@@ -1,11 +1,15 @@
 /* CoreAnimation - CAShapeLayer.h
 
-   Copyright (c) 2008-2017, Apple Inc.
+   Copyright (c) 2008-2018, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef NSString * CAShapeLayerFillRule NS_STRING_ENUM;
+typedef NSString * CAShapeLayerLineJoin NS_STRING_ENUM;
+typedef NSString * CAShapeLayerLineCap NS_STRING_ENUM;
 
 /* The shape layer draws a cubic Bezier spline in its coordinate space.
  *
@@ -30,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Note: rasterization may favor speed over accuracy, e.g. pixels with
  * multiple intersecting path segments may not give exact results. */
 
-CA_CLASS_AVAILABLE (10.6, 3.0, 9.0, 2.0)
+API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0))
 @interface CAShapeLayer : CALayer
 
 /* The path defining the shape to be rendered. If the path extends
@@ -50,7 +54,7 @@ CA_CLASS_AVAILABLE (10.6, 3.0, 9.0, 2.0)
 /* The fill rule used when filling the path. Options are `non-zero' and
  * `even-odd'. Defaults to `non-zero'. */
 
-@property(copy) NSString *fillRule;
+@property(copy) CAShapeLayerFillRule fillRule;
 
 /* The color to fill the path's stroked outline, or nil for no stroking.
  * Defaults to nil. Animatable. */
@@ -80,12 +84,12 @@ CA_CLASS_AVAILABLE (10.6, 3.0, 9.0, 2.0)
 /* The cap style used when stroking the path. Options are `butt', `round'
  * and `square'. Defaults to `butt'. */
 
-@property(copy) NSString *lineCap;
+@property(copy) CAShapeLayerLineCap lineCap;
 
 /* The join style used when stroking the path. Options are `miter', `round'
  * and `bevel'. Defaults to `miter'. */
 
-@property(copy) NSString *lineJoin;
+@property(copy) CAShapeLayerLineJoin lineJoin;
 
 /* The phase of the dashing pattern applied when creating the stroke.
  * Defaults to zero. Animatable. */
@@ -101,27 +105,27 @@ CA_CLASS_AVAILABLE (10.6, 3.0, 9.0, 2.0)
 
 /* `fillRule' values. */
 
-CA_EXTERN NSString *const kCAFillRuleNonZero
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
-CA_EXTERN NSString *const kCAFillRuleEvenOdd
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
+CA_EXTERN CAShapeLayerFillRule const kCAFillRuleNonZero
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAShapeLayerFillRule const kCAFillRuleEvenOdd
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 /* `lineJoin' values. */
 
-CA_EXTERN NSString *const kCALineJoinMiter
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
-CA_EXTERN NSString *const kCALineJoinRound
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
-CA_EXTERN NSString *const kCALineJoinBevel
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
+CA_EXTERN CAShapeLayerLineJoin const kCALineJoinMiter
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAShapeLayerLineJoin const kCALineJoinRound
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAShapeLayerLineJoin const kCALineJoinBevel
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 /* `lineCap' values. */
 
-CA_EXTERN NSString *const kCALineCapButt
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
-CA_EXTERN NSString *const kCALineCapRound
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
-CA_EXTERN NSString *const kCALineCapSquare
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
+CA_EXTERN CAShapeLayerLineCap const kCALineCapButt
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAShapeLayerLineCap const kCALineCapRound
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAShapeLayerLineCap const kCALineCapSquare
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END

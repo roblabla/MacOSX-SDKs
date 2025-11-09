@@ -21,5 +21,11 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @end
 
 
+API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0))
+static const NSUInteger VNDetectFaceRectanglesRequestRevision1 = 1;
+
+API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0))
+static const NSUInteger VNDetectFaceRectanglesRequestRevision2 = 2;
+
 
 NS_ASSUME_NONNULL_END

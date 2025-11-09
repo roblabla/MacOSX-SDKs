@@ -11,6 +11,9 @@ typedef NS_ENUM(NSInteger, INSendMessageRecipientUnsupportedReason) {
     INSendMessageRecipientUnsupportedReasonNoAccount = 1,
     INSendMessageRecipientUnsupportedReasonOffline,
     INSendMessageRecipientUnsupportedReasonMessagingServiceNotEnabledForRecipient,
+    INSendMessageRecipientUnsupportedReasonNoValidHandle API_AVAILABLE(ios(12.0), watchos(5.0), macosx(10.14)),
+    INSendMessageRecipientUnsupportedReasonRequestedHandleInvalid API_AVAILABLE(ios(12.0), watchos(5.0), macosx(10.14)),
+    INSendMessageRecipientUnsupportedReasonNoHandleForLabel API_AVAILABLE(ios(12.0), watchos(5.0), macosx(10.14)),
 } API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13));
 
 NS_ASSUME_NONNULL_BEGIN

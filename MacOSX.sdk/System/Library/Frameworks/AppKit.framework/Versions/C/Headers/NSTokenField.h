@@ -1,7 +1,7 @@
 /*
 	NSTokenField.h
 	Application Kit
-	Copyright (c) 2004-2017, Apple Inc.
+	Copyright (c) 2004-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -55,15 +55,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface NSTokenField : NSTextField {    
-    BOOL _reserved1;
-    BOOL _reserved2;
-    BOOL _reserved3;
-    BOOL _reserved4;
+    BOOL _reserved1 APPKIT_IVAR;
+    BOOL _reserved2 APPKIT_IVAR;
+    BOOL _reserved3 APPKIT_IVAR;
+    BOOL _reserved4 APPKIT_IVAR;
 
-    NSTrackingRectTag  _trackingRectTag;
-    id _reserved5;
-    id _reserved6;
-    id _reserved7;
+    NSTrackingRectTag  _trackingRectTag APPKIT_IVAR;
+    id _reserved5 APPKIT_IVAR;
+    id _reserved6 APPKIT_IVAR;
+    id _reserved7 APPKIT_IVAR;
 }
 
 /* For apps linked against 10.12, this property has zeroing weak memory semantics. When linked against an older SDK, or with objects that do not support zeroing weak references this falls back to having `assign` semantics. */

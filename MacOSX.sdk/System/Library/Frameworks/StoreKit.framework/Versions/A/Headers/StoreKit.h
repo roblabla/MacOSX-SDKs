@@ -10,8 +10,10 @@
 #import <StoreKit/SKPaymentQueue.h>
 #import <StoreKit/SKPaymentTransaction.h>
 #import <StoreKit/SKProduct.h>
+#import <StoreKit/SKProductDiscount.h>
 #import <StoreKit/SKProductsRequest.h>
 #import <StoreKit/SKReceiptRefreshRequest.h>
 #import <StoreKit/SKRequest.h>
+#import <StoreKit/SKStoreReviewController.h>
 #import <StoreKit/SKDownload.h>
 #import <StoreKit/StoreKitDefines.h>

@@ -22,7 +22,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0), watchos(3.2))
+API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
 @interface INSearchForMessagesIntent : INIntent
 
 - (instancetype)initWithRecipients:(nullable NSArray<INPerson *> *)recipients
@@ -32,7 +32,8 @@ API_AVAILABLE(ios(10.0), watchos(3.2))
                      dateTimeRange:(nullable INDateComponentsRange *)dateTimeRange
                        identifiers:(nullable NSArray<NSString *> *)identifiers
            notificationIdentifiers:(nullable NSArray<NSString *> *)notificationIdentifiers
-               speakableGroupNames:(nullable NSArray<INSpeakableString *> *)speakableGroupNames NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13));
+               speakableGroupNames:(nullable NSArray<INSpeakableString *> *)speakableGroupNames
+           conversationIdentifiers:(nullable NSArray<NSString *> *)conversationIdentifiers NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(12.0), watchos(5.0), macosx(10.14));
 
 // Contact that received the messages to be found.
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSArray<INPerson *> *recipients;
@@ -73,6 +74,11 @@ API_AVAILABLE(ios(10.0), watchos(3.2))
 // Describes how to combine the contents of the speakableGroupName array.
 @property (readonly, assign, NS_NONATOMIC_IOSONLY) INConditionalOperator speakableGroupNamesOperator API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13));
 
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSArray<NSString *> *conversationIdentifiers API_AVAILABLE(ios(12.0), watchos(5.0), macosx(10.14));
+
+// Describes how to combine the contents of the conversationIdentifier array.
+@property (readonly, assign, NS_NONATOMIC_IOSONLY) INConditionalOperator conversationIdentifiersOperator API_AVAILABLE(ios(12.0), watchos(5.0), macosx(10.14));
+
 @end
 
 @class INSearchForMessagesIntentResponse;
@@ -82,7 +88,7 @@ API_AVAILABLE(ios(10.0), watchos(3.2))
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(10.0), watchos(3.2))
+API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
 @protocol INSearchForMessagesIntentHandling <NSObject>
 
 @required

@@ -2,6 +2,8 @@
 	Copyright:	(c) 2003-2008 by Apple, Inc., all rights reserved.
 */
 
+#import <QuartzComposer/QuartzComposerDefines.h>
+
 #import <Foundation/Foundation.h>
 #import <ApplicationServices/ApplicationServices.h>
 #import <OpenGL/OpenGL.h>
@@ -131,7 +133,7 @@ Copy this value into a local "CGLContextObj cgl_ctx" variable and use <OpenGL/CG
 The plug-in must save / restore all the OpenGL states it changes except the ones defined by GL_CURRENT_BIT.
 You can retrieve the corresponding OpenGL pixel format using CGLGetPixelFormat().
 */
-- (CGLContextObj) CGLContextObj;
+- (CGLContextObj) CGLContextObj QC_GL_DEPRECATED(10_5, 10_14);
 
 /*
 Convenience method that returns an image provider from a single memory buffer, which must not be modified anymore until the release callback is called.
@@ -147,7 +149,7 @@ The pixel format and colorspace must be compatible, and the texture must be vali
 The "shouldColorMatch" argument should be NO if the image should not be color matched (e.g. it's a mask or gradient).
 The release callback must be defined and will be called and passed the texture name and info arguments when the OpenGL texture is not needed anymore - note that the callback can be called from any thread at any time.
 */
-- (id) outputImageProviderFromTextureWithPixelFormat:(NSString*)format pixelsWide:(NSUInteger)width pixelsHigh:(NSUInteger)height name:(GLuint)name flipped:(BOOL)flipped releaseCallback:(QCPlugInTextureReleaseCallback)callback releaseContext:(void*)context colorSpace:(CGColorSpaceRef)colorSpace shouldColorMatch:(BOOL)colorMatch;
+- (id) outputImageProviderFromTextureWithPixelFormat:(NSString*)format pixelsWide:(NSUInteger)width pixelsHigh:(NSUInteger)height name:(GLuint)name flipped:(BOOL)flipped releaseCallback:(QCPlugInTextureReleaseCallback)callback releaseContext:(void*)context colorSpace:(CGColorSpaceRef)colorSpace shouldColorMatch:(BOOL)colorMatch QC_GL_DEPRECATED(10_5, 10_14);
 
 @end
 
@@ -211,47 +213,47 @@ The subregion bounds are expressed in pixels and must be aligned to integer boun
 Neither the content of the texture nor its states (e.g. wrap mode) must be modified: you can only draw with it.
 The created texture is only valid in the plug-in context.
 */
-- (BOOL) lockTextureRepresentationWithColorSpace:(CGColorSpaceRef)colorSpace forBounds:(NSRect)bounds;
+- (BOOL) lockTextureRepresentationWithColorSpace:(CGColorSpaceRef)colorSpace forBounds:(NSRect)bounds QC_GL_DEPRECATED(10_5, 10_14);
 
 /*
 Returns the width and height of the texture expressed in pixels (those might not match the requested bounds if they were greater than the maximum supported texture size).
 */
-- (NSUInteger) texturePixelsWide;
-- (NSUInteger) texturePixelsHigh;
+- (NSUInteger) texturePixelsWide QC_GL_DEPRECATED(10_5, 10_14);
+- (NSUInteger) texturePixelsHigh QC_GL_DEPRECATED(10_5, 10_14);
 
 /*
 Returns the target and name of the texture.
 */
-- (GLenum) textureTarget;
-- (GLuint) textureName;
+- (GLenum) textureTarget QC_GL_DEPRECATED(10_5, 10_14);
+- (GLuint) textureName QC_GL_DEPRECATED(10_5, 10_14);
 
 /*
 Returns the colorspace of the texture.
 */
-- (CGColorSpaceRef) textureColorSpace;
+- (CGColorSpaceRef) textureColorSpace QC_GL_DEPRECATED(10_5, 10_14);
 
 /*
 Returns true if the contents of the texture is flipped upside-down.
 */
-- (BOOL) textureFlipped;
+- (BOOL) textureFlipped QC_GL_DEPRECATED(10_5, 10_14);
 
 /*
 Returns an optional 4x4 texture matrix to be applied to the texture coordinates or NULL if identity.
 */
-- (const GLfloat*) textureMatrix;
+- (const GLfloat*) textureMatrix QC_GL_DEPRECATED(10_5, 10_14);
 
 /*
 Convenience method that bind the texture to a given texture unit (GL_TEXTURE0...) - it also loads the optional texture matrix on the texture matrix stack.
 If "flag" is YES, another texture matrix will be applied if necessary to scale coordinates (from [0, pixels] to [0,1]) and / or flip them vertically.
 Make sure that each call to -bindTextureRepresentationToCGLContext is balanced with a call to -unbindTextureRepresentationFromCGLContext.
 */
-- (void) bindTextureRepresentationToCGLContext:(CGLContextObj)cgl_ctx textureUnit:(GLenum)unit normalizeCoordinates:(BOOL)flag;
-- (void) unbindTextureRepresentationFromCGLContext:(CGLContextObj)cgl_ctx textureUnit:(GLenum)unit;
+- (void) bindTextureRepresentationToCGLContext:(CGLContextObj)cgl_ctx textureUnit:(GLenum)unit normalizeCoordinates:(BOOL)flag QC_GL_DEPRECATED(10_5, 10_14);
+- (void) unbindTextureRepresentationFromCGLContext:(CGLContextObj)cgl_ctx textureUnit:(GLenum)unit QC_GL_DEPRECATED(10_5, 10_14);
 
 /*
 Destroy the OpenGL texture representation of the image source.
 */
-- (void) unlockTextureRepresentation;
+- (void) unlockTextureRepresentation QC_GL_DEPRECATED(10_5, 10_14);
 
 @end
 
@@ -290,7 +292,7 @@ The base address is guaranteed to be 16 bytes aligned and the bytes per row a mu
 Returns the list of texture pixel formats supported by -copyRenderedTextureForCGLContext (or nil if not supported) - nil by default.
 If this methods returns nil, then -canRenderWithCGLContext / -renderWithCGLContext are called.
 */
-- (NSArray*) supportedRenderedTexturePixelFormats;
+- (NSArray*) supportedRenderedTexturePixelFormats QC_GL_DEPRECATED(10_5, 10_14);
 
 /*
 Returns the name of an OpenGL texture of type GL_TEXTURE_RECTANGLE_EXT that contains a subregion of the image in a given pixel format - 0 by default.
@@ -298,21 +300,21 @@ The "flipped" parameter must be set to YES on output if the contents of the retu
 Use <OpenGL/CGLMacro.h> to send commands to the OpenGL context.
 Make sure to preserve all the OpenGL states except the ones defined by GL_CURRENT_BIT.
 */
-- (GLuint) copyRenderedTextureForCGLContext:(CGLContextObj)cgl_ctx pixelFormat:(NSString*)format bounds:(NSRect)bounds isFlipped:(BOOL*)flipped;
+- (GLuint) copyRenderedTextureForCGLContext:(CGLContextObj)cgl_ctx pixelFormat:(NSString*)format bounds:(NSRect)bounds isFlipped:(BOOL*)flipped QC_GL_DEPRECATED(10_5, 10_14);
 
 /*
 Called to release the previously copied texture.
 Use <OpenGL/CGLMacro.h> to send commands to the OpenGL context.
 Make sure to preserve all the OpenGL states except the ones defined by GL_CURRENT_BIT.
 */
-- (void) releaseRenderedTexture:(GLuint)name forCGLContext:(CGLContextObj)cgl_ctx;
+- (void) releaseRenderedTexture:(GLuint)name forCGLContext:(CGLContextObj)cgl_ctx QC_GL_DEPRECATED(10_5, 10_14);
 
 /*
 Performs extra checkings on the capabilities of the OpenGL context (e.g check for supported extensions) and returns YES if the image can be rendered into this context - NO by default.
 Use <OpenGL/CGLMacro.h> to send commands to the OpenGL context.
 If this methods returns NO, then -renderToBuffer is called.
 */
-- (BOOL) canRenderWithCGLContext:(CGLContextObj)cgl_ctx;
+- (BOOL) canRenderWithCGLContext:(CGLContextObj)cgl_ctx QC_GL_DEPRECATED(10_5, 10_14);
 
 /*
 Renders a subregion of the image with the provided OpenGL context or returns NO on failure.
@@ -320,7 +322,7 @@ Use <OpenGL/CGLMacro.h> to send commands to the OpenGL context.
 The viewport is already set to the proper dimensions and the projection and modelview matrices are identity.
 The rendering must save / restore all the OpenGL states it changes except the ones defined by GL_CURRENT_BIT.
 */
-- (BOOL) renderWithCGLContext:(CGLContextObj)cgl_ctx forBounds:(NSRect)bounds;
+- (BOOL) renderWithCGLContext:(CGLContextObj)cgl_ctx forBounds:(NSRect)bounds QC_GL_DEPRECATED(10_5, 10_14);
 
 @end
 

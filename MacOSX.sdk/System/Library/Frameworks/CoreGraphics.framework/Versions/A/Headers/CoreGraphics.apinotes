@@ -175,6 +175,9 @@ Functions:
   # merged count and pointer to single array property
   SwiftName: CGColorSpace.__unsafeGetColorTable(self:_:)
   SwiftPrivate: true
+- Name: CGColorSpaceGetName
+  SwiftName: getter:CGColorSpace.__name(self:)
+  SwiftPrivate: true
 
 # CGContext
 #

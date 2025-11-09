@@ -32,6 +32,10 @@ MDL_EXPORT
 -(NSUInteger)getTimes:(NSTimeInterval *)timesArray maxCount:(NSUInteger)maxCount NS_REFINED_FOR_SWIFT;
 @end
 
+
+/// AUTO-GENERATED FROM CodeGenArray.h
+
+
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 MDL_EXPORT
 @interface MDLAnimatedScalarArray : MDLAnimatedValue
@@ -99,6 +103,9 @@ MDL_EXPORT
 -(NSUInteger)getDoubleQuaternionArray:(simd_quatd *)valuesArray maxCount:(NSUInteger)maxCount NS_REFINED_FOR_SWIFT;
 
 @end
+
+
+/// AUTO-GENERATED FROM CodeGen.h
 
 
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))

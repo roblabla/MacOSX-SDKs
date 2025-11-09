@@ -1,7 +1,7 @@
 /*
     NSPopover.h
     Application Kit
-    Copyright (c) 2010-2017, Apple Inc.
+    Copyright (c) 2010-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -58,27 +58,27 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSPopover : NSResponder <NSAccessibilityElement, NSAccessibility> {
 #endif
 @private
-    id _bindingAdaptor;
-    id _delegate;
-    id _visualRepresentation;
-    NSView *_positioningView;
-    NSViewController *_contentViewController;
-    NSWindow *_positioningWindow;
-    NSInteger _appearance;
-    NSPopoverBehavior _behavior;
-    id _popoverPrivateData;
-    NSRectEdge _preferredEdge;
+    id _bindingAdaptor APPKIT_IVAR;
+    id _delegate APPKIT_IVAR;
+    id _visualRepresentation APPKIT_IVAR;
+    NSView *_positioningView APPKIT_IVAR;
+    NSViewController *_contentViewController APPKIT_IVAR;
+    NSWindow *_positioningWindow APPKIT_IVAR;
+    NSAppearance *_appearance APPKIT_IVAR;
+    NSPopoverBehavior _behavior APPKIT_IVAR;
+    id _popoverPrivateData APPKIT_IVAR;
+    NSRectEdge _preferredEdge APPKIT_IVAR;
 #if !__LP64__    
-    NSPoint _unused2;
+    NSPoint _unused2 APPKIT_IVAR;
 #endif
-    NSSize _contentSize;
-    NSRect _positioningRect;
+    NSSize _contentSize APPKIT_IVAR;
+    NSRect _positioningRect APPKIT_IVAR;
 #if !__LP64__
-    id _unused3;
+    id _unused3 APPKIT_IVAR;
 #endif
-    id _postCloseBlock;
+    id _postCloseBlock APPKIT_IVAR;
 #if !__LP64__
-    id _reserved[1];
+    id _reserved[1] APPKIT_IVAR;
 #endif
     struct {
         unsigned int animates:1;
@@ -89,12 +89,13 @@ NS_CLASS_AVAILABLE(10_7, NA)
         unsigned int toolbarHidesAnchor:1;
         unsigned int closing:1;
         unsigned int registeredForGeometryInWindowDidChange:1;
+        unsigned int registeredForEffectiveAppearanceDidChange:1;
         unsigned int keepTopStable:1;
         unsigned int implicitlyDetached:1;
         unsigned int hidesDetachedWindowOnDeactivate:1;
         unsigned int requiresCorrectContentAppearance:1;
-        unsigned int reserved:20;
-    } _flags;
+        unsigned int reserved:19;
+    } _flags APPKIT_IVAR;
 }
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -199,7 +200,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 APPKIT_EXTERN NSString * const NSPopoverCloseReasonKey NS_AVAILABLE_MAC(10_7);
 
 /* Possible values for NSPopoverCloseReasonKey */
-typedef NSString * NSPopoverCloseReasonValue NS_STRING_ENUM;
+typedef NSString * NSPopoverCloseReasonValue NS_TYPED_ENUM;
 /* the popover is being closed in a standard way */
 APPKIT_EXTERN NSPopoverCloseReasonValue const NSPopoverCloseReasonStandard NS_AVAILABLE_MAC(10_7);
 /* The popover has been closed because it is being detached to a window */

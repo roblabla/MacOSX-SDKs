@@ -285,7 +285,7 @@ CFPlugInTypes                   Dictionary      1 key/value pair
 					
 					New for CoreMIDI 1.1.
 */
-extern const CFStringRef kMIDIDriverPropertyUsesSerial		__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+extern const CFStringRef kMIDIDriverPropertyUsesSerial		API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos);
 
 
 #ifdef __cplusplus
@@ -321,7 +321,7 @@ extern "C" {
 extern OSStatus		MIDIDeviceCreate(MIDIDriverRef __nullable owner,
 							CFStringRef name, CFStringRef manufacturer, 
 							CFStringRef model, MIDIDeviceRef *outDevice)
-																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+																API_AVAILABLE(macos(10.0), ios(4.2));
 
 
 /*!
@@ -340,7 +340,7 @@ extern OSStatus		MIDIDeviceCreate(MIDIDriverRef __nullable owner,
 						The device to be disposed.
 	@result			An OSStatus result code.
 */
-extern OSStatus		MIDIDeviceDispose(MIDIDeviceRef device)		__OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_4_2);
+extern OSStatus		MIDIDeviceDispose(MIDIDeviceRef device)		API_AVAILABLE(macos(10.3), ios(4.2));
 
 // ___________________________________________________________________________________________
 //	MIDIDeviceList
@@ -357,7 +357,7 @@ extern OSStatus		MIDIDeviceDispose(MIDIDeviceRef device)		__OSX_AVAILABLE_STARTI
 	@result			The number of devices in the list, or 0 if an error occurred.
 */
 extern ItemCount		MIDIDeviceListGetNumberOfDevices(MIDIDeviceListRef devList)
-																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+																API_AVAILABLE(macos(10.0), ios(4.2));
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -373,7 +373,7 @@ extern ItemCount		MIDIDeviceListGetNumberOfDevices(MIDIDeviceListRef devList)
 	@result			A reference to a device, or NULL if an error occurred.
 */
 extern MIDIDeviceRef	MIDIDeviceListGetDevice(MIDIDeviceListRef devList, ItemCount index0)
-																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+																API_AVAILABLE(macos(10.0), ios(4.2));
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -388,7 +388,7 @@ extern MIDIDeviceRef	MIDIDeviceListGetDevice(MIDIDeviceListRef devList, ItemCoun
 	@result			An OSStatus result code.
 */
 extern OSStatus		MIDIDeviceListAddDevice(MIDIDeviceListRef devList, MIDIDeviceRef dev)
-																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+																API_AVAILABLE(macos(10.0), ios(4.2));
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -401,7 +401,7 @@ extern OSStatus		MIDIDeviceListAddDevice(MIDIDeviceListRef devList, MIDIDeviceRe
 	@result			An OSStatus result code.
 */
 extern OSStatus		MIDIDeviceListDispose(MIDIDeviceListRef devList)
-																__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
+																API_AVAILABLE(macos(10.1), ios(4.2));
 
 
 // ___________________________________________________________________________________________
@@ -435,7 +435,7 @@ extern OSStatus		MIDIDeviceListDispose(MIDIDeviceListRef devList)
 	@result			An OSStatus result code.
 */
 extern OSStatus		MIDIEndpointSetRefCons(MIDIEndpointRef endpt,
-					void * __nullable ref1, void * __nullable ref2)					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+					void * __nullable ref1, void * __nullable ref2)					API_AVAILABLE(macos(10.0), ios(4.2));
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -452,7 +452,8 @@ extern OSStatus		MIDIEndpointSetRefCons(MIDIEndpointRef endpt,
 	@result			An OSStatus result code.
 */
 extern OSStatus		MIDIEndpointGetRefCons(MIDIEndpointRef endpt, 
-					void * __nonnull * __nullable ref1, void * __nonnull * __nullable ref2)				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+					void * __nonnull * __nullable ref1, void * __nonnull * __nullable ref2)
+																					API_AVAILABLE(macos(10.0), ios(4.2));
 
 // ___________________________________________________________________________________________
 
@@ -476,7 +477,7 @@ extern OSStatus		MIDIEndpointGetRefCons(MIDIEndpointRef endpt,
 
 	@result			The CFRunLoopRef of the server's driver I/O thread.
 */
-extern CFRunLoopRef	MIDIGetDriverIORunLoop()				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+extern CFRunLoopRef	MIDIGetDriverIORunLoop(void)			API_AVAILABLE(macos(10.0), ios(4.2));
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -494,7 +495,7 @@ extern CFRunLoopRef	MIDIGetDriverIORunLoop()				__OSX_AVAILABLE_STARTING(__MAC_1
 	@result			The requested device list.
 */
 extern MIDIDeviceListRef	MIDIGetDriverDeviceList(MIDIDriverRef __nonnull driver)
-															__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
+															API_AVAILABLE(macos(10.1), ios(4.2));
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -512,7 +513,7 @@ extern MIDIDeviceListRef	MIDIGetDriverDeviceList(MIDIDriverRef __nonnull driver)
 	@result			An OSStatus result code.
 */
 extern OSStatus			MIDIDriverEnableMonitoring(MIDIDriverRef __nonnull driver, Boolean enabled)
-															__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+															API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos);
 
 
 #ifdef __cplusplus

@@ -83,7 +83,7 @@ NS_CLASS_AVAILABLE(10_13, 11_0)
                         height:(NSUInteger)height
                    pixelFormat:(MTLPixelFormat)pixelFormat
                  commandBuffer:(nullable id<MTLCommandBuffer>)commandBuffer
-            mtlTextureProvider:(id<MTLTexture> (^)(void))block;
+            mtlTextureProvider:(nullable id<MTLTexture> (^)(void))block;
 
 // MARK: OpenGL destination
 

@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  @protocol MTLCommandQueue
  @brief A serial queue of command buffers to be executed by the device.
  */
-NS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0))
 @protocol MTLCommandQueue <NSObject>
 
 /*! @brief A string to help identify this object */
@@ -43,7 +43,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method insertDebugCaptureBoundary
  @abstract Inform Xcode about when debug capture should start and stop.
  */
-- (void)insertDebugCaptureBoundary NS_DEPRECATED(10_11, 10_13, 8_0, 11_0, "Use MTLCaptureScope instead");
+- (void)insertDebugCaptureBoundary API_DEPRECATED("Use MTLCaptureScope instead", macos(10.11, 10.13), ios(8.0, 11.0));
 
 @end
 NS_ASSUME_NONNULL_END

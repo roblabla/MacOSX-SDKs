@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 3794CDB8-8448-3C2B-A7D6-108BED45EA0A', 'x86_64: 8821A29B-628B-308F-922A-42CC2CA83981' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: C064C162-B99E-3027-986D-9BAF7B979C5F' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/GPUSupport.framework/Versions/A/Libraries/libGPUSupportMercury.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _gldAttachDrawable, _gldBufferSubData, _gldClearFence, _gldCopyBufferSubData, 
                        _gldCopyTexSubImage, _gldCopyTextureData, _gldCreateBuffer, 
                        _gldCreateComputeModule, _gldCreateComputeProgram, _gldCreateContext, 

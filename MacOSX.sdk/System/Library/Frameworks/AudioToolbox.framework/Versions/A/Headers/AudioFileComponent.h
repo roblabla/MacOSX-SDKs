@@ -73,7 +73,7 @@ AudioFileComponentCreateURL (
 							AudioFileComponent					inComponent,
 							CFURLRef							inFileRef,
 							const AudioStreamBasicDescription	*inFormat,
-							UInt32								inFlags)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+							UInt32								inFlags)		API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function				AudioFileComponentOpenURL
@@ -90,7 +90,7 @@ AudioFileComponentOpenURL (
 					AudioFileComponent			inComponent,
 					CFURLRef					inFileRef, 
 					SInt8						inPermissions, 
-					int							inFileDescriptor)				__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+					int							inFileDescriptor)				API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function	AudioFileComponentOpenWithCallbacks
@@ -110,7 +110,7 @@ AudioFileComponentOpenWithCallbacks(
 								AudioFile_ReadProc					inReadFunc, 
 								AudioFile_WriteProc					inWriteFunc, 
 								AudioFile_GetSizeProc				inGetSizeFunc,
-								AudioFile_SetSizeProc				inSetSizeFunc)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								AudioFile_SetSizeProc				inSetSizeFunc)	API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function	AudioFileComponentInitializeWithCallbacks
@@ -137,7 +137,7 @@ AudioFileComponentInitializeWithCallbacks(
 								AudioFile_SetSizeProc				inSetSizeFunc,
 								UInt32								inFileType,
 								const AudioStreamBasicDescription	*inFormat,
-								UInt32								inFlags)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								UInt32								inFlags)		API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*!
@@ -148,7 +148,7 @@ AudioFileComponentInitializeWithCallbacks(
 */
 extern OSStatus 
 AudioFileComponentCloseFile(
-								AudioFileComponent					inComponent)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								AudioFileComponent					inComponent)	API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 				
 /*!
     @function	AudioFileComponentOptimize
@@ -158,7 +158,7 @@ AudioFileComponentCloseFile(
 */
 extern OSStatus 
 AudioFileComponentOptimize(
-								AudioFileComponent					inComponent)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								AudioFileComponent					inComponent)	API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 				
 /*!
     @function	AudioFileComponentReadBytes
@@ -179,7 +179,7 @@ AudioFileComponentReadBytes(
 								Boolean							inUseCache,
 								SInt64							inStartingByte, 
 								UInt32							*ioNumBytes, 
-								void							*outBuffer)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								void							*outBuffer)		API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 						
 /*!
     @function				AudioFileComponentWriteBytes
@@ -198,7 +198,7 @@ AudioFileComponentWriteBytes(
 								Boolean							inUseCache,
 								SInt64							inStartingByte, 
 								UInt32							*ioNumBytes, 
-								const void						*inBuffer)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								const void						*inBuffer)		API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 						
 /*!
     @function	AudioFileComponentReadPackets
@@ -228,7 +228,7 @@ AudioFileComponentReadPackets(
 								AudioStreamPacketDescription * __nullable outPacketDescriptions,
 								SInt64							inStartingPacket, 
 								UInt32  						*ioNumPackets, 
-								void							*outBuffer)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								void							*outBuffer)		API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 									
 
 /*!
@@ -263,7 +263,7 @@ AudioFileComponentReadPacketData(
 								AudioStreamPacketDescription * __nullable outPacketDescriptions,
 								SInt64							inStartingPacket, 
 								UInt32  						*ioNumPackets, 
-								void							*outBuffer)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								void							*outBuffer)		API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 									
 /*!
     @function	AudioFileComponentWritePackets
@@ -289,7 +289,7 @@ AudioFileComponentWritePackets(
 								const AudioStreamPacketDescription * __nullable inPacketDescriptions,
 								SInt64								inStartingPacket, 
 								UInt32								*ioNumPackets, 
-								const void							*inBuffer)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								const void							*inBuffer)	API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*!
@@ -307,7 +307,7 @@ AudioFileComponentGetPropertyInfo(
 								AudioFileComponent				inComponent,
 								AudioFileComponentPropertyID	inPropertyID,
 								UInt32 * __nullable				outPropertySize,
-								UInt32 * __nullable				outWritable)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								UInt32 * __nullable				outWritable)	API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*!
@@ -324,7 +324,7 @@ AudioFileComponentGetProperty(
 								AudioFileComponent				inComponent,
 								AudioFileComponentPropertyID	inPropertyID,
 								UInt32							*ioPropertyDataSize,
-								void							*outPropertyData)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								void							*outPropertyData)	API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function	AudioFileComponentSetProperty
@@ -340,7 +340,7 @@ AudioFileComponentSetProperty(
 								AudioFileComponent				inComponent,
 								AudioFileComponentPropertyID	inPropertyID,
 								UInt32							inPropertyDataSize,
-								const void						*inPropertyData)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								const void						*inPropertyData)	API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*!
@@ -358,7 +358,7 @@ extern OSStatus
 AudioFileComponentCountUserData(	
 								AudioFileComponent				inComponent,
 								UInt32							inUserDataID,
-								UInt32							*outNumberItems)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								UInt32							*outNumberItems)	API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function	AudioFileComponentGetUserDataSize
@@ -374,7 +374,7 @@ AudioFileComponentGetUserDataSize(
 								AudioFileComponent				inComponent,
 								UInt32							inUserDataID,
 								UInt32							inIndex,
-								UInt32							*outUserDataSize)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								UInt32							*outUserDataSize)	API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function	AudioFileGetUserData
@@ -392,7 +392,7 @@ AudioFileComponentGetUserData(
 								UInt32							inUserDataID,
 								UInt32							inIndex,
 								UInt32							*ioUserDataSize,
-								void							*outUserData)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								void							*outUserData)	API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function	AudioFileComponentSetUserData
@@ -411,7 +411,7 @@ AudioFileComponentSetUserData(
 								UInt32							inUserDataID,
 								UInt32							inIndex,
 								UInt32							inUserDataSize,
-								const void						*inUserData)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								const void						*inUserData)	API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*!
@@ -426,7 +426,7 @@ extern OSStatus
 AudioFileComponentRemoveUserData(	
 								AudioFileComponent				inComponent,
 								UInt32							inUserDataID,
-								UInt32							inIndex)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+								UInt32							inIndex)		API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 //	The following calls are not made on AudioFile instances.
@@ -444,7 +444,7 @@ extern OSStatus
 AudioFileComponentExtensionIsThisFormat(	
 								AudioFileComponent				inComponent,
 								CFStringRef 					inExtension,
-								UInt32							*outResult)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								UInt32							*outResult)		API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*!
@@ -461,7 +461,7 @@ AudioFileComponentFileDataIsThisFormat(
 								AudioFileComponent				inComponent,
 								UInt32							inDataByteSize,
 								const void*						inData,
-								UInt32							*outResult)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								UInt32							*outResult)		API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -480,7 +480,7 @@ extern OSStatus
 AudioFileComponentFileIsThisFormat(	
 								AudioFileComponent				inComponent,
 								SInt16							inFileRefNum,
-								UInt32							*outResult)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_5, __IPHONE_NA, __IPHONE_NA); 
+								UInt32							*outResult)		API_DEPRECATED("no longer supported", macos(10.4, 10.5)) API_UNAVAILABLE(ios, watchos, tvos); 
 	
 /*!
     @function	AudioFileComponentDataIsThisFormat
@@ -502,7 +502,7 @@ AudioFileComponentDataIsThisFormat(
 								AudioFile_WriteProc	__nullable	inWriteFunc,
 								AudioFile_GetSizeProc __nullable inGetSizeFunc,
 								AudioFile_SetSizeProc __nullable inSetSizeFunc,
-								UInt32							*outResult)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_5, __IPHONE_NA, __IPHONE_NA); 
+								UInt32							*outResult)		API_DEPRECATED("no longer supported", macos(10.4, 10.5)) API_UNAVAILABLE(ios, watchos, tvos); 
 
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -527,7 +527,7 @@ AudioFileComponentGetGlobalInfoSize(
 								AudioFileComponentPropertyID	inPropertyID,
 								UInt32							inSpecifierSize,
 								const void * __nullable			inSpecifier,
-								UInt32							*outPropertySize)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								UInt32							*outPropertySize)	API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function	AudioFileComponentGetGlobalInfo
@@ -547,7 +547,7 @@ AudioFileComponentGetGlobalInfo(
 								UInt32							inSpecifierSize,
 								const void * __nullable			inSpecifier,
 								UInt32							*ioPropertyDataSize,
-								void							*outPropertyData)	__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+								void							*outPropertyData)	API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //==================================================================================================
 //	Properties for AudioFileComponentGetGlobalInfo. 
@@ -741,7 +741,7 @@ typedef struct AudioFileFDFTable
 	GetUserDataSizeFDF  mGetUserDataSizeFDF;
 	GetUserDataFDF		mGetUserDataFDF;
 	SetUserDataFDF		mSetUserDataFDF;
-} AudioFileFDFTable __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_7,__IPHONE_NA,__IPHONE_NA);
+} AudioFileFDFTable API_DEPRECATED("no longer supported", macos(10.4, 10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 
 typedef struct AudioFileFDFTableExtended
 {
@@ -761,7 +761,7 @@ typedef struct AudioFileFDFTableExtended
 	SetUserDataFDF		mSetUserDataFDF;
 
 	ReadPacketDataFDF	mReadPacketDataFDF;
-} AudioFileFDFTableExtended __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_7,__IPHONE_NA,__IPHONE_NA);
+} AudioFileFDFTableExtended API_DEPRECATED("no longer supported", macos(10.4, 10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
 	@functiongroup Deprecated AFComponent
@@ -789,7 +789,7 @@ AudioFileComponentCreate(
 								CFStringRef							inFileName,
 								const AudioStreamBasicDescription	*inFormat,
 								UInt32								inFlags,
-								struct FSRef						*outNewFileRef)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+								struct FSRef						*outNewFileRef)		API_DEPRECATED("no longer supported", macos(10.4, 10.6)) API_UNAVAILABLE(ios, watchos, tvos);
                                 
 
 /*!
@@ -807,7 +807,7 @@ AudioFileComponentInitialize(
 								AudioFileComponent					inComponent,
 								const struct FSRef					*inFileRef,
 								const AudioStreamBasicDescription	*inFormat,
-								UInt32								inFlags)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+								UInt32								inFlags)		API_DEPRECATED("no longer supported", macos(10.4, 10.6)) API_UNAVAILABLE(ios, watchos, tvos);
 							
 /*!
     @function	AudioFileComponentOpenFile
@@ -824,7 +824,7 @@ AudioFileComponentOpenFile(
 								AudioFileComponent					inComponent,
 								const struct FSRef					*inFileRef, 
 								SInt8  								inPermissions,
-								SInt16								inRefNum)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
+								SInt16								inRefNum)		API_DEPRECATED("no longer supported", macos(10.4, 10.6)) API_UNAVAILABLE(ios, watchos, tvos);
 
 #if defined(__cplusplus)
 }

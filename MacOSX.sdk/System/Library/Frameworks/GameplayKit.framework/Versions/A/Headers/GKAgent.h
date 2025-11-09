@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
  * these values should be scaled and biased into their target coordinate system and a simple filter on top ensures
  * any noise generated from the steering logic doesn't affect the visual represtentation.
  */
-GK_BASE_AVAILABILITY @interface GKAgent : GKComponent <NSCoding>
+GK_BASE_AVAILABILITY @interface GKAgent : GKComponent <NSSecureCoding>
 
 /**
  * Object which has agentDidUpdate called on it during this agent's behavior updatekbeha
@@ -102,7 +102,7 @@ GK_BASE_AVAILABILITY @interface GKAgent : GKComponent <NSCoding>
  * game model is on a flat 2D plane but the visuals are displayed on an angle where one of the logical axes are used for
  * simulated depth as well as some translation in the display plane.
  */
-GK_BASE_AVAILABILITY @interface GKAgent2D : GKAgent <NSCoding>
+GK_BASE_AVAILABILITY @interface GKAgent2D : GKAgent <NSSecureCoding>
 
 /**
  * Position of the agent on the logical XY plane

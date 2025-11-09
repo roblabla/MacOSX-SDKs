@@ -1,33 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 0602AED4-C94B-325F-A40F-1CFAA9B0A10C', 'x86_64: AE5368E2-255C-3C27-A040-2B2D580898E8' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: D76BF871-F458-3C2B-BAA1-B0B8EB961571' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/3425AMD/libLLVMContainer.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386 ]
-    symbols:         [ _X86CompilationCallback_SSE, __ZN4llvm22CriticalAntiDepBreaker23isNewRegClobberedByRefsENSt3__120__map_const_iteratorINS1_21__tree_const_iteratorINS1_12__value_typeIjPNS_14MachineOperandEEEPNS1_11__tree_nodeIS7_PvEEiEEEESD_j, 
-                       __ZN4llvm22CriticalAntiDepBreaker24findSuitableFreeRegisterENSt3__120__map_const_iteratorINS1_21__tree_const_iteratorINS1_12__value_typeIjPNS_14MachineOperandEEEPNS1_11__tree_nodeIS7_PvEEiEEEESD_jjPKNS_19TargetRegisterClassE, 
-                       __ZThn16_N4llvm13MPPassManager15getOnTheFlyPassEPNS_4PassEPKvRNS_8FunctionE, 
-                       __ZThn16_N4llvm13MPPassManager25addLowerLevelRequiredPassEPNS_4PassES2_, 
-                       __ZThn16_N4llvm20LibCallAliasAnalysis13getModRefInfoENS_17ImmutableCallSiteERKNS_13AliasAnalysis8LocationE, 
-                       __ZThn16_N4llvm20LibCallAliasAnalysisD0Ev, __ZThn16_N4llvm20LibCallAliasAnalysisD1Ev, 
-                       __ZThn16_NK4llvm20LibCallAliasAnalysis16getAnalysisUsageERNS_13AnalysisUsageE, 
-                       __ZThn4_N4llvm14PassNameParserD0Ev, __ZThn4_N4llvm14PassNameParserD1Ev ]
-    weak-def-symbols: [ __ZN4llvm11IntervalMapINS_9SlotIndexEPNS_12LiveIntervalELj16ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
-                        __ZN4llvm11IntervalMapINS_9SlotIndexEjLj16ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj ]
   - archs:           [ x86_64 ]
-    symbols:         [ __ZN4llvm22CriticalAntiDepBreaker23isNewRegClobberedByRefsENSt3__120__map_const_iteratorINS1_21__tree_const_iteratorINS1_12__value_typeIjPNS_14MachineOperandEEEPNS1_11__tree_nodeIS7_PvEElEEEESD_j, 
-                       __ZN4llvm22CriticalAntiDepBreaker24findSuitableFreeRegisterENSt3__120__map_const_iteratorINS1_21__tree_const_iteratorINS1_12__value_typeIjPNS_14MachineOperandEEEPNS1_11__tree_nodeIS7_PvEElEEEESD_jjPKNS_19TargetRegisterClassE, 
-                       __ZThn32_N4llvm13MPPassManager15getOnTheFlyPassEPNS_4PassEPKvRNS_8FunctionE, 
-                       __ZThn32_N4llvm13MPPassManager25addLowerLevelRequiredPassEPNS_4PassES2_, 
-                       __ZThn32_N4llvm20LibCallAliasAnalysis13getModRefInfoENS_17ImmutableCallSiteERKNS_13AliasAnalysis8LocationE, 
-                       __ZThn32_N4llvm20LibCallAliasAnalysisD0Ev, __ZThn32_N4llvm20LibCallAliasAnalysisD1Ev, 
-                       __ZThn32_NK4llvm20LibCallAliasAnalysis16getAnalysisUsageERNS_13AnalysisUsageE, 
-                       __ZThn8_N4llvm14PassNameParserD0Ev, __ZThn8_N4llvm14PassNameParserD1Ev ]
-    weak-def-symbols: [ __ZN4llvm11IntervalMapINS_9SlotIndexEPNS_12LiveIntervalELj8ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
-                        __ZN4llvm11IntervalMapINS_9SlotIndexEjLj9ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj ]
-  - archs:           [ i386, x86_64 ]
     symbols:         [ _EnableARMEHABIDescriptors, _EnableBasePointer, _ForceStackAlign, 
                        _LLVMABIAlignmentOfType, _LLVMABISizeOfType, _LLVMAddAggressiveDCEPass, 
                        _LLVMAddAlias, _LLVMAddAlwaysInlinerPass, _LLVMAddArgumentPromotionPass, 
@@ -2577,6 +2555,8 @@ exports:
                        __ZN4llvm22CriticalAntiDepBreaker11FinishBlockEv, __ZN4llvm22CriticalAntiDepBreaker15ScanInstructionEPNS_12MachineInstrEj, 
                        __ZN4llvm22CriticalAntiDepBreaker18PrescanInstructionEPNS_12MachineInstrE, 
                        __ZN4llvm22CriticalAntiDepBreaker21BreakAntiDependenciesERKNSt3__16vectorINS_5SUnitENS1_9allocatorIS3_EEEENS_17MachineBasicBlock15bundle_iteratorINS_12MachineInstrENS_14ilist_iteratorISB_EEEESE_jRNS2_INS1_4pairIPSB_SG_EENS4_ISH_EEEE, 
+                       __ZN4llvm22CriticalAntiDepBreaker23isNewRegClobberedByRefsENSt3__120__map_const_iteratorINS1_21__tree_const_iteratorINS1_12__value_typeIjPNS_14MachineOperandEEEPNS1_11__tree_nodeIS7_PvEElEEEESD_j, 
+                       __ZN4llvm22CriticalAntiDepBreaker24findSuitableFreeRegisterENSt3__120__map_const_iteratorINS1_21__tree_const_iteratorINS1_12__value_typeIjPNS_14MachineOperandEEEPNS1_11__tree_nodeIS7_PvEElEEEESD_jjPKNS_19TargetRegisterClassE, 
                        __ZN4llvm22CriticalAntiDepBreaker7ObserveEPNS_12MachineInstrEjj, 
                        __ZN4llvm22CriticalAntiDepBreakerC1ERNS_15MachineFunctionERKNS_17RegisterClassInfoE, 
                        __ZN4llvm22CriticalAntiDepBreakerC2ERNS_15MachineFunctionERKNS_17RegisterClassInfoE, 
@@ -5580,10 +5560,18 @@ exports:
                        __ZTVN4llvm9FPExtInstE, __ZTVN4llvm9FenceInstE, __ZTVN4llvm9IVVisitorE, 
                        __ZTVN4llvm9InlineAsmE, __ZTVN4llvm9MCAsmInfoE, __ZTVN4llvm9MCSectionE, 
                        __ZTVN4llvm9StoreInstE, __ZTVN4llvm9TruncInstE, __ZTVN4llvm9VAArgInstE, 
+                       __ZThn32_N4llvm13MPPassManager15getOnTheFlyPassEPNS_4PassEPKvRNS_8FunctionE, 
+                       __ZThn32_N4llvm13MPPassManager25addLowerLevelRequiredPassEPNS_4PassES2_, 
+                       __ZThn32_N4llvm20LibCallAliasAnalysis13getModRefInfoENS_17ImmutableCallSiteERKNS_13AliasAnalysis8LocationE, 
+                       __ZThn32_N4llvm20LibCallAliasAnalysisD0Ev, __ZThn32_N4llvm20LibCallAliasAnalysisD1Ev, 
+                       __ZThn32_NK4llvm20LibCallAliasAnalysis16getAnalysisUsageERNS_13AnalysisUsageE, 
+                       __ZThn8_N4llvm14PassNameParserD0Ev, __ZThn8_N4llvm14PassNameParserD1Ev, 
                        ___jit_debug_register_code, _abort, _decodeInstruction, _getPointerToNamedFunction, 
                        _llvm_regcomp, _llvm_regerror, _llvm_regexec, _llvm_regfree, 
                        _llvm_strlcpy, _raise, _x86DisassemblerDebug, _x86DisassemblerGetInstrName ]
-    weak-def-symbols: [ __ZN4llvm11IntervalMapINS_9SlotIndexEjLj4ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
+    weak-def-symbols: [ __ZN4llvm11IntervalMapINS_9SlotIndexEPNS_12LiveIntervalELj8ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
+                        __ZN4llvm11IntervalMapINS_9SlotIndexEjLj4ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
+                        __ZN4llvm11IntervalMapINS_9SlotIndexEjLj9ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
                         __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE10removeLoopENSt3__111__wrap_iterIPKPS2_EE, 
                         __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE11removeBlockEPS1_, 
                         __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE13changeLoopForEPS1_PS2_, 

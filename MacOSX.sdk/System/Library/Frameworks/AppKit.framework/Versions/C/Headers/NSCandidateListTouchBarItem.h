@@ -1,7 +1,7 @@
 /*
     NSCandidateListTouchBarItem.h
     Application Kit
-    Copyright (c) 2016-2017, Apple Inc.
+    Copyright (c) 2016-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -23,19 +23,19 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 #if !__OBJC2__
 {
 @private
-    id _candidateViewController;
-    NSString *_customizationLabel;
+    id _candidateViewController APPKIT_IVAR;
+    NSString *_customizationLabel APPKIT_IVAR;
     
-    NSViewController *_inputContextViewController;
+    NSViewController *_inputContextViewController APPKIT_IVAR;
     
     struct {
         unsigned int _allowsIM:1;
         unsigned int _collapsed:1;
         unsigned int _isTextCompletionItem:1;
         unsigned int _reserved:29;
-    } _clfbiFlags;
+    } _clfbiFlags APPKIT_IVAR;
     
-    void *_candidateListTouchBarItemReserved[4] __unused;
+    void *_candidateListTouchBarItemReserved[4] __unused APPKIT_IVAR;
 }
 #endif
 

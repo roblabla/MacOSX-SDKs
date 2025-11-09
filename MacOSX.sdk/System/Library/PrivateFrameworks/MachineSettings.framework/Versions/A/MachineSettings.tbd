@@ -1,10 +1,10 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 14572317-05CE-310D-A7FA-AE04ACDC4FDA', 'x86_64: 2555FB0D-1DE7-3DAD-AAB1-5F87927C4ABF' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 5624FB77-5A78-35DA-A0F9-3F60D0BE3ED0' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/MachineSettings.framework/Versions/A/MachineSettings
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _DelayUntilRepeatKey, _DoubleClickThresholdTimeKey, _FNStateKey, 
                        _IgnoreTrackpadIfMousePresentKey, _KeyRepeatIntervalKey, _ModifierMappingKey, 
                        _MouseButtonClickBehaviorKey, _MouseScalingKey, _NSMouseButtonClickBehavior, 
@@ -22,5 +22,5 @@ exports:
                        _setIgnoreTrackpadIfMousePresent, _setMultitouchTrackpadBehavior, 
                        _setTrackpadBehavior, _setTrackpadBehaviorExtended, _setTrackpadTapBehavior, 
                        _setXServeLockEnclosureState, _setXServeLockEnclosureStateForConnection ]
-    objc-classes:    [ _SoundSettings ]
+    objc-classes:    [ SoundSettings ]
 ...

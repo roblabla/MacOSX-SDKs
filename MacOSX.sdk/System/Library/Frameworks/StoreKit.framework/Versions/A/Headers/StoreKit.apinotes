@@ -9,3 +9,11 @@ Classes:
 Tags:
 - Name: SKErrorCode
   NSErrorDomain: SKErrorDomain
+SwiftVersions:
+- Version: 4
+  Classes:
+  - Name: SKProduct
+    Properties:
+    - Name: 'downloadable'
+      PropertyKind: Instance
+      SwiftName: 'downloadable'

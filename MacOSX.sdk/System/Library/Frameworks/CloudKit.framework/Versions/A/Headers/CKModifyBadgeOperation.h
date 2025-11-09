@@ -16,8 +16,10 @@ API_DEPRECATED("No longer supported, will cease working at some point in the fut
 
 @property (nonatomic, assign) NSUInteger badgeValue;
 
-/*  This block is called when the operation completes.
-    The [NSOperation completionBlock] will also be called if both are set. */
+/*! @abstract This block is called when the operation completes.
+ *
+ *  @discussion The [NSOperation completionBlock] will also be called if both are set.
+ */
 @property (nonatomic, copy, nullable) void (^modifyBadgeCompletionBlock)(NSError * _Nullable operationError);
 
 @end

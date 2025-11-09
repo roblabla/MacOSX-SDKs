@@ -1277,6 +1277,8 @@ Tags:
 - Name: NSURLHandleStatus
   SwiftName: NSURLHandle.Status
 Typedefs:
+- Name: NSAttributedStringKey
+  SwiftName: NSAttributedString.Key
 - Name: NSErrorUserInfoKey
   SwiftName: NSError.UserInfoKey
 - Name: NSComparator
@@ -1368,7 +1370,7 @@ Typedefs:
 - Name: NSURLBookmarkFileCreationOptions
   SwiftName: NSURL.BookmarkFileCreationOptions
 - Name: NSRunLoopMode
-  SwiftName: RunLoopMode
+  SwiftName: RunLoop.Mode
 Globals:
 - Name: NSAppleScriptErrorMessage
   SwiftName: NSAppleScript.errorMessage
@@ -1388,6 +1390,8 @@ Globals:
   SwiftName: NSItemProvider.errorDomain
 - Name: NSCurrentLocaleDidChangeNotification
   SwiftName: NSLocale.currentLocaleDidChangeNotification
+- Name: NSDefaultRunLoopMode
+  SwiftName: default
 - Name: NSNetServicesErrorDomain
   SwiftName: NSNetService.errorDomain
 - Name: NSNetServicesErrorCode
@@ -1398,6 +1402,8 @@ Globals:
   SwiftName: Port.didBecomeInvalidNotification
 - Name: NSProcessInfoThermalStateDidChangeNotification
   SwiftName: ProcessInfo.thermalStateDidChangeNotification
+- Name: NSRunLoopCommonModes
+  SwiftName: common
 - Name: NSTaskDidTerminateNotification
   SwiftName: Process.didTerminateNotification
 - Name: NSTextCheckingAllSystemTypes
@@ -1707,6 +1713,10 @@ Enumerators:
   SwiftName: background
 - Name: NSURLNetworkServiceTypeVoice
   SwiftName: voice
+- Name: NSURLNetworkServiceTypeCallSignaling
+  SwiftName: callSignaling
+- Name: NSURLNetworkServiceTypeResponsiveData
+  SwiftName: responsiveData
 - Name: NSXMLEntityGeneralKind
   SwiftName: general
 - Name: NSXMLEntityParsedKind
@@ -1790,6 +1800,26 @@ Enumerators:
 - Name: NSStringEnumerationByLines
   SwiftName: byLines
 SwiftVersions:
+- Version: 4
+  Globals:
+  - Name: NSRunLoopCommonModes
+    SwiftName: commonModes
+  - Name: NSDefaultRunLoopMode
+    SwiftName: defaultRunLoopMode
+  Typedefs:
+  - Name: NSAttributedStringKey
+    SwiftName: NSAttributedStringKey
+  - Name: NSRunLoopMode
+    SwiftName: RunLoopMode
+  Enumerators:
+  - Name: NSURLNetworkServiceTypeCallSignaling
+    SwiftName: networkServiceTypeCallSignaling
+  Classes:
+  - Name: NSExtensionItem
+    Properties:
+    - Name: 'attachments'
+      PropertyKind: Instance
+      Type: 'NSArray * _Nullable'
 - Version: 3
   Classes:
   - Name: NSDimension

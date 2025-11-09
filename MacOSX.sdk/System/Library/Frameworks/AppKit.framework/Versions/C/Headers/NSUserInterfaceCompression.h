@@ -1,18 +1,20 @@
 /*
  NSUserInterfaceCompression.h
  Application Kit
- Copyright (c) 2015-2016, Apple Inc.
+ Copyright (c) 2015-2018, Apple Inc.
  All rights reserved.
  */
 
 #import <Foundation/NSObjCRuntime.h>
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSArray.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+NS_CLASS_AVAILABLE_MAC(10_13)
 @interface NSUserInterfaceCompressionOptions : NSObject <NSCopying, NSCoding> {
-    NSSet *_identifiers;
+    NSSet *_identifiers APPKIT_IVAR;
 }
 
 /*
@@ -88,7 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /*
- NSButton, NSSegmentedControl, NSSliderTouchBarItem currently conform to this protocol
+ NSButton, NSSegmentedControl, and NSSliderTouchBarItem's view currently conform to this protocol
  */
 @protocol NSUserInterfaceCompression
 @required

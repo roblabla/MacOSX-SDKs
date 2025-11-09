@@ -1,7 +1,7 @@
 /*
         NSPDFInfo.h
         Application Kit
-        Copyright (c) 2013-2017, Apple Inc.
+        Copyright (c) 2013-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -17,12 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE_MAC(10_9)
 @interface NSPDFInfo : NSObject <NSCopying, NSCoding> {
-    NSURL *_URL;
-    NSArray *_tagNames;
-    NSPaperOrientation _orientation;
-    NSSize _paperSize;
-    NSMutableDictionary *_attributes;
-    BOOL _fileExtensionHidden;
+    NSURL *_URL APPKIT_IVAR;
+    NSArray *_tagNames APPKIT_IVAR;
+    NSPaperOrientation _orientation APPKIT_IVAR;
+    NSSize _paperSize APPKIT_IVAR;
+    NSMutableDictionary *_attributes APPKIT_IVAR;
+    BOOL _fileExtensionHidden APPKIT_IVAR;
 };
 
 @property (copy, nullable) NSURL *URL;

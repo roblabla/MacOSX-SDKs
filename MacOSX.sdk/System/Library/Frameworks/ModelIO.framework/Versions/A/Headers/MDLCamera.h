@@ -232,7 +232,7 @@ typedef NS_ENUM(NSUInteger, MDLCameraProjection)
 };
 
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLCamera : MDLObject
 
@@ -388,7 +388,7 @@ MDL_EXPORT
 @end
 
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLStereoscopicCamera : MDLCamera
 

@@ -14,19 +14,19 @@
 #include <math.h>
 
 /* Alembic file format, file extension ABC, UTI public.alembic */
-MDL_EXPORT NSString * __nonnull const kUTTypeAlembic NS_AVAILABLE(10_11, 9_0);
+MDL_EXPORT NSString * __nonnull const kUTTypeAlembic API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0));
 
 /* 3d Object file format, file extension OBJ, UTI public.geometry-definition-format */
-MDL_EXPORT NSString * __nonnull const kUTType3dObject NS_AVAILABLE(10_11, 9_0);
+MDL_EXPORT NSString * __nonnull const kUTType3dObject API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0));
 
 /* Polygon file format, file extension PLY, UTI public.polygon-file-format */
-MDL_EXPORT NSString * __nonnull const kUTTypePolygon NS_AVAILABLE(10_11, 9_0);
+MDL_EXPORT NSString * __nonnull const kUTTypePolygon API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0));
 
 /* Stereolithography file format, file extension STL, UTI public.standard-tesselated-geometry-format */
-MDL_EXPORT NSString * __nonnull const kUTTypeStereolithography NS_AVAILABLE(10_11, 9_0);
+MDL_EXPORT NSString * __nonnull const kUTTypeStereolithography API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0));
 
 /* Universal Scene Description file format, file extension USDA or USDB, UTI com.pixar.universal-scene-description */
-MDL_EXPORT NSString * __nonnull const kUTTypeUniversalSceneDescription NS_AVAILABLE(10_12, 10_0);
+MDL_EXPORT NSString * __nonnull const kUTTypeUniversalSceneDescription API_AVAILABLE(macos(10.12), ios(10.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSUInteger, MDLIndexBitDepth)
@@ -58,38 +58,38 @@ typedef NS_ENUM(NSUInteger, MDLDataPrecision) {
     MDLDataPrecisionUndefined,
     MDLDataPrecisionFloat,
     MDLDataPrecisionDouble
-};
+} API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @protocol MDLNamed
 @required
 @property (nonatomic, copy) NSString *name;
 @end
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @protocol MDLComponent <NSObject>
 @end
 
 @class MDLObject;
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @protocol MDLObjectContainerComponent <MDLComponent, NSFastEnumeration>
 
 - (void)addObject:(MDLObject*)object;
 - (void)removeObject:(MDLObject*)object;
-- (MDLObject *)objectAtIndexedSubscript:(NSUInteger)index;
+- (MDLObject *)objectAtIndexedSubscript:(NSUInteger)index API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
-@property (readonly) NSUInteger count;
+@property (readonly) NSUInteger count API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 // returns an array of this object's contained objects, aka children
 @property (nonatomic, readonly, retain) NSArray<MDLObject*> *objects;
 
 @end
 
-typedef struct MDL_EXPORT_CPPCLASS {
+typedef struct MDL_CLASS_EXPORT {
     vector_float3 maxBounds;
     vector_float3 minBounds;
 } MDLAxisAlignedBoundingBox;

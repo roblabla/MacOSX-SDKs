@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2015 Apple Inc.
+ * Copyright (c) 2013-2015, 2018 Apple Inc.
  * All rights reserved.
  */
 
@@ -16,7 +16,7 @@
  * This API is used to create VPN configurations. The VPN tunnel can be started manually, or On Demand rules can be created that will start the VPN tunnel automatically when specific network events occur.
  */
 
-#if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_OSX
 #import <Security/Security.h>
 #endif
 
@@ -49,13 +49,13 @@ typedef NS_ENUM(NSInteger, NEVPNError) {
     NEVPNErrorConfigurationReadWriteFailed = 5,
     /*! @const NEVPNErrorConfigurationUnknown An unknown configuration error occurred. */
     NEVPNErrorConfigurationUnknown = 6,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*! @const NEVPNErrorDomain The VPN error domain */
-NEVPN_EXPORT NSString * const NEVPNErrorDomain NS_AVAILABLE(10_11, 8_0);
+NEVPN_EXPORT NSString * const NEVPNErrorDomain API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*! @const NEVPNConfigurationChangeNotification Name of the NSNotification that is posted when the VPN configuration changes. */
-NEVPN_EXPORT NSString * const NEVPNConfigurationChangeNotification NS_AVAILABLE(10_11, 8_0);
+NEVPN_EXPORT NSString * const NEVPNConfigurationChangeNotification API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @interface NEVPNManager
@@ -65,28 +65,28 @@ NEVPN_EXPORT NSString * const NEVPNConfigurationChangeNotification NS_AVAILABLE(
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEVPNManager : NSObject
 
 /*!
  * @method sharedManager
  * @return The singleton NEVPNManager object for the calling process.
  */
-+ (NEVPNManager *)sharedManager NS_AVAILABLE(10_11, 8_0);
++ (NEVPNManager *)sharedManager API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method loadFromPreferencesWithCompletionHandler:
  * @discussion This function loads the current VPN configuration from the caller's VPN preferences.
  * @param completionHandler A block that will be called on the main thread when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
  */
-- (void)loadFromPreferencesWithCompletionHandler:(void (^)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_11, 8_0);
+- (void)loadFromPreferencesWithCompletionHandler:(void (^)(NSError * __nullable error))completionHandler API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method removeFromPreferencesWithCompletionHandler:
  * @discussion This function removes the VPN configuration from the caller's VPN preferences. If the VPN is enabled, has VPN On Demand enabled, and has VPN On Demand rules, the VPN is disabled and the VPN On Demand rules are de-activated.
  * @param completionHandler A block that will be called on the main thread when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
  */
-- (void)removeFromPreferencesWithCompletionHandler:(nullable void (^)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_11, 8_0);
+- (void)removeFromPreferencesWithCompletionHandler:(nullable void (^)(NSError * __nullable error))completionHandler API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method saveToPreferencesWithCompletionHandler:
@@ -94,58 +94,58 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  *
  * @param completionHandler A block that will be called on the main thread when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
  */
-- (void)saveToPreferencesWithCompletionHandler:(nullable void (^)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_11, 8_0);
+- (void)saveToPreferencesWithCompletionHandler:(nullable void (^)(NSError * __nullable error))completionHandler API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
-#if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_OSX
 /*!
  * @method setAuthorization:
  * @discussion This function sets an authorization object that can be used to obtain the authorization rights necessary to modify the system VPN configuration.
  * @param authorization The AuthorizationRef to use to obtain rights.
  */
-- (void)setAuthorization:(AuthorizationRef)authorization NS_AVAILABLE(10_11, NA);
+- (void)setAuthorization:(AuthorizationRef)authorization API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif
 
 /*!
  * @property onDemandRules
  * @discussion An array of NEOnDemandRule objects.
  */
-@property (copy, nullable) NSArray<NEOnDemandRule *> *onDemandRules NS_AVAILABLE(10_11, 8_0);
+@property (copy, nullable) NSArray<NEOnDemandRule *> *onDemandRules API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property onDemandEnabled
  * @discussion Toggles VPN On Demand.
  */
-@property (getter=isOnDemandEnabled) BOOL onDemandEnabled NS_AVAILABLE(10_11, 8_0);
+@property (getter=isOnDemandEnabled) BOOL onDemandEnabled API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property localizedDescription
  * @discussion A string containing a description of the VPN.
  */
-@property (copy, nullable) NSString *localizedDescription NS_AVAILABLE(10_11, 8_0);
+@property (copy, nullable) NSString *localizedDescription API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property protocol
  * @discussion An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
  */
-@property (strong, nullable) NEVPNProtocol *protocol NS_DEPRECATED(10_11, 10_11, 8_0, 9_0, "Use protocolConfiguration instead");
+@property (strong, nullable) NEVPNProtocol *protocol API_DEPRECATED_WITH_REPLACEMENT("Use protocolConfiguration instead", macos(10.11, 10.11), ios(8.0, 9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property protocolConfiguration
  * @discussion An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
  */
-@property (strong, nullable) NEVPNProtocol *protocolConfiguration NS_AVAILABLE(10_11, 9_0);
+@property (strong, nullable) NEVPNProtocol *protocolConfiguration API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property connection
  * @discussion The NEVPNConnection object used for controlling the VPN tunnel.
  */
-@property (readonly) NEVPNConnection *connection NS_AVAILABLE(10_11, 8_0);
+@property (readonly) NEVPNConnection *connection API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property enabled
  * @discussion Toggles the enabled status of the VPN. Setting this property will disable VPN configurations of other apps. This property will be set to NO  when other VPN configurations are enabled.
  */
-@property (getter=isEnabled) BOOL enabled NS_AVAILABLE(10_11, 8_0);
+@property (getter=isEnabled) BOOL enabled API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

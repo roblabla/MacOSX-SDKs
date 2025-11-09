@@ -1,7 +1,7 @@
 /*
     NSWindowController.h
     Application Kit
-    Copyright (c) 1997-2017, Apple Inc.
+    Copyright (c) 1997-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -17,11 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSWindowController : NSResponder <NSSeguePerforming> {
 @private
-    NSWindow *_window;
-    NSNibName _windowNibName;
-    NSDocument *_document;
-    NSArray *_topLevelObjects;
-    __weak id _owner;
+    NSWindow *_window APPKIT_IVAR;
+    NSNibName _windowNibName APPKIT_IVAR;
+    NSDocument *_document APPKIT_IVAR;
+    NSArray *_topLevelObjects APPKIT_IVAR;
+    __weak id _owner APPKIT_IVAR;
     struct __wcFlags {
         unsigned int shouldCloseDocument:1;
         unsigned int shouldCascade:1;
@@ -32,9 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int nibIsMakingConnections:1;
         unsigned int sentWindowWillLoad:1;
         unsigned int RESERVED:24;
-    } _wcFlags;
-    NSString *_frameAutosaveName;
-    id _moreVars;
+    } _wcFlags APPKIT_IVAR;
+    NSString *_frameAutosaveName APPKIT_IVAR;
+    id _moreVars APPKIT_IVAR;
 }
 
 /* Designated Initializer.  window can be nil.  All other -init... methods call this, and then possibly do other setup.

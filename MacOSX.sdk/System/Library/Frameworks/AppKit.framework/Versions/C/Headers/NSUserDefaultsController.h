@@ -1,7 +1,7 @@
 /*
 	NSUserDefaultsController.h
 	Application Kit
-	Copyright (c) 2002-2017, Apple Inc.
+	Copyright (c) 2002-2018, Apple Inc.
 	All rights reserved.
  */
 
@@ -16,17 +16,17 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSUserDefaultsController : NSController {
 @private
 #if !__LP64__    
-    void *_reserved3;
-    void *_reserved4;
+    void *_reserved3 APPKIT_IVAR;
+    void *_reserved4 APPKIT_IVAR;
 #endif
-    NSUserDefaults *_defaults;
-    NSMutableDictionary *_valueBuffer;
-    NSDictionary *_initialValues;
+    NSUserDefaults *_defaults APPKIT_IVAR;
+    NSMutableDictionary *_valueBuffer APPKIT_IVAR;
+    NSDictionary *_initialValues APPKIT_IVAR;
     struct __userDefaultsControllerFlags {
         unsigned int _sharedInstance:1;
         unsigned int _appliesImmediately:1;
         unsigned int _reservedUserDefaultsController:30;
-    } _userDefaultsControllerFlags;
+    } _userDefaultsControllerFlags APPKIT_IVAR;
 }
 
 @property (class, readonly, strong) NSUserDefaultsController *sharedUserDefaultsController;

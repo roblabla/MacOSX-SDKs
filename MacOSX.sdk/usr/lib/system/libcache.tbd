@@ -1,13 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 7DBA01AB-D159-3406-8358-D74F62E52BBA', 'x86_64: 4BF1D0B3-AB1A-3997-9FEF-CFD5A77E82BB' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: FE21A7E9-DBEB-33AC-836B-785AD036ACF4' ]
 platform:        macosx
 install-name:    /usr/lib/system/libcache.dylib
-current-version: 80
+current-version: 81
 objc-constraint: none
 parent-umbrella: System
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ __cache_handle_memory_pressure_event, _cache_create, _cache_destroy, 
                        _cache_get_and_retain, _cache_get_cost_hint, _cache_get_count_hint, 
                        _cache_get_info, _cache_get_info_for_key, _cache_get_info_for_keys, 

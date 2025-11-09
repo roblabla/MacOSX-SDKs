@@ -110,6 +110,8 @@ struct dtrace_probe {
 	char *dtpr_mod;				/* probe's module name */
 	char *dtpr_func;			/* probe's function name */
 	char *dtpr_name;			/* probe's name */
+	dtrace_probe_t *dtpr_nextprov;		/* next in provider hash */
+	dtrace_probe_t *dtpr_prevprov;		/* previous in provider hash */
 	dtrace_probe_t *dtpr_nextmod;		/* next in module hash */
 	dtrace_probe_t *dtpr_prevmod;		/* previous in module hash */
 	dtrace_probe_t *dtpr_nextfunc;		/* next in function hash */
@@ -135,18 +137,21 @@ typedef struct dtrace_probekey {
 
 typedef struct dtrace_hashbucket {
 	struct dtrace_hashbucket *dthb_next;	/* next on hash chain */
-	dtrace_probe_t *dthb_chain;		/* chain of probes */
+	void *dthb_chain;			/* chain of elements */
 	int dthb_len;				/* number of probes here */
 } dtrace_hashbucket_t;
 
+typedef const char* dtrace_strkey_f(void*, uintptr_t);
+
 typedef struct dtrace_hash {
-	dtrace_hashbucket_t **dth_tab;		/* hash table */
-	int dth_size;				/* size of hash table */
-	int dth_mask;				/* mask to index into table */
-	int dth_nbuckets;			/* total number of buckets */
-	uintptr_t dth_nextoffs;			/* offset of next in probe */
-	uintptr_t dth_prevoffs;			/* offset of prev in probe */
-	uintptr_t dth_stroffs;			/* offset of str in probe */
+	dtrace_hashbucket_t **dth_tab;	/* hash table */
+	int dth_size;			/* size of hash table */
+	int dth_mask;			/* mask to index into table */
+	int dth_nbuckets;		/* total number of buckets */
+	uintptr_t dth_nextoffs;		/* offset of next in element */
+	uintptr_t dth_prevoffs;		/* offset of prev in element */
+	dtrace_strkey_f *dth_getstr;	/* func to retrieve str in element */
+	uintptr_t dth_stroffs;		/* offset of str in element */
 } dtrace_hash_t;
 
 /*
@@ -1310,6 +1315,16 @@ typedef struct dtrace_errhash {
 
 #endif	/* DTRACE_ERRDEBUG */
 
+
+typedef struct dtrace_string dtrace_string_t;
+
+typedef struct dtrace_string {
+	dtrace_string_t *dtst_next;
+	dtrace_string_t *dtst_prev;
+	uint32_t dtst_refcount;
+	char dtst_str[];
+} dtrace_string_t;
+
 /**
  * DTrace Matching pre-conditions
  *
@@ -1343,7 +1358,7 @@ typedef struct dtrace_toxrange {
 	uintptr_t	dtt_limit;		/* limit of toxic range */
 } dtrace_toxrange_t;
 
-extern uint64_t dtrace_getarg(int, int);
+extern uint64_t dtrace_getarg(int, int, dtrace_mstate_t*, dtrace_vstate_t*);
 extern int dtrace_getipl(void);
 extern uintptr_t dtrace_caller(int);
 extern uint32_t dtrace_cas32(uint32_t *, uint32_t, uint32_t);
@@ -1353,6 +1368,9 @@ extern void dtrace_copyinstr(user_addr_t, uintptr_t, size_t, volatile uint16_t *
 extern void dtrace_copyout(uintptr_t, user_addr_t, size_t, volatile uint16_t *);
 extern void dtrace_copyoutstr(uintptr_t, user_addr_t, size_t, volatile uint16_t *);
 extern void dtrace_getpcstack(pc_t *, int, int, uint32_t *);
+extern uint64_t dtrace_load64(uintptr_t);
+extern int dtrace_canload(uint64_t, size_t, dtrace_mstate_t*, dtrace_vstate_t*);
+
 extern uint64_t dtrace_getreg(struct regs *, uint_t);
 extern int dtrace_getstackdepth(int);
 extern void dtrace_getupcstack(uint64_t *, int);
@@ -1370,6 +1388,8 @@ extern int dtrace_assfail(const char *, const char *, int);
 extern int dtrace_attached(void);
 extern hrtime_t dtrace_gethrestime(void);
 extern void dtrace_isa_init(void);
+
+extern void dtrace_flush_caches(void);
 
 extern void dtrace_copy(uintptr_t, uintptr_t, size_t);
 extern void dtrace_copystr(uintptr_t, uintptr_t, size_t, volatile uint16_t *);

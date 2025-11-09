@@ -53,8 +53,8 @@ VT_EXPORT OSStatus VTCopySupportedPropertyDictionaryForEncoder(
 		int32_t						height,
 		CMVideoCodecType			codecType,
 		CM_NULLABLE CFDictionaryRef	encoderSpecification,
-		CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CFStringRef		* CM_NULLABLE outEncoderID,
-		CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CFDictionaryRef	* CM_NULLABLE outSupportedProperties ) API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0));
+		CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CFStringRef		* CM_NULLABLE encoderIDOut,
+		CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CFDictionaryRef	* CM_NULLABLE supportedPropertiesOut ) API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0));
 	
 #pragma pack(pop)
 

@@ -1,7 +1,7 @@
 /*
 	NSItemProvider.h
 	Application Kit
-	Copyright (c) 2014-2017, Apple Inc.
+	Copyright (c) 2014-2018, Apple Inc.
 	All rights reserved.
 */
 

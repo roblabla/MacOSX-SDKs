@@ -55,14 +55,27 @@ the process to be sorted topmost in the report. "-notarget" may be used to avoid
 .Pp
 .Nm duration
 the duration of the sampling in seconds. If not specified, the default of 10 seconds is used.
-.Pp
+.Tp
 .Nm interval
 the number of miliseconds between samples. If not specified, the default of 10 miliseconds is used.
 .Pp
 .Fl i Ar path
-Read in the binary format stored in the spindump file at
+Read in the file located at
 .Ar path
-and re-report that data rather than sampling the live system. Spindump can also parse the stacks of a timeline formatted report without a binary format in order to re-report them in heavy format, in which case only stacks will be updated; summary information will not change.
+rather than sampling the live system. Supported file formats are:
+.Pp
+    * Spindump text files containing a spindump binary format
+    * Spindump text files without a spindump binaty format written in timeline mode (with limited options, and only stacks will be updated; summary information will not change)
+    * Tailspin files
+    * Concatenated kcdata stackshots
+    * Concatenated microstackshots
+.Pp
+.Fl o Ar path
+Specifies where the report should be written. If
+.Ar path
+is a file, it will be overwritten. If
+.Ar path
+is a directory, a file will be created inside that directory with the name following the format <appname>_<pid>.spindump.txt. If a file by that name already exists, spindump will add a unique number to the filename. If not specified, spindump will output reports to files inside /tmp.
 .Pp
 .Fl indexRange Ar s-e
 Only include samples in the given range
@@ -81,27 +94,23 @@ Sort stacks by count (default)
 .Fl timeline
 Sort stacks chronologically
 .Pp
-.Fl file Ar path
-Specifies where the report should be written. If
-.Ar path
-is a file, it will be overwritten. If
-.Ar path
-is a directory, a file will be created inside that directory with the name following the format <appname>_<pid>.spindump.txt. If a file by that name already exists, spindump will add a unique number to the filename. If not specified, spindump will output reports to files inside /tmp.
-.Pp
 .Fl wait
 Wait for the process to exist before sampling. If the process already exists, spindump will begin sampling immediately.
 .Pp
-.Fl onlyrunnable
+.Fl onlyRunnable
 Only display runnable stacks
 .Pp
-.Fl onlyblocked
+.Fl onlyBlocked
 Only display non-runnable stacks
 .Pp
-.Fl onlytarget
+.Fl onlyTarget
 Only sample the target process (allows faster sampling rates)
 .Pp
-.Fl proc <proc>
-If onlytarget is provided, sample
+.Fl proc
+.Ar proc
+If
+.Fl onlyTarget
+is provided, sample
 .Ar proc
 as well. This option may be specified multiple times
 .Pp
@@ -114,10 +123,16 @@ Exit after
 seconds even if the report hasn't been saved
 .Pp
 .Fl stdout
-Print the report to stdout
+Print the report to stdout (in addition to writing to a file)
 .Pp
-.Fl nofile
+.Fl noFile
 Do not output to a file. Implies -stdout and will include the binary format in the stdout output
+.Pp
+.Fl noBinary
+Do not include the spindump binary format at the bottom of the report (the file will not be able to be re-parsed)
+.Pp
+.Fl noText
+Do not include the textual report, only include the binary format
 .Pp
 .Fl open Ar appname
 Specifies an app in which to open the resulting report
@@ -194,6 +209,12 @@ Only include microstackshots taken while the machine was running on battery powe
 .Pp
 .Fl aconly
 Only include microstackshots taken while the machine was running on AC power
+.Pp
+.Fl useridleonly
+Only include microstackshots taken while the user was idle
+.Pp
+.Fl useractiveonly
+Only include microstackshots taken while the user was active
 .Sh SEE ALSO
 .Xr SubmitDiagInfo 8 ,
 .Xr sample 1 

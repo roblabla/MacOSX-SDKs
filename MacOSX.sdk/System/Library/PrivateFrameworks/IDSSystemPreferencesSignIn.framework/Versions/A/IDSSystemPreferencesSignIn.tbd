@@ -1,10 +1,10 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 3C8964F2-D32A-341A-A245-6A985E8BA094', 'x86_64: B5F2D33F-5F4B-31B6-8593-08D2E5B7153F' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 045B4CA1-FE29-30F8-BEE7-8426775A0EFE' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/IDSSystemPreferencesSignIn.framework/Versions/A/IDSSystemPreferencesSignIn
 current-version: 800
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _IDSSignInAccountsWithSystemPreferencesCredentials ]
 ...

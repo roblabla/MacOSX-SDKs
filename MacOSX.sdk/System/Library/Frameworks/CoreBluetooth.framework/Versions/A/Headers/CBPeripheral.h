@@ -248,7 +248,7 @@ CB_EXTERN_CLASS @interface CBPeripheral : CBPeer
  *
  *  @see				peripheral:didWriteValueForCharacteristic:error:
  */
-- (void)openL2CAPChannel:(CBL2CAPPSM)PSM NS_AVAILABLE(NA, 11_0);
+- (void)openL2CAPChannel:(CBL2CAPPSM)PSM NS_AVAILABLE(10_14, 11_0);
 @end
 
 

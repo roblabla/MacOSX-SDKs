@@ -1,7 +1,7 @@
 /*
 	NSTreeController.h
 	Application Kit
-	Copyright (c) 2003-2017, Apple Inc.
+	Copyright (c) 2003-2018, Apple Inc.
 	All rights reserved.
  */
 
@@ -15,12 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface NSTreeController : NSObjectController {
-    id _treeControllerReserved1;
-    NSArray *_modelObservingKeyPaths;
-    id _treeStructureObservers;
-    id _arrangedObjects;
-    id _rootNode;
-    id _selectionIndexPaths;
+    id _treeControllerReserved1 APPKIT_IVAR;
+    NSArray *_modelObservingKeyPaths APPKIT_IVAR;
+    id _treeStructureObservers APPKIT_IVAR;
+    id _arrangedObjects APPKIT_IVAR;
+    id _rootNode APPKIT_IVAR;
+    id _selectionIndexPaths APPKIT_IVAR;
     struct __treeControllerFlags {
         unsigned int _avoidsEmptySelection:1;
         unsigned int _preservesSelection:1;
@@ -35,12 +35,12 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int _skipSortingAfterFetch:1;
 	unsigned int _usesIdenticalComparisonOfModelObjects:1;
         unsigned int _reservedTreeController:20;
-    } _treeControllerFlags;
-    NSArray *_selectedObjects;
-    NSString *_childrenKeyPath;
-    NSString *_countKeyPath;
-    NSString *_leafKeyPath;
-    NSArray *_sortDescriptors;
+    } _treeControllerFlags APPKIT_IVAR;
+    NSArray *_selectedObjects APPKIT_IVAR;
+    NSString *_childrenKeyPath APPKIT_IVAR;
+    NSString *_countKeyPath APPKIT_IVAR;
+    NSString *_leafKeyPath APPKIT_IVAR;
+    NSArray *_sortDescriptors APPKIT_IVAR;
 }
 
 - (void)rearrangeObjects; // triggers rearranging the content objects for the user interface, including sorting (and filtering if provided by subclasses); subclasses can invoke this method if any parameter that affects the arranged objects changes

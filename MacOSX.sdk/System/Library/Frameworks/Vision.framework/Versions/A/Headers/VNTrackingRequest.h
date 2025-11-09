@@ -11,6 +11,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
+@class VNDetectedObjectObservation;
+
+
+/*!
+ @brief    Tracking level options to favor speed or location accuracy. The VNRequestTrackingLevelFast is the default option used by trackers.   
+ */
 typedef NS_ENUM(NSUInteger, VNRequestTrackingLevel)
 {
     VNRequestTrackingLevelAccurate = 0,
@@ -27,7 +33,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 
 /*!
  @property property inputObservation
- @abstract The starting object observation for initial tracker setup or returned from previous object tracking iteration. In general, unless documented in the request's documentation, the rectangle must be defined in normalized coordinates (size and origin between [0,1] with origin at LLC).
+ @abstract The observation object that defines a region to track. Providing an observation not returned from a tracker (e.g. user-defined, or from a detector) begins a new tracker for the sequence. Providing an observation that was returned from a tracker continues the use of that tracker, to track the region to the next frame. In general, unless documented in the request's documentation, the rectangle must be defined in normalized coordinates (both dimensions normalized to [0,1] with the origin at the lower-left corner).
 */
 @property (readwrite, nonatomic, strong) VNDetectedObjectObservation * inputObservation;
 

@@ -1,6 +1,6 @@
 /* CoreAnimation - CATiledLayer.h
 
-   Copyright (c) 2006-2017, Apple Inc.
+   Copyright (c) 2006-2018, Apple Inc.
    All rights reserved. */
 
 /* This is a subclass of CALayer providing a way to asynchronously
@@ -26,7 +26,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
+API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface CATiledLayer : CALayer
 
 /* The time in seconds that newly added images take to "fade-in" to the

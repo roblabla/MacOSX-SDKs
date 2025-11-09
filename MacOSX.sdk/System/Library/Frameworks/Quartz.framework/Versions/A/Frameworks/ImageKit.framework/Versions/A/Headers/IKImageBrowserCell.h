@@ -12,6 +12,7 @@
  */
 
 #import <AppKit/AppKit.h>
+#import <ImageKit/ImageKitBase.h>
 
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
@@ -34,7 +35,7 @@ extern NSString *const IKImageBrowserCellPlaceHolderLayer;
 @interface IKImageBrowserCell : NSObject
 {
 	__weak id                   _parent;
-	void* __strong              _ibCellReserved;
+	void*                       _ibCellReserved;
 }
 
 /*! 

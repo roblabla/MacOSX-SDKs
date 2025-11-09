@@ -16,6 +16,11 @@
 #import <AudioToolbox/MusicPlayer.h>
 #endif
 
+#if __has_include(<AudioToolbox/AUAudioUnit.h>) && __OBJC2__
+#define AVAUDIOENGINE_HAVE_AUAUDIOUNIT 1
+#import <AudioToolbox/AUAudioUnit.h>
+#endif
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class AVAudioFormat, AVAudioNode, AVAudioInputNode, AVAudioOutputNode, AVAudioMixerNode;
@@ -141,7 +146,7 @@ typedef AVAudioEngineManualRenderingStatus (^AVAudioEngineManualRenderingBlock)(
 		audio device and rendering in response to requests from the client, normally at or
 		faster than realtime rate.
 */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioEngine : NSObject {
 @private
 	void *_impl;
@@ -258,7 +263,7 @@ _player = [[AVAudioPlayerNode alloc] init];
 			- any AVAudioUnitTimeEffect
 			- any sample rate conversion
 */
-- (void)connect:(AVAudioNode *)sourceNode toConnectionPoints:(NSArray<AVAudioConnectionPoint *> *)destNodes fromBus:(AVAudioNodeBus)sourceBus format:(AVAudioFormat * __nullable)format NS_AVAILABLE(10_11, 9_0);
+- (void)connect:(AVAudioNode *)sourceNode toConnectionPoints:(NSArray<AVAudioConnectionPoint *> *)destNodes fromBus:(AVAudioNodeBus)sourceBus format:(AVAudioFormat * __nullable)format API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /*! @method disconnectNodeInput:bus:
 	@abstract
@@ -379,7 +384,7 @@ _player = [[AVAudioPlayerNode alloc] init];
  
 		Returns nil if there is no connection on the node's specified input bus.
 */
-- (AVAudioConnectionPoint * __nullable)inputConnectionPointForNode:(AVAudioNode *)node inputBus:(AVAudioNodeBus)bus NS_AVAILABLE(10_11, 9_0);
+- (AVAudioConnectionPoint * __nullable)inputConnectionPointForNode:(AVAudioNode *)node inputBus:(AVAudioNodeBus)bus API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /*! @method outputConnectionPointsForNode:outputBus:
 	@abstract
@@ -396,7 +401,7 @@ _player = [[AVAudioPlayerNode alloc] init];
  
 		Returns an empty array if there are no connections on the node's specified output bus.
 */
-- (NSArray<AVAudioConnectionPoint *> *)outputConnectionPointsForNode:(AVAudioNode *)node outputBus:(AVAudioNodeBus)bus NS_AVAILABLE(10_11, 9_0);
+- (NSArray<AVAudioConnectionPoint *> *)outputConnectionPointsForNode:(AVAudioNode *)node outputBus:(AVAudioNodeBus)bus API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 #if AVAUDIOENGINE_HAVE_MUSICPLAYER
 /*! @property musicSequence
@@ -639,6 +644,119 @@ _player = [[AVAudioPlayerNode alloc] init];
 */
 @property (readonly, nonatomic) AVAudioFramePosition manualRenderingSampleTime API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
+#if AVAUDIOENGINE_HAVE_AUAUDIOUNIT
+/*! @method connectMIDI:to:format:block:
+    @abstract
+        Establish a MIDI only connection between two nodes.
+    @param sourceNode
+        The source node.
+    @param destinationNode
+        The destination node.
+    @param format
+        If non-nil, the format of the source node's output bus is set to this format.
+        In all cases, the format of the source nodes' output bus has to match with the
+        destination nodes' output bus format.
+        Although the output bus of the source is not in use, the format needs to be set
+        in order to be able to use the sample rate for MIDI event timing calculations.
+    @param tapBlock
+        If non-nil, this block is called from the source node's `AUMIDIOutputEventBlock`
+        on the realtime thread. The host can tap the MIDI data of the source node through
+        this block. May be nil.
+    @discussion
+        Use this method to establish a MIDI only connection between a source node and a
+        destination node that has MIDI input capability.
+
+        The source node can only be a AVAudioUnit node of type `kAudioUnitType_MIDIProcessor`.
+        The destination node types can be `kAudioUnitType_MusicDevice`,
+        `kAudioUnitType_MusicEffect` or `kAudioUnitType_MIDIProcessor`.
+
+        Note that any pre-existing MIDI connection involving the destination will be broken.
+
+        Any client installed block on the source node's audio unit `AUMIDIOutputEventBlock`
+        will be overwritten when making the MIDI connection.
+ */
+- (void)connectMIDI:(AVAudioNode *)sourceNode to:(AVAudioNode *)destinationNode format:(AVAudioFormat * __nullable)format block:(AUMIDIOutputEventBlock __nullable)tapBlock API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+
+/*! @method connectMIDI:toNodes:format:block:
+    @abstract
+        Establish a MIDI only connection between a source node and multiple destination nodes.
+    @param sourceNode
+        The source node.
+    @param destinationNodes
+        An array of AVAudioNodes specifying destination nodes.
+    @param format
+        If non-nil, the format of the source node's output bus is set to this format.
+        In all cases, the format of the source nodes' output bus has to match with the
+        destination nodes' output bus format.
+        Although the output bus of the source is not in use, the format needs to be set
+        in order to be able to use the sample rate for MIDI event timing calculations.
+    @param tapBlock
+        If non-nil, this block is called from the source node's `AUMIDIOutputEventBlock`
+        on the realtime thread. The host can tap the MIDI data of the source node through
+        this block. May be nil.
+    @discussion
+        Use this method to establish a MIDI only connection between a source node and
+        multiple destination nodes.
+
+        The source node can only be a AVAudioUnit node of type `kAudioUnitType_MIDIProcessor`.
+        The destination node types can be `kAudioUnitType_MusicDevice`,
+        `kAudioUnitType_MusicEffect` or `kAudioUnitType_MIDIProcessor`.
+
+        MIDI connections made using this method are either one-to-one (when a single
+        destination connection is specified) or one-to-many (when multiple connections are
+        specified), but never many-to-one.
+
+        Note that any pre-existing connection involving the destination will be broken.
+
+        Any client installed block on the source node's audio unit `AUMIDIOutputEventBlock`
+        will be overwritten when making the MIDI connection.
+ */
+- (void)connectMIDI:(AVAudioNode *)sourceNode toNodes:(NSArray<AVAudioNode *> *)destinationNodes format:(AVAudioFormat * __nullable)format block:(AUMIDIOutputEventBlock __nullable)tapBlock API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+
+/*! @method disconnectMIDI:from:
+    @abstract
+        Remove a MIDI connection between two nodes.
+    @param sourceNode
+        The node whose MIDI output is to be disconnected.
+    @param destinationNode
+        The node whose MIDI input is to be disconnected.
+    @discussion
+        If a tap block is installed on the source node, it will be removed when the last
+        connection from the source node is removed.
+ */
+- (void)disconnectMIDI:(AVAudioNode *)sourceNode from:(AVAudioNode *)destinationNode API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+
+/*! @method disconnectMIDI:fromNodes:
+    @abstract
+        Remove a MIDI connection between one source node and multiple destination nodes.
+    @param sourceNode
+        The node whose MIDI output is to be disconnected.
+    @param destinationNodes
+        An array of AVAudioNodes specifying nodes whose MIDI input is to be disconnected.
+    @discussion
+        If a tap block is installed on the source node, it will be removed when the last
+        connection from the source node is removed.
+ */
+- (void)disconnectMIDI:(AVAudioNode *)sourceNode fromNodes:(NSArray<AVAudioNode *> *)destinationNodes API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+
+/*! @method disconnectMIDIInput:
+    @abstract
+        Disconnects all input MIDI connections of this node.
+    @param node
+        The node whose MIDI input is to be disconnected.
+*/
+- (void)disconnectMIDIInput:(AVAudioNode *)node API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+
+/*! @method disconnectMIDIOutput:
+    @abstract
+        Disconnects all output MIDI connections of this node.
+    @param node
+        The node whose MIDI outputs are to be disconnected.
+*/
+- (void)disconnectMIDIOutput:(AVAudioNode *)node API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+
+#endif // AVAUDIOENGINE_HAVE_AUAUDIOUNIT
+
 @end // AVAudioEngine
 
 /*!	@constant AVAudioEngineConfigurationChangeNotification
@@ -666,6 +784,6 @@ _player = [[AVAudioPlayerNode alloc] init];
 		synchronously teardown the engine.
 */
 AVF_EXPORT
-NSString *const AVAudioEngineConfigurationChangeNotification NS_AVAILABLE(10_10, 8_0);
+NSString *const AVAudioEngineConfigurationChangeNotification API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END

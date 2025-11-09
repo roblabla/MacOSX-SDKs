@@ -1,7 +1,7 @@
 /*
 	NSLayoutGuide.h
 	Application Kit
-	Copyright (c) 2015-2017, Apple Inc.
+	Copyright (c) 2015-2018, Apple Inc.
 	All rights reserved.
  */
 
@@ -19,31 +19,31 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 @interface NSLayoutGuide : NSObject <NSCoding, NSUserInterfaceItemIdentification>
 {
     @private
-    id            _owningView;
-    NSString     *_identifier;
-    NSISVariable *_minYVariable;
-    NSISVariable *_minXVariable;
-    NSISVariable *_widthVariable;
-    NSISVariable *_heightVariable;
-    __weak NSLayoutXAxisAnchor *_left;
-    __weak NSLayoutXAxisAnchor *_right;
-    __weak NSLayoutXAxisAnchor *_leading;
-    __weak NSLayoutXAxisAnchor *_trailing;
-    __weak NSLayoutYAxisAnchor *_top;
-    __weak NSLayoutYAxisAnchor *_bottom;
-    __weak NSLayoutDimension   *_width;
-    __weak NSLayoutDimension   *_height;
-    __weak NSLayoutXAxisAnchor *_centerX;
-    __weak NSLayoutYAxisAnchor *_centerY;
+    id            _owningView APPKIT_IVAR;
+    NSString     *_identifier APPKIT_IVAR;
+    NSISVariable *_minYVariable APPKIT_IVAR;
+    NSISVariable *_minXVariable APPKIT_IVAR;
+    NSISVariable *_widthVariable APPKIT_IVAR;
+    NSISVariable *_heightVariable APPKIT_IVAR;
+    __weak NSLayoutXAxisAnchor *_left APPKIT_IVAR;
+    __weak NSLayoutXAxisAnchor *_right APPKIT_IVAR;
+    __weak NSLayoutXAxisAnchor *_leading APPKIT_IVAR;
+    __weak NSLayoutXAxisAnchor *_trailing APPKIT_IVAR;
+    __weak NSLayoutYAxisAnchor *_top APPKIT_IVAR;
+    __weak NSLayoutYAxisAnchor *_bottom APPKIT_IVAR;
+    __weak NSLayoutDimension   *_width APPKIT_IVAR;
+    __weak NSLayoutDimension   *_height APPKIT_IVAR;
+    __weak NSLayoutXAxisAnchor *_centerX APPKIT_IVAR;
+    __weak NSLayoutYAxisAnchor *_centerY APPKIT_IVAR;
     
-    NSRect  _frame;
-    id _aux;
-    id  _reserved2 __unused;
+    NSRect  _frame APPKIT_IVAR;
+    id _aux APPKIT_IVAR;
+    id  _reserved2 __unused APPKIT_IVAR;
 
-    unsigned int    _shouldBeArchived:1;
-    unsigned int    _frameNeedsUpdate:1;
-    unsigned int    _frameIsObserved:1;
-    unsigned int    _reservedFlags:29 __unused;
+    unsigned int    _shouldBeArchived:1 APPKIT_IVAR;
+    unsigned int    _frameNeedsUpdate:1 APPKIT_IVAR;
+    unsigned int    _frameIsObserved:1 APPKIT_IVAR;
+    unsigned int    _reservedFlags:29 __unused APPKIT_IVAR;
 }
 
 

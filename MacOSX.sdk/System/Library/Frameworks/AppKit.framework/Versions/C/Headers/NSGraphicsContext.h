@@ -1,7 +1,7 @@
 /*
         NSGraphicsContext.h
         Application Kit
-        Copyright (c) 1997-2017, Apple Inc.
+        Copyright (c) 1997-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -20,12 +20,12 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSBitmapImageRep;
 
 /* Attributes that can be passed to graphicsContextWithAttributes: method */
-typedef NSString * NSGraphicsContextAttributeKey NS_STRING_ENUM;
+typedef NSString * NSGraphicsContextAttributeKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSGraphicsContextAttributeKey NSGraphicsContextDestinationAttributeName; // Can be an instance of NSWindow, NSMutableData, NSBitmapImageRep, or NSURL.
 APPKIT_EXTERN NSGraphicsContextAttributeKey NSGraphicsContextRepresentationFormatAttributeName; // Specifies destination file format. Used only for NSMutableData or NSURL destinations
 
 // Supported file format
-typedef NSString * NSGraphicsContextRepresentationFormatName NS_STRING_ENUM;
+typedef NSString * NSGraphicsContextRepresentationFormatName NS_TYPED_ENUM;
 APPKIT_EXTERN NSGraphicsContextRepresentationFormatName NSGraphicsContextPSFormat;
 APPKIT_EXTERN NSGraphicsContextRepresentationFormatName NSGraphicsContextPDFFormat;
 
@@ -102,16 +102,13 @@ typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
 
 @interface NSGraphicsContext (NSGraphicsContextDeprecated)
 
-/* This method does nothing and is deprecated
- */
-+ (void)setGraphicsState:(NSInteger)gState NS_DEPRECATED_MAC(10_0, 10_10);
++ (void)setGraphicsState:(NSInteger)gState NS_DEPRECATED_MAC(10_0, 10_10, "This method has no effect");
 
 - (null_unspecified id)focusStack NS_DEPRECATED_MAC(10_0, 10_6);
 - (void)setFocusStack:(null_unspecified id)stack NS_DEPRECATED_MAC(10_0, 10_6);
 
-// Platform specific graphics ports (usually CGContextRef.) Use +graphicsContextWithCGContext:flipped: and -CGContext instead.
-+ (NSGraphicsContext *)graphicsContextWithGraphicsPort:(void *)graphicsPort flipped:(BOOL)initialFlippedState;
-@property (readonly) void *graphicsPort NS_RETURNS_INNER_POINTER;
++ (NSGraphicsContext *)graphicsContextWithGraphicsPort:(void *)graphicsPort flipped:(BOOL)initialFlippedState NS_DEPRECATED_WITH_REPLACEMENT_MAC("graphicsContextWithCGContext:flipped:", 10_0, 10_14);
+@property (readonly) void *graphicsPort NS_RETURNS_INNER_POINTER NS_DEPRECATED_WITH_REPLACEMENT_MAC("CGContext", 10_0, 10_14);
 
 @end
 

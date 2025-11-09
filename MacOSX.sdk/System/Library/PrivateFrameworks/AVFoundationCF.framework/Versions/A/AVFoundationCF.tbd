@@ -1,13 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 56AE9517-790B-3A81-B5EC-67D5147BDD9C', 'x86_64: 6C923E84-7F85-37F2-907A-120C94238AC9' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: D721B8F6-D6DD-39D9-9021-A51230B89E83' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AVFoundationCF.framework/Versions/A/AVFoundationCF
 current-version: 2
 exports:         
   - archs:           [ x86_64 ]
-    objc-ivars:      [ _AVCFInternalPlayerLayer.AVCFLayer, _AVCFInternalSubtitleLayer._subtitleLayerRef ]
-  - archs:           [ i386, x86_64 ]
     symbols:         [ _AVCFApplicationAuthorizationChallengeProviderFairPlay, _AVCFApplicationAuthorizationChallengeProviderNone, 
                        _AVCFAssetAssociatedSubtitlesTrackReferencesKey, _AVCFAssetCacheCopyAllKeys, 
                        _AVCFAssetCacheCopyDefaultCache, _AVCFAssetCacheCopyURL, _AVCFAssetCacheCreateWithURL, 
@@ -334,26 +332,32 @@ exports:
                        _AVCFMetadataiTunesMetadataKeyUserComment, _AVCFMetadataiTunesMetadataKeyUserGenre, 
                        _AVCFMutableCompositionInsertTimeRange, _AVCFMutableCompositionScaleTimeRange, 
                        _AVCFMutableMetadataItemGetTypeID, _AVCFNumberOfChannelsKey, 
-                       _AVCFPlayerAddLayer, _AVCFPlayerAppliesMediaSelectionCriteriaAutomaticallyKey, 
+                       _AVCFPlayerAddLayer, _AVCFPlayerAllowsAirPlayVideoWhileExternalScreenIsActive, 
+                       _AVCFPlayerAppliesMediaSelectionCriteriaAutomaticallyKey, 
+                       _AVCFPlayerAudioSessionModeDefault, _AVCFPlayerAudioSessionModeMoviePlayback, 
                        _AVCFPlayerCopyAudioDeviceUID, _AVCFPlayerCopyCurrentItem, 
                        _AVCFPlayerCopyDisplaysUsedForPlayback, _AVCFPlayerCopyMediaSelectionCriteriaForMediaCharacteristic, 
                        _AVCFPlayerCopyMultichannelAudioStrategy, _AVCFPlayerCopyPerformanceDictionary, 
                        _AVCFPlayerCreateBoundaryTimeObserverForTimes, _AVCFPlayerCreatePeriodicTimeObserverForInterval, 
                        _AVCFPlayerCreateWithPlayerItemAndOptions, _AVCFPlayerCreateWithURLAndOptions, 
                        _AVCFPlayerCurrentPlayerItemChangedNotification, _AVCFPlayerEnableHardwareAcceleratedVideoDecoderKey, 
-                       _AVCFPlayerGetActionAtItemEnd, _AVCFPlayerGetCurrentTime, 
+                       _AVCFPlayerGetActionAtItemEnd, _AVCFPlayerGetAirPlayLocalPlaybackVolume, 
+                       _AVCFPlayerGetAudioSessionPlaybackMode, _AVCFPlayerGetCurrentTime, 
                        _AVCFPlayerGetExternalProtectionStatus, _AVCFPlayerGetNotificationQueue, 
                        _AVCFPlayerGetRate, _AVCFPlayerGetStatus, _AVCFPlayerGetTypeID, 
                        _AVCFPlayerGetVolume, _AVCFPlayerIsAirPlayLocalPlaybackEnabled, 
-                       _AVCFPlayerIsClosedCaptionDisplayEnabled, _AVCFPlayerIsMusicRoutingContextEnabled, 
-                       _AVCFPlayerIsMuted, _AVCFPlayerIsMutedChangedNotification, 
-                       _AVCFPlayerItemAddOutput, _AVCFPlayerItemBecameCurrentNotification, 
-                       _AVCFPlayerItemCancelPendingSeeks, _AVCFPlayerItemCopyLoadedTimeRanges, 
-                       _AVCFPlayerItemCopyOutputs, _AVCFPlayerItemCopySeekableTimeRanges, 
-                       _AVCFPlayerItemCopyTimedMetadata, _AVCFPlayerItemCopyTracks, 
-                       _AVCFPlayerItemCreateWithAsset, _AVCFPlayerItemCreateWithURL, 
-                       _AVCFPlayerItemDidPlayToEndTimeNotification, _AVCFPlayerItemDurationChangedNotification, 
-                       _AVCFPlayerItemExternalProtectionRequiredForPlaybackChanged, 
+                       _AVCFPlayerIsAirPlayVideoActiveDidChangeNotification, _AVCFPlayerIsAirPlayVideoAllowed, 
+                       _AVCFPlayerIsAirPlayVideoAllowedWhileExternalScreenIsActive, 
+                       _AVCFPlayerIsClosedCaptionDisplayEnabled, _AVCFPlayerIsExternalPlaybackActive, 
+                       _AVCFPlayerIsMusicRoutingContextEnabled, _AVCFPlayerIsMuted, 
+                       _AVCFPlayerIsMutedChangedNotification, _AVCFPlayerItemAddOutput, 
+                       _AVCFPlayerItemBecameCurrentNotification, _AVCFPlayerItemCancelPendingSeeks, 
+                       _AVCFPlayerItemCopyLoadedTimeRanges, _AVCFPlayerItemCopyOutputs, 
+                       _AVCFPlayerItemCopySeekableTimeRanges, _AVCFPlayerItemCopyTimedMetadata, 
+                       _AVCFPlayerItemCopyTracks, _AVCFPlayerItemCreateWithAsset, 
+                       _AVCFPlayerItemCreateWithURL, _AVCFPlayerItemDidPlayToEndTimeNotification, 
+                       _AVCFPlayerItemDurationChangedNotification, _AVCFPlayerItemExternalProtectionRequiredForPlaybackChanged, 
+                       _AVCFPlayerItemFailedToPlayToEndTimeErrorKey, _AVCFPlayerItemFailedToPlayToEndTimeNotification, 
                        _AVCFPlayerItemGetAsset, _AVCFPlayerItemGetAudioMix, _AVCFPlayerItemGetCurrentTime, 
                        _AVCFPlayerItemGetDuration, _AVCFPlayerItemGetForwardPlaybackEndTime, 
                        _AVCFPlayerItemGetPresentationSize, _AVCFPlayerItemGetRequiredExternalProtectionMethod, 
@@ -406,8 +410,10 @@ exports:
                        _AVCFPlayerSeekToTime, _AVCFPlayerSeekToTimeWithCompletionCallback, 
                        _AVCFPlayerSeekToTimeWithTolerance, _AVCFPlayerSeekToTimeWithToleranceAndCompletionCallback, 
                        _AVCFPlayerSetActionAtItemEnd, _AVCFPlayerSetAirPlayLocalPlaybackEnabled, 
-                       _AVCFPlayerSetAudioDeviceUID, _AVCFPlayerSetClientEnforcedExternalProtectionMethod, 
-                       _AVCFPlayerSetClosedCaptionDisplayEnabled, _AVCFPlayerSetDisplaysUsedForPlayback, 
+                       _AVCFPlayerSetAirPlayLocalPlaybackVolume, _AVCFPlayerSetAllowsAirPlayVideo, 
+                       _AVCFPlayerSetAudioDeviceUID, _AVCFPlayerSetAudioSessionPlaybackMode, 
+                       _AVCFPlayerSetClientEnforcedExternalProtectionMethod, _AVCFPlayerSetClosedCaptionDisplayEnabled, 
+                       _AVCFPlayerSetDisplaysUsedForPlayback, _AVCFPlayerSetExternalPlaybackRoutingContext, 
                        _AVCFPlayerSetMultichannelAudioStrategy, _AVCFPlayerSetMusicRoutingContextEnabled, 
                        _AVCFPlayerSetMuted, _AVCFPlayerSetRate, _AVCFPlayerSetVolume, 
                        _AVCFPlayerStatusChangedNotification, _AVCFPlayerVolumeChangedNotification, 
@@ -447,5 +453,6 @@ exports:
                        __AVCFUninitializeProtectedContentPlaybackSupportSession, 
                        _kAIGRequestKey_RequestID, _kAVCFAssetExportSessionDesc, _kAVCFAssetProxyVersionNumber, 
                        _kAVCFPlayerItemLegibleOutputDesc ]
-    objc-classes:    [ _AVCFInternalPlayerLayer, _AVCFInternalSubtitleLayer ]
+    objc-classes:    [ AVCFInternalPlayerLayer, AVCFInternalSubtitleLayer ]
+    objc-ivars:      [ AVCFInternalPlayerLayer.AVCFLayer, AVCFInternalSubtitleLayer._subtitleLayerRef ]
 ...

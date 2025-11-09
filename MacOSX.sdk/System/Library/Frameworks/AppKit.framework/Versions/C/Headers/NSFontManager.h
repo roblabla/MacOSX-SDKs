@@ -1,7 +1,7 @@
 /*
 	NSFontManager.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,6 +9,8 @@
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSGeometry.h>
+#import <AppKit/AppKitDefines.h>
+#import <AppKit/NSMenu.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -56,32 +58,32 @@ typedef NS_ENUM(NSUInteger, NSFontAction) {
 };
 
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
-@interface NSFontManager : NSObject
+@interface NSFontManager : NSObject <NSMenuItemValidation>
 {
 /*All instance variables are private*/
 @private
-    NSFontPanel * _panel;
+    NSFontPanel * _panel APPKIT_IVAR;
 #ifndef __OBJC2__
-    unsigned int _fmReserved1;
+    unsigned int _fmReserved1 APPKIT_IVAR;
 #endif
-    SEL _action;
-    id _actionOrigin;
-    id _target;
-    NSFont *_selFont;
+    SEL _action APPKIT_IVAR;
+    id _actionOrigin APPKIT_IVAR;
+    id _target APPKIT_IVAR;
+    NSFont *_selFont APPKIT_IVAR;
     struct _fmFlags {
 	unsigned int multipleFont:1;
 	unsigned int disabled:1;
         unsigned int senderTagMode:2;
 	unsigned int _RESERVED:12;
-    } _fmFlags;
+    } _fmFlags APPKIT_IVAR;
 #ifndef __OBJC2__
-    unsigned short _fmReserved3;
+    unsigned short _fmReserved3 APPKIT_IVAR;
 #endif
-    id _delegate;
-    id _collections;
+    id _delegate APPKIT_IVAR;
+    id _collections APPKIT_IVAR;
 #ifndef __OBJC2__
-    id _hiddenCollections;
-    NSUInteger _fmReserved4;
+    id _hiddenCollections APPKIT_IVAR;
+    NSUInteger _fmReserved4 APPKIT_IVAR;
 #endif
 }
 
@@ -171,11 +173,13 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 - (BOOL)fontManager:(id)sender willIncludeFont:(NSString *)fontName NS_DEPRECATED_MAC(10_0, 10_11, "Use NSFontCollection for providing filtered font lists");
 @end
 
+#if __swift__ < 40200
 /* This is the message that's propagated up the responder chain.
 */
 @interface NSObject(NSFontManagerResponderMethod)
-- (void)changeFont:(nullable id)sender;
+- (void)changeFont:(nullable id)sender NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now an optional method of the NSFontChanging protocol.");
 @end
+#endif
 
 NS_ASSUME_NONNULL_END
 

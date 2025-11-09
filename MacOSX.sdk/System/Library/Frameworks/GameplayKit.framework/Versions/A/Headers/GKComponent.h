@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @see GKComponentSystem
  */
-GK_BASE_AVAILABILITY @interface GKComponent : NSObject <NSCopying, NSCoding>
+GK_BASE_AVAILABILITY @interface GKComponent : NSObject <NSCopying, NSSecureCoding>
 
 /**
  * The entity that this component belongs to. Defaults to nil until the component is added to an entity.

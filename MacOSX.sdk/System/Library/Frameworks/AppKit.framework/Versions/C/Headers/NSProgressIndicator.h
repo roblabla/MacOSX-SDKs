@@ -1,7 +1,7 @@
 /*
         NSProgressIndicator.h
         Application Kit
-        Copyright (c) 1997-2017, Apple Inc.
+        Copyright (c) 1997-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -18,37 +18,33 @@ typedef NS_ENUM(NSUInteger, NSProgressIndicatorStyle) {
 
 @interface NSProgressIndicator : NSView <NSAccessibilityProgressIndicator> {
 @private
-    BOOL		_isBezeled;
-    BOOL		_isIndeterminate;
-    BOOL		_threadedAnimation;
-    double		_minimum;
-    double		_maximum;
-    double		_value;
-    unsigned int        _animationIndex;
-    NSTimeInterval	_animationDelay;
-    id			_timer;
-    CGFloat     _drawingWidth;
-    id		_roundColor;
-    id          _reserved __unused;
-    struct __progressIndicatorFlags {
+    BOOL _isBezeled APPKIT_IVAR;
+    BOOL _isIndeterminate APPKIT_IVAR;
+    BOOL _threadedAnimation APPKIT_IVAR;
+    double _minimum APPKIT_IVAR;
+    double _maximum APPKIT_IVAR;
+    double _value APPKIT_IVAR;
+    unsigned int _animationIndex APPKIT_IVAR;
+    NSTimeInterval _animationDelay APPKIT_IVAR;
+    id<NSObject> _windowOcclusionChangedNotificationToken APPKIT_IVAR;
+    CGFloat _drawingWidth APPKIT_IVAR;
+    id _roundColor APPKIT_IVAR;
+    id<NSObject> _systemColorsChangedNotificationToken APPKIT_IVAR;
+    struct {
         unsigned int isSpinning:1;
         unsigned int isVector:1;
-        unsigned int isLocked:1;
         unsigned int controlTint:3;
+        unsigned int spinningTint:2;
         unsigned int controlSize:2;
-	unsigned int style:1;
-        unsigned int _delayedStartup:1;
- 	unsigned int hideWhenStopped:1;
-        unsigned int revive:1;
-        unsigned int _temporarilyBlockHeartBeating:1;
-        unsigned int _isHidden:1;
-        unsigned int _isHeartBeatInstalled:1;
-        unsigned int _customRenderer:1;
-        unsigned int _lastFrame:8;
-        unsigned int _isDetaching:1;
-        unsigned int RESERVED:7;
-    } _progressIndicatorFlags;
-    id _NSProgressIndicatorReserved1 __unused;
+        unsigned int style:1;
+        unsigned int delayedStartup:1;
+        unsigned int hideWhenStopped:1;
+        unsigned int isHidden:1;
+        unsigned int isHeartBeatInstalled:1;
+        unsigned int customRenderer:1;
+        unsigned int RESERVED:17;
+    } _progressIndicatorFlags APPKIT_IVAR;
+    id _NSProgressIndicatorReserved1 __unused APPKIT_IVAR;
 }
 
 #pragma mark Options
@@ -83,7 +79,7 @@ typedef NS_ENUM(NSUInteger, NSProgressIndicatorStyle) {
 
 @property NSProgressIndicatorStyle style;
 
-/* For the spinning style, it will size the spinning arrows to their default size. For the bar style, the height will be set to the recommended height.
+/* For the spinning style, it will size the view to its default size.  For the bar style, the height will be set to the recommended height.
  */
 - (void)sizeToFit;
 
@@ -93,19 +89,19 @@ typedef NS_ENUM(NSUInteger, NSProgressIndicatorStyle) {
 
 #pragma mark Deprecated declarations
 
-/* These constants do not accurately represent the geometry of NSProgressIndicator.  Use `controlSize` and `sizeToFit` instead.  These declarations will be formally marked deprecated in a future release.
+/* These constants do not accurately represent the geometry of NSProgressIndicator.  Use `controlSize` and `sizeToFit` instead.
  */
 typedef NS_ENUM(NSUInteger, NSProgressIndicatorThickness) {
     NSProgressIndicatorPreferredThickness      = 14,
     NSProgressIndicatorPreferredSmallThickness = 10,
     NSProgressIndicatorPreferredLargeThickness = 18,
     NSProgressIndicatorPreferredAquaThickness  = 12
-};
+} NS_DEPRECATED_MAC(10_0, 10_14);
 
-/* These declarations will be formally marked deprecated in a future release.
+/* Please instead use the more modern versions of these constants.
  */
-static const NSProgressIndicatorStyle NSProgressIndicatorBarStyle = NSProgressIndicatorStyleBar;
-static const NSProgressIndicatorStyle NSProgressIndicatorSpinningStyle = NSProgressIndicatorStyleSpinning;
+static const NSProgressIndicatorStyle NSProgressIndicatorBarStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSProgressIndicatorStyleBar", 10_2, 10_14) = NSProgressIndicatorStyleBar;
+static const NSProgressIndicatorStyle NSProgressIndicatorSpinningStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSProgressIndicatorStyleSpinning", 10_2, 10_14) = NSProgressIndicatorStyleSpinning;
 
 @interface NSProgressIndicator (NSProgressIndicatorDeprecated)
 - (NSTimeInterval)animationDelay NS_DEPRECATED_MAC(10_0, 10_6);

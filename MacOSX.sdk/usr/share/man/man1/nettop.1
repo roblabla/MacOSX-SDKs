@@ -19,6 +19,7 @@
 .Op Fl l Ar <samples>
 .Op Fl L Ar <samples>
 .Op Fl P
+.Op Fl j|k|J Ar <column-name[,column-name]...>
 .\"---------
 .Sh DESCRIPTION
 .\"---------
@@ -42,7 +43,7 @@ Scroll Left
 Toggle delta output
 .It Cm r
 Redraw screen
-.It Cm p
+.It Cm x
 Toggle human readable numbers
 .It Cm e
 Expand all
@@ -53,6 +54,9 @@ Bring up the help menu
 .It Cm j
 Bring up the column selection menu.
 In this mode you can enable/disable columns and change their order.
+.It Cm p
+Bring up the process selection menu.
+In this mode you can enable/disable processes for display.
 .It Cm l
 Change to logging mode, redisplay the current data, and quit.
 .El
@@ -98,6 +102,8 @@ Disable address to name resolution
 Less intensive use of the CPU - draws less often
 .It Fl d
 Delta mode
+.It Fl x
+Extended display of numbers instead of human readable suffixes such as MiB
 .It Fl P
 Display per-process summary only, skipping details of open connections.  This is equivalent to selecting "Collapse All" in the interactive menu.
 .It Fl s Ar <delay>
@@ -110,8 +116,13 @@ Use  logging  mode  and  display  <samples> samples, even if standard output is 
 Select a process for display.  A numeric argument identifies a process by its pid.
 Alternatively a process name may be given, in which case all processes with that name will be displayed.
 The name must be an exact match for the name displayed by nettop, which may require that the name be truncated, for example launchd.develop instead of launchd.development.
+The option may be repeated to select multiple processes.
 .It Fl j Ar <column name list>
 Specifiy a list of column headings to be included in the display. List items are separated by commas.  For example, -j uuid,rtt_var
+.It Fl J Ar <column name list>
+Specifiy a list of column headings that are to be the only ones included in the display. List items are separated by commas.  For example, -j uuid,rtt_var.
+The ordering is currently as per nettop default, but may change in future revisions to match the order of the supplied column names.
+For future compatibility it is recommended that any names supplied here are given an order that matches the output.
 .It Fl k Ar <column name list>
 Specifiy a list of column headings to be excluded from the display. List items are separated by commas.  For example, -k rcvsize,rtt_avg
 .El

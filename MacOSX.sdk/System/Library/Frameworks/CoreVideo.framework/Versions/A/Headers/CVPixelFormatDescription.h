@@ -45,6 +45,9 @@ CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatContainsYCbCr __OSX_AVAILAB
 /* kCFBooleanTrue indicates that the format contains RGB data; */
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatContainsRGB __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
+/* kCFBooleanTrue indicates that the format contains Grayscale data; */
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatContainsGrayscale __OSX_AVAILABLE_STARTING(__MAC_10_14,__IPHONE_12_0);
+
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatComponentRange __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_9_0);
 
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatComponentRange_VideoRange __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_9_0);

@@ -1,7 +1,7 @@
 /*
     NSPersistentHistoryTransaction.h
     Core Data
-    Copyright (c) 2016-2017, Apple Inc.
+    Copyright (c) 2016-2018, Apple Inc.
     All rights reserved.
 */
 

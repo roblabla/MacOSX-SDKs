@@ -2,7 +2,7 @@
 //  GKLeaderboardSet.h
 //  Game Center
 //
-//  Copyright 2012-2017 Apple Inc. All rights reserved.
+//  Copyright 2012-2018 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -10,6 +10,7 @@
 
 
 @class GKLeaderboard;
+@class UIImage;
 
 NS_ASSUME_NONNULL_BEGIN
 // GKLeaderboardSet represents the sets that leaderboards can be broken out into. 

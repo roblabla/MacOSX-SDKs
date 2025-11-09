@@ -82,9 +82,9 @@ typedef NS_ENUM(NSInteger, AVCaptureViewControlsStyle) {
 /*!
 	@property	videoGravity
 	@abstract	A string defining how the video is displayed within the views bounds rect.
-	@discussion	Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default. See <AVFoundation/AVAnimation.h> for a description of these options.
+	@discussion	Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default.
  */
-@property (copy) NSString *videoGravity;
+@property (copy) AVLayerVideoGravity videoGravity;
 
 @end
 

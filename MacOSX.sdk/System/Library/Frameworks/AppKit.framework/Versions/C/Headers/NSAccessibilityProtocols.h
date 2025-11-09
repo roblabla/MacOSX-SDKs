@@ -1,7 +1,7 @@
 /*
  NSAccessibilityProtocols.h
  Application Kit
- Copyright (c) 2013-2017, Apple Inc.
+ Copyright (c) 2013-2018, Apple Inc.
  All rights reserved.
  */
 
@@ -155,8 +155,7 @@ NS_PROTOCOL_REQUIRES_EXPLICIT_IMPLEMENTATION
 - (nullable NSArray *)accessibilityVisibleColumns;
 - (nullable NSArray *)accessibilitySelectedColumns;
 
-// Using this API is discouraged.  This API will be deprecated in the next release.  Instead, use accessibilityHeader.
-- (nullable NSString *)accessibilityHeaderGroup;
+- (nullable NSString *)accessibilityHeaderGroup NS_DEPRECATED_WITH_REPLACEMENT_MAC("accessibilityHeader", 10_9, 10_14);
 
 - (nullable NSArray *)accessibilitySelectedCells;
 - (nullable NSArray *)accessibilityVisibleCells;

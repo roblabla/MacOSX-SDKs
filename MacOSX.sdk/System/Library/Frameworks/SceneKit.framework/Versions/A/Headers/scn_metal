@@ -42,7 +42,12 @@ struct SCNSceneBuffer {
     float4x4    inverseViewProjectionTransform;
     // new in macOS 10.13 and iOS 11
     float2      nearFar; // x: near, y: far
-    float4      viewportSize; // xy:size, zw:size / tan(fov/2)
+    float4      viewportSize; // xy:size, zw:origin
+    // new in macOS 10.14 and iOS 12
+    float4x4    inverseTransposeViewTransform;
+
+    // internal, DO NOT USE
+    float4      clusterScale; // w contains z bias
 };
 
 // In custom shaders or in shader modifiers, you also have access to node relative information.

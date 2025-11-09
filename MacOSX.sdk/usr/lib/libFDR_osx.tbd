@@ -1,10 +1,10 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 101E02D3-ECD1-30B5-A846-0FA41BE5039B', 'x86_64: 6361A048-41B3-3DAA-9F0D-E6D4AA449579' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 6361A048-41B3-3DAA-9F0D-E6D4AA449579' ]
 platform:        macosx
 install-name:    /usr/lib/libFDR_osx.dylib
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _AMFDRAppendPermissionsString, _AMFDRClearMemoryStore, _AMFDRCopyClientId, 
                        _AMFDRCopyLibraryVersionString, _AMFDRCopyUnderlyingDictionary, 
                        _AMFDRCreateInstanceString, _AMFDRCreatePermissionsString, 

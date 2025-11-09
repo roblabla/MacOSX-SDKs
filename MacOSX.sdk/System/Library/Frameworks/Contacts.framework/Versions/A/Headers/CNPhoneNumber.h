@@ -23,8 +23,8 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 + (nullable instancetype)phoneNumberWithStringValue:(NSString *)stringValue;
 - (nullable instancetype)initWithStringValue:(NSString *)string;
 
-- (instancetype)init NS_DEPRECATED(10_11, 10_13, 9_0, 11_0, "Use initWithStringValue:");
-+ (instancetype)new  NS_DEPRECATED(10_11, 10_13, 9_0, 11_0, "Use phoneNumberWithStringValue:");
+- (null_unspecified instancetype)init NS_DEPRECATED(10_11, 10_13, 9_0, 11_0, "Use initWithStringValue:");
++ (null_unspecified instancetype)new  NS_DEPRECATED(10_11, 10_13, 9_0, 11_0, "Use phoneNumberWithStringValue:");
 
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *stringValue;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2017 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -69,9 +69,6 @@
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/queue.h>		/* get TAILQ macros */
-#ifdef BSD_KERN_PRIVATE
-#include <sys/eventhandler.h>
-#endif
 
 #include <net/kpi_interface.h>
 

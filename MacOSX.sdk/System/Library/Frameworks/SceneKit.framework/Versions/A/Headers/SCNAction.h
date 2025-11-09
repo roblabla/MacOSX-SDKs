@@ -1,10 +1,11 @@
 //
 //  SCNAction.h
+//  SceneKit
 //
-//  Copyright (c) 2014-2017 Apple, Inc. All rights reserved.
+//  Copyright © 2014-2017 Apple, Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <SceneKit/SceneKitTypes.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -78,7 +79,7 @@ typedef float (^SCNActionTimingFunction)(float time);
 @end
 
 
-API_AVAILABLE(macos(10.10))
+SCN_EXPORT API_AVAILABLE(macos(10.10))
 @interface SCNAction : NSObject <NSCopying, NSSecureCoding>
 
 /*!
@@ -136,16 +137,16 @@ API_AVAILABLE(macos(10.10))
 + (SCNAction *)scaleTo:(CGFloat)scale duration:(NSTimeInterval)sec;
 
 //Creates an action that runs a collection of actions sequentially.
-+ (nullable SCNAction *)sequence:(NSArray<SCNAction *> *)actions;
++ (SCNAction *)sequence:(NSArray<SCNAction *> *)actions;
 
 //Creates an action that runs a collection of actions in parallel.
-+ (nullable SCNAction *)group:(NSArray<SCNAction *> *)actions;
++ (SCNAction *)group:(NSArray<SCNAction *> *)actions;
 
 //Creates an action that repeats another action a specified number of times.
-+ (nullable SCNAction *)repeatAction:(SCNAction *)action count:(NSUInteger)count;
++ (SCNAction *)repeatAction:(SCNAction *)action count:(NSUInteger)count;
 
 //Creates an action that repeats another action forever.
-+ (nullable SCNAction *)repeatActionForever:(SCNAction *)action;
++ (SCNAction *)repeatActionForever:(SCNAction *)action;
 
 //Creates an action that changes the opacity value of the node to 1.0
 + (SCNAction *)fadeInWithDuration:(NSTimeInterval)sec;

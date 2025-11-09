@@ -31,14 +31,14 @@ enum {
     DOM_DOM_DELTA_PIXEL = 0x00,
     DOM_DOM_DELTA_LINE = 0x01,
     DOM_DOM_DELTA_PAGE = 0x02
-} NS_ENUM_AVAILABLE_MAC(10_5);
+} WEBKIT_ENUM_DEPRECATED_MAC(10_5, 10_14);
 
-NS_CLASS_AVAILABLE_MAC(10_5)
+WEBKIT_CLASS_DEPRECATED_MAC(10_5, 10_14)
 @interface DOMWheelEvent : DOMMouseEvent
-@property (readonly) int wheelDeltaX NS_AVAILABLE_MAC(10_5);
-@property (readonly) int wheelDeltaY NS_AVAILABLE_MAC(10_5);
+@property (readonly) int wheelDeltaX WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int wheelDeltaY WEBKIT_AVAILABLE_MAC(10_5);
 @property (readonly) int wheelDelta;
 @property (readonly) BOOL isHorizontal;
 
-- (void)initWheelEvent:(int)wheelDeltaX wheelDeltaY:(int)wheelDeltaY view:(DOMAbstractView *)view screenX:(int)screenX screenY:(int)screenY clientX:(int)clientX clientY:(int)clientY ctrlKey:(BOOL)ctrlKey altKey:(BOOL)altKey shiftKey:(BOOL)shiftKey metaKey:(BOOL)metaKey NS_AVAILABLE_MAC(10_5);
+- (void)initWheelEvent:(int)wheelDeltaX wheelDeltaY:(int)wheelDeltaY view:(DOMAbstractView *)view screenX:(int)screenX screenY:(int)screenY clientX:(int)clientX clientY:(int)clientY ctrlKey:(BOOL)ctrlKey altKey:(BOOL)altKey shiftKey:(BOOL)shiftKey metaKey:(BOOL)metaKey WEBKIT_AVAILABLE_MAC(10_5);
 @end

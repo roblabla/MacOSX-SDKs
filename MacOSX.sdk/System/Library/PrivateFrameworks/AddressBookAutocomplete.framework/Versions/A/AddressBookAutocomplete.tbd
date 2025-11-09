@@ -1,18 +1,18 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 77D6419C-D117-3E36-83E7-D7A382E5AFF4' ]
+uuids:           [ 'x86_64: A9CA7F9D-7CEF-37B0-A4EB-E0534C6EC0CD' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AddressBookAutocomplete.framework/Versions/A/AddressBookAutocomplete
-current-version: 1796
+current-version: 1885
 exports:         
   - archs:           [ x86_64 ]
-    objc-classes:    [ _ABAutocompleteContactPredicate, _ABAutocompleteLocalContactResultTransformBuilder, 
-                       _ABAutocompleteLocalContactResultTransformer, _ABAutocompleteLocalQuery, 
-                       _ABAutocompleteLocalQueryContactStrategy, _ABAutocompleteLocalQueryGroupsStrategy, 
-                       _ABAutocompleteLocalSearch, _ABAutocompleteLocalSearchObservable, 
-                       _ABAutocompleteLocalSmartGroupsQuery, _ABAutocompleteServerSearch, 
-                       _ABAutocompleteServerSearchObservable, _CNAutocompleteContactFetchPredicateFactory, 
-                       _CNAutocompleteContactFilterPredicateFactory, _CNAutocompleteContactPredicateFactory ]
-    objc-ivars:      [ _ABAutocompleteLocalQuery._cancelationToken, _ABAutocompleteLocalQuery._contactStore, 
-                       _ABAutocompleteLocalQuery._request, _ABAutocompleteLocalQuery._strategy ]
+    objc-classes:    [ ABAutocompleteContactPredicate, ABAutocompleteLocalContactResultTransformBuilder, 
+                       ABAutocompleteLocalContactResultTransformer, ABAutocompleteLocalQuery, 
+                       ABAutocompleteLocalQueryContactStrategy, ABAutocompleteLocalQueryGroupsStrategy, 
+                       ABAutocompleteLocalSearch, ABAutocompleteLocalSearchObservable, 
+                       ABAutocompleteLocalSmartGroupsQuery, ABAutocompleteServerSearch, 
+                       ABAutocompleteServerSearchObservable, CNAutocompleteContactFetchPredicateFactory, 
+                       CNAutocompleteContactFilterPredicateFactory, CNAutocompleteContactPredicateFactory ]
+    objc-ivars:      [ ABAutocompleteLocalQuery._cancelationToken, ABAutocompleteLocalQuery._contactStore, 
+                       ABAutocompleteLocalQuery._request, ABAutocompleteLocalQuery._strategy ]
 ...

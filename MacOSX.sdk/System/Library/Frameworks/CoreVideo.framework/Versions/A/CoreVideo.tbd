@@ -1,13 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: FE7B9142-E9DE-3061-BEAF-7820FCBBFD3D', 'x86_64: 7978501F-C9BD-3B03-8DD8-BD04310F2134' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: C7BB7D0F-3AF2-3046-A387-A802BCA52A3A' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo
 current-version: 1.5
 compatibility-version: 1.2
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _CVBufferDumpToQTES, _CVBufferGetAttachment, _CVBufferGetAttachments, 
                        _CVBufferPropagateAttachments, _CVBufferRelease, _CVBufferRemoveAllAttachments, 
                        _CVBufferRemoveAttachment, _CVBufferRetain, _CVBufferSetAttachment, 
@@ -67,7 +67,8 @@ exports:
                        _CVPixelBufferGetPixelFormatType, _CVPixelBufferGetPlaneCount, 
                        _CVPixelBufferGetTypeID, _CVPixelBufferGetWidth, _CVPixelBufferGetWidthOfPlane, 
                        _CVPixelBufferIsCompatibleWithAttributes, _CVPixelBufferIsPlanar, 
-                       _CVPixelBufferLockBaseAddress, _CVPixelBufferPoolCreate, _CVPixelBufferPoolCreatePixelBuffer, 
+                       _CVPixelBufferLockBaseAddress, _CVPixelBufferPoolCopyIOSurfaceCreationProperties, 
+                       _CVPixelBufferPoolCreate, _CVPixelBufferPoolCreatePixelBuffer, 
                        _CVPixelBufferPoolCreatePixelBufferWithAuxAttributes, _CVPixelBufferPoolFlush, 
                        _CVPixelBufferPoolGetAttributes, _CVPixelBufferPoolGetMaxBufferAge, 
                        _CVPixelBufferPoolGetMinBufferCount, _CVPixelBufferPoolGetPixelBufferAttributes, 
@@ -154,10 +155,11 @@ exports:
                        _kCVPixelFormatComponentRange, _kCVPixelFormatComponentRange_FullRange, 
                        _kCVPixelFormatComponentRange_VideoRange, _kCVPixelFormatComponentRange_WideRange, 
                        _kCVPixelFormatComponents, _kCVPixelFormatConstant, _kCVPixelFormatContainsAlpha, 
-                       _kCVPixelFormatContainsRGB, _kCVPixelFormatContainsYCbCr, 
-                       _kCVPixelFormatExactRatioBetweenBytesPerRowOfPlanes, _kCVPixelFormatFillExtendedPixelsCallback, 
-                       _kCVPixelFormatFourCC, _kCVPixelFormatHorizontalSubsampling, 
-                       _kCVPixelFormatName, _kCVPixelFormatOpenGLCompatibility, _kCVPixelFormatOpenGLFormat, 
+                       _kCVPixelFormatContainsGrayscale, _kCVPixelFormatContainsRGB, 
+                       _kCVPixelFormatContainsYCbCr, _kCVPixelFormatExactRatioBetweenBytesPerRowOfPlanes, 
+                       _kCVPixelFormatFillExtendedPixelsCallback, _kCVPixelFormatFourCC, 
+                       _kCVPixelFormatHorizontalSubsampling, _kCVPixelFormatName, 
+                       _kCVPixelFormatOpenGLCompatibility, _kCVPixelFormatOpenGLFormat, 
                        _kCVPixelFormatOpenGLInternalFormat, _kCVPixelFormatOpenGLType, 
                        _kCVPixelFormatPlanes, _kCVPixelFormatQDCompatibility, _kCVPixelFormatVerticalSubsampling, 
                        _kCVZeroTime ]

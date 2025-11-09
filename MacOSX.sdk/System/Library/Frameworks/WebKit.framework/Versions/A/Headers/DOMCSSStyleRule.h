@@ -28,7 +28,7 @@
 @class DOMCSSStyleDeclaration;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMCSSStyleRule : DOMCSSRule
 @property (copy) NSString *selectorText;
 @property (readonly, strong) DOMCSSStyleDeclaration *style;

@@ -236,29 +236,29 @@ extern "C" {
 #pragma clang assume_nonnull begin
 #endif
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern SparseOpaqueSymbolicFactorization _SparseSymbolicFactorSymmetric
 (SparseFactorization_t factorType,
  const SparseMatrixStructure *Matrix,
  const SparseSymbolicFactorOptions *options);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern SparseOpaqueSymbolicFactorization _SparseSymbolicFactorQR
 (SparseFactorization_t factorType,
  const SparseMatrixStructure *Matrix,
  const SparseSymbolicFactorOptions *options);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SparseRetainSymbolic(SparseOpaqueSymbolicFactorization *_Nonnull symbolicFactor);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SparseDestroyOpaqueSymbolic(SparseOpaqueSymbolicFactorization *toFree);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern SparseSymbolicFactorOptions _SparseGetOptionsFromSymbolicFactor(SparseOpaqueSymbolicFactorization *factor);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
-extern void _SparseTrap();
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
+extern void _SparseTrap(void);
 
 #if __has_feature(nullability)
 #pragma clang assume_nonnull end

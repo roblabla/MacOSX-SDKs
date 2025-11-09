@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 27D3F837-3384-378D-ABE2-153E6E291E7C', 'x86_64: 521144AC-38BD-3EA5-8F38-F8603608C6A2' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 721B6FEF-9E0E-311B-8CAF-93ADEE2AE548' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/GSS.framework/Versions/A/GSS
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _GSSCheckNTLMReflection, _GSSCreateCredentialFromUUID, _GSSCreateError, 
                        _GSSCreateName, _GSSCredCopyName, _GSSCredGetLifetime, _GSSCredentialCopyName, 
                        _GSSCredentialCopyUUID, _GSSCredentialGetLifetime, _GSSItemAdd, 

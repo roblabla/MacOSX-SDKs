@@ -1,7 +1,7 @@
 /*
     NSManagedObjectContext.h
     Core Data
-    Copyright (c) 2004-2017, Apple Inc.
+    Copyright (c) 2004-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -105,7 +105,9 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
       unsigned int _autoMerge:1;
       unsigned int _isXPCServerContext:1;
       unsigned int _pushSecureDelete:1;
-      unsigned int _reservedFlags:4;
+      unsigned int _refreshAfterSave:1;
+      unsigned int _allowAncillary:1;
+      unsigned int _reservedFlags:2;
   } _flags;
   NSMutableSet *_unprocessedChanges;
   NSMutableSet *_unprocessedDeletes;
@@ -216,7 +218,7 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 - (void)lock API_DEPRECATED( "Use a queue style context and -performBlockAndWait: instead", macosx(10.4,10.10), ios(3.0,8.0));
 - (void)unlock API_DEPRECATED( "Use a queue style context and -performBlockAndWait: instead", macosx(10.4,10.10), ios(3.0,8.0));
 - (BOOL)tryLock API_DEPRECATED( "Use a queue style context and -performBlock: instead", macosx(10.4,10.10), ios(3.0,8.0));
-
+    
 // whether or not the context propagates deletes to related objects at the end of the event, or only at save time
 @property (nonatomic) BOOL propagatesDeletesAtEndOfEvent;   // The default is YES.
 

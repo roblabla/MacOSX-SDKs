@@ -1,7 +1,7 @@
 /*
     NSSearchField.h
     Application Kit
-    Copyright (c) 2003-2017, Apple Inc.
+    Copyright (c) 2003-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * NSSearchFieldRecentsAutosaveName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSSearchFieldRecentsAutosaveName NS_SWIFT_BRIDGED_TYPEDEF;
 
 @class NSSearchField;
 
@@ -27,10 +27,10 @@ typedef NSString * NSSearchFieldRecentsAutosaveName NS_EXTENSIBLE_STRING_ENUM;
         unsigned int _reselecting:1;
         unsigned int _isSearching:1;
         unsigned int _reserved:29;
-    } _sfFlags;
-    unsigned int _reserved2;
-    unsigned int _reserved3;
-    unsigned int _reserved4;
+    } _sfFlags APPKIT_IVAR;
+    unsigned int _reserved2 APPKIT_IVAR;
+    unsigned int _reserved3 APPKIT_IVAR;
+    unsigned int _reserved4 APPKIT_IVAR;
 }
 
 /* The rectangle for the search text-field within the bounds of the search field. Subclasses can override this method for custom layout purposes. The isCentered parameter is YES when centersPlaceholder is YES and the caller is interested in the centered appearance. It is NO either when centersPlaceholder is NO or when centersPlaceholder is YES and the caller is interested in the non-centered appearance. Use this instead of -[NSSearchFieldCell searchTextRectForBounds:].

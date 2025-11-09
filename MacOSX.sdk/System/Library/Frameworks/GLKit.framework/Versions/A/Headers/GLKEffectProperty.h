@@ -6,13 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#if TARGET_OS_IPHONE
-#import <OpenGLES/gltypes.h>
-#else // !TARGET_OS_IPHONE
-#import <OpenGL/gltypes.h>
-#endif // !TARGET_OS_IPHONE
-
+#import <GLKit/GLKitBase.h>
 #import <GLKit/GLKMath.h>
 
 
@@ -36,7 +30,8 @@
 NS_ASSUME_NONNULL_BEGIN
 typedef struct GLKEffectPropertyPrv *GLKEffectPropertyPrvPtr;
 
-NS_CLASS_AVAILABLE(10_8, 5_0)
+
+OPENGL_DEPRECATED(10.8,10.14) OPENGLES_DEPRECATED(ios(5.0,12.0), tvos(9.0,12.0))
 @interface GLKEffectProperty : NSObject 
 {
     @protected

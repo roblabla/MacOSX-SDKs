@@ -29,18 +29,18 @@
 @class DOMCSSRuleList;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMCSSStyleSheet : DOMStyleSheet
 @property (readonly, strong) DOMCSSRule *ownerRule;
 @property (readonly, strong) DOMCSSRuleList *cssRules;
-@property (readonly, strong) DOMCSSRuleList *rules NS_AVAILABLE_MAC(10_6);
+@property (readonly, strong) DOMCSSRuleList *rules WEBKIT_AVAILABLE_MAC(10_6);
 
-- (unsigned)insertRule:(NSString *)rule index:(unsigned)index NS_AVAILABLE_MAC(10_5);
+- (unsigned)insertRule:(NSString *)rule index:(unsigned)index WEBKIT_AVAILABLE_MAC(10_5);
 - (void)deleteRule:(unsigned)index;
-- (int)addRule:(NSString *)selector style:(NSString *)style index:(unsigned)index NS_AVAILABLE_MAC(10_6);
-- (void)removeRule:(unsigned)index NS_AVAILABLE_MAC(10_6);
+- (int)addRule:(NSString *)selector style:(NSString *)style index:(unsigned)index WEBKIT_AVAILABLE_MAC(10_6);
+- (void)removeRule:(unsigned)index WEBKIT_AVAILABLE_MAC(10_6);
 @end
 
 @interface DOMCSSStyleSheet (DOMCSSStyleSheetDeprecated)
-- (unsigned)insertRule:(NSString *)rule :(unsigned)index NS_DEPRECATED_MAC(10_4, 10_5);
+- (unsigned)insertRule:(NSString *)rule :(unsigned)index WEBKIT_DEPRECATED_MAC(10_4, 10_5);
 @end

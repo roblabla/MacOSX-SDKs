@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1999-2017 Apple Inc. All rights reserved.
+ * Copyright (c) 1999-2018 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -79,11 +79,13 @@
 #ifndef	_SYS_MBUF_H_
 #define	_SYS_MBUF_H_
 
-#include <sys/cdefs.h>
 #include <sys/appleapiopts.h>
+#include <sys/cdefs.h>
 #include <sys/_types/_u_int32_t.h> /* u_int32_t */
 #include <sys/_types/_u_int64_t.h> /* u_int64_t */
 #include <sys/_types/_u_short.h> /* u_short */
+
+#include <sys/kpi_mbuf.h>
 
 
 /* mbuf types */
@@ -196,5 +198,4 @@ typedef struct mb_stat {
 
 
 
-#include <sys/kpi_mbuf.h>
 #endif	/* !_SYS_MBUF_H_ */

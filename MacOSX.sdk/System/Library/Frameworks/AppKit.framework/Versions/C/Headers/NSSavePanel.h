@@ -1,7 +1,7 @@
 /*
     NSSavePanel.h
     Application Kit
-    Copyright (c) 1994-2017, Apple Inc.
+    Copyright (c) 1994-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -26,8 +26,7 @@ typedef struct __SPFlags {
     unsigned int isExpanded:1;
     unsigned int allowsOtherFileTypes:1;
     unsigned int canCreateDirectories:1;
-    unsigned int canSelectedHiddenExtension:1;
-    unsigned int reserved2:1;
+    unsigned int reserved2:2;
     unsigned int delegate_shouldShowFilename:1;
     unsigned int delegate_compareFilename:1;
     unsigned int delegate_shouldEnableURL:1;
@@ -55,45 +54,50 @@ typedef struct __SPFlags {
 @class NSSavePanelAuxiliary;
 
 @interface NSSavePanel : NSPanel {
-@protected
     // All instance variables should be considered private
-    NSView *__navView;
-    NSView  *_accessoryView;
-    NSArray *_allowedFileTypes;
-    NSString *_validatedPosixName;
-    NSString *_hiddenExtension;
+@private
+    id       _reservedID2 APPKIT_IVAR;
+@protected
+    NSView  *_accessoryView APPKIT_IVAR;
+    NSArray *_allowedFileTypes APPKIT_IVAR;
+    NSString *_validatedPosixName APPKIT_IVAR;
+    NSString *_hiddenExtension APPKIT_IVAR;
         
-    IBOutlet NSTextField  *_messageTextField;
-    IBOutlet NSView       *_savePane;
-    IBOutlet NSBox        *_saveNavSeparatorBox;
-    IBOutlet NSView       *_savePaneTopPartsContainer;
-    IBOutlet NSTextField  *_nameField;
-    IBOutlet NSTextField  *_nameFieldLabel;
-    IBOutlet NSButton     *_expansionButton;
-    IBOutlet NSView       *_directoryPopUpContainer;
-    IBOutlet NSControl    *_directoryPopUp;
-    IBOutlet NSTextField  *_directoryPopUpLabel;
-    IBOutlet NSView       *_navViewContainer;
-    IBOutlet NSView       *_accessoryViewContainer;
-    IBOutlet NSView       *_bottomControlsContainer;
-    IBOutlet NSButton     *_hideExtensionButton;
-    IBOutlet NSButton     *_newFolderButton;
-    IBOutlet NSButton     *_cancelButton;
-    IBOutlet NSButton     *_okButton;
+    IBOutlet NSTextField  *_messageTextField APPKIT_IVAR;
+    IBOutlet NSView       *_savePane APPKIT_IVAR;
+@private
+    id _reservedID6 APPKIT_IVAR;
+@protected
+    IBOutlet NSView       *_savePaneTopPartsContainer APPKIT_IVAR;
+    IBOutlet NSTextField  *_nameField APPKIT_IVAR;
+    IBOutlet NSTextField  *_nameFieldLabel APPKIT_IVAR;
+@private
+    id _reservedID7 APPKIT_IVAR;
+    id _reservedID3 APPKIT_IVAR;
+    id _reservedID4 APPKIT_IVAR;
+    id _reservedID5 APPKIT_IVAR;
+@protected
+    IBOutlet NSView       *_navViewContainer APPKIT_IVAR;
+    IBOutlet NSView       *_accessoryViewContainer APPKIT_IVAR;
+    IBOutlet NSView       *_bottomControlsContainer APPKIT_IVAR;
+    id                     _reservedRemoved APPKIT_IVAR;
+    IBOutlet NSButton     *_newFolderButton APPKIT_IVAR;
+    IBOutlet NSButton     *_cancelButton APPKIT_IVAR;
+    IBOutlet NSButton     *_okButton APPKIT_IVAR;
 
-    id _filepathInputController; // Unused
-    id _reservedID;
+    id _filepathInputController APPKIT_IVAR; // Unused
+    id _reservedID APPKIT_IVAR;
 
-    _SPFlags	_spFlags;
+    _SPFlags	_spFlags APPKIT_IVAR;
     
-    NSSavePanelAuxiliary *_spAuxiliaryStorage;
+    NSSavePanelAuxiliary *_spAuxiliaryStorage APPKIT_IVAR;
     
 @private
-    char _unused:1 __unused;
+    char _unused:1 __unused APPKIT_IVAR;
 #if !__LP64__
-    char _reserved[4];
+    char _reserved[4] APPKIT_IVAR;
 #endif
-    IBOutlet NSProgressIndicator *_openProgressIndicator;
+    IBOutlet NSProgressIndicator *_openProgressIndicator APPKIT_IVAR;
 }
 
 /* Creates a new instance of the NSSavePanel. This class is not a singleton. 
@@ -260,51 +264,23 @@ typedef struct __SPFlags {
 
 @interface NSObject(NSSavePanelDelegateDeprecated)
 
-/* This method is deprecated in 10.6, and will be formally deprecated in a future release. Use panel:validateURL:error: instead. If both methods are implemented, the URL version will be called.
-*/
 - (BOOL)panel:(id)sender isValidFilename:(NSString *)filename NS_DEPRECATED_MAC(10_0, 10_6, "Use -panel:validateURL:error: instead");
-
-/* This method is deprecated in 10.6, and will be formally deprecated in a future release. Use panel:didChangeToDirectoryURL: instead.
-*/
 - (void)panel:(id)sender directoryDidChange:(NSString *)path NS_DEPRECATED_MAC(10_3, 10_6, "Use -panel:didChangeToDirectoryURL: instead");
-
-/* This method is deprecated in 10.6, and will be formally deprecated in a future release. This method should not be used anymore to control sort ordering.
-*/
-- (NSComparisonResult)panel:(id)sender compareFilename:(NSString *)name1 with:(NSString *)name2 caseSensitive:(BOOL)caseSensitive NS_DEPRECATED_MAC(10_0, 10_6);
-
-/* This method is deprecated in 10.6, and will be formally deprecated in a future release. Use panel:shouldEnableURL:  instead
-*/
+- (NSComparisonResult)panel:(id)sender compareFilename:(NSString *)name1 with:(NSString *)name2 caseSensitive:(BOOL)caseSensitive NS_DEPRECATED_MAC(10_0, 10_6, "Filenames in the save panel should not have a custom sort. This method is never called on 10.14, and rarely called after 10.6");
 - (BOOL)panel:(id)sender shouldShowFilename:(NSString *)filename NS_DEPRECATED_MAC(10_0, 10_6, "Use -panel:shouldEnableURL: instead");
 
 @end
 
 @interface NSSavePanel(NSDeprecated)
 
-/* Use -URL instead.
-*/
-- (NSString *)filename NS_DEPRECATED_MAC(10_0, 10_6);
-
-/* Use directoryURL/setDirectoryURL: instead.
-*/
-- (NSString *)directory NS_DEPRECATED_MAC(10_0, 10_6);
-- (void)setDirectory:(nullable NSString *)path NS_DEPRECATED_MAC(10_0, 10_6);
-
-/* Use allowedFileTypes/setAllowedFileTypes: instead. If no extension is given by the user, the first item in the allowedFileTypes will be used as the extension for the save panel.
-*/
-- (nullable NSString *)requiredFileType NS_DEPRECATED_MAC(10_0, 10_6);
-- (void)setRequiredFileType:(nullable NSString *)type NS_DEPRECATED_MAC(10_0, 10_6);
-
-/* Use beginSheetModalForWindow:completionHandler: instead. The following parameters are replaced by properties: 'path' is replaced by 'directoryURL' and 'name' by 'nameFieldStringValue'. 'delegate/didEndSelector/contextInfo' is replaced by the 'completionHandler'.
-*/
-- (void)beginSheetForDirectory:(NSString *)path file:(nullable NSString *)name modalForWindow:(nullable NSWindow *)docWindow modalDelegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo NS_DEPRECATED_MAC(10_0, 10_6);
-
-/* Use -runModal after setting up desired properties. The following parameters are replaced by properties: 'path' is replaced by 'directoryURL' and 'name' by 'nameFieldStringValue'.
-*/
-- (NSInteger)runModalForDirectory:(nullable NSString *)path file:(nullable NSString *)name NS_DEPRECATED_MAC(10_0, 10_6);
-
-/* Deprecated in 10.3. -[NSSavePanel selectText:] does nothing.
-*/
-- (IBAction)selectText:(nullable id)sender NS_DEPRECATED_MAC(10_0, 10_3);
+- (NSString *)filename NS_DEPRECATED_MAC(10_0, 10_6, "Use -URL instead");
+- (NSString *)directory NS_DEPRECATED_MAC(10_0, 10_6, "Use -directoryURL instead");
+- (void)setDirectory:(nullable NSString *)path NS_DEPRECATED_MAC(10_0, 10_6, "Use -setDirectoryURL: instead");
+- (nullable NSString *)requiredFileType NS_DEPRECATED_MAC(10_0, 10_6, "Use -allowedFileTypes instead");
+- (void)setRequiredFileType:(nullable NSString *)type NS_DEPRECATED_MAC(10_0, 10_6, "Use -setAllowedFileTypes: instead");
+- (void)beginSheetForDirectory:(NSString *)path file:(nullable NSString *)name modalForWindow:(nullable NSWindow *)docWindow modalDelegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo NS_DEPRECATED_MAC(10_0, 10_6, "Use beginSheetModalForWindow:completionHandler: instead. The following parameters are replaced by properties: 'path' is replaced by 'directoryURL' and 'name' by 'nameFieldStringValue'.");
+- (NSInteger)runModalForDirectory:(nullable NSString *)path file:(nullable NSString *)name NS_DEPRECATED_MAC(10_0, 10_6, "Use -runModal instead. The following parameters are replaced by properties: 'path' is replaced by 'directoryURL' and 'name' by 'nameFieldStringValue'.");
+- (IBAction)selectText:(nullable id)sender NS_DEPRECATED_MAC(10_0, 10_3, "Default implementation does nothing.");
 
 @end
 

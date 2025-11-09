@@ -14,7 +14,7 @@
 // Accounts are created not bound to any store. Once an account is saved it belongs
 // to the store it was saved into.
 
-ACCOUNTS_CLASS_AVAILABLE(10_8, 5_0)
+API_AVAILABLE(ios(5.0), macos(10.8))
 @interface ACAccount : NSObject
 
 // Creates a new account object with a specified account type.
@@ -23,7 +23,7 @@ ACCOUNTS_CLASS_AVAILABLE(10_8, 5_0)
 // This identifier can be used to look up the account using [ACAccountStore accountWithIdentifier:].
 @property (readonly, weak, NS_NONATOMIC_IOSONLY) NSString      *identifier;
 
-// Accounts are stored with a particular account type. All available accounts of a particular type 
+// Accounts are stored with a particular account type. All available accounts of a particular type
 // can be looked up using [ACAccountStore accountsWithAccountType:]. When creating new accounts
 // this property is required.
 @property (strong, NS_NONATOMIC_IOSONLY)   ACAccountType       *accountType;
@@ -38,9 +38,9 @@ ACCOUNTS_CLASS_AVAILABLE(10_8, 5_0)
 
 // For accounts that support it (currently only Facebook accounts), you can get the user's full name for display
 // purposes without having to talk to the network.
-@property (readonly, NS_NONATOMIC_IOSONLY)  NSString           *userFullName NS_AVAILABLE_IOS(NA);
+@property (readonly, NS_NONATOMIC_IOSONLY)  NSString           *userFullName API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
 
-// The credential for the account. This property can be set and saved during account creation. It is 
+// The credential for the account. This property can be set and saved during account creation. It is
 // inaccessible once the account has been saved.
 @property (strong, NS_NONATOMIC_IOSONLY)   ACAccountCredential *credential;
 

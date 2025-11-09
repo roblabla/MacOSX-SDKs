@@ -51,7 +51,7 @@ typedef float (^SKActionTimingFunction)(float time);
 
 NS_ASSUME_NONNULL_BEGIN
 
-SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
+SK_EXPORT @interface SKAction : NSObject <NSCopying, NSSecureCoding>
 
 /** The duration required to complete an action, in seconds. */
 @property (nonatomic) NSTimeInterval duration;

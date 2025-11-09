@@ -1,7 +1,7 @@
 /*
 	NSColor.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -63,6 +63,13 @@ typedef NS_ENUM(NSInteger, NSColorType) {
     NSColorTypeCatalog          // Colors with catalogNameComponent and colorNameComponent; these colors may have device and appearance specific representations
 };
 
+typedef NS_ENUM(NSInteger, NSColorSystemEffect) {
+    NSColorSystemEffectNone,
+    NSColorSystemEffectPressed,
+    NSColorSystemEffectDeepPressed,
+    NSColorSystemEffectDisabled,
+    NSColorSystemEffectRollover,
+} NS_AVAILABLE_MAC(10_14);
 
 @interface NSColor : NSObject <NSCopying, NSSecureCoding, NSPasteboardReading, NSPasteboardWriting>
 
@@ -145,7 +152,7 @@ typedef NS_ENUM(NSInteger, NSColorType) {
 
 
 
-/* Some convenience methods to create standard colors. Do not make any assumptions about the actual color spaces used: For applications built against the 10.13 SDK these return colors in the sRGB or genericGamma22GrayColorSpace color spaces, while in older apps they use calibrated color spaces.
+/* Some convenience methods to create standard colors, typically should not be used for display in user interface elements. Do not make any assumptions about the actual color spaces used: For applications built against the 10.13 SDK these return colors in the sRGB or genericGamma22GrayColorSpace color spaces, while in older apps they use calibrated color spaces.
  */
 @property (class, strong, readonly) NSColor *blackColor;        /* 0.0 white */
 @property (class, strong, readonly) NSColor *darkGrayColor;     /* 0.333 white */
@@ -164,60 +171,58 @@ typedef NS_ENUM(NSInteger, NSColorType) {
 @property (class, strong, readonly) NSColor *clearColor;        /* 0.0 white, 0.0 alpha */
 
 
-/* The following are system "meta" colors that are used for drawing user interface elements. Many of these colors are implemented as dynamic catalog colors whose values may vary between releases, and even between different appearances in an app (for instance when used in a light or dark appearance in a window, or when used in a Touch Bar).  Do not make assumptions about the color spaces or actual colors used.
+/* The following are semantic system colors that are used for drawing user interface elements. These colors are implemented as dynamic named colors whose values may vary between releases and between different appearances (such as Aqua vs DarkAqua vs TouchBar). Do not make assumptions about the color spaces or actual colors used.
  
  If you do need to extract a CGColor (to use with a layer, say), always do it as lazily/late as possible, and update it whenever needed.  If you do need to extract color components, always convert to the desired color space first as described at the top of this file.
  */
-@property (class, strong, readonly) NSColor *controlShadowColor;            // Dark border for controls
-@property (class, strong, readonly) NSColor *controlDarkShadowColor;        // Darker border for controls
-@property (class, strong, readonly) NSColor *controlColor;                  // Control face and old window background color
-@property (class, strong, readonly) NSColor *controlHighlightColor;         // Light border for controls
-@property (class, strong, readonly) NSColor *controlLightHighlightColor;    // Lighter border for controls
-@property (class, strong, readonly) NSColor *controlTextColor;              // Text on controls
-@property (class, strong, readonly) NSColor *controlBackgroundColor;        // Background of large controls (browser, tableview, clipview, ...)
-@property (class, strong, readonly) NSColor *selectedControlColor;          // Control face for selected controls
-@property (class, strong, readonly) NSColor *secondarySelectedControlColor; // Color for selected controls when control is not active (that is, not focused)
-@property (class, strong, readonly) NSColor *selectedControlTextColor;      // Text on selected controls
-@property (class, strong, readonly) NSColor *disabledControlTextColor;      // Text on disabled controls
-@property (class, strong, readonly) NSColor *textColor;                     // Document text
-@property (class, strong, readonly) NSColor *textBackgroundColor;           // Document text background
-@property (class, strong, readonly) NSColor *selectedTextColor;             // Selected document text
-@property (class, strong, readonly) NSColor *selectedTextBackgroundColor;   // Selected document text background
-@property (class, strong, readonly) NSColor *gridColor;                     // Grids in controls
-@property (class, strong, readonly) NSColor *keyboardFocusIndicatorColor;   // Keyboard focus ring around controls
-@property (class, strong, readonly) NSColor *windowBackgroundColor;         // Background fill for window contents
-@property (class, strong, readonly) NSColor *underPageBackgroundColor NS_AVAILABLE_MAC(10_8); // Background areas revealed behind views
 
-@property (class, strong, readonly) NSColor *labelColor NS_AVAILABLE_MAC(10_10);              // Text color for static text and related elements
-@property (class, strong, readonly) NSColor *secondaryLabelColor NS_AVAILABLE_MAC(10_10);     // Text color for secondary static text and related elements
-@property (class, strong, readonly) NSColor *tertiaryLabelColor NS_AVAILABLE_MAC(10_10);      // Text color for disabled static text and related elements
-@property (class, strong, readonly) NSColor *quaternaryLabelColor NS_AVAILABLE_MAC(10_10);    // Text color for large secondary or disabled static text, separators, large glyphs/icons, etc
+/* Foreground Colors */
+@property (class, strong, readonly) NSColor *labelColor NS_AVAILABLE_MAC(10_10);           // Foreground color for static text and related elements
+@property (class, strong, readonly) NSColor *secondaryLabelColor NS_AVAILABLE_MAC(10_10);  // Foreground color for secondary static text and related elements
+@property (class, strong, readonly) NSColor *tertiaryLabelColor NS_AVAILABLE_MAC(10_10);   // Foreground color for disabled static text and related elements
+@property (class, strong, readonly) NSColor *quaternaryLabelColor NS_AVAILABLE_MAC(10_10); // Foreground color for large secondary or disabled static text, separators, large glyphs/icons, etc
 
-@property (class, strong, readonly) NSColor *scrollBarColor;                // Scroll bar slot color
-@property (class, strong, readonly) NSColor *knobColor;                     // Knob face color for controls
-@property (class, strong, readonly) NSColor *selectedKnobColor;             // Knob face color for selected controls
+@property (class, strong, readonly) NSColor *linkColor NS_AVAILABLE_MAC(10_10);            // Foreground color for standard system links
+@property (class, strong, readonly) NSColor *placeholderTextColor NS_AVAILABLE_MAC(10_10); // Foreground color for placeholder text in controls or text views
+@property (class, strong, readonly) NSColor *windowFrameTextColor;                         // Foreground color on window chrome
+@property (class, strong, readonly) NSColor *selectedMenuItemTextColor;                    // Foreground color inside selected menu items. Equivalent to +labelColor in a NSBackgroundStyleEmphasized context.
+@property (class, strong, readonly) NSColor *alternateSelectedControlTextColor;            // Foreground color inside emphasized and selected content: table views rows, collection views, etc. Equivalent to +labelColor in a NSBackgroundStyleEmphasized context.
+@property (class, strong, readonly) NSColor *headerTextColor;                              // Foreground color for header cells in Table/OutlineView
+@property (class, strong, readonly) NSColor *separatorColor NS_AVAILABLE_MAC(10_14);       // Foreground used for separators between sections of content. Not appropriate for use as split view or window chrome dividers.
+@property (class, strong, readonly) NSColor *gridColor;                                    // Grids in controls
 
-@property (class, strong, readonly) NSColor *windowFrameColor;              // Window frames
-@property (class, strong, readonly) NSColor *windowFrameTextColor;          // Text on window frames
 
-@property (class, strong, readonly) NSColor *selectedMenuItemColor;         // Highlight color for menus
-@property (class, strong, readonly) NSColor *selectedMenuItemTextColor;     // Highlight color for menu text
+/* Background Colors */
+@property (class, strong, readonly) NSColor *windowBackgroundColor;                        // Background for windows. This should not be used for drawing, and NSVisualEffectMaterialWindowBackground should be used instead.
+@property (class, strong, readonly) NSColor *underPageBackgroundColor NS_AVAILABLE_MAC(10_8); // Background areas revealed behind documents. This should not be used for drawing, and NSVisualEffectMaterialUnderPageBackground should be used instead.
+@property (class, strong, readonly) NSColor *controlBackgroundColor;                       // Background for content areas: scroll views, table views, collection views. This should not be used for drawing, and NSVisualEffectMaterialContentBackground should be used instead.
+@property (class, strong, readonly) NSColor *selectedContentBackgroundColor NS_AVAILABLE_MAC(10_14); // The background color of selected and emphasized (focused) content: table views rows, collection views, etc. Alias for +alternateSelectedControlColor
+@property (class, strong, readonly) NSColor *unemphasizedSelectedContentBackgroundColor NS_AVAILABLE_MAC(10_14); // The background color of selected and unemphasized content: table views rows, collection views, etc. Alias for +secondarySelectedControlColor
+@property (class, strong, readonly) NSArray<NSColor *> *alternatingContentBackgroundColors NS_AVAILABLE_MAC(10_14); // The background colors for alternating content items: such as table view rows, collection view items. Alias for +controlAlternatingRowBackgroundColors
+@property (class, strong, readonly) NSColor *findHighlightColor NS_AVAILABLE_MAC(10_13);   // Background color of find indicators: the bubbles that show inline search result hits
 
-@property (class, strong, readonly) NSColor *highlightColor;                // Highlight color for UI elements (this is abstract and defines the color all highlights tend toward)
-@property (class, strong, readonly) NSColor *shadowColor;                   // Shadow color for UI elements (this is abstract and defines the color all shadows tend toward)
 
-@property (class, strong, readonly) NSColor *headerColor;                   // Background color for header cells in Table/OutlineView
-@property (class, strong, readonly) NSColor *headerTextColor;               // Text color for header cells in Table/OutlineView
+/* Text Colors */
+@property (class, strong, readonly) NSColor *textColor;                                    // Document text
+@property (class, strong, readonly) NSColor *textBackgroundColor;                          // Document text background
 
-@property (class, strong, readonly) NSColor *alternateSelectedControlColor;      // Similar to selectedControlColor; for use in lists and tables
-@property (class, strong, readonly) NSColor *alternateSelectedControlTextColor;  // Similar to selectedControlTextColor; see alternateSelectedControlColor
+@property (class, strong, readonly) NSColor *selectedTextColor;                            // Selected document text
+@property (class, strong, readonly) NSColor *selectedTextBackgroundColor;                  // Selected document text background
+@property (class, strong, readonly) NSColor *unemphasizedSelectedTextBackgroundColor NS_AVAILABLE_MAC(10_14); // The background for unemphasized text selection (e.g. when the associated control/view/window is not key)
+@property (class, strong, readonly) NSColor *unemphasizedSelectedTextColor NS_AVAILABLE_MAC(10_14); // The foreground for unemphasized text selection (e.g. when the associated control/view/window is not key)
+
+/* Control Colors */
+@property (class, strong, readonly) NSColor *controlColor;                                 // Approximate background for the color of control faces (such as buttons).
+@property (class, strong, readonly) NSColor *controlTextColor;                             // Text on controls
+@property (class, strong, readonly) NSColor *selectedControlColor;                         // Control face for selected controls
+@property (class, strong, readonly) NSColor *selectedControlTextColor;                     // Text on selected controls
+@property (class, strong, readonly) NSColor *disabledControlTextColor;                     // Text on disabled controls
+@property (class, strong, readonly) NSColor *keyboardFocusIndicatorColor;                  // Keyboard focus ring around controls
 
 @property (class, strong, readonly) NSColor *scrubberTexturedBackgroundColor NS_AVAILABLE_MAC(10_12_2); // Patterned background color for use in NSScrubber
 
-@property (class, strong, readonly) NSArray<NSColor *> *controlAlternatingRowBackgroundColors;  // Standard colors for alternating colored rows in tables and lists (for instance, light blue/white; don't assume just two colors)
 
-
-/* Some colors that are used by system elements and applications. Like the above dynamic system colors, these return catalog colors whose values may vary between different appearances and releases.  Do not make assumptions about the color spaces or actual colors used.
+/* Some colors that are used by system elements and applications. Like the above dynamic system colors, these return named colors whose values may vary between different appearances and releases.  Do not make assumptions about the color spaces or actual colors used.
  */
 @property (class, strong, readonly) NSColor *systemRedColor NS_AVAILABLE_MAC(10_10);
 @property (class, strong, readonly) NSColor *systemGreenColor NS_AVAILABLE_MAC(10_10);
@@ -229,15 +234,19 @@ typedef NS_ENUM(NSInteger, NSColorType) {
 @property (class, strong, readonly) NSColor *systemPurpleColor NS_AVAILABLE_MAC(10_10);
 @property (class, strong, readonly) NSColor *systemGrayColor NS_AVAILABLE_MAC(10_10);
 
-
+/*! A dynamic color that reflects the user's current preferred accent color. This color automatically updates when the accent color preference changes. Do not make assumptions about the color space of this color, which may change across releases. */
+@property (class, strong, readonly) NSColor *controlAccentColor NS_AVAILABLE_MAC(10_14);
 
 @property (class, readonly) NSControlTint currentControlTint;   // returns current system control tint
++ (NSColor *)colorForControlTint:(NSControlTint)controlTint NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "NSControlTint does not describe the full range of available control accent colors. Use +[NSColor controlAccentColor] instead.");
 
-+ (NSColor *)colorForControlTint:(NSControlTint)controlTint;	// pass in valid tint to get rough color matching. returns default if invalid tint
+@property (class, strong, readonly) NSColor *highlightColor; // Highlight color for UI elements (this is abstract and defines the color all highlights tend toward)
+@property (class, strong, readonly) NSColor *shadowColor;    // Shadow color for UI elements (this is abstract and defines the color all shadows tend toward)
+- (nullable NSColor *)highlightWithLevel:(CGFloat)val;       // val = 0 => receiver, val = 1 => highlightColor
+- (nullable NSColor *)shadowWithLevel:(CGFloat)val;          // val = 0 => receiver, val = 1 => shadowColor
 
-- (nullable NSColor *)highlightWithLevel:(CGFloat)val;	// val = 0 => receiver, val = 1 => highlightColor
-- (nullable NSColor *)shadowWithLevel:(CGFloat)val;	// val = 0 => receiver, val = 1 => shadowColor
-
+/// Returns a color representing the base color with a system defined effect applied to it. This color is safe to create before draw time, as the resolution of the final color only happens when being `-set`, retrieving its `CGColor`, resolving with `-colorWithType:`, etc. The return color type is `.named`.
+- (NSColor *)colorWithSystemEffect:(NSColorSystemEffect)systemEffect NS_AVAILABLE_MAC(10_14);
 
 
 /* Set the color: Sets the fill and stroke colors in the current drawing context. If the color doesn't know about alpha, it's set to 1.0. Should be implemented by subclassers.
@@ -322,7 +331,6 @@ typedef NS_ENUM(NSInteger, NSColorType) {
 */
 @property (readonly) CGFloat alphaComponent;
 
-
 /* Pasteboard methods
 */
 + (nullable NSColor *)colorFromPasteboard:(NSPasteboard *)pasteBoard;
@@ -346,24 +354,55 @@ This method provides a global approach to removing alpha which might not always 
 */
 @property (class) BOOL ignoresAlpha;
 
+@end
 
-/* Get the color space name of the color. Note that here "color space name" doesn't refer to the name of an NSColorSpace, but rather an older way to distinguish the color type of different types of colors, as described at the top of this file. Should be implemented by subclassers for code destined to run on 10.12 or earlier. Newer code can choose to implement type instead.  This method will be deprecated in the near future.
+@interface NSColor (NSDeprecated)
+
+/// Historically used as the inner border highlight color for beveled buttons. No longer used.
+@property (class, strong, readonly) NSColor *controlHighlightColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use a color that matches the semantics being used, such as `separatorColor`");
+/// Historically used as the outer border highlight color for beveled buttons. No longer used.
+@property (class, strong, readonly) NSColor *controlLightHighlightColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use a color that matches the semantics being used, such as `separatorColor`");
+/// Historically used as the inner border shadow color for beveled buttons. No longer used.
+@property (class, strong, readonly) NSColor *controlShadowColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use a color that matches the semantics being used, such as `separatorColor`");
+/// Historically used as the outer border shadow color for beveled buttons. No longer used.
+@property (class, strong, readonly) NSColor *controlDarkShadowColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use a color that matches the semantics being used, such as `separatorColor`");
+
+/// Historically used as the color of scroll bars. No longer used.
+@property (class, strong, readonly) NSColor *scrollBarColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use NSScroller instead");
+/// Historically used as the color of scroll bar knobs. No longer used.
+@property (class, strong, readonly) NSColor *knobColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use NSScroller instead");
+/// Historically used as the color of scroll bar knobs being dragged. No longer used.
+@property (class, strong, readonly) NSColor *selectedKnobColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use NSScroller instead");
+
+/// Historically used as the color of the window chrome, which is no longer able to be represented by a color. No longer used.
+@property (class, strong, readonly) NSColor *windowFrameColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use NSVisualEffectMaterialTitlebar");
+/// Historically used as the color of selected menu items, which is no longer a color but a tinted blur effect. No longer used.
+@property (class, strong, readonly) NSColor *selectedMenuItemColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use NSVisualEffectMaterialSelection");
+/// Historically used as the color of table headers, which is no longer a color but a tinted blur effect.
+@property (class, strong, readonly) NSColor *headerColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use NSVisualEffectMaterialHeaderView");
+
+/// The background color of selected content or text that is unemphasized. Older alias for +unemphasizedSelectedContentBackgroundColor and +unemphasizedSelectedTextBackgroundColor
+@property (class, strong, readonly) NSColor *secondarySelectedControlColor NS_DEPRECATED_WITH_REPLACEMENT_MAC("unemphasizedSelectedContentBackgroundColor", 10_1, API_TO_BE_DEPRECATED);
+/// The background color of selected and emphasized (focused) content: table views rows, collection views, etc. Older alias for +selectedContentBackgroundColor
+@property (class, strong, readonly) NSColor *alternateSelectedControlColor NS_DEPRECATED_WITH_REPLACEMENT_MAC("selectedContentBackgroundColor", 10_2, API_TO_BE_DEPRECATED);
+/// The background colors for alternating content items: such as table view rows, collection view items. Older alias for +alternatingContentBackgroundColors
+@property (class, strong, readonly) NSArray<NSColor *> *controlAlternatingRowBackgroundColors NS_DEPRECATED_WITH_REPLACEMENT_MAC("alternatingContentBackgroundColors", 10_3, API_TO_BE_DEPRECATED);
+
+/* Get the color space name of the color. Note that here "color space name" doesn't refer to the name of an NSColorSpace, but rather an older way to distinguish the color type of different types of colors, as described at the top of this file. Should be implemented by subclassers for code destined to run on 10.12 or earlier. Newer code can choose to implement type instead.
  */
-@property (readonly, copy) NSColorSpaceName colorSpaceName;
+@property (readonly, copy) NSColorSpaceName colorSpaceName NS_DEPRECATED_MAC(10_0, 10_14, "Use -type and NSColorType instead");
 
 
 /* Convert the color to a color of another color space name. This may return nil if the specified conversion cannot be done. The abstract implementation of this method returns the receiver if the specified name matches that of the receiver; otherwise it returns nil. Subclassers who can convert themselves to other color space names override this method to do something better.
- 
+
  The device description argument allows the color to specialize itself for the given device.  Device descriptions can be obtained from windows, screens, and printers with the "deviceDescription" method.
- 
+
  If device is nil then the current device (as obtained from the currently lockFocus'ed view's window or, if printing, the current printer) is used. The method without the device: argument passes nil for the device.
- 
+
  If colorSpaceName is nil, then the most appropriate color space is used.
- 
- These methods will be deprecated in the near future. colorUsingType: and colorUsingColorSpace: are the preferred ways to convert colors into other types or color spaces.
  */
-- (nullable NSColor *)colorUsingColorSpaceName:(nullable NSColorSpaceName)name device:(nullable NSDictionary<NSDeviceDescriptionKey, id> *)deviceDescription;
-- (nullable NSColor *)colorUsingColorSpaceName:(NSColorSpaceName)name;
+- (nullable NSColor *)colorUsingColorSpaceName:(nullable NSColorSpaceName)name device:(nullable NSDictionary<NSDeviceDescriptionKey, id> *)deviceDescription NS_DEPRECATED_MAC(10_0, 10_14, "Use -colorUsingType: or -colorUsingColorSpace: instead");
+- (nullable NSColor *)colorUsingColorSpaceName:(NSColorSpaceName)name NS_DEPRECATED_MAC(10_0, 10_14, "Use -colorUsingType: or -colorUsingColorSpace: instead");
 
 
 @end

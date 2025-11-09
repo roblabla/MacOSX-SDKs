@@ -32,17 +32,10 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  The detector may do image processing in this context and if the image is on the GPU and the specified context is a GPU context this may avoid additional upload to / download from the GPU. If the input image is on the CPU (or the output from a CPU based context) specifying a GPU based context (or vice versa) may reduce performance.
 
  The options parameter lets you optinally specify a accuracy / performance tradeoff. Can be nil or an empty dictionary. */
-#if !defined(SWIFT_CLASS_EXTRA) || (defined(SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH) && SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH >= 2)
 + (nullable CIDetector *)detectorOfType:(NSString*)type
                                 context:(nullable CIContext *)context
                                 options:(nullable NSDictionary<NSString *,id> *)options
     NS_AVAILABLE(10_7, 5_0);
-#else
-+ (CIDetector *)detectorOfType:(NSString*)type
-                      context:(nullable CIContext *)context
-                      options:(nullable NSDictionary<NSString *,id> *)options
-    NS_AVAILABLE(10_7, 5_0);
-#endif
 
 /** Returns an array of CIFeature instances in the given image.
  The array is sorted by confidence, highest confidence first. */

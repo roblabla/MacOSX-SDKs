@@ -1,41 +1,40 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 61082A13-9C0C-343F-97F8-0309CC2D4981', 'x86_64: DC5B6292-40E7-3F34-97D1-E329512F04B5' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: EC9D8AD4-E5CB-3765-804A-9E1E9DC045D2' ]
 platform:        macosx
 install-name:    /usr/lib/system/libsystem_asl.dylib
-current-version: 356
+current-version: 356.200.4
 objc-constraint: none
 parent-umbrella: System
 exports:         
-  - archs:           [ i386, x86_64 ]
-    symbols:         [ _ASL_LEVEL_TO_STRING, ___aslVersionNumber, ___aslVersionString, 
-                       __asl_evaluate_send, __asl_fork_child, __asl_lib_log, __asl_log_args_to_xpc, 
-                       __asl_msg_dump, __asl_server_cancel_direct_watch, __asl_server_control_query, 
-                       __asl_server_create_aux_link, __asl_server_match, __asl_server_message, 
-                       __asl_server_prune, __asl_server_query, __asl_server_query_2, 
-                       __asl_server_query_timeout, __asl_server_register_direct_watch, 
-                       __syslog_asl_client, _asl_add_log_file, _asl_add_output, _asl_add_output_file, 
-                       _asl_append, _asl_base_msg, _asl_client_add_output_file, _asl_client_get_control, 
-                       _asl_client_kvdict, _asl_client_match, _asl_client_open, _asl_client_open_from_file, 
-                       _asl_client_release, _asl_client_remove_output_file, _asl_client_retain, 
-                       _asl_client_search, _asl_client_send, _asl_client_set_control, 
-                       _asl_client_set_filter, _asl_client_set_output_file_filter, 
-                       _asl_close, _asl_close_auxiliary_file, _asl_core_check_access, 
-                       _asl_core_decode_buffer, _asl_core_encode_buffer, _asl_core_error, 
-                       _asl_core_get_service_port, _asl_core_htonq, _asl_core_level_to_string, 
-                       _asl_core_new_msg_id, _asl_core_ntohq, _asl_core_parse_time, 
-                       _asl_core_str_match, _asl_core_str_match_c_time, _asl_core_str_match_char, 
-                       _asl_core_str_to_size, _asl_core_str_to_time, _asl_core_str_to_uint32, 
-                       _asl_core_string_hash, _asl_core_time_to_str, _asl_count, 
-                       _asl_create_auxiliary_file, _asl_fetch_key_val_op, _asl_file_close, 
-                       _asl_file_compact, _asl_file_ctime, _asl_file_fetch, _asl_file_fetch_next, 
-                       _asl_file_fetch_previous, _asl_file_filter, _asl_file_filter_level, 
-                       _asl_file_list_add, _asl_file_list_close, _asl_file_list_match, 
-                       _asl_file_list_match_end, _asl_file_list_match_next, _asl_file_list_match_start, 
-                       _asl_file_match, _asl_file_open_read, _asl_file_open_write, 
-                       _asl_file_read_set_position, _asl_file_release, _asl_file_retain, 
-                       _asl_file_save, _asl_file_size, _asl_filesystem_path, _asl_format, 
-                       _asl_format_message, _asl_free, _asl_get, _asl_get_filter, 
+  - archs:           [ x86_64 ]
+    symbols:         [ _ASL_LEVEL_TO_STRING, __asl_evaluate_send, __asl_fork_child, 
+                       __asl_lib_log, __asl_log_args_to_xpc, __asl_msg_dump, __asl_server_cancel_direct_watch, 
+                       __asl_server_control_query, __asl_server_create_aux_link, 
+                       __asl_server_match, __asl_server_message, __asl_server_prune, 
+                       __asl_server_query, __asl_server_query_2, __asl_server_query_timeout, 
+                       __asl_server_register_direct_watch, _asl_add_log_file, _asl_add_output, 
+                       _asl_add_output_file, _asl_append, _asl_base_msg, _asl_client_add_output_file, 
+                       _asl_client_get_control, _asl_client_kvdict, _asl_client_match, 
+                       _asl_client_open, _asl_client_open_from_file, _asl_client_release, 
+                       _asl_client_remove_output_file, _asl_client_retain, _asl_client_search, 
+                       _asl_client_send, _asl_client_set_control, _asl_client_set_filter, 
+                       _asl_client_set_output_file_filter, _asl_close, _asl_close_auxiliary_file, 
+                       _asl_core_check_access, _asl_core_decode_buffer, _asl_core_encode_buffer, 
+                       _asl_core_error, _asl_core_get_service_port, _asl_core_htonq, 
+                       _asl_core_level_to_string, _asl_core_new_msg_id, _asl_core_ntohq, 
+                       _asl_core_parse_time, _asl_core_str_match, _asl_core_str_match_c_time, 
+                       _asl_core_str_match_char, _asl_core_str_to_size, _asl_core_str_to_time, 
+                       _asl_core_str_to_uint32, _asl_core_string_hash, _asl_core_time_to_str, 
+                       _asl_count, _asl_create_auxiliary_file, _asl_fetch_key_val_op, 
+                       _asl_file_close, _asl_file_compact, _asl_file_ctime, _asl_file_fetch, 
+                       _asl_file_fetch_next, _asl_file_fetch_previous, _asl_file_filter, 
+                       _asl_file_filter_level, _asl_file_list_add, _asl_file_list_close, 
+                       _asl_file_list_match, _asl_file_list_match_end, _asl_file_list_match_next, 
+                       _asl_file_list_match_start, _asl_file_match, _asl_file_open_read, 
+                       _asl_file_open_write, _asl_file_read_set_position, _asl_file_release, 
+                       _asl_file_retain, _asl_file_save, _asl_file_size, _asl_filesystem_path, 
+                       _asl_format, _asl_format_message, _asl_free, _asl_get, _asl_get_filter, 
                        _asl_get_index, _asl_get_local_control, _asl_get_type, _asl_get_value_for_key, 
                        _asl_key, _asl_legacy1_close, _asl_legacy1_fetch, _asl_legacy1_match, 
                        _asl_legacy1_open, _asl_list_from_string, _asl_log, _asl_log_auxiliary_location, 
@@ -76,5 +75,5 @@ exports:
                        _asl_string_retain, _asl_syslog_faciliy_name_to_num, _asl_syslog_faciliy_num_to_name, 
                        _asl_trigger_aslmanager, _asl_unset, _asl_unset_key, _asl_vlog, 
                        _aslresponse_free, _aslresponse_next, _closelog, _openlog, 
-                       _setlogmask, _syslog, _vsyslog ]
+                       _setlogmask, _syslog, '_syslog$DARWIN_EXTSN', _vsyslog ]
 ...

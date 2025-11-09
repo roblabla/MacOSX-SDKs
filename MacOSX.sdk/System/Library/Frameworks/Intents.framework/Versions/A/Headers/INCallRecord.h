@@ -7,17 +7,17 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Intents/INCallRecordType.h>
 #import <Intents/INCallCapability.h>
+#import <Intents/INCallRecordType.h>
 
 @class INPerson;
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0))
+API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13))
 @interface INCallRecord : NSObject <NSCopying, NSSecureCoding>
 
-- (id)init NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                        dateCreated:(nullable NSDate *)dateCreated
@@ -33,13 +33,13 @@ API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0))
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INPerson *caller;
 
-@property (readonly, NS_NONATOMIC_IOSONLY) INCallRecordType callRecordType;
-
-@property (readonly, NS_NONATOMIC_IOSONLY) INCallCapability callCapability;
+@property (readonly, assign, NS_NONATOMIC_IOSONLY) INCallRecordType callRecordType;
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSNumber *callDuration NS_REFINED_FOR_SWIFT;
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSNumber *unseen NS_REFINED_FOR_SWIFT;
+
+@property (readonly, assign, NS_NONATOMIC_IOSONLY) INCallCapability callCapability;
 
 @end
 

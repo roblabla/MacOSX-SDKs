@@ -1,18 +1,18 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 3C856F95-DD29-39BE-9C92-501429F86C6F', 'x86_64: 6A8CF1E8-5307-34AA-BCE8-53E69578B0D8' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: FBD6EEE3-084F-3B68-9D41-75595FAAF0B9' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/XprotectFramework.framework/Versions/A/XprotectFramework
 exports:         
   - archs:           [ x86_64 ]
-    objc-ivars:      [ _XProtectAnalysis._feedback, _XProtectAnalysis._feedbackQueue, 
-                       _XProtectAnalysis._fileURL, _XProtectAnalysis._lsProperties, 
-                       _XProtectAnalysis._results, _XProtectAnalysis._xpc ]
-  - archs:           [ i386, x86_64 ]
     symbols:         [ _XProtectAnalysisError, _XProtectCaspianContext, _XProtectDetectionType, 
-                       _XProtectMalwareType, _XProtectShouldTranslocateDMG, _XProtectSignatureName, 
-                       __analysisClientInterface, __analysisServiceInterface, _fileHasDownloadQuarantine, 
-                       _fileIsUnixExecutable, _hasLibraryValidation, _itemConformsToUTI, 
-                       _xprotectGetLog ]
-    objc-classes:    [ _XProtectAnalysis ]
+                       _XProtectIsNotarized, _XProtectMalwareType, _XProtectNotarizationTicketDate, 
+                       _XProtectRevokedByNotaryService, _XProtectShouldTranslocateDMG, 
+                       _XProtectSignatureName, __analysisClientInterface, __analysisServiceInterface, 
+                       _fileHasDownloadQuarantine, _fileIsUnixExecutable, _hasLibraryValidation, 
+                       _itemConformsToUTI, _xprotectGetLog, _xprotectGetSignpostLog ]
+    objc-classes:    [ XProtectAnalysis ]
+    objc-ivars:      [ XProtectAnalysis._feedback, XProtectAnalysis._feedbackQueue, 
+                       XProtectAnalysis._fileURL, XProtectAnalysis._lsProperties, 
+                       XProtectAnalysis._results, XProtectAnalysis._xpc ]
 ...

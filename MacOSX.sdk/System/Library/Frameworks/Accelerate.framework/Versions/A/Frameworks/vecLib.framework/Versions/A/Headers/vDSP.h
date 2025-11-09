@@ -3,9 +3,9 @@
 
     Contains:   AltiVec DSP Interfaces
 
-    Version:    vecLib-622.0
+    Version:    vecLib-671.220
 
-    Copyright:  Copyright (c) 2000-2017 by Apple Inc. All rights reserved.
+    Copyright:  Copyright (c) 2000-2018 by Apple Inc. All rights reserved.
 
     For vDSP documentation, search for "vDSP" at <http://developer.apple.com>
     or search for one of the routine names below.
@@ -37,7 +37,7 @@
                 float       *__C,
                 vDSP_Stride  __IC,
                 vDSP_Length  __N)
-                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+ 					API_AVAILABLE(macos(10.0), ios(4.0));
 
         and is described with:
 
@@ -205,7 +205,7 @@
 #endif
 
 
-#include <Availability.h>
+#include <os/availability.h>
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -238,8 +238,8 @@ extern "C" {
     vDSP_Version0 is a major version number.
     vDSP_Version1 is a minor version number.
 */
-#define vDSP_Version0   622
-#define vDSP_Version1   0
+#define vDSP_Version0   671
+#define vDSP_Version1   220
 
 
 /*  Define types:
@@ -253,7 +253,11 @@ extern "C" {
         includes strides).
 */
 typedef unsigned long vDSP_Length;
+#if defined __arm64__ && !defined __LP64__
+typedef long long     vDSP_Stride;
+#else
 typedef long          vDSP_Stride;
+#endif
 
 /*  A DSPComplex or DSPDoubleComplex is a pair of float or double values that
     together represent a complex value.
@@ -343,18 +347,18 @@ typedef struct vDSP_biquadm_SetupStructD *vDSP_biquadm_SetupD;
 extern __nullable FFTSetup vDSP_create_fftsetup(
     vDSP_Length __Log2n,
     FFTRadix    __Radix)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+		API_AVAILABLE(macos(10.0), ios(4.0));
 
 extern void vDSP_destroy_fftsetup(__nullable FFTSetup __setup)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 
 extern __nullable FFTSetupD vDSP_create_fftsetupD(
     vDSP_Length __Log2n,
     FFTRadix    __Radix)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 
 extern void vDSP_destroy_fftsetupD(__nullable FFTSetupD __setup)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 
 
 /*  vDSP_biquad_CreateSetup allocates memory and prepares the coefficients for
@@ -366,18 +370,18 @@ extern void vDSP_destroy_fftsetupD(__nullable FFTSetupD __setup)
 extern __nullable vDSP_biquad_Setup vDSP_biquad_CreateSetup(
     const double *__Coefficients,
     vDSP_Length   __M)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+        API_AVAILABLE(macos(10.9), ios(6.0));
 extern __nullable vDSP_biquad_SetupD vDSP_biquad_CreateSetupD(
     const double *__Coefficients,
     vDSP_Length   __M)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+        API_AVAILABLE(macos(10.9), ios(6.0));
 
 extern void vDSP_biquad_DestroySetup (
     __nullable vDSP_biquad_Setup __setup)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+        API_AVAILABLE(macos(10.9), ios(6.0));
 extern void vDSP_biquad_DestroySetupD(
     __nullable vDSP_biquad_SetupD __setup)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+        API_AVAILABLE(macos(10.9), ios(6.0));
 
 
 /*  vDSP_biquadm_CreateSetup (for float) or vDSP_biquadm_CreateSetupD (for
@@ -397,18 +401,18 @@ extern __nullable vDSP_biquadm_Setup vDSP_biquadm_CreateSetup(
     const double *__coeffs,
     vDSP_Length   __M,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 extern __nullable vDSP_biquadm_SetupD vDSP_biquadm_CreateSetupD(
     const double *__coeffs,
     vDSP_Length   __M,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
 extern void vDSP_biquadm_DestroySetup(
     vDSP_biquadm_Setup __setup)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 extern void vDSP_biquadm_DestroySetupD(
     vDSP_biquadm_SetupD __setup)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
 
 /*  vDSP_biquadm_CopyState (for float) or vDSP_biquadm_CopyStateD (for double)
     copies the current state between two biquadm setup objects.  The two
@@ -421,15 +425,15 @@ extern void vDSP_biquadm_DestroySetupD(
 extern void vDSP_biquadm_CopyState(
     vDSP_biquadm_Setup                     __dest,
     const struct vDSP_biquadm_SetupStruct *__src)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 extern void vDSP_biquadm_CopyStateD(
     vDSP_biquadm_SetupD                     __dest,
     const struct vDSP_biquadm_SetupStructD *__src)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
 extern void vDSP_biquadm_ResetState(vDSP_biquadm_Setup __setup)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 extern void vDSP_biquadm_ResetStateD(vDSP_biquadm_SetupD __setup)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
 
 /*
     vDSP_biquadm_SetCoefficientsDouble will
@@ -443,7 +447,7 @@ extern void vDSP_biquadm_SetCoefficientsDouble(
     vDSP_Length                         __start_chn,
     vDSP_Length                         __nsec,
     vDSP_Length                         __nchn)
-    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+        API_AVAILABLE(macos(10.11), ios(9.0));
     
 /*
     vDSP_biquadm_SetTargetsDouble will
@@ -459,7 +463,7 @@ extern void vDSP_biquadm_SetTargetsDouble(
     vDSP_Length                         __start_chn,
     vDSP_Length                         __nsec,
     vDSP_Length                         __nchn)
-    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+        API_AVAILABLE(macos(10.11), ios(9.0));
     
 /*
     vDSP_biquadm_SetCoefficientsSingle will
@@ -475,7 +479,7 @@ extern void vDSP_biquadm_SetCoefficientsSingle(
     vDSP_Length                         __start_chn,
     vDSP_Length                         __nsec,
     vDSP_Length                         __nchn)
-    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+        API_AVAILABLE(macos(10.11), ios(9.0));
     
 /*
     vDSP_biquadm_SetTargetsSingle will
@@ -492,7 +496,7 @@ extern void vDSP_biquadm_SetTargetsSingle(
     vDSP_Length                         __start_chn,
     vDSP_Length                         __nsec,
     vDSP_Length                         __nchn)
-    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+        API_AVAILABLE(macos(10.11), ios(9.0));
 /*
     vDSP_biquadm_SetActiveFilters will set the overall active/inactive filter
     state of a valid vDSP_biquadm_Setup object.
@@ -500,7 +504,7 @@ extern void vDSP_biquadm_SetTargetsSingle(
 extern void vDSP_biquadm_SetActiveFilters(
     vDSP_biquadm_Setup                  __setup,
     const bool                         *__filter_states)
-    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+        API_AVAILABLE(macos(10.11), ios(9.0));
 
 // Convert a complex array to a complex-split array.
 extern void vDSP_ctoz(
@@ -509,14 +513,14 @@ extern void vDSP_ctoz(
     const DSPSplitComplex *__Z,
     vDSP_Stride            __IZ,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_ctozD(
     const DSPDoubleComplex      *__C,
     vDSP_Stride                  __IC,
     const DSPDoubleSplitComplex *__Z,
     vDSP_Stride                  __IZ,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Map:
 
             Pseudocode:     Memory:
@@ -537,14 +541,14 @@ extern void vDSP_ztoc(
     DSPComplex            *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_ztocD(
     const DSPDoubleSplitComplex *__Z,
     vDSP_Stride                  __IZ,
     DSPDoubleComplex            *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Map:
 
             Pseudocode:     Memory:
@@ -568,14 +572,14 @@ extern void vDSP_fft_zip(
     vDSP_Stride            __IC,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_fft_zipD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fft_zipt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
@@ -583,7 +587,7 @@ extern void vDSP_fft_zipt(
     const DSPSplitComplex *__Buffer,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_fft_ziptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -591,7 +595,7 @@ extern void vDSP_fft_ziptD(
     const DSPDoubleSplitComplex *__Buffer,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             For this routine, strides are shown explicitly; the default maps
@@ -643,7 +647,7 @@ extern void vDSP_fft_zop(
     vDSP_Stride            __IC,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_fft_zopt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -653,7 +657,7 @@ extern void vDSP_fft_zopt(
     const DSPSplitComplex *__Buffer,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_fft_zopD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -662,7 +666,7 @@ extern void vDSP_fft_zopD(
     vDSP_Stride                  __IC,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fft_zoptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -672,7 +676,7 @@ extern void vDSP_fft_zoptD(
     const DSPDoubleSplitComplex *__Buffer,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             For this routine, strides are shown explicitly; the default maps
@@ -723,14 +727,14 @@ extern void vDSP_fft_zrip(
     vDSP_Stride            __IC,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_fft_zripD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fft_zript(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
@@ -738,7 +742,7 @@ extern void vDSP_fft_zript(
     const DSPSplitComplex *__Buffer,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_fft_zriptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -746,7 +750,7 @@ extern void vDSP_fft_zriptD(
     const DSPDoubleSplitComplex *__Buffer,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             For this routine, strides are shown explicitly; the default maps
@@ -846,7 +850,7 @@ extern void vDSP_fft_zrop(
     vDSP_Stride            __IC,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_fft_zropD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -855,7 +859,7 @@ extern void vDSP_fft_zropD(
     vDSP_Stride                  __IC,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fft_zropt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -865,7 +869,7 @@ extern void vDSP_fft_zropt(
     const DSPSplitComplex *__Buffer,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_fft_zroptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -875,7 +879,7 @@ extern void vDSP_fft_zroptD(
     const DSPDoubleSplitComplex *__Buffer,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             For this routine, strides are shown explicitly; the default maps
@@ -974,7 +978,7 @@ extern void vDSP_fft2d_zip(
     vDSP_Length            __Log2N0,
     vDSP_Length            __Log2N1,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_fft2d_zipD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -983,7 +987,7 @@ extern void vDSP_fft2d_zipD(
     vDSP_Length                  __Log2N0,
     vDSP_Length                  __Log2N1,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fft2d_zipt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
@@ -993,7 +997,7 @@ extern void vDSP_fft2d_zipt(
     vDSP_Length            __Log2N0,
     vDSP_Length            __Log2N1,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_fft2d_ziptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -1003,7 +1007,7 @@ extern void vDSP_fft2d_ziptD(
     vDSP_Length                  __Log2N0,
     vDSP_Length                  __Log2N1,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             For this routine, strides are shown explicitly; the default maps
@@ -1072,7 +1076,7 @@ extern void vDSP_fft2d_zop(
     vDSP_Length            __Log2N0,
     vDSP_Length            __Log2N1,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_fft2d_zopD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -1084,7 +1088,7 @@ extern void vDSP_fft2d_zopD(
     vDSP_Length                  __Log2N0,
     vDSP_Length                  __Log2N1,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fft2d_zopt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -1097,7 +1101,7 @@ extern void vDSP_fft2d_zopt(
     vDSP_Length            __Log2N0,
     vDSP_Length            __Log2N1,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_fft2d_zoptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -1110,7 +1114,7 @@ extern void vDSP_fft2d_zoptD(
     vDSP_Length                  __Log2N0,
     vDSP_Length                  __Log2N1,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             For this routine, strides are shown explicitly; the default maps
@@ -1178,7 +1182,7 @@ extern void vDSP_fft2d_zrip(
     vDSP_Length            __Log2N0,
     vDSP_Length            __Log2N1,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_fft2d_zripD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -1187,7 +1191,7 @@ extern void vDSP_fft2d_zripD(
     vDSP_Length                  __Log2N0,
     vDSP_Length                  __Log2N1,
     FFTDirection                 __flag)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fft2d_zript(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
@@ -1197,7 +1201,7 @@ extern void vDSP_fft2d_zript(
     vDSP_Length            __Log2N0,
     vDSP_Length            __Log2N1,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_fft2d_zriptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -1207,7 +1211,7 @@ extern void vDSP_fft2d_zriptD(
     vDSP_Length                  __Log2N0,
     vDSP_Length                  __Log2N1,
     FFTDirection                 __flag)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             For this routine, strides are shown explicitly; the default maps
@@ -1349,7 +1353,7 @@ extern void vDSP_fft2d_zrop(
     vDSP_Length            __Log2N0,
     vDSP_Length            __Log2N1,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_fft2d_zropt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -1362,7 +1366,7 @@ extern void vDSP_fft2d_zropt(
     vDSP_Length            __Log2N0,
     vDSP_Length            __Log2N1,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_fft2d_zropD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -1374,7 +1378,7 @@ extern void vDSP_fft2d_zropD(
     vDSP_Length                  __Log2N0,
     vDSP_Length                  __Log2N1,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fft2d_zroptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -1387,7 +1391,7 @@ extern void vDSP_fft2d_zroptD(
     vDSP_Length                  __Log2N0,
     vDSP_Length                  __Log2N1,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             For this routine, strides are shown explicitly; the default maps
@@ -1527,7 +1531,7 @@ extern void vDSP_fftm_zip(
     vDSP_Length            __Log2N,
     vDSP_Length            __M,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fftm_zipD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -1536,7 +1540,7 @@ extern void vDSP_fftm_zipD(
     vDSP_Length                  __Log2N,
     vDSP_Length                  __M,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fftm_zipt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
@@ -1546,7 +1550,7 @@ extern void vDSP_fftm_zipt(
     vDSP_Length            __Log2N,
     vDSP_Length            __M,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fftm_ziptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -1556,7 +1560,7 @@ extern void vDSP_fftm_ziptD(
     vDSP_Length                  __Log2N,
     vDSP_Length                  __M,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             For this routine, strides are shown explicitly; the default maps
@@ -1617,7 +1621,7 @@ extern void vDSP_fftm_zop(
     vDSP_Length            __Log2N,
     vDSP_Length            __M,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fftm_zopD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -1629,7 +1633,7 @@ extern void vDSP_fftm_zopD(
     vDSP_Length                  __Log2N,
     vDSP_Length                  __M,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fftm_zopt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -1642,7 +1646,7 @@ extern void vDSP_fftm_zopt(
     vDSP_Length            __Log2N,
     vDSP_Length            __M,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fftm_zoptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -1655,7 +1659,7 @@ extern void vDSP_fftm_zoptD(
     vDSP_Length                  __Log2N,
     vDSP_Length                  __M,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             For this routine, strides are shown explicitly; the default maps
@@ -1714,7 +1718,7 @@ extern void vDSP_fftm_zrip(
     vDSP_Length            __Log2N,
     vDSP_Length            __M,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fftm_zripD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -1723,7 +1727,7 @@ extern void vDSP_fftm_zripD(
     vDSP_Length                  __Log2N,
     vDSP_Length                  __M,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fftm_zript(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
@@ -1733,7 +1737,7 @@ extern void vDSP_fftm_zript(
     vDSP_Length            __Log2N,
     vDSP_Length            __M,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fftm_zriptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -1743,7 +1747,7 @@ extern void vDSP_fftm_zriptD(
     vDSP_Length                  __Log2N,
     vDSP_Length                  __M,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             For this routine, strides are shown explicitly; the default maps
@@ -1854,7 +1858,7 @@ extern void vDSP_fftm_zrop(
     vDSP_Length            __Log2N,
     vDSP_Length            __M,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fftm_zropt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -1867,7 +1871,7 @@ extern void vDSP_fftm_zropt(
     vDSP_Length            __Log2N,
     vDSP_Length            __M,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fftm_zropD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -1879,7 +1883,7 @@ extern void vDSP_fftm_zropD(
     vDSP_Length                  __Log2N,
     vDSP_Length                  __M,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_fftm_zroptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -1892,7 +1896,7 @@ extern void vDSP_fftm_zroptD(
     vDSP_Length                  __Log2N,
     vDSP_Length                  __M,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             For this routine, strides are shown explicitly; the default maps
@@ -1999,7 +2003,8 @@ extern void vDSP_fft3_zop(
     vDSP_Stride            __IC,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_9_0);
+        API_DEPRECATED_WITH_REPLACEMENT("use DFT routines", macos(10.2, 10.11), ios(4.0, 9.0));
+
 extern void vDSP_fft3_zopD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -2008,7 +2013,7 @@ extern void vDSP_fft3_zopD(
     vDSP_Stride                  __IC,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_9_0);
+        API_DEPRECATED_WITH_REPLACEMENT("use DFT routines", macos(10.2, 10.11), ios(4.0, 9.0));
 extern void vDSP_fft5_zop(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -2017,7 +2022,7 @@ extern void vDSP_fft5_zop(
     vDSP_Stride            __IC,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_9_0);
+        API_DEPRECATED_WITH_REPLACEMENT("use DFT routines", macos(10.2, 10.11), ios(4.0, 9.0));
 extern void vDSP_fft5_zopD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -2026,7 +2031,7 @@ extern void vDSP_fft5_zopD(
     vDSP_Stride                  __IC,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_9_0);
+        API_DEPRECATED_WITH_REPLACEMENT("use DFT routines", macos(10.2, 10.11), ios(4.0, 9.0));
     /*  Maps:
 
             For this routine, strides are shown explicitly; the default maps
@@ -2071,14 +2076,14 @@ extern void vDSP_biquad(
     const float *__X, vDSP_Stride __IX,
     float       *__Y, vDSP_Stride __IY,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+        API_AVAILABLE(macos(10.9), ios(6.0));
 extern void vDSP_biquadD(
     const struct vDSP_biquad_SetupStructD *__Setup,
     double       *__Delay,
     const double *__X, vDSP_Stride __IX,
     double       *__Y, vDSP_Stride __IY,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+        API_AVAILABLE(macos(10.9), ios(6.0));
     /*  Maps:
 
             For this routine, strides are shown explicitly; the default maps
@@ -2137,13 +2142,13 @@ extern void vDSP_biquadm(
     const float * __nonnull * __nonnull __X, vDSP_Stride __IX,
     float       * __nonnull * __nonnull __Y, vDSP_Stride __IY,
     vDSP_Length              __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 extern void vDSP_biquadmD(
      vDSP_biquadm_SetupD       __Setup,
      const double * __nonnull * __nonnull __X, vDSP_Stride __IX,
      double       * __nonnull * __nonnull __Y, vDSP_Stride __IY,
      vDSP_Length               __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
     /*  These routines perform the same function as M calls to vDSP_biquad or
         vDSP_biquadD, where M, the delay values, and the biquad setups are
         derived from the biquadm setup:
@@ -2169,7 +2174,7 @@ extern void vDSP_conv(
     vDSP_Stride  __IC,
     vDSP_Length  __N,  // Output length.
     vDSP_Length  __P)  // Filter length.
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_convD(
     const double *__A, // Input signal.
     vDSP_Stride   __IA,
@@ -2179,7 +2184,7 @@ extern void vDSP_convD(
     vDSP_Stride   __IC,
     vDSP_Length   __N, // Output length.
     vDSP_Length   __P) // Filter length.
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_zconv(
     const DSPSplitComplex *__A,  // Input signal.
     vDSP_Stride            __IA,
@@ -2189,7 +2194,7 @@ extern void vDSP_zconv(
     vDSP_Stride            __IC,
     vDSP_Length            __N,  // Output length.
     vDSP_Length            __P)  // Filter length.
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_zconvD(
     const DSPDoubleSplitComplex *__A,    // Input signal.
     vDSP_Stride                  __IA,
@@ -2199,7 +2204,7 @@ extern void vDSP_zconvD(
     vDSP_Stride                  __IC,
     vDSP_Length                  __N,    // Output length.
     vDSP_Length                  __P)    // Filter length.
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -2220,28 +2225,28 @@ extern void vDSP_f3x3(
     vDSP_Length  __NC,
     const float *__F,
     float       *__C)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_f3x3D(
     const double *__A,
     vDSP_Length   __NR,
     vDSP_Length   __NC,
     const double *__F,
     double       *__C)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_f5x5(
     const float *__A,
     vDSP_Length  __NR,
     vDSP_Length  __NC,
     const float *__F,
     float       *__C)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_f5x5D(
     const double *__A,
     vDSP_Length   __NR,
     vDSP_Length   __NC,
     const double *__F,
     double       *__C)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             This routine does not have strides.
@@ -2282,7 +2287,7 @@ extern void vDSP_imgfir(
     float       *__C,  // Output.
     vDSP_Length  __P,  // Number of filter rows.
     vDSP_Length  __Q)  // Number of filter columns.
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_imgfirD(
     const double *__A,  // Input.
     vDSP_Length   __NR, // Number of image rows.
@@ -2291,7 +2296,7 @@ extern void vDSP_imgfirD(
     double       *__C,  // Output.
     vDSP_Length   __P,  // Number of filter rows.
     vDSP_Length   __Q)  // Number of filter columns.
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             This routine does not have strides.
@@ -2331,7 +2336,7 @@ extern void vDSP_mtrans(
     vDSP_Stride  __IC,
     vDSP_Length  __M,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_mtransD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -2339,7 +2344,7 @@ extern void vDSP_mtransD(
     vDSP_Stride   __IC,
     vDSP_Length   __M,
     vDSP_Length   __N)
-            __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+            API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             A is regarded as a two-dimensional matrix with dimemnsions
@@ -2370,7 +2375,7 @@ extern void vDSP_mmul(
     vDSP_Length  __M,
     vDSP_Length  __N,
     vDSP_Length  __P)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_mmulD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -2381,7 +2386,7 @@ extern void vDSP_mmulD(
     vDSP_Length   __M,
     vDSP_Length   __N,
     vDSP_Length   __P)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             A is regarded as a two-dimensional matrix with dimemnsions [M][P]
@@ -2416,7 +2421,7 @@ extern void vDSP_zmma(
     vDSP_Length            __M,
     vDSP_Length            __N,
     vDSP_Length            __P)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_zmmaD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -2429,7 +2434,7 @@ extern void vDSP_zmmaD(
     vDSP_Length                  __M,
     vDSP_Length                  __N,
     vDSP_Length                  __P)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             Pseudocode:     Memory:
@@ -2460,7 +2465,7 @@ extern void vDSP_zmms(
     vDSP_Length            __M,
     vDSP_Length            __N,
     vDSP_Length            __P)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_zmmsD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -2473,7 +2478,7 @@ extern void vDSP_zmmsD(
     vDSP_Length                  __M,
     vDSP_Length                  __N,
     vDSP_Length                  __P)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             Pseudocode:     Memory:
@@ -2505,7 +2510,7 @@ extern void vDSP_zvmmaa(
     const DSPSplitComplex *__F,
     vDSP_Stride            __IF,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 extern void vDSP_zvmmaaD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -2520,7 +2525,7 @@ extern void vDSP_zvmmaaD(
     const DSPDoubleSplitComplex *__F,
     vDSP_Stride                  __IF,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -2544,7 +2549,7 @@ extern void vDSP_zmsm(
     vDSP_Length            __M,
     vDSP_Length            __N,
     vDSP_Length            __P)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_zmsmD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -2557,7 +2562,7 @@ extern void vDSP_zmsmD(
     vDSP_Length                  __M,
     vDSP_Length                  __N,
     vDSP_Length                  __P)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             Pseudocode:     Memory:
@@ -2586,7 +2591,7 @@ extern void vDSP_zmmul(
     vDSP_Length            __M,
     vDSP_Length            __N,
     vDSP_Length            __P)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_zmmulD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -2597,7 +2602,7 @@ extern void vDSP_zmmulD(
     vDSP_Length                  __M,
     vDSP_Length                  __N,
     vDSP_Length                  __P)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             Pseudocode:     Memory:
@@ -2622,7 +2627,7 @@ extern void vDSP_vadd(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_vaddD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -2631,7 +2636,7 @@ extern void vDSP_vaddD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_vaddi(
     const int   *__A,
     vDSP_Stride  __IA,
@@ -2640,7 +2645,7 @@ extern void vDSP_vaddi(
     int         *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 extern void vDSP_zvadd(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -2649,7 +2654,7 @@ extern void vDSP_zvadd(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_zvaddD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -2658,7 +2663,7 @@ extern void vDSP_zvaddD(
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_zrvadd(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -2667,7 +2672,7 @@ extern void vDSP_zrvadd(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_zrvaddD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -2676,7 +2681,7 @@ extern void vDSP_zrvaddD(
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -2695,7 +2700,7 @@ extern void vDSP_vsub(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_vsubD(
     const double *__B, // Caution:  A and B are swapped!
     vDSP_Stride   __IB,
@@ -2704,7 +2709,7 @@ extern void vDSP_vsubD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_zvsub(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -2713,7 +2718,7 @@ extern void vDSP_zvsub(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_zvsubD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -2722,7 +2727,7 @@ extern void vDSP_zvsubD(
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -2741,7 +2746,7 @@ extern void vDSP_vmul(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_vmulD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -2750,7 +2755,7 @@ extern void vDSP_vmulD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_zrvmul(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -2759,7 +2764,7 @@ extern void vDSP_zrvmul(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_zrvmulD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -2768,7 +2773,7 @@ extern void vDSP_zrvmulD(
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -2787,7 +2792,7 @@ extern void vDSP_vdiv(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vdivD(
     const double *__B, // Caution:  A and B are swapped!
     vDSP_Stride   __IB,
@@ -2796,7 +2801,7 @@ extern void vDSP_vdivD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vdivi(
     const int   *__B,  // Caution:  A and B are swapped!
     vDSP_Stride  __IB,
@@ -2805,7 +2810,7 @@ extern void vDSP_vdivi(
     int         *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvdiv(
     const DSPSplitComplex *__B,    // Caution:  A and B are swapped!
     vDSP_Stride            __IB,
@@ -2814,7 +2819,7 @@ extern void vDSP_zvdiv(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvdivD(
     const DSPDoubleSplitComplex *__B,  // Caution:  A and B are swapped!
     vDSP_Stride                  __IB,
@@ -2823,7 +2828,7 @@ extern void vDSP_zvdivD(
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zrvdiv(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -2832,7 +2837,7 @@ extern void vDSP_zrvdiv(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zrvdivD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -2841,7 +2846,7 @@ extern void vDSP_zrvdivD(
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -2859,7 +2864,7 @@ extern void vDSP_vsmul(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_vsmulD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -2867,7 +2872,7 @@ extern void vDSP_vsmulD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -2884,14 +2889,14 @@ extern void vDSP_vsq(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_vsqD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -2909,14 +2914,14 @@ extern void vDSP_vssq(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_vssqD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -2934,7 +2939,7 @@ extern void vDSP_distancesq(
     vDSP_Stride  __IB,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_5_0);
+        API_AVAILABLE(macos(10.8), ios(5.0));
 extern void vDSP_distancesqD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -2942,7 +2947,7 @@ extern void vDSP_distancesqD(
     vDSP_Stride   __IB,
     double       *__C,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -2959,7 +2964,7 @@ extern void vDSP_dotpr(
     vDSP_Stride  __IB,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_dotprD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -2967,7 +2972,7 @@ extern void vDSP_dotprD(
     vDSP_Stride   __IB,
     double       *__C,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_zdotpr(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -2975,7 +2980,7 @@ extern void vDSP_zdotpr(
     vDSP_Stride            __IB,
     const DSPSplitComplex *__C,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_zdotprD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -2983,7 +2988,7 @@ extern void vDSP_zdotprD(
     vDSP_Stride                  __IB,
     const DSPDoubleSplitComplex *__C,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
 extern void vDSP_zrdotpr(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -2991,7 +2996,7 @@ extern void vDSP_zrdotpr(
     vDSP_Stride            __IB,
     const DSPSplitComplex *__C,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_zrdotprD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -2999,7 +3004,7 @@ extern void vDSP_zrdotprD(
     vDSP_Stride                  __IB,
     const DSPDoubleSplitComplex *__C,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3019,7 +3024,7 @@ extern void vDSP_vam(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_vamD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -3030,7 +3035,7 @@ extern void vDSP_vamD(
     double       *__D,
     vDSP_Stride   __IDD,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3051,7 +3056,7 @@ extern void vDSP_vma(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vmaD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -3062,7 +3067,7 @@ extern void vDSP_vmaD(
     double       *__D,
     vDSP_Stride   __ID,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvma(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -3073,7 +3078,7 @@ extern void vDSP_zvma(
     const DSPSplitComplex *__D,
     vDSP_Stride            __ID,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 extern void vDSP_zvmaD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -3084,7 +3089,7 @@ extern void vDSP_zvmaD(
     const DSPDoubleSplitComplex *__D,
     vDSP_Stride                  __ID,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3104,7 +3109,7 @@ extern void vDSP_zvmul(
     vDSP_Stride            __IC,
     vDSP_Length            __N,
     int                    __Conjugate)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_zvmulD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -3114,7 +3119,7 @@ extern void vDSP_zvmulD(
     vDSP_Stride                  __IC,
     vDSP_Length                  __N,
     int                          __Conjugate)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3139,7 +3144,7 @@ extern void vDSP_zidotpr(
     vDSP_Stride            __IB,
     const DSPSplitComplex *__C,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_zidotprD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -3147,7 +3152,7 @@ extern void vDSP_zidotprD(
     vDSP_Stride                  __IB,
     const DSPDoubleSplitComplex *__C,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3167,7 +3172,7 @@ extern void vDSP_zvcma(
     const DSPSplitComplex *__D,
     vDSP_Stride            __ID,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_zvcmaD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -3178,7 +3183,7 @@ extern void vDSP_zvcmaD(
     const DSPDoubleSplitComplex *__D,
     vDSP_Stride                  __ID,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3197,7 +3202,7 @@ extern void vDSP_zrvsub(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 extern void vDSP_zrvsubD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -3206,7 +3211,7 @@ extern void vDSP_zrvsubD(
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3223,14 +3228,14 @@ extern void vDSP_vdpsp(
     float        *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vspdp(
     const float *__A,
     vDSP_Stride  __IA,
     double      *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3247,35 +3252,35 @@ extern void vDSP_vabs(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vabsD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vabsi(
     const int   *__A,
     vDSP_Stride  __IA,
     int         *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvabs(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
     float                 *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvabsD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
     double                      *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3294,7 +3299,7 @@ extern void vDSP_veqvi(
     int         *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3310,31 +3315,31 @@ extern void vDSP_vfill(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfillD(
     const double *__A,
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfilli(
     const int   *__A,
     int         *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvfill(
     const DSPSplitComplex *__A,
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvfillD(
     const DSPDoubleSplitComplex *__A,
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3352,7 +3357,7 @@ extern void vDSP_vsadd(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vsaddD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -3360,7 +3365,7 @@ extern void vDSP_vsaddD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vsaddi(
     const int   *__A,
     vDSP_Stride  __IA,
@@ -3368,7 +3373,7 @@ extern void vDSP_vsaddi(
     int         *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3386,7 +3391,7 @@ extern void vDSP_vsdiv(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vsdivD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -3394,7 +3399,7 @@ extern void vDSP_vsdivD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vsdivi(
     const int   *__A,
     vDSP_Stride  __IA,
@@ -3402,7 +3407,7 @@ extern void vDSP_vsdivi(
     int         *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3417,12 +3422,12 @@ extern void vDSP_zaspec(
     const DSPSplitComplex *__A,
     float                 *__C,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zaspecD(
     const DSPDoubleSplitComplex *__A,
     double                      *__C,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:
 
             No strides are used; arrays map directly to memory.
@@ -3439,12 +3444,12 @@ extern void vDSP_blkman_window(
     float       *__C,
     vDSP_Length  __N,
     int          __Flag)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_blkman_windowD(
     double      *__C,
     vDSP_Length  __N,
     int          __Flag)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:
 
             No strides are used; the array maps directly to memory.
@@ -3471,14 +3476,14 @@ extern void vDSP_zcoher(
     const DSPSplitComplex *__C,
     float                 *__D,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zcoherD(
     const double                *__A,
     const double                *__B,
     const DSPDoubleSplitComplex *__C,
     double                      *__D,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:
 
             No strides are used; arrays map directly to memory.
@@ -3498,7 +3503,7 @@ extern void vDSP_desamp(
     float       *__C,   // Output.
     vDSP_Length  __N,   // Output length.
     vDSP_Length  __P)   // Filter length.
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_desampD(
     const double *__A,  // Input signal.
     vDSP_Stride   __DF, // Decimation Factor.
@@ -3506,7 +3511,7 @@ extern void vDSP_desampD(
     double       *__C,  // Output.
     vDSP_Length   __N,  // Output length.
     vDSP_Length   __P)  // Filter length.
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zrdesamp(
     const DSPSplitComplex *__A,  // Input signal.
     vDSP_Stride            __DF, // Decimation Factor.
@@ -3514,7 +3519,7 @@ extern void vDSP_zrdesamp(
     const DSPSplitComplex *__C,  // Output.
     vDSP_Length            __N,  // Output length.
     vDSP_Length            __P)  // Filter length.
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zrdesampD(
     const DSPDoubleSplitComplex *__A,    // Input signal.
     vDSP_Stride                  __DF,   // Decimation Factor.
@@ -3522,7 +3527,7 @@ extern void vDSP_zrdesampD(
     const DSPDoubleSplitComplex *__C,    // Output.
     vDSP_Length                  __N,    // Output length.
     vDSP_Length                  __P)    // Filter length.
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:
 
             No strides are used; arrays map directly to memory.  DF specifies
@@ -3541,13 +3546,13 @@ extern void vDSP_ztrans(
     const DSPSplitComplex *__B,
     const DSPSplitComplex *__C,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_ztransD(
     const double                *__A,
     const DSPDoubleSplitComplex *__B,
     const DSPDoubleSplitComplex *__C,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:
 
             No strides are used; arrays map directly to memory.
@@ -3565,13 +3570,13 @@ extern void vDSP_zcspec(
     const DSPSplitComplex *__B,
     const DSPSplitComplex *__C,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zcspecD(
     const DSPDoubleSplitComplex *__A,
     const DSPDoubleSplitComplex *__B,
     const DSPDoubleSplitComplex *__C,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:
 
             No strides are used; arrays map directly to memory.
@@ -3592,7 +3597,7 @@ extern void vDSP_zvcmul(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvcmulD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -3601,7 +3606,7 @@ extern void vDSP_zvcmulD(
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __iC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3618,14 +3623,14 @@ extern void vDSP_zvconj(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvconjD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3643,7 +3648,7 @@ extern void vDSP_zvzsml(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvzsmlD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -3651,7 +3656,7 @@ extern void vDSP_zvzsmlD(
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3668,14 +3673,14 @@ extern void vDSP_zvmags(
     float                 *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvmagsD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
     double                      *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3694,7 +3699,7 @@ extern void vDSP_zvmgsa(
     float                 *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvmgsaD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -3703,7 +3708,7 @@ extern void vDSP_zvmgsaD(
     double                      *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3720,14 +3725,14 @@ extern void vDSP_zvmov(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvmovD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3744,14 +3749,14 @@ extern void vDSP_zvneg(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvnegD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3768,14 +3773,14 @@ extern void vDSP_zvphas(
     float                 *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvphasD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
     double                      *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3795,7 +3800,7 @@ extern void vDSP_zvsma(
     const DSPSplitComplex *__D,
     vDSP_Stride            __ID,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvsmaD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -3805,7 +3810,7 @@ extern void vDSP_zvsmaD(
     const DSPDoubleSplitComplex *__D,
     vDSP_Stride                  __ID,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3823,7 +3828,7 @@ extern void vDSP_deq22(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_deq22D(
     const double *__A,
     vDSP_Stride   __IA,
@@ -3831,7 +3836,7 @@ extern void vDSP_deq22D(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -3851,12 +3856,12 @@ extern void vDSP_hamm_window(
     float       *__C,
     vDSP_Length  __N,
     int          __Flag)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_hamm_windowD(
     double      *__C,
     vDSP_Length  __N,
     int          __Flag)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:
 
             No strides are used; the array maps directly to memory.
@@ -3878,12 +3883,12 @@ extern void vDSP_hann_window(
     float       *__C,
     vDSP_Length  __N,
     int          __Flag)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_hann_windowD(
     double      *__C,
     vDSP_Length  __N,
     int          __Flag)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:
 
             No strides are used; the array maps directly to memory.
@@ -3911,13 +3916,13 @@ extern void vDSP_maxmgv(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_maxmgvD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         C[0] is set to the greatest value of |A[n]| for 0 <= n < N.
@@ -3931,14 +3936,14 @@ extern void vDSP_maxmgvi(
     float       *__C,
     vDSP_Length *__I,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_maxmgviD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Length  *__I,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         C[0] is set to the greatest value of |A[n]| for 0 <= n < N.
@@ -3952,13 +3957,13 @@ extern void vDSP_maxv(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_maxvD(
     const double *__A,
     vDSP_Stride   __I,
     double       *__C,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         C[0] is set to the greatest value of A[n] for 0 <= n < N.
@@ -3972,14 +3977,14 @@ extern void vDSP_maxvi(
     float       *__C,
     vDSP_Length *__I,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_maxviD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Length  *__I,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         C[0] is set to the greatest value of A[n] for 0 <= n < N.
@@ -3993,13 +3998,13 @@ extern void vDSP_meamgv(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_meamgvD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4014,13 +4019,13 @@ extern void vDSP_meanv(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_meanvD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4035,13 +4040,13 @@ extern void vDSP_measqv(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_measqvD(
     const double *__A,
     vDSP_Stride   __I,
     double       *__C,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4056,13 +4061,13 @@ extern void vDSP_minmgv(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_minmgvD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         C[0] is set to the least value of |A[n]| for 0 <= n < N.
@@ -4076,14 +4081,14 @@ extern void vDSP_minmgvi(
     float       *__C,
     vDSP_Length *__I,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_minmgviD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Length  *__I,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         C[0] is set to the least value of |A[n]| for 0 <= n < N.
@@ -4097,13 +4102,13 @@ extern void vDSP_minv(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_minvD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         C[0] is set to the least value of A[n] for 0 <= n < N.
@@ -4117,14 +4122,14 @@ extern void vDSP_minvi(
     float       *__C,
     vDSP_Length *__I,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_minviD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Length  *__I,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         C[0] is set to the least value of A[n] for 0 <= n < N.
@@ -4140,7 +4145,7 @@ extern void vDSP_mmov(
     vDSP_Length  __N,
     vDSP_Length  __TA,
     vDSP_Length  __TC)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_mmovD(
     const double *__A,
     double       *__C,
@@ -4148,7 +4153,7 @@ extern void vDSP_mmovD(
     vDSP_Length   __N,
     vDSP_Length   __TA,
     vDSP_Length   __TC)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:
 
             This routine does not have strides.
@@ -4170,13 +4175,13 @@ extern void vDSP_mvessq(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_mvessqD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4193,7 +4198,7 @@ extern void vDSP_nzcros(
     vDSP_Length *__C,
     vDSP_Length *__D,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_nzcrosD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -4201,7 +4206,7 @@ extern void vDSP_nzcrosD(
     vDSP_Length  *__C,
     vDSP_Length  *__D,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         Let S be the number of times the sign bit changes in the sequence A[0],
@@ -4224,14 +4229,14 @@ extern void vDSP_polar(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_polarD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  Strides are shown explicitly in pseudocode.
 
         These compute:
@@ -4253,14 +4258,14 @@ extern void vDSP_rect(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_rectD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  Strides are shown explicitly in pseudocode.
 
         These compute:
@@ -4281,13 +4286,13 @@ extern void vDSP_rmsqv(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_rmsqvD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4304,7 +4309,7 @@ extern void vDSP_svdiv(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_svdivD(
     const double *__A,
     const double *__B,
@@ -4312,7 +4317,7 @@ extern void vDSP_svdivD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4331,13 +4336,13 @@ extern void vDSP_sve(
     vDSP_Stride  __I,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_sveD(
     const double *__A,
     vDSP_Stride   __I,
     double       *__C,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4352,13 +4357,13 @@ extern void vDSP_svemg(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_svemgD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4373,13 +4378,13 @@ extern void vDSP_svesq(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_svesqD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4395,14 +4400,14 @@ extern void vDSP_sve_svesq(
     float        *__Sum,
     float        *__SumOfSquares,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+        API_AVAILABLE(macos(10.8), ios(6.0));
 extern void vDSP_sve_svesqD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__Sum,
     double       *__SumOfSquares,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+        API_AVAILABLE(macos(10.8), ios(6.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4428,7 +4433,7 @@ extern void vDSP_sve_svesqD(
         float        *__Mean,
         float        *__StandardDeviation,
         vDSP_Length   __N)
-            __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+            API_AVAILABLE(macos(10.8), ios(6.0));
     extern void vDSP_normalizeD(
         const double *__A,
         vDSP_Stride   __IA,
@@ -4437,7 +4442,7 @@ extern void vDSP_sve_svesqD(
         double       *__Mean,
         double       *__StandardDeviation,
         vDSP_Length   __N)
-            __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+            API_AVAILABLE(macos(10.8), ios(6.0));
 #else
     extern void vDSP_normalize(
         const float       *__A,
@@ -4447,7 +4452,7 @@ extern void vDSP_sve_svesqD(
         float             *__Mean,
         float             *__StandardDeviation,
         vDSP_Length        __N)
-            __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+            API_AVAILABLE(macos(10.8), ios(6.0));
     extern void vDSP_normalizeD(
         const double       *__A,
         vDSP_Stride         __IA,
@@ -4456,7 +4461,7 @@ extern void vDSP_sve_svesqD(
         double             *__Mean,
         double             *__StandardDeviation,
         vDSP_Length         __N)
-            __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+            API_AVAILABLE(macos(10.8), ios(6.0));
 #endif
     /*  Maps:  The default maps are used.
 
@@ -4481,13 +4486,13 @@ extern void vDSP_svs(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_svsD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4509,7 +4514,7 @@ extern void vDSP_vaam(
     float       *__E,
     vDSP_Stride  __IE,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vaamD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -4522,7 +4527,7 @@ extern void vDSP_vaamD(
     double       *__E,
     vDSP_Stride   __IE,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4545,7 +4550,7 @@ extern void vDSP_vasbm(
     float       *__E,
     vDSP_Stride  __IE,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vasbmD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -4558,7 +4563,7 @@ extern void vDSP_vasbmD(
     double       *__E,
     vDSP_Stride   __IE,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4578,7 +4583,7 @@ extern void vDSP_vasm(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vasmD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -4588,7 +4593,7 @@ extern void vDSP_vasmD(
     double       *__D,
     vDSP_Stride   __ID,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4606,7 +4611,7 @@ extern void vDSP_vavlin(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vavlinD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -4614,7 +4619,7 @@ extern void vDSP_vavlinD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4633,7 +4638,7 @@ extern void vDSP_vclip(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vclipD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -4642,7 +4647,7 @@ extern void vDSP_vclipD(
     double       *__D,
     vDSP_Stride   __ID,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4667,7 +4672,7 @@ extern void vDSP_vclipc(
     vDSP_Length  __N,
     vDSP_Length *__NLow,
     vDSP_Length *__NHigh)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vclipcD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -4678,7 +4683,7 @@ extern void vDSP_vclipcD(
     vDSP_Length   __N,
     vDSP_Length  *__NLow,
     vDSP_Length  *__NHigh)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4699,12 +4704,12 @@ extern void vDSP_vclr(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vclrD(
     double      *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4723,7 +4728,7 @@ extern void vDSP_vcmprs(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vcmprsD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -4732,7 +4737,7 @@ extern void vDSP_vcmprsD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4753,7 +4758,7 @@ extern void vDSP_vdbcon(
     vDSP_Stride  __IC,
     vDSP_Length  __N,
     unsigned int __F)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vdbconD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -4762,7 +4767,7 @@ extern void vDSP_vdbconD(
     vDSP_Stride   __IC,
     vDSP_Length   __N,
     unsigned int  __F)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4786,7 +4791,7 @@ extern void vDSP_vdist(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vdistD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -4795,7 +4800,7 @@ extern void vDSP_vdistD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4816,7 +4821,7 @@ extern void vDSP_venvlp(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_venvlpD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -4827,7 +4832,7 @@ extern void vDSP_venvlpD(
     double       *__D,
     vDSP_Stride   __ID,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4847,84 +4852,84 @@ extern void vDSP_vfix8(
     char        *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfix8D(
     const double *__A,
     vDSP_Stride   __IA,
     char         *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfix16(
     const float *__A,
     vDSP_Stride  __IA,
     short       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfix16D(
     const double *__A,
     vDSP_Stride   __IA,
     short        *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfix32(
     const float *__A,
     vDSP_Stride  __IA,
     int         *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfix32D(
     const double *__A,
     vDSP_Stride   __IA,
     int          *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixu8(
     const float   *__A,
     vDSP_Stride    __IA,
     unsigned char *__C,
     vDSP_Stride    __IC,
     vDSP_Length    __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixu8D(
     const double  *__A,
     vDSP_Stride    __IA,
     unsigned char *__C,
     vDSP_Stride    __IC,
     vDSP_Length    __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixu16(
     const float    *__A,
     vDSP_Stride     __IA,
     unsigned short *__C,
     vDSP_Stride     __IC,
     vDSP_Length     __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixu16D(
     const double   *__A,
     vDSP_Stride     __IA,
     unsigned short *__C,
     vDSP_Stride     __IC,
     vDSP_Length     __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixu32(
     const float  *__A,
     vDSP_Stride   __IA,
     unsigned int *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixu32D(
     const double *__A,
     vDSP_Stride   __IA,
     unsigned int *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -4944,7 +4949,7 @@ extern void vDSP_vsmfixu24(
     vDSP_uint24 *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
     
 /*  Vector convert single precision to 24-bit unsigned integer with pre-scaling.
     The scaled value is rounded toward zero.
@@ -4956,7 +4961,7 @@ extern void vDSP_vsmfix24(
    vDSP_int24  *__C,
    vDSP_Stride  __IC,
    vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
     /*  Maps:  The default maps are used.
     
         These compute:
@@ -4976,14 +4981,14 @@ extern void vDSP_vfltu24(
    float             *__C,
    vDSP_Stride        __IC,
    vDSP_Length        __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 extern void vDSP_vflt24(
   const vDSP_int24 *__A,
   vDSP_Stride       __IA,
   float            *__C,
   vDSP_Stride       __IC,
   vDSP_Length       __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
     /*  Maps:  The default maps are used.
     
         These compute:
@@ -5001,7 +5006,7 @@ extern void vDSP_vfltsmu24(
      float             *__C,
      vDSP_Stride        __IC,
      vDSP_Length        __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 extern void vDSP_vfltsm24(
     const vDSP_int24 *__A,
     vDSP_Stride       __IA,
@@ -5009,7 +5014,7 @@ extern void vDSP_vfltsm24(
     float            *__C,
     vDSP_Stride       __IC,
     vDSP_Length       __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
     /*  Maps:  The default maps are used.
     
         These compute:
@@ -5026,84 +5031,84 @@ extern void vDSP_vfixr8(
     char        *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixr8D(
     const double *__A,
     vDSP_Stride   __IA,
     char         *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixr16(
     const float *__A,
     vDSP_Stride  __IA,
     short       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixr16D(
     const double *__A,
     vDSP_Stride   __IA,
     short        *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixr32(
     const float *__A,
     vDSP_Stride  __IA,
     int         *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixr32D(
     const double *__A,
     vDSP_Stride   __IA,
     int          *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixru8(
     const float   *__A,
     vDSP_Stride    __IA,
     unsigned char *__C,
     vDSP_Stride    __IC,
     vDSP_Length    __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixru8D(
     const double  *__A,
     vDSP_Stride    __IA,
     unsigned char *__C,
     vDSP_Stride    __IC,
     vDSP_Length    __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixru16(
     const float    *__A,
     vDSP_Stride     __IA,
     unsigned short *__C,
     vDSP_Stride     __IC,
     vDSP_Length     __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixru16D(
     const double   *__A,
     vDSP_Stride     __IA,
     unsigned short *__C,
     vDSP_Stride     __IC,
     vDSP_Length     __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixru32(
     const float  *__A,
     vDSP_Stride   __IA,
     unsigned int *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfixru32D(
     const double *__A,
     vDSP_Stride   __IA,
     unsigned int *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -5123,84 +5128,84 @@ extern void vDSP_vflt8(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vflt8D(
     const char  *__A,
     vDSP_Stride  __IA,
     double      *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vflt16(
     const short *__A,
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vflt16D(
     const short *__A,
     vDSP_Stride  __IA,
     double      *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vflt32(
     const int   *__A,
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vflt32D(
     const int   *__A,
     vDSP_Stride  __IA,
     double      *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfltu8(
     const unsigned char *__A,
     vDSP_Stride          __IA,
     float               *__C,
     vDSP_Stride          __IC,
     vDSP_Length          __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfltu8D(
     const unsigned char *__A,
     vDSP_Stride          __IA,
     double              *__C,
     vDSP_Stride          __IC,
     vDSP_Length          __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfltu16(
     const unsigned short *__A,
     vDSP_Stride           __IA,
     float                *__C,
     vDSP_Stride           __IC,
     vDSP_Length           __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfltu16D(
     const unsigned short *__A,
     vDSP_Stride           __IA,
     double               *__C,
     vDSP_Stride           __IC,
     vDSP_Length           __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfltu32(
     const unsigned int *__A,
     vDSP_Stride         __IA,
     float              *__C,
     vDSP_Stride         __IC,
     vDSP_Length         __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfltu32D(
     const unsigned int *__A,
     vDSP_Stride         __IA,
     double             *__C,
     vDSP_Stride         __IC,
     vDSP_Length         __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -5217,14 +5222,14 @@ extern void vDSP_vfrac(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vfracD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -5242,7 +5247,7 @@ extern void vDSP_vgathr(
     float             *__C,
     vDSP_Stride        __IC,
     vDSP_Length        __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vgathrD(
     const double      *__A,
     const vDSP_Length *__B,
@@ -5250,7 +5255,7 @@ extern void vDSP_vgathrD(
     double            *__C,
     vDSP_Stride        __IC,
     vDSP_Length        __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.  Note that A has unit stride.
 
         These compute:
@@ -5267,14 +5272,14 @@ extern void vDSP_vgathra(
     float                              *__C,
     vDSP_Stride                         __IC,
     vDSP_Length                         __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vgathraD(
     const double * __nonnull * __nonnull __A,
     vDSP_Stride                          __IA,
     double                              *__C,
     vDSP_Stride                          __IC,
     vDSP_Length                          __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -5291,14 +5296,14 @@ extern void vDSP_vgen(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vgenD(
     const double *__A,
     const double *__B,
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -5318,7 +5323,7 @@ extern void vDSP_vgenp(
     vDSP_Stride  __IC,
     vDSP_Length  __N,
     vDSP_Length  __M)  // Length of A and of B.
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vgenpD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -5328,7 +5333,7 @@ extern void vDSP_vgenpD(
     vDSP_Stride   __IC,
     vDSP_Length   __N,
     vDSP_Length   __M)  // Length of A and of B.
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -5353,7 +5358,7 @@ extern void vDSP_viclip(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_viclipD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -5362,7 +5367,7 @@ extern void vDSP_viclipD(
     double       *__D,
     vDSP_Stride   __ID,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -5390,7 +5395,7 @@ extern void vDSP_vindex(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vindexD(
     const double *__A,
     const double *__B,
@@ -5398,7 +5403,7 @@ extern void vDSP_vindexD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -5418,7 +5423,7 @@ extern void vDSP_vintb(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vintbD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -5428,7 +5433,7 @@ extern void vDSP_vintbD(
     double       *__D,
     vDSP_Stride   __ID,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -5447,7 +5452,7 @@ extern void vDSP_vlim(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vlimD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -5456,7 +5461,7 @@ extern void vDSP_vlimD(
     double       *__D,
     vDSP_Stride   __ID,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -5478,7 +5483,7 @@ extern void vDSP_vlint(
     vDSP_Stride  __IC,
     vDSP_Length  __N,
     vDSP_Length  __M)  // Nominal length of A, but not used.
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vlintD(
     const double *__A,
     const double *__B,
@@ -5487,7 +5492,7 @@ extern void vDSP_vlintD(
     vDSP_Stride   __IC,
     vDSP_Length   __N,
     vDSP_Length   __M)  // Nominal length of A, but not used.
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -5510,7 +5515,7 @@ extern void vDSP_vmax(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vmaxD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -5519,7 +5524,7 @@ extern void vDSP_vmaxD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -5538,7 +5543,7 @@ extern void vDSP_vmaxmg(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vmaxmgD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -5547,7 +5552,7 @@ extern void vDSP_vmaxmgD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -5565,7 +5570,7 @@ extern void vDSP_vswmax(
     vDSP_Stride  __IC,
     vDSP_Length  __N,
     vDSP_Length  __WindowLength)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
 extern void vDSP_vswmaxD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -5573,7 +5578,7 @@ extern void vDSP_vswmaxD(
     vDSP_Stride   __IC,
     vDSP_Length  __N,
     vDSP_Length  __WindowLength)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
     /*  Maps:  The default maps are used.
 
         These compute the maximum value within a window to the input vector.
@@ -5601,7 +5606,7 @@ extern void vDSP_vmin(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vminD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -5610,7 +5615,7 @@ extern void vDSP_vminD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -5629,7 +5634,7 @@ extern void vDSP_vminmg(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vminmgD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -5638,7 +5643,7 @@ extern void vDSP_vminmgD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -5661,7 +5666,7 @@ extern void vDSP_vmma(
     float       *__E,
     vDSP_Stride  __IE,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vmmaD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -5674,7 +5679,7 @@ extern void vDSP_vmmaD(
     double       *__E,
     vDSP_Stride   __IE,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -5697,7 +5702,7 @@ extern void vDSP_vmmsb(
     float       *__E,
     vDSP_Stride  __IE,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vmmsbD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -5710,7 +5715,7 @@ extern void vDSP_vmmsbD(
     double       *__E,
     vDSP_Stride   __IE,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -5730,7 +5735,7 @@ extern void vDSP_vmsa(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vmsaD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -5740,7 +5745,7 @@ extern void vDSP_vmsaD(
     double       *__D,
     vDSP_Stride   __ID,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -5761,7 +5766,7 @@ extern void vDSP_vmsb(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vmsbD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -5772,7 +5777,7 @@ extern void vDSP_vmsbD(
     double       *__D,
     vDSP_Stride   __ID,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -5789,14 +5794,14 @@ extern void vDSP_vnabs(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vnabsD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -5813,14 +5818,14 @@ extern void vDSP_vneg(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vnegD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -5840,7 +5845,7 @@ extern void vDSP_vpoly(
     vDSP_Stride  __IC,
     vDSP_Length  __N,
     vDSP_Length  __P)  // P is the polynomial degree.
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vpolyD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -5850,7 +5855,7 @@ extern void vDSP_vpolyD(
     vDSP_Stride   __IC,
     vDSP_Length   __N,
     vDSP_Length   __P)  // P is the polynomial degree.
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -5873,7 +5878,7 @@ extern void vDSP_vpythg(
     float       *__E,
     vDSP_Stride  __IE,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vpythgD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -5886,7 +5891,7 @@ extern void vDSP_vpythgD(
     double       *__E,
     vDSP_Stride   __IE,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -5905,7 +5910,7 @@ extern void vDSP_vqint(
     vDSP_Stride  __IC,
     vDSP_Length  __N,
     vDSP_Length  __M)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vqintD(
     const double *__A,
     const double *__B,
@@ -5914,7 +5919,7 @@ extern void vDSP_vqintD(
     vDSP_Stride   __IC,
     vDSP_Length   __N,
     vDSP_Length   __M)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -5936,14 +5941,14 @@ extern void vDSP_vramp(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vrampD(
     const double *__A,
     const double *__B,
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -5961,7 +5966,7 @@ extern void vDSP_vrsum(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vrsumD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -5969,7 +5974,7 @@ extern void vDSP_vrsumD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -5986,12 +5991,12 @@ extern void vDSP_vrvrs(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vrvrsD(
     double      *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -6013,7 +6018,7 @@ extern void vDSP_vsbm(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vsbmD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -6024,7 +6029,7 @@ extern void vDSP_vsbmD(
     double       *__D,
     vDSP_Stride   __ID,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -6047,7 +6052,7 @@ extern void vDSP_vsbsbm(
     float       *__E,
     vDSP_Stride  __IE,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vsbsbmD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -6060,7 +6065,7 @@ extern void vDSP_vsbsbmD(
     double       *__E,
     vDSP_Stride   __IE,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -6080,7 +6085,7 @@ extern void vDSP_vsbsm(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vsbsmD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -6090,7 +6095,7 @@ extern void vDSP_vsbsmD(
     double       *__D,
     vDSP_Stride   __ID,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -6108,7 +6113,7 @@ extern void vDSP_vsimps(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vsimpsD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -6116,7 +6121,7 @@ extern void vDSP_vsimpsD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -6138,7 +6143,7 @@ extern void vDSP_vsma(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vsmaD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -6148,7 +6153,7 @@ extern void vDSP_vsmaD(
     double       *__D,
     vDSP_Stride   __ID,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -6167,7 +6172,7 @@ extern void vDSP_vsmsa(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vsmsaD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -6176,7 +6181,7 @@ extern void vDSP_vsmsaD(
     double       *__D,
     vDSP_Stride   __ID,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -6196,7 +6201,7 @@ extern void vDSP_vsmsb(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vsmsbD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -6206,7 +6211,7 @@ extern void vDSP_vsmsbD(
     double       *__D,
     vDSP_Stride   __ID,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -6227,7 +6232,7 @@ extern void vDSP_vsmsma(
     float       *__E,
     vDSP_Stride  __IE,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+        API_AVAILABLE(macos(10.9), ios(6.0));
 extern void vDSP_vsmsmaD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -6238,7 +6243,7 @@ extern void vDSP_vsmsmaD(
     double       *__E,
     vDSP_Stride   __IE,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
     /*  Maps:  The default maps are used.
         
         This computes:
@@ -6253,12 +6258,12 @@ extern void vDSP_vsort(
     float       *__C,
     vDSP_Length  __N,
     int          __Order)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vsortD(
     double      *__C,
     vDSP_Length  __N,
     int          __Order)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  If Order is +1, C is sorted in ascending order.
         If Order is -1, C is sorted in descending order.
     */
@@ -6271,14 +6276,14 @@ extern void vDSP_vsorti(
     vDSP_Length * __nullable __Temporary,
     vDSP_Length  __N,
     int          __Order)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vsortiD(
     const double *__C,
     vDSP_Length  *__I,
     vDSP_Length  * __nullable __Temporary,
     vDSP_Length   __N,
     int           __Order)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  No strides are used; arrays map directly to memory.
 
         I contains indices into C.
@@ -6297,14 +6302,14 @@ extern void vDSP_vswap(
     float       *__B,
     vDSP_Stride  __IB,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vswapD(
     double      *__A,
     vDSP_Stride  __IA,
     double      *__B,
     vDSP_Stride  __IB,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -6322,7 +6327,7 @@ extern void vDSP_vswsum(
     vDSP_Stride  __IC,
     vDSP_Length  __N,
     vDSP_Length  __P) // Length of window.
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vswsumD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -6330,7 +6335,7 @@ extern void vDSP_vswsumD(
     vDSP_Stride   __IC,
     vDSP_Length   __N,
     vDSP_Length   __P) // Length of window.
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -6353,7 +6358,7 @@ extern void vDSP_vtabi(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vtabiD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -6364,7 +6369,7 @@ extern void vDSP_vtabiD(
     double       *__D,
     vDSP_Stride   __ID,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -6394,7 +6399,7 @@ extern void vDSP_vthr(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vthrD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -6402,7 +6407,7 @@ extern void vDSP_vthrD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -6423,7 +6428,7 @@ extern void vDSP_vthres(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vthresD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -6431,7 +6436,7 @@ extern void vDSP_vthresD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -6453,7 +6458,7 @@ extern void vDSP_vthrsc(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vthrscD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -6462,7 +6467,7 @@ extern void vDSP_vthrscD(
     double       *__D,
     vDSP_Stride   __ID,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -6484,7 +6489,7 @@ extern void vDSP_vtmerg(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vtmergD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -6493,7 +6498,7 @@ extern void vDSP_vtmergD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -6511,7 +6516,7 @@ extern void vDSP_vtrapz(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vtrapzD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -6519,7 +6524,7 @@ extern void vDSP_vtrapzD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
         
         These compute:
@@ -6539,7 +6544,7 @@ extern void vDSP_wiener(
     float       *__P,
     int          __Flag,
     int         *__Error)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_wienerD(
     vDSP_Length   __L,
     const double *__A,
@@ -6548,7 +6553,7 @@ extern void vDSP_wienerD(
     double       *__P,
     int           __Flag,
     int          *__Error)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 
 
 /*  vDSP_FFT16_copv and vDSP_FFT32_copv perform 16- and 32-element FFTs on
@@ -6593,10 +6598,10 @@ extern void vDSP_wienerD(
 */
 void vDSP_FFT16_copv(float *__Output, const float *__Input,
     FFTDirection __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 void vDSP_FFT32_copv(float *__Output, const float *__Input,
     FFTDirection __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_FFT16_zopv and vDSP_FFT32_zopv perform 16- and 32-element FFTs on
@@ -6644,12 +6649,12 @@ void vDSP_FFT16_zopv(
           float *__Or,       float *__Oi,
     const float *__Ir, const float *__Ii,
     FFTDirection __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 void vDSP_FFT32_zopv(
           float *__Or,       float *__Oi,
     const float *__Ir, const float *__Ii,
     FFTDirection __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  How to use the Discrete Fourier Transform (DFT) and Discrete Cosine
@@ -6808,7 +6813,7 @@ typedef vDSP_ENUM(int, vDSP_DFT_Direction)
 __nullable vDSP_DFT_Setup vDSP_DFT_CreateSetup(
     __nullable vDSP_DFT_Setup __Previous,
     vDSP_Length               __Length)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_DFT_zop_CreateSetup is a DFT setup routine.  It creates a setup object
@@ -6902,12 +6907,12 @@ __nullable vDSP_DFT_Setup vDSP_DFT_zop_CreateSetup(
     __nullable vDSP_DFT_Setup __Previous,
     vDSP_Length               __Length,
     vDSP_DFT_Direction        __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.7), ios(4.0));
 __nullable vDSP_DFT_SetupD vDSP_DFT_zop_CreateSetupD(
     __nullable vDSP_DFT_SetupD __Previous,
     vDSP_Length                __Length,
     vDSP_DFT_Direction         __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 
 /*  vDSP_DFT_zrop_CreateSetup and vDSP_DFT_zrop_CreateSetupD are DFT setup
     routines.  Each creates a setup object for use with the corresponding
@@ -7031,11 +7036,11 @@ __nullable vDSP_DFT_SetupD vDSP_DFT_zop_CreateSetupD(
 __nullable vDSP_DFT_Setup vDSP_DFT_zrop_CreateSetup(
     __nullable vDSP_DFT_Setup __Previous,
     vDSP_Length __Length, vDSP_DFT_Direction __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.7), ios(4.0));
 __nullable vDSP_DFT_SetupD vDSP_DFT_zrop_CreateSetupD(
     __nullable vDSP_DFT_SetupD __Previous,
     vDSP_Length __Length, vDSP_DFT_Direction __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 
 
 /*  vDSP_DFT_DestroySetup and vDSP_DFT_DestroySetupD are DFT destroy routines.
@@ -7063,9 +7068,9 @@ __nullable vDSP_DFT_SetupD vDSP_DFT_zrop_CreateSetupD(
     might be executing.
 */
 void vDSP_DFT_DestroySetup(__nullable vDSP_DFT_Setup __Setup)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 void vDSP_DFT_DestroySetupD(__nullable vDSP_DFT_SetupD __Setup)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 
 
 /*  vDSP_DFT_zop is a DFT execution routine.  It performs a DFT, with the aid
@@ -7159,7 +7164,7 @@ void vDSP_DFT_zop(
     const float *__Ir, const float *__Ii, vDSP_Stride __Is,
           float *__Or,       float *__Oi, vDSP_Stride __Os,
     vDSP_DFT_Direction __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_DFT_Execute and vDSP_DFT_ExecuteD are DFT execution routines.  They
@@ -7214,12 +7219,12 @@ void vDSP_DFT_Execute(
     const struct vDSP_DFT_SetupStruct *__Setup,
     const float *__Ir,  const float *__Ii,
           float *__Or,        float *__Oi)
-        __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.7), ios(4.0));
 void vDSP_DFT_ExecuteD(
     const struct vDSP_DFT_SetupStructD *__Setup,
     const double *__Ir,  const double *__Ii,
           double *__Or,        double *__Oi)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 
 
 /*  vDSP_DCT_CreateSetup is a DCT setup routine.  It creates a setup object
@@ -7320,7 +7325,7 @@ __nullable vDSP_DFT_Setup vDSP_DCT_CreateSetup(
     __nullable vDSP_DFT_Setup __Previous,
     vDSP_Length               __Length,
     vDSP_DCT_Type             __Type)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+        API_AVAILABLE(macos(10.9), ios(6.0));
 
 
 /*  vDSP_DCT_Execute is a DCT execution routine.  It performs a DCT, with the
@@ -7352,7 +7357,7 @@ void vDSP_DCT_Execute(
     const struct vDSP_DFT_SetupStruct *__Setup,
     const float                       *__Input,
     float                             *__Output)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+        API_AVAILABLE(macos(10.9), ios(6.0));
 
 
 /*  vDSP_dotpr2, vector single-precision stereo dot product.
@@ -7412,7 +7417,7 @@ void vDSP_dotpr2(
     float       *__C0,
     float       *__C1,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_dotpr2D, vector double-precision stereo dot product.
@@ -7472,7 +7477,7 @@ void vDSP_dotpr2D(
     double       *__C0,
     double       *__C1,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
 
 
 /*  vDSP_dotpr_s1_15, vector integer 1.15 format dot product.
@@ -7521,7 +7526,7 @@ void vDSP_dotpr_s1_15(
     const short int *__B, vDSP_Stride __IB,
     short int       *__C,
     vDSP_Length      __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_dotpr2_s1_15, vector integer 1.15 format stereo dot product.
@@ -7585,7 +7590,7 @@ void vDSP_dotpr2_s1_15(
     short int       *__C0,
     short int       *__C1,
     vDSP_Length      __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_dotpr_s8_24, vector integer 8.24 format dot product.
@@ -7634,7 +7639,7 @@ void vDSP_dotpr_s8_24(
     const int  *__B, vDSP_Stride __IB,
     int        *__C,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_dotpr2_s8_24, vector integer 8.24 format stereo dot product.
@@ -7698,7 +7703,7 @@ void vDSP_dotpr2_s8_24(
     int        *__C0,
     int        *__C1,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_vaddsub, vector single-precision add and subtract.
@@ -7744,7 +7749,7 @@ void vDSP_vaddsub(
           float *__O0, vDSP_Stride __O0S,
           float *__O1, vDSP_Stride __O1S,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
 
 
 /*  vDSP_vaddsubD, vector double-precision add and subtract.
@@ -7790,7 +7795,7 @@ void vDSP_vaddsubD(
           double *__O0, vDSP_Stride __O0S,
           double *__O1, vDSP_Stride __O1S,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
 
 
 /*  vDSP_vrampmul, vector single-precision vramp and multiply.
@@ -7843,7 +7848,7 @@ void vDSP_vrampmul(
     const float *__Step,
     float *__O, vDSP_Stride __OS,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_vrampmulD, vector double-precision vramp and multiply.
@@ -7896,7 +7901,7 @@ void vDSP_vrampmulD(
     const double *__Step,
     double *__O, vDSP_Stride __OS,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
 
 
 /*  vDSP_vrampmuladd, vector single-precision vramp, multiply and add.
@@ -7949,7 +7954,7 @@ void vDSP_vrampmuladd(
     const float *__Step,
     float *__O, vDSP_Stride __OS,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_vrampmuladdD, vector double-precision vramp, multiply and add.
@@ -8002,7 +8007,7 @@ void vDSP_vrampmuladdD(
     const double *__Step,
           double *__O, vDSP_Stride __OS,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
 
 
 /*  vDSP_vrampmul2, stereo vector single-precision vramp and multiply.
@@ -8063,7 +8068,7 @@ void vDSP_vrampmul2(
     const float *__Step,
     float *__O0, float *__O1, vDSP_Stride __OS,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_vrampmul2D, stereo vector double-precision vramp and multiply.
@@ -8124,7 +8129,7 @@ void vDSP_vrampmul2D(
     const double *__Step,
           double *__O0, double *__O1, vDSP_Stride __OS,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
 
 
 /*  vDSP_vrampmuladd2, stereo vector single-precision vramp, multiply and add.
@@ -8185,7 +8190,7 @@ void vDSP_vrampmuladd2(
     const float *__Step,
     float *__O0, float *__O1, vDSP_Stride __OS,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_vrampmuladd2D, stereo vector double-precision vramp, multiply and add.
@@ -8246,7 +8251,7 @@ void vDSP_vrampmuladd2D(
     const double *__Step,
     double *__O0, double *__O1, vDSP_Stride __OS,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
 
 
 /*  vDSP_vrampmul_s1_15, vector integer 1.15 format vramp and multiply.
@@ -8301,7 +8306,7 @@ void vDSP_vrampmul_s1_15(
     const short int *__Step,
     short int *__O, vDSP_Stride __OS,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_vrampmuladd_s1_15, vector integer 1.15 format vramp, multiply and add.
@@ -8356,7 +8361,7 @@ void vDSP_vrampmuladd_s1_15(
     const short int *__Step,
     short int *__O, vDSP_Stride __OS,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_vrampmul2_s1_15, stereo vector integer 1.15 format vramp and multiply.
@@ -8420,7 +8425,7 @@ void vDSP_vrampmul2_s1_15(
     const short int *__Step,
     short int *__O0, short int *__O1, vDSP_Stride __OS,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_vrampmuladd2_s1_15, stereo vector integer 1.15 format vramp, multiply
@@ -8485,7 +8490,7 @@ void vDSP_vrampmuladd2_s1_15(
     const short int *__Step,
     short int *__O0, short int *__O1, vDSP_Stride __OS,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_vrampmul_s8_24, vector integer 8.24 format vramp and multiply.
@@ -8540,7 +8545,7 @@ void vDSP_vrampmul_s8_24(
     const int *__Step,
     int *__O, vDSP_Stride __OS,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_vrampmuladd_s8_24, vector integer 8.24 format vramp, multiply and add.
@@ -8595,7 +8600,7 @@ void vDSP_vrampmuladd_s8_24(
     const int *__Step,
     int *__O, vDSP_Stride __OS,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_vrampmul2_s8_24, stereo vector integer 8.24 format vramp and multiply.
@@ -8659,7 +8664,7 @@ void vDSP_vrampmul2_s8_24(
     const int *__Step,
     int *__O0, int *__O1, vDSP_Stride __OS,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  vDSP_vrampmuladd2_s8_24, stereo vector integer 8.24 format vramp, multiply
@@ -8724,7 +8729,7 @@ void vDSP_vrampmuladd2_s8_24(
     const int *__Step,
     int *__O0, int *__O1, vDSP_Stride __OS,
     vDSP_Length __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.6), ios(4.0));
 
 
 /*  When compiling for i386 on OS X 10.11 or later, the old vDSP routine names
@@ -8735,30 +8740,36 @@ void vDSP_vrampmuladd2_s8_24(
 extern FFTSetup create_fftsetup(
     vDSP_Length __Log2n,
     FFTRadix    __Radix)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+		API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+    API_UNAVAILABLE(ios, watchos, tvos);
+
 extern void destroy_fftsetup(FFTSetup __setup)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+		API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+    API_UNAVAILABLE(ios, watchos, tvos);
 extern void ctoz(
     const DSPComplex      *__C,
     vDSP_Stride            __IC,
     const DSPSplitComplex *__Z,
     vDSP_Stride            __IZ,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+		API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+    API_UNAVAILABLE(ios, watchos, tvos);
 extern void ztoc(
     const DSPSplitComplex *__Z,
     vDSP_Stride            __IZ,
     DSPComplex            *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft_zip(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft_zipt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
@@ -8766,7 +8777,8 @@ extern void fft_zipt(
     const DSPSplitComplex *__Buffer,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft_zop(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -8775,7 +8787,8 @@ extern void fft_zop(
     vDSP_Stride            __IC,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft_zopt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -8785,14 +8798,16 @@ extern void fft_zopt(
     const DSPSplitComplex *__Buffer,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft_zrip(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft_zript(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
@@ -8800,7 +8815,8 @@ extern void fft_zript(
     const DSPSplitComplex *__Buffer,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft_zrop(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -8809,7 +8825,8 @@ extern void fft_zrop(
     vDSP_Stride            __IC,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft_zropt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -8819,7 +8836,8 @@ extern void fft_zropt(
     const DSPSplitComplex *__Buffer,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft2d_zip(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
@@ -8828,7 +8846,8 @@ extern void fft2d_zip(
     vDSP_Length            __Log2N0,
     vDSP_Length            __Log2N1,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft2d_zipt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
@@ -8838,7 +8857,8 @@ extern void fft2d_zipt(
     vDSP_Length            __Log2N0,
     vDSP_Length            __Log2N1,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft2d_zop(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -8850,7 +8870,8 @@ extern void fft2d_zop(
     vDSP_Length            __Log2N0,
     vDSP_Length            __Log2N1,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft2d_zopt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -8863,7 +8884,8 @@ extern void fft2d_zopt(
     vDSP_Length            __Log2N0,
     vDSP_Length            __Log2N1,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft2d_zrip(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
@@ -8872,7 +8894,8 @@ extern void fft2d_zrip(
     vDSP_Length            __Log2N0,
     vDSP_Length            __Log2N1,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft2d_zript(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
@@ -8882,7 +8905,8 @@ extern void fft2d_zript(
     vDSP_Length            __Log2N0,
     vDSP_Length            __Log2N1,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft2d_zrop(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -8894,7 +8918,8 @@ extern void fft2d_zrop(
     vDSP_Length            __Log2N0,
     vDSP_Length            __Log2N1,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft2d_zropt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -8907,7 +8932,8 @@ extern void fft2d_zropt(
     vDSP_Length            __Log2N0,
     vDSP_Length            __Log2N1,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft3_zop(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -8916,7 +8942,8 @@ extern void fft3_zop(
     vDSP_Stride            __IC,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_9_0);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11), ios(4.0, 9.0))
+        API_UNAVAILABLE(watchos, tvos);
 extern void fft5_zop(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -8925,7 +8952,8 @@ extern void fft5_zop(
     vDSP_Stride            __IC,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_9_0);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11), ios(4.0, 9.0))
+        API_UNAVAILABLE(watchos, tvos);
 extern void fftm_zop(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -8937,7 +8965,8 @@ extern void fftm_zop(
     vDSP_Length            __Log2N,
     vDSP_Length            __M,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fftm_zopt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -8950,7 +8979,8 @@ extern void fftm_zopt(
     vDSP_Length            __Log2N,
     vDSP_Length            __M,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fftm_zip(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
@@ -8959,7 +8989,8 @@ extern void fftm_zip(
     vDSP_Length            __Log2N,
     vDSP_Length            __M,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fftm_zipt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
@@ -8969,7 +9000,8 @@ extern void fftm_zipt(
     vDSP_Length            __Log2N,
     vDSP_Length            __M,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fftm_zrop(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -8981,7 +9013,8 @@ extern void fftm_zrop(
     vDSP_Length            __Log2N,
     vDSP_Length            __M,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fftm_zropt(
     FFTSetup               __Setup,
     const DSPSplitComplex *__A,
@@ -8994,7 +9027,8 @@ extern void fftm_zropt(
     vDSP_Length            __Log2N,
     vDSP_Length            __M,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fftm_zrip(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
@@ -9003,7 +9037,8 @@ extern void fftm_zrip(
     vDSP_Length            __Log2N,
     vDSP_Length            __M,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fftm_zript(
     FFTSetup               __Setup,
     const DSPSplitComplex *__C,
@@ -9013,21 +9048,24 @@ extern void fftm_zript(
     vDSP_Length            __Log2N,
     vDSP_Length            __M,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void f3x3(
     const float *__A,
     vDSP_Length  __NR,
     vDSP_Length  __NC,
     const float *__F,
     float       *__C)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void f5x5(
     const float *__A,
     vDSP_Length  __NR,
     vDSP_Length  __NC,
     const float *__F,
     float       *__C)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void conv(
     const float *__A,  // Input signal.
     vDSP_Stride  __IA,
@@ -9037,7 +9075,8 @@ extern void conv(
     vDSP_Stride  __IC,
     vDSP_Length  __N,  // Output length.
     vDSP_Length  __P)  // Filter length.
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void dotpr(
     const float *__A,
     vDSP_Stride  __IA,
@@ -9045,7 +9084,8 @@ extern void dotpr(
     vDSP_Stride  __IB,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void imgfir(
     const float *__A,  // Input.
     vDSP_Length  __NR, // Number of image rows.
@@ -9054,7 +9094,8 @@ extern void imgfir(
     float       *__C,  // Output.
     vDSP_Length  __P,  // Number of filter rows.
     vDSP_Length  __Q)  // Number of filter columns.
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void mtrans(
     const float *__A,
     vDSP_Stride  __IA,
@@ -9062,7 +9103,8 @@ extern void mtrans(
     vDSP_Stride  __IC,
     vDSP_Length  __M,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void mmul(
     const float *__A,
     vDSP_Stride  __IA,
@@ -9073,7 +9115,8 @@ extern void mmul(
     vDSP_Length  __M,
     vDSP_Length  __N,
     vDSP_Length  __P)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void vadd(
     const float *__A,
     vDSP_Stride  __IA,
@@ -9082,7 +9125,8 @@ extern void vadd(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void vsub(
     const float *__B,  // Caution:  A and B are swapped!
     vDSP_Stride  __IB,
@@ -9091,7 +9135,8 @@ extern void vsub(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void vmul(
     const float *__A,
     vDSP_Stride  __IA,
@@ -9100,7 +9145,8 @@ extern void vmul(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void vsmul(
     const float *__A,
     vDSP_Stride  __IA,
@@ -9108,7 +9154,8 @@ extern void vsmul(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void vam(
     const float *__A,
     vDSP_Stride  __IA,
@@ -9119,21 +9166,24 @@ extern void vam(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void vsq(
     const float *__A,
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void vssq(
     const float *__A,
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zvadd(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -9142,7 +9192,8 @@ extern void zvadd(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zvsub(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -9151,7 +9202,8 @@ extern void zvsub(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zdotpr(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -9159,7 +9211,8 @@ extern void zdotpr(
     vDSP_Stride            __IB,
     const DSPSplitComplex *__C,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zconv(
     const DSPSplitComplex *__A,  // Input signal.
     vDSP_Stride            __IA,
@@ -9169,7 +9222,8 @@ extern void zconv(
     vDSP_Stride            __IC,
     vDSP_Length            __N,  // Output length.
     vDSP_Length            __P)  // Filter length.
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zvcma(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -9180,7 +9234,8 @@ extern void zvcma(
     const DSPSplitComplex *__D,
     vDSP_Stride            __ID,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zvmul(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -9190,7 +9245,8 @@ extern void zvmul(
     vDSP_Stride            __IC,
     vDSP_Length            __N,
     int                    __Conjugate)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zidotpr(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -9198,7 +9254,8 @@ extern void zidotpr(
     vDSP_Stride            __IB,
     const DSPSplitComplex *__C,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zmma(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -9211,7 +9268,8 @@ extern void zmma(
     vDSP_Length            __M,
     vDSP_Length            __N,
     vDSP_Length            __P)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zmms(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -9224,7 +9282,8 @@ extern void zmms(
     vDSP_Length            __M,
     vDSP_Length            __N,
     vDSP_Length            __P)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zmsm(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -9237,7 +9296,8 @@ extern void zmsm(
     vDSP_Length            __M,
     vDSP_Length            __N,
     vDSP_Length            __P)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zmmul(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -9248,7 +9308,8 @@ extern void zmmul(
     vDSP_Length            __M,
     vDSP_Length            __N,
     vDSP_Length            __P)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zrvadd(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -9257,7 +9318,8 @@ extern void zrvadd(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zrvmul(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -9266,7 +9328,8 @@ extern void zrvmul(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zrvsub(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -9275,7 +9338,8 @@ extern void zrvsub(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zrdotpr(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
@@ -9283,14 +9347,16 @@ extern void zrdotpr(
     vDSP_Stride            __IB,
     const DSPSplitComplex *__C,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.0, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft_zipD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft_ziptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -9298,7 +9364,8 @@ extern void fft_ziptD(
     const DSPDoubleSplitComplex *__Buffer,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft_zopD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -9307,7 +9374,8 @@ extern void fft_zopD(
     vDSP_Stride                  __IC,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft_zoptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -9317,14 +9385,16 @@ extern void fft_zoptD(
     const DSPDoubleSplitComplex *__Buffer,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft_zripD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft_zriptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -9332,7 +9402,8 @@ extern void fft_zriptD(
     const DSPDoubleSplitComplex *__Buffer,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft_zropD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -9341,7 +9412,8 @@ extern void fft_zropD(
     vDSP_Stride                  __IC,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft_zroptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -9351,7 +9423,8 @@ extern void fft_zroptD(
     const DSPDoubleSplitComplex *__Buffer,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft2d_zipD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -9360,7 +9433,8 @@ extern void fft2d_zipD(
     vDSP_Length                  __Log2N0,
     vDSP_Length                  __Log2N1,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft2d_ziptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -9370,7 +9444,8 @@ extern void fft2d_ziptD(
     vDSP_Length                  __Log2N0,
     vDSP_Length                  __Log2N1,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft2d_zopD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -9382,7 +9457,8 @@ extern void fft2d_zopD(
     vDSP_Length                  __Log2N0,
     vDSP_Length                  __Log2N1,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft2d_zoptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -9395,7 +9471,8 @@ extern void fft2d_zoptD(
     vDSP_Length                  __Log2N0,
     vDSP_Length                  __Log2N1,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft2d_zripD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -9404,7 +9481,8 @@ extern void fft2d_zripD(
     vDSP_Length                  __Log2N0,
     vDSP_Length                  __Log2N1,
     FFTDirection                 __flag)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft2d_zriptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -9414,7 +9492,8 @@ extern void fft2d_zriptD(
     vDSP_Length                  __Log2N0,
     vDSP_Length                  __Log2N1,
     FFTDirection                 __flag)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft2d_zropD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -9426,7 +9505,8 @@ extern void fft2d_zropD(
     vDSP_Length                  __Log2N0,
     vDSP_Length                  __Log2N1,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft2d_zroptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -9439,7 +9519,8 @@ extern void fft2d_zroptD(
     vDSP_Length                  __Log2N0,
     vDSP_Length                  __Log2N1,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fftm_zipD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -9448,7 +9529,8 @@ extern void fftm_zipD(
     vDSP_Length                  __Log2N,
     vDSP_Length                  __M,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fftm_ziptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -9458,7 +9540,8 @@ extern void fftm_ziptD(
     vDSP_Length                  __Log2N,
     vDSP_Length                  __M,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fftm_zopD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -9470,7 +9553,8 @@ extern void fftm_zopD(
     vDSP_Length                  __Log2N,
     vDSP_Length                  __M,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fftm_zoptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -9483,7 +9567,8 @@ extern void fftm_zoptD(
     vDSP_Length                  __Log2N,
     vDSP_Length                  __M,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fftm_zripD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -9492,7 +9577,8 @@ extern void fftm_zripD(
     vDSP_Length                  __Log2N,
     vDSP_Length                  __M,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fftm_zriptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__C,
@@ -9502,7 +9588,8 @@ extern void fftm_zriptD(
     vDSP_Length                  __Log2N,
     vDSP_Length                  __M,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fftm_zropD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -9514,7 +9601,8 @@ extern void fftm_zropD(
     vDSP_Length                  __Log2N,
     vDSP_Length                  __M,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fftm_zroptD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -9527,7 +9615,8 @@ extern void fftm_zroptD(
     vDSP_Length                  __Log2N,
     vDSP_Length                  __M,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void fft3_zopD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -9536,7 +9625,8 @@ extern void fft3_zopD(
     vDSP_Stride                  __IC,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_9_0);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11), ios(4.0, 9.0))
+        API_UNAVAILABLE(watchos, tvos);
 extern void fft5_zopD(
     FFTSetupD                    __Setup,
     const DSPDoubleSplitComplex *__A,
@@ -9545,21 +9635,24 @@ extern void fft5_zopD(
     vDSP_Stride                  __IC,
     vDSP_Length                  __Log2N,
     FFTDirection                 __Direction)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_9_0);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11), ios(4.0, 9.0))
+        API_UNAVAILABLE(watchos, tvos);
 extern void ctozD(
     const DSPDoubleComplex      *__C,
     vDSP_Stride                  __IC,
     const DSPDoubleSplitComplex *__Z,
     vDSP_Stride                  __IZ,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void ztocD(
     const DSPDoubleSplitComplex *__Z,
     vDSP_Stride                  __IZ,
     DSPDoubleComplex            *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void vsmulD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -9567,27 +9660,32 @@ extern void vsmulD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern FFTSetupD create_fftsetupD(
     vDSP_Length __Log2n,
     FFTRadix    __Radix)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void destroy_fftsetupD(FFTSetupD __setup)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void f3x3D(
     const double *__A,
     vDSP_Length   __NR,
     vDSP_Length   __NC,
     const double *__F,
     double       *__C)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void f5x5D(
     const double *__A,
     vDSP_Length   __NR,
     vDSP_Length   __NC,
     const double *__F,
     double       *__C)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void convD(
     const double *__A, // Input signal.
     vDSP_Stride   __IA,
@@ -9597,7 +9695,8 @@ extern void convD(
     vDSP_Stride   __IC,
     vDSP_Length   __N, // Output length.
     vDSP_Length   __P) // Filter length.
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void dotprD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -9605,7 +9704,8 @@ extern void dotprD(
     vDSP_Stride   __IB,
     double       *__C,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void imgfirD(
     const double *__A,  // Input.
     vDSP_Length   __NR, // Number of image rows.
@@ -9614,7 +9714,8 @@ extern void imgfirD(
     double       *__C,  // Output.
     vDSP_Length   __P,  // Number of filter rows.
     vDSP_Length   __Q)  // Number of filter columns.
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void mtransD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -9622,7 +9723,8 @@ extern void mtransD(
     vDSP_Stride   __IC,
     vDSP_Length   __M,
     vDSP_Length   __N)
-            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+            API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+            API_UNAVAILABLE(ios, watchos, tvos);
 extern void mmulD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -9633,7 +9735,8 @@ extern void mmulD(
     vDSP_Length   __M,
     vDSP_Length   __N,
     vDSP_Length   __P)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void vaddD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -9642,7 +9745,8 @@ extern void vaddD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void vsubD(
     const double *__B, // Caution:  A and B are swapped!
     vDSP_Stride   __IB,
@@ -9651,7 +9755,8 @@ extern void vsubD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void vmulD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -9660,7 +9765,8 @@ extern void vmulD(
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void vamD(
     const double *__A,
     vDSP_Stride   __IA,
@@ -9671,21 +9777,24 @@ extern void vamD(
     double       *__D,
     vDSP_Stride   __IDD,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void vsqD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void vssqD(
     const double *__A,
     vDSP_Stride   __IA,
     double       *__C,
     vDSP_Stride   __IC,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zvaddD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -9694,7 +9803,8 @@ extern void zvaddD(
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zvsubD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -9703,7 +9813,8 @@ extern void zvsubD(
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zdotprD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -9711,7 +9822,8 @@ extern void zdotprD(
     vDSP_Stride                  __IB,
     const DSPDoubleSplitComplex *__C,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zconvD(
     const DSPDoubleSplitComplex *__A,    // Input signal.
     vDSP_Stride                  __IA,
@@ -9721,7 +9833,8 @@ extern void zconvD(
     vDSP_Stride                  __IC,
     vDSP_Length                  __N,    // Output length.
     vDSP_Length                  __P)    // Filter length.
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zvcmaD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -9732,7 +9845,8 @@ extern void zvcmaD(
     const DSPDoubleSplitComplex *__D,
     vDSP_Stride                  __ID,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zvmulD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -9742,7 +9856,8 @@ extern void zvmulD(
     vDSP_Stride                  __IC,
     vDSP_Length                  __N,
     int                          __Conjugate)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zidotprD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -9750,7 +9865,8 @@ extern void zidotprD(
     vDSP_Stride                  __IB,
     const DSPDoubleSplitComplex *__C,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zmmaD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -9763,7 +9879,8 @@ extern void zmmaD(
     vDSP_Length                  __M,
     vDSP_Length                  __N,
     vDSP_Length                  __P)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zmmsD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -9776,7 +9893,8 @@ extern void zmmsD(
     vDSP_Length                  __M,
     vDSP_Length                  __N,
     vDSP_Length                  __P)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zmsmD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -9789,7 +9907,8 @@ extern void zmsmD(
     vDSP_Length                  __M,
     vDSP_Length                  __N,
     vDSP_Length                  __P)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zmmulD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -9800,7 +9919,8 @@ extern void zmmulD(
     vDSP_Length                  __M,
     vDSP_Length                  __N,
     vDSP_Length                  __P)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zrvaddD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -9809,7 +9929,8 @@ extern void zrvaddD(
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zrvmulD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -9818,7 +9939,8 @@ extern void zrvmulD(
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zrvsubD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -9827,7 +9949,8 @@ extern void zrvsubD(
     const DSPDoubleSplitComplex *__C,
     vDSP_Stride                  __IC,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 extern void zrdotprD(
     const DSPDoubleSplitComplex *__A,
     vDSP_Stride                  __IA,
@@ -9835,7 +9958,8 @@ extern void zrdotprD(
     vDSP_Stride                  __IB,
     const DSPDoubleSplitComplex *__C,
     vDSP_Length                  __N)
-        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_4_0, __IPHONE_NA);
+        API_DEPRECATED("No longer supported, use vDSP_ prefixed version instead.", macos(10.2, 10.11))
+        API_UNAVAILABLE(ios, watchos, tvos);
 
 #endif  //  #if defined vDSP_DeprecateTranslations
 

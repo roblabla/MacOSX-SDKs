@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 695E99E6-34CB-3F37-A427-05F85EF5C08E', 'x86_64: 8604ECDF-9830-3D47-BDA9-362BB3A0F665' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 7C62757D-C7ED-34CF-9E7F-7C5A53AAE512' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/MDSChannel.framework/Versions/A/MDSChannel
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _AFPSendSpotLightRPC, _MDSChannelAccessTokenCreate, _MDSChannelAccessTokenGetTypeID, 
                        _MDSChannelCloseRPC, _MDSChannelCopyAccessToken, _MDSChannelCreate, 
                        _MDSChannelCreateRPC, _MDSChannelGetAccessTokenRPC, _MDSChannelGetProperties, 

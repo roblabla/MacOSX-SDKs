@@ -1,5 +1,5 @@
 /*	NSObjCRuntime.h
-	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
 */
 
 #include <TargetConditionals.h>
@@ -288,6 +288,12 @@ NS_ENUM(NSInteger) {
 #define NS_ENUM(...) CF_ENUM(__VA_ARGS__)
 #define NS_OPTIONS(_type, _name) CF_OPTIONS(_type, _name)
 
+/* NS_CLOSED_ENUM is only for enums which are guaranteed to never gain an additional case.
+ 
+Usually, this is because the enum represents a mathematically complete set. For example: NSComparisonResult. Once an enum is marked as closed, it is a binary and source incompatible change to add a new value. If there is any doubt about an enum gaining a private or additional public case in the future, use NS_ENUM instead.
+*/
+#define NS_CLOSED_ENUM(_type, _name) CF_CLOSED_ENUM(_type, _name)
+
 /* */
 
 #define _NS_TYPED_ENUM _CF_TYPED_ENUM
@@ -322,6 +328,8 @@ NS_ENUM(NSInteger) {
  };
  */
 #define NS_ERROR_ENUM(...) __NS_ERROR_ENUM_GET_MACRO(__VA_ARGS__, __NS_NAMED_ERROR_ENUM, __NS_ANON_ERROR_ENUM)(__VA_ARGS__)
+
+#define NS_SWIFT_BRIDGED_TYPEDEF CF_SWIFT_BRIDGED_TYPEDEF
 
 // This macro is to be used by system frameworks to support the weak linking of classes. Weak linking is supported on iOS 3.1 and Mac OS X 10.6.8 or later.
 #if (__MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_6 || __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_3_1) && \
@@ -366,8 +374,9 @@ NS_ENUM(NSInteger) {
 #define NS_SWIFT_NOTHROW
 #endif
 
-#define FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(__epoch__) (!defined(SWIFT_CLASS_EXTRA) || (defined(SWIFT_SDK_OVERLAY_FOUNDATION_EPOCH) && (SWIFT_SDK_OVERLAY_FOUNDATION_EPOCH >= __epoch__)))
-#define FOUNDATION_SWIFT_SDK_EPOCH_LESS_THAN(__epoch__) (! FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(__epoch__) )
+// There is no need to use this macro any longer, the last Foundation epoch 
+// was 8 and that is now assumed to be the final version. 
+#define FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(__epoch__) (!defined(SWIFT_CLASS_EXTRA))
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -519,7 +528,22 @@ FOUNDATION_EXPORT const char *NSGetSizeAndAlignment(const char *typePtr, NSUInte
 FOUNDATION_EXPORT void NSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1,2) NS_NO_TAIL_CALL;
 FOUNDATION_EXPORT void NSLogv(NSString *format, va_list args) NS_FORMAT_FUNCTION(1,0) NS_NO_TAIL_CALL;
 
-typedef NS_ENUM(NSInteger, NSComparisonResult) {NSOrderedAscending = -1L, NSOrderedSame, NSOrderedDescending};
+/*
+ These constants are used to indicate how items in a request are ordered, from the first one given in a method invocation or function call to the last (that is, left to right in code).
+ 
+ Given the function:
+   NSComparisonResult f(int a, int b)
+ 
+ If:
+    a < b   then return NSOrderedAscending. The left operand is smaller than the right operand.
+    a > b   then return NSOrderedDescending. The left operand is greater than the right operand.
+    a == b  then return NSOrderedSame. The operands are equal.
+*/
+typedef NS_CLOSED_ENUM(NSInteger, NSComparisonResult) {
+    NSOrderedAscending = -1L,
+    NSOrderedSame,
+    NSOrderedDescending
+};
 
 #if NS_BLOCKS_AVAILABLE
 typedef NSComparisonResult (^NSComparator)(id obj1, id obj2);
@@ -535,21 +559,11 @@ typedef NS_OPTIONS(NSUInteger, NSSortOptions) {
     NSSortStable = (1UL << 4),
 };
 
-/* The following Quality of Service (QoS) classifications are used to indicate to the system the nature and importance of work.  They are used by the system to manage a variety of resources.  Higher QoS classes receive more resources than lower ones during resource contention. */
 typedef NS_ENUM(NSInteger, NSQualityOfService) {
-    /* UserInteractive QoS is used for work directly involved in providing an interactive UI such as processing events or drawing to the screen. */
     NSQualityOfServiceUserInteractive = 0x21,
-    
-    /* UserInitiated QoS is used for performing work that has been explicitly requested by the user and for which results must be immediately presented in order to allow for further user interaction.  For example, loading an email after a user has selected it in a message list. */
     NSQualityOfServiceUserInitiated = 0x19,
-    
-    /* Utility QoS is used for performing work which the user is unlikely to be immediately waiting for the results.  This work may have been requested by the user or initiated automatically, does not prevent the user from further interaction, often operates at user-visible timescales and may have its progress indicated to the user by a non-modal progress indicator.  This work will run in an energy-efficient manner, in deference to higher QoS work when resources are constrained.  For example, periodic content updates or bulk file operations such as media import. */
     NSQualityOfServiceUtility = 0x11,
-    
-    /* Background QoS is used for work that is not user initiated or visible.  In general, a user is unaware that this work is even happening and it will run in the most efficient manner while giving the most deference to higher QoS work.  For example, pre-fetching content, search indexing, backups, and syncing of data with external systems. */
     NSQualityOfServiceBackground = 0x09,
-
-    /* Default QoS indicates the absence of QoS information.  Whenever possible QoS information will be inferred from other sources.  If such inference is not possible, a QoS between UserInitiated and Utility will be used. */
     NSQualityOfServiceDefault = -1
 } API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 

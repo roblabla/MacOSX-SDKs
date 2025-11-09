@@ -1,6 +1,6 @@
 /*
 	NSFileVersion.h
-	Copyright (c) 2010-2017, Apple Inc.
+	Copyright (c) 2010-2018, Apple Inc.
 	All rights reserved.
 */
 

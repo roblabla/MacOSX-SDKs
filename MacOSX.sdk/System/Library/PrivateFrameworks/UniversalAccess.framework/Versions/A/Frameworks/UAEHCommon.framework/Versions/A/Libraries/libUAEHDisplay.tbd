@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: C15D906B-A4CD-35F9-8EA9-89A82F103482' ]
+uuids:           [ 'x86_64: AA8F83E6-25C0-3DEB-AC82-8274C6A64ADE' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Frameworks/UAEHCommon.framework/Versions/A/Libraries/libUAEHDisplay.dylib
 exports:         
@@ -8,5 +8,5 @@ exports:
     symbols:         [ _UADEventHandlerGetVtable, __DisplayEnhancementDriver, _handleEvent, 
                        _handleMessage, _initialize, _libraryWillUnload, _safeToQuit, 
                        _shouldSnarfEvent, _updateSettings, _userSessionDidChange ]
-    objc-classes:    [ _UAEHDisplayEnhancementDriver ]
+    objc-classes:    [ UAEHDisplayEnhancementDriver ]
 ...

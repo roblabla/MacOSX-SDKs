@@ -58,22 +58,6 @@ ICAError        ICDSendNotificationAndWaitForReply( ICASendNotificationPB* pb );
 
 //------------------------------------------------------------------------------------------------------------------------------
 
-extern int          ICLoggingEnabled;
-extern int          ICLoggingLevelMask;
-
-extern const int   ICLoggingLevelError;
-extern const int   ICLoggingLevelWarning;
-extern const int   ICLoggingLevelBasicInfo;
-extern const int   ICLoggingLevelVerboseInfo;
-extern const int   ICLoggingLevelTimingInfo;
-    
-void    __ICLog( const char* format, ... ); // This function MUST be called only if ICLoggingEnabled is true.
-    
-#define __ICLOG(logLevel, params)   { if (ICLoggingEnabled && (logLevel & ICLoggingLevelMask)) __ICLog params; }
-
-
-//------------------------------------------------------------------------------------------------------------------------------
-
 #ifdef __cplusplus
 }
 #endif

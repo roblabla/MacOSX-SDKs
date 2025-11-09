@@ -1,7 +1,7 @@
 /*
         NSApplicationScripting.h
         AppKit Framework
-        Copyright (c) 1997-2017, Apple Inc.
+        Copyright (c) 1997-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -22,11 +22,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+#if __swift__ < 40200
 @interface NSObject(NSApplicationScriptingDelegation)
 
 // Return YES if the receiving delegate object can respond to key value coding messages for a specific keyed attribute, to-one relationship, or to-many relationship.  Return NO otherwise.
-- (BOOL)application:(NSApplication *)sender delegateHandlesKey:(NSString *)key;
+- (BOOL)application:(NSApplication *)sender delegateHandlesKey:(NSString *)key NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now an optional method of the NSApplicationDelegate protocol.");
 
 @end
+#endif
 
 NS_ASSUME_NONNULL_END

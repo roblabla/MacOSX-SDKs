@@ -381,7 +381,7 @@ extern "C" {
 extern AudioComponent __nullable
 AudioComponentFindNext (    AudioComponent __nullable           inComponent,
                             const AudioComponentDescription *   inDesc) 
-                                                                            __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_2_0);
+                                                                            API_AVAILABLE(macos(10.6), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function       AudioComponentCount
@@ -397,7 +397,7 @@ AudioComponentFindNext (    AudioComponent __nullable           inComponent,
 */
 extern UInt32
 AudioComponentCount (   const AudioComponentDescription *       inDesc)
-                                                                            __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_2_0);
+                                                                            API_AVAILABLE(macos(10.6), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function       AudioComponentCopyName
@@ -413,7 +413,7 @@ AudioComponentCount (   const AudioComponentDescription *       inDesc)
 extern OSStatus 
 AudioComponentCopyName (    AudioComponent                      inComponent, 
                             CFStringRef __nullable * __nonnull  outName)
-                                                                            __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_2_0);
+                                                                            API_AVAILABLE(macos(10.6), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function       AudioComponentGetDescription
@@ -429,7 +429,7 @@ AudioComponentCopyName (    AudioComponent                      inComponent,
 extern OSStatus 
 AudioComponentGetDescription(   AudioComponent                  inComponent,
                                 AudioComponentDescription *     outDesc)
-                                                                            __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_2_0);
+                                                                            API_AVAILABLE(macos(10.6), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function       AudioComponentGetVersion
@@ -444,7 +444,7 @@ AudioComponentGetDescription(   AudioComponent                  inComponent,
 extern OSStatus 
 AudioComponentGetVersion(   AudioComponent                      inComponent, 
                             UInt32 *                            outVersion)
-                                                                            __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_2_0);
+                                                                            API_AVAILABLE(macos(10.6), ios(2.0), watchos(2.0), tvos(9.0));
 
 #if defined(__OBJC__) && !TARGET_OS_IPHONE
 @class NSImage;
@@ -464,7 +464,7 @@ AudioComponentGetVersion(   AudioComponent                      inComponent,
 */
 extern NSImage * __nullable
 AudioComponentGetIcon(AudioComponent comp)
-                                                                            __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_NA);
+                                                                            API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif
 
 /*!
@@ -487,7 +487,7 @@ AudioComponentGetIcon(AudioComponent comp)
 extern OSStatus 
 AudioComponentInstanceNew(      AudioComponent                                inComponent,
                                 AudioComponentInstance __nullable * __nonnull outInstance)
-                                                                            __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_2_0);
+                                                                            API_AVAILABLE(macos(10.6), ios(2.0), watchos(2.0), tvos(9.0));
 /*!
     @function       AudioComponentInstantiate
     @abstract       Creates an audio component instance, asynchronously.
@@ -508,7 +508,7 @@ extern void
 AudioComponentInstantiate(      AudioComponent                      inComponent,
                                 AudioComponentInstantiationOptions  inOptions,
                                 void (^inCompletionHandler)(AudioComponentInstance __nullable, OSStatus))
-                                                                            __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+                                                                            API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function       AudioComponentInstanceDispose
@@ -521,7 +521,7 @@ AudioComponentInstantiate(      AudioComponent                      inComponent,
 */
 extern OSStatus 
 AudioComponentInstanceDispose(  AudioComponentInstance          inInstance)
-                                                                            __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_2_0);
+                                                                            API_AVAILABLE(macos(10.6), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function       AudioComponentInstanceGetComponent
@@ -538,7 +538,7 @@ AudioComponentInstanceDispose(  AudioComponentInstance          inInstance)
 */
 extern AudioComponent 
 AudioComponentInstanceGetComponent (    AudioComponentInstance      inInstance)
-                                                                            __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_2_0);
+                                                                            API_AVAILABLE(macos(10.6), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function       AudioComponentInstanceCanDo
@@ -553,7 +553,7 @@ AudioComponentInstanceGetComponent (    AudioComponentInstance      inInstance)
 extern Boolean 
 AudioComponentInstanceCanDo (   AudioComponentInstance              inInstance, 
                                 SInt16                              inSelectorID)
-                                                                            __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_3_0);
+                                                                            API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function       AudioComponentRegister
@@ -582,7 +582,7 @@ AudioComponentRegister(     const AudioComponentDescription *   inDesc,
                             CFStringRef                         inName,
                             UInt32                              inVersion,
                             AudioComponentFactoryFunction       inFactory)
-                                                    __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_5_0);
+                                                    API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function       AudioComponentCopyConfigurationInfo
@@ -600,7 +600,7 @@ AudioComponentRegister(     const AudioComponentDescription *   inDesc,
 extern OSStatus
 AudioComponentCopyConfigurationInfo(    AudioComponent      inComponent,
                                         CFDictionaryRef __nullable * __nonnull outConfigurationInfo)
-                                                    __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA);
+                                                    API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
 	 @enum		 AudioComponentValidationResult
@@ -652,7 +652,7 @@ extern OSStatus
 AudioComponentValidate( AudioComponent					inComponent,
 						CFDictionaryRef __nullable		inValidationParameters,
 						AudioComponentValidationResult *outValidationResult)
-													__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA);
+                                                    API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 	
 /*!
 	@define		kAudioComponentValidationParameter_TimeOut

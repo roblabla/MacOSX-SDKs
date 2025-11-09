@@ -6,12 +6,6 @@
 #import <Availability.h>
 #import <ModelIO/ModelIO.h>
 #import <GLKit/GLKitBase.h>
-#if TARGET_OS_IPHONE
-#import <OpenGLES/gltypes.h>
-#else // !TARGET_OS_IPHONE
-#import <OpenGL/gltypes.h>
-#endif // !TARGET_OS_IPHONE
-
 
 /*!
  @group GLKModelErrors
@@ -20,11 +14,11 @@
 /*!
  @constant kGLKModelErrorDomain
  */
-GLK_EXTERN NSString * __nonnull const kGLKModelErrorDomain NS_AVAILABLE(10_11, 9_0);
+GLK_EXTERN NSString * __nonnull const kGLKModelErrorDomain OPENGL_DEPRECATED(10.11,10.14) OPENGLES_DEPRECATED(ios(9.0, 12.0), tvos(9.0, 12.0));
 /*!
  @constant kGLKModelErrorKey
  */
-GLK_EXTERN NSString * __nonnull const kGLKModelErrorKey NS_AVAILABLE(10_11, 9_0);
+GLK_EXTERN NSString * __nonnull const kGLKModelErrorKey OPENGL_DEPRECATED(10.11,10.14) OPENGLES_DEPRECATED(ios(9.0,12.0), tvos(9.0,12.0));
 
 
 
@@ -32,7 +26,8 @@ GLK_EXTERN NSString * __nonnull const kGLKModelErrorKey NS_AVAILABLE(10_11, 9_0)
  @class GLKMeshBufferAllocator
  @abstract Allocator passed to MDLAsset init method to load vertex and index data directly into OpenGL buffer object
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+
+OPENGL_DEPRECATED(10.11,10.14) OPENGLES_DEPRECATED(ios(9.0,12.0), tvos(9.0,12.0))
 @interface GLKMeshBufferAllocator : NSObject<MDLMeshBufferAllocator>
 
 @end
@@ -42,7 +37,8 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  @abstract Mesh buffers created when  needs to allocate memory to back vertex or index data
  @discussion Memory backing these buffer are OpenGL buffers. Model I/O will load index and vertex data from from a model asset directly in to the OpenGL buffer object.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+
+OPENGL_DEPRECATED(10.11,10.14) OPENGLES_DEPRECATED(ios(9.0,12.0), tvos(9.0, 12.0))
 @interface GLKMeshBuffer : NSObject <MDLMeshBuffer>
 
 /*!
@@ -89,7 +85,8 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 
 @class GLKMesh;
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+
+OPENGL_DEPRECATED(10.11,10.14) OPENGLES_DEPRECATED(ios(9.0,12.0), tvos(9.0, 12.0))
 @interface GLKSubmesh : NSObject
 
 /*!
@@ -142,7 +139,8 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 
 @end
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+
+OPENGL_DEPRECATED(10.11,10.14) OPENGLES_DEPRECATED(ios(9.0,12.0), tvos(9.0, 12.0))
 @interface GLKMesh : NSObject
 
 /*!

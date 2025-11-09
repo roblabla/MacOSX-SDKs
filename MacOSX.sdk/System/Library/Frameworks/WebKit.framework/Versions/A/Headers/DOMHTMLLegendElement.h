@@ -28,9 +28,9 @@
 @class DOMHTMLFormElement;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMHTMLLegendElement : DOMHTMLElement
 @property (readonly, strong) DOMHTMLFormElement *form;
 @property (copy) NSString *align;
-@property (copy) NSString *accessKey NS_DEPRECATED_MAC(10_4, 10_8);
+@property (copy) NSString *accessKey WEBKIT_DEPRECATED_MAC(10_4, 10_8);
 @end

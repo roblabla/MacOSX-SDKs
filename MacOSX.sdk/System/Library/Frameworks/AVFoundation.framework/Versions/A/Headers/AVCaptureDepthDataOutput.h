@@ -3,7 +3,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2016-2017 Apple Inc. All rights reserved.
+    Copyright 2016-2018 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVMediaFormat.h>
@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  
     AVCaptureDepthDataOutput always provides depth data in the format expressed by its source's -[AVCaptureDevice activeDepthDataFormat] property. If you wish to receive depth data in another format, you may choose from the -[AVCaptureDevice activeFormat]'s -[AVCaptureDeviceFormat supportedDepthDataFormats], and set it using -[AVCaptureDevice setActiveDepthDataFormat:].
  */
-NS_CLASS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCaptureDepthDataOutput : AVCaptureOutput
 {
 @private
@@ -56,7 +56,7 @@ NS_CLASS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
  
     A serial dispatch queue must be used to guarantee that depth data will be delivered in order. The callbackQueue parameter may not be NULL, except when setting the delegate to nil.
  */
-- (void)setDelegate:(id<AVCaptureDepthDataOutputDelegate>)delegate callbackQueue:(dispatch_queue_t)callbackQueue;
+- (void)setDelegate:(nullable id<AVCaptureDepthDataOutputDelegate>)delegate callbackQueue:(nullable dispatch_queue_t)callbackQueue;
 
 /*!
  @property delegate
@@ -66,7 +66,7 @@ NS_CLASS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
  @discussion
     The value of this property is an object conforming to the AVCaptureDepthDataOutputDelegate protocol that receives depth data as it is captured. The delegate is set using the setDelegate:queue: method.
  */
-@property(nonatomic, readonly) id<AVCaptureDepthDataOutputDelegate> delegate;
+@property(nonatomic, readonly, nullable) id<AVCaptureDepthDataOutputDelegate> delegate;
 
 /*!
  @property delegateCallbackQueue
@@ -76,7 +76,7 @@ NS_CLASS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
  @discussion
     The value of this property is a dispatch_queue_t. The queue is set using the setDelegate:queue: method.
  */
-@property(nonatomic, readonly) dispatch_queue_t delegateCallbackQueue;
+@property(nonatomic, readonly, nullable) dispatch_queue_t delegateCallbackQueue;
 
 /*!
  @property alwaysDiscardsLateDepthData
@@ -106,7 +106,7 @@ NS_CLASS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
  @abstract
     Defines an interface for delegates of AVCaptureDepthDataOutput to receive captured depth data and be notified of late depth data that were dropped.
  */
-NS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @protocol AVCaptureDepthDataOutputDelegate <NSObject>
 
 @optional

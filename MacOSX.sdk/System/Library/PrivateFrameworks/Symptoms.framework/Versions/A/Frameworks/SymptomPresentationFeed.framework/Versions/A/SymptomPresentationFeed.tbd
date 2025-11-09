@@ -1,9 +1,9 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 444DB6B6-CC77-363E-A43C-66E95979E3B0' ]
+uuids:           [ 'x86_64: 03EF6E79-2294-3E8A-AF10-D374E3DE55A3' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomPresentationFeed.framework/Versions/A/SymptomPresentationFeed
-current-version: 817
+current-version: 820.227.2
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _NSTargetObjectUserInfoKey, _NSUnknownKeyException, _NSUnknownUserInfoKey, 
@@ -20,12 +20,13 @@ exports:
                        _kPerformanceNetAttachBytesOut, _kPerformanceNetAttachConnAttempts, 
                        _kPerformanceNetAttachConnSuccesses, _kPerformanceNetAttachDataStalls, 
                        _kPerformanceNetAttachEpochs, _kPerformanceNetAttachFaultyStay, 
-                       _kPerformanceNetAttachIdentifier, _kPerformanceNetAttachKnownGood, 
-                       _kPerformanceNetAttachLowInternetDL, _kPerformanceNetAttachLowInternetUL, 
-                       _kPerformanceNetAttachLowLqmStay, _kPerformanceNetAttachLowQualyStay, 
-                       _kPerformanceNetAttachLqmTransitionCount, _kPerformanceNetAttachLqmTransitionRate, 
-                       _kPerformanceNetAttachOverallStay, _kPerformanceNetAttachPacketsIn, 
-                       _kPerformanceNetAttachPacketsOut, _kPerformanceNetAttachReTxBytes, 
+                       _kPerformanceNetAttachHotSpot, _kPerformanceNetAttachIdentifier, 
+                       _kPerformanceNetAttachKnownGood, _kPerformanceNetAttachLowInternetDL, 
+                       _kPerformanceNetAttachLowInternetUL, _kPerformanceNetAttachLowLqmStay, 
+                       _kPerformanceNetAttachLowQualyStay, _kPerformanceNetAttachLqmTransitionCount, 
+                       _kPerformanceNetAttachLqmTransitionRate, _kPerformanceNetAttachOverallStay, 
+                       _kPerformanceNetAttachPacketsIn, _kPerformanceNetAttachPacketsOut, 
+                       _kPerformanceNetAttachPassiveCaptivityDetections, _kPerformanceNetAttachReTxBytes, 
                        _kPerformanceNetAttachRttAvg, _kPerformanceNetAttachRttMin, 
                        _kPerformanceNetAttachRttVar, _kPerformanceNetAttachRxDupeBytes, 
                        _kPerformanceNetAttachRxOOOBytes, _kPerformanceNetAttachSinceTime, 
@@ -53,7 +54,7 @@ exports:
                        _kUsageNetworkWiredOutBytes_var, _kUsageNetworkWiredSampleCount, 
                        _kUsageProcessBundleName, _kUsageProcessDataKey, _kUsageProcessProcName, 
                        _kUsageSinceTime, _stringToAdvisory ]
-    objc-classes:    [ _NWNetworkOfInterest, _NWNetworkOfInterestManager, _NWNetworkPredictions, 
-                       _NetworkInterfaceUtils, _NetworkPerformanceFeed, _ProcessNetStatsIndividualEntity, 
-                       _UsageFeed ]
+    objc-classes:    [ NWNetworkOfInterest, NWNetworkOfInterestManager, NWNetworkPredictions, 
+                       NetworkInterfaceUtils, NetworkPerformanceFeed, ProcessNetStatsIndividualEntity, 
+                       UsageFeed ]
 ...

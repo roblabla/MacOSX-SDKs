@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 		For example, an AVAudioPlayerNode that is being used in a gaming scenario can set up its 
 		3D mixing settings and then move from one environment to another.
 */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @protocol AVAudioMixing <AVAudioStereoMixing, AVAudio3DMixing>
 
 /*! @method destinationForMixer:bus:
@@ -68,7 +68,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		Calling this on an AVAudioMixingDestination instance returns self if the specified
 		mixer/input bus match its connection point, otherwise returns nil.
 */
-- (nullable AVAudioMixingDestination *)destinationForMixer:(AVAudioNode *)mixer bus:(AVAudioNodeBus)bus NS_AVAILABLE(10_11, 9_0);
+- (nullable AVAudioMixingDestination *)destinationForMixer:(AVAudioNode *)mixer bus:(AVAudioNodeBus)bus API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /*! @property volume
     @abstract Set a bus's input volume
@@ -85,7 +85,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 /*! @protocol   AVAudioStereoMixing
     @abstract   Protocol that defines stereo mixing properties
 */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @protocol AVAudioStereoMixing <NSObject>
 
 /*! @property pan
@@ -166,7 +166,7 @@ typedef NS_ENUM(NSInteger, AVAudio3DMixingRenderingAlgorithm) {
         Default:    AVAudio3DMixingRenderingAlgorithmEqualPowerPanning
         Mixer:      AVAudioEnvironmentNode
 */
-@property (nonatomic) AVAudio3DMixingRenderingAlgorithm renderingAlgorithm __WATCHOS_PROHIBITED;
+@property (nonatomic) AVAudio3DMixingRenderingAlgorithm renderingAlgorithm API_UNAVAILABLE(watchos);
 
 /*! @property rate
     @abstract Changes the playback rate of the input signal
@@ -178,7 +178,7 @@ typedef NS_ENUM(NSInteger, AVAudio3DMixingRenderingAlgorithm) {
         Default:    1.0
         Mixer:      AVAudioEnvironmentNode
 */
-@property (nonatomic) float rate __WATCHOS_PROHIBITED;
+@property (nonatomic) float rate API_UNAVAILABLE(watchos);
 
 /*! @property reverbBlend
     @abstract Controls the blend of dry and reverb processed audio
@@ -191,7 +191,7 @@ typedef NS_ENUM(NSInteger, AVAudio3DMixingRenderingAlgorithm) {
         Default:    0.0
         Mixer:      AVAudioEnvironmentNode
 */
-@property (nonatomic) float reverbBlend __WATCHOS_PROHIBITED;
+@property (nonatomic) float reverbBlend API_UNAVAILABLE(watchos);
 
 /*! @property obstruction
     @abstract Simulates filtering of the direct path of sound due to an obstacle
@@ -202,7 +202,7 @@ typedef NS_ENUM(NSInteger, AVAudio3DMixingRenderingAlgorithm) {
         Default:    0.0
         Mixer:      AVAudioEnvironmentNode
 */
-@property (nonatomic) float obstruction __WATCHOS_PROHIBITED;
+@property (nonatomic) float obstruction API_UNAVAILABLE(watchos);
 
 /*! @property occlusion
     @abstract Simulates filtering of the direct and reverb paths of sound due to an obstacle
@@ -213,7 +213,7 @@ typedef NS_ENUM(NSInteger, AVAudio3DMixingRenderingAlgorithm) {
         Default:    0.0
         Mixer:      AVAudioEnvironmentNode
 */
-@property (nonatomic) float occlusion __WATCHOS_PROHIBITED;
+@property (nonatomic) float occlusion API_UNAVAILABLE(watchos);
 
 /*! @property position
     @abstract The location of the source in the 3D environment
@@ -222,7 +222,7 @@ typedef NS_ENUM(NSInteger, AVAudio3DMixingRenderingAlgorithm) {
  
         Mixer:      AVAudioEnvironmentNode
 */
-@property (nonatomic) AVAudio3DPoint position __WATCHOS_PROHIBITED;
+@property (nonatomic) AVAudio3DPoint position API_UNAVAILABLE(watchos);
 
 @end
 
@@ -234,7 +234,7 @@ typedef NS_ENUM(NSInteger, AVAudio3DMixingRenderingAlgorithm) {
 		Only an instance vended by a source node (e.g. AVAudioPlayerNode) can be used
 		(see `AVAudioMixing`).
 */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AVAudioMixingDestination : NSObject <AVAudioMixing> {
 @private
 	void *_impl;

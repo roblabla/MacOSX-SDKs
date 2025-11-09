@@ -1,7 +1,7 @@
 /*
  NSMenu.h
  Application Kit
- Copyright (c) 1996-2017, Apple Inc.
+ Copyright (c) 1996-2018, Apple Inc.
  All rights reserved.
 */
 
@@ -21,10 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 {
     /*All instance variables are private*/
     @private
-    NSMenu *_supermenu;
-    NSString *_title;
-    id _itemArray;
-    id _extra;
+    NSMenu *_supermenu APPKIT_IVAR;
+    NSString *_title APPKIT_IVAR;
+    id _itemArray APPKIT_IVAR;
+    id _extra APPKIT_IVAR;
     struct __mFlags {
         unsigned int noAutoenable:1;
         unsigned int inMain:1;
@@ -47,8 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 	unsigned int delegateIsUnsafeUnretained:1;
         unsigned int avoidUsingCache:1;
         unsigned int RESERVED:10;
-    } _mFlags;
-    NSString *_uiid;
+    } _mFlags APPKIT_IVAR;
+    NSString *_uiid APPKIT_IVAR;
 }
 
 /* Designated initializer.  If this menu is used as a submenu of an item in the application's main menu, then the title is what appears in the menu bar.  Otherwise, the title is ignored.  Do not pass nil (an exception will result), but you may pass an empty string.
@@ -107,8 +107,8 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (void)removeAllItems NS_AVAILABLE_MAC(10_6);
 
-/* Returns an array containing the receiver's menu items. */
-@property (readonly, copy) NSArray<NSMenuItem *> *itemArray;
+/* Returns an array containing the receiver's menu items. This property is settable in macOS 10.14 and later. */
+@property (copy) NSArray<NSMenuItem *> *itemArray;
 
 /* Returns the number of menu items in the menu. */
 @property (readonly) NSInteger numberOfItems;
@@ -192,9 +192,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)submenuAction:(nullable id)sender;
 @end
 
-@interface NSObject (NSMenuValidation)
+@protocol NSMenuItemValidation <NSObject>
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem;
 @end
+
+#if __swift__ < 40200
+@interface NSObject (NSMenuValidation)
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSMenuItemValidation protocol.");
+@end
+#endif
 
 @protocol NSMenuDelegate <NSObject>
 @optional

@@ -41,6 +41,8 @@
 #include <IOKit/IOMemoryDescriptor.h>
 #include <IOKit/usb/IOUSBHostFamily.h>
 
+#define kUSBHostTransferLimit (1024)
+
 class AppleUSBHostController;
 class IOUSBHostDevice;
 class AppleUSBRequestPool;

@@ -28,14 +28,14 @@
 @class DOMNode;
 @protocol DOMNodeFilter;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMNodeIterator : DOMObject
 @property (readonly, strong) DOMNode *root;
 @property (readonly) unsigned whatToShow;
 @property (readonly, strong) id <DOMNodeFilter> filter;
 @property (readonly) BOOL expandEntityReferences;
-@property (readonly, strong) DOMNode *referenceNode NS_AVAILABLE_MAC(10_5);
-@property (readonly) BOOL pointerBeforeReferenceNode NS_AVAILABLE_MAC(10_5);
+@property (readonly, strong) DOMNode *referenceNode WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) BOOL pointerBeforeReferenceNode WEBKIT_AVAILABLE_MAC(10_5);
 
 - (DOMNode *)nextNode;
 - (DOMNode *)previousNode;

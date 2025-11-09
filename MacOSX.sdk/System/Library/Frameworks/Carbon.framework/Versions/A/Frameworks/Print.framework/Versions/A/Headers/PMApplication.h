@@ -42,13 +42,6 @@ extern "C" {
 typedef CALLBACK_API( void , PMSheetDoneProcPtr )(PMPrintSession printSession, WindowRef documentWindow, Boolean accepted);
 typedef STACK_UPP_TYPE(PMSheetDoneProcPtr)                      PMSheetDoneUPP;
 
-#if __MACH__
-
-    #define NewPMSheetDoneUPP(userRoutine)                      ((PMSheetDoneUPP)userRoutine)
-    #define DisposePMSheetDoneUPP(userUPP)
-    #define InvokePMSheetDoneUPP(printSession, documentWindow, accepted, userUPP) (*userUPP)(printSession, documentWindow, accepted)
-
-#else
 /*
  *  NewPMSheetDoneUPP()
  *  
@@ -57,8 +50,8 @@ typedef STACK_UPP_TYPE(PMSheetDoneProcPtr)                      PMSheetDoneUPP;
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
-extern PMSheetDoneUPP
-NewPMSheetDoneUPP(PMSheetDoneProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+PMSheetDoneUPP NewPMSheetDoneUPP(PMSheetDoneProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
 
 /*
  *  DisposePMSheetDoneUPP()
@@ -68,8 +61,7 @@ NewPMSheetDoneUPP(PMSheetDoneProcPtr userRoutine)             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
-extern void
-DisposePMSheetDoneUPP(PMSheetDoneUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+void DisposePMSheetDoneUPP(PMSheetDoneUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokePMSheetDoneUPP()
@@ -79,13 +71,11 @@ DisposePMSheetDoneUPP(PMSheetDoneUPP userUPP)                 AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
-extern void
-InvokePMSheetDoneUPP(
+void InvokePMSheetDoneUPP(
   PMPrintSession  printSession,
   WindowRef       documentWindow,
   Boolean         accepted,
   PMSheetDoneUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-#endif
 
 #pragma mark
 #pragma mark Print Loop

@@ -1,7 +1,7 @@
 /*
 	NSDraggingItem.h
 	Application Kit
-	Copyright (c) 2010-2017, Apple Inc.
+	Copyright (c) 2010-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,16 +16,16 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NSPasteboardWriting;
 
 
-typedef NSString * NSDraggingImageComponentKey NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSDraggingImageComponentKey NS_TYPED_EXTENSIBLE_ENUM;
 APPKIT_EXTERN NSDraggingImageComponentKey const NSDraggingImageComponentIconKey NS_AVAILABLE_MAC(10_7);
 APPKIT_EXTERN NSDraggingImageComponentKey const NSDraggingImageComponentLabelKey NS_AVAILABLE_MAC(10_7);
 
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSDraggingImageComponent : NSObject {
 @private
-    NSDraggingImageComponentKey _key;
-    id	_contents;
-    NSRect _frame;
+    NSDraggingImageComponentKey _key APPKIT_IVAR;
+    id	_contents APPKIT_IVAR;
+    NSRect _frame APPKIT_IVAR;
 }
 
 + (NSDraggingImageComponent *)draggingImageComponentWithKey:(NSDraggingImageComponentKey)key;
@@ -51,13 +51,13 @@ NS_CLASS_AVAILABLE(10_7, NA)
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSDraggingItem : NSObject {
 @private
-    id _item;
-    NSRect _frame;
-    NSArray *_components;
-    NSArray *(^_componentsProvider)(void);
+    id _item APPKIT_IVAR;
+    NSRect _frame APPKIT_IVAR;
+    NSArray *_components APPKIT_IVAR;
+    NSArray *(^_componentsProvider)(void) APPKIT_IVAR;
 #if !__LP64__
-    NSInteger _reserved1;
-    NSInteger _reserved2;
+    NSInteger _reserved1 APPKIT_IVAR;
+    NSInteger _reserved2 APPKIT_IVAR;
 #endif
 }
 

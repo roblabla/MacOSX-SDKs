@@ -46,7 +46,7 @@ typedef NS_ENUM(NSUInteger, AVAudioCommonFormat) {
 	
 		Instances of this class are immutable.
 */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioFormat : NSObject <NSSecureCoding> {
 @private
 	AudioStreamBasicDescription _asbd;
@@ -149,7 +149,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  	@discussion
  		If formatDescription is invalid, this method fails (returns nil).
  */
-- (instancetype)initWithCMAudioFormatDescription:(CMAudioFormatDescriptionRef)formatDescription NS_AVAILABLE(10_11, 9_0);
+- (instancetype)initWithCMAudioFormatDescription:(CMAudioFormatDescriptionRef)formatDescription API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 #endif
 
 /*!	@method isEqual:
@@ -223,7 +223,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	 @property formatDescription
 	 @abstract Converts to a CMAudioFormatDescriptionRef, for use with Core Media API's.
  */
-@property (nonatomic, readonly) CMAudioFormatDescriptionRef formatDescription NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic, readonly) CMAudioFormatDescriptionRef formatDescription API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 #endif
 
 @end

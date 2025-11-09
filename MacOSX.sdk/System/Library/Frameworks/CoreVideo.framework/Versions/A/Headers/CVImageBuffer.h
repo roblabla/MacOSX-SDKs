@@ -21,11 +21,16 @@
 #include <Availability.h>
 #include <AvailabilityMacros.h>
 
+// For legacy reasons CVImageBuffer.h includes CoreGraphics.h and ApplicationServices.h
 #if TARGET_OS_IPHONE || TARGET_OS_WIN32
 #include <CoreGraphics/CoreGraphics.h>
 #else
 #include <ApplicationServices/ApplicationServices.h>
 #endif
+
+#include <CoreGraphics/CGColorSpace.h>
+#include <CoreGraphics/CGGeometry.h>
+
 #include <CoreVideo/CVBuffer.h>
 
 #if defined(__cplusplus)
@@ -90,6 +95,7 @@ CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferTransferFunction_ITU_R_2020
 CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferTransferFunction_SMPTE_ST_428_1 __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_10_0);
 CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferTransferFunction_SMPTE_ST_2084_PQ __OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
 CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferTransferFunction_ITU_R_2100_HLG __OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferTransferFunction_Linear __OSX_AVAILABLE_STARTING(__MAC_10_14,__IPHONE_12_0);
 	
 /* Chroma siting information. For progressive images, only the TopField value is used. */
 CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferChromaLocationTopFieldKey __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);			// CFString with one of the following CFString values

@@ -1,7 +1,7 @@
 /*
         NSSecureTextField.h
         Application Kit
-        Copyright (c) 1995-2017, Apple Inc.
+        Copyright (c) 1995-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -16,8 +16,8 @@
 @interface NSSecureTextFieldCell : NSTextFieldCell {
 /*All instance variables are private*/
     @private
-    BOOL _echosBullets;
-    BOOL _csMode __unused;
+    BOOL _echosBullets APPKIT_IVAR;
+    BOOL _csMode __unused APPKIT_IVAR;
 }
 
 @property BOOL echosBullets;

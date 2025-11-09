@@ -48,7 +48,7 @@ typedef void (^AVAudioNodeTapBlock)(AVAudioPCMBuffer *buffer, AVAudioTime *when)
 
 		Nodes do not currently provide useful functionality until attached to an engine.
 */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioNode : NSObject {
 @protected
 	void *_impl;

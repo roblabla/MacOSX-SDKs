@@ -1,27 +1,10 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: A55CD8D5-D048-3DBD-874C-DD21239F503C', 'x86_64: DBB8FEAF-9C24-354D-8EB2-8730840E744E' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: D612DC6C-0AA8-3D41-9E17-E8219984FC65' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/QTKit.framework/Versions/A/QTKit
 exports:         
-  - archs:           [ i386 ]
-    symbols:         [ _CopyNSImageToGWorld, _QTAcceleratedDisplayMask, _QTCaptureDeviceLegacySequenceGrabberAttribute, 
-                       _QTConvertImageConsumerAttributeToVisualContextAttribute, 
-                       _QTConvertVisualContextAttributeToImageConsumerAttribute, 
-                       _QTGetImageImageConsumerAttributesFromVisualContext, _QTMovieMovieStructureAvailableCallbackAttribute, 
-                       _QTObjectTokenExecuteCommand, _QTObjectTokenExecuteCommandWithParams, 
-                       _QTObjectTokenGetProperty, _QTObjectTokenGetPropertyWithParams, 
-                       _QTObjectTokenSetProperty, _QTObjectTokenSetPropertyWithParams, 
-                       _QTSetImageConsumerAttributesForVisualContext, _QTVisualContextAttributesFromImageConsumerAttributes, 
-                       _compareImageRepsAccordingToQTFriendliness, _copyBitmapRepToGWorld, 
-                       _createOpenGLTextureContext, _createPixelBufferContext, _drawImageDataToGWorldWithGraphicsImporter, 
-                       _drawPICTDataToGWorldWithQuickDraw, _friendlinessofNSImageRep, 
-                       _getBitsFromNSData ]
-    objc-classes:    [ _QTImageBufferConformer, _QTMovieContentView, _QTMovieViewControllerViewTranslationHandler, 
-                       _QTVisualContextView ]
   - archs:           [ x86_64 ]
-    symbols:         [ _QTKitServerDidDieNotification, _QTKitServerDidDieProcessIDKey ]
-  - archs:           [ i386, x86_64 ]
     symbols:         [ _QTAddImageCodecQuality, _QTAddImageCodecType, _QTAlternates_AlternateTrack, 
                        _QTAlternates_FallbackTrack, _QTAlternates_LanguageCodeEncoding_ISO_639_2T, 
                        _QTAlternates_LanguageCodeEncoding_MacType_LangCode, _QTAlternates_LanguageCodeEncoding_RFC_4646, 
@@ -76,6 +59,7 @@ exports:
                        _QTImageConsumerTargetDimensionsKey, _QTImageConsumerTargetDimensionsWidthKey, 
                        _QTIndefiniteTime, _QTIntersectionTimeRange, _QTKitCanUseIOSurface, 
                        _QTKitErrorDomain, _QTKitErrorException, _QTKitErrorValue, 
+                       _QTKitServerDidDieNotification, _QTKitServerDidDieProcessIDKey, 
                        _QTLocalizedStringFromErrorCode, _QTLocalizedStringFromKey, 
                        _QTLocalizedStringFromTable, _QTMakeTime, _QTMakeTimeRange, 
                        _QTMakeTimeScaled, _QTMakeTimeWithTimeInterval, _QTMakeTimeWithTimeRecord, 
@@ -351,24 +335,23 @@ exports:
                        _kQTTimeFormatterPositivePrefix, _kQTTimeFormatterPositiveSuffix, 
                        _kQTTimeFormatterRequiredComponents, _kQTTimeFormatterShowsSignInAllComponents, 
                        _kQTTimeFormatterUsesDigitGroupingSeparator ]
-    objc-classes:    [ _QTAudioCompressionOptions, _QTCaptureAudioPreviewOutput, 
-                       _QTCaptureConnection, _QTCaptureDecompressedAudioOutput, _QTCaptureDecompressedVideoOutput, 
-                       _QTCaptureDevice, _QTCaptureDeviceInput, _QTCaptureFileOutput, 
-                       _QTCaptureInput, _QTCaptureLayer, _QTCaptureMovieFileOutput, 
-                       _QTCaptureOutput, _QTCaptureScreenInput, _QTCaptureSession, 
-                       _QTCaptureVideoPreviewOutput, _QTCaptureView, _QTCompressionOptions, 
-                       _QTDataReference, _QTExportOptions, _QTExportSession, _QTFormatDescription, 
-                       _QTHUDBackgroundView, _QTHUDButton, _QTHUDButtonCell, _QTHUDContainerView, 
-                       _QTHUDGroupView, _QTHUDGroupViewItem, _QTHUDMediaTimelineRangeMarker, 
-                       _QTHUDMediaTimelineTrack, _QTHUDMediaTimelineTrackPreview, 
-                       _QTHUDMediaTimelineView, _QTHUDPopUpButton, _QTHUDPopUpButtonCell, 
-                       _QTHUDRemoteIndicatorView, _QTHUDSlider, _QTHUDSliderCell, 
-                       _QTHUDTimeFormatter, _QTHUDTimeline, _QTHUDTimelineCell, _QTHotspot, 
-                       _QTHotspotEnumerator, _QTMedia, _QTMediaKeys, _QTMetadataItem, 
-                       _QTMovie, _QTMovieLayer, _QTMovieModernizer, _QTMoviePlaybackController, 
-                       _QTMovieUndoOperation, _QTMovieVideoProviderQuartzComposerOnly, 
-                       _QTMovieView, _QTMutableExportOptions, _QTMutableMetadataItem, 
-                       _QTNode, _QTNodeEnumerator, _QTPixelBufferConverter, _QTSampleBuffer, 
-                       _QTStream, _QTTrack, _QTUtilities, _QTVideoCompressionOptions, 
-                       _QTVideoRendererWebKitOnly ]
+    objc-classes:    [ QTAudioCompressionOptions, QTCaptureAudioPreviewOutput, QTCaptureConnection, 
+                       QTCaptureDecompressedAudioOutput, QTCaptureDecompressedVideoOutput, 
+                       QTCaptureDevice, QTCaptureDeviceInput, QTCaptureFileOutput, 
+                       QTCaptureInput, QTCaptureLayer, QTCaptureMovieFileOutput, 
+                       QTCaptureOutput, QTCaptureScreenInput, QTCaptureSession, QTCaptureVideoPreviewOutput, 
+                       QTCaptureView, QTCompressionOptions, QTDataReference, QTExportOptions, 
+                       QTExportSession, QTFormatDescription, QTHUDBackgroundView, 
+                       QTHUDButton, QTHUDButtonCell, QTHUDContainerView, QTHUDGroupView, 
+                       QTHUDGroupViewItem, QTHUDMediaTimelineRangeMarker, QTHUDMediaTimelineTrack, 
+                       QTHUDMediaTimelineTrackPreview, QTHUDMediaTimelineView, QTHUDPopUpButton, 
+                       QTHUDPopUpButtonCell, QTHUDRemoteIndicatorView, QTHUDSlider, 
+                       QTHUDSliderCell, QTHUDTimeFormatter, QTHUDTimeline, QTHUDTimelineCell, 
+                       QTHotspot, QTHotspotEnumerator, QTMedia, QTMediaKeys, QTMetadataItem, 
+                       QTMovie, QTMovieLayer, QTMovieModernizer, QTMoviePlaybackController, 
+                       QTMovieUndoOperation, QTMovieVideoProviderQuartzComposerOnly, 
+                       QTMovieView, QTMutableExportOptions, QTMutableMetadataItem, 
+                       QTNode, QTNodeEnumerator, QTPixelBufferConverter, QTSampleBuffer, 
+                       QTStream, QTTrack, QTUtilities, QTVideoCompressionOptions, 
+                       QTVideoRendererWebKitOnly ]
 ...

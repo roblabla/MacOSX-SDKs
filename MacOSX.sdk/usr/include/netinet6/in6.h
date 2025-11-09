@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2017 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2018 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -99,7 +99,6 @@
 #define	_NETINET6_IN6_H_
 #include <sys/appleapiopts.h>
 #include <sys/_types.h>
-
 #include <sys/_types/_sa_family_t.h>
 
 /*
@@ -149,13 +148,13 @@
 /*
  * IPv6 address
  */
-struct in6_addr {
+typedef struct in6_addr {
 	union {
 		__uint8_t   __u6_addr8[16];
 		__uint16_t  __u6_addr16[8];
 		__uint32_t  __u6_addr32[4];
 	} __u6_addr;			/* 128-bit IP6 address */
-};
+} in6_addr_t;
 
 #define	s6_addr   __u6_addr.__u6_addr8
 
@@ -618,6 +617,8 @@ struct ip6_mtuinfo {
 /* New entries should be added here from current IPV6CTL_MAXID value. */
 /* to define items, should talk with KAME guys first, for *BSD compatibility */
 #define	IPV6CTL_MAXID		51
+
+
 
 
 

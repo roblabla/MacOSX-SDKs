@@ -1,7 +1,7 @@
 /*
     NSRulerView.h
     Application Kit
-    Copyright (c) 1994-2017, Apple Inc.
+    Copyright (c) 1994-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, NSRulerOrientation) {
     NSVerticalRuler
 };
 
-typedef NSString * NSRulerViewUnitName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSRulerViewUnitName NS_TYPED_EXTENSIBLE_ENUM;
 APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitInches NS_AVAILABLE_MAC(10_13);
 APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitCentimeters NS_AVAILABLE_MAC(10_13);
 APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitPoints NS_AVAILABLE_MAC(10_13);
@@ -25,31 +25,30 @@ APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitPicas NS_AVAILABLE_MAC(10
 
 @interface NSRulerView : NSView {
 @private
-    __weak NSScrollView *_scrollView;
-    NSRulerOrientation _orientation;
+    __weak NSScrollView *_scrollView APPKIT_IVAR;
+    NSRulerOrientation _orientation APPKIT_IVAR;
 
-    NSString *_units;
-    CGFloat _originOffset;
+    NSString *_units APPKIT_IVAR;
+    CGFloat _originOffset APPKIT_IVAR;
 
-    CGFloat _ruleThickness;
-    CGFloat _thicknessForMarkers;
-    CGFloat _thicknessForAccessoryView;
+    CGFloat _ruleThickness APPKIT_IVAR;
+    CGFloat _thicknessForMarkers APPKIT_IVAR;
+    CGFloat _thicknessForAccessoryView APPKIT_IVAR;
 
-    __weak NSView *_clientView;
-    NSMutableArray *_markers;
-    NSView *_accessoryView;
+    __weak NSView *_clientView APPKIT_IVAR;
+    NSMutableArray *_markers APPKIT_IVAR;
+    NSView *_accessoryView APPKIT_IVAR;
 
     // Hash dict related caching
-    NSDictionary *_cachedHashDict;
-    CGFloat _cachedDocViewToRulerConversion;
+    NSDictionary *_cachedHashDict APPKIT_IVAR;
+    CGFloat _cachedDocViewToRulerConversion APPKIT_IVAR;
 
-    // Scroll optimization related caching
-    NSPoint _cachedContentBoundsOrigin;
+    NSPoint _reservedRulerView2 APPKIT_IVAR;
 
     // Dragging related caching
-    NSRulerMarker *_draggingMarker;
+    NSRulerMarker *_draggingMarker APPKIT_IVAR;
 
-    id _reservedRulerView1;
+    id _reservedRulerView1 APPKIT_IVAR;
 }
 
 /************************* Registering new units *************************/
@@ -66,11 +65,10 @@ APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitPicas NS_AVAILABLE_MAC(10
 /**************************** Basic setup ****************************/
 
 @property (nullable, weak) NSScrollView *scrollView;
-    // A ruler uses its scrollView to finds it's document view to see whether it should be flipped.  The set method is generally called only by the scroll view itself.  You should not have to set this.
+    // A ruler uses its scrollView to finds its document view to see whether it should be flipped.  The set method is generally called only by the scroll view itself.  You should not have to set this.
 
 @property NSRulerOrientation orientation;
     // Either NSHorizontalRuler or NSVerticalRuler.  The set method is generally called by the ruler's scroll view.  You should not have to set this.
-
 
 /**************************** Ruler geometry ****************************/
 
@@ -81,7 +79,7 @@ APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitPicas NS_AVAILABLE_MAC(10
     // The required height for a horizontal ruler or the required width for a vertical ruler.  Used by the scrollview when tiling.  The value is based on the sizes of the various areas of the ruler, some of which can be set below.
 
 @property CGFloat ruleThickness;
-    // The rule size is the height of the area used to draw the ruler hash-marks in a horizontal ruler or the width of that area in a vertical ruler.  This value will be interpretted in the coordinate system of the ruler's superview (like the ruler's frame).
+    // The rule size is the height of the area used to draw the ruler hash marks in a horizontal ruler or the width of that area in a vertical ruler.  This value will be interpretted in the coordinate system of the ruler's superview (like the ruler's frame).
 
 @property CGFloat reservedThicknessForMarkers;
     // This indicates to the ruler how much room it should leave for objects which sit above or to the left of the rule (such as tab stops, margins, etc...).  Default is 15.0.  If you expect that no view in your document view will ever put objects on the ruler, you can set this to 0.0.  If objects are ever set on the ruler, and not enough space was reserved for them, the ruler grows itself and retiles the scroll view.
@@ -95,7 +93,7 @@ APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitPicas NS_AVAILABLE_MAC(10
     // The units of the ruler start out with the user's preferred measurement.  They can be changed if desired.  The units set must be registered with the ruler factory.  By default Inches, Centimeters, Picas, and Points are supported.
 
 @property CGFloat originOffset;
-    // How far to offset the ruler's zero hashmark (and label) from the document view's bounds origin.
+    // How far to offset the ruler's zero hash mark (and label) from the document view's bounds origin.
 
 /**************************** Client view setup ****************************/
 
@@ -113,7 +111,7 @@ APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitPicas NS_AVAILABLE_MAC(10
     // A rulers accessory view is drawn below or to the right of the rule.  It can contain arbitrary controls.
 
 - (void)moveRulerlineFromLocation:(CGFloat)oldLocation toLocation:(CGFloat)newLocation;
-// This method can be used to draw temporary lines in the rule.  NSRulerMarkers use this during dragging to draw the part of the line they draw from themselves across the scroll views contents which appears in the rule area.  You can use this method to draw ticks in the ruler (for example) to show the position or extent of an object while it is being dragged in the document.  oldLocation is the last position that the line was at or -1.0 if this is the first time it is being drawn.  newLocation is where the line should be or -1.0 if you are just trying to get an old line erased. 
+    // This method can be used to draw temporary lines in the rule.  NSRulerMarkers use this during dragging to draw the part of the line they draw from themselves across the scroll views contents which appears in the rule area.  You can use this method to draw ticks in the ruler (for example) to show the position or extent of an object while it is being dragged in the document.  oldLocation is the last position that the line was at or -1.0 if this is the first time it is being drawn.  newLocation is where the line should be or -1.0 if you are just trying to get an old line erased. 
 
 /*********************** Drawing and hash invalidation ***********************/
 
@@ -121,7 +119,7 @@ APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitPicas NS_AVAILABLE_MAC(10
     // Forces recalculation of the hash mark dictionary next time any display is done.  You should not generally have to call this method.
 
 - (void)drawHashMarksAndLabelsInRect:(NSRect)rect;
-    // You should never need to call this, but you might want to override it.  This method is called by -drawRect: to draw the actual hash-marks and labels on the ruler.  If you want to do custom hash-marks and labels you should first look at doing it with a delegate.  You can do whatever kind of custom hash-marks you want through delegation as long as the hash-marks and labels are evenly spaced.  But if you need to do hash-marks or labels that are not evenly spaced you will need to override this.
+    // You should never need to call this, but you might want to override it.  This method is called by -drawRect: to draw the actual hash marks and labels on the ruler.
 
 - (void)drawMarkersInRect:(NSRect)rect;
     // You should never need to call this, but you might want to override it.  This method is called by -drawRect: to draw the ruler objects on the ruler.  If you want to do something different you can override this.
@@ -166,9 +164,10 @@ APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitPicas NS_AVAILABLE_MAC(10
 - (void)rulerView:(NSRulerView *)ruler willSetClientView:(NSView *)newClient;
     // This is sent to the existing client before it is replaced by the new client.  The existing client can catch this to clean up any cached state it keeps while it is the client of a ruler.
 
-// This additional mapping allows mapping between location and point for clients with rotated coordinate system (e.g. vertical text view)
 - (CGFloat)rulerView:(NSRulerView *)ruler locationForPoint:(NSPoint)point NS_AVAILABLE_MAC(10_7);
 - (NSPoint)rulerView:(NSRulerView *)ruler pointForLocation:(CGFloat)point NS_AVAILABLE_MAC(10_7);
+    // This additional mapping allows mapping between location and point for clients with rotated coordinate system (e.g., vertical text view).
+
 @end
 
 NS_ASSUME_NONNULL_END

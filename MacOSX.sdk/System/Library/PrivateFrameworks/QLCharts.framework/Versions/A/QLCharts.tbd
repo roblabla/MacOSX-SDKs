@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 3C84C9E8-3236-3D8F-9B86-686A3DF78E5B' ]
+uuids:           [ 'x86_64: 8E8E0703-667D-3F37-95B4-A4809CD92819' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/QLCharts.framework/Versions/A/QLCharts
 exports:         
@@ -152,5 +152,5 @@ exports:
                        _kOIChartStockType, _kOIChartStrokeColorKey, _kOIChartStrokeWidthKey, 
                        _kOIChartSurfaceType, _kOIChartTextColorKey, _kOIChartTitleAreaKey, 
                        _kOIChartTitleKey, _kOIChartUseShadowsKey, _kOIChartXYType ]
-    objc-classes:    [ _OIPieChartRenderer, _OIPieSliceCGRenderer ]
+    objc-classes:    [ OIPieChartRenderer, OIPieSliceCGRenderer ]
 ...

@@ -1,7 +1,7 @@
 /*
     NSTableCellView.h
     Application Kit
-    Copyright (c) 2009-2017, Apple Inc.
+    Copyright (c) 2009-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -23,13 +23,13 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSTableCellView : NSView {
 @private
-    NSBackgroundStyle _backgroundStyle;
-    id _objectValue;
-    id _aux;
-    NSTableViewRowSizeStyle _rowSizeStyle;
+    NSBackgroundStyle _backgroundStyle APPKIT_IVAR;
+    id _objectValue APPKIT_IVAR;
+    id _aux APPKIT_IVAR;
+    NSTableViewRowSizeStyle _rowSizeStyle APPKIT_IVAR;
 
-    NSTextField *_textField;
-    NSImageView *_imageView;
+    __weak NSTextField *_textField APPKIT_IVAR;
+    __weak NSImageView *_imageView APPKIT_IVAR;
 }
 
 /* The 'objectValue' is automatically set by the table when using bindings, or the result from the dataSource method -tableView:objectValueForTableColumn:row:. Key Value Observing (KVO) compliant so user interface elements can be bound to the 'objectValue'. 
@@ -41,7 +41,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @property (nullable, assign) IBOutlet NSTextField *textField;
 @property (nullable, assign) IBOutlet NSImageView *imageView;
 
-/* The backgroundStyle property is automatically set by the enclosing NSTableRowView to let this view know what its background looks like. For instance, when the -backgroundStyle is NSBackgroundStyleDark, the view should use a light text color. Upon setting, the default implementation automatically forwards calls to all subviews that implement -setBackgroundStyle: or are an NSControl (which have NSCells that respond to -setBackgroundStyle:).
+/* The backgroundStyle property is automatically set by the enclosing NSTableRowView to let this view know what its background looks like. For instance, when the -backgroundStyle is NSBackgroundStyleEmphasized, the view should use a contrasting text color. The system label colors (labelColor, secondaryLabelColor, tertiaryLabelColor, and quaternaryLabelColor) automatically adapt when displayed with an emphasized backgroundStyle. Upon setting, the default implementation automatically forwards calls to all subviews that implement -setBackgroundStyle: or are an NSControl (which have NSCells that respond to -setBackgroundStyle:).
  */
 @property NSBackgroundStyle backgroundStyle;
 

@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2017 Apple Inc. All rights reserved.
+	Copyright 2010-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -53,7 +53,7 @@ AVF_EXPORT AVMediaType const AVMediaTypeMuxed                 NS_AVAILABLE(10_7,
  If clients want to record a particular kind of metadata to a movie, they must manually form connections
  between a AVMediaTypeMetadata port and the movie file output using AVCaptureSession's -addConnection API.
 */
-AVF_EXPORT AVMediaType const AVMediaTypeMetadataObject NS_AVAILABLE_IOS(9_0);
+AVF_EXPORT AVMediaType const AVMediaTypeMetadataObject API_AVAILABLE(ios(9.0), tvos(9.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED;
 
 AVF_EXPORT AVMediaType const AVMediaTypeDepthData NS_AVAILABLE(10_13, 11_0);
 

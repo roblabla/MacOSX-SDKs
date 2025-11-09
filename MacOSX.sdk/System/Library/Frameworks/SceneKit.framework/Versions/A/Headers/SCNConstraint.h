@@ -1,7 +1,8 @@
 //
 //  SCNConstraint.h
+//  SceneKit
 //
-//  Copyright (c) 2013-2017 Apple Inc. All rights reserved.
+//  Copyright © 2013-2018 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -16,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract A SCNConstraint is an abstract class that represents a single constraint that can be applied to a node.
  */
 
-API_AVAILABLE(macos(10.9))
+SCN_EXPORT API_AVAILABLE(macos(10.9))
 @interface SCNConstraint : NSObject <NSCopying, NSSecureCoding, SCNAnimatable>
 
 /*!
@@ -33,7 +34,7 @@ API_AVAILABLE(macos(10.9))
 
 /*!
  @property incremental
- @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to true on macos 10.13, ios 11.0, tvos 11.0, watchos 4.0, default to false on previous releases.
+ @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES on macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in earlier versions.
  */
 @property(nonatomic, getter=isIncremental) BOOL incremental API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
@@ -46,7 +47,7 @@ API_AVAILABLE(macos(10.9))
  @abstract A SCNLookAtConstraint applies on a node's orientation so that it always look at another node.
  */
 
-API_AVAILABLE(macos(10.9))
+SCN_EXPORT API_AVAILABLE(macos(10.9))
 @interface SCNLookAtConstraint : SCNConstraint
 
 /*!
@@ -72,13 +73,13 @@ API_AVAILABLE(macos(10.9))
 
 /*!
  @property targetOffset
- @abstract Front direction in the constraint owner local space. Defaults to [SCNNode localFront]. Animatable
+ @abstract Front direction in the constraint owner local space. Defaults to -[SCNNode localFront]. Animatable
  */
 @property(nonatomic, assign) SCNVector3 localFront API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
  @property worldUp
- @abstract Up reference direction in world space. Defaults to [SCNNode localUp]. Animatable
+ @abstract Up reference direction in world space. Defaults to -[SCNNode localUp]. Animatable
  */
 @property(nonatomic, assign) SCNVector3 worldUp API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
@@ -101,7 +102,7 @@ typedef NS_OPTIONS(NSUInteger, SCNBillboardAxis) {
     SCNBillboardAxisAll = SCNBillboardAxisX | SCNBillboardAxisY | SCNBillboardAxisZ
 };
 
-API_AVAILABLE(macos(10.11), ios(9.0))
+SCN_EXPORT API_AVAILABLE(macos(10.11), ios(9.0))
 @interface SCNBillboardConstraint : SCNConstraint
 
 /*!
@@ -125,7 +126,7 @@ API_AVAILABLE(macos(10.11), ios(9.0))
  @class SCNTransformConstraint
  @abstract A SCNTransformConstraint applies on the transform of a node via a custom block.
  */
-API_AVAILABLE(macos(10.9))
+SCN_EXPORT API_AVAILABLE(macos(10.9))
 @interface SCNTransformConstraint : SCNConstraint
 
 /*!
@@ -163,7 +164,7 @@ API_AVAILABLE(macos(10.9))
  @class SCNIKConstraint
  @abstract A SCNIKConstraint applies an inverse kinematics constraint
  */
-API_AVAILABLE(macos(10.10))
+SCN_EXPORT API_AVAILABLE(macos(10.10))
 @interface SCNIKConstraint : SCNConstraint
 
 /*!
@@ -209,7 +210,7 @@ API_AVAILABLE(macos(10.10))
  @class SCNDistanceConstraint
  @abstract A SCNDistanceConstraint ensure a minimum/maximum distance with a target node.
  */
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
+SCN_EXPORT API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @interface SCNDistanceConstraint : SCNConstraint
 
 /*!
@@ -244,7 +245,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  @class SCNReplicatorConstraint
  @abstract A SCNReplicatorConstraint replicates the position/orientation/scale of a target node
  */
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
+SCN_EXPORT API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @interface SCNReplicatorConstraint : SCNConstraint
 
 /*!
@@ -303,7 +304,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  @class SCNAccelerationConstraint
  @abstract A SCNAccelerationConstraint caps the acceleration and velocity of a node
  */
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
+SCN_EXPORT API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @interface SCNAccelerationConstraint : SCNConstraint
 
 /*!
@@ -346,7 +347,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  @class SCNSliderConstraint
  @abstract A SCNSliderConstraint constraint makes a node to collide and slide against a category of nodes
  */
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
+SCN_EXPORT API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @interface SCNSliderConstraint : SCNConstraint
 
 /*!
@@ -359,19 +360,19 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  @property collisionCategoryBitMask
  @abstract Defines the category of node to collide against. Defaults to 0.
  */
-@property (nonatomic, assign) NSUInteger collisionCategoryBitMask;
+@property(nonatomic, assign) NSUInteger collisionCategoryBitMask;
 
 /*!
  @property radius
  @abstract Defines the radius of the slider. Defaults to 1.
  */
-@property (nonatomic, assign) CGFloat radius;
+@property(nonatomic, assign) CGFloat radius;
 
 /*!
  @property offset
  @abstract Defines the offset of the slider. Defaults to (0,0,0). 
  */
-@property (nonatomic, assign) SCNVector3 offset;
+@property(nonatomic, assign) SCNVector3 offset;
 
 @end
 
@@ -391,7 +392,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  @abstract A SCNAvoidOccluderConstraint constraints place the receiver at a position that prevent nodes with the specified category to occlude the target.
  @discussion The target node and it's children are ignored as potential occluders.
  */
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
+SCN_EXPORT API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @interface SCNAvoidOccluderConstraint : SCNConstraint
 
 /*!
@@ -404,26 +405,26 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  @property delegate
  @abstract The receiver's delegate
  */
-@property (nonatomic, assign) id<SCNAvoidOccluderConstraintDelegate> delegate;
+@property(nonatomic, assign) id <SCNAvoidOccluderConstraintDelegate> delegate;
 
 /*!
  @property target
  @abstract Defines the target node
  */
-@property (nonatomic, retain, nullable) SCNNode *target;
+@property(nonatomic, retain, nullable) SCNNode *target;
 
 /*!
  @property occluderCategoryBitMask
  @abstract Defines the category of node to consider as occluder. Defaults to 1.
  */
-@property (nonatomic, assign) NSUInteger occluderCategoryBitMask;
+@property(nonatomic, assign) NSUInteger occluderCategoryBitMask;
 
 /*!
  @property bias
  @abstract Defines the bias the apply after moving the receiver to avoid occluders. Defaults to 10e-5.
  @discussion A positive bias will move the receiver closer to the target.
  */
-@property (nonatomic, assign) CGFloat bias;
+@property(nonatomic, assign) CGFloat bias;
 
 @end
 

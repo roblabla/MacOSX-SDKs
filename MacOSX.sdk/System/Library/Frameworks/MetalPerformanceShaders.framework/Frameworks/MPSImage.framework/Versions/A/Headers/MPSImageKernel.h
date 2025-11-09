@@ -100,11 +100,20 @@
  *              will be released before the calling function returns.
  */
 
-/* Warning here for ns_returns_retained is clang rdar://problem/20130079 */
+
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wignored-attributes"
+/* Squelch broken clan warning here for ns_returns_retained rdar://problem/20130079 */
+
 typedef id <MTLTexture> __nonnull NS_RETURNS_RETAINED (^MPSCopyAllocator)(
-    MPSKernel * __nonnull filter,
-    id <MTLCommandBuffer> __nonnull commandBuffer,
-    id <MTLTexture> __nonnull sourceTexture);
+      MPSKernel * __nonnull filter,
+      id <MTLCommandBuffer> __nonnull commandBuffer,
+      id <MTLTexture> __nonnull sourceTexture);
+
+
+#pragma clang diagnostic pop
+
 
 
 

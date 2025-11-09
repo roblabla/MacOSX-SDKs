@@ -99,6 +99,7 @@ enum {
     kIOMemoryMapperNone		= 0x00000800,	// Shared with Buffer MD
     kIOMemoryHostOnly           = 0x00001000,   // Never DMA accessible
     kIOMemoryPersistent		= 0x00010000,
+    kIOMemoryMapCopyOnWrite	= 0x00020000,
     kIOMemoryRemote		= 0x00040000,
     kIOMemoryThreadSafe		= 0x00100000,	// Shared with Buffer MD
     kIOMemoryClearEncrypt	= 0x00200000,	// Shared with Buffer MD

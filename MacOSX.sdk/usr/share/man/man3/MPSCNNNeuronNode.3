@@ -1,4 +1,4 @@
-.TH "MPSCNNNeuronNode" 3 "Sun Jul 2 2017" "Version MetalPerformanceShaders-84.1" "MetalPerformanceShaders.framework" \" -*- nroff -*-
+.TH "MPSCNNNeuronNode" 3 "Mon Jul 9 2018" "Version MetalPerformanceShaders-119.3" "MetalPerformanceShaders.framework" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -11,100 +11,50 @@ MPSCNNNeuronNode
 .PP
 Inherits \fBMPSNNFilterNode\fP\&.
 .PP
-Inherited by \fBMPSCNNNeuronAbsoluteNode\fP, \fBMPSCNNNeuronELUNode\fP, \fBMPSCNNNeuronHardSigmoidNode\fP, \fBMPSCNNNeuronLinearNode\fP, \fBMPSCNNNeuronReLUNode\fP, \fBMPSCNNNeuronSigmoidNode\fP, \fBMPSCNNNeuronSoftPlusNode\fP, \fBMPSCNNNeuronSoftSignNode\fP, and \fBMPSCNNNeuronTanHNode\fP\&.
+Inherited by \fBMPSCNNNeuronAbsoluteNode\fP, \fBMPSCNNNeuronELUNode\fP, \fBMPSCNNNeuronExponentialNode\fP, \fBMPSCNNNeuronHardSigmoidNode\fP, \fBMPSCNNNeuronLinearNode\fP, \fBMPSCNNNeuronLogarithmNode\fP, \fBMPSCNNNeuronPowerNode\fP, \fBMPSCNNNeuronPReLUNode\fP, \fBMPSCNNNeuronReLUNNode\fP, \fBMPSCNNNeuronReLUNode\fP, \fBMPSCNNNeuronSigmoidNode\fP, \fBMPSCNNNeuronSoftPlusNode\fP, \fBMPSCNNNeuronSoftSignNode\fP, and \fBMPSCNNNeuronTanHNode\fP\&.
 .SS "Instance Methods"
 
 .in +1c
 .ti -1c
-.RI "(\fBMPSCNNNeuronNode\fP *__nonnull) \- \fBinitWithSource:type:a:b:\fP"
-.br
-.ti -1c
-.RI "(nonnull instancetype) \- \fBinitWithSource:\fP"
-.br
-.ti -1c
-.RI "(nonnull instancetype) \- \fBinitWithSource:a:\fP"
+.RI "(nonnull instancetype) \- \fBinit\fP"
 .br
 .in -1c
 .SS "Class Methods"
 
 .in +1c
 .ti -1c
-.RI "(\fBMPSCNNNeuronNode\fP *__nonnull) + \fBnodeWithSource:type:a:b:\fP"
+.RI "(nonnull instancetype) + \fBnodeWithSource:descriptor:\fP"
 .br
 .in -1c
-.SS "Additional Inherited Members"
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "float \fBa\fP"
+.br
+.ti -1c
+.RI "float \fBb\fP"
+.br
+.ti -1c
+.RI "float \fBc\fP"
+.br
+.in -1c
 .SH "Method Documentation"
 .PP 
-.SS "\- (nonnull instancetype) initWithSource: (\fBMPSNNImageNode\fP *__nonnull) sourceNode"
-Convenience method to init a node representing a \fBMPSCNNNeuronELU\fP kernel\&.  Neuron parameters a and b will default to 1\&.0f 
-.PP
-\fBParameters:\fP
-.RS 4
-\fIsourceNode\fP The \fBMPSNNImageNode\fP representing the source \fBMPSImage\fP for the filter 
-.RE
-.PP
-\fBReturns:\fP
-.RS 4
-A new MPSNNFilter node for a \fBMPSCNNNeuronELU\fP kernel\&. 
-.RE
-.PP
+.SS "\- (nonnull instancetype) init "
 
-.SS "\- (nonnull instancetype) \fBinitWithSource:\fP (\fBMPSNNImageNode\fP *__nonnull) sourceNode(float) a"
-Convenience method to init a node representing a \fBMPSCNNNeuronELU\fP kernel\&.  Neuron parameter b (if it exists) will default to 1\&.0f 
 .PP
-\fBParameters:\fP
-.RS 4
-\fIsourceNode\fP The \fBMPSNNImageNode\fP representing the source \fBMPSImage\fP for the filter 
-.br
-\fIa\fP See class discussion\&. 
-.RE
-.PP
-\fBReturns:\fP
-.RS 4
-A new MPSNNFilter node for a \fBMPSCNNNeuronELU\fP kernel\&. 
-.RE
-.PP
-
-.SS "\- (\fBMPSCNNNeuronNode\fP * __nonnull) \fBinitWithSource:\fP (\fBMPSNNImageNode\fP *__nonnull) sourceNode(\fBMPSCNNNeuronType\fP) type(float) a(float) b"
-Init a node representing a \fBMPSCNNNeuron\fP  The class of the result depends on the contents of the descriptor\&. 
-.PP
-\fBParameters:\fP
-.RS 4
-\fIsourceNode\fP The \fBMPSNNImageNode\fP representing the source \fBMPSImage\fP for the filter 
-.br
-\fItype\fP The type of neuron node to make 
-.br
-\fIa\fP Parameter value a\&. 
-.br
-\fIb\fP Parameter value b\&. 
-.RE
-.PP
-\fBReturns:\fP
-.RS 4
-A new \fBMPSCNNNeuronNode\fP subclass instance for a \fBMPSCNNNeuron\fP kernel\&. 
-.RE
-.PP
-
-.SS "+ (\fBMPSCNNNeuronNode\fP * __nonnull) nodeWithSource: (\fBMPSNNImageNode\fP *__nonnull) sourceNode(\fBMPSCNNNeuronType\fP) type(float) a(float) b"
-Init a node representing a \fBMPSCNNNeuron\fP  The class of the result depends on the contents of the descriptor\&. 
-.PP
-\fBParameters:\fP
-.RS 4
-\fIsourceNode\fP The \fBMPSNNImageNode\fP representing the source \fBMPSImage\fP for the filter 
-.br
-\fItype\fP The type of neuron node to make 
-.br
-\fIa\fP Parameter value a\&. 
-.br
-\fIb\fP Parameter value b\&. 
-.RE
-.PP
-\fBReturns:\fP
-.RS 4
-A new \fBMPSCNNNeuronNode\fP subclass instance for a \fBMPSCNNNeuron\fP kernel\&. 
-.RE
-.PP
-
+Reimplemented from \fBMPSNNFilterNode\fP\&.
+.SS "+ (nonnull instancetype) nodeWithSource: (\fBMPSNNImageNode\fP *__nonnull) sourceNode(\fBMPSNNNeuronDescriptor\fP *__nonnull) descriptor"
+Create a neuron node of the appropriate type with a \fBMPSNNNeuronDescriptor\fP 
+.SH "Property Documentation"
+.PP 
+.SS "\- (float) a\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
+filter parameter a 
+.SS "\- (float) b\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
+filter parameter b 
+.SS "\- (float) c\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
+filter parameter c 
 
 .SH "Author"
 .PP 

@@ -20,7 +20,7 @@ extern "C" {
 #include <stdint.h>
 #include <stddef.h>
 #include <unistd.h>
-#include <Availability.h>
+#include <os/availability.h>
 
 /*!
  *  @define     __has_attribute
@@ -43,7 +43,7 @@ extern "C" {
 #if __has_attribute(nonnull)
 #   define VIMAGE_NON_NULL(...)         __attribute__ ((nonnull(__VA_ARGS__)))
 #else
-#   define VIMAGE_NON_NULL(...)
+#   define VIMAGE_NON_NULL(...)         
 #endif
 
 /*!
@@ -101,6 +101,14 @@ extern "C" {
 #   define VIMAGE_ENUM_AVAILABLE_STARTING( _a, _b )
 #endif
 
+/*
+ *  @vImage function prototype prefix - Currently only set for visibility
+ */
+    
+#ifndef VIMAGE_PF
+#define VIMAGE_PF __attribute__ ((visibility ("default")))
+#endif
+    
 /* Please see vImage.h and vImage documentation for the meaning of these types. */
 
 /*!
@@ -400,26 +408,26 @@ typedef void*       GammaFunction;      /* Used by vImageGamma                  
  */
 typedef VIMAGE_CHOICE_ENUM(vImage_Error, ssize_t)
 {
-    kvImageNoError                      =    0,
-    kvImageRoiLargerThanInputBuffer     =    -21766,
-    kvImageInvalidKernelSize            =    -21767,
-    kvImageInvalidEdgeStyle             =    -21768,
-    kvImageInvalidOffset_X              =    -21769,
-    kvImageInvalidOffset_Y              =    -21770,
-    kvImageMemoryAllocationError        =    -21771,
-    kvImageNullPointerArgument          =    -21772,
-    kvImageInvalidParameter             =    -21773,
-    kvImageBufferSizeMismatch           =    -21774,
-    kvImageUnknownFlagsBit              =    -21775,
-    kvImageInternalError                =    -21776,    /* Should never see this. File a bug! */
-    kvImageInvalidRowBytes              =    -21777,
-    kvImageInvalidImageFormat           =    -21778,
-    kvImageColorSyncIsAbsent            =    -21779,
-    kvImageOutOfPlaceOperationRequired  =    -21780,
-    kvImageInvalidImageObject           =    -21781,
-    kvImageInvalidCVImageFormat         =    -21782,
-    kvImageUnsupportedConversion        =    -21783,
-    kvImageCoreVideoIsAbsent            =    -21784,
+    kvImageNoError                     VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    0,
+    kvImageRoiLargerThanInputBuffer    VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21766,
+    kvImageInvalidKernelSize           VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21767,
+    kvImageInvalidEdgeStyle            VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21768,
+    kvImageInvalidOffset_X             VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21769,
+    kvImageInvalidOffset_Y             VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21770,
+    kvImageMemoryAllocationError       VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21771,
+    kvImageNullPointerArgument         VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21772,
+    kvImageInvalidParameter            VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21773,
+    kvImageBufferSizeMismatch          VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21774,
+    kvImageUnknownFlagsBit             VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21775,
+    kvImageInternalError               VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21776,    /* Should never see this. File a bug! */
+    kvImageInvalidRowBytes             VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21777,
+    kvImageInvalidImageFormat          VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21778,
+    kvImageColorSyncIsAbsent           VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21779,
+    kvImageOutOfPlaceOperationRequired VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21780,
+    kvImageInvalidImageObject          VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21781,
+    kvImageInvalidCVImageFormat        VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21782,
+    kvImageUnsupportedConversion       VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21783,
+    kvImageCoreVideoIsAbsent           VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 ) =    -21784,
 };
     
 /* vImage Flags                                                                                 */
@@ -517,7 +525,7 @@ typedef VIMAGE_CHOICE_ENUM(vImage_Error, ssize_t)
  */
 typedef VIMAGE_OPTIONS_ENUM(vImage_Flags, uint32_t)
 {
-    kvImageNoFlags                                                                                  =    0,
+    kvImageNoFlags                   VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 )     =    0,
     
      /* Operate on red, green and blue channels only. Alpha is copied from source 
         to destination. For Interleaved formats only. */
@@ -770,12 +778,12 @@ typedef struct vImage_YpCbCrToARGBMatrix
 }vImage_YpCbCrToARGBMatrix;
  
 /*! @const      kvImage_YpCbCrToARGBMatrix_ITU_R_601_4
-    @abstract   Y'CbCr->RGB conversion matrix for ITU-Recommendation BT.601-4 */
-extern const vImage_YpCbCrToARGBMatrix *kvImage_YpCbCrToARGBMatrix_ITU_R_601_4 __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
+ @abstract   Y'CbCr->RGB conversion matrix for ITU-Recommendation BT.601-4 */
+extern VIMAGE_PF const vImage_YpCbCrToARGBMatrix *kvImage_YpCbCrToARGBMatrix_ITU_R_601_4 API_AVAILABLE(macos(10.10), ios(8.0), watchos(1.0), tvos(8.0));
 
 /*! @const      kvImage_YpCbCrToARGBMatrix_ITU_R_709_2
-    @abstract   Y'CbCr->RGB conversion matrix for ITU-Recommendation BT.709-2 */
-extern const vImage_YpCbCrToARGBMatrix *kvImage_YpCbCrToARGBMatrix_ITU_R_709_2 __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
+ @abstract   Y'CbCr->RGB conversion matrix for ITU-Recommendation BT.709-2 */
+extern VIMAGE_PF const vImage_YpCbCrToARGBMatrix *kvImage_YpCbCrToARGBMatrix_ITU_R_709_2 API_AVAILABLE(macos(10.10), ios(8.0), watchos(1.0), tvos(8.0));
 
     
     
@@ -844,12 +852,12 @@ typedef struct vImage_ARGBToYpCbCrMatrix
 }vImage_ARGBToYpCbCrMatrix;
 
 /*! @const      kvImage_ARGBToYpCbCrMatrix_ITU_R_601_4
-    @abstract   RGB->Y'CbCr conversion matrix for ITU-Recommendation BT.601-4 */
-extern const vImage_ARGBToYpCbCrMatrix *kvImage_ARGBToYpCbCrMatrix_ITU_R_601_4 __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
+ @abstract   RGB->Y'CbCr conversion matrix for ITU-Recommendation BT.601-4 */
+extern VIMAGE_PF const vImage_ARGBToYpCbCrMatrix *kvImage_ARGBToYpCbCrMatrix_ITU_R_601_4 API_AVAILABLE(macos(10.10), ios(8.0), watchos(1.0), tvos(8.0));
 
 /*! @const      kvImage_ARGBToYpCbCrMatrix_ITU_R_709_2
-    @abstract   RGB->Y'CbCr conversion matrix for ITU-Recommendation BT.709-2 */
-extern const vImage_ARGBToYpCbCrMatrix *kvImage_ARGBToYpCbCrMatrix_ITU_R_709_2 __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
+ @abstract   RGB->Y'CbCr conversion matrix for ITU-Recommendation BT.709-2 */
+extern VIMAGE_PF const vImage_ARGBToYpCbCrMatrix *kvImage_ARGBToYpCbCrMatrix_ITU_R_709_2 API_AVAILABLE(macos(10.10), ios(8.0), watchos(1.0), tvos(8.0));
     
 /*!
  @typedef    vImage_ARGBToYpCbCr

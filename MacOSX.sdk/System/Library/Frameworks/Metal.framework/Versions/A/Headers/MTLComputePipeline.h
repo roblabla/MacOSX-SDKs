@@ -12,7 +12,7 @@
 #import <Metal/MTLPipeline.h>
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLComputePipelineReflection : NSObject
 
 @property (readonly) NSArray <MTLArgument *> *arguments;
@@ -20,7 +20,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 
 @end
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(9.0))
 @interface MTLComputePipelineDescriptor : NSObject <NSCopying>
 
 /*!
@@ -41,18 +41,24 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  */
 @property (readwrite, nonatomic) BOOL threadGroupSizeIsMultipleOfThreadExecutionWidth;
 
+/*!
+ @property maxTotalThreadsPerThreadgroup
+ @abstract Optional property. Set the maxTotalThreadsPerThreadgroup. If it is not set, returns zero.
+ */
+@property (readwrite, nonatomic) NSUInteger maxTotalThreadsPerThreadgroup API_AVAILABLE(macos(10.14), ios(12.0));
+
 
 /*!
  @property computeDataDescriptor
  @abstract An MTLStageInputOutputDescriptor to fetch data from buffers
  */
-@property (nullable, copy, nonatomic) MTLStageInputOutputDescriptor *stageInputDescriptor NS_AVAILABLE(10_12, 10_0);
+@property (nullable, copy, nonatomic) MTLStageInputOutputDescriptor *stageInputDescriptor API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*!
  @property buffers
  @abstract Optional properties for each buffer binding used by the compute function.
  */
-@property (readonly) MTLPipelineBufferDescriptorArray *buffers NS_AVAILABLE(10_13, 11_0);
+@property (readonly) MTLPipelineBufferDescriptorArray *buffers API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  @method reset
@@ -67,10 +73,10 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  @abstract A handle to compiled code for a compute function.
  @discussion MTLComputePipelineState is a single compute function.  It can only be used with the device that it was created against.
 */
-NS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0))
 @protocol MTLComputePipelineState <NSObject>
 
-@property (nullable, readonly) NSString *label NS_AVAILABLE(10_13, 11_0);
+@property (nullable, readonly) NSString *label API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  @property device
@@ -95,7 +101,8 @@ NS_AVAILABLE(10_11, 8_0)
  @property staticThreadgroupMemoryLength
  @abstract The length in bytes of threadgroup memory that is statically allocated.
  */
-@property (readonly) NSUInteger staticThreadgroupMemoryLength NS_AVAILABLE(10_13, 11_0);
+@property (readonly) NSUInteger staticThreadgroupMemoryLength API_AVAILABLE(macos(10.13), ios(11.0));
+
 
 
 

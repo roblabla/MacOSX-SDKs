@@ -152,6 +152,27 @@ token can be created using
 .It "Trailer Magic	2 bytes	Trailer magic number"
 .It "Record Byte Count	4 bytes	Number of bytes in record"
 .El
+.Ss Identity Token
+The
+.Dq identity
+token contains information about the process that triggered the audit record to be
+created.  An
+.Dq identity
+token can be created using
+.Xr au_to_identity 3 .
+.Bl -column -offset 3n ".No Terminal Address Type/Length" ".No N bytes + 1 NUL"
+.It Sy "Field	Bytes	Description"
+.It Li "Token ID" Ta "1 byte" Ta "Token ID"
+.It Li "Signer Type" Ta "4 bytes" Ta "Code signing signer type"
+.It Li "Signing ID Length" Ta "2 bytes" Ta "Length of code signing identifier"
+.It Li "Signing ID" Ta "N bytes + 1 NUL" Ta "Code signing identifier"
+.It Li "Signing ID Truncated" Ta "1 byte" Ta "Whether or not the Signing ID field was truncated"
+.It Li "Team ID Length" Ta "2 bytes" Ta "Length of team identifier"
+.It Li "Team ID" Ta "N bytes + 1 NUL" Ta "Team identifier"
+.It Li "Team ID Truncated" Ta "1 byte" Ta "Whether or not the Team ID field was truncated"
+.It Li "CDHash Length" Ta "2 bytes" Ta "Length of the CDHash"
+.It Li "CDHash" Ta "N bytes" Ta "CDHash"
+.El
 .Ss Arbitrary Data Token
 The
 .Dq arbitrary data
@@ -504,7 +525,7 @@ or
 .It Li "Argument ID" Ta "1 byte" Ta "Argument ID"
 .It Li "Argument value" Ta "4/8 bytes" Ta "Argument value"
 .It Li "Length" Ta "2 bytes" Ta "Length of the text"
-.It Li "Text" Ta "N bytes + 1 nul" Ta "The string including nul"
+.It Li "Text" Ta "N bytes + 1 NUL" Ta "The string including nul"
 .El
 .Ss exec_args Token
 The

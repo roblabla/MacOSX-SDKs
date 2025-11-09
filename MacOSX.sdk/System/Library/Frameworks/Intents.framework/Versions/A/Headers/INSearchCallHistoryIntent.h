@@ -22,7 +22,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0), watchos(3.2))
+API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
 @interface INSearchCallHistoryIntent : INIntent
 
 - (instancetype)initWithDateCreated:(nullable INDateComponentsRange *)dateCreated
@@ -51,7 +51,7 @@ API_AVAILABLE(ios(10.0), watchos(3.2))
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(10.0), watchos(3.2))
+API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
 @protocol INSearchCallHistoryIntentHandling <NSObject>
 
 @required

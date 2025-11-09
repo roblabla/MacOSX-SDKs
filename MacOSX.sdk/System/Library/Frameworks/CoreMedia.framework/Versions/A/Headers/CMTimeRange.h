@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-    Copyright 2007-2015 Apple Inc. All rights reserved.
+	Copyright © 2007-2018 Apple Inc. All rights reserved.
  
 */
 
@@ -108,25 +108,25 @@ CM_EXPORT CMTimeRange CMTimeRangeMake(
 /*!
 	@function	CMTimeRangeGetUnion
     @abstract   Returns the union of two CMTimeRanges.
-    @discussion	This function returns a CMTimeRange structure that represents the union of the time ranges specified by the <i>range1</i> and <i>range2</i> parameters.
+    @discussion	This function returns a CMTimeRange structure that represents the union of the time ranges specified by the <i>range</i> and <i>otherRange</i> parameters.
 				This is the smallest range that includes all times that are in either range.
 	@result     The union of the two CMTimeRanges.
 */
 CM_EXPORT CMTimeRange CMTimeRangeGetUnion(
-				CMTimeRange range1,				/*! @param range1			A CMTimeRange to be unioned. */
-				CMTimeRange range2)				/*! @param range2			Another CMTimeRange to be unioned. */
+				CMTimeRange range,				/*! @param range			A CMTimeRange to be unioned. */
+				CMTimeRange otherRange)				/*! @param otherRange			Another CMTimeRange to be unioned. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
 	@function	CMTimeRangeGetIntersection
     @abstract   Returns the intersection of two CMTimeRanges.
-    @discussion	This function returns a CMTimeRange structure that represents the intersection of the time ranges specified by the <i>range1</i> and <i>range2</i> parameters.
+    @discussion	This function returns a CMTimeRange structure that represents the intersection of the time ranges specified by the <i>range</i> and <i>otherRange</i> parameters.
 				This is the largest range that both ranges include.
 	@result     The intersection of the two CMTimeRanges.
 */
 CM_EXPORT CMTimeRange CMTimeRangeGetIntersection(
-				CMTimeRange range1,				/*! @param range1			A CMTimeRange to be intersected. */
-				CMTimeRange range2)				/*! @param range2			Another CMTimeRange to be intersected. */
+				CMTimeRange range,				/*! @param range			A CMTimeRange to be intersected. */
+				CMTimeRange otherRange)				/*! @param otherRange			Another CMTimeRange to be intersected. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -155,13 +155,13 @@ CM_EXPORT Boolean CMTimeRangeContainsTime(
 /*!
 	@function	CMTimeRangeContainsTimeRange
 	@abstract	Indicates whether a time range is contained within a time range.
-    @discussion	This function returns a Boolean value that indicates whether the time range specified by the <i>range1</i> parameter
-				contains the range specified by the <i>range2</i> parameter.
+    @discussion	This function returns a Boolean value that indicates whether the time range specified by the <i>range</i> parameter
+				contains the range specified by the <i>otherRange</i> parameter.
     @result     Returns true if the second time range is contained within the first time range, false if it is not.
 */
 CM_EXPORT Boolean CMTimeRangeContainsTimeRange(
-				CMTimeRange range1,				/*! @param range1			A CMTimeRange. */
-				CMTimeRange range2)				/*! @param range2			Another CMTimeRange to be tested for inclusion. */
+				CMTimeRange range,				/*! @param range			A CMTimeRange. */
+				CMTimeRange otherRange)				/*! @param otherRange			Another CMTimeRange to be tested for inclusion. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -221,7 +221,20 @@ CM_EXPORT CMTime CMTimeMapDurationFromRangeToRange(
 				CMTimeRange fromRange, 
 				CMTimeRange toRange )
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
-	
+
+/*!
+	@function	CMTimeFoldIntoRange
+	@abstract	Folds a time into the given range.  This can be used in looping time calculations.
+	@result		A CMTime structure representing the translated duration.
+	@discussion	Note that for certain types of looping, you may want to NOT fold times that are prior
+				to the loop range.  That's up to the client.
+*/
+CM_EXPORT CMTime
+CMTimeFoldIntoRange(
+				CMTime time,					/*! @param time				The CMTime to fold. */
+				CMTimeRange foldRange )			/*! @param foldRange		The CMTimeRange into which to fold it. */
+							API_AVAILABLE(macosx(10.14), ios(12.0));
+
 /*!
 	@function	CMTimeRangeFromTimeToTime
 	@abstract	Make a valid CMTimeRange with the given starting and ending times.
@@ -251,7 +264,7 @@ CM_EXPORT CFDictionaryRef CM_NULLABLE CMTimeRangeCopyAsDictionary(
 	@result		The created CMTimeRange.  
 */
 CM_EXPORT CMTimeRange CMTimeRangeMakeFromDictionary(
-				CFDictionaryRef CM_NONNULL dict)			/*! @param dict				A CFDictionary from which to create a CMTimeRange. */
+				CFDictionaryRef CM_NONNULL dictionaryRepresentation)			/*! @param dictionaryRepresentation				A CFDictionary from which to create a CMTimeRange. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 CM_ASSUME_NONNULL_BEGIN
@@ -382,7 +395,7 @@ CM_EXPORT CFDictionaryRef CM_NULLABLE CMTimeMappingCopyAsDictionary(
 	@result		The created CMTimeMapping.  
 */
 CM_EXPORT CMTimeMapping CMTimeMappingMakeFromDictionary(
-				CFDictionaryRef CM_NONNULL dict)			/*! @param dict				A CFDictionary from which to create a CMTimeMapping. */
+				CFDictionaryRef CM_NONNULL dictionaryRepresentation)			/*! @param dictionaryRepresentation				A CFDictionary from which to create a CMTimeMapping. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 CM_ASSUME_NONNULL_BEGIN
 /*!

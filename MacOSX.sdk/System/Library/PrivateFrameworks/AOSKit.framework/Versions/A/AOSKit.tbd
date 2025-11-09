@@ -1,34 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: A7FA1F7C-D8C3-35C6-A64B-BFAE06BA7120', 'x86_64: 68D53B89-AB98-389A-8217-0D0E2714F834' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: C1D9E39D-60A3-3D75-8671-ADFF85A7EA5E' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AOSKit.framework/Versions/A/AOSKit
-current-version: 259
+current-version: 270
 exports:         
   - archs:           [ x86_64 ]
-    objc-ivars:      [ _AOSAccountCache._accountDicts, _AOSAccountCache._appleAccountLookups, 
-                       _AOSAccountCache._dsidMappings, _AOSAccountLock._dsid, _AOSAccountLock._isLocked, 
-                       _AOSAgentConnection._connection, _AOSAgentConnection._isDisconnected, 
-                       _AOSContext._account, _AOSContext._callback, _AOSContext._callbackThread, 
-                       _AOSContext._info, _AOSContext._transaction, _AOSFileLock._fileDescriptor, 
-                       _AOSFileLock._filePath, _AOSFileLock._isLocked, _AOSImpatientExecutor._targetBlock, 
-                       _AOSImpatientExecutor._timeout, _AOSImpatientExecutor._timeoutBlock, 
-                       _AOSPushManager._apsConnection, _AOSPushManager._apsEnvironment, 
-                       _AOSPushManager._enableLaunching, _AOSPushManager._msgDelegate, 
-                       _AOSPushManager._tokenFetchAttempted, _AOSPushManager._tokenString, 
-                       _AOSPushManager._topics, _AOSRequest._cfConnection, _AOSRequest._cfResponse, 
-                       _AOSRequest._clientID, _AOSRequest._connection, _AOSRequest._credentials, 
-                       _AOSRequest._error, _AOSRequest._messageBody, _AOSRequest._method, 
-                       _AOSRequest._originalUrl, _AOSRequest._requestCompleted, _AOSRequest._requestHeaders, 
-                       _AOSRequest._requestInfo, _AOSRequest._requestStarted, _AOSRequest._response, 
-                       _AOSRequest._responseData, _AOSRequest._responseHeaders, _AOSRequest._responseMsg, 
-                       _AOSRequest._url, _AOSThreadManager._proxyLock, _AOSTransaction.callbackBlock, 
-                       _AOSTransaction.callbackFunction, _AOSTransaction.callbackQueue, 
-                       _AOSTransaction.context, _AOSTransaction.contextRelease, _AOSTransaction.contextRetain, 
-                       _AOSTransaction.didFinish, _AOSTransaction.didSucceed, _AOSTransaction.error, 
-                       _AOSTransaction.result, _AOSTransaction.waitLock, _DataclassConfigManager._actionCount, 
-                       _DataclassConfigManager._info ]
-  - archs:           [ i386, x86_64 ]
     symbols:         [ _AOSAccountCacheNewAuthToken, _AOSAccountCopyAuthInfo, _AOSAccountCopyInfo, 
                        _AOSAccountCreate, _AOSAccountGetAppleID, _AOSAccountGetPassword, 
                        _AOSAccountGetProperties, _AOSAccountGetUser, _AOSAccountRefreshInfo, 
@@ -51,15 +28,16 @@ exports:
                        _AOSLaunchStorageUsageThread, _AOSLaunchSystemCheckThread, 
                        _AOSRemoveAccountInfo, _AOSShimAccountCopyProperty, _AOSShimAccountRefresh, 
                        _AOSShimAppleIDForDSID, _AOSShimCopyAccountIDs, _AOSShimCopyLoggedInAccount, 
-                       _AOSShimCopyPropertiesForService, _AOSShimServiceIsEnabled, 
-                       _AOSShimServiceSetEnabled, _AOSStoreAccountInfo, _AOSStoreProxyCredentials, 
-                       _AOSTransactionCancel, _AOSTransactionCreate, _AOSTransactionGetCallbackBlock, 
-                       _AOSTransactionGetCallbackFunction, _AOSTransactionGetCallbackQueue, 
-                       _AOSTransactionGetContext, _AOSTransactionGetError, _AOSTransactionGetResult, 
-                       _AOSTransactionIsAsync, _AOSTransactionIsFinished, _AOSTransactionSetError, 
-                       _AOSTransactionSetIsFinished, _AOSTransactionSetResult, _AOSTransactionSetSuccessful, 
-                       _AOSTransactionSuccessful, _AOSTransactionUpdate, _AOSTransactionWaitUntilFinished, 
-                       _CreateCFErrorFromRequest, __AOSAccountAuthenticate, __AOSAccountCopyBTMMConfigInfo, 
+                       _AOSShimCopyPropertiesForService, _AOSShimHandlePushNotification, 
+                       _AOSShimServiceIsEnabled, _AOSShimServiceSetEnabled, _AOSStoreAccountInfo, 
+                       _AOSStoreProxyCredentials, _AOSTransactionCancel, _AOSTransactionCreate, 
+                       _AOSTransactionGetCallbackBlock, _AOSTransactionGetCallbackFunction, 
+                       _AOSTransactionGetCallbackQueue, _AOSTransactionGetContext, 
+                       _AOSTransactionGetError, _AOSTransactionGetResult, _AOSTransactionIsAsync, 
+                       _AOSTransactionIsFinished, _AOSTransactionSetError, _AOSTransactionSetIsFinished, 
+                       _AOSTransactionSetResult, _AOSTransactionSetSuccessful, _AOSTransactionSuccessful, 
+                       _AOSTransactionUpdate, _AOSTransactionWaitUntilFinished, _CreateCFErrorFromRequest, 
+                       __AOSAccountAuthenticate, __AOSAccountCopyBTMMConfigInfo, 
                        __AOSAccountCopyMemberName, __AOSAccountCopyStoredValue, __AOSAccountCreateFromMobileMePrefs, 
                        __AOSAccountCreateWithMemberName, __AOSAccountDeregisterDevice, 
                        __AOSAccountDisableBTMM, __AOSAccountDisableBTMMForUser, __AOSAccountEnableBTMM, 
@@ -97,7 +75,7 @@ exports:
                        __AOSRemoveAppleID, __AOSRemoveFMMAccount, __AOSRetrieveFMMAccount, 
                        __AOSSerializeAccountInfo, __ShowPasswordChangedAlert, __didFailCallback, 
                        __didFinishLoadingCallback, __didReceiveAuthChallengeCallback, 
-                       __didReceiveDataCallback, __didReceiveResponseCallback, __isCertificateTrustedUnderPinningPolicy, 
+                       __didReceiveDataCallback, __didReceiveResponseCallback, __isCertificateTrusted, 
                        __isSetupServiceHost, __willCacheResponseCallback, __willSendRequestForAuthChallengeCallback, 
                        _kAOSAcceptLanguageHeaderName, _kAOSAcceptTOSHeaderName, _kAOSAccountChangedNotification, 
                        _kAOSAccountFamilyStatusMessageKey, _kAOSAccountHasAcceptedTermsKey, 
@@ -183,8 +161,30 @@ exports:
                        _kAOSiCloudService, _kBTMMConfigDataclassKey, _kBTMMConfigHashedPasswordKey, 
                        _kBTMMConfigTokenKey, _kBTMMConfigURLKey, _kBTMMConfigZoneKey, 
                        _serviceName ]
-    objc-classes:    [ _AOSAccountCache, _AOSAccountLock, _AOSAgentConnection, _AOSAlert, 
-                       _AOSConfig, _AOSContext, _AOSFileLock, _AOSImpatientExecutor, 
-                       _AOSPushManager, _AOSRequest, _AOSThreadManager, _AOSTransaction, 
-                       _AOSUtilities, _DataclassConfigManager, _KeychainAccountStorage ]
+    objc-classes:    [ AOSAccountCache, AOSAccountLock, AOSAgentConnection, AOSAlert, 
+                       AOSConfig, AOSContext, AOSFileLock, AOSImpatientExecutor, 
+                       AOSPushManager, AOSRequest, AOSThreadManager, AOSTransaction, 
+                       AOSUtilities, DataclassConfigManager, KeychainAccountStorage ]
+    objc-ivars:      [ AOSAccountCache._accountDicts, AOSAccountCache._appleAccountLookups, 
+                       AOSAccountCache._dsidMappings, AOSAccountLock._dsid, AOSAccountLock._isLocked, 
+                       AOSAgentConnection._connection, AOSAgentConnection._isDisconnected, 
+                       AOSContext._account, AOSContext._callback, AOSContext._callbackThread, 
+                       AOSContext._info, AOSContext._transaction, AOSFileLock._fileDescriptor, 
+                       AOSFileLock._filePath, AOSFileLock._isLocked, AOSImpatientExecutor._targetBlock, 
+                       AOSImpatientExecutor._timeout, AOSImpatientExecutor._timeoutBlock, 
+                       AOSPushManager._apsConnection, AOSPushManager._apsEnvironment, 
+                       AOSPushManager._enableLaunching, AOSPushManager._msgDelegate, 
+                       AOSPushManager._tokenFetchAttempted, AOSPushManager._tokenString, 
+                       AOSPushManager._topics, AOSRequest._akRetryCount, AOSRequest._cfConnection, 
+                       AOSRequest._cfResponse, AOSRequest._clientID, AOSRequest._connection, 
+                       AOSRequest._credentials, AOSRequest._error, AOSRequest._messageBody, 
+                       AOSRequest._method, AOSRequest._originalUrl, AOSRequest._requestCompleted, 
+                       AOSRequest._requestHeaders, AOSRequest._requestInfo, AOSRequest._requestStarted, 
+                       AOSRequest._response, AOSRequest._responseData, AOSRequest._responseHeaders, 
+                       AOSRequest._responseMsg, AOSRequest._url, AOSThreadManager._proxyLock, 
+                       AOSTransaction.callbackBlock, AOSTransaction.callbackFunction, 
+                       AOSTransaction.callbackQueue, AOSTransaction.context, AOSTransaction.contextRelease, 
+                       AOSTransaction.contextRetain, AOSTransaction.didFinish, AOSTransaction.didSucceed, 
+                       AOSTransaction.error, AOSTransaction.result, AOSTransaction.waitLock, 
+                       DataclassConfigManager._actionCount, DataclassConfigManager._info ]
 ...

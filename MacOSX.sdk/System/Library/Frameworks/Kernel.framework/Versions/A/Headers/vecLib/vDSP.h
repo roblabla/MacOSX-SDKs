@@ -3,9 +3,9 @@
 
     Contains:   AltiVec DSP Interfaces
 
-    Version:    vecLib-622.0
+    Version:    vecLib-671.220
 
-    Copyright:  Copyright (c) 2000-2017 by Apple Inc. All rights reserved.
+    Copyright:  Copyright (c) 2000-2018 by Apple Inc. All rights reserved.
 
     For vDSP documentation, search for "vDSP" at <http://developer.apple.com>
     or search for one of the routine names below.
@@ -37,7 +37,7 @@
                 float       *__C,
                 vDSP_Stride  __IC,
                 vDSP_Length  __N)
-                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+ 					API_AVAILABLE(macos(10.0), ios(4.0));
 
         and is described with:
 
@@ -199,7 +199,7 @@
 */
 
 
-#include <Availability.h>
+#include <os/availability.h>
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -244,8 +244,8 @@ extern "C" {
     vDSP_Version0 is a major version number.
     vDSP_Version1 is a minor version number.
 */
-#define vDSP_Version0   622
-#define vDSP_Version1   0
+#define vDSP_Version0   671
+#define vDSP_Version1   220
 
 
 /*  Define types:
@@ -259,7 +259,11 @@ extern "C" {
         includes strides).
 */
 typedef unsigned long vDSP_Length;
+#if defined __arm64__ && !defined __LP64__
+typedef long long     vDSP_Stride;
+#else
 typedef long          vDSP_Stride;
+#endif
 
 /*  A DSPComplex or DSPDoubleComplex is a pair of float or double values that
     together represent a complex value.
@@ -349,10 +353,10 @@ typedef struct vDSP_biquadm_SetupStructD *vDSP_biquadm_SetupD;
 extern __nullable FFTSetup vDSP_create_fftsetup(
     vDSP_Length __Log2n,
     FFTRadix    __Radix)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+		API_AVAILABLE(macos(10.0), ios(4.0));
 
 extern void vDSP_destroy_fftsetup(__nullable FFTSetup __setup)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 
 /*  vDSP_biquadm_CreateSetup (for float) or vDSP_biquadm_CreateSetupD (for
     double) allocates memory and prepares the coefficients for processing a
@@ -371,18 +375,18 @@ extern __nullable vDSP_biquadm_Setup vDSP_biquadm_CreateSetup(
     const double *__coeffs,
     vDSP_Length   __M,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 extern __nullable vDSP_biquadm_SetupD vDSP_biquadm_CreateSetupD(
     const double *__coeffs,
     vDSP_Length   __M,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
 extern void vDSP_biquadm_DestroySetup(
     vDSP_biquadm_Setup __setup)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 extern void vDSP_biquadm_DestroySetupD(
     vDSP_biquadm_SetupD __setup)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
 
 /*  vDSP_biquadm_CopyState (for float) or vDSP_biquadm_CopyStateD (for double)
     copies the current state between two biquadm setup objects.  The two
@@ -395,15 +399,15 @@ extern void vDSP_biquadm_DestroySetupD(
 extern void vDSP_biquadm_CopyState(
     vDSP_biquadm_Setup                     __dest,
     const struct vDSP_biquadm_SetupStruct *__src)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 extern void vDSP_biquadm_CopyStateD(
     vDSP_biquadm_SetupD                     __dest,
     const struct vDSP_biquadm_SetupStructD *__src)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
 extern void vDSP_biquadm_ResetState(vDSP_biquadm_Setup __setup)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 extern void vDSP_biquadm_ResetStateD(vDSP_biquadm_SetupD __setup)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
 
 /*
     vDSP_biquadm_SetCoefficientsDouble will
@@ -417,7 +421,7 @@ extern void vDSP_biquadm_SetCoefficientsDouble(
     vDSP_Length                         __start_chn,
     vDSP_Length                         __nsec,
     vDSP_Length                         __nchn)
-    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+        API_AVAILABLE(macos(10.11), ios(9.0));
     
 /*
     vDSP_biquadm_SetTargetsDouble will
@@ -433,7 +437,7 @@ extern void vDSP_biquadm_SetTargetsDouble(
     vDSP_Length                         __start_chn,
     vDSP_Length                         __nsec,
     vDSP_Length                         __nchn)
-    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+        API_AVAILABLE(macos(10.11), ios(9.0));
     
 /*
     vDSP_biquadm_SetCoefficientsSingle will
@@ -449,7 +453,7 @@ extern void vDSP_biquadm_SetCoefficientsSingle(
     vDSP_Length                         __start_chn,
     vDSP_Length                         __nsec,
     vDSP_Length                         __nchn)
-    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+        API_AVAILABLE(macos(10.11), ios(9.0));
     
 /*
     vDSP_biquadm_SetTargetsSingle will
@@ -466,7 +470,7 @@ extern void vDSP_biquadm_SetTargetsSingle(
     vDSP_Length                         __start_chn,
     vDSP_Length                         __nsec,
     vDSP_Length                         __nchn)
-    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+        API_AVAILABLE(macos(10.11), ios(9.0));
 /*
     vDSP_biquadm_SetActiveFilters will set the overall active/inactive filter
     state of a valid vDSP_biquadm_Setup object.
@@ -474,7 +478,7 @@ extern void vDSP_biquadm_SetTargetsSingle(
 extern void vDSP_biquadm_SetActiveFilters(
     vDSP_biquadm_Setup                  __setup,
     const bool                         *__filter_states)
-    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+        API_AVAILABLE(macos(10.11), ios(9.0));
 
 // Convert a complex array to a complex-split array.
 extern void vDSP_ctoz(
@@ -483,7 +487,7 @@ extern void vDSP_ctoz(
     const DSPSplitComplex *__Z,
     vDSP_Stride            __IZ,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
     /*  Map:
 
             Pseudocode:     Memory:
@@ -504,7 +508,7 @@ extern void vDSP_ztoc(
     DSPComplex            *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
     /*  Map:
 
             Pseudocode:     Memory:
@@ -529,7 +533,7 @@ extern void vDSP_fft_zrip(
     vDSP_Stride            __IC,
     vDSP_Length            __Log2N,
     FFTDirection           __Direction)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
     /*  Maps:
 
             For this routine, strides are shown explicitly; the default maps
@@ -627,13 +631,13 @@ extern void vDSP_biquadm(
     const float * __nonnull * __nonnull __X, vDSP_Stride __IX,
     float       * __nonnull * __nonnull __Y, vDSP_Stride __IY,
     vDSP_Length              __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+        API_AVAILABLE(macos(10.9), ios(7.0));
 extern void vDSP_biquadmD(
      vDSP_biquadm_SetupD       __Setup,
      const double * __nonnull * __nonnull __X, vDSP_Stride __IX,
      double       * __nonnull * __nonnull __Y, vDSP_Stride __IY,
      vDSP_Length               __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
     /*  These routines perform the same function as M calls to vDSP_biquad or
         vDSP_biquadD, where M, the delay values, and the biquad setups are
         derived from the biquadm setup:
@@ -659,7 +663,7 @@ extern void vDSP_conv(
     vDSP_Stride  __IC,
     vDSP_Length  __N,  // Output length.
     vDSP_Length  __P)  // Filter length.
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
 /*  Split-complex matrix multiply.
 */
 extern void vDSP_zmmul(
@@ -672,7 +676,7 @@ extern void vDSP_zmmul(
     vDSP_Length            __M,
     vDSP_Length            __N,
     vDSP_Length            __P)
-        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.2), ios(4.0));
     /*  Maps:
 
             Pseudocode:     Memory:
@@ -697,7 +701,7 @@ extern void vDSP_vadd(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -716,7 +720,7 @@ extern void vDSP_vsub(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -735,7 +739,7 @@ extern void vDSP_vmul(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -754,7 +758,7 @@ extern void vDSP_vdiv(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvdiv(
     const DSPSplitComplex *__B,    // Caution:  A and B are swapped!
     vDSP_Stride            __IB,
@@ -763,7 +767,7 @@ extern void vDSP_zvdiv(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -781,7 +785,7 @@ extern void vDSP_vsmul(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -802,7 +806,7 @@ extern void vDSP_vma(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -822,7 +826,7 @@ extern void vDSP_zvmul(
     vDSP_Stride            __IC,
     vDSP_Length            __N,
     int                    __Conjugate)
-        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.0), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -847,14 +851,14 @@ extern void vDSP_vabs(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_zvabs(
     const DSPSplitComplex *__A,
     vDSP_Stride            __IA,
     float                 *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -870,7 +874,7 @@ extern void vDSP_vfill(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -888,7 +892,7 @@ extern void vDSP_vsadd(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -905,7 +909,7 @@ extern void vDSP_zvmov(
     const DSPSplitComplex *__C,
     vDSP_Stride            __IC,
     vDSP_Length            __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -924,7 +928,7 @@ extern void vDSP_deq22(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -944,7 +948,7 @@ extern void vDSP_maxmgv(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         C[0] is set to the greatest value of |A[n]| for 0 <= n < N.
@@ -956,7 +960,7 @@ extern void vDSP_maxv(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         C[0] is set to the greatest value of A[n] for 0 <= n < N.
@@ -969,7 +973,7 @@ extern void vDSP_minv(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         C[0] is set to the least value of A[n] for 0 <= n < N.
@@ -983,7 +987,7 @@ extern void vDSP_rmsqv(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -1000,7 +1004,7 @@ extern void vDSP_svdiv(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -1019,7 +1023,7 @@ extern void vDSP_sve(
     vDSP_Stride  __I,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -1035,7 +1039,7 @@ extern void vDSP_svesq(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -1051,7 +1055,7 @@ extern void vDSP_sve_svesq(
     float        *__Sum,
     float        *__SumOfSquares,
     vDSP_Length   __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+        API_AVAILABLE(macos(10.8), ios(6.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -1067,7 +1071,7 @@ extern void vDSP_svs(
     vDSP_Stride  __IA,
     float       *__C,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -1084,7 +1088,7 @@ extern void vDSP_vclip(
     float       *__D,
     vDSP_Stride  __ID,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -1103,7 +1107,7 @@ extern void vDSP_vclr(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -1122,7 +1126,7 @@ extern void vDSP_vdbcon(
     vDSP_Stride  __IC,
     vDSP_Length  __N,
     unsigned int __F)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -1146,7 +1150,7 @@ extern void vDSP_vmax(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -1165,7 +1169,7 @@ extern void vDSP_vmaxmg(
     float       *__C,
     vDSP_Stride  __IC,
     vDSP_Length  __N)
-        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+        API_AVAILABLE(macos(10.4), ios(4.0));
     /*  Maps:  The default maps are used.
 
         These compute:
@@ -1183,7 +1187,7 @@ extern void vDSP_vswmax(
     vDSP_Stride  __IC,
     vDSP_Length  __N,
     vDSP_Length  __WindowLength)
-        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+        API_AVAILABLE(macos(10.10), ios(8.0));
     /*  Maps:  The default maps are used.
 
         These compute the maximum value within a window to the input vector.

@@ -1,27 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 37027709-4E38-332B-97BB-9912D5308C7D', 'x86_64: 91C51D00-B711-358C-9AD9-F18F9BF07B9D' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 737F51C7-98A2-3ACB-A54B-844A72DB85A2' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Python.framework/Versions/2.7/Python
 current-version: 2.7.10
 compatibility-version: 2.7
 objc-constraint: none
 exports:         
-  - archs:           [ i386 ]
-    symbols:         [ _MediaObj_Convert, _MediaObj_New, _MovieCtlObj_Convert, _MovieCtlObj_New, 
-                       _MovieObj_Convert, _MovieObj_New, _PyMacGluePtr_MediaObj_Convert, 
-                       _PyMacGluePtr_MediaObj_New, _PyMacGluePtr_MovieCtlObj_Convert, 
-                       _PyMacGluePtr_MovieCtlObj_New, _PyMacGluePtr_MovieObj_Convert, 
-                       _PyMacGluePtr_MovieObj_New, _PyMacGluePtr_TimeBaseObj_Convert, 
-                       _PyMacGluePtr_TimeBaseObj_New, _PyMacGluePtr_TrackObj_Convert, 
-                       _PyMacGluePtr_TrackObj_New, _PyMacGluePtr_UserDataObj_Convert, 
-                       _PyMacGluePtr_UserDataObj_New, _PyMac_GetFullPathname, _Py_InitModule4, 
-                       _TimeBaseObj_Convert, _TimeBaseObj_New, _TrackObj_Convert, 
-                       _TrackObj_New, _UserDataObj_Convert, _UserDataObj_New, __Py_get_387controlword, 
-                       __Py_set_387controlword ]
   - archs:           [ x86_64 ]
-    symbols:         [ _Py_InitModule4_64 ]
-  - archs:           [ i386, x86_64 ]
     symbols:         [ _AEDesc_Convert, _AEDesc_New, _AEDesc_NewBorrowed, _BMObj_Convert, 
                        _BMObj_New, _CFArrayRefObj_Convert, _CFArrayRefObj_New, _CFDictionaryRefObj_Convert, 
                        _CFDictionaryRefObj_New, _CFMutableArrayRefObj_Convert, _CFMutableArrayRefObj_New, 
@@ -345,18 +331,19 @@ exports:
                        _Py_GetPrefix, _Py_GetProgramFullPath, _Py_GetProgramName, 
                        _Py_GetPythonHome, _Py_GetRecursionLimit, _Py_GetVersion, 
                        _Py_HashRandomizationFlag, _Py_IgnoreEnvironmentFlag, _Py_IncRef, 
-                       _Py_Initialize, _Py_InitializeEx, _Py_InspectFlag, _Py_InteractiveFlag, 
-                       _Py_IsInitialized, _Py_Main, _Py_MakePendingCalls, _Py_NewInterpreter, 
-                       _Py_NoSiteFlag, _Py_NoUserSiteDirectory, _Py_OptimizeFlag, 
-                       _Py_Py3kWarningFlag, _Py_ReprEnter, _Py_ReprLeave, _Py_SetProgramName, 
-                       _Py_SetPythonHome, _Py_SetRecursionLimit, _Py_SubversionRevision, 
-                       _Py_SubversionShortBranch, _Py_SymtableString, _Py_TabcheckFlag, 
-                       _Py_UnicodeFlag, _Py_UniversalNewlineFgets, _Py_UniversalNewlineFread, 
-                       _Py_UseClassExceptionsFlag, _Py_VaBuildValue, _Py_VerboseFlag, 
-                       _Py_meta_grammar, _Py_pgen, _QdRGB_Convert, _QdRGB_New, _ResObj_Convert, 
-                       _ResObj_New, _TEObj_Convert, _TEObj_New, _WinObj_Convert, 
-                       _WinObj_New, _WinObj_WhichWindow, __PyArg_NoKeywords, __PyArg_ParseTupleAndKeywords_SizeT, 
-                       __PyArg_ParseTuple_SizeT, __PyArg_Parse_SizeT, __PyArg_VaParseTupleAndKeywords_SizeT, 
+                       _Py_InitModule4_64, _Py_Initialize, _Py_InitializeEx, _Py_InspectFlag, 
+                       _Py_InteractiveFlag, _Py_IsInitialized, _Py_Main, _Py_MakePendingCalls, 
+                       _Py_NewInterpreter, _Py_NoSiteFlag, _Py_NoUserSiteDirectory, 
+                       _Py_OptimizeFlag, _Py_Py3kWarningFlag, _Py_ReprEnter, _Py_ReprLeave, 
+                       _Py_SetProgramName, _Py_SetPythonHome, _Py_SetRecursionLimit, 
+                       _Py_SubversionRevision, _Py_SubversionShortBranch, _Py_SymtableString, 
+                       _Py_TabcheckFlag, _Py_UnicodeFlag, _Py_UniversalNewlineFgets, 
+                       _Py_UniversalNewlineFread, _Py_UseClassExceptionsFlag, _Py_VaBuildValue, 
+                       _Py_VerboseFlag, _Py_meta_grammar, _Py_pgen, _QdRGB_Convert, 
+                       _QdRGB_New, _ResObj_Convert, _ResObj_New, _TEObj_Convert, 
+                       _TEObj_New, _WinObj_Convert, _WinObj_New, _WinObj_WhichWindow, 
+                       __PyArg_NoKeywords, __PyArg_ParseTupleAndKeywords_SizeT, __PyArg_ParseTuple_SizeT, 
+                       __PyArg_Parse_SizeT, __PyArg_VaParseTupleAndKeywords_SizeT, 
                        __PyArg_VaParse_SizeT, __PyBuiltin_Init, __PyByteArray_empty_string, 
                        __PyBytes_FormatAdvanced, __PyCode_CheckLineNumber, __PyCodec_Lookup, 
                        __PyComplex_FormatAdvanced, __PyDict_Contains, __PyDict_MaybeUntrack, 

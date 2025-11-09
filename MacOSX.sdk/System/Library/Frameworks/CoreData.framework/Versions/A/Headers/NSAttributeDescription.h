@@ -1,7 +1,7 @@
 /*
     NSAttributeDescription.h
     Core Data
-    Copyright (c) 2004-2017, Apple Inc.
+    Copyright (c) 2004-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -46,7 +46,7 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 		unsigned int _hasMaxValueInExtraIvars:1;
 		unsigned int _hasMinValueInExtraIvars:1;
 		unsigned int _storeBinaryDataExternally:1;
-        unsigned int _reservedAttributeFlagOne:1;
+        unsigned int _isTriggerBacked:1;
         unsigned int _reservedAttributeDescription:28;
     } _attributeDescriptionFlags;
     id _defaultValue;

@@ -1,7 +1,7 @@
 /*
     NSCollectionViewFlowLayout.h
     Application Kit
-    Copyright (c) 2015-2017, Apple Inc.
+    Copyright (c) 2015-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -26,7 +26,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
     struct {
         unsigned int invalidateDelegateMetrics:1;
         unsigned int invalidateAttributes:1;
-    } _flowLayoutInvalidationFlags;
+    } _flowLayoutInvalidationFlags APPKIT_IVAR;
 }
 #endif
 
@@ -67,34 +67,34 @@ NS_CLASS_AVAILABLE_MAC(10_11)
         unsigned int sectionFootersFloat:1;
         unsigned int isSingleColumnOrRow:1;
         unsigned int collapsesSectionsToFirstItem:1;
-    } _gridLayoutFlags;
+    } _gridLayoutFlags APPKIT_IVAR;
     
-    CGFloat _interitemSpacing;
-    CGFloat _lineSpacing;
+    CGFloat _interitemSpacing APPKIT_IVAR;
+    CGFloat _lineSpacing APPKIT_IVAR;
     
-    CGSize _itemSize; // for the cases the delegate method is not implemented
-    CGSize _estimatedItemSize;
-    CGSize _headerReferenceSize;
-    CGSize _footerReferenceSize;
-    NSEdgeInsets _sectionInset;
+    CGSize _itemSize APPKIT_IVAR; // for the cases the delegate method is not implemented
+    CGSize _estimatedItemSize APPKIT_IVAR;
+    CGSize _headerReferenceSize APPKIT_IVAR;
+    CGSize _footerReferenceSize APPKIT_IVAR;
+    NSEdgeInsets _sectionInset APPKIT_IVAR;
     
-    id _data;
-    CGSize _currentLayoutSize;
+    id _data APPKIT_IVAR;
+    CGSize _currentLayoutSize APPKIT_IVAR;
     
-    NSMutableDictionary* _insertedItemsAttributesDict;
-    NSMutableDictionary* _insertedSectionHeadersAttributesDict;
-    NSMutableDictionary* _insertedSectionFootersAttributesDict;
-    NSMutableDictionary* _deletedItemsAttributesDict;
-    NSMutableDictionary* _deletedSectionHeadersAttributesDict;
-    NSMutableDictionary* _deletedSectionFootersAttributesDict;
+    NSMutableDictionary* _insertedItemsAttributesDict APPKIT_IVAR;
+    NSMutableDictionary* _insertedSectionHeadersAttributesDict APPKIT_IVAR;
+    NSMutableDictionary* _insertedSectionFootersAttributesDict APPKIT_IVAR;
+    NSMutableDictionary* _deletedItemsAttributesDict APPKIT_IVAR;
+    NSMutableDictionary* _deletedSectionHeadersAttributesDict APPKIT_IVAR;
+    NSMutableDictionary* _deletedSectionFootersAttributesDict APPKIT_IVAR;
     
-    NSCollectionViewScrollDirection _scrollDirection;
-    NSDictionary *_rowAlignmentsOptionsDictionary;
+    NSCollectionViewScrollDirection _scrollDirection APPKIT_IVAR;
+    NSDictionary *_rowAlignmentsOptionsDictionary APPKIT_IVAR;
     
-    CGPoint _contentOffsetAdjustment;
-    CGSize _contentSizeAdjustment;
+    CGPoint _contentOffsetAdjustment APPKIT_IVAR;
+    CGSize _contentSizeAdjustment APPKIT_IVAR;
     
-    NSMutableArray* _indexPathsToValidate;
+    NSMutableArray* _indexPathsToValidate APPKIT_IVAR;
 }
 #endif
 

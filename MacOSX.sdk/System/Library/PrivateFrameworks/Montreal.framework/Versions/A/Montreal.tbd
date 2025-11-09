@@ -1,22 +1,28 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 2826DCA6-3FB4-3E26-ACDE-52AACDEE8308', 'x86_64: A43C86D3-9EEF-300F-96BC-FFD1FD302E97' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: F7AAEEC2-B981-30C4-995F-4D98FB808984' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Montreal.framework/Versions/A/Montreal
-current-version: 42
+current-version: 42.15.8
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
-    symbols:         [ _MRLModelCreate, _MRLModelGetIOMappings, _MRLModelGetInputSize, 
-                       _MRLModelGetOutputSize, _MRLModelGetWeights, _MRLModelLock, 
-                       _MRLModelRecognize, _MRLModelRecognizeIncremental, _MRLModelRecognizeIncrementalClassPlusSuffixIds, 
-                       _MRLModelRecognizeIncrementalOneClassOnly, _MRLModelRecognizeIncrementalTopN, 
-                       _MRLModelRecognizeTopN, _MRLModelRecognizeVectors, _MRLModelRecognizeVectorsIncremental, 
+  - archs:           [ x86_64 ]
+    symbols:         [ _MRLModelCompile, _MRLModelCopyQuantizedSerializedData, _MRLModelCopySerializedData, 
+                       _MRLModelCreate, _MRLModelEvaluate, _MRLModelGetIOMappings, 
+                       _MRLModelGetInputSize, _MRLModelGetOutputSize, _MRLModelGetWeights, 
+                       _MRLModelInitEpoch, _MRLModelLock, _MRLModelRecognize, _MRLModelRecognizeIncremental, 
+                       _MRLModelRecognizeIncrementalClassPlusSuffixIds, _MRLModelRecognizeIncrementalOneClassOnly, 
+                       _MRLModelRecognizeIncrementalTopN, _MRLModelRecognizeTopN, 
+                       _MRLModelRecognizeVectors, _MRLModelRecognizeVectorsIncremental, 
                        _MRLModelRecognizeVectorsIncrementalTopN, _MRLModelRecognizeVectorsTopN, 
                        _MRLModelRelease, _MRLModelReset, _MRLModelSetMaxSequenceLength, 
                        _MRLModelStateCreate, _MRLModelStateIsEmpty, _MRLModelStatePieceData, 
                        _MRLModelStatePieceSize, _MRLModelStateRelease, _MRLModelStateReset, 
                        _MRLModelStateRestore, _MRLModelStateSave, _MRLModelStateSize, 
-                       _MRLModelUnlock, _kMRLModelFileLocationKey, _kMRLModelParameterSizeKey, 
-                       _kMRLModelParametersKey ]
+                       _MRLModelTrainBatch, _MRLModelUnlock, _kMRLModelBeta1Key, 
+                       _kMRLModelBeta2Key, _kMRLModelDataKey, _kMRLModelErrorCountKey, 
+                       _kMRLModelErrorRateKey, _kMRLModelEstimatorTypeKey, _kMRLModelFileLocationKey, 
+                       _kMRLModelHiddenNodesKey, _kMRLModelInputEncodingKey, _kMRLModelLearningRateKey, 
+                       _kMRLModelLogProbabilityKey, _kMRLModelModelConfigKey, _kMRLModelNumThreadsKey, 
+                       _kMRLModelParameterSizeKey, _kMRLModelParametersKey ]
 ...

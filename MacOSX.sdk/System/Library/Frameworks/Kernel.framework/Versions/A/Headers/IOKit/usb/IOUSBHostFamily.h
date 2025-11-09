@@ -370,6 +370,7 @@ enum
 #define kUSBHostPropertySleepPortCurrentLimit                   "kUSBSleepPortCurrentLimit"
 #define kUSBHostPropertyFailedRemoteWake                        "kUSBFailedRemoteWake"
 #define kUSBHostPropertyBusCurrentPoolID                        "UsbBusCurrentPoolID"
+#define kUSBHostPropertySmcBusCurrentPoolID                     "UsbSmcBusCurrentPoolID"
 #define kUSBHostPropertyUserClientEntitlementRequired           "UsbUserClientEntitlementRequired"
 
 // Legacy power properties
@@ -379,7 +380,7 @@ enum
 #define kAppleCurrentExtraInSleep           "AAPL,current-extra-in-sleep"
 #define kAppleExternalConnectorBitmap       "AAPL,ExternalConnectorBitmap"
 
-#if TARGET_OS_EMBEDDED
+#if TARGET_OS_IPHONE
 // Only define these properties on embedded platforms because the legacy IOUSBLib code still uses them
 #define kUSBHostDevicePropertyAddress                           "kUSBAddress"
 #define kUSBHostDevicePropertyManufacturerStringIndex           "iManufacturer"
@@ -400,6 +401,7 @@ enum
 #define kUSBHostDevicePropertyCurrentConfiguration              "kUSBCurrentConfiguration"
 #define kUSBHostDevicePropertyRemoteWakeOverride                "kUSBRemoteWakeOverride"
 #define kUSBHostDevicePropertyConfigurationDescriptorOverride   "kUSBConfigurationDescriptorOverride"
+#define kUSBHostDevicePropertyDeviceDescriptorOverride          "kUSBDeviceDescriptorOverride"
 #define kUSBHostDevicePropertyConfigurationCurrentOverride      "kUSBConfigurationCurrentOverride"
 #define kUSBHostDevicePropertyResetDurationOverride             "kUSBResetDurationOverride"
 #define kUSBHostDevicePropertyDesiredChargingCurrent            "kUSBDesiredChargingCurrent"
@@ -408,7 +410,7 @@ enum
 #define kUSBHostDescriptorOverrideProductStringIndex            "UsbDescriptorOverrideProductStringIndex"
 #define kUSBHostDescriptorOverrideSerialNumberStringIndex       "UsbDescriptorOverrideSerialNumberStringIndex"
 #define kUSBHostDevicePropertyDeviceECID                        "kUSBDeviceECID"
-#define kUSBHostDevicePropertyDisableLPM                        "kUSBHostDeviceDisableLPM"
+#define kUSBHostDevicePropertyEnableLPM                         "kUSBHostDeviceEnableLPM"
 #define kUSBHostDevicePropertyDisablePortLPM                    "kUSBHostDeviceDisablePortLPM"         // Disable port initiated LPM for this device
 
 #define kUSBHostBillboardDevicePropertyNumberOfAlternateModes   "bNumberOfAlternateModes"
@@ -425,7 +427,7 @@ enum
 #define kUSBHostBillboardDevicePropertyAddtionalInfoURL         "AddtionalInfoURL"
 #define kUSBHostBillboardDevicePropertydwAlternateModeVdo       "dwAlternateModeVdo"
 
-#if TARGET_OS_EMBEDDED
+#if TARGET_OS_IPHONE
 #define kUSBHostInterfacePropertyStringIndex                    "iInterface"
 #define kUSBHostInterfacePropertyString                         "kUSBString"
 #define kUSBHostInterfacePropertyNumEndpoints                   "bNumEndpoints"
@@ -456,6 +458,7 @@ enum
 
 #define kUSBHostControllerPropertyIsochronousRequiresContiguous "kUSBIsochronousRequiresContiguous"
 #define kUSBHostControllerPropertySleepSupported                "kUSBSleepSupported"
+#define kUSBHostControllerPropertyRTD3Supported                 "UsbRTD3Supported"
 #define kUSBHostControllerPropertyMuxEnabled                    "kUSBMuxEnabled"
 #define kUSBHostControllerPropertyCompanion                     "kUSBCompanion"                         // OSBoolean false to disable all companion controllers
 #define kUSBHostControllerPropertyLowSpeedCompanion             "kUSBLowSpeedCompanion"                 // OSBoolean false to disable low-speed companion controller
@@ -465,11 +468,14 @@ enum
 #define kUSBHostControllerPropertyRevision                      "Revision"                              // OSData    Major/minor revision number of controller
 #define kUSBHostControllerPropertyCompanionControllerName       "UsbCompanionControllerName"            // OSString  key to set/get the name of the service, i.e. companion controller dictionary.
 #define kUSBHostControllerPropertyDisableUSB3LPM                "kUSBHostControllerDisableUSB3LPM"      // OSBoolean true to disable USB3 LPM on a given controller
+#define kUSBHostControllerPropertyDisableUSB2LPM                "kUSBHostControllerDisableUSB2LPM"      // OSBoolean true to disable USB2 LPM on a given controller
+#define kUSBHostControllerPropertyDisableWakeSources            "UsbHostControllerDisableWakeSources"   // OSBoolean true to disable connect/disconnect/overcurrent wake sources
 
 #define kUSBHostPortPropertyExternalDeviceResetController       "kUSBHostPortExternalDeviceResetController"
 #define kUSBHostPortPropertyExternalDevicePowerController       "kUSBHostPortExternalDevicePowerController"
 
 #define kUSBHostPortPropertyCardReader                          "kUSBHostPortPropertyCardReader"
+#define kUSBHostPortPropertyCardReaderValidateDescriptors       "kUSBHostPortPropertyCardReaderValidateDescriptors"
 
 #define kUSBHostPortPropertyOffset                              "kUSBHostPortPropertyOffset"
 
@@ -512,7 +518,7 @@ typedef enum
     kUSBHostPowerSourceTypeHardware
 }tUSBHostPowerSourceType;
 
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
 
 #ifndef kACPIDevicePathKey
 #define kACPIDevicePathKey          "acpi-path"
@@ -573,7 +579,15 @@ typedef enum
     kDeviceExitLatency,                             // Device Initiated Exit Latencies (PEL)
     kSystemExitLatency,                             // System Exit Latency (SEL)
     kMaxExitLatency,                                // Max Exit Latency (MEL)
-    
+
+    // USB2 LPM specific latencies
+    kBestEffortServiceLatency,                      // Best Effort Service Latency
+    kBestEffortServiceLatencyDeep,                  // Best Effort Service Latency Deep
+    kDefaultBestEffortServiceLatency,               // Default Best Effort Service Latency
+    kDefaultBestEffortServiceLatencyDeep,           // Default Best Effort Service Latency Deep
+    kMaxL1BaseExitLatency,                          // Max Exit Latency for L1 while using BESL base value
+    kMaxL1DeepExitLatency,                          // Max Exit Latency for L1 while using BESL Deep
+
 } tUSBLPMExitLatency;
 
 enum
@@ -596,6 +610,8 @@ enum
     kUSB3LPMMaxHostSchDelay      = 1000,            // Maximum Host Scheduling Delay for Max Exit Latency Calculations
     
     kUSB3LPMExtraDeviceEL        = 4000,            // An additional delay(buffer) in Nano Seconds added to Exit Latency reported by the device in its BOS descriptor
+    
+    kUSB2LPMMaxL1Timeout         = 0xFF00,          // In Micro seconds
 };
 
 typedef enum

@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 		AVAudioBuffer represents a buffer of audio data and its format.
 */
 
-NS_CLASS_AVAILABLE(10_10, 8_0)
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioBuffer : NSObject <NSCopying, NSMutableCopying> {
 @protected
 	void *_impl;
@@ -63,7 +63,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		AVAudioPCMBuffer provides a number of methods useful for manipulating buffers of
 		audio in PCM format.
 */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioPCMBuffer : AVAudioBuffer
 
 /*!	@method initWithPCMFormat:frameCapacity:
@@ -152,7 +152,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@class AVAudioCompressedBuffer
 	@abstract A subclass of AVAudioBuffer for use with compressed audio formats.
 */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AVAudioCompressedBuffer : AVAudioBuffer
 
 /*!	@method initWithFormat:packetCapacity:maximumPacketSize:

@@ -5,6 +5,8 @@
 	Copyright (c) 2015 Apple Inc. All Rights Reserved.
 */
 
+#if !0
+
 #import <Foundation/Foundation.h>
 
 #if __has_include(<CoreMIDI/MIDIServices.h>)
@@ -40,11 +42,13 @@ typedef Float64 AVMusicTimeStamp;
 		If AVMusicSequenceLoadSMF_ChannelsToTracks is not set, the loadad MIDI Sequence will
 		contain one track for each track that is found in the SMF, plus a tempo track (if not found
 		in the SMF).
+		
+		API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 */
 typedef NS_OPTIONS(NSUInteger, AVMusicSequenceLoadOptions) {
 	AVMusicSequenceLoadSMF_PreserveTracks		= 0,				// 0x00
 	AVMusicSequenceLoadSMF_ChannelsToTracks		= (1UL << 0)		// 0x01
-} NS_AVAILABLE(10_11, 9_0);
+};
 
 /*! @typedef AVBeatRange
 	@abstract Used to describe a specific time range within an AVMusicTrack.
@@ -64,7 +68,7 @@ NS_INLINE AVBeatRange AVMakeBeatRange(AVMusicTimeStamp startBeat, AVMusicTimeSta
 /*! @class AVAudioSequencer
 	@abstract A collection of MIDI events organized into AVMusicTracks, plus a player to play back the events.
 */
-NS_CLASS_AVAILABLE(10_11, 9_0) __WATCHOS_PROHIBITED
+OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAudioSequencer : NSObject {
 @protected
 	void *_impl;
@@ -76,7 +80,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0) __WATCHOS_PROHIBITED
 	@discussion
 		This is used to create a sequencer whose tracks will only send events to external MIDI endpoints.
 */
-- (instancetype)init	__TVOS_UNAVAILABLE;
+- (instancetype)init	API_UNAVAILABLE(tvos);
 
 /*! @method initWithAudioEngine:
 	@abstract
@@ -254,7 +258,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0) __WATCHOS_PROHIBITED
 	@abstract A collection of music events which will be sent to a given destination, and which can be 
 				offset, muted, etc. independently of events in other tracks.
 */
-NS_CLASS_AVAILABLE(10_11, 9_0) __WATCHOS_PROHIBITED
+OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVMusicTrack : NSObject {
 @protected
 	void *_impl;
@@ -280,7 +284,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0) __WATCHOS_PROHIBITED
 		events to the MIDI Endpoint.  See also MIDIDestinationCreate.  The endpoint cannot be
 		changed while the track's sequence is playing.
 */
-#if (TARGET_OS_MAC && !TARGET_OS_IPHONE) || TARGET_OS_IOS
+#if TARGET_OS_OSX || TARGET_OS_IOS
 @property (nonatomic) MIDIEndpointRef destinationMIDIEndpoint;
 #endif
 
@@ -370,3 +374,5 @@ typedef NS_ENUM(NSInteger, AVMusicTrackLoopCount) {
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // !TARGET_OS_BRIDGE

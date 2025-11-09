@@ -25,8 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     Instances of AVCaptureVideoDataOutput produce video frames suitable for processing using other media APIs. Applications can access the frames with the captureOutput:didOutputSampleBuffer:fromConnection: delegate method.
  */
-NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
-@interface AVCaptureVideoDataOutput : AVCaptureOutput 
+API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+@interface AVCaptureVideoDataOutput : AVCaptureOutput
 {
 @private
     AVCaptureVideoDataOutputInternal *_internal;
@@ -106,7 +106,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  
     Note that the dictionary of settings is dependent on the current configuration of the receiver's AVCaptureSession and its inputs. The settings dictionary may change if the session's configuration changes. As such, you should configure your session first, then query the recommended video settings. As of iOS 8.3, movies produced with these settings successfully import into the iOS camera roll and sync to and from like devices via iTunes.
  */
-- (nullable NSDictionary<NSString *, id> *)recommendedVideoSettingsForAssetWriterWithOutputFileType:(AVFileType)outputFileType NS_AVAILABLE_IOS(7_0);
+- (nullable NSDictionary<NSString *, id> *)recommendedVideoSettingsForAssetWriterWithOutputFileType:(AVFileType)outputFileType API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
 
 /*!
  @method availableVideoCodecTypesForAssetWriterWithOutputFileType:
@@ -121,7 +121,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     This method allows you to query the available video codecs that may be used when specifying an AVVideoCodecKey in -recommendedVideoSettingsForVideoCodecType:assetWriterOutputFileType:. When specifying an outputFileType of AVFileTypeQuickTimeMovie, video codecs are ordered identically to -[AVCaptureMovieFileOutput availableVideoCodecTypes].
  */
-- (NSArray<AVVideoCodecType> *)availableVideoCodecTypesForAssetWriterWithOutputFileType:(AVFileType)outputFileType NS_AVAILABLE_IOS(11_0);
+- (NSArray<AVVideoCodecType> *)availableVideoCodecTypesForAssetWriterWithOutputFileType:(AVFileType)outputFileType API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
 
 /*!
  @method recommendedVideoSettingsForVideoCodecType:assetWriterOutputFileType:
@@ -146,7 +146,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  
     Note that the dictionary of settings is dependent on the current configuration of the receiver's AVCaptureSession and its inputs. The settings dictionary may change if the session's configuration changes. As such, you should configure your session first, then query the recommended video settings. As of iOS 8.3, movies produced with these settings successfully import into the iOS camera roll and sync to and from like devices via iTunes.
  */
-- (nullable NSDictionary *)recommendedVideoSettingsForVideoCodecType:(AVVideoCodecType)videoCodecType assetWriterOutputFileType:(AVFileType)outputFileType NS_AVAILABLE_IOS(11_0);
+- (nullable NSDictionary *)recommendedVideoSettingsForVideoCodecType:(AVVideoCodecType)videoCodecType assetWriterOutputFileType:(AVFileType)outputFileType API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property availableVideoCVPixelFormatTypes
@@ -156,7 +156,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     The value of this property is an NSArray of NSNumbers that can be used as values for the kCVPixelBufferPixelFormatTypeKey in the receiver's videoSettings property. The first format in the returned list is the most efficient output format.
  */
-@property(nonatomic, readonly) NSArray<NSNumber *> *availableVideoCVPixelFormatTypes NS_AVAILABLE(10_7, 5_0);
+@property(nonatomic, readonly) NSArray<NSNumber *> *availableVideoCVPixelFormatTypes API_AVAILABLE(ios(5.0));
 
 /*!
  @property availableVideoCodecTypes
@@ -166,7 +166,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     The value of this property is an NSArray of AVVideoCodecTypes that can be used as values for the AVVideoCodecKey in the receiver's videoSettings property.
  */
-@property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableVideoCodecTypes NS_AVAILABLE(10_7, 5_0);
+@property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableVideoCodecTypes API_AVAILABLE(ios(5.0));
 
 /*!
  @property minFrameDuration
@@ -176,7 +176,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     The value of this property is a CMTime specifying the minimum duration of each video frame output by the receiver, placing a lower bound on the amount of time that should separate consecutive frames. This is equivalent to the inverse of the maximum frame rate. A value of kCMTimeZero or kCMTimeInvalid indicates an unlimited maximum frame rate. The default value is kCMTimeInvalid. As of iOS 5.0, minFrameDuration is deprecated. Use AVCaptureConnection's videoMinFrameDuration property instead.
  */
-@property(nonatomic) CMTime minFrameDuration NS_DEPRECATED_IOS(4_0, 5_0, "Use AVCaptureConnection's videoMinFrameDuration property instead.");
+@property(nonatomic) CMTime minFrameDuration API_DEPRECATED("Use AVCaptureConnection's videoMinFrameDuration property instead.", ios(4.0, 5.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property alwaysDiscardsLateVideoFrames
@@ -196,7 +196,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @abstract
     Defines an interface for delegates of AVCaptureVideoDataOutput to receive captured video sample buffers and be notified of late sample buffers that were dropped.
  */
-NS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @protocol AVCaptureVideoDataOutputSampleBufferDelegate <NSObject>
 
 @optional
@@ -237,7 +237,7 @@ NS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     Delegates receive this message whenever a video frame is dropped. This method is called once for each dropped frame. The CMSampleBuffer object passed to this delegate method will contain metadata about the dropped video frame, such as its duration and presentation time stamp, but will contain no actual video data. On iOS, Included in the sample buffer attachments is the kCMSampleBufferAttachmentKey_DroppedFrameReason, which indicates why the frame was dropped. This method will be called on the dispatch queue specified by the output's sampleBufferCallbackQueue property. Because this method will be called on the same dispatch queue that is responsible for outputting video frames, it must be efficient to prevent further capture performance problems, such as additional dropped video frames.
  */
-- (void)captureOutput:(AVCaptureOutput *)output didDropSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection NS_AVAILABLE(10_7, 6_0);
+- (void)captureOutput:(AVCaptureOutput *)output didDropSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(6.0));
 
 @end
 

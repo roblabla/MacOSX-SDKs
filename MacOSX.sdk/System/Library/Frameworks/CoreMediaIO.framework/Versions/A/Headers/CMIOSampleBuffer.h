@@ -4,7 +4,7 @@
      Contains:   Routines/constants/etc. used to create CoreMedia Sample Buffers for use in
 				 CMIO graphs.
 
-     Copyright:  (c) 2006-2011 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2006-2018 by Apple Inc., all rights reserved.
 */
 
 /*!
@@ -146,7 +146,7 @@ enum
 				discontinuity in a stream of buffers.  Its various values
 				are defined in CMIOTypes.h.
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_DiscontinuityFlags;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_DiscontinuityFlags API_AVAILABLE(macos(10.7));
 
 /*!
 	@const		kCMIOSampleBufferAttachmentKey_SequenceNumber
@@ -156,7 +156,7 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_DiscontinuityFlags;
 				stream (for example, a buffer was dropped somewhere will
 				reveil itself by a gap in the sequence of sequence numbers).
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_SequenceNumber;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_SequenceNumber API_AVAILABLE(macos(10.7));
 
 //=============================================================================
 //	Constants that specify optional buffer attachments (clients may extend
@@ -169,7 +169,7 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_SequenceNumber;
 				Attached to video MPEG-2 video buffers that came from a transmit
 				stream that had HDV-1 Pack data.
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_HDV1_PackData;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_HDV1_PackData API_AVAILABLE(macos(10.7));
 
 /*!
 	@const		kCMIOSampleBufferAttachmentKey_HDV2_VAUX
@@ -177,7 +177,7 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_HDV1_PackData;
 				Services.  Attached to video MPEG-2 video buffers that came from
 				a transmit stream that had HDV-2 VAUX data.
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_HDV2_VAUX;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_HDV2_VAUX API_AVAILABLE(macos(10.7));
 
 /*!
 	@const		kCMIOSampleBufferAttachmentKey_CAAudioTimeStamp
@@ -185,7 +185,7 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_HDV2_VAUX;
 				defined CoreAudioTypes.h.  Attached to buffers provided by
 				CoreAudio devices.
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_CAAudioTimeStamp;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_CAAudioTimeStamp API_AVAILABLE(macos(10.7));
 
 /*!
 	@const		kCMIOSampleBufferAttachmentKey_SMPTETime
@@ -193,7 +193,7 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_CAAudioTimeStamp;
 				CoreAudioTypes.h.  Attached to buffers that have an associated
 				SMPTE time.
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_SMPTETime;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_SMPTETime API_AVAILABLE(macos(10.7));
 
 /*!
 	@const		kCMIOSampleBufferAttachmentKey_NativeSMPTEFrameCount
@@ -208,7 +208,7 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_SMPTETime;
 				property, and if it exists, check to see that it increments
 				monotonically.
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_NativeSMPTEFrameCount;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_NativeSMPTEFrameCount API_AVAILABLE(macos(10.7));
 
 /*!
 	@const		kCMIOSampleBufferAttachmentKey_NumberOfVideoFramesInBuffer
@@ -216,7 +216,7 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_NativeSMPTEFrameCount;
 				an MPEG-2 transmit stream that was contains multiplexed video frames.
 				It specifies how many video frames are represented by the buffer.
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_NumberOfVideoFramesInBuffer;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_NumberOfVideoFramesInBuffer API_AVAILABLE(macos(10.7));
 
 /*!
 	@const		kCMIOSampleBufferAttachmentKey_NumberOfVideoFramesInGOP
@@ -225,7 +225,7 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_NumberOfVideoFramesInBuffer;
 				output.  It specifies how many frames are contained in the GOP
 				that is started by the I-Frame.
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_NumberOfVideoFramesInGOP;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_NumberOfVideoFramesInGOP API_AVAILABLE(macos(10.7));
 
 /*!
 	@const		kCMIOSampleBufferAttachmentKey_MuxedSourcePresentationTimeStamp
@@ -235,7 +235,7 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_NumberOfVideoFramesInGOP;
 				to drive the clock abstraction for an output device in order to
 				provide a preview of the source data.
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_MuxedSourcePresentationTimeStamp;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_MuxedSourcePresentationTimeStamp API_AVAILABLE(macos(10.7));
 
 /*!
 	@const		kCMIOSampleBufferAttachmentKey_HostTime
@@ -243,7 +243,7 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_MuxedSourcePresentationTimeSta
 				associated with a realtime source or destination that is related
 				to the CPU's hosttime in some way.
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_HostTime;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_HostTime API_AVAILABLE(macos(10.7));
 
 /*!
 	@const		kCMIOSampleBufferAttachmentKey_RepeatedBufferContents
@@ -251,7 +251,7 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_HostTime;
 				kCFBooleanTrue) if the contents of that buffer is identical
 				to the previous buffer in its stream.
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_RepeatedBufferContents;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_RepeatedBufferContents API_AVAILABLE(macos(10.7));
 
 /*!
 	@const		kCMIOSampleBufferAttachmentKey_SourceAudioFormatDescription
@@ -261,7 +261,7 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_RepeatedBufferContents;
                 from which an audio buffer was derived.  Units dealing with
                 audio data should propagate this attachment if it is present.
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_SourceAudioFormatDescription;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_SourceAudioFormatDescription API_AVAILABLE(macos(10.7));
 
 /*!
 	@const		kCMIOSampleBufferAttachmentKey_PulldownCadenceInfo
@@ -270,7 +270,7 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_SourceAudioFormatDescription;
 				30p).  These buffers can use this attachment to specify where
 				this buffer falls in the cadence.
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_PulldownCadenceInfo;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_PulldownCadenceInfo API_AVAILABLE(macos(10.7));
 
 /*!
 	@const		kCMIOSampleBufferAttachmentKey_ClosedCaptionSampleBuffer
@@ -279,14 +279,14 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_PulldownCadenceInfo;
 				is used by the CMIO VDIG input unit if closed caption data
 				is available for the current video frame.
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_ClosedCaptionSampleBuffer;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_ClosedCaptionSampleBuffer API_AVAILABLE(macos(10.7));
 
 /*!
 	@const		kCMIOSampleBufferAttachmentKey_ClientSequenceID
 	@discussion	A CF obect.  Attached to buffers output from units that
 				support kCMIOUnitProperty_ClientSequenceID.
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_ClientSequenceID;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_ClientSequenceID API_AVAILABLE(macos(10.8));
 
 /*!
 	@const		kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers
@@ -304,87 +304,107 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_ClientSequenceID;
 					kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorReference
 					kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorScale
 					kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_KeyboardModifiers
+					kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_KeyboardModifiersEvent
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers API_AVAILABLE(macos(10.8));
 
 /*!
 	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorPositionX
 	@discussion	Used to look up a CFNumber from the CFDictionary specified by
-				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
-				the approximate X coordinate of the mouse when the screen was
-				captured.
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers.  It specifies
+				the approximate X coordinate of the cursor hotspot when the screen was
+				captured (in the cursor’s flipped coordinate system, origin is the top left of the display and not relative to the capture area).
 */
-extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorPositionX;
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorPositionX API_AVAILABLE(macos(10.8));
 
 /*!
 	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorPositionY
 	@discussion	Used to look up a CFNumber from the CFDictionary specified by
-				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
-				the approximate Y coordinate of the mouse when the screen was
-				captured.
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers.  It specifies
+				the approximate Y coordinate of the cursor hotspot when the screen was
+				captured (in the cursor’s flipped coordinate system, origin is the top left of the display and not relative to the capture area).
 */
-extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorPositionY;
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorPositionY API_AVAILABLE(macos(10.8));
 
 /*!
 	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_MouseButtonState
 	@discussion	Used to look up a CFNumber from the CFDictionary specified by
-				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers.  It specifies
 				the approximate state of the mouse buttons when the screen was
 				captured.
 */
-extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_MouseButtonState;
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_MouseButtonState API_AVAILABLE(macos(10.8));
 	
 /*!
 	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorIsVisible
 	@discussion	Used to look up a CFBoolean from the CFDictionary specified by
-				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers.  It specifies
 				the visibility of the mouse cursor when the screen was
 				captured.
 */
-extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorIsVisible;
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorIsVisible API_AVAILABLE(macos(10.13));
 
 /*!
 	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorFrameRect
 	@discussion	Used to look up a CFDictionary representation of a CGRect from the CFDictionary specified by
-				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
-				the frame CGRect as dictionary of the mouse cursor when the screen was captured.
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers.  It specifies
+				the frame CGRect as dictionary of the cursor when the screen was captured relative to the capture area.
+ 				The origin is at the lower left of the capture area.
  */
-extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorFrameRect;
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorFrameRect API_AVAILABLE(macos(10.13));
 
 /*!
 	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorReference
 	@discussion	Used to look up a NSCursor reference from the CFDictionary specified by
-				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers.  It specifies
 				the NSCursor when the screen was captured.
 */
-extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorReference;
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorReference API_AVAILABLE(macos(10.13));
 
 /*!
 	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorSeed
 	@discussion	Used to look up the cursor seed value from the CFDictionary specified by
-				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers.  It specifies
 				the CFNumber of the seed value for the cursor referenced by
 				kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorReference;
 				changes in this number reflect that the cursor has changed.
 */
-extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorSeed;
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorSeed API_AVAILABLE(macos(10.13));
 
 /*!
 	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorScale
 	@discussion	Used to look up a CFNumber from the CFDictionary specified by
-				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers.  It specifies
 				the cursor scaling when the screen was captured.
 */
-extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorScale;
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorScale API_AVAILABLE(macos(10.13));
+	
+/*!
+ 	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorIsDrawnInFramebuffer
+ 	@discussion	Used to look up a CFBoolean from the CFDictionary specified by
+ 				kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers.  It specifies
+ 				if the cursor is being drawn at the display level when the screen was
+ 				captured (if TRUE, the CursorFrameRect may not represent accurately the frame CGRect of the cursor image being drawn).
+*/
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorIsDrawnInFramebuffer API_AVAILABLE(macos(10.14));
 
 /*!
 	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_KeyboardModifiers
 	@discussion	Used to look up a CFNumber from the CFDictionary specified by
-				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers.  It specifies
 				the approximate state of the keyboard modifiers when the screen was
 				captured.
 */
-extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_KeyboardModifiers;
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_KeyboardModifiers API_AVAILABLE(macos(10.8));
+	
+/*!
+	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_KeyboardModifiersEvent
+	@discussion	Used to look up a CFNumber from the CFDictionary specified by
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers.  It specifies
+				the approximate state of the keyboard modifiers when the screen was
+				captured as define in NSEvent.
+*/
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_KeyboardModifiersEvent API_AVAILABLE(macos(10.14));
 
 //=============================================================================
 //	Constants that specify marker buffers
@@ -396,7 +416,7 @@ extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_Keyb
 				that a device has stopped returning data.  The value of this attachment
 				is the same as for the discontinuity flags.
 */
-extern CFStringRef kCMIOSampleBufferAttachmentKey_NoDataMarker;
+extern CFStringRef kCMIOSampleBufferAttachmentKey_NoDataMarker API_AVAILABLE(macos(10.7));
 
 //=============================================================================
 //	Constants that specify known block buffer attachments
@@ -407,7 +427,7 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_NoDataMarker;
 	@discussion A CVPixelBufferRef, as defined by CoreVideo.
 				Attached to block buffers that wrap a Core Video Pixel Buffer.
 */
-extern CFStringRef kCMIOBlockBufferAttachmentKey_CVPixelBufferReference;
+extern CFStringRef kCMIOBlockBufferAttachmentKey_CVPixelBufferReference API_AVAILABLE(macos(10.7));
 
 //=============================================================================
 //	Creators/Destructors
@@ -526,8 +546,9 @@ extern OSStatus CMIOSampleBufferCreate(
 	UInt32 discontinuityFlags,						/*! @param discontinuityFlags
 														This value will be non-zero for buffers that represent a point of discontinuity
 														in their constituant stream.  Values as specified in CMIOTypes.h. */
-	CMSampleBufferRef *sBufOut);					/*! @param sBufOut
+	CMSampleBufferRef *sBufOut						/*! @param sBufOut
 														Returned newly created CMSampleBuffer. */
+	) API_AVAILABLE(macos(10.7));
 
 /*!
 	@function	CMIOSampleBufferCreateForImageBuffer
@@ -556,7 +577,7 @@ extern OSStatus CMIOSampleBufferCreate(
 				CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers (if absent in either they
 				must be absent in both).
 */
-OSStatus CMIOSampleBufferCreateForImageBuffer(
+extern OSStatus CMIOSampleBufferCreateForImageBuffer(
 	CFAllocatorRef allocator,						/*! @param allocator
 														The allocator to use for allocating the CMSampleBuffer object.
 														Pass kCFAllocatorDefault to use the default allocator. */
@@ -578,8 +599,9 @@ OSStatus CMIOSampleBufferCreateForImageBuffer(
 	UInt32 discontinuityFlags,						/*! @param discontinuityFlags
 														This value will be non-zero for buffers that represent a point of discontinuity
 														in their constituant stream.  Values as specified in CMIOTypes.h. */
-	CMSampleBufferRef *sBufOut);					/*! @param sBufOut
+	CMSampleBufferRef *sBufOut						/*! @param sBufOut
 														Returned newly created CMSampleBuffer. */
+	) API_AVAILABLE(macos(10.7));
 
 /*!
 	@function	CMIOSampleBufferCreateNoDataMarker
@@ -610,8 +632,9 @@ extern OSStatus CMIOSampleBufferCreateNoDataMarker
 	UInt32 discontinuityFlags,		/*! @param discontinuityFlags
 										Discontinuity flags to be associated with the no-data event.  They will be
 										augmented to have the kCMIOSampleBufferFlag_NoDataMarker bit set. */
-	CMSampleBufferRef *sBufOut);	/*! @param sBufOut
+	CMSampleBufferRef *sBufOut		/*! @param sBufOut
 										Returned newly created marker CMSampleBuffer. */
+	) API_AVAILABLE(macos(10.7));
 
 //=============================================================================
 //	Getters/Setters
@@ -631,13 +654,14 @@ extern OSStatus CMIOSampleBufferCreateNoDataMarker
 				first create a copy of the buffer using CMSampleBufferCreateCopy().
 */
 extern void CMIOSampleBufferSetSequenceNumber(
-	CFAllocatorRef allocator,		/*! @param allocator
+	CFAllocatorRef allocator,	/*! @param allocator
 										The allocator to use for allocating the CFNumber needed to store the flags.
 										Pass kCFAllocatorDefault to use the default allocator. */
 	CMSampleBufferRef sbuf,		/*! @param sbuf
 										CMSampleBuffer being modified. */
-	UInt64 sequenceNumber);			/*! @param sequenceNumber
+	UInt64 sequenceNumber		/*! @param sequenceNumber
 										New sequence number for the buffer. */
+	) API_AVAILABLE(macos(10.7));
 
 /*!
 	@function	CMIOSampleBufferGetSequenceNumber
@@ -648,8 +672,9 @@ extern void CMIOSampleBufferSetSequenceNumber(
 				was attached to the buffer.
 */
 extern UInt64 CMIOSampleBufferGetSequenceNumber(
-	CMSampleBufferRef sbuf);		/*! @param sbuf
-										CMSampleBuffer being interrogated. */
+	CMSampleBufferRef sbuf		/*! @param sbuf
+									CMSampleBuffer being interrogated. */
+	) API_AVAILABLE(macos(10.7));
 
 /*!
 	@function	CMIOSampleBufferSetDiscontinuityFlags
@@ -665,10 +690,11 @@ extern void CMIOSampleBufferSetDiscontinuityFlags(
 	CFAllocatorRef allocator,		/*! @param allocator
 										The allocator to use for allocating the CFNumber needed to store the flags.
 										Pass kCFAllocatorDefault to use the default allocator. */
-	CMSampleBufferRef sbuf,		/*! @param sbuf
+	CMSampleBufferRef sbuf,			/*! @param sbuf
 										CMSampleBuffer being modified. */
-	UInt32 discontinuityFlags);		/*! @param discontinuityFlags
+	UInt32 discontinuityFlags		/*! @param discontinuityFlags
 										New state of the buffer's discontinuity. */
+	) API_AVAILABLE(macos(10.7));
 
 /*!
 	@function	CMIOSampleBufferGetDiscontinuityFlags
@@ -679,8 +705,9 @@ extern void CMIOSampleBufferSetDiscontinuityFlags(
 	@result		Returns kCMIOSampleBufferDiscontinuityFlag_UnknownDiscontinuity if an error occurs.
 */
 extern UInt32 CMIOSampleBufferGetDiscontinuityFlags(
-	CMSampleBufferRef sbuf);		/*! @param sbuf
+	CMSampleBufferRef sbuf		/*! @param sbuf
 										CMSampleBuffer being interrogated. */
+	) API_AVAILABLE(macos(10.7));
 
 /*!
 	@function	CMIOSampleBufferCopyNonRequiredAttachments
@@ -694,10 +721,11 @@ extern UInt32 CMIOSampleBufferGetDiscontinuityFlags(
 extern OSStatus CMIOSampleBufferCopyNonRequiredAttachments(
 	CMSampleBufferRef sourceSBuf,		/*! @param sourceSBuf
 											CMSampleBuffer whose attachments are being copied. */
-	CMSampleBufferRef destSBuf,		/*! @param destSBuf
+	CMSampleBufferRef destSBuf,			/*! @param destSBuf
 											CMSampleBuffer that will receive the copies. */
-	CMAttachmentMode attachmentMode );	/*! @param attachmentMode
+	CMAttachmentMode attachmentMode		/*! @param attachmentMode
 											Mode of the attachments being copied. */
+	) API_AVAILABLE(macos(10.7));
 											
 											
 /*!
@@ -715,8 +743,9 @@ extern OSStatus CMIOSampleBufferCopyNonRequiredAttachments(
 extern OSStatus CMIOSampleBufferCopySampleAttachments(
 	CMSampleBufferRef sourceSBuf,		/*! @param sourceSBuf
 											CMSampleBuffer whose attachments are being copied. */
-	CMSampleBufferRef destSBuf);		/*! @param destSBuf
+	CMSampleBufferRef destSBuf			/*! @param destSBuf
 											CMSampleBuffer that will receive the copies. */
+	) API_AVAILABLE(macos(10.7));
 
 #pragma pack(pop)
     

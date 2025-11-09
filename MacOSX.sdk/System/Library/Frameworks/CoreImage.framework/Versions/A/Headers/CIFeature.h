@@ -127,11 +127,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (readonly) CGPoint bottomLeft;
 @property (readonly) CGPoint bottomRight;
 
-#if !defined(SWIFT_CLASS_EXTRA) || (defined(SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH) && SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH >= 2)
 @property (nullable, readonly) NSString* messageString;
-#else
-@property (readonly) NSString* messageString;
-#endif
 
 @property (nullable, readonly) CIQRCodeDescriptor *symbolDescriptor NS_AVAILABLE(10_13, 11_0);
 
@@ -151,11 +147,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @property (readonly) CGPoint topRight;
 @property (readonly) CGPoint bottomLeft;
 @property (readonly) CGPoint bottomRight;
-#if !defined(SWIFT_CLASS_EXTRA) || (defined(SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH) && SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH >= 2)
 @property (nullable, readonly) NSArray *subFeatures;
-#else
-@property (readonly) NSArray *subFeatures;
-#endif
 
 
 @end

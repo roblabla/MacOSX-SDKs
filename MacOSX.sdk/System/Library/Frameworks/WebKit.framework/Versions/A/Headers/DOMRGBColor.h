@@ -28,11 +28,11 @@
 @class DOMCSSPrimitiveValue;
 @class NSColor;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMRGBColor : DOMObject
 @property (readonly, strong) DOMCSSPrimitiveValue *red;
 @property (readonly, strong) DOMCSSPrimitiveValue *green;
 @property (readonly, strong) DOMCSSPrimitiveValue *blue;
 @property (readonly, strong) DOMCSSPrimitiveValue *alpha;
-@property (readonly, copy) NSColor *color NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSColor *color WEBKIT_AVAILABLE_MAC(10_5);
 @end

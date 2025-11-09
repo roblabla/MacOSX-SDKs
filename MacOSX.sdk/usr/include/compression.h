@@ -138,7 +138,7 @@ typedef enum {
 */
 extern size_t
 compression_encode_scratch_buffer_size(compression_algorithm algorithm)
-__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+__API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
 
@@ -182,7 +182,7 @@ compression_encode_buffer(uint8_t * __restrict dst_buffer, size_t dst_size,
                           const uint8_t * __restrict src_buffer, size_t src_size,
                           void * __restrict __nullable scratch_buffer,
                           compression_algorithm algorithm)
-__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+__API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
 
@@ -201,7 +201,7 @@ __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
 */
 extern size_t
 compression_decode_scratch_buffer_size(compression_algorithm algorithm)
-__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+__API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
 
@@ -247,7 +247,7 @@ compression_decode_buffer(uint8_t * __restrict dst_buffer, size_t dst_size,
                           const uint8_t * __restrict src_buffer, size_t src_size,
                           void * __restrict __nullable scratch_buffer,
                           compression_algorithm algorithm)
-__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+__API_AVAILABLE(macos(10.11), ios(9.0));
 
 /******************************************************************************
  * Stream (zlib-style) compression interfaces                                 *
@@ -379,7 +379,7 @@ extern compression_status
 compression_stream_init(compression_stream * stream,
                         compression_stream_operation operation,
                         compression_algorithm algorithm)
-__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+__API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
 
@@ -430,7 +430,7 @@ __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
 extern compression_status
 compression_stream_process(compression_stream * stream,
                            int flags)
-__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+__API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
 
@@ -447,7 +447,7 @@ __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
 */
 extern compression_status
 compression_stream_destroy(compression_stream * stream)
-__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+__API_AVAILABLE(macos(10.11), ios(9.0));
   
 #if __has_feature(assume_nonnull)
   _Pragma("clang assume_nonnull end")

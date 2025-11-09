@@ -32,7 +32,7 @@ typedef NS_ENUM(NSUInteger, MTLPurgeableState)
     MTLPurgeableStateNonVolatile = 2,
     MTLPurgeableStateVolatile = 3,
     MTLPurgeableStateEmpty = 4,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 /*!
  @enum MTLCPUCacheMode
@@ -50,7 +50,7 @@ typedef NS_ENUM(NSUInteger, MTLCPUCacheMode)
 {
     MTLCPUCacheModeDefaultCache = 0,
     MTLCPUCacheModeWriteCombined = 1,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 /*!
  @enum MTLStorageMode
@@ -80,10 +80,11 @@ typedef NS_ENUM(NSUInteger, MTLCPUCacheMode)
 typedef NS_ENUM(NSUInteger, MTLStorageMode)
 {
     MTLStorageModeShared  = 0,
-    MTLStorageModeManaged NS_ENUM_AVAILABLE(10_11, NA) = 1,
+    MTLStorageModeManaged API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios) = 1,
     MTLStorageModePrivate = 2,
-    MTLStorageModeMemoryless NS_ENUM_AVAILABLE(NA, 10_0) = 3,
-} NS_ENUM_AVAILABLE(10_11, 9_0);
+    MTLStorageModeMemoryless API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) = 3,
+} API_AVAILABLE(macos(10.11), ios(9.0));
+
 
 /*!
  @enum MTLResourceOptions
@@ -122,36 +123,42 @@ typedef NS_ENUM(NSUInteger, MTLStorageMode)
  devices. The contents of the on-chip storage is undefined and does not persist, but its configuration is controlled by the
  MTLTexture descriptor. Textures created with MTLStorageModeMemoryless dont have an IOAccelResource at any point in their
  lifetime. The only way to populate such resource is to perform rendering operations on it. Blit operations are disallowed.
-
+ 
+ @constant MTLResourceHazardTrackingModeUntracked
+ In this mode, Command encoder dependencies for this resource are tracked manually with MTLFence.
+ This value is always set for resources sub-allocated from a MTLHeap and may optionally be specified
+ for non-heap resources.
+ 
  @discussion
  Note that resource options are a property of MTLTextureDescriptor (resourceOptions), so apply to texture creation.
  they are also passed directly into MTLBuffer creation methods.
 */
 
-#define MTLResourceCPUCacheModeShift 0
-#define MTLResourceCPUCacheModeMask  (0xfUL << MTLResourceCPUCacheModeShift)
-#define MTLResourceStorageModeShift  4
-#define MTLResourceStorageModeMask   (0xfUL << MTLResourceStorageModeShift)
+#define MTLResourceCPUCacheModeShift            0
+#define MTLResourceCPUCacheModeMask             (0xfUL << MTLResourceCPUCacheModeShift)
 
-#define MTLResourceHazardTrackingModeShift  8
-#define MTLResourceHazardTrackingModeMask   (0x1UL << MTLResourceHazardTrackingModeShift)
+#define MTLResourceStorageModeShift             4
+#define MTLResourceStorageModeMask              (0xfUL << MTLResourceStorageModeShift)
+
+#define MTLResourceHazardTrackingModeShift      8
+#define MTLResourceHazardTrackingModeMask       (0x1UL << MTLResourceHazardTrackingModeShift)
 
 typedef NS_OPTIONS(NSUInteger, MTLResourceOptions)
 {
     MTLResourceCPUCacheModeDefaultCache  = MTLCPUCacheModeDefaultCache  << MTLResourceCPUCacheModeShift,
     MTLResourceCPUCacheModeWriteCombined = MTLCPUCacheModeWriteCombined << MTLResourceCPUCacheModeShift,
 
-    MTLResourceStorageModeShared     NS_ENUM_AVAILABLE(10_11, 9_0)  = MTLStorageModeShared     << MTLResourceStorageModeShift,
-    MTLResourceStorageModeManaged    NS_ENUM_AVAILABLE(10_11, NA)   = MTLStorageModeManaged    << MTLResourceStorageModeShift,
-    MTLResourceStorageModePrivate    NS_ENUM_AVAILABLE(10_11, 9_0)  = MTLStorageModePrivate    << MTLResourceStorageModeShift,
-    MTLResourceStorageModeMemoryless NS_ENUM_AVAILABLE(NA,    10_0) = MTLStorageModeMemoryless << MTLResourceStorageModeShift,
+    MTLResourceStorageModeShared     API_AVAILABLE(macos(10.11), ios(9.0))  = MTLStorageModeShared     << MTLResourceStorageModeShift,
+    MTLResourceStorageModeManaged    API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios)   = MTLStorageModeManaged    << MTLResourceStorageModeShift,
+    MTLResourceStorageModePrivate    API_AVAILABLE(macos(10.11), ios(9.0))  = MTLStorageModePrivate    << MTLResourceStorageModeShift,
+    MTLResourceStorageModeMemoryless API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) = MTLStorageModeMemoryless << MTLResourceStorageModeShift,
 
-    MTLResourceHazardTrackingModeUntracked NS_ENUM_AVAILABLE(10_13, 10_0) = 0x1UL << MTLResourceHazardTrackingModeShift,
-
+    MTLResourceHazardTrackingModeUntracked API_AVAILABLE(macos(10.13), ios(10.0)) = 0x1UL << MTLResourceHazardTrackingModeShift,
+    
     // Deprecated spellings
     MTLResourceOptionCPUCacheModeDefault       = MTLResourceCPUCacheModeDefaultCache,
     MTLResourceOptionCPUCacheModeWriteCombined = MTLResourceCPUCacheModeWriteCombined,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 @protocol MTLDevice;
 
@@ -161,7 +168,7 @@ typedef NS_OPTIONS(NSUInteger, MTLResourceOptions)
  @protocol MTLResource
  @abstract Common APIs available for MTLBuffer and MTLTexture instances
  */
-NS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0))
 @protocol MTLResource <NSObject>
 
 /*!
@@ -186,7 +193,7 @@ NS_AVAILABLE(10_11, 8_0)
  @property storageMode
  @abstract The resource storage mode used for the CPU mapping for this resource
  */
-@property (readonly) MTLStorageMode storageMode NS_AVAILABLE(10_11, 9_0);
+@property (readonly) MTLStorageMode storageMode API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @method setPurgeableState
@@ -201,13 +208,13 @@ NS_AVAILABLE(10_11, 8_0)
  @abstract The heap from which this resouce was created.
  @discussion Nil when this resource is not backed by a heap.
  */
-@property (readonly, nullable) id <MTLHeap> heap NS_AVAILABLE(10_13, 10_0);
+@property (readonly, nullable) id <MTLHeap> heap API_AVAILABLE(macos(10.13), ios(10.0));
 
 /*!
  @property allocatedSize
  @abstrace The size in bytes occupied by this resource
 */
-@property (readonly) NSUInteger allocatedSize NS_AVAILABLE(10_13, 11_0);
+@property (readonly) NSUInteger allocatedSize API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  @method makeAliasable
@@ -218,7 +225,7 @@ NS_AVAILABLE(10_11, 8_0)
  from Buffers backed by heap memory has no effect.
  Once a resource is made aliasable, the decision cannot be reverted.
  */
--(void) makeAliasable NS_AVAILABLE(10_13, 10_0);
+-(void) makeAliasable API_AVAILABLE(macos(10.13), ios(10.0));
 
 /*!
  @method isAliasable
@@ -227,7 +234,7 @@ NS_AVAILABLE(10_11, 8_0)
  If resource is sub-allocated from other resource created on the heap, isAliasable returns 
  aliasing state of that base resource. Also returns NO when storage mode is memoryless.
  */
--(BOOL) isAliasable NS_AVAILABLE(10_13, 10_0);
+-(BOOL) isAliasable API_AVAILABLE(macos(10.13), ios(10.0));
 
 @end
 

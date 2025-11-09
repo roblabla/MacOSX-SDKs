@@ -44,7 +44,7 @@ GK_BASE_AVAILABILITY @interface GKCircleObstacle : GKObstacle
 /**
  * An obstacle with an impassible closed polygon
  */
-GK_BASE_AVAILABILITY @interface GKPolygonObstacle : GKObstacle <NSCoding>
+GK_BASE_AVAILABILITY @interface GKPolygonObstacle : GKObstacle <NSSecureCoding>
 
 /**
  * Number of vertices on this polygon

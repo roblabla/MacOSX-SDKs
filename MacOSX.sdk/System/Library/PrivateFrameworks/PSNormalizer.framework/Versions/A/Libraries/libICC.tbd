@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7D648C18-0D63-3EA7-B7C1-27367403CC99' ]
+uuids:           [ 'x86_64: FC6F4BB8-CD25-3476-936E-3F29673086C6' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/PSNormalizer.framework/Versions/A/Libraries/libICC.dylib
 objc-constraint: none

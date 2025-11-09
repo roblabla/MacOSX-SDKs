@@ -1,7 +1,7 @@
 /*
 	NSSearchFieldCell.h
 	Application Kit
-	Copyright (c) 2003-2017, Apple Inc.
+	Copyright (c) 2003-2018, Apple Inc.
 	All rights reserved.
  */
 
@@ -47,18 +47,18 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int subclassOverridesRectForCancelButtonWhenCentered:2;
 	unsigned int resumeEditingOnCancel:1;
 	unsigned int reserved:5;
-    } _sfFlags;
-    NSButtonCell*   _searchButtonCell;
-    NSButtonCell*   _cancelButtonCell;
-    NSMenu*         _searchMenuTemplate;
-    NSString*       _recentsAutosaveName;
-    NSMutableArray* _recentSearches;
-    NSMenu*         _searchMenu;
-    NSTimer*        _partialStringTimer;
-    unsigned int _reserved1;
-    unsigned int _reserved2;
-    unsigned int _reserved3;
-    unsigned int _reserved4 __unused;
+    } _sfFlags APPKIT_IVAR;
+    NSButtonCell*   _searchButtonCell APPKIT_IVAR;
+    NSButtonCell*   _cancelButtonCell APPKIT_IVAR;
+    NSMenu*         _searchMenuTemplate APPKIT_IVAR;
+    NSString*       _recentsAutosaveName APPKIT_IVAR;
+    NSMutableArray* _recentSearches APPKIT_IVAR;
+    NSMenu*         _searchMenu APPKIT_IVAR;
+    NSTimer*        _partialStringTimer APPKIT_IVAR;
+    unsigned int _reserved1 APPKIT_IVAR;
+    unsigned int _reserved2 APPKIT_IVAR;
+    unsigned int _reserved3 APPKIT_IVAR;
+    unsigned int _reserved4 __unused APPKIT_IVAR;
 }
 
 

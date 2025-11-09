@@ -1,12 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 41323E53-C7EA-3E9A-BD30-38E82399F843', 'x86_64: 217656D5-BC40-37FF-B322-91CB2AAD4F34' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: BA948A32-9024-3E55-98D4-18E31F6AED25' ]
 platform:        macosx
 install-name:    '/usr/lib/libc++abi.dylib'
-current-version: 400.7
+current-version: 400.17
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ __ZNKSt10bad_typeid4whatEv, __ZNKSt11logic_error4whatEv, __ZNKSt13bad_exception4whatEv, 
                        __ZNKSt13runtime_error4whatEv, __ZNKSt16bad_array_length4whatEv, 
                        __ZNKSt20bad_array_new_length4whatEv, __ZNKSt8bad_cast4whatEv, 

@@ -52,9 +52,9 @@ enum {
     DOM_DOCUMENT_POSITION_CONTAINS = 0x08,
     DOM_DOCUMENT_POSITION_CONTAINED_BY = 0x10,
     DOM_DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20
-} NS_ENUM_AVAILABLE_MAC(10_4);
+} WEBKIT_ENUM_DEPRECATED_MAC(10_4, 10_14);
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMNode : DOMObject <DOMEventTarget>
 @property (readonly, copy) NSString *nodeName;
 @property (copy) NSString *nodeValue;
@@ -70,31 +70,31 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (copy) NSString *prefix;
 @property (readonly, copy) NSString *localName;
 @property (readonly, strong) DOMNamedNodeMap *attributes;
-@property (readonly, copy) NSString *baseURI NS_AVAILABLE_MAC(10_5);
-@property (copy) NSString *textContent NS_AVAILABLE_MAC(10_5);
-@property (readonly, strong) DOMElement *parentElement NS_AVAILABLE_MAC(10_5);
-@property (readonly) BOOL isContentEditable NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *baseURI WEBKIT_AVAILABLE_MAC(10_5);
+@property (copy) NSString *textContent WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly, strong) DOMElement *parentElement WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) BOOL isContentEditable WEBKIT_AVAILABLE_MAC(10_5);
 
-- (DOMNode *)insertBefore:(DOMNode *)newChild refChild:(DOMNode *)refChild NS_AVAILABLE_MAC(10_5);
-- (DOMNode *)replaceChild:(DOMNode *)newChild oldChild:(DOMNode *)oldChild NS_AVAILABLE_MAC(10_5);
+- (DOMNode *)insertBefore:(DOMNode *)newChild refChild:(DOMNode *)refChild WEBKIT_AVAILABLE_MAC(10_5);
+- (DOMNode *)replaceChild:(DOMNode *)newChild oldChild:(DOMNode *)oldChild WEBKIT_AVAILABLE_MAC(10_5);
 - (DOMNode *)removeChild:(DOMNode *)oldChild;
 - (DOMNode *)appendChild:(DOMNode *)newChild;
 - (BOOL)hasChildNodes;
 - (DOMNode *)cloneNode:(BOOL)deep;
 - (void)normalize;
-- (BOOL)isSupported:(NSString *)feature version:(NSString *)version NS_AVAILABLE_MAC(10_5);
+- (BOOL)isSupported:(NSString *)feature version:(NSString *)version WEBKIT_AVAILABLE_MAC(10_5);
 - (BOOL)hasAttributes;
-- (BOOL)isSameNode:(DOMNode *)other NS_AVAILABLE_MAC(10_5);
-- (BOOL)isEqualNode:(DOMNode *)other NS_AVAILABLE_MAC(10_5);
-- (NSString *)lookupPrefix:(NSString *)namespaceURI NS_AVAILABLE_MAC(10_5);
-- (NSString *)lookupNamespaceURI:(NSString *)prefix NS_AVAILABLE_MAC(10_5);
-- (BOOL)isDefaultNamespace:(NSString *)namespaceURI NS_AVAILABLE_MAC(10_5);
-- (unsigned short)compareDocumentPosition:(DOMNode *)other NS_AVAILABLE_MAC(10_6);
-- (BOOL)contains:(DOMNode *)other NS_AVAILABLE_MAC(10_5);
+- (BOOL)isSameNode:(DOMNode *)other WEBKIT_AVAILABLE_MAC(10_5);
+- (BOOL)isEqualNode:(DOMNode *)other WEBKIT_AVAILABLE_MAC(10_5);
+- (NSString *)lookupPrefix:(NSString *)namespaceURI WEBKIT_AVAILABLE_MAC(10_5);
+- (NSString *)lookupNamespaceURI:(NSString *)prefix WEBKIT_AVAILABLE_MAC(10_5);
+- (BOOL)isDefaultNamespace:(NSString *)namespaceURI WEBKIT_AVAILABLE_MAC(10_5);
+- (unsigned short)compareDocumentPosition:(DOMNode *)other WEBKIT_AVAILABLE_MAC(10_6);
+- (BOOL)contains:(DOMNode *)other WEBKIT_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMNode (DOMNodeDeprecated)
-- (DOMNode *)insertBefore:(DOMNode *)newChild :(DOMNode *)refChild NS_DEPRECATED_MAC(10_4, 10_5);
-- (DOMNode *)replaceChild:(DOMNode *)newChild :(DOMNode *)oldChild NS_DEPRECATED_MAC(10_4, 10_5);
-- (BOOL)isSupported:(NSString *)feature :(NSString *)version NS_DEPRECATED_MAC(10_4, 10_5);
+- (DOMNode *)insertBefore:(DOMNode *)newChild :(DOMNode *)refChild WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (DOMNode *)replaceChild:(DOMNode *)newChild :(DOMNode *)oldChild WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (BOOL)isSupported:(NSString *)feature :(NSString *)version WEBKIT_DEPRECATED_MAC(10_4, 10_5);
 @end

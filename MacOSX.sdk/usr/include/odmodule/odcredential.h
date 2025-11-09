@@ -164,6 +164,21 @@ odcredential_copy_metarecordname(od_credential_t credential);
 void
 odcredential_set_password(od_credential_t credential, CFStringRef password);
 
+/*!
+ * @function odcredential_get_uuid
+ *
+ * @abstract
+ * gets uuid from credential
+ *
+ * @param credential
+ * is an od_credential_t object to modify
+ *
+ * @param uuid
+ * is a uuid_t to populate
+ */
+void
+odcredential_get_uuid(od_credential_t credential, uuid_t uuid);
+
 __END_DECLS
 
 #endif

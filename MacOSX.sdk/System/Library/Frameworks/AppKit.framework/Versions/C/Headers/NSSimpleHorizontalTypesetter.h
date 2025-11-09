@@ -1,6 +1,6 @@
 /* 
     NSSimpleHorizontalTypesetter.h
-    Copyright (c) 1993-2017, Apple Inc.
+    Copyright (c) 1993-2018, Apple Inc.
     All rights reserved. 
  
     A concrete class to lay glyphs out in horizontal boxes.
@@ -72,79 +72,79 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSSimpleHorizontalTypesetter : NSTypesetter {
 /* These are read-only ivars */
     /* Global Info */
-    NSLayoutManager *layoutManager;	/* Current layout manager */
-    NSTextStorage *textStorage;		/* Current text storage being laid out */
+    NSLayoutManager *layoutManager APPKIT_IVAR;	/* Current layout manager */
+    NSTextStorage *textStorage APPKIT_IVAR;		/* Current text storage being laid out */
 
     /* Global info about the state of the layout of current line fragment */
-    unsigned firstGlyphIndex;		/* First glyph of the line fragment, glyph[0] stores this */
-    unsigned curGlyphIndex; 		/* Current glyph (relative to firstGlyphIndex) being laid out */
-    unsigned firstInvalidGlyphIndex;	/* Index into glyphs[]; index of first location where .glyph and .glyphInscription are invalid */
+    unsigned firstGlyphIndex APPKIT_IVAR;		/* First glyph of the line fragment, glyph[0] stores this */
+    unsigned curGlyphIndex APPKIT_IVAR; 		/* Current glyph (relative to firstGlyphIndex) being laid out */
+    unsigned firstInvalidGlyphIndex APPKIT_IVAR;	/* Index into glyphs[]; index of first location where .glyph and .glyphInscription are invalid */
 
     /* Global info about the current cache of glyphs */
-    NSTypesetterGlyphInfo *glyphs;	/* Glyphs 0..curGlyphIndex-1 are valid in here */
-    NSGlyph *glyphCache;
-    NSGlyphInscription *glyphInscriptionCache;
-    unsigned *glyphCharacterIndexCache;
-    BOOL *glyphElasticCache;
+    NSTypesetterGlyphInfo *glyphs APPKIT_IVAR;	/* Glyphs 0..curGlyphIndex-1 are valid in here */
+    NSGlyph *glyphCache APPKIT_IVAR;
+    NSGlyphInscription *glyphInscriptionCache APPKIT_IVAR;
+    unsigned *glyphCharacterIndexCache APPKIT_IVAR;
+    BOOL *glyphElasticCache APPKIT_IVAR;
 
-    NSSize glyphLocationOffset;		/* Offset of all glyphs in glyphs[] array */
+    NSSize glyphLocationOffset APPKIT_IVAR;		/* Offset of all glyphs in glyphs[] array */
 
-    float curMaxGlyphLocation;		/* Maximum location upto where glyphs can be laid */
-    unsigned lastFixedGlyphIndex;	/* Index of last glyph to be laid out at a fixed location (basically start of line or tab loc) */
-    unsigned sizeOfGlyphInfo;
+    float curMaxGlyphLocation APPKIT_IVAR;		/* Maximum location upto where glyphs can be laid */
+    unsigned lastFixedGlyphIndex APPKIT_IVAR;	/* Index of last glyph to be laid out at a fixed location (basically start of line or tab loc) */
+    unsigned sizeOfGlyphInfo APPKIT_IVAR;
 
     /* Info about current glyph (glyph at curGlyphIndex) and previous glyph */
-    NSGlyph curGlyph;
-    NSGlyphInscription curGlyphInscription;
-    unsigned curCharacterIndex;
+    NSGlyph curGlyph APPKIT_IVAR;
+    NSGlyphInscription curGlyphInscription APPKIT_IVAR;
+    unsigned curCharacterIndex APPKIT_IVAR;
 @private	/* All further instance variables are private */
-    unsigned previousGlyph;		/* Previous glyph */
-    unsigned previousBaseGlyphIndex;	/* Index of previous base glyph */
-    unsigned previousBaseGlyph;		/* Previous base glyph */
-    NSFont *previousFont;		/* Font of the previous glyph; cached */
-    float curGlyphOffset;		/* The location where the next glyph should be laid out (used when glyphLayoutMode != NSGlyphLayoutWithPrevious) */
-    BOOL curGlyphOffsetOutOfDate;	/* If yes, then compute curGlyphOffset */
-    BOOL curGlyphIsAControlGlyph;
-    BOOL containerBreakAfterCurGlyph;   /* If yes, go on to next container. */
-    BOOL wrapAfterCurGlyph;		/* Indicates the the line fragment should be done after this glyph */
-    float curSpaceAfter;		/* Manual kerning attribute; cached */
-    float previousSpaceAfter;
-    NSGlyphLayoutMode glyphLayoutMode;	/* Can we compose current glyph with previous; cached */
-    float curGlyphExtentAboveLocation;	/* Distance above and below its display origin that the glyph requires */
-    float curGlyphExtentBelowLocation;
-    NSLayoutDirection curLayoutDirection;
-    NSTextAlignment curTextAlignment;	/* Evaluated to be one of L, R, or C */
+    unsigned previousGlyph APPKIT_IVAR;		/* Previous glyph */
+    unsigned previousBaseGlyphIndex APPKIT_IVAR;	/* Index of previous base glyph */
+    unsigned previousBaseGlyph APPKIT_IVAR;		/* Previous base glyph */
+    NSFont *previousFont APPKIT_IVAR;		/* Font of the previous glyph; cached */
+    float curGlyphOffset APPKIT_IVAR;		/* The location where the next glyph should be laid out (used when glyphLayoutMode != NSGlyphLayoutWithPrevious) */
+    BOOL curGlyphOffsetOutOfDate APPKIT_IVAR;	/* If yes, then compute curGlyphOffset */
+    BOOL curGlyphIsAControlGlyph APPKIT_IVAR;
+    BOOL containerBreakAfterCurGlyph APPKIT_IVAR;   /* If yes, go on to next container. */
+    BOOL wrapAfterCurGlyph APPKIT_IVAR;		/* Indicates the the line fragment should be done after this glyph */
+    float curSpaceAfter APPKIT_IVAR;		/* Manual kerning attribute; cached */
+    float previousSpaceAfter APPKIT_IVAR;
+    NSGlyphLayoutMode glyphLayoutMode APPKIT_IVAR;	/* Can we compose current glyph with previous; cached */
+    float curGlyphExtentAboveLocation APPKIT_IVAR;	/* Distance above and below its display origin that the glyph requires */
+    float curGlyphExtentBelowLocation APPKIT_IVAR;
+    NSLayoutDirection curLayoutDirection APPKIT_IVAR;
+    NSTextAlignment curTextAlignment APPKIT_IVAR;	/* Evaluated to be one of L, R, or C */
 
     /* Cached info about character attributes; these can last beyond one line fragment */
 @public
-    NSFont *curFont;			/* Current font; cached */
-    NSRect curFontBoundingBox;		/* Bounding box for the current font; cached */
-    BOOL curFontIsFixedPitch;		/* Whether or not the current font is fixed pitch, cached */
-    NSPoint curFontAdvancement;		/* If curFontIsFixedPitch, this stores the advancement, cached */
-    _NSPositionOfGlyphMethod curFontPositionOfGlyphMethod;	/* Obtained from methodFor, cached */
+    NSFont *curFont APPKIT_IVAR;			/* Current font; cached */
+    NSRect curFontBoundingBox APPKIT_IVAR;		/* Bounding box for the current font; cached */
+    BOOL curFontIsFixedPitch APPKIT_IVAR;		/* Whether or not the current font is fixed pitch, cached */
+    NSPoint curFontAdvancement APPKIT_IVAR;		/* If curFontIsFixedPitch, this stores the advancement, cached */
+    _NSPositionOfGlyphMethod curFontPositionOfGlyphMethod APPKIT_IVAR;	/* Obtained from methodFor, cached */
 @private
-    NSDictionary *attrs;	       	/* Attributes for the current glyph; cached */
-    NSRange attrsRange;			/* And character range over which it applies */
-    float curBaselineOffset;		/* Current baseline offset, from the baseline offset and superscript attrs; cached */
-    float curMinBaselineDistance;	/* Minimum baseline distance attribute, cached */
-    float curMaxBaselineDistance;	/* Maximum baseline distance attribute, cached */
-    int curSuperscript;			/* Value of the superscript attr; cached */
-    NSParagraphStyle *curParaStyle;	/* Paragraph attributes, cached */
-    NSTextContainer *curContainer;
-    unsigned curContainerIndex;
-    float curContainerLineFragmentPadding;
-    BOOL curContainerIsSimpleRectangular;	/* Whether the current container is simple rectangular, cached */
-    NSSize curContainerSize;		/* [curContainer containerSize], cached */
-    float curMinLineHeight;		/* [curParaStyle minLineHeight], cached */
-    float curMaxLineHeight;		/* [curParaStyle maxLineHeight], cached */
+    NSDictionary *attrs APPKIT_IVAR;	       	/* Attributes for the current glyph; cached */
+    NSRange attrsRange APPKIT_IVAR;			/* And character range over which it applies */
+    float curBaselineOffset APPKIT_IVAR;		/* Current baseline offset, from the baseline offset and superscript attrs; cached */
+    float curMinBaselineDistance APPKIT_IVAR;	/* Minimum baseline distance attribute, cached */
+    float curMaxBaselineDistance APPKIT_IVAR;	/* Maximum baseline distance attribute, cached */
+    int curSuperscript APPKIT_IVAR;			/* Value of the superscript attr; cached */
+    NSParagraphStyle *curParaStyle APPKIT_IVAR;	/* Paragraph attributes, cached */
+    NSTextContainer *curContainer APPKIT_IVAR;
+    unsigned curContainerIndex APPKIT_IVAR;
+    float curContainerLineFragmentPadding APPKIT_IVAR;
+    BOOL curContainerIsSimpleRectangular APPKIT_IVAR;	/* Whether the current container is simple rectangular, cached */
+    NSSize curContainerSize APPKIT_IVAR;		/* [curContainer containerSize], cached */
+    float curMinLineHeight APPKIT_IVAR;		/* [curParaStyle minLineHeight], cached */
+    float curMaxLineHeight APPKIT_IVAR;		/* [curParaStyle maxLineHeight], cached */
     
     /* Other, more global info */
-    NSString *textString;		/* Basically [textStorage string] */
+    NSString *textString APPKIT_IVAR;		/* Basically [textStorage string] */
 
     /* There is capacityOfGlyphs items in the following arrays. */
-    unsigned capacityOfGlyphs;		/* Capacity of array pointed to by the following items */
+    unsigned capacityOfGlyphs APPKIT_IVAR;		/* Capacity of array pointed to by the following items */
 
-    BOOL busy;	/* This typesetter is currently servicing a call; if the typesetter is "not busy" then none of the other accessor methods are valid, because typesetters don't maintain state across invocations of the main entry point. */
+    BOOL busy APPKIT_IVAR;	/* This typesetter is currently servicing a call; if the typesetter is "not busy" then none of the other accessor methods are valid, because typesetters don't maintain state across invocations of the main entry point. */
 
     struct {
 	unsigned _glyphPostLay:1;
@@ -155,17 +155,17 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
         unsigned _tabType:2;
         unsigned _tabEOL:1;
 	unsigned reserved:23;
-    } _tsFlags;
+    } _tsFlags APPKIT_IVAR;
 
 @public
     /* Bidi-related cached info */
-    unsigned char *glyphBidiLevelCache;
-    unsigned char curBidiLevel;		/* Resolved bidirectional embedding level of current glyph */
+    unsigned char *glyphBidiLevelCache APPKIT_IVAR;
+    unsigned char curBidiLevel APPKIT_IVAR;		/* Resolved bidirectional embedding level of current glyph */
     
 @private
-    unsigned char previousBidiLevel;
-    unsigned char _reservedChars[2];
-    unsigned _reserved2[6];
+    unsigned char previousBidiLevel APPKIT_IVAR;
+    unsigned char _reservedChars[2] APPKIT_IVAR;
+    unsigned _reserved2[6] APPKIT_IVAR;
 }
 
 + (id)sharedInstance; 

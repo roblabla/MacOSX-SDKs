@@ -2,7 +2,7 @@
 //  GKMatchmakerViewController.h
 //  Game Center
 //
-//  Copyright 2010-2017 Apple Inc. All rights reserved.
+//  Copyright 2010-2018 Apple Inc. All rights reserved.
 //
 
 @class GKMatchRequest, GKInvite, GKMatch, GKPlayer;
@@ -11,6 +11,10 @@
 
 // View controller to invite friends, respond to invites, and perform auto-matching. Present modally from the top view controller.
 #if TARGET_OS_IPHONE
+
+#import <Foundation/Foundation.h> // NS_ASSUME_NONNULL_BEGIN
+#import <UIKit/UINavigationController.h> // UINavigationController
+
 NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_8, 4_1)
 @interface GKMatchmakerViewController : UINavigationController

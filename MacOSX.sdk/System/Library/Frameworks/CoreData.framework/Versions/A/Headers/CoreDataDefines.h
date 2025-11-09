@@ -1,7 +1,7 @@
 /*
     CoreDataDefines.h
     Core Data
-    Copyright (c) 2004-2017, Apple Inc.
+    Copyright (c) 2004-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 
 #import <AvailabilityMacros.h>
 #import <Availability.h>
+#import <TargetConditionals.h>
 
 //
 //  Platform specific defs for externs

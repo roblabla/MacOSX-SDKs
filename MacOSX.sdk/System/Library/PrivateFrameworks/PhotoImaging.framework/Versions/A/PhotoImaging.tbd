@@ -1,29 +1,56 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 14E228FC-0477-3ACF-B71B-D52644E64831' ]
+uuids:           [ 'x86_64: 291C1310-57C4-34C4-A887-A574C1AFBF4E' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/PhotoImaging.framework/Versions/A/PhotoImaging
-current-version: 3201.6.120
-objc-constraint: none
+current-version: 3401.2.150
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _PIAutoLoopFlavorFromString, _PIAutoLoopFlavorToString, _PIAutoLoopFlavorValueAutoLoop, 
+    symbols:         [ _GUInvertMatrix, _GUMatrixVector, _PIAutoLoopFlavorFromString, 
+                       _PIAutoLoopFlavorToString, _PIAutoLoopFlavorValueAutoLoop, 
                        _PIAutoLoopFlavorValueLongExposure, _PIAutoLoopFlavorValueMirror, 
-                       _PIAutoLoopRecipeForFlavor, _PIAutoLoopRecipeGetCropRect, 
+                       _PIAutoLoopRecipeForFlavor, _PIAutoLoopRecipeFrameTransformGetHomography, 
+                       _PIAutoLoopRecipeFrameTransformGetTime, _PIAutoLoopRecipeGetCropRect, 
                        _PIAutoLoopRecipeGetCropRectDictionary, _PIAutoLoopRecipeGetFlavorParameters, 
                        _PIAutoLoopRecipeGetFrameDuration, _PIAutoLoopRecipeGetInstructionAtTime, 
                        _PIAutoLoopRecipeHasGoodStabilization, _PIAutoLoopRecipeIsValid, 
-                       _PIDepthInfoKey, _PIPortraitInfoKey, _PIWhiteBalanceTypeFaceBalance, 
-                       _PIWhiteBalanceTypeNeutralGray, _PIWhiteBalanceTypeTempTint, 
-                       _apertureValue, _flashFired, _isoValue, _shutterSpeedValue ]
-    objc-classes:    [ _PIAutoLoopAnalysisClient, _PIAutoLoopAnalysisRequest, _PIAutoLoopAutoCalculator, 
-                       _PIAutoLoopExportClient, _PIAutoLoopExportRequest, _PICropAutoCalculator, 
-                       _PIFaceBalanceAutoCalculator, _PIImageIO, _PILevelsAutoAbstractCalculator, 
-                       _PILevelsLuminanceAutoCalculator, _PILevelsRGBAutoCalculator, 
-                       _PILongExposureFusionAutoCalculator, _PILongExposureRegistrationRequest, 
-                       _PIManualRedEyeAutoCalculator, _PIPhotoEditHelper, _PIPipelineFilters, 
-                       _PIPortraitAutoCalculator, _PIRAWTempTintSampler, _PIRedEyeAutoCalculator, 
-                       _PIRepairOffsetAutoCalculator, _PISchema, _PISmartBlackAndWhiteAutoCalculator, 
-                       _PISmartColorAutoCalculator, _PISmartToneAutoCalculator, _PISourceSampler, 
-                       _PIWhiteBalanceAutoCalculator ]
+                       _PIDepthApertureKey, _PIDepthInfoKey, _PIPortraitDisableStageKey, 
+                       _PIPortraitInfoKey, _PIWhiteBalanceTypeFaceBalance, _PIWhiteBalanceTypeNeutralGray, 
+                       _PIWhiteBalanceTypeTempTint, _PhotoImagingVersionNumber, _PhotoImagingVersionString, 
+                       _apertureValue, _fixRedeye, _flashFired, _isoValue, _shutterSpeedValue ]
+    objc-classes:    [ GUBWBilateralConvolution, GUBilateralConvolution, GUMsgImageBuffer, 
+                       PIApertureRedEyeFilter, PIApertureRedEyeProcessorKernel, PIAutoLoopAnalysisClient, 
+                       PIAutoLoopAnalysisJob, PIAutoLoopAnalysisRequest, PIAutoLoopAutoCalculator, 
+                       PIAutoLoopCacheNode, PIAutoLoopExportClient, PIAutoLoopExportJob, 
+                       PIAutoLoopExportRequest, PIAutoLoopFrameNode, PIAutoLoopKernels, 
+                       PIAutoLoopMirrorVideoNode, PIAutoLoopStabVideoNode, PIAutoLoopVideoNode, 
+                       PIBilateralFilter, PIClone, PICropAutoCalculator, PICurvesFilter, 
+                       PIDefinitionFilter, PIDepthEffectApertureAutoCalculator, PIFaceBalanceAutoCalculator, 
+                       PIForwardFakeBoost, PIImageIO, PIInverseFakeBoost, PILevelsAutoAbstractCalculator, 
+                       PILevelsFilter, PILevelsLuminanceAutoCalculator, PILevelsRGBAutoCalculator, 
+                       PILongExposureAccumulator, PILongExposureCacheNode, PILongExposureFusion, 
+                       PILongExposureFusionAutoCalculator, PILongExposureRegistrationJob, 
+                       PILongExposureRegistrationRequest, PIMakerNoteUtilities, PIManualRedEyeAutoCalculator, 
+                       PINeutralGrayWhiteBalanceFilter, PIPhotoEditHelper, PIPipelineFilters, 
+                       PIPortraitApertureValues, PIPortraitAutoCalculator, PIRAWFaceBalance, 
+                       PIRAWTempTintSampler, PIRedEye, PIRedEyeAutoCalculator, PIRepair, 
+                       PIRepairOffsetAutoCalculator, PIRepairProcessorKernel, PIRepairUtilities, 
+                       PIRetouchCacheNode, PIRetouchCompositeNode, PIRetouchSourceNode, 
+                       PIRetouchSubsampleCacheNode, PIRetouchSubsampleSourceNode, 
+                       PISchema, PISelectiveColorFilter, PISmartBlackAndWhiteAutoCalculator, 
+                       PISmartColorAutoCalculator, PISmartToneAutoCalculator, PISourceSampler, 
+                       PITempTintFilter, PIWhiteBalanceAutoCalculator, _GUWhiteColorCalculator, 
+                       _PIAutoLoopAnalysisResult, _PILongExposureRegistrationResult ]
+    objc-ivars:      [ GUMsgImageBuffer.bufferColorspace, GUMsgImageBuffer.elementByteSize, 
+                       GUMsgImageBuffer.format, GUMsgImageBuffer.height, GUMsgImageBuffer.rowElements, 
+                       GUMsgImageBuffer.width, PIApertureRedEyeFilter.inputImage, 
+                       PIApertureRedEyeFilter.inputSpots, PICurvesFilter.inputBlueData, 
+                       PICurvesFilter.inputGrayChoice, PICurvesFilter.inputGreenData, 
+                       PICurvesFilter.inputImage, PICurvesFilter.inputRGBData, PICurvesFilter.inputRedData, 
+                       PIRetouchSourceNode._cacheKey, PIRetouchSourceNode._renderedImage, 
+                       PIRetouchSourceNode._retouchImage, PIRetouchSourceNode._strokes ]
+    weak-def-symbols: [ __ZTI13CGrNavigatorTIDv4_fLm1EE, __ZTI13CGrNavigatorTIhLm1EE, 
+                        __ZTI14CGrNavigatorTCIDv4_fE, __ZTI14CGrNavigatorTCIhE, __ZTS13CGrNavigatorTIDv4_fLm1EE, 
+                        __ZTS13CGrNavigatorTIhLm1EE, __ZTS14CGrNavigatorTCIDv4_fE, 
+                        __ZTS14CGrNavigatorTCIhE ]
 ...

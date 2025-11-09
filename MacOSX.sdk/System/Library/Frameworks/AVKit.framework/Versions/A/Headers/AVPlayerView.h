@@ -56,9 +56,8 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
 	@property	videoGravity
 	@abstract	A string defining how the video is displayed within an AVPlayerLayer bounds rect.
 	@discussion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default.
-				See <AVFoundation/AVAnimation.h> for a description of these options.
  */
-@property (copy) NSString *videoGravity API_AVAILABLE(macosx(10.10));
+@property (copy) AVLayerVideoGravity videoGravity API_AVAILABLE(macosx(10.10));
 
 /*!
 	@property	readyForDisplay
@@ -156,7 +155,7 @@ typedef NS_ENUM(NSInteger, AVPlayerViewTrimResult) {
 				The chapter title (optional).
 	@abstract	Display the provided chapter number and title momentarily.
  */
-- (void)flashChapterNumber:(NSUInteger)chapterNumber chapterTitle:(NSString *)chapterTitle;
+- (void)flashChapterNumber:(NSUInteger)chapterNumber chapterTitle:(nullable NSString *)chapterTitle;
 
 @end
 

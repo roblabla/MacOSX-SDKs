@@ -20,10 +20,14 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNDetectTextRectanglesRequest : VNImageBasedRequest
 
 /*!
-	@brief Determine whether or not the bounding boxes of individual characters should also be defined in the resultant VNTextObservations.
+	@brief Specify whether or not the bounding boxes of individual characters should also be returned in the resultant VNTextObservations. Default is NO.
 */
 @property (readwrite, nonatomic, assign) BOOL reportCharacterBoxes;
 
 @end
+
+
+API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0))
+static const NSUInteger VNDetectTextRectanglesRequestRevision1 = 1;
 
 NS_ASSUME_NONNULL_END

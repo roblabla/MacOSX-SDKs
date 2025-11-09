@@ -1,6 +1,6 @@
 /* CoreAnimation - CATransaction.h
 
-   Copyright (c) 2006-2017, Apple Inc.
+   Copyright (c) 2006-2018, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CABase.h>
@@ -28,7 +28,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
+API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface CATransaction : NSObject
 
 /* Begin a new transaction for the current thread; nests. */
@@ -112,12 +112,12 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 /** Transaction property ids. **/
 
 CA_EXTERN NSString * const kCATransactionAnimationDuration
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 CA_EXTERN NSString * const kCATransactionDisableActions
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 CA_EXTERN NSString * const kCATransactionAnimationTimingFunction
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 CA_EXTERN NSString * const kCATransactionCompletionBlock
-    CA_AVAILABLE_STARTING (10.6, 4.0, 9.0, 2.0);
+    API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END

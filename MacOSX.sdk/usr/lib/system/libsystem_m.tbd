@@ -1,13 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: E45FC198-1EBB-3EEE-A139-9C8F2EF24B8D', 'x86_64: 398310B6-5FF9-3345-A798-FB2E2BA1C9A7' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 43D1796B-954F-37D6-B1AC-9D80DF0655A2' ]
 platform:        macosx
 install-name:    /usr/lib/system/libsystem_m.dylib
-current-version: 3146
+current-version: 3158.200.7
 objc-constraint: none
-parent-umbrella: System
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ __FE_DFL_DISABLE_SSE_DENORMS_ENV, __FE_DFL_ENV, ___Libm_version, 
                        ___cos_d2, ___cos_d4, ___cos_f4, ___cos_f8, ___cospi, ___cospif, 
                        ___exp10, ___exp10f, ___fegetfltrounds, ___fpclassify, ___fpclassifyd, 
@@ -61,7 +60,9 @@ exports:
                        __simd_log1p_f16, __simd_log1p_f4, __simd_log1p_f8, __simd_log2_d2, 
                        __simd_log2_d4, __simd_log2_d8, __simd_log2_f16, __simd_log2_f4, 
                        __simd_log2_f8, __simd_log_d2, __simd_log_d4, __simd_log_d8, 
-                       __simd_log_f16, __simd_log_f4, __simd_log_f8, __simd_orient_pd2, 
+                       __simd_log_f16, __simd_log_f4, __simd_log_f8, __simd_nextafter_d2, 
+                       __simd_nextafter_d4, __simd_nextafter_d8, __simd_nextafter_f16, 
+                       __simd_nextafter_f4, __simd_nextafter_f8, __simd_orient_pd2, 
                        __simd_orient_pd3, __simd_orient_pf2, __simd_orient_pf3, __simd_orient_vd2, 
                        __simd_orient_vd3, __simd_orient_vf2, __simd_orient_vf3, __simd_pow_d2, 
                        __simd_pow_d4, __simd_pow_d8, __simd_pow_f16, __simd_pow_f4, 

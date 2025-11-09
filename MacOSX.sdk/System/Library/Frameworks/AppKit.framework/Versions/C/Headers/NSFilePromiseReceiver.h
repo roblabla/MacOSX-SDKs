@@ -1,7 +1,7 @@
 /*
 	NSFilePromiseReceiver.h
 	Application Kit
-	Copyright (c) 2015-2017, Apple Inc.
+	Copyright (c) 2015-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -18,21 +18,21 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_12)
 @interface NSFilePromiseReceiver : NSObject <NSPasteboardReading> {
 @private
-    NSPasteboard *_pasteboard;
-    NSPasteboardItem *_pasteboardItem;
-    NSArray<NSString*> *_fileTypes;
-    NSArray<NSString *> *_reservedA;
-    NSArray<NSString*> *_fileNames;
-    NSArray<NSURL*> *_fileURLs;
-    NSOperationQueue *_operationQueue;
-    NSInteger _promiseType;
-    void (^_readerBlock)(NSURL *, NSError * __nullable);
+    NSPasteboard *_pasteboard APPKIT_IVAR;
+    NSPasteboardItem *_pasteboardItem APPKIT_IVAR;
+    NSArray<NSString*> *_fileTypes APPKIT_IVAR;
+    NSArray<NSString *> *_reservedA APPKIT_IVAR;
+    NSArray<NSString*> *_fileNames APPKIT_IVAR;
+    NSArray<NSURL*> *_fileURLs APPKIT_IVAR;
+    NSOperationQueue *_operationQueue APPKIT_IVAR;
+    NSInteger _promiseType APPKIT_IVAR;
+    void (^_readerBlock)(NSURL *, NSError * __nullable) APPKIT_IVAR;
     struct {
         unsigned int usesFileCoordination:1;
         unsigned int registered:1;
         unsigned int reserved:30;
-    } _flags;
-    id _private __unused;
+    } _flags APPKIT_IVAR;
+    id _private __unused APPKIT_IVAR;
 }
 
 /* A view must register what types it accepts via -registerForDraggedTypes:. Use this class method to get the file promise drag types that NSFilePromiseReceiver can accept, in order to register a view to accept promised files.

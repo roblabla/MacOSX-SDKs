@@ -301,10 +301,14 @@ public:
     OSMetaClassDeclareReservedUnused(OSSerialize, 7);
 };
 
-// xx-review: this whole class seems to be unused!
 
 typedef bool (*OSSerializerCallback)(void * target, void * ref,
                                      OSSerialize * serializer);
+
+#ifdef __BLOCKS__
+typedef bool (^OSSerializerBlock)(OSSerialize * serializer);
+#endif /* __BLOCKS__ */
+
 
 class OSSerializer : public OSObject
 {
@@ -320,6 +324,14 @@ public:
         void * target,
         OSSerializerCallback callback,
         void * ref = 0);
+
+#ifdef __BLOCKS__
+    static OSSerializer * withBlock(
+        OSSerializerBlock callback);
+#endif
+
+    virtual void free( void ) APPLE_KEXT_OVERRIDE;
+
 
     virtual bool serialize(OSSerialize * serializer) const APPLE_KEXT_OVERRIDE;
 };

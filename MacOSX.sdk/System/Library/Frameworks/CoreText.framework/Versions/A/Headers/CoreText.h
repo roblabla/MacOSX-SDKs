@@ -2,7 +2,7 @@
  *  CoreText.h
  *  CoreText
  *
- *  Copyright (c) 2006-2017 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2018 Apple Inc. All rights reserved.
  *
  */
 
@@ -17,7 +17,6 @@
 #ifndef __CORETEXT__
 #define __CORETEXT__
 
-#include <CoreText/CTDefines.h>
 #include <CoreText/CTFont.h>
 #include <CoreText/CTFontCollection.h>
 #include <CoreText/CTFontDescriptor.h>
@@ -72,6 +71,7 @@ uint32_t CTGetCoreTextVersion( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watcho
 #define kCTVersionNumber10_11 0x00080000
 #define kCTVersionNumber10_12 0x00090000
 #define kCTVersionNumber10_13 0x000A0000
+#define kCTVersionNumber10_14 0x000B0000
 
 CF_EXTERN_C_END
 

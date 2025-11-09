@@ -1,9 +1,8 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 357492D4-05A1-32F5-A718-EBA3A07D442F' ]
+uuids:           [ 'x86_64: 9D3BC9D4-8047-3FC3-87A6-E2F67FD3A269' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/EmojiFoundation.framework/Versions/A/EmojiFoundation
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _EMFEmojiCategoryActivity, _EMFEmojiCategoryFlags, _EMFEmojiCategoryFoodAndDrink, 
@@ -11,8 +10,9 @@ exports:
                        _EMFEmojiCategoryPrepopulated, _EMFEmojiCategoryRecents, _EMFEmojiCategorySymbols, 
                        _EMFEmojiCategoryTravelAndPlaces, _EMFEmojiPreferencesChangedNotification, 
                        _EMFEmojiPreferencesServiceName, _EMFEmojiUsageAdornment, 
-                       _EMFEmojiUsageKeyboard, _EMFEmojiUsageKeywordMatch, _EMFEmojiUsageLearning ]
-    objc-classes:    [ _EMFEmojiCategory, _EMFEmojiLocaleData, _EMFEmojiPreferences, 
-                       _EMFEmojiPreferencesClient, _EMFEmojiPreferencesService, _EMFEmojiToken, 
-                       _EMFStringUtilities ]
+                       _EMFEmojiUsageKeyboard, _EMFEmojiUsageKeywordMatch, _EMFEmojiUsageLearning, 
+                       _EMFGetDeviceBuildVersion, _EMFGetDeviceRegionCode ]
+    objc-classes:    [ EMFEmojiCategory, EMFEmojiLocaleData, EMFEmojiPreferences, 
+                       EMFEmojiPreferencesClient, EMFEmojiPreferencesService, EMFEmojiToken, 
+                       EMFStringUtilities ]
 ...

@@ -76,7 +76,7 @@ CB_EXTERN NSString * const CBAdvertisementDataOverflowServiceUUIDsKey NS_AVAILAB
 /*!
  *  @constant CBAdvertisementDataIsConnectable
  *
- *  @discussion A NSNumber (Boolean) indicating whether or not the advertising event type was connectable. This can be used to determine
+ *  @discussion An NSNumber (Boolean) indicating whether or not the advertising event type was connectable. This can be used to determine
  *				whether or not a peripheral is connectable in that instant.
  *
  */

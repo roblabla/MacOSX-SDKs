@@ -1,7 +1,7 @@
 /*
 	NSBitmapImageRep.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -56,7 +56,7 @@ typedef NS_OPTIONS(NSUInteger, NSBitmapFormat) {
     NSBitmapFormatThirtyTwoBitBigEndian NS_ENUM_AVAILABLE_MAC(10_10) = (1 << 11)
 };
 
-typedef NSString * NSBitmapImageRepPropertyKey NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSBitmapImageRepPropertyKey NS_TYPED_EXTENSIBLE_ENUM;
 
 APPKIT_EXTERN NSBitmapImageRepPropertyKey NSImageCompressionMethod;       // TIFF input/output (NSTIFFCompression in NSNumber)
 APPKIT_EXTERN NSBitmapImageRepPropertyKey NSImageCompressionFactor;	// TIFF/JPEG input/output (float in NSNumber)
@@ -75,6 +75,9 @@ APPKIT_EXTERN NSBitmapImageRepPropertyKey NSImageFallbackBackgroundColor NS_AVAI
 
 @interface NSBitmapImageRep : NSImageRep <NSSecureCoding> {
     /*All instance variables are private*/
+#if __OBJC2__
+    unsigned int _bytesPerRow;
+#endif /* __OBJC2__ */
     struct __bitmapRepFlags {
         unsigned int bitsPerPixel:8;	
 	unsigned int isPlanar:1;
@@ -89,14 +92,16 @@ APPKIT_EXTERN NSBitmapImageRepPropertyKey NSImageFallbackBackgroundColor NS_AVAI
         unsigned int bitmapFormat:3;
         unsigned int cgImageIsPrimary:1;
 	unsigned int compression:20;
-    } _moreRepFlags;
-    unsigned int _bytesPerRow;
-    volatile id _dataObj;
-    NSData *_tiffData;
-    id _properties;
+    } _moreRepFlags APPKIT_IVAR;
+#if !__OBJC2__
+    unsigned int _bytesPerRow APPKIT_IVAR;
+#endif /* !__OBJC2__ */
+    volatile id _dataObj APPKIT_IVAR;
+    NSData *_tiffData APPKIT_IVAR;
+    id _properties APPKIT_IVAR;
 }
 
-- (nullable instancetype)initWithFocusedViewRect:(NSRect)rect;
+- (nullable instancetype)initWithFocusedViewRect:(NSRect)rect NS_DEPRECATED_MAC(10_0, 10_14, "Use -[NSView cacheDisplayInRect:toBitmapImageRep:] to snapshot a view.");
 
 - (nullable instancetype)initWithBitmapDataPlanes:(unsigned char *__nullable *__nullable)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSColorSpaceName)colorSpaceName bytesPerRow:(NSInteger)rBytes bitsPerPixel:(NSInteger)pBits;
 - (nullable instancetype)initWithBitmapDataPlanes:(unsigned char *__nullable *__nullable)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSColorSpaceName)colorSpaceName  bitmapFormat:(NSBitmapFormat)bitmapFormat bytesPerRow:(NSInteger)rBytes bitsPerPixel:(NSInteger)pBits;
@@ -170,20 +175,20 @@ Works on images with 8-bit SPP; thus either 8-bit gray or 24-bit color (with opt
 @end
 
 
-static const NSBitmapImageFileType NSTIFFFileType /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapImageFileTypeTIFF", 10.0, 10.12)*/ = NSBitmapImageFileTypeTIFF;
-static const NSBitmapImageFileType NSBMPFileType /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapImageFileTypeBMP", 10.0, 10.12)*/ = NSBitmapImageFileTypeBMP;
-static const NSBitmapImageFileType NSGIFFileType /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapImageFileTypeGIF", 10.0, 10.12)*/ = NSBitmapImageFileTypeGIF;
-static const NSBitmapImageFileType NSJPEGFileType /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapImageFileTypeJPEG", 10.0, 10.12)*/ = NSBitmapImageFileTypeJPEG;
-static const NSBitmapImageFileType NSPNGFileType /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapImageFileTypePNG", 10.0, 10.12)*/ = NSBitmapImageFileTypePNG;
-static const NSBitmapImageFileType NSJPEG2000FileType /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapImageFileTypeJPEG2000", 10.0, 10.12)*/ = NSBitmapImageFileTypeJPEG2000;
+static const NSBitmapImageFileType NSTIFFFileType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapImageFileTypeTIFF", 10_0, 10_14) = NSBitmapImageFileTypeTIFF;
+static const NSBitmapImageFileType NSBMPFileType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapImageFileTypeBMP", 10_0, 10_14) = NSBitmapImageFileTypeBMP;
+static const NSBitmapImageFileType NSGIFFileType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapImageFileTypeGIF", 10_0, 10_14) = NSBitmapImageFileTypeGIF;
+static const NSBitmapImageFileType NSJPEGFileType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapImageFileTypeJPEG", 10_0, 10_14) = NSBitmapImageFileTypeJPEG;
+static const NSBitmapImageFileType NSPNGFileType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapImageFileTypePNG", 10_0, 10_14) = NSBitmapImageFileTypePNG;
+static const NSBitmapImageFileType NSJPEG2000FileType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapImageFileTypeJPEG2000", 10_0, 10_14) = NSBitmapImageFileTypeJPEG2000;
 
-static const NSBitmapFormat NSAlphaFirstBitmapFormat /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapFormatAlphaFirst", 10.5, 10.12)*/ = NSBitmapFormatAlphaFirst;
-static const NSBitmapFormat NSAlphaNonpremultipliedBitmapFormat /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapFormatAlphaNonpremultiplied", 10.0, 10.12)*/ = NSBitmapFormatAlphaNonpremultiplied;
-static const NSBitmapFormat NSFloatingPointSamplesBitmapFormat /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapFormatFloatingPointSamples", 10.0, 10.12)*/ = NSBitmapFormatFloatingPointSamples;
-static const NSBitmapFormat NS16BitLittleEndianBitmapFormat /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapFormatSixteenBitLittleEndian", 10.5, 10.12)*/ = NSBitmapFormatSixteenBitLittleEndian;
-static const NSBitmapFormat NS32BitLittleEndianBitmapFormat /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapFormatThirtyTwoBitLittleEndian", 10.0, 10.12)*/ = NSBitmapFormatThirtyTwoBitLittleEndian;
-static const NSBitmapFormat NS16BitBigEndianBitmapFormat /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapFormatSixteenBitBigEndian", 10.0, 10.12)*/ = NSBitmapFormatSixteenBitBigEndian;
-static const NSBitmapFormat NS32BitBigEndianBitmapFormat /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapFormatThirtyTwoBitBigEndian", 10.0, 10.12)*/ = NSBitmapFormatThirtyTwoBitBigEndian;
+static const NSBitmapFormat NSAlphaFirstBitmapFormat NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapFormatAlphaFirst", 10_5, 10_14) = NSBitmapFormatAlphaFirst;
+static const NSBitmapFormat NSAlphaNonpremultipliedBitmapFormat NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapFormatAlphaNonpremultiplied", 10_0, 10_14) = NSBitmapFormatAlphaNonpremultiplied;
+static const NSBitmapFormat NSFloatingPointSamplesBitmapFormat NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapFormatFloatingPointSamples", 10_0, 10_14) = NSBitmapFormatFloatingPointSamples;
+static const NSBitmapFormat NS16BitLittleEndianBitmapFormat NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapFormatSixteenBitLittleEndian", 10_5, 10_14) = NSBitmapFormatSixteenBitLittleEndian;
+static const NSBitmapFormat NS32BitLittleEndianBitmapFormat NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapFormatThirtyTwoBitLittleEndian", 10_0, 10_14) = NSBitmapFormatThirtyTwoBitLittleEndian;
+static const NSBitmapFormat NS16BitBigEndianBitmapFormat NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapFormatSixteenBitBigEndian", 10_0, 10_14) = NSBitmapFormatSixteenBitBigEndian;
+static const NSBitmapFormat NS32BitBigEndianBitmapFormat NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBitmapFormatThirtyTwoBitBigEndian", 10_0, 10_14) = NSBitmapFormatThirtyTwoBitBigEndian;
 
 
 NS_ASSUME_NONNULL_END

@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -44,7 +44,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	Clients must serialize their access to the resulting AVAssetTrack and related objects on the associated AVPlayer's
 	notification queue.  By default, this queue is the main queue.
 */
-@property (nonatomic, readonly) AVAssetTrack *assetTrack;
+@property (nonatomic, readonly, nullable) AVAssetTrack *assetTrack;
 
 /*!
  @property		enabled

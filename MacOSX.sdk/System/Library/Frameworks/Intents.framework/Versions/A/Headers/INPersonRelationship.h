@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <Intents/IntentsDefines.h>
 
-typedef NSString *INPersonRelationship NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString *INPersonRelationship NS_TYPED_EXTENSIBLE_ENUM;
 
 INTENTS_EXTERN INPersonRelationship const INPersonRelationshipFather NS_SWIFT_NAME(INPersonRelationship.father) API_AVAILABLE(ios(10.2), watchos(3.2), macosx(10.12.2));
 INTENTS_EXTERN INPersonRelationship const INPersonRelationshipMother NS_SWIFT_NAME(INPersonRelationship.mother) API_AVAILABLE(ios(10.2), watchos(3.2), macosx(10.12.2));

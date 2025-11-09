@@ -1,12 +1,13 @@
 /*
         NSRulerMarker.h
         Application Kit
-        Copyright (c) 1994-2017, Apple Inc.
+        Copyright (c) 1994-2018, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,10 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSRulerMarker : NSObject <NSCopying, NSCoding> {
     /*All instance variables are private*/
-    __weak NSRulerView *_ruler;
-    CGFloat _location;
-    NSImage *_image;
-    NSPoint _imageOrigin;
+    __weak NSRulerView *_ruler APPKIT_IVAR;
+    CGFloat _location APPKIT_IVAR;
+    NSImage *_image APPKIT_IVAR;
+    NSPoint _imageOrigin APPKIT_IVAR;
 
     struct __rFlags {
         unsigned int movable:1;
@@ -25,9 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int dragging:1;
         unsigned int pinned:1;
         unsigned int _reserved:28;
-    } _rFlags;
+    } _rFlags APPKIT_IVAR;
 
-    id _representedObject;
+    id _representedObject APPKIT_IVAR;
 }
 
 /**************************** Initialization ****************************/

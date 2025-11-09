@@ -167,7 +167,7 @@ typedef NS_ENUM(NSUInteger, MDLVertexFormat)
  @class MDLVertexBufferLayout
  @abstract Describes a vertex buffer's layout
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLVertexBufferLayout : NSObject <NSCopying>
 
@@ -193,7 +193,7 @@ MDL_EXPORT
  @class MDLVertexAttribute
  @abstract Structure with properties of a vertex attribute
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLVertexAttribute : NSObject <NSCopying>
 
@@ -202,9 +202,9 @@ MDL_EXPORT
  @abstract Initialize attribute object with all properties
  */
 - (instancetype) initWithName:(NSString *)name
-                               format:(MDLVertexFormat)format
-                               offset:(NSUInteger)offset
-                          bufferIndex:(NSUInteger)bufferIndex;
+                       format:(MDLVertexFormat)format
+                       offset:(NSUInteger)offset
+                  bufferIndex:(NSUInteger)bufferIndex;
 /*!
  @property name
  @abstract Identifying name of the attribute derived from model file, or one of 
@@ -268,7 +268,7 @@ MDL_EXPORT
  Designed to be very similar to MTLVertexDescriptor to ease creation of one from 
  the other
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLVertexDescriptor : NSObject <NSCopying>
 

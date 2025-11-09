@@ -1,16 +1,18 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A7F3E262-64EA-352D-B402-E4851BF2B1C8' ]
+uuids:           [ 'x86_64: D59F401B-7940-3A51-B737-087AA9E5776B' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/IMAssistantCore.framework/Versions/A/IMAssistantCore
 current-version: 800
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _IMAssistantContinuityChatsKey, _IMAssistantContinuityHandlesKey ]
-    objc-classes:    [ _IMAssistantAudioPlayer, _IMAssistantINMessageConverter, _IMAssistantINPersonConverter, 
-                       _IMAssistantIntentHandler, _IMAssistantMessageAttributeOptions, 
-                       _IMAssistantMessageHandler, _IMAssistantMessagePlayAudioHandler, 
-                       _IMAssistantMessageQueryHandler, _IMAssistantMessageReadAttributeSanitizer, 
-                       _IMAssistantMessageSearchHandler, _IMAssistantMessageSendHandler, 
-                       _IMAssistantMessageSetAttributeHandler ]
+    symbols:         [ _IMAssistantContinuityChatsKey, _IMAssistantContinuityHandlesKey, 
+                       _IMAssistantCoreInstantMessageServiceBusinessChat ]
+    objc-classes:    [ IMAssistantAudioPlayer, IMAssistantChatParticipant, IMAssistantINMessageConverter, 
+                       IMAssistantIntentHandler, IMAssistantMessageAttributeOptions, 
+                       IMAssistantMessageHandler, IMAssistantMessagePlayAudioHandler, 
+                       IMAssistantMessageQueryHandler, IMAssistantMessageReadAttributeSanitizer, 
+                       IMAssistantMessageSearchChatParticipant, IMAssistantMessageSearchHandler, 
+                       IMAssistantMessageSendHandler, IMAssistantMessageSetAttributeHandler, 
+                       IMAssistantRelevantChatMatchingRecipients ]
 ...

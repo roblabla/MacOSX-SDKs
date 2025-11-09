@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 5EA0808A-0753-3AB9-92B5-5E330FA2C89F', 'x86_64: 22AB4959-4303-3F67-9766-ED8308380EC8' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 7E4EFF02-2596-31E6-88DE-29C89E2837E4' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _ODContextGetTypeID, _ODConvertToLegacyErrorCode, _ODNodeAddAccountPolicy, 
                        _ODNodeCopyAccountPolicies, _ODNodeCopyCredentials, _ODNodeCopyDetails, 
                        _ODNodeCopyPolicies, _ODNodeCopyRecord, _ODNodeCopyRecordAuthenticationData, 
@@ -16,8 +16,8 @@ exports:
                        _ODNodeCreateWithNodeType, _ODNodeCustomCall, _ODNodeCustomFunction, 
                        _ODNodeGetDSRef, _ODNodeGetName, _ODNodeGetSecureTokenRecoveryType, 
                        _ODNodeGetTypeID, _ODNodePasswordContentCheck, _ODNodeRemoveAccountPolicy, 
-                       _ODNodeRemovePolicy, _ODNodeSetAccountPolicies, _ODNodeSetCredentials, 
-                       _ODNodeSetCredentialsExtended, _ODNodeSetCredentialsUsingKerberosCache, 
+                       _ODNodeRemovePolicy, _ODNodeReplaceUserRecord, _ODNodeSetAccountPolicies, 
+                       _ODNodeSetCredentials, _ODNodeSetCredentialsExtended, _ODNodeSetCredentialsUsingKerberosCache, 
                        _ODNodeSetPolicies, _ODNodeSetPolicy, _ODNodeSetSecureTokenRecoveryCloud, 
                        _ODNodeSetSecureTokenRecoveryCloudUsingIdentity, _ODNodeSetSecureTokenRecoveryMasterPassword, 
                        _ODNodeSetSecureTokenRecoveryPersonal, _ODNodeSetSecureTokenRecoveryPersonalUsingKey, 

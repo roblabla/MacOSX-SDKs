@@ -52,14 +52,14 @@ NS_CLASS_AVAILABLE(10_4, 8_0)
  * On OSX after 10.10, the array will contain instances of CIKernel, CIColorKernel or CIWarpKernel classes.
  * On iOS, the array will contain instances of CIKernel, CIColorKernel or CIWarpKernel classes.
  */
-+ (nullable NSArray<CIKernel *> *)kernelsWithString:(NSString *)string  NS_AVAILABLE(10_4, 8_0);
++ (nullable NSArray<CIKernel *> *)kernelsWithString:(NSString *)string  CIKL_DEPRECATED(10_4,10_14, 8_0,12_0);
 
 /* The string argument should contain a program with one kernel.
  * On OSX 10.10 and before, this returns a CIKernel object.
  * On OSX after 10.10, this returns a CIKernel, CIColorKernel, or CIWarpKernel object.
  * On iOS this returns a CIKernel, CIColorKernel, or CIWarpKernel object.
  */
-+ (nullable instancetype)kernelWithString:(NSString *)string  NS_AVAILABLE(10_10, 8_0);
++ (nullable instancetype)kernelWithString:(NSString *)string  CIKL_DEPRECATED(10_10,10_14, 8_0,12_0);
 
 /* The data argument should represent a metallib file compiled with the Core Image Standard Library
  * and contain the given function written in the Metal Shading Language.
@@ -129,7 +129,7 @@ NS_CLASS_AVAILABLE(10_4, 8_0)
  * The function must take a __sample argument for each input image.
  * Additional arguments can be of type float, vec2, vec3, vec4, or __color.
  * The destination pixel location is obtained by calling destCoord().
- * The kernel should not call sample(), sampleCoord(), or samplerTransform().
+ * The kernel should not call sample(), samplerCoord(), or samplerTransform().
  * The function must return a vec4 pixel color.
  */
 NS_CLASS_AVAILABLE(10_11, 8_0)
@@ -142,7 +142,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  * On iOS9 [CIColorKernel kernelWithString:] will return a CIColorKernel object or nil.
  * On OS X [CIColorKernel kernelWithString:] will return a CIColorKernel object or nil.
  */
-+ (nullable instancetype)kernelWithString:(NSString *)string;
++ (nullable instancetype)kernelWithString:(NSString *)string  CIKL_DEPRECATED(10_10,10_14, 8_0,12_0);
 
 /* Apply the receiver CIColorKernel to produce a new CIImage object.
  *
@@ -167,7 +167,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  *
  * Additional arguments can be of type float, vec2, vec3, vec4.
  * The destination pixel location is obtained by calling destCoord().
- * The kernel should not call sample(), sampleCoord(), or samplerTransform().
+ * The kernel should not call sample(), samplerCoord(), or samplerTransform().
  * The function must return a vec2 source location.
  */
 NS_CLASS_AVAILABLE(10_11, 8_0)
@@ -180,7 +180,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  * On iOS9 [CIWarpKernel kernelWithString:] will return a CIWarpKernel object or nil.
  * On OS X [CIWarpKernel kernelWithString:] will return a CIWarpKernel object or nil.
  */
-+ (nullable instancetype)kernelWithString:(NSString *)string;
++ (nullable instancetype)kernelWithString:(NSString *)string  CIKL_DEPRECATED(10_10,10_14, 8_0,12_0);
 
 /* Apply the receiver CIWarpKernel to produce a new CIImage object.
  *
@@ -214,7 +214,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  * The first argument represents the value of the source pixel and the second 
  * represents that of the old destination. The vec4 returned by the kernel will 
  * be the new destination color.
- * The kernel should not call sample(), sampleCoord(), or samplerTransform().
+ * The kernel should not call sample(), samplerCoord(), or samplerTransform().
  * The function must return a vec4 pixel color.
  */
 NS_CLASS_AVAILABLE(10_13, 11_0)
@@ -223,7 +223,7 @@ NS_CLASS_AVAILABLE(10_13, 11_0)
 }
 
 /* The string argument should contain a program with one custom blend kernel. */
-+ (nullable instancetype)kernelWithString:(NSString *)string;
++ (nullable instancetype)kernelWithString:(NSString *)string  CIKL_DEPRECATED(10_10,10_14, 8_0,12_0);
 
 /* Apply the receiver CIBlendKernel to produce a new CIImage object
  * by blending a foreground and background images.

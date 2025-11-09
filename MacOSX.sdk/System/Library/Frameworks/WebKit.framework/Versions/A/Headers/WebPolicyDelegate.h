@@ -27,6 +27,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <WebKit/WebKitAvailability.h>
 
 #import <AppKit/AppKit.h>
 
@@ -55,13 +56,13 @@ typedef NS_ENUM(NSInteger, WebNavigationType) {
     WebNavigationTypeReload,
     WebNavigationTypeFormResubmitted,
     WebNavigationTypeOther
-};
+} WEBKIT_ENUM_DEPRECATED_MAC(10_3, 10_14);
 
-extern NSString *WebActionNavigationTypeKey; // NSNumber (WebNavigationType)
-extern NSString *WebActionElementKey; // NSDictionary of element info
-extern NSString *WebActionButtonKey; // NSNumber (0 for left button, 1 for middle button, 2 for right button)
-extern NSString *WebActionModifierFlagsKey; // NSNumber (unsigned)
-extern NSString *WebActionOriginalURLKey; // NSURL
+extern NSString *WebActionNavigationTypeKey WEBKIT_DEPRECATED_MAC(10_3, 10_14); // NSNumber (WebNavigationType)
+extern NSString *WebActionElementKey WEBKIT_DEPRECATED_MAC(10_3, 10_14); // NSDictionary of element info
+extern NSString *WebActionButtonKey WEBKIT_DEPRECATED_MAC(10_3, 10_14); // NSNumber (0 for left button, 1 for middle button, 2 for right button)
+extern NSString *WebActionModifierFlagsKey WEBKIT_DEPRECATED_MAC(10_3, 10_14); // NSNumber (unsigned)
+extern NSString *WebActionOriginalURLKey WEBKIT_DEPRECATED_MAC(10_3, 10_14); // NSURL
 
 /*!
     @protocol WebPolicyDecisionListener
@@ -71,6 +72,7 @@ extern NSString *WebActionOriginalURLKey; // NSURL
     with a sheet, for example.
 */
 
+WEBKIT_DEPRECATED_MAC(10_3, 10_14)
 @protocol WebPolicyDecisionListener <NSObject>
 
 /*!
@@ -135,6 +137,7 @@ extern NSString *WebActionOriginalURLKey; // NSURL
     documents come in one navigation, with each replacing the last. In
     this case, conent policy will be checked for each one.
 */
+WEBKIT_DEPRECATED_MAC(10_3, 10_14)
 @protocol WebPolicyDelegate <NSObject>
 
 @optional

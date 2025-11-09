@@ -186,6 +186,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : CBManager
  */
 - (void)cancelPeripheralConnection:(CBPeripheral *)peripheral;
 
+
 @end
 
 

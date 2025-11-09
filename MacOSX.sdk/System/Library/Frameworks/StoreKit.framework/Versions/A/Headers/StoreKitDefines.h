@@ -12,4 +12,6 @@
 #endif
 
 #define	SK_EXTERN_CLASS	__attribute__((visibility("default")))
-#define SK_EXTERN_CLASS_AVAILABLE(version) __attribute__((visibility("default"))) NS_CLASS_AVAILABLE_MAC(version)
+#define SK_EXTERN_CLASS_AVAILABLE(_mac, _ios) __attribute__((visibility("default"))) NS_CLASS_AVAILABLE(_mac, _ios)
+#define SK_EXTERN_CLASS_AVAILABLE_MAC(version) __attribute__((visibility("default"))) NS_CLASS_AVAILABLE_MAC(version)
+#define SK_EXTERN_CLASS_AVAILABLE_IOS(version) __attribute__((visibility("default"))) NS_CLASS_AVAILABLE_IOS(version)

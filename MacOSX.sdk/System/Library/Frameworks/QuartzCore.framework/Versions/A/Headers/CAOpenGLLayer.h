@@ -1,6 +1,6 @@
 /* CoreAnimation - CAOpenGLLayer.h
 
-   Copyright (c) 2006-2017, Apple Inc.
+   Copyright (c) 2006-2018, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
@@ -9,7 +9,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-CA_CLASS_AVAILABLE (10.5)
+#ifndef GL_SILENCE_DEPRECATION
+API_DEPRECATED("OpenGL is deprecated", macos(10.5, 10.14))
+#else
+API_AVAILABLE(macos(10.5))
+#endif
 @interface CAOpenGLLayer : CALayer
 {
 @private

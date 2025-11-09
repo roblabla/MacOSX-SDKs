@@ -36,7 +36,7 @@
 // be removed in a future release.
 #if !defined(CA_PREFER_FIXED_POINT)
     #if TARGET_OS_IPHONE
-        #if (TARGET_CPU_X86 || TARGET_CPU_X86_64 || TARGET_CPU_PPC || TARGET_CPU_PPC64) && !TARGET_IPHONE_SIMULATOR
+        #if (TARGET_CPU_X86 || TARGET_CPU_X86_64 || TARGET_CPU_PPC || TARGET_CPU_PPC64) && !TARGET_OS_SIMULATOR
             #define CA_PREFER_FIXED_POINT 0
         #else
             #define CA_PREFER_FIXED_POINT 1
@@ -975,6 +975,10 @@ CF_ENUM(AudioChannelLabel)
     kAudioChannelLabel_XY_X                     = 206,
     kAudioChannelLabel_XY_Y                     = 207,
 
+    // Binaural Recording
+    kAudioChannelLabel_BinauralLeft             = 208,
+    kAudioChannelLabel_BinauralRight            = 209,
+
     // other
     kAudioChannelLabel_HeadphonesLeft           = 301,
     kAudioChannelLabel_HeadphonesRight          = 302,
@@ -1023,7 +1027,10 @@ CF_ENUM(AudioChannelLabel)
     kAudioChannelLabel_HOA_ACN_13               = (2U << 16) | 13,
     kAudioChannelLabel_HOA_ACN_14               = (2U << 16) | 14,
     kAudioChannelLabel_HOA_ACN_15               = (2U << 16) | 15,
-    kAudioChannelLabel_HOA_ACN_65024            = (2U << 16) | 65024    // 254th order uses 65025 channels
+    kAudioChannelLabel_HOA_ACN_65024            = (2U << 16) | 65024,    // 254th order uses 65025 channels
+    
+    kAudioChannelLabel_BeginReserved            = 0xF0000000,           // Channel label values in this range are reserved for internal use
+    kAudioChannelLabel_EndReserved              = 0xFFFFFFFE
 };
 
 /*!
@@ -1294,7 +1301,11 @@ CF_ENUM(AudioChannelLayoutTag)
                                                                                              // needs to be ORed with the actual number of channels (not the HOA order)
 
     kAudioChannelLayoutTag_DiscreteInOrder          = (147U<<16) | 0,                        // needs to be ORed with the actual number of channels
-    kAudioChannelLayoutTag_Unknown                  = 0xFFFF0000                            // needs to be ORed with the actual number of channels  
+    
+    kAudioChannelLayoutTag_BeginReserved            = 0xF0000000,                            // Channel layout tag values in this range are reserved for internal use
+    kAudioChannelLayoutTag_EndReserved              = 0xFFFEFFFF,
+    
+    kAudioChannelLayoutTag_Unknown                  = 0xFFFF0000                             // needs to be ORed with the actual number of channels
 };
 
 /*!

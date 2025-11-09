@@ -1,9 +1,8 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: FA83E728-0CE4-37E2-A45B-3228821B602D' ]
+uuids:           [ 'x86_64: 23CA5A39-D954-3A87-B2ED-E528ACBD11C7' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/DFRBrightness.framework/Versions/A/DFRBrightness
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _DFRBrightnessClientCopyProperty, _DFRBrightnessClientCreate, 
@@ -16,5 +15,5 @@ exports:
                        _DFRBrightnessClientSetProperty, _DFRBrightnessClientUnregisterDisplayStateUpdateCallback, 
                        _DFRBrightnessClientUnscheduleWithDispatchQueue, _DFRBrightnessVersionNumber, 
                        _DFRBrightnessVersionString ]
-    objc-classes:    [ _DFRBrightnessClient ]
+    objc-classes:    [ DFRBrightnessClient ]
 ...

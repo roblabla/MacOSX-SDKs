@@ -1,12 +1,11 @@
 /*
 	NSToolbarItemGroup.h
 	Application Kit
-	Copyright (c) 2000-2017, Apple Inc.
+	Copyright (c) 2000-2018, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSToolbarItem.h>
-#import <AppKit/AppKit.h>
 #import <Foundation/Foundation.h>
 
 
@@ -17,12 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSToolbarItemGroup : NSToolbarItem {
     @private
-    id _groupItems;
+    id _groupItems APPKIT_IVAR;
     struct {
       unsigned dirtiedLayout:1;
       unsigned reserved:31;
-    } _giFlags;
-    id _giReserved __unused;
+    } _giFlags APPKIT_IVAR;
+    id _giReserved __unused APPKIT_IVAR;
 }
 
 /* Set or get the array of subitems for the toolbar item.  By default, a NSToolbarItemGroup has an empty array of subitems.  You should call this to set the subitems before returning the item to the toolbar.  NSToolbarItemGroups may not contain other NSToolbarItemGroups as subitems.

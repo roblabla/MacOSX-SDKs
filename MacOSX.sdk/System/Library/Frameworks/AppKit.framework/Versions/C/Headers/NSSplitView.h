@@ -1,7 +1,7 @@
 /*
 	NSSplitView.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * NSSplitViewAutosaveName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSSplitViewAutosaveName NS_SWIFT_BRIDGED_TYPEDEF;
 
 @class NSNotification;
 @protocol NSSplitViewDelegate;
@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, NSSplitViewDividerStyle) {
 
 @interface NSSplitView : NSView {
     @private
-    id _variables;
+    id _variables APPKIT_IVAR;
 }
 
 /* Set or get whether the long axes of a split view's dividers are oriented up-and-down (YES) or left-and-right (NO).

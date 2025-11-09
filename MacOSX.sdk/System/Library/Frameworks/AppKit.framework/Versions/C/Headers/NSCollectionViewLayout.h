@@ -1,7 +1,7 @@
 /*
     NSCollectionViewLayout.h
     Application Kit
-    Copyright (c) 2015-2017, Apple Inc.
+    Copyright (c) 2015-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, NSCollectionElementCategory) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * NSCollectionViewDecorationElementKind NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSCollectionViewDecorationElementKind NS_SWIFT_BRIDGED_TYPEDEF;
 
 /* The elementKind that NSCollectionView uses to identify an inter-item gap, when the proposedDropOperation is NSCollectionViewDropBefore.  A client can customize the default look of the inter-item gap drop target indicator by registering a supplementary view nib or class for this elementKind.  If your -collectionView:validateDrop:proposedIndexPath:dropOperation: method disallows NSCollectionViewDropBefore operations, the CollectionView won't show this indicator.
 */
@@ -40,15 +40,15 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 #ifndef __OBJC2__
 {
 @private
-    NSString* _elementKind;
-    NSString* _reuseIdentifier;
-    NSPoint _center;
-    NSSize _size;
-    NSRect _frame;
-    CGFloat _alpha;
-    CGFloat _reserved2[16];
-    NSIndexPath* _indexPath;
-    NSString *_isCloneString;
+    NSString* _elementKind APPKIT_IVAR;
+    NSString* _reuseIdentifier APPKIT_IVAR;
+    NSPoint _center APPKIT_IVAR;
+    NSSize _size APPKIT_IVAR;
+    NSRect _frame APPKIT_IVAR;
+    CGFloat _alpha APPKIT_IVAR;
+    CGFloat _reserved2[16] APPKIT_IVAR;
+    NSIndexPath* _indexPath APPKIT_IVAR;
+    NSString *_isCloneString APPKIT_IVAR;
     struct {
         unsigned int isCellKind:1;
         unsigned int isDecorationView:1;
@@ -57,9 +57,9 @@ NS_CLASS_AVAILABLE_MAC(10_11)
         unsigned int isInterItemGap:1;
         unsigned int isInterSectionGap:1;
         unsigned int reserved:26;
-    } _layoutFlags;
-    NSInteger _zIndex;
-    id _reserved[32];
+    } _layoutFlags APPKIT_IVAR;
+    NSInteger _zIndex APPKIT_IVAR;
+    id _reserved[32] APPKIT_IVAR;
 }
 #endif
 
@@ -93,11 +93,11 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 #ifndef __OBJC2__
 {
 @private
-    NSIndexPath* _initialIndexPath;
-    NSIndexPath* _finalIndexPath;
-    NSCollectionUpdateAction _updateAction;
-    id _gap;
-    id _reserved[11];
+    NSIndexPath* _initialIndexPath APPKIT_IVAR;
+    NSIndexPath* _finalIndexPath APPKIT_IVAR;
+    NSCollectionUpdateAction _updateAction APPKIT_IVAR;
+    id _gap APPKIT_IVAR;
+    id _reserved[11] APPKIT_IVAR;
 }
 #endif
 
@@ -112,20 +112,20 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 #ifndef __OBJC2__
 {
 @private
-    NSMutableSet* _invalidatedItemIndexPaths;
-    NSMutableDictionary* _invalidatedSupplementaryIndexPaths;
-    NSMutableDictionary* _invalidatedDecorationIndexPaths;
-    NSArray* _updateItems;
+    NSMutableSet* _invalidatedItemIndexPaths APPKIT_IVAR;
+    NSMutableDictionary* _invalidatedSupplementaryIndexPaths APPKIT_IVAR;
+    NSMutableDictionary* _invalidatedDecorationIndexPaths APPKIT_IVAR;
+    NSArray* _updateItems APPKIT_IVAR;
     
-    CGPoint _contentOffsetAdjustment;
-    CGSize _contentSizeAdjustment;
+    CGPoint _contentOffsetAdjustment APPKIT_IVAR;
+    CGSize _contentSizeAdjustment APPKIT_IVAR;
     
     struct {
         unsigned int invalidateDataSource:1;
         unsigned int invalidateEverything:1;
         unsigned int reserved:30;
-    } _invalidationContextFlags;
-    id _reserved[6];
+    } _invalidationContextFlags APPKIT_IVAR;
+    id _reserved[6] APPKIT_IVAR;
 }
 #endif
 
@@ -151,40 +151,40 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 #ifndef __OBJC2__
 {
 @package
-    CGSize _collectionViewBoundsSize;
-    NSMutableDictionary* _initialAnimationLayoutAttributesDict;
-    NSMutableDictionary* _finalAnimationLayoutAttributesDict;
-    NSMutableDictionary* _deletedSupplementaryIndexPathsDict;
-    NSMutableDictionary* _insertedSupplementaryIndexPathsDict;
-    NSMutableDictionary* _deletedDecorationIndexPathsDict;
-    NSMutableDictionary* _insertedDecorationIndexPathsDict;
-    NSMutableIndexSet* _deletedSectionsSet;
-    NSMutableIndexSet* _insertedSectionsSet;
+    CGSize _collectionViewBoundsSize APPKIT_IVAR;
+    NSMutableDictionary* _initialAnimationLayoutAttributesDict APPKIT_IVAR;
+    NSMutableDictionary* _finalAnimationLayoutAttributesDict APPKIT_IVAR;
+    NSMutableDictionary* _deletedSupplementaryIndexPathsDict APPKIT_IVAR;
+    NSMutableDictionary* _insertedSupplementaryIndexPathsDict APPKIT_IVAR;
+    NSMutableDictionary* _deletedDecorationIndexPathsDict APPKIT_IVAR;
+    NSMutableDictionary* _insertedDecorationIndexPathsDict APPKIT_IVAR;
+    NSMutableIndexSet* _deletedSectionsSet APPKIT_IVAR;
+    NSMutableIndexSet* _insertedSectionsSet APPKIT_IVAR;
     
-    NSMutableDictionary* _decorationViewClassDict;
-    NSMutableDictionary* _decorationViewNibDict;
-    NSMutableDictionary* _decorationViewExternalObjectsTables;
+    NSMutableDictionary* _decorationViewClassDict APPKIT_IVAR;
+    NSMutableDictionary* _decorationViewNibDict APPKIT_IVAR;
+    NSMutableDictionary* _decorationViewExternalObjectsTables APPKIT_IVAR;
     
-    NSCollectionViewLayout* _transitioningFromLayout;
-    NSCollectionViewLayout* _transitioningToLayout;
+    NSCollectionViewLayout* _transitioningFromLayout APPKIT_IVAR;
+    NSCollectionViewLayout* _transitioningToLayout APPKIT_IVAR;
     
-    NSCollectionViewLayoutInvalidationContext* _invalidationContext;
+    NSCollectionViewLayoutInvalidationContext* _invalidationContext APPKIT_IVAR;
     
-    CGRect _frame;
-    NSIndexSet* _sections;
-    NSIndexSet* _items;
-    NSArray* _elementKinds;
-    NSCollectionViewLayout* _siblingLayout;
-    CGPoint _layoutOffset;
-    NSUInteger _layoutOffsetEdges;
+    CGRect _frame APPKIT_IVAR;
+    NSIndexSet* _sections APPKIT_IVAR;
+    NSIndexSet* _items APPKIT_IVAR;
+    NSArray* _elementKinds APPKIT_IVAR;
+    NSCollectionViewLayout* _siblingLayout APPKIT_IVAR;
+    CGPoint _layoutOffset APPKIT_IVAR;
+    NSUInteger _layoutOffsetEdges APPKIT_IVAR;
     
     struct {
         unsigned int inTransitionFromTransitionLayout:1;
         unsigned int inTransitionToTransitionLayout:1;
         unsigned int prepared:1;
         unsigned int reserved:29;
-    } _layoutFlags;
-    id _reserved[3];
+    } _layoutFlags APPKIT_IVAR;
+    id _reserved[3] APPKIT_IVAR;
 }
 #endif
 

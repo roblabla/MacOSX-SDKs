@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 3038BBF6-DDB4-32BC-BA37-132195F7C3EB', 'x86_64: 6891CE84-47F1-34FC-90FC-B205E5423888' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: A47E7880-607A-3842-89D4-E069503AF150' ]
 platform:        macosx
 install-name:    /usr/lib/libauditd.0.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _audit_quick_start, _audit_quick_stop, _auditd_close_dirs, 
                        _auditd_expire_trails, _auditd_gen_record, _auditd_new_curlink, 
                        _auditd_prevent_audit, _auditd_read_dirs, _auditd_set_evcmap, 

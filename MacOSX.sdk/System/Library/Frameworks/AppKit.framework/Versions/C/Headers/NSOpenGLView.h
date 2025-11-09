@@ -1,23 +1,25 @@
 /*
         NSOpenGLView.h
         Application Kit
-        Copyright (c) 2000-2017, Apple Inc.
+        Copyright (c) 2000-2018, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/NSView.h>
+#import <AppKit/NSOpenGL.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSOpenGLContext, NSOpenGLPixelFormat;
 
+NS_OPENGL_CLASS_DEPRECATED(10_0, 10_14, "Please use MTKView instead.")
 @interface NSOpenGLView : NSView {
   @private
-    NSOpenGLContext*     _openGLContext;
-    NSOpenGLPixelFormat* _pixelFormat;
-    NSInteger                _reserved1 __unused;
-    NSInteger                _reserved2 __unused;
-    NSInteger                _reserved3 __unused;
+    NSOpenGLContext*     _openGLContext APPKIT_IVAR;
+    NSOpenGLPixelFormat* _pixelFormat APPKIT_IVAR;
+    NSInteger                _reserved1 __unused APPKIT_IVAR;
+    NSInteger                _reserved2 __unused APPKIT_IVAR;
+    NSInteger                _reserved3 __unused APPKIT_IVAR;
 }
 
 + (NSOpenGLPixelFormat*)defaultPixelFormat;
@@ -45,7 +47,7 @@ This property is archived (keyed archiving required).
 
 For testing purposes only, the effect of this property can be overridden globally for all views in a process, using the "NSSurfaceResolution" user default.  If NSSurfaceResolution is set to "Device", all views that have surfaces (including not only OpenGL surfaces, but layer tree render surfaces as well) will be opted into using the best resolution surface for the primary display the view is presented on.  This can be used to quickly assess whether an apps view's are ready for non-1x surfaces.  If NSSurfaceResolution is set to "1x", all views that have surfaces will be opted into using 1x (1 pixel per point) surfaces, independent of the display or backing scale factor.  If NSSurfaceResolution is set to any other value, or no value is present for it, then wantsBestResolutionOpenGLSurface will be consulted as described above for views that perform NSOpenGL rendering, and AppKit will separately determine the appropriate resolution for other surfaces, as also described above.
 */
-@property BOOL wantsBestResolutionOpenGLSurface NS_AVAILABLE_MAC(10_7);
+@property BOOL wantsBestResolutionOpenGLSurface NS_OPENGL_DEPRECATED(10_7, 10_14);
 
 @end
 
@@ -53,7 +55,7 @@ For testing purposes only, the effect of this property can be overridden globall
 
 /* When set to YES on a view with an attached OpenGL context, the NSScreen in which that views resides may have its maximumExtendedDynamicRangeColorComponentValue increased.  When composited by the Window Server, color values rendered by this OpenGL surface will be clamped to the NSScreen’s maximumExtendedDynamicRangeColorComponentValue rather than 1.0.
  */
-@property BOOL wantsExtendedDynamicRangeOpenGLSurface NS_AVAILABLE_MAC(10_11);
+@property BOOL wantsExtendedDynamicRangeOpenGLSurface NS_OPENGL_DEPRECATED(10_11, 10_14);
 
 @end
 

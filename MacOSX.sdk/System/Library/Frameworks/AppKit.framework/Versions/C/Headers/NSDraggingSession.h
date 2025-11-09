@@ -1,7 +1,7 @@
 /*
 	NSDraggingSession.h
 	Application Kit
-	Copyright (c) 2010-2017, Apple Inc.
+	Copyright (c) 2010-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -19,30 +19,30 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSDraggingSession : NSObject {
 @private
-    void *_private;
+    void *_private APPKIT_IVAR;
 #if !__LP64__
-    NSPoint _dragLocation;
+    NSPoint _dragLocation APPKIT_IVAR;
 #endif
-    NSPoint _offset;
-    id<NSDraggingSource> _source;
-    id _alternateDragSource;
-    id<NSDraggingSource> _filePromiseDragSource;
-    NSPasteboard *_pboard;
-    NSImage *_compositeImageCache;
+    NSPoint _offset APPKIT_IVAR;
+    id<NSDraggingSource> _source APPKIT_IVAR;
+    id _alternateDragSource APPKIT_IVAR;
+    id<NSDraggingSource> _filePromiseDragSource APPKIT_IVAR;
+    NSPasteboard *_pboard APPKIT_IVAR;
+    NSImage *_compositeImageCache APPKIT_IVAR;
 #if !__LP64__
-    id _filePromiseProviders;
+    id _filePromiseProviders APPKIT_IVAR;
 #endif
-    BOOL _animatesOnCancelOrFail;
+    BOOL _animatesOnCancelOrFail APPKIT_IVAR;
 #if !__LP64__    
-    BOOL _reservedBOOL1;
-    BOOL _reservedBOOL2;
-    BOOL _reservedBOOL3;
-    BOOL _reservedBOOL4;
-    BOOL _reservedBOOL5;
-    BOOL _reservedBOOL6;
-    BOOL _reservedBOOL7;
-    NSInteger _reservedInteger1;
-    NSInteger _reservedInteger2;
+    BOOL _reservedBOOL1 APPKIT_IVAR;
+    BOOL _reservedBOOL2 APPKIT_IVAR;
+    BOOL _reservedBOOL3 APPKIT_IVAR;
+    BOOL _reservedBOOL4 APPKIT_IVAR;
+    BOOL _reservedBOOL5 APPKIT_IVAR;
+    BOOL _reservedBOOL6 APPKIT_IVAR;
+    BOOL _reservedBOOL7 APPKIT_IVAR;
+    NSInteger _reservedInteger1 APPKIT_IVAR;
+    NSInteger _reservedInteger2 APPKIT_IVAR;
 #endif
 }
 

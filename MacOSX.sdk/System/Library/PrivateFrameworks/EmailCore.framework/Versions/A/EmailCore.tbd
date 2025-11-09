@@ -1,12 +1,13 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: C57104BA-1D0D-35C8-B57D-5A8AA031338C' ]
+uuids:           [ 'x86_64: DAA41AF4-2D37-3FC9-896B-4219E429D0AE' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/EmailCore.framework/Versions/A/EmailCore
-current-version: 3441
-objc-constraint: none
+current-version: 3445.100.43
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _ECBytesInEncodingCanBeConcatenated ]
-    objc-classes:    [ _ECEncodedWordDecoder, _ECEncodedWordEncoder ]
+    symbols:         [ _ECBytesInEncodingCanBeConcatenated, _ECConvertCharacterSetNameToEncoding, 
+                       _ECConvertEncodingToCharacterSetName, _ECEncodingIsASCIISuperset, 
+                       _EmailCoreVersionNumber, _EmailCoreVersionString ]
+    objc-classes:    [ ECEncodedWordDecoder, ECEncodedWordEncoder, ECSecureMIMETrustEvaluation ]
 ...

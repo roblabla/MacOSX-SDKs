@@ -1,7 +1,7 @@
 /*
 	NSArrayController.h
 	Application Kit
-	Copyright (c) 2002-2017, Apple Inc.
+	Copyright (c) 2002-2018, Apple Inc.
 	All rights reserved.
  */
 
@@ -17,10 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSArrayController : NSObjectController {
 @private
 #ifndef __OBJC2__
-    void *_reserved4;
+    void *_reserved4 APPKIT_IVAR;
 #endif
-    id _rearrangementExtensions;
-    NSMutableArray *_temporaryWorkObjects;
+    id _rearrangementExtensions APPKIT_IVAR;
+    NSMutableArray *_temporaryWorkObjects APPKIT_IVAR;
     struct __arrayControllerFlags {
         unsigned int _avoidsEmptySelection:1;
         unsigned int _preservesSelection:1;
@@ -38,13 +38,13 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int _skipSortingAfterFetch:1;
         unsigned int _automaticallyRearrangesObjects:1;
         unsigned int _reservedArrayController:17;
-    } _arrayControllerFlags;
-    NSUInteger _observedIndexHint;
-    NSMutableIndexSet *_selectionIndexes;
-    NSMutableArray *_objects;
-    NSIndexSet *_cachedSelectedIndexes;
-    NSArray *_cachedSelectedObjects;
-    NSArray *_arrangedObjects;
+    } _arrayControllerFlags APPKIT_IVAR;
+    NSUInteger _observedIndexHint APPKIT_IVAR;
+    NSMutableIndexSet *_selectionIndexes APPKIT_IVAR;
+    NSMutableArray *_objects APPKIT_IVAR;
+    NSIndexSet *_cachedSelectedIndexes APPKIT_IVAR;
+    NSArray *_cachedSelectedObjects APPKIT_IVAR;
+    NSArray *_arrangedObjects APPKIT_IVAR;
 }
 
 - (void)rearrangeObjects;    // triggers rearranging the content objects for the user interface, including sorting and filtering; subclasses can override and invoke this method if any parameter that affects the arranged objects changes

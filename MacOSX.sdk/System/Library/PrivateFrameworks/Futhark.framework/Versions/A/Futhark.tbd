@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E45C96C7-37A0-391A-9986-14EE66750F7C' ]
+uuids:           [ 'x86_64: 8A895ADD-4498-33F8-B14A-59459A91F8CA' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Futhark.framework/Versions/A/Futhark
 exports:         
@@ -8,9 +8,10 @@ exports:
     symbols:         [ _FKGetBuildAPIVersion, _FKGetBuildGitHash, _FKGetBuildTimestamp, 
                        _FKGetFrameworkVersion, _FKGlyphRender, _FKGlyphSetDerivedProperties, 
                        _FKRecognizeGlyph, _FutharkVersionNumber, _FutharkVersionString ]
-    objc-classes:    [ _FKTextDetector, _FKTextFeature ]
-    objc-ivars:      [ _FKTextDetector._sessions, _FKTextDetector._timeBinarizer, 
-                       _FKTextDetector._timeConcomps, _FKTextDetector._timeDownscale, 
-                       _FKTextDetector._timeRecognizer, _FKTextDetector._timeSequences, 
-                       _FKTextFeature._backingIndex, _FKTextFeature._scale, _FKTextFeature._session ]
+    objc-classes:    [ FKTextDetector, FKTextFeature ]
+    objc-ivars:      [ FKTextDetector._roi, FKTextDetector._sessions, FKTextDetector._size, 
+                       FKTextDetector._timeBinarizer, FKTextDetector._timeConcomps, 
+                       FKTextDetector._timeDownscale, FKTextDetector._timeRecognizer, 
+                       FKTextDetector._timeSequences, FKTextFeature._backingIndex, 
+                       FKTextFeature._scale, FKTextFeature._session ]
 ...

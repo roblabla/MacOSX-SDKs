@@ -124,6 +124,9 @@ typedef enum {
         kIOAccelSurfaceModeStereoBit       = 0x00000010,
         kIOAccelSurfaceModeWindowedBit     = 0x00000020,
 
+#ifndef _OPEN_SOURCE_
+        kIOAccelSurfaceModeSurface2        = 0x00004000,
+#endif /* _OPEN_SOURCE_ */
         kIOAccelSurfaceModeBeamSync        = 0x00008000
 } eIOAccelSurfaceModeBits;
 

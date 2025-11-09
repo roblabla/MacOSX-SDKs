@@ -34,17 +34,17 @@
 @class NSURL;
 
 @interface DOMNode (DOMNodeExtensions)
-- (NSRect)boundingBox NS_AVAILABLE_MAC(10_5);
-- (NSArray *)lineBoxRects NS_AVAILABLE_MAC(10_5);
+- (NSRect)boundingBox WEBKIT_AVAILABLE_MAC(10_5);
+- (NSArray *)lineBoxRects WEBKIT_AVAILABLE_MAC(10_5);
 
 @end
 
 @interface DOMElement (DOMElementAppKitExtensions)
-- (NSImage *)image NS_AVAILABLE_MAC(10_5);
+- (NSImage *)image WEBKIT_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMHTMLDocument (DOMHTMLDocumentExtensions)
-- (DOMDocumentFragment *)createDocumentFragmentWithMarkupString:(NSString *)markupString baseURL:(NSURL *)baseURL NS_AVAILABLE_MAC(10_5);
-- (DOMDocumentFragment *)createDocumentFragmentWithText:(NSString *)text NS_AVAILABLE_MAC(10_5);
+- (DOMDocumentFragment *)createDocumentFragmentWithMarkupString:(NSString *)markupString baseURL:(NSURL *)baseURL WEBKIT_AVAILABLE_MAC(10_5);
+- (DOMDocumentFragment *)createDocumentFragmentWithText:(NSString *)text WEBKIT_AVAILABLE_MAC(10_5);
 @end
 

@@ -1,14 +1,15 @@
 /*
     CFURLEnumerator.h
-    Copyright (c) 2008-2017, Apple Inc. All rights reserved.
+    Copyright (c) 2008-2018, Apple Inc. All rights reserved.
  */
+
+#include <CoreFoundation/CFBase.h>
 
 #if (TARGET_OS_MAC || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE) || CF_BUILDING_CF || NSBUILDINGFOUNDATION
 
 #if !defined(__COREFOUNDATION_CFURLENUMERATOR__)
 #define __COREFOUNDATION_CFURLENUMERATOR__ 1
 
-#include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFArray.h>
 #include <CoreFoundation/CFError.h>
 #include <CoreFoundation/CFURL.h>

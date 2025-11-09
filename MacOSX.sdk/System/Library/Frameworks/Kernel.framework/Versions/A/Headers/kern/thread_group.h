@@ -33,7 +33,6 @@
 #define _KERN_THREAD_GROUP_H_
 
 struct thread_group;
-typedef struct thread_group *thread_group_t;
 
 #include <mach/thread_status.h> /* for proc_reg.h / CONFIG_THREAD_GROUPS */
 
@@ -45,8 +44,8 @@ typedef struct thread_group *thread_group_t;
 #include <kern/queue.h>
 #include <machine/machine_routines.h>
 
-#define THREAD_GROUP_MAX 	(CONFIG_TASK_MAX + 10)
-#define	THREAD_GROUP_MAXNAME	(16)
+#define THREAD_GROUP_MAX                (CONFIG_TASK_MAX + 10)
+#define THREAD_GROUP_MAXNAME            (16)
 
 #define	THREAD_GROUP_SYSTEM	0	// kernel (-VM) + launchd
 #define	THREAD_GROUP_BACKGROUND	1	// background daemons
@@ -55,32 +54,45 @@ typedef struct thread_group *thread_group_t;
 
 #define THREAD_GROUP_INVALID	UINT64_MAX
 
-void		thread_group_init(void);
-void		thread_group_resync(boolean_t create);
-thread_group_t	thread_group_create_and_retain(void);
-void		thread_group_init_thread(thread_t t, task_t task);
-void		thread_group_set_name(thread_group_t tg, const char *name);
-thread_group_t	thread_group_find_by_name_and_retain(char *name);
-thread_group_t	thread_group_find_by_id_and_retain(uint64_t id);
-thread_group_t	thread_group_retain(thread_group_t tg);
-void		thread_group_release(thread_group_t tg);
-thread_group_t	thread_group_get(thread_t t);
-thread_group_t  thread_group_get_home_group(thread_t t);
-void		thread_group_set_bank(thread_t t, thread_group_t tg);
-void		thread_group_set_work_interval(thread_t t, thread_group_t tg);
-uint64_t	thread_group_get_id(thread_group_t tg);
-uint32_t	thread_group_count(void);
-#if DEBUG || DEVELOPMENT
-const char*	thread_group_get_name(thread_group_t tg);
-#endif
-void 		*thread_group_get_machine_data(thread_group_t tg);
-uint32_t	thread_group_machine_data_size(void);
-cluster_type_t	thread_group_recommendation(thread_group_t tg);
+/* Thread group flags */
+#define THREAD_GROUP_FLAGS_EFFICIENT    0x1
+#define THREAD_GROUP_FLAGS_UI_APP       0x2
+#define THREAD_GROUP_FLAGS_VALID        (THREAD_GROUP_FLAGS_EFFICIENT | THREAD_GROUP_FLAGS_UI_APP)
 
-typedef         void (*thread_group_iterate_fn_t)(void*, int, thread_group_t);
+__BEGIN_DECLS
 
+void            thread_group_init(void);
+void            thread_group_resync(boolean_t create);
+struct thread_group *thread_group_create_and_retain(void);
+void            thread_group_init_thread(thread_t t, task_t task);
+void            thread_group_set_name(struct thread_group *tg, const char *name);
+void            thread_group_flags_update_lock(void);
+void            thread_group_flags_update_unlock(void);
+void            thread_group_set_flags(struct thread_group *tg, uint64_t flags);
+void            thread_group_clear_flags(struct thread_group *tg, uint64_t flags);
+void            thread_group_set_flags_locked(struct thread_group *tg, uint64_t flags);
+void            thread_group_clear_flags_locked(struct thread_group *tg, uint64_t flags);
+struct thread_group *thread_group_find_by_name_and_retain(char *name);
+struct thread_group *thread_group_find_by_id_and_retain(uint64_t id);
+struct thread_group *thread_group_retain(struct thread_group *tg);
+void            thread_group_release(struct thread_group *tg);
+struct thread_group *thread_group_get(thread_t t);
+struct thread_group *thread_group_get_home_group(thread_t t);
+void            thread_group_set_bank(thread_t t, struct thread_group *tg);
+void            thread_group_set_work_interval(thread_t t, struct thread_group *tg);
+uint64_t        thread_group_get_id(struct thread_group *tg);
+uint32_t        thread_group_count(void);
+const char *    thread_group_get_name(struct thread_group *tg);
+void *          thread_group_get_machine_data(struct thread_group *tg);
+uint32_t        thread_group_machine_data_size(void);
+cluster_type_t  thread_group_recommendation(struct thread_group *tg);
+
+typedef         void (*thread_group_iterate_fn_t)(void*, int, struct thread_group *);
 kern_return_t	thread_group_iterate_stackshot(thread_group_iterate_fn_t callout, void *arg);
+uint64_t kdp_thread_group_get_flags(struct thread_group *);
 
+
+__END_DECLS
 
 #endif /* CONFIG_THREAD_GROUPS */
 

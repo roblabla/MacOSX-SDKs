@@ -1,10 +1,11 @@
 //
 //  SCNMaterial.h
+//  SceneKit
 //
-//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
+//  Copyright © 2012-2018 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <SceneKit/SceneKitTypes.h>
 #import <SceneKit/SCNAnimation.h>
 #import <SceneKit/SCNShadable.h>
 
@@ -25,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  SCNLightingModelPhong:
    Produces a specularly shaded surface where the specular reflection is shaded according the Phong BRDF approximation.
    The reflected color is calculated as:
-     color = <ambient> * al + <diffuse> * max(N . L, 0) + <specular> * pow(max(R . E, 0), <shininess>)
+     color = <ambient> * al + <diffuse> * max(N ⋅ L, 0) + <specular> * pow(max(R ⋅ E, 0), <shininess>)
    where
      al — Sum of all ambient lights currently active (visible) in the scene
      N — Normal vector
@@ -41,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  SCNLightingModelBlinn:
    Produces a specularly shaded surface with a Blinn BRDF approximation.
    The reflected color is calculated as:
-     color = <ambient> * al + <diffuse> * max(N . L, 0) + <specular> * pow(max(H . N, 0), <shininess>)
+     color = <ambient> * al + <diffuse> * max(N ⋅ L, 0) + <specular> * pow(max(H ⋅ N, 0), <shininess>)
    where
      al — Sum of all ambient lights currently active (visible) in the scene
      N — Normal vector
@@ -58,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
    Produces a diffuse shaded surface with no specular reflection.
    The result is based on Lambert’s Law, which states that when light hits a rough surface, the light is reflected in all directions equally.
    The reflected color is calculated as:
-     color = <ambient> * al + <diffuse> * max(N . L, 0)
+     color = <ambient> * al + <diffuse> * max(N ⋅ L, 0)
    where
      al — Sum of all ambient lights currently active (visible) in the scene
      N — Normal vector
@@ -78,17 +79,12 @@ NS_ASSUME_NONNULL_BEGIN
      <diffuse> — The 'diffuse' property of the SCNMaterial instance
  */
 
-#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 3
 typedef NSString * SCNLightingModel NS_STRING_ENUM;
-#else
-typedef NSString * SCNLightingModel;
-#endif
-
-FOUNDATION_EXTERN SCNLightingModel const SCNLightingModelPhong;
-FOUNDATION_EXTERN SCNLightingModel const SCNLightingModelBlinn;
-FOUNDATION_EXTERN SCNLightingModel const SCNLightingModelLambert;
-FOUNDATION_EXTERN SCNLightingModel const SCNLightingModelConstant;
-FOUNDATION_EXTERN SCNLightingModel const SCNLightingModelPhysicallyBased API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
+SCN_EXPORT SCNLightingModel const SCNLightingModelPhong;
+SCN_EXPORT SCNLightingModel const SCNLightingModelBlinn;
+SCN_EXPORT SCNLightingModel const SCNLightingModelLambert;
+SCN_EXPORT SCNLightingModel const SCNLightingModelConstant;
+SCN_EXPORT SCNLightingModel const SCNLightingModelPhysicallyBased API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
 
 typedef NS_ENUM(NSUInteger, SCNFillMode) {
     SCNFillModeFill  = 0,
@@ -105,7 +101,7 @@ typedef NS_ENUM(NSInteger, SCNCullMode) {
 
 typedef NS_ENUM(NSInteger, SCNTransparencyMode) {
     SCNTransparencyModeAOne                                                                         = 0, // Takes the transparency information from the alpha channel. The value 1.0 is opaque.
-    SCNTransparencyModeRGBZero                                                                      = 1,
+    SCNTransparencyModeRGBZero                                                                      = 1, // Ignores the alpha channel and takes the transparency information from the luminance of the red, green, and blue channels. The value 0.0 is opaque.
     SCNTransparencyModeSingleLayer API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0)) = 2, // Ensures that one layer of transparency is draw correctly.
     SCNTransparencyModeDualLayer   API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0)) = 3, // Ensures that two layers of transparency are ordered and drawn correctly. This should be used for transparent convex objects like cubes and spheres, when you want to see both front and back faces.
     SCNTransparencyModeDefault     API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0)) = SCNTransparencyModeAOne
@@ -135,6 +131,7 @@ typedef NS_ENUM(NSInteger, SCNBlendMode) {
  @abstract A SCNMaterial determines how a geometry is rendered. It encapsulates the colors and textures that define the appearance of 3d geometries.
  */
 
+SCN_EXPORT
 @interface SCNMaterial : NSObject <SCNAnimatable, SCNShadable, NSCopying, NSSecureCoding>
 
 /*! 
@@ -205,8 +202,8 @@ typedef NS_ENUM(NSInteger, SCNBlendMode) {
 
 /*!
  @property displacement
- @abstract <TODO>
- @discussion <TODO, Needs tessellation>
+ @abstract The displacement property specifies how vertex are translated in tangent space.
+ @discussion Pass a grayscale image for a simple 'elevation' or rgb image for a vector displacement.
  */
 @property(nonatomic, readonly) SCNMaterialProperty *displacement API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 

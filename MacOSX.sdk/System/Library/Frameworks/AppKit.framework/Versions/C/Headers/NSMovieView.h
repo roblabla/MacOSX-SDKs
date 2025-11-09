@@ -1,6 +1,6 @@
 /*
         NSMovieView.h
-        Copyright (c) 1998-2017, Apple Inc. All rights reserved.
+        Copyright (c) 1998-2018, Apple Inc. All rights reserved.
 */
 
 // Please note that NSMovie and NSMovieView are deprecated. NSMovieView does not exist in 64-bit.
@@ -8,6 +8,7 @@
 #if !__LP64__
 
 #import <AppKit/NSView.h>
+#import <AppKit/NSMenu.h>
 #import <AppKit/NSUserInterfaceValidation.h>
 
 @class NSMovie;
@@ -29,18 +30,18 @@ typedef struct __MVFlags {
 } _MVFlags;
 
 NS_DEPRECATED_MAC(10_0, 10_5, "Use QTMovieView instead")
-@interface NSMovieView : NSView <NSUserInterfaceValidations>
+@interface NSMovieView : NSView <NSMenuItemValidation, NSUserInterfaceValidations>
 {
   @protected
-    NSMovie*       _fMovie;
-    float          _fRate;
-    float          _fVolume;
-    _MVFlags       _fFlags;
+    NSMovie*       _fMovie APPKIT_IVAR;
+    float          _fRate APPKIT_IVAR;
+    float          _fVolume APPKIT_IVAR;
+    _MVFlags       _fFlags APPKIT_IVAR;
 
-    void*          _fAuxData;
-    unsigned long  _fReserved1;
-    unsigned long  _fReserved2;
-    unsigned long  _fReserved3;
+    void*          _fAuxData APPKIT_IVAR;
+    unsigned long  _fReserved1 APPKIT_IVAR;
+    unsigned long  _fReserved2 APPKIT_IVAR;
+    unsigned long  _fReserved3 APPKIT_IVAR;
 }
 
 - (void) setMovie:(NSMovie*)movie NS_DEPRECATED_MAC(10_0, 10_5);

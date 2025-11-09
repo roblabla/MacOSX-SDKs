@@ -340,6 +340,9 @@ MD_EXPORT CFArrayRef MDItemsCopyAttributes(CFArrayRef items, CFArrayRef names) A
    @const kMDItemExposureTimeSeconds
    Time that the lens was open during exposure
 
+   @const kMDItemLensModel
+   Lens model that was used to acquire this document
+ 
    @const kMDItemEXIFVersion
    The verion of the EXIF header that was used to generate the metadata
 

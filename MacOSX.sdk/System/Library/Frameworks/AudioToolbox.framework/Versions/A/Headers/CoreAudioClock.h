@@ -11,8 +11,11 @@
 
 //==================================================================================================
 
+#include <TargetConditionals.h>
+#if TARGET_OS_OSX
 #include <Availability.h>
 #include <CoreAudio/CoreAudioTypes.h>
+#include <AudioToolbox/MusicPlayer.h>
 
 CF_ASSUME_NONNULL_BEGIN
 
@@ -316,39 +319,6 @@ struct CAClockTime {
 typedef struct CAClockTime CAClockTime;
 
 /*!
-	@struct		CABarBeatTime
-	@abstract	A display representation of a musical time in beats.
-	
-	@field	bar
-				A measure number.
-	@field	beat
-				A beat number (1..n).
-	@field	subbeat
-				The numerator of the fractional number of beats.
-	@field	subbeatDivisor
-				The denominator of the fractional number of beats.
-	@field	reserved
-				Must be 0.
-	@discussion
-				A clock's internal representation of musical time is in beats based on the
-				beginning of the timeline. Normally, such times should be displayed to the user
-				in terms of bars, beats, and subbeats (sometimes called "units" or "parts per
-				quarter" [PPQ]). This data structure is such a display representation.
-
-				By convention, bar 1 is the beginning of the sequence. Beat 1 is the first beat
-				of the measure. In 4/4 time, beat will have a value from 1 to 4. Music
-				applications often use beat divisions such as 480 and 960.
-*/
-struct CABarBeatTime {
-	SInt32				bar;
-	UInt16				beat;
-	UInt16				subbeat;
-	UInt16				subbeatDivisor;
-	UInt16				reserved;
-};
-typedef struct CABarBeatTime CABarBeatTime;
-
-/*!
 	@struct 	CATempoMapEntry
 	@abstract	A tempo change event.
 	
@@ -413,7 +383,7 @@ extern "C" {
 */
 extern OSStatus
 CAClockNew(	UInt32					 				inReservedFlags,
-			CAClockRef __nullable * __nonnull		outCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+			CAClockRef __nullable * __nonnull		outCAClock)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -429,7 +399,7 @@ CAClockNew(	UInt32					 				inReservedFlags,
 	@result			An OSStatus error code.
 */
 extern OSStatus
-CAClockDispose(				CAClockRef 			inCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+CAClockDispose(				CAClockRef 			inCAClock)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -459,7 +429,7 @@ extern OSStatus
 CAClockGetPropertyInfo(		CAClockRef				inCAClock,
 							CAClockPropertyID		inPropertyID,
 							UInt32 * __nullable		outSize,
-							Boolean * __nullable	outWritable)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							Boolean * __nullable	outWritable)				API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -491,7 +461,7 @@ extern OSStatus
 CAClockGetProperty(			CAClockRef			inCAClock,
 							CAClockPropertyID	inPropertyID,
 							UInt32 *			ioPropertyDataSize,
-							void *				outPropertyData)			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							void *				outPropertyData)			API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -519,7 +489,7 @@ extern OSStatus
 CAClockSetProperty(			CAClockRef			inCAClock,
 							CAClockPropertyID	inPropertyID,
 							UInt32				inPropertyDataSize,
-							const void *		inPropertyData)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							const void *		inPropertyData)				API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -547,7 +517,7 @@ CAClockSetProperty(			CAClockRef			inCAClock,
 extern OSStatus
 CAClockAddListener(			CAClockRef			inCAClock,
 							CAClockListenerProc inListenerProc,
-							void *				inUserData)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							void *				inUserData)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 	
 //  -----------------------------------------------------------------------------
 /*!
@@ -574,7 +544,7 @@ CAClockAddListener(			CAClockRef			inCAClock,
 extern OSStatus
 CAClockRemoveListener(		CAClockRef			inCAClock,
 							CAClockListenerProc inListenerProc,
-							void *				inUserData)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							void *				inUserData)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -597,7 +567,7 @@ CAClockRemoveListener(		CAClockRef			inCAClock,
 */
 extern OSStatus
 CAClockSetCurrentTime(		CAClockRef			inCAClock,
-							const CAClockTime *	inTime)						__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							const CAClockTime *	inTime)						API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -621,7 +591,7 @@ CAClockSetCurrentTime(		CAClockRef			inCAClock,
 extern OSStatus
 CAClockGetCurrentTime(		CAClockRef			inCAClock,
 							CAClockTimeFormat	inTimeFormat,
-							CAClockTime *		outTime)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							CAClockTime *		outTime)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -646,7 +616,7 @@ CAClockGetCurrentTime(		CAClockRef			inCAClock,
 extern OSStatus
 CAClockGetStartTime(		CAClockRef			inCAClock,
 							CAClockTimeFormat	inTimeFormat,
-							CAClockTime *		outTime)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							CAClockTime *		outTime)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -675,7 +645,7 @@ extern OSStatus
 CAClockTranslateTime(		CAClockRef			inCAClock,
 							const CAClockTime *	inTime,
 							CAClockTimeFormat	inOutputTimeFormat,
-							CAClockTime *		outTime)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							CAClockTime *		outTime)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -691,7 +661,7 @@ CAClockTranslateTime(		CAClockRef			inCAClock,
 	@result			An OSStatus error code.
 */
 extern OSStatus
-CAClockStart(				CAClockRef			inCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+CAClockStart(				CAClockRef			inCAClock)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -707,7 +677,7 @@ CAClockStart(				CAClockRef			inCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4
 	@result			An OSStatus error code.
 */
 extern OSStatus
-CAClockStop(				CAClockRef			inCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+CAClockStop(				CAClockRef			inCAClock)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -729,7 +699,7 @@ CAClockStop(				CAClockRef			inCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4,
 	@result			An OSStatus error code.
 */
 extern OSStatus
-CAClockArm(					CAClockRef			inCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+CAClockArm(					CAClockRef			inCAClock)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -745,7 +715,7 @@ CAClockArm(					CAClockRef			inCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4,
 	@result			An OSStatus error code.
 */
 extern OSStatus
-CAClockDisarm(				CAClockRef			inCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+CAClockDisarm(				CAClockRef			inCAClock)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -767,7 +737,7 @@ CAClockDisarm(				CAClockRef			inCAClock)					__OSX_AVAILABLE_STARTING(__MAC_10_
 */
 extern OSStatus
 CAClockSetPlayRate(			CAClockRef			inCAClock,
-							Float64				inPlayRate)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							Float64				inPlayRate)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -792,7 +762,7 @@ CAClockSetPlayRate(			CAClockRef			inCAClock,
 */
 extern OSStatus
 CAClockGetPlayRate(			CAClockRef			inCAClock,
-							Float64 *			outPlayRate)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							Float64 *			outPlayRate)				API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -823,7 +793,7 @@ CAClockGetPlayRate(			CAClockRef			inCAClock,
 extern OSStatus
 CAClockGetCurrentTempo(		CAClockRef					inCAClock,
 							CAClockTempo *				outTempo,
-							CAClockTime * __nullable	outTimestamp)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							CAClockTime * __nullable	outTimestamp)				API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -852,7 +822,7 @@ CAClockGetCurrentTempo(		CAClockRef					inCAClock,
 extern OSStatus
 CAClockSetCurrentTempo(		CAClockRef						inCAClock,
 							CAClockTempo					inTempo,
-							const CAClockTime * __nullable	inTimestamp)			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							const CAClockTime * __nullable	inTimestamp)			API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -882,7 +852,7 @@ extern OSStatus
 CAClockSecondsToSMPTETime(	CAClockRef			inCAClock,
 							CAClockSeconds		inSeconds,
 							UInt16				inSubframeDivisor,
-							SMPTETime *			outSMPTETime)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							SMPTETime *			outSMPTETime)				API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -908,7 +878,7 @@ CAClockSecondsToSMPTETime(	CAClockRef			inCAClock,
 extern OSStatus
 CAClockSMPTETimeToSeconds(	CAClockRef			inCAClock,
 							const SMPTETime *   inSMPTETime,
-							CAClockSeconds *	outSeconds)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							CAClockSeconds *	outSeconds)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -948,7 +918,7 @@ extern OSStatus
 CAClockBeatsToBarBeatTime(	CAClockRef			inCAClock,
 							CAClockBeats		inBeats,
 							UInt16				inSubbeatDivisor,
-							CABarBeatTime *		outBarBeatTime)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							CABarBeatTime *		outBarBeatTime)				API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -974,7 +944,7 @@ CAClockBeatsToBarBeatTime(	CAClockRef			inCAClock,
 extern OSStatus
 CAClockBarBeatTimeToBeats(	CAClockRef			inCAClock,
 							const CABarBeatTime *inBarBeatTime,
-							CAClockBeats *		outBeats)					__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+							CAClockBeats *		outBeats)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -998,12 +968,14 @@ CAClockBarBeatTimeToBeats(	CAClockRef			inCAClock,
 */
 extern OSStatus
 CAClockParseMIDI(			CAClockRef			inCAClock,
-							const struct MIDIPacketList *inMIDIPacketList)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+							const struct MIDIPacketList *inMIDIPacketList)	API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 #ifdef __cplusplus
 }
 #endif
 
 CF_ASSUME_NONNULL_END
+
+#endif // TARGET_OS_OSX
 
 #endif // AudioToolbox_CoreAudioClock_h

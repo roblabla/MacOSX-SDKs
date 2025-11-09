@@ -1,5 +1,5 @@
 /*	NSZone.h
-	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>

@@ -16,7 +16,7 @@
     @abstract SFCertificateView is a NSView that displays the contents of a certificate.
 */
 
-@interface SFCertificateView : NSView
+@interface SFCertificateView : NSVisualEffectView
 {
 @private
     id	_reserved_SFCertificateView;

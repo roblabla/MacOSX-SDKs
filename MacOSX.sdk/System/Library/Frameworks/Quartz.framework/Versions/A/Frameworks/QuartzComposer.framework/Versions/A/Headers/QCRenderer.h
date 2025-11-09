@@ -2,6 +2,8 @@
 	Copyright:	(c) 2003-2008 by Apple, Inc., all rights reserved.
 */
 
+#import <QuartzComposer/QuartzComposerDefines.h>
+
 #import <Foundation/Foundation.h>
 #import <OpenGL/OpenGL.h>
 
@@ -146,7 +148,7 @@ Create a new renderer with a low-level CGLContextObj, an RGB colorspace (non-dev
 The CGLContext must have both a color and a depth buffer.
 If any error occurs during loading of the composition, nil will be returned.
 */
-- (id) initWithCGLContext:(CGLContextObj)context pixelFormat:(CGLPixelFormatObj)format colorSpace:(CGColorSpaceRef)colorSpace composition:(QCComposition*)composition;
+- (id) initWithCGLContext:(CGLContextObj)context pixelFormat:(CGLPixelFormatObj)format colorSpace:(CGColorSpaceRef)colorSpace composition:(QCComposition*)composition QC_GL_DEPRECATED(10_5, 10_14);
 
 /*
 Create a new offline renderer of a given size with an RGB colorspace (non-device), and a QCComposition object.

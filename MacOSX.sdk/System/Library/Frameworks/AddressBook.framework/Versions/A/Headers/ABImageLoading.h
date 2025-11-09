@@ -2,7 +2,7 @@
 //  ABImageLoading.h
 //  AddressBook
 //
-//  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
+//  Copyright (c) 2003-2018 Apple Inc.  All rights reserved.
 //
 
 #ifndef __ABIMAGELOADING__

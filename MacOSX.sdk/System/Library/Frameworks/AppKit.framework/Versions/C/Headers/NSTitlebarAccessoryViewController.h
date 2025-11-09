@@ -1,7 +1,7 @@
 /*
     NSTitlebarAccessoryViewController.h
     Application Kit
-    Copyright (c) 2014-2017, Apple Inc.
+    Copyright (c) 2014-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -16,22 +16,22 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_10, NA)
 @interface NSTitlebarAccessoryViewController : NSViewController <NSAnimationDelegate, NSAnimatablePropertyContainer> {
 @private
-    NSLayoutAttribute _layoutAttribute;
-    CGFloat _fullScreenMinHeight;
-    NSClipView *_containingClipView;
-    CGFloat _revealAmount;
-    BOOL _inFullScreen;
-    BOOL _isToolbarAccessoryView;
-    NSInteger _updateCount;
+    NSLayoutAttribute _layoutAttribute APPKIT_IVAR;
+    CGFloat _fullScreenMinHeight APPKIT_IVAR;
+    NSClipView *_containingClipView APPKIT_IVAR;
+    CGFloat _revealAmount APPKIT_IVAR;
+    BOOL _inFullScreen APPKIT_IVAR;
+    BOOL _isToolbarAccessoryView APPKIT_IVAR;
+    NSInteger _updateCount APPKIT_IVAR;
     
-    unsigned int _hidden:1;
-    unsigned int _unusedTVC2:1 __unused;
-    unsigned int _updatingFrame:1;
-    unsigned int _registered:1;
-    unsigned int _reservedTVC:28 __unused;
+    unsigned int _hidden:1 APPKIT_IVAR;
+    unsigned int _unusedTVC2:1 __unused APPKIT_IVAR;
+    unsigned int _updatingFrame:1 APPKIT_IVAR;
+    unsigned int _registered:1 APPKIT_IVAR;
+    unsigned int _reservedTVC:28 __unused APPKIT_IVAR;
 
-    id _animationData;
-    CGFloat _visibleAmount; // For animating visibility
+    id _animationData APPKIT_IVAR;
+    CGFloat _visibleAmount APPKIT_IVAR; // For animating visibility
 }
 
 /* The layoutAttribute defaults to NSLayoutAttributeBottom, telling the window to place this view controller's view under the titlebar. NSLayoutAttributeRight is also supported, telling the window to place the view controller's view on the right side of the window. For applications linked on Mac OS 10.11 or later, NSLayoutAttributeLeft is also supported; placing the item on the left side of the window (adjacent and to the right of the close/minimize/maximize buttons). All other values are currently invalid and will assert.

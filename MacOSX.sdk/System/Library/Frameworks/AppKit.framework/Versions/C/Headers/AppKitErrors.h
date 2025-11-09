@@ -1,7 +1,7 @@
 /*
 	AppKitErrors.h
 	Application Kit
-	Copyright (c) 2004-2017, Apple Inc.
+	Copyright (c) 2004-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -41,7 +41,12 @@ enum {
     
     // Inclusive service error range, for checking future error codes
     NSSharingServiceErrorMinimum = 67072,
-    NSSharingServiceErrorMaximum = 67327
+    NSSharingServiceErrorMaximum = 67327,
+
+    // NSWorkspaceAuthorization
+    NSWorkspaceAuthorizationInvalidError NS_AVAILABLE_MAC(10_14) = 67328,
+    NSWorkspaceErrorMinimum NS_AVAILABLE_MAC(10_14) = 67328,
+    NSWorkspaceErrorMaximum NS_AVAILABLE_MAC(10_14) = 67455,
 };
 
 

@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#if __OBJC2__
+#ifdef __OBJC2__
 @class AUAudioUnit;
 #endif // __OBJC2__
 
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
         An AVAudioUnit is an AVAudioNode implemented by an audio unit. Depending on the type of
         the audio unit, audio is processed either in real-time or non real-time.
 */
-NS_CLASS_AVAILABLE(10_10, 8_0) __WATCHOS_PROHIBITED
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAudioUnit : AVAudioNode
 
 #if AVAUDIOUNIT_HAVE_AUDIOUNIT
@@ -47,7 +47,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0) __WATCHOS_PROHIBITED
 		AVAudioUnitGenerator, AVAudioUnitMIDIInstrument, or AVAudioUnitTimeEffect), selected
 		according to the component's type.
 */
-+ (void)instantiateWithComponentDescription:(AudioComponentDescription)audioComponentDescription options:(AudioComponentInstantiationOptions)options completionHandler:(void (^)(__kindof AVAudioUnit * __nullable audioUnit, NSError * __nullable error))completionHandler NS_AVAILABLE(10_11, 9_0);
++ (void)instantiateWithComponentDescription:(AudioComponentDescription)audioComponentDescription options:(AudioComponentInstantiationOptions)options completionHandler:(void (^)(__kindof AVAudioUnit * __nullable audioUnit, NSError * __nullable error))completionHandler API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0));
 
 /*! @method loadAudioUnitPresetAtURL:error:
     @abstract Load an audio unit preset.
@@ -76,7 +76,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0) __WATCHOS_PROHIBITED
 */
 @property (nonatomic, readonly) AudioUnit audioUnit;
 
-#if __OBJC2__
+#ifdef __OBJC2__
 /*! @property AUAudioUnit
     @abstract An AUAudioUnit wrapping or underlying the implementation's AudioUnit.
     @discussion
@@ -88,7 +88,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0) __WATCHOS_PROHIBITED
         engine should be performed directly on the audio unit. These include changing initialization
         state, stream formats, channel layouts or connections to other audio units.
 */
-@property (nonatomic, readonly) AUAudioUnit *AUAudioUnit NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic, readonly) AUAudioUnit *AUAudioUnit API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0));
 #endif // __OBJC2__
 
 /*! @property name

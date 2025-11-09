@@ -2,8 +2,10 @@
 //  NWEndpoint
 //  Network
 //
-//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2016, 2018 Apple Inc. All rights reserved.
 //
+
+#ifndef __NE_TAPI__
 
 #ifndef __NE_INDIRECT__
 #error "Please import the NetworkExtension module instead of this file directly."
@@ -19,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @interface NWEndpoint
  * @discussion NWEndpoint is a generic class to represent network endpoints, such as a port on a remote server.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NWEndpoint : NSObject <NSSecureCoding, NSCopying>
 
 @end
@@ -27,3 +29,5 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 NS_ASSUME_NONNULL_END
 
 #endif // __NWEndpoint_h_
+
+#endif // __NE_TAPI__

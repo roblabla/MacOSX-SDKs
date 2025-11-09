@@ -102,7 +102,7 @@
     @discussion This method is only sent to the plug-in if the
     WebPlugInShouldLoadMainResourceKey argument passed to the plug-in was NO.
 */
-- (void)webPlugInMainResourceDidReceiveResponse:(NSURLResponse *)response NS_AVAILABLE_MAC(10_6);
+- (void)webPlugInMainResourceDidReceiveResponse:(NSURLResponse *)response WEBKIT_AVAILABLE_MAC(10_6);
 
 /*!
     @method webPlugInMainResourceDidReceiveData:
@@ -111,7 +111,7 @@
     @discussion This method is only sent to the plug-in if the
     WebPlugInShouldLoadMainResourceKey argument passed to the plug-in was NO.
 */
-- (void)webPlugInMainResourceDidReceiveData:(NSData *)data NS_AVAILABLE_MAC(10_6);
+- (void)webPlugInMainResourceDidReceiveData:(NSData *)data WEBKIT_AVAILABLE_MAC(10_6);
 
 /*!
     @method webPlugInMainResourceDidFailWithError:
@@ -120,7 +120,7 @@
     @discussion This method is only sent to the plug-in if the
     WebPlugInShouldLoadMainResourceKey argument passed to the plug-in was NO.
 */
-- (void)webPlugInMainResourceDidFailWithError:(NSError *)error NS_AVAILABLE_MAC(10_6);
+- (void)webPlugInMainResourceDidFailWithError:(NSError *)error WEBKIT_AVAILABLE_MAC(10_6);
 
 /*!
     @method webPlugInMainResourceDidFinishLoading
@@ -129,6 +129,6 @@
     @discussion This method is only sent to the plug-in if the
     WebPlugInShouldLoadMainResourceKey argument passed to the plug-in was NO.
 */
-- (void)webPlugInMainResourceDidFinishLoading NS_AVAILABLE_MAC(10_6);
+- (void)webPlugInMainResourceDidFinishLoading WEBKIT_AVAILABLE_MAC(10_6);
 
 @end

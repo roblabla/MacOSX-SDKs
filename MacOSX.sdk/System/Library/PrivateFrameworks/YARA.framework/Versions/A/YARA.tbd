@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 29D362B1-B3D7-3F63-8B22-376C80A7149E', 'x86_64: 676ED771-28BA-3775-A53A-B1DFD06E49FF' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 4DC87333-EC07-3CE3-A19B-214442E0E97D' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/yara.framework/Versions/A/yara
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ __yr_ac_build_transition_table, __yr_ac_create_failure_links, 
                        __yr_ac_find_suitable_transition_table_slot, __yr_ac_next_state, 
                        __yr_ac_optimize_failure_links, __yr_ac_print_automaton_state, 

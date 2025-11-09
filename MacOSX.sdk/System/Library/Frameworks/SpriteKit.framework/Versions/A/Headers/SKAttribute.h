@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, SKAttributeType) {
 } NS_ENUM_AVAILABLE(10_11, 9_0);
 
 NS_CLASS_AVAILABLE(10_11, 9_0)
-SK_EXPORT @interface SKAttribute : NSObject <NSCoding>
+SK_EXPORT @interface SKAttribute : NSObject <NSSecureCoding>
 
 + (instancetype)attributeWithName:(NSString*)name type:(SKAttributeType)type;
 - (instancetype)initWithName:(NSString*)name type:(SKAttributeType)type NS_DESIGNATED_INITIALIZER;
@@ -42,7 +42,7 @@ SK_EXPORT @interface SKAttribute : NSObject <NSCoding>
 
 
 NS_CLASS_AVAILABLE(10_11, 9_0)
-SK_EXPORT @interface SKAttributeValue : NSObject <NSCoding>
+SK_EXPORT @interface SKAttributeValue : NSObject <NSSecureCoding>
 
 + (instancetype)valueWithFloat:(float)value;
 + (instancetype)valueWithVectorFloat2:(vector_float2)value;

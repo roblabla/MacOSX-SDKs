@@ -1,7 +1,7 @@
 /*
     NSEvent.h
     Application Kit
-    Copyright (c) 1994-2017, Apple Inc.
+    Copyright (c) 1994-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -62,29 +62,29 @@ typedef NS_ENUM(NSUInteger, NSEventType) {        /* various types of events */
 #endif
 };
 
-static const NSEventType NSLeftMouseDown 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeLeftMouseDown", 10.0, 10.12) = NSEventTypeLeftMouseDown;
-static const NSEventType NSLeftMouseUp 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeLeftMouseUp", 10.0, 10.12) = NSEventTypeLeftMouseUp;
-static const NSEventType NSRightMouseDown 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeRightMouseDown", 10.0, 10.12) = NSEventTypeRightMouseDown;
-static const NSEventType NSRightMouseUp		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeRightMouseUp", 10.0, 10.12) = NSEventTypeRightMouseUp;
-static const NSEventType NSMouseMoved 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeMouseMoved", 10.0, 10.12) = NSEventTypeMouseMoved;
-static const NSEventType NSLeftMouseDragged	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeLeftMouseDragged", 10.0, 10.12) = NSEventTypeLeftMouseDragged;
-static const NSEventType NSRightMouseDragged 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeRightMouseDragged", 10.0, 10.12) = NSEventTypeRightMouseDragged;
-static const NSEventType NSMouseEntered 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeMouseEntered", 10.0, 10.12) = NSEventTypeMouseEntered;
-static const NSEventType NSMouseExited 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeMouseExited", 10.0, 10.12) = NSEventTypeMouseExited;
-static const NSEventType NSKeyDown 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeKeyDown", 10.0, 10.12) = NSEventTypeKeyDown;
-static const NSEventType NSKeyUp 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeKeyUp", 10.0, 10.12) = NSEventTypeKeyUp;
-static const NSEventType NSFlagsChanged 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeFlagsChanged", 10.0, 10.12) = NSEventTypeFlagsChanged;
-static const NSEventType NSAppKitDefined 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeAppKitDefined", 10.0, 10.12) = NSEventTypeAppKitDefined;
-static const NSEventType NSSystemDefined 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeSystemDefined", 10.0, 10.12) = NSEventTypeSystemDefined;
-static const NSEventType NSApplicationDefined	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeApplicationDefined", 10.0, 10.12) = NSEventTypeApplicationDefined;
-static const NSEventType NSPeriodic 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypePeriodic", 10.0, 10.12) = NSEventTypePeriodic;
-static const NSEventType NSCursorUpdate 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeCursorUpdate", 10.0, 10.12) = NSEventTypeCursorUpdate;
-static const NSEventType NSScrollWheel 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeScrollWheel", 10.0, 10.12) = NSEventTypeScrollWheel;
-static const NSEventType NSTabletPoint 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeTabletPoint", 10.0, 10.12) = NSEventTypeTabletPoint;
-static const NSEventType NSTabletProximity 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeTabletProximity", 10.0, 10.12) = NSEventTypeTabletProximity;
-static const NSEventType NSOtherMouseDown	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeOtherMouseDown", 10.0, 10.12) = NSEventTypeOtherMouseDown;
-static const NSEventType NSOtherMouseUp 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeOtherMouseUp", 10.0, 10.12) = NSEventTypeOtherMouseUp;
-static const NSEventType NSOtherMouseDragged 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeOtherMouseDragged", 10.0, 10.12) = NSEventTypeOtherMouseDragged;
+static const NSEventType NSLeftMouseDown 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeLeftMouseDown", 10_0, 10_12) = NSEventTypeLeftMouseDown;
+static const NSEventType NSLeftMouseUp 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeLeftMouseUp", 10_0, 10_12) = NSEventTypeLeftMouseUp;
+static const NSEventType NSRightMouseDown 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeRightMouseDown", 10_0, 10_12) = NSEventTypeRightMouseDown;
+static const NSEventType NSRightMouseUp		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeRightMouseUp", 10_0, 10_12) = NSEventTypeRightMouseUp;
+static const NSEventType NSMouseMoved 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeMouseMoved", 10_0, 10_12) = NSEventTypeMouseMoved;
+static const NSEventType NSLeftMouseDragged	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeLeftMouseDragged", 10_0, 10_12) = NSEventTypeLeftMouseDragged;
+static const NSEventType NSRightMouseDragged 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeRightMouseDragged", 10_0, 10_12) = NSEventTypeRightMouseDragged;
+static const NSEventType NSMouseEntered 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeMouseEntered", 10_0, 10_12) = NSEventTypeMouseEntered;
+static const NSEventType NSMouseExited 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeMouseExited", 10_0, 10_12) = NSEventTypeMouseExited;
+static const NSEventType NSKeyDown 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeKeyDown", 10_0, 10_12) = NSEventTypeKeyDown;
+static const NSEventType NSKeyUp 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeKeyUp", 10_0, 10_12) = NSEventTypeKeyUp;
+static const NSEventType NSFlagsChanged 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeFlagsChanged", 10_0, 10_12) = NSEventTypeFlagsChanged;
+static const NSEventType NSAppKitDefined 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeAppKitDefined", 10_0, 10_12) = NSEventTypeAppKitDefined;
+static const NSEventType NSSystemDefined 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeSystemDefined", 10_0, 10_12) = NSEventTypeSystemDefined;
+static const NSEventType NSApplicationDefined	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeApplicationDefined", 10_0, 10_12) = NSEventTypeApplicationDefined;
+static const NSEventType NSPeriodic 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypePeriodic", 10_0, 10_12) = NSEventTypePeriodic;
+static const NSEventType NSCursorUpdate 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeCursorUpdate", 10_0, 10_12) = NSEventTypeCursorUpdate;
+static const NSEventType NSScrollWheel 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeScrollWheel", 10_0, 10_12) = NSEventTypeScrollWheel;
+static const NSEventType NSTabletPoint 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeTabletPoint", 10_0, 10_12) = NSEventTypeTabletPoint;
+static const NSEventType NSTabletProximity 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeTabletProximity", 10_0, 10_12) = NSEventTypeTabletProximity;
+static const NSEventType NSOtherMouseDown	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeOtherMouseDown", 10_0, 10_12) = NSEventTypeOtherMouseDown;
+static const NSEventType NSOtherMouseUp 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeOtherMouseUp", 10_0, 10_12) = NSEventTypeOtherMouseUp;
+static const NSEventType NSOtherMouseDragged 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventTypeOtherMouseDragged", 10_0, 10_12) = NSEventTypeOtherMouseDragged;
 
 
 // For APIs introduced in Mac OS X 10.6 and later, this type is used with NS*Mask constants to indicate the events of interest.
@@ -132,30 +132,30 @@ typedef NS_OPTIONS(unsigned long long, NSEventMask) { /* masks for the types of 
     
 };
 
-static const NSEventMask NSLeftMouseDownMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskLeftMouseDown", 10.0, 10.12) = NSEventMaskLeftMouseDown;
-static const NSEventMask NSLeftMouseUpMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskLeftMouseUp", 10.0, 10.12) = NSEventMaskLeftMouseUp;
-static const NSEventMask NSRightMouseDownMask	 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskRightMouseDown", 10.0, 10.12) = NSEventMaskRightMouseDown;
-static const NSEventMask NSRightMouseUpMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskRightMouseUp", 10.0, 10.12) = NSEventMaskRightMouseUp;
-static const NSEventMask NSMouseMovedMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskMouseMoved", 10.0, 10.12) = NSEventMaskMouseMoved;
-static const NSEventMask NSLeftMouseDraggedMask 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskLeftMouseDragged", 10.0, 10.12) = NSEventMaskLeftMouseDragged;
-static const NSEventMask NSRightMouseDraggedMask 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskRightMouseDragged", 10.0, 10.12) = NSEventMaskRightMouseDragged;
-static const NSEventMask NSMouseEnteredMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskMouseEntered", 10.0, 10.12) = NSEventMaskMouseEntered;
-static const NSEventMask NSMouseExitedMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskMouseExited", 10.0, 10.12) = NSEventMaskMouseExited;
-static const NSEventMask NSKeyDownMask 			NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskKeyDown", 10.0, 10.12) = NSEventMaskKeyDown;
-static const NSEventMask NSKeyUpMask 			NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskKeyUp", 10.0, 10.12) = NSEventMaskKeyUp;
-static const NSEventMask NSFlagsChangedMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskFlagsChanged", 10.0, 10.12) = NSEventMaskFlagsChanged;
-static const NSEventMask NSAppKitDefinedMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskAppKitDefined", 10.0, 10.12) = NSEventMaskAppKitDefined;
-static const NSEventMask NSSystemDefinedMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskSystemDefined", 10.0, 10.12) = NSEventMaskSystemDefined;
-static const NSEventMask NSApplicationDefinedMask 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskApplicationDefined", 10.0, 10.12) = NSEventMaskApplicationDefined;
-static const NSEventMask NSPeriodicMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskPeriodic", 10.0, 10.12) = NSEventMaskPeriodic;
-static const NSEventMask NSCursorUpdateMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskCursorUpdate", 10.0, 10.12) = NSEventMaskCursorUpdate;
-static const NSEventMask NSScrollWheelMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskScrollWheel", 10.0, 10.12) = NSEventMaskScrollWheel;
-static const NSEventMask NSTabletPointMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskTabletPoint", 10.0, 10.12) = NSEventMaskTabletPoint;
-static const NSEventMask NSTabletProximityMask	 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskTabletProximity", 10.0, 10.12) = NSEventMaskTabletProximity;
-static const NSEventMask NSOtherMouseDownMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskOtherMouseDown", 10.0, 10.12) = NSEventMaskOtherMouseDown;
-static const NSEventMask NSOtherMouseUpMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskOtherMouseUp", 10.0, 10.12) = NSEventMaskOtherMouseUp;
-static const NSEventMask NSOtherMouseDraggedMask 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskOtherMouseDragged", 10.0, 10.12) = NSEventMaskOtherMouseDragged;
-static const NSEventMask NSAnyEventMask			NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskAny", 10.0, 10.12) = NSUIntegerMax;
+static const NSEventMask NSLeftMouseDownMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskLeftMouseDown", 10_0, 10_12) = NSEventMaskLeftMouseDown;
+static const NSEventMask NSLeftMouseUpMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskLeftMouseUp", 10_0, 10_12) = NSEventMaskLeftMouseUp;
+static const NSEventMask NSRightMouseDownMask	 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskRightMouseDown", 10_0, 10_12) = NSEventMaskRightMouseDown;
+static const NSEventMask NSRightMouseUpMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskRightMouseUp", 10_0, 10_12) = NSEventMaskRightMouseUp;
+static const NSEventMask NSMouseMovedMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskMouseMoved", 10_0, 10_12) = NSEventMaskMouseMoved;
+static const NSEventMask NSLeftMouseDraggedMask 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskLeftMouseDragged", 10_0, 10_12) = NSEventMaskLeftMouseDragged;
+static const NSEventMask NSRightMouseDraggedMask 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskRightMouseDragged", 10_0, 10_12) = NSEventMaskRightMouseDragged;
+static const NSEventMask NSMouseEnteredMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskMouseEntered", 10_0, 10_12) = NSEventMaskMouseEntered;
+static const NSEventMask NSMouseExitedMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskMouseExited", 10_0, 10_12) = NSEventMaskMouseExited;
+static const NSEventMask NSKeyDownMask 			NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskKeyDown", 10_0, 10_12) = NSEventMaskKeyDown;
+static const NSEventMask NSKeyUpMask 			NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskKeyUp", 10_0, 10_12) = NSEventMaskKeyUp;
+static const NSEventMask NSFlagsChangedMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskFlagsChanged", 10_0, 10_12) = NSEventMaskFlagsChanged;
+static const NSEventMask NSAppKitDefinedMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskAppKitDefined", 10_0, 10_12) = NSEventMaskAppKitDefined;
+static const NSEventMask NSSystemDefinedMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskSystemDefined", 10_0, 10_12) = NSEventMaskSystemDefined;
+static const NSEventMask NSApplicationDefinedMask 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskApplicationDefined", 10_0, 10_12) = NSEventMaskApplicationDefined;
+static const NSEventMask NSPeriodicMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskPeriodic", 10_0, 10_12) = NSEventMaskPeriodic;
+static const NSEventMask NSCursorUpdateMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskCursorUpdate", 10_0, 10_12) = NSEventMaskCursorUpdate;
+static const NSEventMask NSScrollWheelMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskScrollWheel", 10_0, 10_12) = NSEventMaskScrollWheel;
+static const NSEventMask NSTabletPointMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskTabletPoint", 10_0, 10_12) = NSEventMaskTabletPoint;
+static const NSEventMask NSTabletProximityMask	 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskTabletProximity", 10_0, 10_12) = NSEventMaskTabletProximity;
+static const NSEventMask NSOtherMouseDownMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskOtherMouseDown", 10_0, 10_12) = NSEventMaskOtherMouseDown;
+static const NSEventMask NSOtherMouseUpMask 		NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskOtherMouseUp", 10_0, 10_12) = NSEventMaskOtherMouseUp;
+static const NSEventMask NSOtherMouseDraggedMask 	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskOtherMouseDragged", 10_0, 10_12) = NSEventMaskOtherMouseDragged;
+static const NSEventMask NSAnyEventMask			NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventMaskAny", 10_0, 10_12) = NSUIntegerMax;
 
 #if __LP64__
 NS_INLINE NSEventMask NSEventMaskFromType(NSEventType type) { return (1UL << type); }
@@ -178,15 +178,15 @@ typedef NS_OPTIONS(NSUInteger, NSEventModifierFlags) {
     NSEventModifierFlagDeviceIndependentFlagsMask    = 0xffff0000UL
 };
 
-static const NSEventModifierFlags NSAlphaShiftKeyMask         NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagCapsLock", 10.0, 10.12) = NSEventModifierFlagCapsLock;
-static const NSEventModifierFlags NSShiftKeyMask              NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagShift", 10.0, 10.12) = NSEventModifierFlagShift;
-static const NSEventModifierFlags NSControlKeyMask            NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagControl", 10.0, 10.12) = NSEventModifierFlagControl;
-static const NSEventModifierFlags NSAlternateKeyMask          NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagOption", 10.0, 10.12) = NSEventModifierFlagOption;
-static const NSEventModifierFlags NSCommandKeyMask            NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagCommand", 10.0, 10.12) = NSEventModifierFlagCommand;
-static const NSEventModifierFlags NSNumericPadKeyMask         NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagNumericPad", 10.0, 10.12) = NSEventModifierFlagNumericPad;
-static const NSEventModifierFlags NSHelpKeyMask               NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagHelp", 10.0, 10.12) = NSEventModifierFlagHelp;
-static const NSEventModifierFlags NSFunctionKeyMask           NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagFunction", 10.0, 10.12) = NSEventModifierFlagFunction;
-static const NSEventModifierFlags NSDeviceIndependentModifierFlagsMask    NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagDeviceIndependentFlagsMask", 10.0, 10.12) = NSEventModifierFlagDeviceIndependentFlagsMask;
+static const NSEventModifierFlags NSAlphaShiftKeyMask         NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagCapsLock", 10_0, 10_12) = NSEventModifierFlagCapsLock;
+static const NSEventModifierFlags NSShiftKeyMask              NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagShift", 10_0, 10_12) = NSEventModifierFlagShift;
+static const NSEventModifierFlags NSControlKeyMask            NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagControl", 10_0, 10_12) = NSEventModifierFlagControl;
+static const NSEventModifierFlags NSAlternateKeyMask          NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagOption", 10_0, 10_12) = NSEventModifierFlagOption;
+static const NSEventModifierFlags NSCommandKeyMask            NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagCommand", 10_0, 10_12) = NSEventModifierFlagCommand;
+static const NSEventModifierFlags NSNumericPadKeyMask         NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagNumericPad", 10_0, 10_12) = NSEventModifierFlagNumericPad;
+static const NSEventModifierFlags NSHelpKeyMask               NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagHelp", 10_0, 10_12) = NSEventModifierFlagHelp;
+static const NSEventModifierFlags NSFunctionKeyMask           NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagFunction", 10_0, 10_12) = NSEventModifierFlagFunction;
+static const NSEventModifierFlags NSDeviceIndependentModifierFlagsMask    NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventModifierFlagDeviceIndependentFlagsMask", 10_0, 10_12) = NSEventModifierFlagDeviceIndependentFlagsMask;
 
 /* pointer types for NSEventTypeTabletProximity events or mouse events with subtype NSEventSubtypeTabletProximity*/
 typedef NS_ENUM(NSUInteger, NSPointingDeviceType) {        
@@ -196,10 +196,10 @@ typedef NS_ENUM(NSUInteger, NSPointingDeviceType) {
     NSPointingDeviceTypeEraser      = NX_TABLET_POINTER_ERASER
 };
 
-static const NSPointingDeviceType NSUnknownPointingDevice     NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPointingDeviceTypeUnknown", 10.0, 10.12) = NSPointingDeviceTypeUnknown;
-static const NSPointingDeviceType NSPenPointingDevice         NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPointingDeviceTypePen", 10.0, 10.12) = NSPointingDeviceTypePen;
-static const NSPointingDeviceType NSCursorPointingDevice      NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPointingDeviceTypeCursor", 10.0, 10.12) = NSPointingDeviceTypeCursor;
-static const NSPointingDeviceType NSEraserPointingDevice      NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPointingDeviceTypeEraser", 10.0, 10.12) = NSPointingDeviceTypeEraser;
+static const NSPointingDeviceType NSUnknownPointingDevice     NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPointingDeviceTypeUnknown", 10_0, 10_12) = NSPointingDeviceTypeUnknown;
+static const NSPointingDeviceType NSPenPointingDevice         NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPointingDeviceTypePen", 10_0, 10_12) = NSPointingDeviceTypePen;
+static const NSPointingDeviceType NSCursorPointingDevice      NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPointingDeviceTypeCursor", 10_0, 10_12) = NSPointingDeviceTypeCursor;
+static const NSPointingDeviceType NSEraserPointingDevice      NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPointingDeviceTypeEraser", 10_0, 10_12) = NSPointingDeviceTypeEraser;
 
 /* button masks for NSEventTypeTabletPoint events or mouse events with subtype NSEventSubtypeTabletPoint */
 typedef NS_OPTIONS(NSUInteger, NSEventButtonMask) {
@@ -208,9 +208,9 @@ typedef NS_OPTIONS(NSUInteger, NSEventButtonMask) {
     NSEventButtonMaskPenUpperSide          = NX_TABLET_BUTTON_PENUPPERSIDEMASK
 };
 
-static const NSEventButtonMask NSPenTipMask                NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventButtonMaskPenTip", 10.0, 10.12) = NSEventButtonMaskPenTip;
-static const NSEventButtonMask NSPenLowerSideMask          NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventButtonMaskPenLowerSide", 10.0, 10.12) = NSEventButtonMaskPenLowerSide;
-static const NSEventButtonMask NSPenUpperSideMask          NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventButtonMaskPenUpperSide", 10.0, 10.12) = NSEventButtonMaskPenUpperSide;
+static const NSEventButtonMask NSPenTipMask                NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventButtonMaskPenTip", 10_0, 10_12) = NSEventButtonMaskPenTip;
+static const NSEventButtonMask NSPenLowerSideMask          NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventButtonMaskPenLowerSide", 10_0, 10_12) = NSEventButtonMaskPenLowerSide;
+static const NSEventButtonMask NSPenUpperSideMask          NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventButtonMaskPenUpperSide", 10_0, 10_12) = NSEventButtonMaskPenUpperSide;
 
 typedef NS_OPTIONS(NSUInteger, NSEventPhase) {
     NSEventPhaseNone        = 0, // event not associated with a phase.
@@ -251,17 +251,17 @@ typedef NS_ENUM(short, NSEventSubtype) {
     NSEventSubtypeTouch  NS_ENUM_AVAILABLE_MAC(10_6)             = NX_SUBTYPE_MOUSE_TOUCH
 };
 
-static const NSEventSubtype NSWindowExposedEventType            NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeWindowExposed", 10.0, 10.12) = NSEventSubtypeWindowExposed;
-static const NSEventSubtype NSApplicationActivatedEventType     NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeApplicationActivated", 10.0, 10.12) = NSEventSubtypeApplicationActivated;
-static const NSEventSubtype NSApplicationDeactivatedEventType   NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeApplicationDeactivated", 10.0, 10.12) = NSEventSubtypeApplicationDeactivated;
-static const NSEventSubtype NSWindowMovedEventType              NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeWindowMoved", 10.0, 10.12) = NSEventSubtypeWindowMoved;
-static const NSEventSubtype NSScreenChangedEventType            NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeScreenChanged", 10.0, 10.12) = NSEventSubtypeScreenChanged;
+static const NSEventSubtype NSWindowExposedEventType            NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeWindowExposed", 10_0, 10_12) = NSEventSubtypeWindowExposed;
+static const NSEventSubtype NSApplicationActivatedEventType     NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeApplicationActivated", 10_0, 10_12) = NSEventSubtypeApplicationActivated;
+static const NSEventSubtype NSApplicationDeactivatedEventType   NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeApplicationDeactivated", 10_0, 10_12) = NSEventSubtypeApplicationDeactivated;
+static const NSEventSubtype NSWindowMovedEventType              NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeWindowMoved", 10_0, 10_12) = NSEventSubtypeWindowMoved;
+static const NSEventSubtype NSScreenChangedEventType            NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeScreenChanged", 10_0, 10_12) = NSEventSubtypeScreenChanged;
 static const NSEventSubtype NSAWTEventType                      NS_ENUM_DEPRECATED_MAC(10_10, 10_12, "This subtype no longer exists") = (NSEventSubtype)16;
-static const NSEventSubtype NSPowerOffEventType             NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypePowerOff", 10.0, 10.12) = NSEventSubtypePowerOff;
-static const NSEventSubtype NSMouseEventSubtype             NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeMouseEvent", 10.0, 10.12) = NSEventSubtypeMouseEvent;
-static const NSEventSubtype NSTabletPointEventSubtype       NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeTabletPoint", 10.0, 10.12) = NSEventSubtypeTabletPoint;
-static const NSEventSubtype NSTabletProximityEventSubtype   NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeTabletProximity", 10.0, 10.12) = NSEventSubtypeTabletProximity;
-static const NSEventSubtype NSTouchEventSubtype             NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeTouch", 10.0, 10.12) = NSEventSubtypeTouch;
+static const NSEventSubtype NSPowerOffEventType             NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypePowerOff", 10_0, 10_12) = NSEventSubtypePowerOff;
+static const NSEventSubtype NSMouseEventSubtype             NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeMouseEvent", 10_0, 10_12) = NSEventSubtypeMouseEvent;
+static const NSEventSubtype NSTabletPointEventSubtype       NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeTabletPoint", 10_0, 10_12) = NSEventSubtypeTabletPoint;
+static const NSEventSubtype NSTabletProximityEventSubtype   NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeTabletProximity", 10_0, 10_12) = NSEventSubtypeTabletProximity;
+static const NSEventSubtype NSTouchEventSubtype             NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSEventSubtypeTouch", 10_0, 10_12) = NSEventSubtypeTouch;
 
 
 // NSPressureBehavior - The pressure gesture behavior that describes how a pressure gesture behaves and progresses
@@ -316,14 +316,14 @@ typedef NS_ENUM(NSInteger, NSPressureBehavior) {
 
 @interface NSEvent : NSObject <NSCopying, NSCoding> {
     /*All instance variables are private*/
-    NSEventType _type;
-    NSPoint _location;
-    unsigned int _modifierFlags;
-    id _WSTimestamp;
-    NSTimeInterval _timestamp;
-    NSInteger _windowNumber;
-    __weak NSWindow *_window;
-    NSGraphicsContext* _context;
+    NSEventType _type APPKIT_IVAR;
+    NSPoint _location APPKIT_IVAR;
+    unsigned int _modifierFlags APPKIT_IVAR;
+    id _WSTimestamp APPKIT_IVAR;
+    NSTimeInterval _timestamp APPKIT_IVAR;
+    NSInteger _windowNumber APPKIT_IVAR;
+    __weak NSWindow *_window APPKIT_IVAR;
+    NSGraphicsContext* _context APPKIT_IVAR;
     union {
         struct {
             int eventNumber;
@@ -396,11 +396,11 @@ typedef NS_ENUM(NSInteger, NSPressureBehavior) {
         int tabletPointData[14];
         int tabletProximityData[14];
 #endif
-    } _data;
-    void *_eventRef;
+    } _data APPKIT_IVAR;
+    void *_eventRef APPKIT_IVAR;
 #if __LP64__
-    void *reserved1;
-    void *reserved2;
+    void *reserved1 APPKIT_IVAR;
+    void *reserved2 APPKIT_IVAR;
 #endif
 }
 

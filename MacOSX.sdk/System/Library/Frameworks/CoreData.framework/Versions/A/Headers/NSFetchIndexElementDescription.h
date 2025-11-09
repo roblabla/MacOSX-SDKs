@@ -1,7 +1,7 @@
 /*
     NSFetchIndexElementDescription.h
     Core Data
-    Copyright (c) 2017, Apple Inc.
+    Copyright (c) 2017-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -30,7 +30,8 @@ API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0))
     struct __indexElementDescriptionFlags {
         unsigned int _ascending:1;
         unsigned int _propertyIsRetained:1;
-        unsigned int _reservedEntityDescription:30;
+        unsigned int _unique:1;
+        unsigned int _reservedEntityDescription:29;
     } _indexElementDescriptionFlags;
 #endif
 }

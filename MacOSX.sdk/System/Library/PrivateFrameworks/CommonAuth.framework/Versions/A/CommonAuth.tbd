@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 17A264D0-9611-33EA-9081-6CA2E277655C', 'x86_64: F9A7C82E-197F-382E-B854-3DCE83FD6DA3' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 93CF1D80-A3A8-378B-9DF7-BF17A206C57D' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CommonAuth.framework/Versions/A/CommonAuth
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ ___crashreporter_info__, __heim_scram_pairs_free, __heim_scram_parse, 
                        __heim_scram_unparse, _heim_apop_create, _heim_apop_verify, 
                        _heim_cram_md5_create, _heim_cram_md5_export, _heim_cram_md5_free, 

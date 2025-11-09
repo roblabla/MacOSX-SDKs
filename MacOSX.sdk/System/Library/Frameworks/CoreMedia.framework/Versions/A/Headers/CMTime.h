@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-    Copyright 2005-2016 Apple Inc. All rights reserved.
+	Copyright © 2005-2018 Apple Inc. All rights reserved.
  
 */
 
@@ -326,12 +326,12 @@ CMTime CMTimeConvertScale(
 				are considered to be durations and can be added to times in other epochs.
 				Times in different epochs can be compared, however, because numerically greater 
 				epochs always occur after numerically lesser epochs. 
-    @result     The sum of the two CMTimes (addend1 + addend2).
+    @result     The sum of the two CMTimes (lhs + rhs).
 */
 CM_EXPORT 
 CMTime CMTimeAdd(
-				CMTime addend1,				/*! @param addend1			A CMTime to be added. */
-				CMTime addend2)				/*! @param addend2			Another CMTime to be added. */
+				CMTime lhs,				/*! @param lhs			A CMTime to be added. */
+				CMTime rhs)				/*! @param rhs			Another CMTime to be added. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 
@@ -372,12 +372,12 @@ CMTime CMTimeAdd(
 				are considered to be durations and can be subtracted from times in other epochs.
 				Times in different epochs can be compared, however, because numerically greater 
 				epochs always occur after numerically lesser epochs. 
-    @result     The difference of the two CMTimes (minuend - subtrahend).
+    @result     The difference of the two CMTimes (lhs - rhs).
 */
 CM_EXPORT 
 CMTime CMTimeSubtract(
-				CMTime minuend,		/*! @param minuend		The CMTime from which the subtrahend will be subtracted. */
-				CMTime subtrahend)	/*! @param subtrahend	The CMTime that will be subtracted from the minuend. */
+				CMTime lhs,		/*! @param lhs		The CMTime from which the rhs will be subtracted. */
+				CMTime rhs)		/*! @param rhs		The CMTime that will be subtracted from the lhs. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 
@@ -562,7 +562,7 @@ CFDictionaryRef CM_NULLABLE CMTimeCopyAsDictionary(
 */
 CM_EXPORT 
 CMTime CMTimeMakeFromDictionary(
-				CFDictionaryRef CM_NULLABLE dict)	/*! @param dict CFDictionary from which to create CMTime. */
+				CFDictionaryRef CM_NULLABLE dictionaryRepresentation)	/*! @param dictionaryRepresentation CFDictionary from which to create CMTime. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 CM_ASSUME_NONNULL_BEGIN

@@ -8,14 +8,14 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <ServiceManagement/SMErrors.h>
 
-#if !(TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
+#if !TARGET_OS_IPHONE
 #include <Security/Authorization.h>
 #include <ServiceManagement/SMLoginItem.h>
-#else // !(TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
+#else // !TARGET_OS_IPHONE
 // Other projects typedef AuthorizationRef, so let's do a #define here to avoid
 // collisions at compile-time.
 #define AuthorizationRef void *
-#endif // !(TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
+#endif // !TARGET_OS_IPHONE
 
 /*! 
  * @abstract
@@ -182,7 +182,7 @@ Boolean
 SMJobRemove(CFStringRef domain, CFStringRef jobLabel,
 	AuthorizationRef auth, Boolean wait, CFErrorRef *outError);
 
-#if !(TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
+#if !TARGET_OS_IPHONE
 /*!
  * @function SMJobBless
  *
@@ -255,11 +255,11 @@ XPC_EXPORT XPC_NONNULL2
 Boolean
 SMJobBless(CFStringRef domain, CFStringRef executableLabel,
 	AuthorizationRef auth, CFErrorRef *outError);
-#endif // !(TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
+#endif // !TARGET_OS_IPHONE
 
-#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
+#if TARGET_OS_IPHONE
 #undef AuthorizationRef
-#endif // (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
+#endif // TARGET_OS_IPHONE
 
 __END_DECLS
 

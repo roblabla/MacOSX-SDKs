@@ -8,9 +8,10 @@
 
 #import <Foundation/NSExtensionContext.h>
 
+@class PHAsset;
 @class PHPhotoLibrary;
 @class PHProject;
-@class PHFetchOptions;
+@class PHProjectInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,6 +24,28 @@ NS_CLASS_AVAILABLE_MAC(10_13)
 
 @property (nonatomic, readonly) PHPhotoLibrary *photoLibrary;
 @property (nonatomic, readonly) PHProject *project;
+
+/**
+ Invokes the Photos Editor for the given asset.
+ @param asset The asset to edit.
+ @note The extension should observe library changes to get notified when assets are changed/edited.
+ @see PHPhotoLibraryChangeObserver
+ */
+- (void)showEditorForAsset:(PHAsset *)asset API_AVAILABLE(macos(10.14));
+
+
+/**
+ Creates an updated PHProjectInfo from the given projectInfo and the current assets in the PHProject.
+ If the existingProjectInfo is not nil the extension sections will be update to reflect any deletions from the
+ photo library and a new section is appended for any assets in the project which weren't referenced in existingProjectInfo.
+ @param existingProjectInfo PHProjectInfo to update.
+                            If existingProjectInfo is nil a new PHProjectInfo will be created from all assets in the PHProject.
+ @param completion          Completion block that is called with the update result.
+                            updatedProjectInfo is the updated project info, if the update was cancelled it might be nil.
+ @return NSProgress which can be observed, if it's canceled the original project info is returned.
+ */
+- (NSProgress *)updatedProjectInfoFromProjectInfo:(nullable PHProjectInfo *)existingProjectInfo
+                                       completion:(void(^)(PHProjectInfo * _Nullable updatedProjectInfo))completion API_AVAILABLE(macos(10.14));
 
 @end
 

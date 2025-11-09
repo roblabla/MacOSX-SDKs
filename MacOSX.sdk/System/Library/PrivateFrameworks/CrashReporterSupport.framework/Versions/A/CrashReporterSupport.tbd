@@ -1,10 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: DFC9E037-CCBC-31CA-952A-54C839C23312', 'x86_64: D8AB459F-356B-3F6B-9DD9-885443BB340E' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 36754BB2-680F-36AE-A5DE-548B4F41F0AE' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CrashReporterSupport.framework/Versions/A/CrashReporterSupport
+current-version: 938.23
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     re-exports:      [ /usr/lib/libDiagnosticMessagesClient.dylib ]
     symbols:         [ '$ld$add$os10.6$_msgtracer_domain_free', '$ld$add$os10.6$_msgtracer_domain_new', 
                        '$ld$add$os10.6$_msgtracer_log', '$ld$add$os10.6$_msgtracer_log_with_keys', 
@@ -19,8 +20,8 @@ exports:
                        _CROpenProblemReport, _CRPrimeIsAppleInternal, _CRSaveProblemReport, 
                        _CRSubmitProblemReport, _CopyExtensionForProblemType, _CopyUpdatedWhitelistRanges, 
                        _OSACreateProblemReportDirectory, _OSAIsSystemCreatedRoleUser, 
-                       _OSAWriteLogForSubmission, _WriteJetsamMemoryReport, __CRAppendProblemReport, 
-                       __CRAutoSubmitEnabledIsSet, __CRCleanUpLegacyLinksInDirectory, 
+                       _OSAWriteLogForSubmission, _SimulateCrash, _WriteJetsamMemoryReport, 
+                       __CRAppendProblemReport, __CRAutoSubmitEnabledIsSet, __CRCleanUpLegacyLinksInDirectory, 
                        __CRCopyAppleEmailAddress, __CRCopyCrashHistoryForProcess, 
                        __CRCopyCrashHistoryURLForProcess, __CRCopyDiagnosticMessagesHistoryValue, 
                        __CRCopyExecutablePathAndNameForPIDDetectingInconsistencies, 
@@ -56,8 +57,8 @@ exports:
                        _kCRProblemReportCommentsKey, _kCRProblemReportDescriptionKey, 
                        _kCRProblemReportDialogDisplayedKey, _kCRProblemReportDisplayNameKey, 
                        _kCRProblemReportInternalUUIDKey, _kCRProblemReportIsSimulatedKey, 
-                       _kCRProblemReportNoUserUUIDKey, _kCRProblemReportOSVersionKey, 
-                       _kCRProblemReportPathKey, _kCRProblemReportPlistDescriptionKey, 
+                       _kCRProblemReportMoveSourceFileKey, _kCRProblemReportNoUserUUIDKey, 
+                       _kCRProblemReportOSVersionKey, _kCRProblemReportPathKey, _kCRProblemReportPlistDescriptionKey, 
                        _kCRProblemReportPluginNameKey, _kCRProblemReportProblemTypeKey, 
                        _kCRProblemReportReopenPathKey, _kCRProblemReportRoutingKey, 
                        _kCRProblemReportSampleWeightKey, _kCRProblemReportSignatureHashKey, 
@@ -68,11 +69,12 @@ exports:
                        _kCRProblemTypeAssumptionViolation, _kCRProblemTypeAutoBugCapture, 
                        _kCRProblemTypeBridge, _kCRProblemTypeBridgeRestore, _kCRProblemTypeConnectionFailure, 
                        _kCRProblemTypeCoreAnalytics, _kCRProblemTypeCrash, _kCRProblemTypeDifferentialPrivacy, 
-                       _kCRProblemTypeEfiFirmwareIntegrity, _kCRProblemTypeExcResource, 
-                       _kCRProblemTypeFirmwareIntegrity, _kCRProblemTypeGPURestart, 
-                       _kCRProblemTypeHang, _kCRProblemTypeHeartbeat, _kCRProblemTypeIOMicroStackShot, 
-                       _kCRProblemTypeJetsam, _kCRProblemTypeMemoryResource, _kCRProblemTypeMicroStackShots, 
-                       _kCRProblemTypePanic, _kCRProblemTypeServiceWatchdogTimeout, 
+                       _kCRProblemTypeDuetDB2, _kCRProblemTypeEfiFirmwareIntegrity, 
+                       _kCRProblemTypeExcResource, _kCRProblemTypeFirmwareIntegrity, 
+                       _kCRProblemTypeGPURestart, _kCRProblemTypeHang, _kCRProblemTypeHeartbeat, 
+                       _kCRProblemTypeIOMicroStackShot, _kCRProblemTypeJetsam, _kCRProblemTypeMemoryResource, 
+                       _kCRProblemTypeMicroStackShots, _kCRProblemTypePanic, _kCRProblemTypePortraitAnalytics, 
+                       _kCRProblemTypePowerlog, _kCRProblemTypeServiceWatchdogTimeout, 
                        _kCRProblemTypeShutdownStall, _kCRProblemTypeSleepWakeFailure, 
                        _kCRProblemTypeSpin, _kCRProblemTypeSystemInformation, _kCRProblemTypeSystemStats, 
                        _kCRProblemTypeWakeupsMonitorViolation, _kCRProblemTypeWatchdogTimeout, 
@@ -83,5 +85,5 @@ exports:
                        _kMsgTracerKeySignature2, _kMsgTracerKeySignature3, _kMsgTracerKeyUUID, 
                        _kMsgTracerKeyValue, _kMsgTracerKeyValue2, _kMsgTracerKeyValue3, 
                        _kOSAIPSHeaderTimestampKey ]
-    objc-classes:    [ _OSALogWriter ]
+    objc-classes:    [ OSALogWriter ]
 ...

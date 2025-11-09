@@ -1,6 +1,6 @@
 /*
     NSTextList.h
-    Copyright (c) 2004-2017, Apple Inc.
+    Copyright (c) 2004-2018, Apple Inc.
     All rights reserved.
 
     Class to represent text lists.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * NSTextListMarkerFormat NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSTextListMarkerFormat NS_TYPED_EXTENSIBLE_ENUM;
 APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerBox NS_AVAILABLE_MAC(10_13);
 APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerCheck NS_AVAILABLE_MAC(10_13);
 APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerCircle NS_AVAILABLE_MAC(10_13);
@@ -36,10 +36,10 @@ typedef NS_OPTIONS(NSUInteger, NSTextListOptions) {
 
 @interface NSTextList : NSObject <NSCoding, NSCopying> {
     /*All instance variables are private*/
-    NSString *_markerFormat;
-    NSUInteger _listFlags;
-    NSInteger _startIndex;
-    void *_listSecondary;
+    NSString *_markerFormat APPKIT_IVAR;
+    NSUInteger _listFlags APPKIT_IVAR;
+    NSInteger _startIndex APPKIT_IVAR;
+    void *_listSecondary APPKIT_IVAR;
 }
 
 - (instancetype)initWithMarkerFormat:(NSTextListMarkerFormat)format options:(NSUInteger)mask;

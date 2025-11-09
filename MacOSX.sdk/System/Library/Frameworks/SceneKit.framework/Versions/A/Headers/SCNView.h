@@ -1,7 +1,8 @@
 //
 //  SCNView.h
+//  SceneKit
 //
-//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
+//  Copyright © 2012-2018 Apple Inc. All rights reserved.
 //
 
 #import <AppKit/AppKit.h>
@@ -13,29 +14,25 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 3
 typedef NSString * SCNViewOption NS_STRING_ENUM;
-#else
-typedef NSString * SCNViewOption;
-#endif
 
 /*!
  @constant SCNViewOptionPreferredRenderingAPI Specifies the preferred rendering API to be used by the renderer.
  @discussion Pass it as the key in the options dictionary given to initWithFrame:options:. The value is a NSNumber wrapping a SCNRenderingAPI. You can also select the preferred rendering API directly from the SCNView inspector in InterfaceBuilder.
  */
-FOUNDATION_EXTERN SCNViewOption const SCNPreferredRenderingAPIKey API_AVAILABLE(macos(10.11), ios(9.0)) __WATCHOS_UNAVAILABLE;
+SCN_EXPORT SCNViewOption const SCNPreferredRenderingAPIKey API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant SCNViewOptionPreferredDevice Specifies the preferred metal device to be used by the renderer.
  @discussion The value is directly a id <MTLDevice>.
  */
-FOUNDATION_EXTERN SCNViewOption const SCNPreferredDeviceKey API_AVAILABLE(macos(10.11), ios(9.0));
+SCN_EXPORT SCNViewOption const SCNPreferredDeviceKey API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @constant SCNViewOptionPreferLowPowerDevice Specifies if the renderer should prefer a low power metal device.
  @discussion The value is a NSNumber wrapping a BOOL. Defaults to NO.
  */
-FOUNDATION_EXTERN SCNViewOption const SCNPreferLowPowerDeviceKey API_AVAILABLE(macos(10.11), ios(9.0));
+SCN_EXPORT SCNViewOption const SCNPreferLowPowerDeviceKey API_AVAILABLE(macos(10.11), ios(9.0));
 
 #define SCNViewOptionPreferredRenderingAPI SCNPreferredRenderingAPIKey
 #define SCNViewOptionPreferredDevice       SCNPreferredDeviceKey
@@ -57,6 +54,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  @class SCNView
  @abstract A SCNView is a subclass of NSView that can display a SCNScene
  */
+SCN_EXPORT
 @interface SCNView : NSView <SCNSceneRenderer, SCNTechniqueSupport>
 
 /*! 
@@ -108,7 +106,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  @abstract An object describing the current configuration of the event handler which pilot the default camera controller.
  @discussion This object will be used to configure the event handler when allowCameraControl is set to YES.
  */
-@property(nonatomic, readonly) id<SCNCameraControlConfiguration> cameraControlConfiguration API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property(nonatomic, readonly) id <SCNCameraControlConfiguration> cameraControlConfiguration API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
  @property defaultCameraController

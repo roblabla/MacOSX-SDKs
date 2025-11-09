@@ -118,7 +118,8 @@
 */
 
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_8, 5_0)
+
+OPENGL_DEPRECATED(10.8,10.14) OPENGLES_DEPRECATED(ios(5.0,12.0), tvos(9.0,12.0))
 @interface GLKReflectionMapEffect : GLKBaseEffect <GLKNamedEffect>
 {
     @private

@@ -47,10 +47,6 @@ extern "C"
 {
 #endif
 
-#ifndef PCSC_API
-#define PCSC_API
-#endif
-
 	PCSC_API int32_t SCardEstablishContext(uint32_t dwScope,
                                            const void *pvReserved1, const void *pvReserved2, LPSCARDCONTEXT phContext);
 
@@ -118,7 +114,7 @@ extern "C"
 	PCSC_API int32_t SCardSetAttrib(SCARDHANDLE hCard, uint32_t dwAttrId,
                                     const uint8_t *pbAttr, uint32_t cbAttrLen);
     
-	void SCardUnload(void);
+	PCSC_API void SCardUnload(void);
     
 #ifdef __cplusplus
 }

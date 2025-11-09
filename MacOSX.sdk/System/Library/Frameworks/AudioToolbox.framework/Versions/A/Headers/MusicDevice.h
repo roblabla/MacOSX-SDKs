@@ -212,7 +212,7 @@ MusicDeviceMIDIEvent(	MusicDeviceComponent	inUnit,
 						UInt32					inStatus,
 						UInt32					inData1,
 						UInt32					inData2,
-						UInt32					inOffsetSampleFrame)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						UInt32					inOffsetSampleFrame)				API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicDeviceSysEx
@@ -233,7 +233,7 @@ MusicDeviceMIDIEvent(	MusicDeviceComponent	inUnit,
 extern OSStatus
 MusicDeviceSysEx(		MusicDeviceComponent	inUnit,
 						const UInt8 *			inData,
-						UInt32					inLength)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						UInt32					inLength)							API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -281,7 +281,7 @@ MusicDeviceStartNote(	MusicDeviceComponent				inUnit,
 						MusicDeviceGroupID					inGroupID,
 						NoteInstanceID *					outNoteInstanceID,
 						UInt32								inOffsetSampleFrame,
-						const MusicDeviceNoteParams *	 	inParams)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						const MusicDeviceNoteParams *	 	inParams)				API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicDeviceStopNote
@@ -305,7 +305,7 @@ extern OSStatus
 MusicDeviceStopNote(	MusicDeviceComponent	inUnit,
 						MusicDeviceGroupID		inGroupID,
 						NoteInstanceID			inNoteInstanceID,
-						UInt32					inOffsetSampleFrame)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						UInt32					inOffsetSampleFrame)				API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -438,13 +438,13 @@ typedef OSStatus
 extern OSStatus
 MusicDevicePrepareInstrument(	MusicDeviceComponent		inUnit,
 								MusicDeviceInstrumentID		inInstrument)		
-										__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+										API_DEPRECATED("no longer supported", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 extern OSStatus
 MusicDeviceReleaseInstrument(	MusicDeviceComponent		inUnit,
 								MusicDeviceInstrumentID		inInstrument)		
-										__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+										API_DEPRECATED("no longer supported", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 	
 #ifdef __cplusplus

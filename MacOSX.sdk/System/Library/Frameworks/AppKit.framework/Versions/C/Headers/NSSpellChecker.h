@@ -1,7 +1,7 @@
 /*
         NSSpellChecker.h
         Application Kit
-        Copyright (c) 1990-2017, Apple Inc.
+        Copyright (c) 1990-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSString, NSOrthography, NSPanel, NSView, NSViewController, NSMenu;
 
 /* Optional keys that may be used in the options dictionary with checkString:range:types:options:inSpellDocumentWithTag:orthography:wordCount:, requestCheckingOfString:range:types:options:inSpellDocumentWithTag:completionHandler:, and menuForResult:string:options:atLocation:inView:. */
-typedef NSString * NSTextCheckingOptionKey NS_STRING_ENUM;
+typedef NSString * NSTextCheckingOptionKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSTextCheckingOptionKey NSTextCheckingOrthographyKey        NS_AVAILABLE_MAC(10_6);  // NSOrthography indicating an orthography to be used as a starting point for orthography checking, or as the orthography if orthography checking is not enabled
 APPKIT_EXTERN NSTextCheckingOptionKey NSTextCheckingQuotesKey             NS_AVAILABLE_MAC(10_6);  // NSArray containing four strings to be used with NSTextCheckingTypeQuote (opening double quote, closing double quote, opening single quote, and closing single quote in that order); if not specified, values will be taken from user's preferences
 APPKIT_EXTERN NSTextCheckingOptionKey NSTextCheckingReplacementsKey       NS_AVAILABLE_MAC(10_6);  // NSDictionary containing replacements to be used with NSTextCheckingTypeReplacement; if not specified, values will be taken from user's preferences
@@ -44,26 +44,24 @@ The usual usage of this is to implement a checkSpelling: method in an object tha
 
 @private
     // All instance variables are private and subject to future change.  Do not access them.
-    id _guessesBrowser;
-    id _wordField;
-    id _languagePopUp;
+    id _guessesBrowser APPKIT_IVAR;
+    id _wordField APPKIT_IVAR;
+    id _languagePopUp APPKIT_IVAR;
+    id _topLevelPanels APPKIT_IVAR;
+    id _panel APPKIT_IVAR;
 #ifndef __OBJC2__
-    id _reserved1;
+    id _reserved2 APPKIT_IVAR;
 #endif
-    id _panel;
+    id _correctButton APPKIT_IVAR;
+    id _guessButton APPKIT_IVAR;
+    id _ignoreButton APPKIT_IVAR;
 #ifndef __OBJC2__
-    id _reserved2;
+    id _reserved3 APPKIT_IVAR;
 #endif
-    id _correctButton;
-    id _guessButton;
-    id _ignoreButton;
-#ifndef __OBJC2__
-    id _reserved3;
-#endif
-    id _languagesBrowser;
-    id _quotesBrowser;
-    id _replacementsBrowser;
-    id _defineButton;
+    id _languagesBrowser APPKIT_IVAR;
+    id _quotesBrowser APPKIT_IVAR;
+    id _replacementsBrowser APPKIT_IVAR;
+    id _defineButton APPKIT_IVAR;
     
     struct __scFlags {
         unsigned int autoShowGuesses:1;
@@ -78,15 +76,15 @@ The usual usage of this is to implement a checkSpelling: method in an object tha
         unsigned int languagesHidden:1;
         unsigned int quotesByLanguage:1;
         unsigned int _reserved:21;
-    } _scFlags;
+    } _scFlags APPKIT_IVAR;
     
-    id _substitutionsPanel;
+    id _substitutionsPanel APPKIT_IVAR;
 #ifndef __OBJC2__
-    id _reserved4;
+    id _reserved4 APPKIT_IVAR;
 #endif
-    id _learnButton;
-    id _infoField;
-    id _grammarControl;
+    id _learnButton APPKIT_IVAR;
+    id _infoField APPKIT_IVAR;
+    id _grammarControl APPKIT_IVAR;
 }
 
 /* Only one per application. */
@@ -231,11 +229,8 @@ APPKIT_EXTERN NSNotificationName const NSSpellCheckerDidChangeAutomaticTextCompl
 
 @interface NSSpellChecker(NSDeprecated)
 
-/* This is the pre-10.6 equivalent of guessesForWordRange:inString:language:inSpellDocumentWithTag:. */
 - (null_unspecified NSArray *)guessesForWord:(null_unspecified NSString *)word NS_DEPRECATED_MAC(10_0, 10_6, "Use -guessesForWordRange:inString:language:inSpellDocumentWithTag instead");
-
-/* This is the deprecated pre-10.5 equivalent of unlearnWord:. */
-- (void)forgetWord:(null_unspecified NSString *)word NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)forgetWord:(null_unspecified NSString *)word NS_DEPRECATED_WITH_REPLACEMENT_MAC("unlearnWord:", 10_0, 10_5);
 
 @end
 

@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 065A7767-9F7C-3992-95FE-732E136BB4EF' ]
+uuids:           [ 'x86_64: 1AE9DF0D-1CEE-3C29-80DC-A604112EBFB0' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/IMAVCore.framework/Versions/A/IMAVCore
 current-version: 800
@@ -39,9 +39,9 @@ exports:
                        __NSStringDescriptionForIMAVChatEndedReason, __NSStringDescriptionForIMAVChatError, 
                        __NSStringDescriptionForIMAVChatParticipantState, __NSStringDescriptionForIMAVChatState, 
                        __NSStringDescriptionForIMAVResponse ]
-    objc-classes:    [ _IMAVCallManager, _IMAVCamera, _IMAVCameraController, _IMAVChat, 
-                       _IMAVChatParticipant, _IMAVController, _IMAVDaemonController, 
-                       _IMAVInterface, _IMAVLocalPreviewClient, _IMAVMicrophone, 
-                       _IMAVMicrophoneController, _IMAVTelephonyManager ]
-    objc-ivars:      [ _IMAVInterface._delegate ]
+    objc-classes:    [ IMAVCallManager, IMAVCamera, IMAVCameraController, IMAVChat, 
+                       IMAVChatParticipant, IMAVController, IMAVDaemonController, 
+                       IMAVInterface, IMAVLocalPreviewClient, IMAVMicrophone, IMAVMicrophoneController, 
+                       IMAVTelephonyManager ]
+    objc-ivars:      [ IMAVInterface._delegate ]
 ...

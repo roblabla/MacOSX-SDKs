@@ -6,13 +6,6 @@
 //
 
 #import <GLKit/GLKitBase.h>
-
-#if TARGET_OS_IPHONE
-#import <OpenGLES/gltypes.h>
-#else // !TARGET_OS_IPHONE
-#import <OpenGL/gltypes.h>
-#endif // !TARGET_OS_IPHONE
-
 #import <GLKit/GLKNamedEffect.h>
 #import <GLKit/GLKEffectPropertyTransform.h>
 #import <GLKit/GLKEffectPropertyLight.h>
@@ -105,7 +98,8 @@
 @class GLKEffectPropertyTexture;
 
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_8, 5_0)
+
+OPENGL_DEPRECATED(10.8,10.14) OPENGLES_DEPRECATED(ios(5.0,12.0), tvos(9.0,12.0))
 @interface GLKBaseEffect : NSObject <GLKNamedEffect>
 {
     @protected

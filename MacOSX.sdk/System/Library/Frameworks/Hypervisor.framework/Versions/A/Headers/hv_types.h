@@ -19,7 +19,12 @@ extern "C" {
  * @abstract   Options for hv_vm_create()
  */
 enum {
-	HV_VM_DEFAULT = (0ull << 0)
+	HV_VM_DEFAULT = (0ull << 0),
+	HV_VM_SPECIFY_MITIGATIONS = (1ull << 0),
+	HV_VM_MITIGATION_A_ENABLE = (1ull << 1),
+	HV_VM_MITIGATION_B_ENABLE = (1ull << 2),
+	HV_VM_MITIGATION_C_ENABLE = (1ull << 3),
+	HV_VM_MITIGATION_D_ENABLE = (1ull << 4)
 };
 
 typedef uint64_t hv_vm_options_t;

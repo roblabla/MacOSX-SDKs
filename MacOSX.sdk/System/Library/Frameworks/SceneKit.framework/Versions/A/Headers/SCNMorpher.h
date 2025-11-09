@@ -1,7 +1,8 @@
 //
 //  SCNMorpher.h
+//  SceneKit
 //
-//  Copyright (c) 2013-2017 Apple Inc. All rights reserved.
+//  Copyright © 2013-2018 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -20,7 +21,7 @@ typedef NS_ENUM(NSInteger, SCNMorpherCalculationMode) {
  @class SCNMorpher
  @abstract SCNMorpher controls the deformation of morphed geometries
  */
-API_AVAILABLE(macos(10.9))
+SCN_EXPORT API_AVAILABLE(macos(10.9))
 @interface SCNMorpher : NSObject <SCNAnimatable, NSSecureCoding>
 
 /*!
@@ -29,6 +30,12 @@ API_AVAILABLE(macos(10.9))
  @discussion The target geometries must have the same number of entries in their geometry sources and the same topology as the base geometry.
  */
 @property(nonatomic, copy) NSArray<SCNGeometry *> *targets;
+
+/*!
+ @property weights
+ @abstract Access to all the weights of all the targets.
+ */
+@property(nonatomic, retain) NSArray<NSNumber *> *weights API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
  @method setWeight:forTargetAtIndex:
@@ -60,11 +67,6 @@ API_AVAILABLE(macos(10.9))
  */
 @property(nonatomic) SCNMorpherCalculationMode calculationMode;
 
-/*!
- @property weights
- @abstract Access to all the weights of all the targets.
- */
-@property (nonatomic, retain) NSArray<NSNumber *> *weights API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
  @property unifiesNormals

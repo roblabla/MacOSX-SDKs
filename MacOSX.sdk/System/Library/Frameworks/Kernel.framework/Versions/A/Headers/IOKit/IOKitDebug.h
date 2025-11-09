@@ -91,6 +91,29 @@ enum {
 };
 
 enum {
+	kIOKitDebugUserOptions = 0
+                           | kIOLogAttach
+                           | kIOLogProbe
+                           | kIOLogStart
+                           | kIOLogRegister
+                           | kIOLogMatch
+                           | kIOLogConfig
+                           | kIOLogYield
+                           | kIOLogPower
+                           | kIOLogMapping
+                           | kIOLogCatalogue
+                           | kIOLogTracePower
+                           | kIOLogDebugPower
+                           | kOSLogRegistryMods
+                           | kIOLogPMRootDomain
+                           | kOSRegistryModsMode
+                           | kIOLogHibernate
+                           | kIOSleepWakeWdogOff
+                           | kIOKextSpinDump
+                           | kIOWaitQuietPanics
+};
+
+enum {
 	kIOTraceInterrupts		= 		0x00000001ULL,	// Trace primary interrupts
 	kIOTraceWorkLoops		=		0x00000002ULL,	// Trace workloop activity
 	kIOTraceEventSources	=		0x00000004ULL,	// Trace non-passive event sources
@@ -143,7 +166,9 @@ struct IOKitDiagnosticsParameters
     size_t    size;
     uint64_t  value;
     uint32_t  options;
-    uint32_t  reserved[3];
+    uint32_t  tag;
+    uint32_t  zsize;
+    uint32_t  reserved[8];
 };
 typedef struct IOKitDiagnosticsParameters IOKitDiagnosticsParameters;
 
@@ -166,72 +191,6 @@ struct IOTrackingCallSiteInfo
 #define kIOWireTrackingName	"IOWire"
 #define kIOMapTrackingName	"IOMap"
 
-#if KERNEL && IOTRACKING
-
-struct IOTrackingQueue;
-struct IOTrackingCallSite;
-
-struct IOTracking
-{
-    queue_chain_t        link;
-    IOTrackingCallSite * site;
-#if !defined(__LP64__)
-    uint32_t             flags;
-#endif
-};
-
-struct IOTrackingAddress
-{
-    IOTracking    tracking;
-    uintptr_t     address;
-    size_t        size;
-#if defined(__LP64__)
-    uint32_t      flags;
-#endif
-};
-
-struct IOTrackingUser
-{
-    queue_chain_t link;
-    pid_t         btPID;
-    uint8_t       user32;
-    uint8_t       userCount;
-    uintptr_t     bt[kIOTrackingCallSiteBTs];
-    uintptr_t     btUser[kIOTrackingCallSiteBTs];
-};
-
-enum
-{
-    kIOTrackingQueueTypeDefaultOn = 0x00000001,
-    kIOTrackingQueueTypeAlloc     = 0x00000002,
-    kIOTrackingQueueTypeMap       = 0x00000004,
-    kIOTrackingQueueTypeUser      = 0x00000008,
-};
-
-
-void              IOTrackingInit(void);
-IOTrackingQueue * IOTrackingQueueAlloc(const char * name, uintptr_t btEntry,
-					size_t allocSize, size_t minCaptureSize,
-					uint32_t type, uint32_t numSiteQs);
-void              IOTrackingQueueFree(IOTrackingQueue * head);
-void              IOTrackingAdd(IOTrackingQueue * head, IOTracking * mem, size_t size, bool address);
-void              IOTrackingRemove(IOTrackingQueue * head, IOTracking * mem, size_t size);
-void              IOTrackingAddUser(IOTrackingQueue * queue, IOTrackingUser * mem, vm_size_t size);
-void              IOTrackingRemoveUser(IOTrackingQueue * head, IOTrackingUser * tracking);
-
-void              IOTrackingAlloc(IOTrackingQueue * head, uintptr_t address, size_t size);
-void              IOTrackingFree(IOTrackingQueue * head, uintptr_t address, size_t size);
-void              IOTrackingReset(IOTrackingQueue * head);
-void              IOTrackingAccumSize(IOTrackingQueue * head, IOTracking * mem, size_t size);
-kern_return_t     IOTrackingDebug(uint32_t selector, uint32_t options,
-				  const char * names, size_t namesLen, 
-				  size_t size, OSObject ** result);
-
-extern IOTrackingQueue * gIOMallocTracking;
-extern IOTrackingQueue * gIOWireTracking;
-extern IOTrackingQueue * gIOMapTracking;
-
-#endif /* KERNEL && IOTRACKING */
 
 enum
 {

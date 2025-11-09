@@ -1,7 +1,7 @@
 /*
     NSPathControl.h
     Application Kit
-    Copyright (c) 2005-2017, Apple Inc.
+    Copyright (c) 2005-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -41,11 +41,11 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSPathControl : NSControl {
 @private
-    NSDragOperation _draggingSourceOperationMaskForLocal;
-    NSDragOperation _draggingSourceOperationMaskForNonLocal;
-    NSInteger _reserved __unused;
-    id _delegate;
-    id _pathAux;
+    NSDragOperation _draggingSourceOperationMaskForLocal APPKIT_IVAR;
+    NSDragOperation _draggingSourceOperationMaskForNonLocal APPKIT_IVAR;
+    NSInteger _reserved __unused APPKIT_IVAR;
+    id _delegate APPKIT_IVAR;
+    id _pathAux APPKIT_IVAR;
 }
 
 @property(getter=isEditable) BOOL editable NS_AVAILABLE_MAC(10_10);
@@ -133,14 +133,11 @@ NS_CLASS_AVAILABLE(10_5, NA)
 @end
 
 
-
 @interface NSPathControl (NSDeprecated)
 
-/* Access to a control's NSCells is deprecated in Mac OS X 10.10.
- */
-- (nullable NSPathComponentCell *)clickedPathComponentCell;  // Please use -[NSPathControl clickedPathItem] instead.
-- (NSArray<NSPathComponentCell *> *)pathComponentCells;                    // Please use -[NSPathControl pathItems] instead.
-- (void)setPathComponentCells:(NSArray<NSPathComponentCell *> *)cells;     // Please use -[NSPathControl setPathItems:] instead.
+- (nullable NSPathComponentCell *)clickedPathComponentCell NS_DEPRECATED_MAC(10_0, 10_14, "Use -clickedPathItem instead");
+- (NSArray<NSPathComponentCell *> *)pathComponentCells NS_DEPRECATED_MAC(10_0, 10_14, "Use -pathItems instead");
+- (void)setPathComponentCells:(NSArray<NSPathComponentCell *> *)cells NS_DEPRECATED_MAC(10_0, 10_14, "Use -setPathItems: instead");
 
 @end
 

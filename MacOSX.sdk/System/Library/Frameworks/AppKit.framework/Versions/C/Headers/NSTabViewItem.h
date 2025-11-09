@@ -1,7 +1,7 @@
 /*
     NSTabViewItem.h
     Application Kit
-    Copyright (c) 2000-2017, Apple Inc.
+    Copyright (c) 2000-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -22,16 +22,16 @@ typedef NS_ENUM(NSUInteger, NSTabState) {
 @interface NSTabViewItem : NSObject <NSCoding> {
 @private
     /* Persistent properties */
-    id			_identifier;
-    NSString		*__label;			// the label
-    NSView		*_view;				// view to be displayed
-    __weak NSView	*__initialFirstResponder;	// initial first responder for that view
-    NSColor		*__color;			// the color of the tab. By default [NSColor controlColor]
-    NSTabView		*_tabView;			// back pointer to the tabView. Could be nil.
+    id			_identifier APPKIT_IVAR;
+    NSString		*__label APPKIT_IVAR;			// the label
+    NSView		*_view APPKIT_IVAR;				// view to be displayed
+    __weak NSView	*__initialFirstResponder APPKIT_IVAR;	// initial first responder for that view
+    NSColor		*__color APPKIT_IVAR;			// the color of the tab. By default [NSColor controlColor]
+    NSTabView		*_tabView APPKIT_IVAR;			// back pointer to the tabView. Could be nil.
 
     /* Non-persistent properties */
-    NSTabState		_tabState;			// NSSelectedTab, NSBackgroundTab, or NSPressedTab
-    NSView		*_lastKeyView;			// The "last" view in this items keyboard loop
+    NSTabState		_tabState APPKIT_IVAR;			// NSSelectedTab, NSBackgroundTab, or NSPressedTab
+    NSView		*_lastKeyView APPKIT_IVAR;			// The "last" view in this items keyboard loop
 
     struct __tviFlags {
 	unsigned int hasCustomColor:1;			// YES if _color != [NSColor controlColor]
@@ -40,12 +40,12 @@ typedef NS_ENUM(NSUInteger, NSTabState) {
 	unsigned int isTabDisabled:1;
         unsigned int isActive:1;
 	unsigned int RESERVED:27;
-    } _tviFlags;
+    } _tviFlags APPKIT_IVAR;
     
-    NSSize		_labelSize;			// Cached label size. Valid if _labelSizeValid equal YES
-    NSRect		_tabRect;			// Cached tabRect
-    NSToolTipTag	_tabToolTipTag;			// Saved tool tip tag, for when text label is truncated.
-    id _auxiliaryStorage;
+    NSSize		_labelSize APPKIT_IVAR;			// Cached label size. Valid if _labelSizeValid equal YES
+    NSRect		_tabRect APPKIT_IVAR;			// Cached tabRect
+    NSToolTipTag	_tabToolTipTag APPKIT_IVAR;			// Saved tool tip tag, for when text label is truncated.
+    id _auxiliaryStorage APPKIT_IVAR;
 }
 
 /*!

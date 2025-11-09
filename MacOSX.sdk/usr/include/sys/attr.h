@@ -314,6 +314,8 @@ typedef struct vol_capabilities_attr {
  *
  * VOL_CAP_INT_CLONE: When set, the volume supports clones.
  *
+ * VOL_CAP_INT_SNAPSHOT: When set, the volume supports snapshots.
+ *
  * VOL_CAP_INT_RENAME_SWAP: When set, the volume supports swapping
  * file system objects.
  *
@@ -337,6 +339,7 @@ typedef struct vol_capabilities_attr {
 #define VOL_CAP_INT_NAMEDSTREAMS		0x00002000
 #define VOL_CAP_INT_EXTENDED_ATTR		0x00004000
 #define VOL_CAP_INT_CLONE			0x00010000
+#define VOL_CAP_INT_SNAPSHOT			0x00020000
 #define VOL_CAP_INT_RENAME_SWAP			0x00040000
 #define VOL_CAP_INT_RENAME_EXCL			0x00080000
 

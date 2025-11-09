@@ -7,6 +7,7 @@
 
 #import <Metal/MTLDevice.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 /*!
@@ -19,9 +20,9 @@ typedef NS_ENUM(NSUInteger, MTLMutability)
     MTLMutabilityDefault   = 0,
     MTLMutabilityMutable   = 1,
     MTLMutabilityImmutable = 2,
-} NS_ENUM_AVAILABLE(10_13, 11_0);
+} API_AVAILABLE(macos(10.13), ios(11.0));
 
-NS_CLASS_AVAILABLE(10_13, 11_0)
+MTL_EXPORT API_AVAILABLE(macos(10.13), ios(11.0))
 @interface MTLPipelineBufferDescriptor : NSObject <NSCopying>
 
 /*! Buffer mutability. Defaults to MTLMutabilityDefault: mutable for standard buffers, immutable for argument buffers */
@@ -29,7 +30,7 @@ NS_CLASS_AVAILABLE(10_13, 11_0)
 
 @end
 
-NS_CLASS_AVAILABLE(10_13, 11_0)
+MTL_EXPORT API_AVAILABLE(macos(10.13), ios(11.0))
 @interface MTLPipelineBufferDescriptorArray : NSObject
 /* Individual buffer descriptor access */
 - (MTLPipelineBufferDescriptor *)objectAtIndexedSubscript:(NSUInteger)bufferIndex;

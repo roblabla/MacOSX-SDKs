@@ -2,7 +2,7 @@
 //  GKTurnBasedMatch.h
 //  Game Center
 //
-//  Copyright 2010-2017 Apple Inc. All rights reserved.
+//  Copyright 2010-2018 Apple Inc. All rights reserved.
 //
 
 #import <GameKit/GKPlayer.h>
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 // If Game Center initiates a match the developer should create a GKTurnBasedMatch from playersToInvite and present a GKTurnbasedMatchmakerViewController.
-- (void)player:(GKPlayer *)player didRequestMatchWithOtherPlayers:(NSArray<GKPlayer *> *)playersToInvite NS_AVAILABLE(10_10, 8_0) __WATCHOS_PROHIBITED;
+- (void)player:(GKPlayer *)player didRequestMatchWithOtherPlayers:(NSArray<GKPlayer *> *)playersToInvite NS_AVAILABLE(10_10, 8_0) API_UNAVAILABLE(watchos);
 
 // called when it becomes this player's turn.  It also gets called under the following conditions:
 //      the player's turn has a timeout and it is about to expire.

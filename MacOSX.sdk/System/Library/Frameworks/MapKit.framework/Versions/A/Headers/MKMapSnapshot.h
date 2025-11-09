@@ -24,6 +24,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) __WATCHOS_PROHIBITED
 - (CGPoint)pointForCoordinate:(CLLocationCoordinate2D)coordinate;
 #else
 @property (nonatomic, readonly) NSImage *image;
+@property (nonatomic, readonly) NSAppearance *appearance API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios, tvos, watchos);
 - (NSPoint)pointForCoordinate:(CLLocationCoordinate2D)coordinate;
 #endif
 

@@ -1,5 +1,5 @@
 /*	NSExtensionItem.h
-        Copyright (c) 2013-2017, Apple Inc. All rights reserved.
+        Copyright (c) 2013-2018, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
@@ -18,8 +18,8 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 // (optional) content text
 @property(nullable, copy, NS_NONATOMIC_IOSONLY) NSAttributedString *attributedContentText;
 
-// (optional) Contains images, videos, URLs, etc. This is not meant to be an array of alternate data formats/types, but instead a collection to include in a social media post for example. These items are always typed NSItemProvider.
-@property(nullable, copy, NS_NONATOMIC_IOSONLY) NSArray *attachments;
+// (optional) Contains images, videos, URLs, etc. This is not meant to be an array of alternate data formats/types, but instead a collection to include in a social media post for example.
+@property(nullable, copy, NS_NONATOMIC_IOSONLY) NSArray<NSItemProvider *> *attachments;
 
 // (optional) dictionary of key-value data. The key/value pairs accepted by the service are expected to be specified in the extension's Info.plist. The values of NSExtensionItem's properties will be reflected into the dictionary.
 @property(nullable, copy, NS_NONATOMIC_IOSONLY) NSDictionary *userInfo;

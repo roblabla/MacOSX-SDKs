@@ -1,6 +1,6 @@
 /*
         NSParagraphStyle.h
-        Copyright (c) 1994-2017, Apple Inc.  All rights reserved.
+        Copyright (c) 1994-2018, Apple Inc.  All rights reserved.
  
 	NSParagraphStyle and NSMutableParagraphStyle hold paragraph style information
 	NSTextTab holds information about a single tab stop
@@ -15,7 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // NSTextTab
-typedef NSString * NSTextTabOptionKey NS_STRING_ENUM;
+typedef NSString * NSTextTabOptionKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSTextTabOptionKey  NSTabColumnTerminatorsAttributeName NS_AVAILABLE(10_0, 7_0); // An attribute for NSTextTab options.  The value is NSCharacterSet.  The character set is used to determine the tab column terminating character.  The tab and newline characters are implied even if not included in the character set.
 
 NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextTab : NSObject <NSCopying, NSCoding, NSSecureCoding>
@@ -28,9 +28,9 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextTab : NSObject <NSCopying, NSCodi
 #if __LP64__
         unsigned int :32;
 #endif
-    } _flags;
-    CGFloat _location;
-    id _reserved;
+    } _flags APPKIT_IVAR;
+    CGFloat _location APPKIT_IVAR;
+    id _reserved APPKIT_IVAR;
 }
 
 + (NSCharacterSet *)columnTerminatorsForLocale:(nullable NSLocale *)aLocale NS_AVAILABLE(10_11, 7_0); // Returns the column terminators for locale. Passing nil returns an instance corresponding to +[NSLocale systemLocale]. For matching user's formatting preferences, pass +[NSLocale currentLocale]. Can be used as the value for NSTabColumnTerminatorsAttributeName to make a decimal tab stop.
@@ -58,14 +58,14 @@ typedef NS_ENUM(NSUInteger, NSLineBreakMode) {
 NS_CLASS_AVAILABLE(10_0, 6_0) @interface NSParagraphStyle : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 {
     /*All instance variables are private*/
-    CGFloat _lineSpacing;
-    CGFloat _paragraphSpacing;
-    CGFloat _headIndent;
-    CGFloat _tailIndent;
-    CGFloat _firstLineHeadIndent;
-    CGFloat _minimumLineHeight;
-    CGFloat _maximumLineHeight;
-    NSArray *_tabStops;
+    CGFloat _lineSpacing APPKIT_IVAR;
+    CGFloat _paragraphSpacing APPKIT_IVAR;
+    CGFloat _headIndent APPKIT_IVAR;
+    CGFloat _tailIndent APPKIT_IVAR;
+    CGFloat _firstLineHeadIndent APPKIT_IVAR;
+    CGFloat _minimumLineHeight APPKIT_IVAR;
+    CGFloat _maximumLineHeight APPKIT_IVAR;
+    NSArray *_tabStops APPKIT_IVAR;
     struct {
         NSTextAlignment alignment:4;
         NSLineBreakMode lineBreakMode:4;
@@ -78,9 +78,9 @@ NS_CLASS_AVAILABLE(10_0, 6_0) @interface NSParagraphStyle : NSObject <NSCopying,
 #if __LP64__
         unsigned int :32;
 #endif
-    } _flags;
-    CGFloat _defaultTabInterval;
-    id _extraData;
+    } _flags APPKIT_IVAR;
+    CGFloat _defaultTabInterval APPKIT_IVAR;
+    id _extraData APPKIT_IVAR;
 }
 
 @property (class, readonly, copy) NSParagraphStyle *defaultParagraphStyle; // This class property returns a shared and cached NSParagraphStyle instance with the default style settings, with same value as the result of [[NSParagraphStyle alloc] init].

@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
 	
-	Copyright 2007-2017 Apple Inc. All rights reserved.
+	Copyright 2007-2018 Apple Inc. All rights reserved.
 	
 	Standard Video Toolbox compression properties.
 */
@@ -145,6 +145,20 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowTemporalCompression A
 		True by default.  Set this to false to prevent frame reordering.
 */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowFrameReordering API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/Write, CFBoolean, Optional, defaults to true
+
+/*!
+	@constant	kVTCompressionPropertyKey_AllowOpenGOP
+	@abstract
+		Enables Open GOP (Group Of Pictures) encoding.
+	@discussion
+		Only applicable to certain video encoders.  For HEVC encoding the property value is kCFBooleanTrue by default - which means
+		that the encoder may use Open GOP structures, but it is not guaranteed to.
+		Set this to kCFBooleanFalse to prevent the encoder from using any form of Open GOP during encoding.
+		If set to kCFBooleanFalse, this will mean that the encoder will generate groups of pictures that are independently decodable; there
+		will be no frame dependencies across sync samples (frames where kCMSampleAttachmentKey_NotSync is absent or kCFBooleanFalse)
+		When the value is kCFBooleanTrue, the encoder may use Open GOP frame dependency structures to increase compression efficiency or quality.
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowOpenGOP API_AVAILABLE(macosx(10.14), ios(12.0), tvos(12.0)); // Read/Write, CFBoolean, Optional
 
 #pragma mark Rate control
 
@@ -359,6 +373,19 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxH264SliceBytes API_AVAI
 		By default, this property is NULL, indicating unknown.  
 */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RealTime API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2)); // Read/write, CFBoolean or NULL, Optional, default NULL
+
+/*!
+	@constant	kVTCompressionPropertyKey_MaximizePowerEfficiency
+	@abstract
+ 		Hints to the video encoder that it should maximize power efficiency during encode.
+	@discussion
+		For compression where the client is operating in the background, clients may set this property to kCFBooleanTrue, which indicates that
+		the encoder can take steps to minimize impact on power usage and other system activity.
+		Setting the property to NULL is equivalent to setting it to kCFBooleanFalse.
+ 		Not all video encoders support this property
+		By default, this property is NULL.
+ */
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaximizePowerEfficiency API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)); // Read/write, CFBoolean or NULL, Optional, default is false
 
 
 #pragma mark Hints

@@ -27,29 +27,29 @@ typedef NS_ENUM(NSUInteger, MTLPatchType) {
     MTLPatchTypeNone = 0,
     MTLPatchTypeTriangle = 1,
     MTLPatchTypeQuad = 2,
-} NS_ENUM_AVAILABLE(10_12, 10_0);
+} API_AVAILABLE(macos(10.12), ios(10.0));
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLVertexAttribute : NSObject
 
-@property (nullable, readonly) NSString          *name;
+@property (readonly) NSString                    *name;
 @property (readonly) NSUInteger                   attributeIndex;
-@property (readonly) MTLDataType                  attributeType NS_AVAILABLE(10_11, 8_3);
+@property (readonly) MTLDataType                  attributeType API_AVAILABLE(macos(10.11), ios(8.3));
 @property (readonly, getter=isActive) BOOL        active;
-@property (readonly, getter=isPatchData) BOOL              patchData NS_AVAILABLE(10_12, 10_0);
-@property (readonly, getter=isPatchControlPointData) BOOL  patchControlPointData NS_AVAILABLE(10_12, 10_0);
+@property (readonly, getter=isPatchData) BOOL              patchData API_AVAILABLE(macos(10.12), ios(10.0));
+@property (readonly, getter=isPatchControlPointData) BOOL  patchControlPointData API_AVAILABLE(macos(10.12), ios(10.0));
 
 @end
 
-NS_CLASS_AVAILABLE(10_12, 10_0)
+MTL_EXPORT API_AVAILABLE(macos(10.12), ios(10.0))
 @interface MTLAttribute : NSObject
 
-@property (nullable, readonly) NSString          *name;
+@property (readonly) NSString                    *name;
 @property (readonly) NSUInteger                   attributeIndex;
 @property (readonly) MTLDataType                  attributeType;
 @property (readonly, getter=isActive) BOOL        active;
-@property (readonly, getter=isPatchData) BOOL              patchData NS_AVAILABLE(10_12, 10_0);
-@property (readonly, getter=isPatchControlPointData) BOOL  patchControlPointData NS_AVAILABLE(10_12, 10_0);
+@property (readonly, getter=isPatchData) BOOL              patchData API_AVAILABLE(macos(10.12), ios(10.0));
+@property (readonly, getter=isPatchControlPointData) BOOL  patchControlPointData API_AVAILABLE(macos(10.12), ios(10.0));
 
 @end
 
@@ -71,14 +71,14 @@ typedef NS_ENUM(NSUInteger, MTLFunctionType) {
     MTLFunctionTypeVertex = 1,
     MTLFunctionTypeFragment = 2,
     MTLFunctionTypeKernel = 3,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 
 /*!
  @interface MTLFunctionConstant
  @abstract describe an uberShader constant used by the function
  */
-NS_CLASS_AVAILABLE(10_12, 10_0)
+MTL_EXPORT API_AVAILABLE(macos(10.12), ios(10.0))
 @interface MTLFunctionConstant : NSObject
 
 @property (readonly) NSString *name;
@@ -93,14 +93,14 @@ NS_CLASS_AVAILABLE(10_12, 10_0)
  @abstract A handle to to intermediate code used as inputs for either a MTLComputePipelineState or a MTLRenderPipelineState.
  @discussion MTLFunction is a single vertex shader, fragment shader, or compute function.  A Function can only be used with the device that it was created against.
 */
-NS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0))
 @protocol MTLFunction <NSObject>
 
 /*!
  @property label
  @abstract A string to help identify this object.
  */
-@property (nullable, copy, atomic) NSString *label  NS_AVAILABLE(10_12, 10_0);
+@property (nullable, copy, atomic) NSString *label  API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*!
  @property device
@@ -118,14 +118,14 @@ NS_AVAILABLE(10_11, 8_0)
  @property patchType
  @abstract Returns the patch type. MTLPatchTypeNone if it is not a post tessellation vertex shader.
  */
-@property (readonly) MTLPatchType patchType NS_AVAILABLE(10_12, 10_0);
+@property (readonly) MTLPatchType patchType API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*!
  @property patchControlPointCount
  @abstract Returns the number of patch control points if it was specified in the shader. Returns -1 if it
  was not specified.
  */
-@property (readonly) NSInteger patchControlPointCount NS_AVAILABLE(10_12, 10_0);
+@property (readonly) NSInteger patchControlPointCount API_AVAILABLE(macos(10.12), ios(10.0));
 
 @property (nullable, readonly) NSArray <MTLVertexAttribute *> *vertexAttributes;
 
@@ -133,7 +133,7 @@ NS_AVAILABLE(10_11, 8_0)
  @property stageInputAttributes
  @abstract Returns an array describing the attributes
  */
-@property (nullable, readonly) NSArray <MTLAttribute *> *stageInputAttributes NS_AVAILABLE(10_12, 10_0);
+@property (nullable, readonly) NSArray <MTLAttribute *> *stageInputAttributes API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*!
  @property name
@@ -145,34 +145,35 @@ NS_AVAILABLE(10_11, 8_0)
  @property functionConstantsDictionary
  @abstract A dictionary containing information about all function contents, keyed by the constant names.
  */
-@property (readonly) NSDictionary<NSString *, MTLFunctionConstant *> *functionConstantsDictionary NS_AVAILABLE(10_12, 10_0);
+@property (readonly) NSDictionary<NSString *, MTLFunctionConstant *> *functionConstantsDictionary API_AVAILABLE(macos(10.12), ios(10.0));
 
 
 /*!
  * @method newArgumentEncoderWithBufferIndex:
  * @abstract Creates an argument encoder which will encode arguments matching the layout of the argument buffer at the given bind point index.
  */
-- (id <MTLArgumentEncoder>)newArgumentEncoderWithBufferIndex:(NSUInteger)bufferIndex NS_AVAILABLE(10_13, 11_0);
+- (id <MTLArgumentEncoder>)newArgumentEncoderWithBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  * @method newArgumentEncoderWithBufferIndex:
  * @abstract Creates an argument encoder which will encode arguments matching the layout of the argument buffer at the given bind point index.
  */
 - (id <MTLArgumentEncoder>)newArgumentEncoderWithBufferIndex:(NSUInteger)bufferIndex
-                                                                  reflection:(MTLAutoreleasedArgument * __nullable)reflection NS_AVAILABLE(10_13, 11_0);
+                                                                  reflection:(MTLAutoreleasedArgument * __nullable)reflection API_AVAILABLE(macos(10.13), ios(11.0));
 
 
 @end
 
 typedef NS_ENUM(NSUInteger, MTLLanguageVersion) {
 
-    MTLLanguageVersion1_0 NS_ENUM_AVAILABLE(NA, 9_0) = (1 << 16),
-    MTLLanguageVersion1_1 NS_ENUM_AVAILABLE(10_11, 9_0) = (1 << 16) + 1,
-    MTLLanguageVersion1_2 NS_ENUM_AVAILABLE(10_12, 10_0) = (1 << 16) + 2,
-    MTLLanguageVersion2_0 NS_ENUM_AVAILABLE(10_13, NA) = (2 << 16),
-} NS_ENUM_AVAILABLE(10_11, 9_0);
+    MTLLanguageVersion1_0 API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos) = (1 << 16),
+    MTLLanguageVersion1_1 API_AVAILABLE(macos(10.11), ios(9.0)) = (1 << 16) + 1,
+    MTLLanguageVersion1_2 API_AVAILABLE(macos(10.12), ios(10.0)) = (1 << 16) + 2,
+    MTLLanguageVersion2_0 API_AVAILABLE(macos(10.13), ios(11.0)) = (2 << 16),
+    MTLLanguageVersion2_1 API_AVAILABLE(macos(10.14), ios(12.0)) = (2 << 16) + 1,
+} API_AVAILABLE(macos(10.11), ios(9.0));
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLCompileOptions : NSObject <NSCopying>
 
 // Pre-processor options
@@ -196,7 +197,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  @property languageVersion
  @abstract set the metal language version used to interpret the source.
  */
-@property (readwrite, nonatomic) MTLLanguageVersion languageVersion NS_AVAILABLE(10_11, 9_0);
+@property (readwrite, nonatomic) MTLLanguageVersion languageVersion API_AVAILABLE(macos(10.11), ios(9.0));
 
 @end
 
@@ -204,7 +205,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  @constant MTLLibraryErrorDomain
  @abstract NSErrors raised when creating a library.
  */
-NS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0))
 MTL_EXTERN NSString *const MTLLibraryErrorDomain;
 
 /*!
@@ -216,11 +217,11 @@ typedef NS_ENUM(NSUInteger, MTLLibraryError) {
     MTLLibraryErrorInternal         = 2,
     MTLLibraryErrorCompileFailure   = 3,
     MTLLibraryErrorCompileWarning   = 4,
-    MTLLibraryErrorFunctionNotFound NS_AVAILABLE(10_12, 10_0) = 5,
-    MTLLibraryErrorFileNotFound NS_AVAILABLE(10_12, 10_0) = 6,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+    MTLLibraryErrorFunctionNotFound API_AVAILABLE(macos(10.12), ios(10.0)) = 5,
+    MTLLibraryErrorFileNotFound API_AVAILABLE(macos(10.12), ios(10.0)) = 6,
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
-NS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0))
 @protocol MTLLibrary <NSObject>
 
 /*!
@@ -248,7 +249,7 @@ NS_AVAILABLE(10_11, 8_0)
  avoid waiting on the compiler.
  */
 - (nullable id <MTLFunction>) newFunctionWithName:(NSString *)name constantValues:(MTLFunctionConstantValues *)constantValues
-					error:(__autoreleasing NSError **)error NS_AVAILABLE(10_12, 10_0);
+					error:(__autoreleasing NSError **)error API_AVAILABLE(macos(10.12), ios(10.0));
 
 
 /*!
@@ -257,7 +258,7 @@ NS_AVAILABLE(10_11, 8_0)
  @discussion This method is asynchronous since it is will call the compiler.
  */
 - (void) newFunctionWithName:(NSString *)name constantValues:(MTLFunctionConstantValues *)constantValues
-			completionHandler:(void (^)(id<MTLFunction> __nullable function, NSError* error))completionHandler NS_AVAILABLE(10_12, 10_0);
+			completionHandler:(void (^)(id<MTLFunction> __nullable function, NSError* error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*!
  @property functionNames

@@ -3,9 +3,9 @@
  
      Contains:   Algebraic and logical operations on large operands.
  
-     Version:    vecLib-622.0
+     Version:    vecLib-671.220
  
-     Copyright:  Copyright (c) 1999-2017 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 1999-2018 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -25,7 +25,7 @@
 */
 #include "vecLibTypes.h"
 
-#include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -579,7 +579,7 @@ vU256Divide(
   const vU256       *divisor,
   vU256             *result,
   vU256 * __nullable remainder)
-    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -596,7 +596,7 @@ vS256Divide(
   const vS256       *divisor,
   vS256             *result,
   vS256 * __nullable remainder)
-    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -613,7 +613,7 @@ vU512Divide(
   const vU512       *divisor,
   vU512             *result,
   vU512 * __nullable remainder)
-    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -630,7 +630,7 @@ vS512Divide(
   const vS512       *divisor,
   vS512             *result,
   vS512 * __nullable remainder)
-    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -647,7 +647,7 @@ vU1024Divide(
   const vU1024       *divisor,
   vU1024             *result,
   vU1024 * __nullable remainder)
-    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -664,7 +664,7 @@ vS1024Divide(
   const vS1024       *divisor,
   vS1024             *result,
   vS1024 * __nullable remainder)
-    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 
@@ -686,7 +686,7 @@ extern void
 vU128FullMultiply(
   const vU128 *  a,
   const vU128 *  b,
-  vU256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -701,7 +701,7 @@ extern void
 vS128FullMultiply(
   const vS128 *  a,
   const vS128 *  b,
-  vS256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -716,7 +716,7 @@ extern void
 vU256FullMultiply(
   const vU256 *  a,
   const vU256 *  b,
-  vU512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -731,7 +731,7 @@ extern void
 vS256FullMultiply(
   const vS256 *  a,
   const vS256 *  b,
-  vS512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -746,7 +746,7 @@ extern void
 vU512FullMultiply(
   const vU512 *  a,
   const vU512 *  b,
-  vU1024 *       result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU1024 *       result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -761,7 +761,7 @@ extern void
 vS512FullMultiply(
   const vS512 *  a,
   const vS512 *  b,
-  vS1024 *       result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS1024 *       result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -776,7 +776,7 @@ extern void
 vU256HalfMultiply(
   const vU256 *  a,
   const vU256 *  b,
-  vU256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -791,7 +791,7 @@ extern void
 vS256HalfMultiply(
   const vS256 *  a,
   const vS256 *  b,
-  vS256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -806,7 +806,7 @@ extern void
 vU512HalfMultiply(
   const vU512 *  a,
   const vU512 *  b,
-  vU512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -821,7 +821,7 @@ extern void
 vS512HalfMultiply(
   const vS512 *  a,
   const vS512 *  b,
-  vS512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -836,7 +836,7 @@ extern void
 vU1024HalfMultiply(
   const vU1024 *  a,
   const vU1024 *  b,
-  vU1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -851,7 +851,7 @@ extern void
 vS1024HalfMultiply(
   const vS1024 *  a,
   const vS1024 *  b,
-  vS1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 
@@ -873,7 +873,7 @@ extern void
 vU256Sub(
   const vU256 *  a,
   const vU256 *  b,
-  vU256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -888,7 +888,7 @@ extern void
 vS256Sub(
   const vS256 *  a,
   const vS256 *  b,
-  vS256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -903,7 +903,7 @@ extern void
 vU256SubS(
   const vU256 *  a,
   const vU256 *  b,
-  vU256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -918,7 +918,7 @@ extern void
 vS256SubS(
   const vS256 *  a,
   const vS256 *  b,
-  vS256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -933,7 +933,7 @@ extern void
 vU512Sub(
   const vU512 *  a,
   const vU512 *  b,
-  vU512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -948,7 +948,7 @@ extern void
 vS512Sub(
   const vS512 *  a,
   const vS512 *  b,
-  vS512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -963,7 +963,7 @@ extern void
 vU512SubS(
   const vU512 *  a,
   const vU512 *  b,
-  vU512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -978,7 +978,7 @@ extern void
 vS512SubS(
   const vS512 *  a,
   const vS512 *  b,
-  vS512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -993,7 +993,7 @@ extern void
 vU1024Sub(
   const vU1024 *  a,
   const vU1024 *  b,
-  vU1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1008,7 +1008,7 @@ extern void
 vS1024Sub(
   const vS1024 *  a,
   const vS1024 *  b,
-  vS1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1023,7 +1023,7 @@ extern void
 vU1024SubS(
   const vU1024 *  a,
   const vU1024 *  b,
-  vU1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1038,7 +1038,7 @@ extern void
 vS1024SubS(
   const vS1024 *  a,
   const vS1024 *  b,
-  vS1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 
@@ -1059,7 +1059,7 @@ vS1024SubS(
 extern void 
 vU256Neg(
   const vU256 *  a,
-  vU256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1073,7 +1073,7 @@ vU256Neg(
 extern void 
 vS256Neg(
   const vS256 *  a,
-  vS256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1087,7 +1087,7 @@ vS256Neg(
 extern void 
 vU512Neg(
   const vU512 *  a,
-  vU512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1101,7 +1101,7 @@ vU512Neg(
 extern void 
 vS512Neg(
   const vS512 *  a,
-  vS512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1115,7 +1115,7 @@ vS512Neg(
 extern void 
 vU1024Neg(
   const vU1024 *  a,
-  vU1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1129,7 +1129,7 @@ vU1024Neg(
 extern void 
 vS1024Neg(
   const vS1024 *  a,
-  vS1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 
@@ -1151,7 +1151,7 @@ extern void
 vU256Add(
   const vU256 *  a,
   const vU256 *  b,
-  vU256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1166,7 +1166,7 @@ extern void
 vS256Add(
   const vS256 *  a,
   const vS256 *  b,
-  vS256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1181,7 +1181,7 @@ extern void
 vU256AddS(
   const vU256 *  a,
   const vU256 *  b,
-  vU256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1196,7 +1196,7 @@ extern void
 vS256AddS(
   const vS256 *  a,
   const vS256 *  b,
-  vS256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1211,7 +1211,7 @@ extern void
 vU512Add(
   const vU512 *  a,
   const vU512 *  b,
-  vU512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1226,7 +1226,7 @@ extern void
 vS512Add(
   const vS512 *  a,
   const vS512 *  b,
-  vS512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1241,7 +1241,7 @@ extern void
 vU512AddS(
   const vU512 *  a,
   const vU512 *  b,
-  vU512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1256,7 +1256,7 @@ extern void
 vS512AddS(
   const vS512 *  a,
   const vS512 *  b,
-  vS512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1271,7 +1271,7 @@ extern void
 vU1024Add(
   const vU1024 *  a,
   const vU1024 *  b,
-  vU1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1286,7 +1286,7 @@ extern void
 vS1024Add(
   const vS1024 *  a,
   const vS1024 *  b,
-  vS1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1301,7 +1301,7 @@ extern void
 vU1024AddS(
   const vU1024 *  a,
   const vU1024 *  b,
-  vU1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1316,7 +1316,7 @@ extern void
 vS1024AddS(
   const vS1024 *  a,
   const vS1024 *  b,
-  vS1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 
@@ -1338,7 +1338,7 @@ extern void
 vU256Mod(
   const vU256 *  numerator,
   const vU256 *  divisor,
-  vU256 *        remainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU256 *        remainder) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1353,7 +1353,7 @@ extern void
 vS256Mod(
   const vS256 *  numerator,
   const vS256 *  divisor,
-  vS256 *        remainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS256 *        remainder) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1368,7 +1368,7 @@ extern void
 vU512Mod(
   const vU512 *  numerator,
   const vU512 *  divisor,
-  vU512 *        remainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU512 *        remainder) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1383,7 +1383,7 @@ extern void
 vS512Mod(
   const vS512 *  numerator,
   const vS512 *  divisor,
-  vS512 *        remainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS512 *        remainder) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1398,7 +1398,7 @@ extern void
 vU1024Mod(
   const vU1024 *  numerator,
   const vU1024 *  divisor,
-  vU1024 *        remainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU1024 *        remainder) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1413,7 +1413,7 @@ extern void
 vS1024Mod(
   const vS1024 *  numerator,
   const vS1024 *  divisor,
-  vS1024 *        remainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS1024 *        remainder) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 
@@ -1435,7 +1435,7 @@ extern void
 vLL256Shift(
   const vU256 *  a,
   uint32_t       shiftAmount,
-  vU256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1450,7 +1450,7 @@ extern void
 vLL512Shift(
   const vU512 *  a,
   uint32_t       shiftAmount,
-  vU512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1465,7 +1465,7 @@ extern void
 vLL1024Shift(
   const vU1024 *  a,
   uint32_t        shiftAmount,
-  vU1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1480,7 +1480,7 @@ extern void
 vLR256Shift(
   const vU256 *  a,
   uint32_t       shiftAmount,
-  vU256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1495,7 +1495,7 @@ extern void
 vLR512Shift(
   const vU512 *  a,
   uint32_t       shiftAmount,
-  vU512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1510,7 +1510,7 @@ extern void
 vLR1024Shift(
   const vU1024 *  a,
   uint32_t        shiftAmount,
-  vU1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1525,7 +1525,7 @@ extern void
 vA256Shift(
   const vS256 *  a,
   uint32_t       shiftAmount,
-  vS256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1540,7 +1540,7 @@ extern void
 vA512Shift(
   const vS512 *  a,
   uint32_t       shiftAmount,
-  vS512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1555,7 +1555,7 @@ extern void
 vA1024Shift(
   const vS1024 *  a,
   uint32_t        shiftAmount,
-  vS1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vS1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 
@@ -1577,7 +1577,7 @@ extern void
 vL256Rotate(
   const vU256 *  a,
   uint32_t       rotateAmount,
-  vU256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1592,7 +1592,7 @@ extern void
 vL512Rotate(
   const vU512 *  a,
   uint32_t       rotateAmount,
-  vU512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1607,7 +1607,7 @@ extern void
 vL1024Rotate(
   const vU1024 *  a,
   uint32_t        rotateAmount,
-  vU1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1622,7 +1622,7 @@ extern void
 vR256Rotate(
   const vU256 *  a,
   uint32_t       rotateAmount,
-  vU256 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU256 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1637,7 +1637,7 @@ extern void
 vR512Rotate(
   const vU512 *  a,
   uint32_t       rotateAmount,
-  vU512 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU512 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 /*
@@ -1652,7 +1652,7 @@ extern void
 vR1024Rotate(
   const vU1024 *  a,
   uint32_t        rotateAmount,
-  vU1024 *        result) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vU1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 
 #endif  // defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__

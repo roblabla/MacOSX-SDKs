@@ -1,7 +1,7 @@
 /*
         NSResponder.h
         Application Kit
-        Copyright (c) 1994-2017, Apple Inc.
+        Copyright (c) 1994-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSResponder : NSObject <NSCoding>
 {
     /*All instance variables are private*/
-    id _nextResponder;
+    id _nextResponder APPKIT_IVAR;
 }
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -108,9 +108,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable id)supplementalTargetForAction:(SEL)action sender:(nullable id)sender NS_AVAILABLE_MAC(10_7);
 @end
 
-@interface NSResponder (NSStandardKeyBindingMethods)
-
-// This category contains a large number of methods intended for use as key binding commands.  NSResponder does not implement any of them.  NSTextView implements a certain subset of them (see the NSTextView.h header).  Your responder subclasses can implement any that make sense.  You can make up your own as well, but you should use these if the concepts map.  If your view is key and uses key binding and the user types a key sequence which is bound to a command which is not implemented in your class, it is OK, nothing will happen by default.
+/* This protocol contains a large number of methods intended for use as key binding commands.  NSResponder does not implement any of them.  NSTextView implements a certain subset of them (see the NSTextView.h header).  Your responder subclasses can implement any that make sense.  You can make up your own as well, but you should use these if the concepts map.  If your view is key and uses key binding and the user types a key sequence which is bound to a command which is not implemented in your class, it is OK, nothing will happen by default.
+*/
+@protocol NSStandardKeyBindingResponding <NSObject>
+@optional
 
 /************************* Key binding entry-points *************************/
 
@@ -259,6 +260,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface NSResponder (NSStandardKeyBindingMethods) <NSStandardKeyBindingResponding>
+@end
+
 @interface NSResponder(NSUndoSupport)
 @property (nullable, readonly, strong) NSUndoManager *undoManager;
 @end
@@ -335,9 +339,7 @@ You can override this method to customize the presentation of errors by examinin
 
 @interface NSResponder(NSDeprecated)
 
-/* This method is deprecated in 10.8 and higher. Historically it has always returned NO and not done anything on MacOS.
- */
-- (BOOL)performMnemonic:(NSString *)string NS_DEPRECATED_MAC(10_0, 10_8);
+- (BOOL)performMnemonic:(NSString *)string NS_DEPRECATED_MAC(10_0, 10_8, "This has always returned NO and had no effect on macOS");
 
 @end
 

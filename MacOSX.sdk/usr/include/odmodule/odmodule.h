@@ -24,6 +24,10 @@
 #if !defined(__ODMODULE_H)
 #define __ODMODULE_H
 
+#include <stdint.h>
+#include <xpc/xpc.h>
+#include <odmodule/odtypes.h>
+
 enum {
 	eODModuleTypeSession		= 1L << 0,
 	eODModuleTypeAuthentication	= 1L << 1,

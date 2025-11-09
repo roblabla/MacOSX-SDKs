@@ -67,3 +67,4 @@ extern NSString* kQuartzFilterManagerDidAddFilterNotification;
 extern NSString* kQuartzFilterManagerDidRemoveFilterNotification;
 extern NSString* kQuartzFilterManagerDidModifyFilterNotification;
 extern NSString* kQuartzFilterManagerDidSelectFilterNotification;
+

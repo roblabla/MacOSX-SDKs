@@ -1,13 +1,14 @@
 /*
         NSMovie.h
         Application Kit
-        Copyright (c) 2000-2017, Apple Inc.
+        Copyright (c) 2000-2018, Apple Inc.
         All rights reserved.
 */
 
 // Please note that NSMovie and NSMovieView are deprecated. These classes still exist in 32-bit, but only limited functionality for NSMovie is provided in 64-bit. This minimal functionality will allow you to correctly read and write archives containing NSMovie's in 64-bit. You can also access a QTMovie instance created from the movie data in the NSMovie archive (64-bit only). This is provided as a means for backwards compatibility only. Please transition to using QTMovie as soon as possible.
 
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKitDefines.h>
 
 @class NSPasteboard, NSURL;
 
@@ -24,15 +25,15 @@ NS_CLASS_DEPRECATED_MAC(10_0, 10_5, "Use QTMovie instead")
 #endif
 
   @private
-    void*    _movie;
-    NSURL*   _url;
+    void*    _movie APPKIT_IVAR;
+    NSURL*   _url APPKIT_IVAR;
 #ifndef __OBJC2__
     struct {
-	int dispose:1;
-	int reserved:31;
+	int dispose:1 APPKIT_IVAR;
+	int reserved:31 APPKIT_IVAR;
     } _movieFlags;
-    long     _reserved1;
-    long     _reserved2;
+    long     _reserved1 APPKIT_IVAR;
+    long     _reserved2 APPKIT_IVAR;
 #endif
 }
 

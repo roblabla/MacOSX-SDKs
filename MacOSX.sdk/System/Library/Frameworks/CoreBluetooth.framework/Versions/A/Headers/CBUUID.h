@@ -128,7 +128,7 @@ CB_EXTERN_CLASS @interface CBUUID : NSObject <NSCopying>
  * @method UUIDWithNSUUID:
  *
  *  @discussion
- *      Creates a CBUUID with a NSUUID.
+ *      Creates a CBUUID with an NSUUID.
  *
  */
 + (CBUUID *)UUIDWithNSUUID:(NSUUID *)theUUID NS_AVAILABLE(10_9, 7_0);

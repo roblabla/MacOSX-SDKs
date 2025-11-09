@@ -6,6 +6,7 @@
 //
 
 #import <Vision/VNRequest.h>
+#import <Vision/VNTypes.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -29,14 +30,16 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @property (class, nonatomic, readonly, copy) NSArray<VNBarcodeSymbology> *supportedSymbologies;
 
 
-
-
 /*!
 	@discussion The collection of barcode symbologies that are to be detected in the image.  The default is to scan for all possible symbologies.
 */
 @property (readwrite, nonatomic, copy) NSArray<VNBarcodeSymbology> *symbologies;
 
 @end
+
+
+API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0))
+static const NSUInteger VNDetectBarcodesRequestRevision1 = 1;
 
 
 NS_ASSUME_NONNULL_END

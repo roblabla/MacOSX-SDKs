@@ -1,12 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 969E213F-00CD-347B-991E-C04B348B9844', 'x86_64: 9C9FC234-FEB9-313A-A247-AFD592B9A1FA' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 276725E7-B84C-3C32-A7E8-A440DD411ED8' ]
 platform:        macosx
 install-name:    /usr/lib/libgmalloc.dylib
 current-version: 109
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _GM_malloc_fork_child, _GM_malloc_fork_parent, _GM_malloc_fork_prepare, 
                        _GMcalloc, _GMfree, _GMmalloc, _GMmalloc_create_zone, _GMmalloc_default_purgeable_zone, 
                        _GMmalloc_default_zone, _GMmalloc_good_size, _GMmalloc_make_nonpurgeable, 

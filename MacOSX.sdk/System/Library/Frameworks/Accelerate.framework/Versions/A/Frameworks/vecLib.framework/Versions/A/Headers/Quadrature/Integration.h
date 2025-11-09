@@ -9,10 +9,7 @@
 #if __has_include( <Availability.h> )
 #include <Availability.h>
 #else
-#define __OSX_AVAILABLE(a)
-#define __IOS_AVAILABLE(a)
-#define __TVOS_AVAILABLE(a)
-#define __WATCHOS_AVAILABLE(a)
+#define __API_AVAILABLE(...)
 #endif
 
 // Nullability
@@ -180,14 +177,11 @@ extern double quadrature_integrate(const quadrature_integrate_function * __f,
                                    double * _Nullable abs_error,
                                    size_t workspace_size,
                                    void * __restrict _Nullable workspace)
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0);
+__API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
 // Availability
 #if !__has_include(<Availability.h>)
-#undef __OSX_AVAILABLE
-#undef __IOS_AVAILABLE
-#undef __TVOS_AVAILABLE
-#undef __WATCHOS_AVAILABLE
+#undef __API_AVAILABLE
 #endif
 
 // Nullability

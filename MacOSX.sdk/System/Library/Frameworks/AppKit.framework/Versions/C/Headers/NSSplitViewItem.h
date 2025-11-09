@@ -1,7 +1,7 @@
 /*
     NSSplitViewItem.h
     Application Kit
-    Copyright (c) 2014-2017, Apple Inc.
+    Copyright (c) 2014-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -41,7 +41,7 @@ APPKIT_EXTERN const CGFloat NSSplitViewItemUnspecifiedDimension NS_AVAILABLE_MAC
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface NSSplitViewItem : NSObject <NSAnimatablePropertyContainer, NSCoding> {
 @private
-    id _splitViewItemPrivateData;
+    id _splitViewItemPrivateData APPKIT_IVAR;
     struct {
         unsigned int _collapsed:1;
         unsigned int _canCollapse:1;
@@ -50,7 +50,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
         unsigned int _springLoaded:1;
         unsigned int _forceWithinWindowBlending:1;
         unsigned int _reserved:26;
-    } _flags;
+    } _flags APPKIT_IVAR;
 }
 
 /*!

@@ -1,7 +1,7 @@
 /*
 	NSFormCell.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,11 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSFormCell : NSActionCell
 {
     /*All instance variables are private*/
-    CGFloat	_titleWidth;
-    id		_titleCell;
-    CGFloat	_titleEndPoint;
+    CGFloat	_titleWidth APPKIT_IVAR;
+    id		_titleCell APPKIT_IVAR;
+    CGFloat	_titleEndPoint APPKIT_IVAR;
 #if __LP64__
-    CGFloat    _preferredTextFieldWidth;
+    CGFloat    _preferredTextFieldWidth APPKIT_IVAR;
 #endif
 }
 

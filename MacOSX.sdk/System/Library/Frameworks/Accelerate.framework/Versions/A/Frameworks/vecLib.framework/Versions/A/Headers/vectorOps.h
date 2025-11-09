@@ -3,9 +3,9 @@
  
      Contains:   vector and matrix functions for AltiVec
  
-     Version:    vecLib-622.0
+     Version:    vecLib-671.220
  
-     Copyright:  Copyright (c) 1999-2017 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 1999-2018 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -25,7 +25,7 @@
 */
 #include "vecLibTypes.h"
 
-#include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -85,7 +85,9 @@ extern "C" {
 extern int32_t 
 vIsamax(
   int32_t        count,
-  const vFloat   *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x)
+  API_DEPRECATED("Use cblas_isamax or vDSP_maxmgvi instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -108,7 +110,9 @@ vIsamax(
 extern int32_t 
 vIsamin(
   int32_t        count,
-  const vFloat   *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x)
+  API_DEPRECATED("Use vDSP_minmgvi instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -131,7 +135,9 @@ vIsamin(
 extern int32_t 
 vIsmax(
   int32_t        count,
-  const vFloat   *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x)
+  API_DEPRECATED("Use vDSP_maxvi instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -154,7 +160,9 @@ vIsmax(
 extern int32_t 
 vIsmin(
   int32_t        count,
-  const vFloat   *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x)
+  API_DEPRECATED("Use vDSP_minvi instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -177,7 +185,9 @@ vIsmin(
 extern float 
 vSasum(
   int32_t        count,
-  const vFloat   *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x)
+  API_DEPRECATED("Use cblas_sasum or vDSP_svemg instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -200,7 +210,9 @@ vSasum(
 extern float 
 vSsum(
   int32_t        count,
-  const vFloat   *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x)
+  API_DEPRECATED("Use vDSP_sve instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -229,7 +241,9 @@ vSaxpy(
   int32_t        n,
   float          alpha,
   const vFloat   *x,
-  vFloat         *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *y)
+  API_DEPRECATED("Use cblas_saxpy instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -253,7 +267,9 @@ extern void
 vScopy(
   int32_t        n,
   const vFloat   *x,
-  vFloat         *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *y)
+  API_DEPRECATED("Use cblas_scopy or memcpy instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -276,7 +292,9 @@ extern float
 vSdot(
   int32_t        n,
   const vFloat   *x,
-  const vFloat   *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *y)
+  API_DEPRECATED("Use cblas_sdot or vDSP_dotpr instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -307,7 +325,9 @@ vSnaxpy(
   int32_t        m,
   const vFloat   *a,
   const vFloat   *x,
-  vFloat         *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *y)
+  API_DEPRECATED("Use cblas_saxpy in a loop instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -348,7 +368,9 @@ vSndot(
   float          *s,
   int32_t        isw,
   const vFloat   *x,
-  const vFloat   *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *y)
+  API_DEPRECATED("Use cblas_sdot or vDSP_dotpr in a loop instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -371,7 +393,9 @@ vSndot(
 extern float 
 vSnrm2(
   int32_t        count,
-  const vFloat   *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x)
+  API_DEPRECATED("Use cblas_snrm2 instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -393,7 +417,9 @@ vSnrm2(
 extern float 
 vSnorm2(
   int32_t        count,
-  const vFloat   *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  const vFloat   *x)
+  API_DEPRECATED("Use cblas_snrm2 instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -426,7 +452,9 @@ vSrot(
   vFloat    *x,
   vFloat    *y,
   float     c,
-  float     s) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  float     s)
+  API_DEPRECATED("Use cblas_srot instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -452,7 +480,9 @@ extern void
 vSscal(
   int32_t   n,
   float     alpha,
-  vFloat    *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat    *x)
+  API_DEPRECATED("Use cblas_sscal instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -477,7 +507,9 @@ extern void
 vSswap(
   int32_t   n,
   vFloat    *x,
-  vFloat    *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat    *y)
+  API_DEPRECATED("Use cblas_sswap instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -505,7 +537,9 @@ vSyax(
   int32_t        n,
   float          alpha,
   const vFloat   *x,
-  vFloat         *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *y)
+  API_DEPRECATED("Use vDSP_vsmul instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -537,7 +571,9 @@ vSzaxpy(
   float          alpha,
   const vFloat   *x,
   const vFloat   *y,
-  vFloat         *z) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *z)
+  API_DEPRECATED("Use vDSP_vsma instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -599,7 +635,9 @@ vSgemv(
   const vFloat   *a,
   const vFloat   *x,
   float          beta,
-  vFloat         *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *y)
+  API_DEPRECATED("Use cblas_sgemv instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -637,7 +675,9 @@ vSgemx(
   float          alpha,
   const vFloat   *a,
   const vFloat   *x,
-  vFloat         *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *y)
+  API_DEPRECATED("Use cblas_sgemv instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -675,7 +715,9 @@ vSgemtx(
   float          alpha,
   const vFloat   *a,
   const vFloat   *x,
-  vFloat         *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *y)
+  API_DEPRECATED("Use cblas_sgemv instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -739,7 +781,9 @@ vSgeadd(
   char           forma,
   const vFloat   *b,
   char           formb,
-  vFloat         *c) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *c)
+  API_DEPRECATED("Use appleblas_sgeadd instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -796,7 +840,9 @@ vSgesub(
   char           forma,
   const vFloat   *b,
   char           formb,
-  vFloat         *c) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *c)
+  API_DEPRECATED("Use appleblas_sgeadd instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -856,7 +902,9 @@ vSgemul(
   char           forma,
   const vFloat   *b,
   char           formb,
-  vFloat         *matrix) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *matrix)
+  API_DEPRECATED("Use cblas_sgemm instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -926,7 +974,9 @@ vSgemm(
   vFloat         *c,
   float          alpha,
   float          beta,
-  vFloat         *matrix) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *matrix)
+  API_DEPRECATED("Use cblas_sgemm instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -948,7 +998,9 @@ vSgemm(
 extern void 
 vSgetmi(
   int32_t   size,
-  vFloat    *x) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat    *x)
+  API_DEPRECATED("Use appleblas_sgeadd instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -974,7 +1026,9 @@ vSgetmo(
   int32_t        height,
   int32_t        width,
   const vFloat   *x,
-  vFloat         *y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *y)
+  API_DEPRECATED("Use appleblas_sgeadd instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -1014,7 +1068,9 @@ vSgevv(
   int32_t        n,
   const vFloat   *A,
   const vFloat   *B,
-  vFloat         *M) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vFloat         *M)
+  API_DEPRECATED("Use cblas_sger on a zero matrix instead", macos(10.0, 10.14))
+  API_UNAVAILABLE(ios, tvos, watchos);
 
 
 #endif	// defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE__

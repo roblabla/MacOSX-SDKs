@@ -91,5 +91,4 @@ typedef mach_port_t		vm_named_entry_t;
 
 #define UPL_NULL		((upl_t) 0)
 #define VM_NAMED_ENTRY_NULL	((vm_named_entry_t) 0)
-
 #endif	/* _MACH_VM_TYPES_H_ */

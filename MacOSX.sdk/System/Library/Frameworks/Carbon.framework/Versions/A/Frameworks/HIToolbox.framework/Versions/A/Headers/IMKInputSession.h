@@ -21,6 +21,7 @@
 #ifdef __OBJC__
 
 #import <Foundation/Foundation.h>
+#import <HIToolbox/TextServices.h>
 
 
 /*!

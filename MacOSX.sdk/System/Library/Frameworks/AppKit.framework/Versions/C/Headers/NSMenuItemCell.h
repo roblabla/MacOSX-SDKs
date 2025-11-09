@@ -1,7 +1,7 @@
 /*
         NSMenuItemCell.h
         Application Kit
-        Copyright (c) 1997-2017, Apple Inc.
+        Copyright (c) 1997-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -18,14 +18,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSMenuItemCell : NSButtonCell {
     /*All instance variables are private*/
     @private
-    id _extraData;
-    NSSize _stateImageSize;
-    NSSize _imageSize;
-    NSSize _titleSize;
+    id _extraData APPKIT_IVAR;
+    NSSize _stateImageSize APPKIT_IVAR;
+    NSSize _imageSize APPKIT_IVAR;
+    NSSize _titleSize APPKIT_IVAR;
 #if ! __LP64__
-    NSSize _keyEquivalentSize;
+    NSSize _keyEquivalentSize APPKIT_IVAR;
 #endif
-    NSSize _size;
+    NSSize _size APPKIT_IVAR;
     struct __micFlags {
         unsigned int needsSizing:1;
         unsigned int reserved:1;
@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int keyEquivGlyphWidth:16;
 	unsigned int uniqueAgainstMain:1;
         unsigned int RESERVED:12;
-    } _micFlags;
+    } _micFlags APPKIT_IVAR;
 }
 
 - (instancetype)initTextCell:(NSString *)string NS_DESIGNATED_INITIALIZER;
@@ -42,8 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, strong) NSMenuItem *menuItem;
 
 #if ! __LP64__
-- (void)setMenuView:(NSMenuView *)menuView;
-- (NSMenuView *)menuView;
+- (void)setMenuView:(nullable NSMenuView *)menuView;
+- (nullable NSMenuView *)menuView;
 #endif
 
 @property BOOL needsSizing;

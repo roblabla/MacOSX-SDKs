@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger, INIntentHandlingStatus) {
     INIntentHandlingStatusSuccess,
     INIntentHandlingStatusFailure,
     INIntentHandlingStatusDeferredToApplication,
+    INIntentHandlingStatusUserConfirmationRequired API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)),
 } API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2));
 
 typedef NS_ENUM(NSInteger, INInteractionDirection) {

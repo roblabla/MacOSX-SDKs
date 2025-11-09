@@ -2,7 +2,7 @@
  *  CTRun.h
  *  CoreText
  *
- *  Copyright (c) 2004-2017 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2018 Apple Inc. All rights reserved.
  *
  */
 
@@ -18,8 +18,9 @@
 #define __CTRUN__
 
 #include <CoreText/CTDefines.h>
-#include <CoreFoundation/CFDictionary.h>
-#include <CoreGraphics/CGContext.h>
+
+#include <CoreFoundation/CoreFoundation.h>
+#include <CoreGraphics/CoreGraphics.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
@@ -151,7 +152,7 @@ CTRunStatus CTRunGetStatus(
     @result     A valid pointer to an array of CGGlyph structures or NULL.
 */
 
-const CGGlyph * __nullable CTRunGetGlyphsPtr(
+const CGGlyph * _Nullable CTRunGetGlyphsPtr(
     CTRunRef run ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
@@ -198,7 +199,7 @@ void CTRunGetGlyphs(
     @result     A valid pointer to an array of CGPoint structures or NULL.
 */
 
-const CGPoint * __nullable CTRunGetPositionsPtr(
+const CGPoint * _Nullable CTRunGetPositionsPtr(
     CTRunRef run ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
@@ -251,7 +252,7 @@ void CTRunGetPositions(
     @result     A valid pointer to an array of CGSize structures or NULL.
 */
 
-const CGSize * __nullable CTRunGetAdvancesPtr(
+const CGSize * _Nullable CTRunGetAdvancesPtr(
     CTRunRef run ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
@@ -300,7 +301,7 @@ void CTRunGetAdvances(
     @result     A valid pointer to an array of CFIndex structures or NULL.
 */
 
-const CFIndex * __nullable CTRunGetStringIndicesPtr(
+const CFIndex * _Nullable CTRunGetStringIndicesPtr(
     CTRunRef run ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
@@ -381,9 +382,9 @@ CFRange CTRunGetStringRange(
 double CTRunGetTypographicBounds(
     CTRunRef run,
     CFRange range,
-    CGFloat * __nullable ascent,
-    CGFloat * __nullable descent,
-    CGFloat * __nullable leading ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+    CGFloat * _Nullable ascent,
+    CGFloat * _Nullable descent,
+    CGFloat * _Nullable leading ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -423,7 +424,7 @@ double CTRunGetTypographicBounds(
 
 CGRect CTRunGetImageBounds(
     CTRunRef run,
-    CGContextRef __nullable context,
+    CGContextRef _Nullable context,
     CFRange range ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 

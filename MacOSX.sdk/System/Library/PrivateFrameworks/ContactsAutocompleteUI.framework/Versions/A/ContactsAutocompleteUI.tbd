@@ -1,20 +1,22 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 24A8A9E2-4B2E-38D1-94FB-B58B6709B6D9' ]
+uuids:           [ 'x86_64: 64F22704-22D4-37E5-950F-F087C6511876' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/ContactsAutocompleteUI.framework/Versions/A/ContactsAutocompleteUI
 current-version: 0
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _AutcompleteColumnAccount, _AutcompleteColumnIcon, _AutcompleteColumnIdentifier, 
-                       _AutcompleteColumnName, _CNViewIsAutocompleteHeaderView, _MFComposeRecipientStringMatchAddress, 
+    symbols:         [ _CNAutocompleteColumnAccount, _CNAutocompleteColumnIcon, _CNAutocompleteColumnIdentifier, 
+                       _CNAutocompleteColumnName, _CNAutocompleteMinWindowWidth, 
+                       _CNViewIsAutocompleteHeaderView, _MFComposeRecipientStringMatchAddress, 
                        _MFComposeRecipientStringMatchFirstName, _MFComposeRecipientStringMatchLastName, 
                        _MFComposeRecipientStringMatchMiddleName, _MFComposeRecipientStringMatchType ]
-    objc-classes:    [ _CNAutocompleteGroupResultNamer, _CNAutocompleteHeaderView, 
-                       _CNAutocompleteResultFormatter, _CNAutocompleteResultIconView, 
-                       _CNAutocompleteResultNamer, _CNAutocompleteResultPartitioner, 
-                       _CNAutocompleteResultTable, _CNAutocompleteResultView, _CNAutocompleteResultWindow, 
-                       _CNAutocompleteResultWindowBase, _CNAutocompleteRowView, _CNAutocompleteSortsGroupMembers, 
-                       _CNAutocompleteUIDelegateWrapper, _CNAutocompleteUIModeler, 
-                       _CNExtendedAutocompleteResultWindow, _CNStringRearranger ]
+    objc-classes:    [ CNAutocompleteColorRepository, CNAutocompleteGroupResultNamer, 
+                       CNAutocompleteHeaderView, CNAutocompleteResultFormatter, CNAutocompleteResultIconView, 
+                       CNAutocompleteResultNamer, CNAutocompleteResultPartitioner, 
+                       CNAutocompleteResultTableView, CNAutocompleteResultView, CNAutocompleteResultWindow, 
+                       CNAutocompleteResultWindowBase, CNAutocompleteRowView, CNAutocompleteSeparatorView, 
+                       CNAutocompleteSortsGroupMembers, CNAutocompleteUIDelegateWrapper, 
+                       CNAutocompleteUIModeler, CNExtendedAutocompleteResultWindow, 
+                       CNStringRearranger ]
 ...

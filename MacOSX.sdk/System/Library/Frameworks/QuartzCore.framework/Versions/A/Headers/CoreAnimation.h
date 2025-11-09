@@ -1,6 +1,6 @@
 /* CoreAnimation - CoreAnimation.h
 
-   Copyright (c) 2006-2017, Apple Inc.
+   Copyright (c) 2006-2018, Apple Inc.
    All rights reserved. */
 
 #ifndef COREANIMATION_H

@@ -14,6 +14,12 @@ NS_CLASS_AVAILABLE(10_13, NA)
 
 @property (nonatomic, readonly) NSData *projectExtensionData;
 
+/**
+ Property to determine if a project preview was previously set.
+ Use -[PHProjectChangeRequest setProjectPreviewImage:] to set a project preview.
+ */
+@property (nonatomic, readonly) BOOL hasProjectPreview API_AVAILABLE(macos(10.14));
+
 @end
 
 NS_ASSUME_NONNULL_END

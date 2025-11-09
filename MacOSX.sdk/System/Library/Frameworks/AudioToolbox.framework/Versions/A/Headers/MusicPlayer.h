@@ -283,9 +283,38 @@ typedef struct AUPresetEvent
 } AUPresetEvent;
 
 
-	CF_ASSUME_NONNULL_END
-	#include <AudioToolbox/CoreAudioClock.h>
-	CF_ASSUME_NONNULL_BEGIN
+/*!
+	@struct		CABarBeatTime
+	@abstract	A display representation of a musical time in beats.
+	
+	@field	bar
+				A measure number.
+	@field	beat
+				A beat number (1..n).
+	@field	subbeat
+				The numerator of the fractional number of beats.
+	@field	subbeatDivisor
+				The denominator of the fractional number of beats.
+	@field	reserved
+				Must be 0.
+	@discussion
+				A clock's internal representation of musical time is in beats based on the
+				beginning of the timeline. Normally, such times should be displayed to the user
+				in terms of bars, beats, and subbeats (sometimes called "units" or "parts per
+				quarter" [PPQ]). This data structure is such a display representation.
+
+				By convention, bar 1 is the beginning of the sequence. Beat 1 is the first beat
+				of the measure. In 4/4 time, beat will have a value from 1 to 4. Music
+				applications often use beat divisions such as 480 and 960.
+*/
+struct CABarBeatTime {
+	SInt32				bar;
+	UInt16				beat;
+	UInt16				subbeat;
+	UInt16				subbeatDivisor;
+	UInt16				reserved;
+};
+typedef struct CABarBeatTime CABarBeatTime;
 
 typedef struct OpaqueMusicPlayer		*MusicPlayer;
 typedef struct OpaqueMusicSequence		*MusicSequence;
@@ -429,7 +458,7 @@ typedef struct MusicTrackLoopInfo
 	@param		outPlayer	the newly created player
 */
 extern OSStatus
-NewMusicPlayer(			MusicPlayer	__nullable * __nonnull outPlayer)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+NewMusicPlayer(			MusicPlayer	__nullable * __nonnull outPlayer)			API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	DisposeMusicPlayer
@@ -437,7 +466,7 @@ NewMusicPlayer(			MusicPlayer	__nullable * __nonnull outPlayer)			__OSX_AVAILABL
 	@param		inPlayer	the player to dispose
 */
 extern OSStatus
-DisposeMusicPlayer(		MusicPlayer		inPlayer)								__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+DisposeMusicPlayer(		MusicPlayer		inPlayer)								API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -450,7 +479,7 @@ DisposeMusicPlayer(		MusicPlayer		inPlayer)								__OSX_AVAILABLE_STARTING(__MA
 */
 extern OSStatus
 MusicPlayerSetSequence(	MusicPlayer 	inPlayer,
-						MusicSequence __nullable inSequence)					__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						MusicSequence __nullable inSequence)					API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicPlayerGetSequence
@@ -462,7 +491,7 @@ MusicPlayerSetSequence(	MusicPlayer 	inPlayer,
 */
 extern OSStatus
 MusicPlayerGetSequence(	MusicPlayer 	inPlayer,
-						MusicSequence __nullable * __nonnull outSequence)		__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_5_0);
+						MusicSequence __nullable * __nonnull outSequence)		API_AVAILABLE(macos(10.3), ios(5.0), watchos(2.0), tvos(9.0));
 								
 /*!
 	@function	MusicPlayerSetTime
@@ -476,7 +505,7 @@ MusicPlayerGetSequence(	MusicPlayer 	inPlayer,
 */
 extern OSStatus
 MusicPlayerSetTime(		MusicPlayer 	inPlayer,
-						MusicTimeStamp 	inTime)									__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						MusicTimeStamp 	inTime)									API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicPlayerGetTime
@@ -488,7 +517,7 @@ MusicPlayerSetTime(		MusicPlayer 	inPlayer,
 */
 extern OSStatus
 MusicPlayerGetTime(		MusicPlayer 	inPlayer,
-						MusicTimeStamp	*outTime)								__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						MusicTimeStamp	*outTime)								API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicPlayerGetHostTimeForBeats
@@ -506,7 +535,7 @@ MusicPlayerGetTime(		MusicPlayer 	inPlayer,
 extern OSStatus
 MusicPlayerGetHostTimeForBeats(	MusicPlayer 	inPlayer,
 								MusicTimeStamp	inBeats,
-								UInt64 *		outHostTime)					__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_5_0);
+								UInt64 *		outHostTime)					API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicPlayerGetBeatsForHostTime
@@ -524,7 +553,7 @@ MusicPlayerGetHostTimeForBeats(	MusicPlayer 	inPlayer,
 extern OSStatus
 MusicPlayerGetBeatsForHostTime(	MusicPlayer 	inPlayer,
 								UInt64			inHostTime,
-								MusicTimeStamp *outBeats)						__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_5_0);
+								MusicTimeStamp *outBeats)						API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicPlayerPreroll
@@ -534,7 +563,7 @@ MusicPlayerGetBeatsForHostTime(	MusicPlayer 	inPlayer,
 	@param		inPlayer	the player
 */
 extern OSStatus
-MusicPlayerPreroll(		MusicPlayer 	inPlayer)								__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+MusicPlayerPreroll(		MusicPlayer 	inPlayer)								API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicPlayerStart
@@ -543,7 +572,7 @@ MusicPlayerPreroll(		MusicPlayer 	inPlayer)								__OSX_AVAILABLE_STARTING(__MA
 	@param		inPlayer	the player
 */
 extern OSStatus
-MusicPlayerStart(		MusicPlayer 	inPlayer)								__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+MusicPlayerStart(		MusicPlayer 	inPlayer)								API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicPlayerStop
@@ -551,7 +580,7 @@ MusicPlayerStart(		MusicPlayer 	inPlayer)								__OSX_AVAILABLE_STARTING(__MAC_
 	@param		inPlayer	the player
 */
 extern OSStatus
-MusicPlayerStop(		MusicPlayer 	inPlayer)								__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+MusicPlayerStop(		MusicPlayer 	inPlayer)								API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 // 
 /*!
@@ -566,7 +595,7 @@ MusicPlayerStop(		MusicPlayer 	inPlayer)								__OSX_AVAILABLE_STARTING(__MAC_1
 */
 extern OSStatus
 MusicPlayerIsPlaying(	MusicPlayer 	inPlayer,
-						Boolean *		outIsPlaying)							__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_5_0);
+						Boolean *		outIsPlaying)							API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicPlayerSetPlayRateScalar
@@ -577,7 +606,7 @@ MusicPlayerIsPlaying(	MusicPlayer 	inPlayer,
 */
 extern OSStatus
 MusicPlayerSetPlayRateScalar(	MusicPlayer		inPlayer,
-								Float64			inScaleRate)					__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_5_0);
+								Float64			inScaleRate)					API_AVAILABLE(macos(10.3), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicPlayerGetPlayRateScalar
@@ -587,7 +616,7 @@ MusicPlayerSetPlayRateScalar(	MusicPlayer		inPlayer,
 */
 extern OSStatus
 MusicPlayerGetPlayRateScalar(	MusicPlayer		inPlayer,
-								Float64 *		outScaleRate)					__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_5_0);
+								Float64 *		outScaleRate)					API_AVAILABLE(macos(10.3), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 //=====================================================================================================================
@@ -612,7 +641,7 @@ MusicPlayerGetPlayRateScalar(	MusicPlayer		inPlayer,
 	@param		outSequence		the new sequence
 */
 extern OSStatus
-NewMusicSequence(	MusicSequence __nullable * __nonnull outSequence)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+NewMusicSequence(	MusicSequence __nullable * __nonnull outSequence)			API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	DisposeMusicSequence
@@ -621,7 +650,7 @@ NewMusicSequence(	MusicSequence __nullable * __nonnull outSequence)			__OSX_AVAI
 	@param		inSequence		the sequence
 */
 extern OSStatus
-DisposeMusicSequence(		MusicSequence		inSequence)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+DisposeMusicSequence(		MusicSequence		inSequence)						API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceNewTrack
@@ -631,7 +660,7 @@ DisposeMusicSequence(		MusicSequence		inSequence)						__OSX_AVAILABLE_STARTING(
 */
 extern OSStatus
 MusicSequenceNewTrack(		MusicSequence 		inSequence,
-							MusicTrack __nullable * __nonnull outTrack)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+							MusicTrack __nullable * __nonnull outTrack)			API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 													
 /*!
 	@function	MusicSequenceDisposeTrack
@@ -641,7 +670,7 @@ MusicSequenceNewTrack(		MusicSequence 		inSequence,
 */
 extern OSStatus
 MusicSequenceDisposeTrack(	MusicSequence 		inSequence,
-							MusicTrack 			inTrack)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+							MusicTrack 			inTrack)						API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceGetTrackCount
@@ -652,7 +681,7 @@ MusicSequenceDisposeTrack(	MusicSequence 		inSequence,
 */
 extern OSStatus
 MusicSequenceGetTrackCount(	MusicSequence 		inSequence,
-							UInt32 				*outNumberOfTracks)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+							UInt32 				*outNumberOfTracks)				API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 										
 /*!
 	@function	MusicSequenceGetIndTrack
@@ -666,7 +695,7 @@ MusicSequenceGetTrackCount(	MusicSequence 		inSequence,
 extern OSStatus
 MusicSequenceGetIndTrack(	MusicSequence 						inSequence,
 							UInt32 								inTrackIndex,
-							MusicTrack __nullable * __nonnull	outTrack)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+							MusicTrack __nullable * __nonnull	outTrack)		API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceGetTrackIndex
@@ -680,7 +709,7 @@ MusicSequenceGetIndTrack(	MusicSequence 						inSequence,
 extern OSStatus
 MusicSequenceGetTrackIndex(	MusicSequence 		inSequence,
 							MusicTrack 			inTrack,
-							UInt32				*outTrackIndex)					__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+							UInt32				*outTrackIndex)					API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceGetTempoTrack
@@ -693,7 +722,7 @@ MusicSequenceGetTrackIndex(	MusicSequence 		inSequence,
 */
 extern OSStatus
 MusicSequenceGetTempoTrack(	MusicSequence						inSequence,
-							MusicTrack __nullable * __nonnull	outTrack)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_5_0);
+							MusicTrack __nullable * __nonnull	outTrack)		API_AVAILABLE(macos(10.1), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -710,7 +739,7 @@ MusicSequenceGetTempoTrack(	MusicSequence						inSequence,
 */
 extern OSStatus
 MusicSequenceSetAUGraph(	MusicSequence 	   inSequence,
-							AUGraph __nullable inGraph)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+							AUGraph __nullable inGraph)							API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -729,7 +758,7 @@ MusicSequenceSetAUGraph(	MusicSequence 	   inSequence,
 */
 extern OSStatus
 MusicSequenceGetAUGraph(	MusicSequence 					inSequence,
-							AUGraph __nullable * __nonnull	outGraph)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+							AUGraph __nullable * __nonnull	outGraph)			API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceSetMIDIEndpoint
@@ -742,7 +771,7 @@ MusicSequenceGetAUGraph(	MusicSequence 					inSequence,
 */
 extern OSStatus
 MusicSequenceSetMIDIEndpoint(	MusicSequence 	inSequence,
-								MIDIEndpointRef	inEndpoint)						__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_5_0) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+								MIDIEndpointRef	inEndpoint)						API_AVAILABLE(macos(10.1), ios(5.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 	
 /*!
 	@function	MusicSequenceSetSequenceType
@@ -771,7 +800,7 @@ MusicSequenceSetMIDIEndpoint(	MusicSequence 	inSequence,
 */
 extern OSStatus
 MusicSequenceSetSequenceType(	MusicSequence		inSequence,
-							MusicSequenceType		inType)						__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+							MusicSequenceType		inType)						API_AVAILABLE(macos(10.5), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceGetSequenceType
@@ -782,7 +811,7 @@ MusicSequenceSetSequenceType(	MusicSequence		inSequence,
 */
 extern OSStatus
 MusicSequenceGetSequenceType(	MusicSequence		inSequence,
-							MusicSequenceType * 	outType)					__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+							MusicSequenceType * 	outType)					API_AVAILABLE(macos(10.5), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -799,7 +828,7 @@ extern OSStatus
 MusicSequenceFileLoad (MusicSequence				inSequence,
 						CFURLRef					inFileRef,
 						MusicSequenceFileTypeID		inFileTypeHint, // can be zero in many cases
-						MusicSequenceLoadFlags		inFlags)					__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+						MusicSequenceLoadFlags		inFlags)					API_AVAILABLE(macos(10.5), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceFileLoadData
@@ -816,7 +845,7 @@ extern OSStatus
 MusicSequenceFileLoadData (MusicSequence			inSequence,
 						CFDataRef					inData,
 						MusicSequenceFileTypeID		inFileTypeHint, // can be zero in many cases
-						MusicSequenceLoadFlags		inFlags)					__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+						MusicSequenceLoadFlags		inFlags)					API_AVAILABLE(macos(10.5), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceSetSMPTEResolution
@@ -902,7 +931,7 @@ MusicSequenceFileCreate (MusicSequence				inSequence,
 						CFURLRef					inFileRef,
 						MusicSequenceFileTypeID		inFileType,
 						MusicSequenceFileFlags		inFlags,
-						SInt16						inResolution)				__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+						SInt16						inResolution)				API_AVAILABLE(macos(10.5), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceFileCreateData
@@ -921,7 +950,7 @@ MusicSequenceFileCreateData (MusicSequence					inSequence,
 						MusicSequenceFileTypeID				inFileType,
 						MusicSequenceFileFlags				inFlags,
 						SInt16								inResolution,
-						CFDataRef __nullable * __nonnull	outData)			__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+						CFDataRef __nullable * __nonnull	outData)			API_AVAILABLE(macos(10.5), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -930,7 +959,7 @@ MusicSequenceFileCreateData (MusicSequence					inSequence,
 	@param		inSequence		the sequence
 */
 extern OSStatus
-MusicSequenceReverse(		MusicSequence	inSequence)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+MusicSequenceReverse(		MusicSequence	inSequence)							API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceGetSecondsForBeats
@@ -943,7 +972,7 @@ MusicSequenceReverse(		MusicSequence	inSequence)							__OSX_AVAILABLE_STARTING(
 extern OSStatus
 MusicSequenceGetSecondsForBeats(	MusicSequence		inSequence,
 									MusicTimeStamp		inBeats,
-									Float64 *			outSeconds)				__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_5_0);
+									Float64 *			outSeconds)				API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceGetBeatsForSeconds
@@ -956,7 +985,7 @@ MusicSequenceGetSecondsForBeats(	MusicSequence		inSequence,
 extern OSStatus
 MusicSequenceGetBeatsForSeconds(	MusicSequence		inSequence,
 									Float64				inSeconds,
-									MusicTimeStamp *	outBeats)				__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_5_0);
+									MusicTimeStamp *	outBeats)				API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceSetUserCallback
@@ -984,12 +1013,12 @@ MusicSequenceGetBeatsForSeconds(	MusicSequence		inSequence,
 extern OSStatus
 MusicSequenceSetUserCallback(	MusicSequence							inSequence,
 								MusicSequenceUserCallback __nullable	inCallback,
-								void * __nullable						inClientData)		__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_5_0);
+								void * __nullable						inClientData)		API_AVAILABLE(macos(10.3), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceBeatsToBarBeatTime
 	@abstract	Convenience function to format a sequence's beat time to its bar-beat time
-	@discussion	see <AudioToolbox/CAClock.h>. The sequence's tempo track Time Sig events are used to 
+	@discussion	The sequence's tempo track Time Sig events are used to
 				to calculate the bar-beat representation. If there are no Time Sig events added to the sequence
 				4/4 is assumed. A Time Sig event is a MIDI Meta Event as specified for MIDI files.
 	@param		inSequence		the sequence
@@ -1001,12 +1030,12 @@ extern OSStatus
 MusicSequenceBeatsToBarBeatTime(MusicSequence				inSequence,
 								MusicTimeStamp				inBeats,
 								UInt32						inSubbeatDivisor,
-								CABarBeatTime *				outBarBeatTime)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+								CABarBeatTime *				outBarBeatTime)		API_AVAILABLE(macos(10.5), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceBarBeatTimeToBeats
 	@abstract	Convenience function to format a bar-beat time to a sequence's beat time
-	@discussion	see <AudioToolbox/CAClock.h>. The sequence's tempo track Time Sig events are used to 
+	@discussion	The sequence's tempo track Time Sig events are used to
 				to calculate the bar-beat representation. If there are no Time Sig events added to the sequence
 				4/4 is assumed. A Time Sig event is a MIDI Meta Event as specified for MIDI files.
 	@param		inSequence		the sequence
@@ -1016,7 +1045,7 @@ MusicSequenceBeatsToBarBeatTime(MusicSequence				inSequence,
 extern OSStatus
 MusicSequenceBarBeatTimeToBeats(MusicSequence				inSequence,
 								const CABarBeatTime *		inBarBeatTime,
-								MusicTimeStamp *			outBeats)			__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+								MusicTimeStamp *			outBeats)			API_AVAILABLE(macos(10.5), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceGetInfoDictionary
@@ -1033,7 +1062,7 @@ MusicSequenceBarBeatTimeToBeats(MusicSequence				inSequence,
 CF_IMPLICIT_BRIDGING_ENABLED
 
 extern CFDictionaryRef
-MusicSequenceGetInfoDictionary(	MusicSequence				inSequence)			__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+MusicSequenceGetInfoDictionary(	MusicSequence				inSequence)			API_AVAILABLE(macos(10.5), ios(5.0), watchos(2.0), tvos(9.0));
 
 CF_IMPLICIT_BRIDGING_DISABLED
 
@@ -1054,7 +1083,7 @@ CF_IMPLICIT_BRIDGING_DISABLED
 */
 extern OSStatus
 MusicTrackGetSequence(	MusicTrack 			inTrack,
-						MusicSequence __nullable * __nonnull outSequence)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						MusicSequence __nullable * __nonnull outSequence)		API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicTrackSetDestNode
@@ -1066,7 +1095,7 @@ MusicTrackGetSequence(	MusicTrack 			inTrack,
 */
 extern OSStatus
 MusicTrackSetDestNode(	MusicTrack 			inTrack,
-						AUNode				inNode)								__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						AUNode				inNode)								API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicTrackSetDestMIDIEndpoint
@@ -1077,7 +1106,7 @@ MusicTrackSetDestNode(	MusicTrack 			inTrack,
 */
 extern OSStatus
 MusicTrackSetDestMIDIEndpoint(	MusicTrack			inTrack,
-								MIDIEndpointRef		inEndpoint)					__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_5_0) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+								MIDIEndpointRef		inEndpoint)					API_AVAILABLE(macos(10.1), ios(5.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 	
 /*!
 	@function	MusicTrackGetDestNode
@@ -1089,7 +1118,7 @@ MusicTrackSetDestMIDIEndpoint(	MusicTrack			inTrack,
 */
 extern OSStatus
 MusicTrackGetDestNode(			MusicTrack 			inTrack,
-								AUNode *			outNode)					__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_5_0);
+								AUNode *			outNode)					API_AVAILABLE(macos(10.1), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicTrackGetDestMIDIEndpoint
@@ -1101,7 +1130,7 @@ MusicTrackGetDestNode(			MusicTrack 			inTrack,
 */
 extern OSStatus
 MusicTrackGetDestMIDIEndpoint(	MusicTrack			inTrack,
-								MIDIEndpointRef	*	outEndpoint)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_5_0) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+								MIDIEndpointRef	*	outEndpoint)				API_AVAILABLE(macos(10.1), ios(5.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 	
 /*!
 	@function	MusicTrackSetProperty
@@ -1116,7 +1145,7 @@ extern OSStatus
 MusicTrackSetProperty(	MusicTrack 			inTrack,
 						UInt32 				inPropertyID,
 						void				*inData,
-						UInt32				inLength)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						UInt32				inLength)							API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicTrackGetProperty
@@ -1135,7 +1164,7 @@ extern OSStatus
 MusicTrackGetProperty(	MusicTrack 			inTrack,
 						UInt32 				inPropertyID,
 						void				*outData,
-						UInt32				*ioLength)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						UInt32				*ioLength)							API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1158,7 +1187,7 @@ extern OSStatus
 MusicTrackMoveEvents(	MusicTrack 			inTrack,
 						MusicTimeStamp		inStartTime,
 						MusicTimeStamp		inEndTime,
-						MusicTimeStamp		inMoveTime)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						MusicTimeStamp		inMoveTime)							API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicTrackClear
@@ -1171,7 +1200,7 @@ MusicTrackMoveEvents(	MusicTrack 			inTrack,
 extern OSStatus
 MusicTrackClear(		MusicTrack 			inTrack,
 						MusicTimeStamp		inStartTime,
-						MusicTimeStamp		inEndTime)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						MusicTimeStamp		inEndTime)							API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicTrackCut
@@ -1187,7 +1216,7 @@ MusicTrackClear(		MusicTrack 			inTrack,
 extern OSStatus
 MusicTrackCut(			MusicTrack 			inTrack,
 						MusicTimeStamp		inStartTime,
-						MusicTimeStamp		inEndTime)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						MusicTimeStamp		inEndTime)							API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicTrackCopyInsert
@@ -1209,7 +1238,7 @@ MusicTrackCopyInsert(	MusicTrack 			inSourceTrack,
 						MusicTimeStamp		inSourceStartTime,
 						MusicTimeStamp		inSourceEndTime,
 						MusicTrack 			inDestTrack,
-						MusicTimeStamp		inDestInsertTime)					__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						MusicTimeStamp		inDestInsertTime)					API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicTrackMerge
@@ -1230,7 +1259,7 @@ MusicTrackMerge(		MusicTrack 			inSourceTrack,
 						MusicTimeStamp		inSourceStartTime,
 						MusicTimeStamp		inSourceEndTime,
 						MusicTrack 			inDestTrack,
-						MusicTimeStamp		inDestInsertTime)					__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+						MusicTimeStamp		inDestInsertTime)					API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 //=====================================================================================================================
@@ -1255,7 +1284,7 @@ MusicTrackMerge(		MusicTrack 			inSourceTrack,
 extern OSStatus
 MusicTrackNewMIDINoteEvent(			MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									const MIDINoteMessage *		inMessage)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+									const MIDINoteMessage *		inMessage)		API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicTrackNewMIDIChannelEvent
@@ -1268,7 +1297,7 @@ MusicTrackNewMIDINoteEvent(			MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewMIDIChannelEvent(		MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									const MIDIChannelMessage *	inMessage)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+									const MIDIChannelMessage *	inMessage)		API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicTrackNewMIDIRawDataEvent
@@ -1281,7 +1310,7 @@ MusicTrackNewMIDIChannelEvent(		MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewMIDIRawDataEvent(		MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									const MIDIRawData *			inRawData)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+									const MIDIRawData *			inRawData)		API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicTrackNewExtendedNoteEvent
@@ -1294,7 +1323,7 @@ MusicTrackNewMIDIRawDataEvent(		MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewExtendedNoteEvent(		MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									const ExtendedNoteOnEvent	*inInfo)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+									const ExtendedNoteOnEvent	*inInfo)		API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 										
 /*!
 	@function	MusicTrackNewParameterEvent
@@ -1307,7 +1336,7 @@ MusicTrackNewExtendedNoteEvent(		MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewParameterEvent(		MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									const ParameterEvent *		inInfo)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_5_0);
+									const ParameterEvent *		inInfo)			API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
 										
 /*!
 	@function	MusicTrackNewExtendedTempoEvent
@@ -1320,7 +1349,7 @@ MusicTrackNewParameterEvent(		MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewExtendedTempoEvent(	MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									Float64						inBPM)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+									Float64						inBPM)			API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 										
 /*!
 	@function	MusicTrackNewMetaEvent
@@ -1333,7 +1362,7 @@ MusicTrackNewExtendedTempoEvent(	MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewMetaEvent(				MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									const MIDIMetaEvent *		inMetaEvent)	__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+									const MIDIMetaEvent *		inMetaEvent)	API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 										
 /*!
 	@function	MusicEventUserData
@@ -1346,7 +1375,7 @@ MusicTrackNewMetaEvent(				MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewUserEvent(				MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
-									const MusicEventUserData *	inUserData)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+									const MusicEventUserData *	inUserData)		API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicTrackNewAUPresetEvent
@@ -1359,7 +1388,7 @@ MusicTrackNewUserEvent(				MusicTrack 					inTrack,
 extern OSStatus
 MusicTrackNewAUPresetEvent(			MusicTrack 					inTrack,
 									MusicTimeStamp			 	inTimeStamp,
-									const AUPresetEvent *		inPresetEvent)	__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_5_0);
+									const AUPresetEvent *		inPresetEvent)	API_AVAILABLE(macos(10.3), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 
@@ -1394,7 +1423,7 @@ MusicTrackNewAUPresetEvent(			MusicTrack 					inTrack,
 */
 extern OSStatus
 NewMusicEventIterator(		MusicTrack 									inTrack,
-							MusicEventIterator __nullable * __nonnull	outIterator)	__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+							MusicEventIterator __nullable * __nonnull	outIterator)	API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 													
 /*!
 	@function	DisposeMusicEventIterator
@@ -1402,7 +1431,7 @@ NewMusicEventIterator(		MusicTrack 									inTrack,
 	@param		inIterator		the iterator
 */
 extern OSStatus
-DisposeMusicEventIterator(			MusicEventIterator	inIterator)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+DisposeMusicEventIterator(			MusicEventIterator	inIterator)				API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicEventIteratorSeek
@@ -1418,7 +1447,7 @@ DisposeMusicEventIterator(			MusicEventIterator	inIterator)				__OSX_AVAILABLE_S
 */
 extern OSStatus
 MusicEventIteratorSeek(				MusicEventIterator 	inIterator,
-									MusicTimeStamp 		inTimeStamp)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+									MusicTimeStamp 		inTimeStamp)			API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicEventIteratorNextEvent
@@ -1431,7 +1460,7 @@ MusicEventIteratorSeek(				MusicEventIterator 	inIterator,
 	@param		inIterator		the iterator
 */
 extern OSStatus
-MusicEventIteratorNextEvent(		MusicEventIterator 	inIterator)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+MusicEventIteratorNextEvent(		MusicEventIterator 	inIterator)				API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicEventIteratorPreviousEvent
@@ -1443,7 +1472,7 @@ MusicEventIteratorNextEvent(		MusicEventIterator 	inIterator)				__OSX_AVAILABLE
 	@param		inIterator		the iterator
 */
 extern OSStatus
-MusicEventIteratorPreviousEvent(	MusicEventIterator 	inIterator)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+MusicEventIteratorPreviousEvent(	MusicEventIterator 	inIterator)				API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicEventIteratorGetEventInfo
@@ -1465,7 +1494,7 @@ MusicEventIteratorGetEventInfo(		MusicEventIterator 		inIterator,
 									MusicTimeStamp *		outTimeStamp,
 									MusicEventType *		outEventType,
 									const void * __nullable * __nonnull outEventData,
-									UInt32 *				outEventDataSize)	__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+									UInt32 *				outEventDataSize)	API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 	
 /*!
 	@function	MusicEventIteratorSetEventInfo
@@ -1481,7 +1510,7 @@ MusicEventIteratorGetEventInfo(		MusicEventIterator 		inIterator,
 extern OSStatus
 MusicEventIteratorSetEventInfo(		MusicEventIterator 		inIterator,
 									MusicEventType			inEventType,
-									const void *			inEventData)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_5_0);
+									const void *			inEventData)		API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicEventIteratorSetEventTime
@@ -1495,7 +1524,7 @@ MusicEventIteratorSetEventInfo(		MusicEventIterator 		inIterator,
 */
 extern OSStatus
 MusicEventIteratorSetEventTime(		MusicEventIterator 		inIterator,
-									MusicTimeStamp			inTimeStamp)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+									MusicTimeStamp			inTimeStamp)		API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicEventIteratorDeleteEvent
@@ -1505,7 +1534,7 @@ MusicEventIteratorSetEventTime(		MusicEventIterator 		inIterator,
 	@param		inIterator		the iterator
 */
 extern OSStatus
-MusicEventIteratorDeleteEvent(		MusicEventIterator	 	inIterator)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+MusicEventIteratorDeleteEvent(		MusicEventIterator	 	inIterator)			API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicEventIteratorHasPreviousEvent
@@ -1526,7 +1555,7 @@ MusicEventIteratorDeleteEvent(		MusicEventIterator	 	inIterator)			__OSX_AVAILAB
 */
 extern OSStatus
 MusicEventIteratorHasPreviousEvent(	MusicEventIterator 	inIterator,
-									Boolean	*			outHasPrevEvent)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+									Boolean	*			outHasPrevEvent)		API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicEventIteratorHasNextEvent
@@ -1547,7 +1576,7 @@ MusicEventIteratorHasPreviousEvent(	MusicEventIterator 	inIterator,
 */
 extern OSStatus
 MusicEventIteratorHasNextEvent(		MusicEventIterator	inIterator,
-									Boolean	*			outHasNextEvent)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
+									Boolean	*			outHasNextEvent)		API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicEventIteratorHasCurrentEvent
@@ -1557,7 +1586,7 @@ MusicEventIteratorHasNextEvent(		MusicEventIterator	inIterator,
 */
 extern OSStatus
 MusicEventIteratorHasCurrentEvent(	MusicEventIterator	inIterator,
-									Boolean	*			outHasCurEvent)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_5_0);
+									Boolean	*			outHasCurEvent)			API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 
@@ -1571,7 +1600,7 @@ MusicEventIteratorHasCurrentEvent(	MusicEventIterator	inIterator,
 #if !TARGET_RT_64_BIT
 extern OSStatus
 MusicSequenceLoadSMFData(	MusicSequence	inSequence,
-							CFDataRef		inData)					__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+							CFDataRef		inData)					API_DEPRECATED("no longer supported", macos(10.2, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif // !TARGET_RT_64_BIT
 
 
@@ -1583,30 +1612,30 @@ MusicSequenceLoadSMFData(	MusicSequence	inSequence,
 extern OSStatus
 MusicSequenceLoadSMFWithFlags(		MusicSequence			inSequence,
 									const struct FSRef *			inFileRef,
-									MusicSequenceLoadFlags	inFlags)	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+									MusicSequenceLoadFlags	inFlags)	API_DEPRECATED("no longer supported", macos(10.3, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 extern OSStatus
 MusicSequenceLoadSMFDataWithFlags(	MusicSequence	inSequence,
 									CFDataRef				inData,
-									MusicSequenceLoadFlags	inFlags)	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+									MusicSequenceLoadFlags	inFlags)	API_DEPRECATED("no longer supported", macos(10.3, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 // inFlags must be zero
 extern OSStatus
 MusicSequenceSaveMIDIFile(	MusicSequence	inSequence,
 							const struct FSRef *inParentDirectory,
 							CFStringRef		inFileName,
 							UInt16			inResolution,
-							UInt32			inFlags)				__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+							UInt32			inFlags)				API_DEPRECATED("no longer supported", macos(10.4, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 extern OSStatus
 MusicSequenceSaveSMFData(	MusicSequence	inSequence,
 							CFDataRef __nullable * __nonnull outData,
-							UInt16			inResolution)			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+							UInt16			inResolution)			API_DEPRECATED("no longer supported", macos(10.2, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 extern OSStatus
 NewMusicTrackFrom(		MusicTrack			inSourceTrack,
 						MusicTimeStamp		inSourceStartTime,
 						MusicTimeStamp		inSourceEndTime,
-						MusicTrack __nullable * __nonnull outNewTrack)	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+						MusicTrack __nullable * __nonnull outNewTrack)	API_DEPRECATED("no longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, watchos, tvos);
 
 enum {
 	kMusicEventType_ExtendedControl			= 2
@@ -1623,7 +1652,7 @@ extern OSStatus
 MusicTrackNewExtendedControlEvent(	MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
 									const ExtendedControlEvent	*inInfo)		
-																	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+																	API_DEPRECATED("no longer supported", macos(10.0, 10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 
 #if defined(__cplusplus)
 }

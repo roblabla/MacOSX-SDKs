@@ -1,7 +1,7 @@
 /*
     NSTouch.h
     Application Kit
-    Copyright (c) 2009-2017, Apple Inc.
+    Copyright (c) 2009-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSDate.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -42,21 +43,21 @@ NS_INLINE NSTouchTypeMask NSTouchTypeMaskFromType(NSTouchType type) { return (1 
 NS_CLASS_AVAILABLE(10_6, NA)
 @interface NSTouch : NSObject <NSCopying> {
 @private
-    NSInteger _index;
-    id _identity;
-    NSTouchPhase _phase;
-    NSPoint _pos1;
-    NSInteger _privateFlags;
-    NSView *_view;
-    id _reserved1;
-    NSPoint _pos0;
-    NSInteger _reserved4;
-    id _device;
-    NSSize  _deviceSize;
-    NSInteger _contextId;
-    NSTimeInterval _timestamp;
+    NSInteger _index APPKIT_IVAR;
+    id _identity APPKIT_IVAR;
+    NSTouchPhase _phase APPKIT_IVAR;
+    NSPoint _pos1 APPKIT_IVAR;
+    NSInteger _privateFlags APPKIT_IVAR;
+    NSView *_view APPKIT_IVAR;
+    id _reserved1 APPKIT_IVAR;
+    NSPoint _pos0 APPKIT_IVAR;
+    NSInteger _reserved4 APPKIT_IVAR;
+    id _device APPKIT_IVAR;
+    NSSize  _deviceSize APPKIT_IVAR;
+    NSInteger _contextId APPKIT_IVAR;
+    NSTimeInterval _timestamp APPKIT_IVAR;
 #if ! __LP64__
-    id _reserved8;
+    id _reserved8 APPKIT_IVAR;
 #endif
 }
 

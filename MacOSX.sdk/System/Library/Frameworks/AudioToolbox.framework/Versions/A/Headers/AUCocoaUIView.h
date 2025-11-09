@@ -8,7 +8,8 @@
 	Audio unit hosts can call these methods to retrieve views for audio units.
 */
 
-#if __OBJC__
+#include <TargetConditionals.h>
+#if defined(__OBJC__) && TARGET_OS_OSX
 
 #import <Cocoa/Cocoa.h>
 #import <AudioToolbox/AUComponent.h>
@@ -53,4 +54,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#endif
+#endif // defined(__OBJC__) && TARGET_OS_OSX

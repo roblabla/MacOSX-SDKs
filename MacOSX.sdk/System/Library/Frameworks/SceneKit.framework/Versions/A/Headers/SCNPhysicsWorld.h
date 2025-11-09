@@ -1,7 +1,8 @@
 //
 //  SCNPhysicsWorld.h
+//  SceneKit
 //
-//  Copyright (c) 2014-2017 Apple Inc. All rights reserved.
+//  Copyright © 2014-2018 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -16,30 +17,20 @@ NS_ASSUME_NONNULL_BEGIN
 @class SCNHitTestResult;
 
 // Keys for ray, contact and sweep tests
-#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 3
 typedef NSString * SCNPhysicsTestOption NS_STRING_ENUM;
-#else
-typedef NSString * SCNPhysicsTestOption;
-#endif
-
-FOUNDATION_EXTERN SCNPhysicsTestOption const SCNPhysicsTestCollisionBitMaskKey API_AVAILABLE(macos(10.10)); // Allows to filter the objects tested by rayTest, contactTest and convexSweep. Default is SCNPhysicsCollisionCategoryAll
-FOUNDATION_EXTERN SCNPhysicsTestOption const SCNPhysicsTestSearchModeKey       API_AVAILABLE(macos(10.10)); // Specifies how to perform the ray/contact/sweep test. Values are defined below. If not defined, then defaults to SCNPhysicsTestSearchModeAny
-FOUNDATION_EXTERN SCNPhysicsTestOption const SCNPhysicsTestBackfaceCullingKey  API_AVAILABLE(macos(10.10)); // Specifies whether the back faces should be ignored or not. Defaults to YES.
+SCN_EXPORT SCNPhysicsTestOption const SCNPhysicsTestCollisionBitMaskKey API_AVAILABLE(macos(10.10)); // Allows to filter the objects tested by rayTest, contactTest and convexSweep. Default is SCNPhysicsCollisionCategoryAll
+SCN_EXPORT SCNPhysicsTestOption const SCNPhysicsTestSearchModeKey       API_AVAILABLE(macos(10.10)); // Specifies how to perform the ray/contact/sweep test. Values are defined below. If not defined, then defaults to SCNPhysicsTestSearchModeAny
+SCN_EXPORT SCNPhysicsTestOption const SCNPhysicsTestBackfaceCullingKey  API_AVAILABLE(macos(10.10)); // Specifies whether the back faces should be ignored or not. Defaults to YES.
 
 #define SCNPhysicsTestOptionCollisionBitMask SCNPhysicsTestCollisionBitMaskKey
 #define SCNPhysicsTestOptionSearchMode       SCNPhysicsTestSearchModeKey
 #define SCNPhysicsTestOptionBackfaceCulling  SCNPhysicsTestBackfaceCullingKey
 
 // Values for SCNPhysicsTestSearchModeKey
-#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 3
 typedef NSString * SCNPhysicsTestSearchMode NS_STRING_ENUM;
-#else
-typedef NSString * SCNPhysicsTestSearchMode;
-#endif
-
-FOUNDATION_EXTERN SCNPhysicsTestSearchMode const SCNPhysicsTestSearchModeAny     API_AVAILABLE(macos(10.10)); // Returns the first contact found.
-FOUNDATION_EXTERN SCNPhysicsTestSearchMode const SCNPhysicsTestSearchModeClosest API_AVAILABLE(macos(10.10)); // Returns the nearest contact found only.
-FOUNDATION_EXTERN SCNPhysicsTestSearchMode const SCNPhysicsTestSearchModeAll     API_AVAILABLE(macos(10.10)); // All contacts are returned.
+SCN_EXPORT SCNPhysicsTestSearchMode const SCNPhysicsTestSearchModeAny     API_AVAILABLE(macos(10.10)); // Returns the first contact found.
+SCN_EXPORT SCNPhysicsTestSearchMode const SCNPhysicsTestSearchModeClosest API_AVAILABLE(macos(10.10)); // Returns the nearest contact found only.
+SCN_EXPORT SCNPhysicsTestSearchMode const SCNPhysicsTestSearchModeAll     API_AVAILABLE(macos(10.10)); // All contacts are returned.
 
 /*!
  @protocol SCNPhysicsContactDelegate
@@ -58,7 +49,7 @@ API_AVAILABLE(macos(10.10))
  @abstract The SCNPhysicsWorld class describes and allows to control the physics simulation of a 3d scene.
  @discussion The SCNPhysicsWorld class should not be allocated directly but retrieved from the SCNScene class using the physicsWorld property.
  */
-API_AVAILABLE(macos(10.10))
+SCN_EXPORT API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsWorld : NSObject <NSSecureCoding>
 
 //A global 3D vector specifying the field force acceleration due to gravity. The unit is meter per second. Default is {0, -9.8, 0}.
@@ -72,7 +63,9 @@ API_AVAILABLE(macos(10.10))
 @property(nonatomic) NSTimeInterval timeStep;
 
 //A delegate that is called when two physic bodies come in contact with each other.
-@property(atomic, assign, nullable) id <SCNPhysicsContactDelegate> contactDelegate;
+//On iOS 11 or lower the property is unsafe_unretained and it's the responsibility of the client to set it to nil before deallocating the delegate.
+//Starting in iOS12, the property is weak
+@property(atomic, weak, nullable) id <SCNPhysicsContactDelegate> contactDelegate;
 
 //Behaviors management
 - (void)addBehavior:(SCNPhysicsBehavior *)behavior;

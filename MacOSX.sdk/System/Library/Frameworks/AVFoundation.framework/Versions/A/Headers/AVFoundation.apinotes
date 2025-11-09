@@ -24,6 +24,28 @@ Classes:
   - Selector: 'appendTimedMetadataGroup:'
     SwiftName: append(_:)
     MethodKind: Instance
+- Name: AVAudioSession
+  Methods:
+  # AVAudioSession setActive
+  - Selector: 'setActive:error:'
+    MethodKind: Instance
+    Availability: nonswift
+  - Selector: 'setActive:withOptions:error:'
+    SwiftName: setActive(_:options:)
+    MethodKind: Instance
+  # AVAudioSession setCategory
+  - Selector: 'setCategory:error:'
+    MethodKind: Instance
+    Availability: nonswift
+  - Selector: 'setCategory:withOptions:error:'
+    MethodKind: Instance
+    Availability: nonswift
+  - Selector: 'setCategory:mode:options:error:'
+    SwiftName: setCategory(_:mode:options:)
+    MethodKind: Instance
+  - Selector: 'setCategory:mode:routeSharingPolicy:options:error:'
+    SwiftName: setCategory(_:mode:policy:options:)
+    MethodKind: Instance
 - Name: AVCaptureAudioDataOutput
   Methods:
   - Selector: 'new'
@@ -68,8 +90,8 @@ Classes:
     SwiftName: 'chromaticityValues(for:)'
     MethodKind: Instance
   - Selector: 'defaultDeviceWithDeviceType:mediaType:position:'
+    SwiftName: 'default(_:for:position:)'
     MethodKind: Class
-    SwiftPrivate: true
   - Selector: 'defaultDeviceWithMediaType:'
     SwiftName: 'default(for:)'
     MethodKind: Class
@@ -99,10 +121,6 @@ Classes:
     MethodKind: Instance
 - Name: AVCaptureDeviceDiscoverySession
   SwiftName: AVCaptureDevice.DiscoverySession
-  Methods:
-  - Selector: 'discoverySessionWithDeviceTypes:mediaType:position:'
-    MethodKind: Class
-    SwiftPrivate: true
 - Name: AVCaptureDeviceFormat
   SwiftName: AVCaptureDevice.Format
   Properties:
@@ -159,11 +177,11 @@ Classes:
     SwiftName: 'supportedPhotoCodecTypes(for:)'
     MethodKind: Instance
   - Selector: 'supportedPhotoPixelFormatTypesForFileType:'
+    SwiftName: 'supportedPhotoPixelFormatTypes(for:)'
     MethodKind: Instance
-    SwiftPrivate: true
   - Selector: 'supportedRawPhotoPixelFormatTypesForFileType:'
+    SwiftName: 'supportedRawPhotoPixelFormatTypes(for:)'
     MethodKind: Instance
-    SwiftPrivate: true
   Properties:
   - Name: availablePhotoPixelFormatTypes
     PropertyKind: Instance
@@ -179,12 +197,31 @@ Classes:
   - Name: availablePreviewPhotoPixelFormatTypes
     PropertyKind: Instance
     SwiftPrivate: true
+- Name: AVCaptureScreenInput
+  Methods:
+    - Selector: 'new'
+      MethodKind: Class
+      Availability: nonswift
+      AvailabilityMsg: 'use object initializers instead'
+- Name: AVCaptureSession
+  Methods:
+    - Selector: 'canAddConnection:'
+      SwiftName: 'canAddConnection(_:)'
+      MethodKind: Instance
+    - Selector: 'addConnection:'
+      SwiftName: 'addConnection(_:)'
+      MethodKind: Instance
+    - Selector: 'removeConnection:'
+      SwiftName: 'removeConnection(_:)'
+      MethodKind: Instance
 - Name: AVCaptureStillImageOutput
   Methods:
   - Selector: 'new'
     MethodKind: Class
     Availability: nonswift
     AvailabilityMsg: 'use object initializers instead'
+- Name: AVCaptureSystemPressureState
+  SwiftName: AVCaptureDevice.SystemPressureState
 - Name: AVCaptureVideoDataOutput
   Methods:
   - Selector: 'availableVideoCodecTypesForAssetWriterWithOutputFileType:'
@@ -215,8 +252,6 @@ Classes:
   - Selector: 'rectForMetadataOutputRectOfInterest:'
     SwiftName: 'layerRectConverted(fromMetadataOutputRect:)'
     MethodKind: Instance
-- Name: AVFrameRateRange
-  SwiftName: AVCaptureDeviceFormat.FrameRateRange
 - Name: AVMutableComposition
   Methods:
   - Selector: 'insertTimeRange:ofAsset:atTime:error:'
@@ -343,6 +378,14 @@ Classes:
     MethodKind: Instance
   - Selector: 'addInputGroup:'
     SwiftName: add(_:)
+    MethodKind: Instance
+- Name: AVMetadataItemValueRequest
+  Methods:
+  - Selector: 'respondWithError:'
+    SwiftName: respond(error:)
+    MethodKind: Instance
+  - Selector: 'respondWithValue:'
+    SwiftName: respond(value:)
     MethodKind: Instance
 - Name: AVMutableAudioMixInputParameters
   Methods:
@@ -534,7 +577,41 @@ Enumerators:
   SwiftName: addMovieHeaderToDestination
 - Name: AVMusicSequenceLoadSMF_ChannelsToTracks
   SwiftName: smfChannelsToTracks
+- Name: AVPlayerHDRModeHDR10
+  SwiftName: hdr10
+- Name: AVPlayerHDRModeHLG
+  SwiftName: hlg
 Tags:
+- Name: AVAssetExportSessionStatus
+  SwiftName: AVAssetExportSession.Status
+- Name: AVAssetImageGeneratorResult
+  SwiftName: AVAssetImageGenerator.Result
+- Name: AVAssetReaderStatus
+  SwiftName: AVAssetReader.Status
+- Name: AVAssetWriterStatus
+  SwiftName: AVAssetWriter.Status
+- Name: AVAudioSessionCategoryOptions
+  SwiftName: AVAudioSession.CategoryOptions
+- Name: AVAudioSessionErrorCode
+  SwiftName: AVAudioSession.ErrorCode
+- Name: AVAudioSessionInterruptionOptions
+  SwiftName: AVAudioSession.InterruptionOptions
+- Name: AVAudioSessionInterruptionType
+  SwiftName: AVAudioSession.InterruptionType
+- Name: AVAudioSessionIOType
+  SwiftName: AVAudioSession.IOType
+- Name: AVAudioSessionPortOverride
+  SwiftName: AVAudioSession.PortOverride
+- Name: AVAudioSessionRecordPermission
+  SwiftName: AVAudioSession.RecordPermission
+- Name: AVAudioSessionRouteChangeReason
+  SwiftName: AVAudioSession.RouteChangeReason
+- Name: AVAudioSessionRouteSharingPolicy
+  SwiftName: AVAudioSession.RouteSharingPolicy
+- Name: AVAudioSessionSetActiveOptions
+  SwiftName: AVAudioSession.SetActiveOptions
+- Name: AVAudioSessionSilenceSecondaryAudioHintType
+  SwiftName: AVAudioSession.SilenceSecondaryAudioHintType
 - Name: AVCaptureAutoFocusRangeRestriction
   SwiftName: AVCaptureDevice.AutoFocusRangeRestriction
 - Name: AVCaptureAutoFocusSystem
@@ -555,36 +632,90 @@ Tags:
   SwiftName: AVCaptureOutput.DataDroppedReason
 - Name: AVCaptureSessionInterruptionReason
   SwiftName: AVCaptureSession.InterruptionReason
+- Name: AVCaptureSystemPressureFactors
+  SwiftName: AVCaptureSystemPressureState.Factors
 - Name: AVCaptureTorchMode
   SwiftName: AVCaptureDevice.TorchMode
 - Name: AVCaptureWhiteBalanceMode
   SwiftName: AVCaptureDevice.WhiteBalanceMode
+- Name: AVContentKeyRequestStatus
+  SwiftName: AVContentKeyRequest.Status
 - Name: AVDepthDataAccuracy
   SwiftName: AVDepthData.Accuracy
 - Name: AVDepthDataQuality
   SwiftName: AVDepthData.Quality
 - Name: AVError
   NSErrorDomain: AVFoundationErrorDomain
+- Name: AVPlayerActionAtItemEnd
+  SwiftName: AVPlayer.ActionAtItemEnd
+- Name: AVPlayerHDRMode
+  SwiftName: AVPlayer.HDRMode
+- Name: AVPlayerItemStatus
+  SwiftName: AVPlayerItem.Status
+- Name: AVPlayerLooperStatus
+  SwiftName: AVPlayerLooper.Status
+- Name: AVPlayerStatus
+  SwiftName: AVPlayer.Status
+- Name: AVPlayerTimeControlStatus
+  SwiftName: AVPlayer.TimeControlStatus
+- Name: AVSampleBufferRequestDirection
+  SwiftName: AVSampleBufferRequest.Direction
+- Name: AVSampleBufferRequestMode
+  SwiftName: AVSampleBufferRequest.Mode
 Typedefs:
+- Name: AVAssetImageGeneratorApertureMode
+  SwiftName: AVAssetImageGenerator.ApertureMode
+- Name: AVAssetWriterInputMediaDataLocation
+  SwiftName: AVAssetWriterInput.MediaDataLocation
+- Name: AVAudioSessionCategory
+  SwiftName: AVAudioSession.Category
+- Name: AVAudioSessionLocation
+  SwiftName: AVAudioSession.Location
+- Name: AVAudioSessionMode
+  SwiftName: AVAudioSession.Mode
+- Name: AVAudioSessionOrientation
+  SwiftName: AVAudioSession.Orientation
+- Name: AVAudioSessionPolarPattern
+  SwiftName: AVAudioSession.PolarPattern
+- Name: AVAudioSessionPort
+  SwiftName: AVAudioSession.Port
 - Name: AVCaptureDeviceTransportControlsSpeed
   SwiftName: AVCaptureDevice.TransportControlsSpeed
 - Name: AVCaptureDeviceType
   SwiftName: AVCaptureDevice.DeviceType
 - Name: AVCaptureSessionPreset
   SwiftName: AVCaptureSession.Preset
+- Name: AVCaptureSystemPressureLevel
+  SwiftName: AVCaptureSystemPressureState.Level
 - Name: AVCaptureWhiteBalanceChromaticityValues
   SwiftName: AVCaptureDevice.WhiteBalanceChromaticityValues
 - Name: AVCaptureWhiteBalanceGains
   SwiftName: AVCaptureDevice.WhiteBalanceGains
 - Name: AVCaptureWhiteBalanceTemperatureAndTintValues
   SwiftName: AVCaptureDevice.WhiteBalanceTemperatureAndTintValues
+- Name: AVContentKeyRequestRetryReason
+  SwiftName: AVContentKeyRequest.RetryReason
 - Name: AVMetadataObjectType
   SwiftName: AVMetadataObject.ObjectType
+- Name: AVPlayerItemLegibleOutputTextStylingResolution
+  SwiftName: AVPlayerItemLegibleOutput.TextStylingResolution
 - Name: AVPlayerWaitingReason
   SwiftName: AVPlayer.WaitingReason
 - Name: AVTrackAssociationType
   SwiftName: AVAssetTrack.AssociationType
 Globals:
+# AVAudioSession
+- Name: AVAudioSessionInterruptionNotification
+  SwiftName: AVAudioSession.interruptionNotification
+- Name: AVAudioSessionMediaServicesWereLostNotification
+  SwiftName: AVAudioSession.mediaServicesWereLostNotification
+- Name: AVAudioSessionRouteChangeNotification
+  SwiftName: AVAudioSession.routeChangeNotification
+- Name: AVAudioSessionSilenceSecondaryAudioHintNotification
+  SwiftName: AVAudioSession.silenceSecondaryAudioHintNotification
+- Name: AVAudioSessionMediaServicesWereResetNotification
+  SwiftName: AVAudioSession.mediaServicesWereResetNotification
+
 # AVCaptureDevice constants
 - Name: AVCaptureExposureDurationCurrent
   SwiftName: AVCaptureDevice.currentExposureDuration
@@ -925,6 +1056,10 @@ Globals:
 - Name: AVVideoCodecTypeAppleProRes422
   SwiftName: proRes422
 
+# AVSampleBufferRenderSynchronizer
+- Name: AVSampleBufferRenderSynchronizerRateDidChangeNotification
+  SwiftName: AVSampleBufferRenderSynchronizer.rateDidChangeNotification
+
 SwiftVersions:
 - Version: 3
   Classes:
@@ -1110,6 +1245,10 @@ SwiftVersions:
     - Selector: 'chromaticityValuesForDeviceWhiteBalanceGains:'
       SwiftName: 'chromaticityValues(forDeviceWhiteBalanceGains:)'
       MethodKind: Instance
+    - Selector: 'defaultDeviceWithDeviceType:mediaType:position:'
+      MethodKind: Class
+      NullabilityOfRet: U
+      Nullability: [ U, U, N ]
     - Selector: 'defaultDeviceWithMediaType:'
       MethodKind: Class
       NullabilityOfRet: U
@@ -1227,6 +1366,11 @@ SwiftVersions:
       Nullability: U
   - Name: AVCaptureDeviceDiscoverySession
     SwiftName: AVCaptureDeviceDiscoverySession
+    Methods:
+    - Selector: 'discoverySessionWithDeviceTypes:mediaType:position:'
+      MethodKind: Class
+      NullabilityOfRet: U
+      Nullability: [ U, U, N ]
     Properties:
     - Name: devices
       PropertyKind: Instance
@@ -1549,8 +1693,6 @@ SwiftVersions:
       - Position: 0
         Nullability: N
         Type: 'NSArray<NSDictionary *> *'
-  - Name: AVFrameRateRange
-    SwiftName: AVFrameRateRange
   - Name: AVMetadataMachineReadableCodeObject
     Properties:
     - Name: stringValue
@@ -1768,6 +1910,8 @@ SwiftVersions:
   - Name: AVCaptureDeviceTransportControlsPlayingMode
     SwiftName: playingMode
   Tags:
+  - Name: AVAudioSessionRecordPermission
+    EnumKind: NSOptions
   - Name: AVCaptureAutoFocusSystem
     SwiftName: AVCaptureAutoFocusSystem
   - Name: AVCaptureAutoFocusRangeRestriction
@@ -2170,3 +2314,259 @@ SwiftVersions:
     SwiftName: AVPlayerWaitingWhileEvaluatingBufferingRateReason
   - Name: AVPlayerWaitingWithNoItemToPlayReason
     SwiftName: AVPlayerWaitingWithNoItemToPlayReason
+
+- Version: 4
+  Classes:
+  - Name: AVAssetReaderOutput
+    Properties:
+    - Name: mediaType
+      PropertyKind: Instance
+      Type: 'NSString *'
+      Nullability: N
+  - Name: AVAudioSession
+    Methods:
+    # AVAudioSession setActive
+    - Selector: 'setActive:error:'
+      SwiftName: setActive(_:)
+      MethodKind: Instance
+    - Selector: 'setActive:withOptions:error:'
+      SwiftName: setActive(_:with options:)
+      MethodKind: Instance
+    # AVAudioSession setCategory
+    - Selector: 'setCategory:error:'
+      SwiftName: setCategory(_:)
+      MethodKind: Instance
+    - Selector: 'setCategory:withOptions:error:'
+      SwiftName: setCategory(_:with options:)
+      MethodKind: Instance
+    - Selector: 'setCategory:mode:options:error:'
+      SwiftName: setCategory(_:mode:options:)
+      MethodKind: Instance
+    - Selector: 'setCategory:mode:routeSharingPolicy:options:error:'
+      SwiftName: setCategory(_:mode:routeSharingPolicy:options:)
+      MethodKind: Instance
+    Properties:
+    - Name: recordPermission
+      PropertyKind: Instance
+      SwiftImportAsAccessors: true
+  - Name: AVCameraCalibrationData
+    Properties:
+    - Name: inverseLensDistortionLookupTable
+      PropertyKind: Instance
+      Nullability: N
+    - Name: lensDistortionLookupTable
+      PropertyKind: Instance
+      Nullability: N
+  - Name: AVCaptureDepthDataOutput
+    Methods:
+    - Selector: 'setDelegate:callbackQueue:'
+      MethodKind: Instance
+      Parameters:
+      - Position: 0
+        Nullability: N
+      - Position: 1
+        Nullability: N
+    Properties:
+    - Name: delegate
+      PropertyKind: Instance
+      Nullability: N
+    - Name: delegateCallbackQueue
+      PropertyKind: Instance
+      Nullability: N
+  - Name: AVCaptureScreenInput
+    Methods:
+    - Selector: 'initWithDisplayID:'
+      MethodKind: Instance
+      NullabilityOfRet: N
+    - Selector: 'new'
+      MethodKind: Class
+      Availability: available
+      NullabilityOfRet: N
+  - Name: AVCaptureSession
+    Methods:
+      - Selector: 'canAddConnection:'
+        SwiftName: 'canAdd(_:)'
+        MethodKind: Instance
+      - Selector: 'addConnection:'
+        SwiftName: 'add(_:)'
+        MethodKind: Instance
+      - Selector: 'removeConnection:'
+        SwiftName: 'remove(_:)'
+        MethodKind: Instance
+  - Name: AVContentKeyRequest
+    Methods:
+    - Selector: 'makeStreamingContentKeyRequestDataForApp:contentIdentifier:options:completionHandler:'
+      MethodKind: Instance
+      Parameters:
+      - Position: 1
+        Nullability: N
+  - Name: AVMediaSelectionGroup
+    Methods:
+    - Selector: 'mediaSelectionOptionsFromArray:withMediaCharacteristics:'
+      MethodKind: Class
+      Parameters:
+      - Position: 1
+        Type: 'NSArray<NSString *> *'
+        Nullability: N
+    - Selector: 'mediaSelectionOptionsFromArray:withoutMediaCharacteristics:'
+      MethodKind: Class
+      Parameters:
+      - Position: 1
+        Type: 'NSArray<NSString *> *'
+        Nullability: N
+  - Name: AVMediaSelectionOption
+    Properties:
+    - Name: mediaType
+      PropertyKind: Instance
+      Type: 'NSString *'
+      Nullability: N
+  - Name: AVMetadataItemValueRequest
+    Methods:
+    - Selector: 'respondWithError:'
+      SwiftName: respondWithError(_:)
+      MethodKind: Instance
+    - Selector: 'respondWithValue:'
+      SwiftName: respond(withValue:)
+      MethodKind: Instance
+  - Name: AVMutableMovieTrack
+    Methods:
+    - Selector: 'addTrackAssociationToTrack:type:'
+      MethodKind: Instance
+      Parameters:
+      - Position: 1
+        Type: 'NSString *'
+        Nullability: N
+    - Selector: 'removeTrackAssociationToTrack:type:'
+      MethodKind: Instance
+      Parameters:
+      - Position: 1
+        Type: 'NSString *'
+        Nullability: N
+  - Name: AVPlayerItemTrack
+    Properties:
+    - Name: assetTrack
+      PropertyKind: Instance
+      Type: 'AVAssetTrack *'
+      Nullability: N
+  - Name: AVPlayerMediaSelectionCriteria
+    Properties:
+    - Name: preferredMediaCharacteristics
+      PropertyKind: Instance
+      Type: 'NSArray<NSString *> *'
+      Nullability: O
+  Enumerators:
+  # AVAudioSession Error Codes
+  - Name: AVAudioSessionErrorCodeNone
+    SwiftName: codeNone
+  - Name: AVAudioSessionErrorCodeMediaServicesFailed
+    SwiftName: codeMediaServicesFailed
+  - Name: AVAudioSessionErrorCodeIsBusy
+    SwiftName: codeIsBusy
+  - Name: AVAudioSessionErrorCodeIncompatibleCategory
+    SwiftName: codeIncompatibleCategory
+  - Name: AVAudioSessionErrorCodeCannotInterruptOthers
+    SwiftName: codeCannotInterruptOthers
+  - Name: AVAudioSessionErrorCodeMissingEntitlement
+    SwiftName: codeMissingEntitlement
+  - Name: AVAudioSessionErrorCodeSiriIsRecording
+    SwiftName: codeSiriIsRecording
+  - Name: AVAudioSessionErrorCodeCannotStartPlaying
+    SwiftName: codeCannotStartPlaying
+  - Name: AVAudioSessionErrorCodeCannotStartRecording
+    SwiftName: codeCannotStartRecording
+  - Name: AVAudioSessionErrorCodeBadParam
+    SwiftName: codeBadParam
+  - Name: AVAudioSessionErrorCodeInsufficientPriority
+    SwiftName: insufficientPriority
+  - Name: AVAudioSessionErrorCodeResourceNotAvailable
+    SwiftName: codeResourceNotAvailable
+  - Name: AVAudioSessionErrorCodeUnspecified
+    SwiftName: codeUnspecified
+  Tags:
+  - Name: AVAssetExportSessionStatus
+    SwiftName: AVAssetExportSessionStatus
+  - Name: AVAssetImageGeneratorResult
+    SwiftName: AVAssetImageGeneratorResult
+  - Name: AVAssetReaderStatus
+    SwiftName: AVAssetReaderStatus
+  - Name: AVAssetWriterStatus
+    SwiftName: AVAssetWriterStatus
+# AVAudioSession Options and Enums
+  - Name: AVAudioSessionCategoryOptions
+    SwiftName: AVAudioSessionCategoryOptions
+  - Name: AVAudioSessionErrorCode
+    SwiftName: AVAudioSessionErrorCode
+  - Name: AVAudioSessionInterruptionOptions
+    SwiftName: AVAudioSessionInterruptionOptions
+  - Name: AVAudioSessionInterruptionType
+    SwiftName: AVAudioSessionInterruptionType
+  - Name: AVAudioSessionIOType
+    SwiftName: AVAudioSessionIOType
+  - Name: AVAudioSessionPortOverride
+    SwiftName: AVAudioSessionPortOverride
+  - Name: AVAudioSessionRecordPermission
+    SwiftName: AVAudioSessionRecordPermission
+  - Name: AVAudioSessionRouteChangeReason
+    SwiftName: AVAudioSessionRouteChangeReason
+  - Name: AVAudioSessionRouteSharingPolicy
+    SwiftName: AVAudioSessionRouteSharingPolicy
+  - Name: AVAudioSessionSetActiveOptions
+    SwiftName: AVAudioSessionSetActiveOptions
+  - Name: AVAudioSessionSilenceSecondaryAudioHintType
+    SwiftName: AVAudioSessionSilenceSecondaryAudioHintType
+  - Name: AVContentKeyRequestStatus
+    SwiftName: AVContentKeyRequestStatus
+  - Name: AVPlayerStatus
+    SwiftName: AVPlayerStatus
+  - Name: AVPlayerTimeControlStatus
+    SwiftName: AVPlayerTimeControlStatus
+  - Name: AVPlayerActionAtItemEnd
+    SwiftName: AVPlayerActionAtItemEnd
+  - Name: AVPlayerItemStatus
+    SwiftName: AVPlayerItemStatus
+  - Name: AVPlayerLooperStatus
+    SwiftName: AVPlayerLooperStatus
+  - Name: AVSampleBufferRequestDirection
+    SwiftName: AVSampleBufferRequestDirection
+  - Name: AVSampleBufferRequestMode
+    SwiftName: AVSampleBufferRequestMode
+  Typedefs:
+  # AVAudioSession String Enums
+  - Name: AVAssetWriterInputMediaDataLocation
+    SwiftName: AVAssetWriterInputMediaDataLocation
+  - Name: AVAudioSessionCategory
+    SwiftName: AVAudioSessionCategory
+    SwiftWrapper: none
+  - Name: AVAudioSessionLocation
+    SwiftName: AVAudioSessionLocation
+    SwiftWrapper: none
+  - Name: AVAudioSessionMode
+    SwiftName: AVAudioSessionMode
+    SwiftWrapper: none
+  - Name: AVAudioSessionOrientation
+    SwiftName: AVAudioSessionOrientation
+    SwiftWrapper: none
+  - Name: AVAudioSessionPolarPattern
+    SwiftName: AVAudioSessionPolarPattern
+    SwiftWrapper: none
+  - Name: AVAudioSessionPort
+    SwiftName: AVAudioSessionPort
+    SwiftWrapper: none
+  - Name: AVAssetImageGeneratorApertureMode
+    SwiftName: AVAssetImageGeneratorApertureMode
+  - Name: AVContentKeyRequestRetryReason
+    SwiftName: AVContentKeyRequestRetryReason
+  - Name: AVPlayerItemLegibleOutputTextStylingResolution
+    SwiftName: AVPlayerItemLegibleOutputTextStylingResolution
+  Globals:
+  # AVAudioSession
+  - Name: AVAudioSessionInterruptionNotification
+    SwiftName: AVAudioSessionInterruption
+  - Name: AVAudioSessionMediaServicesWereLostNotification
+    SwiftName: AVAudioSessionMediaServicesWereLost
+  - Name: AVAudioSessionMediaServicesWereResetNotification
+    SwiftName: AVAudioSessionMediaServicesWereReset
+  - Name: AVAudioSessionRouteChangeNotification
+    SwiftName: AVAudioSessionRouteChange
+  - Name: AVAudioSessionSilenceSecondaryAudioHintNotification
+    SwiftName: AVAudioSessionSilenceSecondaryAudioHint

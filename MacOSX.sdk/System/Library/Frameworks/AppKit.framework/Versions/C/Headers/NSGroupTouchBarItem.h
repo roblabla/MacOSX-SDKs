@@ -1,7 +1,7 @@
 /*
  NSGroupTouchBarItem.h
  Application Kit
- Copyright (c) 2015-2017, Apple Inc.
+ Copyright (c) 2015-2018, Apple Inc.
  All rights reserved.
 */
 
@@ -14,16 +14,16 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSGroupTouchBarItem : NSTouchBarItem {
 @private
-    NSTouchBar *_groupTouchBar;
-    NSString *_customizationLabel;
-    NSUserInterfaceLayoutDirection _groupUserInterfaceLayoutDirection;
+    NSTouchBar *_groupTouchBar APPKIT_IVAR;
+    NSString *_customizationLabel APPKIT_IVAR;
+    NSUserInterfaceLayoutDirection _groupUserInterfaceLayoutDirection APPKIT_IVAR;
     struct __gtbiFlags {
         unsigned int hasAutomaticLayoutDirection:1;
         unsigned int reserved:31;
-    } _gtbiFlags;
-    id _private;
+    } _gtbiFlags APPKIT_IVAR;
+    id _private APPKIT_IVAR;
 #if !__OBJC2__
-    void *_groupTouchBarItemReserved[1] __unused;
+    void *_groupTouchBarItemReserved[1] __unused APPKIT_IVAR;
 #endif /* !__OBJC2__ */
 }
 

@@ -1430,7 +1430,6 @@ CFN_EXPORT Boolean
 CFNetServiceRegister(CFNetServiceRef theService, CFStreamError * __nullable error) CF_DEPRECATED(10_2, 10_4, NA, NA);
 
 
-
 /*
  *  CFNetServiceResolve()   *** DEPRECATED ***
  *  

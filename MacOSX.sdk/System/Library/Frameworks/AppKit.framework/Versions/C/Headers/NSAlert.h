@@ -1,7 +1,7 @@
 /*
 	NSAlert.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -40,42 +40,40 @@ static const NSModalResponse NSAlertFirstButtonReturn = 1000;
 static const NSModalResponse NSAlertSecondButtonReturn = 1001;
 static const NSModalResponse NSAlertThirdButtonReturn = 1002;
 
-@interface NSAlert : NSObject
-{
-    @private
-    /*All instance variables are private*/
-    NSTextField *_informationField;
-    id  _first;
-    id  _second;
-    id  _third;
-    NSArray *_buttons;
-    NSPanel *_panel;
-    id  _messageField;
-    id  _imageView;
-    NSSize _minButtonSize;
-    CGFloat _buttonSpacing;
-    CGFloat _buttonPadding;
-    CGFloat _messagePadding;
-    CGFloat _buttonSpacingMaxX;
-    CGFloat _buttonSpacingY;
-    id _modalDelegate;
-    NSWindow *_docWindow;
-    SEL _didEndSelector;
-    SEL _didDismissSelector;
-    NSImage *_unbadgedImage;
-    NSSize _defaultPanelSize;
-    id _helpButton;
-    id _delegate;
-    NSAlertStyle _alertStyle;
-    id _helpAnchor;
-    BOOL _layoutDone;
-    BOOL _showsHelp;
-    BOOL _showsSuppressionButton;
+@interface NSAlert : NSObject {
+@private
+    NSTextField *_informationField APPKIT_IVAR;
+    id  _first APPKIT_IVAR;
+    id  _second APPKIT_IVAR;
+    id  _third APPKIT_IVAR;
+    NSArray *_buttons APPKIT_IVAR;
+    NSPanel *_panel APPKIT_IVAR;
+    id  _messageField APPKIT_IVAR;
+    id  _imageView APPKIT_IVAR;
+    NSSize _minButtonSize APPKIT_IVAR;
+    CGFloat _buttonSpacing APPKIT_IVAR;
+    CGFloat _buttonPadding APPKIT_IVAR;
+    CGFloat _messagePadding APPKIT_IVAR;
+    CGFloat _buttonSpacingMaxX APPKIT_IVAR;
+    CGFloat _buttonSpacingY APPKIT_IVAR;
+    id _modalDelegate APPKIT_IVAR;
+    NSWindow *_docWindow APPKIT_IVAR;
+    SEL _didEndSelector APPKIT_IVAR;
+    SEL _didDismissSelector APPKIT_IVAR;
+    NSImage *_unbadgedImage APPKIT_IVAR;
+    NSSize _defaultPanelSize APPKIT_IVAR;
+    id _helpButton APPKIT_IVAR;
+    id _delegate APPKIT_IVAR;
+    NSAlertStyle _alertStyle APPKIT_IVAR;
+    id _helpAnchor APPKIT_IVAR;
+    BOOL _layoutDone APPKIT_IVAR;
+    BOOL _showsHelp APPKIT_IVAR;
+    BOOL _showsSuppressionButton APPKIT_IVAR;
 #ifndef __OBJC2__
-    BOOL reserved;
+    BOOL reserved APPKIT_IVAR;
 #endif
-    id _suppressionButton;
-    id _accessoryView;
+    id _suppressionButton APPKIT_IVAR;
+    id _accessoryView APPKIT_IVAR;
 }
 
 
@@ -164,22 +162,18 @@ static const NSModalResponse NSAlertThirdButtonReturn = 1002;
 
 @interface NSAlert (NSAlertDeprecated)
 
-/* This method is deprecated in 10.9 and will be formally deprecated in the following release.
- This was intended for use by apps migrating from the C-based API.  This uses alternate return codes that were compatible with this C-based API, but not with modern alerts, see NSAlertDefaultReturn, etc. in NSPanel.h
+/* This was intended for use by apps migrating from the C-based API.  This uses alternate return codes that were compatible with this C-based API, but not with modern alerts, see NSAlertDefaultReturn, etc. in NSPanel.h
  Alerts should be created with the -init method and setting properties.
  */
 + (NSAlert *)alertWithMessageText:(nullable NSString *)message defaultButton:(nullable NSString *)defaultButton alternateButton:(nullable NSString *)alternateButton otherButton:(nullable NSString *)otherButton informativeTextWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(5,6) NS_DEPRECATED_MAC(10_3, 10_10, "Use -init instead");
 
-/* This method is deprecated in 10.9 and will be formally deprecated in the following release.
- -beginSheetModalForWindow:completionHandler: should be used instead.
- */
 - (void)beginSheetModalForWindow:(NSWindow *)window modalDelegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo NS_DEPRECATED_MAC(10_3, 10_10, "Use -beginSheetModalForWindow:completionHandler: instead");
 
 @end
 
-static const NSAlertStyle NSWarningAlertStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSAlertStyleWarning", 10.3, 10.12) = NSAlertStyleWarning;
-static const NSAlertStyle NSInformationalAlertStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSAlertStyleInformational", 10.3, 10.12) = NSAlertStyleInformational;
-static const NSAlertStyle NSCriticalAlertStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSAlertStyleCritical", 10.3, 10.12) = NSAlertStyleCritical;
+static const NSAlertStyle NSWarningAlertStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSAlertStyleWarning", 10_3, 10_12) = NSAlertStyleWarning;
+static const NSAlertStyle NSInformationalAlertStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSAlertStyleInformational", 10_3, 10_12) = NSAlertStyleInformational;
+static const NSAlertStyle NSCriticalAlertStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSAlertStyleCritical", 10_3, 10_12) = NSAlertStyleCritical;
 
 NS_ASSUME_NONNULL_END
 

@@ -3,7 +3,7 @@
 
 	Framework:		AVFoundation
  
-	Copyright 2009-2017 Apple Inc. All rights reserved.
+	Copyright 2009-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -49,7 +49,10 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 	@property       alternateGroupID
 	@abstract       An integer indicating the track as a member of a particular alternate group.
 */
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wavailability"
 @property (nonatomic, readonly) NSInteger alternateGroupID NS_AVAILABLE_MAC(10_11);
+#pragma clang diagnostic pop
 
 @end
 
@@ -328,7 +331,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 	@param			trackAssociationType
 					The type of track association to add between the receiver and the specified movieTrack (for instance, AVTrackAssociationTypeChapterList).
 */
-- (void)addTrackAssociationToTrack:(AVMovieTrack *)movieTrack type:(NSString *)trackAssociationType;
+- (void)addTrackAssociationToTrack:(AVMovieTrack *)movieTrack type:(AVTrackAssociationType)trackAssociationType;
 
 /*!
 	@method			removeTrackAssociationToTrack:type:
@@ -338,7 +341,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 	@param			trackAssociationType
 					The type of track association to remove between the receiver and the specified movieTrack (for instance, AVTrackAssociationTypeChapterList).
 */
-- (void)removeTrackAssociationToTrack:(AVMovieTrack *)movieTrack type:(NSString *)trackAssociationType;
+- (void)removeTrackAssociationToTrack:(AVMovieTrack *)movieTrack type:(AVTrackAssociationType)trackAssociationType;
 
 @end
 

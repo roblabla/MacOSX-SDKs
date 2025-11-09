@@ -1,7 +1,7 @@
 /*
  * NEVPNProtocol.h
  *
- * Copyright (c) 2013-2015 Apple Inc.
+ * Copyright (c) 2013-2015, 2018 Apple Inc.
  * All rights reserved.
  */
 
@@ -21,56 +21,56 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEVPNProtocol : NSObject <NSCopying,NSSecureCoding>
 
 /*!
  * @property serverAddress
  * @discussion The VPN server. Depending on the protocol, may be an IP address, host name, or URL.
  */
-@property (copy, nullable) NSString *serverAddress NS_AVAILABLE(10_11, 8_0);
+@property (copy, nullable) NSString *serverAddress API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property username
  * @discussion The username component of the VPN authentication credential.
  */
-@property (copy, nullable) NSString *username NS_AVAILABLE(10_11, 8_0);
+@property (copy, nullable) NSString *username API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property passwordReference
  * @discussion The password component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassGenericPassword class.
  */
-@property (copy, nullable) NSData *passwordReference NS_AVAILABLE(10_11, 8_0);
+@property (copy, nullable) NSData *passwordReference API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property identityReference
  * @discussion The certificate and private key component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassIdentity class.
  */
-@property (copy, nullable) NSData *identityReference NS_AVAILABLE(10_11, 9_0);
+@property (copy, nullable) NSData *identityReference API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property identityData
  * @discussion The PKCS12 data for the VPN authentication identity. The value is a NSData in PKCS12 format.
  */
-@property (copy, nullable) NSData *identityData NS_AVAILABLE(10_11, 8_0);
+@property (copy, nullable) NSData *identityData API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property identityDataPassword 
  * @discussion The password to be used to decrypt the PKCS12 identity data.
  */
-@property (copy, nullable) NSString *identityDataPassword NS_AVAILABLE(10_11, 8_0);
+@property (copy, nullable) NSString *identityDataPassword API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property disconnectOnSleep
  * @discussion If YES, the VPN connection will be disconnected when the device goes to sleep. The default is NO.
  */
-@property BOOL disconnectOnSleep NS_AVAILABLE(10_11, 8_0);
+@property BOOL disconnectOnSleep API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property proxySettings
  * @discussion An NEProxySettings object containing the proxy settings to use for connections routed through the tunnel.
  */
-@property (copy, nullable) NEProxySettings *proxySettings NS_AVAILABLE(10_11, 9_0);
+@property (copy, nullable) NEProxySettings *proxySettings API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

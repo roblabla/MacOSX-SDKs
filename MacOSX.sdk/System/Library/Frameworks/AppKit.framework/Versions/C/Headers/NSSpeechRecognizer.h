@@ -1,7 +1,7 @@
 /*
 	NSSpeechRecognizer.h
 	Application Kit
-	Copyright (c) 2003-2017, Apple Inc.
+	Copyright (c) 2003-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSSpeechRecognizer : NSObject {
 @private // All instance variables are private
-    id	_privateNSSpeechRecognizerVars;
+    id	_privateNSSpeechRecognizerVars APPKIT_IVAR;
 }
 
 - (nullable instancetype)init;

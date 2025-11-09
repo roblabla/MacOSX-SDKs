@@ -1,13 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: EEA30025-E28D-3570-90B7-E5BDC84B99E1', 'x86_64: 3429E8DC-6F5D-3FF5-A0F4-C2FFBED7F4FD' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 105C2108-7EF5-3650-A8F2-1A790273B1CE' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CoreSDB.framework/Versions/A/CoreSDB
 current-version: 800
 exports:         
-  - archs:           [ i386 ]
-    objc-classes:    [ _CSDBThreadedRecordStore, __CSDBThreadObject ]
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _CSDBCheckResultWithStatement, _CSDBConfigLookaside, _CSDBCreateDirectoriesToPath, 
                        _CSDBCreateDirectoriesToPathWithOwnership, _CSDBCreateThreadedRecordStore, 
                        _CSDBCreateThreadedRecordStoreWithQOSClass, _CSDBCreateUTF8StringFromCFString, 
@@ -94,10 +92,10 @@ exports:
                        _CSDBSqliteDatabaseSetShouldMigrateInExternalProcess, _CSDBSqliteDatabaseSetValueForProperty, 
                        _CSDBSqliteDatabaseSetVersion, _CSDBSqliteDatabaseStatementForReading, 
                        _CSDBSqliteDatabaseStatementForWriting, _CSDBSqliteDatabaseVacuum, 
-                       _CSDBSqliteDeleteDatabase, _CSDBSqliteErrMsg, _CSDBSqliteSetDefaultPageCacheSize, 
-                       _CSDBSqliteSetupLoggingForDatabaseHandle, _CSDBSqliteStatementApplyValuesFromRecord, 
-                       _CSDBSqliteStatementApplyValuesFromRecordWithNullValue, _CSDBSqliteStatementBindValuesForColumns, 
-                       _CSDBSqliteStatementCopyAllRowsStringsForColumnsAtIndices, 
+                       _CSDBSqliteDeleteDatabase, _CSDBSqliteErrMsg, _CSDBSqlitePreparedStatement, 
+                       _CSDBSqliteSetDefaultPageCacheSize, _CSDBSqliteSetupLoggingForDatabaseHandle, 
+                       _CSDBSqliteStatementApplyValuesFromRecord, _CSDBSqliteStatementApplyValuesFromRecordWithNullValue, 
+                       _CSDBSqliteStatementBindValuesForColumns, _CSDBSqliteStatementCopyAllRowsStringsForColumnsAtIndices, 
                        _CSDBSqliteStatementCopyDataResult, _CSDBSqliteStatementCopyStringResult, 
                        _CSDBSqliteStatementCopyStringsForColumnsAtIndices, _CSDBSqliteStatementInteger64Result, 
                        _CSDBSqliteStatementInteger64ResultColumn, _CSDBSqliteStatementIntegerResult, 
@@ -107,5 +105,6 @@ exports:
                        _CSDBStringMethods, _CSDBThreadedRecordStoreEnsureDatabaseSetup, 
                        _CSDBThreadedRecordStoreEnsureDatabaseSetupWithProtection, 
                        _CSDBThreadedRecordStoreGetSequenceNumber, _CSDBThreadedRecordStoreOwnsCurrentThread, 
-                       _CSDBThreadedRecordStoreRegisterClass, _CSDBThreadedRecordStoreTeardownDatabase ]
+                       _CSDBThreadedRecordStoreRegisterClass, _CSDBThreadedRecordStoreTeardownDatabase, 
+                       _kCSDBRecordErrorDomain, _kCSDBRecordSQLiteErrorDomain ]
 ...

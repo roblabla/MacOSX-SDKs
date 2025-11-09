@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class MDLSubmesh;
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLSubmeshTopology : NSObject
 
@@ -109,7 +109,7 @@ MDL_EXPORT
  @class MDLSubmesh
  @abstract A drawable subset of an MDLMesh, with its own material
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLSubmesh : NSObject<MDLNamed>
 

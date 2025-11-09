@@ -1,7 +1,7 @@
 /*
     NSPersistentHistoryChangeRequest.h
     Core Data
-    Copyright (c) 2014-2017, Apple Inc.
+    Copyright (c) 2014-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -20,16 +20,17 @@ API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0))
 #if (!__OBJC2__)
 @private
     NSPersistentHistoryToken *_token;
-    NSDate *_date;
     NSPersistentHistoryResultType _resultType;
     NSArray *_transactionIDs;
     NSNumber *_transactionNumber;
     struct __persistentHistoryChangeRequestDescriptionFlags {
         unsigned int _useQueryGenerationToken:1;
         unsigned int _deleteHistoryRequest:1;
-        
-        unsigned int _reservedPersistentHistoryChangeRequestDescription:30;
+        unsigned int _fetchTransactionForToken:1;
+        unsigned int _reservedPersistentHistoryChangeRequestDescription:29;
     } _persistentHistoryChangeRequestDescriptionFlags;
+
+    id* _additionalPrivateIvars;
 #endif
 }
 

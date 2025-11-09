@@ -1,11 +1,12 @@
 /*
     NSTableViewRowAction.h
     Application Kit
-    Copyright (c) 2014-2017, Apple Inc.
+    Copyright (c) 2014-2018, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,14 +22,14 @@ typedef NS_ENUM(NSInteger, NSTableViewRowActionStyle) {
 NS_CLASS_AVAILABLE_MAC(10_11)
 @interface NSTableViewRowAction : NSObject <NSCopying> {
 @private
-    NSTableViewRowActionStyle _style;
-    NSString *_title;
-    void (^_handler)(NSTableViewRowAction *action, NSInteger row);
-    NSColor *_backgroundColor;
+    NSTableViewRowActionStyle _style APPKIT_IVAR;
+    NSString *_title APPKIT_IVAR;
+    void (^_handler)(NSTableViewRowAction *action, NSInteger row) APPKIT_IVAR;
+    NSColor *_backgroundColor APPKIT_IVAR;
 #ifndef __OBJC2__
-    unsigned int _flags:32;
+    unsigned int _flags:32 APPKIT_IVAR;
 #endif
-    NSImage *_image;
+    NSImage *_image APPKIT_IVAR;
 }
 
 + (instancetype)rowActionWithStyle:(NSTableViewRowActionStyle)style title:(NSString *)title handler:(void (^)(NSTableViewRowAction *action, NSInteger row))handler;

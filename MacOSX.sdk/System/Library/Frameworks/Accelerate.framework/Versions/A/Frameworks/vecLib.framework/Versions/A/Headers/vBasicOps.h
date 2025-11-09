@@ -3,9 +3,9 @@
  
      Contains:   Basic Algebraic Operations for AltiVec
  
-     Version:    vecLib-622.0
+     Version:    vecLib-671.220
  
-     Copyright:  Copyright (c) 1999-2017 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 1999-2018 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -20,7 +20,7 @@
 
 #include "vecLibTypes.h"
 
-#include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -156,6 +156,9 @@ Following is a short description of functions in this section:
 // call occur and then return after executing 1 instruction. Thus we
 // introduce this conditional define to allow for certain inline
 // attributes to be defined.
+// However, as we still include these symbols in they dylib for
+// backwards compatability, they must not be inline for the tapi
+// installapi pass.
 #if defined __SSE2__
 
 #if __has_feature(assume_nonnull)
@@ -183,8 +186,7 @@ vU8Divide(
   vUInt8    vN,
   vUInt8    vD,
   vUInt8 * __nullable vRemainder)
-    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-
+	API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  *  vS8Divide()
@@ -199,7 +201,7 @@ vS8Divide(
   vSInt8    vN,
   vSInt8    vD,
   vSInt8 * __nullable vRemainder)
-    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -215,7 +217,7 @@ vU16Divide(
   vUInt16    vN,
   vUInt16    vD,
   vUInt16 * __nullable vRemainder)
-    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -231,7 +233,7 @@ vS16Divide(
   vSInt16    vN,
   vSInt16    vD,
   vSInt16 * __nullable vRemainder)
-    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -247,7 +249,7 @@ vU32Divide(
   vUInt32    vN,
   vUInt32    vD,
   vUInt32 * __nullable vRemainder)
-    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -263,7 +265,7 @@ vS32Divide(
   vSInt32    vN,
   vSInt32    vD,
   vSInt32 * __nullable vRemainder)
-    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -279,7 +281,7 @@ vU64Divide(
   vUInt32    vN,
   vUInt32    vD,
   vUInt32 * __nullable vRemainder)
-    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -295,7 +297,7 @@ vS64Divide(
   vSInt32    vN,
   vSInt32    vD,
   vSInt32 * __nullable vRemainder)
-    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -311,7 +313,7 @@ vU128Divide(
   vUInt32    vN,
   vUInt32    vD,
   vUInt32 * __nullable vRemainder)
-    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -327,7 +329,7 @@ vS128Divide(
   vSInt32    vN,
   vSInt32    vD,
   vSInt32 * __nullable vRemainder)
-    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 
@@ -342,7 +344,7 @@ vS128Divide(
 extern vUInt8 
 vU8HalfMultiply(
   vUInt8   vA,
-  vUInt8   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt8   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -356,7 +358,7 @@ vU8HalfMultiply(
 extern vSInt8 
 vS8HalfMultiply(
   vSInt8   vA,
-  vSInt8   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt8   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -370,17 +372,17 @@ vS8HalfMultiply(
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-#if defined __SSE2__
+#if defined __SSE2__ && !defined __clang_tapi__
 static __inline__ vUInt16 __VBASICOPS_INLINE_ATTR__
 vU16HalfMultiply(
   vUInt16   __vbasicops_vA,
   vUInt16   __vbasicops_vB) { return _mm_mullo_epi16(__vbasicops_vA, __vbasicops_vB); }
-#else // defined __SSE2__
+#else // defined __SSE2__ && !defined __clang_tapi__
 extern vUInt16 
 vU16HalfMultiply(
   vUInt16   vA,
-  vUInt16   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-#endif // defined __SSE2__
+  vUInt16   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif // defined __SSE2__ && !defined __clang_tapi__
 
 
 /*
@@ -395,17 +397,17 @@ vU16HalfMultiply(
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-#if defined __SSE2__
+#if defined __SSE2__ && !defined __clang_tapi__
 static __inline__ vSInt16 __VBASICOPS_INLINE_ATTR__
 vS16HalfMultiply(
   vSInt16   __vbasicops_vA,
   vSInt16   __vbasicops_vB) { return _mm_mullo_epi16(__vbasicops_vA, __vbasicops_vB); }
-#else // defined __SSE2__
+#else // defined __SSE2__ && !defined __clang_tapi__
 extern vSInt16 
 vS16HalfMultiply(
   vSInt16   vA,
-  vSInt16   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-#endif // defined __SSE2__
+  vSInt16   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif // defined __SSE2__ && !defined __clang_tapi__
 
 
 /*
@@ -419,7 +421,7 @@ vS16HalfMultiply(
 extern vUInt32 
 vU32HalfMultiply(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -433,7 +435,7 @@ vU32HalfMultiply(
 extern vSInt32 
 vS32HalfMultiply(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -448,7 +450,7 @@ vS32HalfMultiply(
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-#if defined (__SSE2__)
+#if defined (__SSE2__) && !defined __clang_tapi__
 static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
 vU32FullMulEven(
   vUInt32   __vbasicops_vA,
@@ -458,12 +460,12 @@ vU32FullMulEven(
     __vbasicops_vB = _mm_srli_epi64(__vbasicops_vB, 32);
     return _mm_mul_epu32(__vbasicops_vA, __vbasicops_vB);
 }
-#else // defined __SSE2__
+#else // defined (__SSE2__) && !defined __clang_tapi__
 extern vUInt32 
 vU32FullMulEven(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-#endif // defined __SSE2__
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif // defined (__SSE2__) && !defined __clang_tapi__
 
 
 /*
@@ -477,17 +479,17 @@ vU32FullMulEven(
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-#if defined __SSE2__
+#if defined __SSE2__ && !defined __clang_tapi__
 static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
 vU32FullMulOdd(
   vUInt32   __vbasicops_vA,
   vUInt32   __vbasicops_vB) { return _mm_mul_epu32(__vbasicops_vA, __vbasicops_vB); }
-#else // defined __SSE2__
+#else // defined __SSE2__ && !defined __clang_tapi__
 extern vUInt32 
 vU32FullMulOdd(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-#endif // defined __SSE2__
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif // defined __SSE2__ && !defined __clang_tapi__
 
 
 /*
@@ -501,7 +503,7 @@ vU32FullMulOdd(
 extern vSInt32 
 vS32FullMulEven(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -515,7 +517,7 @@ vS32FullMulEven(
 extern vSInt32 
 vS32FullMulOdd(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -529,7 +531,7 @@ vS32FullMulOdd(
 extern vUInt32 
 vU64FullMulEven(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -543,7 +545,7 @@ vU64FullMulEven(
 extern vUInt32 
 vU64FullMulOdd(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -557,7 +559,7 @@ vU64FullMulOdd(
 extern vUInt32 
 vU64HalfMultiply(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -571,7 +573,7 @@ vU64HalfMultiply(
 extern vSInt32 
 vS64HalfMultiply(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -585,7 +587,7 @@ vS64HalfMultiply(
 extern vSInt32 
 vS64FullMulEven(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -599,7 +601,7 @@ vS64FullMulEven(
 extern vSInt32 
 vS64FullMulOdd(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -613,7 +615,7 @@ vS64FullMulOdd(
 extern vUInt32 
 vU128HalfMultiply(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -627,7 +629,7 @@ vU128HalfMultiply(
 extern vSInt32 
 vS128HalfMultiply(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 
@@ -646,17 +648,17 @@ vS128HalfMultiply(
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-#if defined __SSE2__
+#if defined __SSE2__ && !defined __clang_tapi__
 static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
 vU64Sub(
   vUInt32   __vbasicops_vA,
   vUInt32   __vbasicops_vB) { return _mm_sub_epi64(__vbasicops_vA, __vbasicops_vB); }
-#else
+#else	//	defined __SSE2__ && !defined __clang_tapi__
 extern vUInt32 
 vU64Sub(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-#endif
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif	//	defined __SSE2__ && !defined __clang_tapi__
 
 
 /*
@@ -670,7 +672,7 @@ vU64Sub(
 extern vUInt32 
 vU64SubS(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -684,7 +686,7 @@ vU64SubS(
 extern vUInt32 
 vU128Sub(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -698,7 +700,7 @@ vU128Sub(
 extern vUInt32 
 vU128SubS(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -716,17 +718,17 @@ vU128SubS(
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-#if defined __SSE2__
+#if defined __SSE2__ && !defined __clang_tapi__
 static __inline__ vSInt32 __VBASICOPS_INLINE_ATTR__
 vS64Sub(
   vSInt32   __vbasicops_vA,
   vSInt32   __vbasicops_vB) { return _mm_sub_epi64(__vbasicops_vA, __vbasicops_vB); }
-#else
+#else	//	defined __SSE2__ && !defined __clang_tapi__
 extern vSInt32 
 vS64Sub(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-#endif
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif	//	defined __SSE2__ && !defined __clang_tapi__
 
 
 /*
@@ -740,7 +742,7 @@ vS64Sub(
 extern vSInt32 
 vS128Sub(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -754,7 +756,7 @@ vS128Sub(
 extern vSInt32 
 vS64SubS(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -768,7 +770,7 @@ vS64SubS(
 extern vSInt32 
 vS128SubS(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 
@@ -783,17 +785,17 @@ vS128SubS(
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-#if defined (__SSE2__)
+#if defined (__SSE2__) && !defined __clang_tapi__
 static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
 vU64Add(
   vUInt32   __vbasicops_vA,
   vUInt32   __vbasicops_vB) { return _mm_add_epi64(__vbasicops_vA, __vbasicops_vB); }
-#else
+#else	//	defined __SSE2__ && !defined __clang_tapi__
 extern vUInt32
 vU64Add(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-#endif
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif	//	defined __SSE2__ && !defined __clang_tapi__
 
 /*
  *  vU64AddS()
@@ -806,7 +808,7 @@ vU64Add(
 extern vUInt32 
 vU64AddS(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -820,7 +822,7 @@ vU64AddS(
 extern vUInt32 
 vU128Add(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -834,7 +836,7 @@ vU128Add(
 extern vUInt32 
 vU128AddS(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -848,17 +850,17 @@ vU128AddS(
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-#if defined __SSE2__
+#if defined __SSE2__ && !defined __clang_tapi__
 static __inline__ vSInt32 __VBASICOPS_INLINE_ATTR__
 vS64Add(
   vSInt32   __vbasicops_vA,
   vSInt32   __vbasicops_vB) { return _mm_add_epi64(__vbasicops_vA, __vbasicops_vB); }
-#else // defined __SSE2__
+#else // defined __SSE2__ && !defined __clang_tapi__
 extern vSInt32 
 vS64Add(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-#endif // defined __SSE2__
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif // defined __SSE2__ && !defined __clang_tapi__
 
 
 /*
@@ -872,7 +874,7 @@ vS64Add(
 extern vSInt32 
 vS64AddS(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -886,7 +888,7 @@ vS64AddS(
 extern vSInt32 
 vS128Add(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -900,7 +902,7 @@ vS128Add(
 extern vSInt32 
 vS128AddS(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 
@@ -909,7 +911,7 @@ vS128AddS(
  */  
 extern vUInt32 
 vU64Neg (
-  vUInt32   vA) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vA) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -917,7 +919,7 @@ vU64Neg (
  */  
 extern vSInt32 
 vS64Neg (
-  vSInt32   vA) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+  vSInt32   vA) API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -925,7 +927,7 @@ vS64Neg (
  */  
 extern vUInt32 
 vU128Neg (
-  vUInt32   vA) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+  vUInt32   vA) API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -933,7 +935,7 @@ vU128Neg (
  */  
 extern vSInt32 
 vS128Neg (
-  vSInt32   vA) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+  vSInt32   vA) API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 
@@ -945,7 +947,7 @@ vS128Neg (
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-#if defined (__SSE2__)
+#if defined (__SSE2__) && !defined __clang_tapi__
 static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
 vLL64Shift(
   vUInt32   __vbasicops_vA,
@@ -954,12 +956,12 @@ vLL64Shift(
     return _mm_sll_epi64(__vbasicops_vA,
                          _mm_and_si128(__vbasicops_vShiftFactor, _mm_cvtsi32_si128( 0x3F )));
 }
-#else
+#else	//	defined __SSE2__ && !defined __clang_tapi__
 extern vUInt32 
 vLL64Shift(
   vUInt32   vA,
-  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-#endif
+  vUInt8    vShiftFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif	//	defined __SSE2__ && !defined __clang_tapi__
 
 /*
  *  vA64Shift()
@@ -972,7 +974,7 @@ vLL64Shift(
 extern vUInt32 
 vA64Shift(
   vUInt32   vA,
-  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt8    vShiftFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -983,7 +985,7 @@ vA64Shift(
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-#if defined (__SSE2__)
+#if defined (__SSE2__) && !defined __clang_tapi__
 static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
 vLR64Shift(
     vUInt32   __vbasicops_vA,
@@ -992,12 +994,12 @@ vLR64Shift(
     return _mm_srl_epi64(__vbasicops_vA,
                          _mm_and_si128(__vbasicops_vShiftFactor, _mm_cvtsi32_si128( 0x3F )));
 }
-#else
+#else	//	defined __SSE2__ && !defined __clang_tapi__
 extern vUInt32 
 vLR64Shift(
   vUInt32   vA,
-  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-#endif
+  vUInt8    vShiftFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif	//	defined __SSE2__ && !defined __clang_tapi__
 
 /*
  *  vLL64Shift2()
@@ -1010,7 +1012,7 @@ vLR64Shift(
 extern vUInt32 
 vLL64Shift2(
   vUInt32   vA,
-  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt8    vShiftFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -1024,7 +1026,7 @@ vLL64Shift2(
 extern vUInt32 
 vA64Shift2(
   vUInt32   vA,
-  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt8    vShiftFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -1038,7 +1040,7 @@ vA64Shift2(
 extern vUInt32 
 vLR64Shift2(
   vUInt32   vA,
-  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt8    vShiftFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -1052,7 +1054,7 @@ vLR64Shift2(
 extern vUInt32 
 vLL128Shift(
   vUInt32   vA,
-  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+  vUInt8    vShiftFactor) API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -1066,7 +1068,7 @@ vLL128Shift(
 extern vUInt32 
 vLR128Shift(
   vUInt32   vA,
-  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+  vUInt8    vShiftFactor) API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -1080,7 +1082,7 @@ vLR128Shift(
 extern vUInt32 
 vA128Shift(
   vUInt32   vA,
-  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt8    vShiftFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 
@@ -1095,7 +1097,7 @@ vA128Shift(
 extern vUInt32 
 vL64Rotate(
   vUInt32   vA,
-  vUInt8    vRotateFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt8    vRotateFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -1109,7 +1111,7 @@ vL64Rotate(
 extern vUInt32 
 vR64Rotate(
   vUInt32   vA,
-  vUInt8    vRotateFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt8    vRotateFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -1123,7 +1125,7 @@ vR64Rotate(
 extern vUInt32 
 vL64Rotate2(
   vUInt32   vA,
-  vUInt8    vRotateFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt8    vRotateFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -1137,7 +1139,7 @@ vL64Rotate2(
 extern vUInt32 
 vR64Rotate2(
   vUInt32   vA,
-  vUInt8    vRotateFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt8    vRotateFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -1151,7 +1153,7 @@ vR64Rotate2(
 extern vUInt32 
 vL128Rotate(
   vUInt32   vA,
-  vUInt8    vRotateFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt8    vRotateFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -1165,7 +1167,7 @@ vL128Rotate(
 extern vUInt32 
 vR128Rotate(
   vUInt32   vA,
-  vUInt8    vRotateFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt8    vRotateFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 #endif  // defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__

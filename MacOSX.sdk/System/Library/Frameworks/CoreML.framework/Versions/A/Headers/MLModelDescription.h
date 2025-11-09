@@ -5,8 +5,10 @@
 //  Copyright © 2017 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <CoreML/MLFeatureDescription.h>
 #import <CoreML/MLModelMetadataKeys.h>
+#import <CoreML/MLExport.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  * with special meaning and metadata.
  */
 API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0))
+ML_EXPORT
 @interface MLModelDescription : NSObject
 
 /// Description of the inputs to the model

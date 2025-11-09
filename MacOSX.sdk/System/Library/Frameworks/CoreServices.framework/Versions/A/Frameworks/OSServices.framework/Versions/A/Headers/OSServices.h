@@ -19,8 +19,10 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+#if TARGET_OS_OSX
 #ifndef __CARBONCORE__
 #include <CarbonCore/CarbonCore.h>
+#endif
 #endif
 
 #ifndef __CSIDENTITY__
@@ -39,28 +41,40 @@
 #include <OSServices/CSIdentityQuery.h>
 #endif
 
+#if TARGET_OS_OSX
 #ifndef __ICONSTORAGE__
 #include <OSServices/IconStorage.h>
 #endif
+#endif
 
+#if TARGET_OS_OSX
 #ifndef __POWER__
 #include <OSServices/Power.h>
 #endif
+#endif
 
+#if TARGET_OS_OSX
 #ifndef __SECURITYCORE__
 #include <OSServices/SecurityCore.h>
 #endif
+#endif
 
+#if TARGET_OS_OSX
 #ifndef __WSMETHODINVOCATION__
 #include <OSServices/WSMethodInvocation.h>
 #endif
+#endif
 
+#if TARGET_OS_OSX
 #ifndef __WSPROTOCOLHANDLER__
 #include <OSServices/WSProtocolHandler.h>
 #endif
+#endif
 
+#if TARGET_OS_OSX
 #ifndef __WSTYPES__
 #include <OSServices/WSTypes.h>
+#endif
 #endif
 
 

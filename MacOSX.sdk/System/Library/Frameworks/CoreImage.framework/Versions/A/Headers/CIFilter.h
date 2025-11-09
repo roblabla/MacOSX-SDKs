@@ -159,6 +159,7 @@ CORE_IMAGE_EXPORT NSString * const kCIInputBackgroundImageKey NS_AVAILABLE(10_5,
 CORE_IMAGE_EXPORT NSString * const kCIInputImageKey NS_AVAILABLE(10_5, 5_0);
 CORE_IMAGE_EXPORT NSString * const kCIInputDepthImageKey NS_AVAILABLE(10_13, 11_0);
 CORE_IMAGE_EXPORT NSString * const kCIInputDisparityImageKey NS_AVAILABLE(10_13, 11_0);
+CORE_IMAGE_EXPORT NSString * const kCIInputAmountKey NS_AVAILABLE(10_14, 12_0);
 CORE_IMAGE_EXPORT NSString * const kCIInputTimeKey NS_AVAILABLE(10_5, 7_0);
 CORE_IMAGE_EXPORT NSString * const kCIInputTransformKey NS_AVAILABLE(10_5, 7_0);
 CORE_IMAGE_EXPORT NSString * const kCIInputScaleKey NS_AVAILABLE(10_5, 7_0);
@@ -179,6 +180,7 @@ CORE_IMAGE_EXPORT NSString * const kCIInputBiasKey NS_AVAILABLE(10_5, 9_0);
 CORE_IMAGE_EXPORT NSString * const kCIInputWeightsKey NS_AVAILABLE(10_11, 9_0);
 CORE_IMAGE_EXPORT NSString * const kCIInputGradientImageKey NS_AVAILABLE(10_5, 9_0);
 CORE_IMAGE_EXPORT NSString * const kCIInputMaskImageKey NS_AVAILABLE(10_5, 7_0);
+CORE_IMAGE_EXPORT NSString * const kCIInputMatteImageKey NS_AVAILABLE(10_14, 12_0);
 CORE_IMAGE_EXPORT NSString * const kCIInputShadingImageKey NS_AVAILABLE(10_5, 9_0);
 CORE_IMAGE_EXPORT NSString * const kCIInputTargetImageKey NS_AVAILABLE(10_5, 7_0);
 CORE_IMAGE_EXPORT NSString * const kCIInputExtentKey NS_AVAILABLE(10_5, 7_0);
@@ -316,15 +318,9 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
    The parameters of other filter classes will not be serialized.
    The return value will be null if none of the filters can be serialized.
  */
-#if !defined(SWIFT_CLASS_EXTRA) || (defined(SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH) && SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH >= 2)
 + (nullable NSData*)serializedXMPFromFilters:(NSArray<CIFilter *> *)filters
                             inputImageExtent:(CGRect)extent
     NS_AVAILABLE(10_9, 6_0);
-#else
-+ (NSData*)serializedXMPFromFilters:(NSArray<CIFilter *> *)filters
-                   inputImageExtent:(CGRect)extent
-    NS_AVAILABLE(10_9, 6_0);
-#endif
 
 /* Return an array of CIFilters de-serialized from XMP data.
  */

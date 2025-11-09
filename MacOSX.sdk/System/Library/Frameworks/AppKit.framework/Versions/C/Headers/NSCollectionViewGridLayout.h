@@ -1,7 +1,7 @@
 /*
     NSCollectionViewGridLayout.h
     Application Kit
-    Copyright (c) 2015-2017, Apple Inc.
+    Copyright (c) 2015-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -18,15 +18,15 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 #ifndef __OBJC2__
 {
 @private
-    NSUInteger _maxGridRows;
-    NSUInteger _maxGridColumns;
-    NSSize _minItemSize;
-    NSSize _maxItemSize;
-    NSEdgeInsets _margins;
-    CGFloat _minimumInteritemSpacing;
-    CGFloat _minimumLineSpacing;
-    NSArray *_backgroundColors;
-    id _glReserved[22];
+    NSUInteger _maxGridRows APPKIT_IVAR;
+    NSUInteger _maxGridColumns APPKIT_IVAR;
+    NSSize _minItemSize APPKIT_IVAR;
+    NSSize _maxItemSize APPKIT_IVAR;
+    NSEdgeInsets _margins APPKIT_IVAR;
+    CGFloat _minimumInteritemSpacing APPKIT_IVAR;
+    CGFloat _minimumLineSpacing APPKIT_IVAR;
+    NSArray *_backgroundColors APPKIT_IVAR;
+    id _glReserved[22] APPKIT_IVAR;
 }
 #endif
 

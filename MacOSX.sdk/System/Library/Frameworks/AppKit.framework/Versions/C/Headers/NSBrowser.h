@@ -1,7 +1,7 @@
 /*
     NSBrowser.h
     Application Kit
-    Copyright (c) 1994-2017, Apple Inc.
+    Copyright (c) 1994-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -16,41 +16,12 @@ static const NSAppKitVersion NSAppKitVersionNumberWithColumnResizingBrowser = 68
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * NSBrowserColumnsAutosaveName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSBrowserColumnsAutosaveName NS_SWIFT_BRIDGED_TYPEDEF;
 
 @class NSMatrix, NSScroller, NSIndexSet;
 @protocol NSBrowserDelegate;
 
 typedef struct __Brflags {
-#ifdef __BIG_ENDIAN__
-    unsigned int        allowsMultipleSelection:1;
-    unsigned int        allowsBranchSelection:1;
-    unsigned int        reuseColumns:1;
-    unsigned int        isTitled:1;
-    unsigned int        titleFromPrevious:1;
-    unsigned int        separateColumns:1;
-    unsigned int        delegateImplementsWillDisplayCell:1;
-    unsigned int        delegateSetsTitles:1;
-    unsigned int        delegateSelectsCellsByString:1;
-    unsigned int        delegateDoesNotCreateRowsInMatrix:1;
-    unsigned int        delegateValidatesColumns:1;
-    unsigned int        acceptArrowKeys:1;
-    unsigned int        dontDrawTitles:1;
-    unsigned int        sendActionOnArrowKeys:1;
-    unsigned int        prohibitEmptySel:1;
-    unsigned int        hasHorizontalScroller:1;
-    unsigned int        time:1;
-    unsigned int        allowsIncrementalSearching:1;
-    unsigned int        delegateSelectsCellsByRow:1;
-    unsigned int        disableCompositing:6;
-    unsigned int        refusesFirstResponder:1;
-    unsigned int	acceptsFirstMouse:1;
-    unsigned int	actionNeedsToBeSent:1;
-    unsigned int        usesSmallSizeTitleFont:1;
-    unsigned int	usesSmallScrollers:1;
-    unsigned int	prefersAllColumnUserResizing:1;
-    unsigned int        firstVisibleCalculationDisabled:1;
-#else
     unsigned int        firstVisibleCalculationDisabled:1;
     unsigned int 	prefersAllColumnUserResizing:1;
     unsigned int	usesSmallScrollers:1;
@@ -78,7 +49,6 @@ typedef struct __Brflags {
     unsigned int        reuseColumns:1;
     unsigned int        allowsBranchSelection:1;
     unsigned int        allowsMultipleSelection:1;
-#endif
 } _Brflags;
 
 
@@ -109,24 +79,24 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 @interface NSBrowser : NSControl
 {
     /* All instance variables are private */
-    id                           _nsreserved2;
-    SEL                          _nsreserved3;
-    __weak id                    _delegate;
-    SEL                          _doubleAction;
-    Class                        _matrixClass;
-    id                           _cellPrototype;
-    NSSize		         _columnSize;
-    short		         _numberOfVisibleColumns;
-    short		         _minColumnWidth;
-    short		         _firstVisibleColumn;
-    short		         _maxVisibleColumns;
-    NSMutableArray	        *_titles;
-    NSString		        *_pathSeparator;
-    NSMutableArray	        *_columns;
-    id                           _brAuxiliaryStorage;
-    NSString		        *_firstColumnTitle;
-    NSScroller		        *_scroller;
-    _Brflags                    _brflags;
+    id                           _nsreserved2 APPKIT_IVAR;
+    SEL                          _nsreserved3 APPKIT_IVAR;
+    __weak id                    _delegate APPKIT_IVAR;
+    SEL                          _doubleAction APPKIT_IVAR;
+    Class                        _matrixClass APPKIT_IVAR;
+    id                           _cellPrototype APPKIT_IVAR;
+    NSSize		         _columnSize APPKIT_IVAR;
+    short		         _numberOfVisibleColumns APPKIT_IVAR;
+    short		         _minColumnWidth APPKIT_IVAR;
+    short		         _firstVisibleColumn APPKIT_IVAR;
+    short		         _maxVisibleColumns APPKIT_IVAR;
+    NSMutableArray	        *_titles APPKIT_IVAR;
+    NSString		        *_pathSeparator APPKIT_IVAR;
+    NSMutableArray	        *_columns APPKIT_IVAR;
+    id                           _brAuxiliaryStorage APPKIT_IVAR;
+    NSString		        *_firstColumnTitle APPKIT_IVAR;
+    NSScroller		        *_scroller APPKIT_IVAR;
+    _Brflags                    _brflags APPKIT_IVAR;
 }
 
 @property (class, readonly) Class cellClass;

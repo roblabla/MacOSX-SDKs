@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  @class MTLHeapDescriptor
  */
-NS_CLASS_AVAILABLE(10_13, 10_0)
+MTL_EXPORT API_AVAILABLE(macos(10.13), ios(10.0))
 @interface MTLHeapDescriptor : NSObject <NSCopying>
 
 /*!
@@ -48,7 +48,7 @@ NS_CLASS_AVAILABLE(10_13, 10_0)
 /*!
  @protocol MTLHeap
  */
-NS_AVAILABLE(10_13, 10_0)
+API_AVAILABLE(macos(10.13), ios(10.0))
 @protocol MTLHeap <NSObject>
 
 /*!
@@ -94,7 +94,7 @@ NS_AVAILABLE(10_13, 10_0)
  @property currentAllocatedSize
  @abstract The size in bytes of the current heap allocation.
  */
-@property (readonly) NSUInteger currentAllocatedSize NS_AVAILABLE(10_13, 11_0);
+@property (readonly) NSUInteger currentAllocatedSize API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  @method maxAvailableSizeWithAlignment:
@@ -109,8 +109,8 @@ NS_AVAILABLE(10_13, 10_0)
  @discussion The requested storage and CPU cache modes must match the storage and CPU cache modes of the heap.
  @return The buffer or nil if heap is full.
  */
-- (id <MTLBuffer>)newBufferWithLength:(NSUInteger)length 
-                              options:(MTLResourceOptions)options;
+- (nullable id <MTLBuffer>)newBufferWithLength:(NSUInteger)length
+                                       options:(MTLResourceOptions)options;
 
 /*!
  @method newTextureWithDescriptor:
@@ -118,7 +118,7 @@ NS_AVAILABLE(10_13, 10_0)
  @discussion The requested storage and CPU cache modes must match the storage and CPU cache modes of the heap, with the exception that the requested storage mode can be MTLStorageModeMemoryless. 
  @return The texture or nil if heap is full.
  */
-- (id <MTLTexture>)newTextureWithDescriptor:(MTLTextureDescriptor *)desc;
+- (nullable id <MTLTexture>)newTextureWithDescriptor:(MTLTextureDescriptor *)desc;
 
 /*!
  @method setPurgeabilityState:

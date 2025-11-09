@@ -6,23 +6,26 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <ImageKit/ImageKitBase.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+#ifndef IKSaveOptions_h
+#define IKSaveOptions_h
 
 @class IKSaveOptions;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+IK_CLASS_AVAILABLE(10.6)
 @interface NSObject(IKSaveOptionsDelegate)
 - (BOOL)saveOptions: (IKSaveOptions *)saveOptions
    shouldShowUTType: (NSString *)utType;
 @end
-#endif
 
+@class NSSavePanel, NSView;
 
 /*! 
  @class IKSaveOptions
  @abstract The IKSaveOptions class initializes, adds, and manages user interface options for saving image data.
  */
+IK_CLASS_AVAILABLE(10.5)
 @interface IKSaveOptions : NSObject
 {
 @private

@@ -1,12 +1,13 @@
 /*
         NSTreeNode.h
 	AppKit
-	Copyright (c) 2007-2017, Apple Inc.
+	Copyright (c) 2007-2018, Apple Inc.
 	All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,16 +15,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSTreeNode : NSObject {
-    id _childNodesProxy;
-    id _representedObject;
-    void *_observationInfo;
-    id _reserved2;
-    NSMutableArray *_childNodes;
-    __weak NSTreeNode *_parentNode;
+    id _childNodesProxy APPKIT_IVAR;
+    id _representedObject APPKIT_IVAR;
+    void *_observationInfo APPKIT_IVAR;
+    id _reserved2 APPKIT_IVAR;
+    NSMutableArray *_childNodes APPKIT_IVAR;
+    __weak NSTreeNode *_parentNode APPKIT_IVAR;
     struct __NSTreeNodeFlags {
 	unsigned int ignoreObserving:1;
 	unsigned int reserved:31;
-    } _NSTreeNodeFlags;
+    } _NSTreeNodeFlags APPKIT_IVAR;
 }
 
 + (instancetype)treeNodeWithRepresentedObject:(nullable id)modelObject;

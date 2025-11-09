@@ -38,7 +38,7 @@ typedef NS_ENUM(NSInteger, AVAudioUnitDistortionPreset) {
     @abstract An AVAudioUnitEffect that implements a multi-stage distortion effect.
  
 */
-NS_CLASS_AVAILABLE(10_10, 8_0) __WATCHOS_PROHIBITED
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos) 
 @interface AVAudioUnitDistortion : AVAudioUnitEffect
 
 /*! @method loadFactoryPreset:

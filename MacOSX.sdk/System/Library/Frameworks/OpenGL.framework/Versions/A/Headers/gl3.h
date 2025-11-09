@@ -108,6 +108,7 @@
 
 /* Base GL types */
 #include <OpenGL/gltypes.h>
+#include <OpenGL/OpenGLAvailability.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -1613,54 +1614,54 @@ extern "C" {
 #ifndef GL_VERSION_1_0
 #define GL_VERSION_1_0 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glCullFace (GLenum mode);
-GLAPI void APIENTRY glFrontFace (GLenum mode);
-GLAPI void APIENTRY glHint (GLenum target, GLenum mode);
-GLAPI void APIENTRY glLineWidth (GLfloat width);
-GLAPI void APIENTRY glPointSize (GLfloat size);
-GLAPI void APIENTRY glPolygonMode (GLenum face, GLenum mode);
-GLAPI void APIENTRY glScissor (GLint x, GLint y, GLsizei width, GLsizei height);
-GLAPI void APIENTRY glTexParameterf (GLenum target, GLenum pname, GLfloat param);
-GLAPI void APIENTRY glTexParameterfv (GLenum target, GLenum pname, const GLfloat *params);
-GLAPI void APIENTRY glTexParameteri (GLenum target, GLenum pname, GLint param);
-GLAPI void APIENTRY glTexParameteriv (GLenum target, GLenum pname, const GLint *params);
-GLAPI void APIENTRY glTexImage1D (GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
-GLAPI void APIENTRY glTexImage2D (GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
-GLAPI void APIENTRY glDrawBuffer (GLenum mode);
-GLAPI void APIENTRY glClear (GLbitfield mask);
-GLAPI void APIENTRY glClearColor (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
-GLAPI void APIENTRY glClearStencil (GLint s);
-GLAPI void APIENTRY glClearDepth (GLclampd depth);
-GLAPI void APIENTRY glStencilMask (GLuint mask);
-GLAPI void APIENTRY glColorMask (GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha);
-GLAPI void APIENTRY glDepthMask (GLboolean flag);
-GLAPI void APIENTRY glDisable (GLenum cap);
-GLAPI void APIENTRY glEnable (GLenum cap);
-GLAPI void APIENTRY glFinish (void);
-GLAPI void APIENTRY glFlush (void);
-GLAPI void APIENTRY glBlendFunc (GLenum sfactor, GLenum dfactor);
-GLAPI void APIENTRY glLogicOp (GLenum opcode);
-GLAPI void APIENTRY glStencilFunc (GLenum func, GLint ref, GLuint mask);
-GLAPI void APIENTRY glStencilOp (GLenum fail, GLenum zfail, GLenum zpass);
-GLAPI void APIENTRY glDepthFunc (GLenum func);
-GLAPI void APIENTRY glPixelStoref (GLenum pname, GLfloat param);
-GLAPI void APIENTRY glPixelStorei (GLenum pname, GLint param);
-GLAPI void APIENTRY glReadBuffer (GLenum mode);
-GLAPI void APIENTRY glReadPixels (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels);
-GLAPI void APIENTRY glGetBooleanv (GLenum pname, GLboolean *params);
-GLAPI void APIENTRY glGetDoublev (GLenum pname, GLdouble *params);
-GLAPI GLenum APIENTRY glGetError (void);
-GLAPI void APIENTRY glGetFloatv (GLenum pname, GLfloat *params);
-GLAPI void APIENTRY glGetIntegerv (GLenum pname, GLint *params);
-GLAPI const GLubyte * APIENTRY glGetString (GLenum name);
-GLAPI void APIENTRY glGetTexImage (GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels);
-GLAPI void APIENTRY glGetTexParameterfv (GLenum target, GLenum pname, GLfloat *params);
-GLAPI void APIENTRY glGetTexParameteriv (GLenum target, GLenum pname, GLint *params);
-GLAPI void APIENTRY glGetTexLevelParameterfv (GLenum target, GLint level, GLenum pname, GLfloat *params);
-GLAPI void APIENTRY glGetTexLevelParameteriv (GLenum target, GLint level, GLenum pname, GLint *params);
-GLAPI GLboolean APIENTRY glIsEnabled (GLenum cap);
-GLAPI void APIENTRY glDepthRange (GLclampd near, GLclampd far);
-GLAPI void APIENTRY glViewport (GLint x, GLint y, GLsizei width, GLsizei height);
+GLAPI void APIENTRY glCullFace (GLenum mode) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glFrontFace (GLenum mode) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glHint (GLenum target, GLenum mode) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glLineWidth (GLfloat width) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glPointSize (GLfloat size) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glPolygonMode (GLenum face, GLenum mode) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glScissor (GLint x, GLint y, GLsizei width, GLsizei height) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glTexParameterf (GLenum target, GLenum pname, GLfloat param) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glTexParameterfv (GLenum target, GLenum pname, const GLfloat *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glTexParameteri (GLenum target, GLenum pname, GLint param) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glTexParameteriv (GLenum target, GLenum pname, const GLint *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glTexImage1D (GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glTexImage2D (GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glDrawBuffer (GLenum mode) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glClear (GLbitfield mask) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glClearColor (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glClearStencil (GLint s) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glClearDepth (GLclampd depth) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glStencilMask (GLuint mask) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glColorMask (GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glDepthMask (GLboolean flag) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glDisable (GLenum cap) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glEnable (GLenum cap) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glFinish (void) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glFlush (void) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glBlendFunc (GLenum sfactor, GLenum dfactor) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glLogicOp (GLenum opcode) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glStencilFunc (GLenum func, GLint ref, GLuint mask) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glStencilOp (GLenum fail, GLenum zfail, GLenum zpass) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glDepthFunc (GLenum func) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glPixelStoref (GLenum pname, GLfloat param) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glPixelStorei (GLenum pname, GLint param) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glReadBuffer (GLenum mode) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glReadPixels (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetBooleanv (GLenum pname, GLboolean *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetDoublev (GLenum pname, GLdouble *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI GLenum APIENTRY glGetError (void) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetFloatv (GLenum pname, GLfloat *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetIntegerv (GLenum pname, GLint *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI const GLubyte * APIENTRY glGetString (GLenum name) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetTexImage (GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetTexParameterfv (GLenum target, GLenum pname, GLfloat *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetTexParameteriv (GLenum target, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetTexLevelParameterfv (GLenum target, GLint level, GLenum pname, GLfloat *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetTexLevelParameteriv (GLenum target, GLint level, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI GLboolean APIENTRY glIsEnabled (GLenum cap) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glDepthRange (GLclampd near, GLclampd far) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glViewport (GLint x, GLint y, GLsizei width, GLsizei height) OPENGL_DEPRECATED(10.5, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLCULLFACEPROC) (GLenum mode);
 typedef void (APIENTRYP PFNGLFRONTFACEPROC) (GLenum mode);
@@ -1715,19 +1716,19 @@ typedef void (APIENTRYP PFNGLVIEWPORTPROC) (GLint x, GLint y, GLsizei width, GLs
 #ifndef GL_VERSION_1_1
 #define GL_VERSION_1_1 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glDrawArrays (GLenum mode, GLint first, GLsizei count);
-GLAPI void APIENTRY glDrawElements (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices);
-GLAPI void APIENTRY glPolygonOffset (GLfloat factor, GLfloat units);
-GLAPI void APIENTRY glCopyTexImage1D (GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border);
-GLAPI void APIENTRY glCopyTexImage2D (GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border);
-GLAPI void APIENTRY glCopyTexSubImage1D (GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width);
-GLAPI void APIENTRY glCopyTexSubImage2D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height);
-GLAPI void APIENTRY glTexSubImage1D (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels);
-GLAPI void APIENTRY glTexSubImage2D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels);
-GLAPI void APIENTRY glBindTexture (GLenum target, GLuint texture);
-GLAPI void APIENTRY glDeleteTextures (GLsizei n, const GLuint *textures);
-GLAPI void APIENTRY glGenTextures (GLsizei n, GLuint *textures);
-GLAPI GLboolean APIENTRY glIsTexture (GLuint texture);
+GLAPI void APIENTRY glDrawArrays (GLenum mode, GLint first, GLsizei count) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glDrawElements (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glPolygonOffset (GLfloat factor, GLfloat units) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glCopyTexImage1D (GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glCopyTexImage2D (GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glCopyTexSubImage1D (GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glCopyTexSubImage2D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glTexSubImage1D (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glTexSubImage2D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glBindTexture (GLenum target, GLuint texture) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glDeleteTextures (GLsizei n, const GLuint *textures) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGenTextures (GLsizei n, GLuint *textures) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI GLboolean APIENTRY glIsTexture (GLuint texture) OPENGL_DEPRECATED(10.5, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLDRAWARRAYSPROC) (GLenum mode, GLint first, GLsizei count);
 typedef void (APIENTRYP PFNGLDRAWELEMENTSPROC) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices);
@@ -1747,12 +1748,12 @@ typedef GLboolean (APIENTRYP PFNGLISTEXTUREPROC) (GLuint texture);
 #ifndef GL_VERSION_1_2
 #define GL_VERSION_1_2 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glBlendColor (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
-GLAPI void APIENTRY glBlendEquation (GLenum mode);
-GLAPI void APIENTRY glDrawRangeElements (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices);
-GLAPI void APIENTRY glTexImage3D (GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
-GLAPI void APIENTRY glTexSubImage3D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels);
-GLAPI void APIENTRY glCopyTexSubImage3D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height);
+GLAPI void APIENTRY glBlendColor (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glBlendEquation (GLenum mode) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glDrawRangeElements (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glTexImage3D (GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glTexSubImage3D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glCopyTexSubImage3D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height) OPENGL_DEPRECATED(10.5, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLBLENDCOLORPROC) (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
 typedef void (APIENTRYP PFNGLBLENDEQUATIONPROC) (GLenum mode);
@@ -1765,15 +1766,15 @@ typedef void (APIENTRYP PFNGLCOPYTEXSUBIMAGE3DPROC) (GLenum target, GLint level,
 #ifndef GL_VERSION_1_3
 #define GL_VERSION_1_3 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glActiveTexture (GLenum texture);
-GLAPI void APIENTRY glSampleCoverage (GLclampf value, GLboolean invert);
-GLAPI void APIENTRY glCompressedTexImage3D (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data);
-GLAPI void APIENTRY glCompressedTexImage2D (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data);
-GLAPI void APIENTRY glCompressedTexImage1D (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data);
-GLAPI void APIENTRY glCompressedTexSubImage3D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data);
-GLAPI void APIENTRY glCompressedTexSubImage2D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data);
-GLAPI void APIENTRY glCompressedTexSubImage1D (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data);
-GLAPI void APIENTRY glGetCompressedTexImage (GLenum target, GLint level, GLvoid *img);
+GLAPI void APIENTRY glActiveTexture (GLenum texture) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glSampleCoverage (GLclampf value, GLboolean invert) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glCompressedTexImage3D (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glCompressedTexImage2D (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glCompressedTexImage1D (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glCompressedTexSubImage3D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glCompressedTexSubImage2D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glCompressedTexSubImage1D (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetCompressedTexImage (GLenum target, GLint level, GLvoid *img) OPENGL_DEPRECATED(10.5, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLACTIVETEXTUREPROC) (GLenum texture);
 typedef void (APIENTRYP PFNGLSAMPLECOVERAGEPROC) (GLclampf value, GLboolean invert);
@@ -1789,13 +1790,13 @@ typedef void (APIENTRYP PFNGLGETCOMPRESSEDTEXIMAGEPROC) (GLenum target, GLint le
 #ifndef GL_VERSION_1_4
 #define GL_VERSION_1_4 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glBlendFuncSeparate (GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha);
-GLAPI void APIENTRY glMultiDrawArrays (GLenum mode, const GLint *first, const GLsizei *count, GLsizei drawcount);
-GLAPI void APIENTRY glMultiDrawElements (GLenum mode, const GLsizei *count, GLenum type, const GLvoid* const *indices, GLsizei drawcount);
-GLAPI void APIENTRY glPointParameterf (GLenum pname, GLfloat param);
-GLAPI void APIENTRY glPointParameterfv (GLenum pname, const GLfloat *params);
-GLAPI void APIENTRY glPointParameteri (GLenum pname, GLint param);
-GLAPI void APIENTRY glPointParameteriv (GLenum pname, const GLint *params);
+GLAPI void APIENTRY glBlendFuncSeparate (GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glMultiDrawArrays (GLenum mode, const GLint *first, const GLsizei *count, GLsizei drawcount) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glMultiDrawElements (GLenum mode, const GLsizei *count, GLenum type, const GLvoid* const *indices, GLsizei drawcount) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glPointParameterf (GLenum pname, GLfloat param) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glPointParameterfv (GLenum pname, const GLfloat *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glPointParameteri (GLenum pname, GLint param) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glPointParameteriv (GLenum pname, const GLint *params) OPENGL_DEPRECATED(10.5, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLBLENDFUNCSEPARATEPROC) (GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha);
 typedef void (APIENTRYP PFNGLMULTIDRAWARRAYSPROC) (GLenum mode, const GLint *first, const GLsizei *count, GLsizei drawcount);
@@ -1809,25 +1810,25 @@ typedef void (APIENTRYP PFNGLPOINTPARAMETERIVPROC) (GLenum pname, const GLint *p
 #ifndef GL_VERSION_1_5
 #define GL_VERSION_1_5 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glGenQueries (GLsizei n, GLuint *ids);
-GLAPI void APIENTRY glDeleteQueries (GLsizei n, const GLuint *ids);
-GLAPI GLboolean APIENTRY glIsQuery (GLuint id);
-GLAPI void APIENTRY glBeginQuery (GLenum target, GLuint id);
-GLAPI void APIENTRY glEndQuery (GLenum target);
-GLAPI void APIENTRY glGetQueryiv (GLenum target, GLenum pname, GLint *params);
-GLAPI void APIENTRY glGetQueryObjectiv (GLuint id, GLenum pname, GLint *params);
-GLAPI void APIENTRY glGetQueryObjectuiv (GLuint id, GLenum pname, GLuint *params);
-GLAPI void APIENTRY glBindBuffer (GLenum target, GLuint buffer);
-GLAPI void APIENTRY glDeleteBuffers (GLsizei n, const GLuint *buffers);
-GLAPI void APIENTRY glGenBuffers (GLsizei n, GLuint *buffers);
-GLAPI GLboolean APIENTRY glIsBuffer (GLuint buffer);
-GLAPI void APIENTRY glBufferData (GLenum target, GLsizeiptr size, const GLvoid *data, GLenum usage);
-GLAPI void APIENTRY glBufferSubData (GLenum target, GLintptr offset, GLsizeiptr size, const GLvoid *data);
-GLAPI void APIENTRY glGetBufferSubData (GLenum target, GLintptr offset, GLsizeiptr size, GLvoid *data);
-GLAPI GLvoid* APIENTRY glMapBuffer (GLenum target, GLenum access);
-GLAPI GLboolean APIENTRY glUnmapBuffer (GLenum target);
-GLAPI void APIENTRY glGetBufferParameteriv (GLenum target, GLenum pname, GLint *params);
-GLAPI void APIENTRY glGetBufferPointerv (GLenum target, GLenum pname, GLvoid* *params);
+GLAPI void APIENTRY glGenQueries (GLsizei n, GLuint *ids) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glDeleteQueries (GLsizei n, const GLuint *ids) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI GLboolean APIENTRY glIsQuery (GLuint id) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glBeginQuery (GLenum target, GLuint id) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glEndQuery (GLenum target) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetQueryiv (GLenum target, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetQueryObjectiv (GLuint id, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetQueryObjectuiv (GLuint id, GLenum pname, GLuint *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glBindBuffer (GLenum target, GLuint buffer) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glDeleteBuffers (GLsizei n, const GLuint *buffers) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGenBuffers (GLsizei n, GLuint *buffers) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI GLboolean APIENTRY glIsBuffer (GLuint buffer) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glBufferData (GLenum target, GLsizeiptr size, const GLvoid *data, GLenum usage) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glBufferSubData (GLenum target, GLintptr offset, GLsizeiptr size, const GLvoid *data) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetBufferSubData (GLenum target, GLintptr offset, GLsizeiptr size, GLvoid *data) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI GLvoid* APIENTRY glMapBuffer (GLenum target, GLenum access) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI GLboolean APIENTRY glUnmapBuffer (GLenum target) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetBufferParameteriv (GLenum target, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetBufferPointerv (GLenum target, GLenum pname, GLvoid* *params) OPENGL_DEPRECATED(10.5, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLGENQUERIESPROC) (GLsizei n, GLuint *ids);
 typedef void (APIENTRYP PFNGLDELETEQUERIESPROC) (GLsizei n, const GLuint *ids);
@@ -1853,99 +1854,99 @@ typedef void (APIENTRYP PFNGLGETBUFFERPOINTERVPROC) (GLenum target, GLenum pname
 #ifndef GL_VERSION_2_0
 #define GL_VERSION_2_0 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glBlendEquationSeparate (GLenum modeRGB, GLenum modeAlpha);
-GLAPI void APIENTRY glDrawBuffers (GLsizei n, const GLenum *bufs);
-GLAPI void APIENTRY glStencilOpSeparate (GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass);
-GLAPI void APIENTRY glStencilFuncSeparate (GLenum face, GLenum func, GLint ref, GLuint mask);
-GLAPI void APIENTRY glStencilMaskSeparate (GLenum face, GLuint mask);
-GLAPI void APIENTRY glAttachShader (GLuint program, GLuint shader);
-GLAPI void APIENTRY glBindAttribLocation (GLuint program, GLuint index, const GLchar *name);
-GLAPI void APIENTRY glCompileShader (GLuint shader);
-GLAPI GLuint APIENTRY glCreateProgram (void);
-GLAPI GLuint APIENTRY glCreateShader (GLenum type);
-GLAPI void APIENTRY glDeleteProgram (GLuint program);
-GLAPI void APIENTRY glDeleteShader (GLuint shader);
-GLAPI void APIENTRY glDetachShader (GLuint program, GLuint shader);
-GLAPI void APIENTRY glDisableVertexAttribArray (GLuint index);
-GLAPI void APIENTRY glEnableVertexAttribArray (GLuint index);
-GLAPI void APIENTRY glGetActiveAttrib (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name);
-GLAPI void APIENTRY glGetActiveUniform (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name);
-GLAPI void APIENTRY glGetAttachedShaders (GLuint program, GLsizei maxCount, GLsizei *count, GLuint *shaders);
-GLAPI GLint APIENTRY glGetAttribLocation (GLuint program, const GLchar *name);
-GLAPI void APIENTRY glGetProgramiv (GLuint program, GLenum pname, GLint *params);
-GLAPI void APIENTRY glGetProgramInfoLog (GLuint program, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
-GLAPI void APIENTRY glGetShaderiv (GLuint shader, GLenum pname, GLint *params);
-GLAPI void APIENTRY glGetShaderInfoLog (GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
-GLAPI void APIENTRY glGetShaderSource (GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *source);
-GLAPI GLint APIENTRY glGetUniformLocation (GLuint program, const GLchar *name);
-GLAPI void APIENTRY glGetUniformfv (GLuint program, GLint location, GLfloat *params);
-GLAPI void APIENTRY glGetUniformiv (GLuint program, GLint location, GLint *params);
-GLAPI void APIENTRY glGetVertexAttribdv (GLuint index, GLenum pname, GLdouble *params);
-GLAPI void APIENTRY glGetVertexAttribfv (GLuint index, GLenum pname, GLfloat *params);
-GLAPI void APIENTRY glGetVertexAttribiv (GLuint index, GLenum pname, GLint *params);
-GLAPI void APIENTRY glGetVertexAttribPointerv (GLuint index, GLenum pname, GLvoid* *pointer);
-GLAPI GLboolean APIENTRY glIsProgram (GLuint program);
-GLAPI GLboolean APIENTRY glIsShader (GLuint shader);
-GLAPI void APIENTRY glLinkProgram (GLuint program);
-GLAPI void APIENTRY glShaderSource (GLuint shader, GLsizei count, const GLchar* const *string, const GLint *length);
-GLAPI void APIENTRY glUseProgram (GLuint program);
-GLAPI void APIENTRY glUniform1f (GLint location, GLfloat v0);
-GLAPI void APIENTRY glUniform2f (GLint location, GLfloat v0, GLfloat v1);
-GLAPI void APIENTRY glUniform3f (GLint location, GLfloat v0, GLfloat v1, GLfloat v2);
-GLAPI void APIENTRY glUniform4f (GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
-GLAPI void APIENTRY glUniform1i (GLint location, GLint v0);
-GLAPI void APIENTRY glUniform2i (GLint location, GLint v0, GLint v1);
-GLAPI void APIENTRY glUniform3i (GLint location, GLint v0, GLint v1, GLint v2);
-GLAPI void APIENTRY glUniform4i (GLint location, GLint v0, GLint v1, GLint v2, GLint v3);
-GLAPI void APIENTRY glUniform1fv (GLint location, GLsizei count, const GLfloat *value);
-GLAPI void APIENTRY glUniform2fv (GLint location, GLsizei count, const GLfloat *value);
-GLAPI void APIENTRY glUniform3fv (GLint location, GLsizei count, const GLfloat *value);
-GLAPI void APIENTRY glUniform4fv (GLint location, GLsizei count, const GLfloat *value);
-GLAPI void APIENTRY glUniform1iv (GLint location, GLsizei count, const GLint *value);
-GLAPI void APIENTRY glUniform2iv (GLint location, GLsizei count, const GLint *value);
-GLAPI void APIENTRY glUniform3iv (GLint location, GLsizei count, const GLint *value);
-GLAPI void APIENTRY glUniform4iv (GLint location, GLsizei count, const GLint *value);
-GLAPI void APIENTRY glUniformMatrix2fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glUniformMatrix3fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glUniformMatrix4fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glValidateProgram (GLuint program);
-GLAPI void APIENTRY glVertexAttrib1d (GLuint index, GLdouble x);
-GLAPI void APIENTRY glVertexAttrib1dv (GLuint index, const GLdouble *v);
-GLAPI void APIENTRY glVertexAttrib1f (GLuint index, GLfloat x);
-GLAPI void APIENTRY glVertexAttrib1fv (GLuint index, const GLfloat *v);
-GLAPI void APIENTRY glVertexAttrib1s (GLuint index, GLshort x);
-GLAPI void APIENTRY glVertexAttrib1sv (GLuint index, const GLshort *v);
-GLAPI void APIENTRY glVertexAttrib2d (GLuint index, GLdouble x, GLdouble y);
-GLAPI void APIENTRY glVertexAttrib2dv (GLuint index, const GLdouble *v);
-GLAPI void APIENTRY glVertexAttrib2f (GLuint index, GLfloat x, GLfloat y);
-GLAPI void APIENTRY glVertexAttrib2fv (GLuint index, const GLfloat *v);
-GLAPI void APIENTRY glVertexAttrib2s (GLuint index, GLshort x, GLshort y);
-GLAPI void APIENTRY glVertexAttrib2sv (GLuint index, const GLshort *v);
-GLAPI void APIENTRY glVertexAttrib3d (GLuint index, GLdouble x, GLdouble y, GLdouble z);
-GLAPI void APIENTRY glVertexAttrib3dv (GLuint index, const GLdouble *v);
-GLAPI void APIENTRY glVertexAttrib3f (GLuint index, GLfloat x, GLfloat y, GLfloat z);
-GLAPI void APIENTRY glVertexAttrib3fv (GLuint index, const GLfloat *v);
-GLAPI void APIENTRY glVertexAttrib3s (GLuint index, GLshort x, GLshort y, GLshort z);
-GLAPI void APIENTRY glVertexAttrib3sv (GLuint index, const GLshort *v);
-GLAPI void APIENTRY glVertexAttrib4Nbv (GLuint index, const GLbyte *v);
-GLAPI void APIENTRY glVertexAttrib4Niv (GLuint index, const GLint *v);
-GLAPI void APIENTRY glVertexAttrib4Nsv (GLuint index, const GLshort *v);
-GLAPI void APIENTRY glVertexAttrib4Nub (GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
-GLAPI void APIENTRY glVertexAttrib4Nubv (GLuint index, const GLubyte *v);
-GLAPI void APIENTRY glVertexAttrib4Nuiv (GLuint index, const GLuint *v);
-GLAPI void APIENTRY glVertexAttrib4Nusv (GLuint index, const GLushort *v);
-GLAPI void APIENTRY glVertexAttrib4bv (GLuint index, const GLbyte *v);
-GLAPI void APIENTRY glVertexAttrib4d (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLAPI void APIENTRY glVertexAttrib4dv (GLuint index, const GLdouble *v);
-GLAPI void APIENTRY glVertexAttrib4f (GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-GLAPI void APIENTRY glVertexAttrib4fv (GLuint index, const GLfloat *v);
-GLAPI void APIENTRY glVertexAttrib4iv (GLuint index, const GLint *v);
-GLAPI void APIENTRY glVertexAttrib4s (GLuint index, GLshort x, GLshort y, GLshort z, GLshort w);
-GLAPI void APIENTRY glVertexAttrib4sv (GLuint index, const GLshort *v);
-GLAPI void APIENTRY glVertexAttrib4ubv (GLuint index, const GLubyte *v);
-GLAPI void APIENTRY glVertexAttrib4uiv (GLuint index, const GLuint *v);
-GLAPI void APIENTRY glVertexAttrib4usv (GLuint index, const GLushort *v);
-GLAPI void APIENTRY glVertexAttribPointer (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer);
+GLAPI void APIENTRY glBlendEquationSeparate (GLenum modeRGB, GLenum modeAlpha) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glDrawBuffers (GLsizei n, const GLenum *bufs) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glStencilOpSeparate (GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glStencilFuncSeparate (GLenum face, GLenum func, GLint ref, GLuint mask) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glStencilMaskSeparate (GLenum face, GLuint mask) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glAttachShader (GLuint program, GLuint shader) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glBindAttribLocation (GLuint program, GLuint index, const GLchar *name) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glCompileShader (GLuint shader) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI GLuint APIENTRY glCreateProgram (void) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI GLuint APIENTRY glCreateShader (GLenum type) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glDeleteProgram (GLuint program) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glDeleteShader (GLuint shader) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glDetachShader (GLuint program, GLuint shader) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glDisableVertexAttribArray (GLuint index) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glEnableVertexAttribArray (GLuint index) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetActiveAttrib (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetActiveUniform (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetAttachedShaders (GLuint program, GLsizei maxCount, GLsizei *count, GLuint *shaders) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI GLint APIENTRY glGetAttribLocation (GLuint program, const GLchar *name) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetProgramiv (GLuint program, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetProgramInfoLog (GLuint program, GLsizei bufSize, GLsizei *length, GLchar *infoLog) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetShaderiv (GLuint shader, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetShaderInfoLog (GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetShaderSource (GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *source) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI GLint APIENTRY glGetUniformLocation (GLuint program, const GLchar *name) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetUniformfv (GLuint program, GLint location, GLfloat *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetUniformiv (GLuint program, GLint location, GLint *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetVertexAttribdv (GLuint index, GLenum pname, GLdouble *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetVertexAttribfv (GLuint index, GLenum pname, GLfloat *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetVertexAttribiv (GLuint index, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetVertexAttribPointerv (GLuint index, GLenum pname, GLvoid* *pointer) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI GLboolean APIENTRY glIsProgram (GLuint program) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI GLboolean APIENTRY glIsShader (GLuint shader) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glLinkProgram (GLuint program) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glShaderSource (GLuint shader, GLsizei count, const GLchar* const *string, const GLint *length) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUseProgram (GLuint program) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniform1f (GLint location, GLfloat v0) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniform2f (GLint location, GLfloat v0, GLfloat v1) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniform3f (GLint location, GLfloat v0, GLfloat v1, GLfloat v2) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniform4f (GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniform1i (GLint location, GLint v0) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniform2i (GLint location, GLint v0, GLint v1) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniform3i (GLint location, GLint v0, GLint v1, GLint v2) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniform4i (GLint location, GLint v0, GLint v1, GLint v2, GLint v3) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniform1fv (GLint location, GLsizei count, const GLfloat *value) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniform2fv (GLint location, GLsizei count, const GLfloat *value) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniform3fv (GLint location, GLsizei count, const GLfloat *value) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniform4fv (GLint location, GLsizei count, const GLfloat *value) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniform1iv (GLint location, GLsizei count, const GLint *value) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniform2iv (GLint location, GLsizei count, const GLint *value) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniform3iv (GLint location, GLsizei count, const GLint *value) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniform4iv (GLint location, GLsizei count, const GLint *value) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniformMatrix2fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniformMatrix3fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniformMatrix4fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glValidateProgram (GLuint program) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib1d (GLuint index, GLdouble x) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib1dv (GLuint index, const GLdouble *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib1f (GLuint index, GLfloat x) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib1fv (GLuint index, const GLfloat *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib1s (GLuint index, GLshort x) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib1sv (GLuint index, const GLshort *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib2d (GLuint index, GLdouble x, GLdouble y) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib2dv (GLuint index, const GLdouble *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib2f (GLuint index, GLfloat x, GLfloat y) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib2fv (GLuint index, const GLfloat *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib2s (GLuint index, GLshort x, GLshort y) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib2sv (GLuint index, const GLshort *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib3d (GLuint index, GLdouble x, GLdouble y, GLdouble z) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib3dv (GLuint index, const GLdouble *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib3f (GLuint index, GLfloat x, GLfloat y, GLfloat z) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib3fv (GLuint index, const GLfloat *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib3s (GLuint index, GLshort x, GLshort y, GLshort z) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib3sv (GLuint index, const GLshort *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4Nbv (GLuint index, const GLbyte *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4Niv (GLuint index, const GLint *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4Nsv (GLuint index, const GLshort *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4Nub (GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4Nubv (GLuint index, const GLubyte *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4Nuiv (GLuint index, const GLuint *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4Nusv (GLuint index, const GLushort *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4bv (GLuint index, const GLbyte *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4d (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4dv (GLuint index, const GLdouble *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4f (GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4fv (GLuint index, const GLfloat *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4iv (GLuint index, const GLint *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4s (GLuint index, GLshort x, GLshort y, GLshort z, GLshort w) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4sv (GLuint index, const GLshort *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4ubv (GLuint index, const GLubyte *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4uiv (GLuint index, const GLuint *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttrib4usv (GLuint index, const GLushort *v) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glVertexAttribPointer (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer) OPENGL_DEPRECATED(10.5, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLBLENDEQUATIONSEPARATEPROC) (GLenum modeRGB, GLenum modeAlpha);
 typedef void (APIENTRYP PFNGLDRAWBUFFERSPROC) (GLsizei n, const GLenum *bufs);
@@ -2045,12 +2046,12 @@ typedef void (APIENTRYP PFNGLVERTEXATTRIBPOINTERPROC) (GLuint index, GLint size,
 #ifndef GL_VERSION_2_1
 #define GL_VERSION_2_1 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glUniformMatrix2x3fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glUniformMatrix3x2fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glUniformMatrix2x4fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glUniformMatrix4x2fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glUniformMatrix3x4fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glUniformMatrix4x3fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+GLAPI void APIENTRY glUniformMatrix2x3fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniformMatrix3x2fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniformMatrix2x4fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniformMatrix4x2fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniformMatrix3x4fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniformMatrix4x3fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.5, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLUNIFORMMATRIX2X3FVPROC) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
 typedef void (APIENTRYP PFNGLUNIFORMMATRIX3X2FVPROC) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
@@ -2067,64 +2068,64 @@ typedef void (APIENTRYP PFNGLUNIFORMMATRIX4X3FVPROC) (GLint location, GLsizei co
 /* ARB_map_buffer_range */
 /* ARB_vertex_array_object */
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glColorMaski (GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a);
-GLAPI void APIENTRY glGetBooleani_v (GLenum target, GLuint index, GLboolean *data);
-GLAPI void APIENTRY glGetIntegeri_v (GLenum target, GLuint index, GLint *data);
-GLAPI void APIENTRY glEnablei (GLenum target, GLuint index);
-GLAPI void APIENTRY glDisablei (GLenum target, GLuint index);
-GLAPI GLboolean APIENTRY glIsEnabledi (GLenum target, GLuint index);
-GLAPI void APIENTRY glBeginTransformFeedback (GLenum primitiveMode);
-GLAPI void APIENTRY glEndTransformFeedback (void);
-GLAPI void APIENTRY glBindBufferRange (GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
-GLAPI void APIENTRY glBindBufferBase (GLenum target, GLuint index, GLuint buffer);
-GLAPI void APIENTRY glTransformFeedbackVaryings (GLuint program, GLsizei count, const GLchar* const *varyings, GLenum bufferMode);
-GLAPI void APIENTRY glGetTransformFeedbackVarying (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
-GLAPI void APIENTRY glClampColor (GLenum target, GLenum clamp);
-GLAPI void APIENTRY glBeginConditionalRender (GLuint id, GLenum mode);
-GLAPI void APIENTRY glEndConditionalRender (void);
-GLAPI void APIENTRY glVertexAttribIPointer (GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
-GLAPI void APIENTRY glGetVertexAttribIiv (GLuint index, GLenum pname, GLint *params);
-GLAPI void APIENTRY glGetVertexAttribIuiv (GLuint index, GLenum pname, GLuint *params);
-GLAPI void APIENTRY glVertexAttribI1i (GLuint index, GLint x);
-GLAPI void APIENTRY glVertexAttribI2i (GLuint index, GLint x, GLint y);
-GLAPI void APIENTRY glVertexAttribI3i (GLuint index, GLint x, GLint y, GLint z);
-GLAPI void APIENTRY glVertexAttribI4i (GLuint index, GLint x, GLint y, GLint z, GLint w);
-GLAPI void APIENTRY glVertexAttribI1ui (GLuint index, GLuint x);
-GLAPI void APIENTRY glVertexAttribI2ui (GLuint index, GLuint x, GLuint y);
-GLAPI void APIENTRY glVertexAttribI3ui (GLuint index, GLuint x, GLuint y, GLuint z);
-GLAPI void APIENTRY glVertexAttribI4ui (GLuint index, GLuint x, GLuint y, GLuint z, GLuint w);
-GLAPI void APIENTRY glVertexAttribI1iv (GLuint index, const GLint *v);
-GLAPI void APIENTRY glVertexAttribI2iv (GLuint index, const GLint *v);
-GLAPI void APIENTRY glVertexAttribI3iv (GLuint index, const GLint *v);
-GLAPI void APIENTRY glVertexAttribI4iv (GLuint index, const GLint *v);
-GLAPI void APIENTRY glVertexAttribI1uiv (GLuint index, const GLuint *v);
-GLAPI void APIENTRY glVertexAttribI2uiv (GLuint index, const GLuint *v);
-GLAPI void APIENTRY glVertexAttribI3uiv (GLuint index, const GLuint *v);
-GLAPI void APIENTRY glVertexAttribI4uiv (GLuint index, const GLuint *v);
-GLAPI void APIENTRY glVertexAttribI4bv (GLuint index, const GLbyte *v);
-GLAPI void APIENTRY glVertexAttribI4sv (GLuint index, const GLshort *v);
-GLAPI void APIENTRY glVertexAttribI4ubv (GLuint index, const GLubyte *v);
-GLAPI void APIENTRY glVertexAttribI4usv (GLuint index, const GLushort *v);
-GLAPI void APIENTRY glGetUniformuiv (GLuint program, GLint location, GLuint *params);
-GLAPI void APIENTRY glBindFragDataLocation (GLuint program, GLuint color, const GLchar *name);
-GLAPI GLint APIENTRY glGetFragDataLocation (GLuint program, const GLchar *name);
-GLAPI void APIENTRY glUniform1ui (GLint location, GLuint v0);
-GLAPI void APIENTRY glUniform2ui (GLint location, GLuint v0, GLuint v1);
-GLAPI void APIENTRY glUniform3ui (GLint location, GLuint v0, GLuint v1, GLuint v2);
-GLAPI void APIENTRY glUniform4ui (GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3);
-GLAPI void APIENTRY glUniform1uiv (GLint location, GLsizei count, const GLuint *value);
-GLAPI void APIENTRY glUniform2uiv (GLint location, GLsizei count, const GLuint *value);
-GLAPI void APIENTRY glUniform3uiv (GLint location, GLsizei count, const GLuint *value);
-GLAPI void APIENTRY glUniform4uiv (GLint location, GLsizei count, const GLuint *value);
-GLAPI void APIENTRY glTexParameterIiv (GLenum target, GLenum pname, const GLint *params);
-GLAPI void APIENTRY glTexParameterIuiv (GLenum target, GLenum pname, const GLuint *params);
-GLAPI void APIENTRY glGetTexParameterIiv (GLenum target, GLenum pname, GLint *params);
-GLAPI void APIENTRY glGetTexParameterIuiv (GLenum target, GLenum pname, GLuint *params);
-GLAPI void APIENTRY glClearBufferiv (GLenum buffer, GLint drawbuffer, const GLint *value);
-GLAPI void APIENTRY glClearBufferuiv (GLenum buffer, GLint drawbuffer, const GLuint *value);
-GLAPI void APIENTRY glClearBufferfv (GLenum buffer, GLint drawbuffer, const GLfloat *value);
-GLAPI void APIENTRY glClearBufferfi (GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil);
-GLAPI const GLubyte * APIENTRY glGetStringi (GLenum name, GLuint index);
+GLAPI void APIENTRY glColorMaski (GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetBooleani_v (GLenum target, GLuint index, GLboolean *data) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetIntegeri_v (GLenum target, GLuint index, GLint *data) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glEnablei (GLenum target, GLuint index) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glDisablei (GLenum target, GLuint index) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI GLboolean APIENTRY glIsEnabledi (GLenum target, GLuint index) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glBeginTransformFeedback (GLenum primitiveMode) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glEndTransformFeedback (void) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glBindBufferRange (GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glBindBufferBase (GLenum target, GLuint index, GLuint buffer) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glTransformFeedbackVaryings (GLuint program, GLsizei count, const GLchar* const *varyings, GLenum bufferMode) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetTransformFeedbackVarying (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glClampColor (GLenum target, GLenum clamp) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glBeginConditionalRender (GLuint id, GLenum mode) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glEndConditionalRender (void) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribIPointer (GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetVertexAttribIiv (GLuint index, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetVertexAttribIuiv (GLuint index, GLenum pname, GLuint *params) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI1i (GLuint index, GLint x) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI2i (GLuint index, GLint x, GLint y) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI3i (GLuint index, GLint x, GLint y, GLint z) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI4i (GLuint index, GLint x, GLint y, GLint z, GLint w) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI1ui (GLuint index, GLuint x) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI2ui (GLuint index, GLuint x, GLuint y) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI3ui (GLuint index, GLuint x, GLuint y, GLuint z) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI4ui (GLuint index, GLuint x, GLuint y, GLuint z, GLuint w) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI1iv (GLuint index, const GLint *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI2iv (GLuint index, const GLint *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI3iv (GLuint index, const GLint *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI4iv (GLuint index, const GLint *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI1uiv (GLuint index, const GLuint *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI2uiv (GLuint index, const GLuint *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI3uiv (GLuint index, const GLuint *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI4uiv (GLuint index, const GLuint *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI4bv (GLuint index, const GLbyte *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI4sv (GLuint index, const GLshort *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI4ubv (GLuint index, const GLubyte *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribI4usv (GLuint index, const GLushort *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetUniformuiv (GLuint program, GLint location, GLuint *params) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glBindFragDataLocation (GLuint program, GLuint color, const GLchar *name) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI GLint APIENTRY glGetFragDataLocation (GLuint program, const GLchar *name) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniform1ui (GLint location, GLuint v0) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniform2ui (GLint location, GLuint v0, GLuint v1) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniform3ui (GLint location, GLuint v0, GLuint v1, GLuint v2) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniform4ui (GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniform1uiv (GLint location, GLsizei count, const GLuint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniform2uiv (GLint location, GLsizei count, const GLuint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniform3uiv (GLint location, GLsizei count, const GLuint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniform4uiv (GLint location, GLsizei count, const GLuint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glTexParameterIiv (GLenum target, GLenum pname, const GLint *params) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glTexParameterIuiv (GLenum target, GLenum pname, const GLuint *params) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetTexParameterIiv (GLenum target, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetTexParameterIuiv (GLenum target, GLenum pname, GLuint *params) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glClearBufferiv (GLenum buffer, GLint drawbuffer, const GLint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glClearBufferuiv (GLenum buffer, GLint drawbuffer, const GLuint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glClearBufferfv (GLenum buffer, GLint drawbuffer, const GLfloat *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glClearBufferfi (GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI const GLubyte * APIENTRY glGetStringi (GLenum name, GLuint index) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLCOLORMASKIPROC) (GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a);
 typedef void (APIENTRYP PFNGLGETBOOLEANI_VPROC) (GLenum target, GLuint index, GLboolean *data);
@@ -2192,10 +2193,10 @@ typedef const GLubyte * (APIENTRYP PFNGLGETSTRINGIPROC) (GLenum name, GLuint ind
 /* ARB_copy_buffer */
 /* ARB_uniform_buffer_object */
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glDrawArraysInstanced (GLenum mode, GLint first, GLsizei count, GLsizei instancecount);
-GLAPI void APIENTRY glDrawElementsInstanced (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei instancecount);
-GLAPI void APIENTRY glTexBuffer (GLenum target, GLenum internalformat, GLuint buffer);
-GLAPI void APIENTRY glPrimitiveRestartIndex (GLuint index);
+GLAPI void APIENTRY glDrawArraysInstanced (GLenum mode, GLint first, GLsizei count, GLsizei instancecount) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glDrawElementsInstanced (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei instancecount) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glTexBuffer (GLenum target, GLenum internalformat, GLuint buffer) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glPrimitiveRestartIndex (GLuint index) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLDRAWARRAYSINSTANCEDPROC) (GLenum mode, GLint first, GLsizei count, GLsizei instancecount);
 typedef void (APIENTRYP PFNGLDRAWELEMENTSINSTANCEDPROC) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei instancecount);
@@ -2211,9 +2212,9 @@ typedef void (APIENTRYP PFNGLPRIMITIVERESTARTINDEXPROC) (GLuint index);
 /* ARB_sync */
 /* ARB_texture_multisample */
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glGetInteger64i_v (GLenum target, GLuint index, GLint64 *data);
-GLAPI void APIENTRY glGetBufferParameteri64v (GLenum target, GLenum pname, GLint64 *params);
-GLAPI void APIENTRY glFramebufferTexture (GLenum target, GLenum attachment, GLuint texture, GLint level);
+GLAPI void APIENTRY glGetInteger64i_v (GLenum target, GLuint index, GLint64 *data) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetBufferParameteri64v (GLenum target, GLenum pname, GLint64 *params) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glFramebufferTexture (GLenum target, GLenum attachment, GLuint texture, GLint level) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLGETINTEGER64I_VPROC) (GLenum target, GLuint index, GLint64 *data);
 typedef void (APIENTRYP PFNGLGETBUFFERPARAMETERI64VPROC) (GLenum target, GLenum pname, GLint64 *params);
@@ -2253,11 +2254,11 @@ typedef void (APIENTRYP PFNGLVERTEXATTRIBDIVISORPROC) (GLuint index, GLuint divi
 /* ARB_transform_feedback2 */
 /* ARB_transform_feedback3 */
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glMinSampleShading (GLfloat value);
-GLAPI void APIENTRY glBlendEquationi (GLuint buf, GLenum mode);
-GLAPI void APIENTRY glBlendEquationSeparatei (GLuint buf, GLenum modeRGB, GLenum modeAlpha);
-GLAPI void APIENTRY glBlendFunci (GLuint buf, GLenum src, GLenum dst);
-GLAPI void APIENTRY glBlendFuncSeparatei (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
+GLAPI void APIENTRY glMinSampleShading (GLfloat value) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glBlendEquationi (GLuint buf, GLenum mode) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glBlendEquationSeparatei (GLuint buf, GLenum modeRGB, GLenum modeAlpha) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glBlendFunci (GLuint buf, GLenum src, GLenum dst) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glBlendFuncSeparatei (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha) OPENGL_DEPRECATED(10.8, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLMINSAMPLESHADINGPROC) (GLfloat value);
 typedef void (APIENTRYP PFNGLBLENDEQUATIONIPROC) (GLuint buf, GLenum mode);
@@ -2284,26 +2285,26 @@ typedef void (APIENTRYP PFNGLBLENDFUNCSEPARATEIPROC) (GLuint buf, GLenum srcRGB,
 #ifndef GL_ARB_framebuffer_object
 #define GL_ARB_framebuffer_object 1
 #ifdef GL3_PROTOTYPES
-GLAPI GLboolean APIENTRY glIsRenderbuffer (GLuint renderbuffer);
-GLAPI void APIENTRY glBindRenderbuffer (GLenum target, GLuint renderbuffer);
-GLAPI void APIENTRY glDeleteRenderbuffers (GLsizei n, const GLuint *renderbuffers);
-GLAPI void APIENTRY glGenRenderbuffers (GLsizei n, GLuint *renderbuffers);
-GLAPI void APIENTRY glRenderbufferStorage (GLenum target, GLenum internalformat, GLsizei width, GLsizei height);
-GLAPI void APIENTRY glGetRenderbufferParameteriv (GLenum target, GLenum pname, GLint *params);
-GLAPI GLboolean APIENTRY glIsFramebuffer (GLuint framebuffer);
-GLAPI void APIENTRY glBindFramebuffer (GLenum target, GLuint framebuffer);
-GLAPI void APIENTRY glDeleteFramebuffers (GLsizei n, const GLuint *framebuffers);
-GLAPI void APIENTRY glGenFramebuffers (GLsizei n, GLuint *framebuffers);
-GLAPI GLenum APIENTRY glCheckFramebufferStatus (GLenum target);
-GLAPI void APIENTRY glFramebufferTexture1D (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
-GLAPI void APIENTRY glFramebufferTexture2D (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
-GLAPI void APIENTRY glFramebufferTexture3D (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset);
-GLAPI void APIENTRY glFramebufferRenderbuffer (GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer);
-GLAPI void APIENTRY glGetFramebufferAttachmentParameteriv (GLenum target, GLenum attachment, GLenum pname, GLint *params);
-GLAPI void APIENTRY glGenerateMipmap (GLenum target);
-GLAPI void APIENTRY glBlitFramebuffer (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);
-GLAPI void APIENTRY glRenderbufferStorageMultisample (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
-GLAPI void APIENTRY glFramebufferTextureLayer (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer);
+GLAPI GLboolean APIENTRY glIsRenderbuffer (GLuint renderbuffer) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glBindRenderbuffer (GLenum target, GLuint renderbuffer) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glDeleteRenderbuffers (GLsizei n, const GLuint *renderbuffers) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glGenRenderbuffers (GLsizei n, GLuint *renderbuffers) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glRenderbufferStorage (GLenum target, GLenum internalformat, GLsizei width, GLsizei height) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glGetRenderbufferParameteriv (GLenum target, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI GLboolean APIENTRY glIsFramebuffer (GLuint framebuffer) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glBindFramebuffer (GLenum target, GLuint framebuffer) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glDeleteFramebuffers (GLsizei n, const GLuint *framebuffers) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glGenFramebuffers (GLsizei n, GLuint *framebuffers) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI GLenum APIENTRY glCheckFramebufferStatus (GLenum target) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glFramebufferTexture1D (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glFramebufferTexture2D (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glFramebufferTexture3D (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glFramebufferRenderbuffer (GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glGetFramebufferAttachmentParameteriv (GLenum target, GLenum attachment, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glGenerateMipmap (GLenum target) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glBlitFramebuffer (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glRenderbufferStorageMultisample (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height) OPENGL_DEPRECATED(10.8, 10.14);
+GLAPI void APIENTRY glFramebufferTextureLayer (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer) OPENGL_DEPRECATED(10.8, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef GLboolean (APIENTRYP PFNGLISRENDERBUFFERPROC) (GLuint renderbuffer);
 typedef void (APIENTRYP PFNGLBINDRENDERBUFFERPROC) (GLenum target, GLuint renderbuffer);
@@ -2356,10 +2357,10 @@ typedef void (APIENTRYP PFNGLFLUSHMAPPEDBUFFERRANGEPROC) (GLenum target, GLintpt
 #ifndef GL_ARB_vertex_array_object
 #define GL_ARB_vertex_array_object 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glBindVertexArray (GLuint array);
-GLAPI void APIENTRY glDeleteVertexArrays (GLsizei n, const GLuint *arrays);
-GLAPI void APIENTRY glGenVertexArrays (GLsizei n, GLuint *arrays);
-GLAPI GLboolean APIENTRY glIsVertexArray (GLuint array);
+GLAPI void APIENTRY glBindVertexArray (GLuint array) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glDeleteVertexArrays (GLsizei n, const GLuint *arrays) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGenVertexArrays (GLsizei n, GLuint *arrays) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI GLboolean APIENTRY glIsVertexArray (GLuint array) OPENGL_DEPRECATED(10.5, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLBINDVERTEXARRAYPROC) (GLuint array);
 typedef void (APIENTRYP PFNGLDELETEVERTEXARRAYSPROC) (GLsizei n, const GLuint *arrays);
@@ -2370,13 +2371,13 @@ typedef GLboolean (APIENTRYP PFNGLISVERTEXARRAYPROC) (GLuint array);
 #ifndef GL_ARB_uniform_buffer_object
 #define GL_ARB_uniform_buffer_object 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glGetUniformIndices (GLuint program, GLsizei uniformCount, const GLchar* const *uniformNames, GLuint *uniformIndices);
-GLAPI void APIENTRY glGetActiveUniformsiv (GLuint program, GLsizei uniformCount, const GLuint *uniformIndices, GLenum pname, GLint *params);
-GLAPI void APIENTRY glGetActiveUniformName (GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformName);
-GLAPI GLuint APIENTRY glGetUniformBlockIndex (GLuint program, const GLchar *uniformBlockName);
-GLAPI void APIENTRY glGetActiveUniformBlockiv (GLuint program, GLuint uniformBlockIndex, GLenum pname, GLint *params);
-GLAPI void APIENTRY glGetActiveUniformBlockName (GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformBlockName);
-GLAPI void APIENTRY glUniformBlockBinding (GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
+GLAPI void APIENTRY glGetUniformIndices (GLuint program, GLsizei uniformCount, const GLchar* const *uniformNames, GLuint *uniformIndices) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetActiveUniformsiv (GLuint program, GLsizei uniformCount, const GLuint *uniformIndices, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetActiveUniformName (GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformName) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI GLuint APIENTRY glGetUniformBlockIndex (GLuint program, const GLchar *uniformBlockName) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetActiveUniformBlockiv (GLuint program, GLuint uniformBlockIndex, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glGetActiveUniformBlockName (GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformBlockName) OPENGL_DEPRECATED(10.5, 10.14);
+GLAPI void APIENTRY glUniformBlockBinding (GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding) OPENGL_DEPRECATED(10.5, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLGETUNIFORMINDICESPROC) (GLuint program, GLsizei uniformCount, const GLchar* const *uniformNames, GLuint *uniformIndices);
 typedef void (APIENTRYP PFNGLGETACTIVEUNIFORMSIVPROC) (GLuint program, GLsizei uniformCount, const GLuint *uniformIndices, GLenum pname, GLint *params);
@@ -2390,7 +2391,7 @@ typedef void (APIENTRYP PFNGLUNIFORMBLOCKBINDINGPROC) (GLuint program, GLuint un
 #ifndef GL_ARB_copy_buffer
 #define GL_ARB_copy_buffer 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glCopyBufferSubData (GLenum readTarget, GLenum writeTarget, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size);
+GLAPI void APIENTRY glCopyBufferSubData (GLenum readTarget, GLenum writeTarget, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size) OPENGL_DEPRECATED(10.5, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLCOPYBUFFERSUBDATAPROC) (GLenum readTarget, GLenum writeTarget, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size);
 #endif
@@ -2402,10 +2403,10 @@ typedef void (APIENTRYP PFNGLCOPYBUFFERSUBDATAPROC) (GLenum readTarget, GLenum w
 #ifndef GL_ARB_draw_elements_base_vertex
 #define GL_ARB_draw_elements_base_vertex 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glDrawElementsBaseVertex (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex);
-GLAPI void APIENTRY glDrawRangeElementsBaseVertex (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex);
-GLAPI void APIENTRY glDrawElementsInstancedBaseVertex (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei instancecount, GLint basevertex);
-GLAPI void APIENTRY glMultiDrawElementsBaseVertex (GLenum mode, const GLsizei *count, GLenum type, const GLvoid* const *indices, GLsizei drawcount, const GLint *basevertex);
+GLAPI void APIENTRY glDrawElementsBaseVertex (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glDrawRangeElementsBaseVertex (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glDrawElementsInstancedBaseVertex (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei instancecount, GLint basevertex) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glMultiDrawElementsBaseVertex (GLenum mode, const GLsizei *count, GLenum type, const GLvoid* const *indices, GLsizei drawcount, const GLint *basevertex) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLDRAWELEMENTSBASEVERTEXPROC) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex);
 typedef void (APIENTRYP PFNGLDRAWRANGEELEMENTSBASEVERTEXPROC) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex);
@@ -2420,7 +2421,7 @@ typedef void (APIENTRYP PFNGLMULTIDRAWELEMENTSBASEVERTEXPROC) (GLenum mode, cons
 #ifndef GL_ARB_provoking_vertex
 #define GL_ARB_provoking_vertex 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glProvokingVertex (GLenum mode);
+GLAPI void APIENTRY glProvokingVertex (GLenum mode) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLPROVOKINGVERTEXPROC) (GLenum mode);
 #endif
@@ -2432,13 +2433,13 @@ typedef void (APIENTRYP PFNGLPROVOKINGVERTEXPROC) (GLenum mode);
 #ifndef GL_ARB_sync
 #define GL_ARB_sync 1
 #ifdef GL3_PROTOTYPES
-GLAPI GLsync APIENTRY glFenceSync (GLenum condition, GLbitfield flags);
-GLAPI GLboolean APIENTRY glIsSync (GLsync sync);
-GLAPI void APIENTRY glDeleteSync (GLsync sync);
-GLAPI GLenum APIENTRY glClientWaitSync (GLsync sync, GLbitfield flags, GLuint64 timeout);
-GLAPI void APIENTRY glWaitSync (GLsync sync, GLbitfield flags, GLuint64 timeout);
-GLAPI void APIENTRY glGetInteger64v (GLenum pname, GLint64 *params);
-GLAPI void APIENTRY glGetSynciv (GLsync sync, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values);
+GLAPI GLsync APIENTRY glFenceSync (GLenum condition, GLbitfield flags) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI GLboolean APIENTRY glIsSync (GLsync sync) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glDeleteSync (GLsync sync) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI GLenum APIENTRY glClientWaitSync (GLsync sync, GLbitfield flags, GLuint64 timeout) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glWaitSync (GLsync sync, GLbitfield flags, GLuint64 timeout) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetInteger64v (GLenum pname, GLint64 *params) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetSynciv (GLsync sync, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef GLsync (APIENTRYP PFNGLFENCESYNCPROC) (GLenum condition, GLbitfield flags);
 typedef GLboolean (APIENTRYP PFNGLISSYNCPROC) (GLsync sync);
@@ -2452,10 +2453,10 @@ typedef void (APIENTRYP PFNGLGETSYNCIVPROC) (GLsync sync, GLenum pname, GLsizei 
 #ifndef GL_ARB_texture_multisample
 #define GL_ARB_texture_multisample 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glTexImage2DMultisample (GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
-GLAPI void APIENTRY glTexImage3DMultisample (GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
-GLAPI void APIENTRY glGetMultisamplefv (GLenum pname, GLuint index, GLfloat *val);
-GLAPI void APIENTRY glSampleMaski (GLuint index, GLbitfield mask);
+GLAPI void APIENTRY glTexImage2DMultisample (GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glTexImage3DMultisample (GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetMultisamplefv (GLenum pname, GLuint index, GLfloat *val) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glSampleMaski (GLuint index, GLbitfield mask) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLTEXIMAGE2DMULTISAMPLEPROC) (GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
 typedef void (APIENTRYP PFNGLTEXIMAGE3DMULTISAMPLEPROC) (GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
@@ -2474,8 +2475,8 @@ typedef void (APIENTRYP PFNGLSAMPLEMASKIPROC) (GLuint index, GLbitfield mask);
 #ifndef GL_ARB_blend_func_extended
 #define GL_ARB_blend_func_extended 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glBindFragDataLocationIndexed (GLuint program, GLuint colorNumber, GLuint index, const GLchar *name);
-GLAPI GLint APIENTRY glGetFragDataIndex (GLuint program, const GLchar *name);
+GLAPI void APIENTRY glBindFragDataLocationIndexed (GLuint program, GLuint colorNumber, GLuint index, const GLchar *name) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI GLint APIENTRY glGetFragDataIndex (GLuint program, const GLchar *name) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLBINDFRAGDATALOCATIONINDEXEDPROC) (GLuint program, GLuint colorNumber, GLuint index, const GLchar *name);
 typedef GLint (APIENTRYP PFNGLGETFRAGDATAINDEXPROC) (GLuint program, const GLchar *name);
@@ -2492,20 +2493,20 @@ typedef GLint (APIENTRYP PFNGLGETFRAGDATAINDEXPROC) (GLuint program, const GLcha
 #ifndef GL_ARB_sampler_objects
 #define GL_ARB_sampler_objects 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glGenSamplers (GLsizei count, GLuint *samplers);
-GLAPI void APIENTRY glDeleteSamplers (GLsizei count, const GLuint *samplers);
-GLAPI GLboolean APIENTRY glIsSampler (GLuint sampler);
-GLAPI void APIENTRY glBindSampler (GLuint unit, GLuint sampler);
-GLAPI void APIENTRY glSamplerParameteri (GLuint sampler, GLenum pname, GLint param);
-GLAPI void APIENTRY glSamplerParameteriv (GLuint sampler, GLenum pname, const GLint *param);
-GLAPI void APIENTRY glSamplerParameterf (GLuint sampler, GLenum pname, GLfloat param);
-GLAPI void APIENTRY glSamplerParameterfv (GLuint sampler, GLenum pname, const GLfloat *param);
-GLAPI void APIENTRY glSamplerParameterIiv (GLuint sampler, GLenum pname, const GLint *param);
-GLAPI void APIENTRY glSamplerParameterIuiv (GLuint sampler, GLenum pname, const GLuint *param);
-GLAPI void APIENTRY glGetSamplerParameteriv (GLuint sampler, GLenum pname, GLint *params);
-GLAPI void APIENTRY glGetSamplerParameterIiv (GLuint sampler, GLenum pname, GLint *params);
-GLAPI void APIENTRY glGetSamplerParameterfv (GLuint sampler, GLenum pname, GLfloat *params);
-GLAPI void APIENTRY glGetSamplerParameterIuiv (GLuint sampler, GLenum pname, GLuint *params);
+GLAPI void APIENTRY glGenSamplers (GLsizei count, GLuint *samplers) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glDeleteSamplers (GLsizei count, const GLuint *samplers) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI GLboolean APIENTRY glIsSampler (GLuint sampler) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glBindSampler (GLuint unit, GLuint sampler) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glSamplerParameteri (GLuint sampler, GLenum pname, GLint param) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glSamplerParameteriv (GLuint sampler, GLenum pname, const GLint *param) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glSamplerParameterf (GLuint sampler, GLenum pname, GLfloat param) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glSamplerParameterfv (GLuint sampler, GLenum pname, const GLfloat *param) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glSamplerParameterIiv (GLuint sampler, GLenum pname, const GLint *param) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glSamplerParameterIuiv (GLuint sampler, GLenum pname, const GLuint *param) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetSamplerParameteriv (GLuint sampler, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetSamplerParameterIiv (GLuint sampler, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetSamplerParameterfv (GLuint sampler, GLenum pname, GLfloat *params) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetSamplerParameterIuiv (GLuint sampler, GLenum pname, GLuint *params) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLGENSAMPLERSPROC) (GLsizei count, GLuint *samplers);
 typedef void (APIENTRYP PFNGLDELETESAMPLERSPROC) (GLsizei count, const GLuint *samplers);
@@ -2538,9 +2539,9 @@ typedef void (APIENTRYP PFNGLGETSAMPLERPARAMETERIUIVPROC) (GLuint sampler, GLenu
 #ifndef GL_ARB_timer_query
 #define GL_ARB_timer_query 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glQueryCounter (GLuint id, GLenum target);
-GLAPI void APIENTRY glGetQueryObjecti64v (GLuint id, GLenum pname, GLint64 *params);
-GLAPI void APIENTRY glGetQueryObjectui64v (GLuint id, GLenum pname, GLuint64 *params);
+GLAPI void APIENTRY glQueryCounter (GLuint id, GLenum target) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetQueryObjecti64v (GLuint id, GLenum pname, GLint64 *params) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetQueryObjectui64v (GLuint id, GLenum pname, GLuint64 *params) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLQUERYCOUNTERPROC) (GLuint id, GLenum target);
 typedef void (APIENTRYP PFNGLGETQUERYOBJECTI64VPROC) (GLuint id, GLenum pname, GLint64 *params);
@@ -2550,14 +2551,14 @@ typedef void (APIENTRYP PFNGLGETQUERYOBJECTUI64VPROC) (GLuint id, GLenum pname, 
 #ifndef GL_ARB_vertex_type_2_10_10_10_rev
 #define GL_ARB_vertex_type_2_10_10_10_rev 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glVertexAttribP1ui (GLuint index, GLenum type, GLboolean normalized, GLuint value);
-GLAPI void APIENTRY glVertexAttribP1uiv (GLuint index, GLenum type, GLboolean normalized, const GLuint *value);
-GLAPI void APIENTRY glVertexAttribP2ui (GLuint index, GLenum type, GLboolean normalized, GLuint value);
-GLAPI void APIENTRY glVertexAttribP2uiv (GLuint index, GLenum type, GLboolean normalized, const GLuint *value);
-GLAPI void APIENTRY glVertexAttribP3ui (GLuint index, GLenum type, GLboolean normalized, GLuint value);
-GLAPI void APIENTRY glVertexAttribP3uiv (GLuint index, GLenum type, GLboolean normalized, const GLuint *value);
-GLAPI void APIENTRY glVertexAttribP4ui (GLuint index, GLenum type, GLboolean normalized, GLuint value);
-GLAPI void APIENTRY glVertexAttribP4uiv (GLuint index, GLenum type, GLboolean normalized, const GLuint *value);
+GLAPI void APIENTRY glVertexAttribP1ui (GLuint index, GLenum type, GLboolean normalized, GLuint value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribP1uiv (GLuint index, GLenum type, GLboolean normalized, const GLuint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribP2ui (GLuint index, GLenum type, GLboolean normalized, GLuint value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribP2uiv (GLuint index, GLenum type, GLboolean normalized, const GLuint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribP3ui (GLuint index, GLenum type, GLboolean normalized, GLuint value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribP3uiv (GLuint index, GLenum type, GLboolean normalized, const GLuint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribP4ui (GLuint index, GLenum type, GLboolean normalized, GLuint value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribP4uiv (GLuint index, GLenum type, GLboolean normalized, const GLuint *value) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLVERTEXATTRIBP1UIPROC) (GLuint index, GLenum type, GLboolean normalized, GLuint value);
 typedef void (APIENTRYP PFNGLVERTEXATTRIBP1UIVPROC) (GLuint index, GLenum type, GLboolean normalized, const GLuint *value);
@@ -2572,8 +2573,8 @@ typedef void (APIENTRYP PFNGLVERTEXATTRIBP4UIVPROC) (GLuint index, GLenum type, 
 #ifndef GL_ARB_draw_indirect
 #define GL_ARB_draw_indirect 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glDrawArraysIndirect (GLenum mode, const GLvoid *indirect);
-GLAPI void APIENTRY glDrawElementsIndirect (GLenum mode, GLenum type, const GLvoid *indirect);
+GLAPI void APIENTRY glDrawArraysIndirect (GLenum mode, const GLvoid *indirect) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glDrawElementsIndirect (GLenum mode, GLenum type, const GLvoid *indirect) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLDRAWARRAYSINDIRECTPROC) (GLenum mode, const GLvoid *indirect);
 typedef void (APIENTRYP PFNGLDRAWELEMENTSINDIRECTPROC) (GLenum mode, GLenum type, const GLvoid *indirect);
@@ -2586,24 +2587,24 @@ typedef void (APIENTRYP PFNGLDRAWELEMENTSINDIRECTPROC) (GLenum mode, GLenum type
 #ifndef GL_ARB_gpu_shader_fp64
 #define GL_ARB_gpu_shader_fp64 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glUniform1d (GLint location, GLdouble x);
-GLAPI void APIENTRY glUniform2d (GLint location, GLdouble x, GLdouble y);
-GLAPI void APIENTRY glUniform3d (GLint location, GLdouble x, GLdouble y, GLdouble z);
-GLAPI void APIENTRY glUniform4d (GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLAPI void APIENTRY glUniform1dv (GLint location, GLsizei count, const GLdouble *value);
-GLAPI void APIENTRY glUniform2dv (GLint location, GLsizei count, const GLdouble *value);
-GLAPI void APIENTRY glUniform3dv (GLint location, GLsizei count, const GLdouble *value);
-GLAPI void APIENTRY glUniform4dv (GLint location, GLsizei count, const GLdouble *value);
-GLAPI void APIENTRY glUniformMatrix2dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glUniformMatrix3dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glUniformMatrix4dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glUniformMatrix2x3dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glUniformMatrix2x4dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glUniformMatrix3x2dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glUniformMatrix3x4dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glUniformMatrix4x2dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glUniformMatrix4x3dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glGetUniformdv (GLuint program, GLint location, GLdouble *params);
+GLAPI void APIENTRY glUniform1d (GLint location, GLdouble x) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniform2d (GLint location, GLdouble x, GLdouble y) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniform3d (GLint location, GLdouble x, GLdouble y, GLdouble z) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniform4d (GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniform1dv (GLint location, GLsizei count, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniform2dv (GLint location, GLsizei count, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniform3dv (GLint location, GLsizei count, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniform4dv (GLint location, GLsizei count, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniformMatrix2dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniformMatrix3dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniformMatrix4dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniformMatrix2x3dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniformMatrix2x4dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniformMatrix3x2dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniformMatrix3x4dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniformMatrix4x2dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniformMatrix4x3dv (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetUniformdv (GLuint program, GLint location, GLdouble *params) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLUNIFORM1DPROC) (GLint location, GLdouble x);
 typedef void (APIENTRYP PFNGLUNIFORM2DPROC) (GLint location, GLdouble x, GLdouble y);
@@ -2628,14 +2629,14 @@ typedef void (APIENTRYP PFNGLGETUNIFORMDVPROC) (GLuint program, GLint location, 
 #ifndef GL_ARB_shader_subroutine
 #define GL_ARB_shader_subroutine 1
 #ifdef GL3_PROTOTYPES
-GLAPI GLint APIENTRY glGetSubroutineUniformLocation (GLuint program, GLenum shadertype, const GLchar *name);
-GLAPI GLuint APIENTRY glGetSubroutineIndex (GLuint program, GLenum shadertype, const GLchar *name);
-GLAPI void APIENTRY glGetActiveSubroutineUniformiv (GLuint program, GLenum shadertype, GLuint index, GLenum pname, GLint *values);
-GLAPI void APIENTRY glGetActiveSubroutineUniformName (GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei *length, GLchar *name);
-GLAPI void APIENTRY glGetActiveSubroutineName (GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei *length, GLchar *name);
-GLAPI void APIENTRY glUniformSubroutinesuiv (GLenum shadertype, GLsizei count, const GLuint *indices);
-GLAPI void APIENTRY glGetUniformSubroutineuiv (GLenum shadertype, GLint location, GLuint *params);
-GLAPI void APIENTRY glGetProgramStageiv (GLuint program, GLenum shadertype, GLenum pname, GLint *values);
+GLAPI GLint APIENTRY glGetSubroutineUniformLocation (GLuint program, GLenum shadertype, const GLchar *name) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI GLuint APIENTRY glGetSubroutineIndex (GLuint program, GLenum shadertype, const GLchar *name) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetActiveSubroutineUniformiv (GLuint program, GLenum shadertype, GLuint index, GLenum pname, GLint *values) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetActiveSubroutineUniformName (GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei *length, GLchar *name) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetActiveSubroutineName (GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei *length, GLchar *name) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glUniformSubroutinesuiv (GLenum shadertype, GLsizei count, const GLuint *indices) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetUniformSubroutineuiv (GLenum shadertype, GLint location, GLuint *params) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetProgramStageiv (GLuint program, GLenum shadertype, GLenum pname, GLint *values) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef GLint (APIENTRYP PFNGLGETSUBROUTINEUNIFORMLOCATIONPROC) (GLuint program, GLenum shadertype, const GLchar *name);
 typedef GLuint (APIENTRYP PFNGLGETSUBROUTINEINDEXPROC) (GLuint program, GLenum shadertype, const GLchar *name);
@@ -2650,8 +2651,8 @@ typedef void (APIENTRYP PFNGLGETPROGRAMSTAGEIVPROC) (GLuint program, GLenum shad
 #ifndef GL_ARB_tessellation_shader
 #define GL_ARB_tessellation_shader 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glPatchParameteri (GLenum pname, GLint value);
-GLAPI void APIENTRY glPatchParameterfv (GLenum pname, const GLfloat *values);
+GLAPI void APIENTRY glPatchParameteri (GLenum pname, GLint value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glPatchParameterfv (GLenum pname, const GLfloat *values) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLPATCHPARAMETERIPROC) (GLenum pname, GLint value);
 typedef void (APIENTRYP PFNGLPATCHPARAMETERFVPROC) (GLenum pname, const GLfloat *values);
@@ -2664,13 +2665,13 @@ typedef void (APIENTRYP PFNGLPATCHPARAMETERFVPROC) (GLenum pname, const GLfloat 
 #ifndef GL_ARB_transform_feedback2
 #define GL_ARB_transform_feedback2 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glBindTransformFeedback (GLenum target, GLuint id);
-GLAPI void APIENTRY glDeleteTransformFeedbacks (GLsizei n, const GLuint *ids);
-GLAPI void APIENTRY glGenTransformFeedbacks (GLsizei n, GLuint *ids);
-GLAPI GLboolean APIENTRY glIsTransformFeedback (GLuint id);
-GLAPI void APIENTRY glPauseTransformFeedback (void);
-GLAPI void APIENTRY glResumeTransformFeedback (void);
-GLAPI void APIENTRY glDrawTransformFeedback (GLenum mode, GLuint id);
+GLAPI void APIENTRY glBindTransformFeedback (GLenum target, GLuint id) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glDeleteTransformFeedbacks (GLsizei n, const GLuint *ids) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGenTransformFeedbacks (GLsizei n, GLuint *ids) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI GLboolean APIENTRY glIsTransformFeedback (GLuint id) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glPauseTransformFeedback (void) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glResumeTransformFeedback (void) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glDrawTransformFeedback (GLenum mode, GLuint id) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLBINDTRANSFORMFEEDBACKPROC) (GLenum target, GLuint id);
 typedef void (APIENTRYP PFNGLDELETETRANSFORMFEEDBACKSPROC) (GLsizei n, const GLuint *ids);
@@ -2684,10 +2685,10 @@ typedef void (APIENTRYP PFNGLDRAWTRANSFORMFEEDBACKPROC) (GLenum mode, GLuint id)
 #ifndef GL_ARB_transform_feedback3
 #define GL_ARB_transform_feedback3 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glDrawTransformFeedbackStream (GLenum mode, GLuint id, GLuint stream);
-GLAPI void APIENTRY glBeginQueryIndexed (GLenum target, GLuint index, GLuint id);
-GLAPI void APIENTRY glEndQueryIndexed (GLenum target, GLuint index);
-GLAPI void APIENTRY glGetQueryIndexediv (GLenum target, GLuint index, GLenum pname, GLint *params);
+GLAPI void APIENTRY glDrawTransformFeedbackStream (GLenum mode, GLuint id, GLuint stream) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glBeginQueryIndexed (GLenum target, GLuint index, GLuint id) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glEndQueryIndexed (GLenum target, GLuint index) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetQueryIndexediv (GLenum target, GLuint index, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLDRAWTRANSFORMFEEDBACKSTREAMPROC) (GLenum mode, GLuint id, GLuint stream);
 typedef void (APIENTRYP PFNGLBEGINQUERYINDEXEDPROC) (GLenum target, GLuint index, GLuint id);
@@ -2698,11 +2699,11 @@ typedef void (APIENTRYP PFNGLGETQUERYINDEXEDIVPROC) (GLenum target, GLuint index
 #ifndef GL_ARB_ES2_compatibility
 #define GL_ARB_ES2_compatibility 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glReleaseShaderCompiler (void);
-GLAPI void APIENTRY glShaderBinary (GLsizei count, const GLuint *shaders, GLenum binaryformat, const GLvoid *binary, GLsizei length);
-GLAPI void APIENTRY glGetShaderPrecisionFormat (GLenum shadertype, GLenum precisiontype, GLint *range, GLint *precision);
-GLAPI void APIENTRY glDepthRangef (GLclampf n, GLclampf f);
-GLAPI void APIENTRY glClearDepthf (GLclampf d);
+GLAPI void APIENTRY glReleaseShaderCompiler (void) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glShaderBinary (GLsizei count, const GLuint *shaders, GLenum binaryformat, const GLvoid *binary, GLsizei length) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetShaderPrecisionFormat (GLenum shadertype, GLenum precisiontype, GLint *range, GLint *precision) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glDepthRangef (GLclampf n, GLclampf f) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glClearDepthf (GLclampf d) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLRELEASESHADERCOMPILERPROC) (void);
 typedef void (APIENTRYP PFNGLSHADERBINARYPROC) (GLsizei count, const GLuint *shaders, GLenum binaryformat, const GLvoid *binary, GLsizei length);
@@ -2714,9 +2715,9 @@ typedef void (APIENTRYP PFNGLCLEARDEPTHFPROC) (GLclampf d);
 #ifndef GL_ARB_get_program_binary
 #define GL_ARB_get_program_binary 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glGetProgramBinary (GLuint program, GLsizei bufSize, GLsizei *length, GLenum *binaryFormat, GLvoid *binary);
-GLAPI void APIENTRY glProgramBinary (GLuint program, GLenum binaryFormat, const GLvoid *binary, GLsizei length);
-GLAPI void APIENTRY glProgramParameteri (GLuint program, GLenum pname, GLint value);
+GLAPI void APIENTRY glGetProgramBinary (GLuint program, GLsizei bufSize, GLsizei *length, GLenum *binaryFormat, GLvoid *binary) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramBinary (GLuint program, GLenum binaryFormat, const GLvoid *binary, GLsizei length) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramParameteri (GLuint program, GLenum pname, GLint value) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLGETPROGRAMBINARYPROC) (GLuint program, GLsizei bufSize, GLsizei *length, GLenum *binaryFormat, GLvoid *binary);
 typedef void (APIENTRYP PFNGLPROGRAMBINARYPROC) (GLuint program, GLenum binaryFormat, const GLvoid *binary, GLsizei length);
@@ -2726,66 +2727,66 @@ typedef void (APIENTRYP PFNGLPROGRAMPARAMETERIPROC) (GLuint program, GLenum pnam
 #ifndef GL_ARB_separate_shader_objects
 #define GL_ARB_separate_shader_objects 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glUseProgramStages (GLuint pipeline, GLbitfield stages, GLuint program);
-GLAPI void APIENTRY glActiveShaderProgram (GLuint pipeline, GLuint program);
-GLAPI GLuint APIENTRY glCreateShaderProgramv (GLenum type, GLsizei count, const GLchar* const *strings);
-GLAPI void APIENTRY glBindProgramPipeline (GLuint pipeline);
-GLAPI void APIENTRY glDeleteProgramPipelines (GLsizei n, const GLuint *pipelines);
-GLAPI void APIENTRY glGenProgramPipelines (GLsizei n, GLuint *pipelines);
-GLAPI GLboolean APIENTRY glIsProgramPipeline (GLuint pipeline);
-GLAPI void APIENTRY glGetProgramPipelineiv (GLuint pipeline, GLenum pname, GLint *params);
-GLAPI void APIENTRY glProgramUniform1i (GLuint program, GLint location, GLint v0);
-GLAPI void APIENTRY glProgramUniform1iv (GLuint program, GLint location, GLsizei count, const GLint *value);
-GLAPI void APIENTRY glProgramUniform1f (GLuint program, GLint location, GLfloat v0);
-GLAPI void APIENTRY glProgramUniform1fv (GLuint program, GLint location, GLsizei count, const GLfloat *value);
-GLAPI void APIENTRY glProgramUniform1d (GLuint program, GLint location, GLdouble v0);
-GLAPI void APIENTRY glProgramUniform1dv (GLuint program, GLint location, GLsizei count, const GLdouble *value);
-GLAPI void APIENTRY glProgramUniform1ui (GLuint program, GLint location, GLuint v0);
-GLAPI void APIENTRY glProgramUniform1uiv (GLuint program, GLint location, GLsizei count, const GLuint *value);
-GLAPI void APIENTRY glProgramUniform2i (GLuint program, GLint location, GLint v0, GLint v1);
-GLAPI void APIENTRY glProgramUniform2iv (GLuint program, GLint location, GLsizei count, const GLint *value);
-GLAPI void APIENTRY glProgramUniform2f (GLuint program, GLint location, GLfloat v0, GLfloat v1);
-GLAPI void APIENTRY glProgramUniform2fv (GLuint program, GLint location, GLsizei count, const GLfloat *value);
-GLAPI void APIENTRY glProgramUniform2d (GLuint program, GLint location, GLdouble v0, GLdouble v1);
-GLAPI void APIENTRY glProgramUniform2dv (GLuint program, GLint location, GLsizei count, const GLdouble *value);
-GLAPI void APIENTRY glProgramUniform2ui (GLuint program, GLint location, GLuint v0, GLuint v1);
-GLAPI void APIENTRY glProgramUniform2uiv (GLuint program, GLint location, GLsizei count, const GLuint *value);
-GLAPI void APIENTRY glProgramUniform3i (GLuint program, GLint location, GLint v0, GLint v1, GLint v2);
-GLAPI void APIENTRY glProgramUniform3iv (GLuint program, GLint location, GLsizei count, const GLint *value);
-GLAPI void APIENTRY glProgramUniform3f (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2);
-GLAPI void APIENTRY glProgramUniform3fv (GLuint program, GLint location, GLsizei count, const GLfloat *value);
-GLAPI void APIENTRY glProgramUniform3d (GLuint program, GLint location, GLdouble v0, GLdouble v1, GLdouble v2);
-GLAPI void APIENTRY glProgramUniform3dv (GLuint program, GLint location, GLsizei count, const GLdouble *value);
-GLAPI void APIENTRY glProgramUniform3ui (GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2);
-GLAPI void APIENTRY glProgramUniform3uiv (GLuint program, GLint location, GLsizei count, const GLuint *value);
-GLAPI void APIENTRY glProgramUniform4i (GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3);
-GLAPI void APIENTRY glProgramUniform4iv (GLuint program, GLint location, GLsizei count, const GLint *value);
-GLAPI void APIENTRY glProgramUniform4f (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
-GLAPI void APIENTRY glProgramUniform4fv (GLuint program, GLint location, GLsizei count, const GLfloat *value);
-GLAPI void APIENTRY glProgramUniform4d (GLuint program, GLint location, GLdouble v0, GLdouble v1, GLdouble v2, GLdouble v3);
-GLAPI void APIENTRY glProgramUniform4dv (GLuint program, GLint location, GLsizei count, const GLdouble *value);
-GLAPI void APIENTRY glProgramUniform4ui (GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3);
-GLAPI void APIENTRY glProgramUniform4uiv (GLuint program, GLint location, GLsizei count, const GLuint *value);
-GLAPI void APIENTRY glProgramUniformMatrix2fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glProgramUniformMatrix3fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glProgramUniformMatrix4fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glProgramUniformMatrix2dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glProgramUniformMatrix3dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glProgramUniformMatrix4dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glProgramUniformMatrix2x3fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glProgramUniformMatrix3x2fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glProgramUniformMatrix2x4fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glProgramUniformMatrix4x2fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glProgramUniformMatrix3x4fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glProgramUniformMatrix4x3fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLAPI void APIENTRY glProgramUniformMatrix2x3dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glProgramUniformMatrix3x2dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glProgramUniformMatrix2x4dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glProgramUniformMatrix4x2dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glProgramUniformMatrix3x4dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glProgramUniformMatrix4x3dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
-GLAPI void APIENTRY glValidateProgramPipeline (GLuint pipeline);
-GLAPI void APIENTRY glGetProgramPipelineInfoLog (GLuint pipeline, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
+GLAPI void APIENTRY glUseProgramStages (GLuint pipeline, GLbitfield stages, GLuint program) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glActiveShaderProgram (GLuint pipeline, GLuint program) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI GLuint APIENTRY glCreateShaderProgramv (GLenum type, GLsizei count, const GLchar* const *strings) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glBindProgramPipeline (GLuint pipeline) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glDeleteProgramPipelines (GLsizei n, const GLuint *pipelines) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGenProgramPipelines (GLsizei n, GLuint *pipelines) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI GLboolean APIENTRY glIsProgramPipeline (GLuint pipeline) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetProgramPipelineiv (GLuint pipeline, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform1i (GLuint program, GLint location, GLint v0) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform1iv (GLuint program, GLint location, GLsizei count, const GLint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform1f (GLuint program, GLint location, GLfloat v0) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform1fv (GLuint program, GLint location, GLsizei count, const GLfloat *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform1d (GLuint program, GLint location, GLdouble v0) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform1dv (GLuint program, GLint location, GLsizei count, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform1ui (GLuint program, GLint location, GLuint v0) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform1uiv (GLuint program, GLint location, GLsizei count, const GLuint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform2i (GLuint program, GLint location, GLint v0, GLint v1) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform2iv (GLuint program, GLint location, GLsizei count, const GLint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform2f (GLuint program, GLint location, GLfloat v0, GLfloat v1) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform2fv (GLuint program, GLint location, GLsizei count, const GLfloat *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform2d (GLuint program, GLint location, GLdouble v0, GLdouble v1) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform2dv (GLuint program, GLint location, GLsizei count, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform2ui (GLuint program, GLint location, GLuint v0, GLuint v1) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform2uiv (GLuint program, GLint location, GLsizei count, const GLuint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform3i (GLuint program, GLint location, GLint v0, GLint v1, GLint v2) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform3iv (GLuint program, GLint location, GLsizei count, const GLint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform3f (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform3fv (GLuint program, GLint location, GLsizei count, const GLfloat *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform3d (GLuint program, GLint location, GLdouble v0, GLdouble v1, GLdouble v2) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform3dv (GLuint program, GLint location, GLsizei count, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform3ui (GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform3uiv (GLuint program, GLint location, GLsizei count, const GLuint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform4i (GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform4iv (GLuint program, GLint location, GLsizei count, const GLint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform4f (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform4fv (GLuint program, GLint location, GLsizei count, const GLfloat *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform4d (GLuint program, GLint location, GLdouble v0, GLdouble v1, GLdouble v2, GLdouble v3) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform4dv (GLuint program, GLint location, GLsizei count, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform4ui (GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniform4uiv (GLuint program, GLint location, GLsizei count, const GLuint *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix2fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix3fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix4fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix2dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix3dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix4dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix2x3fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix3x2fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix2x4fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix4x2fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix3x4fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix4x3fv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix2x3dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix3x2dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix2x4dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix4x2dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix3x4dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glProgramUniformMatrix4x3dv (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glValidateProgramPipeline (GLuint pipeline) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetProgramPipelineInfoLog (GLuint pipeline, GLsizei bufSize, GLsizei *length, GLchar *infoLog) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLUSEPROGRAMSTAGESPROC) (GLuint pipeline, GLbitfield stages, GLuint program);
 typedef void (APIENTRYP PFNGLACTIVESHADERPROGRAMPROC) (GLuint pipeline, GLuint program);
@@ -2856,16 +2857,16 @@ typedef void (APIENTRYP PFNGLGETPROGRAMPIPELINEINFOLOGPROC) (GLuint pipeline, GL
 #ifndef GL_ARB_vertex_attrib_64bit
 #define GL_ARB_vertex_attrib_64bit 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glVertexAttribL1d (GLuint index, GLdouble x);
-GLAPI void APIENTRY glVertexAttribL2d (GLuint index, GLdouble x, GLdouble y);
-GLAPI void APIENTRY glVertexAttribL3d (GLuint index, GLdouble x, GLdouble y, GLdouble z);
-GLAPI void APIENTRY glVertexAttribL4d (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLAPI void APIENTRY glVertexAttribL1dv (GLuint index, const GLdouble *v);
-GLAPI void APIENTRY glVertexAttribL2dv (GLuint index, const GLdouble *v);
-GLAPI void APIENTRY glVertexAttribL3dv (GLuint index, const GLdouble *v);
-GLAPI void APIENTRY glVertexAttribL4dv (GLuint index, const GLdouble *v);
-GLAPI void APIENTRY glVertexAttribLPointer (GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
-GLAPI void APIENTRY glGetVertexAttribLdv (GLuint index, GLenum pname, GLdouble *params);
+GLAPI void APIENTRY glVertexAttribL1d (GLuint index, GLdouble x) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribL2d (GLuint index, GLdouble x, GLdouble y) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribL3d (GLuint index, GLdouble x, GLdouble y, GLdouble z) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribL4d (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribL1dv (GLuint index, const GLdouble *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribL2dv (GLuint index, const GLdouble *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribL3dv (GLuint index, const GLdouble *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribL4dv (GLuint index, const GLdouble *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glVertexAttribLPointer (GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetVertexAttribLdv (GLuint index, GLenum pname, GLdouble *params) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLVERTEXATTRIBL1DPROC) (GLuint index, GLdouble x);
 typedef void (APIENTRYP PFNGLVERTEXATTRIBL2DPROC) (GLuint index, GLdouble x, GLdouble y);
@@ -2882,16 +2883,16 @@ typedef void (APIENTRYP PFNGLGETVERTEXATTRIBLDVPROC) (GLuint index, GLenum pname
 #ifndef GL_ARB_viewport_array
 #define GL_ARB_viewport_array 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glViewportArrayv (GLuint first, GLsizei count, const GLfloat *v);
-GLAPI void APIENTRY glViewportIndexedf (GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h);
-GLAPI void APIENTRY glViewportIndexedfv (GLuint index, const GLfloat *v);
-GLAPI void APIENTRY glScissorArrayv (GLuint first, GLsizei count, const GLint *v);
-GLAPI void APIENTRY glScissorIndexed (GLuint index, GLint left, GLint bottom, GLsizei width, GLsizei height);
-GLAPI void APIENTRY glScissorIndexedv (GLuint index, const GLint *v);
-GLAPI void APIENTRY glDepthRangeArrayv (GLuint first, GLsizei count, const GLclampd *v);
-GLAPI void APIENTRY glDepthRangeIndexed (GLuint index, GLclampd n, GLclampd f);
-GLAPI void APIENTRY glGetFloati_v (GLenum target, GLuint index, GLfloat *data);
-GLAPI void APIENTRY glGetDoublei_v (GLenum target, GLuint index, GLdouble *data);
+GLAPI void APIENTRY glViewportArrayv (GLuint first, GLsizei count, const GLfloat *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glViewportIndexedf (GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glViewportIndexedfv (GLuint index, const GLfloat *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glScissorArrayv (GLuint first, GLsizei count, const GLint *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glScissorIndexed (GLuint index, GLint left, GLint bottom, GLsizei width, GLsizei height) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glScissorIndexedv (GLuint index, const GLint *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glDepthRangeArrayv (GLuint first, GLsizei count, const GLclampd *v) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glDepthRangeIndexed (GLuint index, GLclampd n, GLclampd f) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetFloati_v (GLenum target, GLuint index, GLfloat *data) OPENGL_DEPRECATED(10.7, 10.14);
+GLAPI void APIENTRY glGetDoublei_v (GLenum target, GLuint index, GLdouble *data) OPENGL_DEPRECATED(10.7, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLVIEWPORTARRAYVPROC) (GLuint first, GLsizei count, const GLfloat *v);
 typedef void (APIENTRYP PFNGLVIEWPORTINDEXEDFPROC) (GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h);

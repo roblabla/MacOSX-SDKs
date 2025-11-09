@@ -8,7 +8,7 @@
 .\"man mdoc.samples for a complete listing of options
 .\"man mdoc for the short list of editing options
 .\"/usr/share/misc/mdoc.template
-.Dd May 11, 2017              \" DATE
+.Dd November 13, 2017         \" DATE
 .Dt layerutil 1      \" Program name and manual section number
 .Os Darwin
 .Sh NAME                 \" Section Header - required - don't modify 
@@ -47,15 +47,17 @@ best or smallest. GPU Compression is only supported on iOS
 Set the lossy compression factor used for image content to a value
 between 0 and 1.0, default is 0.75. The smaller the value, the smaller
 the compressed file size. A value of 1.0 creates a lossless image.
-.\"
-.\"
-.\"
-.\"
-.\"
-.\"
-.\"
-.\"
-.\"
+.It Fl s Ar n , Fl Fl scale=v
+Used to specify the scale factor used in the generated lcr file. When
+used with a PSD file it indicates the scale factor of the PSD
+file. When used with an LSR file indicates which scale factor of
+images should be kept. If scale is not
+specified 1 is assumed.
+.It Fl p Ar n , Fl Fl display-gamut=v
+v can be one of srgb/p3. Selecting p3 processes the image and if it
+contains wide gamut data will be treated as such.
+.It Fl g Ar s, Fl Fl palette-image
+Turn on palette image compression (Defaults to off).
 .It Fl o , Fl Fl output
 Output file name. If you are converting an input lsr/psd file then if
 no output file is given, the basename of the input file is used as

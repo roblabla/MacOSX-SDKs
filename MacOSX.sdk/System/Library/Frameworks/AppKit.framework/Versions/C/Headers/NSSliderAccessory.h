@@ -1,7 +1,7 @@
 /*
     NSSliderAccessory.h
     Application Kit
-    Copyright (c) 2016-2017, Apple Inc.
+    Copyright (c) 2016-2018, Apple Inc.
     All rights reserved.
  */
 
@@ -15,14 +15,14 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_12)
 @interface NSSliderAccessory : NSObject <NSCoding, NSAccessibility, NSAccessibilityElement> {
 @private
-    id _content;
-    id _container;
-    NSSliderAccessoryBehavior *_behavior;
-    signed char _enabled: 1;
+    id _content APPKIT_IVAR;
+    id _container APPKIT_IVAR;
+    NSSliderAccessoryBehavior *_behavior APPKIT_IVAR;
+    signed char _enabled: 1 APPKIT_IVAR;
 
 #if !__OBJC2__
-    unsigned int _sliderAccessoryReservedFlags: 31 __unused;
-    void *_sliderAccessoryReserved[3] __unused;
+    unsigned int _sliderAccessoryReservedFlags: 31 __unused APPKIT_IVAR;
+    void *_sliderAccessoryReserved[3] __unused APPKIT_IVAR;
 #endif /* !__OBJC2__ */
 }
 

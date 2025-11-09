@@ -1,6 +1,6 @@
 /* CoreAnimation - CAMediaTiming.h
 
-   Copyright (c) 2006-2017, Apple Inc.
+   Copyright (c) 2006-2018, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CABase.h>
@@ -26,6 +26,8 @@
  * and optionally to play backwards before repeating. */
 
 @class NSString;
+
+typedef NSString * CAMediaTimingFillMode NS_STRING_ENUM;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -72,19 +74,19 @@ NS_ASSUME_NONNULL_BEGIN
  * are `backwards', `forwards', `both' and `removed'. Defaults to
  * `removed'. */
 
-@property(copy) NSString *fillMode;
+@property(copy) CAMediaTimingFillMode fillMode;
 
 @end
 
 /* `fillMode' options. */
 
-CA_EXTERN NSString * const kCAFillModeForwards
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAFillModeBackwards
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAFillModeBoth
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAFillModeRemoved
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
+CA_EXTERN CAMediaTimingFillMode const kCAFillModeForwards
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAMediaTimingFillMode const kCAFillModeBackwards
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAMediaTimingFillMode const kCAFillModeBoth
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAMediaTimingFillMode const kCAFillModeRemoved
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END

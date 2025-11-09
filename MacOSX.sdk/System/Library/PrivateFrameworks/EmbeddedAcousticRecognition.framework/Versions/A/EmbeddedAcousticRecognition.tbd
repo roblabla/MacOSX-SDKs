@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D39FD8F4-3877-34EC-86CA-BB1851D451BC' ]
+uuids:           [ 'x86_64: F700484C-1ABC-33E8-A550-13FD206D4195' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/EmbeddedAcousticRecognition.framework/Versions/A/EmbeddedAcousticRecognition
 exports:         
@@ -17,26 +17,23 @@ exports:
                        _EARCSpeechRecognitionTokenGetStart, _EARCSpeechRecognitionTokenGetTokenName, 
                        _EARCSpeechRecognitionTokenHasSpaceAfter, _EARCSpeechRecognizerCreate, 
                        _EARCSpeechRecognizerCreateRecognitionBuffer, _EARCSpeechRecognizerSetDetectUtterances, 
-                       _EARCSpeechRecognizerSetUserProfileData, _EARCSpeechRecognizerUpdateUserProfileData, 
-                       _EARCUserProfileAddWord, _EARCUserProfileCopyDataProfile, 
-                       _EARCUserProfileCopyPronunciationsForOrthography, _EARCUserProfileCopySanitizedString, 
-                       _EARCUserProfileCreate, _EARCUserProfileReadDataProfile, _EARCUserProfileRemoveAllWords, 
+                       _EARCSpeechRecognizerSetJitProfileData, _EARCSpeechRecognizerSetUserProfileData, 
+                       _EARCSpeechRecognizerUpdateUserProfileData, _EARCUserProfileAddWord, 
+                       _EARCUserProfileCopyDataProfile, _EARCUserProfileCopyPronunciationsForOrthography, 
+                       _EARCUserProfileCopySanitizedString, _EARCUserProfileCreate, 
+                       _EARCUserProfileReadDataProfile, _EARCUserProfileRemoveAllWords, 
                        _EARCWordPartCreate, _EARCWordPartGetFrequency, _EARCWordPartGetOrthography, 
                        _EARCWordPartGetPronunciations, _EARCWordPartGetTagName, _EARErrorDomain, 
-                       _EARRecognitionStatisticAcousticProfileGenerationTime, _EARRecognitionStatisticAcousticProfileLoadingTime, 
-                       _EARRecognitionStatisticAverageActiveTokensPerFrame, _EARRecognitionStatisticFirstPassCpuTime, 
-                       _EARRecognitionStatisticLmeLoadingTime, _EARRecognitionStatisticProcessEmittingCpuTime, 
-                       _EARRecognitionStatisticProcessEmittingWallTime, _EARRecognitionStatisticProcessNonemittingCpuTime, 
-                       _EARRecognitionStatisticProcessNonemittingWallTime, _EARRecognitionStatisticPruneActiveTokensCpuTime, 
-                       _EARRecognitionStatisticPruneActiveTokensWallTime, _EARRecognitionStatisticRecogCpuTime, 
-                       _EARRecognitionStatisticSecondPassCpuTime ]
-    objc-classes:    [ _EARCaesuraSilencePosteriorGenerator, _EARClientSilenceFeatures, 
-                       _EARKeywordFinder, _EARKeywordFinderResult, _EARPSRAudioProcessor, 
-                       _EARTokenPronounciations, __EARCombinedResult, __EARCommandTagger, 
-                       __EARCommandTagging, __EARCommandTaggingResult, __EARDefaultServerEndpointFeatures, 
-                       __EAREndpointFeatures, __EAREndpointer, __EARFormatter, __EARLanguageModel, 
-                       __EARResultCombiner, __EARSpeechModelInfo, __EARSpeechRecognitionAudioBuffer, 
-                       __EARSpeechRecognitionResult, __EARSpeechRecognitionToken, 
-                       __EARSpeechRecognizer, __EARSystemResult, __EARUserProfile, 
-                       __EARWordPart ]
+                       _EARRecognitionStatisticAverageActiveTokensPerFrame, _EARRecognitionStatisticRecogCpuTime ]
+    objc-classes:    [ EARCaesuraSilencePosteriorGenerator, EARClientSilenceFeatures, 
+                       EARKeywordFinder, EARKeywordFinderResult, EARPSRAudioProcessor, 
+                       EARTokenPronounciations, EMTResult, EMTToken, EMTTokenizer, 
+                       EMTTranslator, _EARAcousticFeature, _EARAudioAnalytics, _EARCombinedResult, 
+                       _EARCommandTagger, _EARCommandTagging, _EARCommandTaggingResult, 
+                       _EARDefaultServerEndpointFeatures, _EAREndpointFeatures, _EAREndpointer, 
+                       _EARFormatter, _EARLanguageModel, _EARResultCombiner, _EARSpeechModelInfo, 
+                       _EARSpeechRecognition, _EARSpeechRecognitionAudioBuffer, _EARSpeechRecognitionResult, 
+                       _EARSpeechRecognitionResultPackage, _EARSpeechRecognitionToken, 
+                       _EARSpeechRecognizer, _EARSystemResult, _EARTransformUtil, 
+                       _EARUserProfile, _EARUserProfileBuilder, _EARWordPart ]
 ...

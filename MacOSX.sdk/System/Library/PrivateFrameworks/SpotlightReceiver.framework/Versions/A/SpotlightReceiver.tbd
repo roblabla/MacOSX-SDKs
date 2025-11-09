@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2137CA5F-60C1-33C4-AE05-8A7D5F412A5A' ]
+uuids:           [ 'x86_64: CE0DA698-B2FB-3AF6-A17D-CEEDBEACAFB7' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/SpotlightReceiver.framework/Versions/A/SpotlightReceiver
 exports:         
@@ -8,5 +8,5 @@ exports:
     symbols:         [ _SpotlightReceiverEntitlement, _SpotlightReceiverRegister, 
                        _SpotlightReceiverVersionNumber, _SpotlightReceiverVersionString, 
                        _SpotlightSenderEntitlement ]
-    objc-classes:    [ _CSRecieverConnection ]
+    objc-classes:    [ CSRecieverConnection ]
 ...

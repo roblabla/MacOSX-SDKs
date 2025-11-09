@@ -1,13 +1,15 @@
 /* CoreAnimation - CAScrollLayer.h
 
-   Copyright (c) 2006-2017, Apple Inc.
+   Copyright (c) 2006-2018, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
+typedef NSString * CAScrollLayerScrollMode NS_STRING_ENUM;
+
+API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface CAScrollLayer : CALayer
 
 /* Changes the origin of the layer to point 'p'. */
@@ -21,7 +23,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 /* Defines the axes in which the layer may be scrolled. Possible values
  * are `none', `vertically', `horizontally' or `both' (the default). */
 
-@property(copy) NSString *scrollMode;
+@property(copy) CAScrollLayerScrollMode scrollMode;
 
 @end
 
@@ -46,13 +48,13 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 
 /* `scrollMode' values. */
 
-CA_EXTERN NSString * const kCAScrollNone
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAScrollVertically
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAScrollHorizontally
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAScrollBoth
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
+CA_EXTERN CAScrollLayerScrollMode const kCAScrollNone
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAScrollLayerScrollMode const kCAScrollVertically
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAScrollLayerScrollMode const kCAScrollHorizontally
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAScrollLayerScrollMode const kCAScrollBoth
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END

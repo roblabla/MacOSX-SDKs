@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2016 Apple Inc. All rights reserved.
+	Copyright 2010-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -202,6 +202,26 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
       The array is tested for suitability for setting as the value of the trackSegments property. If a portion of an existing trackSegments array is to be modified, the modification can be made via an instance of NSMutableArray, and the resulting array can be tested via -validateTrackSegments:error:.
 */
 - (BOOL)validateTrackSegments:(NSArray<AVCompositionTrackSegment *> *)trackSegments error:(NSError * _Nullable * _Nullable)outError;
+
+/*!
+	@method			addTrackAssociationToTrack:type:
+	@abstract		Establishes a track association of a specific type between two tracks.
+	@param			compositionTrack
+					An AVCompositionTrack object that is to be associated with the receiver.
+	@param			trackAssociationType
+					The type of track association to add between the receiver and the specified compositionTrack (for instance, AVTrackAssociationTypeChapterList).
+*/
+- (void)addTrackAssociationToTrack:(AVCompositionTrack *)compositionTrack type:(AVTrackAssociationType)trackAssociationType API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
+
+/*!
+	@method			removeTrackAssociationToTrack:type:
+	@abstract		Removes a track association of a specific type between two tracks.
+	@param			compositionTrack
+					An AVCompositionTrack object that is associated with the receiver.
+	@param			trackAssociationType
+					The type of track association to remove between the receiver and the specified compositionTrack (for instance, AVTrackAssociationTypeChapterList).
+*/
+- (void)removeTrackAssociationToTrack:(AVCompositionTrack *)compositionTrack type:(AVTrackAssociationType)trackAssociationType API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
 
 @end
 

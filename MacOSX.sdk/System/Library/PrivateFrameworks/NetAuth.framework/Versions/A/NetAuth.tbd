@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 0E34552C-1D01-3458-9B7A-F889CA8CF9A4', 'x86_64: 7B7A8056-4B08-3766-865A-77786E7627D5' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 55DC741A-A01A-380C-B2D3-244241DA1F2C' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/NetAuth.framework/Versions/A/NetAuth
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _DictionaryCreateFromBytesAndLength, _GetNetAuthAuthAgentPort, 
                        _GetNetAuthUserAgentPort, _NAAA_GetCredentials_CloseSession, 
                        _NAAA_GetCredentials_OpenSession, _NAAA_GetCredentials_ReportError, 

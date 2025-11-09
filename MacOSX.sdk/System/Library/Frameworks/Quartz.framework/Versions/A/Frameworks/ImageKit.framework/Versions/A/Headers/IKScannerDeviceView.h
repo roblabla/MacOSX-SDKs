@@ -5,10 +5,12 @@
 //  Copyright 2008 Apple Inc.. All rights reserved.
 //
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+#ifndef IKScannerView_h
+#define IKScannerView_h
 
 #import <Cocoa/Cocoa.h>
 #import <ImageCaptureCore/ImageCaptureCore.h>
+#import <ImageKit/ImageKitBase.h>
 
 @class IKScannerDeviceView;
 
@@ -98,6 +100,7 @@ typedef NS_ENUM(NSInteger, IKScannerDeviceViewDisplayMode)
  @class IKScannerDeviceView
  @abstract IKScannerDeviceView displays a UI to work with Image Capture supported scanners.
  */
+IK_CLASS_AVAILABLE(10.6)
 @interface IKScannerDeviceView : NSView 
 {
 @private

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2017 Apple Inc.
+ * Copyright (c) 2015-2018 Apple Inc.
  * All rights reserved.
  */
 
@@ -25,8 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
  *	This key is used to indicate the Remediation URL. The URL should follow the scheme
  *	http or https to be used by the content filter.
  */
-NEFILTER_EXPORT NSString const *NEFilterProviderRemediationMapRemediationURLs NS_AVAILABLE(NA, 9_0);			// Key for RemediationURL
-NEFILTER_EXPORT NSString const *NEFilterProviderRemediationMapRemediationButtonTexts NS_AVAILABLE(NA, 9_0);	// Key for Remediation button text
+NEFILTER_EXPORT NSString const *NEFilterProviderRemediationMapRemediationURLs API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);			// Key for RemediationURL
+NEFILTER_EXPORT NSString const *NEFilterProviderRemediationMapRemediationButtonTexts API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);	// Key for Remediation button text
 
 /*!
  *	Strings which can be appended or inserted into the remediation URL
@@ -49,7 +49,7 @@ NEFILTER_EXPORT NSString const *NEFilterProviderRemediationMapRemediationButtonT
  *
  * NEFilterProvider is part of NetworkExtension.framework
  */
-NS_CLASS_AVAILABLE(NA, 9_0)
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface NEFilterProvider : NEProvider
 
 /*!
@@ -60,7 +60,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  * filter was started successfully, subclass implementations must pass the nil value to this block. If an error occurred
  * while starting the filter, sublcass implementations must pass a non-nil NSError containing more details about the error.
  */
-- (void)startFilterWithCompletionHandler:(void (^)(NSError * __nullable error))completionHandler NS_AVAILABLE(NA, 9_0);
+- (void)startFilterWithCompletionHandler:(void (^)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method stopFilterWithReason:completionHandler:
@@ -70,7 +70,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  * @param completionHandler A block that must be called when the process of stopping the filter is complete.
  */
 - (void)stopFilterWithReason:(NEProviderStopReason)reason
-		   completionHandler:(void (^)(void))completionHandler NS_AVAILABLE(NA, 9_0);
+		   completionHandler:(void (^)(void))completionHandler API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property filterConfiguration
@@ -78,7 +78,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  * property can change during the lifetime of a filter. Filter implementations can use KVO to be notified when the
  * configuration changes.
  */
-@property (readonly) NEFilterProviderConfiguration *filterConfiguration NS_AVAILABLE(NA, 9_0);
+@property (readonly) NEFilterProviderConfiguration *filterConfiguration API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 
@@ -89,7 +89,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  *
  * NEFilterVerdict is part of NetworkExtension.framework
  */
-NS_CLASS_AVAILABLE(NA, 9_0)
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface NEFilterVerdict : NSObject <NSSecureCoding,NSCopying>
 
 /*!
@@ -101,7 +101,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  * effect. This property applies when the action taken upon a flow is allow, deny, remediate, or filterData (filterData
  * for new flows only).
  */
-@property BOOL shouldReport NS_AVAILABLE(NA, 11_0);
+@property BOOL shouldReport API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 
@@ -112,7 +112,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  *
  * NEFilterNewFlowVerdict is part of NetworkExtension.framework
  */
-NS_CLASS_AVAILABLE(NA, 9_0)
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface NEFilterNewFlowVerdict : NEFilterVerdict <NSSecureCoding,NSCopying>
 
 /*!
@@ -122,21 +122,21 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  * to decide on the new flow again.
  * @return The NEFilterNewFlowVerdict object.
  */
-+ (NEFilterNewFlowVerdict *) needRulesVerdict NS_AVAILABLE(NA, 9_0);
++ (NEFilterNewFlowVerdict *) needRulesVerdict API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method allowVerdict
  * @discussion This class method returns a verdict indicating that the flow should be allowed.
  * @return The NEFilterNewFlowVerdict object.
  */
-+ (NEFilterNewFlowVerdict *) allowVerdict NS_AVAILABLE(NA, 9_0);
++ (NEFilterNewFlowVerdict *) allowVerdict API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method dropVerdict
  * @discussion This class method returns a verdict indicating that the flow should be dropped.
  * @return The NEFilterNewFlowVerdict object.
  */
-+ (NEFilterNewFlowVerdict *) dropVerdict NS_AVAILABLE(NA, 9_0);
++ (NEFilterNewFlowVerdict *) dropVerdict API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 /*!
  * @method remediateVerdictWithRemediationURLMapKey:remediationButtonTextMapKey:
  * @discussion This class method returns a verdict indicating that a "content blocked" page should be displayed to
@@ -145,7 +145,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  * @return The NEFilterNewFlowVerdict object.
  */
 + (NEFilterNewFlowVerdict *)remediateVerdictWithRemediationURLMapKey:(NSString *)remediationURLMapKey
-										 remediationButtonTextMapKey:(NSString *)remediationButtonTextMapKey NS_AVAILABLE(NA, 9_0);
+										 remediationButtonTextMapKey:(NSString *)remediationButtonTextMapKey API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method URLAppendStringVerdictWithMapKey
@@ -153,7 +153,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  * @param urlAppendMapKey URL Append map key to be used by the data plugin to notify what the url should be appended with
  * @return The NEFilterNewFlowVerdict object.
  */
-+ (NEFilterNewFlowVerdict *)URLAppendStringVerdictWithMapKey:(NSString *)urlAppendMapKey NS_AVAILABLE(NA, 9_0);
++ (NEFilterNewFlowVerdict *)URLAppendStringVerdictWithMapKey:(NSString *)urlAppendMapKey API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method filterDataVerdictWithFilterInbound:peekInboundBytes:filterOutbound:peekOutboundBytes:
@@ -170,7 +170,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
 + (NEFilterNewFlowVerdict *)filterDataVerdictWithFilterInbound:(BOOL)filterInbound
 											  peekInboundBytes:(NSUInteger)peekInboundBytes
 												filterOutbound:(BOOL)filterOutbound
-											 peekOutboundBytes:(NSUInteger)peekOutboundBytes NS_AVAILABLE(NA, 9_0);
+											 peekOutboundBytes:(NSUInteger)peekOutboundBytes API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 
@@ -181,7 +181,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  *
  * NEFilterControlVerdict is part of NetworkExtension.framework
  */
-NS_CLASS_AVAILABLE(NA, 9_0)
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface NEFilterControlVerdict : NEFilterNewFlowVerdict <NSSecureCoding,NSCopying>
 
 /*!
@@ -191,7 +191,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  * @param updateRules YES if the control provider has updated the rules and wants to communicate that to the data provider
  * @return The NEFilterControlVerdict object.
  */
-+ (NEFilterControlVerdict *)allowVerdictWithUpdateRules:(BOOL)updateRules NS_AVAILABLE(NA, 9_0);
++ (NEFilterControlVerdict *)allowVerdictWithUpdateRules:(BOOL)updateRules API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method dropVerdictWithUpdateRules:
@@ -200,7 +200,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  * @param updateRules YES if the control provider has updated the rules and wants to communicate that to the data provider
  * @return The NEFilterControlVerdict object.
  */
-+ (NEFilterControlVerdict *)dropVerdictWithUpdateRules:(BOOL)updateRules NS_AVAILABLE(NA, 9_0);
++ (NEFilterControlVerdict *)dropVerdictWithUpdateRules:(BOOL)updateRules API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method updateRules
@@ -208,7 +208,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  * and the rules needed by the data provider have been set.
  * @return The NEFilterControlVerdict object.
  */
-+ (NEFilterControlVerdict *)updateRules NS_AVAILABLE(NA, 9_0);
++ (NEFilterControlVerdict *)updateRules API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 
@@ -229,7 +229,7 @@ typedef NS_ENUM(NSInteger, NEFilterAction){
 	NEFilterActionRemediate = 3,
 	/*! @const NEFilterActionFilterData Filtering data on the flow */
 	NEFilterActionFilterData = 4,
-} NS_AVAILABLE(NA, 11_0);
+} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @interface NEFilterReport
@@ -238,7 +238,7 @@ typedef NS_ENUM(NSInteger, NEFilterAction){
  *
  * NEFilterReport is part of NetworkExtension.framework
  */
-NS_CLASS_AVAILABLE(NA, 11_0)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface NEFilterReport : NSObject <NSSecureCoding,NSCopying>
 
 /*!

@@ -6,13 +6,14 @@
 //
 #import <Foundation/Foundation.h>
 
-
 #import <Vision/VNDefines.h>
 #import <Vision/VNTypes.h>
 #import <Vision/VNError.h>
 #import <Vision/VNUtils.h>
 #import <Vision/VNFaceLandmarks.h>
 #import <Vision/VNRequest.h>
+#import <Vision/VNRequestRevisionProviding.h>
+#import <Vision/VNFaceObservationAccepting.h>
 #import <Vision/VNDetectBarcodesRequest.h>
 #import <Vision/VNDetectFaceRectanglesRequest.h>
 #import <Vision/VNDetectFaceLandmarksRequest.h>
@@ -27,6 +28,7 @@
 #import <Vision/VNTrackingRequest.h>
 #import <Vision/VNTrackObjectRequest.h>
 #import <Vision/VNTrackRectangleRequest.h>
+
 
 /* The version of the Vision framework */
 VN_EXPORT double VNVisionVersionNumber API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));

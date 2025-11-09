@@ -131,6 +131,7 @@ extern const CFStringRef kSecGuestAttributeDynamicCodeInfoPlist;
 extern const CFStringRef kSecGuestAttributeArchitecture;
 extern const CFStringRef kSecGuestAttributeSubarchitecture;
 
+#if TARGET_OS_OSX
 /*!
 	@function SecCodeCopyGuestWithAttributes
 	This is the omnibus API function for obtaining dynamic code references.
@@ -188,6 +189,7 @@ extern const CFStringRef kSecGuestAttributeSubarchitecture;
 
 OSStatus SecCodeCopyGuestWithAttributes(SecCodeRef __nullable host,
 	CFDictionaryRef __nullable attributes,	SecCSFlags flags, SecCodeRef * __nonnull CF_RETURNS_RETAINED guest);
+#endif // TARGET_OS_OSX
 
 
 /*!
@@ -453,6 +455,7 @@ extern const CFStringRef kSecCodeInfoTimestamp;		/* Signing */
 extern const CFStringRef kSecCodeInfoTrust;			/* Signing */
 extern const CFStringRef kSecCodeInfoUnique;		/* generic */
 extern const CFStringRef kSecCodeInfoCdHashes;		/* generic */
+extern const CFStringRef kSecCodeInfoRuntimeVersion; /*generic */
 
 OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags,
 	CFDictionaryRef * __nonnull CF_RETURNS_RETAINED information);

@@ -1,24 +1,25 @@
 /*
         NSStoryboard.h
         Application Kit
-        Copyright (c) 2013-2017, Apple Inc.
+        Copyright (c) 2013-2018, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * NSStoryboardName NS_EXTENSIBLE_STRING_ENUM;
-typedef NSString * NSStoryboardSceneIdentifier NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSStoryboardName NS_SWIFT_BRIDGED_TYPEDEF;
+typedef NSString * NSStoryboardSceneIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface NSStoryboard : NSObject {
 @private
-    id _privateStoryboardData;
+    id _privateStoryboardData APPKIT_IVAR;
     struct _storyboardFlags {
         unsigned int reserved:32;
-    };
+    } APPKIT_IVAR;
 }
 
 /* The main UI storyboard for the application, specified by the "NSMainStoryboardFile" key in its Info.plist */

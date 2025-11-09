@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  @protocol MTLParallelRenderCommandEncoder
  @discussion The MTLParallelRenderCommandEncoder protocol is designed to allow a single render to texture operation to be efficiently (and safely) broken up across multiple threads.
  */
-NS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0))
 @protocol MTLParallelRenderCommandEncoder <MTLCommandEncoder>
 
 /*!
@@ -34,21 +34,21 @@ NS_AVAILABLE(10_11, 8_0)
  @param storeAction The desired store action for the given color attachment.  This may be set to any value other than MTLStoreActionUnknown.
  @param colorAttachmentIndex The index of the color attachment
 */
-- (void)setColorStoreAction:(MTLStoreAction)storeAction atIndex:(NSUInteger)colorAttachmentIndex NS_AVAILABLE(10_12, 10_0);
+- (void)setColorStoreAction:(MTLStoreAction)storeAction atIndex:(NSUInteger)colorAttachmentIndex API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*!
  @method setDepthStoreAction:
  @brief If the the store action for the depth attachment was set to MTLStoreActionUnknown when the render command encoder was created,
  setDepthStoreAction: must be used to finalize the store action before endEncoding is called.
 */
-- (void)setDepthStoreAction:(MTLStoreAction)storeAction NS_AVAILABLE(10_12, 10_0);
+- (void)setDepthStoreAction:(MTLStoreAction)storeAction API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*!
  @method setStencilStoreAction:
  @brief If the the store action for the stencil attachment was set to MTLStoreActionUnknown when the render command encoder was created,
  setStencilStoreAction: must be used to finalize the store action before endEncoding is called.
 */
-- (void)setStencilStoreAction:(MTLStoreAction)storeAction NS_AVAILABLE(10_12, 10_0);
+- (void)setStencilStoreAction:(MTLStoreAction)storeAction API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*!
  @method setColorStoreActionOptions:atIndex:
@@ -57,21 +57,21 @@ NS_AVAILABLE(10_11, 8_0)
  @param storeActionOptions The desired store action options for the given color attachment.
  @param colorAttachmentIndex The index of the color attachment
  */
-- (void)setColorStoreActionOptions:(MTLStoreActionOptions)storeActionOptions atIndex:(NSUInteger)colorAttachmentIndex NS_AVAILABLE(10_13, 11_0);
+- (void)setColorStoreActionOptions:(MTLStoreActionOptions)storeActionOptions atIndex:(NSUInteger)colorAttachmentIndex API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  @method setDepthStoreActionOptions:
  @brief If the the store action for the depth attachment was set to MTLStoreActionUnknown when the render command encoder was created,
  setDepthStoreActionOptions: may be used to finalize the store action options before endEncoding is called.
  */
-- (void)setDepthStoreActionOptions:(MTLStoreActionOptions)storeActionOptions NS_AVAILABLE(10_13, 11_0);
+- (void)setDepthStoreActionOptions:(MTLStoreActionOptions)storeActionOptions API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  @method setStencilStoreActionOptions:
  @brief If the the store action for the stencil attachment was set to MTLStoreActionUnknown when the render command encoder was created,
  setStencilStoreActionOptions: may be used to finalize the store action options before endEncoding is called.
  */
-- (void)setStencilStoreActionOptions:(MTLStoreActionOptions)storeActionOptions NS_AVAILABLE(10_13, 11_0);
+- (void)setStencilStoreActionOptions:(MTLStoreActionOptions)storeActionOptions API_AVAILABLE(macos(10.13), ios(11.0));
 
 @end
 NS_ASSUME_NONNULL_END

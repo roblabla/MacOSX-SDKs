@@ -1,10 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 862FBF47-F295-3753-ABF8-CBAD1DEC422A', 'x86_64: 94E25E7D-B4CE-3B60-959E-9616DA667D30' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: A7F8E168-AB1D-36F4-9693-CFEF12BC197D' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio
+objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _AudioConvertHostTimeToNanos, _AudioConvertNanosToHostTime, 
                        _AudioDeviceAddIOProc, _AudioDeviceAddPropertyListener, _AudioDeviceCreateIOProcID, 
                        _AudioDeviceCreateIOProcIDWithBlock, _AudioDeviceCreateIOProcIDWithClockedBlock, 
@@ -28,10 +29,10 @@ exports:
                        _AudioObjectAddPropertyListenerBlock, _AudioObjectAddPropertyListenerInternal, 
                        _AudioObjectCreate, _AudioObjectExists, _AudioObjectGetPropertyData, 
                        _AudioObjectGetPropertyDataSize, _AudioObjectHasProperty, 
-                       _AudioObjectIsPropertySettable, _AudioObjectPropertiesChanged, 
-                       _AudioObjectRemovePropertyListener, _AudioObjectRemovePropertyListenerBlock, 
-                       _AudioObjectSetPropertyData, _AudioObjectShow, _AudioObjectsPublishedAndDied, 
-                       _AudioStreamAddPropertyListener, _AudioStreamGetProperty, 
-                       _AudioStreamGetPropertyInfo, _AudioStreamRemovePropertyListener, 
+                       _AudioObjectIsOnListenerThread, _AudioObjectIsPropertySettable, 
+                       _AudioObjectPropertiesChanged, _AudioObjectRemovePropertyListener, 
+                       _AudioObjectRemovePropertyListenerBlock, _AudioObjectSetPropertyData, 
+                       _AudioObjectShow, _AudioObjectsPublishedAndDied, _AudioStreamAddPropertyListener, 
+                       _AudioStreamGetProperty, _AudioStreamGetPropertyInfo, _AudioStreamRemovePropertyListener, 
                        _AudioStreamSetProperty ]
 ...

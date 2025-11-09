@@ -1,19 +1,20 @@
 /*
 	NSButton.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSButtonCell.h>
 #import <AppKit/NSUserInterfaceValidation.h>
+#import <AppKit/NSUserInterfaceCompression.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSSound;
 
-@interface NSButton : NSControl <NSUserInterfaceValidations, NSAccessibilityButton>
+@interface NSButton : NSControl <NSUserInterfaceValidations, NSAccessibilityButton, NSUserInterfaceCompression>
 
 @property (copy) NSString *title;
 @property (copy) NSString *alternateTitle;
@@ -37,7 +38,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (getter=isSpringLoaded) BOOL springLoaded NS_AVAILABLE_MAC(10_10_3); // sends action on deep-press or extended hover while dragging. Defaults to NO.
 @property NSInteger maxAcceleratorLevel NS_AVAILABLE_MAC(10_10_3);	// Configures the maximum allowed level for an NSMultiLevelAcceleratorButton, allowed values range from [1,5]. Defaults to 2.
 
-@property (nullable, copy) NSColor *bezelColor NS_AVAILABLE_MAC(10_12_2); // The color of the button's bevel, in appearances that support it
+/*! Applies a custom color to the button's bezel, in appearances that support it. A nil value indicates an unmodified button appearance. The default value is nil. */
+@property (nullable, copy) NSColor *bezelColor NS_AVAILABLE_MAC(10_12_2);
+
+/*! Applies a tint color to template image and text content, in combination with other theme-appropriate effects. Only applicable to borderless buttons. A nil value indicates the standard set of effects without color modification. The default value is nil. Non-template images and attributed string values are not affected by the contentTintColor. */
+@property (nullable, copy) NSColor *contentTintColor NS_AVAILABLE_MAC(10_14);
+
+- (void)compressWithPrioritizedCompressionOptions:(NSArray<NSUserInterfaceCompressionOptions *> *)prioritizedOptions NS_AVAILABLE_MAC(10_13);
+- (NSSize)minimumSizeWithPrioritizedCompressionOptions:(NSArray<NSUserInterfaceCompressionOptions *> *)prioritizedOptions NS_AVAILABLE_MAC(10_13);
+@property (readonly, copy) NSUserInterfaceCompressionOptions *activeCompressionOptions NS_AVAILABLE_MAC(10_13);
 
 @end
 

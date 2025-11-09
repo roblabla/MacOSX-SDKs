@@ -2,7 +2,7 @@
  *  CTFontTraits.h
  *  CoreText
  *
- *  Copyright (c) 2006-2017 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2018 Apple Inc. All rights reserved.
  *
  */
 
@@ -10,8 +10,8 @@
 #define __CTFONTTRAITS__
 
 #include <CoreText/CTDefines.h>
-#include <CoreFoundation/CFNumber.h>
-#include <CoreFoundation/CFString.h>
+
+#include <CoreFoundation/CoreFoundation.h>
 
 CF_EXTERN_C_BEGIN
 CF_ASSUME_NONNULL_BEGIN
@@ -63,7 +63,7 @@ typedef CF_OPTIONS(uint32_t, CTFontSymbolicTraits) {
     kCTFontTraitMonoSpace           = (1 << 10),    // Use fixed-pitch glyphs if available. May have multiple glyph advances (most CJK glyphs may contain two spaces)
     kCTFontTraitVertical            = (1 << 11),    // Use vertical glyph variants and metrics
     kCTFontTraitUIOptimized         = (1 << 12),    // Synthesize appropriate attributes for UI rendering such as control titles if necessary
-    kCTFontTraitColorGlyphs         = (1 << 13),    // Color glyphs ('sbix' or 'COLR') are available. 
+    kCTFontTraitColorGlyphs         = (1 << 13),    // Color glyphs ('sbix', 'COLR', or 'SVG ') are available. 
     kCTFontTraitComposite           = (1 << 14),    // The font is a CFR (Composite font reference), a cascade list is expected per font. 
 
     kCTFontTraitClassMask           = (15U << kCTFontClassMaskShift),

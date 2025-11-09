@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
 	
-	Copyright 2006-2013 Apple Inc. All rights reserved.
+	Copyright © 2006-2018 Apple Inc. All rights reserved.
 	
 	Video Toolbox client API for compressing video frames.
 	
@@ -233,7 +233,7 @@ VTCompressionSessionPrepareToEncodeFrames( CM_NONNULL VTCompressionSessionRef se
 		Contains key/value pairs specifying additional properties for encoding this frame.
 		Note that some session properties may also be changed between frames.
 		Such changes have effect on subsequently encoded frames.
-	@param	sourceFrameRefCon
+	@param	sourceFrameRefcon
 		Your reference value for the frame, which will be passed to the output callback function.
 	@param	infoFlagsOut
 		Points to a VTEncodeInfoFlags to receive information about the encode operation.
@@ -249,7 +249,7 @@ VTCompressionSessionEncodeFrame(
 	CMTime								presentationTimeStamp,
 	CMTime								duration, // may be kCMTimeInvalid
 	CM_NULLABLE CFDictionaryRef			frameProperties,
-	void * CM_NULLABLE					sourceFrameRefCon,
+	void * CM_NULLABLE					sourceFrameRefcon,
 	VTEncodeInfoFlags * CM_NULLABLE		infoFlagsOut ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 	
 #if __BLOCKS__

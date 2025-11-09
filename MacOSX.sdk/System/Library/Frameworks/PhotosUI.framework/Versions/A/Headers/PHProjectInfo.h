@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <PhotosUI/PhotosUITypes.h>
+#import <MapKit/MapKit.h>
 
 @class PHCloudIdentifier;
 @class PHProjectSection;
@@ -45,7 +46,7 @@ typedef NS_ENUM(NSInteger, PHProjectCreationSource) {
 NS_CLASS_AVAILABLE_MAC(10_13)
 @interface PHProjectInfo : NSObject <NSSecureCoding>
 
-// Source from which the project was created.
+/// Source from which the project was created.
 @property (nonatomic, readonly) PHProjectCreationSource creationSource;
 
 /**
@@ -54,8 +55,21 @@ NS_CLASS_AVAILABLE_MAC(10_13)
  */
 @property (nonatomic, readonly) PHProjectType projectType;
 
-// Array of project sections each containing one or more PHProjectSectionContent objects.
+/// Array of project sections each containing one or more PHProjectSectionContent objects.
 @property (nonatomic, readonly) NSArray<PHProjectSection *> *sections;
+
+
+/**
+ The following properties are only used when the user creates a new project from an existing Apple Print Product.
+ */
+/// YES if the source project had branding enabled.
+@property (nonatomic, readonly) BOOL brandingEnabled API_AVAILABLE(macos(10.14));
+/// YES if the source project had page numbers enabled.
+@property (nonatomic, readonly) BOOL pageNumbersEnabled API_AVAILABLE(macos(10.14));
+/// The product identifier of the originating Apple Print Product.
+@property (nonatomic, readonly, nullable) NSString *productIdentifier API_AVAILABLE(macos(10.14));
+/// The product theme identifier of the originating Apple Print Product.
+@property (nonatomic, readonly, nullable) NSString *themeIdentifier API_AVAILABLE(macos(10.14));
 
 // PHProjectInfo cannot be directly instantiated.
 - (instancetype)init NS_UNAVAILABLE;
@@ -99,10 +113,10 @@ NS_CLASS_AVAILABLE_MAC(10_13)
  */
 @property (nonatomic, readonly) NSArray<PHProjectSectionContent *> *sectionContents;
 
-// The intended usage of the section (e.g., cover, content, auxiliary)
+/// The intended usage of the section (e.g., cover, content, auxiliary)
 @property (nonatomic, readonly) PHProjectSectionType sectionType;
 
-// Title for the section (e.g., a Moment name or a general geographical location), might be an empty string.
+/// Title for the section (e.g., a Moment name or a general geographical location), might be an empty string.
 @property (nonatomic, readonly) NSString *title;
 
 // PHProjectSection cannot be directly instantiated.
@@ -119,7 +133,7 @@ NS_CLASS_AVAILABLE_MAC(10_13)
 NS_CLASS_AVAILABLE_MAC(10_13)
 @interface PHProjectSectionContent : NSObject <NSSecureCoding>
 
-// Array of asset, text, or journal entry elements contained in the content.
+/// Array of asset, text, or journal entry elements contained in the content.
 @property (nonatomic, readonly) NSArray<__kindof PHProjectElement *> *elements;
 
 /**
@@ -130,11 +144,17 @@ NS_CLASS_AVAILABLE_MAC(10_13)
  */
 @property (nonatomic, readonly) NSInteger numberOfColumns;
 
-// Overall aspect ratio of the full content layout (width/height) to enable faithful replication in the project's layout.
+/// Overall aspect ratio of the full content layout (width/height) to enable faithful replication in the project's layout.
 @property (nonatomic, readonly) double aspectRatio;
 
-// Convenience for getting a single array of all cloud asset identifiers referenced in the content without needing to enumerate elements.
+/// Convenience for getting a single array of all cloud asset identifiers referenced in the content without needing to enumerate elements.
 @property (nonatomic, readonly) NSArray<PHCloudIdentifier *> *cloudAssetIdentifiers;
+
+/**
+ Background color of the section content.
+ This property is only used when the user creates a new project from an existing Apple Print Product
+ */
+@property (nonatomic, readonly, nullable) NSColor *backgroundColor API_AVAILABLE(macos(10.14));
 
 // PHProjectSectionContent cannot be directly instantiated.
 - (instancetype)init NS_UNAVAILABLE;
@@ -195,12 +215,22 @@ NS_CLASS_AVAILABLE_MAC(10_13)
 
 /**
  Significance of the regionOfInterest in the overall project context is provided as a weight score.
+ All regions of interest with the same identifier in the project have the same weight.
  For projects doing things like animation or transition between assets, focusing on the highest weighted
  regions of interest will ensure that the presentation represents something that is most meaningful to the user.
  Value range is a double between 0.0 and 1.0.
  Default is 0.5.
  */
 @property (nonatomic, readonly) double weight;
+
+/**
+ Quality of the represented region of interest in the asset.
+ Different regions of interest with the same identifier may have different quality values.
+ If the project wants to decide between multiple assets containing the same region of interest,
+ the quality score can be used to pick the best representation of the region of interest.
+ Value range is a double between 0.0 and 1.0.
+ */
+@property (nonatomic, readonly) double quality API_AVAILABLE(macos(10.14));
 
 /**
  Identifier of the region of interest. Regions representing the same person or object will have
@@ -228,7 +258,7 @@ NS_CLASS_AVAILABLE_MAC(10_13)
  */
 @property (nonatomic, readonly) PHCloudIdentifier *cloudAssetIdentifier;
 
-// If a user has explicitly annotated an asset (e.g., caption) that value will be provided in this property.
+/// If a user has explicitly annotated an asset (e.g., caption) that value will be provided in this property.
 @property (nonatomic, readonly) NSString *annotation;
 
 /**
@@ -247,9 +277,16 @@ NS_CLASS_AVAILABLE_MAC(10_13)
  */
 @property (nonatomic, readonly) NSArray<PHProjectRegionOfInterest *> *regionsOfInterest;
 
+/**
+ The following properties are only used when the user creates a new project from an existing Apple Print Product.
+ */
+/// YES if the asset was presented horizontally flipped in the originating project.
+@property (nonatomic, readonly) BOOL horizontallyFlipped API_AVAILABLE(macos(10.14));
+/// YES if the asset was presented vertically flipped in the originating project.
+@property (nonatomic, readonly) BOOL verticallyFlipped API_AVAILABLE(macos(10.14));
 @end
 
-// Options for PHProjectTextElementType
+/// Options for PHProjectTextElementType
 typedef NS_ENUM(NSInteger, PHProjectTextElementType) {
     PHProjectTextElementTypeBody = 0,
     PHProjectTextElementTypeTitle,
@@ -264,7 +301,7 @@ typedef NS_ENUM(NSInteger, PHProjectTextElementType) {
 NS_CLASS_AVAILABLE_MAC(10_13)
 @interface PHProjectTextElement : PHProjectElement <NSSecureCoding>
 
-// Unformatted, raw string for the text element
+/// Unformatted, raw string for the text element
 @property (nonatomic, readonly) NSString *text;
 
 /**
@@ -283,14 +320,31 @@ NS_CLASS_AVAILABLE_MAC(10_13)
 NS_CLASS_AVAILABLE_MAC(10_13)
 @interface PHProjectJournalEntryElement : PHProjectElement <NSSecureCoding>
 
-// date to which the provided asset and/or text pertain
+/// Date to which the provided asset and/or text pertain
 @property (nonatomic, readonly) NSDate *date;
 
-// representative asset, if any, for that date
+/// Representative asset, if any, for that date.
 @property (nonatomic, readonly, nullable) PHProjectAssetElement *assetElement;
 
-// descriptive text (e.g., "Mom's Birthday") for that date
+/// Descriptive text (e.g., "Mom's Birthday") for that date.
 @property (nonatomic, readonly, nullable) PHProjectTextElement *textElement;
+@end
+
+/**
+ A PHProjectMapElement object representing a map with annotations.
+ In general, these will only be included for projects created from existing Apple Print Product projects.
+ */
+API_AVAILABLE(macos(10.14))
+@interface PHProjectMapElement : PHProjectElement <NSSecureCoding>
+/// The type of the map in the project.
+@property (nonatomic, readonly) MKMapType mapType;
+
+@property (nonatomic, readonly) CLLocationCoordinate2D centerCoordinate;
+@property (nonatomic, readonly) CLLocationDirection heading;
+@property (nonatomic, readonly) CGFloat pitch;
+@property (nonatomic, readonly) CLLocationDistance altitude;
+
+@property (nonatomic, copy, readonly) NSArray<id<MKAnnotation>> *annotations;
 @end
 
 NS_ASSUME_NONNULL_END

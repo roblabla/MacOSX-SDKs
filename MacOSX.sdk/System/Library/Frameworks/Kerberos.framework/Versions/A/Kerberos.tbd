@@ -1,13 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 1B79DE0D-2D65-36AF-939C-AC74188E1321', 'x86_64: B1238145-0E0F-38F8-B2FF-22F9C0A7B4D9' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 8BE3D524-257D-3663-A937-F1AC76BDF4D9' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Kerberos.framework/Versions/A/Kerberos
 current-version: 6
 compatibility-version: 5
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _FSp_krb_get_svc_in_tkt, _FSp_profile_init, _FSp_profile_init_path, 
                        _FSp_put_svc_key, _FSp_read_service_key, _GSS_C_NT_ANONYMOUS, 
                        _GSS_C_NT_EXPORT_NAME, _GSS_C_NT_HOSTBASED_SERVICE, _GSS_C_NT_HOSTBASED_SERVICE_X, 
@@ -52,7 +52,8 @@ exports:
                        _KLAcquireNewTickets, _KLAcquireNewTicketsWithPassword, _KLAcquireTickets, 
                        _KLAcquireTicketsWithPassword, _KLCacheHasValidTickets, _KLCancelAllDialogs, 
                        _KLChangePassword, _KLChangePasswordWithPasswords, _KLComparePrincipal, 
-                       _KLCountKerberosRealms, _KLCreateLoginOptions, _KLCreatePrincipalFromString, 
+                       _KLCountKerberosRealms, _KLCreateLoginOptions, _KLCreatePrincipalFromKerberos5Principal, 
+                       _KLCreatePrincipalFromPrincipal, _KLCreatePrincipalFromString, 
                        _KLCreatePrincipalFromTriplet, _KLDestroyTickets, _KLDisposeLoginOptions, 
                        _KLDisposePrincipal, _KLDisposeString, _KLFindKerberosRealmByName, 
                        _KLGetApplicationOptions, _KLGetDefaultLoginOption, _KLGetDisplayStringFromPrincipal, 
@@ -75,9 +76,13 @@ exports:
                        _KServerGetSessionTimeRemainingCompat, _KServerNewSessionCompat, 
                        _KServerVerifyTicketCompat, ___KLAllowAutomaticPrompting, 
                        ___KLAllowHomeDirectoryAccess, ___KLAllowRememberPassword, 
-                       ___KLPromptMechanism, ___KLSetApplicationPrompter, ___KLSetAutomaticPrompting, 
-                       ___KLSetHomeDirectoryAccess, ___KLSetPromptMechanism, ___KerberosDebugLogLevel, 
-                       ___KerberosDebugPrint, ___KerberosDebugPrintMemory, ___KerberosDebugPrintSession, 
+                       ___KLCreatePrincipalFromKerberos5Principal, ___KLCreatePrincipalFromTriplet, 
+                       ___KLGetKerberos5PrincipalFromPrincipal, ___KLGetKeychainPasswordForPrincipal, 
+                       ___KLGetTripletFromPrincipal, ___KLPrincipalIsTicketGrantingService, 
+                       ___KLPrincipalSetKeychainPassword, ___KLPromptMechanism, ___KLRemoveKeychainPasswordForPrincipal, 
+                       ___KLSetApplicationPrompter, ___KLSetAutomaticPrompting, ___KLSetHomeDirectoryAccess, 
+                       ___KLSetPromptMechanism, ___KerberosDebugLogLevel, ___KerberosDebugPrint, 
+                       ___KerberosDebugPrintMemory, ___KerberosDebugPrintSession, 
                        ___KerberosDebugVAPrint, ___KerberosInternal_krb5_defkeyname, 
                        ___KerberosInternal_krb5int_sendtokdc_debug_handler, _add_error_table, 
                        _apple_gss_krb5_export_authdata_if_relevant_context, _apple_gss_krb5_free_authdata_if_relevant, 
@@ -108,21 +113,22 @@ exports:
                        _gss_release_cred, _gss_release_name, _gss_release_oid, _gss_release_oid_set, 
                        _gss_seal, _gss_sign, _gss_str_to_oid, _gss_test_oid_set_member, 
                        _gss_unseal, _gss_unwrap, _gss_verify, _gss_verify_mic, _gss_wrap, 
-                       _gss_wrap_size_limit, _k_isinst, _k_isname, _k_isrealm, _kim_ccache_compare, 
-                       _kim_ccache_copy, _kim_ccache_create_from_client_identity, 
-                       _kim_ccache_create_from_default, _kim_ccache_create_from_display_name, 
-                       _kim_ccache_create_from_keytab, _kim_ccache_create_from_krb5_ccache, 
-                       _kim_ccache_create_from_type_and_name, _kim_ccache_create_new, 
-                       _kim_ccache_create_new_if_needed, _kim_ccache_create_new_if_needed_with_password, 
-                       _kim_ccache_create_new_with_password, _kim_ccache_destroy, 
-                       _kim_ccache_free, _kim_ccache_get_client_identity, _kim_ccache_get_display_name, 
-                       _kim_ccache_get_expiration_time, _kim_ccache_get_krb5_ccache, 
-                       _kim_ccache_get_name, _kim_ccache_get_options, _kim_ccache_get_renewal_expiration_time, 
-                       _kim_ccache_get_start_time, _kim_ccache_get_state, _kim_ccache_get_type, 
-                       _kim_ccache_get_valid_credential, _kim_ccache_iterator_create, 
-                       _kim_ccache_iterator_free, _kim_ccache_iterator_next, _kim_ccache_renew, 
-                       _kim_ccache_set_default, _kim_ccache_validate, _kim_ccache_verify, 
-                       _kim_credential_copy, _kim_credential_create_from_keytab, 
+                       _gss_wrap_size_limit, _initialize_asn1_error_table, _initialize_k524_error_table, 
+                       _initialize_krb5_error_table, _initialize_prof_error_table, 
+                       _k_isinst, _k_isname, _k_isrealm, _kim_ccache_compare, _kim_ccache_copy, 
+                       _kim_ccache_create_from_client_identity, _kim_ccache_create_from_default, 
+                       _kim_ccache_create_from_display_name, _kim_ccache_create_from_keytab, 
+                       _kim_ccache_create_from_krb5_ccache, _kim_ccache_create_from_type_and_name, 
+                       _kim_ccache_create_new, _kim_ccache_create_new_if_needed, 
+                       _kim_ccache_create_new_if_needed_with_password, _kim_ccache_create_new_with_password, 
+                       _kim_ccache_destroy, _kim_ccache_free, _kim_ccache_get_client_identity, 
+                       _kim_ccache_get_display_name, _kim_ccache_get_expiration_time, 
+                       _kim_ccache_get_krb5_ccache, _kim_ccache_get_name, _kim_ccache_get_options, 
+                       _kim_ccache_get_renewal_expiration_time, _kim_ccache_get_start_time, 
+                       _kim_ccache_get_state, _kim_ccache_get_type, _kim_ccache_get_valid_credential, 
+                       _kim_ccache_iterator_create, _kim_ccache_iterator_free, _kim_ccache_iterator_next, 
+                       _kim_ccache_renew, _kim_ccache_set_default, _kim_ccache_validate, 
+                       _kim_ccache_verify, _kim_credential_copy, _kim_credential_create_from_keytab, 
                        _kim_credential_create_from_krb5_creds, _kim_credential_create_new, 
                        _kim_credential_create_new_with_password, _kim_credential_free, 
                        _kim_credential_get_client_identity, _kim_credential_get_expiration_time, 

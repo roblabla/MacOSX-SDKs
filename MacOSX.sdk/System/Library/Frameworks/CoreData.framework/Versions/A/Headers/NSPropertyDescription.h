@@ -1,7 +1,7 @@
 /*
     NSPropertyDescription.h
     Core Data
-    Copyright (c) 2004-2017, Apple Inc.
+    Copyright (c) 2004-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -43,9 +43,10 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
         unsigned int _hasMinValueInExtraIvars:1;
         unsigned int _storeBinaryDataExternally:1;
         unsigned int _preserveValueOnDelete:1;
-        unsigned int _reservedAttributeFlagOne:1;
-
-        unsigned int _reservedPropertyDescription:18;
+        unsigned int _isTriggerBacked:1;
+        unsigned int _isFileBackedFuture:1;
+        
+        unsigned int _reservedPropertyDescription:17;
     } _propertyDescriptionFlags;    
 	long _entitysReferenceIDForProperty;
 #endif
@@ -70,7 +71,7 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 
 /* Returns a boolean value indicating if the property is important for searching.  NSPersistentStores can optionally utilize this information upon store creation for operations like defining indexes.
 */
-@property (getter=isIndexed) BOOL indexed API_DEPRECATED( "Use NSEntityDescription.indexes instead", macosx(10.5,10.13),ios(3.0,11.0),tvos(10.0, 11.0),watchos(3.0, 4.0));
+@property (getter=isIndexed) BOOL indexed API_DEPRECATED( "Use NSEntityDescription.indexes instead", macosx(10.5,10.13),ios(3.0,11.0),tvos(9.0, 11.0),watchos(2.0, 4.0));
 
 /* Returns the version hash for the property.  The version hash is used to uniquely identify a property based on its configuration.  The version hash uses only values which affect the persistence of data and the user-defined versionHashModifier value.  (The values which affect persistence are the name of the property, the flags for isOptional, isTransient, and isReadOnly).  This value is stored as part of the version information in the metadata for stores, as well as a definition of a property involved in an NSPropertyMapping.
 */

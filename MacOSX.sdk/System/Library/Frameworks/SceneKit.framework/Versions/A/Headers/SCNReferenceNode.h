@@ -1,7 +1,8 @@
 //
 //  SCNReferenceNode.h
+//  SceneKit
 //
-//  Copyright (c) 2015-2017 Apple Inc. All rights reserved.
+//  Copyright © 2015-2018 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SCNNode.h>
@@ -22,7 +23,7 @@ typedef NS_ENUM(NSInteger, SCNReferenceLoadingPolicy) {
  @class SCNReferenceNode
  @abstract Node that references an external file.
  */
-API_AVAILABLE(macos(10.11), ios(9.0))
+SCN_EXPORT API_AVAILABLE(macos(10.11), ios(9.0))
 @interface SCNReferenceNode : SCNNode
 
 /*!

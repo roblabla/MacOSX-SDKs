@@ -104,13 +104,7 @@
 #define DISPATCH_UNAVAILABLE_MSG(msg)
 #endif
 
-#ifdef __linux__
-#define DISPATCH_LINUX_UNAVAILABLE() \
-		DISPATCH_UNAVAILABLE_MSG( \
-		"This interface is unavailable on linux systems")
-#else
 #define DISPATCH_LINUX_UNAVAILABLE()
-#endif
 
 #ifndef DISPATCH_ALIAS_V2
 #if TARGET_OS_MAC
@@ -120,16 +114,7 @@
 #endif
 #endif
 
-#if TARGET_OS_WIN32 && defined(__DISPATCH_BUILDING_DISPATCH__) && \
-		defined(__cplusplus)
-#define DISPATCH_EXPORT extern "C" extern __declspec(dllexport)
-#elif TARGET_OS_WIN32 && defined(__DISPATCH_BUILDING_DISPATCH__)
-#define DISPATCH_EXPORT extern __declspec(dllexport)
-#elif TARGET_OS_WIN32 && defined(__cplusplus)
-#define DISPATCH_EXPORT extern "C" extern __declspec(dllimport)
-#elif TARGET_OS_WIN32
-#define DISPATCH_EXPORT extern __declspec(dllimport)
-#elif __GNUC__
+#if   __GNUC__
 #define DISPATCH_EXPORT extern __attribute__((visibility("default")))
 #else
 #define DISPATCH_EXPORT extern

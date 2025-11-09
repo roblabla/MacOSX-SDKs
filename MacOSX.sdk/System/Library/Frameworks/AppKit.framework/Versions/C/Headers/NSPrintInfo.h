@@ -1,7 +1,7 @@
 /*
 	NSPrintInfo.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -26,13 +26,13 @@ typedef NS_ENUM(NSInteger, NSPaperOrientation) {
 /* Valid values for the NSPrintHorizontalPagination and NSPrintVerticalPagination attributes.
 */
 typedef NS_ENUM(NSUInteger, NSPrintingPaginationMode) {
-    NSAutoPagination = 0,
-    NSFitPagination = 1,
-    NSClipPagination = 2
+    NSPrintingPaginationModeAutomatic = 0,
+    NSPrintingPaginationModeFit = 1,
+    NSPrintingPaginationModeClip = 2
 };
 
 
-typedef NSString * NSPrintInfoAttributeKey NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSPrintInfoAttributeKey NS_TYPED_EXTENSIBLE_ENUM;
 
 /* Keys for page setup attributes that are recognized by NSPrintInfo.
 */
@@ -49,8 +49,8 @@ APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintTopMargin; // an NSNumber con
 APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintBottomMargin; // an NSNumber containing a measurement in floating-point points
 APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintHorizontallyCentered; // an NSNumber containing a boolean value
 APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintVerticallyCentered; // an NSNumber containing a boolean value
-APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintHorizontalPagination; // an NSNumber containing NSAutoPagination, NSFitPagination, or NSClipPagination
-APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintVerticalPagination; // an NSNumber containing NSAutoPagination, NSFitPagination, or NSClipPagination
+APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintHorizontalPagination; // an NSNumber containing NSPrintingPaginationModeAutomatic, NSPrintingPaginationModeFit, or NSPrintingPaginationModeClip
+APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintVerticalPagination; // an NSNumber containing NSPrintingPaginationModeAutomatic, NSPrintingPaginationModeFit, or NSPrintingPaginationModeClip
 
 /* Keys for print job attributes that are recognized by NSPrintInfo.
 */
@@ -79,19 +79,19 @@ APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintHeaderAndFooter; // a boolean
 
 /* Valid values for the NSPrintJobDisposition attribute.
  */
-typedef NSString * NSPrintJobDispositionValue NS_STRING_ENUM;
+typedef NSString * NSPrintJobDispositionValue NS_TYPED_ENUM;
 APPKIT_EXTERN NSPrintJobDispositionValue const NSPrintSpoolJob;
 APPKIT_EXTERN NSPrintJobDispositionValue const NSPrintPreviewJob;
 APPKIT_EXTERN NSPrintJobDispositionValue const NSPrintSaveJob;
 APPKIT_EXTERN NSPrintJobDispositionValue const NSPrintCancelJob;
 
 
-typedef NSString *NSPrintInfoSettingKey NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString *NSPrintInfoSettingKey NS_SWIFT_BRIDGED_TYPEDEF;
 
 @interface NSPrintInfo : NSObject<NSCopying, NSCoding> {
     @private
-    NSMutableDictionary *_attributes;
-    id _moreVars;
+    NSMutableDictionary *_attributes APPKIT_IVAR;
+    id _moreVars APPKIT_IVAR;
 }
 
 /* Set or get the "shared" instance of NSPrintInfo. The shared print info object is the one that is used automatically by -[NSPageLayout runModal] and +[NSPrintOperation printOperationWithView:].
@@ -184,33 +184,31 @@ typedef NSString *NSPrintInfoSettingKey NS_EXTENSIBLE_STRING_ENUM;
 
 @interface NSPrintInfo(NSDeprecated)
 
-/* A method that was deprecated in Mac OS 10.2. +[NSPrintInfo setDefaultPrinter:] does nothing.
-*/
-+ (void)setDefaultPrinter:(nullable NSPrinter *)printer NS_DEPRECATED_MAC(10_0, 10_2);
++ (void)setDefaultPrinter:(nullable NSPrinter *)printer NS_DEPRECATED_MAC(10_0, 10_2, "NSPrintInfo's implementation has no effect");
 
-/* A method that was deprecated in Mac OS 10.2. NSPrintInfo's implementation of this method recognizes only a small fixed set of paper names, and does not take the details of any particular printer into account. You should use -[NSPrinter pageSizeForPaper:] instead.
+/* NSPrintInfo's implementation of this method recognizes only a small fixed set of paper names, and does not take the details of any particular printer into account.
 */
-+ (NSSize)sizeForPaperName:(nullable NSPrinterPaperName)name NS_DEPRECATED_MAC(10_0, 10_2);
++ (NSSize)sizeForPaperName:(nullable NSPrinterPaperName)name NS_DEPRECATED_MAC(10_0, 10_2, "Use -[NSPrinter pageSizeForPaper:] instead");
 
 @end
 
-/* Keys for attributes that were deprecated in Mac OS 10.2. NSPrintInfo does not recognizes these attributes. For backward binary compatibility, -[NSPrintInfo setUpPrintOperationDefaultValues] does however set default values for the NSPrintJobFeatures (an empty dictionary) and NSPrintPagesPerSheet (1) attributes.
-*/
-APPKIT_EXTERN NSString * const NSPrintFormName NS_DEPRECATED_MAC(10_0, 10_2);
-APPKIT_EXTERN NSString * const NSPrintJobFeatures NS_DEPRECATED_MAC(10_0, 10_2);
-APPKIT_EXTERN NSString * const NSPrintManualFeed NS_DEPRECATED_MAC(10_0, 10_2);
-APPKIT_EXTERN NSString * const NSPrintPagesPerSheet NS_DEPRECATED_MAC(10_0, 10_2);
-APPKIT_EXTERN NSString * const NSPrintPaperFeed NS_DEPRECATED_MAC(10_0, 10_2);
+APPKIT_EXTERN NSString * const NSPrintFormName NS_DEPRECATED_MAC(10_0, 10_2, "NSPrintInfo does not recognize this attribute");
+APPKIT_EXTERN NSString * const NSPrintJobFeatures NS_DEPRECATED_MAC(10_0, 10_2, "NSPrintInfo does not recognize this attribute. -[NSPrintInfo setUpPrintOperationDefaultValues] sets a default value of an empty dictionary");
+APPKIT_EXTERN NSString * const NSPrintManualFeed NS_DEPRECATED_MAC(10_0, 10_2, "NSPrintInfo does not recognize this attribute");
+APPKIT_EXTERN NSString * const NSPrintPagesPerSheet NS_DEPRECATED_MAC(10_0, 10_2, "NSPrintInfo does not recognize this attribute. -[NSPrintInfo setUpPrintOperationDefaultValues] sets a default value of 1");
+APPKIT_EXTERN NSString * const NSPrintPaperFeed NS_DEPRECATED_MAC(10_0, 10_2, "NSPrintInfo does not recognize this attribute");
 
-/* A key for an attribute that was deprecated in Mac OS 10.6. You can use NSPrintJobSavingURL instead.
-*/
 APPKIT_EXTERN NSString * const NSPrintSavePath NS_DEPRECATED_MAC(10_0, 10_6, "Use NSPrintJobSavingURL instead");
 
-/* An enum NSPrintOrientation values that was deprecated in OS X 10.9. You can use NSPaperOrientation instead.
-*/
 typedef NS_ENUM(NSUInteger, NSPrintingOrientation) {
-    NSPortraitOrientation = 0,
-    NSLandscapeOrientation = 1
-};
+    NSPortraitOrientation NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPaperOrientationPortrait", 10_0, 10_14) = 0,
+    NSLandscapeOrientation NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPaperOrientationLandscape", 10_0, 10_14) = 1
+} NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPaperOrientation", 10_0, 10_14);
+
+/* Deprecated legacy printing pagination mode constants. Prefer to use NSPrintingPaginationMode values instead.
+*/
+static const NSPrintingPaginationMode NSAutoPagination NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPrintingPaginationModeAutomatic", 10_0, API_TO_BE_DEPRECATED) = NSPrintingPaginationModeAutomatic;
+static const NSPrintingPaginationMode NSFitPagination NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPrintingPaginationModeFit", 10_0, API_TO_BE_DEPRECATED) = NSPrintingPaginationModeFit;
+static const NSPrintingPaginationMode NSClipPagination NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPrintingPaginationModeClip", 10_0, API_TO_BE_DEPRECATED) = NSPrintingPaginationModeClip;
 
 NS_ASSUME_NONNULL_END

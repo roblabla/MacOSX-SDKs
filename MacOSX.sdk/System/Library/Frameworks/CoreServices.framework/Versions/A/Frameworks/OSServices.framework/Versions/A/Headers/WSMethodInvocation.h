@@ -527,8 +527,13 @@ WSMethodInvocationInvoke(WSMethodInvocationRef invocation)    __OSX_AVAILABLE_BU
  *    outRef:
  *      a CFDictionaryRef containing the result of the execution or a
  *      fault, and optional debug information.
+ *
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later but deprecated in 10.8
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
  */
-typedef CALLBACK_API( void , WSMethodInvocationCallBackProcPtr )(WSMethodInvocationRef invocation, void *info, CFDictionaryRef outRef);
+typedef void(*WSMethodInvocationCallBackProcPtr)(WSMethodInvocationRef invocation, void *info, CFDictionaryRef outRef) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 	
 	
@@ -704,8 +709,13 @@ WSMethodResultIsFault(CFDictionaryRef methodResult)           __OSX_AVAILABLE_BU
  *  Result:
  *    a CFStringRef containing valid XML.  The caller of this callback
  *    will release the string.
+ *
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later but deprecated in 10.8
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
  */
-typedef CALLBACK_API( CFStringRef , WSMethodInvocationSerializationProcPtr )(WSMethodInvocationRef invocation, CFTypeRef obj, void *info);
+typedef CFStringRef(*WSMethodInvocationSerializationProcPtr)(WSMethodInvocationRef invocation, CFTypeRef obj, void *info) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 	
 	
@@ -779,8 +789,13 @@ WSMethodInvocationAddSerializationOverride(
  *  Result:
  *    a CFTypeRef representing the deserialized data, or NULL to allow
  *    the default deserializers to act.
+ *
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later but deprecated in 10.8
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
  */
-typedef CALLBACK_API( CFTypeRef , WSMethodInvocationDeserializationProcPtr )(WSMethodInvocationRef invocation, CFXMLTreeRef msgRoot, CFXMLTreeRef deserializeRoot, void *info);
+typedef CFTypeRef(*WSMethodInvocationDeserializationProcPtr)(WSMethodInvocationRef invocation, CFXMLTreeRef msgRoot, CFXMLTreeRef deserializeRoot, void *info) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 	
 	

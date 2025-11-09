@@ -1,7 +1,7 @@
 /*
 	NSGridView.h
 	Application Kit
-	Copyright (c) 2015-2017, Apple Inc.
+	Copyright (c) 2015-2018, Apple Inc.
 	All rights reserved.
  */
 
@@ -48,19 +48,22 @@ APPKIT_EXTERN const CGFloat NSGridViewSizeForContent NS_AVAILABLE_MAC(10_12); //
 NS_CLASS_AVAILABLE_MAC(10_12)
 @interface NSGridView : NSView {
 @private
-    NSGridCellPlacement _xPlacement;
-    NSGridCellPlacement _yPlacement;
-    NSGridRowAlignment _rowAlignment;
-    CGFloat _rowSpacing;
-    CGFloat _colSpacing;
-    NSMutableArray *_columns;
-    NSMutableArray *_rows;
-    NSMapTable *_cellTable;
-    NSInteger _currentConstraintGeneration;
+    NSGridCellPlacement _xPlacement APPKIT_IVAR;
+    NSGridCellPlacement _yPlacement APPKIT_IVAR;
+    NSGridRowAlignment _rowAlignment APPKIT_IVAR;
+    CGFloat _rowSpacing APPKIT_IVAR;
+    CGFloat _colSpacing APPKIT_IVAR;
+    NSMutableArray *_columns APPKIT_IVAR;
+    NSMutableArray *_rows APPKIT_IVAR;
+    NSMapTable *_cellTable APPKIT_IVAR;
+    NSInteger _currentConstraintGeneration APPKIT_IVAR;
+    struct {
+        unsigned int isDecoding:1;
+        unsigned int _unused:31;
+    } _flags APPKIT_IVAR;
 #if !__OBJC2__
-    id  _reserved __unused;
-    id  _reserved2 __unused;
-    id  _reserved3 __unused;
+    id  _reserved2 __unused APPKIT_IVAR;
+    id  _reserved3 __unused APPKIT_IVAR;
 #endif
 }
 
@@ -114,23 +117,23 @@ NS_CLASS_AVAILABLE_MAC(10_12)
 NS_CLASS_AVAILABLE_MAC(10_12)
 @interface NSGridRow : NSObject <NSCoding> {
 @private
-    NSGridView *_owningGridView;
-    NSMutableArray <NSGridCell*> *_cells;
-    NSLayoutYAxisAnchor* _top;
+    NSGridView *_owningGridView APPKIT_IVAR;
+    NSMutableArray <NSGridCell*> *_cells APPKIT_IVAR;
+    NSLayoutYAxisAnchor* _top APPKIT_IVAR;
 #if !__OBJC2__
-    id  _reserved __unused;
-    id  _reserved2 __unused;
-    id  _reserved3 __unused;
+    id  _reserved __unused APPKIT_IVAR;
+    id  _reserved2 __unused APPKIT_IVAR;
+    id  _reserved3 __unused APPKIT_IVAR;
 #endif
     
-    NSGridCellPlacement _yPlacement;
-    NSGridRowAlignment _rowAlignment;
-    NSInteger _hasContentInGeneration;
+    NSGridCellPlacement _yPlacement APPKIT_IVAR;
+    NSGridRowAlignment _rowAlignment APPKIT_IVAR;
+    NSInteger _hasContentInGeneration APPKIT_IVAR;
 
-    CGFloat _height;
-    CGFloat _topPadding;
-    CGFloat _bottomPadding;
-    BOOL _hidden;
+    CGFloat _height APPKIT_IVAR;
+    CGFloat _topPadding APPKIT_IVAR;
+    CGFloat _bottomPadding APPKIT_IVAR;
+    BOOL _hidden APPKIT_IVAR;
 }
 
 @property (readonly,weak) NSGridView *gridView;
@@ -156,21 +159,21 @@ NS_CLASS_AVAILABLE_MAC(10_12)
 NS_CLASS_AVAILABLE_MAC(10_12)
 @interface NSGridColumn : NSObject <NSCoding> {
 @private
-    NSGridView *_owningGridView;
-    NSLayoutXAxisAnchor *_leading;
+    NSGridView *_owningGridView APPKIT_IVAR;
+    NSLayoutXAxisAnchor *_leading APPKIT_IVAR;
     
 #if !__OBJC2__
-    id  _reserved __unused;
-    id  _reserved2 __unused;
-    id  _reserved3 __unused;
+    id  _reserved __unused APPKIT_IVAR;
+    id  _reserved2 __unused APPKIT_IVAR;
+    id  _reserved3 __unused APPKIT_IVAR;
 #endif
     
-    NSInteger _hasContentInGeneration;
-    NSGridCellPlacement _xPlacement;
-    CGFloat _width;
-    CGFloat _trailingPadding;
-    CGFloat _leadingPadding;
-    BOOL _hidden;
+    NSInteger _hasContentInGeneration APPKIT_IVAR;
+    NSGridCellPlacement _xPlacement APPKIT_IVAR;
+    CGFloat _width APPKIT_IVAR;
+    CGFloat _trailingPadding APPKIT_IVAR;
+    CGFloat _leadingPadding APPKIT_IVAR;
+    BOOL _hidden APPKIT_IVAR;
 }
 
 @property (readonly,weak) NSGridView *gridView;
@@ -193,21 +196,21 @@ NS_CLASS_AVAILABLE_MAC(10_12)
 NS_CLASS_AVAILABLE_MAC(10_12)
 @interface NSGridCell : NSObject <NSCoding> {
 @private
-    __weak NSGridRow *_row;
-    __weak NSGridColumn *_column;
-    NSView  *_contentView;
-    NSGridCell *_headOfMergedCell;
-    NSArray<NSLayoutConstraint*> *_customPlacementConstraints;
+    __weak NSGridRow *_row APPKIT_IVAR;
+    __weak NSGridColumn *_column APPKIT_IVAR;
+    NSView  *_contentView APPKIT_IVAR;
+    NSGridCell *_headOfMergedCell APPKIT_IVAR;
+    NSArray<NSLayoutConstraint*> *_customPlacementConstraints APPKIT_IVAR;
     
 #if !__OBJC2__
-    id  _reserved __unused;
-    id  _reserved2 __unused;
-    id  _reserved3 __unused;
+    id  _reserved __unused APPKIT_IVAR;
+    id  _reserved2 __unused APPKIT_IVAR;
+    id  _reserved3 __unused APPKIT_IVAR;
 #endif
     
-    NSGridCellPlacement _xPlacement;
-    NSGridCellPlacement _yPlacement;
-    NSGridRowAlignment _rowAlignment;
+    NSGridCellPlacement _xPlacement APPKIT_IVAR;
+    NSGridCellPlacement _yPlacement APPKIT_IVAR;
+    NSGridRowAlignment _rowAlignment APPKIT_IVAR;
 }
 
 

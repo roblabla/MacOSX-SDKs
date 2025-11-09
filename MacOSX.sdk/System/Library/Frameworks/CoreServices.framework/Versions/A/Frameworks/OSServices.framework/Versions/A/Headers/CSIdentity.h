@@ -20,16 +20,16 @@
 #endif
 
 #ifndef __CSIDENTITYBASE__
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-#include <MobileCoreServices/CSIdentityBase.h>
+#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !0)
+#include <CoreServices/CSIdentityBase.h>
 #else
 #include <OSServices/CSIdentityBase.h>
 #endif
 #endif
 
 #ifndef __CSIDENTITYAUTHORITY__
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-#include <MobileCoreServices/CSIdentityAuthority.h>
+#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !0)
+#include <CoreServices/CSIdentityAuthority.h>
 #else
 #include <OSServices/CSIdentityAuthority.h>
 #endif
@@ -41,14 +41,13 @@
 
 #ifndef __AUTHORIZATION__
 #include <Security/Security.h>
-#if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_OSX
 #include <Security/Authorization.h>
 #endif
 #endif
 
-
-
 #include <Availability.h>
+#include <ConditionalMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -1301,7 +1300,7 @@ CSIdentityDelete(CSIdentityRef identity)                      __OSX_AVAILABLE_ST
  */
 
 
-#if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_OSX
 /*
  *  CSIdentityCommit()
  *  
@@ -1343,7 +1342,7 @@ CSIdentityCommit(
   AuthorizationRef   authorization,       /* can be NULL */
   CFErrorRef *       error)               /* can be NULL */   __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 	
-#endif // !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+#endif // TARGET_OS_OSX
 
 
 /*
@@ -1359,7 +1358,7 @@ enum {
 };
 
 
-typedef CALLBACK_API_C( void , CSIdentityStatusUpdatedCallback )(CSIdentityRef identity, CFIndex status, CFErrorRef error, void *info);
+typedef void (*CSIdentityStatusUpdatedCallback)(CSIdentityRef identity, CFIndex status, CFErrorRef error, void *info);
 
 /*
  *  CSIdentityClientContext
@@ -1413,7 +1412,7 @@ struct CSIdentityClientContext {
 typedef struct CSIdentityClientContext  CSIdentityClientContext;
 
 
-#if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_OSX
 /*
  *  CSIdentityCommitAsynchronously()
  *  
@@ -1465,7 +1464,7 @@ CSIdentityCommitAsynchronously(
   CFRunLoopRef                     runLoop,
   CFStringRef                      runLoopMode,
   AuthorizationRef                 authorization)       /* can be NULL */ __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
-#endif // !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+#endif // TARGET_OS_OSX
 
 
 /*

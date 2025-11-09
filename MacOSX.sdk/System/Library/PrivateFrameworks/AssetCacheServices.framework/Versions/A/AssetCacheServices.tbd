@@ -1,16 +1,18 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 85356816-7127-3D08-971F-25D7739C8670' ]
+uuids:           [ 'x86_64: CB6F7B37-D115-3F52-94FC-0D72BF923706' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AssetCacheServices.framework/Versions/A/AssetCacheServices
-current-version: 68
-objc-constraint: none
+current-version: 83.3
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ACSImportFileIntoCachingServer, _ACSLocateCachingServer, 
-                       _ACSMightCurrentNetworkHaveCachingServer, _A_CALLBACK_BLOCK_RELEASED_AN_OBJECT_IT_DID_NOT_OWN, 
+                       _ACSMightCurrentNetworkHaveCachingServer, _ACSURLSessionDownloadTaskResumeData, 
+                       _ACSURLSessionTaskPriorityDefault, _ACSURLSessionTaskPriorityHigh, 
+                       _ACSURLSessionTaskPriorityLow, _ACSURLSessionTransferSizeUnknown, 
                        _AssetCacheServicesVersionNumber, _AssetCacheServicesVersionString, 
                        __ACSIntrospect, __ACSLocateAllCachingServers, __ACSSetTestFlags, 
+                       __A_CALLBACK_BLOCK_RELEASED_AN_ASSETCACHESERVICES_OBJECT_IT_DID_NOT_OWN, 
                        __kACSIntrospectionPublicAddressRangesKey, __kACSOptionAutoRefreshKey, 
                        __kACSOptionForceMissKey, __kACSOptionRoutingKey, __kACSRoutingSystem, 
                        __kACSRoutingUser, __kACSServerAdviceKey, __kACSServerGUIDKey, 
@@ -22,4 +24,6 @@ exports:
                        _kACSOptionImportStrategyRename, _kACSOptionImportStrategySymbolicLink, 
                        _kACSOptionMethodKey, _kACSOptionQuickMissKey, _kACSOptionSizeHintKey, 
                        _kACSOptionSourceLengthKey, _kACSOptionSourceOffsetKey ]
+    objc-classes:    [ ACSURLSession, ACSURLSessionDataTask, ACSURLSessionDownloadTask, 
+                       ACSURLSessionTask, ACSURLSessionUploadTask ]
 ...

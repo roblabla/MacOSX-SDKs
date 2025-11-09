@@ -1,7 +1,7 @@
 /*
 	NSDatePickerCell.h
 	Application Kit
-	Copyright (c) 2004-2017, Apple Inc.
+	Copyright (c) 2004-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,26 +12,26 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, NSDatePickerStyle) {
-    NSTextFieldAndStepperDatePickerStyle    = 0,
-    NSClockAndCalendarDatePickerStyle       = 1,
-    NSTextFieldDatePickerStyle              = 2
+    NSDatePickerStyleTextFieldAndStepper    = 0,
+    NSDatePickerStyleClockAndCalendar       = 1,
+    NSDatePickerStyleTextField              = 2
 };
 
 typedef NS_ENUM(NSUInteger, NSDatePickerMode) {
-    NSSingleDateMode = 0,
-    NSRangeDateMode = 1
+    NSDatePickerModeSingle = 0,
+    NSDatePickerModeRange = 1
 };
 
 typedef NS_OPTIONS(NSUInteger, NSDatePickerElementFlags) {
     /* Time Elements */
-    NSHourMinuteDatePickerElementFlag       = 0x000c,
-    NSHourMinuteSecondDatePickerElementFlag = 0x000e,
-    NSTimeZoneDatePickerElementFlag	    = 0x0010,
+    NSDatePickerElementFlagHourMinute       = 0x000c,
+    NSDatePickerElementFlagHourMinuteSecond = 0x000e,
+    NSDatePickerElementFlagTimeZone	    = 0x0010,
 
     /* Date Elements */
-    NSYearMonthDatePickerElementFlag	    = 0x00c0,
-    NSYearMonthDayDatePickerElementFlag	    = 0x00e0,
-    NSEraDatePickerElementFlag		    = 0x0100,
+    NSDatePickerElementFlagYearMonth	    = 0x00c0,
+    NSDatePickerElementFlagYearMonthDay	    = 0x00e0,
+    NSDatePickerElementFlagEra		    = 0x0100,
 };
 
 @class NSCalendar, NSLocale, NSTimeZone;
@@ -40,9 +40,9 @@ typedef NS_OPTIONS(NSUInteger, NSDatePickerElementFlags) {
 @interface NSDatePickerCell : NSActionCell
 {
 @private
-    NSTimeInterval _timeInterval;
-    NSDate *_minDate;
-    NSDate *_maxDate;
+    NSTimeInterval _timeInterval APPKIT_IVAR;
+    NSDate *_minDate APPKIT_IVAR;
+    NSDate *_maxDate APPKIT_IVAR;
     struct __dateCellFlags {
         unsigned int elements:16;
         unsigned int controlStyle:3;
@@ -53,19 +53,19 @@ typedef NS_OPTIONS(NSUInteger, NSDatePickerElementFlags) {
         unsigned int digitsEntered:2;
         unsigned int forcesLeadingZeroes:1;
         unsigned int wrapsDateComponentArithmetic:1;
-    } _dcFlags;
-    __weak id<NSDatePickerCellDelegate> _delegate;
-    NSCalendar *_calendar;
-    NSLocale *_locale;
-    NSTimeZone *_timeZone;
-    NSColor *_backgroundColor;
-    NSColor *_textColor;
-    int _indexOfSelectedSubfield;
-    int _reserved0 __unused;
-    id _reserved1;
-    id _reserved2;
-    id _reserved3;
-    id _reserved4;
+    } _dcFlags APPKIT_IVAR;
+    __weak id<NSDatePickerCellDelegate> _delegate APPKIT_IVAR;
+    NSCalendar *_calendar APPKIT_IVAR;
+    NSLocale *_locale APPKIT_IVAR;
+    NSTimeZone *_timeZone APPKIT_IVAR;
+    NSColor *_backgroundColor APPKIT_IVAR;
+    NSColor *_textColor APPKIT_IVAR;
+    int _indexOfSelectedSubfield APPKIT_IVAR;
+    int _reserved0 __unused APPKIT_IVAR;
+    id _reserved1 APPKIT_IVAR;
+    id _reserved2 APPKIT_IVAR;
+    id _reserved3 APPKIT_IVAR;
+    id _reserved4 APPKIT_IVAR;
 }
 
 - (instancetype)initTextCell:(NSString *)string NS_DESIGNATED_INITIALIZER;
@@ -118,6 +118,26 @@ typedef NS_OPTIONS(NSUInteger, NSDatePickerElementFlags) {
 @optional
 - (void)datePickerCell:(NSDatePickerCell *)datePickerCell validateProposedDateValue:(NSDate * __nonnull *__nonnull)proposedDateValue timeInterval:(nullable NSTimeInterval *)proposedTimeInterval;
 @end
+
+/* Deprecated legacy date picker style constants. Prefer to use NSDatePickerStyle values instead.
+*/
+static const NSDatePickerStyle NSTextFieldAndStepperDatePickerStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSDatePickerStyleTextFieldAndStepper", 10_0, API_TO_BE_DEPRECATED) = NSDatePickerStyleTextFieldAndStepper;
+static const NSDatePickerStyle NSClockAndCalendarDatePickerStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSDatePickerStyleClockAndCalendar", 10_0, API_TO_BE_DEPRECATED) = NSDatePickerStyleClockAndCalendar;
+static const NSDatePickerStyle NSTextFieldDatePickerStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSDatePickerStyleTextField", 10_0, API_TO_BE_DEPRECATED) = NSDatePickerStyleTextField;
+
+/* Deprecated legacy date picker mode constants. Prefer to use NSDatePickerMode values instead.
+*/
+static const NSDatePickerMode NSSingleDateMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSDatePickerModeSingle", 10_0, API_TO_BE_DEPRECATED) = NSDatePickerModeSingle;
+static const NSDatePickerMode NSRangeDateMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSDatePickerModeRange", 10_0, API_TO_BE_DEPRECATED) = NSDatePickerModeRange;
+
+/* Deprecated legacy date picker element flag constants. Prefer to use NSDatePickerElementFlags values instead.
+*/
+static const NSDatePickerElementFlags NSHourMinuteDatePickerElementFlag NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSDatePickerElementFlagHourMinute", 10_0, API_TO_BE_DEPRECATED) = NSDatePickerElementFlagHourMinute;
+static const NSDatePickerElementFlags NSHourMinuteSecondDatePickerElementFlag NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSDatePickerElementFlagHourMinuteSecond", 10_0, API_TO_BE_DEPRECATED) = NSDatePickerElementFlagHourMinuteSecond;
+static const NSDatePickerElementFlags NSTimeZoneDatePickerElementFlag NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSDatePickerElementFlagTimeZone", 10_0, API_TO_BE_DEPRECATED) = NSDatePickerElementFlagTimeZone;
+static const NSDatePickerElementFlags NSYearMonthDatePickerElementFlag NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSDatePickerElementFlagYearMonth", 10_0, API_TO_BE_DEPRECATED) = NSDatePickerElementFlagYearMonth;
+static const NSDatePickerElementFlags NSYearMonthDayDatePickerElementFlag NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSDatePickerElementFlagYearMonthDay", 10_0, API_TO_BE_DEPRECATED) = NSDatePickerElementFlagYearMonthDay;
+static const NSDatePickerElementFlags NSEraDatePickerElementFlag NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSDatePickerElementFlagEra", 10_0, API_TO_BE_DEPRECATED) = NSDatePickerElementFlagEra;
 
 NS_ASSUME_NONNULL_END
 

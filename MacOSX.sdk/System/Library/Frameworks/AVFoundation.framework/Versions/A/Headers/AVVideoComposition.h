@@ -75,12 +75,8 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /* indicates the size at which the video composition, when enabled, should render */
 @property (nonatomic, readonly) CGSize renderSize;
 
-#if TARGET_OS_IPHONE
-
 /* indicates the scale at which the video composition should render. May only be other than 1.0 for a video composition set on an AVPlayerItem */
-@property (nonatomic, readonly) float renderScale;
-
-#endif // TARGET_OS_IPHONE
+@property (nonatomic, readonly) float renderScale API_AVAILABLE(macos(10.14), ios(4.0), tvos(9.0)) __WATCHOS_PROHIBITED;
 
 /* Indicates instructions for video composition via an NSArray of instances of classes implementing the AVVideoCompositionInstruction protocol.
    For the first instruction in the array, timeRange.start must be less than or equal to the earliest time for which playback or other processing will be attempted
@@ -243,12 +239,8 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /* indicates the size at which the video composition, when enabled, should render */
 @property (nonatomic) CGSize renderSize;
 
-#if TARGET_OS_IPHONE
-
 /* indicates the scale at which the video composition should render. May only be other than 1.0 for a video composition set on an AVPlayerItem */
-@property (nonatomic) float renderScale;
-
-#endif // TARGET_OS_IPHONE
+@property (nonatomic) float renderScale API_AVAILABLE(macos(10.14), ios(4.0), tvos(9.0)) __WATCHOS_PROHIBITED;
 
 /* Indicates instructions for video composition via an NSArray of instances of classes implementing the AVVideoCompositionInstruction protocol.
    For the first instruction in the array, timeRange.start must be less than or equal to the earliest time for which playback or other processing will be attempted

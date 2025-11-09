@@ -79,6 +79,7 @@
 .Nm au_to_header_ex ,
 .Nm au_to_header32_ex ,
 .Nm au_to_trailer ,
+.Nm au_to_identity ,
 .Nm au_to_zonename
 .Nd "routines for generating BSM audit tokens"
 .Sh LIBRARY
@@ -209,6 +210,12 @@
 .Fn au_to_header32_ex "int rec_size" "au_event_t e_type" "au_emod_t e_mod"
 .Ft "token_t *"
 .Fn au_to_trailer "int rec_size"
+.Ft "token_t *"
+.Fo au_to_identity
+.Fa "u_int32_t signer_type" "const char* signing_id"
+.Fa "u_char signing_id_trunc" "const char* team_id" "u_char team_id_trunc"
+.Fa "u_int8_t* cdhash" "u_int16_t cdhash_len"
+.Fc
 .Ft "token_t *"
 .Fn au_to_zonename "const char *zonename"
 .Sh DESCRIPTION

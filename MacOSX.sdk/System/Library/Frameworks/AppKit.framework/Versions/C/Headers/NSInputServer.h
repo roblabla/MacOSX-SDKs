@@ -1,13 +1,14 @@
 /*
 	NSInputServer.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSRange.h>
+#import <AppKit/AppKitDefines.h>
 
 /* These methods must be implemented by the delegate.
 */
@@ -63,8 +64,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_DEPRECATED_MAC(10_0, 10_6)
 @interface NSInputServer : NSObject <NSInputServiceProvider, NSInputServerMouseTracker> {
-    NSString *_name;
-    id _delegate;
+    NSString *_name APPKIT_IVAR;
+    id _delegate APPKIT_IVAR;
 }
 
 - (instancetype) initWithDelegate:(null_unspecified id)delegate name:(null_unspecified NSString *)name NS_DEPRECATED_MAC(10_0, 10_6);

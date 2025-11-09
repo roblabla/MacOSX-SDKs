@@ -1,10 +1,18 @@
 //
 //  ModelIO.h
+//  SceneKit
 //
-//  Copyright (c) 2015-2017 Apple Inc. All rights reserved.
+//  Copyright © 2015-2018 Apple Inc. All rights reserved.
 //
 
 #import <ModelIO/ModelIO.h>
+
+#import <SceneKit/SCNNode.h>
+#import <SceneKit/SCNScene.h>
+#import <SceneKit/SCNLight.h>
+#import <SceneKit/SCNCamera.h>
+#import <SceneKit/SCNGeometry.h>
+#import <SceneKit/SCNMaterial.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

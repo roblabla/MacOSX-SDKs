@@ -48,6 +48,7 @@
     Once at least one byte is received, the data source is considered "committed". This is done
     so the contents of the frame will not be lost if the new data source fails to successfully load.
 */
+WEBKIT_DEPRECATED_MAC(10_3, 10_14)
 @protocol WebFrameLoadDelegate <NSObject>
 
 @optional
@@ -201,7 +202,7 @@
     @discussion This method is deprecated. Consider using webView:didClearWindowObject:forFrame:
     instead.
 */
-- (void)webView:(WebView *)webView windowScriptObjectAvailable:(WebScriptObject *)windowScriptObject NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)webView:(WebView *)webView windowScriptObjectAvailable:(WebScriptObject *)windowScriptObject WEBKIT_DEPRECATED_MAC(10_4, 10_5);
 
 #if JSC_OBJC_API_ENABLED
 /*!

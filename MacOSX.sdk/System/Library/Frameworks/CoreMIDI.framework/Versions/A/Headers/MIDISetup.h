@@ -78,7 +78,7 @@ typedef MIDIObjectRef MIDISetupRef;
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupCreate(	MIDISetupRef *outSetup )					__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+MIDISetupCreate(	MIDISetupRef *outSetup )					API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos);
 
 
 //  -----------------------------------------------------------------------------
@@ -96,7 +96,7 @@ MIDISetupCreate(	MIDISetupRef *outSetup )					__OSX_AVAILABLE_BUT_DEPRECATED(__M
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupDispose(	MIDISetupRef setup )						__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+MIDISetupDispose(	MIDISetupRef setup )						API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -120,7 +120,7 @@ MIDISetupDispose(	MIDISetupRef setup )						__OSX_AVAILABLE_BUT_DEPRECATED(__MAC
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupInstall(	MIDISetupRef setup )						__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+MIDISetupInstall(	MIDISetupRef setup )						API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos);
 
 
 //  -----------------------------------------------------------------------------
@@ -141,7 +141,7 @@ MIDISetupInstall(	MIDISetupRef setup )						__OSX_AVAILABLE_BUT_DEPRECATED(__MAC
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupGetCurrent(	MIDISetupRef *outSetup )				__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+MIDISetupGetCurrent(	MIDISetupRef *outSetup )				API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos);
 
 
 //  -----------------------------------------------------------------------------
@@ -165,7 +165,7 @@ MIDISetupGetCurrent(	MIDISetupRef *outSetup )				__OSX_AVAILABLE_BUT_DEPRECATED(
 */
 extern OSStatus
 MIDISetupToData(	MIDISetupRef	setup,
-					CFDataRef __nullable * __nonnull outData )					__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+					CFDataRef __nullable * __nonnull outData )	API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -188,7 +188,7 @@ MIDISetupToData(	MIDISetupRef	setup,
 */
 extern OSStatus
 MIDISetupFromData(	CFDataRef 		data, 
-					MIDISetupRef *	outSetup)					__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+					MIDISetupRef *	outSetup)					API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -220,7 +220,7 @@ extern OSStatus
 MIDIDeviceAddEntity(MIDIDeviceRef device, CFStringRef name, 
 					Boolean embedded, ItemCount numSourceEndpoints,
 					ItemCount numDestinationEndpoints, MIDIEntityRef *newEntity)
-																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+																API_AVAILABLE(macos(10.0), ios(4.2));
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -239,7 +239,7 @@ MIDIDeviceAddEntity(MIDIDeviceRef device, CFStringRef name,
 */
 extern OSStatus
 MIDIDeviceRemoveEntity(MIDIDeviceRef device, MIDIEntityRef entity)
-																__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
+																API_AVAILABLE(macos(10.1), ios(4.2));
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -260,7 +260,7 @@ MIDIDeviceRemoveEntity(MIDIDeviceRef device, MIDIEntityRef entity)
 */
 extern OSStatus
 MIDIEntityAddOrRemoveEndpoints(MIDIEntityRef entity, ItemCount numSourceEndpoints,
-					ItemCount numDestinationEndpoints)			__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
+					ItemCount numDestinationEndpoints)			API_AVAILABLE(macos(10.2), ios(4.2));
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -277,7 +277,7 @@ MIDIEntityAddOrRemoveEndpoints(MIDIEntityRef entity, ItemCount numSourceEndpoint
 						The device to be added.
 */
 extern OSStatus
-MIDISetupAddDevice(		MIDIDeviceRef device )					__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
+MIDISetupAddDevice(		MIDIDeviceRef device )					API_AVAILABLE(macos(10.1), ios(4.2));
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -299,7 +299,7 @@ MIDISetupAddDevice(		MIDIDeviceRef device )					__OSX_AVAILABLE_STARTING(__MAC_1
 						The device to be added.
 */
 extern OSStatus
-MIDISetupRemoveDevice(	MIDIDeviceRef device )				__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
+MIDISetupRemoveDevice(	MIDIDeviceRef device )				API_AVAILABLE(macos(10.1), ios(4.2));
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -313,7 +313,7 @@ MIDISetupRemoveDevice(	MIDIDeviceRef device )				__OSX_AVAILABLE_STARTING(__MAC_
 						The device to be added.
 */
 extern OSStatus
-MIDISetupAddExternalDevice(	MIDIDeviceRef device )			__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
+MIDISetupAddExternalDevice(	MIDIDeviceRef device )			API_AVAILABLE(macos(10.1), ios(4.2));
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -327,7 +327,7 @@ MIDISetupAddExternalDevice(	MIDIDeviceRef device )			__OSX_AVAILABLE_STARTING(__
 						The device to be removed.
 */
 extern OSStatus
-MIDISetupRemoveExternalDevice( MIDIDeviceRef device )		__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
+MIDISetupRemoveExternalDevice( MIDIDeviceRef device )		API_AVAILABLE(macos(10.1), ios(4.2));
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -357,7 +357,7 @@ MIDISetupRemoveExternalDevice( MIDIDeviceRef device )		__OSX_AVAILABLE_STARTING(
 */
 extern OSStatus
 MIDIGetSerialPortOwner(	CFStringRef			portName, 
-						CFStringRef __nullable * __nonnull outDriverName )	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+						CFStringRef __nullable * __nonnull outDriverName )	API_DEPRECATED("No longer supported", macos(10.1, 10.6)) API_UNAVAILABLE(ios, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -380,7 +380,7 @@ MIDIGetSerialPortOwner(	CFStringRef			portName,
 */
 extern OSStatus
 MIDISetSerialPortOwner(	CFStringRef			portName, 
-						CFStringRef			driverName )	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+						CFStringRef			driverName )	API_DEPRECATED("No longer supported", macos(10.1, 10.6)) API_UNAVAILABLE(ios, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -402,7 +402,7 @@ MIDISetSerialPortOwner(	CFStringRef			portName,
 	@result			An OSStatus result code.	
 */
 extern OSStatus
-MIDIGetSerialPortDrivers(	CFArrayRef __nullable * __nonnull outDriverNames )	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+MIDIGetSerialPortDrivers(	CFArrayRef __nullable * __nonnull outDriverNames )	API_DEPRECATED("No longer supported", macos(10.1, 10.6)) API_UNAVAILABLE(ios, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -429,7 +429,7 @@ MIDIGetSerialPortDrivers(	CFArrayRef __nullable * __nonnull outDriverNames )	__O
 extern OSStatus		
 MIDIExternalDeviceCreate(CFStringRef name, CFStringRef manufacturer, 
 							CFStringRef model, MIDIDeviceRef *outDevice)
-															__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
+															API_AVAILABLE(macos(10.1), ios(4.2));
 
 #ifdef __cplusplus
 }

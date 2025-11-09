@@ -1,11 +1,12 @@
 /*
  NSPathControlItem.h
  Application Kit
- Copyright (c) 2013-2017, Apple Inc.
+ Copyright (c) 2013-2018, Apple Inc.
  All rights reserved.
  */
 
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface NSPathControlItem : NSObject {
 @private
-    NSPathComponentCell *_secretCell;
+    NSPathComponentCell *_secretCell APPKIT_IVAR;
 }
 
 /* The title of the path item.

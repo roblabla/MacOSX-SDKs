@@ -3,7 +3,7 @@
  
 	Framework:  AVFoundation
  
-	Copyright 2012-2016 Apple Inc. All rights reserved.
+	Copyright 2012-2018 Apple Inc. All rights reserved.
  
  */
 
@@ -37,7 +37,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
    If no option is found that possesses all of the desired characteristics, the option that best matches the desired characteristics will be selected.
    When making automatic selections, AVPlayer treats the preference for additional media characteristics as a criterion that's secondary to language preference.
  */
-@property (nonatomic, readonly, nullable) NSArray<NSString *> *preferredMediaCharacteristics;
+@property (nonatomic, readonly, nullable) NSArray<AVMediaCharacteristic> *preferredMediaCharacteristics;
 
 /*!
   @method		initWithPreferredLanguages:preferredMediaCharacteristics:

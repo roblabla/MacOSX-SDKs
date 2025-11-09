@@ -1,7 +1,7 @@
 /*
 	NSSliderCell.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -21,15 +21,15 @@ typedef NS_ENUM(NSUInteger, NSSliderType) {
 @interface NSSliderCell : NSActionCell
 {
     /*All instance variables are private*/
-    id       _sliderCellPrivateData;
-    CGFloat  _previousValue;
-    CGFloat  _knobOffset;
-    int      _numberOfTickMarks;
-    double	_altIncValue;
-    double	_value;
-    double	_maxValue;
-    double	_minValue;
-    NSRect	_trackRect;
+    id       _sliderCellPrivateData APPKIT_IVAR;
+    CGFloat  _previousValue APPKIT_IVAR;
+    CGFloat  _knobOffset APPKIT_IVAR;
+    int      _numberOfTickMarks APPKIT_IVAR;
+    double	_altIncValue APPKIT_IVAR;
+    double	_value APPKIT_IVAR;
+    double	_maxValue APPKIT_IVAR;
+    double	_minValue APPKIT_IVAR;
+    NSRect	_trackRect APPKIT_IVAR;
     struct __sliderCellFlags {
         unsigned int weAreVertical:1;
         unsigned int weAreVerticalSet:1;
@@ -46,7 +46,7 @@ typedef NS_ENUM(NSUInteger, NSSliderType) {
         unsigned int collapseOnResize:1;
         unsigned int startedOnAccessory:1;
         unsigned int reserved2:17;
-    } _scFlags;
+    } _scFlags APPKIT_IVAR;
 }
 
 @property (class, readonly) BOOL prefersTrackingUntilMouseUp;
@@ -109,23 +109,24 @@ typedef NS_ENUM(NSUInteger, NSSliderType) {
 
 @end
 
-/* These methods have never done anything, and are formally deprecated as of 10.9 */
 @interface NSSliderCell (NSDeprecated)
-- (void)setTitleColor:(NSColor *)newColor NS_DEPRECATED_MAC(10_0, 10_9);
-- (NSColor *)titleColor NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setTitleFont:(NSFont *)fontObj NS_DEPRECATED_MAC(10_0, 10_9);
-- (NSFont *)titleFont NS_DEPRECATED_MAC(10_0, 10_9);
-- (NSString *)title NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setTitle:(NSString *)string NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setTitleCell:(NSCell *)cell NS_DEPRECATED_MAC(10_0, 10_9);
-- (id)titleCell NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setKnobThickness:(CGFloat)thickness NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setTitleCell:(null_unspecified NSCell *)cell NS_DEPRECATED_MAC(10_0, 10_9, "-setTitleCell: had no effect since 10.0");
+- (null_unspecified id)titleCell NS_DEPRECATED_MAC(10_0, 10_9, "-titleCell has returned nil since 10.0");
+- (void)setTitleColor:(null_unspecified NSColor *)newColor NS_DEPRECATED_MAC(10_0, 10_9, "-setTitleColor: had no effect since 10.0");
+- (null_unspecified NSColor *)titleColor NS_DEPRECATED_MAC(10_0, 10_9, "-titleColor has returned nil since 10.0");
+- (void)setTitleFont:(null_unspecified NSFont *)fontObj NS_DEPRECATED_MAC(10_0, 10_9, "-setTitleFont: had no effect since 10.0");
+- (null_unspecified NSFont *)titleFont NS_DEPRECATED_MAC(10_0, 10_9, "-titleFont has returned nil since 10.0");
+- (null_unspecified NSString *)title NS_DEPRECATED_MAC(10_0, 10_9, "-title has returned nil since 10.0");
+- (void)setTitle:(null_unspecified NSString *)string NS_DEPRECATED_MAC(10_0, 10_9, "-setTitle: had no effect since 10.0");
+- (void)setKnobThickness:(CGFloat)thickness NS_DEPRECATED_MAC(10_0, 10_9, "-knobThickness has returned 0 since 10.0");
+- (void)setImage:(null_unspecified NSImage *)backgroundImage NS_DEPRECATED_MAC(10_0, 10_9, "-setImage: had no effect since 10.0");
+- (null_unspecified NSImage *)image NS_DEPRECATED_MAC(10_0, 10_9, "-image has returned nil since 10.0");
 @end
 
-static const NSTickMarkPosition NSTickMarkBelow NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTickMarkPositionBelow", 10.0, 10.12) = NSTickMarkPositionBelow;
-static const NSTickMarkPosition NSTickMarkAbove NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTickMarkPositionAbove", 10.0, 10.12) = NSTickMarkPositionAbove;
-static const NSTickMarkPosition NSTickMarkLeft NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTickMarkPositionLeading", 10.0, 10.12) = NSTickMarkPositionLeading;
-static const NSTickMarkPosition NSTickMarkRight NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTickMarkPositionTrailing", 10.0, 10.12) = NSTickMarkPositionTrailing;
+static const NSTickMarkPosition NSTickMarkBelow NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTickMarkPositionBelow", 10_0, 10_12) = NSTickMarkPositionBelow;
+static const NSTickMarkPosition NSTickMarkAbove NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTickMarkPositionAbove", 10_0, 10_12) = NSTickMarkPositionAbove;
+static const NSTickMarkPosition NSTickMarkLeft NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTickMarkPositionLeading", 10_0, 10_12) = NSTickMarkPositionLeading;
+static const NSTickMarkPosition NSTickMarkRight NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTickMarkPositionTrailing", 10_0, 10_12) = NSTickMarkPositionTrailing;
 
-static const NSSliderType NSLinearSlider NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSSliderTypeLinear", 10.0, 10.12) = NSSliderTypeLinear;
-static const NSSliderType NSCircularSlider NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSSliderTypeCircular", 10.0, 10.12) = NSSliderTypeCircular;
+static const NSSliderType NSLinearSlider NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSSliderTypeLinear", 10_0, 10_12) = NSSliderTypeLinear;
+static const NSSliderType NSCircularSlider NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSSliderTypeCircular", 10_0, 10_12) = NSSliderTypeCircular;

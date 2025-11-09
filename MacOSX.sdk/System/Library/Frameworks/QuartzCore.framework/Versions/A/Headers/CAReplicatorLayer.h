@@ -1,6 +1,6 @@
 /* CoreAnimation - CAReplicatorLayer.h
 
-   Copyright (c) 2008-2017, Apple Inc.
+   Copyright (c) 2008-2018, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  * instance of z replicator layer's sublayers. This may change in the
  * future. */
 
-CA_CLASS_AVAILABLE (10.6, 3.0, 9.0, 2.0)
+API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0))
 @interface CAReplicatorLayer : CALayer
 
 /* The number of copies to create, including the source object.

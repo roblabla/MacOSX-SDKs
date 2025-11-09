@@ -1,17 +1,13 @@
 //
 //  SCNCAAnimationExtensions.h
+//  SceneKit
 //
-//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
+//  Copyright © 2012-2018 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreGraphics/CoreGraphics.h>
-#import <QuartzCore/QuartzCore.h>
+#import <SceneKit/SCNAnimation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-@class SCNAnimationEvent, SCNAnimation;
-
 
 @interface CAAnimation (SCNAnimation) <SCNAnimation>
 @end
@@ -28,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Initializes a CoreAnimation animation from a SCNAnimation
  */
-+ (CAAnimation *)animationWithSCNAnimation:(SCNAnimation *)animation API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
++ (CAAnimation *)animationWithSCNAnimation:(SCNAnimation *)animation API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 /*!
  @property usesSceneTimeBase

@@ -1103,6 +1103,7 @@ struct vnop_clonefile_args {
 			vnode_t sdvp, /* source directory vnode pointer (optional) */
 			mount_t mp, /* mount point of filesystem */
 			dir_clone_authorizer_op_t vattr_op, /* specific operation requested : setup, authorization or cleanup  */
+			uint32_t flags, /* needs to have the value passed to a_flags */
 			vfs_context_t ctx, 		/* As passed to VNOP */
 			void *reserved);		/* Always NULL */
 	void *a_reserved;		/* Currently unused */

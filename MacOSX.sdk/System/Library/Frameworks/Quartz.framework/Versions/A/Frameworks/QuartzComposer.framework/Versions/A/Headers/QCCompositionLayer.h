@@ -2,6 +2,8 @@
 	Copyright:	(c) 2003-2008 by Apple, Inc., all rights reserved.
 */
 
+#import <QuartzComposer/QuartzComposerDefines.h>
+
 #import <Foundation/Foundation.h>
 
 #if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
@@ -21,6 +23,7 @@
 */
 
 /* Quartz Composer Composition Core Animation layer */
+QC_GL_CLASS_DEPRECATED(10_5, 10_14)
 @interface QCCompositionLayer : CAOpenGLLayer <QCCompositionRenderer>
 {
 @private

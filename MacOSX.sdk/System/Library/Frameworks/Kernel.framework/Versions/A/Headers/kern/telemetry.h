@@ -36,33 +36,17 @@
 
 __BEGIN_DECLS
 
-extern volatile boolean_t telemetry_needs_record;
-
-extern void telemetry_init(void);
-
-extern void compute_telemetry(void *);
-
-extern void telemetry_ast(thread_t thread, uint32_t reasons);
-
-extern int telemetry_gather(user_addr_t buffer, uint32_t *length, boolean_t mark);
-
-extern void telemetry_mark_curthread(boolean_t interrupted_userspace);
-
-extern void telemetry_task_ctl(task_t task, uint32_t reason, int enable_disable);
-extern void telemetry_task_ctl_locked(task_t task, uint32_t reason, int enable_disable);
-extern void telemetry_global_ctl(int enable_disable);
-
-extern int telemetry_timer_event(uint64_t deadline, uint64_t interval, uint64_t leeway);
-
 #define TELEMETRY_CMD_TIMER_EVENT 1
 #define TELEMETRY_CMD_VOUCHER_NAME 2
 #define TELEMETRY_CMD_VOUCHER_STAIN TELEMETRY_CMD_VOUCHER_NAME
 
+enum telemetry_pmi {
+	TELEMETRY_PMI_NONE,
+	TELEMETRY_PMI_INSTRS,
+	TELEMETRY_PMI_CYCLES,
+};
+#define TELEMETRY_CMD_PMI_SETUP 3
 
-extern void bootprofile_init(void);
-extern void bootprofile_wake_from_sleep(void);
-extern void bootprofile_get(void **buffer, uint32_t *length);
-extern int bootprofile_gather(user_addr_t buffer, uint32_t *length);
 
 __END_DECLS
 

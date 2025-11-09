@@ -23,12 +23,14 @@ NS_ASSUME_NONNULL_BEGIN
 					The buffer interrupts any buffer already playing.
 	@constant	AVAudioPlayerNodeBufferInterruptsAtLoop
 					The buffer interrupts any buffer already playing, at its loop point.
+
+	API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 */
 typedef NS_OPTIONS(NSUInteger, AVAudioPlayerNodeBufferOptions) {
     AVAudioPlayerNodeBufferLoops			= 1UL << 0,		// 0x01
 	AVAudioPlayerNodeBufferInterrupts		= 1UL << 1,		// 0x02
 	AVAudioPlayerNodeBufferInterruptsAtLoop	= 1UL << 2		// 0x04
-} NS_AVAILABLE(10_10, 8_0);
+};
 
 /*!
 	@enum AVAudioPlayerNodeCompletionCallbackType
@@ -45,12 +47,14 @@ typedef NS_OPTIONS(NSUInteger, AVAudioPlayerNodeBufferOptions) {
 					The buffer or file has finished playing. This accounts for both (small) signal 
 					processing latencies downstream of the player in the engine, as well as
 					(possibly significant) latency in the audio playback device.
-*/
+
+ 	API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+ */
 typedef NS_ENUM(NSInteger, AVAudioPlayerNodeCompletionCallbackType) {
 	AVAudioPlayerNodeCompletionDataConsumed		= 0,
 	AVAudioPlayerNodeCompletionDataRendered		= 1,
 	AVAudioPlayerNodeCompletionDataPlayedBack	= 2,
-} API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+};
 
 /*! @typedef AVAudioPlayerNodeCompletionHandler
 	@abstract Buffer or file completion callback handler.
@@ -144,7 +148,7 @@ typedef void (^AVAudioPlayerNodeCompletionHandler)(AVAudioPlayerNodeCompletionCa
 		`outputPresentationLatency`) can be used to track how much data the player has rendered and
 		how much more data is left to render.
 */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioPlayerNode : AVAudioNode <AVAudioMixing>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;

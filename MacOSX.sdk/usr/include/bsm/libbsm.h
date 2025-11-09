@@ -50,7 +50,7 @@
 
 #ifdef __APPLE__
 #include <mach/mach.h>		/* audit_token_t */
-#include <Availability.h>
+#include <os/availability.h>
 #endif
 
 /*
@@ -61,6 +61,8 @@
  */
 #define	AUDIT_MAX_ARGS	128
 #define	AUDIT_MAX_ENV	128
+#define	AUDIT_MAX_CERT_HASH	32
+#define	AUDIT_MAX_KRB5_PRINCIPAL	32
 
 /*
  * Arguments to au_preselect(3).
@@ -266,6 +268,24 @@ typedef struct {
 	u_int32_t	 count;
 	char		*text[AUDIT_MAX_ENV];
 } au_execenv_t;
+
+/*
+ * count                   4 bytes
+ * text                    count null-terminated string(s)
+ */
+typedef struct {
+	u_int32_t	 count;
+	char		*text[AUDIT_MAX_CERT_HASH];
+} au_cert_hash_t;
+
+/*
+ * count                   4 bytes
+ * text                    count null-terminated string(s)
+ */
+typedef struct {
+	u_int32_t	 count;
+	char		*text[AUDIT_MAX_KRB5_PRINCIPAL];
+} au_krb5_principal_t;
 
 /*
  * status                  4 bytes
@@ -702,6 +722,33 @@ typedef struct {
 } au_invalid_t;
 
 /*
+ * signer type             4 bytes
+ * signing id length       2 bytes
+ * signing id              N bytes + 1 terminating NULL byte
+ * signing id truncated    1 byte (true/false)
+ * team id length          2 bytes
+ * team id                 N bytes + 1 terminating NULL byte
+ * team id truncated       1 byte (true/false)
+ * cdhash length           2 bytes
+ * cdhash                  N bytes
+ *
+ * Note: This structure represents a contiguous (in-memory/on-disk) layout.
+ * Due to multiple variable length buffers it cannot be simply assigned and
+ * should only be populated via au_fetch_tok().
+ */
+typedef struct {
+	u_int32_t	signer_type;
+	u_int16_t	signing_id_len;
+	char		*signing_id;
+	u_char		signing_id_truncated;
+	u_int16_t	team_id_len;
+	char		*team_id;
+	u_char		team_id_truncated;
+	u_int16_t	cdhash_len;
+	u_int8_t	*cdhash;
+} au_identity_t;
+
+/*
  * trailer magic number    2 bytes
  * record byte count       4 bytes
  */
@@ -757,118 +804,221 @@ struct tokenstr {
 		au_invalid_t		invalid;
 		au_trailer_t		trail;
 		au_zonename_t		zonename;
+		au_cert_hash_t		cert_hash;
+		au_krb5_principal_t		krb5_principal;
+		au_identity_t	identity;
 	} tt; /* The token is one of the above types */
 };
 
 typedef struct tokenstr tokenstr_t;
 
-int			 audit_submit(short au_event, au_id_t auid,
-			    char status, int reterr, const char *fmt, ...);
+int audit_submit(short au_event, au_id_t auid, char status, int reterr, const char *fmt, ...)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Functions relating to querying audit class information.
  */
-void			 setauclass(void);
-void			 endauclass(void);
-struct au_class_ent	*getauclassent(void);
-struct au_class_ent	*getauclassent_r(au_class_ent_t *class_int);
-struct au_class_ent	*getauclassnam(const char *name);
-struct au_class_ent	*getauclassnam_r(au_class_ent_t *class_int,
-			    const char *name);
-struct au_class_ent	*getauclassnum(au_class_t class_number);
-struct au_class_ent	*getauclassnum_r(au_class_ent_t *class_int,
-			    au_class_t class_number);
+void setauclass(void)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+void endauclass(void)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+struct au_class_ent *getauclassent(void)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+struct au_class_ent *getauclassent_r(au_class_ent_t *class_int)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+struct au_class_ent *getauclassnam(const char *name)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+struct au_class_ent *getauclassnam_r(au_class_ent_t *class_int, const char *name)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+struct au_class_ent *getauclassnum(au_class_t class_number)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+struct au_class_ent *getauclassnum_r(au_class_ent_t *class_int, au_class_t class_number)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Functions relating to querying audit control information.
  */
-void			 setac(void);
-void			 endac(void);
-int			 getacdir(char *name, int len);
-int			 getacmin(int *min_val);
-int			 getacfilesz(size_t *size_val);
-int			 getacflg(char *auditstr, int len);
-int			 getacna(char *auditstr, int len);
-int			 getacpol(char *auditstr, size_t len);
-int			 getacsflagsmask(const char *which, char *auditstr, size_t len);
-int			 getachost(char *auditstr, size_t len);
-int			 getacexpire(int *andflg, time_t *age, size_t *size);
-int			 getauditflagsbin(char *auditstr, au_mask_t *masks);
-int			 getauditflagschar(char *auditstr, au_mask_t *masks,
-			    int verbose);
-int			 au_preselect(au_event_t event, au_mask_t *mask_p,
-			    int sorf, int flag);
-ssize_t			 au_poltostr(int policy, size_t maxsize, char *buf);
-int			 au_strtopol(const char *polstr, int *policy);
-ssize_t			 au_sflagstostr(uint64_t flags, size_t maxsize, char *buf);
-int			 au_strtosflags(const char *sflagsstr, uint64_t *flags);
+void setac(void)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+void endac(void)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int getacdir(char *name, int len)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int getacmin(int *min_val)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int getacfilesz(size_t *size_val)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int getacflg(char *auditstr, int len)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int getacna(char *auditstr, int len)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int getacpol(char *auditstr, size_t len)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int getacsflagsmask(const char *which, char *auditstr, size_t len)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int getachost(char *auditstr, size_t len)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int getacexpire(int *andflg, time_t *age, size_t *size)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int getauditflagsbin(char *auditstr, au_mask_t *masks)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int getauditflagschar(char *auditstr, au_mask_t *masks, int verbose)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int au_preselect(au_event_t event, au_mask_t *mask_p, int sorf, int flag)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+ssize_t au_poltostr(int policy, size_t maxsize, char *buf)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int au_strtopol(const char *polstr, int *policy)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+ssize_t au_sflagstostr(uint64_t flags, size_t maxsize, char *buf)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int au_strtosflags(const char *sflagsstr, uint64_t *flags)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Functions relating to querying audit event information.
  */
-void			 setauevent(void);
-void			 endauevent(void);
-struct au_event_ent	*getauevent(void);
-struct au_event_ent	*getauevent_r(struct au_event_ent *e);
-struct au_event_ent	*getauevnam(const char *name);
-struct au_event_ent	*getauevnam_r(struct au_event_ent *e,
-			    const char *name);
-struct au_event_ent	*getauevnum(au_event_t event_number);
-struct au_event_ent	*getauevnum_r(struct au_event_ent *e,
-			    au_event_t event_number);
-au_event_t		*getauevnonam(const char *event_name);
-au_event_t		*getauevnonam_r(au_event_t *ev,
-			    const char *event_name);
+void setauevent(void)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+void endauevent(void)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+struct au_event_ent *getauevent(void)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+struct au_event_ent *getauevent_r(struct au_event_ent *e)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+struct au_event_ent *getauevnam(const char *name)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+struct au_event_ent *getauevnam_r(struct au_event_ent *e, const char *name)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+struct au_event_ent *getauevnum(au_event_t event_number)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+struct au_event_ent *getauevnum_r(struct au_event_ent *e, au_event_t event_number)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+au_event_t *getauevnonam(const char *event_name)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+au_event_t *getauevnonam_r(au_event_t *ev, const char *event_name)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Functions relating to querying audit user information.
  */
-void			 setauuser(void);
-void			 endauuser(void);
-struct au_user_ent	*getauuserent(void);
-struct au_user_ent	*getauuserent_r(struct au_user_ent *u);
-struct au_user_ent	*getauusernam(const char *name);
-struct au_user_ent	*getauusernam_r(struct au_user_ent *u,
-			    const char *name);
-int			 au_user_mask(char *username, au_mask_t *mask_p);
-int			 getfauditflags(au_mask_t *usremask,
-			    au_mask_t *usrdmask, au_mask_t *lastmask);
+void setauuser(void)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+void endauuser(void)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+struct au_user_ent *getauuserent(void)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+struct au_user_ent *getauuserent_r(struct au_user_ent *u)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+struct au_user_ent *getauusernam(const char *name)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+struct au_user_ent *getauusernam_r(struct au_user_ent *u, const char *name)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int au_user_mask(char *username, au_mask_t *mask_p)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int getfauditflags(au_mask_t *usremask, au_mask_t *usrdmask, au_mask_t *lastmask)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Functions for reading and printing records and tokens from audit trails.
  */
-int			 au_read_rec(FILE *fp, u_char **buf);
-int			 au_fetch_tok(tokenstr_t *tok, u_char *buf, int len);
+int au_read_rec(FILE *fp, u_char **buf)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int au_fetch_tok(tokenstr_t *tok, u_char *buf, int len)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
 //XXX The following interface has different prototype from BSM
-void			 au_print_tok(FILE *outfp, tokenstr_t *tok,
-			    char *del, char raw, char sfrm);
-void			 au_print_flags_tok(FILE *outfp, tokenstr_t *tok,
-			    char *del, int oflags);
-void			 au_print_tok_xml(FILE *outfp, tokenstr_t *tok,
-			    char *del, char raw, char sfrm);
+void au_print_tok(FILE *outfp, tokenstr_t *tok, char *del, char raw, char sfrm)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+void au_print_flags_tok(FILE *outfp, tokenstr_t *tok, char *del, int oflags)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+void au_print_tok_xml(FILE *outfp, tokenstr_t *tok, char *del, char raw, char sfrm)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /* 
  * Functions relating to XML output.
  */
-void			 au_print_xml_header(FILE *outfp);
-void			 au_print_xml_footer(FILE *outfp);
+void au_print_xml_header(FILE *outfp)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+void au_print_xml_footer(FILE *outfp)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * BSM library routines for converting between local and BSM constant spaces.
  * (Note: some of these are replicated in audit_record.h for the benefit of
  * the FreeBSD and Mac OS X kernels)
  */
-int	 au_bsm_to_domain(u_short bsm_domain, int *local_domainp);
-int	 au_bsm_to_errno(u_char bsm_error, int *errorp);
-int	 au_bsm_to_fcntl_cmd(u_short bsm_fcntl_cmd, int *local_fcntl_cmdp);
-int	 au_bsm_to_socket_type(u_short bsm_socket_type,
-	    int *local_socket_typep);
-u_short	 au_domain_to_bsm(int local_domain);
-u_char	 au_errno_to_bsm(int local_errno);
-u_short	 au_fcntl_cmd_to_bsm(int local_fcntl_command); 
-u_short	 au_socket_type_to_bsm(int local_socket_type);
+int au_bsm_to_domain(u_short bsm_domain, int *local_domainp)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
-const char	 *au_strerror(u_char bsm_error);
+int au_bsm_to_errno(u_char bsm_error, int *errorp)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int au_bsm_to_fcntl_cmd(u_short bsm_fcntl_cmd, int *local_fcntl_cmdp)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int au_bsm_to_socket_type(u_short bsm_socket_type, int *local_socket_typep)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+u_short au_domain_to_bsm(int local_domain)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+u_char au_errno_to_bsm(int local_errno)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+u_short au_fcntl_cmd_to_bsm(int local_fcntl_command)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+u_short au_socket_type_to_bsm(int local_socket_type)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+const char *au_strerror(u_char bsm_error)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
 __END_DECLS
 
 /*
@@ -961,7 +1111,8 @@ __BEGIN_DECLS
  *
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
-void	au_free_token(token_t *tok);
+void au_free_token(token_t *tok)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Lightweight check to determine if auditing is enabled.  If a client
@@ -977,24 +1128,29 @@ void	au_free_token(token_t *tok);
  *
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
-int	au_get_state(void);
+int au_get_state(void)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Initialize the audit notification.  If it has not already been initialized
  * it will automatically on the first call of au_get_state().
  */
-uint32_t	au_notify_initialize(void);
+uint32_t au_notify_initialize(void)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Cancel audit notification and free the resources associated with it.
  * Responsible code that no longer needs to use au_get_state() should call
  * this.
  */
-int		au_notify_terminate(void);
+int au_notify_terminate(void)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
 __END_DECLS
 
 /* OpenSSH compatibility */
-int	cannot_audit(int);
+int cannot_audit(int)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 __BEGIN_DECLS
 /*
@@ -1019,8 +1175,11 @@ __BEGIN_DECLS
  *
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
-int	audit_set_terminal_id_ex(au_tid_addr_t *tid);
-int	audit_set_terminal_id(au_tid_t *tid);
+int audit_set_terminal_id_ex(au_tid_addr_t *tid)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_set_terminal_id(au_tid_t *tid)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * BEGIN au_write() WRAPPERS
@@ -1075,8 +1234,8 @@ int	audit_set_terminal_id(au_tid_t *tid);
  *
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
-int	audit_write(short event_code, token_t *subject, token_t *misctok,
-	    char retval, int errcode);
+int audit_write(short event_code, token_t *subject, token_t *misctok, char retval, int errcode)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_write_success_ex()
@@ -1124,12 +1283,15 @@ int	audit_write(short event_code, token_t *subject, token_t *misctok,
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
 
-int	audit_write_success_ex(short event_code, token_t *misctok, au_id_t auid,
-	    uid_t euid, gid_t egid, uid_t ruid, gid_t rgid, pid_t pid,
-	    au_asid_t sid, au_tid_addr_t *tid);
-int	audit_write_success(short event_code, token_t *misctok, au_id_t auid,
-	    uid_t euid, gid_t egid, uid_t ruid, gid_t rgid, pid_t pid,
-	    au_asid_t sid, au_tid_t *tid);
+int audit_write_success_ex(short event_code, token_t *misctok, au_id_t auid,
+	uid_t euid, gid_t egid, uid_t ruid, gid_t rgid, pid_t pid,
+	au_asid_t sid, au_tid_addr_t *tid)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_write_success(short event_code, token_t *misctok, au_id_t auid,
+	uid_t euid, gid_t egid, uid_t ruid, gid_t rgid, pid_t pid,
+	au_asid_t sid, au_tid_t *tid)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_write_success_self()
@@ -1150,7 +1312,8 @@ int	audit_write_success(short event_code, token_t *misctok, au_id_t auid,
  *
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
-int	audit_write_success_self(short event_code, token_t *misctok);
+int audit_write_success_self(short event_code, token_t *misctok)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_write_failure_ex()
@@ -1199,12 +1362,15 @@ int	audit_write_success_self(short event_code, token_t *misctok);
  *
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
-int	audit_write_failure_ex(short event_code, char *errmsg, int errret,
-	    au_id_t auid, uid_t euid, gid_t egid, uid_t ruid, gid_t rgid,
-	    pid_t pid, au_asid_t sid, au_tid_addr_t *tid);
-int	audit_write_failure(short event_code, char *errmsg, int errret,
-	    au_id_t auid, uid_t euid, gid_t egid, uid_t ruid, gid_t rgid,
-	    pid_t pid, au_asid_t sid, au_tid_t *tid);
+int audit_write_failure_ex(short event_code, char *errmsg, int errret,
+	au_id_t auid, uid_t euid, gid_t egid, uid_t ruid, gid_t rgid,
+	pid_t pid, au_asid_t sid, au_tid_addr_t *tid)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_write_failure(short event_code, char *errmsg, int errret,
+	au_id_t auid, uid_t euid, gid_t egid, uid_t ruid, gid_t rgid,
+	pid_t pid, au_asid_t sid, au_tid_t *tid)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_write_failure_self()
@@ -1228,7 +1394,8 @@ int	audit_write_failure(short event_code, char *errmsg, int errret,
  *
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
-int	audit_write_failure_self(short event_code, char *errmsg, int errret);
+int audit_write_failure_self(short event_code, char *errmsg, int errret)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_write_failure_na_ex()
@@ -1264,10 +1431,13 @@ int	audit_write_failure_self(short event_code, char *errmsg, int errret);
  *
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
-int	audit_write_failure_na_ex(short event_code, char *errmsg, int errret,
-	    uid_t euid, gid_t egid, pid_t pid, au_tid_addr_t *tid);
-int	audit_write_failure_na(short event_code, char *errmsg, int errret,
-	    uid_t euid, gid_t egid, pid_t pid, au_tid_t *tid);
+int audit_write_failure_na_ex(short event_code, char *errmsg, int errret,
+	uid_t euid, gid_t egid, pid_t pid, au_tid_addr_t *tid)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_write_failure_na(short event_code, char *errmsg, int errret,
+	uid_t euid, gid_t egid, pid_t pid, au_tid_t *tid)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /* END au_write() WRAPPERS */
 
@@ -1324,7 +1494,8 @@ void audit_token_to_au32(
 	gid_t		*rgidp,
 	pid_t		*pidp,
 	au_asid_t	*asidp,
-	au_tid_t	*tidp);
+	au_tid_t	*tidp)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_token_to_auid()
@@ -1338,7 +1509,7 @@ void audit_token_to_au32(
  * @return - The audit user ID extracted from the Mach audit token.
  */
 uid_t audit_token_to_auid(audit_token_t atoken)
-	__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_token_to_euid()
@@ -1352,7 +1523,7 @@ uid_t audit_token_to_auid(audit_token_t atoken)
  * @return - The effective user ID extracted from the Mach audit token.
  */
 uid_t audit_token_to_euid(audit_token_t atoken)
-	__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_token_to_egid()
@@ -1366,7 +1537,7 @@ uid_t audit_token_to_euid(audit_token_t atoken)
  * @return - The effective group ID extracted from the Mach audit token.
  */
 gid_t audit_token_to_egid(audit_token_t atoken)
-	__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_token_to_ruid()
@@ -1380,7 +1551,7 @@ gid_t audit_token_to_egid(audit_token_t atoken)
  * @return - The real user ID extracted from the Mach audit token.
  */
 uid_t audit_token_to_ruid(audit_token_t atoken)
-	__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_token_to_rgid()
@@ -1394,7 +1565,7 @@ uid_t audit_token_to_ruid(audit_token_t atoken)
  * @return - The real group ID extracted from the Mach audit token.
  */
 gid_t audit_token_to_rgid(audit_token_t atoken)
-	__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_token_to_pid()
@@ -1408,7 +1579,7 @@ gid_t audit_token_to_rgid(audit_token_t atoken)
  * @return - The process ID extracted from the Mach audit token.
  */
 pid_t audit_token_to_pid(audit_token_t atoken)
-	__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_token_to_asid()
@@ -1422,7 +1593,7 @@ pid_t audit_token_to_pid(audit_token_t atoken)
  * @return - The audit session ID extracted from the Mach audit token.
  */
 au_asid_t audit_token_to_asid(audit_token_t atoken)
-	__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_token_to_pidversion()
@@ -1436,39 +1607,99 @@ au_asid_t audit_token_to_asid(audit_token_t atoken)
  * @return - The process ID version extracted from the Mach audit token.
  */
 int audit_token_to_pidversion(audit_token_t atoken)
-	__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
 #endif /* !__APPLE__ */
 
 /*
  * Wrapper functions to auditon(2).
  */
-int audit_get_car(char *path, size_t sz);
-int audit_get_class(au_evclass_map_t *evc_map, size_t sz);
-int audit_set_class(au_evclass_map_t *evc_map, size_t sz);
-int audit_get_cond(int *cond);
-int audit_set_cond(int *cond);
-int audit_get_cwd(char *path, size_t sz);
-int audit_get_fsize(au_fstat_t *fstat, size_t sz);
-int audit_set_fsize(au_fstat_t *fstat, size_t sz);
-int audit_get_kmask(au_mask_t *kmask, size_t sz);
-int audit_set_kmask(au_mask_t *kmask, size_t sz);
-int audit_get_kaudit(auditinfo_addr_t *aia, size_t sz);
-int audit_set_kaudit(auditinfo_addr_t *aia, size_t sz);
-int audit_set_pmask(auditpinfo_t *api, size_t sz);
-int audit_get_pinfo(auditpinfo_t *api, size_t sz);
-int audit_get_pinfo_addr(auditpinfo_addr_t *apia, size_t sz);
-int audit_get_policy(int *policy);
-int audit_set_policy(int *policy);
-int audit_get_qctrl(au_qctrl_t *qctrl, size_t sz);
-int audit_set_qctrl(au_qctrl_t *qctrl, size_t sz);
-int audit_get_sflags(uint64_t *flags);
-int audit_set_sflags(uint64_t flags);
-int audit_get_sflags_mask(const char *which, uint64_t *mask);
-int audit_set_sflags_mask(const char *which, uint64_t mask);
-int audit_get_sinfo_addr(auditinfo_addr_t *aia, size_t sz);
-int audit_get_stat(au_stat_t *stats, size_t sz);
-int audit_set_stat(au_stat_t *stats, size_t sz);
-int audit_send_trigger(int *trigger);
+int audit_get_car(char *path, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_get_class(au_evclass_map_t *evc_map, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_set_class(au_evclass_map_t *evc_map, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_get_cond(int *cond)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_set_cond(int *cond)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_get_cwd(char *path, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_get_fsize(au_fstat_t *fstat, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_set_fsize(au_fstat_t *fstat, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_get_kmask(au_mask_t *kmask, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_set_kmask(au_mask_t *kmask, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_get_kaudit(auditinfo_addr_t *aia, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_set_kaudit(auditinfo_addr_t *aia, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_set_pmask(auditpinfo_t *api, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_get_pinfo(auditpinfo_t *api, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_get_pinfo_addr(auditpinfo_addr_t *apia, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_get_policy(int *policy)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_set_policy(int *policy)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_get_qctrl(au_qctrl_t *qctrl, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_set_qctrl(au_qctrl_t *qctrl, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_get_sflags(uint64_t *flags)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_set_sflags(uint64_t flags)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_get_sflags_mask(const char *which, uint64_t *mask)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_set_sflags_mask(const char *which, uint64_t mask)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_get_sinfo_addr(auditinfo_addr_t *aia, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_get_stat(au_stat_t *stats, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_set_stat(au_stat_t *stats, size_t sz)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_send_trigger(int *trigger)
+	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_get_ctlmode(au_ctlmode_t *mode, size_t sz)
+	API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios, watchos, tvos);
+
+int audit_get_expire_after(au_expire_after_t *expire, size_t sz)
+	API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios, watchos, tvos);
 
 __END_DECLS
 

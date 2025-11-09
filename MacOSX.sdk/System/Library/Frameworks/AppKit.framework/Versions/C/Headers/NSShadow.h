@@ -1,7 +1,7 @@
 /*
         NSShadow.h
         Application Kit
-	Copyright (c) 2002-2017, Apple Inc.
+	Copyright (c) 2002-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -9,19 +9,20 @@
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSColor;
 
-@interface NSShadow : NSObject <NSCopying, NSCoding> {
+@interface NSShadow : NSObject <NSCopying, NSSecureCoding> {
     /*All instance variables are private*/
-    NSUInteger _shadowFlags;
-    NSSize _shadowOffset;
-    CGFloat _shadowBlurRadius;
-    NSColor *_shadowColor;
-    CGFloat _reservedFloat[3];
-    void *_reserved;
+    NSUInteger _shadowFlags APPKIT_IVAR;
+    NSSize _shadowOffset APPKIT_IVAR;
+    CGFloat _shadowBlurRadius APPKIT_IVAR;
+    NSColor *_shadowColor APPKIT_IVAR;
+    CGFloat _reservedFloat[3] APPKIT_IVAR;
+    void *_reserved APPKIT_IVAR;
 }
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;     // designated initializer, returns a default shadow with zero offset, zero blur radius, and default color

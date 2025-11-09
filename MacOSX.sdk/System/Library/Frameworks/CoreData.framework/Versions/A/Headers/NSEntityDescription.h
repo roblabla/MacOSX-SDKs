@@ -1,7 +1,7 @@
 /*
     NSEntityDescription.h
     Core Data
-    Copyright (c) 2004-2017, Apple Inc.
+    Copyright (c) 2004-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -53,7 +53,8 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
         unsigned int _hasNonstandardPrimitiveProperties:2;
         unsigned int _hasUniqueProperties:1;
         unsigned int _validationUniqueProperties:1;
-        unsigned int _reservedEntityDescription:20;
+        unsigned int _hasAttributesWithFileBackedFutures:1;
+        unsigned int _reservedEntityDescription:19;
     } _entityDescriptionFlags;
     __strong void *_extraIvars;
     NSMutableDictionary *_userInfo;
@@ -107,20 +108,21 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 
 
 /* Returns/sets uniqueness constraints for the entity. A uniqueness constraint is a set of one or more attributes whose value must be unique over the set of instances of that entity.
- Sets an array of arrays, each of which contains one or more NSAttributeDescription or NSString instances (strings must be the names of attributes on the entity) on which the constraint is registered.
- Returns an array of arrays, each of which contains instances of NSString which identify the attributes on the entity that comprise the constraint.
- This value forms part of the entity's version hash. Stores which do not support uniqueness constraints should refuse to initialize when given a model containing such constraints.
- Discussion: uniqueness constraint violations can be computationally expensive to handle. It is highly suggested that there be only one uniqueness constraint per entity hierarchy,
- although subentites may extend a sueprentity's constraint.
- */
 
+    Sets an array of arrays, each of which contains one or more NSAttributeDescription or NSString instances (strings must be the names of attributes on the entity) on which the constraint is registered.
+    Returns an array of arrays, each of which contains instances of NSString which identify the attributes on the entity that comprise the constraint.
+    This value forms part of the entity's version hash. Stores which do not support uniqueness constraints should refuse to initialize when given a model containing such constraints.
+    Discussion: uniqueness constraint violations can be computationally expensive to handle. It is highly suggested that there be only one uniqueness constraint per entity hierarchy,
+    although subentites may extend a sueprentity's constraint.
+*/
+                                                                                                                                                                      
 @property (strong)NSArray<NSArray<id> *> *uniquenessConstraints API_AVAILABLE(macosx(10.11),ios(9.0));
 
 /*  Getter returns an array of arrays of NSPropertyDescription objects describing the components of the indexes.
     Setter takes an array of arrays of NSPropertyDescription objects and/or strings that are the names of properties of the entity on which the index is created. The special strings @"self" and @"entity" can be used to indicate that an index should contain a reference to the object's primary or entity key.
     This value does not form part of the entity's version hash, and may be ignored by stores which do not natively support compound indexes.
  */
-@property (strong) NSArray<NSArray<id> *> *compoundIndexes API_DEPRECATED( "Use NSEntityDescription.indexes instead", macosx(10.5,10.13),ios(3.0,11.0),tvos(10.0, 11.0),watchos(3.0, 4.0));
+@property (strong) NSArray<NSArray<id> *> *compoundIndexes API_DEPRECATED( "Use NSEntityDescription.indexes instead", macosx(10.5,10.13),ios(3.0,11.0),tvos(9.0, 11.0),watchos(2.0, 4.0));
 
 /* Expression used to compute the CoreSpotlight display name for instance of this entity. */
 @property (nonatomic, retain) NSExpression *coreSpotlightDisplayNameExpression API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0));

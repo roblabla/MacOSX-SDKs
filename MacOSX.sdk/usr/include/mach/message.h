@@ -649,7 +649,9 @@ typedef integer_t mach_msg_option_t;
 #define MACH_SEND_NODENAP	MACH_SEND_NOIMPORTANCE
 #define MACH_SEND_IMPORTANCE	0x00080000	/* msg carries importance - kernel only */
 #define MACH_SEND_SYNC_OVERRIDE	0x00100000	/* msg should do sync ipc override */
-
+#define MACH_SEND_PROPAGATE_QOS  0x00200000	/* IPC should propagate the caller's QoS */
+#define MACH_SEND_SYNC_USE_THRPRI	MACH_SEND_PROPAGATE_QOS /* obsolete name */
+#define MACH_SEND_KERNEL    0x00400000  /* full send from kernel space - kernel only */
 
 #define MACH_RCV_TIMEOUT	0x00000100	/* timeout value applies to receive */	
 #define MACH_RCV_NOTIFY		0x00000200	/* reserved - legacy */

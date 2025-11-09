@@ -31,6 +31,8 @@
 #ifndef _BSM_AUDIT_FILTER_H_
 #define	_BSM_AUDIT_FILTER_H_
 
+#include <bsm/libbsm.h>
+
 /*
  * Module interface for audit filter modules.
  *
@@ -53,11 +55,6 @@ typedef void (*audit_filter_rawrecord_t)(void *instance, struct timespec *ts,
 	    void *data, u_int len);
 typedef void (*audit_filter_detach_t)(void *instance);
 
-/*
- * APIs that may be called by audit filters.
- */
-void	audit_filter_getcookie(void *instance, void **cookie);
-void	audit_filter_setcookie(void *instance, void *cookie);
 
 /*
  * Values to be returned by audit_filter_init_t.

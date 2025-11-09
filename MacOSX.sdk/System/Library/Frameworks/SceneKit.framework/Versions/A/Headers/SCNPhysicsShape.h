@@ -1,7 +1,8 @@
 //
 //  SCNPhysicsShape.h
+//  SceneKit
 //
-//  Copyright (c) 2014-2017 Apple Inc. All rights reserved.
+//  Copyright © 2014-2018 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,37 +12,27 @@ NS_ASSUME_NONNULL_BEGIN
 @class SCNGeometry;
 @class SCNNode;
 
-#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 3
 typedef NSString * SCNPhysicsShapeOption NS_STRING_ENUM;
-#else
-typedef NSString * SCNPhysicsShapeOption;
-#endif
-
-FOUNDATION_EXTERN SCNPhysicsShapeOption const SCNPhysicsShapeTypeKey               API_AVAILABLE(macos(10.10));                        // Type of the physics shape. Default is SCNPhysicsShapeTypeConvexHull. See below for the list of shape types.
-FOUNDATION_EXTERN SCNPhysicsShapeOption const SCNPhysicsShapeKeepAsCompoundKey     API_AVAILABLE(macos(10.10));                        // A boolean to decide if a hierarchy is kept as a compound of shapes or flattened as one single volume. Default is true.
-FOUNDATION_EXTERN SCNPhysicsShapeOption const SCNPhysicsShapeScaleKey              API_AVAILABLE(macos(10.10));                        // Local scaling of the physics shape (as an SCNVector3 wrapped in a NSValue)
-FOUNDATION_EXTERN SCNPhysicsShapeOption const SCNPhysicsShapeOptionCollisionMargin API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)); // Collision margin of the physics shape (as an NSNumber)
+SCN_EXPORT SCNPhysicsShapeOption const SCNPhysicsShapeTypeKey               API_AVAILABLE(macos(10.10));                        // Type of the physics shape. Default is SCNPhysicsShapeTypeConvexHull. See below for the list of shape types.
+SCN_EXPORT SCNPhysicsShapeOption const SCNPhysicsShapeKeepAsCompoundKey     API_AVAILABLE(macos(10.10));                        // A boolean to decide if a hierarchy is kept as a compound of shapes or flattened as one single volume. Default is true.
+SCN_EXPORT SCNPhysicsShapeOption const SCNPhysicsShapeScaleKey              API_AVAILABLE(macos(10.10));                        // Local scaling of the physics shape (as an SCNVector3 wrapped in a NSValue)
+SCN_EXPORT SCNPhysicsShapeOption const SCNPhysicsShapeOptionCollisionMargin API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)); // Collision margin of the physics shape (as an NSNumber)
 
 #define SCNPhysicsShapeOptionType           SCNPhysicsShapeTypeKey
 #define SCNPhysicsShapeOptionKeepAsCompound SCNPhysicsShapeKeepAsCompoundKey
 #define SCNPhysicsShapeOptionScale          SCNPhysicsShapeScaleKey
 
 // Values for SCNPhysicsShapeOptionType
-#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 3
 typedef NSString * SCNPhysicsShapeType NS_STRING_ENUM;
-#else
-typedef NSString * SCNPhysicsShapeType;
-#endif
-
-FOUNDATION_EXTERN SCNPhysicsShapeType const SCNPhysicsShapeTypeBoundingBox API_AVAILABLE(macos(10.10));
-FOUNDATION_EXTERN SCNPhysicsShapeType const SCNPhysicsShapeTypeConvexHull API_AVAILABLE(macos(10.10));
-FOUNDATION_EXTERN SCNPhysicsShapeType const SCNPhysicsShapeTypeConcavePolyhedron API_AVAILABLE(macos(10.10));
+SCN_EXPORT SCNPhysicsShapeType const SCNPhysicsShapeTypeBoundingBox API_AVAILABLE(macos(10.10));
+SCN_EXPORT SCNPhysicsShapeType const SCNPhysicsShapeTypeConvexHull API_AVAILABLE(macos(10.10));
+SCN_EXPORT SCNPhysicsShapeType const SCNPhysicsShapeTypeConcavePolyhedron API_AVAILABLE(macos(10.10));
 
 /*!
  @class SCNPhysicsShape
  @abstract SCNPhysicsShape represents the shape of a physics body.
  */
-API_AVAILABLE(macos(10.10))
+SCN_EXPORT API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsShape : NSObject <NSCopying, NSSecureCoding>
 
 //Creates an instance of a physics shape based on a geometry. see above for the possible options.

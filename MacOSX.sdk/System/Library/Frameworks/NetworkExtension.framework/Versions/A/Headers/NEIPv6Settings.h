@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2015 Apple Inc.
+ * Copyright (c) 2013-2015, 2018 Apple Inc.
  * All rights reserved.
  */
 
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEIPv6Settings : NSObject <NSSecureCoding,NSCopying>
 
 /*!
@@ -34,31 +34,31 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param networkPrefixLengths An array of NSNumber objects each containing the length in bits of the network prefix of the corresponding address in the addresses parameter.
  * @return The initialized object.
  */
-- (instancetype)initWithAddresses:(NSArray<NSString *> *)addresses networkPrefixLengths:(NSArray<NSNumber *> *)networkPrefixLengths NS_AVAILABLE(10_11, 9_0);
+- (instancetype)initWithAddresses:(NSArray<NSString *> *)addresses networkPrefixLengths:(NSArray<NSNumber *> *)networkPrefixLengths API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property addresses
  * @discussion An array of IPv6 addresses represented strings. These addresses will be set on the virtual interface used by the VPN tunnel.
  */
-@property (readonly) NSArray<NSString *> *addresses NS_AVAILABLE(10_11, 9_0);
+@property (readonly) NSArray<NSString *> *addresses API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property networkPrefixLengths
  * @discussion An array of NSNumber objects each representing the length in bits of the network prefix of the corresponding address in the addresses property.
  */
-@property (readonly) NSArray<NSNumber *> *networkPrefixLengths NS_AVAILABLE(10_11, 9_0);
+@property (readonly) NSArray<NSNumber *> *networkPrefixLengths API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property includedRoutes
  * @discussion An array of NEIPv6Route objects. Traffic matching these routes will be routed through the virtual interface used by the VPN tunnel.
  */
-@property (copy, nullable) NSArray<NEIPv6Route *> *includedRoutes NS_AVAILABLE(10_11, 9_0);
+@property (copy, nullable) NSArray<NEIPv6Route *> *includedRoutes API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property excludedRoutes
  * @discussion An array of NEIPv6Route objects. Traffic matching these routes will be routed through the current primary physical interface of the device.
  */
-@property (copy, nullable) NSArray<NEIPv6Route *> *excludedRoutes NS_AVAILABLE(10_11, 9_0);
+@property (copy, nullable) NSArray<NEIPv6Route *> *excludedRoutes API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 
@@ -68,7 +68,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0))
 @interface NEIPv6Route : NSObject <NSSecureCoding,NSCopying>
 
 /*!
@@ -78,31 +78,31 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param networkPrefixLength A number containing the length in bits of the network prefix of the destination network.
  * @return The initialized NEIPv6Route.
  */
-- (instancetype)initWithDestinationAddress:(NSString *)address networkPrefixLength:(NSNumber *)networkPrefixLength NS_AVAILABLE(10_11, 9_0);
+- (instancetype)initWithDestinationAddress:(NSString *)address networkPrefixLength:(NSNumber *)networkPrefixLength API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property destinationAddress
  * @discussion An IPv6 address represented as a string.
  */
-@property (readonly) NSString *destinationAddress NS_AVAILABLE(10_11, 9_0);
+@property (readonly) NSString *destinationAddress API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property destinationNetworkPrefixLength
  * @discussion A number containing the length in bits of the network prefix of the destination network. This prefix in combination with the destinationAddress property is used to determine the destination network of the route.
  */
-@property (readonly) NSNumber *destinationNetworkPrefixLength NS_AVAILABLE(10_11, 9_0);
+@property (readonly) NSNumber *destinationNetworkPrefixLength API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property gatewayAddress
  * @discussion The IPv6 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
  */
-@property (copy, nullable) NSString *gatewayAddress NS_AVAILABLE(10_11, 9_0);
+@property (copy, nullable) NSString *gatewayAddress API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method defaultRoute
  * @return A route object that represents the IPv6 default route.
  */
-+ (NEIPv6Route * const)defaultRoute NS_AVAILABLE(10_11, 9_0);
++ (NEIPv6Route * const)defaultRoute API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 @end
 
 NS_ASSUME_NONNULL_END

@@ -29,11 +29,11 @@
 @class DOMElement;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMAttr : DOMNode
 @property (readonly, copy) NSString *name;
 @property (readonly) BOOL specified;
 @property (copy) NSString *value;
 @property (readonly, strong) DOMElement *ownerElement;
-@property (readonly, strong) DOMCSSStyleDeclaration *style NS_AVAILABLE_MAC(10_5);
+@property (readonly, strong) DOMCSSStyleDeclaration *style WEBKIT_AVAILABLE_MAC(10_5);
 @end

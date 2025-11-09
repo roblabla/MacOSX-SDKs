@@ -1,17 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: B24A7801-4F9A-33DE-AC87-B9D94ED409D6', 'x86_64: 2FF42A5B-5450-3A8E-A563-6CAEF8E35718' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 135F1CAC-86F4-34E3-AA29-389DD028C4B8' ]
 platform:        macosx
 flags:           [ not_app_extension_safe ]
 install-name:    /System/Library/PrivateFrameworks/AirTrafficHost.framework/Versions/A/AirTrafficHost
 current-version: 116
 exports:         
   - archs:           [ x86_64 ]
-    objc-ivars:      [ _ATLegacyMessage._dataClass, _ATLegacyMessage._messageId, 
-                       _ATLegacyMessage._messageType, _ATLegacyMessage._name, _ATLegacyMessage._params, 
-                       _ATLegacyMessage._payload, _ATLegacyMessage._result, _ATLegacyMessage._session, 
-                       _ATLegacyMessage._sig, _ATLegacyMessage._timestamp ]
-  - archs:           [ i386, x86_64 ]
     symbols:         [ _ATCFMessageCreate, _ATCFMessageGetName, _ATCFMessageGetParam, 
                        _ATCFMessageGetSessionNumber, _ATCFMessageVerify, _ATCrashReportInternalLogs, 
                        _ATGetProcessLinkLevel, _ATHostAdvertiserStartWakeupService, 
@@ -38,5 +33,9 @@ exports:
                        __writeDictionary, _kATLogFacilityController, _kATLogFacilityDataMigrator, 
                        _kATLogFacilityFramework, _kATLogFacilityHost, _kATLogFacilitySettings, 
                        _kATLogFacilityWaker, _sRunning ]
-    objc-classes:    [ _ATLegacyMessage ]
+    objc-classes:    [ ATLegacyMessage ]
+    objc-ivars:      [ ATLegacyMessage._dataClass, ATLegacyMessage._messageId, ATLegacyMessage._messageType, 
+                       ATLegacyMessage._name, ATLegacyMessage._params, ATLegacyMessage._payload, 
+                       ATLegacyMessage._result, ATLegacyMessage._session, ATLegacyMessage._sig, 
+                       ATLegacyMessage._timestamp ]
 ...

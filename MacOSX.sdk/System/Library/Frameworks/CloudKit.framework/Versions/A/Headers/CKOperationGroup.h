@@ -79,23 +79,23 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  */
 @property (atomic, assign) NSUInteger quantity;
 
-/* @abstract Estimated size of traffic being uploaded to the CloudKit Server
+/*! @abstract Estimated size of traffic being uploaded to the CloudKit Server
  *
- * @discussion Inform the system how much data you plan on transferring.  Obviously, these won't be exact.  Be as accurate as possible, but even an order-of-magnitude estimate is better than no value.  The system will consult these values when scheduling discretionary network requests (see the description of CKOperationConfiguration -> qualityOfService).
- * Overestimating your workload means that an operation group issuing discretionary network requests may be delayed until network conditions are good.
- * Underestimating your workload may cause the system to oversaturate a constrained connection, leading to network failures.
- * You may update after the CKOperationGroup is created.  If it is increased, then subsequent CKOperations associated with this operation group may be delayed until network conditions are good.
- * Defaults to CKOperationGroupTransferSizeUnknown
+ *  @discussion Inform the system how much data you plan on transferring.  Obviously, these won't be exact.  Be as accurate as possible, but even an order-of-magnitude estimate is better than no value.  The system will consult these values when scheduling discretionary network requests (see the description of CKOperationConfiguration -> qualityOfService).
+ *  Overestimating your workload means that an operation group issuing discretionary network requests may be delayed until network conditions are good.
+ *  Underestimating your workload may cause the system to oversaturate a constrained connection, leading to network failures.
+ *  You may update after the CKOperationGroup is created.  If it is increased, then subsequent CKOperations associated with this operation group may be delayed until network conditions are good.
+ *  Defaults to CKOperationGroupTransferSizeUnknown
  */
 @property (atomic, assign) CKOperationGroupTransferSize expectedSendSize;
 
-/* @abstract Estimated size of traffic being downloaded from the CloudKit Server
+/*! @abstract Estimated size of traffic being downloaded from the CloudKit Server
  *
- * @discussion Inform the system how much data you plan on transferring.  Obviously, these won't be exact.  Be as accurate as possible, but even an order-of-magnitude estimate is better than no value.  The system will consult these values when scheduling discretionary network requests (see the description of CKOperationConfiguration -> qualityOfService).
- * Overestimating your workload means that an operation group issuing discretionary network requests may be delayed until network conditions are good.
- * Underestimating your workload may cause the system to oversaturate a constrained connection, leading to network failures.
- * You may update after the CKOperationGroup is created.  If it is increased, then subsequent CKOperations associated with this operation group may be delayed until network conditions are good.
- * Defaults to CKOperationGroupTransferSizeUnknown
+ *  @discussion Inform the system how much data you plan on transferring.  Obviously, these won't be exact.  Be as accurate as possible, but even an order-of-magnitude estimate is better than no value.  The system will consult these values when scheduling discretionary network requests (see the description of CKOperationConfiguration -> qualityOfService).
+ *  Overestimating your workload means that an operation group issuing discretionary network requests may be delayed until network conditions are good.
+ *  Underestimating your workload may cause the system to oversaturate a constrained connection, leading to network failures.
+ *  You may update after the CKOperationGroup is created.  If it is increased, then subsequent CKOperations associated with this operation group may be delayed until network conditions are good.
+ *  Defaults to CKOperationGroupTransferSizeUnknown
  */
 @property (atomic, assign) CKOperationGroupTransferSize expectedReceiveSize;
 

@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger, MTLCompareFunction) {
     MTLCompareFunctionNotEqual = 5,
     MTLCompareFunctionGreaterEqual = 6,
     MTLCompareFunctionAlways = 7,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 typedef NS_ENUM(NSUInteger, MTLStencilOperation) {
     MTLStencilOperationKeep = 0,
@@ -30,9 +30,9 @@ typedef NS_ENUM(NSUInteger, MTLStencilOperation) {
     MTLStencilOperationInvert = 5,
     MTLStencilOperationIncrementWrap = 6,
     MTLStencilOperationDecrementWrap = 7,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLStencilDescriptor : NSObject <NSCopying>
 
 @property (nonatomic) MTLCompareFunction stencilCompareFunction;
@@ -51,7 +51,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 
 @end
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLDepthStencilDescriptor : NSObject <NSCopying>
 
 /* Defaults to MTLCompareFuncAlways, which effectively skips the depth test */
@@ -74,7 +74,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 
 
 /* Device-specific compiled depth/stencil state object */
-NS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0))
 @protocol MTLDepthStencilState <NSObject>
 
 /*!

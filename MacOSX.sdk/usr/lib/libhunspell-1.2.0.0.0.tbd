@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: C75A5CF7-63C1-32C9-8D98-91110ACDBBFB', 'x86_64: F2CEE0CA-063C-3421-B56A-0AB8500B2D73' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 6BC2FEB1-4E13-3A47-9F13-54F465DDC228' ]
 platform:        macosx
 install-name:    /usr/lib/libhunspell-1.2.0.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _Hunspell_add, _Hunspell_add_with_affix, _Hunspell_analyze, 
                        _Hunspell_create, _Hunspell_create_key, _Hunspell_destroy, 
                        _Hunspell_free_list, _Hunspell_generate, _Hunspell_get_dic_encoding, 

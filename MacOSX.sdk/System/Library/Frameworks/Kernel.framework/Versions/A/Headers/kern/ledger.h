@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2010-2018 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -54,6 +54,7 @@ struct ledger_template_info {
 	char		lti_group[LEDGER_NAME_MAX];
 	char		lti_units[LEDGER_NAME_MAX];
 };
+
 
 struct ledger_entry_info {
 	int64_t		lei_balance;

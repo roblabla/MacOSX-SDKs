@@ -1,13 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 7106F43C-84DD-3F26-905A-B52780AFEB3E', 'x86_64: 7B4D2CE2-1438-387A-9802-5CEEFBF26F86' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 8C419238-675A-3C41-B8D4-95E391CA630F' ]
 platform:        macosx
 install-name:    /usr/lib/libpam.2.dylib
 current-version: 3
 compatibility-version: 3
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ __openpam_debug, __openpam_log, __pam_control_flag_name, __pam_err_name, 
                        __pam_facility_name, __pam_func_name, __pam_item_name, __pam_sm_func_name, 
                        _misc_conv, _openpam_borrow_cred, _openpam_clear_chains, _openpam_configure, 

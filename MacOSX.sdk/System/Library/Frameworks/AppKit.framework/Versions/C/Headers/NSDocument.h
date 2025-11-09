@@ -1,7 +1,7 @@
 /*
 	NSDocument.h
 	Application Kit
-	Copyright (c) 1997-2017, Apple Inc.
+	Copyright (c) 1997-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,7 +11,9 @@
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSFilePresenter.h>
+#import <AppKit/NSMenu.h>
 #import <AppKit/NSPrintInfo.h>
+#import <AppKit/NSKeyValueBinding.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -81,18 +83,18 @@ typedef NS_ENUM(NSUInteger, NSSaveOperationType) {
     
 };
 
-@interface NSDocument : NSObject<NSFilePresenter, NSUserInterfaceValidations> {
+@interface NSDocument : NSObject<NSEditorRegistration, NSFilePresenter, NSMenuItemValidation, NSUserInterfaceValidations> {
     @private
-    NSWindow *_window;
-    id _windowControllers;
-    NSURL *_fileURL;
-    NSString *_fileType;
-    NSPrintInfo *_printInfo;
-    long _documentReserved __unused;
-    NSView *savePanelAccessory __unused;
-    id _displayName;
-    id _privateData;
-    NSUndoManager *_undoManager;
+    NSWindow *_window APPKIT_IVAR;
+    id _windowControllers APPKIT_IVAR;
+    NSURL *_fileURL APPKIT_IVAR;
+    NSString *_fileType APPKIT_IVAR;
+    NSPrintInfo *_printInfo APPKIT_IVAR;
+    long _documentReserved __unused APPKIT_IVAR;
+    NSView *savePanelAccessory __unused APPKIT_IVAR;
+    id _displayName APPKIT_IVAR;
+    id _privateData APPKIT_IVAR;
+    NSUndoManager *_undoManager APPKIT_IVAR;
     struct __docFlags {
 	unsigned int inClose:1;
 	unsigned int hasUndoManager:1;
@@ -102,8 +104,8 @@ typedef NS_ENUM(NSUInteger, NSSaveOperationType) {
 	unsigned int hasInvalidRestorableState:1;
 	unsigned int hasEverHadInvalidRestorableState:1;
 	unsigned int RESERVED:25;
-    } _docFlags;
-    NSString *_savePanelSaveType;
+    } _docFlags APPKIT_IVAR;
+    NSString *_savePanelSaveType APPKIT_IVAR;
 }
 
 #pragma mark *** Initialization ***
@@ -234,7 +236,7 @@ The distinction between entire activities and the file accessing part of activit
 
 #pragma mark *** Reverting ***
 
-/* The action of the File menu's Revert to Saved item in a document-based application. The default implementation of this method presents a panel giving the user the opportunity to cancel the operation and, and if the user chooses to continue, makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration informal protocol has discarded its changes and then invokes [self revertToContentsOfURL:[self url] ofType:[self fileType] error:outError]. If that returns NO, it presents the error to the user in an document-modal alert panel.
+/* The action of the File menu's Revert to Saved item in a document-based application. The default implementation of this method presents a panel giving the user the opportunity to cancel the operation and, and if the user chooses to continue, makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration protocol has discarded its changes and then invokes [self revertToContentsOfURL:[self url] ofType:[self fileType] error:outError]. If that returns NO, it presents the error to the user in an document-modal alert panel.
 
 If +autosavesInPlace returns YES and +preservesVersions returns NO, this method throws an exception.
 */
@@ -366,7 +368,7 @@ The default implementation of this method returns a non-nil value based off the 
 
     - (void)document:(NSDocument *)document didSave:(BOOL)didSaveSuccessfully contextInfo:(void *)contextInfo;
 
-The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration informal protocol has committed its changes, then invokes [self runModalSavePanelForSaveOperation:NSSaveAsOperation delegate:delegate didSaveSelector:didSaveSelector contextInfo:inContextInfo] right away if a save panel must be presented. Otherwise, it may present a panel asking the user to make a decision for any of the following situations:
+The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration protocol has committed its changes, then invokes [self runModalSavePanelForSaveOperation:NSSaveAsOperation delegate:delegate didSaveSelector:didSaveSelector contextInfo:inContextInfo] right away if a save panel must be presented. Otherwise, it may present a panel asking the user to make a decision for any of the following situations:
     1) The document's file or file package was modified by something other than the current application since it was opened or most recently saved.
     2) The document's file or file package was moved or renamed since it was opened or most recently saved.
     3) The document's file or file package was deleted or trashed since it was opened or most recently saved.
@@ -378,7 +380,7 @@ The list of conditions for which NSDocument checks is subject to change. Regardl
 
     - (void)document:(NSDocument *)document didSave:(BOOL)didSaveSuccessfully contextInfo:(void *)contextInfo;
 
-The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration informal protocol has committed its changes, then creates a save panel, adds a standard "file format" accessory view if there is more than one file type for the user to choose from and [self shouldRunSavePanelWithAccessoryView] returns YES, sets various attributes of the panel, invokes [self prepareSavePanel:theSavePanel] to provide an opportunity for customization, then presents the panel. If the user OKs the panel -saveToURL:ofType:forSaveOperation:delegate:didSaveSelector:contextInfo: is invoked.
+The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration protocol has committed its changes, then creates a save panel, adds a standard "file format" accessory view if there is more than one file type for the user to choose from and [self shouldRunSavePanelWithAccessoryView] returns YES, sets various attributes of the panel, invokes [self prepareSavePanel:theSavePanel] to provide an opportunity for customization, then presents the panel. If the user OKs the panel -saveToURL:ofType:forSaveOperation:delegate:didSaveSelector:contextInfo: is invoked.
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self saveToFile:nil saveOperation:saveOperation delegate:delegate didSaveSelector:contextInfo:] if -saveToFile:saveOperation:delegate:didSaveSelector:contextInfo: is overridden, even if the user cancels the panel (because that's what 10.3 did).
 */
@@ -404,7 +406,7 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
     - (void)document:(NSDocument *)document didSave:(BOOL)didSaveSuccessfully contextInfo:(void *)contextInfo;
 
-The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration informal protocol has committed its changes (except for autosave operations), then invokes [self saveToURL:url ofType:typeName forSaveOperation:saveOperation completionHandler:aCompletionHandler] and, if that completion handler is passed an NSError when it is invoked, presents the error to the user in a document-modal panel before messaging the delegate.
+The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration protocol has committed its changes (except for autosave operations), then invokes [self saveToURL:url ofType:typeName forSaveOperation:saveOperation completionHandler:aCompletionHandler] and, if that completion handler is passed an NSError when it is invoked, presents the error to the user in a document-modal panel before messaging the delegate.
 */
 - (void)saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation delegate:(nullable id)delegate didSaveSelector:(nullable SEL)didSaveSelector contextInfo:(nullable void *)contextInfo;
 
@@ -502,11 +504,11 @@ Starting in Mac OS 10.7 the default implementations of these methods are thread 
 
     - (void)document:(NSDocument *)document shouldClose:(BOOL)shouldClose contextInfo:(void *)contextInfo;
 
-The default implementation of this method has two rather different behaviors. If [[self class] autosavesInPlace] returns YES and [self fileURL] returns non-nil then it simply invokes [self autosaveWithImplicitCancellability:NO completionHandler:aCompletionHandler] if [self hasUnautosavedChanges] returns YES after making sure that any editor registered using Cocoa Bindings' NSEditorRegistration informal protocol has committed its changes. Otherwise it presents a panel giving the user the choice of canceling, discarding changes, or saving. In that case the shouldClose value passed to the delegate will be YES if the document was not modified in the first place, or the user chose to discard modifications, or chose to save and the saving was successful. NO will be passed if the user chose to cancel the operation or saving was unsuccessful. Because -saveDocumentWithDelegate:didSaveSelector:contextInfo: is used, an alert panel will be presented before the delegate is messaged if saving is attempted but does not succeed.
+The default implementation of this method has two rather different behaviors. If [[self class] autosavesInPlace] returns YES and [self fileURL] returns non-nil then it simply invokes [self autosaveWithImplicitCancellability:NO completionHandler:aCompletionHandler] if [self hasUnautosavedChanges] returns YES after making sure that any editor registered using Cocoa Bindings' NSEditorRegistration protocol has committed its changes. Otherwise it presents a panel giving the user the choice of canceling, discarding changes, or saving. In that case the shouldClose value passed to the delegate will be YES if the document was not modified in the first place, or the user chose to discard modifications, or chose to save and the saving was successful. NO will be passed if the user chose to cancel the operation or saving was unsuccessful. Because -saveDocumentWithDelegate:didSaveSelector:contextInfo: is used, an alert panel will be presented before the delegate is messaged if saving is attempted but does not succeed.
 */
 - (void)canCloseDocumentWithDelegate:(id)delegate shouldCloseSelector:(nullable SEL)shouldCloseSelector contextInfo:(nullable void *)contextInfo;
 
-/* Close the document, discarding any as-yet-unsaved modifications. The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration informal protocol has discarded its changes, sends each of the document's window controllers a -close message, invokes [[NSDocumentController sharedDocumentController] removeDocument:self], and then invokes [NSFileCoordinator removeFilePresenter:self]. This is typically the method to use to close open documents (instead of just causing them to be deallocated by some other means). It's usually correct to use -canCloseDocumentWithDelegate:shouldCloseSelector:contextInfo: first to make sure that the user's changes have been saved if appropriate.
+/* Close the document, discarding any as-yet-unsaved modifications. The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration protocol has discarded its changes, sends each of the document's window controllers a -close message, invokes [[NSDocumentController sharedDocumentController] removeDocument:self], and then invokes [NSFileCoordinator removeFilePresenter:self]. This is typically the method to use to close open documents (instead of just causing them to be deallocated by some other means). It's usually correct to use -canCloseDocumentWithDelegate:shouldCloseSelector:contextInfo: first to make sure that the user's changes have been saved if appropriate.
 */
 - (void)close;
 
@@ -520,7 +522,7 @@ The default implementation of this method has two rather different behaviors. If
  
  - (void)document:(NSDocument *)document didDuplicate:(BOOL)didDuplicate contextInfo:(void *)contextInfo;
 
-The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration informal protocol has committed its changes, then checks to see if there are recent changes that might have been inadvertent and, if so, presents a panel giving the user the choice of canceling, duplicating, or duplicating then also discarding recent changes. Unless the user cancels duplicating, or if no panel was presented, it then invokes -duplicateAndReturnError:. If the user chose duplicating and discarding it also discards recent changes after duplicating.
+The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration protocol has committed its changes, then checks to see if there are recent changes that might have been inadvertent and, if so, presents a panel giving the user the choice of canceling, duplicating, or duplicating then also discarding recent changes. Unless the user cancels duplicating, or if no panel was presented, it then invokes -duplicateAndReturnError:. If the user chose duplicating and discarding it also discards recent changes after duplicating.
 */
 - (void)duplicateDocumentWithDelegate:(nullable id)delegate didDuplicateSelector:(nullable SEL)didDuplicateSelector contextInfo:(nullable void *)contextInfo NS_AVAILABLE_MAC(10_7);
 
@@ -550,7 +552,7 @@ You can override this method to customize what is done during document duplicati
 
 /* Present a move panel to the user, then try to save the document if the user OKs the panel. When moving is completed, regardless of success, failure, or cancellation, invoke the given block.
 
-The default implementation of this method first makes sure that any editor registered using Cocoa Binding's NSEditorRegistration informal protocol has committed its changes if necessary. Then, if [self fileURL] is non-nil, it creates and presents a move panel. If the user OKs the panel, -moveToURL:completionHandler: is invoked. If a file already exists at the location the user chooses, the user will be asked to choose between replacing that file, renaming the current document, or canceling. If [self fileURL] is nil, then this method will instead invoke [self runModalSavePanelForSaveOperation:NSSaveAsOperation delegate:didSaveSelector:contextInfo:].
+The default implementation of this method first makes sure that any editor registered using Cocoa Binding's NSEditorRegistration protocol has committed its changes if necessary. Then, if [self fileURL] is non-nil, it creates and presents a move panel. If the user OKs the panel, -moveToURL:completionHandler: is invoked. If a file already exists at the location the user chooses, the user will be asked to choose between replacing that file, renaming the current document, or canceling. If [self fileURL] is nil, then this method will instead invoke [self runModalSavePanelForSaveOperation:NSSaveAsOperation delegate:didSaveSelector:contextInfo:].
 */
 - (void)moveDocumentWithCompletionHandler:(void (^ __nullable)(BOOL didMove))completionHandler NS_AVAILABLE_MAC(10_8);
 
@@ -569,7 +571,7 @@ The default implementation of this method does a coordinated move of the file at
 
 /* Lock the document to prevent the user from making further modifications. When locking is completed, regardless of success or failure, invoke the given block.
 
-The default implementation of this method first makes sure that any editor registered using Cocoa Binding's NSEditorRegistration informal protocol has committed its changes and immediately autosaves the document. If the autosave completes successfully or isn't necessary, this method invokes [self lockWithCompletionHandler:]. When locking succeeds, -isLocked will begin returning YES. Documents that return nil from [self fileURL] cannot be locked.
+The default implementation of this method first makes sure that any editor registered using Cocoa Binding's NSEditorRegistration protocol has committed its changes and immediately autosaves the document. If the autosave completes successfully or isn't necessary, this method invokes [self lockWithCompletionHandler:]. When locking succeeds, -isLocked will begin returning YES. Documents that return nil from [self fileURL] cannot be locked.
 */
 - (void)lockDocumentWithCompletionHandler:(void (^ __nullable)(BOOL didLock))completionHandler NS_AVAILABLE_MAC(10_8);
 
@@ -629,7 +631,7 @@ The default implementation of this method creates a page layout panel, invokes [
 
     - (void)document:(NSDocument *)document didPrint:(BOOL)didPrintSuccessfully contextInfo:(void *)contextInfo;
 
-The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration informal protocol has committed its changes, then invokes [self printOperationWithSettings:printSettings error:&anError]. If nil is returned it presents the error to the user in a document-modal panel before messaging the delegate. Otherwise it invokes [thePrintOperation setShowsPrintPanel:showPrintPanel] then [self runModalPrintOperation:thePrintOperation delegate:delegate didRunSelector:didPrintSelector contextInfo:contextInfo].
+The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration protocol has committed its changes, then invokes [self printOperationWithSettings:printSettings error:&anError]. If nil is returned it presents the error to the user in a document-modal panel before messaging the delegate. Otherwise it invokes [thePrintOperation setShowsPrintPanel:showPrintPanel] then [self runModalPrintOperation:thePrintOperation delegate:delegate didRunSelector:didPrintSelector contextInfo:contextInfo].
 
 Starting in OS X 10.6, if the printSettings dictionary has an NSPrintJobDisposition entry whose value is NSPrintSaveJob, while lacking an NSPrintJobSavingURL or NSPrintSavePath entry indicating where the PDF file should be written, then the default implementation of this method will present a save panel asking the user where the PDF file should be saved. Additionally, starting in OS X 10.9, the default implementation of this method will invoke -PDFPrintOperation instead of -printOperationWithSettings:error: in this scenario.
 
@@ -681,7 +683,7 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 #pragma mark *** Change Management ***
 
-/* Return YES if the document has changes that have not been saved, NO otherwise, primarily determined by the history of previous invocations of -updateChangeCount:. The default implementation of this method returns NO immediately after invocation of -updateChangeCount:NSChangeCleared. It will then return YES if subsequent invocations of -updateChangeCount: have recorded a situation in which the document has changes that have not been saved. Also, it will always return YES after invocation of -updateChangeCount:NSChangeReadOtherContents, until the next invocation of -updateChangeCount:NSChangeCleared. (-updateChangeCount:NSChangeAutosaved has no effect on what the default implementation of this method returns.) Lastly, because NSDocument implements Cocoa Bindings' NSEditorRegistration informal protocol, the default implementation will return YES whenever there are registered key-value binding editors.
+/* Return YES if the document has changes that have not been saved, NO otherwise, primarily determined by the history of previous invocations of -updateChangeCount:. The default implementation of this method returns NO immediately after invocation of -updateChangeCount:NSChangeCleared. It will then return YES if subsequent invocations of -updateChangeCount: have recorded a situation in which the document has changes that have not been saved. Also, it will always return YES after invocation of -updateChangeCount:NSChangeReadOtherContents, until the next invocation of -updateChangeCount:NSChangeCleared. (-updateChangeCount:NSChangeAutosaved has no effect on what the default implementation of this method returns.) Lastly, because NSDocument implements Cocoa Bindings' NSEditorRegistration protocol, the default implementation will return YES whenever there are registered key-value binding editors.
 */
 @property (getter=isDocumentEdited, readonly) BOOL documentEdited;
 

@@ -89,12 +89,12 @@
     extern "C" {
 #endif
 
-extern const simd_float2x2 matrix_identity_float2x2  __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const simd_float3x3 matrix_identity_float3x3  __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const simd_float4x4 matrix_identity_float4x4  __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const simd_double2x2 matrix_identity_double2x2 __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const simd_double3x3 matrix_identity_double3x3 __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const simd_double4x4 matrix_identity_double4x4 __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const simd_float2x2 matrix_identity_float2x2  __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+extern const simd_float3x3 matrix_identity_float3x3  __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+extern const simd_float4x4 matrix_identity_float4x4  __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+extern const simd_double2x2 matrix_identity_double2x2 __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+extern const simd_double3x3 matrix_identity_double3x3 __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+extern const simd_double4x4 matrix_identity_double4x4 __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 static simd_float2x2 SIMD_CFUNC simd_diagonal_matrix(simd_float2 __x);
 static simd_float3x3 SIMD_CFUNC simd_diagonal_matrix(simd_float3 __x);
@@ -256,12 +256,12 @@ static double SIMD_CFUNC simd_determinant(simd_double3x3 __x);
 static double SIMD_CFUNC simd_determinant(simd_double4x4 __x);
 #define matrix_determinant simd_determinant
 
-static simd_float2x2 SIMD_CFUNC simd_inverse(simd_float2x2 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-static simd_float3x3 SIMD_CFUNC simd_inverse(simd_float3x3 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-static simd_float4x4 SIMD_CFUNC simd_inverse(simd_float4x4 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-static simd_double2x2 SIMD_CFUNC simd_inverse(simd_double2x2 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-static simd_double3x3 SIMD_CFUNC simd_inverse(simd_double3x3 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-static simd_double4x4 SIMD_CFUNC simd_inverse(simd_double4x4 __x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+static simd_float2x2 SIMD_CFUNC simd_inverse(simd_float2x2 __x) __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+static simd_float3x3 SIMD_CFUNC simd_inverse(simd_float3x3 __x) __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+static simd_float4x4 SIMD_CFUNC simd_inverse(simd_float4x4 __x) __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+static simd_double2x2 SIMD_CFUNC simd_inverse(simd_double2x2 __x) __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+static simd_double3x3 SIMD_CFUNC simd_inverse(simd_double3x3 __x) __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+static simd_double4x4 SIMD_CFUNC simd_inverse(simd_double4x4 __x) __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 #define matrix_invert simd_inverse
 
 static simd_float2 SIMD_CFUNC simd_mul(simd_float2x2 __x, simd_float2 __y);
@@ -419,10 +419,45 @@ static simd_bool SIMD_CFUNC simd_almost_equal_elements_relative(simd_double4x4 _
 } /* extern "C" */
 
 namespace simd {
-  template <typename fptypeNxM> static SIMD_CPPFUNC fptypeNxM operator+(const fptypeNxM x, const fptypeNxM y) { return fptypeNxM(::simd_linear_combination(1, x, 1, y)); }
-  template <typename fptypeNxM> static SIMD_CPPFUNC fptypeNxM operator-(const fptypeNxM x, const fptypeNxM y) { return fptypeNxM(::simd_linear_combination(1, x,-1, y)); }
-  template <typename fptypeNxM> static SIMD_CPPFUNC fptypeNxM& operator+=(fptypeNxM& x, const fptypeNxM y) { x = ::simd_linear_combination(1, x, 1, y); return x; }
-  template <typename fptypeNxM> static SIMD_CPPFUNC fptypeNxM& operator-=(fptypeNxM& x, const fptypeNxM y) { x = ::simd_linear_combination(1, x,-1, y); return x; }
+  static SIMD_CPPFUNC float2x2 operator+(const float2x2 x, const float2x2 y) { return float2x2(::simd_linear_combination(1, x, 1, y)); }
+  static SIMD_CPPFUNC float2x3 operator+(const float2x3 x, const float2x3 y) { return float2x3(::simd_linear_combination(1, x, 1, y)); }
+  static SIMD_CPPFUNC float2x4 operator+(const float2x4 x, const float2x4 y) { return float2x4(::simd_linear_combination(1, x, 1, y)); }
+  static SIMD_CPPFUNC float3x2 operator+(const float3x2 x, const float3x2 y) { return float3x2(::simd_linear_combination(1, x, 1, y)); }
+  static SIMD_CPPFUNC float3x3 operator+(const float3x3 x, const float3x3 y) { return float3x3(::simd_linear_combination(1, x, 1, y)); }
+  static SIMD_CPPFUNC float3x4 operator+(const float3x4 x, const float3x4 y) { return float3x4(::simd_linear_combination(1, x, 1, y)); }
+  static SIMD_CPPFUNC float4x2 operator+(const float4x2 x, const float4x2 y) { return float4x2(::simd_linear_combination(1, x, 1, y)); }
+  static SIMD_CPPFUNC float4x3 operator+(const float4x3 x, const float4x3 y) { return float4x3(::simd_linear_combination(1, x, 1, y)); }
+  static SIMD_CPPFUNC float4x4 operator+(const float4x4 x, const float4x4 y) { return float4x4(::simd_linear_combination(1, x, 1, y)); }
+  
+  static SIMD_CPPFUNC float2x2 operator-(const float2x2 x, const float2x2 y) { return float2x2(::simd_linear_combination(1, x, -1, y)); }
+  static SIMD_CPPFUNC float2x3 operator-(const float2x3 x, const float2x3 y) { return float2x3(::simd_linear_combination(1, x, -1, y)); }
+  static SIMD_CPPFUNC float2x4 operator-(const float2x4 x, const float2x4 y) { return float2x4(::simd_linear_combination(1, x, -1, y)); }
+  static SIMD_CPPFUNC float3x2 operator-(const float3x2 x, const float3x2 y) { return float3x2(::simd_linear_combination(1, x, -1, y)); }
+  static SIMD_CPPFUNC float3x3 operator-(const float3x3 x, const float3x3 y) { return float3x3(::simd_linear_combination(1, x, -1, y)); }
+  static SIMD_CPPFUNC float3x4 operator-(const float3x4 x, const float3x4 y) { return float3x4(::simd_linear_combination(1, x, -1, y)); }
+  static SIMD_CPPFUNC float4x2 operator-(const float4x2 x, const float4x2 y) { return float4x2(::simd_linear_combination(1, x, -1, y)); }
+  static SIMD_CPPFUNC float4x3 operator-(const float4x3 x, const float4x3 y) { return float4x3(::simd_linear_combination(1, x, -1, y)); }
+  static SIMD_CPPFUNC float4x4 operator-(const float4x4 x, const float4x4 y) { return float4x4(::simd_linear_combination(1, x, -1, y)); }
+  
+  static SIMD_CPPFUNC float2x2& operator+=(float2x2& x, const float2x2 y) { x = x + y; return x; }
+  static SIMD_CPPFUNC float2x3& operator+=(float2x3& x, const float2x3 y) { x = x + y; return x; }
+  static SIMD_CPPFUNC float2x4& operator+=(float2x4& x, const float2x4 y) { x = x + y; return x; }
+  static SIMD_CPPFUNC float3x2& operator+=(float3x2& x, const float3x2 y) { x = x + y; return x; }
+  static SIMD_CPPFUNC float3x3& operator+=(float3x3& x, const float3x3 y) { x = x + y; return x; }
+  static SIMD_CPPFUNC float3x4& operator+=(float3x4& x, const float3x4 y) { x = x + y; return x; }
+  static SIMD_CPPFUNC float4x2& operator+=(float4x2& x, const float4x2 y) { x = x + y; return x; }
+  static SIMD_CPPFUNC float4x3& operator+=(float4x3& x, const float4x3 y) { x = x + y; return x; }
+  static SIMD_CPPFUNC float4x4& operator+=(float4x4& x, const float4x4 y) { x = x + y; return x; }
+  
+  static SIMD_CPPFUNC float2x2& operator-=(float2x2& x, const float2x2 y) { x = x - y; return x; }
+  static SIMD_CPPFUNC float2x3& operator-=(float2x3& x, const float2x3 y) { x = x - y; return x; }
+  static SIMD_CPPFUNC float2x4& operator-=(float2x4& x, const float2x4 y) { x = x - y; return x; }
+  static SIMD_CPPFUNC float3x2& operator-=(float3x2& x, const float3x2 y) { x = x - y; return x; }
+  static SIMD_CPPFUNC float3x3& operator-=(float3x3& x, const float3x3 y) { x = x - y; return x; }
+  static SIMD_CPPFUNC float3x4& operator-=(float3x4& x, const float3x4 y) { x = x - y; return x; }
+  static SIMD_CPPFUNC float4x2& operator-=(float4x2& x, const float4x2 y) { x = x - y; return x; }
+  static SIMD_CPPFUNC float4x3& operator-=(float4x3& x, const float4x3 y) { x = x - y; return x; }
+  static SIMD_CPPFUNC float4x4& operator-=(float4x4& x, const float4x4 y) { x = x - y; return x; }
   
   static SIMD_CPPFUNC float2x2 transpose(const float2x2 x) { return ::simd_transpose(x); }
   static SIMD_CPPFUNC float2x3 transpose(const float3x2 x) { return ::simd_transpose(x); }
@@ -440,9 +475,9 @@ namespace simd {
   
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wgcc-compat"
-  static SIMD_CPPFUNC float2x2 inverse(const float2x2 x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0) { return ::simd_inverse(x); }
-  static SIMD_CPPFUNC float3x3 inverse(const float3x3 x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0) { return ::simd_inverse(x); }
-  static SIMD_CPPFUNC float4x4 inverse(const float4x4 x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0) { return ::simd_inverse(x); }
+  static SIMD_CPPFUNC float2x2 inverse(const float2x2 x) __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)) { return ::simd_inverse(x); }
+  static SIMD_CPPFUNC float3x3 inverse(const float3x3 x) __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)) { return ::simd_inverse(x); }
+  static SIMD_CPPFUNC float4x4 inverse(const float4x4 x) __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)) { return ::simd_inverse(x); }
 #pragma clang diagnostic pop
   
   static SIMD_CPPFUNC float2x2 operator*(const float a, const float2x2 x) { return ::simd_mul(a, x); }
@@ -532,6 +567,86 @@ namespace simd {
   static SIMD_CPPFUNC float4x3& operator*=(float4x3& x, const float4x4 y) { x = ::simd_mul(x, y); return x; }
   static SIMD_CPPFUNC float4x4& operator*=(float4x4& x, const float4x4 y) { x = ::simd_mul(x, y); return x; }
   
+  static SIMD_CPPFUNC bool operator==(const float2x2& x, const float2x2& y) { return ::simd_equal(x, y); }
+  static SIMD_CPPFUNC bool operator==(const float2x3& x, const float2x3& y) { return ::simd_equal(x, y); }
+  static SIMD_CPPFUNC bool operator==(const float2x4& x, const float2x4& y) { return ::simd_equal(x, y); }
+  static SIMD_CPPFUNC bool operator==(const float3x2& x, const float3x2& y) { return ::simd_equal(x, y); }
+  static SIMD_CPPFUNC bool operator==(const float3x3& x, const float3x3& y) { return ::simd_equal(x, y); }
+  static SIMD_CPPFUNC bool operator==(const float3x4& x, const float3x4& y) { return ::simd_equal(x, y); }
+  static SIMD_CPPFUNC bool operator==(const float4x2& x, const float4x2& y) { return ::simd_equal(x, y); }
+  static SIMD_CPPFUNC bool operator==(const float4x3& x, const float4x3& y) { return ::simd_equal(x, y); }
+  static SIMD_CPPFUNC bool operator==(const float4x4& x, const float4x4& y) { return ::simd_equal(x, y); }
+  
+  static SIMD_CPPFUNC bool operator!=(const float2x2& x, const float2x2& y) { return !(x == y); }
+  static SIMD_CPPFUNC bool operator!=(const float2x3& x, const float2x3& y) { return !(x == y); }
+  static SIMD_CPPFUNC bool operator!=(const float2x4& x, const float2x4& y) { return !(x == y); }
+  static SIMD_CPPFUNC bool operator!=(const float3x2& x, const float3x2& y) { return !(x == y); }
+  static SIMD_CPPFUNC bool operator!=(const float3x3& x, const float3x3& y) { return !(x == y); }
+  static SIMD_CPPFUNC bool operator!=(const float3x4& x, const float3x4& y) { return !(x == y); }
+  static SIMD_CPPFUNC bool operator!=(const float4x2& x, const float4x2& y) { return !(x == y); }
+  static SIMD_CPPFUNC bool operator!=(const float4x3& x, const float4x3& y) { return !(x == y); }
+  static SIMD_CPPFUNC bool operator!=(const float4x4& x, const float4x4& y) { return !(x == y); }
+  
+  static SIMD_CPPFUNC bool almost_equal_elements(const float2x2 x, const float2x2 y, const float tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements(const float2x3 x, const float2x3 y, const float tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements(const float2x4 x, const float2x4 y, const float tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements(const float3x2 x, const float3x2 y, const float tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements(const float3x3 x, const float3x3 y, const float tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements(const float3x4 x, const float3x4 y, const float tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements(const float4x2 x, const float4x2 y, const float tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements(const float4x3 x, const float4x3 y, const float tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements(const float4x4 x, const float4x4 y, const float tol) { return ::simd_almost_equal_elements(x, y, tol); }
+    
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const float2x2 x, const float2x2 y, const float tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const float2x3 x, const float2x3 y, const float tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const float2x4 x, const float2x4 y, const float tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const float3x2 x, const float3x2 y, const float tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const float3x3 x, const float3x3 y, const float tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const float3x4 x, const float3x4 y, const float tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const float4x2 x, const float4x2 y, const float tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const float4x3 x, const float4x3 y, const float tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const float4x4 x, const float4x4 y, const float tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  
+  static SIMD_CPPFUNC double2x2 operator+(const double2x2 x, const double2x2 y) { return double2x2(::simd_linear_combination(1, x, 1, y)); }
+  static SIMD_CPPFUNC double2x3 operator+(const double2x3 x, const double2x3 y) { return double2x3(::simd_linear_combination(1, x, 1, y)); }
+  static SIMD_CPPFUNC double2x4 operator+(const double2x4 x, const double2x4 y) { return double2x4(::simd_linear_combination(1, x, 1, y)); }
+  static SIMD_CPPFUNC double3x2 operator+(const double3x2 x, const double3x2 y) { return double3x2(::simd_linear_combination(1, x, 1, y)); }
+  static SIMD_CPPFUNC double3x3 operator+(const double3x3 x, const double3x3 y) { return double3x3(::simd_linear_combination(1, x, 1, y)); }
+  static SIMD_CPPFUNC double3x4 operator+(const double3x4 x, const double3x4 y) { return double3x4(::simd_linear_combination(1, x, 1, y)); }
+  static SIMD_CPPFUNC double4x2 operator+(const double4x2 x, const double4x2 y) { return double4x2(::simd_linear_combination(1, x, 1, y)); }
+  static SIMD_CPPFUNC double4x3 operator+(const double4x3 x, const double4x3 y) { return double4x3(::simd_linear_combination(1, x, 1, y)); }
+  static SIMD_CPPFUNC double4x4 operator+(const double4x4 x, const double4x4 y) { return double4x4(::simd_linear_combination(1, x, 1, y)); }
+  
+  static SIMD_CPPFUNC double2x2 operator-(const double2x2 x, const double2x2 y) { return double2x2(::simd_linear_combination(1, x, -1, y)); }
+  static SIMD_CPPFUNC double2x3 operator-(const double2x3 x, const double2x3 y) { return double2x3(::simd_linear_combination(1, x, -1, y)); }
+  static SIMD_CPPFUNC double2x4 operator-(const double2x4 x, const double2x4 y) { return double2x4(::simd_linear_combination(1, x, -1, y)); }
+  static SIMD_CPPFUNC double3x2 operator-(const double3x2 x, const double3x2 y) { return double3x2(::simd_linear_combination(1, x, -1, y)); }
+  static SIMD_CPPFUNC double3x3 operator-(const double3x3 x, const double3x3 y) { return double3x3(::simd_linear_combination(1, x, -1, y)); }
+  static SIMD_CPPFUNC double3x4 operator-(const double3x4 x, const double3x4 y) { return double3x4(::simd_linear_combination(1, x, -1, y)); }
+  static SIMD_CPPFUNC double4x2 operator-(const double4x2 x, const double4x2 y) { return double4x2(::simd_linear_combination(1, x, -1, y)); }
+  static SIMD_CPPFUNC double4x3 operator-(const double4x3 x, const double4x3 y) { return double4x3(::simd_linear_combination(1, x, -1, y)); }
+  static SIMD_CPPFUNC double4x4 operator-(const double4x4 x, const double4x4 y) { return double4x4(::simd_linear_combination(1, x, -1, y)); }
+  
+  static SIMD_CPPFUNC double2x2& operator+=(double2x2& x, const double2x2 y) { x = x + y; return x; }
+  static SIMD_CPPFUNC double2x3& operator+=(double2x3& x, const double2x3 y) { x = x + y; return x; }
+  static SIMD_CPPFUNC double2x4& operator+=(double2x4& x, const double2x4 y) { x = x + y; return x; }
+  static SIMD_CPPFUNC double3x2& operator+=(double3x2& x, const double3x2 y) { x = x + y; return x; }
+  static SIMD_CPPFUNC double3x3& operator+=(double3x3& x, const double3x3 y) { x = x + y; return x; }
+  static SIMD_CPPFUNC double3x4& operator+=(double3x4& x, const double3x4 y) { x = x + y; return x; }
+  static SIMD_CPPFUNC double4x2& operator+=(double4x2& x, const double4x2 y) { x = x + y; return x; }
+  static SIMD_CPPFUNC double4x3& operator+=(double4x3& x, const double4x3 y) { x = x + y; return x; }
+  static SIMD_CPPFUNC double4x4& operator+=(double4x4& x, const double4x4 y) { x = x + y; return x; }
+  
+  static SIMD_CPPFUNC double2x2& operator-=(double2x2& x, const double2x2 y) { x = x - y; return x; }
+  static SIMD_CPPFUNC double2x3& operator-=(double2x3& x, const double2x3 y) { x = x - y; return x; }
+  static SIMD_CPPFUNC double2x4& operator-=(double2x4& x, const double2x4 y) { x = x - y; return x; }
+  static SIMD_CPPFUNC double3x2& operator-=(double3x2& x, const double3x2 y) { x = x - y; return x; }
+  static SIMD_CPPFUNC double3x3& operator-=(double3x3& x, const double3x3 y) { x = x - y; return x; }
+  static SIMD_CPPFUNC double3x4& operator-=(double3x4& x, const double3x4 y) { x = x - y; return x; }
+  static SIMD_CPPFUNC double4x2& operator-=(double4x2& x, const double4x2 y) { x = x - y; return x; }
+  static SIMD_CPPFUNC double4x3& operator-=(double4x3& x, const double4x3 y) { x = x - y; return x; }
+  static SIMD_CPPFUNC double4x4& operator-=(double4x4& x, const double4x4 y) { x = x - y; return x; }
+  
   static SIMD_CPPFUNC double2x2 transpose(const double2x2 x) { return ::simd_transpose(x); }
   static SIMD_CPPFUNC double2x3 transpose(const double3x2 x) { return ::simd_transpose(x); }
   static SIMD_CPPFUNC double2x4 transpose(const double4x2 x) { return ::simd_transpose(x); }
@@ -548,9 +663,9 @@ namespace simd {
   
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wgcc-compat"
-  static SIMD_CPPFUNC double2x2 inverse(const double2x2 x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0) { return ::simd_inverse(x); }
-  static SIMD_CPPFUNC double3x3 inverse(const double3x3 x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0) { return ::simd_inverse(x); }
-  static SIMD_CPPFUNC double4x4 inverse(const double4x4 x) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0) { return ::simd_inverse(x); }
+  static SIMD_CPPFUNC double2x2 inverse(const double2x2 x) __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)) { return ::simd_inverse(x); }
+  static SIMD_CPPFUNC double3x3 inverse(const double3x3 x) __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)) { return ::simd_inverse(x); }
+  static SIMD_CPPFUNC double4x4 inverse(const double4x4 x) __API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)) { return ::simd_inverse(x); }
 #pragma clang diagnostic pop
   
   static SIMD_CPPFUNC double2x2 operator*(const double a, const double2x2 x) { return ::simd_mul(a, x); }
@@ -640,10 +755,45 @@ namespace simd {
   static SIMD_CPPFUNC double4x3& operator*=(double4x3& x, const double4x4 y) { x = ::simd_mul(x, y); return x; }
   static SIMD_CPPFUNC double4x4& operator*=(double4x4& x, const double4x4 y) { x = ::simd_mul(x, y); return x; }
   
-  template <typename fptypeNxM> static SIMD_CPPFUNC bool operator==(const fptypeNxM& x, const fptypeNxM& y) { return ::simd_equal(x, y); }
-  template <typename fptypeNxM> static SIMD_CPPFUNC bool operator!=(const fptypeNxM& x, const fptypeNxM& y) { return !::simd_equal(x, y); }
-  template <typename fptypeNxM, typename fptype> static SIMD_CPPFUNC bool almost_equal_elements(const fptypeNxM x, const fptypeNxM y, const fptype tol) { return ::simd_almost_equal_elements(x, y, tol); }
-  template <typename fptypeNxM, typename fptype> static SIMD_CPPFUNC bool almost_equal_elements_relative(const fptypeNxM x, const fptypeNxM y, const fptype tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool operator==(const double2x2& x, const double2x2& y) { return ::simd_equal(x, y); }
+  static SIMD_CPPFUNC bool operator==(const double2x3& x, const double2x3& y) { return ::simd_equal(x, y); }
+  static SIMD_CPPFUNC bool operator==(const double2x4& x, const double2x4& y) { return ::simd_equal(x, y); }
+  static SIMD_CPPFUNC bool operator==(const double3x2& x, const double3x2& y) { return ::simd_equal(x, y); }
+  static SIMD_CPPFUNC bool operator==(const double3x3& x, const double3x3& y) { return ::simd_equal(x, y); }
+  static SIMD_CPPFUNC bool operator==(const double3x4& x, const double3x4& y) { return ::simd_equal(x, y); }
+  static SIMD_CPPFUNC bool operator==(const double4x2& x, const double4x2& y) { return ::simd_equal(x, y); }
+  static SIMD_CPPFUNC bool operator==(const double4x3& x, const double4x3& y) { return ::simd_equal(x, y); }
+  static SIMD_CPPFUNC bool operator==(const double4x4& x, const double4x4& y) { return ::simd_equal(x, y); }
+  
+  static SIMD_CPPFUNC bool operator!=(const double2x2& x, const double2x2& y) { return !(x == y); }
+  static SIMD_CPPFUNC bool operator!=(const double2x3& x, const double2x3& y) { return !(x == y); }
+  static SIMD_CPPFUNC bool operator!=(const double2x4& x, const double2x4& y) { return !(x == y); }
+  static SIMD_CPPFUNC bool operator!=(const double3x2& x, const double3x2& y) { return !(x == y); }
+  static SIMD_CPPFUNC bool operator!=(const double3x3& x, const double3x3& y) { return !(x == y); }
+  static SIMD_CPPFUNC bool operator!=(const double3x4& x, const double3x4& y) { return !(x == y); }
+  static SIMD_CPPFUNC bool operator!=(const double4x2& x, const double4x2& y) { return !(x == y); }
+  static SIMD_CPPFUNC bool operator!=(const double4x3& x, const double4x3& y) { return !(x == y); }
+  static SIMD_CPPFUNC bool operator!=(const double4x4& x, const double4x4& y) { return !(x == y); }
+  
+  static SIMD_CPPFUNC bool almost_equal_elements(const double2x2 x, const double2x2 y, const double tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements(const double2x3 x, const double2x3 y, const double tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements(const double2x4 x, const double2x4 y, const double tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements(const double3x2 x, const double3x2 y, const double tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements(const double3x3 x, const double3x3 y, const double tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements(const double3x4 x, const double3x4 y, const double tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements(const double4x2 x, const double4x2 y, const double tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements(const double4x3 x, const double4x3 y, const double tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements(const double4x4 x, const double4x4 y, const double tol) { return ::simd_almost_equal_elements(x, y, tol); }
+  
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const double2x2 x, const double2x2 y, const double tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const double2x3 x, const double2x3 y, const double tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const double2x4 x, const double2x4 y, const double tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const double3x2 x, const double3x2 y, const double tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const double3x3 x, const double3x3 y, const double tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const double3x4 x, const double3x4 y, const double tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const double4x2 x, const double4x2 y, const double tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const double4x3 x, const double4x3 y, const double tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
+  static SIMD_CPPFUNC bool almost_equal_elements_relative(const double4x4 x, const double4x4 y, const double tol) { return ::simd_almost_equal_elements_relative(x, y, tol); }
 }
 
 extern "C" {

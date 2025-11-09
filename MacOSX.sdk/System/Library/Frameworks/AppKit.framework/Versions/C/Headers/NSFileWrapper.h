@@ -1,7 +1,7 @@
 /*
         NSFileWrapper.h
         Application Kit
-        Copyright (c) 1995-2017, Apple Inc.
+        Copyright (c) 1995-2018, Apple Inc.
         All rights reserved.
 */
 

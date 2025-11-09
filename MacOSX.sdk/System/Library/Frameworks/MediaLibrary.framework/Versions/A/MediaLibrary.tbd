@@ -1,9 +1,9 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 55DCCE05-AD8F-3996-9434-2FBA350AB996' ]
+uuids:           [ 'x86_64: DB634B1B-7981-3ABB-9441-A44E95502ED6' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/MediaLibrary.framework/Versions/A/MediaLibrary
-current-version: 750
+current-version: 762
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ASL_LEVEL_ERR_STR, _ASL_LEVEL_INFO_STR, _MLApertureAllPhotosTypeIdentifier, 
@@ -89,9 +89,9 @@ exports:
                        _mlpmrInstrument_logUInt32, _mlpmrInstrument_logUInt64, _mlpmrTimer_begin, 
                        _mlpmrTimer_delta, _mlpmrTimer_end, _mlpmrTimer_init, _mlpmrTimer_pause, 
                        _mlpmrTimer_resume ]
-    objc-classes:    [ _MLMediaGroup, _MLMediaGroupImpl, _MLMediaLibrary, _MLMediaLibraryImpl, 
-                       _MLMediaObject, _MLMediaObjectImpl, _MLMediaSource, _MLMediaSourceImpl, 
-                       _MLPMR, _MLPMRContext, _MLPMRContextImpl ]
-    objc-ivars:      [ _MLPMRContext.impl, _MLPMRContextImpl.mAppName, _MLPMRContextImpl.mDefaultInstrumentType, 
-                       _MLPMRContextImpl.mInstruments, _MLPMRContextImpl.mLogPath ]
+    objc-classes:    [ MLMediaGroup, MLMediaGroupImpl, MLMediaLibrary, MLMediaLibraryImpl, 
+                       MLMediaObject, MLMediaObjectImpl, MLMediaSource, MLMediaSourceImpl, 
+                       MLPMR, MLPMRContext, MLPMRContextImpl ]
+    objc-ivars:      [ MLPMRContext.impl, MLPMRContextImpl.mAppName, MLPMRContextImpl.mDefaultInstrumentType, 
+                       MLPMRContextImpl.mInstruments, MLPMRContextImpl.mLogPath ]
 ...

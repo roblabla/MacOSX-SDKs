@@ -23,8 +23,9 @@
 #include <CoreMedia/CMSync.h>
 #include <CoreMedia/CMTextMarkup.h>
 #include <CoreMedia/CMMetadata.h>
-#if TARGET_OS_IPHONE
+#if ! TARGET_OS_WINDOWS
 #include <CoreMedia/CMAudioClock.h>
-#else
+#endif
+#if ! TARGET_OS_IPHONE
 #include <CoreMedia/CMAudioDeviceClock.h>
 #endif

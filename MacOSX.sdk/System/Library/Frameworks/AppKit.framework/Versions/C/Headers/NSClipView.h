@@ -1,15 +1,11 @@
 /*
 	NSClipView.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSView.h>
-
-#ifndef NSEDGEINSETS_DEFINED
-#import <AppKit/NSLayoutConstraint.h>
-#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,19 +14,19 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSClipView : NSView
 {
     /*All instance variables are private*/
-    NSColor             *_backgroundColor;
-    NSView              *_docView;
-    NSRect              _docRect;
-    NSRect              _oldDocFrame;
-    NSCursor            *_cursor;
-    id                  _scrollAnimationHelper;
-    struct __cvFlags {
-	unsigned int        __unused:1;
-	unsigned int        onlyUncovered:1;
-	unsigned int        reflectScroll:1;
-	unsigned int        usedByCell:1;
-	unsigned int	    scrollClipTo:1;
-	unsigned int	    noCopyOnScroll:1;
+    NSColor             *_backgroundColor APPKIT_IVAR;
+    NSView              *_docView APPKIT_IVAR;
+    NSRect              _docRect APPKIT_IVAR;
+    NSRect              _oldDocFrame APPKIT_IVAR;
+    NSCursor            *_cursor APPKIT_IVAR;
+    id                  _scrollAnimationHelper APPKIT_IVAR;
+    struct {
+        unsigned int        unused:1;
+        unsigned int        onlyUncovered:1;
+        unsigned int        reflectScroll:1;
+        unsigned int        usedByCell:1;
+        unsigned int	    scrollClipTo:1;
+        unsigned int	    noCopyOnScroll:1;
         unsigned int        drawsBackground:1;
         unsigned int        scrollInProgress:1;
         unsigned int        skipRemoveSuperviewCheck:1;
@@ -50,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int        isScrollDueToUserAction:1;
         unsigned int        hasOverlappingViews:1;
         unsigned int        automaticallyCalculateContentSize:1;
-    } _cvFlags;
+    } _cvFlags APPKIT_IVAR;
 }
 
 @property (copy) NSColor *backgroundColor;
@@ -82,14 +78,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface NSClipView(NSDeprecated)
-// -[NSClipView constrainScrollPoint:] will be formally deprecated in an upcoming release. -[NSClipView constrainBoundsRect:] should be used instead.
-- (NSPoint)constrainScrollPoint:(NSPoint)newOrigin NS_DEPRECATED_MAC(10_0, 10_10, "Use -constrainBoundsRect: instead");
-@end
-
 @interface NSView(NSClipViewSuperview)
 - (void)reflectScrolledClipView:(NSClipView *)clipView;
 - (void)scrollClipView:(NSClipView *)clipView toPoint:(NSPoint)point;
+@end
+
+
+@interface NSClipView(NSDeprecated)
+- (NSPoint)constrainScrollPoint:(NSPoint)newOrigin NS_DEPRECATED_MAC(10_0, 10_10, "Use -constrainBoundsRect: instead");
 @end
 
 NS_ASSUME_NONNULL_END

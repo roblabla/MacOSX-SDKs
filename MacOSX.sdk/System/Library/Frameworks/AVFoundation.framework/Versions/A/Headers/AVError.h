@@ -3,14 +3,14 @@
  
 	Framework:  AVFoundation
  
-	Copyright 2010-2017 Apple Inc. All rights reserved.
+	Copyright 2010-2018 Apple Inc. All rights reserved.
 
  */
 
 #import <AVFoundation/AVBase.h>
 #import <Foundation/Foundation.h>
 
-AVF_EXPORT NSString *const AVFoundationErrorDomain                  NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT NSErrorDomain const AVFoundationErrorDomain              NS_AVAILABLE(10_7, 4_0);
 
 AVF_EXPORT NSString *const AVErrorDeviceKey                         NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVErrorTimeKey                           NS_AVAILABLE(10_7, 4_0);
@@ -29,7 +29,7 @@ AVF_EXPORT NSString *const AVErrorDiscontinuityFlagsKey             NS_AVAILABLE
 
 #endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 
-typedef NS_ENUM(NSInteger, AVError) {
+typedef NS_ERROR_ENUM(AVFoundationErrorDomain, AVError) {
     AVErrorUnknown                                      = -11800,
     AVErrorOutOfMemory                                  = -11801,
     AVErrorSessionNotRunning                            = -11803,
@@ -107,4 +107,6 @@ typedef NS_ENUM(NSInteger, AVError) {
 	AVErrorContentNotUpdated NS_AVAILABLE(10_13, 11_0)	= -11866,
 	AVErrorNoLongerPlayable	 NS_AVAILABLE(10_13, 11_0)	= -11867,
 	AVErrorNoCompatibleAlternatesForExternalDisplay API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED = -11868,
+	AVErrorNoSourceTrack API_AVAILABLE(macos(10.13.2), ios(11.2), tvos(11.2)) __WATCHOS_PROHIBITED = -11869,
+	AVErrorExternalPlaybackNotSupportedForAsset API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) __WATCHOS_PROHIBITED = -11870,
 };

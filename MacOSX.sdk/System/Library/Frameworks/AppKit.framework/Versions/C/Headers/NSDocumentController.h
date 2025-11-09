@@ -1,11 +1,12 @@
 /*
 	NSDocumentController.h
 	Application Kit
-	Copyright (c) 1997-2017, Apple Inc.
+	Copyright (c) 1997-2018, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSNibDeclarations.h>
+#import <AppKit/NSMenu.h>
 #import <AppKit/NSUserInterfaceValidation.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDate.h>
@@ -14,13 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSDocument, NSError, NSMenuItem, NSMutableDictionary, NSOpenPanel, NSURL, NSWindow;
 
-@interface NSDocumentController : NSObject<NSCoding, NSUserInterfaceValidations> {
+@interface NSDocumentController : NSObject<NSCoding, NSMenuItemValidation, NSUserInterfaceValidations> {
     @private
-    id _documents;
-    id _moreVars;
-    NSArray *_cachedTypeDescriptions;
-    NSMutableDictionary *_recents;
-    int _recentsLimit;
+    id _documents APPKIT_IVAR;
+    id _moreVars APPKIT_IVAR;
+    NSArray *_cachedTypeDescriptions APPKIT_IVAR;
+    NSMutableDictionary *_recents APPKIT_IVAR;
+    int _recentsLimit APPKIT_IVAR;
 }
 
 #pragma mark *** The Shared Document Controller ***

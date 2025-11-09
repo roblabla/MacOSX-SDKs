@@ -28,11 +28,11 @@
 @class DOMNode;
 @class DOMXPathResult;
 
-NS_CLASS_AVAILABLE_MAC(10_5)
+WEBKIT_CLASS_DEPRECATED_MAC(10_5, 10_14)
 @interface DOMXPathExpression : DOMObject
-- (DOMXPathResult *)evaluate:(DOMNode *)contextNode type:(unsigned short)type inResult:(DOMXPathResult *)inResult NS_AVAILABLE_MAC(10_5);
+- (DOMXPathResult *)evaluate:(DOMNode *)contextNode type:(unsigned short)type inResult:(DOMXPathResult *)inResult WEBKIT_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMXPathExpression (DOMXPathExpressionDeprecated)
-- (DOMXPathResult *)evaluate:(DOMNode *)contextNode :(unsigned short)type :(DOMXPathResult *)inResult NS_DEPRECATED_MAC(10_5, 10_5);
+- (DOMXPathResult *)evaluate:(DOMNode *)contextNode :(unsigned short)type :(DOMXPathResult *)inResult WEBKIT_DEPRECATED_MAC(10_5, 10_5);
 @end

@@ -597,14 +597,16 @@ public:
 							SCSICmdField1Byte 			THIRD_PARTY_DEVICE_ID,
 							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
-	
+
+#endif /* !TARGET_OS_EMBEDDED */
+    
 	virtual bool		REPORT_DEVICE_IDENTIFIER ( 
 							SCSITaskIdentifier			request,
 							IOMemoryDescriptor *		dataBuffer,
 							SCSICmdField4Byte 			ALLOCATION_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
 	
-#endif /* !TARGET_OS_EMBEDDED */
+
 
    	virtual bool		REPORT_LUNS ( 
 							SCSITaskIdentifier			request,

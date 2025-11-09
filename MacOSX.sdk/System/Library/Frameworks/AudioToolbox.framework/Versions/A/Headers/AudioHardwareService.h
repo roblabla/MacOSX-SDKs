@@ -86,7 +86,7 @@ CF_ENUM(AudioObjectPropertySelector)
 extern Boolean
 AudioHardwareServiceHasProperty(    AudioObjectID                       inObjectID,
                                     const AudioObjectPropertyAddress*   inAddress)                  
-                                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
+                                                            API_DEPRECATED("no longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function       AudioHardwareServiceIsPropertySettable
@@ -104,7 +104,7 @@ extern OSStatus
 AudioHardwareServiceIsPropertySettable( AudioObjectID                       inObjectID,
                                         const AudioObjectPropertyAddress*   inAddress,
                                         Boolean*                            outIsSettable)          
-                                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
+                                                            API_DEPRECATED("no longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function       AudioHardwareServiceGetPropertyDataSize
@@ -131,7 +131,7 @@ AudioHardwareServiceGetPropertyDataSize(    AudioObjectID                       
                                             UInt32                              inQualifierDataSize,
                                             const void*                         inQualifierData,
                                             UInt32*                             outDataSize)        
-                                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
+                                                            API_DEPRECATED("no longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function       AudioHardwareServiceGetPropertyData
@@ -164,7 +164,7 @@ AudioHardwareServiceGetPropertyData(    AudioObjectID                       inOb
                                         const void*                         inQualifierData,
                                         UInt32*                             ioDataSize,
                                         void*                               outData)                
-                                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
+                                                        API_DEPRECATED("no longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function       AudioHardwareServiceSetPropertyData
@@ -198,7 +198,7 @@ AudioHardwareServiceSetPropertyData(    AudioObjectID                       inOb
                                         const void*                         inQualifierData,
                                         UInt32                              inDataSize,
                                         const void*                         inData)                 
-                                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
+                                                        API_DEPRECATED("no longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function       AudioHardwareServiceAddPropertyListener
@@ -220,7 +220,7 @@ AudioHardwareServiceAddPropertyListener(    AudioObjectID                       
                                             const AudioObjectPropertyAddress*   inAddress,
                                             AudioObjectPropertyListenerProc     inListener,
                                             void*                               inClientData)       
-                                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
+                                                        API_DEPRECATED("no longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function       AudioHardwareServiceRemovePropertyListener
@@ -242,7 +242,7 @@ AudioHardwareServiceRemovePropertyListener( AudioObjectID                       
                                             const AudioObjectPropertyAddress*   inAddress,
                                             AudioObjectPropertyListenerProc     inListener,
                                             void*                               inClientData)       
-                                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
+                                                        API_DEPRECATED("no longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 #if defined(__cplusplus)
 }

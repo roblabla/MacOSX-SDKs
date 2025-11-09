@@ -15,8 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MTLCommandQueue;
 @protocol MTLDevice;
 
-NS_CLASS_AVAILABLE(10_13, 11_0)
-MTL_EXPORT
+MTL_EXPORT API_AVAILABLE(macos(10.13), ios(11.0))
 @interface MTLCaptureManager : NSObject
 {
     BOOL _isCapturing;
@@ -31,7 +30,7 @@ MTL_EXPORT
 + (MTLCaptureManager*)sharedCaptureManager;
 
 // Use +[sharedCaptureManager]
-- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)init API_UNAVAILABLE(macos, ios);
 
 // Creates a new capture scope for the given capture device
 - (id<MTLCaptureScope>)newCaptureScopeWithDevice:(id<MTLDevice>)device;
@@ -42,7 +41,7 @@ MTL_EXPORT
 - (void)startCaptureWithDevice:(id<MTLDevice>)device;
 // Starts capturing, for the given command queue, command buffers that are created after invoking this method and committed before invoking -[stopCapture] or clicking Xcode’s stop capture button.
 - (void)startCaptureWithCommandQueue:(id<MTLCommandQueue>)commandQueue;
-// Start a capture with the given scope: from the scope's begin until its end (or Xcode’s stop capture button is pressed), restricting the capture to the scope's device(s) and, if selected, the scope's command queue
+// Start a capture with the given scope: from the scope's begin until its end, restricting the capture to the scope's device(s) and, if selected, the scope's command queue
 - (void)startCaptureWithScope:(id<MTLCaptureScope>)captureScope;
 
 // Stops a capture started from startCaptureWithDevice:/startCaptureWithCommandQueue:/startCaptureWithScope: or from Xcode’s capture button

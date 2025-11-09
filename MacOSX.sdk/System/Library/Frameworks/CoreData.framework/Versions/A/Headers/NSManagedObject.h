@@ -1,7 +1,7 @@
 /*
     NSManagedObject.h
     Core Data
-    Copyright (c) 2004-2017, Apple Inc.
+    Copyright (c) 2004-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -48,7 +48,6 @@ API_AVAILABLE(macosx(10.4),ios(3.0)) NS_REQUIRES_PROPERTY_DEFINITIONS
 /*  Distinguish between changes that should and should not dirty the object for any key unknown to Core Data.  10.5 & earlier default to NO.  10.6 and later default to YES. */
 /*    Similarly, transient attributes may be individually flagged as not dirtying the object by adding +(BOOL)contextShouldIgnoreChangesFor<key> where <key> is the property name. */
 @property(class, readonly) BOOL contextShouldIgnoreUnmodeledPropertyChanges API_AVAILABLE(macosx(10.6),ios(3.0));
-
 
 /* The Entity represented by this subclass. This method is only legal to call on subclasses of NSManagedObject that represent a single entity in the model.
  */
@@ -154,7 +153,7 @@ API_AVAILABLE(macosx(10.4),ios(3.0)) NS_REQUIRES_PROPERTY_DEFINITIONS
 
 - (void)setObservationInfo:(nullable void*)inObservationInfo;
 - (nullable void*)observationInfo;
-
+    
 @end
 
 NS_ASSUME_NONNULL_END

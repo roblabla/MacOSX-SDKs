@@ -19,7 +19,6 @@
 #include <CoreVideo/CVBase.h>
 #include <CoreVideo/CVReturn.h>
 #include <CoreVideo/CVImageBuffer.h>
-#include <ApplicationServices/ApplicationServices.h>
 #include <OpenGL/OpenGL.h>
 #include <OpenGL/gltypes.h>
 #include <stddef.h>
@@ -38,7 +37,7 @@ extern "C" {
 */
 typedef CVImageBufferRef CVOpenGLTextureRef;
 
-CV_EXPORT CFTypeID CVOpenGLTextureGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CFTypeID CVOpenGLTextureGetTypeID(void) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
 
 /*!
     @function   CVOpenGLTextureRetain
@@ -47,7 +46,7 @@ CV_EXPORT CFTypeID CVOpenGLTextureGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_
     @param      buffer A CVOpenGLTexture object that you want to retain.
     @result     A CVOpenGLTexture object that is the same as the passed in buffer.
 */
-CV_EXPORT CVOpenGLTextureRef CV_NULLABLE CVOpenGLTextureRetain( CVOpenGLTextureRef CV_NULLABLE texture ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVOpenGLTextureRef CV_NULLABLE CVOpenGLTextureRetain( CVOpenGLTextureRef CV_NULLABLE texture ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
 
 /*!
     @function   CVOpenGLTextureRelease
@@ -55,7 +54,7 @@ CV_EXPORT CVOpenGLTextureRef CV_NULLABLE CVOpenGLTextureRetain( CVOpenGLTextureR
     @discussion Equivalent to CFRelease, but NULL safe
     @param      buffer A CVOpenGLTexture object that you want to release.
 */
-CV_EXPORT void CVOpenGLTextureRelease( CV_RELEASES_ARGUMENT CVOpenGLTextureRef CV_NULLABLE texture ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT void CVOpenGLTextureRelease( CV_RELEASES_ARGUMENT CVOpenGLTextureRef CV_NULLABLE texture ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
 
 /*!
     @function   CVOpenGLTextureGetTarget
@@ -63,7 +62,7 @@ CV_EXPORT void CVOpenGLTextureRelease( CV_RELEASES_ARGUMENT CVOpenGLTextureRef C
     @param      image Target CVOpenGLTexture
     @result     OpenGL texture target
 */
-CV_EXPORT GLenum CVOpenGLTextureGetTarget( CVOpenGLTextureRef CV_NONNULL image ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT GLenum CVOpenGLTextureGetTarget( CVOpenGLTextureRef CV_NONNULL image ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
 
 /*!
     @function   CVOpenGLTextureGetName
@@ -71,7 +70,7 @@ CV_EXPORT GLenum CVOpenGLTextureGetTarget( CVOpenGLTextureRef CV_NONNULL image )
     @param      image Target CVOpenGLTexture
     @result     OpenGL texture target name
 */
-CV_EXPORT GLuint CVOpenGLTextureGetName( CVOpenGLTextureRef CV_NONNULL image ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT GLuint CVOpenGLTextureGetName( CVOpenGLTextureRef CV_NONNULL image ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
 
 /*!
     @function   CVOpenGLTextureIsFlipped
@@ -79,7 +78,7 @@ CV_EXPORT GLuint CVOpenGLTextureGetName( CVOpenGLTextureRef CV_NONNULL image ) A
     @param      image Target CVOpenGLTexture
     @result     True if 0,0 in the texture is upper left, false if 0,0 is lower left
 */
-CV_EXPORT Boolean CVOpenGLTextureIsFlipped( CVOpenGLTextureRef CV_NONNULL image ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT Boolean CVOpenGLTextureIsFlipped( CVOpenGLTextureRef CV_NONNULL image ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
 
 /*!
     @function   CVOpenGLTextureGetCleanTexCoords 
@@ -95,7 +94,7 @@ CV_EXPORT void CVOpenGLTextureGetCleanTexCoords( CVOpenGLTextureRef CV_NONNULL i
 						 GLfloat lowerLeft[2],
 						 GLfloat lowerRight[2], 
 						 GLfloat upperRight[2],
-						 GLfloat upperLeft[2] ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+						 GLfloat upperLeft[2] ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
 
 #if defined(__cplusplus)
 }

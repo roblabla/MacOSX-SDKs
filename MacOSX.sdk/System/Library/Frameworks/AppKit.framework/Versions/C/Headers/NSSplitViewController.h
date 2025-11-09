@@ -1,7 +1,7 @@
 /*
     NSSplitViewController.h
     Application Kit
-    Copyright (c) 2014-2017, Apple Inc.
+    Copyright (c) 2014-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -28,12 +28,12 @@ APPKIT_EXTERN const CGFloat NSSplitViewControllerAutomaticDimension NS_AVAILABLE
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface NSSplitViewController : NSViewController <NSSplitViewDelegate, NSUserInterfaceValidations> {
 @private
-    NSSplitView *_splitView;
-    id _splitViewControllerPrivateData;
+    NSSplitView *_splitView APPKIT_IVAR;
+    id _splitViewControllerPrivateData APPKIT_IVAR;
 #ifndef __OBJC2__
     struct {
         unsigned int _reserved:32;
-    } _splitViewControllerFlags;
+    } _splitViewControllerFlags APPKIT_IVAR;
 #endif
 }
 

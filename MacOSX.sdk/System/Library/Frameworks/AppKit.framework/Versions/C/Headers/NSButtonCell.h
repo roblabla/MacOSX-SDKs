@@ -1,7 +1,7 @@
 /*
 	NSButtonCell.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -41,41 +41,8 @@ typedef NS_ENUM(NSUInteger, NSBezelStyle) {
 };
 
 typedef struct __BCFlags {
-#ifdef __BIG_ENDIAN__
-    unsigned int        pushIn:1;
-    unsigned int        changeContents:1;
-    unsigned int        changeBackground:1;
-    unsigned int        changeGray:1;
-    unsigned int        lightByContents:1;
-    unsigned int        lightByBackground:1;
-    unsigned int        lightByGray:1;
-    unsigned int        drawing:1;
-    unsigned int        bordered:1;
-    unsigned int        imageOverlaps:1;
-    unsigned int        horizontal:1;
-    unsigned int        bottomOrLeft:1;
-    unsigned int        imageAndText:1;
-    unsigned int        imageSizeDiff:1;
-    unsigned int        hasKeyEquivalentInsteadOfImage:1;
-    unsigned int        inIntermediateDisclosure:1;
-    unsigned int        transparent:1;
-    unsigned int        inset:2;
-    unsigned int        doesNotDimImage:1;
-    unsigned int        suppressAXValueChangeNote:1;
-    unsigned int        isDrawingDisclosure:1;
-    unsigned int        hasTitleTextField:1;
-    unsigned int        useButtonImageSource:1;
-    unsigned int        isDrawingFocus:1;
-    unsigned int        allowTitleTightening:1;
-    unsigned int        imageHugsTitle:1;
-    unsigned int        shouldNotHighlightOnPerformClick:1;
-    unsigned int        leadingOrTrailing:1;
-    unsigned int        alwaysRadioExclusive:1;
-    unsigned int        hasOverlayView:1;
     unsigned int        __reserved:1;
-#else
-    unsigned int        __reserved:1;
-    unsigned int        hasOverlayView:1;
+    unsigned int        calculatingPreferredAppearance:1;
     unsigned int        alwaysRadioExclusive:1;
     unsigned int        leadingOrTrailing:1;
     unsigned int        shouldNotHighlightOnPerformClick:1;
@@ -105,38 +72,28 @@ typedef struct __BCFlags {
     unsigned int        changeBackground:1;
     unsigned int        changeContents:1;
     unsigned int        pushIn:1;
-#endif
 } _BCFlags;
 
 typedef struct __BCFlags2 {
-#ifdef __BIG_ENDIAN__
-    unsigned int	keyEquivalentModifierMask:24;
-    unsigned int	imageScaling:2;
-    unsigned int	bezelStyle2:1;
-    unsigned int	mouseInside:1;
-    unsigned int	showsBorderOnlyWhileMouseInside:1;
-    unsigned int	bezelStyle:3;
-#else
     unsigned int	bezelStyle:3;
     unsigned int	showsBorderOnlyWhileMouseInside:1;
     unsigned int	mouseInside:1;
     unsigned int	bezelStyle2:1;
     unsigned int	imageScaling:2;
     unsigned int	keyEquivalentModifierMask:24;
-#endif
 } _BCFlags2;
 
 @interface NSButtonCell : NSActionCell {
     /*All instance variables are private*/
-    NSString	       *_altContents;
-    id			_sound;
-    NSString	       *_keyEquivalent;
-    _BCFlags2		_bcFlags2;
-    unsigned short	_periodicDelay;
-    unsigned short	_periodicInterval;
-    _BCFlags            _bcFlags;
-    NSImage            *_normalImage;
-    id                  _alternateImageOrKeyEquivalentFont;
+    NSString	       *_altContents APPKIT_IVAR;
+    id			_sound APPKIT_IVAR;
+    NSString	       *_keyEquivalent APPKIT_IVAR;
+    _BCFlags2		_bcFlags2 APPKIT_IVAR;
+    unsigned short	_periodicDelay APPKIT_IVAR;
+    unsigned short	_periodicInterval APPKIT_IVAR;
+    _BCFlags            _bcFlags APPKIT_IVAR;
+    NSImage            *_normalImage APPKIT_IVAR;
+    id                  _alternateImageOrKeyEquivalentFont APPKIT_IVAR;
 }
 
 - (instancetype)initTextCell:(NSString *)string NS_DESIGNATED_INITIALIZER;
@@ -207,40 +164,38 @@ typedef NS_ENUM(NSUInteger, NSGradientType) {
     NSGradientConvexStrong  = 4
 } NS_DEPRECATED_MAC(10_0, 10_12);
 
-// The following NSButtonType constants will be deprecated in a future release. Please migrate to the modern equivalents.
-static const NSButtonType NSMomentaryLightButton = NSButtonTypeMomentaryLight;
-static const NSButtonType NSPushOnPushOffButton = NSButtonTypePushOnPushOff;
-static const NSButtonType NSToggleButton = NSButtonTypeToggle;
-static const NSButtonType NSSwitchButton = NSButtonTypeSwitch;
-static const NSButtonType NSRadioButton = NSButtonTypeRadio;
-static const NSButtonType NSMomentaryChangeButton = NSButtonTypeMomentaryChange;
-static const NSButtonType NSOnOffButton = NSButtonTypeOnOff;
-static const NSButtonType NSMomentaryPushInButton = NSButtonTypeMomentaryPushIn;
-static const NSButtonType NSAcceleratorButton = NSButtonTypeAccelerator;
-static const NSButtonType NSMultiLevelAcceleratorButton = NSButtonTypeMultiLevelAccelerator;
+static const NSButtonType NSMomentaryLightButton NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSButtonTypeMomentaryLight", 10_0, 10_14) = NSButtonTypeMomentaryLight;
+static const NSButtonType NSPushOnPushOffButton NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSButtonTypePushOnPushOff", 10_0, 10_14) = NSButtonTypePushOnPushOff;
+static const NSButtonType NSToggleButton NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSButtonTypeToggle", 10_0, 10_14) = NSButtonTypeToggle;
+static const NSButtonType NSSwitchButton NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSButtonTypeSwitch", 10_0, 10_14) = NSButtonTypeSwitch;
+static const NSButtonType NSRadioButton NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSButtonTypeRadio", 10_0, 10_14) = NSButtonTypeRadio;
+static const NSButtonType NSMomentaryChangeButton NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSButtonTypeMomentaryChange", 10_0, 10_14) = NSButtonTypeMomentaryChange;
+static const NSButtonType NSOnOffButton NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSButtonTypeOnOff", 10_0, 10_14) = NSButtonTypeOnOff;
+static const NSButtonType NSMomentaryPushInButton NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSButtonTypeMomentaryPushIn", 10_0, 10_14) = NSButtonTypeMomentaryPushIn;
+static const NSButtonType NSAcceleratorButton NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSButtonTypeAccelerator", 10_10_3, 10_14) = NSButtonTypeAccelerator;
+static const NSButtonType NSMultiLevelAcceleratorButton NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSButtonTypeMultiLevelAccelerator", 10_10_3, 10_14) = NSButtonTypeMultiLevelAccelerator;
 
 /* These constants were accidentally reversed so that NSMomentaryPushButton lit and NSMomentaryLight pushed. These names are now deprecated */
 static const NSButtonType NSMomentaryPushButton NS_ENUM_DEPRECATED_MAC(10_0, 10_9, "This constant is misnamed and has the same effect as NSButtonTypeMomentaryLight. Use that name instead, or switch to NSButtonTypeMomentaryPushIn.") = NSButtonTypeMomentaryLight;
 static const NSButtonType NSMomentaryLight NS_ENUM_DEPRECATED_MAC(10_0, 10_9, "This constant is misnamed and has the same effect as NSButtonTypeMomentaryPushIn. Use that name instead, or switch to NSButtonTypeMomentaryLight.") = NSButtonTypeMomentaryPushIn;
 
-// The following NSBezelStyle constants will be deprecated in a future release. Please migrate to the modern equivalents.
-static const NSBezelStyle NSRoundedBezelStyle = NSBezelStyleRounded;
-static const NSBezelStyle NSRegularSquareBezelStyle = NSBezelStyleRegularSquare;
-static const NSBezelStyle NSDisclosureBezelStyle = NSBezelStyleDisclosure;
-static const NSBezelStyle NSShadowlessSquareBezelStyle = NSBezelStyleShadowlessSquare;
-static const NSBezelStyle NSCircularBezelStyle = NSBezelStyleCircular;
-static const NSBezelStyle NSTexturedSquareBezelStyle = NSBezelStyleTexturedSquare;
-static const NSBezelStyle NSHelpButtonBezelStyle = NSBezelStyleHelpButton;
-static const NSBezelStyle NSSmallSquareBezelStyle = NSBezelStyleSmallSquare;
-static const NSBezelStyle NSTexturedRoundedBezelStyle = NSBezelStyleTexturedRounded;
-static const NSBezelStyle NSRoundRectBezelStyle = NSBezelStyleRoundRect;
-static const NSBezelStyle NSRecessedBezelStyle = NSBezelStyleRecessed;
-static const NSBezelStyle NSRoundedDisclosureBezelStyle = NSBezelStyleRoundedDisclosure;
-static const NSBezelStyle NSInlineBezelStyle = NSBezelStyleInline;
+static const NSBezelStyle NSRoundedBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleRounded", 10_0, 10_14) = NSBezelStyleRounded;
+static const NSBezelStyle NSRegularSquareBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleRegularSquare", 10_0, 10_14) = NSBezelStyleRegularSquare;
+static const NSBezelStyle NSDisclosureBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleDisclosure", 10_0, 10_14) = NSBezelStyleDisclosure;
+static const NSBezelStyle NSShadowlessSquareBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleShadowlessSquare", 10_0, 10_14) = NSBezelStyleShadowlessSquare;
+static const NSBezelStyle NSCircularBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleCircular", 10_0, 10_14) = NSBezelStyleCircular;
+static const NSBezelStyle NSTexturedSquareBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleTexturedSquare", 10_0, 10_14) = NSBezelStyleTexturedSquare;
+static const NSBezelStyle NSHelpButtonBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleHelpButton", 10_0, 10_14) = NSBezelStyleHelpButton;
+static const NSBezelStyle NSSmallSquareBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleSmallSquare", 10_0, 10_14) = NSBezelStyleSmallSquare;
+static const NSBezelStyle NSTexturedRoundedBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleTexturedRounded", 10_0, 10_14) = NSBezelStyleTexturedRounded;
+static const NSBezelStyle NSRoundRectBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleRoundRect", 10_0, 10_14) = NSBezelStyleRoundRect;
+static const NSBezelStyle NSRecessedBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleRecessed", 10_0, 10_14) = NSBezelStyleRecessed;
+static const NSBezelStyle NSRoundedDisclosureBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleRoundedDisclosure", 10_0, 10_14) = NSBezelStyleRoundedDisclosure;
+static const NSBezelStyle NSInlineBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleInline", 10_0, 10_14) = NSBezelStyleInline;
 
 static const NSBezelStyle NSSmallIconButtonBezelStyle NS_ENUM_DEPRECATED_MAC(10_0, 10_0, "This bezel style is obsolete and should not be used.") = (NSBezelStyle)2;
-static const NSBezelStyle NSThickSquareBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleRegularSquare", 10.0, 10.12) = (NSBezelStyle)3;
-static const NSBezelStyle NSThickerSquareBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleRegularSquare", 10.0, 10.12) = (NSBezelStyle)4;
+static const NSBezelStyle NSThickSquareBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleRegularSquare", 10_0, 10_12) = (NSBezelStyle)3;
+static const NSBezelStyle NSThickerSquareBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleRegularSquare", 10_0, 10_12) = (NSBezelStyle)4;
 
 @interface NSButtonCell(NSDeprecated)
 

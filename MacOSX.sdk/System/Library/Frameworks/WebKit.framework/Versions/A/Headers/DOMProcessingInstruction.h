@@ -28,8 +28,8 @@
 @class DOMStyleSheet;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMProcessingInstruction : DOMCharacterData
 @property (readonly, copy) NSString *target;
-@property (readonly, strong) DOMStyleSheet *sheet NS_AVAILABLE_MAC(10_4);
+@property (readonly, strong) DOMStyleSheet *sheet WEBKIT_AVAILABLE_MAC(10_4);
 @end

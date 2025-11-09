@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 77AEDF0F-355D-3D5F-BB97-6389FFE17519' ]
+uuids:           [ 'x86_64: 0A92AD27-3AD3-3B4C-9852-32FC13C3D437' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/ExternalAccessory.framework/ExternalAccessory
 objc-constraint: none
@@ -61,14 +61,15 @@ exports:
                        _EAVehicleInfoModelKey, _EAVehicleInfoOutsideTemperatureKey, 
                        _EAVehicleInfoRangeCNGKey, _EAVehicleInfoRangeDieselKey, _EAVehicleInfoRangeElectricKey, 
                        _EAVehicleInfoRangeGasolineKey, _EAVehicleInfoRangeKey, _EAVehicleInfoSiriNameKey, 
-                       _EAVehicleInfoYearKey, _GetEAAccesoryManager, _kCFAccessoryPortA2DPIn, 
-                       _kCFAccessoryPortA2DPOut, _kCFAccessoryPortDisplayPort, _kCFAccessoryPortHFP, 
-                       _kCFAccessoryPortLineIn, _kCFAccessoryPortLineOut, _kCFAccessoryPortPropertyAudioLatencyInSeconds, 
-                       _kCFAccessoryPortPropertyAutoPlayOnConnect, _kCFAccessoryPortPropertyCurrentSampleRate, 
-                       _kCFAccessoryPortPropertyFullDuplexIsSupported, _kCFAccessoryPortPropertyIsActive, 
-                       _kCFAccessoryPortPropertyIsConnected, _kCFAccessoryPortPropertyIsVoiceSignalProcessingSupported, 
+                       _EAVehicleInfoYearKey, _GetEAAccesoryManager, _kCFAccessoryDestinationSharingOptionsKey, 
+                       _kCFAccessoryPortA2DPIn, _kCFAccessoryPortA2DPOut, _kCFAccessoryPortDisplayPort, 
+                       _kCFAccessoryPortHFP, _kCFAccessoryPortLineIn, _kCFAccessoryPortLineOut, 
+                       _kCFAccessoryPortPropertyAudioLatencyInSeconds, _kCFAccessoryPortPropertyAutoPlayOnConnect, 
+                       _kCFAccessoryPortPropertyCurrentSampleRate, _kCFAccessoryPortPropertyFullDuplexIsSupported, 
+                       _kCFAccessoryPortPropertyIsActive, _kCFAccessoryPortPropertyIsConnected, 
+                       _kCFAccessoryPortPropertyIsVoiceSignalProcessingSupported, 
                        _kCFAccessoryPortPropertySupportedSampleRatesInHz, _kCFAccessoryPortPropertyVolumeControlIsSupported, 
                        _kCFAccessoryPortPropertyVolumeScalar, _kCFAccessoryPortUSBIn, 
                        _kCFAccessoryPortUSBOut ]
-    objc-classes:    [ _EAAccessory, _EAAccessoryManager, _EASession ]
+    objc-classes:    [ EAAccessory, EAAccessoryManager, EASession ]
 ...

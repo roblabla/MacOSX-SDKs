@@ -147,7 +147,7 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 
 // Toggle displaying or not displaying page breaks (spacing) between pages. This spacing value
 // is defined by the pageBreakMargins property. If displaysPageBreaks is NO, then pageBreakMargins
-// will always return { 0.0, 0.0, 0.0, 0.0 }
+// will always return { 0.0, 0.0, 0.0, 0.0 }. Default is YES.
 @property (nonatomic) BOOL displaysPageBreaks;
 
 // If displaysPageBreaks is enabled, you may customize the spacing between pages by defining margins for
@@ -170,6 +170,9 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 
 // Allows setting the interpolation quality for images drawn into the PDFView context. 
 @property (nonatomic) PDFInterpolationQuality interpolationQuality PDFKIT_AVAILABLE(10_7, 11_0);
+
+// Specifies if shadows should be drawn around page borders in a PDFView. Defaults to YES.
+@property (nonatomic, setter=enablePageShadows:) BOOL pageShadowsEnabled PDFKIT_AVAILABLE(10_14, 12_0);
 
 
 // -------- delegate

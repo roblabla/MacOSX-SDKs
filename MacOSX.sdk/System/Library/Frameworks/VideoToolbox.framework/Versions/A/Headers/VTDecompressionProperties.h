@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
  
-    Copyright 2007-2013 Apple Inc. All rights reserved.
+	Copyright © 2007-2018 Apple Inc. All rights reserved.
   
 	Standard Video Toolbox decompression properties.
 */
@@ -201,7 +201,21 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_UsingHardwareAccelerated
 		realtime playback.  Setting the property to NULL is equivalent to setting it to kCFBooleanTrue.
 */
 VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_RealTime API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2)); // Read/write, CFBoolean or NULL, Optional, default is true
-	
+
+/*!
+	@constant	kVTDecompressionPropertyKey_MaximizePowerEfficiency
+	@abstract
+ 		Hints to the video decoder that it should maximize power efficiency during decoding.
+	@discussion
+		For decompression where the client is operating in the background, clients may set this property to kCFBooleanTrue, which indicates that
+		the decoder can take steps to minimize impact on power usage and other system activity.
+		Setting the property to NULL is equivalent to setting it to kCFBooleanFalse.
+ 		Setting both kVTDecompressionPropertyKey_MaximizePowerEfficiency and kVTDecompressionPropertyKey_RealTime is unsupported and results in undefined behavior.
+ 		Not all video decoders may support this property
+		By default, this property is NULL.
+ */
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MaximizePowerEfficiency API_AVAILABLE(macos(10.14), ios(8.0), tvos(10.2)); // Read/write, CFBoolean or NULL, Optional, default is false
+
 /*!
 	@constant	kVTDecompressionPropertyKey_ThreadCount
 	@abstract
@@ -315,7 +329,6 @@ VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_KeyFrames A
 */
 VT_EXPORT const CFStringRef kVTDecompressionProperty_TemporalLevelLimit API_AVAILABLE(macosx(10.13), ios(11.0), tvos(10.4)); // Read/write, CFNumber
 	
-
 /*!
 	@constant	kVTDecompressionPropertyKey_SuggestedQualityOfServiceTiers
 	@abstract
@@ -376,6 +389,34 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelFormatsWithReducedR
 		This property value is a CFDictionary containing properties from VTPixelTransferProperties.h.
 */
 VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelTransferProperties API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/Write, CFDictionary containing properties from VTPixelTransferProperties.h.
+
+/*!
+	@constant	kVTVideoDecoderSpecification_RequiredDecoderGPURegistryID
+	@abstract
+		If set, the VideoToolbox will only use a hardware decoder running on the GPU specified by the provided GPU registryID.
+	@discussion
+		This specification implies kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder.  A separate hardware decode opt-in is not required.
+		The GPU registryID can be obtained from a MTLDevice using [MTLDevice registryID] or can be obtained from OpenGL or OpenCL.
+		This option can only be used to specify a GPU registryID corresponding to a removable GPU (eGPU).
+		If 0 is specified for the required GPU registryID, the VideoToolbox will not utilize removable GPUs for decode.
+*/
+VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_RequiredDecoderGPURegistryID API_AVAILABLE(macosx(10.13)); // CFNumber, Optional
+
+/*!
+	@constant	kVTVideoDecoderSpecification_PreferredDecoderGPURegistryID
+	@abstract
+		If set, the VideoToolbox will try to use a hardware decoder running on the GPU specified by the provided GPU registryID.  If the
+		GPU does not support decode of the specified format, the VideoToolbox will fall back to alternate decoders.
+	@discussion
+		This specification implies kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder.  A separate hardware decode opt-in is not required.
+		If both kVTVideoDecoderSpecification_PreferredDecoderGPURegistryID and kVTVideoDecoderSpecification_RequiredDecoderGPURegistryID are
+		set, kVTVideoDecoderSpecification_PreferredDecoderGPURegistryID will be ignored.
+		This specification can be used in conjunction with kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder to prevent a fallback
+		to software decode.
+		The GPU registryID can be obtained from a MTLDevice using [MTLDevice registryID] or can be obtained from OpenGL or OpenCL.
+		This option can only be used to specify a GPU registryID corresponding to a removable GPU (eGPU).
+*/
+VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_PreferredDecoderGPURegistryID API_AVAILABLE(macosx(10.13)); // CFNumber, Optional
 
 	
 CM_ASSUME_NONNULL_END

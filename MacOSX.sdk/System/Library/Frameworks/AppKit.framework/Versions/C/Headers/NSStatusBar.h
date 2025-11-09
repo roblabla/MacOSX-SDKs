@@ -1,12 +1,13 @@
 /*
         NSStatusBar.h
         Application Kit
-        Copyright (c) 1997-2017, Apple Inc.
+        Copyright (c) 1997-2018, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,10 +22,10 @@ static const CGFloat NSSquareStatusItemLength = -2.0;
 @interface NSStatusBar : NSObject
 {
  @private
-    id             _items;
-    void           *_fReserved1;
-    void           *_fReserved2 __unused;
-    NSInteger      _registeredForNote;
+    id             _items APPKIT_IVAR;
+    void           *_fReserved1 APPKIT_IVAR;
+    void           *_fReserved2 __unused APPKIT_IVAR;
+    NSInteger      _registeredForNote APPKIT_IVAR;
 }
 
 @property (class, readonly, strong) NSStatusBar *systemStatusBar;

@@ -1,7 +1,7 @@
 /*
  NSSharingService.h
  Application Kit
- Copyright (c) 2011-2017, Apple Inc.
+ Copyright (c) 2011-2018, Apple Inc.
  All rights reserved.
  */
 
@@ -21,29 +21,32 @@ NS_ASSUME_NONNULL_BEGIN
 /* NSSharing can be used to share items to different kinds of local and remote services. Items are objects which respond to the NSPasteboardWriting protocol, like NSURL, NSImage or NSString. If an NSURL is a file URL (point to a video for example), then the content of the file will be shared. If the URL is remote, then the URL itself will be shared. 
  */
 
-typedef NSString * NSSharingServiceName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSSharingServiceName NS_TYPED_EXTENSIBLE_ENUM;
 
 /* built-in sharing services
  */
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnFacebook NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnTwitter NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnSinaWeibo NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnTencentWeibo NS_AVAILABLE_MAC(10_9);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnLinkedIn NS_AVAILABLE_MAC(10_9);
 APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameComposeEmail NS_AVAILABLE_MAC(10_8);
 APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameComposeMessage NS_AVAILABLE_MAC(10_8);
 APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameSendViaAirDrop NS_AVAILABLE_MAC(10_8);
 APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameAddToSafariReadingList NS_AVAILABLE_MAC(10_8);
 APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameAddToIPhoto NS_AVAILABLE_MAC(10_8);
 APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameAddToAperture NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsTwitterProfileImage NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsFacebookProfileImage NS_AVAILABLE_MAC(10_9);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsLinkedInProfileImage NS_AVAILABLE_MAC(10_9);
 APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsDesktopPicture NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostImageOnFlickr NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostVideoOnVimeo NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostVideoOnYouku NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostVideoOnTudou NS_AVAILABLE_MAC(10_8);
+
+/* Formerly built-in sharing services. Deprecated as of 10.14
+ */
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnFacebook NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnTwitter NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnSinaWeibo NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnTencentWeibo NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnLinkedIn NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsTwitterProfileImage NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsFacebookProfileImage NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsLinkedInProfileImage NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostImageOnFlickr NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostVideoOnVimeo NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostVideoOnYouku NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostVideoOnTudou NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
 
 /* This service differs from other NSSharingServices in that it allows the user to establishes a persistent sharing session for the specified items with potentially many participants, instead of sending a copy of the items. You can invoke this service with an NSItemProvider that has registered a CKShare & CKContainer via either -registerCloudKitShare:container: or -registerCloudKitShareWithPreparationHandler:. (Registering other types on the same provider to enable other sharing services is allowed.)
  
@@ -57,7 +60,7 @@ APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameCloudSharing NS_AVA
 NS_CLASS_AVAILABLE(10_8, NA)
 @interface NSSharingService : NSObject {
 @private
-    id _reserved;
+    id _reserved APPKIT_IVAR;
 }
 @property (nullable, weak) id <NSSharingServiceDelegate> delegate;
 @property (readonly, copy) NSString *title;
@@ -216,7 +219,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @interface NSSharingServicePicker : NSObject 
 {
 @private
-    id _reserved;
+    id _reserved APPKIT_IVAR;
 }
 
 @property (nullable, weak) id <NSSharingServicePickerDelegate> delegate;

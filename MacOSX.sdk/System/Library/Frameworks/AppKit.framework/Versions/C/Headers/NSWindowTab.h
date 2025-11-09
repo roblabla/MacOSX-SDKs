@@ -1,11 +1,12 @@
 /*
     NSWindowTab.h
     Application Kit
-    Copyright (c) 2016-2017, Apple Inc.
+    Copyright (c) 2016-2018, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,16 +17,16 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_13)
 @interface NSWindowTab : NSObject {
 @private
-    NSString *_title;
-    NSAttributedString *_attributedTitle;
-    NSString *_toolTip;
-    NSImage *_image;
-    NSView *_accessoryView;
-    NSTabBarItem *_tabBarItem;
-    __weak NSWindow *_window;
-    
+    NSString *_title APPKIT_IVAR;
+    NSAttributedString *_attributedTitle APPKIT_IVAR;
+    NSString *_toolTip APPKIT_IVAR;
+    NSImage *_image APPKIT_IVAR;
+    NSView *_accessoryView APPKIT_IVAR;
+    NSTabBarItem *_tabBarItem APPKIT_IVAR;
+    __weak NSWindow *_window APPKIT_IVAR;
+
 #if !__OBJC2__
-    void *_extraReserved[2] __unused;
+    void *_extraReserved[2] __unused APPKIT_IVAR;
 #endif
 }
 

@@ -1,7 +1,7 @@
 /*
 	NSFont.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -23,9 +23,9 @@ APPKIT_EXTERN const CGFloat * NSFontIdentityMatrix;
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSFont : NSObject <NSCopying, NSSecureCoding> {
     /* All instance variables are private */
-    NSString *_name;
-    CGFloat _size;
-    NSInteger _retainCount;
+    NSString *_name APPKIT_IVAR;
+    CGFloat _size APPKIT_IVAR;
+    NSInteger _retainCount APPKIT_IVAR;
     struct __fFlags {
         unsigned int _isScreenFont:1;
         unsigned int _systemFontType:8;
@@ -35,8 +35,8 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
         unsigned int _inInstanceCache:1;
         unsigned int _appearanceSize:1;
         unsigned int _reserved2:13;
-    } _fFlags;
-    id _private;
+    } _fFlags APPKIT_IVAR;
+    id _private APPKIT_IVAR;
 }
 
 /********* Factory *********/

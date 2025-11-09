@@ -31,9 +31,9 @@
 @class DOMNode;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMHTMLSelectElement : DOMHTMLElement
-@property BOOL autofocus NS_AVAILABLE_MAC(10_6);
+@property BOOL autofocus WEBKIT_AVAILABLE_MAC(10_6);
 @property BOOL disabled;
 @property (readonly, strong) DOMHTMLFormElement *form;
 @property BOOL multiple;
@@ -44,14 +44,14 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (readonly) int length;
 @property int selectedIndex;
 @property (copy) NSString *value;
-@property (readonly) BOOL willValidate NS_AVAILABLE_MAC(10_6);
+@property (readonly) BOOL willValidate WEBKIT_AVAILABLE_MAC(10_6);
 
-- (DOMNode *)item:(unsigned)index NS_AVAILABLE_MAC(10_6);
-- (DOMNode *)namedItem:(NSString *)name NS_AVAILABLE_MAC(10_6);
-- (void)add:(DOMHTMLElement *)element before:(DOMHTMLElement *)before NS_AVAILABLE_MAC(10_5);
+- (DOMNode *)item:(unsigned)index WEBKIT_AVAILABLE_MAC(10_6);
+- (DOMNode *)namedItem:(NSString *)name WEBKIT_AVAILABLE_MAC(10_6);
+- (void)add:(DOMHTMLElement *)element before:(DOMHTMLElement *)before WEBKIT_AVAILABLE_MAC(10_5);
 - (void)remove:(int)index;
 @end
 
 @interface DOMHTMLSelectElement (DOMHTMLSelectElementDeprecated)
-- (void)add:(DOMHTMLElement *)element :(DOMHTMLElement *)before NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)add:(DOMHTMLElement *)element :(DOMHTMLElement *)before WEBKIT_DEPRECATED_MAC(10_4, 10_5);
 @end

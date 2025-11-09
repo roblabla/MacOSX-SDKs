@@ -1,7 +1,7 @@
 /*
         NSTextContainer.h
         Application Kit
-        Copyright (c) 1994-2017, Apple Inc.
+        Copyright (c) 1994-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -19,10 +19,10 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextContainer : NSObject <NSCoding, N
     /*All instance variables are private*/
     
 @private
-    NSLayoutManager *_layoutManager;
-    NSTextView *_textView;
-    NSSize _size;
-    CGFloat _lineFragmentPadding;
+    NSLayoutManager *_layoutManager APPKIT_IVAR;
+    NSTextView *_textView APPKIT_IVAR;
+    NSSize _size APPKIT_IVAR;
+    CGFloat _lineFragmentPadding APPKIT_IVAR;
     struct __tcFlags {
         unsigned short widthTracksTextView:1;
         unsigned short heightTracksTextView:1;
@@ -30,7 +30,7 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextContainer : NSObject <NSCoding, N
         unsigned short lineBreakMode:4;
         unsigned short oldAPI:1;
         unsigned short _reserved:8;
-    } _tcFlags;
+    } _tcFlags APPKIT_IVAR;
 }
 
 /**************************** Initialization ****************************/

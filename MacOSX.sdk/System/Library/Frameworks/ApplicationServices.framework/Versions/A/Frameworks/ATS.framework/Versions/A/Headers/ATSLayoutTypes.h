@@ -5,7 +5,7 @@
  
      Version:    ATS
  
-     Copyright:  © 1994-2012 by Apple Inc., all rights reserved.
+     Copyright:  (c)) 1994-2018 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -605,8 +605,10 @@ typedef STACK_UPP_TYPE(ATSUDirectLayoutOperationOverrideProcPtr)  ATSUDirectLayo
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
+#if !__LP64__
 extern ATSUDirectLayoutOperationOverrideUPP
 NewATSUDirectLayoutOperationOverrideUPP(ATSUDirectLayoutOperationOverrideProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+#endif // !__LP64
 
 /*
  *  DisposeATSUDirectLayoutOperationOverrideUPP()
@@ -616,9 +618,11 @@ NewATSUDirectLayoutOperationOverrideUPP(ATSUDirectLayoutOperationOverrideProcPtr
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
+#if !__LP64__
 extern void
 DisposeATSUDirectLayoutOperationOverrideUPP(ATSUDirectLayoutOperationOverrideUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
-
+#endif // !__LP64
+	
 /*
  *  InvokeATSUDirectLayoutOperationOverrideUPP()
  *  
@@ -627,6 +631,7 @@ DisposeATSUDirectLayoutOperationOverrideUPP(ATSUDirectLayoutOperationOverrideUPP
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
+#if !__LP64__
 extern OSStatus
 InvokeATSUDirectLayoutOperationOverrideUPP(
   ATSULayoutOperationSelector           iCurrentOperation,
@@ -635,6 +640,7 @@ InvokeATSUDirectLayoutOperationOverrideUPP(
   void *                                iOperationCallbackParameterPtr,
   ATSULayoutOperationCallbackStatus *   oCallbackStatus,
   ATSUDirectLayoutOperationOverrideUPP  userUPP)              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+#endif // !__LP64
 
 #if __MACH__
   #ifdef __cplusplus

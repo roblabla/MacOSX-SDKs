@@ -155,6 +155,10 @@ extern SInt32 IOServiceOrdering( const OSMetaClassBase * inObj1, const OSMetaCla
 typedef void (*IOInterruptAction)( OSObject * target, void * refCon,
                    IOService * nub, int source );
 
+#ifdef __BLOCKS__
+typedef void (^IOInterruptActionBlock)(IOService * nub, int source);
+#endif /* __BLOCKS__ */
+
 /*! @typedef IOServiceNotificationHandler
     @param target Reference supplied when the notification was registered.
     @param refCon Reference constant supplied when the notification was registered.
@@ -167,6 +171,12 @@ typedef bool (*IOServiceMatchingNotificationHandler)( void * target, void * refC
                                   IOService * newService,
                                   IONotifier * notifier );
 
+#ifdef __BLOCKS__
+typedef bool (^IOServiceMatchingNotificationHandlerBlock)(IOService * newService,
+                                  IONotifier * notifier );
+#endif /* __BLOCKS__ */
+
+
 /*! @typedef IOServiceInterestHandler
     @param target Reference supplied when the notification was registered.
     @param refCon Reference constant supplied when the notification was registered.
@@ -178,6 +188,11 @@ typedef bool (*IOServiceMatchingNotificationHandler)( void * target, void * refC
 typedef IOReturn (*IOServiceInterestHandler)( void * target, void * refCon,
                                               UInt32 messageType, IOService * provider,
                                               void * messageArgument, vm_size_t argSize );
+
+#ifdef __BLOCKS__
+typedef IOReturn (^IOServiceInterestHandlerBlock)( uint32_t messageType, IOService * provider,
+                                                   void   * messageArgument, size_t argSize );
+#endif /* __BLOCKS__ */
 
 typedef void (*IOServiceApplierFunction)(IOService * service, void * context);
 typedef void (*OSObjectApplierFunction)(OSObject * object, void * context);
@@ -319,7 +334,9 @@ protected:
 
 /*! @var reserved
     Reserved for future use.  (Internal use only)  */
+    APPLE_KEXT_WSHADOW_PUSH;
     ExpansionData * reserved;
+    APPLE_KEXT_WSHADOW_POP;
 
 private:
     IOService *     __provider;
@@ -769,6 +786,14 @@ public:
                             void * target, void * ref = 0,
                             SInt32 priority = 0 );
 
+
+#ifdef __BLOCKS__
+    static IONotifier * addMatchingNotification(
+                            const OSSymbol * type, OSDictionary * matching,
+                            SInt32 priority,
+                            IOServiceMatchingNotificationHandlerBlock handler);
+#endif /* __BLOCKS__ */
+
 /*! @function waitForService
     @abstract Deprecated use waitForMatchingService(). Waits for a matching to service to be published.
     @discussion Provides a method of waiting for an IOService object matching the supplied matching dictionary to be registered and fully matched. 
@@ -1108,6 +1133,19 @@ public:
     virtual IOReturn registerInterrupt(int source, OSObject *target,
                                        IOInterruptAction handler,
                                        void *refCon = 0);
+
+#ifdef __BLOCKS__
+/*! @function registerInterrupt
+    @abstract Registers a block handler for a device supplying interrupts.
+    @discussion This method installs a C function interrupt handler to be called at primary interrupt time for a device's interrupt. Only one handler may be installed per interrupt source. IOInterruptEventSource provides a work loop based abstraction for interrupt delivery that may be more appropriate for work loop based drivers.
+    @param source The index of the interrupt source in the device.
+    @param target An object instance to be passed to the interrupt handler.
+    @param handler The block to be invoked at primary interrupt time when the interrupt occurs. The handler should process the interrupt by clearing the interrupt, or by disabling the source.
+    @result An IOReturn code.<br><code>kIOReturnNoInterrupt</code> is returned if the source is not valid; <code>kIOReturnNoResources</code> is returned if the interrupt already has an installed handler. */
+
+	IOReturn registerInterruptBlock(int source, OSObject *target,
+				      IOInterruptActionBlock handler);
+#endif /* __BLOCKS__ */
                                        
 /*! @function unregisterInterrupt
     @abstract Removes a C function interrupt handler for a device supplying hardware interrupts.
@@ -1209,6 +1247,11 @@ public:
     virtual IONotifier * registerInterest( const OSSymbol * typeOfInterest,
                                            IOServiceInterestHandler handler,
                                            void * target, void * ref = 0 );
+
+#ifdef __BLOCKS__
+    IONotifier * registerInterest(const OSSymbol * typeOfInterest,
+                                  IOServiceInterestHandlerBlock handler);
+#endif /* __BLOCKS__ */
 
     virtual void applyToProviders( IOServiceApplierFunction applier,
                                    void * context );
@@ -1355,7 +1398,9 @@ private:
     bool terminatePhase1( IOOptionBits options = 0 );
     void scheduleTerminatePhase2( IOOptionBits options = 0 );
     void scheduleStop( IOService * provider );
-    static void terminateThread( void * arg, wait_result_t unused );
+
+    static void waitToBecomeTerminateThread( void );
+    static void __attribute__((__noreturn__)) terminateThread( void * arg, wait_result_t unused );
     static void terminateWorker( IOOptionBits options );
     static void actionWillTerminate( IOService * victim, IOOptionBits options, 
                                      OSArray * doPhase2List, void*, void * );

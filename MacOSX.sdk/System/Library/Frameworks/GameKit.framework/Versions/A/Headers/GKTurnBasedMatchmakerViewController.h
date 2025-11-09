@@ -2,7 +2,7 @@
 //  GKTurnBasedMatchmakerViewController.h
 //  Game Center
 //
-//  Copyright 2010-2017 Apple Inc. All rights reserved.
+//  Copyright 2010-2018 Apple Inc. All rights reserved.
 //
 
 @protocol GKTurnBasedMatchmakerViewControllerDelegate;
@@ -13,6 +13,10 @@
 
 // View controller to manage turn-based matches, invite friends and perform auto-matching. Present modally from the top view controller.
 #if TARGET_OS_IPHONE
+
+#import <Foundation/Foundation.h> // NS_ASSUME_NONNULL_BEGIN
+#import <UIKit/UINavigationController.h> // UINavigationController
+
 NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface GKTurnBasedMatchmakerViewController : UINavigationController

@@ -35,7 +35,7 @@ enum {
 
 
 
-#if !TARGET_OS_IPHONE
+#if TARGET_OS_OSX
 typedef struct LSLaunchFSRefSpec {
   const FSRef *       appRef;                 /* app to use, can be NULL*/
   ItemCount           numDocs;                /* items to open/print, can be zero*/

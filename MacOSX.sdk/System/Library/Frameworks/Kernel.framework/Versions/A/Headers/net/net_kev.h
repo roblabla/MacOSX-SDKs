@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+ * Copyright (c) 2016-2018 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -81,6 +81,7 @@
 #define	KEV_DL_AWDL_UNRESTRICTED                27
 #define	KEV_DL_RRC_STATE_CHANGED                28
 #define	KEV_DL_QOS_MODE_CHANGED			29
+#define	KEV_DL_LOW_POWER_MODE_CHANGED		30
 
 
 #define	KEV_INET6_SUBCLASS      6       /* inet6 subclass */

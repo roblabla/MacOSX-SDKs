@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MTLCommandQueue;
 @protocol MTLDrawable;
 @protocol MTLCommandBuffer;
+@protocol MTLEvent;
 
 @class MTLRenderPassDescriptor;
 
@@ -51,13 +52,13 @@ typedef NS_ENUM(NSUInteger, MTLCommandBufferStatus) {
     MTLCommandBufferStatusScheduled = 3,
     MTLCommandBufferStatusCompleted = 4,
     MTLCommandBufferStatusError = 5,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
  /*!
  @constant MTLCommandBufferErrorDomain
  @abstract An error domain for NSError objects produced by MTLCommandBuffer
  */
-NS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0))
 MTL_EXTERN NSString *const MTLCommandBufferErrorDomain;
 
 /*!
@@ -102,17 +103,34 @@ typedef NS_ENUM(NSUInteger, MTLCommandBufferError)
     MTLCommandBufferErrorNotPermitted = 7,
     MTLCommandBufferErrorOutOfMemory = 8,
     MTLCommandBufferErrorInvalidResource = 9,
-    MTLCommandBufferErrorMemoryless NS_AVAILABLE_IOS(10_0) = 10,
-    MTLCommandBufferErrorDeviceRemoved NS_AVAILABLE_MAC(10_13) = 11,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+    MTLCommandBufferErrorMemoryless API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) = 10,
+    MTLCommandBufferErrorDeviceRemoved API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios) = 11,
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 typedef void (^MTLCommandBufferHandler)(id <MTLCommandBuffer>);
+
+/*!
+ @enum MTLDispatchType
+ 
+ @abstract MTLDispatchType Describes how a command encoder will execute dispatched work.
+ 
+ @constant MTLDispatchTypeSerial
+ Command encoder dispatches are executed in dispatched order.
+ 
+ @constant MTLDispatchTypeConcurrent
+ Command encoder dispatches are executed in parallel with each other. 
+*/
+
+typedef NS_ENUM(NSUInteger, MTLDispatchType){
+    MTLDispatchTypeSerial,
+    MTLDispatchTypeConcurrent,
+}API_AVAILABLE(macos(10.14), ios(12.0));
 
 /*!
  @protocol MTLCommandBuffer
  @abstract A serial list of commands for the device to execute.
  */
-NS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0))
 @protocol MTLCommandBuffer <NSObject>
 
 /*!
@@ -139,19 +157,19 @@ NS_AVAILABLE(10_11, 8_0)
  */
 @property (nullable, copy, atomic) NSString *label;
 
-@property (readonly) CFTimeInterval kernelStartTime NS_AVAILABLE_IOS(10_3);
-@property (readonly) CFTimeInterval kernelEndTime NS_AVAILABLE_IOS(10_3);
+@property (readonly) CFTimeInterval kernelStartTime API_AVAILABLE(ios(10.3)) API_UNAVAILABLE(macos);
+@property (readonly) CFTimeInterval kernelEndTime API_AVAILABLE(ios(10.3)) API_UNAVAILABLE(macos);
 
 /*!
  @property GPUStartTime
- @abstract The host time in seconds that GPU starts exeucting this command buffer. Returns zero if it has not started. This usually can be called in command buffer completion handler.
+ @abstract The host time in seconds that GPU starts executing this command buffer. Returns zero if it has not started. This usually can be called in command buffer completion handler.
  */
-@property (readonly) CFTimeInterval GPUStartTime NS_AVAILABLE_IOS(10_3);
+@property (readonly) CFTimeInterval GPUStartTime API_AVAILABLE(ios(10.3)) API_UNAVAILABLE(macos);
 /*!
  @property GPUEndTime
- @abstract The host time in seconds that GPU finishes exeucting this command buffer. Returns zero if CPU has not received completion notification. This usually can be called in command buffer completion handler.
+ @abstract The host time in seconds that GPU finishes executing this command buffer. Returns zero if CPU has not received completion notification. This usually can be called in command buffer completion handler.
  */
-@property (readonly) CFTimeInterval GPUEndTime NS_AVAILABLE_IOS(10_3);
+@property (readonly) CFTimeInterval GPUEndTime API_AVAILABLE(ios(10.3)) API_UNAVAILABLE(macos);
 
 /*!
  @method enqueue
@@ -233,6 +251,27 @@ NS_AVAILABLE(10_11, 8_0)
  @abstract returns a compute command encoder to encode into this command buffer.
  */
 - (nullable id <MTLComputeCommandEncoder>)computeCommandEncoder;
+/*! 
+ @method computeCommandEncoderWithDispatchType
+ @abstract returns a compute command encoder to encode into this command buffer. Optionally allow this command encoder to execute dispatches concurrently.
+ @discussion On devices that do not support concurrent command encoders, this call is equivalent to computeCommandEncoder
+ */
+
+ - (nullable id<MTLComputeCommandEncoder>)computeCommandEncoderWithDispatchType:(MTLDispatchType) dispatchType API_AVAILABLE(macos(10.14), ios(12.0));
+
+/*!
+ @method encodeWaitForEvent:value:
+ @abstract Encodes a command that pauses execution of this command buffer until the specified event reaches a given value.
+ @discussion This method may only be called if there is no current command encoder on the receiver.
+*/
+- (void)encodeWaitForEvent:(id <MTLEvent>)event value:(uint64_t)value API_AVAILABLE(macos(10.14), ios(12.0));
+
+/*!
+ @method encodeSignalEvent:value:
+ @abstract Encodes a command that signals an event with a given value.
+ @discussion This method may only be called if there is no current command encoder on the receiver.
+ */
+- (void)encodeSignalEvent:(id <MTLEvent>)event value:(uint64_t)value API_AVAILABLE(macos(10.14), ios(12.0));
 
 /*!
  @method parallelRenderCommandEncoderWithDescriptor:
@@ -245,13 +284,13 @@ NS_AVAILABLE(10_11, 8_0)
  @method pushDebugGroup:
  @abstract Push a new named string onto a stack of string labels.
  */
-- (void)pushDebugGroup:(NSString *)string NS_AVAILABLE(10_13, 11_0);
+- (void)pushDebugGroup:(NSString *)string API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  @method popDebugGroup
  @abstract Pop the latest named string off of the stack.
  */
-- (void)popDebugGroup NS_AVAILABLE(10_13, 11_0);
+- (void)popDebugGroup API_AVAILABLE(macos(10.13), ios(11.0));
 
 
 @end

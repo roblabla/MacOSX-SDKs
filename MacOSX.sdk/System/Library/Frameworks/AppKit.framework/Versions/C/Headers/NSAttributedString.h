@@ -1,12 +1,13 @@
 /*
         NSAttributedString.h
-        Copyright (c) 1994-2017, Apple Inc.
+        Copyright (c) 1994-2018, Apple Inc.
         All rights reserved.
  
         This file defines Application Kit extensions to NSAttributedString and NSMutableAttributedString.
 */
 
 #import <Foundation/NSAttributedString.h>
+#import <Foundation/NSItemProvider.h>
 #import <AppKit/NSFontManager.h>
 #import <AppKit/NSText.h>
 #import <AppKit/NSPasteboard.h>
@@ -51,7 +52,7 @@ APPKIT_EXTERN NSAttributedStringKey NSMarkedClauseSegmentAttributeName; // Claus
 
 APPKIT_EXTERN NSAttributedStringKey NSTextAlternativesAttributeName NS_AVAILABLE_MAC(10_8); // An NSTextAlternatives object.  Used primarily as a temporary attribute, with primaryString equal to the substring for the range to which it is attached, and alternativeStrings representing alternatives for that string that may be presented to the user.
 
-APPKIT_EXTERN NSAttributedStringKey NSSpellingStateAttributeName;  // NSSpellingStateAttributeName is used and recognized only as a temporary attribute (see NSLayoutManager.h).  It indicates that spelling and/or grammar indicators should be shown for the specified characters, default 0: no spelling or grammar indicat
+APPKIT_EXTERN NSAttributedStringKey NSSpellingStateAttributeName;  // NSSpellingStateAttributeName is used and recognized only as a temporary attribute (see NSLayoutManager.h).  It indicates that spelling and/or grammar indicators should be shown for the specified characters, default 0: no spelling or grammar indicator
 
 
 APPKIT_EXTERN NSAttributedStringKey NSSuperscriptAttributeName; // NSNumber containing integer, default 0
@@ -59,20 +60,21 @@ APPKIT_EXTERN NSAttributedStringKey NSGlyphInfoAttributeName;  // NSGlyphInfo sp
 
 
 /************************ Attribute values ************************/
-// This defines currently supported values for NSUnderlineStyleAttributeName and NSStrikethroughStyleAttributeName. NSUnderlineStyle*, NSUnderlinePattern*, and NSUnderlineByWord are or'ed together to produce an underline style.
-typedef NS_ENUM(NSInteger, NSUnderlineStyle) {
+// This defines currently supported values for NSUnderlineStyleAttributeName and NSStrikethroughStyleAttributeName. These values are or'ed together to produce an underline style.
+// Underlines will be drawn with a solid pattern by default, so NSUnderlineStylePatternSolid does not need to be specified.
+typedef NS_OPTIONS(NSInteger, NSUnderlineStyle) {
     NSUnderlineStyleNone                                    = 0x00,
     NSUnderlineStyleSingle                                  = 0x01,
     NSUnderlineStyleThick NS_ENUM_AVAILABLE(10_0, 7_0)      = 0x02,
     NSUnderlineStyleDouble NS_ENUM_AVAILABLE(10_0, 7_0)     = 0x09,
 
-    NSUnderlinePatternSolid NS_ENUM_AVAILABLE(10_0, 7_0)      = 0x0000,
-    NSUnderlinePatternDot NS_ENUM_AVAILABLE(10_0, 7_0)        = 0x0100,
-    NSUnderlinePatternDash NS_ENUM_AVAILABLE(10_0, 7_0)       = 0x0200,
-    NSUnderlinePatternDashDot NS_ENUM_AVAILABLE(10_0, 7_0)    = 0x0300,
-    NSUnderlinePatternDashDotDot NS_ENUM_AVAILABLE(10_0, 7_0) = 0x0400,
+    NSUnderlineStylePatternSolid NS_ENUM_AVAILABLE(10_0, 7_0)      = 0x0000,
+    NSUnderlineStylePatternDot NS_ENUM_AVAILABLE(10_0, 7_0)        = 0x0100,
+    NSUnderlineStylePatternDash NS_ENUM_AVAILABLE(10_0, 7_0)       = 0x0200,
+    NSUnderlineStylePatternDashDot NS_ENUM_AVAILABLE(10_0, 7_0)    = 0x0300,
+    NSUnderlineStylePatternDashDotDot NS_ENUM_AVAILABLE(10_0, 7_0) = 0x0400,
 
-    NSUnderlineByWord NS_ENUM_AVAILABLE(10_0, 7_0)            = 0x8000
+    NSUnderlineStyleByWord NS_ENUM_AVAILABLE(10_0, 7_0)            = 0x8000
 } NS_ENUM_AVAILABLE(10_0, 6_0);
 
 // NSWritingDirectionFormatType values used by NSWritingDirectionAttributeName. It is or'ed with either NSWritingDirectionLeftToRight or NSWritingDirectionRightToLeft. Can specify the formatting controls defined by Unicode Bidirectional Algorithm.
@@ -82,7 +84,7 @@ typedef NS_ENUM(NSInteger, NSWritingDirectionFormatType) {
 } NS_ENUM_AVAILABLE(10_11, 9_0);
 
 // NSTextEffectAttributeName values
-typedef NSString * NSTextEffectStyle NS_STRING_ENUM;
+typedef NSString * NSTextEffectStyle NS_TYPED_ENUM;
 APPKIT_EXTERN NSTextEffectStyle const NSTextEffectLetterpressStyle NS_AVAILABLE(10_10, 7_0);
 
 // Flag values supported for NSSpellingStateAttributeName as of Mac OS X version 10.5.  Prior to 10.5, any non-zero value caused the spelling indicator to be shown.
@@ -105,7 +107,7 @@ typedef NS_ENUM(NSInteger, NSSpellingState) {
 
 /************************ Document formats ************************/
 
-typedef NSString * NSAttributedStringDocumentType NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSAttributedStringDocumentType NS_TYPED_EXTENSIBLE_ENUM;
 
 // Supported document types for the NSDocumentTypeDocumentAttribute key in the document attributes dictionary.
 APPKIT_EXTERN NSAttributedStringDocumentType  NSPlainTextDocumentType NS_AVAILABLE(10_0, 7_0);
@@ -119,13 +121,13 @@ APPKIT_EXTERN NSAttributedStringDocumentType NSWebArchiveTextDocumentType;
 APPKIT_EXTERN NSAttributedStringDocumentType NSOfficeOpenXMLTextDocumentType NS_AVAILABLE_MAC(10_5);
 APPKIT_EXTERN NSAttributedStringDocumentType NSOpenDocumentTextDocumentType NS_AVAILABLE_MAC(10_5);
 
-typedef NSString * NSTextLayoutSectionKey NS_STRING_ENUM;
+typedef NSString * NSTextLayoutSectionKey NS_TYPED_ENUM;
 
 // Keys for NSLayoutOrientationSectionsAttribute.
 APPKIT_EXTERN NSTextLayoutSectionKey  NSTextLayoutSectionOrientation NS_AVAILABLE(10_7, 7_0); // NSNumber containing NSTextLayoutOrientation value. default: NSTextLayoutOrientationHorizontal
 APPKIT_EXTERN NSTextLayoutSectionKey  NSTextLayoutSectionRange NS_AVAILABLE(10_7, 7_0); // NSValue containing NSRange representing a character range. default: a range covering the whole document
 
-typedef NSString * NSAttributedStringDocumentAttributeKey NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSAttributedStringDocumentAttributeKey NS_TYPED_EXTENSIBLE_ENUM;
 
 // Keys for options and document attributes dictionaries.  They are in and out document properties used by both read/write methods.
 
@@ -147,6 +149,7 @@ APPKIT_EXTERN NSAttributedStringDocumentAttributeKey NSCreationTimeDocumentAttri
 APPKIT_EXTERN NSAttributedStringDocumentAttributeKey NSModificationTimeDocumentAttribute;  // NSDate containing the modification date of the document contents
 APPKIT_EXTERN NSAttributedStringDocumentAttributeKey NSManagerDocumentAttribute NS_AVAILABLE_MAC(10_5);  // NSString containing name of the author's manager
 APPKIT_EXTERN NSAttributedStringDocumentAttributeKey NSCategoryDocumentAttribute NS_AVAILABLE_MAC(10_6);  // NSString containing the document category
+APPKIT_EXTERN NSAttributedStringDocumentAttributeKey NSAppearanceDocumentAttribute NS_AVAILABLE_MAC(10_14); // NSAppearance used to evaluate named NSColors when saving. The appearance itself is not written out; it is just used to determine the generated color component values. If not specified the canonical default light appearance is used.
 
 // NSPlainTextDocumentType document attributes
 APPKIT_EXTERN NSAttributedStringDocumentAttributeKey  NSCharacterEncodingDocumentAttribute NS_AVAILABLE(10_0, 7_0);  // @"CharacterEncoding", NSNumber containing integer specifying NSStringEncoding for the file; default for plain text is the default encoding.  This key in options can specify the string encoding for reading the data.  Upon return, the document attributes can contain the actual encoding used.  For writing methods, this value is used for generating the plain text data.
@@ -182,11 +185,11 @@ APPKIT_EXTERN NSAttributedStringDocumentAttributeKey NSPrefixSpacesDocumentAttri
 
 // The following are keys for various options that can be specified in the options dictionaries for the text import APIs below.  Except for NSTextSizeMultiplierDocumentOption and NSFileTypeDocumentOption, the values have been recognized for some time, but the actual identifier shown below was added in 10.4. If you want your app to run on earlier systems, you need to continue using the actual string value that these identifiers represent. The actual string value is specified in the comments below.
 
-typedef NSString * NSAttributedStringDocumentReadingOptionKey NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSAttributedStringDocumentReadingOptionKey NS_TYPED_EXTENSIBLE_ENUM;
 
-APPKIT_EXTERN NSAttributedStringDocumentReadingOptionKey NSDocumentTypeDocumentOption;  // @"DocumentType", NSString indicating a document type to be forced when loading the document, specified as one of the NSDocumentTypeDocumentAttribute constants listed above
-APPKIT_EXTERN NSAttributedStringDocumentReadingOptionKey NSDefaultAttributesDocumentOption;  // @"DefaultAttributes", for plain text only; NSDictionary containing attributes to be applied to plain files
-APPKIT_EXTERN NSAttributedStringDocumentReadingOptionKey NSCharacterEncodingDocumentOption;  // @"CharacterEncoding", for plain text and HTML; NSNumber containing integer specifying NSStringEncoding to be used to interpret the file
+APPKIT_EXTERN NSAttributedStringDocumentReadingOptionKey  NSDocumentTypeDocumentOption;  // @"DocumentType", NSString indicating a document type to be forced when loading the document, specified as one of the NSDocumentTypeDocumentAttribute constants listed above
+APPKIT_EXTERN NSAttributedStringDocumentReadingOptionKey  NSDefaultAttributesDocumentOption;  // @"DefaultAttributes", for plain text only; NSDictionary containing attributes to be applied to plain files
+APPKIT_EXTERN NSAttributedStringDocumentReadingOptionKey  NSCharacterEncodingDocumentOption;  // @"CharacterEncoding", for plain text and HTML; NSNumber containing integer specifying NSStringEncoding to be used to interpret the file
 
 APPKIT_EXTERN NSAttributedStringDocumentReadingOptionKey NSTextEncodingNameDocumentOption;  // @"TextEncodingName", for HTML only; NSString containing a name, IANA or otherwise, specifying an encoding to be used to interpret the file; mutually exclusive with NSCharacterEncodingDocumentOption
 APPKIT_EXTERN NSAttributedStringDocumentReadingOptionKey NSBaseURLDocumentOption;  // @"BaseURL", for HTML only; NSURL containing a URL to be treated as the base URL for the document
@@ -272,6 +275,15 @@ APPKIT_EXTERN NSAttributedStringDocumentReadingOptionKey NSFileTypeDocumentOptio
 @end
 
 /************************ Deprecated ************************/
+// NSUnderlineByWord and the NSUnderlinePattern* values are soft deprecated starting with macOS 10.14/iOS 12 and will be officially deprecated in a future release.  Please use the NSUnderlineStyle* equivalents instead.
+// Underlines will be drawn with a solid pattern by default, so NSUnderlinePatternSolid does not need to be specified.
+static const NSUnderlineStyle NSUnderlinePatternSolid = NSUnderlineStylePatternSolid;
+static const NSUnderlineStyle NSUnderlinePatternDot = NSUnderlineStylePatternDot;
+static const NSUnderlineStyle NSUnderlinePatternDash = NSUnderlineStylePatternDash;
+static const NSUnderlineStyle NSUnderlinePatternDashDot = NSUnderlineStylePatternDashDot;
+static const NSUnderlineStyle NSUnderlinePatternDashDotDot = NSUnderlineStylePatternDashDotDot;
+static const NSUnderlineStyle NSUnderlineByWord = NSUnderlineStyleByWord;
+
 APPKIT_EXTERN NSAttributedStringKey NSCharacterShapeAttributeName NS_DEPRECATED_MAC(10_0, 10_11, "This attribute is bound to a specific implementation of ATS feature and not generically supported by wide range of fonts. The majority of characters accessed through this API are now encoded in the Unicode standard. Use the CTFont feature API for fine control over character shape choices.");
 APPKIT_EXTERN NSAttributedStringKey NSUsesScreenFontsDocumentAttribute NS_DEPRECATED_MAC(10_8, 10_11);
 

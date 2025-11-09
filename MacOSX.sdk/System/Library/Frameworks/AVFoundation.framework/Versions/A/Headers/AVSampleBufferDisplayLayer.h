@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotification API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED; // decode failed, see NSError in notification payload
 AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED; // NSError
 
-API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED
 @interface AVSampleBufferDisplayLayer : CALayer
 {
 @private
@@ -74,14 +74,14 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED
 		
 					This property is key value observable.
  */
-@property (nonatomic, readonly) AVQueuedSampleBufferRenderingStatus status;
+@property (nonatomic, readonly) AVQueuedSampleBufferRenderingStatus status API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED;
 
 /*!
 	@property		error
 	@abstract		If the display layer's status is AVQueuedSampleBufferRenderingStatusFailed, this describes the error that caused the failure.
 	@discussion		The value of this property is an NSError that describes what caused the display layer to no longer be able to enqueue sample buffers. If the status is not AVQueuedSampleBufferRenderingStatusFailed, the value of this property is nil.
  */
-@property (nonatomic, readonly, nullable) NSError *error;
+@property (nonatomic, readonly, nullable) NSError *error API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED;
 
 /*!
 	@method			enqueueSampleBuffer:

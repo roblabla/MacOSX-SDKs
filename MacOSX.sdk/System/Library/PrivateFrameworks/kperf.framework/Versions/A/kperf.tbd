@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 1C9BFC5D-9A0C-3F78-9759-224568578DFC', 'x86_64: EF90B7FF-5695-3302-BE14-13701685343B' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 2D6EDDA6-4D44-31EF-84CE-14A6F50A135E' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/kperf.framework/Versions/A/kperf
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _kpc_counterbuf_alloc, _kpc_counterbuf_free, _kpc_cpu_string, 
                        _kpc_force_all_ctrs_get, _kpc_force_all_ctrs_set, _kpc_get_actionid, 
                        _kpc_get_config, _kpc_get_config_count, _kpc_get_counter_count, 
@@ -34,16 +34,19 @@ exports:
                        _kperf_kdebug_filter_create, _kperf_kdebug_filter_create_desc, 
                        _kperf_kdebug_filter_destroy, _kperf_kdebug_filter_get, _kperf_kdebug_filter_get_filter, 
                        _kperf_kdebug_filter_get_n_filters, _kperf_kdebug_filter_set, 
-                       _kperf_kern_is_64bit, _kperf_logging_flush, _kperf_logging_query_size, 
-                       _kperf_logging_set_kdebug, _kperf_logging_set_size, _kperf_logging_set_typefilter, 
-                       _kperf_logging_set_wrap, _kperf_logging_start, _kperf_logging_stop, 
-                       _kperf_ns_to_ticks, _kperf_reset, _kperf_sample_get, _kperf_sample_off, 
-                       _kperf_sample_on, _kperf_sample_set, _kperf_signpost_action_get, 
-                       _kperf_signpost_action_set, _kperf_tick_frequency, _kperf_ticks_to_ns, 
-                       _kperf_timer_action_get, _kperf_timer_action_set, _kperf_timer_count_get, 
-                       _kperf_timer_count_set, _kperf_timer_period_get, _kperf_timer_period_set, 
-                       _kperf_timer_pet_get, _kperf_timer_pet_set, _kperf_typefilter_clear, 
-                       _kperf_typefilter_disable_class, _kperf_typefilter_disable_subclass, 
-                       _kperf_typefilter_enable_class, _kperf_typefilter_enable_subclass, 
-                       _kperf_typefilter_invert ]
+                       _kperf_kern_is_64bit, _kperf_lazy_cpu_action_get, _kperf_lazy_cpu_action_set, 
+                       _kperf_lazy_cpu_time_threshold_get, _kperf_lazy_cpu_time_threshold_set, 
+                       _kperf_lazy_wait_action_get, _kperf_lazy_wait_action_set, 
+                       _kperf_lazy_wait_time_threshold_get, _kperf_lazy_wait_time_threshold_set, 
+                       _kperf_logging_flush, _kperf_logging_query_size, _kperf_logging_set_kdebug, 
+                       _kperf_logging_set_size, _kperf_logging_set_typefilter, _kperf_logging_set_wrap, 
+                       _kperf_logging_start, _kperf_logging_stop, _kperf_ns_to_ticks, 
+                       _kperf_reset, _kperf_sample_get, _kperf_sample_off, _kperf_sample_on, 
+                       _kperf_sample_set, _kperf_signpost_action_get, _kperf_signpost_action_set, 
+                       _kperf_tick_frequency, _kperf_ticks_to_ns, _kperf_timer_action_get, 
+                       _kperf_timer_action_set, _kperf_timer_count_get, _kperf_timer_count_set, 
+                       _kperf_timer_period_get, _kperf_timer_period_set, _kperf_timer_pet_get, 
+                       _kperf_timer_pet_set, _kperf_typefilter_clear, _kperf_typefilter_disable_class, 
+                       _kperf_typefilter_disable_subclass, _kperf_typefilter_enable_class, 
+                       _kperf_typefilter_enable_subclass, _kperf_typefilter_invert ]
 ...

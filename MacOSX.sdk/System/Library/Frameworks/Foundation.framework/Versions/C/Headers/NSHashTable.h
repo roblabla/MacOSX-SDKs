@@ -1,5 +1,5 @@
 /*	NSHashTable.h
-	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPointerFunctions.h>
@@ -18,9 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 */
 
 static const NSPointerFunctionsOptions NSHashTableStrongMemory API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = NSPointerFunctionsStrongMemory;
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
 static const NSPointerFunctionsOptions NSHashTableZeroingWeakMemory API_DEPRECATED("GC no longer supported", macos(10.5,10.8)) API_UNAVAILABLE(ios, watchos, tvos) = NSPointerFunctionsZeroingWeakMemory;
-#endif
 static const NSPointerFunctionsOptions NSHashTableCopyIn API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = NSPointerFunctionsCopyIn;
 static const NSPointerFunctionsOptions NSHashTableObjectPointerPersonality API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = NSPointerFunctionsObjectPointerPersonality;
 static const NSPointerFunctionsOptions NSHashTableWeakMemory API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0)) = NSPointerFunctionsWeakMemory;
@@ -28,7 +26,7 @@ static const NSPointerFunctionsOptions NSHashTableWeakMemory API_AVAILABLE(macos
 typedef NSUInteger NSHashTableOptions;
 
 NS_CLASS_AVAILABLE(10_5, 6_0)
-@interface NSHashTable<ObjectType> : NSObject <NSCopying, NSCoding, NSFastEnumeration>
+@interface NSHashTable<ObjectType> : NSObject <NSCopying, NSSecureCoding, NSFastEnumeration>
 
 - (instancetype)initWithOptions:(NSPointerFunctionsOptions)options capacity:(NSUInteger)initialCapacity NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithPointerFunctions:(NSPointerFunctions *)functions capacity:(NSUInteger)initialCapacity NS_DESIGNATED_INITIALIZER;
@@ -37,9 +35,7 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 
 + (NSHashTable<ObjectType> *)hashTableWithOptions:(NSPointerFunctionsOptions)options;
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
 + (id)hashTableWithWeakObjects API_DEPRECATED("GC no longer supported", macos(10.5,10.8)) API_UNAVAILABLE(ios, watchos, tvos);  // GC zeroing, otherwise unsafe unretained
-#endif
 
 + (NSHashTable<ObjectType> *)weakObjectsHashTable API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0)); // entries are not necessarily purged right away when the weak object is reclaimed
 
@@ -72,13 +68,6 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 @property (readonly, copy) NSSet<ObjectType> *setRepresentation;  // create a set of the contents
 
 @end
-
-NS_ASSUME_NONNULL_END
-
-
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
-
-NS_ASSUME_NONNULL_BEGIN
 
 /****************	(void *) Hash table operations	****************/
 
@@ -125,16 +114,4 @@ FOUNDATION_EXPORT const NSHashTableCallBacks NSPointerToStructHashCallBacks;
 FOUNDATION_EXPORT const NSHashTableCallBacks NSIntHashCallBacks API_DEPRECATED("Not supported", macos(10.0,10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 NS_ASSUME_NONNULL_END
-
-#else
-
-#if defined(__has_include)
-#if __has_include(<Foundation/NSHashTablePriv.h>)
-#include <Foundation/NSHashTablePriv.h>
-#endif
-#endif
-
-#endif
-
-#endif
-
+#endif // defined __FOUNDATION_NSHASHTABLE__

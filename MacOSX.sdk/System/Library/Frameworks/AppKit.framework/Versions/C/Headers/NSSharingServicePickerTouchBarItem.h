@@ -1,7 +1,7 @@
 /*
     NSSharingServicePickerTouchBarItem.h
     Application Kit
-    Copyright (c) 2016-2017, Apple Inc.
+    Copyright (c) 2016-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -17,13 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSSharingServicePickerTouchBarItem : NSTouchBarItem {
 @private
-    __kindof NSPopoverTouchBarItem *_internalPopoverItem;
-    __weak NSTouchBarSharingServicePickerViewController *_pickerViewController;
-    NSString *_customizationLabel;
-    __weak id<NSSharingServicePickerTouchBarItemDelegate> _delegate;
+    __kindof NSPopoverTouchBarItem *_internalPopoverItem APPKIT_IVAR;
+    __weak NSTouchBarSharingServicePickerViewController *_pickerViewController APPKIT_IVAR;
+    NSString *_customizationLabel APPKIT_IVAR;
+    __weak id<NSSharingServicePickerTouchBarItemDelegate> _delegate APPKIT_IVAR;
 
 #if !__OBJC2__
-    void *_sharingServicePickerTouchBarItemReserved[4] __unused;
+    void *_sharingServicePickerTouchBarItemReserved[4] __unused APPKIT_IVAR;
 #endif
 }
 

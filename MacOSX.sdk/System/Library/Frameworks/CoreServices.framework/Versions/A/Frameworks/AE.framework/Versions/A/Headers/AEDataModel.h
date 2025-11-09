@@ -422,7 +422,7 @@ enum {
   kAEDontRecord                 = 0x00001000, /* don't record this event - available only in vers 1.0.1 and greater */
   kAEDontExecute                = 0x00002000, /* don't send the event for recording - available only in vers 1.0.1 and greater */
   kAEProcessNonReplyEvents      = 0x00008000, /* allow processing of non-reply events while awaiting synchronous AppleEvent reply */
-  kAEDoNotAutomaticallyAddAnnotationsToEvent = 0x00010000 /* if set, don't automatically add any sandbox or other annotations to the event */
+  kAEDoNotAutomaticallyAddAnnotationsToEvent = 0x00010000, /* if set, don't automatically add any sandbox or other annotations to the event */
 };
 
 

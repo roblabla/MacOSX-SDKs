@@ -1,7 +1,7 @@
 /*
 	Copyright:	(c) 2003-2008 by Apple, Inc., all rights reserved.
 */
-
+#import <QuartzComposer/QuartzComposerDefines.h>
 #import <Foundation/Foundation.h>
 
 /* HIGH-LEVEL NOTES:
@@ -35,8 +35,8 @@ extern NSString* const QCCompositionCategoryUtility;
 extern NSString* const QCCompositionInputImageKey; //Image port
 extern NSString* const QCCompositionInputSourceImageKey; //Image port
 extern NSString* const QCCompositionInputDestinationImageKey; //Image port
-extern NSString* const QCCompositionInputRSSFeedURLKey; //String port (must be passed a http or feed scheme URL)
-extern NSString* const QCCompositionInputRSSArticleDurationKey; //Number port (expressed in seconds)
+extern NSString* const QCCompositionInputRSSFeedURLKey QC_GL_DEPRECATED(10_5, 10_14); //String port (must be passed a http or feed scheme URL)
+extern NSString* const QCCompositionInputRSSArticleDurationKey QC_GL_DEPRECATED(10_5, 10_14); //Number port (expressed in seconds)
 extern NSString* const QCCompositionInputPreviewModeKey; //Boolean port
 extern NSString* const QCCompositionInputXKey; //Number port (normalized to the image width with the origin on the left)
 extern NSString* const QCCompositionInputYKey; //Number port (normalized to the image height with the origin at the bottom)
@@ -97,7 +97,7 @@ extern NSString* const QCCompositionProtocolScreenSaver;
 - QCCompositionInputRSSFeedURLKey: RSS Feed URL
 - QCCompositionInputRSSArticleDurationKey (optional): The display duration of each feed article
 */
-extern NSString* const QCCompositionProtocolRSSVisualizer;
+extern NSString* const QCCompositionProtocolRSSVisualizer QC_GL_DEPRECATED(10_5, 10_14);
 
 /* Composition music visualizer protocol (the composition acts as a visualizer for music):
 - QCCompositionInputAudioPeakKey: the instantaneous audio peak

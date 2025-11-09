@@ -1,7 +1,7 @@
 /*
         NSSound.h
 	Application Kit
-	Copyright (c) 1997-2017, Apple Inc.
+	Copyright (c) 1997-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -18,16 +18,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 APPKIT_EXTERN NSPasteboardType const NSSoundPboardType;
 
-typedef NSString * NSSoundName NS_EXTENSIBLE_STRING_ENUM;
-typedef NSString * NSSoundPlaybackDeviceIdentifier NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSSoundName NS_SWIFT_BRIDGED_TYPEDEF;
+typedef NSString * NSSoundPlaybackDeviceIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 
-@interface NSSound : NSObject <NSCopying, NSCoding, NSPasteboardReading, NSPasteboardWriting>
+@interface NSSound : NSObject <NSCopying, NSSecureCoding, NSPasteboardReading, NSPasteboardWriting>
 {
 @private
-    __weak id<NSSoundDelegate> _delegate;
-    id _info;
-    id _reserved[6];
-    uint32_t _sFlags;
+    __weak id<NSSoundDelegate> _delegate APPKIT_IVAR;
+    id _info APPKIT_IVAR;
+    id _reserved[6] APPKIT_IVAR;
+    uint32_t _sFlags APPKIT_IVAR;
 }
 
 /* If this finds & creates the sound, only name is saved when archived.
@@ -100,7 +100,7 @@ typedef NSString * NSSoundPlaybackDeviceIdentifier NS_EXTENSIBLE_STRING_ENUM;
 
 @interface NSSound (NSDeprecated)
 
-/* Methods that were deprecated in Mac OS 10.5. You can now use +soundUnfilteredTypes to get an array of Uniform Type Identifiers (UTIs).
+/* You can now use +soundUnfilteredTypes to get an array of Uniform Type Identifiers (UTIs).
 */
 + (null_unspecified NSArray *)soundUnfilteredFileTypes NS_DEPRECATED_MAC(10_0, 10_5);
 + (null_unspecified NSArray *)soundUnfilteredPasteboardTypes NS_DEPRECATED_MAC(10_0, 10_5);

@@ -1,7 +1,7 @@
 /*
 	NSControl.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -17,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSControl : NSView
 {
     /*All instance variables are private*/
-    NSControlAuxiliary *_aux;
-    id		_cell;
+    NSControlAuxiliary *_aux APPKIT_IVAR;
+    id		_cell APPKIT_IVAR;
     struct __conFlags {
         unsigned int enabled:1;
         unsigned int ignoreMultiClick:1;
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int hsmlwidth:1;
         unsigned int dontValidate:1;
         unsigned int reserved:22;
-    } _conFlags;
+    } _conFlags APPKIT_IVAR;
 }
 
 @property (nullable, weak) id target; // Target is weak for zeroing-weak compatible objects in apps linked on 10.10 or later. Otherwise the behavior of this property is 'assign’.
@@ -122,15 +122,20 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+#if __swift__ < 40200
 @interface NSObject(NSControlSubclassNotifications)
-- (void)controlTextDidBeginEditing:(NSNotification *)obj;
-- (void)controlTextDidEndEditing:(NSNotification *)obj;
-- (void)controlTextDidChange:(NSNotification *)obj;
+- (void)controlTextDidBeginEditing:(NSNotification *)obj NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now an optional method of the NSControlTextEditingDelegate protocol.");
+- (void)controlTextDidEndEditing:(NSNotification *)obj NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now an optional method of the NSControlTextEditingDelegate protocol.");
+- (void)controlTextDidChange:(NSNotification *)obj NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now an optional method of the NSControlTextEditingDelegate protocol.");
 @end
-
+#endif
 
 @protocol NSControlTextEditingDelegate <NSObject>
 @optional
+
+- (void)controlTextDidBeginEditing:(NSNotification *)obj;
+- (void)controlTextDidEndEditing:(NSNotification *)obj;
+- (void)controlTextDidChange:(NSNotification *)obj;
 
 // These delegate and notification methods are sent from NSControl subclasses that allow text editing such as NSTextField and NSMatrix.  The classes that need to send these have delegates.  NSControl does not.
 - (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor;
@@ -161,8 +166,8 @@ APPKIT_EXTERN NSNotificationName NSControlTextDidChangeNotification;		//	@"NSFie
 - (nullable __kindof NSCell *)selectedCell;
 - (NSInteger)selectedTag;
 
-- (void)setNeedsDisplay;    // Use setNeedsDisplay:YES instead.
-- (void)calcSize;
+- (void)setNeedsDisplay NS_DEPRECATED_MAC(10_0, 10_14, "Use setNeedsDisplay:YES instead");
+- (void)calcSize NS_DEPRECATED_MAC(10_0, 10_14, "Override -layout instead. This method should never be called");
 
 - (void)updateCell:(NSCell *)cell;
 - (void)updateCellInside:(NSCell *)cell;

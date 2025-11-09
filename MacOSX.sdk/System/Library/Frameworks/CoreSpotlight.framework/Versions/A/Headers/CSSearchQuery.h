@@ -9,18 +9,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-CORESPOTLIGHT_EXPORT NSString * const CSSearchQueryErrorDomain CS_AVAILABLE(10_12, 10_0) CS_TVOS_UNAVAILABLE;
+CORESPOTLIGHT_EXPORT NSString * const CSSearchQueryErrorDomain API_AVAILABLE(macos(10.12), ios(10.0)) CS_TVOS_UNAVAILABLE;
 
 typedef NS_ENUM(NSInteger, CSSearchQueryErrorCode) {
     CSSearchQueryErrorCodeUnknown = -2000,
     CSSearchQueryErrorCodeIndexUnreachable = -2001,
     CSSearchQueryErrorCodeInvalidQuery = -2002,
     CSSearchQueryErrorCodeCancelled = -2003,
-} CS_AVAILABLE(10_12, 10_0) CS_TVOS_UNAVAILABLE;
+} API_AVAILABLE(macos(10.12), ios(10.0)) CS_TVOS_UNAVAILABLE;
 
 @class CSSearchableItem;
 
-CS_CLASS_AVAILABLE(10_12, 10_0) CS_TVOS_UNAVAILABLE
+API_AVAILABLE(macos(10.12), ios(10.0)) CS_TVOS_UNAVAILABLE
 @interface CSSearchQuery : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

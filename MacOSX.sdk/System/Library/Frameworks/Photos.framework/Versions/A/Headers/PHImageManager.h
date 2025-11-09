@@ -61,7 +61,7 @@ extern NSString *const PHImageResultIsInCloudKey NS_AVAILABLE(10_13, 8_0); // ke
 extern NSString *const PHImageResultIsDegradedKey NS_AVAILABLE(10_13, 8_0); // key (NSNumber): result  is a degraded image (only with async requests), meaning other images will be sent unless the request is cancelled in the meanwhile (note that the other request may fail if, for example, data is not available locally and networkAccessAllowed was not specified)
 extern NSString *const PHImageResultRequestIDKey NS_AVAILABLE(10_13, 8_0); // key (NSNumber): Request ID of the request for this result
 extern NSString *const PHImageCancelledKey NS_AVAILABLE(10_13, 8_0); // key (NSNumber): result is not available because the request was cancelled
-extern NSString *const PHImageErrorKey NS_AVAILABLE(10_13, 8_0); // key (NSError): NSFileManager or iCloud Photo Library errors
+extern NSString *const PHImageErrorKey NS_AVAILABLE(10_13, 8_0); // key (NSError): NSFileManager or iCloud Photos errors
 
 
 NS_CLASS_AVAILABLE(10_13, 8_0) @interface PHImageManager : NSObject

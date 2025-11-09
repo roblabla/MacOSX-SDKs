@@ -1,10 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 6702DA64-1A56-347C-81F7-8E0D582448E1', 'x86_64: BC4ED13E-FD74-3EC8-9E1C-EEF247465F59' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: CCAC9774-C4BF-33C1-AC87-F2AEB972632F' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/OpenCL.framework/Versions/A/OpenCL
+objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _clBuildProgram, _clCompileProgram, _clCreateBuffer, _clCreateCommandQueue, 
                        _clCreateCommandQueueWithPropertiesAPPLE, _clCreateContext, 
                        _clCreateContextAndCommandQueueAPPLE, _clCreateContextFromType, 
@@ -46,18 +47,18 @@ exports:
                        _clSetKernelArgsVaListAPPLE, _clSetMemObjectDestructorAPPLE, 
                        _clSetMemObjectDestructorCallback, _clSetUserEventStatus, 
                        _clUnloadCompiler, _clUnloadPlatformCompiler, _clWaitForEvents, 
-                       _gclBuildProgramBinaryAPPLE, _gclCreateArgsAPPLE, _gclDeleteArgsAPPLE, 
-                       _gclExecKernelAPPLE, _gclRegisterBlockKernelMap, _gclReleaseSampler, 
-                       _gclSetKernelArgAPPLE, _gclSetKernelArgMemAPPLE, _gclSetKernelArgSamplerAPPLE, 
-                       _gcl_copy_image, _gcl_copy_image_to_ptr, _gcl_copy_ptr_to_image, 
-                       _gcl_create_buffer_from_ptr, _gcl_create_dispatch_queue, _gcl_create_image, 
-                       _gcl_create_kernel_from_block, _gcl_free, _gcl_get_context, 
-                       _gcl_get_device_id_with_dispatch_queue, _gcl_get_kernel_block_workgroup_info, 
-                       _gcl_get_supported_image_formats, _gcl_gl_create_image_from_renderbuffer, 
-                       _gcl_gl_create_image_from_texture, _gcl_gl_create_ptr_from_buffer, 
-                       _gcl_gl_set_sharegroup, _gcl_log_cl_error, _gcl_log_cl_fatal, 
-                       _gcl_log_error, _gcl_log_fatal, _gcl_log_warning, _gcl_malloc, 
-                       _gcl_map_image, _gcl_map_ptr, _gcl_memcpy, _gcl_memcpy_rect, 
+                       _gclBuildProgramAPPLE, _gclBuildProgramBinaryAPPLE, _gclCreateArgsAPPLE, 
+                       _gclDeleteArgsAPPLE, _gclExecKernelAPPLE, _gclRegisterBlockKernelMap, 
+                       _gclReleaseSampler, _gclSetKernelArgAPPLE, _gclSetKernelArgMemAPPLE, 
+                       _gclSetKernelArgSamplerAPPLE, _gcl_copy_image, _gcl_copy_image_to_ptr, 
+                       _gcl_copy_ptr_to_image, _gcl_create_buffer_from_ptr, _gcl_create_dispatch_queue, 
+                       _gcl_create_image, _gcl_create_kernel_from_block, _gcl_free, 
+                       _gcl_get_context, _gcl_get_device_id_with_dispatch_queue, 
+                       _gcl_get_kernel_block_workgroup_info, _gcl_get_supported_image_formats, 
+                       _gcl_gl_create_image_from_renderbuffer, _gcl_gl_create_image_from_texture, 
+                       _gcl_gl_create_ptr_from_buffer, _gcl_gl_set_sharegroup, _gcl_log_cl_error, 
+                       _gcl_log_cl_fatal, _gcl_log_error, _gcl_log_fatal, _gcl_log_warning, 
+                       _gcl_malloc, _gcl_map_image, _gcl_map_ptr, _gcl_memcpy, _gcl_memcpy_rect, 
                        _gcl_release_image, _gcl_retain_image, _gcl_set_finalizer, 
                        _gcl_start_timer, _gcl_stop_timer, _gcl_unmap ]
 ...

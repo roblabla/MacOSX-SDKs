@@ -1,5 +1,5 @@
 /*      NSCache.h
-        Copyright (c) 2008-2017, Apple Inc. All rights reserved.
+        Copyright (c) 2008-2018, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>

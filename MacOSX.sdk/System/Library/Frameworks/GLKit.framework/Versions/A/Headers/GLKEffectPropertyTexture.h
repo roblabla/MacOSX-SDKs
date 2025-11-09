@@ -4,7 +4,7 @@
 //
 //  Copyright (c) 2011-2012 Apple Inc. All rights reserved.
 //
-
+#import <GLKit/GLKitBase.h>
 #if TARGET_OS_IPHONE
 #import <OpenGLES/ES2/gl.h>
 #else // !TARGET_OS_IPHONE
@@ -35,7 +35,8 @@ typedef NS_ENUM(GLint, GLKTextureEnvMode)
 //
 // GLKEffectPropertyTexture simply contains properties to configure GL texture rendering.
 //
-NS_CLASS_AVAILABLE(10_8, 5_0)
+
+OPENGL_DEPRECATED(10.8,10.14) OPENGLES_DEPRECATED(ios(5.0,12.0), tvos(9.0,12.0))
 @interface GLKEffectPropertyTexture : GLKEffectProperty
 {
     // Texture Enabled

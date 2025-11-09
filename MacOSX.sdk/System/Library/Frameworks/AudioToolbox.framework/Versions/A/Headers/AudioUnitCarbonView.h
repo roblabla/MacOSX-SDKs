@@ -8,6 +8,9 @@
 #ifndef AudioUnit_AudioUnitCarbonView_h
 #define AudioUnit_AudioUnitCarbonView_h
 
+#include <TargetConditionals.h>
+#if TARGET_OS_OSX
+
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <Carbon/Carbon.h>
 	#include <AudioToolbox/AUComponent.h>
@@ -130,7 +133,7 @@ AudioUnitCarbonViewCreate(	  AudioUnitCarbonView   inView,
 							  ControlRef            inParentControl,
 							  const Float32Point *  inLocation,
 							  const Float32Point *  inSize,
-							  ControlRef *          outControl)				__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_11, __IPHONE_NA, __IPHONE_NA);
+							  ControlRef *          outControl)				API_DEPRECATED("no longer supported", macos(10.2, 10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
 	@function	AudioUnitCarbonViewSetEventListener
@@ -149,7 +152,7 @@ extern OSStatus
 AudioUnitCarbonViewSetEventListener(	AudioUnitCarbonView                inView,
 										AudioUnitCarbonViewEventListener   inCallback,
 										void *                             inUserData)
-																			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+																			API_DEPRECATED("no longer supported", macos(10.2, 10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif
 
 /*!
@@ -181,5 +184,6 @@ enum
 }
 #endif
 
-#endif /* AudioUnit_AudioUnitCarbonView_h */
+#endif // TARGET_OS_OSX
 
+#endif /* AudioUnit_AudioUnitCarbonView_h */

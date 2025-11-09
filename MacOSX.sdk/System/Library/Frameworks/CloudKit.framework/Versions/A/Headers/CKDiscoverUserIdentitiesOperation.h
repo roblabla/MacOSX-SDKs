@@ -22,8 +22,10 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 
 @property (nonatomic, copy, nullable) void (^userIdentityDiscoveredBlock)(CKUserIdentity *identity, CKUserIdentityLookupInfo * lookupInfo);
 
-/*  This block is called when the operation completes.
- The [NSOperation completionBlock] will also be called if both are set. */
+/*! @abstract This block is called when the operation completes.
+ *
+ *  @discussion The [NSOperation completionBlock] will also be called if both are set.
+ */
 @property (nonatomic, copy, nullable) void (^discoverUserIdentitiesCompletionBlock)(NSError * _Nullable operationError);
 
 @end

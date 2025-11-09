@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 02DD776F-5785-3C5A-99D8-642182CFB5D9', 'x86_64: 2FCF0916-A115-3066-B99E-9555F1268917' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: DFFC9EE1-71AE-3FB1-B396-91AF7B875993' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/kperfdata.framework/Versions/A/kperfdata
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _kpdecode_cursor_clearchunk, _kpdecode_cursor_create, _kpdecode_cursor_flush, 
                        _kpdecode_cursor_free, _kpdecode_cursor_get_stats, _kpdecode_cursor_next_record, 
                        _kpdecode_cursor_set_option, _kpdecode_cursor_setchunk, _kpdecode_record_free, 

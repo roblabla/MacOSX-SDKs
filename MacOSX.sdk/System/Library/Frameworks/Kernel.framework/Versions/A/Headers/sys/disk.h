@@ -75,6 +75,8 @@
  * DKIOCGETIOMINSATURATIONBYTECOUNT      get minimum byte count to saturate storage bandwidth
  *
  * DKIOCGETERRORDESCRIPTION              get description of any drive error
+ *
+ * DKIOCGETMAXSWAPWRITE                  get maximum swap file write per day in bytes
  */
 
 #define DK_FEATURE_BARRIER                    0x00000002

@@ -2,7 +2,7 @@
 //  GKLeaderboard.h
 //  Game Center
 //
-//  Copyright 2010-2017 Apple Inc. All rights reserved.
+//  Copyright 2010-2018 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, GKLeaderboardPlayerScope) {
 
 @class GKPlayer;
 @class GKScore;
+@class UIImage;
 
 NS_ASSUME_NONNULL_BEGIN
 

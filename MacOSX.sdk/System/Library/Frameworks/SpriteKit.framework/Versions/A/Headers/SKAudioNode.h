@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @see AVAudio3DMixing
  * @see SKScene.listener
  */
-SK_EXPORT NS_AVAILABLE(10_11, 9_0) @interface SKAudioNode : SKNode <NSCoding>
+SK_EXPORT NS_AVAILABLE(10_11, 9_0) @interface SKAudioNode : SKNode <NSSecureCoding>
 
 /**Creates a SpriteKit scene graph audio node from the given AVAudioNode.
  * @see AVAudioNode

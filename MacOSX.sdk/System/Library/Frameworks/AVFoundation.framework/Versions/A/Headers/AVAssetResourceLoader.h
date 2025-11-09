@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2016 Apple Inc. All rights reserved.
+	Copyright 2010-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -148,6 +148,33 @@ AV_INIT_UNAVAILABLE
 @end
 
 /*!
+ 	@class		AVAssetResourceLoadingRequestor
+ 
+ 	@abstract	AVAssetResourceLoadingRequestor represents the originator of loading request
+ 
+ 	@discussion
+		Information about the originator of a loading request, in order to decide whether or how to fulfill the request.
+ */
+
+@class AVAssetResourceLoadingRequestor;
+@class AVAssetResourceLoadingRequestorInternal;
+
+API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0))
+@interface AVAssetResourceLoadingRequestor : NSObject {
+@private
+	AVAssetResourceLoadingRequestorInternal *_requestor;
+}
+AV_INIT_UNAVAILABLE
+
+/*!
+ @property 		providesExpiredSessionReports
+ @abstract		Whether the requestor provides expired session reports (see AVContentKeySession)
+ */
+@property (nonatomic, readonly) BOOL providesExpiredSessionReports;
+
+@end
+
+/*!
 	@class		AVAssetResourceLoadingRequest
  
 	@abstract	AVAssetResourceLoadingRequest encapsulates information about a resource request issued by a resource loader.
@@ -213,6 +240,12 @@ AV_INIT_UNAVAILABLE
 */
 @property (nonatomic, copy, nullable) NSURLRequest *redirect NS_AVAILABLE(10_9, 7_0);
 
+/*!
+ @property 		requestor
+ @abstract		The AVAssetResourceLoadingRequestor that made this request
+ */
+@property (nonatomic, readonly) AVAssetResourceLoadingRequestor *requestor API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
+
 /*! 
  @method 		finishLoading   
  @abstract		Causes the receiver to treat the processing of the request as complete.
@@ -270,6 +303,13 @@ AV_INIT_UNAVAILABLE
  @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to a UTI indicating the type of data contained by the requested resource.
 */
 @property (nonatomic, copy, nullable) NSString *contentType;
+
+/*!
+ @property		allowedContentTypes
+ @abstract		An array showing the types of data which will be accepted as a valid response for the requested resource.
+ @discussion	If allowedContentTypes is nonnil and the contentType property is not in allowedContentTypes, an exception will be raised.
+*/
+@property (nonatomic, readonly, nullable) NSArray <NSString *> *allowedContentTypes API_AVAILABLE(ios(11.2), tvos(11.2), macos(10.13.2), watchos(4.2));
 
 /*! 
  @property 		contentLength
@@ -404,7 +444,7 @@ AV_INIT_UNAVAILABLE
  @constant		AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey
  @abstract		Specifies whether the content key request should require a persistable key to be returned from the key vendor. Value should be a NSNumber created with +[NSNumber numberWithBool:].
 */
-AVF_EXPORT NSString *const AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey NS_AVAILABLE_IOS(9_0);
+AVF_EXPORT NSString *const AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey API_AVAILABLE(ios(9.0), tvos(9.0)) __WATCHOS_PROHIBITED;
 
 @interface AVAssetResourceLoadingRequest (AVAssetResourceLoadingRequestDeprecated)
 

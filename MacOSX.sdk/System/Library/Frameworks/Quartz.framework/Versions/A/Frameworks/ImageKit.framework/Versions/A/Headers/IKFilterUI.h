@@ -41,7 +41,8 @@ This call is overriden by a filter to provide a view for the viewForUIConfigurat
 
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
-#import "IKFilterUIView.h"
+#import <ImageKit/ImageKitBase.h>
+#import <ImageKit/IKFilterUIView.h>
 
 /*!
     @const      IKUISizeFlavor

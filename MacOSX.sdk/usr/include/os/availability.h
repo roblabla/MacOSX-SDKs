@@ -21,24 +21,28 @@
 #ifndef __OS_AVAILABILITY__
 #define __OS_AVAILABILITY__
 
+/* 
+ * API_TO_BE_DEPRECATED is used as a version number in API that will be deprecated 
+ * in an upcoming release. This soft deprecation is an intermediate step before formal 
+ * deprecation to notify developers about the API before compiler warnings are generated.
+ * You can find all places in your code that use soft deprecated API by redefining the 
+ * value of this macro to your current minimum deployment target, for example:
+ * (macOS)
+ *   clang -DAPI_TO_BE_DEPRECATED=10.12 <other compiler flags>
+ * (iOS)
+ *   clang -DAPI_TO_BE_DEPRECATED=11.0 <other compiler flags>
+ */
+ 
+#ifndef API_TO_BE_DEPRECATED
+#define API_TO_BE_DEPRECATED 100000
+#endif
+
 #include <AvailabilityInternal.h>
 
-/*
- Macros for defining which versions/platform a given symbol can be used.
- 
- @see http://clang.llvm.org/docs/AttributeReference.html#availability
 
- * Note that these macros are only compatible with clang compilers that
- * support the following target selection options:
- *
- * -mmacosx-version-min
- * -miphoneos-version-min
- * -mwatchos-version-min
- * -mtvos-version-min
- * -mbridgeos-version-min
- */
 
-#if defined(__has_feature) && defined(__has_attribute) && __has_attribute(availability)
+#if defined(__has_feature) && defined(__has_attribute)
+ #if __has_attribute(availability)
 
     /*
      * API Introductions
@@ -54,7 +58,7 @@
      *    API_AVAILABLE(macos(10.4), ios(8.0), watchos(2.0), tvos(10.0))
      */
 
-    #define API_AVAILABLE(...) __API_AVAILABLE_GET_MACRO(__VA_ARGS__,__API_AVAILABLE5, __API_AVAILABLE4, __API_AVAILABLE3, __API_AVAILABLE2, __API_AVAILABLE1)(__VA_ARGS__)
+    #define API_AVAILABLE(...) __API_AVAILABLE_GET_MACRO(__VA_ARGS__,__API_AVAILABLE6, __API_AVAILABLE5, __API_AVAILABLE4, __API_AVAILABLE3, __API_AVAILABLE2, __API_AVAILABLE1, 0)(__VA_ARGS__)
 
     /*
      * API Deprecations
@@ -73,8 +77,8 @@
      *    API_DEPRECATED_WITH_REPLACEMENT("SomeClassName", macos(10.4, 10.6), watchos(2.0, 3.0))
      */
 
-    #define API_DEPRECATED(...) __API_DEPRECATED_MSG_GET_MACRO(__VA_ARGS__,__API_DEPRECATED_MSG6,__API_DEPRECATED_MSG5,__API_DEPRECATED_MSG4,__API_DEPRECATED_MSG3,__API_DEPRECATED_MSG2,__API_DEPRECATED_MSG1)(__VA_ARGS__)
-    #define API_DEPRECATED_WITH_REPLACEMENT(...) __API_DEPRECATED_REP_GET_MACRO(__VA_ARGS__,__API_DEPRECATED_REP6,__API_DEPRECATED_REP5,__API_DEPRECATED_REP4,__API_DEPRECATED_REP3,__API_DEPRECATED_REP2,__API_DEPRECATED_REP1)(__VA_ARGS__)
+    #define API_DEPRECATED(...) __API_DEPRECATED_MSG_GET_MACRO(__VA_ARGS__,__API_DEPRECATED_MSG7, __API_DEPRECATED_MSG6,__API_DEPRECATED_MSG5,__API_DEPRECATED_MSG4,__API_DEPRECATED_MSG3,__API_DEPRECATED_MSG2,__API_DEPRECATED_MSG1, 0)(__VA_ARGS__)
+    #define API_DEPRECATED_WITH_REPLACEMENT(...) __API_DEPRECATED_REP_GET_MACRO(__VA_ARGS__,__API_DEPRECATED_REP7, __API_DEPRECATED_REP6,__API_DEPRECATED_REP5,__API_DEPRECATED_REP4,__API_DEPRECATED_REP3,__API_DEPRECATED_REP2,__API_DEPRECATED_REP1, 0)(__VA_ARGS__)
 
 
     /*
@@ -86,17 +90,40 @@
      *    API_UNAVAILABLE(watchos, tvos)
      */
 
-    #define API_UNAVAILABLE(...) __API_UNAVAILABLE_GET_MACRO(__VA_ARGS__,__API_UNAVAILABLE4,__API_UNAVAILABLE3,__API_UNAVAILABLE2,__API_UNAVAILABLE1)(__VA_ARGS__)
-#else
+    #define API_UNAVAILABLE(...) __API_UNAVAILABLE_GET_MACRO(__VA_ARGS__,__API_UNAVAILABLE6, __API_UNAVAILABLE5, __API_UNAVAILABLE4,__API_UNAVAILABLE3,__API_UNAVAILABLE2,__API_UNAVAILABLE1, 0)(__VA_ARGS__)
+ #else
 
     /* 
-     * Evaluate to nothing for compilers that don't support clang language extensions.
+     * Evaluate to nothing for compilers that don't support availability.
      */
    
      #define API_AVAILABLE(...)
      #define API_DEPRECATED(...)
      #define API_DEPRECATED_WITH_REPLACEMENT(...)
      #define API_UNAVAILABLE(...)
-#endif /* #if defined(__has_feature) && defined(__has_attribute) && __has_attribute(availability) */
+ #endif /* __has_attribute(availability) */
+#else
+
+    /* 
+     * Evaluate to nothing for compilers that don't support clang language extensions.
+     */
+    
+    #define __API_AVAILABLE(...)
+    #define __API_DEPRECATED(...)
+    #define __API_DEPRECATED_WITH_REPLACEMENT(...)
+    #define __API_UNAVAILABLE(...)
+#endif /* #if defined(__has_feature) && defined(__has_attribute) */
+
+#if __has_include(<AvailabilityProhibitedInternal.h>)
+  #include <AvailabilityProhibitedInternal.h>
+#endif
+
+/*
+ * If SPI_AVAILABLE has not been defined elsewhere, disable it.
+ */
+
+#ifndef SPI_AVAILABLE
+  #define SPI_AVAILABLE(...)
+#endif
 
 #endif /* __OS_AVAILABILITY__ */

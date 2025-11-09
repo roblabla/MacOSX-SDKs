@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract An MDLAsset represents the contents of a model file.
  
  @discussion Each asset contains a collection of hierarchies of objects, where 
-             each object in the asset is the top level of a hierarchy. Objects 
+             each object in the asset is the top level of a hierarchy. Objects
              include transforms, lights, cameras, and meshes.
  
  MDLAssets are typically instantiated from NSURLs that refer to a model resource.
@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLAsset : NSObject <NSCopying, NSFastEnumeration>
 
@@ -63,22 +63,6 @@ MDL_EXPORT
              Submeshes will be converted to triangle topology.
  */
 - (instancetype)initWithURL:(NSURL *)URL;
-
-
-/*!
- @method initWithURL:bufferAllocator:preserveIndexing:error
- @abstract Initialize with contents of URL, preserving indexing in the original file
- 
- @discussion Some file formats allow independent indexing of vertex attritutes,
- for example, there might be more data entries for vertex positions than
- for normals. The vertex buffers and submesh index buffers will be
- created exactly as they were in the originating file.
- */
-- (instancetype)initWithURL:(NSURL *)URL
-            bufferAllocator:(nullable id<MDLMeshBufferAllocator>)bufferAllocator
-           preserveIndexing:(BOOL)preserveIndexing
-                      error:(NSError * __nullable * __nullable)error;
-
 /*!
  @method initWithURL:vertexDescriptor:bufferAllocator:
  @abstract Initialize an MDLAsset using the contents of the resource located at 
@@ -144,7 +128,7 @@ MDL_EXPORT
 /*!
  @abstract Return the object at the specified path, or nil if none exists there
  */
-- (MDLObject*)objectAtPath:(NSString*)path;
+- (MDLObject*)objectAtPath:(NSString*)path API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 /*!
  @method canImportFileExtension:
@@ -176,11 +160,11 @@ MDL_EXPORT
 
 /*!
  @method loadTextures
- @abstract Iterates all material properties on all materials. If they are string 
+ @abstract Iterates over all material properties on all materials. If they are string
            values or NSURL values, and can be resolved as textures, then the string 
            and NSURL values will be replaced by MDLTextureSampler values.
  */
-- (void)loadTextures;
+- (void)loadTextures API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 /*!
  @method boundingBoxAtTime:
@@ -228,7 +212,7 @@ MDL_EXPORT
  @discussion Some imported formats specify a scene up axis. By default Y-axis (0, 1, 0) is used
  but other values are supported.
  */
-@property (nonatomic, readwrite) vector_float3 upAxis;
+@property (nonatomic, readwrite) vector_float3 upAxis API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 /*!
  @property URL
@@ -242,7 +226,7 @@ MDL_EXPORT
  @abstract Resolver asset that helps find associated files
  @discussion The default asset resolver is the RelativeAssetResolver
  */
-@property (nonatomic, retain, nullable) id<MDLAssetResolver> resolver;
+@property (nonatomic, retain, nullable) id<MDLAssetResolver> resolver API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 
 /*!
@@ -293,16 +277,16 @@ MDL_EXPORT
 /*!
  @property masters
  @abstract Master objects that can be instanced into the asset's object hierarchy
- @discussion @see MDLObjectContainerComponent
+ @see MDLObjectContainerComponent
  */
 @property (nonatomic, retain) id<MDLObjectContainerComponent> masters;
 
 /*!
  @property animations
  @abstract Animations that can be bound to MDLObjects (@see MDLAnimationBindComponent)
- @discussion @see MDLObjectContainerComponent
+ @see MDLObjectContainerComponent
  */
-@property (nonatomic, retain) id<MDLObjectContainerComponent> animations;
+@property (nonatomic, retain) id<MDLObjectContainerComponent> animations API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 @end
 

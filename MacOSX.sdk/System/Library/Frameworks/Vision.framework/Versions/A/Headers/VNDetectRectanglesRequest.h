@@ -6,6 +6,7 @@
 //
 
 #import <Vision/VNRequest.h>
+#import <Vision/VNTypes.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -35,22 +36,26 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @property (readwrite, nonatomic, assign) VNDegrees quadratureTolerance;
 
 /*!
- @brief Specifies the minimum size of the rectangle to be detected, as a proportion of the smallest dimension, range [0.0, 1.0], default .2
+ @brief Specifies the minimum size of the rectangle to be detected, as a proportion of the smallest dimension, range [0.0, 1.0], default .2. Any smaller rectangles that may have been detected will not be returned. 
  */
 @property (readwrite, nonatomic, assign) float minimumSize;
 
 /*!
- @brief Specifies the minimum confidence score of the rectangle to be detected, range [0.0, 1.0], default 0.0
+ @brief Specifies a minimum confidence score, range [0.0, 1.0], default 0.0. Any rectangles with a lower confidence score will not be returned.
  */
 @property (readwrite, nonatomic, assign) VNConfidence minimumConfidence;
 
 /*!
- @brief Specifies the maximum number of rectangles to be returned.  The default is 1.  Setting this property to 0 will not bound the resultant maximum observations.  
+ @brief Specifies the maximum number of rectangles to be returned.  The default is 1.  Setting this property to 0 will allow an unlimited number of observations to be returned.
  */
 @property (readwrite, nonatomic, assign) NSUInteger maximumObservations;
 
 
 @end
+
+
+API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0))
+static const NSUInteger VNDetectRectanglesRequestRevision1 = 1;
 
 
 NS_ASSUME_NONNULL_END

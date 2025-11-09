@@ -24,10 +24,10 @@ typedef NSString *IOSurfacePropertyKey NS_STRING_ENUM;
 
 /* The following list of properties are used with the CFDictionary passed to IOSurfaceCreate(). */
 
-/* IOSurfacePropertyAllocSizeKey    - NSNumber of the total allocation size of the buffer including all planes.    
+/* IOSurfacePropertyKeyAllocSize    - NSNumber of the total allocation size of the buffer including all planes.    
    Defaults to BufferHeight * BytesPerRow if not specified.   Must be specified for
    dimensionless buffers. */
-extern IOSurfacePropertyKey IOSurfacePropertyAllocSizeKey                   IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyAllocSize                   IOSFC_AVAILABLE_STARTING(__MAC_10_14, __IPHONE_12_0);
 
 /* IOSurfacePropertyKeyWidth  - NSNumber for the width of the IOSurface buffer in pixels.   Required for planar IOSurfaces. */
 extern IOSurfacePropertyKey IOSurfacePropertyKeyWidth                       IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
@@ -38,7 +38,7 @@ extern IOSurfacePropertyKey IOSurfacePropertyKeyHeight                      IOSF
 /* IOSurfacePropertyKeyBytesPerRow - NSNumber for the bytes per row of the buffer.   If not specified, IOSurface will first calculate
    the number full elements required on each row (by rounding up), multiplied by the bytes per element for this surface.
    That value will then be appropriately aligned. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyBytesPerRow	                 IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyBytesPerRow                 IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
 
 /* Optional properties for non-planar two dimensional images */
  
@@ -63,7 +63,7 @@ extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneInfo                   IOSF
 extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneWidth                  IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
 
 /* IOSurfacePropertyKeyPlaneHeight  - NSNumber for the height of this plane in pixels.  Required for image planes. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneHeight	                 IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneHeight                 IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
 
 /* IOSurfacePropertyKeyPlaneBytesPerRow    - NSNumber for the bytes per row of this plane.  If not specified, IOSurface will first calculate
    the number full elements required on each row (by rounding up), multiplied by the bytes per element for this plane.  
@@ -72,7 +72,7 @@ extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneBytesPerRow            IOSF
 
 /* IOSurfacePropertyKeyPlaneOffset  - NSNumber for the offset into the buffer for this plane.  If not specified then IOSurface
    will lay out each plane sequentially based on the previous plane's allocation size. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneOffset	                 IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneOffset                 IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
 
 /* IOSurfacePropertyKeyPlaneSize    - NSNumber for the total data size of this plane.  Defaults to plane height * plane bytes per row if not specified. */
 extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneSize                   IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
@@ -93,11 +93,11 @@ extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneElementHeight          IOSF
 
 /* Optional properties global to the entire IOSurface */
 
-/* IOSurfacePropertyKeyCacheMode		- NSNumber for the CPU cache mode to be used for the allocation.  Default is kIOMapDefaultCache. */
+/* IOSurfacePropertyKeyCacheMode        - NSNumber for the CPU cache mode to be used for the allocation.  Default is kIOMapDefaultCache. */
 extern IOSurfacePropertyKey IOSurfacePropertyKeyCacheMode                   IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
 
-/* IOSurfacePropertyKeyPixelFormat - NSNumber	A 32-bit unsigned integer that stores the traditional Mac OS X buffer format  */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyPixelFormat	                 IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+/* IOSurfacePropertyKeyPixelFormat - NSNumber   A 32-bit unsigned integer that stores the traditional Mac OS X buffer format  */
+extern IOSurfacePropertyKey IOSurfacePropertyKeyPixelFormat                 IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
 
 /* IOSurfacePropertyKeyPixelSizeCastingAllowed - If false the creator promises that there will be no pixel size casting when used on the GPU.  Default is true.  */
 extern IOSurfacePropertyKey IOSurfacePropertyKeyPixelSizeCastingAllowed     IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
@@ -209,9 +209,12 @@ value must be an exact match. */
 
 /* See comments in IOSurfaceAPI.h */
 - (kern_return_t)setPurgeable:(IOSurfacePurgeabilityState)newState oldState:(IOSurfacePurgeabilityState * __nullable)oldState
-	IOSFC_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0);
+    IOSFC_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0);
 
 @end 
+
+// This key was misnamed.
+extern IOSurfacePropertyKey IOSurfacePropertyAllocSizeKey                   IOSFC_AVAILABLE_BUT_DEPRECATED(__MAC_10_12, __MAC_10_14, __IPHONE_10_0, __IPHONE_12_0);
 
 NS_ASSUME_NONNULL_END
 

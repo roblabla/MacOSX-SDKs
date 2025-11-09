@@ -21,6 +21,8 @@
 
 #import <cups/cups.h>
 #import <cups/ppd.h>
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -5,7 +5,10 @@
 //  Copyright © 2017 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <CoreML/MLFeatureProvider.h>
+#import <CoreML/MLFeatureValue.h>
+#import <CoreML/MLExport.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -13,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  * A concrete convenience class conforming to MLFeatureProvider.
  */
 API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0))
+ML_EXPORT
 @interface MLDictionaryFeatureProvider : NSObject<MLFeatureProvider, NSFastEnumeration>
 
 /// Dictionary holding the feature values

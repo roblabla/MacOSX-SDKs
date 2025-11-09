@@ -1,7 +1,8 @@
 //
 //  SCNSceneSource.h
+//  SceneKit
 //
-//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
+//  Copyright © 2012-2018 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -12,40 +13,36 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*! @group Scene source properties */
 /*! File contributors. The values are dictionaries populated with keys documented in the "Contributor dictionary keys" group. */
-FOUNDATION_EXTERN NSString * const SCNSceneSourceAssetContributorsKey;
+SCN_EXPORT NSString * const SCNSceneSourceAssetContributorsKey;
 /*! When the file was created. The value is a NSDate instance. */
-FOUNDATION_EXTERN NSString * const SCNSceneSourceAssetCreatedDateKey;
+SCN_EXPORT NSString * const SCNSceneSourceAssetCreatedDateKey;
 /*! When the file was last modified. The value is a NSDate instance. */
-FOUNDATION_EXTERN NSString * const SCNSceneSourceAssetModifiedDateKey;
+SCN_EXPORT NSString * const SCNSceneSourceAssetModifiedDateKey;
 /*! The up axis of the file. If the file is oriented Y-up, for example, then this is the string \@"0.0 1.0 0.0" */
-FOUNDATION_EXTERN NSString * const SCNSceneSourceAssetUpAxisKey;
+SCN_EXPORT NSString * const SCNSceneSourceAssetUpAxisKey;
 /*! The unit used in the file. The value is a dictionary populated with keys documented in the "Unit dictionary keys" group. */
-FOUNDATION_EXTERN NSString * const SCNSceneSourceAssetUnitKey;
+SCN_EXPORT NSString * const SCNSceneSourceAssetUnitKey;
 
 /*! @group Contributor dictionary keys */
 /*! Authoring tool used to create the file. The corresponding value is an NSString. */
-FOUNDATION_EXTERN NSString * const SCNSceneSourceAssetAuthoringToolKey;
+SCN_EXPORT NSString * const SCNSceneSourceAssetAuthoringToolKey;
 /*! The file's author. The corresponding value is an NSString. */
-FOUNDATION_EXTERN NSString * const SCNSceneSourceAssetAuthorKey;
+SCN_EXPORT NSString * const SCNSceneSourceAssetAuthorKey;
 
 /*! @group Unit dictionary keys */
 /*! The name (NSString) of the unit */
-FOUNDATION_EXTERN NSString * const SCNSceneSourceAssetUnitNameKey;
+SCN_EXPORT NSString * const SCNSceneSourceAssetUnitNameKey;
 /*! A NSNumber encapsulating a floating-point value indicating how many meters the unit is. For example, if the name is \@"centimeter", then this will be 0.01. */
-FOUNDATION_EXTERN NSString * const SCNSceneSourceAssetUnitMeterKey;
+SCN_EXPORT NSString * const SCNSceneSourceAssetUnitMeterKey;
 
 /*! @group Scene loading options */
-#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 3
 typedef NSString * SCNSceneSourceLoadingOption NS_STRING_ENUM;
-#else
-typedef NSString * SCNSceneSourceLoadingOption;
-#endif
 
 /*! @constant SCNSceneSourceCreateNormalsIfAbsentKey
 	@abstract Enable to try to guess acceptable normals for the vertices if none are given in the file
     @discussion Use this with a boolean value encapsulated in a NSNumber. The default value is NO.
  */
-FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceCreateNormalsIfAbsentKey;
+SCN_EXPORT SCNSceneSourceLoadingOption const SCNSceneSourceCreateNormalsIfAbsentKey;
 
 /*!
  @constant SCNSceneSourceCheckConsistencyKey
@@ -56,7 +53,7 @@ FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceCreateNormalsI
  If the document doesn't pass the consistency check it is then not loaded and an error is returned.
  This is slower, but for security reasons it should be set to YES if you are not sure the files you load are valid and have not been tampered with. 
  */
-FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceCheckConsistencyKey;
+SCN_EXPORT SCNSceneSourceLoadingOption const SCNSceneSourceCheckConsistencyKey;
 
 /*!
  @constant SCNSceneSourceFlattenSceneKey
@@ -66,7 +63,7 @@ FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceCheckConsisten
  SceneKit will attempt to reduce the scene graph by merging the geometries.
  This option is suitable to preview a 3D scene efficiently and when manipulating the scene graph is not needed.
  */
-FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceFlattenSceneKey;
+SCN_EXPORT SCNSceneSourceLoadingOption const SCNSceneSourceFlattenSceneKey;
 
 /*!
  @constant SCNSceneSourceUseSafeModeKey
@@ -76,7 +73,7 @@ FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceFlattenSceneKe
  SceneKit will forbid network accesses, prevent the loading of resources from arbitrary directories, and will not execute
  any code present in the loaded files.
  */
-FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceUseSafeModeKey;
+SCN_EXPORT SCNSceneSourceLoadingOption const SCNSceneSourceUseSafeModeKey API_DEPRECATED("No longer supported", macos(10.8, 10.13), ios(8.0, 11.0), tvos(9.0, 11.0), watchos(3.0, 4.0));
 
 /*!
  @constant SCNSceneSourceAssetDirectoryURLsKey
@@ -86,7 +83,7 @@ FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceUseSafeModeKey
  This is recommended if you want to construct your scene source from a data object, not from an URL,
  and need to load resources whose paths are not absolute.
  */
-FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceAssetDirectoryURLsKey;
+SCN_EXPORT SCNSceneSourceLoadingOption const SCNSceneSourceAssetDirectoryURLsKey;
 
 /*!
  @constant SCNSceneSourceOverrideAssetURLsKey
@@ -95,7 +92,7 @@ FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceAssetDirectory
  You can force SceneKit to only search for extern resources within the directories specified by the SCNSceneSourceAssetDirectoryURLsKey key.
  This can be useful to load a file and its resources from a specific bundle for instance.
  */
-FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceOverrideAssetURLsKey;
+SCN_EXPORT SCNSceneSourceLoadingOption const SCNSceneSourceOverrideAssetURLsKey;
 
 /*!
  @constant SCNSceneSourceStrictConformanceKey
@@ -104,7 +101,7 @@ FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceOverrideAssetU
 			 enable additional features and make the rendering as close as possible to the original intent. If you pass YES,
              SceneKit will instead only consider features which are part of the file format specification.
  */
-FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceStrictConformanceKey;
+SCN_EXPORT SCNSceneSourceLoadingOption const SCNSceneSourceStrictConformanceKey;
 
 /*!
  @constant SCNSceneSourceConvertUnitsToMetersKey
@@ -113,7 +110,7 @@ FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceStrictConforma
      For better physics simulation it is recommended to use 1 unit equals to 1 meter.
      This option has no effect for SCN files or if the asset is already compressed by Xcode (use the compression options instead).
  */
-FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceConvertUnitsToMetersKey API_AVAILABLE(macos(10.10), ios(11.0), tvos(11.0), watchos(4.0));
+SCN_EXPORT SCNSceneSourceLoadingOption const SCNSceneSourceConvertUnitsToMetersKey API_AVAILABLE(macos(10.10), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
  @constant SCNSceneSourceConvertToYUpKey
@@ -121,21 +118,21 @@ FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceConvertUnitsTo
  @discussion Use this with a boolean value encapsulated in a NSNumber. The default value is NO.
  This option has no effect for SCN files or if the asset is already compressed by Xcode (use the compression options instead).
  */
-FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceConvertToYUpKey API_AVAILABLE(macos(10.10), ios(11.0), tvos(11.0), watchos(4.0));
+SCN_EXPORT SCNSceneSourceLoadingOption const SCNSceneSourceConvertToYUpKey API_AVAILABLE(macos(10.10), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
  @constant SCNSceneSourceAnimationImportPolicyKey
  @abstract Pass one of the value below to specify what to do with loaded animations.
  @discussion See below for the description of each individual key. Defaults to SCNSceneSourceAnimationImportPolicyPlayRepeatedly. On 10.9 and before the behavior is SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase. For compatibility reason if the application was built on 10.9 or before the default behavior is SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase.
  */
-FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceAnimationImportPolicyKey API_AVAILABLE(macos(10.10));
+SCN_EXPORT SCNSceneSourceLoadingOption const SCNSceneSourceAnimationImportPolicyKey API_AVAILABLE(macos(10.10));
 
 /*!
  @constant SCNSceneSourceLoadingOptionPreserveOriginalTopology
  @abstract Pass YES to make SceneKit preserve the original topology instead of triangulating at load time.
  This can be useful to get better results when subdividing a geometry. Defaults to NO.
  */
-FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceLoadingOptionPreserveOriginalTopology API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
+SCN_EXPORT SCNSceneSourceLoadingOption const SCNSceneSourceLoadingOptionPreserveOriginalTopology API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
 
 #define SCNSceneSourceLoadingOptionCreateNormalsIfAbsent    SCNSceneSourceCreateNormalsIfAbsentKey
 #define SCNSceneSourceLoadingOptionCheckConsistency         SCNSceneSourceCheckConsistencyKey
@@ -149,35 +146,31 @@ FOUNDATION_EXTERN SCNSceneSourceLoadingOption const SCNSceneSourceLoadingOptionP
 #define SCNSceneSourceLoadingOptionAnimationImportPolicy    SCNSceneSourceAnimationImportPolicyKey
 
 /* Values for SCNSceneSourceLoadingOptionAnimationImportPolicy */
-#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 3
 typedef NSString * SCNSceneSourceAnimationImportPolicy NS_STRING_ENUM;
-#else
-typedef NSString * SCNSceneSourceAnimationImportPolicy;
-#endif
 
 /*!
  @constant SCNSceneSourceAnimationImportPolicyPlay
  @abstract Add animations to the scene and play them once (repeatCount set to 1).
  */
-FOUNDATION_EXTERN SCNSceneSourceAnimationImportPolicy const SCNSceneSourceAnimationImportPolicyPlay API_AVAILABLE(macos(10.10));
+SCN_EXPORT SCNSceneSourceAnimationImportPolicy const SCNSceneSourceAnimationImportPolicyPlay API_AVAILABLE(macos(10.10));
 
 /*!
  @constant SCNSceneSourceAnimationImportPolicyPlayRepeatedly
  @abstract Add animations to the scene and play them repeatedly (repeatCount set to infinity).
  */
-FOUNDATION_EXTERN SCNSceneSourceAnimationImportPolicy const SCNSceneSourceAnimationImportPolicyPlayRepeatedly API_AVAILABLE(macos(10.10));
+SCN_EXPORT SCNSceneSourceAnimationImportPolicy const SCNSceneSourceAnimationImportPolicyPlayRepeatedly API_AVAILABLE(macos(10.10));
 
 /*!
  @constant SCNSceneSourceAnimationImportPolicyDoNotPlay
  @abstract Only keep animations in the SCNSceneSource and don't add to the animatable elements of the scene.
  */
-FOUNDATION_EXTERN SCNSceneSourceAnimationImportPolicy const SCNSceneSourceAnimationImportPolicyDoNotPlay API_AVAILABLE(macos(10.10));
+SCN_EXPORT SCNSceneSourceAnimationImportPolicy const SCNSceneSourceAnimationImportPolicyDoNotPlay API_AVAILABLE(macos(10.10));
 
 /*!
  @constant SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase
  @abstract Add animations to the scene and play them using the SCNView/SCNRenderer's scene time (usesSceneTimeBase set to YES)
  */
-FOUNDATION_EXTERN SCNSceneSourceAnimationImportPolicy const SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase API_AVAILABLE(macos(10.10));
+SCN_EXPORT SCNSceneSourceAnimationImportPolicy const SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase API_AVAILABLE(macos(10.10));
 
 
 /*!
@@ -189,7 +182,7 @@ FOUNDATION_EXTERN SCNSceneSourceAnimationImportPolicy const SCNSceneSourceAnimat
              in their user info dictionary using the other keys (SCNConsistency*) defined in this file.
  */
 
-FOUNDATION_EXTERN NSString * const SCNDetailedErrorsKey;
+SCN_EXPORT NSString * const SCNDetailedErrorsKey;
 
 /*!
  @constant SCNConsistencyElementIDErrorKey
@@ -197,21 +190,21 @@ FOUNDATION_EXTERN NSString * const SCNDetailedErrorsKey;
  @discussion When the element does not have an ID, the ID of the closest parent element which has one is returned.
  */
 
-FOUNDATION_EXTERN NSString * const SCNConsistencyElementIDErrorKey;
+SCN_EXPORT NSString * const SCNConsistencyElementIDErrorKey;
 
 /*!
  @constant SCNConsistencyElementTypeErrorKey
  @abstract For XML-based formats, the tag name of the element where the error occurred.
  */
 
-FOUNDATION_EXTERN NSString * const SCNConsistencyElementTypeErrorKey;
+SCN_EXPORT NSString * const SCNConsistencyElementTypeErrorKey;
 
 /*!
  @constant SCNConsistencyLineNumberErrorKey
  @abstract For text-based formats, the line number where an error occurred.
  */
 
-FOUNDATION_EXTERN NSString * const SCNConsistencyLineNumberErrorKey;
+SCN_EXPORT NSString * const SCNConsistencyLineNumberErrorKey;
 
 /*!
  @enum SCNConsistencyErrorCode
@@ -250,6 +243,7 @@ typedef void (^SCNSceneSourceStatusHandler)(float totalProgress, SCNSceneSourceS
  After creating a SCNSceneSource object for the appropriate source, you can obtain scenes using SCNSceneSource methods.
  */
 
+SCN_EXPORT
 @interface SCNSceneSource : NSObject 
 
 /*!
@@ -332,11 +326,7 @@ typedef void (^SCNSceneSourceStatusHandler)(float totalProgress, SCNSceneSourceS
  @param entryClass Specifies the type of the object to be returned. It can be one of the following classes: SCNMaterial, SCNGeometry, SCNScene, SCNNode, CAAnimation, SCNLight, SCNCamera, SCNSkinner, SCNMorpher, NSImage
  @discussion Returns NULL if the receiver's library doesn't contains such an uid for the specified type.
  */
-#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 1
 - (nullable id)entryWithIdentifier:(NSString *)uid withClass:(Class)entryClass NS_REFINED_FOR_SWIFT;
-#else
-- (nullable id)entryWithIdentifier:(NSString *)uid withClass:(Class)entryClass;
-#endif
 
 /*!
  @method identifiersOfEntriesWithClass:

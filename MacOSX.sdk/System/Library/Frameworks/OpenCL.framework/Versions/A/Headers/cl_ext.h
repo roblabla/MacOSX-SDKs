@@ -82,19 +82,19 @@ cl_int	clSetMemObjectDestructorAPPLE(  cl_mem                  /* memobj */,
 extern void clLogMessagesToSystemLogAPPLE(  const char * /* errstr */, 
                                             const void * /* private_info */, 
                                             size_t       /* cb */, 
-                                            void *       /* user_data */ )  CL_EXT_SUFFIX__VERSION_1_0;
+                                            void *       /* user_data */ )  CL_EXT_SUFFIX__VERSION_1_0 CL_DEPRECATED(10.6, 10.14);
 
 /* clLogMessagesToStdout sends all log messages to the file descriptor stdout   */
 extern void clLogMessagesToStdoutAPPLE(   const char * /* errstr */, 
                                           const void * /* private_info */, 
                                           size_t       /* cb */, 
-                                          void *       /* user_data */ )    CL_EXT_SUFFIX__VERSION_1_0;
+                                          void *       /* user_data */ )    CL_EXT_SUFFIX__VERSION_1_0 CL_DEPRECATED(10.6, 10.14);
 
 /* clLogMessagesToStderr sends all log messages to the file descriptor stderr   */
 extern void clLogMessagesToStderrAPPLE(   const char * /* errstr */, 
                                           const void * /* private_info */, 
                                           size_t       /* cb */, 
-                                          void *       /* user_data */ )    CL_EXT_SUFFIX__VERSION_1_0;
+                                          void *       /* user_data */ )    CL_EXT_SUFFIX__VERSION_1_0 CL_DEPRECATED(10.6, 10.14);
     
 /* Extension: cl_APPLE_clut 
  * New APIs that allow apps to reduce the number of CL API calls they need to make
@@ -108,7 +108,7 @@ extern CL_API_ENTRY cl_int CL_API_CALL clCreateContextAndCommandQueueAPPLE(
                                                   void *                        /* user_data */,
                                                   cl_command_queue_properties   /* queue_properties */,
                                                   cl_context *                  /* context */,
-                                                  cl_command_queue *            /* queues */)   CL_EXT_SUFFIX__VERSION_1_1;
+                                                  cl_command_queue *            /* queues */)   CL_EXT_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 extern CL_API_ENTRY cl_int CL_API_CALL clCreateProgramAndKernelsWithSourceAPPLE(
                                                        cl_context           /* context */,
@@ -121,21 +121,21 @@ extern CL_API_ENTRY cl_int CL_API_CALL clCreateProgramAndKernelsWithSourceAPPLE(
                                                        cl_uint              /* num_kernels */,
                                                        const char **        /* kernel_name_strings */,
                                                        cl_program *         /* program */,
-                                                       cl_kernel *          /* kernels */)   CL_EXT_SUFFIX__VERSION_1_1;
+                                                       cl_kernel *          /* kernels */)   CL_EXT_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 extern CL_API_ENTRY cl_int CL_API_CALL clSetKernelArgsListAPPLE(cl_kernel /* kernel */, 
                                                                 cl_uint   /* num_args */, 
-                                                                ... )   CL_EXT_SUFFIX__VERSION_1_1;
+                                                                ... )   CL_EXT_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 extern CL_API_ENTRY cl_int CL_API_CALL clSetKernelArgsVaListAPPLE(cl_kernel /* kernel */, 
                                                                   cl_uint   /* num_args */, 
-                                                                  va_list   /* argp */)   CL_EXT_SUFFIX__VERSION_1_1;
+                                                                  va_list   /* argp */)   CL_EXT_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 #define CL_INVALID_ARG_NAME_APPLE   -1060
 extern CL_API_ENTRY cl_int CL_API_CALL clSetKernelArgByNameAPPLE(cl_kernel    /* kernel */,                                         
                                                                  const char * /* arg_name */,
                                                                  size_t       /* arg_size */,
-                                                                 const void * /* arg_value */) CL_EXT_SUFFIX__VERSION_1_1;
+                                                                 const void * /* arg_value */) CL_EXT_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 /* Extension: cl_APPLE_query_kernel_names
  * 
@@ -207,12 +207,12 @@ extern CL_API_ENTRY cl_int CL_API_CALL clSetKernelArgByNameAPPLE(cl_kernel    /*
 typedef struct _cl_dag * cl_dag;
 typedef int              cl_dag_node;
   
-cl_dag clCreateDAGAPPLE(cl_context c) CL_EXT_SUFFIX__VERSION_1_2;
+cl_dag clCreateDAGAPPLE(cl_context c) CL_EXT_SUFFIX__VERSION_1_2 CL_DEPRECATED(10.8, 10.14);
 
 /* Extension: clReleaseDAGAPPLE
  * Release a DAG object used to create the final kernel
  */
-void clReleaseDAGAPPLE(cl_dag dag) CL_EXT_SUFFIX__VERSION_1_2;
+void clReleaseDAGAPPLE(cl_dag dag) CL_EXT_SUFFIX__VERSION_1_2 CL_DEPRECATED(10.8, 10.14);
 
 /* Extension: clGetDAGNodeAPPLE
  * For a given function 'f' created with clCreateDAGAPPLE(), set 0 or more
@@ -229,13 +229,13 @@ void clReleaseDAGAPPLE(cl_dag dag) CL_EXT_SUFFIX__VERSION_1_2;
  * clEnqueueNDRangeKernel() on the output of clCreateKernelFromDAGAPPLE().
  */
 cl_dag_node clGetDAGNodeAPPLE(cl_dag d, cl_kernel f, cl_dag_node *args,
-                              unsigned *arg_indices, unsigned nargs) CL_EXT_SUFFIX__VERSION_1_2;
+                              unsigned *arg_indices, unsigned nargs) CL_EXT_SUFFIX__VERSION_1_2 CL_DEPRECATED(10.8, 10.14);
 
 /* Extension:  clCreateKernelFromDAGAPPLE
  * Given a DAG, ask CVMS to create a functional kernel from it.
  */
 cl_kernel clCreateKernelFromDAGAPPLE(cl_dag d, cl_uint n,
-                                     const cl_device_id *list) CL_EXT_SUFFIX__VERSION_1_2;
+                                     const cl_device_id *list) CL_EXT_SUFFIX__VERSION_1_2 CL_DEPRECATED(10.8, 10.14);
   
 /* Extension: clCreateCommandQueueWithPropertiesAPPLE
  * Create a command queue for the specified device. The properties array
@@ -271,7 +271,7 @@ cl_kernel clCreateKernelFromDAGAPPLE(cl_dag d, cl_uint n,
   clCreateCommandQueueWithPropertiesAPPLE (cl_context                          /* context */,
                                            cl_device_id                        /* device */,
                                            const cl_queue_properties_APPLE *   /* properties */,
-                                           cl_int *                            /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_2;
+                                           cl_int *                            /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_2 CL_DEPRECATED(10.8, 10.14);
 #define CL_QUEUE_PRIORITY_APPLE                           0x10000013
 #define CL_QUEUE_NUM_COMPUTE_UNITS_APPLE                  0x10000014
 #define CL_QUEUE_PRIORITY_BACKGROUND_APPLE                0x10000015

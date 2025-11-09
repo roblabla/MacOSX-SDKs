@@ -1,15 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 3BA60D59-A507-3D92-81D2-5C820FEF4AA3', 'x86_64: 3C99CC1F-C965-302E-BA73-BA58C4BAA03B' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 6EF369F9-358C-34A1-A7DF-18757F7955E0' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/iPodSync.framework/Versions/A/iPodSync
 current-version: 121
 exports:         
   - archs:           [ x86_64 ]
-    objc-ivars:      [ _iPodCalendarFilter._needsUpdate, _iPodCalendarFilter._useAllCalendars, 
-                       _iPodCalendarFilter._usedCalendarGroups, _iPodContactFilter._needsUpdate, 
-                       _iPodContactFilter._useAllContacts, _iPodContactFilter._usedContactGroups ]
-  - archs:           [ i386, x86_64 ]
     symbols:         [ _CopySyncEngineDisplayNameForDataClass, _CopySyncEngineImageForDataClass, 
                        _IsiPodRegisteredForSync, _IsiPodRegisteredForSyncWithUID, 
                        __ConvertCFStringToUInt64, __iPodSynchronizeWithSyncUID, _iPodCancelSynchronization, 
@@ -27,5 +23,8 @@ exports:
                        _iPodSyncVersionNumber, _iPodSyncVersionString, _iPodSynchronize, 
                        _iPodSynchronizeWithUID, _iPodSynchronizeiPodGroup, _iPodUnregisterForSync, 
                        _iPodUnregisterForSyncWithUID ]
-    objc-classes:    [ _iPodCalendarFilter, _iPodContactFilter ]
+    objc-classes:    [ iPodCalendarFilter, iPodContactFilter ]
+    objc-ivars:      [ iPodCalendarFilter._needsUpdate, iPodCalendarFilter._useAllCalendars, 
+                       iPodCalendarFilter._usedCalendarGroups, iPodContactFilter._needsUpdate, 
+                       iPodContactFilter._useAllContacts, iPodContactFilter._usedContactGroups ]
 ...

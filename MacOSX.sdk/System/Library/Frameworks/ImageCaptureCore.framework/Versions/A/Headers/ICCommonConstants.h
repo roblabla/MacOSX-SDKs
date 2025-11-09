@@ -35,6 +35,7 @@
 
 */
 
+
 typedef NS_ENUM(NSUInteger, ICEXIFOrientationType)
 {
     ICEXIFOrientation1  = 1,    // Normal
@@ -46,6 +47,19 @@ typedef NS_ENUM(NSUInteger, ICEXIFOrientationType)
     ICEXIFOrientation7  = 7,    // Rotated 90° CW and flipped vertically
     ICEXIFOrientation8  = 8     // Rotated 90° CW
 };
+
+//------------------------------------------------------------------------------------------------------------------------------
+
+typedef enum ICReturnCodeOffset
+{
+    ICReturnCodeThumbnailOffset           = -21000,
+    ICReturnCodeMetadataOffset            = -21050,
+    ICReturnCodeDownloadOffset            = -21100,
+    ICReturnCodeDeleteOffset              = -21150,
+    ICReturnCodeExFATOffset               = -21200,
+    ICReturnCodePTPOffset                 = -21250,
+    ICReturnCodeSystemOffset              = -21300,
+} ICReturnCodeOffset;
 
 //------------------------------------------------------------------------------------------------------------------------------
 
@@ -114,6 +128,7 @@ typedef NS_ENUM(NSUInteger, ICEXIFOrientationType)
     @constant ICReturnDeviceSoftwareNotAvailable
         Software for the device is not available from Apple.
 */
+
 typedef NS_ENUM( NSInteger, ICReturnCode )
 {
     ICReturnSuccess                               = 0,
@@ -150,7 +165,29 @@ typedef NS_ENUM( NSInteger, ICReturnCode )
     ICReturnDeviceCouldNotUnpair                  = -9952,
     ICReturnDeviceNeedsCredentials                = -9953,
     ICReturnDeviceIsBusyEnumerating               = -9954,
-    ICReturnDeviceCommandGeneralFailure           = -9955
+    ICReturnDeviceCommandGeneralFailure           = -9955,
+    ICReturnDeviceFailedToCompleteTransfer        = -9956,
+    ICReturnDeviceFailedToSendData                = -9957,
+    ICReturnSessionNotOpened                      = -9958,
+    // Thumbnails
+    ICReturnThumbnailNotAvailable               = ICReturnCodeThumbnailOffset,
+    ICReturnThumbnailAlreadyFetching            = ICReturnCodeThumbnailOffset -1,
+    ICReturnThumbnailCanceled                   = ICReturnCodeThumbnailOffset -2,
+    ICReturnThumbnailInvalid                    = ICReturnCodeThumbnailOffset -3,
+    
+    ICReturnErrorDeviceEjected                  = ICReturnCodeSystemOffset,
+    
+    // Metadata
+    ICReturnMetadataNotAvailable                = ICReturnCodeMetadataOffset,
+    ICReturnMetadataAlreadyFetching             = ICReturnCodeMetadataOffset -1,
+    ICReturnMetadataCanceled                    = ICReturnCodeMetadataOffset -2,
+    ICReturnMetadataInvalid                     = ICReturnCodeMetadataOffset -3,
+    
+    
+    // Multi Error
+    ICReturnMultiErrorDictionary                = -30000,
 };
 
-////------------------------------------------------------------------------------------------------------------------------------
+#define ICReturnDeviceIsAccessRestrictedAppleDevice ICReturnDeviceIsPasscodeLocked
+
+//------------------------------------------------------------------------------------------------------------------------------

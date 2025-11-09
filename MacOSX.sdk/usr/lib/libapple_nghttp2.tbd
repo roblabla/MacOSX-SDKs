@@ -1,12 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 2840747B-C3E6-3E3A-9CD3-59CB06540532', 'x86_64: BDFAB4A0-D204-3DD3-BC62-B9E80A325BDA' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: B8D45114-3868-3154-BC35-22597E3E7D8A' ]
 platform:        macosx
 install-name:    /usr/lib/libapple_nghttp2.dylib
-current-version: 1.20.3
+current-version: 1.24.1
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _nghttp2_check_header_name, _nghttp2_check_header_value, _nghttp2_hd_deflate_bound, 
                        _nghttp2_hd_deflate_change_table_size, _nghttp2_hd_deflate_del, 
                        _nghttp2_hd_deflate_get_dynamic_table_size, _nghttp2_hd_deflate_get_max_dynamic_table_size, 

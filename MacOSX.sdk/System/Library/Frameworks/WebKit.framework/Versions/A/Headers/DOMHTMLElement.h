@@ -28,20 +28,20 @@
 @class DOMHTMLCollection;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMHTMLElement : DOMElement
 @property (copy) NSString *title;
 @property (copy) NSString *lang;
 @property (copy) NSString *dir;
 @property int tabIndex;
-@property (copy) NSString *accessKey NS_AVAILABLE_MAC(10_8);
+@property (copy) NSString *accessKey WEBKIT_AVAILABLE_MAC(10_8);
 @property (copy) NSString *innerText;
 @property (copy) NSString *outerText;
 @property (copy) NSString *contentEditable;
 @property (readonly) BOOL isContentEditable;
 @property (copy) NSString *idName;
 @property (readonly, strong) DOMHTMLCollection *children;
-@property (readonly, copy) NSString *titleDisplayString NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *titleDisplayString WEBKIT_AVAILABLE_MAC(10_5);
 
-- (void)click NS_AVAILABLE_MAC(10_8);
+- (void)click WEBKIT_AVAILABLE_MAC(10_8);
 @end

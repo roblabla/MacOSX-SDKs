@@ -4,12 +4,12 @@
 #define __LA_BASE_HEADER__
 
 #include <os/object.h>
+#include <os/availability.h>
 #include <stddef.h>
-#include <Availability.h>
 
 /*  Define abstractions for a number of attributes that we wish to be able to
     consisely attach to functions in the LinearAlgebra library.             */
-#define LA_AVAILABILITY  __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0)
+#define LA_AVAILABILITY  API_AVAILABLE(macos(10.10), ios(8.0))
 #define LA_NONNULL1      OS_NONNULL1
 #define LA_NONNULL       OS_NONNULL_ALL
 #define LA_EXPORT        OS_EXPORT

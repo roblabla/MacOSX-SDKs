@@ -1,6 +1,6 @@
 /*
 	NSGlyphInfo.h
-	Copyright (c) 2002-2017, Apple Inc.
+	Copyright (c) 2002-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSGlyphInfo : NSObject <NSCopying, NSSecureCoding> {
     @package
-    NSString *_baseString;
+    NSString *_baseString APPKIT_IVAR;
 }
 
 + (nullable NSGlyphInfo *)glyphInfoWithCGGlyph:(CGGlyph)glyph forFont:(NSFont *)font baseString:(NSString *)string API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));

@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
     for a particular MDLObject are provided.
  */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @protocol MDLTransformComponent <MDLComponent>
 @required
@@ -63,7 +63,6 @@ MDL_EXPORT
 
 @end
 
-
 /**
  Concrete implementation of <MDLTransformComponent>.
  For more complex transform components create a class that conforms to 
@@ -73,12 +72,15 @@ MDL_EXPORT
  set the matrix property, and clear any timing information.
  
  */
-
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLTransform : NSObject <NSCopying, MDLTransformComponent>
-
-- (instancetype)initWithIdentity NS_DESIGNATED_INITIALIZER;
+/*!
+ @method init
+ @discussion Initialize an MDLTransform's matrices with identity
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithIdentity API_DEPRECATED_WITH_REPLACEMENT("init", macos(10.11, 10.13), ios(9.0, 11.0), tvos(9.0, 11.0));
 - (instancetype)initWithTransformComponent:(id<MDLTransformComponent>)component;
 - (instancetype)initWithTransformComponent:(id<MDLTransformComponent>)component
                            resetsTransform:(BOOL)resetsTransform;
@@ -101,7 +103,7 @@ MDL_EXPORT
 - (vector_float3)shearAtTime:(NSTimeInterval)time;
 - (vector_float3)scaleAtTime:(NSTimeInterval)time;
 
-- (void)setMatrix:(matrix_float4x4)matrix forTime:(NSTimeInterval)time;
+- (void)setMatrix:(matrix_float4x4)matrix forTime:(NSTimeInterval)time API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 - (void)setTranslation:(vector_float3)translation forTime:(NSTimeInterval)time;
 - (void)setRotation:(vector_float3)rotation forTime:(NSTimeInterval)time;
 - (void)setShear:(vector_float3)shear forTime:(NSTimeInterval)time;

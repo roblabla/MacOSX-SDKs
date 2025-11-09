@@ -1,6 +1,6 @@
 /*
         NSTextStorage.h
-        Copyright (c) 1994-2017, Apple Inc.
+        Copyright (c) 1994-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -34,8 +34,8 @@ typedef NS_OPTIONS(NSUInteger, NSTextStorageEditActions) {
 NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextStorage : NSMutableAttributedString
 {
     /*All instance variables are private*/
-    NSRange _editedRange;
-    NSInteger _editedDelta;
+    NSRange _editedRange APPKIT_IVAR;
+    NSInteger _editedDelta APPKIT_IVAR;
     struct {
         unsigned int editedMask:8;
         unsigned int postWillProcess:1;
@@ -45,9 +45,9 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextStorage : NSMutableAttributedStri
 #if __LP64__
         unsigned int :32;
 #endif
-    } _flags;
-    NSMutableArray *_layoutManagers;
-    id _sideData;
+    } _flags APPKIT_IVAR;
+    NSMutableArray *_layoutManagers APPKIT_IVAR;
+    id _sideData APPKIT_IVAR;
 }
 
 /**************************** Layout manager ****************************/

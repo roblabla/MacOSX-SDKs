@@ -88,11 +88,13 @@ typedef NS_ENUM(NSUInteger, MTLDataType){
     MTLDataTypeBool4 = 56,
 
     
-    MTLDataTypeTexture NS_ENUM_AVAILABLE(10_13, 11_0) = 58,
-    MTLDataTypeSampler NS_ENUM_AVAILABLE(10_13, 11_0) = 59,
-    MTLDataTypePointer NS_ENUM_AVAILABLE(10_13, 11_0) = 60,
+    MTLDataTypeTexture API_AVAILABLE(macos(10.13), ios(11.0)) = 58,
+    MTLDataTypeSampler API_AVAILABLE(macos(10.13), ios(11.0)) = 59,
+    MTLDataTypePointer API_AVAILABLE(macos(10.13), ios(11.0)) = 60,
 
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+    MTLDataTypeRenderPipeline  API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios) = 78,
+    MTLDataTypeIndirectCommandBuffer   API_AVAILABLE(macos(10.14), ios(12.0)) = 80,
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 @class MTLArgument;
 
@@ -120,7 +122,7 @@ typedef NS_ENUM(NSUInteger, MTLArgumentType) {
     MTLArgumentTypeSampler = 3,
 
 
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 /*!
  @enum MTLArgumentAccess
@@ -131,19 +133,19 @@ typedef NS_ENUM(NSUInteger, MTLArgumentAccess) {
     MTLArgumentAccessReadWrite  = 1,
     MTLArgumentAccessWriteOnly  = 2,
     
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 @class MTLStructType;
 @class MTLArrayType;
 @class MTLTextureReferenceType;
 @class MTLPointerType;
 
-NS_CLASS_AVAILABLE(10_13, 11_0)
+MTL_EXPORT API_AVAILABLE(macos(10.13), ios(11.0))
 @interface MTLType : NSObject
 @property (readonly) MTLDataType dataType;
 @end
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLStructMember : NSObject
  
 @property (readonly) NSString *name;
@@ -153,15 +155,15 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 - (nullable MTLStructType *)structType;
 - (nullable MTLArrayType *)arrayType;
 
-- (nullable MTLTextureReferenceType *)textureReferenceType  NS_AVAILABLE(10_13, 11_0);
-- (nullable MTLPointerType *)pointerType  NS_AVAILABLE(10_13, 11_0);
+- (nullable MTLTextureReferenceType *)textureReferenceType  API_AVAILABLE(macos(10.13), ios(11.0));
+- (nullable MTLPointerType *)pointerType  API_AVAILABLE(macos(10.13), ios(11.0));
 
-@property (readonly) NSUInteger argumentIndex NS_AVAILABLE(10_13, 11_0);
+@property (readonly) NSUInteger argumentIndex API_AVAILABLE(macos(10.13), ios(11.0));
 
 
 @end
  
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLStructType  : MTLType
 
 @property (readonly) NSArray <MTLStructMember *> *members;
@@ -170,23 +172,23 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 
 @end
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLArrayType  : MTLType
 
 @property (readonly) MTLDataType elementType;
 
 @property (readonly) NSUInteger arrayLength;
 @property (readonly) NSUInteger stride;
-@property (readonly) NSUInteger argumentIndexStride NS_AVAILABLE(10_13, 11_0);
+@property (readonly) NSUInteger argumentIndexStride API_AVAILABLE(macos(10.13), ios(11.0));
 - (nullable MTLStructType *)elementStructType;
 - (nullable MTLArrayType *)elementArrayType;
-- (nullable MTLTextureReferenceType *)elementTextureReferenceType  NS_AVAILABLE(10_13, 11_0);
-- (nullable MTLPointerType *)elementPointerType  NS_AVAILABLE(10_13, 11_0);
+- (nullable MTLTextureReferenceType *)elementTextureReferenceType  API_AVAILABLE(macos(10.13), ios(11.0));
+- (nullable MTLPointerType *)elementPointerType  API_AVAILABLE(macos(10.13), ios(11.0));
 
 
 @end
 
-NS_CLASS_AVAILABLE(10_13, 11_0)
+MTL_EXPORT API_AVAILABLE(macos(10.13), ios(11.0))
 @interface MTLPointerType : MTLType
 
 @property (readonly) MTLDataType elementType;           // MTLDataTypeFloat, MTLDataTypeFloat4, MTLDataTypeStruct, ...
@@ -194,14 +196,14 @@ NS_CLASS_AVAILABLE(10_13, 11_0)
 @property (readonly) NSUInteger alignment;              // min alignment for the element data
 @property (readonly) NSUInteger dataSize;               // sizeof(T) for T *argName
 
-@property (readonly) BOOL elementIsArgumentBuffer NS_AVAILABLE(10_13, 11_0);
+@property (readonly) BOOL elementIsArgumentBuffer API_AVAILABLE(macos(10.13), ios(11.0));
 
-- (nullable MTLStructType *)elementStructType  NS_AVAILABLE(10_13, 11_0);
-- (nullable MTLArrayType *)elementArrayType  NS_AVAILABLE(10_13, 11_0);
+- (nullable MTLStructType *)elementStructType  API_AVAILABLE(macos(10.13), ios(11.0));
+- (nullable MTLArrayType *)elementArrayType  API_AVAILABLE(macos(10.13), ios(11.0));
 
 @end
 
-NS_CLASS_AVAILABLE(10_13, 11_0)
+MTL_EXPORT API_AVAILABLE(macos(10.13), ios(11.0))
 @interface MTLTextureReferenceType : MTLType
 
 @property (readonly) MTLDataType textureDataType; // half, float, int, or uint.
@@ -215,7 +217,7 @@ NS_CLASS_AVAILABLE(10_13, 11_0)
 /*!
  MTLArgument
 */
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLArgument : NSObject
 
 @property (readonly) NSString *name;
@@ -230,8 +232,8 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 @property (readonly) NSUInteger      bufferAlignment;		// min alignment of starting offset in the buffer
 @property (readonly) NSUInteger      bufferDataSize; 		// sizeof(T) for T *argName
 @property (readonly) MTLDataType     bufferDataType; 		// MTLDataTypeFloat, MTLDataTypeFloat4, MTLDataTypeStruct, ...
-@property (readonly) MTLStructType  *bufferStructType;
-@property (readonly, nullable) MTLPointerType *bufferPointerType NS_AVAILABLE(10_13, 11_0);
+@property (readonly, nullable) MTLStructType  *bufferStructType;
+@property (readonly, nullable) MTLPointerType *bufferPointerType API_AVAILABLE(macos(10.13), ios(11.0));
 
 
 // for threadgroup memory arguments
@@ -241,8 +243,8 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 // for texture arguments
 @property (readonly) MTLTextureType textureType; // texture1D, texture2D...
 @property (readonly) MTLDataType    textureDataType; // half, float, int, or uint.
-@property (readonly) BOOL           isDepthTexture NS_AVAILABLE(10_12, 10_0); // true for depth textures
-@property (readonly) NSUInteger     arrayLength NS_AVAILABLE(10_13, 10_0);
+@property (readonly) BOOL           isDepthTexture API_AVAILABLE(macos(10.12), ios(10.0)); // true for depth textures
+@property (readonly) NSUInteger     arrayLength API_AVAILABLE(macos(10.13), ios(10.0));
 
 @end
 

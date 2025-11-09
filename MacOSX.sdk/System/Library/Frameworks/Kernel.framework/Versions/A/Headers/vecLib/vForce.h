@@ -1,6 +1,6 @@
 /*
-vForce.h (from vecLib-622.0)
-Copyright (c) 1999-2017 by Apple Inc. All rights reserved.
+vForce.h (from vecLib-671.220)
+Copyright (c) 1999-2018 by Apple Inc. All rights reserved.
 
 @APPLE_LICENSE_HEADER_START@
 
@@ -22,6 +22,27 @@ limitations under the License.
 @APPLE_LICENSE_HEADER_END@
 */
 
+/*! @header
+ *  vForce provides fast mathematical operations on large arrays.
+ *
+ *  There are several differences between vForce and the similar functions
+ *  available in libm. They are:
+ *  1) vForce can operate on arrays of any size (libm only works on scalars,
+ *     and simd.h on small fixed size vectors).
+ *  2) vForce may treat some or all denormal numbers as zero.
+ *  3) vForce does not guarantee to set floating point flags correctly.
+ *
+ *  However, unlike some fast math alternatives, vForce respects the closure of
+ *  the number system, therefore infinities and NaNs are correctly processed.
+ *
+ *  Developers should assume that the exact value returned and treatment of
+ *  denormal values will vary across different microarchitectures and versions
+ *  of the operating system.
+ *
+ *  For very small vectors, users may wish to consider using simd.h for
+ *  increased performance.
+ */
+
 #ifndef __VFORCE_H
 #define __VFORCE_H
 
@@ -32,7 +53,7 @@ limitations under the License.
 extern "C" {
 #endif
 
-#include <Availability.h>
+#include <os/availability.h>
 
 
 #if !defined __has_feature
@@ -40,14 +61,18 @@ extern "C" {
 #endif
 #if __has_feature(assume_nonnull)
     _Pragma("clang assume_nonnull begin")
-#else
-    #define __nullable
-    #define __nonnull
 #endif
 
 
-/* Set y[i] to the exponential function of x[i], for i=0,..,n-1 */
-void vvexpf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
+/*! @abstract Calculates the exponential function e**x for each element of a
+ *            vector.
+ *
+ *  @param y (output) Output vector of size *n. y[i] is set to exp(x[i]).
+ *
+ *  @param x (input)  Input vector of size *n.
+ *
+ *  @param n (input)  The number of elements in the vectors x and y.          */
+void vvexpf (float * /* y */, const float * /* x */, const int * /* n */) API_AVAILABLE(macos(10.4), ios(5.0));
 #if __has_feature(assume_nonnull)
     _Pragma("clang assume_nonnull end")
 #endif

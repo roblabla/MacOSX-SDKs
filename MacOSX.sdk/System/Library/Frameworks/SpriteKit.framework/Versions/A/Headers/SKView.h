@@ -33,7 +33,7 @@ SK_EXPORT @interface SKView : UIView
 
 #import <Cocoa/Cocoa.h>
 NS_ASSUME_NONNULL_BEGIN
-SK_EXPORT @interface SKView : NSView
+SK_EXPORT @interface SKView : NSView <NSSecureCoding>
 
 #endif
 

@@ -1,7 +1,7 @@
 /*
     NSMergePolicy.h
     Core Data
-    Copyright (c) 2004-2017, Apple Inc.
+    Copyright (c) 2004-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -79,7 +79,10 @@ API_AVAILABLE(macosx(10.7),ios(5.0))
 
 @end
 
-/* Used to report uniqueness constraint violations. Optimistic locking failures will be reported separately from uniquness conflicts and will be resolved first. Each constraint violated will result in a separate NSConstraintConflict, although if an entity hierarchy has a constraint which is extended in subentities, all constraint violations for that constraint will be collapsed into a single report.
+/* Used to report merge conflicts which include uniqueness constraint violations. Optimistic locking failures will be reported
+ separately from uniquness conflicts and will be resolved first. Each constraint violated will result in a separate NSMergeConflict,
+ although if an entity hierarchy has a constraint which is extended in subentities, all constraint violations for that constraint
+ will be collapsed into a single report.
  */
 API_AVAILABLE(macosx(10.11),ios(9.0))
 @interface NSConstraintConflict : NSObject {
@@ -119,7 +122,6 @@ API_AVAILABLE(macosx(10.11),ios(9.0))
 
 @end
 
-
 API_AVAILABLE(macosx(10.7),ios(5.0))
 @interface NSMergePolicy : NSObject {
 #if (!__OBJC2__)
@@ -158,7 +160,7 @@ API_AVAILABLE(macosx(10.7),ios(5.0))
  *  any mistakes will cause permanent data corruption in the form of dangling foreign keys.
  * Will be called before -resolveConstraintConflicts:error:
  */
- - (BOOL)resolveOptimisticLockingVersionConflicts:(NSArray<NSMergeConflict *> *)list error:(NSError **)error API_AVAILABLE(macosx(10.11),ios(9.0));
+- (BOOL)resolveOptimisticLockingVersionConflicts:(NSArray<NSMergeConflict *> *)list error:(NSError **)error API_AVAILABLE(macosx(10.11),ios(9.0));
 
 /* Resolve uniqueness constraint violations for the list of failures.
  *  Will be called after -resolveOptimisticLockingVersionConflicts:error:

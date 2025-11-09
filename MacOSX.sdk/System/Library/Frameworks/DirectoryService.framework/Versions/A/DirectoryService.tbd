@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 69B2724F-5CD8-3020-B04C-2977A270AC4D', 'x86_64: B56D5F82-AED6-301F-BD98-16A18A07A85D' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 222097B7-D721-3F27-9798-ACC95E73F233' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/DirectoryService.framework/Versions/A/DirectoryService
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ ___DirectoryServiceVersionNumber, ___DirectoryServiceVersionString, 
                        _dsAddAttribute, _dsAddAttributeValue, _dsAddChildPIDToReference, 
                        _dsAllocAttributeValueEntry, _dsAllocStringsFromList, _dsAppendAuthBuffer, 

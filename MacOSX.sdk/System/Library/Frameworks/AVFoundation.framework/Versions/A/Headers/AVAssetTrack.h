@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2017 Apple Inc. All rights reserved.
+	Copyright 2010-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -368,7 +368,7 @@ AVF_EXPORT NSString *const AVAssetTrackTrackAssociationsDidChangeNotification NS
 
 @class AVFragmentedAssetTrackInternal;
 
-NS_CLASS_AVAILABLE_MAC(10_11)
+API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos)
 @interface AVFragmentedAssetTrack : AVAssetTrack
 {
 @private

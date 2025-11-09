@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     Constants indicating the type of an AVMetadataObject.
  */
-typedef NSString * AVMetadataObjectType NS_STRING_ENUM NS_AVAILABLE(10_10, 6_0) __TVOS_PROHIBITED;
+typedef NSString * AVMetadataObjectType NS_STRING_ENUM API_AVAILABLE(macos(10.10), ios(6.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 
 #pragma mark - AVMetadataObject
@@ -36,7 +36,7 @@ typedef NSString * AVMetadataObjectType NS_STRING_ENUM NS_AVAILABLE(10_10, 6_0) 
  
     The concrete AVMetadataFaceObject is used by AVCaptureMetadataOutput for face detection.
  */
-NS_CLASS_AVAILABLE(10_10, 6_0) __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.10), ios(6.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVMetadataObject : NSObject
 {
 @private
@@ -96,7 +96,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     AVMetadataFaceObject objects return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeFace NS_AVAILABLE(10_10, 6_0) __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeFace API_AVAILABLE(macos(10.10), ios(6.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 
 #pragma mark - AVMetadataFaceObject
@@ -113,7 +113,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeFace NS_AVAILABLE(10_1
  
     On supported platforms, AVCaptureMetadataOutput outputs arrays of detected face objects. See AVCaptureOutput.h.
  */
-NS_CLASS_AVAILABLE(10_10, 6_0) __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.10), ios(6.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVMetadataFaceObject : AVMetadataObject <NSCopying>
 {
 @private
@@ -175,7 +175,7 @@ NS_CLASS_AVAILABLE(10_10, 6_0) __TVOS_PROHIBITED
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from UPC-E codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeUPCECode NS_AVAILABLE_IOS(7_0) __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeUPCECode API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 /*!
  @constant AVMetadataObjectTypeCode39Code
@@ -185,7 +185,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeUPCECode NS_AVAILABLE_
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from Code 39 codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode39Code NS_AVAILABLE_IOS(7_0) __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode39Code API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 /*!
  @constant AVMetadataObjectTypeCode39Mod43Code
@@ -195,7 +195,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode39Code NS_AVAILABL
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from Code 39 mod 43 codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode39Mod43Code NS_AVAILABLE_IOS(7_0) __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode39Mod43Code API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 /*!
  @constant AVMetadataObjectTypeEAN13Code
@@ -205,7 +205,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode39Mod43Code NS_AVA
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from EAN-13 (including UPC-A) codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeEAN13Code NS_AVAILABLE_IOS(7_0) __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeEAN13Code API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 /*!
  @constant AVMetadataObjectTypeEAN8Code
@@ -215,7 +215,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeEAN13Code NS_AVAILABLE
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from EAN-8 codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeEAN8Code NS_AVAILABLE_IOS(7_0) __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeEAN8Code API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 /*!
  @constant AVMetadataObjectTypeCode93Code
@@ -225,7 +225,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeEAN8Code NS_AVAILABLE_
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from Code 93 codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode93Code NS_AVAILABLE_IOS(7_0) __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode93Code API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 /*!
  @constant AVMetadataObjectTypeCode128Code
@@ -235,7 +235,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode93Code NS_AVAILABL
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from Code 128 codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode128Code NS_AVAILABLE_IOS(7_0) __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode128Code API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 /*!
  @constant AVMetadataObjectTypePDF417Code
@@ -245,7 +245,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode128Code NS_AVAILAB
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from PDF417 codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypePDF417Code NS_AVAILABLE_IOS(7_0) __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypePDF417Code API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 /*!
  @constant AVMetadataObjectTypeQRCode
@@ -255,7 +255,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypePDF417Code NS_AVAILABL
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from QR codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeQRCode NS_AVAILABLE_IOS(7_0) __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeQRCode API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 /*!
  @constant AVMetadataObjectTypeAztecCode
@@ -265,7 +265,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeQRCode NS_AVAILABLE_IO
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from Aztec codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeAztecCode NS_AVAILABLE_IOS(7_0) __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeAztecCode API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 /*!
  @constant AVMetadataObjectTypeInterleaved2of5Code
@@ -275,7 +275,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeAztecCode NS_AVAILABLE
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from Interleaved 2 of 5 codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeInterleaved2of5Code NS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeInterleaved2of5Code API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 /*!
  @constant AVMetadataObjectTypeITF14Code
@@ -285,7 +285,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeInterleaved2of5Code NS
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from ITF14 codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeITF14Code NS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeITF14Code API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 /*!
  @constant AVMetadataObjectTypeDataMatrixCode
@@ -295,7 +295,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeITF14Code NS_AVAILABLE
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from DataMatrix codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeDataMatrixCode NS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeDataMatrixCode API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 
 #pragma mark - AVMetadataMachineReadableCodeObject
@@ -312,7 +312,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeDataMatrixCode NS_AVAI
  
     On supported platforms, AVCaptureMetadataOutput outputs arrays of detected machine readable code objects. See AVCaptureMetadataOutput.h.
  */
-NS_CLASS_AVAILABLE_IOS(7_0) __TVOS_PROHIBITED
+API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVMetadataMachineReadableCodeObject : AVMetadataObject
 {
 @private
@@ -354,7 +354,7 @@ NS_CLASS_AVAILABLE_IOS(7_0) __TVOS_PROHIBITED
  @discussion
     The value may be nil if an abstract representation of a machine readable code object is not defined for the code type or could not be detected.
  */
-@property(readonly, nullable) CIBarcodeDescriptor *descriptor NS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED;
+@property(readonly, nullable) CIBarcodeDescriptor *descriptor API_AVAILABLE(ios(11.0));
 
 @end
 

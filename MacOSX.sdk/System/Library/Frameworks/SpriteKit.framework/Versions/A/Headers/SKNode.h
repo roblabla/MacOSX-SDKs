@@ -43,12 +43,12 @@ typedef NS_ENUM(NSInteger, SKNodeFocusBehavior) {
  */
 #if TARGET_OS_IPHONE
 #if SKVIEW_AVAILABLE
-SK_EXPORT @interface SKNode : UIResponder <NSCopying, NSCoding, UIFocusItem>
+SK_EXPORT @interface SKNode : UIResponder <NSCopying, NSSecureCoding, UIFocusItem>
 #else
-SK_EXPORT @interface SKNode : NSObject <NSCopying, NSCoding>
+SK_EXPORT @interface SKNode : NSObject <NSCopying, NSSecureCoding>
 #endif
 #else
-SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
+SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSSecureCoding>
 #endif
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -61,6 +61,8 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
 + (instancetype)node;
 
 + (nullable instancetype)nodeWithFileNamed:(NSString*)filename;
+
++ (nullable instancetype)nodeWithFileNamed:(NSString *)filename securelyWithClasses:(NSSet<Class> *)classes andError:(NSError **)error API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
 
 @property (nonatomic, readonly) CGRect frame;
 
@@ -228,7 +230,7 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
 - (BOOL)inParentHierarchy:(SKNode *)parent;
 
 - (void)runAction:(SKAction *)action;
-- (void)runAction:(SKAction *)action completion:(void (^)())block;
+- (void)runAction:(SKAction *)action completion:(void (^)(void))block;
 - (void)runAction:(SKAction *)action withKey:(NSString *)key;
 
 - (BOOL)hasActions;

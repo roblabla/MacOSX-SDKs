@@ -1,11 +1,10 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 58D90EC6-7AA6-3D08-A03C-76BAC7C6F436', 'x86_64: F3E013D3-5F18-39F7-A56F-2640A90BC7F9' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
 platform:        macosx
 install-name:    /usr/lib/libcupsppdc.1.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ __ZN10ppdcChoiceC1EPKcS1_S1_, __ZN10ppdcChoiceC2EPKcS1_S1_, 
                        __ZN10ppdcChoiceD0Ev, __ZN10ppdcChoiceD1Ev, __ZN10ppdcChoiceD2Ev, 
                        __ZN10ppdcDriver10find_groupEPKc, __ZN10ppdcDriver11find_optionEPKc, 

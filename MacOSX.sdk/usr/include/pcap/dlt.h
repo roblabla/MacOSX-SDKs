@@ -1310,14 +1310,10 @@
  */
 #define DLT_RDS		265
 
-#ifdef __APPLE__
-
 /*
  * USB packets, beginning with a Darwin (macOS, etc.) USB header.
  */
 #define DLT_USB_DARWIN		266
-
-#endif /* __APPLE__ */
 
 /*
  * In case the code that includes this file (directly or indirectly)

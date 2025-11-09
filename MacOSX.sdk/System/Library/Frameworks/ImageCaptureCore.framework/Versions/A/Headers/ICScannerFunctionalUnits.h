@@ -18,6 +18,7 @@
 
 //------------------------------------------------------------------------------------------------------------------------------
 
+#import <ImageCaptureCore/ImageCapturePlatform.h>
 #import <ImageCaptureCore/ICCommonConstants.h>
 
 //-------------------------------------------------------------------------------------------------------------------- Constants
@@ -30,6 +31,7 @@
   @constant ICScannerFunctionalUnitTypeDocumentFeeder Document feeder functional unit.
 */
 
+IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICScannerFunctionalUnitType)
 {
     ICScannerFunctionalUnitTypeFlatbed              = 0,
@@ -49,6 +51,7 @@ typedef NS_ENUM(NSUInteger, ICScannerFunctionalUnitType)
   @constant ICScannerMeasurementUnitPixels      
 */
 
+IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICScannerMeasurementUnit)
 {
     ICScannerMeasurementUnitInches      = 0,
@@ -67,6 +70,7 @@ typedef NS_ENUM(NSUInteger, ICScannerMeasurementUnit)
   @constant ICScannerBitDepth16Bits Image with 16 bits per channel.
 */
 
+IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICScannerBitDepth)
 {
     ICScannerBitDepth1Bit   = 1,
@@ -81,6 +85,7 @@ typedef NS_ENUM(NSUInteger, ICScannerBitDepth)
   @constant ICScannerColorDataFormatTypePlanar For multi-channel data (e.g., RGB) each channel is transferred sequentially.
 */
 
+IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICScannerColorDataFormatType)
 {
     ICScannerColorDataFormatTypeChunky  = 0,
@@ -101,6 +106,7 @@ typedef NS_ENUM(NSUInteger, ICScannerColorDataFormatType)
   @constant ICScannerPixelDataTypeCIEXYZ Color image in CIEXYZ color space.
 */
 
+IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICScannerPixelDataType)
 {
     ICScannerPixelDataTypeBW      = 0,
@@ -194,6 +200,7 @@ typedef NS_ENUM(NSUInteger, ICScannerPixelDataType)
   @constant ICScannerDocumentTypeLF             Large Format,                     100.00 mm x  120.00 mm
 */
 
+IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICScannerDocumentType)
 {
     ICScannerDocumentTypeDefault      = 0,
@@ -279,6 +286,7 @@ typedef NS_ENUM(NSUInteger, ICScannerDocumentType)
   @constant ICScannerStateOverviewScanInProgress The scanner functional unit is performing an overview scan.
 */
 
+IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(unsigned int, ICScannerFunctionalUnitState)
 {
     ICScannerFunctionalUnitStateReady                  = (1 << 0),
@@ -294,6 +302,7 @@ typedef NS_ENUM(unsigned int, ICScannerFunctionalUnitState)
   @constant ICScannerFeatureTypeBoolean The value of this feature can be YES or NO.
 */
 
+IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICScannerFeatureType)
 {
     ICScannerFeatureTypeEnumeration = 0,
@@ -309,6 +318,7 @@ typedef NS_ENUM(NSUInteger, ICScannerFeatureType)
     @discussion The scanner functional units may have one or more instances of these classes to allow users to choose scanner-specific settings or operations before performing a scan.
 */
 
+IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 @interface ICScannerFeature : NSObject
 {
 @private
@@ -348,11 +358,11 @@ typedef NS_ENUM(NSUInteger, ICScannerFeatureType)
 /*!
     @class ICScannerFeatureEnumeration
     @abstract ICScannerFeatureEnumeration object is used to represent a feature of a scanner functional unit that can have one of several discrete values.
-    @discussion 
 */
 
 NS_ASSUME_NONNULL_BEGIN
 
+IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 @interface ICScannerFeatureEnumeration : ICScannerFeature
 {
 @private
@@ -399,9 +409,9 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
     @class ICScannerFeatureRange
     @abstract ICScannerFeatureRange object is used to represent a property of a scanner functional unit whose value lies within a range.
-    @discussion 
 */
 
+IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 @interface ICScannerFeatureRange : ICScannerFeature
 {
 @private
@@ -448,9 +458,9 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
     @class ICScannerFeatureBoolean
     @abstract ICScannerFeatureBoolean object is used to represent a property of a scanner functional unit whose value can be YES or NO.
-    @discussion 
 */
 
+IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 @interface ICScannerFeatureBoolean : ICScannerFeature
 {
 @private
@@ -469,9 +479,9 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
     @class ICScannerFeatureTemplate
     @abstract ICScannerFeatureTemplate object is used to define a group of one or more rectangular scan areas that can be used with a scanner functional unit.
-    @discussion 
 */
 
+IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 @interface ICScannerFeatureTemplate : ICScannerFeature
 {
 @private
@@ -487,6 +497,7 @@ NS_ASSUME_NONNULL_BEGIN
     @abstract ICScannerFunctionalUnit is an abstract class that represents a scanner functiona unit. ImageCaptureCore defines three concrete subclasses of ICScannerFunctionalUnit: ICScannerFunctionalUnitFlatbed, ICScannerFunctionalUnitPositiveTransparency, ICScannerFunctionalUnitNegativeTransparency and ICScannerFunctionalUnitDocumentFeeder. ICScannerDevice creates instances of these concrete subclasses.
 */
 
+IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 @interface ICScannerFunctionalUnit : NSObject
 {
 @private
@@ -713,6 +724,7 @@ NS_ASSUME_NONNULL_BEGIN
     @discussion This represents the flatbed  unit on the scanner.
 */
 
+IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 @interface ICScannerFunctionalUnitFlatbed : ICScannerFunctionalUnit
 {
 @private
@@ -749,6 +761,7 @@ NS_ASSUME_NONNULL_BEGIN
     @discussion This represents the transparency unit on the scanner for scanning postives
 */
 
+IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 @interface ICScannerFunctionalUnitPositiveTransparency : ICScannerFunctionalUnit
 {
 @private
@@ -785,6 +798,7 @@ NS_ASSUME_NONNULL_BEGIN
     @discussion This represents the transparency unit on the scanner for scanning negatives.
 */
 
+IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 @interface ICScannerFunctionalUnitNegativeTransparency : ICScannerFunctionalUnit
 {
 @private
@@ -821,6 +835,7 @@ NS_ASSUME_NONNULL_BEGIN
     @discussion This represents the document feeder unit on the scanner.
 */
 
+IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 @interface ICScannerFunctionalUnitDocumentFeeder : ICScannerFunctionalUnit
 {
 @private

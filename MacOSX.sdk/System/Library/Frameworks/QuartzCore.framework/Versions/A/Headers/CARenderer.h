@@ -1,6 +1,6 @@
 /* CoreAnimation - CARenderer.h
 
-   Copyright (c) 2007-2017, Apple Inc.
+   Copyright (c) 2007-2018, Apple Inc.
    All rights reserved. */
 
 /* This class lets an application manually drive the rendering of a
@@ -38,7 +38,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-CA_CLASS_AVAILABLE (10.5)
+API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface CARenderer : NSObject
 {
 @private
@@ -49,13 +49,19 @@ CA_CLASS_AVAILABLE (10.5)
  * Core OpenGL context. 'dict' is an optional dictionary of parameters.  */
 
 + (CARenderer *)rendererWithCGLContext:(void *)ctx
-    options:(nullable NSDictionary *)dict;
+    options:(nullable NSDictionary *)dict
+#ifndef GL_SILENCE_DEPRECATION
+    API_DEPRECATED("+rendererWithMTLTexture", macos(10.5, 10.14));
+#else
+    API_AVAILABLE(macos(10.5));
+#endif
 
 /* Create a new renderer object. Its render target is the specified
  * texture. 'dict' is an optional dictionary of parameters.  */
 
 + (CARenderer *)rendererWithMTLTexture:(id<MTLTexture>)tex
-    options:(nullable NSDictionary *)dict CA_AVAILABLE_STARTING(10.13, 11.0, 11.0, 4.0);
+    options:(nullable NSDictionary *)dict
+    API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* The root layer associated with the renderer. */
 
@@ -96,6 +102,9 @@ CA_CLASS_AVAILABLE (10.5)
 
 - (void)endFrame;
 
+/* Change the renderer's destination Metal texture. */
+
+- (void)setDestination:(id<MTLTexture>)tex;
 @end
 
 /** Options for the renderer options dictionary. **/
@@ -103,6 +112,13 @@ CA_CLASS_AVAILABLE (10.5)
 /* The CGColorSpaceRef object defining the output color space. */
 
 CA_EXTERN NSString * const kCARendererColorSpace
-    CA_AVAILABLE_STARTING (10.6, 2.0, 9.0, 2.0);
+    API_AVAILABLE(macos(10.6), ios(2.0), watchos(2.0), tvos(9.0));
+
+/* The Metal Command Queue object against which to submit work.
+ * The client can issue blits and other synchronization operations
+ * to this queue after rendering if necessary. */
+
+CA_EXTERN NSString * const kCARendererMetalCommandQueue
+    API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 
 NS_ASSUME_NONNULL_END

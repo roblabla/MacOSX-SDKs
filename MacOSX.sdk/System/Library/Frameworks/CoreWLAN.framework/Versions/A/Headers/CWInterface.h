@@ -59,6 +59,8 @@ NS_CLASS_AVAILABLE_MAC(10_6)
 		dispatch_queue_t		_eventQueue;
 
         NSXPCConnection         *_xpcConnection;
+    
+        BOOL                    _ownsXPCConnection;
 }
 
 /*!
@@ -321,7 +323,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * Use +[CWInterface interfaceNames] to get a list of available Wi-Fi interface names.
  * Returns a CWInterface object for the default Wi-Fi interface if no interface name is specified.
  */
-+ (instancetype)interfaceWithName:(NSString *)name NS_DEPRECATED_MAC(10_6, 10_10, "Use -[CWWiFiClient interfaceWithName:] instead");
++ (instancetype)interfaceWithName:(nullable NSString *)name NS_DEPRECATED_MAC(10_6, 10_10, "Use -[CWWiFiClient interfaceWithName:] instead");
 
 /*!
  * @method
@@ -336,7 +338,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * Use +[CWInterface interfaceNames] to get a list of available Wi-Fi interface names.
  * Returns a CWInterface object for the default Wi-Fi interface if no interface name is specified.
  */
-- (instancetype)initWithInterfaceName:(NSString *)name NS_DEPRECATED_MAC(10_6, 10_10, "Use -[CWWiFiClient interfaceWithName:] instead");
+- (instancetype)initWithInterfaceName:(nullable NSString *)name NS_DEPRECATED_MAC(10_6, 10_10, "Use -[CWWiFiClient interfaceWithName:] instead");
 
 /*! @functiongroup Setting the Power State */
 

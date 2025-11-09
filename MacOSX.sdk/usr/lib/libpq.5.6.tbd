@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A924C24A-1E23-3B78-9BE5-4CDE96429EB3' ]
+uuids:           [ 'x86_64: 678AE5EC-91DE-3614-AF0A-4E3D40064D04' ]
 platform:        macosx
 install-name:    /usr/lib/libpq.5.dylib
 current-version: 5.6

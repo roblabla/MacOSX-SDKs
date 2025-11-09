@@ -1,28 +1,33 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D6E07593-084F-3982-86E8-95648B5FCD70' ]
+uuids:           [ 'x86_64: 80DE2FD1-85DB-3E98-98BD-F22A2600DD25' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/MetalPerformanceShaders.framework/Frameworks/MPSImage.framework/Versions/A/MPSImage
-current-version: 86
+current-version: 121.1.1
 parent-umbrella: MetalPerformanceShaders
 exports:         
   - archs:           [ x86_64 ]
     allowable-clients: [ MetalPerformanceShaders ]
     symbols:         [ _MPSSubTileEncode ]
-    objc-classes:    [ _MPSBinaryImageKernel, _MPSImageAdd, _MPSImageAreaMax, _MPSImageAreaMin, 
-                       _MPSImageArithmetic, _MPSImageBilinearScale, _MPSImageBox, 
-                       _MPSImageConversion, _MPSImageConvolution, _MPSImageCopyToMatrix, 
-                       _MPSImageDilate, _MPSImageDivide, _MPSImageErode, _MPSImageFindKeypoints, 
-                       _MPSImageGaussianBlur, _MPSImageGaussianPyramid, _MPSImageHistogram, 
-                       _MPSImageHistogramEqualization, _MPSImageHistogramSpecification, 
-                       _MPSImageIntegral, _MPSImageIntegralOfSquares, _MPSImageLanczosScale, 
-                       _MPSImageLaplacian, _MPSImageMedian, _MPSImageMultiply, _MPSImageSobel, 
-                       _MPSImageStatisticsMean, _MPSImageStatisticsMeanAndVariance, 
-                       _MPSImageStatisticsMinAndMax, _MPSImageSubtract, _MPSImageTent, 
-                       _MPSImageThresholdBinary, _MPSImageThresholdBinaryInverse, 
-                       _MPSImageThresholdToZero, _MPSImageThresholdToZeroInverse, 
-                       _MPSImageThresholdTruncate, _MPSImageTranspose, _MPSUnaryImageKernel ]
-    objc-ivars:      [ _MPSBinaryImageKernel._encode, _MPSBinaryImageKernel._encodeData, 
-                       _MPSUnaryImageKernel._encode, _MPSUnaryImageKernel._encodeData, 
-                       _MPSUnaryImageKernel._getPreferredTileSize ]
+    objc-classes:    [ MPSBinaryImageKernel, MPSImageAdd, MPSImageAreaMax, MPSImageAreaMin, 
+                       MPSImageArithmetic, MPSImageBilinearScale, MPSImageBox, MPSImageConversion, 
+                       MPSImageConvolution, MPSImageCopyToMatrix, MPSImageDilate, 
+                       MPSImageDivide, MPSImageErode, MPSImageEuclideanDistanceTransform, 
+                       MPSImageFindKeypoints, MPSImageGaussianBlur, MPSImageGaussianPyramid, 
+                       MPSImageGuidedFilter, MPSImageHistogram, MPSImageHistogramEqualization, 
+                       MPSImageHistogramSpecification, MPSImageIntegral, MPSImageIntegralOfSquares, 
+                       MPSImageLanczosScale, MPSImageLaplacian, MPSImageLaplacianPyramid, 
+                       MPSImageLaplacianPyramidAdd, MPSImageLaplacianPyramidSubtract, 
+                       MPSImageMedian, MPSImageMultiply, MPSImageNormalizedHistogram, 
+                       MPSImageReduceColumnMax, MPSImageReduceColumnMean, MPSImageReduceColumnMin, 
+                       MPSImageReduceColumnSum, MPSImageReduceRowMax, MPSImageReduceRowMean, 
+                       MPSImageReduceRowMin, MPSImageReduceRowSum, MPSImageSobel, 
+                       MPSImageStatisticsMean, MPSImageStatisticsMeanAndVariance, 
+                       MPSImageStatisticsMinAndMax, MPSImageSubtract, MPSImageTent, 
+                       MPSImageThresholdBinary, MPSImageThresholdBinaryInverse, MPSImageThresholdToZero, 
+                       MPSImageThresholdToZeroInverse, MPSImageThresholdTruncate, 
+                       MPSImageTranspose, MPSMatrixCopyToImage, MPSUnaryImageKernel ]
+    objc-ivars:      [ MPSBinaryImageKernel._encode, MPSBinaryImageKernel._encodeData, 
+                       MPSUnaryImageKernel._encode, MPSUnaryImageKernel._encodeData, 
+                       MPSUnaryImageKernel._getPreferredTileSize ]
 ...

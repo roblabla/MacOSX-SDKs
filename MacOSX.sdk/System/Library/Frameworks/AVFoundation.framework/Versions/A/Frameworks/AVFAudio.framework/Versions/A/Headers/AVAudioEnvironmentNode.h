@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger, AVAudioEnvironmentDistanceAttenuationModel) {
         A standalone instance of AVAudioEnvironmentDistanceAttenuationParameters cannot be created. 
         Only an instance vended out by a source object (e.g. AVAudioEnvironmentNode) can be used.
 */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioEnvironmentDistanceAttenuationParameters : NSObject {
 @private
 	void *_impl;
@@ -113,7 +113,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
         Only an instance vended out by a source object (e.g. AVAudioEnvironmentNode) can be used.
 */
 
-NS_CLASS_AVAILABLE(10_10, 8_0)
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioEnvironmentReverbParameters : NSObject {
 @private
 	void *_impl;
@@ -183,7 +183,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
         kAudioChannelLayoutTag_AudioUnit_8;
 */
 
-NS_CLASS_AVAILABLE(10_10, 8_0) __WATCHOS_PROHIBITED
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAudioEnvironmentNode : AVAudioNode <AVAudioMixing>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;

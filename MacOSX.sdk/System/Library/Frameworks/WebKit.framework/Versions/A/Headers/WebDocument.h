@@ -27,6 +27,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <WebKit/WebKitAvailability.h>
 
 #import <AppKit/AppKit.h>
 
@@ -37,6 +38,7 @@
     @protocol WebDocumentView
     @discussion Protocol implemented by the document view of WebFrameView
 */
+WEBKIT_DEPRECATED_MAC(10_3, 10_14)
 @protocol WebDocumentView <NSObject>
 
 /*!
@@ -88,6 +90,7 @@
     @protocol WebDocumentSearching
     @discussion Optional protocol for searching document view of WebFrameView. 
 */
+WEBKIT_DEPRECATED_MAC(10_3, 10_14)
 @protocol WebDocumentSearching <NSObject>
 /*!
     @method searchFor:direction:caseSensitive:wrap:
@@ -106,6 +109,7 @@
     @protocol WebDocumentText
     @discussion Optional protocol for supporting text operations.
 */
+WEBKIT_DEPRECATED_MAC(10_3, 10_14)
 @protocol WebDocumentText <NSObject>
 
 /*!
@@ -158,6 +162,7 @@
     @protocol WebDocumentRepresentation
     @discussion Protocol implemented by the document representation of a data source.
 */
+WEBKIT_DEPRECATED_MAC(10_3, 10_14)
 @protocol WebDocumentRepresentation <NSObject>
 /*!
     @method setDataSource:

@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2016 Apple Inc. All rights reserved.
+	Copyright 2011-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -116,7 +116,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
   @result		An instance of NSArray containing the media selection options of the specified NSArray that match the specified
 				media characteristics.
 */
-+ (NSArray<AVMediaSelectionOption *> *)mediaSelectionOptionsFromArray:(NSArray<AVMediaSelectionOption *> *)mediaSelectionOptions withMediaCharacteristics:(NSArray<NSString *> *)mediaCharacteristics;
++ (NSArray<AVMediaSelectionOption *> *)mediaSelectionOptionsFromArray:(NSArray<AVMediaSelectionOption *> *)mediaSelectionOptions withMediaCharacteristics:(NSArray<AVMediaCharacteristic> *)mediaCharacteristics;
 
 /*!
   @method		mediaSelectionOptionsFromArray:withoutMediaCharacteristics:
@@ -128,7 +128,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
   @result		An instance of NSArray containing the media selection options of the specified NSArray that lack the specified
 				media characteristics.
 */
-+ (NSArray<AVMediaSelectionOption *> *)mediaSelectionOptionsFromArray:(NSArray<AVMediaSelectionOption *> *)mediaSelectionOptions withoutMediaCharacteristics:(NSArray<NSString *> *)mediaCharacteristics;
++ (NSArray<AVMediaSelectionOption *> *)mediaSelectionOptionsFromArray:(NSArray<AVMediaSelectionOption *> *)mediaSelectionOptions withoutMediaCharacteristics:(NSArray<AVMediaCharacteristic> *)mediaCharacteristics;
 
 @end
 
@@ -153,7 +153,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  @property		mediaType
  @abstract		The media type of the media data, e.g. AVMediaTypeAudio, AVMediaTypeSubtitle, etc.
 */
-@property (nonatomic, readonly) NSString *mediaType;
+@property (nonatomic, readonly) AVMediaType mediaType;
 
 /*!
  @property		mediaSubTypes

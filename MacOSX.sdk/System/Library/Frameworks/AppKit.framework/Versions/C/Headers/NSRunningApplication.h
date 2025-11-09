@@ -1,7 +1,7 @@
 /*
 	NSRunningApplication.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -56,22 +56,22 @@ typedef NS_ENUM(NSInteger, NSApplicationActivationPolicy) {
 NS_CLASS_AVAILABLE(10_6, NA)
 @interface NSRunningApplication : NSObject {
     @private
-    id _superReserved __unused;
-    void *_asn;
-    void **_helpers;
-    id _obsInfo;
-    NSLock *_lock;
-    NSString *_bundleID;
-    NSString *_localizedName;
-    NSURL *_bundleURL;
-    NSURL *_executableURL;
-    NSDate *_launchDate;
-    NSImage *_icon;
-    int _pid;
-    unsigned int _lastSeed;
-    unsigned int _activeSeed;
-    unsigned int _staleSeed;
-    unsigned long long _obsMask;
+    id _superReserved __unused APPKIT_IVAR;
+    void *_asn APPKIT_IVAR;
+    void **_helpers APPKIT_IVAR;
+    id _obsInfo APPKIT_IVAR;
+    NSLock *_lock APPKIT_IVAR;
+    NSString *_bundleID APPKIT_IVAR;
+    NSString *_localizedName APPKIT_IVAR;
+    NSURL *_bundleURL APPKIT_IVAR;
+    NSURL *_executableURL APPKIT_IVAR;
+    NSDate *_launchDate APPKIT_IVAR;
+    NSImage *_icon APPKIT_IVAR;
+    int _pid APPKIT_IVAR;
+    unsigned int _lastSeed APPKIT_IVAR;
+    unsigned int _activeSeed APPKIT_IVAR;
+    unsigned int _staleSeed APPKIT_IVAR;
+    unsigned long long _obsMask APPKIT_IVAR;
     struct {
 	unsigned fetchedDynamic:1;
 	unsigned deadToUs:1;
@@ -83,8 +83,8 @@ NS_CLASS_AVAILABLE(10_6, NA)
 	unsigned arch:3;
 	unsigned activationPolicy:3;
         unsigned reserved1:19;
-    } _aflags;
-    id _appReserved __unused;
+    } _aflags APPKIT_IVAR;
+    id _appReserved __unused APPKIT_IVAR;
 }
 
 /* Indicates that the process is an exited application.  This is observable through KVO. */

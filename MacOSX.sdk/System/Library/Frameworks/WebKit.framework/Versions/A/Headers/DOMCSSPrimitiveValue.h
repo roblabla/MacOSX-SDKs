@@ -61,15 +61,15 @@ enum {
     DOM_CSS_VH = 27,
     DOM_CSS_VMIN = 28,
     DOM_CSS_VMAX = 29
-} NS_ENUM_AVAILABLE_MAC(10_4);
+} WEBKIT_ENUM_DEPRECATED_MAC(10_4, 10_14);
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMCSSPrimitiveValue : DOMCSSValue
 @property (readonly) unsigned short primitiveType;
 
-- (void)setFloatValue:(unsigned short)unitType floatValue:(float)floatValue NS_AVAILABLE_MAC(10_5);
+- (void)setFloatValue:(unsigned short)unitType floatValue:(float)floatValue WEBKIT_AVAILABLE_MAC(10_5);
 - (float)getFloatValue:(unsigned short)unitType;
-- (void)setStringValue:(unsigned short)stringType stringValue:(NSString *)stringValue NS_AVAILABLE_MAC(10_5);
+- (void)setStringValue:(unsigned short)stringType stringValue:(NSString *)stringValue WEBKIT_AVAILABLE_MAC(10_5);
 - (NSString *)getStringValue;
 - (DOMCounter *)getCounterValue;
 - (DOMRect *)getRectValue;
@@ -77,6 +77,6 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @end
 
 @interface DOMCSSPrimitiveValue (DOMCSSPrimitiveValueDeprecated)
-- (void)setFloatValue:(unsigned short)unitType :(float)floatValue NS_DEPRECATED_MAC(10_4, 10_5);
-- (void)setStringValue:(unsigned short)stringType :(NSString *)stringValue NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)setFloatValue:(unsigned short)unitType :(float)floatValue WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (void)setStringValue:(unsigned short)stringType :(NSString *)stringValue WEBKIT_DEPRECATED_MAC(10_4, 10_5);
 @end

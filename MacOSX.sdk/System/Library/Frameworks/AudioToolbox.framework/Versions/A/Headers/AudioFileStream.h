@@ -298,7 +298,7 @@ AudioFileStreamOpen (
 							AudioFileStream_PacketsProc				inPacketsProc,
                 			AudioFileTypeID							inFileTypeHint,
                 			AudioFileStreamID __nullable * __nonnull outAudioFileStream)
-																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+																		API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -325,7 +325,7 @@ AudioFileStreamParseBytes(
 								UInt32							inDataByteSize,
 								const void * __nullable			inData,
 								AudioFileStreamParseFlags		inFlags)
-																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+																		API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function		AudioFileStreamSeek
@@ -354,7 +354,7 @@ AudioFileStreamSeek(
 								SInt64							inPacketOffset,
 								SInt64 *						outDataByteOffset,
 								AudioFileStreamSeekFlags *		ioFlags)
-																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+																		API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function		AudioFileStreamGetPropertyInfo
@@ -379,7 +379,7 @@ AudioFileStreamGetPropertyInfo(
 								AudioFileStreamPropertyID		inPropertyID,
 								UInt32 * __nullable				outPropertyDataSize,
 								Boolean * __nullable			outWritable)
-																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+																		API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -405,7 +405,7 @@ AudioFileStreamGetProperty(
 							AudioFileStreamPropertyID			inPropertyID,
 							UInt32 *							ioPropertyDataSize,
 							void *								outPropertyData)		
-																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+																		API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function		AudioFileStreamSetProperty
@@ -429,7 +429,7 @@ AudioFileStreamSetProperty(
 							AudioFileStreamPropertyID			inPropertyID,
 							UInt32								inPropertyDataSize,
 							const void *						inPropertyData)		
-																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+																		API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function		AudioFileStreamClose
@@ -441,7 +441,7 @@ AudioFileStreamSetProperty(
 */
 extern OSStatus
 AudioFileStreamClose(			AudioFileStreamID				inAudioFileStream)										
-																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+																		API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 
 #if defined(__cplusplus)

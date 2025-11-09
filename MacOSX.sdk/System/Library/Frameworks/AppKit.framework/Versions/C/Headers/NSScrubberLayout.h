@@ -1,11 +1,12 @@
 /*
  NSScrubberLayout.h
  Application Kit
- Copyright (c) 2016-2017, Apple Inc.
+ Copyright (c) 2016-2018, Apple Inc.
  All rights reserved.
  */
 
 #import <Foundation/NSGeometry.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,13 +23,13 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSScrubberLayoutAttributes : NSObject <NSCopying> {
 @private
-    NSInteger _itemIndex;
-    NSRect _frame;
-    CGFloat _alpha;
-    unsigned int _escapes:1;
-    unsigned int _reservedLayoutAttributeFlags:31 __unused;
+    NSInteger _itemIndex APPKIT_IVAR;
+    NSRect _frame APPKIT_IVAR;
+    CGFloat _alpha APPKIT_IVAR;
+    unsigned int _escapes:1 APPKIT_IVAR;
+    unsigned int _reservedLayoutAttributeFlags:31 __unused APPKIT_IVAR;
 #ifndef __OBJC2__
-    id _reserved[2] __unused;
+    id _reserved[2] __unused APPKIT_IVAR;
 #endif
 }
 
@@ -49,9 +50,9 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSScrubberLayout : NSObject <NSCoding> {
 @private
-    __weak id _private;
-    unsigned int _dirty:1;
-    unsigned int _reservedFlags:31 __unused;
+    __weak id _private APPKIT_IVAR;
+    unsigned int _dirty:1 APPKIT_IVAR;
+    unsigned int _reservedFlags:31 __unused APPKIT_IVAR;
 }
 
 #pragma mark Base Implementation
@@ -120,9 +121,9 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSScrubberFlowLayout : NSScrubberLayout {
 @private
-    id _support;
-    CGFloat _itemSpacing;
-    NSSize _itemSize;
+    id _support APPKIT_IVAR;
+    CGFloat _itemSpacing APPKIT_IVAR;
+    NSSize _itemSize APPKIT_IVAR;
 }
 
 /// The amount of horizontal spacing between items in points. The default value is 0.0.
@@ -144,7 +145,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSScrubberProportionalLayout : NSScrubberLayout {
 @private
-    NSInteger _numberOfVisibleItems;
+    NSInteger _numberOfVisibleItems APPKIT_IVAR;
 }
 
 /// The number of items that should fit within the scrubber's viewport at once.

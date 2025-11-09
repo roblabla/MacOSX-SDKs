@@ -28,27 +28,27 @@
 @class DOMHTMLCollection;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMHTMLDocument : DOMDocument
-@property (readonly, strong) DOMHTMLCollection *embeds NS_AVAILABLE_MAC(10_5);
-@property (readonly, strong) DOMHTMLCollection *plugins NS_AVAILABLE_MAC(10_5);
-@property (readonly, strong) DOMHTMLCollection *scripts NS_AVAILABLE_MAC(10_5);
-@property (readonly) int width NS_AVAILABLE_MAC(10_5);
-@property (readonly) int height NS_AVAILABLE_MAC(10_5);
-@property (copy) NSString *dir NS_AVAILABLE_MAC(10_5);
-@property (copy) NSString *designMode NS_AVAILABLE_MAC(10_5);
-@property (readonly, copy) NSString *compatMode NS_AVAILABLE_MAC(10_6);
-@property (copy) NSString *bgColor NS_AVAILABLE_MAC(10_5);
-@property (copy) NSString *fgColor NS_AVAILABLE_MAC(10_5);
-@property (copy) NSString *alinkColor NS_AVAILABLE_MAC(10_5);
-@property (copy) NSString *linkColor NS_AVAILABLE_MAC(10_5);
-@property (copy) NSString *vlinkColor NS_AVAILABLE_MAC(10_5);
+@property (readonly, strong) DOMHTMLCollection *embeds WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly, strong) DOMHTMLCollection *plugins WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly, strong) DOMHTMLCollection *scripts WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int width WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int height WEBKIT_AVAILABLE_MAC(10_5);
+@property (copy) NSString *dir WEBKIT_AVAILABLE_MAC(10_5);
+@property (copy) NSString *designMode WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *compatMode WEBKIT_AVAILABLE_MAC(10_6);
+@property (copy) NSString *bgColor WEBKIT_AVAILABLE_MAC(10_5);
+@property (copy) NSString *fgColor WEBKIT_AVAILABLE_MAC(10_5);
+@property (copy) NSString *alinkColor WEBKIT_AVAILABLE_MAC(10_5);
+@property (copy) NSString *linkColor WEBKIT_AVAILABLE_MAC(10_5);
+@property (copy) NSString *vlinkColor WEBKIT_AVAILABLE_MAC(10_5);
 
 - (void)open;
 - (void)close;
 - (void)write:(NSString *)text;
 - (void)writeln:(NSString *)text;
-- (void)clear NS_AVAILABLE_MAC(10_6);
-- (void)captureEvents NS_AVAILABLE_MAC(10_5);
-- (void)releaseEvents NS_AVAILABLE_MAC(10_5);
+- (void)clear WEBKIT_AVAILABLE_MAC(10_6);
+- (void)captureEvents WEBKIT_AVAILABLE_MAC(10_5);
+- (void)releaseEvents WEBKIT_AVAILABLE_MAC(10_5);
 @end

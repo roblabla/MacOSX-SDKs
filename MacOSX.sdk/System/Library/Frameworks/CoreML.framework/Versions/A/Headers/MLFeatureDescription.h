@@ -11,6 +11,8 @@
 #import <CoreML/MLDictionaryConstraint.h>
 #import <CoreML/MLMultiArrayConstraint.h>
 #import <CoreML/MLImageConstraint.h>
+#import <CoreML/MLSequenceConstraint.h>
+#import <CoreML/MLExport.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Description of a feature
  */
 API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0))
+ML_EXPORT
 @interface MLFeatureDescription : NSObject<NSCopying>
 
 /// Name of feature
@@ -41,13 +44,16 @@ API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0))
 @interface MLFeatureDescription (MLFeatureValueConstraints)
 
 /// Constraint when type == MLFeatureTypeMultiArray, nil otherwise
-@property (readwrite, nullable, nonatomic) MLMultiArrayConstraint *multiArrayConstraint;
+@property (readonly, nullable, nonatomic) MLMultiArrayConstraint *multiArrayConstraint;
 
 /// Constraint when type == MLFeatureTypeImage, nil otherwise
-@property (readwrite, nullable, nonatomic) MLImageConstraint *imageConstraint;
+@property (readonly, nullable, nonatomic) MLImageConstraint *imageConstraint;
 
 /// Constraint when type == MLFeatureTypeDictionary, nil otherwise
-@property (readwrite, nullable, nonatomic) MLDictionaryConstraint *dictionaryConstraint;
+@property (readonly, nullable, nonatomic) MLDictionaryConstraint *dictionaryConstraint;
+
+/// Constraint when type == MLFeatureTypeSequence, nil otherwise
+@property (readonly, nullable, nonatomic) MLSequenceConstraint *sequenceConstraint API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 
 @end
 

@@ -165,7 +165,7 @@ CF_ENUM(AudioServicesPropertyID)
 extern OSStatus 
 AudioServicesCreateSystemSoundID(   CFURLRef                    inFileURL,
                                     SystemSoundID*              outSystemSoundID)
-                                                                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+                                                                API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 	
 /*!
     @function       AudioServicesDisposeSystemSoundID
@@ -178,7 +178,7 @@ AudioServicesCreateSystemSoundID(   CFURLRef                    inFileURL,
 */
 extern OSStatus 
 AudioServicesDisposeSystemSoundID(SystemSoundID inSystemSoundID)                                    
-                                                                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+                                                                API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function       AudioServicesPlayAlertSoundWithCompletion
@@ -196,7 +196,7 @@ AudioServicesDisposeSystemSoundID(SystemSoundID inSystemSoundID)
 extern void
 AudioServicesPlayAlertSoundWithCompletion(  SystemSoundID inSystemSoundID,
                                             void (^__nullable inCompletionBlock)(void))
-                                                                    __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+                                                                    API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
                                                                 
 /*!
     @function       AudioServicesPlaySystemSoundWithCompletion
@@ -212,7 +212,7 @@ AudioServicesPlayAlertSoundWithCompletion(  SystemSoundID inSystemSoundID,
 extern void
 AudioServicesPlaySystemSoundWithCompletion(     SystemSoundID inSystemSoundID,
                                                 void (^__nullable inCompletionBlock)(void))
-                                                                        __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+                                                                        API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
                                                                 
 /*!
     @function       AudioServicesGetPropertyInfo
@@ -238,7 +238,7 @@ AudioServicesGetPropertyInfo( AudioServicesPropertyID   inPropertyID,
                               const void * __nullable   inSpecifier,
                               UInt32 * __nullable       outPropertyDataSize,
                               Boolean * __nullable      outWritable)
-                                                                    __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+                                                                    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function       AudioServicesGetProperty
@@ -265,7 +265,7 @@ AudioServicesGetProperty(   AudioServicesPropertyID         inPropertyID,
                             const void * __nullable         inSpecifier,
                             UInt32 *                        ioPropertyDataSize,
                             void * __nullable               outPropertyData)
-                                                                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+                                                                API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function       AudioServicesSetProperty
@@ -289,7 +289,7 @@ AudioServicesSetProperty(   AudioServicesPropertyID             inPropertyID,
                             const void * __nullable             inSpecifier,
                             UInt32                              inPropertyDataSize,
                             const void *                        inPropertyData)
-                                                                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+                                                                API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
                                                                 
 /*!
     This function will be deprecated in a future release. Use AudioServicesPlayAlertSoundWithCompletion instead.
@@ -304,7 +304,7 @@ AudioServicesSetProperty(   AudioServicesPropertyID             inPropertyID,
 */
 extern void 
 AudioServicesPlayAlertSound(SystemSoundID inSystemSoundID)                                          
-                                                                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+                                                                API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
                                                                 
 /*!
     This function will be deprecated in a future release. Use AudioServicesPlaySystemSoundWithCompletion instead.
@@ -317,7 +317,7 @@ AudioServicesPlayAlertSound(SystemSoundID inSystemSoundID)
 */
 extern void 
 AudioServicesPlaySystemSound(SystemSoundID inSystemSoundID)                                         
-                                                                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+                                                                API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
                                                                 
 /*!
     This function will be deprecated in a future release. Use AudioServicesPlayAlertSoundWithCompletion 
@@ -349,7 +349,7 @@ AudioServicesAddSystemSoundCompletion(  SystemSoundID                           
                                     	CFStringRef __nullable                              inRunLoopMode,
                                     	AudioServicesSystemSoundCompletionProc              inCompletionRoutine,
                                     	void * __nullable                                   inClientData)
-                                                                    __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+                                                                    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     This function will be deprecated in a future release. Use AudioServicesPlayAlertSoundWithCompletion
@@ -365,7 +365,7 @@ AudioServicesAddSystemSoundCompletion(  SystemSoundID                           
 */
 extern void 
 AudioServicesRemoveSystemSoundCompletion(SystemSoundID inSystemSoundID)                             
-                                                                    __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+                                                                    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 CF_ASSUME_NONNULL_END
     

@@ -18,17 +18,17 @@ extern "C" {
 #pragma clang assume_nonnull begin
 #endif
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern _SPARSE_VARIANT(SparseMatrix) _SPARSE_VARIANT(_SparseConvertFromCoordinate)
 (int m, int n, long nBlock, uint8_t blockSize, SparseAttributes_t attributes, const int *row,
  const int *col, const _SPARSE_IMPLEMENTATION_TYPE *val, char *storage, int *workspace);
 
 #if defined __SPARSE_TYPES_H
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
   extern _SPARSE_VARIANT(SparseMatrix) _SPARSE_VARIANT(_SparseConvertFromOpaque)(_SPARSE_OLDSTYLE(sparse_matrix) matrix);
 #endif /* defined __SPARSE_TYPES_H */
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseNumericFactorSymmetric)
 (SparseOpaqueSymbolicFactorization *symbolicFactor,
  const _SPARSE_VARIANT(SparseMatrix) *Matrix,
@@ -36,7 +36,7 @@ extern _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseNumeric
  void *factorStorage,
  void *workspace);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseNumericFactorQR)
 (SparseOpaqueSymbolicFactorization *symbolicFactor,
  const _SPARSE_VARIANT(SparseMatrix) *Matrix,
@@ -44,75 +44,75 @@ extern _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseNumeric
  void *factorStorage,
  void *workspace);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseFactorSymmetric)
 (SparseFactorization_t factorType,
  const _SPARSE_VARIANT(SparseMatrix) *Matrix,
  const SparseSymbolicFactorOptions *sfoptions,
  const SparseNumericFactorOptions *nfoptions);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseFactorQR)
 (SparseFactorization_t factorType,
  const _SPARSE_VARIANT(SparseMatrix) *Matrix,
  const SparseSymbolicFactorOptions *sfoptions,
  const SparseNumericFactorOptions *nfoptions);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SPARSE_VARIANT(_SparseRefactorSymmetric)
 (const _SPARSE_VARIANT(SparseMatrix) *Matrix,
  _SPARSE_VARIANT(SparseOpaqueFactorization) *Factorization,
  const SparseNumericFactorOptions *nfoptions,
  void *workspace);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SPARSE_VARIANT(_SparseRefactorQR)
 (const _SPARSE_VARIANT(SparseMatrix) *Matrix,
  _SPARSE_VARIANT(SparseOpaqueFactorization) *Factorization,
  const SparseNumericFactorOptions *nfoptions,
  void *workspace);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SPARSE_VARIANT(_SparseMultiplySubfactor)
 (const _SPARSE_VARIANT(SparseOpaqueSubfactor) *Subfactor,
  const _SPARSE_VARIANT(DenseMatrix) *_Nullable x,
  const _SPARSE_VARIANT(DenseMatrix) *y,
  char *workspace);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SPARSE_VARIANT(_SparseSolveSubfactor)
 (const _SPARSE_VARIANT(SparseOpaqueSubfactor) *Subfactor,
  const _SPARSE_VARIANT(DenseMatrix) *_Nullable b,
  const _SPARSE_VARIANT(DenseMatrix) *x,
  char *workspace);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SPARSE_VARIANT(_SparseSolveOpaque)
 (const _SPARSE_VARIANT(SparseOpaqueFactorization) *Factored,
  const _SPARSE_VARIANT(DenseMatrix) *_Nullable RHS,
  const _SPARSE_VARIANT(DenseMatrix) *Soln,
  void *workspace);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SPARSE_VARIANT(_SparseDestroyOpaqueNumeric)(_SPARSE_VARIANT(SparseOpaqueFactorization) *toFree);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SPARSE_VARIANT(_SparseRetainNumeric)
 (_SPARSE_VARIANT(SparseOpaqueFactorization) *_Nonnull numericFactor);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern SparseNumericFactorOptions _SPARSE_VARIANT(_SparseGetOptionsFromNumericFactor)(_SPARSE_VARIANT(SparseOpaqueFactorization) *factor);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SPARSE_VARIANT(_SparseGetWorkspaceRequired)
 (SparseSubfactor_t Subfactor, _SPARSE_VARIANT(SparseOpaqueFactorization) Factor, size_t *workStatic,
  size_t *workPerRHS);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern size_t _SPARSE_VARIANT(_SparseGetIterativeStateSize)
 (const SparseIterativeMethod *method, bool preconditioner, int m, int n, int nrhs);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SPARSE_VARIANT(_SparseCGIterate)
 (const SparseCGOptions *options,
  int iteration,
@@ -124,7 +124,7 @@ extern void _SPARSE_VARIANT(_SparseCGIterate)
  const _SPARSE_VARIANT(SparseOpaquePreconditioner) *_Nullable Preconditioner,
  void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix), _SPARSE_VARIANT(DenseMatrix)));
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern SparseIterativeStatus_t _SPARSE_VARIANT(_SparseCGSolve)
 (const SparseCGOptions *options,
  _SPARSE_VARIANT(DenseMatrix) *X,
@@ -132,7 +132,7 @@ extern SparseIterativeStatus_t _SPARSE_VARIANT(_SparseCGSolve)
  void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix), _SPARSE_VARIANT(DenseMatrix)),
  const _SPARSE_VARIANT(SparseOpaquePreconditioner) *_Nullable Preconditioner);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SPARSE_VARIANT(_SparseGMRESIterate)
 (const SparseGMRESOptions *options,
  int iteration,
@@ -144,7 +144,7 @@ extern void _SPARSE_VARIANT(_SparseGMRESIterate)
  const _SPARSE_VARIANT(SparseOpaquePreconditioner) *_Nullable Preconditioner,
  void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix), _SPARSE_VARIANT(DenseMatrix)));
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern SparseIterativeStatus_t _SPARSE_VARIANT(_SparseGMRESSolve)
 (SparseGMRESOptions *options,
  _SPARSE_VARIANT(DenseMatrix) *X,
@@ -152,7 +152,7 @@ extern SparseIterativeStatus_t _SPARSE_VARIANT(_SparseGMRESSolve)
  void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix), _SPARSE_VARIANT(DenseMatrix)),
  const _SPARSE_VARIANT(SparseOpaquePreconditioner) *_Nullable Preconditioner);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SPARSE_VARIANT(_SparseLSMRIterate)
 (const SparseLSMROptions *options,
  int iteration,
@@ -164,7 +164,7 @@ extern void _SPARSE_VARIANT(_SparseLSMRIterate)
  const _SPARSE_VARIANT(SparseOpaquePreconditioner) *_Nullable Preconditioner,
  void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix), _SPARSE_VARIANT(DenseMatrix)));
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern SparseIterativeStatus_t _SPARSE_VARIANT(_SparseLSMRSolve)
 (SparseLSMROptions *options,
  _SPARSE_VARIANT(DenseMatrix) *X,
@@ -172,16 +172,16 @@ extern SparseIterativeStatus_t _SPARSE_VARIANT(_SparseLSMRSolve)
  void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix), _SPARSE_VARIANT(DenseMatrix)),
  const _SPARSE_VARIANT(SparseOpaquePreconditioner) *_Nullable Preconditioner);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern _SPARSE_VARIANT(SparseOpaquePreconditioner) _SPARSE_VARIANT(_SparseCreatePreconditioner)
 (SparsePreconditioner_t type,
  _SPARSE_VARIANT(SparseMatrix) *A);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SPARSE_VARIANT(_SparseReleaseOpaquePreconditioner)
 (_SPARSE_VARIANT(SparseOpaquePreconditioner) *toFree);
 
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SPARSE_VARIANT(_SparseSpMV)
 (_SPARSE_IMPLEMENTATION_TYPE alpha,
  _SPARSE_VARIANT(SparseMatrix) A,
@@ -1091,29 +1091,29 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method, _SPARSE_VARIAN
       SPARSE_PARAMETER_CHECK(Xm == Bm, SparseIterativeParameterError,
                              "Counts of X (%d) and B (%d) do not match.", Xm, Bm);
       return _SPARSE_VARIANT(_SparseCGSolve)(&method.options.cg, &X, &B,
-        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X, _SPARSE_VARIANT(DenseMatrix) Y) {
+        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
           // For CG, trans is only ever false (and requires A==A^T anyway)
-          if(accumulate) SparseMultiplyAdd(A, X, Y);
-          else           SparseMultiply(A, X, Y);
+          if(accumulate) SparseMultiplyAdd(A, X_, Y);
+          else           SparseMultiply(A, X_, Y);
         }, NULL);
     case _SparseMethodGMRES:
       // For GMRES A must be square, so X and B must have matching dimensions
       SPARSE_PARAMETER_CHECK(Xm == Bm, SparseIterativeParameterError,
                              "Counts of X (%d) and B (%d) do not match.", Xm, Bm);
       return _SPARSE_VARIANT(_SparseGMRESSolve)(&method.options.gmres, &X, &B,
-        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X, _SPARSE_VARIANT(DenseMatrix) Y) {
+        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
           // For GMRES, trans is only ever false
-          if(accumulate) SparseMultiplyAdd(A, X, Y);
-          else           SparseMultiply(A, X, Y);        }, NULL);
+          if(accumulate) SparseMultiplyAdd(A, X_, Y);
+          else           SparseMultiply(A, X_, Y);        }, NULL);
     case _SparseMethodLSMR:
       return _SPARSE_VARIANT(_SparseLSMRSolve)(&method.options.lsmr, &X, &B,
-        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X, _SPARSE_VARIANT(DenseMatrix) Y) {
+        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
           if(accumulate) {
-            if(trans==CblasNoTrans) SparseMultiplyAdd(A, X, Y);
-            else                    SparseMultiplyAdd(SparseGetTranspose(A), X, Y);
+            if(trans==CblasNoTrans) SparseMultiplyAdd(A, X_, Y);
+            else                    SparseMultiplyAdd(SparseGetTranspose(A), X_, Y);
           } else {
-            if(trans==CblasNoTrans) SparseMultiply(A, X, Y);
-            else                    SparseMultiply(SparseGetTranspose(A), X, Y);
+            if(trans==CblasNoTrans) SparseMultiply(A, X_, Y);
+            else                    SparseMultiply(SparseGetTranspose(A), X_, Y);
           }
         }, NULL);
     default:
@@ -1187,9 +1187,9 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
       SPARSE_PARAMETER_CHECK(Xm == Bm, SparseIterativeParameterError,
                              "Counts of X (%d) and B (%d) do not match.", Xm, Bm);
       return _SPARSE_VARIANT(_SparseCGSolve)(&method.options.cg, &X, &B,
-        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X, _SPARSE_VARIANT(DenseMatrix) Y) {
+        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
          ApplyOperator(accumulate, trans,
-           (_SPARSE_VARIANT(DenseVector)) { .count=X.rowCount, .data=X.data },
+           (_SPARSE_VARIANT(DenseVector)) { .count=X_.rowCount, .data=X_.data },
            (_SPARSE_VARIANT(DenseVector)) { .count=Y.rowCount, .data=Y.data }
            );
         }, NULL );
@@ -1198,17 +1198,17 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
       SPARSE_PARAMETER_CHECK(Xm == Bm, SparseIterativeParameterError,
                              "Counts of X (%d) and B (%d) do not match.", Xm, Bm);
       return _SPARSE_VARIANT(_SparseGMRESSolve)(&method.options.gmres, &X, &B,
-        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X, _SPARSE_VARIANT(DenseMatrix) Y) {
+        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
           ApplyOperator(accumulate, trans,
-            (_SPARSE_VARIANT(DenseVector)) { .count=X.rowCount, .data=X.data },
+            (_SPARSE_VARIANT(DenseVector)) { .count=X_.rowCount, .data=X_.data },
             (_SPARSE_VARIANT(DenseVector)) { .count=Y.rowCount, .data=Y.data }
             );
         }, NULL );
     case _SparseMethodLSMR:
       return _SPARSE_VARIANT(_SparseLSMRSolve)(&method.options.lsmr, &X, &B,
-        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X, _SPARSE_VARIANT(DenseMatrix) Y) {
+        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
           ApplyOperator(accumulate, trans,
-            (_SPARSE_VARIANT(DenseVector)) { .count=X.rowCount, .data=X.data },
+            (_SPARSE_VARIANT(DenseVector)) { .count=X_.rowCount, .data=X_.data },
             (_SPARSE_VARIANT(DenseVector)) { .count=Y.rowCount, .data=Y.data }
             );
         }, NULL );
@@ -1255,29 +1255,29 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method, _SPARSE_VARIAN
   switch(method.method) {
     case _SparseMethodCG:
       result = _SPARSE_VARIANT(_SparseCGSolve)(&method.options.cg, &X, &B,
-        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X, _SPARSE_VARIANT(DenseMatrix) Y) {
+        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
           // For CG, trans is only ever false
-          if(accumulate) SparseMultiplyAdd(A, X, Y);
-          else           SparseMultiply(A, X, Y);
+          if(accumulate) SparseMultiplyAdd(A, X_, Y);
+          else           SparseMultiply(A, X_, Y);
         }, &P);
       break;
     case _SparseMethodGMRES:
       result = _SPARSE_VARIANT(_SparseGMRESSolve)(&method.options.gmres, &X, &B,
-        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X, _SPARSE_VARIANT(DenseMatrix) Y) {
+        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
           // For GMRES, trans is only ever false
-          if(accumulate) SparseMultiplyAdd(A, X, Y);
-          else           SparseMultiply(A, X, Y);
+          if(accumulate) SparseMultiplyAdd(A, X_, Y);
+          else           SparseMultiply(A, X_, Y);
         }, &P);
       break;
     case _SparseMethodLSMR:
       result = _SPARSE_VARIANT(_SparseLSMRSolve)(&method.options.lsmr, &X, &B,
-      ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X, _SPARSE_VARIANT(DenseMatrix) Y) {
+      ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
         if(accumulate) {
-          if(trans==CblasNoTrans) SparseMultiplyAdd(A, X, Y);
-          else                    SparseMultiplyAdd(SparseGetTranspose(A), X, Y);
+          if(trans==CblasNoTrans) SparseMultiplyAdd(A, X_, Y);
+          else                    SparseMultiplyAdd(SparseGetTranspose(A), X_, Y);
         } else {
-          if(trans==CblasNoTrans) SparseMultiply(A, X, Y);
-          else                    SparseMultiply(SparseGetTranspose(A), X, Y);
+          if(trans==CblasNoTrans) SparseMultiply(A, X_, Y);
+          else                    SparseMultiply(SparseGetTranspose(A), X_, Y);
         }
       }, &P);
       break;
@@ -1327,30 +1327,30 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method, _SPARSE_VARIAN
       SPARSE_PARAMETER_CHECK(Xm == Bm, SparseIterativeParameterError,
                              "Counts of X (%d) and B (%d) do not match.", Xm, Bm);
       return _SPARSE_VARIANT(_SparseCGSolve)(&method.options.cg, &X, &B,
-        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X, _SPARSE_VARIANT(DenseMatrix) Y) {
+        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
           // For CG, trans is only ever false (and requires A==A^T anyway)
-          if(accumulate) SparseMultiplyAdd(A, X, Y);
-          else           SparseMultiply(A, X, Y);
+          if(accumulate) SparseMultiplyAdd(A, X_, Y);
+          else           SparseMultiply(A, X_, Y);
         }, &Preconditioner);
     case _SparseMethodGMRES:
       // For GMRES A must be square, so X and B must have matching dimensions
       SPARSE_PARAMETER_CHECK(Xm == Bm, SparseIterativeParameterError,
                              "Counts of X (%d) and B (%d) do not match.", Xm, Bm);
       return _SPARSE_VARIANT(_SparseGMRESSolve)(&method.options.gmres, &X, &B,
-        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X, _SPARSE_VARIANT(DenseMatrix) Y) {
+        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
           // For GMRES, trans is only ever false
-          if(accumulate) SparseMultiplyAdd(A, X, Y);
-          else           SparseMultiply(A, X, Y);
+          if(accumulate) SparseMultiplyAdd(A, X_, Y);
+          else           SparseMultiply(A, X_, Y);
         }, &Preconditioner);
     case _SparseMethodLSMR:
       return _SPARSE_VARIANT(_SparseLSMRSolve)(&method.options.lsmr, &X, &B,
-        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X, _SPARSE_VARIANT(DenseMatrix) Y) {
+        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
           if(accumulate) {
-            if(trans==CblasNoTrans) SparseMultiplyAdd(A, X, Y);
-            else                    SparseMultiplyAdd(SparseGetTranspose(A), X, Y);
+            if(trans==CblasNoTrans) SparseMultiplyAdd(A, X_, Y);
+            else                    SparseMultiplyAdd(SparseGetTranspose(A), X_, Y);
           } else {
-            if(trans==CblasNoTrans) SparseMultiply(A, X, Y);
-            else                    SparseMultiply(SparseGetTranspose(A), X, Y);
+            if(trans==CblasNoTrans) SparseMultiply(A, X_, Y);
+            else                    SparseMultiply(SparseGetTranspose(A), X_, Y);
           }
         }, &Preconditioner);
     default:
@@ -1429,9 +1429,9 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
       SPARSE_PARAMETER_CHECK(Xm == Bm, SparseIterativeParameterError,
                              "Counts of X (%d) and B (%d) do not match.", Xm, Bm);
       return _SPARSE_VARIANT(_SparseCGSolve)(&method.options.cg, &X, &B,
-        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X, _SPARSE_VARIANT(DenseMatrix) Y) {
+        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
           ApplyOperator(accumulate, trans,
-            (_SPARSE_VARIANT(DenseVector)) { .count=X.rowCount, .data=X.data },
+            (_SPARSE_VARIANT(DenseVector)) { .count=X_.rowCount, .data=X_.data },
             (_SPARSE_VARIANT(DenseVector)) { .count=Y.rowCount, .data=Y.data }
             );
         }, &Preconditioner );
@@ -1440,17 +1440,17 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
       SPARSE_PARAMETER_CHECK(Xm == Bm, SparseIterativeParameterError,
                              "Counts of X (%d) and B (%d) do not match.", Xm, Bm);
       return _SPARSE_VARIANT(_SparseGMRESSolve)(&method.options.gmres, &X, &B,
-        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X, _SPARSE_VARIANT(DenseMatrix) Y) {
+        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
           ApplyOperator(accumulate, trans,
-            (_SPARSE_VARIANT(DenseVector)) { .count=X.rowCount, .data=X.data },
+            (_SPARSE_VARIANT(DenseVector)) { .count=X_.rowCount, .data=X_.data },
             (_SPARSE_VARIANT(DenseVector)) { .count=Y.rowCount, .data=Y.data }
             );
           }, &Preconditioner );
     case _SparseMethodLSMR:
       return _SPARSE_VARIANT(_SparseLSMRSolve)(&method.options.lsmr, &X, &B,
-        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X, _SPARSE_VARIANT(DenseMatrix) Y) {
+        ^void(bool accumulate, enum CBLAS_TRANSPOSE trans, _SPARSE_VARIANT(DenseMatrix) X_, _SPARSE_VARIANT(DenseMatrix) Y) {
           ApplyOperator(accumulate, trans,
-            (_SPARSE_VARIANT(DenseVector)) { .count=X.rowCount, .data=X.data },
+            (_SPARSE_VARIANT(DenseVector)) { .count=X_.rowCount, .data=X_.data },
             (_SPARSE_VARIANT(DenseVector)) { .count=Y.rowCount, .data=Y.data }
             );
         }, &Preconditioner );

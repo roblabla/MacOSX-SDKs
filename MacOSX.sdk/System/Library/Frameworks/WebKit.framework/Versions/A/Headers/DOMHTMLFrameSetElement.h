@@ -27,7 +27,7 @@
 
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMHTMLFrameSetElement : DOMHTMLElement
 @property (copy) NSString *cols;
 @property (copy) NSString *rows;

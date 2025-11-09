@@ -6,10 +6,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <TargetConditionals.h>
 #import <CoreML/MLFeatureType.h>
 #import <CoreML/MLMultiArray.h>
+#import <CoreML/MLSequence.h>
 #import <CoreVideo/CVPixelBuffer.h>
+#import <CoreML/MLExport.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -21,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  * can also have a missing or undefined value of a well defined type.
  */
 API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0))
+ML_EXPORT
 @interface MLFeatureValue : NSObject<NSCopying>
 
 /// Type of the value for which the corresponding property below is held
@@ -47,12 +49,16 @@ API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0))
 /// Populated value if the type is MLFeatureTypeImage
 @property (readonly, nullable, nonatomic) CVPixelBufferRef imageBufferValue;
 
+/// Populated value if the type is MLFeatureTypeSequence
+@property (readonly, nullable, nonatomic) MLSequence *sequenceValue API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+
 /// Hold an object with the specified value
 + (instancetype)featureValueWithInt64:(int64_t)value;
 + (instancetype)featureValueWithDouble:(double)value;
 + (instancetype)featureValueWithString:(NSString *)value;
 + (instancetype)featureValueWithMultiArray:(MLMultiArray *)value;
 + (instancetype)featureValueWithPixelBuffer:(CVPixelBufferRef)value;
++ (instancetype)featureValueWithSequence:(MLSequence *)sequence API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 
 /// Represent an undefined value of a specified type
 + (instancetype)undefinedFeatureValueWithType:(MLFeatureType)type;
@@ -64,6 +70,8 @@ API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0))
  */
 + (nullable instancetype)featureValueWithDictionary:(NSDictionary<id, NSNumber *> *)value
                                               error:(NSError **)error;
+
+
 
 - (BOOL)isEqualToFeatureValue:(MLFeatureValue *)value;
 

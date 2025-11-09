@@ -1,7 +1,7 @@
 /*
     NSPersistentStoreCoordinator.h
     Core Data
-    Copyright (c) 2004-2017, Apple Inc.
+    Copyright (c) 2004-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -106,7 +106,7 @@ COREDATA_EXTERN NSString * const NSStoreModelVersionIdentifiersKey API_AVAILABLE
 COREDATA_EXTERN NSString * const NSPersistentStoreOSCompatibility API_AVAILABLE(macosx(10.5),ios(3.0));    
 
 /* User info key specifying the maximum connection pool size that should be used on a store that supports concurrent request handling, the value should be an NSNumber. The connection pool size determines the number of requests a store can handle concurrently, and should be a function of how many contexts are attempting to access store data at any time. Generally, application developers should not set this, and should use the default value. The default connection pool size is implementation dependent and may vary by store type and/or platform.
-*/
+ */
 COREDATA_EXTERN NSString * const NSPersistentStoreConnectionPoolMaxSizeKey API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));
 
 /* Spotlight indexing and external record support keys */
@@ -147,12 +147,31 @@ COREDATA_EXTERN NSString * const NSModelPathKey API_DEPRECATED("Spotlight integr
 /* Dictionary key for the object URI extracted from an external record file URL */
 COREDATA_EXTERN NSString * const NSObjectURIKey API_DEPRECATED("Spotlight integration is deprecated. Use CoreSpotlight integration instead.", macosx(10.6,10.13)) API_UNAVAILABLE(ios);
 
+
 /* store option for the destroy... and replace... to indicate that the store file should be destroyed even if the operation might be unsafe (overriding locks
  */
 COREDATA_EXTERN NSString * const NSPersistentStoreForceDestroyOption API_AVAILABLE(macosx(10.8),ios(6.0));
 
+/* Key to represent the protection class for the persistent store.  Backward compatibility may preclude some features.  The acceptable values are those defined in Foundation for the NSFileProtectionKey.  The default value of NSPersistentStoreFileProtectionKey is NSFileProtectionCompleteUntilFirstUserAuthentication for all applications built on or after iOS5.  The default value for all older applications is NSFileProtectionNone. */
+COREDATA_EXTERN NSString * const NSPersistentStoreFileProtectionKey API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macosx);
+
 /* Dictionary key for enabling persistent history - default is NO */
 COREDATA_EXTERN NSString * const NSPersistentHistoryTrackingKey API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0));
+
+/*
+ Allows developers to provide an additional set of classes (which must implement NSSecureCoding) that should be used while
+ decoding a binary store.
+ Using this option is preferable to using NSBinaryStoreInsecureDecodingCompatibilityOption.
+ */
+COREDATA_EXTERN NSString * const NSBinaryStoreSecureDecodingClasses API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0));
+
+/*
+ Indicate that the binary store should be decoded insecurely. This may be necessary if a store has metadata or transformable
+ properties containing non-standard classes. If possible, developers should use the NSBinaryStoreSecureDecodingClasses option
+ to specify the contained classes, allowing the binary store to to be securely decoded.
+ Applications linked before the availability date will default to using this option.
+ */
+COREDATA_EXTERN NSString * const NSBinaryStoreInsecureDecodingCompatibilityOption API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0));
 
 API_AVAILABLE(macosx(10.4),ios(3.0))
 @interface NSPersistentStoreCoordinator : NSObject <NSLocking> {
@@ -246,7 +265,7 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
     externalRecordsURL must not exist as the store will be created from scratch (no appending to an existing store is allowed).
 */
 - (nullable NSPersistentStore *)importStoreWithIdentifier:(nullable NSString *)storeIdentifier fromExternalRecordsDirectory:(NSURL *)externalRecordsURL toURL:(NSURL *)destinationURL options:(nullable NSDictionary *)options withType:(NSString *)storeType error:(NSError **)error API_AVAILABLE(macosx(10.6)) API_UNAVAILABLE(ios);
-
+    
 /* Used for save as - performance may vary depending on the type of old and new store; the old store is usually removed from the coordinator by the migration operation, and therefore is no longer a useful reference after invoking this method 
 */
 - (nullable NSPersistentStore *)migratePersistentStore:(NSPersistentStore *)store toURL:(NSURL *)URL options:(nullable NSDictionary *)options withType:(NSString *)storeType error:(NSError **)error;
@@ -265,15 +284,16 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 /* synchronously performs the block on the coordinator's queue.  May safely be called reentrantly. Encapsulates an autorelease pool. */
 - (void)performBlockAndWait:(void (NS_NOESCAPE ^)(void))block  API_AVAILABLE(macosx(10.10),ios(8.0));
 
-/*
-    Deprecated
- */
+ /*
+  *   DEPRECATED
+  */
+    
 + (nullable NSDictionary *)metadataForPersistentStoreWithURL:(NSURL *)url error:(NSError **)error API_DEPRECATED("Use -metadataForPersistentStoreOfType:URL:options:error: and pass in an options dictionary matching addPersistentStoreWithType", macosx(10.4,10.5));
-
+    
 - (void)lock API_DEPRECATED( "Use -performBlockAndWait: instead", macosx(10.4,10.10), ios(3.0,8.0));
 - (void)unlock API_DEPRECATED( "Use -performBlockAndWait: instead", macosx(10.4,10.10), ios(3.0,8.0));
 - (BOOL)tryLock API_DEPRECATED( "Use -performBlock: instead", macosx(10.4,10.10), ios(3.0,8.0));
-
+    
 + (nullable NSDictionary<NSString *, id> *)metadataForPersistentStoreOfType:(nullable NSString *)storeType URL:(NSURL *)url error:(NSError **)error API_DEPRECATED("Use -metadataForPersistentStoreOfType:URL:options:error: and pass in an options dictionary matching addPersistentStoreWithType", macosx(10.5,10.11), ios(3.0,9.0));
 
 + (BOOL)setMetadata:(nullable NSDictionary<NSString *, id> *)metadata forPersistentStoreOfType:(nullable NSString *)storeType URL:(NSURL*)url error:(NSError **)error API_DEPRECATED("Use  -setMetadata:forPersistentStoreOfType:URL:options:error: and pass in an options dictionary matching addPersistentStoreWithType", macosx(10.5,10.11), ios(3.0,9.0));
@@ -308,7 +328,6 @@ typedef NS_ENUM(NSUInteger, NSPersistentStoreUbiquitousTransitionType) {
     NSPersistentStoreUbiquitousTransitionTypeInitialImportCompleted
 } API_DEPRECATED("Please see the release notes and Core Data documentation.", macosx(10.9,10.12), ios(7.0,10.0));
 
-
 /* option indicating that a persistent store has a given name in ubiquity, this option is required for ubiquity to function  */
 COREDATA_EXTERN NSString * const NSPersistentStoreUbiquitousContentNameKey API_DEPRECATED("Please see the release notes and Core Data documentation.", macosx(10.7,10.12), ios(5.0,10.0));
 
@@ -339,7 +358,7 @@ COREDATA_EXTERN NSString * const NSPersistentStoreUbiquitousContainerIdentifierK
 /* NSNumber boolean indicating that the receiver should erase the local store file and rebuild it from the iCloud data in Mobile Documents.
  */
 COREDATA_EXTERN NSString * const NSPersistentStoreRebuildFromUbiquitousContentOption API_DEPRECATED("Please see the release notes and Core Data documentation.", macosx(10.9,10.12), ios(7.0,10.0));
-
-
+    
 
 NS_ASSUME_NONNULL_END
+

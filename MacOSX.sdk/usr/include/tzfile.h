@@ -50,7 +50,7 @@ static char	tzfilehid[] = "@(#)tzfile.h	8.1";
  * be "zoneinfo"
  */
 #ifndef TZDEFAULT
-# if TARGET_OS_SIMULATOR || TARGET_OS_BRIDGE || TARGET_OS_OSX
+# if TARGET_OS_SIMULATOR || TARGET_OS_OSX
 #  define TZDEFAULT       "/etc/localtime"
 # else
 #  define TZDEFAULT       "/var/db/timezone/localtime"

@@ -49,7 +49,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	mach_port_MSG_COUNT
-#define	mach_port_MSG_COUNT	36
+#define	mach_port_MSG_COUNT	37
 #endif	/* mach_port_MSG_COUNT */
 
 #include <mach/std_types.h>

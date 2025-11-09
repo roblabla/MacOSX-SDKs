@@ -12,6 +12,8 @@
 #pragma once
 #endif
 
+#include <MacTypes.h> // UInt32
+
 #ifdef __cplusplus
 extern "C" {
 #endif

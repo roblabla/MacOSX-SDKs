@@ -24,8 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     Instances of AVCaptureMetadataOutput emit arrays of AVMetadataObject instances (see AVMetadataObject.h), such as detected faces. Applications can access the metadata objects with the captureOutput:didOutputMetadataObjects:fromConnection: delegate method.
  */
-NS_CLASS_AVAILABLE_IOS(6_0) __TVOS_PROHIBITED
-@interface AVCaptureMetadataOutput : AVCaptureOutput 
+API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+@interface AVCaptureMetadataOutput : AVCaptureOutput
 {
 @private
     AVCaptureMetadataOutputInternal *_internal;
@@ -102,7 +102,7 @@ NS_CLASS_AVAILABLE_IOS(6_0) __TVOS_PROHIBITED
  @discussion
     The value of this property is a CGRect that determines the receiver's rectangle of interest for each frame of video. The rectangle's origin is top left and is relative to the coordinate space of the device providing the metadata. Specifying a rectOfInterest may improve detection performance for certain types of metadata. The default value of this property is the value CGRectMake(0, 0, 1, 1). Metadata objects whose bounds do not intersect with the rectOfInterest will not be returned.
  */
-@property(nonatomic) CGRect rectOfInterest NS_AVAILABLE_IOS(7_0);
+@property(nonatomic) CGRect rectOfInterest API_AVAILABLE(ios(7.0));
 
 @end
 
@@ -112,7 +112,7 @@ NS_CLASS_AVAILABLE_IOS(6_0) __TVOS_PROHIBITED
  @abstract
     Defines an interface for delegates of AVCaptureMetadataOutput to receive emitted objects.
  */
-NS_AVAILABLE_IOS(6_0) __TVOS_PROHIBITED
+API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @protocol AVCaptureMetadataOutputObjectsDelegate <NSObject>
 
 @optional

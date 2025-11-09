@@ -1,7 +1,7 @@
 /*
     NSTableColumn.h
     Application Kit
-    Copyright (c) 1995-2017, Apple Inc.
+    Copyright (c) 1995-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -23,13 +23,13 @@ typedef NS_OPTIONS(NSUInteger, NSTableColumnResizingOptions) {
 
 @interface NSTableColumn : NSObject <NSCoding, NSUserInterfaceItemIdentification> {
     /*All instance variables are private */
-    id		_identifier;
-    CGFloat	_width;
-    CGFloat	_minWidth;
-    CGFloat	_maxWidth;
-    __weak NSTableView *_tableView;
-    NSCell	*_headerCell;
-    NSCell	*_dataCell;
+    id		_identifier APPKIT_IVAR;
+    CGFloat	_width APPKIT_IVAR;
+    CGFloat	_minWidth APPKIT_IVAR;
+    CGFloat	_maxWidth APPKIT_IVAR;
+    __weak NSTableView *_tableView APPKIT_IVAR;
+    NSCell	*_headerCell APPKIT_IVAR;
+    NSCell	*_dataCell APPKIT_IVAR;
     struct __colFlags {
         unsigned int	oldIsResizable:1;
         unsigned int	isEditable:1;
@@ -39,8 +39,8 @@ typedef NS_OPTIONS(NSUInteger, NSTableColumnResizingOptions) {
         unsigned int    autoResizingAllowed:1;
         unsigned int    hidden:1; // Defaults to NO
         unsigned int	RESERVED:18;
-    } _cFlags;
-    id _tcAuxiliaryStorage;
+    } _cFlags APPKIT_IVAR;
+    id _tcAuxiliaryStorage APPKIT_IVAR;
 }
 
 /* Designated initializer for NSTableColumns. Prior to 10.7, the parameter type was 'id', but it is now an 'NSString *'. See also -setIdentifier: and -identifier, and NSUserInterfaceItemIdentification.

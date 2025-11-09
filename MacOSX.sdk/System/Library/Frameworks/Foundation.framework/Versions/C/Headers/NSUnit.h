@@ -1,6 +1,6 @@
 /*
  NSUnit.h
- Copyright (c) 2015-2017, Apple Inc.
+ Copyright (c) 2015-2018, Apple Inc.
  All rights reserved.
  */
 

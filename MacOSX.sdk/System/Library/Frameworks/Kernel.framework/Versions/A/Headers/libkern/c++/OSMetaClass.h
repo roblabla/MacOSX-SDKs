@@ -97,6 +97,12 @@ class OSSerialize;
 #define APPLE_KEXT_COMPATIBILITY_OVERRIDE
 #endif
 
+#define APPLE_KEXT_WSHADOW_PUSH _Pragma("clang diagnostic push"); \
+	_Pragma("clang diagnostic ignored \"-Wunknown-warning-option\"") \
+	_Pragma("clang diagnostic ignored \"-Wshadow-field\"")
+
+#define APPLE_KEXT_WSHADOW_POP _Pragma("clang diagnostic pop")
+
 
 /*!
  * @class OSMetaClassBase
@@ -295,51 +301,10 @@ public:
  *  @abstract Release an object if not <code>NULL</code>, then set it to <code>NULL</code>.
  *  @param    inst  Instance of an OSObject, may be <code>NULL</code>.
  */
-#define OSSafeReleaseNULL(inst)   do { if (inst) (inst)->release(); (inst) = NULL; } while (0)
+#define OSSafeReleaseNULL(inst)   do { if (inst != NULL) (inst)->release(); (inst) = NULL; } while (0)
 
 typedef void (*_ptf_t)(void);
 
-#if APPLE_KEXT_LEGACY_ABI
-
-// Arcane evil code interprets a C++ pointer to function as specified in the
-// -fapple-kext ABI, i.e. the gcc-2.95 generated code.  IT DOES NOT ALLOW
-// the conversion of functions that are from MULTIPLY inherited classes.
-
-static inline _ptf_t
-_ptmf2ptf(const OSMetaClassBase *self, void (OSMetaClassBase::*func)(void))
-{
-    union {
-        void (OSMetaClassBase::*fIn)(void);
-        struct {     // Pointer to member function 2.95
-            unsigned short fToff;
-            short  fVInd;
-            union {
-                _ptf_t fPFN;
-                short  fVOff;
-            } u;
-        } fptmf2;
-    } map;
-
-    map.fIn = func;
-    if (map.fptmf2.fToff) {
-        panic("Multiple inheritance is not supported");
-        return 0;
-    } else if (map.fptmf2.fVInd < 0) {
-        // Not virtual, i.e. plain member func
-        return map.fptmf2.u.fPFN;
-    } else {
-        union {
-            const OSMetaClassBase *fObj;
-            _ptf_t **vtablep;
-        } u;
-        u.fObj = self;
-
-        // Virtual member function so dereference vtable
-        return (*u.vtablep)[map.fptmf2.fVInd - 1];
-    }
-}
-
-#else /* !APPLE_KEXT_LEGACY_ABI */
 #if   defined(__i386__) || defined(__x86_64__)
 
 // Slightly less arcane and slightly less evil code to do
@@ -377,7 +342,6 @@ _ptmf2ptf(const OSMetaClassBase *self, void (OSMetaClassBase::*func)(void))
 #error Unknown architecture.
 #endif /* __arm__ */
 
-#endif /* !APPLE_KEXT_LEGACY_ABI */
 
    /*!
     * @define OSMemberFunctionCast
@@ -1573,7 +1537,7 @@ public:
         virtual const OSMetaClass * getMetaClass() const APPLE_KEXT_OVERRIDE; \
     protected:                                                  \
     className (const OSMetaClass *);                            \
-    virtual ~ className ()
+    virtual ~ className () APPLE_KEXT_OVERRIDE
 
 
    /*!

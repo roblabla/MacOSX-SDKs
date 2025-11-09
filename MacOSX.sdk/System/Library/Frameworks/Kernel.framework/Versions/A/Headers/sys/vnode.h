@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2017 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -550,7 +550,8 @@ extern int		vttoif_tab[];
 #define VNODE_READDIR_NAMEMAX     0x0008   /* For extended readdir, try to limit names to NAME_MAX bytes */
 
 /* VNOP_CLONEFILE flags: */
-#define VNODE_CLONEFILE_DEFAULT   0x0000
+#define VNODE_CLONEFILE_DEFAULT       0x0000
+#define VNODE_CLONEFILE_NOOWNERCOPY   0x0001 /* Don't copy ownership information */
 
 
 #define	NULLVP	((struct vnode *)NULL)
@@ -816,6 +817,7 @@ int	vnode_isswap(vnode_t vp);
  @return Nonzero if the vnode is a named stream, 0 otherwise.
  */
 int	vnode_isnamedstream(vnode_t vp);
+
 
 /*!
  @function vnode_ismountedon
@@ -1270,6 +1272,7 @@ int	vnode_recycle(vnode_t vp);
 
 
 #define	VNODE_UPDATE_PARENT	0x01
+#define	VNODE_UPDATE_NAMEDSTREAM_PARENT	VNODE_UPDATE_PARENT
 #define	VNODE_UPDATE_NAME	0x02
 #define	VNODE_UPDATE_CACHE	0x04
 #define VNODE_UPDATE_PURGE	0x08
@@ -1652,6 +1655,16 @@ int	vnode_isdirty(vnode_t vp);
 
 
 
+
+/*!
+ @function vnode_getbackingvnode
+ @abstract If the input vnode is a NULLFS mirrored vnode, then return the vnode it wraps.
+ @Used to un-mirror files, primarily for security purposes. On success, out_vp is always set to a vp with an iocount. The caller must release the iocount.
+ @param in_vp The vnode being asked about
+ @param out_vpp A pointer to the output vnode, unchanged on error
+ @return 0 on Success, ENOENT if in_vp doesn't mirror anything, EINVAL on parameter errors.
+ */
+int vnode_getbackingvnode(vnode_t in_vp, vnode_t* out_vpp);
 
 /*
  * Helper functions for implementing VNOP_GETATTRLISTBULK for a filesystem

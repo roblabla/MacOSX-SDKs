@@ -42,9 +42,9 @@ enum {
     DOM_NODE_AFTER = 1,
     DOM_NODE_BEFORE_AND_AFTER = 2,
     DOM_NODE_INSIDE = 3
-} NS_ENUM_AVAILABLE_MAC(10_4);
+} WEBKIT_ENUM_DEPRECATED_MAC(10_4, 10_14);
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMRange : DOMObject
 @property (readonly, strong) DOMNode *startContainer;
 @property (readonly) int startOffset;
@@ -52,10 +52,10 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (readonly) int endOffset;
 @property (readonly) BOOL collapsed;
 @property (readonly, strong) DOMNode *commonAncestorContainer;
-@property (readonly, copy) NSString *text NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *text WEBKIT_AVAILABLE_MAC(10_5);
 
-- (void)setStart:(DOMNode *)refNode offset:(int)offset NS_AVAILABLE_MAC(10_5);
-- (void)setEnd:(DOMNode *)refNode offset:(int)offset NS_AVAILABLE_MAC(10_5);
+- (void)setStart:(DOMNode *)refNode offset:(int)offset WEBKIT_AVAILABLE_MAC(10_5);
+- (void)setEnd:(DOMNode *)refNode offset:(int)offset WEBKIT_AVAILABLE_MAC(10_5);
 - (void)setStartBefore:(DOMNode *)refNode;
 - (void)setStartAfter:(DOMNode *)refNode;
 - (void)setEndBefore:(DOMNode *)refNode;
@@ -63,7 +63,7 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 - (void)collapse:(BOOL)toStart;
 - (void)selectNode:(DOMNode *)refNode;
 - (void)selectNodeContents:(DOMNode *)refNode;
-- (short)compareBoundaryPoints:(unsigned short)how sourceRange:(DOMRange *)sourceRange NS_AVAILABLE_MAC(10_5);
+- (short)compareBoundaryPoints:(unsigned short)how sourceRange:(DOMRange *)sourceRange WEBKIT_AVAILABLE_MAC(10_5);
 - (void)deleteContents;
 - (DOMDocumentFragment *)extractContents;
 - (DOMDocumentFragment *)cloneContents;
@@ -72,15 +72,15 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 - (DOMRange *)cloneRange;
 - (NSString *)toString;
 - (void)detach;
-- (DOMDocumentFragment *)createContextualFragment:(NSString *)html NS_AVAILABLE_MAC(10_5);
-- (short)compareNode:(DOMNode *)refNode NS_AVAILABLE_MAC(10_5);
-- (BOOL)intersectsNode:(DOMNode *)refNode NS_AVAILABLE_MAC(10_5);
-- (short)comparePoint:(DOMNode *)refNode offset:(int)offset NS_AVAILABLE_MAC(10_5);
-- (BOOL)isPointInRange:(DOMNode *)refNode offset:(int)offset NS_AVAILABLE_MAC(10_5);
+- (DOMDocumentFragment *)createContextualFragment:(NSString *)html WEBKIT_AVAILABLE_MAC(10_5);
+- (short)compareNode:(DOMNode *)refNode WEBKIT_AVAILABLE_MAC(10_5);
+- (BOOL)intersectsNode:(DOMNode *)refNode WEBKIT_AVAILABLE_MAC(10_5);
+- (short)comparePoint:(DOMNode *)refNode offset:(int)offset WEBKIT_AVAILABLE_MAC(10_5);
+- (BOOL)isPointInRange:(DOMNode *)refNode offset:(int)offset WEBKIT_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMRange (DOMRangeDeprecated)
-- (void)setStart:(DOMNode *)refNode :(int)offset NS_DEPRECATED_MAC(10_4, 10_5);
-- (void)setEnd:(DOMNode *)refNode :(int)offset NS_DEPRECATED_MAC(10_4, 10_5);
-- (short)compareBoundaryPoints:(unsigned short)how :(DOMRange *)sourceRange NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)setStart:(DOMNode *)refNode :(int)offset WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (void)setEnd:(DOMNode *)refNode :(int)offset WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (short)compareBoundaryPoints:(unsigned short)how :(DOMRange *)sourceRange WEBKIT_DEPRECATED_MAC(10_4, 10_5);
 @end

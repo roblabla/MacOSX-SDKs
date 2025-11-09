@@ -1,13 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 31BFF961-171E-331A-BA3A-F79E69C6E63B', 'x86_64: D9E281A2-D7BA-32CD-8B96-54972B1D9E66' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 205CC13E-4ED7-3CE9-987F-12B28C6115A7' ]
 platform:        macosx
 install-name:    /usr/lib/libsasl2.2.dylib
 current-version: 3.15
 compatibility-version: 3
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ __plug_buf_alloc, __plug_challenge_prompt, __plug_decode, 
                        __plug_find_prompt, __plug_free_secret, __plug_free_string, 
                        __plug_get_password, __plug_get_realm, __plug_get_simple, 

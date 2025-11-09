@@ -19,13 +19,11 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 @property (nonatomic, copy, nullable) NSArray<CKRecordZone *> *recordZonesToSave;
 @property (nonatomic, copy, nullable) NSArray<CKRecordZoneID *> *recordZoneIDsToDelete;
 
-/*  This block is called when the operation completes.
- The [NSOperation completionBlock] will also be called if both are set.
- If the error is CKErrorPartialFailure, the error's userInfo dictionary contains
- a dictionary of recordZoneIDs to errors keyed off of CKPartialErrorsByItemIDKey.
- This call happens as soon as the server has
- seen all record changes, and may be invoked while the server is processing the side effects
- of those changes.
+/*! @abstract This block is called when the operation completes.
+ *
+ *  @discussion The [NSOperation completionBlock] will also be called if both are set.
+ *  If the error is `CKErrorPartialFailure`, the error's userInfo dictionary contains a dictionary of recordZoneIDs to errors keyed off of `CKPartialErrorsByItemIDKey`.
+ *  This call happens as soon as the server has seen all record changes, and may be invoked while the server is processing the side effects of those changes.
  */
 @property (nonatomic, copy, nullable) void (^modifyRecordZonesCompletionBlock)(NSArray<CKRecordZone *> * _Nullable savedRecordZones, NSArray<CKRecordZoneID *> * _Nullable deletedRecordZoneIDs, NSError * _Nullable operationError);
 

@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2018 Apple Inc. All rights reserved.
 
 	To report bugs, go to:  http://developer.apple.com/bugreporter/
 
@@ -38,8 +38,12 @@
 #import <AVFoundation/AVAudioProcessingSettings.h>
 
 #if TARGET_OS_IPHONE
+#if __has_include(<AVFoundation/AVAssetDownloadTask.h>)
 #import <AVFoundation/AVAssetDownloadTask.h>
+#endif
+#if __has_include(<AVFoundation/AVAssetDownloadStorageManager.h>)
 #import <AVFoundation/AVAssetDownloadStorageManager.h>
+#endif
 #endif
 
 #if (TARGET_OS_IPHONE || defined(__MAC_10_7))
@@ -48,6 +52,7 @@
 #import <AVFoundation/AVCaptureInput.h>
 #import <AVFoundation/AVCaptureOutput.h>
 #import <AVFoundation/AVCaptureSession.h>
+#import <AVFoundation/AVCaptureSystemPressure.h>
 #import <AVFoundation/AVCaptureVideoPreviewLayer.h>
 #endif
 
@@ -55,6 +60,7 @@
 #import <AVFoundation/AVCompositionTrack.h>
 #import <AVFoundation/AVCompositionTrackSegment.h>
 #import <AVFoundation/AVDepthData.h>
+#import <AVFoundation/AVPortraitEffectsMatte.h>
 #import <AVFoundation/AVError.h>
 #endif
 
@@ -101,4 +107,7 @@
 #import <AVFoundation/AVVideoCompositing.h>
 #import <AVFoundation/AVVideoComposition.h>
 #import <AVFoundation/AVVideoSettings.h>
+#endif
+#if TARGET_OS_TV
+#import <AVFoundation/AVDisplayCriteria.h>
 #endif

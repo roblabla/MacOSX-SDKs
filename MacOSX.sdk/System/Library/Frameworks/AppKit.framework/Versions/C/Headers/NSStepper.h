@@ -1,7 +1,7 @@
 /*
         NSStepper.h
         Application Kit
-        Copyright (c) 2000-2017, Apple Inc.
+        Copyright (c) 2000-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -9,10 +9,10 @@
 
 @interface NSStepper : NSControl <NSAccessibilityStepper> {
   @private
-    unsigned int _reserved1;
-    unsigned int _reserved2;
-    unsigned int _reserved3;
-    unsigned int _reserved4;
+    unsigned int _reserved1 APPKIT_IVAR;
+    unsigned int _reserved2 APPKIT_IVAR;
+    unsigned int _reserved3 APPKIT_IVAR;
+    unsigned int _reserved4 APPKIT_IVAR;
 }
 
 @property double minValue;

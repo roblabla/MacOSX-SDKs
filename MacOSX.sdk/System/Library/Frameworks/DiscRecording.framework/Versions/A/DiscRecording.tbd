@@ -1,10 +1,10 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: D49B029D-0B3F-38D9-B955-2E79D601EBEE', 'x86_64: AD964635-ABF1-37E6-B16B-E85B972C2686' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 9F007E61-83AD-3DB5-B3D5-CB4F1EDF746A' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/DiscRecording.framework/Versions/A/DiscRecording
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     re-exports:      [ /usr/lib/libobjc.A.dylib ]
     symbols:         [ _DRAbstractFile, _DRAccessDate, _DRAllFilesystems, _DRApplicationIdentifier, 
                        _DRAttributeModificationDate, _DRAudioFourChannelKey, _DRAudioPreEmphasisKey, 
@@ -390,7 +390,7 @@ exports:
                        _kDRVerificationTypeReceiveData, _kDRVolumeCheckedDate, _kDRVolumeCreationDate, 
                        _kDRVolumeEffectiveDate, _kDRVolumeExpirationDate, _kDRVolumeModificationDate, 
                        _kDRVolumeSet ]
-    objc-classes:    [ _DRBurn, _DRCDTextBlock, _DRCallbackDevice, _DRDevice, _DRDeviceFilter, 
-                       _DRErase, _DRFSObject, _DRFile, _DRFolder, _DRMSF, _DRMSFFormatter, 
-                       _DRNotificationCenter, _DRPrepare, _DRSession, _DRTask, _DRTrack ]
+    objc-classes:    [ DRBurn, DRCDTextBlock, DRCallbackDevice, DRDevice, DRDeviceFilter, 
+                       DRErase, DRFSObject, DRFile, DRFolder, DRMSF, DRMSFFormatter, 
+                       DRNotificationCenter, DRPrepare, DRSession, DRTask, DRTrack ]
 ...

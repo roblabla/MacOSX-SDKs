@@ -1,42 +1,25 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 837C913D-24FD-3D63-A2E5-3AE8CF12A449', 'x86_64: 0771E183-A390-328B-A983-8F8643BA9A91' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 8149AFE0-69D5-3CD0-8639-42B80043C851' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Frameworks/CommerceCore.framework/Versions/A/CommerceCore
 current-version: 379
 exports:         
   - archs:           [ x86_64 ]
-    objc-ivars:      [ _ISPurchaseReceipt._createdFromCoder, _ISPurchaseReceipt.mAdamID, 
-                       _ISPurchaseReceipt.mBundleID, _ISPurchaseReceipt.mBundleVersion, 
-                       _ISPurchaseReceipt.mCancellationReason, _ISPurchaseReceipt.mDecoder, 
-                       _ISPurchaseReceipt.mDeveloperID, _ISPurchaseReceipt.mDownloadID, 
-                       _ISPurchaseReceipt.mExpirationDate, _ISPurchaseReceipt.mExpirationDateString, 
-                       _ISPurchaseReceipt.mFRToolVersion, _ISPurchaseReceipt.mHWType, 
-                       _ISPurchaseReceipt.mHashIsValid, _ISPurchaseReceipt.mInstallerVersionID, 
-                       _ISPurchaseReceipt.mOpaqueDSIDString, _ISPurchaseReceipt.mOraganizationDisplayName, 
-                       _ISPurchaseReceipt.mParentalControls, _ISPurchaseReceipt.mPurchaseDate, 
-                       _ISPurchaseReceipt.mPurchaseDateString, _ISPurchaseReceipt.mReceiptCreationDate, 
-                       _ISPurchaseReceipt.mReceiptData, _ISPurchaseReceipt.mReceiptPath, 
-                       _ISPurchaseReceipt.mReceiptType, _ISPurchaseReceipt.mRenewalDate, 
-                       _ISPurchaseReceipt.mRenewalDateString, _asn1IntegerToken.mValue, 
-                       _asn1OSToken.mValue, _asn1ReceiptToken.mContentToken, _asn1ReceiptToken.mType, 
-                       _asn1ReceiptToken.mTypeVersion, _asn1SequenceToken.mReadPointer, 
-                       _asn1SetToken.mReadPointer, _asn1Token.mClass, _asn1Token.mContent, 
-                       _asn1Token.mIdentifier, _asn1Token.mLength ]
-  - archs:           [ i386, x86_64 ]
-    symbols:         [ _CKAdoptionInfoPlistPath, _CKCheckBookDownloadQueue, _CKCreateArchiveAtURL, 
-                       _CKCreateCriticalUpdateTimeStamp, _CKCriticalUpdateTimeStamp, 
-                       _CKDownloadDirectory, _CKInstallPathForIAP, _CKInstallPathForSharedIAP, 
-                       _CKMDMCheckMajorOSUpdateStatus, _CKMDMDownloadAndInstallMajorOSUpdate, 
-                       _CKMDMDownloadOptionAllowRedownload, _CKMDMDownloadOptionDsidFailback, 
-                       _CKMDMDownloadOptionPerformPreflightCheck, _CKMDMDownloadSoftwareProductByBundleIdentifierAndType, 
-                       _CKMDMDownloadSoftwareProductByItemIdentifierAndType, _CKMDMProcessManifestAtURL, 
-                       _CKManifestPath, _CKRedownloadVPPSoftwareProductByBundleIdentifier, 
-                       _CKRedownloadVPPSoftwareProductByBundleIdentifierAndType, 
+    symbols:         [ _CKAdoptionInfoPlistPath, _CKCheckBookDownloadQueue, _CKCreateCriticalUpdateTimeStamp, 
+                       _CKCriticalUpdateTimeStamp, _CKDownloadDirectory, _CKInstallPathForIAP, 
+                       _CKInstallPathForSharedIAP, _CKMDMCheckMajorOSUpdateStatus, 
+                       _CKMDMDownloadAndInstallMajorOSUpdate, _CKMDMDownloadOptionAllowRedownload, 
+                       _CKMDMDownloadOptionDsidFailback, _CKMDMDownloadOptionPerformPreflightCheck, 
+                       _CKMDMDownloadSoftwareProductByBundleIdentifierAndType, _CKMDMDownloadSoftwareProductByItemIdentifierAndType, 
+                       _CKMDMManifestOptionPinCertificates, _CKMDMManifestOptionPinningRevocationCheckRequired, 
+                       _CKMDMProcessManifest, _CKMDMProcessManifestAtURL, _CKManifestPath, 
+                       _CKRedownloadVPPSoftwareProductByBundleIdentifier, _CKRedownloadVPPSoftwareProductByBundleIdentifierAndType, 
                        _CKRedownloadVPPSoftwareProductByItemIdentifier, _CKRedownloadVPPSoftwareProductByItemIdentifierAndType, 
                        _CKRemoveCriticalUpdateTimeStamp, _CKShowVPPInviteForAllUsers, 
                        _CKShowVPPInviteForCurrentUser, _CKUpToDateFirstCheckinCookiePath, 
-                       _CKUpToDateInfoPlistPath, _CKVPPError, _CKWhatsNewMenuItemClicked, 
+                       _CKUpToDateInfoPlistPath, _CKVPPError, _CKVPPGetAvailableManagedUpdates, 
+                       _CKVPPManagedApps, _CKVPPReloadAvailableManagedUpdates, _CKWhatsNewMenuItemClicked, 
                        _CKWhatsNewMenuItemShouldBeVisible, _ISCopyDecodedBase64, 
                        _ISCopyEncodedBase64, _ISCopyGzippedDataForData, _ISSHA1DataForBytes, 
                        _ISStringFromDigest, _MD5StringForBytes, _SendStoreagentEvent, 
@@ -47,6 +30,23 @@ exports:
                        _kCKVPPInviteMetadataOrgNameKey, _kCKVPPInviteOrgNamePreferencesKey, 
                        _kCKVPPInviteURLPreferencesKey, _kCheckQueueDSID, _kCheckQueuePurchasedItems, 
                        _parseISO8601, _sAppleROOTCert, _sWWDRCACert ]
-    objc-classes:    [ _CKMDMSupport, _ISPurchaseReceipt, _asn1IntegerToken, _asn1OSToken, 
-                       _asn1ReceiptToken, _asn1SequenceToken, _asn1SetToken, _asn1Token ]
+    objc-classes:    [ ISPurchaseReceipt, asn1IntegerToken, asn1OSToken, asn1ReceiptToken, 
+                       asn1SequenceToken, asn1SetToken, asn1Token ]
+    objc-ivars:      [ ISPurchaseReceipt._createdFromCoder, ISPurchaseReceipt.mAdamID, 
+                       ISPurchaseReceipt.mBundleID, ISPurchaseReceipt.mBundleVersion, 
+                       ISPurchaseReceipt.mCancellationReason, ISPurchaseReceipt.mDecoder, 
+                       ISPurchaseReceipt.mDeveloperID, ISPurchaseReceipt.mDownloadID, 
+                       ISPurchaseReceipt.mExpirationDate, ISPurchaseReceipt.mExpirationDateString, 
+                       ISPurchaseReceipt.mFRToolVersion, ISPurchaseReceipt.mHWType, 
+                       ISPurchaseReceipt.mHashIsValid, ISPurchaseReceipt.mInstallerVersionID, 
+                       ISPurchaseReceipt.mOpaqueDSIDString, ISPurchaseReceipt.mOraganizationDisplayName, 
+                       ISPurchaseReceipt.mParentalControls, ISPurchaseReceipt.mPurchaseDate, 
+                       ISPurchaseReceipt.mPurchaseDateString, ISPurchaseReceipt.mReceiptCreationDate, 
+                       ISPurchaseReceipt.mReceiptData, ISPurchaseReceipt.mReceiptPath, 
+                       ISPurchaseReceipt.mReceiptType, ISPurchaseReceipt.mRenewalDate, 
+                       ISPurchaseReceipt.mRenewalDateString, asn1IntegerToken.mValue, 
+                       asn1OSToken.mValue, asn1ReceiptToken.mContentToken, asn1ReceiptToken.mType, 
+                       asn1ReceiptToken.mTypeVersion, asn1SequenceToken.mReadPointer, 
+                       asn1SetToken.mReadPointer, asn1Token.mClass, asn1Token.mContent, 
+                       asn1Token.mIdentifier, asn1Token.mLength ]
 ...

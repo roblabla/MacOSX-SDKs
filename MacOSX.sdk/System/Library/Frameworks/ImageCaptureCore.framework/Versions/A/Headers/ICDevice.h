@@ -11,17 +11,18 @@
 
 #pragma once
 
-#import <Foundation/NSObjCRuntime.h>
-#import <objc/NSObject.h>
-
-@class NSError, NSDictionary, NSData, NSMutableDictionary;
-
-#import <CoreGraphics/CGImage.h>
-
 /*!
     @header ICDevice
     ICDevice is an abstract class that represents a device supported by Image Capture. ImageCaptureCore defines two concrete subclasses of ICDevice, ICCameraDevice and ICScannerDevice. ICDeviceBrowser creates instances of these two subclasses to represent cameras and scanners it finds.
 */
+
+#import <ImageCaptureCore/ImageCapturePlatform.h>
+#import <Foundation/NSObjCRuntime.h>
+#import <CoreGraphics/CGImage.h>
+#import <objc/NSObject.h>
+
+@class NSError, NSDictionary, NSData, NSMutableDictionary;
+
 
 //------------------------------------------------------------------------------------------------------------------------------
 
@@ -35,6 +36,7 @@
   @constant ICDeviceTypeScanner Scanner device.
 */
 
+IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICDeviceType)
 {
     ICDeviceTypeCamera  = 0x00000001,
@@ -50,6 +52,7 @@ typedef NS_ENUM(NSUInteger, ICDeviceType)
   @constant ICDeviceLocationTypeBluetooth Device found as a paired Bluetooth device.
 */
 
+IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICDeviceLocationType)
 {
     ICDeviceLocationTypeLocal     = 0x00000100,
@@ -64,7 +67,7 @@ typedef NS_ENUM(NSUInteger, ICDeviceLocationType)
   @constant ICDeviceTypeMaskCamera Mask to detect a camera device.
   @constant ICDeviceTypeMaskScanner Mask to detect a scanner device.
 */
-
+IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICDeviceTypeMask)
 {
     ICDeviceTypeMaskCamera  = 0x00000001,
@@ -80,7 +83,7 @@ typedef NS_ENUM(NSUInteger, ICDeviceTypeMask)
   @constant ICDeviceLocationTypeMaskBluetooth Mask to detect paired Bluetooth device.
   @constant ICDeviceLocationTypeMaskRemote Mask to detect a remote (shared, Bonjour, Bluetooth) device.
 */
-
+IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM( NSUInteger, ICDeviceLocationTypeMask )
 {
     ICDeviceLocationTypeMaskLocal     = 0x00000100,
@@ -99,35 +102,35 @@ NS_ASSUME_NONNULL_BEGIN
     @abstract   ICTransportTypeUSB
     @discussion Indicates that the device uses USB transport.
 */
-extern NSString* const ICTransportTypeUSB;
+IMAGECAPTURE_EXTERN NSString* const ICTransportTypeUSB;
 
 /*!
     @const      ICTransportTypeFireWire
     @abstract   ICTransportTypeFireWire
     @discussion Indicates that the device uses FireWire transport.
 */
-extern NSString *const ICTransportTypeFireWire;
+IMAGECAPTURE_EXTERN NSString *const ICTransportTypeFireWire;
 
 /*!
     @const      ICTransportTypeBluetooth
     @abstract   ICTransportTypeBluetooth
     @discussion Indicates that the device uses Bluetooth transport.
 */
-extern NSString *const ICTransportTypeBluetooth;
+IMAGECAPTURE_EXTERN NSString *const ICTransportTypeBluetooth;
 
 /*!
     @const      ICTransportTypeTCPIP
     @abstract   ICTransportTypeTCPIP
     @discussion Indicates that the device uses TCP/IP transport. These devices are discovered using Bonjour.
 */
-extern NSString *const ICTransportTypeTCPIP;
+IMAGECAPTURE_EXTERN NSString *const ICTransportTypeTCPIP;
 
 /*!
     @const      ICTransportTypeMassStorage
     @abstract   ICTransportTypeMassStorage
     @discussion Indicates that the device use mounts as a mass-storage volume.
 */
-extern NSString *const ICTransportTypeMassStorage;
+IMAGECAPTURE_EXTERN NSString *const ICTransportTypeMassStorage;
 
 //------------------------------------------------------------------------------------------------------------------------------
 // Constants used for device location description.
@@ -136,28 +139,28 @@ extern NSString *const ICTransportTypeMassStorage;
     @abstract   ICDeviceLocationDescriptionUSB
     @discussion This description is returned for locationDescription property of a device connected to a USB port.
 */
-extern NSString *const ICDeviceLocationDescriptionUSB;
+IMAGECAPTURE_EXTERN NSString *const ICDeviceLocationDescriptionUSB;
 
 /*!
     @const      ICDeviceLocationDescriptionFireWire
     @abstract   ICDeviceLocationDescriptionFireWire
     @discussion This description is returned for locationDescription property of a device connected to a FireWire port.
 */
-extern NSString *const ICDeviceLocationDescriptionFireWire;
+IMAGECAPTURE_EXTERN NSString *const ICDeviceLocationDescriptionFireWire;
 
 /*!
     @const      ICDeviceLocationDescriptionBluetooth
     @abstract   ICDeviceLocationDescriptionBluetooth
     @discussion This description is returned for locationDescription property of a device connected via Bluetooth.
 */
-extern NSString *const ICDeviceLocationDescriptionBluetooth;
+IMAGECAPTURE_EXTERN NSString *const ICDeviceLocationDescriptionBluetooth;
 
 /*!
     @const      ICDeviceLocationDescriptionMassStorage
     @abstract   ICDeviceLocationDescriptionMassStorage
     @discussion This description is returned for locationDescription property of a device that is mounted as a mass-storage volume.
 */
-extern NSString *const ICDeviceLocationDescriptionMassStorage;
+IMAGECAPTURE_EXTERN NSString *const ICDeviceLocationDescriptionMassStorage;
 
 //------------------------------------------------------------------------------------------------------------------------------
 // Constants used to identify button-press on a device.
@@ -166,42 +169,42 @@ extern NSString *const ICDeviceLocationDescriptionMassStorage;
     @abstract   ICButtonTypeScan
     @discussion Indicates that the "Scan" button on the device was pressed.
 */
-extern NSString *const ICButtonTypeScan;
+IMAGECAPTURE_EXTERN NSString *const ICButtonTypeScan;
 
 /*!
     @const      ICButtonTypeMail
     @abstract   ICButtonTypeMail
     @discussion Indicates that the "Mail" button on the device was pressed.
 */
-extern NSString *const ICButtonTypeMail;
+IMAGECAPTURE_EXTERN NSString *const ICButtonTypeMail;
 
 /*!
     @const      ICButtonTypeCopy
     @abstract   ICButtonTypeCopy
     @discussion Indicates that the "Copy" button on the device was pressed.
 */
-extern NSString *const ICButtonTypeCopy;
+IMAGECAPTURE_EXTERN NSString *const ICButtonTypeCopy;
 
 /*!
     @const      ICButtonTypeWeb
     @abstract   ICButtonTypeWeb
     @discussion Indicates that the "Web" button on the device was pressed.
 */
-extern NSString *const ICButtonTypeWeb;
+IMAGECAPTURE_EXTERN NSString *const ICButtonTypeWeb;
 
 /*!
     @const      ICButtonTypePrint
     @abstract   ICButtonTypePrint
     @discussion Indicates that the "Print" button on the device was pressed.
 */
-extern NSString *const ICButtonTypePrint;
+IMAGECAPTURE_EXTERN NSString *const ICButtonTypePrint;
 
 /*!
     @const      ICButtonTypeTransfer
     @abstract   ICButtonTypeTransfer
     @discussion Indicates that the "Transfer" button on the device was pressed.
 */
-extern NSString *const ICButtonTypeTransfer;
+IMAGECAPTURE_EXTERN NSString *const ICButtonTypeTransfer;
 
 //------------------------------------------------------------------------------------------------------------------------------
 // Constants used for device status notifications.
@@ -210,21 +213,21 @@ extern NSString *const ICButtonTypeTransfer;
     @abstract   ICStatusNotificationKey
     @discussion Key for a non-localized notification string.
 */
-extern NSString *const ICStatusNotificationKey;
+IMAGECAPTURE_EXTERN NSString *const ICStatusNotificationKey;
 
 /*!
     @const      ICStatusCodeKey
     @abstract   ICStatusCodeKey
     @discussion One of values defined in ICReturnCode.
 */
-extern NSString *const ICStatusCodeKey;
+IMAGECAPTURE_EXTERN NSString *const ICStatusCodeKey;
 
 /*!
     @const      ICLocalizedStatusNotificationKey
     @abstract   ICLocalizedStatusNotificationKey
     @discussion Key for a localized notification string.
 */
-extern NSString *const ICLocalizedStatusNotificationKey;
+IMAGECAPTURE_EXTERN NSString *const ICLocalizedStatusNotificationKey;
 
 //------------------------------------------------------------------------------------------------------------------------------
 // Constants used to describe capabilities of a device
@@ -233,7 +236,7 @@ extern NSString *const ICLocalizedStatusNotificationKey;
     @abstract   ICDeviceCanEjectOrDisconnect
     @discussion Indicates either the device is mounted as a mass-storage volume and can be ejected or the it is a remote device with an active connection that can be disconnected.
 */
-extern NSString *const ICDeviceCanEjectOrDisconnect;
+IMAGECAPTURE_EXTERN NSString *const ICDeviceCanEjectOrDisconnect;
 
 
 //------------------------------------------------------------------------------------------------------------- ICDeviceDelegate
@@ -323,6 +326,7 @@ extern NSString *const ICDeviceCanEjectOrDisconnect;
   @abstract ICDevice is an abstract class that represents a device supported by Image Capture facility. ImageCaptureCore defines two concrete subclasses of ICDevice, ICCameraDevice and ICScannerDevice. ICDeviceBrowser creates instances of these two subclasses to represent cameras and scanners it finds.
 */
 
+IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 @interface ICDevice : NSObject
 {
 @private

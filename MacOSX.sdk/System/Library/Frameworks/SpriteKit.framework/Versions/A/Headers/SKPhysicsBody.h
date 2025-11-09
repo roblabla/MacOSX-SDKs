@@ -21,7 +21,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-SK_EXPORT @interface SKPhysicsBody : NSObject <NSCopying, NSCoding>
+SK_EXPORT @interface SKPhysicsBody : NSObject <NSCopying, NSSecureCoding>
 
 /**
  Creates a circle of radius r centered at the node's origin.

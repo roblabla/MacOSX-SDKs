@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, CLRegionState) {
 	CLRegionStateUnknown,
 	CLRegionStateInside,
 	CLRegionStateOutside
-} NS_ENUM_AVAILABLE(10_10, 7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+} API_AVAILABLE(macos(10.10), ios(7.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*
  * CLProximity
@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, CLProximity) {
 	CLProximityImmediate,
 	CLProximityNear,
 	CLProximityFar
-} NS_ENUM_AVAILABLE(NA, 7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+} API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  CLRegion
@@ -47,10 +47,10 @@ typedef NS_ENUM(NSInteger, CLProximity) {
  *  Discussion:
  *    A logical area.
  */
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0))
 @interface CLRegion : NSObject <NSCopying, NSSecureCoding>
 {
-@protected
+@package
 	CLRegionInternal *_internal;
 }
 /*
@@ -65,7 +65,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  */
 - (instancetype)initCircularRegionWithCenter:(CLLocationCoordinate2D)center
 									  radius:(CLLocationDistance)radius
-								  identifier:(NSString *)identifier API_DEPRECATED("Please see CLCircularRegion", ios(4.0, 7.0), macos(10.7, 10.10)) __TVOS_PROHIBITED;
+								  identifier:(NSString *)identifier API_DEPRECATED("Please see CLCircularRegion", ios(4.0, 7.0), macos(10.7, 10.10)) API_UNAVAILABLE(tvos);
 
 /*
  *  center
@@ -75,7 +75,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  *
  *    This method has been deprecated, please see CLCircularRegion.
  */
-@property (readonly, nonatomic) CLLocationCoordinate2D center API_DEPRECATED("Please see CLCircularRegion", ios(4.0, 7.0), macos(10.7, 10.10)) __TVOS_PROHIBITED;
+@property (readonly, nonatomic) CLLocationCoordinate2D center API_DEPRECATED("Please see CLCircularRegion", ios(4.0, 7.0), macos(10.7, 10.10)) API_UNAVAILABLE(tvos);
 
 /*
  *  radius
@@ -85,7 +85,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  *
  *    This method has been deprecated, please see CLCircularRegion.
  */
-@property (readonly, nonatomic) CLLocationDistance radius API_DEPRECATED("Please see CLCircularRegion", ios(4.0, 7.0), macos(10.7, 10.10)) __TVOS_PROHIBITED;
+@property (readonly, nonatomic) CLLocationDistance radius API_DEPRECATED("Please see CLCircularRegion", ios(4.0, 7.0), macos(10.7, 10.10)) API_UNAVAILABLE(tvos);
 
 /*
  *  identifier
@@ -121,7 +121,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  *
  *    This method has been deprecated, please see CLCircularRegion.
  */
-- (BOOL)containsCoordinate:(CLLocationCoordinate2D)coordinate API_DEPRECATED("Please see CLCircularRegion", ios(4.0, 7.0), macos(10.7, 10.10)) __TVOS_PROHIBITED;
+- (BOOL)containsCoordinate:(CLLocationCoordinate2D)coordinate API_DEPRECATED("Please see CLCircularRegion", ios(4.0, 7.0), macos(10.7, 10.10)) API_UNAVAILABLE(tvos);
 
 @end
 

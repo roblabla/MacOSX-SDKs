@@ -11,8 +11,10 @@ NS_ASSUME_NONNULL_BEGIN
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 @interface CKRecordZoneID : NSObject <NSSecureCoding, NSCopying>
 
-/* Zone names must be 255 characters or less. Most UTF-8 characters are valid. */
+/*! Zone names must be 255 characters or less. Most UTF-8 characters are valid. */
+
 - (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)initWithZoneName:(NSString *)zoneName ownerName:(NSString *)ownerName NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, readonly, strong) NSString *zoneName;

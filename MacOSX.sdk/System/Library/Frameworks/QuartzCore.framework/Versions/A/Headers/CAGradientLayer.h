@@ -1,17 +1,20 @@
 /* CoreAnimation - CAGradientLayer.h
 
-   Copyright (c) 2008-2017, Apple Inc.
+   Copyright (c) 2008-2018, Apple Inc.
    All rights reserved. */
 
 /* The gradient layer draws a color gradient over its background color,
  * filling the shape of the layer (i.e. including rounded corners). */
 
 #import <QuartzCore/CALayer.h>
+#import <QuartzCore/CAMediaTimingFunction.h>
 #import <Foundation/NSArray.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-CA_CLASS_AVAILABLE (10.6, 3.0, 9.0, 2.0)
+typedef NSString * CAGradientLayerType NS_STRING_ENUM;
+
+API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0))
 @interface CAGradientLayer : CALayer
 
 /* The array of CGColorRef objects defining the color of each gradient
@@ -39,16 +42,33 @@ CA_CLASS_AVAILABLE (10.6, 3.0, 9.0, 2.0)
 @property CGPoint startPoint;
 @property CGPoint endPoint;
 
-/* The kind of gradient that will be drawn. Currently the only allowed
- * value is `axial' (the default value). */
+/* The kind of gradient that will be drawn. Currently, the only allowed
+ * values are `axial' (the default value), `radial', and `conic'. */
 
-@property(copy) NSString *type;
+@property(copy) CAGradientLayerType type;
 
 @end
 
 /** `type' values. **/
 
-CA_EXTERN NSString * const kCAGradientLayerAxial
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
+CA_EXTERN CAGradientLayerType const kCAGradientLayerAxial
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+
+/* Radial gradient. The gradient is defined as an ellipse with its
+ * center at 'startPoint' and its width and height defined by
+ * '(endPoint.x - startPoint.x) * 2' and '(endPoint.y - startPoint.y) *
+ * 2' respectively. */
+
+CA_EXTERN CAGradientLayerType const kCAGradientLayerRadial
+    API_AVAILABLE(macos(10.6), ios(3.2), watchos(2.0), tvos(9.0));
+
+/* Conic gradient. The gradient is centered at 'startPoint' and its 0-degrees
+ * direction is defined by a vector spanned between 'startPoint' and
+ * 'endPoint'. When 'startPoint' and 'endPoint' overlap the results are
+ * undefined. The gradient's angle increases in the direction of rotation of
+ * positive x-axis towards positive y-axis. */
+
+CA_EXTERN CAGradientLayerType const kCAGradientLayerConic
+    API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 
 NS_ASSUME_NONNULL_END

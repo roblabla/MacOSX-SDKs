@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 42C86D7B-8CA5-3BCC-92CC-8AABB5654853' ]
+uuids:           [ 'x86_64: 9AF7BC60-4D24-3484-823F-91DFAFDFE2FB' ]
 platform:        macosx
 install-name:    /usr/lib/libBSDPClient.A.dylib
 objc-constraint: none

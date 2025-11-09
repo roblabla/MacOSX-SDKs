@@ -3,6 +3,7 @@
 //  Copyright (c) 2014-2015 Apple. All rights reserved.
 //
 
+#import <CryptoTokenKit/TKBase.h>
 #import <CryptoTokenKit/TKError.h>
 #import <CryptoTokenKit/TKTLVRecord.h>
 

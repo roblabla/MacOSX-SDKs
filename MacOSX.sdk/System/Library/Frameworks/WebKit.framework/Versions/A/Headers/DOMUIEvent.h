@@ -28,21 +28,21 @@
 @class DOMAbstractView;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMUIEvent : DOMEvent
 @property (readonly, strong) DOMAbstractView *view;
 @property (readonly) int detail;
-@property (readonly) int keyCode NS_AVAILABLE_MAC(10_5);
-@property (readonly) int charCode NS_AVAILABLE_MAC(10_5);
-@property (readonly) int layerX NS_DEPRECATED_MAC(10_5, 10_5);
-@property (readonly) int layerY NS_DEPRECATED_MAC(10_5, 10_5);
-@property (readonly) int pageX NS_AVAILABLE_MAC(10_5);
-@property (readonly) int pageY NS_AVAILABLE_MAC(10_5);
-@property (readonly) int which NS_AVAILABLE_MAC(10_5);
+@property (readonly) int keyCode WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int charCode WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int layerX WEBKIT_DEPRECATED_MAC(10_5, 10_5);
+@property (readonly) int layerY WEBKIT_DEPRECATED_MAC(10_5, 10_5);
+@property (readonly) int pageX WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int pageY WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int which WEBKIT_AVAILABLE_MAC(10_5);
 
-- (void)initUIEvent:(NSString *)type canBubble:(BOOL)canBubble cancelable:(BOOL)cancelable view:(DOMAbstractView *)view detail:(int)detail NS_AVAILABLE_MAC(10_5);
+- (void)initUIEvent:(NSString *)type canBubble:(BOOL)canBubble cancelable:(BOOL)cancelable view:(DOMAbstractView *)view detail:(int)detail WEBKIT_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMUIEvent (DOMUIEventDeprecated)
-- (void)initUIEvent:(NSString *)type :(BOOL)canBubble :(BOOL)cancelable :(DOMAbstractView *)view :(int)detail NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)initUIEvent:(NSString *)type :(BOOL)canBubble :(BOOL)cancelable :(DOMAbstractView *)view :(int)detail WEBKIT_DEPRECATED_MAC(10_4, 10_5);
 @end

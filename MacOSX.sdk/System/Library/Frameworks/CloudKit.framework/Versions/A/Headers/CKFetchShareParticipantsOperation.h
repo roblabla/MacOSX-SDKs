@@ -20,10 +20,10 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 
 @property (nonatomic, copy, nullable) void (^shareParticipantFetchedBlock)(CKShareParticipant *participant);
 
-/*  This block is called when the operation completes.
- The [NSOperation completionBlock] will also be called if both are set.
- If the error is CKErrorPartialFailure, the error's userInfo dictionary contains
- a dictionary of lookup infos to errors keyed off of CKPartialErrorsByItemIDKey.
+/*! @abstract This block is called when the operation completes.
+ *
+ *  @discussion The [NSOperation completionBlock] will also be called if both are set.
+ *  If the error is `CKErrorPartialFailure`, the error's userInfo dictionary contains a dictionary of lookup infos to errors keyed off of `CKPartialErrorsByItemIDKey`.
  */
 @property (nonatomic, copy, nullable) void (^fetchShareParticipantsCompletionBlock)(NSError * _Nullable operationError);
 

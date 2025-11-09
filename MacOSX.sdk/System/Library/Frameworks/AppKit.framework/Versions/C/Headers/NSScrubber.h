@@ -1,7 +1,7 @@
 /*
  NSScrubber.h
  Application Kit
- Copyright (c) 2016-2017, Apple Inc.
+ Copyright (c) 2016-2018, Apple Inc.
  All rights reserved.
  */
 
@@ -96,40 +96,40 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSScrubber : NSView {
 @private
-    __weak id _delegate;
-    __weak id _dataSource;
-    id _tx;
+    __weak id _delegate APPKIT_IVAR;
+    __weak id _dataSource APPKIT_IVAR;
+    id _tx APPKIT_IVAR;
 
-    NSScrollView *_scrollView;
-    NSView *_translationView;
-    NSPanGestureRecognizer   *_scrubGestureRecognizer;
-    NSPanGestureRecognizer   *_scrollGestureRecognizer;
-    NSPressGestureRecognizer *_pressGestureRecognizer;
+    NSScrollView *_scrollView APPKIT_IVAR;
+    NSView *_translationView APPKIT_IVAR;
+    NSPanGestureRecognizer   *_scrubGestureRecognizer APPKIT_IVAR;
+    NSPanGestureRecognizer   *_scrollGestureRecognizer APPKIT_IVAR;
+    NSPressGestureRecognizer *_pressGestureRecognizer APPKIT_IVAR;
     
-    NSButton *_arrowLeft;
-    NSButton *_arrowRight;
+    NSButton *_arrowLeft APPKIT_IVAR;
+    NSButton *_arrowRight APPKIT_IVAR;
     
-    NSView  *_backgroundView;
-    NSColor *_backgroundColor;
+    NSView  *_backgroundView APPKIT_IVAR;
+    NSColor *_backgroundColor APPKIT_IVAR;
     
-    NSScrubberAlignment _itemAlignment;
-    NSScrubberMode _mode;
+    NSScrubberAlignment _itemAlignment APPKIT_IVAR;
+    NSScrubberMode _mode APPKIT_IVAR;
     
-    id _autoscrollLink;
-    NSPoint _autoscrollEffectivePoint;
-    CGFloat _autoscrollRatio;
-    CGFloat _autoscrollVelocity;
-    NSTimeInterval _autoscrollBasis;
+    id _autoscrollLink APPKIT_IVAR;
+    NSPoint _autoscrollEffectivePoint APPKIT_IVAR;
+    CGFloat _autoscrollRatio APPKIT_IVAR;
+    CGFloat _autoscrollVelocity APPKIT_IVAR;
+    NSTimeInterval _autoscrollBasis APPKIT_IVAR;
     
-    unsigned int _isInteracting:1;
-    unsigned int _isMovingSelection:1;
-    unsigned int _continuous:1;
-    unsigned int _ignoresTouches:1;
-    unsigned int _trackingChangedItem:1;
-    unsigned int _reservedFlags:27 __unused;
+    unsigned int _isInteracting:1 APPKIT_IVAR;
+    unsigned int _isMovingSelection:1 APPKIT_IVAR;
+    unsigned int _continuous:1 APPKIT_IVAR;
+    unsigned int _ignoresTouches:1 APPKIT_IVAR;
+    unsigned int _trackingChangedItem:1 APPKIT_IVAR;
+    unsigned int _reservedFlags:27 __unused APPKIT_IVAR;
     
 #ifndef __OBJC2__
-    id _reserved __unused;
+    id _reserved __unused APPKIT_IVAR;
 #endif
 }
 

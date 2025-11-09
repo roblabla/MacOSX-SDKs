@@ -1,7 +1,7 @@
 /*
 	NSAccessibility.h
 	Application Kit
-	Copyright (c) 2001-2017, Apple Inc.
+	Copyright (c) 2001-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -181,6 +181,11 @@ The rule of thumb is that the affected element should be passed into the functio
 
 */
 APPKIT_EXTERN void NSAccessibilityPostNotification(id element, NSAccessibilityNotificationName notification);
+
+#ifdef __swift__
+// This struct is not available in Objective-C. Its only purpose is to create a namespace for accessibility symbols in Swift.
+typedef struct NSAccessibility { void *_reserved; } NSAccessibility;
+#endif
 
 NS_ASSUME_NONNULL_END
 

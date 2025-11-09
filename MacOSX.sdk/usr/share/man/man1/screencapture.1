@@ -16,8 +16,12 @@ A list of options follows.
 .Bl -tag -width Ds
 .It Fl c
 Force screen capture to go to the clipboard.
+.It Fl b
+Capture Touch Bar, only works in non-interactive modes.
 .It Fl C
 Capture the cursor as well as the screen.  Only allowed in non-interactive modes.
+.It Fl d
+Display errors to the user graphically.
 .It Fl i
 Capture screen interactively, by selection or window.
 The control key will cause the screen shot to go to the clipboard.
@@ -25,16 +29,29 @@ The space key will toggle between mouse selection and window selection modes.
 The escape key will cancel the interactive screen shot.
 .It Fl m
 Only capture the main monitor, undefined if -i is set.
-.It Fl M 
-Open the taken picture in a new Mail message.
+.It Fl D
+.Ar <display>
+Screen capture or record from the display specified. 1 is main, 2 secondary, etc
 .It Fl o
 In window capture mode, do not capture the shadow of the window.
-.It Fl P 
-Open the taken picture in a Preview window.
+.It Fl p
+Screen capture will use the default settings for capture. The files argument will be ignored.
+.It Fl M 
+Open the taken picture in a new Mail message.
+.It Fl P
+Open the taken picture in a Preview window or QuickTime Player if video.
+.It Fl I
+Open the taken picture in Mesages.
+.It Fl B
+.Ar <bundleid>
+Open in the app matching bundleid.
 .It Fl s
 Only allow mouse selection mode.
 .It Fl S
 In window capture mode, capture the screen instead of the window.
+.It Fl J
+.Ar <style>
+Sets the starting style of interfactive capture "selection","window","video".
 .It Fl t 
 .Ar <format>
 Image format to create, default is png (other options include pdf, jpg, tiff and other formats).
@@ -51,8 +68,26 @@ Do not play sounds.
 Do not capture attached windows.
 .It Fl r
 Do not add screen dpi meta data to captured file.
-.It Fl b
-capture Touch Bar, only works in non-interactive modes.
+.It Fl l
+.Ar <windowid>
+Captures the window with windowid.
+.It Fl R
+.Ar <rectangle>
+Capture rectangle using format x,y,width,height.
+.It Fl v
+Capture video recording of the screen.
+.It Fl V
+.Ar <seconds>
+Capture video recording of the screen for the specified seconds.
+.It Fl A
+.Ar <id>
+Captures audio during a video recording using default input. Optionally pass id of the audio source.
+.It Fl k
+Show clicks in video recordings.
+.It Fl U
+Show interactive toolbar in interactive mode.
+.It Fl u
+Present UI after screencapture is complete. Files passed to commandline will be ignored.
 .It Ar files
 where to save the screen capture, 1 file per screen
 .El

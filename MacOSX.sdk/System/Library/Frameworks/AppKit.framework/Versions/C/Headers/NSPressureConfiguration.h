@@ -1,7 +1,7 @@
 /*
     NSPressureConfiguration.h
     Application Kit
-    Copyright (c) 2013-2017, Apple Inc.
+    Copyright (c) 2013-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE_MAC(10_10_3)
 @interface NSPressureConfiguration : NSObject {
-    NSPressureBehavior _pressureBehavior;
-    NSInteger _reserved1;
+    NSPressureBehavior _pressureBehavior APPKIT_IVAR;
+    NSInteger _reserved1 APPKIT_IVAR;
 }
 
 @property(readonly) NSPressureBehavior pressureBehavior;

@@ -1,12 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 852E165A-4244-3ADB-8F7D-18F3BAC6B4A3', 'x86_64: 9FCA1305-49AC-3E58-8034-38FE981BD77E' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: AC5BA3FA-17AE-3D1D-BDEA-AE217934B527' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/DCERPC.framework/Versions/A/DCERPC
 current-version: 63
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _dce_error_inq_text, _dcethread_SIGEMT_e, _dcethread_SIGIOT_e, 
                        _dcethread_SIGPIPE_e, _dcethread_SIGSYS_e, _dcethread_SIGTRAP_e, 
                        _dcethread_aritherr_e, _dcethread_badparam_e, _dcethread_decovf_e, 

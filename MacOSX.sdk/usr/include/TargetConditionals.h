@@ -34,6 +34,11 @@
 
 #ifndef __TARGETCONDITIONALS__
 #define __TARGETCONDITIONALS__
+
+#if __has_include(<TargetConditionalsInternal.h>)
+  #include <TargetConditionalsInternal.h>
+#endif
+
 /****************************************************************************************************
 
     TARGET_CPU_*    
@@ -43,8 +48,10 @@
         TARGET_CPU_PPC          - Compiler is generating PowerPC instructions for 32-bit mode
         TARGET_CPU_PPC64        - Compiler is generating PowerPC instructions for 64-bit mode
         TARGET_CPU_68K          - Compiler is generating 680x0 instructions
-        TARGET_CPU_X86          - Compiler is generating x86 instructions
-        TARGET_CPU_ARM          - Compiler is generating ARM instructions
+        TARGET_CPU_X86          - Compiler is generating x86 instructions for 32-bit mode
+        TARGET_CPU_X86_64       - Compiler is generating x86 instructions for 64-bit mode
+        TARGET_CPU_ARM          - Compiler is generating ARM instructions for 32-bit mode
+        TARGET_CPU_ARM64        - Compiler is generating ARM instructions for 64-bit mode
         TARGET_CPU_MIPS         - Compiler is generating MIPS instructions
         TARGET_CPU_SPARC        - Compiler is generating Sparc instructions
         TARGET_CPU_ALPHA        - Compiler is generating Dec Alpha instructions
@@ -68,8 +75,8 @@
               TARGET_OS_WATCH           - Generated code will run under Apple Watch OS
               TARGET_OS_BRIDGE          - Generated code will run under Bridge devices
            TARGET_OS_SIMULATOR      - Generated code will run under a simulator
-           TARGET_OS_EMBEDDED       - Generated code for firmware
        
+        TARGET_OS_EMBEDDED        - DEPRECATED: Use TARGET_OS_IPHONE and/or TARGET_OS_SIMULATOR instead
         TARGET_IPHONE_SIMULATOR   - DEPRECATED: Same as TARGET_OS_SIMULATOR
         TARGET_OS_NANO            - DEPRECATED: Same as TARGET_OS_WATCH
 
@@ -96,8 +103,7 @@
         
 
 ****************************************************************************************************/
-
-
+ 
 /*
  *    gcc based compiler used on Mac OS X
  */
@@ -105,14 +111,19 @@
     #define TARGET_OS_MAC               1
     #define TARGET_OS_WIN32             0
     #define TARGET_OS_UNIX              0
-    #define TARGET_OS_OSX               1
-    #define TARGET_OS_IPHONE            0
-    #define TARGET_OS_IOS               0
-    #define TARGET_OS_WATCH             0
-    #define TARGET_OS_BRIDGE            0
-    #define TARGET_OS_TV                0
-    #define TARGET_OS_SIMULATOR         0
-    #define TARGET_OS_EMBEDDED          0 
+
+    #if !DYNAMIC_TARGETS_ENABLED
+        #define TARGET_OS_OSX               1
+        #define TARGET_OS_IPHONE            0
+        #define TARGET_OS_IOS               0
+        #define TARGET_OS_WATCH             0
+        
+        #define TARGET_OS_TV                0
+        #define TARGET_OS_SIMULATOR         0
+        #define TARGET_OS_EMBEDDED          0 
+        #define TARGET_OS_RTKIT             0 
+    #endif
+    
     #define TARGET_IPHONE_SIMULATOR     TARGET_OS_SIMULATOR /* deprecated */
     #define TARGET_OS_NANO              TARGET_OS_WATCH /* deprecated */ 
     #if defined(__ppc__) 
@@ -215,7 +226,11 @@
         #define TARGET_RT_MAC_MACHO     1
         #define TARGET_RT_LITTLE_ENDIAN 1
         #define TARGET_RT_BIG_ENDIAN    0
-        #define TARGET_RT_64_BIT        1
+        #if __LP64__
+          #define TARGET_RT_64_BIT      1
+        #else
+          #define TARGET_RT_64_BIT      0
+        #endif
     #else
         #error unrecognized GNU C compiler
     #endif

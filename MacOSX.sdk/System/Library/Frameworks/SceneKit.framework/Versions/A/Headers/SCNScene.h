@@ -1,7 +1,8 @@
 //
 //  SCNScene.h
+//  SceneKit
 //
-//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
+//  Copyright © 2012-2018 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -31,22 +32,18 @@ typedef void (^SCNSceneExportProgressHandler)(float totalProgress, NSError * _Nu
  @abstract Specifies the final destination (as a NSURL) of the scene being exported.
  @discussion The destination URL is required if the scene is exported to a temporary directory and then moved to a final destination. This enables the exported document to get correct relative paths to referenced images.
  */
-FOUNDATION_EXTERN NSString * const SCNSceneExportDestinationURL API_AVAILABLE(macos(10.9));
+SCN_EXPORT NSString * const SCNSceneExportDestinationURL API_AVAILABLE(macos(10.9));
 
 
 /*! @group Scene attributes
     @abstract These keys can be used with the -[SCNScene attributeForKey:] method.
  */
-#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 3
-typedef NSString * SCNSceneAttribute NS_STRING_ENUM;
-#else
-typedef NSString * SCNSceneAttribute;
-#endif
 
-FOUNDATION_EXTERN SCNSceneAttribute const SCNSceneStartTimeAttributeKey;                          // A floating point value, encapsulated in a NSNumber, containing the start time of the scene.
-FOUNDATION_EXTERN SCNSceneAttribute const SCNSceneEndTimeAttributeKey;                            // A floating point value, encapsulated in a NSNumber, containing the end time of the scene.
-FOUNDATION_EXTERN SCNSceneAttribute const SCNSceneFrameRateAttributeKey;                          // A floating point value, encapsulated in a NSNumber, containing the framerate of the scene.
-FOUNDATION_EXTERN SCNSceneAttribute const SCNSceneUpAxisAttributeKey API_AVAILABLE(macos(10.10)); // A vector3 value, encapsulated in a NSValue, containing the up axis of the scene. This is just for information, setting the up axis as no effect.
+typedef NSString * SCNSceneAttribute NS_STRING_ENUM;
+SCN_EXPORT SCNSceneAttribute const SCNSceneStartTimeAttributeKey;                          // A floating point value, encapsulated in a NSNumber, containing the start time of the scene.
+SCN_EXPORT SCNSceneAttribute const SCNSceneEndTimeAttributeKey;                            // A floating point value, encapsulated in a NSNumber, containing the end time of the scene.
+SCN_EXPORT SCNSceneAttribute const SCNSceneFrameRateAttributeKey;                          // A floating point value, encapsulated in a NSNumber, containing the framerate of the scene.
+SCN_EXPORT SCNSceneAttribute const SCNSceneUpAxisAttributeKey API_AVAILABLE(macos(10.10)); // A vector3 value, encapsulated in a NSValue, containing the up axis of the scene. This is just for information, setting the up axis as no effect.
 
 #define SCNSceneAttributeStartTime SCNSceneStartTimeAttributeKey
 #define SCNSceneAttributeEndTime   SCNSceneEndTimeAttributeKey
@@ -58,6 +55,7 @@ FOUNDATION_EXTERN SCNSceneAttribute const SCNSceneUpAxisAttributeKey API_AVAILAB
  @abstract SCNScene is the class that describes a 3d scene. It encapsulates a node hierarchy.
  */
 
+SCN_EXPORT
 @interface SCNScene : NSObject <NSSecureCoding>
 
 + (instancetype)scene;

@@ -1,4 +1,4 @@
-.\" Copyright (c) 2015 Apple Computer, Inc. All rights reserved.
+.\" Copyright (c) 2015-17 Apple Inc. All rights reserved.
 .\" 
 .\" The contents of this file constitute Original Code as defined in and
 .\" are subject to the Apple Public Source License Version 1.1 (the
@@ -27,6 +27,7 @@ file system
 .Sh SYNOPSIS
 .Nm
 .Op Fl D
+.Op Fl g
 .Op Fl e
 .Op Fl v
 .Op Fl i
@@ -43,6 +44,10 @@ The
 command converts an existing HFS file system to a new
 .Tn APFS
 file system.
+.Pp
+It is recommended not to run the
+.Nm
+directly, but to run `diskutil apfs convert`.
 .Pp
 The
 .Ar device-path
@@ -88,6 +93,8 @@ as the mount point.
 If this option is not used, a temporary directory will be created and used.
 .It Fl o Ar nx-apfs-format
 NX or APFS format options.
+.It Fl g
+If conversion succeeds, modify the GPT UUID. 
 .It Fl D | Fl -skip-single-dirlinks
 Convert all former and current directory hardlinks to files/aliases. 
 .El

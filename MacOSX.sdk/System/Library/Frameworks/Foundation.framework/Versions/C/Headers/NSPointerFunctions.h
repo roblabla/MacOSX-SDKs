@@ -1,7 +1,7 @@
 /*
  *  NSPointerFunctions.h
  *
- *  Copyright (c) 2005-2017, Apple Inc. All rights reserved.
+ *  Copyright (c) 2005-2018, Apple Inc. All rights reserved.
  *
  */
  
@@ -33,9 +33,7 @@ typedef NS_OPTIONS(NSUInteger, NSPointerFunctionsOptions) {
     
     // default is strong
     NSPointerFunctionsStrongMemory API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (0UL << 0),       // use strong write-barrier to backing store; use GC memory on copyIn
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
-    NSPointerFunctionsZeroingWeakMemory NS_ENUM_DEPRECATED_MAC(10_5, 10_8) = (1UL << 0),  // deprecated; uses GC weak read and write barriers, and dangling pointer behavior otherwise 
-#endif
+    NSPointerFunctionsZeroingWeakMemory API_DEPRECATED("GC no longer supported", macos(10.5, 10.8)) API_UNAVAILABLE(ios, watchos, tvos) = (1UL << 0),  // deprecated; uses GC weak read and write barriers, and dangling pointer behavior otherwise
     NSPointerFunctionsOpaqueMemory API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (2UL << 0),
     NSPointerFunctionsMallocMemory API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (3UL << 0),       // free() will be called on removal, calloc on copyIn
     NSPointerFunctionsMachVirtualMemory API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (4UL << 0),
@@ -78,18 +76,6 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 @end
 
 NS_ASSUME_NONNULL_END
-
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
-
-#else
-
-#if defined(__has_include)
-#if __has_include(<Foundation/NSPointerFunctionsPriv.h>)
-#include <Foundation/NSPointerFunctionsPriv.h>
-#endif
-#endif
-
-#endif
 
 /*
    Cheat Sheet

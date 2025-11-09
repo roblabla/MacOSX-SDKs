@@ -120,6 +120,10 @@ Enumerators:
   SwiftName: bgr10_xr
 - Name: MTLPixelFormatBGR10_XR_sRGB
   SwiftName: bgr10_xr_srgb
+- Name: MTLPixelFormatBGRA10_XR
+  SwiftName: bgra10_xr
+- Name: MTLPixelFormatBGRA10_XR_sRGB
+  SwiftName: bgra10_xr_srgb
 - Name: MTLPixelFormatPVRTC_RGB_2BPP
   SwiftName: pvrtc_rgb_2bpp
 - Name: MTLPixelFormatPVRTC_RGB_2BPP_sRGB
@@ -308,6 +312,7 @@ Enumerators:
   SwiftName: ushort
 - Name: MTLVertexFormatUShortNormalized
   SwiftName: ushortNormalized
+
 Classes:
 - Name: MTLCaptureManager
   Methods:
@@ -373,6 +378,27 @@ Protocols:
   - Selector: 'waitForFence:'
     SwiftName: waitForFence(_:)
     MethodKind: Instance
+  - Selector: 'optimizeContentsForGPUAccess:'
+    SwiftName: optimizeContentsForGPUAccess(texture:)
+    MethodKind: Instance
+  - Selector: 'optimizeContentsForGPUAccess:slice:level:'
+    SwiftName: optimizeContentsForGPUAccess(texture:slice:level:)
+    MethodKind: Instance
+  - Selector: 'optimizeContentsForCPUAccess:'
+    SwiftName: optimizeContentsForCPUAccess(texture:)
+    MethodKind: Instance
+  - Selector: 'optimizeContentsForCPUAccess:slice:level:'
+    SwiftName: optimizeContentsForCPUAccess(texture:slice:level:)
+    MethodKind: Instance
+  - Selector: 'resetCommandsInBuffer:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'copyIndirectCommandBuffer:sourceRange:destination:destinationIndex:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'optimizeIndirectCommandBuffer:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
 - Name: MTLBuffer
   Methods:
   - Selector: 'newTextureWithDescriptor:offset:bytesPerRow:'
@@ -384,6 +410,7 @@ Protocols:
   - Selector: 'addDebugMarker:range:'
     MethodKind: Instance
     SwiftPrivate: true
+  Properties:
 - Name: MTLCommandBuffer
   Methods:
   - Selector: 'blitCommandEncoder'
@@ -395,11 +422,17 @@ Protocols:
   - Selector: 'computeCommandEncoder'
     SwiftName: makeComputeCommandEncoder()
     MethodKind: Instance
-  - Selector: 'computeCommandEncoderWithParallelExecution'
-    SwiftName: makeComputeCommandEncoderWithParallelExecution()
+  - Selector: 'computeCommandEncoderWithDispatchType:'
+    SwiftName: makeComputeCommandEncoder(dispatchType:)
     MethodKind: Instance
   - Selector: 'parallelRenderCommandEncoderWithDescriptor:'
     SwiftName: makeParallelRenderCommandEncoder(descriptor:)
+    MethodKind: Instance
+  - Selector: 'encodeWaitForEvent:value:'
+    SwiftName: encodeWaitForEvent(_:value:)
+    MethodKind: Instance
+  - Selector: 'encodeSignalEvent:value:'
+    SwiftName: encodeSignalEvent(_:value:)
     MethodKind: Instance
 - Name: MTLCommandQueue
   Methods:
@@ -468,6 +501,13 @@ Protocols:
   - Selector: 'useHeaps:count:'
     MethodKind: Instance
     SwiftPrivate: true
+  - Selector: 'memoryBarrierWithScope:'
+    MethodKind: Instance
+    SwiftName: memoryBarrier(scope:)
+  - Selector: 'memoryBarrierWithResources:count:'
+    MethodKind: Instance
+    SwiftName: __memoryBarrier(resources:count:)
+    SwiftPrivate: true
 - Name: MTLDevice
   Methods:
   - Selector: 'getDefaultSamplePositions:count:'
@@ -505,18 +545,6 @@ Protocols:
     MethodKind: Instance
   - Selector: 'newRenderPipelineStateWithDescriptor:options:reflection:error:'
     SwiftName: makeRenderPipelineState(descriptor:options:reflection:)
-    MethodKind: Instance
-  - Selector: 'newRenderPipelineStateWithTileDescriptor:error:'
-    SwiftName: makeRenderPipelineState(tileDescriptor:)
-    MethodKind: Instance
-  - Selector: 'newRenderPipelineStateWithTileDescriptor:options:reflection:error:'
-    SwiftName: makeRenderPipelineState(tileDescriptor:options:reflection:)
-    MethodKind: Instance
-  - Selector: 'newRenderPipelineStateWithTileDescriptor:completionHandler:'
-    SwiftName: makeRenderPipelineState(tileDescriptor:completionHandler:)
-    MethodKind: Instance
-  - Selector: 'newRenderPipelineStateWithTileDescriptor:options:completionHandler:'
-    SwiftName: makeRenderPipelineState(tileDescriptor:options:completionHandler:)
     MethodKind: Instance
   - Selector: 'newComputePipelineStateWithFunction:completionHandler:'
     SwiftName: makeComputePipelineState(function:completionHandler:)
@@ -581,6 +609,24 @@ Protocols:
   - Selector: 'newArgumentEncoderWithArguments:'
     SwiftName: makeArgumentEncoder(arguments:)
     MethodKind: Instance
+  - Selector: 'newEvent'
+    SwiftName: makeEvent()
+    MethodKind: Instance
+  - Selector: 'newSharedEvent'
+    SwiftName: 'makeSharedEvent()'
+    MethodKind: Instance
+  - Selector: 'newSharedEventWithHandle:'
+    SwiftName: makeSharedEvent(handle:)
+    MethodKind: Instance
+  - Selector: 'newSharedTextureWithDescriptor:'
+    SwiftName: makeSharedTexture(descriptor:)
+    MethodKind: Instance
+  - Selector: 'newSharedTextureWithHandle:'
+    SwiftName: makeSharedTexture(handle:)
+    MethodKind: Instance
+  - Selector: 'newIndirectCommandBufferWithDescriptor:maxCommandCount:options:'
+    SwiftName: makeIndirectCommandBuffer(descriptor:maxCommandCount:options:)
+    MethodKind: Instance
 - Name: MTLDrawable
   Methods:
   - Selector: 'presentAtTime:'
@@ -632,6 +678,18 @@ Protocols:
     SwiftName: setSamplerState(_:index:)
     MethodKind: Instance
   - Selector: 'setSamplerStates:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setRenderPipelineState:atIndex:'
+    SwiftName: setRenderPipelineState(_:index:)
+    MethodKind: Instance
+  - Selector: 'setRenderPipelineStates:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setIndirectCommandBuffer:atIndex:'
+    SwiftName: setIndirectCommandBuffer(_:index:)
+    MethodKind: Instance
+  - Selector: 'setIndirectCommandBuffers:withRange:'
     MethodKind: Instance
     SwiftPrivate: true
 - Name: MTLLibrary
@@ -744,27 +802,6 @@ Protocols:
   - Selector: 'setColorStoreActionOptions:atIndex:'
     SwiftName: setColorStoreActionOptions(_:index:)
     MethodKind: Instance
-  - Selector: 'setTileBytes:length:atIndex:'
-    SwiftName: setTileBytes(_:length:index:)
-    MethodKind: Instance
-  - Selector: 'setTileBuffer:offset:atIndex:'
-    SwiftName: setTileBuffer(_:offset:index:)
-    MethodKind: Instance
-  - Selector: 'setTileBufferOffset:atIndex:'
-    SwiftName: setTileBufferOffset(_:index:)
-    MethodKind: Instance
-  - Selector: 'setTileTexture:atIndex:'
-    SwiftName: setTileTexture(_:index:)
-    MethodKind: Instance
-  - Selector: 'setTileSamplerState:atIndex:'
-    SwiftName: setTileSamplerState(_:index:)
-    MethodKind: Instance
-  - Selector: 'setTileSamplerState:lodMinClamp:lodMaxClamp:atIndex:'
-    SwiftName: setTileSamplerState(_:lodMinClamp:lodMaxClamp:index:)
-    MethodKind: Instance
-  - Selector: 'setThreadgroupMemoryLength:offset:atIndex:'
-    SwiftName: setThreadgroupMemoryLength(_:offset:index:)
-    MethodKind: Instance
   - Selector: 'setBlendColorRed:green:blue:alpha:'
     SwiftName: setBlendColor(red:green:blue:alpha:)
     MethodKind: Instance
@@ -808,10 +845,10 @@ Protocols:
     SwiftName: drawIndexedPrimitives(type:indexType:indexBuffer:indexBufferOffset:indirectBuffer:indirectBufferOffset:)
     MethodKind: Instance
   - Selector: 'updateFence:afterStages:'
-    SwiftName: updateFence(after:)
+    SwiftName: updateFence(_:after:)
     MethodKind: Instance
   - Selector: 'waitForFence:beforeStages:'
-    SwiftName: waitForFence(before:)
+    SwiftName: waitForFence(_:before:)
     MethodKind: Instance
   - Selector: 'useResource:usage:'
     SwiftName: useResource(_:usage:)
@@ -825,6 +862,24 @@ Protocols:
   - Selector: 'useHeaps:count:'
     MethodKind: Instance
     SwiftPrivate: true
+  - Selector: 'memoryBarrierWithScope:afterStages:beforeStages:'
+    MethodKind: Instance
+    SwiftName: memoryBarrier(scope:after:before:)
+  - Selector: 'memoryBarrierWithResources:count:afterStages:beforeStages:'
+    MethodKind: Instance
+    SwiftName: __memoryBarrier(resources:count:after:before:)
+    SwiftPrivate: true
+  - Selector: 'executeCommandsInBuffer:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'executeCommandsInBuffer:indirectBuffer:indirectBufferOffset:'
+    MethodKind: Instance
+    SwiftPrivate: true
+- Name: MTLSharedEvent
+  Methods:
+  - Selector: 'newSharedEventHandle'
+    SwiftName: makeSharedEventHandle()
+    MethodKind: Instance
 - Name: MTLTexture
   Methods:
   - Selector: 'newTextureViewWithPixelFormat:'
@@ -839,7 +894,26 @@ Protocols:
   - Selector: 'replaceRegion:mipmapLevel:slice:withBytes:bytesPerRow:bytesPerImage:'
     SwiftName: replace(region:mipmapLevel:slice:withBytes:bytesPerRow:bytesPerImage:)
     MethodKind: Instance
-
+  - Selector: 'newSharedTextureHandle'
+    SwiftName: makeSharedTextureHandle()
+    MethodKind: Instance
+  Properties:
+- Name: MTLIndirectCommandBuffer
+  Methods:
+  - Selector: 'indirectRenderCommandAtIndex:'
+    SwiftName: indirectRenderCommandAt(_:)
+    MethodKind: Instance
+  - Selector: 'resetWithRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+- Name: MTLIndirectRenderCommand
+  Methods:
+  - Selector: 'setVertexBuffer:offset:atIndex:'
+    SwiftName: setVertexBuffer(_:offset:at:)
+    MethodKind: Instance
+  - Selector: 'setFragmentBuffer:offset:atIndex:'
+    SwiftName: setFragmentBuffer(_:offset:at:)
+    MethodKind: Instance
 SwiftVersions:
 - Version: 3
   Functions:
@@ -871,6 +945,8 @@ SwiftVersions:
     - Selector: 'fillBuffer:range:value:'
       SwiftName: fill(buffer:range:value:)
       MethodKind: Instance
+   
+
   - Name: MTLBuffer
     Methods:
     - Selector: 'newTextureWithDescriptor:offset:bytesPerRow:'
@@ -895,10 +971,6 @@ SwiftVersions:
       NullabilityOfRet: N
     - Selector: 'computeCommandEncoder'
       SwiftName: makeComputeCommandEncoder()
-      MethodKind: Instance
-      NullabilityOfRet: N
-    - Selector: 'computeCommandEncoderWithParallelExecution'
-      SwiftName: makeComputeCommandEncoderWithParallelExecution()
       MethodKind: Instance
       NullabilityOfRet: N
     - Selector: 'parallelRenderCommandEncoderWithDescriptor:'
@@ -1034,6 +1106,9 @@ SwiftVersions:
     - Selector: 'useHeaps:count:'
       SwiftName: useHeaps(_:count:)
       MethodKind: Instance
+    - Selector: 'memoryBarrierWithResources:count:'
+      SwiftName: memoryBarrier(resources:count:)
+      MethodKind: Instance
   - Name: MTLIndirectArgumentEncoder
     Methods:
     - Selector: 'newIndirectArgumentEncoderForBufferAtIndex:'
@@ -1071,6 +1146,18 @@ SwiftVersions:
     - Selector: 'setSamplerStates:withRange:'
       MethodKind: Instance
       SwiftPrivate: false
+    - Selector: 'setRenderPipelineState:atIndex:'
+      SwiftName: setRenderPipelineState(_:index:)
+      MethodKind: Instance
+    - Selector: 'setRenderPipelineStates:withRange:'
+      MethodKind: Instance
+      SwiftPrivate: true
+    - Selector: 'setIndirectCommandBuffer:atIndex:'
+      SwiftName: setIndirectCommandBuffer(_:index:)
+      MethodKind: Instance
+    - Selector: 'setIndirectCommandBuffers:withRange:'
+      MethodKind: Instance
+      SwiftPrivate: true
   - Name: MTLParallelRenderCommandEncoder
     Methods:
     - Selector: 'renderCommandEncoder'
@@ -1147,27 +1234,6 @@ SwiftVersions:
     - Selector: 'setColorStoreActionOptions:atIndex:'
       SwiftName: setColorStoreActionOptions(_:at:)
       MethodKind: Instance
-    - Selector: 'setTileBytes:length:atIndex:'
-      SwiftName: setTileBytes(_:length:at:)
-      MethodKind: Instance
-    - Selector: 'setTileBuffer:offset:atIndex:'
-      SwiftName: setTileBuffer(_:offset:at:)
-      MethodKind: Instance
-    - Selector: 'setTileBufferOffset:atIndex:'
-      SwiftName: setTileBufferOffset(_:at:)
-      MethodKind: Instance
-    - Selector: 'setTileTexture:atIndex:'
-      SwiftName: setTileTexture(_:at:)
-      MethodKind: Instance
-    - Selector: 'setTileSamplerState:atIndex:'
-      SwiftName: setTileSamplerState(_:at:)
-      MethodKind: Instance
-    - Selector: 'setTileSamplerState:lodMinClamp:lodMaxClamp:atIndex:'
-      SwiftName: setTileSamplerState(_:lodMinClamp:lodMaxClamp:at:)
-      MethodKind: Instance
-    - Selector: 'setThreadgroupMemoryLength:offset:atIndex:'
-      SwiftName: setThreadgroupMemoryLength(_:offset:at:)
-      MethodKind: Instance
     - Selector: 'setFragmentSamplerStates:lodMinClamps:lodMaxClamps:withRange:'
       SwiftName: setFragmentSamplerStates(_:lodMinClamps:lodMaxClamps:with:)
       MethodKind: Instance
@@ -1230,6 +1296,15 @@ SwiftVersions:
     - Selector: 'useHeaps:count:'
       SwiftName: useHeaps(_:count:)
       MethodKind: Instance
+    - Selector: 'memoryBarrierWithResources:count:afterStages:beforeStages:'
+      SwiftName: memoryBarrier(resources:count:after:before)
+      MethodKind: Instance
+    - Selector: 'updateFence:afterStages:'
+      SwiftName: update(_:after:)
+      MethodKind: Instance
+    - Selector: 'waitForFence:beforeStages:'
+      SwiftName: wait(for:before:)
+      MethodKind: Instance
   - Name: MTLTexture
     Methods:
     - Selector: 'newTextureViewWithPixelFormat:'
@@ -1240,4 +1315,52 @@ SwiftVersions:
       SwiftName: makeTextureView(pixelFormat:textureType:levels:slices:)
       MethodKind: Instance
       NullabilityOfRet: N
-
+- Version: 4
+  Protocols:
+  - Name: MTLRenderCommandEncoder
+    Methods:
+    - Selector: 'updateFence:afterStages:'
+      SwiftName: update(_:after:)
+      MethodKind: Instance
+    - Selector: 'waitForFence:beforeStages:'
+      SwiftName: wait(for:before:)
+      MethodKind: Instance
+  - Name: MTLHeap
+    Methods:
+    - Selector: 'newBufferWithLength:options:'
+      SwiftName: makeBuffer(length:options:)
+      MethodKind: Instance
+      NullabilityOfRet: N
+    - Selector: 'newTextureWithDescriptor:'
+      SwiftName: makeTexture(descriptor:)
+      MethodKind: Instance
+      NullabilityOfRet: N
+  - Name: MTLArgumentEncoder
+    Methods:
+    - Selector: 'setArgumentBuffer:offset:'
+      MethodKind: Instance
+      Parameters:
+      - Position: 0
+        Nullability: N
+  Classes:
+  - Name: MTLArgument
+    Properties:
+    - Name: bufferStructType
+      Nullability: N
+  - Name: MTLAttribute
+    Properties:
+    - Name: name
+      Nullability: O
+  - Name: MTLVertexAttribute
+    Properties:
+    - Name: name
+      Nullability: O
+  - Name: MTLTileRenderPipelineDescriptor
+    Properties:
+    - Name: label
+      Nullability: N
+  Enumerators:
+  - Name: MTLPixelFormatBGRA10_XR
+    SwiftName: BGRA10_XR
+  - Name: MTLPixelFormatBGRA10_XR_sRGB
+    SwiftName: bgra10_XR_sRGB

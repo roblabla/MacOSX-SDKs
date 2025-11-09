@@ -31,11 +31,11 @@ extern "C" {
 extern OSStatus
 AUMIDIControllerCreate(			CFStringRef				inVirtualDestinationName,
 								AUMIDIControllerRef *	outController)				
-	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+	API_DEPRECATED("no longer supported", macos(10.2, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 extern OSStatus
 AUMIDIControllerDispose(		AUMIDIControllerRef		inController)			
-	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+	API_DEPRECATED("no longer supported", macos(10.2, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 extern OSStatus
 AUMIDIControllerMapChannelToAU(	AUMIDIControllerRef		inController,
@@ -43,7 +43,7 @@ AUMIDIControllerMapChannelToAU(	AUMIDIControllerRef		inController,
 								AudioUnit				inAudioUnit,
 								SInt32					inDestMIDIChannel,
 								Boolean					inCreateDefaultControlMappings)
-	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+	API_DEPRECATED("no longer supported", macos(10.2, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 extern OSStatus
@@ -51,7 +51,7 @@ AUMIDIControllerMapEventToParameter(	AUMIDIControllerRef		inController,
 										UInt8					inMIDIStatusByte,
 										UInt16					inMIDIControl,
 										const AudioUnitParameter *inParameter)	
-	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+	API_DEPRECATED("no longer supported", macos(10.2, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 // this will remove any mapping held by this controller
 // to the specified audio unit - whether those are:
@@ -63,7 +63,7 @@ AUMIDIControllerMapEventToParameter(	AUMIDIControllerRef		inController,
 extern OSStatus
 AUMIDIControllerUnmapAudioUnit(		AUMIDIControllerRef		inController,
 									AudioUnit				inAudioUnit)		
-	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+	API_DEPRECATED("no longer supported", macos(10.2, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 										
 /*
 	$$$ need description of timestamps in the packets (if any) are treated -- needs
@@ -72,18 +72,18 @@ AUMIDIControllerUnmapAudioUnit(		AUMIDIControllerRef		inController,
 extern OSStatus
 AUMIDIControllerHandleMIDI(			AUMIDIControllerRef		inController,
 									const MIDIPacketList *	inMIDIPacketList)	
-	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+	API_DEPRECATED("no longer supported", macos(10.2, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 extern OSStatus
 AUMIDIControllerConnectSource(		AUMIDIControllerRef		inController,
 									MIDIEndpointRef			inSource)			
-	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+	API_DEPRECATED("no longer supported", macos(10.2, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 extern OSStatus
 AUMIDIControllerDisconnectSource(	AUMIDIControllerRef		inController,
 									MIDIEndpointRef			inSource)			
-	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+	API_DEPRECATED("no longer supported", macos(10.2, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
 	Tells an AUMIDIController to generate an XML description of the control/NRPN 
@@ -95,7 +95,7 @@ AUMIDIControllerDisconnectSource(	AUMIDIControllerRef		inController,
 extern OSStatus
 AUMIDIControllerExportXMLNames(		AUMIDIControllerRef		inController,
 									CFURLRef *				outXMLFileURL)		
-	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+	API_DEPRECATED("no longer supported", macos(10.2, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 #ifdef __cplusplus

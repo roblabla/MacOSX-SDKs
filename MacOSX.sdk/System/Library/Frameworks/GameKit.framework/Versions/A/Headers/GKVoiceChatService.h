@@ -110,7 +110,7 @@ NS_CLASS_DEPRECATED_IOS(3_0, 7_0, "Use GKVoiceChat instead")
 
 + (BOOL)isVoIPAllowed;
 
-@property(assign) id<GKVoiceChatClient> client;
+@property(assign) id<GKVoiceChatClient> client NS_DEPRECATED_IOS(3_0, 7_0) ;
 
 // May fail if you already in a chat, or if there is no peer-to-peer channel that can be made to the participant.
 - (BOOL)startVoiceChatWithParticipantID:(NSString *)participantID error:(NSError **)error;

@@ -1,7 +1,7 @@
 /*
  NSScrubberItemView.h
  Application Kit
- Copyright (c) 2016-2017, Apple Inc.
+ Copyright (c) 2016-2018, Apple Inc.
  All rights reserved.
  */
 
@@ -18,13 +18,13 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSScrubberArrangedView : NSView {
 @private
-    id _cache __unused;
-    os_unfair_lock _flagLock;
-    unsigned int _selected:1;
-    unsigned int _highlighted:1;
+    id _cache __unused APPKIT_IVAR;
+    os_unfair_lock _flagLock APPKIT_IVAR;
+    unsigned int _selected:1 APPKIT_IVAR;
+    unsigned int _highlighted:1 APPKIT_IVAR;
 #if !__OBJC2__
-    unsigned int _reservedArrangedViewFlags:30 __unused;
-    id _arrangedViewReserved[2] __unused;
+    unsigned int _reservedArrangedViewFlags:30 __unused APPKIT_IVAR;
+    id _arrangedViewReserved[2] __unused APPKIT_IVAR;
 #endif
 }
 
@@ -44,7 +44,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSScrubberSelectionView : NSScrubberArrangedView {
 #if !__OBJC2__
-    id _selectionViewReserved[4] __unused;
+    id _selectionViewReserved[4] __unused APPKIT_IVAR;
 #endif
 }
 @end
@@ -58,14 +58,14 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSScrubberItemView : NSScrubberArrangedView {
 @private
-    id _background;
-    id _foreground;
-    id _maskOne;
-    id _maskTwo;
-    unsigned int _edge:2;
+    id _background APPKIT_IVAR;
+    id _foreground APPKIT_IVAR;
+    id _maskOne APPKIT_IVAR;
+    id _maskTwo APPKIT_IVAR;
+    unsigned int _edge:2 APPKIT_IVAR;
 #if !__OBJC2__
-    unsigned int _scrubberItemViewReservedFlags:30 __unused;
-    id _scrubberItemViewReserved[3] __unused;
+    unsigned int _scrubberItemViewReservedFlags:30 __unused APPKIT_IVAR;
+    id _scrubberItemViewReserved[3] __unused APPKIT_IVAR;
 #endif
 }
 
@@ -80,9 +80,9 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSScrubberTextItemView : NSScrubberItemView {
 @private
-    NSTextField *_textField;
+    NSTextField *_textField APPKIT_IVAR;
 #if !__OBJC2__
-    id _scrubberTextItemViewReserved[4] __unused;
+    id _scrubberTextItemViewReserved[4] __unused APPKIT_IVAR;
 #endif
 }
 
@@ -101,10 +101,10 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSScrubberImageItemView : NSScrubberItemView {
 @private
-    NSImageView *_imageView;
-    NSImageAlignment _alignment;
+    NSImageView *_imageView APPKIT_IVAR;
+    NSImageAlignment _alignment APPKIT_IVAR;
 #if !__OBJC2__
-    id _scrubberImageItemViewReserved[4] __unused;
+    id _scrubberImageItemViewReserved[4] __unused APPKIT_IVAR;
 #endif
 }
 

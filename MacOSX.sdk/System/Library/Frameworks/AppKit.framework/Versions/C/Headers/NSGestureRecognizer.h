@@ -1,7 +1,7 @@
 /*
     NSGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2017, Apple Inc.
+    Copyright (c) 2013-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -32,25 +32,25 @@ typedef NS_ENUM(NSInteger, NSGestureRecognizerState) {
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface NSGestureRecognizer : NSObject <NSCoding> {
   @private
-    NSMutableArray                   *_targets;
-    id                                _target;
-    SEL                               _action;
-    NSMutableArray                   *_delayedEvents;
-    NSView                           *_view;
-    NSEvent                          *_updateEvent;
-    id <NSGestureRecognizerDelegate>  _delegate;
-    NSMutableSet                     *_friends;
-    NSGestureRecognizerState          _state;
-    NSUInteger                        _gestureFlags;
-    NSUInteger                        _delayFlags;
+    NSMutableArray                   *_targets APPKIT_IVAR;
+    id                                _target APPKIT_IVAR;
+    SEL                               _action APPKIT_IVAR;
+    NSMutableArray                   *_delayedEvents APPKIT_IVAR;
+    NSView                           *_view APPKIT_IVAR;
+    NSEvent                          *_updateEvent APPKIT_IVAR;
+    id <NSGestureRecognizerDelegate>  _delegate APPKIT_IVAR;
+    NSMutableSet                     *_friends APPKIT_IVAR;
+    NSGestureRecognizerState          _state APPKIT_IVAR;
+    NSUInteger                        _gestureFlags APPKIT_IVAR;
+    NSUInteger                        _delayFlags APPKIT_IVAR;
     
-    NSMutableSet                     *_failureRequirements;
-    NSMutableSet                     *_failureDependents;
-    NSMutableSet                     *_dynamicFailureRequirements;
-    NSMutableSet                     *_dynamicFailureDependents;
-    id                                _failureMap;
+    NSMutableSet                     *_failureRequirements APPKIT_IVAR;
+    NSMutableSet                     *_failureDependents APPKIT_IVAR;
+    NSMutableSet                     *_dynamicFailureRequirements APPKIT_IVAR;
+    NSMutableSet                     *_dynamicFailureDependents APPKIT_IVAR;
+    id                                _failureMap APPKIT_IVAR;
     
-    id                                _reserved;
+    id                                _reserved APPKIT_IVAR;
 }
 
 /* valid action method signatures:

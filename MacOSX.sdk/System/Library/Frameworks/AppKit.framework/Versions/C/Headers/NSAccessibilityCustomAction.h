@@ -1,27 +1,28 @@
 /*
      NSAccessibilityCustomAction.h
      Application Kit
-     Copyright (c) 2017 Apple Inc. All rights reserved.
+     Copyright (c) 2017-2018, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE_MAC(10_13) @interface NSAccessibilityCustomAction : NSObject
 {
 @private
-    NSString *_name;
-    __weak id<NSObject> _target;
-    BOOL (^_handler)();
-    SEL _selector;
+    NSString *_name APPKIT_IVAR;
+    __weak id<NSObject> _target APPKIT_IVAR;
+    BOOL (^_handler)(void) APPKIT_IVAR;
+    SEL _selector APPKIT_IVAR;
 }
 
 /* Creates a custom action that performs the action via a block handler.
     The block should return whether the action was executed successfully or not.
     The return status will help accessibility clients know what to communicate back to the user.
 */
-- (instancetype)initWithName:(NSString *)name handler:(BOOL(^ _Nullable)())handler;
+- (instancetype)initWithName:(NSString *)name handler:(BOOL(^ _Nullable)(void))handler;
 
 /* Creates a custom action that performs the action via selector/target.
     The selector should have a signature that returns a BOOL for the success status of the execution.
@@ -32,7 +33,7 @@ NS_CLASS_AVAILABLE_MAC(10_13) @interface NSAccessibilityCustomAction : NSObject
 @property (copy) NSString *name;
 
 // The block that handles the execution of the action
-@property (nullable, copy) BOOL (^handler)();
+@property (nullable, copy) BOOL (^handler)(void);
 
 // The object that will perform the action via selector
 @property (nullable, weak) id<NSObject> target;

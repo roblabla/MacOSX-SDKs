@@ -18,7 +18,7 @@
 //
 // The account will be validated and saved as a system account.
 
-ACCOUNTS_CLASS_AVAILABLE(10_8, 5_0)
+API_AVAILABLE(ios(5.0), macos(10.8))
 @interface ACAccountCredential : NSObject
 
 - (instancetype)initWithOAuthToken:(NSString *)token tokenSecret:(NSString *)secret;

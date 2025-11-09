@@ -134,7 +134,7 @@ PMRelease(PMObject __nullable object)							AVAILABLE_MAC_OS_X_VERSION_10_0_AND_
  *  
  */
 extern OSStatus 
-PMCreateSession(__nonnull PMPrintSession* __nonnull printSession)					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+PMCreateSession(PMPrintSession __nullable * __nonnull printSession)					AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -653,9 +653,9 @@ PMSessionCreatePageFormatList(
 extern OSStatus 
 PMSessionCreatePrinterList(
   PMPrintSession					printSession,
-  CFArrayRef __nonnull * __nonnull	printerList,
+  CFArrayRef __nullable * __nonnull	printerList,
   CFIndex * __nullable				currentIndex,
-  PMPrinter __nonnull * __nullable	currentPrinter)				AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  PMPrinter __nullable * __nullable	currentPrinter)				AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 /*
  *  PMSessionGetCurrentPrinter()
@@ -675,7 +675,7 @@ PMSessionCreatePrinterList(
 extern OSStatus 
 PMSessionGetCurrentPrinter(
   PMPrintSession					printSession,
-  PMPrinter __nonnull * __nonnull	currentPrinter)				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  PMPrinter __nullable * __nonnull	currentPrinter)				AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  PMSessionSetCurrentPMPrinter()
@@ -757,7 +757,7 @@ PMSessionSetDataInSession(
  *  
  */
 extern OSStatus 
-PMCreatePageFormat(PMPageFormat __nonnull * __nonnull pageFormat)	AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+PMCreatePageFormat(PMPageFormat __nullable * __nonnull pageFormat)	AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  PMSessionDefaultPageFormat()
@@ -837,7 +837,7 @@ PMCopyPageFormat(
  */
 extern OSStatus 
 PMCreatePageFormatWithPMPaper(
-  PMPageFormat __nonnull * __nonnull	pageFormat,
+  PMPageFormat __nullable * __nonnull	pageFormat,
   PMPaper								paper)					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*
@@ -867,7 +867,7 @@ PMCreatePageFormatWithPMPaper(
 extern OSStatus 
 PMPageFormatCreateDataRepresentation(
   PMPageFormat						pageFormat,
-  CFDataRef __nonnull * __nonnull	data,
+  CFDataRef __nullable * __nonnull	data,
   PMDataFormat						format)						AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
@@ -891,7 +891,7 @@ PMPageFormatCreateDataRepresentation(
 extern OSStatus 
 PMPageFormatCreateWithDataRepresentation(
 	CFDataRef data, 
-	PMPageFormat __nonnull * __nonnull  pageFormat)				AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	PMPageFormat __nullable * __nonnull  pageFormat)				AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 
@@ -1179,7 +1179,7 @@ PMSetScale(
  */
 extern OSStatus 
 PMCreatePrintSettings(
-	PMPrintSettings __nonnull * __nonnull printSettings)		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+	PMPrintSettings __nullable * __nonnull printSettings)		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  PMSessionDefaultPrintSettings()
@@ -1262,7 +1262,7 @@ PMCopyPrintSettings(
 extern OSStatus 
 PMPrintSettingsCreateDataRepresentation(
   PMPrintSettings					printSettings,
-  CFDataRef __nonnull * __nonnull	data,
+  CFDataRef __nullable * __nonnull	data,
   PMDataFormat						format)						AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
@@ -1287,7 +1287,7 @@ PMPrintSettingsCreateDataRepresentation(
 extern OSStatus 
 PMPrintSettingsCreateWithDataRepresentation(
 	CFDataRef								data,
-	PMPrintSettings __nonnull * __nonnull	printSettings)		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	PMPrintSettings __nullable * __nonnull	printSettings)		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
   
@@ -1716,7 +1716,7 @@ PMPrintSettingsCopyKeys(
  */
 extern OSStatus
 PMCreateGenericPrinter(
-	PMPrinter __nonnull * __nonnull	printer)					AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	PMPrinter __nullable * __nonnull	printer)					AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*
  *  PMServerCreatePrinterList()
@@ -1904,8 +1904,8 @@ PMPrinterCopyDeviceURI(
  */
 extern OSStatus 
 PMPrinterCopyHostName(
-  PMPrinter							printer,
-  CFStringRef __nonnull * __nonnull	hostNameP)					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  PMPrinter								printer,
+  CFStringRef __nullable * __nonnull	hostNameP)					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -2561,9 +2561,9 @@ PMPresetCopyName(
  */
 extern OSStatus 
 PMPresetCreatePrintSettings(
-  PMPreset								preset,
-  PMPrintSession						session,
-  PMPrintSettings __nonnull * __nonnull	printSettings)			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  PMPreset									preset,
+  PMPrintSession							session,
+  PMPrintSettings __nullable * __nonnull	printSettings)			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 	
 	/*
@@ -2601,7 +2601,7 @@ PMPresetCreatePrintSettings(
  */
 extern OSStatus 
 PMPresetGetAttributes(
-  PMPreset								preset,
+  PMPreset									preset,
   CFDictionaryRef __nullable * __nonnull	attributes)				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
@@ -2635,8 +2635,8 @@ PMPresetGetAttributes(
  */
 extern OSStatus 
 PMGetPageFormatPaper(
-  PMPageFormat					format,
-  PMPaper __nonnull * __nonnull	paper)							AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  PMPageFormat						format,
+  PMPaper __nullable * __nonnull	paper)							AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -2809,8 +2809,8 @@ PMPaperGetMargins(
  */
 extern OSStatus 
 PMPaperGetID(
-  PMPaper							paper,
-  CFStringRef __nonnull * __nonnull	paperID)					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  PMPaper								paper,
+  CFStringRef __nullable * __nonnull	paperID)					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*
  *  PMPaperGetPPDPaperName()
@@ -3428,8 +3428,8 @@ PMPrinterSendCommand(
 
 extern OSStatus
 PMPrinterCopyState(
-  PMPrinter								printer,
-  CFDictionaryRef __nonnull * __nonnull	stateDict)				AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+  PMPrinter									printer,
+  CFDictionaryRef __nullable * __nonnull	stateDict)				AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 #pragma mark

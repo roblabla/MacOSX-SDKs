@@ -1,7 +1,7 @@
 /*
 	AppKitDefines.h
 	Application Kit
-	Copyright (c) 1995-2017, Apple Inc.
+	Copyright (c) 1995-2018, Apple Inc.
 	All rights reserved.
 */
 #ifndef _APPKITDEFINES_H
@@ -41,6 +41,19 @@
 #define APPKIT_PRIVATE          __attribute__((visibility("hidden")))
 #endif
 
+#endif
+
+#ifndef NS_SWIFT_BRIDGED_TYPEDEF
+#if __has_attribute(swift_bridged_typedef)
+#define NS_SWIFT_BRIDGED_TYPEDEF __attribute__((swift_bridged_typedef))
+#else
+#define NS_SWIFT_BRIDGED_TYPEDEF
+#endif
+#endif
+
+/* These macros are for AppKit's own use. They may be modified or removed in a future release. */
+#ifndef APPKIT_IVAR
+#define APPKIT_IVAR DEPRECATED_MSG_ATTRIBUTE("AppKit instance variables are private, and the ability to access them will be removed in a future release.")
 #endif
 
 #endif // _APPKITDEFINES_H

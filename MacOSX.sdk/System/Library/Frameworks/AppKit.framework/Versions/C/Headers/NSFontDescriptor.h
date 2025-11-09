@@ -1,7 +1,7 @@
 /*
 	NSFontDescriptor.h
 	Application Kit
-	Copyright (c) 2003-2017, Apple Inc.
+	Copyright (c) 2003-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -42,24 +42,24 @@ typedef NS_OPTIONS(uint32_t, NSFontDescriptorSymbolicTraits) {
     NSFontDescriptorClassOrnamentals = 9u << 28,
     NSFontDescriptorClassScripts = 10u << 28,
     NSFontDescriptorClassSymbolic = 12u << 28
-} NS_ENUM_AVAILABLE_MAC(10_13);
+};
 
 @class NSAffineTransform;
 
-typedef NSString * NSFontDescriptorAttributeName NS_EXTENSIBLE_STRING_ENUM;
-typedef NSString * NSFontDescriptorTraitKey NS_STRING_ENUM;
-typedef NSString * NSFontDescriptorVariationKey NS_STRING_ENUM;
-typedef NSString * NSFontDescriptorFeatureKey NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSFontDescriptorAttributeName NS_TYPED_EXTENSIBLE_ENUM;
+typedef NSString * NSFontDescriptorTraitKey NS_TYPED_ENUM;
+typedef NSString * NSFontDescriptorVariationKey NS_TYPED_ENUM;
+typedef NSString * NSFontDescriptorFeatureKey NS_TYPED_EXTENSIBLE_ENUM;
 typedef CGFloat NSFontWeight NS_TYPED_EXTENSIBLE_ENUM;
 
 @interface NSFontDescriptor: NSObject <NSCopying, NSSecureCoding> {
 /* All instance variables are private */
-    NSMutableDictionary *_attributes;
-    id _reserved1;
-    id _reserved2;
-    id _reserved3;
-    id _reserved4;
-    id _reserved5;
+    NSMutableDictionary *_attributes APPKIT_IVAR;
+    id _reserved1 APPKIT_IVAR;
+    id _reserved2 APPKIT_IVAR;
+    id _reserved3 APPKIT_IVAR;
+    id _reserved4 APPKIT_IVAR;
+    id _reserved5 APPKIT_IVAR;
 }
 
 /* Core attribute access */

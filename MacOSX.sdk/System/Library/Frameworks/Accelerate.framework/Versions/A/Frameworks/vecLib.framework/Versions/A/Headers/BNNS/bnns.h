@@ -14,10 +14,7 @@ extern "C" {
 #if __has_include( <Availability.h> )
 #include <Availability.h>
 #else
-#define __OSX_AVAILABLE(a)
-#define __IOS_AVAILABLE(a)
-#define __TVOS_AVAILABLE(a)
-#define __WATCHOS_AVAILABLE(a)
+#define __API_AVAILABLE(...)
 #endif
 
 // Nullability
@@ -563,7 +560,7 @@ BNNSFilter BNNSFilterCreateConvolutionLayer(const BNNSImageStackDescriptor * in_
                                             const BNNSImageStackDescriptor * out_desc,
                                             const BNNSConvolutionLayerParameters * layer_params,
                                             const BNNSFilterParameters * _Nullable filter_params)
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0);
+__API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!
 
@@ -585,7 +582,7 @@ BNNSFilter BNNSFilterCreateFullyConnectedLayer(const BNNSVectorDescriptor * in_d
                                                const BNNSVectorDescriptor * out_desc,
                                                const BNNSFullyConnectedLayerParameters * layer_params,
                                                const BNNSFilterParameters * _Nullable filter_params)
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0);
+__API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!
 
@@ -608,7 +605,7 @@ BNNSFilter BNNSFilterCreatePoolingLayer(const BNNSImageStackDescriptor * in_desc
                                         const BNNSImageStackDescriptor * out_desc,
                                         const BNNSPoolingLayerParameters * layer_params,
                                         const BNNSFilterParameters * _Nullable filter_params)
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0);
+__API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!
 
@@ -629,7 +626,7 @@ BNNSFilter BNNSFilterCreateVectorActivationLayer(const BNNSVectorDescriptor * in
                                                  const BNNSVectorDescriptor * out_desc,
                                                  const BNNSActivation * activation,
                                                  const BNNSFilterParameters * _Nullable filter_params)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0);
+__API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 /*!
 
@@ -642,7 +639,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AV
 @return 0 on success, and -1 on failure.
 */
 int BNNSFilterApply(BNNSFilter filter,const void * in,void * out)
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0);
+__API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!
 
@@ -663,7 +660,7 @@ The filter is applied for each of the <tt>batch_size</tt> inputs, and produces <
 */
 
 int BNNSFilterApplyBatch(BNNSFilter filter,size_t batch_size,const void * in,size_t in_stride,void * out,size_t out_stride)
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0);
+__API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!
 
@@ -674,14 +671,11 @@ __OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AV
 @param filter Filter to destroy
 */
 void BNNSFilterDestroy(BNNSFilter filter)
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0);
+__API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 // Availability
 #if !__has_include( <Availability.h> )
-#undef __OSX_AVAILABLE
-#undef __IOS_AVAILABLE
-#undef __TVOS_AVAILABLE
-#undef __WATCHOS_AVAILABLE
+#undef __API_AVAILABLE
 #endif
 
 // Nullability

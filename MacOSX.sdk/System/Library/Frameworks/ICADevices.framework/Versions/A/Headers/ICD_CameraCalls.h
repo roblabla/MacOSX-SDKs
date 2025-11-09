@@ -32,11 +32,8 @@ enum {
     kICD_MetaData                 = 'meta',
     kICD_ThumbnailData            = 'thum',     // Deprecated in 10.5
     kICD_ThumbnailDataFormatJPEG  = 'tjpg',     // Deprecated in 10.5.
-                                                // Use kICAThumbnailFormatJPEG or kICAThumbnailFormatJPEGAutoRotated instead.
     kICD_ThumbnailDataFormatTIFF  = 'ttif',     // Deprecated in 10.5.
-                                                // Use kICAThumbnailFormatTIFF or kICAThumbnailFormatTIFFAutoRotated instead.
     kICD_ThumbnailDataFormatPNG   = 'tpng'      // Deprecated in 10.5. 
-                                                // Use kICAThumbnailFormatPNG instead.
 };
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -201,11 +198,7 @@ ICAError ICDDisconnectBluetoothDevice(CFDictionaryRef params);
 
 ICAError ICDConnectTCPIPDevice(CFDictionaryRef params);
 ICAError ICDDisconnectTCPIPDevice(CFDictionaryRef params);
-                          
-//------------------------------------------------------------------------------------------------------------------------------
-
-ICAError ICDStatusChanged( ICAObject object, OSType message )                     DEPRECATED_IN_MAC_OS_X_VERSION_10_3_AND_LATER;
-
+    
 //------------------------------------------------------------------------------------------------------------------------------
 
 // callback functions

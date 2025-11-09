@@ -5,11 +5,14 @@
 //  Copyright © 2017 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <simd/simd.h>
+
 #import <Vision/VNDefines.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
 
 
 /*!
@@ -37,7 +40,7 @@ VN_EXPORT bool VNNormalizedRectIsIdentityRect(CGRect normalizedRect) API_AVAILAB
 
 	@param	imageHeight				The pixel height of the image.
 
-	@return the point in image coordinates.
+	@return the point in normalized coordinates.
 */
 VN_EXPORT CGPoint VNImagePointForNormalizedPoint(CGPoint normalizedPoint, size_t imageWidth, size_t imageHeight) API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
@@ -57,7 +60,7 @@ VN_EXPORT CGRect VNImageRectForNormalizedRect(CGRect normalizedRect, size_t imag
 
 
 /*!
-	@discussion	Returns a region of interest rectangle in pixel coordinates.
+	@discussion	Returns an image rectangle in normalized coordinates.
 
 	@param	imageRect				The rectangle in image coordinate space.
 	
@@ -100,3 +103,6 @@ VN_EXPORT CGPoint VNNormalizedFaceBoundingBoxPointForLandmarkPoint(vector_float2
 	@return	the face landmark point in image coordinates.
 */
 VN_EXPORT CGPoint VNImagePointForFaceLandmarkPoint(vector_float2 faceLandmarkPoint, CGRect faceBoundingBox, size_t imageWidth, size_t imageHeight) API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+
+
+NS_ASSUME_NONNULL_END

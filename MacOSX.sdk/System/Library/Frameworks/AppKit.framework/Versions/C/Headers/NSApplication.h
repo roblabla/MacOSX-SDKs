@@ -1,7 +1,7 @@
 /*
     NSApplication.h
     Application Kit
-    Copyright (c) 1994-2017, Apple Inc.
+    Copyright (c) 1994-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -11,9 +11,12 @@
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSUserInterfaceValidation.h>
 #import <AppKit/NSRunningApplication.h>
+#import <AppKit/NSUserActivity.h>
 #import <AppKit/NSUserInterfaceLayout.h>
 #import <AppKit/NSPrintInfo.h>
 #import <AppKit/NSPasteboard.h>
+#import <AppKit/NSAppearance.h>
+#import <AppKit/NSMenu.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSUserActivity;
 @class CKShareMetadata;
 @protocol NSApplicationDelegate;
+@protocol NSUserActivityRestoring;
 
 typedef double NSAppKitVersion NS_TYPED_EXTENSIBLE_ENUM;
 /* The version of the AppKit framework */
@@ -65,6 +69,10 @@ static const NSAppKitVersion NSAppKitVersionNumber10_11_3 = 1404.34;
 static const NSAppKitVersion NSAppKitVersionNumber10_12 = 1504;
 static const NSAppKitVersion NSAppKitVersionNumber10_12_1 = 1504.60;
 static const NSAppKitVersion NSAppKitVersionNumber10_12_2 = 1504.76;
+static const NSAppKitVersion NSAppKitVersionNumber10_13 = 1561;
+static const NSAppKitVersion NSAppKitVersionNumber10_13_1 = 1561.1;
+static const NSAppKitVersion NSAppKitVersionNumber10_13_2 = 1561.2;
+static const NSAppKitVersion NSAppKitVersionNumber10_13_4 = 1561.4;
 
 /* Modes passed to NSRunLoop */
 APPKIT_EXTERN NSRunLoopMode NSModalPanelRunLoopMode;
@@ -119,21 +127,21 @@ typedef struct _NSModalSession *NSModalSession;
 // threading information
 typedef struct NSThreadPrivate _NSThreadPrivate;
 
-@interface NSApplication : NSResponder <NSUserInterfaceValidations, NSAccessibilityElement, NSAccessibility>
+@interface NSApplication : NSResponder <NSUserInterfaceValidations, NSMenuItemValidation, NSAccessibilityElement, NSAccessibility>
 {
     /*All instance variables are private*/
-    NSEvent            *_currentEvent;
-    id     		_windowList;
-    __weak id           _keyWindow;
-    __weak id           _mainWindow;
-    __weak id           _delegate;
-    id            	_hiddenList;
-    int                 _hiddenCount __unused;
-    NSInteger               _context;
-    void		*_appleEventSuspensionID;
-    __weak NSWindow            *_previousKeyWindowX;
-    short               _unusedApp;
-    short               _running;
+    NSEvent            *_currentEvent APPKIT_IVAR;
+    id     		_windowList APPKIT_IVAR;
+    __weak id           _keyWindow APPKIT_IVAR;
+    __weak id           _mainWindow APPKIT_IVAR;
+    __weak id           _delegate APPKIT_IVAR;
+    id            	_hiddenList APPKIT_IVAR;
+    int                 _hiddenCount __unused APPKIT_IVAR;
+    NSInteger               _context APPKIT_IVAR;
+    void		*_appleEventSuspensionID APPKIT_IVAR;
+    __weak NSWindow            *_previousKeyWindowX APPKIT_IVAR;
+    short               _unusedApp APPKIT_IVAR;
+    short               _running APPKIT_IVAR;
     struct __appFlags {
 	unsigned int        _hidden:1;
 	unsigned int        _appleEventActivationInProgress:1;
@@ -166,12 +174,14 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
         unsigned int        _didTryRestoringPersistentState:1;
         unsigned int        _reservedN:1;
         unsigned int        _mightBeSwitching:1;
-    }                   _appFlags;
-    id                  _mainMenu;
-    id                  _openWindows;
-    id                  _unused[1];
-    id                  _eventDelegate;
-    _NSThreadPrivate     *_threadingSupport;
+    }                   _appFlags APPKIT_IVAR;
+    id                  _mainMenu APPKIT_IVAR;
+    id                  _openWindows APPKIT_IVAR;
+@private
+    NSAppearance       *_appearance APPKIT_IVAR;
+@protected
+    id                  _eventDelegate APPKIT_IVAR;
+    _NSThreadPrivate     *_threadingSupport APPKIT_IVAR;
 }
 
 APPKIT_EXTERN __kindof NSApplication * __null_unspecified NSApp;
@@ -217,7 +227,7 @@ typedef NS_ENUM(NSUInteger, NSRequestUserAttentionType) {
 
 /*  Execute a block for each of the app's windows. Set *stop = YES if desired, to halt the enumeration early.
  */
-- (void)enumerateWindowsWithOptions:(NSWindowListOptions)options usingBlock:(void (NS_NOESCAPE ^) (NSWindow *window, BOOL *stop))block NS_AVAILABLE_MAC(10_12);
+- (void)enumerateWindowsWithOptions:(NSWindowListOptions)options usingBlock:(void (NS_NOESCAPE ^)(NSWindow *window, BOOL *stop))block NS_AVAILABLE_MAC(10_12);
 
 - (void)preventWindowOrdering;
 @property (readonly, copy) NSArray<NSWindow *> *windows;
@@ -272,6 +282,14 @@ typedef NS_ENUM(NSUInteger, NSApplicationDelegateReply) {
 
 @property (readonly) NSApplicationOcclusionState occlusionState NS_AVAILABLE_MAC(10_9);
 
+@end
+
+@interface NSApplication (NSAppearanceCustomization) <NSAppearanceCustomization>
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wavailability"
+@property (nullable, strong) NSAppearance *appearance NS_AVAILABLE_MAC(10_14);
+@property (readonly, strong) NSAppearance *effectiveAppearance NS_AVAILABLE_MAC(10_14);
+#pragma clang diagnostic pop
 @end
 
 @interface NSApplication(NSEvent)
@@ -384,7 +402,7 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
  
  If this user activity was created automatically by having NSUbiquitousDocumentUserActivityType in a CFBundleDocumentTypes entry, AppKit can automatically restore the NSUserActivity on OS X if NO is returned, or this method is unimplemented. It will do so by creating a document of the appropriate type using the URL stored in the userInfo under the NSUserActivityDocumentURLKey. The document will have restoreUserActivity: called on it.
  */
-- (BOOL)application:(NSApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void(^)(NSArray *restorableObjects))restorationHandler NS_AVAILABLE_MAC(10_10);
+- (BOOL)application:(NSApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void(^)(NSArray<id<NSUserActivityRestoring>> *restorableObjects))restorationHandler NS_AVAILABLE_MAC(10_10);
 
 /* There are instances where continuing a NSUserActivity may fail. This will get called on the main thread if it does so. If it is unimplemented, AppKit will present the error. */
 - (void)application:(NSApplication *)application didFailToContinueUserActivityWithType:(NSString *)userActivityType error:(NSError *)error NS_AVAILABLE_MAC(10_10);
@@ -398,6 +416,13 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
  You should use the CKShareMetadata object's shareURL and containerIdentifier to schedule a CKAcceptSharesOperation, then start using the resulting CKShare and its associated record(s), which will appear in the CKContainer's shared database in a zone matching that of the record's owner.
 */
 - (void)application:(NSApplication *)application userDidAcceptCloudKitShareWithMetadata:(CKShareMetadata *)metadata NS_AVAILABLE_MAC(10_12);
+
+/* Key Value Coding support:
+ */
+
+/* Return YES if the receiving delegate object can respond to key value coding messages for a specific keyed attribute, to-one relationship, or to-many relationship.  Return NO otherwise.
+*/
+- (BOOL)application:(NSApplication *)sender delegateHandlesKey:(NSString *)key;
 
 /* Notifications:
  */
@@ -435,7 +460,7 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
 @end
 
 /* Optional keys in -orderFrontStandardAboutPanelWithOptions: optionsDictionary */
-typedef NSString * NSAboutPanelOptionKey NS_STRING_ENUM;
+typedef NSString * NSAboutPanelOptionKey NS_TYPED_ENUM;
 /// NSAttributedString displayed in the info area of the panel. If not specified, contents obtained from "Credits.rtf" in [NSBundle mainBundle]; if not available, blank.
 APPKIT_EXTERN NSAboutPanelOptionKey const NSAboutPanelOptionCredits NS_AVAILABLE_MAC(10_13);
 /// NSString displayed in place of the default app name. If not specified, uses the value of CFBundleName (localizable). Fallback is [[NSProcessInfo processInfo] processName].
@@ -473,6 +498,8 @@ APPKIT_EXTERN NSAboutPanelOptionKey const NSAboutPanelOptionApplicationVersion N
 - (void)enableRelaunchOnLogin NS_AVAILABLE_MAC(10_7);
 @end
 
+/* Soft deprecated. Please use NSApplication's registerForRemoteNotifications along with requestAuthorizationWithOptions: from the UserNotifications.framework to specify allowable notification types.
+*/
 typedef NS_OPTIONS(NSUInteger, NSRemoteNotificationType) {
     NSRemoteNotificationTypeNone NS_ENUM_AVAILABLE_MAC(10_7)    = 0,
     NSRemoteNotificationTypeBadge NS_ENUM_AVAILABLE_MAC(10_7)   = 1 << 0,
@@ -482,12 +509,18 @@ typedef NS_OPTIONS(NSUInteger, NSRemoteNotificationType) {
 
 
 @interface NSApplication (NSRemoteNotifications)
-- (void)registerForRemoteNotificationTypes:(NSRemoteNotificationType)types NS_AVAILABLE_MAC(10_7);
+- (void)registerForRemoteNotifications NS_AVAILABLE_MAC(10_14);
 - (void)unregisterForRemoteNotifications NS_AVAILABLE_MAC(10_7);
 
+/* Returns YES if the application is currently registered for remote notifications, taking into account any systemwide settings; doesn't relate to connectivity.
+*/
+@property(readonly, getter=isRegisteredForRemoteNotifications) BOOL registeredForRemoteNotifications NS_AVAILABLE_MAC(10_14);
+
+/* The following are soft deprecated. Please use the registerForRemoteNotifications above and requestAuthorizationWithOptions: from UserNotifications.framework
+*/
+- (void)registerForRemoteNotificationTypes:(NSRemoteNotificationType)types NS_AVAILABLE_MAC(10_7);
 @property (readonly) NSRemoteNotificationType enabledRemoteNotificationTypes NS_AVAILABLE_MAC(10_7);
 @end
-
 
 /* An Application's startup function */
 
@@ -508,7 +541,7 @@ APPKIT_EXTERN NSInteger NSSetShowsServicesMenuItem(NSString *itemName, BOOL enab
 APPKIT_EXTERN void NSUpdateDynamicServices(void);
 APPKIT_EXTERN BOOL NSPerformService(NSString *itemName, NSPasteboard * __nullable pboard);
 
-typedef NSString * NSServiceProviderName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSServiceProviderName NS_SWIFT_BRIDGED_TYPEDEF;
 APPKIT_EXTERN void NSRegisterServicesProvider(id __nullable provider, NSServiceProviderName name); // apps should use -setServicesProvider
 APPKIT_EXTERN void NSUnregisterServicesProvider(NSServiceProviderName name);
 
@@ -560,22 +593,19 @@ APPKIT_EXTERN NSNotificationName const NSApplicationDidChangeOcclusionStateNotif
  */
 - (void)application:(null_unspecified NSApplication *)sender printFiles:(null_unspecified NSArray<NSString *> *)filenames NS_DEPRECATED_MAC(10_3, 10_4);
 
-/* These constants were informally deprecated in OS X 10.9. */
 enum {
     NSRunStoppedResponse NS_ENUM_DEPRECATED_MAC(10_0, 10_10, "Use NSModalResponseStop instead") = (-1000),
     NSRunAbortedResponse NS_ENUM_DEPRECATED_MAC(10_0, 10_10, "Use NSModalResponseAbort instead") = (-1001),
     NSRunContinuesResponse NS_ENUM_DEPRECATED_MAC(10_0, 10_10, "Use NSModalResponseContinue instead") = (-1002)
 };
 
-/* These methods were informally deprecated in OS X 10.9.  NSWindow's -beginSheet:completionHandler: and -endSheet:returnCode: should be used instead.  NSApplication's -beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo: will continue to work as it previously did, leaking contextInfo and failing when there is already an existing sheet.
+/* NSWindow's -beginSheet:completionHandler: and -endSheet:returnCode: should be used instead.  NSApplication's -beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo: will continue to work as it previously did, leaking contextInfo and failing when there is already an existing sheet.
  */
 - (void)beginSheet:(NSWindow *)sheet modalForWindow:(NSWindow *)docWindow modalDelegate:(nullable id)modalDelegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(null_unspecified void *)contextInfo NS_DEPRECATED_MAC(10_0, 10_10, "Use -[NSWindow beginSheet:completionHandler:] instead");
 - (void)endSheet:(NSWindow *)sheet NS_DEPRECATED_MAC(10_0, 10_10, "Use -[NSWindow endSheet:] instead");
 - (void)endSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode NS_DEPRECATED_MAC(10_0, 10_10, "Use -[NSWindow endSheet:returnCode:] instead");
 
-/* This method is soft deprecated starting with macOS 10.12. It will be officially deprecated in a future release. Use -enumerateWindowsWithOptions:usingBlock: instead.
- */
-- (nullable NSWindow *)makeWindowsPerform:(SEL)selector inOrder:(BOOL)flag;
+- (nullable NSWindow *)makeWindowsPerform:(SEL)selector inOrder:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_14, "Use -enumerateWindowsWithOptions:usingBlock: instead");
 
 /* This method is deprecated as of macOS 10.12. Beginning in OS X 10.11 it would always return nil. Prior to this it would return an undefined graphics context that was not generally suitable for drawing.
  */

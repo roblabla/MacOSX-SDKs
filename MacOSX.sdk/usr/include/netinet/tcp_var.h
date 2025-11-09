@@ -255,9 +255,12 @@ struct	tcpstat {
 	u_int32_t	tcps_badsyn;		/* bogus SYN, e.g. premature ACK */
 	u_int32_t	tcps_mturesent;		/* resends due to MTU discovery */
 	u_int32_t	tcps_listendrop;	/* listen queue overflows */
+	u_int32_t	tcps_synchallenge;	/* challenge ACK due to bad SYN */
+	u_int32_t	tcps_rstchallenge;	/* challenge ACK due to bad RST */
 
 	/* new stats from FreeBSD 5.4 sync up */
 	u_int32_t	tcps_minmssdrops;	/* average minmss too low drops */
+
 	u_int32_t	tcps_sndrexmitbad;	/* unnecessary packet retransmissions */
 	u_int32_t	tcps_badrst;		/* ignored RSTs in the window */
 
@@ -454,6 +457,7 @@ struct	tcpstat {
 	u_int32_t	tcps_mptcp_back_to_wifi;	/* Total number of connections that succeed to move traffic away from cell (when starting on cell) */
 	u_int32_t	tcps_mptcp_wifi_proxy;		/* Total number of new subflows that fell back to regular TCP on cell */
 	u_int32_t	tcps_mptcp_cell_proxy;		/* Total number of new subflows that fell back to regular TCP on WiFi */
+	u_int32_t	tcps_mptcp_triggered_cell;	/* Total number of times an MPTCP-connection triggered cell bringup */
 };
 
 

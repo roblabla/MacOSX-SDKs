@@ -105,17 +105,17 @@ extern "C"
 
 // prints out the internal state of an object to stdio
 extern void CAShow (void* inObject) 
-											__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+											API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 // prints out the internal state of an object to the supplied FILE
 extern void CAShowFile (void* inObject, FILE* inFile) 
-											__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+											API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 	
 // this will return the name of a sound bank from a sound bank file
 // the name should be released by the caller
 struct FSRef;
 extern OSStatus GetNameFromSoundBank (const struct FSRef *inSoundBankRef, CFStringRef __nullable * __nonnull outName)
-											__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+											API_DEPRECATED("no longer supported", macos(10.2, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function		CopyNameFromSoundBank
@@ -132,7 +132,7 @@ extern OSStatus GetNameFromSoundBank (const struct FSRef *inSoundBankRef, CFStri
 
 extern OSStatus
 CopyNameFromSoundBank (CFURLRef inURL, CFStringRef __nullable * __nonnull outName)
-											__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_7_0);
+											API_AVAILABLE(macos(10.5), ios(7.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function		CopyInstrumentInfoFromSoundBank
@@ -159,7 +159,7 @@ CopyNameFromSoundBank (CFURLRef inURL, CFStringRef __nullable * __nonnull outNam
 */
 
 extern OSStatus CopyInstrumentInfoFromSoundBank (CFURLRef inURL, CFArrayRef __nullable * __nonnull outInstrumentInfo)
-														__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_7_0);
+														API_AVAILABLE(macos(10.8), ios(7.0), watchos(2.0), tvos(9.0));
 	
 #define kInstrumentInfoKey_Name		"name"
 #define kInstrumentInfoKey_MSB		"MSB"

@@ -3,7 +3,7 @@
  
     Framework:  AVFoundation
  
-	Copyright 2013-2017 Apple Inc. All rights reserved.
+	Copyright 2013-2018 Apple Inc. All rights reserved.
  
  */
 
@@ -43,7 +43,7 @@ typedef NSString * AVAudioTimePitchAlgorithm NS_STRING_ENUM;
                 Variable rate from 1/32 to 32.
  
 */
-AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmLowQualityZeroLatency NS_AVAILABLE_IOS(7_0);
+AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmLowQualityZeroLatency API_AVAILABLE(ios(7.0), tvos(9.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED;
 AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmTimeDomain NS_AVAILABLE(10_9, 7_0);
 AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmSpectral NS_AVAILABLE(10_9, 7_0);
 AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmVarispeed NS_AVAILABLE(10_9, 7_0);

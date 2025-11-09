@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-SK_EXPORT @interface SKTextureAtlas : NSObject <NSCoding>
+SK_EXPORT @interface SKTextureAtlas : NSObject <NSSecureCoding>
 
 
 /* Atlas with .png and .plist file name*/

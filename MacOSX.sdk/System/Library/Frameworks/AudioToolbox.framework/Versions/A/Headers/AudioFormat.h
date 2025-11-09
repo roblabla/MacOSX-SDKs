@@ -451,7 +451,7 @@ extern OSStatus
 AudioFormatGetPropertyInfo(	AudioFormatPropertyID	inPropertyID,
 							UInt32					inSpecifierSize,
 							const void * __nullable	inSpecifier,
-							UInt32 *				outPropertyDataSize)	__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+							UInt32 *				outPropertyDataSize)	API_AVAILABLE(macos(10.3), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function	AudioFormatGetProperty
@@ -469,7 +469,7 @@ AudioFormatGetProperty(	AudioFormatPropertyID	inPropertyID,
 						UInt32					inSpecifierSize,
 						const void * __nullable	inSpecifier,
 						UInt32 * __nullable		ioPropertyDataSize,
-						void * __nullable		outPropertyData)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+						void * __nullable		outPropertyData)			API_AVAILABLE(macos(10.3), ios(2.0), watchos(2.0), tvos(9.0));
 
 
 //-----------------------------------------------------------------------------

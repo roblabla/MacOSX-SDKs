@@ -1648,6 +1648,9 @@
 /* */
 #define HAVE_SQLITE3 1
 
+/* have sqlite3_errstr function */
+#define HAVE_SQLITE3_ERRSTR 1
+
 /* have commercial sqlite3 with crypto support */
 /* #undef HAVE_SQLITE3_KEY */
 
@@ -2160,7 +2163,7 @@
 #define MYSQLND_SSL_SUPPORTED 1
 
 /* */
-#define NDBM_INCLUDE_FILE "/BuildRoot/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.Internal.sdk/usr/include/ndbm.h"
+#define NDBM_INCLUDE_FILE "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr/include/ndbm.h"
 
 /* */
 /* #undef NEUTRINO */
@@ -2205,7 +2208,7 @@
 /* #undef PHPDBG_DEBUG */
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2017-07-10"
+#define PHP_BUILD_DATE "2018-08-18"
 
 /* Define if your system has fork/vfork/CreateProcess */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1
@@ -2238,7 +2241,7 @@
 /* #undef PHP_HPUX_TIME_R */
 
 /* Path to iconv.h */
-#define PHP_ICONV_H_PATH </BuildRoot/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.Internal.sdk/usr/include/iconv.h>
+#define PHP_ICONV_H_PATH </Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr/include/iconv.h>
 
 /* Which iconv implementation to use */
 #define PHP_ICONV_IMPL "libiconv"
@@ -2280,7 +2283,7 @@
 #define PHP_SIGCHILD 0
 
 /* uname -a output */
-#define PHP_UNAME "Darwin osx347.sd.apple.com 17.0 Darwin Kernel Version 16.1.0: Wed May 17 11:07:20 PDT 2017; root:xnu-3789.21.4.1.5~1/DEVELOPMENT_X86_64 x86_64"
+#define PHP_UNAME "Darwin osx327.sd.apple.com 18.0 Darwin Kernel Version 17.0.0: Fri May 4 10:33:38 PDT 2018; root:xnu-4570.1.46.100.2~1/DEVELOPMENT_X86_64 x86_64"
 
 /* Whether PHP has to use its own crypt_r for blowfish, des and ext des */
 #define PHP_USE_PHP_CRYPT_R 1

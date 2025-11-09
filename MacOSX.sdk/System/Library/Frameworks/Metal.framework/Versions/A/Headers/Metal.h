@@ -29,3 +29,7 @@
 #import <Metal/MTLArgumentEncoder.h>
 #import <Metal/MTLCaptureManager.h>
 #import <Metal/MTLCaptureScope.h>
+#import <Metal/MTLIndirectCommandBuffer.h>
+#import <Metal/MTLIndirectCommandEncoder.h>
+#import <Metal/MTLFence.h>
+#import <Metal/MTLEvent.h>

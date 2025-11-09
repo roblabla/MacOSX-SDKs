@@ -1,7 +1,7 @@
 /*
         NSTabView.h
         Application Kit
-        Copyright (c) 2000-2017, Apple Inc.
+        Copyright (c) 2000-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -48,30 +48,30 @@ typedef NS_ENUM(NSUInteger, NSTabViewBorderType) {
 @private
     	/* Persistent properties */
     
-    id                           _tabViewItems;                 // array of NSTabViewItem
-    NSTabViewItem	        *_selectedTabViewItem;		// nil only if _tabViewItems is empty
-    NSFont		        *_font;				// font use to display the tab label
+    id                           _tabViewItems APPKIT_IVAR;                 // array of NSTabViewItem
+    NSTabViewItem	        *_selectedTabViewItem APPKIT_IVAR;		// nil only if _tabViewItems is empty
+    NSFont		        *_font APPKIT_IVAR;				// font use to display the tab label
     struct __NSTabViewTypeFlags {
         unsigned int tabViewBorderType:3;
         unsigned int tabPosition:5;
         unsigned int reserved:24;
-    } _typeFlags;
-    BOOL		         _allowTruncatedLabels;
-    __weak id<NSTabViewDelegate> _delegate;
+    } _typeFlags APPKIT_IVAR;
+    BOOL		         _allowTruncatedLabels APPKIT_IVAR;
+    __weak id<NSTabViewDelegate> _delegate APPKIT_IVAR;
 
     	/* Non-Persistent properties */
 
-    BOOL		         _tabViewUnusedBOOL1 __unused;
+    BOOL		         _tabViewUnusedBOOL1 __unused APPKIT_IVAR;
     
-    BOOL		         _drawsBackground;		// YES if we draw the background when borderless
-    NSTabViewItem	        *_pressedTabViewItem;		// using during tracking
-    NSInteger		         _endTabWidth;			// Width of the end tab. It depends on the font used.
-    NSInteger		         _maxOverlap;			// Maximum tab overlap. Function of _enTabWidth
-    CGFloat		         _tabHeight;			// Cache height of tabs
-    NSTabViewItem	        *_tabViewItemWithKeyView;	// the tabViewItem with the keyView "outline"
-    NSView 		        *_originalNextKeyView;		// Original nextKeyView of the tabView. Needed to restore the keyViewLoop.
+    BOOL		         _drawsBackground APPKIT_IVAR;		// YES if we draw the background when borderless
+    NSTabViewItem	        *_pressedTabViewItem APPKIT_IVAR;		// using during tracking
+    NSInteger		         _endTabWidth APPKIT_IVAR;			// Width of the end tab. It depends on the font used.
+    NSInteger		         _maxOverlap APPKIT_IVAR;			// Maximum tab overlap. Function of _enTabWidth
+    CGFloat		         _tabHeight APPKIT_IVAR;			// Cache height of tabs
+    NSTabViewItem	        *_tabViewItemWithKeyView APPKIT_IVAR;	// the tabViewItem with the keyView "outline"
+    NSView 		        *_originalNextKeyView APPKIT_IVAR;		// Original nextKeyView of the tabView. Needed to restore the keyViewLoop.
 #if __LP64__
-    NSLayoutConstraint          *_tabViewMinimumSizeConstraint; // Width constraint for the tab view based on its minimum size
+    NSLayoutConstraint          *_tabViewMinimumSizeConstraint APPKIT_IVAR; // Width constraint for the tab view based on its minimum size
 #endif
     
     struct __NSTabViewDelegateRespondTo {
@@ -80,7 +80,7 @@ typedef NS_ENUM(NSUInteger, NSTabViewBorderType) {
         unsigned int didSelectTabViewItem:1;
         unsigned int didChangeNumberOfTabViewItems:1;
         unsigned int reserved:28;
-    } _delegateRespondTo;
+    } _delegateRespondTo APPKIT_IVAR;
     
     struct __NSTabViewFlags {
         unsigned int needsLayout:1;
@@ -94,10 +94,10 @@ typedef NS_ENUM(NSUInteger, NSTabViewBorderType) {
         unsigned int allowsPropertyChange:1;
         unsigned int ownedByTabViewController:1;
         unsigned int reserved:19;
-    } _flags;
-    NSTabViewItem 	*_focusedTabViewItem;
+    } _flags APPKIT_IVAR;
+    NSTabViewItem 	*_focusedTabViewItem APPKIT_IVAR;
 
-    void		*_tabViewUnused2 __unused;
+    void		*_tabViewUnused2 __unused APPKIT_IVAR;
 }
 
 	/* Select */
@@ -121,11 +121,10 @@ typedef NS_ENUM(NSUInteger, NSTabViewBorderType) {
 @property NSTabViewType tabViewType;                                            // Use tabPosition and tabViewBorderType instead. Setting this will also set the tabPosition and tabViewBorderType. Setting tabPosition or tabViewBorderType will affect tabViewType
 @property NSTabPosition tabPosition NS_AVAILABLE_MAC(10_12);
 @property NSTabViewBorderType tabViewBorderType NS_AVAILABLE_MAC(10_12);        // This will only be respected if NSTabPosition is NSTabPositionNone.
-@property (readonly, copy) NSArray<__kindof NSTabViewItem *> *tabViewItems;
+@property (copy) NSArray<__kindof NSTabViewItem *> *tabViewItems;
 @property BOOL allowsTruncatedLabels;
 @property (readonly) NSSize minimumSize;					// returns the minimum size of the tab view
 @property BOOL drawsBackground;  						// only relevant for borderless tab view type
-@property NSControlTint controlTint;
 @property NSControlSize controlSize;
 
 	/* Add/Remove tabs */
@@ -152,6 +151,8 @@ typedef NS_ENUM(NSUInteger, NSTabViewBorderType) {
 - (NSInteger)indexOfTabViewItem:(NSTabViewItem *)tabViewItem;			// NSNotFound if not found
 - (NSTabViewItem *)tabViewItemAtIndex:(NSInteger)index;                         // May raise an NSRangeException	
 - (NSInteger)indexOfTabViewItemWithIdentifier:(id)identifier;			// NSNotFound if not found
+
+@property NSControlTint controlTint NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "The controlTint property is not respected on 10.14 and later.");
 
 @end
 

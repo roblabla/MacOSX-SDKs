@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2017 Apple Inc.
+ * Copyright (c) 2015-2018 Apple Inc.
  * All rights reserved.
  */
 
@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @interface NEFilterControlProvider
  * @discussion The NEFilterControlProvider class declares the programmatic interface for an object that is responsible for installing filtering rules on the device.
  */
-NS_CLASS_AVAILABLE(NA, 9_0)
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface NEFilterControlProvider : NEFilterProvider
 
 /*!
@@ -43,13 +43,13 @@ NS_CLASS_AVAILABLE(NA, 9_0)
 					  };
 
  */
-@property (copy, nullable) NSDictionary<NSString *, NSDictionary<NSString *, NSObject *> *> *remediationMap NS_AVAILABLE(NA, 9_0);
+@property (copy, nullable) NSDictionary<NSString *, NSDictionary<NSString *, NSObject *> *> *remediationMap API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property URLAppendStringMap
  * @discussion A dictionary containing strings to be appended to URLs.
  */
-@property (copy, nullable) NSDictionary<NSString *, NSString *> *URLAppendStringMap NS_AVAILABLE(NA, 9_0);
+@property (copy, nullable) NSDictionary<NSString *, NSString *> *URLAppendStringMap API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method handleRemediationForFlow:completionHandler:
@@ -57,7 +57,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  * @param flow An NEFilterFlow object containing details about the flow that requires remediation.
  * @param completionHandler A block that must be called when the NEFilterControlProvider is ready for the NEFilterDataProvider to re-process the new flow. NEFilterControlVerdict stores the verdict through which the control provider determines if a flow needs to be dropped or allowed. The verdict also indicates if the control plugin wants the data plugin to update its rules and handle the verdict.
  */
-- (void)handleRemediationForFlow:(NEFilterFlow *)flow completionHandler:(void (^)(NEFilterControlVerdict *))completionHandler NS_AVAILABLE(NA, 9_0);
+- (void)handleRemediationForFlow:(NEFilterFlow *)flow completionHandler:(void (^)(NEFilterControlVerdict *))completionHandler API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 
 /*!
@@ -66,20 +66,20 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  * @param flow An NEFilterFlow object containing details about the flow that requires a rules update.
  * @param completionHandler A block that must be called when the NEFilterControlProvider is ready for the NEFilterDataProvider to re-process the new flow. NEFilterControlVerdict stores the verdict through which the control provider determines if a flow needs to be dropped or allowed. The verdict also indicates if the control plugin wants the data plugin to update its rules and handle the verdict.
  */
-- (void)handleNewFlow:(NEFilterFlow *)flow completionHandler:(void (^)(NEFilterControlVerdict *))completionHandler NS_AVAILABLE(NA, 9_0);
+- (void)handleNewFlow:(NEFilterFlow *)flow completionHandler:(void (^)(NEFilterControlVerdict *))completionHandler API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method notifyRulesChanged
  * @discussion This function is called by filter control implementations to notify the data provider "out of band" that the rules changed.
  */
-- (void)notifyRulesChanged NS_AVAILABLE(NA, 9_0);
+- (void)notifyRulesChanged API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method handleReport:
  * @discussion This function is called by the framework when the data provider extension returns a verdict with the report property set to True. Subclass implementations may override this method to handle the flow report.
  * @param report The report being delivered
  */
-- (void)handleReport:(NEFilterReport *)report NS_AVAILABLE(NA, 11_0);
+- (void)handleReport:(NEFilterReport *)report API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 @end
 
 NS_ASSUME_NONNULL_END

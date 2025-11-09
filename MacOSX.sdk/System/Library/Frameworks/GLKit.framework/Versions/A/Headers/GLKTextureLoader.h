@@ -25,18 +25,13 @@
  */
 
 #import <CoreGraphics/CoreGraphics.h>
-
 #import <Foundation/Foundation.h>
-
+#import <GLKit/GLKitBase.h>
 #if TARGET_OS_IPHONE
 #import <OpenGLES/EAGL.h>
-#import <OpenGLES/gltypes.h>
-#else // !TARGET_OS_IPHONE
-#import <OpenGL/gltypes.h>
+#else //!TARGET_OS_IPHONE
 #import <AppKit/AppKit.h>
-#endif // !TARGET_OS_IPHONE
-
-#import <GLKit/GLKitBase.h>
+#endif //!TARGET_OS_IPHONE
 
 NS_ASSUME_NONNULL_BEGIN
 #pragma mark -
@@ -52,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
  For compressed formats, this option must be omitted, or false.
  False by default.
  */
-GLK_EXTERN NSString *const GLKTextureLoaderApplyPremultiplication NS_AVAILABLE(10_8, 5_0);
+GLK_EXTERN NSString *const GLKTextureLoaderApplyPremultiplication NS_AVAILABLE(10_8, 5_0) OPENGL_DEPRECATED(10.8,10.14) OPENGLES_DEPRECATED(ios(5.0,12.0), tvos(9.0,12.0));
 
 /*
  GLKTextureLoaderGenerateMipmaps - A boolean NSNumber
@@ -60,13 +55,13 @@ GLK_EXTERN NSString *const GLKTextureLoaderApplyPremultiplication NS_AVAILABLE(1
  Generates mipmap levels for all faces when used with cube maps.
  Sets GL_TEXTURE_MIN_FILTER parameter to GL_LINEAR_MIPMAP_LINEAR when true.
  False by default. */
-GLK_EXTERN NSString *const GLKTextureLoaderGenerateMipmaps NS_AVAILABLE(10_8, 5_0);
+GLK_EXTERN NSString *const GLKTextureLoaderGenerateMipmaps NS_AVAILABLE(10_8, 5_0) OPENGL_DEPRECATED(10.8,10.14) OPENGLES_DEPRECATED(ios(5.0,12.0), tvos(9.0,12.0));
 
 /*
  GLKTextureLoaderOriginBottomLeft - A boolean NSNumber.
  Transform image data to match OpenGL's bottom left orientation specification.
  False by default. */
-GLK_EXTERN NSString *const GLKTextureLoaderOriginBottomLeft NS_AVAILABLE(10_8, 5_0);
+GLK_EXTERN NSString *const GLKTextureLoaderOriginBottomLeft NS_AVAILABLE(10_8, 5_0) OPENGL_DEPRECATED(10.8,10.14) OPENGLES_DEPRECATED(ios(5.0,12.0), tvos(9.0,12.0));
 
 /*
  GLKTextureLoaderGrayscaleAsAlpha - A boolean NSNumber.
@@ -75,7 +70,7 @@ GLK_EXTERN NSString *const GLKTextureLoaderOriginBottomLeft NS_AVAILABLE(10_8, 5
  Has no effect on non-grayscale images and on OS X.
  False by default.
  */
-GLK_EXTERN NSString *const GLKTextureLoaderGrayscaleAsAlpha NS_AVAILABLE_IOS(5_0);
+GLK_EXTERN NSString *const GLKTextureLoaderGrayscaleAsAlpha; API_UNAVAILABLE(macos) OPENGLES_DEPRECATED(ios(5.0,12.0), tvos(9.0,12.0));
 
 
 /*
@@ -85,7 +80,7 @@ GLK_EXTERN NSString *const GLKTextureLoaderGrayscaleAsAlpha NS_AVAILABLE_IOS(5_0
  False by default.
  */
 #if TARGET_OS_IPHONE || defined(MAC_OS_X_VERSION_10_9)
-GLK_EXTERN NSString *const GLKTextureLoaderSRGB NS_AVAILABLE(10_9, 7_0);
+GLK_EXTERN NSString *const GLKTextureLoaderSRGB  OPENGL_DEPRECATED(10.9,10.14) OPENGLES_DEPRECATED(ios(7.0,12.0), tvos(9.0,12.0));
 #else
 GLK_EXTERN NSString *const GLKTextureLoaderSRGB;
 #endif
@@ -93,13 +88,13 @@ GLK_EXTERN NSString *const GLKTextureLoaderSRGB;
 /*
  Error domain for GLKTextureLoader
  */
-GLK_EXTERN NSString *const GLKTextureLoaderErrorDomain NS_AVAILABLE(10_8, 5_0);
+GLK_EXTERN NSString *const GLKTextureLoaderErrorDomain OPENGL_DEPRECATED(10.8,10.14) OPENGLES_DEPRECATED(ios(5.0,12.0), tvos(9.0,12.0));
 
 /*
  Error keys for obtaining more error information
  */
-GLK_EXTERN NSString *const GLKTextureLoaderErrorKey NS_AVAILABLE(10_8, 5_0);
-GLK_EXTERN NSString *const GLKTextureLoaderGLErrorKey NS_AVAILABLE(10_8, 5_0);
+GLK_EXTERN NSString *const GLKTextureLoaderErrorKey OPENGL_DEPRECATED(10.8,10.14) OPENGLES_DEPRECATED(ios(5.0,12.0), tvos(9.0,12.0));
+GLK_EXTERN NSString *const GLKTextureLoaderGLErrorKey OPENGL_DEPRECATED(10.8,10.14) OPENGLES_DEPRECATED(ios(5.0,12.0), tvos(9.0,12.0));
 
 /*
  Error codes
@@ -155,7 +150,8 @@ typedef NS_ENUM(GLint, GLKTextureInfoOrigin)
 /*
  Immutable Texture Object Data
  */
-NS_CLASS_AVAILABLE(10_8, 5_0)
+
+OPENGL_DEPRECATED(10.8,10.14) OPENGLES_DEPRECATED(ios(5.0,12.0), tvos(9.0,12.0))
 @interface GLKTextureInfo : NSObject <NSCopying>
 {
 @private
@@ -190,7 +186,8 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 
 typedef void (^GLKTextureLoaderCallback) (GLKTextureInfo * __nullable textureInfo, NSError * __nullable outError);
 
-NS_CLASS_AVAILABLE(10_8, 5_0)
+
+OPENGL_DEPRECATED(10.8,10.14) OPENGLES_DEPRECATED(ios(5.0,12.0), tvos(9.0,12.0))
 @interface GLKTextureLoader : NSObject
 {
     

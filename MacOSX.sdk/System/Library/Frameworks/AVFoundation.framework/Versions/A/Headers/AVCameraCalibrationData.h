@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     When rendering effects to images produced by cameras, or performing computer vision tasks such as correcting images for geometric distortions, it is necessary to characterize the camera's calibration information, such as its pixel focal length, principal point, lens distortion characteristics, etc. AVCameraCalibrationData provides this information.
  */
-NS_CLASS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED
 @interface AVCameraCalibrationData : NSObject
 {
 @private
@@ -88,8 +88,10 @@ AV_INIT_UNAVAILABLE
  
  @discussion
     Images captured by a camera are geometrically warped by radial distortions in the lens. In order to project from the 2D image plane back into the 3D world, the images must be distortion corrected, or made rectilinear. Lens distortion is modeled using a one-dimensional lookup table of 32-bit float values evenly distributed along a radius from the center of the distortion to the farthest corner, with each value representing an elongation or compression of the radius (0.0 for any given point indicates no elongation). This model assumes radially symmetric lens distortion. When dealing with AVDepthData, the disparity / depth map representations are geometrically distorted to align with images produced by the camera. For more information, see the reference implementation below.
+ 
+    If the camera lacks the calibration data needed to accurately characterize lens distortions, this property's value is nil.
  */
-@property(nonatomic, readonly) NSData *lensDistortionLookupTable;
+@property(nullable, nonatomic, readonly) NSData *lensDistortionLookupTable;
 
 /*!
  @property inverseLensDistortionLookupTable
@@ -98,8 +100,10 @@ AV_INIT_UNAVAILABLE
  
  @discussion
     See lensDistortionLookupTable. If you've rectified an image by removing the distortions characterized by the lensDistortionLookupTable, and now wish to go back to geometrically distorted, you may use the inverseLensDistortionLookupTable. For more information, see the reference implementation below.
+ 
+    If the camera lacks the calibration data needed to accurately characterize lens distortions, this property's value is nil.
  */
-@property(nonatomic, readonly) NSData *inverseLensDistortionLookupTable;
+@property(nullable, nonatomic, readonly) NSData *inverseLensDistortionLookupTable;
 
 /*!
  @property lensDistortionCenter
@@ -108,6 +112,8 @@ AV_INIT_UNAVAILABLE
  
  @discussion
     Due to geometric distortions in the image, the center of the distortion may not be equal to the optical center (principal point) of the lens. When making an image rectilinear, the distortion center should be used rather than the optical center of the image. For more information, see the reference implementation below.
+ 
+    If the camera lacks the calibration data needed to accurately characterize lens distortions, this property's value is set to CGPointZero and should not be used.
  */
 @property(nonatomic, readonly) CGPoint lensDistortionCenter;
 

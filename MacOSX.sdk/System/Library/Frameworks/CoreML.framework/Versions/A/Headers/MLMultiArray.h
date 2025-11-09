@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreML/MLExport.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,6 +24,7 @@ typedef NS_ENUM(NSInteger, MLMultiArrayDataType) {
  * Multidimensional Array
  */
 API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0))
+ML_EXPORT
 @interface MLMultiArray : NSObject
 
 /// Unsafe pointer to underlying buffer holding the data

@@ -5,7 +5,7 @@
  
      Version:    ATS
  
-     Copyright:  Copyright 1997-2012 by Apple Inc., all rights reserved.
+     Copyright:  Copyright 1997-2018 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -18,6 +18,10 @@
 
 #ifndef __CORESERVICES__
 #include <CoreServices/CoreServices.h>
+#endif
+
+#ifndef __CARBONCORE__
+#include <CarbonCore/CarbonCore.h>
 #endif
 
 #ifndef __CGGEOMETRY__
@@ -147,8 +151,10 @@ typedef STACK_UPP_TYPE(FMFontCallbackFilterProcPtr)             FMFontCallbackFi
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
+#if !__LP64__
 extern FMFontFamilyCallbackFilterUPP
 NewFMFontFamilyCallbackFilterUPP(FMFontFamilyCallbackFilterProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+#endif // !__LP64
 
 /*
  *  NewFMFontCallbackFilterUPP()
@@ -158,8 +164,10 @@ NewFMFontFamilyCallbackFilterUPP(FMFontFamilyCallbackFilterProcPtr userRoutine) 
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
+#if !__LP64__
 extern FMFontCallbackFilterUPP
 NewFMFontCallbackFilterUPP(FMFontCallbackFilterProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+#endif // !__LP64
 
 /*
  *  DisposeFMFontFamilyCallbackFilterUPP()
@@ -169,8 +177,10 @@ NewFMFontCallbackFilterUPP(FMFontCallbackFilterProcPtr userRoutine) AVAILABLE_MA
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
+#if !__LP64__
 extern void
 DisposeFMFontFamilyCallbackFilterUPP(FMFontFamilyCallbackFilterUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+#endif // !__LP64
 
 /*
  *  DisposeFMFontCallbackFilterUPP()
@@ -180,8 +190,10 @@ DisposeFMFontFamilyCallbackFilterUPP(FMFontFamilyCallbackFilterUPP userUPP) AVAI
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
+#if !__LP64__
 extern void
 DisposeFMFontCallbackFilterUPP(FMFontCallbackFilterUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+#endif // !__LP64
 
 /*
  *  InvokeFMFontFamilyCallbackFilterUPP()
@@ -191,11 +203,13 @@ DisposeFMFontCallbackFilterUPP(FMFontCallbackFilterUPP userUPP) AVAILABLE_MAC_OS
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
+#if !__LP64__
 extern OSStatus
 InvokeFMFontFamilyCallbackFilterUPP(
   FMFontFamily                   iFontFamily,
   void *                         iRefCon,
   FMFontFamilyCallbackFilterUPP  userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+#endif // !__LP64
 
 /*
  *  InvokeFMFontCallbackFilterUPP()
@@ -205,11 +219,13 @@ InvokeFMFontFamilyCallbackFilterUPP(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
+#if !__LP64__
 extern OSStatus
 InvokeFMFontCallbackFilterUPP(
   FMFont                   iFont,
   void *                   iRefCon,
   FMFontCallbackFilterUPP  userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+#endif // !__LP64
 
 #if __MACH__
   #ifdef __cplusplus

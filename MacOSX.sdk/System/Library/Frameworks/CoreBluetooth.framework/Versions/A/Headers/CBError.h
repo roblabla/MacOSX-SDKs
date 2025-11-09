@@ -37,7 +37,9 @@ typedef NS_ENUM(NSInteger, CBError) {
 	CBErrorAlreadyAdvertising NS_ENUM_AVAILABLE(10_9, 6_0)		= 9,
 	CBErrorConnectionFailed NS_ENUM_AVAILABLE(10_13, 7_1)		= 10,
 	CBErrorConnectionLimitReached NS_ENUM_AVAILABLE(10_13, 9_0)	= 11,
-	CBErrorUnkownDevice NS_ENUM_AVAILABLE(10_13, 9_0)			= 12
+	CBErrorUnkownDevice NS_ENUM_DEPRECATED(10_13, 10_15, 9_0, 13_0, "Use CBErrorUnknownDevice instead") = 12,
+	CBErrorUnknownDevice NS_ENUM_AVAILABLE(10_14, 12_0)			= 12,
+	CBErrorOperationNotSupported NS_ENUM_AVAILABLE(10_14, 12_0)	= 13,
 
 };
 

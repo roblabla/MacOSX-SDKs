@@ -419,3 +419,10 @@ SwiftVersions:
     - Selector: 'geometrySourceWithVertices:count:'
       MethodKind: Class
       SwiftPrivate: false
+  - Name: SCNAnimationEvent
+    Methods:
+    - Selector: 'animationEventWithKeyTime:block:'
+      MethodKind: Class
+      Parameters:
+      - Position: 1
+        Type: 'void(^ _Nonnull)(CAAnimation * _Nonnull, id _Nonnull, BOOL)'

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  A SpriteKit node used to render a 2D array of textured sprites. Uses SKTileSet to determine what textures it can use to render. Separate tile map nodes can be layered on top of one another to achieve various effects, such as parallax scrolling.
  */
-SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKTileMapNode : SKNode <NSCopying, NSCoding>
+SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKTileMapNode : SKNode <NSCopying, NSSecureCoding>
 
 /**
  Create a tile map node with the specified tile set and dimensions. The tiles of the map will be empty, equivalent to the nil tile definition/group.

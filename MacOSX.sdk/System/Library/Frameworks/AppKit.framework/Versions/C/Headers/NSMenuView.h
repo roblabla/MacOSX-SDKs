@@ -1,7 +1,7 @@
 /*
         NSMenuView.h
         Application Kit
-        Copyright (c) 1997-2017, Apple Inc.
+        Copyright (c) 1997-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -19,23 +19,23 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSMenuView : NSView {
     /*All instance variables are private*/
     @private
-    NSMenu *_menu;
-    NSMutableArray *_cells;
-    CGFloat _stateImageWidth;
-    CGFloat _imageAndTitleWidth;
-    CGFloat _keyEquivalentWidth;
-    CGFloat *_extents;
-    unsigned _extentsCapacity;
-    int _highlightedItemIndex;
-    BOOL *_submenuPopupCancel;
-    NSMenuView *_attachedMenuView;
-    CGFloat _scrollArrowHeight;
-    CGFloat _maxWinHeight;
-    NSFont *_font;
-    NSSize _minSize;
-    CGFloat _horizontalEdgePad;
-    void *trackingState;
-    id _scrollingView;
+    NSMenu *_menu APPKIT_IVAR;
+    NSMutableArray *_cells APPKIT_IVAR;
+    CGFloat _stateImageWidth APPKIT_IVAR;
+    CGFloat _imageAndTitleWidth APPKIT_IVAR;
+    CGFloat _keyEquivalentWidth APPKIT_IVAR;
+    CGFloat *_extents APPKIT_IVAR;
+    unsigned _extentsCapacity APPKIT_IVAR;
+    int _highlightedItemIndex APPKIT_IVAR;
+    BOOL *_submenuPopupCancel APPKIT_IVAR;
+    NSMenuView *_attachedMenuView APPKIT_IVAR;
+    CGFloat _scrollArrowHeight APPKIT_IVAR;
+    CGFloat _maxWinHeight APPKIT_IVAR;
+    NSFont *_font APPKIT_IVAR;
+    NSSize _minSize APPKIT_IVAR;
+    CGFloat _horizontalEdgePad APPKIT_IVAR;
+    void *trackingState APPKIT_IVAR;
+    id _scrollingView APPKIT_IVAR;
     struct __mvFlags {
         unsigned int needsSizing:1;
         unsigned int releasingWindow:1;
@@ -50,7 +50,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
         unsigned int savedHODState:1;
         unsigned int drawCenter:1;
         unsigned int RESERVED:5;
-    } _mvFlags;
+    } _mvFlags APPKIT_IVAR;
 }
 
 + (CGFloat)menuBarHeight;

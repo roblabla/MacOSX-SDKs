@@ -31,12 +31,9 @@ enum {
     kICS_FileData                 = 'file',
     kICS_MetaData                 = 'meta',
     kICS_ThumbnailData            = 'thum',     // Deprecated in 10.5
-    kICS_ThumbnailDataFormatJPEG  = 'tjpg',     // Deprecated in 10.5.
-                                                // Use kICAThumbnailFormatJPEG or kICAThumbnailFormatJPEGAutoRotated instead.
-    kICS_ThumbnailDataFormatTIFF  = 'ttif',     // Deprecated in 10.5.
-                                                // Use kICAThumbnailFormatTIFF or kICAThumbnailFormatTIFFAutoRotated instead.
-    kICS_ThumbnailDataFormatPNG   = 'tpng'      // Deprecated in 10.5. 
-                                                // Use kICAThumbnailFormatPNG instead.
+    kICS_ThumbnailDataFormatJPEG  = 'tjpg',     // Deprecated in 10.5
+    kICS_ThumbnailDataFormatTIFF  = 'ttif',     // Deprecated in 10.5
+    kICS_ThumbnailDataFormatPNG   = 'tpng'      // Deprecated in 10.5    
 };
 
 //------------------------------------------------------------------------------------------------------------------------------

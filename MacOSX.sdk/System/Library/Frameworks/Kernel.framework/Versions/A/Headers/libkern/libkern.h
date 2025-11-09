@@ -77,6 +77,8 @@
 #include <sys/cdefs.h>
 #include <sys/types.h>
 #include <mach/vm_param.h>
+#include <libkern/crc.h>
+#include <libkern/copyio.h>
 
 
 #ifdef __APPLE_API_OBSOLETE
@@ -169,11 +171,10 @@ int	printf(const char *, ...) __printflike(1,2);
 uint16_t	crc16(uint16_t crc, const void *bufp, size_t len);
 uint32_t	crc32(uint32_t crc, const void *bufp, size_t len);
 
+
 int	copystr(const void *kfaddr, void *kdaddr, size_t len, size_t *done);
 int	copyinstr(const user_addr_t uaddr, void *kaddr, size_t len, size_t *done);
 int	copyoutstr(const void *kaddr, user_addr_t udaddr, size_t len, size_t *done);
-int	copyin(const user_addr_t uaddr, void *kaddr, size_t len);
-int	copyout(const void *kaddr, user_addr_t udaddr, size_t len);
 
 int vsscanf(const char *, char const *, va_list);
 
@@ -196,6 +197,7 @@ clz(unsigned int num)
 	// On Intel, clz(0) is undefined
 	return num ? __builtin_clz(num) : sizeof(num) * CHAR_BIT;
 }
+
 
 __END_DECLS
 

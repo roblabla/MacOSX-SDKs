@@ -21,6 +21,8 @@
 					reflects the response of the remote device.
 */
 
+@class BluetoothFileReference;
+
 @interface OBEXFileTransferServices : NSObject
 {
 
@@ -29,7 +31,7 @@
 	id							mOBEXFileGet;
 	id							mOBEXFilePut;
 	
-	id							mFolderListingFileRef;
+	BluetoothFileReference *	mFolderListingFileRef;
 	int							mActionCommand;
 	int							mSavedCommand;
 	NSString *					mActionArgument1;

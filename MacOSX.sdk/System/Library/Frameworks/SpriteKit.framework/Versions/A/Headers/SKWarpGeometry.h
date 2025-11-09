@@ -30,10 +30,10 @@ SK_EXPORT NS_AVAILABLE(10_12, 10_0) @protocol SKWarpable <NSObject>
 
 
 /* Base class for future expansion */
-SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKWarpGeometry : NSObject <NSCopying, NSCoding>
+SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKWarpGeometry : NSObject <NSCopying, NSSecureCoding>
 @end
 
-SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKWarpGeometryGrid : SKWarpGeometry <NSCoding>
+SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKWarpGeometryGrid : SKWarpGeometry <NSSecureCoding>
 
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
@@ -59,11 +59,11 @@ SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKWarpGeometryGrid : SKWarpGeomet
  Source and dest positions are provided in row-major order staring from the top-left.
  For example the indices for a 2x2 grid would be as follows:
  
- [0]---[1]---[2]
+ [6]---[7]---[8]
   |     |     |
  [3]---[4]---[5]
   |     |     |
- [6]---[7]---[8]
+ [0]---[1]---[2]
  
  */
 #if (defined(SWIFT_SDK_OVERLAY_SPRITEKIT_EPOCH) && SWIFT_SDK_OVERLAY_SPRITEKIT_EPOCH >= 1)

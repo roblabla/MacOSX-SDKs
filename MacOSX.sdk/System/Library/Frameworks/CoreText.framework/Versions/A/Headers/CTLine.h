@@ -2,7 +2,7 @@
  *  CTLine.h
  *  CoreText
  *
- *  Copyright (c) 2003-2017 Apple Inc. All rights reserved.
+ *  Copyright (c) 2003-2018 Apple Inc. All rights reserved.
  *
  */
 
@@ -18,9 +18,9 @@
 #define __CTLINE__
 
 #include <CoreText/CTDefines.h>
-#include <CoreFoundation/CFArray.h>
-#include <CoreFoundation/CFAttributedString.h>
-#include <CoreGraphics/CGContext.h>
+
+#include <CoreFoundation/CoreFoundation.h>
+#include <CoreGraphics/CoreGraphics.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
@@ -166,11 +166,11 @@ CTLineRef CTLineCreateWithAttributedString(
                 NULL.
 */
 
-CTLineRef __nullable CTLineCreateTruncatedLine(
+CTLineRef _Nullable CTLineCreateTruncatedLine(
     CTLineRef line,
     double width,
     CTLineTruncationType truncationType,
-    CTLineRef __nullable truncationToken ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+    CTLineRef _Nullable truncationToken ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -197,7 +197,7 @@ CTLineRef __nullable CTLineCreateTruncatedLine(
                 NULL.
 */
 
-CTLineRef __nullable CTLineCreateJustifiedLine(
+CTLineRef _Nullable CTLineCreateJustifiedLine(
     CTLineRef line,
     CGFloat justificationFactor,
     double justificationWidth ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
@@ -340,9 +340,9 @@ void CTLineDraw(
 
 double CTLineGetTypographicBounds(
     CTLineRef line,
-    CGFloat * __nullable ascent,
-    CGFloat * __nullable descent,
-    CGFloat * __nullable leading ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+    CGFloat * _Nullable ascent,
+    CGFloat * _Nullable descent,
+    CGFloat * _Nullable leading ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -415,7 +415,7 @@ double CTLineGetTrailingWhitespaceWidth(
 
 CGRect CTLineGetImageBounds(
     CTLineRef line,
-    CGContextRef __nullable context ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+    CGContextRef _Nullable context ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -485,7 +485,7 @@ CFIndex CTLineGetStringIndexForPosition(
 CGFloat CTLineGetOffsetForStringIndex(
     CTLineRef line,
     CFIndex charIndex,
-    CGFloat * __nullable secondaryOffset ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+    CGFloat * _Nullable secondaryOffset ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 #if defined(__BLOCKS__)

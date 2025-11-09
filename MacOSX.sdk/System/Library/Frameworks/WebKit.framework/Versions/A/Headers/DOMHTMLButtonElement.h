@@ -28,16 +28,16 @@
 @class DOMHTMLFormElement;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMHTMLButtonElement : DOMHTMLElement
-@property BOOL autofocus NS_AVAILABLE_MAC(10_6);
+@property BOOL autofocus WEBKIT_AVAILABLE_MAC(10_6);
 @property BOOL disabled;
 @property (readonly, strong) DOMHTMLFormElement *form;
 @property (copy) NSString *type;
 @property (copy) NSString *name;
 @property (copy) NSString *value;
-@property (readonly) BOOL willValidate NS_AVAILABLE_MAC(10_6);
-@property (copy) NSString *accessKey NS_DEPRECATED_MAC(10_4, 10_8);
+@property (readonly) BOOL willValidate WEBKIT_AVAILABLE_MAC(10_6);
+@property (copy) NSString *accessKey WEBKIT_DEPRECATED_MAC(10_4, 10_8);
 
-- (void)click NS_AVAILABLE_MAC(10_5);
+- (void)click WEBKIT_AVAILABLE_MAC(10_5);
 @end

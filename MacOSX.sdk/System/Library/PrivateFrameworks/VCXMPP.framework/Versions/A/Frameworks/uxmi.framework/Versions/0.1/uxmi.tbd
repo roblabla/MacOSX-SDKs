@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: B7A33FDF-BF97-3CEE-B5FD-D252E819DCAA', 'x86_64: 40DDBD99-E5D2-377D-8EBA-0153A2762743' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 1866B678-B444-3211-8939-CAAE13650CE7' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/uxmi.framework/Versions/0.1/uxmi
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _CFUXMICreateBase64StringFromBytes, _CFUXMICreateBase64StringFromData, 
                        _CFUXMICreateDataFromBase64String, _CFUXMICreateDataFromBase64UTF8CString, 
                        _CFUXMIGetRunLoop, _CFUXMIRemoveFromRunLoop, _CFUXMIScheduleInRunLoop, 

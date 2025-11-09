@@ -1,7 +1,7 @@
 /*
     NSAnimation.h
     Application Kit
-    Copyright (c) 2004-2017, Apple Inc.
+    Copyright (c) 2004-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -33,16 +33,16 @@ APPKIT_EXTERN NSString * NSAnimationProgressMark; // NSNumber(float) with NSAnim
 
 @interface NSAnimation : NSObject <NSCopying, NSCoding> {
   @private
-    NSTimeInterval _duration;
-    NSAnimationProgress _currentProgress;
-    float _framesPerSecond;
-    __weak id<NSAnimationDelegate> _delegate;
-    NSDisplayLink1 *_displayLink;
-    NSTimeInterval _startTime;
-    NSMutableArray *_progressMarks;
-    NSAnimation *_startAnimation;
-    NSAnimation *_stopAnimation;
-    int _nextProgressMark;
+    NSTimeInterval _duration APPKIT_IVAR;
+    NSAnimationProgress _currentProgress APPKIT_IVAR;
+    float _framesPerSecond APPKIT_IVAR;
+    __weak id<NSAnimationDelegate> _delegate APPKIT_IVAR;
+    NSDisplayLink1 *_displayLink APPKIT_IVAR;
+    NSTimeInterval _startTime APPKIT_IVAR;
+    NSMutableArray *_progressMarks APPKIT_IVAR;
+    NSAnimation *_startAnimation APPKIT_IVAR;
+    NSAnimation *_stopAnimation APPKIT_IVAR;
+    int _nextProgressMark APPKIT_IVAR;
     struct __aFlags {
 	unsigned int delegateAnimationShouldStart:1;
 	unsigned int delegateAnimationDidStop:1;
@@ -54,17 +54,17 @@ APPKIT_EXTERN NSString * NSAnimationProgressMark; // NSNumber(float) with NSAnim
         unsigned int sendProgressAllTheTime:1;
         unsigned int hasHandler:1;
 	unsigned int reserved:23;
-    } _aFlags;
+    } _aFlags APPKIT_IVAR;
     struct __aSettings {
 	unsigned int animationCurve:8;
 	unsigned int animationBlockingMode:2;
 	unsigned int reserved:22;
-    } _aSettings;
-    NSRunLoop *_scheduledRunLoop;
+    } _aSettings APPKIT_IVAR;
+    NSRunLoop *_scheduledRunLoop APPKIT_IVAR;
 #ifndef __OBJC2__
-    NSInteger _reserved2;
-    NSInteger _reserved3;
-    NSInteger _reserved4;
+    NSInteger _reserved2 APPKIT_IVAR;
+    NSInteger _reserved3 APPKIT_IVAR;
+    NSInteger _reserved4 APPKIT_IVAR;
 #endif
 }
 
@@ -115,32 +115,32 @@ APPKIT_EXTERN NSString * NSAnimationProgressMark; // NSNumber(float) with NSAnim
 
 /*-----------------------------------------------------------------------------------------*/
 
-typedef NSString * NSViewAnimationKey NS_STRING_ENUM;
+typedef NSString * NSViewAnimationKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSViewAnimationKey NSViewAnimationTargetKey;       // NSWindow* or NSView* (required)
 APPKIT_EXTERN NSViewAnimationKey NSViewAnimationStartFrameKey;   // NSValue*(NSRect) (optional)
 APPKIT_EXTERN NSViewAnimationKey NSViewAnimationEndFrameKey;     // NSValue*(NSRect) (optional)
 APPKIT_EXTERN NSViewAnimationKey NSViewAnimationEffectKey;       // NSViewAnimationEffectName (optional)
 
-typedef NSString * NSViewAnimationEffectName NS_STRING_ENUM;
+typedef NSString * NSViewAnimationEffectName NS_TYPED_ENUM;
 APPKIT_EXTERN NSViewAnimationEffectName NSViewAnimationFadeInEffect;
 APPKIT_EXTERN NSViewAnimationEffectName NSViewAnimationFadeOutEffect;
 
 @interface NSViewAnimation : NSAnimation {
   @private
-    NSArray                *_viewAnimations;
-    id                      _viewAnimationInfo;
-    id                      _windowAnimationInfo;
+    NSArray                *_viewAnimations APPKIT_IVAR;
+    id                      _viewAnimationInfo APPKIT_IVAR;
+    id                      _windowAnimationInfo APPKIT_IVAR;
 #ifndef __OBJC2__
-    NSUInteger                  _reserved4a;
-    NSUInteger                  _reserved4b;
-    NSUInteger                  _reserved4c;
+    NSUInteger                  _reserved4a APPKIT_IVAR;
+    NSUInteger                  _reserved4b APPKIT_IVAR;
+    NSUInteger                  _reserved4c APPKIT_IVAR;
     struct __vaFlags {
 	unsigned int reserved:32;
-    }                       _vaFlags;    
-    NSUInteger                  _reserved5;
-    NSUInteger                  _reserved6;
-    NSUInteger                  _reserved7;
-    NSUInteger                  _reserved8;
+    }                       _vaFlags APPKIT_IVAR;    
+    NSUInteger                  _reserved5 APPKIT_IVAR;
+    NSUInteger                  _reserved6 APPKIT_IVAR;
+    NSUInteger                  _reserved7 APPKIT_IVAR;
+    NSUInteger                  _reserved8 APPKIT_IVAR;
 #endif
 }
 
@@ -150,7 +150,7 @@ APPKIT_EXTERN NSViewAnimationEffectName NSViewAnimationFadeOutEffect;
 
 @end
 
-typedef NSString * NSAnimatablePropertyKey NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSAnimatablePropertyKey NS_SWIFT_BRIDGED_TYPEDEF;
 
 @protocol NSAnimatablePropertyContainer
 

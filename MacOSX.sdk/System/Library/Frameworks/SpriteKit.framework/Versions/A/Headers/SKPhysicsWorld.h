@@ -20,7 +20,7 @@ SK_EXPORT @protocol SKPhysicsContactDelegate<NSObject>
 - (void)didEndContact:(SKPhysicsContact *)contact;
 @end
 
-SK_EXPORT @interface SKPhysicsWorld : NSObject<NSCoding>
+SK_EXPORT @interface SKPhysicsWorld : NSObject<NSSecureCoding>
 
 /**
  A global 2D vector specifying the field force acceleration due to gravity. The unit is meters per second so standard earth gravity would be { 0.0, +/-9.8 }.
@@ -48,3 +48,5 @@ SK_EXPORT @interface SKPhysicsWorld : NSObject<NSCoding>
 @end
 
 NS_ASSUME_NONNULL_END
+
+

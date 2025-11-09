@@ -1,7 +1,7 @@
 /*
 	NSCell.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,7 +10,6 @@
 #import <Foundation/NSGeometry.h>
 #import <AppKit/NSText.h>
 #import <AppKit/NSParagraphStyle.h>
-#import <AppKit/NSApplication.h>
 #import <AppKit/NSUserInterfaceItemIdentification.h>
 #import <AppKit/NSAccessibilityProtocols.h>
 
@@ -75,10 +74,10 @@ static const NSControlStateValue NSControlStateValueMixed = -1;
 static const NSControlStateValue NSControlStateValueOff = 0;
 static const NSControlStateValue NSControlStateValueOn = 1;
 
-typedef NSControlStateValue NSCellStateValue /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlStateValue", 10_0, 10_13)*/;
-static const NSControlStateValue NSMixedState /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlStateValueMixed", 10_0, 10_13)*/ = NSControlStateValueMixed;
-static const NSControlStateValue NSOffState /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlStateValueOff", 10_0, 10_13)*/ = NSControlStateValueOff;
-static const NSControlStateValue NSOnState /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlStateValueOn", 10_0, 10_13)*/ = NSControlStateValueOn;
+typedef NSControlStateValue NSCellStateValue NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlStateValue", 10_0, 10_14);
+static const NSControlStateValue NSMixedState NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlStateValueMixed", 10_0, 10_14) = NSControlStateValueMixed;
+static const NSControlStateValue NSOffState NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlStateValueOff", 10_0, 10_14) = NSControlStateValueOff;
+static const NSControlStateValue NSOnState NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlStateValueOn", 10_0, 10_14) = NSControlStateValueOn;
 
 /* NSButtonCell highlightsBy and showsStateBy mask */
 typedef NS_OPTIONS(NSUInteger, NSCellStyleMask) {
@@ -96,15 +95,14 @@ typedef NS_ENUM(NSUInteger, NSControlTint) {
     NSClearControlTint    = 7
 };
 
-
 typedef NS_ENUM(NSUInteger, NSControlSize) {
     NSControlSizeRegular,
     NSControlSizeSmall,
     NSControlSizeMini,
 };
-static const NSControlSize NSRegularControlSize NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlSizeRegular", 10.0, 10.12) = NSControlSizeRegular;
-static const NSControlSize NSSmallControlSize NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlSizeSmall", 10.0, 10.12) = NSControlSizeSmall;
-static const NSControlSize NSMiniControlSize NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlSizeMini", 10.0, 10.12) = NSControlSizeMini;
+static const NSControlSize NSRegularControlSize NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlSizeRegular", 10_0, 10_12) = NSControlSizeRegular;
+static const NSControlSize NSSmallControlSize NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlSizeSmall", 10_0, 10_12) = NSControlSizeSmall;
+static const NSControlSize NSMiniControlSize NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlSizeMini", 10_0, 10_12) = NSControlSizeMini;
 
 typedef struct __CFlags {
     unsigned int        state:1;
@@ -131,7 +129,7 @@ typedef struct __CFlags {
     unsigned int        isLoaded:1;
     unsigned int        truncateLastLine:1;
     unsigned int        dontActOnMouseUp:1;
-    unsigned int        isWhite:1;
+    unsigned int        isWhite:1 __unused;
     unsigned int        useUserKeyEquivalent:1;
     unsigned int        showsFirstResponder:1;
     unsigned int        focusRingType:2;
@@ -163,12 +161,12 @@ typedef struct __CFlags {
 @interface NSCell : NSObject <NSCopying, NSCoding, NSUserInterfaceItemIdentification, NSAccessibilityElement, NSAccessibility>
 {
     /*All instance variables are private*/
-    id _contents;
-    _CFlags _cFlags;
+    id _contents APPKIT_IVAR;
+    _CFlags _cFlags APPKIT_IVAR;
 @private
     // This variable should *only* be accessed through the following methods:
     // setImage:, image, setFont:, and font
-    id _support;
+    id _support APPKIT_IVAR;
 }
 
 
@@ -221,7 +219,6 @@ typedef struct __CFlags {
 - (void)takeStringValueFrom:(nullable id)sender;
 - (void)takeObjectValueFrom:(nullable id)sender;
 @property (nullable, strong) NSImage *image;
-@property NSControlTint controlTint;
 @property NSControlSize controlSize;
 @property (nullable, strong) id representedObject;
 - (NSInteger)cellAttribute:(NSCellAttribute)parameter;
@@ -314,8 +311,6 @@ typedef struct __CFlags {
 - (void)setNextState;			/* toggle/cycle through states */
 @end
 
-APPKIT_EXTERN NSNotificationName NSControlTintDidChangeNotification; /* sent after user changes control tint preference */
-
 /* Cell Hit testing support */
 
 typedef NS_OPTIONS(NSUInteger, NSCellHitResult) {
@@ -361,15 +356,22 @@ typedef NS_OPTIONS(NSUInteger, NSCellHitResult) {
 @end
 
 typedef NS_ENUM(NSInteger, NSBackgroundStyle) {
-    NSBackgroundStyleLight = 0,	// The background is a light color. Dark content contrasts well with this background.
-    NSBackgroundStyleDark,	// The background is a dark color. Light content contrasts well with this background.
-    NSBackgroundStyleRaised,	// The background is intended to appear higher than the content drawn on it. Content might need to be inset.
-    NSBackgroundStyleLowered	// The background is intended to appear lower than the content drawn on it. Content might need to be embossed.
-} NS_ENUM_AVAILABLE_MAC(10_5);
+    /* The background reflects the predominant color scheme of the view's appearance. */
+    NSBackgroundStyleNormal = 0,
+
+    /* The background is indicating emphasis (e.g. selection state) using an alternate color or visual effect. Content may alter its appearance to reflect this emphasis. */
+    NSBackgroundStyleEmphasized,
+
+    /* The background is intended to appear higher than the content drawn on it. Content might need to be inset. */
+    NSBackgroundStyleRaised,
+
+    /* The background is intended to appear lower than the content drawn on it. Content might need to be embossed. */
+    NSBackgroundStyleLowered,
+} NS_AVAILABLE_MAC(10_5);
 
 @interface NSCell (NSCellBackgroundStyle)
 
-/* Describes the surface the cell is drawn onto in -[NSCell drawWithFrame:inView:]. A control typically sets this before it asks the cell to draw. A cell may draw differently based on background characteristics. For example, a tableview drawing a cell in a selected row might call [cell setBackgroundStyle:NSBackgroundStyleDark]. A text cell might decide to render its text white as a result. A rating-style level indicator might draw its stars white instead of gray.
+/* Describes the surface the cell is drawn onto in -[NSCell drawWithFrame:inView:]. A control typically sets this before it asks the cell to draw. A cell may draw differently based on background characteristics. For example, a tableview drawing a cell in a selected row might call [cell setBackgroundStyle:NSBackgroundStyleEmphasized]. A text cell might decide to render its text using alternateSelectedControlTextColor as a result.
  */
 @property NSBackgroundStyle backgroundStyle NS_AVAILABLE_MAC(10_5);
 
@@ -384,6 +386,8 @@ typedef NS_ENUM(NSInteger, NSBackgroundStyle) {
 
 
 @interface NSCell (NSDeprecated)
+
+@property NSControlTint controlTint NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "The controlTint property is not respected on 10.14 and later. For custom cells, use +[NSColor controlAccentColor] to respect the user's preferred accent color when drawing.");
 
 // Use formatters instead.  See -[NSCell formatter] and -[NSCell setFormatter:].
 - (NSInteger)entryType NS_DEPRECATED_MAC(10_0, 10_0);
@@ -400,6 +404,13 @@ typedef NS_ENUM(NSInteger, NSBackgroundStyle) {
 
 @end
 
+/* In some appearances, NSBackgroundStyleLight may refer to a state where the background is actually a dark color. Use NSBackgroundStyleNormal instead. */
+static const NSBackgroundStyle NSBackgroundStyleLight NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBackgroundStyleNormal", 10_5, API_TO_BE_DEPRECATED) = NSBackgroundStyleNormal;
+
+/* NSBackgroundStyleDark is not a reliable indicator of background states with visually dark or saturated colors. Use NSBackgroundStyleEmphasized instead. */
+static const NSBackgroundStyle NSBackgroundStyleDark NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBackgroundStyleEmphasized", 10_5, API_TO_BE_DEPRECATED) = NSBackgroundStyleEmphasized;
+
+APPKIT_EXTERN NSNotificationName NSControlTintDidChangeNotification NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Changes to the accent color can be manually observed by implementing -viewDidChangeEffectiveAppearance in a NSView subclass, or by Key-Value Observing the -effectiveAppearance property on NSApplication. Views are automatically redisplayed when the accent color changes.");
 
 /* Draw an image from two end caps and a fill.  The end caps are scaled proportionally to match the thickness of the destination frame.  In the horizontal case, the startCap is drawn into the left part of the destination, the endCap is drawn into the right part of the destination, and the fill is tiled over the remaining area.  The caps and the fill should all be the same height.  The vertical case is similar.  
  

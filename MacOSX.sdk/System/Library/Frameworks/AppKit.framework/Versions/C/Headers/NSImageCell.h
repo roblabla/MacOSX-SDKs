@@ -1,7 +1,7 @@
 /*
 	NSImageCell.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -34,16 +34,16 @@ typedef NS_ENUM(NSUInteger, NSImageFrameStyle) {
 @interface NSImageCell : NSCell <NSCopying, NSCoding>
 {
     /*All instance variables are private*/
-    id _controlView;      
+    id _controlView APPKIT_IVAR;
     struct __ICFlags {
-        unsigned int _unused:22;
+        unsigned int _unused:21;
         unsigned int _animates:1;
         unsigned int _align:4;
-        unsigned int _scale:2;
+        unsigned int _scale:3;
         unsigned int _style:3;
-    } _icFlags;
-    struct _NSImageCellAnimationState *_animationState;
-    NSImage *_scaledImage;
+    } _icFlags APPKIT_IVAR;
+    struct _NSImageCellAnimationState *_animationState APPKIT_IVAR;
+    NSImage *_scaledImage APPKIT_IVAR;
 }
 
 @property NSImageAlignment imageAlignment;

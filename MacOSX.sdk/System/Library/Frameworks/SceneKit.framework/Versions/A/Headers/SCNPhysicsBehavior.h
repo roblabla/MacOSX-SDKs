@@ -1,7 +1,8 @@
 //
 //  SCNPhysicsBehavior.h
+//  SceneKit
 //
-//  Copyright (c) 2014-2017 Apple Inc. All rights reserved.
+//  Copyright © 2014-2018 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -15,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  @class SCNPhysicsBehavior
  @abstract SCNPhysicsBehavior is an abstract class that represents a behavior in the physics world.
  */
-API_AVAILABLE(macos(10.10))
+SCN_EXPORT API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsBehavior : NSObject <NSSecureCoding>
 @end
 
@@ -23,7 +24,7 @@ API_AVAILABLE(macos(10.10))
  @class SCNPhysicsHingeJoint
  @abstract SCNPhysicsHingeJoint makes two bodies to move like they are connected by a hinge. It is for example suitable for doors, chains...
  */
-API_AVAILABLE(macos(10.10))
+SCN_EXPORT API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsHingeJoint : SCNPhysicsBehavior
 
 //Initializes and returns a physics hinge joint.
@@ -48,7 +49,7 @@ API_AVAILABLE(macos(10.10))
  @class SCNPhysicsBallSocketJoint
  @abstract SCNPhysicsBallSocketJoint makes two bodies to move like they are connected by a ball-and-socket joint (i.e it allows rotations around all axes).
  */
-API_AVAILABLE(macos(10.10))
+SCN_EXPORT API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsBallSocketJoint : SCNPhysicsBehavior
 
 //Initializes and returns a physics ball-and-socket joint.
@@ -71,7 +72,7 @@ API_AVAILABLE(macos(10.10))
  @class SCNPhysicsSliderJoint
  @abstract SCNPhysicsSliderJoint provides a linear sliding joint between two bodies.
  */
-API_AVAILABLE(macos(10.10))
+SCN_EXPORT API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsSliderJoint : SCNPhysicsBehavior
 
 //Initializes and returns a physics slider joint.
@@ -109,7 +110,7 @@ API_AVAILABLE(macos(10.10))
 /*!
  @class SCNPhysicsConeTwistJoint
  */
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
+SCN_EXPORT API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @interface SCNPhysicsConeTwistJoint : SCNPhysicsBehavior
 
 //Initializes and returns a physics cone-twist joint.
@@ -139,7 +140,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  @class SCNPhysicsVehicleWheel
  @abstract SCNPhysicsVehicleWheel represents a wheel that can be attached to a SCNPhysicsVehicle instance.
  */
-API_AVAILABLE(macos(10.10))
+SCN_EXPORT API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsVehicleWheel : NSObject <NSCopying, NSSecureCoding>
 
 //Initializes and returns a wheel.
@@ -187,7 +188,7 @@ API_AVAILABLE(macos(10.10))
  @class SCNPhysicsVehicle
  @abstract SCNPhysicsVehicle provides a vehicle behavior.
  */
-API_AVAILABLE(macos(10.10))
+SCN_EXPORT API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsVehicle : SCNPhysicsBehavior
 
 // Initializes and returns a physics vehicle that applies on the physics body "chassisBody" with the given wheels.

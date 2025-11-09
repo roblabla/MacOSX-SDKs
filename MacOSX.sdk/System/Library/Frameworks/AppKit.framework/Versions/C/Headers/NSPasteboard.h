@@ -1,7 +1,7 @@
 /*
 	NSPasteboard.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NSPasteboardWriting;
 /* Standard Pasteboard Types */
 
-typedef NSString * NSPasteboardType NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSPasteboardType NS_TYPED_EXTENSIBLE_ENUM;
 APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeString	 		NS_AVAILABLE_MAC(10_6); // Replaces NSStringPboardType
 APPKIT_EXTERN NSPasteboardType const NSPasteboardTypePDF			NS_AVAILABLE_MAC(10_6); // Replaces NSPDFPboardType
 APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeTIFF	 		NS_AVAILABLE_MAC(10_6); // Replaces NSTIFFPboardType
@@ -40,7 +40,7 @@ APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeFileURL                    
 
 /* Standard Pasteboard Names */
 
-typedef NSString * NSPasteboardName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSPasteboardName NS_TYPED_EXTENSIBLE_ENUM;
 APPKIT_EXTERN NSPasteboardName NSPasteboardNameGeneral NS_AVAILABLE_MAC(10_13);
 APPKIT_EXTERN NSPasteboardName NSPasteboardNameFont NS_AVAILABLE_MAC(10_13);
 APPKIT_EXTERN NSPasteboardName NSPasteboardNameRuler NS_AVAILABLE_MAC(10_13);
@@ -57,7 +57,7 @@ typedef NS_OPTIONS(NSUInteger, NSPasteboardContentsOptions) {
 /* Pasteboard Reading Options
  These options can be used for both the -readObjectsForClasses:options: and -canReadObjectForClasses:options: methods, unless otherwise specified.  The currently available options allow for customization of how NSURLs are read from the pasteboard.
  */
-typedef NSString * NSPasteboardReadingOptionKey NS_STRING_ENUM;
+typedef NSString * NSPasteboardReadingOptionKey NS_TYPED_ENUM;
 /* Option for reading NSURLs to restrict the results to file URLs only.  The value for this key is an NSNumber with a boolean value.
  */
 APPKIT_EXTERN NSPasteboardReadingOptionKey const NSPasteboardURLReadingFileURLsOnlyKey NS_AVAILABLE_MAC(10_6);
@@ -74,15 +74,15 @@ APPKIT_EXTERN NSPasteboardReadingOptionKey const NSPasteboardURLReadingContentsC
 @interface NSPasteboard : NSObject
 {
     @private
-    id			_pboard;
-    int			_gen;
-    id			_owners;
-    CFIndex		_cachedTypeNameChangeCount;
-    id			_cachedTypeNames;
-    NSMutableDictionary *_promiseTypeNamesByIdentifier;
-    id			_support;	
-    id			_pasteboardItems;
-    void *		_reserved[3] __unused;
+    id			_pboard APPKIT_IVAR;
+    int			_gen APPKIT_IVAR;
+    id			_owners APPKIT_IVAR;
+    CFIndex		_cachedTypeNameChangeCount APPKIT_IVAR;
+    id			_cachedTypeNames APPKIT_IVAR;
+    NSMutableDictionary *_promiseTypeNamesByIdentifier APPKIT_IVAR;
+    id			_support APPKIT_IVAR;	
+    id			_pasteboardItems APPKIT_IVAR;
+    void *		_reserved[3] __unused APPKIT_IVAR;
 }
 
 @property (class, readonly, strong) NSPasteboard *generalPasteboard;
@@ -177,10 +177,18 @@ Example: there are five items on the pasteboard, two contain TIFF data, two cont
 @end
 
 
-@interface NSObject(NSPasteboardOwner)
+@protocol NSPasteboardTypeOwner <NSObject>
 - (void)pasteboard:(NSPasteboard *)sender provideDataForType:(NSPasteboardType)type;
+@optional
 - (void)pasteboardChangedOwner:(NSPasteboard *)sender;
 @end
+
+#if __swift__ < 40200
+@interface NSObject(NSPasteboardOwner)
+- (void)pasteboard:(NSPasteboard *)sender provideDataForType:(NSPasteboardType)type NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSPasteboardTypeOwner protocol.");
+- (void)pasteboardChangedOwner:(NSPasteboard *)sender NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now an optional method of the NSPasteboardTypeOwner protocol.");
+@end
+#endif
 
 
 /*** NSPasteboardWriting and NSPasteboardReading Protocols ***/
@@ -288,33 +296,6 @@ typedef NS_OPTIONS(NSUInteger, NSPasteboardReadingOptions) {
 @end
 
 
-/*** Pboard Types ***/
-
-/* Use of pboard types should be replaced with use of UTIs.  Pboard types will be deprecated in a future release. */
-APPKIT_EXTERN NSPasteboardType NSStringPboardType;	    // Use NSPasteboardTypeString
-APPKIT_EXTERN NSPasteboardType NSFilenamesPboardType;	    // Use NSPasteboardTypeFileURL
-APPKIT_EXTERN NSPasteboardType NSTIFFPboardType;	    // Use NSPasteboardTypeTIFF
-APPKIT_EXTERN NSPasteboardType NSRTFPboardType;	    // Use NSPasteboardTypeRTF
-APPKIT_EXTERN NSPasteboardType NSTabularTextPboardType;    // Use NSPasteboardTypeTabularText
-APPKIT_EXTERN NSPasteboardType NSFontPboardType;	    // Use NSPasteboardTypeFont
-APPKIT_EXTERN NSPasteboardType NSRulerPboardType;        // Use NSPasteboardTypeRuler
-APPKIT_EXTERN NSPasteboardType NSColorPboardType;        // Use NSPasteboardTypeColor
-APPKIT_EXTERN NSPasteboardType NSRTFDPboardType;        // Use NSPasteboardTypeRTFD
-APPKIT_EXTERN NSPasteboardType NSHTMLPboardType;        // Use NSPasteboardTypeHTML
-APPKIT_EXTERN NSPasteboardType NSURLPboardType;        // Use NSPasteboardTypeURL
-APPKIT_EXTERN NSPasteboardType NSPDFPboardType;        // Use NSPasteboardTypePDF
-APPKIT_EXTERN NSPasteboardType NSMultipleTextSelectionPboardType   NS_AVAILABLE_MAC(10_5); // Use NSPasteboardTypeMultipleTextSelection
-
-APPKIT_EXTERN NSPasteboardType NSPostScriptPboardType;        // Use @"com.adobe.encapsulated-postscript"
-APPKIT_EXTERN NSPasteboardType NSVCardPboardType; // Use (NSString *)kUTTypeVCard
-APPKIT_EXTERN NSPasteboardType NSInkTextPboardType; // Use (NSString *)kUTTypeInkText
-
-// HFS Promise type for dragging only
-APPKIT_EXTERN NSPasteboardType NSFilesPromisePboardType; // Use (NSString *)kPasteboardTypeFileURLPromise
-
-/* This UTI constant has been replaced by NSPasteboardTypeTextFinderOptions. */
-APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeFindPanelSearchOptions    NS_AVAILABLE_MAC(10_6);
-
 /*** File Contents ***/
 
 /* The file contents pboard type allowed you to synthesize a pboard type for a file's contents based on the file's extension.  Using the UTI of a file to represent its contents now replaces this functionality.*/
@@ -338,13 +319,34 @@ APPKIT_EXTERN NSArray<NSString *> * __nullable NSGetFileTypes(NSArray<NSPasteboa
 
 /*** Deprecated ***/
 
-/*** Everything remaining in this header is deprecated and should not be used ***/
+APPKIT_EXTERN NSPasteboardType NSStringPboardType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardTypeString", 10_0, 10_14);
+APPKIT_EXTERN NSPasteboardType NSFilenamesPboardType NS_DEPRECATED_MAC(10_0, 10_14, "Create multiple pasteboard items with NSPasteboardTypeFileURL or kUTTypeFileURL instead");
+APPKIT_EXTERN NSPasteboardType NSTIFFPboardType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardTypeTIFF", 10_0, 10_14);
+APPKIT_EXTERN NSPasteboardType NSRTFPboardType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardTypeRTF", 10_0, 10_14);
+APPKIT_EXTERN NSPasteboardType NSTabularTextPboardType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardTypeTabularText", 10_0, 10_14);
+APPKIT_EXTERN NSPasteboardType NSFontPboardType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardTypeFont", 10_0, 10_14);
+APPKIT_EXTERN NSPasteboardType NSRulerPboardType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardTypeRuler", 10_0, 10_14);
+APPKIT_EXTERN NSPasteboardType NSColorPboardType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardTypeColor", 10_0, 10_14);
+APPKIT_EXTERN NSPasteboardType NSRTFDPboardType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardTypeRTFD", 10_0, 10_14);
+APPKIT_EXTERN NSPasteboardType NSHTMLPboardType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardTypeHTML", 10_0, 10_14);
+APPKIT_EXTERN NSPasteboardType NSURLPboardType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardTypeURL", 10_0, 10_14);
+APPKIT_EXTERN NSPasteboardType NSPDFPboardType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardTypePDF", 10_0, 10_14);
+APPKIT_EXTERN NSPasteboardType NSMultipleTextSelectionPboardType NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardTypeMultipleTextSelection", 10_5, 10_14);
 
-APPKIT_EXTERN NSPasteboardName NSGeneralPboard NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardNameGeneral", 10.0, 10.13);
-APPKIT_EXTERN NSPasteboardName NSFontPboard NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardNameFont", 10.0, 10.13);
-APPKIT_EXTERN NSPasteboardName NSRulerPboard NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardNameRuler", 10.0, 10.13);
-APPKIT_EXTERN NSPasteboardName NSFindPboard NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardNameFind", 10.0, 10.13);
-APPKIT_EXTERN NSPasteboardName NSDragPboard NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardNameDrag", 10.0, 10.13);
+APPKIT_EXTERN NSPasteboardType NSPostScriptPboardType NS_DEPRECATED_WITH_REPLACEMENT_MAC("@\"com.adobe.encapsulated-postscript\"", 10_0, 10_14);
+APPKIT_EXTERN NSPasteboardType NSVCardPboardType NS_DEPRECATED_WITH_REPLACEMENT_MAC("kUTTypeVCard", 10_0, 10_14);
+APPKIT_EXTERN NSPasteboardType NSInkTextPboardType NS_DEPRECATED_WITH_REPLACEMENT_MAC("kUTTypeInkText", 10_0, 10_14);
+
+// HFS Promise type for dragging only
+APPKIT_EXTERN NSPasteboardType NSFilesPromisePboardType NS_DEPRECATED_WITH_REPLACEMENT_MAC("kPasteboardTypeFileURLPromise", 10_0, 10_14);
+
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeFindPanelSearchOptions NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardTypeTextFinderOptions", 10_6, 10_14);
+
+APPKIT_EXTERN NSPasteboardName NSGeneralPboard NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardNameGeneral", 10_0, 10_13);
+APPKIT_EXTERN NSPasteboardName NSFontPboard NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardNameFont", 10_0, 10_13);
+APPKIT_EXTERN NSPasteboardName NSRulerPboard NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardNameRuler", 10_0, 10_13);
+APPKIT_EXTERN NSPasteboardName NSFindPboard NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardNameFind", 10_0, 10_13);
+APPKIT_EXTERN NSPasteboardName NSDragPboard NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardNameDrag", 10_0, 10_13);
 
 /* NSPICTPboardType is deprecated in SnowLeopard.  The PICT format was formally deprecated in Tiger along with QuickDraw.  Applications should not be explicitly providing or looking for PICT data on the pasteboard.
 

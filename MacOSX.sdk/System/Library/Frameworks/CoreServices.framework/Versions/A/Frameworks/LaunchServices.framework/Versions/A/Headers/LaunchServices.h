@@ -17,11 +17,12 @@
 
 #include <TargetConditionals.h>
 
-#if !TARGET_OS_IPHONE
+
+#if TARGET_OS_OSX
 #ifndef __ICONSCORE__
 #include <LaunchServices/IconsCore.h>
 #endif
-#endif //!TARGET_OS_IPHONE
+#endif // TARGET_OS_OSX
 
 #ifndef __LSINFO__
 #include <LaunchServices/LSInfo.h>
@@ -31,9 +32,12 @@
 #include <LaunchServices/LSOpen.h>
 #endif
 
+#if TARGET_OS_OSX
 #ifndef __LSQUARANTINE__
 #include <LaunchServices/LSQuarantine.h>
 #endif
+#endif // TARGET_OS_OSX
+
 
 #ifndef __UTCORETYPES__
 #include <LaunchServices/UTCoreTypes.h>
@@ -42,6 +46,5 @@
 #ifndef __UTTYPE__
 #include <LaunchServices/UTType.h>
 #endif
-
 
 #endif /* __LAUNCHSERVICES__ */

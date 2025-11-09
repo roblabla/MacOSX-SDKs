@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2015, 2017 Apple Inc.
+ * Copyright (c) 2014-2015, 2017-2018 Apple Inc.
  * All rights reserved.
  */
 
@@ -26,10 +26,8 @@
 #import <NetworkExtension/NEFilterProvider.h>
 #import <NetworkExtension/NEFilterProviderConfiguration.h>
 #import <NetworkExtension/NEFlowMetaData.h>
-#if TARGET_OS_IPHONE
 #import <NetworkExtension/NEHotspotHelper.h>
 #import <NetworkExtension/NEHotspotConfigurationManager.h>
-#endif
 #import <NetworkExtension/NEIPv4Settings.h>
 #import <NetworkExtension/NEIPv6Settings.h>
 #import <NetworkExtension/NEOnDemandRule.h>

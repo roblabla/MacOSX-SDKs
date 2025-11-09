@@ -1,7 +1,7 @@
 /*
         NSInterfaceStyle.h
         Application Kit
-        Copyright (c) 1995-2017, Apple Inc.
+        Copyright (c) 1995-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -14,7 +14,7 @@ enum {
     NSWindows95InterfaceStyle NS_ENUM_DEPRECATED_MAC(10_0, 10_8) = 2,
     NSMacintoshInterfaceStyle NS_ENUM_DEPRECATED_MAC(10_0, 10_8) = 3
 };
-typedef NSUInteger NSInterfaceStyle NS_DEPRECATED_MAC(10_0, 10_8); // Deprecated in 10.8
+typedef NSUInteger NSInterfaceStyle NS_DEPRECATED_MAC(10_0, 10_8);
 
 APPKIT_EXTERN NSInterfaceStyle NSInterfaceStyleForKey(NSString *key, NSResponder *responder) NS_DEPRECATED_MAC(10_0, 10_8);
     // Responders can use this function to parameterize their drawing and behavior.  If the responder has specific defaults to control various aspects of its interface individually, the keys for those special settings can be passed in, otherwise pass nil to get the global setting.  The responder should always be passed, but in situations where a responder is not available, pass nil.

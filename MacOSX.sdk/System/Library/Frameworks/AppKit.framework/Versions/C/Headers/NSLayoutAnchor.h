@@ -1,12 +1,13 @@
 /*
  NSLayoutAnchor.h
  Application Kit
- Copyright (c) 2015-2017, Apple Inc.
+ Copyright (c) 2015-2018, Apple Inc.
  All rights reserved.
  */
 
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSArray.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,13 +25,13 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @interface NSLayoutAnchor<AnchorType> : NSObject <NSCopying, NSCoding>
 {
     @private
-    id  _item;
-    NSInteger _attr;
-    id _reserved1;
-    id _reserved2;
-    id _reserved3;
-    id _reserved4;
-    id _reserved5;
+    id  _item APPKIT_IVAR;
+    NSInteger _attr APPKIT_IVAR;
+    id _reserved1 APPKIT_IVAR;
+    id _reserved2 APPKIT_IVAR;
+    id _reserved3 APPKIT_IVAR;
+    id _reserved4 APPKIT_IVAR;
+    id _reserved5 APPKIT_IVAR;
 }
 
 // These methods return an inactive constraint of the form thisAnchor = otherAnchor.

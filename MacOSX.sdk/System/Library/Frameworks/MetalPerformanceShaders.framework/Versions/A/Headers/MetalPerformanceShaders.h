@@ -5,15 +5,19 @@
  *  @copyright Copyright (c) 2015 Apple Inc. All rights reserved.
  */
 
+#ifndef __METAL_VERSION__
 #import <MPSCore/MPSCore.h>
 #import <MPSImage/MPSImage.h>
 #import <MPSMatrix/MPSMatrix.h>
 #import <MPSNeuralNetwork/MPSNeuralNetwork.h>
+#endif
+#import <MPSRayIntersector/MPSRayIntersector.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+#ifndef __METAL_VERSION__
 /*!
  *  MPSSupportsMTLDevice
  *  @abstract   Determine whether a MetalPerformanceShaders.framework  supports a MTLDevice.
@@ -24,7 +28,80 @@ extern "C" {
  */
 BOOL    MPSSupportsMTLDevice( __nullable id <MTLDevice> device )  MPS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0));
 
-
+    
+/*! @abstract Hint to MPS how much memory your application expects to need for the command buffer
+ *  @discussion This will cause MPS to prefetch a MTLHeap into its internal cache of
+ *              the indicated size, which will be sub-allocated to back the temporary images,
+ *              matrices, vectors and states in used over the course of the command buffer.
+ *              This can be helpful in certain pathological situations when allocation sizes
+ *              needed to support temporary objects do not allow for reuse of previous allocations
+ *              for new objects.
+ *
+ *              Example: if the temporary resources need progressively larger MTLHeaps
+ *              over the course of the MTLCommandBuffer, such as 1 MB, 2MB, 4 MB and 8MB,
+ *              the first allocation might create a 1 MB heap, this might be released,
+ *              but since the second allocation needs a 2 MB heap and the 1 MB heap is too
+ *              small to be used, a new heap would need to be made, and so forth.  Using
+ *              MPSHintTemporaryMemoryHighWaterMark(), a single 8 MB heap might be made manifest,
+ *              and all four allocations can use it if they don't overlap temporally. Otherwise,
+ *              a total of 1+2+4+8=15 MB might be allocated.
+ *
+ *              The application should be careful not to pass the sum of all allocations over
+ *              the course of the command buffer. As we expect that not all temporary resources
+ *              need to coexist at the same time, and so can alias one another, that would waste
+ *              memory. The application should instead track the high water mark of the most
+ *              memory in use at any single point over the course of the command buffer.
+ *
+ *              This can be simply done by traversing your graph creating all the temporary images,
+ *              states, matrices and vectors that you will need in advance. Since the allocation of
+ *              the underlying MTLHeaps that they use is deferred until you actually attempt to write
+ *              to these resources or get the underlying MTLTexture or MTLBuffer, you can create all
+ *              the objects, then call MPSHintTemporaryMemoryUsage, then call the various -encode
+ *              methods and the heap should be sized correctly before memory is distributed to the
+ *              temporary objects. In this exercise, assume that memory is not distributed to the
+ *              temporary object until it is used to hold data, and is reclaimed for reuse when readCount
+ *              reaches zero. The expected size temporary memory used by each object can be queried
+ *              using its -resourceSize method.
+ *
+ *              Notes: The MPSNNGraph does this automatically for its workload. It is not necessary to
+ *              prefetch for that. If a MTLHeap large enough to satisfy the size is already cached,
+ *              no new one will be created. If the prefetched heap turns out to be too small, additional
+ *              small heaps will be created as needed dynamically. If the prefetched heap is too big,
+ *              any additional memory is wasted.
+ *
+ *              When the graph is known in advance, this method is preferred over
+ *              +[MPSTemporaryImage prefetchStorageWithCommandBuffer:imageDescriptorList:]
+ *              as the latter can not estimate the time period over which each resource is used, and is
+ *              likely to conservatively prefetch too small a heap.
+ *
+ *  @param      cmdBuf      The scope of the MTLHeap
+ *  @param      bytes       The size, in bytes, of the prefetched heap. The actual size ussed may be rounded
+ *                          up according to device alignment requirements. This should be the maximum
+ *`                         amount of temporary memory used at any point in the command buffer.
+ */
+void    MPSHintTemporaryMemoryHighWaterMark( __nonnull id <MTLCommandBuffer> cmdBuf,
+                                             NSUInteger   bytes );
+    
+/*! @abstract   Set the timeout after which unused cached MTLHeaps are released
+ *  @discussion MPS maintains a private set of MTLHeaps attached to each MTLCommandBuffer
+ *              for use by temporary images, matrices, vectors and states, and also for its own
+ *              private usage for temporary storage in some (typically multipass) filters. When the
+ *              command buffer completes, these are returned to a MTLDevice level cache for reuse.
+ *              If it is not reused within the heap cache duration, then the MTLHeaps are released
+ *              and the memory is returned to the operating system for general reuse. The intent
+ *              of this second level cache is to avoid surrendering the GPU performance advantage
+ *              on repetitive workloads to  allocation, zero-fill and deallocation and reallocation
+ *              of large MTLHeaps, which otherwise can easily occur.
+ *
+ *              Default: 5s.
+ *
+ *  @param      cmdBuf  The scope over which to set the heap cache duration. If the MTLCommandBuffer
+ *              has already been committed, behavior is undefined.
+ *  @param      seconds The number of seconds to cache used MTLHeaps before retiring them.
+ *              NaN will be interpeted as 0.
+ */
+void    MPSSetHeapCacheDuration( __nonnull id <MTLCommandBuffer> cmdBuf,
+                                 double seconds );
 
 //
 //  These headers contain doxygen formatted documentation. They are human readable as is,
@@ -55,6 +132,21 @@ BOOL    MPSSupportsMTLDevice( __nullable id <MTLDevice> device )  MPS_AVAILABLE_
  *  In iOS 10, MetalPerformanceShaders.framework adds support for the following kernels:
  *  -  collection of kernels to implement and run neural networks using previously obtained training data, on the GPU
  *  -  new image processing filters to perform color-conversion and for building a gaussian pyramid
+ *
+ *  In iOS11, MetalPerformanceShaders.framework adds support for the following kernels:
+ *  -  Image Processing Filters:  FindKeypoints, Statistics (Min-Max, Mean-Variance, Mean), Arithmetic Operations, Bilinear scale
+ *                                Histogram filter takes a minPixelThresholdValue when computing histogram
+ *  -  Linear Algebra Primitives: Triangular, LU and Cholesky Solvers, LU and Cholesky Decomposition
+ *                                Support for multiple input types for Matrix-Matrix Multiplication
+ *                                Matrix-Vector Multiply (gemv)
+ *  -  Convolution Neural Networks:  New Neuron Functions: HardSigmoid, SoftELU, ELU, PReLU, ReLUN
+ *                                   Convolution Transpose, Depth-wise Convolution, Dilated Convolution, Sub-pixel Convolution
+ *                                   Dilated Pooling, Upsampling
+ *  -  Recurrent Neural Networks
+ *  -  A neural network graph API that makes it easy to create and execute neural networks on the GPU
+ *
+ *  The MetalPerformanceShaders.framework is now also available as API in macOS 10.13.  All primitives/filters supported
+ *  by the framework in iOS 11 are also avalable on macOS 10.13.
  *
  *  @subsection subsection_usingMPS  Using MPS
  *  To use MPS:
@@ -175,7 +267,7 @@ BOOL    MPSSupportsMTLDevice( __nullable id <MTLDevice> device )  MPS_AVAILABLE_
  *  label, should one be required. From this are derived the MPSUnaryImageKernel and MPSBinaryImageKernel
  *  sub-classes which define shared behavior for most image processing kernels (filters) such as
  *  edging modes, clipping and tiling support for image operations that consume one or two source textures.
- *  Neither these or the MPSKernel are typically be used directly. They just provide API abstraction
+ *  Neither these or the MPSKernel are typically used directly. They just provide API abstraction
  *  and in some cases may allow some level of polymorphic manipulation of MPS image kernel objects.
  *
  *  Subclasses of the MPSUnaryImageKernel and MPSBinaryImageKernel provide specialized -init and -encode 
@@ -282,22 +374,24 @@ BOOL    MPSSupportsMTLDevice( __nullable id <MTLDevice> device )  MPS_AVAILABLE_
  *
  *  @subsubsection  subsubsection_options  MPSKernelOptions
  *  Each MPSKernel takes a MPSKernelOptions bit mask to indicate various options to use when running the filter:
- *
+ *  @code
  *      typedef NS_OPTIONS(NSUInteger, MPSKernelOptions)
  *
- *      MPSKernelOptionsNone                     Use default options
+ *      MPSKernelOptionsNone
+ *             Use default options
  *
- *      MPSKernelOptionsSkipAPIValidation        Do not spend time looking at parameters passed to MPS
- *                                              for errors.
+ *      MPSKernelOptionsSkipAPIValidation
+ *          Do not spend time looking at parameters passed to MPS for errors.
  *
- *      MPSKernelOptionsAllowReducedPrecision    When possible, MPSKernels use a higher precision data representation internally than
- *                                              the destination storage format to avoid excessive accumulation of computational
- *                                              rounding error in the result. MPSKernelOptionsAllowReducedPrecision advises the
- *                                              MPSKernel that the destination storage format already has too much precision for
- *                                              what is ultimately required downstream, and the MPSKernel may use reduced precision
- *                                              internally when it feels that a less precise result would yield better performance.
- *                                              When enabled, the precision of the result may vary by hardware and operating system.
- *
+ *      MPSKernelOptionsAllowReducedPrecision
+ *          When possible, MPSKernels use a higher precision data representation internally than
+ *          the destination storage format to avoid excessive accumulation of computational
+ *          rounding error in the result. MPSKernelOptionsAllowReducedPrecision advises the
+ *          MPSKernel that the destination storage format already has too much precision for
+ *          what is ultimately required downstream, and the MPSKernel may use reduced precision
+ *          internally when it feels that a less precise result would yield better performance.
+ *          When enabled, the precision of the result may vary by hardware and operating system.
+ *  @endcode
  *  @section subsection_availableFilters     Available MPSKernels
  *
  *  @subsection subsection_convolution  Image Convolution
@@ -566,15 +660,22 @@ BOOL    MPSSupportsMTLDevice( __nullable id <MTLDevice> device )  MPS_AVAILABLE_
  *  base class are provided to help you implement these steps as efficiently as possible.
  *
 
- *      MPSCNNNeuronLinear              <MPSNeuralNetwork/MPSCNNConvolution.h>       A linear neuron activation function
- *      MPSCNNNeuronReLU                <MPSNeuralNetwork/MPSCNNConvolution.h>       A neuron activation function with rectified linear units
- *      MPSCNNNeuronSigmoid             <MPSNeuralNetwork/MPSCNNConvolution.h>       A sigmoid neuron activation function 1/(1+e**-x)
- *      MPSCNNNeuronHardSigmoid         <MPSNeuralNetwork/MPSCNNConvolution.h>       A hard sigmoid neuron activation function clamp((a*x)+b, 0, 1)
- *      MPSCNNNeuronTanH                <MPSNeuralNetwork/MPSCNNConvolution.h>       A neuron activation function using hyperbolic tangent
- *      MPSCNNNeuronAbsolute            <MPSNeuralNetwork/MPSCNNConvolution.h>       An absolute neuron activation function |x|
- *      MPSCNNNeuronSoftPlus            <MPSNeuralNetwork/MPSCNNConvolution.h>       A parametric SoftPlus neuron activation function a*log(1+e**(b*x))
- *      MPSCNNNeuronSoftSign            <MPSNeuralNetwork/MPSCNNConvolution.h>       A SoftSign neuron activation function x/(1+|x|)
- *      MPSCNNNeuronELU                 <MPSNeuralNetwork/MPSCNNConvolution.h>       A parametric ELU neuron activation function x<0 ? (a*(e**x-1)) : x
+ *      MPSCNNNeuron                    <MPSNeuralNetwork/MPSCNNNeuron.h>            Neuron activation function filter
+ *      Activation filter types:
+ *          MPSCNNNeuronTypeLinear                                                   A linear neuron activation function
+ *          MPSCNNNeuronTypeReLU                                                     A neuron activation function with rectified linear units
+ *          MPSCNNNeuronTypeSigmoid                                                  A sigmoid neuron activation function 1/(1+e**-x)
+ *          MPSCNNNeuronTypeHardSigmoid                                              A hard sigmoid neuron activation function clamp((a*x)+b, 0, 1)
+ *          MPSCNNNeuronTypeTanH                                                     A neuron activation function using hyperbolic tangent
+ *          MPSCNNNeuronTypeAbsolute                                                 An absolute neuron activation function |x|
+ *          MPSCNNNeuronTypeSoftPlus                                                 A parametric SoftPlus neuron activation function a*log(1+e**(b*x))
+ *          MPSCNNNeuronTypeSoftSign                                                 A SoftSign neuron activation function x/(1+|x|)
+ *          MPSCNNNeuronTypeELU                                                      A parametric ELU neuron activation function x<0 ? (a*(e**x-1)) : x
+ *          MPSCNNNeuronTypeReLUN                                                    A rectified linear N neuron activation function min((x>=0?x:a*x), b)
+ *          MPSCNNNeuronTypePReLU                                                    ReLU, except a different a value is provided for each feature channel
+ *          MPSCNNNeuronPower                                                        A Power neuron activation function (a*x+b)^c
+ *          MPSCNNNeuronExponential                                                  A Exponential neuron activation function c^(a*x+b)
+ *          MPSCNNNeuronLogarithm                                                    A Logarithm neuron activation function log_c(a*x+b)
  *      MPSCNNConvolution               <MPSNeuralNetwork/MPSCNNConvolution.h>       A 4D convolution tensor
  *      MPSCNNConvolutionTranspose      <MPSNeuralNetwork/MPSCNNConvolution.h>       A 4D convolution transpose tensor
  *      MPSCNNFullyConnected            <MPSNeuralNetwork/MPSCNNConvolution.h>       A fully connected CNN layer
@@ -588,6 +689,7 @@ BOOL    MPSSupportsMTLDevice( __nullable id <MTLDevice> device )  MPS_AVAILABLE_
  *      MPSCNNLogSoftmax                <MPSNeuralNetwork/MPSCNNSoftMax.h>           pixel(x,y,k) - ln(sum(exp(pixel(x,y,0)) ... exp(pixel(x,y,N-1)))
  *      MPSCNNUpsamplingNearest         <MPSNeuralNetwork/MPSCNNUpsampling.h>        A nearest upsampling layer.
  *      MPSCNNUpsamplingBilinear        <MPSNeuralNetwork/MPSCNNUpsampling.h>        A bilinear upsampling layer.
+ *      MPSCNNDropout                   <MPSNeuralNetwork/MPSCNNDropout.h>           A dropout layer.
  *
  *  MPSCNNKernels operate on MPSImages.  MPSImages are at their core MTLTextures. However, whereas
  *  MTLTextures commonly represent image or texel data, a MPSImage is a more abstract representation
@@ -611,13 +713,10 @@ BOOL    MPSSupportsMTLDevice( __nullable id <MTLDevice> device )  MPS_AVAILABLE_
  *  the application can make a large MPSImage or MPSTemporaryImage and fill in parts of it with multiple layers
  *  (as long as the destination feature channel offset is a multiple of 4).
  *
- *  The standard MPSCNNConvolution operator also does dilated convolution and sub-pixel convolution. There are
- *  also bit-wise convolution operators that can use only a single bit for precision of the weights. The
- *  precision of the image can be reduced to 1 bit in this case as well.  The bit {0,1} represents {-1,1}.
- *
- *  @subsection subsection_RNN     Recurrent Neural Networks
- *
- *  @subsection subsection_matrix_primitives     Matrix Primitives
+ *  The standard MPSCNNConvolution operator also does dilated convolution, sub-pixel convolution and
+ *  depth-wise convolution. There are also bit-wise convolution operators that can use only a single bit
+ *  for precision of the weights. The precision of the image can be reduced to 1 bit in this case as well.
+ *  The bit {0,1} represents {-1,1}.
  *
  *  Some CNN Tips:
  *  - Think carefully about the edge mode requested for pooling layers. The default is clamp to zero, but there
@@ -644,6 +743,55 @@ BOOL    MPSSupportsMTLDevice( __nullable id <MTLDevice> device )  MPS_AVAILABLE_
  *      Please be sure to understand the use of the MPSTemporaryImage.readCount.
  *  - Because MPS encodes its work in place in your MTLCommandBuffer, you always have the option to insert your own
  *      code in between MPSCNNKernels as a Metal shader for tasks not covered by MPS. You need not use MPS for everything.
+ *
+ *
+ *  @subsection subsection_RNN     Recurrent Neural Networks
+ *
+ *  @subsection subsection_matrix_primitives     Matrix Primitives
+ *  MPS provides kernels for performing common linear algebra operations.  These kernels operate on MPSMatrix objects.  MPSMatrix
+ *  objects are constructed from MTLBuffer objects and represent matrices which serve as inputs and outputs of MPSMatrix
+ *  kernels.
+ *
+ *  MPSMatrix objects allow the data in a MTLBuffer to be interpreted as a two-dimensional array or, a set of two-dimensional arrays.
+ *  This is done by associating length and layout parameters with the user-supplied MTLBuffer.  These parameters are encapsulated as
+ *  an MPSMatrixDescriptor object and are used, along with the user-supplied MTLBuffer, to construct an MPSMatrix.
+ *
+ *  Two initialization methods are provided for MPSMatrixDescriptor objects:
+ *
+ *      +[MPSMatrixDescriptor matrixDescriptorWithRows:columns:rowBytes:dataType]  and
+ *      +[MPSMatrixDescriptor matrixDescriptorWithRows:columns:matrices:rowBytes:matrixBytes:dataType]
+ *
+ *  'matrices' and 'matrixBytes' are used when the data will represent a set of multiple matrices with identical layouts.  Initializing
+ *  an MPSMatrixDescriptor object without these parameters constructs a descriptor to be used when the data will represent a single
+ *  matrix.  The size of a matrix is specified using the 'rows' and 'columns' arguments and indicate the number of rows and columns
+ *  in the matrix respectively.  'rowBytes' and 'matrixBytes' represent the stride, in bytes, between consecutive rows and matrices
+ *  respectively.  'dataType' is a parameter of type MPSDataType and specifies the type of the provided data.
+ *
+ *  Notes:
+ *      'rowBytes' must be a multiple of the size, in bytes, of a single data element.  'matrixBytes' must be a multiple of the value
+ *      of 'rowBytes'.
+ *      The value of 'rowBytes' can also have an impact on the performance of kernels which use the resulting MPSMatrix object; the
+ *      convenience method, +[MPSMatrixDescriptor rowBytesForColumns:dataType], can be used to query a performant value which may then
+ *      be used to initialize the data.
+ *
+ *  MPSMatrix objects are initialized using MPSMatrixDescriptor objects, specifying the layout, and MTLBuffer objects, containing the
+ *  data.  Some MPS kernels operate on one-dimensional arrays of data, these are known as MPSVector objects and are initialized in a
+ *  manner analogous to MPSMatrix objects.
+ *
+ *  The following kernels allow performing linear algebra operations using MPSMatrix/MPSVector objects:
+ *
+ *      MPSMatrixMultiplication         <MPSMatrix/MPSMatrixMultiplication.h>       Generalized matrix-matrix multiplication.
+ *      MPSMatrixVectorMultiplication   <MPSMatrix/MPSMatrixMultiplication.h>       Generalized matrix-vector multiplication.
+ *      MPSMatrixSolveTriangular        <MPSMatrix/MPSMatrixSolve.h>                Solve a system of equations using a triangular coefficient matrix.
+ *      MPSMatrixSolveLU                <MPSMatrix/MPSMatrixSolve.h>                Solve a system of equations using an LU factorization.
+ *      MPSMatrixSolveCholesky          <MPSMatrix/MPSMatrixSolve.h>                Solve a system of equations using a Cholesky factorization.
+ *      MPSMatrixDecompositionLU        <MPSMatrix/MPSMatrixDecomposition.h>        Perform an LU decomposition of a matrix.
+ *      MPSMatrixDecompositionCholesky  <MPSMatrix/MPSMatrixDecomposition.h>        Perform a Cholesky decomposition of a matrix.
+ *
+ *  MPSMatrix kernels allow operations on sub-regions of the data referenced by an MPSMatrix object.  This is done through offset and
+ *  batching properties of the kernel.  For example, MPSMatrixUnaryKernel kernels have the properties 'sourceMatrixOrigin' and
+ *  'resultMatrixOrigin' to indicate where in a given matrix to begin reading and writing data respectively.  The properties 'batchStart' and
+ *  'batchSize' also allow the kernel to reference only a subset of the provided matrices.
  *
  *  @section  section_validation    MPS API validation
  *  MPS uses the same API validation layer that Metal uses to alert you to API mistakes while
@@ -765,12 +913,12 @@ BOOL    MPSSupportsMTLDevice( __nullable id <MTLDevice> device )  MPS_AVAILABLE_
  *  neural networks. The graph is a network of MPSNNFilterNodes, MPSNNImageNodes and  MPSNNStateNodes. 
  *  MPSNNImageNodes represent MPSImages or MPSTemporaryImages. MPSNNFilterNodes represent MPSCNNKernel
  *  objects -- each of the lower level MPSCNNKernel subclasses has a sister object that is a
- *  subclass of the MPSNNFilterNode. Finally, MPSStateNodes stand in for MPSState objects. 
+ *  subclass of the MPSNNFilterNode. Finally, MPSNNStateNodes stand in for MPSState objects. 
  *
  *  MPSState objects are also new for macOS 10.13, iOS/tvOS 11. They stand in for bits of opaque state that
  *  need to be handed  between filter nodes.  For example, a MPSCNNConvolutionTranspose filter may need to
  *  know the original size of the filter passed into the corresponding MPSCNNConvolution node farther up the
- *  tree. There is a corresponding MPSCNNConvolutionState object that tracks this information. You will
+ *  tree. There is a corresponding MPSCNNConvolutionGradientState object that tracks this information. You will
  *  encounter state objects only infrequently. Most graphs are made up of images and filters.
  *
  *  To represent a graph, one usually first creates a MPSNNImageNode. This represents the input image or
@@ -868,6 +1016,25 @@ BOOL    MPSSupportsMTLDevice( __nullable id <MTLDevice> device )  MPS_AVAILABLE_
  *  The extra synchronization from [id <MTLCommandBuffer> waitForCompletion] should be avoided. It can
  *  be exceptionally costly because the wait for new work to appear allows the GPU clock to spin down.
  *  Factor of two or more performance increases are common with -addCompletedHandler:.
+ *
+ *  A graph can also be encoded using the higher level -[MPSNNGraph executeAsyncWithSourceImages:completionHandler:]
+ *  which requires minimal experience with Metal. Assuming you have already gotten a list of MPSImages as input
+ *  to your graph (typically one), you may use that instead:
+ *
+ *  @code
+ *      MPSImage * result = [k[0] executeAsyncWithSourceImages: @[image]
+ *                                           completionHandler: ^(MPSImage * __nullable i, NSError * __nullable error ){
+ *          if( error)
+ *              MyLogError("Error: -computeAsyncWithSourceImages:completionHandler: failed: %s\n\t",
+ *                   [error.localizedDescription cStringUsingEncoding: NSASCIIStringEncoding],
+ *                   [error.localizedFailureReason cStringUsingEncoding: NSASCIIStringEncoding]);
+ *
+ *          MyProcessResult(i);
+ *      }];
+ *  @endcode
+ *  The image returned directly from the left hand side of -executeAsyncWithSourceImages:completionHandler:
+ *  and passed into the completion hander are the same. The contents of the image will be valid once the
+ *  completion handler is called.
  *
  *  @section  subsection_mpsnngraph_sizing   MPSNNGraph intermediate image sizing and centering
  *  The MPSNNGraph will automatically size and center the intermediate images that appear in the graph.
@@ -1025,8 +1192,117 @@ BOOL    MPSSupportsMTLDevice( __nullable id <MTLDevice> device )  MPS_AVAILABLE_
  *  together — performance can be improved by up a factor of two 
  *  by breaking the work into tiles about 512 kB in size. Use
  *  -sourceRegionForDestinationSize: to find the MPSRegion needed
- *  for each tile. 
+ *  for each tile.
+ *
+ *  @section using_graph_for_training   Using MPSNNGraph for Training
+ *  This version of MPSNNGraph uses an explicit node structure to graph out
+ *  the training process. That is, you must build out the training segment
+ *  of the graph manually in addition to the inference passes. MPS doesn't do
+ *  this automatically. However, MPS will provide some help along the way.
+ *
+ *  To construct a training graph from a complete graph of inference MPSNNFilterNodes,
+ *  append a MPSNNLossNode to calculate the loss function for the inference pass. This
+ *  produces the first gradient MPSNNImageNode as its image result node. Next, walk
+ *  backwards up the graph adding gradient conjugate operations for each node in the
+ *  preceding inference section. For example, for a MPSCNNConvolutionNode, add a
+ *  MPSCNNConvolutionGradientNode.  This is most easily done using
+ *  [MPSNNFilterNode gradientFilterWithSources:] as you go. The gradient image result
+ *  from each MPSNNGradientFilterNode serves as the gradient input to the next one. Most
+ *  of the wiring up of image and state nodes will be done automatically for you, along
+ *  with the copying of various node properties. You need only mirror the topology
+ *  of MPSNNFilterNodes and MPSNNImageNodes with MPSNNGradientFilterNodes and
+ *  gradient MPSNNImageNodes on the way back up.
+ *
+ *  The loss data is passed to the graph at -encode time in a MPSNNLossGradientState
+ *  object. As typically there is only one state object passed in to a training graph,
+ *  you probably won't need to invest much in MPSHandles to disambiguate inputs here.
+ *  The images are passed in as the image argument. Training is generally done in batches
+ *  of images, so these will actually be passed in as MPSImageBatch and MPSNNStateBatch
+ *  instead. If you want to configure the node corresponding to this MPSNNLossGradientState
+ *  object, you can get it from the MPSNNLossNode.
+ *
+ *  The weight updates are handled through new callbacks into the MPSCNNConvolutionDataSource
+ *  and MPSCNNBatchNormalizationDataSource protocols. You will be handed gradients and
+ *  old weights and will be expected to calculate the new weights based on these.
+ *  You can add a metal command buffer completion callback at this time to save these to
+ *  the disk to mark your progress, if you like. Most updates happen on the GPU. 
+ *  Typically, your Application will use the same data source for both the MPSNNFilterNode
+ *  forward inference pass and the conjugate MPSNNGradientFilterNode pass. The gradient pass
+ *  will trigger weight updates. These will be applied to both nodes, provided that they use
+ *  the same data source.
+ *
+ *  If necessary, appropriate -init methods are provided that allow you to insert
+ *  differently configured nodes if you want to do something unusual instead. To manually
+ *  configure such, each MPSNNGradientFilterNode will consume a MPSNNGradientState node that
+ *  records MPSNNFilterNode settings at the time it was run. The MPSNNGradientFilterNode
+ *  will also need to see the image node used as input to the inference MPSNNFilterNode.
+ *  Finally, there is the input gradient calculated by the previous MPSNNGradientFilterNode
+ *  in the chain. These are all passed to the MPSNNGradientFilterNode when it is created.
+ *  If there are any configurable properties on the MPSNNFilterNode, these need to be copied
+ *  to the MPSNNGradientFilterNode as well. This complexity is handled for you in
+ *  [MPSNNFilterNode gradientFilterWithSources:], so it is recommended that when possible,
+ *  you use that instead to help make sure everything is wired up correctly.
+ *
+ *  @section release_notes   MPS Release Notes
+ *  @subsection macosX_13_4    macOS X.13.4  iOS/tvOS 11.3
+ *  A preview for neural network training support is provided in macOS X.13.4.
+ *  It is intended to facilitate MPS adoption by major third party neural
+ *  networking frameworks. All interfaces marked macos(10.13.4) should
+ *  be considered experimental, subject to change as a result of
+ *  feedback from the machine learning community before final release
+ *  in a major OS revision. To allow for changes during the comment period,
+ *  binary compatibility between experimental releases and the final release
+ *  is not guaranteed. To provide feedback, please file bugs against Metal
+ *  Performance Shaders / macOS using http://bugreporter.apple.com.  Feedback
+ *  in other forums such as social media will likely not be successful in
+ *  attracting our attention.
+ *
+ *  To avoid compile time versioning warnings while using these features on a
+ *  macOS X.13 SDK, set MACOSX_DEPLOYMENT_TARGET = 10.13.4 in your
+ *  .xcodeproj/project.pbxproj. New features very rarely come in support
+ *  updates and the Xcode GUI is not pre-configured to make this easy for you.
+ *  As a workaround, set the deployment target using Xcode GUI to some much
+ *  older, easily recognized version such as 10.11 to ensure that
+ *  MACOSX_DEPLOYMENT_TARGET appears in your project.pbxproj. Then, use a text
+ *  editor to adjust the value to 10.13.4 manually.
+ *
+ *  @subsection macosX_14    macOS X.14  iOS/tvOS 12.0
+ *  All macOS 10.13.4 and iOS 11.3 APIs that were previously subject to change
+ *  are now fully supported, with the following exception:
+ *
+ *      MPSKeyedUnarchiver, introduced in macOS 10.13.4, iOS/tvOS 11.3, is a
+ *      convenience implementation of the MPSDeviceProvider protocol on top of
+ *      NSKeyedUnarchiver. Though the old interfaces are still there, the version
+ *      in macOS X.14 and iOS/tvOS 12.0 is not in a practical sense binary compatibile
+ *      with the original version of the class. All previous methods of creating or
+ *      initializing a MPSKeyedUnarchiver now return nil. NSKeyedUnarchiver deprecated
+ *      most of its API in favor of NSSecureCoding. The old MPSKeyedUnarchiver interface
+ *      didn't provide enough information to responsibly update to the secure coding
+ *      requirements in the new NSKeyedUnarchiver APIs.
+ *
+ *  New classes:
+ *      MPSImageLaplacianPyramid                MPSMatrixCopyToImage
+ *      MPSMatrixSoftMaxGradient                MPSMatrixLogSoftMaxGradient
+ *      MPSCNNYOLOLoss                          MPSMatrixBatchNormalization
+ *      MPSMatrixBatchNormalizationGradient     MPSMatrixFullyConnectedGradient
+ *      MPSMatrixNeuronGradient                 MPSNNOptimizerStochasticGradientDescent
+ *      MPSNNOptimizerRMSProp                   MPSNNOptimizerAdam
+ *      MPSNNReduceFeatureChannelsArgumentMin   MPSNNReduceFeatureChannelsArgumentMax
+ *      MPSRNNMatrixTrainingLayer               MPSRaytracer
+ *      MPSInstanceAccelerationStructure        MPSTriangleAccelerationStructure
+ *
+ *  Notable simplification of weight updates during neural network training:
+ *      GPU: A number of different methods are now provided to calculate weight updates on the GPU
+ *              See MPSNNOptimizers.
+ *      CPU: -[MPSNNGraph reloadFromDataSources] allows updating graph weights without
+ *              making a new MPSNNGraph.
+ *
+ *  We spent most of our time tuning neural network training for performance and reduced
+ *  memory consumption.
+ *
+ *  One more thing, we added the MPSRayIntersector subframework for ray tracing.
  */
+#endif
 
 #ifdef __cplusplus
 }

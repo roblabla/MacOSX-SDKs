@@ -13,8 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class AMWorkflow;
 @class AMWorkflowController;
 
-@interface AMWorkflowView : NSView {
-   @private
+@interface AMWorkflowView : NSView
+{
+	@private
 	__weak AMWorkflowController *_workflowController;
 	NSMutableArray *_actionViewControllers;
 	NSArray *_draggedActionViews;
@@ -22,7 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 	AM_UNUSED_FOR_ANALYZER id _unused;
 	id _variablesEditorController;
 	AM_UNUSED_FOR_ANALYZER id _showWhenRunController;
-	struct __AMWorkflowViewFlags {
+	struct __AMWorkflowViewFlags
+	{
 		NSUInteger ignoreSubviewFrameChanges : 1;
 		NSUInteger editingEnabled : 1;
 		NSUInteger reserved : 30;

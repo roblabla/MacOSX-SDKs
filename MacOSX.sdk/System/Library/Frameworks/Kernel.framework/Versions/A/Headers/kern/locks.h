@@ -182,6 +182,17 @@ extern wait_result_t	lck_mtx_sleep_deadline(
 									event_t				event,
 									wait_interrupt_t	interruptible,
 									uint64_t			deadline);
+#if DEVELOPMENT || DEBUG
+extern void		erase_all_test_mtx_stats(void);
+extern int		get_test_mtx_stats_string(char* buffer, int buffer_size);
+extern void		lck_mtx_test_init(void);
+extern void		lck_mtx_test_lock(void);
+extern void		lck_mtx_test_unlock(void);
+extern int		lck_mtx_test_mtx_uncontended(int iter, char* buffer, int buffer_size);
+extern int		lck_mtx_test_mtx_contended(int iter, char* buffer, int buffer_size);
+extern int		lck_mtx_test_mtx_uncontended_loop_time(int iter, char* buffer, int buffer_size);
+extern int		lck_mtx_test_mtx_contended_loop_time(int iter, char* buffer, int buffer_size);
+#endif
 
 
 extern void				lck_mtx_assert(

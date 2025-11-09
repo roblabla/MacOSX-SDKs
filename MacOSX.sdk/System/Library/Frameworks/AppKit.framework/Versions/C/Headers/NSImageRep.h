@@ -1,7 +1,7 @@
 /*
 	NSImageRep.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSPasteboard, NSGraphicsContext, NSURL;
 
-typedef NSString * NSImageHintKey NS_STRING_ENUM;
+typedef NSString * NSImageHintKey NS_TYPED_ENUM;
 
 /* NSImageRepMatchesDevice indicates the value is variable, depending on the output device. It can be passed in (or received back) as the value of bitsPerSample, pixelsWide, and pixelsHigh.
 */
@@ -48,11 +48,18 @@ typedef NS_ENUM(NSInteger, NSImageLayoutDirection) {
         unsigned int bitsPerSample:8;
         unsigned int internalLayoutDirection:2;
 	unsigned int gsaved:14;
-    } _repFlags;
-    NSColorSpaceName _colorSpaceName;
-    NSSize _size;
-    int _pixelsWide;
-    int _pixelsHigh;
+    } _repFlags APPKIT_IVAR;
+#if __OBJC2__
+    int _pixelsWide APPKIT_IVAR;
+    NSColorSpaceName _colorSpaceName APPKIT_IVAR;
+    NSSize _size APPKIT_IVAR;
+    int _pixelsHigh APPKIT_IVAR;
+#else /* __OBJC2__ */
+    NSColorSpaceName _colorSpaceName APPKIT_IVAR;
+    NSSize _size APPKIT_IVAR;
+    int _pixelsWide APPKIT_IVAR;
+    int _pixelsHigh APPKIT_IVAR;
+#endif /* __OBJC2__ */
 }
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;

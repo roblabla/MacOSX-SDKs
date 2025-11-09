@@ -1,6 +1,6 @@
 framework module OpenGL [extern_c] {
   umbrella header "OpenGL.h"
-
+  
   module CGLRenderers { 
     header "CGLRenderers.h"
     export *
@@ -39,6 +39,7 @@ framework module OpenGL [extern_c] {
 
   explicit module GL {
     header "gl.h"
+
     export GLTypes
     export *    
 
@@ -52,14 +53,14 @@ framework module OpenGL [extern_c] {
       export *
 
       explicit module Macro {
-        header "gluMacro.h"
+        textual header "gluMacro.h"
         header "gluContext.h"
         export *
       }
     }
 
     explicit module Macro {
-      header "CGLMacro.h"
+      textual header "CGLMacro.h"
       header "CGLContext.h"
       header "gliContext.h"
       header "gliDispatch.h"

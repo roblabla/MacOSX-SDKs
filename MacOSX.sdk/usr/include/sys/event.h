@@ -2,7 +2,7 @@
  * Copyright (c) 2003-2017 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
@@ -11,10 +11,10 @@
  * unlawful or unlicensed copies of an Apple operating system, or to
  * circumvent, violate, or enable the circumvention or violation of, any
  * terms of an Apple operating system software license agreement.
- * 
+ *
  * Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -22,7 +22,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /*-
@@ -130,54 +130,54 @@ struct kevent64_s {
 
 
 /* kevent system call flags */
-#define KEVENT_FLAG_NONE                         0x000	/* no flag value */
-#define KEVENT_FLAG_IMMEDIATE                    0x001	/* immediate timeout */
-#define KEVENT_FLAG_ERROR_EVENTS                 0x002	/* output events only include change errors */
+#define KEVENT_FLAG_NONE                         0x000000	/* no flag value */
+#define KEVENT_FLAG_IMMEDIATE                    0x000001	/* immediate timeout */
+#define KEVENT_FLAG_ERROR_EVENTS                 0x000002	/* output events only include change errors */
 
 
 /* actions */
-#define EV_ADD              0x0001		/* add event to kq (implies enable) */
-#define EV_DELETE           0x0002		/* delete event from kq */
-#define EV_ENABLE           0x0004		/* enable event */
-#define EV_DISABLE          0x0008		/* disable event (not reported) */
+#define EV_ADD              0x0001      /* add event to kq (implies enable) */
+#define EV_DELETE           0x0002      /* delete event from kq */
+#define EV_ENABLE           0x0004      /* enable event */
+#define EV_DISABLE          0x0008      /* disable event (not reported) */
 
 /* flags */
-#define EV_ONESHOT          0x0010		/* only report one occurrence */
-#define EV_CLEAR            0x0020		/* clear event state after reporting */
-#define EV_RECEIPT          0x0040		/* force immediate event output */
-                                		/* ... with or without EV_ERROR */
-                                  		/* ... use KEVENT_FLAG_ERROR_EVENTS */
-                                		/*     on syscalls supporting flags */
+#define EV_ONESHOT          0x0010      /* only report one occurrence */
+#define EV_CLEAR            0x0020      /* clear event state after reporting */
+#define EV_RECEIPT          0x0040      /* force immediate event output */
+                                        /* ... with or without EV_ERROR */
+                                        /* ... use KEVENT_FLAG_ERROR_EVENTS */
+                                        /*     on syscalls supporting flags */
 
-#define EV_DISPATCH         0x0080		/* disable event after reporting */
-#define EV_UDATA_SPECIFIC   0x0100		/* unique kevent per udata value */
+#define EV_DISPATCH         0x0080      /* disable event after reporting */
+#define EV_UDATA_SPECIFIC   0x0100      /* unique kevent per udata value */
 
 #define EV_DISPATCH2        (EV_DISPATCH | EV_UDATA_SPECIFIC)
-                                  		/* ... in combination with EV_DELETE */
-                                  		/* will defer delete until udata-specific */
-                                  		/* event enabled. EINPROGRESS will be */
-                                  		/* returned to indicate the deferral */
+                                        /* ... in combination with EV_DELETE */
+                                        /* will defer delete until udata-specific */
+                                        /* event enabled. EINPROGRESS will be */
+                                        /* returned to indicate the deferral */
 
-#define EV_VANISHED         0x0200		/* report that source has vanished  */
-                                  		/* ... only valid with EV_DISPATCH2 */
+#define EV_VANISHED         0x0200      /* report that source has vanished  */
+                                        /* ... only valid with EV_DISPATCH2 */
 
-#define EV_SYSFLAGS         0xF000		/* reserved by system */
-#define EV_FLAG0            0x1000		/* filter-specific flag */
-#define EV_FLAG1            0x2000		/* filter-specific flag */
+#define EV_SYSFLAGS         0xF000      /* reserved by system */
+#define EV_FLAG0            0x1000      /* filter-specific flag */
+#define EV_FLAG1            0x2000      /* filter-specific flag */
 
 /* returned values */
-#define EV_EOF              0x8000		/* EOF detected */
-#define EV_ERROR            0x4000		/* error, data contains errno */
+#define EV_EOF              0x8000      /* EOF detected */
+#define EV_ERROR            0x4000      /* error, data contains errno */
 
 /*
  * Filter specific flags for EVFILT_READ
  *
  * The default behavior for EVFILT_READ is to make the "read" determination
- * relative to the current file descriptor read pointer. 
+ * relative to the current file descriptor read pointer.
  *
  * The EV_POLL flag indicates the determination should be made via poll(2)
  * semantics. These semantics dictate always returning true for regular files,
- * regardless of the amount of unread data in the file.  
+ * regardless of the amount of unread data in the file.
  *
  * On input, EV_OOBAND specifies that filter should actively return in the
  * presence of OOB on the descriptor. It implies that filter will return
@@ -207,7 +207,7 @@ struct kevent64_s {
 #define NOTE_TRIGGER	0x01000000
 
 /*
- * On input, the top two bits of fflags specifies how the lower twenty four 
+ * On input, the top two bits of fflags specifies how the lower twenty four
  * bits should be applied to the stored value of fflags.
  *
  * On output, the top two bits will always be set to NOTE_FFNOP and the
@@ -218,7 +218,7 @@ struct kevent64_s {
 #define NOTE_FFOR       0x80000000              /* or fflags */
 #define NOTE_FFCOPY     0xc0000000              /* copy fflags */
 #define NOTE_FFCTRLMASK 0xc0000000              /* mask for operations */
-#define NOTE_FFLAGSMASK	0x00ffffff 
+#define NOTE_FFLAGSMASK	0x00ffffff
 
 
 /*
@@ -235,13 +235,13 @@ struct kevent64_s {
 /*
  * data/hint fflags for EVFILT_VNODE, shared with userspace
  */
-#define	NOTE_DELETE	0x00000001		/* vnode was removed */
-#define	NOTE_WRITE	0x00000002		/* data contents changed */
-#define	NOTE_EXTEND	0x00000004		/* size increased */
-#define	NOTE_ATTRIB	0x00000008		/* attributes changed */
-#define	NOTE_LINK	0x00000010		/* link count changed */
-#define	NOTE_RENAME	0x00000020		/* vnode was renamed */
-#define	NOTE_REVOKE	0x00000040		/* vnode access was revoked */
+#define NOTE_DELETE	0x00000001		/* vnode was removed */
+#define NOTE_WRITE	0x00000002		/* data contents changed */
+#define NOTE_EXTEND	0x00000004		/* size increased */
+#define NOTE_ATTRIB	0x00000008		/* attributes changed */
+#define NOTE_LINK	0x00000010		/* link count changed */
+#define NOTE_RENAME	0x00000020		/* vnode was renamed */
+#define NOTE_REVOKE	0x00000040		/* vnode access was revoked */
 #define NOTE_NONE	0x00000080		/* No specific vnode event: to test for EVFILT_READ activation*/
 #define NOTE_FUNLOCK	0x00000100		/* vnode was unlocked by flock(2) */
 
@@ -259,22 +259,22 @@ enum {
 	eNoteReapDeprecated __deprecated_enum_msg("This kqueue(2) EVFILT_PROC flag is deprecated") = 0x10000000
 };
 
-#define	NOTE_EXIT		0x80000000	/* process exited */
-#define	NOTE_FORK		0x40000000	/* process forked */
-#define	NOTE_EXEC		0x20000000	/* process exec'd */
-#define	NOTE_REAP		((unsigned int)eNoteReapDeprecated /* 0x10000000 */)	/* process reaped */
-#define	NOTE_SIGNAL		0x08000000	/* shared with EVFILT_SIGNAL */
-#define	NOTE_EXITSTATUS		0x04000000	/* exit status to be returned, valid for child process only */
-#define	NOTE_EXIT_DETAIL	0x02000000	/* provide details on reasons for exit */
+#define NOTE_EXIT		0x80000000	/* process exited */
+#define NOTE_FORK		0x40000000	/* process forked */
+#define NOTE_EXEC		0x20000000	/* process exec'd */
+#define NOTE_REAP		((unsigned int)eNoteReapDeprecated /* 0x10000000 */)	/* process reaped */
+#define NOTE_SIGNAL		0x08000000	/* shared with EVFILT_SIGNAL */
+#define NOTE_EXITSTATUS		0x04000000	/* exit status to be returned, valid for child process only */
+#define NOTE_EXIT_DETAIL	0x02000000	/* provide details on reasons for exit */
 
-#define	NOTE_PDATAMASK	0x000fffff		/* mask for signal & exit status */
-#define	NOTE_PCTRLMASK	(~NOTE_PDATAMASK)
+#define NOTE_PDATAMASK	0x000fffff		/* mask for signal & exit status */
+#define NOTE_PCTRLMASK	(~NOTE_PDATAMASK)
 
 /*
  * If NOTE_EXITSTATUS is present, provide additional info about exiting process.
  */
 enum {
-	eNoteExitReparentedDeprecated __deprecated_enum_msg("This kqueue(2) EVFILT_PROC flag is no longer sent") = 0x00080000 
+	eNoteExitReparentedDeprecated __deprecated_enum_msg("This kqueue(2) EVFILT_PROC flag is no longer sent") = 0x00080000
 };
 #define NOTE_EXIT_REPARENTED	((unsigned int)eNoteExitReparentedDeprecated)	/* exited while reparented */
 
@@ -282,8 +282,8 @@ enum {
  * If NOTE_EXIT_DETAIL is present, these bits indicate specific reasons for exiting.
  */
 #define NOTE_EXIT_DETAIL_MASK		0x00070000
-#define	NOTE_EXIT_DECRYPTFAIL		0x00010000 
-#define	NOTE_EXIT_MEMORY		0x00020000
+#define NOTE_EXIT_DECRYPTFAIL		0x00010000
+#define NOTE_EXIT_MEMORY		0x00020000
 #define NOTE_EXIT_CSERROR		0x00040000
 
 
@@ -308,7 +308,7 @@ enum {
 #define NOTE_NSECONDS	0x00000004		/* data is nanoseconds     */
 #define NOTE_ABSOLUTE	0x00000008		/* absolute timeout        */
 	/* ... implicit EV_ONESHOT, timeout uses the gettimeofday epoch */
-#define NOTE_LEEWAY	0x00000010		/* ext[1] holds leeway for power aware timers */
+#define NOTE_LEEWAY		0x00000010		/* ext[1] holds leeway for power aware timers */
 #define NOTE_CRITICAL	0x00000020		/* system does minimal timer coalescing */
 #define NOTE_BACKGROUND	0x00000040		/* system does maximum timer coalescing */
 #define NOTE_MACH_CONTINUOUS_TIME	0x00000080
@@ -342,7 +342,7 @@ enum {
  * system call argument specifying an ouput area (kevent_qos) will be consulted. If
  * the system call specified an output data area, the user-space address
  * of the received message is carved from that provided output data area (if enough
- * space remains there). The address and length of each received message is 
+ * space remains there). The address and length of each received message is
  * returned in the ext[0] and ext[1] fields (respectively) of the corresponding kevent.
  *
  * IF_MACH_RCV_VOUCHER_CONTENT is specified, the contents of the message voucher is
@@ -361,14 +361,14 @@ enum {
  * NOTE_TRACK, NOTE_TRACKERR, and NOTE_CHILD are no longer supported as of 10.5
  */
 /* additional flags for EVFILT_PROC */
-#define	NOTE_TRACK	0x00000001		/* follow across forks */
-#define	NOTE_TRACKERR	0x00000002		/* could not track child */
-#define	NOTE_CHILD	0x00000004		/* am a child process */
+#define NOTE_TRACK	0x00000001		/* follow across forks */
+#define NOTE_TRACKERR	0x00000002		/* could not track child */
+#define NOTE_CHILD	0x00000004		/* am a child process */
 
 
 
 /* Temporay solution for BootX to use inode.h till kqueue moves to vfs layer */
-#include <sys/queue.h> 
+#include <sys/queue.h>
 struct knote;
 SLIST_HEAD(klist, knote);
 
@@ -379,19 +379,18 @@ struct timespec;
 
 __BEGIN_DECLS
 int     kqueue(void);
-int     kevent(int kq, 
+int     kevent(int kq,
 	       const struct kevent *changelist, int nchanges,
 	       struct kevent *eventlist, int nevents,
 	       const struct timespec *timeout);
-int     kevent64(int kq, 
+int     kevent64(int kq,
 		 const struct kevent64_s *changelist, int nchanges,
 		 struct kevent64_s *eventlist, int nevents,
-		 unsigned int flags, 
+		 unsigned int flags,
 		 const struct timespec *timeout);
 
 
 __END_DECLS
-
 
 
 

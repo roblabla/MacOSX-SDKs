@@ -45,6 +45,10 @@ Print wide output, do not clip to terminal width
 Print UUID info only.
 .It Fl arch Ar arch_name
 Specify the target architecture. The default value is
+.Ar current
+, which matches the current system architecture. If the current architecture is not available in the targeted file or process, the symbols command will attempt to use
+.Ar any64bit
+, which matches the first available 64-bit architecture. If there is no 64-bit architecture available, the symbols command will finally fall back to
 .Ar any
 , which matches the first available architecture. The value
 .Ar all

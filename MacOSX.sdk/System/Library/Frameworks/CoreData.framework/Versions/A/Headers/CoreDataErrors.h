@@ -1,7 +1,7 @@
 /*
     CoreDataErrors.h
     Core Data
-    Copyright (c) 2004-2017, Apple Inc.
+    Copyright (c) 2004-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -83,7 +83,7 @@ enum : NSInteger {
     NSInferredMappingModelError                      = 134190, // inferred mapping model creation error
     NSExternalRecordImportError                      = 134200, // general error encountered while importing external records
     
-    NSPersistentHistoryTokenExpiredError             = 134301 // The history token passed to NSPersistentChangeRequest was invalid
+    NSPersistentHistoryTokenExpiredError             = 134301  // The history token passed to NSPersistentChangeRequest was invalid
 };
 
 NS_ASSUME_NONNULL_END

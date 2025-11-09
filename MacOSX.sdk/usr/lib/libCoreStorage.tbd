@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: CAD02BFA-05C3-3AA4-853F-956DF4CD93B3', 'x86_64: B495D87B-FE21-3C14-9017-F02D9CA226D5' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: F56AD958-416C-38EA-9829-DEAAB1F0C155' ]
 platform:        macosx
 install-name:    /usr/lib/libCoreStorage.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _CoreStorageAddPhysicalVolume, _CoreStorageAddVolumeExtentsForConversion, 
                        _CoreStorageAddVolumeForConversion, _CoreStorageCalcMinResizeDeltaForPhysicalVolume, 
                        _CoreStorageCanRevertVolume, _CoreStorageClearIOErrorForVolume, 

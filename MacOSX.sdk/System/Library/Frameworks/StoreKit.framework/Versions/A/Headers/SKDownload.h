@@ -2,68 +2,69 @@
 //  SKDownload.h
 //  StoreKit
 //
-//  Copyright 2012 Apple, Inc. All rights reserved.
+//  Copyright (c) 2012 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKitDefines.h>
 
-@class SKPaymentTransaction;
-
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger, SKDownloadState)
-{
-	SKDownloadStateWaiting,
-	SKDownloadStateActive,
-	SKDownloadStatePaused,
-	SKDownloadStateFinished,
-	SKDownloadStateFailed,
-	SKDownloadStateCancelled
-} NS_AVAILABLE_MAC(10_8);
+@class SKPaymentTransaction;
 
+typedef NS_ENUM(NSInteger, SKDownloadState) {
+    SKDownloadStateWaiting,     // Download is inactive, waiting to be downloaded
+    SKDownloadStateActive,      // Download is actively downloading
+    SKDownloadStatePaused,      // Download was paused by the user
+    SKDownloadStateFinished,    // Download is finished, content is available
+    SKDownloadStateFailed,      // Download failed
+    SKDownloadStateCancelled,   // Download was cancelled
+} NS_AVAILABLE(10_8, 6_0);
 
-// Model class to define a download for a particular product
-SK_EXTERN_CLASS_AVAILABLE(10_8)
-@interface SKDownload : NSObject
-{
+SK_EXTERN NSTimeInterval SKDownloadTimeRemainingUnknown NS_AVAILABLE(10_14, 6_0);
+
+SK_EXTERN_CLASS_AVAILABLE(10_8, 6_0) @interface SKDownload : NSObject {
 @private
     id _internal;
 }
 
-// Product identifier entered in iTunesConnect
-@property(nonatomic, readonly) NSString *contentIdentifier NS_AVAILABLE_MAC(10_8);
+// State of the download
+@property(nonatomic, readonly) SKDownloadState state NS_AVAILABLE(10_8, 12_0);
+@property(nonatomic, readonly) SKDownloadState downloadState NS_DEPRECATED_IOS(6_0, 12_0, "Use [SKDownload state] instead");
 
-// Download state
-@property(nonatomic, readonly) SKDownloadState state NS_AVAILABLE_MAC(10_8);
-
-// Content URL
-@property(nonatomic, readonly, nullable) NSURL *contentURL NS_AVAILABLE_MAC(10_8);
-
-// Download progress 
-@property(nonatomic, readonly) float progress NS_AVAILABLE_MAC(10_8);
-
-// Last error, can be NULL
-@property(nonatomic, copy, readonly, nullable) NSError *error NS_AVAILABLE_MAC(10_8);
-
-// Estimated number of seconds remaining in the download
-@property(nonatomic, readonly) NSTimeInterval timeRemaining NS_AVAILABLE_MAC(10_8);
-
-// Filesize of the asset
+// Total size of the content, in bytes
+#if TARGET_OS_OSX
 @property(nonatomic, copy, readonly) NSNumber *contentLength NS_AVAILABLE_MAC(10_8);
+#else
+@property(nonatomic, readonly) long long contentLength NS_AVAILABLE_IOS(6_0);
+#endif
 
-// Version string of the product
-@property(nonatomic, copy, readonly) NSString *contentVersion NS_AVAILABLE_MAC(10_8);
+// Identifier for this content
+@property(nonatomic, readonly) NSString *contentIdentifier NS_AVAILABLE(10_8, 6_0);
 
-// The transaction associated with the downloadable file
-@property(nonatomic, readonly) SKPaymentTransaction *transaction NS_AVAILABLE_MAC(10_11);
+// Location of the content data, if state is SKDownloadStateFinished
+@property(nonatomic, readonly, nullable) NSURL *contentURL NS_AVAILABLE(10_8, 6_0);
 
-//
-+ (nullable NSURL *) contentURLForProductID:(NSString *)productID NS_AVAILABLE_MAC(10_8);
+// Content version
+@property(nonatomic, readonly) NSString *contentVersion NS_AVAILABLE(10_8, 6_0);
+
+// Failure error, if state is SKDownloadStateFailed
+@property(nonatomic, readonly, nullable) NSError *error NS_AVAILABLE(10_8, 6_0);
+
+// Overall progress for the download [0..1]
+@property(nonatomic, readonly) float progress NS_AVAILABLE(10_8, 6_0);
+
+// Estimated time remaining to complete the download, in seconds.  Value is SKDownloadTimeRemainingUnknown if estimate is unknownxx.
+@property(nonatomic, readonly) NSTimeInterval timeRemaining NS_AVAILABLE(10_8, 6_0);
+
+// Transaction for this download
+@property(nonatomic, readonly) SKPaymentTransaction *transaction NS_AVAILABLE(10_11, 6_0);
+
+
++ (nullable NSURL *)contentURLForProductID:(NSString *)productID NS_AVAILABLE_MAC(10_8);
 
 // Deletes the content for that identifier from disk
-+ (void) deleteContentForProductID:(NSString *)productID NS_AVAILABLE_MAC(10_8);
-
++ (void)deleteContentForProductID:(NSString *)productID NS_AVAILABLE_MAC(10_8);
 @end
 
 NS_ASSUME_NONNULL_END

@@ -4,7 +4,7 @@
 //
 //  Copyright (c) 2011-2012 Apple Inc. All rights reserved.
 //
-
+#import <GLKit/GLKitBase.h>
 #import <GLKit/GLKEffectProperty.h>
 #import <GLKit/GLKMath.h>
 
@@ -24,7 +24,8 @@
  a current result with respect to the modelviewMatrix.
 */
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_8, 5_0)
+
+OPENGL_DEPRECATED(10.8,10.14) OPENGLES_DEPRECATED(ios(5.0,12.0), tvos(9.0,12.0))
 @interface GLKEffectPropertyTransform : GLKEffectProperty 
 {
     @private

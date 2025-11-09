@@ -31,18 +31,18 @@
 @class DOMHTMLDocument;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMImplementation : DOMObject
-- (BOOL)hasFeature:(NSString *)feature version:(NSString *)version NS_AVAILABLE_MAC(10_5);
-- (DOMDocumentType *)createDocumentType:(NSString *)qualifiedName publicId:(NSString *)publicId systemId:(NSString *)systemId NS_AVAILABLE_MAC(10_5);
-- (DOMDocument *)createDocument:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName doctype:(DOMDocumentType *)doctype NS_AVAILABLE_MAC(10_5);
-- (DOMCSSStyleSheet *)createCSSStyleSheet:(NSString *)title media:(NSString *)media NS_AVAILABLE_MAC(10_5);
-- (DOMHTMLDocument *)createHTMLDocument:(NSString *)title NS_AVAILABLE_MAC(10_5);
+- (BOOL)hasFeature:(NSString *)feature version:(NSString *)version WEBKIT_AVAILABLE_MAC(10_5);
+- (DOMDocumentType *)createDocumentType:(NSString *)qualifiedName publicId:(NSString *)publicId systemId:(NSString *)systemId WEBKIT_AVAILABLE_MAC(10_5);
+- (DOMDocument *)createDocument:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName doctype:(DOMDocumentType *)doctype WEBKIT_AVAILABLE_MAC(10_5);
+- (DOMCSSStyleSheet *)createCSSStyleSheet:(NSString *)title media:(NSString *)media WEBKIT_AVAILABLE_MAC(10_5);
+- (DOMHTMLDocument *)createHTMLDocument:(NSString *)title WEBKIT_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMImplementation (DOMImplementationDeprecated)
-- (BOOL)hasFeature:(NSString *)feature :(NSString *)version NS_DEPRECATED_MAC(10_4, 10_5);
-- (DOMDocumentType *)createDocumentType:(NSString *)qualifiedName :(NSString *)publicId :(NSString *)systemId NS_DEPRECATED_MAC(10_4, 10_5);
-- (DOMDocument *)createDocument:(NSString *)namespaceURI :(NSString *)qualifiedName :(DOMDocumentType *)doctype NS_DEPRECATED_MAC(10_4, 10_5);
-- (DOMCSSStyleSheet *)createCSSStyleSheet:(NSString *)title :(NSString *)media NS_DEPRECATED_MAC(10_4, 10_5);
+- (BOOL)hasFeature:(NSString *)feature :(NSString *)version WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (DOMDocumentType *)createDocumentType:(NSString *)qualifiedName :(NSString *)publicId :(NSString *)systemId WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (DOMDocument *)createDocument:(NSString *)namespaceURI :(NSString *)qualifiedName :(DOMDocumentType *)doctype WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (DOMCSSStyleSheet *)createCSSStyleSheet:(NSString *)title :(NSString *)media WEBKIT_DEPRECATED_MAC(10_4, 10_5);
 @end

@@ -29,11 +29,11 @@
 @class NSString;
 @protocol DOMEventListener;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @protocol DOMEventTarget <NSObject, NSCopying>
-- (void)addEventListener:(NSString *)type listener:(id <DOMEventListener>)listener useCapture:(BOOL)useCapture NS_AVAILABLE_MAC(10_5);
-- (void)removeEventListener:(NSString *)type listener:(id <DOMEventListener>)listener useCapture:(BOOL)useCapture NS_AVAILABLE_MAC(10_5);
+- (void)addEventListener:(NSString *)type listener:(id <DOMEventListener>)listener useCapture:(BOOL)useCapture WEBKIT_AVAILABLE_MAC(10_5);
+- (void)removeEventListener:(NSString *)type listener:(id <DOMEventListener>)listener useCapture:(BOOL)useCapture WEBKIT_AVAILABLE_MAC(10_5);
 - (BOOL)dispatchEvent:(DOMEvent *)event;
-- (void)addEventListener:(NSString *)type :(id <DOMEventListener>)listener :(BOOL)useCapture NS_DEPRECATED_MAC(10_4, 10_5);
-- (void)removeEventListener:(NSString *)type :(id <DOMEventListener>)listener :(BOOL)useCapture NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)addEventListener:(NSString *)type :(id <DOMEventListener>)listener :(BOOL)useCapture WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (void)removeEventListener:(NSString *)type :(id <DOMEventListener>)listener :(BOOL)useCapture WEBKIT_DEPRECATED_MAC(10_4, 10_5);
 @end

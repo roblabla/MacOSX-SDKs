@@ -1,5 +1,5 @@
-.\" Copyright (c) 2015 Apple Inc. All rights reserved.
-.Dd December 3, 2015
+.\" Copyright (c) 2015 - 2018 Apple Inc. All rights reserved.
+.Dd March 6, 2018
 .Dt FSCK_APFS 8
 .Os "Mac OS X"
 .Sh NAME
@@ -9,6 +9,9 @@
 .Nm fsck_apfs
 .Op Fl q | n | y
 .Op Fl l
+.Op Fl s
+.Op Fl S
+.Op Fl o
 .Ar device
 .Sh DESCRIPTION
 .Pp
@@ -24,14 +27,10 @@ Because of inconsistencies between the block device and the buffer
 cache, the raw device should always be used.
 .Pp
 In its current state, fsck_apfs checks the integrity of various container
-data structures. We do not check for overlapping allocations.
+data structures.
 .Pp
 The options are as follows:
 .Bl -hang -offset indent
-.It Fl l
-Lock down the file system for a verify-only check.  This makes it
-possible to check a file system that is currently mounted, although no
-repairs can be made.
 .It Fl q
 Causes
 .Nm
@@ -40,6 +39,17 @@ to quickly check whether the volume is `clean'.
 Never attempt to repair any damage that is found.
 .It Fl y
 Always attempt to repair any damage that is found.
+.It Fl l
+Enable live verification mode. This makes it possible to check an APFS
+container which is currently mounted read-write, although no
+repairs can be made.
+.It Fl s
+Print space verification summary.
+.It Fl S
+Skip iteration of snapshots (top-level snapshot structures will still be checked), although no
+repairs can be made.
+.It Fl o
+Repair overallocations; please do not run an older fsck_apfs on newer systems with this option.
 .El
 .Sh EXIT VALUES
 .Nm

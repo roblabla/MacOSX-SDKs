@@ -49,7 +49,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	mach_port_MSG_COUNT
-#define	mach_port_MSG_COUNT	36
+#define	mach_port_MSG_COUNT	37
 #endif	/* mach_port_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -563,6 +563,19 @@ kern_return_t mach_port_space_basic_info
 	ipc_info_space_basic_t *basic_info
 );
 
+/* Routine mach_port_special_reply_port_reset_link */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t mach_port_special_reply_port_reset_link
+(
+	ipc_space_t task,
+	mach_port_name_t name,
+	boolean_t *srp_lost_link
+);
+
 __END_DECLS
 
 /********************** Caution **************************/
@@ -1052,6 +1065,18 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_port_name_t name;
+	} __Request__mach_port_special_reply_port_reset_link_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__mach_port_subsystem__defined */
 
 /* union of all requests */
@@ -1095,6 +1120,7 @@ union __RequestUnion__mach_port_subsystem {
 	__Request__mach_port_guard_t Request_mach_port_guard;
 	__Request__mach_port_unguard_t Request_mach_port_unguard;
 	__Request__mach_port_space_basic_info_t Request_mach_port_space_basic_info;
+	__Request__mach_port_special_reply_port_reset_link_t Request_mach_port_special_reply_port_reset_link;
 };
 #endif /* !__RequestUnion__mach_port_subsystem__defined */
 /* typedefs for all replies */
@@ -1578,6 +1604,19 @@ union __RequestUnion__mach_port_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		boolean_t srp_lost_link;
+	} __Reply__mach_port_special_reply_port_reset_link_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__mach_port_subsystem__defined */
 
 /* union of all replies */
@@ -1621,6 +1660,7 @@ union __ReplyUnion__mach_port_subsystem {
 	__Reply__mach_port_guard_t Reply_mach_port_guard;
 	__Reply__mach_port_unguard_t Reply_mach_port_unguard;
 	__Reply__mach_port_space_basic_info_t Reply_mach_port_space_basic_info;
+	__Reply__mach_port_special_reply_port_reset_link_t Reply_mach_port_special_reply_port_reset_link;
 };
 #endif /* !__RequestUnion__mach_port_subsystem__defined */
 
@@ -1661,7 +1701,8 @@ union __ReplyUnion__mach_port_subsystem {
     { "mach_port_destruct", 3232 },\
     { "mach_port_guard", 3233 },\
     { "mach_port_unguard", 3234 },\
-    { "mach_port_space_basic_info", 3235 }
+    { "mach_port_space_basic_info", 3235 },\
+    { "mach_port_special_reply_port_reset_link", 3236 }
 #endif
 
 #ifdef __AfterMigUserHeader

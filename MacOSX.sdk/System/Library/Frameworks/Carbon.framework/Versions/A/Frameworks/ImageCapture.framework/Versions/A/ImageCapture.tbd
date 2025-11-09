@@ -1,12 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 7721ED2A-CEFE-3943-9AA4-B0DA8EC2B2FC', 'x86_64: 518046AE-5BFE-32A3-962F-558C1130A9F5' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 47915C3C-DED4-3E0C-9155-6B130FFF89BB' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/ImageCapture.framework/Versions/A/ImageCapture
 current-version: 5
 parent-umbrella: Carbon
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _ICACloseSession, _ICAConvertJPEGDataToICADataInPlace, _ICAConvertTIFFDataToICADataInPlace, 
                        _ICACopyMatchingDeviceDictionaries, _ICACopyObjectData, _ICACopyObjectPropertyDictionary, 
                        _ICACopyObjectThumbnail, _ICACopyParameterBlockPtrForAsyncCall, 
@@ -25,21 +25,20 @@ exports:
                        _ICAGetPropertyRefCon, _ICAGetRootOfObject, _ICAGetRootOfProperty, 
                        _ICAGetSInt16ValueFromDict, _ICAGetSInt32ValueFromDict, _ICAGetSInt64ValueFromDict, 
                        _ICAGetUTCDateFromDateCString, _ICAGetUTCDateFromSeconds, 
-                       _ICAGetUTCDateFromSecondsSince1904, _ICAImportImage, _ICALaunchImageCaptureExtension, 
-                       _ICALoadDeviceModule, _ICAObjectSendMessage, _ICAOpenSession, 
-                       _ICARegisterEventNotification, _ICARegisterForEventNotification, 
-                       _ICAScannerCloseSession, _ICAScannerGetParameters, _ICAScannerInitialize, 
-                       _ICAScannerOpenSession, _ICAScannerSetParameters, _ICAScannerStart, 
-                       _ICAScannerStatus, _ICASetBehaviorFlags, _ICASetICAObjectInDict, 
-                       _ICASetLongValueInDict, _ICASetObjectRefCon, _ICASetPropertyData, 
-                       _ICASetPropertyRefCon, _ICASetSInt16ValueInDict, _ICASetSInt32ValueInDict, 
-                       _ICASetSInt64ValueInDict, _ICASetUTF8StringInDict, _ICASharedMemoryCreate, 
-                       _ICASharedMemoryDestroy, _ICASharedMemoryMap, _ICASharedMemoryUnmap, 
-                       _ICAShowDeviceBrowser, _ICAUnloadDeviceModule, _ICAUpdateDeviceDictionary, 
-                       _ICAUploadFile, _ICDBulkNewObject, _ICDBulkNewProperty, _ICDDeviceNotification, 
+                       _ICAGetUTCDateFromSecondsSince1904, _ICAImportImage, _ICALoadDeviceModule, 
+                       _ICAObjectSendMessage, _ICAOpenSession, _ICARegisterEventNotification, 
+                       _ICARegisterForEventNotification, _ICAScannerCloseSession, 
+                       _ICAScannerGetParameters, _ICAScannerInitialize, _ICAScannerOpenSession, 
+                       _ICAScannerSetParameters, _ICAScannerStart, _ICAScannerStatus, 
+                       _ICASetBehaviorFlags, _ICASetICAObjectInDict, _ICASetLongValueInDict, 
+                       _ICASetObjectRefCon, _ICASetPropertyData, _ICASetPropertyRefCon, 
+                       _ICASetSInt16ValueInDict, _ICASetSInt32ValueInDict, _ICASetSInt64ValueInDict, 
+                       _ICASetUTF8StringInDict, _ICASharedMemoryCreate, _ICASharedMemoryDestroy, 
+                       _ICASharedMemoryMap, _ICASharedMemoryUnmap, _ICAShowDeviceBrowser, 
+                       _ICAUnloadDeviceModule, _ICAUpdateDeviceDictionary, _ICAUploadFile, 
+                       _ICDBulkNewObject, _ICDBulkNewProperty, _ICDDeviceNotification, 
                        _ICDDeviceRegister, _ICDDeviceUnRegister, _ICDDisposeObject, 
-                       _ICDDisposeProperty, _ICDNewObject, _ICDNewProperty, __ICGetPIDForProcess, 
-                       __ICRegisterForProcessDeath, _kICAAddMetaDataToFinderCommentKey, 
+                       _ICDDisposeProperty, _ICDNewObject, _ICDNewProperty, _kICAAddMetaDataToFinderCommentKey, 
                        _kICAAdjustCreationDateKey, _kICAAudioCodecsKey, _kICABIPVersionKey, 
                        _kICABluetoothAddressKey, _kICABluetoothTransportType, _kICABonjourServiceNameKey, 
                        _kICABonjourServiceTypeKey, _kICABonjourTXTRecordKey, _kICACreateCustomIconKey, 

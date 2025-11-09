@@ -32,9 +32,9 @@ enum {
     DOM_MODIFICATION = 1,
     DOM_ADDITION = 2,
     DOM_REMOVAL = 3
-} NS_ENUM_AVAILABLE_MAC(10_4);
+} WEBKIT_ENUM_DEPRECATED_MAC(10_4, 10_14);
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMMutationEvent : DOMEvent
 @property (readonly, strong) DOMNode *relatedNode;
 @property (readonly, copy) NSString *prevValue;
@@ -43,9 +43,9 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (readonly, copy) NSString *attrName;
 @property (readonly) unsigned short attrChange;
 
-- (void)initMutationEvent:(NSString *)type canBubble:(BOOL)canBubble cancelable:(BOOL)cancelable relatedNode:(DOMNode *)relatedNode prevValue:(NSString *)prevValue newValue:(NSString *)newValue attrName:(NSString *)attrName attrChange:(unsigned short)attrChange NS_AVAILABLE_MAC(10_5);
+- (void)initMutationEvent:(NSString *)type canBubble:(BOOL)canBubble cancelable:(BOOL)cancelable relatedNode:(DOMNode *)relatedNode prevValue:(NSString *)prevValue newValue:(NSString *)newValue attrName:(NSString *)attrName attrChange:(unsigned short)attrChange WEBKIT_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMMutationEvent (DOMMutationEventDeprecated)
-- (void)initMutationEvent:(NSString *)type :(BOOL)canBubble :(BOOL)cancelable :(DOMNode *)relatedNode :(NSString *)prevValue :(NSString *)newValue :(NSString *)attrName :(unsigned short)attrChange NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)initMutationEvent:(NSString *)type :(BOOL)canBubble :(BOOL)cancelable :(DOMNode *)relatedNode :(NSString *)prevValue :(NSString *)newValue :(NSString *)attrName :(unsigned short)attrChange WEBKIT_DEPRECATED_MAC(10_4, 10_5);
 @end

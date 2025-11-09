@@ -477,7 +477,7 @@ typedef CFIndex                         CSIdentityQueryEvent;
  *    info:
  *      Any other information you want passed to the callback function
  */
-typedef CALLBACK_API_C( void , CSIdentityQueryReceiveEventCallback )(CSIdentityQueryRef query, CSIdentityQueryEvent event, CFArrayRef identities, CFErrorRef error, void *info);
+typedef void (*CSIdentityQueryReceiveEventCallback)(CSIdentityQueryRef query, CSIdentityQueryEvent event, CFArrayRef identities, CFErrorRef error, void *info);
 
 /*
  *  CSIdentityQueryClientContext

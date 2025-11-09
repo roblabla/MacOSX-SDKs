@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, AVDepthDataQuality) {
     AVDepthDataQualityLow    = 0,
     AVDepthDataQualityHigh   = 1,
-} NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
 
 /*
  @enum AVDepthDataAccuracy
@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger, AVDepthDataQuality) {
 typedef NS_ENUM(NSInteger, AVDepthDataAccuracy) {
     AVDepthDataAccuracyRelative    = 0,
     AVDepthDataAccuracyAbsolute    = 1,
-} NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
 
 @class AVDepthDataInternal;
 
@@ -71,7 +71,7 @@ typedef NS_ENUM(NSInteger, AVDepthDataAccuracy) {
  
     When capturing depth data from a camera using AVCaptureDepthDataOutput, AVDepthData objects are delivered to your AVCaptureDepthDataOutputDelegate in a streaming fashion. When capturing depth data along with photos using AVCapturePhotoOutput, depth data is delivered to your AVCapturePhotoCaptureDelegate as a property of an AVCapturePhoto (see -[AVCapturePhotoCaptureDelegate captureOutput:didFinishProcessingPhoto:error:]). When working with image files containing depth information, AVDepthData may be instantiated using information obtained from ImageIO. When editing images containing depth information, derivative AVDepthData objects may be instantiated reflecting the edits that have been performed.
  */
-NS_CLASS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED
 @interface AVDepthData : NSObject
 {
 @private
@@ -93,7 +93,7 @@ AV_INIT_UNAVAILABLE
     An AVDepthData instance, or nil if the auxiliary data info dictionary was malformed.
  
  @discussion
-    When using ImageIO framework's CGImageSource API to read from a HEIF, JPEG, or DNG file containing depth data, AVDepthData can be instantiated using the result of CGImageSourceCopyAuxiliaryDataInfoAtIndex, which returns a CFDictionary of primitive map information.
+    When using ImageIO framework's CGImageSource API to read from a HEIF or JPEG file containing depth data, AVDepthData can be instantiated using the result of CGImageSourceCopyAuxiliaryDataInfoAtIndex, which returns a CFDictionary of primitive map information.
  */
 + (nullable instancetype)depthDataFromDictionaryRepresentation:(NSDictionary *)imageSourceAuxDataInfoDictionary error:(NSError * _Nullable * _Nullable)outError;
 
@@ -165,7 +165,7 @@ AV_INIT_UNAVAILABLE
     A dictionary of CGImageDestination compatible depth information, or nil if the auxDataType is unsupported.
  
  @discussion
-    When using ImageIO framework's CGImageDestination API to write depth data to a HEIF, JPEG, or DNG file, you may use this method to generate a dictionary of primitive map information consumed by CGImageDestinationAddAuxiliaryDataInfo.
+    When using ImageIO framework's CGImageDestination API to write depth data to a HEIF or JPEG file, you may use this method to generate a dictionary of primitive map information consumed by CGImageDestinationAddAuxiliaryDataInfo.
  */
 - (nullable NSDictionary *)dictionaryRepresentationForAuxiliaryDataType:(NSString * _Nullable * _Nullable)outAuxDataType;
 

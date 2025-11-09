@@ -16,10 +16,10 @@ API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13))
 
 // This resolution result is for when the app extension wants to tell Siri to proceed, with a given INCallDestinationType. The resolvedValue can be different than the original INCallDestinationType. This allows app extensions to apply business logic constraints.
 // Use +notRequired to continue with a 'nil' value.
-+ (instancetype)successWithResolvedValue:(INCallDestinationType)resolvedValue NS_SWIFT_NAME(success(with:));
++ (instancetype)successWithResolvedCallDestinationType:(INCallDestinationType)resolvedCallDestinationType NS_SWIFT_NAME(success(with:));
 
 // This resolution result is to ask Siri to confirm if this is the value with which the user wants to continue.
-+ (instancetype)confirmationRequiredWithValueToConfirm:(INCallDestinationType)valueToConfirm NS_SWIFT_NAME(confirmationRequired(with:));
++ (instancetype)confirmationRequiredWithCallDestinationTypeToConfirm:(INCallDestinationType)callDestinationTypeToConfirm NS_SWIFT_NAME(confirmationRequired(with:));
 
 @end
 

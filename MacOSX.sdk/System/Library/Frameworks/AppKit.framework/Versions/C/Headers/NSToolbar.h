@@ -1,7 +1,7 @@
 /*
 	NSToolbar.h
 	Application Kit
-	Copyright (c) 2000-2017, Apple Inc.
+	Copyright (c) 2000-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,8 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * NSToolbarIdentifier NS_EXTENSIBLE_STRING_ENUM;
-typedef NSString * NSToolbarItemIdentifier NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSToolbarIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
+typedef NSString * NSToolbarItemIdentifier NS_TYPED_EXTENSIBLE_ENUM;
 
 @class NSToolbarItem, NSWindow, NSView;
 @protocol NSToolbarDelegate;
@@ -32,25 +32,25 @@ typedef NS_ENUM(NSUInteger, NSToolbarSizeMode) {
 
 @interface NSToolbar : NSObject {
 @private
-    NSToolbarIdentifier			_toolbarIdentifier;
+    NSToolbarIdentifier			_toolbarIdentifier APPKIT_IVAR;
 
-    NSMutableArray *		_currentItems;
-    NSMutableArray *		_currentItemIdentifiers;
+    NSMutableArray *		_currentItems APPKIT_IVAR;
+    NSMutableArray *		_currentItemIdentifiers APPKIT_IVAR;
 
-    NSView *_fullScreenAccessoryView;
+    NSView *_fullScreenAccessoryView APPKIT_IVAR;
     struct {
         unsigned int _hideBaselineOverride:1;
         unsigned int _reserved:31;
-    } _tbFlags2;
+    } _tbFlags2 APPKIT_IVAR;
     
-    NSToolbarItemIdentifier			_selectedItemIdentifier;
-    void *		_metrics;
+    NSToolbarItemIdentifier			_selectedItemIdentifier APPKIT_IVAR;
+    void *		_metrics APPKIT_IVAR;
 
-    __weak id			_delegate;
-    NSWindow *			_logicalWindow;
-    id				_configPalette;
-    id 				_toolbarView;
-    NSInteger			_syncPostEnabledCount;
+    __weak id			_delegate APPKIT_IVAR;
+    NSWindow *			_logicalWindow APPKIT_IVAR;
+    id				_configPalette APPKIT_IVAR;
+    id 				_toolbarView APPKIT_IVAR;
+    NSInteger			_syncPostEnabledCount APPKIT_IVAR;
     
     struct __tbFlags {
 	unsigned int allowsUserCustomization:1;
@@ -83,10 +83,10 @@ typedef NS_ENUM(NSUInteger, NSToolbarSizeMode) {
         unsigned int autovalidatesItemsDisabled:1;
         unsigned int inAutovalidation:1;
 	unsigned int loadedMetrics:1;
-    } _tbFlags;
+    } _tbFlags APPKIT_IVAR;
 
-    NSInteger			_customizationSheetWidth;
-    id				_tbReserved;
+    NSInteger			_customizationSheetWidth APPKIT_IVAR;
+    id				_tbReserved APPKIT_IVAR;
 }
 
 /* The identifier is used to form the toolbar's autosave name.  Also, toolbars with the same identifier are implicitly synchronized so that they maintain the same state. */
@@ -137,6 +137,13 @@ typedef NS_ENUM(NSUInteger, NSToolbarSizeMode) {
 
 /* Allows you to access the current visible items (non clipped). */
 @property (nullable, readonly, copy) NSArray<__kindof NSToolbarItem *> *visibleItems;
+
+/*
+ The item with the specified identifier will be positioned in the absolute center of the Toolbar relative to the window assuming space allows. When the window shrinks, the highest priority is to have the most items visible. Thus, centering is broken first (it'll be pushed off to the left/right as necessary). Next, items will be shrunk down a little at a time towards their min size, at the same rate. Finally, items will be removed based on their visibility priority.
+ 
+ This property is archived.
+ */
+@property (nullable, copy) NSToolbarItemIdentifier centeredItemIdentifier NS_AVAILABLE_MAC(10_14);
 
 
 // ----- Autosaving The Configuration -----
@@ -196,30 +203,22 @@ APPKIT_EXTERN NSNotificationName NSToolbarWillAddItemNotification;
 APPKIT_EXTERN NSNotificationName NSToolbarDidRemoveItemNotification;
 
 
-
 @interface NSToolbar(NSDeprecated)
 
-
-/* 
- NOTE: this is soft deprecated in 10.10 and hard deprecated in 10.13. Instead NSTitlebarAccessoryViewController should be used with NSWindow.
- 
+/*
  Sets the toolbar full screen accessory view.  When entering full screen, the accessory view is removed from the window if necessary, and attaches underneath the toolbar.  When leaving full screen, the accessory view is returned to the window, if it was in the window previously. To customize this latter behavior, you can implement the NSWindow delegate method windowWillExitFullScreen:.
  */
-@property (nullable, strong) NSView *fullScreenAccessoryView NS_DEPRECATED_MAC(10_7, 10_13, "Use NSTitlebarAccessoryViewController on NSWindow instead");
+@property (nullable, strong) NSView *fullScreenAccessoryView NS_DEPRECATED_MAC(10_7, 10_13, "Use NSTitlebarAccessoryViewController with NSWindow instead");
 
-/* 
- NOTE: this is soft deprecated in 10.10 and hard deprecated in 10.13. Instead NSTitlebarAccessoryViewController should be used with NSWindow. NSTitlebarAccessoryViewController has a fullScreenMinHeight property. The fullScreenMaxHeight is implied by the view's height.
-
- 
+/*
  The following properties control the minimum and maximum height of the accessory view. The minimum height is used when the menu bar is hidden, and the max height to a fully revealed menu bar. During the reveal, the accessory view's frame is interpolated between its minimum and maximum height.
  
  If the minimum height is zero (which it is by default), the accessory view is not resized; instead a special transition is used to reveal it with the menu bar. This simplifies the accessory view's task, because it does not have to handle the case of being set to zero height. To create a fixed-height accessory view, set the min and max height to be equal.
  
  By default, the min height is 0 and the max height gets set to the height of the accessory view's frame when it is set.
  */
-@property CGFloat fullScreenAccessoryViewMinHeight NS_DEPRECATED_MAC(10_7, 10_13, "Use NSTitlebarAccessoryViewController on NSWindow instead");
-@property CGFloat fullScreenAccessoryViewMaxHeight NS_DEPRECATED_MAC(10_7, 10_13, "Use NSTitlebarAccessoryViewController on NSWindow instead");
-
+@property CGFloat fullScreenAccessoryViewMinHeight NS_DEPRECATED_MAC(10_7, 10_13, "Use NSTitlebarAccessoryViewController and its fullScreenMinHeight property with NSWindow instead.");
+@property CGFloat fullScreenAccessoryViewMaxHeight NS_DEPRECATED_MAC(10_7, 10_13, "Use NSTitlebarAccessoryViewController with NSWindow instead. The max height of a titlebar accessory is implied by its view's height.");
 
 @end
 

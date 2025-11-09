@@ -1,7 +1,7 @@
 /*
         NSSpellServer.h
         Application Kit
-        Copyright (c) 1990-2017, Apple Inc.
+        Copyright (c) 1990-2018, Apple Inc.
         All rights reserved.
 */
 

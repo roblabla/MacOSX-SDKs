@@ -1,9 +1,9 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 132C0535-C4A0-3E0C-96E1-FAE27FA57512' ]
+uuids:           [ 'x86_64: FDE839C9-3842-3DC3-BB3A-5A7CAB1615A7' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/PhotoLibraryPrivate.framework/Versions/A/Frameworks/ShareServicesCore.framework/Versions/A/ShareServicesCore
-current-version: 3201.9.160
+current-version: 3411.5.190
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _IPXAssetCountsByType, _IPXLocalizationKeyForAssets, _IPXReachabilityTestHost, 
@@ -26,20 +26,20 @@ exports:
                        _kSBLShareKitWindowKey, _kSBLShareKitiCloudActionKey, _kSBLSharedPhotoStreamManagerErrorDomain, 
                        _kSBLSharesServicesManagerErrorDomain, _kSBLSharesServicesManagerLogDomain, 
                        _kSBLiCloudPhotosDisabledKey, _kShareKitJpegQuality ]
-    objc-classes:    [ _PLCloudAssetChangeNotification, _PLCloudCommentsChangeNotification, 
-                       _PLCloudFeedAssetsEntry, _PLCloudFeedCommentsEntry, _PLCloudFeedEntriesChangeNotification, 
-                       _PLCloudFeedEntry, _SBLAutoUploadTask, _SBLCPLStatus, _SBLCloudFeedEntriesManager, 
-                       _SBLCloudPhotoLibraryManager, _SBLCloudPhotoLibraryManagerWorkItem, 
-                       _SBLCloudPhotoLibraryThumbnailManager, _SBLCreateSharedPhotoStreamRequest, 
-                       _SBLDownloadProvidersOperation, _SBLFullfillProvidersOperation, 
-                       _SBLGIFCreator, _SBLLivePhotoBundleCreator, _SBLMutableCreateSharedPhotoStreamRequest, 
-                       _SBLMutablePostVersionsToSharedPhotoStreamRequest, _SBLMutableSharedPhotoStreamSettings, 
-                       _SBLMyPhotoStreamItemReference, _SBLMyPhotoStreamManager, 
-                       _SBLPostVersionsAsset, _SBLPostVersionsToSharedPhotoStreamRequest, 
-                       _SBLPrepareProvidersOperation, _SBLProvidersOperation, _SBLReconnectProvidersOperation, 
-                       _SBLShareKitManager, _SBLShareKitSession, _SBLShareKitShareableItem, 
-                       _SBLShareServicesManager, _SBLShareServicesManagerInitializationWorkItem, 
-                       _SBLSharedPhotoStreamDuplicateDetector, _SBLSharedPhotoStreamManager, 
-                       _SBLSharedPhotoStreamSettings, _SharingServiceString ]
-    objc-ivars:      [ _SBLShareServicesManagerInitializationWorkItem._shareServicesManager ]
+    objc-classes:    [ PLCloudAssetChangeNotification, PLCloudCommentsChangeNotification, 
+                       PLCloudFeedAssetsEntry, PLCloudFeedCommentsEntry, PLCloudFeedEntriesChangeNotification, 
+                       PLCloudFeedEntry, SBLAutoUploadTask, SBLCPLStatus, SBLCloudFeedEntriesManager, 
+                       SBLCloudPhotoLibraryManager, SBLCloudPhotoLibraryManagerWorkItem, 
+                       SBLCloudPhotoLibraryThumbnailManager, SBLCreateSharedPhotoStreamRequest, 
+                       SBLDownloadProvidersOperation, SBLFullfillProvidersOperation, 
+                       SBLGIFCreator, SBLLivePhotoBundleCreator, SBLMutableCreateSharedPhotoStreamRequest, 
+                       SBLMutablePostVersionsToSharedPhotoStreamRequest, SBLMutableSharedPhotoStreamSettings, 
+                       SBLMyPhotoStreamItemReference, SBLMyPhotoStreamManager, SBLPostVersionsAsset, 
+                       SBLPostVersionsToSharedPhotoStreamRequest, SBLPrepareProvidersOperation, 
+                       SBLProvidersOperation, SBLReconnectProvidersOperation, SBLShareKitManager, 
+                       SBLShareKitSession, SBLShareKitShareableItem, SBLShareServicesManager, 
+                       SBLShareServicesManagerInitializationWorkItem, SBLSharedPhotoStreamDuplicateDetector, 
+                       SBLSharedPhotoStreamManager, SBLSharedPhotoStreamSettings, 
+                       SharingServiceString ]
+    objc-ivars:      [ SBLShareServicesManagerInitializationWorkItem._shareServicesManager ]
 ...

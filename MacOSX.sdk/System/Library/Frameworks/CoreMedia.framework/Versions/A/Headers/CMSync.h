@@ -3,7 +3,7 @@
  
 	Framework:  CoreMedia
  
-	Copyright © 2006-2015 Apple Inc. All rights reserved.
+	Copyright © 2006-2018 Apple Inc. All rights reserved.
  
 */
 
@@ -164,8 +164,8 @@ CMClockGetTime(
 CM_EXPORT OSStatus
 CMClockGetAnchorTime( 
 		CMClockRef CM_NONNULL clock,
-		CMTime * CM_NONNULL outClockTime,
-		CMTime * CM_NONNULL outReferenceClockTime )
+		CMTime * CM_NONNULL clockTimeOut,
+		CMTime * CM_NONNULL referenceClockTimeOut )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
@@ -259,7 +259,7 @@ CMTimebaseCopyMasterClock(
 	@discussion
 		Only returns NULL if there was an error (such as timebase == NULL).
 */
-CM_EXPORT CMClockOrTimebaseRef CM_NULLABLE
+CM_EXPORT CMClockOrTimebaseRef CM_NONNULL
 CMTimebaseCopyMaster(
 		CMTimebaseRef CM_NONNULL timebase )
 			__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
@@ -268,7 +268,7 @@ CMTimebaseCopyMaster(
 	@function	CMTimebaseCopyUltimateMasterClock
 	@abstract	Returns the master clock that is the master of all of a timebase's master timebases.
 */
-CM_EXPORT CMClockRef CM_NULLABLE
+CM_EXPORT CMClockRef CM_NONNULL
 CMTimebaseCopyUltimateMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
 			__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
@@ -283,7 +283,7 @@ CMTimebaseCopyUltimateMasterClock(
 CM_EXPORT CMTimebaseRef CM_NULLABLE
 CMTimebaseGetMasterTimebase(
 		CMTimebaseRef CM_NONNULL timebase )
-			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_8, __MAC_10_11, __IPHONE_6_0, __IPHONE_9_0);
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyMasterTimebase", macosx(10.8, 10.11), ios(6.0, 9.0));
 
 /*!
 	@function	CMTimebaseGetMasterClock
@@ -295,7 +295,7 @@ CMTimebaseGetMasterTimebase(
 CM_EXPORT CMClockRef CM_NULLABLE
 CMTimebaseGetMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_8, __MAC_10_11, __IPHONE_6_0, __IPHONE_9_0);
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyMasterClock", macosx(10.8, 10.11), ios(6.0, 9.0));
 
 /*!
 	@function	CMTimebaseGetMaster
@@ -308,7 +308,7 @@ CMTimebaseGetMasterClock(
 CM_EXPORT CMClockOrTimebaseRef CM_NULLABLE
 CMTimebaseGetMaster(
 		CMTimebaseRef CM_NONNULL timebase )
-			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_8, __MAC_10_11, __IPHONE_6_0, __IPHONE_9_0);
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyMaster", macosx(10.8, 10.11), ios(6.0, 9.0));
 
 /*!
 	@function	CMTimebaseGetUltimateMasterClock
@@ -319,7 +319,7 @@ CMTimebaseGetMaster(
 CM_EXPORT CMClockRef CM_NULLABLE
 CMTimebaseGetUltimateMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_8, __MAC_10_11, __IPHONE_6_0, __IPHONE_9_0);
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyUltimateMasterClock", macosx(10.8, 10.11), ios(6.0, 9.0));
 		
 /*!
 	@function	CMTimebaseGetTime
@@ -390,8 +390,8 @@ CMTimebaseGetRate(
 CM_EXPORT OSStatus 
 CMTimebaseGetTimeAndRate( 
 		CMTimebaseRef CM_NONNULL timebase,
-		CMTime * CM_NULLABLE outTime,
-		Float64 * CM_NULLABLE outRate )
+		CMTime * CM_NULLABLE timeOut,
+		Float64 * CM_NULLABLE rateOut )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!

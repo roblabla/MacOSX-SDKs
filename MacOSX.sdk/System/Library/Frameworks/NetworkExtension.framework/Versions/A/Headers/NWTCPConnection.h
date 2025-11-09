@@ -2,8 +2,10 @@
 //  NWTCPConnection.h
 //  Network
 //
-//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2016, 2018 Apple Inc. All rights reserved.
 //
+
+#ifndef __NE_TAPI__
 
 #ifndef __NE_INDIRECT__
 #error "Please import the NetworkExtension module instead of this file directly."
@@ -49,13 +51,13 @@ typedef NS_ENUM(NSInteger, NWTCPConnectionState) {
 	 *		the cancellation method.
 	 */
 	NWTCPConnectionStateCancelled		= 5,
-} NS_AVAILABLE(10_11, 9_0);
+} API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @interface NWTCPConnection
  * @discussion Establish TCP connections to an endpoint, and send and receive data on the TCP connection.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NWTCPConnection : NSObject
 
 /*!
@@ -79,19 +81,19 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param connection The original connection from which the caller will upgrade
  * @return An initialized NWTCPConnection
  */
-- (instancetype)initWithUpgradeForConnection:(NWTCPConnection *)connection NS_AVAILABLE(10_11, 9_0);
+- (instancetype)initWithUpgradeForConnection:(NWTCPConnection *)connection API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property state
  * @discussion The status of the connection. Use KVO to watch this property to get updates.
  */
-@property (readonly) NWTCPConnectionState state NS_AVAILABLE(10_11, 9_0);
+@property (readonly) NWTCPConnectionState state API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property viable
  * @discussion YES if the connection can read and write data, NO otherwise. Use KVO to watch this property.
  */
-@property (readonly, getter=isViable) BOOL viable NS_AVAILABLE(10_11, 9_0);
+@property (readonly, getter=isViable) BOOL viable API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property hasBetterPath
@@ -100,13 +102,13 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  *		be done using the convenience upgrade initializer method.
  *		Use KVO to watch this property to get updates.
  */
-@property (readonly) BOOL hasBetterPath NS_AVAILABLE(10_11, 9_0);
+@property (readonly) BOOL hasBetterPath API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property endpoint
  * @discussion The destination endpoint with which this connection was created.
  */
-@property (readonly) NWEndpoint *endpoint NS_AVAILABLE(10_11, 9_0);
+@property (readonly) NWEndpoint *endpoint API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property connectedPath
@@ -117,19 +119,19 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * 		for this connection only. As a result, some underlying properties might change in time and
  * 		might not reflect the path for other connections that might be established at different times.
  */
-@property (readonly, nullable) NWPath *connectedPath NS_AVAILABLE(10_11, 9_0);
+@property (readonly, nullable) NWPath *connectedPath API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property localAddress
  * @discussion The IP address endpoint from which the connection was connected.
  */
-@property (readonly, nullable) NWEndpoint *localAddress NS_AVAILABLE(10_11, 9_0);
+@property (readonly, nullable) NWEndpoint *localAddress API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property remoteAddress
  * @discussion The IP address endpoint to which the connection was connected.
  */
-@property (readonly, nullable) NWEndpoint *remoteAddress NS_AVAILABLE(10_11, 9_0);
+@property (readonly, nullable) NWEndpoint *remoteAddress API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property txtRecord
@@ -137,32 +139,30 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * 		with the Bonjour service is available via this property. Beware that the value comes from
  * 		the network. Care must be taken when parsing this potentially malicious value.
  */
-@property (readonly, nullable) NSData *txtRecord NS_AVAILABLE(10_11, 9_0);
+@property (readonly, nullable) NSData *txtRecord API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property error
  * @discussion The connection-wide error property indicates any fatal error that occurred while
  * 		processing the connection or performing data reading or writing.
  */
-@property (readonly, nullable) NSError *error NS_AVAILABLE(10_11, 9_0);
+@property (readonly, nullable) NSError *error API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method cancel:
  * @discussion Cancel the connection. This will clean up the resources associated with this object
  * 		and transition this object to NWTCPConnectionStateCancelled state.
  */
-- (void)cancel NS_AVAILABLE(10_11, 9_0);
+- (void)cancel API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method readLength:completionHandler:
  * @discussion Read "length" number of bytes. See readMinimumLength:maximumLength:completionHandler:
  * 		for a complete discussion of the callback behavior.
  * @param length The exact number of bytes the application wants to read
- *		for a complete discussion of the callback behavior.
- * @param length The exact number of bytes the caller wants to read
  * @param completion The completion handler to be invoked when there is data to read or an error occurred
  */
-- (void)readLength:(NSUInteger)length completionHandler:(void (^)(NSData * __nullable data, NSError * __nullable error))completion NS_AVAILABLE(10_11, 9_0);
+- (void)readLength:(NSUInteger)length completionHandler:(void (^)(NSData * __nullable data, NSError * __nullable error))completion API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method readMinimumLength:maximumLength:completionHandler:
@@ -189,7 +189,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param maximum The maximum number of bytes the caller wants to read
  * @param completion The completion handler to be invoked when there is data to read or an error occurred
  */
-- (void)readMinimumLength:(NSUInteger)minimum maximumLength:(NSUInteger)maximum completionHandler:(void (^)(NSData * __nullable data, NSError * __nullable error))completion NS_AVAILABLE(10_11, 9_0);
+- (void)readMinimumLength:(NSUInteger)minimum maximumLength:(NSUInteger)maximum completionHandler:(void (^)(NSData * __nullable data, NSError * __nullable error))completion API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method write:completionHandler:
@@ -199,7 +199,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param completion The completion handler to be invoked when the data content has been written or an error has occurred.
  * 		If the error is nil, the write succeeded and the caller can write more data.
  */
-- (void)write:(NSData *)data completionHandler:(void (^)(NSError * __nullable error))completion NS_AVAILABLE(10_11, 9_0);
+- (void)write:(NSData *)data completionHandler:(void (^)(NSError * __nullable error))completion API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method writeClose:
@@ -208,7 +208,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * 		When the connection's read side and write side are closed, the connection is considered
  * 		disconnected and will transition to the appropriate state.
  */
-- (void)writeClose NS_AVAILABLE(10_11, 9_0);
+- (void)writeClose API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 
@@ -282,3 +282,5 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 NS_ASSUME_NONNULL_END
 
 #endif // __NWTCPConnection_h_
+
+#endif // __NE_TAPI__

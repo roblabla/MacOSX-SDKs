@@ -1,7 +1,7 @@
 /*
 	NSTextField.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,8 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSTextField : NSControl <NSUserInterfaceValidations, NSAccessibilityNavigableStaticText>
 {
     /*All instance variables are private*/
-    id _delegate;
-    SEL _errorAction;
+    id _delegate APPKIT_IVAR;
+    SEL _errorAction APPKIT_IVAR;
 }
 
 @property (nullable, copy) NSString *placeholderString NS_AVAILABLE_MAC(10_10);

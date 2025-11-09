@@ -1,7 +1,7 @@
 /*
     NSTableView.h
     Application Kit
-    Copyright (c) 1995-2017, Apple Inc.
+    Copyright (c) 1995-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -20,27 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NSTableViewDelegate, NSTableViewDataSource;
 
 typedef struct __TvFlags {
-#ifdef __BIG_ENDIAN__
-    unsigned int        allowsColumnReordering:1;
-    unsigned int        allowsColumnResizing:1;
-    unsigned int        hasBlurBackgroundViews:1;
-    unsigned int        allowsEmptySelection:1;
-    unsigned int        allowsMultipleSelection:1;
-    unsigned int        allowsColumnSelection:1;
-    unsigned int        selectionType:2;
-    unsigned int        allowGapRow:1;
-    unsigned int        compareWidthWithSuperview:2;
-    unsigned int        delegateWillDisplayCell:1;
-    unsigned int        delegateShouldEditTableColumn:1;
-    unsigned int        delegateShouldSelectRow:1;
-    unsigned int        delegateShouldSelectTableColumn:1;
-    unsigned int        delegateSelectionShouldChangeInTableView:1;
-    unsigned int        oldAutoresizesAllColumnsToFit:1;
-    unsigned int        dataSourceSetObjectValue:1;
-    unsigned int        selectionPostingDisableCount:7;
-    unsigned int        movedPostingDisableCount:6;
-    unsigned int        refusesFirstResponder:1;
-#else
     unsigned int        refusesFirstResponder:1;
     unsigned int        movedPostingDisableCount:6;
     unsigned int        selectionPostingDisableCount:7;
@@ -60,7 +39,6 @@ typedef struct __TvFlags {
     unsigned int        hasBlurBackgroundViews:1;
     unsigned int        allowsColumnResizing:1;
     unsigned int        allowsColumnReordering:1;
-#endif
 } _TvFlags;
 
 /* In drag and drop, used to specify a dropOperation.  For example, given a table with N rows (numbered with row 0 at the top visually), a row of N-1 and operation of NSTableViewDropOn would specify a drop on the last row.  To specify a drop below the last row, one would use a row of N and NSTableViewDropAbove for the operation.
@@ -158,39 +136,39 @@ typedef NS_ENUM(NSInteger, NSTableRowActionEdge) {
     NSTableRowActionEdgeTrailing, // Action buttons that appear on the trailing (or right) edge of an NSTableRowView
 } NS_ENUM_AVAILABLE_MAC(10_11);
 
-typedef NSString * NSTableViewAutosaveName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSTableViewAutosaveName NS_SWIFT_BRIDGED_TYPEDEF;
 
 @interface NSTableView : NSControl <NSUserInterfaceValidations, NSTextViewDelegate, NSDraggingSource, NSAccessibilityTable>
 {
     /* All instance variables are private */
-    NSTableHeaderView   *_headerView;
-    NSView              *_cornerView;
-    NSMutableArray      *_tableColumns;
-    NSCell              *_editingCell;
+    NSTableHeaderView   *_headerView APPKIT_IVAR;
+    NSView              *_cornerView APPKIT_IVAR;
+    NSMutableArray      *_tableColumns APPKIT_IVAR;
+    NSCell              *_editingCell APPKIT_IVAR;
     // NOTE: accessing the _delegate or _dataSource ivars directly is not supported! They are opaque objects, and may not represent the real delegate.
-    id                  _delegate;
-    id                  _dataSource;
-    NSSize              _intercellSpacing;
-    CGFloat             _rowHeight;
-    NSInteger           _lastSelectedColumn;
-    NSInteger           _lastSelectedRow;
-    NSInteger           _editingRow;
-    NSInteger           _editingColumn;
-    NSMutableIndexSet   *_selectedColumns;
-    NSMutableIndexSet   *_selectedRows;
-    id                  _columnDragInfoX;
-    NSColor             *_backgroundColor;
-    NSColor             *_gridColor;
-    id                  _rowDataX;
-    id                  _reserved3;
-    NSIndexSet          *_oldSelection;
-    SEL                 _doubleAction;
-    NSRect              _rectOfLastColumn;
-    NSInteger           _lastCachedRectColumn;
-    NSRect              _unused2;
-    NSInteger           _unused3;
-    _TvFlags            _tvFlags;
-    id                  _reserved;
+    id                  _delegate APPKIT_IVAR;
+    id                  _dataSource APPKIT_IVAR;
+    NSSize              _intercellSpacing APPKIT_IVAR;
+    CGFloat             _rowHeight APPKIT_IVAR;
+    NSInteger           _lastSelectedColumn APPKIT_IVAR;
+    NSInteger           _lastSelectedRow APPKIT_IVAR;
+    NSInteger           _editingRow APPKIT_IVAR;
+    NSInteger           _editingColumn APPKIT_IVAR;
+    NSMutableIndexSet   *_selectedColumns APPKIT_IVAR;
+    NSMutableIndexSet   *_selectedRows APPKIT_IVAR;
+    id                  _columnDragInfoX APPKIT_IVAR;
+    NSColor             *_backgroundColor APPKIT_IVAR;
+    NSColor             *_gridColor APPKIT_IVAR;
+    id                  _rowDataX APPKIT_IVAR;
+    id                  _reserved3 APPKIT_IVAR;
+    NSIndexSet          *_oldSelection APPKIT_IVAR;
+    SEL                 _doubleAction APPKIT_IVAR;
+    NSRect              _rectOfLastColumn APPKIT_IVAR;
+    NSInteger           _lastCachedRectColumn APPKIT_IVAR;
+    NSRect              _unused2 APPKIT_IVAR;
+    NSInteger           _unused3 APPKIT_IVAR;
+    _TvFlags            _tvFlags APPKIT_IVAR;
+    id                  _reserved APPKIT_IVAR;
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;
@@ -254,7 +232,7 @@ typedef NSString * NSTableViewAutosaveName NS_EXTENSIBLE_STRING_ENUM;
 @property (readonly) NSTableViewRowSizeStyle effectiveRowSizeStyle NS_AVAILABLE_MAC(10_7);
 
 
-/* Get and set the rowHeight. The value must be greater than 0. Calling -setRowHeight: with a non-pixel aligning (fractional) value will be forced to a pixel aligning (integral) value. For variable row height tableViews (ones that have the delegate implement -tableView:heightOfRow:), -rowHeight will be used to draw alternating rows past the last row in the tableView. The actual -rectOfRow: is equal to the -rowHeight plus the intercellSpacing.height. The default value is 17.0 for applications linked on 10.5 and higher (the height acceptable for [NSFont systemFontSize]). The default value is 16.0 for 10.4 and lower.
+/* Get and set the rowHeight. The value must be greater than 0. Calling -setRowHeight: with a non-pixel aligning (fractional) value will be forced to a pixel aligning (integral) value. For variable row height tableViews (ones that have the delegate implement -tableView:heightOfRow:), -rowHeight will be used to draw alternating rows past the last row in the tableView. The actual -rectOfRow: is equal to the -rowHeight plus the intercellSpacing.height. The default value is 17.0 for applications linked on 10.5 and higher (the height acceptable for [NSFont systemFontSize]). The default value is 16.0 for 10.4 and lower. Group rows will follow the system defined height.
  */
 @property CGFloat rowHeight;
 
@@ -703,7 +681,7 @@ typedef NS_OPTIONS(NSUInteger, NSTableViewAnimationOptions) {
 - (void)tableView:(NSTableView *)tableView didDragTableColumn:(NSTableColumn *)tableColumn;
 
 /* Optional - Variable Row Heights
-    Implement this method to support a table with varying row heights. The height returned by this method should not include intercell spacing and must be greater than zero. Performance Considerations: For large tables in particular, you should make sure that this method is efficient. NSTableView may cache the values this method returns, but this should NOT be depended on, as all values may not be cached. To signal a row height change, call -noteHeightOfRowsWithIndexesChanged:. For a given row, the same row height should always be returned until -noteHeightOfRowsWithIndexesChanged: is called, otherwise unpredicable results will happen. NSTableView automatically invalidates its entire row height cache in -reloadData, and -noteNumberOfRowsChanged.
+    Implement this method to support a table with varying row heights. The height returned by this method should not include intercell spacing. Returning a height of -1 will default to the rowHeight of the tableView for normal rows, and the system defined height for group rows. Performance Considerations: For large tables in particular, you should make sure that this method is efficient. NSTableView may cache the values this method returns, but this should NOT be depended on, as all values may not be cached. To signal a row height change, call -noteHeightOfRowsWithIndexesChanged:. For a given row, the same row height should always be returned until -noteHeightOfRowsWithIndexesChanged: is called, otherwise unpredicable results will happen. NSTableView automatically invalidates its entire row height cache in -reloadData, and -noteNumberOfRowsChanged.
 */
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row;
 

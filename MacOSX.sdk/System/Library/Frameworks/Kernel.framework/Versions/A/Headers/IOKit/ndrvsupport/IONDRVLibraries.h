@@ -300,8 +300,6 @@ enum {
     #define nil NULL
 #endif
 
-typedef ResType                         VSLGestaltType;
-
 enum {
   clutType                      = 0,    /*0 if lookup table*/
   fixedType                     = 1,    /*1 if fixed table*/
@@ -333,9 +331,6 @@ enum {
 enum {
     kVSLClamshellStateGestaltType = 'clam',
 };
-
-OSStatus
-VSLGestalt( VSLGestaltType selector, UInt32 * response );
 
 OSErr
 VSLNewInterruptService(

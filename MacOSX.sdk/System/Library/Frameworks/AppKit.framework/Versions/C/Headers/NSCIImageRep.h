@@ -1,7 +1,7 @@
 /*
         NSCIImageRep.h
         Application Kit
-        Copyright (c) 2003-2017, Apple Inc.
+        Copyright (c) 2003-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSCIImageRep : NSImageRep
 {
-    CIImage *_ciImage;
+    CIImage *_ciImage APPKIT_IVAR;
 }
 + (instancetype)imageRepWithCIImage:(CIImage *)image;
 - (instancetype)initWithCIImage:(CIImage *)image;

@@ -8,21 +8,52 @@
 #ifndef __IMAGEIOBASE__
 #define __IMAGEIOBASE__
 
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <float.h>
+
 #include <CoreFoundation/CoreFoundation.h>
+#include <os/availability.h>
+#include <TargetConditionals.h>
 
-#if defined(IMAGEIO_BUILDING_IMAGEIO)
 
-#   define IMAGEIO_AVAILABLE_STARTING(_mac,_iphone)
-#   define IMAGEIO_AVAILABLE_BUT_DEPRECATED(_mac,_macDep,_iphone,_iphoneDep)
+#ifdef IMAGEIO_BUILDING_IMAGEIO
 
-#else /* !defined(IMAGEIO_BUILDING_IMAGEIO) */
+# define __OSX_AVAILABLE_STARTING(m0,i)
+# define __OSX_AVAILABLE_BUT_DEPRECATED(m0,m1,i0,i1)
+# define IMAGEIO_AVAILABLE_STARTING(...)
+# define IMAGEIO_AVAILABLE_BUT_DEPRECATED(...)
+# define IMAGEIO_UNAVAILABLE_DESKTOP
+# define IMAGEIO_UNAVAILABLE_EMBEDDED
 
-#   include <Availability.h>
-#   define IMAGEIO_AVAILABLE_STARTING __OSX_AVAILABLE_STARTING
-#   define IMAGEIO_AVAILABLE_BUT_DEPRECATED __OSX_AVAILABLE_BUT_DEPRECATED
+# define _iio_Nullable
+# define _iio_Nonnull
 
-#endif /* !defined(IMAGEIO_BUILDING_IMAGEIO) */
+#else
 
+#define GET_IMAGEIO_AVAIL_MACRO(_1,_2,_3,_4,NAME,...) NAME
+#define IMAGEIO_AVAILABLE_STARTING(...) GET_IMAGEIO_AVAIL_MACRO(__VA_ARGS__, IMAGEIO_AVAILABLE_STARTING4, IMAGEIO_AVAILABLE_STARTING3, IMAGEIO_AVAILABLE_STARTING2, IMAGEIO_AVAILABLE_STARTING1)(__VA_ARGS__)
+#define IMAGEIO_AVAILABLE_STARTING1(m) API_AVAILABLE(macos(m))
+#define IMAGEIO_AVAILABLE_STARTING2(m,i) API_AVAILABLE(macos(m), ios(i))
+#define IMAGEIO_AVAILABLE_STARTING3(m,i,t) API_AVAILABLE(macos(m), ios(i), tvos(t))
+#define IMAGEIO_AVAILABLE_STARTING4(m,i,t,w) API_AVAILABLE(macos(m), ios(i), tvos(t), watchos(w))
+
+#define GET_IMAGEIO_AVAIL_BUT_DEPR_MACRO(_1,_2,_3,_4,_5,NAME,...) NAME
+#define IMAGEIO_AVAILABLE_BUT_DEPRECATED(...) GET_IMAGEIO_AVAIL_BUT_DEPR_MACRO(__VA_ARGS__, IMAGEIO_AVAILABLE_BUT_DEPRECATED5, IMAGEIO_AVAILABLE_BUT_DEPRECATED4, IMAGEIO_AVAILABLE_BUT_DEPRECATED3, IMAGEIO_AVAILABLE_BUT_DEPRECATED2, IMAGEIO_AVAILABLE_BUT_DEPRECATED1)(__VA_ARGS__)
+#define IMAGEIO_AVAILABLE_BUT_DEPRECATED1(m0)
+#define IMAGEIO_AVAILABLE_BUT_DEPRECATED2(m0,m1) API_DEPRECATED("No longer supported", macos(m0,m1))
+#define IMAGEIO_AVAILABLE_BUT_DEPRECATED3(m0,m1,w) API_DEPRECATED(w, macos(m0,m1))
+#define IMAGEIO_AVAILABLE_BUT_DEPRECATED4(m0,m1,i0,i1) API_DEPRECATED("No longer supported", macos(m0,m1), ios(i0,i1))
+#define IMAGEIO_AVAILABLE_BUT_DEPRECATED5(m0,m1,i0,i1,w) API_DEPRECATED(w, macos(m0,m1), ios(i0,i1))
+
+#define IMAGEIO_UNAVAILABLE_DESKTOP API_UNAVAILABLE(macos)
+#define IMAGEIO_UNAVAILABLE_EMBEDDED API_UNAVAILABLE(ios, tvos, watchos)
+
+# define _iio_Nullable _Nullable
+# define _iio_Nonnull _Nonnull
+
+#endif
 
 #if !defined(IMAGEIO_EXTERN)
 #   if defined(__WIN32__)
@@ -59,7 +90,7 @@
 #   endif
 #endif
 
-#if (TARGET_OS_MAC && !TARGET_IPHONE_SIMULATOR) || TARGET_OS_EMBEDDED
+#if ((TARGET_OS_MAC || TARGET_OS_IPHONE) && !TARGET_OS_SIMULATOR)
 #    define IIO_HAS_IOSURFACE 1
 #else
 #    define IIO_HAS_IOSURFACE 0

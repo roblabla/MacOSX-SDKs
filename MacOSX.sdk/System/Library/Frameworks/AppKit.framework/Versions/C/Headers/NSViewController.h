@@ -1,11 +1,12 @@
 /*
 	NSViewController.h
 	Application Kit
-	Copyright (c) 2006-2017, Apple Inc.
+	Copyright (c) 2006-2018, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
+#import <AppKit/NSKeyValueBinding.h>
 #import <AppKit/NSNib.h>
 #import <AppKit/NSNibDeclarations.h>
 #import <AppKit/NSResponder.h>
@@ -43,23 +44,23 @@ typedef NS_OPTIONS(NSUInteger, NSViewControllerTransitionOptions) {
 } NS_ENUM_AVAILABLE_MAC(10_10);
 
 NS_CLASS_AVAILABLE(10_5, NA)
-@interface NSViewController : NSResponder <NSCoding, NSSeguePerforming, NSUserInterfaceItemIdentification> {
+@interface NSViewController : NSResponder <NSEditor, NSSeguePerforming, NSUserInterfaceItemIdentification> {
 @private
-    NSNibName _nibName;
-    NSBundle *_nibBundle;
-    id _representedObject;
-    NSString *_title;
-    IBOutlet NSView *view;
-    NSArray *_topLevelObjects;
-    NSPointerArray *_editors;
-    id _autounbinder;
-    NSString *_designNibBundleIdentifier;
-    id __privateData;
-    unsigned int _viewIsAppearing:1;
-    unsigned int _delayViewDidAppear:1;
-    unsigned int _isContentViewController:1;
-    unsigned int _shouldDirtyLayoutOnSizeChanges:1;
-    unsigned int _reserved:28 __unused;
+    NSNibName _nibName APPKIT_IVAR;
+    NSBundle *_nibBundle APPKIT_IVAR;
+    id _representedObject APPKIT_IVAR;
+    NSString *_title APPKIT_IVAR;
+    NSView *view APPKIT_IVAR;
+    NSArray *_topLevelObjects APPKIT_IVAR;
+    NSPointerArray *_editors APPKIT_IVAR;
+    id _autounbinder APPKIT_IVAR;
+    NSString *_designNibBundleIdentifier APPKIT_IVAR;
+    id __privateData APPKIT_IVAR;
+    unsigned int _viewIsAppearing:1 APPKIT_IVAR;
+    unsigned int _delayViewDidAppear:1 APPKIT_IVAR;
+    unsigned int _isContentViewController:1 APPKIT_IVAR;
+    unsigned int _shouldDirtyLayoutOnSizeChanges:1 APPKIT_IVAR;
+    unsigned int _reserved:28 __unused APPKIT_IVAR;
 }
 
 /* The designated initializer. The specified nib should typically have the class of the file's owner set to NSViewController, or a subclass of yours, with the "view" outlet connected to a view. If you pass in a nil nib name then -nibName will return nil. -loadView can be used to assign a view before -view is invoked. If you pass in a nil bundle then -nibBundle will return nil and -loadView will interpret it using the same rules as -[NSNib initWithNibNamed:bundle:].
@@ -88,7 +89,7 @@ On 10.10 and higher, a nil nibName can be used, and NSViewController will automa
 
 /* The default implementation of the getter first invokes [self loadView] if the view hasn't been set yet. After -loadView is called, -viewDidLoad will be called. The setter can be used to assign a view that's created in a different manner than what -view's default implementation would do.
 */
-@property (strong) NSView *view;
+@property (strong) IBOutlet NSView *view;
 
 /* The default implementation of this method invokes [self nibName] and [self nibBundle] and then uses the NSNib class to load the nib with this object as the file's owner. If the "view" outlet of the file's owner in the nib is properly connected, the regular nib loading machinery will send this object a -setView: message. You can override this method to customize how nib loading is done, including merely adding new behavior immediately before or immediately after nib loading done by the default implementation. One can also use viewDidLoad to modify things after the view has been loaded. You should not invoke this method from other objects unless you take care to avoid redundant invocations; NSViewController's default implement can handle them but overrides in subclasses might not. (Typically other objects should instead invoke -view and let the view controller do whatever it takes to fulfill the request.) In general, you should not call this method, and let NSViewController call it when needed. If you need it called, simply call [viewController view].
  
@@ -96,7 +97,7 @@ Prior to 10.10, -loadView would not have well defined behavior if [self nibName]
 */
 - (void)loadView;
 
-/* Conformance to KVB's NSEditor informal protocol. The default implementations of these methods pass on the message to each registered editor, which are typically controls in the nib that are bound to the nib file's owner. You can override these methods to customize what is done when your view's presentation to the user is about to end because, for example, the user has selected another of a set of views or hit a panel's OK button (committing time) or because the user has hit a panel's Cancel button (discarding time). This class also conforms to KVB's NSEditorRegistration informal protocol, but you're not encouraged to override those methods.
+/* Conformance to KVB's NSEditor informal protocol. The default implementations of these methods pass on the message to each registered editor, which are typically controls in the nib that are bound to the nib file's owner. You can override these methods to customize what is done when your view's presentation to the user is about to end because, for example, the user has selected another of a set of views or hit a panel's OK button (committing time) or because the user has hit a panel's Cancel button (discarding time). This class also conforms to KVB's NSEditorRegistration protocol, but you're not encouraged to override those methods.
 */
 - (void)commitEditingWithDelegate:(nullable id)delegate didCommitSelector:(nullable SEL)didCommitSelector contextInfo:(nullable void *)contextInfo;
 - (BOOL)commitEditing;

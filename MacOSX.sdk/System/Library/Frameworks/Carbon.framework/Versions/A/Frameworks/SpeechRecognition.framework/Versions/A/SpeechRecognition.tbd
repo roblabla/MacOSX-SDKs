@@ -1,12 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: ECC5BC84-D93A-3B78-9E2F-259DA4F0F845', 'x86_64: 32682444-12CF-3C4A-8411-D9A3C19B5788' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 1C38B9CB-DD45-3A7B-9D4C-631855A4EE32' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition
 objc-constraint: none
 parent-umbrella: Carbon
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     allowable-clients: [ AppKit, LatentSemanticMapping ]
     symbols:         [ _DisposeSRCallBackUPP, _InvokeSRCallBackUPP, _NewSRCallBackUPP, 
                        _SFSAvatarCaptionVisible, _SFSCopyActiveRecognizer, _SFSCopyCurrentAvatarIdentifier, 

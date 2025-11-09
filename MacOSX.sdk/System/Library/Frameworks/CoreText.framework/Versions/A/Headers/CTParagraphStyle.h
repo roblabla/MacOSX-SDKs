@@ -2,7 +2,7 @@
  *  CTParagraphStyle.h
  *  CoreText
  *
- *  Copyright (c) 2004-2017 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2018 Apple Inc. All rights reserved.
  *
  */
 
@@ -18,8 +18,9 @@
 #define __CTPARAGRAPHSTYLE__
 
 #include <CoreText/CTDefines.h>
-#include <CoreFoundation/CFArray.h>
-#include <CoreGraphics/CGBase.h>
+
+#include <CoreFoundation/CoreFoundation.h>
+#include <CoreGraphics/CoreGraphics.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
@@ -417,7 +418,7 @@ typedef struct CTParagraphStyleSetting
 */
 
 CTParagraphStyleRef CTParagraphStyleCreate(
-    const CTParagraphStyleSetting * __nullable settings,
+    const CTParagraphStyleSetting * _Nullable settings,
     size_t settingCount ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 

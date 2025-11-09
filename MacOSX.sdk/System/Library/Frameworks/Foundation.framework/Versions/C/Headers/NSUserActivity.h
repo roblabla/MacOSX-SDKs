@@ -1,15 +1,18 @@
 /*	NSUserActivity.h
-	Copyright (c) 2014-2017, Apple Inc. All rights reserved.
+	Copyright (c) 2014-2018, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSObjCRuntime.h>
 
 #if __OBJC2__
 
-@class NSArray, NSDictionary<KeyType, ObjectType>, NSSet<ObjectType>, NSString, NSURL, NSInputStream, NSOutputStream, NSError;
+NS_ASSUME_NONNULL_BEGIN
+
+@class NSArray, NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSSet<ObjectType>, NSString, NSURL, NSInputStream, NSOutputStream, NSError;
 @protocol NSUserActivityDelegate;
 
-NS_ASSUME_NONNULL_BEGIN
+typedef NSString* NSUserActivityPersistentIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 
 /* NSUserActivity encapsulates the state of a user activity in an application on a particular device, in a way that allows the same activity to be continued on another device in a corresponding application from the same developer. Examples of user user activities include editing a document, viewing a web page, or watching a video.
 */
@@ -92,6 +95,13 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 
 /* Set to YES if this user activity should be eligible for indexing for any user of this application, on any device, or NO if the activity contains private or sensitive information or which would not be useful to other users if indexed.  The activity must also have requiredUserActivityKeys or a webpageURL */
 @property (getter=isEligibleForPublicIndexing) BOOL eligibleForPublicIndexing API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(10.0));
+
+@property (getter=isEligibleForPrediction) BOOL eligibleForPrediction API_AVAILABLE( ios(12.0), watchos(5.0) ) API_UNAVAILABLE( macos, tvos );
+
+@property (copy, nullable) NSUserActivityPersistentIdentifier persistentIdentifier  API_AVAILABLE( ios(12.0), watchos(5.0) ) API_UNAVAILABLE( macos, tvos );
+
++(void) deleteSavedUserActivitiesWithPersistentIdentifiers:(NSArray<NSUserActivityPersistentIdentifier>*) persistentIdentifiers completionHandler:(void(^)(void))handler API_AVAILABLE( ios(12.0), watchos(5.0) ) API_UNAVAILABLE( macos, tvos );
++(void) deleteAllSavedUserActivitiesWithCompletionHandler:(void(^)(void))handler API_AVAILABLE( ios(12.0), watchos(5.0) ) API_UNAVAILABLE( macos, tvos );
 
 @end
 

@@ -2,7 +2,7 @@
 //  GKFriendRequestComposeViewController.h
 //  Game Center
 //
-//  Copyright 2010-2017 Apple Inc. All rights reserved.
+//  Copyright 2010-2018 Apple Inc. All rights reserved.
 //
 
 #if TARGET_OS_IPHONE
@@ -48,10 +48,11 @@ NS_CLASS_DEPRECATED(10_8, 10_12, 4_2, 10_0)
 - (void)addRecipientsWithPlayerIDs:(NSArray<NSString *> *)playerIDs NS_DEPRECATED(10_8, 10_10, 4_2, 8_0, "use addRecipientPlayers:") ;
 - (void)addRecipientsWithEmailAddresses:(NSArray<NSString *> *)emailAddresses;
 
-@property (nonatomic, assign, nullable) id<GKFriendRequestComposeViewControllerDelegate> composeViewDelegate;
+@property (nonatomic, assign, nullable) id<GKFriendRequestComposeViewControllerDelegate> composeViewDelegate NS_DEPRECATED(10_8, 10_12, 4_2, 10_0) ;
 @end
 
 // Optional delegate
+NS_DEPRECATED(10_8, 10_12, 4_2, 10_0) 
 @protocol GKFriendRequestComposeViewControllerDelegate
 // The compose view has finished
 - (void)friendRequestComposeViewControllerDidFinish:(GKFriendRequestComposeViewController *)viewController NS_DEPRECATED(10_8, 10_12, 4_2, 10_0) ;

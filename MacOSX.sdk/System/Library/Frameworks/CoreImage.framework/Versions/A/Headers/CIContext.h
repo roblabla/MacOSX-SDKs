@@ -7,9 +7,9 @@
 #import <CoreImage/CoreImageDefines.h>
 #import <CoreVideo/CoreVideo.h>
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !0)
  #import <OpenGLES/EAGL.h>
-#else
+#elif TARGET_OS_OSX
  #import <OpenGL/CGLTypes.h>
 #endif 
 
@@ -28,43 +28,45 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 
 /* Keys that may be passed in the dictionary while creating contexts: */
 
+typedef NSString * CIContextOption NS_TYPED_ENUM;
+
 /* A CGColorSpaceRef object defining the color space that images are
  * converted to before rendering into the context. */
-CORE_IMAGE_EXPORT NSString * const kCIContextOutputColorSpace;
+CORE_IMAGE_EXPORT CIContextOption const kCIContextOutputColorSpace;
 
 /* A CGColorSpaceRef object defining the color space in which all
  * intermediate operations are performed. */
-CORE_IMAGE_EXPORT NSString * const kCIContextWorkingColorSpace;
+CORE_IMAGE_EXPORT CIContextOption const kCIContextWorkingColorSpace;
 
 /* An NSNumber with a CIFormat value defining the pixel format to use for intermediate buffers.
 * On iOS GPU the supported values for this key are RGBA8 and RGBAh. If not specified RGBA8 us used.
 * On iOS CPU the only supported value for this key is RGBAf. If not specified RGBAf us used.
 * On OSX GPU the supported values for this key are RGBA8, RGBAh and RGBAf. If not specified RGBAh us used.
 * On OSX CPU the supported values for this key are RGBA8, RGBAh and RGBAf. If not specified RGBAh us used. */
-CORE_IMAGE_EXPORT NSString * const kCIContextWorkingFormat NS_AVAILABLE(10_4,8_0);
+CORE_IMAGE_EXPORT CIContextOption const kCIContextWorkingFormat NS_AVAILABLE(10_4,8_0);
 
 /* A boolean NSNumber controlling the quality of affine downsample operations.
  * @YES implies that more quality is desired.
  * On iOS the default value is @NO.
  * On OSX the default value is @YES. */
-CORE_IMAGE_EXPORT NSString * const kCIContextHighQualityDownsample NS_AVAILABLE(10_11,9_0);
+CORE_IMAGE_EXPORT CIContextOption const kCIContextHighQualityDownsample NS_AVAILABLE(10_11,9_0);
 
 /* A boolean NSNumber controlling whether output renders produce alpha-premultiplied pixels.
  * The default value is @YES. */
-CORE_IMAGE_EXPORT NSString * const kCIContextOutputPremultiplied NS_AVAILABLE(10_4,7_0);
+CORE_IMAGE_EXPORT CIContextOption const kCIContextOutputPremultiplied NS_AVAILABLE(10_4,7_0);
 
 /* A boolean NSNumber controlling how intermediate buffers are cached.
  * If @NO, the context will empty intermediates during and after renders.
  * The default value is @YES. */
-CORE_IMAGE_EXPORT NSString * const kCIContextCacheIntermediates NS_AVAILABLE(10_12,10_0);
+CORE_IMAGE_EXPORT CIContextOption const kCIContextCacheIntermediates NS_AVAILABLE(10_12,10_0);
 
 /* An NSNumber with a boolean value. When @YES the context will use
- * software rendering. */
-CORE_IMAGE_EXPORT NSString * const kCIContextUseSoftwareRenderer;
+ * software rendering on macOS. */
+CORE_IMAGE_EXPORT CIContextOption const kCIContextUseSoftwareRenderer;
 
 /* An NSNumber with a boolean value. When @YES the context will use 
  * low priority rendering on the GPU. */
-CORE_IMAGE_EXPORT NSString * const kCIContextPriorityRequestLow NS_AVAILABLE(10_12, 8_0);
+CORE_IMAGE_EXPORT CIContextOption const kCIContextPriorityRequestLow NS_AVAILABLE(10_12, 8_0);
 
 
 #pragma mark - contextWithCGLContext
@@ -75,22 +77,22 @@ CORE_IMAGE_EXPORT NSString * const kCIContextPriorityRequestLow NS_AVAILABLE(10_
  * it's required to be valid for the lifetime of the CIContext.
  * The colorspace should be set to the colorspace of your target otherwise
  * CI will take the colorspace from the CGLContext if available. */
-#if !TARGET_OS_IPHONE
+#if TARGET_OS_OSX
 + (CIContext *)contextWithCGLContext:(CGLContextObj)cglctx
 						 pixelFormat:(nullable CGLPixelFormatObj)pixelFormat
 						  colorSpace:(nullable CGColorSpaceRef)colorSpace
-							 options:(nullable NSDictionary<NSString*,id> *)options
-    NS_AVAILABLE_MAC(10_6);
+							 options:(nullable NSDictionary<CIContextOption, id> *)options
+    CI_GL_DEPRECATED_MAC(10_6,10_14);
 #endif
 
 /* DEPRECATED, please use the method above or if you need this
 * for backward capability, make sure that you specify the colorspace
 * in the options dictionary */
-#if !TARGET_OS_IPHONE
+#if TARGET_OS_OSX
 + (CIContext *)contextWithCGLContext:(CGLContextObj)cglctx
 						 pixelFormat:(nullable CGLPixelFormatObj)pixelFormat
-							 options:(nullable NSDictionary<NSString*,id> *)options
-    NS_DEPRECATED_MAC(10_4,10_6);
+							 options:(nullable NSDictionary<CIContextOption, id> *)options
+    CI_GL_DEPRECATED_MAC(10_4,10_6);
 #endif
 
 
@@ -104,7 +106,7 @@ CORE_IMAGE_EXPORT NSString * const kCIContextPriorityRequestLow NS_AVAILABLE(10_
  * The [context drawImage:...] render methods will render to the CGContext.
  */
 + (CIContext *)contextWithCGContext:(CGContextRef)cgctx
-                            options:(nullable NSDictionary<NSString*,id> *)options
+                            options:(nullable NSDictionary<CIContextOption, id> *)options
     NS_AVAILABLE(10_4,9_0);
 
 
@@ -119,12 +121,12 @@ CORE_IMAGE_EXPORT NSString * const kCIContextPriorityRequestLow NS_AVAILABLE(10_
  * of context.
  */
 
-+ (CIContext *)contextWithOptions:(nullable NSDictionary<NSString*,id> *)options
++ (CIContext *)contextWithOptions:(nullable NSDictionary<CIContextOption, id> *)options
     NS_AVAILABLE(10_4,5_0);
 
 + (CIContext *)context NS_AVAILABLE(10_4,5_0);
 
-- (instancetype)initWithOptions:(nullable NSDictionary<NSString*,id> *)options
+- (instancetype)initWithOptions:(nullable NSDictionary<CIContextOption, id> *)options
 NS_AVAILABLE(10_4,5_0);
 
 - (instancetype)init NS_AVAILABLE(10_4,5_0);
@@ -139,13 +141,13 @@ NS_AVAILABLE(10_4,5_0);
  *
  * The [context drawImage:...] render methods will render to the EAGLContext.
  */
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !0)
 + (CIContext *)contextWithEAGLContext:(EAGLContext *)eaglContext
-    NS_AVAILABLE_IOS(5_0);
+    CI_GL_DEPRECATED_IOS(5_0,12_0);
 
 + (CIContext *)contextWithEAGLContext:(EAGLContext *)eaglContext
-                              options:(nullable NSDictionary<NSString*,id> *)options
-    NS_AVAILABLE_IOS(5_0);
+                              options:(nullable NSDictionary<CIContextOption, id> *)options
+    CI_GL_DEPRECATED_IOS(5_0,12_0);
 #endif
 
 
@@ -157,7 +159,7 @@ NS_AVAILABLE(10_4,5_0);
 + (CIContext *)contextWithMTLDevice:(id<MTLDevice>)device NS_AVAILABLE(10_11,9_0);
 
 + (CIContext *)contextWithMTLDevice:(id<MTLDevice>)device
-                            options:(nullable NSDictionary<NSString*,id> *)options
+                            options:(nullable NSDictionary<CIContextOption, id> *)options
     NS_AVAILABLE(10_11,9_0);
 
 
@@ -165,11 +167,7 @@ NS_AVAILABLE(10_4,5_0);
 
 // The working color space of the CIContext
 // The property will be null if the context was created with color management disabled.
-#if !defined(SWIFT_CLASS_EXTRA) || (defined(SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH) && SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH >= 2)
 @property (nullable, nonatomic, readonly) CGColorSpaceRef workingColorSpace NS_AVAILABLE(10_11,9_0);
-#else
-@property (nonatomic, readonly) CGColorSpaceRef workingColorSpace NS_AVAILABLE(10_11,9_0);
-#endif
 
 // The working pixel format of the CIContext used for intermediate buffers
 @property (nonatomic, readonly) CIFormat workingFormat NS_AVAILABLE(10_11,9_0);
@@ -193,15 +191,9 @@ NS_AVAILABLE(10_4,5_0);
  * the context, then create and return a new CoreGraphics image with
  * the results. The caller is responsible for releasing the returned image.
  * The return value will be null if size is empty or too big. */
-#if !defined(SWIFT_CLASS_EXTRA) || (defined(SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH) && SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH >= 2)
 - (nullable CGImageRef)createCGImage:(CIImage *)image
                             fromRect:(CGRect)fromRect
 CF_RETURNS_RETAINED;
-#else
-- (CGImageRef)createCGImage:(CIImage *)image
-                   fromRect:(CGRect)fromRect
-CF_RETURNS_RETAINED;
-#endif
 
 /* Create a new CGImage from the specified subrect of the image. If
  * non-nil the new image will be created in the specified format and colorspace.
@@ -209,19 +201,11 @@ CF_RETURNS_RETAINED;
  * and must match the specified CIFormat.
  * This will return null if fromRect is empty or infinite or the format isn't supported.
  */
-#if !defined(SWIFT_CLASS_EXTRA) || (defined(SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH) && SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH >= 2)
 - (nullable CGImageRef)createCGImage:(CIImage *)image
                             fromRect:(CGRect)fromRect
                               format:(CIFormat)format
                           colorSpace:(nullable CGColorSpaceRef)colorSpace
 CF_RETURNS_RETAINED;
-#else
-- (CGImageRef)createCGImage:(CIImage *)image
-                   fromRect:(CGRect)fromRect
-                     format:(CIFormat)format
-                 colorSpace:(nullable CGColorSpaceRef)colorSpace
-CF_RETURNS_RETAINED;
-#endif
 
 /* Create a new CGImage from the specified subrect of the image.
  * The new CGImageRef will be created in the specified format and colorspace.
@@ -232,35 +216,20 @@ CF_RETURNS_RETAINED;
  * If deferred is NO, then the CIImage will be rendered once when this method is called.
  * If deferred is YES, then the CIImage will be rendered whenever the CGImage is rendered.
  */
-#if !defined(SWIFT_CLASS_EXTRA) || (defined(SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH) && SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH >= 2)
 - (nullable CGImageRef)createCGImage:(CIImage *)image
                             fromRect:(CGRect)fromRect
                               format:(CIFormat)format
                           colorSpace:(nullable CGColorSpaceRef)colorSpace
                             deferred:(BOOL)deferred
 CF_RETURNS_RETAINED NS_AVAILABLE(10_12,10_0);
-#else
-- (CGImageRef)createCGImage:(CIImage *)image
-                   fromRect:(CGRect)fromRect
-                     format:(CIFormat)format
-                 colorSpace:(nullable CGColorSpaceRef)colorSpace
-                   deferred:(BOOL)deferred
-CF_RETURNS_RETAINED NS_AVAILABLE(10_12,10_0);
-#endif
 
 /* Create a CoreGraphics layer object suitable for creating content for
  * subsequently rendering into this CI context. The 'info' parameter is
  * passed into CGLayerCreate () as the auxiliaryInfo dictionary.
  * This will return null if size is empty or infinite. */
-#if !defined(SWIFT_CLASS_EXTRA) || (defined(SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH) && SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH >= 2)
 - (nullable CGLayerRef)createCGLayerWithSize:(CGSize)size
                                         info:(nullable CFDictionaryRef)info
 CF_RETURNS_RETAINED NS_DEPRECATED_MAC(10_4,10_11);
-#else
-- (CGLayerRef)createCGLayerWithSize:(CGSize)size
-                               info:(nullable CFDictionaryRef)info
-CF_RETURNS_RETAINED NS_DEPRECATED_MAC(10_4,10_11);
-#endif
 
 /* Render 'image' to the given bitmap.
  * The 'data' parameter must point to at least rowBytes*floor(bounds.size.height) bytes.
@@ -361,30 +330,27 @@ toCVPixelBuffer:(CVPixelBufferRef)buffer
  * shared with other GL resources.  The return value will be null if index is 
  * out of range (e.g. if the device has no offline GPUs).
  */
-#if !TARGET_OS_IPHONE
-#if !defined(SWIFT_CLASS_EXTRA) || (defined(SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH) && SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH >= 2)
-+ (nullable CIContext *)contextForOfflineGPUAtIndex:(unsigned int)index NS_AVAILABLE_MAC(10_10);
+#if TARGET_OS_OSX
++ (nullable CIContext *)contextForOfflineGPUAtIndex:(unsigned int)index CI_GL_DEPRECATED_MAC(10_10,10_14);
 + (nullable CIContext *)contextForOfflineGPUAtIndex:(unsigned int)index
                                          colorSpace:(nullable CGColorSpaceRef)colorSpace
-                                            options:(nullable NSDictionary<NSString*,id> *)options
-                                      sharedContext:(nullable CGLContextObj)sharedContext NS_AVAILABLE_MAC(10_10);
-#else
-+(CIContext *)contextForOfflineGPUAtIndex:(unsigned int)index NS_AVAILABLE_MAC(10_10);
-+(CIContext *)contextForOfflineGPUAtIndex:(unsigned int)index
-                               colorSpace:(nullable CGColorSpaceRef)colorSpace
-                                  options:(nullable NSDictionary<NSString*,id> *)options
-                            sharedContext:(nullable CGLContextObj)sharedContext NS_AVAILABLE_MAC(10_10);
-#endif
+                                            options:(nullable NSDictionary<CIContextOption, id> *)options
+                                      sharedContext:(nullable CGLContextObj)sharedContext CI_GL_DEPRECATED_MAC(10_10,10_14);
 #endif
 
 
 @end
 
+typedef NSString * CIImageRepresentationOption NS_TYPED_ENUM; 
+
 @interface CIContext (ImageRepresentation)
 
-CORE_IMAGE_EXPORT NSString * const kCIImageRepresentationAVDepthData NS_AVAILABLE(10_13,11_0);
-CORE_IMAGE_EXPORT NSString * const kCIImageRepresentationDepthImage NS_AVAILABLE(10_13,11_0);
-CORE_IMAGE_EXPORT NSString * const kCIImageRepresentationDisparityImage NS_AVAILABLE(10_13,11_0);
+CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationAVDepthData NS_AVAILABLE(10_13,11_0);
+CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationDepthImage NS_AVAILABLE(10_13,11_0);
+CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationDisparityImage NS_AVAILABLE(10_13,11_0);
+
+CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationAVPortraitEffectsMatte NS_AVAILABLE(10_14,12_0);
+CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationPortraitEffectsMatteImage NS_AVAILABLE(10_14,12_0);
 
 /* Render a CIImage to TIFF data. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
@@ -393,27 +359,29 @@ CORE_IMAGE_EXPORT NSString * const kCIImageRepresentationDisparityImage NS_AVAIL
 - (nullable NSData*) TIFFRepresentationOfImage:(CIImage*)image
                                         format:(CIFormat)format
                                     colorSpace:(CGColorSpaceRef)colorSpace
-                                       options:(NSDictionary*)options NS_AVAILABLE(10_12,10_0);
+                                       options:(NSDictionary<CIImageRepresentationOption, id>*)options NS_AVAILABLE(10_12,10_0);
 
 /* Render a CIImage to JPEG data. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome. */
 /* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
 /* kCIImageRepresentationAVDepthData, kCIImageRepresentationDepthImage, */
-/* kCIImageRepresentationDisparityImage. */
+/* kCIImageRepresentationDisparityImage, kCIImageRepresentationAVPortraitEffectsMatte, */
+/* kCIImageRepresentationPortraitEffectsMatteImage. */
 - (nullable NSData*) JPEGRepresentationOfImage:(CIImage*)image
                                     colorSpace:(CGColorSpaceRef)colorSpace
-                                       options:(NSDictionary*)options NS_AVAILABLE(10_12,10_0);
+                                       options:(NSDictionary<CIImageRepresentationOption, id>*)options NS_AVAILABLE(10_12,10_0);
 
 /* Render a CIImage to HEIF data. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
 /* and must match the specified CIFormat. */
 /* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
 /* kCIImageRepresentationAVDepthData, kCIImageRepresentationDepthImage, */
-/* kCIImageRepresentationDisparityImage. */
+/* kCIImageRepresentationDisparityImage, kCIImageRepresentationAVPortraitEffectsMatte, */
+/* kCIImageRepresentationPortraitEffectsMatteImage. */
 - (nullable NSData*) HEIFRepresentationOfImage:(CIImage*)image
                                         format:(CIFormat)format
                                     colorSpace:(CGColorSpaceRef)colorSpace
-                                       options:(NSDictionary*)options NS_AVAILABLE_IOS(11_0);
+                                       options:(NSDictionary<CIImageRepresentationOption, id>*)options NS_AVAILABLE(10_13_4,11_0);
 
 /* Render a CIImage to PNG data. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
@@ -422,7 +390,7 @@ CORE_IMAGE_EXPORT NSString * const kCIImageRepresentationDisparityImage NS_AVAIL
 - (nullable NSData*) PNGRepresentationOfImage:(CIImage*)image
                                        format:(CIFormat)format
                                    colorSpace:(CGColorSpaceRef)colorSpace
-                                      options:(NSDictionary*)options NS_AVAILABLE(10_13,11_0);
+                                      options:(NSDictionary<CIImageRepresentationOption, id>*)options NS_AVAILABLE(10_13,11_0);
 
 /* Render a CIImage to TIFF file. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
@@ -432,7 +400,7 @@ CORE_IMAGE_EXPORT NSString * const kCIImageRepresentationDisparityImage NS_AVAIL
                                   toURL:(NSURL*)url
                                  format:(CIFormat)format
                              colorSpace:(CGColorSpaceRef)colorSpace 
-                                options:(NSDictionary*)options
+                                options:(NSDictionary<CIImageRepresentationOption, id>*)options
                                   error:(NSError **)errorPtr NS_AVAILABLE(10_12,10_0);
 
 /* Render a CIImage to PNG file. Image must have a finite non-empty extent. */
@@ -443,18 +411,19 @@ CORE_IMAGE_EXPORT NSString * const kCIImageRepresentationDisparityImage NS_AVAIL
                                  toURL:(NSURL*)url
                                 format:(CIFormat)format
                             colorSpace:(CGColorSpaceRef)colorSpace
-                               options:(NSDictionary*)options
+                               options:(NSDictionary<CIImageRepresentationOption, id>*)options
                                  error:(NSError **)errorPtr NS_AVAILABLE(10_13,11_0);
 
 /* Render a CIImage to JPEG file. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome. */
 /* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
 /* kCIImageRepresentationAVDepthData, kCIImageRepresentationDepthImage, */
-/* kCIImageRepresentationDisparityImage. */
+/* kCIImageRepresentationDisparityImage, kCIImageRepresentationAVPortraitEffectsMatte, */
+/* kCIImageRepresentationPortraitEffectsMatteImage. */
 - (BOOL) writeJPEGRepresentationOfImage:(CIImage*)image
                                   toURL:(NSURL*)url
                              colorSpace:(CGColorSpaceRef)colorSpace
-                                options:(NSDictionary*)options
+                                options:(NSDictionary<CIImageRepresentationOption, id>*)options
                                   error:(NSError **)errorPtr NS_AVAILABLE(10_12,10_0);
 
 /* Render a CIImage to HEIF file. Image must have a finite non-empty extent. */
@@ -462,15 +431,56 @@ CORE_IMAGE_EXPORT NSString * const kCIImageRepresentationDisparityImage NS_AVAIL
 /* and must match the specified CIFormat. */
 /* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
 /* kCIImageRepresentationAVDepthData, kCIImageRepresentationDepthImage, */
-/* kCIImageRepresentationDisparityImage. */
+/* kCIImageRepresentationDisparityImage, kCIImageRepresentationAVPortraitEffectsMatte, */
+/* kCIImageRepresentationPortraitEffectsMatteImage. */
 - (BOOL) writeHEIFRepresentationOfImage:(CIImage*)image
                                   toURL:(NSURL*)url
                                  format:(CIFormat)format
                              colorSpace:(CGColorSpaceRef)colorSpace
-                                options:(NSDictionary*)options
-                                  error:(NSError **)errorPtr NS_AVAILABLE_IOS(11_0);
+                                options:(NSDictionary<CIImageRepresentationOption, id>*)options
+                                  error:(NSError **)errorPtr NS_AVAILABLE(10_13_4,11_0);
 
 
 @end
+
+@interface CIContext (CIDepthBlurEffect)
+
+/* Create and CIFilter instance for 'image' that can be used to apply the CIDepthBlurEffect.
+ *
+ * The receiver context is user to render the image in order to get the facial landmarks
+ *
+ * The 'options' parameter is a key value/pair reserved for future use.
+ *
+ */
+
+- (nullable CIFilter *) depthBlurEffectFilterForImageURL:(NSURL *)url options:(nullable NSDictionary *)options NS_AVAILABLE(10_14,12_0);
+
+/* This is the same as the method above expect it uses NSData to instantiate the image data
+ * instead of the contents of a NSURL.
+ *
+ */
+
+- (nullable CIFilter *) depthBlurEffectFilterForImageData:(NSData *)data options:(nullable NSDictionary *)options NS_AVAILABLE(10_14,12_0);
+
+
+/* Create and CIFilter instance for 'image' that can be used to apply the CIDepthBlurEffect.
+ *
+ * The receiver context is user to render the image in order to get the facial landmarks
+ *
+ * The 'orientation' parameter should be CGImagePropertyOrientation enum value
+ * as defined in the TIFF spec.
+ *
+ * The 'options' parameter is a key value/pair reserved for future use.
+ *
+ */
+
+- (nullable CIFilter *) depthBlurEffectFilterForImage:(CIImage *)image
+                                       disparityImage:(CIImage *)disparityImage
+                                 portraitEffectsMatte:(nullable CIImage *)portraitEffectsMatte
+                                          orientation:(CGImagePropertyOrientation)orientation
+                                              options:(nullable NSDictionary *)options NS_AVAILABLE(10_14,12_0);
+
+@end
+
 
 NS_ASSUME_NONNULL_END

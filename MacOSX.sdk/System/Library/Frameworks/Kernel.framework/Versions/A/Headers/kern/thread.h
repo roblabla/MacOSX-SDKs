@@ -101,6 +101,10 @@
 
 __BEGIN_DECLS
 
+extern void thread_mtx_lock(thread_t thread);
+
+extern void thread_mtx_unlock(thread_t thread);
+
 extern thread_t		current_thread(void);
 
 extern void			thread_reference(

@@ -1,7 +1,7 @@
 /*
 	NSTokenFieldCell.h
 	Application Kit
-	Copyright (c) 2004-2017, Apple Inc.
+	Copyright (c) 2004-2018, Apple Inc.
 	All rights reserved.
 
 */
@@ -23,23 +23,18 @@ typedef NS_ENUM(NSUInteger, NSTokenStyle) {
     NSTokenStylePlainSquared NS_ENUM_AVAILABLE_MAC(10_10), // A token with squared edges that has no background unless selected or highlighted.
 };
 
-// Deprecated in 10.10. Use the above NSTokenStyles instead.
-static const NSTokenStyle NSDefaultTokenStyle = NSTokenStyleDefault;
-static const NSTokenStyle NSPlainTextTokenStyle = NSTokenStyleNone;
-static const NSTokenStyle NSRoundedTokenStyle = NSTokenStyleRounded;
-
 @interface NSTokenFieldCell : NSTextFieldCell {
 @private
-    NSCharacterSet *_tokenizingCharacterSet;
-    __weak id _delegate;
-    NSTimeInterval _completionDelay;
-    id _cache;
-    id _defaultTerminator;
-    id _trackingArea;
-    id _lastCell;
-    NSRect _lastCellFrame;
-    BOOL *_autoCompleteCancel;
-    id _reserved[6] __unused;
+    NSCharacterSet *_tokenizingCharacterSet APPKIT_IVAR;
+    __weak id _delegate APPKIT_IVAR;
+    NSTimeInterval _completionDelay APPKIT_IVAR;
+    id _cache APPKIT_IVAR;
+    id _defaultTerminator APPKIT_IVAR;
+    id _trackingArea APPKIT_IVAR;
+    id _lastCell APPKIT_IVAR;
+    NSRect _lastCellFrame APPKIT_IVAR;
+    BOOL *_autoCompleteCancel APPKIT_IVAR;
+    id _reserved[6] __unused APPKIT_IVAR;
     struct {
         unsigned int _style:4;
 
@@ -52,7 +47,7 @@ static const NSTokenStyle NSRoundedTokenStyle = NSTokenStyleRounded;
         unsigned int _performingDrop:1;
 
         unsigned int _reserved:20;
-    } _tfcFlags;
+    } _tfcFlags APPKIT_IVAR;
 }
 
 /* Sets the default token style used for each new token.  However, if the delegate implements tokenField:styleForRepresentedObject:, that return value will be used instead.
@@ -107,5 +102,9 @@ static const NSTokenStyle NSRoundedTokenStyle = NSTokenStyleRounded;
 - (NSTokenStyle)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell styleForRepresentedObject:(id)representedObject;
 
 @end
+
+static const NSTokenStyle NSDefaultTokenStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTokenStyleDefault", 10_0, 10_14) = NSTokenStyleDefault;
+static const NSTokenStyle NSPlainTextTokenStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTokenStyleNone", 10_0, 10_14) = NSTokenStyleNone;
+static const NSTokenStyle NSRoundedTokenStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTokenStyleRounded", 10_0, 10_14) = NSTokenStyleRounded;
 
 NS_ASSUME_NONNULL_END

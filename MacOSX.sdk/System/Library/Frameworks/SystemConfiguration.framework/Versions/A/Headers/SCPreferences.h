@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2000, 2001, 2004, 2005, 2007-2010, 2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2000, 2001, 2004, 2005, 2007-2010, 2015, 2018 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
  * compliance with the License. Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this
  * file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -17,14 +17,14 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_LICENSE_HEADER_END@
  */
 
 #ifndef _SCPREFERENCES_H
 #define _SCPREFERENCES_H
 
-#include <Availability.h>
+#include <os/availability.h>
 #include <TargetConditionals.h>
 #include <sys/cdefs.h>
 #include <dispatch/dispatch.h>
@@ -83,8 +83,12 @@ typedef const struct CF_BRIDGED_TYPE(id) __SCPreferences *	SCPreferencesRef;
 		preferences to the active system configuration.
  */
 typedef CF_OPTIONS(uint32_t, SCPreferencesNotification) {
-	kSCPreferencesNotificationCommit	= 1<<0,	// __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA)
-	kSCPreferencesNotificationApply		= 1<<1	// __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA)
+	kSCPreferencesNotificationCommit
+		API_AVAILABLE(macos(4.0))
+		API_UNAVAILABLE(ios, tvos, watchos)	= 1<<0,
+	kSCPreferencesNotificationApply
+		API_AVAILABLE(macos(4.0))
+		API_UNAVAILABLE(ios, tvos, watchos)	= 1<<1
 };
 
 /*!
@@ -137,7 +141,7 @@ __BEGIN_DECLS
 	@discussion Returns the type identifier of all SCPreferences instances.
  */
 CFTypeID
-SCPreferencesGetTypeID			(void)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+SCPreferencesGetTypeID			(void)			API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCPreferencesCreate
@@ -161,7 +165,7 @@ SCPreferencesCreate			(
 					CFAllocatorRef		__nullable	allocator,
 					CFStringRef				name,
 					CFStringRef		__nullable	prefsID
-					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)			API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*!
@@ -190,7 +194,7 @@ SCPreferencesCreateWithAuthorization	(
 					CFStringRef				name,
 					CFStringRef		__nullable	prefsID,
 					AuthorizationRef	__nullable	authorization
-					)			__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+					)			API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCPreferencesLock
@@ -211,7 +215,7 @@ Boolean
 SCPreferencesLock			(
 					SCPreferencesRef	prefs,
 					Boolean			wait
-					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)			API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCPreferencesCommitChanges
@@ -233,7 +237,7 @@ SCPreferencesLock			(
 Boolean
 SCPreferencesCommitChanges		(
 					SCPreferencesRef	prefs
-					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)			API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCPreferencesApplyChanges
@@ -246,7 +250,7 @@ SCPreferencesCommitChanges		(
 Boolean
 SCPreferencesApplyChanges		(
 					SCPreferencesRef	prefs
-					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)			API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCPreferencesUnlock
@@ -262,7 +266,7 @@ SCPreferencesApplyChanges		(
 Boolean
 SCPreferencesUnlock			(
 					SCPreferencesRef	prefs
-					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)			API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCPreferencesGetSignature
@@ -275,7 +279,7 @@ SCPreferencesUnlock			(
 CFDataRef __nullable
 SCPreferencesGetSignature		(
 					SCPreferencesRef	prefs
-					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)			API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCPreferencesCopyKeyList
@@ -287,7 +291,7 @@ SCPreferencesGetSignature		(
 CFArrayRef __nullable
 SCPreferencesCopyKeyList		(
 					SCPreferencesRef	prefs
-					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)			API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCPreferencesGetValue
@@ -307,7 +311,7 @@ CFPropertyListRef __nullable
 SCPreferencesGetValue			(
 					SCPreferencesRef	prefs,
 					CFStringRef		key
-					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)			API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCPreferencesAddValue
@@ -329,7 +333,7 @@ SCPreferencesAddValue			(
 					SCPreferencesRef	prefs,
 					CFStringRef		key,
 					CFPropertyListRef	value
-					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)			API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCPreferencesSetValue
@@ -350,7 +354,7 @@ SCPreferencesSetValue			(
 					SCPreferencesRef	prefs,
 					CFStringRef		key,
 					CFPropertyListRef	value
-					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)			API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCPreferencesRemoveValue
@@ -368,7 +372,7 @@ Boolean
 SCPreferencesRemoveValue		(
 					SCPreferencesRef	prefs,
 					CFStringRef		key
-					)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)			API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCPreferencesSetCallback
@@ -388,7 +392,7 @@ SCPreferencesSetCallback		(
 					SCPreferencesRef			prefs,
 					SCPreferencesCallBack	__nullable	callout,
 					SCPreferencesContext	* __nullable	context
-					)			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+					)			API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCPreferencesScheduleWithRunLoop
@@ -408,7 +412,7 @@ SCPreferencesScheduleWithRunLoop	(
 					SCPreferencesRef	prefs,
 					CFRunLoopRef		runLoop,
 					CFStringRef		runLoopMode
-					)			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+					)			API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCPreferencesUnscheduleFromRunLoop
@@ -428,7 +432,7 @@ SCPreferencesUnscheduleFromRunLoop	(
 					SCPreferencesRef	prefs,
 					CFRunLoopRef		runLoop,
 					CFStringRef		runLoopMode
-					)			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+					)			API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCPreferencesSetDispatchQueue
@@ -443,7 +447,7 @@ Boolean
 SCPreferencesSetDispatchQueue		(
 					 SCPreferencesRef			prefs,
 					 dispatch_queue_t	__nullable	queue
-					 )			__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA);
+					 )			API_AVAILABLE(macos(10.6)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCPreferencesSynchronize
@@ -459,11 +463,11 @@ SCPreferencesSetDispatchQueue		(
 void
 SCPreferencesSynchronize		(
 					SCPreferencesRef	prefs
-					)			__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+					)			API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos);
 
 __END_DECLS
 
 CF_ASSUME_NONNULL_END
 CF_IMPLICIT_BRIDGING_DISABLED
 
-#endif /* _SCPREFERENCES_H */
+#endif	/* _SCPREFERENCES_H */

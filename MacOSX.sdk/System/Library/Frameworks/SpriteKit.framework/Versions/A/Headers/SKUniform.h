@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, SKUniformType) {
 NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE(10_10, 8_0)
-SK_EXPORT @interface SKUniform : NSObject <NSCopying, NSCoding>
+SK_EXPORT @interface SKUniform : NSObject <NSCopying, NSSecureCoding>
 
 /**
  Create a shader uniform with a given name.

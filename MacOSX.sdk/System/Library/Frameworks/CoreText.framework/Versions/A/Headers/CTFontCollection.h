@@ -2,7 +2,7 @@
  *  CTFontCollection.h
  *  CoreText
  *
- *  Copyright (c) 2006-2017 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2018 Apple Inc. All rights reserved.
  *
  */
 
@@ -17,7 +17,6 @@
 #ifndef __CTFONTCOLLECTION__
 #define __CTFONTCOLLECTION__
 
-#include <CoreText/CTDefines.h>
 #include <CoreText/CTFontDescriptor.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
@@ -106,7 +105,7 @@ CT_EXPORT const CFStringRef kCTFontCollectionDisallowAutoActivationOption CT_AVA
     @result     This function creates a new collection containing all fonts available to the current application.
 */
 CTFontCollectionRef CTFontCollectionCreateFromAvailableFonts(
-    CFDictionaryRef __nullable options ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+    CFDictionaryRef _Nullable options ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCollectionCreateWithFontDescriptors
@@ -121,8 +120,8 @@ CTFontCollectionRef CTFontCollectionCreateFromAvailableFonts(
     @result     This function creates a new collection based on the provided font descriptors. The contents of this collection is defined by matching the provided descriptors against all available font descriptors.
 */
 CTFontCollectionRef CTFontCollectionCreateWithFontDescriptors(
-    CFArrayRef __nullable queryDescriptors,
-    CFDictionaryRef __nullable options ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+    CFArrayRef _Nullable queryDescriptors,
+    CFDictionaryRef _Nullable options ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCollectionCreateCopyWithFontDescriptors
@@ -141,8 +140,8 @@ CTFontCollectionRef CTFontCollectionCreateWithFontDescriptors(
 */
 CTFontCollectionRef CTFontCollectionCreateCopyWithFontDescriptors(
     CTFontCollectionRef original,
-    CFArrayRef __nullable queryDescriptors,
-    CFDictionaryRef __nullable options ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+    CFArrayRef _Nullable queryDescriptors,
+    CFDictionaryRef _Nullable options ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCollectionCreateMutableCopy
@@ -169,7 +168,7 @@ CTMutableFontCollectionRef CTFontCollectionCreateMutableCopy(
 
     @result     This function returns a retained reference to the array of descriptors to be used to query (match) the system font database. The return value is undefined if CTFontCollectionCreateFromAvailableFonts was used to create the collection.
 */
-CFArrayRef __nullable CTFontCollectionCopyQueryDescriptors(
+CFArrayRef _Nullable CTFontCollectionCopyQueryDescriptors(
     CTFontCollectionRef collection ) CT_AVAILABLE(macos(10.7)) CT_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -184,7 +183,7 @@ CFArrayRef __nullable CTFontCollectionCopyQueryDescriptors(
 */
 void CTFontCollectionSetQueryDescriptors(
     CTMutableFontCollectionRef  collection,
-    CFArrayRef __nullable       descriptors ) CT_AVAILABLE(macos(10.7)) CT_UNAVAILABLE(ios, watchos, tvos);
+    CFArrayRef _Nullable        descriptors ) CT_AVAILABLE(macos(10.7)) CT_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function   CTFontCollectionCopyExclusionDescriptors
@@ -195,7 +194,7 @@ void CTFontCollectionSetQueryDescriptors(
 
     @result     This function returns a retained reference to the array of descriptors to be used to query (match) the system font database.
 */
-CFArrayRef __nullable CTFontCollectionCopyExclusionDescriptors( CTFontCollectionRef collection ) CT_AVAILABLE(macos(10.7)) CT_UNAVAILABLE(ios, watchos, tvos);
+CFArrayRef _Nullable CTFontCollectionCopyExclusionDescriptors( CTFontCollectionRef collection ) CT_AVAILABLE(macos(10.7)) CT_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function   CTFontCollectionSetExclusionDescriptors
@@ -209,7 +208,7 @@ CFArrayRef __nullable CTFontCollectionCopyExclusionDescriptors( CTFontCollection
 */
 void CTFontCollectionSetExclusionDescriptors(
     CTMutableFontCollectionRef  collection,
-    CFArrayRef __nullable       descriptors ) CT_AVAILABLE(macos(10.7)) CT_UNAVAILABLE(ios, watchos, tvos);
+    CFArrayRef _Nullable        descriptors ) CT_AVAILABLE(macos(10.7)) CT_UNAVAILABLE(ios, watchos, tvos);
 
 /*! --------------------------------------------------------------------------
     @group Retrieving Matching Descriptors
@@ -224,7 +223,7 @@ void CTFontCollectionSetExclusionDescriptors(
 
     @result     An array of CTFontDescriptors matching the collection definition or NULL if there are none.
 */
-CFArrayRef __nullable CTFontCollectionCreateMatchingFontDescriptors(
+CFArrayRef _Nullable CTFontCollectionCreateMatchingFontDescriptors(
     CTFontCollectionRef collection ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -242,10 +241,10 @@ CFArrayRef __nullable CTFontCollectionCreateMatchingFontDescriptors(
 
     @result     An array of CTFontDescriptors matching the criteria of the collection, sorted by the results of the sorting callback function, or NULL if there are none.
 */
-CFArrayRef __nullable CTFontCollectionCreateMatchingFontDescriptorsSortedWithCallback(
+CFArrayRef _Nullable CTFontCollectionCreateMatchingFontDescriptorsSortedWithCallback(
     CTFontCollectionRef                     collection,
-    CTFontCollectionSortDescriptorsCallback __nullable sortCallback,
-    void * __nullable                       refCon ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+    CTFontCollectionSortDescriptorsCallback _Nullable sortCallback,
+    void * _Nullable                        refCon ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCollectionCreateMatchingFontDescriptorsWithOptions
@@ -259,9 +258,9 @@ CFArrayRef __nullable CTFontCollectionCreateMatchingFontDescriptorsSortedWithCal
 
     @result     An array of CTFontDescriptors matching the collection definition or NULL if there are none.
 */
-CFArrayRef __nullable CTFontCollectionCreateMatchingFontDescriptorsWithOptions(
+CFArrayRef _Nullable CTFontCollectionCreateMatchingFontDescriptorsWithOptions(
     CTFontCollectionRef collection,
-    CFDictionaryRef __nullable options ) CT_AVAILABLE(macos(10.7)) CT_UNAVAILABLE(ios, watchos, tvos);
+    CFDictionaryRef _Nullable options ) CT_AVAILABLE(macos(10.7), ios(12.0), watchos(5.0), tvos(12.0));
 
 /*!
     @function   CTFontCollectionCreateMatchingFontDescriptorsForFamily
@@ -275,10 +274,10 @@ CFArrayRef __nullable CTFontCollectionCreateMatchingFontDescriptorsWithOptions(
 
     @result     An array of CTFontDescriptors matching the specified family in the collection or NULL if there are none.
 */
-CFArrayRef __nullable CTFontCollectionCreateMatchingFontDescriptorsForFamily(
+CFArrayRef _Nullable CTFontCollectionCreateMatchingFontDescriptorsForFamily(
     CTFontCollectionRef collection,
     CFStringRef         familyName,
-    CFDictionaryRef __nullable options ) CT_AVAILABLE(macos(10.7)) CT_UNAVAILABLE(ios, watchos, tvos);
+    CFDictionaryRef _Nullable options ) CT_AVAILABLE(macos(10.7)) CT_UNAVAILABLE(ios, watchos, tvos);
 
 /*! --------------------------------------------------------------------------
     @group Bulk attribute access

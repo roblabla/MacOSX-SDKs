@@ -1,6 +1,6 @@
 /* 
 	NSTypesetter.h
-	Copyright (c) 1994-2017, Apple Inc.  All rights reserved. 
+	Copyright (c) 1994-2018, Apple Inc.  All rights reserved. 
 
 	An abstract class to lay glyphs out in horizontal or vertical boxes	
 */
@@ -16,9 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSTypesetter : NSObject {
 #if __LP64__
-    void *_reserved;
+    void *_reserved APPKIT_IVAR;
 #else /* __LP64__ */
-    unsigned _reserved[2];
+    unsigned _reserved[2] APPKIT_IVAR;
 #endif /* __LP64__ */
 }
 

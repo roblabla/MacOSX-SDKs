@@ -33,7 +33,7 @@ MA_EXPORT CFStringRef const MAMediaCharacteristicDescribesVideoForAccessibility 
  @abstract User preference for audible media characteristic
  @result An array containing the preferred order of media characteristics for audible media.
  */
-MA_EXPORT CFArrayRef MAAudibleMediaCopyPreferredCharacteristics() CF_AVAILABLE(10_10, 8_0);
+MA_EXPORT CFArrayRef MAAudibleMediaCopyPreferredCharacteristics(void) CF_AVAILABLE(10_10, 8_0);
 
 CF_ASSUME_NONNULL_END
 MA_EXTERN_C_END

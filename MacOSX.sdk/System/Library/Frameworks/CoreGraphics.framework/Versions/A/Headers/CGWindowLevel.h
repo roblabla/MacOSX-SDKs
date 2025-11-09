@@ -50,7 +50,7 @@ typedef int32_t CGWindowLevel;
    types. */
 
 CG_EXTERN CGWindowLevel CGWindowLevelForKey(CGWindowLevelKey key)
-  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  CG_AVAILABLE_STARTING(10.0);
 
 /* The number of window levels reserved by Apple for internal use. */
 #define kCGNumReservedWindowLevels	(16)

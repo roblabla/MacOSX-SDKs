@@ -3,7 +3,7 @@
 
     Contains:   API for communicating with CoreMediaIO hardware
 
-    Copyright:  © 2005-2011 by Apple Inc., all rights reserved.
+    Copyright:  © 2005-2018 by Apple Inc., all rights reserved.
 */
 
 
@@ -64,7 +64,7 @@ struct CMIODeviceStreamConfiguration
 {
     UInt32  mNumberStreams;
     UInt32  mNumberChannels[];
-};
+} API_AVAILABLE(macos(10.7));
 typedef struct CMIODeviceStreamConfiguration CMIODeviceStreamConfiguration;
 
 
@@ -91,7 +91,7 @@ struct CMIODeviceAVCCommand
     UInt8*  mResponse;
     UInt32  mResponseLength;
     UInt32  mResponseUsed;
-};
+} API_AVAILABLE(macos(10.7));
 typedef struct CMIODeviceAVCCommand CMIODeviceAVCCommand;
 
 /*!
@@ -116,7 +116,7 @@ struct CMIODeviceRS422Command
     UInt8*  mResponse;
     UInt32  mResponseLength;
     UInt32  mResponseUsed;
-};
+} API_AVAILABLE(macos(10.7));
 typedef struct CMIODeviceRS422Command CMIODeviceRS422Command;
 
 
@@ -156,7 +156,7 @@ struct CMIODeviceSMPTETimeCallback
 {
     CMIODeviceGetSMPTETimeProc  mGetSMPTETimeProc;
     void*                       mRefCon;
-};
+} API_AVAILABLE(macos(10.7));
 typedef struct CMIODeviceSMPTETimeCallback CMIODeviceSMPTETimeCallback;
 
 
@@ -539,7 +539,7 @@ enum
 */
 extern OSStatus
 CMIODeviceStartStream(  CMIODeviceID    deviceID,
-                        CMIOStreamID    streamID)                                                                                       AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                        CMIOStreamID    streamID) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIODeviceStopStream
@@ -552,7 +552,7 @@ CMIODeviceStartStream(  CMIODeviceID    deviceID,
 */
 extern OSStatus
 CMIODeviceStopStream(   CMIODeviceID    deviceID,
-                        CMIOStreamID    streamID)                                                                                       AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                        CMIOStreamID    streamID) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIODeviceProcessAVCCommand
@@ -567,7 +567,7 @@ CMIODeviceStopStream(   CMIODeviceID    deviceID,
 */
 extern OSStatus
 CMIODeviceProcessAVCCommand(    CMIODeviceID            deviceID,
-                                CMIODeviceAVCCommand*   ioAVCCommand)                                                                   AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                                CMIODeviceAVCCommand*   ioAVCCommand) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIODeviceProcessRS422Command
@@ -581,7 +581,7 @@ CMIODeviceProcessAVCCommand(    CMIODeviceID            deviceID,
 */
 extern OSStatus
 CMIODeviceProcessRS422Command(  CMIODeviceID            deviceID,
-                                CMIODeviceRS422Command* ioRS422Command)                                                                 AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                                CMIODeviceRS422Command* ioRS422Command) API_AVAILABLE(macos(10.7));
 
 #pragma pack(pop)
     

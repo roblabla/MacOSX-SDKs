@@ -1,7 +1,7 @@
 /*
 	NSUserInterfaceValidation.h
 	Application Kit
-	Copyright (c) 1999-2017, Apple Inc.
+	Copyright (c) 1999-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -26,7 +26,7 @@ You can extend this functionality by introducing a new set of protocols that are
  2) Declare validation method for validators
     You should declare your new selector that takes your object as the argument.
     i.e.
-        @protocol NSToolbarItemValidations
+        @protocol NSToolbarItemValidation
         - (BOOL)validateToolbarItem:(id <NSValidatedToobarItem>)item;
         @end
 
@@ -52,7 +52,7 @@ You can extend this functionality by introducing a new set of protocols that are
  4) Implement category methods for standard objects (Optional)
     Now you can implement default validation methods for standard objects like NSTextView or NSDocument.
     i.e.
-        @implementation NSTextView (NSToolbarValidation)
+        @implementation NSTextView (NSToolbarItemValidation)
     
         - (BOOL)validateToolbarItem:(id <NSValidatedToobarItem>)item {
             BOOL returnValue = [self validateUserInterfaceItem:item];

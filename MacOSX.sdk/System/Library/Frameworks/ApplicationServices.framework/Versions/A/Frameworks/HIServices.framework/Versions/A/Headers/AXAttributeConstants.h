@@ -9,6 +9,14 @@
 #ifndef __AXATTRIBUTECONSTANTS__
 #define __AXATTRIBUTECONSTANTS__
 
+#include <CoreFoundation/CoreFoundation.h> /* CF_OPTIONS */
+
+#ifndef __MACTYPES__
+#include <MacTypes.h> /* UInt32 */
+#endif
+
+#include <CoreFoundation/CFAvailability.h> /* CF_OPTIONS */
+
 /*! @header AXAttributeConstants.h
 	@discussion Each UIElement has a set of attributes that assistive applications use to get information about the UIElement.
 	The list of attributes vary depending on the type of UIElement. The value of some attributes can be changed, while others cannot.

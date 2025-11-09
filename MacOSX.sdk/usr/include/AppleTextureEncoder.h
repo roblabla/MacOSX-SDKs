@@ -61,39 +61,14 @@
  *  The major field of the at_encoder_get_version build version corresponds with
  *  the availability version (e.g. AT_AVAILABILITY_v1) here.
  */
-#   ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
-#       define  AT_AVAILABILITY_v1      __IOS_AVAILABLE(10.0)
-#   elif defined __MAC_OS_X_VERSION_MIN_REQUIRED
-#       define  AT_AVAILABILITY_v1      __OSX_AVAILABLE(10.12)
-#   elif __has_feature(attribute_availability_tvos)
-#       define  AT_AVAILABILITY_v1      __TVOS_AVAILABLE(10.0)
-#   elif __has_feature(attribute_availability_watchos)
-#       define  AT_AVAILABILITY_v1      __WATCHOS_UNAVAILABLE
-#   else
-#       define  AT_AVAILABILITY_v1
-#   endif
 
-#   if __has_extension(enumerator_attributes)
-#       ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
-#           define  AT_ENUM_AVAILABILITY_v1      __IOS_AVAILABLE(10.0)
-#       elif defined __MAC_OS_X_VERSION_MIN_REQUIRED
-#           define  AT_ENUM_AVAILABILITY_v1      __OSX_AVAILABLE(10.12)
-#       elif __has_feature(attribute_availability_tvos)
-#           define  AT_ENUM_AVAILABILITY_v1      __TVOS_AVAILABLE(10.0)
-#       elif __has_feature(attribute_availability_watchos)
-#           define  AT_ENUM_AVAILABILITY_v1      __WATCHOS_UNAVAILABLE
-#       else
-#           define  AT_ENUM_AVAILABILITY_v1
-#       endif
-#   else
-#       define      AT_ENUM_AVAILABILITY_v1
-#   endif
+#   define AT_AVAILABILITY_v1       __API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(5.0))
+#   define AT_ENUM_AVAILABILITY_v1  __API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(5.0))
 
 #else   /* AT_LINK_STATIC */
 #   define      AT_ENUM_AVAILABILITY_v1
 #   define      AT_AVAILABILITY_v1
 #endif  /* AT_LINK_STATIC */
-
 
 #ifdef __cplusplus
     extern "C" {

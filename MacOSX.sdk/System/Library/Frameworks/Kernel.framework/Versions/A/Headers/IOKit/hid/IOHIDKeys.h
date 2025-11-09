@@ -107,6 +107,7 @@ __BEGIN_DECLS
 #define kIOHIDMaxResponseLatencyKey         "MaxResponseLatency"
 #define kIOHIDUniqueIDKey                   "UniqueID"
 #define kIOHIDPhysicalDeviceUniqueIDKey     "PhysicalDeviceUniqueID"
+#define kIOHIDModelNumberKey                "ModelNumber"
 
 
 #define kIOHIDTransportUSBValue                 "USB"
@@ -119,7 +120,7 @@ __BEGIN_DECLS
 #define kIOHIDTransportIAPValue                 "iAP"
 #define kIOHIDTransportAirPlayValue             "AirPlay"
 #define kIOHIDTransportSPUValue                 "SPU"
-
+#define kIOHIDTransportBTAACPValue              "BT-AACP"
 
 
 #define kIOHIDCategoryAutomotiveValue       "Automotive"

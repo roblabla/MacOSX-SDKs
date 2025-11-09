@@ -24,7 +24,7 @@ AVF_EXPORT NSString *const AVLinearPCMBitDepthKey;						/* value is an integer, 
 AVF_EXPORT NSString *const AVLinearPCMIsBigEndianKey;					/* value is a BOOL */
 AVF_EXPORT NSString *const AVLinearPCMIsFloatKey;						/* value is a BOOL */
 
-AVF_EXPORT NSString *const AVLinearPCMIsNonInterleaved                  NS_AVAILABLE(10_7, 4_0);   /* value is a BOOL */
+AVF_EXPORT NSString *const AVLinearPCMIsNonInterleaved                  API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0));   /* value is a BOOL */
 #define AVLinearPCMIsNonInterleavedKey AVLinearPCMIsNonInterleaved
 
 /* audio file type key */
@@ -32,33 +32,33 @@ AVF_EXPORT NSString *const AVAudioFileTypeKey API_AVAILABLE(macos(10.13), ios(11
 
 /* encoder property keys */
 AVF_EXPORT NSString *const AVEncoderAudioQualityKey;					/* value is an integer from enum AVAudioQuality */
-AVF_EXPORT NSString *const AVEncoderAudioQualityForVBRKey               NS_AVAILABLE(10_9, 7_0); /* value is an integer from enum AVAudioQuality. only relevant for AVAudioBitRateStrategy_Variable */
+AVF_EXPORT NSString *const AVEncoderAudioQualityForVBRKey               API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0)); /* value is an integer from enum AVAudioQuality. only relevant for AVAudioBitRateStrategy_Variable */
 
 	/* only one of AVEncoderBitRateKey and AVEncoderBitRatePerChannelKey should be provided. */
 AVF_EXPORT NSString *const AVEncoderBitRateKey;           				/* value is an integer. */
-AVF_EXPORT NSString *const AVEncoderBitRatePerChannelKey                NS_AVAILABLE(10_7, 4_0); /* value is an integer */
-AVF_EXPORT NSString *const AVEncoderBitRateStrategyKey                  NS_AVAILABLE(10_9, 7_0); /* value is an AVAudioBitRateStrategy constant. see below. */
+AVF_EXPORT NSString *const AVEncoderBitRatePerChannelKey                API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0)); /* value is an integer */
+AVF_EXPORT NSString *const AVEncoderBitRateStrategyKey                  API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0)); /* value is an AVAudioBitRateStrategy constant. see below. */
 AVF_EXPORT NSString *const AVEncoderBitDepthHintKey;					/* value is an integer from 8 to 32 */
 
 /* sample rate converter property keys */
-AVF_EXPORT NSString *const AVSampleRateConverterAlgorithmKey NS_AVAILABLE(10_9, 7_0); /* value is an AVSampleRateConverterAlgorithm constant. see below. */
+AVF_EXPORT NSString *const AVSampleRateConverterAlgorithmKey API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0)); /* value is an AVSampleRateConverterAlgorithm constant. see below. */
 AVF_EXPORT NSString *const AVSampleRateConverterAudioQualityKey;		/* value is an integer from enum AVAudioQuality */
 
 /* channel layout */
-AVF_EXPORT NSString *const AVChannelLayoutKey NS_AVAILABLE(10_7, 4_0);	/* value is an NSData containing an AudioChannelLayout */
+AVF_EXPORT NSString *const AVChannelLayoutKey API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0));	/* value is an NSData containing an AudioChannelLayout */
 
 
 /* property values */
 
 /* values for AVEncoderBitRateStrategyKey */
-AVF_EXPORT NSString *const AVAudioBitRateStrategy_Constant              NS_AVAILABLE(10_9, 7_0);
-AVF_EXPORT NSString *const AVAudioBitRateStrategy_LongTermAverage       NS_AVAILABLE(10_9, 7_0);
-AVF_EXPORT NSString *const AVAudioBitRateStrategy_VariableConstrained   NS_AVAILABLE(10_9, 7_0);
-AVF_EXPORT NSString *const AVAudioBitRateStrategy_Variable              NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT NSString *const AVAudioBitRateStrategy_Constant              API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+AVF_EXPORT NSString *const AVAudioBitRateStrategy_LongTermAverage       API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+AVF_EXPORT NSString *const AVAudioBitRateStrategy_VariableConstrained   API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+AVF_EXPORT NSString *const AVAudioBitRateStrategy_Variable              API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 /* values for AVSampleRateConverterAlgorithmKey */
-AVF_EXPORT NSString *const AVSampleRateConverterAlgorithm_Normal        NS_AVAILABLE(10_9, 7_0);
-AVF_EXPORT NSString *const AVSampleRateConverterAlgorithm_Mastering     NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT NSString *const AVSampleRateConverterAlgorithm_Normal        API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+AVF_EXPORT NSString *const AVSampleRateConverterAlgorithm_Mastering     API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 AVF_EXPORT NSString *const AVSampleRateConverterAlgorithm_MinimumPhase  API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 typedef NS_ENUM(NSInteger, AVAudioQuality) {

@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion Includes transformation and bounds info, links to parent and
              children in the hierachy
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLObject : NSObject<MDLNamed>
 
@@ -101,7 +101,7 @@ MDL_EXPORT
 - (void)enumerateChildObjectsOfClass:(Class)objectClass
                                 root:(MDLObject*)root
                           usingBlock:( void(^)(MDLObject* object, BOOL *stop))block
-                         stopPointer:(BOOL *)stopPointer;
+                         stopPointer:(BOOL *)stopPointer API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 
 /*!
@@ -158,7 +158,7 @@ MDL_EXPORT
              custom containers might reference in memory representations, offline 
              databases, and so on.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLObjectContainer : NSObject<MDLObjectContainerComponent>
 

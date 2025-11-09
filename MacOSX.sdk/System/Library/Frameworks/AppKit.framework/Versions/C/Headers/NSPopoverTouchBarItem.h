@@ -1,7 +1,7 @@
 /*
  NSPopoverTouchBarItem.h
  Application Kit
- Copyright (c) 2015-2017, Apple Inc.
+ Copyright (c) 2015-2018, Apple Inc.
  All rights reserved.
 */
 
@@ -12,24 +12,24 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSPopoverTouchBarItem : NSTouchBarItem {
 @private
-    NSTouchBar *_popoverTouchBar;
-    NSTouchBar *_pressAndHoldTouchBar;
+    NSTouchBar *_popoverTouchBar APPKIT_IVAR;
+    NSTouchBar *_pressAndHoldTouchBar APPKIT_IVAR;
     
-    id _overlay;
+    id _overlay APPKIT_IVAR;
     
-    NSString *_customizationLabel;
+    NSString *_customizationLabel APPKIT_IVAR;
     
-    NSView *_collapsedRepresentation;
+    NSView *_collapsedRepresentation APPKIT_IVAR;
     
-    NSImage *_collapsedRepresentationImage;
-    NSString *_collapsedRepresentationLabel;
+    NSImage *_collapsedRepresentationImage APPKIT_IVAR;
+    NSString *_collapsedRepresentationLabel APPKIT_IVAR;
     
-    unsigned _showsCloseButton:1;
-    unsigned _showsControlStrip:1;
-    unsigned _collapsedRepresentationChevronBehavior:2;
+    unsigned _showsCloseButton:1 APPKIT_IVAR;
+    unsigned _showsControlStrip:1 APPKIT_IVAR;
+    unsigned _collapsedRepresentationChevronBehavior:2 APPKIT_IVAR;
 #if !__OBJC2__
-    unsigned _popoverTouchBarItemReservedFlags: 28 __unused;
-    void *_popoverTouchBarItemReserved[3] __unused;
+    unsigned _popoverTouchBarItemReservedFlags: 28 __unused APPKIT_IVAR;
+    void *_popoverTouchBarItemReserved[3] __unused APPKIT_IVAR;
 #endif /* !__OBJC2__ */
 }
 

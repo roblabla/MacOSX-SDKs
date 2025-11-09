@@ -1422,7 +1422,7 @@ enum {
   /*
    * Events related to Ink.
    */
-  kEventClassInk                = 'ink ',
+  kEventClassInk                = 'ink ', /* DEPRECATED on macOS 10.14 and later. */
   kEventClassTSMDocumentAccess  = 'tdac',
 
   /*
@@ -15737,14 +15737,22 @@ GetSymbolicHotKeyMode(void)                                   AVAILABLE_MAC_OS_X
 
 
 /*--------------------------------------------------------------------------------------*/
+/*  ¥ DEPRECATED                                                                        */
+/*                                                                                      */
+/*  Event classes and types below this point are either deprecated (they continue to    */
+/*  function but are not the most modern nor most efficient solution to a problem), or  */
+/*  they are completely unavailable on macOS.                                           */
+/*--------------------------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------------------------*/
 /*  Ink Events                                                                          */
 /*--------------------------------------------------------------------------------------*/
 enum {
-  kEventParamInkTextRef         = 'iwrd', /* typePtr */
-  kEventParamInkKeyboardShortcut = 'ikbd', /* typeBoolean */
-  kEventParamInkGestureKind     = 'gknd', /* typeUInt32 */
-  kEventParamInkGestureBounds   = 'gbnd', /* typeHIRect */
-  kEventParamInkGestureHotspot  = 'ghot' /* typeHIPoint */
+  kEventParamInkTextRef         = 'iwrd', /* typePtr (DEPRECATED on macOS 10.14 and later.) */
+  kEventParamInkKeyboardShortcut = 'ikbd', /* typeBoolean (DEPRECATED on macOS 10.14 and later.) */
+  kEventParamInkGestureKind     = 'gknd', /* typeUInt32 (DEPRECATED on macOS 10.14 and later.) */
+  kEventParamInkGestureBounds   = 'gbnd', /* typeHIRect (DEPRECATED on macOS 10.14 and later.) */
+  kEventParamInkGestureHotspot  = 'ghot' /* typeHIPoint (DEPRECATED on macOS 10.14 and later.) */
 };
 
 
@@ -15774,7 +15782,7 @@ enum {
  *          The mouse event being handled.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework but deprecated in 10.14
  *    CarbonLib:        not available
  */
 enum {
@@ -15812,7 +15820,7 @@ enum {
  *          Hotspot for the gesture in global coordinates.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework but deprecated in 10.14
  *    CarbonLib:        not available
  */
 enum {
@@ -15846,7 +15854,7 @@ enum {
  *          character.)
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework but deprecated in 10.14
  *    CarbonLib:        not available
  */
 enum {

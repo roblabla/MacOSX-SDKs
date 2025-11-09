@@ -1,7 +1,7 @@
 /*
     NSCollectionView.h
     Application Kit
-    Copyright (c) 2005-2017, Apple Inc.
+    Copyright (c) 2005-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -44,7 +44,7 @@ typedef NS_OPTIONS(NSUInteger, NSCollectionViewScrollPosition) {
     NSCollectionViewScrollPositionNearestVerticalEdge  = 1 << 8, /* Nearer of Leading,Trailing */
 };
 
-typedef NSString * NSCollectionViewSupplementaryElementKind NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSCollectionViewSupplementaryElementKind NS_SWIFT_BRIDGED_TYPEDEF;
 
 @class NSButton, NSCollectionView, NSCollectionViewLayout, NSCollectionViewLayoutAttributes, NSCollectionViewTransitionLayout, NSDraggingImageComponent, NSImageView, NSIndexSet, NSMutableIndexSet, NSNib, NSTextField;
 @protocol NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewPrefetching;
@@ -92,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_5)
 @interface NSCollectionViewItem : NSViewController <NSCopying, NSCollectionViewElement> {
 @private
-    __weak NSCollectionView *_collectionView;
+    __weak NSCollectionView *_collectionView APPKIT_IVAR;
     struct {
         unsigned int isSelected:1;
         unsigned int suppressSelectionChangedNotification:1;
@@ -105,9 +105,9 @@ NS_CLASS_AVAILABLE_MAC(10_5)
         unsigned int dragging:1;
         unsigned int isTransientAccessibilityElement:1;
         unsigned int reserved:6;
-    } _cviFlags;
-    NSData *_cachedArchive;
-    id _reserved2 __unused;
+    } _cviFlags APPKIT_IVAR;
+    NSData *_cachedArchive APPKIT_IVAR;
+    id _reserved2 __unused APPKIT_IVAR;
 }
 
 /* Non-retained backlink to the containing CollectionView.
@@ -142,16 +142,16 @@ NS_CLASS_AVAILABLE_MAC(10_5)
 NS_CLASS_AVAILABLE_MAC(10_5)
 @interface NSCollectionView : NSView <NSDraggingSource, NSDraggingDestination> {
 @private
-    NSArray *_content;
-    NSMutableIndexSet *_selectionIndexes;
-    NSCollectionViewItem *_itemPrototype;
-    NSSize _minItemSize;
-    NSSize _maxItemSize;
-    NSUInteger _maxGridRows;
-    NSUInteger _maxGridColumns;
-    NSArray *_backgroundColors;
-    NSMutableArray *_displayedItems;
-    NSTimeInterval _animationDuration;
+    NSArray *_content APPKIT_IVAR;
+    NSMutableIndexSet *_selectionIndexes APPKIT_IVAR;
+    NSCollectionViewItem *_itemPrototype APPKIT_IVAR;
+    NSSize _minItemSize APPKIT_IVAR;
+    NSSize _maxItemSize APPKIT_IVAR;
+    NSUInteger _maxGridRows APPKIT_IVAR;
+    NSUInteger _maxGridColumns APPKIT_IVAR;
+    NSArray *_backgroundColors APPKIT_IVAR;
+    NSMutableArray *_displayedItems APPKIT_IVAR;
+    NSTimeInterval _animationDuration APPKIT_IVAR;
     struct {
         unsigned int isFirstResponder:1;
         unsigned int invalidateItemViews:1;
@@ -160,7 +160,6 @@ NS_CLASS_AVAILABLE_MAC(10_5)
         unsigned int avoidsEmptySelection:1;
         unsigned int superviewIsClipView:1;
         unsigned int needsUpdateGrid:1;
-        unsigned int needsUpdateBackground:1;
         unsigned int gridSettingsNeedUpdate:1;
         unsigned int guardSetFrameSize:1;
         unsigned int canDisplayItems:1;
@@ -168,38 +167,39 @@ NS_CLASS_AVAILABLE_MAC(10_5)
         unsigned int unarchiving:1;
         unsigned int observingScroll:1;
         unsigned int scheduledResize:1;
-        unsigned int isOpaque:1;
         unsigned int observingClipFrameChanges:1;
         unsigned int allowsSectionDrop:1;
         unsigned int backgroundViewScrollsWithContent:1;
         unsigned int opensGaps:1;
         unsigned int visMode:1;
         unsigned int restoringState:1;
+        unsigned int needsResize:1;
+        unsigned int itemPrototypeInitialized:1;
         unsigned int reserved:10;
-    } _cvFlags;
-    id _delegate;
-    NSMutableArray *_backgroundLayers;
-    NSSize _storedFrameSize;
-    NSNib *_cachedNib;
-    BOOL *_animTimerCancel;
-    NSArray *_removedItems;
-    NSArray *_addedItems;
-    NSIndexSet *_addedItemIndexes;
-    BOOL *_resizeTimerCancel;
+    } _cvFlags APPKIT_IVAR;
+    id _delegate APPKIT_IVAR;
+    NSMutableArray *_backgroundLayers APPKIT_IVAR;
+    NSSize _storedFrameSize APPKIT_IVAR;
+    NSNib *_cachedNib APPKIT_IVAR;
+    BOOL *_animTimerCancel APPKIT_IVAR;
+    NSArray *_removedItems APPKIT_IVAR;
+    NSArray *_addedItems APPKIT_IVAR;
+    NSIndexSet *_addedItemIndexes APPKIT_IVAR;
+    BOOL *_resizeTimerCancel APPKIT_IVAR;
     
-    NSIndexSet *_draggedIndexes;
-    NSDragOperation _draggingSourceOperationMaskForLocal;
-    NSDragOperation _draggingSourceOperationMaskForNonLocal;
-    NSInteger _currentDropIndex;
-    NSInteger _currentDropSpaceIndex;
-    NSInteger _shiftRow;
-    NSDragOperation _currentDragOperation;
-    NSCollectionViewDropOperation _currentDropOperation;
-    id _draggingInfo;
-    BOOL *_dragTimerCancel;
+    NSIndexSet *_draggedIndexes APPKIT_IVAR;
+    NSDragOperation _draggingSourceOperationMaskForLocal APPKIT_IVAR;
+    NSDragOperation _draggingSourceOperationMaskForNonLocal APPKIT_IVAR;
+    NSInteger _currentDropIndex APPKIT_IVAR;
+    NSInteger _currentDropSpaceIndex APPKIT_IVAR;
+    NSInteger _shiftRow APPKIT_IVAR;
+    NSDragOperation _currentDragOperation APPKIT_IVAR;
+    NSCollectionViewDropOperation _currentDropOperation APPKIT_IVAR;
+    id _draggingInfo APPKIT_IVAR;
+    BOOL *_dragTimerCancel APPKIT_IVAR;
     
-    id _private;
-    void *_reserved[13];
+    id _private APPKIT_IVAR;
+    void *_reserved[13] APPKIT_IVAR;
 }
 
 #pragma mark *** Data Source / Model Objects ***
@@ -271,14 +271,9 @@ Use this method to retrieve the layout information for a particular supplementar
 */
 - (NSRect)frameForItemAtIndex:(NSUInteger)index withNumberOfItems:(NSUInteger)numberOfItems NS_AVAILABLE_MAC(10_7);
 
-/* The following properties pertain only to NSCollectionViewGridLayout, and will be deprecated in a future release.  When you set collectionViewLayout to point to an instance of this class (or a subclass), these NSCollectionView properties take on the corresponding property values of the NSCollectionViewGridLayout.  When collectionViewLayout points to any other kind of layout object, these properties remember the values they are given, but they don't affect item layout or display.  When targeting OS X 10.11 and later, it's recommended that you reference the corresponding NSCollectionViewGridLayout properties instead.
+/* The first background color in the array is used as the background of the entire collection view. Passing nil resets the background colors back to the default.
 */
-@property NSUInteger maxNumberOfRows;       // default: 0, which means no limit
-@property NSUInteger maxNumberOfColumns;    // default: 0, which means no limit
-@property NSSize minItemSize;               // default: (0; 0)
-@property NSSize maxItemSize;               // default: (0; 0), which means no limit
-@property (null_resettable, copy) NSArray<NSColor *> *backgroundColors; // passing nil resets the background colors back to the default
-
+@property (null_resettable, copy) NSArray<NSColor *> *backgroundColors;
 
 #pragma mark *** Section and Item Counts ***
 
@@ -359,23 +354,10 @@ Use this method to retrieve the layout information for a particular supplementar
  */
 - (__kindof NSView *)makeSupplementaryViewOfKind:(NSCollectionViewSupplementaryElementKind)elementKind withIdentifier:(NSUserInterfaceItemIdentifier)identifier forIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_11);
 
-/* (Soft-Deprecated)  Invoked by a dataSource-less NSCollectionView when it needs a new item to represent the given model "object" (which is presumed to be a member of the CollectionView's "content" array).  Instantiates and returns a non-autoreleased item whose "representedObject" has been set to point to the given "object".  NSCollectionView's implementation of this method makes a copy of the CollectionView's itemPrototype (raising an exception if itemPrototype is nil).  You can override this method to customize the returned item or its view subtree however you wish, calling up to super first to obtain it.  Or, you can replace super's implementation entirely, to instantiate whatever kind of item you wish, potentially based on the type or properties of the given model "object".  The item returned from this factory method should NOT be autoreleased.
- 
- It is considered a programming error to send this message to an NSCollectionView that has a dataSource; an exception will be raised.  Use -makeItemWithIdentifier:forIndexPath: instead, from the dataSource's -collectionView:itemForRepresentedObjectAtIndexPath: method.
- */
-- (NSCollectionViewItem *)newItemForRepresentedObject:(id)object;
-
-/* (Soft-Deprecated)  A prototype NSCollectionViewItem that a dataSource-less NSCollectionView should clone to produce new items.  When not using a dataSource, you must either specify an itemPrototype, or override -newItemForRepresentedObject:, for the CollectionView to be able to create and display items.
- 
- It is considered a programming error to send this message to an NSCollectionView that has a dataSource; an exception will be raised.  Use -registerNib:forItemWithIdentifier: or -registerClass:forItemWithIdentifier: instead.
- */
-@property (nullable, strong) NSCollectionViewItem *itemPrototype;
-
-
 #pragma mark *** Finding Items ***
 
 /* (Soft-Deprecated)  Returns the NSCollectionViewItem associated with the represented object at the given index.  Sending this to a CollectionView that has more than one section raises an exception.  Use -itemAtIndexPath: instead.
-*/
+ */
 - (nullable NSCollectionViewItem *)itemAtIndex:(NSUInteger)index NS_AVAILABLE_MAC(10_6);
 
 /* Returns the NSCollectionViewItem (if any) associated with the represented object at the given indexPath.  This method returns nil if the CollectionView isn't currently maintaining an NSCollectionViewItem instance for the given indexPath, as may be the case if the specified item is outside the CollectionView's visibleRect.
@@ -604,9 +586,9 @@ This method must always return a valid view.
 - (BOOL)collectionView:(NSCollectionView *)collectionView writeItemsAtIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pasteboard NS_AVAILABLE_MAC(10_6);
 
 /* This is a legacy method for file promise dragging, that's invoked when the delegate has placed NSFilesPromisePboardType data on the dragging pasteboard (typically in -collectionView:writeItemsAtIndexPaths:toPasteboard:). When using file promises and targeting macOS 10.12 and later, you should instead implement -collectionView:pasteboardWriterForItemAtIndexPath: to return a fully configured NSFilePromiseProvider, whose delegate provides the file name resolution functionality that was previously delegated to this method.
- 
-NSCollectionView implements -namesOfPromisedFilesDroppedAtDestination: to return the results of this delegate method. This method should return an array of filenames (not full paths) for the created files. `dropURL` specifies the drop location. You do not need to implement this method for your collection view to be a drag source.
-*/
+
+ NSCollectionView implements -namesOfPromisedFilesDroppedAtDestination: to return the results of this delegate method. This method should return an array of filenames (not full paths) for the created files. `dropURL` specifies the drop location. You do not need to implement this method for your collection view to be a drag source.
+ */
 - (NSArray<NSString *> *)collectionView:(NSCollectionView *)collectionView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropURL forDraggedItemsAtIndexPaths:(NSSet<NSIndexPath *> *)indexPaths NS_DEPRECATED_MAC(10_11, 10_13, "Use NSFilePromiseReceiver objects instead");
 
 /* Old Form (Single Section Only) */
@@ -738,6 +720,29 @@ Multi-image drag and drop: If draggingInfo.animatesToDestination is set to YES, 
 /* Executes the given block for each NSIndexPath in the set.  The index paths are enumerated in the order defined by NSIndexPath's -compare: method.  For CollectionView item index paths, this means all index paths in section 0, in ascending order, followed by all index paths in section 1, and so on.  You may pass the NSEnumerationReverse option to enumerate in the reverse order.  Set *stop = YES if desired, to halt the enumeration early.  Note that the given indexPath is not guaranteed to survive return from the block invocation, so if you wish to pass it outside the block, you must make a -copy (and later -release or -autorelease, if not using ARC).
  */
 - (void)enumerateIndexPathsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (NS_NOESCAPE ^)(NSIndexPath *indexPath, BOOL *stop))block NS_AVAILABLE_MAC(10_11);
+
+@end
+
+@interface NSCollectionView (NSDeprecated)
+
+/* Invoked by a dataSource-less NSCollectionView when it needs a new item to represent the given model "object" (which is presumed to be a member of the CollectionView's "content" array).  Instantiates and returns a non-autoreleased item whose "representedObject" has been set to point to the given "object".  NSCollectionView's implementation of this method makes a copy of the CollectionView's itemPrototype (raising an exception if itemPrototype is nil).  You can override this method to customize the returned item or its view subtree however you wish, calling up to super first to obtain it.  Or, you can replace super's implementation entirely, to instantiate whatever kind of item you wish, potentially based on the type or properties of the given model "object".  The item returned from this factory method should NOT be autoreleased.
+
+   It is considered a programming error to send this message to an NSCollectionView that has a dataSource; an exception will be raised.  Use -makeItemWithIdentifier:forIndexPath: instead, from the dataSource's -collectionView:itemForRepresentedObjectAtIndexPath: method.
+ */
+- (NSCollectionViewItem *)newItemForRepresentedObject:(id)object NS_DEPRECATED_MAC(10_5, 10_14, "Use -[NSCollectionViewDataSource collectionView:itemForRepresentedObjectAtIndexPath:] instead");
+
+/* A prototype NSCollectionViewItem that a dataSource-less NSCollectionView should clone to produce new items.  When not using a dataSource, you must either specify an itemPrototype, or override -newItemForRepresentedObject:, for the CollectionView to be able to create and display items.
+
+   It is considered a programming error to send this message to an NSCollectionView that has a dataSource; an exception will be raised.
+ */
+@property (nullable, strong) NSCollectionViewItem *itemPrototype NS_DEPRECATED_MAC(10_5, 10_14, "Use -registerNib:forItemWithIdentifier: or -registerClass:forItemWithIdentifier: instead.");
+
+/* The following properties pertain only to NSCollectionViewGridLayout.  When you set collectionViewLayout to point to an instance of this class (or a subclass), these NSCollectionView properties take on the corresponding property values of the NSCollectionViewGridLayout.  When collectionViewLayout points to any other kind of layout object, these properties remember the values they are given, but they don't affect item layout or display.  When targeting OS X 10.11 and later, it's recommended that you reference the corresponding NSCollectionViewGridLayout properties instead.
+ */
+@property NSUInteger maxNumberOfRows NS_DEPRECATED_MAC(10_5, 10_14, "Use NSCollectionViewGridLayout as the receiver's collectionViewLayout, setting its maximumNumberOfRows instead"); // default: 0, which means no limit
+@property NSUInteger maxNumberOfColumns NS_DEPRECATED_MAC(10_5, 10_14, "Use NSCollectionViewGridLayout as the receiver's collectionViewLayout, setting its maximumNumberOfColumns instead"); // default: 0, which means no limit
+@property NSSize minItemSize NS_DEPRECATED_MAC(10_5, 10_14, "Use NSCollectionViewGridLayout as the receiver's collectionViewLayout, setting its minimumItemSize instead"); // default: (0; 0)
+@property NSSize maxItemSize NS_DEPRECATED_MAC(10_5, 10_14, "Use NSCollectionViewGridLayout as the receiver's collectionViewLayout, setting its maximumItemSize instead"); // default: (0; 0), which means no limit
 
 @end
 

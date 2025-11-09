@@ -32,6 +32,9 @@
 #define kLAErrorInvalidContext                            -10
 #define kLAErrorNotInteractive                          -1004
 
+#define kLAErrorBiometryNotAvailable                        kLAErrorTouchIDNotAvailable
+#define kLAErrorBiometryNotEnrolled                         kLAErrorTouchIDNotEnrolled
+#define kLAErrorBiometryLockout                             kLAErrorTouchIDLockout
 
 // Error domain
 #define kLAErrorDomain        "com.apple.LocalAuthentication"

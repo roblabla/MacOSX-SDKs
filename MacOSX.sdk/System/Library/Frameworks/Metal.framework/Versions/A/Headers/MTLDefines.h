@@ -5,11 +5,10 @@
 //  Copyright (c) 2014 Apple Inc. All rights reserved.
 //
 
-#import <Availability.h>
+#import <os/availability.h>
 #import <TargetConditionals.h>
 
 #define MTL_EXPORT __attribute__((visibility ("default")))
-
 #ifdef __cplusplus
 #define MTL_EXTERN extern "C" MTL_EXPORT
 #else

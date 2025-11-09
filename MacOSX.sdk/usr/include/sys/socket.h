@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -520,7 +520,12 @@ struct sockaddr_storage {
 #define	NET_RT_TRASH		5	/* routes not in table but not freed */
 #define	NET_RT_IFLIST2		6	/* interface list with addresses */
 #define	NET_RT_DUMP2		7	/* dump; may limit to a.f. */
-#define	NET_RT_MAXID		10
+/*
+ * Allows read access non-local host's MAC address
+ * if the process has neighbor cache entitlement.
+ */
+#define	NET_RT_FLAGS_PRIV	10
+#define	NET_RT_MAXID		11
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
 

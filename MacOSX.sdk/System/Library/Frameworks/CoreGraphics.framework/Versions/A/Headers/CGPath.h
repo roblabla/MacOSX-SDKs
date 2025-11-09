@@ -39,35 +39,35 @@ typedef CF_ENUM(int32_t, CGLineCap) {
 /* Return the CFTypeID for CGPathRefs. */
 
 CG_EXTERN CFTypeID CGPathGetTypeID(void)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Create a mutable path. */
 
 CG_EXTERN CGMutablePathRef  CGPathCreateMutable(void)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Create a copy of `path'. */
 
 CG_EXTERN CGPathRef __nullable CGPathCreateCopy(CGPathRef cg_nullable path)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Create a copy of `path' transformed by `transform'. */
 
 CG_EXTERN CGPathRef __nullable CGPathCreateCopyByTransformingPath(
     CGPathRef cg_nullable path, const CGAffineTransform * __nullable transform)
-    CG_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
+    CG_AVAILABLE_STARTING(10.7, 5.0);
 
 /* Create a mutable copy of `path'. */
 
 CG_EXTERN CGMutablePathRef __nullable CGPathCreateMutableCopy(
     CGPathRef cg_nullable path)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Create a mutable copy of `path' transformed by `transform'. */
 
 CG_EXTERN CGMutablePathRef __nullable CGPathCreateMutableCopyByTransformingPath(
     CGPathRef cg_nullable path, const CGAffineTransform * __nullable transform)
-    CG_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
+    CG_AVAILABLE_STARTING(10.7, 5.0);
 
 /* Return a path representing a rectangle bounded by `rect'. The rectangle
    forms a complete subpath of the path --- that is, it begins with a "move
@@ -78,7 +78,7 @@ CG_EXTERN CGMutablePathRef __nullable CGPathCreateMutableCopyByTransformingPath(
 
 CG_EXTERN CGPathRef  CGPathCreateWithRect(CGRect rect,
     const CGAffineTransform * __nullable transform)
-    CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_4_0);
+    CG_AVAILABLE_STARTING(10.5, 4.0);
 
 /* Return a path representing an ellipse bounded by `rect'. The ellipse is
    approximated by a sequence of Bézier curves. The center of the ellipse is
@@ -94,7 +94,7 @@ CG_EXTERN CGPathRef  CGPathCreateWithRect(CGRect rect,
 
 CG_EXTERN CGPathRef  CGPathCreateWithEllipseInRect(CGRect rect,
     const CGAffineTransform * __nullable transform)
-    CG_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
+    CG_AVAILABLE_STARTING(10.7, 5.0);
 
 /* Return a path representing a rounded rectangle. The rounded rectangle
    coincides with the edges of `rect'. Each corner is consists of
@@ -108,7 +108,7 @@ CG_EXTERN CGPathRef  CGPathCreateWithEllipseInRect(CGRect rect,
 CG_EXTERN CGPathRef  CGPathCreateWithRoundedRect(CGRect rect,
     CGFloat cornerWidth, CGFloat cornerHeight,
     const CGAffineTransform * __nullable transform)
-    CG_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+    CG_AVAILABLE_STARTING(10.9, 7.0);
 
 /* Add a rounded rectangle to `path'. The rounded rectangle coincides with
    the edges of `rect'. Each corner is consists of one-quarter of an ellipse
@@ -122,7 +122,7 @@ CG_EXTERN CGPathRef  CGPathCreateWithRoundedRect(CGRect rect,
 CG_EXTERN void CGPathAddRoundedRect(CGMutablePathRef cg_nullable path,
     const CGAffineTransform * __nullable transform, CGRect rect,
     CGFloat cornerWidth, CGFloat cornerHeight)
-    CG_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+    CG_AVAILABLE_STARTING(10.9, 7.0);
 
 /* Create a dashed path from `path'. The parameters `phase', `lengths', and
    `count' have the same meaning as the corresponding parameters for
@@ -133,7 +133,7 @@ CG_EXTERN void CGPathAddRoundedRect(CGMutablePathRef cg_nullable path,
 CG_EXTERN CGPathRef __nullable CGPathCreateCopyByDashingPath(
     CGPathRef cg_nullable path, const CGAffineTransform * __nullable transform,
     CGFloat phase, const CGFloat * __nullable lengths, size_t count)
-    CG_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
+    CG_AVAILABLE_STARTING(10.7, 5.0);
 
 /* Create a stroked path from `path'. The parameters `lineWidth', `lineCap',
    `lineJoin', and `miterLimit' have the same meaning as the corresponding
@@ -145,25 +145,25 @@ CG_EXTERN CGPathRef __nullable CGPathCreateCopyByStrokingPath(
     CGPathRef cg_nullable path, const CGAffineTransform * __nullable transform,
     CGFloat lineWidth, CGLineCap lineCap,
     CGLineJoin lineJoin, CGFloat miterLimit)
-    CG_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
+    CG_AVAILABLE_STARTING(10.7, 5.0);
 
 /* Equivalent to `CFRetain(path)', except it doesn't crash (as CFRetain
    does) if `path' is NULL. */
 
 CG_EXTERN CGPathRef cg_nullable CGPathRetain(CGPathRef cg_nullable path)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Equivalent to `CFRelease(path)', except it doesn't crash (as CFRelease
    does) if `path' is NULL. */
 
 CG_EXTERN void CGPathRelease(CGPathRef cg_nullable path)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Return true if `path1' is equal to `path2'; false otherwise. */
 
 CG_EXTERN bool CGPathEqualToPath(CGPathRef cg_nullable path1,
     CGPathRef cg_nullable path2)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /*** Path construction functions. ***/
 
@@ -172,7 +172,7 @@ CG_EXTERN bool CGPathEqualToPath(CGPathRef cg_nullable path1,
 
 CG_EXTERN void CGPathMoveToPoint(CGMutablePathRef cg_nullable path,
     const CGAffineTransform * __nullable m, CGFloat x, CGFloat y)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Append a straight line segment from the current point to `(x, y)' in
    `path' and move the current point to `(x, y)'. If `m' is non-NULL, then
@@ -180,7 +180,7 @@ CG_EXTERN void CGPathMoveToPoint(CGMutablePathRef cg_nullable path,
 
 CG_EXTERN void CGPathAddLineToPoint(CGMutablePathRef cg_nullable path,
     const CGAffineTransform * __nullable m, CGFloat x, CGFloat y)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Append a quadratic curve from the current point to `(x, y)' with control
    point `(cpx, cpy)' in `path' and move the current point to `(x, y)'. If
@@ -189,7 +189,7 @@ CG_EXTERN void CGPathAddLineToPoint(CGMutablePathRef cg_nullable path,
 CG_EXTERN void CGPathAddQuadCurveToPoint(CGMutablePathRef cg_nullable path,
     const CGAffineTransform *__nullable m, CGFloat cpx, CGFloat cpy,
     CGFloat x, CGFloat y)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Append a cubic Bézier curve from the current point to `(x,y)' with
    control points `(cp1x, cp1y)' and `(cp2x, cp2y)' in `path' and move the
@@ -199,13 +199,13 @@ CG_EXTERN void CGPathAddQuadCurveToPoint(CGMutablePathRef cg_nullable path,
 CG_EXTERN void CGPathAddCurveToPoint(CGMutablePathRef cg_nullable path,
     const CGAffineTransform * __nullable m, CGFloat cp1x, CGFloat cp1y,
     CGFloat cp2x, CGFloat cp2y, CGFloat x, CGFloat y)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Append a line from the current point to the starting point of the current
    subpath of `path' and end the subpath. */
 
 CG_EXTERN void CGPathCloseSubpath(CGMutablePathRef cg_nullable path)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /*** Path construction convenience functions. ***/
 
@@ -214,7 +214,7 @@ CG_EXTERN void CGPathCloseSubpath(CGMutablePathRef cg_nullable path)
 
 CG_EXTERN void CGPathAddRect(CGMutablePathRef cg_nullable path,
     const CGAffineTransform * __nullable m, CGRect rect)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Add each rectangle specified by `rects', an array of `count' CGRects, to
    `path'. If `m' is non-NULL, then first transform each rectangle by `m'
@@ -223,7 +223,7 @@ CG_EXTERN void CGPathAddRect(CGMutablePathRef cg_nullable path,
 CG_EXTERN void CGPathAddRects(CGMutablePathRef cg_nullable path,
     const CGAffineTransform * __nullable m, const CGRect * __nullable rects,
     size_t count)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Move to the first element of `points', an array of `count' CGPoints, and
    append a line from each point to the next point in `points'. If `m' is
@@ -232,7 +232,7 @@ CG_EXTERN void CGPathAddRects(CGMutablePathRef cg_nullable path,
 CG_EXTERN void CGPathAddLines(CGMutablePathRef cg_nullable path,
     const CGAffineTransform * __nullable m, const CGPoint * __nullable points,
     size_t count)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Add an ellipse (an oval) inside `rect' to `path'. The ellipse is
    approximated by a sequence of Bézier curves. The center of the ellipse is
@@ -247,7 +247,7 @@ CG_EXTERN void CGPathAddLines(CGMutablePathRef cg_nullable path,
 
 CG_EXTERN void CGPathAddEllipseInRect(CGMutablePathRef cg_nullable path,
     const CGAffineTransform * __nullable m, CGRect rect)
-    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* Add an arc of a circle to `path', possibly preceded by a straight line
    segment. The arc is approximated by a sequence of Bézier curves. The
@@ -263,7 +263,7 @@ CG_EXTERN void CGPathAddEllipseInRect(CGMutablePathRef cg_nullable path,
 CG_EXTERN void CGPathAddRelativeArc(CGMutablePathRef cg_nullable path,
     const CGAffineTransform * __nullable matrix, CGFloat x, CGFloat y,
     CGFloat radius, CGFloat startAngle, CGFloat delta)
-    CG_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
+    CG_AVAILABLE_STARTING(10.7, 5.0);
 
 /* Add an arc of a circle to `path', possibly preceded by a straight line
    segment. The arc is approximated by a sequence of Bézier curves. `(x, y)'
@@ -291,7 +291,7 @@ CG_EXTERN void CGPathAddArc(CGMutablePathRef cg_nullable path,
     const CGAffineTransform * __nullable m,
     CGFloat x, CGFloat y, CGFloat radius, CGFloat startAngle, CGFloat endAngle,
     bool clockwise)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Add an arc of a circle to `path', possibly preceded by a straight line
    segment. The arc is approximated by a sequence of Bézier curves. `radius'
@@ -304,32 +304,32 @@ CG_EXTERN void CGPathAddArc(CGMutablePathRef cg_nullable path,
 CG_EXTERN void CGPathAddArcToPoint(CGMutablePathRef cg_nullable path,
     const CGAffineTransform * __nullable m, CGFloat x1, CGFloat y1,
     CGFloat x2, CGFloat y2, CGFloat radius)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Add `path2' to `path1'. If `m' is non-NULL, then the points in `path2'
    will be transformed by `m' before they are added to `path1'. */
 
 CG_EXTERN void CGPathAddPath(CGMutablePathRef cg_nullable path1,
     const CGAffineTransform * __nullable m, CGPathRef cg_nullable path2)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /*** Path information functions. ***/
 
 /* Return true if `path' contains no elements, false otherwise. */
 
 CG_EXTERN bool CGPathIsEmpty(CGPathRef cg_nullable path)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Return true if `path' represents a rectangle, false otherwise. */
 
 CG_EXTERN bool CGPathIsRect(CGPathRef cg_nullable path, CGRect * __nullable rect)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Return the current point of the current subpath of `path'. If there is no
    current point, then return CGPointZero. */
 
 CG_EXTERN CGPoint CGPathGetCurrentPoint(CGPathRef cg_nullable path)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Return the bounding box of `path'. The bounding box is the smallest
    rectangle completely enclosing all points in the path, including control
@@ -337,7 +337,7 @@ CG_EXTERN CGPoint CGPathGetCurrentPoint(CGPathRef cg_nullable path)
    return `CGRectNull'. */
 
 CG_EXTERN CGRect CGPathGetBoundingBox(CGPathRef cg_nullable path)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Return the path bounding box of `path'. The path bounding box is the
    smallest rectangle completely enclosing all points in the path, *not*
@@ -345,7 +345,7 @@ CG_EXTERN CGRect CGPathGetBoundingBox(CGPathRef cg_nullable path)
    path is empty, then return `CGRectNull'. */
 
 CG_EXTERN CGRect CGPathGetPathBoundingBox(CGPathRef cg_nullable path)
-    CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+    CG_AVAILABLE_STARTING(10.6, 4.0);
 
 /* Return true if `point' is contained in `path'; false otherwise. A point
    is contained in a path if it is inside the painted region when the path
@@ -356,7 +356,7 @@ CG_EXTERN CGRect CGPathGetPathBoundingBox(CGPathRef cg_nullable path)
 
 CG_EXTERN bool CGPathContainsPoint(CGPathRef cg_nullable path,
     const CGAffineTransform * __nullable m, CGPoint point, bool eoFill)
-    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* The types of path elements returned by `CGPathApply'. */
 
@@ -386,12 +386,12 @@ typedef void (*CGPathApplierFunction)(void * __nullable info,
 
 CG_EXTERN void CGPathApply(CGPathRef cg_nullable path, void * __nullable info,
     CGPathApplierFunction cg_nullable function)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 typedef void (^CGPathApplyBlock)(const CGPathElement * element);
 
 CG_EXTERN void CGPathApplyWithBlock(CGPathRef path, CGPathApplyBlock CF_NOESCAPE block)
-    CG_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0);
+    CG_AVAILABLE_STARTING(10.13, 11.0);
 
 CF_ASSUME_NONNULL_END
 

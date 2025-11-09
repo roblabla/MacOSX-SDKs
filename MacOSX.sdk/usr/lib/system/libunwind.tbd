@@ -1,13 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: F77E9461-188D-346D-8624-8CDBA06A7B7D', 'x86_64: 2E68350B-0D04-3BB8-8EB3-D96395F8D649' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 41222EF6-2233-3CF4-947A-15D48CB8C030' ]
 platform:        macosx
 install-name:    /usr/lib/system/libunwind.dylib
-current-version: 35.3
+current-version: 35.4
 objc-constraint: none
 parent-umbrella: System
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ '$ld$hide$os10.4$__Unwind_Backtrace', '$ld$hide$os10.4$__Unwind_DeleteException', 
                        '$ld$hide$os10.4$__Unwind_FindEnclosingFunction', '$ld$hide$os10.4$__Unwind_Find_FDE', 
                        '$ld$hide$os10.4$__Unwind_ForcedUnwind', '$ld$hide$os10.4$__Unwind_GetCFA', 

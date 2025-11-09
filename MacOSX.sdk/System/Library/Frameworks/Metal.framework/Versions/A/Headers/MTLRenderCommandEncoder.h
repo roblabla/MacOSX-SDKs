@@ -31,13 +31,13 @@ typedef NS_ENUM(NSUInteger, MTLPrimitiveType) {
     MTLPrimitiveTypeLineStrip = 2,
     MTLPrimitiveTypeTriangle = 3,
     MTLPrimitiveTypeTriangleStrip = 4,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 typedef NS_ENUM(NSUInteger, MTLVisibilityResultMode) {
     MTLVisibilityResultModeDisabled = 0,
     MTLVisibilityResultModeBoolean = 1,
-    MTLVisibilityResultModeCounting NS_ENUM_AVAILABLE(10_11, 9_0) = 2,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+    MTLVisibilityResultModeCounting API_AVAILABLE(macos(10.11), ios(9.0)) = 2,
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 typedef struct {
     NSUInteger x, y, width, height;
@@ -51,22 +51,22 @@ typedef NS_ENUM(NSUInteger, MTLCullMode) {
     MTLCullModeNone = 0,
     MTLCullModeFront = 1,
     MTLCullModeBack = 2,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 typedef NS_ENUM(NSUInteger, MTLWinding) {
     MTLWindingClockwise = 0,
     MTLWindingCounterClockwise = 1,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 typedef NS_ENUM(NSUInteger, MTLDepthClipMode) {
     MTLDepthClipModeClip = 0,
     MTLDepthClipModeClamp = 1,
-} NS_ENUM_AVAILABLE(10_11, 9_0);
+} API_AVAILABLE(macos(10.11), ios(9.0));
 
 typedef NS_ENUM(NSUInteger, MTLTriangleFillMode) {
     MTLTriangleFillModeFill = 0,
     MTLTriangleFillModeLines = 1,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 typedef struct {
     uint32_t vertexCount;
@@ -112,13 +112,13 @@ typedef NS_OPTIONS(NSUInteger, MTLRenderStages)
 {
     MTLRenderStageVertex   = (1UL << 0),
     MTLRenderStageFragment = (1UL << 1),
-} NS_ENUM_AVAILABLE(10_13, 10_0);
+} API_AVAILABLE(macos(10.13), ios(10.0));
 
 /*!
  @protocol MTLRenderCommandEncoder
  @discussion MTLRenderCommandEncoder is a container for graphics rendering state and the code to translate the state into a command format that the device can execute. 
  */
-NS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0))
 @protocol MTLRenderCommandEncoder <MTLCommandEncoder>
 
 /*!
@@ -133,7 +133,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setVertexBytes:length:atIndex:
  @brief Set the data (by copy) for a given vertex buffer binding point.  This will remove any existing MTLBuffer from the binding point.
  */
-- (void)setVertexBytes:(const void *)bytes length:(NSUInteger)length atIndex:(NSUInteger)index NS_AVAILABLE(10_11, 8_3);
+- (void)setVertexBytes:(const void *)bytes length:(NSUInteger)length atIndex:(NSUInteger)index API_AVAILABLE(macos(10.11), ios(8.3));
 
 /*!
  @method setVertexBuffer:offset:atIndex:
@@ -145,7 +145,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setVertexBufferOffset:atIndex:
  @brief Set the offset within the current global buffer for all vertex shaders at the given bind point index.
  */
-- (void)setVertexBufferOffset:(NSUInteger)offset atIndex:(NSUInteger)index NS_AVAILABLE(10_11, 8_3);
+- (void)setVertexBufferOffset:(NSUInteger)offset atIndex:(NSUInteger)index API_AVAILABLE(macos(10.11), ios(8.3));
 
 /*!
  @method setVertexBuffers:offsets:withRange:
@@ -195,11 +195,12 @@ NS_AVAILABLE(10_11, 8_0)
  */
 - (void)setViewport:(MTLViewport)viewport;
 
+
 /*!
  @method setViewports:
  @brief Specifies an array of viewports, which are used to transform vertices from normalized device coordinates to window coordinates based on [[ viewport_array_index ]] value specified in the vertex shader.
  */
-- (void)setViewports:(const MTLViewport [__nonnull])viewports count:(NSUInteger)count NS_AVAILABLE(10_13, NA);
+- (void)setViewports:(const MTLViewport [__nonnull])viewports count:(NSUInteger)count API_AVAILABLE(macos(10.13), ios(12.0));
 
 /*!
  @method setFrontFacingWinding:
@@ -218,7 +219,7 @@ NS_AVAILABLE(10_11, 8_0)
 @method setDepthClipMode:
 @brief Controls what is done with fragments outside of the near or far planes.
 */
-- (void)setDepthClipMode:(MTLDepthClipMode)depthClipMode NS_AVAILABLE(10_11, 11_0);
+- (void)setDepthClipMode:(MTLDepthClipMode)depthClipMode API_AVAILABLE(macos(10.11), ios(11.0));
 
 /*!
  @method setDepthBias:slopeScale:clamp:
@@ -232,11 +233,12 @@ NS_AVAILABLE(10_11, 8_0)
  */
 - (void)setScissorRect:(MTLScissorRect)rect;
 
+
 /*!
- @method setViewports:
+ @method setScissorRects:
  @brief Specifies an array of rectangles for a fragment scissor test. The specific rectangle used is based on the [[ viewport_array_index ]] value output by the vertex shader. Fragments that lie outside the scissor rectangle are discarded.
  */
-- (void)setScissorRects:(const MTLScissorRect [__nonnull])scissorRects count:(NSUInteger)count NS_AVAILABLE(10_13, NA);
+- (void)setScissorRects:(const MTLScissorRect [__nonnull])scissorRects count:(NSUInteger)count API_AVAILABLE(macos(10.13), ios(12.0));
 
 /*!
  @method setTriangleFillMode:
@@ -250,7 +252,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setFragmentBytes:length:atIndex:
  @brief Set the data (by copy) for a given fragment buffer binding point.  This will remove any existing MTLBuffer from the binding point.
  */
-- (void)setFragmentBytes:(const void *)bytes length:(NSUInteger)length atIndex:(NSUInteger)index NS_AVAILABLE(10_11, 8_3);
+- (void)setFragmentBytes:(const void *)bytes length:(NSUInteger)length atIndex:(NSUInteger)index API_AVAILABLE(macos(10.11), ios(8.3));
 
 /*!
  @method setFragmentBuffer:offset:atIndex:
@@ -262,7 +264,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setFragmentBufferOffset:atIndex:
  @brief Set the offset within the current global buffer for all fragment shaders at the given bind point index.
  */
-- (void)setFragmentBufferOffset:(NSUInteger)offset atIndex:(NSUInteger)index NS_AVAILABLE(10_11, 8_3);
+- (void)setFragmentBufferOffset:(NSUInteger)offset atIndex:(NSUInteger)index API_AVAILABLE(macos(10.11), ios(8.3));
 
 /*!
  @method setFragmentBuffers:offsets:withRange:
@@ -330,7 +332,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setStencilFrontReferenceValue:backReferenceValue:
  @brief Set the stencil reference value for the back and front stencil buffers independently.
  */
-- (void)setStencilFrontReferenceValue:(uint32_t)frontReferenceValue backReferenceValue:(uint32_t)backReferenceValue NS_AVAILABLE(10_11, 9_0);
+- (void)setStencilFrontReferenceValue:(uint32_t)frontReferenceValue backReferenceValue:(uint32_t)backReferenceValue API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @method setVisibilityResultMode:offset:
@@ -347,21 +349,21 @@ NS_AVAILABLE(10_11, 8_0)
  @param storeAction The desired store action for the given color attachment.  This may be set to any value other than MTLStoreActionUnknown.
  @param colorAttachmentIndex The index of the color attachment
 */
-- (void)setColorStoreAction:(MTLStoreAction)storeAction atIndex:(NSUInteger)colorAttachmentIndex NS_AVAILABLE(10_12, 10_0);
+- (void)setColorStoreAction:(MTLStoreAction)storeAction atIndex:(NSUInteger)colorAttachmentIndex API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*!
  @method setDepthStoreAction:
  @brief If the the store action for the depth attachment was set to MTLStoreActionUnknown when the render command encoder was created,
  setDepthStoreAction: must be used to finalize the store action before endEncoding is called.
 */
-- (void)setDepthStoreAction:(MTLStoreAction)storeAction NS_AVAILABLE(10_12, 10_0);
+- (void)setDepthStoreAction:(MTLStoreAction)storeAction API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*!
  @method setStencilStoreAction:
  @brief If the the store action for the stencil attachment was set to MTLStoreActionUnknown when the render command encoder was created,
  setStencilStoreAction: must be used to finalize the store action before endEncoding is called.
 */
-- (void)setStencilStoreAction:(MTLStoreAction)storeAction NS_AVAILABLE(10_12, 10_0);
+- (void)setStencilStoreAction:(MTLStoreAction)storeAction API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*!
  @method setColorStoreActionOptions:atIndex:
@@ -370,21 +372,21 @@ NS_AVAILABLE(10_11, 8_0)
  @param storeActionOptions The desired store action options for the given color attachment.
  @param colorAttachmentIndex The index of the color attachment
  */
-- (void)setColorStoreActionOptions:(MTLStoreActionOptions)storeActionOptions atIndex:(NSUInteger)colorAttachmentIndex NS_AVAILABLE(10_13, 11_0);
+- (void)setColorStoreActionOptions:(MTLStoreActionOptions)storeActionOptions atIndex:(NSUInteger)colorAttachmentIndex API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  @method setDepthStoreActionOptions:
  @brief If the the store action for the depth attachment was set to MTLStoreActionUnknown when the render command encoder was created,
  setDepthStoreActionOptions: may be used to finalize the store action options before endEncoding is called.
  */
-- (void)setDepthStoreActionOptions:(MTLStoreActionOptions)storeActionOptions NS_AVAILABLE(10_13, 11_0);
+- (void)setDepthStoreActionOptions:(MTLStoreActionOptions)storeActionOptions API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  @method setStencilStoreActionOptions:
  @brief If the the store action for the stencil attachment was set to MTLStoreActionUnknown when the render command encoder was created,
  setStencilStoreActionOptions: may be used to finalize the store action options before endEncoding is called.
  */
-- (void)setStencilStoreActionOptions:(MTLStoreActionOptions)storeActionOptions NS_AVAILABLE(10_13, 11_0);
+- (void)setStencilStoreActionOptions:(MTLStoreActionOptions)storeActionOptions API_AVAILABLE(macos(10.13), ios(11.0));
 
 /* Drawing */
 
@@ -439,7 +441,7 @@ NS_AVAILABLE(10_11, 8_0)
  @param instanceCount The number of instances drawn.
  @param baseInstance Offset for instance_id.
  */
-- (void)drawPrimitives:(MTLPrimitiveType)primitiveType vertexStart:(NSUInteger)vertexStart vertexCount:(NSUInteger)vertexCount instanceCount:(NSUInteger)instanceCount baseInstance:(NSUInteger)baseInstance NS_AVAILABLE(10_11, 9_0);
+- (void)drawPrimitives:(MTLPrimitiveType)primitiveType vertexStart:(NSUInteger)vertexStart vertexCount:(NSUInteger)vertexCount instanceCount:(NSUInteger)instanceCount baseInstance:(NSUInteger)baseInstance API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @method drawIndexedPrimitives:indexCount:indexType:indexBuffer:indexBufferOffset:instanceCount:baseVertex:baseInstance:
@@ -453,7 +455,7 @@ NS_AVAILABLE(10_11, 8_0)
  @param baseVertex Offset for vertex_id. NOTE: this can be negative
  @param baseInstance Offset for instance_id.
  */
-- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id <MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance NS_AVAILABLE(10_11, 9_0);
+- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexCount:(NSUInteger)indexCount indexType:(MTLIndexType)indexType indexBuffer:(id <MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset instanceCount:(NSUInteger)instanceCount baseVertex:(NSInteger)baseVertex baseInstance:(NSUInteger)baseInstance API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @method drawPrimitives:indirectBuffer:indirectBufferOffset:
@@ -462,7 +464,7 @@ NS_AVAILABLE(10_11, 8_0)
  @param indirectBuffer A buffer object that the device will read drawPrimitives arguments from, see MTLDrawPrimitivesIndirectArguments.
  @param indirectBufferOffset Byte offset within @a indirectBuffer to start reading indexes from.  @a indirectBufferOffset must be a multiple of 4.
  */
-- (void)drawPrimitives:(MTLPrimitiveType)primitiveType indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset NS_AVAILABLE(10_11, 9_0);
+- (void)drawPrimitives:(MTLPrimitiveType)primitiveType indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @method drawIndexedPrimitives:indexType:indexBuffer:indexBufferOffset:indirectBuffer:indirectBufferOffset:
@@ -474,41 +476,43 @@ NS_AVAILABLE(10_11, 8_0)
  @param indirectBuffer A buffer object that the device will read drawIndexedPrimitives arguments from, see MTLDrawIndexedPrimitivesIndirectArguments.
  @param indirectBufferOffset Byte offset within @a indirectBuffer to start reading indexes from.  @a indirectBufferOffset must be a multiple of 4.
  */
-- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexType:(MTLIndexType)indexType indexBuffer:(id <MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset NS_AVAILABLE(10_11, 9_0);
+- (void)drawIndexedPrimitives:(MTLPrimitiveType)primitiveType indexType:(MTLIndexType)indexType indexBuffer:(id <MTLBuffer>)indexBuffer indexBufferOffset:(NSUInteger)indexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @method textureBarrier:
  @brief Ensure that following fragment shaders can read textures written by previous draw calls (in particular the framebuffer)
  */
-- (void)textureBarrier NS_AVAILABLE_MAC(10_11);
+- (void)textureBarrier
+    API_DEPRECATED_WITH_REPLACEMENT("memoryBarrierWithScope:MTLBarrierScopeRenderTargets", macos(10.11, 10.14)) API_UNAVAILABLE(ios, tvos)
+    ;
 
 /*!
  @method updateFence:afterStages:
- @abstract Update the event to capture all GPU work so far enqueued by this encoder for the given stages.
- @discussion Unlike <st>updateFence:</st>, this method will update the event when the given stage(s) complete, allowing for commands to overlap in execution.
+ @abstract Update the fence to capture all GPU work so far enqueued by this encoder for the given stages.
+ @discussion Unlike <st>updateFence:</st>, this method will update the fence when the given stage(s) complete, allowing for commands to overlap in execution.
  On iOS, render command encoder fence updates are always delayed until the end of the encoder.
  */
-- (void)updateFence:(id <MTLFence>)fence afterStages:(MTLRenderStages)stages NS_AVAILABLE(10_13, 10_0);
+- (void)updateFence:(id <MTLFence>)fence afterStages:(MTLRenderStages)stages API_AVAILABLE(macos(10.13), ios(10.0));
 
 /*!
  @method waitForFence:beforeStages:
- @abstract Prevent further GPU work until the event is reached for the given stages.
+ @abstract Prevent further GPU work until the fence is reached for the given stages.
  @discussion Unlike <st>waitForFence:</st>, this method will only block commands assoicated with the given stage(s), allowing for commands to overlap in execution.
  On iOS, render command encoder fence waits always occur the beginning of the encoder.
  */
-- (void)waitForFence:(id <MTLFence>)fence beforeStages:(MTLRenderStages)stages NS_AVAILABLE(10_13, 10_0);
+- (void)waitForFence:(id <MTLFence>)fence beforeStages:(MTLRenderStages)stages API_AVAILABLE(macos(10.13), ios(10.0));
 
--(void)setTessellationFactorBuffer:(nullable id <MTLBuffer>)buffer offset:(NSUInteger)offset instanceStride:(NSUInteger)instanceStride NS_AVAILABLE(10_12, 10_0);
+-(void)setTessellationFactorBuffer:(nullable id <MTLBuffer>)buffer offset:(NSUInteger)offset instanceStride:(NSUInteger)instanceStride API_AVAILABLE(macos(10.12), ios(10.0));
 
--(void)setTessellationFactorScale:(float)scale NS_AVAILABLE(10_12, 10_0);
+-(void)setTessellationFactorScale:(float)scale API_AVAILABLE(macos(10.12), ios(10.0));
 
--(void)drawPatches:(NSUInteger)numberOfPatchControlPoints patchStart:(NSUInteger)patchStart patchCount:(NSUInteger)patchCount patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset instanceCount:(NSUInteger)instanceCount baseInstance:(NSUInteger)baseInstance NS_AVAILABLE(10_12, 10_0);
+-(void)drawPatches:(NSUInteger)numberOfPatchControlPoints patchStart:(NSUInteger)patchStart patchCount:(NSUInteger)patchCount patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset instanceCount:(NSUInteger)instanceCount baseInstance:(NSUInteger)baseInstance API_AVAILABLE(macos(10.12), ios(10.0));
 
--(void)drawPatches:(NSUInteger)numberOfPatchControlPoints patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset NS_AVAILABLE(10_12, NA);
+-(void)drawPatches:(NSUInteger)numberOfPatchControlPoints patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset API_AVAILABLE(macos(10.12)) API_UNAVAILABLE(ios);
 
--(void)drawIndexedPatches:(NSUInteger)numberOfPatchControlPoints patchStart:(NSUInteger)patchStart patchCount:(NSUInteger)patchCount patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset controlPointIndexBuffer:(id <MTLBuffer>)controlPointIndexBuffer controlPointIndexBufferOffset:(NSUInteger)controlPointIndexBufferOffset instanceCount:(NSUInteger)instanceCount baseInstance:(NSUInteger)baseInstance NS_AVAILABLE(10_12, 10_0);
+-(void)drawIndexedPatches:(NSUInteger)numberOfPatchControlPoints patchStart:(NSUInteger)patchStart patchCount:(NSUInteger)patchCount patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset controlPointIndexBuffer:(id <MTLBuffer>)controlPointIndexBuffer controlPointIndexBufferOffset:(NSUInteger)controlPointIndexBufferOffset instanceCount:(NSUInteger)instanceCount baseInstance:(NSUInteger)baseInstance API_AVAILABLE(macos(10.12), ios(10.0));
 
--(void)drawIndexedPatches:(NSUInteger)numberOfPatchControlPoints patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset controlPointIndexBuffer:(id <MTLBuffer>)controlPointIndexBuffer controlPointIndexBufferOffset:(NSUInteger)controlPointIndexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset NS_AVAILABLE(10_12, NA);
+-(void)drawIndexedPatches:(NSUInteger)numberOfPatchControlPoints patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset controlPointIndexBuffer:(id <MTLBuffer>)controlPointIndexBuffer controlPointIndexBufferOffset:(NSUInteger)controlPointIndexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset API_AVAILABLE(macos(10.12)) API_UNAVAILABLE(ios);
 
 
 /*!
@@ -519,7 +523,7 @@ NS_AVAILABLE(10_11, 8_0)
      Note that calling useResource does not retain the resource. It is the responsiblity of the user to retain the resource until
      the command buffer has been executed.
  */
-- (void)useResource:(id <MTLResource>)resource usage:(MTLResourceUsage)usage NS_AVAILABLE(10_13, 11_0);
+- (void)useResource:(id <MTLResource>)resource usage:(MTLResourceUsage)usage API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  * @method useResources:count:usage:
@@ -529,21 +533,52 @@ NS_AVAILABLE(10_11, 8_0)
    Note that calling useResources does not retain the resources. It is the responsiblity of the user to retain the resources until
    the command buffer has been executed.
 */
-- (void)useResources:(const id <MTLResource> __nonnull[__nonnull])resources count:(NSUInteger)count usage:(MTLResourceUsage)usage NS_AVAILABLE(10_13, 11_0);
+- (void)useResources:(const id <MTLResource> __nonnull[__nonnull])resources count:(NSUInteger)count usage:(MTLResourceUsage)usage API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  * @method useHeap:
  * @abstract Declare that the resources allocated from a heap may be accessed by the render pass through an argument buffer
  * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any draw commands which may access the resources allocated from the heap through an argument buffer. This method may cause all of the color attachments allocated from the heap to become decompressed. Therefore, it is recommended that the useResource:usage: or useResources:count:usage: methods be used for color attachments instead, with a minimal (i.e. read-only) usage.
  */
-- (void)useHeap:(id <MTLHeap>)heap NS_AVAILABLE(10_13, 11_0);
+- (void)useHeap:(id <MTLHeap>)heap API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  * @method useHeaps:count:
  * @abstract Declare that the resources allocated from an array of heaps may be accessed by the render pass through an argument buffer
  * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any draw commands which may access the resources allocated from the heaps through an argument buffer. This method may cause all of the color attachments allocated from the heaps to become decompressed. Therefore, it is recommended that the useResource:usage: or useResources:count:usage: methods be used for color attachments instead, with a minimal (i.e. read-only) usage.
  */
-- (void)useHeaps:(const id <MTLHeap> __nonnull[__nonnull])heaps count:(NSUInteger)count NS_AVAILABLE(10_13, 11_0);
+- (void)useHeaps:(const id <MTLHeap> __nonnull[__nonnull])heaps count:(NSUInteger)count API_AVAILABLE(macos(10.13), ios(11.0));
+
+
+/*!
+ * @method executeCommandsInBuffer:buffer:withRange
+ * @abstract Execute  commands in the range executionRange within the given buffer.
+ * @discussion The same indirect command buffer may be executed any number of times within the same encoder.
+ */
+- (void)executeCommandsInBuffer:(id<MTLIndirectCommandBuffer>)indirectCommandBuffer withRange:(NSRange)executionRange API_AVAILABLE(macos(10.14), ios(12.0));
+
+/*!
+ * @method executeCommandsInBuffer:buffer:indirectRangeBuffer:indirectBufferOffset:
+ * @abstract Execute the commands in the given indirect range
+ * @discussion The same indirect command buffer may be executed any number of times within the same encoder.
+ */
+- (void)executeCommandsInBuffer:(id<MTLIndirectCommandBuffer>)indirectCommandbuffer indirectBuffer:(id<MTLBuffer>)indirectRangeBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios);
+
+
+/*!
+ * @method memoryBarrierWithScope:afterStages:beforeStages:
+ * @abstract Make stores to memory encoded before the barrier coherent with loads from memory encoded after the barrier.
+ * @discussion The barrier makes stores coherent that 1) are to a resource with a type in the given scope, and 2) happen at (or before) the stage given by afterStages. Only affects loads that happen at (or after) the stage given by beforeStages.
+ */
+-(void)memoryBarrierWithScope:(MTLBarrierScope)scope afterStages:(MTLRenderStages)after beforeStages:(MTLRenderStages)before API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios);
+
+/*!
+ * @method memoryBarrierWithResources:count:afterStages:beforeStages:
+ * @abstract Make stores to memory encoded before the barrier coherent with loads from memory encoded after the barrier.
+ * @discussion The barrier makes stores coherent that 1) are to resources in given array, and 2) happen at (or before) the stage given by afterStages. Only affects loads that happen at (or after) the stage give by beforeStages.
+ */
+-(void)memoryBarrierWithResources:(const id<MTLResource> __nonnull[__nonnull])resources count:(NSUInteger)count afterStages:(MTLRenderStages)after beforeStages:(MTLRenderStages)before API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios);
+
 
 
 @end

@@ -59,8 +59,8 @@
  *    erfc(x)       simd::erfc(x)
  *    tgamma(x)     simd::tgamma(x)
  *
- *    fmod(x)       simd::fmod(x)
- *    remainder(x)  simd::remainder(x)
+ *    fmod(x,y)      simd::fmod(x,y)
+ *    remainder(x,y) simd::remainder(x,y)
  *
  *    ceil(x)       simd::ceil(x)
  *    floor(x)      simd::floor(x)
@@ -1917,7 +1917,7 @@ static SIMD_CFUNC simd_float3 __tg_fmin(simd_float3 x, simd_float3 y) {
 }
   
 static SIMD_CFUNC simd_float4 __tg_fmin(simd_float4 x, simd_float4 y) {
-#if defined __AVX512DQ__ && defined __AVX512VL__
+#if defined __AVX512DQ__ && defined __AVX512VL__ && !__FINITE_MATH_ONLY__
   return _mm_range_ps(x, y, 4);
 #elif defined __SSE2__ && __FINITE_MATH_ONLY__
   return _mm_min_ps(x, y);
@@ -1933,7 +1933,7 @@ static SIMD_CFUNC simd_float4 __tg_fmin(simd_float4 x, simd_float4 y) {
 }
   
 static SIMD_CFUNC simd_float8 __tg_fmin(simd_float8 x, simd_float8 y) {
-#if defined __AVX512DQ__ && defined __AVX512VL__
+#if defined __AVX512DQ__ && defined __AVX512VL__ && !__FINITE_MATH_ONLY__
   return _mm256_range_ps(x, y, 4);
 #elif defined __AVX__ && __FINITE_MATH_ONLY__
   return _mm256_min_ps(x, y);
@@ -1945,7 +1945,7 @@ static SIMD_CFUNC simd_float8 __tg_fmin(simd_float8 x, simd_float8 y) {
 }
   
 static SIMD_CFUNC simd_float16 __tg_fmin(simd_float16 x, simd_float16 y) {
-#if defined __AVX512DQ__
+#if defined __AVX512DQ__ && !__FINITE_MATH_ONLY__
   return _mm512_range_ps(x, y, 4);
 #elif defined __AVX512F__ && __FINITE_MATH_ONLY__
   return _mm512_min_ps(x, y);
@@ -2015,7 +2015,7 @@ static SIMD_CFUNC simd_float3 __tg_fmax(simd_float3 x, simd_float3 y) {
 }
   
 static SIMD_CFUNC simd_float4 __tg_fmax(simd_float4 x, simd_float4 y) {
-#if defined __AVX512DQ__ && defined __AVX512VL__
+#if defined __AVX512DQ__ && defined __AVX512VL__ && !__FINITE_MATH_ONLY__
   return _mm_range_ps(x, y, 5);
 #elif defined __SSE2__ && __FINITE_MATH_ONLY__
   return _mm_max_ps(x, y);
@@ -2031,7 +2031,7 @@ static SIMD_CFUNC simd_float4 __tg_fmax(simd_float4 x, simd_float4 y) {
 }
   
 static SIMD_CFUNC simd_float8 __tg_fmax(simd_float8 x, simd_float8 y) {
-#if defined __AVX512DQ__ && defined __AVX512VL__
+#if defined __AVX512DQ__ && defined __AVX512VL__ && !__FINITE_MATH_ONLY__
   return _mm256_range_ps(x, y, 5);
 #elif defined __AVX__ && __FINITE_MATH_ONLY__
   return _mm256_max_ps(x, y);
@@ -2043,7 +2043,7 @@ static SIMD_CFUNC simd_float8 __tg_fmax(simd_float8 x, simd_float8 y) {
 }
   
 static SIMD_CFUNC simd_float16 __tg_fmax(simd_float16 x, simd_float16 y) {
-#if defined __AVX512DQ__
+#if defined __AVX512DQ__ && !__FINITE_MATH_ONLY__
   return _mm512_range_ps(x, y, 5);
 #elif defined __AVX512F__ && __FINITE_MATH_ONLY__
   return _mm512_max_ps(x, y);
@@ -2553,7 +2553,7 @@ static inline SIMD_CFUNC simd_float8 __tg_sin(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_sin_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_sin(simd_float16 x) {
   return _simd_sin_f16(x);
@@ -2595,7 +2595,7 @@ static inline SIMD_CFUNC simd_double4 __tg_sin(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_sin_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_sin(simd_double8 x) {
   return _simd_sin_d8(x);
@@ -2641,7 +2641,7 @@ static inline SIMD_CFUNC simd_float8 __tg_cos(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_cos_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_cos(simd_float16 x) {
   return _simd_cos_f16(x);
@@ -2683,7 +2683,7 @@ static inline SIMD_CFUNC simd_double4 __tg_cos(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_cos_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_cos(simd_double8 x) {
   return _simd_cos_d8(x);
@@ -2726,7 +2726,7 @@ static inline SIMD_CFUNC simd_float8 __tg_acos(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_acos_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_acos(simd_float16 x) {
   return _simd_acos_f16(x);
@@ -2763,7 +2763,7 @@ static inline SIMD_CFUNC simd_double4 __tg_acos(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_acos_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_acos(simd_double8 x) {
   return _simd_acos_d8(x);
@@ -2805,7 +2805,7 @@ static inline SIMD_CFUNC simd_float8 __tg_asin(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_asin_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_asin(simd_float16 x) {
   return _simd_asin_f16(x);
@@ -2842,7 +2842,7 @@ static inline SIMD_CFUNC simd_double4 __tg_asin(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_asin_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_asin(simd_double8 x) {
   return _simd_asin_d8(x);
@@ -2884,7 +2884,7 @@ static inline SIMD_CFUNC simd_float8 __tg_atan(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_atan_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_atan(simd_float16 x) {
   return _simd_atan_f16(x);
@@ -2921,7 +2921,7 @@ static inline SIMD_CFUNC simd_double4 __tg_atan(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_atan_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_atan(simd_double8 x) {
   return _simd_atan_d8(x);
@@ -2963,7 +2963,7 @@ static inline SIMD_CFUNC simd_float8 __tg_tan(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_tan_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_tan(simd_float16 x) {
   return _simd_tan_f16(x);
@@ -3000,7 +3000,7 @@ static inline SIMD_CFUNC simd_double4 __tg_tan(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_tan_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_tan(simd_double8 x) {
   return _simd_tan_d8(x);
@@ -3043,7 +3043,7 @@ static inline SIMD_CFUNC simd_float8 __tg_cospi(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_cospi_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_cospi(simd_float16 x) {
   return _simd_cospi_f16(x);
@@ -3080,7 +3080,7 @@ static inline SIMD_CFUNC simd_double4 __tg_cospi(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_cospi_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_cospi(simd_double8 x) {
   return _simd_cospi_d8(x);
@@ -3124,7 +3124,7 @@ static inline SIMD_CFUNC simd_float8 __tg_sinpi(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_sinpi_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_sinpi(simd_float16 x) {
   return _simd_sinpi_f16(x);
@@ -3161,7 +3161,7 @@ static inline SIMD_CFUNC simd_double4 __tg_sinpi(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_sinpi_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_sinpi(simd_double8 x) {
   return _simd_sinpi_d8(x);
@@ -3205,7 +3205,7 @@ static inline SIMD_CFUNC simd_float8 __tg_tanpi(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_tanpi_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_tanpi(simd_float16 x) {
   return _simd_tanpi_f16(x);
@@ -3242,7 +3242,7 @@ static inline SIMD_CFUNC simd_double4 __tg_tanpi(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_tanpi_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_tanpi(simd_double8 x) {
   return _simd_tanpi_d8(x);
@@ -3285,7 +3285,7 @@ static inline SIMD_CFUNC simd_float8 __tg_acosh(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_acosh_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_acosh(simd_float16 x) {
   return _simd_acosh_f16(x);
@@ -3322,7 +3322,7 @@ static inline SIMD_CFUNC simd_double4 __tg_acosh(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_acosh_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_acosh(simd_double8 x) {
   return _simd_acosh_d8(x);
@@ -3364,7 +3364,7 @@ static inline SIMD_CFUNC simd_float8 __tg_asinh(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_asinh_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_asinh(simd_float16 x) {
   return _simd_asinh_f16(x);
@@ -3401,7 +3401,7 @@ static inline SIMD_CFUNC simd_double4 __tg_asinh(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_asinh_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_asinh(simd_double8 x) {
   return _simd_asinh_d8(x);
@@ -3443,7 +3443,7 @@ static inline SIMD_CFUNC simd_float8 __tg_atanh(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_atanh_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_atanh(simd_float16 x) {
   return _simd_atanh_f16(x);
@@ -3480,7 +3480,7 @@ static inline SIMD_CFUNC simd_double4 __tg_atanh(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_atanh_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_atanh(simd_double8 x) {
   return _simd_atanh_d8(x);
@@ -3522,7 +3522,7 @@ static inline SIMD_CFUNC simd_float8 __tg_cosh(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_cosh_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_cosh(simd_float16 x) {
   return _simd_cosh_f16(x);
@@ -3559,7 +3559,7 @@ static inline SIMD_CFUNC simd_double4 __tg_cosh(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_cosh_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_cosh(simd_double8 x) {
   return _simd_cosh_d8(x);
@@ -3601,7 +3601,7 @@ static inline SIMD_CFUNC simd_float8 __tg_sinh(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_sinh_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_sinh(simd_float16 x) {
   return _simd_sinh_f16(x);
@@ -3638,7 +3638,7 @@ static inline SIMD_CFUNC simd_double4 __tg_sinh(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_sinh_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_sinh(simd_double8 x) {
   return _simd_sinh_d8(x);
@@ -3680,7 +3680,7 @@ static inline SIMD_CFUNC simd_float8 __tg_tanh(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_tanh_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_tanh(simd_float16 x) {
   return _simd_tanh_f16(x);
@@ -3717,7 +3717,7 @@ static inline SIMD_CFUNC simd_double4 __tg_tanh(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_tanh_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_tanh(simd_double8 x) {
   return _simd_tanh_d8(x);
@@ -3759,7 +3759,7 @@ static inline SIMD_CFUNC simd_float8 __tg_exp(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_exp_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_exp(simd_float16 x) {
   return _simd_exp_f16(x);
@@ -3796,7 +3796,7 @@ static inline SIMD_CFUNC simd_double4 __tg_exp(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_exp_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_exp(simd_double8 x) {
   return _simd_exp_d8(x);
@@ -3838,7 +3838,7 @@ static inline SIMD_CFUNC simd_float8 __tg_exp2(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_exp2_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_exp2(simd_float16 x) {
   return _simd_exp2_f16(x);
@@ -3875,7 +3875,7 @@ static inline SIMD_CFUNC simd_double4 __tg_exp2(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_exp2_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_exp2(simd_double8 x) {
   return _simd_exp2_d8(x);
@@ -3918,7 +3918,7 @@ static inline SIMD_CFUNC simd_float8 __tg_exp10(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_exp10_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_exp10(simd_float16 x) {
   return _simd_exp10_f16(x);
@@ -3955,7 +3955,7 @@ static inline SIMD_CFUNC simd_double4 __tg_exp10(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_exp10_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_exp10(simd_double8 x) {
   return _simd_exp10_d8(x);
@@ -3998,7 +3998,7 @@ static inline SIMD_CFUNC simd_float8 __tg_expm1(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_expm1_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_expm1(simd_float16 x) {
   return _simd_expm1_f16(x);
@@ -4035,7 +4035,7 @@ static inline SIMD_CFUNC simd_double4 __tg_expm1(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_expm1_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_expm1(simd_double8 x) {
   return _simd_expm1_d8(x);
@@ -4077,7 +4077,7 @@ static inline SIMD_CFUNC simd_float8 __tg_log(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_log_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_log(simd_float16 x) {
   return _simd_log_f16(x);
@@ -4114,7 +4114,7 @@ static inline SIMD_CFUNC simd_double4 __tg_log(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_log_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_log(simd_double8 x) {
   return _simd_log_d8(x);
@@ -4156,7 +4156,7 @@ static inline SIMD_CFUNC simd_float8 __tg_log2(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_log2_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_log2(simd_float16 x) {
   return _simd_log2_f16(x);
@@ -4193,7 +4193,7 @@ static inline SIMD_CFUNC simd_double4 __tg_log2(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_log2_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_log2(simd_double8 x) {
   return _simd_log2_d8(x);
@@ -4235,7 +4235,7 @@ static inline SIMD_CFUNC simd_float8 __tg_log10(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_log10_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_log10(simd_float16 x) {
   return _simd_log10_f16(x);
@@ -4272,7 +4272,7 @@ static inline SIMD_CFUNC simd_double4 __tg_log10(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_log10_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_log10(simd_double8 x) {
   return _simd_log10_d8(x);
@@ -4314,7 +4314,7 @@ static inline SIMD_CFUNC simd_float8 __tg_log1p(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_log1p_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_log1p(simd_float16 x) {
   return _simd_log1p_f16(x);
@@ -4351,7 +4351,7 @@ static inline SIMD_CFUNC simd_double4 __tg_log1p(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_log1p_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_log1p(simd_double8 x) {
   return _simd_log1p_d8(x);
@@ -4393,7 +4393,7 @@ static inline SIMD_CFUNC simd_float8 __tg_cbrt(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_cbrt_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_cbrt(simd_float16 x) {
   return _simd_cbrt_f16(x);
@@ -4430,7 +4430,7 @@ static inline SIMD_CFUNC simd_double4 __tg_cbrt(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_cbrt_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_cbrt(simd_double8 x) {
   return _simd_cbrt_d8(x);
@@ -4472,7 +4472,7 @@ static inline SIMD_CFUNC simd_float8 __tg_erf(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_erf_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_erf(simd_float16 x) {
   return _simd_erf_f16(x);
@@ -4509,7 +4509,7 @@ static inline SIMD_CFUNC simd_double4 __tg_erf(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_erf_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_erf(simd_double8 x) {
   return _simd_erf_d8(x);
@@ -4551,7 +4551,7 @@ static inline SIMD_CFUNC simd_float8 __tg_erfc(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_erfc_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_erfc(simd_float16 x) {
   return _simd_erfc_f16(x);
@@ -4588,7 +4588,7 @@ static inline SIMD_CFUNC simd_double4 __tg_erfc(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_erfc_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_erfc(simd_double8 x) {
   return _simd_erfc_d8(x);
@@ -4630,7 +4630,7 @@ static inline SIMD_CFUNC simd_float8 __tg_tgamma(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_tgamma_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_tgamma(simd_float16 x) {
   return _simd_tgamma_f16(x);
@@ -4667,7 +4667,7 @@ static inline SIMD_CFUNC simd_double4 __tg_tgamma(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_tgamma_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_tgamma(simd_double8 x) {
   return _simd_tgamma_d8(x);
@@ -4713,7 +4713,7 @@ static inline SIMD_CFUNC simd_float8 __tg_round(simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_round_f16(simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_round(simd_float16 x) {
   return _simd_round_f16(x);
@@ -4754,7 +4754,7 @@ static inline SIMD_CFUNC simd_double4 __tg_round(simd_double4 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_round_d8(simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_round(simd_double8 x) {
   return _simd_round_d8(x);
@@ -4796,7 +4796,7 @@ static inline SIMD_CFUNC simd_float8 __tg_atan2(simd_float8 y, simd_float8 x) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_atan2_f16(simd_float16 y, simd_float16 x);
 static inline SIMD_CFUNC simd_float16 __tg_atan2(simd_float16 y, simd_float16 x) {
   return _simd_atan2_f16(y, x);
@@ -4833,7 +4833,7 @@ static inline SIMD_CFUNC simd_double4 __tg_atan2(simd_double4 y, simd_double4 x)
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_atan2_d8(simd_double8 y, simd_double8 x);
 static inline SIMD_CFUNC simd_double8 __tg_atan2(simd_double8 y, simd_double8 x) {
   return _simd_atan2_d8(y, x);
@@ -4875,7 +4875,7 @@ static inline SIMD_CFUNC simd_float8 __tg_hypot(simd_float8 x, simd_float8 y) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_hypot_f16(simd_float16 x, simd_float16 y);
 static inline SIMD_CFUNC simd_float16 __tg_hypot(simd_float16 x, simd_float16 y) {
   return _simd_hypot_f16(x, y);
@@ -4912,7 +4912,7 @@ static inline SIMD_CFUNC simd_double4 __tg_hypot(simd_double4 x, simd_double4 y)
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_hypot_d8(simd_double8 x, simd_double8 y);
 static inline SIMD_CFUNC simd_double8 __tg_hypot(simd_double8 x, simd_double8 y) {
   return _simd_hypot_d8(x, y);
@@ -4954,7 +4954,7 @@ static inline SIMD_CFUNC simd_float8 __tg_pow(simd_float8 x, simd_float8 y) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_pow_f16(simd_float16 x, simd_float16 y);
 static inline SIMD_CFUNC simd_float16 __tg_pow(simd_float16 x, simd_float16 y) {
   return _simd_pow_f16(x, y);
@@ -4991,7 +4991,7 @@ static inline SIMD_CFUNC simd_double4 __tg_pow(simd_double4 x, simd_double4 y) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_pow_d8(simd_double8 x, simd_double8 y);
 static inline SIMD_CFUNC simd_double8 __tg_pow(simd_double8 x, simd_double8 y) {
   return _simd_pow_d8(x, y);
@@ -5033,7 +5033,7 @@ static inline SIMD_CFUNC simd_float8 __tg_fmod(simd_float8 x, simd_float8 y) {
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_fmod_f16(simd_float16 x, simd_float16 y);
 static inline SIMD_CFUNC simd_float16 __tg_fmod(simd_float16 x, simd_float16 y) {
   return _simd_fmod_f16(x, y);
@@ -5070,7 +5070,7 @@ static inline SIMD_CFUNC simd_double4 __tg_fmod(simd_double4 x, simd_double4 y) 
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_fmod_d8(simd_double8 x, simd_double8 y);
 static inline SIMD_CFUNC simd_double8 __tg_fmod(simd_double8 x, simd_double8 y) {
   return _simd_fmod_d8(x, y);
@@ -5112,7 +5112,7 @@ static inline SIMD_CFUNC simd_float8 __tg_remainder(simd_float8 x, simd_float8 y
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_remainder_f16(simd_float16 x, simd_float16 y);
 static inline SIMD_CFUNC simd_float16 __tg_remainder(simd_float16 x, simd_float16 y) {
   return _simd_remainder_f16(x, y);
@@ -5149,7 +5149,7 @@ static inline SIMD_CFUNC simd_double4 __tg_remainder(simd_double4 x, simd_double
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_remainder_d8(simd_double8 x, simd_double8 y);
 static inline SIMD_CFUNC simd_double8 __tg_remainder(simd_double8 x, simd_double8 y) {
   return _simd_remainder_d8(x, y);
@@ -5191,7 +5191,7 @@ static inline SIMD_CFUNC simd_float8 __tg_nextafter(simd_float8 x, simd_float8 y
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_float16 _simd_nextafter_f16(simd_float16 x, simd_float16 y);
 static inline SIMD_CFUNC simd_float16 __tg_nextafter(simd_float16 x, simd_float16 y) {
   return _simd_nextafter_f16(x, y);
@@ -5228,7 +5228,7 @@ static inline SIMD_CFUNC simd_double4 __tg_nextafter(simd_double4 x, simd_double
 }
 #endif
 
-#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__ && defined __x86_64__
+#if SIMD_LIBRARY_VERSION >= 3 && defined __AVX512F__
 extern simd_double8 _simd_nextafter_d8(simd_double8 x, simd_double8 y);
 static inline SIMD_CFUNC simd_double8 __tg_nextafter(simd_double8 x, simd_double8 y) {
   return _simd_nextafter_d8(x, y);

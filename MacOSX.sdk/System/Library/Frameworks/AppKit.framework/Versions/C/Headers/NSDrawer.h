@@ -1,7 +1,7 @@
 /*
     NSDrawer.h
     Application Kit
-    Copyright (c) 1999-2017, Apple Inc.
+    Copyright (c) 1999-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -33,27 +33,27 @@ NS_CLASS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSS
 @interface NSDrawer : NSResponder <NSAccessibilityElement, NSAccessibility>
 {
     /* All instance variables are private */
-    NSDrawerState 	_drawerState;
-    NSDrawerState	_drawerNextState;
-    NSRectEdge 		_drawerEdge;
-    NSRectEdge 		_drawerNextEdge;
-    NSRectEdge 		_drawerPreferredEdge;
-    float 		_drawerPercent;
-    float 		_drawerPercentSaved;
-    CGFloat		_drawerLeadingOffset;
-    CGFloat		_drawerTrailingOffset;
-    NSLock 		*_drawerLock;
-    NSWindow		*_drawerWindow;
-    NSWindow 		*_drawerParentWindow;
-    NSWindow		*_drawerNextParentWindow;
-    NSString		*_drawerSaveName;
-    CFAbsoluteTime 	_drawerStartTime;
-    CFTimeInterval 	_drawerTotalTime;
-    CFRunLoopRef 	_drawerLoop;
-    CFRunLoopTimerRef 	_drawerTimer;
-    id 			_drawerDelegate;
-    unsigned int	_drawerFlags;
-    CFRunLoopObserverRef _drawerObserver;
+    NSDrawerState 	_drawerState APPKIT_IVAR;
+    NSDrawerState	_drawerNextState APPKIT_IVAR;
+    NSRectEdge 		_drawerEdge APPKIT_IVAR;
+    NSRectEdge 		_drawerNextEdge APPKIT_IVAR;
+    NSRectEdge 		_drawerPreferredEdge APPKIT_IVAR;
+    float 		_drawerPercent APPKIT_IVAR;
+    float 		_drawerPercentSaved APPKIT_IVAR;
+    CGFloat		_drawerLeadingOffset APPKIT_IVAR;
+    CGFloat		_drawerTrailingOffset APPKIT_IVAR;
+    NSLock 		*_drawerLock APPKIT_IVAR;
+    NSWindow		*_drawerWindow APPKIT_IVAR;
+    NSWindow 		*_drawerParentWindow APPKIT_IVAR;
+    NSWindow		*_drawerNextParentWindow APPKIT_IVAR;
+    NSString		*_drawerSaveName APPKIT_IVAR;
+    CFAbsoluteTime 	_drawerStartTime APPKIT_IVAR;
+    CFTimeInterval 	_drawerTotalTime APPKIT_IVAR;
+    CFRunLoopRef 	_drawerLoop APPKIT_IVAR;
+    CFRunLoopTimerRef 	_drawerTimer APPKIT_IVAR;
+    id 			_drawerDelegate APPKIT_IVAR;
+    unsigned int	_drawerFlags APPKIT_IVAR;
+    CFRunLoopObserverRef _drawerObserver APPKIT_IVAR;
 }
 
 - (instancetype)initWithContentSize:(NSSize)contentSize preferredEdge:(NSRectEdge)edge;

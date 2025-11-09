@@ -1,6 +1,6 @@
 /* CoreAnimation - CATextLayer.h
 
-   Copyright (c) 2006-2017, Apple Inc.
+   Copyright (c) 2006-2018, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
@@ -11,7 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
+typedef NSString * CATextLayerTruncationMode NS_STRING_ENUM;
+typedef NSString * CATextLayerAlignmentMode NS_STRING_ENUM;
+
+API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface CATextLayer : CALayer
 {
 @private
@@ -50,13 +53,13 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * bounds. The possible options are `none', `start', `middle' and
  * `end'. Defaults to `none'. */
 
-@property(copy) NSString *truncationMode;
+@property(copy) CATextLayerTruncationMode truncationMode;
 
 /* Describes how individual lines of text are aligned within the layer
  * bounds. The possible options are `natural', `left', `right',
  * `center' and `justified'. Defaults to `natural'. */
 
-@property(copy) NSString *alignmentMode;
+@property(copy) CATextLayerAlignmentMode alignmentMode;
 
 /* Sets allowsFontSubpixelQuantization parameter of CGContextRef
  * passed to the -drawInContext: method. Defaults to NO. */
@@ -67,26 +70,26 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 
 /* Truncation modes. */
 
-CA_EXTERN NSString * const kCATruncationNone
-    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
-CA_EXTERN NSString * const kCATruncationStart
-    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
-CA_EXTERN NSString * const kCATruncationEnd
-    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
-CA_EXTERN NSString * const kCATruncationMiddle
-    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
+CA_EXTERN CATextLayerTruncationMode const kCATruncationNone
+    API_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+CA_EXTERN CATextLayerTruncationMode const kCATruncationStart
+    API_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+CA_EXTERN CATextLayerTruncationMode const kCATruncationEnd
+    API_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+CA_EXTERN CATextLayerTruncationMode const kCATruncationMiddle
+    API_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /* Alignment modes. */
 
-CA_EXTERN NSString * const kCAAlignmentNatural
-    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
-CA_EXTERN NSString * const kCAAlignmentLeft
-    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
-CA_EXTERN NSString * const kCAAlignmentRight
-    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
-CA_EXTERN NSString * const kCAAlignmentCenter
-    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
-CA_EXTERN NSString * const kCAAlignmentJustified
-    CA_AVAILABLE_STARTING (10.5, 3.2, 9.0, 2.0);
+CA_EXTERN CATextLayerAlignmentMode const kCAAlignmentNatural
+    API_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+CA_EXTERN CATextLayerAlignmentMode const kCAAlignmentLeft
+    API_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+CA_EXTERN CATextLayerAlignmentMode const kCAAlignmentRight
+    API_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+CA_EXTERN CATextLayerAlignmentMode const kCAAlignmentCenter
+    API_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+CA_EXTERN CATextLayerAlignmentMode const kCAAlignmentJustified
+    API_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END

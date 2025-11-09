@@ -1,7 +1,7 @@
 /*
 	NSObjectController.h
 	Application Kit
-	Copyright (c) 2002-2017, Apple Inc.
+	Copyright (c) 2002-2018, Apple Inc.
 	All rights reserved.
  */
 
@@ -16,8 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObjectController : NSController {
 @private
-    void *_reserved3 __unused;
-    id _managedProxy;
+    void *_reserved3 __unused APPKIT_IVAR;
+    id _managedProxy APPKIT_IVAR;
     struct __objectControllerFlags {
         unsigned int _editable:1;
         unsigned int _automaticallyPreparesContent:1;
@@ -28,13 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int _hasFetched:1;
         unsigned int _batches:1;
         unsigned int _reservedObjectController:24;
-    } _objectControllerFlags;
-    NSString *_objectClassName;
-    Class _objectClass;
-    NSArray *_contentObjectArray;
+    } _objectControllerFlags APPKIT_IVAR;
+    NSString *_objectClassName APPKIT_IVAR;
+    Class _objectClass APPKIT_IVAR;
+    NSArray *_contentObjectArray APPKIT_IVAR;
 @protected    // all instance variables are private
-    id _content;
-    id _objectHandler;
+    id _content APPKIT_IVAR;
+    id _objectHandler APPKIT_IVAR;
 }
 
 - (instancetype)initWithContent:(nullable id)content NS_DESIGNATED_INITIALIZER;

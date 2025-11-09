@@ -39,8 +39,8 @@ NS_CLASS_AVAILABLE_MAC(10_7)
     
     BOOL            _temporarilyDisabled;
     
-    BOOL            _autoLogin;
-    
+    BOOL            _captiveBypass;
+
     BOOL            _isPasspoint;
     
     NSString        *_domainName;
@@ -70,6 +70,8 @@ NS_CLASS_AVAILABLE_MAC(10_7)
     NSInteger       _userRole;
     
     NSString        *_payloadUUID;
+    
+    NSUInteger      _addedBy;
 }
 
 /*!
@@ -188,7 +190,7 @@ NS_CLASS_AVAILABLE_MAC(10_7)
  * @abstract
  * Set the service set identifier (SSID).
  */
-@property(copy) NSData *ssidData NS_AVAILABLE_MAC(10_7);
+@property(copy, nullable) NSData *ssidData NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @property

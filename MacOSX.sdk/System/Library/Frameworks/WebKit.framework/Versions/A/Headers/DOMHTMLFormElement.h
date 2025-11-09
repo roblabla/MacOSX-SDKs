@@ -28,12 +28,12 @@
 @class DOMHTMLCollection;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMHTMLFormElement : DOMHTMLElement
 @property (copy) NSString *acceptCharset;
 @property (copy) NSString *action;
 @property (copy) NSString *enctype;
-@property (copy) NSString *encoding NS_AVAILABLE_MAC(10_5);
+@property (copy) NSString *encoding WEBKIT_AVAILABLE_MAC(10_5);
 @property (copy) NSString *method;
 @property (copy) NSString *name;
 @property (copy) NSString *target;

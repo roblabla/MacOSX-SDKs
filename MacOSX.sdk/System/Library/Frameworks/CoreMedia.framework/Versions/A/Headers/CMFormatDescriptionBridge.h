@@ -3,7 +3,7 @@
 
 	Framework:  CoreMedia
 
-	Copyright 2006-2015 Apple Inc. All rights reserved.
+	Copyright © 2006-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -73,9 +73,11 @@ enum
 
 CM_ASSUME_NONNULL_BEGIN
 
-CM_EXPORT const CFStringRef kCMImageDescriptionFlavor_QuickTimeMovie	__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// equivalent to NULL
-CM_EXPORT const CFStringRef kCMImageDescriptionFlavor_ISOFamily			__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// MP4, etc
-CM_EXPORT const CFStringRef kCMImageDescriptionFlavor_3GPFamily			__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// 3GPP (implies ISO)
+typedef CFStringRef CMImageDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM;
+
+CM_EXPORT const CMImageDescriptionFlavor kCMImageDescriptionFlavor_QuickTimeMovie	__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// equivalent to NULL
+CM_EXPORT const CMImageDescriptionFlavor kCMImageDescriptionFlavor_ISOFamily			__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// MP4, etc
+CM_EXPORT const CMImageDescriptionFlavor kCMImageDescriptionFlavor_3GPFamily			__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// 3GPP (implies ISO)
 
 CM_ASSUME_NONNULL_END
 
@@ -85,18 +87,18 @@ CM_ASSUME_NONNULL_END
 
 	@param	allocator						Allocator to use for allocating the CMVideoFormatDescription object. May be NULL.
 	@param	imageDescriptionData			ImageDescription data structure in big-endian byte ordering.
-	@param	imageDescriptionSize			Size of ImageDescription data structure.
-	@param	imageDescriptionStringEncoding	Pass CFStringGetSystemEncoding() or GetApplicationTextEncoding().
-	@param	imageDescriptionFlavor			kCMImageDescriptionFlavor constant or NULL for QuickTimeMovie flavor.
+	@param	size							Size of ImageDescription data structure.
+	@param	stringEncoding					Pass CFStringGetSystemEncoding() or GetApplicationTextEncoding().
+	@param	flavor							kCMImageDescriptionFlavor constant or NULL for QuickTimeMovie flavor.
 	@param	videoFormatDescriptionOut		Receives new CMVideoFormatDescription.
 */
 CM_EXPORT OSStatus CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData(
 		CFAllocatorRef CM_NULLABLE allocator,
 		const uint8_t * CM_NONNULL imageDescriptionData,
-		size_t imageDescriptionSize,
-		CFStringEncoding imageDescriptionStringEncoding,
-		CFStringRef CM_NULLABLE imageDescriptionFlavor,
-		CM_RETURNS_RETAINED_PARAMETER CMVideoFormatDescriptionRef CM_NULLABLE * CM_NONNULL videoFormatDescriptionOut )
+		size_t size,
+		CFStringEncoding stringEncoding,
+		CMImageDescriptionFlavor CM_NULLABLE flavor,
+		CM_RETURNS_RETAINED_PARAMETER CMVideoFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -105,16 +107,16 @@ CM_EXPORT OSStatus CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionDa
 
 	@param	allocator						Allocator to use for allocating the CMVideoFormatDescription object. May be NULL.
 	@param	imageDescriptionBlockBuffer		CMBlockBuffer containing ImageDescription data structure in big-endian byte ordering.
-	@param	imageDescriptionStringEncoding	Pass CFStringGetSystemEncoding() or GetApplicationTextEncoding().
-	@param	imageDescriptionFlavor			kCMImageDescriptionFlavor constant or NULL for QuickTimeMovie flavor.
+	@param	stringEncoding					Pass CFStringGetSystemEncoding() or GetApplicationTextEncoding().
+	@param	flavor							kCMImageDescriptionFlavor constant or NULL for QuickTimeMovie flavor.
 	@param	videoFormatDescriptionOut		Receives new CMVideoFormatDescription.
 */
 CM_EXPORT OSStatus CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBlockBuffer(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMBlockBufferRef CM_NONNULL imageDescriptionBlockBuffer,
-		CFStringEncoding imageDescriptionStringEncoding,
-		CFStringRef CM_NULLABLE imageDescriptionFlavor,
-		CM_RETURNS_RETAINED_PARAMETER CMVideoFormatDescriptionRef CM_NULLABLE * CM_NONNULL videoFormatDescriptionOut )
+		CFStringEncoding stringEncoding,
+		CMImageDescriptionFlavor CM_NULLABLE flavor,
+		CM_RETURNS_RETAINED_PARAMETER CMVideoFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -134,9 +136,9 @@ CM_EXPORT OSStatus CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBl
 CM_EXPORT OSStatus CMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMVideoFormatDescriptionRef CM_NONNULL videoFormatDescription,
-		CFStringEncoding imageDescriptionStringEncoding,
-		CFStringRef CM_NULLABLE imageDescriptionFlavor,
-		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL imageDescriptionBlockBufferOut )
+		CFStringEncoding stringEncoding,
+		CMImageDescriptionFlavor CM_NULLABLE flavor,
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 CF_IMPLICIT_BRIDGING_ENABLED
@@ -201,10 +203,12 @@ CF_IMPLICIT_BRIDGING_DISABLED
 
 CM_ASSUME_NONNULL_BEGIN
 
-CM_EXPORT const CFStringRef kCMSoundDescriptionFlavor_QuickTimeMovie	__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// equivalent to NULL
-CM_EXPORT const CFStringRef kCMSoundDescriptionFlavor_QuickTimeMovieV2	__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-CM_EXPORT const CFStringRef kCMSoundDescriptionFlavor_ISOFamily			__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// MP4, etc
-CM_EXPORT const CFStringRef kCMSoundDescriptionFlavor_3GPFamily			__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// 3GPP (implies ISO)
+typedef CFStringRef CMSoundDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM;
+
+CM_EXPORT const CMSoundDescriptionFlavor kCMSoundDescriptionFlavor_QuickTimeMovie	__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// equivalent to NULL
+CM_EXPORT const CMSoundDescriptionFlavor kCMSoundDescriptionFlavor_QuickTimeMovieV2	__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+CM_EXPORT const CMSoundDescriptionFlavor kCMSoundDescriptionFlavor_ISOFamily			__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// MP4, etc
+CM_EXPORT const CMSoundDescriptionFlavor kCMSoundDescriptionFlavor_3GPFamily			__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);	// 3GPP (implies ISO)
 
 CM_ASSUME_NONNULL_END
 
@@ -214,16 +218,16 @@ CM_ASSUME_NONNULL_END
 
 	@param	allocator						Allocator to use for allocating the CMAudioFormatDescription object. May be NULL.
 	@param	soundDescriptionData			SoundDescription data structure in big-endian byte ordering.
-	@param	soundDescriptionSize			Size of SoundDescription data structure.
-	@param	soundDescriptionFlavor			kCMSoundDescriptionFlavor constant or NULL for QuickTimeMovie flavor.
-	@param	audioFormatDescriptionOut		Receives new CMAudioFormatDescription.
+	@param	size							Size of SoundDescription data structure.
+	@param	flavor							kCMSoundDescriptionFlavor constant or NULL for QuickTimeMovie flavor.
+	@param	formatDescriptionOut			Receives new CMAudioFormatDescription.
 */
 CM_EXPORT OSStatus CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData(
 		CM_NULLABLE CFAllocatorRef allocator,
 		const uint8_t * CM_NONNULL soundDescriptionData,
-		size_t soundDescriptionSize,
-		CFStringRef CM_NULLABLE soundDescriptionFlavor,
-		CM_RETURNS_RETAINED_PARAMETER CMAudioFormatDescriptionRef CM_NULLABLE * CM_NONNULL  audioFormatDescriptionOut )
+		size_t size,
+		CMSoundDescriptionFlavor CM_NULLABLE flavor,
+		CM_RETURNS_RETAINED_PARAMETER CMAudioFormatDescriptionRef CM_NULLABLE * CM_NONNULL  formatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -232,14 +236,14 @@ CM_EXPORT OSStatus CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionDa
 
 	@param	allocator						Allocator to use for allocating the CMAudioFormatDescription object. May be NULL.
 	@param	soundDescriptionBlockBuffer		CMBlockBuffer containing SoundDescription data structure in big-endian byte ordering.
-	@param	soundDescriptionFlavor			kCMSoundDescriptionFlavor constant or NULL for QuickTimeMovie flavor.
-	@param	audioFormatDescriptionOut		Receives new CMAudioFormatDescription.
+	@param	flavor			kCMSoundDescriptionFlavor constant or NULL for QuickTimeMovie flavor.
+	@param	formatDescriptionOut		Receives new CMAudioFormatDescription.
 */
 CM_EXPORT OSStatus CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBlockBuffer(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMBlockBufferRef CM_NONNULL soundDescriptionBlockBuffer,
-		CFStringRef CM_NULLABLE soundDescriptionFlavor,
-		CM_RETURNS_RETAINED_PARAMETER CMAudioFormatDescriptionRef CM_NULLABLE * CM_NONNULL audioFormatDescriptionOut )
+		CMSoundDescriptionFlavor CM_NULLABLE flavor,
+		CM_RETURNS_RETAINED_PARAMETER CMAudioFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -252,14 +256,14 @@ CM_EXPORT OSStatus CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBl
 
 	@param	allocator						Allocator to use for allocating the CMBlockBuffer object. May be NULL.
 	@param	audioFormatDescription			CMAudioFormatDescription to be copied.
-	@param	soundDescriptionFlavor			kCMSoundDescriptionFlavor constant or NULL for QuickTimeMovie flavor.
-	@param	soundDescriptionBlockBufferOut	Receives new CMBlockBuffer containing SoundDescription data structure in big-endian byte ordering.
+	@param	flavor							kCMSoundDescriptionFlavor constant or NULL for QuickTimeMovie flavor.
+	@param	blockBufferOut					Receives new CMBlockBuffer containing SoundDescription data structure in big-endian byte ordering.
 */
 CM_EXPORT OSStatus CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMAudioFormatDescriptionRef CM_NONNULL audioFormatDescription,
-		CFStringRef CM_NULLABLE soundDescriptionFlavor,
-		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL soundDescriptionBlockBufferOut )
+		CMSoundDescriptionFlavor CM_NULLABLE flavor,
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 CF_IMPLICIT_BRIDGING_ENABLED
@@ -269,11 +273,11 @@ CF_IMPLICIT_BRIDGING_ENABLED
 	@abstract	Examine a big-endian SoundDescription data structure in a CMBlockBuffer, and report whether the sample tables will need to use the legacy CBR layout.
 
 	@param	soundDescriptionBlockBuffer		CMBlockBuffer containing SoundDescription data structure in big-endian byte ordering.
-	@param	soundDescriptionFlavor			kCMSoundDescriptionFlavor constant or NULL for QuickTimeMovie flavor.
+	@param	flavor							kCMSoundDescriptionFlavor constant or NULL for QuickTimeMovie flavor.
 */
 CM_EXPORT Boolean CMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayout(
 		CMBlockBufferRef CM_NONNULL soundDescriptionBlockBuffer,
-		CFStringRef CM_NULLABLE soundDescriptionFlavor )
+		CMSoundDescriptionFlavor CM_NULLABLE flavor )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 #if TARGET_RT_LITTLE_ENDIAN
@@ -315,24 +319,26 @@ CF_IMPLICIT_BRIDGING_DISABLED
 	@functiongroup	CMTextFormatDescription and TextDescription bridge functions
 */
 
+typedef CFStringRef CMTextDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM;
+
 /*!
 	@function	CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData
 	@abstract	Creates a CMTextFormatDescription from a big-endian TextDescription data structure.
 
 	@param	allocator						Allocator to use for allocating the CMTextFormatDescription object. May be NULL.
 	@param	textDescriptionData				TextDescription data structure in big-endian byte ordering.
-	@param	textDescriptionSize				Size of TextDescription data structure.
-	@param	textDescriptionFlavor			Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
+	@param	size							Size of TextDescription data structure.
+	@param	flavor							Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
 	@param	mediaType,						Pass kCMMediaType_Text or kCMMediaType_Subtitle.
-	@param	textFormatDescriptionOut		Receives new CMTextFormatDescription.
+	@param	formatDescriptionOut			Receives new CMTextFormatDescription.
 */
 CM_EXPORT OSStatus CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData(
 		CFAllocatorRef CM_NULLABLE allocator,
 		const uint8_t * CM_NONNULL textDescriptionData,
-		size_t textDescriptionSize,
-		CFStringRef CM_NULLABLE textDescriptionFlavor,
+		size_t size,
+		CMTextDescriptionFlavor CM_NULLABLE flavor,
 		CMMediaType mediaType,
-		CM_RETURNS_RETAINED_PARAMETER CMTextFormatDescriptionRef CM_NULLABLE * CM_NONNULL textFormatDescriptionOut )
+		CM_RETURNS_RETAINED_PARAMETER CMTextFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -341,16 +347,16 @@ CM_EXPORT OSStatus CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData
 
 	@param	allocator						Allocator to use for allocating the CMTextFormatDescription object. May be NULL.
 	@param	textDescriptionBlockBuffer		CMBlockBuffer containing TextDescription data structure in big-endian byte ordering.
-	@param	textDescriptionFlavor			Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
+	@param	flavor							Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
 	@param	mediaType,						Pass kCMMediaType_Text or kCMMediaType_Subtitle.
-	@param	textFormatDescriptionOut		Receives new CMTextFormatDescription.
+	@param	formatDescriptionOut			Receives new CMTextFormatDescription.
 */
 CM_EXPORT OSStatus CMTextFormatDescriptionCreateFromBigEndianTextDescriptionBlockBuffer(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMBlockBufferRef CM_NONNULL textDescriptionBlockBuffer,
-		CFStringRef CM_NULLABLE textDescriptionFlavor,
+		CMTextDescriptionFlavor CM_NULLABLE flavor,
 		CMMediaType mediaType,
-		CM_RETURNS_RETAINED_PARAMETER CMTextFormatDescriptionRef CM_NULLABLE * CM_NONNULL textFormatDescriptionOut )
+		CM_RETURNS_RETAINED_PARAMETER CMTextFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -369,8 +375,8 @@ CM_EXPORT OSStatus CMTextFormatDescriptionCreateFromBigEndianTextDescriptionBloc
 CM_EXPORT OSStatus CMTextFormatDescriptionCopyAsBigEndianTextDescriptionBlockBuffer(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMTextFormatDescriptionRef CM_NONNULL textFormatDescription,
-		CFStringRef CM_NULLABLE textDescriptionFlavor,
-		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL textDescriptionBlockBufferOut )
+		CMTextDescriptionFlavor CM_NULLABLE flavor,
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 CF_IMPLICIT_BRIDGING_ENABLED
@@ -414,22 +420,24 @@ CF_IMPLICIT_BRIDGING_DISABLED
 	@functiongroup	CMClosedCaptionFormatDescription and ClosedCaptionDescription bridge functions
 */
 
+typedef CFStringRef CMClosedCaptionDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM;
+
 /*!
 	@function	CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData
 	@abstract	Creates a CMClosedCaptionFormatDescription from a big-endian ClosedCaptionDescription data structure.
 
 	@param	allocator							Allocator to use for allocating the CMClosedCaptionFormatDescription object. May be NULL.
 	@param	closedCaptionDescriptionData		ClosedCaptionDescription data structure in big-endian byte ordering.
-	@param	closedCaptionDescriptionSize		Size of ClosedCaptionDescription data structure.
-	@param	closedCaptionDescriptionFlavor		Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
-	@param	closedCaptionFormatDescriptionOut	Receives new CMClosedCaptionFormatDescription.
+	@param	size								Size of ClosedCaptionDescription data structure.
+	@param	flavor								Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
+	@param	formatDescriptionOut				Receives new CMClosedCaptionFormatDescription.
 */
 CM_EXPORT OSStatus CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData(
 		CFAllocatorRef CM_NULLABLE allocator,
 		const uint8_t * CM_NONNULL closedCaptionDescriptionData,
-		size_t closedCaptionDescriptionSize,
-		CFStringRef CM_NULLABLE closedCaptionDescriptionFlavor,
-		CM_RETURNS_RETAINED_PARAMETER CMClosedCaptionFormatDescriptionRef CM_NULLABLE * CM_NONNULL closedCaptionFormatDescriptionOut )
+		size_t size,
+		CMClosedCaptionDescriptionFlavor CM_NULLABLE flavor,
+		CM_RETURNS_RETAINED_PARAMETER CMClosedCaptionFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -438,14 +446,14 @@ CM_EXPORT OSStatus CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCapt
 
 	@param	allocator							Allocator to use for allocating the CMClosedCaptionFormatDescription object. May be NULL.
 	@param	closedCaptionDescriptionBlockBuffer	CMBlockBuffer containing ClosedCaptionDescription data structure in big-endian byte ordering.
-	@param	closedCaptionDescriptionFlavor		Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
-	@param	closedCaptionFormatDescriptionOut	Receives new CMClosedCaptionFormatDescription.
+	@param	flavor								Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
+	@param	formatDescriptionOut				Receives new CMClosedCaptionFormatDescription.
 */
 CM_EXPORT OSStatus CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionBlockBuffer(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMBlockBufferRef CM_NONNULL closedCaptionDescriptionBlockBuffer,
-		CFStringRef CM_NULLABLE closedCaptionDescriptionFlavor,
-		CM_RETURNS_RETAINED_PARAMETER CMClosedCaptionFormatDescriptionRef CM_NULLABLE * CM_NONNULL closedCaptionFormatDescriptionOut )
+		CMClosedCaptionDescriptionFlavor CM_NULLABLE flavor,
+		CM_RETURNS_RETAINED_PARAMETER CMClosedCaptionFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -456,16 +464,16 @@ CM_EXPORT OSStatus CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCapt
                 garbage values (0xFFFF).  The caller must overwrite these values with a valid dataRefIndex
                 if writing the SampleDescription to a QuickTime/ISO file.
 
-	@param	allocator								Allocator to use for allocating the CMBlockBuffer object. May be NULL.
-	@param	closedCaptionFormatDescription			CMClosedCaptionFormatDescription to be copied.
-	@param	closedCaptionDescriptionFlavor			Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
-	@param	closedCaptionDescriptionBlockBufferOut	Receives new CMBlockBuffer containing ClosedCaptionDescription data structure in big-endian byte ordering.
+	@param	allocator							Allocator to use for allocating the CMBlockBuffer object. May be NULL.
+	@param	closedCaptionFormatDescription		CMClosedCaptionFormatDescription to be copied.
+	@param	flavor								Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
+	@param	blockBufferOut						Receives new CMBlockBuffer containing ClosedCaptionDescription data structure in big-endian byte ordering.
 */
 CM_EXPORT OSStatus CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMClosedCaptionFormatDescriptionRef CM_NONNULL closedCaptionFormatDescription,
-		CFStringRef CM_NULLABLE closedCaptionDescriptionFlavor,
-		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL closedCaptionDescriptionBlockBufferOut )
+		CMClosedCaptionDescriptionFlavor CM_NULLABLE flavor,
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 CF_IMPLICIT_BRIDGING_ENABLED
@@ -509,22 +517,24 @@ CF_IMPLICIT_BRIDGING_DISABLED
 	@functiongroup	CMTimeCodeFormatDescription and TimeCodeDescription bridge functions
 */
 
+typedef CFStringRef CMTimeCodeDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM;
+
 /*!
 	@function	CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData
 	@abstract	Creates a CMTimeCodeFormatDescription from a big-endian TimeCodeDescription data structure.
 
 	@param	allocator						Allocator to use for allocating the CMTimeCodeFormatDescription object. May be NULL.
 	@param	timeCodeDescriptionData			TimeCodeDescription data structure in big-endian byte ordering.
-	@param	timeCodeDescriptionSize			Size of TimeCodeDescription data structure.
-	@param	timeCodeDescriptionFlavor		Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
-	@param	timeCodeFormatDescriptionOut	Receives new CMTimeCodeFormatDescription.
+	@param	size							Size of TimeCodeDescription data structure.
+	@param	flavor							Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
+	@param	formatDescriptionOut			Receives new CMTimeCodeFormatDescription.
 */
 CM_EXPORT OSStatus CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData(
 		CFAllocatorRef CM_NULLABLE allocator,
 		const uint8_t * CM_NONNULL timeCodeDescriptionData,
-		size_t timeCodeDescriptionSize, 
-		CFStringRef CM_NULLABLE timeCodeDescriptionFlavor,
-		CM_RETURNS_RETAINED_PARAMETER CMTimeCodeFormatDescriptionRef CM_NULLABLE * CM_NONNULL timeCodeFormatDescriptionOut )
+		size_t size, 
+		CMTimeCodeDescriptionFlavor CM_NULLABLE flavor,
+		CM_RETURNS_RETAINED_PARAMETER CMTimeCodeFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -533,14 +543,14 @@ CM_EXPORT OSStatus CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescrip
 
 	@param	allocator						Allocator to use for allocating the CMTimeCodeFormatDescription object. May be NULL.
 	@param	timeCodeDescriptionBlockBuffer	CMBlockBuffer containing TimeCodeDescription data structure in big-endian byte ordering.
-	@param	timeCodeDescriptionFlavor		Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
-	@param	timeCodeFormatDescriptionOut	Receives new CMTimeCodeFormatDescription.
+	@param	flavor							Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
+	@param	formatDescriptionOut			Receives new CMTimeCodeFormatDescription.
 */
 CM_EXPORT OSStatus CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionBlockBuffer(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMBlockBufferRef CM_NONNULL timeCodeDescriptionBlockBuffer,
-		CFStringRef CM_NULLABLE timeCodeDescriptionFlavor,
-		CM_RETURNS_RETAINED_PARAMETER CMTimeCodeFormatDescriptionRef CM_NULLABLE * CM_NONNULL timeCodeFormatDescriptionOut )
+		CMTimeCodeDescriptionFlavor CM_NULLABLE flavor,
+		CM_RETURNS_RETAINED_PARAMETER CMTimeCodeFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -551,16 +561,16 @@ CM_EXPORT OSStatus CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescrip
                 garbage values (0xFFFF).  The caller must overwrite these values with a valid dataRefIndex
                 if writing the SampleDescription to a QuickTime/ISO file.
 
-	@param	allocator							Allocator to use for allocating the CMBlockBuffer object. May be NULL.
-	@param	timeCodeFormatDescription			CMTimeCodeFormatDescription to be copied.
-	@param	timeCodeDescriptionFlavor			Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
-	@param	timeCodeDescriptionBlockBufferOut	Receives new CMBlockBuffer containing TimeCodeDescription data structure in big-endian byte ordering.
+	@param	allocator					Allocator to use for allocating the CMBlockBuffer object. May be NULL.
+	@param	timeCodeFormatDescription	CMTimeCodeFormatDescription to be copied.
+	@param	flavor						Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
+	@param	blockBufferOut				Receives new CMBlockBuffer containing TimeCodeDescription data structure in big-endian byte ordering.
 */
 CM_EXPORT OSStatus CMTimeCodeFormatDescriptionCopyAsBigEndianTimeCodeDescriptionBlockBuffer(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMTimeCodeFormatDescriptionRef CM_NONNULL timeCodeFormatDescription,
-		CFStringRef CM_NULLABLE timeCodeDescriptionFlavor,
-		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL timeCodeDescriptionBlockBufferOut )
+		CMTimeCodeDescriptionFlavor CM_NULLABLE flavor,
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 CF_IMPLICIT_BRIDGING_ENABLED
@@ -604,22 +614,24 @@ CF_IMPLICIT_BRIDGING_DISABLED
 	@functiongroup	CMMetadataFormatDescription and MetadataDescription bridge functions
 */
 
+typedef CFStringRef CMMetadataDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM;
+
 /*!
 	@function	CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData
 	@abstract	Creates a CMMetadataFormatDescription from a big-endian MetadataDescription data structure.
 
-	@param	allocator						Allocator to use for allocating the CMMetadataFormatDescription object. May be NULL.
-	@param	metadataDescriptionData			MetadataDescription data structure in big-endian byte ordering.
-	@param	metadataDescriptionSize			Size of MetadataDescription data structure.
-	@param	metadataDescriptionFlavor		Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
-	@param	metadataFormatDescriptionOut	Receives new CMMetadataFormatDescriptionRef.
+	@param	allocator					Allocator to use for allocating the CMMetadataFormatDescription object. May be NULL.
+	@param	metadataDescriptionData		MetadataDescription data structure in big-endian byte ordering.
+	@param	size						Size of MetadataDescription data structure.
+	@param	flavor						Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
+	@param	formatDescriptionOut		Receives new CMMetadataFormatDescriptionRef.
 */
 CM_EXPORT OSStatus CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData(
 		CFAllocatorRef CM_NULLABLE allocator,
 		const uint8_t * CM_NONNULL metadataDescriptionData,
-		size_t metadataDescriptionSize,
-		CFStringRef CM_NULLABLE metadataDescriptionFlavor,
-		CM_RETURNS_RETAINED_PARAMETER CMMetadataFormatDescriptionRef CM_NULLABLE * CM_NONNULL metadataFormatDescriptionOut )
+		size_t size,
+		CMMetadataDescriptionFlavor CM_NULLABLE flavor,
+		CM_RETURNS_RETAINED_PARAMETER CMMetadataFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -628,14 +640,14 @@ CM_EXPORT OSStatus CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescrip
 
 	@param	allocator						Allocator to use for allocating the CMMetadataFormatDescription object. May be NULL.
 	@param	metadataDescriptionBlockBuffer	CMBlockBuffer containing MetadataDescription data structure in big-endian byte ordering.
-	@param	metadataDescriptionFlavor		Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
-	@param	metadataFormatDescriptionOut	Receives new CMMetadataFormatDescriptionRef.
+	@param	flavor							Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
+	@param	formatDescriptionOut			Receives new CMMetadataFormatDescriptionRef.
 */
 CM_EXPORT OSStatus CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionBlockBuffer(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMBlockBufferRef CM_NONNULL metadataDescriptionBlockBuffer,
-		CFStringRef CM_NULLABLE metadataDescriptionFlavor,
-		CM_RETURNS_RETAINED_PARAMETER CMMetadataFormatDescriptionRef CM_NULLABLE * CM_NONNULL metadataFormatDescriptionOut )
+		CMMetadataDescriptionFlavor CM_NULLABLE flavor,
+		CM_RETURNS_RETAINED_PARAMETER CMMetadataFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /*!
@@ -646,16 +658,16 @@ CM_EXPORT OSStatus CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescrip
                 garbage values (0xFFFF).  The caller must overwrite these values with a valid dataRefIndex
                 if writing the SampleDescription to a QuickTime/ISO file.
 
-	@param	allocator							Allocator to use for allocating the CMBlockBuffer object. May be NULL.
-	@param	metadataFormatDescription			CMMetadataFormatDescriptionRef to be copied.
-	@param	metadataDescriptionFlavor			Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
-	@param	metadataDescriptionBlockBufferOut	Receives new CMBlockBuffer containing MetadataDescription data structure in big-endian byte ordering.
+	@param	allocator					Allocator to use for allocating the CMBlockBuffer object. May be NULL.
+	@param	metadataFormatDescription	CMMetadataFormatDescriptionRef to be copied.
+	@param	flavor						Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor.
+	@param	blockBufferOut				Receives new CMBlockBuffer containing MetadataDescription data structure in big-endian byte ordering.
 */
 CM_EXPORT OSStatus CMMetadataFormatDescriptionCopyAsBigEndianMetadataDescriptionBlockBuffer(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMMetadataFormatDescriptionRef CM_NONNULL metadataFormatDescription,
-		CFStringRef CM_NULLABLE metadataDescriptionFlavor,
-		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL metadataDescriptionBlockBufferOut )
+		CMMetadataDescriptionFlavor CM_NULLABLE flavor,
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut )
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 CF_IMPLICIT_BRIDGING_ENABLED

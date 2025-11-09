@@ -1,9 +1,10 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B753C9F3-15F1-3996-8B38-7B6FD41DC1D9' ]
+uuids:           [ 'x86_64: 1EBAFEFF-DD50-3B8C-9224-4E59FECB30AB' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CoreDuetDebugLogging.framework/Versions/A/CoreDuetDebugLogging
 exports:         
   - archs:           [ x86_64 ]
-    objc-classes:    [ _CDDebug ]
+    symbols:         [ _CDDSetError, _CDDebugErrorStrings ]
+    objc-classes:    [ CDDebug ]
 ...

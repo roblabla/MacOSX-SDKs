@@ -5,10 +5,12 @@
     All rights reserved.
  */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+#ifndef IKImageEditPanel_h
+#define IKImageEditPanel_h
 
 #import <AppKit/NSPanel.h>
 #import <ApplicationServices/ApplicationServices.h>
+#import <ImageKit/ImageKitBase.h>
 
 @class IKImageEditPanel;
 
@@ -71,6 +73,7 @@
  @class IKImageEditPanel
  @abstract The IKImageEditPanel class provides a panel, that is, a utility window that floats on top of document windows, optimized for image editing.
  */
+IK_CLASS_AVAILABLE(10.5)
 @interface IKImageEditPanel : NSPanel
 {
 @private

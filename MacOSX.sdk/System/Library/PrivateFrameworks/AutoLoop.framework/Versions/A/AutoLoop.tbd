@@ -1,9 +1,8 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A4F0EA2A-B3FA-355D-9352-9A41D0E2C460' ]
+uuids:           [ 'x86_64: 26E4753F-0DBA-3323-9241-AEBC4BA3EABA' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AutoLoop.framework/Versions/A/AutoLoop
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _AUTOLOOP_LAR_KEY_ERROR, _AUTOLOOP_LAR_KEY_FRAMETRANSFORM_GAPBRIDGE, 
@@ -21,19 +20,21 @@ exports:
                        _alLoopRecipeFromDictionary, _alLoopRecipeToDict, _alRender, 
                        _alStabilizeParamsDestroy, _alStabilizeParamsFromDictionary, 
                        _alStabilizeParamsToDict, _autoloopErrorCodeToString, _autoloopSettingsDestroy, 
-                       _autoloopSettingsSetGating, _autoloopSettingsSetLongerBounce, 
-                       _autoloopSettingsSetPointOfInterestAndTrim, _autoloopSettingsSetRecipeProviderCallback, 
-                       _buildLoopRecipeDictFromLiveAnalysisDict, _createAutoLoopSettingsForAsset, 
-                       _createBundleDefaultGatingClassifierURL, _createGIFFromVideo, 
-                       _createGatingDetailString, _create_default_internal_autoloopSettings, 
+                       _autoloopSettingsSetDisableStabilizationGPU, _autoloopSettingsSetGating, 
+                       _autoloopSettingsSetGatingFeaturesProviderCallback, _autoloopSettingsSetLongerBounce, 
+                       _autoloopSettingsSetOptimizeForMemoryUse, _autoloopSettingsSetPointOfInterestAndTrim, 
+                       _autoloopSettingsSetRecipeProviderCallback, _buildLoopRecipeDictFromLiveAnalysisDict, 
+                       _createAutoLoopSettingsForAsset, _createBundleDefaultGatingClassifierURL, 
+                       _createGIFFromVideo, _createGatingDetailString, _create_default_internal_autoloopSettings, 
                        _extractGatingDecision, _extractGatingResult, _getFlavor, 
                        _getGatingOptionFlagsForDiagnostics, _getGatingOptionFlagsForSuggestions, 
                        _getGatingResult, _getMinimumSafeInputDuration, _get_autoloopSettings_forAsset, 
-                       _get_default_autoloopSettings, _liveAnalysisResultCopyRecipe, 
-                       _liveAnalysisResultDestroy, _liveAnalysisResultFromDictionary, 
-                       _liveAnalysisResultToDictionary, _renderGIF, _renderStabilizedVideo, 
-                       _runAutoLoopPipeline, _runAutoLoopRender, _runAutoLoopStabilize, 
-                       _runLiveAnalysisPipeline, _runPingPongRender, _validateAutoLoopSettings, 
-                       _validateInputVideoAndGetDuration, _validateLiveAnalysisDictionaryFormatAndVersion, 
-                       _validateLiveAnalysisDictionaryVersion ]
+                       _get_default_autoloopSettings, _inertiaCamMetalLibEnd, _inertiaCamMetalLibStart, 
+                       _liveAnalysisResultCopyRecipe, _liveAnalysisResultDestroy, 
+                       _liveAnalysisResultFromDictionary, _liveAnalysisResultToDictionary, 
+                       _renderGIF, _renderStabilizedVideo, _runAutoLoopPipeline, 
+                       _runAutoLoopRender, _runAutoLoopStabilize, _runLiveAnalysisPipeline, 
+                       _runPingPongRender, _validateAutoLoopSettings, _validateInputVideoAndGetDuration, 
+                       _validateLiveAnalysisDictionaryFormatAndVersion, _validateLiveAnalysisDictionaryVersion ]
+    weak-def-symbols: [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__117bad_function_callE ]
 ...

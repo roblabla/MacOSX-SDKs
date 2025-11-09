@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 1B0E532C-89B6-3158-944A-255F3533A83A' ]
+uuids:           [ 'x86_64: 098F633F-A2EA-366A-896E-84B15CB4CF1B' ]
 platform:        macosx
 install-name:    /usr/lib/libnfrestore.dylib
 objc-constraint: none
@@ -13,9 +13,10 @@ exports:
                        _NfJcopUpdateFileGetSequenceForPlan, _NfJcopUpdateFileLogDescription, 
                        _NfJcopUpdateFileOpenWithData, _NfJcopUpdateFileOpenWithFilePath, 
                        _NfJcopUpdateFileReadCommand, _NfRestore, _NfRestoreBundleCreate, 
-                       _NfRestoreBundleScan, _NfRestoreDumpUART, _NfRestoreOpenWithSE, 
-                       _NfRestoreReturnError, _NfRestoreSEClose, _NfRestoreSEEnumerate, 
-                       _NfRestoreSEList, _NfRestoreSEOpen, _NfRestoreSETransceive, 
+                       _NfRestoreBundleScan, _NfRestoreCopyUniqueFDRKey, _NfRestoreDumpUART, 
+                       _NfRestoreOpenWithSE, _NfRestoreOpenWithSEAndResult, _NfRestoreReturnError, 
+                       _NfRestoreSEClose, _NfRestoreSEEnumerate, _NfRestoreSEList, 
+                       _NfRestoreSEOpen, _NfRestoreSEOpenWithError, _NfRestoreSETransceive, 
                        _NfRestoreToggleDwnldReq, _NfRestoreToggleSEPower, _NfSecureElementApplyImage, 
                        _NfSecureElementApplyPlan, _NfSecureElementApplyScript, _NfSecureElementClose, 
                        _NfSecureElementGarbageCollect, _NfSecureElementIsInValidJSBL, 

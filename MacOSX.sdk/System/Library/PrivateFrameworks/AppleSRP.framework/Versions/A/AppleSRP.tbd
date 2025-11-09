@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: A257887E-7A02-39FF-8D6F-2E924C8C164C', 'x86_64: FBEC6A7B-C2B1-3ED8-AF79-2D8995AC87D2' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: B8E2BEC9-FAFB-3E26-BF26-E2E58C545006' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AppleSRP.framework/Versions/A/AppleSRP
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _BigIntegerAdd, _BigIntegerAddInt, _BigIntegerBitLen, _BigIntegerCheckPrime, 
                        _BigIntegerCmp, _BigIntegerCmpInt, _BigIntegerDivInt, _BigIntegerFree, 
                        _BigIntegerFromBytes, _BigIntegerFromInt, _BigIntegerLShift, 
@@ -22,7 +22,9 @@ exports:
                        _SRP_set_authenticator, _SRP_set_client_param_verify_cb, _SRP_set_modulus_min_bits, 
                        _SRP_set_params, _SRP_set_secret_bits_cb, _SRP_set_server_lookup, 
                        _SRP_set_user_raw, _SRP_set_username, _SRP_use_engine, _SRP_verify, 
-                       _cstr_appendn, _cstr_clear_free, _cstr_free, _cstr_new, _cstr_set_length, 
-                       _gettpnam, _t_closepw, _t_cstrfromb64, _t_getpwbyname, _t_makepwent, 
-                       _t_newpw, _t_random, _t_sessionkey, _t_tob64cstr, _t_tohex ]
+                       _cstr_append, _cstr_append_str, _cstr_appendn, _cstr_clear_free, 
+                       _cstr_copy, _cstr_create, _cstr_createn, _cstr_dup, _cstr_dup_alloc, 
+                       _cstr_empty, _cstr_free, _cstr_new, _cstr_new_alloc, _cstr_set, 
+                       _cstr_set_allocator, _cstr_set_length, _cstr_setn, _cstr_use, 
+                       _t_cstrfromb64, _t_random, _t_sessionkey, _t_tob64cstr, _t_tohex ]
 ...

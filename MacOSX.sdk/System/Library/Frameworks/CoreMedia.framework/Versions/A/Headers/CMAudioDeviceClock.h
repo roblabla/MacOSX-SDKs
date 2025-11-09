@@ -3,7 +3,7 @@
  
 	Framework:  CoreMedia
  
-	Copyright © 2006-2015 Apple Inc. All rights reserved.
+	Copyright © 2006-2018 Apple Inc. All rights reserved.
  
 */
 
@@ -13,9 +13,7 @@
 #include <CoreMedia/CMBase.h>
 #include <CoreMedia/CMSync.h>
 
-#if ! TARGET_OS_IPHONE
 #include <CoreAudio/CoreAudio.h>
-#endif // ! TARGET_OS_IPHONE
 
 #ifdef __cplusplus
 extern "C" {
@@ -37,9 +35,8 @@ CMAudioDeviceClockCreate(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CFStringRef	CM_NULLABLE deviceUID,
 		CM_RETURNS_RETAINED_PARAMETER CMClockRef CM_NULLABLE * CM_NONNULL clockOut)
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+			API_AVAILABLE(macosx(10.8)) API_UNAVAILABLE(ios, tvos, watchos);
 
-#if ! TARGET_OS_IPHONE
 /*!
 	@function	CMAudioDeviceClockCreateFromAudioDeviceID
 	@abstract	Creates a clock that tracks playback through a particular CoreAudio device.
@@ -49,7 +46,7 @@ CMAudioDeviceClockCreateFromAudioDeviceID(
 		CFAllocatorRef CM_NULLABLE allocator,
 		AudioDeviceID deviceID,
 		CM_RETURNS_RETAINED_PARAMETER CMClockRef CM_NULLABLE * CM_NONNULL clockOut)
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+			API_AVAILABLE(macosx(10.8)) API_UNAVAILABLE(ios, tvos, watchos);
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -63,7 +60,7 @@ CM_EXPORT OSStatus
 CMAudioDeviceClockSetAudioDeviceUID(
 		CMClockRef CM_NONNULL clock,
 		CFStringRef CM_NULLABLE deviceUID)
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+			API_AVAILABLE(macosx(10.8)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function	CMAudioDeviceClockSetAudioDeviceUID
@@ -73,7 +70,7 @@ CM_EXPORT OSStatus
 CMAudioDeviceClockSetAudioDeviceID(
 		CMClockRef CM_NONNULL clock,
 		AudioDeviceID deviceID)
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+			API_AVAILABLE(macosx(10.8)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function	CMAudioDeviceClockGetAudioDevice
@@ -91,9 +88,7 @@ CM_EXPORT OSStatus CMAudioDeviceClockGetAudioDevice(
 		CM_RETURNS_NOT_RETAINED_PARAMETER CFStringRef CM_NULLABLE * CM_NULLABLE deviceUIDOut,	// may be NULL
 		AudioDeviceID * CM_NULLABLE deviceIDOut,			// may be NULL
 		Boolean * CM_NULLABLE trackingDefaultDeviceOut)	// may be NULL
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
-
-#endif // ! TARGET_OS_IPHONE
+			API_AVAILABLE(macosx(10.8)) API_UNAVAILABLE(ios, tvos, watchos);
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

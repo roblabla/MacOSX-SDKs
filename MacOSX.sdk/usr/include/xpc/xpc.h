@@ -308,7 +308,7 @@ XPC_TYPE(_xpc_type_error);
 #define XPC_ERROR_KEY_DESCRIPTION _xpc_error_key_description
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT
-const char *const _xpc_error_key_description;
+const char * const _xpc_error_key_description;
 
 /*!
  * @define XPC_EVENT_KEY_NAME
@@ -318,7 +318,7 @@ const char *const _xpc_error_key_description;
 #define XPC_EVENT_KEY_NAME _xpc_event_key_name
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT
-const char *const _xpc_event_key_name;
+const char * const _xpc_event_key_name;
 
 XPC_ASSUME_NONNULL_END
 #ifndef __XPC_BUILDING_XPC__
@@ -1790,7 +1790,7 @@ xpc_array_create_connection(xpc_object_t xarray, size_t index);
 __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0)
 XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL_ALL
 xpc_object_t _Nullable
-xpc_array_get_dictionary(xpc_object_t self, size_t index);
+xpc_array_get_dictionary(xpc_object_t xarray, size_t index);
 
 /*!
  * @function xpc_array_get_array
@@ -1817,7 +1817,7 @@ xpc_array_get_dictionary(xpc_object_t self, size_t index);
 __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0)
 XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL_ALL
 xpc_object_t _Nullable
-xpc_array_get_array(xpc_object_t self, size_t index);
+xpc_array_get_array(xpc_object_t xarray, size_t index);
 
 #pragma mark Dictionary
 /*!
@@ -2502,7 +2502,7 @@ xpc_dictionary_create_connection(xpc_object_t xdict, const char *key);
 __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0)
 XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL_ALL
 xpc_object_t _Nullable
-xpc_dictionary_get_dictionary(xpc_object_t self, const char *key);
+xpc_dictionary_get_dictionary(xpc_object_t xdict, const char *key);
 
 /*!
  * @function xpc_dictionary_get_array
@@ -2528,7 +2528,7 @@ xpc_dictionary_get_dictionary(xpc_object_t self, const char *key);
 __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0)
 XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL_ALL
 xpc_object_t _Nullable
-xpc_dictionary_get_array(xpc_object_t self, const char *key);
+xpc_dictionary_get_array(xpc_object_t xdict, const char *key);
 
 #pragma mark Runtime
 /*!

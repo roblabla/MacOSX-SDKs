@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
              underlying objects.
  */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLVertexAttributeData : NSObject
 
@@ -30,7 +30,7 @@ MDL_EXPORT
 @property (nonatomic) void *dataStart;
 @property (nonatomic) NSUInteger stride;
 @property (nonatomic) MDLVertexFormat format;
-@property (nonatomic) NSUInteger bufferSize;
+@property (nonatomic) NSUInteger bufferSize API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 @end
 
@@ -41,7 +41,7 @@ MDL_EXPORT
  @discussion Includes a collection of submeshs which have indexbuffer and
              material information
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLMesh : MDLObject
 
@@ -138,8 +138,9 @@ MDL_EXPORT
 /*!
  @property vertexCount
  @abstract Number of vertices in the vertexBuffers
- @discussion This value is valid only if the mesh was initialized
-             with an explicit vertex count
+ @discussion The size of vertex data in each buffer can be computed by multiplying
+             this value with the stride of the buffer in the vertexDescriptor's
+             layout
  */
 @property (nonatomic, readwrite) NSUInteger vertexCount;
 
@@ -283,7 +284,7 @@ MDL_EXPORT
 */
 - (void)addOrthTanBasisForTextureCoordinateAttributeNamed:(NSString *)textureCoordinateAttributeName
                                      normalAttributeNamed:(NSString *)normalAttributeName
-                                    tangentAttributeNamed:(NSString *)tangentAttributeName;
+                                    tangentAttributeNamed:(NSString *)tangentAttributeName API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 /*!
  @method addTextureCoordinatesForAttributeNamed:textureCoordinateAttributeName
@@ -306,7 +307,7 @@ MDL_EXPORT
              coordinate attribute exists on the mesh. An exception will be raised if
              the attribute cannot be found
  */
-- (void)flipTextureCoordinatesInAttributeNamed:(NSString*)textureCoordinateAttributeName;
+- (void)flipTextureCoordinatesInAttributeNamed:(NSString*)textureCoordinateAttributeName API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 /*!
  @method makeVerticesUnique:
@@ -325,7 +326,7 @@ MDL_EXPORT
  vertices so faces do not share vertices. The vertex buffer and index
  buffers on submeshes may grow to accomadate any vertices added.
  */
-- (BOOL)makeVerticesUniqueAndReturnError:(NSError **)error;
+- (BOOL)makeVerticesUniqueAndReturnError:(NSError **)error API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 /*!
  @method replaceAttributeNamed:withData
@@ -590,7 +591,7 @@ MDL_EXPORT
                   hemisphereSegments:(NSUInteger)hemisphereSegments
                         geometryType:(MDLGeometryType)geometryType
                        inwardNormals:(BOOL)inwardNormals
-                           allocator:(nullable id<MDLMeshBufferAllocator>)allocator;
+                           allocator:(nullable id<MDLMeshBufferAllocator>)allocator API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 + (instancetype)newEllipticalConeWithHeight:(float)height
                                       radii:(vector_float2)radii
                              radialSegments:(NSUInteger)radialSegments
@@ -605,7 +606,7 @@ MDL_EXPORT
 + (instancetype)newIcosahedronWithRadius:(float)radius
                            inwardNormals:(BOOL)inwardNormals
                             geometryType:(MDLGeometryType)geometryType
-                               allocator:(nullable id<MDLMeshBufferAllocator>)allocator;
+                               allocator:(nullable id<MDLMeshBufferAllocator>)allocator API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 + (instancetype)newIcosahedronWithRadius:(float)radius
                            inwardNormals:(BOOL)inwardNormals
                                allocator:(nullable id<MDLMeshBufferAllocator>)allocator;

@@ -74,6 +74,8 @@
 
 CF_ASSUME_NONNULL_BEGIN
 
+#define AU_SUPPORT_INTERAPP_AUDIO (TARGET_OS_IPHONE && !(0 && !TARGET_OS_SIMULATOR && !TARGET_OS_EMBEDDED))
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -202,6 +204,45 @@ CF_ENUM(UInt32) {
 	kAudioUnitType_MIDIProcessor			= 'aumi'
 };
 
+#if AU_SUPPORT_INTERAPP_AUDIO
+/*!
+    @enum           Audio Unit Types (for inter-app audio)
+    @abstract		types of inter-app audio units
+
+    @constant       kAudioUnitType_RemoteEffect
+    @constant       kAudioUnitType_RemoteGenerator
+    @constant       kAudioUnitType_RemoteInstrument
+    @constant       kAudioUnitType_RemoteMusicEffect
+	
+	@discussion
+        These Audio Unit types are identical to the corresponding "non-remote" types (e.g.
+        kAudioUnitType_Effect, etc.), with the exception that they are the types that must be
+        used for AudioUnits defined by applications calling AudioOutputUnitPublish.
+
+		When Audio Components of these types are instantiated via AudioComponentInstanceNew,
+		a connection is made to the process which published the component via AudioOutputUnitPublish.
+
+		When using Audio Units which are instances of these components, one must take care to
+		initialize the unit only immediately before beginning a series of render operations, and
+		uninitialize it immediately afterwards, since while initialized, the Audio Unit's background
+		process is being kept awake and is consuming system resources.
+		
+		When using AudioUnitGetProperty and AudioUnitSetProperty, only Apple-defined properties
+		are supported.
+
+		For kAudioUnitProperty_HostCallbacks, hosts can set this property on any remote audio unit.
+		This will cause the host callbacks to be called on each render cycle and the results 
+		communicated to the remote AU's process. The owner of the published AU ("node") can *get*
+		this property on its output units, obtaining the structure of function pointers, and call
+		the host callbacks during the render cycle.
+*/
+CF_ENUM(UInt32) {
+    kAudioUnitType_RemoteEffect         = 'aurx',
+    kAudioUnitType_RemoteGenerator      = 'aurg',
+    kAudioUnitType_RemoteInstrument     = 'auri',
+    kAudioUnitType_RemoteMusicEffect    = 'aurm'
+};
+#endif
 
 //================================================================================================
 #pragma mark -
@@ -488,7 +529,7 @@ CF_ENUM(UInt32) {
 */
 CF_ENUM(UInt32) {
 	kAudioUnitSubType_StereoMixer			= 'smxr',
-	kAudioUnitSubType_3DMixer __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_10, __IPHONE_NA, __IPHONE_NA)
+	kAudioUnitSubType_3DMixer API_DEPRECATED("no longer supported", macos(10.3, 10.10)) API_UNAVAILABLE(ios, watchos, tvos)
 											= '3dmx',
 											// use kAudioUnitSubType_SpatialMixer instead
 };
@@ -683,7 +724,9 @@ typedef CF_OPTIONS(UInt32, AudioUnitRenderActionFlags)
 		The audio unit did not satisfy the render request in time.
 	@constant kAudioUnitErr_ExtensionNotFound
 		The specified identifier did not match any Audio Unit Extensions.
-	
+	@constant		kAudioUnitErr_InvalidParameterValue
+					The parameter value is not supported, e.g. the value specified is NaN or
+					infinite.
 */
 CF_ENUM(OSStatus) {
 	kAudioUnitErr_InvalidProperty			= -10879,
@@ -705,13 +748,42 @@ CF_ENUM(OSStatus) {
 	kAudioUnitErr_Initialized				= -10849,
 	kAudioUnitErr_InvalidOfflineRender		= -10848,
 	kAudioUnitErr_Unauthorized				= -10847,
-    kAudioUnitErr_MIDIOutputBufferFull		= -66753,
-    kAudioComponentErr_InstanceInvalidated  = -66749,
+	kAudioUnitErr_MIDIOutputBufferFull		= -66753,
+	kAudioComponentErr_InstanceTimedOut     = -66754,
+	kAudioComponentErr_InstanceInvalidated  = -66749,
 	kAudioUnitErr_RenderTimeout				= -66745,
-	kAudioUnitErr_ExtensionNotFound			= -66744
+	kAudioUnitErr_ExtensionNotFound			= -66744,
+	kAudioUnitErr_InvalidParameterValue		= -66743,
 };
 
 
+#if AU_SUPPORT_INTERAPP_AUDIO
+/*!
+    @enum       AudioComponent errors for inter-app audio
+    
+    @constant   kAudioComponentErr_DuplicateDescription
+        a non-unique component description was provided to AudioOutputUnitPublish
+    @constant   kAudioComponentErr_UnsupportedType
+        an unsupported component type was provided to AudioOutputUnitPublish
+    @constant   kAudioComponentErr_TooManyInstances
+        components published via AudioOutputUnitPublish may only have one instance
+    @constant   kAudioComponentErr_NotPermitted
+		app needs "inter-app-audio" entitlement or host app needs "audio" in its UIBackgroundModes.
+		Or app is trying to register a component not declared in its Info.plist.
+    @constant   kAudioComponentErr_InitializationTimedOut
+        host did not render in a timely manner; must uninitialize and reinitialize.
+	@constant	kAudioComponentErr_InvalidFormat
+		inter-app AU element formats must have sample rates matching the hardware.
+*/
+CF_ENUM(OSStatus) {
+    kAudioComponentErr_DuplicateDescription     = -66752,
+    kAudioComponentErr_UnsupportedType          = -66751,
+    kAudioComponentErr_TooManyInstances         = -66750,
+    kAudioComponentErr_NotPermitted             = -66748,
+	kAudioComponentErr_InitializationTimedOut	= -66747,
+	kAudioComponentErr_InvalidFormat			= -66746
+};
+#endif
 
 /*!
 	@typedef			AudioUnitPropertyID
@@ -968,7 +1040,7 @@ typedef void
 		CFNotificationCenterGetLocalCenter(), using an object of NULL.
 */
 extern const CFStringRef kAudioComponentRegistrationsChangedNotification
-												__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_7_0);
+												API_AVAILABLE(macos(10.11), ios(7.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@constant kAudioComponentInstanceInvalidationNotification
@@ -989,7 +1061,7 @@ extern const CFStringRef kAudioComponentRegistrationsChangedNotification
 	}];
 */
 extern const CFStringRef kAudioComponentInstanceInvalidationNotification
-												__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+												API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 
 //================================================================================================
@@ -1015,7 +1087,7 @@ extern const CFStringRef kAudioComponentInstanceInvalidationNotification
 */
 extern OSStatus
 AudioUnitInitialize(				AudioUnit				inUnit)						
-												__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+												API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function		AudioUnitUninitialize
@@ -1035,7 +1107,7 @@ AudioUnitInitialize(				AudioUnit				inUnit)
 */
 extern OSStatus
 AudioUnitUninitialize(				AudioUnit				inUnit)						
-												__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+												API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -1071,7 +1143,7 @@ AudioUnitGetPropertyInfo(			AudioUnit				inUnit,
 									AudioUnitElement		inElement,
 									UInt32 * __nullable		outDataSize,
 									Boolean * __nullable	outWritable)			
-												__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+												API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function		AudioUnitGetProperty
@@ -1103,7 +1175,7 @@ AudioUnitGetProperty(				AudioUnit				inUnit,
 									AudioUnitElement		inElement,
 									void *					outData,
 									UInt32 *				ioDataSize)				
-												__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+												API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function		AudioUnitSetProperty
@@ -1137,7 +1209,7 @@ AudioUnitSetProperty(				AudioUnit				inUnit,
 									AudioUnitElement		inElement,
 									const void * __nullable	inData,
 									UInt32					inDataSize)				
-												__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+												API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function		AudioUnitAddPropertyListener
@@ -1166,7 +1238,7 @@ AudioUnitAddPropertyListener(		AudioUnit						inUnit,
 									AudioUnitPropertyID				inID,
 									AudioUnitPropertyListenerProc	inProc,
 									void * __nullable				inProcUserData)
-												__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+												API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function		AudioUnitRemovePropertyListenerWithUserData
@@ -1191,7 +1263,7 @@ AudioUnitRemovePropertyListenerWithUserData(
 									AudioUnitPropertyID				inID,
 									AudioUnitPropertyListenerProc	inProc,
 									void * __nullable				inProcUserData)
-												__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+												API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function		AudioUnitAddRenderNotify
@@ -1219,7 +1291,7 @@ extern OSStatus
 AudioUnitAddRenderNotify(			AudioUnit				inUnit,
 									AURenderCallback		inProc,
 									void * __nullable		inProcUserData)
-												__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+												API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function		AudioUnitRemoveRenderNotify
@@ -1239,7 +1311,7 @@ extern OSStatus
 AudioUnitRemoveRenderNotify(		AudioUnit				inUnit,
 									AURenderCallback		inProc,
 									void * __nullable		inProcUserData)
-												__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+												API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function		AudioUnitGetParameter
@@ -1266,7 +1338,7 @@ AudioUnitGetParameter(				AudioUnit					inUnit,
 									AudioUnitScope				inScope,
 									AudioUnitElement			inElement,
 									AudioUnitParameterValue *	outValue)			
-												__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+												API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function		AudioUnitSetParameter
@@ -1298,7 +1370,7 @@ AudioUnitSetParameter(				AudioUnit					inUnit,
 									AudioUnitElement			inElement,
 									AudioUnitParameterValue		inValue,
 									UInt32						inBufferOffsetInFrames) 
-												__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+												API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function		AudioUnitScheduleParameters
@@ -1335,7 +1407,7 @@ extern OSStatus
 AudioUnitScheduleParameters(		AudioUnit						inUnit,
 									const AudioUnitParameterEvent *	inParameterEvent,
 									UInt32							inNumParamEvents) 
-												__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+												API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function		AudioUnitRender
@@ -1384,7 +1456,7 @@ AudioUnitRender(					AudioUnit						inUnit,
 									UInt32							inOutputBusNumber,
 									UInt32							inNumberFrames,
 									AudioBufferList *				ioData)			
-												__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+												API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 extern OSStatus
 AudioUnitProcess (					AudioUnit						inUnit, 
@@ -1392,7 +1464,7 @@ AudioUnitProcess (					AudioUnit						inUnit,
 									const AudioTimeStamp *			inTimeStamp, 
 									UInt32							inNumberFrames, 
 									AudioBufferList *				ioData)
-												__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_6_0);
+												API_AVAILABLE(macos(10.7), ios(6.0), watchos(2.0), tvos(9.0));
 
 extern OSStatus
 AudioUnitProcessMultiple(			AudioUnit						inUnit, 
@@ -1403,7 +1475,7 @@ AudioUnitProcessMultiple(			AudioUnit						inUnit,
 									const AudioBufferList * __nonnull * __nonnull inInputBufferLists,
 									UInt32							inNumberOutputBufferLists,
 									AudioBufferList * __nonnull * __nonnull ioOutputBufferLists)
-												__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_6_0);
+												API_AVAILABLE(macos(10.7), ios(6.0), watchos(2.0), tvos(9.0));
 	
 /*!
 	@function		AudioUnitReset
@@ -1432,8 +1504,64 @@ extern OSStatus
 AudioUnitReset(						AudioUnit			inUnit,
 									AudioUnitScope		inScope,
 									AudioUnitElement	inElement)					
-												__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+												API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
 
+#if AU_SUPPORT_INTERAPP_AUDIO
+/*!
+    @function       AudioOutputUnitPublish
+
+    @abstract       Register an audio output unit as available to be used as an audio unit by
+                    other applications.
+
+    @param          inOutputUnit
+                        The audio output unit to be published.
+    @param          inDesc
+                        The AudioComponentDescription under which to register the application.
+    @param          inName  
+                        The application or component name.
+    @result         An OSStatus result code.
+    
+    @discussion
+        This allows a publishing application to register its audio (input/)output unit as being able
+        to be redirected and repurposed as an audio unit effect, generator, music device or music
+        effect by another host application.
+*/
+extern OSStatus
+AudioOutputUnitPublish(         const AudioComponentDescription *   inDesc,
+                                CFStringRef                         inName,
+                                UInt32                              inVersion,
+								AudioUnit                           inOutputUnit)
+                                                API_AVAILABLE(ios(7.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+
+
+#if defined(__OBJC__)
+@class UIImage;
+
+extern UIImage * __nullable
+AudioOutputUnitGetHostIcon(AudioUnit au, float desiredPointSize)
+                                                API_AVAILABLE(ios(7.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+extern UIImage * __nullable
+AudioComponentGetIcon(AudioComponent comp, float desiredPointSize)
+                                                API_AVAILABLE(ios(7.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+
+#endif // __OBJC__
+
+
+/*!
+    @function       AudioComponentGetLastActiveTime
+    @abstract       Fetches the time at which the application publishing the component was last active.
+	@discussion
+		Inter-app audio hosts can use this to sort the list of available nodes by how recently
+		the user interacted with them.
+	
+    @param          inComponent
+                        The AudioComponent being queried.
+    @result         The CFAbsoluteTime at which the node was last active (0 if never).
+*/
+extern CFAbsoluteTime
+AudioComponentGetLastActiveTime(AudioComponent comp)
+                                                API_AVAILABLE(ios(7.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+#endif // AU_SUPPORT_INTERAPP_AUDIO
 
 #if defined(__LP64__) || TARGET_OS_IPHONE
 /*!
@@ -1678,7 +1806,7 @@ extern OSStatus
 AudioUnitRemovePropertyListener(	AudioUnit						inUnit,
 									AudioUnitPropertyID				inID,
 									AudioUnitPropertyListenerProc	inProc)			
-				__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+				API_DEPRECATED("no longer supported", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif
 
 #ifdef __cplusplus

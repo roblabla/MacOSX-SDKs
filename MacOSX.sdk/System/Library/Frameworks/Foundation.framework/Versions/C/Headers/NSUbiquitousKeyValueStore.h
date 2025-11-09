@@ -1,5 +1,5 @@
 /*	NSUbiquitousKeyValueStore.h
-	Copyright (c) 2011-2017, Apple Inc. All rights reserved.
+	Copyright (c) 2011-2018, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>

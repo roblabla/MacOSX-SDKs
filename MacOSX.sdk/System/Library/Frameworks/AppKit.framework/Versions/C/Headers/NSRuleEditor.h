@@ -1,7 +1,7 @@
 /*
         NSRuleEditor.h
 	Application Kit
-	Copyright (c) 2006-2017, Apple Inc.
+	Copyright (c) 2006-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NSRuleEditorDelegate;
 
 /* The following strings are to be used as keys to the dictionary returned from the optional method ruleEditor: predicatePartsForCriterion: withDisplayValue: inRow: .  In order to construct a valid predicate, the union of the dictionaries for each item in the row must contain the required parts as described below: */
-typedef NSString * NSRuleEditorPredicatePartKey NS_STRING_ENUM;
+typedef NSString * NSRuleEditorPredicatePartKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSRuleEditorPredicatePartKey const NSRuleEditorPredicateLeftExpression; /* The value of this key should be an NSExpression representing the left expression in the predicate; this value is required for a non-nil comparison predicate */
 APPKIT_EXTERN NSRuleEditorPredicatePartKey const NSRuleEditorPredicateRightExpression; /* The value of this key should be an NSExpression representing the right expression in the predicate; this value is required for a non-nil comparison predicate */
 APPKIT_EXTERN NSRuleEditorPredicatePartKey const NSRuleEditorPredicateComparisonModifier; /* NSNumber representing the NSComparisonPredicateModifier of the predicate; this value is optional and, if not specified, NSDirectPredicateModifier is assumed */
@@ -67,23 +67,23 @@ typedef NS_ENUM(NSUInteger, NSRuleEditorRowType) {
 
 @interface NSRuleEditor : NSControl {
     @private
-    id _ruleDataSource;
-    __weak id _ruleDelegate;
-    NSIndexSet *_draggingRows;
-    NSMutableArray *_rowCache;
-    NSView *_slicesHolder;
-    NSMutableArray *_slices;
-    CGFloat _sliceHeight;
-    CGFloat _alignmentGridWidth;
-    NSInteger _subviewIndexOfDropLine;
-    id _dropLineView;
-    NSViewAnimation *_currentAnimation;
-    id _unused1 __unused;
-    NSString *_stringsFileName;
-    id _standardLocalizer;
-    id _headerLocalizer;
-    NSPredicate *_predicate;
-    NSInteger _nestingMode;
+    id _ruleDataSource APPKIT_IVAR;
+    __weak id _ruleDelegate APPKIT_IVAR;
+    NSIndexSet *_draggingRows APPKIT_IVAR;
+    NSMutableArray *_rowCache APPKIT_IVAR;
+    NSView *_slicesHolder APPKIT_IVAR;
+    NSMutableArray *_slices APPKIT_IVAR;
+    CGFloat _sliceHeight APPKIT_IVAR;
+    CGFloat _alignmentGridWidth APPKIT_IVAR;
+    NSInteger _subviewIndexOfDropLine APPKIT_IVAR;
+    id _dropLineView APPKIT_IVAR;
+    NSViewAnimation *_currentAnimation APPKIT_IVAR;
+    id _unused1 __unused APPKIT_IVAR;
+    NSString *_stringsFileName APPKIT_IVAR;
+    id _standardLocalizer APPKIT_IVAR;
+    id _headerLocalizer APPKIT_IVAR;
+    NSPredicate *_predicate APPKIT_IVAR;
+    NSInteger _nestingMode APPKIT_IVAR;
     struct {
 	unsigned elideUpdating:1;
 	unsigned lastAlternateKeyValue:1;
@@ -98,17 +98,17 @@ typedef NS_ENUM(NSUInteger, NSRuleEditorRowType) {
 	unsigned allowsEmptyCompoundRows:1;
 	unsigned dropChangedRowCount:1;
 	unsigned reserved:20;
-    } _ruleEditorFlags;
-    NSString *_typeKeyPath;
-    NSString *_itemsKeyPath;
-    NSString *_valuesKeyPath;
-    NSString *_subrowsArrayKeyPath;
-    Class _rowClass;
-    id _boundArrayOwner;
-    NSString *_boundArrayKeyPath;
-    id _ruleReserved1 __unused;
-    NSInteger _lastRow;
-    id _ruleReserved2 __unused;
+    } _ruleEditorFlags APPKIT_IVAR;
+    NSString *_typeKeyPath APPKIT_IVAR;
+    NSString *_itemsKeyPath APPKIT_IVAR;
+    NSString *_valuesKeyPath APPKIT_IVAR;
+    NSString *_subrowsArrayKeyPath APPKIT_IVAR;
+    Class _rowClass APPKIT_IVAR;
+    id _boundArrayOwner APPKIT_IVAR;
+    NSString *_boundArrayKeyPath APPKIT_IVAR;
+    id _ruleReserved1 __unused APPKIT_IVAR;
+    NSInteger _lastRow APPKIT_IVAR;
+    id _ruleReserved2 __unused APPKIT_IVAR;
 }
 
 /* -- Configuring NSRuleEditor -- */

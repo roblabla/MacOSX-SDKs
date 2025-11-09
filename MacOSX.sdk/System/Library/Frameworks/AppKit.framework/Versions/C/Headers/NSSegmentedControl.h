@@ -1,7 +1,7 @@
 /*
 	NSSegmentedControl.h
 	Application Kit
-	Copyright (c) 2003-2017, Apple Inc.
+	Copyright (c) 2003-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -50,10 +50,10 @@ typedef NS_ENUM(NSInteger, NSSegmentDistribution) {
 
 @interface NSSegmentedControl : NSControl <NSUserInterfaceCompression> {
   @private
-    NSInteger _reserved1;
-    NSInteger _reserved2;
-    NSInteger _reserved3;
-    id        _scAux;
+    NSInteger _reserved1 APPKIT_IVAR;
+    NSInteger _reserved2 APPKIT_IVAR;
+    NSInteger _reserved3 APPKIT_IVAR;
+    id        _scAux APPKIT_IVAR;
 }
 
 @property NSInteger segmentCount;
@@ -110,6 +110,10 @@ typedef NS_ENUM(NSInteger, NSSegmentDistribution) {
 - (NSTextAlignment)alignmentForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13);
 
 @property NSSegmentDistribution segmentDistribution NS_AVAILABLE_MAC(10_13); // Defaults to NSSegmentDistributionFill on 10.13, older systems will continue to behave similarly to NSSegmentDistributionFit
+
+- (void)compressWithPrioritizedCompressionOptions:(NSArray<NSUserInterfaceCompressionOptions *> *)prioritizedOptions NS_AVAILABLE_MAC(10_13);
+- (NSSize)minimumSizeWithPrioritizedCompressionOptions:(NSArray<NSUserInterfaceCompressionOptions *> *)prioritizedOptions NS_AVAILABLE_MAC(10_13);
+@property (readonly, copy) NSUserInterfaceCompressionOptions *activeCompressionOptions NS_AVAILABLE_MAC(10_13);
 
 @end
 

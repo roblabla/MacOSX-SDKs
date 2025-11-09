@@ -1,7 +1,7 @@
 /*
     NSEntityMapping.h
     Core Data
-    Copyright (c) 2004-2017, Apple Inc.
+    Copyright (c) 2004-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -47,7 +47,8 @@ API_AVAILABLE(macosx(10.5),ios(3.0))
 
     struct __entityMappingFlags {
         unsigned int _isInUse:1;
-        unsigned int _reservedEntityMapping:31;
+        unsigned int _changeIsConstraintOnly:1;
+        unsigned int _reservedEntityMapping:30;
     } _entityMappingFlags;
 #endif
 }

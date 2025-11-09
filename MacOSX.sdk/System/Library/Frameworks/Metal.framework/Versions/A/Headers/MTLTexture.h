@@ -27,9 +27,33 @@ typedef NS_ENUM(NSUInteger, MTLTextureType)
     MTLTextureType2DArray = 3,
     MTLTextureType2DMultisample = 4,
     MTLTextureTypeCube = 5,
-    MTLTextureTypeCubeArray NS_AVAILABLE_MAC(10_11) = 6,
+    MTLTextureTypeCubeArray API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios) = 6,
     MTLTextureType3D = 7,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+    MTLTextureType2DMultisampleArray API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios) = 8,
+    MTLTextureTypeTextureBuffer API_AVAILABLE(macos(10.14), ios(12.0)) = 9
+} API_AVAILABLE(macos(10.11), ios(8.0));
+
+
+API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios)
+@interface MTLSharedTextureHandle : NSObject <NSSecureCoding>
+{
+    struct MTLSharedTextureHandlePrivate *_priv;
+}
+
+/*!
+ @property device
+ @abstract The device this texture was created against.
+ @discussion This shared texture handle can only be used with this device.
+ */
+@property (readonly) id <MTLDevice> device;
+
+/*!
+ @property label
+ @abstract A copy of the original texture's label property, if any
+*/
+@property (readonly, nullable) NSString *label;
+
+@end
 
 /*!
  @enum MTLTextureUsage
@@ -43,9 +67,9 @@ typedef NS_OPTIONS(NSUInteger, MTLTextureUsage)
     MTLTextureUsageShaderWrite     = 0x0002,
     MTLTextureUsageRenderTarget    = 0x0004,
     MTLTextureUsagePixelFormatView = 0x0010,
-} NS_ENUM_AVAILABLE(10_11, 9_0);
+} API_AVAILABLE(macos(10.11), ios(9.0));
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLTextureDescriptor : NSObject <NSCopying>
 
 /*!
@@ -59,6 +83,15 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  @abstract Create a TextureDescriptor for a common Cube texture.
  */
 + (MTLTextureDescriptor*)textureCubeDescriptorWithPixelFormat:(MTLPixelFormat)pixelFormat size:(NSUInteger)size mipmapped:(BOOL)mipmapped;
+
+/*!
+ @method textureBufferDescriptorWithPixelFormat:width:resourceOptions:usage:
+ @abstract Create a TextureDescriptor for a common texture buffer.
+ */
++ (MTLTextureDescriptor*)textureBufferDescriptorWithPixelFormat:(MTLPixelFormat)pixelFormat
+                                                          width:(NSUInteger)width
+                                                resourceOptions:(MTLResourceOptions)resourceOptions
+                                                          usage:(MTLTextureUsage)usage API_AVAILABLE(macos(10.14), ios(12.0));
 
 /*!
  @property type
@@ -102,7 +135,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 /*!
  @property sampleCount
  @abstract The number of samples in the texture to create. The default value is 1.
- @discussion When creating Buffer and Array textures, sampleCount must be 1. Implementations may round sample counts up to the next supported value.
+ @discussion When creating Buffer textures sampleCount must be 1. Implementations may round sample counts up to the next supported value.
  */
 @property (readwrite, nonatomic) NSUInteger sampleCount;
 
@@ -123,19 +156,27 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  @property cpuCacheMode
  @abstract Options to specify CPU cache mode of texture resource.
  */
-@property (readwrite, nonatomic) MTLCPUCacheMode cpuCacheMode NS_AVAILABLE(10_11, 9_0);
+@property (readwrite, nonatomic) MTLCPUCacheMode cpuCacheMode API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @property storageMode
  @abstract To specify storage mode of texture resource.
  */
-@property (readwrite, nonatomic) MTLStorageMode storageMode NS_AVAILABLE(10_11, 9_0);
+@property (readwrite, nonatomic) MTLStorageMode storageMode API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @property usage
  @abstract Description of texture usage
  */
-@property (readwrite, nonatomic) MTLTextureUsage usage NS_AVAILABLE(10_11, 9_0);
+@property (readwrite, nonatomic) MTLTextureUsage usage API_AVAILABLE(macos(10.11), ios(9.0));
+
+
+/*!
+ @property allowGPUOptimizedContents
+ @abstract Allow GPU-optimization for the contents of this texture. The default value is true.
+ @discussion Useful for opting-out of GPU-optimization when implicit optimization (e.g. RT writes) is regressing CPU-read-back performance. See the documentation for optimizeContentsForGPUAccess: and optimizeContentsForCPUAccess: APIs.
+ */
+@property (readwrite, nonatomic) BOOL allowGPUOptimizedContents API_AVAILABLE(macos(10.14), ios(12.0));
 
 @end
 
@@ -147,63 +188,63 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  
  Most APIs that operate on individual images in a texture address those images via a tuple of a Slice, and Mipmap Level within that slice.
  */
-NS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0))
 @protocol MTLTexture <MTLResource>
 
 /*!
  @property rootResource
  @abstract The resource this texture was created from. It may be a texture or a buffer. If this texture is not reusing storage of another MTLResource, then nil is returned.
  */
-@property (nullable, readonly) id <MTLResource> rootResource NS_DEPRECATED(10_11, 10_12, 8_0, 10_0, "Use parentTexture or buffer instead");
+@property (nullable, readonly) id <MTLResource> rootResource API_DEPRECATED("Use parentTexture or buffer instead", macos(10.11, 10.12), ios(8.0, 10.0));
 
 /*!
  @property parentTexture
  @abstract The texture this texture view was created from, or nil if this is not a texture view or it was not created from a texture.
  */
-@property (nullable, readonly) id <MTLTexture> parentTexture NS_AVAILABLE(10_11, 9_0);
+@property (nullable, readonly) id <MTLTexture> parentTexture API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @property parentRelativeLevel
  @abstract The base level of the texture this texture view was created from, or 0 if this is not a texture view.
  */
-@property (readonly) NSUInteger parentRelativeLevel NS_AVAILABLE(10_11, 9_0);
+@property (readonly) NSUInteger parentRelativeLevel API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @property parentRelativeSlice
  @abstract The base slice of the texture this texture view was created from, or 0 if this is not a texture view.
  */
-@property (readonly) NSUInteger parentRelativeSlice NS_AVAILABLE(10_11, 9_0);
+@property (readonly) NSUInteger parentRelativeSlice API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @property buffer
  @abstract The buffer this texture view was created from, or nil if this is not a texture view or it was not created from a buffer.
  */
-@property (nullable, readonly) id <MTLBuffer> buffer NS_AVAILABLE(10_12, 9_0);
+@property (nullable, readonly) id <MTLBuffer> buffer API_AVAILABLE(macos(10.12), ios(9.0));
 
 /*!
  @property bufferOffset
  @abstract The offset of the buffer this texture view was created from, or 0 if this is not a texture view.
  */
-@property (readonly) NSUInteger bufferOffset NS_AVAILABLE(10_12, 9_0);
+@property (readonly) NSUInteger bufferOffset API_AVAILABLE(macos(10.12), ios(9.0));
 
 /*!
  @property bufferBytesPerRow
  @abstract The bytesPerRow of the buffer this texture view was created from, or 0 if this is not a texture view.
  */
-@property (readonly) NSUInteger bufferBytesPerRow NS_AVAILABLE(10_12, 9_0);
+@property (readonly) NSUInteger bufferBytesPerRow API_AVAILABLE(macos(10.12), ios(9.0));
 
 
 /*!
  @property iosurface
  @abstract If this texture was created from an IOSurface, this returns a reference to that IOSurface. iosurface is nil if this texture was not created from an IOSurface.
  */
-@property (nullable, readonly) IOSurfaceRef iosurface NS_AVAILABLE(10_11, 11_0);
+@property (nullable, readonly) IOSurfaceRef iosurface API_AVAILABLE(macos(10.11), ios(11.0));
 
 /*!
  @property iosurfacePlane
  @abstract If this texture was created from an IOSurface, this returns the plane of the IOSurface from which the texture was created. iosurfacePlane is 0 if this texture was not created from an IOSurface.
  */
-@property (readonly) NSUInteger iosurfacePlane NS_AVAILABLE(10_11, 11_0);
+@property (readonly) NSUInteger iosurfacePlane API_AVAILABLE(macos(10.11), ios(11.0));
 
 /*!
  @property type
@@ -264,11 +305,26 @@ NS_AVAILABLE(10_11, 8_0)
 @property (readonly) MTLTextureUsage usage;
 
 /*!
+ @property shareable
+ @abstract If YES, this texture can be shared with other processes.
+ @discussion Texture can be shared across process addres space boundaries through use of sharedTextureHandle and XPC.
+ */
+@property (readonly, getter = isShareable) BOOL shareable;
+
+/*!
  @property framebufferOnly
  @abstract If YES, this texture can only be used with a MTLAttachmentDescriptor, and cannot be used as a texture argument for MTLRenderCommandEncoder, MTLBlitCommandEncoder, or MTLComputeCommandEncoder. Furthermore, when this property's value is YES, readPixels/writePixels may not be used with this texture.
  @discussion Textures obtained from CAMetalDrawables may have this property set to YES, depending on the value of frameBufferOnly passed to their parent CAMetalLayer. Textures created directly by the application will not have any restrictions.
  */
 @property (readonly, getter = isFramebufferOnly) BOOL framebufferOnly;
+
+
+/*!
+ @property allowGPUOptimizedContents
+ @abstract Allow GPU-optimization for the contents texture. The default value is true.
+ @discussion Useful for opting-out of GPU-optimization when implicit optimization (e.g. RT writes) is regressing CPU-read-back performance. See the documentation for optimizeContentsForGPUAccess: and optimizeContentsForCPUAccess: APIs.
+ */
+@property (readonly) BOOL allowGPUOptimizedContents API_AVAILABLE(macos(10.14), ios(12.0));
 
 /*!
  @method getBytes:bytesPerRow:bytesPerImage:fromRegion:mipmapLevel:slice:
@@ -304,7 +360,14 @@ NS_AVAILABLE(10_11, 8_0)
  @method newTextureViewWithPixelFormat:textureType:levels:slices:
  @abstract Create a new texture which shares the same storage as the source texture, but with a different (but compatible) pixel format, texture type, levels and slices.
  */
-- (nullable id<MTLTexture>)newTextureViewWithPixelFormat:(MTLPixelFormat)pixelFormat textureType:(MTLTextureType)textureType levels:(NSRange)levelRange slices:(NSRange)sliceRange NS_AVAILABLE(10_11, 9_0);
+- (nullable id<MTLTexture>)newTextureViewWithPixelFormat:(MTLPixelFormat)pixelFormat textureType:(MTLTextureType)textureType levels:(NSRange)levelRange slices:(NSRange)sliceRange API_AVAILABLE(macos(10.11), ios(9.0));
+
+/*!
+ @method newSharedTextureHandle
+ @abstract Create a new texture handle, that can be shared across process addres space boundaries.
+ */
+- (nullable MTLSharedTextureHandle *)newSharedTextureHandle API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios);
+
 
 @end
 NS_ASSUME_NONNULL_END

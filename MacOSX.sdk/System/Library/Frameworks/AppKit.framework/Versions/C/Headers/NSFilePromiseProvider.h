@@ -1,7 +1,7 @@
 /*
 	NSFilePromiseProvider.h
 	Application Kit
-	Copyright (c) 2015-2017, Apple Inc.
+	Copyright (c) 2015-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -19,18 +19,19 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_12)
 @interface NSFilePromiseProvider : NSObject <NSPasteboardWriting> {
 @private
-    NSString *_fileType;
-    NSArray<NSString *> *_reservedA;
-    id _reservedB;
-    __weak id <NSFilePromiseProviderDelegate> _delegate;
-    id _userInfo;
-    NSURL *_destinationURL;
-    NSInteger _dragggingSequenceNumber;
+    NSString *_fileType APPKIT_IVAR;
+    NSArray<NSString *> *_reservedA APPKIT_IVAR;
+    id _reservedB APPKIT_IVAR;
+    __weak id <NSFilePromiseProviderDelegate> _delegate APPKIT_IVAR;
+    id _userInfo APPKIT_IVAR;
+    NSURL *_destinationURL APPKIT_IVAR;
+    NSInteger _dragggingSequenceNumber APPKIT_IVAR;
     struct {
         unsigned int valid;
-        unsigned int reserved:31;
-    } _flags;
-    id _private __unused;
+        unsigned int providedItem:1;
+        unsigned int reserved:30;
+    } _flags APPKIT_IVAR;
+    id _private APPKIT_IVAR;
 }
 
 /* The UTI of the promised file type. An exception is thrown if the fileType does not conform to kUTTypeData or kUTTypeDirectory */

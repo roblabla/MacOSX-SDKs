@@ -2,7 +2,7 @@
  *  CTRubyAnnotation.h
  *  CoreText
  *
- *  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
+ *  Copyright (c) 2012-2018 Apple Inc. All rights reserved.
  *
  */
 
@@ -18,8 +18,9 @@
 #define __CTRUBYANNOTATION__
 
 #include <CoreText/CTDefines.h>
-#include <CoreGraphics/CGBase.h>
-#include <CoreFoundation/CFDictionary.h>
+
+#include <CoreFoundation/CoreFoundation.h>
+#include <CoreGraphics/CoreGraphics.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
@@ -172,7 +173,7 @@ CTRubyAnnotationRef CTRubyAnnotationCreate(
     CTRubyAlignment alignment,
     CTRubyOverhang overhang,
     CGFloat sizeFactor,
-    CFStringRef __nullable text[_Nonnull kCTRubyPositionCount] ) CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+    CFStringRef _Nullable text[_Nonnull kCTRubyPositionCount] ) CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const      kCTRubyAnnotationSizeFactorAttributeName
@@ -305,7 +306,7 @@ CGFloat CTRubyAnnotationGetSizeFactor(
                 function will return a CFStringRef for the text. Otherwise it will return NULL.
 */
 
-CFStringRef __nullable CTRubyAnnotationGetTextForPosition(
+CFStringRef _Nullable CTRubyAnnotationGetTextForPosition(
     CTRubyAnnotationRef rubyAnnotation,
     CTRubyPosition position ) CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 

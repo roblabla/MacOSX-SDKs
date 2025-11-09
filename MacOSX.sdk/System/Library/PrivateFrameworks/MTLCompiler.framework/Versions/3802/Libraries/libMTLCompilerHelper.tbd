@@ -1,10 +1,10 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: F45471E3-1FBD-3E7B-A1C9-1F6C5720A445', 'x86_64: D3480D29-BD72-33C6-9FE0-771AE3E790F7' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 6A21E821-9210-3554-852B-0E2D78C66632' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/MTLCompiler.framework/Versions/3802/Libraries/libMTLCompilerHelper.dylib
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _createCompilerHelper, _deleteCompilerHelper ]
     weak-def-symbols: [ __ZTI26MTLCompilerHelperInterface, __ZTI28MTLCompilerBuiltInFileReader, 
                         __ZTS26MTLCompilerHelperInterface, __ZTS28MTLCompilerBuiltInFileReader ]

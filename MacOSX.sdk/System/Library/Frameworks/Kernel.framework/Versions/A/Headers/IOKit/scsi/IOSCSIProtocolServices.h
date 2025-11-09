@@ -749,7 +749,6 @@ protected:
     OSMetaClassDeclareReservedUsed ( IOSCSIProtocolServices, 6 );
 	virtual SCSIServiceResponse		HandleTargetReset ( void );
 
-#if !TARGET_OS_EMBEDDED
 	/*!
 	@function CreateSCSITargetDevice
 	@abstract Used to create a SCSITargetDevice which will manage logical units.
@@ -761,7 +760,6 @@ protected:
 	*/
     OSMetaClassDeclareReservedUsed ( IOSCSIProtocolServices,  7 );
 	virtual bool	CreateSCSITargetDevice ( void );
-#endif /* !TARGET_OS_EMBEDDED */
 	
 private:
 	

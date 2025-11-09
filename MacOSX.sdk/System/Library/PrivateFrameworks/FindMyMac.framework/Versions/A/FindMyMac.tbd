@@ -1,10 +1,10 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 3B4A2C6B-3F76-363F-AA24-0E27AF34A7D1', 'x86_64: F47B1D92-DF8D-378D-A54A-0729F8442F60' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 30AAC34A-E68A-3B95-9369-35E752A20C96' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/FindMyMac.framework/Versions/A/FindMyMac
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _AtLoginWindow, _CopyDataAndBytesAndLengthFromDictionary, 
                        _CopyNVRAMKeys, _CopyPropertyAsCFString, _CopyPropertyAsData, 
                        _CreateTokenKeyForAccount, _DictionaryCreateFromBytesAndLength, 

@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: CE5F8BAD-67C0-3B3F-897D-6A4E291CF675' ]
+uuids:           [ 'x86_64: B1F6F5B2-9FEB-3191-9F0F-2FC76FA3B0EE' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/SDAPI.framework/Versions/A/SDAPI
 objc-constraint: none

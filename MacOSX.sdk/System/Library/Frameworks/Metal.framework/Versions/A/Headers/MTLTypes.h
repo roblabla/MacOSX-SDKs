@@ -80,8 +80,9 @@ typedef struct {
     float x, y;
 } MTLSamplePosition;
 
-MTL_INLINE MTLSamplePosition MTLSamplePositionMake(float x, float y)
+MTL_INLINE MTLSamplePosition MTLSamplePositionMake(float x, float y) API_AVAILABLE(macos(10.13), ios(11.0))
 {
     MTLSamplePosition position = {x, y};
     return position;
 }
+

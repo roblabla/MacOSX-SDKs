@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// developer might want to represent include song files, streaming audio URLs,
 /// or radio stations.
 MP_API(ios(7.1), tvos(7.1), macos(10.12.2))
+MP_PROHIBITED(watchos)
 @interface MPContentItem : NSObject
 
 /// Designated initializer. A unique identifier is required to identify the item

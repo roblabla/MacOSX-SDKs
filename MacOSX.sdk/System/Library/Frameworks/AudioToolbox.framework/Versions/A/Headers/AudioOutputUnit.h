@@ -25,10 +25,10 @@ extern "C" {
 //	Start/stop methods for output units
 //-----------------------------------------------------------------------------
 extern OSStatus
-AudioOutputUnitStart(	AudioUnit	ci)											__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+AudioOutputUnitStart(	AudioUnit	ci)											API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
 
 extern OSStatus
-AudioOutputUnitStop(	AudioUnit	ci)											__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+AudioOutputUnitStop(	AudioUnit	ci)											API_AVAILABLE(macos(10.0), ios(2.0), watchos(2.0), tvos(9.0));
 
 //-----------------------------------------------------------------------------
 //	Selectors for component and audio plugin calls

@@ -1,7 +1,7 @@
 /*
 	NSNibLoading.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -27,9 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface NSBundle (NSNibLoadingDeprecated)
-+ (BOOL)loadNibFile:(null_unspecified NSString *)fileName externalNameTable:(null_unspecified NSDictionary *)context withZone:(null_unspecified NSZone *)zone NS_DEPRECATED_MAC(10_0, 10_8); // Deprecated in Mac OS X 10.8
-+ (BOOL)loadNibNamed:(null_unspecified NSString *)nibName owner:(null_unspecified id)owner NS_DEPRECATED_MAC(10_0, 10_8); // Deprecated in Mac OS X 10.8
-- (BOOL)loadNibFile:(null_unspecified NSString *)fileName externalNameTable:(null_unspecified NSDictionary *)context withZone:(null_unspecified NSZone *)zone NS_DEPRECATED_MAC(10_0, 10_8); // Deprecated in Mac OS X 10.8
++ (BOOL)loadNibFile:(null_unspecified NSString *)fileName externalNameTable:(null_unspecified NSDictionary *)context withZone:(null_unspecified NSZone *)zone NS_DEPRECATED_MAC(10_0, 10_8);
++ (BOOL)loadNibNamed:(null_unspecified NSString *)nibName owner:(null_unspecified id)owner NS_DEPRECATED_MAC(10_0, 10_8);
+- (BOOL)loadNibFile:(null_unspecified NSString *)fileName externalNameTable:(null_unspecified NSDictionary *)context withZone:(null_unspecified NSZone *)zone NS_DEPRECATED_MAC(10_0, 10_8);
 @end
 
 NS_ASSUME_NONNULL_END

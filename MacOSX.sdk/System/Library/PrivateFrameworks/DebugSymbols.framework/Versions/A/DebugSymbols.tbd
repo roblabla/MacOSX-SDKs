@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 00329704-8EF3-3075-9916-DBB0CDBEA68C', 'x86_64: B6CBAC8A-3FB3-342A-8EB1-2673B65FC97D' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 12419E0F-BC7A-3F3A-AA53-5F068DAED725' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/DebugSymbols.framework/Versions/A/DebugSymbols
-current-version: 141
+current-version: 185
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _DBGAddDSYMURL, _DBGAppID, _DBGBlockPath, _DBGCopyDSYMPropertyLists, 
                        _DBGCopyDSYMURLForUUID, _DBGCopyDSYMURLForUUIDWithOptions, 
                        _DBGCopyFullDSYMURLForUUID, _DBGCopyFullDSYMURLForUUIDWithOptions, 

@@ -1,11 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 0AA4081C-59EE-32EC-9CA9-476170AA86E3', 'x86_64: 8CD7A32A-7E31-30E5-B874-70ACE13811C5' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: D9388630-E7F2-321E-81FF-EBD5F3B47A52' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices
+current-version: 284.16.3
 parent-umbrella: CoreServices
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _DCSActivateDictionaryPanel, _DCSCopyActiveDictionaries, _DCSCopyAvailableDictionaries, 
                        _DCSCopyDefinitionMarkup, _DCSCopyDefinitionRecords, _DCSCopyDefinitions, 
                        _DCSCopyInactiveDictionaries, _DCSCopyLanguagesOfPreparedDefaultDictionaries, 

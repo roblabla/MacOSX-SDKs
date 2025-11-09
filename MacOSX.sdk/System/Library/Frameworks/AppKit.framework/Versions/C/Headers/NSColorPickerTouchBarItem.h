@@ -1,7 +1,7 @@
 /*
  NSColorPickerTouchBarItem.h
  Application Kit
- Copyright (c) 2016-2017, Apple Inc.
+ Copyright (c) 2016-2018, Apple Inc.
  All rights reserved.
 */
 
@@ -14,24 +14,24 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSColorPickerTouchBarItem : NSTouchBarItem {
 @private
-    id _overlay;
-    NSString *_customizationLabel;
-    NSColor *_color;
-    __weak id _target;
-    SEL _action;
-    NSInteger _mode;
-    NSView *_view;
-    NSString *_buttonTitle;
-    NSImage *_buttonImage;
-    NSColorList *_colorList;
-    id _autounbinder;
-    NSArray<NSColorSpace *> *_allowedColorSpaces;
-    signed char _showsAlpha:1;
-    signed char _supportsPressAndHoldVariants:1;
-    signed char _enabled:1;
+    id _overlay APPKIT_IVAR;
+    NSString *_customizationLabel APPKIT_IVAR;
+    NSColor *_color APPKIT_IVAR;
+    __weak id _target APPKIT_IVAR;
+    SEL _action APPKIT_IVAR;
+    NSInteger _mode APPKIT_IVAR;
+    NSView *_view APPKIT_IVAR;
+    NSString *_buttonTitle APPKIT_IVAR;
+    NSImage *_buttonImage APPKIT_IVAR;
+    NSColorList *_colorList APPKIT_IVAR;
+    id _autounbinder APPKIT_IVAR;
+    NSArray<NSColorSpace *> *_allowedColorSpaces APPKIT_IVAR;
+    signed char _showsAlpha:1 APPKIT_IVAR;
+    signed char _supportsPressAndHoldVariants:1 APPKIT_IVAR;
+    signed char _enabled:1 APPKIT_IVAR;
 #if !__OBJC2__
-    unsigned int _colorPickerTouchBarItemReservedFlags:29 __unused;
-    void *_colorPickerTouchBarItemReserved[3] __unused;
+    unsigned int _colorPickerTouchBarItemReservedFlags:29 __unused APPKIT_IVAR;
+    void *_colorPickerTouchBarItemReserved[3] __unused APPKIT_IVAR;
 #endif /* !__OBJC2__ */
 }
 

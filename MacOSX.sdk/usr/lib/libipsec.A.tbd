@@ -1,12 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: F100A348-721F-35FB-9BD8-CCD7A316303E', 'x86_64: 36F732AB-706D-3FDF-A547-CA38BC4FEF58' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: BECEF849-2DDC-3A93-BFE6-71613E65B244' ]
 platform:        macosx
 install-name:    /usr/lib/libipsec.A.dylib
 current-version: 300
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ ___ipsec_errcode, ___ipsec_set_strerror, ___libipsec_create_buffer, 
                        ___libipsec_delete_buffer, ___libipsec_flex_debug, ___libipsec_flush_buffer, 
                        ___libipsec_scan_buffer, ___libipsec_scan_bytes, ___libipsec_scan_string, 

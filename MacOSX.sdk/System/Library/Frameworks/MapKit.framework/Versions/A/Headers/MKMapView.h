@@ -5,8 +5,11 @@
 //  Copyright (c) 2009-2014, Apple Inc. All rights reserved.
 //
 
-#import <MapKit/MKAnnotationView.h>
 #import <MapKit/MKFoundation.h>
+
+#if MK_SUPPORTS_VIEW_CLASSES
+
+#import <MapKit/MKAnnotationView.h>
 #import <MapKit/MKGeometry.h>
 #import <MapKit/MKTypes.h>
 #import <MapKit/MKOverlay.h>
@@ -141,7 +144,7 @@ NS_CLASS_AVAILABLE(10_9, NA)
 - (nullable MKAnnotationView *)dequeueReusableAnnotationViewWithIdentifier:(NSString *)identifier;
 
 // Used by the delegate to acquire a reusable annotation view, or create a new view for registered class, in lieu of allocating a new one. Throws an exception if view could not be aquired.
-- (MKAnnotationView *)dequeueReusableAnnotationViewWithIdentifier:(NSString *)identifier forAnnotation:(id<MKAnnotation>)annotation;
+- (MKAnnotationView *)dequeueReusableAnnotationViewWithIdentifier:(NSString *)identifier forAnnotation:(id<MKAnnotation>)annotation NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
 
 // Register a MKAnnotationView subclass to be instantiated when dequeueReusableAnnotationViewWithIdentifier: does not have a view to reuse.
 - (void)registerClass:(nullable Class)viewClass forAnnotationViewWithReuseIdentifier:(NSString *)identifier NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
@@ -211,6 +214,8 @@ __WATCHOS_PROHIBITED
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated;
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated;
 
+- (void)mapViewDidChangeVisibleRegion:(MKMapView *)mapView API_AVAILABLE(ios(11), tvos(11), macos(10.13));
+
 - (void)mapViewWillStartLoadingMap:(MKMapView *)mapView;
 - (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView;
 - (void)mapViewDidFailLoadingMap:(MKMapView *)mapView withError:(NSError *)error;
@@ -265,3 +270,5 @@ __WATCHOS_PROHIBITED
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // MK_SUPPORTS_VIEW_CLASSES

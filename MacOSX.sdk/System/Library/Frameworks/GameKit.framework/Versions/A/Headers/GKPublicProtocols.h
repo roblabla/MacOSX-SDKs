@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Callbacks to the GKSession delegate.
 */
+NS_DEPRECATED(10_8, 10_10, 3_0, 7_0, "Use MCSession in association with MCSessionDelegate from the MultipeerConnectivity framework instead") 
 @protocol GKSessionDelegate <NSObject>
 
 @optional
@@ -47,6 +48,7 @@ Deny by calling -denyConnectionFromPeer:
 @class GKVoiceChatService;
 
 //All clients will need to implement this protocol
+NS_DEPRECATED_IOS(3_0, 7_0, "Use GKVoiceChat instead") 
 @protocol GKVoiceChatClient <NSObject>
 
 @required

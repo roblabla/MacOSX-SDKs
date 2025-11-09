@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     An AVCaptureVideoPreviewLayer instance is a subclass of CALayer and is therefore suitable for insertion in a layer hierarchy as part of a graphical interface. One creates an AVCaptureVideoPreviewLayer instance with the capture session to be previewed, using +layerWithSession: or -initWithSession:. Using the @"videoGravity" property, one can influence how content is viewed relative to the layer bounds. On some hardware configurations, the orientation of the layer can be manipulated using @"orientation" and @"mirrored".
  */
-NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCaptureVideoPreviewLayer : CALayer
 {
 @private
@@ -67,7 +67,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @result
     A newly initialized AVCaptureVideoPreviewLayer instance.
  */
-+ (instancetype)layerWithSessionWithNoConnection:(AVCaptureSession *)session NS_AVAILABLE(10_7, 8_0);
++ (instancetype)layerWithSessionWithNoConnection:(AVCaptureSession *)session API_AVAILABLE(ios(8.0));
 
 /*!
  @method initWithSessionWithNoConnection:
@@ -79,7 +79,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @result
     A newly initialized AVCaptureVideoPreviewLayer instance.
  */
-- (instancetype)initWithSessionWithNoConnection:(AVCaptureSession *)session NS_AVAILABLE(10_7, 8_0);
+- (instancetype)initWithSessionWithNoConnection:(AVCaptureSession *)session API_AVAILABLE(ios(8.0));
 
 /*!
  @property session
@@ -99,7 +99,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     The session is retained by the preview layer.
  */
-- (void)setSessionWithNoConnection:(AVCaptureSession *)session NS_AVAILABLE(10_7, 8_0);
+- (void)setSessionWithNoConnection:(AVCaptureSession *)session API_AVAILABLE(ios(8.0));
 
 /*!
  @property connection
@@ -109,7 +109,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     When calling initWithSession: or setSession: with a valid AVCaptureSession instance, a connection is formed to the first eligible video AVCaptureInput. If the receiver is detached from a session, the connection property becomes nil.
  */
-@property(nonatomic, readonly, nullable) AVCaptureConnection *connection NS_AVAILABLE(10_7, 6_0);
+@property(nonatomic, readonly, nullable) AVCaptureConnection *connection API_AVAILABLE(ios(6.0));
 
 /*!
  @property videoGravity
@@ -134,7 +134,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     AVCaptureDevice pointOfInterest is expressed as a CGPoint where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This convenience method converts a point in the coordinate space of the receiver to a point of interest in the coordinate space of the AVCaptureDevice providing input to the receiver. The conversion takes frameSize and videoGravity into consideration.
  */
-- (CGPoint)captureDevicePointOfInterestForPoint:(CGPoint)pointInLayer NS_AVAILABLE_IOS(6_0);
+- (CGPoint)captureDevicePointOfInterestForPoint:(CGPoint)pointInLayer API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos);
 
 /*!
  @method pointForCaptureDevicePointOfInterest:
@@ -149,7 +149,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     AVCaptureDevice pointOfInterest is expressed as a CGPoint where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This convenience method converts a point in the coordinate space of the AVCaptureDevice providing input to the coordinate space of the receiver. The conversion takes frame size and videoGravity into consideration.
  */
-- (CGPoint)pointForCaptureDevicePointOfInterest:(CGPoint)captureDevicePointOfInterest NS_AVAILABLE_IOS(6_0);
+- (CGPoint)pointForCaptureDevicePointOfInterest:(CGPoint)captureDevicePointOfInterest API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos);
 
 /*!
  @method metadataOutputRectOfInterestForRect:
@@ -164,7 +164,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     AVCaptureMetadataOutput rectOfInterest is expressed as a CGRect where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This convenience method converts a rectangle in the coordinate space of the receiver to a rectangle of interest in the coordinate space of an AVCaptureMetadataOutput whose AVCaptureDevice is providing input to the receiver. The conversion takes frame size and videoGravity into consideration.
  */
-- (CGRect)metadataOutputRectOfInterestForRect:(CGRect)rectInLayerCoordinates NS_AVAILABLE_IOS(7_0);
+- (CGRect)metadataOutputRectOfInterestForRect:(CGRect)rectInLayerCoordinates API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
 
 /*!
  @method rectForMetadataOutputRectOfInterest:
@@ -179,7 +179,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     AVCaptureMetadataOutput rectOfInterest is expressed as a CGRect where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This convenience method converts a rectangle in the coordinate space of an AVCaptureMetadataOutput whose AVCaptureDevice is providing input to the coordinate space of the receiver. The conversion takes frame size and videoGravity into consideration.
  */
-- (CGRect)rectForMetadataOutputRectOfInterest:(CGRect)rectInMetadataOutputCoordinates NS_AVAILABLE_IOS(7_0);
+- (CGRect)rectForMetadataOutputRectOfInterest:(CGRect)rectInMetadataOutputCoordinates API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
 
 /*!
  @method transformedMetadataObjectForMetadataObject:
@@ -194,9 +194,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     AVMetadataObject bounds may be expressed as a rect where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. Face metadata objects likewise express yaw and roll angles with respect to an unrotated picture. -transformedMetadataObjectForMetadataObject: converts the visual properties in the coordinate space of the supplied AVMetadataObject to the coordinate space of the receiver. The conversion takes orientation, mirroring, layer bounds and videoGravity into consideration. If the provided metadata object originates from an input source other than the preview layer's, nil will be returned.
  */
-- (nullable AVMetadataObject *)transformedMetadataObjectForMetadataObject:(AVMetadataObject *)metadataObject NS_AVAILABLE_IOS(6_0);
-
-#if TARGET_OS_IPHONE
+- (nullable AVMetadataObject *)transformedMetadataObjectForMetadataObject:(AVMetadataObject *)metadataObject API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property orientationSupported
@@ -206,7 +204,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     Changes in orientation are not supported on all hardware configurations. An application should check the value of @"orientationSupported" before attempting to manipulate the orientation of the receiver. This property is deprecated. Use AVCaptureConnection's -isVideoOrientationSupported instead.
  */
-@property(nonatomic, readonly, getter=isOrientationSupported) BOOL orientationSupported NS_DEPRECATED_IOS(4_0, 6_0, "Use AVCaptureConnection's isVideoOrientationSupported instead.");
+@property(nonatomic, readonly, getter=isOrientationSupported) BOOL orientationSupported API_DEPRECATED("Use AVCaptureConnection's isVideoOrientationSupported instead.", ios(4.0, 6.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property orientation
@@ -216,7 +214,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     AVCaptureVideoOrientation and its constants are defined in AVCaptureSession.h. The value of @"orientationSupported" must be YES in order to set @"orientation". An exception will be raised if this requirement is ignored. This property is deprecated. Use AVCaptureConnection's -videoOrientation instead.
  */
-@property(nonatomic) AVCaptureVideoOrientation orientation NS_DEPRECATED_IOS(4_0, 6_0, "Use AVCaptureConnection's videoOrientation instead.");
+@property(nonatomic) AVCaptureVideoOrientation orientation API_DEPRECATED("Use AVCaptureConnection's videoOrientation instead.", ios(4.0, 6.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property mirroringSupported
@@ -226,7 +224,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     Mirroring is not supported on all hardware configurations. An application should check the value of @"mirroringSupported" before attempting to manipulate mirroring on the receiver. This property is deprecated. Use AVCaptureConnection's -isVideoMirroringSupported instead.
  */
-@property(nonatomic, readonly, getter=isMirroringSupported) BOOL mirroringSupported NS_DEPRECATED_IOS(4_0, 6_0, "Use AVCaptureConnection's isVideoMirroringSupported instead.");
+@property(nonatomic, readonly, getter=isMirroringSupported) BOOL mirroringSupported API_DEPRECATED("Use AVCaptureConnection's isVideoMirroringSupported instead.", ios(4.0, 6.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property automaticallyAdjustsMirroring
@@ -236,7 +234,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     For some session configurations, preview will be mirrored by default. When the value of this property is YES, the value of @"mirrored" may change depending on the configuration of the session, for example after switching to a different AVCaptureDeviceInput. The default value is YES. This property is deprecated. Use AVCaptureConnection's -automaticallyAdjustsVideoMirroring instead.
  */
-@property(nonatomic) BOOL automaticallyAdjustsMirroring NS_DEPRECATED_IOS(4_0, 6_0, "Use AVCaptureConnection's automaticallyAdjustsVideoMirroring instead.");
+@property(nonatomic) BOOL automaticallyAdjustsMirroring API_DEPRECATED("Use AVCaptureConnection's automaticallyAdjustsVideoMirroring instead.", ios(4.0, 6.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property mirrored
@@ -246,9 +244,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     For most applications, it is unnecessary to manipulate preview mirroring manually if @"automaticallyAdjustsMirroring" is set to YES. The value of @"automaticallyAdjustsMirroring" must be NO in order to set @"mirrored". The value of @"mirroringSupported" must be YES in order to set @"mirrored". An exception will be raised if the value of @"mirrored" is mutated without respecting these requirements. This property is deprecated. Use AVCaptureConnection's -videoMirrored instead.
  */
-@property(nonatomic, getter=isMirrored) BOOL mirrored NS_DEPRECATED_IOS(4_0, 6_0, "Use AVCaptureConnection's videoMirrored instead.");
-
-#endif // TARGET_OS_IPHONE
+@property(nonatomic, getter=isMirrored) BOOL mirrored API_DEPRECATED("Use AVCaptureConnection's videoMirrored instead.", ios(4.0, 6.0)) API_UNAVAILABLE(macos);
 
 @end
 

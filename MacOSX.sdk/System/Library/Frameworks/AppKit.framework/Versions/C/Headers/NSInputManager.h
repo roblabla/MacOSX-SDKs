@@ -1,13 +1,14 @@
 /*
 	NSInputManager.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSRange.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -58,22 +59,22 @@ NS_CLASS_DEPRECATED_MAC(10_0, 10_6, "Use NSTextInputContext instead")
 @interface NSInputManager : NSObject <NSTextInput> {
 /*All instance variables are private*/
 @private
-    id _currentClient;
-    id _server;			// an NSInputServer obj, usually
-    id _bundleObj;		// principal obj instance of bundle, if any
-    id _keybindings;		// optional extra bindings, if any
-    NSString *_trueName;	// name passed to "init"
-    NSString *_connectionName;	// the connection banner
-    NSString *_hostName;	// host to run on or nil if own host
-    NSString *_procToExec;	// process path, if any
-    NSString *_visibleName;	// localized user-visible name
-    NSString *_bundleName;	// path to bundle, if any
-    NSString *_language;		// language name
-    NSImage *_image;		// image for menu item
-    unsigned int _flags;
-    NSString *_keyBindingsName;	// path to the default bindings, if any
+    id _currentClient APPKIT_IVAR;
+    id _server APPKIT_IVAR;			// an NSInputServer obj, usually
+    id _bundleObj APPKIT_IVAR;		// principal obj instance of bundle, if any
+    id _keybindings APPKIT_IVAR;		// optional extra bindings, if any
+    NSString *_trueName APPKIT_IVAR;	// name passed to "init"
+    NSString *_connectionName APPKIT_IVAR;	// the connection banner
+    NSString *_hostName APPKIT_IVAR;	// host to run on or nil if own host
+    NSString *_procToExec APPKIT_IVAR;	// process path, if any
+    NSString *_visibleName APPKIT_IVAR;	// localized user-visible name
+    NSString *_bundleName APPKIT_IVAR;	// path to bundle, if any
+    NSString *_language APPKIT_IVAR;		// language name
+    NSImage *_image APPKIT_IVAR;		// image for menu item
+    unsigned int _flags APPKIT_IVAR;
+    NSString *_keyBindingsName APPKIT_IVAR;	// path to the default bindings, if any
 #ifndef __OBJC2__
-    int _reservedInputManager2;
+    int _reservedInputManager2 APPKIT_IVAR;
 #endif
 }
 

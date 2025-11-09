@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2015 Apple Inc.
+ * Copyright (c) 2013-2015, 2018 Apple Inc.
  * All rights reserved.
  */
 
@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, NEVPNIKEAuthenticationMethod) {
 	NEVPNIKEAuthenticationMethodCertificate = 1,
 	/*! @const NEVPNIKEAuthenticationMethodSharedSecret Use a shared secret as the authentication credential */
 	NEVPNIKEAuthenticationMethodSharedSecret = 2,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @interface NEVPNProtocolIPSec
@@ -30,14 +30,14 @@ typedef NS_ENUM(NSInteger, NEVPNIKEAuthenticationMethod) {
  *
  * Instances of this class use IKE version 1 for key negotiation.
  */
-NS_CLASS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEVPNProtocolIPSec : NEVPNProtocol
 
 /*!
  * @property authenticationMethod
  * @discussion The method used to authenticate with the IPSec server. Note that if this property is set to NEVPNIKEAuthenticationMethodNone, extended authentication will still be negotiated if useExtendedAuthentication is set to YES.
  */
-@property NEVPNIKEAuthenticationMethod authenticationMethod NS_AVAILABLE(10_11, 8_0);
+@property NEVPNIKEAuthenticationMethod authenticationMethod API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property useExtendedAuthentication
@@ -45,25 +45,25 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  *   For IKE version 1, when this flag is set X-Auth authentication will be negotiated as part of the IKE session, using the username and password properties as the credential.
  *   For IKE version 2, when this flag is set EAP authentication will be negotiated as part of the IKE session, using the username, password, and/or identity properties as the credential depending on which EAP method the server requires.
  */
-@property BOOL useExtendedAuthentication NS_AVAILABLE(10_11, 8_0);
+@property BOOL useExtendedAuthentication API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property sharedSecretReference
  * @discussion A persistent reference to a keychain item of class kSecClassGenericPassword containing the IKE shared secret.
  */
-@property (copy, nullable) NSData *sharedSecretReference NS_AVAILABLE(10_11, 8_0);
+@property (copy, nullable) NSData *sharedSecretReference API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property localIdentifier
  * @discussion A string identifying the local IPSec endpoint for authentication purposes.
  */
-@property (copy, nullable) NSString *localIdentifier NS_AVAILABLE(10_11, 8_0);
+@property (copy, nullable) NSString *localIdentifier API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property remoteIdentifier
  * @discussion A string identifying the remote IPSec endpoint for authentication purposes.
  */
-@property (copy, nullable) NSString *remoteIdentifier NS_AVAILABLE(10_11, 8_0);
+@property (copy, nullable) NSString *remoteIdentifier API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

@@ -93,9 +93,7 @@ private:
 	void updateWakeReason(IOPCIDevice * device);
 
 protected:
-    static void nvLocation( IORegistryEntry * entry,
-                            UInt8 * busNum, UInt8 * deviceNum, UInt8 * functionNum );
-#if !defined(__LP64__) || defined(__x86_64__)
+#if !defined(__arm64__)
     static SInt32 compareAddressCell( UInt32 cellCount, UInt32 cleft[], UInt32 cright[] );
 #else
     static SInt64 compareAddressCell( UInt32 cellCount, UInt32 cleft[], UInt32 cright[] );

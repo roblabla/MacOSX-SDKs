@@ -272,22 +272,14 @@ AV_INIT_UNAVAILABLE
 /* Specifies a time range to be exported from the source.  The default timeRange of an export session is kCMTimeZero..kCMTimePositiveInfinity, meaning that the full duration of the asset will be exported. */
 @property (nonatomic) CMTimeRange timeRange;
 
-#if TARGET_OS_IPHONE
-
 /* Provides an estimate of the maximum duration of exported media that is possible given the source asset, the export preset, and the current value of fileLengthLimit.  The export will not stop when it reaches this maximum duration; set the timeRange property to export only a certain time range.  */
-@property (nonatomic, readonly) CMTime maxDuration NS_AVAILABLE_IOS(4_0);
-
-#endif // TARGET_OS_IPHONE
+@property (nonatomic, readonly) CMTime maxDuration API_AVAILABLE(macos(10.14), ios(4.0), tvos(9.0)) __WATCHOS_PROHIBITED;
 
 /* Indicates the estimated byte size of exported file. Returns zero when export preset is AVAssetExportPresetPassthrough or AVAssetExportPresetAppleProRes422LPCM. This property will also return zero if a numeric value (ie. not invalid, indefinite, or infinite) for the timeRange property has not been set. */
 @property (nonatomic, readonly) long long estimatedOutputFileLength NS_AVAILABLE(10_9, 5_0);
 
-#if TARGET_OS_IPHONE
-
 /* Indicates the file length that the output of the session should not exceed.  Depending on the content of the source asset, it is possible for the output to slightly exceed the file length limit.  The length of the output file should be tested if you require that a strict limit be observed before making use of the output.  See also maxDuration and timeRange. */
-@property (nonatomic) long long fileLengthLimit NS_AVAILABLE_IOS(4_0); 
-
-#endif // TARGET_OS_IPHONE
+@property (nonatomic) long long fileLengthLimit API_AVAILABLE(macos(10.14), ios(4.0), tvos(9.0)) __WATCHOS_PROHIBITED;
 
 @end
 

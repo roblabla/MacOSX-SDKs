@@ -1,20 +1,20 @@
 /*
     NSPathCell.h
     Application Kit
-    Copyright (c) 2005-2017, Apple Inc.
+    Copyright (c) 2005-2018, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
-
-
 #import <AppKit/NSActionCell.h>
+#import <AppKit/NSSavePanel.h>
+#import <AppKit/NSMenu.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSString, NSImage, NSAnimation, NSPathComponentCell, NSURL, NSPopUpButtonCell, NSNotification, NSOpenPanel;
-@protocol NSPathCellDelegate, NSOpenSavePanelDelegate;
+@protocol NSPathCellDelegate;
 
 /* 
     NSPathCell
@@ -50,25 +50,25 @@ typedef NS_ENUM(NSInteger, NSPathStyle) {
 
 
 NS_CLASS_AVAILABLE(10_5, NA)
-@interface NSPathCell : NSActionCell <NSOpenSavePanelDelegate> {
+@interface NSPathCell : NSActionCell <NSMenuItemValidation, NSOpenSavePanelDelegate> {
 @private
-    NSColor *_backgroundColor;
-    NSMutableArray *_borderColors;
-    NSMutableArray *_cells;
-    NSPathComponentCell *_clickedCell;
-    NSPathComponentCell *_hoveredCell;
-    NSPopUpButtonCell *_popUpButtonCell;
-    NSRect _currentRect;
-    NSAnimation *_animation;
-    NSArray *_allowedTypes;
-    SEL _doubleAction;
-    __weak id<NSPathCellDelegate> _delegate;
+    NSColor *_backgroundColor APPKIT_IVAR;
+    NSMutableArray *_borderColors APPKIT_IVAR;
+    NSMutableArray *_cells APPKIT_IVAR;
+    NSPathComponentCell *_clickedCell APPKIT_IVAR;
+    NSPathComponentCell *_hoveredCell APPKIT_IVAR;
+    NSPopUpButtonCell *_popUpButtonCell APPKIT_IVAR;
+    NSRect _currentRect APPKIT_IVAR;
+    NSAnimation *_animation APPKIT_IVAR;
+    NSArray *_allowedTypes APPKIT_IVAR;
+    SEL _doubleAction APPKIT_IVAR;
+    __weak id<NSPathCellDelegate> _delegate APPKIT_IVAR;
     struct {
         unsigned int cbs:4;
         unsigned int reserved:28;
-    } _piFlags;
-    NSPathStyle _pathStyle;
-    id _aux;
+    } _piFlags APPKIT_IVAR;
+    NSPathStyle _pathStyle APPKIT_IVAR;
+    id _aux APPKIT_IVAR;
 }
 
 /* See NSPathControl for documentation on all the properties listed below. The NSPathControl directly calls the cell's methods.

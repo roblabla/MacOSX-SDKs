@@ -1,20 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: DF61A3D5-AF6E-322E-B05C-A4BF8393F15B', 'x86_64: 9F54101E-0A5A-3793-8BCC-D3364D6F7BA7' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 089301DF-60C9-3BED-9357-2F91336C1579' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/GenerationalStorage.framework/Versions/A/GenerationalStorage
-current-version: 280
+current-version: 285.101
 exports:         
-  - archs:           [ i386 ]
-    objc-classes:    [ _GSClientManagedLibrary, _GSPermanentAdditionEnumerator, _GSSystemManagedLibrary, 
-                       _GSTemporaryAddtionEnumerator, __CopyfileCallbackCtx ]
   - archs:           [ x86_64 ]
-    objc-ivars:      [ _GSDaemonProxySync._error, _GSDaemonProxySync._result, _GSDaemonProxySync._target, 
-                       _GSDocumentIdentifier.deviceID, _GSDocumentIdentifier.documentID, 
-                       _GSDocumentIdentifier.volumeUUID, _GSStagingPrefix._deviceID, 
-                       _GSStagingPrefix._extension, _GSStagingPrefix._path, _GSStagingPrefix._pathComponents, 
-                       _GSStagingPrefix._sandboxHandle, _GSStagingPrefix._volumeUUID ]
-  - archs:           [ i386, x86_64 ]
     symbols:         [ _GSAdditionCreationDisplayNameKey, _GSAdditionCreationInfoValidate, 
                        _GSAdditionCreationKeepFileIDKey, _GSAdditionCreationNameKey, 
                        _GSAdditionCreationNameSpaceKey, _GSAdditionCreationOnDuplicateKey, 
@@ -51,6 +42,11 @@ exports:
                        __GSIsDocumentRevision, __GSOpenByID, __PathRename, __PathResolve, 
                        __RemoveSubTrees, __RemoveTree, __SetBirthTimeSpecForFD, _get_volume_uuid, 
                        _kGSLibraryErrorDomain ]
-    objc-classes:    [ _GSAddition, _GSDaemonProxySync, _GSDocumentIdentifier, _GSPermanentStorage, 
-                       _GSStagingPrefix, _GSStorageManager, _GSTemporaryStorage ]
+    objc-classes:    [ GSAddition, GSDaemonProxySync, GSDocumentIdentifier, GSPermanentStorage, 
+                       GSStagingPrefix, GSStorageManager, GSTemporaryStorage ]
+    objc-ivars:      [ GSDaemonProxySync._error, GSDaemonProxySync._result, GSDaemonProxySync._target, 
+                       GSDocumentIdentifier.deviceID, GSDocumentIdentifier.documentID, 
+                       GSDocumentIdentifier.volumeUUID, GSStagingPrefix._deviceID, 
+                       GSStagingPrefix._extension, GSStagingPrefix._path, GSStagingPrefix._pathComponents, 
+                       GSStagingPrefix._sandboxHandle, GSStagingPrefix._volumeUUID ]
 ...

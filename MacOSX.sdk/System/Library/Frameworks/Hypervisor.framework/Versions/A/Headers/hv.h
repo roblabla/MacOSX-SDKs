@@ -162,7 +162,7 @@ extern hv_return_t hv_vcpu_write_fpstate(hv_vcpuid_t vcpu, void *buffer,
 	size_t size) __HV_10_10;
 
 /*!
- * @function   hvvcpu_enable_native_msr
+ * @function   hv_vcpu_enable_native_msr
  * @abstract   Enables an MSR to be used natively by the VM
  * @param      vcpu    vCPU ID
  * @param      msr     ID of the MSR

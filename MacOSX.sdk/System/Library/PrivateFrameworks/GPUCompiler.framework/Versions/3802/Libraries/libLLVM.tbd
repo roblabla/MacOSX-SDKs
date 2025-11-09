@@ -1,28 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 03979DD9-55E7-3DCB-A1D4-9BC20E24C226', 'x86_64: FEBCCE2D-A4E4-3FA1-A8AF-2645EFE1F749' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: F92BC0C5-1F72-3CC0-ADCE-802EEA28A9CA' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/3802/Libraries/libLLVM.dylib
-current-version: 3802.1.22
+current-version: 3802.5.31
 objc-constraint: none
 exports:         
-  - archs:           [ i386 ]
-    symbols:         [ __ZThn4_N4llvm14PassNameParserD0Ev, __ZThn4_N4llvm14PassNameParserD1Ev ]
-    weak-def-symbols: [ __ZN4llvm11IntervalMapINS_9SlotIndexEPNS_12LiveIntervalELj16ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
-                        __ZN4llvm11IntervalMapINS_9SlotIndexEjLj16ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
-                        __ZN4llvm21DominanceFrontierBaseINS_10BasicBlockEE13addToFrontierENSt3__114__map_iteratorINS3_15__tree_iteratorINS3_12__value_typeIPS1_NS3_3setIS7_NS3_4lessIS7_EENS3_9allocatorIS7_EEEEEEPNS3_11__tree_nodeISE_PvEEiEEEES7_, 
-                        __ZN4llvm21DominanceFrontierBaseINS_10BasicBlockEE18removeFromFrontierENSt3__114__map_iteratorINS3_15__tree_iteratorINS3_12__value_typeIPS1_NS3_3setIS7_NS3_4lessIS7_EENS3_9allocatorIS7_EEEEEEPNS3_11__tree_nodeISE_PvEEiEEEES7_, 
-                        __ZN4llvm21DominanceFrontierBaseINS_17MachineBasicBlockEE13addToFrontierENSt3__114__map_iteratorINS3_15__tree_iteratorINS3_12__value_typeIPS1_NS3_3setIS7_NS3_4lessIS7_EENS3_9allocatorIS7_EEEEEEPNS3_11__tree_nodeISE_PvEEiEEEES7_, 
-                        __ZN4llvm21DominanceFrontierBaseINS_17MachineBasicBlockEE18removeFromFrontierENSt3__114__map_iteratorINS3_15__tree_iteratorINS3_12__value_typeIPS1_NS3_3setIS7_NS3_4lessIS7_EENS3_9allocatorIS7_EEEEEEPNS3_11__tree_nodeISE_PvEEiEEEES7_ ]
   - archs:           [ x86_64 ]
-    symbols:         [ __ZThn8_N4llvm14PassNameParserD0Ev, __ZThn8_N4llvm14PassNameParserD1Ev ]
-    weak-def-symbols: [ __ZN4llvm11IntervalMapINS_9SlotIndexEPNS_12LiveIntervalELj8ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
-                        __ZN4llvm11IntervalMapINS_9SlotIndexEjLj9ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
-                        __ZN4llvm21DominanceFrontierBaseINS_10BasicBlockEE13addToFrontierENSt3__114__map_iteratorINS3_15__tree_iteratorINS3_12__value_typeIPS1_NS3_3setIS7_NS3_4lessIS7_EENS3_9allocatorIS7_EEEEEEPNS3_11__tree_nodeISE_PvEElEEEES7_, 
-                        __ZN4llvm21DominanceFrontierBaseINS_10BasicBlockEE18removeFromFrontierENSt3__114__map_iteratorINS3_15__tree_iteratorINS3_12__value_typeIPS1_NS3_3setIS7_NS3_4lessIS7_EENS3_9allocatorIS7_EEEEEEPNS3_11__tree_nodeISE_PvEElEEEES7_, 
-                        __ZN4llvm21DominanceFrontierBaseINS_17MachineBasicBlockEE13addToFrontierENSt3__114__map_iteratorINS3_15__tree_iteratorINS3_12__value_typeIPS1_NS3_3setIS7_NS3_4lessIS7_EENS3_9allocatorIS7_EEEEEEPNS3_11__tree_nodeISE_PvEElEEEES7_, 
-                        __ZN4llvm21DominanceFrontierBaseINS_17MachineBasicBlockEE18removeFromFrontierENSt3__114__map_iteratorINS3_15__tree_iteratorINS3_12__value_typeIPS1_NS3_3setIS7_NS3_4lessIS7_EENS3_9allocatorIS7_EEEEEEPNS3_11__tree_nodeISE_PvEElEEEES7_ ]
-  - archs:           [ i386, x86_64 ]
     symbols:         [ _ConvertUTF16toUTF32, _ConvertUTF16toUTF8, _ConvertUTF32toUTF16, 
                        _ConvertUTF32toUTF8, _ConvertUTF8toUTF16, _ConvertUTF8toUTF32, 
                        _ConvertUTF8toUTF32Partial, _EnableIPRA, _LLVMABIAlignmentOfType, 
@@ -1956,7 +1940,7 @@ exports:
                        __ZN4llvm15CatchSwitchInstC1EPNS_5ValueEPNS_10BasicBlockEjRKNS_5TwineES4_, 
                        __ZN4llvm15CatchSwitchInstC1ERKS0_, __ZN4llvm15CatchSwitchInstC2EPNS_5ValueEPNS_10BasicBlockEjRKNS_5TwineEPNS_11InstructionE, 
                        __ZN4llvm15CatchSwitchInstC2EPNS_5ValueEPNS_10BasicBlockEjRKNS_5TwineES4_, 
-                       __ZN4llvm15CatchSwitchInstC2ERKS0_, __ZN4llvm15CloneBasicBlockEPKNS_10BasicBlockERNS_8ValueMapIPKNS_5ValueENS_6WeakVHENS_14ValueMapConfigIS6_NS_3sys10SmartMutexILb0EEEEEEERKNS_5TwineEPNS_8FunctionEPNS_14ClonedCodeInfoE, 
+                       __ZN4llvm15CatchSwitchInstC2ERKS0_, __ZN4llvm15CloneBasicBlockEPKNS_10BasicBlockERNS_8ValueMapIPKNS_5ValueENS_6WeakVHENS_14ValueMapConfigIS6_NS_3sys10SmartMutexILb0EEEEEEERKNS_5TwineEPNS_8FunctionEPNS_14ClonedCodeInfoEPNS_15DebugInfoFinderE, 
                        __ZN4llvm15CodeViewContext12emitDefRangeERNS_16MCObjectStreamerENS_8ArrayRefINSt3__14pairIPKNS_8MCSymbolES8_EEEENS_9StringRefE, 
                        __ZN4llvm15CodeViewContext14encodeDefRangeERNS_11MCAsmLayoutERNS_20MCCVDefRangeFragmentE, 
                        __ZN4llvm15CodeViewContext15emitStringTableERNS_16MCObjectStreamerE, 
@@ -5659,6 +5643,7 @@ exports:
                        __ZN4llvm8Constant15getIntegerValueEPNS_4TypeERKNS_5APIntE, 
                        __ZN4llvm8Constant19handleOperandChangeEPNS_5ValueES2_, __ZN4llvm8Constant6anchorEv, 
                        __ZN4llvm8DIEEntry14getRefAddrSizeEPKNS_10AsmPrinterE, __ZN4llvm8DIModule7getImplERNS_11LLVMContextEPNS_8MetadataEPNS_8MDStringES6_S6_S6_NS3_11StorageTypeEb, 
+                       __ZN4llvm8DebugLoc15appendInlinedAtES0_PNS_10DILocationERNS_11LLVMContextERNS_8DenseMapIPKNS_6MDNodeEPS6_NS_12DenseMapInfoIS8_EENS_6detail12DenseMapPairIS8_S9_EEEEb, 
                        __ZN4llvm8DebugLoc3getEjjPKNS_6MDNodeES3_, __ZN4llvm8DebugLocC1EPKNS_10DILocationE, 
                        __ZN4llvm8DebugLocC1EPKNS_6MDNodeE, __ZN4llvm8DebugLocC2EPKNS_10DILocationE, 
                        __ZN4llvm8DebugLocC2EPKNS_6MDNodeE, __ZN4llvm8FastISel10fastEmit_fENS_3MVTES1_jPKNS_10ConstantFPE, 
@@ -6174,6 +6159,7 @@ exports:
                        __ZN4llvm9DIBuilder17trackIfUnresolvedEPNS_6MDNodeE, __ZN4llvm9DIBuilder18createAutoVariableEPNS_7DIScopeENS_9StringRefEPNS_6DIFileEjPNS_6DITypeEbj, 
                        __ZN4llvm9DIBuilder18createLexicalBlockEPNS_7DIScopeEPNS_6DIFileEjj, 
                        __ZN4llvm9DIBuilder18createObjCPropertyENS_9StringRefEPNS_6DIFileEjS1_S1_jPNS_6DITypeE, 
+                       __ZN4llvm9DIBuilder18finalizeSubprogramEPNS_12DISubprogramE, 
                        __ZN4llvm9DIBuilder19createQualifiedTypeEjPNS_6DITypeE, __ZN4llvm9DIBuilder19createReferenceTypeEjPNS_6DITypeEyy, 
                        __ZN4llvm9DIBuilder19getOrCreateSubrangeExx, __ZN4llvm9DIBuilder19replaceVTableHolderERPNS_15DICompositeTypeES2_, 
                        __ZN4llvm9DIBuilder20createArtificialTypeEPNS_6DITypeE, __ZN4llvm9DIBuilder20createGlobalVariableEPNS_7DIScopeENS_9StringRefES3_PNS_6DIFileEjPNS_6DITypeEbPNS_12DIExpressionEPNS_6MDNodeE, 
@@ -8269,10 +8255,9 @@ exports:
                        __ZNK4llvm8DIEValue6SizeOfEPKNS_10AsmPrinterE, __ZNK4llvm8DIEValue9EmitValueEPKNS_10AsmPrinterE, 
                        __ZNK4llvm8DebugLoc12getInlinedAtEv, __ZNK4llvm8DebugLoc13getFnDebugLocEv, 
                        __ZNK4llvm8DebugLoc17getInlinedAtScopeEv, __ZNK4llvm8DebugLoc3getEv, 
-                       __ZNK4llvm8DebugLoc4dumpEv, __ZNK4llvm8DebugLoc5printERNS_11raw_ostreamE, 
-                       __ZNK4llvm8DebugLoc6getColEv, __ZNK4llvm8DebugLoc7getLineEv, 
-                       __ZNK4llvm8DebugLoc8getScopeEv, __ZNK4llvm8FCmpInst9cloneImplEv, 
-                       __ZNK4llvm8FastISel20optimizeCmpPredicateEPKNS_7CmpInstE, 
+                       __ZNK4llvm8DebugLoc5printERNS_11raw_ostreamE, __ZNK4llvm8DebugLoc6getColEv, 
+                       __ZNK4llvm8DebugLoc7getLineEv, __ZNK4llvm8DebugLoc8getScopeEv, 
+                       __ZNK4llvm8FCmpInst9cloneImplEv, __ZNK4llvm8FastISel20optimizeCmpPredicateEPKNS_7CmpInstE, 
                        __ZNK4llvm8FastISel26createMachineMemOperandForEPKNS_11InstructionE, 
                        __ZNK4llvm8FileInfo13printCoverageERNS_11raw_ostreamERKNS0_12GCOVCoverageE, 
                        __ZNK4llvm8FileInfo14printBlockInfoERNS_11raw_ostreamERKNS_9GCOVBlockEjRj, 
@@ -8551,6 +8536,7 @@ exports:
                        __ZTVN4llvm9ErrorListE, __ZTVN4llvm9IVVisitorE, __ZTVN4llvm9InlineAsmE, 
                        __ZTVN4llvm9MCAsmInfoE, __ZTVN4llvm9MemoryDefE, __ZTVN4llvm9MemoryPhiE, 
                        __ZTVN4llvm9MemorySSA13CachingWalkerE, __ZTVN4llvm9MemoryUseE, 
+                       __ZThn8_N4llvm14PassNameParserD0Ev, __ZThn8_N4llvm14PassNameParserD1Ev, 
                        _getNumBytesForUTF8, _isLegalUTF8Sequence, _isLegalUTF8String, 
                        _llvm_regcomp, _llvm_regerror, _llvm_regexec, _llvm_regfree, 
                        _llvm_strlcpy ]
@@ -8594,7 +8580,9 @@ exports:
                         __ZN4llvm10RegionBaseINS_12RegionTraitsINS_8FunctionEEEEC2EPNS_10BasicBlockES6_PNS_10RegionInfoEPNS_13DominatorTreeEPNS_6RegionE, 
                         __ZN4llvm10RegionBaseINS_12RegionTraitsINS_8FunctionEEEED1Ev, 
                         __ZN4llvm10RegionBaseINS_12RegionTraitsINS_8FunctionEEEED2Ev, 
+                        __ZN4llvm11IntervalMapINS_9SlotIndexEPNS_12LiveIntervalELj8ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
                         __ZN4llvm11IntervalMapINS_9SlotIndexEjLj4ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
+                        __ZN4llvm11IntervalMapINS_9SlotIndexEjLj9ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
                         __ZN4llvm11PassManagerINS_13LazyCallGraph3SCCEE3runERS2_RNS_15AnalysisManagerIS2_EE, 
                         __ZN4llvm11PassManagerINS_13LazyCallGraph3SCCEEC1EOS3_, __ZN4llvm11PassManagerINS_13LazyCallGraph3SCCEEC1Eb, 
                         __ZN4llvm11PassManagerINS_13LazyCallGraph3SCCEEC2EOS3_, __ZN4llvm11PassManagerINS_13LazyCallGraph3SCCEEC2Eb, 
@@ -8848,14 +8836,18 @@ exports:
                         __ZN4llvm18RawInstrProfReaderIyEC2ENSt3__110unique_ptrINS_12MemoryBufferENS2_14default_deleteIS4_EEEE, 
                         __ZN4llvm21DominanceFrontierBaseINS_10BasicBlockEE11removeBlockEPS1_, 
                         __ZN4llvm21DominanceFrontierBaseINS_10BasicBlockEE13addBasicBlockEPS1_RKNSt3__13setIS3_NS4_4lessIS3_EENS4_9allocatorIS3_EEEE, 
+                        __ZN4llvm21DominanceFrontierBaseINS_10BasicBlockEE13addToFrontierENSt3__114__map_iteratorINS3_15__tree_iteratorINS3_12__value_typeIPS1_NS3_3setIS7_NS3_4lessIS7_EENS3_9allocatorIS7_EEEEEEPNS3_11__tree_nodeISE_PvEElEEEES7_, 
                         __ZN4llvm21DominanceFrontierBaseINS_10BasicBlockEE13releaseMemoryEv, 
+                        __ZN4llvm21DominanceFrontierBaseINS_10BasicBlockEE18removeFromFrontierENSt3__114__map_iteratorINS3_15__tree_iteratorINS3_12__value_typeIPS1_NS3_3setIS7_NS3_4lessIS7_EENS3_9allocatorIS7_EEEEEEPNS3_11__tree_nodeISE_PvEElEEEES7_, 
                         __ZN4llvm21DominanceFrontierBaseINS_10BasicBlockEE3endEv, 
                         __ZN4llvm21DominanceFrontierBaseINS_10BasicBlockEE4findEPS1_, 
                         __ZN4llvm21DominanceFrontierBaseINS_10BasicBlockEE5beginEv, 
                         __ZN4llvm21DominanceFrontierBaseINS_10BasicBlockEEC1Eb, __ZN4llvm21DominanceFrontierBaseINS_10BasicBlockEEC2Eb, 
                         __ZN4llvm21DominanceFrontierBaseINS_17MachineBasicBlockEE11removeBlockEPS1_, 
                         __ZN4llvm21DominanceFrontierBaseINS_17MachineBasicBlockEE13addBasicBlockEPS1_RKNSt3__13setIS3_NS4_4lessIS3_EENS4_9allocatorIS3_EEEE, 
+                        __ZN4llvm21DominanceFrontierBaseINS_17MachineBasicBlockEE13addToFrontierENSt3__114__map_iteratorINS3_15__tree_iteratorINS3_12__value_typeIPS1_NS3_3setIS7_NS3_4lessIS7_EENS3_9allocatorIS7_EEEEEEPNS3_11__tree_nodeISE_PvEElEEEES7_, 
                         __ZN4llvm21DominanceFrontierBaseINS_17MachineBasicBlockEE13releaseMemoryEv, 
+                        __ZN4llvm21DominanceFrontierBaseINS_17MachineBasicBlockEE18removeFromFrontierENSt3__114__map_iteratorINS3_15__tree_iteratorINS3_12__value_typeIPS1_NS3_3setIS7_NS3_4lessIS7_EENS3_9allocatorIS7_EEEEEEPNS3_11__tree_nodeISE_PvEElEEEES7_, 
                         __ZN4llvm21DominanceFrontierBaseINS_17MachineBasicBlockEE3endEv, 
                         __ZN4llvm21DominanceFrontierBaseINS_17MachineBasicBlockEE4findEPS1_, 
                         __ZN4llvm21DominanceFrontierBaseINS_17MachineBasicBlockEE5beginEv, 

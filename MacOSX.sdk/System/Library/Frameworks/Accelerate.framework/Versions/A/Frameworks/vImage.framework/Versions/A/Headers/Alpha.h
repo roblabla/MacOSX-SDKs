@@ -1,74 +1,74 @@
 /*!
- *  @header Alpha.h
- *  vImage Framework
- *
- *  @copyright Copyright (c) 2003-2016 by Apple Inc. All rights reserved.
- *
- *  See vImage/vImage.h for more on how to better view the headerdoc documentation for functions declared herein.
- *
- *  @discussion
- *  Alpha compositing is the practice of blending one image into another using a coverage component, commonly called
- *  alpha, to indicate how opaque each pixel is.  A value of 1.0 (or 255 if an 8-bit image) indicates the
- *  pixel is fully opaque. A value of 0 indicates that it is fully transparent. Values in beetween establish a linear scale
- *  of partial opacity. Alpha can be used to slowly fade one image into another. Some images such as icons, have opqaue
- *  portions and transparent portions. A blending operation based on alpha is required to draw these over a background 
- *  image.
- *
- *  In its simplest form, an alpha blend is a linear interpolation between pixel of two images:
- * <pre>@textblock
- *      float: new color =  top color * alpha + (1-alpha) * bottom color
- *      8-bit: new color =  (top color * alpha + (255-alpha) * bottom color + 127) / 255
- * @/textblock </pre>
- *  However, these formulations are a bit too simplistic because they do not account for the possibility that
- *  the bottom layer may have some transparency to it too. One subtlety of adding transparency to the bottom image
- *  is that the result image has an alpha component to it too that should be divided out:
- * <pre>@textblock
- *      float: new alpha =  top alpha + (1-top alpha) * bottom alpha
- *      float: new color =  (top color * top alpha + (1- top alpha) * bottom color * bottom alpha ) / new alpha
- *
- *      8-bit: new alpha =  top alpha + ((255-top alpha) * bottom alpha + 127)/255
- *      8-bit: new color =  (255 * top color * top alpha + (255- top alpha) * bottom color * bottom alpha + (255*255)/2) / (255 * 255 * new alpha)
- * @/textblock </pre>
- * As might be imagined, this extra complication may become costly.  At the cost of a small amount of accuracy in non-opaque regions
- * of the image, it is common to leave the alpha multiplied into the image. This avoids the division at the end. In addition,
- * if the result is used in another blend, we don't have to multiply the alpha back in at that stage, which simplifies things
- * all around. Such images with the alpha channel multiplied into the other channels are called pre-multiplied images.
- *
- * This gives us the following for premultiplied alpha blends:
- * <pre>@textblock
- *      float: new alpha               = top alpha +               (1 - top alpha) * bottom alpha
- *      float: new premultiplied color = top premultiplied color + (1 - top alpha) * bottom premultiplied color
- *
- *      8-bit: new alpha               =  top alpha +               ((255 - top alpha) * bottom alpha + 127)/255
- *      8-bit: new premultiplied color =  top premultiplied color + ((255 - top alpha) * bottom premultiplied color + 127)/255
- * @/textblock </pre>
- *
- * Some images are known to be fully opaque. For such images, alpha is 1.0 (or 255) for all the pixels, and consequently
- * do not require any computation to be done to interconvert between premultiplied and non-premultiplied states. That is,
- * since x/1 = x  and x*1 = x, they are non-premultiplied and premultiplied at the same time, and can serve in either 
- * capacity as needed.  Because of this special status, CoreGraphics labels them kCGImageAlphaNoneSkipFirst/Last. vImage
- * does similar things in vImage_Utilities.h. Labelling opaque buffers as such enables cheaper alpha blending and will frequently
- * will let us avoid blending all-together as a simple copy operation will do.
- *
- * This header provides compositing (blending) operations for both premultiplied and non-premultiplied images, functions 
- * to premultiply or unpremultiply images, and some functions to make sure that the color channel values do not exceed
- * the alpha value, which sometimes can happen after a convolution, morphological or resampling operation.
- *
- *	These alpha compositing functions assume that the floating point range is 0.0 (black) to 1.0 (full intensity color).
- *	While values outside these ranges do function correctly (you can have 110% intensity color or -50% color, for example),
- *	the calculation is done assuming 1.0 represents full intensity color, and 0.0 represents the absence of color. If these
- *	assumptions are not correct, then the calculation will produce incorrect results. Apple does not currently provide
- *	alpha compositing functions that work with any floating point range in vImage.
- *
- *	8 bit functionality assumes that 0 is no color, and 255 is full color. 8 bit functions do saturated clipping before
- *	converting from internal precision back to 8 bits to make sure that modulo overflow does not occur. The internal 
- *  calculation is done with higher precision.
- *
- *  @ignorefuncmacro VIMAGE_NON_NULL
- */
+*  @header Alpha.h
+*  vImage Framework
+*
+*  @copyright Copyright (c) 2003-2016 by Apple Inc. All rights reserved.
+*
+*  See vImage/vImage.h for more on how to better view the headerdoc documentation for functions declared herein.
+*
+*  @discussion
+*  Alpha compositing is the practice of blending one image into another using a coverage component, commonly called
+*  alpha, to indicate how opaque each pixel is.  A value of 1.0 (or 255 if an 8-bit image) indicates the
+*  pixel is fully opaque. A value of 0 indicates that it is fully transparent. Values in beetween establish a linear scale
+*  of partial opacity. Alpha can be used to slowly fade one image into another. Some images such as icons, have opqaue
+*  portions and transparent portions. A blending operation based on alpha is required to draw these over a background
+*  image.
+*
+*  In its simplest form, an alpha blend is a linear interpolation between pixel of two images:
+* <pre>@textblock
+*      float: new color =  top color * alpha + (1-alpha) * bottom color
+*      8-bit: new color =  (top color * alpha + (255-alpha) * bottom color + 127) / 255
+* @/textblock </pre>
+*  However, these formulations are a bit too simplistic because they do not account for the possibility that
+*  the bottom layer may have some transparency to it too. One subtlety of adding transparency to the bottom image
+*  is that the result image has an alpha component to it too that should be divided out:
+* <pre>@textblock
+*      float: new alpha =  top alpha + (1-top alpha) * bottom alpha
+*      float: new color =  (top color * top alpha + (1- top alpha) * bottom color * bottom alpha ) / new alpha
+*
+*      8-bit: new alpha =  top alpha + ((255-top alpha) * bottom alpha + 127)/255
+*      8-bit: new color =  (255 * top color * top alpha + (255- top alpha) * bottom color * bottom alpha + (255*255)/2) / (255 * 255 * new alpha)
+* @/textblock </pre>
+* As might be imagined, this extra complication may become costly.  At the cost of a small amount of accuracy in non-opaque regions
+* of the image, it is common to leave the alpha multiplied into the image. This avoids the division at the end. In addition,
+* if the result is used in another blend, we don't have to multiply the alpha back in at that stage, which simplifies things
+* all around. Such images with the alpha channel multiplied into the other channels are called pre-multiplied images.
+*
+* This gives us the following for premultiplied alpha blends:
+* <pre>@textblock
+*      float: new alpha               = top alpha +               (1 - top alpha) * bottom alpha
+*      float: new premultiplied color = top premultiplied color + (1 - top alpha) * bottom premultiplied color
+*
+*      8-bit: new alpha               =  top alpha +               ((255 - top alpha) * bottom alpha + 127)/255
+*      8-bit: new premultiplied color =  top premultiplied color + ((255 - top alpha) * bottom premultiplied color + 127)/255
+* @/textblock </pre>
+*
+* Some images are known to be fully opaque. For such images, alpha is 1.0 (or 255) for all the pixels, and consequently
+* do not require any computation to be done to interconvert between premultiplied and non-premultiplied states. That is,
+* since x/1 = x  and x*1 = x, they are non-premultiplied and premultiplied at the same time, and can serve in either
+* capacity as needed.  Because of this special status, CoreGraphics labels them kCGImageAlphaNoneSkipFirst/Last. vImage
+* does similar things in vImage_Utilities.h. Labelling opaque buffers as such enables cheaper alpha blending and will frequently
+* will let us avoid blending all-together as a simple copy operation will do.
+*
+* This header provides compositing (blending) operations for both premultiplied and non-premultiplied images, functions
+* to premultiply or unpremultiply images, and some functions to make sure that the color channel values do not exceed
+* the alpha value, which sometimes can happen after a convolution, morphological or resampling operation.
+*
+*    These alpha compositing functions assume that the floating point range is 0.0 (black) to 1.0 (full intensity color).
+*    While values outside these ranges do function correctly (you can have 110% intensity color or -50% color, for example),
+*    the calculation is done assuming 1.0 represents full intensity color, and 0.0 represents the absence of color. If these
+*    assumptions are not correct, then the calculation will produce incorrect results. Apple does not currently provide
+*    alpha compositing functions that work with any floating point range in vImage.
+*
+*    8 bit functionality assumes that 0 is no color, and 255 is full color. 8 bit functions do saturated clipping before
+*    converting from internal precision back to 8 bits to make sure that modulo overflow does not occur. The internal
+*  calculation is done with higher precision.
+*
+*  @ignorefuncmacro VIMAGE_NON_NULL
+*/
 
 #ifndef VIMAGE_ALPHA_H
-#define VIMAGE_ALPHA_H	
+#define VIMAGE_ALPHA_H
 
 #include <vImage/vImage_Types.h>
 
@@ -79,10 +79,10 @@ extern "C" {
 /*!
  * @functiongroup Alpha Blend
  * @discussion The Alpha Blend functions composite two non-premultiplied images together to produce a non-premultiplied result.
- *             They are in general more expensive than their premultiplied counterparts, because the alpha has to be 
+ *             They are in general more expensive than their premultiplied counterparts, because the alpha has to be
  *             divided out of the result at the end.
  */
-    
+
 /*!
  * @function vImageAlphaBlend_Planar8
  * @abstract Composite two non-premultiplied planar 8-bit images, to produce a non-premultiplied result.
@@ -97,7 +97,7 @@ extern "C" {
  *          float alpha =  srcTopAlpha + (1.0 - srcTopAlpha) * srcBottomAlpha
  * @/textblock </pre>
  *      For planar data, you need to calculate alpha yourself ahead of time and provide that as an argument to this function.
- *      This can be done using: 
+ *      This can be done using:
  * <pre>@textblock
  *          vImagePremultipliedAlphaBlend_Planar8( srcTopAlpha, srcTopAlpha, srcBottomAlpha, alpha, kvImageNoFlags );
  * @/textblock </pre>
@@ -126,11 +126,11 @@ extern "C" {
  * @result              The following result codes may be returned:
  *  <pre>@textblock
  *          kvImageNoError                      Success!
- *          
+ *
  *          kvImageRoiLargerThanInputBuffer     The destination buffer must be no larger than srcTop, srcBottom, srcTopAlpha, srcBottomAlpha and alpha.
  *  @/textblock</pre>
  */
-vImage_Error	vImageAlphaBlend_Planar8( const vImage_Buffer *srcTop, const vImage_Buffer *srcTopAlpha, const vImage_Buffer *srcBottom, const vImage_Buffer *srcBottomAlpha, const vImage_Buffer *alpha, const vImage_Buffer *dest, vImage_Flags flags )  VIMAGE_NON_NULL(1,2,3,4,5,6)  __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImageAlphaBlend_Planar8( const vImage_Buffer *srcTop, const vImage_Buffer *srcTopAlpha, const vImage_Buffer *srcBottom, const vImage_Buffer *srcBottomAlpha, const vImage_Buffer *alpha, const vImage_Buffer *dest, vImage_Flags flags )  VIMAGE_NON_NULL(1,2,3,4,5,6)  API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageAlphaBlend_PlanarF
@@ -179,8 +179,8 @@ vImage_Error	vImageAlphaBlend_Planar8( const vImage_Buffer *srcTop, const vImage
  *          kvImageRoiLargerThanInputBuffer     The destination buffer must be no larger than srcTop, srcBottom, srcTopAlpha, srcBottomAlpha and alpha.
  *  @/textblock</pre>
  */
-    
-vImage_Error	vImageAlphaBlend_PlanarF( const vImage_Buffer *srcTop, const vImage_Buffer *srcTopAlpha, const vImage_Buffer *srcBottom, const vImage_Buffer *srcBottomAlpha, const vImage_Buffer *alpha, const vImage_Buffer *dest, vImage_Flags flags )  VIMAGE_NON_NULL(1,2,3,4,5,6)  __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+
+VIMAGE_PF vImage_Error    vImageAlphaBlend_PlanarF( const vImage_Buffer *srcTop, const vImage_Buffer *srcTopAlpha, const vImage_Buffer *srcBottom, const vImage_Buffer *srcBottomAlpha, const vImage_Buffer *alpha, const vImage_Buffer *dest, vImage_Flags flags )  VIMAGE_NON_NULL(1,2,3,4,5,6)  API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageAlphaBlend_ARGB8888
@@ -219,7 +219,7 @@ vImage_Error	vImageAlphaBlend_PlanarF( const vImage_Buffer *srcTop, const vImage
  *          kvImageRoiLargerThanInputBuffer     The destination buffer must be no larger than srcTop, srcBottom, srcTopAlpha, srcBottomAlpha and alpha.
  *  @/textblock</pre>
  */
-vImage_Error	vImageAlphaBlend_ARGB8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)   __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImageAlphaBlend_ARGB8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)   API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageAlphaBlend_ARGBFFFF
@@ -258,13 +258,13 @@ vImage_Error	vImageAlphaBlend_ARGB8888( const vImage_Buffer *srcTop, const vImag
  *          kvImageRoiLargerThanInputBuffer     The destination buffer must be no larger than srcTop, srcBottom, srcTopAlpha, srcBottomAlpha and alpha.
  *  @/textblock</pre>
  */
-vImage_Error	vImageAlphaBlend_ARGBFFFF( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)  __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImageAlphaBlend_ARGBFFFF( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)  API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @functiongroup Alpha Blend (Premultiplied)
  * @discussion  Premultiplied alpha blends composite two premultiplied images to produce a premultiplied result.
  */
-    
+
 /*!
  * @function vImagePremultipliedAlphaBlend_Planar8
  * @abstract blend two premultiplied Planar8 images to produce a premultiplied Planar8 result.
@@ -302,13 +302,13 @@ vImage_Error	vImageAlphaBlend_ARGBFFFF( const vImage_Buffer *srcTop, const vImag
  * @/textblock</pre>
  *
  */
-vImage_Error	vImagePremultipliedAlphaBlend_Planar8( const vImage_Buffer *srcTop,
-                                                      const vImage_Buffer *srcTopAlpha,
-                                                      const vImage_Buffer *srcBottom,
-                                                      const vImage_Buffer *dest,
-                                                      vImage_Flags flags )
-                                                      VIMAGE_NON_NULL(1,2,3,4)
-                                                      __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImagePremultipliedAlphaBlend_Planar8( const vImage_Buffer *srcTop,
+                                                                const vImage_Buffer *srcTopAlpha,
+                                                                const vImage_Buffer *srcBottom,
+                                                                const vImage_Buffer *dest,
+                                                                vImage_Flags flags )
+VIMAGE_NON_NULL(1,2,3,4)
+API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImagePremultipliedAlphaBlend_PlanarF
@@ -348,13 +348,13 @@ vImage_Error	vImagePremultipliedAlphaBlend_Planar8( const vImage_Buffer *srcTop,
  *
  */
 
-vImage_Error	vImagePremultipliedAlphaBlend_PlanarF( const vImage_Buffer *srcTop,
-                                                      const vImage_Buffer *srcTopAlpha,
-                                                      const vImage_Buffer *srcBottom,
-                                                      const vImage_Buffer *dest,
-                                                      vImage_Flags flags )
-                                                      VIMAGE_NON_NULL(1,2,3,4)
-                                                      __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImagePremultipliedAlphaBlend_PlanarF( const vImage_Buffer *srcTop,
+                                                                const vImage_Buffer *srcTopAlpha,
+                                                                const vImage_Buffer *srcBottom,
+                                                                const vImage_Buffer *dest,
+                                                                vImage_Flags flags )
+VIMAGE_NON_NULL(1,2,3,4)
+API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImagePremultipliedAlphaBlend_ARGB8888
@@ -383,7 +383,7 @@ vImage_Error	vImagePremultipliedAlphaBlend_PlanarF( const vImage_Buffer *srcTop,
  * <pre>@textblock
  *      kvImageNoFlags      Default operation
  *
- *      kvImageDoNotTile    Disable internal multithreading. You might want to do that if you are calling 
+ *      kvImageDoNotTile    Disable internal multithreading. You might want to do that if you are calling
  *                          this in the context of your own multithreaded tiling engine.
  * @/textblock </pre>
  *
@@ -395,7 +395,7 @@ vImage_Error	vImagePremultipliedAlphaBlend_PlanarF( const vImage_Buffer *srcTop,
  * @/textblock</pre>
  *
  */
-vImage_Error	vImagePremultipliedAlphaBlend_ARGB8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)   __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImagePremultipliedAlphaBlend_ARGB8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)   API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImagePremultipliedAlphaBlend_BGRA8888
@@ -437,9 +437,9 @@ vImage_Error	vImagePremultipliedAlphaBlend_ARGB8888( const vImage_Buffer *srcTop
  * @/textblock</pre>
  *
  */
-vImage_Error	vImagePremultipliedAlphaBlend_BGRA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)   __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImagePremultipliedAlphaBlend_BGRA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)   API_AVAILABLE(macos(10.6), ios(5.0), watchos(1.0), tvos(5.0));
 #define         vImagePremultipliedAlphaBlend_RGBA8888( _srcTop, _srcBottom, _dest, _flags )    vImagePremultipliedAlphaBlend_BGRA8888((_srcTop), (_srcBottom), (_dest), (_flags))
-    
+
 /*!
  * @function vImagePremultipliedAlphaBlend_ARGBFFFF
  * @abstract blend two premultiplied ARGBFFFF images to produce a premultiplied ARGBFFFF result.
@@ -478,7 +478,7 @@ vImage_Error	vImagePremultipliedAlphaBlend_BGRA8888( const vImage_Buffer *srcTop
  * @/textblock</pre>
  *
  */
-vImage_Error	vImagePremultipliedAlphaBlend_ARGBFFFF( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)   __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImagePremultipliedAlphaBlend_ARGBFFFF( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)   API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImagePremultipliedAlphaBlend_BGRAFFFF
@@ -519,7 +519,7 @@ vImage_Error	vImagePremultipliedAlphaBlend_ARGBFFFF( const vImage_Buffer *srcTop
  * @/textblock</pre>
  *
  */
-vImage_Error	vImagePremultipliedAlphaBlend_BGRAFFFF( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)   __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImagePremultipliedAlphaBlend_BGRAFFFF( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)   API_AVAILABLE(macos(10.6), ios(5.0), watchos(1.0), tvos(5.0));
 #define         vImagePremultipliedAlphaBlend_RGBAFFFF( _srcTop, _srcBottom, _dest, _flags )    vImagePremultipliedAlphaBlend_BGRAFFFF((_srcTop), (_srcBottom), (_dest), (_flags))
 
 /*!
@@ -622,14 +622,14 @@ vImage_Error	vImagePremultipliedAlphaBlend_BGRAFFFF( const vImage_Buffer *srcTop
  * @/textblock</pre>
  *
  */
-vImage_Error vImagePremultipliedAlphaBlendWithPermute_ARGB8888(const vImage_Buffer *srcTop,
-                                                               const vImage_Buffer *srcBottom,
-                                                               const vImage_Buffer *dest,
-                                                               const uint8_t permuteMap[4],
-                                                               bool makeDestAlphaOpaque,
-                                                               vImage_Flags flags )
-                                                               VIMAGE_NON_NULL(1,2,3,4)
-                                                               __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+VIMAGE_PF vImage_Error vImagePremultipliedAlphaBlendWithPermute_ARGB8888(const vImage_Buffer *srcTop,
+                                                                         const vImage_Buffer *srcBottom,
+                                                                         const vImage_Buffer *dest,
+                                                                         const uint8_t permuteMap[4],
+                                                                         bool makeDestAlphaOpaque,
+                                                                         vImage_Flags flags )
+VIMAGE_NON_NULL(1,2,3,4)
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
 
 
 
@@ -733,15 +733,15 @@ vImage_Error vImagePremultipliedAlphaBlendWithPermute_ARGB8888(const vImage_Buff
  * @/textblock</pre>
  *
  */
-vImage_Error vImagePremultipliedAlphaBlendWithPermute_RGBA8888(const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, const uint8_t permuteMap[4], bool makeDestAlphaOpaque, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+VIMAGE_PF vImage_Error vImagePremultipliedAlphaBlendWithPermute_RGBA8888(const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, const uint8_t permuteMap[4], bool makeDestAlphaOpaque, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3,4) API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
 
-    
+
 /*!
  *  @functiongroup Alpha Blend (Premultiplied, other blend modes)
- *  @discussion These alternative blend modes correspond to the blend modes required for SVG 
+ *  @discussion These alternative blend modes correspond to the blend modes required for SVG
  *              (http://www.w3.org/TR/SVG/filters.html, see feBlend)
  */
-    
+
 /*!
  * @function vImagePremultipliedAlphaBlendMultiply_RGBA8888
  * @abstract blend two premultiplied RGBA8888 images using the Multiply blend mode to produce a premultiplied RGBA8888 result.
@@ -749,7 +749,7 @@ vImage_Error vImagePremultipliedAlphaBlendWithPermute_RGBA8888(const vImage_Buff
  *      For each color channel:
  * <pre>@textblock
  *          uint8_t destColor =((255 -    srcTopAlpha) * srcBottomColor +
- *                              (255 - srcBottomAlpha) * srcTopColor + 
+ *                              (255 - srcBottomAlpha) * srcTopColor +
  *                               srcTopColor * srcBottomColor + 127)/255;
  * @/textblock</pre>
  *      The output alpha channel (the new alpha value for that pixel) can be calculated as:
@@ -784,7 +784,7 @@ vImage_Error vImagePremultipliedAlphaBlendWithPermute_RGBA8888(const vImage_Buff
  * @/textblock</pre>
  *
  */
-vImage_Error	vImagePremultipliedAlphaBlendMultiply_RGBA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 ) __WATCHOS_AVAILABLE(__WATCHOS_2_0);
+VIMAGE_PF vImage_Error    vImagePremultipliedAlphaBlendMultiply_RGBA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /*!
  * @function vImagePremultipliedAlphaBlendScreen_RGBA8888
@@ -826,7 +826,7 @@ vImage_Error	vImagePremultipliedAlphaBlendMultiply_RGBA8888( const vImage_Buffer
  * @/textblock</pre>
  *
  */
-vImage_Error	vImagePremultipliedAlphaBlendScreen_RGBA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 ) __WATCHOS_AVAILABLE(__WATCHOS_2_0);
+VIMAGE_PF vImage_Error    vImagePremultipliedAlphaBlendScreen_RGBA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /*!
  * @function vImagePremultipliedAlphaBlendDarken_RGBA8888
@@ -869,7 +869,7 @@ vImage_Error	vImagePremultipliedAlphaBlendScreen_RGBA8888( const vImage_Buffer *
  * @/textblock</pre>
  *
  */
-vImage_Error	vImagePremultipliedAlphaBlendDarken_RGBA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 ) __WATCHOS_AVAILABLE(__WATCHOS_2_0);
+VIMAGE_PF vImage_Error    vImagePremultipliedAlphaBlendDarken_RGBA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /*!
  * @function vImagePremultipliedAlphaBlendLighten_RGBA8888
@@ -911,22 +911,22 @@ vImage_Error	vImagePremultipliedAlphaBlendDarken_RGBA8888( const vImage_Buffer *
  *          kvImageRoiLargerThanInputBuffer     The height and width of the result must be less than or equal to each of the input buffers.
  * @/textblock</pre>
  */
-vImage_Error	vImagePremultipliedAlphaBlendLighten_RGBA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_11, __IPHONE_9_0 ) __WATCHOS_AVAILABLE(__WATCHOS_2_0);
+VIMAGE_PF vImage_Error    vImagePremultipliedAlphaBlendLighten_RGBA8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 
-    
-    
+
+
 /*!
  *  @functiongroup Premultiply Data
  *  @discussion  Multiply a non-premultiplied (normal) image with its
  *               alpha channel to produce a premultiplied image.
  */
-    
+
 /*!
  *  @function vImagePremultiplyData_Planar8
  *  @abstract Multiply a Planar8 color channel by its corresponding alpha
  *  @discussion
- *  This function multiplies color channels by the alpha channel.  
+ *  This function multiplies color channels by the alpha channel.
  *  <pre>@textblock
  *      For each color channel:
  *
@@ -951,11 +951,11 @@ vImage_Error	vImagePremultipliedAlphaBlendLighten_RGBA8888( const vImage_Buffer 
  *  <pre>@textblock
  *          kvImageNoError                      Success.
  *
- *          kvImageRoiLargerThanInputBuffer     dest->width and dest->height must be less than or equal to corresponding 
+ *          kvImageRoiLargerThanInputBuffer     dest->width and dest->height must be less than or equal to corresponding
  *                                              dimensions in src and alpha
  *  @/textblock</pre>
  */
-vImage_Error	vImagePremultiplyData_Planar8( const vImage_Buffer *src, const vImage_Buffer *alpha, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)   __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImagePremultiplyData_Planar8( const vImage_Buffer *src, const vImage_Buffer *alpha, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)   API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  *  @function vImagePremultiplyData_PlanarF
@@ -990,7 +990,7 @@ vImage_Error	vImagePremultiplyData_Planar8( const vImage_Buffer *src, const vIma
  *                                              dimensions in src and alpha
  *  @/textblock</pre>
  */
-vImage_Error	vImagePremultiplyData_PlanarF( const vImage_Buffer *src, const vImage_Buffer *alpha, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)   __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImagePremultiplyData_PlanarF( const vImage_Buffer *src, const vImage_Buffer *alpha, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)   API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  *  @function vImagePremultiplyData_ARGB8888
@@ -1029,7 +1029,7 @@ vImage_Error	vImagePremultiplyData_PlanarF( const vImage_Buffer *src, const vIma
  *                                              dimensions in src and alpha
  *  @/textblock</pre>
  */
-vImage_Error	vImagePremultiplyData_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)   __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImagePremultiplyData_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)   API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  *  @function vImagePremultiplyData_ARGBFFFF
@@ -1068,7 +1068,7 @@ vImage_Error	vImagePremultiplyData_ARGB8888( const vImage_Buffer *src, const vIm
  *                                              dimensions in src and alpha
  *  @/textblock</pre>
  */
-vImage_Error	vImagePremultiplyData_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)   __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImagePremultiplyData_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)   API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  *  @function vImagePremultiplyData_RGBA8888
@@ -1107,7 +1107,7 @@ vImage_Error	vImagePremultiplyData_ARGBFFFF( const vImage_Buffer *src, const vIm
  *                                              dimensions in src and alpha
  *  @/textblock</pre>
  */
-vImage_Error	vImagePremultiplyData_RGBA8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)   __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImagePremultiplyData_RGBA8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)   API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 #define         vImagePremultiplyData_BGRA8888( _src, _dest, _flags )           vImagePremultiplyData_RGBA8888((_src), (_dest), (_flags))
 
 /*!
@@ -1147,7 +1147,7 @@ vImage_Error	vImagePremultiplyData_RGBA8888( const vImage_Buffer *src, const vIm
  *                                              dimensions in src and alpha
  *  @/textblock</pre>
  */
-vImage_Error	vImagePremultiplyData_RGBAFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)   __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImagePremultiplyData_RGBAFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)   API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 #define         vImagePremultiplyData_BGRAFFFF( _src, _dest, _flags )           vImagePremultiplyData_RGBAFFFF((_src), (_dest), (_flags))
 
 /*!
@@ -1187,7 +1187,7 @@ vImage_Error	vImagePremultiplyData_RGBAFFFF( const vImage_Buffer *src, const vIm
  *                                              dimensions in src and alpha
  *  @/textblock</pre>
  */
-vImage_Error	vImagePremultiplyData_ARGB16U( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_8, __IPHONE_6_0 );
+VIMAGE_PF vImage_Error    vImagePremultiplyData_ARGB16U( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.8), ios(6.0), watchos(1.0), tvos(6.0));
 
 /*!
  *  @function vImagePremultiplyData_RGBA16U
@@ -1226,7 +1226,7 @@ vImage_Error	vImagePremultiplyData_ARGB16U( const vImage_Buffer *src, const vIma
  *                                              dimensions in src and alpha
  *  @/textblock</pre>
  */
-vImage_Error	vImagePremultiplyData_RGBA16U( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_8, __IPHONE_6_0 );
+VIMAGE_PF vImage_Error    vImagePremultiplyData_RGBA16U( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.8), ios(6.0), watchos(1.0), tvos(6.0));
 #define         vImagePremultiplyData_BGRA16U( _src, _dest, _flags )           vImagePremultiplyData_RGBA16U((_src), (_dest), (_flags))
 
 
@@ -1265,7 +1265,7 @@ vImage_Error	vImagePremultiplyData_RGBA16U( const vImage_Buffer *src, const vIma
  *                                              dimensions in src and alpha
  *  @/textblock</pre>
  */
-vImage_Error    vImagePremultiplyData_ARGB16Q12( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+VIMAGE_PF vImage_Error    vImagePremultiplyData_ARGB16Q12( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
 
 /*!
  *  @function vImagePremultiplyData_RGBA16Q12
@@ -1302,13 +1302,13 @@ vImage_Error    vImagePremultiplyData_ARGB16Q12( const vImage_Buffer *src, const
  *                                              dimensions in src and alpha
  *  @/textblock</pre>
  */
-vImage_Error    vImagePremultiplyData_RGBA16Q12( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
-    
+VIMAGE_PF vImage_Error    vImagePremultiplyData_RGBA16Q12( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
+
 /*!
  *  @functiongroup Unpremultiply Data
  *  @discussion Divide a premultiplied image by its alpha channel to produce a non-premultiplied image.
  */
-    
+
 /*!
  *  @function vImageUnpremultiplyData_Planar8
  *  @abstract Divide alpha from a premultiplied Planar8 images
@@ -1319,7 +1319,7 @@ vImage_Error    vImagePremultiplyData_RGBA16Q12( const vImage_Buffer *src, const
  *          uint8_t destColor = ( MIN(src_color, alpha) * 255 + alpha/2) / alpha;
  *  @/textblock </pre>
  *      ...which is the nearest unpremultiplied result, with clamping to ensure no modulo overflow in cases where srcColor > srcAlpha.
- *      In the division by zero case, the returned color value is 0.  
+ *      In the division by zero case, the returned color value is 0.
  *
  *      This function can work in place provided the following are true:
  *          For each buffer "buf" that overlaps with dest, buf->data must be equal to dest->data.
@@ -1342,9 +1342,9 @@ vImage_Error    vImagePremultiplyData_RGBA16Q12( const vImage_Buffer *src, const
  *                      kvImageRoiLargerThanInputBuffer     dest->height or width is larger than the corresponding src or alpha dimension
  *      @/textblock </pre>
  */
-vImage_Error	vImageUnpremultiplyData_Planar8( const vImage_Buffer *src, const vImage_Buffer *alpha, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)   __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImageUnpremultiplyData_Planar8( const vImage_Buffer *src, const vImage_Buffer *alpha, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)   API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
-    
+
 /*!
  *  @function vImageUnpremultiplyData_PlanarF
  *  @abstract Divide alpha from a premultiplied PlanarF images
@@ -1375,7 +1375,7 @@ vImage_Error	vImageUnpremultiplyData_Planar8( const vImage_Buffer *src, const vI
  *                      kvImageRoiLargerThanInputBuffer     dest->height or width is larger than the corresponding src or alpha dimension
  *      @/textblock </pre>
  */
-vImage_Error	vImageUnpremultiplyData_PlanarF( const vImage_Buffer *src, const vImage_Buffer *alpha, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImageUnpremultiplyData_PlanarF( const vImage_Buffer *src, const vImage_Buffer *alpha, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)    API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  *  @function vImageUnpremultiplyData_ARGB8888
@@ -1389,7 +1389,7 @@ vImage_Error	vImageUnpremultiplyData_PlanarF( const vImage_Buffer *src, const vI
  *      @/textblock </pre>
  *
  *      ...which is the nearest unpremultiplied result, with clamping to ensure no modulo overflow in cases where srcColor > srcAlpha.
- *      In the division by zero case, the returned color value is 0.  
+ *      In the division by zero case, the returned color value is 0.
  *
  *      The positioning of only the alpha channel is important for interleaved formats for these functions.
  *      This function will work with other channel orders that have alpha first.
@@ -1414,7 +1414,7 @@ vImage_Error	vImageUnpremultiplyData_PlanarF( const vImage_Buffer *src, const vI
  *                      kvImageRoiLargerThanInputBuffer     dest->height or width is larger than the corresponding src or alpha dimension
  *      @/textblock </pre>
  */
-vImage_Error	vImageUnpremultiplyData_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImageUnpremultiplyData_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)    API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  *  @function vImageUnpremultiplyData_RGBA8888
@@ -1453,7 +1453,7 @@ vImage_Error	vImageUnpremultiplyData_ARGB8888( const vImage_Buffer *src, const v
  *                      kvImageRoiLargerThanInputBuffer     dest->height or width is larger than the corresponding src or alpha dimension
  *      @/textblock </pre>
  */
-vImage_Error	vImageUnpremultiplyData_RGBA8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)    __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImageUnpremultiplyData_RGBA8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)    API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 #define         vImageUnpremultiplyData_BGRA8888( _src, _dest, _flags )             vImageUnpremultiplyData_RGBA8888((_src), (_dest), (_flags))
 
 /*!
@@ -1490,9 +1490,9 @@ vImage_Error	vImageUnpremultiplyData_RGBA8888( const vImage_Buffer *src, const v
  *                      kvImageRoiLargerThanInputBuffer     dest->height or width is larger than the corresponding src or alpha dimension
  *      @/textblock </pre>
  */
-vImage_Error	vImageUnpremultiplyData_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImageUnpremultiplyData_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)    API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
-    
+
 /*!
  *  @function vImageUnpremultiplyData_RGBAFFFF
  *  @abstract Divide the alpha channel from the color channels in a RGBAFFFF image
@@ -1527,10 +1527,10 @@ vImage_Error	vImageUnpremultiplyData_ARGBFFFF( const vImage_Buffer *src, const v
  *                      kvImageRoiLargerThanInputBuffer     dest->height or width is larger than the corresponding src or alpha dimension
  *      @/textblock </pre>
  */
-vImage_Error	vImageUnpremultiplyData_RGBAFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)    __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImageUnpremultiplyData_RGBAFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2)    API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 #define         vImageUnpremultiplyData_BGRAFFFF( _src, _dest, _flags )             vImageUnpremultiplyData_RGBAFFFF((_src), (_dest), (_flags))
 
-    
+
 /*!
  *  @function vImageUnpremultiplyData_ARGB16U
  *  @abstract Divide the alpha channel from the color channels in a ARGB16U image
@@ -1568,9 +1568,9 @@ vImage_Error	vImageUnpremultiplyData_RGBAFFFF( const vImage_Buffer *src, const v
  *                      kvImageRoiLargerThanInputBuffer     dest->height or width is larger than the corresponding src or alpha dimension
  *      @/textblock </pre>
  */
-vImage_Error	vImageUnpremultiplyData_ARGB16U( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_8, __IPHONE_6_0 );
+VIMAGE_PF vImage_Error    vImageUnpremultiplyData_ARGB16U( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.8), ios(6.0), watchos(1.0), tvos(6.0));
 
-    
+
 /*!
  *  @function vImageUnpremultiplyData_RGBA16U
  *  @abstract Divide the alpha channel from the color channels in a RGBA16U image
@@ -1608,7 +1608,7 @@ vImage_Error	vImageUnpremultiplyData_ARGB16U( const vImage_Buffer *src, const vI
  *                      kvImageRoiLargerThanInputBuffer     dest->height or width is larger than the corresponding src or alpha dimension
  *      @/textblock </pre>
  */
-vImage_Error	vImageUnpremultiplyData_RGBA16U( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_8, __IPHONE_6_0 );
+VIMAGE_PF vImage_Error    vImageUnpremultiplyData_RGBA16U( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.8), ios(6.0), watchos(1.0), tvos(6.0));
 #define         vImageUnpremultiplyData_BGRA16U( _src, _dest, _flags )             vImageUnpremultiplyData_RGBA16U((_src), (_dest), (_flags))
 
 /*!
@@ -1648,9 +1648,9 @@ vImage_Error	vImageUnpremultiplyData_RGBA16U( const vImage_Buffer *src, const vI
  *                      kvImageRoiLargerThanInputBuffer     dest->height or width is larger than the corresponding src or alpha dimension
  *      @/textblock </pre>
  */
-vImage_Error    vImageUnpremultiplyData_ARGB16Q12( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+VIMAGE_PF vImage_Error    vImageUnpremultiplyData_ARGB16Q12( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
 
-    
+
 /*!
  *  @function vImageUnpremultiplyData_RGBA16Q12
  *  @abstract Divide the alpha channel from the color channels in a RGBA16Q12 image
@@ -1666,7 +1666,7 @@ vImage_Error    vImageUnpremultiplyData_ARGB16Q12( const vImage_Buffer *src, con
  *      In the division by zero case, the returned color value is 0.
  *
  *      The positioning of only the alpha channel is important for interleaved formats for these functions.
- *      This function will work with other channel orders that have alpha last. 
+ *      This function will work with other channel orders that have alpha last.
  *
  *      This function can work in place provided the following are true:
  *          src->data must be equal to dest->data
@@ -1688,14 +1688,14 @@ vImage_Error    vImageUnpremultiplyData_ARGB16Q12( const vImage_Buffer *src, con
  *                      kvImageRoiLargerThanInputBuffer     dest->height or width is larger than the corresponding src or alpha dimension
  *      @/textblock </pre>
  */
-vImage_Error    vImageUnpremultiplyData_RGBA16Q12( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+VIMAGE_PF vImage_Error    vImageUnpremultiplyData_RGBA16Q12( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
 
 /*!
  * @functiongroup Alpha Blend (Premultiplied with additional constant alpha)
  * @discussion  A premultiplied alpha blend with an extra constant alpha applied to the top image to allow
  *              it to be faded in our out.
  */
-    
+
 /*!
  * @function vImagePremultipliedConstAlphaBlend_Planar8
  * @abstract Blend two Planar8 premultiplied images with an extra image-wide alpha for the top image
@@ -1729,7 +1729,7 @@ vImage_Error    vImageUnpremultiplyData_RGBA16Q12( const vImage_Buffer *src, con
  *                                              srcTop, srcTopAlpha or srcBottom
  * @/textblock</pre>
  */
-vImage_Error	vImagePremultipliedConstAlphaBlend_Planar8( const vImage_Buffer *srcTop, Pixel_8 constAlpha, const vImage_Buffer *srcTopAlpha, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,3,4,5)    __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImagePremultipliedConstAlphaBlend_Planar8( const vImage_Buffer *srcTop, Pixel_8 constAlpha, const vImage_Buffer *srcTopAlpha, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,3,4,5)    API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImagePremultipliedConstAlphaBlend_PlanarF
@@ -1762,7 +1762,7 @@ vImage_Error	vImagePremultipliedConstAlphaBlend_Planar8( const vImage_Buffer *sr
  *                                              srcTop, srcTopAlpha or srcBottom
  * @/textblock</pre>
  */
-vImage_Error	vImagePremultipliedConstAlphaBlend_PlanarF( const vImage_Buffer *srcTop, Pixel_F constAlpha, const vImage_Buffer *srcTopAlpha, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,3,4,5)    __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImagePremultipliedConstAlphaBlend_PlanarF( const vImage_Buffer *srcTop, Pixel_F constAlpha, const vImage_Buffer *srcTopAlpha, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,3,4,5)    API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImagePremultipliedConstAlphaBlend_ARGB8888
@@ -1798,7 +1798,7 @@ vImage_Error	vImagePremultipliedConstAlphaBlend_PlanarF( const vImage_Buffer *sr
  *                                              srcTop, srcTopAlpha or srcBottom
  * @/textblock</pre>
  */
-vImage_Error	vImagePremultipliedConstAlphaBlend_ARGB8888( const vImage_Buffer *srcTop, Pixel_8 constAlpha, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,3,4)    __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImagePremultipliedConstAlphaBlend_ARGB8888( const vImage_Buffer *srcTop, Pixel_8 constAlpha, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,3,4)    API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImagePremultipliedConstAlphaBlend_ARGBFFFF
@@ -1834,14 +1834,14 @@ vImage_Error	vImagePremultipliedConstAlphaBlend_ARGB8888( const vImage_Buffer *s
  *                                              srcTop, srcTopAlpha or srcBottom
  * @/textblock</pre>
  */
-vImage_Error	vImagePremultipliedConstAlphaBlend_ARGBFFFF( const vImage_Buffer *srcTop, Pixel_F constAlpha, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,3,4)    __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImagePremultipliedConstAlphaBlend_ARGBFFFF( const vImage_Buffer *srcTop, Pixel_F constAlpha, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,3,4)    API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  *  @functiongroup Alpha Blend (Non-premultiplied to premultiplied)
- *  @discussion    These functions blend a non-premultiplied top image into a premultiplied bottom image 
+ *  @discussion    These functions blend a non-premultiplied top image into a premultiplied bottom image
  *                 to produce a premultiplied result.
  */
-    
+
 /*!
  * @function vImageAlphaBlend_NonpremultipliedToPremultiplied_Planar8
  * @abstract Blend a non-premultiplied top Planar8 image into a premultiplied Planar8 bottom image and return a premultiplied Planar8 result.
@@ -1849,10 +1849,10 @@ vImage_Error	vImagePremultipliedConstAlphaBlend_ARGBFFFF( const vImage_Buffer *s
  * <pre>@textblock
  *      result = (srcTop * srctopAlpha + (255 - srcTopAlpha) * bottomAlpha + 127 ) / 255;
  * @/textblock </pre>
- * This function will work in place as long as the src and dest buffer overlap exactly. 
+ * This function will work in place as long as the src and dest buffer overlap exactly.
  * The src buffers must be at least as large as the dest buffer in each dimension. (src.height >= dest.height && src.width >= dest.width)
  *
- *  To calculate the alpha result for the Planar cases, use 
+ *  To calculate the alpha result for the Planar cases, use
  * <pre>@textblock
  *      vImagePremultipliedAlphaBlend_Planar8( srcTopAlpha, srcTopAlpha, srcBottomAlpha, dest, flags );
  * @/textblock </pre>
@@ -1868,7 +1868,7 @@ vImage_Error	vImagePremultipliedConstAlphaBlend_ARGBFFFF( const vImage_Buffer *s
  *      <pre> @textblock
  *          kvImageNoFlags          Default operation.
  *
- *          kvImageDoNotTile        Disable internal multithreading. 
+ *          kvImageDoNotTile        Disable internal multithreading.
  *      @/textblock </pre>
  *  @result     The following error codes may occur:
  *      <pre> @textblock
@@ -1878,7 +1878,7 @@ vImage_Error	vImagePremultipliedConstAlphaBlend_ARGBFFFF( const vImage_Buffer *s
  *                                              dimensions in srcTop, srcTopAlpha and srcBottom.
  *      @/textblock </pre>
  */
-vImage_Error	vImageAlphaBlend_NonpremultipliedToPremultiplied_Planar8( const vImage_Buffer *srcTop, const vImage_Buffer *srcTopAlpha, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3,4)    __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImageAlphaBlend_NonpremultipliedToPremultiplied_Planar8( const vImage_Buffer *srcTop, const vImage_Buffer *srcTopAlpha, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3,4)    API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageAlphaBlend_NonpremultipliedToPremultiplied_PlanarF
@@ -1916,8 +1916,8 @@ vImage_Error	vImageAlphaBlend_NonpremultipliedToPremultiplied_Planar8( const vIm
  *                                              dimensions in srcTop, srcTopAlpha and srcBottom.
  *      @/textblock </pre>
  */
-vImage_Error	vImageAlphaBlend_NonpremultipliedToPremultiplied_PlanarF( const vImage_Buffer *srcTop, const vImage_Buffer *srcTopAlpha, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3,4)    __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
-    
+VIMAGE_PF vImage_Error    vImageAlphaBlend_NonpremultipliedToPremultiplied_PlanarF( const vImage_Buffer *srcTop, const vImage_Buffer *srcTopAlpha, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3,4)    API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
+
 /*!
  * @function vImageAlphaBlend_NonpremultipliedToPremultiplied_ARGB8888
  * @abstract Blend a non-premultiplied top ARGB8888 image into a premultiplied ARGB8888 bottom image and return a premultiplied ARGB8888 result.
@@ -1951,7 +1951,7 @@ vImage_Error	vImageAlphaBlend_NonpremultipliedToPremultiplied_PlanarF( const vIm
  *                                              dimensions in srcTop, srcTopAlpha and srcBottom.
  *      @/textblock </pre>
  */
-vImage_Error	vImageAlphaBlend_NonpremultipliedToPremultiplied_ARGB8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)    __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImageAlphaBlend_NonpremultipliedToPremultiplied_ARGB8888( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)    API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageAlphaBlend_NonpremultipliedToPremultiplied_ARGBFFFF
@@ -1986,7 +1986,7 @@ vImage_Error	vImageAlphaBlend_NonpremultipliedToPremultiplied_ARGB8888( const vI
  *                                              dimensions in srcTop, srcTopAlpha and srcBottom.
  *      @/textblock </pre>
  */
-vImage_Error	vImageAlphaBlend_NonpremultipliedToPremultiplied_ARGBFFFF( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)    __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error    vImageAlphaBlend_NonpremultipliedToPremultiplied_ARGBFFFF( const vImage_Buffer *srcTop, const vImage_Buffer *srcBottom, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3)    API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @functiongroup Clip To Alpha
@@ -1997,12 +1997,12 @@ vImage_Error	vImageAlphaBlend_NonpremultipliedToPremultiplied_ARGBFFFF( const vI
  *               function vImageClipToAlpha which identify color channels that are greater than alpha and clamp them to be
  *               equal to alpha.
  */
-    
+
 /*!
  *  @function vImageClipToAlpha_Planar8
  *  @abstract Clamp a Planar8 color buffer to be less than or equal to alpha
  *  @discussion
- *  For each pixel, each color channel shall be set to the smaller of the color channel or alpha value for that pixel. 
+ *  For each pixel, each color channel shall be set to the smaller of the color channel or alpha value for that pixel.
  *  <pre>@textblock
  *          color_result = MIN( color, alpha )
  *  @/textblock </pre>
@@ -2026,7 +2026,7 @@ vImage_Error	vImageAlphaBlend_NonpremultipliedToPremultiplied_ARGBFFFF( const vI
  *                                              dimensions in srcTop, srcTopAlpha and srcBottom.
  *      @/textblock </pre>
  */
-vImage_Error vImageClipToAlpha_Planar8( const vImage_Buffer *src, const vImage_Buffer *alpha, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error vImageClipToAlpha_Planar8( const vImage_Buffer *src, const vImage_Buffer *alpha, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  *  @function vImageClipToAlpha_PlanarF
@@ -2056,8 +2056,8 @@ vImage_Error vImageClipToAlpha_Planar8( const vImage_Buffer *src, const vImage_B
  *                                              dimensions in srcTop, srcTopAlpha and srcBottom.
  *      @/textblock </pre>
  */
-vImage_Error vImageClipToAlpha_PlanarF( const vImage_Buffer *src,  const vImage_Buffer *alpha,  const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
- 
+VIMAGE_PF vImage_Error vImageClipToAlpha_PlanarF( const vImage_Buffer *src,  const vImage_Buffer *alpha,  const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
+
 /*!
  *  @function vImageClipToAlpha_ARGB8888
  *  @abstract Clamp a ARGB8888 color buffer to be less than or equal to alpha
@@ -2089,7 +2089,7 @@ vImage_Error vImageClipToAlpha_PlanarF( const vImage_Buffer *src,  const vImage_
  *                                              dimensions in srcTop, srcTopAlpha and srcBottom.
  *      @/textblock </pre>
  */
-vImage_Error vImageClipToAlpha_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error vImageClipToAlpha_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  *  @function vImageClipToAlpha_ARGBFFFF
@@ -2122,7 +2122,7 @@ vImage_Error vImageClipToAlpha_ARGB8888( const vImage_Buffer *src, const vImage_
  *                                              dimensions in srcTop, srcTopAlpha and srcBottom.
  *      @/textblock </pre>
  */
-vImage_Error vImageClipToAlpha_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error vImageClipToAlpha_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  *  @function vImageClipToAlpha_RGBA8888
@@ -2155,7 +2155,7 @@ vImage_Error vImageClipToAlpha_ARGBFFFF( const vImage_Buffer *src, const vImage_
  *                                              dimensions in srcTop, srcTopAlpha and srcBottom.
  *      @/textblock </pre>
  */
-vImage_Error vImageClipToAlpha_RGBA8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_8, __IPHONE_6_0 );
+VIMAGE_PF vImage_Error vImageClipToAlpha_RGBA8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.8), ios(6.0), watchos(1.0), tvos(6.0));
 #define vImageClipToAlpha_BGRA8888(_src, _dest, _flags)   vImageClipToAlpha_RGBA8888((_src), (_dest), (_flags))
 
 /*!
@@ -2189,7 +2189,7 @@ vImage_Error vImageClipToAlpha_RGBA8888( const vImage_Buffer *src, const vImage_
  *                                              dimensions in srcTop, srcTopAlpha and srcBottom.
  *      @/textblock </pre>
  */
-vImage_Error vImageClipToAlpha_RGBAFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_8, __IPHONE_6_0 );
+VIMAGE_PF vImage_Error vImageClipToAlpha_RGBAFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.8), ios(6.0), watchos(1.0), tvos(6.0));
 #define vImageClipToAlpha_BGRAFFFF(_src, _dest, _flags)   vImageClipToAlpha_RGBAFFFF((_src), (_dest), (_flags))
 
 /*

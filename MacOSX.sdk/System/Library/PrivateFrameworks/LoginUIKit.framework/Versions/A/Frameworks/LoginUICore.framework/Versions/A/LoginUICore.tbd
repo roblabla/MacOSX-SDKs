@@ -1,23 +1,24 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 72DF57F3-A389-3551-A277-DB8F39F20B70', 'x86_64: 0DA9885C-517E-3DEC-9429-2F80BF6057D7' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 2528E230-11E9-3436-ADCF-ED149F50A264' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
-    symbols:         [ _LUICAvatarMask, _LUICAvatarOverlay, _LUICButtonBack, _LUICButtonCancel, 
-                       _LUICButtonContinue, _LUICButtonExit, _LUICButtonFMMGo, _LUICButtonFMMGoRTL, 
-                       _LUICButtonGO, _LUICButtonGuestUser, _LUICButtonNext, _LUICButtonPasswordError, 
-                       _LUICButtonPasswordHint, _LUICButtonPrevious, _LUICButtonRestart, 
-                       _LUICButtonRestartToSafari, _LUICButtonShiftLeft, _LUICButtonShiftRight, 
-                       _LUICButtonShutDown, _LUICButtonSleep, _LUICButtonSwitchUser, 
-                       _LUICDigitField, _LUICDigitFieldFocus, _LUICEFIImageIdentifier, 
-                       _LUICGetBootStyle, _LUICImageAppleLogo, _LUICImageAvatarSelection1Line, 
-                       _LUICImageAvatarSelection2Lines, _LUICImageGenericUser, _LUICImageGenericUserSmall, 
-                       _LUICImageGuestUser, _LUICImageGuestUserSmall, _LUICImageHintDividerLine, 
-                       _LUICImageLoggedInBadge, _LUICImageMacOSX, _LUICImageOtherUser, 
-                       _LUICImagePocketShadowLeft, _LUICImagePocketShadowRight, _LUICImagePopUpButtonCenter, 
+  - archs:           [ x86_64 ]
+    symbols:         [ _LUI2CButtonBack, _LUI2CButtonLogin, _LUICAvatarMask, _LUICAvatarOverlay, 
+                       _LUICButtonBack, _LUICButtonCancel, _LUICButtonContinue, _LUICButtonExit, 
+                       _LUICButtonFMMGo, _LUICButtonFMMGoRTL, _LUICButtonGO, _LUICButtonGuestUser, 
+                       _LUICButtonNext, _LUICButtonPasswordError, _LUICButtonPasswordHint, 
+                       _LUICButtonPrevious, _LUICButtonRestart, _LUICButtonRestartToSafari, 
+                       _LUICButtonShiftLeft, _LUICButtonShiftRight, _LUICButtonShutDown, 
+                       _LUICButtonSleep, _LUICButtonSwitchUser, _LUICDigitField, 
+                       _LUICDigitFieldFocus, _LUICEFIImageIdentifier, _LUICGetBootStyle, 
+                       _LUICImageAppleLogo, _LUICImageAvatarSelection1Line, _LUICImageAvatarSelection2Lines, 
+                       _LUICImageGenericUser, _LUICImageGenericUserSmall, _LUICImageGuestUser, 
+                       _LUICImageGuestUserSmall, _LUICImageHintDividerLine, _LUICImageLoggedInBadge, 
+                       _LUICImageMacOSX, _LUICImageOtherUser, _LUICImagePocketShadowLeft, 
+                       _LUICImagePocketShadowRight, _LUICImagePopUpButtonCenter, 
                        _LUICImagePopUpButtonLeft, _LUICImagePopUpButtonRight, _LUICImageProgressBarLeftEndcap, 
                        _LUICImageProgressBarLeftEndcapFull, _LUICImageProgressBarLeftEndcapFullGray, 
                        _LUICImageProgressBarLeftEndcapGray, _LUICImageProgressBarMiddle, 

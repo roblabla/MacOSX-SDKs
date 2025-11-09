@@ -9,6 +9,8 @@
 #ifndef __AXNOTIFICATIONCONSTANTS__
 #define __AXNOTIFICATIONCONSTANTS__
 
+#include <CoreFoundation/CFBase.h> /* CF_ENUM */
+
 /*!
 	@header AXNotificationConstants.h
 	

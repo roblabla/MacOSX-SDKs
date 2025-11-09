@@ -1,6 +1,6 @@
 /* CoreAnimation - CAEmitterLayer.h
 
-   Copyright (c) 2007-2017, Apple Inc.
+   Copyright (c) 2007-2018, Apple Inc.
    All rights reserved. */
 
 /* Particle emitter layer.
@@ -16,11 +16,15 @@
 
 #import <QuartzCore/CALayer.h>
 
+typedef NSString * CAEmitterLayerEmitterShape NS_STRING_ENUM;
+typedef NSString * CAEmitterLayerEmitterMode NS_STRING_ENUM;
+typedef NSString * CAEmitterLayerRenderMode NS_STRING_ENUM;
+
 @class CAEmitterCell;
 
 NS_ASSUME_NONNULL_BEGIN
 
-CA_CLASS_AVAILABLE (10.6, 5.0, 9.0, 2.0)
+API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0))
 @interface CAEmitterLayer : CALayer
 
 /* The array of emitter cells attached to the layer. Each object must
@@ -55,13 +59,13 @@ CA_CLASS_AVAILABLE (10.6, 5.0, 9.0, 2.0)
  * `point' (the default), `line', `rectangle', `circle', `cuboid' and
  * `sphere'. */
 
-@property(copy) NSString *emitterShape;
+@property(copy) CAEmitterLayerEmitterShape emitterShape;
 
 /* A string defining how particles are created relative to the emission
  * shape. Current options are `points', `outline', `surface' and
  * `volume' (the default). */
 
-@property(copy) NSString *emitterMode;
+@property(copy) CAEmitterLayerEmitterMode emitterMode;
 
 /* A string defining how particles are composited into the layer's
  * image. Current options are `unordered' (the default), `oldestFirst',
@@ -69,7 +73,7 @@ CA_CLASS_AVAILABLE (10.6, 5.0, 9.0, 2.0)
  * `additive'. The first four use source-over compositing, the last
  * uses additive compositing. */
 
-@property(copy) NSString *renderMode;
+@property(copy) CAEmitterLayerRenderMode renderMode;
 
 /* When true the particles are rendered as if they directly inhabit the
  * three dimensional coordinate space of the layer's superlayer, rather
@@ -103,41 +107,41 @@ CA_CLASS_AVAILABLE (10.6, 5.0, 9.0, 2.0)
 
 /** `emitterShape' values. **/
 
-CA_EXTERN NSString * const kCAEmitterLayerPoint
-    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAEmitterLayerLine
-    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAEmitterLayerRectangle
-    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAEmitterLayerCuboid
-    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAEmitterLayerCircle
-    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAEmitterLayerSphere
-    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
+CA_EXTERN CAEmitterLayerEmitterShape const kCAEmitterLayerPoint
+    API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAEmitterLayerEmitterShape const kCAEmitterLayerLine
+    API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAEmitterLayerEmitterShape const kCAEmitterLayerRectangle
+    API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAEmitterLayerEmitterShape const kCAEmitterLayerCuboid
+    API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAEmitterLayerEmitterShape const kCAEmitterLayerCircle
+    API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAEmitterLayerEmitterShape const kCAEmitterLayerSphere
+    API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0));
 
 /** `emitterMode' values. **/
 
-CA_EXTERN NSString * const kCAEmitterLayerPoints
-    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAEmitterLayerOutline
-    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAEmitterLayerSurface
-    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAEmitterLayerVolume
-    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
+CA_EXTERN CAEmitterLayerEmitterMode const kCAEmitterLayerPoints
+    API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAEmitterLayerEmitterMode const kCAEmitterLayerOutline
+    API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAEmitterLayerEmitterMode const kCAEmitterLayerSurface
+    API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAEmitterLayerEmitterMode const kCAEmitterLayerVolume
+    API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0));
 
 /** `renderMode' values. **/
 
-CA_EXTERN NSString * const kCAEmitterLayerUnordered
-    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAEmitterLayerOldestFirst
-    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAEmitterLayerOldestLast
-    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAEmitterLayerBackToFront
-    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAEmitterLayerAdditive
-    CA_AVAILABLE_STARTING (10.6, 5.0, 9.0, 2.0);
+CA_EXTERN CAEmitterLayerRenderMode const kCAEmitterLayerUnordered
+    API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAEmitterLayerRenderMode const kCAEmitterLayerOldestFirst
+    API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAEmitterLayerRenderMode const kCAEmitterLayerOldestLast
+    API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAEmitterLayerRenderMode const kCAEmitterLayerBackToFront
+    API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAEmitterLayerRenderMode const kCAEmitterLayerAdditive
+    API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END

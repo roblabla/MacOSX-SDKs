@@ -1,12 +1,13 @@
 /*
 	NSToolbarItem.h
 	Application Kit
-	Copyright (c) 2000-2017, Apple Inc.
+	Copyright (c) 2000-2018, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSText.h>
 #import <AppKit/NSToolbar.h>
+#import <AppKit/NSMenu.h>
 #import <AppKit/NSUserInterfaceValidation.h>
 #import <Foundation/Foundation.h>
 
@@ -20,19 +21,19 @@ static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityLow 
 static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityHigh  = 1000;
 static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityUser  = 2000;
 
-@interface NSToolbarItem : NSObject <NSCopying, NSValidatedUserInterfaceItem> {
+@interface NSToolbarItem : NSObject <NSCopying, NSMenuItemValidation, NSValidatedUserInterfaceItem> {
 @private
-    __weak NSToolbar *  _toolbar;
-    NSImage *		_image;
-    NSToolbarItemIdentifier _itemIdentifier;
+    __weak NSToolbar *  _toolbar APPKIT_IVAR;
+    NSImage *		_image APPKIT_IVAR;
+    NSToolbarItemIdentifier _itemIdentifier APPKIT_IVAR;
     
-    NSString *		_label;
-    NSTextAlignment	_labelAlignment;
-    NSString *		_paletteLabel;
+    NSString *		_label APPKIT_IVAR;
+    NSTextAlignment	_labelAlignment APPKIT_IVAR;
+    NSString *		_paletteLabel APPKIT_IVAR;
     
-    NSString *		_toolTip;
-    NSMenuItem *	_menuItemRep;
-    NSInteger		_tag;
+    NSString *		_toolTip APPKIT_IVAR;
+    NSMenuItem *	_menuItemRep APPKIT_IVAR;
+    NSInteger		_tag APPKIT_IVAR;
     
     struct __tbiFlags {
 	unsigned int viewRespondsToIsEnabled:1;
@@ -60,17 +61,20 @@ static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityUser
 	unsigned int sizeHasBeenSet:1;
         unsigned int stateWasDisabledBeforeSheet:1;
         unsigned int wantsToBeCentered:1;
+        unsigned int isMeasuring:1;
+        unsigned int ignoresEncodedMinMaxValue:1;
+        unsigned int usesStaticMinMaxValues:1;
 
-        unsigned int RESERVED:7;
-    } _tbiFlags;
-    id                  _tbiReserved;
+        unsigned int RESERVED:4;
+    } _tbiFlags APPKIT_IVAR;
+    id                  _tbiReserved APPKIT_IVAR;
         
-    id			_itemViewer;
-    NSView *		_view;
-    NSSize		_minSize;
-    NSSize		_maxSize;
+    id			_itemViewer APPKIT_IVAR;
+    NSView *		_view APPKIT_IVAR;
+    NSSize		_minSize APPKIT_IVAR;
+    NSSize		_maxSize APPKIT_IVAR;
 #if __LP64__
-    id			_toolbarItemReserved __unused;
+    id			_toolbarItemReserved __unused APPKIT_IVAR;
 #endif
 }
 
@@ -113,10 +117,13 @@ static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityUser
 /* Use setView: if you want your toolbar item to use something other than the standard.  Note that, by default, many of the set/get methods will be implemented by calls forwarded to the view you set, if it responds to it.  Also, your view must be archivable (in order for the toolbar to make copies of your item to hand off to the config palette). */
 @property (nullable, strong) NSView *view;
 
-/* Unless you have already set your own custom view, you should not call this method.  The min size should be small enough to look nice in all display modes. */
+/*
+ Unless you have already set your own custom view, you should not call these methods.
+ The min size should be small enough to look nice in all display modes.
+ If you do not set a min/max size, the view's size properties will be calculated using constraints. Apps linked before 10.14 will use the view's current size.
+ In general, apps should rely on the automatic measurements and constraints to define min/max sizes rather than setting these properties since this will account for localizations.
+ */
 @property NSSize minSize;
-
-/* Unless you have set your own custom view, you should not call this method. */
 @property NSSize maxSize;
 
 /* When a toolbar does not have enough space to fit all its items, it must push some into the overflow menu.  Items with the highest visibility priority level are choosen last for the overflow menu.  The default visibilityPriority value is NSToolbarItemVisibilityPriorityStandard.  To suggest that an item always remain visible, give it a value greater than NSToolbarItemVisibilityPriorityStandard, but less than NSToolbarItemVisibilityPriorityUser.   In 10.7, users can no longer modify the toolbar item visibility priority. */
@@ -142,12 +149,18 @@ static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityUser
 @end
 
 
-@interface NSObject (NSToolbarItemValidation)
+@protocol NSToolbarItemValidation <NSObject>
 
 /* NSToolbarItemValidation extends the standard validation idea by introducing this new method which is sent to validators for each visible standard NSToolbarItem with a valid target/action pair.  Note: This message is sent from NSToolbarItem's validate method, however validate will not send this message for items that have custom views. */
 - (BOOL)validateToolbarItem:(NSToolbarItem *)item;
 
 @end
+
+#if __swift__ < 40200
+@interface NSObject (NSToolbarItemValidation)
+- (BOOL)validateToolbarItem:(NSToolbarItem *)item NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSToolbarItemValidation protocol.");
+@end
+#endif
 
 @protocol NSCloudSharingValidation <NSObject>
 

@@ -9,7 +9,7 @@
 #import <SpriteKit/SKScene.h>
 
 /* SKRenderer is not available for WatchKit apps and the iOS simulator */
-#if SKVIEW_AVAILABLE && !TARGET_IPHONE_SIMULATOR
+#if SKVIEW_AVAILABLE && !TARGET_OS_SIMULATOR
 
 #import <Metal/Metal.h>
 

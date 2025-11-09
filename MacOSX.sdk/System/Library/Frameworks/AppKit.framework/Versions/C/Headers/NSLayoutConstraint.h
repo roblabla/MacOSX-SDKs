@@ -1,7 +1,7 @@
 /*
 	NSLayoutConstraint.h
 	Application Kit
-	Copyright (c) 2009-2017, Apple Inc.
+	Copyright (c) 2009-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -73,25 +73,6 @@ typedef NS_ENUM(NSInteger, NSLayoutConstraintOrientation) {
     NSLayoutConstraintOrientationVertical = 1
 };
 
-#ifndef NSEDGEINSETS_DEFINED
-typedef struct {
-    CGFloat top; 
-    CGFloat left; 
-    CGFloat bottom;
-    CGFloat right;
-} NSEdgeInsets;
-
-NS_INLINE NSEdgeInsets NSEdgeInsetsMake(CGFloat top, CGFloat left, CGFloat bottom, CGFloat right) {
-    NSEdgeInsets e;
-    e.top = top;
-    e.left = left;
-    e.bottom = bottom;
-    e.right = right;
-    return e;
-}
-
-#endif
-
 /* Where AppKit's use of priority levels interacts with the user's use, we must define the priority levels involved.  Note that most of the time there is no interaction.  The use of priority levels is likely to be local to one sub-area of the window that is under the control of one author.  
  */
 typedef float NSLayoutPriority NS_TYPED_EXTENSIBLE_ENUM NS_AVAILABLE_MAC(10_7);
@@ -109,22 +90,22 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSLayoutConstraint : NSObject <NSAnimatablePropertyContainer>
 {
     @private
-    id _container;
-    __weak id _firstItem;
-    __weak id _secondItem;
-    CGFloat _constant;
-    CGFloat _loweredConstant;
-    id _markerAndPositiveExtraVar;
-    id _negativeExtraVar;
+    id _container APPKIT_IVAR;
+    __weak id _firstItem APPKIT_IVAR;
+    __weak id _secondItem APPKIT_IVAR;
+    CGFloat _constant APPKIT_IVAR;
+    CGFloat _loweredConstant APPKIT_IVAR;
+    id _markerAndPositiveExtraVar APPKIT_IVAR;
+    id _negativeExtraVar APPKIT_IVAR;
 #if __OBJC2__
-    uint64_t _layoutConstraintFlags;
-    float _coefficient;
-    NSLayoutPriority _priority;
+    uint64_t _layoutConstraintFlags APPKIT_IVAR;
+    float _coefficient APPKIT_IVAR;
+    NSLayoutPriority _priority APPKIT_IVAR;
 #else
-    float _coefficient;
-    NSLayoutPriority _priority;
-    uint64_t _layoutConstraintFlags;
-    id _flange;
+    float _coefficient APPKIT_IVAR;
+    NSLayoutPriority _priority APPKIT_IVAR;
+    uint64_t _layoutConstraintFlags APPKIT_IVAR;
+    id _flange APPKIT_IVAR;
 #endif
 }
 
@@ -321,7 +302,7 @@ APPKIT_EXTERN NSDictionary<NSString *, id> * _NSDictionaryOfVariableBindings(NSS
  
  Note that not all views have an intrinsicContentSize.  A horizontal slider has an intrinsic height, but no intrinsic width - the slider artwork has no intrinsic best width.  A horizontal NSSlider returns (NSViewNoIntrinsicMetric, <slider height>) for intrinsicContentSize.  An NSBox returns (NSViewNoIntrinsicMetric, NSViewNoIntrinsicMetric).  The _intrinsic_ content size is concerned only with data that is in the view itself, not in other views.
  */
-APPKIT_EXTERN const CGFloat NSViewNoInstrinsicMetric; // Deprecated. Use NSViewNoIntrinsicMetric.
+APPKIT_EXTERN const CGFloat NSViewNoInstrinsicMetric NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSViewNoIntrinsicMetric", 10_7, 10_14);
 APPKIT_EXTERN const CGFloat NSViewNoIntrinsicMetric NS_AVAILABLE_MAC(10_11); // -1
 
 @property (readonly) NSSize intrinsicContentSize NS_AVAILABLE_MAC(10_7);

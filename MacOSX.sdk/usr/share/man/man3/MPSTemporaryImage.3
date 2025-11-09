@@ -1,4 +1,4 @@
-.TH "MPSTemporaryImage" 3 "Sun Jul 2 2017" "Version MetalPerformanceShaders-84.1" "MetalPerformanceShaders.framework" \" -*- nroff -*-
+.TH "MPSTemporaryImage" 3 "Mon Jul 9 2018" "Version MetalPerformanceShaders-119.3" "MetalPerformanceShaders.framework" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -33,6 +33,9 @@ Inherits \fBMPSImage\fP\&.
 .RI "(nonnull instancetype) + \fBtemporaryImageWithCommandBuffer:textureDescriptor:\fP"
 .br
 .ti -1c
+.RI "(nonnull instancetype) + \fBtemporaryImageWithCommandBuffer:textureDescriptor:featureChannels:\fP"
+.br
+.ti -1c
 .RI "(void) + \fBprefetchStorageWithCommandBuffer:imageDescriptorList:\fP"
 .br
 .in -1c
@@ -51,7 +54,7 @@ What is temporary memory? It is memory, plain and simple\&. Analogy: If we use a
 .PP
 Welcome to the 1970's! We have added a heap\&.
 .PP
-Unsurprisingly, MPSTemporaryImages can provide for profound reduction in the the amount of memory used by your application\&. Like malloc, MPS maintains a heap of memory usable in a command buffer\&. Over the lifetime of a command buffer, the same piece of memory may be reused many times\&. This means that each time the same meory is reused, it aliases with previous uses\&. If we aren't careful, we might find that needed data is overwritten by successive allocations\&. However, this is no different than accessing freed memory only to discover it doesn't contain what you thought it did anymore, so you should be able to keep out of trouble by following a few simple rules, like with malloc\&.
+Unsurprisingly, MPSTemporaryImages can provide for profound reduction in the the amount of memory used by your application\&. Like malloc, MPS maintains a heap of memory usable in a command buffer\&. Over the lifetime of a command buffer, the same piece of memory may be reused many times\&. This means that each time the same memory is reused, it aliases with previous uses\&. If we aren't careful, we might find that needed data is overwritten by successive allocations\&. However, this is no different than accessing freed memory only to discover it doesn't contain what you thought it did anymore, so you should be able to keep out of trouble by following a few simple rules, like with malloc\&.
 .PP
 To this end, we added some restrictions to help you out and get a bit more performance\&. Some comments are appended in parentheses below to extend the analogy of command buffer = program:
 .PP
@@ -68,6 +71,8 @@ Since MPSTemporaryImages can only be used with a single MTLCommandBuffer, and ca
 To keep the lifetime of the underlying texture allocation as short as possible, the underlying texture is not allocated until the first time the \fBMPSTemporaryImage\fP is used by a \fBMPSCNNKernel\fP or the \&.texture property is read\&. The readCount property serves to limit the lifetime on the other end\&.
 .PP
 You may use the \fBMPSTemporaryImage\&.texture\fP with \fBMPSUnaryImageKernel\fP -encode\&.\&.\&. methods, iff featureChannels <= 4 and the MTLTexture conforms to requirements of that \fBMPSKernel\fP\&. There is no locking mechanism provided to prevent a MTLTexture returned from the \&.texture property from becoming invalid when the readCount reaches 0\&.
+.PP
+Finally, MPSTemporaryImages are complicated to use with blit encoders\&. Your application should assume that the \fBMPSTemporaryImage\fP is backed by a MTLHeap, and consequently needs a MTLFence to ensure that compute command encoders and other encoders do not trip over one another with heap based memory\&. MPS will almost never use a blit encoder for this reason\&. If you do need one, then you will need to make a new compute encoder to block on whatever previous compute encoder last used the heap block\&. (MPS will not tell you who previously used the heap block\&. That encoder is almost certainly long dead anyway\&.) If concurrent encoders are involved, then a barrier might be needed\&. Within that compute encoder, you will call -updateFence\&. End the compute encoder, make a blit encoder wait for the fence, do the blit, update a new fence, then make a new compute encoder, wait for the second fence, then you can continue\&. Possibly the second do-nothing compute encoder needs to be ended so MPS can be called\&. Frankly, we don't bother with blit encoders and just write a compute operation for copy / clear as needed, or better yet find a way to eliminate the clear / copy pass so we don't have to pay for it\&. Note: the most common use of a blit encoder, -synchronizeResource: can not encounter this problem because MPSTemporaryImages live in GPU private memory and can not be read by the CPU\&.
 .PP
 MPSTemporaryImages can otherwise be used wherever MPSImages are used\&. 
 .SH "Method Documentation"
@@ -89,11 +94,13 @@ Help MPS decide which allocations to make ahead of time  The texture cache that 
 .PP
 It is never necessary to call this method\&. It is purely a performance and memory optimization\&.
 .PP
+This method makes a conservative estimate of memory required and may not fully cover temporary memory needs, resulting in additional allocations later that could encounter pathological behavior, if they are too small\&. If the full extent and timing of the workload is known in advance, it is recommended that \fBMPSHintTemporaryMemoryHighWaterMark()\fP be used instead\&.
+.PP
 \fBParameters:\fP
 .RS 4
 \fIcommandBuffer\fP The command buffer on which the MPSTemporaryImages will be used 
 .br
-\fIdescriptorList\fP A NSArray of MPSImageDescriptors, indicating images that will be created 
+\fIdescriptorList\fP \fBA\fP NSArray of MPSImageDescriptors, indicating images that will be created 
 .RE
 .PP
 
@@ -104,12 +111,12 @@ Initialize a \fBMPSTemporaryImage\fP for use on a MTLCommandBuffer
 .RS 4
 \fIcommandBuffer\fP The MTLCommandBuffer on which the \fBMPSTemporaryImage\fP will be exclusively used
 .br
-\fIimageDescriptor\fP A valid imageDescriptor describing the \fBMPSImage\fP format to create\&.
+\fIimageDescriptor\fP \fBA\fP valid imageDescriptor describing the \fBMPSImage\fP format to create\&.
 .RE
 .PP
 \fBReturns:\fP
 .RS 4
-A valid \fBMPSTemporaryImage\fP\&. The object will be released when the command buffer is committed\&. The underlying texture will become invalid before this time due to the action of the readCount property\&. 
+\fBA\fP valid \fBMPSTemporaryImage\fP\&. The object will be released when the command buffer is committed\&. The underlying texture will become invalid before this time due to the action of the readCount property\&. 
 .RE
 .PP
 
@@ -129,12 +136,38 @@ depth must be 1
 .RS 4
 \fIcommandBuffer\fP The command buffer on which the \fBMPSTemporaryImage\fP may be used 
 .br
-\fItextureDescriptor\fP A texture descriptor describing the \fBMPSTemporaryImage\fP texture
+\fItextureDescriptor\fP \fBA\fP texture descriptor describing the \fBMPSTemporaryImage\fP texture
 .RE
 .PP
 \fBReturns:\fP
 .RS 4
-A valid \fBMPSTemporaryImage\fP\&. The object will be released when the command buffer is committed\&. The underlying texture will become invalid before this time due to the action of the readCount property\&. 
+\fBA\fP valid \fBMPSTemporaryImage\fP\&. The object will be released when the command buffer is committed\&. The underlying texture will become invalid before this time due to the action of the readCount property\&. 
+.RE
+.PP
+
+.SS "+ (nonnull instancetype) temporaryImageWithCommandBuffer: (nonnull id< MTLCommandBuffer >) commandBuffer(const MTLTextureDescriptor *__nonnull) textureDescriptor(NSUInteger) featureChannels"
+Low level interface for creating a \fBMPSTemporaryImage\fP using a MTLTextureDescriptor  This function provides access to MTLPixelFormats not typically covered by -initForCommandBuffer:imageDescriptor: The number of images will be inferred from number of slices in the descriptor\&.arrayLength and the number of feature channels\&.
+.PP
+The following restrictions apply: 
+.PP
+.nf
+MTLTextureType must be MTLTextureType2D or MTLTextureType2DArray
+MTLTextureUsage must contain at least one of MTLTextureUsageShaderRead, MTLTextureUsageShaderWrite
+MTLStorageMode must be MTLStorageModePrivate
+
+.fi
+.PP
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcommandBuffer\fP The command buffer on which the \fBMPSTemporaryImage\fP may be used 
+.br
+\fItextureDescriptor\fP \fBA\fP texture descriptor describing the \fBMPSTemporaryImage\fP texture
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fBA\fP valid \fBMPSTemporaryImage\fP\&. The object will be released when the command buffer is committed\&. The underlying texture will become invalid before this time due to the action of the readCount property\&. 
 .RE
 .PP
 

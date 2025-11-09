@@ -45,6 +45,8 @@ enum {
 	kVDADecoderFormatNotSupportedErr	= -12471,
 	kVDADecoderConfigurationError		= -12472,
 	kVDADecoderDecoderFailedErr			= -12473,
+	kVDADecoderParamErr			= -12474,
+	kVDADecoderAllocationFailedErr	= -12475,
 };
 
 /*!

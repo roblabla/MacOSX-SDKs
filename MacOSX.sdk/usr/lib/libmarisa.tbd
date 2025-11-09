@@ -1,11 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 805453EE-B829-3DA5-8DF3-5132D03D5B74', 'x86_64: D6D2D55D-1D2E-3442-B152-B18803C0ABB4' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: AFC43F0E-4FDF-31DF-A854-935F411635A1' ]
 platform:        macosx
 install-name:    /usr/lib/libmarisa.dylib
+current-version: 9.15.2
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ __ZN6marisa4Trie3mapEPKvm, __ZN6marisa4Trie4loadEPKc, __ZN6marisa4Trie4mmapEPKc, 
                        __ZN6marisa4Trie4readEi, __ZN6marisa4Trie4swapERS0_, __ZN6marisa4Trie5buildERNS_6KeysetEi, 
                        __ZN6marisa4Trie5clearEv, __ZN6marisa4TrieC1Ev, __ZN6marisa4TrieC2Ev, 

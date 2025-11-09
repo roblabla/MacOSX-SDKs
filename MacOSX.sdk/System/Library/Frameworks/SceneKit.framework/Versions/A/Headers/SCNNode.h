@@ -1,13 +1,14 @@
 //
 //  SCNNode.h
+//  SceneKit
 //
-//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
+//  Copyright © 2012-2018 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SCNAnimation.h>
 #import <SceneKit/SCNBoundingVolume.h>
 #import <SceneKit/SCNAction.h>
-#include <AvailabilityMacros.h>
+#import <AvailabilityMacros.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,17 +30,16 @@ NS_ASSUME_NONNULL_BEGIN
     @discussion These keys are used for the 'semantic' argument of -[SCNProgram setSemantic:forSymbol:options:]
                 Transforms are SCNMatrix4 wrapped in NSValues.
  */
-FOUNDATION_EXTERN NSString * const SCNModelTransform;
-FOUNDATION_EXTERN NSString * const SCNViewTransform;
-FOUNDATION_EXTERN NSString * const SCNProjectionTransform;
-FOUNDATION_EXTERN NSString * const SCNNormalTransform;
-FOUNDATION_EXTERN NSString * const SCNModelViewTransform;
-FOUNDATION_EXTERN NSString * const SCNModelViewProjectionTransform;
+SCN_EXPORT NSString * const SCNModelTransform;
+SCN_EXPORT NSString * const SCNViewTransform;
+SCN_EXPORT NSString * const SCNProjectionTransform;
+SCN_EXPORT NSString * const SCNNormalTransform;
+SCN_EXPORT NSString * const SCNModelViewTransform;
+SCN_EXPORT NSString * const SCNModelViewProjectionTransform;
 
 /*! @enum SCNMovabilityHint
  @abstract The available modes of movability.
- @discussion Movable nodes are not captured when computing light probes. Fixed nodes are not lit by probes.
- Also Movable nodes are not blurred by the motion blur.
+ @discussion Movable nodes are not captured when computing light probes.
  */
 typedef NS_ENUM(NSInteger, SCNMovabilityHint) {
     SCNMovabilityHintFixed,
@@ -61,6 +61,7 @@ typedef NS_ENUM(NSInteger, SCNNodeFocusBehavior) {
  @discussion It encapsulates the position, rotations, and other transforms of a node, which define a coordinate system.
 		     The coordinate systems of all the sub-nodes are relative to the one of their parent node.
  */
+SCN_EXPORT
 @interface SCNNode : NSObject <NSCopying, NSSecureCoding, SCNAnimatable, SCNActionable, SCNBoundingVolume>
 
 #pragma mark - Creating a Node
@@ -151,11 +152,24 @@ typedef NS_ENUM(NSInteger, SCNNodeFocusBehavior) {
  */
 @property(nonatomic) SCNMatrix4 transform;
 
+/*!
+ @property worldTransform
+ @abstract Determines the receiver's transform in world space (relative to the scene's root node). Animatable.
+ */
+@property(nonatomic, readonly) SCNMatrix4 worldTransform;
+- (void)setWorldTransform:(SCNMatrix4)worldTransform API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
 /*! 
  @property position
  @abstract Determines the receiver's position. Animatable.
  */
 @property(nonatomic) SCNVector3 position;
+
+/*!
+ @property worldPosition
+ @abstract Determines the receiver's position in world space (relative to the scene's root node).
+ */
+@property(nonatomic) SCNVector3 worldPosition API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*! 
  @property rotation
@@ -172,7 +186,7 @@ typedef NS_ENUM(NSInteger, SCNNodeFocusBehavior) {
 
 /*!
  @property worldOrientation
- @abstract Determines the receiver's orientation relative to the scene as a unit quaternion. Animatable.
+ @abstract Determines the receiver's orientation in world space (relative to the scene's root node). Animatable.
  */
 @property(nonatomic) SCNQuaternion worldOrientation API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
@@ -203,21 +217,6 @@ typedef NS_ENUM(NSInteger, SCNNodeFocusBehavior) {
  */
 @property(nonatomic) SCNMatrix4 pivot;
 
-/*! 
- @property worldPosition
- @abstract Returns the receiver's world position.
- @discussion A world position is the position relative to the scene.
- */
-@property(nonatomic) SCNVector3 worldPosition API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
-
-/*!
- @property worldTransform
- @abstract Returns the receiver's world transform.
- @discussion A world transform is the transform relative to the scene. 
- */
-@property(nonatomic, readonly) SCNMatrix4 worldTransform;
-- (void)setWorldTransform:(SCNMatrix4)worldTransform API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
-
 #pragma mark - Modifying the Node′s Visibility
 
 /*! 
@@ -247,9 +246,9 @@ typedef NS_ENUM(NSInteger, SCNNodeFocusBehavior) {
 
 /*!
  @property movabilityHint
- @abstract Give hints oregarding the movability of the receiver. See enum above for details. Defaults to SCNMovabilityHintFixed.
+ @abstract Communicates to SceneKit’s rendering system about how you want to move content in your scene; it does not affect your ability to change the node’s position or add animations or physics to the node. Defaults to SCNMovabilityHintFixed.
  */
-@property (nonatomic) SCNMovabilityHint movabilityHint API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
+@property(nonatomic) SCNMovabilityHint movabilityHint API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
 
 
 #pragma mark - Managing the Node Hierarchy
@@ -429,7 +428,7 @@ typedef NS_ENUM(NSInteger, SCNNodeFocusBehavior) {
  @abstract An array of Core Image filters that are applied to the rendering of the receiver and its child nodes. Animatable.
  @discussion Defaults to nil. Filter properties should be modified by calling setValue:forKeyPath: on each node that the filter is attached to. If the inputs of the filter are modified directly after the filter is attached to a node, the behavior is undefined.
  */
-@property(nonatomic, copy, nullable) NSArray<CIFilter *> *filters API_AVAILABLE(macos(10.9)) __WATCHOS_PROHIBITED;
+@property(nonatomic, copy, nullable) NSArray<CIFilter *> *filters API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(watchos);
 
 
 #pragma mark - Accessing the Presentation Node
@@ -497,50 +496,50 @@ typedef NS_ENUM(NSInteger, SCNNodeFocusBehavior) {
  @property focusBehavior
  @abstract Controls the behavior of the receiver regarding the UIFocus system. Defaults to SCNNodeFocusBehaviorNone.
  */
-@property (nonatomic) SCNNodeFocusBehavior focusBehavior API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property(nonatomic) SCNNodeFocusBehavior focusBehavior API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 @end
 
 @interface SCNNode (Transforms)
 
 /*!
- @property up
- @abstract The local unit Y axis.
+ @property localUp
+ @abstract The local unit Y axis (0, 1, 0).
  */
-@property (class, readonly, nonatomic) SCNVector3 localUp API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property(class, readonly, nonatomic) SCNVector3 localUp API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
- @property right
- @abstract the local unit X axis.
+ @property localRight
+ @abstract The local unit X axis (1, 0, 0).
  */
-@property (class, readonly, nonatomic) SCNVector3 localRight API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property(class, readonly, nonatomic) SCNVector3 localRight API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
- @property front
- @abstract the local unit -Z axis.
+ @property localFront
+ @abstract The local unit -Z axis (0, 0, -1).
  */
-@property (class, readonly, nonatomic) SCNVector3 localFront API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property(class, readonly, nonatomic) SCNVector3 localFront API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
- @property up
- @abstract The local unit Y axis in the world space.
+ @property worldUp
+ @abstract The local unit Y axis (0, 1, 0) in world space.
  */
-@property (readonly, nonatomic) SCNVector3 worldUp API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property(readonly, nonatomic) SCNVector3 worldUp API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
- @property right
- @abstract the local unit X axis in the world space.
+ @property worldRight
+ @abstract The local unit X axis (1, 0, 0) in world space.
  */
-@property (readonly, nonatomic) SCNVector3 worldRight API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property(readonly, nonatomic) SCNVector3 worldRight API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
- @property front
- @abstract the local unit -Z axis in the world space.
+ @property worldFront
+ @abstract The local unit -Z axis (0, 0, -1) in world space.
  */
-@property (readonly, nonatomic) SCNVector3 worldFront API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property(readonly, nonatomic) SCNVector3 worldFront API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /**
- Convenience for calling lookAt:up:localFront: with worldUp set to [self worldUp]
+ Convenience for calling lookAt:up:localFront: with worldUp set to `self.worldUp`
  and localFront [SCNNode localFront].
  @param worldTarget target position in world space.
  */
@@ -650,17 +649,17 @@ typedef NS_ENUM(NSInteger, SCNNodeFocusBehavior) {
 @property(nonatomic) simd_float4x4 simdPivot API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
- @abstract A world position is the position relative to the scene.
+ @abstract Determines the receiver's position in world space (relative to the scene's root node).
  */
 @property(nonatomic) simd_float3 simdWorldPosition API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
- @abstract Determines the receiver's orientation relative to the scene as a unit quaternion. Animatable.
+ @abstract Determines the receiver's orientation in world space (relative to the scene's root node). Animatable.
  */
 @property(nonatomic) simd_quatf simdWorldOrientation API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
- @abstract A world transform is the transform relative to the scene.
+ @abstract Determines the receiver's transform in world space (relative to the scene's root node). Animatable.
  */
 @property(nonatomic) simd_float4x4 simdWorldTransform API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
@@ -673,16 +672,16 @@ typedef NS_ENUM(NSInteger, SCNNodeFocusBehavior) {
 - (simd_float4x4)simdConvertTransform:(simd_float4x4)transform toNode:(nullable SCNNode *)node API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 - (simd_float4x4)simdConvertTransform:(simd_float4x4)transform fromNode:(nullable SCNNode *)node API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
-@property (class, readonly, nonatomic) simd_float3 simdLocalUp API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
-@property (class, readonly, nonatomic) simd_float3 simdLocalRight API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
-@property (class, readonly, nonatomic) simd_float3 simdLocalFront API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property(class, readonly, nonatomic) simd_float3 simdLocalUp API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property(class, readonly, nonatomic) simd_float3 simdLocalRight API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property(class, readonly, nonatomic) simd_float3 simdLocalFront API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
-@property (readonly, nonatomic) simd_float3 simdWorldUp API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
-@property (readonly, nonatomic) simd_float3 simdWorldRight API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
-@property (readonly, nonatomic) simd_float3 simdWorldFront API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property(readonly, nonatomic) simd_float3 simdWorldUp API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property(readonly, nonatomic) simd_float3 simdWorldRight API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property(readonly, nonatomic) simd_float3 simdWorldFront API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
-- (void)simdLookAt:(vector_float3)worldTarget API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
-- (void)simdLookAt:(vector_float3)worldTarget up:(vector_float3)worldUp localFront:(simd_float3)localFront API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+- (void)simdLookAt:(simd_float3)worldTarget API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+- (void)simdLookAt:(simd_float3)worldTarget up:(simd_float3)worldUp localFront:(simd_float3)localFront API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 - (void)simdLocalTranslateBy:(simd_float3)translation API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 - (void)simdLocalRotateBy:(simd_quatf)rotation API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));

@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 0B11A3E1-0557-3F0E-9AA7-FA9B00291DDA', 'x86_64: 8397B5F1-6EC9-3BB1-BCA5-2436F611DB0E' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 45A2C724-F3D1-316A-9A41-CAB8E2A390EC' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreVMClient.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ __cvmsIsAssert, __cvmsIsMonolithic, _cvms_connection_control, 
                        _cvms_connection_create, _cvms_connection_has_service, _cvms_connection_release, 
                        _cvms_connection_retain, _cvms_content_get_function_pointer, 
@@ -13,8 +13,8 @@ exports:
                        _cvms_element_build_and_get, _cvms_element_build_from_source, 
                        _cvms_element_create_with_content, _cvms_element_find_with_key, 
                        _cvms_element_get_content, _cvms_element_get_key, _cvms_element_release, 
-                       _cvms_element_release_async, _cvms_element_remove_from_cache, 
-                       _cvms_element_retain, _cvms_element_write_content_to_file, 
+                       _cvms_element_release_async, _cvms_element_release_dylib, 
+                       _cvms_element_remove_from_cache, _cvms_element_retain, _cvms_element_write_content_to_file, 
                        _cvms_error_string, _cvms_queue_element_build, _cvms_queue_element_compile, 
                        _cvms_queue_element_create_empty, _cvms_queue_element_release, 
                        _cvms_queue_element_retain, _cvms_queue_element_set_status, 

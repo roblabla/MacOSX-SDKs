@@ -1,6 +1,6 @@
 /* CoreAnimation - CAMediaTimingFunction.h
 
-   Copyright (c) 2006-2017, Apple Inc.
+   Copyright (c) 2006-2018, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CAMediaTiming.h>
@@ -10,13 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NSString * CAMediaTimingFunctionName NS_STRING_ENUM;
+
 /* Represents one segment of a function describing a timing curve. The
  * function maps an input time normalized to the range [0,1] to an
  * output time also in the range [0,1]. E.g. these functions are used
  * to define the pacing of an animation over its duration (or over the
  * duration of one keyframe). */
 
-CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
+API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface CAMediaTimingFunction : NSObject <NSSecureCoding>
 {
 @private
@@ -28,7 +30,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * `easeInEaseOut' and `default' (the curve used by implicit animations
  * created by Core Animation). */
 
-+ (instancetype)functionWithName:(NSString *)name;
++ (instancetype)functionWithName:(CAMediaTimingFunctionName)name;
 
 /* Creates a timing function modelled on a cubic Bezier curve. The end
  * points of the curve are at (0,0) and (1,1), the two points 'c1' and
@@ -47,15 +49,15 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 
 /** Timing function names. **/
 
-CA_EXTERN NSString * const kCAMediaTimingFunctionLinear
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAMediaTimingFunctionEaseIn
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAMediaTimingFunctionEaseOut
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAMediaTimingFunctionEaseInEaseOut
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAMediaTimingFunctionDefault
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
+CA_EXTERN CAMediaTimingFunctionName const kCAMediaTimingFunctionLinear
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAMediaTimingFunctionName const kCAMediaTimingFunctionEaseIn
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAMediaTimingFunctionName const kCAMediaTimingFunctionEaseOut
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAMediaTimingFunctionName const kCAMediaTimingFunctionEaseInEaseOut
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAMediaTimingFunctionName const kCAMediaTimingFunctionDefault
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END

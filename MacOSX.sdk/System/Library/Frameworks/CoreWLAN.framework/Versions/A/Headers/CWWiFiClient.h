@@ -112,39 +112,6 @@ NS_ASSUME_NONNULL_BEGIN
  * The name of the Wi-Fi interface.
  *
  * @abstract
- * Invoked when any state of WiFi virtual interface changes.
- *
- * @discussion
- * Use -[CWWiFiClient startMonitoringEventWithType:error:] with the CWEventTypeVirtualInterfaceStateChanged event type
- * to register for virtual interface state changed notifications.
- */
-- (void)virtualInterfaceStateChangedForWiFiInterfaceWithName:(NSString *)interfaceName;
-
-/*!
- * @method
- *
- * @param interfaceName
- * The name of the Wi-Fi interface.
- *
- * @param rangingData
- * Dictionary containing distance measurement data.
- *
- * @abstract
- * Invoked when WiFi ranging measurement completed.
- *
- * @discussion
- * Use -[CWWiFiClient startMonitoringEventWithType:error:] with the CWEventTypeRangingReportEvent event type
- * to register for ranging event notifications.
- */
-- (void)rangingReportEventForWiFiInterfaceWithName:(NSString *)interfaceName data:(NSArray *)rangingData error:(NSError *)err;
-
-/*!
- * @method
- *
- * @param interfaceName
- * The name of the Wi-Fi interface.
- *
- * @abstract
  * Invoked when the Wi-Fi link state changes.
  *
  * @discussion
@@ -235,7 +202,9 @@ NS_CLASS_AVAILABLE_MAC(10_10)
         NSXPCConnection     *_xpcConnection;
         
         NSMutableSet        *_eventList;
-        
+    
+        dispatch_queue_t    _eventQueue;
+
         NSMutableDictionary *_interfaceMap;
         
         dispatch_queue_t    _mutex;
@@ -272,7 +241,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  * @abstract
  * Initializes a CWWiFiClient object.
  */
-- (nullable CWWiFiClient *)init NS_AVAILABLE_MAC(10_10);
+- (instancetype)init NS_AVAILABLE_MAC(10_10);
 
 /*! @functiongroup Getting a Wi-Fi Interface */
 

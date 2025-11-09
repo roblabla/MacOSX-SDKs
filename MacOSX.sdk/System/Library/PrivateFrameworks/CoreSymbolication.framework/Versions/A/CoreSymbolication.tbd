@@ -1,28 +1,26 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 966F982C-4954-3970-965A-715F9AD7AD99', 'x86_64: 36C1454F-8AF1-3310-94AF-04D86225FCE4' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: F985088F-5323-3D84-80FE-3A3135C4A320' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CoreSymbolication.framework/Versions/A/CoreSymbolication
-current-version: 63075
+current-version: 64460.6
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _CSAddressSetAdd, _CSAddressSetCreate, _CSArchitectureGetArchitectureForName, 
                        _CSArchitectureGetCurrent, _CSArchitectureGetFamily, _CSArchitectureGetFamilyName, 
                        _CSArchitectureIs32Bit, _CSArchitectureIs64Bit, _CSArchitectureIsArm, 
                        _CSArchitectureIsArm64, _CSArchitectureIsBigEndian, _CSArchitectureIsI386, 
                        _CSArchitectureIsLittleEndian, _CSArchitectureIsX86_64, _CSArchitectureMatchesArchitecture, 
-                       _CSCopyDescription, _CSCopyDescriptionWithIndent, _CSEqual, 
-                       _CSExceptionSafeThreadRunBlock, _CSGetRetainCount, _CSIsNull, 
-                       _CSMMapArchiveCacheCopyMMapArchive, _CSMMapArchiveCacheReleaseMMapArchive, 
-                       _CSMMapArchiveCacheSetShouldStoreToDaemon, _CSRangeContainsRange, 
-                       _CSRangeIntersectsRange, _CSRegionCopyDescriptionWithIndent, 
+                       _CSCopyDescription, _CSCopyDescriptionWithIndent, _CSDemangleSymbolName, 
+                       _CSEqual, _CSExceptionSafeThreadRunBlock, _CSGetForceSafeMachVMReads, 
+                       _CSGetRetainCount, _CSIsNull, _CSMMapArchiveCacheCopyMMapArchive, 
+                       _CSMMapArchiveCacheReleaseMMapArchive, _CSMMapArchiveCacheSetShouldStoreToDaemon, 
+                       _CSRangeContainsRange, _CSRangeIntersectsRange, _CSRegionCopyDescriptionWithIndent, 
                        _CSRegionForeachSourceInfo, _CSRegionForeachSymbol, _CSRegionGetName, 
                        _CSRegionGetRange, _CSRegionGetSymbolOwner, _CSRegionGetSymbolicator, 
                        _CSRelease, _CSRetain, _CSSectionGetSegment, _CSSegmentForeachSection, 
-                       _CSShow, _CSSignatureAddSegment, _CSSignatureAllocateSegments, 
-                       _CSSignatureCopy, _CSSignatureEncodeSymbolOwner, _CSSignatureEncodeSymbolicator, 
-                       _CSSignatureFreeSegments, _CSSourceInfoCopyDescriptionWithIndent, 
+                       _CSSetForceSafeMachVMReads, _CSShow, _CSSourceInfoCopyDescriptionWithIndent, 
                        _CSSourceInfoGetColumn, _CSSourceInfoGetFilename, _CSSourceInfoGetLineNumber, 
                        _CSSourceInfoGetPath, _CSSourceInfoGetRange, _CSSourceInfoGetRegion, 
                        _CSSourceInfoGetSymbol, _CSSourceInfoGetSymbolOwner, _CSSourceInfoGetSymbolicator, 
@@ -75,9 +73,10 @@ exports:
                        _CSSymbolOwnerRemoveInContext, _CSSymbolOwnerSegmentsMatch, 
                        _CSSymbolOwnerSetLoadTimestamp, _CSSymbolOwnerSetPath, _CSSymbolOwnerSetPathForSymbolication, 
                        _CSSymbolOwnerSetRelocationCount, _CSSymbolOwnerSetTransientUserData, 
-                       _CSSymbolOwnerSetUnloadTimestamp, _CSSymbolicatorAddSymbolOwner, 
-                       _CSSymbolicatorApplyMutableContextBlock, _CSSymbolicatorCopyDescriptionWithIndent, 
-                       _CSSymbolicatorCreateForTaskSharedCache, _CSSymbolicatorCreateForTaskSharedCacheWithFlagsAndNotification, 
+                       _CSSymbolOwnerSetUnloadTimestamp, _CSSymbolOwnerUsesCPlusPlus, 
+                       _CSSymbolicatorAddSymbolOwner, _CSSymbolicatorApplyMutableContextBlock, 
+                       _CSSymbolicatorCopyDescriptionWithIndent, _CSSymbolicatorCreateForTaskSharedCache, 
+                       _CSSymbolicatorCreateForTaskSharedCacheWithFlagsAndNotification, 
                        _CSSymbolicatorCreateSignature, _CSSymbolicatorCreateSignatureElidingSomeSymbolOwners, 
                        _CSSymbolicatorCreateWithBinaryImageList, _CSSymbolicatorCreateWithBinaryImageListCountPidFlagsAndNotification, 
                        _CSSymbolicatorCreateWithMachKernel, _CSSymbolicatorCreateWithMachKernelFlagsAndNotification, 
@@ -107,14 +106,13 @@ exports:
                        _CSSymbolicatorGetFlagsForNoSymbolOrSourceInfoData, _CSSymbolicatorGetPid, 
                        _CSSymbolicatorGetRegionCountAtTime, _CSSymbolicatorGetRegionWithAddressAtTime, 
                        _CSSymbolicatorGetRegionWithNameAtTime, _CSSymbolicatorGetSectionWithAddressAtTime, 
-                       _CSSymbolicatorGetSegmentWithAddressAtTime, _CSSymbolicatorGetSharedCacheSlide, 
-                       _CSSymbolicatorGetSharedCacheUUID, _CSSymbolicatorGetSourceInfoCountAtTime, 
-                       _CSSymbolicatorGetSourceInfoWithAddressAtTime, _CSSymbolicatorGetSymbolCountAtTime, 
-                       _CSSymbolicatorGetSymbolOwner, _CSSymbolicatorGetSymbolOwnerCountAtTime, 
-                       _CSSymbolicatorGetSymbolOwnerWithAddressAtTime, _CSSymbolicatorGetSymbolOwnerWithCFUUIDBytesAtTime, 
-                       _CSSymbolicatorGetSymbolOwnerWithNameAtTime, _CSSymbolicatorGetSymbolOwnerWithUUIDAtTime, 
-                       _CSSymbolicatorGetSymbolWithAddressAtTime, _CSSymbolicatorGetSymbolWithMangledNameAtTime, 
-                       _CSSymbolicatorGetSymbolWithMangledNameFromSymbolOwnerWithNameAtTime, 
+                       _CSSymbolicatorGetSegmentWithAddressAtTime, _CSSymbolicatorGetSharedCacheUUID, 
+                       _CSSymbolicatorGetSourceInfoCountAtTime, _CSSymbolicatorGetSourceInfoWithAddressAtTime, 
+                       _CSSymbolicatorGetSymbolCountAtTime, _CSSymbolicatorGetSymbolOwner, 
+                       _CSSymbolicatorGetSymbolOwnerCountAtTime, _CSSymbolicatorGetSymbolOwnerWithAddressAtTime, 
+                       _CSSymbolicatorGetSymbolOwnerWithCFUUIDBytesAtTime, _CSSymbolicatorGetSymbolOwnerWithNameAtTime, 
+                       _CSSymbolicatorGetSymbolOwnerWithUUIDAtTime, _CSSymbolicatorGetSymbolWithAddressAtTime, 
+                       _CSSymbolicatorGetSymbolWithMangledNameAtTime, _CSSymbolicatorGetSymbolWithMangledNameFromSymbolOwnerWithNameAtTime, 
                        _CSSymbolicatorGetSymbolWithNameAtTime, _CSSymbolicatorGetSymbolWithNameFromSymbolOwnerWithNameAtTime, 
                        _CSSymbolicatorGetTask, _CSSymbolicatorIsKernelSymbolicator, 
                        _CSSymbolicatorIsTaskTranslated, _CSSymbolicatorIsTaskValid, 
@@ -131,6 +129,7 @@ exports:
                        _kCSTypeDictionaryWeakKeyCallBacks, _kCSTypeDictionaryWeakValueCallBacks, 
                        _kCSTypeSetCallBacks, _kCSTypeSetWeakCallBacks, _map_new_node, 
                        _mapped_memory_read, _mapped_memory_read_pointer, _next_node, 
+                       _release_mapped_memory_cache, _retain_mapped_memory_cache, 
                        _sample_remote_thread, _sample_remote_thread_with_dispatch_queue, 
                        _sampling_context_clear_cache, _task_is_64bit, _thread_name_for_thread_port ]
 ...

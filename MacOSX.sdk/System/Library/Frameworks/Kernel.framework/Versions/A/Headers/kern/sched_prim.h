@@ -80,6 +80,7 @@ __BEGIN_DECLS
 
 
 
+
 /* Context switch */
 extern wait_result_t	thread_block(
 							thread_continue_t	continuation);

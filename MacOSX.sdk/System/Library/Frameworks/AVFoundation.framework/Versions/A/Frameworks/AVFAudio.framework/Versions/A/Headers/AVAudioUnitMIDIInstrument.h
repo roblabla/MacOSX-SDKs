@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
     This base class represents audio units of type kAudioUnitType_MusicDevice or kAudioUnitType_RemoteInstrument. This can be used in a chain
     that processes realtime input (live) and has general concept of music events i.e. notes.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0) __WATCHOS_PROHIBITED
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAudioUnitMIDIInstrument : AVAudioUnit AVAudioUnitMIDIInstrument_MixingConformance
 
 #if AVAUDIOUNIT_HAVE_AUDIOUNIT

@@ -24,7 +24,15 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2))
                          displayName:(nullable NSString *)displayName
                                image:(nullable INImage *)image
                    contactIdentifier:(nullable NSString *)contactIdentifier
-                    customIdentifier:(nullable NSString *)customIdentifier NS_DESIGNATED_INITIALIZER;
+                    customIdentifier:(nullable NSString *)customIdentifier;
+
+- (instancetype)initWithPersonHandle:(INPersonHandle *)personHandle
+                      nameComponents:(nullable NSPersonNameComponents *)nameComponents
+                         displayName:(nullable NSString *)displayName
+                               image:(nullable INImage *)image
+                   contactIdentifier:(nullable NSString *)contactIdentifier
+                    customIdentifier:(nullable NSString *)customIdentifier
+                                isMe:(BOOL)isMe NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(12.0), watchos(5.0), macosx(10.14));
 
 // The identity of the person in the application
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INPersonHandle *personHandle;
@@ -51,7 +59,8 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2))
 @end
 
 typedef NS_ENUM(NSInteger, INPersonSuggestionType) {
-    INPersonSuggestionTypeSocialProfile = 1,
+    INPersonSuggestionTypeNone API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)) = 0,
+    INPersonSuggestionTypeSocialProfile,
     INPersonSuggestionTypeInstantMessageAddress
 };
 

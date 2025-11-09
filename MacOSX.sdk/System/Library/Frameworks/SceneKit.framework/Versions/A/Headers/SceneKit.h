@@ -1,7 +1,8 @@
 //
 //  SceneKit.h
+//  SceneKit
 //
-//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
+//  Copyright © 2012-2018 Apple Inc. All rights reserved.
 //
 
 /*! @framework SceneKit

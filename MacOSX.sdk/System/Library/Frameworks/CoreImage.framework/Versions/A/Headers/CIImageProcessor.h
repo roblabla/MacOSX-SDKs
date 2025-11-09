@@ -7,7 +7,7 @@
 
 #import <CoreImage/CIImage.h>
 
-#if !TARGET_OS_IPHONE
+#if TARGET_OS_OSX
 #import <IOSurface/IOSurface.h>
 #elif !TARGET_OS_SIMULATOR
 #import <IOSurface/IOSurfaceRef.h>
@@ -62,6 +62,7 @@ NS_CLASS_AVAILABLE(10_12, 10_0)
 
 // Override this class method if you want your any of the inputs to be in a specific supported CIPixelFormat.
 // The format must be one of kCIFormatBGRA8, kCIFormatRGBAh, kCIFormatRGBAf or kCIFormatR8.
+// On iOS 12 and macOS 10.14, the formats kCIFormatRh and kCIFormatRf are also supported.
 // If the requested inputFormat is 0, then the input will be a supported format that best
 // matches the rendering context's workingFormat.
 //
@@ -74,6 +75,7 @@ NS_CLASS_AVAILABLE(10_12, 10_0)
 
 // Override this class property if you want your processor's output to be in a specific supported CIPixelFormat.
 // The format must be one of kCIFormatBGRA8, kCIFormatRGBAh, kCIFormatRGBAf or kCIFormatR8.
+// On iOS 12 and macOS 10.14, the formats kCIFormatRh and kCIFormatRf are also supported.
 // If the outputFormat is 0, then the output will be a supported format that best
 // matches the rendering context's workingFormat.
 //

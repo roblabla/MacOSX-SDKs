@@ -22,7 +22,7 @@ typedef NS_ENUM(NSUInteger, SKTileDefinitionRotation) {
 /**
  A tile definition contains the information needed to represent a single type of tile within a tile map.
  */
-SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKTileDefinition : NSObject <NSCopying, NSCoding>
+SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKTileDefinition : NSObject <NSCopying, NSSecureCoding>
 
 /**
  Create a tile definition with an SKTexture, and set its size to the SKTexture's width/height.
@@ -153,3 +153,5 @@ SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKTileDefinition : NSObject <NSCo
 @end
 
 NS_ASSUME_NONNULL_END
+
+

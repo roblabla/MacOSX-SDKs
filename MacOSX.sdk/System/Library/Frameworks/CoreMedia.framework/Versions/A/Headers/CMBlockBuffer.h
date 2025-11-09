@@ -3,7 +3,7 @@
  
 	Framework:  CoreMedia
 
-    Copyright 2005-2015 Apple Inc. All rights reserved.
+	Copyright © 2005-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -124,8 +124,8 @@ typedef struct CM_BRIDGED_TYPE(id) OpaqueCMBlockBuffer *CMBlockBufferRef;
 */
 typedef  struct {
 	uint32_t	version;
-	void* CM_NULLABLE (* CM_NULLABLE AllocateBlock)(void* CM_NULLABLE refCon, size_t sizeInBytes);
-	void (* CM_NULLABLE FreeBlock)(void* CM_NULLABLE refCon, void* CM_NONNULL doomedMemoryBlock, size_t sizeInBytes);
+	void* CM_NULLABLE (* CM_NULLABLE AllocateBlock)(void* CM_NULLABLE refcon, size_t sizeInBytes);
+	void (* CM_NULLABLE FreeBlock)(void* CM_NULLABLE refcon, void* CM_NONNULL doomedMemoryBlock, size_t sizeInBytes);
 	void* CM_NULLABLE refCon;
 } CMBlockBufferCustomBlockSource;
 
@@ -158,7 +158,7 @@ enum
 	@param	subBlockCapacity	Number of subBlocks the newBlockBuffer shall accommodate before expansion occurs.
 								A value of zero means "do the reasonable default"
 	@param	flags				Feature and control flags
-	@param	newBBufOut			Receives newly-created empty CMBlockBuffer object with retain count of 1. Must not be  NULL.
+	@param	blockBufferOut		Receives newly-created empty CMBlockBuffer object with retain count of 1. Must not be  NULL.
 	
 	@result	Returns kCMBlockBufferNoErr if successful.
 */
@@ -166,7 +166,7 @@ CM_EXPORT OSStatus	CMBlockBufferCreateEmpty(
 		CFAllocatorRef CM_NULLABLE structureAllocator,
 		uint32_t subBlockCapacity, 
 		CMBlockBufferFlags flags, 
-		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL newBBufOut)
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -198,7 +198,7 @@ CM_EXPORT OSStatus	CMBlockBufferCreateEmpty(
 	@param	offsetToData		Offset within the memoryBlock at which the CMBlockBuffer should refer to data.
 	@param	dataLength			Number of relevant data bytes, starting at offsetToData, within the memory block.
 	@param	flags				Feature and control flags
-	@param	newBBufOut			Receives newly-created CMBlockBuffer object with a retain count of 1. Must not be  NULL.
+	@param	blockBufferOut		Receives newly-created CMBlockBuffer object with a retain count of 1. Must not be  NULL.
 
 	@result	Returns kCMBlockBufferNoErr if successful.
 */
@@ -211,7 +211,7 @@ CM_EXPORT OSStatus	CMBlockBufferCreateWithMemoryBlock(
 		size_t offsetToData, 
 		size_t dataLength,
 		CMBlockBufferFlags flags, 
-		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL newBBufOut)
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -223,23 +223,23 @@ CM_EXPORT OSStatus	CMBlockBufferCreateWithMemoryBlock(
 
 	@param	structureAllocator	Allocator to use for allocating the CMBlockBuffer object. NULL will cause the
 								default allocator to be used.
-	@param	targetBuffer		CMBlockBuffer to refer to. This parameter must not be NULL. Unless the kCMBlockBufferPermitEmptyReferenceFlag
+	@param	bufferReference		CMBlockBuffer to refer to. This parameter must not be NULL. Unless the kCMBlockBufferPermitEmptyReferenceFlag
 								is passed, it must not be empty and it must have a data length at least large enough to supply the data subset
 								specified (i.e. offsetToData+dataLength bytes).
-	@param	offsetToData		Offset within the target CMBlockBuffer at which the new CMBlockBuffer should refer to data.
+	@param	offsetToData		Offset within the reference CMBlockBuffer at which the new CMBlockBuffer should refer to data.
 	@param	dataLength			Number of relevant data bytes, starting at offsetToData, within the target CMBlockBuffer.
 	@param	flags				Feature and control flags
-	@param	newBBufOut			Receives newly-created CMBlockBuffer object with a retain count of 1. Must not be  NULL.
+	@param	blockBufferOut		Receives newly-created CMBlockBuffer object with a retain count of 1. Must not be  NULL.
 
 	@result	Returns kCMBlockBufferNoErr if successful.
 */
 CM_EXPORT OSStatus	CMBlockBufferCreateWithBufferReference(
 		CFAllocatorRef CM_NULLABLE structureAllocator,
-		CMBlockBufferRef CM_NONNULL targetBuffer,
+		CMBlockBufferRef CM_NONNULL bufferReference,
 		size_t offsetToData,
 		size_t dataLength, 
 		CMBlockBufferFlags flags, 
-		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL newBBufOut)
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -265,7 +265,7 @@ CM_EXPORT OSStatus	CMBlockBufferCreateWithBufferReference(
 	@param	dataLength			Number of relevant data bytes, starting at offsetToData, within the source CMBlockBuffer. If zero, the
 								target buffer's total available dataLength (starting at offsetToData) will be referenced.
 	@param	flags				Feature and control flags
-	@param	newBBufOut			Receives newly-created CMBlockBuffer object with a retain count of 1. Must not be  NULL.
+	@param	blockBufferOut		Receives newly-created CMBlockBuffer object with a retain count of 1. Must not be  NULL.
 	
 	@result	Returns kCMBlockBufferNoErr if successful
 */
@@ -277,7 +277,7 @@ CM_EXPORT OSStatus	CMBlockBufferCreateContiguous(
 		size_t offsetToData, 
 		size_t dataLength, 
 		CMBlockBufferFlags flags, 
-		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL newBBufOut)
+		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 
@@ -389,13 +389,13 @@ CM_EXPORT OSStatus	CMBlockBufferAssureBlockMemory(CMBlockBufferRef CM_NONNULL th
 				given temporary block and its pointer will be returned. 
 
 
-	@param	theBuffer		CMBlockBuffer to operate on. Must not be NULL
-	@param	offset			Offset within the CMBlockBuffer's offset range.
-	@param	length			Desired number of bytes to access at offset
-	@param	temporaryBlock	A piece of memory, assumed to be at least length bytes in size. Must not be NULL
-	@param	returnedPointer	Receives NULL if the desired amount of data could not be accessed at the given offset.
-							Receives non-NULL if it could. The value returned will either be a direct pointer into
-							the CMBlockBuffer or temporaryBlock Must not be NULL.
+	@param	theBuffer			CMBlockBuffer to operate on. Must not be NULL
+	@param	offset				Offset within the CMBlockBuffer's offset range.
+	@param	length				Desired number of bytes to access at offset
+	@param	temporaryBlock		A piece of memory, assumed to be at least length bytes in size. Must not be NULL
+	@param	returnedPointerOut	Receives NULL if the desired amount of data could not be accessed at the given offset.
+								Receives non-NULL if it could. The value returned will either be a direct pointer into
+								the CMBlockBuffer or temporaryBlock Must not be NULL.
 							
 	@result	Returns kCMBlockBufferNoErr if the desired amount of data could be accessed at the given offset.
 */
@@ -404,7 +404,7 @@ CM_EXPORT OSStatus CMBlockBufferAccessDataBytes(
 		size_t offset, 
 		size_t length, 
 		void * CM_NONNULL temporaryBlock,
-		char * CM_NULLABLE * CM_NONNULL returnedPointer)
+		char * CM_NULLABLE * CM_NONNULL returnedPointerOut)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
@@ -490,14 +490,14 @@ CM_EXPORT OSStatus	CMBlockBufferFillDataBytes(
 				original CMBlockBuffer is referenced - once the CMBlockBuffer is released for the last time, any pointers
 				into it will be invalid. 
 
-	@param	theBuffer		CMBlockBuffer to operate on. Must not be NULL
-	@param	offset			Offset within the buffer's offset range.
-	@param	lengthAtOffset	On return, contains the amount of data available at the specified offset. May be NULL.
-	@param	totalLength		On return, contains the block buffer's total data length (from offset 0). May be NULL.
-							The caller can compare (offset+lengthAtOffset) with totalLength to determine whether
-							the entire CMBlockBuffer has been referenced and whether it is possible to access the CMBlockBuffer's
-							data with a contiguous reference.
-	@param	dataPointer		On return, contains a pointer to the data byte at the specified offset; lengthAtOffset bytes are
+	@param	theBuffer			CMBlockBuffer to operate on. Must not be NULL
+	@param	offset				Offset within the buffer's offset range.
+	@param	lengthAtOffsetOut	On return, contains the amount of data available at the specified offset. May be NULL.
+	@param	totalLengthOut		On return, contains the block buffer's total data length (from offset 0). May be NULL.
+								The caller can compare (offset+lengthAtOffset) with totalLength to determine whether
+								the entire CMBlockBuffer has been referenced and whether it is possible to access the CMBlockBuffer's
+								data with a contiguous reference.
+	@param	dataPointerOut		On return, contains a pointer to the data byte at the specified offset; lengthAtOffset bytes are
 							available at this address. May be NULL.
 
 	@result	Returns kCMBlockBufferNoErr if data was accessible at the specified offset within the given CMBlockBuffer, false otherwise.
@@ -505,9 +505,9 @@ CM_EXPORT OSStatus	CMBlockBufferFillDataBytes(
 CM_EXPORT OSStatus	CMBlockBufferGetDataPointer(
 		CMBlockBufferRef CM_NONNULL theBuffer,
 		size_t offset, 
-		size_t * CM_NULLABLE lengthAtOffset,
-		size_t * CM_NULLABLE totalLength,
-		char * CM_NULLABLE * CM_NULLABLE dataPointer)
+		size_t * CM_NULLABLE lengthAtOffsetOut,
+		size_t * CM_NULLABLE totalLengthOut,
+		char * CM_NULLABLE * CM_NULLABLE dataPointerOut)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!

@@ -1,4 +1,4 @@
-.TH "MPSCNNUpsamplingBilinear" 3 "Sun Jul 2 2017" "Version MetalPerformanceShaders-84.1" "MetalPerformanceShaders.framework" \" -*- nroff -*-
+.TH "MPSCNNUpsamplingBilinear" 3 "Mon Jul 9 2018" "Version MetalPerformanceShaders-119.3" "MetalPerformanceShaders.framework" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -15,6 +15,9 @@ Inherits \fBMPSCNNUpsampling\fP\&.
 .in +1c
 .ti -1c
 .RI "(nonnull instancetype) \- \fBinitWithDevice:integerScaleFactorX:integerScaleFactorY:\fP"
+.br
+.ti -1c
+.RI "(nonnull instancetype) \- \fBinitWithDevice:integerScaleFactorX:integerScaleFactorY:alignCorners:\fP"
 .br
 .in -1c
 .SS "Additional Inherited Members"
@@ -37,7 +40,27 @@ Initialize the bilinear spatial upsampling filter\&.
 .PP
 \fBReturns:\fP
 .RS 4
-A valid \fBMPSCNNUpsamplingBilinear\fP object or nil, if failure\&. 
+\fBA\fP valid \fBMPSCNNUpsamplingBilinear\fP object or nil, if failure\&. 
+.RE
+.PP
+
+.SS "\- (nonnull instancetype) \fBinitWithDevice:\fP (nonnull id< MTLDevice >) device(NSUInteger) integerScaleFactorX(NSUInteger) integerScaleFactorY(BOOL) alignCorners"
+Initialize the bilinear spatial upsampling filter\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdevice\fP The device the filter will run on\&. 
+.br
+\fIintegerScaleFactorX\fP The upsampling factor for the x dimension\&. 
+.br
+\fIintegerScaleFactorY\fP The upsampling factor for the y dimension\&. 
+.br
+\fIalignCorners\fP Specifier whether the centers of the 4 corner pixels of the input and output regions are aligned, preserving the values at the corner pixels\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fBA\fP valid \fBMPSCNNUpsamplingBilinear\fP object or nil, if failure\&. 
 .RE
 .PP
 

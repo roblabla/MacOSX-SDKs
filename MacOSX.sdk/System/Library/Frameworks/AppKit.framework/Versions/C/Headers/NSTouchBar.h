@@ -1,7 +1,7 @@
 /*
  NSTouchBar.h
  Application Kit
- Copyright (c) 2015-2017, Apple Inc.
+ Copyright (c) 2015-2018, Apple Inc.
  All rights reserved.
 */
 
@@ -11,35 +11,35 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * NSTouchBarCustomizationIdentifier NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSTouchBarCustomizationIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 
 @protocol NSTouchBarDelegate, NSTouchBarProvider;
 
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSTouchBar : NSObject <NSCoding> {
 @private
-    id _configuration;
+    id _configuration APPKIT_IVAR;
 
-    NSTouchBarItemIdentifier _principalItemIdentifier;
+    NSTouchBarItemIdentifier _principalItemIdentifier APPKIT_IVAR;
     
-    NSSet<NSTouchBarItem *> *_templateItems;
+    NSSet<NSTouchBarItem *> *_templateItems APPKIT_IVAR;
     
-    __weak id <NSTouchBarDelegate> _delegate;
+    __weak id <NSTouchBarDelegate> _delegate APPKIT_IVAR;
     
-    NSCache *_itemCache;
+    NSMutableDictionary *_itemCache APPKIT_IVAR;
     
-    NSInteger _visibilityCount;
+    NSInteger _visibilityCount APPKIT_IVAR;
     
-    unsigned _isBuildingItems:1;
+    unsigned _isBuildingItems:1 APPKIT_IVAR;
     
-    unsigned _suppressesLessFocusedTouchBars:1;
-    unsigned _suppressesMoreFocusedTouchBars:1;
-    unsigned _suppressedByLessFocusedTouchBars:1;
-    unsigned _suppressedByMoreFocusedTouchBars:1;
+    unsigned _suppressesLessFocusedTouchBars:1 APPKIT_IVAR;
+    unsigned _suppressesMoreFocusedTouchBars:1 APPKIT_IVAR;
+    unsigned _suppressedByLessFocusedTouchBars:1 APPKIT_IVAR;
+    unsigned _suppressedByMoreFocusedTouchBars:1 APPKIT_IVAR;
     
-    id _fbReserved;
+    id _fbReserved APPKIT_IVAR;
 #if !__OBJC2__
-    void *_touchBarReserved[4] __unused;
+    void *_touchBarReserved[4] __unused APPKIT_IVAR;
 #endif /* !__OBJC2__ */
 }
 

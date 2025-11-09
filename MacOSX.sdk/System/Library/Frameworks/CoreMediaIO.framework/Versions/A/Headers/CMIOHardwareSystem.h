@@ -3,7 +3,7 @@
 
     Contains:   API for communicating with CoreMediaIO hardware
 
-    Copyright:  © 2005-2010 by Apple Inc., all rights reserved.
+    Copyright:  © 2005-2018 by Apple Inc., all rights reserved.
 */
 
 

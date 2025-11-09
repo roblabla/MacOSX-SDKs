@@ -43,16 +43,19 @@
  *    simd_doubleN where N is 1, 2, 3, 4, or 8.
  *
  *  These types generally have greater alignment than the underlying scalar
- *  type; they are aligned to either the size of the vector[1] or the targeted
- *  platform's "maximum alignment"[2] in Clang, whichever is smaller.
+ *  type; they are aligned to either the size of the vector[1] or 16 bytes,
+ *  whichever is smaller.
  *
  *    [1] Note that sizeof a three-element vector is the same as sizeof the
  *    corresponding four-element vector, because three-element vectors have
  *    a hidden lane of padding.
  *
- *    [2] Generally the architectural vector width, either 16, 32, or 64
- *    bytes. If you need precise control over alignment, be careful because
- *    this value can change depending on compile options.
+ *  In earlier versions of the simd library, the alignment of vectors could
+ *  be larger than 16B, up to the "architectural vector size" of 16, 32, or
+ *  64B, depending on what options were passed on the command line when
+ *  compiling. This super-alignment does not interact well with malloc, and
+ *  makes it difficult for libraries to provide a stable API, while conferring
+ *  relatively little performance benefit, so it has been relaxed.
  *
  *  For each simd_typeN type where N is not 1 or 3, there is also a
  *  corresponding simd_packed_typeN type that requires only the alignment
@@ -140,7 +143,7 @@ typedef __attribute__((__ext_vector_type__(16))) char simd_char16;
  *  than the alignment of char; if you need to operate on data buffers that
  *  may not be suitably aligned, you should access them using
  *  simd_packed_char32 instead.                                               */
-typedef __attribute__((__ext_vector_type__(32))) char simd_char32;
+typedef __attribute__((__ext_vector_type__(32),__aligned__(16))) char simd_char32;
 
 /*! @abstract A vector of sixty-four 8-bit signed (twos-complement)
  *  integers.
@@ -149,7 +152,7 @@ typedef __attribute__((__ext_vector_type__(32))) char simd_char32;
  *  than the alignment of char; if you need to operate on data buffers that
  *  may not be suitably aligned, you should access them using
  *  simd_packed_char64 instead.                                               */
-typedef __attribute__((__ext_vector_type__(64))) char simd_char64;
+typedef __attribute__((__ext_vector_type__(64),__aligned__(16))) char simd_char64;
 
 /*! @abstract A scalar 8-bit unsigned integer.                                */
 typedef unsigned char simd_uchar1;
@@ -198,7 +201,7 @@ typedef __attribute__((__ext_vector_type__(16))) unsigned char simd_uchar16;
  *  than the alignment of unsigned char; if you need to operate on data
  *  buffers that may not be suitably aligned, you should access them using
  *  simd_packed_uchar32 instead.                                              */
-typedef __attribute__((__ext_vector_type__(32))) unsigned char simd_uchar32;
+typedef __attribute__((__ext_vector_type__(32),__aligned__(16))) unsigned char simd_uchar32;
 
 /*! @abstract A vector of sixty-four 8-bit unsigned integers.
  *  @description In C++ this type is also available as simd::uchar64. This
@@ -206,7 +209,7 @@ typedef __attribute__((__ext_vector_type__(32))) unsigned char simd_uchar32;
  *  than the alignment of unsigned char; if you need to operate on data
  *  buffers that may not be suitably aligned, you should access them using
  *  simd_packed_uchar64 instead.                                              */
-typedef __attribute__((__ext_vector_type__(64))) unsigned char simd_uchar64;
+typedef __attribute__((__ext_vector_type__(64),__aligned__(16))) unsigned char simd_uchar64;
 
 /*! @abstract A scalar 16-bit signed (twos-complement) integer.               */
 typedef short simd_short1;
@@ -247,7 +250,7 @@ typedef __attribute__((__ext_vector_type__(8))) short simd_short8;
  *  than the alignment of short; if you need to operate on data buffers that
  *  may not be suitably aligned, you should access them using
  *  simd_packed_short16 instead.                                              */
-typedef __attribute__((__ext_vector_type__(16))) short simd_short16;
+typedef __attribute__((__ext_vector_type__(16),__aligned__(16))) short simd_short16;
 
 /*! @abstract A vector of thirty-two 16-bit signed (twos-complement)
  *  integers.
@@ -256,7 +259,7 @@ typedef __attribute__((__ext_vector_type__(16))) short simd_short16;
  *  than the alignment of short; if you need to operate on data buffers that
  *  may not be suitably aligned, you should access them using
  *  simd_packed_short32 instead.                                              */
-typedef __attribute__((__ext_vector_type__(32))) short simd_short32;
+typedef __attribute__((__ext_vector_type__(32),__aligned__(16))) short simd_short32;
 
 /*! @abstract A scalar 16-bit unsigned integer.                               */
 typedef unsigned short simd_ushort1;
@@ -297,7 +300,7 @@ typedef __attribute__((__ext_vector_type__(8))) unsigned short simd_ushort8;
  *  than the alignment of unsigned short; if you need to operate on data
  *  buffers that may not be suitably aligned, you should access them using
  *  simd_packed_ushort16 instead.                                             */
-typedef __attribute__((__ext_vector_type__(16))) unsigned short simd_ushort16;
+typedef __attribute__((__ext_vector_type__(16),__aligned__(16))) unsigned short simd_ushort16;
 
 /*! @abstract A vector of thirty-two 16-bit unsigned integers.
  *  @description In C++ this type is also available as simd::ushort32. This
@@ -305,7 +308,7 @@ typedef __attribute__((__ext_vector_type__(16))) unsigned short simd_ushort16;
  *  than the alignment of unsigned short; if you need to operate on data
  *  buffers that may not be suitably aligned, you should access them using
  *  simd_packed_ushort32 instead.                                             */
-typedef __attribute__((__ext_vector_type__(32))) unsigned short simd_ushort32;
+typedef __attribute__((__ext_vector_type__(32),__aligned__(16))) unsigned short simd_ushort32;
 
 /*! @abstract A scalar 32-bit signed (twos-complement) integer.               */
 typedef int simd_int1;
@@ -336,7 +339,7 @@ typedef __attribute__((__ext_vector_type__(4))) int simd_int4;
  *  the alignment of int; if you need to operate on data buffers that may
  *  not be suitably aligned, you should access them using simd_packed_int8
  *  instead.                                                                  */
-typedef __attribute__((__ext_vector_type__(8))) int simd_int8;
+typedef __attribute__((__ext_vector_type__(8),__aligned__(16))) int simd_int8;
 
 /*! @abstract A vector of sixteen 32-bit signed (twos-complement) integers.
  *  @description In C++ this type is also available as simd::int16. This
@@ -344,7 +347,7 @@ typedef __attribute__((__ext_vector_type__(8))) int simd_int8;
  *  than the alignment of int; if you need to operate on data buffers that
  *  may not be suitably aligned, you should access them using
  *  simd_packed_int16 instead.                                                */
-typedef __attribute__((__ext_vector_type__(16))) int simd_int16;
+typedef __attribute__((__ext_vector_type__(16),__aligned__(16))) int simd_int16;
 
 /*! @abstract A scalar 32-bit unsigned integer.                               */
 typedef unsigned int simd_uint1;
@@ -377,7 +380,7 @@ typedef __attribute__((__ext_vector_type__(4))) unsigned int simd_uint4;
  *  than the alignment of unsigned int; if you need to operate on data
  *  buffers that may not be suitably aligned, you should access them using
  *  simd_packed_uint8 instead.                                                */
-typedef __attribute__((__ext_vector_type__(8))) unsigned int simd_uint8;
+typedef __attribute__((__ext_vector_type__(8),__aligned__(16))) unsigned int simd_uint8;
 
 /*! @abstract A vector of sixteen 32-bit unsigned integers.
  *  @description In C++ this type is also available as simd::uint16. This
@@ -385,7 +388,7 @@ typedef __attribute__((__ext_vector_type__(8))) unsigned int simd_uint8;
  *  than the alignment of unsigned int; if you need to operate on data
  *  buffers that may not be suitably aligned, you should access them using
  *  simd_packed_uint16 instead.                                               */
-typedef __attribute__((__ext_vector_type__(16))) unsigned int simd_uint16;
+typedef __attribute__((__ext_vector_type__(16),__aligned__(16))) unsigned int simd_uint16;
 
 /*! @abstract A scalar 32-bit floating-point number.                          */
 typedef float simd_float1;
@@ -418,7 +421,7 @@ typedef __attribute__((__ext_vector_type__(4))) float simd_float4;
  *  than the alignment of float; if you need to operate on data buffers that
  *  may not be suitably aligned, you should access them using
  *  simd_packed_float8 instead.                                               */
-typedef __attribute__((__ext_vector_type__(8))) float simd_float8;
+typedef __attribute__((__ext_vector_type__(8),__aligned__(16))) float simd_float8;
 
 /*! @abstract A vector of sixteen 32-bit floating-point numbers.
  *  @description In C++ this type is also available as simd::float16. This
@@ -426,7 +429,7 @@ typedef __attribute__((__ext_vector_type__(8))) float simd_float8;
  *  than the alignment of float; if you need to operate on data buffers that
  *  may not be suitably aligned, you should access them using
  *  simd_packed_float16 instead.                                              */
-typedef __attribute__((__ext_vector_type__(16))) float simd_float16;
+typedef __attribute__((__ext_vector_type__(16),__aligned__(16))) float simd_float16;
 
 /*! @abstract A scalar 64-bit signed (twos-complement) integer.               */
 #if defined __LP64__
@@ -447,7 +450,7 @@ typedef __attribute__((__ext_vector_type__(2))) simd_long1 simd_long2;
  *  @description In C++ and Metal, this type is also available as
  *  simd::long3. Note that vectors of this type are padded to have the same
  *  size and alignment as simd_long4.                                         */
-typedef __attribute__((__ext_vector_type__(3))) simd_long1 simd_long3;
+typedef __attribute__((__ext_vector_type__(3),__aligned__(16))) simd_long1 simd_long3;
 
 /*! @abstract A vector of four 64-bit signed (twos-complement) integers.
  *  @description In C++ and Metal, this type is also available as
@@ -455,7 +458,7 @@ typedef __attribute__((__ext_vector_type__(3))) simd_long1 simd_long3;
  *  simd_long1; if you need to operate on data buffers that may not be
  *  suitably aligned, you should access them using simd_packed_long4
  *  instead.                                                                  */
-typedef __attribute__((__ext_vector_type__(4))) simd_long1 simd_long4;
+typedef __attribute__((__ext_vector_type__(4),__aligned__(16))) simd_long1 simd_long4;
 
 /*! @abstract A vector of eight 64-bit signed (twos-complement) integers.
  *  @description In C++ this type is also available as simd::long8. This
@@ -463,7 +466,7 @@ typedef __attribute__((__ext_vector_type__(4))) simd_long1 simd_long4;
  *  than the alignment of simd_long1; if you need to operate on data buffers
  *  that may not be suitably aligned, you should access them using
  *  simd_packed_long8 instead.                                                */
-typedef __attribute__((__ext_vector_type__(8))) simd_long1 simd_long8;
+typedef __attribute__((__ext_vector_type__(8),__aligned__(16))) simd_long1 simd_long8;
 
 /*! @abstract A scalar 64-bit unsigned integer.                               */
 #if defined __LP64__
@@ -484,7 +487,7 @@ typedef __attribute__((__ext_vector_type__(2))) simd_ulong1 simd_ulong2;
  *  @description In C++ and Metal, this type is also available as
  *  simd::ulong3. Note that vectors of this type are padded to have the same
  *  size and alignment as simd_ulong4.                                        */
-typedef __attribute__((__ext_vector_type__(3))) simd_ulong1 simd_ulong3;
+typedef __attribute__((__ext_vector_type__(3),__aligned__(16))) simd_ulong1 simd_ulong3;
 
 /*! @abstract A vector of four 64-bit unsigned integers.
  *  @description In C++ and Metal, this type is also available as
@@ -492,7 +495,7 @@ typedef __attribute__((__ext_vector_type__(3))) simd_ulong1 simd_ulong3;
  *  of simd_ulong1; if you need to operate on data buffers that may not be
  *  suitably aligned, you should access them using simd_packed_ulong4
  *  instead.                                                                  */
-typedef __attribute__((__ext_vector_type__(4))) simd_ulong1 simd_ulong4;
+typedef __attribute__((__ext_vector_type__(4),__aligned__(16))) simd_ulong1 simd_ulong4;
 
 /*! @abstract A vector of eight 64-bit unsigned integers.
  *  @description In C++ this type is also available as simd::ulong8. This
@@ -500,7 +503,7 @@ typedef __attribute__((__ext_vector_type__(4))) simd_ulong1 simd_ulong4;
  *  than the alignment of simd_ulong1; if you need to operate on data
  *  buffers that may not be suitably aligned, you should access them using
  *  simd_packed_ulong8 instead.                                               */
-typedef __attribute__((__ext_vector_type__(8))) simd_ulong1 simd_ulong8;
+typedef __attribute__((__ext_vector_type__(8),__aligned__(16))) simd_ulong1 simd_ulong8;
 
 /*! @abstract A scalar 64-bit floating-point number.                          */
 typedef double simd_double1;
@@ -517,7 +520,7 @@ typedef __attribute__((__ext_vector_type__(2))) double simd_double2;
  *  @description In C++ and Metal, this type is also available as
  *  simd::double3. Note that vectors of this type are padded to have the
  *  same size and alignment as simd_double4.                                  */
-typedef __attribute__((__ext_vector_type__(3))) double simd_double3;
+typedef __attribute__((__ext_vector_type__(3),__aligned__(16))) double simd_double3;
 
 /*! @abstract A vector of four 64-bit floating-point numbers.
  *  @description In C++ and Metal, this type is also available as
@@ -525,7 +528,7 @@ typedef __attribute__((__ext_vector_type__(3))) double simd_double3;
  *  of double; if you need to operate on data buffers that may not be
  *  suitably aligned, you should access them using simd_packed_double4
  *  instead.                                                                  */
-typedef __attribute__((__ext_vector_type__(4))) double simd_double4;
+typedef __attribute__((__ext_vector_type__(4),__aligned__(16))) double simd_double4;
 
 /*! @abstract A vector of eight 64-bit floating-point numbers.
  *  @description In C++ this type is also available as simd::double8. This
@@ -533,7 +536,7 @@ typedef __attribute__((__ext_vector_type__(4))) double simd_double4;
  *  than the alignment of double; if you need to operate on data buffers
  *  that may not be suitably aligned, you should access them using
  *  simd_packed_double8 instead.                                              */
-typedef __attribute__((__ext_vector_type__(8))) double simd_double8;
+typedef __attribute__((__ext_vector_type__(8),__aligned__(16))) double simd_double8;
 
 /*  MARK: C++ vector types                                                    */
 #if defined __cplusplus

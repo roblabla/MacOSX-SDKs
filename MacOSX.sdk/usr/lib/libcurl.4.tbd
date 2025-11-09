@@ -1,13 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: FF35E4F6-D639-38CE-B74F-D842282762BB', 'x86_64: 99A9D440-EABF-38FB-ACB9-74DAD0F1553A' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 607613FE-3D84-3035-9C79-C6F72AF287D7' ]
 platform:        macosx
 install-name:    /usr/lib/libcurl.4.dylib
 current-version: 9
 compatibility-version: 7
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _curl_easy_cleanup, _curl_easy_duphandle, _curl_easy_escape, 
                        _curl_easy_getinfo, _curl_easy_init, _curl_easy_pause, _curl_easy_perform, 
                        _curl_easy_recv, _curl_easy_reset, _curl_easy_send, _curl_easy_setopt, 

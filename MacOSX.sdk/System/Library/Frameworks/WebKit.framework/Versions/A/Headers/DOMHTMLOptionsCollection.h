@@ -29,13 +29,13 @@
 @class DOMNode;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMHTMLOptionsCollection : DOMObject
-@property int selectedIndex NS_AVAILABLE_MAC(10_5);
+@property int selectedIndex WEBKIT_AVAILABLE_MAC(10_5);
 @property unsigned length;
 
 - (DOMNode *)namedItem:(NSString *)name;
-- (void)add:(DOMHTMLOptionElement *)option index:(unsigned)index NS_AVAILABLE_MAC(10_5);
-- (void)remove:(unsigned)index NS_AVAILABLE_MAC(10_6);
+- (void)add:(DOMHTMLOptionElement *)option index:(unsigned)index WEBKIT_AVAILABLE_MAC(10_5);
+- (void)remove:(unsigned)index WEBKIT_AVAILABLE_MAC(10_6);
 - (DOMNode *)item:(unsigned)index;
 @end

@@ -1,7 +1,7 @@
 /*
 	NSTextAlternatives.h
 	Application Kit
-	Copyright (c) 2011-2017, Apple Inc.
+	Copyright (c) 2011-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -17,9 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_8, NA)
 @interface NSTextAlternatives : NSObject {
 @private
-    NSString *_primaryString;
-    NSArray *_alternativeStrings;
-    id _internal;
+    NSString *_primaryString APPKIT_IVAR;
+    NSArray *_alternativeStrings APPKIT_IVAR;
+    id _internal APPKIT_IVAR;
 }
 
 - (instancetype)initWithPrimaryString:(NSString *)primaryString alternativeStrings:(NSArray<NSString *> *)alternativeStrings;

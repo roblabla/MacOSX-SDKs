@@ -1,8 +1,11 @@
 //
 //  SCNAnimation.h
+//  SceneKit
 //
-//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
+//  Copyright © 2012-2018 Apple Inc. All rights reserved.
 //
+
+#import <SceneKit/SceneKitTypes.h>
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -19,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^SCNAnimationDidStartBlock)(SCNAnimation *animation, id <SCNAnimatable> receiver);
 typedef void (^SCNAnimationDidStopBlock)(SCNAnimation *animation, id <SCNAnimatable> receiver, BOOL completed);
 
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
+SCN_EXPORT API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @interface SCNTimingFunction : NSObject <NSSecureCoding>
 + (SCNTimingFunction *)functionWithTimingMode:(SCNActionTimingMode)timingMode;
 + (SCNTimingFunction *)functionWithCAMediaTimingFunction:(CAMediaTimingFunction *)caTimingFunction;
@@ -143,8 +146,8 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 /**
  SCNAnimation represents an animation that targets a specific key path.
  */
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
-@interface SCNAnimation : NSObject  <SCNAnimation, NSCopying, NSSecureCoding>
+SCN_EXPORT API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
+@interface SCNAnimation : NSObject <SCNAnimation, NSCopying, NSSecureCoding>
 
 
 /*!
@@ -183,17 +186,19 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 /**
  The duration of the animation in seconds. Defaults to 0.
  */
-@property (nonatomic) NSTimeInterval duration;
+@property(nonatomic) NSTimeInterval duration;
 
 /**
  The key-path describing the property to be animated for single-property animations, nil for animations targetting multiple nodes. defaults to nil.
+ The key-path uses the KVC syntax. It's also possible to target a specific sub-node with the following syntax:
+    /<node-name>.property1.property2.field    (field is optional, <node-name> is the name of the targeted node).
  */
-@property (nonatomic, copy, nullable) NSString *keyPath;
+@property(nonatomic, copy, nullable) NSString *keyPath;
 
 /**
  A timing function defining the pacing of the animation. Defaults to nil indicating linear pacing.
  */
-@property (nonatomic, retain) SCNTimingFunction *timingFunction;
+@property(nonatomic, retain) SCNTimingFunction *timingFunction;
 
 
 
@@ -205,13 +210,13 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  Determines the receiver's blend-in duration.
  @discussion When the blendInDuration is greater than zero, the effect of the animation progressively increase from 0% to 100% during the specified duration.
  */
-@property (nonatomic) NSTimeInterval blendInDuration;
+@property(nonatomic) NSTimeInterval blendInDuration;
 
 /**
  Determines the receiver's blend-out duration.
  @discussion When the blendOutDuration is greater than zero, the effect of the animation progressively decrease from 100% to 0% at the end of the animation duration.
  */
-@property (nonatomic) NSTimeInterval blendOutDuration;
+@property(nonatomic) NSTimeInterval blendOutDuration;
 
 
 
@@ -222,12 +227,12 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 /**
  When true, the animation is removed from the render tree once its active duration has passed. Defaults to YES. 
  */
-@property (nonatomic, getter=isRemovedOnCompletion) BOOL removedOnCompletion;
+@property(nonatomic, getter=isRemovedOnCompletion) BOOL removedOnCompletion;
 
 /**
  When true, the animation is applied to the model tree once its active duration has passed. Defaults to NO.
  */
-@property (nonatomic, getter=isAppliedOnCompletion) BOOL appliedOnCompletion;
+@property(nonatomic, getter=isAppliedOnCompletion) BOOL appliedOnCompletion;
 
 
 
@@ -238,11 +243,11 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 /**
  The repeat count of the object. May be fractional. Defaults to 0.
  */
-@property (nonatomic) CGFloat repeatCount;
+@property(nonatomic) CGFloat repeatCount;
 /**
  When true, the object plays backwards after playing forwards. Defaults to NO.
  */
-@property (nonatomic) BOOL  autoreverses;
+@property(nonatomic) BOOL autoreverses;
 
 
 
@@ -254,14 +259,14 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  The relative delay to start the animation, in relation to its parent animation if applicable. Defaults to 0.
  @discussion This property is bridged with CoreAnimations's beginTime. However, for top level animations, startDelay relative to the current time (unlike CAAnimation's beginTime that is absolute). So if a CAAnimation has a non-zero beginTime, startDelay is initialized as caAnimation.beginTime - CACurrentMediaTime().
  */
-@property (nonatomic) NSTimeInterval startDelay;
+@property(nonatomic) NSTimeInterval startDelay;
 
 /**
  Additional offset in active local time. i.e. to convert from parent
  time tp to active local time t: t = (tp - begin) * speed + offset.
  Defaults to 0.
  */
-@property (nonatomic) NSTimeInterval timeOffset;
+@property(nonatomic) NSTimeInterval timeOffset;
 
 
 
@@ -272,12 +277,12 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 /**
  When true, the animation remains active after its active duration and evaluates to its end value. Defaults to NO.
  */
-@property (nonatomic) BOOL fillsForward;
+@property(nonatomic) BOOL fillsForward;
 
 /**
  When true, the animation is active before its active duration and evaluates to its start value. Defaults to NO.
  */
-@property (nonatomic) BOOL fillsBackward;
+@property(nonatomic) BOOL fillsBackward;
 
 /**
  Determines whether the receiver is evaluated using the scene time or the system time. Defaults to NO.
@@ -285,7 +290,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  The "sceneTime" base is typically used by players or editors that need to preview, edit and being able to change the evaluation time.
  @see SCNSceneSourceAnimationImportPolicyKey
  */
-@property (nonatomic) BOOL usesSceneTimeBase;
+@property(nonatomic) BOOL usesSceneTimeBase;
 
 
 /*!
@@ -295,20 +300,20 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 /**
  Called when the animation starts.
  */
-@property (nonatomic, copy, nullable) SCNAnimationDidStartBlock animationDidStart;
+@property(nonatomic, copy, nullable) SCNAnimationDidStartBlock animationDidStart;
 
 /**
  Called when the animation either completes its active duration or
  is removed from the object it is attached to (i.e. the layer). The 'completed' argument of SCNAnimationDidStopBlock
  is true if the animation reached the end of its active duration without being removed.
  */
-@property (nonatomic, copy, nullable) SCNAnimationDidStopBlock animationDidStop;
+@property(nonatomic, copy, nullable) SCNAnimationDidStopBlock animationDidStop;
 
 /**
  Specifies the animation events attached to the receiver.
  @see SCNAnimationEvent
  */
-@property (nonatomic, copy, nullable) NSArray<SCNAnimationEvent *> *animationEvents;
+@property(nonatomic, copy, nullable) NSArray<SCNAnimationEvent *> *animationEvents;
 
 /*!
  Additive and cumulative
@@ -320,7 +325,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  presentation value. The addition function is type-dependent, e.g.
  for affine transforms the two matrices are concatenated. Defaults to
  NO. */
-@property (nonatomic, getter=isAdditive) BOOL additive;
+@property(nonatomic, getter=isAdditive) BOOL additive;
 
 /**
  The `cumulative' property affects how repeating animations produce
@@ -329,7 +334,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  current repeat cycle. If false, the value is simply the value
  calculated for the current repeat cycle. Defaults to NO. 
  */
-@property (nonatomic, getter=isCumulative) BOOL cumulative;
+@property(nonatomic, getter=isCumulative) BOOL cumulative;
 
 @end
 
@@ -338,7 +343,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 /**
  SCNAnimationPlayer let you control when and how to play and blend an animation
  */
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
+SCN_EXPORT API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @interface SCNAnimationPlayer : NSObject  <SCNAnimatable, NSCopying, NSSecureCoding>
 
 /**
@@ -350,22 +355,22 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 /**
  The played animation
  */
-@property (nonatomic, readonly) SCNAnimation *animation;
+@property(nonatomic, readonly) SCNAnimation *animation;
 
 /**
  The speed to play the animation at. Defaults to 1.0. Animatable
  */
-@property (nonatomic) CGFloat speed;
+@property(nonatomic) CGFloat speed;
 
 /**
  Controls the influence of the played animation. When set to 1 the animation is applied without any blending. When set to less than 1, the animation value is blent with the current presentation value of the animated property. Defaults to 1.0. Animatable.
  */
-@property (nonatomic) CGFloat blendFactor;
+@property(nonatomic) CGFloat blendFactor;
 
 /**
  Specifies if the animation is paused. Defaults to NO.
  */
-@property (nonatomic) BOOL paused;
+@property(nonatomic) BOOL paused;
 
 /*!
  Actions
@@ -398,7 +403,7 @@ typedef void (^SCNAnimationEventBlock)(id <SCNAnimation> animation, id animatedO
 /**
  SCNAnimationEvent encapsulates a block to trigger at a specific time.
  */
-API_AVAILABLE(macos(10.9))
+SCN_EXPORT API_AVAILABLE(macos(10.9))
 @interface SCNAnimationEvent : NSObject
 
 /*!

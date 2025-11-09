@@ -1,11 +1,10 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 32EA3918-6F7E-350A-A18C-8818EC550CEB' ]
+uuids:           [ 'x86_64: 11E32690-CFB6-39FD-A1B4-570CCC795020' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/MessageSecurity.framework/Versions/A/MessageSecurity
 current-version: 0
 compatibility-version: 0
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _MSCMSAttributeTypeAppleHashAgility, _MSCMSAttributeTypeCountersignature, 
@@ -24,14 +23,14 @@ exports:
                        _MSEncryptionAlgorithmAES256_CCM, _MSEncryptionAlgorithmAES256_GCM, 
                        _MSEncryptionAlgorithmAES256_KeyWrap, _MSEncryptionAlgorithmRC2_CBC, 
                        _MSEncryptionAlgorithmRSA, _MSEncryptionAlgorithmRSAOAEP, 
-                       _MSSignatureAlgorithmECDSAX962SHA1, _MSSignatureAlgorithmECDSAX962SHA224, 
-                       _MSSignatureAlgorithmECDSAX962SHA256, _MSSignatureAlgorithmECDSAX962SHA384, 
-                       _MSSignatureAlgorithmECDSAX962SHA512, _MSSignatureAlgorithmRSAPKCS1v5MD5, 
-                       _MSSignatureAlgorithmRSAPKCS1v5SHA1, _MSSignatureAlgorithmRSAPKCS1v5SHA224, 
-                       _MSSignatureAlgorithmRSAPKCS1v5SHA256, _MSSignatureAlgorithmRSAPKCS1v5SHA384, 
-                       _MSSignatureAlgorithmRSAPKCS1v5SHA512 ]
-    objc-classes:    [ _MSAlgorithmIdentifier, _MSCMSAppleHashAgilityAttribute, _MSCMSAttribute, 
-                       _MSCMSContentInfo, _MSCMSCountersignatureAttribute, _MSCMSSignedData, 
-                       _MSCMSSignerInfo, _MSCMSSigningTimeAttribute, _MSDecodeOptions, 
-                       _MSOID ]
+                       _MSKeyAlgorithmECPublicKey, _MSSignatureAlgorithmECDSAX962SHA1, 
+                       _MSSignatureAlgorithmECDSAX962SHA224, _MSSignatureAlgorithmECDSAX962SHA256, 
+                       _MSSignatureAlgorithmECDSAX962SHA384, _MSSignatureAlgorithmECDSAX962SHA512, 
+                       _MSSignatureAlgorithmRSAPKCS1v5MD5, _MSSignatureAlgorithmRSAPKCS1v5SHA1, 
+                       _MSSignatureAlgorithmRSAPKCS1v5SHA224, _MSSignatureAlgorithmRSAPKCS1v5SHA256, 
+                       _MSSignatureAlgorithmRSAPKCS1v5SHA384, _MSSignatureAlgorithmRSAPKCS1v5SHA512 ]
+    objc-classes:    [ MSAlgorithmIdentifier, MSCMSAppleHashAgilityAttribute, MSCMSAttribute, 
+                       MSCMSContentInfo, MSCMSCountersignatureAttribute, MSCMSMutableAttributeArray, 
+                       MSCMSSignedData, MSCMSSignerInfo, MSCMSSigningTimeAttribute, 
+                       MSDecodeOptions, MSOID ]
 ...

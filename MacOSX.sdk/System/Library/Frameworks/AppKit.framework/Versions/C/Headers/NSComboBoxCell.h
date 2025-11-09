@@ -1,7 +1,7 @@
 /*
 	NSComboBoxCell.h
 	Application Kit
-	Copyright (c) 1996-2017, Apple Inc.
+	Copyright (c) 1996-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSComboBoxCell : NSTextFieldCell   {
     /*All instance variables are private*/
-    id _delegate;
-    id _dataSource;
+    id _delegate APPKIT_IVAR;
+    id _dataSource APPKIT_IVAR;
     struct __cbcFlags {
         unsigned int usesDataSource:1;
         unsigned int completes:1;
@@ -27,14 +27,14 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int synchronizingSelection:1;
         unsigned int reserved:9;
 	unsigned int visibleItems:16;
-    } _cbcFlags;
-    NSButtonCell *_buttonCell;
-    NSTableView *_tableView;
-    NSScrollView *_scrollView;
-    NSWindow *_popUp;
-    NSMutableArray *_popUpList;
-    NSRect *_cellFrame;
-    void *_reserved;
+    } _cbcFlags APPKIT_IVAR;
+    NSButtonCell *_buttonCell APPKIT_IVAR;
+    NSTableView *_tableView APPKIT_IVAR;
+    NSScrollView *_scrollView APPKIT_IVAR;
+    NSWindow *_popUp APPKIT_IVAR;
+    NSMutableArray *_popUpList APPKIT_IVAR;
+    NSRect *_cellFrame APPKIT_IVAR;
+    void *_reserved APPKIT_IVAR;
  }
 
 @property BOOL hasVerticalScroller;

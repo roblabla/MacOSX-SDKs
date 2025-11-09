@@ -89,8 +89,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 /*! @property   useLayerInputUnitTransformMode
  *  @abstract   if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer,
  *              even if said weights are specified as nil.
- *              For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in @ref MPSBasicRNNDescriptor,
- *              but not in @ref inputTransform. Defaults to NO.
+ *              For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in @ref MPSRNNSingleGateDescriptor. Defaults to NO.
  */
 @property(readwrite, nonatomic) BOOL            useLayerInputUnitTransformMode;
 
@@ -103,45 +102,6 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  */
 @property(readwrite, nonatomic) BOOL            useFloat32Weights;
 
-
-// Input transformation
-
-/*! @property   inputTransform
- *  @abstract   Transform the input of the RNN layer before any other operations. For an image based RNN
- *              this perfoms a convolution operation as specified by the data source and for a matrix based RNN
- *              it performs a matrix multiply and an affine transform - in this case the kernelWidth and
- *              kernelHeight must be equal to one in order for it to define a matrix. This applies across all
- *              the other data sources defined in the different RNN descriptors.
- *              If the normal operation of the RNN layer is:
- *                  (yt, ht, ct) = f(xt,ht-1,ct-1), then this transformation replaces 'xt' with 'W*xt + b'.
- *              If nil, no operation is performed. Defaults to nil.
- */
-@property (readwrite, retain, nonatomic, nullable)  id <MPSCNNConvolutionDataSource> inputTransform;
-
-
-// Output transformation
-
-/*! @property   outputTransform
- *  @abstract   Transform the output values on the destination of the RNN layer after all other operations.
- *              For a image based RNN this perfoms a convolution operation as specified by the data source
- *              and for a matrix based RNN it performs a matrix multiply and an affine transform.
- *              If the normal operation of the RNN layer is:
- *                  (yt, ht, ct) = f(xt,ht-1,ct-1), then this transformation replaces 'yt' with 'W*yt + b'.
- *              If nil, no operation is performed on the output values. Defaults to nil.
- */
-@property (readwrite, retain, nonatomic, nullable)  id <MPSCNNConvolutionDataSource> outputTransform;
-
-// Recurrent output transformation
-
-/*! @property   recurrentOutputTransform
- *  @abstract   Transform the output values on the destination of the RNN layer after all other operations.
- *              For a image based RNN this perfoms a convolution operation as specified by the data source
- *              and for a matrix based RNN it performs a matrix multiply and an affine transform.
- *              If the normal operation of the RNN layer is:
- *                  (yt, ht, ct) = f(xt,ht-1,ct-1), then this transformation replaces 'ht' with 'W*ht + b'.
- *              If nil, no operation is performed on the output values. Defaults to nil.
- */
-@property (readwrite, retain, nonatomic, nullable)  id <MPSCNNConvolutionDataSource> recurrentOutputTransform;
 
 
 /*! @property   layerSequenceDirection
@@ -268,7 +228,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
  *                      c_i =      Uh_ij * (r_j h0_j)  +  Vh_ij * (z_j h0_j)
  *                      h_i = gh(  Wh_ij * x_j  + c_i + bh_i  )
  *
- *                  h1_i = ( 1 - z_i ^ p)^(1/p) h0_i + z_i h_i
+ *                  h1_i = ( 1 - z_i ^ p)^(1/p) h_i + z_i h0_i
  *
  *
  *              The '*' stands for convolution (see @ref MPSRNNImageInferenceLayer) or matrix-vector/matrix multiplication
@@ -344,7 +304,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 /*! @property   flipOutputGates
  *  @abstract   If YES then the GRU-block output formula is changed to:
- *                  h1_i = ( 1 - z_i ^ p)^(1/p) h_i + z_i h0_i.
+ *                  h1_i = ( 1 - z_i ^ p)^(1/p) h0_i + z_i h_i.
  *              Defaults to NO.
  */
 @property(readwrite, nonatomic) BOOL        flipOutputGates;
@@ -541,6 +501,11 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *  @abstract   Neuron parameter B for 'gh'. Defaults to 1.0f.
  */
 @property(readwrite, nonatomic) float                   cellToOutputNeuronParamB;
+
+/*! @property   cellToOutputNeuronParamC
+ *  @abstract   Neuron parameter C for 'gh'. Defaults to 1.0f.
+ */
+@property(readwrite, nonatomic) float                   cellToOutputNeuronParamC;
 
 
 
@@ -828,6 +793,8 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
+
+
 #pragma mark -
 #pragma mark MPSRNNMatrixInferenceLayer
 
@@ -847,10 +814,29 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              from a previous set of recurrent states, but this can be achieved quite easily by defining two separate
  *              unidirectional stacks of layers, and running the same input sequence on them separately (one forwards and one backwards)
  *              and ultimately combining the two result sequences as desired with auxiliary functions.
- *              The input and output vectors in encode calls are stored as rows of the input and output matrices and currently
- *              MPSRNNMatrixInferenceLayer supports only matrices with number of rows equal to one. The mathematical operation then is
- *              strictly speaking y^T = W x^T  <=> y = x W^T in the linear transformations of @ref MPSRNNSingleGateDescriptor,
- *              @ref MPSLSTMDescriptor and @ref MPSGRUDescriptor.
+ *              The input and output vectors in encode calls are stored as rows of the input and output matrices and
+ *              MPSRNNMatrixInferenceLayer supports matrices with decreasing number of rows: The row-indices identify the different
+ *              sequences that may be of different lengths - for example if we have three sequences:
+ *                  ( x1, x2, x3 ), ( y1, y2, y3, y4 ) and ( z1, z2 )
+ *              of vectors xi, yi and zi, then these can be inserted together as a batch to the sequence encoding kernel by
+ *              using the matrices:
+ *                  @code
+ *                           ( y1 )        ( y2 )        ( y3 )        ( y4 )
+ *                      m1 = ( x1 ),  m2 = ( x2 ),  m3 = ( x3 ),  m4 =
+ *                           ( z1 )        ( z2 )
+ *                  @endcode
+ *              If a recurrent output state is requested then it will contain the state corresponding to last inputs to each
+ *              sequence and if all the intermediate states are requested (see storeAllIntermediateStates),
+ *              then the shorter sequences will be propagated by copying the state of the previous output if the
+ *              input vector is not present in the sequence - in the example above the output states would be:
+ *                  @code
+ *                           ( s_y1 )        ( s_y2 )        ( s_y3 )        ( s_y4 )
+ *                      s1 = ( s_x1 ),  s2 = ( s_x2 ),  s3 = ( s_x3 ),  s4 = ( s_x3 )
+ *                           ( s_z1 )        ( s_z2 )        ( s_z2 )        ( s_z2 )
+ *                  @endcode
+ *              The mathematical operation described in the linear transformations of @ref MPSRNNSingleGateDescriptor
+ *              @ref MPSLSTMDescriptor and @ref MPSGRUDescriptor are y^T = W x^T  <=> y = x W^T, where x is the matrix containing
+ *              the input vectors as rows, y is the matrix containing the output vectors as rows and W is the weight matrix.
  *
  */
 MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
@@ -936,8 +922,12 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
  *                  results at the end using utility functions.
  *  @param      commandBuffer                   A valid MTLCommandBuffer to receive the encoded filter
  *  @param      sourceMatrices                  An array of valid MPSMatrix objects containing the sequence of source matrices.
+ *  @param      sourceOffsets                   An array of byte-offsets into the sourceMatrices, if nil zeros are assumed and
+ *                                                  if not nil must contain offset for every matrix in sourceMatrices.
  *  @param      destinationMatrices             An array valid MPSMatrices to be overwritten by result matrix sequence.
  *                                                  destinationMatrices may not alias sourceMatrices.
+ *  @param      destinationOffsets              An array of byte-offsets into the destinationMatrices, if nil zeros are assumed and
+ *                                                  if not nil must contain offset for every matrix in destinationMatrices.
  *  @param      recurrentInputState             An optional state containing the output matrices and memory cells (for LSTMs)
  *                                                  of the layer obtained from the previous input matrices in a sequence of inputs.
  *                                                  Has to be the output of a previous call to this function or nil (assumed zero).
@@ -975,6 +965,17 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
  *                                                               recurrentOutputState: nil];
  *                                                  @endcode
  */
+
+-( void )  encodeSequenceToCommandBuffer:(nonnull id<MTLCommandBuffer>)commandBuffer
+                          sourceMatrices:(NSArray<MPSMatrix*> * __nonnull)sourceMatrices
+                           sourceOffsets:(NSUInteger * __nullable) sourceOffsets
+                     destinationMatrices:(NSArray<MPSMatrix*> * __nonnull)destinationMatrices
+                      destinationOffsets:(NSUInteger * __nullable) destinationOffsets
+                     recurrentInputState:(MPSRNNRecurrentMatrixState * __nullable)recurrentInputState
+                   recurrentOutputStates:(NSMutableArray<MPSRNNRecurrentMatrixState*>  * __nullable)recurrentOutputStates
+MPS_SWIFT_NAME( encodeSequence(commandBuffer:sourceMatrices:sourceOffsets:destinationMatrices:destinationOffsets:recurrentInputState:recurrentOutputStates:))
+MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+
 
 -( void )  encodeSequenceToCommandBuffer:(nonnull id<MTLCommandBuffer>)commandBuffer
                           sourceMatrices:(NSArray<MPSMatrix*> * __nonnull)sourceMatrices
@@ -1042,6 +1043,417 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
                                device:(nullable id <MTLDevice>) device;
 
 @end    /* MPSRNNMatrixInferenceLayer */
+
+
+
+
+/*!
+ *  @class      MPSRNNMatrixTrainingState
+ *  @dependency This depends on Metal.framework
+ *  @discussion This class holds the data that is passed from the forward pass needed in the backward pass.
+ *
+ */
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0))
+@interface  MPSRNNMatrixTrainingState : MPSState
+@end
+
+/*! @enum       MPSRNNMatrixId
+ *  @abstract   Defines which matrix is to be copied in or out of the trainable RNN layer -
+ *              @see MPSRNNMatrixTrainingLayer:encodeCopyWeightsToCommandBuffer. That is, this identifies a
+ *              matrix within the set of trainable weight parameters in @ref initWithDevice, @ref createWeightGradientMatrices
+ *              @ref encodeForwardSequenceToCommandBuffer, @ref encodeGradientSequenceToCommandBuffer etc.
+ */
+#if defined(DOXYGEN)
+#    define MPS_SWIFT_NAME(_a)
+#    define MPS_ENUM_AVAILABLE_STARTING(...)
+typedef enum MPSRNNMatrixId
+#else
+typedef NS_ENUM(NSUInteger, MPSRNNMatrixId)
+#endif
+{
+    MPSRNNMatrixIdSingleGateInputWeights            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)) MPS_SWIFT_NAME(SingleGateInputWeights)  = 0,
+    MPSRNNMatrixIdSingleGateRecurrentWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdSingleGateBiasTerms               MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+
+
+    MPSRNNMatrixIdLSTMInputGateInputWeights         MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMInputGateRecurrentWeights     MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMInputGateMemoryWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMInputGateBiasTerms            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+
+    MPSRNNMatrixIdLSTMForgetGateInputWeights         MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMForgetGateRecurrentWeights     MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMForgetGateMemoryWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMForgetGateBiasTerms            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+
+    MPSRNNMatrixIdLSTMMemoryGateInputWeights         MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMMemoryGateRecurrentWeights     MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMMemoryGateMemoryWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMMemoryGateBiasTerms            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+
+    MPSRNNMatrixIdLSTMOutputGateInputWeights         MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMOutputGateRecurrentWeights     MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMOutputGateMemoryWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMOutputGateBiasTerms            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+
+
+    MPSRNNMatrixIdGRUInputGateInputWeights            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdGRUInputGateRecurrentWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdGRUInputGateBiasTerms               MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+
+    MPSRNNMatrixIdGRURecurrentGateInputWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdGRURecurrentGateRecurrentWeights    MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdGRURecurrentGateBiasTerms           MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+
+    MPSRNNMatrixIdGRUOutputGateInputWeights            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdGRUOutputGateRecurrentWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdGRUOutputGateInputGateWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdGRUOutputGateBiasTerms               MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+
+    MPSRNNMatrixId_count // Do not use - auxiliary enum value that gives number of ids.
+
+}
+#if defined(DOXYGEN)
+MPSRNNMatrixId
+#endif
+;
+
+
+
+
+#pragma mark -
+#pragma mark MPSRNNMatrixTrainingLayer
+
+/*!
+ *  @class      MPSRNNMatrixTrainingLayer
+ *  @dependency This depends on Metal.framework
+ *  @discussion The MPSRNNMatrixTrainingLayer specifies a recurrent neural network layer for training on MPSMatrices.
+ *
+ *              A MPSRNNMatrixTrainingLayer is initialized using a @ref MPSRNNLayerDescriptor, which further specifies the
+ *              recurrent network layer.
+ *              The input and output vectors in encode calls are stored as rows of the input and output matrices and
+ *              MPSRNNMatrixTrainingLayer supports matrices with decreasing number of rows: The row-indices identify the different
+ *              sequences that may be of different lengths - for example if we have three sequences:
+ *                  ( x1, x2, x3 ), ( y1, y2, y3, y4 ) and ( z1, z2 )
+ *              of vectors xi, yi and zi, then these can be inserted together as a batch to the sequence encoding kernel by
+ *              using the matrices:
+ *                  @code
+ *                           ( y1 )        ( y2 )        ( y3 )        ( y4 )
+ *                      m1 = ( x1 ),  m2 = ( x2 ),  m3 = ( x3 ),  m4 =
+ *                           ( z1 )        ( z2 )
+ *                  @endcode
+ *              The gradient computation pass is then achieved by passing the corresponding gradient sequence from the
+ *              previous layer ( dx1, dx2, dx3 ), ( dy1, dy2, dy3, dy4 ) and ( dz1, dz2 ) as matrices
+ *                  @code
+ *                            ( dy1 )         ( dy2 )         ( dy3 )         ( dy4 )
+ *                      dm1 = ( dx1 ),  dm2 = ( dx2 ),  dm3 = ( dx3 ),  dm4 =
+ *                            ( dz1 )         ( dz2 )
+ *                  @endcode
+ *
+ *              The mathematical operation described in the linear transformations of @ref MPSRNNSingleGateDescriptor
+ *              @ref MPSLSTMDescriptor and @ref MPSGRUDescriptor are y^T = W x^T  <=> y = x W^T, where x is the matrix containing
+ *              the input vectors as rows, y is the matrix containing the output vectors as rows and W is the weight matrix.
+ *
+ */
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0))
+@interface  MPSRNNMatrixTrainingLayer : MPSKernel
+
+
+/*! @property   inputFeatureChannels
+ *  @abstract   The number of feature channels input vector/matrix.
+ */
+@property(readonly, nonatomic) NSUInteger       inputFeatureChannels;
+
+/*! @property   outputFeatureChannels
+ *  @abstract   The number of feature channels in the output vector/matrix.
+ */
+@property(readonly, nonatomic) NSUInteger       outputFeatureChannels;
+
+/*! @property   storeAllIntermediateStates
+ *  @abstract   If YES then calls to functions @ref encodeForwardSequenceToCommandBuffer and
+ *              @ref encodeGradientSequenceToCommandBuffer return every recurrent state
+ *              in the array: recurrentOutputStates.
+ *              Defaults to NO.
+ */
+@property(readwrite, nonatomic) BOOL            storeAllIntermediateStates;
+
+
+/*! @property   recurrentOutputIsTemporary
+ *  @abstract   How recurrent output states from @ref encodeForwardSequenceToCommandBuffer
+ *              and encodeGradientSequenceToCommandBuffer are constructed.
+ *              Defaults to NO. For reference @see MPSState.
+ */
+@property(readwrite, nonatomic) BOOL            recurrentOutputIsTemporary;
+
+
+/*! @property   trainingStateIsTemporary
+ *  @abstract   How training output states from @ref encodeForwardSequenceToCommandBuffer are constructed.
+ *              Defaults to NO. For reference @see MPSState.
+ */
+@property(readwrite, nonatomic) BOOL            trainingStateIsTemporary;
+
+/*! @property   accumulateWeightGradients
+ *  @abstract   If yes then the computed weight gradients are accumulated on top of existing values in
+ *              calls to the gradient computation functions: encodeGradientSequenceToCommandBuffer.
+ *              Defaults to NO.
+ */
+@property(readwrite, nonatomic) BOOL            accumulateWeightGradients;
+
+
+/*!
+ *  @abstract   Initializes a linear (fully connected) RNN kernel for training
+ *  @param      device                      The MTLDevice on which this MPSRNNMatrixLayer filter will be used
+ *  @param      rnnDescriptor               The descriptor that defines the RNN layer
+ *  @param      trainableWeights            An array where to store the weights of the layer as MPSMatrices.
+ *                                          NOTE: The exact layout and number of matrices may vary between
+ *                                          platforms and therefore you should not save out these weights directly,
+ *                                          but instead use the function encodeCopyWeightsToCommandBuffer to identify
+ *                                          the weights and biases for serialization.
+ *                                          Typically you should pass here an initialized but empty NSMutableArray and
+ *                                          when this function returns the array will have been populated with the
+ *                                          weight matrices needed in the encode-calls, by using initial values from
+ *                                          the datasources in rnnDescriptor.
+ *  @return     A valid MPSRNNMatrixTrainingLayer object or nil, if failure.
+ */
+-(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
+                         rnnDescriptor: (nonnull const MPSRNNDescriptor*) rnnDescriptor
+                      trainableWeights: (NSMutableArray<MPSMatrix*>  * __nonnull)trainableWeights
+NS_DESIGNATED_INITIALIZER
+MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+
+
+/*!
+ *  @abstract   Initializes a set of matrices that can be used in training for weight and bias gradient outputs in
+ *              @see encodeBackwardSequenceToCommandBuffer. Can be also used to easily create auxiliary matrices for example
+ *              for ADAM and other advanced optimization schemes. The layout and number of matrices is the same as for the outputs of
+ *              @see initWithDevice, but the data type may differ. NOTE: These matrices cannot be used as weight matrices in the
+ *              forward and backward encode calls, but matrices from initWithDevice() or createWeightMatrices() should be used instead.
+ *  @param      matricesOut                 An array where the newly created matrices will be stored, will be initialized to zero.
+ *  @param      dataType                    Datatype for the entries - currently MPSDataTypeFloat32 and MPSDataTypeFloat16 are supported.
+ */
+-(void) createWeightGradientMatrices: (NSMutableArray<MPSMatrix*>  * __nonnull) matricesOut
+                            dataType: (MPSDataType) dataType
+MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+
+/*!
+ *  @abstract   As @ref createWeightGradientMatrices, but the matrices will be temporary with readCount = 1, which means that they
+ *              become invalid after the first encode call that reads them. Note also that as the matrices are temporary, their
+ *              storage mode will be private which means that you can only access the data using a kernel on the GPU.
+ *  @param      matricesOut                 An array where the newly created matrices will be stored, will be initialized to zero.
+ *  @param      dataType                    Datatype for the entries - currently MPSDataTypeFloat32 and MPSDataTypeFloat16 are supported.
+ *  @param      commandBuffer               The command buffer that the temporary matrices will live on.
+ */
+-(void) createTemporaryWeightGradientMatrices: (NSMutableArray<MPSMatrix*>  * __nonnull) matricesOut
+                                     dataType: (MPSDataType) dataType
+                                commandBuffer: (nonnull id<MTLCommandBuffer>) commandBuffer
+MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+
+
+/*!
+ *  @abstract   Initializes a set of matrices that can be used in training for weight and bias matrices in
+ *              the forward and backward passes. The layout, datatype and number of matrices is the same as for the outputs of
+ *              @see initWithDevice.
+ *  @param      matricesOut                 An array where the newly created matrices will be stored, will be initialized to zero.
+ */
+-(void) createWeightMatrices: (NSMutableArray<MPSMatrix*>  * __nonnull) matricesOut
+MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+
+
+/*
+ * Use initWithDevice:rnnDescriptor instead
+ */
+-(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device NS_UNAVAILABLE;
+
+
+/*!
+ *  @abstract   Encode a copy kernel that copies one matrix from the trainable weight set to a matrix with standard layout,
+ *              where the column index is the input feature channel index (in forward direction) and row index is the output
+ *              feature channel index.
+ *  @param      commandBuffer                   A valid MTLCommandBuffer to receive the encoded filter
+ *  @param      weights                         An array weights from @see initWithDevice or @see createWeightMatrices.
+ *  @param      matrixId                        Which matrix to copy - has to be a valid Id based on inputs defined in
+ *                                              the rnnDescriptor of @see initWithDevice.
+ *  @param      matrix                          The destination or source matrix that is used in the copy.
+ *  @param      copyFromWeightsToMatrix         If YES then the copy direction is from the set of trainable 'weights' to 'matrix',
+ *                                              otherwise the copy is done from 'matrix' to 'weights'.
+ *  @param      matrixOffset                    A (valid) offset into matrix to be applied to the copy operation.
+ */
+
+-( void )  encodeCopyWeightsToCommandBuffer: (nonnull id<MTLCommandBuffer>)commandBuffer
+                                    weights: (NSArray<MPSMatrix*>  * __nonnull)weights
+                                   matrixId: (MPSRNNMatrixId) matrixId
+                                     matrix: (MPSMatrix * __nonnull) matrix
+                    copyFromWeightsToMatrix: (BOOL) copyFromWeightsToMatrix
+                               matrixOffset: (MTLOrigin) matrixOffset
+
+MPS_SWIFT_NAME( encodeCopyWeights(commandBuffer:weights:matrixId:matrix:copyFromWeightsToMatrix:matrixOffset:));
+
+
+/*!
+ *  @abstract   Encode an MPSRNNMatrixTrainingLayer forward pass kernel for a sequence of inputs into a command buffer.
+ *  @param      commandBuffer                   A valid MTLCommandBuffer to receive the encoded filter
+ *  @param      sourceMatrices                  An array of valid MPSMatrix objects containing the sequence of source matrices.
+ *  @param      sourceOffsets                   An array of byte-offsets into the sourceMatrices, if nil zeros are assumed and
+ *                                                  if not nil must contain offset for every matrix in sourceMatrices.
+ *  @param      destinationMatrices             An array valid MPSMatrices to be overwritten by result matrix sequence.
+ *                                                  destinationMatrices may not alias sourceMatrices.
+ *  @param      destinationOffsets              An array of byte-offsets into the destinationMatrices, if nil zeros are assumed and
+ *                                                  if not nil must contain offset for every matrix in destinationMatrices.
+ *  @param      trainingStates                   An array containing the training states to be passed to the gradient computation
+ *                                                  encode function.
+ *  @param      recurrentInputState             An optional state containing the output matrices and memory cells (for LSTMs)
+ *                                                  of the layer obtained from the previous input matrices in a sequence of inputs.
+ *                                                  Has to be the output of a previous call to this function or nil (assumed zero).
+ *  @param      recurrentOutputStates           An array that will be appended with the recurrent output states. May not be nil.
+ *                                                  If recurrentOutputIsTemporary is YES and then all returned recurrent states
+ *                                                  will be temporary. @see MPSState:isTemporary.
+ *  @param      weights                         An array of valid MPSMatrix objects containing the weights, should be the array
+ *                                                  that was produced either by @see initWithDevice or @see createWeightMatrices.
+ */
+
+-( void )  encodeForwardSequenceToCommandBuffer:(nonnull id<MTLCommandBuffer>)commandBuffer
+                                 sourceMatrices:(NSArray<MPSMatrix*> * __nonnull)sourceMatrices
+                                  sourceOffsets:(NSUInteger * __nullable)sourceOffsets
+                            destinationMatrices:(NSArray<MPSMatrix*> * __nonnull)destinationMatrices
+                             destinationOffsets:(NSUInteger * __nullable)destinationOffsets
+                                 trainingStates:(NSMutableArray<MPSRNNMatrixTrainingState*> * __nonnull) trainingStates
+                            recurrentInputState:(MPSRNNRecurrentMatrixState * __nullable)recurrentInputState
+                          recurrentOutputStates:(NSMutableArray<MPSRNNRecurrentMatrixState*>  * __nullable)recurrentOutputStates
+                                        weights:(NSArray<MPSMatrix*>  * __nonnull)weights
+
+MPS_SWIFT_NAME( encodeForwardSequence(commandBuffer:sourceMatrices:sourceOffsets:destinationMatrices:destinationOffsets:trainingStates:recurrentInputState:recurrentOutputStates:weights:));
+
+/*!
+ *  @abstract   Encode an MPSRNNMatrixTrainingLayer forward pass kernel for a sequence of inputs into a command buffer.
+ *  @param      commandBuffer                   A valid MTLCommandBuffer to receive the encoded filter
+ *  @param      sourceMatrices                  An array of valid MPSMatrix objects containing the sequence of source matrices.
+ *  @param      destinationMatrices             An array valid MPSMatrices to be overwritten by result matrix sequence.
+ *                                                  destinationMatrices may not alias sourceMatrices.
+ *  @param      trainingStates                   An array containing the training states to be passed to the gradient computation
+ *                                                  encode function.
+ *  @param      weights                         An array of valid MPSMatrix objects containing the weights, should be the array
+ *                                                  that was produced either by @see initWithDevice or @see createWeightMatrices.
+ */
+
+-( void )  encodeForwardSequenceToCommandBuffer:(nonnull id<MTLCommandBuffer>)commandBuffer
+                                 sourceMatrices:(NSArray<MPSMatrix*> * __nonnull)sourceMatrices
+                            destinationMatrices:(NSArray<MPSMatrix*> * __nonnull)destinationMatrices
+                                 trainingStates:(NSMutableArray<MPSRNNMatrixTrainingState*> * __nonnull) trainingStates
+                                        weights:(NSArray<MPSMatrix*>  * __nonnull)weights
+
+MPS_SWIFT_NAME( encodeForwardSequence(commandBuffer:sourceMatrices:destinationMatrices:trainingStates:weights:));
+
+
+
+/*!
+ *  @abstract   Encode an MPSRNNMatrixTrainingLayer gradient pass kernel for a sequence of input gradients into a command buffer.
+ *              NOTE: The time sequence indexing follows the array indexing in the inputs: sourceGradients[0] has to contain the
+ *              gradients corresponding to the first matrix in the forward pass corresponding to the current subsequence, which is
+ *              typically sourceMatrices[0].
+ *  @param      commandBuffer                   A valid MTLCommandBuffer to receive the encoded filter
+ *  @param      forwardSources                  An array of MPSMatrix objects containing the sequence of source matrices of the forward pass.
+ *  @param      forwardSourceOffsets            An array of byte-offsets into the forwardSources, if nil zeros are assumed and
+ *                                                  if not nil must contain offset for every matrix in forwardSources.
+ *  @param      sourceGradients                 An array of valid MPSMatrix objects containing the sequence of source gradient matrices.
+ *  @param      sourceGradientOffsets           An array of byte-offsets into the sourceGradients, if nil zeros are assumed and
+ *                                                  if not nil must contain offset for every matrix in sourceGradients.
+ *  @param      destinationGradients            An array valid MPSMatrix objects that will receive the backpropagated gradients, may be
+ *                                                  nil if not needed (for example first layer in graph).
+ *  @param      destinationOffsets              An array of byte-offsets into the destinationGradients, if nil zeros are assumed and
+ *                                                  if not nil must contain offset for every matrix in destinationGradients.
+ *  @param      weightGradients                 An array of valid MPSMatrix objects that will receive the gradient wrt. weights and
+ *                                                  biases of the layer - should be the array that was produced either
+ *                                                  by @see initWithDevice or @see createWeightMatrices. May be nil in which case
+ *                                                  the gradients for the weights are not computed.
+ *  @param      trainingStates                  An array containing the training states from the forward pass - the array must contain
+ *                                                  the states corresponding to the input gradients is sourceGradients.
+ *  @param      recurrentInputState             An optional state containing the output matrices and memory cells (for LSTMs)
+ *                                                  of the layer obtained from the previous input gradients in a sequence of inputs.
+ *                                                  Has to be the output of a previous call to this function or nil (assumed zero).
+ *  @param      recurrentOutputStates           An array that will be appended with the recurrent output states. Can be nil.
+ *                                                  If recurrentOutputIsTemporary is YES and then all returned recurrent states
+ *                                                  will be temporary. @see MPSState:isTemporary.
+ *  @param      weights                         An array of valid MPSMatrix objects containing the weights, should be the array
+ *                                                  that was produced either by @see initWithDevice or @see createWeightMatrices.
+ */
+
+-( void )  encodeGradientSequenceToCommandBuffer:(nonnull id<MTLCommandBuffer>) commandBuffer
+                                  forwardSources:(NSArray<MPSMatrix*> * __nonnull) forwardSources
+                            forwardSourceOffsets:(NSUInteger * __nullable)forwardSourceOffsets
+                                 sourceGradients:(NSArray<MPSMatrix*> * __nonnull) sourceGradients
+                           sourceGradientOffsets:(NSUInteger * __nullable)sourceGradientOffsets
+                            destinationGradients:(NSArray<MPSMatrix*> * __nullable) destinationGradients
+                              destinationOffsets:(NSUInteger * __nullable)destinationOffsets
+                                 weightGradients:(NSArray<MPSMatrix*> * __nullable) weightGradients
+                                  trainingStates:(NSArray<MPSRNNMatrixTrainingState*> * __nonnull) trainingStates
+                             recurrentInputState:(MPSRNNRecurrentMatrixState * __nullable) recurrentInputState
+                           recurrentOutputStates:(NSMutableArray<MPSRNNRecurrentMatrixState*>  * __nullable) recurrentOutputStates
+                                         weights:(NSArray<MPSMatrix*>  * __nonnull)weights
+
+MPS_SWIFT_NAME( encodeGradientSequence(commandBuffer:forwardSources:forwardSourceOffsets:sourceGradients:sourceOffsets:destinationGradients:destinationOffsets:weightGradients:trainingStates:recurrentInputState:recurrentOutputStates:weights:));
+
+
+/*!
+ *  @abstract   Encode an MPSRNNMatrixTrainingLayer gradient pass kernel for a sequence of input gradients into a command buffer.
+ *              NOTE: The time sequence indexing follows the array indexing in the inputs: sourceGradients[0] has to contain the
+ *              gradients corresponding to the first matrix in the forward pass corresponding to the current subsequence, which is
+ *              typically sourceMatrices[0].
+ *  @param      commandBuffer                   A valid MTLCommandBuffer to receive the encoded filter
+ *  @param      forwardSources                  An array of MPSMatrix objects containing the sequence of source matrices of the forward pass.
+ *  @param      sourceGradients                 An array of MPSMatrix objects containing the sequence of source gradient matrices.
+ *  @param      destinationGradients            An array valid MPSMatrix objects that will receive the backpropagated gradients, may be
+ *                                                  nil if not needed (for example first layer in graph).
+ *  @param      weightGradients                 An array valid MPSMatrix objects that will receive the gradient wrt. weights and
+ *                                                  biases of the layer - should be the array that was produced either
+ *                                                  by @see initWithDevice or @see createWeightMatrices. May be nil in which case
+ *                                                  the gradients for the weights are not computed.
+ *                                                  NOTE: The weight gradients are accumulated on top of existing values so
+ *
+ *  @param      trainingStates                  An array containing the training states from the forward pass - the array must contain
+ *                                                  the states corresponding to the input gradients is sourceGradients.
+ *  @param      weights                         An array of valid MPSMatrix objects containing the weights, should be the array
+ *                                                  that was produced either by @see initWithDevice or @see createWeightMatrices.
+ */
+
+-( void )  encodeGradientSequenceToCommandBuffer:(nonnull id<MTLCommandBuffer>) commandBuffer
+                                  forwardSources:(NSArray<MPSMatrix*> * __nonnull) forwardSources
+                                 sourceGradients:(NSArray<MPSMatrix*> * __nonnull) sourceGradients
+                            destinationGradients:(NSArray<MPSMatrix*> * __nullable) destinationGradients
+                                 weightGradients:(NSArray<MPSMatrix*> * __nullable) weightGradients
+                                  trainingStates:(NSArray<MPSRNNMatrixTrainingState*> * __nonnull) trainingStates
+                                         weights:(NSArray<MPSMatrix*>  * __nonnull)weights
+
+MPS_SWIFT_NAME( encodeGradientSequence(commandBuffer:forwardSources:sourceGradients:destinationGradients:weightGradients:trainingStates:weights:));
+
+
+
+/*! @abstract NSSecureCoding compatability
+ *  @discussion See @ref MPSKernel#initWithCoder.
+ *  @param      aDecoder    The NSCoder subclass with your serialized MPSRNNMatrixTrainingLayer
+ *  @param      device      The MTLDevice on which to make the MPSRNNMatrixTrainingLayer
+ *  @return     A new MPSRNNMatrixTrainingLayer object, or nil if failure.
+ */
+-(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
+                                device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+
+
+/*!
+ *  @abstract   Make a copy of this kernel for a new device - @see MPSKernel
+ *  @param      zone        The NSZone in which to allocate the object
+ *  @param      device      The device for the new MPSKernel. If nil, then use
+ *                          self.device.
+ *  @result     a pointer to a copy of this MPSKernel. This will fail, returning
+ *              nil if the device is not supported. Devices must be
+ *              MTLFeatureSet_iOS_GPUFamily2_v1 or later.
+ */
+
+- (nonnull instancetype) copyWithZone:(nullable NSZone *)zone
+                               device:(nullable id <MTLDevice>) device;
+
+@end    /* MPSRNNMatrixTrainingLayer */
+
+
 
 #ifdef __cplusplus
 }

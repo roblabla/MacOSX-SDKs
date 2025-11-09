@@ -32,6 +32,13 @@ typedef NS_ENUM(NSInteger, INMessageType) {
     INMessageTypeMediaVideo,
     INMessageTypeMediaPass,
     INMessageTypeMediaAudio,
+    INMessageTypePaymentSent API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)),
+    INMessageTypePaymentRequest API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)),
+    INMessageTypePaymentNote API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)),
+    INMessageTypeAnimoji API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)),
+    INMessageTypeActivitySnippet API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)),
+    INMessageTypeFile API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)),
+    INMessageTypeLink API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)),
 } API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0));
 
 API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2))

@@ -25,7 +25,7 @@
 
 #import <WebKit/DOMHTMLElement.h>
 
-NS_CLASS_AVAILABLE_MAC(10_5)
+WEBKIT_CLASS_DEPRECATED_MAC(10_5, 10_14)
 @interface DOMHTMLMarqueeElement : DOMHTMLElement
 - (void)start;
 - (void)stop;

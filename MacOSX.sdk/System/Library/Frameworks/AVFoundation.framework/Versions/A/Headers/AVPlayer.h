@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2017 Apple Inc. All rights reserved.
+	Copyright 2010-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -669,6 +669,73 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 
 @end
 
+/*!
+ @typedef AVPlayerHDRMode
+ @abstract  A bitfield type that specifies an HDR mode.
+ 
+ @constant	AVPlayerHDRModeHLG
+ @abstract	Indicates that HLG (Hybrid Log-Gamma) HDR mode is available.
+ @constant	AVPlayerHDRModeHDR10
+ @abstract	Indicates that HDR10 HDR mode is available.
+ @constant	AVPlayerHDRModeDolbyVision
+ @abstract	Indicates that Dolby Vision HDR mode is available.
+ */
+typedef NS_OPTIONS(NSInteger, AVPlayerHDRMode) {
+	AVPlayerHDRModeHLG				= 0x1,
+	AVPlayerHDRModeHDR10				= 0x2,
+	AVPlayerHDRModeDolbyVision		= 0x4,
+} API_AVAILABLE(ios(11.2), tvos(11.2)) API_UNAVAILABLE(macos, watchos);
+
+@interface AVPlayer (AVPlayerPlaybackCapabilities)
+
+/*!
+	 @property		availableHDRModes
+	 @abstract		An AVPlayerHDRMode value that indicates the HDR modes the device can play to an appropriate display.   A value of 0 indicates that no HDR modes are supported.
+ 
+	 @discussion
+		 This property indicates all of the HDR modes that the device can play.  Each value indicates that an appropriate HDR display is available for the specified HDR mode.  Additionally, the device must be capable of playing the specified HDR type.  This property does not indicate whether video contains HDR content, whether HDR video is currently playing, or whether video is playing on an HDR display.
+*/
+@property (class, nonatomic, readonly) AVPlayerHDRMode availableHDRModes API_AVAILABLE(ios(11.2), tvos(11.2)) API_UNAVAILABLE(macos, watchos);
+
+/*!
+	 @constant		AVPlayerAvailableHDRModesDidChangeNotification
+	 @abstract		A notification that fires whenever availableHDRModes changes.
+ 
+	 @discussion
+		 This notification fires when a value is added or removed from the list of availableHDRModes.  This can be caused by display connection/disconnection or resource changes.
+*/
+API_AVAILABLE(ios(11.2), tvos(11.2)) API_UNAVAILABLE(macos, watchos)
+AVF_EXPORT NSNotificationName const AVPlayerAvailableHDRModesDidChangeNotification;
+
+@end
+
+@interface AVPlayer (AVPlayerVideoDecoderGPUSupport)
+
+/*!
+	@property		preferredVideoDecoderGPURegistryID
+	@abstract		Specifies a registryID associated with a GPU that should be used for video decode.
+
+	@discussion
+		By default, whenever possible, video decode will be performed on the GPU associated with the display on which the presenting CALayer is located.  Decode will be transitioned to a new GPU if appropriate when the CALayer moves to a new display.  This property overrides this default behavior, forcing decode to prefer an affinity to the GPU specified regardless of which GPU is being used to display the associated CALayer.
+
+		The GPU registryID can be obtained from the GPU MTLDevice using [MTLDevice registryID] or can be obtained from OpenGL or OpenCL.
+*/
+@property (nonatomic) uint64_t preferredVideoDecoderGPURegistryID API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios, tvos, watchos);
+
+@end
+
+@interface AVPlayer (AVPlayerVideoDisplaySleepPrevention)
+
+/*!
+ @property   preventsDisplaySleepDuringVideoPlayback
+ @abstract   Indicates whether video playback prevents display and device sleep.
+ @discussion
+	 Default is YES on iOS.  Default is NO on macOS.
+	 Setting this property to NO does not force the display to sleep, it simply stops preventing display sleep.  Other apps or frameworks within your app may still be preventing display sleep for various reasons.
+ */
+@property (nonatomic) BOOL preventsDisplaySleepDuringVideoPlayback API_AVAILABLE(ios(12.0), tvos(12.0), macos(10.14)) __WATCHOS_PROHIBITED;
+
+@end
 
 @interface AVPlayer (AVPlayerDeprecated)
 

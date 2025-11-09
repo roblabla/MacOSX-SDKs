@@ -35,7 +35,7 @@
  
  A driver that has successfully matched on an IOUSBHostInterface is able to take ownership of the interface by calling the <code>open</code> method defined by IOService on the IOUSBHostInterface.  Once <code>open</code> has completed successfully, the driver has an open session, and may use the deviceRequest interface to send control requests, the selectAlternateSetting interface to change the endpoints and behavior of the interface.
  
- When the driver is finished with control of the IOUSBHostInterface, it must call <code>close</code> to end its session.  Calling <code>close</code> will synchronously abort that session's outstanding IO on the control endpoint.  If the interface is terminating for any reason, such as the device being unplugged, termination of the IOUSBHostInterface will be blocked until the driver calls <code>close</code>.  The willTerminate call into the driver is the recommended location to call <code>close</code>.
+ When the driver is finished with control of the IOUSBHostInterface, it must call <code>close</code> to end its session.  Calling <code>close</code> will synchronously abort any IO associated with that session, including requests on the control endpoint.  If the interface is terminating for any reason, such as the device being unplugged, the driver must call <code>close</code> on the IOUSBHostInterface, or termination will be blocked and the port will not register newly attached devices for matching.  The willTerminate call into the driver is the recommended location to call <code>close</code>.
  
  <h3>deviceRequest Interface</h3>
  
@@ -158,8 +158,6 @@ while(deviceCandidate != NULL)
 #include <IOKit/usb/IOUSBHostFamily.h>
 #include <IOKit/usb/IOUSBHostDevice.h>
 
-class IOSimpleReporter;
-
 /*!
  * @class       IOUSBHostInterface
  * @brief       The IOService object representing a USB interface
@@ -233,9 +231,6 @@ public:
     virtual void        close(IOService* forClient, IOOptionBits options = 0);
     
     virtual IOReturn    message(UInt32 type, IOService* provider,  void* argument = 0);
-
-    virtual IOReturn configureReport(IOReportChannelList* channels, IOReportConfigureAction action, void* result, void* destination);
-    virtual IOReturn updateReport(IOReportChannelList*channels, IOReportUpdateAction action, void* result, void* destination);
 
     virtual const char* stringFromReturn(IOReturn code);
 
@@ -533,9 +528,6 @@ protected:
 protected:
     struct tExpansionData
     {
-        IOLock*             _reportLock;
-        OSSet*              _reports;
-        IOSimpleReporter*   _idlePolicyReport;
     };
     tExpansionData* _expansionData;
 };

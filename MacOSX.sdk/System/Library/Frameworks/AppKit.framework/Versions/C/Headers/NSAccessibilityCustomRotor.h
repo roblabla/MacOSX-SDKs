@@ -1,7 +1,7 @@
 /*
 	NSAccessibilityCustomRotor.h
 	Application Kit
-	Copyright (c) 2016-2017, Apple Inc.
+	Copyright (c) 2016-2018, Apple Inc.
 	All rights reserved.
  */
 
@@ -83,10 +83,10 @@ typedef NS_ENUM(NSInteger, NSAccessibilityCustomRotorType) {
 API_AVAILABLE(macos(10.13)) @interface NSAccessibilityCustomRotor : NSObject
 {
 @private
-    NSAccessibilityCustomRotorType _type;
-    NSString *_label;
-    __weak id<NSAccessibilityCustomRotorItemSearchDelegate> _itemSearchDelegate;
-    __weak id<NSAccessibilityElementLoading> _itemLoadingDelegate;
+    NSAccessibilityCustomRotorType _type APPKIT_IVAR;
+    NSString *_label APPKIT_IVAR;
+    __weak id<NSAccessibilityCustomRotorItemSearchDelegate> _itemSearchDelegate APPKIT_IVAR;
+    __weak id<NSAccessibilityElementLoading> _itemLoadingDelegate APPKIT_IVAR;
 }
 
 /*!
@@ -146,9 +146,9 @@ API_AVAILABLE(macos(10.13)) @interface NSAccessibilityCustomRotor : NSObject
 API_AVAILABLE(macos(10.13)) @interface NSAccessibilityCustomRotorSearchParameters : NSObject
 {
 @private
-    NSAccessibilityCustomRotorItemResult *_currentItem;
-    NSAccessibilityCustomRotorSearchDirection _searchDirection;
-    NSString *_filterString;
+    NSAccessibilityCustomRotorItemResult *_currentItem APPKIT_IVAR;
+    NSAccessibilityCustomRotorSearchDirection _searchDirection APPKIT_IVAR;
+    NSString *_filterString APPKIT_IVAR;
 }
 
 /*!
@@ -182,11 +182,11 @@ API_AVAILABLE(macos(10.13)) @interface NSAccessibilityCustomRotorSearchParameter
 API_AVAILABLE(macos(10.13)) @interface NSAccessibilityCustomRotorItemResult : NSObject
 {
 @private
-    __weak id<NSAccessibilityElement> _targetElement;
+    __weak id<NSAccessibilityElement> _targetElement APPKIT_IVAR;
     
-    NSRange _targetRange;
-    NSString *_customLabel;
-    id<NSSecureCoding, NSObject> _itemLoadingToken;
+    NSRange _targetRange APPKIT_IVAR;
+    NSString *_customLabel APPKIT_IVAR;
+    id<NSSecureCoding, NSObject> _itemLoadingToken APPKIT_IVAR;
 }
 
 + (instancetype)new NS_UNAVAILABLE;

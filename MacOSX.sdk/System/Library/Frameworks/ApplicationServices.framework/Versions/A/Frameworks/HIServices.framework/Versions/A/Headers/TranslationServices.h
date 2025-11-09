@@ -3,7 +3,7 @@
  
      Contains:   Translation Services Interfaces.
  
-     Copyright:  © 2003-2012 by Apple Computer, Inc., all rights reserved.
+     Copyright:  ï¿½ 2003-2012 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -20,6 +20,7 @@
 
 
 #include <AvailabilityMacros.h>
+#include <CoreServices/CoreServices.h> // FSRef
 
 #if PRAGMA_ONCE
 #pragma once

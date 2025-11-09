@@ -1,7 +1,7 @@
 /*
     NSPressGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2017, Apple Inc.
+    Copyright (c) 2013-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -13,13 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_10, NA)
 @interface NSPressGestureRecognizer : NSGestureRecognizer <NSCoding> {
 @private
-    NSPoint _location;
-    NSUInteger _buttonMask;
-    NSTimeInterval _minimumPressDuration;
-    CGFloat _allowableMovement;
-    NSInteger _buttonCount;
-    NSInteger _lcflags;
-    id _reserved1;
+    NSPoint _location APPKIT_IVAR;
+    NSUInteger _buttonMask APPKIT_IVAR;
+    NSTimeInterval _minimumPressDuration APPKIT_IVAR;
+    CGFloat _allowableMovement APPKIT_IVAR;
+    NSInteger _buttonCount APPKIT_IVAR;
+    NSInteger _lcflags APPKIT_IVAR;
+    id _reserved1 APPKIT_IVAR;
 }
 
 /* bitfield of the button(s) required to recognize this click where bit 0 is the primary button, 1 is the secondary button, etc...

@@ -12,6 +12,7 @@
 #import <Contacts/CNContact.h>
 #import <Contacts/CNContact+Predicates.h>
 #import <Contacts/CNMutableContact.h>
+#import <Contacts/CNContact+NSItemProvider.h>
 
 #import <Contacts/CNLabeledValue.h>
 #import <Contacts/CNPhoneNumber.h>

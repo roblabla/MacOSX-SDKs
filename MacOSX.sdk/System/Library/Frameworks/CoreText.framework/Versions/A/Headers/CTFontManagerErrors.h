@@ -2,7 +2,7 @@
  *  CTFontManagerErrors.h
  *  CoreText
  *
- *  Copyright (c) 2008-2015 Apple Inc. All rights reserved.
+ *  Copyright (c) 2008-2018 Apple Inc. All rights reserved.
  *
  */
 
@@ -10,7 +10,8 @@
 #define __CTFONTMANAGERERRORS__
 
 #include <CoreText/CTDefines.h>
-#include <CoreFoundation/CFString.h>
+
+#include <CoreFoundation/CoreFoundation.h>
 
 CF_EXTERN_C_BEGIN
 CF_ASSUME_NONNULL_BEGIN

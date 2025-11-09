@@ -92,9 +92,11 @@ __BEGIN_DECLS
 #endif // __clang 
 
 #if __XPC_TEST__
-#define XPC_TESTSTATIC 
+#define XPC_TESTSTATIC
+#define XPC_TESTEXTERN(x) extern x
 #else // __XPC_TEST__
 #define XPC_TESTSTATIC static
+#define XPC_TESTEXTERN(x)
 #endif // __XPC_TEST__
 
 #if __has_feature(objc_arc)

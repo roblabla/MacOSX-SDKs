@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MTLDevice;
 @protocol MTLCommandQueue;
 
-NS_AVAILABLE(10_13, 11_0)
+API_AVAILABLE(macos(10.13), ios(11.0))
 @protocol MTLCaptureScope <NSObject>
 
 // Remarks: only MTLCommandBuffers created after -[beginScope] and committed before -[endScope] are captured.

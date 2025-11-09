@@ -33,7 +33,7 @@ typedef unsigned long long DOMTimeStamp;
 
 typedef struct DOMObjectInternal DOMObjectInternal;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMObject : WebScriptObject <NSCopying> {
 @package
     DOMObjectInternal *_internal;
@@ -44,5 +44,5 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @end
 
 @interface DOMObject (DOMLinkStyle)
-@property (readonly, strong) DOMStyleSheet *sheet NS_AVAILABLE_MAC(10_4);
+@property (readonly, strong) DOMStyleSheet *sheet WEBKIT_AVAILABLE_MAC(10_4);
 @end

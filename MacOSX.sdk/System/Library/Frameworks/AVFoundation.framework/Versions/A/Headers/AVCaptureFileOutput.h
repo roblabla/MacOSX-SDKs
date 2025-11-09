@@ -3,7 +3,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2010-2017 Apple Inc. All rights reserved.
+    Copyright 2010-2018 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVCaptureOutputBase.h>
@@ -31,14 +31,12 @@ NS_ASSUME_NONNULL_BEGIN
  
     The concrete subclasses of AVCaptureFileOutput are AVCaptureMovieFileOutput, which records media to a QuickTime movie file, and AVCaptureAudioFileOutput, which writes audio media to a variety of audio file formats.
  */
-NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
-@interface AVCaptureFileOutput : AVCaptureOutput 
+API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+@interface AVCaptureFileOutput : AVCaptureOutput
 {
 @private
     AVCaptureFileOutputInternal *_fileOutputInternal;
 }
-
-#if TARGET_OS_OSX
 
 /*!
  @property delegate
@@ -48,9 +46,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     The value of this property is an object conforming to the AVCaptureFileOutputDelegate protocol that will be able to monitor and control recording along exact sample boundaries.
  */
-@property(nonatomic, assign, nullable) id<AVCaptureFileOutputDelegate> delegate NS_AVAILABLE_MAC(10_7);
-
-#endif // TARGET_OS_OSX
+@property(nonatomic, assign, nullable) id<AVCaptureFileOutputDelegate> delegate API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @property outputFileURL
@@ -109,8 +105,6 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  */
 @property(nonatomic, readonly, getter=isRecording) BOOL recording;
 
-#if TARGET_OS_OSX
-
 /*!
  @property recordingPaused
  @abstract
@@ -119,7 +113,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     This property indicates recording to the file returned by outputFileURL has been previously paused using the pauseRecording method. When a recording is paused, captured samples are not written to the output file, but new samples can be written to the same file in the future by calling resumeRecording.
  */
-@property(nonatomic, readonly, getter=isRecordingPaused) BOOL recordingPaused NS_AVAILABLE_MAC(10_7);
+@property(nonatomic, readonly, getter=isRecordingPaused) BOOL recordingPaused __IOS_PROHIBITED __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*!
  @method pauseRecording
@@ -131,7 +125,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  
     On Mac OS X, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the last samples written to the current file are guaranteed to be those that were output immediately before those in the sample buffer passed to that method.
  */
-- (void)pauseRecording NS_AVAILABLE_MAC(10_7);
+- (void)pauseRecording __IOS_PROHIBITED __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*!
  @method resumeRecording
@@ -143,9 +137,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  
     On Mac OS X, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the first samples written to the current file are guaranteed to be those contained in the sample buffer passed to that method.
  */
-- (void)resumeRecording NS_AVAILABLE_MAC(10_7);
-
-#endif // TARGET_OS_OSX
+- (void)resumeRecording __IOS_PROHIBITED __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*!
  @property recordedDuration
@@ -205,7 +197,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @abstract
     Defines an interface for delegates of AVCaptureFileOutput to respond to events that occur in the process of recording a single file.
  */
-NS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @protocol AVCaptureFileOutputRecordingDelegate <NSObject>
 
 @optional
@@ -246,7 +238,7 @@ NS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  
     Clients should not assume that this method will be called on a specific thread, and should also try to make this method as efficient as possible.
  */
-- (void)captureOutput:(AVCaptureFileOutput *)output didPauseRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray<AVCaptureConnection *> *)connections NS_AVAILABLE_MAC(10_7);
+- (void)captureOutput:(AVCaptureFileOutput *)output didPauseRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray<AVCaptureConnection *> *)connections API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @method captureOutput:didResumeRecordingToOutputFileAtURL:fromConnections:
@@ -265,7 +257,7 @@ NS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  
     Clients should not assume that this method will be called on a specific thread, and should also try to make this method as efficient as possible.
  */
-- (void)captureOutput:(AVCaptureFileOutput *)output didResumeRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray<AVCaptureConnection *> *)connections NS_AVAILABLE_MAC(10_7);
+- (void)captureOutput:(AVCaptureFileOutput *)output didResumeRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray<AVCaptureConnection *> *)connections API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @method captureOutput:willFinishRecordingToOutputFileAtURL:fromConnections:error:
@@ -286,7 +278,7 @@ NS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  
     Clients should not assume that this method will be called on a specific thread, and should also try to make this method as efficient as possible.
  */
-- (void)captureOutput:(AVCaptureFileOutput *)output willFinishRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray<AVCaptureConnection *> *)connections error:(nullable NSError *)error NS_AVAILABLE_MAC(10_7);
+- (void)captureOutput:(AVCaptureFileOutput *)output willFinishRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray<AVCaptureConnection *> *)connections error:(nullable NSError *)error API_UNAVAILABLE(ios, watchos, tvos);
 
 @required
 
@@ -321,7 +313,7 @@ NS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @abstract
     Defines an interface for delegates of AVCaptureFileOutput to monitor and control recordings along exact sample boundaries.
  */
-NS_AVAILABLE_MAC(10_7) __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos)
 @protocol AVCaptureFileOutputDelegate <NSObject>
 
 @required
@@ -337,7 +329,7 @@ NS_AVAILABLE_MAC(10_7) __TVOS_PROHIBITED
  @discussion
     In apps linked before Mac OS X 10.8, delegates that implement the captureOutput:didOutputSampleBuffer:fromConnection: method can ensure frame accurate start / stop of a recording by calling startRecordingToOutputFileURL:recordingDelegate: from within the callback. Frame accurate start requires the capture output to apply outputSettings when the session starts running, so it is ready to record on any given frame boundary. Compressing all the time while the session is running has power, thermal, and CPU implications. In apps linked on or after Mac OS X 10.8, delegates must implement captureOutputShouldProvideSampleAccurateRecordingStart: to indicate whether frame accurate start/stop recording is required (returning YES) or not (returning NO). The output calls this method as soon as the delegate is added, and never again. If your delegate returns NO, the capture output applies compression settings when startRecordingToOutputFileURL:recordingDelegate: is called, and disables compression settings after the recording is stopped.
  */
-- (BOOL)captureOutputShouldProvideSampleAccurateRecordingStart:(AVCaptureOutput *)output NS_AVAILABLE_MAC(10_8);
+- (BOOL)captureOutputShouldProvideSampleAccurateRecordingStart:(AVCaptureOutput *)output API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @optional
 
@@ -381,7 +373,7 @@ NS_AVAILABLE_MAC(10_7) __TVOS_PROHIBITED
  @discussion
     AVCaptureMovieFileOutput implements the complete file recording interface declared by AVCaptureFileOutput for writing media data to QuickTime movie files. In addition, instances of AVCaptureMovieFileOutput allow clients to configure options specific to the QuickTime file format, including allowing them to write metadata collections to each file, specify media encoding options for each track (Mac OS X), and specify an interval at which movie fragments should be written.
  */
-NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCaptureMovieFileOutput : AVCaptureFileOutput
 {
 @private
@@ -414,8 +406,6 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  */
 @property(nonatomic, copy, nullable) NSArray<AVMetadataItem *> *metadata;
 
-#if TARGET_OS_IPHONE
-
 /*!
  @property availableVideoCodecTypes
  @abstract
@@ -424,9 +414,20 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     The value of this property is an NSArray of AVVideoCodecTypes that can be used as values for the AVVideoCodecKey in the receiver's setOutputSettingsForConnection: dictionary. The array of available video codecs may change depending on the current session preset. The first codec in the array is used by default when recording a file.
  */
-@property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableVideoCodecTypes NS_AVAILABLE_IOS(10_0);
+@property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableVideoCodecTypes API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos);
 
-#endif // TARGET_OS_IPHONE
+/*!
+ @method supportedOutputSettingsKeysForConnection:
+ @abstract
+    Indicates the supported keys that can be specified in setOutputSettings:forConnection:.
+ 
+ @param connection
+    The connection delivering the media to be encoded.
+ 
+ @discussion
+    Returns an NSArray of NSStrings listing the allowable keys in the receiver's setOutputSettings:forConnection: dictionary.
+ */
+- (NSArray<NSString *> *)supportedOutputSettingsKeysForConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, tvos, watchos);
 
 /*!
  @method outputSettingsForConnection:
@@ -441,7 +442,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     See AVAudioSettings.h for audio connections or AVVideoSettings.h for video connections for more information on the structure of an output settings dictionary. If the returned value is an empty dictionary (i.e. [NSDictionary dictionary], the format of the media from the connection will not be changed before being written to the file. If -setOutputSettings:forConnection: was called with a nil dictionary, this method returns a non-nil dictionary reflecting the settings used by the AVCaptureSession's current sessionPreset.
  */
-- (NSDictionary<NSString *, id> *)outputSettingsForConnection:(AVCaptureConnection *)connection NS_AVAILABLE(10_7, 10_0);
+- (NSDictionary<NSString *, id> *)outputSettingsForConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(10.0));
 
 /*!
  @method setOutputSettings:forConnection:
@@ -456,9 +457,11 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     See AVAudioSettings.h for audio connections or AVVideoSettings.h for video connections for more information on how to construct an output settings dictionary. A value of an empty dictionary (i.e. [NSDictionary dictionary], means that the format of the media from the connection should not be changed before being written to the file. A value of nil means that the output format will be determined by the session preset. In this case, -outputSettingsForConnection: will return a non-nil dictionary reflecting the settings used by the AVCaptureSession's current sessionPreset.
  
-    On iOS, you may only specify the AVVideoCodecKey in the outputSettings. If you specify any other key, an NSInvalidArgumentException will be thrown. See the availableVideoCodecTypes property.
+    On iOS, your outputSettings dictionary may only contain keys listed in - supportedOutputSettingsKeysForConnection:. If you specify any other key, an NSInvalidArgumentException will be thrown. Further restrictions may be imposed on the AVVideoCodecTypeKey. Its value should be present in the -availableVideoCodecTypes array. If AVVideoCompressionPropertiesKey is specified, you must also specify a valid value for AVVideoCodecKey. On iOS versions prior to 12.0, the only settable key for video connections is AVVideoCodecTypeKey. On iOS 12.0 and later, video connections gain support for AVVideoCompressionPropertiesKey.
+ 
+ 	On iOS, -outputSettingsForConnection: always provides a fully populated dictionary. If you call -outputSettingsForConnection: with the intent of overriding a few of the values, you must take care to exclude keys that are not supported before calling -setOutputSettings:forConnection:. When providing an AVVideoCompressionPropertiesKey sub dictionary, you may specify a sparse dictionary. AVCaptureMovieFileOutput will always fill in missing keys with default values for the current AVCaptureSession configuration.
  */
-- (void)setOutputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings forConnection:(AVCaptureConnection *)connection NS_AVAILABLE(10_7, 10_0);
+- (void)setOutputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings forConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(10.0));
 
 /*!
  @method recordsVideoOrientationAndMirroringChangesAsMetadataTrackForConnection:
@@ -471,7 +474,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     See setRecordsVideoOrientationAndMirroringChanges:asMetadataTrackForConnection: for details on the behavior controlled by this value. The default value returned is NO.
  */
-- (BOOL)recordsVideoOrientationAndMirroringChangesAsMetadataTrackForConnection:(AVCaptureConnection *)connection NS_AVAILABLE_IOS(9_0);
+- (BOOL)recordsVideoOrientationAndMirroringChangesAsMetadataTrackForConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos);
 
 /*!
  @method setRecordsVideoOrientationAndMirroringChanges:asMetadataTrackForConnection:
@@ -494,7 +497,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  
     The doRecordChanges value is only observed at the start of recording. Changes to the value will not have any effect until the next recording is started.
  */
-- (void)setRecordsVideoOrientationAndMirroringChanges:(BOOL)doRecordChanges asMetadataTrackForConnection:(AVCaptureConnection *)connection NS_AVAILABLE_IOS(9_0);
+- (void)setRecordsVideoOrientationAndMirroringChanges:(BOOL)doRecordChanges asMetadataTrackForConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos);
 
 @end
 
@@ -511,7 +514,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     AVCaptureAudioFileOutput implements the complete file recording interface declared by AVCaptureFileOutput for writing media data to audio files. In addition, instances of AVCaptureAudioFileOutput allow clients to configure options specific to the audio file formats, including allowing them to write metadata collections to each file and specify audio encoding options.
  */
-NS_CLASS_AVAILABLE_MAC(10_7) __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface AVCaptureAudioFileOutput : AVCaptureFileOutput
 {
 @private

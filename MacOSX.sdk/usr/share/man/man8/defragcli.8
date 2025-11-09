@@ -10,6 +10,7 @@
 .Op Fl c Ar file
 .Op Fl t Ar seconds
 .Op Fl u Ar userid
+.Op Fl e Ar file 
 .Sh DESCRIPTION
 .Nm
 allows the super-user to trigger targeted defragmentation of files specified by
@@ -22,6 +23,8 @@ Dry mode, will not adjust kernel parameters
 Force defragmentation attempt even on mounts that do not normally qualify
 .It Fl c
 Path to a defragmentation configuration plist file
+.It Fl e
+Path to a file to show the extents information for. Overrides all other options. 
 .It Fl t
 Maximum time for
 .Nm

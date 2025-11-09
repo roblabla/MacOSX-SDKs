@@ -1,26 +1,27 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 6812EAEE-24E1-312E-8561-A4773364A108' ]
+uuids:           [ 'x86_64: C2A090EE-8898-35EE-851D-8F8FC3A4490B' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/SiriTasks.framework/Versions/A/SiriTasks
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _STStringFromGenericIntentResponseCode, _STWorkoutErrorDomain ]
-    objc-classes:    [ _STAlarmAction, _STAlarmModification, _STAlarmShowAlarmAndPerformActionRequest, 
-                       _STCreateAlarmAction, _STDeleteAlarmAction, _STEmailMessage, 
-                       _STGenericIntent, _STGenericIntentDateRange, _STGenericIntentGroup, 
-                       _STGenericIntentHelper, _STGenericIntentLocation, _STGenericIntentPerson, 
-                       _STGenericIntentRequest, _STGenericIntentResponse, _STGenericIntentTopic, 
-                       _STMapItem, _STMapViewport, _STMapViewportVertex, _STPromptManeuverRequest, 
-                       _STReminderListObject, _STSendDraftMessageRequest, _STSendEmailRequest, 
-                       _STShowActivityRequest, _STShowAlarmAction, _STShowDailyWeatherForecastRequest, 
-                       _STShowDraftMessageRequest, _STShowDraftMessageUsageResult, 
-                       _STShowHourlyWeatherForecastRequest, _STShowMapPointRequest, 
-                       _STShowMapsSearchResultsRequest, _STShowMessageRequest, _STShowStockOverviewRequest, 
-                       _STShowWeatherConditionsRequest, _STShowWeatherCurrentConditionsRequest, 
-                       _STShowWeatherForecastRequest, _STStartNavigationRequest, 
-                       _STStartWorkoutRequest, _STStopNavigationRequest, _STStopwatchShowAndPerformStopwatchAction, 
-                       _STTemperature, _STTimerShowTimerAndPerformAction, _STUpdateAlarmAction, 
-                       _STWatchFace, _STWeatherAttributes, _STWeatherCurrentConditions, 
-                       _STWeatherHourlyForecast, _STWeatherUnits, _STWorkoutSetStateRequest ]
+    objc-classes:    [ STAlarmAction, STAlarmModification, STAlarmShowAlarmAndPerformActionRequest, 
+                       STCreateAlarmAction, STDeleteAlarmAction, STEmailMessage, 
+                       STGenericIntent, STGenericIntentDateRange, STGenericIntentGroup, 
+                       STGenericIntentHelper, STGenericIntentLocation, STGenericIntentPerson, 
+                       STGenericIntentRequest, STGenericIntentResponse, STGenericIntentTopic, 
+                       STMapItem, STMapViewport, STMapViewportVertex, STMediaChannel, 
+                       STPromptManeuverRequest, STReminderListObject, STSendDraftMessageRequest, 
+                       STSendEmailRequest, STShowActivityRequest, STShowAlarmAction, 
+                       STShowChannelRequest, STShowDailyWeatherForecastRequest, STShowDraftMessageRequest, 
+                       STShowDraftMessageUsageResult, STShowHourlyWeatherForecastRequest, 
+                       STShowMapPointRequest, STShowMapsSearchResultsRequest, STShowMessageRequest, 
+                       STShowStockOverviewRequest, STShowWeatherConditionsRequest, 
+                       STShowWeatherCurrentConditionsRequest, STShowWeatherForecastRequest, 
+                       STStartNavigationRequest, STStartWorkoutRequest, STStopNavigationRequest, 
+                       STStopwatchShowAndPerformStopwatchAction, STTemperature, STTimerShowTimerAndPerformAction, 
+                       STUpdateAlarmAction, STUpdateWatchListRequest, STWatchFace, 
+                       STWeatherAttributes, STWeatherCurrentConditions, STWeatherHourlyForecast, 
+                       STWeatherUnits, STWorkoutSetStateRequest ]
 ...

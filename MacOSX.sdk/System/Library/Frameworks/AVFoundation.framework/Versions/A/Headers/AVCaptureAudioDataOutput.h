@@ -25,8 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     Instances of AVCaptureAudioDataOutput produce audio sample buffers suitable for processing using other media APIs. Applications can access the sample buffers with the captureOutput:didOutputSampleBuffer:fromConnection: delegate method.
  */
-NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
-@interface AVCaptureAudioDataOutput : AVCaptureOutput 
+API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+@interface AVCaptureAudioDataOutput : AVCaptureOutput
 {
 @private
     AVCaptureAudioDataOutputInternal *_internal;
@@ -75,8 +75,6 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  */
 @property(nonatomic, readonly, nullable) dispatch_queue_t sampleBufferCallbackQueue;
 
-#if TARGET_OS_OSX
-
 /*!
  @property audioSettings
  @abstract
@@ -85,9 +83,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     The value of this property is an NSDictionary containing values for audio settings keys defined in AVAudioSettings.h. When audioSettings is set to nil, the AVCaptureAudioDataOutput vends samples in their device native format.
  */
-@property(nonatomic, copy, null_resettable) NSDictionary<NSString *, id> *audioSettings NS_AVAILABLE_MAC(10_7);
-
-#endif // TARGET_OS_OSX
+@property(nonatomic, copy, null_resettable) NSDictionary<NSString *, id> *audioSettings API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @method recommendedAudioSettingsForAssetWriterWithOutputFileType:
@@ -108,7 +104,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  
     Note that the dictionary of settings is dependent on the current configuration of the receiver's AVCaptureSession and its inputs. The settings dictionary may change if the session's configuration changes. As such, you should configure your session first, then query the recommended audio settings.
  */
-- (nullable NSDictionary *)recommendedAudioSettingsForAssetWriterWithOutputFileType:(AVFileType)outputFileType NS_AVAILABLE_IOS(7_0);
+- (nullable NSDictionary *)recommendedAudioSettingsForAssetWriterWithOutputFileType:(AVFileType)outputFileType API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
 
 @end
 
@@ -118,7 +114,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @abstract
     Defines an interface for delegates of AVCaptureAudioDataOutput to receive captured audio sample buffers.
  */
-NS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @protocol AVCaptureAudioDataOutputSampleBufferDelegate <NSObject>
 
 @optional

@@ -197,7 +197,7 @@ extern "C" {
  *    the event handler.  If the client wishes to use the object at
  *    some later time, it must perform a CFRetain on the object.
  */
-typedef struct OpaqueInkTextRef*        InkTextRef;
+typedef struct OpaqueInkTextRef*        InkTextRef DEPRECATED_IN_MAC_OS_X_VERSION_10_14_AND_LATER;
 
 /*
  *  InkStrokeRef
@@ -219,7 +219,7 @@ typedef struct OpaqueInkTextRef*        InkTextRef;
  *    If the client wishes to use the object at some later time, it
  *    must perform a CFRetain on the object.
  */
-typedef struct OpaqueInkStrokeRef*      InkStrokeRef;
+typedef struct OpaqueInkStrokeRef*      InkStrokeRef DEPRECATED_IN_MAC_OS_X_VERSION_10_14_AND_LATER;
 
 /*
  *  InkPoint
@@ -247,9 +247,9 @@ struct InkPoint {
    * (kEventParamKeyModifiers from the mouse event).
    */
   UInt32              keyModifiers;
-};
-typedef struct InkPoint                 InkPoint;
-typedef InkPoint *                      InkPointPtr;
+} DEPRECATED_IN_MAC_OS_X_VERSION_10_14_AND_LATER;
+typedef struct InkPoint                 InkPoint DEPRECATED_IN_MAC_OS_X_VERSION_10_14_AND_LATER;
+typedef InkPoint *                      InkPointPtr DEPRECATED_IN_MAC_OS_X_VERSION_10_14_AND_LATER;
 
 /*
  *  InkAlternateCount
@@ -259,7 +259,7 @@ typedef InkPoint *                      InkPointPtr;
  *    Defined for backward compatibility only.  APIs now take and
  *    return CFIndex.
  */
-typedef CFIndex                         InkAlternateCount;
+typedef CFIndex                         InkAlternateCount DEPRECATED_IN_MAC_OS_X_VERSION_10_14_AND_LATER;
 /*——————————————————————————————————————————————————————————————————————————————————————*/
 /*  • Ink Constants                                                                     */
 /*——————————————————————————————————————————————————————————————————————————————————————*/
@@ -271,7 +271,7 @@ typedef CFIndex                         InkAlternateCount;
  *  Discussion:
  *    User preference (system-wide) setting constants.
  */
-typedef FourCharCode                    InkUserWritingModeType;
+typedef FourCharCode                    InkUserWritingModeType DEPRECATED_IN_MAC_OS_X_VERSION_10_14_AND_LATER;
 enum {
   kInkWriteNowhere              = 'nowh',
   kInkWriteAnywhere             = 'anyw',
@@ -286,7 +286,7 @@ enum {
  *  Discussion:
  *    Application state setting constants.
  */
-typedef FourCharCode                    InkApplicationWritingModeType;
+typedef FourCharCode                    InkApplicationWritingModeType DEPRECATED_IN_MAC_OS_X_VERSION_10_14_AND_LATER;
 enum {
   kInkWriteNowhereInApp         = 'nowa',
   kInkWriteAnywhereInApp        = 'anya'
@@ -300,7 +300,7 @@ enum {
  *  Summary:
  *    Application drawing setting constants.
  */
-typedef UInt32 InkDrawingModeType;
+typedef UInt32 InkDrawingModeType DEPRECATED_IN_MAC_OS_X_VERSION_10_14_AND_LATER;
 enum {
   kInkDrawNothing               = 0,
   kInkDrawInkOnly               = 1,
@@ -315,7 +315,7 @@ enum {
  *  Summary:
  *    Constants for drawing an InkTextRef.
  */
-typedef UInt32 InkTextDrawFlagsType;
+typedef UInt32 InkTextDrawFlagsType DEPRECATED_IN_MAC_OS_X_VERSION_10_14_AND_LATER;
 enum {
 
   /*
@@ -358,7 +358,7 @@ enum {
  *    control over the Ink Manager’s automatic phrase termination can
  *    be obtained by combining the following constants.
  */
-typedef UInt32 InkTerminationType;
+typedef UInt32 InkTerminationType DEPRECATED_IN_MAC_OS_X_VERSION_10_14_AND_LATER;
 enum {
 
   /*
@@ -424,7 +424,7 @@ enum {
  *    which data stream is currently being controlled by calls to
  *    InkTerminateCurrentPhrase() and InkSetPhraseTerminationMode().
  */
-typedef UInt32 InkSourceType;
+typedef UInt32 InkSourceType DEPRECATED_IN_MAC_OS_X_VERSION_10_14_AND_LATER;
 enum {
 
   /*
@@ -451,7 +451,7 @@ enum {
  *    providing stroke points via InkAddStrokeToCurrentPhrase(), *not*
  *    when the user is writing.
  */
-typedef UInt32 InkRecognitionType;
+typedef UInt32 InkRecognitionType DEPRECATED_IN_MAC_OS_X_VERSION_10_14_AND_LATER;
 enum {
   kInkRecognitionNone           = 0,
   kInkRecognitionText           = 1,
@@ -543,7 +543,7 @@ enum {
  *    by an application, the Ink Manager would cause a sequence of key
  *    events to be posted that simulated the user typing a command-u.
  */
-typedef FourCharCode InkGestureKind;
+typedef FourCharCode InkGestureKind DEPRECATED_IN_MAC_OS_X_VERSION_10_14_AND_LATER;
 enum {
 
   /*
@@ -769,11 +769,11 @@ enum {
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern InkUserWritingModeType 
-InkUserWritingMode(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+InkUserWritingMode(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 /* Read/Write Application Settings */
@@ -803,11 +803,11 @@ InkUserWritingMode(void)                                      AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern void 
-InkSetApplicationWritingMode(InkApplicationWritingModeType iWriteWhere) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+InkSetApplicationWritingMode(InkApplicationWritingModeType iWriteWhere) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 /*
@@ -830,11 +830,11 @@ InkSetApplicationWritingMode(InkApplicationWritingModeType iWriteWhere) AVAILABL
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern void 
-InkSetApplicationRecognitionMode(InkRecognitionType iRecognitionType) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+InkSetApplicationRecognitionMode(InkRecognitionType iRecognitionType) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 /*
@@ -892,13 +892,13 @@ InkSetApplicationRecognitionMode(InkRecognitionType iRecognitionType) AVAILABLE_
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern void 
 InkSetPhraseTerminationMode(
   InkSourceType        iSource,
-  InkTerminationType   iAllowedTerminationTypes)              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  InkTerminationType   iAllowedTerminationTypes)              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 /*
@@ -927,11 +927,11 @@ InkSetPhraseTerminationMode(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-InkIsPhraseInProgress(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+InkIsPhraseInProgress(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 /* For backward compatibility only*/
@@ -963,11 +963,11 @@ InkIsPhraseInProgress(void)                                   AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern void 
-InkSetDrawingMode(InkDrawingModeType iDrawingMode)            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+InkSetDrawingMode(InkDrawingModeType iDrawingMode)            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 
@@ -1007,13 +1007,13 @@ InkSetDrawingMode(InkDrawingModeType iDrawingMode)            AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern void 
 InkAddStrokeToCurrentPhrase(
   unsigned long   iPointCount,
-  InkPoint *      iPointArray)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  InkPoint *      iPointArray)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 /*
@@ -1043,11 +1043,11 @@ InkAddStrokeToCurrentPhrase(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern void 
-InkTerminateCurrentPhrase(InkSourceType iSource)              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+InkTerminateCurrentPhrase(InkSourceType iSource)              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 /*——————————————————————————————————————————————————————————————————————————————————————*/
@@ -1071,11 +1071,11 @@ InkTerminateCurrentPhrase(InkSourceType iSource)              AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern CFIndex 
-InkTextAlternatesCount(InkTextRef iTextRef)                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+InkTextAlternatesCount(InkTextRef iTextRef)                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 /*
@@ -1103,13 +1103,13 @@ InkTextAlternatesCount(InkTextRef iTextRef)                   AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
 InkTextCreateCFString(
   InkTextRef   iTextRef,
-  CFIndex      iAlternateIndex)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFIndex      iAlternateIndex)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 /*
@@ -1193,14 +1193,14 @@ InkTextCreateCFString(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework [32-bit only]
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern ItemCount 
 InkTextInsertAlternatesInMenu(
   InkTextRef      iTextRef,
   MenuRef         iMenuRef,
-  MenuItemIndex   iAfterItem)                                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  MenuItemIndex   iAfterItem)                                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 
@@ -1232,11 +1232,11 @@ InkTextInsertAlternatesInMenu(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern UInt32 
-InkTextKeyModifiers(InkTextRef iTextRef)                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+InkTextKeyModifiers(InkTextRef iTextRef)                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 
@@ -1262,11 +1262,11 @@ InkTextKeyModifiers(InkTextRef iTextRef)                      AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern InkTextRef 
-InkTextCopy(InkTextRef iTextRef)                              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+InkTextCopy(InkTextRef iTextRef)                              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 
@@ -1289,11 +1289,11 @@ InkTextCopy(InkTextRef iTextRef)                              AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern HIRect 
-InkTextBounds(InkTextRef iTextRef)                            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+InkTextBounds(InkTextRef iTextRef)                            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 
@@ -1328,7 +1328,7 @@ InkTextBounds(InkTextRef iTextRef)                            AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern void 
@@ -1336,7 +1336,7 @@ InkTextDraw(
   InkTextRef             iTextRef,
   CGContextRef           iContext,       /* can be NULL */
   const CGRect *         iBounds,
-  InkTextDrawFlagsType   iFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  InkTextDrawFlagsType   iFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 
@@ -1374,14 +1374,14 @@ InkTextDraw(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern CFIndex 
 InkTextFlatten(
   InkTextRef         iTextRef,
   CFMutableDataRef   ioDataRef,
-  CFIndex            iIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFIndex            iIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 
@@ -1413,13 +1413,13 @@ InkTextFlatten(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern InkTextRef 
 InkTextCreateFromCFData(
   CFDataRef   iFlattenedInkText,
-  CFIndex     iIndex)                                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFIndex     iIndex)                                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 
@@ -1440,11 +1440,11 @@ InkTextCreateFromCFData(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-InkTextGetTypeID(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+InkTextGetTypeID(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 
@@ -1469,11 +1469,11 @@ InkTextGetTypeID(void)                                        AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern CFIndex 
-InkTextGetStrokeCount(InkTextRef iTextRef)                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+InkTextGetStrokeCount(InkTextRef iTextRef)                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 
@@ -1514,13 +1514,13 @@ InkTextGetStrokeCount(InkTextRef iTextRef)                    AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern InkStrokeRef 
 InkTextGetStroke(
   InkTextRef   iTextRef,
-  CFIndex      iStrokeIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFIndex      iStrokeIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 /*——————————————————————————————————————————————————————————————————————————————————————*/
@@ -1548,11 +1548,11 @@ InkTextGetStroke(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern CFIndex 
-InkStrokeGetPointCount(InkStrokeRef iStrokeRef)               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+InkStrokeGetPointCount(InkStrokeRef iStrokeRef)               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 /*
@@ -1585,13 +1585,13 @@ InkStrokeGetPointCount(InkStrokeRef iStrokeRef)               AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern InkPoint * 
 InkStrokeGetPoints(
   InkStrokeRef   iStrokeRef,
-  InkPoint *     oPointBuffer)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  InkPoint *     oPointBuffer)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 
@@ -1612,11 +1612,11 @@ InkStrokeGetPoints(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later but deprecated in 10.14
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-InkStrokeGetTypeID(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+InkStrokeGetTypeID(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_14;
 
 
 

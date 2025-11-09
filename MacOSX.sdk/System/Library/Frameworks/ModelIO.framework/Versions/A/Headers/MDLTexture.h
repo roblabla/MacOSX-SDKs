@@ -12,6 +12,7 @@
 #import <ModelIO/ModelIOExports.h>
 #import <ModelIO/MDLTypes.h>
 #import <ModelIO/MDLObject.h>
+#import <ModelIO/MDLAssetResolver.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <CoreGraphics/CGImage.h>
 #import <simd/simd.h>
@@ -70,7 +71,7 @@ typedef NS_ENUM(NSInteger, MDLTextureChannelEncoding) {
            dimension.x. Other layouts are possible in the future.
  */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLTexture : NSObject<MDLNamed>
 
@@ -82,6 +83,7 @@ MDL_EXPORT
  */
 + (nullable instancetype)textureNamed:(NSString *)name;
 + (nullable instancetype)textureNamed:(NSString *)name bundle:(nullable NSBundle*)bundleOrNil;
++ (nullable instancetype)textureNamed:(NSString *)name assetResolver:(id<MDLAssetResolver>)resolver API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0));
 
 /**
   Creates a cube texture map image using 6 faces of the same dimensions, 
@@ -125,16 +127,16 @@ MDL_EXPORT
 - (BOOL)writeToURL:(NSURL *)URL;
 
 /** write a particular level of a mipped texture to URL, deducing type from path extension */
-- (BOOL)writeToURL:(NSURL *)URL level:(NSUInteger)level;
+- (BOOL)writeToURL:(NSURL *)URL level:(NSUInteger)level API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 /** write a texture to URL, using a specific UT type */
 - (BOOL)writeToURL:(NSURL *)nsurl type:(CFStringRef)type;
 
 /** write a particular level of a mipped texture to URL, using a specific UT type */
-- (BOOL)writeToURL:(NSURL *)nsurl type:(CFStringRef)type level:(NSUInteger)level;
+- (BOOL)writeToURL:(NSURL *)nsurl type:(CFStringRef)type level:(NSUInteger)level API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 - (nullable CGImageRef)imageFromTexture;
-- (nullable CGImageRef)imageFromTextureAtLevel:(NSUInteger)level;
+- (nullable CGImageRef)imageFromTextureAtLevel:(NSUInteger)level API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 - (nullable NSData *)texelDataWithTopLeftOrigin;
 - (nullable NSData *)texelDataWithBottomLeftOrigin;
@@ -168,7 +170,7 @@ MDL_EXPORT
              a lightweight reference to something that could be loaded
  */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLURLTexture : MDLTexture
 
@@ -186,7 +188,7 @@ MDLCheckerboardTexture
              object is merely a description
  */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLCheckerboardTexture : MDLTexture
 
@@ -253,7 +255,7 @@ MDLSkyCubeTexture
  object is merely a description. All parameters have legal values between zero and one.
  */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLSkyCubeTexture : MDLTexture
 
@@ -272,7 +274,8 @@ MDL_EXPORT
                 sunElevation:(float)sunElevation              // from 0 to 1 zenith to nadir
                   sunAzimuth:(float)sunAzimuth                // from 0 to 2Pi
    upperAtmosphereScattering:(float)upperAtmosphereScattering // how intense the sun looks, 0 to 1
-                groundAlbedo:(float)groundAlbedo;             // how much sky color is reflected from the Earth
+                groundAlbedo:(float)groundAlbedo              // how much sky color is reflected from the Earth
+API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 /**
  Call updateTexture if parameters have been changed and a new sky is required.
@@ -281,7 +284,7 @@ MDL_EXPORT
 
 @property (nonatomic, assign) float turbidity;
 @property (nonatomic, assign) float sunElevation;
-@property (nonatomic, assign) float sunAzimuth;
+@property (nonatomic, assign) float sunAzimuth API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 @property (nonatomic, assign) float upperAtmosphereScattering;
 @property (nonatomic, assign) float groundAlbedo;
 
@@ -297,7 +300,7 @@ MDL_EXPORT
 
 @end
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLColorSwatchTexture : MDLTexture
 
@@ -331,7 +334,7 @@ MDL_EXPORT
  object is merely a description
  */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLNoiseTexture : MDLTexture
 
@@ -374,11 +377,11 @@ MDL_EXPORT
 - (instancetype)initCellularNoiseWithFrequency:(float)frequency
                                           name:(nullable NSString*)name
                              textureDimensions:(vector_int2)textureDimensions
-                               channelEncoding:(MDLTextureChannelEncoding)channelEncoding;
+                               channelEncoding:(MDLTextureChannelEncoding)channelEncoding API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 @end
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLNormalMapTexture : MDLTexture
 

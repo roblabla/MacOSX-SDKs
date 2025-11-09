@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, MDLLightType) {
 @class MDLColorSpec;
 @class MDLTexture;
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLLight : MDLObject
 
@@ -61,7 +61,7 @@ MDL_EXPORT
  @property attenuationEndDistance. Beyond this distance, there is no light.
  */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLPhysicallyPlausibleLight : MDLLight
 
@@ -86,7 +86,7 @@ MDL_EXPORT
 
 @end
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLAreaLight : MDLPhysicallyPlausibleLight
 
@@ -108,7 +108,7 @@ MDL_EXPORT
            calculated by generateSphericalHarmonicsFromLight:
 */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLPhotometricLight : MDLPhysicallyPlausibleLight
 
@@ -129,7 +129,7 @@ MDL_EXPORT
  the parameter textureSize is the size in pixels of the texture image. For a size of N,
  1D generates an Nx1 image, 2D generates an NxN image, 3D generates an Nx(N*6) image (i.e. cubemap).
  */
--(MDLTexture*)generateTexture:(NSUInteger)textureSize;
+-(MDLTexture*)generateTexture:(NSUInteger)textureSize API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 @property (nonatomic, retain, nullable, readonly) MDLTexture *lightCubeMap;
 
@@ -139,7 +139,7 @@ MDL_EXPORT
 
 @end
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLLightProbe : MDLLight
 

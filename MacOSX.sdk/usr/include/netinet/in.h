@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2017 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -379,6 +379,10 @@ struct sockaddr_in {
 	struct	in_addr sin_addr;
 	char		sin_zero[8];
 };
+
+#define IN_ARE_ADDR_EQUAL(a, b) \
+    (bcmp(&(a)->s_addr, &(b)->s_addr, \
+        sizeof (struct in_addr)) == 0)
 
 
 #define INET_ADDRSTRLEN                 16

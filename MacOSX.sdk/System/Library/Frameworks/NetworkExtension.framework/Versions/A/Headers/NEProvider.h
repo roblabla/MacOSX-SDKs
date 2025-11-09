@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Apple Inc.
+ * Copyright (c) 2015, 2018 Apple Inc.
  * All rights reserved.
  */
 
@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger, NEProviderStopReason) {
 	NEProviderStopReasonUserSwitch = 13,
 	/*! @const NEProviderStopReasonConnectionFailed Failed to establish connection. */
 	NEProviderStopReasonConnectionFailed = 14,
-} NS_AVAILABLE(10_11, 9_0);
+} API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @file NEProvider.h
@@ -70,7 +70,7 @@ typedef NS_ENUM(NSInteger, NEProviderStopReason) {
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEProvider : NSObject
 
 /*!
@@ -78,13 +78,13 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @discussion This function is called by the framework when the system is about to go to sleep. Subclass developers can override this method to implement custom behavior such as closing connections or pausing some network activity.
  * @param completionHandler When the method is finished handling the sleep event it must execute this completion handler.
  */
-- (void)sleepWithCompletionHandler:(void (^)(void))completionHandler NS_AVAILABLE(10_11, 9_0);
+- (void)sleepWithCompletionHandler:(void (^)(void))completionHandler API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method wake
  * @discussion This function is called by the framework immediately after the system wakes up from sleep. Subclass developers can override this method to implement custom behavior such as re-establishing connections or resuming some network activity.
  */
-- (void)wake NS_AVAILABLE(10_11, 9_0);
+- (void)wake API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method createTCPConnectionToEndpoint:enableTLS:TLSParameters:delegate:
@@ -95,7 +95,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param delegate An object to use as the connections delegate. This object should conform to the NWTCPConnectionAuthenticationDelegate protocol.
  * @return An NWTCPConnection object.
  */
-- (NWTCPConnection *)createTCPConnectionToEndpoint:(NWEndpoint *)remoteEndpoint enableTLS:(BOOL)enableTLS TLSParameters:(nullable NWTLSParameters *)TLSParameters delegate:(nullable id)delegate NS_AVAILABLE(10_11, 9_0);
+- (NWTCPConnection *)createTCPConnectionToEndpoint:(NWEndpoint *)remoteEndpoint enableTLS:(BOOL)enableTLS TLSParameters:(nullable NWTLSParameters *)TLSParameters delegate:(nullable id)delegate API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method createUDPSessionToEndpoint:fromEndpoint:
@@ -104,7 +104,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param localEndpoint An NWHostEndpoint object that specifies the local IP address endpoint to use as the source endpoint of the UDP session.
  * @return An NWUDPSession object.
  */
-- (NWUDPSession *)createUDPSessionToEndpoint:(NWEndpoint *)remoteEndpoint fromEndpoint:(nullable NWHostEndpoint *)localEndpoint NS_AVAILABLE(10_11, 9_0);
+- (NWUDPSession *)createUDPSessionToEndpoint:(NWEndpoint *)remoteEndpoint fromEndpoint:(nullable NWHostEndpoint *)localEndpoint API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method displayMessage:completionHandler:
@@ -112,13 +112,13 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param message The message to be displayed.
  * @param completionHandler A block that is executed when the user acknowledges the message. If this method is called on a NEFilterDataProvider instance or the message cannot be displayed, then the completion handler block will be executed immediately with success parameter set to NO. If the message was successfully displayed to the user, then the completion handler block is executed with the success parameter set to YES when the user dismisses the message.
  */
-- (void)displayMessage:(NSString *)message completionHandler:(void (^)(BOOL success))completionHandler NS_AVAILABLE(10_12, 10_0);
+- (void)displayMessage:(NSString *)message completionHandler:(void (^)(BOOL success))completionHandler API_DEPRECATED_WITH_REPLACEMENT("UILocalNotification", macos(10.12, 10.14), ios(10.0, 12.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property defaultPath
  * @discussion The current default path for connections created by the provider. Use KVO to watch for network changes.
  */
-@property (readonly, nullable) NWPath *defaultPath NS_AVAILABLE(10_11, 9_0);
+@property (readonly, nullable) NWPath *defaultPath API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

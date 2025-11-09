@@ -1,7 +1,7 @@
 /*
         NSTextView.h
         Application Kit
-        Copyright (c) 1994-2017, Apple Inc.
+        Copyright (c) 1994-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -24,6 +24,8 @@
 #import <Foundation/NSTextCheckingResult.h>
 #import <AppKit/NSTouchBarItem.h>
 #import <AppKit/NSCandidateListTouchBarItem.h>
+#import <AppKit/NSColorPanel.h>
+#import <AppKit/NSMenu.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -61,7 +63,7 @@ APPKIT_EXTERN NSString * NSAllRomanInputSourcesLocaleIdentifier NS_AVAILABLE_MAC
 #if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_12
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 #endif
-@interface NSTextView : NSText <NSUserInterfaceValidations, NSTextInputClient, NSTextLayoutOrientationProvider, NSDraggingSource, NSTextInput, NSAccessibilityNavigableStaticText>
+@interface NSTextView : NSText <NSColorChanging, NSMenuItemValidation, NSUserInterfaceValidations, NSTextInputClient, NSTextLayoutOrientationProvider, NSDraggingSource, NSStandardKeyBindingResponding, NSTextInput, NSAccessibilityNavigableStaticText>
 
 /**************************** Initializing ****************************/
 
@@ -198,6 +200,10 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 // Returns whether instances of the class operate in the object ownership policy introduced with macOS Sierra and later. When YES, the new object owner policy is used. Under the policy, each text view strongly retains its text storage and its text container weakly references the view. Also, the text views are compatible with __weak storage. The default is YES.
 @property (readonly, class) BOOL stronglyReferencesTextStorage NS_AVAILABLE_MAC(10_12);
 
+/*************************** Document Content Access ***************************/
+#pragma mark Document Content Mutation
+// Replaces the contents at the specified range with attributedString. In addition to invoking -[NSTextStorage replaceCharactersInRange:withAttributedString:], this method ensures that the change is validated with -shouldChangeTextInRange:replacementString:/-didChangeText. Returns YES if the change was validated and performed. Upon replacement, each attribute run in attributedString is complemented by the attributes at range.location.
+- (BOOL)performValidatedReplacementInRange:(NSRange)range withAttributedString:(NSAttributedString *)attributedString NS_AVAILABLE_MAC(10_14);
 @end
 
 @interface NSTextView (NSCompletion)
@@ -445,7 +451,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 - (IBAction)toggleQuickLookPreviewPanel:(nullable id)sender NS_AVAILABLE_MAC(10_7);
 
 // Returns an array of preview items within the specified character ranges.  Each preview item conforms to the QLPreviewItem protocol.  The NSTextView implementation returns an array of NSURL objects, each url referring to the document URL of a text attachment content if available.
-- (nullable NSArray<id<QLPreviewItem>> *)quickLookPreviewableItemsInRanges:(NSArray<NSValue *> *)ranges NS_AVAILABLE_MAC(10_7);
+- (NSArray<id<QLPreviewItem>> *)quickLookPreviewableItemsInRanges:(NSArray<NSValue *> *)ranges NS_AVAILABLE_MAC(10_7);
 
 // Notifies QLPreviewPanel for possible status changes with the data source or controller.  Typically invoked from selection changes.
 - (void)updateQuickLookPreviewPanel NS_AVAILABLE_MAC(10_7);
@@ -486,6 +492,18 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @property (nullable, readonly, strong) NSCandidateListTouchBarItem *candidateListTouchBarItem NS_AVAILABLE_MAC(10_12_2);
 @end
 
+#pragma mark NSTextView Factory Methods
+@interface NSTextView (NSTextView_Factory)
+// Instantiates a new text view enclosed in a scroll view. As with -[NSTextView init*] methods, the objects created with this factory method is configured suitable for UI elements typically used in inspectors. Access the text view via -[NSScrollView documentView].
++ (NSScrollView *)scrollableTextView NS_AVAILABLE_MAC(10_14);
+
+// Instantiates a new text view configured as a field editor.
++ (instancetype)fieldEditor NS_AVAILABLE_MAC(10_14);
+
+// Instantiates a new text view configured for displaying the document contents enclosed in a scroll view. Access the text view via -[NSScrollView documentView].
++ (NSScrollView *)scrollableDocumentContentTextView NS_AVAILABLE_MAC(10_14);
++ (NSScrollView *)scrollablePlainDocumentContentTextView NS_AVAILABLE_MAC(10_14);
+@end
 
 @interface NSTextView (NSDeprecated)
 
@@ -638,7 +656,7 @@ typedef NS_ENUM(NSUInteger, NSFindPanelAction) {
 
 APPKIT_EXTERN NSPasteboardType NSFindPanelSearchOptionsPboardType  NS_AVAILABLE_MAC(10_5);
 
-typedef NSString * NSPasteboardTypeFindPanelSearchOptionKey NS_STRING_ENUM;
+typedef NSString * NSPasteboardTypeFindPanelSearchOptionKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSPasteboardTypeFindPanelSearchOptionKey NSFindPanelCaseInsensitiveSearch NS_AVAILABLE_MAC(10_5);     // BOOL
 APPKIT_EXTERN NSPasteboardTypeFindPanelSearchOptionKey NSFindPanelSubstringMatch NS_AVAILABLE_MAC(10_5);            // NSNumber containing NSFindPanelSubstringMatchType
 

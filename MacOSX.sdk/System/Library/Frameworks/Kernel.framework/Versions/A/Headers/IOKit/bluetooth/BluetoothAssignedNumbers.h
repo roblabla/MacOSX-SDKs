@@ -604,7 +604,8 @@ enum
 	kBluetoothSDPUUID16RFCOMM 								= 0x0003, 	// 00000003-0000-1000-8000-00805f9b34fb 
 	kBluetoothSDPUUID16TCP 									= 0x0004, 	// 00000004-0000-1000-8000-00805f9b34fb 
 	kBluetoothSDPUUID16TCSBIN 								= 0x0005, 	// 00000005-0000-1000-8000-00805f9b34fb 
-	kBluetoothSDPUUID16TCSAT 								= 0x0006, 	// 00000006-0000-1000-8000-00805f9b34fb 
+	kBluetoothSDPUUID16TCSAT 								= 0x0006, 	// 00000006-0000-1000-8000-00805f9b34fb
+    kBluetoothSDPUUID16ATT                                  = 0x0007,
 	kBluetoothSDPUUID16OBEX 								= 0x0008, 	// 00000008-0000-1000-8000-00805f9b34fb 
 	kBluetoothSDPUUID16IP 									= 0x0009, 	// 00000009-0000-1000-8000-00805f9b34fb 
 	kBluetoothSDPUUID16FTP 									= 0x000A, 	// 0000000A-0000-1000-8000-00805f9b34fb 
@@ -694,7 +695,8 @@ enum SDPServiceClasses
 	kBluetoothSDPUUID16ServiceClassVideoDistribution						= 0x1305,
 	kBluetoothSDPUUID16ServiceClassHealthDevice								= 0x1400,
 	kBluetoothSDPUUID16ServiceClassHealthDeviceSource						= 0x1401,
-	kBluetoothSDPUUID16ServiceClassHealthDeviceSink							= 0x1402
+	kBluetoothSDPUUID16ServiceClassHealthDeviceSink							= 0x1402,
+    kBluetoothSDPUUID16ServiceClassGATT                                     = 0x1801,
 };
 
 enum SDPAttributeIdentifierCodes

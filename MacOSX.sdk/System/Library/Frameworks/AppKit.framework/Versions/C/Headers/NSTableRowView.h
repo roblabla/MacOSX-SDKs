@@ -1,7 +1,7 @@
 /*
     NSTableRowView.h
     Application Kit
-    Copyright (c) 2008-2017, Apple Inc.
+    Copyright (c) 2008-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -20,42 +20,43 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSTableRowView : NSView <NSAccessibilityRow> {
 @private
-    __unsafe_unretained NSView **_columnViews;
-    NSInteger _columnCount;
+    __unsafe_unretained NSView **_columnViews APPKIT_IVAR;
+    NSInteger _columnCount APPKIT_IVAR;
     
-    NSTableViewSelectionHighlightStyle _selectionHighlightStyle;
-    NSTableViewDraggingDestinationFeedbackStyle _draggingDestinationFeedbackStyle;
+    NSTableViewSelectionHighlightStyle _selectionHighlightStyle APPKIT_IVAR;
+    NSTableViewDraggingDestinationFeedbackStyle _draggingDestinationFeedbackStyle APPKIT_IVAR;
     
-    CGFloat _dropOperationIndentation;
+    CGFloat _dropOperationIndentation APPKIT_IVAR;
 
-    NSColor *_backgroundColor;
-    NSMutableDictionary<NSNumber *, NSArray<NSLayoutConstraint *> *> *_columnConstraints;
+    NSColor *_backgroundColor APPKIT_IVAR;
+    NSMutableDictionary<NSNumber *, NSArray<NSLayoutConstraint *> *> *_columnConstraints APPKIT_IVAR;
 
-    unsigned int _targetForDropOperation:1;
-    unsigned int _groupRowStyle:2;
-    unsigned int _priorRowSelected:1;
-    unsigned int _nextRowSelected:1;
-    unsigned int _selected:1;
-    unsigned int _emphasized:1;
-    unsigned int _hasAssociatedViews:1;
-    unsigned int _backgroundStylesDirty:1;
-    unsigned int _isFloating:1;
-    unsigned int _hasCustomGridColor:1;
-    unsigned int _usingCachedImageOnly:1;
-    unsigned int _gridStyleMask:4;
-    unsigned int _updatingBackgroundStyle:1;
-    unsigned int _locationNeedsUpdating:1;
-    unsigned int _isStatic:1;
-    unsigned int _hasSelectedBackgroundView:1;
-    unsigned int _selectionBlendingMode:1;
-    unsigned int _checkingFontRefColor:1;
-    unsigned int _forDeletion:1;
-    unsigned int _emphasizedForDropOperation:1;
-    unsigned int _keyViewLoopIsDirty:1;
-    unsigned int _hasSelectionAlpha:1;
-    unsigned int _hasLayoutChangedListener:1;
+    unsigned int _targetForDropOperation:1 APPKIT_IVAR;
+    unsigned int _groupRowStyle:2 APPKIT_IVAR;
+    unsigned int _priorRowSelected:1 APPKIT_IVAR;
+    unsigned int _nextRowSelected:1 APPKIT_IVAR;
+    unsigned int _selected:1 APPKIT_IVAR;
+    unsigned int _emphasized:1 APPKIT_IVAR;
+    unsigned int _hasAssociatedViews:1 APPKIT_IVAR;
+    unsigned int _backgroundStylesDirty:1 APPKIT_IVAR;
+    unsigned int _isFloating:1 APPKIT_IVAR;
+    unsigned int _hasCustomGridColor:1 APPKIT_IVAR;
+    unsigned int _usingCachedImageOnly:1 APPKIT_IVAR;
+    unsigned int _gridStyleMask:4 APPKIT_IVAR;
+    unsigned int _updatingBackgroundStyle:1 APPKIT_IVAR;
+    unsigned int _locationNeedsUpdating:1 APPKIT_IVAR;
+    unsigned int _isStatic:1 APPKIT_IVAR;
+    unsigned int _hasSelectedBackgroundView:1 APPKIT_IVAR;
+    unsigned int _selectionBlendingMode:1 APPKIT_IVAR;
+    unsigned int _checkingFontRefColor:1 APPKIT_IVAR;
+    unsigned int _forDeletion:1 APPKIT_IVAR;
+    unsigned int _emphasizedForDropOperation:1 APPKIT_IVAR;
+    unsigned int _keyViewLoopIsDirty:1 APPKIT_IVAR;
+    unsigned int _hasSelectionAlpha:1 APPKIT_IVAR;
+    unsigned int _hasLayoutChangedListener:1 APPKIT_IVAR;
+    unsigned int _canUseSelectionMaterialWithRegularHighlights:1 APPKIT_IVAR;
 #if !__LP64__    
-    unsigned int _reserved2:4 __unused;
+    unsigned int _reserved2:3 __unused APPKIT_IVAR;
 #endif
 }
 

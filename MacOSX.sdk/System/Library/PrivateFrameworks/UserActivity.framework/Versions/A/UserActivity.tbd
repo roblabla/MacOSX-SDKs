@@ -1,9 +1,9 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 6B1E9DED-891A-35BC-9DDC-A6A4D5C19C63' ]
+uuids:           [ 'x86_64: 66D81D27-BA48-3A12-AA97-2666D7170749' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/UserActivity.framework/Versions/A/UserActivity
-current-version: 94.1
+current-version: 213
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _UAAlwaysAdvertise, _UAContinuityErrorDomain, _UAUserActivityAdvertisePriority, 
@@ -22,10 +22,9 @@ exports:
                        __UAUserActivityDidContinueToAppStoreApplicationIdentifierKey, 
                        __UAUserActivityDidContinueToAppStoreNotification, _kUACanModifyAnySuggestedActionEntitlement, 
                        _kUAIsDefaultFrontmostAppEntitlement ]
-    objc-classes:    [ _UABestAppSuggestion, _UABestAppSuggestionManager, _UAPasteboardDataProvider, 
-                       _UAPasteboardGeneration, _UAPasteboardItem, _UAPingResults, 
-                       _UAResumableActivitiesControlManager, _UASharedPasteboard, 
-                       _UASharedPasteboardInfo, _UASharedPasteboardItemInfo, _UASharedPasteboardManager, 
-                       _UASharedPasteboardTypeInfo, _UAUserActivity, _UAUserActivityInfo, 
-                       _UAUserActivityManager ]
+    objc-classes:    [ UABestAppSuggestion, UABestAppSuggestionManager, UAPasteboardDataProvider, 
+                       UAPasteboardGeneration, UAPasteboardItem, UAPingResults, UAResumableActivitiesControlManager, 
+                       UASharedPasteboard, UASharedPasteboardInfo, UASharedPasteboardItemInfo, 
+                       UASharedPasteboardManager, UASharedPasteboardTypeInfo, UAUserActivity, 
+                       UAUserActivityInfo, UAUserActivityManager ]
 ...

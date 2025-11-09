@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger, SFSafariServicesVersion) {
     SFSafariServicesVersion10_0,
     SFSafariServicesVersion10_1,
     SFSafariServicesVersion11_0,
+    SFSafariServicesVersion12_0,
 };
 
 extern void* _SFSafariServicesAvailable __attribute__((visibility("default"))) __attribute__((weak_import)) __attribute__((availability(swift, unavailable)));

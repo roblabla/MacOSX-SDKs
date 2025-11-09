@@ -6,6 +6,9 @@
 //
 
 #import <MapKit/MKFoundation.h>
+
+#if MK_SUPPORTS_VIEW_CLASSES
+
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #else
@@ -139,3 +142,5 @@ NS_CLASS_AVAILABLE(10_9, NA)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // MK_SUPPORTS_VIEW_CLASSES

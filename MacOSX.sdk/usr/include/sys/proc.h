@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2016 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -211,6 +211,8 @@ struct extern_proc {
 #define P_DIRTY_MARKED                          0x00000080      /* marked dirty previously */
 #define P_DIRTY_AGING_IN_PROGRESS               0x00000100      /* aging in one of the 'aging bands' */
 #define P_DIRTY_LAUNCH_IN_PROGRESS              0x00000200      /* launch is in progress */
+#define P_DIRTY_DEFER_ALWAYS                    0x00000400      /* defer going to idle-exit after every dirty->clean transition.
+								 * For legacy jetsam policy only. This is the default with the other policies.*/
 
 #define P_DIRTY_IS_DIRTY                        (P_DIRTY | P_DIRTY_SHUTDOWN)
 #define P_DIRTY_IDLE_EXIT_ENABLED               (P_DIRTY_TRACK|P_DIRTY_ALLOW_IDLE_EXIT)

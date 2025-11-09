@@ -8,6 +8,8 @@
 #ifndef Photos_PhotosTypes_h
 #define Photos_PhotosTypes_h
 
+#import <Foundation/Foundation.h>
+
 #pragma mark - PHCollectionListTypes
 
 typedef NS_ENUM(NSInteger, PHImageContentMode) {

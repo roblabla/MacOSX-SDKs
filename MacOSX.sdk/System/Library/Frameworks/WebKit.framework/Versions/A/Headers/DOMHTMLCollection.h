@@ -29,11 +29,11 @@
 @class DOMNodeList;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMHTMLCollection : DOMObject
 @property (readonly) unsigned length;
 
 - (DOMNode *)item:(unsigned)index;
 - (DOMNode *)namedItem:(NSString *)name;
-- (DOMNodeList *)tags:(NSString *)name NS_AVAILABLE_MAC(10_6);
+- (DOMNodeList *)tags:(NSString *)name WEBKIT_AVAILABLE_MAC(10_6);
 @end

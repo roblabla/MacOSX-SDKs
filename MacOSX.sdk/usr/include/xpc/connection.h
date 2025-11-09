@@ -445,7 +445,7 @@ xpc_connection_send_message(xpc_connection_t connection, xpc_object_t message);
  * @discussion
  * XPC guarantees that, even if the connection's target queue is a concurrent
  * queue, there are no other messages being sent concurrently while the barrier
- * block is executing. XPC does not guarantee that the reciept of messages
+ * block is executing. XPC does not guarantee that the receipt of messages
  * (either through the connection's event handler or through reply handlers)
  * will be suspended while the barrier is executing.
  *

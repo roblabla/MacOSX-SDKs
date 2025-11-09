@@ -29,7 +29,7 @@
 @class NSString;
 @class NSURL;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMHTMLLinkElement : DOMHTMLElement
 @property BOOL disabled;
 @property (copy) NSString *charset;
@@ -40,6 +40,6 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (copy) NSString *rev;
 @property (copy) NSString *target;
 @property (copy) NSString *type;
-@property (readonly, strong) DOMStyleSheet *sheet NS_AVAILABLE_MAC(10_4);
-@property (readonly, copy) NSURL *absoluteLinkURL NS_AVAILABLE_MAC(10_5);
+@property (readonly, strong) DOMStyleSheet *sheet WEBKIT_AVAILABLE_MAC(10_4);
+@property (readonly, copy) NSURL *absoluteLinkURL WEBKIT_AVAILABLE_MAC(10_5);
 @end

@@ -190,7 +190,7 @@ typedef NS_ENUM(NSUInteger, MDLMaterialMipMapFilterMode) {
     MDLMaterialMipMapFilterModeLinear,
 };
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLTextureFilter : NSObject
 @property (nonatomic, assign) MDLMaterialTextureWrapMode sWrapMode;
@@ -201,7 +201,7 @@ MDL_EXPORT
 @property (nonatomic, assign) MDLMaterialMipMapFilterMode mipFilter;
 @end
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLTextureSampler : NSObject
 
@@ -217,7 +217,7 @@ MDL_EXPORT
  a Rec 709 color.
  */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLMaterialProperty : NSObject<MDLNamed, NSCopying>
 
@@ -255,7 +255,7 @@ MDL_EXPORT
 
 @end
 
-NS_CLASS_AVAILABLE(10_12, 10_0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0))
 MDL_EXPORT
 @interface MDLMaterialPropertyConnection : NSObject<MDLNamed>
 
@@ -270,7 +270,7 @@ MDL_EXPORT
 
 @end
 
-NS_CLASS_AVAILABLE(10_12, 10_0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0))
 MDL_EXPORT
 @interface MDLMaterialPropertyNode : NSObject<MDLNamed>
 
@@ -292,7 +292,7 @@ MDL_EXPORT
              external to the graph, which are all the inputs and outputs not
              internally connected to something
  */
-NS_CLASS_AVAILABLE(10_12, 10_0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0))
 MDL_EXPORT
 @interface MDLMaterialPropertyGraph : MDLMaterialPropertyNode
 
@@ -314,7 +314,7 @@ MDL_EXPORT
  an approximation.
  */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLScatteringFunction : NSObject<MDLNamed>
 
@@ -332,7 +332,7 @@ MDL_EXPORT
 
 @end
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLPhysicallyPlausibleScatteringFunction : MDLScatteringFunction
 
@@ -358,7 +358,7 @@ typedef NS_ENUM(NSUInteger, MDLMaterialFace) {
     MDLMaterialFaceDoubleSided
 };
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLMaterial : NSObject<MDLNamed, NSFastEnumeration>
 
@@ -374,14 +374,14 @@ MDL_EXPORT
 - (nullable MDLMaterialProperty*)propertyWithSemantic:(MDLMaterialSemantic)semantic;
 
 // Returns the complete list of properties that match the semantic (e.g. Kd & Kd_map)
-- (NSArray<MDLMaterialProperty *> *)propertiesWithSemantic:(MDLMaterialSemantic)semantic;
+- (NSArray<MDLMaterialProperty *> *)propertiesWithSemantic:(MDLMaterialSemantic)semantic API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 - (void)removeAllProperties;
 
 // Iterates all material properties. If they are string values, they are resolved into
 // valid paths as NSURL values.
 // @param resolver If non-nil, the resolver can be invoked to convert stringValues
 //                 to NSURLs for loading.
-- (void)resolveTexturesWithResolver:(id<MDLAssetResolver>)resolver;
+- (void)resolveTexturesWithResolver:(id<MDLAssetResolver>)resolver API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 // Iterates all material properties. If they are string values or NSURL values, and
 // can be resolved as textures, then the string and NSURL values will be replaced by
@@ -389,7 +389,7 @@ MDL_EXPORT
 // wrap modes will be clamp, and the filter modes will be linear.
 // @param resolver If non-nil, the resolver can be invoked to convert stringValues
 //                 to NSURLs for loading.
-- (void)loadTexturesUsingResolver:(id<MDLAssetResolver>)resolver;
+- (void)loadTexturesUsingResolver:(id<MDLAssetResolver>)resolver API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 @property (nonatomic, readonly, retain) MDLScatteringFunction *scatteringFunction;
 

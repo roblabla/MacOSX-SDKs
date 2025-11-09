@@ -1,7 +1,7 @@
 /*
 	NSFontPanel.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -24,41 +24,52 @@ typedef NS_OPTIONS(NSUInteger, NSFontPanelModeMask) {
     NSFontPanelModeMaskAllEffects = 0XFFF00,
     NSFontPanelModesMaskStandardModes = 0xFFFF,
     NSFontPanelModesMaskAllModes = 0xFFFFFFFF
-} NS_ENUM_AVAILABLE_MAC(10_13);
+};
 
-@interface NSObject (NSFontPanelValidationAdditions)
+@protocol NSFontChanging <NSObject>
+@optional
+
+/* This is the message that's propagated up the responder chain.
+ */
+- (void)changeFont:(nullable NSFontManager *)sender;
 - (NSFontPanelModeMask)validModesForFontPanel:(NSFontPanel *)fontPanel;
 @end
+
+#if __swift__ < 40200
+@interface NSObject (NSFontPanelValidationAdditions)
+- (NSFontPanelModeMask)validModesForFontPanel:(NSFontPanel *)fontPanel NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now an optional method of the NSFontChanging protocol.");
+@end
+#endif
 
 
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSFontPanel : NSPanel {
     /*All instance variables are private*/
-    NSFontManager *_manager;
-    NSArray *_collectionNames;
-    id _selection;
-    void *_carbonNotification; 
-    id _targetObject;
+    NSFontManager *_manager APPKIT_IVAR;
+    NSArray *_collectionNames APPKIT_IVAR;
+    id _selection APPKIT_IVAR;
+    void *_carbonNotification APPKIT_IVAR;
+    id _targetObject APPKIT_IVAR;
 
-    id			_familyList;
-    id                  _faceList;
-    id                  _sizeList;
-    id                  _mainCollectionList;
-    id			_sizeField;
-    id                  _sizeSlider;
-    id                  _sizeSliderBox;
-    id			_preview;
-    id			_previewContainer;
-    id                  _mainSplitView;
-    id			_mmCollectionList;	
-    id			_mmFamilyList;
-    id                  _mmFaceList;
-    id                  _mmSizeList;
-    id			_fullSizeHeightConstraint;
-    id                  _searchField;
-    id			_fixedListButton;
-    id		        _sliderButton; 
-    id		        _accessoryView; 
+    id			_familyList APPKIT_IVAR;
+    id                  _faceList APPKIT_IVAR;
+    id                  _sizeList APPKIT_IVAR;
+    id                  _mainCollectionList APPKIT_IVAR;
+    id			_sizeField APPKIT_IVAR;
+    id                  _sizeSlider APPKIT_IVAR;
+    id                  _sizeSliderBox APPKIT_IVAR;
+    id			_preview APPKIT_IVAR;
+    id			_previewContainer APPKIT_IVAR;
+    id                  _mainSplitView APPKIT_IVAR;
+    id			_mmCollectionList APPKIT_IVAR;
+    id			_mmFamilyList APPKIT_IVAR;
+    id                  _mmFaceList APPKIT_IVAR;
+    id                  _mmSizeList APPKIT_IVAR;
+    id			_fullSizeHeightConstraint APPKIT_IVAR;
+    id                  _searchField APPKIT_IVAR;
+    id			_fixedListButton APPKIT_IVAR;
+    id		        _sliderButton APPKIT_IVAR;
+    id		        _accessoryView APPKIT_IVAR;
     struct __fpFlags {
 	unsigned int	    setFontChange:1;
 	unsigned int	    setFontAttributeChange:1;
@@ -73,40 +84,43 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
         unsigned int        _uiMode:8;
         unsigned int        _miniMode:1;
         unsigned int _reserved:13;
-    } _fpFlags;
+    } _fpFlags APPKIT_IVAR;
 
-    id			_regularModeBox; 
-    id			_miniModeBox; 
-    id			_sizeBox;
-    id			_collectionLabel; 
-    id			_sizeLabel; 
-    id                  _faceDivider;
-    id                  _familyLabel;
-    id			_sizeStyleButton; 
-    id			_newSizeField; 
-    id			_editSizeList; 
-    id			_editSizeListBox; 
-    id			_editSizeSliderBox; 
-    id			_editSizeSliderMaxField; 
-    id			_editSizeSliderMinField; 
-    id			_sizeEditWindow; 
-    id			_availableSizes; 
+    id			_regularModeBox APPKIT_IVAR;
+    id			_miniModeBox APPKIT_IVAR;
+    id			_sizeBox APPKIT_IVAR;
+    id			_collectionLabel APPKIT_IVAR;
+    id			_sizeLabel APPKIT_IVAR;
+    id                  _faceDivider APPKIT_IVAR;
+    id                  _familyLabel APPKIT_IVAR;
+    id			_sizeStyleButton APPKIT_IVAR;
+    id			_newSizeField APPKIT_IVAR;
+    id			_editSizeList APPKIT_IVAR;
+    id			_editSizeListBox APPKIT_IVAR;
+    id			_editSizeSliderBox APPKIT_IVAR;
+    id			_editSizeSliderMaxField APPKIT_IVAR;
+    id			_editSizeSliderMinField APPKIT_IVAR;
+    id			_sizeEditWindow APPKIT_IVAR;
+    id			_availableSizes APPKIT_IVAR;
 
-    id _addCollectionButton;
-    id _removeCollectionButton;
+    id _addCollectionButton APPKIT_IVAR;
+    id _removeCollectionButton APPKIT_IVAR;
 
-    CGFloat _fontPanelPreviewHeight; 
-    id _typographyPanel;
-    id _actionButton;
-    id _fontEffectsBox;
-    int _sizeStyle;
+    CGFloat _fontPanelPreviewHeight APPKIT_IVAR;
+    id _typographyPanel APPKIT_IVAR;
+    id _actionButton APPKIT_IVAR;
+    id _fontEffectsBox APPKIT_IVAR;
+    int _sizeStyle APPKIT_IVAR;
 
-    id _fontPanelToolbar;
-    id _fontPanelContentView;
+    id _fontPanelToolbar APPKIT_IVAR;
+    id _fontPanelContentView APPKIT_IVAR;
 
 #if !__LP64__
-    id _fpUnused[70];
+    id _fpUnused[69] APPKIT_IVAR;
 #endif /* !__LP64__ */
+
+@private
+    id _familyToFaceConstraint APPKIT_IVAR;
 }
 
 @property (class, readonly, strong) NSFontPanel *sharedFontPanel;

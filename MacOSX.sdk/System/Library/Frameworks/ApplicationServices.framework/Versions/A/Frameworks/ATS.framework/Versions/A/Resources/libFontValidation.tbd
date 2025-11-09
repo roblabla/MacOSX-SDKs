@@ -1,10 +1,10 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 13955C05-C01D-3C83-B05C-D60C2D777154', 'x86_64: 7AFE8C15-493A-35F2-80AD-7B6CF376F778' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: B8222837-D02A-3BAD-A5DF-D860CD910643' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontValidation.dylib
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _ATSFontTestCopyAvailableTests, _ATSFontTestCreateReport, 
                        _kATSFontTestArrayKey, _kATSFontTestConsistencyTest, _kATSFontTestCoreTest, 
                        _kATSFontTestCreateReportTypeKey, _kATSFontTestDescriptionKey, 

@@ -1,7 +1,7 @@
 /*
 	NSDragging.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -67,17 +67,17 @@ typedef NS_ENUM(NSInteger, NSSpringLoadingHighlight) {
  */
 @protocol NSDraggingInfo <NSObject>
 @required
-- (nullable NSWindow *)draggingDestinationWindow;
-- (NSDragOperation)draggingSourceOperationMask;
-- (NSPoint)draggingLocation;
+@property (nullable, readonly) NSWindow *draggingDestinationWindow;
+@property (readonly) NSDragOperation draggingSourceOperationMask;
+@property (readonly) NSPoint draggingLocation;
 
 /* Returns the current location of the current composited dragging image’s origin in NSDraggingFormationNone translated to the base coordinate system of the destination object’s window
 */
-- (NSPoint)draggedImageLocation;
-- (nullable NSImage *)draggedImage;
-- (NSPasteboard *)draggingPasteboard;
-- (nullable id)draggingSource;
-- (NSInteger)draggingSequenceNumber;
+@property (readonly) NSPoint draggedImageLocation;
+@property (nullable, readonly) NSImage *draggedImage NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use NSDraggingItem objects instead");
+@property (readonly) NSPasteboard *draggingPasteboard;
+@property (nullable, readonly) id draggingSource;
+@property (readonly) NSInteger draggingSequenceNumber;
 - (void)slideDraggedImageTo:(NSPoint)screenPoint;
 - (nullable NSArray<NSString *> *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination NS_DEPRECATED_MAC(10_0, 10_13, "Use NSFilePromiseReceiver objects instead");
 

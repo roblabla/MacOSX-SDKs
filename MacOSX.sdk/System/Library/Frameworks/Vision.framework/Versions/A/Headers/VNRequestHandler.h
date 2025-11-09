@@ -7,37 +7,31 @@
 /*!
  @header There are two types of request handlers: VNSequenceRequestHandler and VNImageRequestHandler.
  
- TODO:  re-document this
- 
- Each of them are for scheduling @link VNRequest @/link. But the type of request dictates which kind of request handler to use. Some VNRequests can be used on multiple classes of VNTrackingHandlers while other require a specific one. Please refer to the documentation of the specific request. The general distinction between the 3 is that requests that are specific to an image (or buffer) would use the VNImageRequestHandler. Face detection is an example for the VNImageRequestHandler. For requests that span over multiple image buffers the request handler will hold on to past request data to allow algorithms to work on multiple buffers in a sequence and that sequence can be dynamic. 
- 
- The base class VNSequenceRequestHandler is to be used for requests that are not tied to an image like Face Recognition that is based on already detected faces. Requests can be scheduled synchronous where the performRequests call waits for all requests to finish or asynchronous via performRequestsAsynchronous. performRequestsAsynchronous returns immediately. The client can monitor the completion of the requests through the completionHandler specified in each VNRequest.
+ Each of them are for scheduling one or more @link VNRequest @/link objects for processing. The type of request may dictate which kind of request handler to use. Some VNRequests can be used with both, while others can only be used with a specific one. Please refer to the documentation of the specific request. The general distinction between the two is that requests that are specific to an image (or buffer) would use the VNImageRequestHandler. For requests that span over multiple image buffers the VNSequenceRequestHandler will hold on to past request data to allow algorithms to work on multiple buffers in a sequence, and that sequence can be dynamic.
  
  */
 
 
 #import <Foundation/Foundation.h>
-
 #import <CoreVideo/CVPixelBuffer.h>
-
 #import <CoreImage/CoreImage.h>
-
 #import <ImageIO/ImageIO.h>
 
 #import <Vision/VNDefines.h>
 #import <Vision/VNRequest.h>
 
 
-
 NS_ASSUME_NONNULL_BEGIN
 
-// Options keys  passed into the VNImageRequestHandler creations or requests that take an auxilary image
 
+/*!
+ @brief Options keys passed into the VNImageRequestHandler creations or requests that take an auxiliary image. These are options that either describe specific properties of an image like the VNImageOptionCameraIntrinsics or how an image needs to be handled like the VNImageOptionCIContext.
+*/
 typedef NSString * VNImageOption NS_STRING_ENUM;
 
 /*!
  @const      VNImageOptionProperties
- @abstract   VNImageOptionProperties is the dictionary from CGImageSourceCopyPropertiesAtIndex. This contains metadata that can be used by some algorithms
+ @abstract   VNImageOptionProperties is the dictionary from CGImageSourceCopyPropertiesAtIndex. This contains metadata that can be used by some algorithms like horizon detection.
  */
 
 VN_EXPORT VNImageOption const VNImageOptionProperties API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
@@ -55,7 +49,11 @@ VN_EXPORT VNImageOption const VNImageOptionProperties API_AVAILABLE(macos(10.13)
  */
 VN_EXPORT VNImageOption const VNImageOptionCameraIntrinsics API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
+/*!
+ @brief VNImageOptionCIContext  Specifies the CIContext to be used in Core Image operations of request handler. If this is not specified, Vision will create its own CIContext. This option is helpful when the passed in CIImage is the result of a CIFilter chain that has been executed on a CIContext or uses outputs of a CIImage on a given CIContext as they don't have to transfer to other contexts.
+ */
 
+VN_EXPORT VNImageOption const VNImageOptionCIContext API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 
 /*!
@@ -80,8 +78,8 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  @brief initWithCVPixelBuffer:options creates a VNImageRequestHandler to be used for performing requests against the image passed in as buffer.
  
  @param pixelBuffer A CVPixelBuffer containing the image to be used for performing the requests. The content of the buffer cannot be modified for the lifetime of the VNImageRequestHandler.
- @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This superceeds every other orientation information.
- @param options A dictionary with options specifying auxilary information for the buffer/image like VNImageOptionCameraIntrinsics
+ @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information.
+ @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
  */
 - (instancetype)initWithCVPixelBuffer:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options;
 
@@ -99,8 +97,8 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  @brief initWithCGImage:options creates a VNImageRequestHandler to be used for performing requests against the image passed in as a CGImageRef.
  
  @param image A CGImageRef containing the image to be used for performing the requests. The content of the image cannot be modified.
- @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This superceeds every other orientation information.
- @param options A dictionary with options specifying auxilary information for the buffer/image like VNImageOptionCameraIntrinsics
+ @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information.
+ @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
 
  */
 - (instancetype)initWithCGImage:(CGImageRef)image orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options;
@@ -110,7 +108,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  @brief initWithCIImage:options creates a VNImageRequestHandler to be used for performing requests against the image passed in as a CIImage.
  
  @param image A CIImage containing the image to be used for performing the requests. The content of the image cannot be modified.
- @param options A dictionary with options specifying auxilary information for the buffer/image like VNImageOptionCameraIntrinsics
+ @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
  
  
  @note:  Request results may not be accurate in simulator due to CI's inability to render certain pixel formats in the simulator. The orientation of the original image should be applied for instance by using imageByApplyingOrientation or use the initWithCIImage:options:orientation API.
@@ -122,8 +120,8 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  @brief initWithCIImage:options:orientation creates a VNImageRequestHandler to be used for performing requests against the image passed in as a CIImage.
  
  @param image A CIImage containing the image to be used for performing the requests. The content of the image cannot be modified.
- @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This superceeds every other orientation information.
- @param options A dictionary with options specifying auxilary information for the buffer/image like VNImageOptionCameraIntrinsics
+ @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information.
+ @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
 
  
  @note:  Request results may not be accurate in simulator due to CI's inability to render certain pixel formats in the simulator
@@ -135,7 +133,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  @brief initWithURL:options creates a VNImageRequestHandler to be used for performing requests against an image specified by it's URL
  
  @param imageURL A URL pointing at an image to be used for performing the requests. The image has to be in a format that is supported by ImageIO. The content of the image cannot be modified.
- @param options A dictionary with options specifying auxilary information for the buffer/image like VNImageOptionCameraIntrinsics
+ @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
  
  @note:  Request results may not be accurate in simulator due to CI's inability to render certain pixel formats in the simulator
  */
@@ -146,8 +144,8 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  @brief initWithURL:options creates a VNImageRequestHandler to be used for performing requests against an image specified by it's URL
  
  @param imageURL A URL pointing at an image to be used for performing the requests. The image has to be in a format that is supported by ImageIO. The content of the image cannot be modified.
- @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This superceeds every other orientation information.
- @param options A dictionary with options specifying auxilary information for the buffer/image like VNImageOptionCameraIntrinsics
+ @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information.
+ @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
 
  @note:  Request results may not be accurate in simulator due to CI's inability to render certain pixel formats in the simulator
  */
@@ -158,7 +156,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  @brief initWithData:options creates a VNImageRequestHandler to be used for performing requests against an image contained in an NSData object.
  
  @param imageData An NSData object containing the content of the image to be used for performing the requests. See CIImage imageWithData for supported format. The content of the image cannot be modified.
- @param options A dictionary with options specifying auxilary information for the buffer/image like VNImageOptionCameraIntrinsics
+ @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
  
  @note:  Request results may not be accurate in simulator due to CI's inability to render certain pixel formats in the simulator
  
@@ -170,8 +168,8 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  @brief initWithData:options creates a VNImageRequestHandler to be used for performing requests against an image contained in an NSData object.
  
  @param imageData An NSData object containing the content of the image to be used for performing the requests. See CIImage imageWithData for supported format. The content of the image cannot be modified.
- @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This superceeds every other orientation information.
- @param options A dictionary with options specifying auxilary information for the buffer/image like VNImageOptionCameraIntrinsics
+ @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information.
+ @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
 
  @note:  Request results may not be accurate in simulator due to CI's inability to render certain pixel formats in the simulator
  
@@ -338,7 +336,6 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 	@param	error			On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify NULL for this parameter if you do not want the error information.
  */
 - (BOOL)performRequests:(NSArray<VNRequest *> *)requests onImageData:(NSData*)imageData orientation:(CGImagePropertyOrientation)orientation error:(NSError **)error;
-
 
 @end
 

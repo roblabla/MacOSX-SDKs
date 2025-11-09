@@ -6,10 +6,12 @@
 //
 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+#ifndef IKDeviceBrowserView_h
+#define IKDeviceBrowserView_h
 
 #import <Cocoa/Cocoa.h>
 #import <ImageCaptureCore/ImageCaptureCore.h>
+#import <ImageKit/ImageKitBase.h>
 
 @class IKDeviceBrowserView;
 
@@ -51,6 +53,7 @@ typedef NS_ENUM(NSInteger, IKDeviceBrowserViewDisplayMode)
  @abstract IKDeviceBrowserView displays Image Capture cameras and scanners.
  */
 
+IK_CLASS_AVAILABLE(10.6)
 @interface IKDeviceBrowserView : NSView
 {
 @private

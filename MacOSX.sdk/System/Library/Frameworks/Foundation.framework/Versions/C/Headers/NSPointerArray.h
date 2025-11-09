@@ -1,6 +1,6 @@
 /*
  *  NSPointerArray.h
- *  Copyright (c) 2005-2017, Apple Inc. All rights reserved.
+ *  Copyright (c) 2005-2018, Apple Inc. All rights reserved.
  *
  */
  
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 */
 
 NS_CLASS_AVAILABLE(10_5, 6_0)
-@interface NSPointerArray : NSObject <NSFastEnumeration, NSCopying, NSCoding>
+@interface NSPointerArray : NSObject <NSFastEnumeration, NSCopying, NSSecureCoding>
 // construction
 - (instancetype)initWithOptions:(NSPointerFunctionsOptions)options NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithPointerFunctions:(NSPointerFunctions *)functions NS_DESIGNATED_INITIALIZER;

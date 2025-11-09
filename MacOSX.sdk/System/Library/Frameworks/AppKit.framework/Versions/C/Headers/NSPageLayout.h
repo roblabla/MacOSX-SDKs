@@ -1,7 +1,7 @@
 /*
 	NSPageLayout.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -14,17 +14,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSPageLayout : NSObject {
     @private
-    NSMutableArray *_accessoryControllers;
-    NSPrintInfo *_originalPrintInfo;
-    id _delegate;
-    SEL _didEndSelector;
-    void *_contextInfo;
-    NSPrintInfo *_presentedPrintInfo;
-    NSWindowController *_windowController;
-#if __LP64__
-    id _reserved[4] __unused;
-#else
-    unsigned char _compatibilityPadding[156];
+    NSMutableArray *_accessoryControllers APPKIT_IVAR;
+    NSPrintInfo *_originalPrintInfo APPKIT_IVAR;
+    id _delegate APPKIT_IVAR;
+    SEL _didEndSelector APPKIT_IVAR;
+    void *_contextInfo APPKIT_IVAR;
+    NSPrintInfo *_presentedPrintInfo APPKIT_IVAR;
+    NSWindowController *_windowController APPKIT_IVAR;
+#if ! __LP64__
+    unsigned char _compatibilityPadding[156] APPKIT_IVAR;
 #endif
 }
 
@@ -59,13 +57,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSPageLayout(NSDeprecated)
 
-/* Methods that were deprecated in Mac OS 10.5. -setAccessoryView: replaces all of the accessory controllers that have been added so far by -addAccessoryController:. -accessoryView merely returns the view of the first accessory controller, or nil.
+/* -setAccessoryView: replaces all of the accessory controllers that have been added so far by -addAccessoryController:. -accessoryView merely returns the view of the first accessory controller, or nil.
 */
 - (void)setAccessoryView:(null_unspecified NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
 - (null_unspecified NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
 
-/* Methods that were deprecated in Mac OS 10.5.
-*/
 - (void)readPrintInfo NS_DEPRECATED_MAC(10_0, 10_5);
 - (void)writePrintInfo NS_DEPRECATED_MAC(10_0, 10_5);
 

@@ -466,6 +466,7 @@ struct kev_in6_data {
 #define	IN6_IFF_DYNAMIC		0x0100	/* assigned by DHCPv6 service */
 #define	IN6_IFF_OPTIMISTIC	0x0200	/* optimistic DAD, i.e. RFC 4429 */
 #define	IN6_IFF_SECURED		0x0400	/* cryptographically generated */
+#define	IN6_IFF_CLAT46		0x1000  /* Address reserved for CLAT46 */
 #define	IN6_IFF_NOPFX		0x8000	/* Depreciated. Don't use. */
 
 /* Duplicate Address Detection [DAD] in progress. */

@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: A679E9F4-16FF-3E4E-81E4-9CDA50785FBB', 'x86_64: 8706B095-6288-358B-AF09-CDFDAA7E5764' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 8706B095-6288-358B-AF09-CDFDAA7E5764' ]
 platform:        macosx
 flags:           [ not_app_extension_safe ]
 install-name:    /usr/lib/libnetsnmp.15.dylib
@@ -8,7 +8,7 @@ current-version: 17.2
 compatibility-version: 17
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _File, _MDbegin, _MDchecksum, _MDget, _MDreverse, _MDsign, 
                        _MDupdate, _Mib, _RFC1213_MIB, _Sessions, __netsnmp_udp_sockopt_set, 
                        __pm_save_everything, __pm_save_index_string_string, __pm_user_function, 

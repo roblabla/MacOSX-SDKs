@@ -1,5 +1,5 @@
 /*	NSValueTransformer.h
-        Copyright (c) 2002-2017, Apple Inc. All rights reserved.
+        Copyright (c) 2002-2018, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -12,9 +12,11 @@ typedef NSString *NSValueTransformerName NS_EXTENSIBLE_STRING_ENUM;
 
 FOUNDATION_EXPORT NSValueTransformerName const NSNegateBooleanTransformerName	API_AVAILABLE(macos(10.3), ios(3.0), watchos(2.0), tvos(9.0));
 FOUNDATION_EXPORT NSValueTransformerName const NSIsNilTransformerName		API_AVAILABLE(macos(10.3), ios(3.0), watchos(2.0), tvos(9.0));
-FOUNDATION_EXPORT NSValueTransformerName const NSIsNotNilTransformerName		API_AVAILABLE(macos(10.3), ios(3.0), watchos(2.0), tvos(9.0));
-FOUNDATION_EXPORT NSValueTransformerName const NSUnarchiveFromDataTransformerName	API_AVAILABLE(macos(10.3), ios(3.0), watchos(2.0), tvos(9.0));
-FOUNDATION_EXPORT NSValueTransformerName const NSKeyedUnarchiveFromDataTransformerName	API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSValueTransformerName const NSIsNotNilTransformerName	API_AVAILABLE(macos(10.3), ios(3.0), watchos(2.0), tvos(9.0));
+
+FOUNDATION_EXPORT NSValueTransformerName const NSUnarchiveFromDataTransformerName       API_DEPRECATED_WITH_REPLACEMENT("NSSecureUnarchiveFromDataTransformerName", macos(10.3, 10.14), ios(3.0, 12.0), watchos(2.0, 5.0), tvos(9.0, 12.0));
+FOUNDATION_EXPORT NSValueTransformerName const NSKeyedUnarchiveFromDataTransformerName  API_DEPRECATED_WITH_REPLACEMENT("NSSecureUnarchiveFromDataTransformerName", macos(10.3, 10.14), ios(3.0, 12.0), watchos(2.0, 5.0), tvos(9.0, 12.0));
+FOUNDATION_EXPORT NSValueTransformerName const NSSecureUnarchiveFromDataTransformerName API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 
 NS_CLASS_AVAILABLE(10_3, 3_0)
 @interface NSValueTransformer : NSObject {
@@ -32,6 +34,19 @@ NS_CLASS_AVAILABLE(10_3, 3_0)
 
 - (nullable id)transformedValue:(nullable id)value;           // by default returns value
 - (nullable id)reverseTransformedValue:(nullable id)value;    // by default raises an exception if +allowsReverseTransformation returns NO and otherwise invokes transformedValue:
+
+@end
+
+/// A value transformer which transforms values to and from \c NSData by archiving and unarchiving using secure coding.
+API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
+@interface NSSecureUnarchiveFromDataTransformer : NSValueTransformer
+
+/// The list of allowable classes which the top-level object in the archive must conform to on encoding and decoding.
+///
+/// Returns the result of \c +transformedValueClass if not \c Nil; otherwise, currently returns \c NSArray, \c NSDictionary, \c NSString, \c NSNumber, \c NSDate, \c NSData, \c NSURL, \c NSUUID, and \c NSNull.
+///
+/// Can be overridden by subclasses to provide an expanded or different set of allowed transformation classes.
+@property (class, readonly, copy) NSArray<Class> *allowedTopLevelClasses;
 
 @end
 

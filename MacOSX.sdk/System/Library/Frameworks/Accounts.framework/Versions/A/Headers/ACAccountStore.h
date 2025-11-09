@@ -31,7 +31,7 @@ typedef void(^ACAccountStoreCredentialRenewalHandler)(ACAccountCredentialRenewRe
 // store to grab credentials, just be sure to grab the credential object and then
 // you can release the owning account and store, e.g.
 
-ACCOUNTS_CLASS_AVAILABLE(10_8, 5_0)
+API_AVAILABLE(ios(5.0), macos(10.8))
 @interface ACAccountStore : NSObject
 
 // An array of all the accounts in an account database
@@ -54,8 +54,7 @@ ACCOUNTS_CLASS_AVAILABLE(10_8, 5_0)
 - (void)saveAccount:(ACAccount *)account withCompletionHandler:(ACAccountStoreSaveCompletionHandler)completionHandler;
 
 // DEPRECATED: Please use requestAccessToAccountsWithType:options:completion: instead.
-- (void)requestAccessToAccountsWithType:(ACAccountType *)accountType
-                  withCompletionHandler:(ACAccountStoreRequestAccessCompletionHandler)handler NS_DEPRECATED(NA, NA, 5_0, NA);
+- (void)requestAccessToAccountsWithType:(ACAccountType *)accountType withCompletionHandler:(ACAccountStoreRequestAccessCompletionHandler)handler API_DEPRECATED_WITH_REPLACEMENT("-requestAccessToAccountsWithType:options:completion:", ios(5.0, 6.0)) API_UNAVAILABLE(macos);
 
 // Obtains permission, if necessary, from the user to access protected properties, and utilize accounts
 // of a particular type in protected operations, for example OAuth signing. The completion handler for 
@@ -64,9 +63,7 @@ ACCOUNTS_CLASS_AVAILABLE(10_8, 5_0)
 // appears in ACAccountType.h. This method will throw an NSInvalidArgumentException if the options
 // dictionary is not provided for such account types. Conversely, if the account type does not require
 // an options dictionary, the options parameter must be nil.
-- (void)requestAccessToAccountsWithType:(ACAccountType *)accountType
-                                options:(NSDictionary *)options
-                             completion:(ACAccountStoreRequestAccessCompletionHandler)completion;
+- (void)requestAccessToAccountsWithType:(ACAccountType *)accountType options:(NSDictionary *)options completion:(ACAccountStoreRequestAccessCompletionHandler)completion;
 
 // Call this if you discover that an ACAccount's credential is no longer valid.
 // For Twitter and Sina Weibo accounts, this method will prompt the user to go to Settings to re-enter their password.
@@ -85,4 +82,4 @@ ACCOUNTS_CLASS_AVAILABLE(10_8, 5_0)
 // notification is received, you should consider all ACAccount instances you have to be invalid. Purge current
 // instances of ACAccount and obtain new instances using the account store. You may need to deal with accounts
 // being removed by an external process while you are using them.
-ACCOUNTS_EXTERN NSString * const ACAccountStoreDidChangeNotification NS_AVAILABLE(10_8, 5_0);
+ACCOUNTS_EXTERN NSString * const ACAccountStoreDidChangeNotification API_AVAILABLE(ios(5.0), macos(10.8));

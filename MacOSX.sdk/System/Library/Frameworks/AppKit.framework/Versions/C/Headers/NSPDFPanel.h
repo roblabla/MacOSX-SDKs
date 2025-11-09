@@ -1,11 +1,12 @@
 /*
         NSPDFPanel.h
         Application Kit
-        Copyright (c) 2013-2017, Apple Inc.
+        Copyright (c) 2013-2018, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,11 +21,11 @@ typedef NS_OPTIONS(NSInteger, NSPDFPanelOptions) {
 
 NS_CLASS_AVAILABLE_MAC(10_9)
 @interface NSPDFPanel : NSObject {
-    NSViewController *_accessoryController;
-    NSPDFPanelOptions _options;
-    NSString *_defaultFileName;
-    id _panel;
-    id _private;
+    NSViewController *_accessoryController APPKIT_IVAR;
+    NSPDFPanelOptions _options APPKIT_IVAR;
+    NSString *_defaultFileName APPKIT_IVAR;
+    id _panel APPKIT_IVAR;
+    id _private APPKIT_IVAR;
 };
 
 /* Create a new NSPDFPanel.

@@ -1,7 +1,7 @@
 /*
 	NSEPSImageRep.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -13,9 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSEPSImageRep : NSImageRep {
     /*All instance variables are private*/
-    NSPoint _bBoxOrigin;
-    NSData *_epsData;
-    NSPDFImageRep* _pdfImageRep;
+    NSPoint _bBoxOrigin APPKIT_IVAR;
+    NSData *_epsData APPKIT_IVAR;
+    NSPDFImageRep* _pdfImageRep APPKIT_IVAR;
 }
 
 + (nullable instancetype)imageRepWithData:(NSData *)epsData;	/* Convenience of initWithData: */

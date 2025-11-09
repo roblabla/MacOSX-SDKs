@@ -20,21 +20,21 @@ typedef NS_ENUM(NSUInteger, MTLLoadAction) {
     MTLLoadActionDontCare = 0,
     MTLLoadActionLoad = 1,
     MTLLoadActionClear = 2,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 typedef NS_ENUM(NSUInteger, MTLStoreAction) {
     MTLStoreActionDontCare = 0,
     MTLStoreActionStore = 1,
     MTLStoreActionMultisampleResolve = 2,
-    MTLStoreActionStoreAndMultisampleResolve NS_ENUM_AVAILABLE(10_12, 10_0) = 3,
-    MTLStoreActionUnknown NS_ENUM_AVAILABLE(10_12, 10_0) = 4,
-    MTLStoreActionCustomSampleDepthStore NS_ENUM_AVAILABLE(10_13, 11_0) = 5,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+    MTLStoreActionStoreAndMultisampleResolve API_AVAILABLE(macos(10.12), ios(10.0)) = 3,
+    MTLStoreActionUnknown API_AVAILABLE(macos(10.12), ios(10.0)) = 4,
+    MTLStoreActionCustomSampleDepthStore API_AVAILABLE(macos(10.13), ios(11.0)) = 5,
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 typedef NS_OPTIONS(NSUInteger, MTLStoreActionOptions) {
     MTLStoreActionOptionNone                  = 0,
     MTLStoreActionOptionCustomSamplePositions = 1 << 0,
-} NS_ENUM_AVAILABLE(10_13, 11_0);
+} API_AVAILABLE(macos(10.13), ios(11.0));
 
 typedef struct
 {
@@ -44,13 +44,12 @@ typedef struct
     double alpha;
 } MTLClearColor;
 
-// Should we provide a set of APIs similar to the old methods below?
 MTL_INLINE MTLClearColor MTLClearColorMake(double red, double green, double blue, double alpha);
 
 @protocol MTLTexture;
 @protocol MTLBuffer;
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLRenderPassAttachmentDescriptor : NSObject <NSCopying>
 
 /*!
@@ -121,11 +120,11 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  @abstract Optional configuration for the store action performed with this attachment at the end of a render pass.  Default is
  MTLStoreActionOptionNone.
  */
-@property (nonatomic) MTLStoreActionOptions storeActionOptions NS_AVAILABLE(10_13, 11_0);
+@property (nonatomic) MTLStoreActionOptions storeActionOptions API_AVAILABLE(macos(10.13), ios(11.0));
 
 @end
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLRenderPassColorAttachmentDescriptor : MTLRenderPassAttachmentDescriptor
 
 /*!
@@ -145,9 +144,9 @@ typedef NS_ENUM(NSUInteger, MTLMultisampleDepthResolveFilter)
     MTLMultisampleDepthResolveFilterSample0 = 0,
     MTLMultisampleDepthResolveFilterMin = 1,
     MTLMultisampleDepthResolveFilterMax = 2,
-} NS_ENUM_AVAILABLE_IOS(9_0);
+} API_AVAILABLE(macos(10.14), ios(9.0));
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLRenderPassDepthAttachmentDescriptor : MTLRenderPassAttachmentDescriptor
 
 /*!
@@ -160,15 +159,34 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  @property resolveFilter
  @abstract The filter to be used for depth multisample resolve.  Defaults to MTLMultisampleDepthResolveFilterSample0.
  */
-@property (nonatomic) MTLMultisampleDepthResolveFilter depthResolveFilter NS_AVAILABLE_IOS(9_0);
+@property (nonatomic) MTLMultisampleDepthResolveFilter depthResolveFilter API_AVAILABLE(macos(10.14), ios(9.0));
 
 @end
 
 
 
+/*!
+ @enum MTLMultisampleStencilResolveFilter
+ @abstract Controls the MSAA stencil resolve operation.
+ */
+typedef NS_ENUM(NSUInteger, MTLMultisampleStencilResolveFilter)
+{
+    /*!
+     @constant MTLMultisampleStencilResolveFilterSample0
+     @abstract The stencil sample corresponding to sample 0. This is the default behavior.
+     */
+    MTLMultisampleStencilResolveFilterSample0               = 0,
+
+    /*!
+     @constant MTLMultisampleStencilResolveFilterDepthResolvedSample
+     @abstract The stencil sample corresponding to whichever depth sample is selected by the depth resolve filter. If depth resolve is not enabled, the stencil sample is chosen based on what a depth resolve filter would have selected.
+     */
+    MTLMultisampleStencilResolveFilterDepthResolvedSample   = 1,
+} API_AVAILABLE(macos(10.14), ios(12.0));
 
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLRenderPassStencilAttachmentDescriptor : MTLRenderPassAttachmentDescriptor
 
 /*!
@@ -177,12 +195,17 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  */
 @property (nonatomic) uint32_t clearStencil;
 
+/*!
+ @property stencilResolveFilter
+ @abstract The filter to be used for stencil multisample resolve. Defaults to MTLMultisampleStencilResolveFilterSample0.
+ */
+@property (nonatomic) MTLMultisampleStencilResolveFilter stencilResolveFilter API_AVAILABLE(macos(10.14), ios(12.0));
 
 @end
 
 
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLRenderPassColorAttachmentDescriptorArray : NSObject
 /* Individual attachment state access */
 - (MTLRenderPassColorAttachmentDescriptor *)objectAtIndexedSubscript:(NSUInteger)attachmentIndex;
@@ -196,7 +219,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  @class MTLRenderPassDescriptor
  @abstract MTLRenderPassDescriptor represents a collection of attachments to be used to create a concrete render command encoder
  */
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLRenderPassDescriptor : NSObject <NSCopying>
 
 /*!
@@ -221,7 +244,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  @property renderTargetArrayLength:
  @abstract The number of active layers
  */
-@property (nonatomic) NSUInteger renderTargetArrayLength NS_AVAILABLE(10_11, NA);
+@property (nonatomic) NSUInteger renderTargetArrayLength API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios);
 
 
 
@@ -233,7 +256,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  @param positions The source array for custom sample position data.
  @param count Specifies the length of the positions array, and must be a valid sample count or 0 (to disable custom sample positions).
  */
-- (void)setSamplePositions:(const MTLSamplePosition * _Nullable)positions count:(NSUInteger)count NS_AVAILABLE(10_13, 11_0);
+- (void)setSamplePositions:(const MTLSamplePosition * _Nullable)positions count:(NSUInteger)count API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  @method getSamplePositions:count:
@@ -242,7 +265,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  @param count Specifies the length of the positions array, which must be large enough to hold all configured sample positions.
  @return The number of previously configured custom sample positions.
  */
-- (NSUInteger)getSamplePositions:(MTLSamplePosition * _Nullable)positions count:(NSUInteger)count NS_AVAILABLE(10_13, 11_0);
+- (NSUInteger)getSamplePositions:(MTLSamplePosition * _Nullable)positions count:(NSUInteger)count API_AVAILABLE(macos(10.13), ios(11.0));
 
 
 @end

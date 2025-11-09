@@ -4,7 +4,7 @@
 //
 //  Copyright (c) 2011-2012 Apple Inc. All rights reserved.
 //
-
+#import <GLKit/GLKitBase.h>
 #import <GLKit/GLKEffectProperty.h>
 
 // Fog modes per the OpenGL ES 1.1 specification
@@ -32,7 +32,8 @@ typedef NS_ENUM(GLint, GLKFogMode)
       end             1.0
 */
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_8, 5_0)
+
+OPENGL_DEPRECATED(10.8,10.14) OPENGLES_DEPRECATED(ios(5.0,12.0), tvos(9.0,12.0))
 @interface GLKEffectPropertyFog : GLKEffectProperty 
 {
     @private

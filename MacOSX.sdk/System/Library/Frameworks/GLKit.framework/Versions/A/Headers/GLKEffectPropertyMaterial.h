@@ -4,7 +4,7 @@
 //
 //  Copyright (c) 2011-2012 Apple Inc. All rights reserved.
 //
-
+#import <GLKit/GLKitBase.h>
 #import <GLKit/GLKEffectProperty.h>
 
 /*
@@ -14,7 +14,8 @@
  accordance with the specification and lighting behavior of OpenGL ES 1.1.
 */
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_8, 5_0)
+
+OPENGL_DEPRECATED(10.8,10.14) OPENGLES_DEPRECATED(ios(5.0,12.0), tvos(9.0,12.0))
 @interface GLKEffectPropertyMaterial : GLKEffectProperty
 {    
     @private

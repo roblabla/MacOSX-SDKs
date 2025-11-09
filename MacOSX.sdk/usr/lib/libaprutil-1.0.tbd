@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: B1F8DE01-7641-34E8-BC82-DB8C605B3039', 'x86_64: 111F1545-F104-3610-9A90-C27F184FB987' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 878B511C-1550-38F0-B2AB-696B9AA81D2A' ]
 platform:        macosx
 flags:           [ flat_namespace ]
 install-name:    /usr/lib/libaprutil-1.0.dylib
@@ -8,7 +8,7 @@ current-version: 4
 compatibility-version: 4
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ __crypt_blowfish_rn, __crypt_gensalt_blowfish_rn, __crypt_output_magic, 
                        _apr_base64_decode, _apr_base64_decode_binary, _apr_base64_decode_len, 
                        _apr_base64_encode, _apr_base64_encode_binary, _apr_base64_encode_len, 
@@ -105,11 +105,7 @@ exports:
                        _apu__sdbm_getpair, _apu__sdbm_hash, _apu__sdbm_nullitem, 
                        _apu__sdbm_putpair, _apu__sdbm_splpage, _apu_version, _apu_version_string ]
 undefineds:      
-  - archs:           [ i386 ]
-    symbols:         [ '_fputs$UNIX2003' ]
   - archs:           [ x86_64 ]
-    symbols:         [ _fputs ]
-  - archs:           [ i386, x86_64 ]
     symbols:         [ _XML_ErrorString, _XML_GetErrorCode, _XML_Parse, _XML_ParserCreate, 
                        _XML_ParserFree, _XML_SetCharacterDataHandler, _XML_SetElementHandler, 
                        _XML_SetEntityDeclHandler, _XML_SetUserData, _XML_StopParser, 
@@ -146,14 +142,14 @@ undefineds:
                        _apr_thread_mutex_destroy, _apr_thread_mutex_lock, _apr_thread_mutex_unlock, 
                        _apr_thread_rwlock_rdlock, _apr_thread_rwlock_unlock, _apr_thread_rwlock_wrlock, 
                        _apr_time_exp_get, _apr_time_exp_gmt_get, _apr_time_now, _apr_vformatter, 
-                       _atof, _atoi, _atol, _crypt, _fputc, _free, _iconv, _iconv_close, 
-                       _iconv_open, _ldap_bind_s, _ldap_err2string, _ldap_get_option, 
-                       _ldap_init, _ldap_set_option, _ldap_set_rebind_proc, _ldap_start_tls_s, 
-                       _malloc, _memchr, _memcmp, _memcpy, _memmove, _printf, _pthread_mutex_lock, 
-                       _pthread_mutex_unlock, _qsort, _rand, _sqlite3_bind_blob, 
-                       _sqlite3_bind_double, _sqlite3_bind_int, _sqlite3_bind_int64, 
-                       _sqlite3_bind_null, _sqlite3_bind_text, _sqlite3_changes, 
-                       _sqlite3_close, _sqlite3_column_blob, _sqlite3_column_bytes, 
+                       _atof, _atoi, _atol, _crypt, _fputc, _fputs, _free, _iconv, 
+                       _iconv_close, _iconv_open, _ldap_bind_s, _ldap_err2string, 
+                       _ldap_get_option, _ldap_init, _ldap_set_option, _ldap_set_rebind_proc, 
+                       _ldap_start_tls_s, _malloc, _memchr, _memcmp, _memcpy, _memmove, 
+                       _printf, _pthread_mutex_lock, _pthread_mutex_unlock, _qsort, 
+                       _rand, _sqlite3_bind_blob, _sqlite3_bind_double, _sqlite3_bind_int, 
+                       _sqlite3_bind_int64, _sqlite3_bind_null, _sqlite3_bind_text, 
+                       _sqlite3_changes, _sqlite3_close, _sqlite3_column_blob, _sqlite3_column_bytes, 
                        _sqlite3_column_count, _sqlite3_column_name, _sqlite3_column_text, 
                        _sqlite3_column_type, _sqlite3_errmsg, _sqlite3_finalize, 
                        _sqlite3_free, _sqlite3_mprintf, _sqlite3_open, _sqlite3_prepare, 

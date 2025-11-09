@@ -5,10 +5,12 @@
 //  Copyright 2008 Apple Inc.. All rights reserved.
 //
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+#ifndef IKCameraDeviceView_h
+#define IKCameraDeviceView_h
 
 #import <Cocoa/Cocoa.h>
 #import <ImageCaptureCore/ImageCaptureCore.h>
+#import <ImageKit/ImageKitBase.h>
 
 @class IKCameraDeviceView;
 
@@ -65,7 +67,7 @@ typedef NS_ENUM(NSInteger, IKCameraDeviceViewTransferMode)
  @class IKCameraDeviceView
  @abstract IKCameraDeviceView displays content of a Image Capture supported camera.
  */
-
+IK_CLASS_AVAILABLE(10.6)
 @interface IKCameraDeviceView : NSView
 {
 @private

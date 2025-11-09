@@ -7,8 +7,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AMWorkspace : NSObject {
-   @private
+@interface AMWorkspace : NSObject
+{
+	@private
 	id _reserved;
 	id _reserved2;
 	id _reserved3;

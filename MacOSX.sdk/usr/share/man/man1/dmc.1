@@ -1,13 +1,13 @@
 .\" generated with Ronn/v0.7.3
 .\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
-.TH "DMC" "1" "April 2017" "" ""
+.TH "DMC" "1" "January 2018" "" ""
 .
 .SH "NAME"
 \fBdmc\fR \- controls the Disk Mount Conditioner
 .
 .SH "SYNOPSIS"
-\fBdmc start\fR \fImount\fR [\fIprofile\-name\fR|\fIprofile\-index\fR]
+\fBdmc start\fR \fImount\fR [\fIprofile\-name\fR|\fIprofile\-index\fR [\-boot]]
 .
 .br
 \fBdmc stop\fR \fImount\fR
@@ -25,7 +25,7 @@
 \fBdmc select\fR \fImount\fR \fIprofile\-name\fR|\fIprofile\-index\fR
 .
 .br
-\fBdmc configure\fR \fImount\fR \fItype\fR \fIaccess\-time\fR \fIread\-throughput\fR \fIwrite\-throughput\fR
+\fBdmc configure\fR \fImount\fR \fItype\fR \fIaccess\-time\fR \fIread\-throughput\fR \fIwrite\-throughput\fR [\fIioqueue\-depth\fR \fImaxreadcnt\fR \fImaxwritecnt\fR \fIsegreadcnt\fR \fIsegwritecnt\fR]
 .
 .br
 \fBdmc help | \-h\fR
@@ -50,16 +50,16 @@ Common command parameters:
 .IP "" 0
 .
 .P
-\fBdmc start\fR \fImount\fR [\fIprofile\-name\fR|\fIprofile\-index\fR]
+\fBdmc start\fR \fImount\fR [\fIprofile\-name\fR|\fIprofile\-index\fR [\-boot]]
 .
 .br
-\~\~\~\~Start the Disk Mount Conditioner on the given mount point with the current settings (from \fBdmc status\fR) or the given profile, if provided\.
+\~\~\~\~Start the Disk Mount Conditioner on the given mount point with the current settings (from \fBdmc status\fR) or the given profile, if provided\. Optionally configure the profile to remain enabled across reboots, if \fI\-boot\fR is supplied\.
 .
 .P
 \fBdmc stop\fR \fImount\fR
 .
 .br
-\~\~\~\~Disable the Disk Mount Conditioner on the given mount point
+\~\~\~\~Disable the Disk Mount Conditioner on the given mount point\. Also disables any settings that persist across reboot via the \fI\-boot\fR flag provided to \fBdmc start\fR, if any\.
 .
 .P
 \fBdmc status\fR \fImount\fR [\-json]
@@ -86,7 +86,7 @@ Common command parameters:
 \~\~\~\~Choose a different profile for the given mount point without enabling or disabling the Disk Mount Conditioner
 .
 .P
-\fBdmc configure\fR \fImount\fR \fItype\fR \fIaccess\-time\fR \fIread\-throughput\fR \fIwrite\-throughput\fR
+\fBdmc configure\fR \fImount\fR \fItype\fR \fIaccess\-time\fR \fIread\-throughput\fR \fIwrite\-throughput\fR [\fIioqueue\-depth\fR \fImaxreadcnt\fR \fImaxwritecnt\fR \fIsegreadcnt\fR \fIsegwritecnt\fR]
 .
 .br
 \~\~\~\~Select custom parameters for the given mount point rather than using the settings provided by a default profile\.
@@ -105,6 +105,21 @@ Common command parameters:
 .
 .IP "\(bu" 4
 \fIwrite\-throughput\fR \- integer specifying megabytes\-per\-second maxmimu throughput for disk writes
+.
+.IP "\(bu" 4
+\fIioqueue\-depth\fR \- maximum number of commands that a device can accept
+.
+.IP "\(bu" 4
+\fImaxreadcnt\fR \- maximum byte count per read
+.
+.IP "\(bu" 4
+\fImaxwritecnt\fR \- maximum byte count per write
+.
+.IP "\(bu" 4
+\fIsegreadcnt\fR \- maximum physically disjoint segments processed per read
+.
+.IP "\(bu" 4
+\fIsegwritecnt\fR \- maximum physically disjoint segments processed per write
 .
 .IP "" 0
 .
@@ -130,7 +145,7 @@ Common command parameters:
 The Disk Mount Conditioner is not a \'simulator\'\. It can only degrade (or \'condition\') the I/O such that a faster disk device behaves like a slower device, not vice\-versa\. For example, a 5400 RPM hard drive cannot be conditioned to act like a SSD that is capable of a higher throughput than the theoretical limitations of the hard disk\.
 .
 .P
-In addition to running \fBdmc stop\fR, rebooting is also a sufficient way to clear any existing settings and disable Disk Mount Conditioner on all mount points\.
+In addition to running \fBdmc stop\fR, rebooting is also a sufficient way to clear any existing settings and disable Disk Mount Conditioner on all mount points (unless started with \fI\-boot\fR)\.
 .
 .SH "SEE ALSO"
 nlc(1)

@@ -1,13 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64, x86_64h ]
-uuids:           [ 'i386: F43BC90E-52A8-3930-B8B0-0004EB48EF6D', 'x86_64: F546A524-CB2D-3AA9-9FBE-C1E982C17447', 
-                   'x86_64h: 30445946-AF66-3CDB-ABE7-19BF121DD06D' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64, x86_64h ]
+uuids:           [ 'x86_64: 57E602AE-8EA5-337C-9ECF-0A9696B6CCA9', 'x86_64h: DB23E2A0-EA06-3073-AA7E-2873556714A9' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage
-current-version: 417
+current-version: 506.19.1
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64, x86_64h ]
+  - archs:           [ x86_64, x86_64h ]
     symbols:         [ _Init_vImage, _SetvImageThreadCount, _SetvImageThreadState, 
                        _SetvImageVectorAvailable, __vImage_TempBuffer_Enable_Legacy, 
                        _kvImageConstDecodeArray0, _kvImageDecodeArray_16Q12Format, 
@@ -168,6 +167,10 @@ exports:
                        _vImageCopyBuffer, _vImageCreateCGImageFromBuffer, _vImageCreateGammaFunction, 
                        _vImageCreateMonochromeColorSpaceWithWhitePointAndTransferFunction, 
                        _vImageCreateRGBColorSpaceWithPrimariesAndTransferFunction, 
+                       _vImageDeepmapDecode, _vImageDeepmapDecodeScratchBufferSize, 
+                       _vImageDeepmapDecodeStreamCreate, _vImageDeepmapDecodeStreamProcess, 
+                       _vImageDeepmapDecodeStreamRelease, _vImageDeepmapDecodeStreamScratchBufferSize, 
+                       _vImageDeepmapEncode, _vImageDeepmapEncodeCreateBuffer, _vImageDeepmapPixelSize, 
                        _vImageDestroyGammaFunction, _vImageDestroyResamplingFilter, 
                        _vImageDilate_ARGB8888, _vImageDilate_ARGBFFFF, _vImageDilate_Planar8, 
                        _vImageDilate_PlanarF, _vImageEndsInContrastStretch_ARGB8888, 

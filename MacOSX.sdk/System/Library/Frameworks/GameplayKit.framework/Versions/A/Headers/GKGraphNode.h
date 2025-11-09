@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * A node in a directed graph. Edges are directed and can have variable costs.
  */
-GK_BASE_AVAILABILITY @interface GKGraphNode : NSObject <NSCoding>
+GK_BASE_AVAILABILITY @interface GKGraphNode : NSObject <NSSecureCoding>
 
 /**
  * List of other graph nodes that this node has an edge leading to.

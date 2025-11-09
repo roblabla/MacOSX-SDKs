@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-SK_EXPORT @interface SKPhysicsJoint : NSObject <NSCoding>
+SK_EXPORT @interface SKPhysicsJoint : NSObject <NSSecureCoding>
 
 @property (nonatomic, retain) SKPhysicsBody *bodyA;
 @property (nonatomic, retain) SKPhysicsBody *bodyB;

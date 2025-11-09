@@ -22,9 +22,9 @@ extern "C" {
 #endif
 
 // Open an instance of the default audio output unit (it can be closed with CloseComponent).
-extern OSStatus	OpenDefaultAudioOutput(AudioUnit *outUnit)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_3, __IPHONE_NA, __IPHONE_NA);
+extern OSStatus	OpenDefaultAudioOutput(AudioUnit *outUnit)		API_DEPRECATED("no longer supported", macos(10.0, 10.3)) API_UNAVAILABLE(ios, watchos, tvos);
 
-extern OSStatus	OpenSystemSoundAudioOutput(AudioUnit *outUnit)	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+extern OSStatus	OpenSystemSoundAudioOutput(AudioUnit *outUnit)	API_DEPRECATED("no longer supported", macos(10.1, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 				// for system sounds like alerts, modems, etc.
 
 #ifdef __cplusplus

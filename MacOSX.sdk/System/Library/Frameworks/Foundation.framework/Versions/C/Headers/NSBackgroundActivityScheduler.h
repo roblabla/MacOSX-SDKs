@@ -1,5 +1,5 @@
 /*	NSBackgroundActivityScheduler.h
-	Copyright (c) 2013-2017, Apple Inc. All rights reserved.
+	Copyright (c) 2013-2018, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, NSBackgroundActivityResult) {
     
     // Indicate that the system should defer the remainder of this work for now and reschedule the completion soon. This should be used in response to checking the value of -shouldDefer.
     NSBackgroundActivityResultDeferred = 2,
-} NS_ENUM_AVAILABLE(10_10, NA);
+} API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 typedef void (^NSBackgroundActivityCompletionHandler)(NSBackgroundActivityResult result);
 
@@ -25,7 +25,7 @@ typedef void (^NSBackgroundActivityCompletionHandler)(NSBackgroundActivityResult
  It is used to schedule maintenance or background kinds of tasks. These activities are run by the OS at a time that best accommodates system-wide factors like energy, thermal conditions, and CPU usage. If you have activities that run at an interval measured in 10s of minutes or more, then use this class to schedule those activities.
  
  */
-NS_CLASS_AVAILABLE(10_10, NA)
+API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NSBackgroundActivityScheduler : NSObject {
     @private
     id _private1;

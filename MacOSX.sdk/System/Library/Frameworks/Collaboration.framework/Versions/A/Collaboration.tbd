@@ -1,26 +1,25 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: FB7F2247-2E9E-31C1-8A75-98243868C813', 'x86_64: B2178A32-5A74-3C0E-BE3E-3F0D7E884B16' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: E4AE88F1-4B99-3621-B01F-D292B0839470' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Collaboration.framework/Versions/A/Collaboration
-current-version: 80
+current-version: 81
 exports:         
   - archs:           [ x86_64 ]
-    objc-ivars:      [ _CBIdentity._reserved, _CBIdentityQuery._csQuery, _CBIdentityQuery._delegate, 
-                       _CBIdentityQuery._identities, _CBIdentityQuery._showsHiddenIdentities, 
-                       _IdentityDataSource._disabledIdentities, _IdentityDataSource._groupImage, 
-                       _IdentityDataSource._identities, _IdentityDataSource._userImage, 
-                       _IdentityDataSource._vCardImage, _ListObject._displayName, 
-                       _ListObject._icon, _ListObject._identity, _ListObject._person, 
-                       _ListObject._realName, _SidebarDataSource._addressBookGroups, 
-                       _SidebarDataSource._showsAddressBook, _SidebarDataSource._showsAddressBookGroups, 
-                       _SidebarDataSource._showsNetworkGroups, _SidebarDataSource._showsNetworkUsers, 
-                       _SidebarDataSource._sidebarItems, _SidebarDataSource._usersGroupsState ]
-  - archs:           [ i386, x86_64 ]
     symbols:         [ _SidebarContacts, _SidebarNetworkGroups, _SidebarNetworkUsers, 
                        _SidebarUsersGroups, _SortABGroupsByName, _SortABPeopleByFirstName, 
                        _SortIdentitiesByFirstName ]
-    objc-classes:    [ _CBGroupIdentity, _CBIdentity, _CBIdentityAuthority, _CBIdentityPicker, 
-                       _CBIdentityQuery, _CBUserIdentity, _IdentityDataSource, _IdentityPickerInternal, 
-                       _ListObject, _SidebarDataSource ]
+    objc-classes:    [ CBGroupIdentity, CBIdentity, CBIdentityAuthority, CBIdentityPicker, 
+                       CBIdentityQuery, CBUserIdentity, IdentityDataSource, IdentityPickerInternal, 
+                       ListObject, SidebarDataSource ]
+    objc-ivars:      [ CBIdentity._reserved, CBIdentityQuery._csQuery, CBIdentityQuery._delegate, 
+                       CBIdentityQuery._identities, CBIdentityQuery._showsHiddenIdentities, 
+                       IdentityDataSource._disabledIdentities, IdentityDataSource._groupImage, 
+                       IdentityDataSource._identities, IdentityDataSource._userImage, 
+                       IdentityDataSource._vCardImage, ListObject._displayName, ListObject._icon, 
+                       ListObject._identity, ListObject._person, ListObject._realName, 
+                       SidebarDataSource._addressBookGroups, SidebarDataSource._showsAddressBook, 
+                       SidebarDataSource._showsAddressBookGroups, SidebarDataSource._showsNetworkGroups, 
+                       SidebarDataSource._showsNetworkUsers, SidebarDataSource._sidebarItems, 
+                       SidebarDataSource._usersGroupsState ]
 ...

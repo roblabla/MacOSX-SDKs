@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, MDLMeshBufferType) {
  @class MDLMeshBufferMap
  @abstract Represents a reference to memory of a mapped MeshBuffer
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLMeshBufferMap : NSObject
 
@@ -40,7 +40,7 @@ MDL_EXPORT
            and arrange for unmapping on deallocation.
  */
 -(instancetype) initWithBytes:(void*)bytes
-                  deallocator:(nullable void (^)())deallocator;
+                  deallocator:(nullable void (^)(void))deallocator;
 
 /*!
  @property bytes
@@ -56,7 +56,7 @@ MDL_EXPORT
            index data
  @discussion Supports deep copy of data by conforming to the NSCopying protocol
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 @protocol MDLMeshBuffer <NSObject, NSCopying>
 
 /*!
@@ -118,7 +118,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  @abstract A CPU memory backed mesh buffer
  */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLMeshBufferData : NSObject <MDLMeshBuffer>
 
@@ -150,7 +150,7 @@ MDL_EXPORT
  @abstract A reference to a logical pool of memory from which mesh buffers would 
            be allocated
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 @protocol MDLMeshBufferZone <NSObject>
 
 /*!
@@ -176,7 +176,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
              implementing MDLMeshBuffer with memory to be filled with vertex and 
              index data during 3d file loading and parsing.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 @protocol MDLMeshBufferAllocator <NSObject>
 
 /*!
@@ -261,7 +261,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 /*!
  An allocator to use when backing with an NSData is appropriate.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLMeshBufferDataAllocator: NSObject <MDLMeshBufferAllocator>
 

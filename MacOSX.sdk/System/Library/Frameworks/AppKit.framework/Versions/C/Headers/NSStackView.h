@@ -1,7 +1,7 @@
 /*
  NSStackView.h
  Application Kit
- Copyright (c) 2012-2017, Apple Inc.
+ Copyright (c) 2012-2018, Apple Inc.
  All rights reserved.
  */
 
@@ -101,30 +101,30 @@ static const CGFloat NSStackViewSpacingUseDefault NS_AVAILABLE_MAC(10_9) = FLT_M
 NS_CLASS_AVAILABLE(10_9, NA)
 @interface NSStackView : NSView {
 @private
-    id _delegate;
+    id _delegate APPKIT_IVAR;
     
-    NSUserInterfaceLayoutOrientation _orientation;
-    NSInteger _alignment;
-    NSEdgeInsets _edgeInsets;
-    CGFloat _spacing;
+    NSUserInterfaceLayoutOrientation _orientation APPKIT_IVAR;
+    NSInteger _alignment APPKIT_IVAR;
+    NSEdgeInsets _edgeInsets APPKIT_IVAR;
+    CGFloat _spacing APPKIT_IVAR;
     
-    NSLayoutPriority _verticalClippingResistancePriority;
-    NSLayoutPriority _horizontalClippingResistancePriority;
-    NSLayoutPriority _verticalHuggingPriority;
-    NSLayoutPriority _horizontalHuggingPriority;
+    NSLayoutPriority _verticalClippingResistancePriority APPKIT_IVAR;
+    NSLayoutPriority _horizontalClippingResistancePriority APPKIT_IVAR;
+    NSLayoutPriority _verticalHuggingPriority APPKIT_IVAR;
+    NSLayoutPriority _horizontalHuggingPriority APPKIT_IVAR;
     
-    BOOL _unused __unused;
-    id _unused2 __unused;
-    id _unused3 __unused;
+    BOOL _unused __unused APPKIT_IVAR;
+    id _unused2 __unused APPKIT_IVAR;
+    id _unused3 __unused APPKIT_IVAR;
     
-    id _private;
+    id _private APPKIT_IVAR;
     
     struct {
         unsigned int _inDealloc:1;
         unsigned int _detachesHiddenViews:1;
         unsigned int _baselineRelativeArrangement:1;
         unsigned int _reserved:29;
-    } _flags;
+    } _flags APPKIT_IVAR;
 }
 
 + (instancetype)stackViewWithViews:(NSArray<NSView *> *)views; // Returns an autoreleased horizontal StackView with the provided views set as the leading views, and has translatesAutoresizingMaskIntoConstraints set to NO.

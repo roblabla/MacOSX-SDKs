@@ -1,5 +1,5 @@
 /*	NSOrderedSet.h
-	Copyright (c) 2007-2017, Apple Inc. All rights reserved.
+	Copyright (c) 2007-2018, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>

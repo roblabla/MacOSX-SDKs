@@ -10,7 +10,7 @@
 #include <float.h>
 #include <TargetConditionals.h>
 #include <CoreFoundation/CFBase.h>
-#include <CoreFoundation/CFAvailability.h>
+#include <os/availability.h>
 
 /* Definition of `__CG_HAS_COMPILER_ATTRIBUTE'. */
 
@@ -94,6 +94,20 @@
 # endif /* defined(__LP64__) */
 #endif /* !defined(CG_EXTERN_64) */
 
+/* Definition of `CG_SKYLIGHT_EXTERN_64` */
+
+#if !defined(CG_SKYLIGHT_EXTERN_64)
+# if defined(__LP64__)
+#  define CG_SKYLIGHT_EXTERN_64 CG_EXTERN
+# else /* !defined(__LP64__) */
+#  if defined(CG_BUILDING_CG)
+#    define CG_SKYLIGHT_EXTERN_64 CG_EXTERN
+#  else /* !defined(CG_BUILDING_CG) */
+#    define CG_SKYLIGHT_EXTERN_64 CG_LOCAL
+#  endif /* !defined(CG_BUILDING_CG) */
+# endif /* defined(__LP64__) */
+#endif /* !defined(CG_SKYLIGHT_EXTERN_64) */
+
 /* Definition of `CG_EXTERN_32` */
 
 #if !defined(CG_EXTERN_32)
@@ -173,13 +187,40 @@
 
 /* Define `CG_AVAILABLE_STARTING' and `CG_AVAILABLE_BUT_DEPRECATED'. */
 
-#if defined(CG_BUILDING_CG)
-# define CG_AVAILABLE_STARTING(_mac, _iphone)
-# define CG_AVAILABLE_BUT_DEPRECATED(_mac, _macDep, _iphone, _iphoneDep)
-#else
-# include <Availability.h>
-# define CG_AVAILABLE_STARTING __OSX_AVAILABLE_STARTING
-# define CG_AVAILABLE_BUT_DEPRECATED __OSX_AVAILABLE_BUT_DEPRECATED
+#define GET_CG_AVAIL_MACRO(_1,_2,NAME,...) NAME
+#define CG_AVAILABLE_STARTING(...) GET_CG_AVAIL_MACRO(__VA_ARGS__, CG_AVAILABLE_STARTING2, CG_AVAILABLE_STARTING1)(__VA_ARGS__)
+#define CG_AVAILABLE_STARTING_IOS(i) API_AVAILABLE(ios(i))
+#define CG_AVAILABLE_STARTING1(m) API_AVAILABLE(macos(m))
+#define CG_AVAILABLE_STARTING2(m,i) API_AVAILABLE(macos(m), ios(i))
+
+#define GET_CG_AVAIL_BUT_DEPR_MACRO(_1,_2,_3,_4,_5,NAME,...) NAME
+#define CG_AVAILABLE_BUT_DEPRECATED(...) GET_CG_AVAIL_BUT_DEPR_MACRO(__VA_ARGS__, CG_AVAILABLE_BUT_DEPRECATED5, CG_AVAILABLE_BUT_DEPRECATED4, CG_AVAILABLE_BUT_DEPRECATED3, CG_AVAILABLE_BUT_DEPRECATED2, CG_AVAILABLE_BUT_DEPRECATED1)(__VA_ARGS__)
+#define CG_AVAILABLE_BUT_DEPRECATED1(m0)
+#define CG_AVAILABLE_BUT_DEPRECATED2(m0,m1) API_DEPRECATED("No longer supported", macos(m0,m1))
+#define CG_AVAILABLE_BUT_DEPRECATED3(m0,m1,w) API_DEPRECATED(w, macos(m0,m1))
+#define CG_AVAILABLE_BUT_DEPRECATED4(m0,m1,i0,i1) API_DEPRECATED("No longer supported", macos(m0,m1), ios(i0,i1))
+#define CG_AVAILABLE_BUT_DEPRECATED5(m0,m1,i0,i1,w) API_DEPRECATED(w, macos(m0,m1), ios(i0,i1))
+#define CG_UNAVAILABLE_DESKTOP API_UNAVAILABLE(macos)
+#define CG_UNAVAILABLE_EMBEDDED API_UNAVAILABLE(ios, tvos, watchos)
+
+#ifdef CG_BUILDING_CG
+# undef __OSX_AVAILABLE_STARTING
+# undef __OSX_AVAILABLE_BUT_DEPRECATED
+# undef CG_AVAILABLE_STARTING
+# undef CG_AVAILABLE_STARTING_IOS
+# undef CG_AVAILABLE_BUT_DEPRECATED
+# undef CG_UNAVAILABLE_DESKTOP
+# undef CG_UNAVAILABLE_EMBEDDED
+#endif
+
+#ifndef __OSX_AVAILABLE_STARTING
+# define __OSX_AVAILABLE_STARTING(m0,i)
+# define __OSX_AVAILABLE_BUT_DEPRECATED(m0,m1,i0,i1)
+# define CG_AVAILABLE_STARTING(...)
+# define CG_AVAILABLE_STARTING_IOS(...)
+# define CG_AVAILABLE_BUT_DEPRECATED(...)
+# define CG_UNAVAILABLE_DESKTOP
+# define CG_UNAVAILABLE_EMBEDDED
 #endif
 
 /* Definition of `__CG_STATIC_ASSERT'. */
@@ -277,7 +318,7 @@ typedef CGFLOAT_TYPE CGFloat;
 # define CG_PRIVATE_EXTERN CG_LOCAL
 #endif
 
-#if !TARGET_IPHONE_SIMULATOR
+#if !TARGET_OS_SIMULATOR
 
 typedef struct  CF_BRIDGED_TYPE(id) __IOSurface *IOSurfaceRef __attribute__((swift_name("IOSurfaceRef")));
 
@@ -285,7 +326,7 @@ typedef struct  CF_BRIDGED_TYPE(id) __IOSurface *IOSurfaceRef __attribute__((swi
 
 /* 'cg_nullable' will be dropped for new Swift clients. All others get currently the old behavior */
 
-#if defined(SWIFT_SDK_OVERLAY_COREGRAPHICS_EPOCH) && SWIFT_SDK_OVERLAY_COREGRAPHICS_EPOCH >= 0
+#if defined(__swift__)
 #   define cg_nullable
 #else
 #   define cg_nullable __nullable

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2015 Apple Inc.
+ * Copyright (c) 2013-2015, 2018 Apple Inc.
  * All rights reserved.
  */
 
@@ -32,16 +32,16 @@ typedef NS_ENUM(NSInteger, NEVPNStatus) {
     NEVPNStatusReasserting = 4,
     /*! @const NEVPNStatusDisconnecting The VPN is disconnecting. */
     NEVPNStatusDisconnecting = 5,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*! @const NEVPNStatusDidChangeNotification Name of the NSNotification that is posted when the VPN status changes. */
-NEVPN_EXPORT NSString * const NEVPNStatusDidChangeNotification NS_AVAILABLE(10_11, 8_0);
+NEVPN_EXPORT NSString * const NEVPNStatusDidChangeNotification API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*! @const NEVPNConnectionStartOptionUsername Specify this key in the options dictionary passed to startVPNTunnelWithOptions:returningError: to override the username saved in the configuration. The value is a string */
-NEVPN_EXPORT NSString * const NEVPNConnectionStartOptionUsername NS_AVAILABLE(10_11, 9_0);
+NEVPN_EXPORT NSString * const NEVPNConnectionStartOptionUsername API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*! @const NEVPNConnectionStartOptionPassword Specify this key in the options dictionary passed to startVPNTunnelWithOptions:returningError: to override the password saved in the configuration. The value is a string */
-NEVPN_EXPORT NSString * const NEVPNConnectionStartOptionPassword NS_AVAILABLE(10_11, 9_0);
+NEVPN_EXPORT NSString * const NEVPNConnectionStartOptionPassword API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @interface NEVPNConnection
@@ -49,7 +49,7 @@ NEVPN_EXPORT NSString * const NEVPNConnectionStartOptionPassword NS_AVAILABLE(10
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEVPNConnection : NSObject
 
 /*!
@@ -60,7 +60,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  *    2. NEVPNErrorConfigurationDisabled
  * @return YES if the VPN tunnel was started successfully, NO if an error occurred.
  */
-- (BOOL)startVPNTunnelAndReturnError:(NSError **)error NS_AVAILABLE(10_11, 8_0);
+- (BOOL)startVPNTunnelAndReturnError:(NSError **)error API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method startVPNTunnelWithOptions:andReturnError:
@@ -74,31 +74,31 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  *    2. NEVPNErrorConfigurationDisabled
  * @return YES if the VPN tunnel was started successfully, NO if an error occurred.
  */
-- (BOOL)startVPNTunnelWithOptions:(nullable NSDictionary<NSString *,NSObject *> *)options andReturnError:(NSError **)error NS_AVAILABLE(10_11, 9_0);
+- (BOOL)startVPNTunnelWithOptions:(nullable NSDictionary<NSString *,NSObject *> *)options andReturnError:(NSError **)error API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method stopVPNTunnel:
  * @discussion This function is used to stop the VPN tunnel. The VPN tunnel disconnect process is started and this function returns immediately.
  */
-- (void)stopVPNTunnel NS_AVAILABLE(10_11, 8_0);
+- (void)stopVPNTunnel API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property status
  * @discussion The current status of the VPN.
  */
-@property (readonly) NEVPNStatus status NS_AVAILABLE(10_11, 8_0);
+@property (readonly) NEVPNStatus status API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property connectedDate
  * @discussion The date and time when the connection status changed to NEVPNStatusConnected. This property is nil if the connection is not fully established.
  */
-@property (readonly, nullable) NSDate *connectedDate NS_AVAILABLE(10_11, 9_0);
+@property (readonly, nullable) NSDate *connectedDate API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property manager
  * @discussion The NEVPNManager associated with this NEVPNConnection.
  */
-@property (readonly) NEVPNManager *manager NS_AVAILABLE(10_12, 10_0);
+@property (readonly) NEVPNManager *manager API_AVAILABLE(macos(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

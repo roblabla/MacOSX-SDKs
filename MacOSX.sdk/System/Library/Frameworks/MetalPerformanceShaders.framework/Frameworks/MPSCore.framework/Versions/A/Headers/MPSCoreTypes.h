@@ -137,6 +137,18 @@ typedef NS_ENUM(NSUInteger, MPSImageEdgeMode)
     
     /*! Out of bound pixels are clamped to nearest edge pixel */
     MPSImageEdgeModeClamp               MPS_ENUM_AVAILABLE_STARTING(macos(10.13), ios(9.0), tvos(9.0))  = 1,
+
+    /*! Out of bound pixels are mirrored wrt. the nearest edge pixel center - ie. the edge of the image is not repeated.
+     *  NOTE: The only filter that currently supports this mode is @ref MPSNNPad - using this with other filters results in undefined behavior. */
+    MPSImageEdgeModeMirror              MPS_ENUM_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1)),
+
+    /*! Out of bound pixels are mirrored wrt. the nearest edge pixel nearest border - ie. the edge of the image is repeated.
+     *  NOTE: The only filter that currently supports this mode is @ref MPSNNPad - using this with other filters results in undefined behavior. */
+    MPSImageEdgeModeMirrorWithEdge      MPS_ENUM_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1)),
+
+    /*! Out of bound pixels are filled with a constant value defined by the filter.
+     *  NOTE: The only filter that currently supports this mode is @ref MPSNNPad - using this with other filters results in undefined behavior. */
+    MPSImageEdgeModeConstant            MPS_ENUM_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1)),
 }
 #if defined(DOXYGEN)
     MPSImageEdgeMode
@@ -177,6 +189,9 @@ typedef NS_ENUM(NSUInteger, MPSImageFeatureChannelFormat)
     /*! IEEE-754 32-bit floating-point value.  "single precision" (standard float type in C) 24 bits of precision + exponent */
     MPSImageFeatureChannelFormatFloat32     MPS_ENUM_AVAILABLE_STARTING(macos(10.13), ios(10.0), tvos(10.0))  = 4,
     
+    
+    /* Always last */
+    MPSImageFeatureChannelFormatCount        MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
 }
 #if defined(DOXYGEN)
     MPSImageFeatureChannelFormat
@@ -305,6 +320,28 @@ typedef struct MPSScaleTransform
     double  translateY;                     /**< vertical translation */
 }MPSScaleTransform;
 
+/*!
+ *  @struct     MPSImageCoordinate
+ *  @memberof   MPSImage
+ *  @abstract   A unsigned coordinate with x, y and channel components
+ */
+typedef struct MPSImageCoordinate
+{
+    NSUInteger x;           /**<    The horizontal component of the coordinate. Units: pixels      */
+    NSUInteger y;           /**<    The vertical component of the coordinate. Units: pixels        */
+    NSUInteger channel;     /**<    The index of the channel or feature channel within the pixel   */
+}MPSImageCoordinate;
+
+/*!
+ *  @struct     MPSImageRegion
+ *  @memberof   MPSImage
+ *  @abstract   A rectangular subregion of a MPSImage
+ */
+typedef struct MPSImageRegion
+{
+    MPSImageCoordinate offset;      /**<    The position of the top left corner of the subregion */
+    MPSImageCoordinate size;        /**<    The size {pixels, pixels, channels} of the subregion */
+}MPSImageRegion;
 
     
 /*!
@@ -314,7 +351,8 @@ typedef struct MPSScaleTransform
  *              The entire image will be used.
  *              This is the default clipping rectangle or the input extent for MPSKernels.
  */
-extern const MTLRegion  MPSRectNoClip;
+extern const MTLRegion  MPSRectNoClip
+    MPS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0));
     
 /*! @abstract   A way of extending a NSCoder to enable the setting of MTLDevice for unarchived objects
  *  @discussion When a object is initialized by a NSCoder, it calls -initWithCoder:, which is 
@@ -323,6 +361,10 @@ extern const MTLRegion  MPSRectNoClip;
  *              will be used.  If you would like to specify which device to use, subclass the 
  *              NSCoder (NSKeyedUnarchiver, etc.) to conform to MPSDeviceProvider so that 
  *              the device can be gotten from the NSCoder.
+ *
+ *              See MPSKeyedUnarchiver for one implementation of this protocol. It reads files
+ *              prepared with the NSKeyedArchiver and allows you to set the MTLDevice that the
+ *              unarchived objects use.
  */
 @protocol   MPSDeviceProvider
     /*! @abstract   Return the device to use when making MPSKernel subclasses from the NSCoder */

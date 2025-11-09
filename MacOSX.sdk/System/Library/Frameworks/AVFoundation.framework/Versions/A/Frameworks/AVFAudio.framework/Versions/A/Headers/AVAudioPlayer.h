@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 #endif
 @protocol AVAudioPlayerDelegate;
 
-NS_CLASS_AVAILABLE(10_7, 2_2) __WATCHOS_AVAILABLE(3_0)
+OS_EXPORT API_AVAILABLE(macos(10.7), ios(2.2), watchos(3.0), tvos(9.0))
 @interface AVAudioPlayer : NSObject {
 @private
 	id _impl;
@@ -41,14 +41,14 @@ NS_CLASS_AVAILABLE(10_7, 2_2) __WATCHOS_AVAILABLE(3_0)
 
 /* The file type hint is a constant defined in AVMediaFormat.h whose value is a UTI for a file format. e.g. AVFileTypeAIFF. */
 /* Sometimes the type of a file cannot be determined from the data, or it is actually corrupt. The file type hint tells the parser what kind of data to look for so that files which are not self identifying or possibly even corrupt can be successfully parsed. */
-- (nullable instancetype)initWithContentsOfURL:(NSURL *)url fileTypeHint:(NSString * __nullable)utiString error:(NSError **)outError NS_AVAILABLE(10_9, 7_0);
-- (nullable instancetype)initWithData:(NSData *)data fileTypeHint:(NSString * __nullable)utiString error:(NSError **)outError NS_AVAILABLE(10_9, 7_0);
+- (nullable instancetype)initWithContentsOfURL:(NSURL *)url fileTypeHint:(NSString * __nullable)utiString error:(NSError **)outError API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+- (nullable instancetype)initWithData:(NSData *)data fileTypeHint:(NSString * __nullable)utiString error:(NSError **)outError API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 /* transport control */
 /* methods that return BOOL return YES on success and NO on failure. */
 - (BOOL)prepareToPlay;	/* get ready to play the sound. happens automatically on play. */
 - (BOOL)play;			/* sound is played asynchronously. */
-- (BOOL)playAtTime:(NSTimeInterval)time NS_AVAILABLE(10_7, 4_0); /* play a sound some time in the future. time is an absolute time based on and greater than deviceCurrentTime. */
+- (BOOL)playAtTime:(NSTimeInterval)time API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0)); /* play a sound some time in the future. time is an absolute time based on and greater than deviceCurrentTime. */
 - (void)pause;			/* pauses playback, but remains ready to play. */
 - (void)stop;			/* stops playback. no longer ready to play. */
 
@@ -59,10 +59,8 @@ NS_CLASS_AVAILABLE(10_7, 2_2) __WATCHOS_AVAILABLE(3_0)
 @property(readonly) NSUInteger numberOfChannels;
 @property(readonly) NSTimeInterval duration; /* the duration of the sound. */
 
-#if !TARGET_OS_IPHONE
 /* the UID of the current audio device (as a string) */
-@property(copy, nullable) NSString *currentDevice API_AVAILABLE(macos(10.13));
-#endif
+@property(copy, nullable) NSString *currentDevice API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /* the delegate will be sent messages from the AVAudioPlayerDelegate protocol */ 
 @property(assign, nullable) id<AVAudioPlayerDelegate> delegate;
@@ -71,12 +69,12 @@ NS_CLASS_AVAILABLE(10_7, 2_2) __WATCHOS_AVAILABLE(3_0)
 @property(readonly, nullable) NSURL *url; /* returns nil if object was not created with a URL */
 @property(readonly, nullable) NSData *data; /* returns nil if object was not created with a data object */
 
-@property float pan NS_AVAILABLE(10_7, 4_0); /* set panning. -1.0 is left, 0.0 is center, 1.0 is right. */
+@property float pan API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0)); /* set panning. -1.0 is left, 0.0 is center, 1.0 is right. */
 @property float volume; /* The volume for the sound. The nominal range is from 0.0 to 1.0. */
 - (void)setVolume:(float)volume fadeDuration:(NSTimeInterval)duration API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0)); /* fade to a new volume over a duration */
 
-@property BOOL enableRate NS_AVAILABLE(10_8, 5_0); /* You must set enableRate to YES for the rate property to take effect. You must set this before calling prepareToPlay. */
-@property float rate NS_AVAILABLE(10_8, 5_0); /* See enableRate. The playback rate for the sound. 1.0 is normal, 0.5 is half speed, 2.0 is double speed. */
+@property BOOL enableRate API_AVAILABLE(macos(10.8), ios(5.0), watchos(2.0), tvos(9.0)); /* You must set enableRate to YES for the rate property to take effect. You must set this before calling prepareToPlay. */
+@property float rate API_AVAILABLE(macos(10.8), ios(5.0), watchos(2.0), tvos(9.0)); /* See enableRate. The playback rate for the sound. 1.0 is normal, 0.5 is half speed, 2.0 is double speed. */
 
 
 /*  If the sound is playing, currentTime is the offset into the sound of the current playback position.  
@@ -84,7 +82,7 @@ If the sound is not playing, currentTime is the offset into the sound where play
 @property NSTimeInterval currentTime;
 
 /* returns the current time associated with the output device */
-@property(readonly) NSTimeInterval deviceCurrentTime NS_AVAILABLE(10_7, 4_0);
+@property(readonly) NSTimeInterval deviceCurrentTime API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0));
 
 /* "numberOfLoops" is the number of times that the sound will return to the beginning upon reaching the end. 
 A value of zero means to play the sound just once.
@@ -94,7 +92,7 @@ Any negative number will loop indefinitely until stopped.
 @property NSInteger numberOfLoops;
 
 /* settings */
-@property(readonly) NSDictionary<NSString *, id> *settings NS_AVAILABLE(10_7, 4_0); /* returns a settings dictionary with keys as described in AVAudioSettings.h */
+@property(readonly) NSDictionary<NSString *, id> *settings API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0)); /* returns a settings dictionary with keys as described in AVAudioSettings.h */
 
 /* returns the format of the audio data */
 @property(readonly) AVAudioFormat *format API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
@@ -108,11 +106,11 @@ Any negative number will loop indefinitely until stopped.
 - (float)peakPowerForChannel:(NSUInteger)channelNumber; /* returns peak power in decibels for a given channel */
 - (float)averagePowerForChannel:(NSUInteger)channelNumber; /* returns average power in decibels for a given channel */
 
-#if (TARGET_OS_IPHONE && __has_include(<AVFoundation/AVAudioSession.h>))
+#if (TARGET_OS_IPHONE && !0 && __has_include(<AVFoundation/AVAudioSession.h>))
 /* The channels property lets you assign the output to play to specific channels as described by AVAudioSession's channels property */
 /* This property is nil valued until set. */
 /* The array must have the same number of channels as returned by the numberOfChannels property. */
-@property(nonatomic, copy, nullable) NSArray<AVAudioSessionChannelDescription *> *channelAssignments NS_AVAILABLE(10_9, 7_0); /* Array of AVAudioSessionChannelDescription objects */
+@property(nonatomic, copy, nullable) NSArray<AVAudioSessionChannelDescription *> *channelAssignments API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0)); /* Array of AVAudioSessionChannelDescription objects */
 #endif
 
 @end

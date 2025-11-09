@@ -1,7 +1,7 @@
 /*
 	NSScreen.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -21,10 +21,10 @@ typedef struct NSScreenAuxiliary NSScreenAuxiliaryOpaque;
 @interface NSScreen : NSObject {
 /*All instance variables are private*/
 @private
-    NSRect _frame;          // cached value, possibly stale
-    NSWindowDepth _depth;  
-    int _screenNumber;
-    id _auxiliaryStorage;
+    NSRect _frame APPKIT_IVAR;          // cached value, possibly stale
+    NSWindowDepth _depth APPKIT_IVAR;  
+    int _screenNumber APPKIT_IVAR;
+    id _auxiliaryStorage APPKIT_IVAR;
 }
 
 @property (class, readonly, copy) NSArray<NSScreen *> *screens;	/* All screens; first one is "zero" screen */

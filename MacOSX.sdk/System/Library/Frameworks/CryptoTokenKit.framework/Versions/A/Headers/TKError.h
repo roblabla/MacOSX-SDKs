@@ -4,10 +4,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CryptoTokenKit/TKBase.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString *const TKErrorDomain;
+TK_EXTERN NSString *const TKErrorDomain;
 
 typedef NS_ENUM(NSInteger, TKErrorCode) {
     TKErrorCodeNotImplemented        = -1,

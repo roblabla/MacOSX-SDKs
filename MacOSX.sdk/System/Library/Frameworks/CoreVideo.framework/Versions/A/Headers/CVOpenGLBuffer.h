@@ -25,15 +25,15 @@
 extern "C" {
 #endif
 
-CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferWidth AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferHeight AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferTarget AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferInternalFormat AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferMaximumMipmapLevel AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferWidth COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferHeight COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferTarget COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferInternalFormat COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLBufferMaximumMipmapLevel COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
 
 typedef CVImageBufferRef CVOpenGLBufferRef;
 
-CV_EXPORT CFTypeID CVOpenGLBufferGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CFTypeID CVOpenGLBufferGetTypeID(void) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
 
 /*!
     @function   CVOpenGLBufferRetain
@@ -42,7 +42,7 @@ CV_EXPORT CFTypeID CVOpenGLBufferGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_4
     @param      buffer A CVOpenGLBuffer object that you want to retain.
     @result     A CVOpenGLBuffer object that is the same as the passed in buffer.
 */
-CV_EXPORT CVOpenGLBufferRef CV_NULLABLE CVOpenGLBufferRetain( CVOpenGLBufferRef CV_NULLABLE buffer ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVOpenGLBufferRef CV_NULLABLE CVOpenGLBufferRetain( CVOpenGLBufferRef CV_NULLABLE buffer ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
 
 /*!
     @function   CVOpenGLBufferRelease
@@ -50,7 +50,7 @@ CV_EXPORT CVOpenGLBufferRef CV_NULLABLE CVOpenGLBufferRetain( CVOpenGLBufferRef 
     @discussion Equivalent to CFRelease, but NULL safe
     @param      buffer A CVOpenGLBuffer object that you want to release.
 */
-CV_EXPORT void CVOpenGLBufferRelease( CV_RELEASES_ARGUMENT CVOpenGLBufferRef CV_NULLABLE buffer ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT void CVOpenGLBufferRelease( CV_RELEASES_ARGUMENT CVOpenGLBufferRef CV_NULLABLE buffer ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
 
 /*!
     @function   CVOpenGLBufferCreate
@@ -68,14 +68,14 @@ CV_EXPORT CVReturn CVOpenGLBufferCreate(
     size_t width,
     size_t height,
     CFDictionaryRef CV_NULLABLE attributes,
-    CV_RETURNS_RETAINED_PARAMETER CVOpenGLBufferRef CV_NULLABLE * CV_NONNULL bufferOut ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+    CV_RETURNS_RETAINED_PARAMETER CVOpenGLBufferRef CV_NULLABLE * CV_NONNULL bufferOut ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
 
 /*!
     @function   CVOpenGLBufferGetAttributes
     @param      openGLBuffer Target OpenGL Buffer.
     @result     CVOpenGLBuffer attributes dictionary, NULL if not set.
 */
-CV_EXPORT CFDictionaryRef CV_NULLABLE CVOpenGLBufferGetAttributes( CVOpenGLBufferRef CV_NONNULL openGLBuffer ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CFDictionaryRef CV_NULLABLE CVOpenGLBufferGetAttributes( CVOpenGLBufferRef CV_NONNULL openGLBuffer ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
 
 /*!
     @function   CVOpenGLBufferAttach
@@ -86,7 +86,7 @@ CV_EXPORT CFDictionaryRef CV_NULLABLE CVOpenGLBufferGetAttributes( CVOpenGLBuffe
     @param      screen       The virtual screen number you want to use
     @result     kCVReturnSuccess if the attachment succeeded
 */
-CV_EXPORT CVReturn CVOpenGLBufferAttach( CVOpenGLBufferRef CV_NONNULL openGLBuffer, CGLContextObj CV_NONNULL cglContext, GLenum face, GLint level, GLint screen ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVOpenGLBufferAttach( CVOpenGLBufferRef CV_NONNULL openGLBuffer, CGLContextObj CV_NONNULL cglContext, GLenum face, GLint level, GLint screen ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
 
 #if defined(__cplusplus)
 }

@@ -284,7 +284,7 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : CBManager
  *					responsibility to handle PSM discovery on the client.
  *
  */
-- (void)publishL2CAPChannelWithEncryption:(BOOL)encryptionRequired NS_AVAILABLE(NA, 11_0);
+- (void)publishL2CAPChannelWithEncryption:(BOOL)encryptionRequired NS_AVAILABLE(10_14, 11_0);
 
 /*!
  *  @method unpublishL2CAPChannel:
@@ -295,8 +295,7 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : CBManager
  *					using this PSM will be closed.
  *
  */
-- (void)unpublishL2CAPChannel:(CBL2CAPPSM)PSM NS_AVAILABLE(NA, 11_0);
-
+- (void)unpublishL2CAPChannel:(CBL2CAPPSM)PSM NS_AVAILABLE(10_14, 11_0);
 
 @end
 

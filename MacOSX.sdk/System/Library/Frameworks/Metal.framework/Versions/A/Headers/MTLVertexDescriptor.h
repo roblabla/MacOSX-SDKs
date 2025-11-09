@@ -73,52 +73,52 @@ typedef NS_ENUM(NSUInteger, MTLVertexFormat)
     MTLVertexFormatInt1010102Normalized = 40,
     MTLVertexFormatUInt1010102Normalized = 41,
     
-    MTLVertexFormatUChar4Normalized_BGRA NS_ENUM_AVAILABLE(10_13, 11_0) = 42,
+    MTLVertexFormatUChar4Normalized_BGRA API_AVAILABLE(macos(10.13), ios(11.0)) = 42,
     
-    MTLVertexFormatUChar NS_ENUM_AVAILABLE(10_13, 11_0) = 45,
-    MTLVertexFormatChar NS_ENUM_AVAILABLE(10_13, 11_0) = 46,
-    MTLVertexFormatUCharNormalized NS_ENUM_AVAILABLE(10_13, 11_0) = 47,
-    MTLVertexFormatCharNormalized NS_ENUM_AVAILABLE(10_13, 11_0) = 48,
+    MTLVertexFormatUChar API_AVAILABLE(macos(10.13), ios(11.0)) = 45,
+    MTLVertexFormatChar API_AVAILABLE(macos(10.13), ios(11.0)) = 46,
+    MTLVertexFormatUCharNormalized API_AVAILABLE(macos(10.13), ios(11.0)) = 47,
+    MTLVertexFormatCharNormalized API_AVAILABLE(macos(10.13), ios(11.0)) = 48,
     
-    MTLVertexFormatUShort NS_ENUM_AVAILABLE(10_13, 11_0) = 49,
-    MTLVertexFormatShort NS_ENUM_AVAILABLE(10_13, 11_0) = 50,
-    MTLVertexFormatUShortNormalized NS_ENUM_AVAILABLE(10_13, 11_0) = 51,
-    MTLVertexFormatShortNormalized NS_ENUM_AVAILABLE(10_13, 11_0) = 52,
+    MTLVertexFormatUShort API_AVAILABLE(macos(10.13), ios(11.0)) = 49,
+    MTLVertexFormatShort API_AVAILABLE(macos(10.13), ios(11.0)) = 50,
+    MTLVertexFormatUShortNormalized API_AVAILABLE(macos(10.13), ios(11.0)) = 51,
+    MTLVertexFormatShortNormalized API_AVAILABLE(macos(10.13), ios(11.0)) = 52,
     
-    MTLVertexFormatHalf NS_ENUM_AVAILABLE(10_13, 11_0) = 53,
+    MTLVertexFormatHalf API_AVAILABLE(macos(10.13), ios(11.0)) = 53,
     
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 typedef NS_ENUM(NSUInteger, MTLVertexStepFunction)
 {
     MTLVertexStepFunctionConstant = 0,
     MTLVertexStepFunctionPerVertex = 1,
     MTLVertexStepFunctionPerInstance = 2,
-    MTLVertexStepFunctionPerPatch NS_ENUM_AVAILABLE(10_12, 10_0) = 3,
-    MTLVertexStepFunctionPerPatchControlPoint NS_ENUM_AVAILABLE(10_12, 10_0) = 4,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+    MTLVertexStepFunctionPerPatch API_AVAILABLE(macos(10.12), ios(10.0)) = 3,
+    MTLVertexStepFunctionPerPatchControlPoint API_AVAILABLE(macos(10.12), ios(10.0)) = 4,
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLVertexBufferLayoutDescriptor : NSObject <NSCopying>
 @property (assign, nonatomic) NSUInteger stride;
 @property (assign, nonatomic) MTLVertexStepFunction stepFunction;
 @property (assign, nonatomic) NSUInteger stepRate;
 @end
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLVertexBufferLayoutDescriptorArray : NSObject
 - (MTLVertexBufferLayoutDescriptor *)objectAtIndexedSubscript:(NSUInteger)index;
 - (void)setObject:(nullable MTLVertexBufferLayoutDescriptor *)bufferDesc atIndexedSubscript:(NSUInteger)index;
 @end
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLVertexAttributeDescriptor : NSObject <NSCopying>
 @property (assign, nonatomic) MTLVertexFormat format;
 @property (assign, nonatomic) NSUInteger offset;
 @property (assign, nonatomic) NSUInteger bufferIndex;
 @end
 
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLVertexAttributeDescriptorArray : NSObject
 - (MTLVertexAttributeDescriptor *)objectAtIndexedSubscript:(NSUInteger)index;
 - (void)setObject:(nullable MTLVertexAttributeDescriptor *)attributeDesc atIndexedSubscript:(NSUInteger)index;
@@ -127,7 +127,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 /*
  MTLVertexDescriptor
  */
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLVertexDescriptor : NSObject <NSCopying>
 
 + (MTLVertexDescriptor *)vertexDescriptor;

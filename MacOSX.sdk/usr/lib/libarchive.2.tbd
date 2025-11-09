@@ -1,33 +1,23 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: D55C5F86-251D-3C33-A617-0C623D4F512E', 'x86_64: 8FC28DD8-E315-3C3E-95FE-D1D2CBE49888' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: B47C54A0-3A30-374A-BD99-2304B9B0EC82' ]
 platform:        macosx
 install-name:    /usr/lib/libarchive.2.dylib
 current-version: 9.2
 compatibility-version: 9
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
-    symbols:         [ ___archive_2VersionNumber, ___archive_2VersionString, ___archive_check_child, 
-                       ___archive_check_magic, ___archive_create_child, ___archive_entry_acl_parse_w, 
-                       ___archive_errx, ___archive_parse_options, ___archive_read_ahead, 
-                       ___archive_read_consume, ___archive_read_filter_ahead, ___archive_read_filter_consume, 
-                       ___archive_read_filter_skip, ___archive_read_get_bidder, ___archive_read_program, 
-                       ___archive_read_register_format, ___archive_read_skip, ___archive_read_skip_lenient, 
-                       ___archive_strappend_char, ___archive_strappend_w_mbs, ___archive_strappend_w_utf8, 
-                       ___archive_string_append, ___archive_string_concat, ___archive_string_copy, 
-                       ___archive_string_ensure, ___archive_string_free, ___archive_string_sprintf, 
-                       ___archive_string_utf8_w, ___archive_string_vsprintf, ___archive_strncat, 
-                       ___archive_write_format_header_ustar, _archive_api_feature, 
-                       _archive_api_version, _archive_clear_error, _archive_compression, 
-                       _archive_compression_name, _archive_copy_error, _archive_entry_acl_add_entry, 
-                       _archive_entry_acl_add_entry_w, _archive_entry_acl_clear, 
-                       _archive_entry_acl_count, _archive_entry_acl_next, _archive_entry_acl_reset, 
-                       _archive_entry_acl_text_w, _archive_entry_atime, _archive_entry_atime_is_set, 
-                       _archive_entry_atime_nsec, _archive_entry_birthtime, _archive_entry_birthtime_is_set, 
-                       _archive_entry_birthtime_nsec, _archive_entry_clear, _archive_entry_clone, 
-                       _archive_entry_copy_fflags_text, _archive_entry_copy_fflags_text_w, 
-                       _archive_entry_copy_gname, _archive_entry_copy_gname_w, _archive_entry_copy_hardlink, 
+  - archs:           [ x86_64 ]
+    symbols:         [ ___archive_entry_acl_parse_w, _archive_api_feature, _archive_api_version, 
+                       _archive_clear_error, _archive_compression, _archive_compression_name, 
+                       _archive_copy_error, _archive_entry_acl_add_entry, _archive_entry_acl_add_entry_w, 
+                       _archive_entry_acl_clear, _archive_entry_acl_count, _archive_entry_acl_next, 
+                       _archive_entry_acl_reset, _archive_entry_acl_text_w, _archive_entry_atime, 
+                       _archive_entry_atime_is_set, _archive_entry_atime_nsec, _archive_entry_birthtime, 
+                       _archive_entry_birthtime_is_set, _archive_entry_birthtime_nsec, 
+                       _archive_entry_clear, _archive_entry_clone, _archive_entry_copy_fflags_text, 
+                       _archive_entry_copy_fflags_text_w, _archive_entry_copy_gname, 
+                       _archive_entry_copy_gname_w, _archive_entry_copy_hardlink, 
                        _archive_entry_copy_hardlink_w, _archive_entry_copy_link, 
                        _archive_entry_copy_link_w, _archive_entry_copy_pathname, 
                        _archive_entry_copy_pathname_w, _archive_entry_copy_sourcepath, 

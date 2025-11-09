@@ -11,10 +11,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^QLPreviewItemLoadingBlock)(NSError * _Nullable error);
+typedef void(^QLPreviewItemLoadingBlock)(NSError * _Nullable error) API_DEPRECATED("Use void (^)(NSError * _Nullable) instead", macos(10.13,10.14)) API_UNAVAILABLE(ios, watchos, tvos);
 
-
+/**
+ The controller that implements the QLPreviewingController protocol must at least implement one of the two following methods:
+ -[QLPreviewingController preparePreviewOfSearchableItemWithIdentifier:queryString:completionHandler:], to generate previews for Spotlight searchable items.
+ -[QLPreviewingController preparePreviewOfFileAtURL:completionHandler:], to generate previews for file URLs.
+ */
 QL_EXPORT @protocol QLPreviewingController <NSObject>
+
+@optional
 
 /**
  @abstract
@@ -25,10 +31,12 @@ QL_EXPORT @protocol QLPreviewingController <NSObject>
  Heavy work potentially blocking the main thread should be avoided in this method.
  
  @param identifier The identifier of the CSSearchableItem the user interacted with in Spotlight.
+ @param queryString The query string the user entered in Spotlight before interacting with the CSSearchableItem.
  @param handler The completion handler should be called whenever the view is ready to be displayed. A loading spinner will be shown until the handler is called.
  It can be called asynchronously after the method has returned.
  */
-- (void)preparePreviewOfSearchableItemWithIdentifier:(NSString*)identifier queryString:(NSString *)queryString completionHandler:(QLPreviewItemLoadingBlock)handler;
+- (void)preparePreviewOfSearchableItemWithIdentifier:(NSString *)identifier queryString:(NSString * _Nullable)queryString completionHandler:(void (^)(NSError * _Nullable))handler NS_SWIFT_NAME(preparePreviewOfSearchableItem(identifier:queryString:completionHandler:));
+
 
 @end
 

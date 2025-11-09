@@ -1,7 +1,7 @@
 /*
 	NSColorWell.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSColorWell : NSControl
 {
     /*All instance variables are private*/
-    NSColor *_color;
-    id _reserved;
-    SEL _reserved2;
+    NSColor *_color APPKIT_IVAR;
+    id _reserved APPKIT_IVAR;
+    SEL _reserved2 APPKIT_IVAR;
     struct __cwFlags {
 	unsigned int        isActive:1;
 	unsigned int        isBordered:1;
@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 	unsigned int        isNotContinuous:1;
         unsigned int        refusesFR:1;
 	unsigned int	    reservedColorWell:27;
-    } _cwFlags;
+    } _cwFlags APPKIT_IVAR;
 }
 
 - (void)deactivate;

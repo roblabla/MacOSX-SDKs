@@ -1,7 +1,7 @@
 /*
 	NSHelpManager.h
 	Application Kit
-	Copyright (c) 1995-2017, Apple Inc.
+	Copyright (c) 1995-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,20 +16,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSAttributedString, NSWindow;
 
-typedef NSString * NSHelpBookName NS_EXTENSIBLE_STRING_ENUM;
-typedef NSString * NSHelpAnchorName NS_EXTENSIBLE_STRING_ENUM;
-typedef NSString * NSHelpManagerContextHelpKey NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSHelpBookName NS_SWIFT_BRIDGED_TYPEDEF;
+typedef NSString * NSHelpAnchorName NS_SWIFT_BRIDGED_TYPEDEF;
+typedef NSString * NSHelpManagerContextHelpKey NS_SWIFT_BRIDGED_TYPEDEF;
 
 @interface NSHelpManager : NSObject
 {
     /*All instance variables are private*/
-    NSMapTable		*_helpMapTable;
-    NSMapTable		*_keyMapTable;
-    NSMapTable		*_bundleMapTable;
-    NSWindow		*_helpWindow;
-    NSWindow		*_shadowWindow;
-    NSWindow		*_evtWindow;
-    NSBundle		*_helpBundle;
+    NSMapTable		*_helpMapTable APPKIT_IVAR;
+    NSMapTable		*_keyMapTable APPKIT_IVAR;
+    NSMapTable		*_bundleMapTable APPKIT_IVAR;
+    NSWindow		*_helpWindow APPKIT_IVAR;
+    NSWindow		*_shadowWindow APPKIT_IVAR;
+    NSWindow		*_evtWindow APPKIT_IVAR;
+    NSBundle		*_helpBundle APPKIT_IVAR;
 }
 
 @property (class, readonly, strong) NSHelpManager *sharedHelpManager;

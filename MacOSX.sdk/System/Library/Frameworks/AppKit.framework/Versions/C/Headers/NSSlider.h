@@ -1,7 +1,7 @@
 /*
 	NSSlider.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -82,22 +82,20 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (instancetype)sliderWithValue:(double)value minValue:(double)minValue maxValue:(double)maxValue target:(nullable id)target action:(nullable SEL)action NS_AVAILABLE_MAC(10_12);
 
-
 @end
 
 @interface NSSlider (NSSliderDeprecated)
-/* These methods have never done anything, and are formally deprecated as of 10.9*/
-- (void)setTitleCell:(null_unspecified NSCell *)cell NS_DEPRECATED_MAC(10_0, 10_9);
-- (null_unspecified id)titleCell NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setTitleColor:(null_unspecified NSColor *)newColor NS_DEPRECATED_MAC(10_0, 10_9);
-- (null_unspecified NSColor *)titleColor NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setTitleFont:(null_unspecified NSFont *)fontObj NS_DEPRECATED_MAC(10_0, 10_9);
-- (null_unspecified NSFont *)titleFont NS_DEPRECATED_MAC(10_0, 10_9);
-- (null_unspecified NSString *)title NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setTitle:(null_unspecified NSString *)string NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setKnobThickness:(CGFloat)thickness NS_DEPRECATED_MAC(10_0, 10_9);
-- (void)setImage:(null_unspecified NSImage *)backgroundImage NS_DEPRECATED_MAC(10_0, 10_9);
-- (null_unspecified NSImage *)image NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setTitleCell:(null_unspecified NSCell *)cell NS_DEPRECATED_MAC(10_0, 10_9, "-setTitleCell: had no effect since 10.0");
+- (null_unspecified id)titleCell NS_DEPRECATED_MAC(10_0, 10_9, "-titleCell has returned nil since 10.0");
+- (void)setTitleColor:(null_unspecified NSColor *)newColor NS_DEPRECATED_MAC(10_0, 10_9, "-setTitleColor: had no effect since 10.0");
+- (null_unspecified NSColor *)titleColor NS_DEPRECATED_MAC(10_0, 10_9, "-titleColor has returned nil since 10.0");
+- (void)setTitleFont:(null_unspecified NSFont *)fontObj NS_DEPRECATED_MAC(10_0, 10_9, "-setTitleFont: had no effect since 10.0");
+- (null_unspecified NSFont *)titleFont NS_DEPRECATED_MAC(10_0, 10_9, "-titleFont has returned nil since 10.0");
+- (null_unspecified NSString *)title NS_DEPRECATED_MAC(10_0, 10_9, "-title has returned nil since 10.0");
+- (void)setTitle:(null_unspecified NSString *)string NS_DEPRECATED_MAC(10_0, 10_9, "-setTitle: had no effect since 10.0");
+- (void)setKnobThickness:(CGFloat)thickness NS_DEPRECATED_MAC(10_0, 10_9, "-knobThickness has returned 0 since 10.0");
+- (void)setImage:(null_unspecified NSImage *)backgroundImage NS_DEPRECATED_MAC(10_0, 10_9, "-setImage: had no effect since 10.0");
+- (null_unspecified NSImage *)image NS_DEPRECATED_MAC(10_0, 10_9, "-image has returned nil since 10.0");
 @end
 
 NS_ASSUME_NONNULL_END

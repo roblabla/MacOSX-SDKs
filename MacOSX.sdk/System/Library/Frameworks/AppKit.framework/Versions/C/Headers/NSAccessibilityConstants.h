@@ -1,7 +1,7 @@
 /*
 	NSAccessibilityConstants.h
 	Application Kit
-	Copyright (c) 2001-2017, Apple Inc.
+	Copyright (c) 2001-2018, Apple Inc.
 	All rights reserved.
 */
 #import <AppKit/AppKitDefines.h>
@@ -23,7 +23,7 @@ APPKIT_EXTERN NSString *const NSAccessibilityErrorCodeExceptionInfo;
 
 /* Standard attributes
  */
-typedef NSString * NSAccessibilityAttributeName NS_STRING_ENUM;
+typedef NSString * NSAccessibilityAttributeName NS_TYPED_ENUM;
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityRoleAttribute;		//(NSAccessibilityRole) - type, non-localized (e.g. radioButton)
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityRoleDescriptionAttribute;	//(NSString *) - user readable role (e.g. "radio button")
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilitySubroleAttribute;		//(NSAccessibilitySubrole) - type, non-localized (e.g. closeButton)
@@ -112,7 +112,7 @@ NS_AVAILABLE_MAC(10_5);
 
 /* Parameterized text-specific attributes
  */
-typedef NSString * NSAccessibilityParameterizedAttributeName NS_STRING_ENUM;
+typedef NSString * NSAccessibilityParameterizedAttributeName NS_TYPED_ENUM;
 APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityLineForIndexParameterizedAttribute;		//(NSNumber *) - line# for char index; param:(NSNumber *)
 APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityRangeForLineParameterizedAttribute;		//(NSValue *)  - (rangeValue) range of line; param:(NSNumber *)
 APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityStringForRangeParameterizedAttribute;	//(NSString *) - substring; param:(NSValue * - rangeValue)
@@ -171,7 +171,7 @@ APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityCustomTextAttribute NS_
  */
 APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityAnnotationTextAttribute NS_AVAILABLE_MAC(10_13);   //(NSArray *) - (NSDictionary<NSAccessibilityAnnotationAttributeKey, id> *)
 
-typedef NSString * NSAccessibilityAnnotationAttributeKey NS_STRING_ENUM;
+typedef NSString * NSAccessibilityAnnotationAttributeKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSAccessibilityAnnotationAttributeKey const NSAccessibilityAnnotationLabel; // required (NSString *)
 APPKIT_EXTERN NSAccessibilityAnnotationAttributeKey const NSAccessibilityAnnotationElement; // optional (id) - UIElement for the annotation object
 APPKIT_EXTERN NSAccessibilityAnnotationAttributeKey const NSAccessibilityAnnotationLocation; // optional (NSNumber *) - (NSAccessibilityAnnotationPosition)
@@ -182,7 +182,7 @@ typedef NS_ENUM(NSInteger, NSAccessibilityAnnotationPosition) {
     NSAccessibilityAnnotationPositionEnd,
 } NS_ENUM_AVAILABLE_MAC(10_13);
 
-typedef NSString * NSAccessibilityFontAttributeKey NS_STRING_ENUM;
+typedef NSString * NSAccessibilityFontAttributeKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSAccessibilityFontAttributeKey const NSAccessibilityFontNameKey;	// required
 APPKIT_EXTERN NSAccessibilityFontAttributeKey const NSAccessibilityFontFamilyKey;	// optional
 APPKIT_EXTERN NSAccessibilityFontAttributeKey const NSAccessibilityVisibleNameKey;	// optional
@@ -222,7 +222,7 @@ typedef NS_ENUM(NSInteger, NSAccessibilityOrientation) {
 } NS_ENUM_AVAILABLE_MAC(10_10);
 
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityOrientationAttribute;	//(NSAccessibilityOrientationValue)
-typedef NSString * NSAccessibilityOrientationValue NS_STRING_ENUM;
+typedef NSString * NSAccessibilityOrientationValue NS_TYPED_ENUM;
 APPKIT_EXTERN NSAccessibilityOrientationValue const NSAccessibilityVerticalOrientationValue;
 APPKIT_EXTERN NSAccessibilityOrientationValue const NSAccessibilityHorizontalOrientationValue;
 APPKIT_EXTERN NSAccessibilityOrientationValue const NSAccessibilityUnknownOrientationValue;
@@ -281,7 +281,7 @@ APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityHandlesAttribute
 
 /* Sort direction values
  */
-typedef NSString * NSAccessibilitySortDirectionValue NS_STRING_ENUM;
+typedef NSString * NSAccessibilitySortDirectionValue NS_TYPED_ENUM;
 APPKIT_EXTERN NSAccessibilitySortDirectionValue const NSAccessibilityAscendingSortDirectionValue;
 APPKIT_EXTERN NSAccessibilitySortDirectionValue const NSAccessibilityDescendingSortDirectionValue;
 APPKIT_EXTERN NSAccessibilitySortDirectionValue const NSAccessibilityUnknownSortDirectionValue;
@@ -328,7 +328,7 @@ NS_AVAILABLE_MAC(10_7);
 
 /* Ruler marker type values
  */
-typedef NSString * NSAccessibilityRulerMarkerTypeValue NS_STRING_ENUM;
+typedef NSString * NSAccessibilityRulerMarkerTypeValue NS_TYPED_ENUM;
 APPKIT_EXTERN NSAccessibilityRulerMarkerTypeValue const NSAccessibilityLeftTabStopMarkerTypeValue;
 APPKIT_EXTERN NSAccessibilityRulerMarkerTypeValue const NSAccessibilityRightTabStopMarkerTypeValue;
 APPKIT_EXTERN NSAccessibilityRulerMarkerTypeValue const NSAccessibilityCenterTabStopMarkerTypeValue;
@@ -351,7 +351,7 @@ typedef NS_ENUM(NSInteger, NSAccessibilityRulerMarkerType) {
 
 /* Ruler unit values
  */
-typedef NSString * NSAccessibilityRulerUnitValue NS_STRING_ENUM;
+typedef NSString * NSAccessibilityRulerUnitValue NS_TYPED_ENUM;
 APPKIT_EXTERN NSAccessibilityRulerUnitValue const NSAccessibilityInchesUnitValue;
 APPKIT_EXTERN NSAccessibilityRulerUnitValue const NSAccessibilityCentimetersUnitValue;
 APPKIT_EXTERN NSAccessibilityRulerUnitValue const NSAccessibilityPointsUnitValue;
@@ -368,7 +368,7 @@ typedef NS_ENUM(NSInteger, NSAccessibilityUnits) {
 
 /* Actions
  */
-typedef NSString * NSAccessibilityActionName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSAccessibilityActionName NS_TYPED_EXTENSIBLE_ENUM;
 APPKIT_EXTERN NSAccessibilityActionName const NSAccessibilityPressAction;
 APPKIT_EXTERN NSAccessibilityActionName const NSAccessibilityIncrementAction;
 APPKIT_EXTERN NSAccessibilityActionName const NSAccessibilityDecrementAction;
@@ -386,7 +386,7 @@ APPKIT_EXTERN NSAccessibilityActionName const NSAccessibilityShowDefaultUIAction
 
 /* Notifications
  */
-typedef NSString * NSAccessibilityNotificationName NS_STRING_ENUM;
+typedef NSString * NSAccessibilityNotificationName NS_TYPED_ENUM;
 
 /* Focus notifications
  */
@@ -455,7 +455,7 @@ APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityAnnouncementR
 
 /* Roles
  */
-typedef NSString * NSAccessibilityRole NS_STRING_ENUM;
+typedef NSString * NSAccessibilityRole NS_TYPED_ENUM;
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityUnknownRole;
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityButtonRole;
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityRadioButtonRole;
@@ -518,7 +518,7 @@ APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityHandleRole NS_AVAILABLE_M
 
 /* Subroles
  */
-typedef NSString * NSAccessibilitySubrole NS_STRING_ENUM;
+typedef NSString * NSAccessibilitySubrole NS_TYPED_ENUM;
 APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityUnknownSubrole;
 APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityCloseButtonSubrole;
 APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityZoomButtonSubrole;
@@ -553,7 +553,7 @@ APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityCollectionListSubrole 
 APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilitySectionListSubrole NS_AVAILABLE_MAC(10_13);
 
 /* Below are keys used for the user info dictionary of the NSAccessibilityPostNotificationWithUserInfo API */
-typedef NSString * NSAccessibilityNotificationUserInfoKey NS_STRING_ENUM;
+typedef NSString * NSAccessibilityNotificationUserInfoKey NS_TYPED_ENUM;
 /* Key used in the user info dictionary for notifications.  The value is an array of elements that is associated with the notification.  For example, a NSAccessibilityLayoutChangedNotification should include an array of elements that have been added/changed using this key.
  */
 APPKIT_EXTERN NSAccessibilityNotificationUserInfoKey const NSAccessibilityUIElementsKey NS_AVAILABLE_MAC(10_9);
@@ -569,7 +569,7 @@ APPKIT_EXTERN NSAccessibilityNotificationUserInfoKey const NSAccessibilityAnnoun
 
 /* This function allows an accessibility notification to be posted with a user info dictionary.  The user info dictionary can be nil.  Valid contents of the user info dictionary are limited to classes which can be returned to an accessibility client.  That list currently includes NSString, NSNumber, NSArray, NSValues of points, ranges, sizes, rects, and valid NSAccessibility objects.  Most accessibility notifications do not require a user info dictionary.
  */
-APPKIT_EXTERN void NSAccessibilityPostNotificationWithUserInfo(id element, NSAccessibilityNotificationName notification, NSDictionary<NSAccessibilityNotificationUserInfoKey, id> *userInfo) NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN void NSAccessibilityPostNotificationWithUserInfo(id element, NSAccessibilityNotificationName notification, NSDictionary<NSAccessibilityNotificationUserInfoKey, id> * __nullable userInfo) NS_AVAILABLE_MAC(10_7);
 
 
 

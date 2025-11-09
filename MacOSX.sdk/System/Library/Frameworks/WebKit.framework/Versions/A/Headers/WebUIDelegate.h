@@ -72,7 +72,7 @@ enum {
     WebMenuItemPDFContinuous,
     WebMenuItemPDFNextPage,
     WebMenuItemPDFPreviousPage,
-};
+} WEBKIT_ENUM_DEPRECATED_MAC(10_3, 10_14);
 
 /*!
     @enum WebDragDestinationAction
@@ -89,7 +89,7 @@ typedef NS_OPTIONS(NSUInteger, WebDragDestinationAction) {
     WebDragDestinationActionEdit    = 2,
     WebDragDestinationActionLoad    = 4,
     WebDragDestinationActionAny     = UINT_MAX
-};
+} WEBKIT_ENUM_DEPRECATED_MAC(10_3, 10_14);
 
 /*!
     @enum WebDragSourceAction
@@ -108,13 +108,14 @@ typedef NS_OPTIONS(NSUInteger, WebDragSourceAction) {
     WebDragSourceActionLink         = 4,
     WebDragSourceActionSelection    = 8,
     WebDragSourceActionAny          = UINT_MAX
-};
+} WEBKIT_ENUM_DEPRECATED_MAC(10_3, 10_14);
 
 /*!
     @protocol WebOpenPanelResultListener
     @discussion This protocol is used to call back with the results of
     the file open panel requested by runOpenPanelForFileButtonWithResultListener:
 */
+WEBKIT_DEPRECATED_MAC(10_3, 10_14)
 @protocol WebOpenPanelResultListener <NSObject>
 
 /*!
@@ -129,7 +130,7 @@ typedef NS_OPTIONS(NSUInteger, WebDragSourceAction) {
     @abstract Call this method to return an array of filenames from the file open panel.
     @param fileNames an array of paths of selected files
 */
-- (void)chooseFilenames:(NSArray *)fileNames NS_AVAILABLE_MAC(10_6);
+- (void)chooseFilenames:(NSArray *)fileNames WEBKIT_AVAILABLE_MAC(10_6);
 
 /*!
     @method cancel
@@ -150,6 +151,7 @@ typedef NS_OPTIONS(NSUInteger, WebDragSourceAction) {
     other aspects of web pages. These methods are used to open new
     windows and control aspects of existing windows.
 */
+WEBKIT_DEPRECATED_MAC(10_3, 10_14)
 @protocol WebUIDelegate <NSObject>
 
 @optional
@@ -418,7 +420,7 @@ typedef NS_OPTIONS(NSUInteger, WebDragSourceAction) {
     @discussion This method is passed a callback object instead of giving a return
     value so that it can be handled with a sheet.
 */
-- (void)webView:(WebView *)sender runOpenPanelForFileButtonWithResultListener:(id<WebOpenPanelResultListener>)resultListener allowMultipleFiles:(BOOL)allowMultipleFiles NS_AVAILABLE_MAC(10_6);
+- (void)webView:(WebView *)sender runOpenPanelForFileButtonWithResultListener:(id<WebOpenPanelResultListener>)resultListener allowMultipleFiles:(BOOL)allowMultipleFiles WEBKIT_AVAILABLE_MAC(10_6);
 
 /*!
     @method webView:mouseDidMoveOverElement:modifierFlags:
@@ -561,12 +563,12 @@ typedef NS_OPTIONS(NSUInteger, WebDragSourceAction) {
 
 // The following delegate methods are deprecated in favor of the ones above that specify
 // the WebFrame whose JavaScript initiated this call.
-- (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message NS_DEPRECATED_MAC(10_3, 10_5);
-- (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message NS_DEPRECATED_MAC(10_3, 10_5);
-- (NSString *)webView:(WebView *)sender runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText NS_DEPRECATED_MAC(10_3, 10_5);
+- (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message WEBKIT_DEPRECATED_MAC(10_3, 10_5);
+- (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message WEBKIT_DEPRECATED_MAC(10_3, 10_5);
+- (NSString *)webView:(WebView *)sender runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText WEBKIT_DEPRECATED_MAC(10_3, 10_5);
 
 // The following delegate methods are deprecated. Content rect calculations are now done automatically.
-- (void)webView:(WebView *)sender setContentRect:(NSRect)frame NS_DEPRECATED_MAC(10_3, 10_5);
-- (NSRect)webViewContentRect:(WebView *)sender NS_DEPRECATED_MAC(10_3, 10_5);
+- (void)webView:(WebView *)sender setContentRect:(NSRect)frame WEBKIT_DEPRECATED_MAC(10_3, 10_5);
+- (NSRect)webViewContentRect:(WebView *)sender WEBKIT_DEPRECATED_MAC(10_3, 10_5);
 
 @end

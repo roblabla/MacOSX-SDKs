@@ -27,6 +27,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <WebKit/WebKitAvailability.h>
 
 #import <AppKit/AppKit.h>
 
@@ -39,7 +40,7 @@
     either the item's title, alternate title, url strings, or last visited interval
     changes.  The userInfo will be nil.
 */
-extern NSString *WebHistoryItemChangedNotification;
+extern NSString *WebHistoryItemChangedNotification WEBKIT_DEPRECATED_MAC(10_3, 10_14);
 
 /*!
     @class WebHistoryItem
@@ -48,6 +49,7 @@ extern NSString *WebHistoryItemChangedNotification;
     pages visited.  With the exception of the displayTitle, the properties of 
     WebHistoryItems are set by WebKit.  WebHistoryItems are normally never created directly.
 */
+WEBKIT_CLASS_DEPRECATED_MAC(10_3, 10_14)
 @interface WebHistoryItem : NSObject <NSCopying>
 {
 @package

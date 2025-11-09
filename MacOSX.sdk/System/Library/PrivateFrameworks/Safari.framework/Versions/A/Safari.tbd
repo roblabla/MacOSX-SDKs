@@ -1,9 +1,9 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2D31BB5E-5E54-3CEF-8951-A961E1AB25D6' ]
+uuids:           [ 'x86_64: CA73996B-A16D-3C5A-9E38-FDA13B300B4B' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Safari.framework/Versions/A/Safari
-current-version: 604.1.31
+current-version: 606.2.104
 compatibility-version: 528
 exports:         
   - archs:           [ x86_64 ]
@@ -39,16 +39,17 @@ exports:
                        _CKBADatabaseCopyServerIdsInFolderWithServerId, _CKBADatabaseCreateBookmark, 
                        _CKBADatabaseCreateFolder, _CKBADatabaseCreateWithoutLock, 
                        _CKBADatabaseGetLocalCloudKitMigrationState, _CKBADatabasePerformDeduplication, 
-                       _CKBADatabaseSaveBackupWithName, _CKBADatabaseSetAccountHash, 
-                       _CKBADatabaseSetChildrenOrderForFolderWithServerId, _CKBADatabaseSetLocalCloudKitMigrationState, 
-                       _CKBAFolderCopyKnownKeys, _CKBAFolderGetFolderType, _CKBAItemCopyAttributes, 
-                       _CKBAItemCopyValueForKey, _CKBAItemGetIsInFolderWithServerSyncId, 
-                       _CKBAItemGetItemType, _CKBAItemIsEqualToItem, _CKBAItemSetModifiedAttributes, 
-                       _CKBAReadingListItemCopyKnownKeys, _CKBAResetDeviceIdentifier, 
-                       _NotificationAgentMain, _PlugInUpdateNotifierMain, _SafariDiagnosticsMain, 
-                       _SafariHistoryServiceAgentMain, _SafariLaunchAgentMain, _SafariMain, 
-                       _SyncedCreditCardsDidChangeExternallyNotification, _SyncedPasswordsDidChangeExternallyNotification, 
-                       _WKBundleInitialize, __Z25safariDateOfLastActiveUsev, __Z31BrowserDataImportingServiceMainv, 
+                       _CKBADatabasePerformMaintenanceAfterVersion, _CKBADatabaseSaveBackupWithName, 
+                       _CKBADatabaseSetAccountHash, _CKBADatabaseSetChildrenOrderForFolderWithServerId, 
+                       _CKBADatabaseSetLocalCloudKitMigrationState, _CKBAFolderCopyKnownKeys, 
+                       _CKBAFolderGetFolderType, _CKBAItemCopyAttributes, _CKBAItemCopyValueForKey, 
+                       _CKBAItemGetIsInFolderWithServerSyncId, _CKBAItemGetItemType, 
+                       _CKBAItemIsEqualToItem, _CKBAItemSetModifiedAttributes, _CKBAReadingListItemCopyKnownKeys, 
+                       _CKBAResetDeviceIdentifier, _NotificationAgentMain, _PlugInUpdateNotifierMain, 
+                       _SafariDiagnosticsMain, _SafariHistoryServiceAgentMain, _SafariLaunchAgentMain, 
+                       _SafariMain, _SyncedCreditCardsDidChangeExternallyNotification, 
+                       _SyncedPasswordsDidChangeExternallyNotification, _WKBundleInitialize, 
+                       __Z25safariDateOfLastActiveUsev, __Z31BrowserDataImportingServiceMainv, 
                        __Z33safariApplicationBundleIdentifierv, __Z41creditCardDataControllerHasCreditCardDatav, 
                        __Z43creditCardDataControllerClearCreditCardDatav, __Z50safariApplicationCloudTabStoreUUIDForCurrentDevicev, 
                        __Z52credentialAndProtectionSpaceCollectionHasCredentialsv, 
@@ -72,8 +73,8 @@ exports:
                        _messageFromContainingAppUserInfoKey, _resetCloudHistoryDefaultsKey, 
                        _safariFrameworkBundleIdentifier, _safariProductionApplicationBundleIdentifier, 
                        _safariSharedFrameworkBundleIdentifier, _safariTechnologyPreviewApplicationBundleIdentifier ]
-    objc-classes:    [ _BookmarksController, _PurgeableDirectory, _PurgeableItemController, 
-                       _PurgeableWebCache, _ReadingListItem, _SafariContentBlockerAppExtensionsController, 
-                       _SnapshotCache, _SnapshotRequest, _SnapshotResponse, _WebBookmark, 
-                       _WebBookmarkGroup, _WebBookmarkLeaf, _WebBookmarkList ]
+    objc-classes:    [ BookmarksController, PurgeableDirectory, PurgeableItemController, 
+                       PurgeableWebCache, SafariContentBlockerAppExtensionsController, 
+                       SnapshotCache, SnapshotRequest, SnapshotResponse, WebBookmarkGroup, 
+                       WebBookmarkLeaf, WebBookmarkList, WebBookmarkProxy ]
 ...

@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_12, 10_0)
+MTL_EXPORT API_AVAILABLE(macos(10.12), ios(10.0))
 @interface MTLFunctionConstantValues : NSObject <NSCopying>
 
 // using indices

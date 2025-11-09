@@ -1,6 +1,6 @@
 /*
 	NSFileWrapper.h
-	Copyright (c) 1995-2017, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2018, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -34,7 +34,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileWrapperWritingOptions) {
 } API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 NS_CLASS_AVAILABLE(10_0, 4_0)
-@interface NSFileWrapper : NSObject<NSCoding> {
+@interface NSFileWrapper : NSObject<NSSecureCoding> {
     @private
     NSDictionary *_fileAttributes;
     NSString *_preferredFileName;

@@ -3,7 +3,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2010-2017 Apple Inc. All rights reserved.
+    Copyright 2010-2018 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -31,8 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     Concrete instances of AVCaptureInput representing input sources such as cameras can be added to instances of AVCaptureSession using the -[AVCaptureSession addInput:] method. An AVCaptureInput vends one or more streams of media data. For example, input devices can provide both audio and video data. Each media stream provided by an input is represented by an AVCaptureInputPort object. Within a capture session, connections are made between AVCaptureInput instances and AVCaptureOutput instances via AVCaptureConnection objects that define the mapping between a set of AVCaptureInputPort objects and a single AVCaptureOutput.
  */
-NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
-@interface AVCaptureInput : NSObject 
+API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+@interface AVCaptureInput : NSObject
 {
 @private
     AVCaptureInputInternal *_inputInternal;
@@ -61,7 +61,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     The notification object is the AVCaptureInputPort instance whose format description changed.
  */
-AVF_EXPORT NSString *const AVCaptureInputPortFormatDescriptionDidChangeNotification NS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureInputPortFormatDescriptionDidChangeNotification API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 
 #pragma mark - AVCaptureInputPort
@@ -76,7 +76,7 @@ AVF_EXPORT NSString *const AVCaptureInputPortFormatDescriptionDidChangeNotificat
  @discussion
     Instances of AVCaptureInputPort cannot be created directly. An AVCaptureInput exposes its input ports via its ports property. Input ports provide information about the format of their media data via the mediaType and formatDescription properties, and allow clients to control the flow of data via the enabled property. Input ports are used by an AVCaptureConnection to define the mapping between inputs and outputs in an AVCaptureSession.
  */
-NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCaptureInputPort : NSObject
 {
 @private
@@ -133,7 +133,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     The clock is read-only.
  */
-@property(nonatomic, readonly, nullable) __attribute__((NSObject)) CMClockRef clock NS_AVAILABLE(10_9, 7_0);
+@property(nonatomic, readonly, nullable) __attribute__((NSObject)) CMClockRef clock API_AVAILABLE(macos(10.9), ios(7.0));
 
 @end
 
@@ -151,8 +151,8 @@ AV_INIT_UNAVAILABLE
  @discussion
     Instances of AVCaptureDeviceInput are input sources for AVCaptureSession that provide media data from devices connected to the system, represented by instances of AVCaptureDevice.
  */
-NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
-@interface AVCaptureDeviceInput : AVCaptureInput 
+API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+@interface AVCaptureDeviceInput : AVCaptureInput
 {
 @private
     AVCaptureDeviceInputInternal *_internal;
@@ -202,6 +202,18 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  */
 @property(nonatomic, readonly) AVCaptureDevice *device;
 
+/*!
+ @property unifiedAutoExposureDefaultsEnabled
+ @abstract
+    Specifies whether the source device should use the same default auto exposure behaviors for -[AVCaptureSession setSessionPreset:] and -[AVCaptureDevice setActiveFormat:].
+ 
+ @discussion
+    AVCaptureDevice's activeFormat property may be set two different ways. 1) You set it directly using one of the formats in the device's -formats array, or 2) the AVCaptureSession sets it on your behalf when you set the AVCaptureSession's sessionPreset property. Depending on the device and format, the default auto exposure behavior may be configured differently when you use one method or the other, resulting in non-uniform auto exposure behavior. Auto exposure defaults include min frame rate, max frame rate, and max exposure duration. If you wish to ensure that consistent default behaviors are applied to the device regardless of the API you use to configure the activeFormat, you may set the device input's unifiedAutoExposureDefaultsEnabled property to YES. Default value for this property is NO.
+ 
+    Note that if you manually set the device's min frame rate, max frame rate, or max exposure duration, your custom values will override the device defaults regardless of whether you've set this property to YES.
+ */
+@property(nonatomic) BOOL unifiedAutoExposureDefaultsEnabled API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, tvos, watchos);
+
 @end
 
 
@@ -217,8 +229,8 @@ NS_CLASS_AVAILABLE(10_7, 4_0) __TVOS_PROHIBITED
  @discussion
     Instances of AVCaptureScreenInput are input sources for AVCaptureSession that provide media data from one of the screens connected to the system, represented by CGDirectDisplayIDs.
  */
-NS_CLASS_AVAILABLE_MAC(10_7) __TVOS_PROHIBITED
-@interface AVCaptureScreenInput : AVCaptureInput 
+API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos)
+@interface AVCaptureScreenInput : AVCaptureInput
 {
 @private
     AVCaptureScreenInputInternal *_internal;
@@ -251,7 +263,7 @@ NS_CLASS_AVAILABLE_MAC(10_7) __TVOS_PROHIBITED
  @discussion
     This method creates an instance of AVCaptureScreenInput that can be used to capture data from a display in an AVCaptureSession. This method validates the displayID. If the display cannot be used because it is not available on the system, for example, this method returns nil.
  */
-- (instancetype)initWithDisplayID:(CGDirectDisplayID)displayID;
+- (nullable instancetype)initWithDisplayID:(CGDirectDisplayID)displayID;
 
 #endif // TARGET_OS_OSX
 
@@ -303,7 +315,7 @@ NS_CLASS_AVAILABLE_MAC(10_7) __TVOS_PROHIBITED
  @discussion
     By default, AVCaptureScreenInput draws the cursor in its captured output. If this property is set to NO, the captured output contains only the windows on the screen. Cursor is omitted. Note that cursor position and mouse button state at the time of capture is preserved in CMSampleBuffers emitted from AVCaptureScreenInput. See the inline documentation for kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers in <CoreMediaIO/CMIOSampleBuffer.h>
  */
-@property(nonatomic) BOOL capturesCursor NS_AVAILABLE_MAC(10_8);
+@property(nonatomic) BOOL capturesCursor API_AVAILABLE(macos(10.8));
 
 /*!
  @property removesDuplicateFrames
@@ -315,7 +327,7 @@ NS_CLASS_AVAILABLE_MAC(10_7) __TVOS_PROHIBITED
  
     As of 10.10, this property has been deprecated and is ignored. Clients wishing to re-create this functionality can use an AVCaptureVideoDataOutput and compare frame contents in their own code. If they wish to write a movie file, they can then pass the unique frames to an AVAssetWriterInput.
  */
-@property(nonatomic) BOOL removesDuplicateFrames NS_DEPRECATED_MAC(10_8, 10_10);
+@property(nonatomic) BOOL removesDuplicateFrames API_DEPRECATED("No longer supported.", macos(10.8, 10.10));
 
 @end
 
@@ -332,8 +344,8 @@ NS_CLASS_AVAILABLE_MAC(10_7) __TVOS_PROHIBITED
  @discussion
     Instances of AVCaptureMetadataInput are input sources for AVCaptureSession that provide AVMetadataItems to an AVCaptureSession. AVCaptureMetadataInputs present one and only one AVCaptureInputPort, which currently may only be connected to an AVCaptureMovieFileOutput. The metadata supplied over the input port is provided by the client, and must conform to a client-supplied CMFormatDescription. The AVMetadataItems are supplied in an AVTimedMetadataGroup.
  */
-NS_CLASS_AVAILABLE_IOS(9_0) __TVOS_PROHIBITED
-@interface AVCaptureMetadataInput : AVCaptureInput 
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+@interface AVCaptureMetadataInput : AVCaptureInput
 {
 @private
     AVCaptureMetadataInputInternal *_internal;

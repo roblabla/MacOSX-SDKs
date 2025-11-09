@@ -1,17 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 6B427B1B-F957-3740-AB61-50DDC9EE5430', 'x86_64: F69F5218-16FB-3335-AAE7-9AB156D8EB1C' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: BDE14D25-4D82-3EBC-8EF2-D1F6BC957B07' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/OpenScripting.framework/Versions/A/OpenScripting
 parent-umbrella: Carbon
 exports:         
-  - archs:           [ i386 ]
-    symbols:         [ _ASGetAppTerminology, _ASGetHandler, _ASGetProperty, _ASSetHandler, 
-                       _ASSetProperty, _DisposeOSAActiveUPP, _DisposeOSACreateAppleEventUPP, 
-                       _DisposeOSASendUPP, _InvokeOSAActiveUPP, _InvokeOSACreateAppleEventUPP, 
-                       _InvokeOSASendUPP, _NewOSAActiveUPP, _NewOSACreateAppleEventUPP, 
-                       _NewOSASendUPP, _OSAGetAppTerminology ]
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _ASCopySourceAttributes, _ASGetSourceStyleNames, _ASGetSourceStyles, 
                        _ASInit, _ASSetSourceAttributes, _ASSetSourceStyles, _OSAAddStorageType, 
                        _OSAAuthorizeEvent, _OSAAvailableDialectCodeList, _OSAAvailableDialects, 

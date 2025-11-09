@@ -1,29 +1,30 @@
 /*
         NSAppearance.h
         Application Kit
-        Copyright (c) 2011-2017, Apple Inc.
+        Copyright (c) 2011-2018, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/AppKitDefines.h>
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSString, NSBundle;
 
-typedef NSString * NSAppearanceName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSAppearanceName NS_TYPED_EXTENSIBLE_ENUM;
 
 NS_CLASS_AVAILABLE_MAC(10_9)
-@interface NSAppearance : NSObject <NSCoding> {
+@interface NSAppearance : NSObject <NSSecureCoding> {
 @private
-    NSAppearanceName _name;
-    NSBundle *_bundle;
-    void *_private;
-    id _reserved;
-    id _auxiliary;
+    NSAppearanceName _name APPKIT_IVAR;
+    NSBundle *_bundle APPKIT_IVAR;
+    void *_private APPKIT_IVAR;
+    id _reserved APPKIT_IVAR;
+    id _auxiliary APPKIT_IVAR;
 #if !__LP64__
-    id _extra[2];
+    id _extra[2] APPKIT_IVAR;
 #endif
 }
 
@@ -48,18 +49,32 @@ NS_CLASS_AVAILABLE_MAC(10_9)
  */
 @property (readonly) BOOL allowsVibrancy NS_AVAILABLE_MAC(10_10);
 
+/* Given a list of appearance names, returns the one that best matches the receiver
+ */
+- (nullable NSAppearanceName)bestMatchFromAppearancesWithNames:(NSArray<NSAppearanceName> *)appearances NS_AVAILABLE_MAC(10_14);
+
 @end
 
 #pragma mark -
 #pragma mark Standard Appearances
 
 APPKIT_EXTERN NSAppearanceName const NSAppearanceNameAqua NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSAppearanceName const NSAppearanceNameDarkAqua NS_AVAILABLE_MAC(10_14);
+
 APPKIT_EXTERN NSAppearanceName const NSAppearanceNameLightContent NS_DEPRECATED_MAC(10_9, 10_10, "Light content should use the default Aqua apppearance.");
 
 /* The following two Vibrant appearances should only be set on an NSVisualEffectView, or one of its container subviews.
  */
 APPKIT_EXTERN NSAppearanceName const NSAppearanceNameVibrantDark NS_AVAILABLE_MAC(10_10);
 APPKIT_EXTERN NSAppearanceName const NSAppearanceNameVibrantLight NS_AVAILABLE_MAC(10_10);
+
+/* The following appearance names are for matching using bestMatchFromAppearancesWithNames:
+   Passing any of them to appearanceNamed: will return NULL
+ */
+APPKIT_EXTERN NSAppearanceName const NSAppearanceNameAccessibilityHighContrastAqua NS_AVAILABLE_MAC(10_14);
+APPKIT_EXTERN NSAppearanceName const NSAppearanceNameAccessibilityHighContrastDarkAqua NS_AVAILABLE_MAC(10_14);
+APPKIT_EXTERN NSAppearanceName const NSAppearanceNameAccessibilityHighContrastVibrantLight NS_AVAILABLE_MAC(10_14);
+APPKIT_EXTERN NSAppearanceName const NSAppearanceNameAccessibilityHighContrastVibrantDark NS_AVAILABLE_MAC(10_14);
 
 #pragma mark -
 

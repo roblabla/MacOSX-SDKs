@@ -64,7 +64,8 @@ enum
     kHIDRtOutputReport  = 2,
     kHIDRtFeatureReport = 3,
 
-    kInterruptRetries  = 10
+    kInterruptRetries      = 10,
+    kErrorRecoveryInterval = 50     // Milliseconds
 };
 
 //	from IOHIDDescriptorParser.h:

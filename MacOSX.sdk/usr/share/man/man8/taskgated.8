@@ -19,10 +19,6 @@ When the kernel is asked for the task port of a process, and preliminary access 
 checks pass, it invokes this daemon (via launchd) to make the decision.
 .Sh OPTIONS
 .Bl -tag -width -indent  \" Differs from above in tag removed 
-.It Fl s
-Allow signed applications marked as "safe" to have free access to
-task ports, without having to pass an authorization check. Note that such callers
-must be marked both allowed and safe.
 .It Fl t Ar timeout
 The daemon will quit after that many seconds of inactivity. It will be relaunched
 by launchd as needed. A timeout of zero can be specified to make the daemon quit

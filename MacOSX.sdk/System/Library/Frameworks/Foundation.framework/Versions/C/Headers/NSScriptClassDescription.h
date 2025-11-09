@@ -1,6 +1,6 @@
 /*
 	NSScriptClassDescription.h
-	Copyright (c) 1997-2017, Apple Inc.
+	Copyright (c) 1997-2018, Apple Inc.
 	All rights reserved.
 */
 

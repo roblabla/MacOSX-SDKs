@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DE008114-8FDB-3CBE-805D-BD9E59790A72' ]
+uuids:           [ 'x86_64: 1AEE3DFB-C2FE-370A-9DD1-96BCE25FA897' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityEvents.framework/Versions/A/AccessibilityEvents
 current-version: 2
@@ -18,12 +18,12 @@ exports:
                        _AXETrackingTwoFingerGestureRecognizerMinimumPinchSeparationDeviationDefault, 
                        _AXETrackingTwoFingerGestureRecognizerMinimumRotateAngleDeviationDefault, 
                        _AccessibilityEventsVersionNumber, _AccessibilityEventsVersionString ]
-    objc-classes:    [ _AXEDFRDevice, _AXEEventTap, _AXEEventTapGestureEvent, _AXEEventTapKeyboardEvent, 
-                       _AXEEventTapManager, _AXEEventTapMouseEvent, _AXEMathUtilities, 
-                       _AXEMockTimer, _AXEMockTimerFactory, _AXENSTimer, _AXEThrottler, 
-                       _AXETimerFactory, _AXETrackingFlickGestureRecognizer, _AXETrackingGestureEvent, 
-                       _AXETrackingGestureRecognizerTestsFingerSimulator, _AXETrackingHoldGestureRecognizer, 
-                       _AXETrackingSplitTapGestureRecognizer, _AXETrackingTapGestureRecognizer, 
-                       _AXETrackingTouchEvent, _AXETrackingTrackpadDevice, _AXETrackingTwoFingerGestureRecognizer, 
-                       __AXEEventTapInfo, __AXEEventTapListenerWrapper, __AXETrackingStabilizingTouchHistory ]
+    objc-classes:    [ AXEDFRDevice, AXEEventTap, AXEEventTapGestureEvent, AXEEventTapKeyboardEvent, 
+                       AXEEventTapManager, AXEEventTapMouseEvent, AXEMathUtilities, 
+                       AXEMockTimer, AXEMockTimerFactory, AXENSTimer, AXEThrottler, 
+                       AXETimerFactory, AXETrackingFlickGestureRecognizer, AXETrackingGestureEvent, 
+                       AXETrackingGestureRecognizerTestsFingerSimulator, AXETrackingHoldGestureRecognizer, 
+                       AXETrackingSplitTapGestureRecognizer, AXETrackingTapGestureRecognizer, 
+                       AXETrackingTouchEvent, AXETrackingTrackpadDevice, AXETrackingTwoFingerGestureRecognizer, 
+                       _AXEEventTapInfo, _AXEEventTapListenerWrapper, _AXETrackingStabilizingTouchHistory ]
 ...

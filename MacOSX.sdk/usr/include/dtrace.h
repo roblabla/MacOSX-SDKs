@@ -33,13 +33,6 @@
 #define	_DTRACE_H
 
 #if !defined(__APPLE__)
-/*
- * clang does not understand this pragma, and it is included in system headers
- */
-#pragma ident	"@(#)dtrace.h	1.17	07/11/12 SMI"
-#endif
-
-#if !defined(__APPLE__)
 #include <sys/dtrace.h>
 #include <stdarg.h>
 #include <stdio.h>
@@ -143,6 +136,7 @@ extern dtrace_hdl_t *dtrace_vopen(int, int, int *,
 extern int dtrace_go(dtrace_hdl_t *);
 extern int dtrace_stop(dtrace_hdl_t *);
 extern void dtrace_sleep(dtrace_hdl_t *);
+extern int dtrace_signal(dtrace_hdl_t *);
 extern void dtrace_close(dtrace_hdl_t *);
 
 extern int dtrace_errno(dtrace_hdl_t *);
@@ -155,7 +149,7 @@ extern int dtrace_getopt(dtrace_hdl_t *, const char *, dtrace_optval_t *);
 
 extern void dtrace_update(dtrace_hdl_t *);
 extern int dtrace_ctlfd(dtrace_hdl_t *);
-
+extern int dtrace_kernel_path(char*, size_t);
 /*
  * DTrace Program Interface
  *

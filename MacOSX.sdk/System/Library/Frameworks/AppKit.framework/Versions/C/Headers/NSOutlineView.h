@@ -1,7 +1,7 @@
 /*
     NSOutlineView.h
     Application Kit
-    Copyright (c) 1997-2017, Apple Inc.
+    Copyright (c) 1997-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -22,40 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NSOutlineViewDelegate, NSOutlineViewDataSource;
 
 typedef struct __OvFlags {
-#ifdef __BIG_ENDIAN__
-    unsigned int delegateWillDisplayCell:1;
-    unsigned int delegateShouldEditTableColumn:1;
-    unsigned int delegateShouldSelectItem:1;
-    unsigned int delegateShouldSelectTableColumn:1;
-    unsigned int delegateSelectionShouldChangeInOutlineView:1;
-    unsigned int delegateShouldCollapseItem:1;
-    unsigned int delegateShouldExpandItem:1;
-    unsigned int autoresizesOutlineColumn:1;
-    unsigned int autoSaveExpandItems:1;
-    unsigned int enableExpandNotifications:1;
-    unsigned int delegateWillDisplayOutlineCell:1;
-    unsigned int subclassRowForItem:1;
-    unsigned int selectionAdjustmentDisabled:1;
-    unsigned int stronglyReferencesItems:1;
-    unsigned int animateExpandAndCollapse:1;
-    unsigned int delegateHeightOfRowByItem:1;
-    unsigned int delayRowEntryFreeDisabled:1;
-    unsigned int numberOfRowsDataExpandEntered:1;
-    unsigned int validDataSourceMethods:1;
-    unsigned int reloadingData:1;
-    unsigned int dataSourceDraggingEndedAt:1;
-    unsigned int dataSourceDraggedImageMovedTo:1;
-    unsigned int delegateShouldShowOutlineCellForItem:1;
-    unsigned int delegateAutoExpandItem:1;
-    unsigned int delegateAutoCollapseItem:1;
-    unsigned int delegateShouldAutoExpandItem:1;
-    unsigned int unused2:1;
-    unsigned int _isSpringLoadingFlashing:1;
-    unsigned int dontRedisplayOnFrameChange:1;
-    unsigned int allowAutomaticAnimations:1;
-    unsigned int dataSourceObjectValueByItem:1;
-    unsigned int unused3:1;
-#else
     unsigned int unused3:1;
     unsigned int dataSourceObjectValueByItem:1;
     unsigned int allowAutomaticAnimations:1;
@@ -88,7 +54,6 @@ typedef struct __OvFlags {
     unsigned int delegateShouldSelectItem:1;
     unsigned int delegateShouldEditTableColumn:1;
     unsigned int delegateWillDisplayCell:1;
-#endif
 } _OVFlags;
 
 /* NSOutlineViewDropOnItemIndex may be used as a valid childIndex of a drop target item. In this case, the drop will happen directly on the target item.
@@ -99,30 +64,30 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 
 @interface NSOutlineView : NSTableView <NSAccessibilityOutline> {
   @private
-    NSInteger            _numberOfRows;    
-    _NSOVRowEntry       *_rowEntryTree;
-    NSMapTable          *_itemToEntryMap;
-    CFMutableArrayRef    _rowEntryArray;
-    NSInteger            _firstRowIndexDrawn;
-    id                   _autoExpandTimerItem;
-    NSTableColumn        *_outlineTableColumn;
-    BOOL                 _initedRows;
-    BOOL                  _indentationMarkerInCell;
-    NSInteger            _indentationPerLevel;
-    NSButtonCell         *_outlineCell;
-    NSRect               _trackingOutlineFrame;
-    id                   _expandingItem;
-    NSMutableArray       *_draggedItems;
-    _OVFlags             _ovFlags;
-    id                   _unused_ovLock __unused;
-    long                *_indentArray;
-    long                 _originalWidth;
-    id                   _expandSet;
-    id                   _expandSetToExpandItemsInto;
-    long                 _indentArraySize;
-    NSButtonCell        *_trackingOutlineCell;
-    NSInteger            _trackingRow;
-    id                   _ovReserved;
+    NSInteger            _numberOfRows APPKIT_IVAR;    
+    _NSOVRowEntry       *_rowEntryTree APPKIT_IVAR;
+    NSMapTable          *_itemToEntryMap APPKIT_IVAR;
+    CFMutableArrayRef    _rowEntryArray APPKIT_IVAR;
+    NSInteger            _firstRowIndexDrawn APPKIT_IVAR;
+    id                   _autoExpandTimerItem APPKIT_IVAR;
+    NSTableColumn        *_outlineTableColumn APPKIT_IVAR;
+    BOOL                 _initedRows APPKIT_IVAR;
+    BOOL                  _indentationMarkerInCell APPKIT_IVAR;
+    NSInteger            _indentationPerLevel APPKIT_IVAR;
+    NSButtonCell         *_outlineCell APPKIT_IVAR;
+    NSRect               _trackingOutlineFrame APPKIT_IVAR;
+    id                   _expandingItem APPKIT_IVAR;
+    NSMutableArray       *_draggedItems APPKIT_IVAR;
+    _OVFlags             _ovFlags APPKIT_IVAR;
+    id                   _unused_ovLock __unused APPKIT_IVAR;
+    long                *_indentArray APPKIT_IVAR;
+    long                 _originalWidth APPKIT_IVAR;
+    id                   _expandSet APPKIT_IVAR;
+    id                   _expandSetToExpandItemsInto APPKIT_IVAR;
+    long                 _indentArraySize APPKIT_IVAR;
+    NSButtonCell        *_trackingOutlineCell APPKIT_IVAR;
+    NSInteger            _trackingRow APPKIT_IVAR;
+    id                   _ovReserved APPKIT_IVAR;
 }
 
 #pragma clang diagnostic push
@@ -387,7 +352,7 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 - (NSString *)outlineView:(NSOutlineView *)outlineView toolTipForCell:(NSCell *)cell rect:(NSRectPointer)rect tableColumn:(nullable NSTableColumn *)tableColumn item:(id)item mouseLocation:(NSPoint)mouseLocation;
 
 /* Optional - Variable Row Heights
-    Implement this method to support a table with varying row heights. The height returned by this method should not include intercell spacing and must be greater than zero. Performance Considerations: For large tables in particular, you should make sure that this method is efficient. NSTableView may cache the values this method returns, but this should NOT be depended on, as all values may not be cached. To signal a row height change, call -noteHeightOfRowsWithIndexesChanged:. For a given row, the same row height should always be returned until -noteHeightOfRowsWithIndexesChanged: is called, otherwise unpredicable results will happen. NSTableView automatically invalidates its entire row height cache in -reloadData, and -noteNumberOfRowsChanged.
+    Implement this method to support a table with varying row heights. The height returned by this method should not include intercell spacing. Returning a height of -1 will default to the rowHeight of the tableView for normal rows, and the system defined height for group rows. Performance Considerations: For large tables in particular, you should make sure that this method is efficient. NSTableView may cache the values this method returns, but this should NOT be depended on, as all values may not be cached. To signal a row height change, call -noteHeightOfRowsWithIndexesChanged:. For a given row, the same row height should always be returned until -noteHeightOfRowsWithIndexesChanged: is called, otherwise unpredicable results will happen. NSTableView automatically invalidates its entire row height cache in -reloadData, and -noteNumberOfRowsChanged.
  */
 - (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item;
 
@@ -439,7 +404,7 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldCollapseItem:(id)item;
 
 /* Optional - OutlineCell (disclosure triangle button cell)
-    Implement this method to customize the "outline cell" used for the disclosure triangle button. customization of the "outline cell" used for the disclosure triangle button. For instance, you can cause the button cell to always use a "dark" triangle by changing the cell's backgroundStyle with: [cell setBackgroundStyle:NSBackgroundStyleLight]
+    Implement this method to customize the "outline cell" used for the disclosure triangle button. customization of the "outline cell" used for the disclosure triangle button.
 */
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayOutlineCell:(id)cell forTableColumn:(nullable NSTableColumn *)tableColumn item:(id)item;
 

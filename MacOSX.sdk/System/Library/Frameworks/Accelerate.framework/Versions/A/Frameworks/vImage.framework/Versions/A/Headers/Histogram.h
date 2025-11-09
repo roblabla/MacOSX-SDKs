@@ -1,15 +1,15 @@
 /*!
- *  @header Histogram.h
- *  vImage_Framework
- *
- *  See vImage/vImage.h for more on how to view the headerdoc documentation for functions declared herein.
- *
- *  @copyright Copyright (c) 2003-2016 by Apple Inc. All rights reserved.
- *
- *  @discussion Exports interfaces for collecting histograms of images, and causing images to conform to histograms.
- *
- *  @ignorefuncmacro VIMAGE_NON_NULL
- */
+*  @header Histogram.h
+*  vImage_Framework
+*
+*  See vImage/vImage.h for more on how to view the headerdoc documentation for functions declared herein.
+*
+*  @copyright Copyright (c) 2003-2016 by Apple Inc. All rights reserved.
+*
+*  @discussion Exports interfaces for collecting histograms of images, and causing images to conform to histograms.
+*
+*  @ignorefuncmacro VIMAGE_NON_NULL
+*/
 
 #ifndef VIMAGE_HISTOGRAM_H
 #define VIMAGE_HISTOGRAM_H
@@ -22,10 +22,10 @@ extern "C" {
 
 /*!
  * @functiongroup Histogram Calculation
- * @discussion  These functions build a histogram of the frequency of occurence of 
+ * @discussion  These functions build a histogram of the frequency of occurence of
  *              each channel value in the provided image.
  */
-    
+
 /*!
  * @function vImageHistogramCalculation_Planar8
  *
@@ -59,11 +59,11 @@ extern "C" {
  *   kvImageNullPointerArgument      src or histogram pointer is NULL.
  * @/textblock</pre>
  */
-vImage_Error
-vImageHistogramCalculation_Planar8( 
-    const vImage_Buffer *src, 
-    vImagePixelCount *histogram, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageHistogramCalculation_Planar8(
+                                   const vImage_Buffer *src,
+                                   vImagePixelCount *histogram,
+                                   vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageHistogramCalculation_PlanarF
@@ -107,18 +107,18 @@ vImageHistogramCalculation_Planar8(
  * @return  The following error codes may occur:
  * <pre>@textblock
  *   kvImageNoError                  Success!
- *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0 
+ *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0
  *   kvImageNullPointerArgument      src or histogram pointer is NULL.
  * @/textblock</pre>
  */
-vImage_Error 
-vImageHistogramCalculation_PlanarF( 
-    const vImage_Buffer *src, 
-    vImagePixelCount *histogram, 
-    unsigned int histogram_entries, 
-    Pixel_F minVal, 
-    Pixel_F maxVal, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageHistogramCalculation_PlanarF(
+                                   const vImage_Buffer *src,
+                                   vImagePixelCount *histogram,
+                                   unsigned int histogram_entries,
+                                   Pixel_F minVal,
+                                   Pixel_F maxVal,
+                                   vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageHistogramCalculation_ARGB8888
@@ -164,11 +164,11 @@ vImageHistogramCalculation_PlanarF(
  *   kvImageNullPointerArgument      src or histogram pointer is NULL.
  * @/textblock</pre>
  */
-vImage_Error 
-vImageHistogramCalculation_ARGB8888( 
-    const vImage_Buffer *src, 
-    vImagePixelCount *histogram[4], 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageHistogramCalculation_ARGB8888(
+                                    const vImage_Buffer *src,
+                                    vImagePixelCount *histogram[4],
+                                    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageHistogramCalculation_ARGBFFFF
@@ -224,19 +224,19 @@ vImageHistogramCalculation_ARGB8888(
  * @return The following error codes may be returned:
  * <pre>@textblock
  *   kvImageNoError                  Success!
- *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0 
+ *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0
  *   kvImageNullPointerArgument      src or any of the histogram pointers is NULL.
  * @/textblock</pre>
  *
  */
-vImage_Error 
-vImageHistogramCalculation_ARGBFFFF( 
-    const vImage_Buffer *src, 
-    vImagePixelCount *histogram[4], 
-    unsigned int histogram_entries, 
-    Pixel_F minVal, 
-    Pixel_F maxVal, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageHistogramCalculation_ARGBFFFF(
+                                    const vImage_Buffer *src,
+                                    vImagePixelCount *histogram[4],
+                                    unsigned int histogram_entries,
+                                    Pixel_F minVal,
+                                    Pixel_F maxVal,
+                                    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 
 /*!
@@ -280,11 +280,11 @@ vImageHistogramCalculation_ARGBFFFF(
  *   kvImageNullPointerArgument      src or dest pointer is NULL.
  * @/textblock</pre>
  */
-vImage_Error 
-vImageEqualization_Planar8( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageEqualization_Planar8(
+                           const vImage_Buffer *src,
+                           const vImage_Buffer *dest,
+                           vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageEqualization_PlanarF
@@ -351,21 +351,21 @@ vImageEqualization_Planar8(
  * <pre>@textblock
  *   >= 0                            Minimum temp buffer size, if kvImageGetTempBufferSize was specified.
  *   kvImageNoError                  Success!
- *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0 
+ *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0
  *   kvImageNullPointerArgument      src or histogram pointer is NULL.
  *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match.
  *   kvImageMemoryAllocationError    Can not allocate memory for the buffer.
  * @/textblock</pre>
  */
-vImage_Error
-vImageEqualization_PlanarF( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    void *tempBuffer, 
-    unsigned int histogram_entries, 
-    Pixel_F minVal,
-    Pixel_F maxVal, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageEqualization_PlanarF(
+                           const vImage_Buffer *src,
+                           const vImage_Buffer *dest,
+                           void *tempBuffer,
+                           unsigned int histogram_entries,
+                           Pixel_F minVal,
+                           Pixel_F maxVal,
+                           vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageEqualization_ARGB8888
@@ -410,11 +410,11 @@ vImageEqualization_PlanarF(
  *   kvImageNullPointerArgument      src or dest pointer is NULL.
  * @/textblock</pre>
  */
-vImage_Error 
-vImageEqualization_ARGB8888( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageEqualization_ARGB8888(
+                            const vImage_Buffer *src,
+                            const vImage_Buffer *dest,
+                            vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageEqualization_ARGBFFFF
@@ -476,7 +476,7 @@ vImageEqualization_ARGB8888(
  *                                      returned, indicating that the temp buffer
  *                                      size is 0 for this set of parameters on
  *                                      this device with this operating system at
- *                                      this time of day. 
+ *                                      this time of day.
  *
  *          kvImageLeaveAlphaUnchanged    Copy the alpha channel to the destination image unchanged
  * @/textblock</pre>
@@ -485,7 +485,7 @@ vImageEqualization_ARGB8888(
  * <pre>@textblock
  *   >= 0                            Minimum temp buffer size, if kvImageGetTempBufferSize was specified.
  *   kvImageNoError                  Success!
- *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0 
+ *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0
  *   kvImageNullPointerArgument      src or dest pointer is NULL.
  *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match.
  *   kvImageMemoryAllocationError    Can not allocate memory for the buffer.
@@ -496,17 +496,17 @@ vImageEqualization_ARGB8888(
  *    kvImageDoNotTile
  *
  * All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images)
- *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF. 
+ *    work equally well on four channel images with other channel orderings such as RGBA8888 or BGRAFFFF.
  */
-vImage_Error
-vImageEqualization_ARGBFFFF( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    void *tempBuffer, 
-    unsigned int histogram_entries,  
-    Pixel_F minVal, 
-    Pixel_F maxVal, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageEqualization_ARGBFFFF(
+                            const vImage_Buffer *src,
+                            const vImage_Buffer *dest,
+                            void *tempBuffer,
+                            unsigned int histogram_entries,
+                            Pixel_F minVal,
+                            Pixel_F maxVal,
+                            vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 
 /*!
@@ -514,7 +514,7 @@ vImageEqualization_ARGBFFFF(
  * @discussion These functions cause the source image pixel distribution to conform to the
  *             desired histogram.
  */
-    
+
 /*!
  * @function vImageHistogramSpecification_Planar8
  *
@@ -554,12 +554,12 @@ vImageEqualization_ARGBFFFF(
  *   kvImageNullPointerArgument      src, dest or desired_histogram pointer is NULL.
  * @/textblock</pre>
  */
-vImage_Error
-vImageHistogramSpecification_Planar8( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    const vImagePixelCount *desired_histogram, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageHistogramSpecification_Planar8(
+                                     const vImage_Buffer *src,
+                                     const vImage_Buffer *dest,
+                                     const vImagePixelCount *desired_histogram,
+                                     vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageHistogramSpecification_PlanarF
@@ -622,29 +622,29 @@ vImageHistogramSpecification_Planar8(
  *                                      returned, indicating that the temp buffer
  *                                      size is 0 for this set of parameters on
  *                                      this device with this operating system at
- *                                      this time of day. 
+ *                                      this time of day.
  * @/textblock</pre>
  *
  * @return The following error codes may be returned:
  * <pre>@textblock
  *   >= 0                            Minimum temp buffer size, if kvImageGetTempBufferSize was specified.
  *   kvImageNoError                  Success!
- *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0 
+ *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0
  *   kvImageNullPointerArgument      src, dest or desired_histogram pointer is NULL.
  *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match.
  *   kvImageMemoryAllocationError    Can not allocate memory for the buffer.
  * @/textblock</pre>
  */
-vImage_Error 
-vImageHistogramSpecification_PlanarF( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    void *tempBuffer, 
-    const vImagePixelCount *desired_histogram, 
-    unsigned int histogram_entries, 
-    Pixel_F minVal, 
-    Pixel_F maxVal, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2,4) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageHistogramSpecification_PlanarF(
+                                     const vImage_Buffer *src,
+                                     const vImage_Buffer *dest,
+                                     void *tempBuffer,
+                                     const vImagePixelCount *desired_histogram,
+                                     unsigned int histogram_entries,
+                                     Pixel_F minVal,
+                                     Pixel_F maxVal,
+                                     vImage_Flags flags ) VIMAGE_NON_NULL(1,2,4) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 
 /*!
@@ -679,7 +679,7 @@ vImageHistogramSpecification_PlanarF(
  *                      Each histogram should be an array with 256 elements.
  *                      This function does not allocate storage for the histograms. You must allocate
  *                      storage for each of the four histograms, create an array and populate it with
- *                      pointers to the histograms before calling the function. The contents of the 
+ *                      pointers to the histograms before calling the function. The contents of the
  *                      histograms are generally obtained from vImageHistogramCalculation_<fmt> from
  *                      another image, but need not be so.
  *
@@ -700,12 +700,12 @@ vImageHistogramSpecification_PlanarF(
  *   kvImageNullPointerArgument      src, dest or any of the desired_histogram pointers is NULL.
  * @/textblock</pre>
  */
-vImage_Error 
-vImageHistogramSpecification_ARGB8888( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    const vImagePixelCount *desired_histogram[4], 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageHistogramSpecification_ARGB8888(
+                                      const vImage_Buffer *src,
+                                      const vImage_Buffer *dest,
+                                      const vImagePixelCount *desired_histogram[4],
+                                      vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 
 /*!
@@ -741,13 +741,13 @@ vImageHistogramSpecification_ARGB8888(
  * @param dest          A pointer to a vImage buffer that references the destination pixels
  *
  * @param tempBuffer    A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer,
- *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself, 
+ *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself,
  *                      in which case you are responsible for deallocating it when you is no longer need it.
- *                      If you want to allocate the buffer yourself, see the documentation for information 
+ *                      If you want to allocate the buffer yourself, see the documentation for information
  *                      on how to determine the minimum size that you must allocate.
  *
  * @param desired_histogram A pointer to an array of four histograms, one each for
- *                      alpha, red, green, and blue (in that order).                
+ *                      alpha, red, green, and blue (in that order).
  *                      These are the desired histograms for the transformed image.
  *                      Each histogram should be an array with histogram_entries elements..
  *                      This function does not allocate storage for the histograms. You must allocate
@@ -763,7 +763,7 @@ vImageHistogramSpecification_ARGB8888(
  *                      This minimum value is applied to each of the four channels separately.
  *
  * @param maxVal        A maximum pixel value. Any pixel value greater than this will be clipped to this value
- *                      (for the purposes of histogram calculation), and assigned to the last histogram entry. 
+ *                      (for the purposes of histogram calculation), and assigned to the last histogram entry.
  *                      This maximum value is applied to each of the four channels separately.
  *
  * @param flags The following flags are allowed:
@@ -781,7 +781,7 @@ vImageHistogramSpecification_ARGB8888(
  *                                      returned, indicating that the temp buffer
  *                                      size is 0 for this set of parameters on
  *                                      this device with this operating system at
- *                                      this time of day. 
+ *                                      this time of day.
  *
  *          kvImageLeaveAlphaUnchanged  Copy the alpha channel to the destination image unchanged
  * @/textblock</pre>
@@ -790,22 +790,22 @@ vImageHistogramSpecification_ARGB8888(
  * <pre>@textblock
  *   >= 0                            Minimum temp buffer size, if kvImageGetTempBufferSize was specified.
  *   kvImageNoError                  Success!
- *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0 
+ *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0
  *   kvImageNullPointerArgument      src, dest or any of desired_histogram pointers is NULL.
  *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match.
  *   kvImageMemoryAllocationError    Can not allocate memory for the buffer.
  * @/textblock</pre>
  */
-vImage_Error
-vImageHistogramSpecification_ARGBFFFF( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    void *tempBuffer, 
-    const vImagePixelCount *desired_histogram[4], 
-    unsigned int histogram_entries, 
-    Pixel_F minVal, 
-    Pixel_F maxVal, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageHistogramSpecification_ARGBFFFF(
+                                      const vImage_Buffer *src,
+                                      const vImage_Buffer *dest,
+                                      void *tempBuffer,
+                                      const vImagePixelCount *desired_histogram[4],
+                                      unsigned int histogram_entries,
+                                      Pixel_F minVal,
+                                      Pixel_F maxVal,
+                                      vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @functiongroup Contrast Stretch
@@ -852,11 +852,11 @@ vImageHistogramSpecification_ARGBFFFF(
  *   kvImageNullPointerArgument      src or dest pointer is NULL.
  *   @/textblock</pre>
  */
-vImage_Error 
-vImageContrastStretch_Planar8( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageContrastStretch_Planar8(
+                              const vImage_Buffer *src,
+                              const vImage_Buffer *dest,
+                              vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageContrastStretch_PlanarF
@@ -882,9 +882,9 @@ vImageContrastStretch_Planar8(
  * @param dest          A pointer to a vImage buffer that references the destination pixels
  *
  * @param tempBuffer    A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer,
- *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself, 
+ *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself,
  *                      in which case you are responsible for deallocating it when you is no longer need it.
- *                      If you want to allocate the buffer yourself, see the documentation for information 
+ *                      If you want to allocate the buffer yourself, see the documentation for information
  *                      on how to determine the minimum size that you must allocate.
  *
  * @param histogram_entries The number of histogram entries, or bins to be used in histograms for this operation
@@ -912,28 +912,28 @@ vImageContrastStretch_Planar8(
  *                                      returned, indicating that the temp buffer
  *                                      size is 0 for this set of parameters on
  *                                      this device with this operating system at
- *                                      this time of day. 
+ *                                      this time of day.
  * @/textblock</pre>
  *
  * @return The following error codes may be returned
  * <pre>@textblock
  *   >= 0                            Minimum temp buffer size, if kvImageGetTempBufferSize was specified.
  *   kvImageNoError                  Success!
- *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0 
+ *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0
  *   kvImageNullPointerArgument      src or dest pointer is NULL.
  *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match.
  *   kvImageMemoryAllocationError    Can not allocate memory for the buffer.
  * @/textblock</pre>
  */
-vImage_Error 
-vImageContrastStretch_PlanarF( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    void *tempBuffer, 
-    unsigned int histogram_entries, 
-    Pixel_F minVal, 
-    Pixel_F maxVal, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageContrastStretch_PlanarF(
+                              const vImage_Buffer *src,
+                              const vImage_Buffer *dest,
+                              void *tempBuffer,
+                              unsigned int histogram_entries,
+                              Pixel_F minVal,
+                              Pixel_F maxVal,
+                              vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageContrastStretch_ARGB8888
@@ -978,11 +978,11 @@ vImageContrastStretch_PlanarF(
  *   kvImageNullPointerArgument      src or dest pointer is NULL.
  * @/textblock</pre>
  */
-vImage_Error 
-vImageContrastStretch_ARGB8888( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageContrastStretch_ARGB8888(
+                               const vImage_Buffer *src,
+                               const vImage_Buffer *dest,
+                               vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageContrastStretch_ARGBFFFF
@@ -1009,9 +1009,9 @@ vImageContrastStretch_ARGB8888(
  * @param dest          A pointer to a vImage buffer that references the destination pixels
  *
  * @param tempBuffer    A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer,
- *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself, 
+ *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself,
  *                      in which case you are responsible for deallocating it when you is no longer need it.
- *                      If you want to allocate the buffer yourself, see the documentation for information 
+ *                      If you want to allocate the buffer yourself, see the documentation for information
  *                      on how to determine the minimum size that you must allocate.
  *
  * @param histogram_entries The number of histogram entries, or bins, to be used in histograms for this operation
@@ -1021,7 +1021,7 @@ vImageContrastStretch_ARGB8888(
  *                      This minimum value is applied to each of the four channels separately.
  *
  * @param maxVal        A maximum pixel value. Any pixel value greater than this will be clipped to this value
- *                      (for the purposes of histogram calculation), and assigned to the last histogram entry. 
+ *                      (for the purposes of histogram calculation), and assigned to the last histogram entry.
  *                      This maximum value is applied to each of the four channels separately.
  *
  * @param flags         The following flags are allowed:
@@ -1039,7 +1039,7 @@ vImageContrastStretch_ARGB8888(
  *                                      returned, indicating that the temp buffer
  *                                      size is 0 for this set of parameters on
  *                                      this device with this operating system at
- *                                      this time of day. 
+ *                                      this time of day.
  *
  *          kvImageLeaveAlphaUnchanged  Copy the alpha channel to the destination image unchanged
  * @/textblock</pre>
@@ -1048,20 +1048,20 @@ vImageContrastStretch_ARGB8888(
  * <pre>@textblock
  *   >= 0                            Minimum temp buffer size, if kvImageGetTempBufferSize was specified.
  *   kvImageNoError                  Success!
- *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0 
+ *   kvImageInvalidParameter         maxVal is less than minVal or histogram_entries is 0
  *   kvImageNullPointerArgument      src or dest pointer is NULL.
  *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match.
  * @/textblock<pre>
  */
-vImage_Error 
-vImageContrastStretch_ARGBFFFF( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    void *tempBuffer, 
-    unsigned int histogram_entries, 
-    Pixel_F minVal, 
-    Pixel_F maxVal, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageContrastStretch_ARGBFFFF(
+                               const vImage_Buffer *src,
+                               const vImage_Buffer *dest,
+                               void *tempBuffer,
+                               unsigned int histogram_entries,
+                               Pixel_F minVal,
+                               Pixel_F maxVal,
+                               vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 
 /*!
@@ -1092,9 +1092,9 @@ vImageContrastStretch_ARGBFFFF(
  * @param percent_low   A percentage value.
  *                      The number of pixels that map to the lowest end of the histogram of the
  *                      transformed image should represent this percentage of the total pixels.
- *    
+ *
  * @param percent_high  A percentage value.
- *                      The number of pixels that map to the highest end of the histogram of the 
+ *                      The number of pixels that map to the highest end of the histogram of the
  *                      transformed image should represent this percentage of the total pixels.
  *
  * @param flags         The following flags are allowed:
@@ -1113,19 +1113,19 @@ vImageContrastStretch_ARGBFFFF(
  *   kvImageInvalidParameter         percent_low + percent_high is greater than 100.
  * @/textblock</pre>
  */
-vImage_Error 
-vImageEndsInContrastStretch_Planar8( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    unsigned int percent_low, 
-    unsigned int percent_high, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageEndsInContrastStretch_Planar8(
+                                    const vImage_Buffer *src,
+                                    const vImage_Buffer *dest,
+                                    unsigned int percent_low,
+                                    unsigned int percent_high,
+                                    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageEndsInContrastStretch_PlanarF
  *
  * @abstract Performs an ends-in contrast stretch operation on a PlanarF source image.
- * @discussion 
+ * @discussion
  * <pre>@textblock
  *      Compute the histogram of the input image;
  *      Generate LookUp table based on the histogram and percentage parameters
@@ -1143,17 +1143,17 @@ vImageEndsInContrastStretch_Planar8(
  * @param dest          A pointer to a vImage buffer that references the destination pixels
  *
  * @param tempBuffer    A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer,
- *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself, 
+ *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself,
  *                      in which case you are responsible for deallocating it when you is no longer need it.
- *                      If you want to allocate the buffer yourself, see the documentation for information 
+ *                      If you want to allocate the buffer yourself, see the documentation for information
  *                      on how to determine the minimum size that you must allocate.
  *
  * @param percent_low   A percentage value.
  *                      The number of pixels that map to the lowest end of the histogram of the
  *                      transformed image should represent this percentage of the total pixels.
- *    
+ *
  * @param percent_high  A percentage value.
- *                      The number of pixels that map to the highest end of the histogram of the 
+ *                      The number of pixels that map to the highest end of the histogram of the
  *                      transformed image should represent this percentage of the total pixels.
  *
  * @param histogram_entries The number of histogram entries, or bins, to be used in histograms for this operation
@@ -1163,7 +1163,7 @@ vImageEndsInContrastStretch_Planar8(
  *                      (for the purposes of histogram calculation), and assigned to the first histogram entry.
  *
  * @param maxVal        A maximum pixel value, the high end of the histogram.
- *                      Any pixel value greater than this will be clipped to this value 
+ *                      Any pixel value greater than this will be clipped to this value
  *                      (for the purposes of histogram calculation), and assigned to the last histogram entry.
  *
  * @param    flags      The following flags are allowed:
@@ -1181,7 +1181,7 @@ vImageEndsInContrastStretch_Planar8(
  *                                      returned, indicating that the temp buffer
  *                                      size is 0 for this set of parameters on
  *                                      this device with this operating system at
- *                                      this time of day. 
+ *                                      this time of day.
  * @/textblock</pre>
  *
  * @return The following error codes may be returned:
@@ -1195,17 +1195,17 @@ vImageEndsInContrastStretch_Planar8(
  *   kvImageMemoryAllocationError    Can not allocate memory for the buffer.
  * @/textblock </pre>
  */
-vImage_Error
-vImageEndsInContrastStretch_PlanarF( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    void *tempBuffer, 
-    unsigned int percent_low, 
-    unsigned int percent_high, 
-    unsigned int histogram_entries, 
-    Pixel_F minVal, 
-    Pixel_F maxVal, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageEndsInContrastStretch_PlanarF(
+                                    const vImage_Buffer *src,
+                                    const vImage_Buffer *dest,
+                                    void *tempBuffer,
+                                    unsigned int percent_low,
+                                    unsigned int percent_high,
+                                    unsigned int histogram_entries,
+                                    Pixel_F minVal,
+                                    Pixel_F maxVal,
+                                    vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
  * @function vImageEndsInContrastStretch_ARGB8888
@@ -1235,9 +1235,9 @@ vImageEndsInContrastStretch_PlanarF(
  * @param percent_low   An array of four percentage values, one each for alpha, red, green, and blue.
  *                      The number of pixels that map to the lowest end of the histogram of the
  *                      transformed image should represent this percentage of the total pixels.
- *    
+ *
  * @param percent_high  An array of four percentage values, one each for alpha, red, green, and blue.
- *                      The number of pixels that map to the highest end of the histogram of the 
+ *                      The number of pixels that map to the highest end of the histogram of the
  *                      transformed image should represent this percentage of the total pixels.
  *
  * @param flags         The following flags are allowed:
@@ -1258,13 +1258,13 @@ vImageEndsInContrastStretch_PlanarF(
  *   kvImageInvalidParameter         Some of percent_low[i]+percent_high[i] is greater than 100.
  * @/textblock</pre>
  */
-vImage_Error 
-vImageEndsInContrastStretch_ARGB8888( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    const unsigned int percent_low[4], 
-    const unsigned int percent_high[4], 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageEndsInContrastStretch_ARGB8888(
+                                     const vImage_Buffer *src,
+                                     const vImage_Buffer *dest,
+                                     const unsigned int percent_low[4],
+                                     const unsigned int percent_high[4],
+                                     vImage_Flags flags ) VIMAGE_NON_NULL(1,2,3,4) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 
 /*!
@@ -1295,17 +1295,17 @@ vImageEndsInContrastStretch_ARGB8888(
  * @param dest          A pointer to a vImage buffer that references the destination pixels
  *
  * @param tempBuffer    A pointer to a temporary buffer. If you pass NULL, the function allocates the buffer,
- *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself, 
+ *                      then deallocates it before returning. Alternatively, you can allocate the buffer yourself,
  *                      in which case you are responsible for deallocating it when you is no longer need it.
- *                      If you want to allocate the buffer yourself, see the documentation for information 
+ *                      If you want to allocate the buffer yourself, see the documentation for information
  *                      on how to determine the minimum size that you must allocate.
  *
  * @param percent_low   An array of four percentage values, one each for alpha, red, green, and blue.
  *                      The number of pixels that map to the lowest end of the histogram of the
  *                      transformed image should represent this percentage of the total pixels.
- *    
+ *
  * @param percent_high  An array of four percentage values, one each for alpha, red, green, and blue.
- *                      The number of pixels that map to the highest end of the histogram of the 
+ *                      The number of pixels that map to the highest end of the histogram of the
  *                      transformed image should represent this percentage of the total pixels.
  *
  * @param histogram_entries The number of histogram entries, or bins, to be used in histograms for this operation
@@ -1315,7 +1315,7 @@ vImageEndsInContrastStretch_ARGB8888(
  *                      This minimum value is applied to each of the four channels separately.
  *
  * @param maxVal        A maximum pixel value. Any pixel value greater than this will be clipped to this value
- *                      (for the purposes of histogram calculation), and assigned to the last histogram entry. 
+ *                      (for the purposes of histogram calculation), and assigned to the last histogram entry.
  *                      This maximum value is applied to each of the four channels separately.
  *
  * @param flags         The following flags are allowed:
@@ -1333,7 +1333,7 @@ vImageEndsInContrastStretch_ARGB8888(
  *                                      returned, indicating that the temp buffer
  *                                      size is 0 for this set of parameters on
  *                                      this device with this operating system at
- *                                      this time of day. 
+ *                                      this time of day.
  *
  *          kvImageLeaveAlphaUnchanged  Copy the alpha channel to the destination image unchanged
  * @/textblock</pre>
@@ -1341,24 +1341,24 @@ vImageEndsInContrastStretch_ARGB8888(
  * <pre>@textblock
  *   >= 0                            Minimum temp buffer size, if kvImageGetTempBufferSize was specified.
  *   kvImageNoError                  Success!
- *   kvImageInvalidParameter         maxVal is less than minVal, histogram_entries is 0 or 
+ *   kvImageInvalidParameter         maxVal is less than minVal, histogram_entries is 0 or
  *                                   some of percent_low[i]+percent_high[i] is greater than 100.
  *   kvImageNullPointerArgument      src, dest, percent_low or percent_high pointer is NULL.
  *   kvImageBufferSizeMismatch       Sizes of the src and dest images do not match.
  *   kvImageMemoryAllocationError    Can not allocate memory for the buffer.
  * @/textblock</pre>
  */
-vImage_Error 
-vImageEndsInContrastStretch_ARGBFFFF( 
-    const vImage_Buffer *src, 
-    const vImage_Buffer *dest, 
-    void *tempBuffer, 
-    const unsigned int percent_low[4], 
-    const unsigned int percent_high[4], 
-    unsigned int histogram_entries, 
-    Pixel_F minVal, 
-    Pixel_F maxVal, 
-    vImage_Flags flags ) VIMAGE_NON_NULL(1,2,4,5) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+VIMAGE_PF vImage_Error
+vImageEndsInContrastStretch_ARGBFFFF(
+                                     const vImage_Buffer *src,
+                                     const vImage_Buffer *dest,
+                                     void *tempBuffer,
+                                     const unsigned int percent_low[4],
+                                     const unsigned int percent_high[4],
+                                     unsigned int histogram_entries,
+                                     Pixel_F minVal,
+                                     Pixel_F maxVal,
+                                     vImage_Flags flags ) VIMAGE_NON_NULL(1,2,4,5) API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
 
 #ifdef __cplusplus

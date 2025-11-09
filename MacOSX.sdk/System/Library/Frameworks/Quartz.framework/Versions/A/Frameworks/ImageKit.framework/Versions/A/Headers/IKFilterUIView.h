@@ -12,7 +12,7 @@
 
 #import <AppKit/AppKit.h>
 #import <QuartzCore/QuartzCore.h>
-
+#import <ImageKit/ImageKitBase.h>
 
 @interface IKFilterUIView : NSView 
 {

@@ -1,7 +1,8 @@
 //
 //  SCNPhysicsBody.h
+//  SceneKit
 //
-//  Copyright (c) 2014-2017 Apple Inc. All rights reserved.
+//  Copyright © 2014-2018 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -28,7 +29,7 @@ typedef NS_OPTIONS(NSUInteger, SCNPhysicsCollisionCategory) {
  @class SCNPhysicsBody
  @abstract The SCNPhysicsBody class describes the physics properties (such as mass, friction...) of a node.
  */
-API_AVAILABLE(macos(10.10))
+SCN_EXPORT API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsBody : NSObject <NSCopying, NSSecureCoding>
 
 //Creates an instance of a static body with default properties.
@@ -125,6 +126,22 @@ API_AVAILABLE(macos(10.10))
 
 //Reset the physical transform to the node's model transform.
 - (void)resetTransform;
+
+// Sets a physics body at rest (or not)
+- (void)setResting:(BOOL)resting API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
+
+// Use discrete collision detection if the body’s distance traveled in one step is at or below this threshold, or continuous collision detection otherwise. Defaults to zero, indicating that continuous collision detection is always disabled.
+@property (nonatomic) CGFloat continuousCollisionDetectionThreshold API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
+
+// Specifies an offset for the center of mass of the body. Defaults to (0,0,0).
+@property(nonatomic) SCNVector3 centerOfMassOffset API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
+
+// Linear velocity threshold under which the body may be considered resting. Defaults to 0.1.
+@property (nonatomic) CGFloat linearRestingThreshold API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
+
+// Angular velocity threshold under which the body may be considered resting. Defaults to 0.1.
+@property (nonatomic) CGFloat angularRestingThreshold API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
+
 
 @end
     

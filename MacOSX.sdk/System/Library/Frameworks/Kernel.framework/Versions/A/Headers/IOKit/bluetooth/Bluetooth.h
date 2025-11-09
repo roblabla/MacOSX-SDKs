@@ -1110,6 +1110,8 @@ enum
         kBluetoothHCICommandLEReadPhy                                       = 0x0030,
         kBluetoothHCICommandLESetDefaultPhy                                 = 0x0031,
         kBluetoothHCICommandLESetPhy                                        = 0x0032,
+		kBluetoothHCICommandLEEnhancedReceiverTest							= 0x0033,
+		kBluetoothHCICommandLEEnhancedTransmitterTest						= 0x0034,
 
 	// Command Group: Logo Testing (no commands yet)
 	
@@ -1346,8 +1348,8 @@ struct BluetoothHCILinkPolicySettingsInfo
 typedef struct BluetoothHCIQualityOfServiceSetupParams	BluetoothHCIQualityOfServiceSetupParams;
 struct BluetoothHCIQualityOfServiceSetupParams
 {
-	uint8_t		flags;
-	uint8_t		serviceType;
+	uint8_t			flags;
+	uint8_t			serviceType;
 	uint32_t		tokenRate;
 	uint32_t		peakBandwidth;
 	uint32_t		latency;
@@ -1361,7 +1363,7 @@ struct BluetoothHCISetupSynchronousConnectionParams
 	uint32_t		receiveBandwidth;
 	uint16_t		maxLatency;
 	uint16_t		voiceSetting;
-	uint8_t		retransmissionEffort;
+	uint8_t			retransmissionEffort;
 	uint16_t		packetType;
 };
 		
@@ -1372,7 +1374,7 @@ struct BluetoothHCIAcceptSynchronousConnectionRequestParams
 	uint32_t		receiveBandwidth;
 	uint16_t		maxLatency;
 	uint16_t		contentFormat;
-	uint8_t		retransmissionEffort;
+	uint8_t			retransmissionEffort;
 	uint16_t		packetType;
 };
 // Add for EnhancedSetup
@@ -1383,10 +1385,10 @@ struct BluetoothHCIEnhancedSetupSynchronousConnectionParams
     uint32_t		receiveBandwidth;
     uint64_t        transmitCodingFormat;
     uint64_t        receiveCodingFormat;
-    uint8_t         transmitCodecFrameSize;
-    uint8_t         receiveCodecFrameSize;
-    uint16_t        inputBandwidth;
-    uint16_t        outputBandwidth;
+    uint16_t        transmitCodecFrameSize;
+    uint16_t        receiveCodecFrameSize;
+    uint32_t        inputBandwidth;
+    uint32_t        outputBandwidth;
     uint64_t        inputCodingFormat;
     uint64_t        outputCodingFormat;
     uint16_t        inputCodedDataSize;
@@ -1400,9 +1402,8 @@ struct BluetoothHCIEnhancedSetupSynchronousConnectionParams
     uint8_t         inputTransportUnitSize;
     uint8_t         outputTransportUnitSize;
     uint16_t		maxLatency;
-    uint16_t		voiceSetting;
-    uint8_t		retransmissionEffort;
-    uint16_t		packetType;
+	uint16_t		packetType;
+    uint8_t			retransmissionEffort;
 };
 // Add for EnhancedAccept
 typedef struct BluetoothHCIEnhancedAcceptSynchronousConnectionRequestParams	BluetoothHCIEnhancedAcceptSynchronousConnectionRequestParams;
@@ -1412,10 +1413,10 @@ struct BluetoothHCIEnhancedAcceptSynchronousConnectionRequestParams
     uint32_t		receiveBandwidth;
     uint64_t        transmitCodingFormat;
     uint64_t        receiveCodingFormat;
-    uint8_t         transmitCodecFrameSize;
-    uint8_t         receiveCodecFrameSize;
-    uint16_t        inputBandwidth;
-    uint16_t        outputBandwidth;
+    uint16_t        transmitCodecFrameSize;
+    uint16_t        receiveCodecFrameSize;
+    uint32_t        inputBandwidth;
+    uint32_t        outputBandwidth;
     uint64_t        inputCodingFormat;
     uint64_t        outputCodingFormat;
     uint16_t        inputCodedDataSize;
@@ -1429,9 +1430,8 @@ struct BluetoothHCIEnhancedAcceptSynchronousConnectionRequestParams
     uint8_t         inputTransportUnitSize;
     uint8_t         outputTransportUnitSize;
     uint16_t		maxLatency;
-    uint16_t		voiceSetting;
-    uint8_t		retransmissionEffort;
-    uint16_t		packetType;
+	uint16_t		packetType;
+    uint8_t			retransmissionEffort;
 };
 
 typedef uint8_t	BluetoothHCILoopbackMode;

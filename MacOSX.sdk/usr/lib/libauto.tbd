@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: CE2A78CC-670F-3E07-9539-822DCD2F6084', 'x86_64: A05C7900-F8C7-3E75-8D3F-909B40C19717' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 01824E49-F2EF-3FC1-ABF3-782EFDF6CA17' ]
 platform:        macosx
 install-name:    /usr/lib/libauto.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ ___auto_reference_logger, _auto_assign_weak_reference, _auto_collect, 
                        _auto_collect_multithreaded, _auto_collection_parameters, 
                        _auto_collector_disable, _auto_collector_reenable, _auto_enumerate_references, 

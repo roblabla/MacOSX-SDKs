@@ -12,7 +12,6 @@
 .Op Fl dump_userdefs
 .Op Fl flush_pboard
 .Op Fl flush_userdefs
-.Op Fl existing_languages
 language1 language2 ...
 .Sh DESCRIPTION
 .Nm
@@ -24,9 +23,7 @@ is NOT related to the pasteboard.  The pasteboard is managed by the pboard agent
 .Nm
 normally runs the first time Services are needed in any login session.  You may run it manually for debugging Services. If run without any options, pbs will scan for changed Services, cache them along with their English localization on a private pasteboard, and immediately update the Services menu in all running apps. It will also log about any invalid Services declarations in Info.plist. This is useful when developing or testing Services, because it immediately applies any changes.
 .Pp
-ServicesMenu.strings files for a localization are loaded only when an app running under that localization shows the Services menu.  You may pass pbs language codes (e.g. "fr") to cause it to load that localization immediately.  You may also pass the flag
-. Fl existing_languages
-to reload already loaded localizations.
+ServicesMenu.strings files for a localization are loaded only when an app running under that localization shows the Services menu.  You may pass pbs language codes (e.g. "fr") to cause it to load that localization immediately.
 .Pp
 .Nm
 has additional options that are useful for debugging, in particular the -dump_pboard option. The complete list of options is:

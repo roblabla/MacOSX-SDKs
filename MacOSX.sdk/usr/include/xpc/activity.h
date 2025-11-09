@@ -35,7 +35,7 @@ __BEGIN_DECLS
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
 XPC_EXPORT
-const char *XPC_ACTIVITY_INTERVAL;
+const char * const XPC_ACTIVITY_INTERVAL;
 
 /*!
  * @constant XPC_ACTIVITY_REPEATING
@@ -43,7 +43,7 @@ const char *XPC_ACTIVITY_INTERVAL;
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
 XPC_EXPORT
-const char *XPC_ACTIVITY_REPEATING;
+const char * const XPC_ACTIVITY_REPEATING;
 
 /*!
  * @constant XPC_ACTIVITY_DELAY
@@ -52,7 +52,7 @@ const char *XPC_ACTIVITY_REPEATING;
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
 XPC_EXPORT
-const char *XPC_ACTIVITY_DELAY;
+const char * const XPC_ACTIVITY_DELAY;
 
 /*!
  * @constant XPC_ACTIVITY_GRACE_PERIOD
@@ -61,7 +61,7 @@ const char *XPC_ACTIVITY_DELAY;
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
 XPC_EXPORT
-const char *XPC_ACTIVITY_GRACE_PERIOD;
+const char * const XPC_ACTIVITY_GRACE_PERIOD;
 
 
 __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
@@ -106,27 +106,41 @@ const int64_t XPC_ACTIVITY_INTERVAL_7_DAYS;
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
 XPC_EXPORT
-const char *XPC_ACTIVITY_PRIORITY;
+const char * const XPC_ACTIVITY_PRIORITY;
 
 /*!
  * @constant XPC_ACTIVITY_PRIORITY_MAINTENANCE
  * A string indicating activity is maintenance priority.
+ *
  * Maintenance priority is intended for user-invisible maintenance tasks
  * such as garbage collection or optimization.
+ *
+ * Maintenance activities are not permitted to run if the device thermal
+ * condition exceeds a nominal level or if the battery level is lower than 20%.
+ * In Low Power Mode (on supported devices), maintenance activities are not
+ * permitted to run while the device is on battery, or plugged in and the
+ * battery level is lower than 30%.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
 XPC_EXPORT
-const char *XPC_ACTIVITY_PRIORITY_MAINTENANCE;
+const char * const XPC_ACTIVITY_PRIORITY_MAINTENANCE;
 
 /*!
  * @constant XPC_ACTIVITY_PRIORITY_UTILITY
  * A string indicating activity is utility priority.
+ *
  * Utility priority is intended for user-visible tasks such as fetching data
  * from the network, copying files, or importing data.
+ *
+ * Utility activities are not permitted to run if the device thermal condition
+ * exceeds a moderate level or if the battery level is less than 10%.  In Low
+ * Power Mode (on supported devices) when on battery power, utility activities
+ * are only permitted when they are close to their deadline (90% of their time
+ * window has elapsed).
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
 XPC_EXPORT
-const char *XPC_ACTIVITY_PRIORITY_UTILITY;
+const char * const XPC_ACTIVITY_PRIORITY_UTILITY;
 
 /*!
  * @constant XPC_ACTIVITY_ALLOW_BATTERY
@@ -136,7 +150,7 @@ const char *XPC_ACTIVITY_PRIORITY_UTILITY;
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
 XPC_EXPORT
-const char *XPC_ACTIVITY_ALLOW_BATTERY;
+const char * const XPC_ACTIVITY_ALLOW_BATTERY;
 
 /*!
  * @constant XPC_ACTIVITY_REQUIRE_SCREEN_SLEEP
@@ -148,7 +162,7 @@ const char *XPC_ACTIVITY_ALLOW_BATTERY;
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
 XPC_EXPORT
-const char *XPC_ACTIVITY_REQUIRE_SCREEN_SLEEP; // bool
+const char * const XPC_ACTIVITY_REQUIRE_SCREEN_SLEEP; // bool
 
 /*!
  * @constant XPC_ACTIVITY_REQUIRE_BATTERY_LEVEL
@@ -159,7 +173,7 @@ const char *XPC_ACTIVITY_REQUIRE_SCREEN_SLEEP; // bool
 __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_9, __IPHONE_7_0, __IPHONE_7_0,
 	"REQUIRE_BATTERY_LEVEL is not implemented")
 XPC_EXPORT
-const char *XPC_ACTIVITY_REQUIRE_BATTERY_LEVEL; // int (%)
+const char * const XPC_ACTIVITY_REQUIRE_BATTERY_LEVEL; // int (%)
 
 /*!
  * @constant XPC_ACTIVITY_REQUIRE_HDD_SPINNING
@@ -170,7 +184,7 @@ const char *XPC_ACTIVITY_REQUIRE_BATTERY_LEVEL; // int (%)
 __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_9, __IPHONE_7_0, __IPHONE_7_0,
 	"REQUIRE_HDD_SPINNING is not implemented")
 XPC_EXPORT
-const char *XPC_ACTIVITY_REQUIRE_HDD_SPINNING; // bool
+const char * const XPC_ACTIVITY_REQUIRE_HDD_SPINNING; // bool
 
 /*!
  * @define XPC_TYPE_ACTIVITY

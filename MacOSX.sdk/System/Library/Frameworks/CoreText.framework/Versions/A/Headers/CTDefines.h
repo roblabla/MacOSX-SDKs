@@ -2,7 +2,7 @@
  *  CTDefines.h
  *  CoreText
  *
- *  Copyright (c) 2010-2017 Apple Inc. All rights reserved.
+ *  Copyright (c) 2010-2018 Apple Inc. All rights reserved.
  *
  */
 
@@ -23,11 +23,11 @@
 # define CT_AVAILABLE(...)
 # define CT_UNAVAILABLE(...)
 # define CT_DEPRECATED(...)
-#else /* defined(CT_BUILDING_CoreText) */
+#else /* defined(CT_BUILDING_CoreText) || TARGET_OS_WIN32 */
 # define CT_AVAILABLE(...) API_AVAILABLE(__VA_ARGS__)
 # define CT_UNAVAILABLE(...) API_UNAVAILABLE(__VA_ARGS__)
 # define CT_DEPRECATED(...) API_DEPRECATED(__VA_ARGS__)
-#endif /* defined(CT_BUILDING_CoreText) */
+#endif /* defined(CT_BUILDING_CoreText) || TARGET_OS_WIN32 */
 
 #if __has_feature(enumerator_attributes) && __has_attribute(availability)
 # define CT_ENUM_DEPRECATED(...) CT_DEPRECATED(__VA_ARGS__)
@@ -55,7 +55,7 @@
 #endif /*  __has_attribute(objc_bridge) */
 
 #if TARGET_OS_WIN32
-#define __nullable
+#define _Nullable
 #define _Nonnull
 
 #define CF_BRIDGED_TYPE(T)

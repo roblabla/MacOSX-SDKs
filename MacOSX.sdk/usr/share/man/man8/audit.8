@@ -62,7 +62,12 @@ audit control file will be removed.
 .It Fl s
 Specifies that the audit system should [re]synchronize its
 configuration from the audit control file.
-A new log file will be created.
+A new log file will be created. The attributable
+.Va flags
+parameter from the
+.Xr audit_control 5
+configuration file is set at login time and is not synchronized with this
+flag.
 .It Fl t
 Specifies that the audit system should terminate.
 Log files are closed

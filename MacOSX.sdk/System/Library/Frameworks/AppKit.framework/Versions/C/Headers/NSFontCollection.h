@@ -1,7 +1,7 @@
 /*
 	NSFontCollection.h
 	Application Kit
-	Copyright (c) 2010-2017, Apple Inc.
+	Copyright (c) 2010-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -35,7 +35,7 @@ typedef NS_OPTIONS(NSUInteger, NSFontCollectionVisibility) {
 /*
  Matching options
  */
-typedef NSString * NSFontCollectionMatchingOptionKey NS_STRING_ENUM;
+typedef NSString * NSFontCollectionMatchingOptionKey NS_TYPED_ENUM;
 // NSNumber BOOL specifying whether disabled fonts should be included in the list of matching descriptors (YES) or not (NO). When unspecified, CoreText assumes NO. This option is intended only for font management applications. This option will make descriptor matching slower.
 APPKIT_EXTERN NSFontCollectionMatchingOptionKey const NSFontCollectionIncludeDisabledFontsOption NS_AVAILABLE_MAC(10_7);
 
@@ -46,7 +46,7 @@ APPKIT_EXTERN NSFontCollectionMatchingOptionKey const NSFontCollectionRemoveDupl
 APPKIT_EXTERN NSFontCollectionMatchingOptionKey const NSFontCollectionDisallowAutoActivationOption NS_AVAILABLE_MAC(10_7);
 
 
-typedef NSString * NSFontCollectionName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSFontCollectionName NS_TYPED_EXTENSIBLE_ENUM;
 
 /*
  NSFontCollection - immutable font list
@@ -160,14 +160,14 @@ NS_CLASS_AVAILABLE(10_7, NA)
 APPKIT_EXTERN NSNotificationName const NSFontCollectionDidChangeNotification NS_AVAILABLE_MAC(10_7);
 
 // Notification user info dictionary keys
-typedef NSString * NSFontCollectionUserInfoKey NS_STRING_ENUM;
+typedef NSString * NSFontCollectionUserInfoKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSFontCollectionUserInfoKey const NSFontCollectionActionKey NS_AVAILABLE_MAC(10_7);			// NSString: action taken
 APPKIT_EXTERN NSFontCollectionUserInfoKey const NSFontCollectionNameKey NS_AVAILABLE_MAC(10_7);			// NSString: current name of affected collection
 APPKIT_EXTERN NSFontCollectionUserInfoKey const NSFontCollectionOldNameKey NS_AVAILABLE_MAC(10_7);		// NSString: for NSFontCollectionWasRenamed, previous name of affected collection
 APPKIT_EXTERN NSFontCollectionUserInfoKey const NSFontCollectionVisibilityKey NS_AVAILABLE_MAC(10_7);		// NSNumber: visibility of affected collection
 
 // Values for NSFontCollectionAction
-typedef NSString * NSFontCollectionActionTypeKey NS_STRING_ENUM;
+typedef NSString * NSFontCollectionActionTypeKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSFontCollectionActionTypeKey const NSFontCollectionWasShown NS_AVAILABLE_MAC(10_7);
 APPKIT_EXTERN NSFontCollectionActionTypeKey const NSFontCollectionWasHidden NS_AVAILABLE_MAC(10_7);
 APPKIT_EXTERN NSFontCollectionActionTypeKey const NSFontCollectionWasRenamed NS_AVAILABLE_MAC(10_7);

@@ -1,6 +1,6 @@
 /*
         NSStringDrawing.h
-        Copyright (c) 1994-2017, Apple Inc.  All rights reserved.
+        Copyright (c) 1994-2018, Apple Inc.  All rights reserved.
 */
 
 #import <Foundation/NSString.h>
@@ -16,7 +16,7 @@ NS_CLASS_AVAILABLE(10_11, 6_0) @interface NSStringDrawingContext : NSObject
 #if !__OBJC2__
 {
 @private
-    id impl;
+    id impl APPKIT_IVAR;
 }
 #endif
 

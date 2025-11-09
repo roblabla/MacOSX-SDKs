@@ -1,7 +1,7 @@
 /*
         NSTrackingArea.h
         Application Kit
-        Copyright (c) 2006-2017, Apple Inc.
+        Copyright (c) 2006-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSObjCRuntime.h>
 #import <Foundation/NSGeometry.h>
+#import <AppKit/AppKitDefines.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -40,12 +41,12 @@ NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSTrackingArea : NSObject <NSCopying, NSCoding>
 {
 @private
-    NSRect _rect;
-    __weak id _owner;
-    NSDictionary * _userInfo;
-    NSTrackingAreaOptions _options;
-    NSInteger _privateFlags;
-    id _reserved;
+    NSRect _rect APPKIT_IVAR;
+    __weak id _owner APPKIT_IVAR;
+    NSDictionary * _userInfo APPKIT_IVAR;
+    NSTrackingAreaOptions _options APPKIT_IVAR;
+    NSInteger _privateFlags APPKIT_IVAR;
+    id _reserved APPKIT_IVAR;
 }
 - (instancetype)initWithRect:(NSRect)rect options:(NSTrackingAreaOptions)options owner:(nullable id)owner userInfo:(nullable NSDictionary<id, id> *)userInfo;
 @property (readonly) NSRect rect;

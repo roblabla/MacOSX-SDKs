@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2000-2002, 2004, 2005, 2008, 2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2002, 2004, 2005, 2008, 2015, 2018 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
  * compliance with the License. Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this
  * file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -17,14 +17,14 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_LICENSE_HEADER_END@
  */
 
 #ifndef _SCDYNAMICSTOREKEY_H
 #define _SCDYNAMICSTOREKEY_H
 
-#include <Availability.h>
+#include <os/availability.h>
 #include <sys/cdefs.h>
 #include <CoreFoundation/CoreFoundation.h>
 
@@ -64,7 +64,7 @@ SCDynamicStoreKeyCreate				(
 						CFAllocatorRef	__nullable	allocator,
 						CFStringRef			fmt,
 						...
-						)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+						)		API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreKeyCreateNetworkGlobalEntity
@@ -89,7 +89,7 @@ SCDynamicStoreKeyCreateNetworkGlobalEntity	(
 						CFAllocatorRef	__nullable	allocator,
 						CFStringRef			domain,
 						CFStringRef			entity
-						)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+						)		API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreKeyCreateNetworkInterface
@@ -111,7 +111,7 @@ CFStringRef
 SCDynamicStoreKeyCreateNetworkInterface		(
 						CFAllocatorRef	__nullable	allocator,
 						CFStringRef			domain
-						)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+						)		API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreKeyCreateNetworkInterfaceEntity
@@ -139,7 +139,7 @@ SCDynamicStoreKeyCreateNetworkInterfaceEntity	(
 						CFStringRef			domain,
 						CFStringRef			ifname,
 						CFStringRef	__nullable	entity
-						)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+						)		API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreKeyCreateNetworkServiceEntity
@@ -168,7 +168,7 @@ SCDynamicStoreKeyCreateNetworkServiceEntity	(
 						CFStringRef			domain,
 						CFStringRef			serviceID,
 						CFStringRef	__nullable	entity
-						)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+						)		API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreKeyCreateComputerName
@@ -186,7 +186,7 @@ SCDynamicStoreKeyCreateNetworkServiceEntity	(
 CFStringRef
 SCDynamicStoreKeyCreateComputerName		(
 						CFAllocatorRef	__nullable	allocator
-						)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+						)		API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreKeyCreateConsoleUser
@@ -203,7 +203,7 @@ SCDynamicStoreKeyCreateComputerName		(
 CFStringRef
 SCDynamicStoreKeyCreateConsoleUser		(
 						CFAllocatorRef	__nullable	allocator
-						)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+						)		API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreKeyCreateHostNames
@@ -221,7 +221,7 @@ SCDynamicStoreKeyCreateConsoleUser		(
 CFStringRef
 SCDynamicStoreKeyCreateHostNames		(
 						CFAllocatorRef	__nullable	allocator
-						)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
+						)		API_AVAILABLE(macos(10.2)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreKeyCreateLocation
@@ -239,7 +239,7 @@ SCDynamicStoreKeyCreateHostNames		(
 CFStringRef
 SCDynamicStoreKeyCreateLocation			(
 						CFAllocatorRef	__nullable	allocator
-						)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
+						)		API_AVAILABLE(macos(10.2)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreKeyCreateProxies
@@ -257,7 +257,7 @@ SCDynamicStoreKeyCreateLocation			(
 CFStringRef
 SCDynamicStoreKeyCreateProxies			(
 						CFAllocatorRef	__nullable	allocator
-						)		__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+						)		API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 __END_DECLS
 

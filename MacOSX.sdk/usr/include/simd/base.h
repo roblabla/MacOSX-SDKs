@@ -59,11 +59,7 @@
 #   endif
 #  else /* !__has_include(<Availability.h>) */
 #   define SIMD_LIBRARY_VERSION 3
-#   define __OSX_AVAILABLE_STARTING(osx,ios) /* Nothing */
-#   define __OSX_AVAILABLE(version)          /* Nothing */
-#   define __IOS_AVAILABLE(version)          /* Nothing */
-#   define __WATCHOS_AVAILABLE(version)      /* Nothing */
-#   define __TVOS_AVAILABLE(version)         /* Nothing */
+#   define __API_AVAILABLE(...) /* Nothing */
 #  endif
 
 /*  The simd types interoperate with the native simd intrinsic types for each

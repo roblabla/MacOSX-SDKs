@@ -1,7 +1,7 @@
 /* 
     NSMediaLibraryBrowserController.h
     Application Kit
-    Copyright (c) 2012-2017, Apple Inc.
+    Copyright (c) 2012-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -18,6 +18,7 @@
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -41,7 +42,7 @@ NS_CLASS_AVAILABLE(10_9, NA)
 @interface NSMediaLibraryBrowserController : NSObject
 {
 @private
-    id _browserProxy;
+    id _browserProxy APPKIT_IVAR;
 }
 
 @property (getter=isVisible) BOOL visible;

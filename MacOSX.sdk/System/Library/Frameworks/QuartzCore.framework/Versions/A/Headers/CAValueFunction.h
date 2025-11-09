@@ -1,14 +1,16 @@
 /* CoreAnimation - CAValueFunction.h
 
-   Copyright (c) 2008-2017, Apple Inc.
+   Copyright (c) 2008-2018, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CABase.h>
 #import <Foundation/NSObject.h>
 
+typedef NSString * CAValueFunctionName NS_STRING_ENUM;
+
 NS_ASSUME_NONNULL_BEGIN
 
-CA_CLASS_AVAILABLE (10.6, 3.0, 9.0, 2.0)
+API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0))
 @interface CAValueFunction : NSObject <NSSecureCoding>
 {
 @protected
@@ -16,9 +18,9 @@ CA_CLASS_AVAILABLE (10.6, 3.0, 9.0, 2.0)
   void *_impl;
 }
 
-+ (nullable instancetype)functionWithName:(NSString *)name;
++ (nullable instancetype)functionWithName:(CAValueFunctionName)name;
 
-@property(readonly) NSString *name;
+@property(readonly) CAValueFunctionName name;
 
 @end
 
@@ -28,45 +30,45 @@ CA_CLASS_AVAILABLE (10.6, 3.0, 9.0, 2.0)
  * value in radians, and construct a 4x4 matrix representing the
  * corresponding rotation matrix. */
 
-CA_EXTERN NSString * const kCAValueFunctionRotateX
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAValueFunctionRotateY
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAValueFunctionRotateZ
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
+CA_EXTERN CAValueFunctionName const kCAValueFunctionRotateX
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAValueFunctionName const kCAValueFunctionRotateY
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAValueFunctionName const kCAValueFunctionRotateZ
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 /* The `scale' function takes three input values and constructs a
  * 4x4 matrix representing the corresponding scale matrix. */
 
-CA_EXTERN NSString * const kCAValueFunctionScale
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
+CA_EXTERN CAValueFunctionName const kCAValueFunctionScale
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 /* The `scaleX', `scaleY', `scaleZ' functions take a single input value
  * and construct a 4x4 matrix representing the corresponding scaling
  * matrix. */
 
-CA_EXTERN NSString * const kCAValueFunctionScaleX
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAValueFunctionScaleY
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAValueFunctionScaleZ
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
+CA_EXTERN CAValueFunctionName const kCAValueFunctionScaleX
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAValueFunctionName const kCAValueFunctionScaleY
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAValueFunctionName const kCAValueFunctionScaleZ
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 /* The `translate' function takes three input values and constructs a
  * 4x4 matrix representing the corresponding scale matrix. */
 
-CA_EXTERN NSString * const kCAValueFunctionTranslate
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
+CA_EXTERN CAValueFunctionName const kCAValueFunctionTranslate
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 /* The `translateX', `translateY', `translateZ' functions take a single
  * input value and construct a 4x4 matrix representing the corresponding
  * translation matrix. */
 
-CA_EXTERN NSString * const kCAValueFunctionTranslateX
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAValueFunctionTranslateY
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAValueFunctionTranslateZ
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
+CA_EXTERN CAValueFunctionName const kCAValueFunctionTranslateX
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAValueFunctionName const kCAValueFunctionTranslateY
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAValueFunctionName const kCAValueFunctionTranslateZ
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END

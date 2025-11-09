@@ -25,8 +25,8 @@
 
 #import <WebKit/DOMHTMLElement.h>
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMHTMLPreElement : DOMHTMLElement
 @property int width;
-@property BOOL wrap NS_AVAILABLE_MAC(10_5);
+@property BOOL wrap WEBKIT_AVAILABLE_MAC(10_5);
 @end

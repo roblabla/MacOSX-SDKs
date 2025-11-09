@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
                 recurrence.
 */
 NS_CLASS_AVAILABLE(10_8, 4_0)
-@interface EKRecurrenceDayOfWeek : NSObject <NSCopying> {
+@interface EKRecurrenceDayOfWeek : NSObject <NSCopying, NSSecureCoding> {
 }
 
 /*!

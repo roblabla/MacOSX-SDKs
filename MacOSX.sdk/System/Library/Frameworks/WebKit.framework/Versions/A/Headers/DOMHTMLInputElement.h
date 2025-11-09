@@ -30,19 +30,19 @@
 @class NSString;
 @class NSURL;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMHTMLInputElement : DOMHTMLElement
 @property (copy) NSString *accept;
 @property (copy) NSString *alt;
-@property BOOL autofocus NS_AVAILABLE_MAC(10_6);
+@property BOOL autofocus WEBKIT_AVAILABLE_MAC(10_6);
 @property BOOL defaultChecked;
 @property BOOL checked;
 @property BOOL disabled;
 @property (readonly, strong) DOMHTMLFormElement *form;
-@property (strong) DOMFileList *files NS_AVAILABLE_MAC(10_6);
-@property BOOL indeterminate NS_AVAILABLE_MAC(10_5);
+@property (strong) DOMFileList *files WEBKIT_AVAILABLE_MAC(10_6);
+@property BOOL indeterminate WEBKIT_AVAILABLE_MAC(10_5);
 @property int maxLength;
-@property BOOL multiple NS_AVAILABLE_MAC(10_6);
+@property BOOL multiple WEBKIT_AVAILABLE_MAC(10_6);
 @property (copy) NSString *name;
 @property BOOL readOnly;
 @property (copy) NSString *size;
@@ -50,16 +50,16 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (copy) NSString *type;
 @property (copy) NSString *defaultValue;
 @property (copy) NSString *value;
-@property (readonly) BOOL willValidate NS_AVAILABLE_MAC(10_6);
-@property int selectionStart NS_AVAILABLE_MAC(10_5);
-@property int selectionEnd NS_AVAILABLE_MAC(10_5);
+@property (readonly) BOOL willValidate WEBKIT_AVAILABLE_MAC(10_6);
+@property int selectionStart WEBKIT_AVAILABLE_MAC(10_5);
+@property int selectionEnd WEBKIT_AVAILABLE_MAC(10_5);
 @property (copy) NSString *align;
 @property (copy) NSString *useMap;
-@property (copy) NSString *accessKey NS_DEPRECATED_MAC(10_4, 10_8);
-@property (readonly, copy) NSString *altDisplayString NS_AVAILABLE_MAC(10_5);
-@property (readonly, copy) NSURL *absoluteImageURL NS_AVAILABLE_MAC(10_5);
+@property (copy) NSString *accessKey WEBKIT_DEPRECATED_MAC(10_4, 10_8);
+@property (readonly, copy) NSString *altDisplayString WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSURL *absoluteImageURL WEBKIT_AVAILABLE_MAC(10_5);
 
 - (void)select;
-- (void)setSelectionRange:(int)start end:(int)end NS_AVAILABLE_MAC(10_5);
+- (void)setSelectionRange:(int)start end:(int)end WEBKIT_AVAILABLE_MAC(10_5);
 - (void)click;
 @end

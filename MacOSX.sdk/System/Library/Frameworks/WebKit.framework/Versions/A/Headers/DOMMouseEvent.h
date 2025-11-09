@@ -30,7 +30,7 @@
 @class NSString;
 @protocol DOMEventTarget;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMMouseEvent : DOMUIEvent
 @property (readonly) int screenX;
 @property (readonly) int screenY;
@@ -42,16 +42,16 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (readonly) BOOL metaKey;
 @property (readonly) unsigned short button;
 @property (readonly, strong) id <DOMEventTarget> relatedTarget;
-@property (readonly) int offsetX NS_AVAILABLE_MAC(10_5);
-@property (readonly) int offsetY NS_AVAILABLE_MAC(10_5);
-@property (readonly) int x NS_AVAILABLE_MAC(10_5);
-@property (readonly) int y NS_AVAILABLE_MAC(10_5);
-@property (readonly, strong) DOMNode *fromElement NS_AVAILABLE_MAC(10_5);
-@property (readonly, strong) DOMNode *toElement NS_AVAILABLE_MAC(10_5);
+@property (readonly) int offsetX WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int offsetY WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int x WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int y WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly, strong) DOMNode *fromElement WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly, strong) DOMNode *toElement WEBKIT_AVAILABLE_MAC(10_5);
 
-- (void)initMouseEvent:(NSString *)type canBubble:(BOOL)canBubble cancelable:(BOOL)cancelable view:(DOMAbstractView *)view detail:(int)detail screenX:(int)screenX screenY:(int)screenY clientX:(int)clientX clientY:(int)clientY ctrlKey:(BOOL)ctrlKey altKey:(BOOL)altKey shiftKey:(BOOL)shiftKey metaKey:(BOOL)metaKey button:(unsigned short)button relatedTarget:(id <DOMEventTarget>)relatedTarget NS_AVAILABLE_MAC(10_5);
+- (void)initMouseEvent:(NSString *)type canBubble:(BOOL)canBubble cancelable:(BOOL)cancelable view:(DOMAbstractView *)view detail:(int)detail screenX:(int)screenX screenY:(int)screenY clientX:(int)clientX clientY:(int)clientY ctrlKey:(BOOL)ctrlKey altKey:(BOOL)altKey shiftKey:(BOOL)shiftKey metaKey:(BOOL)metaKey button:(unsigned short)button relatedTarget:(id <DOMEventTarget>)relatedTarget WEBKIT_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMMouseEvent (DOMMouseEventDeprecated)
-- (void)initMouseEvent:(NSString *)type :(BOOL)canBubble :(BOOL)cancelable :(DOMAbstractView *)view :(int)detail :(int)screenX :(int)screenY :(int)clientX :(int)clientY :(BOOL)ctrlKey :(BOOL)altKey :(BOOL)shiftKey :(BOOL)metaKey :(unsigned short)button :(id <DOMEventTarget>)relatedTarget NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)initMouseEvent:(NSString *)type :(BOOL)canBubble :(BOOL)cancelable :(DOMAbstractView *)view :(int)detail :(int)screenX :(int)screenY :(int)clientX :(int)clientY :(BOOL)ctrlKey :(BOOL)altKey :(BOOL)shiftKey :(BOOL)metaKey :(unsigned short)button :(id <DOMEventTarget>)relatedTarget WEBKIT_DEPRECATED_MAC(10_4, 10_5);
 @end

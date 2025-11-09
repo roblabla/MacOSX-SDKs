@@ -72,7 +72,10 @@ provide usage and version information, respectively.
 .Ar source
 and
 .Ar target
-can be /dev entries or volume mountpoints. 
+can be /dev entries or volume mountpoints. For more information on restoring to or from
+APFS filesystems, see the
+.Sy RESTORING WITH APFS FILESYSTEMS
+section below.
 If restoring a multicast disk image to a file,
 .Ar file
 can be a path to a local file or directory. If the specified path is a file,
@@ -108,7 +111,13 @@ cannot erase blockcopy the root filesystem as the source, unless it happened to 
 read-only).
 .It Fl -target 
 can be a /dev entry, or volume mountpoint. Must be unmountable in order for an erase block-copy
-to occur.
+to occur.  If
+.Ar source
+specifies an image of an APFS container, then
+.Ar target
+can specify a mounted APFS volume.  See the
+.Sy RESTORING WITH APFS FILESYSTEMS
+section below for details.
 .It Fl -file
 when performing a multicast restore, 
 .Fl -file
@@ -181,7 +190,9 @@ disallowed.  Catalog fragmentation is undesirable and in most cases it is
 better to fix the problem on the source (e.g. by running fsck_hfs -r on it),
 but
 .Fl -allowfragmentedcatalog
-is provided for situations where such a change is impractical.
+is provided for situations where such a change is impractical.  This option
+only makes sense if the source specifes an HFS+ filesystem variant.  It is
+otherwise ignored.
 .It Fl -corestorageconvert
 Cause
 .Ar target
@@ -200,6 +211,31 @@ is already a Core Storage LV, then this option has no effect.
 .It Fl -SHA256
 forces the restore to use the SHA-256 hash in the image during verification.
 If the image doesn't contain a SHA-256 hash, then an error will be raised.
+.It Fl -sourcevolumename
+tells
+.Nm
+which volume in the
+.Ar source
+container to invert when doing an APFS restore.  It is an error if more than
+one volume has the specified name.  You can see the volume names and UUIDs by running
+.Nm
+with the
+.Sy info
+verb.  See the section
+.Sy RESTORING WITH APFS FILESYSTEMS
+below for when this option is necessary.
+.It Fl -sourcevolumeUUID
+tells
+.Nm
+which volume in the
+.Ar source
+container to invert when doing an APFS restore.  You can see the volume names and UUIDs by running
+.Nm
+with the
+.Sy info
+verb.  See the section
+.Sy RESTORING WITH APFS FILESYSTEMS
+below for when this option is necessary.
 .El
 .It Sy restoreexact
 performs the same operation as
@@ -309,6 +345,86 @@ writes its output as an XML-formatted plist, suitable for parsing by
 another program.
 .El
 .El
+.Sh RESTORING WITH APFS FILESYSTEMS
+Individual APFS volumes can not be restored directly, because their device nodes don't allow I/O from a
+standard process.  However,
+.Nm
+can restore entire APFS containers, including all volumes.  Or it can restore valid system configurations, which
+can get the effect of restoring a single system.  This requires understanding what is meant by a
+.Sy valid system.
+.Pp
+In order for an APFS volume to be bootable, it must contain a properly installed macOS system.  It must also be
+part of an APFS container which also has two special volumes in it: a Preboot volume and a Recovery volume.  A
+container may have arbitrarily many system volumes in it, but it must have only one Preboot volume and one
+Recovery volume, each with the corresponding APFS volume role set (see
+.Ns Xr diskutil 1
+for information on roles).  The Preboot and Recovery volumes contain information which is tied to each system
+volume in the container.  So for a system volume to be bootable, that information needs to be set up in the Preboot
+and Recovery volumes.  A system which is part of a container that has these two special volumes, and for which the
+requisite information is set up in those volumes, will be referred to here as a
+.Sy valid system.
+.Pp
+If the
+.Ar source
+of a restore is an APFS image (i.e. an image which contains an APFS container), then
+.Nm
+does different things depending on how
+.Ar target
+was specified:
+.Bl -tag -width "1234"
+.It Volume Restore
+If the
+.Ar target
+is an individual volume within an existing APFS container, then
+.Nm
+will block restore the APFS container to a file within that volume, after which
+it will invert the volume within the restored container, erasing the previous contents of the
+.Ar target
+volume and replacing them with the source volume contents.  If the
+.Ar source
+container only has a
+single non-special volume (i.e. not Preboot or Recovery), then that is the volume which will be
+inverted.  If the
+.Ar source
+container has more than one non-special volume, then either the
+.Fl -sourcevolumename
+or
+.Fl -sourcevolumeUUID
+option must be present and must specify the volume to invert.
+Additionally, if the volume being inverted is a
+.Sy valid system
+(as defined above), then the relevant contents of both the Preboot and Recovery volumes will be
+copied from the
+.Ar source
+to the
+.Ar target ,
+creating those volumes on the
+.Ar target
+if necessary.
+.It Volume Restore with Creation
+If the
+.Ar target
+is a synthesized APFS whole disk or Apple_APFS partition, and the
+.Fl -erase
+option is not present, then
+.Nm
+will create a new volume in the given container, after which it will do a volume restore to that new volume,
+as with the previous section.  All other volumes in the container are preserved.
+.It Volume Restore with Erase
+If the
+.Ar target
+is a synthesized APFS whole disk or any disk partition, and the
+.Fl -erase
+option is present, then
+.Nm
+will erase the existing partition, create a new APFS container and a new volume in it, after which
+it will do a volume restore to that new volume,
+as with the previous section.
+.El
+.Pp
+See the
+.Sy EXAMPLES
+section below for some command lines that show these operations.
 .Sh BUFFERING
 The following options control how
 .Nm
@@ -390,6 +506,44 @@ attempts to start a restore. The server will continue to multicast the image unt
 .D1 sudo asr restore --source asr://<hostname> --file <file> --erase
 Will receive the multicast stream from <hostname> and save it to a file. If <file> is a directory, the image of the streamed
 disk image will be used the save the file. --erase causes any existing file with the same name to be overwritten.
+.Pp
+.Em Restoring a single APFS volume
+.D1 sudo asr restore -s <APFS image> -t /Volumes/MyAPFSVolume --erase
+In this case the contents of MyAPFSVolume will be replaced by the contents of the source container's single APFS volume,
+possibly including any associated data for the Preboot and Recovery volumes, if the source is a
+.Sy valid system .
+If the source has more than one non-special volume, this is an error.  No other volumes in the target will be affected.
+.Pp
+.Em Restoring one of many APFS volumes
+.D1 sudo asr restore -s <APFS image> --sourcevolumename SourceVolume -t /Volumes/MyAPFSVolume --erase
+This tells
+.Nm
+to select the volume named "SourceVolume" from the given APFS image.  If there is no volume with that name, or if
+there are more than one with that name, it is an error.  Use the
+.Sy info
+verb to see the volume names and UUIDs for an image.  No other volumes in the target will be affected.
+.Pp
+.Em Creating a new APFS volume on the fly
+.D1 sudo asr restore -s <APFS image> --sourcevolumename SourceVolume -t /dev/disk2
+Here we get the same effect as the last example, except that
+.Nm
+will create a new volume on the target APFS container disk, given by /dev/disk2, and use that newly created volume as
+the target.  Any volumes which already existed in the container will still be there after the restore.
+.Pp
+.Em Overwriting the existing container
+.D1 sudo asr restore -s <APFS image> --sourcevolumename SourceVolume -t /dev/disk2 --erase
+Like the last example, we restore to a new volume on the target APFS container disk.  However
+in this case we are erasing the target, so any volumes which already existed are destroyed.
+.Pp
+.Em Looking at an image's volume names/UUIDs
+.D1 asr info -s <APFS image>
+Assuming this image has been previously scanned (using the
+.Sy imagescan
+verb), this will display the volumes' names and UUIDs so they can be used with the
+.Fl -sourcevolumename
+or
+.Fl -sourcevolumeUUID
+options.
 .Sh HOW TO USE ASR
 .Nm
 requires a properly created disk image for most efficient operation.

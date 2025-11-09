@@ -21,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @class AUAudioUnitBusArray;
 @class AUAudioUnitBus;
 @class AUAudioUnitPreset;
+@class MIDICIProfile;
+@class MIDICIProfileState;
+typedef uint8_t MIDIChannelNumber;
+
 @protocol AUAudioUnitFactory;
 
 // =================================================================================================
@@ -225,6 +229,20 @@ typedef OSStatus (^AUMIDIOutputEventBlock)(AUEventSampleTime eventSampleTime, ui
 */
 typedef BOOL (^AUHostMusicalContextBlock)(double * __nullable currentTempo, double * __nullable timeSignatureNumerator, NSInteger * __nullable timeSignatureDenominator, double * __nullable currentBeatPosition, NSInteger * __nullable sampleOffsetToNextBeat, double * __nullable currentMeasureDownbeatPosition);
 
+/*!	@typedef	AUMIDICIProfileChangedBlock
+	@brief		Block by which hosts are informed of an audio unit having enabled or disabled a
+				MIDI-CI profile.
+	@param cable
+		The virtual MIDI cable on which the event occured.
+	@param channel
+		The MIDI channel on which the profile was enabled or disabled.
+	@param profile
+		The MIDI-CI profile.
+	@param enabled
+		YES if the profile was enabled, NO if the profile was disabled.
+*/
+typedef void (^AUMIDICIProfileChangedBlock)(uint8_t cable, MIDIChannelNumber channel, MIDICIProfile *profile, BOOL enabled);
+
 /*!	@enum		AUHostTransportState
 	@brief		Flags describing the host's transport state.
 	@constant	AUHostTransportStateChanged
@@ -301,7 +319,7 @@ typedef BOOL (^AUHostTransportStateBlock)(AUHostTransportStateFlags * __nullable
 		with a v3 audio unit, all major pieces of functionality are bridged between the
 		two API's. This header describes, for each v3 method or property, the v2 equivalent.
 */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUAudioUnit : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -826,6 +844,66 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 */
 @property (NS_NONATOMIC_IOSONLY, copy, nullable) NSArray<NSNumber *> *channelMap API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
+/*!	@method		profileStateForCable:channel:
+	@brief		Given a MIDI cable and channel number, return the supported MIDI-CI Profiles.
+	@param cable
+		The virtual MIDI cable for which the profiles are requested.
+	@param channel
+		The MIDI channel for which the profiles are requested.
+	@return
+		A MIDICIProfileState object containing all the supported MIDI-CI profiles for this channel
+		on this cable.
+*/
+- (MIDICIProfileState *)profileStateForCable:(uint8_t)cable channel:(MIDIChannelNumber)channel API_AVAILABLE(macos(10.14), ios(12.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+
+/*!	@method		enableProfile:profile:cable:onChannel:error
+	@brief		Enable a MIDI-CI Profile on the specified cable/channel.
+	@param	profile
+		The MIDI-CI profile to be enabled.
+	@param cable
+		The virtual MIDI cable.
+	@param channel
+		The MIDI channel.
+	@param outError
+		Returned in the event of failure.
+	@return
+		YES for success. NO in the event of a failure, in which case the error is returned
+		in outError.
+*/
+- (BOOL)enableProfile:(MIDICIProfile *)profile
+                cable:(uint8_t)cable
+            onChannel:(MIDIChannelNumber)channel
+                error:(NSError **)outError API_AVAILABLE(macos(10.14), ios(12.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+
+/*!	@method		disableProfile:profile:cable:onChannel:error
+	@brief		Disable a MIDI-CI Profile on the specified cable/channel.
+	@param	profile
+		The MIDI-CI profile to be disabled.
+	@param cable
+		The virtual MIDI cable.
+	@param channel
+		The MIDI channel.
+	@param outError
+		Returned in the event of failure.
+	@return
+		YES for success. NO in the event of a failure, in which case the error is returned
+		in outError.
+*/
+- (BOOL)disableProfile:(MIDICIProfile *)profile
+                 cable:(uint8_t)cable
+             onChannel:(MIDIChannelNumber)channel
+                 error:(NSError **)outError API_AVAILABLE(macos(10.14), ios(12.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+
+/*!	@property	profileChangedBlock
+	@brief		A block called when a device notifies that a MIDI-CI profile has been enabled or 
+				disabled.
+	@discussion
+		Since enabling / disabling MIDI-CI profiles is an asynchronous operation, the host can set 
+		this block and the audio unit is expected to call it every time the state of a MIDI-CI 
+		profile has changed.
+*/
+@property (nonatomic, nullable) AUMIDICIProfileChangedBlock profileChangedBlock API_AVAILABLE(macos(10.14), ios(12.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+
 @end
 
 // =================================================================================================
@@ -957,7 +1035,7 @@ typedef void (^AUInputHandler)(AudioUnitRenderActionFlags *actionFlags, const Au
 		
 		The bus array is bridged to the v2 property kAudioUnitProperty_ElementCount.
 */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUAudioUnitBusArray : NSObject <NSFastEnumeration>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -1015,7 +1093,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 /*!	@class	AUAudioUnitBus
 	@brief	An input or output connection point on an audio unit.
 */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUAudioUnitBus : NSObject
 
 /*!	@property	format
@@ -1140,7 +1218,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 	@brief	A collection of parameter settings provided by the audio unit implementor, producing a
 			useful sound or starting point.
 */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUAudioUnitPreset : NSObject <NSSecureCoding>
 
 /*!	@property	number

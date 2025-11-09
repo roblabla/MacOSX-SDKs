@@ -1,23 +1,23 @@
 /*!
- *  @header vImage_Utilities.h
- *  vImage
- *
- *  Created by Ian Ollmann on 6/7/12.
- *
- *  See vImage/vImage.h for more on how to view the headerdoc documentation for functions declared herein.
- *
- *  @copyright Copyright (c) 2012-2016 by Apple Inc. All rights reserved.
- *
- *  @discussion These interfaces provide methods to help exchange data between CoreGraphics and vImage
- *              and provides conversion routines to convert nearly any image format to nearly any 
- *              other image format.  They are intended to streamline vImage adoption, and make it possible
- *              for your application's imaging pipeline to gracefully handle a wide diversity of image formats.
- *              When conversions are necessary, they are vectorized and multithreaded to minimize cost in
- *              time and energy.
- *
- *  @ignorefuncmacro VIMAGE_NON_NULL
- *  @ignorefuncmacro VIMAGE_CHOICE_ENUM
- */
+*  @header vImage_Utilities.h
+*  vImage
+*
+*  Created by Ian Ollmann on 6/7/12.
+*
+*  See vImage/vImage.h for more on how to view the headerdoc documentation for functions declared herein.
+*
+*  @copyright Copyright (c) 2012-2016 by Apple Inc. All rights reserved.
+*
+*  @discussion These interfaces provide methods to help exchange data between CoreGraphics and vImage
+*              and provides conversion routines to convert nearly any image format to nearly any
+*              other image format.  They are intended to streamline vImage adoption, and make it possible
+*              for your application's imaging pipeline to gracefully handle a wide diversity of image formats.
+*              When conversions are necessary, they are vectorized and multithreaded to minimize cost in
+*              time and energy.
+*
+*  @ignorefuncmacro VIMAGE_NON_NULL
+*  @ignorefuncmacro VIMAGE_CHOICE_ENUM
+*/
 
 #ifndef vImage_Utilities_h
 #define vImage_Utilities_h
@@ -29,23 +29,27 @@
 extern "C" {
 #endif
 
+#ifndef VIMAGE_PF
+    #define VIMAGE_PF __attribute__ ((visibility ("default")))
+#endif
+    
 /*!
  * @const kvImageDecodeArray_16Q12Format
  * @abstract Predefined decode array constant to use with 16Q12 formatted data
  * @discussion 16Q12 data is a signed 16-bit fixed point integer. The format is implicitly divided by 2**12
- *             to give a range of [-8,8)  (SHRT_MIN/4096,SHRT_MAX/4096). The type is present to allow 
+ *             to give a range of [-8,8)  (SHRT_MIN/4096,SHRT_MAX/4096). The type is present to allow
  *             8-bit content to be converted into other colorspaces and operated on without undue
  *             loss of precision or loss of color gamut due to clamping. This constant is "magic" in the
  *             sense that it is identified by address. Copying the values here will cause a CG format to
- *             be instead interpreted as a _unsigned_ 16 bit format. 
+ *             be instead interpreted as a _unsigned_ 16 bit format.
  *
  *             16Q12 pixels do not follow CG image format conventions in two respects. The format is signed.
- *             The alpha channel is subject to the decode array transform too, meaning that 0 is transparent 
- *             and 4096 opaque. Consequently, ALL buffers that use this format must be tagged with the 
+ *             The alpha channel is subject to the decode array transform too, meaning that 0 is transparent
+ *             and 4096 opaque. Consequently, ALL buffers that use this format must be tagged with the
  *             kvImageDecodeArray_16Q12Format decode array.
  *
  */
-extern const CGFloat * kvImageDecodeArray_16Q12Format;
+extern VIMAGE_PF const CGFloat * kvImageDecodeArray_16Q12Format;
 
 /*!
  * @struct vImage_CGImageFormat
@@ -145,29 +149,29 @@ extern const CGFloat * kvImageDecodeArray_16Q12Format;
 typedef struct vImage_CGImageFormat
 {
     uint32_t                bitsPerComponent;
-    uint32_t                bitsPerPixel;       
-    CGColorSpaceRef         colorSpace;         
-    CGBitmapInfo            bitmapInfo;         
-    uint32_t                version;            
+    uint32_t                bitsPerPixel;
+    CGColorSpaceRef         colorSpace;
+    CGBitmapInfo            bitmapInfo;
+    uint32_t                version;
     const CGFloat *         decode;
     CGColorRenderingIntent  renderingIntent;
 }vImage_CGImageFormat;
 
 
-    
+
 /*!
  *  @functiongroup vImage_Buffer utilities
  *  @discussion Convenience methods for working with vImage_Buffers.
  */
-    
- /*!
+
+/*!
  *  @function vImageBuffer_Init
  *  @abstract Convenience function to allocate a vImage_Buffer of desired size
  *  @discussion This function is a convenience method to help initialize a vImage_Buffer struct with a buffer sized
- *  and aligned for best performance. It will initialize the height, width and rowBytes fields, and allocate 
- *  the pixel storage for you. You are responsible for releasing the memory pointed to by buf->data back to 
- *  the system when you are done with it using free(). If no such allocation is desired, pass  
- *  kvImageNoAllocate in the flags to cause buf->data to be set to NULL and the preferred alignment 
+ *  and aligned for best performance. It will initialize the height, width and rowBytes fields, and allocate
+ *  the pixel storage for you. You are responsible for releasing the memory pointed to by buf->data back to
+ *  the system when you are done with it using free(). If no such allocation is desired, pass
+ *  kvImageNoAllocate in the flags to cause buf->data to be set to NULL and the preferred alignment
  *  to be returned from the left hand side of the function.
  *
  *  Here is an example of typical usage:
@@ -201,23 +205,23 @@ typedef struct vImage_CGImageFormat
  *  @param pixelBits        The number of bits in a pixel of image data. If the image is in a planar format
  *                          then this is the number of bits per color component. If pixelBits is not divisible
  *                          by 8, then vImage will pad the scanline out to a multiple of a byte so that
- *                          two scanlines can not share the same byte and all scanlines start at the start of 
+ *                          two scanlines can not share the same byte and all scanlines start at the start of
  *                          a byte.
  *
  *  @param flags            Must be from the following list:
  *
  *  <pre>@textblock
  *                          kvImageNoAllocate -- on return buf->data is initialized to NULL. A preferred
- *                              alignment suitable for use with posix_memalign is returned out the left hand 
- *                              side of the function and buf->rowBytes will be set to the preferred rowBytes. 
- *                              If the left hand side return is negative, it is an error code, not a size. 
- *                          
- *                              If the kvImageNoAllocate flag is not passed, then on return buf->data will point 
- *                              to a newly allocated buffer with preferred alignment and rowBytes. An appropriate 
+ *                              alignment suitable for use with posix_memalign is returned out the left hand
+ *                              side of the function and buf->rowBytes will be set to the preferred rowBytes.
+ *                              If the left hand side return is negative, it is an error code, not a size.
+ *
+ *                              If the kvImageNoAllocate flag is not passed, then on return buf->data will point
+ *                              to a newly allocated buffer with preferred alignment and rowBytes. An appropriate
  *                              error code will be returned from the left hand side.
  *
  *                          kvImagePrintDiagnosticsToConsole -- directs the function to print diagnostic information
- *                              to the console in the event of failure. 
+ *                              to the console in the event of failure.
  *  @/textblock</pre>
  *
  *  @return  One of the following error codes will be returned out the left hand side.
@@ -233,17 +237,17 @@ typedef struct vImage_CGImageFormat
  *      kvImageUnknownFlagsBit          flags was not from the list above
  *  @/textblock</pre>
  */
-    
-vImage_Error  vImageBuffer_Init( vImage_Buffer *         buf,
-                                 vImagePixelCount        height,
-                                 vImagePixelCount        width,
-                                 uint32_t                pixelBits,
-                                 vImage_Flags            flags)
-                                 VIMAGE_NON_NULL(1)
-                                  __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
-    
 
-    
+VIMAGE_PF vImage_Error  vImageBuffer_Init( vImage_Buffer *         buf,
+                                          vImagePixelCount        height,
+                                          vImagePixelCount        width,
+                                          uint32_t                pixelBits,
+                                          vImage_Flags            flags)
+VIMAGE_NON_NULL(1)
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
+
+
+
 /*!
  *  @function vImageBuffer_GetSize
  *  @abstract Returns size of a vImage_Buffer as a CGSize.
@@ -265,34 +269,34 @@ vImage_Error  vImageBuffer_Init( vImage_Buffer *         buf,
  *  @return  The largest CGSize that will fit in the buffer. In typical usage, this
  *           is equal to the size of the buffer.
  */
-CGSize vImageBuffer_GetSize( const vImage_Buffer *buf )
+VIMAGE_PF CGSize vImageBuffer_GetSize( const vImage_Buffer *buf )
 VIMAGE_NON_NULL(1)
-__OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
 
-    
 
-    
-    
+
+
+
 /*!
  * @functiongroup vImage_CGImageFormat functions
  * @discussion    A vImage_CGImageFormat describes a pixel format compatible with CoreGraphics.
  *                Most access to the vImage_CGImageFormat struct is done directly through memberwise
  *                access, but a few tasks are complicated enough to deserve their own library function.
  */
-    
+
 /*!
  * @function vImageCGImageFormat_GetComponentCount
  * @abstract Calculate the number of channels (color + alpha) for a given image format
  * @discussion  The number of channels may not be safely calculated as bitsPerPixel / bitsPerComponent.
- *              Use this routine instead. 
+ *              Use this routine instead.
  * @param    format     A pointer to a valid vImage_CGImageFormat.  If format->colorspace is NULL,
  *                      the format is assumed to belong to the sRGB colorspace.
  *
  * @return   Returns the number of color + alpha channels in the image.
  */
-uint32_t vImageCGImageFormat_GetComponentCount( const vImage_CGImageFormat *format )
-    VIMAGE_NON_NULL(1)
-    __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+VIMAGE_PF uint32_t vImageCGImageFormat_GetComponentCount( const vImage_CGImageFormat *format )
+VIMAGE_NON_NULL(1)
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
 
 /*!
  * @function vImageCGImageFormat_IsEqual
@@ -306,21 +310,21 @@ uint32_t vImageCGImageFormat_GetComponentCount( const vImage_CGImageFormat *form
  *
  * @return  nonzero if two vImage_CGImageFormats are the same
  */
-Boolean vImageCGImageFormat_IsEqual( const vImage_CGImageFormat *f1,  const vImage_CGImageFormat *f2 )
-    __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+VIMAGE_PF Boolean vImageCGImageFormat_IsEqual( const vImage_CGImageFormat *f1,  const vImage_CGImageFormat *f2 )
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
 
-    
+
 /*!
  *  @functiongroup vImage_Buffer CGImageRef interconversion
  *  @discussion High level routines to convert from vImage_Buffer to CGImageRef and back.
  */
-    
+
 /*!
  * @function vImageBuffer_InitWithCGImage
  * @abstract Initialize a vImage_Buffer struct with the contents of a CGImageRef
  * @discussion This function will initialize a vImage_Buffer struct with an image from a CGImageRef.
  * By default, a new region of memory to hold the image data will be allocated by this function.  You may
- * optionally allocate the memory region yourself by passing in the kvImageNoAllocate flag. 
+ * optionally allocate the memory region yourself by passing in the kvImageNoAllocate flag.
  *
  * You may release the CGImageRef and format->colorspace upon successful return of this function.
  *
@@ -354,20 +358,20 @@ Boolean vImageCGImageFormat_IsEqual( const vImage_CGImageFormat *f1,  const vIma
  *              allocated piece of memory will be used to hold the image. You are responsible
  *              for releasing the memory pointed to by buf->data back to the system using free().
  *
- *                  If you want to allocate the buf->data and initialize rowBytes yourself, then you may pass 
- *                  kvImageNoAllocate in the flags parameter. This will cause the buf->data and rowBytes values  
- *                  passed into the function to be used directly without modification.  You may find vImageBuffer_Init,  
+ *                  If you want to allocate the buf->data and initialize rowBytes yourself, then you may pass
+ *                  kvImageNoAllocate in the flags parameter. This will cause the buf->data and rowBytes values
+ *                  passed into the function to be used directly without modification.  You may find vImageBuffer_Init,
  *                  vImageCGImageFormat_GetPixelBits, CGImageGetWidth and CGImageGetHeight helpful in sizing your buffer.
  *
- * @param format  A pointer to a valid vImage_CGImageFormat specifying the desired image format associated with the 
+ * @param format  A pointer to a valid vImage_CGImageFormat specifying the desired image format associated with the
  *                  output buf. If format->colorspace is NULL, sRGB will be used.
  *
  * @param backgroundColor If the CGImageRef encodes an alpha (or mask) and the output format does not have alpha then the
  *                  result will be flattened against a background color. See vImageConverter_CreateWithCGImageFormat
  *                  and functions like vImageFlatten_ARGB8888ToRGB888 for more on flattening. The background color here is
- *                  a series of values of range [0,1] interpreted according to the colorspace passed in format. Example: If 
+ *                  a series of values of range [0,1] interpreted according to the colorspace passed in format. Example: If
  *                  the format encodes for a AGBR 8-bit image (kCGImageAlphaLast, kCGBitmapByteOrder32Little), then this would be
- *                  {red, green, blue}, the canonical ordering for a RGB colorspace, as an array of three CGFloats.  
+ *                  {red, green, blue}, the canonical ordering for a RGB colorspace, as an array of three CGFloats.
  *                  If NULL is passed, an array full of zeros is used. The backgroundColor must have at least as many
  *                  CGFloats in it as the colorspace has color channels. See CGColorSpaceGetNumberOfComponents.
  *
@@ -385,22 +389,22 @@ Boolean vImageCGImageFormat_IsEqual( const vImage_CGImageFormat *f1,  const vIma
  *                  kvImageDoNoTile         It is possible that vImage will have to do an image format conversion from the
  *                                          image native format to the desired format. This will turn off multithreading for
  *                                          that step and any other vImage work that is multithreaded. Since any such conversions
- *                                          are likely happening outside your tiling engine, use of this flag here is 
- *                                          probably counterproductive. In rare cases, it might be valuable as a method to 
- *                                          leave unoccupied some cores for other tasks, if you have other multithreaded time 
+ *                                          are likely happening outside your tiling engine, use of this flag here is
+ *                                          probably counterproductive. In rare cases, it might be valuable as a method to
+ *                                          leave unoccupied some cores for other tasks, if you have other multithreaded time
  *                                          sensitive tasks running. Likewise, if you are converting multiple images concurrently,
  *                                          it might be helpful to avoid oversubscribing the system.
  *  @/textblock </pre>
  *
  *
  *  @return If the call succeeds, kvImageNoError is returned and the memory region pointed to by buf will be initialized to
- *      describe a valid repesentation of the CGImageRef. 
+ *      describe a valid repesentation of the CGImageRef.
  *
  *      If the call fails, then one of the following error codes will be returned and buf->data will be set to NULL.
  *
  *  <pre>@textblock
  *          kvImageUnknownFlagsBit              flags must be kvImageNoFlags or kvImageNoAllocate
- *          kvImageMemoryAllocationError        Not enough memory to allocate buf->data 
+ *          kvImageMemoryAllocationError        Not enough memory to allocate buf->data
  *          kvImageInvalidParameter             format->bitmapInfo has unknown bits set
  *          kvImageInvalidParameter             format->version is not 0
  *          kvImageInvalidParameter             format->decode is not NULL
@@ -411,46 +415,46 @@ Boolean vImageCGImageFormat_IsEqual( const vImage_CGImageFormat *f1,  const vIma
  *                                              not produce image output.
  *          kvImageNullPointerArgument          format may not be NULL
  *          kvImageNullPointerArgument          image may not be NULL
- *          kvImageInternalError                Something unexpected went wrong. Please file a bug. 
+ *          kvImageInternalError                Something unexpected went wrong. Please file a bug.
  *  @/textblock </pre>
  *
  */
-    
-vImage_Error vImageBuffer_InitWithCGImage(  vImage_Buffer        *  buf,            
-                                            vImage_CGImageFormat *  format,         
-                                            const CGFloat        *  backgroundColor,
-                                            CGImageRef              image,          
-                                            vImage_Flags            flags  )
-                                            VIMAGE_NON_NULL(1,2,4)
-                                            __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );  
+
+VIMAGE_PF vImage_Error vImageBuffer_InitWithCGImage(  vImage_Buffer        *  buf,
+                                                    vImage_CGImageFormat *  format,
+                                                    const CGFloat        *  backgroundColor,
+                                                    CGImageRef              image,
+                                                    vImage_Flags            flags  )
+VIMAGE_NON_NULL(1,2,4)
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
 
 
-        
+
 /*!
  * @function vImageCreateCGImageFromBuffer
  * @abstract Create a CGImageRef from a vImage_Buffer.
  * @discussion This function creates a CGImageRef using the image data in a vImage_Buffer. The CGImageRef has a retain count of 1.
  * By default, a copy of the image data is made. This allows the function to convert to a CG-friendly format as necessary
- * and allows you to continue to use the vImage_Buffer without causing problems for the CGImageRef. 
+ * and allows you to continue to use the vImage_Buffer without causing problems for the CGImageRef.
  *
  *  <pre>@textblock
  * No copy mode
  * ------------
- * When the kvImageNoAllocate flag is passed, then "no-copy" operation is said to occur. Ownership of the memory region  
- * pointed to by buf->data is transferred to the CGImageRef and it becomes private to and owned by that object and will 
- * be used without modification. The memory region pointed to by buf->data will be destroyed when the CGImageRef is 
+ * When the kvImageNoAllocate flag is passed, then "no-copy" operation is said to occur. Ownership of the memory region
+ * pointed to by buf->data is transferred to the CGImageRef and it becomes private to and owned by that object and will
+ * be used without modification. The memory region pointed to by buf->data will be destroyed when the CGImageRef is
  * destroyed. Caution: CGImageRefs are defined to be immutable once created. Behavior is undefined if you create
  * a CGImageRef then modify the pixels in its backing store.
  *
- * No-copy mode can be a little fussy about formats. When a format is rejected, kvImageInvalidImageFormat will be returned. 
- * Formats that are likely to succeed are 8-bit unsigned, 16-bit unsigned and 32-bit floating-point. The image should be 
- * kCGImageAlphaNone, kCGImageAlphaLast, kCGImageAlphaPremultipliedLast or kCGImageAlphaNoneSkipLast, and decode = NULL. 
- * The image should be in host endian mode. This is kCGBitmapByteOrderDefault for 8-bit per component images, and or larger 
- * types, the endianness is given by the endianness of the host system and the size is given by the size of the pixel 
- * (bitsPerComponent < 8) or channel (bitsPerComponent > 8). For example RGB565 data should be kCGBitmapByteOrder16Little 
- * and 32-bit floating point data should be kCGBitmapByteOrder32Little on little endian processors. 
+ * No-copy mode can be a little fussy about formats. When a format is rejected, kvImageInvalidImageFormat will be returned.
+ * Formats that are likely to succeed are 8-bit unsigned, 16-bit unsigned and 32-bit floating-point. The image should be
+ * kCGImageAlphaNone, kCGImageAlphaLast, kCGImageAlphaPremultipliedLast or kCGImageAlphaNoneSkipLast, and decode = NULL.
+ * The image should be in host endian mode. This is kCGBitmapByteOrderDefault for 8-bit per component images, and or larger
+ * types, the endianness is given by the endianness of the host system and the size is given by the size of the pixel
+ * (bitsPerComponent < 8) or channel (bitsPerComponent > 8). For example RGB565 data should be kCGBitmapByteOrder16Little
+ * and 32-bit floating point data should be kCGBitmapByteOrder32Little on little endian processors.
  *
- * It is recommended that if no-copy mode fails, that you try again without the kvImageNoAllocate flag. The call probably 
+ * It is recommended that if no-copy mode fails, that you try again without the kvImageNoAllocate flag. The call probably
  * will succeed.
  *  @/textblock </pre>
  *
@@ -473,23 +477,23 @@ vImage_Error vImageBuffer_InitWithCGImage(  vImage_Buffer        *  buf,
  *                  in which case sRGB will be used.  The colorspace is retained as needed by the new CGImage.
  *
  *  @param callback        In no-copy mode, this callback is called to destroy the buf->data when the CGImageRef no longer needs it.
- *                  If NULL is passed for the callback, then free() will be used to destroy buf->data.  userData will be 
+ *                  If NULL is passed for the callback, then free() will be used to destroy buf->data.  userData will be
  *                  passed to the callback function as the userData parameter and buf->data passed as the buf_data parameter.
  *
- *                  This parameter has no effect if kvImageNoAllocate is not in flags. 
+ *                  This parameter has no effect if kvImageNoAllocate is not in flags.
  *
- *                  The callback may be called at any time from any thread. It is possible for it to be called before 
- *                  vImageCreateCGImageFromBuffer returns.  
+ *                  The callback may be called at any time from any thread. It is possible for it to be called before
+ *                  vImageCreateCGImageFromBuffer returns.
  *
  *                  The callback will not be called if the returned CGImageRef is NULL.
  *
  *  @param userData        The value to pass to the callbacks userData parameter. If callback is NULL or kvImageNoAllocate
- *                  is passed in flags, this value is ignored.  
- *                  
+ *                  is passed in flags, this value is ignored.
+ *
  *  @param flags           The following flags are allowed:
  *  <pre>@textblock
  *                  kvImageNoAllocate                   Causes vImageCreateCGImageFromBuffer to run in no-copy mode.
- *                                                      Ownership of the memory pointed to by buf->data is transferred 
+ *                                                      Ownership of the memory pointed to by buf->data is transferred
  *                                                      to the CGImageRef.  You'll need to set up a callback and userData
  *                                                      to manage releasing the memory back to the system when the CGImage
  *                                                      is done with it.
@@ -503,7 +507,7 @@ vImage_Error vImageBuffer_InitWithCGImage(  vImage_Buffer        *  buf,
  *
  *                  kvImageDoNotTile                    Disables multithreading in any conversions that need to be done.
  *                                                      Since it seems likely any such conversions will not be running in
- *                                                      the context of your tiling engine (if you wrote one) in this case, 
+ *                                                      the context of your tiling engine (if you wrote one) in this case,
  *                                                      this flag is probably counterproductive in this context. Conversions
  *                                                      can happen later, after this call returns, when the image is drawn.
  *  @/textblock </pre>
@@ -512,8 +516,8 @@ vImage_Error vImageBuffer_InitWithCGImage(  vImage_Buffer        *  buf,
  *                  is another way to get error information.
  *
  * @return  On success, the returned CGImageRef will be non-NULL. If error is not NULL, kvImageNoError will be written there.
- *      On failure, NULL will be returned, and if error is not NULL, a more informative error code will be written there. 
- *          
+ *      On failure, NULL will be returned, and if error is not NULL, a more informative error code will be written there.
+ *
  *  <pre>@textblock
  *  Error Values:
  *      kvImageUnknownFlagsBit              flags was not from the list described in the flags parameter above
@@ -526,18 +530,18 @@ vImage_Error vImageBuffer_InitWithCGImage(  vImage_Buffer        *  buf,
  *  @/textblock </pre>
  *
  */
-    
-CGImageRef vImageCreateCGImageFromBuffer( const vImage_Buffer *buf,
-                                          const vImage_CGImageFormat *format,
-                                          void (*callback)(void *userData, void *buf_data),
-                                          void *userData,
-                                          vImage_Flags flags,
-                                          vImage_Error *error )
-                                          VIMAGE_NON_NULL(1,2)
-                                          __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );     
-    
 
-    
+VIMAGE_PF CGImageRef vImageCreateCGImageFromBuffer( const vImage_Buffer *buf,
+                                                   const vImage_CGImageFormat *format,
+                                                   void (*callback)(void *userData, void *buf_data),
+                                                   void *userData,
+                                                   vImage_Flags flags,
+                                                   vImage_Error *error )
+VIMAGE_NON_NULL(1,2)
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
+
+
+
 /*!
  * @functiongroup vImageConverterRef methods
  * @discussion A vImageConverterRef describes a particular pixel format to pixel format conversion. These functions
@@ -548,20 +552,20 @@ CGImageRef vImageCreateCGImageFromBuffer( const vImage_Buffer *buf,
 /*!
  *  @function vImageConverter_Retain
  *  @abstract Retain a vImageConverterRef
- *  @discussion You should retain a vImageConverterRef when you receive it from elsewhere (that is, you did not 
- *              create or copy it) and you want it to persist. If you retain a vImageConverterRef you are responsible 
+ *  @discussion You should retain a vImageConverterRef when you receive it from elsewhere (that is, you did not
+ *              create or copy it) and you want it to persist. If you retain a vImageConverterRef you are responsible
  *              for releasing it (see Memory Management Programming Guide for Core Foundation).
  *
  *  Like all of vImage, this interface is thread safe and may be called reentrantly.
  *
  *  @param converter  The vImageConverter to retain. If NULL, then nothing happens.
  */
-void vImageConverter_Retain( vImageConverterRef converter ) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+VIMAGE_PF void vImageConverter_Retain( vImageConverterRef converter ) API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
 
 /*!
  *  @function vImageConverter_Release
  *  @abstract Release a vImageConverterRef
- *  @discussion If the retain count of a vImageConverterRef becomes zero, the memory allocated to the 
+ *  @discussion If the retain count of a vImageConverterRef becomes zero, the memory allocated to the
  *              object is deallocated and the object is destroyed. If you create or explicitly
  *              retain (see the vImageConverter_Retain function) a vImageConverterRef, you are responsible for
  *              releasing it when you no longer need it (see Memory Management Programming Guide for Core Foundation).
@@ -570,7 +574,7 @@ void vImageConverter_Retain( vImageConverterRef converter ) __OSX_AVAILABLE_STAR
  *
  *  @param converter  The vImageConverter to release. If NULL, then nothing happens.
  */
-void vImageConverter_Release( vImageConverterRef converter ) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+VIMAGE_PF void vImageConverter_Release( vImageConverterRef converter ) API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
 
 
 /*!
@@ -578,7 +582,7 @@ void vImageConverter_Release( vImageConverterRef converter ) __OSX_AVAILABLE_STA
  *  @abstract Create a vImageConverterRef to convert from one vImage_CGImageFormat to another
  *  @discussion vImageConverter_CreateWithCGImageFormat creates a vImageConverter to convert between
  *              image formats describable with a vImage_CGImageFormat.  The vImageConverter is intended
- *              to be used (and reused, possibly reentrantly) with vImageConvert_AnyToAny() to convert 
+ *              to be used (and reused, possibly reentrantly) with vImageConvert_AnyToAny() to convert
  *              images from one format to another.
  *
  *  <pre>@textblock
@@ -623,21 +627,21 @@ void vImageConverter_Release( vImageConverterRef converter ) __OSX_AVAILABLE_STA
  *                      It will be released when the vImageConverter is destroyed.
  *
  *  @param  backgroundColor Points to an array of floats to be used as a background color if one is needed. The
- *                      backgroundColor range is assumed to be [0,1]. The channel ordering and number of color 
- *                      channels must match the natural order of the destination colorSpace (e.g. RGB or CMYK). 
- *                      The backgroundColor may be NULL if no background color is needed. 
+ *                      backgroundColor range is assumed to be [0,1]. The channel ordering and number of color
+ *                      channels must match the natural order of the destination colorSpace (e.g. RGB or CMYK).
+ *                      The backgroundColor may be NULL if no background color is needed.
  *
- *                      A background color is used when the image is converted from an alpha-containing format 
- *                      to an alpha-none format, in which case the alpha is removed by compositing against the 
- *                      opaque background color pointed to by this parameter. If the image is instead converted 
- *                      from one alpha containing format to another, then the image will be premultiplied or 
- *                      unpremultiplied as necessary and no background color is necessary. (For unpremultiplication, 
+ *                      A background color is used when the image is converted from an alpha-containing format
+ *                      to an alpha-none format, in which case the alpha is removed by compositing against the
+ *                      opaque background color pointed to by this parameter. If the image is instead converted
+ *                      from one alpha containing format to another, then the image will be premultiplied or
+ *                      unpremultiplied as necessary and no background color is necessary. (For unpremultiplication,
  *                      the result color value for pixels with alpha 0 is 0.)  Likewise, when converting between
  *                      alpha-none formats, a background color is not used. In the case of kCGImageAlphaNone ->
  *                      kCGImageAlphaNoneSkipFirst/Last, the vacant alpha channel is filled in with 1.0. If NULL
- *                      is passed here, then 0 will be used for the color channels. 
+ *                      is passed here, then 0 will be used for the color channels.
  *
- *                      The vImageConverter will contain a copy of the data passed in this field.  
+ *                      The vImageConverter will contain a copy of the data passed in this field.
  *
  *  @param flags        Any of the following flags are allowed:
  *
@@ -650,8 +654,8 @@ void vImageConverter_Release( vImageConverterRef converter ) __OSX_AVAILABLE_STA
  *                                               whether it was or not.
  *  @/textblock </pre>
  *
- *  @param error        May be NULL.  If not NULL, then a vImage_Error is returned at the address pointed to by error. 
- *                      The vImage_Error will be less than 0 if an error condition occurred. Checking the vImageConverter 
+ *  @param error        May be NULL.  If not NULL, then a vImage_Error is returned at the address pointed to by error.
+ *                      The vImage_Error will be less than 0 if an error condition occurred. Checking the vImageConverter
  *                      returned to make sure it is non-NULL is sufficient to verify success or failure of the function.
  *
  *                      The following error values can occur:
@@ -692,14 +696,14 @@ void vImageConverter_Release( vImageConverterRef converter ) __OSX_AVAILABLE_STA
  *
  *  If error is not NULL, an error code will be written to that address on return.
  */
- 
-vImageConverterRef vImageConverter_CreateWithCGImageFormat( const vImage_CGImageFormat *srcFormat,
-                                                            const vImage_CGImageFormat *destFormat,
-                                                            const CGFloat *backgroundColor,          
-                                                            vImage_Flags flags,
-                                                            vImage_Error *error )
-                                                            VIMAGE_NON_NULL(1,2)
-                                                            __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+
+VIMAGE_PF vImageConverterRef vImageConverter_CreateWithCGImageFormat( const vImage_CGImageFormat *srcFormat,
+                                                                     const vImage_CGImageFormat *destFormat,
+                                                                     const CGFloat *backgroundColor,
+                                                                     vImage_Flags flags,
+                                                                     vImage_Error *error )
+VIMAGE_NON_NULL(1,2)
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
 
 
 /*!
@@ -722,10 +726,10 @@ vImageConverterRef vImageConverter_CreateWithCGImageFormat( const vImage_CGImage
  *                      kColorSyncTransformFullConversionData is required for black point compensation.
  *                      CAUTION: vImageConverter_CreateWithColorSyncCodeFragment does not verify that the
  *                      codeFragment is actually appropriate for the srcFormat and destFormat provided. Nor
- *                      does it attempt to append additional color space transformation steps to make the 
- *                      codeFragment appropriate to the images provided. If the colorspace of the srcFormat 
- *                      and destFormat do not correspond to the ColorSyncProfileRefs used to create the 
- *                      ColorSync transform in at least colorspace model, then the behavior is undefined. 
+ *                      does it attempt to append additional color space transformation steps to make the
+ *                      codeFragment appropriate to the images provided. If the colorspace of the srcFormat
+ *                      and destFormat do not correspond to the ColorSyncProfileRefs used to create the
+ *                      ColorSync transform in at least colorspace model, then the behavior is undefined.
  *                      See CGColorSpaceModel CoreGraphics/CGColorSpace.h
  *
  *  @param srcFormat    A pointer to a populated vImage_CGImageFormat struct describing the image format
@@ -811,25 +815,25 @@ vImageConverterRef vImageConverter_CreateWithCGImageFormat( const vImage_CGImage
  *  If error is not NULL, an error code will be written to that address on return.
  *
  */
-    
-vImageConverterRef vImageConverter_CreateWithColorSyncCodeFragment( CFTypeRef codeFragment,
-                                                                    const vImage_CGImageFormat *srcFormat,
-                                                                    const vImage_CGImageFormat *destFormat,
-                                                                    const CGFloat *backgroundColor,         
-                                                                    vImage_Flags flags,
-                                                                    vImage_Error *error )
-                                                                    VIMAGE_NON_NULL(1,2)
-                                                                    __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
 
-    
+VIMAGE_PF vImageConverterRef vImageConverter_CreateWithColorSyncCodeFragment( CFTypeRef codeFragment,
+                                                                             const vImage_CGImageFormat *srcFormat,
+                                                                             const vImage_CGImageFormat *destFormat,
+                                                                             const CGFloat *backgroundColor,
+                                                                             vImage_Flags flags,
+                                                                             vImage_Error *error )
+VIMAGE_NON_NULL(1,2)
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
+
+
 /*!
  * @function  vImageConverter_MustOperateOutOfPlace
- * @abstract  Determine whether a converter is capable of operating in place. 
+ * @abstract  Determine whether a converter is capable of operating in place.
  * @discussion  Some conversions will work if the src and destination image buffer
- *              scanlines start at the same address. Others will not. In such cases, 
+ *              scanlines start at the same address. Others will not. In such cases,
  *              you need to allocate additional storage to hold the destination buffer.
- *              This function returns kvImageOutOfPlaceOperationRequired if the conversion 
- *              requires out of place operation. 
+ *              This function returns kvImageOutOfPlaceOperationRequired if the conversion
+ *              requires out of place operation.
  *
  *  <pre>@textblock
  *       In-place operation is considered to mean srcs[i].data = dests[i].data
@@ -843,19 +847,19 @@ vImageConverterRef vImageConverter_CreateWithColorSyncCodeFragment( CFTypeRef co
  *      srcs = dests = NULL         kvImageNoError if any conversion with this converter is guaranteed to work in place,
  *                                  provided that srcs[i].data = dests[i].data and srcs[i].rowBytes = dests[i].rowBytes.
  *                                  If there exists at least one combination of height and width for which in place operation
- *                                  is not possible with this converter, then kvImageOutOfPlaceOperationRequired will be returned. 
+ *                                  is not possible with this converter, then kvImageOutOfPlaceOperationRequired will be returned.
  *
  *      srcs != NULL, dests = NULL  kvImageNullPointerArgument
  *      srcs = NULL, dests != NULL  kvImageNullPointerArgument
- *  
- *      srcs != NULL, dests != NULL kvImageNoError if the conversion will successfully operate in place for this particular 
- *                                  combination of heights, widths and rowBytes. In this case, vImage does not check to see if the 
- *                                  buffers overlap. It presumes that srcs[i].data = dests[i].data.  This is intended to allow 
- *                                  you to defer allocation until later.  If in place operation will not work, then 
- *                                  kvImageOutOfPlaceOperationRequired is returned. 
+ *
+ *      srcs != NULL, dests != NULL kvImageNoError if the conversion will successfully operate in place for this particular
+ *                                  combination of heights, widths and rowBytes. In this case, vImage does not check to see if the
+ *                                  buffers overlap. It presumes that srcs[i].data = dests[i].data.  This is intended to allow
+ *                                  you to defer allocation until later.  If in place operation will not work, then
+ *                                  kvImageOutOfPlaceOperationRequired is returned.
  *  @/textblock </pre>
  *
- *  In no case during this function call does vImage examine the contents of the memory pointed to by srcs[i].data or dests[i].data. 
+ *  In no case during this function call does vImage examine the contents of the memory pointed to by srcs[i].data or dests[i].data.
  *
  *  @param converter           The converter to check
  *
@@ -866,8 +870,8 @@ vImageConverterRef vImageConverter_CreateWithColorSyncCodeFragment( CFTypeRef co
  *
  *  <pre>@textblock
  *                              Note: in the case of kvImagePrintDiagnosticsToConsole, the flag means print
- *                              error information to the console for errors caught by vImageConverter_MustOperateOutOfPlace,  
- *                              not vImageConvert_AnyToAny. At times, vImageConverter_MustOperateOutOfPlace may fail because 
+ *                              error information to the console for errors caught by vImageConverter_MustOperateOutOfPlace,
+ *                              not vImageConvert_AnyToAny. At times, vImageConverter_MustOperateOutOfPlace may fail because
  *                              it detects an error condition that would cause vImageConvert_AnyToAny to fail.
  *  @/textblock </pre>
  *
@@ -875,37 +879,37 @@ vImageConverterRef vImageConverter_CreateWithColorSyncCodeFragment( CFTypeRef co
  *  <pre>@textblock
  *      kvImageNoError                      In-place operation will work
  *      kvImageNullPointerArgument          The converter may not be NULL
- *      kvImageNullPointerArgument          srcs and dests must either both be NULL or neither must be NULL. 
+ *      kvImageNullPointerArgument          srcs and dests must either both be NULL or neither must be NULL.
  *      kvImageInvalidParameter             The converter is invalid
  *      kvImageUnknownFlagsBit              An unknown / unsupported flag was used
  *      kvImageOutOfPlaceOperationRequired  vImageConvert_AnyToAny requires separate buffers be used for this operation
  *  @/textblock </pre>
  */
-vImage_Error vImageConverter_MustOperateOutOfPlace( const vImageConverterRef converter,
-                                                    const vImage_Buffer *srcs,
-                                                    const vImage_Buffer *dests,
-                                                    vImage_Flags flags)
-                                                    VIMAGE_NON_NULL(1)
-                                                    __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
-    
+VIMAGE_PF vImage_Error vImageConverter_MustOperateOutOfPlace( const vImageConverterRef converter,
+                                                             const vImage_Buffer *srcs,
+                                                             const vImage_Buffer *dests,
+                                                             vImage_Flags flags)
+VIMAGE_NON_NULL(1)
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
+
 /*!
  * @function vImageConverter_GetNumberOfSourceBuffers
  * @abstract Get the number of source buffers consumed by the converter.
  * @discussion  All formats discribed by a vImage_CGImageFormat just consume one vImage_Buffer
  *              and produce one vImage_Buffer. There are no multi-plane vImage_CGImageFormats.
- *              However, some video formats (see vImage/vImage_CVUtilities) have planar 
+ *              However, some video formats (see vImage/vImage_CVUtilities) have planar
  *              data formats with data in more than one plane. For such conversions, it may be
  *              necessary to know how many input buffers are consumed by a converter.
  *
- *              For older operating systems, where these functions are not available, 
+ *              For older operating systems, where these functions are not available,
  *              the number of source and destination buffers is always 1.
  *
  * @param converter The conversion for which you wish to know the number of source buffers
  *
  * @return On success, the number of source buffers is returned.  On failure, 0 is returned.
  */
-unsigned long vImageConverter_GetNumberOfSourceBuffers( const vImageConverterRef converter ) VIMAGE_NON_NULL(1) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
-    
+VIMAGE_PF unsigned long vImageConverter_GetNumberOfSourceBuffers( const vImageConverterRef converter ) VIMAGE_NON_NULL(1) API_AVAILABLE(macos(10.10), ios(8.0), watchos(1.0), tvos(8.0));
+
 /*!
  * @function vImageConverter_GetNumberOfDestinationBuffers
  * @abstract Get the number of destination buffers written to by the converter.
@@ -922,8 +926,8 @@ unsigned long vImageConverter_GetNumberOfSourceBuffers( const vImageConverterRef
  *
  * @return On success, the number of result buffers is returned.  On failure, 0 is returned.
  */
-unsigned long vImageConverter_GetNumberOfDestinationBuffers( const vImageConverterRef converter ) VIMAGE_NON_NULL(1) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
-    
+VIMAGE_PF unsigned long vImageConverter_GetNumberOfDestinationBuffers( const vImageConverterRef converter ) VIMAGE_NON_NULL(1) API_AVAILABLE(macos(10.10), ios(8.0), watchos(1.0), tvos(8.0));
+
 /*!
  * @enum vImageBufferTypeCode
  *
@@ -937,17 +941,17 @@ unsigned long vImageConverter_GetNumberOfDestinationBuffers( const vImageConvert
  *
  * @constant kvImageBufferTypeCode_Alpha  The buffer contains the alpha channel / coverage component
  *
- * @constant kvImageBufferTypeCode_Indexed  The buffer contains data in an indexed colorspace. This is a 
- *                      planar buffer that is used to index a lookup table of color values. The color 
+ * @constant kvImageBufferTypeCode_Indexed  The buffer contains data in an indexed colorspace. This is a
+ *                      planar buffer that is used to index a lookup table of color values. The color
  *                      values in the table may belong to more than one color component.  Typically the
- *                      colorspace will have a color model of kCGColorSpaceModelIndexed and you will need 
+ *                      colorspace will have a color model of kCGColorSpaceModelIndexed and you will need
  *                      use CGColorSpaceGetBaseColorSpace to find out what to what color model the lookup
  *                      table maps.
  *
  * @constant kvImageBufferTypeCode_CVPixelBuffer_YCbCr  The buffer contains luminance, and both chroma channels
  *                      interleaved according to the vImageConstCVImageFormatRef image type.
  *
- * @constant kvImageBufferTypeCode_Luminance   The buffer contains only luminance data. 
+ * @constant kvImageBufferTypeCode_Luminance   The buffer contains only luminance data.
  *
  * @constant kvImageBufferTypeCode_Chroma       The buffer contains both chrominance channels, interleaved.
  *
@@ -955,7 +959,7 @@ unsigned long vImageConverter_GetNumberOfDestinationBuffers( const vImageConvert
  *
  * @constant kvImageBufferTypeCode_Cr           The buffer contains the red chrominance channel
  *
- * @constant kvImageBufferTypeCode_CGFormat     The buffer contains data describable as a vImage_CGImageFormat as 
+ * @constant kvImageBufferTypeCode_CGFormat     The buffer contains data describable as a vImage_CGImageFormat as
  *                                              a single (likely chunky) buffer
  *
  * @constant kvImageBufferTypeCode_Chunky       The buffer contains chunky data not describable as a vImage_CGImageFormat.
@@ -988,78 +992,78 @@ unsigned long vImageConverter_GetNumberOfDestinationBuffers( const vImageConvert
  */
 typedef VIMAGE_CHOICE_ENUM(vImageBufferTypeCode, uint32_t)
 {
-    kvImageBufferTypeCode_EndOfList = 0,
+    kvImageBufferTypeCode_EndOfList VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ) = 0,
     
     /* planar formats -- each buffer contains a single color channel, arising from an image described by a colorspace */
-    kvImageBufferTypeCode_ColorSpaceChannel1,
-    kvImageBufferTypeCode_ColorSpaceChannel2,
-    kvImageBufferTypeCode_ColorSpaceChannel3,
-    kvImageBufferTypeCode_ColorSpaceChannel4,
-    kvImageBufferTypeCode_ColorSpaceChannel5,
-    kvImageBufferTypeCode_ColorSpaceChannel6,
-    kvImageBufferTypeCode_ColorSpaceChannel7,
-    kvImageBufferTypeCode_ColorSpaceChannel8,
-    kvImageBufferTypeCode_ColorSpaceChannel9,
-    kvImageBufferTypeCode_ColorSpaceChannel10,
-    kvImageBufferTypeCode_ColorSpaceChannel11,
-    kvImageBufferTypeCode_ColorSpaceChannel12,
-    kvImageBufferTypeCode_ColorSpaceChannel13,
-    kvImageBufferTypeCode_ColorSpaceChannel14,
-    kvImageBufferTypeCode_ColorSpaceChannel15,
-    kvImageBufferTypeCode_ColorSpaceChannel16,
+    kvImageBufferTypeCode_ColorSpaceChannel1 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    kvImageBufferTypeCode_ColorSpaceChannel2 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    kvImageBufferTypeCode_ColorSpaceChannel3 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    kvImageBufferTypeCode_ColorSpaceChannel4 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    kvImageBufferTypeCode_ColorSpaceChannel5 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    kvImageBufferTypeCode_ColorSpaceChannel6 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    kvImageBufferTypeCode_ColorSpaceChannel7 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    kvImageBufferTypeCode_ColorSpaceChannel8 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    kvImageBufferTypeCode_ColorSpaceChannel9 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    kvImageBufferTypeCode_ColorSpaceChannel10 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    kvImageBufferTypeCode_ColorSpaceChannel11 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    kvImageBufferTypeCode_ColorSpaceChannel12 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    kvImageBufferTypeCode_ColorSpaceChannel13 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    kvImageBufferTypeCode_ColorSpaceChannel14 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    kvImageBufferTypeCode_ColorSpaceChannel15 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    kvImageBufferTypeCode_ColorSpaceChannel16 VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
     
     /* Coverage component */
-    kvImageBufferTypeCode_Alpha,
-
+    kvImageBufferTypeCode_Alpha VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    
     /* indexed color spaces */
-    kvImageBufferTypeCode_Indexed,
-
+    kvImageBufferTypeCode_Indexed VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
+    
     /* YUV formats.  */
-    kvImageBufferTypeCode_CVPixelBuffer_YCbCr,          /* A YCbCr packed buffer formatted according to types in CVPixelBuffer.h. May be accompanied by an alpha channel */
-    kvImageBufferTypeCode_Luminance,                    /* A Luminance (Y) plane */
-    kvImageBufferTypeCode_Chroma,                       /* A two-channel chroma (CbCr) plane */
-    kvImageBufferTypeCode_Cb,                           /* A blue chroma (Cb) plane */
-    kvImageBufferTypeCode_Cr,                           /* A red chroma (Cr) plane */
+    kvImageBufferTypeCode_CVPixelBuffer_YCbCr VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),          /* A YCbCr packed buffer formatted according to types in CVPixelBuffer.h. May be accompanied by an alpha channel */
+    kvImageBufferTypeCode_Luminance VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),                    /* A Luminance (Y) plane */
+    kvImageBufferTypeCode_Chroma VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),                       /* A two-channel chroma (CbCr) plane */
+    kvImageBufferTypeCode_Cb VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),                           /* A blue chroma (Cb) plane */
+    kvImageBufferTypeCode_Cr VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),                           /* A red chroma (Cr) plane */
     
     /* A interleaved (chunky) format with one or more channels, encodable as a vImage_CGImageFormat */
-    kvImageBufferTypeCode_CGFormat,                     /* always a singleton -- appearing as { kvImageBufferTypeCode_CGFormat, 0} */
-                                                        /* prior to OS X.10 and iOS 8.0, all vImageConvert_AnyToAny buffers have this type.*/
-
-    kvImageBufferTypeCode_Chunky,                       /* always a singleton -- appearing as { kvImageBufferTypeCode_Chunky, 0} */
-                                                        /* buffer format is not encodable as vImage_CGImageFormat. Not YpCbCr. */
-
+    kvImageBufferTypeCode_CGFormat VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),                     /* always a singleton -- appearing as { kvImageBufferTypeCode_CGFormat, 0} */
+    /* prior to OS X.10 and iOS 8.0, all vImageConvert_AnyToAny buffers have this type.*/
+    
+    kvImageBufferTypeCode_Chunky VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),                       /* always a singleton -- appearing as { kvImageBufferTypeCode_Chunky, 0} */
+    /* buffer format is not encodable as vImage_CGImageFormat. Not YpCbCr. */
+    
     /* must appear after last unique code */
-    kvImageBufferTypeCode_UniqueFormatCount,
+    kvImageBufferTypeCode_UniqueFormatCount VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ),
     
     /* Convenience codes for better code readability */
-    kvImageBufferTypeCode_Monochrome = kvImageBufferTypeCode_ColorSpaceChannel1,
+    kvImageBufferTypeCode_Monochrome  VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ) = kvImageBufferTypeCode_ColorSpaceChannel1,
     
     
-    kvImageBufferTypeCode_RGB_Red = kvImageBufferTypeCode_ColorSpaceChannel1,
-    kvImageBufferTypeCode_RGB_Green = kvImageBufferTypeCode_ColorSpaceChannel2,
-    kvImageBufferTypeCode_RGB_Blue = kvImageBufferTypeCode_ColorSpaceChannel3,
-
-    kvImageBufferTypeCode_CMYK_Cyan = kvImageBufferTypeCode_ColorSpaceChannel1,
-    kvImageBufferTypeCode_CMYK_Magenta = kvImageBufferTypeCode_ColorSpaceChannel2,
-    kvImageBufferTypeCode_CMYK_Yellow = kvImageBufferTypeCode_ColorSpaceChannel3,
-    kvImageBufferTypeCode_CMYK_Black = kvImageBufferTypeCode_ColorSpaceChannel4,
-
-    kvImageBufferTypeCode_XYZ_X = kvImageBufferTypeCode_ColorSpaceChannel1,
-    kvImageBufferTypeCode_XYZ_Y = kvImageBufferTypeCode_ColorSpaceChannel2,
-    kvImageBufferTypeCode_XYZ_Z = kvImageBufferTypeCode_ColorSpaceChannel3,
-
-    kvImageBufferTypeCode_LAB_L = kvImageBufferTypeCode_ColorSpaceChannel1,
-    kvImageBufferTypeCode_LAB_A = kvImageBufferTypeCode_ColorSpaceChannel2,
-    kvImageBufferTypeCode_LAB_B = kvImageBufferTypeCode_ColorSpaceChannel3,
+    kvImageBufferTypeCode_RGB_Red VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ) = kvImageBufferTypeCode_ColorSpaceChannel1,
+    kvImageBufferTypeCode_RGB_Green VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ) = kvImageBufferTypeCode_ColorSpaceChannel2,
+    kvImageBufferTypeCode_RGB_Blue VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ) = kvImageBufferTypeCode_ColorSpaceChannel3,
+    
+    kvImageBufferTypeCode_CMYK_Cyan VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ) = kvImageBufferTypeCode_ColorSpaceChannel1,
+    kvImageBufferTypeCode_CMYK_Magenta VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ) = kvImageBufferTypeCode_ColorSpaceChannel2,
+    kvImageBufferTypeCode_CMYK_Yellow VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ) = kvImageBufferTypeCode_ColorSpaceChannel3,
+    kvImageBufferTypeCode_CMYK_Black VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ) = kvImageBufferTypeCode_ColorSpaceChannel4,
+    
+    kvImageBufferTypeCode_XYZ_X VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ) = kvImageBufferTypeCode_ColorSpaceChannel1,
+    kvImageBufferTypeCode_XYZ_Y VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ) = kvImageBufferTypeCode_ColorSpaceChannel2,
+    kvImageBufferTypeCode_XYZ_Z VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ) = kvImageBufferTypeCode_ColorSpaceChannel3,
+    
+    kvImageBufferTypeCode_LAB_L VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ) = kvImageBufferTypeCode_ColorSpaceChannel1,
+    kvImageBufferTypeCode_LAB_A VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ) = kvImageBufferTypeCode_ColorSpaceChannel2,
+    kvImageBufferTypeCode_LAB_B VIMAGE_ENUM_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 ) = kvImageBufferTypeCode_ColorSpaceChannel3,
 };
-    
+
 /*!
  *  @function vImageConverter_GetSourceBufferOrder
  *
  *  @abstract Get a list of vImage_Buffer channel names specifying the order of planes
  *
  *  @discussion These functions describe the identity of each buffer passed in the srcs parameters of vImageConvert_AnyToAny,
- *  to allow you to order the buffers correctly. It is provided for informational purposes, to help wire up image 
+ *  to allow you to order the buffers correctly. It is provided for informational purposes, to help wire up image
  *  processing pipelines to vImage that are not supported through more direct means, CGImages, CVPixelBuffers, the alternative
  *  handling of which is described at the end of this comment.
  *
@@ -1100,7 +1104,7 @@ typedef VIMAGE_CHOICE_ENUM(vImageBufferTypeCode, uint32_t)
  *  indicate the order that the vImage_Buffers are passed in to vImageConvert_AnyToAny. The array is valid for the
  *  lifetime of the vImageConverterRef.  It belongs to the vImageConverterRef and should not be freed by you.
  */
-const vImageBufferTypeCode * vImageConverter_GetSourceBufferOrder( vImageConverterRef converter )  VIMAGE_NON_NULL(1) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
+VIMAGE_PF const vImageBufferTypeCode * vImageConverter_GetSourceBufferOrder( vImageConverterRef converter )  VIMAGE_NON_NULL(1) API_AVAILABLE(macos(10.10), ios(8.0), watchos(1.0), tvos(8.0));
 
 /*!
  *  @function vImageConverter_GetDestinationBufferOrder
@@ -1149,9 +1153,9 @@ const vImageBufferTypeCode * vImageConverter_GetSourceBufferOrder( vImageConvert
  *  indicate the order that the vImage_Buffers are passed in to vImageConvert_AnyToAny. The array is valid for the
  *  lifetime of the vImageConverterRef. It belongs to the vImageConverterRef and should not be freed by you.
  */
-const vImageBufferTypeCode * vImageConverter_GetDestinationBufferOrder( vImageConverterRef converter )  VIMAGE_NON_NULL(1) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
+VIMAGE_PF const vImageBufferTypeCode * vImageConverter_GetDestinationBufferOrder( vImageConverterRef converter )  VIMAGE_NON_NULL(1) API_AVAILABLE(macos(10.10), ios(8.0), watchos(1.0), tvos(8.0));
 
-    
+
 /*!
  *  @function vImageConvert_AnyToAny
  *
@@ -1165,19 +1169,19 @@ const vImageBufferTypeCode * vImageConverter_GetDestinationBufferOrder( vImageCo
  *  For an in-place conversion to work, it is required that srcs[i].data = dests[i].data and srcs[i].rowBytes = dests[i].rowBytes.
  *
  *  All scanlines must start at an at least byte aligned address. (Some formats have 1, 2, 4 or 12 bits per channel/pixel and
- *  conceivably might not start at a byte aligned address.) A single byte may not span multiple rows of data. 
+ *  conceivably might not start at a byte aligned address.) A single byte may not span multiple rows of data.
  *
- *  Some formats, particarly YUV 422 and 420 and those that have pixel size not evenly divisble by 8 bits, operate in chunks 
+ *  Some formats, particarly YUV 422 and 420 and those that have pixel size not evenly divisble by 8 bits, operate in chunks
  *  containing multiple pixels. For example, a Y'CbCr 422 chunk may have {Y0, Cb, Y1, Cr} in the chunk. The chunk contains two
- *  pixels, each with an independent Y (luminance) component, but shared chrominance.  Even though the chunk width is two, 
+ *  pixels, each with an independent Y (luminance) component, but shared chrominance.  Even though the chunk width is two,
  *  it is still possible for an image to have a width that is not divisible by two. This means that some part of the chunk on
  *  the rightmost edge of the scanline must refer to a non-existant pixel. When reading incomplete chunks, vImage will only
- *  touch the unused parts of the chunk when it knows it to be safe to do so. When writing incomplete chunks, vImage will 
+ *  touch the unused parts of the chunk when it knows it to be safe to do so. When writing incomplete chunks, vImage will
  *  copy the rightmost valid pixel color into the unused part of the chunk. Thus, on reading the entire chunk doesn't have to
  *  be there, but on writing, it does. Conventions on this are varied among chunk using imaging pipelines and this conservative
  *  approach should interoperate with most. However, some care must be exercised when writing to chunk based formats (not to be
  *  confused with chunky formats which merely have several channels interleaved) to make sure that the buffer is large enough
- *  to tolerate the write policy.  If you are tiling chunk based data, care must be taken not to run tile boundaries 
+ *  to tolerate the write policy.  If you are tiling chunk based data, care must be taken not to run tile boundaries
  *  through the middle of a chunk.  Chunks are assumed to be indivisible.
  *
  *  @param converter  A valid vImageConverterRef indicating what conversion to do. The same vImageConverterRef
@@ -1247,15 +1251,15 @@ const vImageBufferTypeCode * vImageConverter_GetDestinationBufferOrder( vImageCo
  *  @/textblock </pre>
  *
  */
-vImage_Error vImageConvert_AnyToAny( const vImageConverterRef converter,
-                                     const vImage_Buffer * srcs,    /* an array of vImage_Buffer structs describing source data planes */
-                                     const vImage_Buffer * dests,   /* an array of vImage_Buffer structs describing destination data planes */
-                                     void  *tempBuffer,             /* may be NULL */
-                                     vImage_Flags  flags
-                                    )
-                                    VIMAGE_NON_NULL(1,2,3)
-                                    __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
-    
+VIMAGE_PF vImage_Error vImageConvert_AnyToAny( const vImageConverterRef converter,
+                                              const vImage_Buffer * srcs,    /* an array of vImage_Buffer structs describing source data planes */
+                                              const vImage_Buffer * dests,   /* an array of vImage_Buffer structs describing destination data planes */
+                                              void  *tempBuffer,             /* may be NULL */
+                                              vImage_Flags  flags
+                                              )
+VIMAGE_NON_NULL(1,2,3)
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
+
 /*
  *  General vImage alignment requirements:
  *  ======================================
@@ -1291,97 +1295,97 @@ vImage_Error vImageConvert_AnyToAny( const vImageConverterRef converter,
  *  Alignment
  *  ---------
  *  Performance will typically improve with even greater alignment up to cacheline aligned image rows. vImageBuffer_Init() can be used to get vImage's
- *  estimation of what sort of row padding is generally likely to work best on the current machine for a given image and pixel size. 
+ *  estimation of what sort of row padding is generally likely to work best on the current machine for a given image and pixel size.
  *
  *  Memory reuse
  *  ------------
- *  It can also be quite helpful to reuse vImage_Buffers and operate in-place so as to avoid spending time in zero-fill faults zeroing the contents 
- *  of newly allocated buffers. (These will show up in Instruments traces as time spent in kernel VM activity.) However, caching unused buffers for 
- *  extended periods of time can contribute to degradation of overall system performance in low memory situations so recycling of buffers is usually 
- *  best done when good temporal locality is expected. LibCache may be helpful for avoiding such problems when it is not known with certainty that the 
+ *  It can also be quite helpful to reuse vImage_Buffers and operate in-place so as to avoid spending time in zero-fill faults zeroing the contents
+ *  of newly allocated buffers. (These will show up in Instruments traces as time spent in kernel VM activity.) However, caching unused buffers for
+ *  extended periods of time can contribute to degradation of overall system performance in low memory situations so recycling of buffers is usually
+ *  best done when good temporal locality is expected. LibCache may be helpful for avoiding such problems when it is not known with certainty that the
  *  buffer will be reused immediately.
  *
  *  Tiling and multithreading
  *  -------------------------
- *  Most vImage functions, including vImageConvert_AnyToAny, will automatically split up work across multiple processors (when available) if there is 
- *  enough image data to warrant it. It can take some time to wake up other processors or redirect their attention from their current task to a new one, 
- *  so multithreading is not attempted if it seems likely the current processor can complete the work before the attention of the other cores can be 
- *  redirected to work on the problem. With some exceptions, the work is typically divided at boundaries between image rows. (To be clear, tiles can be 
+ *  Most vImage functions, including vImageConvert_AnyToAny, will automatically split up work across multiple processors (when available) if there is
+ *  enough image data to warrant it. It can take some time to wake up other processors or redirect their attention from their current task to a new one,
+ *  so multithreading is not attempted if it seems likely the current processor can complete the work before the attention of the other cores can be
+ *  redirected to work on the problem. With some exceptions, the work is typically divided at boundaries between image rows. (To be clear, tiles can be
  *  taller than just one row.) So, for some functions, if you break up the work to one scanline at a time, it will never multithread. Exactly which functions
  *  do that is subject to change. If you want to stop multithreading, please use kvImageDoNotTile.
- *  
- *  The size of the tile chosen by the function varies by function. Some do little computation and so need the lowest possible load/store latencies to 
- *  run at top speed. Others do more work per byte are consequently not so dependent on low memory access latencies, so may work equally well with tiles 
- *  closer to the size of the L2 or L3 caches and so may use larger tiles. Some computationally intense functions may not care if the data is in cache 
- *  at all. Each vImage function will tile its workload as it sees fit without regard to what other vImage functions may have done or plan to do. 
  *
- *  While this scheme generally works well, you can often do much better with a little work especially in cases where multiple vImage functions are called 
- *  back to back for a few reasons: 
+ *  The size of the tile chosen by the function varies by function. Some do little computation and so need the lowest possible load/store latencies to
+ *  run at top speed. Others do more work per byte are consequently not so dependent on low memory access latencies, so may work equally well with tiles
+ *  closer to the size of the L2 or L3 caches and so may use larger tiles. Some computationally intense functions may not care if the data is in cache
+ *  at all. Each vImage function will tile its workload as it sees fit without regard to what other vImage functions may have done or plan to do.
  *
- *      First of all, if the image is larger than the caches, then as new pixels are produced, they will cause earlier result pixels from the same image 
- *  to be flushed to more remote levels of the cache or ultimately out to DRAM (or even disk in low memory situations!) to make room for the new results. When 
- *  it is time to call the next vImage function on the result, you may find that even though you just worked on it, part of the image is not in the cache and 
- *  so you have to pay some time to load it back in again when it as needed. This can happen over and over again with each new vImage filter.  A similar 
- *  story may occur for smaller images as data is flushed from level 1 to level 2 to level 3 of the cache to make room for new data. It would be faster if 
- *  you could somehow move on to the next vImage filter while a region of the image is still in the cache before it is evicted to make room for the rest 
- *  of the image. We will get to the how a little later. 
+ *  While this scheme generally works well, you can often do much better with a little work especially in cases where multiple vImage functions are called
+ *  back to back for a few reasons:
+ *
+ *      First of all, if the image is larger than the caches, then as new pixels are produced, they will cause earlier result pixels from the same image
+ *  to be flushed to more remote levels of the cache or ultimately out to DRAM (or even disk in low memory situations!) to make room for the new results. When
+ *  it is time to call the next vImage function on the result, you may find that even though you just worked on it, part of the image is not in the cache and
+ *  so you have to pay some time to load it back in again when it as needed. This can happen over and over again with each new vImage filter.  A similar
+ *  story may occur for smaller images as data is flushed from level 1 to level 2 to level 3 of the cache to make room for new data. It would be faster if
+ *  you could somehow move on to the next vImage filter while a region of the image is still in the cache before it is evicted to make room for the rest
+ *  of the image. We will get to the how a little later.
  *
  *      Second, since processor cores are usually assigned by vImage to work on parts of the image on a first-come first-served basis to keep per-call latency
- *  down, it is probably common that different cores will work on different parts of the image in each successive vImage call, even in cases where the tiling 
- *  strategies between two back to back vImage calls are otherwise similar. That is, in the first vImage function call, the top left corner might be done by 
- *  processor 1 and in the next vImage function call by processor 3. The next time you call the same code, it might be processor 2 and processor 5 that do 
- *  the work on that region. Unfortunately, in many current processor architectures, the faster cache levels (level 1 and 2) are often not shared with most 
- *  of the other cores and it can take more time for the other cores to get data from them. It would be faster if you could somehow convince the same core to 
- *  operate on the same region of the image each time, because only then do we have some guarantee that the faster cache levels are doing us any good between 
+ *  down, it is probably common that different cores will work on different parts of the image in each successive vImage call, even in cases where the tiling
+ *  strategies between two back to back vImage calls are otherwise similar. That is, in the first vImage function call, the top left corner might be done by
+ *  processor 1 and in the next vImage function call by processor 3. The next time you call the same code, it might be processor 2 and processor 5 that do
+ *  the work on that region. Unfortunately, in many current processor architectures, the faster cache levels (level 1 and 2) are often not shared with most
+ *  of the other cores and it can take more time for the other cores to get data from them. It would be faster if you could somehow convince the same core to
+ *  operate on the same region of the image each time, because only then do we have some guarantee that the faster cache levels are doing us any good between
  *  back to back calls.
  *
- *      Third, just as it may take some time to get all the processors redirected to work on a particular task, you may also lose some time because 
- *  they don't all finish at the same time. Some processors end up waiting for others to finish before the vImage call can return. Here one expects this 
+ *      Third, just as it may take some time to get all the processors redirected to work on a particular task, you may also lose some time because
+ *  they don't all finish at the same time. Some processors end up waiting for others to finish before the vImage call can return. Here one expects this
  *  time lost to be a tiny fraction of the overall time for large images, but for medium sized ones it may weigh against overall performance. (Smaller images
- *  may not even bother to multithread in such cases.) When you advance to the next back-to-back vImage call, some of the cores might have gone to sleep or 
+ *  may not even bother to multithread in such cases.) When you advance to the next back-to-back vImage call, some of the cores might have gone to sleep or
  *  moved on to unrelated work waiting for other cores to finish, and now you have to wait for them to get back on task again. You could reduce overall latency
- *  if you could somehow convince the next filter to start on regions that are done without having to wait for all of the regions of the image to be done, 
- *  so that the cores stay busy and don't get distracted. 
+ *  if you could somehow convince the next filter to start on regions that are done without having to wait for all of the regions of the image to be done,
+ *  so that the cores stay busy and don't get distracted.
  *
  *      Fourth, doing back-to-back-to-back vImage calls probably means having a bunch of intermediate vImage_Buffers hanging around that take up memory.
  *  In cases where the intermediate computation has to be done in some higher precision, like floating-point, some of these can be quite big. It would be
- *  very helpful to somehow make those go away, or at least go on a diet. 
+ *  very helpful to somehow make those go away, or at least go on a diet.
  *
  *  So, how is this collection of problems fixed? Well, first of all, you don't /have/ to fix anything. Even with all of that, it should still work pretty
- *  well. If pretty well is not good enough, then the solution is to manage the threading yourself. Lets say you want to apply 4 vImage filters (A, B, C and 
- *  D) to an image in a back-to-back fashion. First you break up the result image into a bunch of smaller chunks, called tiles. These should be small enough 
- *  to fit conformably in the cache but not so small that we devote too much time doing setup tasks like parameter checking or initializing variables repeatedly. 
- *  (You can figure out the right size later when it all works. Guess for now.) Starting from the result tiles, work backward. For each tile in the output of D, 
- *  figure out which pixels from C are needed as input. This defines the set of tiles produced by C. In cases where the function needs to look at nearby pixels 
- *  to calculate a result pixel (e.g. Convolution or various Morphology filters) then it is possible that the C-produced tiles may overlap a bit. The process is 
- *  then repeated moving backward through B and A until we arrive at the starting image. We can now trace each result tile through a bunch of discrete image 
- *  fragments back up to a region in the original image. Since we know that we have all the input pixels we need to calculate a result tile at each stage, we 
- *  can apply filters A,B,C and D in series to a tile without needing to worry about what is happening in the other tiles. Thus, each tile can be operated on 
+ *  well. If pretty well is not good enough, then the solution is to manage the threading yourself. Lets say you want to apply 4 vImage filters (A, B, C and
+ *  D) to an image in a back-to-back fashion. First you break up the result image into a bunch of smaller chunks, called tiles. These should be small enough
+ *  to fit conformably in the cache but not so small that we devote too much time doing setup tasks like parameter checking or initializing variables repeatedly.
+ *  (You can figure out the right size later when it all works. Guess for now.) Starting from the result tiles, work backward. For each tile in the output of D,
+ *  figure out which pixels from C are needed as input. This defines the set of tiles produced by C. In cases where the function needs to look at nearby pixels
+ *  to calculate a result pixel (e.g. Convolution or various Morphology filters) then it is possible that the C-produced tiles may overlap a bit. The process is
+ *  then repeated moving backward through B and A until we arrive at the starting image. We can now trace each result tile through a bunch of discrete image
+ *  fragments back up to a region in the original image. Since we know that we have all the input pixels we need to calculate a result tile at each stage, we
+ *  can apply filters A,B,C and D in series to a tile without needing to worry about what is happening in the other tiles. Thus, each tile can be operated on
  *  by a different thread, and multithreading becomes trivial.
  *
- *  Consider the implications. Since each tile of data is operated on by a single thread and threads usually do not gratuitously hop around from core to core 
+ *  Consider the implications. Since each tile of data is operated on by a single thread and threads usually do not gratuitously hop around from core to core
  *  (very much) the result from filter A on that tile should usually be in the right L1 or L2 cache when we call filter B to consume the result from A for that region,
- *  provided that we call filter B on that tile from that thread right away and don't run off and do other things. The same goes for filters C and D. So, you 
- *  are now probably getting better-than-good-enough temporal cache locality.  Observe also that it is generally not required that the intermediate (A,B or 
- *  C product) tiles be stored in memory that is contiguous with other tiles from the same intermediate image. They can be their own little chunks of memory 
- *  stored somewhere else. Maybe you even put them on the stack -- which probably will avoid most zero fill faults and is quick to allocate. In fact, if the 
- *  output tiles are of the same size, then as the thread finishes one tile, you can just reuse those small intermediate buffers that hold the intermediate 
- *  tiles for the next tile. The intermediate image then never exists as a whole at any given time and so you never have to allocate storage for most of it.  
- *  This gives you better-than-good-enough memory usage. Floating-point is starting to look a lot better! Next, because each tile is not waiting on its fellows, 
- *  you can begin working on filter B as soon as the thread is done with filter A. There is no more waiting for filter A to be done on the entire image before 
- *  B can be started. Threads go idle less. There is probably still bit of time lost to waiting for cores to spin up and some for the last thread to finish on 
- *  exit, but it is amortized over four filters instead of each filter. 
+ *  provided that we call filter B on that tile from that thread right away and don't run off and do other things. The same goes for filters C and D. So, you
+ *  are now probably getting better-than-good-enough temporal cache locality.  Observe also that it is generally not required that the intermediate (A,B or
+ *  C product) tiles be stored in memory that is contiguous with other tiles from the same intermediate image. They can be their own little chunks of memory
+ *  stored somewhere else. Maybe you even put them on the stack -- which probably will avoid most zero fill faults and is quick to allocate. In fact, if the
+ *  output tiles are of the same size, then as the thread finishes one tile, you can just reuse those small intermediate buffers that hold the intermediate
+ *  tiles for the next tile. The intermediate image then never exists as a whole at any given time and so you never have to allocate storage for most of it.
+ *  This gives you better-than-good-enough memory usage. Floating-point is starting to look a lot better! Next, because each tile is not waiting on its fellows,
+ *  you can begin working on filter B as soon as the thread is done with filter A. There is no more waiting for filter A to be done on the entire image before
+ *  B can be started. Threads go idle less. There is probably still bit of time lost to waiting for cores to spin up and some for the last thread to finish on
+ *  exit, but it is amortized over four filters instead of each filter.
  *
- *  Recall that in standard opertaion, vImage will still be trying to multithread behind your back for all these little tiles. This will cause the threads to 
- *  oversubscribe the number of cores. Work that was supposed to be done by one thread is now split up to many. Threads may hop around from core to core much 
- *  more looking for a place to run, defeating cache locality. You may spend a lot of time waiting for cores to redirect to the next job with lots of little 
- *  jobs. The Instruments system trace looks like a tangled knot of threads playing musical chairs for a limited number of cores. To stop this, pass the 
+ *  Recall that in standard opertaion, vImage will still be trying to multithread behind your back for all these little tiles. This will cause the threads to
+ *  oversubscribe the number of cores. Work that was supposed to be done by one thread is now split up to many. Threads may hop around from core to core much
+ *  more looking for a place to run, defeating cache locality. You may spend a lot of time waiting for cores to redirect to the next job with lots of little
+ *  jobs. The Instruments system trace looks like a tangled knot of threads playing musical chairs for a limited number of cores. To stop this, pass the
  *  kvImageDoNotTile flag to make sure vImage is running only on the thread you assign to it.
  */
 
-    
+
 #ifdef __cplusplus
-    }
+}
 #endif
 
 #endif  /* vImage_Utilities_h */

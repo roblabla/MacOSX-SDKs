@@ -45,6 +45,6 @@ typedef NS_ENUM(NSInteger, CLError) {
  *    When an error with code kCLErrorRegionMonitoringResponseDelayed is received, this key may be populated
  *    in the userInfo dictionary.  The value is a CLRegion that the location service can more effectively monitor.
  */
-extern NSString *const kCLErrorUserInfoAlternateRegionKey NS_AVAILABLE(10_7, 5_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+extern NSString *const kCLErrorUserInfoAlternateRegionKey NS_AVAILABLE(10_7, 5_0) API_UNAVAILABLE(watchos, tvos);
 
 NS_ASSUME_NONNULL_END

@@ -3,7 +3,7 @@
 
 	Framework:		AVFoundation
  
-	Copyright 2009-2017 Apple Inc. All rights reserved.
+	Copyright 2009-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -636,13 +636,10 @@ AVF_EXPORT NSString *const AVFragmentedMovieDurationDidChangeNotification NS_AVA
 */
 AVF_EXPORT NSString *const AVFragmentedMovieWasDefragmentedNotification NS_AVAILABLE_MAC(10_10);
 
-@class AVFragmentedMovieInternal;
-
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface AVFragmentedMovie : AVMovie <AVFragmentMinding>
 {
 @private
-	AVFragmentedMovieInternal	*_fragmentedMovie __attribute__((unused));
 }
 
 /*!

@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 428E7E23-3927-34E5-AF80-E6F126C7A946', 'x86_64: 51217F2E-CADB-3CEB-87D3-64842E74F925' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 5F293B33-27A9-35A8-BD1E-86C655EBCDA8' ]
 platform:        macosx
 flags:           [ not_app_extension_safe ]
 install-name:    /System/Library/PrivateFrameworks/DeviceLink.framework/Versions/A/DeviceLink
@@ -8,7 +8,7 @@ current-version: 264
 compatibility-version: 100
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _CFPrintf, _DLConnect, _DLConnectToDeviceWithPort, _DLConnectToServiceOnDevice, 
                        _DLConnectToServiceOnDeviceWithOptions, _DLConnectionInfoCreateForEndpoint, 
                        _DLContentsOfDirectory, _DLCopyConnectedDeviceArray, _DLCopyFileAttributes, 

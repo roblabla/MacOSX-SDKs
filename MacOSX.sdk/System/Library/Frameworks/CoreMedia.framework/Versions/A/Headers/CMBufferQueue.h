@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-    Copyright 2006-2015 Apple Inc. All rights reserved.
+	Copyright © 2006-2018 Apple Inc. All rights reserved.
   
 */
 
@@ -297,7 +297,7 @@ CM_EXPORT OSStatus CMBufferQueueEnqueue(
 				it when done with it.
 	@result		The dequeued buffer.  Will be NULL if the queue is empty.
 */
-CM_EXPORT CMBufferRef CM_NULLABLE CMBufferQueueDequeueAndRetain(
+CM_EXPORT CMBufferRef CM_RETURNS_RETAINED CM_NULLABLE CMBufferQueueDequeueAndRetain(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												The CMBufferQueue from which to dequeue a buffer. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
@@ -310,7 +310,7 @@ CM_EXPORT CMBufferRef CM_NULLABLE CMBufferQueueDequeueAndRetain(
 				it when done with it.
 	@result		The dequeued buffer.  Will be NULL if the queue is empty, or if the buffer to be dequeued is not yet ready.
 */
-CM_EXPORT CMBufferRef CM_NULLABLE CMBufferQueueDequeueIfDataReadyAndRetain(
+CM_EXPORT CMBufferRef CM_RETURNS_RETAINED CM_NULLABLE CMBufferQueueDequeueIfDataReadyAndRetain(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												The CMBufferQueue from which to dequeue a buffer (if the buffer is ready). */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
@@ -392,7 +392,7 @@ CM_EXPORT OSStatus
 CMBufferQueueResetWithCallback(
 	CMBufferQueueRef CM_NONNULL queue,	/*! @param queue
 											CMBufferQueue being reset, that may contain multiple buffers. */
-	void (* CM_NONNULL callback)(CMBufferRef CM_NONNULL buffer, void * CM_NULLABLE refcon ),
+	void (* CM_NONNULL CF_NOESCAPE callback)(CMBufferRef CM_NONNULL buffer, void * CM_NULLABLE refcon ),
 										/*! @param callback
 											Function to be called for each buffer.
 											The callback should not make other calls to the buffer queue. */
@@ -589,27 +589,27 @@ enum
 	@abstract	Installs a trigger on a CMBufferQueue.
 	@discussion	The returned trigger token can be passed to CMBufferQueueTestTrigger and CMBufferQueueRemoveTrigger.
 				The triggerTokenOut parameter can be NULL (client doesn't need to test or remove trigger), and the
-				triggerCallback parameter can be NULL (client doesn't need callbacks, but rather will explicitly
+				callback parameter can be NULL (client doesn't need callbacks, but rather will explicitly
 				test the trigger).  One of these two parameters must be non-NULL, however, since an untestable
 				trigger that does not perform a callback is meaningless.  If the trigger condition is already true,
-				CMBufferQueueInstallTrigger will call the triggerCallback.  If it does this, it will first write
+				CMBufferQueueInstallTrigger will call the callback.  If it does this, it will first write
 				the trigger token to *triggerTokenOut.
 */
 CM_EXPORT OSStatus CMBufferQueueInstallTrigger(
 	CMBufferQueueRef CM_NONNULL queue,					/*! @param queue
 															CMBufferQueue on which the trigger is being set. */
-	CMBufferQueueTriggerCallback CM_NULLABLE triggerCallback,	/*! @param triggerCallback
+	CMBufferQueueTriggerCallback CM_NULLABLE callback,	/*! @param callback
 															Callback to be called when the trigger condition becomes true.
 															Can be NULL, if client intends only to explicitly test the
 															condition.  Cannot be NULL if triggerTokenOut is NULL,
 															since then the trigger would be meaningless. */
-	void * CM_NULLABLE triggerRefcon,					/*! @param triggerRefcon
-															Refcon to be passed to the triggerCallback.
+	void * CM_NULLABLE refcon,							/*! @param refcon
+															Refcon to be passed to the callback.
 															Can be NULL if the callback doesn't need it, or is
 															itself NULL. */
-	CMBufferQueueTriggerCondition triggerCondition,		/*! @param triggerCondition
+	CMBufferQueueTriggerCondition condition,			/*! @param condition
 															The condition to be tested when evaluating the trigger. */
-	CMTime triggerTime,									/*! @param triggerTime
+	CMTime time,										/*! @param time
 															The time value to compare against when evaluating the trigger.
 															Must be numeric (ie. not invalid, indefinite, or infinite),
 															except for certain trigger conditions which ignore it
@@ -630,19 +630,19 @@ CM_EXPORT OSStatus CMBufferQueueInstallTrigger(
 CM_EXPORT OSStatus CMBufferQueueInstallTriggerWithIntegerThreshold(
 	CMBufferQueueRef CM_NONNULL queue,										/*! @param queue
 																				CMBufferQueue on which the trigger is being set. */
-	CMBufferQueueTriggerCallback CM_NULLABLE triggerCallback,				/*! @param triggerCallback
+	CMBufferQueueTriggerCallback CM_NULLABLE callback,						/*! @param callback
 																				Callback to be called when the trigger condition becomes true.
 																				Can be NULL, if client intends only to explicitly test the
 																				condition.  Cannot be NULL if triggerTokenOut is NULL,
 																				since then the trigger would be meaningless. */
-	void * CM_NULLABLE triggerRefcon,										/*! @param triggerRefcon
-																				Refcon to be passed to the triggerCallback.
+	void * CM_NULLABLE refcon,												/*! @param refcon
+																				Refcon to be passed to the callback.
 																				Can be NULL if the callback doesn't need it, or is
 																				itself NULL. */
-	CMBufferQueueTriggerCondition triggerCondition,							/*! @param triggerCondition
+	CMBufferQueueTriggerCondition condition,								/*! @param triggerCondition
 																				The condition to be tested when evaluating the trigger.
 																				Must be a valid condition for an integer threshold. */
-	CMItemCount triggerThreshold,											/*! @param triggerThreshold
+	CMItemCount threshold,													/*! @param threshold
 																				The integer value to compare against when evaluating the trigger. */
 	CMBufferQueueTriggerToken CM_NULLABLE * CM_NULLABLE triggerTokenOut )	/*! @param triggerTokenOut
 																				Address where created trigger token will be written.
@@ -690,7 +690,7 @@ CM_EXPORT OSStatus
 CMBufferQueueCallForEachBuffer(
 	CMBufferQueueRef CM_NONNULL queue,		/*! @param queue
 												CMBufferQueue that may contain multiple buffers. */
-	OSStatus (* CM_NONNULL callback)(CMBufferRef CM_NONNULL buffer, void * CM_NULLABLE refcon ),
+	OSStatus (* CM_NONNULL CF_NOESCAPE callback)(CMBufferRef CM_NONNULL buffer, void * CM_NULLABLE refcon ),
 											/*! @param callback
 												Function to be called for each buffer.
 												The callback may modify buffer attachments but should not modify sort-affecting
@@ -717,12 +717,12 @@ typedef OSStatus (*CMBufferValidationCallback)(CMBufferQueueRef CM_NONNULL queue
 	@abstract	Sets a function that CMBufferQueueEnqueue will call to validate buffers before adding them to the queue.
 */
 CM_EXPORT OSStatus CMBufferQueueSetValidationCallback( 
-		CMBufferQueueRef CM_NONNULL queue,							/*! @param queue
-																		CMBufferQueue that will use the validation callback. */
-		CMBufferValidationCallback CM_NONNULL validationCallback,	/*! @param validationCallback
-																		Callback that will validate each buffer enqueued. */
-		void * CM_NULLABLE validationRefCon )						/*! @param validationRefCon
-																		Context refcon for validation callback. */
+		CMBufferQueueRef CM_NONNULL queue,					/*! @param queue
+																	CMBufferQueue that will use the validation callback. */
+		CMBufferValidationCallback CM_NONNULL callback,		/*! @param callback
+																	Callback that will validate each buffer enqueued. */
+		void * CM_NULLABLE refcon )							/*! @param refcon
+																	Context refcon for validation callback. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 	
 CF_IMPLICIT_BRIDGING_DISABLED

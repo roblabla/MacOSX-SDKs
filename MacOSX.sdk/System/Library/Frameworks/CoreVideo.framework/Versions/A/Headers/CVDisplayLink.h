@@ -20,7 +20,7 @@
 
 
 
-#include <ApplicationServices/ApplicationServices.h>
+#include <CoreGraphics/CoreGraphics.h>
 #include <CoreVideo/CVReturn.h>
 #include <CoreVideo/CVBase.h>
 #include <OpenGL/OpenGL.h>

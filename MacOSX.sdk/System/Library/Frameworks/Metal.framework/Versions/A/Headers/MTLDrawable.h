@@ -22,7 +22,7 @@ typedef void (^MTLDrawablePresentedHandler)(id<MTLDrawable>);
  @protocol MTLDrawable
  @abstract All "drawable" objects (such as those coming from CAMetalLayer) are expected to conform to this protocol
  */
-NS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0))
 @protocol MTLDrawable <NSObject>
 
 /* Present this drawable as soon as possible */

@@ -5,6 +5,9 @@
 //  Copyright © 2015 Apple Inc. All rights reserved.
 //
 
+#import <MediaPlayer/MediaPlayerDefines.h>
+
+#if MP_HAS_AVMEDIASELECTION
 #import <AVFoundation/AVMediaSelectionGroup.h>
 #import <AVFoundation/AVMediaSelection.h>
 #import <AVFoundation/AVMediaFormat.h>
@@ -34,3 +37,4 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+#endif

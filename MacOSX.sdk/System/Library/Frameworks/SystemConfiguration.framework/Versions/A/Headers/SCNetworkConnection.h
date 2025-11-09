@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2003-2006, 2008-2010, 2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2003-2006, 2008-2010, 2015, 2018 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
  * compliance with the License. Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this
  * file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -17,14 +17,14 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_LICENSE_HEADER_END@
  */
 
 #ifndef _SCNETWORKCONNECTION_H
 #define _SCNETWORKCONNECTION_H
 
-#include <Availability.h>
+#include <os/availability.h>
 #include <TargetConditionals.h>
 #include <sys/cdefs.h>
 #include <dispatch/dispatch.h>
@@ -213,7 +213,8 @@ typedef void (*SCNetworkConnectionCallBack)	(
 		"best" SCNetworkConnection.
  */
 #define kSCNetworkConnectionSelectionOptionOnDemandHostName	CFSTR("OnDemandHostName")	// CFString
-												// __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA)
+												// API_AVAILABLE(macos(4.0))
+												
 
 /*!
 	@define kSCNetworkConnectionSelectionOptionOnDemandRetry
@@ -221,7 +222,8 @@ typedef void (*SCNetworkConnectionCallBack)	(
 		already been issued for the specified OnDemand host name.
  */
 #define kSCNetworkConnectionSelectionOptionOnDemandRetry	CFSTR("OnDemandRetry")		// CFBoolean
-												// __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA)
+												// API_AVAILABLE(macos(4.0))
+												
 
 __BEGIN_DECLS
 
@@ -231,7 +233,7 @@ __BEGIN_DECLS
 		instances.
  */
 CFTypeID
-SCNetworkConnectionGetTypeID			(void)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+SCNetworkConnectionGetTypeID			(void)			API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*!
@@ -254,7 +256,7 @@ SCNetworkConnectionCopyUserPreferences		(
 						CFDictionaryRef				  __nullable	selectionOptions,
 						CFStringRef		__nonnull	* __nullable	serviceID,
 						CFDictionaryRef		__nonnull	* __nullable	userOptions
-						)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+						)			API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*!
@@ -284,7 +286,7 @@ SCNetworkConnectionCreateWithServiceID		(
 						CFStringRef					serviceID,
 						SCNetworkConnectionCallBack	__nullable	callout,
 						SCNetworkConnectionContext	* __nullable	context
-						)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+						)			API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*!
@@ -296,7 +298,7 @@ SCNetworkConnectionCreateWithServiceID		(
 CFStringRef __nullable
 SCNetworkConnectionCopyServiceID		(
 						SCNetworkConnectionRef		connection
-						)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+						)			API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*!
@@ -319,7 +321,7 @@ SCNetworkConnectionCopyServiceID		(
 SCNetworkConnectionStatus
 SCNetworkConnectionGetStatus			(
 						SCNetworkConnectionRef		connection
-						)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+						)			API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*!
@@ -367,7 +369,7 @@ SCNetworkConnectionGetStatus			(
 CFDictionaryRef __nullable
 SCNetworkConnectionCopyExtendedStatus		(
 						SCNetworkConnectionRef		connection
-						)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+						)			API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*!
@@ -409,7 +411,7 @@ SCNetworkConnectionCopyExtendedStatus		(
 CFDictionaryRef __nullable
 SCNetworkConnectionCopyStatistics		(
 						SCNetworkConnectionRef		connection
-						)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+						)			API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*!
@@ -461,7 +463,7 @@ SCNetworkConnectionStart			(
 						SCNetworkConnectionRef				connection,
 						CFDictionaryRef			__nullable	userOptions,
 						Boolean						linger
-						)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+						)			API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*!
@@ -487,7 +489,7 @@ Boolean
 SCNetworkConnectionStop				(
 						SCNetworkConnectionRef		connection,
 						Boolean				forceDisconnect
-						)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+						)			API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*!
@@ -503,7 +505,7 @@ SCNetworkConnectionStop				(
 CFDictionaryRef __nullable
 SCNetworkConnectionCopyUserOptions		(
 						SCNetworkConnectionRef		connection
-						)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+						)			API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*!
@@ -521,7 +523,7 @@ SCNetworkConnectionScheduleWithRunLoop		(
 						SCNetworkConnectionRef		connection,
 						CFRunLoopRef			runLoop,
 						CFStringRef			runLoopMode
-						)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+						)			API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*!
@@ -539,7 +541,7 @@ SCNetworkConnectionUnscheduleFromRunLoop	(
 						SCNetworkConnectionRef		connection,
 						CFRunLoopRef			runLoop,
 						CFStringRef			runLoopMode
-						)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+						)			API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*!
@@ -556,11 +558,11 @@ Boolean
 SCNetworkConnectionSetDispatchQueue		(
 						 SCNetworkConnectionRef				connection,
 						 dispatch_queue_t		__nullable	queue
-						 )			__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA);
+						 )			API_AVAILABLE(macos(10.6)) API_UNAVAILABLE(ios, tvos, watchos);
 
 __END_DECLS
 
 CF_ASSUME_NONNULL_END
 CF_IMPLICIT_BRIDGING_DISABLED
 
-#endif /* _SCNETWORKCONNECTION_H */
+#endif	/* _SCNETWORKCONNECTION_H */

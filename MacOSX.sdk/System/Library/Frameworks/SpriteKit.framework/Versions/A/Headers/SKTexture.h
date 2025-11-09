@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  A texture to be mapped onto SKSpriteNode instances.
  */
-SK_EXPORT @interface SKTexture : NSObject <NSCopying, NSCoding>
+SK_EXPORT @interface SKTexture : NSObject <NSCopying, NSSecureCoding>
 
 /**
  Create a texture from an image file. Behaves similar to imageNamed: in UIImage or NSImage

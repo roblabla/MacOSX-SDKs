@@ -1,4 +1,4 @@
-.TH "MPSCNNPoolingNode" 3 "Sun Jul 2 2017" "Version MetalPerformanceShaders-84.1" "MetalPerformanceShaders.framework" \" -*- nroff -*-
+.TH "MPSCNNPoolingNode" 3 "Mon Jul 9 2018" "Version MetalPerformanceShaders-119.3" "MetalPerformanceShaders.framework" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -35,10 +35,25 @@ Inherited by \fBMPSCNNPoolingAverageNode\fP, \fBMPSCNNPoolingL2NormNode\fP, and 
 .RI "(nonnull instancetype) + \fBnodeWithSource:filterSize:stride:\fP"
 .br
 .in -1c
-.SS "Additional Inherited Members"
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "NSUInteger \fBkernelWidth\fP"
+.br
+.ti -1c
+.RI "NSUInteger NSUInteger \fBkernelHeight\fP"
+.br
+.ti -1c
+.RI "NSUInteger NSUInteger NSUInteger \fBstrideInPixelsX\fP"
+.br
+.ti -1c
+.RI "NSUInteger NSUInteger NSUInteger NSUInteger \fBstrideInPixelsY\fP"
+.br
+.in -1c
 .SH "Detailed Description"
 .PP 
-A node for a \fBMPSCNNPooling\fP kernel  This is an abstract base class that does not correspond with any particular \fBMPSCNNKernel\fP\&. Please make one of the \fBMPSCNNPooling\fP subclasses instead\&. 
+\fBA\fP node for a \fBMPSCNNPooling\fP kernel  This is an abstract base class that does not correspond with any particular \fBMPSCNNKernel\fP\&. Please make one of the \fBMPSCNNPooling\fP subclasses instead\&. 
 .SH "Method Documentation"
 .PP 
 .SS "\- (nonnull instancetype) initWithSource: (\fBMPSNNImageNode\fP *__nonnull) sourceNode(NSUInteger) size"
@@ -53,7 +68,7 @@ Convenience initializer for \fBMPSCNNPooling\fP nodes with square non-overlappin
 .PP
 \fBReturns:\fP
 .RS 4
-A new MPSNNFilter node for a \fBMPSCNNPooling\fP kernel\&. 
+\fBA\fP new MPSNNFilter node for a \fBMPSCNNPooling\fP kernel\&. 
 .RE
 .PP
 
@@ -71,7 +86,7 @@ Convenience initializer for \fBMPSCNNPooling\fP nodes with square kernels
 .PP
 \fBReturns:\fP
 .RS 4
-A new MPSNNFilter node for a \fBMPSCNNPooling\fP kernel\&. 
+\fBA\fP new MPSNNFilter node for a \fBMPSCNNPooling\fP kernel\&. 
 .RE
 .PP
 
@@ -93,7 +108,7 @@ Init a node representing a \fBMPSCNNPooling\fP kernel
 .PP
 \fBReturns:\fP
 .RS 4
-A new MPSNNFilter node for a \fBMPSCNNPooling\fP kernel\&. 
+\fBA\fP new MPSNNFilter node for a \fBMPSCNNPooling\fP kernel\&. 
 .RE
 .PP
 
@@ -109,7 +124,7 @@ Convenience initializer for \fBMPSCNNPooling\fP nodes with square non-overlappin
 .PP
 \fBReturns:\fP
 .RS 4
-A new MPSNNFilter node for a \fBMPSCNNPooling\fP kernel\&. 
+\fBA\fP new MPSNNFilter node for a \fBMPSCNNPooling\fP kernel\&. 
 .RE
 .PP
 
@@ -127,9 +142,19 @@ Convenience initializer for \fBMPSCNNPooling\fP nodes with square non-overlappin
 .PP
 \fBReturns:\fP
 .RS 4
-A new MPSNNFilter node for a \fBMPSCNNPooling\fP kernel\&. 
+\fBA\fP new MPSNNFilter node for a \fBMPSCNNPooling\fP kernel\&. 
 .RE
 .PP
+
+.SH "Property Documentation"
+.PP 
+.SS "\- (NSUInteger NSUInteger) kernelHeight\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
+
+.SS "\- (NSUInteger) kernelWidth\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
+
+.SS "\- (NSUInteger NSUInteger NSUInteger) strideInPixelsX\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
+
+.SS "\- (NSUInteger NSUInteger NSUInteger NSUInteger) strideInPixelsY\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
 
 
 .SH "Author"

@@ -1,21 +1,34 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7E8F5C78-9225-31F0-948B-B3047ACE982C' ]
+uuids:           [ 'x86_64: 190009F9-B82F-3DD8-935B-F2A881A324E4' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/XCTAutomationSupport.framework/Versions/A/XCTAutomationSupport
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _XCAXDefaultStringAttributes_iOS, _XCAXDefaultStringAttributes_tvOS, 
+    symbols:         [ _XCAXDefaultStringAttributes, _XCAXDefaultStringAttributes_iOS, 
+                       _XCAXDefaultStringAttributes_tvOS, _XCAXLocalizableStringsDataAttributes, 
                        _XCBOOLFromAXValue, _XCCGPointFromAXValue, _XCCGRectFromAXValue, 
-                       _XCCGSizeFromAXValue, _XCGetWrappedAXUIElementFromNotificationPayload, 
-                       _XCNSArrayFromAXValue, _XCNSObjectFromAXValue, _XCNSStringFromAXValue, 
+                       _XCCGSizeFromAXValue, _XCElementSnapshotAttributeAccessibilityElement, 
+                       _XCElementSnapshotAttributeBridgedProcessID, _XCElementSnapshotAttributeChildren, 
+                       _XCElementSnapshotAttributeElementType, _XCElementSnapshotAttributeEnabled, 
+                       _XCElementSnapshotAttributeFrame, _XCElementSnapshotAttributeHasFocus, 
+                       _XCElementSnapshotAttributeHorizontalSizeClass, _XCElementSnapshotAttributeIdentifier, 
+                       _XCElementSnapshotAttributeLabel, _XCElementSnapshotAttributePlaceholderValue, 
+                       _XCElementSnapshotAttributeSelected, _XCElementSnapshotAttributeTitle, 
+                       _XCElementSnapshotAttributeValue, _XCElementSnapshotAttributeVerticalSizeClass, 
+                       _XCGetWrappedAXUIElementFromNotificationPayload, _XCNSArrayFromAXValue, 
+                       _XCNSNumberFromAXValue, _XCNSObjectFromAXValue, _XCNSStringFromAXValue, 
                        _XCSafeAttributeValue, _XCStringFromRect, _XCTASDebugLogger, 
-                       _XCTASLog, _XCTASSetDebugLogger, _XCTAccessibilityFrameworkCanAccessElement, 
-                       _XCTDefaultIdentifierFromSubrole, _XCTElementTypeFromRole, 
-                       _XCTSetSharedAccessibilityFramework, _XCTSharedAccessibilityFramework, 
-                       _XCUISetSharedCapabilities, _XCUISharedCapabilities, _XCUIUnsetSharedCapabilities, 
-                       _XCValueIsAXError, _XC_kAXXCAttributeAbsoluteValue, _XC_kAXXCAttributeActiveKeyboard, 
+                       _XCTASDispatchAssertQueue, _XCTASDispatchAssertQueueNot, _XCTASSetDebugLogger, 
+                       _XCTAccessibilityErrorKey, _XCTAccessibilityFrameworkAssertThreadRequirement, 
+                       _XCTAccessibilityFrameworkCanAccessElement, _XCTAutomationSupportErrorDomain, 
+                       _XCTAutomationSupportVersionNumber, _XCTAutomationSupportVersionString, 
+                       _XCTDefaultIdentifierFromSubrole, _XCTElementTypeFromClassAndTraits, 
+                       _XCTElementTypeFromRole, _XCTElementTypeShouldIgnoreSubrole, 
+                       _XCTInvalidExpressionsKey, _XCTPerformOnMainRunLoop, _XCTSetSharedAccessibilityFramework, 
+                       _XCTSharedAccessibilityFramework, _XCTStringFromAXError, _XCUISetSharedCapabilities, 
+                       _XCUISharedCapabilities, _XCUIUnsetSharedCapabilities, _XCValueIsAXError, 
+                       _XC_kAXXCAttributeAbsoluteValue, _XC_kAXXCAttributeActiveKeyboard, 
                        _XC_kAXXCAttributeApplication, _XC_kAXXCAttributeApplicationOrientation, 
                        _XC_kAXXCAttributeAvailableKeyplanes, _XC_kAXXCAttributeCallState, 
                        _XC_kAXXCAttributeCenterPoint, _XC_kAXXCAttributeChildren, 
@@ -31,7 +44,9 @@ exports:
                        _XC_kAXXCAttributeIsOpaqueElementProvider, _XC_kAXXCAttributeIsRemoteElement, 
                        _XC_kAXXCAttributeIsStarkElement, _XC_kAXXCAttributeIsUserInteractionEnabled, 
                        _XC_kAXXCAttributeIsValid, _XC_kAXXCAttributeIsVisible, _XC_kAXXCAttributeKeyboardKeyRepresentedString, 
-                       _XC_kAXXCAttributeLabel, _XC_kAXXCAttributeLanguage, _XC_kAXXCAttributeMainWindow, 
+                       _XC_kAXXCAttributeLabel, _XC_kAXXCAttributeLanguage, _XC_kAXXCAttributeLocalizationBundleID, 
+                       _XC_kAXXCAttributeLocalizationBundlePath, _XC_kAXXCAttributeLocalizedStringKey, 
+                       _XC_kAXXCAttributeLocalizedStringTableName, _XC_kAXXCAttributeMainWindow, 
                        _XC_kAXXCAttributeMaxScrubberPosition, _XC_kAXXCAttributeMaxValue, 
                        _XC_kAXXCAttributeMinScrubberPosition, _XC_kAXXCAttributeMinValue, 
                        _XC_kAXXCAttributeOpaqueElementParent, _XC_kAXXCAttributeParent, 
@@ -49,20 +64,24 @@ exports:
                        _XC_kAXXCAttributeVisibleCells, _XC_kAXXCAttributeVisibleFrame, 
                        _XC_kAXXCAttributeVisibleHorizontalScrollArea, _XC_kAXXCAttributeVisiblePoint, 
                        _XC_kAXXCAttributeVisibleSections, _XC_kAXXCAttributeVisibleVerticalScrollArea, 
-                       _XC_kAXXCAttributeWindowContextId, _XC_kAXXCParameterizedAttributeApplicationForPosition, 
-                       _XC_kAXXCParameterizedAttributeApplicationState, _XC_kAXXCParameterizedAttributeChildrenWithRange, 
-                       _XC_kAXXCParameterizedAttributeContextIdForPoint, _XC_kAXXCParameterizedAttributeContextIdForPointWithDisplayId, 
+                       _XC_kAXXCAttributeWindowContextId, _XC_kAXXCAttributeWindowDisplayId, 
+                       _XC_kAXXCParameterizedAttributeApplicationForPosition, _XC_kAXXCParameterizedAttributeApplicationState, 
+                       _XC_kAXXCParameterizedAttributeChildrenWithRange, _XC_kAXXCParameterizedAttributeContextIdForPoint, 
+                       _XC_kAXXCParameterizedAttributeContextIdForPointWithDisplayId, 
                        _XC_kAXXCParameterizedAttributeConvertHostedViewFrame, _XC_kAXXCParameterizedAttributeConvertHostedViewPosition, 
                        _XC_kAXXCParameterizedAttributeConvertHostedViewPositionFromContext, 
                        _XC_kAXXCParameterizedAttributeConvertPositionToContext, _XC_kAXXCParameterizedAttributeKeyboardKeyForString, 
                        _XC_kAXXCParameterizedAttributeUserTestingSnapshotParameterized, 
-                       __XCUIStringFromElementType ]
-    objc-classes:    [ _XCAXCycleDetector, _XCAccessibilityElement, _XCElementSnapshot, 
-                       _XCTAccessibilityFramework, _XCTAccessibilityInterface, _XCTApplicationStateSnapshot, 
-                       _XCTAutomationSession, _XCTElementBlockFilteringTransformer, 
-                       _XCTElementBlockSortingTransformer, _XCTElementContainingTransformer, 
-                       _XCTElementFilteringTransformer, _XCTElementIndexingTransformer, 
-                       _XCTElementQuery, _XCTElementQueryProcessor, _XCTElementQueryResults, 
-                       _XCTElementSetCodableTransformer, _XCTElementSnapshotRequest, 
-                       _XCTElementSortingTransformer, _XCTMatchingElementIterator ]
+                       __XCTASLog, __XCUIStringFromElementType ]
+    objc-classes:    [ XCAXCycleDetector, XCAccessibilityElement, XCElementSnapshot, 
+                       XCTAccessibilityFramework, XCTAccessibilityInterface, XCTAnimationsIdleNotifier, 
+                       XCTApplicationStateSnapshot, XCTAutomationSession, XCTContainingTransformerIterator, 
+                       XCTElementBlockFilteringTransformer, XCTElementBlockSortingTransformer, 
+                       XCTElementContainingTransformer, XCTElementFilteringTransformer, 
+                       XCTElementIndexingTransformer, XCTElementQuery, XCTElementQueryProcessor, 
+                       XCTElementQueryResults, XCTElementSetCodableTransformer, XCTElementSnapshotDescendantsEnumerator, 
+                       XCTElementSnapshotRequest, XCTElementSortingTransformer, XCTFilteringTransformerIterator, 
+                       XCTIndexingTransformerIterator, XCTLogArchiveRequest, XCTMainRunLoopIdleNotifier, 
+                       XCTMatchingElementIterator, XCTSpindumpRequestSpecification, 
+                       XCUIBridgedProcessCapabilities, XCUICapabilities ]
 ...

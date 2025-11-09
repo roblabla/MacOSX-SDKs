@@ -1,13 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 949F3461-8C17-3A9A-9728-AA53D739E5A7', 'x86_64: 47CA0F95-B536-376F-949D-66D11904E9C2' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
 platform:        macosx
 install-name:    /usr/lib/libcups.2.dylib
-current-version: 2.12
+current-version: 2.13
 compatibility-version: 2
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ __cupsAppleCopyDefaultPaperID, __cupsAppleCopyDefaultPrinter, 
                        __cupsAppleGetUseLastPrinter, __cupsAppleLanguage, __cupsAppleLocale, 
                        __cupsAppleSetDefaultPaperID, __cupsAppleSetDefaultPrinter, 
@@ -19,26 +18,26 @@ exports:
                        __cupsGet1284Values, __cupsGetDestResource, __cupsGetDests, 
                        __cupsGetPassword, __cupsGlobalLock, __cupsGlobalUnlock, __cupsGlobals, 
                        __cupsLangPrintError, __cupsLangPrintFilter, __cupsLangPrintf, 
-                       __cupsLangPuts, __cupsLangString, __cupsMD5Append, __cupsMD5Finish, 
-                       __cupsMD5Init, __cupsMessageFree, __cupsMessageLoad, __cupsMessageLookup, 
-                       __cupsMessageNew, __cupsMutexInit, __cupsMutexLock, __cupsMutexUnlock, 
-                       __cupsNextDelay, __cupsRWInit, __cupsRWLockRead, __cupsRWLockWrite, 
-                       __cupsRWUnlock, __cupsSNMPClose, __cupsSNMPCopyOID, __cupsSNMPDefaultCommunity, 
-                       __cupsSNMPIsOID, __cupsSNMPIsOIDPrefixed, __cupsSNMPOIDToString, 
-                       __cupsSNMPOpen, __cupsSNMPRead, __cupsSNMPSetDebug, __cupsSNMPStringToOID, 
-                       __cupsSNMPWalk, __cupsSNMPWrite, __cupsSetDefaults, __cupsSetError, 
-                       __cupsSetHTTPError, __cupsSetLocale, __cupsSetNegotiateAuthString, 
+                       __cupsLangPuts, __cupsLangString, __cupsMessageFree, __cupsMessageLoad, 
+                       __cupsMessageLookup, __cupsMessageNew, __cupsMutexInit, __cupsMutexLock, 
+                       __cupsMutexUnlock, __cupsNextDelay, __cupsRWInit, __cupsRWLockRead, 
+                       __cupsRWLockWrite, __cupsRWUnlock, __cupsSNMPClose, __cupsSNMPCopyOID, 
+                       __cupsSNMPDefaultCommunity, __cupsSNMPIsOID, __cupsSNMPIsOIDPrefixed, 
+                       __cupsSNMPOIDToString, __cupsSNMPOpen, __cupsSNMPRead, __cupsSNMPSetDebug, 
+                       __cupsSNMPStringToOID, __cupsSNMPWalk, __cupsSNMPWrite, __cupsSetDefaults, 
+                       __cupsSetError, __cupsSetHTTPError, __cupsSetLocale, __cupsSetNegotiateAuthString, 
                        __cupsStrAlloc, __cupsStrDate, __cupsStrFlush, __cupsStrFormatd, 
                        __cupsStrFree, __cupsStrRetain, __cupsStrScand, __cupsStrStatistics, 
-                       __cupsThreadCancel, __cupsThreadCreate, __cupsThreadWait, 
-                       __cupsUserDefault, __cups_safe_vsnprintf, __cups_strcasecmp, 
-                       __cups_strcpy, __cups_strncasecmp, __httpAddrSetPort, __httpCreateCredentials, 
-                       __httpDecodeURI, __httpDisconnect, __httpEncodeURI, __httpFreeCredentials, 
-                       __httpResolveURI, __httpStatus, __httpTLSInitialize, __httpTLSPending, 
-                       __httpTLSRead, __httpTLSSetOptions, __httpTLSStart, __httpTLSStop, 
-                       __httpTLSWrite, __httpUpdate, __httpWait, __ippFindOption, 
-                       __ppdCacheCreateWithFile, __ppdCacheCreateWithPPD, __ppdCacheDestroy, 
-                       __ppdCacheGetBin, __ppdCacheGetFinishingOptions, __ppdCacheGetFinishingValues, 
+                       __cupsThreadCancel, __cupsThreadCreate, __cupsThreadDetach, 
+                       __cupsThreadWait, __cupsUserDefault, __cups_safe_vsnprintf, 
+                       __cups_strcasecmp, __cups_strcpy, __cups_strncasecmp, __httpAddrSetPort, 
+                       __httpCreateCredentials, __httpDecodeURI, __httpDisconnect, 
+                       __httpEncodeURI, __httpFreeCredentials, __httpResolveURI, 
+                       __httpStatus, __httpTLSInitialize, __httpTLSPending, __httpTLSRead, 
+                       __httpTLSSetOptions, __httpTLSStart, __httpTLSStop, __httpTLSWrite, 
+                       __httpUpdate, __httpWait, __ippFindOption, __ppdCacheCreateWithFile, 
+                       __ppdCacheCreateWithPPD, __ppdCacheDestroy, __ppdCacheGetBin, 
+                       __ppdCacheGetFinishingOptions, __ppdCacheGetFinishingValues, 
                        __ppdCacheGetInputSlot, __ppdCacheGetMediaType, __ppdCacheGetOutputBin, 
                        __ppdCacheGetPageSize, __ppdCacheGetSize, __ppdCacheGetSource, 
                        __ppdCacheGetType, __ppdCacheWriteFile, __ppdCreateFromIPP, 
@@ -80,13 +79,13 @@ exports:
                        _cupsGetIntegerOption, _cupsGetJobs, _cupsGetJobs2, _cupsGetNamedDest, 
                        _cupsGetOption, _cupsGetPPD, _cupsGetPPD2, _cupsGetPPD3, _cupsGetPassword, 
                        _cupsGetPassword2, _cupsGetPrinters, _cupsGetResponse, _cupsGetServerPPD, 
-                       _cupsHashData, _cupsLangDefault, _cupsLangEncoding, _cupsLangFlush, 
-                       _cupsLangFree, _cupsLangGet, _cupsLastError, _cupsLastErrorString, 
-                       _cupsLocalizeDestMedia, _cupsLocalizeDestOption, _cupsLocalizeDestValue, 
-                       _cupsMakeServerCredentials, _cupsMarkOptions, _cupsNotifySubject, 
-                       _cupsNotifyText, _cupsParseOptions, _cupsPrintFile, _cupsPrintFile2, 
-                       _cupsPrintFiles, _cupsPrintFiles2, _cupsPutFd, _cupsPutFile, 
-                       _cupsReadResponseData, _cupsRemoveDest, _cupsRemoveOption, 
+                       _cupsHashData, _cupsHashString, _cupsLangDefault, _cupsLangEncoding, 
+                       _cupsLangFlush, _cupsLangFree, _cupsLangGet, _cupsLastError, 
+                       _cupsLastErrorString, _cupsLocalizeDestMedia, _cupsLocalizeDestOption, 
+                       _cupsLocalizeDestValue, _cupsMakeServerCredentials, _cupsMarkOptions, 
+                       _cupsNotifySubject, _cupsNotifyText, _cupsParseOptions, _cupsPrintFile, 
+                       _cupsPrintFile2, _cupsPrintFiles, _cupsPrintFiles2, _cupsPutFd, 
+                       _cupsPutFile, _cupsReadResponseData, _cupsRemoveDest, _cupsRemoveOption, 
                        _cupsResolveConflicts, _cupsSendRequest, _cupsServer, _cupsSetClientCertCB, 
                        _cupsSetCredentials, _cupsSetDefaultDest, _cupsSetDests, _cupsSetDests2, 
                        _cupsSetEncryption, _cupsSetPasswordCB, _cupsSetPasswordCB2, 

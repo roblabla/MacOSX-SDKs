@@ -1,7 +1,7 @@
 /*
     NSClickGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2017, Apple Inc.
+    Copyright (c) 2013-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -13,15 +13,15 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_10, NA)
 @interface NSClickGestureRecognizer : NSGestureRecognizer <NSCoding> {
 @private
-    NSInteger _flags;
-    NSPoint _location;
-    NSUInteger _buttonMask;
-    NSInteger _numberOfClicksRequired;
-    NSInteger _currentButtonCount;
-    NSInteger _activeButtonCount;
-    NSInteger _currentClickCount;
-    id _reserved0;
-    id _reserved1;
+    NSInteger _flags APPKIT_IVAR;
+    NSPoint _location APPKIT_IVAR;
+    NSUInteger _buttonMask APPKIT_IVAR;
+    NSInteger _numberOfClicksRequired APPKIT_IVAR;
+    NSInteger _currentButtonCount APPKIT_IVAR;
+    NSInteger _activeButtonCount APPKIT_IVAR;
+    NSInteger _currentClickCount APPKIT_IVAR;
+    id _reserved0 APPKIT_IVAR;
+    id _reserved1 APPKIT_IVAR;
 }
 
 /* bitfield of the button(s) required to recognize this click where bit 0 is the primary button, 1 is the secondary button, etc...

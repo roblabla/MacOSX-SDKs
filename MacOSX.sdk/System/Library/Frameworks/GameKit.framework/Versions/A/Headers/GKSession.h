@@ -38,7 +38,7 @@ If name = nil then GKSession will use the device name.
 - (id)initWithSessionID:(NSString *)sessionID displayName:(NSString *)name sessionMode:(GKSessionMode)mode NS_DEPRECATED(10_8, 10_10, 3_0, 7_0);
 #pragma clang diagnostic pop
 
-@property(assign) id<GKSessionDelegate> delegate;
+@property(assign) id<GKSessionDelegate> delegate NS_DEPRECATED(10_8, 10_10, 3_0, 7_0) ;
 
 @property(readonly) NSString *sessionID;
 @property(readonly) NSString *displayName;

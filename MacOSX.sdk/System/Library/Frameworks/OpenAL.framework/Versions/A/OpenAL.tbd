@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: E79EEF68-9CE2-3057-B8B7-7B68CF7778EC', 'x86_64: A84A0F93-4D6C-3047-BBA5-6491F61B7C4A' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 69CA8E49-D0BF-3153-88FB-3A6BCE8D14B7' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/OpenAL.framework/Versions/A/OpenAL
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _alBuffer3f, _alBuffer3i, _alBufferData, _alBufferDataStatic, 
                        _alBufferf, _alBufferfv, _alBufferi, _alBufferiv, _alDeleteBuffers, 
                        _alDeleteSources, _alDisable, _alDistanceModel, _alDopplerFactor, 

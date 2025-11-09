@@ -1,7 +1,7 @@
 /*
     NSUserInterfaceItemIdentification.h
     Application Kit
-    Copyright (c) 2006-2017, Apple Inc.
+    Copyright (c) 2006-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * NSUserInterfaceItemIdentifier NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSUserInterfaceItemIdentifier NS_TYPED_EXTENSIBLE_ENUM;
 
 /* Introduced in Mac OS 10.7 */
 @protocol NSUserInterfaceItemIdentification

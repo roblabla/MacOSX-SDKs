@@ -64,3 +64,8 @@ SwiftVersions:
     Parameters:
     - Position: 2
       Nullability: U
+# - "Version: 4", if you're in -swift-version 4 or -swift-version 3 (rdar://problem/35661627)
+- Version: 4
+  Functions:
+  - Name: CTTypesetterCreateWithAttributedStringAndOptions
+    ResultType: CTTypesetterRef _Nonnull

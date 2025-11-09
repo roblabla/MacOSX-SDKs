@@ -1,10 +1,10 @@
 .Dd September 23, 2011 
 .Dt xip 1 
-.Os Mac OS X
+.Os macOS
 .\"																				NAME 
 .Sh NAME
 .Nm xip
-.Nd Create a signed archive for secure distribution
+.Nd Create or expand a secure archive for secure distribution.
 .\"																				SYNOPSIS
 .Sh SYNOPSIS
 .Nm
@@ -32,4 +32,6 @@ Disable trusted timestamp, regardless of identity.
 The path to one or more files or directories to be archived.
 .It Ar output-archive
 The path to which the signed archive will be written.
+.It Cm --expand <input-file>
+Expands the archive into the current working directory. This option cannot be used with any other arguments.
 .El

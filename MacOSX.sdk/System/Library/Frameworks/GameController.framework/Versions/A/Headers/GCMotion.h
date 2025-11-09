@@ -135,7 +135,7 @@ typedef void (^GCMotionValueChangedHandler)(GCMotion *motion);
 /**
  The controller generating the motion data has sensors that can accurately determine the current attitude and rotation rate. If this is enabled the motion data for attitude and rotation rate are usable for inputs.
  */
-@property (nonatomic, assign, readonly) BOOL hasAttitudeAndRotationRate __TVOS_UNAVAILABLE;
+@property (nonatomic, assign, readonly) BOOL hasAttitudeAndRotationRate __TVOS_AVAILABLE(11.0);
 
 /**
  The current attitude of the controller.
@@ -144,7 +144,7 @@ typedef void (^GCMotionValueChangedHandler)(GCMotion *motion);
  @see hasAttitudeAndRotationRate
  @see GCMicroGamepad
  */
-@property (nonatomic, assign, readonly) GCQuaternion attitude __TVOS_UNAVAILABLE;
+@property (nonatomic, assign, readonly) GCQuaternion attitude __TVOS_AVAILABLE(11.0);
 
 /**
  The current rotation rate of the controller.
@@ -153,7 +153,7 @@ typedef void (^GCMotionValueChangedHandler)(GCMotion *motion);
  @see hasAttitudeAndRotationRate
  @see GCMicroGamepad
  */
-@property (nonatomic, assign, readonly) GCRotationRate rotationRate __TVOS_UNAVAILABLE;
+@property (nonatomic, assign, readonly) GCRotationRate rotationRate __TVOS_AVAILABLE(11.0);
 
 @end
 

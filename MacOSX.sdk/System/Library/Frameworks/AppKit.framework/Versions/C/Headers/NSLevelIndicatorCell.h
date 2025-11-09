@@ -1,7 +1,7 @@
 /*
     NSLevelIndicatorCell.h
     Application Kit
-    Copyright (c) 2004-2017, Apple Inc.
+    Copyright (c) 2004-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -19,13 +19,13 @@ typedef NS_ENUM(NSUInteger, NSLevelIndicatorStyle) {
 
 @interface NSLevelIndicatorCell : NSActionCell {
 @private
-    double _value;
-    double _minValue;
-    double _maxValue;
-    double _warningValue;
-    double _criticalValue;
-    int    _numberOfTickMarks;
-    int    _numberOfMajorTickMarks;
+    double _value APPKIT_IVAR;
+    double _minValue APPKIT_IVAR;
+    double _maxValue APPKIT_IVAR;
+    double _warningValue APPKIT_IVAR;
+    double _criticalValue APPKIT_IVAR;
+    int    _numberOfTickMarks APPKIT_IVAR;
+    int    _numberOfMajorTickMarks APPKIT_IVAR;
     struct {
         unsigned int indicatorStyle:4;
         unsigned int tickMarkPosition:1;
@@ -34,12 +34,12 @@ typedef NS_ENUM(NSUInteger, NSLevelIndicatorStyle) {
         unsigned int tieredCapacity:1;
         unsigned int inTableView:1;
         unsigned int reserved:22;
-    } _liFlags;
-    NSRect _cellFrame;
-    id     _aux;
-    id     _core;
-    int    _reserved1 __unused;
-    int    _reserved2 __unused;
+    } _liFlags APPKIT_IVAR;
+    NSRect _cellFrame APPKIT_IVAR;
+    id     _aux APPKIT_IVAR;
+    id     _core APPKIT_IVAR;
+    int    _reserved1 __unused APPKIT_IVAR;
+    int    _reserved2 __unused APPKIT_IVAR;
 }
 
 - (instancetype)initWithLevelIndicatorStyle:(NSLevelIndicatorStyle)levelIndicatorStyle;
@@ -65,11 +65,10 @@ typedef NS_ENUM(NSUInteger, NSLevelIndicatorStyle) {
 
 @end
 
-/* Legacy style names. These constants will be deprecated in a future release. */
-static const NSLevelIndicatorStyle NSRelevancyLevelIndicatorStyle = NSLevelIndicatorStyleRelevancy;
-static const NSLevelIndicatorStyle NSContinuousCapacityLevelIndicatorStyle = NSLevelIndicatorStyleContinuousCapacity;
-static const NSLevelIndicatorStyle NSDiscreteCapacityLevelIndicatorStyle = NSLevelIndicatorStyleDiscreteCapacity;
-static const NSLevelIndicatorStyle NSRatingLevelIndicatorStyle = NSLevelIndicatorStyleRating;
+static const NSLevelIndicatorStyle NSRelevancyLevelIndicatorStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSLevelIndicatorStyleRelevancy", 10_0, 10_14) = NSLevelIndicatorStyleRelevancy;
+static const NSLevelIndicatorStyle NSContinuousCapacityLevelIndicatorStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSLevelIndicatorStyleContinuousCapacity", 10_0, 10_14) = NSLevelIndicatorStyleContinuousCapacity;
+static const NSLevelIndicatorStyle NSDiscreteCapacityLevelIndicatorStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSLevelIndicatorStyleDiscreteCapacity", 10_0, 10_14) = NSLevelIndicatorStyleDiscreteCapacity;
+static const NSLevelIndicatorStyle NSRatingLevelIndicatorStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSLevelIndicatorStyleRating", 10_0, 10_14) = NSLevelIndicatorStyleRating;
 
 NS_ASSUME_NONNULL_END
 

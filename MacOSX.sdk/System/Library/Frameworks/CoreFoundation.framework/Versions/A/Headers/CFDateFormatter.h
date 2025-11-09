@@ -1,7 +1,7 @@
 /*	CFDateFormatter.h
-	Copyright (c) 2003-2017, Apple Inc. and the Swift project authors
+	Copyright (c) 2003-2018, Apple Inc. and the Swift project authors
  
-	Portions Copyright (c) 2014-2017, Apple Inc. and the Swift project authors
+	Portions Copyright (c) 2014-2018, Apple Inc. and the Swift project authors
 	Licensed under Apache License v2.0 with Runtime Library Exception
 	See http://swift.org/LICENSE.txt for license information
 	See http://swift.org/CONTRIBUTORS.txt for the list of Swift project authors
@@ -67,13 +67,14 @@ typedef CF_OPTIONS(CFOptionFlags, CFISO8601DateFormatOptions) {
      */
     kCFISO8601DateFormatWithDay API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = (1UL << 4),
 
-    kCFISO8601DateFormatWithTime API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = (1UL << 5),  // This uses the format "HH:mm:ss"
+    kCFISO8601DateFormatWithTime API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = (1UL << 5),  // This uses the format "HHmmss"
     kCFISO8601DateFormatWithTimeZone API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = (1UL << 6),
 
     kCFISO8601DateFormatWithSpaceBetweenDateAndTime API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = (1UL << 7),  // Use space instead of "T"
     kCFISO8601DateFormatWithDashSeparatorInDate API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = (1UL << 8),  // Add separator for date ("-")
     kCFISO8601DateFormatWithColonSeparatorInTime API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = (1UL << 9),  // Add separator for time (":")
     kCFISO8601DateFormatWithColonSeparatorInTimeZone API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = (1UL << 10),  // Add ":" separator in timezone (eg. +08:00)
+    kCFISO8601DateFormatWithFractionalSeconds API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0), tvos(11.0)) = (1UL << 11),  // Add 3 significant digits of fractional seconds (".SSS")
 
     kCFISO8601DateFormatWithFullDate API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = kCFISO8601DateFormatWithYear | kCFISO8601DateFormatWithMonth | kCFISO8601DateFormatWithDay | kCFISO8601DateFormatWithDashSeparatorInDate,
     kCFISO8601DateFormatWithFullTime API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = kCFISO8601DateFormatWithTime | kCFISO8601DateFormatWithColonSeparatorInTime | kCFISO8601DateFormatWithTimeZone | kCFISO8601DateFormatWithColonSeparatorInTimeZone,

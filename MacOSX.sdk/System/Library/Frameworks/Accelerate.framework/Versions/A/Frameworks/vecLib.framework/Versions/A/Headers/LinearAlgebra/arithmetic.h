@@ -3,6 +3,8 @@
 #ifndef __LA_ARITHMETIC_HEADER__
 #define __LA_ARITHMETIC_HEADER__
 
+#include <vecLib/LinearAlgebra/object.h>
+
 #if __has_feature(assume_nonnull)
 ////  If assume_nonnull is available, use it and use nullability qualifiers.
 _Pragma("clang assume_nonnull begin")

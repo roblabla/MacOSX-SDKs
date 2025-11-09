@@ -83,7 +83,7 @@ typedef struct LSItemInfoRecord {
 } LSItemInfoRecord __OS_AVAILABILITY_MSG(macosx, deprecated=10.11, "Use CFURLCopyResourcePropertiesForKeys or -[NSURL resourceValuesForKeys:error:] instead.");
 
 
-
+#if TARGET_OS_OSX
 /*
  *  LSCopyItemInfoForURL()   *** DEPRECATED ***
  *  
@@ -885,6 +885,8 @@ LSRegisterFSRef(
   const FSRef *  inRef,
   Boolean        inUpdate)                                    __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_3, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSRegisterURL instead.");
 
+	
+#endif // TARGET_OS_OSX
 
 
 /* ================================================================================== */
@@ -1079,6 +1081,7 @@ extern const CFStringRef kLSItemExtensionIsHidden                    __OSX_AVAIL
  */
 extern const CFStringRef kLSItemQuarantineProperties                 __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use the URL resource property kCFURLQuarantinePropertiesKey or NSURLQuarantinePropertiesKey instead.");
 
+#if TARGET_OS_OSX
 /*
  *  LSCopyItemAttribute()   *** DEPRECATED ***
  *  
@@ -1223,7 +1226,7 @@ LSSetItemAttribute(
   CFStringRef    inAttributeName,
   CFTypeRef      inValue)               /* can be NULL */     __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use CFURLSetResourcePropertyForKey or -[NSURL setResourceValue:forKey:error:] instead.");
 
-
+#endif // TARGET_OS_OSX
 
 /*
  *  LSHandlerOptions   *** DEPRECATED ***

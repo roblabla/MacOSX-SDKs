@@ -104,7 +104,7 @@ extern const CLLocationAccuracy kCLLocationAccuracyThreeKilometers;
  *  Discussion:
  *  	Used to specify the maximum CLLocationDistance
  */
-extern const CLLocationDistance CLLocationDistanceMax API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos);
+extern const CLLocationDistance CLLocationDistanceMax API_AVAILABLE(ios(6.0), macos(10.14));
 
 /*
  *  CLTimeIntervalMax
@@ -112,7 +112,7 @@ extern const CLLocationDistance CLLocationDistanceMax API_AVAILABLE(ios(6.0)) AP
  *  Discussion:
  *  	Used to specify the maximum NSTimeInterval
  */
-extern const NSTimeInterval CLTimeIntervalMax API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos);
+extern const NSTimeInterval CLTimeIntervalMax API_AVAILABLE(ios(6.0), macos(10.14));
 
 /*
  *  kCLLocationCoordinate2DInvalid
@@ -152,7 +152,7 @@ CLLocationCoordinate2D CLLocationCoordinate2DMake(CLLocationDegrees latitude, CL
  *  Discussion:
  *    Encapsulates the information about a floor.
  */
-NS_CLASS_AVAILABLE(NA, 8_0)
+API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos)
 @interface CLFloor : NSObject <NSCopying, NSSecureCoding>
 
 /*
@@ -176,7 +176,7 @@ NS_CLASS_AVAILABLE(NA, 8_0)
  *  Discussion:
  *    Represents a geographical coordinate along with accuracy and timestamp information.
  */
-NS_CLASS_AVAILABLE(10_6, 2_0)
+API_AVAILABLE(macos(10.6), ios(2.0))
 @interface CLLocation : NSObject <NSCopying, NSSecureCoding>
 {
 @private
@@ -259,7 +259,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Range:
  *    0.0 - 359.9 degrees, 0 being true North
  */
-@property(readonly, nonatomic) CLLocationDirection course API_AVAILABLE(ios(2.2), macos(10.7)) __TVOS_PROHIBITED;
+@property(readonly, nonatomic) CLLocationDirection course API_AVAILABLE(ios(2.2), macos(10.7)) API_UNAVAILABLE(tvos);
 
 /*
  *  speed
@@ -267,7 +267,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *    Returns the speed of the location in m/s. Negative if speed is invalid.
  */
-@property(readonly, nonatomic) CLLocationSpeed speed API_AVAILABLE(ios(2.2), macos(10.7)) __TVOS_PROHIBITED;
+@property(readonly, nonatomic) CLLocationSpeed speed API_AVAILABLE(ios(2.2), macos(10.7)) API_UNAVAILABLE(tvos);
 
 /*
  *  timestamp
@@ -293,7 +293,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *    Deprecated. Use -distanceFromLocation: instead.
  */
-- (CLLocationDistance)getDistanceFrom:(const CLLocation *)location API_DEPRECATED_WITH_REPLACEMENT("-distanceFromLocation:", ios(2.0, 3.2)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (CLLocationDistance)getDistanceFrom:(const CLLocation *)location API_DEPRECATED_WITH_REPLACEMENT("-distanceFromLocation:", ios(2.0, 3.2)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  distanceFromLocation:

@@ -1,13 +1,14 @@
 /*
         NSMenuItem.h
         Application Kit
-        Copyright (c) 1996-2017, Apple Inc.
+        Copyright (c) 1996-2018, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
 #import <AppKit/AppKitDefines.h>
+#import <AppKit/NSUserInterfaceItemIdentification.h>
 #import <AppKit/NSUserInterfaceValidation.h>
 #import <AppKit/NSView.h>
 #import <AppKit/NSCell.h>
@@ -21,30 +22,30 @@ NS_ASSUME_NONNULL_BEGIN
 {
     /*All instance variables are private*/
     @private
-    NSMenu *_menu;
-    NSString *_title;
-    NSString *_keyEquivalent;
+    NSMenu *_menu APPKIT_IVAR;
+    NSString *_title APPKIT_IVAR;
+    NSString *_keyEquivalent APPKIT_IVAR;
 #if __LP64__
-    NSString *_uiid;
-    id _repObject;
-    NSMenu *_submenu;
-    id _extraData;
-    id _target;
-    SEL _action;
-    NSInteger _tag;
-    unsigned char _keyEquivalentModifierMask;
+    NSString *_uiid APPKIT_IVAR;
+    id _repObject APPKIT_IVAR;
+    NSMenu *_submenu APPKIT_IVAR;
+    id _extraData APPKIT_IVAR;
+    id _target APPKIT_IVAR;
+    SEL _action APPKIT_IVAR;
+    NSInteger _tag APPKIT_IVAR;
+    unsigned char _keyEquivalentModifierMask APPKIT_IVAR;
 #else
-    NSUInteger _keyEquivalentModifierMask;
-    NSInteger _userKEGenerationCount;
-    NSInteger _state;
-    NSImage *_image;
-    NSMenu *_submenu;
-    NSString *_uiid;
-    id _repObject;
-    id _target;
-    SEL _action;
-    NSInteger _tag;
-    id _extraData;    
+    NSUInteger _keyEquivalentModifierMask APPKIT_IVAR;
+    NSInteger _userKEGenerationCount APPKIT_IVAR;
+    NSInteger _state APPKIT_IVAR;
+    NSImage *_image APPKIT_IVAR;
+    NSMenu *_submenu APPKIT_IVAR;
+    NSString *_uiid APPKIT_IVAR;
+    id _repObject APPKIT_IVAR;
+    id _target APPKIT_IVAR;
+    SEL _action APPKIT_IVAR;
+    NSInteger _tag APPKIT_IVAR;
+    id _extraData APPKIT_IVAR;    
 #endif
     struct __miFlags {
         unsigned int keGenerationCount:8;
@@ -66,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int hiddenActiveKE:1;
         unsigned int noRepeatKEs:1;
         unsigned int targetWeak:1;
-    } _miFlags;
+    } _miFlags APPKIT_IVAR;
 }
 
 @property (class) BOOL usesUserKeyEquivalents;
@@ -146,6 +147,8 @@ When a menu item is copied via NSCopying, any attached view is copied via archiv
 /* Returns the menu item containing the receiver or any of its superviews in the view hierarchy, or nil if the receiver's view hierarchy is not in a menu item. */
 @property (nullable, readonly, strong) NSMenuItem *enclosingMenuItem NS_AVAILABLE_MAC(10_5);
 @end
+
+APPKIT_EXTERN NSUserInterfaceItemIdentifier const NSMenuItemImportFromDeviceIdentifier NS_AVAILABLE_MAC(10_14); // Continuity Camera menu item.
 
 // The NSMenuItem protocol is deprecated.  Use the NSMenuItem class in your code.
 #if defined(__GNUC__) && (__GNUC__ >= 4) && (__GNUC_MINOR__ >= 2)

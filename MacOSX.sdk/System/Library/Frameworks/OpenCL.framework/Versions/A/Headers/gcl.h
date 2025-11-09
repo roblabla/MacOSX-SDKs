@@ -83,7 +83,7 @@ typedef enum clk_sampler_type
 DISPATCH_RETURNS_RETAINED
 #endif
 extern dispatch_queue_t __nullable gcl_create_dispatch_queue(cl_queue_flags flags, 
-                                                  cl_device_id __nullable device_id) GCL_API_SUFFIX__VERSION_1_1;
+                                                  cl_device_id __nullable device_id) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 //************************************************************************************************************************
 // The following APIs describe how to create OpenCL memory objects
@@ -99,9 +99,9 @@ extern dispatch_queue_t __nullable gcl_create_dispatch_queue(cl_queue_flags flag
 //************************************************************************************************************************
 extern void * __nullable gcl_malloc(size_t bytes, 
                                     void * __nullable host_ptr, 
-                                    cl_malloc_flags flags) GCL_API_SUFFIX__VERSION_1_1;
+                                    cl_malloc_flags flags) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
-extern void gcl_free(void * __nonnull ptr) GCL_API_SUFFIX__VERSION_1_1;
+extern void gcl_free(void * __nonnull ptr) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 //**********************************************************************************************************************************
 // gcl_create_image() creates a 2D image (depth = 1) or a 3D image (depth > 1).  
@@ -112,11 +112,11 @@ extern cl_image __nullable gcl_create_image(const cl_image_format * __nonnull im
                                             size_t image_width, 
                                             size_t image_height, 
                                             size_t image_depth, 
-                                            IOSurfaceRef __nullable io_surface) GCL_API_SUFFIX__VERSION_1_1;
+                                            IOSurfaceRef __nullable io_surface) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
-extern void gcl_retain_image(cl_image __nonnull image) GCL_API_SUFFIX__VERSION_1_1;
+extern void gcl_retain_image(cl_image __nonnull image) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
-extern void gcl_release_image(cl_image __nonnull image) GCL_API_SUFFIX__VERSION_1_1;
+extern void gcl_release_image(cl_image __nonnull image) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 //************************************************************************************************************************
 // gcl_get_supported_image_formats() queries the image formats supported by the OpenCL device specified by device_id.
@@ -128,7 +128,7 @@ extern void gcl_get_supported_image_formats(cl_device_id __nonnull device_id,
                                             cl_image_type image_type, 
                                             unsigned int num_entries, 
                                             cl_image_format * __nonnull image_formats, 
-                                            unsigned int * __nullable num_image_formats) GCL_API_SUFFIX__VERSION_1_1;
+                                            unsigned int * __nullable num_image_formats) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 //************************************************************************************************************************
 // The following APIs are OpenCL commands that can be passed in a block(s) to the GCD APIs that queue tasks for dispatch 
@@ -137,7 +137,7 @@ extern void gcl_get_supported_image_formats(cl_device_id __nonnull device_id,
 //************************************************************************************************************************
 extern void gcl_memcpy(void * __nonnull dst, 
                        const void * __nonnull src, 
-                       size_t size) GCL_API_SUFFIX__VERSION_1_1;
+                       size_t size) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 extern void gcl_memcpy_rect(void * __nonnull dst, 
                             const void * __nonnull src, 
@@ -147,23 +147,23 @@ extern void gcl_memcpy_rect(void * __nonnull dst,
                             size_t dst_row_pitch, 
                             size_t dst_slice_pitch, 
                             size_t src_row_pitch, 
-                            size_t src_slice_pitch) GCL_API_SUFFIX__VERSION_1_1;
+                            size_t src_slice_pitch) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 extern void gcl_copy_image(cl_image __nonnull dst_image, 
                            cl_image __nonnull src_image, 
                            const size_t dst_origin[3], 
                            const size_t src_origin[3], 
-                           const size_t region[3]) GCL_API_SUFFIX__VERSION_1_1;
+                           const size_t region[3]) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 extern void gcl_copy_ptr_to_image(cl_mem __nonnull dst_image, 
                                   void * __nonnull src_ptr, 
                                   const size_t dst_origin[3], 
-                                  const size_t region[3]) GCL_API_SUFFIX__VERSION_1_1;
+                                  const size_t region[3]) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 extern void gcl_copy_image_to_ptr(void * __nonnull dst_ptr, 
                                   cl_image __nonnull src_image, 
                                   const size_t src_origin[3], 
-                                  const size_t region[3]) GCL_API_SUFFIX__VERSION_1_1;
+                                  const size_t region[3]) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 //************************************************************************************************************************
 // The following map functions allow you to map a region of the buffer or image into the host address space
@@ -171,32 +171,32 @@ extern void gcl_copy_image_to_ptr(void * __nonnull dst_ptr,
 //************************************************************************************************************************
 extern void * __nullable gcl_map_ptr(void * __nonnull ptr, 
                                      cl_map_flags map_flags, 
-                                     size_t cb) GCL_API_SUFFIX__VERSION_1_1;
+                                     size_t cb) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
                          
 extern void * __nullable gcl_map_image(cl_image __nonnull image, 
                                        cl_map_flags map_flags, 
                                        const size_t origin[3], 
-                                       const size_t region[3]) GCL_API_SUFFIX__VERSION_1_1;
+                                       const size_t region[3]) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
                            
-extern void gcl_unmap(void * __nonnull) GCL_API_SUFFIX__VERSION_1_1;
+extern void gcl_unmap(void * __nonnull) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 //************************************************************************************************************************
 // gcl_create_kernel_from_block() is required to query the work-group size to use in cl_ndrange.local_work_size.  
 // This is needed to ensure good performance across GPUs as the work-group sizes vary across GPUs.
 //************************************************************************************************************************
-extern cl_kernel __nullable gcl_create_kernel_from_block(void * __nonnull kernel_block_ptr) GCL_API_SUFFIX__VERSION_1_1;
+extern cl_kernel __nullable gcl_create_kernel_from_block(void * __nonnull kernel_block_ptr) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 extern void gcl_get_kernel_block_workgroup_info(void * __nonnull kernel_block_ptr, 
                                                 cl_kernel_work_group_info param_name, 
                                                 size_t param_value_size, 
                                                 void * __nonnull param_value, 
-                                                size_t *__nullable param_value_size_ret) GCL_API_SUFFIX__VERSION_1_1;
+                                                size_t *__nullable param_value_size_ret) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 //************************************************************************************************************************
 // gcl_get_device_id_with_dispatch_queue() returns the cl_device_id.  This can then be used to query device information 
 // using the clGetDeviceInfo OpenCL API.
 //************************************************************************************************************************
-extern cl_device_id __nullable gcl_get_device_id_with_dispatch_queue(dispatch_queue_t __nonnull queue) GCL_API_SUFFIX__VERSION_1_1;
+extern cl_device_id __nullable gcl_get_device_id_with_dispatch_queue(dispatch_queue_t __nonnull queue) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 //************************************************************************************************************************
 // gcl_set_finalizer() sets the finalizer function for any objects created by gcl_malloc or gcl_create_***  
@@ -204,22 +204,22 @@ extern cl_device_id __nullable gcl_get_device_id_with_dispatch_queue(dispatch_qu
 //************************************************************************************************************************
 extern void gcl_set_finalizer(void * __nonnull object, 
                               void (* __nonnull cl_pfn_finalizer)(void * __nonnull object, void * __nullable user_data), 
-                              void * __nullable user_data) GCL_API_SUFFIX__VERSION_1_1;
+                              void * __nullable user_data) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 //************************************************************************************************************************
 // The following APIs allows you to measure the time it takes to execute a set of CL commands in a block
 // gcl_start_timer starts the timer.  gcl_stop_timer will return the time elapsed in seconds.
 //************************************************************************************************************************
-extern cl_timer gcl_start_timer(void) GCL_API_SUFFIX__VERSION_1_1;
+extern cl_timer gcl_start_timer(void) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
-extern double gcl_stop_timer(cl_timer t) GCL_API_SUFFIX__VERSION_1_1;
+extern double gcl_stop_timer(cl_timer t) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 //************************************************************************************************************************
 // Create a buffer cl_mem object from ptr returned by gcl_malloc. This cl_mem object can be used by CL API calls and enables
 // sharing of objects between GCL and the OpenCL API. The cl_mem object references the data store associated with 
 // ptr. The cl_mem objects created using gcl_create_buffer_from_ptr must be released before ptr is freed using gcl_free. 
 //************************************************************************************************************************
-extern cl_mem __nullable gcl_create_buffer_from_ptr(void * __nonnull ptr) GCL_API_SUFFIX__VERSION_1_1;
+extern cl_mem __nullable gcl_create_buffer_from_ptr(void * __nonnull ptr) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 //************************************************************************************************************************
 // The following APIs implement sharing of OpenGL vertex buffer, texture and renderbuffer objects with OpenCL.
@@ -227,13 +227,13 @@ extern cl_mem __nullable gcl_create_buffer_from_ptr(void * __nonnull ptr) GCL_AP
 // A cl_image is equivalent to the cl_mem object returned by clCreateFromGLTexture{2D|3D} or clCreateFromGLRenderbuffer 
 // and can be used by both GCL and OpenCL APIs.
 //************************************************************************************************************************
-extern void * __nullable gcl_gl_create_ptr_from_buffer(GLuint bufobj) GCL_API_SUFFIX__VERSION_1_1;
+extern void * __nullable gcl_gl_create_ptr_from_buffer(GLuint bufobj) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 extern cl_image __nullable gcl_gl_create_image_from_texture(GLenum texture_target, 
                                                             GLint mip_level, 
-                                                            GLuint texture) GCL_API_SUFFIX__VERSION_1_1;
+                                                            GLuint texture) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
-extern cl_image __nullable gcl_gl_create_image_from_renderbuffer(GLuint render_buffer) GCL_API_SUFFIX__VERSION_1_1;
+extern cl_image __nullable gcl_gl_create_image_from_renderbuffer(GLuint render_buffer) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
  
 //************************************************************************************************************************
 // The following APIs passed in a block(s) to a dispatch queue implement synchronization of commands between OpenGL and OpenCL.
@@ -246,7 +246,7 @@ extern cl_image __nullable gcl_gl_create_image_from_renderbuffer(GLuint render_b
 //
 // The sharegroup can only be specified once.
 //************************************************************************************************************************
-extern void gcl_gl_set_sharegroup(void* __nonnull share) GCL_API_SUFFIX__VERSION_1_1;
+extern void gcl_gl_set_sharegroup(void* __nonnull share) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 //************************************************************************************************************************
 // The following APIs allow the OpenCL objects underlying the GCL implementation to be obtained for interoperation 
@@ -256,7 +256,7 @@ extern void gcl_gl_set_sharegroup(void* __nonnull share) GCL_API_SUFFIX__VERSION
 //************************************************************************************************************************
 // gcl_get_context() returns the cl_context used by all GCL dispatch queues. The context may not be retained or released.
 //************************************************************************************************************************
-extern cl_context __nullable gcl_get_context(void) GCL_API_SUFFIX__VERSION_1_1;
+extern cl_context __nullable gcl_get_context(void) GCL_API_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
   
 #ifdef __cplusplus
 }

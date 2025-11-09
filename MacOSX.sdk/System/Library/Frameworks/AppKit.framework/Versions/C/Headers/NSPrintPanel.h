@@ -1,7 +1,7 @@
 /*
 	NSPrintPanel.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -44,14 +44,14 @@ typedef NS_OPTIONS(NSUInteger, NSPrintPanelOptions) {
 
 /* Valid values for passing into -[NSPrintPanel setJobStyleHint:].
 */
-typedef NSString * NSPrintPanelJobStyleHint NS_STRING_ENUM;
+typedef NSString * NSPrintPanelJobStyleHint NS_TYPED_ENUM;
 APPKIT_EXTERN NSPrintPanelJobStyleHint const NSPrintPhotoJobStyleHint;
 APPKIT_EXTERN NSPrintPanelJobStyleHint const NSPrintAllPresetsJobStyleHint NS_AVAILABLE_MAC(10_6);
 APPKIT_EXTERN NSPrintPanelJobStyleHint const NSPrintNoPresetsJobStyleHint NS_AVAILABLE_MAC(10_6);
 
 /* The keys of the entries that must be in the dictionaries returned by NSPrintPanelAccessorizing's -localizedSummaryItems method.
 */
-typedef NSString * NSPrintPanelAccessorySummaryKey NS_STRING_ENUM;
+typedef NSString * NSPrintPanelAccessorySummaryKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSPrintPanelAccessorySummaryKey const NSPrintPanelAccessorySummaryItemNameKey NS_AVAILABLE_MAC(10_5);
 APPKIT_EXTERN NSPrintPanelAccessorySummaryKey const NSPrintPanelAccessorySummaryItemDescriptionKey NS_AVAILABLE_MAC(10_5);
 
@@ -72,23 +72,21 @@ APPKIT_EXTERN NSPrintPanelAccessorySummaryKey const NSPrintPanelAccessorySummary
 
 @interface NSPrintPanel : NSObject {
     @private
-    NSMutableArray *_accessoryControllers;
-    id _previewController;
-    NSView *_thumbnailView;
-    NSInteger _options;
-    NSString *_defaultButtonTitle;
-    NSString *_helpAnchor;
-    NSString *_jobStyleHint;
-    NSPrintInfo *_originalPrintInfo;
-    id _delegate;
-    SEL _didEndSelector;
-    void *_contextInfo;
-    NSPrintInfo *_presentedPrintInfo;
-    NSWindowController *_windowController;
-#if __LP64__
-    id _reserved[2] __unused;
-#else
-    unsigned char _compatibilityPadding[192];
+    NSMutableArray *_accessoryControllers APPKIT_IVAR;
+    id _previewController APPKIT_IVAR;
+    NSView *_thumbnailView APPKIT_IVAR;
+    NSInteger _options APPKIT_IVAR;
+    NSString *_defaultButtonTitle APPKIT_IVAR;
+    NSString *_helpAnchor APPKIT_IVAR;
+    NSString *_jobStyleHint APPKIT_IVAR;
+    NSPrintInfo *_originalPrintInfo APPKIT_IVAR;
+    id _delegate APPKIT_IVAR;
+    SEL _didEndSelector APPKIT_IVAR;
+    void *_contextInfo APPKIT_IVAR;
+    NSPrintInfo *_presentedPrintInfo APPKIT_IVAR;
+    NSWindowController *_windowController APPKIT_IVAR;
+#if ! __LP64__
+    unsigned char _compatibilityPadding[192] APPKIT_IVAR;
 #endif
 }
 
@@ -143,13 +141,9 @@ APPKIT_EXTERN NSPrintPanelAccessorySummaryKey const NSPrintPanelAccessorySummary
 
 @interface NSPrintPanel(NSDeprecated)
 
-/* Methods that were deprecated in Mac OS 10.5. -setAccessoryView: replaces all of the accessory controllers that have been added so far by -addAccessoryController:. -accessoryView merely returns the view of the first accessory controller, or nil.
-*/
-- (void)setAccessoryView:(nullable NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
-- (nullable NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)setAccessoryView:(nullable NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5, "Use -addAccessoryController instead");
+- (nullable NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5,  "Use -accessoryControllers instead. For compatibility this returns the view of the first accessory controller, or nil");
 
-/* Methods that were also deprecated in Mac OS 10.5.
-*/
 - (void)updateFromPrintInfo NS_DEPRECATED_MAC(10_0, 10_5);
 - (void)finalWritePrintInfo NS_DEPRECATED_MAC(10_0, 10_5);
 

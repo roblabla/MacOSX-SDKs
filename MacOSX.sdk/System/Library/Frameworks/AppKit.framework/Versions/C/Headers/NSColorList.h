@@ -1,7 +1,7 @@
 /*
 	NSColorList.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -20,19 +20,19 @@ NSColorLists post "NSColorListDidChangeNotification" when changed.
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * NSColorListName NS_EXTENSIBLE_STRING_ENUM;
-typedef NSString * NSColorName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSColorListName NS_SWIFT_BRIDGED_TYPEDEF;
+typedef NSString * NSColorName NS_SWIFT_BRIDGED_TYPEDEF;
 
 @class NSColor, NSBundle;
 
 @interface NSColorList : NSObject <NSSecureCoding> {
     /*All instance variables are private*/
-    NSMutableArray *_keyArray;
-    NSMutableArray *_colorArray;
-    CFMutableDictionaryRef _keyToIndexTable;
-    NSString *_name;
-    NSString *_printerType;
-    NSString *_fileName;
+    NSMutableArray *_keyArray APPKIT_IVAR;
+    NSMutableArray *_colorArray APPKIT_IVAR;
+    CFMutableDictionaryRef _keyToIndexTable APPKIT_IVAR;
+    NSString *_name APPKIT_IVAR;
+    NSString *_printerType APPKIT_IVAR;
+    NSString *_fileName APPKIT_IVAR;
     struct _colorListFlags {
 	unsigned int colorsLoaded:1;
 	unsigned int editable:1;
@@ -46,8 +46,8 @@ typedef NSString * NSColorName NS_EXTENSIBLE_STRING_ENUM;
 #if __LP64__
 	unsigned int :32;
 #endif
-    } _flags;
-    id _clAuxiliaryStorage;
+    } _flags APPKIT_IVAR;
+    id _clAuxiliaryStorage APPKIT_IVAR;
 }
 
 /* Returns all color lists in the user's color list path, including those added at runtime. Creating a named color list and saving with writeToFile:nil will add it to this list; removeFile will remove it from this list. (That is what happens as the user creates and destroys color lists in the color panel.)
@@ -99,7 +99,7 @@ typedef NSString * NSColorName NS_EXTENSIBLE_STRING_ENUM;
  
    Use of the unkeyed archive format (and hence this API) is discouraged since it cannot represent some colors (including custom colorspace based ones) without loss. Use writeToURL:error: instead.
 */
-- (BOOL)writeToFile:(nullable NSString *)path;	
+- (BOOL)writeToFile:(nullable NSString *)path NS_DEPRECATED_MAC(10_0, 10_14, "Use -writeToURL:error: instead");
 
 /* If the color list is in the user's private colorlists directory, removes the corresponding file and the color list from availableColorLists. If there are no outstanding references to the color list this might deallocate the object as well.
 */

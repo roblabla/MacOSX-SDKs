@@ -1,7 +1,7 @@
 /*
         NSOpenGLLayer.h
         Application Kit
-        Copyright (c) 2008-2017, Apple Inc.
+        Copyright (c) 2008-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -12,12 +12,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_6, NA)
+NS_OPENGL_CLASS_DEPRECATED(10_6, 10_14, "Please use CAMetalLayer instead.")
 @interface NSOpenGLLayer : CAOpenGLLayer
 {
 @private
 #ifndef __OBJC2__
-    void *_reserved[7] __unused;
+    void *_reserved[7] __unused APPKIT_IVAR;
 #endif
 }
 

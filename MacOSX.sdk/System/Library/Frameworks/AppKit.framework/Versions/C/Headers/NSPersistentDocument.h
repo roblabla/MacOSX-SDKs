@@ -1,7 +1,7 @@
 /*
 	NSPersistentDocument.h
 	Application Kit
-	Copyright (c) 2004-2017, Apple Inc.
+	Copyright (c) 2004-2018, Apple Inc.
 	All rights reserved.
  */
 
@@ -15,13 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSPersistentDocument : NSDocument {
 @private
-    NSManagedObjectModel *_managedObjectModel;
-    NSManagedObjectContext *_managedObjectContext;
-    id _store;
-    uintptr_t _pDocFlags;
-    id _relatedRequestURLs;
-    void *_reserved3 __unused;
-    void *_reserved4 __unused;
+    NSManagedObjectModel *_managedObjectModel APPKIT_IVAR;
+    NSManagedObjectContext *_managedObjectContext APPKIT_IVAR;
+    id _store APPKIT_IVAR;
+    uintptr_t _pDocFlags APPKIT_IVAR;
+    id _relatedRequestURLs APPKIT_IVAR;
+    void *_reserved3 __unused APPKIT_IVAR;
+    void *_reserved4 __unused APPKIT_IVAR;
 }
 
 // Persistent documents always have a managed context (and a persistent store coordinator through that context).

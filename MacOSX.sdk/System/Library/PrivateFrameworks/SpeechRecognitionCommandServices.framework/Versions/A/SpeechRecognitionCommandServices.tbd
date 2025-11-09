@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 88109319-CDB7-30CF-824E-9EDC1D73D5B5' ]
+uuids:           [ 'x86_64: 7A698205-4559-3B5C-9A4E-1CECB09366BF' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/SpeechRecognitionCommandServices.framework/Versions/A/SpeechRecognitionCommandServices
 exports:         
@@ -20,7 +20,7 @@ exports:
                        _kSRCSCommandParseDictionaryKeyText, _kSRCSCommandTargetTypeOSX, 
                        _kSRCSCommandTargetTypeiOS, _kSRCSCommandTargetTypewatchOS, 
                        _yychar, _yyerror, _yylex, _yylval, _yynerrs, _yyparse ]
-    objc-classes:    [ _SRCSCommandStringsTable, _SRCSOldCommandStringParser, _SRCSSpokenCommandUtilities ]
-    objc-ivars:      [ _SRCSCommandStringsTable._commandStringsCache, _SRCSSpokenCommandUtilities._commandAttributes, 
-                       _SRCSSpokenCommandUtilities._commandStringsTablesByLocaleIdentifier ]
+    objc-classes:    [ SRCSCommandStringsTable, SRCSOldCommandStringParser, SRCSSpokenCommandUtilities ]
+    objc-ivars:      [ SRCSCommandStringsTable._commandStringsCache, SRCSSpokenCommandUtilities._commandAttributes, 
+                       SRCSSpokenCommandUtilities._commandStringsTablesByLocaleIdentifier ]
 ...

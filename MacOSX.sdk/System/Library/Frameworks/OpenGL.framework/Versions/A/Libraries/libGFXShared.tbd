@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: DCF97F8E-6AB2-3B95-B210-60C415FB4748', 'x86_64: EE280409-2CF8-30C1-9D66-B41852C89024' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: C26CA5C7-8DFC-3BE9-9873-C7A51F139FB0' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGFXShared.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _gfxAllocateTextureLevel, _gfxAnnotateAddDataSource, _gfxAnnotateBuffer, 
                        _gfxAnnotateRemoveDataSource, _gfxAnnotateTexture, _gfxClearSyncObjectsInHash, 
                        _gfxCompareSharedState, _gfxCreateGLSyncFromCLEvent, _gfxCreatePluginBuffer, 
@@ -23,13 +23,13 @@ exports:
                        _gfxInitializeGLTexture, _gfxInitializeGLTexturePluginState, 
                        _gfxInitializeLibrary, _gfxLibAlloc, _gfxLibCalloc, _gfxLibFree, 
                        _gfxLinkedOSVersion, _gfxLoadPluginData, _gfxModifyPluginTextureLevel, 
-                       _gfxPixelBytes, _gfxPluginConnectAll, _gfxReleaseBufferObject, 
-                       _gfxReleaseLibrary, _gfxReleaseSharedState, _gfxReleaseSharedStateAndHash, 
-                       _gfxReleaseSyncObject, _gfxReleaseTextureObject, _gfxReqToBase, 
-                       _gfxRetainBufferObject, _gfxRetainSharedState, _gfxRetainSharedStateAndHash, 
-                       _gfxRetainSyncObject, _gfxRetainTextureObject, _gfxSetShaderDetachFunc, 
-                       _gfxSetSharedFreeFunc, _gfxSharedHasFloatRenderer, _gfxSynchronizeTexLevelStorage, 
-                       _gfxTextureLevelBytes, _gfxUpdatePluginTextureLevelGeometry, 
+                       _gfxPixelBytes, _gfxPluginConnectAll, _gfxPreferRemovable, 
+                       _gfxReleaseBufferObject, _gfxReleaseLibrary, _gfxReleaseSharedState, 
+                       _gfxReleaseSharedStateAndHash, _gfxReleaseSyncObject, _gfxReleaseTextureObject, 
+                       _gfxReqToBase, _gfxRetainBufferObject, _gfxRetainSharedState, 
+                       _gfxRetainSharedStateAndHash, _gfxRetainSyncObject, _gfxRetainTextureObject, 
+                       _gfxSetShaderDetachFunc, _gfxSetSharedFreeFunc, _gfxSharedHasFloatRenderer, 
+                       _gfxSynchronizeTexLevelStorage, _gfxTextureLevelBytes, _gfxUpdatePluginTextureLevelGeometry, 
                        _gfxUpdateTextureForGeometryChange, _gfxUpdateTextureForParameterChange, 
                        _gfxUploadPluginBufferData, _gfxUploadPluginTextureLevel, 
                        _gfxWaitBufferOnDevices, _gfxWaitPluginBuffer, _gfxWaitPluginTexture, 

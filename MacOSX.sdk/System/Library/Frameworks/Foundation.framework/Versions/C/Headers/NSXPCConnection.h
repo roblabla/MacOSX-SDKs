@@ -1,5 +1,5 @@
 /*	NSXPCConnection.h
-        Copyright (c) 2011-2017, Apple Inc. All rights reserved.
+        Copyright (c) 2011-2018, Apple Inc. All rights reserved.
  */
 
 #import <dispatch/dispatch.h>
@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 // Make a synchronous IPC call instead of the default async behavior. The error handler block and reply block will be invoked on the calling thread before the message to the proxy returns, instead of on the queue for the connection.
-- (id)synchronousRemoteObjectProxyWithErrorHandler:(void (NS_NOESCAPE ^)(NSError *error))handler API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+- (id)synchronousRemoteObjectProxyWithErrorHandler:(void (^)(NSError *error))handler API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 @end
 

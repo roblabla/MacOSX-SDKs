@@ -15,8 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 // AMBundleAction
 
 NS_CLASS_AVAILABLE_MAC(10_4)
-@interface AMBundleAction : AMAction <NSCoding, NSCopying> {
-   @private
+@interface AMBundleAction : AMAction <NSCopying, NSSecureCoding>
+{
+	@private
 	__weak NSView *_view;
 	NSBundle *_bundle;
 	NSArray *_topLevelObjects;

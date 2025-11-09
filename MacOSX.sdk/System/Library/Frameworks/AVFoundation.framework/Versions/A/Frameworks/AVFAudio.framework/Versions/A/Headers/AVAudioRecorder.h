@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSURL, NSError;
 
 
-API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos) 
 @interface AVAudioRecorder : NSObject {
 @private
     void *_impl;
@@ -40,9 +40,9 @@ API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos)
 /* methods that return BOOL return YES on success and NO on failure. */
 - (BOOL)prepareToRecord; /* creates the file and gets ready to record. happens automatically on record. */
 - (BOOL)record; /* start or resume recording to file. */
-- (BOOL)recordAtTime:(NSTimeInterval)time NS_AVAILABLE_IOS(6_0); /* start recording at specified time in the future. time is an absolute time based on and greater than deviceCurrentTime. */
+- (BOOL)recordAtTime:(NSTimeInterval)time API_AVAILABLE(macos(10.9), ios(6.0), watchos(4.0)) API_UNAVAILABLE(tvos); /* start recording at specified time in the future. time is an absolute time based on and greater than deviceCurrentTime. */
 - (BOOL)recordForDuration:(NSTimeInterval) duration; /* record a file of a specified duration. the recorder will stop when it has recorded this length of audio */
-- (BOOL)recordAtTime:(NSTimeInterval)time forDuration:(NSTimeInterval) duration NS_AVAILABLE_IOS(6_0); /* record a file of a specified duration starting at specified time. time is an absolute time based on and greater than deviceCurrentTime. */
+- (BOOL)recordAtTime:(NSTimeInterval)time forDuration:(NSTimeInterval) duration API_AVAILABLE(macos(10.9), ios(6.0), watchos(4.0)) API_UNAVAILABLE(tvos); /* record a file of a specified duration starting at specified time. time is an absolute time based on and greater than deviceCurrentTime. */
 - (void)pause; /* pause recording */
 - (void)stop; /* stops recording. closes the file. */
 
@@ -66,7 +66,7 @@ API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos)
 /* get the current time of the recording - only valid while recording */
 @property(readonly) NSTimeInterval currentTime;
 /* get the device current time - always valid */
-@property(readonly) NSTimeInterval deviceCurrentTime NS_AVAILABLE_IOS(6_0);
+@property(readonly) NSTimeInterval deviceCurrentTime API_AVAILABLE(macos(10.9), ios(6.0), watchos(4.0)) API_UNAVAILABLE(tvos);
 
 /* metering */
 
@@ -81,14 +81,14 @@ API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos)
 /* The channels property lets you assign the output to record specific channels as described by AVAudioSession's channels property */
 /* This property is nil valued until set. */
 /* The array must have the same number of channels as returned by the numberOfChannels property. */
-@property(nonatomic, copy, nullable) NSArray<AVAudioSessionChannelDescription *> *channelAssignments NS_AVAILABLE(10_9, 7_0); /* Array of AVAudioSessionChannelDescription objects */
+@property(nonatomic, copy, nullable) NSArray<AVAudioSessionChannelDescription *> *channelAssignments API_AVAILABLE(macos(10.9), ios(7.0), watchos(4.0)) API_UNAVAILABLE(tvos); /* Array of AVAudioSessionChannelDescription objects */
 #endif
 
 @end
 
 
 /* A protocol for delegates of AVAudioRecorder */
-API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos) 
 @protocol AVAudioRecorderDelegate <NSObject>
 @optional 
 

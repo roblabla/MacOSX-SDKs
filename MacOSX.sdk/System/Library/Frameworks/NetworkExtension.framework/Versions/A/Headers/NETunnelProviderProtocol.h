@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Apple Inc.
+ * Copyright (c) 2015, 2018 Apple Inc.
  * All rights reserved.
  */
 
@@ -24,20 +24,20 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NETunnelProviderProtocol : NEVPNProtocol
 
 /*!
  * @property providerConfiguration
  * @discussion A dictionary containing NETunnelProvider vendor-specific configuration parameters. This dictionary is passed as-is to NETunnelProviders when a tunnel is started.
  */
-@property (copy, nullable) NSDictionary<NSString *,id> *providerConfiguration NS_AVAILABLE(10_11, 9_0);
+@property (copy, nullable) NSDictionary<NSString *,id> *providerConfiguration API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property providerBundleIdentifier
  * @discussion A string containing the bundle identifier of the NETunnelProvider to be used by this configuration.
  */
-@property (copy, nullable) NSString *providerBundleIdentifier NS_AVAILABLE(10_11, 9_0);
+@property (copy, nullable) NSString *providerBundleIdentifier API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

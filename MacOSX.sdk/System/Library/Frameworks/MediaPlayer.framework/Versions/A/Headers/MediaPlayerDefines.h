@@ -26,7 +26,7 @@
 #define __MP_PROHIBITED_PLATFORM_ios ios,unavailable
 #define __MP_PROHIBITED_PLATFORM_watchos watchos,unavailable
 #define __MP_PROHIBITED_PLATFORM_tvos tvos,unavailable
-#define __MP_PROHIBITED_PLATFORM_bridgeos bridgeos,unavailable
+
 
 #if __has_include(<AvailabilityProhibitedInternal.h>)
 #define __MP_P(x)
@@ -41,3 +41,6 @@
 #define __MP_PROHIBITED_GET_MACRO(_1,_2,_3,_4,NAME,...) NAME
 
 #define MP_PROHIBITED(...) __MP_PROHIBITED_GET_MACRO(__VA_ARGS__,__MP_PROHIBITED4,__MP_PROHIBITED3,__MP_PROHIBITED2,__MP_PROHIBITED1)(__VA_ARGS__)
+
+#define MP_HAS_UIVIEW               __has_include(<UIKit/UIView.h>)
+#define MP_HAS_AVMEDIASELECTION     __has_include(<AVFoundation/AVMediaSelection.h>)

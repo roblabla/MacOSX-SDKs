@@ -1,13 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64, x86_64h ]
-uuids:           [ 'i386: 0C7848B1-0F3B-3EB7-8784-57D15012D2B4', 'x86_64: 508D8382-065F-3133-B61B-ADCD1A401470', 
-                   'x86_64h: 547C43FB-0243-340A-9B9B-AE8E5A5653BA' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64, x86_64h ]
+uuids:           [ 'x86_64: E00244BC-D710-3978-B6EE-38E22882B0D9', 'x86_64h: 00D6FC17-B739-3259-90A4-92AC8BBE03D6' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparseBLAS.dylib
 objc-constraint: none
-parent-umbrella: vecLib
 exports:         
-  - archs:           [ i386, x86_64, x86_64h ]
+  - archs:           [ x86_64, x86_64h ]
+    allowable-clients: [ Sparse, vecLib ]
     symbols:         [ _sparse_commit, _sparse_elementwise_norm_double, _sparse_elementwise_norm_float, 
                        _sparse_extract_block_double, _sparse_extract_block_float, 
                        _sparse_extract_sparse_column_double, _sparse_extract_sparse_column_float, 

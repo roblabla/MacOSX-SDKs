@@ -1,38 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: B5CB894F-71B3-3493-8411-8BF21644065A', 'x86_64: 5CCF57B8-A575-36A9-B893-BEB9A76EA1DC' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 90641B6B-D07B-3577-B594-965825544B60' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSyncLegacy.framework/Versions/A/ColorSyncLegacy
 objc-constraint: none
 parent-umbrella: ApplicationServices
 exports:         
-  - archs:           [ i386 ]
-    symbols:         [ _CMActivateCurrentWorkflow, _CMActivateWorkflow, _CMConvertFixedXYZToXYZ, 
-                       _CMConvertHLSToRGB, _CMConvertHSVToRGB, _CMConvertLabToXYZ, 
-                       _CMConvertLuvToXYZ, _CMConvertRGBToGray, _CMConvertRGBToHLS, 
-                       _CMConvertRGBToHSV, _CMConvertXYZToFixedXYZ, _CMConvertXYZToLab, 
-                       _CMConvertXYZToLuv, _CMConvertXYZToXYZ, _CMConvertXYZToYxy, 
-                       _CMConvertYxyToXYZ, _CMCopyWorkflow, _CMCountImageProfiles, 
-                       _CMCountWorkflows, _CMCreateProfileIdentifier, _CMDeleteWorkflow, 
-                       _CMDisposeProfileSearch, _CMEmbedImage, _CMExportWorkflow, 
-                       _CMFlattenProfile, _CMGetCWInfo, _CMGetColorSyncFolderSpec, 
-                       _CMGetDeviceProfiles, _CMGetImageSpace, _CMGetIndImageProfile, 
-                       _CMGetIndWorkflow, _CMGetPreferredCMM, _CMGetPreferredCMMGlobal, 
-                       _CMGetScriptProfileDescription, _CMGetWorkflowDates, _CMGetWorkflowDesc, 
-                       _CMGetWorkflowEntry, _CMGetWorkflowName, _CMImportWorkflow, 
-                       _CMInitWorkflows, _CMLinkImage, _CMMatchImage, _CMNewDisplayProfile, 
-                       _CMNewProfileSearch, _CMProfileIdentifierFolderSearch, _CMProfileIdentifierListSearch, 
-                       _CMProofImage, _CMRevertWorkflow, _CMRevertWorkflows, _CMSaveWorkflows, 
-                       _CMSearchGetIndProfile, _CMSearchGetIndProfileFileSpec, _CMSetDefaultProfileBySpace, 
-                       _CMSetDefaultProfileByUse, _CMSetDeviceProfiles, _CMSetIndImageProfile, 
-                       _CMSetPreferredCMM, _CMSetPreferredCMMGlobal, _CMSetWorkflowDesc, 
-                       _CMSetWorkflowEntry, _CMSetWorkflowName, _CMTermWorkflows, 
-                       _CMUnembedImage, _CMUpdateProfileSearch, _CMValidImage, _CMWorkflowIsActive, 
-                       _CMWorkflowIsModified, _DisposeCMProfileFilterUPP, _InvokeCMProfileFilterUPP, 
-                       _NCMSetSystemProfile, _NCMUnflattenProfile, _NewCMProfileFilterUPP ]
   - archs:           [ x86_64 ]
-    symbols:         [ _kCMIlluminantD50, _kCMIlluminantD65 ]
-  - archs:           [ i386, x86_64 ]
     allowable-clients: [ DMProxy ]
     symbols:         [ _CMCloneProfileRef, _CMCloseProfile, _CMConvertDoubleXYZToD50, 
                        _CMConvertRGBFloatBitmap, _CMConvertXYZFloatBitmap, _CMCopyProfile, 
@@ -74,5 +48,6 @@ exports:
                        _NewCMBitmapCallBackUPP, _NewCMConcatCallBackUPP, _NewCMFlattenUPP, 
                        _NewCMMIterateUPP, _NewCMProfileAccessUPP, _NewCMProfileIterateUPP, 
                        __CMGetProfileOfSuite, __CMLoadProfileLutsByAVID, __CMProfileGetProperty, 
-                       __CMProfileSetProperty, __CWColorWorldGetProperty, __CWColorWorldSetProperty ]
+                       __CMProfileSetProperty, __CWColorWorldGetProperty, __CWColorWorldSetProperty, 
+                       _kCMIlluminantD50, _kCMIlluminantD65 ]
 ...

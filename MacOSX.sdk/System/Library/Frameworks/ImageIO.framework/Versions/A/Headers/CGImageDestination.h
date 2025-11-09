@@ -30,7 +30,7 @@ CF_ASSUME_NONNULL_BEGIN
  * A value of 0.0 implies that that maximum compression is 
  * desired. */
 
-IMAGEIO_EXTERN const CFStringRef kCGImageDestinationLossyCompressionQuality  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationLossyCompressionQuality  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 
 
 /* The desired background color to composite against when writing 
@@ -39,35 +39,35 @@ IMAGEIO_EXTERN const CFStringRef kCGImageDestinationLossyCompressionQuality  IMA
  * any alpha component of its own.  If not present a white color
  * will be used if needed. */
 
-IMAGEIO_EXTERN const CFStringRef kCGImageDestinationBackgroundColor  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationBackgroundColor  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 
 /* Rescale the image to the maximum width and height in pixels.
  * If present, this value of this key must be a CFNumberRef. */
 
-IMAGEIO_EXTERN const CFStringRef kCGImageDestinationImageMaxPixelSize  IMAGEIO_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationImageMaxPixelSize  IMAGEIO_AVAILABLE_STARTING(10.10, 8.0);
 
 /* Enable or disable thumbnail embedding for JPEG and HEIF.
  * The value should be kCFBooleanTrue or kCFBooleanFalse. Defaults to kCFBooleanFalse */
 
-IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEmbedThumbnail  IMAGEIO_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEmbedThumbnail  IMAGEIO_AVAILABLE_STARTING(10.10, 8.0);
 
 
 /* Create an image using a colorspace, that has is compatible with older devices
  * The value should be kCFBooleanTrue or kCFBooleanFalse
  * Defaults to kCFBooleanFalse = don't do any color conversion
  */
-IMAGEIO_EXTERN const CFStringRef kCGImageDestinationOptimizeColorForSharing  IMAGEIO_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_9_3);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationOptimizeColorForSharing  IMAGEIO_AVAILABLE_STARTING(10.12, 9.3);
 
 CF_ASSUME_NONNULL_END
 
 
 /* Return the CFTypeID for CGImageDestinations. */
 
-IMAGEIO_EXTERN CFTypeID CGImageDestinationGetTypeID(void)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CFTypeID CGImageDestinationGetTypeID(void)  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 
 /* Return an array of supported type identifiers. */
 
-IMAGEIO_EXTERN CFArrayRef __nonnull CGImageDestinationCopyTypeIdentifiers(void)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CFArrayRef _iio_Nonnull CGImageDestinationCopyTypeIdentifiers(void)  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 
 /* Create an image destination writing to the data consumer `consumer'.
  * The parameter `type' specifies the type identifier of the resulting
@@ -76,7 +76,7 @@ IMAGEIO_EXTERN CFArrayRef __nonnull CGImageDestinationCopyTypeIdentifiers(void) 
  * dictionary is reserved for future use; currently, you should pass NULL
  * for this parameter. */
 
-IMAGEIO_EXTERN CGImageDestinationRef __nullable CGImageDestinationCreateWithDataConsumer(CGDataConsumerRef __nonnull consumer, CFStringRef __nonnull type, size_t count, CFDictionaryRef __nullable options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CGImageDestinationRef _iio_Nullable CGImageDestinationCreateWithDataConsumer(CGDataConsumerRef _iio_Nonnull consumer, CFStringRef _iio_Nonnull type, size_t count, CFDictionaryRef _iio_Nullable options)  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 
 /* Create an image destination writing to `data'. The parameter `type'
  * specifies the type identifier of the resulting image file.  The
@@ -84,7 +84,7 @@ IMAGEIO_EXTERN CGImageDestinationRef __nullable CGImageDestinationCreateWithData
  * that the image file will contain. The `options' dictionary is reserved
  * for future use; currently, you should pass NULL for this parameter. */
 
-IMAGEIO_EXTERN CGImageDestinationRef __nullable CGImageDestinationCreateWithData(CFMutableDataRef __nonnull data, CFStringRef __nonnull type, size_t count, CFDictionaryRef __nullable options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CGImageDestinationRef _iio_Nullable CGImageDestinationCreateWithData(CFMutableDataRef _iio_Nonnull data, CFStringRef _iio_Nonnull type, size_t count, CFDictionaryRef _iio_Nullable options)  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 
 /* Create an image destination writing to `url'. The parameter `type'
  * specifies the type identifier of the resulting image file.  The
@@ -93,19 +93,19 @@ IMAGEIO_EXTERN CGImageDestinationRef __nullable CGImageDestinationCreateWithData
  * for future use; currently, you should pass NULL for this parameter.
  * Note that if `url' already exists, it will be overwritten. */
 
-IMAGEIO_EXTERN CGImageDestinationRef __nullable CGImageDestinationCreateWithURL(CFURLRef __nonnull url, CFStringRef __nonnull type, size_t count, CFDictionaryRef __nullable options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN CGImageDestinationRef _iio_Nullable CGImageDestinationCreateWithURL(CFURLRef _iio_Nonnull url, CFStringRef _iio_Nonnull type, size_t count, CFDictionaryRef _iio_Nullable options)  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 
 /* Specify the dictionary `properties' of properties which apply to all
  * images in the image destination `idst'. */
 
-IMAGEIO_EXTERN void CGImageDestinationSetProperties(CGImageDestinationRef __nonnull idst, CFDictionaryRef __nullable properties)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN void CGImageDestinationSetProperties(CGImageDestinationRef _iio_Nonnull idst, CFDictionaryRef _iio_Nullable properties)  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 
 /* Set the next image in the image destination `idst' to be `image' with
  * optional properties specified in `properties'.  An error is logged if
  * more images are added than specified in the original count of the image
  * destination. */
 
-IMAGEIO_EXTERN void CGImageDestinationAddImage(CGImageDestinationRef __nonnull idst, CGImageRef __nonnull image, CFDictionaryRef __nullable properties)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN void CGImageDestinationAddImage(CGImageDestinationRef _iio_Nonnull idst, CGImageRef _iio_Nonnull image, CFDictionaryRef _iio_Nullable properties)  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 
 /* Set the next image in the image destination `idst' to be the image at
  * `index' in the image source `isrc'.  The index is zero-based. The
@@ -114,7 +114,7 @@ IMAGEIO_EXTERN void CGImageDestinationAddImage(CGImageDestinationRef __nonnull i
  * the value kCFNull, the corresponding property in the destination will be
  * removed. */
 
-IMAGEIO_EXTERN void CGImageDestinationAddImageFromSource(CGImageDestinationRef __nonnull idst, CGImageSourceRef __nonnull isrc, size_t index, CFDictionaryRef __nullable properties)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN void CGImageDestinationAddImageFromSource(CGImageDestinationRef _iio_Nonnull idst, CGImageSourceRef _iio_Nonnull isrc, size_t index, CFDictionaryRef _iio_Nullable properties)  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 
 /* Write everything to the destination data, url or consumer of the image
  * destination `idst'.  You must call this function or the image
@@ -122,14 +122,14 @@ IMAGEIO_EXTERN void CGImageDestinationAddImageFromSource(CGImageDestinationRef _
  * additional data will be written to the image destination.  Return true
  * if the image was successfully written; false otherwise. */
 
-IMAGEIO_EXTERN bool CGImageDestinationFinalize(CGImageDestinationRef __nonnull idst)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+IMAGEIO_EXTERN bool CGImageDestinationFinalize(CGImageDestinationRef _iio_Nonnull idst)  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 
 
 /* Set the next image in the image destination `idst' to be `image' with
  * metadata properties specified in `metadata'. An error is logged if more
  * images are added than specified in the original count of the image
  * destination. */
-IMAGEIO_EXTERN void CGImageDestinationAddImageAndMetadata(CGImageDestinationRef __nonnull idst, CGImageRef __nonnull image, CGImageMetadataRef __nullable metadata, CFDictionaryRef __nullable options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN void CGImageDestinationAddImageAndMetadata(CGImageDestinationRef _iio_Nonnull idst, CGImageRef _iio_Nonnull image, CGImageMetadataRef _iio_Nullable metadata, CFDictionaryRef _iio_Nullable options)  IMAGEIO_AVAILABLE_STARTING(10.8, 7.0);
 
 /**
  ** Keys which may be used in the 'options' dictionary of
@@ -143,7 +143,7 @@ CF_ASSUME_NONNULL_BEGIN
  * will be replaced. Use kCGImageDestinationMergeMetadata to merge the tags
  * with the existing tags in the image source.
  */
-IMAGEIO_EXTERN const CFStringRef kCGImageDestinationMetadata IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationMetadata IMAGEIO_AVAILABLE_STARTING(10.8, 7.0);
 
 /* If true, The metadata will be copied from the source and merged with the tags
  * specified in kCGImageDestinationMetadata. If a tag does not exist in the 
@@ -152,14 +152,14 @@ IMAGEIO_EXTERN const CFStringRef kCGImageDestinationMetadata IMAGEIO_AVAILABLE_S
  * kCFNull. If present, the value of this key is a CFBoooleanRef. The default
  * is kCFBooleanFalse.
  */ 
-IMAGEIO_EXTERN const CFStringRef kCGImageDestinationMergeMetadata IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationMergeMetadata IMAGEIO_AVAILABLE_STARTING(10.8, 7.0);
 
 /* XMP data will not be written to the destination. If used in conjunction with 
  * kCGImageDestinationMetadata, EXIF and/or IPTC tags will be preserved, but 
  * an XMP packet will not be written to the file. If present, the value for 
  * this key is a CFBooleanRef. The default is kCFBooleanFalse.
  */
-IMAGEIO_EXTERN const CFStringRef kCGImageMetadataShouldExcludeXMP IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef kCGImageMetadataShouldExcludeXMP IMAGEIO_AVAILABLE_STARTING(10.8, 7.0);
 
 /* If true, GPS metadata will not be written to EXIF data or the corresponding
  * EXIF tags in XMP. This flag cannot filter any proprietary location data that
@@ -167,7 +167,7 @@ IMAGEIO_EXTERN const CFStringRef kCGImageMetadataShouldExcludeXMP IMAGEIO_AVAILA
  * If present, the value for this key is a CFBooleanRef. The default is 
  * kCFBooleanFalse.
  */
-IMAGEIO_EXTERN const CFStringRef kCGImageMetadataShouldExcludeGPS IMAGEIO_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+IMAGEIO_EXTERN const CFStringRef kCGImageMetadataShouldExcludeGPS IMAGEIO_AVAILABLE_STARTING(10.10, 8.0);
 
 /* Updates the DateTime parameters of the image metadata. Only values
  * present in the original image will updated. If present, the value should
@@ -175,13 +175,13 @@ IMAGEIO_EXTERN const CFStringRef kCGImageMetadataShouldExcludeGPS IMAGEIO_AVAILA
  * Exif DateTime or ISO 8601 DateTime format. This option is mutually
  * exclusive with kCGImageDestinationMetadata.
  */
-IMAGEIO_EXTERN const CFStringRef kCGImageDestinationDateTime IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationDateTime IMAGEIO_AVAILABLE_STARTING(10.8, 7.0);
 
 /* Updates the orientation in the image metadata. The image data itself will
  * not be rotated. If present, the value should be a CFNumberRef from 1 to 8. 
  * This option is mutually exclusive with kCGImageDestinationMetadata.
  */
-IMAGEIO_EXTERN const CFStringRef kCGImageDestinationOrientation IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationOrientation IMAGEIO_AVAILABLE_STARTING(10.8, 7.0);
 
 CF_ASSUME_NONNULL_END
 
@@ -195,7 +195,7 @@ CF_ASSUME_NONNULL_END
  * if the operation was successful. If an error occurs, false will be returned 
  * and 'err' will be set to a CFErrorRef. Not all image formats are supported 
  * for this operation. */
-IMAGEIO_EXTERN bool CGImageDestinationCopyImageSource(CGImageDestinationRef __nonnull idst, CGImageSourceRef __nonnull isrc, CFDictionaryRef __nullable options, __nullable CFErrorRef * __nullable err) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN bool CGImageDestinationCopyImageSource(CGImageDestinationRef _iio_Nonnull idst, CGImageSourceRef _iio_Nonnull isrc, CFDictionaryRef _iio_Nullable options, _iio_Nullable CFErrorRef * _iio_Nullable err) IMAGEIO_AVAILABLE_STARTING(10.8, 7.0);
 
 /* Depth data support for JPEG, HEIF, and DNG images.
  * The auxiliaryDataInfoDictionary should contain:
@@ -204,7 +204,7 @@ IMAGEIO_EXTERN bool CGImageDestinationCopyImageSource(CGImageDestinationRef __no
  *   - metadata (CGImageMetadataRef) - (kCGImageAuxiliaryDataInfoMetadata)
  * To add depth data to an image, call CGImageDestinationAddAuxiliaryDataInfo() after adding the CGImage to the CGImageDestinationRef.
  */
-IMAGEIO_EXTERN void CGImageDestinationAddAuxiliaryDataInfo(CGImageDestinationRef __nonnull idst, CFStringRef __nonnull auxiliaryImageDataType, CFDictionaryRef __nonnull auxiliaryDataInfoDictionary ) IMAGEIO_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0);
+IMAGEIO_EXTERN void CGImageDestinationAddAuxiliaryDataInfo(CGImageDestinationRef _iio_Nonnull idst, CFStringRef _iio_Nonnull auxiliaryImageDataType, CFDictionaryRef _iio_Nonnull auxiliaryDataInfoDictionary ) IMAGEIO_AVAILABLE_STARTING(10.13, 11.0);
 
 
 CF_IMPLICIT_BRIDGING_DISABLED

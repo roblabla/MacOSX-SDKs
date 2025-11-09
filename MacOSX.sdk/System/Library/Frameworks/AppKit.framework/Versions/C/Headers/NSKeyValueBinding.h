@@ -1,7 +1,7 @@
 /*
 	NSKeyValueBinding.h
 	Application Kit
-	Copyright (c) 2002-2017, Apple Inc.
+	Copyright (c) 2002-2018, Apple Inc.
 	All rights reserved.
  */
 
@@ -10,22 +10,33 @@
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
 
+#import <CoreData/NSManagedObjectContext.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSString, NSError, NSAttributeDescription;
 
-APPKIT_EXTERN id NSMultipleValuesMarker;
-APPKIT_EXTERN id NSNoSelectionMarker;
-APPKIT_EXTERN id NSNotApplicableMarker;
+NS_CLASS_AVAILABLE_MAC(10_14)
+@interface NSBindingSelectionMarker : NSObject <NSCopying>
+// Subclassing or instantiating NSBindingSelectionMarker is not supported.
+- (instancetype)init NS_UNAVAILABLE;
+
+@property (class, readonly, strong) NSBindingSelectionMarker *multipleValuesSelectionMarker NS_AVAILABLE_MAC(10_14);
+@property (class, readonly, strong) NSBindingSelectionMarker *noSelectionMarker NS_AVAILABLE_MAC(10_14);
+@property (class, readonly, strong) NSBindingSelectionMarker *notApplicableSelectionMarker NS_AVAILABLE_MAC(10_14);
+@end
+
+APPKIT_EXTERN NSBindingSelectionMarker * NSMultipleValuesMarker NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBindingSelectionMarker.multipleValuesSelectionMarker", 10_0, API_TO_BE_DEPRECATED);
+APPKIT_EXTERN NSBindingSelectionMarker * NSNoSelectionMarker NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBindingSelectionMarker.noSelectionMarker", 10_0, API_TO_BE_DEPRECATED);
+APPKIT_EXTERN NSBindingSelectionMarker * NSNotApplicableMarker NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBindingSelectionMarker.notApplicableSelectionMarker", 10_0, API_TO_BE_DEPRECATED);
 
 APPKIT_EXTERN BOOL NSIsControllerMarker(__nullable id object);
 
-typedef NSString * NSBindingName NS_EXTENSIBLE_STRING_ENUM;
-typedef NSString * NSBindingOption NS_STRING_ENUM;
+typedef NSString * NSBindingName NS_TYPED_EXTENSIBLE_ENUM;
+typedef NSString * NSBindingOption NS_TYPED_ENUM;
 
 // keys for the returned dictionary of -infoForBinding:
-typedef NSString * NSBindingInfoKey NS_STRING_ENUM;
+typedef NSString * NSBindingInfoKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSBindingInfoKey NSObservedObjectKey;
 APPKIT_EXTERN NSBindingInfoKey NSObservedKeyPathKey;
 APPKIT_EXTERN NSBindingInfoKey NSOptionsKey;
@@ -61,21 +72,13 @@ APPKIT_EXTERN NSBindingInfoKey NSOptionsKey;
 
 @interface NSObject (NSPlaceholders)
 
-+ (void)setDefaultPlaceholder:(nullable id)placeholder forMarker:(nullable id)marker withBinding:(NSBindingName)binding;    // marker can be nil or one of NSMultipleValuesMarker, NSNoSelectionMarker, NSNotApplicableMarker
-+ (nullable id)defaultPlaceholderForMarker:(nullable id)marker withBinding:(NSBindingName)binding;    // marker can be nil or one of NSMultipleValuesMarker, NSNoSelectionMarker, NSNotApplicableMarker
-
-@end
-
-// methods implemented by controllers, CoreData's managed object contexts (and potentially documents)
-@interface NSObject (NSEditorRegistration)
-
-- (void)objectDidBeginEditing:(id)editor;
-- (void)objectDidEndEditing:(id)editor;
++ (void)setDefaultPlaceholder:(nullable id)placeholder forMarker:(nullable NSBindingSelectionMarker *)marker withBinding:(NSBindingName)binding;    // marker can be nil or one of multipleValuesSelectionMarker, noSelectionMarker, notApplicableSelectionMarker
++ (nullable id)defaultPlaceholderForMarker:(nullable NSBindingSelectionMarker *)marker withBinding:(NSBindingName)binding;    // marker can be nil or one of multipleValuesSelectionMarker, noSelectionMarker, notApplicableSelectionMarker
 
 @end
 
 // methods implemented by controllers, CoreData's managed object contexts, and user interface elements
-@interface NSObject (NSEditor)
+@protocol NSEditor <NSObject>
 
 - (void)discardEditing;    // forces changing to end (reverts back to the original value)
 - (BOOL)commitEditing;    // returns whether end editing was successful (while trying to apply changes to a model object, there might be validation problems or so that prevent the operation from being successful
@@ -94,9 +97,30 @@ If an error occurs while attempting to commit, because key-value coding validati
  
  If you have enabled autosaving in your application, and your application has custom objects that implement or override the NSEditor protocol, you must also implement this method in those NSEditors.
  */
-- (BOOL)commitEditingAndReturnError:(NSError **)error   NS_AVAILABLE_MAC(10_7);
+- (BOOL)commitEditingAndReturnError:(NSError **)error NS_AVAILABLE_MAC(10_7);
 
 @end
+
+// methods implemented by controllers, CoreData's managed object contexts (and potentially documents)
+@protocol NSEditorRegistration <NSObject>
+@optional
+- (void)objectDidBeginEditing:(id<NSEditor>)editor;
+- (void)objectDidEndEditing:(id<NSEditor>)editor;
+@end
+
+#if __swift__ < 40200
+@interface NSObject (NSEditor)
+- (void)discardEditing NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSEditor protocol.");
+- (BOOL)commitEditing NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSEditor protocol.");
+- (void)commitEditingWithDelegate:(nullable id)delegate didCommitSelector:(nullable SEL)didCommitSelector contextInfo:(nullable void *)contextInfo NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSEditor protocol.");
+- (BOOL)commitEditingAndReturnError:(NSError **)error NS_DEPRECATED_MAC(10_7, API_TO_BE_DEPRECATED, "This is now a method of the NSEditor protocol.");
+@end
+
+@interface NSObject (NSEditorRegistration)
+- (void)objectDidBeginEditing:(id<NSEditor>)editor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSEditorRegistration protocol.");
+- (void)objectDidEndEditing:(id<NSEditor>)editor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSEditorRegistration protocol.");
+@end
+#endif
 
 // constants for binding names
 APPKIT_EXTERN NSBindingName NSAlignmentBinding;
@@ -206,6 +230,10 @@ APPKIT_EXTERN NSBindingOption NSSelectsAllWhenSettingContentBindingOption;
 APPKIT_EXTERN NSBindingOption NSValidatesImmediatelyBindingOption;
 APPKIT_EXTERN NSBindingOption NSValueTransformerNameBindingOption;
 APPKIT_EXTERN NSBindingOption NSValueTransformerBindingOption;
+
+/// NSManagedObjectContext implements the NSEditor and NSEditorRegistration protocols for use with NSControllers and NSDocument
+@interface NSManagedObjectContext (NSEditorAndEditorRegistrationConformance) <NSEditor, NSEditorRegistration>
+@end
 
 NS_ASSUME_NONNULL_END
 

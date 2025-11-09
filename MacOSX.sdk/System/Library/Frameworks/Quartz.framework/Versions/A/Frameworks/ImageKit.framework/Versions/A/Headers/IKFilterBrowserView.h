@@ -6,6 +6,8 @@
 
 #import <AppKit/AppKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import <ImageKit/ImageKitBase.h>
+
 /*!
     @header IKFilterBrowserView
 	@copyright 2006 Apple Inc. All rights reserved.

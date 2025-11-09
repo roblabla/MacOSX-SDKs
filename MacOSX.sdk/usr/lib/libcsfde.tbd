@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: B5EB6C0A-3D83-33C6-AFB3-42D9593D645C', 'x86_64: FA38E5CC-44D5-3AC1-9791-DB1B8813822C' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 65E8F1F1-665A-381E-8932-D7CBA451991B' ]
 platform:        macosx
 install-name:    /usr/lib/libcsfde.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _CSFDEActivateRecoveryAgentAsNeeded, _CSFDEAddExternalKeyUserEntry, 
                        _CSFDEAddOSUserEntry, _CSFDEAddPassphraseOnlyUserEntry, _CSFDEAddVolumeEncryption, 
                        _CSFDEChangeUserPassphrase, _CSFDECookRecipeIntoContext, _CSFDECopyBankersQuestions, 

@@ -64,20 +64,20 @@ struct os_log_s _os_log_default;
  * always captured to memory or disk.
  *
  * @constant OS_LOG_TYPE_INFO
- * Equivalent type for "os_log_info()" messages, i.e., Additional informational
+ * Equivalent type for "os_log_info()" messages, i.e., additional informational
  * messages.
  *
  * @constant OS_LOG_TYPE_DEBUG
- * Equivalent type for "os_log_debug()" messages, i.e., Debug messages.
+ * Equivalent type for "os_log_debug()" messages, i.e., debug messages.
  *
  * @constant OS_LOG_TYPE_ERROR
- * Equivalent type for "os_log_error()" messages, i.e., local process error
- * messages.
+ * Equivalent type for "os_log_error()" messages, i.e., messages indicating
+ * error conditions.
  *
  * @constant OS_LOG_TYPE_FAULT
- * Equivalent type for "os_log_fault()" messages, i.e., a system error that
- * involves potentially more than one process, usually used by daemons and
- * services.
+ * Equivalent type for "os_log_fault()" messages, i.e., messages indicating
+ * that an unexpected condition occurred that likely indicates the presence of a
+ * bug.
  */
 OS_ENUM(os_log_type, uint8_t,
     OS_LOG_TYPE_DEFAULT = 0x00,
@@ -326,10 +326,16 @@ os_log_create(const char *subsystem, const char *category);
  * Insert a fault log message into the Unified Logging and Tracing system.
  *
  * @discussion
- * Log a fault message issue into the Unified Logging and Tracing system
- * signifying a multi-process (i.e., system error) related issue, either
- * due to interaction via IPC or some other.  Faults will gather information
- * from the entire process chain and record it for later inspection.
+ * Log a fault message into the Unified Logging and Tracing system.
+ *
+ * Faults should be used to report conditions which indicate the
+ * presence of a bug.  Faults will gather more expensive contextual information
+ * and record it for later inspection.  They may also be reported to other
+ * debugging tools for display or aggregation.
+ *
+ * Note that faults should only be used for unexpected error conditions in
+ * which there's a clear and safe recovery path.  If such a path does not
+ * exist, consider the os_crash(3) family of APIs instead.
  *
  * When an os_activity_id_t is present, the log message will also be scoped by
  * that identifier.  Activities provide granular filtering of log messages

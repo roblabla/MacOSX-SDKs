@@ -1,7 +1,7 @@
 /*
     NSView.h
     Application Kit
-    Copyright (c) 1994-2017, Apple Inc.
+    Copyright (c) 1994-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -13,13 +13,13 @@
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSAnimation.h>
 #import <AppKit/NSAppearance.h>
-#import <AppKit/NSApplication.h>
 #import <AppKit/NSDragging.h>
 #import <AppKit/NSGraphics.h>
 #import <AppKit/NSPasteboard.h>
 #import <AppKit/NSResponder.h>
 #import <AppKit/NSTouch.h>
 #import <AppKit/NSUserInterfaceItemIdentification.h>
+#import <AppKit/NSUserInterfaceLayout.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -106,17 +106,17 @@ typedef NSInteger NSToolTipTag;
 @interface NSView : NSResponder <NSAnimatablePropertyContainer, NSUserInterfaceItemIdentification, NSDraggingDestination, NSAppearanceCustomization, NSAccessibilityElement, NSAccessibility>
 {
     /* All instance variables are private */
-    NSRect              _frame;
-    NSRect              _bounds;
-    __kindof NSView    *_superview;
-    NSArray<__kindof NSView *> *_subviews;
-    NSWindow           *_window;
-    id                  _unused_was_gState;
-    id                  _frameMatrix;
-    CALayer             *_layer;
-    id     	        _dragTypes;
-    _NSViewAuxiliary    *_viewAuxiliary;
-    _VFlags     	_vFlags;
+    NSRect              _frame APPKIT_IVAR;
+    NSRect              _bounds APPKIT_IVAR;
+    __kindof NSView    *_superview APPKIT_IVAR;
+    NSArray<__kindof NSView *> *_subviews APPKIT_IVAR;
+    NSWindow           *_window APPKIT_IVAR;
+    id                  _unused_was_gState APPKIT_IVAR;
+    id                  _frameMatrix APPKIT_IVAR;
+    CALayer             *_layer APPKIT_IVAR;
+    id     	        _dragTypes APPKIT_IVAR;
+    _NSViewAuxiliary    *_viewAuxiliary APPKIT_IVAR;
+    _VFlags     	_vFlags APPKIT_IVAR;
     struct __VFlags2 {
         unsigned int nextKeyViewRefCount:14;
         unsigned int previousKeyViewRefCount:14;
@@ -124,7 +124,7 @@ typedef NSInteger NSToolTipTag;
         unsigned int hasToolTip:1;
         unsigned int cachedIsFlipped:1;
         unsigned int menuWasSet:1;
-    } _vFlags2;
+    } _vFlags2 APPKIT_IVAR;
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;
@@ -229,12 +229,12 @@ typedef NSInteger NSToolTipTag;
 
 /* Sets whether AppKit may invoke the view's -drawRect: method on a background thread, where it would otherwise be invoked on the main thread.  Defaults to NO for most kinds of views.  May be set to YES to enable threaded drawing for a particular view instance.  The view's window must also have its "allowsConcurrentViewDrawing" property set to YES (the default) for threading of view drawing to actually take place. */
 
-@property (readonly) BOOL canDraw;
+@property (readonly) BOOL canDraw NS_DEPRECATED_MAC(10_0, 10_14, "If a view needs display, -drawRect: or -updateLayer will be called automatically when the view is able to draw.  To check whether a view is in a window, call -window.  To check whether a view is hidden, call -isHiddenOrHasHiddenAncestor.");
 - (void)setNeedsDisplayInRect:(NSRect)invalidRect;
 @property BOOL needsDisplay;
-- (void)lockFocus;
-- (void)unlockFocus;
-- (BOOL)lockFocusIfCanDraw;
+- (void)lockFocus NS_DEPRECATED_MAC(10_0, 10_14, "To draw, subclass NSView and implement -drawRect:; AppKit's automatic deferred display mechanism will call -drawRect: as necessary to display the view.");
+- (void)unlockFocus NS_DEPRECATED_MAC(10_0, 10_14, "To draw, subclass NSView and implement -drawRect:; AppKit's automatic deferred display mechanism will call -drawRect: as necessary to display the view.");
+- (BOOL)lockFocusIfCanDraw NS_DEPRECATED_MAC(10_0, 10_14, "To draw, subclass NSView and implement -drawRect:; AppKit's automatic deferred display mechanism will call -drawRect: as necessary to display the view.");
 - (BOOL)lockFocusIfCanDrawInContext:(NSGraphicsContext *)context NS_DEPRECATED_MAC(10_4, 10_13, "Use -[NSView displayRectIgnoringOpacity:inContext:] to draw a view subtree into a graphics context.");
 @property (class, readonly, nullable, strong) NSView *focusView;
 @property (readonly) NSRect visibleRect;
@@ -257,7 +257,7 @@ typedef NSInteger NSToolTipTag;
 - (BOOL)scrollRectToVisible:(NSRect)rect;
 - (BOOL)autoscroll:(NSEvent *)event;
 - (NSRect)adjustScroll:(NSRect)newVisible;
-- (void)scrollRect:(NSRect)rect by:(NSSize)delta;
+- (void)scrollRect:(NSRect)rect by:(NSSize)delta NS_DEPRECATED_MAC(10_0, 10_14, "Use NSScrollView to achieve scrolling views.");
 - (void)translateRectsNeedingDisplayInRect:(NSRect)clipRect by:(NSSize)delta NS_AVAILABLE_MAC(10_5);
 
 - (nullable NSView *)hitTest:(NSPoint)point;
@@ -427,19 +427,35 @@ typedef NSInteger NSToolTipTag;
  */
 @property (readonly) BOOL allowsVibrancy NS_AVAILABLE_MAC(10_10);
 
+/// Override point for reacting to the effective appearance of the receiver changing. At this point `effectiveAppearance` property reflects the new appearance.
+- (void)viewDidChangeEffectiveAppearance NS_AVAILABLE_MAC(10_14);
+
 @end
 
-@interface NSObject (NSLayerDelegateContentsScaleUpdating)
+@protocol NSViewLayerContentScaleDelegate <NSObject>
+@optional
 
-/* This method can be implemented as an optional CALayer delegate method, for handling resolution changes.  When a window changes its backing resolution, AppKit attempts to automatically update the contentsScale and contents of all CALayers in the window to match the new resolution.  View backing layers are updated automatically.  Any layer whose "contents" property is set to an NSImage will also be updated automatically.  (Basedon the NSImage's available representations, AppKit will select an appropriate bitmapped representation, or rasterize a resolution-independent representation at the appropriate scale factor.)  For all other layers, AppKit will check whether the layer has a delegate that implements this method.  If so, AppKit will send this message to the layer's delegate to ask whether it should automatically update the contentsScale for that layer to match the backingScaleFactor of the window.  If you return YES for a given layer, AppKit will set the layer's contentsScale as proposed, and you must ensure that the layer's contents and other properties are configured appropriately for that new contentsScale.  (If you expressed the layer's "contents" as a CGImage, you may need to provide a different CGImage that's appropriate for the new contentsScale.) Note this method is only invoked when a window's backingScaleFactor changes. You are responsible for setting the initial contentsScale of your layers.
+/* This method can be implemented as an optional CALayer delegate method, for handling resolution changes.  When a window changes its backing resolution, AppKit attempts to automatically update the contentsScale and contents of all CALayers in the window to match the new resolution.  View backing layers are updated automatically.  Any layer whose "contents" property is set to an NSImage will also be updated automatically.  (Based on the NSImage's available representations, AppKit will select an appropriate bitmapped representation, or rasterize a resolution-independent representation at the appropriate scale factor.)  For all other layers, AppKit will check whether the layer has a delegate that implements this method.  If so, AppKit will send this message to the layer's delegate to ask whether it should automatically update the contentsScale for that layer to match the backingScaleFactor of the window.  If you return YES for a given layer, AppKit will set the layer's contentsScale as proposed, and you must ensure that the layer's contents and other properties are configured appropriately for that new contentsScale.  (If you expressed the layer's "contents" as a CGImage, you may need to provide a different CGImage that's appropriate for the new contentsScale.)  Note that this method is only invoked when a window's backingScaleFactor changes.  You are responsible for setting the initial contentsScale of your layers.
 */
 - (BOOL)layer:(CALayer *)layer shouldInheritContentsScale:(CGFloat)newScale fromWindow:(NSWindow *)window NS_AVAILABLE_MAC(10_7); // added in 10.7.3
 
 @end
 
-@interface NSObject(NSToolTipOwner)
+#if __swift__ < 40200
+@interface NSObject (NSLayerDelegateContentsScaleUpdating)
+- (BOOL)layer:(CALayer *)layer shouldInheritContentsScale:(CGFloat)newScale fromWindow:(NSWindow *)window NS_DEPRECATED_MAC(10_7, API_TO_BE_DEPRECATED, "This is now a method of the NSViewLayerContentScaleDelegate protocol."); // added in 10.7.3
+@end
+#endif
+
+@protocol NSViewToolTipOwner <NSObject>
 - (NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(nullable void *)data;
 @end
+
+#if __swift__ < 40200
+@interface NSObject(NSToolTipOwner)
+- (NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(nullable void *)data NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSViewToolTipOwner protocol.");
+@end
+#endif
 
 @interface NSView(NSKeyboardUI)
 @property (nullable, assign) NSView *nextKeyView;
@@ -483,7 +499,7 @@ typedef NSInteger NSToolTipTag;
 @property (readonly, copy) NSAttributedString *pageFooter;
 
 /*** This method is obsolete.  It will never be invoked from within AppKit, and NSView's implementation of it does nothing. ***/
-- (void)drawSheetBorderWithSize:(NSSize)borderSize;
+- (void)drawSheetBorderWithSize:(NSSize)borderSize NS_DEPRECATED_MAC(10_0, 10_14, "This is never invoked and the NSView implementation does nothing");
 
 /* Printing */
 /* Returns print job title. Default implementation first tries its window's NSDocument (displayName), then window's title */
@@ -507,7 +523,7 @@ typedef NSInteger NSToolTipTag;
 @end
 
 /* Constants for options when entering and exiting full screen mode */
-typedef NSString * NSViewFullScreenModeOptionKey NS_STRING_ENUM;
+typedef NSString * NSViewFullScreenModeOptionKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSViewFullScreenModeOptionKey const NSFullScreenModeAllScreens NS_AVAILABLE_MAC(10_5);                      // NSNumber numberWithBool:YES/NO
 APPKIT_EXTERN NSViewFullScreenModeOptionKey const NSFullScreenModeSetting NS_AVAILABLE_MAC(10_5);                         // NSDictionary (obtained from CGSDisplay based functions)
 APPKIT_EXTERN NSViewFullScreenModeOptionKey const NSFullScreenModeWindowLevel NS_AVAILABLE_MAC(10_5);                     // NSNumber numberWithInt:windowLevel
@@ -522,10 +538,10 @@ APPKIT_EXTERN NSViewFullScreenModeOptionKey const NSFullScreenModeApplicationPre
 
 /* NSDefinitionPresentationTypeKey is an optional key in 'options' that specifies the presentation type of the definition display.  The possible values are NSDefinitionPresentationTypeOverlay that produces a small overlay window at the string location, or NSDefinitionPresentationTypeDictionaryApplication that invokes 'Dictionary' application to display the definition.  Without this option, the definition will be shown in either of those presentation forms depending on the 'Contextual Menu:' setting in Dictionary application preferences.
  */
-typedef NSString * NSDefinitionOptionKey NS_STRING_ENUM;
+typedef NSString * NSDefinitionOptionKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSDefinitionOptionKey const NSDefinitionPresentationTypeKey NS_AVAILABLE_MAC(10_6);
 
-typedef NSString * NSDefinitionPresentationType NS_STRING_ENUM;
+typedef NSString * NSDefinitionPresentationType NS_TYPED_ENUM;
 APPKIT_EXTERN NSDefinitionPresentationType const NSDefinitionPresentationTypeOverlay NS_AVAILABLE_MAC(10_6);
 APPKIT_EXTERN NSDefinitionPresentationType const NSDefinitionPresentationTypeDictionaryApplication NS_AVAILABLE_MAC(10_6);
 
@@ -574,14 +590,11 @@ APPKIT_EXTERN NSDefinitionPresentationType const NSDefinitionPresentationTypeDic
 
 @interface NSView(NSDeprecated)
 
-/* This drag method as been deprecated in favor of beginDraggingSessionWithItems:event:source:
- */
 - (void)dragImage:(NSImage *)image at:(NSPoint)viewLocation offset:(NSSize)initialOffset event:(NSEvent *)event pasteboard:(NSPasteboard *)pboard source:(id)sourceObj slideBack:(BOOL)slideFlag NS_DEPRECATED_MAC(10_0, 10_7, "Use -beginDraggingSessionWithItems:event:source: instead");
 
 - (BOOL)dragFile:(NSString *)filename fromRect:(NSRect)rect slideBack:(BOOL)flag event:(NSEvent *)event NS_DEPRECATED_MAC(10_0, 10_13, "Use -beginDraggingSessionWithItems:event:source: instead");
 - (BOOL)dragPromisedFilesOfTypes:(NSArray<NSString *> *)typeArray fromRect:(NSRect)rect source:(id)sourceObject slideBack:(BOOL)flag event:(NSEvent *)event NS_DEPRECATED_MAC(10_0, 10_13, "Use -beginDraggingSessionWithItems:event:source: with an NSFilePromiseProvider instead");
 
-/* These methods are deprecated on 10.7 and later. */
 - (NSPoint)convertPointToBase:(NSPoint)point NS_DEPRECATED_MAC(10_5, 10_7);
 - (NSPoint)convertPointFromBase:(NSPoint)point NS_DEPRECATED_MAC(10_5, 10_7);
 - (NSSize)convertSizeToBase:(NSSize)size NS_DEPRECATED_MAC(10_5, 10_7);
@@ -589,15 +602,13 @@ APPKIT_EXTERN NSDefinitionPresentationType const NSDefinitionPresentationTypeDic
 - (NSRect)convertRectToBase:(NSRect)rect NS_DEPRECATED_MAC(10_5, 10_7);
 - (NSRect)convertRectFromBase:(NSRect)rect NS_DEPRECATED_MAC(10_5, 10_7);
 
-/* This method is deprecated in 10.8 and higher. On MacOS it has historically not done anything.
- */
-- (BOOL)performMnemonic:(NSString *)string NS_DEPRECATED_MAC(10_0, 10_8, "This method does nothing on macOS");
+- (BOOL)performMnemonic:(NSString *)string NS_DEPRECATED_MAC(10_0, 10_8, "This has always returned NO and had no effect on macOS");
 
 /* shouldDrawColor is no longer used by AppKit.
  */
 - (BOOL)shouldDrawColor NS_DEPRECATED_MAC(10_0, 10_10, "This method no longer does anything");
 
-/* The gState class of methods are deprecatd and in many cases did not do anything, or not what one would expect.
+/* The gState class of methods are deprecated and in many cases did not do anything, or not what one would expect.
  */
 - (NSInteger)gState NS_DEPRECATED_MAC(10_0, 10_10);
 - (void)allocateGState NS_DEPRECATED_MAC(10_0, 10_10);

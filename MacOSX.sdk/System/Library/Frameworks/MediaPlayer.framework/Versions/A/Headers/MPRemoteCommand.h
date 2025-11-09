@@ -27,11 +27,16 @@ typedef NS_ENUM(NSInteger, MPRemoteCommandHandlerStatus) {
     /// command is received, but nothing is currently playing.
     MPRemoteCommandHandlerStatusNoActionableNowPlayingItem MP_API(ios(9.1), macos(10.12.2)) = 110,
     
+    /// The command could not be executed because a device required
+    /// is not available. For instance, if headphones are required, or if a watch
+    /// app realizes that it needs the companion to fulfull a request.
+    MPRemoteCommandHandlerStatusDeviceNotFound MP_API(ios(11.0), macos(10.13)) = 120,
+    
     /// The command could not be executed for another reason.
     MPRemoteCommandHandlerStatusCommandFailed = 200
-} MP_API(ios(7.1), macos(10.12.2));
+} MP_API(ios(7.1), macos(10.12.2), watchos(5.0));
 
-MP_API(ios(7.1), tvos(7.1), macos(10.12.2))
+MP_API(ios(7.1), tvos(7.1), macos(10.12.2), watchos(5.0))
 @interface MPRemoteCommand : NSObject
 
 /// Whether a button (for example) should be enabled and tappable for this
@@ -59,7 +64,7 @@ MP_API(ios(7.1), tvos(7.1), macos(10.12.2))
 
 @end
 
-MP_API(ios(7.1), tvos(7.1), macos(10.12.2))
+MP_API(ios(7.1), tvos(7.1), macos(10.12.2), watchos(5.0))
 @interface MPSkipIntervalCommand : MPRemoteCommand
 
 /// An array of NSNumbers (NSTimeIntervals) that contain preferred skip intervals.
@@ -67,7 +72,7 @@ MP_API(ios(7.1), tvos(7.1), macos(10.12.2))
 
 @end
 
-MP_API(ios(7.1), tvos(7.1), macos(10.12.2))
+MP_API(ios(7.1), tvos(7.1), macos(10.12.2), watchos(5.0))
 @interface MPFeedbackCommand : MPRemoteCommand
 
 /// Whether the feedback command is in an "active" state. An example of when a
@@ -85,7 +90,7 @@ MP_API(ios(7.1), tvos(7.1), macos(10.12.2))
 
 @end
 
-MP_API(ios(7.1), tvos(7.1), macos(10.12.2))
+MP_API(ios(7.1), tvos(7.1), macos(10.12.2), watchos(5.0))
 @interface MPRatingCommand : MPRemoteCommand
 
 /// Minimum rating for the command.
@@ -96,7 +101,7 @@ MP_API(ios(7.1), tvos(7.1), macos(10.12.2))
 
 @end
 
-MP_API(ios(7.1), tvos(7.1), macos(10.12.2))
+MP_API(ios(7.1), tvos(7.1), macos(10.12.2), watchos(5.0))
 @interface MPChangePlaybackRateCommand : MPRemoteCommand
 
 /// An array of NSNumbers (floats) that contain supported playback rates that
@@ -107,7 +112,7 @@ MP_API(ios(7.1), tvos(7.1), macos(10.12.2))
 
 /// Command for changing the current playback position in a now playing item.
 /// Sends out MPChangePlaybackPositionCommandEvents.
-MP_API(ios(9.0), tvos(9.0), macos(10.12.2))
+MP_API(ios(9.0), tvos(9.0), macos(10.12.2), watchos(5.0))
 @interface MPChangePlaybackPositionCommand : MPRemoteCommand
 
 @end
@@ -116,7 +121,7 @@ MP_API(ios(9.0), tvos(9.0), macos(10.12.2))
 /// update the system's current representation of your app's shuffle mode, set
 /// the currentShuffleType property on this command to the proper shuffle type
 /// value.
-MP_API(ios(8.0), tvos(8.0), macos(10.12.2))
+MP_API(ios(8.0), tvos(8.0), macos(10.12.2), watchos(5.0))
 @interface MPChangeShuffleModeCommand : MPRemoteCommand
 
 /// The app's current shuffle type.
@@ -128,7 +133,7 @@ MP_API(ios(8.0), tvos(8.0), macos(10.12.2))
 /// update the system's current representation of your app's repeat mode, set
 /// the currentRepeatType property on this command to the proper repeat type
 /// value.
-MP_API(ios(8.0), tvos(8.0), macos(10.12.2))
+MP_API(ios(8.0), tvos(8.0), macos(10.12.2), watchos(5.0))
 @interface MPChangeRepeatModeCommand : MPRemoteCommand
 
 /// The app's current repeat mode.

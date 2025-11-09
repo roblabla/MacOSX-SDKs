@@ -255,13 +255,10 @@
 # define OS_ENUM(_name, _type, ...) enum { __VA_ARGS__ }; typedef _type _name##_t
 #endif
 
-#if __has_include(<Availability.h>)
-# include <Availability.h>
+#if __has_include(<os/availability.h>)
+# include <os/availability.h>
 #else
-# define __OSX_AVAILABLE(_) /* nothing */
-# define __IOS_AVAILABLE(_) /* nothing */
-# define __WATCHOS_AVAILABLE(_) /* nothing */
-# define __TVOS_AVAILABLE(_) /* nothing */
+# define API_AVAILABLE(_) /* nothing */
 #endif
 
 #if __has_feature(nullability)
@@ -482,7 +479,7 @@ static inline SPARSE_PUBLIC_INTERFACE
 SparseMatrix_Double SparseConvertFromCoordinate(int rowCount, int columnCount,
   long blockCount, uint8_t blockSize, SparseAttributes_t attributes,
   const int *row, const int *column, const double *data)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Convert from coordinate format arrays to a SparseMatrix_Float
  *  object, dropping out-of-range entries and summing duplicates.
@@ -521,7 +518,7 @@ static inline SPARSE_PUBLIC_INTERFACE
 SparseMatrix_Float SparseConvertFromCoordinate(int rowCount, int columnCount, long blockCount,
   uint8_t blockSize, SparseAttributes_t attributes, const int *row,
   const int *column, const float *data)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Convert from coordinate format arrays to a SparseMatrix_Double
  *  object, dropping out-of-range entries and summing duplicates.
@@ -570,7 +567,7 @@ static inline SPARSE_PUBLIC_INTERFACE
 SparseMatrix_Double SparseConvertFromCoordinate(int rowCount, int columnCount, long blockCount,
   uint8_t blockSize, SparseAttributes_t attributes, const int *row,
   const int *column, const double *data, void *storage, void *workspace)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Convert from coordinate format arrays to a SparseMatrix_Float
  *  object, dropping out-of-range entries and summing duplicates.
@@ -619,7 +616,7 @@ static inline SPARSE_PUBLIC_INTERFACE
 SparseMatrix_Float SparseConvertFromCoordinate(int rowCount, int columnCount, long blockCount,
   uint8_t blockSize, SparseAttributes_t attributes, const int *row,
   const int *column, const float *data, void *storage, void *workspace)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 #if defined __SPARSE_TYPES_H
 /*! @group Conversions from opaque sparse matrix types
@@ -636,7 +633,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param matrix The matrix to be converted.                                 */
 static inline SPARSE_PUBLIC_INTERFACE
 SparseMatrix_Double SparseConvertFromOpaque(sparse_matrix_double matrix)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Converts an opaque sparse_matrix_float object to a transparent
  *  SparseMatrix_Float object. When you are done with this matrix, release
@@ -645,7 +642,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param matrix The matrix to be converted.                                 */
 static inline SPARSE_PUBLIC_INTERFACE
 SparseMatrix_Float SparseConvertFromOpaque(sparse_matrix_float matrix)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 #endif /* defined __SPARSE_TYPES_H */
 
 /******************************************************************************
@@ -1233,7 +1230,7 @@ typedef struct {
  *  of A and X. Overwritten with their product.                               */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiply(SparseMatrix_Double A, DenseMatrix_Double X, DenseMatrix_Double Y)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Performs the multiplication Y = AX for float values.
  *
@@ -1245,7 +1242,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  of A and X. Overwritten with their product.                               */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiply(SparseMatrix_Float A, DenseMatrix_Float X, DenseMatrix_Float Y)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Performs the multiplication Y = alpha * AX for double values
  *
@@ -1259,7 +1256,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  of A and X. Overwritten with alpha * AX.                                  */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiply(double alpha, SparseMatrix_Double A, DenseMatrix_Double X, DenseMatrix_Double Y)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Performs the multiplication Y = alpha * AX for float values.
  *
@@ -1273,7 +1270,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  of A and X. Overwritten with alpha * AX.                                  */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiply(float alpha, SparseMatrix_Float A, DenseMatrix_Float X, DenseMatrix_Float Y)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Performs the multiplication y = Ax for double values
  *
@@ -1284,7 +1281,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param y (output) dense vector.                                           */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiply(SparseMatrix_Double A, DenseVector_Double x, DenseVector_Double y)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Performs the multiplication y = Ax for float values
  *
@@ -1295,7 +1292,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param y (output) dense vector.                                           */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiply(SparseMatrix_Float A, DenseVector_Float x, DenseVector_Float y)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Performs the multiplication y = alpha * Ax for double values
  *
@@ -1308,7 +1305,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param y (output) dense vector.                                           */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiply(double alpha, SparseMatrix_Double A, DenseVector_Double x, DenseVector_Double y)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Performs the multiplication y = alpha * Ax for float values.
  *
@@ -1321,7 +1318,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param y (output) dense vector.                                           */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiply(float alpha, SparseMatrix_Float A, DenseVector_Float x, DenseVector_Float y)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /**** Multipy-Add *************************************************************/
 
@@ -1335,7 +1332,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  of A and X. Overwritten with their product.                               */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiplyAdd(SparseMatrix_Double A, DenseMatrix_Double X, DenseMatrix_Double Y)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Y += AX for float values.
  *
@@ -1347,7 +1344,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  of A and X. Overwritten with their product.                               */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiplyAdd(SparseMatrix_Float A, DenseMatrix_Float X, DenseMatrix_Float Y)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Y += alpha * AX for double values
  *
@@ -1361,7 +1358,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  of A and X. Overwritten with alpha * AX.                                  */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiplyAdd(double alpha, SparseMatrix_Double A, DenseMatrix_Double X, DenseMatrix_Double Y)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Y += alpha * AX for float values.
  *
@@ -1375,7 +1372,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  of A and X. Overwritten with alpha * AX.                                  */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiplyAdd(float alpha, SparseMatrix_Float A, DenseMatrix_Float X, DenseMatrix_Float Y)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract y += Ax for double values
  *
@@ -1386,7 +1383,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param y (output) dense vector.                                           */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiplyAdd(SparseMatrix_Double A, DenseVector_Double x, DenseVector_Double y)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract y += Ax for float values.
  *
@@ -1397,7 +1394,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param y (output) dense vector.                                           */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiplyAdd(SparseMatrix_Float A, DenseVector_Float x, DenseVector_Float y)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract y += alpha * Ax for double values
  *
@@ -1410,7 +1407,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param y (output) dense vector.                                           */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiplyAdd(double alpha, SparseMatrix_Double A, DenseVector_Double x, DenseVector_Double y)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract y += alpha * Ax for float values.
  *
@@ -1423,7 +1420,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param y (output) dense vector.                                           */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiplyAdd(float alpha, SparseMatrix_Float A, DenseVector_Float x, DenseVector_Float y)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /******************************************************************************
  *  @group Transposition
@@ -1439,7 +1436,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param Matrix The matrix to transpose.
  *
  *  @returns A copy of matrix with A.structure.attributes.transpose flipped.  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseMatrix_Double SparseGetTranspose(SparseMatrix_Double Matrix);
 
 /*! @abstract Returns a transposed copy of the specified SparseMatrix_Float.
@@ -1453,7 +1450,7 @@ SparseMatrix_Double SparseGetTranspose(SparseMatrix_Double Matrix);
  *
  *  @returns A copy of matrix with matrix.structure.attributes.transpose bit
  *           flipped.                                                         */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseMatrix_Float SparseGetTranspose(SparseMatrix_Float Matrix);
 
 /*! @abstract Returns a transposed, reference-counted copy of a factorization.
@@ -1463,7 +1460,7 @@ SparseMatrix_Float SparseGetTranspose(SparseMatrix_Float Matrix);
  *  @returns A matrix factorization of A^T, where the original was of A. As
  *           this is reference counted, it must be freed through a call to
  *           SparseCleanup() once it is no longer required.                   */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueFactorization_Double SparseGetTranspose(SparseOpaqueFactorization_Double Factor);
 
 /*! @abstract Returns a transposed, reference-counted copy of a factorization.
@@ -1473,7 +1470,7 @@ SparseOpaqueFactorization_Double SparseGetTranspose(SparseOpaqueFactorization_Do
  *  @returns A matrix factorization of A^T, where the original was of A. As
  *           this is reference counted, it must be freed through a call to
  *           SparseCleanup() once it is no longer required.                   */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueFactorization_Float SparseGetTranspose(SparseOpaqueFactorization_Float Factor);
 
 /*! @abstract Returns a transposed, reference-counted copy of a subfactor.
@@ -1483,7 +1480,7 @@ SparseOpaqueFactorization_Float SparseGetTranspose(SparseOpaqueFactorization_Flo
  *  @returns A subfactor equivalent to the transpose of the one provided. As
  *           this is reference counted, it must be freed through a call to
  *           SparseCleanup() once it is no longer required.                   */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueSubfactor_Double SparseGetTranspose(SparseOpaqueSubfactor_Double Subfactor);
 
 /*! @abstract Returns a transposed, reference-counted copy of a subfactor.
@@ -1493,7 +1490,7 @@ SparseOpaqueSubfactor_Double SparseGetTranspose(SparseOpaqueSubfactor_Double Sub
  *  @returns A subfactor equivalent to the transpose of the one provided. As
  *           this is reference counted, it must be freed through a call to
  *           SparseCleanup() once it is no longer required.                   */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueSubfactor_Float SparseGetTranspose(SparseOpaqueSubfactor_Float Subfactor);
 
 /******************************************************************************
@@ -1510,7 +1507,7 @@ SparseOpaqueSubfactor_Float SparseGetTranspose(SparseOpaqueSubfactor_Float Subfa
  *  @param Matrix The matrix to factorize.
  *
  *  @returns Factorization of Matrix.                                         */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueFactorization_Double SparseFactor(SparseFactorization_t type, SparseMatrix_Double Matrix);
 
 /*! @abstract Returns the specified factorization of a sparse matrix of float
@@ -1519,7 +1516,7 @@ SparseOpaqueFactorization_Double SparseFactor(SparseFactorization_t type, Sparse
  *  @param type The type of factorization to perform.
  *
  *  @param Matrix The matrix to factorize.                                    */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueFactorization_Float SparseFactor(SparseFactorization_t type, SparseMatrix_Float Matrix);
 
 /*! @abstract Returns the specified factorization of a sparse matrix of double
@@ -1535,7 +1532,7 @@ SparseOpaqueFactorization_Float SparseFactor(SparseFactorization_t type, SparseM
  *  @param nfoptions Numeric factor options, for example pivoting parameters.
  *
  *  @returns Factorization of Matrix.                                         */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueFactorization_Double SparseFactor(SparseFactorization_t type, SparseMatrix_Double Matrix, SparseSymbolicFactorOptions sfoptions, SparseNumericFactorOptions nfoptions);
 
 /*! @abstract Returns the specified factorization of a sparse matrix of float
@@ -1551,7 +1548,7 @@ SparseOpaqueFactorization_Double SparseFactor(SparseFactorization_t type, Sparse
  *  @param nfoptions Numeric factor options, for example pivoting parameters.
  *
  *  @returns Factorization of Matrix.                                         */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueFactorization_Float SparseFactor(SparseFactorization_t type, SparseMatrix_Float Matrix, SparseSymbolicFactorOptions sfoptions, SparseNumericFactorOptions nfoptions);
 
 /**** Sparse Factor Functions using pre-calculated symbolic factors ***********/
@@ -1565,7 +1562,7 @@ SparseOpaqueFactorization_Float SparseFactor(SparseFactorization_t type, SparseM
  *  @param Matrix The matrix to factorize.
  *
  *  @returns Factorization of Matrix.                                         */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueFactorization_Double SparseFactor(SparseOpaqueSymbolicFactorization SymbolicFactor, SparseMatrix_Double Matrix);
 
 /*! @abstract Returns the factorization of a sparse matrix of float values
@@ -1577,7 +1574,7 @@ SparseOpaqueFactorization_Double SparseFactor(SparseOpaqueSymbolicFactorization 
  *  @param Matrix The matrix to factorize.
  *
  *  @returns Factorization of Matrix.                                         */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueFactorization_Float SparseFactor(SparseOpaqueSymbolicFactorization SymbolicFactor, SparseMatrix_Float Matrix);
 
 /*! @abstract Returns the factorization of a sparse matrix of double values
@@ -1592,7 +1589,7 @@ SparseOpaqueFactorization_Float SparseFactor(SparseOpaqueSymbolicFactorization S
  *  @param nfoptions Numeric factor options, for example pivoting parameters.
  *
  *  @returns Factorization of Matrix.                                         */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueFactorization_Double SparseFactor(SparseOpaqueSymbolicFactorization SymbolicFactor, SparseMatrix_Double Matrix, SparseNumericFactorOptions nfoptions);
 
 /*! @abstract Returns the factorization of a sparse matrix of float values
@@ -1607,7 +1604,7 @@ SparseOpaqueFactorization_Double SparseFactor(SparseOpaqueSymbolicFactorization 
  *  @param nfoptions Numeric factor options, for example pivoting parameters.
  *
  *  @returns Factorization of Matrix.                                         */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueFactorization_Float SparseFactor(SparseOpaqueSymbolicFactorization SymbolicFactor, SparseMatrix_Float Matrix, SparseNumericFactorOptions nfoptions);
 
 /**** Sparse Factor Functions with user-defined workspace *********************/
@@ -1643,7 +1640,7 @@ SparseOpaqueFactorization_Float SparseFactor(SparseOpaqueSymbolicFactorization S
  *         by malloc() has this property).
  *
  *  @returns Factorization of Matrix.                                         */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueFactorization_Double SparseFactor(
   SparseOpaqueSymbolicFactorization SymbolicFactor, SparseMatrix_Double Matrix,
   SparseNumericFactorOptions nfoptions, void *_Nullable factorStorage,
@@ -1680,7 +1677,7 @@ SparseOpaqueFactorization_Double SparseFactor(
  *         by malloc() has this property).
  *
  *  @returns Factorization of Matrix.                                         */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueFactorization_Float SparseFactor(
   SparseOpaqueSymbolicFactorization SymbolicFactor, SparseMatrix_Float Matrix,
   SparseNumericFactorOptions nfoptions, void *_Nullable factorStorage,
@@ -1706,7 +1703,7 @@ SparseOpaqueFactorization_Float SparseFactor(
  *         X. If A has dimension m x n, then XB must have dimension k x nrhs,
  *         where k=max(m,n) and nrhs is the number of right-hand sides to find
  *         solutions for.                                                     */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueFactorization_Double Factored, DenseMatrix_Double XB);
 
 /*! @abstract Solves the system AX=B for X, using the supplied factorization
@@ -1725,7 +1722,7 @@ void SparseSolve(SparseOpaqueFactorization_Double Factored, DenseMatrix_Double X
  *         X. If A has dimension m x n, then XB must have dimension k x nrhs,
  *         where k=max(m,n) and nrhs is the number of right-hand sides to find
  *         solutions for.                                                     */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueFactorization_Float Factored, DenseMatrix_Float XB);
 
 /*! @abstract Solves the system AX=B for X, using the supplied factorization
@@ -1746,7 +1743,7 @@ void SparseSolve(SparseOpaqueFactorization_Float Factored, DenseMatrix_Float XB)
  *
  *  @param X Matrix in which to return solutions. If A has dimension m x n, and
  *         B has dimension m x nrhs, then X must have dimension n x nrhs.     */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueFactorization_Double Factored, DenseMatrix_Double B, DenseMatrix_Double X);
 
 /*! @abstract Solves the system AX=B for X, using the supplied factorization
@@ -1767,7 +1764,7 @@ void SparseSolve(SparseOpaqueFactorization_Double Factored, DenseMatrix_Double B
  *
  *  @param X Matrix in which to return solutions. If A has dimension m x n, and
  *         B has dimension m x nrhs, then X must have dimension n x nrhs.     */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueFactorization_Float Factored, DenseMatrix_Float B, DenseMatrix_Float X);
 
 /**** Solving Systems with User Defined Workspace *****************************/
@@ -1794,7 +1791,7 @@ void SparseSolve(SparseOpaqueFactorization_Float Factored, DenseMatrix_Float B, 
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueFactorization_Double Factored,
   DenseMatrix_Double XB, void *workspace);
 
@@ -1820,7 +1817,7 @@ void SparseSolve(SparseOpaqueFactorization_Double Factored,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueFactorization_Float Factored, DenseMatrix_Float XB,
   void *workspace);
 
@@ -1848,7 +1845,7 @@ void SparseSolve(SparseOpaqueFactorization_Float Factored, DenseMatrix_Float XB,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueFactorization_Double Factored,
   DenseMatrix_Double X, DenseMatrix_Double B, void *workspace);
 
@@ -1876,7 +1873,7 @@ void SparseSolve(SparseOpaqueFactorization_Double Factored,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueFactorization_Float Factored, DenseMatrix_Float X,
   DenseMatrix_Float B, void *workspace);
 
@@ -1899,7 +1896,7 @@ void SparseSolve(SparseOpaqueFactorization_Float Factored, DenseMatrix_Float X,
  *  @param xb On entry, the right-hand side b. On return, the solution vector
  *         x. If A has dimension m x n, then xb must have length k, where
  *         k=max(m,n).                                                        */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueFactorization_Double Factored,
   DenseVector_Double xb);
 
@@ -1918,7 +1915,7 @@ void SparseSolve(SparseOpaqueFactorization_Double Factored,
  *  @param xb On entry, the right-hand side b. On return, the solution vector
  *         x. If A has dimension m x n, then xb must have length k, where
  *         k=max(m,n).                                                        */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueFactorization_Float Factored, DenseVector_Float xb);
 
 /*! @abstract Solves the system Ax=b for x, using the supplied factorization
@@ -1938,7 +1935,7 @@ void SparseSolve(SparseOpaqueFactorization_Float Factored, DenseVector_Float xb)
  *
  *  @param x Vector in which to return solution. If A has dimension m x n, then
  *         x must have length n.                                              */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueFactorization_Double Factored,
   DenseVector_Double b, DenseVector_Double x);
 
@@ -1959,7 +1956,7 @@ void SparseSolve(SparseOpaqueFactorization_Double Factored,
  *
  *  @param x Vector in which to return solution. If A has dimension m x n, then
  *         x must have length n.                                              */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueFactorization_Float Factored, DenseVector_Float b,
   DenseVector_Float x);
 
@@ -1986,7 +1983,7 @@ void SparseSolve(SparseOpaqueFactorization_Float Factored, DenseVector_Float b,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueFactorization_Double Factored,
   DenseVector_Double xb, void *workspace);
 
@@ -2011,7 +2008,7 @@ void SparseSolve(SparseOpaqueFactorization_Double Factored,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueFactorization_Float Factored, DenseVector_Float xb,
                  void *workspace);
 
@@ -2038,7 +2035,7 @@ void SparseSolve(SparseOpaqueFactorization_Float Factored, DenseVector_Float xb,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueFactorization_Double Factored,
   DenseVector_Double x, DenseVector_Double b, void *workspace);
 
@@ -2065,7 +2062,7 @@ void SparseSolve(SparseOpaqueFactorization_Double Factored,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueFactorization_Float Factored, DenseVector_Float x,
   DenseVector_Float b, void *workspace);
 
@@ -2087,7 +2084,7 @@ void SparseSolve(SparseOpaqueFactorization_Float Factored, DenseVector_Float x,
  *  @param Matrix The structure of the sparse matrix to be factorized.
  *
  *  @returns The requested symbolic factorization of Matrix.                  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueSymbolicFactorization SparseFactor(SparseFactorization_t type,
   SparseMatrixStructure Matrix);
 
@@ -2106,7 +2103,7 @@ SparseOpaqueSymbolicFactorization SparseFactor(SparseFactorization_t type,
  *         to use.
  *
  *  @returns The requested symbolic factorization of Matrix.                  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueSymbolicFactorization SparseFactor(SparseFactorization_t type,
   SparseMatrixStructure Matrix, SparseSymbolicFactorOptions sfoptions);
 
@@ -2134,7 +2131,7 @@ SparseOpaqueSymbolicFactorization SparseFactor(SparseFactorization_t type,
  *  @param Matrix The matrix to be factorized.
  *
  *  @param Factorization The factorization to be updated.                     */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseRefactor(SparseMatrix_Double Matrix,
   SparseOpaqueFactorization_Double *Factorization);
 
@@ -2159,7 +2156,7 @@ void SparseRefactor(SparseMatrix_Double Matrix,
  *  @param Matrix The matrix to be factorized.
  *
  *  @param Factorization The factorization to be updated.                     */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseRefactor(SparseMatrix_Float Matrix,
   SparseOpaqueFactorization_Float *Factorization);
 
@@ -2184,7 +2181,7 @@ void SparseRefactor(SparseMatrix_Float Matrix,
  *  @param Factorization The factorization to be updated.
  *
  *  @param nfoptions Numeric factor options, for example pivoting parameters. */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseRefactor(SparseMatrix_Double Matrix,
   SparseOpaqueFactorization_Double *Factorization,
   SparseNumericFactorOptions nfoptions);
@@ -2210,7 +2207,7 @@ void SparseRefactor(SparseMatrix_Double Matrix,
  *  @param Factorization The factorization to be updated.
  *
  *  @param nfoptions Numeric factor options, for example pivoting parameters. */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseRefactor(SparseMatrix_Float Matrix,
   SparseOpaqueFactorization_Float *Factorization,
   SparseNumericFactorOptions nfoptions);
@@ -2243,7 +2240,7 @@ void SparseRefactor(SparseMatrix_Float Matrix,
  *  @param Matrix The matrix to be factorized.
  *
  *  @param Factorization The factorization to be updated.                     */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseRefactor(SparseMatrix_Double Matrix,
   SparseOpaqueFactorization_Double *Factorization, void *workspace);
 
@@ -2275,7 +2272,7 @@ void SparseRefactor(SparseMatrix_Double Matrix,
  *  @param Matrix The matrix to be factorized.
  *
  *  @param Factorization The factorization to be updated.                     */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseRefactor(SparseMatrix_Float Matrix,
   SparseOpaqueFactorization_Float *Factorization, void *workspace);
 
@@ -2315,7 +2312,7 @@ void SparseRefactor(SparseMatrix_Float Matrix,
  *         by malloc() has this property).
  *         This workspace may be reused or destroyed by the user as soon as the
  *         function returns.                                                  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseRefactor(SparseMatrix_Double Matrix,
   SparseOpaqueFactorization_Double *Factorization,
   SparseNumericFactorOptions nfoptions, void *workspace);
@@ -2356,7 +2353,7 @@ void SparseRefactor(SparseMatrix_Double Matrix,
  *         by malloc() has this property).
  *         This workspace may be reused or destroyed by the user as soon as the
  *         function returns.                                                  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseRefactor(SparseMatrix_Float Matrix,
   SparseOpaqueFactorization_Float *Factorization,
   SparseNumericFactorOptions nfoptions, void *workspace);
@@ -2387,7 +2384,7 @@ void SparseRefactor(SparseMatrix_Float Matrix,
  *
  *  @returns Object representing the requested sub-factor. Must be cleaned up
  *  by a call to SparseCleanup() once it is no longer required.               */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueSubfactor_Double SparseCreateSubfactor(SparseSubfactor_t subfactor,
   SparseOpaqueFactorization_Double Factor);
 
@@ -2413,7 +2410,7 @@ SparseOpaqueSubfactor_Double SparseCreateSubfactor(SparseSubfactor_t subfactor,
  *
  *  @returns Object representing the requested sub-factor. Must be cleaned up
  *  by a call to SparseCleanup() once it is no longer required.               */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueSubfactor_Float SparseCreateSubfactor(SparseSubfactor_t subfactor,
   SparseOpaqueFactorization_Float Factor);
 
@@ -2433,7 +2430,7 @@ SparseOpaqueSubfactor_Float SparseCreateSubfactor(SparseSubfactor_t subfactor,
  *         k x nrhs, where k = max(m, n) and nrhs is the number of right-hand
  *         sides. If m != n, then only the first min(m,n) entries are used for
  *         input or output as approriate.                                     */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseMatrix_Double XB);
 
 /*! @abstract Solve the equation Subfactor * X = B for the matrix X, in place.
@@ -2446,7 +2443,7 @@ void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseMatrix_Double XB);
  *         k x nrhs, where k = max(m, n) and nrhs is the number of right-hand
  *         sides. If m != n, then only the first min(m,n) entries are used for
  *         input or output as approriate.                                     */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueSubfactor_Float Subfactor, DenseMatrix_Float XB);
 
 /*! @abstract Solve the equation Subfactor * X = B for the matrix X.
@@ -2459,7 +2456,7 @@ void SparseSolve(SparseOpaqueSubfactor_Float Subfactor, DenseMatrix_Float XB);
  *
  *  @param X (output) The solutions X. If Subfactor is m x n, and B is m x nrhs,
  *         then X must have dimension n x nrhs.                               */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseMatrix_Double B,
   DenseMatrix_Double X);
 
@@ -2473,7 +2470,7 @@ void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseMatrix_Double B,
  *
  *  @param X (output) The solutions X. If Subfactor is m x n, and B is m x nrhs,
  *         then X must have dimension n x nrhs.                               */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueSubfactor_Float Subfactor, DenseMatrix_Float B,
   DenseMatrix_Float X);
 
@@ -2495,7 +2492,7 @@ void SparseSolve(SparseOpaqueSubfactor_Float Subfactor, DenseMatrix_Float B,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseMatrix_Double XB,
   void *workspace);
 
@@ -2515,7 +2512,7 @@ void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseMatrix_Double XB,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueSubfactor_Float Subfactor, DenseMatrix_Float XB,
   void *workspace);
 
@@ -2536,7 +2533,7 @@ void SparseSolve(SparseOpaqueSubfactor_Float Subfactor, DenseMatrix_Float XB,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseMatrix_Double B,
   DenseMatrix_Double X, void *workspace);
 
@@ -2557,7 +2554,7 @@ void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseMatrix_Double B,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueSubfactor_Float Subfactor, DenseMatrix_Float B,
   DenseMatrix_Float X, void *workspace);
 
@@ -2572,7 +2569,7 @@ void SparseSolve(SparseOpaqueSubfactor_Float Subfactor, DenseMatrix_Float B,
  *         with the solution vector x. If Subfactor is m x n, then xb must have
  *         length k, where k = max(m, n). If m != n, then only the first
  *         min(m,n) entries are used for input or output as approriate.       */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double xb);
 
 /*! @abstract Solve the equation Subfactor * x = b for the vector x, in place.
@@ -2584,7 +2581,7 @@ void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double xb);
  *         with the solution vector x. If Subfactor is m x n, then xb must have
  *         length k, where k = max(m, n). If m != n, then only the first
  *         min(m,n) entries are used for input or output as approriate.       */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueSubfactor_Float Subfactor, DenseVector_Float xb);
 
 /*! @abstract Solve the equation Subfactor * x = b for the vector x.
@@ -2597,7 +2594,7 @@ void SparseSolve(SparseOpaqueSubfactor_Float Subfactor, DenseVector_Float xb);
  *
  *  @param x (output) The solution x. If Subfactor is m x n, then x must have
  *         length n.                                                          */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double b,
   DenseVector_Double x);
 
@@ -2611,7 +2608,7 @@ void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double b,
  *
  *  @param x (output) The solution x. If Subfactor is m x n, then x must have
  *         length n.                                                          */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueSubfactor_Float Subfactor, DenseVector_Float b,
   DenseVector_Float x);
 
@@ -2632,7 +2629,7 @@ void SparseSolve(SparseOpaqueSubfactor_Float Subfactor, DenseVector_Float b,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double xb,
   void *workspace);
 
@@ -2651,7 +2648,7 @@ void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double xb,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double xb,
   void *workspace);
 
@@ -2671,7 +2668,7 @@ void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double xb,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double b,
   DenseVector_Double x, void *workspace);
 
@@ -2691,7 +2688,7 @@ void SparseSolve(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double b,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseSolve(SparseOpaqueSubfactor_Float Subfactor, DenseVector_Float b,
   DenseVector_Float x, void *workspace);
 
@@ -2707,7 +2704,7 @@ void SparseSolve(SparseOpaqueSubfactor_Float Subfactor, DenseVector_Float b,
  *         k x nrhs, where k = max(m, n) and nrhs is the number of right-hand
  *         side vectors. If m != n, then only the first min(m,n) entries are
  *         used for input or output as approriate.                            */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseMultiply(SparseOpaqueSubfactor_Double Subfactor, DenseMatrix_Double XY);
 
 /*! @abstract Perform the multiply operation Y = Subfactor * X in place.
@@ -2720,7 +2717,7 @@ void SparseMultiply(SparseOpaqueSubfactor_Double Subfactor, DenseMatrix_Double X
  *         k x nrhs, where k = max(m, n) and nrhs is the number of right-hand
  *         side vectors. If m != n, then only the first min(m,n) entries are
  *         used for input or output as approriate.                            */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseMultiply(SparseOpaqueSubfactor_Float Subfactor, DenseMatrix_Float XY);
 
 /*! @abstract Perform the multiply operation Y = Subfactor * X.
@@ -2734,7 +2731,7 @@ void SparseMultiply(SparseOpaqueSubfactor_Float Subfactor, DenseMatrix_Float XY)
  *
  *  @param Y (output) The result vectors Y. If Subfactor is m x n, and X is
  *         m x nrhs, then Y must have dimension m x nrhs.                     */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseMultiply(SparseOpaqueSubfactor_Double Subfactor, DenseMatrix_Double X,
   DenseMatrix_Double Y);
 
@@ -2749,7 +2746,7 @@ void SparseMultiply(SparseOpaqueSubfactor_Double Subfactor, DenseMatrix_Double X
  *
  *  @param Y (output) The result vectors Y. If Subfactor is m x n, and X is
  *         m x nrhs, then Y must have dimension m x nrhs.                     */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseMultiply(SparseOpaqueSubfactor_Float Subfactor, DenseMatrix_Float X,
   DenseMatrix_Float Y);
 
@@ -2771,7 +2768,7 @@ void SparseMultiply(SparseOpaqueSubfactor_Float Subfactor, DenseMatrix_Float X,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseMultiply(SparseOpaqueSubfactor_Double Subfactor, DenseMatrix_Double XY,
   void *workspace);
 
@@ -2791,7 +2788,7 @@ void SparseMultiply(SparseOpaqueSubfactor_Double Subfactor, DenseMatrix_Double X
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseMultiply(SparseOpaqueSubfactor_Float Subfactor, DenseMatrix_Float XY,
   void *workspace);
 
@@ -2812,7 +2809,7 @@ void SparseMultiply(SparseOpaqueSubfactor_Float Subfactor, DenseMatrix_Float XY,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseMultiply(SparseOpaqueSubfactor_Double Subfactor, DenseMatrix_Double X,
   DenseMatrix_Double Y, void *workspace);
 
@@ -2833,7 +2830,7 @@ void SparseMultiply(SparseOpaqueSubfactor_Double Subfactor, DenseMatrix_Double X
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseMultiply(SparseOpaqueSubfactor_Float Subfactor, DenseMatrix_Float X,
   DenseMatrix_Float Y, void *workspace);
 
@@ -2850,7 +2847,7 @@ void SparseMultiply(SparseOpaqueSubfactor_Float Subfactor, DenseMatrix_Float X,
  *         entries are used for input or output as approriate.                */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiply(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double xy)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Perform the multiply operation y = Subfactor * x in place.
  *
@@ -2863,7 +2860,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *         entries are used for input or output as approriate.                */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseMultiply(SparseOpaqueSubfactor_Float Subfactor, DenseVector_Float xy)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Perform the multiply operation y = Subfactor * x.
  *
@@ -2875,7 +2872,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *
  *  @param y (output) The result vector y. If Subfactor is m x n, then y must have
  *         length m.                                                          */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseMultiply(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double x,
   DenseVector_Double y);
 
@@ -2889,7 +2886,7 @@ void SparseMultiply(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double x
  *
  *  @param y (output) The result vector y. If Subfactor is m x n, then y must have
  *         length m.                                                          */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseMultiply(SparseOpaqueSubfactor_Float Subfactor, DenseVector_Float x,
   DenseVector_Float y);
 
@@ -2910,7 +2907,7 @@ void SparseMultiply(SparseOpaqueSubfactor_Float Subfactor, DenseVector_Float x,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseMultiply(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double xy,
   void *workspace);
 
@@ -2929,7 +2926,7 @@ void SparseMultiply(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double x
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseMultiply(SparseOpaqueSubfactor_Float Subfactor, DenseVector_Float xy,
   void *workspace);
 
@@ -2949,7 +2946,7 @@ void SparseMultiply(SparseOpaqueSubfactor_Float Subfactor, DenseVector_Float xy,
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseMultiply(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double x,
   DenseVector_Double y, void *workspace);
 
@@ -2969,7 +2966,7 @@ void SparseMultiply(SparseOpaqueSubfactor_Double Subfactor, DenseVector_Double x
  *         This memory must be 16-byte aligned (any allocation returned
  *         by malloc() has this property).
  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseMultiply(SparseOpaqueSubfactor_Float Subfactor, DenseVector_Float x,
   DenseVector_Float y, void *workspace);
 
@@ -3044,7 +3041,7 @@ typedef struct {
  *  @returns The constructed preconditioner object. Resource must be freed
  *           through a call to SparseCleanup() once the user is finished with
  *           the preconditioner.                                              */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaquePreconditioner_Double SparseCreatePreconditioner(
   SparsePreconditioner_t type, SparseMatrix_Double A);
 
@@ -3057,7 +3054,7 @@ SparseOpaquePreconditioner_Double SparseCreatePreconditioner(
  *  @returns The constructed preconditioner object. Resource must be freed
  *           through a call to SparseCleanup() once the user is finished with
  *           the preconditioner.                                              */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaquePreconditioner_Float SparseCreatePreconditioner(
   SparsePreconditioner_t type, SparseMatrix_Float A);
 
@@ -3415,33 +3412,33 @@ typedef struct {
 /**** Iterative Method Factory Functions **************************************/
 
 /*! @abstract Return a Conjugate Gradient Method with default options.        */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeMethod SparseConjugateGradient(void);
 
 /*! @abstract Return a Conjugate Gradient Method with specified options.
  *
  *  @param options Options for conjugate gradient method.                     */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeMethod SparseConjugateGradient(SparseCGOptions options);
 
 /*! @abstract Return a GMRES Method with default options.                     */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeMethod SparseGMRES(void);
 
 /*! @abstract Return a GMRES Method with specified options.
  *
  *  @param options Options for GMRES method.                                  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeMethod SparseGMRES(SparseGMRESOptions options);
 
 /*! @abstract Return a LSMR Method with default options.                      */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeMethod SparseLSMR(void);
 
 /*! @abstract Return a LSMR Method with specified options
  *
  *  @param options Options for LSMR method.                                   */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeMethod SparseLSMR(SparseLSMROptions options);
 
 /******************************************************************************
@@ -3466,7 +3463,7 @@ SparseIterativeMethod SparseLSMR(SparseLSMROptions options);
  *         has dimension m x n, and B has dimension m x nrhs, then X must have
  *         dimension n x nrhs. If no good initial estimate is available, user
  *         should set the initial guess to be the zero vector.                */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   SparseMatrix_Double A, DenseMatrix_Double B, DenseMatrix_Double X);
 
@@ -3486,7 +3483,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         has dimension m x n, and B has dimension m x nrhs, then X must have
  *         dimension n x nrhs. If no good initial estimate is available, user
  *         should set the initial guess to be the zero vector.                */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   SparseMatrix_Float A, DenseMatrix_Float B, DenseMatrix_Float X);
 
@@ -3505,7 +3502,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         has dimension m x n, then x must have length n. If no good initial
  *         estimate is available, user should set the initial guess to be the
  *         zero vector.                                                       */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   SparseMatrix_Double A, DenseVector_Double b, DenseVector_Double x);
 
@@ -3524,7 +3521,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         has dimension m x n, then x must have length n. If no good initial
  *         estimate is available, user should set the initial guess to be the
  *         zero vector.                                                       */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   SparseMatrix_Float A, DenseVector_Float b, DenseVector_Float x);
 
@@ -3551,7 +3548,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         has dimension m x n, and B has dimension m x nrhs, then X must have
  *         dimension n x nrhs. If no good initial estimate is available, user
  *         should set the initial guess to be the zero vector.                */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans,
     DenseMatrix_Double X, DenseMatrix_Double Y),
@@ -3580,7 +3577,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         has dimension m x n, and B has dimension m x nrhs, then X must have
  *         dimension n x nrhs. If no good initial estimate is available, user
  *         should set the initial guess to be the zero vector.                */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans,
     DenseMatrix_Float X, DenseMatrix_Float Y),
@@ -3608,7 +3605,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         has dimension m x n, then x must have length n. If no good initial
  *         estimate is available, user should set the initial guess to be the
  *         zero vector.                                                       */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans,
     DenseVector_Double x, DenseVector_Double y),
@@ -3636,7 +3633,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         has dimension m x n, then x must have length n. If no good initial
  *         estimate is available, user should set the initial guess to be the
  *         zero vector.                                                       */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans,
     DenseVector_Float x, DenseVector_Float y),
@@ -3662,7 +3659,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         should set the initial guess to be the zero vector.
  *
  *  @param Preconditioner Type of preconditioner to create and apply.         */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   SparseMatrix_Double A, DenseMatrix_Double B, DenseMatrix_Double X,
   SparsePreconditioner_t Preconditioner);
@@ -3685,7 +3682,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         should set the initial guess to be the zero vector.
  *
  *  @param Preconditioner Type of preconditioner to create and apply.         */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   SparseMatrix_Float A, DenseMatrix_Float B, DenseMatrix_Float X,
   SparsePreconditioner_t Preconditioner);
@@ -3707,7 +3704,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         zero vector.
  *
  *  @param Preconditioner Type of preconditioner to create and apply.         */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   SparseMatrix_Double A, DenseVector_Double b, DenseVector_Double x,
   SparsePreconditioner_t Preconditioner);
@@ -3729,7 +3726,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         zero vector.
  *
  *  @param Preconditioner Type of preconditioner to create and apply.         */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   SparseMatrix_Float A, DenseVector_Float b, DenseVector_Float x,
   SparsePreconditioner_t Preconditioner);
@@ -3752,7 +3749,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         should set the initial guess to be the zero vector.
  *
  *  @parameter Preconditioner The preconditioner to apply.                    */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   SparseMatrix_Double A, DenseMatrix_Double B, DenseMatrix_Double X,
   SparseOpaquePreconditioner_Double Preconditioner);
@@ -3775,7 +3772,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         should set the initial guess to be the zero vector.
  *
  *  @parameter Preconditioner The preconditioner to apply.                    */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   SparseMatrix_Float A, DenseMatrix_Float B, DenseMatrix_Float X,
   SparseOpaquePreconditioner_Float Preconditioner);
@@ -3797,7 +3794,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         zero vector.
  *
  *  @param Preconditioner The preconditioner to apply.                        */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   SparseMatrix_Double A, DenseVector_Double b, DenseVector_Double x,
   SparseOpaquePreconditioner_Double Preconditioner);
@@ -3819,7 +3816,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         zero vector.
  *
  *  @param Preconditioner The preconditioner to apply.                        */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   SparseMatrix_Float A, DenseVector_Float b, DenseVector_Float x,
   SparseOpaquePreconditioner_Float Preconditioner);
@@ -3849,7 +3846,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         should set the initial guess to be the zero vector.
  *
  *  @param Preconditioner (input) The preconditioner to use.                  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans,
     DenseMatrix_Double X, DenseMatrix_Double Y),
@@ -3881,7 +3878,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         should set the initial guess to be the zero vector.
  *
  *  @param Preconditioner (input) The preconditioner to use.                  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans,
     DenseMatrix_Float X, DenseMatrix_Float Y),
@@ -3912,7 +3909,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *         zero vector.
  *
  *  @param Preconditioner (input) The preconditioner to use.                  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans,
     DenseVector_Double x, DenseVector_Double y),
@@ -3943,7 +3940,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *          zero vector.
  *
  *  @param Preconditioner (input) The preconditioner to use.                  */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
   void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans,
     DenseVector_Float x, DenseVector_Float y),
@@ -4010,7 +4007,7 @@ SparseIterativeStatus_t SparseSolve(SparseIterativeMethod method,
  *  @param nrhs (input) Number of right-hand sides to be solved for.
  *
  *  @returns Size of state space required in bytes.                           */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 size_t SparseGetStateSize_Double(SparseIterativeMethod method,
   bool preconditioner, int m, int n, int nrhs);
 
@@ -4029,7 +4026,7 @@ size_t SparseGetStateSize_Double(SparseIterativeMethod method,
  *  @param nrhs (input) Number of right-hand sides to be solved for.
  *
  *  @returns Size of state space required in bytes.                           */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 size_t SparseGetStateSize_Float(SparseIterativeMethod method,
   bool preconditioner, int m, int n, int nrhs);
 
@@ -4094,7 +4091,7 @@ size_t SparseGetStateSize_Float(SparseIterativeMethod method,
  *         been achieved to bring X up to date.
  *
  *  @param Preconditioner (input) Preconditioner to apply.                    */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseIterate(SparseIterativeMethod method, int iteration,
   const bool *converged, void *state,
   void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans,
@@ -4163,7 +4160,7 @@ void SparseIterate(SparseIterativeMethod method, int iteration,
  *         been achieved to bring X up to date.
  *
  *  @param Preconditioner (input) Preconditioner to apply.                    */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseIterate(SparseIterativeMethod method, int iteration,
   const bool *converged, void *state,
   void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans, DenseMatrix_Float X, DenseMatrix_Float Y),
@@ -4229,7 +4226,7 @@ void SparseIterate(SparseIterativeMethod method, int iteration,
  *         or may be used to store some other vector.
  *         The user should make a call with iteration<0 once convergence has
  *         been achieved to bring X up to date.                               */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseIterate(SparseIterativeMethod method, int iteration,
   const bool *converged, void *state,
   void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans,
@@ -4295,7 +4292,7 @@ void SparseIterate(SparseIterativeMethod method, int iteration,
  *         or may be used to store some other vector.
  *         The user should make a call with iteration<0 once convergence has
  *         been achieved to bring X up to date.                               */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 void SparseIterate(SparseIterativeMethod method, int iteration,
   const bool *converged, void *state,
   void (^_Nonnull ApplyOperator)(bool accumulate, enum CBLAS_TRANSPOSE trans,
@@ -4331,7 +4328,7 @@ void SparseIterate(SparseIterativeMethod method, int iteration,
  *         reference count of.
  *
  *  @returns A copy of SymbolicFactor.                                        */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueSymbolicFactorization SparseRetain(
   SparseOpaqueSymbolicFactorization SymbolicFactor);
 
@@ -4342,7 +4339,7 @@ SparseOpaqueSymbolicFactorization SparseRetain(
  *         reference count of.
  *
  *  @returns A copy of NumericFactor.                                        */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueFactorization_Double SparseRetain(
   SparseOpaqueFactorization_Double NumericFactor);
 
@@ -4353,7 +4350,7 @@ SparseOpaqueFactorization_Double SparseRetain(
  *         reference count of.
  *
  *  @returns A copy of NumericFactor.                                        */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueFactorization_Float SparseRetain(
   SparseOpaqueFactorization_Float NumericFactor);
 
@@ -4364,7 +4361,7 @@ SparseOpaqueFactorization_Float SparseRetain(
  *         reference count of.
  *
  *  @returns A copy of NumericFactor.                                        */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueSubfactor_Double SparseRetain(SparseOpaqueSubfactor_Double NumericFactor);
 
 /*! @abstract Increase reference count on a numeric factorization object,
@@ -4374,7 +4371,7 @@ SparseOpaqueSubfactor_Double SparseRetain(SparseOpaqueSubfactor_Double NumericFa
  *         reference count of.
  *
  *  @returns A copy of NumericFactor.                                        */
-static inline SPARSE_PUBLIC_INTERFACE __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11)
+static inline SPARSE_PUBLIC_INTERFACE API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 SparseOpaqueSubfactor_Float SparseRetain(SparseOpaqueSubfactor_Float NumericFactor);
 
 /**** Cleaning up resources ***************************************************/
@@ -4385,7 +4382,7 @@ SparseOpaqueSubfactor_Float SparseRetain(SparseOpaqueSubfactor_Float NumericFact
  *  @param Opaque The resource to be freed.                                   */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseCleanup(SparseOpaqueSymbolicFactorization Opaque)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Release a Sparse Object's references to any memory allocated
  *  by the sparse library.
@@ -4393,7 +4390,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param Opaque The resource to be freed.                                   */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseCleanup(SparseOpaqueFactorization_Double Opaque)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Release a Sparse Object's references to any memory allocated
  *  by the sparse library.
@@ -4401,7 +4398,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param Opaque The resource to be freed.                                   */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseCleanup(SparseOpaqueFactorization_Float Opaque)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Release a Sparse Object's references to any memory allocated
  *  by the sparse library.
@@ -4409,7 +4406,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param Opaque The resource to be freed.                                   */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseCleanup(SparseOpaqueSubfactor_Double Opaque)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Release a Sparse Object's references to any memory allocated
  *  by the sparse library.
@@ -4417,7 +4414,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param Opaque The resource to be freed.                                   */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseCleanup(SparseOpaqueSubfactor_Float Opaque)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Release a Sparse matrix's references to any memory allocated
  *  by the Sparse library.
@@ -4427,7 +4424,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param Matrix The matrix to be freed.                                     */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseCleanup(SparseMatrix_Double Matrix)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Release a Sparse matrix's references to any memory allocated
  *  by the Sparse library.
@@ -4437,7 +4434,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param Matrix The matrix to be freed.                                     */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseCleanup(SparseMatrix_Float Matrix)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Release a Sparse Preconditioner's references to any memory allocated
  *  by the sparse library.
@@ -4445,7 +4442,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param Opaque The Preconditioner to be freed.                             */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseCleanup(SparseOpaquePreconditioner_Double Opaque)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*! @abstract Release a Sparse Preconditioner's references to any memory allocated
  *  by the sparse library.
@@ -4453,7 +4450,7 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
  *  @param Opaque The Preconditioner to be freed.                             */
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseCleanup(SparseOpaquePreconditioner_Float Opaque)
-__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILABLE(11);
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 
 /*********************************** END **************************************/
 
@@ -4461,15 +4458,10 @@ __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11) __WATCHOS_AVAILABLE(4) __TVOS_AVAILAB
 # pragma clang assume_nonnull end
 #endif
 
-#if   __MAC_OS_X_VERSION_MIN_REQUIRED  >= __MAC_10_13   || \
-      __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_11_0 || \
-      __WATCH_OS_VERSION_MIN_REQUIRED  >= __WATCHOS_4_0 || \
-      __TV_OS_VERSION_MIN_REQUIRED     >= __TVOS_11_0
-# if defined SPARSE_INCLUDED_VIA_ACCELERATE /* Included via Accelerate */
-#  include <vecLib/Sparse/SolveImplementation.h>
-# else /* Standalone environments */
-#  include "SolveImplementation.h"
-# endif
+#if defined SPARSE_INCLUDED_VIA_ACCELERATE /* Included via Accelerate */
+# include <vecLib/Sparse/SolveImplementation.h>
+#else /* Standalone environments */
+# include "SolveImplementation.h"
 #endif
 
 #endif /* __has_attribute(overloadable) */

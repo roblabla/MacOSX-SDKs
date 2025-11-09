@@ -73,27 +73,27 @@ typedef NS_ENUM(NSUInteger, MTLAttributeFormat)
     MTLAttributeFormatInt1010102Normalized = 40,
     MTLAttributeFormatUInt1010102Normalized = 41,
     
-    MTLAttributeFormatUChar4Normalized_BGRA NS_ENUM_AVAILABLE(10_13, 11_0) = 42,
+    MTLAttributeFormatUChar4Normalized_BGRA API_AVAILABLE(macos(10.13), ios(11.0)) = 42,
     
-    MTLAttributeFormatUChar NS_ENUM_AVAILABLE(10_13, 11_0) = 45,
-    MTLAttributeFormatChar NS_ENUM_AVAILABLE(10_13, 11_0) = 46,
-    MTLAttributeFormatUCharNormalized NS_ENUM_AVAILABLE(10_13, 11_0) = 47,
-    MTLAttributeFormatCharNormalized NS_ENUM_AVAILABLE(10_13, 11_0) = 48,
+    MTLAttributeFormatUChar API_AVAILABLE(macos(10.13), ios(11.0)) = 45,
+    MTLAttributeFormatChar API_AVAILABLE(macos(10.13), ios(11.0)) = 46,
+    MTLAttributeFormatUCharNormalized API_AVAILABLE(macos(10.13), ios(11.0)) = 47,
+    MTLAttributeFormatCharNormalized API_AVAILABLE(macos(10.13), ios(11.0)) = 48,
     
-    MTLAttributeFormatUShort NS_ENUM_AVAILABLE(10_13, 11_0) = 49,
-    MTLAttributeFormatShort NS_ENUM_AVAILABLE(10_13, 11_0) = 50,
-    MTLAttributeFormatUShortNormalized NS_ENUM_AVAILABLE(10_13, 11_0) = 51,
-    MTLAttributeFormatShortNormalized NS_ENUM_AVAILABLE(10_13, 11_0) = 52,
+    MTLAttributeFormatUShort API_AVAILABLE(macos(10.13), ios(11.0)) = 49,
+    MTLAttributeFormatShort API_AVAILABLE(macos(10.13), ios(11.0)) = 50,
+    MTLAttributeFormatUShortNormalized API_AVAILABLE(macos(10.13), ios(11.0)) = 51,
+    MTLAttributeFormatShortNormalized API_AVAILABLE(macos(10.13), ios(11.0)) = 52,
     
-    MTLAttributeFormatHalf NS_ENUM_AVAILABLE(10_13, 11_0) = 53,
+    MTLAttributeFormatHalf API_AVAILABLE(macos(10.13), ios(11.0)) = 53,
     
-} NS_ENUM_AVAILABLE(10_12, 10_0);
+} API_AVAILABLE(macos(10.12), ios(10.0));
 
 
 typedef NS_ENUM(NSUInteger, MTLIndexType) {
     MTLIndexTypeUInt16 = 0,
     MTLIndexTypeUInt32 = 1,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 
 typedef NS_ENUM(NSUInteger, MTLStepFunction)
@@ -103,38 +103,38 @@ typedef NS_ENUM(NSUInteger, MTLStepFunction)
     // vertex functions only
     MTLStepFunctionPerVertex = 1,
     MTLStepFunctionPerInstance = 2,
-    MTLStepFunctionPerPatch NS_ENUM_AVAILABLE(10_12, 10_0) = 3,
-    MTLStepFunctionPerPatchControlPoint NS_ENUM_AVAILABLE(10_12, 10_0) = 4,
+    MTLStepFunctionPerPatch API_AVAILABLE(macos(10.12), ios(10.0)) = 3,
+    MTLStepFunctionPerPatchControlPoint API_AVAILABLE(macos(10.12), ios(10.0)) = 4,
 
     // compute functions only
     MTLStepFunctionThreadPositionInGridX = 5,
     MTLStepFunctionThreadPositionInGridY = 6,
     MTLStepFunctionThreadPositionInGridXIndexed = 7,
     MTLStepFunctionThreadPositionInGridYIndexed = 8,
-} NS_ENUM_AVAILABLE(10_12, 10_0);
+} API_AVAILABLE(macos(10.12), ios(10.0));
 
 
-NS_CLASS_AVAILABLE(10_12, 10_0)
+MTL_EXPORT API_AVAILABLE(macos(10.12), ios(10.0))
 @interface MTLBufferLayoutDescriptor : NSObject <NSCopying>
 @property (assign, nonatomic) NSUInteger stride;
 @property (assign, nonatomic) MTLStepFunction stepFunction;
 @property (assign, nonatomic) NSUInteger stepRate;
 @end
 
-NS_CLASS_AVAILABLE(10_12, 10_0)
+MTL_EXPORT API_AVAILABLE(macos(10.12), ios(10.0))
 @interface MTLBufferLayoutDescriptorArray : NSObject
 - (MTLBufferLayoutDescriptor *)objectAtIndexedSubscript:(NSUInteger)index;
 - (void)setObject:(nullable MTLBufferLayoutDescriptor *)bufferDesc atIndexedSubscript:(NSUInteger)index;
 @end
 
-NS_CLASS_AVAILABLE(10_12, 10_0)
+MTL_EXPORT API_AVAILABLE(macos(10.12), ios(10.0))
 @interface MTLAttributeDescriptor : NSObject <NSCopying>
 @property (assign, nonatomic) MTLAttributeFormat format;
 @property (assign, nonatomic) NSUInteger offset;
 @property (assign, nonatomic) NSUInteger bufferIndex;
 @end
 
-NS_CLASS_AVAILABLE(10_12, 10_0)
+MTL_EXPORT API_AVAILABLE(macos(10.12), ios(10.0))
 @interface MTLAttributeDescriptorArray : NSObject
 - (MTLAttributeDescriptor *)objectAtIndexedSubscript:(NSUInteger)index;
 - (void)setObject:(nullable MTLAttributeDescriptor *)attributeDesc atIndexedSubscript:(NSUInteger)index;
@@ -143,7 +143,7 @@ NS_CLASS_AVAILABLE(10_12, 10_0)
 /*
  MTLStageInputOutputDescriptor
  */
-NS_CLASS_AVAILABLE(10_12, 10_0)
+MTL_EXPORT API_AVAILABLE(macos(10.12), ios(10.0))
 @interface MTLStageInputOutputDescriptor : NSObject <NSCopying>
 
 + (MTLStageInputOutputDescriptor *)stageInputOutputDescriptor;

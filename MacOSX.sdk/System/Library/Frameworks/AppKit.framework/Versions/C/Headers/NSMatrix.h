@@ -1,7 +1,7 @@
 /*
 	NSMatrix.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -24,37 +24,6 @@ typedef NS_ENUM(NSUInteger, NSMatrixMode) {
 };
 
 typedef struct __MFlags {
-#ifdef __BIG_ENDIAN__
-    unsigned int	highlightMode:1;
-    unsigned int	radioMode:1;
-    unsigned int	listMode:1;
-    unsigned int	allowEmptySel:1;
-    unsigned int	autoscroll:1;
-    unsigned int	selectionByRect:1;
-    unsigned int	drawsCellBackground:1;
-    unsigned int	drawsBackground:1;
-    unsigned int	autosizeCells:1;
-    unsigned int	drawingAncestor:1;
-    unsigned int	tabKeyTraversesCells:1;
-    unsigned int	tabKeyTraversesCellsExplicitlySet:1;
-    unsigned int	allowsIncrementalSearching:1;
-    unsigned int	currentlySelectingCell:1;
-    unsigned int	onlySetKeyCell:1;
-    unsigned int	changingSelectionWithKeyboard:1;
-    unsigned int	dontScroll:1;
-    unsigned int	refusesFirstResponder:1;
-    unsigned int	useSimpleTrackingMode:1;
-    unsigned int	checkForSimpleTrackingMode:1;
-    unsigned int	reservedMatrix2:3;
-    unsigned int	tmpAllowNonVisibleCellsToBecomeFirstResponder:1;
-    unsigned int	reservedMatrix3:1;
-    unsigned int	browserOptimizationsEnabled:1;
-    unsigned int	drawingContextMenuHighlight:1;
-    unsigned int	drawingContextMenuHighlightOnAllSelectedRows:1;
-    unsigned int	autorecalculatesCellSize:1;
-    unsigned int	cellSizeNeedsAutorecalc:1;
-    unsigned int	reservedMatrix:2;
-#else
     unsigned int	reservedMatrix:2;
     unsigned int	cellSizeNeedsAutorecalc:1;
     unsigned int	autorecalculatesCellSize:1;
@@ -84,34 +53,33 @@ typedef struct __MFlags {
     unsigned int	listMode:1;
     unsigned int	radioMode:1;
     unsigned int	highlightMode:1;
-#endif
 } _MFlags;
 
 /*
     NSMatrix is deprecated and will be unsupported in future releases.  For radio button grouping, sibling radio buttons that share the same action will operate in an exclusive mode.
  */
-@interface NSMatrix : NSControl <NSUserInterfaceValidations>
+@interface NSMatrix : NSControl <NSUserInterfaceValidations, NSViewToolTipOwner>
 {
     /*All instance variables are private*/
-    id                          _reserved2;
-    SEL                         _reserved3;
-    SEL                         _doubleAction;
-    SEL                         _errorAction;
-    __weak id                   _delegate;
-    id                          _selectedCell;
-    NSInteger                   _selectedRow;
-    NSInteger                   _selectedCol;
-    NSInteger                   _numRows;
-    NSInteger                   _numCols;
-    NSSize                      _cellSize;
-    NSSize                      _intercell;
-    id                          _font;
-    id                          _protoCell;
-    id                          _cellClass;
-    NSColor                    *_backgroundColor;
-    id                          _private;
-    NSMutableArray	       *_cells;
-    _MFlags                     _mFlags;
+    id                          _reserved2 APPKIT_IVAR;
+    SEL                         _reserved3 APPKIT_IVAR;
+    SEL                         _doubleAction APPKIT_IVAR;
+    SEL                         _errorAction APPKIT_IVAR;
+    __weak id                   _delegate APPKIT_IVAR;
+    id                          _selectedCell APPKIT_IVAR;
+    NSInteger                   _selectedRow APPKIT_IVAR;
+    NSInteger                   _selectedCol APPKIT_IVAR;
+    NSInteger                   _numRows APPKIT_IVAR;
+    NSInteger                   _numCols APPKIT_IVAR;
+    NSSize                      _cellSize APPKIT_IVAR;
+    NSSize                      _intercell APPKIT_IVAR;
+    id                          _font APPKIT_IVAR;
+    id                          _protoCell APPKIT_IVAR;
+    id                          _cellClass APPKIT_IVAR;
+    NSColor                    *_backgroundColor APPKIT_IVAR;
+    id                          _private APPKIT_IVAR;
+    NSMutableArray	       *_cells APPKIT_IVAR;
+    _MFlags                     _mFlags APPKIT_IVAR;
 }
 
 

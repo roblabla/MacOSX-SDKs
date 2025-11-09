@@ -219,7 +219,7 @@ extern OSStatus
 AUListenerCreateWithDispatchQueue(  AUParameterListenerRef __nullable * __nonnull outListener,
                                     Float32                                       inNotificationInterval,
                                     dispatch_queue_t                              inDispatchQueue,
-                                    AUParameterListenerBlock                      inBlock)        __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_6_0);
+                                    AUParameterListenerBlock                      inBlock)        API_AVAILABLE(macos(10.6), ios(6.0), watchos(2.0), tvos(9.0));
 #endif
 
 /*!
@@ -255,7 +255,7 @@ AUListenerCreate(                   AUParameterListenerProc         inProc,
                                     CFRunLoopRef __nullable         inRunLoop,
                                     CFStringRef __nullable          inRunLoopMode,
                                     Float32                         inNotificationInterval,
-                                    AUParameterListenerRef __nullable * __nonnull outListener)    __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_6_0);
+                                    AUParameterListenerRef __nullable * __nonnull outListener)    API_AVAILABLE(macos(10.2), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function   AUListenerDispose
@@ -265,7 +265,7 @@ AUListenerCreate(                   AUParameterListenerProc         inProc,
     @discussion 
 */
 extern OSStatus
-AUListenerDispose(                  AUParameterListenerRef          inListener)     __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_6_0);
+AUListenerDispose(                  AUParameterListenerRef          inListener)     API_AVAILABLE(macos(10.2), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function   AUListenerAddParameter
@@ -286,7 +286,7 @@ AUListenerDispose(                  AUParameterListenerRef          inListener) 
 extern OSStatus
 AUListenerAddParameter(             AUParameterListenerRef          inListener, 
                                     void * __nullable               inObject,
-                                    const AudioUnitParameter *      inParameter)    __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_6_0);
+                                    const AudioUnitParameter *      inParameter)    API_AVAILABLE(macos(10.2), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function   AUListenerRemoveParameter
@@ -302,7 +302,7 @@ AUListenerAddParameter(             AUParameterListenerRef          inListener,
 extern OSStatus
 AUListenerRemoveParameter(          AUParameterListenerRef          inListener, 
                                     void * __nullable               inObject,
-                                    const AudioUnitParameter *      inParameter)    __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_6_0);
+                                    const AudioUnitParameter *      inParameter)    API_AVAILABLE(macos(10.2), ios(6.0), watchos(2.0), tvos(9.0));
 
 
 
@@ -335,7 +335,7 @@ AUParameterSet(                     AUParameterListenerRef __nullable inSendingL
                                     const AudioUnitParameter *        inParameter,
                                     AudioUnitParameterValue           inValue,
                                     UInt32                            inBufferOffsetInFrames)
-                                                                                    __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_6_0);
+                                                                                    API_AVAILABLE(macos(10.2), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function   AUParameterListenerNotify
@@ -366,7 +366,7 @@ AUParameterSet(                     AUParameterListenerRef __nullable inSendingL
 extern OSStatus
 AUParameterListenerNotify(          AUParameterListenerRef __nullable inSendingListener,
                                     void * __nullable                 inSendingObject,
-                                    const AudioUnitParameter *        inParameter)    __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_6_0);
+                                    const AudioUnitParameter *        inParameter)    API_AVAILABLE(macos(10.2), ios(6.0), watchos(2.0), tvos(9.0));
 
 /* ============================================================================= */
 
@@ -426,7 +426,7 @@ AUEventListenerCreateWithDispatchQueue(
                                     Float32                                   inNotificationInterval,     // seconds
                                     Float32                                   inValueChangeGranularity,   // seconds
                                     dispatch_queue_t                          inDispatchQueue,
-                                    AUEventListenerBlock                      inBlock)            __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_6_0);
+                                    AUEventListenerBlock                      inBlock)            API_AVAILABLE(macos(10.6), ios(6.0), watchos(2.0), tvos(9.0));
 #endif
 
 /*!
@@ -462,7 +462,7 @@ AUEventListenerCreate(              AUEventListenerProc                       in
                                     CFStringRef __nullable                    inRunLoopMode,
                                     Float32                                   inNotificationInterval,     // seconds
                                     Float32                                   inValueChangeGranularity,   // seconds
-                                    AUEventListenerRef __nullable * __nonnull outListener)        __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_6_0);
+                                    AUEventListenerRef __nullable * __nonnull outListener)        API_AVAILABLE(macos(10.3), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function   AUEventListenerAddEventType
@@ -480,7 +480,7 @@ AUEventListenerCreate(              AUEventListenerProc                       in
 extern OSStatus
 AUEventListenerAddEventType(        AUEventListenerRef          inListener,
                                     void * __nullable           inObject,
-                                    const AudioUnitEvent *      inEvent)        __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_6_0);
+                                    const AudioUnitEvent *      inEvent)        API_AVAILABLE(macos(10.3), ios(6.0), watchos(2.0), tvos(9.0));
     
 /*!
     @function   AUEventListenerRemoveEventType
@@ -496,7 +496,7 @@ AUEventListenerAddEventType(        AUEventListenerRef          inListener,
 extern OSStatus
 AUEventListenerRemoveEventType(     AUEventListenerRef          inListener,
                                     void * __nullable           inObject,
-                                    const AudioUnitEvent *      inEvent)        __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_6_0);           
+                                    const AudioUnitEvent *      inEvent)        API_AVAILABLE(macos(10.3), ios(6.0), watchos(2.0), tvos(9.0));           
 
 /*!
     @function   AUEventListenerNotify
@@ -519,7 +519,7 @@ AUEventListenerRemoveEventType(     AUEventListenerRef          inListener,
 extern OSStatus
 AUEventListenerNotify(              AUEventListenerRef __nullable  inSendingListener,
                                     void * __nullable              inSendingObject,
-                                    const AudioUnitEvent *         inEvent)        __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_6_0);
+                                    const AudioUnitEvent *         inEvent)        API_AVAILABLE(macos(10.3), ios(6.0), watchos(2.0), tvos(9.0));
                                     
 /* ============================================================================= */
 
@@ -543,7 +543,7 @@ AUEventListenerNotify(              AUEventListenerRef __nullable  inSendingList
 */
 extern AudioUnitParameterValue
 AUParameterValueFromLinear(         Float32                     inLinearValue,      // 0-1
-                                    const AudioUnitParameter *  inParameter)    __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_6_0);
+                                    const AudioUnitParameter *  inParameter)    API_AVAILABLE(macos(10.2), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function   AUParameterValueToLinear
@@ -561,7 +561,7 @@ AUParameterValueFromLinear(         Float32                     inLinearValue,  
 */
 extern Float32
 AUParameterValueToLinear(           AudioUnitParameterValue     inParameterValue,
-                                    const AudioUnitParameter *  inParameter)    __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_6_0);
+                                    const AudioUnitParameter *  inParameter)    API_AVAILABLE(macos(10.2), ios(6.0), watchos(2.0), tvos(9.0));
                                         // returns 0-1
 
 /*!
@@ -599,7 +599,7 @@ extern char *
 AUParameterFormatValue(             Float64                     inParameterValue,
                                     const AudioUnitParameter *  inParameter,
                                     char *                      inTextBuffer,
-                                    UInt32                      inDigits)       __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_6_0);
+                                    UInt32                      inDigits)       API_AVAILABLE(macos(10.2), ios(6.0), watchos(2.0), tvos(9.0));
 
 #ifdef __cplusplus
 }

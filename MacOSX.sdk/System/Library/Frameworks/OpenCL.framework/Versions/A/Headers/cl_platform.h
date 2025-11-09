@@ -25,11 +25,19 @@
 
 #ifndef __CL_PLATFORM_H
 #define __CL_PLATFORM_H
-
+#include <os/availability.h>
+#ifdef CL_SILENCE_DEPRECATION
+#define CL_DEPRECATED(__start__, __end__)
+#else
+#define CL_DEPRECATED(__start__ , __end__) API_DEPRECATED("(Define CL_SILENCE_DEPRECATION to hide this warning)", macos(__start__, __end__))
+#endif
 #ifdef __APPLE__
     /* Contains #defines for AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER below */
     #include <AvailabilityMacros.h>
+
 #endif
+
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -48,7 +56,7 @@ extern "C" {
 #ifdef __APPLE__
     #define CL_EXTENSION_WEAK_LINK       __attribute__((weak_import))
     #define CL_API_SUFFIX__VERSION_1_0                  AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER
-    #define CL_EXT_SUFFIX__VERSION_1_0                  CL_EXTENSION_WEAK_LINK AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER
+    #define CL_EXT_SUFFIX__VERSION_1_0                  CL_EXTENSION_WEAK_LINK AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER 
     #define CL_API_SUFFIX__VERSION_1_1                  AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
     #define GCL_API_SUFFIX__VERSION_1_1                 AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
     #define CL_EXT_SUFFIX__VERSION_1_1                  CL_EXTENSION_WEAK_LINK AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER

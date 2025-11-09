@@ -1,6 +1,6 @@
 /*	
      NSUserNotification.h
-     Copyright (c) 2011-2017, Apple Inc. All rights reserved.
+     Copyright (c) 2011-2018, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/* All NSUserNotifications API are deprecated. Please switch to the UserNotifications.framework for all notifications work. */
 // Used to describe the method in which the user activated the user notification. Alerts can be activated by either clicking on the body of the alert or the action button.
 typedef NS_ENUM(NSInteger, NSUserNotificationActivationType) {
     NSUserNotificationActivationTypeNone = 0,
@@ -17,9 +18,9 @@ typedef NS_ENUM(NSInteger, NSUserNotificationActivationType) {
     NSUserNotificationActivationTypeActionButtonClicked = 2,
     NSUserNotificationActivationTypeReplied API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos) = 3,
     NSUserNotificationActivationTypeAdditionalActionClicked API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos) = 4,
-} NS_ENUM_AVAILABLE(10_8, NA);
+} NS_DEPRECATED_MAC(10_8, API_TO_BE_DEPRECATED, "All NSUserNotifications API should be replaced with UserNotifications.frameworks API");
 
-NS_CLASS_AVAILABLE(10_8, NA)
+NS_DEPRECATED_MAC(10_8, API_TO_BE_DEPRECATED, "All NSUserNotifications API should be replaced with UserNotifications.frameworks API")
 @interface NSUserNotification : NSObject <NSCopying> {
 @private
     id _internal;
@@ -98,7 +99,8 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @end
 
 // An action shown to the user as part of a NSUserNotification in the additionalActions property.
-NS_CLASS_AVAILABLE_MAC(10_10)
+NS_DEPRECATED_MAC(10_10, API_TO_BE_DEPRECATED, "All NSUserNotifications API should be replaced with UserNotifications.frameworks API")
+
 @interface NSUserNotificationAction : NSObject <NSCopying>
 
 + (instancetype)actionWithIdentifier:(nullable NSString *)identifier title:(nullable NSString *)title;
@@ -110,9 +112,9 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSUserNotificationDefaultSoundName API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSUserNotificationDefaultSoundName NS_DEPRECATED_MAC(10_8, API_TO_BE_DEPRECATED, "All NSUserNotifications API should be replaced with UserNotifications.frameworks API") API_UNAVAILABLE(ios, watchos, tvos);
 
-NS_CLASS_AVAILABLE(10_8, NA)
+NS_DEPRECATED_MAC(10_8, API_TO_BE_DEPRECATED, "All NSUserNotifications API should be replaced with UserNotifications.frameworks API")
 @interface NSUserNotificationCenter : NSObject {
 @private
     id _internal;
@@ -156,6 +158,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 @end
 
+/* All NSUserNotifications API are deprecated. Please switch to the UserNotifications.framework for all notifications work. */
 @protocol NSUserNotificationCenterDelegate <NSObject>
 @optional
 

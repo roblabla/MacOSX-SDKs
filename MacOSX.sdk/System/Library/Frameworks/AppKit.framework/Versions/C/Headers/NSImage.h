@@ -1,7 +1,7 @@
 /*
 	NSImage.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSColor, NSImageRep, NSGraphicsContext, NSURL;
 @protocol NSImageDelegate;
 
-typedef NSString * NSImageName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSImageName NS_SWIFT_BRIDGED_TYPEDEF;
 
 APPKIT_EXTERN NSImageHintKey const NSImageHintCTM NS_AVAILABLE_MAC(10_6); // value is NSAffineTransform
 APPKIT_EXTERN NSImageHintKey const NSImageHintInterpolation NS_AVAILABLE_MAC(10_6); // value is NSNumber with NSImageInterpolation enum value
@@ -50,11 +50,11 @@ typedef NS_ENUM(NSInteger, NSImageResizingMode) {
 
 @class _NSImageAuxiliary;
 
-@interface NSImage : NSObject <NSCopying, NSCoding, NSSecureCoding, NSPasteboardReading, NSPasteboardWriting>
+@interface NSImage : NSObject <NSCopying, NSSecureCoding, NSPasteboardReading, NSPasteboardWriting>
 {
     /*All instance variables are private*/
-    NSImageName _name;
-    NSSize _size;
+    NSImageName _name APPKIT_IVAR;
+    NSSize _size APPKIT_IVAR;
     struct __imageFlags {
 	unsigned int scalable:1;
 	unsigned int dataRetained:1;
@@ -78,9 +78,9 @@ typedef NS_ENUM(NSInteger, NSImageResizingMode) {
         unsigned int isTemplate:1;
         unsigned int failedToExpand:1;
         unsigned int reserved1:8;
-    } _flags;
-    volatile id _reps;
-    _NSImageAuxiliary *_imageAuxiliary;
+    } _flags APPKIT_IVAR;
+    volatile id _reps APPKIT_IVAR;
+    _NSImageAuxiliary *_imageAuxiliary APPKIT_IVAR;
 }
 
 + (nullable NSImage *)imageNamed:(NSImageName)name;	/* If this finds & creates the image, only name is saved when archived */
@@ -100,7 +100,7 @@ typedef NS_ENUM(NSInteger, NSImageResizingMode) {
 - (nullable instancetype)initWithDataIgnoringOrientation:(NSData *)data NS_AVAILABLE_MAC(10_6);
 
 // Note that the block passed to the below method may be invoked whenever and on whatever thread the image itself is drawn on. Care should be taken to ensure that all state accessed within the drawingHandler block is done so in a thread safe manner.
-+ (NSImage *)imageWithSize:(NSSize)size flipped:(BOOL)drawingHandlerShouldBeCalledWithFlippedContext drawingHandler:(BOOL (^)(NSRect dstRect))drawingHandler NS_AVAILABLE_MAC(10_8);
++ (instancetype)imageWithSize:(NSSize)size flipped:(BOOL)drawingHandlerShouldBeCalledWithFlippedContext drawingHandler:(BOOL (^)(NSRect dstRect))drawingHandler NS_AVAILABLE_MAC(10_8);
 
 @property NSSize size;
 - (BOOL)setName:(nullable NSImageName)string;
@@ -173,13 +173,13 @@ typedef NS_ENUM(NSInteger, NSImageResizingMode) {
 - (BOOL)isTemplate NS_AVAILABLE_MAC(10_5);
 - (void)setTemplate:(BOOL)isTemplate NS_AVAILABLE_MAC(10_5);
 #else
-@property (getter = isTemplate) BOOL template;
+@property (getter=isTemplate) BOOL template NS_AVAILABLE_MAC(10_5);
 #endif
 
 
 /* An accessibility description can be set on an image.  This description will be used automatically by interface elements that display images.  Like all accessibility descriptions, the string should be a short localized string that does not include the name of the interface element.  For instance, "delete" rather than "delete button". 
 */
-@property (nullable, copy) NSString *accessibilityDescription	NS_AVAILABLE_MAC(10_6);
+@property (nullable, copy) NSString *accessibilityDescription NS_AVAILABLE_MAC(10_6);
 
 /* Make an NSImage referencing a CGImage.  The client should not assume anything about the image, other than that drawing it is equivalent to drawing the CGImage.
  
@@ -276,12 +276,11 @@ typedef NS_ENUM(NSInteger, NSImageResizingMode) {
 
 @end
 
-#pragma mark -
-#pragma mark Standard Images
+#pragma mark - Standard images
 
 /* Standard images.  
  
- Most images are named by a specific function or situation where they are intended to be used.  In some cases, the artwork may be more generic than the name.  For example, the image for NSImageNameInvalidDataFreestandingTemplate is an arrow in 10.5.  Please do not use an image outside of the function for which it is intended - the artwork can change between releases.  The invalid data image could change to a yellow exclamation-point-in-triangle  icon.  If there is no image available for the situation you're interested in, please file a bug and use your own custom art in the meantime.
+ Most images are named by a specific function or situation where they are intended to be used.  In some cases, the artwork may be more generic than the name.  For example, the image for NSImageNameInvalidDataFreestandingTemplate is an arrow in 10.5.  Please do not use an image outside of the function for which it is intended - the artwork can change between releases.  The invalid data image could change to a yellow exclamation-point-in-triangle icon.  If there is no image available for the situation you're interested in, please file a bug report, and use your own custom art in the meantime.
  
  The size of an image is also not guaranteed to be the same (or maintain the same aspect ratio) between releases, so you should explcitly size the image appropriately for your use.
 
@@ -289,18 +288,48 @@ typedef NS_ENUM(NSInteger, NSImageResizingMode) {
  
  Some images also contain the word "Freestanding".  This indicates that an image is appropriate for use as a borderless button - it doesn't need any extra bezel artwork behind it.  For example, Safari uses NSImageNameStopProgressTemplate as the stop button in a button on its toolbar, while it uses NSImageNameStopProgressFreestandingTemplate in the downloads window where it appears inline with a progress indicator.
   
- The string value of each symbol is the same as the constant name without the "ImageName" part.  For example, NSImageNameBonjour is @"NSBonjour".  This is documented so that images can be used by name in Interface Builder.
+ The string value of each symbol is typically the same as the constant name without the "ImageName" part.  For example, NSImageNameBonjour is @"NSBonjour".  This is documented so that images can be used by name in Interface Builder.
  */
-APPKIT_EXTERN NSImageName const NSImageNameQuickLookTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameBluetoothTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameIChatTheaterTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameSlideshowTemplate NS_AVAILABLE_MAC(10_5);
 
-/*  This image is appropriate on an 'action' button.  An action button is a popup that has the same contents as the contextual menu for a related control.
+APPKIT_EXTERN NSImageName const NSImageNameAddTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameBluetoothTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameBonjour NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameBookmarksTemplate NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSImageName const NSImageNameCaution NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSImageName const NSImageNameComputer NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameEnterFullScreenTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameExitFullScreenTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameFolder NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSImageName const NSImageNameFolderBurnable NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameFolderSmart NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameFollowLinkFreestandingTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameHomeTemplate NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSImageName const NSImageNameIChatTheaterTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameLockLockedTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameLockUnlockedTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameNetwork NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNamePathTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameQuickLookTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameRefreshFreestandingTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameRefreshTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameRemoveTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameRevealFreestandingTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameShareTemplate NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSImageName const NSImageNameSlideshowTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameStatusAvailable NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSImageName const NSImageNameStatusNone NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSImageName const NSImageNameStatusPartiallyAvailable NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSImageName const NSImageNameStatusUnavailable NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSImageName const NSImageNameStopProgressFreestandingTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameStopProgressTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameTrashEmpty NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSImageName const NSImageNameTrashFull NS_AVAILABLE_MAC(10_6);
+
+/* This image is appropriate on an 'action' button.  An action button is a popup that has the same contents as the contextual menu for a related control.
  */
 APPKIT_EXTERN NSImageName const NSImageNameActionTemplate NS_AVAILABLE_MAC(10_5); 
 
-/*  This image can be used as a badge for a 'smart' item.  In 10.5, this and the 'action' image are both gears.  Please avoid using a gear for other situations, and if you do, use custom art.
+/* This image can be used as a badge for a 'smart' item.  In 10.5, this and the 'action' image are both gears.  Please avoid using a gear for other situations, and if you do, use custom art.
  */
 APPKIT_EXTERN NSImageName const NSImageNameSmartBadgeTemplate NS_AVAILABLE_MAC(10_5);
 
@@ -311,13 +340,9 @@ APPKIT_EXTERN NSImageName const NSImageNameListViewTemplate NS_AVAILABLE_MAC(10_
 APPKIT_EXTERN NSImageName const NSImageNameColumnViewTemplate NS_AVAILABLE_MAC(10_5);
 APPKIT_EXTERN NSImageName const NSImageNameFlowViewTemplate NS_AVAILABLE_MAC(10_5);
 
-APPKIT_EXTERN NSImageName const NSImageNamePathTemplate NS_AVAILABLE_MAC(10_5);
-
 /* Place this image to the right of invalid data.  For example, use it if the user tries to commit a form when it's missing a required name field.
  */
 APPKIT_EXTERN NSImageName const NSImageNameInvalidDataFreestandingTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameLockLockedTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameLockUnlockedTemplate NS_AVAILABLE_MAC(10_5);
 
 /* Use these images for "go forward" or "go back" functions, as seen in Safari's toolbar.  These images will automatically mirror when the user interface layout direction is right to left.
  */
@@ -333,24 +358,6 @@ APPKIT_EXTERN NSImageName const NSImageNameGoLeftTemplate NS_AVAILABLE_MAC(10_5)
  */
 APPKIT_EXTERN NSImageName const NSImageNameRightFacingTriangleTemplate NS_AVAILABLE_MAC(10_5);
 APPKIT_EXTERN NSImageName const NSImageNameLeftFacingTriangleTemplate NS_AVAILABLE_MAC(10_5);
-
-APPKIT_EXTERN NSImageName const NSImageNameAddTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameRemoveTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameRevealFreestandingTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameFollowLinkFreestandingTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameEnterFullScreenTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameExitFullScreenTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameStopProgressTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameStopProgressFreestandingTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameRefreshTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameRefreshFreestandingTemplate NS_AVAILABLE_MAC(10_5);
-
-APPKIT_EXTERN NSImageName const NSImageNameBonjour NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameComputer NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameFolderBurnable NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameFolderSmart NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameFolder NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameNetwork NS_AVAILABLE_MAC(10_5);
 
 /* NSImageNameDotMac will continue to work for the forseeable future, and will return the same image as NSImageNameMobileMe.
  */
@@ -389,18 +396,9 @@ APPKIT_EXTERN NSImageName const NSImageNameMenuMixedStateTemplate NS_AVAILABLE_M
  */
 APPKIT_EXTERN NSImageName const NSImageNameApplicationIcon NS_AVAILABLE_MAC(10_6);
 
-APPKIT_EXTERN NSImageName const NSImageNameTrashEmpty NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameTrashFull NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameHomeTemplate NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameBookmarksTemplate NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameCaution NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameStatusAvailable NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameStatusPartiallyAvailable NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameStatusUnavailable NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameStatusNone NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameShareTemplate NS_AVAILABLE_MAC(10_8);
+#pragma mark - NSTouchBar images
 
-/* These images are appropriate for use only in NSTouchBarItems.
+/* These images are appropriate for use only in NSTouchBar.
  */
 APPKIT_EXTERN NSImageName const NSImageNameTouchBarAddDetailTemplate NS_AVAILABLE_MAC(10_12_2);
 APPKIT_EXTERN NSImageName const NSImageNameTouchBarAddTemplate NS_AVAILABLE_MAC(10_12_2);

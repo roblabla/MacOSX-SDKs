@@ -1,7 +1,8 @@
 //
 //  SCNLevelOfDetail.h
+//  SceneKit
 //
-//  Copyright (c) 2013-2017 Apple Inc. All rights reserved.
+//  Copyright © 2013-2018 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  @class SCNLevelOfDetail
  @abstract SCNLevelOfDetail represents a level of detail of a geometry.
  */
-API_AVAILABLE(macos(10.9))
+SCN_EXPORT API_AVAILABLE(macos(10.9))
 @interface SCNLevelOfDetail : NSObject <NSCopying, NSSecureCoding>
 
 /*!

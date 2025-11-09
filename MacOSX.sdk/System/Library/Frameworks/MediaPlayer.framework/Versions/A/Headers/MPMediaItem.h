@@ -32,13 +32,13 @@ typedef NS_OPTIONS(NSUInteger, MPMediaType) {
     MPMediaTypeAnyVideo     MP_API(ios(5.0), macos(10.12.2))    = 0xff00,
     
     MPMediaTypeAny                                     = ~0UL
-} MP_API(ios(3.0), tvos(9.0), macos(10.12.2));
+} MP_API(ios(3.0), tvos(9.0), macos(10.12.2)) MP_PROHIBITED(watchos);
 
 // An MPMediaItem represents a single piece of media in an MPMediaLibrary.
 // Media items have a unique identifier which persists across application launches.
 
 MP_API(ios(3.0))
-MP_PROHIBITED(tvos, macos)
+MP_PROHIBITED(tvos, macos, watchos)
 @interface MPMediaItem : MPMediaEntity
 
 #pragma mark - Properties
@@ -99,7 +99,7 @@ MP_EXTERN NSString * const MPMediaItemPropertyDiscNumber;
 MP_EXTERN NSString * const MPMediaItemPropertyDiscCount;
 @property (nonatomic, readonly) NSUInteger discCount MP_API(ios(8.0));
 
-MP_EXTERN NSString * const MPMediaItemPropertyArtwork;
+MP_EXTERN NSString * const MPMediaItemPropertyArtwork MP_API(ios(3.0), macos(10.13.2));
 @property (nonatomic, readonly, nullable) MPMediaItemArtwork *artwork MP_API(ios(7.0));
 
 MP_EXTERN NSString * const MPMediaItemPropertyIsExplicit MP_API(ios(7.0), macos(10.12.2));
@@ -164,7 +164,7 @@ MP_EXTERN NSString * const MPMediaItemPropertyPlaybackStoreID MP_API(ios(10.3));
 
 //-----------------------------------------------------
 
-MP_API(ios(3.0), tvos(9.0), macos(10.12.2))
+MP_API(ios(3.0), tvos(9.0), macos(10.12.2), watchos(5.0))
 @interface MPMediaItemArtwork : NSObject
 
 #if TARGET_OS_IPHONE

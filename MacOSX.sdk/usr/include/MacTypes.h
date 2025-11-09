@@ -319,8 +319,8 @@ typedef unsigned char                   Boolean;
         UniversalProcHandle     Pointer to a UniversalProcPtr
         
 *********************************************************************************/
-typedef CALLBACK_API_C( long , ProcPtr )();
-typedef CALLBACK_API( void , Register68kProcPtr )();
+typedef CALLBACK_API_C( long , ProcPtr )(void);
+typedef CALLBACK_API( void , Register68kProcPtr )(void);
 #if TARGET_RT_MAC_CFM
 /*  The RoutineDescriptor structure is defined in MixedMode.h */
 typedef struct RoutineDescriptor *UniversalProcPtr;

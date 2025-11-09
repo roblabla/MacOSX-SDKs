@@ -1,12 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 69A72723-A58A-3CF6-81BC-483613088A16', 'x86_64: 94B9AF89-F12C-34B0-A264-394C28A7F684' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 5A758D93-4BBD-3C6D-861B-000536ED9B2D' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata
-current-version: 1174.1
+current-version: 1191.52
 parent-umbrella: CoreServices
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     allowable-clients: [ Foundation ]
     symbols:         [ _MDBackupBegin, _MDBackupCancel, _MDBackupCreate, _MDBackupEnd, 
                        _MDBackupFileWasIndexed, _MDBackupFinishedForVolume, _MDBackupFlushFallbackBackup, 
@@ -66,8 +66,8 @@ exports:
                        _MDPlistEnumerateQueryResults, _MDPlistGetPlistObjectType, 
                        _MDPlistGetRootPlistObject, _MDPlistNumberGetDoubleValue, 
                        _MDPlistNumberGetIntValue, _MDPlistPlistObjectToEmbeddedReference, 
-                       _MDPlistStringGetValue, _MDPlistUUIDGetValue, _MDQueryCopyQueryString, 
-                       _MDQueryCopySortingAttributes, _MDQueryCopyValueListAttributes, 
+                       _MDPlistReferenceToPlistObject, _MDPlistStringGetValue, _MDPlistUUIDGetValue, 
+                       _MDQueryCopyQueryString, _MDQueryCopySortingAttributes, _MDQueryCopyValueListAttributes, 
                        _MDQueryCopyValuesOfAttribute, _MDQueryCreate, _MDQueryCreateForItems, 
                        _MDQueryCreateSubset, _MDQueryDisableUpdates, _MDQueryEnableUpdates, 
                        _MDQueryExecute, _MDQueryGetAttributeValueOfResultAtIndex, 
@@ -244,8 +244,8 @@ exports:
                        __MDQuerySetMaxCountPerGroup, __MDQuerySetMenuSortFlagsForQuery, 
                        __MDQuerySetNoProgress, __MDQuerySetRankingTerms, __MDQuerySetSearchScopes, 
                        __MDQuerySetSortFlagsForAttribute, __MDQuerySetSortOrder, 
-                       __MDQuerySetSortToNone, __MDQuerySortDatesDescending, __MDQueryStringPreload, 
-                       __MDQueryTotalCount, __MDQueryUserStringFacetsApplyDoWhileBlock, 
+                       __MDQuerySetSortToNone, __MDQuerySortDatesDescending, __MDQueryStringCopyUserInput, 
+                       __MDQueryStringPreload, __MDQueryTotalCount, __MDQueryUserStringFacetsApplyDoWhileBlock, 
                        __MDQueryWillSendPerformanceFeedback, __MDRankBitForShortcut, 
                        __MDRankIsExactPhraseMatch, __MDRankIsMeaningfulForTopHit, 
                        __MDRankIsOnOldBootVolume, __MDRegisterMailClient, __MDRemoveExtendedAttributes, 
@@ -394,12 +394,13 @@ exports:
                        _kMDQueryBatchFirstDelay, _kMDQueryBatchProgressCount, _kMDQueryBatchProgressDelay, 
                        _kMDQueryBatchUpdateCount, _kMDQueryBatchUpdateDelay, _kMDQueryCompletionFields, 
                        _kMDQueryCompletionString, _kMDQueryDidFinishNotification, 
-                       _kMDQueryDidUpdateNotification, _kMDQueryFlatScopes, _kMDQueryGroupMaxCount, 
-                       _kMDQueryGroupingRules, _kMDQueryHasUpdateNotification, _kMDQueryIndexedOnly, 
-                       _kMDQueryIsLive, _kMDQueryIsLowPriority, _kMDQueryItemArray, 
-                       _kMDQueryLiftingRules, _kMDQueryMDFilter, _kMDQueryMatchOnlyFinderFiles, 
-                       _kMDQueryMatchSupportFiles, _kMDQueryMaxCount, _kMDQueryNoProgress, 
-                       _kMDQueryNoRewrite, _kMDQueryOptionContextIdentifier, _kMDQueryOptionFinderLabelsDict, 
+                       _kMDQueryDidUpdateNotification, _kMDQueryFilters, _kMDQueryFlatScopes, 
+                       _kMDQueryGroupMaxCount, _kMDQueryGroupingRules, _kMDQueryHasUpdateNotification, 
+                       _kMDQueryIndexedOnly, _kMDQueryIsLive, _kMDQueryIsLowPriority, 
+                       _kMDQueryItemArray, _kMDQueryLiftingRules, _kMDQueryMDFilter, 
+                       _kMDQueryMatchOnlyFinderFiles, _kMDQueryMatchSupportFiles, 
+                       _kMDQueryMaxCount, _kMDQueryNoProgress, _kMDQueryNoRewrite, 
+                       _kMDQueryOptionContextIdentifier, _kMDQueryOptionFinderLabelsDict, 
                        _kMDQueryOptionFinderLabelsDictLocale, _kMDQueryProgressNotification, 
                        _kMDQueryQoSClass, _kMDQueryResultContentRelevance, _kMDQueryResultGroupId, 
                        _kMDQueryResultMLRelevance, _kMDQueryResultMatchedDisplayNameField, 
@@ -426,6 +427,6 @@ exports:
                        _mdsChannelRequest, _mdsClientCheckin, _mdsFetchAccessTokenIDForUID, 
                        _mdsManageCheckin, _mdsMarkItemsAsUsed, _mdsPeerCheckin, _mdsRequestVolume, 
                        _mdsServerBootstrap ]
-    objc-classes:    [ _MDSPathFilter, __MDLabel, __MDMutablePlistBytes, __MDPlistBytes, 
-                       __MDServiceConnection ]
+    objc-classes:    [ MDSPathFilter, _MDLabel, _MDMutablePlistBytes, _MDPlistBytes, 
+                       _MDServiceConnection ]
 ...

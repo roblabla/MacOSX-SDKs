@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BFAF35CE-984D-3258-B896-DD5CAB598C92' ]
+uuids:           [ 'x86_64: 44B4E1CF-7011-32CD-9D7A-BCEF2BB08F3F' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AccessoryNowPlaying.framework/Versions/A/AccessoryNowPlaying
 exports:         
@@ -12,6 +12,7 @@ exports:
                        _kACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_AlbumTrackCount, 
                        _kACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_AlbumTrackNum, 
                        _kACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_Artist, 
+                       _kACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_ArtworkID, 
                        _kACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_ChapterCount, 
                        _kACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_Composer, 
                        _kACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_Genre, 
@@ -40,6 +41,16 @@ exports:
                        _kACCNowPlaying_NowPlayingUpdate_PlaybackAttributes_iTunesRadioStation, 
                        _kACCNowPlaying_NowPlayingUpdate_PlaybackAttributes_iTunesRadioStationIdentifier, 
                        _kACCNowPlaying_NowPlayingUpdate_PlaybackAttributes_iTunesRadioStationMediaPlaylistPersistentID, 
+                       _kACCNowPlaying_PlaybackQueueContentInfo_Available, _kACCNowPlaying_PlaybackQueueContentInfo_Count, 
+                       _kACCNowPlaying_PlaybackQueueContentInfo_List, _kACCNowPlaying_PlaybackQueueContentInfo_NonLibrary, 
+                       _kACCNowPlaying_PlaybackQueueContentInfo_RequestID, _kACCNowPlaying_PlaybackQueueContentInfo_StartIndex, 
+                       _kACCNowPlaying_PlaybackQueueContentItemAttributes_AlbumArtist, 
+                       _kACCNowPlaying_PlaybackQueueContentItemAttributes_AlbumTitle, 
+                       _kACCNowPlaying_PlaybackQueueContentItemAttributes_Artist, 
+                       _kACCNowPlaying_PlaybackQueueContentItemAttributes_Composer, 
+                       _kACCNowPlaying_PlaybackQueueContentItemAttributes_Genre, 
+                       _kACCNowPlaying_PlaybackQueueContentItemAttributes_PersistentID, 
+                       _kACCNowPlaying_PlaybackQueueContentItemAttributes_Title, 
                        _kACCNowPlaying_SetNowPlayingInfo_ElapsedTime, _kACCNowPlaying_SetNowPlayingInfo_PlaybackQueueIndex, 
                        _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes, _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_AlbumDiscCount, 
                        _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_AlbumDiscNum, 
@@ -47,6 +58,7 @@ exports:
                        _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_AlbumTrackCount, 
                        _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_AlbumTrackNum, 
                        _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_Artist, 
+                       _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_ArtworkID, 
                        _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_ChapterCount, 
                        _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_Composer, 
                        _kCFACCNowPlaying_NowPlayingUpdate_MediaItemAttributes_Genre, 
@@ -75,8 +87,18 @@ exports:
                        _kCFACCNowPlaying_NowPlayingUpdate_PlaybackAttributes_iTunesRadioStation, 
                        _kCFACCNowPlaying_NowPlayingUpdate_PlaybackAttributes_iTunesRadioStationIdentifier, 
                        _kCFACCNowPlaying_NowPlayingUpdate_PlaybackAttributes_iTunesRadioStationMediaPlaylistPersistentID, 
+                       _kCFACCNowPlaying_PlaybackQueueContentInfo_Available, _kCFACCNowPlaying_PlaybackQueueContentInfo_Count, 
+                       _kCFACCNowPlaying_PlaybackQueueContentInfo_List, _kCFACCNowPlaying_PlaybackQueueContentInfo_NonLibrary, 
+                       _kCFACCNowPlaying_PlaybackQueueContentInfo_RequestID, _kCFACCNowPlaying_PlaybackQueueContentInfo_StartIndex, 
+                       _kCFACCNowPlaying_PlaybackQueueContentItemAttributes_AlbumArtist, 
+                       _kCFACCNowPlaying_PlaybackQueueContentItemAttributes_AlbumTitle, 
+                       _kCFACCNowPlaying_PlaybackQueueContentItemAttributes_Artist, 
+                       _kCFACCNowPlaying_PlaybackQueueContentItemAttributes_Composer, 
+                       _kCFACCNowPlaying_PlaybackQueueContentItemAttributes_Genre, 
+                       _kCFACCNowPlaying_PlaybackQueueContentItemAttributes_PersistentID, 
+                       _kCFACCNowPlaying_PlaybackQueueContentItemAttributes_Title, 
                        _kCFACCNowPlaying_SetNowPlayingInfo_ElapsedTime, _kCFACCNowPlaying_SetNowPlayingInfo_PlaybackQueueIndex, 
                        _kCFACCNowPlaying_SubscriberList_MediaItemArtwork, _kCFACCNowPlaying_SubscriberList_MediaItemAttributes, 
-                       _kCFACCNowPlaying_SubscriberList_PlaybackAttributes ]
-    objc-classes:    [ _AccessoryNowPlayingClient ]
+                       _kCFACCNowPlaying_SubscriberList_PlaybackAttributes, _kCFACCNowPlaying_SubscriberList_PlaybackQueueList ]
+    objc-classes:    [ AccessoryNowPlayingClient ]
 ...

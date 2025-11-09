@@ -173,6 +173,7 @@ CFN_EXPORT const CFStringRef kCFStreamNetworkServiceType CF_AVAILABLE(10_7, 4_0)
 CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeVideo      CF_AVAILABLE(10_7, 5_0);   // interactive video
 CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeVoice      CF_AVAILABLE(10_7, 5_0);   // interactive voice data
 CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeBackground CF_AVAILABLE(10_7, 5_0);   // background
+CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeResponsiveData __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0); // responsive (time sensitive) data
 CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeCallSignaling	   CF_AVAILABLE(10_12, 10_0); //Call Signaling
 
 /* deprecated network service type: */
@@ -214,17 +215,6 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyConnectionIsCellular CF_AVAILABLE(
  */
 CFN_EXPORT const CFIndex kCFStreamErrorDomainWinSock CF_AVAILABLE(10_5, 2_0);
 
-/*
- *  kCFStreamErrorDomainSOCKS
- *  
- *  Discussion:
- *	SOCKS proxy error domain.  Errors formulated using inlines below.
- *  
- */
-CFN_EXPORT const int kCFStreamErrorDomainSOCKS CF_AVAILABLE(10_0, 2_0);
-
-
-
 CF_INLINE
 SInt32 CFSocketStreamSOCKSGetErrorSubdomain(const CFStreamError* error) {
 	return ((error->error >> 16) & 0x0000FFFF);
@@ -264,110 +254,6 @@ enum {
   kSOCKS5NoAcceptableMethod	 = 0xFF  /* other values indicate the server's desired method */
 };
 
-
-
-/*
- *  kCFStreamPropertySOCKSProxy
- *  
- *  Discussion:
- *	Stream property key, for both set and copy operations.  To set a
- *	stream to use a SOCKS proxy, call CFReadStreamSetProperty or
- *	CFWriteStreamSetProperty with the property name set to
- *	kCFStreamPropertySOCKSProxy and the value being a dictionary with
- *	at least the following two keys: kCFStreamPropertySOCKSProxyHost
- *	and kCFStreamPropertySOCKSProxyPort.  The dictionary returned by
- *	SystemConfiguration for SOCKS proxies will work without
- *	alteration.
- *  
- */
-CFN_EXPORT const CFStringRef kCFStreamPropertySOCKSProxy CF_AVAILABLE(10_2, 2_0);
-
-/*
- *  kCFStreamPropertySOCKSProxyHost
- *  
- *  Discussion:
- *	CFDictionary key for SOCKS proxy information.  The key
- *	kCFStreamPropertySOCKSProxyHost should contain a CFStringRef
- *	value representing the SOCKS proxy host.  Defined to match
- *	kSCPropNetProxiesSOCKSProxy
- *  
- */
-CFN_EXPORT const CFStringRef kCFStreamPropertySOCKSProxyHost CF_AVAILABLE(10_2, 2_0);
-
-/*
- *  kCFStreamPropertySOCKSProxyPort
- *  
- *  Discussion:
- *	CFDictionary key for SOCKS proxy information.  The key
- *	kCFStreamPropertySOCKSProxyPort should contain a CFNumberRef
- *	which itself is of type kCFNumberSInt32Type.  This value should
- *	represent the port on which the proxy is listening.  Defined to
- *	match kSCPropNetProxiesSOCKSPort
- *  
- */
-CFN_EXPORT const CFStringRef kCFStreamPropertySOCKSProxyPort CF_AVAILABLE(10_2, 2_0);
-
-/*
- *  kCFStreamPropertySOCKSVersion
- *  
- *  Discussion:
- *	CFDictionary key for SOCKS proxy information.  By default, SOCKS5
- *	will be used unless there is a kCFStreamPropertySOCKSVersion key
- *	in the dictionary.  Its value must be
- *	kCFStreamSocketSOCKSVersion4 or kCFStreamSocketSOCKSVersion5 to
- *	set SOCKS4 or SOCKS5, respectively.
- *  
- */
-CFN_EXPORT const CFStringRef kCFStreamPropertySOCKSVersion CF_AVAILABLE(10_2, 2_0);
-
-/*
- *  kCFStreamSocketSOCKSVersion4
- *  
- *  Discussion:
- *	CFDictionary value for SOCKS proxy information.  Indcates that
- *	SOCKS will or is using version 4 of the SOCKS protocol.
- *  
- */
-CFN_EXPORT const CFStringRef kCFStreamSocketSOCKSVersion4 CF_AVAILABLE(10_2, 2_0);
-
-/*
- *  kCFStreamSocketSOCKSVersion5
- *  
- *  Discussion:
- *	CFDictionary value for SOCKS proxy information.  Indcates that
- *	SOCKS will or is using version 5 of the SOCKS protocol.
- *  
- */
-CFN_EXPORT const CFStringRef kCFStreamSocketSOCKSVersion5 CF_AVAILABLE(10_2, 2_0);
-
-/*
- *  kCFStreamPropertySOCKSUser
- *  
- *  Discussion:
- *	CFDictionary key for SOCKS proxy information.  To set a user name
- *	and/or password, if required, the dictionary must contain the
- *	key(s) kCFStreamPropertySOCKSUser and/or  
- *	kCFStreamPropertySOCKSPassword with the value being the user's
- *	name as a CFStringRef and/or the user's password as a
- *	CFStringRef, respectively.
- *  
- */
-CFN_EXPORT const CFStringRef kCFStreamPropertySOCKSUser CF_AVAILABLE(10_2, 2_0);
-
-/*
- *  kCFStreamPropertySOCKSPassword
- *  
- *  Discussion:
- *	CFDictionary key for SOCKS proxy information.  To set a user name
- *	and/or password, if required, the dictionary must contain the
- *	key(s) kCFStreamPropertySOCKSUser and/or  
- *	kCFStreamPropertySOCKSPassword with the value being the user's
- *	name as a CFStringRef and/or the user's password as a
- *	CFStringRef, respectively.
- *  
- */
-CFN_EXPORT const CFStringRef kCFStreamPropertySOCKSPassword CF_AVAILABLE(10_2, 2_0);
-
 /*
  *  kCFStreamPropertyProxyLocalBypass
  *
@@ -379,104 +265,6 @@ CFN_EXPORT const CFStringRef kCFStreamPropertySOCKSPassword CF_AVAILABLE(10_2, 2
  *
  */
 CFN_EXPORT const CFStringRef kCFStreamPropertyProxyLocalBypass CF_AVAILABLE(10_4, 2_0);
-
-
-/*
- *  kCFStreamErrorDomainSSL
- *  
- *  Discussion:
- *	Errors located in Security/SecureTransport.h
- *  
- */
-CFN_EXPORT const int kCFStreamErrorDomainSSL CF_AVAILABLE(10_2, 2_0);
-
-/*
- *  kCFStreamPropertySocketSecurityLevel
- *  
- *  Discussion:
- *	Stream property key, for both set and copy operations. To set a
- *	stream to be secure, call CFReadStreamSetProperty or
- *	CFWriteStreamSetPropertywith the property name set to
- *	kCFStreamPropertySocketSecurityLevel and the value being one of
- *	the following values.  Streams may set a security level after
- *	open in order to allow on-the-fly securing of a stream.
- *  
- */
-CFN_EXPORT const CFStringRef kCFStreamPropertySocketSecurityLevel CF_AVAILABLE(10_2, 2_0);
-
-/*
- *  kCFStreamSocketSecurityLevelNone
- *  
- *  Discussion:
- *	Stream property value, for both set and copy operations.
- *	Indicates to use no security (default setting).
- *  
- */
-CFN_EXPORT const CFStringRef kCFStreamSocketSecurityLevelNone CF_AVAILABLE(10_2, 2_0);
-
-/*
- *  kCFStreamSocketSecurityLevelSSLv2
- *
- *  Note: SSLv2 is DEPRECATED starting in OS X 10.12 and iOS 10.0.
- *  
- *  Discussion:
- *	Stream property value, for both set and copy operations.
- *	Indicates to use SSLv2 security.
- *  
- */
-CFN_EXPORT const CFStringRef kCFStreamSocketSecurityLevelSSLv2 CF_DEPRECATED(10_2, 10_12, 2_0, 10_0);
-
-/*
- *  kCFStreamSocketSecurityLevelSSLv3
- *
- *  Note: SSLv3 is DEPRECATED starting in OS X 10.12 and iOS 10.0.
- *  
- *  Discussion:
- *	Stream property value, for both set and copy operations.
- *	Indicates to use SSLv3 security.
- *  
- */
-CFN_EXPORT const CFStringRef kCFStreamSocketSecurityLevelSSLv3 CF_DEPRECATED(10_2, 10_12, 2_0, 10_0);
-
-/*
- *  kCFStreamSocketSecurityLevelTLSv1
- *  
- *  Discussion:
- *	Stream property value, for both set and copy operations.
- *	Indicates to use TLSv1 security.
- *  
- */
-CFN_EXPORT const CFStringRef kCFStreamSocketSecurityLevelTLSv1 CF_AVAILABLE(10_2, 2_0);
-
-/*
- *  kCFStreamSocketSecurityLevelNegotiatedSSL
- *  
- *  Discussion:
- *	Stream property value, for both set and copy operations.
- *	Indicates to use TLS or SSL with fallback to lower versions. This
- *	is what HTTPS does, for instance.
- *  
- */
-CFN_EXPORT const CFStringRef kCFStreamSocketSecurityLevelNegotiatedSSL CF_AVAILABLE(10_2, 2_0);
-
-/*
- *  kCFStreamPropertyShouldCloseNativeSocket
- *  
- *  Discussion:
- *	Set the value to kCFBooleanTrue if the stream should close and
- *	release the underlying native socket when the stream is released.
- *	 Set the value to kCFBooleanFalse to keep the native socket from
- *	closing and releasing when the stream is released. If the stream
- *	was created with a native socket, the default property setting on
- *	the stream is kCFBooleanFalse. The
- *	kCFStreamPropertyShouldCloseNativeSocket can be set through
- *	CFReadStreamSetProperty or CFWriteStreamSetProperty.  The
- *	property can be copied through CFReadStreamCopyProperty or
- *	CFWriteStreamCopyProperty.
- *  
- */
-CFN_EXPORT const CFStringRef kCFStreamPropertyShouldCloseNativeSocket CF_AVAILABLE(10_2, 2_0);
-
 
 /*
  *  kCFStreamPropertySocketRemoteHost

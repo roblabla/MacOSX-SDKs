@@ -1,14 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: B48F6A0A-AA09-3574-B23A-D5331576E116', 'x86_64: 44697E04-A9E5-3F3A-9233-E99EAE5332DB' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: ADFC6A6C-C82A-3574-B549-E52A99FC109A' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CommunicationsFilter.framework/Versions/A/CommunicationsFilter
 current-version: 800
 exports:         
-  - archs:           [ i386 ]
-    objc-classes:    [ _CommunicationFilterItemCache, _CommunicationsFilterBlockList, 
-                       _CommunicationsFilterBlockListCache ]
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _CMFAgentName, _CMFBlockListAddItemForAllServices, _CMFBlockListCopyItemsForAllServicesService, 
                        _CMFBlockListIsItemBlocked, _CMFBlockListRemoveItemFromAllServices, 
                        _CMFBlockListUpdatedNotification, _CMFDictionaryResultKey, 
@@ -16,5 +13,5 @@ exports:
                        _CMFItemCreateWithPhoneNumber, _CMFItemGetType, _CMFSyncAgentBlockListUpdated, 
                        _CMFXPCEventCode, _CMFXPCParameterKeyItem, _CMFXPCResponseKey, 
                        _CreateCMFItemFromString ]
-    objc-classes:    [ _CommunicationFilterItem ]
+    objc-classes:    [ CommunicationFilterItem ]
 ...

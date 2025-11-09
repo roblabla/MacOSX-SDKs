@@ -44,6 +44,8 @@ extern "C"
 {
 #endif
 
+#define AUGRAPH_DEPRECATED(macos_intro) API_DEPRECATED("AUGraph is deprecated in favor of AVAudioEngine", macos(macos_intro, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED))
+
 /*!
 	@typedef	AUGraph
 	@abstract	A reference to an AUGraph object.
@@ -96,7 +98,7 @@ CF_ENUM(OSStatus)
     @param		outGraph		the new AUGraph object
 */
 extern OSStatus
-NewAUGraph(			AUGraph	__nullable * __nonnull outGraph)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+NewAUGraph(			AUGraph	__nullable * __nonnull outGraph)		AUGRAPH_DEPRECATED(10.0);
 
 /*!
     @function	DisposeAUGraph
@@ -105,7 +107,7 @@ NewAUGraph(			AUGraph	__nullable * __nonnull outGraph)		__OSX_AVAILABLE_STARTING
     @param		inGraph		the AUGraph object to be disposed
 */
 extern OSStatus
-DisposeAUGraph(		AUGraph			inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+DisposeAUGraph(		AUGraph			inGraph)						AUGRAPH_DEPRECATED(10.0);
 
 
 #pragma mark -
@@ -126,7 +128,7 @@ DisposeAUGraph(		AUGraph			inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__I
 extern OSStatus
 AUGraphAddNode(		AUGraph								inGraph,
 					const AudioComponentDescription	*	inDescription,
-					AUNode *	  						outNode)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+					AUNode *	  						outNode)	AUGRAPH_DEPRECATED(10.5);
 
 /*!
     @function	AUGraphRemoveNode
@@ -138,7 +140,7 @@ AUGraphAddNode(		AUGraph								inGraph,
 */
 extern OSStatus
 AUGraphRemoveNode(  AUGraph			inGraph,
-					AUNode			inNode)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+					AUNode			inNode)							AUGRAPH_DEPRECATED(10.0);
 
 /*!
     @function	AUGraphGetNodeCount
@@ -149,7 +151,7 @@ AUGraphRemoveNode(  AUGraph			inGraph,
 */
 extern OSStatus
 AUGraphGetNodeCount(AUGraph			inGraph,
-					UInt32 			*outNumberOfNodes)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+					UInt32 			*outNumberOfNodes)				AUGRAPH_DEPRECATED(10.0);
 
 /*!
     @function	AUGraphGetIndNode
@@ -163,7 +165,7 @@ AUGraphGetNodeCount(AUGraph			inGraph,
 extern OSStatus
 AUGraphGetIndNode(  AUGraph			inGraph,
 					UInt32 			inIndex,
-					AUNode			*outNode)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+					AUNode			*outNode)						AUGRAPH_DEPRECATED(10.0);
 
 /*!
     @function	AUGraphNodeInfo
@@ -179,7 +181,7 @@ extern OSStatus
 AUGraphNodeInfo(	AUGraph									inGraph,
 					AUNode									inNode,
 					AudioComponentDescription * __nullable	outDescription,
-					AudioUnit __nullable * __nullable		outAudioUnit)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+					AudioUnit __nullable * __nullable		outAudioUnit)		AUGRAPH_DEPRECATED(10.5);
 			
 
 #pragma mark -
@@ -201,7 +203,7 @@ AUGraphNodeInfo(	AUGraph									inGraph,
 */
 extern OSStatus
 AUGraphNewNodeSubGraph( AUGraph				inGraph,
-						AUNode				*outNode)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
+						AUNode				*outNode)			API_DEPRECATED("no longer supported", macos(10.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function	AUGraphGetNodeInfoSubGraph
@@ -214,7 +216,7 @@ AUGraphNewNodeSubGraph( AUGraph				inGraph,
 extern OSStatus
 AUGraphGetNodeInfoSubGraph(	const AUGraph		inGraph,
 							AUNode				inNode,
-							AUGraph	__nullable * __nonnull outSubGraph)	__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
+							AUGraph	__nullable * __nonnull outSubGraph)	API_DEPRECATED("no longer supported", macos(10.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos);
 								
 /*!
     @function	AUGraphIsNodeSubGraph
@@ -227,7 +229,7 @@ AUGraphGetNodeInfoSubGraph(	const AUGraph		inGraph,
 extern OSStatus
 AUGraphIsNodeSubGraph(		const AUGraph		inGraph,
 							AUNode				inNode,
-							Boolean *			outFlag)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
+							Boolean *			outFlag)		API_DEPRECATED("no longer supported", macos(10.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 #pragma mark -
@@ -328,7 +330,7 @@ AUGraphConnectNodeInput(	AUGraph			inGraph,
 							AUNode			inSourceNode,
 							UInt32			inSourceOutputNumber,
 							AUNode			inDestNode,
-							UInt32			inDestInputNumber)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+							UInt32			inDestInputNumber)		AUGRAPH_DEPRECATED(10.0);
 
 /*! 
 	@function	AUGraphSetNodeInputCallback
@@ -343,7 +345,7 @@ AUGraphSetNodeInputCallback (AUGraph						inGraph,
 							AUNode							inDestNode,
 							UInt32							inDestInputNumber,
 							const AURenderCallbackStruct *	inInputCallback) 
-																	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+																	AUGRAPH_DEPRECATED(10.5);
 
 /*! 
 	@function	AUGraphDisconnectNodeInput
@@ -357,7 +359,7 @@ AUGraphSetNodeInputCallback (AUGraph						inGraph,
 extern OSStatus
 AUGraphDisconnectNodeInput(	AUGraph			inGraph,
 							AUNode			inDestNode,
-							UInt32			inDestInputNumber)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+							UInt32			inDestInputNumber)		AUGRAPH_DEPRECATED(10.0);
 
 /*! 
 	@function	AUGraphClearConnections
@@ -366,7 +368,7 @@ AUGraphDisconnectNodeInput(	AUGraph			inGraph,
 	@param		inGraph
 */
 extern OSStatus
-AUGraphClearConnections(	AUGraph			inGraph)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+AUGraphClearConnections(	AUGraph			inGraph)				AUGRAPH_DEPRECATED(10.0);
 
 /*! 
 	@function	AUGraphGetNumberOfInteractions
@@ -377,7 +379,7 @@ AUGraphClearConnections(	AUGraph			inGraph)				__OSX_AVAILABLE_STARTING(__MAC_10
 */
 extern OSStatus
 AUGraphGetNumberOfInteractions(	AUGraph				inGraph,
-								UInt32 *			outNumInteractions)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+								UInt32 *			outNumInteractions)	AUGRAPH_DEPRECATED(10.5);
 
 /*! 
 	@function	AUGraphGetInteractionInfo
@@ -395,7 +397,7 @@ AUGraphGetNumberOfInteractions(	AUGraph				inGraph,
 extern OSStatus
 AUGraphGetInteractionInfo(	AUGraph					inGraph,
 							UInt32					inInteractionIndex,
-							AUNodeInteraction *		outInteraction)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+							AUNodeInteraction *		outInteraction)		AUGRAPH_DEPRECATED(10.5);
 
 /*! 
 	@function	AUGraphCountNodeInteractions
@@ -408,7 +410,7 @@ AUGraphGetInteractionInfo(	AUGraph					inGraph,
 extern OSStatus
 AUGraphCountNodeInteractions(	AUGraph				inGraph,
 								AUNode				inNode,
-								UInt32 *			outNumInteractions)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+								UInt32 *			outNumInteractions)	AUGRAPH_DEPRECATED(10.5);
 
 /*! 
 	@function	AUGraphGetNodeInteractions
@@ -425,7 +427,7 @@ extern OSStatus
 AUGraphGetNodeInteractions(	AUGraph					inGraph,
 							AUNode					inNode,
 							UInt32 *				ioNumInteractions,
-							AUNodeInteraction *		outInteractions)	__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+							AUNodeInteraction *		outInteractions)	AUGRAPH_DEPRECATED(10.5);
 
 
 
@@ -476,7 +478,7 @@ AUGraphGetNodeInteractions(	AUGraph					inGraph,
 */
 extern OSStatus
 AUGraphUpdate(		AUGraph					inGraph,
-					Boolean	 * __nullable	outIsUpdated)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+					Boolean	 * __nullable	outIsUpdated)			AUGRAPH_DEPRECATED(10.0);
 
 #pragma mark -
 #pragma mark State Management
@@ -490,7 +492,7 @@ AUGraphUpdate(		AUGraph					inGraph,
 	@param		inGraph
 */
 extern OSStatus
-AUGraphOpen(			AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+AUGraphOpen(			AUGraph		inGraph)						AUGRAPH_DEPRECATED(10.0);
 
 /*!
 	@function	AUGraphClose
@@ -499,7 +501,7 @@ AUGraphOpen(			AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHO
 	@param		inGraph
 */
 extern OSStatus
-AUGraphClose(			AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+AUGraphClose(			AUGraph		inGraph)						AUGRAPH_DEPRECATED(10.0);
 
 /*!
 	@function	AUGraphInitialize
@@ -513,7 +515,7 @@ AUGraphClose(			AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPH
 	@param		inGraph
 */
 extern OSStatus
-AUGraphInitialize(		AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+AUGraphInitialize(		AUGraph		inGraph)						AUGRAPH_DEPRECATED(10.0);
 
 /*!
 	@function	AUGraphUninitialize
@@ -522,7 +524,7 @@ AUGraphInitialize(		AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,_
 	@param		inGraph
 */
 extern OSStatus
-AUGraphUninitialize(	AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+AUGraphUninitialize(	AUGraph		inGraph)						AUGRAPH_DEPRECATED(10.0);
 
 /*!
 	@function	AUGraphStart
@@ -533,7 +535,7 @@ AUGraphUninitialize(	AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,
 	@param		inGraph
 */
 extern OSStatus
-AUGraphStart(			AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+AUGraphStart(			AUGraph		inGraph)						AUGRAPH_DEPRECATED(10.0);
 
 /*!
 	@function	AUGraphStop
@@ -541,7 +543,7 @@ AUGraphStart(			AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPH
 	@discussion Stop() is called on the "head" node(s) of the AUGraph	(rendering is stopped)
 */
 extern OSStatus
-AUGraphStop(			AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+AUGraphStop(			AUGraph		inGraph)						AUGRAPH_DEPRECATED(10.0);
 
 
 /*!
@@ -550,7 +552,7 @@ AUGraphStop(			AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHO
 */
 extern OSStatus
 AUGraphIsOpen(			AUGraph		inGraph,
-						Boolean		*outIsOpen)						__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+						Boolean		*outIsOpen)						AUGRAPH_DEPRECATED(10.0);
 							
 /*!
 	@function	AUGraphIsInitialized
@@ -558,7 +560,7 @@ AUGraphIsOpen(			AUGraph		inGraph,
 */
 extern OSStatus
 AUGraphIsInitialized(	AUGraph		inGraph,
-						Boolean		*outIsInitialized)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+						Boolean		*outIsInitialized)				AUGRAPH_DEPRECATED(10.0);
 							
 /*!
 	@function	AUGraphIsRunning
@@ -566,7 +568,7 @@ AUGraphIsInitialized(	AUGraph		inGraph,
 */
 extern OSStatus
 AUGraphIsRunning(		AUGraph		inGraph,
-						Boolean		*outIsRunning)					__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
+						Boolean		*outIsRunning)					AUGRAPH_DEPRECATED(10.0);
 						
 #pragma mark -
 #pragma mark Utilities
@@ -581,7 +583,7 @@ AUGraphIsRunning(		AUGraph		inGraph,
 */
 extern OSStatus
 AUGraphGetCPULoad(		AUGraph		inGraph,
-						Float32		*outAverageCPULoad)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+						Float32		*outAverageCPULoad)				AUGRAPH_DEPRECATED(10.1);
 
 /*!
 	@function	AUGraphGetMaxCPULoad
@@ -591,7 +593,7 @@ AUGraphGetCPULoad(		AUGraph		inGraph,
 */
 extern OSStatus
 AUGraphGetMaxCPULoad(	AUGraph		inGraph,
-						Float32		*outMaxLoad)					__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+						Float32		*outMaxLoad)					AUGRAPH_DEPRECATED(10.3);
 
 /*!
 	@function	AUGraphAddRenderNotify
@@ -603,7 +605,7 @@ AUGraphGetMaxCPULoad(	AUGraph		inGraph,
 extern OSStatus
 AUGraphAddRenderNotify(			AUGraph					inGraph,
 								AURenderCallback 		inCallback,
-								void * __nullable		inRefCon)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+								void * __nullable		inRefCon)		AUGRAPH_DEPRECATED(10.2);
 
 /*!
 	@function	AUGraphRemoveRenderNotify
@@ -614,7 +616,7 @@ AUGraphAddRenderNotify(			AUGraph					inGraph,
 extern OSStatus
 AUGraphRemoveRenderNotify(		AUGraph					inGraph,
 								AURenderCallback 		inCallback,
-								void * __nullable		inRefCon)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+								void * __nullable		inRefCon)		AUGRAPH_DEPRECATED(10.2);
 	
 #pragma mark -
 #pragma mark Deprecated
@@ -630,7 +632,7 @@ AUGraphNewNode(	AUGraph								inGraph,
 				const struct ComponentDescription	*inDescription,
 				UInt32								inClassDataSize,	// reserved: must be zero
 				const void							*inClassData,
-				AUNode								*outNode)				__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+				AUNode								*outNode)			API_DEPRECATED("no longer supported", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*!
@@ -644,7 +646,7 @@ AUGraphGetNodeInfo(	AUGraph						inGraph,
 					struct ComponentDescription *outDescription,
 					UInt32						*outClassDataSize,
 					void * __nullable * __nullable outClassData,
-					AudioUnit __nullable * __nullable outAudioUnit)				__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+					AudioUnit __nullable * __nullable outAudioUnit)		API_DEPRECATED("no longer supported", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
 	@function			AUGraphGetNumberOfConnections
@@ -652,7 +654,7 @@ AUGraphGetNodeInfo(	AUGraph						inGraph,
 */
 extern OSStatus
 AUGraphGetNumberOfConnections(	AUGraph		inGraph,
-								UInt32		*outNumConnections)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+								UInt32		*outNumConnections)		API_DEPRECATED("no longer supported", macos(10.1, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
 	@function			AUGraphGetConnectionInfo
@@ -664,7 +666,7 @@ AUGraphGetConnectionInfo(	AUGraph		inGraph,
 							AUNode		*outSourceNode,
 							UInt32		*outSourceOutputNumber,
 							AUNode		*outDestNode,
-							UInt32		*outDestInputNumber)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+							UInt32		*outDestInputNumber)		API_DEPRECATED("no longer supported", macos(10.1, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
 	@function			AUGraphCountNodeConnections
@@ -673,7 +675,7 @@ AUGraphGetConnectionInfo(	AUGraph		inGraph,
 extern OSStatus
 AUGraphCountNodeConnections(	AUGraph 	inGraph,
 								AUNode 		inNode,
-								UInt32 		*outNumConnections)		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+								UInt32 		*outNumConnections)		API_DEPRECATED("no longer supported", macos(10.3, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
 	@function			AUGraphGetNodeConnections
@@ -684,7 +686,7 @@ AUGraphGetNodeConnections(		AUGraph						inGraph,
 								AUNode						inNode,
 								AudioUnitNodeConnection		*outConnections,
 								UInt32						*ioNumConnections)	
-																	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+																	API_DEPRECATED("no longer supported", macos(10.3, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 	
 #if defined(__cplusplus)

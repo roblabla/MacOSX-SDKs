@@ -1,21 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 5291F231-B228-3350-B55C-6CF9D7CEB428', 'x86_64: E6B1D745-D286-3C04-9E6B-03920644E62F' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: A4D9CF37-D076-3CE9-95F1-DA89DA1601B6' ]
 platform:        macosx
 install-name:    /usr/lib/system/libcompiler_rt.dylib
-current-version: 62
+current-version: 63.4
 objc-constraint: none
 parent-umbrella: System
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ ___absvti2, ___addvti3, ___ashlti3, ___ashrti3, ___clzti2, 
-                       ___cmpti2, ___ctzti2, ___divti3, ___ffsti2, ___fixdfti, ___fixsfti, 
-                       ___fixunsdfti, ___fixunssfti, ___fixunsxfti, ___fixxfti, ___floattidf, 
-                       ___floattisf, ___floattixf, ___floatuntidf, ___floatuntisf, 
-                       ___floatuntixf, ___lshrti3, ___modti3, ___muloti4, ___multi3, 
-                       ___mulvti3, ___negti2, ___negvti2, ___parityti2, ___popcountti2, 
-                       ___subvti3, ___ucmpti2, ___udivmodti4, ___udivti3, ___umodti3 ]
-  - archs:           [ i386, x86_64 ]
     symbols:         [ '$ld$hide$os10.10$___extendhfsf2', '$ld$hide$os10.10$___truncdfhf2', 
                        '$ld$hide$os10.10$___truncsfhf2', '$ld$hide$os10.10$_atomic_flag_clear', 
                        '$ld$hide$os10.10$_atomic_flag_clear_explicit', '$ld$hide$os10.10$_atomic_flag_test_and_set', 
@@ -198,7 +190,8 @@ exports:
                        '$ld$hide$os10.9$_atomic_flag_clear_explicit', '$ld$hide$os10.9$_atomic_flag_test_and_set', 
                        '$ld$hide$os10.9$_atomic_flag_test_and_set_explicit', '$ld$hide$os10.9$_atomic_signal_fence', 
                        '$ld$hide$os10.9$_atomic_thread_fence', ___absvdi2, ___absvsi2, 
-                       ___addvdi3, ___addvsi3, ___ashldi3, ___ashrdi3, ___atomic_compare_exchange, 
+                       ___absvti2, ___addvdi3, ___addvsi3, ___addvti3, ___ashldi3, 
+                       ___ashlti3, ___ashrdi3, ___ashrti3, ___atomic_compare_exchange, 
                        ___atomic_compare_exchange_1, ___atomic_compare_exchange_2, 
                        ___atomic_compare_exchange_4, ___atomic_compare_exchange_8, 
                        ___atomic_exchange, ___atomic_exchange_1, ___atomic_exchange_2, 
@@ -212,19 +205,25 @@ exports:
                        ___atomic_fetch_xor_8, ___atomic_load, ___atomic_load_1, ___atomic_load_2, 
                        ___atomic_load_4, ___atomic_load_8, ___atomic_store, ___atomic_store_1, 
                        ___atomic_store_2, ___atomic_store_4, ___atomic_store_8, ___clear_cache, 
-                       ___clzdi2, ___clzsi2, ___cmpdi2, ___ctzdi2, ___ctzsi2, ___divdc3, 
-                       ___divdi3, ___divsc3, ___divxc3, ___enable_execute_stack, 
-                       ___extendhfsf2, ___ffsdi2, ___fixdfdi, ___fixsfdi, ___fixunsdfdi, 
-                       ___fixunsdfsi, ___fixunssfdi, ___fixunssfsi, ___fixunsxfdi, 
-                       ___fixunsxfsi, ___fixxfdi, ___floatdidf, ___floatdisf, ___floatdixf, 
-                       ___floatundidf, ___floatundisf, ___floatundixf, ___gcc_personality_v0, 
-                       ___gnu_f2h_ieee, ___gnu_h2f_ieee, ___lshrdi3, ___moddi3, ___muldc3, 
-                       ___muldi3, ___mulodi4, ___mulosi4, ___mulsc3, ___mulvdi3, 
-                       ___mulvsi3, ___mulxc3, ___negdi2, ___negvdi2, ___negvsi2, 
-                       ___paritydi2, ___paritysi2, ___popcountdi2, ___popcountsi2, 
-                       ___powidf2, ___powisf2, ___powixf2, ___subvdi3, ___subvsi3, 
-                       ___truncdfhf2, ___truncsfhf2, ___ucmpdi2, ___udivdi3, ___udivmoddi4, 
-                       ___umoddi3, _atomic_flag_clear, _atomic_flag_clear_explicit, 
+                       ___clzdi2, ___clzsi2, ___clzti2, ___cmpdi2, ___cmpti2, ___ctzdi2, 
+                       ___ctzsi2, ___ctzti2, ___divdc3, ___divdi3, ___divsc3, ___divti3, 
+                       ___divxc3, ___enable_execute_stack, ___extendhfsf2, ___ffsdi2, 
+                       ___ffsti2, ___fixdfdi, ___fixdfti, ___fixsfdi, ___fixsfti, 
+                       ___fixunsdfdi, ___fixunsdfsi, ___fixunsdfti, ___fixunssfdi, 
+                       ___fixunssfsi, ___fixunssfti, ___fixunsxfdi, ___fixunsxfsi, 
+                       ___fixunsxfti, ___fixxfdi, ___fixxfti, ___floatdidf, ___floatdisf, 
+                       ___floatdixf, ___floattidf, ___floattisf, ___floattixf, ___floatundidf, 
+                       ___floatundisf, ___floatundixf, ___floatuntidf, ___floatuntisf, 
+                       ___floatuntixf, ___gcc_personality_v0, ___gnu_f2h_ieee, ___gnu_h2f_ieee, 
+                       ___lshrdi3, ___lshrti3, ___moddi3, ___modti3, ___muldc3, ___muldi3, 
+                       ___mulodi4, ___mulosi4, ___muloti4, ___mulsc3, ___multi3, 
+                       ___mulvdi3, ___mulvsi3, ___mulvti3, ___mulxc3, ___negdi2, 
+                       ___negti2, ___negvdi2, ___negvsi2, ___negvti2, ___paritydi2, 
+                       ___paritysi2, ___parityti2, ___popcountdi2, ___popcountsi2, 
+                       ___popcountti2, ___powidf2, ___powisf2, ___powixf2, ___subvdi3, 
+                       ___subvsi3, ___subvti3, ___truncdfhf2, ___truncsfhf2, ___ucmpdi2, 
+                       ___ucmpti2, ___udivdi3, ___udivmoddi4, ___udivmodti4, ___udivti3, 
+                       ___umoddi3, ___umodti3, _atomic_flag_clear, _atomic_flag_clear_explicit, 
                        _atomic_flag_test_and_set, _atomic_flag_test_and_set_explicit, 
                        _atomic_signal_fence, _atomic_thread_fence, _vers ]
 ...

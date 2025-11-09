@@ -1,12 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: F9ACB7B9-7E71-3E71-AB37-BC6E284BCD25', 'x86_64: 054989A9-65C6-3E46-A7F6-129A8BB3A713' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 8340FC5E-769E-3B30-9CC9-AE2C8C0CAC43' ]
 platform:        macosx
 install-name:    /usr/lib/libdtrace.dylib
 current-version: 130
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _Pstate, _Pstatus, _Pxlookup_by_addr, __dtrace_disallow_dsym, 
                        __dtrace_version, _ctf_add_array, _ctf_add_const, _ctf_add_enum, 
                        _ctf_add_enumerator, _ctf_add_float, _ctf_add_forward, _ctf_add_function, 
@@ -43,19 +43,19 @@ exports:
                        _dtrace_fprintf, _dtrace_freopen, _dtrace_geterr_dof, _dtrace_getopt, 
                        _dtrace_getopt_dof, _dtrace_go, _dtrace_handle_buffered, _dtrace_handle_drop, 
                        _dtrace_handle_err, _dtrace_handle_proc, _dtrace_handle_setopt, 
-                       _dtrace_id2desc, _dtrace_ld_create_dof, _dtrace_lookup_by_addr, 
-                       _dtrace_lookup_by_name, _dtrace_lookup_by_type, _dtrace_object_info, 
-                       _dtrace_object_iter, _dtrace_open, _dtrace_printa_create, 
+                       _dtrace_id2desc, _dtrace_kernel_path, _dtrace_ld_create_dof, 
+                       _dtrace_lookup_by_addr, _dtrace_lookup_by_name, _dtrace_lookup_by_type, 
+                       _dtrace_object_info, _dtrace_object_iter, _dtrace_open, _dtrace_printa_create, 
                        _dtrace_printf_create, _dtrace_printf_format, _dtrace_probe_info, 
                        _dtrace_probe_iter, _dtrace_proc_continue, _dtrace_proc_create, 
                        _dtrace_proc_grab, _dtrace_proc_release, _dtrace_proc_waitfor, 
                        _dtrace_program_exec, _dtrace_program_fcompile, _dtrace_program_header, 
                        _dtrace_program_info, _dtrace_program_link, _dtrace_program_strcompile, 
-                       _dtrace_provider_modules, _dtrace_setopt, _dtrace_sleep, _dtrace_sprintf, 
-                       _dtrace_stability_name, _dtrace_status, _dtrace_stmt_action, 
-                       _dtrace_stmt_add, _dtrace_stmt_create, _dtrace_stmt_destroy, 
-                       _dtrace_stmt_iter, _dtrace_stop, _dtrace_str2attr, _dtrace_str2desc, 
-                       _dtrace_subrstr, _dtrace_symbol_type, _dtrace_system, _dtrace_type_fcompile, 
-                       _dtrace_type_strcompile, _dtrace_uaddr2str, _dtrace_update, 
-                       _dtrace_vopen, _dtrace_work, _dtrace_xstr2desc ]
+                       _dtrace_provider_modules, _dtrace_setopt, _dtrace_signal, 
+                       _dtrace_sleep, _dtrace_sprintf, _dtrace_stability_name, _dtrace_status, 
+                       _dtrace_stmt_action, _dtrace_stmt_add, _dtrace_stmt_create, 
+                       _dtrace_stmt_destroy, _dtrace_stmt_iter, _dtrace_stop, _dtrace_str2attr, 
+                       _dtrace_str2desc, _dtrace_subrstr, _dtrace_symbol_type, _dtrace_system, 
+                       _dtrace_type_fcompile, _dtrace_type_strcompile, _dtrace_uaddr2str, 
+                       _dtrace_update, _dtrace_vopen, _dtrace_work, _dtrace_xstr2desc ]
 ...

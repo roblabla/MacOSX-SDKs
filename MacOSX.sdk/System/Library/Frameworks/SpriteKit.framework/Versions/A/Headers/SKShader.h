@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE(10_10, 8_0)
-SK_EXPORT @interface SKShader : NSObject <NSCopying, NSCoding>
+SK_EXPORT @interface SKShader : NSObject <NSCopying, NSSecureCoding>
 
 /**
  Create a custom shader with source code.

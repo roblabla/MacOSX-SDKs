@@ -46,6 +46,10 @@
 #ifndef __ASSERTMACROS__
 #define __ASSERTMACROS__
 
+#ifdef DEBUG_ASSERT_CONFIG_INCLUDE
+    #include DEBUG_ASSERT_CONFIG_INCLUDE
+#endif
+
 /*
  *  Macro overview:
  *  
@@ -1217,8 +1221,14 @@
  */
 #ifndef __Check_Compile_Time
     #ifdef __GNUC__ 
+     #if (__cplusplus >= 201103L)
+        #define __Check_Compile_Time( expr )    static_assert( expr , "__Check_Compile_Time")        
+     #elif (__STDC_VERSION__ >= 201112L)
+        #define __Check_Compile_Time( expr )    _Static_assert( expr , "__Check_Compile_Time")
+     #else
         #define __Check_Compile_Time( expr )    \
             extern int compile_time_assert_failed[ ( expr ) ? 1 : -1 ] __attribute__( ( unused ) )
+     #endif
     #else
         #define __Check_Compile_Time( expr )    \
             extern int compile_time_assert_failed[ ( expr ) ? 1 : -1 ]
@@ -1240,7 +1250,7 @@
  *  of the old macros into the new equivalents.  To do so, in Terminal go into the directory containing the
  *  sources to be converted and run this command.
  *
-    find . -name '*.[c|cc|cp|cpp|m|mm|h]' -print0 |  xargs -0 tops -verbose \
+    find -E . -regex '.*\.(c|cc|cp|cpp|m|mm|h)' -print0 |  xargs -0 tops -verbose \
       replace "check(<b args>)" with "__Check(<args>)" \
       replace "check_noerr(<b args>)" with "__Check_noErr(<args>)" \
       replace "check_noerr_string(<b args>)" with "__Check_noErr_String(<args>)" \

@@ -13,8 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class AMAction;
 @class AMWorkflowController;
 
-@interface AMWorkflow : NSObject <NSCopying> {
-   @private
+@interface AMWorkflow : NSObject <NSCopying>
+{
+	@private
 	NSString *_uuid;
 	NSURL *_fileURL;
 	id _actions;
@@ -36,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 	id _outputType;
 
 	id _future;
-	AM_UNUSED_FOR_ANALYZER id _future2;
+	id _future2;
 	AM_UNUSED_FOR_ANALYZER id _future3;
 	AM_UNUSED_FOR_ANALYZER id _future4;
 }

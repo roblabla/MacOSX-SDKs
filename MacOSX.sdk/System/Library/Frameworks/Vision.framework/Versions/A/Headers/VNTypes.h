@@ -5,9 +5,6 @@
 //  Copyright © 2017 Apple Inc. All rights reserved.
 //
 
-#ifndef VNTYPES_H
-#define VNTYPES_H
-
 #import <Foundation/Foundation.h>
 
 #import <Vision/VNDefines.h>
@@ -34,22 +31,20 @@ typedef NS_ENUM(NSUInteger, VNImageCropAndScaleOption)
 typedef NSString *VNBarcodeSymbology NS_STRING_ENUM;
 
 VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyAztec API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCODE39 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCODE39Checksum API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCODE39FullASCII API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCODE39FullASCIIChecksum API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCODE93 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCODE93i API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCODE128 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCode39 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCode39Checksum API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCode39FullASCII API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCode39FullASCIIChecksum API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCode93 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCode93i API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyCode128 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyDataMatrix API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyEAN8 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyEAN13 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyI2OF5 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
-VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyI2OF5Checksum API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyI2of5 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyI2of5Checksum API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyITF14 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyPDF417 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyQR API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyUPCE API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
-
-#endif /* VNTYPES_H */

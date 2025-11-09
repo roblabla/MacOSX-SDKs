@@ -2,7 +2,7 @@
  *  CTStringAttributes.h
  *  CoreText
  *
- *  Copyright (c) 2004-2017 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2018 Apple Inc. All rights reserved.
  *
  */
 
@@ -10,9 +10,9 @@
 #define __CTSTRINGATTRIBUTES__
 
 #include <CoreText/CTDefines.h>
-#include <CoreFoundation/CFNumber.h>
-#include <CoreFoundation/CFString.h>
-#include <CoreGraphics/CGColor.h>
+
+#include <CoreFoundation/CoreFoundation.h>
+#include <CoreGraphics/CoreGraphics.h>
 
 CF_EXTERN_C_BEGIN
 CF_ASSUME_NONNULL_BEGIN
@@ -244,7 +244,7 @@ CT_EXPORT const CFStringRef kCTGlyphInfoAttributeName CT_AVAILABLE(macos(10.5), 
                 an attribute value of 1 corresponds to kTraditionalCharactersSelector.
 */
 
-CT_EXPORT const CFStringRef kCTCharacterShapeAttributeName CT_DEPRECATED("Use feature type kCharacterShapeType with the appropriate selector", macos(10.5, 10.11), ios(3.2, 9.0)) CT_UNAVAILABLE(watchos, tvos);
+CT_EXPORT const CFStringRef kCTCharacterShapeAttributeName CT_DEPRECATED("Use feature type kCharacterShapeType with the appropriate selector", macos(10.5, 10.11), ios(3.2, 9.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
 
 
 /*!

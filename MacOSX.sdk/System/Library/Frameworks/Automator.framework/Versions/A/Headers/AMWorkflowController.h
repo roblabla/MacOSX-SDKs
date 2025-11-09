@@ -19,23 +19,26 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol AMWorkflowControllerDelegate;
 
-@interface AMWorkflowController : NSController {
-   @public
+@interface AMWorkflowController : NSController
+{
+	@public
 	AMWorkflowView *workflowView;
 
-   @private
+	@private
 	AMWorkflow *_workflow;
 	id _runner;
 	AM_UNUSED_FOR_ANALYZER id _runnerInterface;
 	AM_UNUSED_FOR_ANALYZER id _eventMonitor;
 	__weak id<AMWorkflowControllerDelegate> _delegate;
-	struct __AMWorkflowControllerFlags {
+	struct __AMWorkflowControllerFlags
+	{
 		NSUInteger shouldRunLocally : 1;
 		NSUInteger isRunningLocally : 1;
 		NSUInteger shouldDisplayProgressInMenuBar : 1;
 		NSUInteger reserved : 29;
 	} _flags;
-	struct __AMWorkflowControllerDelegateRespondTo {
+	struct __AMWorkflowControllerDelegateRespondTo
+	{
 		NSUInteger workflowControllerDidAddWorkflow : 1;
 		NSUInteger workflowControllerDidRemoveWorkflow : 1;
 		NSUInteger workflowControllerWillRun : 1;

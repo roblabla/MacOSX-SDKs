@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
                 One initialized with a number of occurrences will return nil for its endDate.
 */
 NS_CLASS_AVAILABLE(10_8, 4_0)
-@interface EKRecurrenceEnd : NSObject <NSCopying> {
+@interface EKRecurrenceEnd : NSObject <NSCopying, NSSecureCoding> {
 }
 
 /*!

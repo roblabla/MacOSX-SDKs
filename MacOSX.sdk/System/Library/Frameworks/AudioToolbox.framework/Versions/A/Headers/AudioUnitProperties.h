@@ -47,8 +47,8 @@
 			- these properties are available on only available on OS X
 */
 
-#ifndef AudioUnit_AudioUnitProperties_h
-#define AudioUnit_AudioUnitProperties_h
+#ifndef AudioToolbox_AudioUnitProperties_h
+#define AudioToolbox_AudioUnitProperties_h
 
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <AudioToolbox/AUComponent.h>
@@ -1934,7 +1934,7 @@ enum {
 CF_ENUM(AudioUnitPropertyID) {
 // range (3060->3999)
 	kAudioUnitProperty_DistanceAttenuationData      = 3600
-} __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
+} API_DEPRECATED("no longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
 	@struct			AUDistanceAttenuationData
@@ -1946,7 +1946,7 @@ typedef struct AUDistanceAttenuationData
 		Float32	inDistance;	// 0-1000
 		Float32 outGain;	// 0-1
 	} pairs[1]; // this is a variable length array of inNumberOfPairs elements
-} AUDistanceAttenuationData __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_11, __IPHONE_NA, __IPHONE_NA);
+} AUDistanceAttenuationData API_DEPRECATED("no longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 //=====================================================================================================================
@@ -3468,4 +3468,4 @@ CF_ENUM(AudioUnitPropertyID) {
 
 CF_ASSUME_NONNULL_END
 
-#endif // AudioUnit_AudioUnitProperties_h
+#endif // AudioToolbox_AudioUnitProperties_h

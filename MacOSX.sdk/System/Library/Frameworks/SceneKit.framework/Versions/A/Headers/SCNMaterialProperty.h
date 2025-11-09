@@ -1,7 +1,8 @@
 //
 //  SCNMaterialProperty.h
+//  SceneKit
 //
-//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
+//  Copyright © 2012-2018 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -33,6 +34,7 @@ typedef NS_ENUM(NSInteger, SCNWrapMode) {
     @discussion This can be used to specify the various properties of SCNMaterial slots such as diffuse, ambient, etc.
 */
 
+SCN_EXPORT
 @interface SCNMaterialProperty : NSObject <SCNAnimatable, NSSecureCoding>
 
 /*!
@@ -43,7 +45,7 @@ typedef NS_ENUM(NSInteger, SCNWrapMode) {
 
 /*! 
  @property contents
- @abstract Specifies the receiver's contents. This can be a color (NSColor, UIColor, CGColorRef), an image (NSImage, UIImage, CGImageRef), a layer (CALayer), a path (NSString or NSURL), a SpriteKit scene (SKScene), a texture (SKTexture, id<MTLTexture> or GLKTextureInfo), or a floating value between 0 and 1 (NSNumber) for metalness and roughness properties. AVCaptureDevice is supported on iOS 11.0 and AVPlayer is supported on macOS 10.13, iOS 11.0 and tvOS11.0. Animatable when set to a color.
+ @abstract Specifies the receiver's contents. This can be a color (NSColor, UIColor, CGColorRef), an image (NSImage, UIImage, CGImageRef), a layer (CALayer), a path (NSString or NSURL), a SpriteKit scene (SKScene), a texture (SKTexture, id<MTLTexture> or GLKTextureInfo), or a floating value between 0 and 1 (NSNumber) for metalness and roughness properties. AVCaptureDevice is supported on iOS 11 and AVPlayer is supported on macOS 10.13, iOS 11 and tvOS 11. Animatable when set to a color.
  @discussion Setting the contents to an instance of SKTexture will automatically update the wrapS, wrapT, contentsTransform, minification, magnification and mip filters according to the SKTexture settings.
              When a cube map is expected (e.g. SCNMaterial.reflective, SCNScene.background, SCNScene.lightingEnvironment) you can use
                1. A horizontal strip image                          where `6 * image.height ==     image.width`

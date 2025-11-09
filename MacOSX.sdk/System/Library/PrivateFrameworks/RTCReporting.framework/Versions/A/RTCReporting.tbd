@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DEDCB670-64BF-3AA3-80C1-0DC504111FA8' ]
+uuids:           [ 'x86_64: 4037D594-2FD8-350B-8D33-9210E7689DC4' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/RTCReporting.framework/Versions/A/RTCReporting
 exports:         
@@ -15,21 +15,19 @@ exports:
                        _kRTCReportingBackendAWD, _kRTCReportingBackendDashboard, 
                        _kRTCReportingBackendHTTPPost, _kRTCReportingBackendHTTPPost2, 
                        _kRTCReportingBackendPowerlog, _kRTCReportingBackendQRS, _kRTCReportingBackendUploadServer, 
-                       _kRTCReportingDefaultsDomain, _kRTCReportingDefaultsKeyUUIDOverrideDNU, 
-                       _kRTCReportingDefaultsKeyUUIDRespectDNU, _kRTCReportingErrorDomain, 
-                       _kRTCReportingHierarchyTokenLevel, _kRTCReportingHierarchyTokenTokenID, 
-                       _kRTCReportingLogDataData, _kRTCReportingLogDataEndTime, _kRTCReportingLogDataStartTime, 
+                       _kRTCReportingErrorDomain, _kRTCReportingHierarchyTokenLevel, 
+                       _kRTCReportingHierarchyTokenTokenID, _kRTCReportingLogDataData, 
+                       _kRTCReportingLogDataEndTime, _kRTCReportingLogDataStartTime, 
                        _kRTCReportingMessageParametersCategory, _kRTCReportingMessageParametersFlag, 
                        _kRTCReportingMessageParametersPayload, _kRTCReportingMessageParametersType, 
                        _kRTCReportingSessionInfoBatchEvent, _kRTCReportingSessionInfoClientType, 
                        _kRTCReportingSessionInfoClientVersion, _kRTCReportingSessionInfoEnableFlag, 
                        _kRTCReportingSessionInfoHierarchyToken, _kRTCReportingSessionInfoRequireUserInfo, 
                        _kRTCReportingSessionInfoSessionID, _kRTCReportingUserInfoClientName, 
-                       _kRTCReportingUserInfoServiceName, _validateMessageWithCategory, 
-                       _validateMessageWithDictionary, _validateSessionInfo ]
-    objc-classes:    [ _RTCReporting, _RTCReportingAggregationObject, _RTCReportingDeallocNotifier, 
-                       _RTCReportingLogging, _UpdateAndReportServices ]
-    objc-ivars:      [ _RTCReportingAggregationObject._aggregationBlock, _RTCReportingDeallocNotifier._delegate, 
-                       _UpdateAndReportServices._block, _UpdateAndReportServices._report, 
-                       _UpdateAndReportServices._update ]
+                       _kRTCReportingUserInfoServiceName ]
+    objc-classes:    [ RTCReporting, RTCReportingAggregationObject, RTCReportingDeallocNotifier, 
+                       UpdateAndReportServices ]
+    objc-ivars:      [ RTCReportingAggregationObject._aggregationBlock, RTCReportingDeallocNotifier._delegate, 
+                       UpdateAndReportServices._block, UpdateAndReportServices._report, 
+                       UpdateAndReportServices._update ]
 ...

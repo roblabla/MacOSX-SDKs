@@ -1,10 +1,10 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 180B39AF-A930-34EC-9CBA-D7CC5F490202', 'x86_64: 2AC87CA8-B587-310C-BAB3-FE855B6A1DDF' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 821DE2A3-1CAD-3A7D-A2DD-41EBA3A6FEF3' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Apple80211
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _ACInterfaceCreate, _ACInterfaceDeviceNameCopy, _ACInterfaceGetPower, 
                        _ACInterfaceSetPower, _ACNetworkAssociate, _ACNetworkCopyBroadcastScanResults, 
                        _ACNetworkCopyDirectedScanResult, _ACNetworkDisassociate, 

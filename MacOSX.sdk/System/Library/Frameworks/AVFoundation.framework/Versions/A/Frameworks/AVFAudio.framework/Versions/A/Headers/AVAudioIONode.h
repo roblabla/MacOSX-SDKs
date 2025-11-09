@@ -54,7 +54,7 @@ typedef const AudioBufferList * __nullable (^AVAudioIONodeInputBlock)(AVAudioFra
 		In the manual rendering mode, the AVAudioInputNode and AVAudioOutputNode perform the input
 		and output in the engine, in response to client's request.
 */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioIONode : AVAudioNode
 
 /*!	@property presentationLatency
@@ -143,7 +143,7 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(4.0), tvos(11.0))
 		The format of the input scope is initially the same as that of the
 		output, but you may set it to a different format, in which case the node will convert.
 */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioOutputNode : AVAudioIONode
 - (instancetype)init NS_UNAVAILABLE; // fetch instance via -[AVAudioEngine outputNode].
 @end

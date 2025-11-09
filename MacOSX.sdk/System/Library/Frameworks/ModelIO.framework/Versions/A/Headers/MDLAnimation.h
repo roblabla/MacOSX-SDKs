@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <ModelIO/MDLValueTypes.h>
 #import <ModelIO/MDLAnimatedValueTypes.h>
+#import <ModelIO/MDLObject.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +17,12 @@ MDL_EXPORT
 @interface MDLSkeleton : MDLObject<NSCopying>
 
 @property (nonatomic, readonly) NSArray<NSString *> *jointPaths;
+
+ // world space bind transforms
 @property (nonatomic, readonly) MDLMatrix4x4Array *jointBindTransforms;
+
+ // local space default transforms, used for joints not animated in a MDLPackedJointAnimation
+@property (nonatomic, readonly) MDLMatrix4x4Array *jointRestTransforms;
 
 -(instancetype) initWithName:(NSString *)name
                   jointPaths:(NSArray<NSString *> *)jointPaths;
@@ -42,17 +48,15 @@ MDL_EXPORT
 
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 MDL_EXPORT
-@interface MDLAnimationBindComponent : NSObject<MDLNamed, NSCopying, MDLComponent>
+@interface MDLAnimationBindComponent : NSObject<NSCopying, MDLComponent>
 
 @property (nonatomic, nullable, retain) MDLSkeleton* skeleton;
 @property (nonatomic, nullable, retain) id<MDLJointAnimation> jointAnimation;
 
-@property (nonatomic) matrix_float4x4 geometryBindTransform;
+ // optional. If set, jointIndices vertex buffers index into this list of joints.
+@property (nonatomic, nullable, retain) NSArray<NSString *> *jointPaths;
 
--(instancetype) initWithName:(NSString *)name
-                    skeleton:(MDLSkeleton *)skeleton
-              jointAnimation:(id<MDLJointAnimation>)jointAnimation
-       geometryBindTransform:(matrix_float4x4)geometryBindTransform;
+@property (nonatomic) matrix_double4x4 geometryBindTransform;
 @end
 
 

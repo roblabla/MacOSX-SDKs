@@ -120,9 +120,9 @@ enum WSTypeID {
 };
 typedef enum WSTypeID WSTypeID;
 
-typedef CALLBACK_API( void *, WSClientContextRetainCallBackProcPtr )(void * info);
-typedef CALLBACK_API( void , WSClientContextReleaseCallBackProcPtr )(void * info);
-typedef CALLBACK_API( CFStringRef , WSClientContextCopyDescriptionCallBackProcPtr )(void * info);
+typedef void *(*WSClientContextRetainCallBackProcPtr)(void * info) __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
+typedef void (*WSClientContextReleaseCallBackProcPtr)(void * info) __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
+typedef CFStringRef (*WSClientContextCopyDescriptionCallBackProcPtr)(void * info) __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
 /*
  *  WSClientContext
@@ -160,7 +160,7 @@ struct WSClientContext {
    */
   WSClientContextCopyDescriptionCallBackProcPtr  copyDescription;
 };
-typedef struct WSClientContext          WSClientContext;
+typedef struct WSClientContext          WSClientContext __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 /*
     Web Service protocol types.  These constant strings specify the type
     of web service method invocation created.  These are passed to

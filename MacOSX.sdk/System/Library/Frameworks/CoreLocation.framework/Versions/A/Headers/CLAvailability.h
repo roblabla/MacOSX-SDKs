@@ -13,14 +13,7 @@
 */
 
 #import <Availability.h>
-
-#ifndef __TVOS_PROHIBITED
-#define __TVOS_PROHIBITED
-#endif
-
-#ifndef __WATCHOS_PROHIBITED
-#define __WATCHOS_PROHIBITED
-#endif
+#import <os/availability.h>
 
 #ifdef __cplusplus
 #define CL_EXTERN extern "C" __attribute__((visibility ("default")))

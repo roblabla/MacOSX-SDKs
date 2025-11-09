@@ -1,13 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: AABE96F9-263D-3248-9758-4375CE6B3BF0', 'x86_64: B8ECA700-44C3-3DD9-8016-9D9D25224CE6' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: C5308CBC-6736-31A7-905B-C635C6D43FDE' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SecurityHI.framework/Versions/A/SecurityHI
 current-version: 55006
 objc-constraint: none
 parent-umbrella: Carbon
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     allowable-clients: [ AppleShareClient ]
     symbols:         [ _DisposeURLNotifyUPP, _DisposeURLSystemEventUPP, _InvokeURLNotifyUPP, 
                        _InvokeURLSystemEventUPP, _KCAddAppleSharePassword, _KCAddGenericPassword, 

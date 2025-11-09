@@ -102,7 +102,7 @@ TCL_LIB_FLAG='-framework Tcl'
 
 # String to pass to linker to pick up the Tcl library from its
 # build directory.
-TCL_BUILD_LIB_SPEC='-F/BuildRoot/Library/Caches/com.apple.xbs/Binaries/tcl/install/TempContent/Objects/OBJROOT1/tcl/Deployment -framework Tcl'
+TCL_BUILD_LIB_SPEC='-F/Library/Caches/com.apple.xbs/Binaries/tcl/install/TempContent/Objects/OBJROOT1/tcl/Deployment -framework Tcl'
 
 # String to pass to linker to pick up the Tcl library from its
 # installed directory.
@@ -110,7 +110,7 @@ TCL_LIB_SPEC='-F/System/Library/Frameworks -framework Tcl'
 
 # String to pass to the compiler so that an extension can
 # find installed Tcl headers.
-TCL_INCLUDE_SPEC='-I/System/Library/Frameworks/Tcl.framework/Versions/8.5/Headers'
+TCL_INCLUDE_SPEC='-iwithsysroot /System/Library/Frameworks/Tcl.framework/Versions/8.5/Headers'
 
 # Indicates whether a version numbers should be used in -l switches
 # ("ok" means it's safe to use switches like -ltcl7.5;  "nodots" means
@@ -137,7 +137,7 @@ TCL_UNSHARED_LIB_SUFFIX='${VERSION}.a'
 # different place than the directory containing the source files, this
 # points to the location of the sources, not the location where Tcl was
 # compiled.
-TCL_SRC_DIR='/BuildRoot/Library/Caches/com.apple.xbs/Sources/tcl/tcl-118/tcl/tcl'
+TCL_SRC_DIR='/Library/Caches/com.apple.xbs/Sources/tcl/tcl-118.200.2/tcl/tcl'
 
 # List of standard directories in which to look for packages during
 # "package require" commands.  Contains the "prefix" directory plus also
@@ -155,14 +155,14 @@ TCL_STUB_LIB_FLAG='-ltclstub8.5'
 
 # String to pass to linker to pick up the Tcl stub library from its
 # build directory.
-TCL_BUILD_STUB_LIB_SPEC='-L/BuildRoot/Library/Caches/com.apple.xbs/Binaries/tcl/install/TempContent/Objects/OBJROOT1/tcl/Deployment -ltclstub8.5'
+TCL_BUILD_STUB_LIB_SPEC='-L/Library/Caches/com.apple.xbs/Binaries/tcl/install/TempContent/Objects/OBJROOT1/tcl/Deployment -ltclstub8.5'
 
 # String to pass to linker to pick up the Tcl stub library from its
 # installed directory.
 TCL_STUB_LIB_SPEC='-L/System/Library/Frameworks/Tcl.framework/Versions/8.5 -ltclstub8.5'
 
 # Path to the Tcl stub library in the build directory.
-TCL_BUILD_STUB_LIB_PATH='/BuildRoot/Library/Caches/com.apple.xbs/Binaries/tcl/install/TempContent/Objects/OBJROOT1/tcl/Deployment/libtclstub8.5.a'
+TCL_BUILD_STUB_LIB_PATH='/Library/Caches/com.apple.xbs/Binaries/tcl/install/TempContent/Objects/OBJROOT1/tcl/Deployment/libtclstub8.5.a'
 
 # Path to the Tcl stub library in the install directory.
 TCL_STUB_LIB_PATH='/System/Library/Frameworks/Tcl.framework/Versions/8.5/libtclstub8.5.a'

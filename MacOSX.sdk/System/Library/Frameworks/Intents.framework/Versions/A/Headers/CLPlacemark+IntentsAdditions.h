@@ -6,8 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Contacts/CNPostalAddress.h>
 #import <CoreLocation/CLPlacemark.h>
+
+@class CNPostalAddress;
 
 NS_ASSUME_NONNULL_BEGIN
 

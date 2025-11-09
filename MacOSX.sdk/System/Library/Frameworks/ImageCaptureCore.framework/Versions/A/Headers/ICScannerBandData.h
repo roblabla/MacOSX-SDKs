@@ -15,6 +15,7 @@
 
 //------------------------------------------------------------------------------------------------------------ ICScannerBandData
 
+IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 @interface ICScannerBandData : NSObject
 {
     NSUInteger              _fullImageWidth;

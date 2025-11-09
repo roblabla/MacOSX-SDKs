@@ -19,11 +19,12 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
-#if !TARGET_OS_IPHONE
+#if TARGET_OS_OSX
+
 #ifndef __CARBONCORE__
 #include <CarbonCore/CarbonCore.h>
 #endif
-#endif
+#endif // TARGET_OS_OSX
 
 #include <Availability.h>
 
@@ -525,11 +526,8 @@ CF_ASSUME_NONNULL_END
 }
 #endif
 
-
-
 #include <LaunchServices/LSInfoDeprecated.h>
-
-
+	
 
 #endif /* __LSINFO__ */
 

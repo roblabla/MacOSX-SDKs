@@ -33,9 +33,9 @@ enum {
     DOM_CAPTURING_PHASE = 1,
     DOM_AT_TARGET = 2,
     DOM_BUBBLING_PHASE = 3
-} NS_ENUM_AVAILABLE_MAC(10_4);
+} WEBKIT_ENUM_DEPRECATED_MAC(10_4, 10_14);
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMEvent : DOMObject
 @property (readonly, copy) NSString *type;
 @property (readonly, strong) id <DOMEventTarget> target;
@@ -44,15 +44,15 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (readonly) BOOL bubbles;
 @property (readonly) BOOL cancelable;
 @property (readonly) DOMTimeStamp timeStamp;
-@property (readonly, strong) id <DOMEventTarget> srcElement NS_AVAILABLE_MAC(10_6);
-@property BOOL returnValue NS_AVAILABLE_MAC(10_6);
-@property BOOL cancelBubble NS_AVAILABLE_MAC(10_6);
+@property (readonly, strong) id <DOMEventTarget> srcElement WEBKIT_AVAILABLE_MAC(10_6);
+@property BOOL returnValue WEBKIT_AVAILABLE_MAC(10_6);
+@property BOOL cancelBubble WEBKIT_AVAILABLE_MAC(10_6);
 
 - (void)stopPropagation;
 - (void)preventDefault;
-- (void)initEvent:(NSString *)eventTypeArg canBubbleArg:(BOOL)canBubbleArg cancelableArg:(BOOL)cancelableArg NS_AVAILABLE_MAC(10_5);
+- (void)initEvent:(NSString *)eventTypeArg canBubbleArg:(BOOL)canBubbleArg cancelableArg:(BOOL)cancelableArg WEBKIT_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMEvent (DOMEventDeprecated)
-- (void)initEvent:(NSString *)eventTypeArg :(BOOL)canBubbleArg :(BOOL)cancelableArg NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)initEvent:(NSString *)eventTypeArg :(BOOL)canBubbleArg :(BOOL)cancelableArg WEBKIT_DEPRECATED_MAC(10_4, 10_5);
 @end

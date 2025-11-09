@@ -1,6 +1,6 @@
 /* CoreAnimation - CAAnimation.h
 
-   Copyright (c) 2006-2017, Apple Inc.
+   Copyright (c) 2006-2018, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
@@ -11,9 +11,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NSString * CAAnimationCalculationMode NS_STRING_ENUM;
+typedef NSString * CAAnimationRotationMode NS_STRING_ENUM;
+typedef NSString * CATransitionType NS_STRING_ENUM;
+typedef NSString * CATransitionSubtype NS_STRING_ENUM;
+
 /** The base animation class. **/
 
-CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
+API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface CAAnimation : NSObject
     <NSSecureCoding, NSCopying, CAMediaTiming, CAAction>
 {
@@ -71,7 +76,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 
 /** Subclass for property-based animations. **/
 
-CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
+API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface CAPropertyAnimation : CAAnimation
 
 /* Creates a new animation object with its `keyPath' property set to
@@ -110,7 +115,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 
 /** Subclass for basic (single-keyframe) animations. **/
 
-CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
+API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface CABasicAnimation : CAPropertyAnimation
 
 /* The objects defining the property values being interpolated between.
@@ -146,7 +151,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 
 /** General keyframe animation class. **/
 
-CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
+API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface CAKeyframeAnimation : CAPropertyAnimation
 
 /* An array of objects providing the value of the animation function for
@@ -183,7 +188,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * `paced' or `cubicPaced' the `keyTimes' and `timingFunctions'
  * properties of the animation are ignored and calculated implicitly. */
 
-@property(copy) NSString *calculationMode;
+@property(copy) CAAnimationCalculationMode calculationMode;
 
 /* For animations with the cubic calculation modes, these properties
  * provide control over the interpolation scheme. Each keyframe may
@@ -213,33 +218,33 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * no path object is supplied is undefined. `autoReverse' rotates to
  * match the tangent plus 180 degrees. */
 
-@property(nullable, copy) NSString *rotationMode;
+@property(nullable, copy) CAAnimationRotationMode rotationMode;
 
 @end
 
 /* `calculationMode' strings. */
 
-CA_EXTERN NSString * const kCAAnimationLinear
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAAnimationDiscrete
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAAnimationPaced
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAAnimationCubic
-    CA_AVAILABLE_STARTING (10.7, 4.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAAnimationCubicPaced
-    CA_AVAILABLE_STARTING (10.7, 4.0, 9.0, 2.0);
+CA_EXTERN CAAnimationCalculationMode const kCAAnimationLinear
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAAnimationCalculationMode const kCAAnimationDiscrete
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAAnimationCalculationMode const kCAAnimationPaced
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAAnimationCalculationMode const kCAAnimationCubic
+    API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAAnimationCalculationMode const kCAAnimationCubicPaced
+    API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0));
 
 /* `rotationMode' strings. */
 
-CA_EXTERN NSString * const kCAAnimationRotateAuto
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAAnimationRotateAutoReverse
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
+CA_EXTERN CAAnimationRotationMode const kCAAnimationRotateAuto
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CAAnimationRotationMode const kCAAnimationRotateAutoReverse
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /** Subclass for mass-spring animations. */
 
-CA_CLASS_AVAILABLE (10.11, 9.0, 9.0, 2.0)
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface CASpringAnimation : CABasicAnimation
 
 /* The mass of the object attached to the end of the spring. Must be greater
@@ -275,20 +280,20 @@ CA_CLASS_AVAILABLE (10.11, 9.0, 9.0, 2.0)
 
 /** Transition animation subclass. **/
 
-CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
+API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface CATransition : CAAnimation
 
 /* The name of the transition. Current legal transition types include
  * `fade', `moveIn', `push' and `reveal'. Defaults to `fade'. */
 
-@property(copy) NSString *type;
+@property(copy) CATransitionType type;
 
 /* An optional subtype for the transition. E.g. used to specify the
  * transition direction for motion-based transitions, in which case
  * the legal values are `fromLeft', `fromRight', `fromTop' and
  * `fromBottom'. */
 
-@property(nullable, copy) NSString *subtype;
+@property(nullable, copy) CATransitionSubtype subtype;
 
 /* The amount of progress through to the transition at which to begin
  * and end execution. Legal values are numbers in the range [0,1].
@@ -311,30 +316,30 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 
 /* Common transition types. */
 
-CA_EXTERN NSString * const kCATransitionFade
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCATransitionMoveIn
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCATransitionPush
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCATransitionReveal
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
+CA_EXTERN CATransitionType const kCATransitionFade
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CATransitionType const kCATransitionMoveIn
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CATransitionType const kCATransitionPush
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CATransitionType const kCATransitionReveal
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /* Common transition subtypes. */
 
-CA_EXTERN NSString * const kCATransitionFromRight
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCATransitionFromLeft
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCATransitionFromTop
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCATransitionFromBottom
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
+CA_EXTERN CATransitionSubtype const kCATransitionFromRight
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CATransitionSubtype const kCATransitionFromLeft
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CATransitionSubtype const kCATransitionFromTop
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CATransitionSubtype const kCATransitionFromBottom
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 
 /** Animation subclass for grouped animations. **/
 
-CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
+API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface CAAnimationGroup : CAAnimation
 
 /* An array of CAAnimation objects. Each member of the array will run

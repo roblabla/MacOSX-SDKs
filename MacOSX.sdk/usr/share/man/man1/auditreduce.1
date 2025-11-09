@@ -47,6 +47,7 @@
 .Op Fl m Ar event
 .Op Fl o Ar object Ns = Ns Ar value
 .Op Fl r Ar ruid
+.Op Fl U
 .Op Fl u Ar auid
 .Op Fl v
 .Op Ar
@@ -127,6 +128,10 @@ Select records containing the given shared memory ID.
 .El
 .It Fl r Ar ruid
 Select records with the given real user ID or name.
+.It Fl U
+Use unbuffered output. This option is automatically set when the input file
+is a character device (e.g. /dev/auditpipe), allowing records to be fully
+processed as they are generated.
 .It Fl u Ar auid
 Select records with the given audit ID.
 .It Fl v

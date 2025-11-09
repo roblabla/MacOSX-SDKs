@@ -1,7 +1,8 @@
 //
 //  SCNTransaction.h
+//  SceneKit
 //
-//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
+//  Copyright © 2012-2018 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -14,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  * operations into atomic updates. Every
  * modification to the scene graph requires a transaction to be part of. */
 
+SCN_EXPORT
 @interface SCNTransaction : NSObject
 
 /* Begin a new transaction for the current thread; nests. */
@@ -38,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  * property. The default value is nil, when set to a non-nil value any
  * animations added to scene graph will have this value set as their
  * "timingFunction" property. */
-@property(class, nonatomic, copy, nullable) CAMediaTimingFunction *animationTimingFunction __WATCHOS_PROHIBITED;
+@property(class, nonatomic, copy, nullable) CAMediaTimingFunction *animationTimingFunction API_UNAVAILABLE(watchos);
 
 /* Accessors for the "disableActions" per-thread transaction property.
  * Defines whether or not the implicit animations are performed. 

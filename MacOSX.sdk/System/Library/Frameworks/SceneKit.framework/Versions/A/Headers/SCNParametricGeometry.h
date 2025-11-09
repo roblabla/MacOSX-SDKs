@@ -1,7 +1,8 @@
 //
 //  SCNParametricGeometry.h
+//  SceneKit
 //
-//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
+//  Copyright © 2012-2018 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SCNGeometry.h>
@@ -17,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract SCNPlane represents a rectangle with controllable width and height. The plane has one visible side.
  */
 
+SCN_EXPORT
 @interface SCNPlane : SCNGeometry
 
 /*!
@@ -77,6 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract SCNBox represents a box with rectangular sides and optional chamfers.
  */
 
+SCN_EXPORT
 @interface SCNBox : SCNGeometry
 
 /*!
@@ -153,6 +156,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract SCNPyramid represents a right pyramid with a rectangular base.
  */
 
+SCN_EXPORT
 @interface SCNPyramid : SCNGeometry
 
 /*!
@@ -214,6 +218,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract SCNSphere represents a sphere with controllable radius
  */
 
+SCN_EXPORT
 @interface SCNSphere : SCNGeometry
 
 /*!
@@ -252,6 +257,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract SCNCylinder represents a cylinder with controllable height and radius.
  */
 
+SCN_EXPORT
 @interface SCNCylinder : SCNGeometry
 
 /*!
@@ -298,6 +304,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract SCNCone represents a cone with controllable height, top radius and bottom radius.
  */
 
+SCN_EXPORT
 @interface SCNCone : SCNGeometry
 
 /*!
@@ -352,6 +359,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract SCNTube represents a tube with controllable height, inner radius and outer radius.
  */
 
+SCN_EXPORT
 @interface SCNTube : SCNGeometry
 
 /*!
@@ -406,6 +414,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract SCNCapsule represents a capsule with controllable height and cap radius.
  */
 
+SCN_EXPORT
 @interface SCNCapsule : SCNGeometry
 
 /*!
@@ -459,6 +468,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract SCNTorus represents a torus with controllable ring radius and pipe radius.
  */
 
+SCN_EXPORT
 @interface SCNTorus : SCNGeometry
 
 /*!
@@ -505,6 +515,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract SCNFloor represents an infinite plane geometry. 
  */
 
+SCN_EXPORT
 @interface SCNFloor : SCNGeometry 
 
 /*!
@@ -570,6 +581,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract SCNText represents a block of text that has been extruded
  */
 
+SCN_EXPORT
 @interface SCNText : SCNGeometry 
 
 /*!
@@ -594,10 +606,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, copy, nullable) id string;
 
-/*! 
+/*!
  @property font
  @abstract The font used to represent the text.
- @discussion The font property is only used when the string property is not an NSAttributedString. The default value is Helvetica size 36.
+ @discussion The font property is only used when the string property is not an NSAttributedString. Defaults to the system font (12 point).
  */
 @property(nonatomic, retain, null_resettable) NSFont *font;
 
@@ -676,7 +688,7 @@ typedef NS_ENUM(NSInteger, SCNChamferMode) {
  @class SCNShape
  @abstract SCNShape represents a 2D shape (cubic Bezier spline) than can be extruded.
  */
-API_AVAILABLE(macos(10.9))
+SCN_EXPORT API_AVAILABLE(macos(10.9))
 @interface SCNShape : SCNGeometry
 
 /*!

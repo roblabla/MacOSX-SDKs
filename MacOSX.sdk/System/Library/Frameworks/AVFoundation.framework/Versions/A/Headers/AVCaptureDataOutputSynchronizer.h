@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  
     Note that the AVCaptureDataOutputSynchronizer overrides each data output's -setSampleBufferDelegate:queue:, -setDepthDataDelegate:queue:, or -setMetadataObjectsDelegate:queue: method call. -[AVCaptureVideoDataOutput alwaysDiscardsLateVideoFrames] and -[AVCaptureDepthData alwaysDiscardsLateDepthData] properties are honored.
  */
-NS_CLASS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCaptureDataOutputSynchronizer : NSObject
 {
 @private
@@ -97,7 +97,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 
-NS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @protocol AVCaptureDataOutputSynchronizerDelegate <NSObject>
 
 @required
@@ -132,7 +132,7 @@ NS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
  @discussion
     AVCaptureDataOutputSynchronizer's -dataOutputSynchronizer:didOutputSynchronizedDataCollection: delegate method delivers a collection of AVCaptureSynchronizedData objects which can be iterated by use AVCaptureOutput. AVCaptureSynchronizedDataCollection supports object subscripting and fast enumeration of the data outputs as keys.
  */
-NS_CLASS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCaptureSynchronizedDataCollection : NSObject <NSFastEnumeration>
 {
 @private
@@ -194,7 +194,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     AVCaptureDataOutputSynchronizer's -dataOutputSynchronizer:didOutputSynchronizedData: delegate callback delivers a dictionary of key/value pairs, with the keys being the AVCaptureOutput instances returning data, and the values being concrete subclasses of AVCaptureSynchronizedData.
  */
-NS_CLASS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCaptureSynchronizedData : NSObject
 {
 @private
@@ -228,7 +228,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Synchronized sample buffer data is valid for the duration of AVCaptureDataOutputSynchronizer's -dataOutputSynchronizer:didOutputSynchronizedData: delegate callback. To extend the sample buffer data beyond the callback, you must CFRetain it, and later call CFRelease when you're done with it.
  */
-NS_CLASS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCaptureSynchronizedSampleBufferData : AVCaptureSynchronizedData
 {
 @private
@@ -280,7 +280,7 @@ NS_CLASS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
  @discussion
     A single AVCaptureMetadataOutput may be configured to deliver multiple kinds of metadata objects (such as QRCodes and detected faces). AVCaptureSynchronizedMetadataObjectData's -metadataObjects array may contain multiple AVMetadataObject subclasses, depending on how the AVCaptureMetadataOutput was configured. All synchronized metadata objects share a common timestamp.
  */
-NS_CLASS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCaptureSynchronizedMetadataObjectData : AVCaptureSynchronizedData
 {
 @private
@@ -312,7 +312,7 @@ NS_CLASS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
  @discussion
     Depth data, like video, may be dropped if not serviced in a timely fashion.
  */
-NS_CLASS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCaptureSynchronizedDepthData : AVCaptureSynchronizedData
 {
 @private
@@ -325,7 +325,7 @@ NS_CLASS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
     An instance of AVDepthData.
  
  @discussion
-    If depthDataWasDropped is YES, the returned depthData was dropped before it could be delivered to you, and thus this AVDepthDAta is a shell containing format information and calibration data, but no actual pixel map data. This property is never nil. If a data output has no data to return, it is simply not present in the dictionary of synchronized data returned by AVCaptureDataOutputSynchronizer's -dataOutputSynchronizer:didOutputSynchronizedData: delegate callback.
+    If depthDataWasDropped is YES, the returned depthData was dropped before it could be delivered to you, and thus this AVDepthData is a shell containing format information and calibration data, but no actual pixel map data. This property is never nil. If a data output has no data to return, it is simply not present in the dictionary of synchronized data returned by AVCaptureDataOutputSynchronizer's -dataOutputSynchronizer:didOutputSynchronizedData: delegate callback.
  */
 @property(readonly) AVDepthData *depthData;
 

@@ -49,8 +49,8 @@
 #define HostToUSB64 OSSwapHostToLittleInt64
 
 #define StandardUSBBit(bit)                     ((uint32_t)(1) << bit)
-#define StandardUSBBitRange(start, end)         (~(((uint32_t)(1) << start) - 1) & ((uint32_t)(1 << end) | ((uint32_t)(1 << end) - 1)))
-#define StandardUSBBitRange64(start, end)       (~(((uint64_t)(1) << start) - 1) & ((uint64_t)(1 << end) | ((uint64_t)(1 << end) - 1)))
+#define StandardUSBBitRange(start, end)         (~(((uint32_t)(1) << start) - 1) & (((uint32_t)(1) << end) | (((uint32_t)(1) << end) - 1)))
+#define StandardUSBBitRange64(start, end)       (~(((uint64_t)(1) << start) - 1) & (((uint64_t)(1) << end) | (((uint64_t)(1) << end) - 1)))
 #define StandardUSBBitRangePhase(start, end)    (start)
 
 #define kUSB30Bitrate5Gbps  ( 5 * 1000 * 1000 * 1000ULL)
@@ -1251,6 +1251,26 @@ namespace StandardUSB
 
 namespace StandardUSB20
 {
+#pragma mark BESL & HIRD Encodings
+
+    /*!
+     * @brief       BESL Encodings from Table X-X1 in USB 2.0 ECN Errata for Link Power Management
+     * @discussion  This method converts the Best Effort Service Latency Index value used in the USB 2.0 Extension descriptor to Nanoseconds.
+     * @param       beslIndex The BESL Index value used in the USB 2.0 Extension descriptor
+     * @param       beslNs Reference to uint32_t.  As output, it is the converted BESL value in Nanoseconds
+     * @return      result code.  kIOReturnSuccess if the conversion was successful. kIOReturnBadArgument if the input beslIndex is invalid.
+     */
+    IOReturn convertBESLIndexToNs(uint32_t beslIndex, uint32_t& beslNs);
+
+    /*!
+     * @brief       BESL Encodings from Table X-X1 in USB 2.0 ECN Errata for Link Power Management
+     * @discussion  This method does the opposite of convertBESLIndexToUs. It converts the BESL value in Nanoseconds to Index.
+     * @param       beslNs The converted BESL value in Nanoseconds
+     * @param       beslIndex Reference to uint32_t. As output, it is the BESL Index value converted from Nanoseconds.
+     * @return      result code.  kIOReturnSuccess if the conversion was successful. kIOReturnBadArgument if the input beslNs is invalid.
+     */
+    IOReturn convertBESLNsToIndex(uint32_t beslNs, uint32_t &beslIndex);
+
     enum tBusCurrent
     {
         kBusCurrentMinimum       = 100,

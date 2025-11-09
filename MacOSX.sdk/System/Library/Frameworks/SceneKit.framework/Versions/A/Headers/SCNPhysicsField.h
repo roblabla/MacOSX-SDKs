@@ -1,7 +1,8 @@
 //
 //  SCNPhysicsField.h
+//  SceneKit
 //
-//  Copyright (c) 2014-2017 Apple Inc. All rights reserved.
+//  Copyright © 2014-2018 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -23,7 +24,7 @@ typedef NS_ENUM(NSInteger, SCNPhysicsFieldScope) {
  @class SCNPhysicsField
  @abstract SCNPhysicsField is an abstract class that describes a force field that applies in the physics world.
  */
-API_AVAILABLE(macos(10.10))
+SCN_EXPORT API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsField : NSObject <NSCopying, NSSecureCoding>
 
 // The following properties control the behavior of the field

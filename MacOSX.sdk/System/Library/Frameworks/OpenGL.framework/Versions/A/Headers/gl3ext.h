@@ -170,10 +170,10 @@ extern "C" {
 #ifndef GL_ARB_draw_buffers_blend
 #define GL_ARB_draw_buffers_blend 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glBlendEquationiARB (GLuint buf, GLenum mode);
-GLAPI void APIENTRY glBlendEquationSeparateiARB (GLuint buf, GLenum modeRGB, GLenum modeAlpha);
-GLAPI void APIENTRY glBlendFunciARB (GLuint buf, GLenum src, GLenum dst);
-GLAPI void APIENTRY glBlendFuncSeparateiARB (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
+GLAPI void APIENTRY glBlendEquationiARB (GLuint buf, GLenum mode) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI void APIENTRY glBlendEquationSeparateiARB (GLuint buf, GLenum modeRGB, GLenum modeAlpha) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI void APIENTRY glBlendFunciARB (GLuint buf, GLenum src, GLenum dst) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI void APIENTRY glBlendFuncSeparateiARB (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha) OPENGL_DEPRECATED(10.6, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLBLENDEQUATIONIARBPROC) (GLuint buf, GLenum mode);
 typedef void (APIENTRYP PFNGLBLENDEQUATIONSEPARATEIARBPROC) (GLuint buf, GLenum modeRGB, GLenum modeAlpha);
@@ -184,7 +184,7 @@ typedef void (APIENTRYP PFNGLBLENDFUNCSEPARATEIARBPROC) (GLuint buf, GLenum srcR
 #ifndef GL_ARB_instanced_arrays
 #define GL_ARB_instanced_arrays 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glVertexAttribDivisorARB (GLuint index, GLuint divisor);
+GLAPI void APIENTRY glVertexAttribDivisorARB (GLuint index, GLuint divisor) OPENGL_DEPRECATED(10.6, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLVERTEXATTRIBDIVISORARBPROC) (GLuint index, GLuint divisor);
 #endif
@@ -192,7 +192,7 @@ typedef void (APIENTRYP PFNGLVERTEXATTRIBDIVISORARBPROC) (GLuint index, GLuint d
 #ifndef GL_ARB_internalformat_query
 #define GL_ARB_internalformat_query 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glGetInternalformativ (GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint *params);
+GLAPI void APIENTRY glGetInternalformativ (GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint *params) OPENGL_DEPRECATED(10.6, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLGETINTERNALFORMATIVPROC) (GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint *params);
 #endif
@@ -200,7 +200,7 @@ typedef void (APIENTRYP PFNGLGETINTERNALFORMATIVPROC) (GLenum target, GLenum int
 #ifndef GL_ARB_sample_shading
 #define GL_ARB_sample_shading 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glMinSampleShadingARB (GLclampf value);
+GLAPI void APIENTRY glMinSampleShadingARB (GLclampf value) OPENGL_DEPRECATED(10.6, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLMINSAMPLESHADINGARBPROC) (GLclampf value);
 #endif
@@ -208,12 +208,12 @@ typedef void (APIENTRYP PFNGLMINSAMPLESHADINGARBPROC) (GLclampf value);
 #ifndef GL_ARB_shading_language_include
 #define GL_ARB_shading_language_include 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glNamedStringARB (GLenum type, GLint namelen, const GLchar *name, GLint stringlen, const GLchar *string);
-GLAPI void APIENTRY glDeleteNamedStringARB (GLint namelen, const GLchar *name);
-GLAPI void APIENTRY glCompileShaderIncludeARB (GLuint shader, GLsizei count, const GLchar* const *path, const GLint *length);
-GLAPI GLboolean APIENTRY glIsNamedStringARB (GLint namelen, const GLchar *name);
-GLAPI void APIENTRY glGetNamedStringARB (GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string);
-GLAPI void APIENTRY glGetNamedStringivARB (GLint namelen, const GLchar *name, GLenum pname, GLint *params);
+GLAPI void APIENTRY glNamedStringARB (GLenum type, GLint namelen, const GLchar *name, GLint stringlen, const GLchar *string) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI void APIENTRY glDeleteNamedStringARB (GLint namelen, const GLchar *name) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI void APIENTRY glCompileShaderIncludeARB (GLuint shader, GLsizei count, const GLchar* const *path, const GLint *length) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI GLboolean APIENTRY glIsNamedStringARB (GLint namelen, const GLchar *name) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI void APIENTRY glGetNamedStringARB (GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI void APIENTRY glGetNamedStringivARB (GLint namelen, const GLchar *name, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.6, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLNAMEDSTRINGARBPROC) (GLenum type, GLint namelen, const GLchar *name, GLint stringlen, const GLchar *string);
 typedef void (APIENTRYP PFNGLDELETENAMEDSTRINGARBPROC) (GLint namelen, const GLchar *name);
@@ -234,9 +234,9 @@ typedef void (APIENTRYP PFNGLGETNAMEDSTRINGIVARBPROC) (GLint namelen, const GLch
 #ifndef GL_ARB_texture_storage
 #define GL_ARB_texture_storage 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glTexStorage1D (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width);
-GLAPI void APIENTRY glTexStorage2D (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height);
-GLAPI void APIENTRY glTexStorage3D (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth);
+GLAPI void APIENTRY glTexStorage1D (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI void APIENTRY glTexStorage2D (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI void APIENTRY glTexStorage3D (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth) OPENGL_DEPRECATED(10.6, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLTEXSTORAGE1DPROC) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width);
 typedef void (APIENTRYP PFNGLTEXSTORAGE2DPROC) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height);
@@ -246,8 +246,8 @@ typedef void (APIENTRYP PFNGLTEXSTORAGE3DPROC) (GLenum target, GLsizei levels, G
 #ifndef GL_EXT_debug_label
 #define GL_EXT_debug_label 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glLabelObjectEXT (GLenum type, GLuint object, GLsizei length, const GLchar *label);
-GLAPI void APIENTRY glGetObjectLabelEXT (GLenum type, GLuint object, GLsizei bufSize, GLsizei *length, GLchar *label);
+GLAPI void APIENTRY glLabelObjectEXT (GLenum type, GLuint object, GLsizei length, const GLchar *label) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI void APIENTRY glGetObjectLabelEXT (GLenum type, GLuint object, GLsizei bufSize, GLsizei *length, GLchar *label) OPENGL_DEPRECATED(10.6, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLLABELOBJECTEXTPROC) (GLenum type, GLuint object, GLsizei length, const GLchar *label);
 typedef void (APIENTRYP PFNGLGETOBJECTLABELEXTPROC) (GLenum type, GLuint object, GLsizei bufSize, GLsizei *length, GLchar *label);
@@ -256,9 +256,9 @@ typedef void (APIENTRYP PFNGLGETOBJECTLABELEXTPROC) (GLenum type, GLuint object,
 #ifndef GL_EXT_debug_marker
 #define GL_EXT_debug_marker 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glInsertEventMarkerEXT (GLsizei length, const char *marker);
-GLAPI void APIENTRY glPushGroupMarkerEXT (GLsizei length, const char *marker);
-GLAPI void APIENTRY glPopGroupMarkerEXT (void);
+GLAPI void APIENTRY glInsertEventMarkerEXT (GLsizei length, const char *marker) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI void APIENTRY glPushGroupMarkerEXT (GLsizei length, const char *marker) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI void APIENTRY glPopGroupMarkerEXT (void) OPENGL_DEPRECATED(10.6, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLINSERTEVENTMARKEREXTPROC) (GLsizei length, const char *marker);
 typedef void (APIENTRYP PFNGLPUSHGROUPMARKEREXTPROC) (GLsizei length, const char *marker);
@@ -268,7 +268,7 @@ typedef void (APIENTRYP PFNGLPOPGROUPMARKEREXTPROC) (void);
 #ifndef GL_EXT_depth_bounds_test
 #define GL_EXT_depth_bounds_test 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glDepthBoundsEXT (GLclampd zmin, GLclampd zmax);
+GLAPI void APIENTRY glDepthBoundsEXT (GLclampd zmin, GLclampd zmax) OPENGL_DEPRECATED(10.6, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLDEPTHBOUNDSEXTPROC) (GLclampd zmin, GLclampd zmax);
 #endif
@@ -304,9 +304,9 @@ typedef void (APIENTRYP PFNGLDEPTHBOUNDSEXTPROC) (GLclampd zmin, GLclampd zmax);
 #ifndef GL_APPLE_flush_render
 #define GL_APPLE_flush_render 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glFlushRenderAPPLE (void);
-GLAPI void APIENTRY glFinishRenderAPPLE (void);
-GLAPI void APIENTRY glSwapAPPLE (void);
+GLAPI void APIENTRY glFlushRenderAPPLE (void) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI void APIENTRY glFinishRenderAPPLE (void) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI void APIENTRY glSwapAPPLE (void) OPENGL_DEPRECATED(10.6, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLFLUSHRENDERAPPLEPROC) (void);
 typedef void (APIENTRYP PFNGLFINISHRENDERAPPLEPROC) (void);
@@ -316,9 +316,9 @@ typedef void (APIENTRYP PFNGLSWAPAPPLEPROC) (void);
 #ifndef GL_APPLE_object_purgeable
 #define GL_APPLE_object_purgeable 1
 #ifdef GL3_PROTOTYPES
-GLAPI GLenum APIENTRY glObjectPurgeableAPPLE (GLenum objectType, GLuint name, GLenum option);
-GLAPI GLenum APIENTRY glObjectUnpurgeableAPPLE (GLenum objectType, GLuint name, GLenum option);
-GLAPI void APIENTRY glGetObjectParameterivAPPLE (GLenum objectType, GLuint name, GLenum pname, GLint *params);
+GLAPI GLenum APIENTRY glObjectPurgeableAPPLE (GLenum objectType, GLuint name, GLenum option) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI GLenum APIENTRY glObjectUnpurgeableAPPLE (GLenum objectType, GLuint name, GLenum option) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI void APIENTRY glGetObjectParameterivAPPLE (GLenum objectType, GLuint name, GLenum pname, GLint *params) OPENGL_DEPRECATED(10.6, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef GLenum (APIENTRYP PFNGLOBJECTPURGEABLEAPPLEPROC) (GLenum objectType, GLuint name, GLenum option);
 typedef GLenum (APIENTRYP PFNGLOBJECTUNPURGEABLEAPPLEPROC) (GLenum objectType, GLuint name, GLenum option);
@@ -336,8 +336,8 @@ typedef void (APIENTRYP PFNGLGETOBJECTPARAMETERIVAPPLEPROC) (GLenum objectType, 
 #ifndef GL_APPLE_texture_range
 #define GL_APPLE_texture_range 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glTextureRangeAPPLE (GLenum target, GLsizei length, const GLvoid *pointer);
-GLAPI void APIENTRY glGetTexParameterPointervAPPLE (GLenum target, GLenum pname, GLvoid **params);
+GLAPI void APIENTRY glTextureRangeAPPLE (GLenum target, GLsizei length, const GLvoid *pointer) OPENGL_DEPRECATED(10.6, 10.14);
+GLAPI void APIENTRY glGetTexParameterPointervAPPLE (GLenum target, GLenum pname, GLvoid **params) OPENGL_DEPRECATED(10.6, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLTEXTURERANGEAPPLEPROC) (GLenum target, GLsizei length, const GLvoid *pointer);
 typedef void (APIENTRYP PFNGLGETTEXPARAMETERPOINTERVAPPLEPROC) (GLenum target, GLenum pname, GLvoid **params);
@@ -350,7 +350,7 @@ typedef void (APIENTRYP PFNGLGETTEXPARAMETERPOINTERVAPPLEPROC) (GLenum target, G
 #ifndef GL_NV_texture_barrier
 #define GL_NV_texture_barrier 1
 #ifdef GL3_PROTOTYPES
-GLAPI void APIENTRY glTextureBarrierNV (void);
+GLAPI void APIENTRY glTextureBarrierNV (void) OPENGL_DEPRECATED(10.6, 10.14);
 #endif /* GL3_PROTOTYPES */
 typedef void (APIENTRYP PFNGLTEXTUREBARRIERNVPROC) (void);
 #endif

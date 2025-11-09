@@ -15,3 +15,5 @@
 #endif
 
 #define MK_CLASS_AVAILABLE(_macIntro, _iphoneIntro) __attribute__((visibility("default"))) NS_CLASS_AVAILABLE(_macIntro, _iphoneIntro)
+
+#define MK_SUPPORTS_VIEW_CLASSES (__has_include(<UIKit/UIView.h>) || !TARGET_OS_IPHONE)

@@ -74,5 +74,7 @@
 #include <mach/boolean.h>
 #include <mach/vm_prot.h>
 
+#include <kern/trustcache.h>
+
 
 #endif	/* _VM_PMAP_H_ */

@@ -23,8 +23,10 @@ API_DEPRECATED_WITH_REPLACEMENT("CKDiscoverUserIdentitiesOperation", macos(10.10
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
-/*  This block is called when the operation completes.
-    The [NSOperation completionBlock] will also be called if both are set. */
+/*! @abstract This block is called when the operation completes.
+ *
+ *  @discussion The [NSOperation completionBlock] will also be called if both are set.
+ */
 @property (nonatomic, copy, nullable) void (^discoverUserInfosCompletionBlock)(NSDictionary<NSString *, CKDiscoveredUserInfo *> * _Nullable emailsToUserInfos, NSDictionary<CKRecordID *, CKDiscoveredUserInfo *> * _Nullable userRecordIDsToUserInfos, NSError * _Nullable operationError);
 
 #pragma clang diagnostic pop

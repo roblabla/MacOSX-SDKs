@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 22CA76FC-19A7-3F8F-9388-F16ECDAADB38' ]
+uuids:           [ 'x86_64: BB70D02C-CDEC-3E7C-8FC2-FA00E70DC97E' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Quagga.framework/Versions/A/Quagga
 exports:         
@@ -15,8 +15,8 @@ exports:
                        _ACBSCreateSymbolDescriptorFromBasicDescriptorWithDefaultPayloadEncoding_Local, 
                        _ACBSCreateSymbolDescriptorFromBasicDescriptorWithDefaultPayloadEncoding_Remote, 
                        _ACBSCreateSymbolDescriptorFromBasicDescriptor_Remote, _CreateGTIN13RepresentationFromCode, 
-                       __ACBSConfigSetExplicitTypeMask, __CreateFrameInfoBySearchingForBarcodesInBitmapBuffer, 
-                       __CreateFrameInfoBySearchingForBarcodesInBitmapBufferPyramid, 
+                       _Quagga_framework_build_date, _Quagga_version, __ACBSConfigSetExplicitTypeMask, 
+                       __CreateFrameInfoBySearchingForBarcodesInBitmapBuffer, __CreateFrameInfoBySearchingForBarcodesInBitmapBufferPyramid, 
                        _kACBarcodeDescriptionAcceptanceThreshold, _kACBarcodeDescriptionAztecDataCodewords, 
                        _kACBarcodeDescriptionAztecDataLayers, _kACBarcodeDescriptionAztecIsCompact, 
                        _kACBarcodeDescriptionAztecMessageBits, _kACBarcodeDescriptionCodeProperties, 

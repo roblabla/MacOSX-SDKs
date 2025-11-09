@@ -6,6 +6,9 @@
 //
 
 #import <MapKit/MKFoundation.h>
+
+#if __has_include(<UIKit/UIView.h>) || !TARGET_OS_IPHONE
+
 #import <MapKit/MKGeometry.h>
 #import <MapKit/MKTypes.h>
 #import <MapKit/MKMapView.h>
@@ -28,6 +31,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) __WATCHOS_PROHIBITED
 @property (nonatomic, assign) CGSize size;
 #else
 @property (nonatomic, assign) NSSize size;
+@property (nonatomic, nullable, strong) NSAppearance *appearance API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios, tvos, watchos);
 #endif
 
 #if TARGET_OS_IPHONE
@@ -38,3 +42,5 @@ NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) __WATCHOS_PROHIBITED
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

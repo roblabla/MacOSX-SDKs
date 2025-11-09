@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Apple Inc.
+ * Copyright (c) 2015, 2018 Apple Inc.
  * All rights reserved.
  */
 
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NETunnelProviderManager : NEVPNManager
 
 /*!
@@ -35,19 +35,19 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @discussion This function asynchronously reads all of the NETunnelProvider configurations created by the calling app that have previously been saved to disk and returns them as NETunnelProviderManager objects.
  * @param completionHandler A block that takes an array NETunnelProviderManager objects. The array passed to the block may be empty if no NETunnelProvider configurations were successfully read from the disk.  The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
  */
-+ (void)loadAllFromPreferencesWithCompletionHandler:(void (^)(NSArray<NETunnelProviderManager *> * __nullable managers, NSError * __nullable error))completionHandler NS_AVAILABLE(10_11, 9_0);
++ (void)loadAllFromPreferencesWithCompletionHandler:(void (^)(NSArray<NETunnelProviderManager *> * __nullable managers, NSError * __nullable error))completionHandler API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method copyAppRules
  * @discussion This function returns an array of NEAppRule objects.
  */
-- (nullable NSArray<NEAppRule *> *)copyAppRules NS_AVAILABLE(10_11, 9_0);
+- (nullable NSArray<NEAppRule *> *)copyAppRules API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property routingMethod
  * @discussion The method by which network traffic is routed to the tunnel. The default is NETunnelProviderRoutingMethodDestinationIP.
  */
-@property (readonly) NETunnelProviderRoutingMethod routingMethod NS_AVAILABLE(10_11, 9_0);
+@property (readonly) NETunnelProviderRoutingMethod routingMethod API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

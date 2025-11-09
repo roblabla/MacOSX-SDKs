@@ -1,13 +1,12 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 785B622B-8F7D-3B4D-83AF-EB98CB79FFF6' ]
+uuids:           [ 'x86_64: AEF88F43-C928-3DCB-95D6-C6706B565422' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CoreOptimization.framework/Versions/A/CoreOptimization
 objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _CoreOptimizationVersionNumber, _CoreOptimizationVersionString, 
-                       __Z15GradientDescentRNSt3__18valarrayIdEEN16CoreOptimization17ObjectiveFunctionEi, 
+    symbols:         [ __Z15GradientDescentRNSt3__18valarrayIdEEN16CoreOptimization17ObjectiveFunctionEi, 
                        __Z4normRKN16CoreOptimization10gradient_tE, __ZN16CoreOptimization4BFGS11GetSolutionEv, 
                        __ZN16CoreOptimization4BFGS13UpdateHessianERNS_9hessian_tERKNSt3__18valarrayIdEES7_, 
                        __ZN16CoreOptimization4BFGS16UpdateHessianInvERNS_9hessian_tERKNSt3__18valarrayIdEES7_, 

@@ -34,8 +34,4 @@
 
 #endif /* __OBJC__ */
 
-#if __METAL_MACOS__ || __METAL_IOS__
-
 #import <CoreImage/CIKernelMetalLib.h>
-
-#endif /* __METAL_MACOS__ || __METAL_IOS__ */

@@ -134,7 +134,7 @@ __BEGIN_DECLS
 
 // 5c8187d0-9ef3-11d4-8b45-000a27052861
 /*!
-    @defined kIOUSBDeviceInterfaceID
+    @defined kIOUSBDeviceInterfaceID100
     @discussion This UUID constant is used to obtain a device interface corresponding 
     to an IOUSBDevice user client in the kernel. The type of this device interface is 
     IOUSBDeviceInterface. This device interface is obtained after the device interface for 
@@ -154,51 +154,14 @@ __BEGIN_DECLS
     IOReturn                    err;
     
     err = (*iodev)->QueryInterface(iodev,
-                                    CFUUIDGetUUIDBytes(kIOUSBDeviceInterfaceID),
+                                    CFUUIDGetUUIDBytes(kIOUSBDeviceInterfaceID100),
                                     (LPVoid)&dev);
     @/textblock
     </pre>
 */
-#define kIOUSBDeviceInterfaceID CFUUIDGetConstantUUIDWithBytes(NULL,	\
+#define kIOUSBDeviceInterfaceID100 CFUUIDGetConstantUUIDWithBytes(NULL,	\
     0x5c, 0x81, 0x87, 0xd0, 0x9e, 0xf3, 0x11, 0xD4,			\
     0x8b, 0x45, 0x00, 0x0a, 0x27, 0x05, 0x28, 0x61)
-
-
-
-
-
-// 73c97ae8-9ef3-11d4-b1d0-000a27052861
-/*!
-    @defined kIOUSBInterfaceInterfaceID
-    @discussion This UUID constant is used to obtain a device interface corresponding 
-    to an IOUSBInterface user client in the kernel. The type of this device interface 
-    is IOUSBInterfaceInterface. This device interface is obtained after the device interface 
-    for the service itself has been obtained.
-    
-    <b>Note:</b> The IOUSBInterfaceInterface is returned by all versions of the IOUSBFamily 
-    currently shipping. However, there are some functions which are available only in 
-    IOUSBFamily version 1.8.2 and above. Access to these functions, as well as to all of the functions 
-    contained in IOUSBInterfaceInterface, can be obtained by using one of the other UUIDs listed in this header.
-    
-    Example:
-    <pre>
-    @textblock
-    IOCFPluginInterface		**iodev; 	// obtained earlier
-    
-    IOUSBInterfaceInterface	**intf;		// fetching this now
-    IOReturn                    err;
-    
-    err = (*iodev)->QueryInterface(iodev,
-                                CFUUIDGetUUIDBytes(kIOUSBInterfaceInterfaceID),
-                                (LPVoid)&intf);
-    @/textblock
-    </pre>
-*/
-#define kIOUSBInterfaceInterfaceID CFUUIDGetConstantUUIDWithBytes(NULL,	\
-    0x73, 0xc9, 0x7a, 0xe8, 0x9e, 0xf3, 0x11, 0xD4,			\
-    0xb1, 0xd0, 0x00, 0x0a, 0x27, 0x05, 0x28, 0x61)
-
-
 
 
 
@@ -485,6 +448,85 @@ __BEGIN_DECLS
 #define kIOUSBDeviceInterfaceID650 CFUUIDGetConstantUUIDWithBytes(kCFAllocatorSystemDefault, 	\
 0x4A, 0xAC, 0x1B, 0x2E, 0x24, 0xC2, 0x47, 0x6A, 												\
 0x96, 0x4D, 0x91, 0x33, 0x35, 0x34, 0xF2, 0xCC)
+
+
+
+
+
+// 56AD089D-878D-4BEA-A1F5-2C8DC43E8A98
+/*!
+ @defined kIOUSBDeviceInterfaceID942
+ @discussion This UUID constant is used to obtain a device interface corresponding to
+ an IOUSBDevice user client in the kernel. The type of this device interface is
+ IOUSBDeviceInterface942. This device interface is obtained after the device interface for
+ the service itself has been obtained.
+
+ <b>Note:</b> The IOUSBDeviceInterface650 is returned only by version 900.4.2 or above of the
+ IOUSBFamily. This version of IOUSBFamily shipped with Mac OS X version 10.14 If your software
+ is running on an earlier version of Mac OS X you will need to use UUID kIOUSBDeviceInterfaceID,
+ kIOUSBDeviceInterfaceID182, kIOUSBDeviceInterfaceID187, kIOUSBDeviceInterfaceID197, kIOUSBDeviceInterfaceID245, kIOUSBDeviceInterfaceID300,
+ kIOUSBDeviceInterfaceID320 or kIOUSBDeviceInterfaceID500, kIOUSBDeviceInterfaceID650 and you will not have access to some functions.
+
+ Example:
+ <pre>
+ @textblock
+ IOCFPluginInterface        **iodev;     // obtained earlier
+
+ IOUSBDeviceInterface942    **dev;        // fetching this now
+ IOReturn                    err;
+
+ err = (*iodev)->QueryInterface(iodev,
+ CFUUIDGetUUIDBytes(kIOUSBDeviceInterfaceID942),
+ (LPVoid)&dev);
+ @/textblock
+ </pre>
+ */
+#define kIOUSBDeviceInterfaceID942 CFUUIDGetConstantUUIDWithBytes(kCFAllocatorSystemDefault,     \
+0x56, 0xAD, 0x08, 0x9D, 0x87, 0x8D, 0x4B, 0xEA,                                                  \
+0xA1, 0xF5, 0x2C, 0x8D, 0xC4, 0x3E, 0x8A, 0x98)
+
+
+
+
+
+
+// The preferred interface ID is the newest version
+#define kIOUSBDeviceInterfaceID kIOUSBDeviceInterfaceID942
+
+
+
+
+
+// 73c97ae8-9ef3-11d4-b1d0-000a27052861
+/*!
+ @defined kIOUSBInterfaceInterfaceID100
+ @discussion This UUID constant is used to obtain a device interface corresponding
+ to an IOUSBInterface user client in the kernel. The type of this device interface
+ is IOUSBInterfaceInterface. This device interface is obtained after the device interface
+ for the service itself has been obtained.
+
+ <b>Note:</b> The IOUSBInterfaceInterface is returned by all versions of the IOUSBFamily
+ currently shipping. However, there are some functions which are available only in
+ IOUSBFamily version 1.8.2 and above. Access to these functions, as well as to all of the functions
+ contained in IOUSBInterfaceInterface, can be obtained by using one of the other UUIDs listed in this header.
+
+ Example:
+ <pre>
+ @textblock
+ IOCFPluginInterface        **iodev;     // obtained earlier
+
+ IOUSBInterfaceInterface    **intf;        // fetching this now
+ IOReturn                    err;
+
+ err = (*iodev)->QueryInterface(iodev,
+ CFUUIDGetUUIDBytes(kIOUSBInterfaceInterfaceID100),
+ (LPVoid)&intf);
+ @/textblock
+ </pre>
+ */
+#define kIOUSBInterfaceInterfaceID100 CFUUIDGetConstantUUIDWithBytes(NULL,    \
+0x73, 0xc9, 0x7a, 0xe8, 0x9e, 0xf3, 0x11, 0xD4,            \
+0xb1, 0xd0, 0x00, 0x0a, 0x27, 0x05, 0x28, 0x61)
 
 
 
@@ -954,6 +996,49 @@ __BEGIN_DECLS
 #define kIOUSBInterfaceInterfaceID800 CFUUIDGetConstantUUIDWithBytes(kCFAllocatorSystemDefault, \
 0x33, 0xA8, 0x5D, 0xB0, 0x0C, 0x3B, 0x43, 0x28,                                                 \
 0x8F, 0x02, 0xFD, 0xA8, 0x1B, 0x11, 0x7F, 0x4C)
+
+// 8752663B-C07B-4BAE-9584-22032FAB9C5A
+/*!
+ @defined kIOUSBInterfaceInterfaceID942
+ @discussion This UUID constant is used to obtain an interface interface corresponding to
+ an IOUSBInterface user client in the kernel. The type of this device interface is
+ kIOUSBInterfaceInterfaceID942. This device interface is obtained after the device interface
+ for the service itself has been obtained.
+
+ <b>Note:</b> The kIOUSBInterfaceInterfaceID942 is returned only by version 900.4.2 or above of
+ the IOUSBFamily. This version of IOUSBFamily shipped with Mac OS X version 10.14.  If your software
+ is running on a version of Mac OS X prior to 10.14 you will need to use the UUID kIOUSBInterfaceInterfaceID,
+ kIOUSBInterfaceInterfaceID182, kIOUSBInterfaceInterfaceID183, kIOUSBInterfaceInterfaceID190, kIOUSBInterfaceInterfaceID192,
+ kIOUSBInterfaceInterfaceID197, kIOUSBInterfaceInterfaceID220, kIOUSBInterfaceInterfaceID245, kIOUSBInterfaceInterfaceID300,
+ kIOUSBInterfaceInterfaceID500, kIOUSBInterfaceInterfaceID550 , kIOUSBInterfaceInterfaceID650, kIOUSBInterfaceInterfaceID700, or kIOUSBInterfaceInterfaceID800 and you will not have access to some functions.
+
+ Example:
+ <pre>
+ @textblock
+ IOCFPluginInterface             **iodev;     // obtained earlier
+
+ IOUSBInterfaceInterface942      **intf;     // fetching this now
+ IOReturn                        err;
+
+ err = (*iodev)->QueryInterface(iodev,
+ CFUUIDGetUUIDBytes(kIOUSBInterfaceInterfaceID942),
+ (LPVoid)&intf);
+ @/textblock
+ </pre>
+ */
+
+#define kIOUSBInterfaceInterfaceID942 CFUUIDGetConstantUUIDWithBytes(kCFAllocatorSystemDefault, \
+0x87, 0x52, 0x66, 0x3B, 0xC0, 0x7B, 0x4B, 0xAE,                                                 \
+0x95, 0x84, 0x22, 0x03, 0x2F, 0xAB, 0x9C, 0x5A)
+
+
+
+// The preferred interface ID is the newest version
+#define kIOUSBInterfaceInterfaceID kIOUSBInterfaceInterfaceID942
+
+
+
+
 
 /*!
  @interface IOUSBDeviceInterface
@@ -1995,7 +2080,74 @@ typedef struct IOUSBDeviceStruct650 {
 
 } IOUSBDeviceInterface650;
 
+/*!
+ @interface IOUSBDeviceInterface942
+ @abstract   The object you use to access USB devices from user space, returned by the IOUSBFamily version 900.4.2 and above.
+ @discussion The functions listed here include all of the functions defined for the IOUSBDeviceInterface,
+ IOUSBDeviceInterface182, IOUSBDeviceInterface187, IOUSBDeviceInterface197, IOUSBDeviceInterface245, IOUSBDeviceInterface300,
+ IOUSBDeviceInterface320, IOUSBDeviceInterface500, IOUSBDeviceInterface942, or IOUSBDeviceInterface942
+ and some new functions that are available on Mac OS X version 10.14 and later.
+ @super IOUSBDeviceInterface650
+ */
 
+typedef struct IOUSBDeviceStruct942 {
+    IUNKNOWN_C_GUTS;
+    IOReturn (*CreateDeviceAsyncEventSource)(void *self, CFRunLoopSourceRef *source);
+    CFRunLoopSourceRef (*GetDeviceAsyncEventSource)(void *self);
+    IOReturn (*CreateDeviceAsyncPort)(void *self, mach_port_t *port);
+    mach_port_t (*GetDeviceAsyncPort)(void *self);
+    IOReturn (*USBDeviceOpen)(void *self);
+    IOReturn (*USBDeviceClose)(void *self);
+    IOReturn (*GetDeviceClass)(void *self, UInt8 *devClass);
+    IOReturn (*GetDeviceSubClass)(void *self, UInt8 *devSubClass);
+    IOReturn (*GetDeviceProtocol)(void *self, UInt8 *devProtocol);
+    IOReturn (*GetDeviceVendor)(void *self, UInt16 *devVendor);
+    IOReturn (*GetDeviceProduct)(void *self, UInt16 *devProduct);
+    IOReturn (*GetDeviceReleaseNumber)(void *self, UInt16 *devRelNum);
+    IOReturn (*GetDeviceAddress)(void *self, USBDeviceAddress *addr);
+    IOReturn (*GetDeviceBusPowerAvailable)(void *self, UInt32 *powerAvailable);
+    IOReturn (*GetDeviceSpeed)(void *self, UInt8 *devSpeed);
+    IOReturn (*GetNumberOfConfigurations)(void *self, UInt8 *numConfig);
+    IOReturn (*GetLocationID)(void *self, UInt32 *locationID);
+    IOReturn (*GetConfigurationDescriptorPtr)(void *self, UInt8 configIndex, IOUSBConfigurationDescriptorPtr *desc);
+    IOReturn (*GetConfiguration)(void *self, UInt8 *configNum);
+    IOReturn (*SetConfiguration)(void *self, UInt8 configNum);
+    IOReturn (*GetBusFrameNumber)(void *self, UInt64 *frame, AbsoluteTime *atTime);
+    IOReturn (*ResetDevice)(void *self);
+    IOReturn (*DeviceRequest)(void *self, IOUSBDevRequest *req);
+    IOReturn (*DeviceRequestAsync)(void *self, IOUSBDevRequest *req, IOAsyncCallback1 callback, void *refCon);
+    IOReturn (*CreateInterfaceIterator)(void *self, IOUSBFindInterfaceRequest *req, io_iterator_t *iter);
+    IOReturn (*USBDeviceOpenSeize)(void *self);
+    IOReturn (*DeviceRequestTO)(void *self, IOUSBDevRequestTO *req);
+    IOReturn (*DeviceRequestAsyncTO)(void *self, IOUSBDevRequestTO *req, IOAsyncCallback1 callback, void *refCon);
+    IOReturn (*USBDeviceSuspend)(void *self, Boolean suspend);
+    IOReturn (*USBDeviceAbortPipeZero)(void *self);
+    IOReturn (*USBGetManufacturerStringIndex)(void *self, UInt8 *msi);
+    IOReturn (*USBGetProductStringIndex)(void *self, UInt8 *psi);
+    IOReturn (*USBGetSerialNumberStringIndex)(void *self, UInt8 *snsi);
+    IOReturn (*USBDeviceReEnumerate)(void *self, UInt32 options);
+    IOReturn (*GetBusMicroFrameNumber)(void *self, UInt64 *microFrame, AbsoluteTime *atTime);
+    IOReturn (*GetIOUSBLibVersion)(void *self, NumVersion *ioUSBLibVersion, NumVersion *usbFamilyVersion);
+    IOReturn (*GetBusFrameNumberWithTime)(void *self, UInt64 *frame, AbsoluteTime *atTime);
+    IOReturn (*GetUSBDeviceInformation)(void *self, UInt32 *info);
+    IOReturn (*RequestExtraPower)(void *self, UInt32 type, UInt32 requestedPower, UInt32 *powerAvailable);
+    IOReturn (*ReturnExtraPower)(void *self, UInt32 type, UInt32 powerReturned);
+    IOReturn (*GetExtraPowerAllocated)(void *self, UInt32 type, UInt32 *powerAllocated);
+    IOReturn (*GetBandwidthAvailableForDevice)(void *self, UInt32 *bandwidth);
+    IOReturn (*SetConfigurationV2)(void *self, UInt8 configNum, bool startInterfaceMatching, bool issueRemoteWakeup);
+    IOReturn (*RegisterForNotification)(void * self, UInt64 notificationMask, IOAsyncCallback2 callback, void *refCon, UInt64 *pRegistrationToken);
+    IOReturn (*UnregisterNotification)(void *self, UInt64 registrationToken);
+    IOReturn (*AcknowledgeNotification)(void *self, UInt64 notificationToken);
+
+    /*!
+     @function   GetDeviceAsyncNotificationPort
+     @abstract   Returns the IONotificationPort for this IOService instance.
+     @availability This function is only available with IOUSBDeviceInterface942 and above.
+     @param      self Pointer to the IOUSBDeviceInterface.
+     @result     Returns the IONotificationPortRef if one exists, MACH_PORT_NULL otherwise.
+     */
+    IONotificationPortRef (* GetDeviceAsyncNotificationPort)(void* self);
+} IOUSBDeviceInterface942;
 
 
 
@@ -4274,6 +4426,108 @@ typedef struct IOUSBInterfaceStruct800 {
     IOReturn (*SetPipeIdlePolicy)(void* self, UInt8 pipeRef, UInt32 ioIdleTimeout);
 
 } IOUSBInterfaceInterface800;
+
+/*!
+ @interface IOUSBInterfaceInterface942
+ @abstract   The object you use to access a USB interface interface from user space, returned by the IOUSBFamily
+ version 900.4.2 and above.
+ @discussion The functions listed here include all of the functions defined for the IOUSBInterfaceInterface,
+ IOUSBInterfaceInterface182, IOUSBInterfaceInterface183, IOUSBInterfaceInterface190, IOUSBInterfaceInterface192,
+ IOUSBInterfaceInterface197, IOUSBInterfaceInterface220, IOUSBInterfaceInterface245, IOUSBInterfaceInterface300,
+ IOUSBInterfaceInterface500, IOUSBInterfaceInterface550 and IOUSBInterfaceInterface650, IOUSBInterfaceInterface700, IOUSBInterfaceInterface800 as well as some new functions that are available on
+ Mac OS X version 10.14 and later.
+ @super IOUSBInterfaceInterface942
+ */
+
+typedef struct IOUSBInterfaceStruct942 {
+    IUNKNOWN_C_GUTS;
+    IOReturn (*CreateInterfaceAsyncEventSource)(void *self, CFRunLoopSourceRef *source);
+    CFRunLoopSourceRef (*GetInterfaceAsyncEventSource)(void *self);
+    IOReturn (*CreateInterfaceAsyncPort)(void *self, mach_port_t *port);
+    mach_port_t (*GetInterfaceAsyncPort)(void *self);
+    IOReturn (*USBInterfaceOpen)(void *self);
+    IOReturn (*USBInterfaceClose)(void *self);
+    IOReturn (*GetInterfaceClass)(void *self, UInt8 *intfClass);
+    IOReturn (*GetInterfaceSubClass)(void *self, UInt8 *intfSubClass);
+    IOReturn (*GetInterfaceProtocol)(void *self, UInt8 *intfProtocol);
+    IOReturn (*GetDeviceVendor)(void *self, UInt16 *devVendor);
+    IOReturn (*GetDeviceProduct)(void *self, UInt16 *devProduct);
+    IOReturn (*GetDeviceReleaseNumber)(void *self, UInt16 *devRelNum);
+    IOReturn (*GetConfigurationValue)(void *self, UInt8 *configVal);
+    IOReturn (*GetInterfaceNumber)(void *self, UInt8 *intfNumber);
+    IOReturn (*GetAlternateSetting)(void *self, UInt8 *intfAltSetting);
+    IOReturn (*GetNumEndpoints)(void *self, UInt8 *intfNumEndpoints);
+    IOReturn (*GetLocationID)(void *self, UInt32 *locationID);
+    IOReturn (*GetDevice)(void *self, io_service_t *device);
+    IOReturn (*SetAlternateInterface)(void *self, UInt8 alternateSetting);
+    IOReturn (*GetBusFrameNumber)(void *self, UInt64 *frame, AbsoluteTime *atTime);
+    IOReturn (*ControlRequest)(void *self, UInt8 pipeRef, IOUSBDevRequest *req);
+    IOReturn (*ControlRequestAsync)(void *self, UInt8 pipeRef, IOUSBDevRequest *req, IOAsyncCallback1 callback, void *refCon);
+    IOReturn (*GetPipeProperties)(void *self, UInt8 pipeRef, UInt8 *direction, UInt8 *number, UInt8 *transferType, UInt16 *maxPacketSize, UInt8 *interval);
+    IOReturn (*GetPipeStatus)(void *self, UInt8 pipeRef);
+    IOReturn (*AbortPipe)(void *self, UInt8 pipeRef);
+    IOReturn (*ResetPipe)(void *self, UInt8 pipeRef);
+    IOReturn (*ClearPipeStall)(void *self, UInt8 pipeRef);
+    IOReturn (*ReadPipe)(void *self, UInt8 pipeRef, void *buf, UInt32 *size);
+    IOReturn (*WritePipe)(void *self, UInt8 pipeRef, void *buf, UInt32 size);
+    IOReturn (*ReadPipeAsync)(void *self, UInt8 pipeRef, void *buf, UInt32 size, IOAsyncCallback1 callback, void *refcon);
+    IOReturn (*WritePipeAsync)(void *self, UInt8 pipeRef, void *buf, UInt32 size, IOAsyncCallback1 callback, void *refcon);
+    IOReturn (*ReadIsochPipeAsync)(void *self, UInt8 pipeRef, void *buf, UInt64 frameStart, UInt32 numFrames, IOUSBIsocFrame *frameList,
+                                   IOAsyncCallback1 callback, void *refcon);
+    IOReturn (*WriteIsochPipeAsync)(void *self, UInt8 pipeRef, void *buf, UInt64 frameStart, UInt32 numFrames, IOUSBIsocFrame *frameList,
+                                    IOAsyncCallback1 callback, void *refcon);
+    IOReturn (*ControlRequestTO)(void *self, UInt8 pipeRef, IOUSBDevRequestTO *req);
+    IOReturn (*ControlRequestAsyncTO)(void *self, UInt8 pipeRef, IOUSBDevRequestTO *req, IOAsyncCallback1 callback, void *refCon);
+    IOReturn (*ReadPipeTO)(void *self, UInt8 pipeRef, void *buf, UInt32 *size, UInt32 noDataTimeout, UInt32 completionTimeout);
+    IOReturn (*WritePipeTO)(void *self, UInt8 pipeRef, void *buf, UInt32 size, UInt32 noDataTimeout, UInt32 completionTimeout);
+    IOReturn (*ReadPipeAsyncTO)(void *self, UInt8 pipeRef, void *buf, UInt32 size, UInt32 noDataTimeout, UInt32 completionTimeout, IOAsyncCallback1 callback, void *refcon);
+    IOReturn (*WritePipeAsyncTO)(void *self, UInt8 pipeRef, void *buf, UInt32 size, UInt32 noDataTimeout, UInt32 completionTimeout, IOAsyncCallback1 callback, void *refcon);
+    IOReturn (*USBInterfaceGetStringIndex)(void *self, UInt8 *si);
+    IOReturn (*USBInterfaceOpenSeize)(void *self);
+    IOReturn (*ClearPipeStallBothEnds)(void *self, UInt8 pipeRef);
+    IOReturn (*SetPipePolicy)(void *self, UInt8 pipeRef, UInt16 maxPacketSize, UInt8 maxInterval);
+    IOReturn (*GetBandwidthAvailable)(void *self, UInt32 *bandwidth);
+    IOReturn (*GetEndpointProperties)(void *self, UInt8 alternateSetting, UInt8 endpointNumber, UInt8 direction, UInt8 *transferType, UInt16 *maxPacketSize, UInt8 *interval);
+    IOReturn (*LowLatencyReadIsochPipeAsync)(void *self, UInt8 pipeRef, void *buf, UInt64 frameStart, UInt32 numFrames, UInt32 updateFrequency, IOUSBLowLatencyIsocFrame *frameList,
+                                             IOAsyncCallback1 callback, void *refcon);
+    IOReturn (*LowLatencyWriteIsochPipeAsync)(void *self, UInt8 pipeRef, void *buf, UInt64 frameStart, UInt32 numFrames, UInt32 updateFrequency, IOUSBLowLatencyIsocFrame *frameList,
+                                              IOAsyncCallback1 callback, void *refcon);
+    IOReturn (*LowLatencyCreateBuffer)(void * self, void **buffer, IOByteCount size, UInt32 bufferType);
+    IOReturn (*LowLatencyDestroyBuffer) (void * self, void * buffer );
+    IOReturn (*GetBusMicroFrameNumber)(void *self, UInt64 *microFrame, AbsoluteTime *atTime);
+    IOReturn (*GetFrameListTime)(void *self, UInt32 *microsecondsInFrame);
+    IOReturn (*GetIOUSBLibVersion)(void *self, NumVersion *ioUSBLibVersion, NumVersion *usbFamilyVersion);
+    IOUSBDescriptorHeader * (*FindNextAssociatedDescriptor)(void *self, const void *currentDescriptor, UInt8 descriptorType);
+    IOUSBDescriptorHeader * (*FindNextAltInterface)(void *self, const void *current, IOUSBFindInterfaceRequest *request);
+    IOReturn (*GetBusFrameNumberWithTime)(void *self, UInt64 *frame, AbsoluteTime *atTime);
+    IOReturn (*GetPipePropertiesV2)(void *self, UInt8 pipeRef, UInt8 *direction, UInt8 *number, UInt8 *transferType, UInt16 *maxPacketSize, UInt8 *interval, UInt8 *maxBurst, UInt8 *mult, UInt16 *bytesPerInterval);
+    IOReturn (*GetPipePropertiesV3)(void *self, UInt8 pipeRef, IOUSBEndpointProperties *properties);
+    IOReturn (*GetEndpointPropertiesV3)(void *self, IOUSBEndpointProperties *properties);
+    IOReturn (*SupportsStreams)(void *self, UInt8 pipeRef, UInt32 *supportsStreams);
+    IOReturn (*CreateStreams)(void *self, UInt8 pipeRef, UInt32 streamID);
+    IOReturn (*GetConfiguredStreams)(void *self, UInt8 pipeRef, UInt32 *configuredStreams);
+    IOReturn (*ReadStreamsPipeTO)(void *self, UInt8 pipeRef, UInt32 streamID, void *buf, UInt32 *size, UInt32 noDataTimeout, UInt32 completionTimeout);
+    IOReturn (*WriteStreamsPipeTO)(void *self, UInt8 pipeRef, UInt32 streamID, void *buf, UInt32 size, UInt32 noDataTimeout, UInt32 completionTimeout);
+    IOReturn (*ReadStreamsPipeAsyncTO)(void *self, UInt8 pipeRef, UInt32 streamID, void *buf, UInt32 size, UInt32 noDataTimeout, UInt32 completionTimeout, IOAsyncCallback1 callback, void *refcon);
+    IOReturn (*WriteStreamsPipeAsyncTO)(void *self, UInt8 pipeRef, UInt32 streamID, void *buf, UInt32 size, UInt32 noDataTimeout, UInt32 completionTimeout, IOAsyncCallback1 callback, void *refcon);
+    IOReturn (*AbortStreamsPipe)(void *self, UInt8 pipeRef, UInt32 streamID);
+    IOReturn (*RegisterForNotification)(void * self, UInt64 notificationMask, IOAsyncCallback2 callback, void *refCon, UInt64 *pRegistrationToken);
+    IOReturn (*UnregisterNotification)(void *self, UInt64 registrationToken);
+    IOReturn (*AcknowledgeNotification)(void *self, UInt64 notificationToken);
+    IOReturn (*RegisterDriver)(void *self);
+    IOReturn (*SetDeviceIdlePolicy)(void* self, UInt32 deviceIdleTimeout);
+    IOReturn (*SetPipeIdlePolicy)(void* self, UInt8 pipeRef, UInt32 ioIdleTimeout);
+
+    /*!
+     @function     GetInterfaceAsyncNotificationPort
+     @abstract     Returns the IONotificationPort for this IOService instance.
+     @availability This function is only available with IOUSBInterfaceInterface942 and above.
+     @param        self Pointer to the IOUSBInterfaceInterface.
+     @result       Returns the IONotificationPortRef if one exists, MACH_PORT_NULL otherwise.
+     */
+    IONotificationPortRef (* GetInterfaceAsyncNotificationPort)(void* self);
+
+} IOUSBInterfaceInterface942;
 
 #define kIOUSBDeviceClassName		"IOUSBDevice"
 #define kIOUSBInterfaceClassName	"IOUSBInterface"

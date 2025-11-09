@@ -1,5 +1,5 @@
 //
-//  MTFence.h
+//  MTLFence.h
 //  Metal
 //
 //  Copyright (c) 2016 Apple Inc. All rights reserved.
@@ -9,7 +9,7 @@
 #import <Metal/MTLDefines.h>
 #import <Metal/MTLDevice.h>
 
-NS_AVAILABLE(10_13, 10_0)
+API_AVAILABLE(macos(10.13), ios(10.0))
 @protocol MTLFence <NSObject>
 @property (nonnull, readonly) id <MTLDevice> device;
 

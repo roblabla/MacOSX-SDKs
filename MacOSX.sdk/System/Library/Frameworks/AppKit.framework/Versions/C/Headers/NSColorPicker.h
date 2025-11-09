@@ -1,7 +1,7 @@
 /*
 	NSColorPicker.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSColorPicker : NSObject <NSColorPickingDefault>
 {
     /*All instance variables are private*/
-    id _imageObject;
-    NSColorPanel *_colorPanel;
-    NSString *_buttonToolTip;
+    id _imageObject APPKIT_IVAR;
+    NSColorPanel *_colorPanel APPKIT_IVAR;
+    NSString *_buttonToolTip APPKIT_IVAR;
 }
 - (nullable instancetype)initWithPickerMask:(NSUInteger)mask colorPanel:(NSColorPanel *)owningColorPanel;
 @property (readonly, strong) NSColorPanel *colorPanel;

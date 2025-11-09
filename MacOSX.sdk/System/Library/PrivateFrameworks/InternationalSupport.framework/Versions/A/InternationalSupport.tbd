@@ -1,10 +1,11 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2BD049C3-5C92-3B5D-9A47-7A33E1209630' ]
+uuids:           [ 'x86_64: F0E300AD-1E67-3D57-B179-C2212F7CD00C' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/InternationalSupport.framework/Versions/A/InternationalSupport
-objc-constraint: none
+current-version: 10.15.6
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _InternationalSupportVersionNumber, _InternationalSupportVersionString ]
+    objc-classes:    [ ISUtilities ]
 ...

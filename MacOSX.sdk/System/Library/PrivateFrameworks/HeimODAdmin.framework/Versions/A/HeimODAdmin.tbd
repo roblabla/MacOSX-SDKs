@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 6B93B8A6-2062-3B3A-8427-630DD8B14F8B', 'x86_64: E3FC83BF-B65C-362B-A185-F480B98CEF02' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: BA224EB7-8FE3-341D-B070-D911323D8071' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/HeimODAdmin.framework/Versions/A/HeimODAdmin
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _HeimODAddAppleIDAlias, _HeimODAddCertificate, _HeimODAddCertificateSubjectAndTrustAnchor, 
                        _HeimODAddServerAlias, _HeimODAddSubjectAltCertName, _HeimODAddSubjectAltCertSHA1Digest, 
                        _HeimODClearACL, _HeimODClearKerberosFlags, _HeimODCopyACL, 

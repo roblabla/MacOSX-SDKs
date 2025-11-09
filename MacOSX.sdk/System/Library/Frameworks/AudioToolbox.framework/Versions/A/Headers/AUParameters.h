@@ -121,7 +121,7 @@ typedef void *AUParameterObserverToken;
 	@discussion
 		Nodes are instances of either AUParameterGroup or AUParameter.
 */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUParameterNode : NSObject
 
 /*!	@property	identifier
@@ -232,7 +232,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 		A parameter group is KVC-compliant for its children; e.g. valueForKey:@"volume" will
 		return a child parameter whose identifier is "volume".
 */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUParameterGroup : AUParameterNode <NSSecureCoding>
 
 /// The group's child nodes (AUParameterGroupNode).
@@ -260,7 +260,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 		mostly immutable (except for values and implementor hooks); the only way to modify them
 		is to publish a new tree.
 */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUParameterTree : AUParameterGroup <NSSecureCoding>
 
 /*!	@method	parameterWithAddress:
@@ -290,7 +290,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 /*!	@class	AUParameter
 	@brief	A node representing a single parameter.
 */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUParameter : AUParameterNode <NSSecureCoding>
 
 /// The parameter's minimum value.

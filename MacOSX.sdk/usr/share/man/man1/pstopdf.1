@@ -11,7 +11,6 @@
 .Op Fl o Ar outname
 .Op Fl l
 .Op Fl p
-.Op Fl i
 .Sh DESCRIPTION          \" Section Header - required - don't modify
 .Nm
 is a tool to convert PostScript input data into a PDF document. The input data may
@@ -27,12 +26,6 @@ the output file will be created in the current directory and named
 .Ar foo.pdf 
 for an input file named
 .Ar foo.ps
-.It Fl i
-Reads from stdin rather than a named input file. If the output file is not explicitly 
-named and the input data comes from 
-.Ar stdin
-the named output file will be
-.Ar stdin.pdf
 .It Fl l
 Specifies that any messages generated during file conversion be written to
 a log file. For an output file named
@@ -49,14 +42,14 @@ when the -l (log file) option is specified.
 .El                      \" Ends the list
 .Pp
 .Sh EXAMPLES
-.Bl -tag -width "pstopdf -i -o outputfilename" -compact
+.Bl -tag -width "pstopdf -o outputfilename" -compact
 .It Li pstopdf inputfile.ps
 Creates a PDF file named 
 .Ar inputfile.pdf 
 from the PostScript data in the input file 
 .Ar inputfile.ps
 .Pp
-.It Li pstopdf -i -o outputfilename
+.It Li pstopdf -o outputfilename
 Creates a PDF file named 
 .Ar outputfilename
 from the PostScript data read from stdin.

@@ -79,7 +79,7 @@ cl_int	clGetGLContextInfoAPPLE ( cl_context __nonnull /* context */,
 								  cl_gl_platform_info /* param_name */,
 								  size_t /* param_value_size */,
 								  void *  __nullable /* param_value */,
-								  size_t * __nullable /* param_value_size_ret */)  CL_EXT_SUFFIX__VERSION_1_0;  
+								  size_t * __nullable /* param_value_size_ret */)  CL_EXT_SUFFIX__VERSION_1_0 CL_DEPRECATED(10.6, 10.14);  
 
 /* The list of supported param_name values and the information returned in param_value by 
  * clGetContextInfo are listed below:
@@ -106,7 +106,7 @@ cl_int	clGetGLContextInfoAPPLE ( cl_context __nonnull /* context */,
 extern CL_API_ENTRY cl_event __nullable CL_API_CALL
 clCreateEventFromGLsyncKHR(cl_context __nonnull  /* context */,
                            cl_GLsync  __nonnull  /* cl_GLsync */,
-                           cl_int *   __nullable /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_1;
+                           cl_int *   __nullable /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 #ifdef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
 #if __has_feature(objc_class_property)
@@ -122,7 +122,7 @@ cl_mem __nullable clCreateImageFromIOSurface2DAPPLE(cl_context __nonnull /* cont
 										 size_t /* image_width */,
 										 size_t /* image_height */,
 										 IOSurfaceRef __nonnull/* iosurface */,
-										 cl_int * __nullable /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_1;
+										 cl_int * __nullable /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_1 CL_DEPRECATED(10.7, 10.14);
 
 typedef intptr_t cl_iosurface_properties_APPLE;
   
@@ -141,7 +141,7 @@ cl_mem __nullable clCreateImageFromIOSurfaceWithPropertiesAPPLE(cl_context __non
                       const cl_image_format * __nonnull         /* image_format */,
                       const cl_image_desc *   __nonnull         /* image_desc */,
                       cl_iosurface_properties_APPLE * __nonnull /* properties */,
-                      cl_int * __nullable                       /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_2;
+                      cl_int * __nullable                       /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_2 CL_DEPRECATED(10.8, 10.14);
 
 /* Query parameter name for clGetImageInfo that returns the IOSurface backing the image (IOSurfaceRef) */
 #define CL_IMAGE_IOSURFACE_APPLE                            0x1000001b /* Introduced in Mac OS X 10.9 */

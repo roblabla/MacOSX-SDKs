@@ -19,7 +19,7 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
-#if !TARGET_OS_IPHONE
+#if TARGET_OS_OSX
 #ifndef __CARBONCORE__
 #include <CarbonCore/CarbonCore.h>
 #endif
@@ -29,7 +29,7 @@
 #include <LaunchServices/LSInfo.h>
 #endif
 
-#if !TARGET_OS_IPHONE
+#if TARGET_OS_OSX
 #ifndef __AE__
 #include <AE/AE.h>
 #endif
@@ -71,7 +71,7 @@ typedef CF_OPTIONS(OptionBits, LSLaunchFlags) {
   kLSLaunchAndHideOthers        = 0x00200000, /* Hide all other apps when the app checks in.*/
 };
 
-#if !TARGET_OS_IPHONE
+#if TARGET_OS_OSX
 typedef struct LSLaunchURLSpec {
   __nullable CFURLRef           appURL;                 /* app to use*/
   __nullable CFArrayRef         itemURLs;               /* items to open/print*/

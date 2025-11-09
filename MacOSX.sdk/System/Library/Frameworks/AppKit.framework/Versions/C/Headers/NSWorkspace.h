@@ -1,7 +1,7 @@
 /*
 	NSWorkspace.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSAppleEventDescriptor.h>
+#import <Foundation/NSFileManager.h>
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -40,7 +41,7 @@ typedef NS_OPTIONS(NSUInteger, NSWorkspaceIconCreationOptions) {
 
 
 /* The following keys can be used in the configuration dictionary of the launchApplicationAtURL:, openURL:, and openURL:withApplicationAtURL: methods.  Each key is optional, and if omitted, default behavior is applied. */
-typedef NSString * NSWorkspaceLaunchConfigurationKey NS_STRING_ENUM;
+typedef NSString * NSWorkspaceLaunchConfigurationKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSWorkspaceLaunchConfigurationKey const NSWorkspaceLaunchConfigurationAppleEvent NS_AVAILABLE_MAC(10_6); //the first NSAppleEventDescriptor to send to the new app.  If an instance of the app is already running, this is sent to that app.
 APPKIT_EXTERN NSWorkspaceLaunchConfigurationKey const NSWorkspaceLaunchConfigurationArguments NS_AVAILABLE_MAC(10_6); //an NSArray of NSStrings, passed to the new app in the argv parameter.  Ignored if a new instance is not launched.
 APPKIT_EXTERN NSWorkspaceLaunchConfigurationKey const NSWorkspaceLaunchConfigurationEnvironment NS_AVAILABLE_MAC(10_6); //an NSDictionary, mapping NSStrings to NSStrings, containing environment variables to set for the new app.  Ignored if a new instance is not launched.
@@ -49,11 +50,11 @@ APPKIT_EXTERN NSWorkspaceLaunchConfigurationKey const NSWorkspaceLaunchConfigura
 @interface NSWorkspace : NSObject {
   /*All instance variables are private*/
   @private
-    NSNotificationCenter *notificationCenter;
+    NSNotificationCenter *notificationCenter APPKIT_IVAR;
 #if ! __LP64__
-    int deviceStatusCount;
-    int applicationStatusCount;
-    id _reservedWorkspace1;
+    int deviceStatusCount APPKIT_IVAR;
+    int applicationStatusCount APPKIT_IVAR;
+    id _reservedWorkspace1 APPKIT_IVAR;
 #endif
 }
 
@@ -223,7 +224,7 @@ Use this method instead of merely comparing UTIs for equality.
 
 
 /* The following keys may be specified or returned in the options dictionary for setDesktopImageURL:forScreen:options:error: and desktopImageURLForScreen:options:. */
-typedef NSString * NSWorkspaceDesktopImageOptionKey NS_STRING_ENUM;
+typedef NSString * NSWorkspaceDesktopImageOptionKey NS_TYPED_ENUM;
 
 /* The value is an NSNumber containing an NSImageScaling.  If this is not specified, NSImageScaleProportionallyUpOrDown is used.  Note: NSImageScaleProportionallyDown is not currently supported.
  */
@@ -257,6 +258,52 @@ APPKIT_EXTERN NSWorkspaceDesktopImageOptionKey const NSWorkspaceDesktopImageFill
 
 @end
 
+
+typedef NS_ENUM(NSInteger, NSWorkspaceAuthorizationType) {
+    NSWorkspaceAuthorizationTypeCreateSymbolicLink,
+    NSWorkspaceAuthorizationTypeSetAttributes,
+    NSWorkspaceAuthorizationTypeReplaceFile,
+} NS_AVAILABLE_MAC(10_14);
+
+NS_AVAILABLE_MAC(10_14)
+@interface NSWorkspaceAuthorization : NSObject {
+@private
+    id _private;
+}
+@end
+
+@interface NSWorkspace (NSWorkspaceAuthorization)
+- (void)requestAuthorizationOfType:(NSWorkspaceAuthorizationType)type completionHandler:(void (^)(NSWorkspaceAuthorization * _Nullable authorization, NSError * _Nullable error))completionHandler NS_AVAILABLE_MAC(10_14);
+@end
+
+@interface NSFileManager (NSWorkspaceAuthorization)
+
+/* The following method returns an NSFileManager instance that can perform file system operations previously allowed by the user via -[NSWorkspace requestAuthorizationOfType:completionHandler:]. Each NSWorkspaceAuthorization you receive requires creating a new NSFileManager instance using this method.
+ 
+ Only the following NSFileManager methods currently take advantage of an authorization:
+ 
+ -createSymbolicLinkAtURL:withDestinationURL:error:  (NSWorkspaceAuthorizationTypeCreateSymbolicLink)
+ -setAttributes:ofItemAtPath:error:  (NSWorkspaceAuthorizationTypeSetAttributes)
+ -replaceItemAtURL:withItemAtURL:backupItemName:options:resultingItemURL:error:  (NSWorkspaceAuthorizationTypeReplaceFile)
+ 
+ Note that an NSWorkspaceAuthorizationTypeSetAttributes authorization only enables -setAttributes:ofItemAtPath:error: to modify the following attributes:
+ 
+ - NSFileOwnerAccountID
+ - NSFileGroupOwnerAccountID
+ - NSFilePosixPermissions
+ 
+ Also note that for -replaceItemAtURL:withItemAtURL:backupItemName:options:resultingItemURL:error:, the backupItemName and options parameters will be ignored.
+ 
+ These methods may also fail with any of the following errors:
+ - NSWorkspaceAuthorizationInvalidError: The provided NSWorkspaceAuthorization expired or is invalid.
+ - NSFileWriteUnknownError: The application failed to communicate with a helper process, or a file system error occurred.
+ - NSFileWriteNoPermissionError: The operation failed for any other reason, including the user denying access to the resource, or access to a resource is denied by system policy.
+ 
+ All other NSFileManager methods invoked on this instance will behave normally.
+ */
++ (instancetype)fileManagerWithAuthorization:(NSWorkspaceAuthorization *)authorization NS_AVAILABLE_MAC(10_14);
+
+@end
 
 /* Application notifications */
 
@@ -318,7 +365,7 @@ APPKIT_EXTERN NSNotificationName const NSWorkspaceActiveSpaceDidChangeNotificati
 
 
 /* Everything remaining in this header is deprecated and should not be used. */
-typedef NSString * NSWorkspaceFileOperationName NS_DEPRECATED_MAC(10_0, 10_11) NS_STRING_ENUM;
+typedef NSString * NSWorkspaceFileOperationName NS_DEPRECATED_MAC(10_0, 10_11) NS_TYPED_ENUM;
 
 @interface NSWorkspace (NSDeprecated)
 - (BOOL)openTempFile:(NSString *)fullPath NS_DEPRECATED_MAC(10_0, 10_6);

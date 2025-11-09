@@ -1,7 +1,7 @@
 /*
 	NSCursor.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -17,14 +17,14 @@ static const NSAppKitVersion NSAppKitVersionNumberWithCursorSizeSupport = 682.0;
 
 @interface NSCursor : NSObject <NSCoding> {
     /*All instance variables are private*/
-    NSPoint _hotSpot;
+    NSPoint _hotSpot APPKIT_IVAR;
     struct _cursorFlags {
 	unsigned int onMouseExited:1;
 	unsigned int onMouseEntered:1;
         unsigned int cursorType:8;
 	unsigned int :22;
-    } _flags;
-    id _image;
+    } _flags APPKIT_IVAR;
+    id _image APPKIT_IVAR;
 }
 
 /* Returns the application's current cursor. This is not necessarily the cursor that is currently being displayed on the system. If you need the currently displayed cursor, use currentSystemCursor.

@@ -1,7 +1,7 @@
 /*
 	NSColorSpace.h
 	Application Kit
-	Copyright (c) 2004-2017, Apple Inc.
+	Copyright (c) 2004-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, NSColorSpaceModel) {
 
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSColorSpace : NSObject <NSSecureCoding> {
-    id _profile;
+    id _profile APPKIT_IVAR;
     struct {
 	unsigned int colorSpaceID:8;
 	unsigned int storageType:3;
@@ -39,10 +39,10 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 #if __LP64__
 	unsigned int :32;
 #endif
-    } _flags;
-    void *__cgColorSpace;
-    void *__cgColorTransform;
-    void *_reserved[4];
+    } _flags APPKIT_IVAR;
+    void *__cgColorSpace APPKIT_IVAR;
+    void *__cgColorTransform APPKIT_IVAR;
+    void *_reserved[4] APPKIT_IVAR;
 }
 
 - (nullable instancetype)initWithICCProfileData:(NSData *)iccData;
@@ -87,15 +87,14 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @end
 
 
-static const NSColorSpaceModel NSUnknownColorSpaceModel /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorSpaceModelUnknown", 10.0, 10.12)*/ = NSColorSpaceModelUnknown;
-static const NSColorSpaceModel NSGrayColorSpaceModel    /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorSpaceModelGray", 10.0, 10.12)*/ = NSColorSpaceModelGray;
-static const NSColorSpaceModel NSRGBColorSpaceModel     /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorSpaceModelRGB", 10.0, 10.12)*/ = NSColorSpaceModelRGB;
-static const NSColorSpaceModel NSCMYKColorSpaceModel    /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorSpaceModelCMYK", 10.0, 10.12)*/ = NSColorSpaceModelCMYK;
-static const NSColorSpaceModel NSLABColorSpaceModel     /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorSpaceModelLAB", 10.0, 10.12)*/ = NSColorSpaceModelLAB;
-static const NSColorSpaceModel NSDeviceNColorSpaceModel /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorSpaceModelDeviceN", 10.0, 10.12)*/ = NSColorSpaceModelDeviceN;
-static const NSColorSpaceModel NSIndexedColorSpaceModel /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorSpaceModelIndexed", 10.0, 10.12)*/ = NSColorSpaceModelIndexed;
-static const NSColorSpaceModel NSPatternColorSpaceModel /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorSpaceModelPatterned", 10.0, 10.12)*/ = NSColorSpaceModelPatterned;
-
+static const NSColorSpaceModel NSUnknownColorSpaceModel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorSpaceModelUnknown", 10_0, 10_14) = NSColorSpaceModelUnknown;
+static const NSColorSpaceModel NSGrayColorSpaceModel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorSpaceModelGray", 10_0, 10_14) = NSColorSpaceModelGray;
+static const NSColorSpaceModel NSRGBColorSpaceModel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorSpaceModelRGB", 10_0, 10_14) = NSColorSpaceModelRGB;
+static const NSColorSpaceModel NSCMYKColorSpaceModel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorSpaceModelCMYK", 10_0, 10_14) = NSColorSpaceModelCMYK;
+static const NSColorSpaceModel NSLABColorSpaceModel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorSpaceModelLAB", 10_0, 10_14) = NSColorSpaceModelLAB;
+static const NSColorSpaceModel NSDeviceNColorSpaceModel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorSpaceModelDeviceN", 10_0, 10_14) = NSColorSpaceModelDeviceN;
+static const NSColorSpaceModel NSIndexedColorSpaceModel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorSpaceModelIndexed", 10_0, 10_14) = NSColorSpaceModelIndexed;
+static const NSColorSpaceModel NSPatternColorSpaceModel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorSpaceModelPatterned", 10_0, 10_14) = NSColorSpaceModelPatterned;
 
 NS_ASSUME_NONNULL_END
 

@@ -1,4 +1,4 @@
-.TH "MPSCNNUpsampling" 3 "Sun Jul 2 2017" "Version MetalPerformanceShaders-84.1" "MetalPerformanceShaders.framework" \" -*- nroff -*-
+.TH "MPSCNNUpsampling" 3 "Mon Jul 9 2018" "Version MetalPerformanceShaders-119.3" "MetalPerformanceShaders.framework" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -28,6 +28,9 @@ Inherited by \fBMPSCNNUpsamplingBilinear\fP, and \fBMPSCNNUpsamplingNearest\fP\&
 .ti -1c
 .RI "double \fBscaleFactorY\fP"
 .br
+.ti -1c
+.RI "BOOL \fBalignCorners\fP"
+.br
 .in -1c
 .SS "Additional Inherited Members"
 .SH "Detailed Description"
@@ -51,7 +54,7 @@ Standard init with default properties per filter type
 .PP
 \fBReturns:\fP
 .RS 4
-A pointer to the newly initialized object\&. This will fail, returning nil if the device is not supported\&. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later\&. 
+\fBA\fP pointer to the newly initialized object\&. This will fail, returning nil if the device is not supported\&. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later\&. 
 .RE
 .PP
 
@@ -59,6 +62,8 @@ A pointer to the newly initialized object\&. This will fail, returning nil if th
 Reimplemented from \fBMPSCNNKernel\fP\&.
 .SH "Property Documentation"
 .PP 
+.SS "\- alignCorners\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
+If YES, the centers of the 4 corner pixels of the input and output regions are aligned, preserving the values at the corner pixels\&. The default is NO\&. 
 .SS "\- scaleFactorX\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
 The upsampling scale factor for the x dimension\&. The default value is 1\&. 
 .SS "\- scaleFactorY\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"

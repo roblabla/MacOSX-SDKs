@@ -51,8 +51,21 @@ Example entries in this file are:
 0x00000002:fw:file write
 0x00000004:fa:file attribute access
 0x00000080:pc:process
+0x10000000:res:reserved for internal use
 0xffffffff:all:all flags set
 .Ed
+.Sh NOTES
+The audit class
+.Pa res
+is reserved for internal use. Unentitled applications can still modify the
+event class preselection mask for an audit event (for example by using the
+.Xr audit_event 5
+configuration file or the
+.Xr auditon 2
+system call with the A_SETCLASS command), however these applications will not
+be able to change the
+.Pa res
+audit class mask for that event.
 .Sh FILES
 .Bl -tag -width ".Pa /etc/security/audit_class" -compact
 .It Pa /etc/security/audit_class

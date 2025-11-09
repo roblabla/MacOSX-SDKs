@@ -25,11 +25,17 @@
 /* SuExec log file */
 /* #undef AP_LOG_EXEC */
 
+/* SuExec log to syslog */
+/* #undef AP_LOG_SYSLOG */
+
 /* Listening sockets are non-blocking when there are more than 1 */
 #define AP_NONBLOCK_WHEN_MULTI_LISTEN 1
 
 /* safe shell path for SuExec */
 /* #undef AP_SAFE_PATH */
+
+/* Enable if suexec is installed with Linux capabilities, not setuid */
+/* #undef AP_SUEXEC_CAPABILITIES */
 
 /* umask for suexec'd process */
 /* #undef AP_SUEXEC_UMASK */
@@ -47,11 +53,20 @@
 /* Using autoconf to configure Apache */
 #define AP_USING_AUTOCONF 1
 
+/* Define to 1 if you have the `arc4random_buf' function. */
+#define HAVE_ARC4RANDOM_BUF 1
+
 /* Define to 1 if you have the `bindprocessor' function. */
 /* #undef HAVE_BINDPROCESSOR */
 
 /* Define to 1 if you have the <bstring.h> header file. */
 /* #undef HAVE_BSTRING_H */
+
+/* Define if curl is available */
+#define HAVE_CURL 1
+
+/* Define to 1 if you have the <curl/curl.h> header file. */
+#define HAVE_CURL_CURL_H 1
 
 /* Define if distcache support is enabled */
 /* #undef HAVE_DISTCACHE */
@@ -97,6 +112,9 @@
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
+
+/* Define if jansson is available */
+/* #undef HAVE_JANSSON */
 
 /* Define to 1 if you have the `killpg' function. */
 #define HAVE_KILLPG 1
@@ -226,6 +244,9 @@
 
 /* Define to 1 if you have the <unistd.h> header file. */
 #define HAVE_UNISTD_H 1
+
+/* Define to 1 if you have the `vsyslog' function. */
+/* #undef HAVE_VSYSLOG */
 
 /* Root directory of the Apache install area */
 #define HTTPD_ROOT "/usr"

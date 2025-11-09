@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     The output is a single stereo bus. 
 */
-NS_CLASS_AVAILABLE(10_10, 8_0) __WATCHOS_PROHIBITED
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos) 
 @interface AVAudioUnitSampler : AVAudioUnitMIDIInstrument
 
 /*! @method loadSoundBankInstrumentAtURL:program:bankMSB:bankLSB:error:

@@ -3,7 +3,7 @@
  
      Contains:   API for the CFPlugIn that implements an CMIO driver for the DAL from user space
  
-     Copyright:  © 2004-2010 by Apple Inc., all rights reserved.
+     Copyright:  © 2004-2018 by Apple Inc., all rights reserved.
 */
 
 #if !defined(__CMIOHardwarePlugIn_h__)
@@ -508,7 +508,7 @@ struct  CMIOHardwarePlugInInterface
                         Float64                 frameNumber,
                         Boolean                 playOnCue);
     
-};
+} API_AVAILABLE(macos(10.7));
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark    CMIOObject Functions
@@ -536,7 +536,7 @@ extern OSStatus
 CMIOObjectCreate(   CMIOHardwarePlugInRef   owningPlugIn,
                     CMIOObjectID            owningObjectID,
                     CMIOClassID             classID,
-                    CMIOObjectID*           objectID)                                       AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                    CMIOObjectID*           objectID) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIOObjectsPublishedAndDied
@@ -565,7 +565,7 @@ CMIOObjectsPublishedAndDied(    CMIOHardwarePlugInRef   owningPlugIn,
                                 UInt32                  numberPublishedCMIOObjects,
                                 const CMIOObjectID      publishedCMIOObjects[],
                                 UInt32                  numberDeadCMIOObjects,
-                                const CMIOObjectID      deadCMIOObjects[])                       AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                                const CMIOObjectID      deadCMIOObjects[]) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIOObjectPropertiesChanged
@@ -587,7 +587,7 @@ extern OSStatus
 CMIOObjectPropertiesChanged(    CMIOHardwarePlugInRef           owningPlugIn,
                                 CMIOObjectID                    objectID,
                                 UInt32                          numberAddresses,
-                                const CMIOObjectPropertyAddress addresses[])                  AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                                const CMIOObjectPropertyAddress addresses[]) API_AVAILABLE(macos(10.7));
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark    CMIODevice Functions

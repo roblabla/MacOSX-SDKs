@@ -5,6 +5,8 @@
  Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
  */
 
+#if !0
+
 #import <AVFAudio/AVAudioTypes.h>
 
 #if __has_include(<AudioToolbox/AudioComponent.h>)
@@ -16,19 +18,19 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // Standard Audio Unit Types
-AVF_EXPORT NSString * const AVAudioUnitTypeOutput				NS_AVAILABLE(10_10, 9_0);
-AVF_EXPORT NSString * const AVAudioUnitTypeMusicDevice			NS_AVAILABLE(10_10, 9_0);
-AVF_EXPORT NSString * const AVAudioUnitTypeMusicEffect			NS_AVAILABLE(10_10, 9_0);
-AVF_EXPORT NSString * const AVAudioUnitTypeFormatConverter		NS_AVAILABLE(10_10, 9_0);
-AVF_EXPORT NSString * const AVAudioUnitTypeEffect				NS_AVAILABLE(10_10, 9_0);
-AVF_EXPORT NSString * const AVAudioUnitTypeMixer				NS_AVAILABLE(10_10, 9_0);
-AVF_EXPORT NSString * const AVAudioUnitTypePanner				NS_AVAILABLE(10_10, 9_0);
-AVF_EXPORT NSString * const AVAudioUnitTypeGenerator			NS_AVAILABLE(10_10, 9_0);
-AVF_EXPORT NSString * const AVAudioUnitTypeOfflineEffect		NS_AVAILABLE(10_10, 9_0);
-AVF_EXPORT NSString * const AVAudioUnitTypeMIDIProcessor		NS_AVAILABLE(10_10, 9_0);
+AVF_EXPORT NSString * const AVAudioUnitTypeOutput				API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSString * const AVAudioUnitTypeMusicDevice			API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSString * const AVAudioUnitTypeMusicEffect			API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSString * const AVAudioUnitTypeFormatConverter		API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSString * const AVAudioUnitTypeEffect				API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSString * const AVAudioUnitTypeMixer				API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSString * const AVAudioUnitTypePanner				API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSString * const AVAudioUnitTypeGenerator			API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSString * const AVAudioUnitTypeOfflineEffect		API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSString * const AVAudioUnitTypeMIDIProcessor		API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 // Standard Audio Unit Manufacturers
-AVF_EXPORT NSString * const AVAudioUnitManufacturerNameApple	NS_AVAILABLE(10_10, 9_0);
+AVF_EXPORT NSString * const AVAudioUnitManufacturerNameApple	API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 #pragma mark AVAudioUnitComponent
 
@@ -40,7 +42,7 @@ AVF_EXPORT NSString * const AVAudioUnitManufacturerNameApple	NS_AVAILABLE(10_10,
  	 for display.
  */
 
-NS_CLASS_AVAILABLE(10_10, 9_0) __WATCHOS_PROHIBITED
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAudioUnitComponent : NSObject
 {
 	void *_impl;
@@ -83,7 +85,7 @@ NS_CLASS_AVAILABLE(10_10, 9_0) __WATCHOS_PROHIBITED
 /*! @property availableArchitectures
 	@abstract NSArray of NSNumbers each of which corresponds to one of the constants in Mach-O Architecture in NSBundle Class Reference
  */
-@property (nonatomic, readonly) NSArray<NSNumber *>		*availableArchitectures NS_AVAILABLE(10_10, NA);
+@property (nonatomic, readonly) NSArray<NSNumber *>		*availableArchitectures API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*! @property sandboxSafe
 	@abstract On OSX, YES if the AudioComponent can be loaded into a sandboxed process otherwise NO.
@@ -111,7 +113,7 @@ NS_CLASS_AVAILABLE(10_10, 9_0) __WATCHOS_PROHIBITED
 /*! @property userTagNames
 	@abstract User tags represent the tags from the current user.
  */
-@property (copy) NSArray<NSString *>		*userTagNames NS_AVAILABLE(10_10, NA);
+@property (copy) NSArray<NSString *>		*userTagNames API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*! @property allTagNames
 	@abstract represent the tags from the current user and the system tags defined by AudioComponent.
@@ -129,9 +131,9 @@ NS_CLASS_AVAILABLE(10_10, 9_0) __WATCHOS_PROHIBITED
 	@abstract A URL that will specify the location of an icon file that can be used when presenting UI
  for this audio component.
  */
-@property (nonatomic, readonly, nullable) NSURL		*iconURL NS_AVAILABLE(10_10, NA);
+@property (nonatomic, readonly, nullable) NSURL		*iconURL API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
-#if !TARGET_OS_IPHONE
+#if TARGET_OS_OSX
 /*! @property icon
 	@abstract An icon representing the component.
     @discussion
@@ -140,29 +142,29 @@ NS_CLASS_AVAILABLE(10_10, 9_0) __WATCHOS_PROHIBITED
         
         For components loaded from bundles, the icon will be that of the bundle.
  */
-@property (nonatomic, readonly, nullable) NSImage *icon NS_AVAILABLE(10_11, NA);
+@property (nonatomic, readonly, nullable) NSImage *icon API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif
 
 /*! @property passesAUVal
 	@abstract YES if the AudioComponent has passed the AU validation tests, otherwise NO
  */
-@property (nonatomic, readonly) BOOL		passesAUVal NS_AVAILABLE(10_10, NA);
+@property (nonatomic, readonly) BOOL		passesAUVal API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*! @property hasCustomView
 	@abstract YES if the AudioComponent provides custom view, otherwise NO
  */
-@property (nonatomic, readonly) BOOL		hasCustomView NS_AVAILABLE(10_10, NA);
+@property (nonatomic, readonly) BOOL		hasCustomView API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*! @property configurationDictionary
 	@abstract A NSDictionary that contains information describing the capabilities of the AudioComponent.
 	The specific information depends on the type and the keys are defined in AudioUnitProperties.h
  */
-@property (nonatomic, readonly) NSDictionary<NSString *, id>		*configurationDictionary NS_AVAILABLE(10_10, NA);
+@property (nonatomic, readonly) NSDictionary<NSString *, id>		*configurationDictionary API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*! @property supportsNumberInputChannels: outputChannels:
 	@abstract returns YES if the AudioComponent supports the input/output channel configuration
  */
-- (BOOL)supportsNumberInputChannels:(NSInteger)numInputChannels outputChannels:(NSInteger)numOutputChannels NS_AVAILABLE(10_10, NA);
+- (BOOL)supportsNumberInputChannels:(NSInteger)numInputChannels outputChannels:(NSInteger)numOutputChannels API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 
@@ -170,7 +172,7 @@ NS_CLASS_AVAILABLE(10_10, 9_0) __WATCHOS_PROHIBITED
 #pragma mark AVAudioUnitComponentManager
 
 /* The notification object is an AVAudioUnitComponent object */
-AVF_EXPORT NSString * const AVAudioUnitComponentTagsDidChangeNotification NS_AVAILABLE(10_10, 9_0);
+AVF_EXPORT NSString * const AVAudioUnitComponentTagsDidChangeNotification API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @class AVAudioUnitComponentManager
@@ -191,7 +193,7 @@ AVF_EXPORT NSString * const AVAudioUnitComponentTagsDidChangeNotification NS_AVA
 			- using an AudioComponentDescription
  */
 
-NS_CLASS_AVAILABLE(10_10, 9_0) __WATCHOS_PROHIBITED
+OS_EXPORT API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAudioUnitComponentManager : NSObject
 {
 	void *_impl;
@@ -246,3 +248,5 @@ NS_CLASS_AVAILABLE(10_10, 9_0) __WATCHOS_PROHIBITED
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // !TARGET_OS_BRIDGE

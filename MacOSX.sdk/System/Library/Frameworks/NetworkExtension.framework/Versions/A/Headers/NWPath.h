@@ -2,8 +2,10 @@
 //  NWPath.h
 //  Network
 //
-//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2016, 2018 Apple Inc. All rights reserved.
 //
+
+#ifndef __NE_TAPI__
 
 #ifndef __NE_INDIRECT__
 #error "Please import the NetworkExtension module instead of this file directly."
@@ -29,7 +31,7 @@ typedef NS_ENUM(NSInteger, NWPathStatus) {
 	/*! @const NWPathStatusSatisfiable The path may become satisfied upon
 	 *		a connection attempt. */
 	NWPathStatusSatisfiable = 3,
-} NS_AVAILABLE(10_11, 9_0);
+} API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @interface NWPath
@@ -37,30 +39,32 @@ typedef NS_ENUM(NSInteger, NWPathStatus) {
  *		properties of the path that a networking connection will take on the device. For example,
  *		if the path status is NWPathStatusSatisfied, then a connection could use that path.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NWPath : NSObject
 
 /*!
  * @property status
  * @discussion The evaluated NWPathStatus of the NWPath.
  */
-@property (readonly) NWPathStatus status NS_AVAILABLE(10_11, 9_0);
+@property (readonly) NWPathStatus status API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property expensive
  * @discussion Returns YES is the path is considered expensive, as when using a cellular data plan.
  */
-@property (readonly, getter=isExpensive) BOOL expensive NS_AVAILABLE(10_11, 9_0);
+@property (readonly, getter=isExpensive) BOOL expensive API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method isEqualToPath:
  * @param path An NWPath object to compare.
  * @return YES if the two path objects have the same content, NO otherwise.
  */
-- (BOOL)isEqualToPath:(NWPath *)path NS_AVAILABLE(10_11, 9_0);
+- (BOOL)isEqualToPath:(NWPath *)path API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 
 NS_ASSUME_NONNULL_END
 
 #endif // __NWPath_h_
+
+#endif // __NE_TAPI__

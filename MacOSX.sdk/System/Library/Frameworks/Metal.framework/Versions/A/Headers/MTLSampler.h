@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSUInteger, MTLSamplerMinMagFilter) {
     MTLSamplerMinMagFilterNearest = 0,
     MTLSamplerMinMagFilterLinear = 1,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 /*!
  @enum MTLSamplerMipFilter
@@ -37,7 +37,7 @@ typedef NS_ENUM(NSUInteger, MTLSamplerMipFilter) {
     MTLSamplerMipFilterNotMipmapped = 0,
     MTLSamplerMipFilterNearest = 1,
     MTLSamplerMipFilterLinear = 2,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 /*!
  @enum MTLSamplerAddressMode
@@ -57,19 +57,18 @@ typedef NS_ENUM(NSUInteger, MTLSamplerMipFilter) {
  
  @constant MTLSamplerAddressModeClampToZero
  ClampToZero returns transparent zero (0,0,0,0) for images with an alpha channel, and returns opaque zero (0,0,0,1) for images without an alpha channel.
- */
+ 
+ @constant MTLSamplerAddressModeClampToBorderColor
+ Clamp to border color returns the value specified by the borderColor variable of the MTLSamplerDesc.
+*/
 typedef NS_ENUM(NSUInteger, MTLSamplerAddressMode) {
     MTLSamplerAddressModeClampToEdge = 0,
-    MTLSamplerAddressModeMirrorClampToEdge NS_AVAILABLE_MAC(10_11) = 1,
+    MTLSamplerAddressModeMirrorClampToEdge API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios) = 1,
     MTLSamplerAddressModeRepeat = 2,
     MTLSamplerAddressModeMirrorRepeat = 3,
     MTLSamplerAddressModeClampToZero = 4,
-    /*!
-     @constant MTLSamplerAddressModeClampToBorderColor
-     Clamp to border color returns the value specified by the borderColor variable of the MTLSamplerDesc.
-     */
-    MTLSamplerAddressModeClampToBorderColor NS_AVAILABLE_MAC(10_12) = 5,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
+    MTLSamplerAddressModeClampToBorderColor API_AVAILABLE(macos(10.12)) API_UNAVAILABLE(ios) = 5,
+} API_AVAILABLE(macos(10.11), ios(8.0));
 
 /*!
  @enum MTLSamplerBorderColor
@@ -88,13 +87,14 @@ typedef NS_ENUM(NSUInteger, MTLSamplerBorderColor) {
     MTLSamplerBorderColorTransparentBlack = 0,  // {0,0,0,0}
     MTLSamplerBorderColorOpaqueBlack = 1,       // {0,0,0,1}
     MTLSamplerBorderColorOpaqueWhite = 2,       // {1,1,1,1}
-} NS_AVAILABLE_MAC(10_12);
+} API_AVAILABLE(macos(10.12)) API_UNAVAILABLE(ios);
+
 
 /*!
  @class MTLSamplerDescriptor
  @abstract A mutable descriptor used to configure a sampler.  When complete, this can be used to create an immutable MTLSamplerState.
  */
-NS_CLASS_AVAILABLE(10_11, 8_0)
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLSamplerDescriptor : NSObject <NSCopying>
 
 /*!
@@ -147,7 +147,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  @property borderColor
  @abstract Set the color for the MTLSamplerAddressMode to one of the predefined in the MTLSamplerBorderColor enum.
  */
-@property (nonatomic) MTLSamplerBorderColor borderColor NS_AVAILABLE_MAC(10_12);
+@property (nonatomic) MTLSamplerBorderColor borderColor API_AVAILABLE(macos(10.12)) API_UNAVAILABLE(ios);
 
 /*!
  @property normalizedCoordinates.
@@ -175,19 +175,20 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  @abstract If YES, an average level of detail will be used when sampling from a texture. If NO, no averaging is performed.
  @discussion lodAverage defaults to NO. This option is a performance hint. An implementation is free to ignore this property.
  */
-@property (nonatomic) BOOL lodAverage NS_AVAILABLE_IOS(9_0);
+@property (nonatomic) BOOL lodAverage API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property compareFunction
  @abstract Set the comparison function used when sampling shadow maps. The default value is MTLCompareFunctionNever.
  */
-@property (nonatomic) MTLCompareFunction compareFunction NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic) MTLCompareFunction compareFunction API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @property supportArgumentBuffers
  @abstract true if the sampler can be used inside an argument buffer
 */
-@property (nonatomic) BOOL supportArgumentBuffers NS_AVAILABLE(10_13, 11_0);
+@property (nonatomic) BOOL supportArgumentBuffers API_AVAILABLE(macos(10.13), ios(11.0));
+
 
 /*!
  @property label
@@ -201,7 +202,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  @protocol MTLSamplerState
  @abstract An immutable collection of sampler state compiled for a single device.
  */
-NS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0))
 @protocol MTLSamplerState <NSObject>
 
 /*!

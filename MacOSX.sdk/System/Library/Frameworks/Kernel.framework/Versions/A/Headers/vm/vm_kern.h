@@ -66,6 +66,10 @@
 #ifndef	_VM_VM_KERN_H_
 #define _VM_VM_KERN_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <mach/mach_types.h>
 #include <mach/boolean.h>
 #include <mach/kern_return.h>
@@ -92,5 +96,10 @@ extern void	vm_kernel_unslide_or_perm_external(
 
 
 extern void vm_init_before_launchd(void);
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif	/* _VM_VM_KERN_H_ */

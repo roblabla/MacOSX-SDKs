@@ -2,6 +2,8 @@
 	Copyright:	(c) 2003-2008 by Apple, Inc., all rights reserved.
 */
 
+#import <QuartzComposer/QuartzComposerDefines.h>
+
 #import <QuartzComposer/QCPlugIn.h>
 #import <QuartzComposer/QCComposition.h>
 #import <QuartzComposer/QCCompositionRepository.h>

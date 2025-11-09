@@ -1,7 +1,7 @@
 /*
 	NSComboBox.h
 	Application Kit
-	Copyright (c) 1996-2017, Apple Inc.
+	Copyright (c) 1996-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -40,7 +40,7 @@ APPKIT_EXTERN NSNotificationName NSComboBoxSelectionIsChangingNotification;
 
 @interface NSComboBox : NSTextField {
     /*All instance variables are private*/
-    id _dataSource;
+    id _dataSource APPKIT_IVAR;
 }
 
 @property BOOL hasVerticalScroller;

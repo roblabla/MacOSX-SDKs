@@ -6,6 +6,9 @@
 //
 
 #import <MapKit/MKFoundation.h>
+
+#if MK_SUPPORTS_VIEW_CLASSES
+
 #import <MapKit/MKAnnotationView.h>
 
 typedef NS_ENUM(NSUInteger, MKPinAnnotationColor) {
@@ -42,3 +45,5 @@ NS_CLASS_AVAILABLE(10_9, 3_0) __TVOS_AVAILABLE(9_2) __WATCHOS_PROHIBITED
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // MK_SUPPORTS_VIEW_CLASSES

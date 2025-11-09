@@ -26,8 +26,6 @@
 #include <os/availability.h>
 #include <TargetConditionals.h>
 #include <os/base.h>
-#elif defined(__linux__)
-#include <os/linux_base.h>
 #endif
 
 #include <sys/types.h>
@@ -40,17 +38,8 @@
 #endif
 #include <fcntl.h>
 
-#if defined(__linux__) && defined(__has_feature)
-#if __has_feature(modules)
-#if !defined(__arm__)
-#include <stdio.h> // for off_t (to match Glibc.modulemap)
-#endif
-#endif
-#endif
 
-#define DISPATCH_API_VERSION 20170124
-
-#ifndef __DISPATCH_BUILDING_DISPATCH__
+#define DISPATCH_API_VERSION 20180109
 
 #ifndef __DISPATCH_INDIRECT__
 #define __DISPATCH_INDIRECT__
@@ -70,7 +59,5 @@
 #include <dispatch/io.h>
 
 #undef __DISPATCH_INDIRECT__
-
-#endif /* !__DISPATCH_BUILDING_DISPATCH__ */
 
 #endif

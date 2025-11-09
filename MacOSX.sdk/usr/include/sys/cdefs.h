@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -390,6 +390,27 @@
 #endif
 
 /*
+ * __alloc_size can be used to label function arguments that represent the
+ * size of memory that the function allocates and returns. The one-argument
+ * form labels a single argument that gives the allocation size (where the
+ * arguments are numbered from 1):
+ *
+ * void	*malloc(size_t __size) __alloc_size(1);
+ *
+ * The two-argument form handles the case where the size is calculated as the
+ * product of two arguments:
+ *
+ * void	*calloc(size_t __count, size_t __size) __alloc_size(1,2);
+ */
+#ifndef __alloc_size
+#if __has_attribute(alloc_size)
+#define __alloc_size(...) __attribute__((alloc_size(__VA_ARGS__)))
+#else
+#define __alloc_size(...)
+#endif
+#endif // __alloc_size
+
+/*
  * COMPILATION ENVIRONMENTS -- see compat(5) for additional detail
  *
  * DEFAULT	By default newly complied code will get POSIX APIs plus
@@ -684,9 +705,11 @@
  * c99 still want long longs.  While not perfect, we allow long longs for
  * g++.
  */
-#define	__DARWIN_NO_LONG_LONG	(defined(__STRICT_ANSI__) \
-				&& (__STDC_VERSION__-0 < 199901L) \
-				&& !defined(__GNUG__))
+#if (defined(__STRICT_ANSI__) && (__STDC_VERSION__-0 < 199901L)  && !defined(__GNUG__))
+#define __DARWIN_NO_LONG_LONG 1
+#else
+#define __DARWIN_NO_LONG_LONG 0
+#endif
 
 /*****************************************
  *  Public darwin-specific feature macros
@@ -761,5 +784,8 @@
 #error Unsupported architecture
 #endif
 
+
+
+#define __compiler_barrier() __asm__ __volatile__("" ::: "memory")
 
 #endif /* !_CDEFS_H_ */

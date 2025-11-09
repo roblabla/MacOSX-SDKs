@@ -2,7 +2,7 @@
 //  GKPlayer.h
 //  Game Center
 //
-//  Copyright 2010-2017 Apple Inc. All rights reserved.
+//  Copyright 2010-2018 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,6 +13,7 @@
 @class GKPlayerInternal;
 @class GKGame;
 @class GKLocalPlayer;
+@class UIImage;
 
 NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 @interface GKPlayer : GKBasePlayer

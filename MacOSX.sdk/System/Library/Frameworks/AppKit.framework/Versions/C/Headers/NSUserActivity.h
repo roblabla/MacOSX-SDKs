@@ -1,7 +1,7 @@
 /*
     NSUserActivity.h
     Application Kit
-    Copyright (c) 2014-2017, Apple Inc.
+    Copyright (c) 2014-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -21,7 +21,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSResponder (NSUserActivity)
+@protocol NSUserActivityRestoring <NSObject>
+/* This method exists to be overridden and will be called from the main thread. It will be called on any objects passed to the restorationHandler given to application:continueUserActivity:restorationHandler: below. You should use the state in the userInfo to restore the object. On OS X, activities managed by NSDocument can be restored automatically, if NO is returned from application:continueActivity:restorationHandler: (or it is unimplemented). In this situation, the document will be opened via -[NSDocumentController openDocumentWithContentsOfURL:display:completionHandler:], and will have restoreUserActivityState: called on it. */
+- (void)restoreUserActivityState:(NSUserActivity *)userActivity NS_AVAILABLE_MAC(10_10);
+@end
+
+@interface NSResponder (NSUserActivity) <NSUserActivityRestoring>
 
 /*
  Setting an NSUserActivity will cause it to become managed by AppKit/UIKIt. NSUserActivities managed by AppKit/UIKIt will be saved automatically at an appropriate time. You will have an opportunity to add state representing the user’s activity via the below updateUserActivityState: override. It is recommended that you override the updateUserActivityState: method to lazily write any state to the userInfo.
@@ -39,12 +44,9 @@ NS_ASSUME_NONNULL_BEGIN
 /* This method exists to be overridden and will be called from the main thread. You should save any state representing the user's activity into the NSUserActivity's userInfo via its -addUserInfoEntriesFromDictionary method. When the state is out of date, you should mark the userActivity as needing to save via the needsSave property, and your override will be invoked again at an appropriate time. */
 - (void)updateUserActivityState:(NSUserActivity *)userActivity NS_AVAILABLE_MAC(10_10);
 
-/* This method exists to be overridden and will be called from the main thread. It will be called on any objects passed to the restorationHandler given to application:continueUserActivity:restorationHandler: below. You should use the state in the userInfo to restore the object. */
-- (void)restoreUserActivityState:(NSUserActivity *)userActivity NS_AVAILABLE_MAC(10_10);
-
 @end
 
-@interface NSDocument (NSUserActivity)
+@interface NSDocument (NSUserActivity) <NSUserActivityRestoring>
 
 /*
  This works just like the above responder methods for the most part.
@@ -57,9 +59,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* On OS X, The default implementation of this will put the fileURL into the userInfo with the NSUserActivityDocumentURLKey. NSDocument will automatically call needsSave on the userActivity when the fileURL changes. */
 - (void)updateUserActivityState:(NSUserActivity *)activity NS_AVAILABLE_MAC(10_10);
-
-/* On OS X, activities managed by NSDocument can be restored automatically, if NO is returned from application:continueActivity:restorationHandler: (or it is unimplemented). In this situation, the document will be opened via -[NSDocumentController openDocumentWithContentsOfURL:display:completionHandler:], and will have restoreUserActivityState: called on it. */
-- (void)restoreUserActivityState:(NSUserActivity *)activity NS_AVAILABLE_MAC(10_10);
 
 @end
 

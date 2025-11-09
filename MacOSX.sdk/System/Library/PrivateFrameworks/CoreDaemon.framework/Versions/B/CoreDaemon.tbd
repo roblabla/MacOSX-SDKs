@@ -1,13 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 938345AE-8FED-3222-8A9A-04D0430279E0', 'x86_64: 98557993-7CF2-32D0-87B2-01D982C6BC4A' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 8D971ACD-6A26-30A9-9C5B-BCBF60A661F1' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CoreDaemon.framework/Versions/B/CoreDaemon
 current-version: 3
 compatibility-version: 3
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _XSCipherCopyCipherProperties, _XSCipherFromName, _XSCipherSpecParse, 
                        _XSCipherToName, _XSDHParamCreateFromFile, _XSDHParamGetSize, 
                        _XSEventPortCreate, _XSEventPortDelete, _XSEventPortPostEvent, 

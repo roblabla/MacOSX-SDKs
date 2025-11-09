@@ -1,7 +1,7 @@
 /*
     NSTabViewController.h
     Application Kit
-    Copyright (c) 2014-2017, Apple Inc.
+    Copyright (c) 2014-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -37,15 +37,15 @@ typedef NS_ENUM(NSInteger, NSTabViewControllerTabStyle) {
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface NSTabViewController : NSViewController <NSTabViewDelegate, NSToolbarDelegate> {
 @private
-    NSTabView *_tabView;
-    id _tabViewControllerPrivateData;
+    NSTabView *_tabView APPKIT_IVAR;
+    id _tabViewControllerPrivateData APPKIT_IVAR;
     
     struct {
         unsigned int _changingSelection:1;
         unsigned int _addingInitialTabViewItems:1;
         unsigned int _tabBarIsDrivingTabMove:1;
         unsigned int __extra:29;
-    } _tabViewControllerFlags;
+    } _tabViewControllerFlags APPKIT_IVAR;
 }
 
 /// The style that this NSTabViewController displays its UI as. Defaults to \c NSTabViewControllerTabStyleSegmentedControlOnTop.

@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2017 Apple Inc. All rights reserved.
+	Copyright 2010-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -283,7 +283,7 @@ AV_INIT_UNAVAILABLE
  @method			currentTime
  @abstract			Returns the current time of the item.
  @result			A CMTime
- @discussion		Returns the current time of the item.
+ @discussion		Returns the current time of the item. Not key-value observable; use -[AVPlayer addPeriodicTimeObserverForInterval:queue:usingBlock:] instead.
  */
 - (CMTime)currentTime;
 

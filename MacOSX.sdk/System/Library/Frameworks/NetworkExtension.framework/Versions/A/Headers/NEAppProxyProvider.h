@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, 2017 Apple Inc.
+ * Copyright (c) 2015, 2017, 2018 Apple Inc.
  * All rights reserved.
  */
 
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * NEAppProxyProvider is part of NetworkExtension.framework
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEAppProxyProvider : NETunnelProvider
 
 /*!
@@ -33,7 +33,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param options A dictionary containing keys and values passed by the provider's containing app. If the containing app did not start the proxy then this parameter will be nil.
  * @param completionHandler A block that must be called when the process of starting the proxy is complete. If the proxy cannot be started then the subclass' implementation of this method must pass a non-nil NSError object to this block. A value of nil passed to the completion handler indicates that the proxy was successfully started.
  */
-- (void)startProxyWithOptions:(nullable NSDictionary<NSString *,id> *)options completionHandler:(void (^)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_11, 9_0);
+- (void)startProxyWithOptions:(nullable NSDictionary<NSString *,id> *)options completionHandler:(void (^)(NSError * __nullable error))completionHandler API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method stopProxyWithReason:completionHandler:
@@ -41,14 +41,14 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param reason An NEProviderStopReason indicating why the proxy is being stopped.
  * @param completionHandler A block that must be called when the proxy is completely stopped.
  */
-- (void)stopProxyWithReason:(NEProviderStopReason)reason completionHandler:(void (^)(void))completionHandler NS_AVAILABLE(10_11, 9_0);
+- (void)stopProxyWithReason:(NEProviderStopReason)reason completionHandler:(void (^)(void))completionHandler API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method cancelProxyWithError:
  * @discussion This function is called by proxy provider implementations to stop the proxy when a network error is encountered that renders the proxy no longer viable. Subclasses should not override this method.
  * @param error An NSError object containing details about the error that the proxy provider implementation encountered.
  */
-- (void)cancelProxyWithError:(nullable NSError *)error NS_AVAILABLE(10_11, 9_0);
+- (void)cancelProxyWithError:(nullable NSError *)error API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method handleNewFlow:
@@ -56,7 +56,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param flow The new flow
  * @return YES if the proxy implementation has retained the flow and intends to handle the flow data. NO if the proxy implementation has not retained the flow and will not handle the flow data. In this case the flow is terminated.
  */
-- (BOOL)handleNewFlow:(NEAppProxyFlow *)flow NS_AVAILABLE(10_11, 9_0);
+- (BOOL)handleNewFlow:(NEAppProxyFlow *)flow API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

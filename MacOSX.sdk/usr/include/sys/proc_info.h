@@ -593,7 +593,10 @@ struct kqueue_dyninfo {
 	uint8_t  kqdi_async_qos;
 	uint16_t kqdi_request_state;
 	uint8_t  kqdi_events_qos;
-	uint8_t  _kqdi_reserved0[7];
+	uint8_t	 kqdi_pri;
+	uint8_t	 kqdi_pol;
+	uint8_t	 kqdi_cpupercent;
+	uint8_t  _kqdi_reserved0[4];
 	uint64_t _kqdi_reserved1[4];
 };
 
@@ -619,7 +622,7 @@ struct appletalk_fdinfo {
 	struct appletalk_info	appletalkinfo;
 };
 
-
+typedef uint64_t proc_info_udata_t;
 
 /* defns of process file desc type */
 #define PROX_FDTYPE_ATALK	0
@@ -662,7 +665,6 @@ struct proc_fileportinfo {
 #define PROC_PIDLISTTHREADS		6
 #define PROC_PIDLISTTHREADS_SIZE	(2* sizeof(uint32_t))
 
-
 #define PROC_PIDREGIONINFO		7
 #define PROC_PIDREGIONINFO_SIZE		(sizeof(struct proc_regioninfo))
 
@@ -693,7 +695,6 @@ struct proc_fileportinfo {
 
 #define PROC_PID_RUSAGE			16
 #define PROC_PID_RUSAGE_SIZE		0
-
 
 /* Flavors for proc_pidfdinfo */
 
@@ -759,12 +760,17 @@ struct proc_fileportinfo {
 #define PROC_DIRTY_ALLOW_IDLE_EXIT      0x2
 #define PROC_DIRTY_DEFER                0x4
 #define PROC_DIRTY_LAUNCH_IN_PROGRESS   0x8
+#define PROC_DIRTY_DEFER_ALWAYS         0x10
 
 /* proc_get_dirty() flags */
 #define PROC_DIRTY_TRACKED              0x1
 #define PROC_DIRTY_ALLOWS_IDLE_EXIT     0x2
 #define PROC_DIRTY_IS_DIRTY             0x4
 #define PROC_DIRTY_LAUNCH_IS_IN_PROGRESS   0x8
+
+/* Flavors for proc_udata_info */
+#define PROC_UDATA_INFO_GET		1
+#define PROC_UDATA_INFO_SET		2
 
 
 

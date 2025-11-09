@@ -1,15 +1,10 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 2192BD80-EA1D-3BF6-B01F-A0D013DD8D5F', 'x86_64: 6305A148-86BA-3359-8D8F-933D8A295BCD' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 5BB09CDE-3C60-303A-BAE9-96B7859891A0' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/JavaVM.framework/Versions/A/Frameworks/JavaNativeFoundation.framework/Versions/A/JavaNativeFoundation
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ '_OBJC_EHTYPE_$_JNFException' ]
-    objc-ivars:      [ _JNFInternalJavaClassToCoersionHolder.coercion, _JNFJObjectWrapper.jobj, 
-                       _JNFTypeCoercer.javaClassNameToCoercion, _JNFTypeCoercer.javaClassToCoercion, 
-                       _JNFTypeCoercer.nsClassToCoercion, _JNFTypeCoercer.parent ]
-  - archs:           [ i386, x86_64 ]
     symbols:         [ _JNFAssertionFailure, _JNFAssertionFailureBreak, _JNFCFToJavaBoolean, 
                        _JNFCallBooleanMethod, _JNFCallByteMethod, _JNFCallCharMethod, 
                        _JNFCallDoubleMethod, _JNFCallFloatMethod, _JNFCallIntMethod, 
@@ -46,8 +41,12 @@ exports:
                        _kClassNotFoundException, _kIllegalAccessException, _kIllegalArgumentException, 
                        _kNoSuchFieldException, _kNoSuchMethodException, _kNullPointerException, 
                        _kOutOfMemoryError, _kRuntimeException ]
-    objc-classes:    [ _JNFDateCoercion, _JNFDefaultCoercions, _JNFException, _JNFInternalJavaClassToCoersionHolder, 
-                       _JNFJObjectWrapper, _JNFListCoercion, _JNFMapCoercion, _JNFNumberCoercion, 
-                       _JNFRunLoop, _JNFRunnable, _JNFRunnableWrapper, _JNFSetCoercion, 
-                       _JNFStringCoercion, _JNFTypeCoercer, _JNFWeakJObjectWrapper ]
+    objc-classes:    [ JNFDateCoercion, JNFDefaultCoercions, JNFException, JNFInternalJavaClassToCoersionHolder, 
+                       JNFJObjectWrapper, JNFListCoercion, JNFMapCoercion, JNFNumberCoercion, 
+                       JNFRunLoop, JNFRunnable, JNFRunnableWrapper, JNFSetCoercion, 
+                       JNFStringCoercion, JNFTypeCoercer, JNFWeakJObjectWrapper ]
+    objc-eh-types:   [ JNFException ]
+    objc-ivars:      [ JNFInternalJavaClassToCoersionHolder.coercion, JNFJObjectWrapper.jobj, 
+                       JNFTypeCoercer.javaClassNameToCoercion, JNFTypeCoercer.javaClassToCoercion, 
+                       JNFTypeCoercer.nsClassToCoercion, JNFTypeCoercer.parent ]
 ...

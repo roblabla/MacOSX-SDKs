@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSImage;
 
-typedef NS_ENUM(NSUInteger, AMLogLevel) {
+typedef NS_ENUM(NSUInteger, AMLogLevel)
+{
 	AMLogLevelDebug = 0,
 	AMLogLevelInfo = 1,
 	AMLogLevelWarn = 2,
@@ -20,8 +21,9 @@ typedef NS_ENUM(NSUInteger, AMLogLevel) {
 };
 
 NS_CLASS_AVAILABLE_MAC(10_4)
-@interface AMAction : NSObject {
-   @private
+@interface AMAction : NSObject
+{
+	@private
 	NSMutableDictionary *_definition;
 	AM_UNUSED_FOR_ANALYZER NSDictionary *_argumentsWithOutlets;
 	AM_UNUSED_FOR_ANALYZER NSString *_currentInput;

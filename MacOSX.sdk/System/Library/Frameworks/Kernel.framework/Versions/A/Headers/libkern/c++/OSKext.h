@@ -162,6 +162,7 @@ private:
         unsigned int interface:1;
         unsigned int kernelComponent:1;
         unsigned int prelinked:1;
+        unsigned int builtin:1;
         unsigned int loaded:1;
         unsigned int dtraceInitialized:1;
         unsigned int starting:1;
@@ -179,6 +180,7 @@ private:
     struct list_head pendingPgoHead;
     uuid_t instance_uuid;
     OSKextAccount * account;
+    uint32_t builtinKmodIdx;
 
 #if PRAGMA_MARK
 /**************************************/
@@ -378,9 +380,7 @@ private:
         OSMetaClass * aClass);
     virtual bool    hasOSMetaClassInstances(void);
     virtual OSSet * getMetaClasses(void);
-    static  void reportOSMetaClassInstances(
-        const char     * kextIdentifier,
-        OSKextLogSpec    msgLogSpec);
+
     virtual void reportOSMetaClassInstances(
         OSKextLogSpec msgLogSpec);
 
@@ -443,11 +443,10 @@ private:
     void updateLoadedKextSummary(OSKextLoadedKextSummary *summary);
     void updateActiveAccount(OSKextActiveAccount *accountp);
 
+
     /* C++ Initialization.
      */
     virtual void               setCPPInitialized(bool initialized=true);
-
-
 
 #if PRAGMA_MARK
 /**************************************/
@@ -506,6 +505,7 @@ public:
                                             OSDictionary * theDictionary,
                                             OSCollectionIterator * theIterator);
     static void     createExcludeListFromPrelinkInfo(OSArray * theInfoArray);
+    static boolean_t updateExcludeList(OSDictionary * infoDict);
 
     static bool     isWaitingKextd(void);
 
@@ -522,6 +522,8 @@ public:
     virtual OSKextLoadTag      getLoadTag(void);
     virtual void               getSizeInfo(uint32_t *loadSize, uint32_t *wiredSize);
     virtual OSData           * copyUUID(void);
+    OSData                   * copyTextUUID(void);
+    OSData                   * copyMachoUUID(const kernel_mach_header_t * header);
     virtual OSArray          * copyPersonalitiesArray(void);
     
    /* This removes personalities naming the kext (by CFBundleIdentifier),

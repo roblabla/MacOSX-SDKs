@@ -1,6 +1,6 @@
 /* CoreAnimation - CALayer.h
 
-   Copyright (c) 2006-2017, Apple Inc.
+   Copyright (c) 2006-2018, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CAMediaTiming.h>
@@ -15,6 +15,10 @@
 @protocol CALayoutManager;
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef NSString * CALayerContentsGravity NS_STRING_ENUM;
+typedef NSString * CALayerContentsFormat NS_STRING_ENUM;
+typedef NSString * CALayerContentsFilter NS_STRING_ENUM;
 
 /* Bit definitions for `autoresizingMask' property. */
 
@@ -51,7 +55,7 @@ typedef NS_OPTIONS (NSUInteger, CACornerMask)
 
 /** The base layer class. **/
 
-CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
+API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface CALayer : NSObject <NSSecureCoding, CAMediaTiming>
 {
 @private
@@ -241,7 +245,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * the behavior is undefined. Note that the returned array is not
  * guaranteed to retain its elements. */
 
-@property(nullable, copy) NSArray<CALayer *> *sublayers;
+@property(nullable, copy) NSArray<__kindof CALayer *> *sublayers;
 
 /* Add 'layer' to the end of the receiver's sublayers array. If 'layer'
  * already has a superlayer, it will be removed before being added. */
@@ -261,11 +265,11 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 - (void)insertSublayer:(CALayer *)layer below:(nullable CALayer *)sibling;
 - (void)insertSublayer:(CALayer *)layer above:(nullable CALayer *)sibling;
 
-/* Remove 'layer' from the sublayers array of the receiver and insert
- * 'layer2' if non-nil in its position. If the superlayer of 'layer'
+/* Remove 'oldLayer' from the sublayers array of the receiver and insert
+ * 'newLayer' if non-nil in its position. If the superlayer of 'oldLayer'
  * is not the receiver, the behavior is undefined. */
 
-- (void)replaceSublayer:(CALayer *)layer with:(CALayer *)layer2;
+- (void)replaceSublayer:(CALayer *)oldLayer with:(CALayer *)newLayer;
 
 /* A transform applied to each member of the `sublayers' array while
  * rendering its contents into the receiver's output. Typically used as
@@ -283,7 +287,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * undefined. Nested masks (mask layers with their own masks) are
  * unsupported. */
 
-@property(nullable, strong) CALayer *mask;
+@property(nullable, strong) __kindof CALayer *mask;
 
 /* When true an implicit mask matching the layer bounds is applied to
  * the layer (including the effects of the `cornerRadius' property). If
@@ -311,7 +315,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * isn't a CATransformLayer (transform layers don't have a 2D
  * coordinate space in which the point could be specified). */
 
-- (nullable CALayer *)hitTest:(CGPoint)p;
+- (nullable __kindof CALayer *)hitTest:(CGPoint)p;
 
 /* Returns true if the bounds of the layer contains point 'p'. */
 
@@ -342,7 +346,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * `resize'. Note that "bottom" always means "Minimum Y" and "top"
  * always means "Maximum Y". */
 
-@property(copy) NSString *contentsGravity;
+@property(copy) CALayerContentsGravity contentsGravity;
 
 /* Defines the scale factor applied to the contents of the layer. If
  * the physical size of the contents is '(w, h)' then the logical size
@@ -353,7 +357,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * as large as the layer bounds). Defaults to one. Animatable. */
 
 @property CGFloat contentsScale
-  CA_AVAILABLE_STARTING (10.7, 4.0, 9.0, 2.0);
+  API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0));
 
 /* A rectangle in normalized image coordinates defining the scaled
  * center part of the `contents' image.
@@ -380,8 +384,8 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * -drawLayerInContext. Defaults to kCAContentsFormatRGBA8Uint. Note that this
  * does not affect the interpretation of the `contents' property directly. */
 
-@property(copy) NSString *contentsFormat
-  CA_AVAILABLE_STARTING (10.12, 10.0, 10.0, 3.0);
+@property(copy) CALayerContentsFormat contentsFormat
+  API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 /* The filter types to use when rendering the `contents' property of
  * the layer. The minification filter is used when to reduce the size
@@ -389,8 +393,8 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * image data. Currently the allowed values are `nearest' and `linear'.
  * Both properties default to `linear'. */
 
-@property(copy) NSString *minificationFilter;
-@property(copy) NSString *magnificationFilter;
+@property(copy) CALayerContentsFilter minificationFilter;
+@property(copy) CALayerContentsFilter magnificationFilter;
 
 /* The bias factor added when determining which levels of detail to use
  * when minifying using trilinear filtering. The default value is 0.
@@ -438,7 +442,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * default value is NO. */
 
 @property BOOL drawsAsynchronously
-  CA_AVAILABLE_STARTING (10.8, 6.0, 9.0, 2.0);
+  API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 /* Called via the -display method when the `contents' property is being
  * updated. Default implementation does nothing. The context may be
@@ -467,6 +471,18 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 
 @property CAEdgeAntialiasingMask edgeAntialiasingMask;
 
+/* When true this layer is allowed to antialias its edges, as requested
+ * by the edgeAntialiasingMask.
+ *
+ * The default value is read from the CALayerAllowsEdgeAntialiasing
+ * property in the main bundle's Info.plist. On iOS, if that property
+ * is not found, the UIViewEdgeAntialiasing property will be used
+ * instead. If no value is found in the Info.plist the default value is
+ * YES on macOS and NO on iOS. */
+
+@property BOOL allowsEdgeAntialiasing
+    API_AVAILABLE(macos(10.10), ios(2.0), watchos(2.0), tvos(9.0));
+
 /* The background color of the layer. Default value is nil. Colors
  * created from tiled patterns are supported. Animatable. */
 
@@ -482,7 +498,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * `cornerRadius' property. Defaults to all four corners. */
 
 @property CACornerMask maskedCorners
-  CA_AVAILABLE_STARTING (10.13, 11.0, 11.0, 4.0);
+  API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* The width of the layer's border, inset from the layer bounds. The
  * border is composited above the layer's content and sublayers and
@@ -501,6 +517,20 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * results. Animatable. */
 
 @property float opacity;
+
+/* When true, and the layer's opacity property is less than one, the
+ * layer is allowed to composite itself as a group separate from its
+ * parent. This gives the correct results when the layer contains
+ * multiple opaque components, but may reduce performance.
+ *
+ * The default value is read from the CALayerAllowsGroupOpacity
+ * property in the main bundle's Info.plist. On iOS, if that property
+ * is not found, the UIViewGroupOpacity property will be used instead.
+ * If no value is found in the Info.plist the default value is YES on
+ * macOS and NO on iOS. */
+
+@property BOOL allowsGroupOpacity
+    API_AVAILABLE(macos(10.10), ios(2.0), watchos(2.0), tvos(9.0));
 
 /* A filter object used to composite the layer with its (possibly
  * filtered) background. Default value is nil, which implies source-
@@ -736,7 +766,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * if no such animation exists. Attempting to modify any properties of
  * the returned object will result in undefined behavior. */
 
-- (nullable CAAnimation *)animationForKey:(NSString *)key;
+- (nullable __kindof CAAnimation *)animationForKey:(NSString *)key;
 
 
 /** Miscellaneous properties. **/
@@ -830,7 +860,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * be called if the delegate implements -displayLayer. */
 
 - (void)layerWillDraw:(CALayer *)layer
-  CA_AVAILABLE_STARTING (10.12, 10.0, 10.0, 3.0);
+  API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 /* Called by the default -layoutSublayers implementation before the layout
  * manager is checked. Note that if the delegate method is invoked, the
@@ -839,7 +869,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 - (void)layoutSublayersOfLayer:(CALayer *)layer;
 
 /* If defined, called by the default implementation of the
- * -actionForKey: method. Should return an object implementating the
+ * -actionForKey: method. Should return an object implementing the
  * CAAction protocol. May return 'nil' if the delegate doesn't specify
  * a behavior for the current event. Returning the null object (i.e.
  * '[NSNull null]') explicitly forces no further search. (I.e. the
@@ -851,64 +881,64 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 
 /** Layer `contentsGravity' values. **/
 
-CA_EXTERN NSString * const kCAGravityCenter
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAGravityTop
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAGravityBottom
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAGravityLeft
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAGravityRight
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAGravityTopLeft
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAGravityTopRight
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAGravityBottomLeft
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAGravityBottomRight
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAGravityResize
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAGravityResizeAspect
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAGravityResizeAspectFill
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
+CA_EXTERN CALayerContentsGravity const kCAGravityCenter
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CALayerContentsGravity const kCAGravityTop
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CALayerContentsGravity const kCAGravityBottom
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CALayerContentsGravity const kCAGravityLeft
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CALayerContentsGravity const kCAGravityRight
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CALayerContentsGravity const kCAGravityTopLeft
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CALayerContentsGravity const kCAGravityTopRight
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CALayerContentsGravity const kCAGravityBottomLeft
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CALayerContentsGravity const kCAGravityBottomRight
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CALayerContentsGravity const kCAGravityResize
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CALayerContentsGravity const kCAGravityResizeAspect
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CALayerContentsGravity const kCAGravityResizeAspectFill
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /** Layer `contentsFormat` values. **/
 
-CA_EXTERN NSString * const kCAContentsFormatRGBA8Uint /* RGBA UInt8 per component */
-  CA_AVAILABLE_STARTING (10.12, 10.0, 10.0, 3.0);
-CA_EXTERN NSString * const kCAContentsFormatRGBA16Float /* RGBA half-float 16-bit per component */
-  CA_AVAILABLE_STARTING (10.12, 10.0, 10.0, 3.0);
-CA_EXTERN NSString * const kCAContentsFormatGray8Uint /* Grayscale with alpha (if not opaque) UInt8 per component */
-  CA_AVAILABLE_STARTING (10.12, 10.0, 10.0, 3.0);
+CA_EXTERN CALayerContentsFormat const kCAContentsFormatRGBA8Uint /* RGBA UInt8 per component */
+  API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+CA_EXTERN CALayerContentsFormat const kCAContentsFormatRGBA16Float /* RGBA half-float 16-bit per component */
+  API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+CA_EXTERN CALayerContentsFormat const kCAContentsFormatGray8Uint /* Grayscale with alpha (if not opaque) UInt8 per component */
+  API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 /** Contents filter names. **/
 
-CA_EXTERN NSString * const kCAFilterNearest
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
-CA_EXTERN NSString * const kCAFilterLinear
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
+CA_EXTERN CALayerContentsFilter const kCAFilterNearest
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+CA_EXTERN CALayerContentsFilter const kCAFilterLinear
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /* Trilinear minification filter. Enables mipmap generation. Some
  * renderers may ignore this, or impose additional restrictions, such
  * as source images requiring power-of-two dimensions. */
 
-CA_EXTERN NSString * const kCAFilterTrilinear
-    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);
+CA_EXTERN CALayerContentsFilter const kCAFilterTrilinear
+    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 /** Layer event names. **/
 
 CA_EXTERN NSString * const kCAOnOrderIn
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 CA_EXTERN NSString * const kCAOnOrderOut
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /** The animation key used for transitions. **/
 
 CA_EXTERN NSString * const kCATransition
-    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);
+    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END

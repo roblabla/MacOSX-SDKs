@@ -14,7 +14,7 @@
 #include <Availability.h>
 #include <TargetConditionals.h>
 
-#if !(defined(MAC_OS_X_VERSION_10_13) || defined(__IPHONE_11_0)) || defined(IOSFC_BUILDING_IOSFC)
+#if !(defined(MAC_OS_X_VERSION_10_14) || defined(__IPHONE_12_0)) || defined(IOSFC_BUILDING_IOSFC)
 #  define IOSFC_DEPRECATED 
 #  define IOSFC_DEPRECATED_MSG(s)
 #  define IOSFC_IOS_DEPRECATED_MSG(s)
@@ -24,7 +24,7 @@
 #else /* !defined(IOSFC_BUILDING_IOSFC) */
 #  define IOSFC_DEPRECATED DEPRECATED_ATTRIBUTE
 #  define IOSFC_DEPRECATED_MSG(s) DEPRECATED_MSG_ATTRIBUTE(s)
-#if TARGET_OS_EMBEDDED
+#if TARGET_OS_IPHONE
 #  define IOSFC_IOS_DEPRECATED_MSG(s) DEPRECATED_MSG_ATTRIBUTE(s)
 #else
 #  define IOSFC_IOS_DEPRECATED_MSG(s)
@@ -42,7 +42,7 @@
 
 #include <mach/kern_return.h>
 #include <CoreFoundation/CoreFoundation.h>
-#if !TARGET_OS_EMBEDDED
+#if TARGET_OS_OSX
 #include <xpc/xpc.h>
 #endif
 

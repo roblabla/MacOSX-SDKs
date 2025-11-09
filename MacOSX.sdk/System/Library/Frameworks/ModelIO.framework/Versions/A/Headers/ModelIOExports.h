@@ -12,3 +12,7 @@
 #else
 #   define MDL_EXPORT extern __attribute__((visibility ("default")))
 #endif
+
+// export struct or class
+#define MDL_CLASS_EXPORT __attribute__((visibility ("default")))
+

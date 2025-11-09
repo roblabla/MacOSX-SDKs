@@ -1,4 +1,4 @@
-.TH "MPSGRUDescriptor" 3 "Sun Jul 2 2017" "Version MetalPerformanceShaders-84.1" "MetalPerformanceShaders.framework" \" -*- nroff -*-
+.TH "MPSGRUDescriptor" 3 "Mon Jul 9 2018" "Version MetalPerformanceShaders-119.3" "MetalPerformanceShaders.framework" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -76,7 +76,7 @@ Then the output of the Gated Recurrent Unit layer is computed as follows:
     c_i =      Uh_ij * (r_j h0_j)  +  Vh_ij * (z_j h0_j)
     h_i = gh(  Wh_ij * x_j  + c_i + bh_i  )
 
-h1_i = ( 1 - z_i ^ p)^(1/p) h0_i + z_i h_i
+h1_i = ( 1 - z_i ^ p)^(1/p) h_i + z_i h0_i
 
 .fi
 .PP
@@ -96,14 +96,14 @@ Creates a GRU descriptor\&.
 .PP
 \fBReturns:\fP
 .RS 4
-A valid \fBMPSGRUDescriptor\fP object or nil, if failure\&. 
+\fBA\fP valid \fBMPSGRUDescriptor\fP object or nil, if failure\&. 
 .RE
 .PP
 
 .SH "Property Documentation"
 .PP 
 .SS "\- flipOutputGates\fC [read]\fP, \fC [write]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
-If YES then the GRU-block output formula is changed to: h1_i = ( 1 - z_i ^ p)^(1/p) h_i + z_i h0_i\&. Defaults to NO\&. 
+If YES then the GRU-block output formula is changed to: h1_i = ( 1 - z_i ^ p)^(1/p) h0_i + z_i h_i\&. Defaults to NO\&. 
 .SS "\- gatePnormValue\fC [read]\fP, \fC [write]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
 The p-norm gating norm value as specified by the GRU formulae\&. Defaults to 1\&.0f\&. 
 .SS "\- inputGateInputWeights\fC [read]\fP, \fC [write]\fP, \fC [nonatomic]\fP, \fC [retain]\fP"

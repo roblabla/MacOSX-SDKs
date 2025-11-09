@@ -1,121 +1,136 @@
 /*
     NSVisualEffectView.h
     Application Kit
-    Copyright (c) 2014-2017, Apple Inc.
+    Copyright (c) 2014-2018, Apple Inc.
     All rights reserved.
 */
 
 #import <AppKit/NSView.h>
+#import <AppKit/NSWindow.h>
+#import <AppKit/NSImage.h>
 #import <AppKit/NSCell.h>
+#import <Foundation/NSObjCRuntime.h>
 
-/* The main material that this view displays.
- */
 NS_ASSUME_NONNULL_BEGIN
 
+/// The main material that this view displays.  Materials are dynamic, and their exact look depends on the view's effectiveAppearance, blendingMode, state, emphasized, and possibly other factors.
 typedef NS_ENUM(NSInteger, NSVisualEffectMaterial) {
-    // These first colors are abstract materials managed by AppKit and should be used when creating UI that needs to mimic these material types
-    // Many of these colors are dynamic and depend on the current NSAppearance set on the view (or its parent view)
-    NSVisualEffectMaterialAppearanceBased = 0, // Maps to Light or Dark, depending on the appearance set on the view
-    NSVisualEffectMaterialTitlebar = 3, // Mainly designed to be used for NSVisualEffectBlendingModeWithinWindow
-    /* A special material for selection. The material will vary depending on the effectiveAppearance, active state, and emphasized state.
-     */
-    NSVisualEffectMaterialSelection = 4,
-    NSVisualEffectMaterialMenu NS_ENUM_AVAILABLE_MAC(10_11) = 5,
-    NSVisualEffectMaterialPopover NS_ENUM_AVAILABLE_MAC(10_11) = 6,
-    NSVisualEffectMaterialSidebar NS_ENUM_AVAILABLE_MAC(10_11) = 7,
+    /// The material used by window titlebars.
+    NSVisualEffectMaterialTitlebar = 3,
     
-    // These next colors are specific palette colors that can be used to create a specific design or look that doesn’t fit into the above system defined materials
-    NSVisualEffectMaterialLight = 1,
-    NSVisualEffectMaterialDark = 2,
-    NSVisualEffectMaterialMediumLight NS_ENUM_AVAILABLE_MAC(10_11) = 8,
-    NSVisualEffectMaterialUltraDark NS_ENUM_AVAILABLE_MAC(10_11) = 9,
-} NS_ENUM_AVAILABLE_MAC(10_10);
+    /// The material used in some table views, menus, etc., to indicate selection.
+    NSVisualEffectMaterialSelection = 4,
+    
+    /// The material used by menus.
+    NSVisualEffectMaterialMenu NS_ENUM_AVAILABLE_MAC(10_11) = 5,
+    
+    /// The material used in the background of NSPopover windows.
+    NSVisualEffectMaterialPopover NS_ENUM_AVAILABLE_MAC(10_11) = 6,
+    
+    /// The material used in the background of window sidebars.
+    NSVisualEffectMaterialSidebar NS_ENUM_AVAILABLE_MAC(10_11) = 7,
+        
+    /// The material used in various in-line header or footer views (e.g., by NSTableView).
+    NSVisualEffectMaterialHeaderView NS_ENUM_AVAILABLE_MAC(10_14) = 10,
+    
+    /// The material used as the background of sheet windows.
+    NSVisualEffectMaterialSheet NS_ENUM_AVAILABLE_MAC(10_14) = 11,
+    
+    /// The material used by opaque window backgrounds.
+    NSVisualEffectMaterialWindowBackground NS_ENUM_AVAILABLE_MAC(10_14) = 12,
+    
+    /// The material used as the background of heads-up display (HUD) windows.
+    NSVisualEffectMaterialHUDWindow NS_ENUM_AVAILABLE_MAC(10_14) = 13,
+    
+    /// The material used as the background of full-screen modal UI.
+    NSVisualEffectMaterialFullScreenUI NS_ENUM_AVAILABLE_MAC(10_14) = 15,
+    
+    /// The material used as the background of tool tips.
+    NSVisualEffectMaterialToolTip NS_ENUM_AVAILABLE_MAC(10_14) = 17,
+    
+    /// The material used as the opaque background of content (e.g., by NSScrollView, NSTableView, NSCollectionView, etc.).
+    NSVisualEffectMaterialContentBackground NS_ENUM_AVAILABLE_MAC(10_14) = 18,
+    
+    /// The material used under window backgrounds.
+    NSVisualEffectMaterialUnderWindowBackground NS_ENUM_AVAILABLE_MAC(10_14) = 21,
+        
+    /// The material used as the background behind document pages.
+    NSVisualEffectMaterialUnderPageBackground NS_ENUM_AVAILABLE_MAC(10_14) = 22,
+    
+    /// A default material appropriate for the view's effectiveAppearance.  You should instead choose an appropriate semantic material.
+    NSVisualEffectMaterialAppearanceBased NS_ENUM_DEPRECATED_MAC(10_10, API_TO_BE_DEPRECATED, "Use a specific semantic material instead.") = 0,
+    
+    // Materials with specific looks.  You should instead choose an appropriate semantic material.
+    NSVisualEffectMaterialLight NS_ENUM_DEPRECATED_MAC(10_10, API_TO_BE_DEPRECATED, "Use a semantic material instead.  To force the appearance of a view hierarchy, set the `appearance` property to an appropriate NSAppearance value.") = 1,
+    NSVisualEffectMaterialDark NS_ENUM_DEPRECATED_MAC(10_10, API_TO_BE_DEPRECATED, "Use a semantic material instead.  To force the appearance of a view hierarchy, set the `appearance` property to an appropriate NSAppearance value.") = 2,
+    NSVisualEffectMaterialMediumLight NS_ENUM_DEPRECATED_MAC(10_11, API_TO_BE_DEPRECATED, "Use a semantic material instead.  To force the appearance of a view hierarchy, set the `appearance` property to an appropriate NSAppearance value.") = 8,
+    NSVisualEffectMaterialUltraDark NS_ENUM_DEPRECATED_MAC(10_11, API_TO_BE_DEPRECATED, "Use a semantic material instead.  To force the appearance of a view hierarchy, set the `appearance` property to an appropriate NSAppearance value.") = 9,
+} NS_AVAILABLE_MAC(10_10);
                 
-/* How the view blends with things behind it.
- */
 typedef NS_ENUM(NSInteger, NSVisualEffectBlendingMode) {
-    NSVisualEffectBlendingModeBehindWindow, // Blends and blurs with the contents behind the window (such as the desktop or other windows). These can overlap, and the view lower in the hierarchy will "win".
-    NSVisualEffectBlendingModeWithinWindow, // Blends and blurs with contents behind the view in the current window only. For now, these cannot overlap each other. This mode REQUIRES layer-backing with view.wantsLayer = YES.
-} NS_ENUM_AVAILABLE_MAC(10_10);
+    /// Blend with the area behind the window (such as the Desktop or other windows).
+    NSVisualEffectBlendingModeBehindWindow,
+    
+    /// Blend with the area behind the view in the window.
+    NSVisualEffectBlendingModeWithinWindow,
+} NS_AVAILABLE_MAC(10_10);
 
-/* The material may look different when it is inactive. 
- */
 typedef NS_ENUM(NSInteger, NSVisualEffectState) {
-    NSVisualEffectStateFollowsWindowActiveState, // The backdrop automatically appears active when the window is active, and inactive when it is not active.
-    NSVisualEffectStateActive, // The backdrop is explicitly active, always
-    NSVisualEffectStateInactive, // The backdrop is explicitly inactive
-} NS_ENUM_AVAILABLE_MAC(10_10);
+    /// Use the active look only when the containing window is active.
+    NSVisualEffectStateFollowsWindowActiveState,
+    
+    /// Use the active look always.
+    NSVisualEffectStateActive,
+    
+    /// Use the inactive look always.
+    NSVisualEffectStateInactive,
+} NS_AVAILABLE_MAC(10_10);
 
-/* The NSVisualEffectView is the basis for all visual effects, including "vibrant" appearances. You can optionally set the appearance to [NSAppearance appearanceNamed:NSAppearanceNameVibrantDark] (or Light) to get the desired light or dark appearance. Combine this with an appropriate light or dark material to get the desired vibrant look. Combining NSAppearanceNameVibrantDark with a light material will look bad, and should not be done.
- */
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface NSVisualEffectView : NSView {
 @private
-    struct NSVisualEffectViewInternal *_NSVisualEffectViewInternal;
+    struct NSVisualEffectViewInternal *_NSVisualEffectViewInternal APPKIT_IVAR;
     
 #if !__LP64__
-    uint8_t _reserved[40];
+    uint8_t _reserved[36] APPKIT_IVAR;
 #endif
-    CALayer *_darkenLayer;
-    CALayer *_maskLayer;
-    CALayer *_clearCopyLayer;
-    CALayer *_backdropLayer;
-    CALayer *_backdropLayerForMask __unused;
+    CALayer *_darkenLayer APPKIT_IVAR;
+    CALayer *_colorCopyLayer APPKIT_IVAR;
+    CALayer *_backdropLayer APPKIT_IVAR;
+    NSImage *_maskImage APPKIT_IVAR;
     
-    unsigned int _dirty:1;
-    unsigned int _hasMask:1;
-    unsigned int _disableBlurFilter:1;
-    unsigned int _titlebarMaterialDrawsSeparator:1;
-    unsigned int _maskSet:1;
-    unsigned int _clear:1;
-    unsigned int _updateInDidMoveToWindow:1;
-    unsigned int _hasAcceleration:1;
-    unsigned int _emphasized:1;
-    unsigned int _hasAccelerationCached:1;
-    unsigned int _requiresBackdrop:1;
-    unsigned int _appearsDarker:1;
-    unsigned int _inheritsBlendGroup:1;
-    unsigned int _registeredForFrameChanges:1;
-    unsigned int _needsClearProxy:1;
-    unsigned int _reservedFlags:17 __unused;
+    unsigned int _clear:1 APPKIT_IVAR;
+    unsigned int _emphasized:1 APPKIT_IVAR;
+    unsigned int _appearsDarker:1 APPKIT_IVAR;
+    unsigned int _inheritsBlendGroup:1 APPKIT_IVAR;
+    unsigned int _needsClearProxy:1 APPKIT_IVAR;
+    unsigned int _usesMaterialPreferredAppearance:1 APPKIT_IVAR;
+    unsigned int _reservedFlags:26 __unused APPKIT_IVAR;
 }
 
-/* The default value is NSVisualEffectMaterialAppearanceBased; the material is updated to be the correct material based on the appearance set on this view.
- */
+/// A value indicating which material is shown by the NSVisualEffectView.  See the comments on NSVisualEffectMaterial.  Defaults to NSVisualEffectMaterialAppearanceBased.  You should instead specify an appropriate semantic material value.  See the comments on NSVisualEffectMaterial.
 @property NSVisualEffectMaterial material;
 
-/*  Returns "Light" or "Dark" depending on the material selected.
-*/
-@property(readonly) NSBackgroundStyle interiorBackgroundStyle;
+/// An NSBackgroundStyle value that most closely matches the look of the material shown by the NSVisualEffectView.
+@property (readonly) NSBackgroundStyle interiorBackgroundStyle;
 
-/* How this backdrop view blurs its contents. It can either blend with the contents behind the window (NSVisualEffectBlendingModeBehindWindow -- the default), or within the current window (NSVisualEffectBlendingModeWithinWindow). The blending mode for the material NSVisualEffectMaterialTitlebar can only be NSVisualEffectBlendingModeWithinWindow.
- 
- The blendingMode NSVisualEffectBlendingModeWithinWindow requires setWantsLayer:YES to be done on the parent view that you desire to blend with.
-*/
+/// A value controlling how the NSVisualEffectView generates its material.  See the comments on NSVisualEffectBlendingMode.  Not all materials support both blending modes, so NSVisualEffectView may fall back to a more appropriate blending mode as needed.  Defaults to NSVisualEffectBlendingModeBehindWindow.
 @property NSVisualEffectBlendingMode blendingMode;
 
-/* The state defaults to NSVisualEffectStateFollowsWindowActiveState.
- */
+/// A value controlling when the NSVisualEffectView takes on the active look.  See the comments on NSVisualEffectState.  Defaults to NSVisualEffectStateFollowsWindowActiveState.
 @property NSVisualEffectState state;
 
-/* The mask image masks this view. It is best to set this to the smallest mask image possible and properly set the image.capInsets to inform the image on how to stretch the contents when it is used as a mask. Setting the maskImage on an NSVisualEffectView that is the window.contentView will correctly set the window's shadow.
- */
-@property(nullable, retain) NSImage *maskImage;
+/// An image whose alpha channel is used to mask the material generated by the NSVisualEffectView.  (It does not also mask subviews.)  Defaults to nil.  It is best to set this to the smallest mask image possible and properly set the image's capInsets property to stretch it.  Setting the maskImage on an NSVisualEffectView that is the contentView of a window will correctly influence the window's shadow.
+@property (nullable, retain) NSImage *maskImage;
 
-/* Some materials (currently only the Selection material) have a different look when the view is emphasized, meaning the view that is showing the selection has firstResponder status. The default value is NO.
- */
+/// When YES, the material takes on the emphasized look.  Defaults to NO.  Some, but not all, materials change their look when emphasized.  This is used to indicate that an associated view has firstResponder status.
 @property (getter=isEmphasized) BOOL emphasized NS_AVAILABLE_MAC(10_12);
 
-/* Some things this class overrides; it is required to call super if you subclass and override these.
- */
+// Some things this class overrides.  It is required to call super if you subclass NSVisualEffectView and override these.
+
 - (void)viewDidMoveToWindow NS_REQUIRES_SUPER;
 - (void)viewWillMoveToWindow:(nullable NSWindow *)newWindow NS_REQUIRES_SUPER;
 
 @end
 
 NS_ASSUME_NONNULL_END
-
-
-
-
-

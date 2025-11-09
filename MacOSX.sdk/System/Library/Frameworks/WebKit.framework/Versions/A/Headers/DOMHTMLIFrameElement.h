@@ -29,7 +29,7 @@
 @class DOMDocument;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMHTMLIFrameElement : DOMHTMLElement
 @property (copy) NSString *align;
 @property (copy) NSString *frameBorder;
@@ -42,5 +42,5 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (copy) NSString *src;
 @property (copy) NSString *width;
 @property (readonly, strong) DOMDocument *contentDocument;
-@property (readonly, strong) DOMAbstractView *contentWindow NS_AVAILABLE_MAC(10_6);
+@property (readonly, strong) DOMAbstractView *contentWindow WEBKIT_AVAILABLE_MAC(10_6);
 @end

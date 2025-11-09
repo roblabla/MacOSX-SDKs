@@ -1,7 +1,7 @@
 /*
  NSCustomTouchBarItem.h
  Application Kit
- Copyright (c) 2015-2017, Apple Inc.
+ Copyright (c) 2015-2018, Apple Inc.
  All rights reserved.
 */
 
@@ -12,14 +12,14 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSCustomTouchBarItem : NSTouchBarItem {
 @private
-    NSView *_view;
-    NSViewController *_viewController;
-    NSString *_customizationLabel;
-    NSInteger _preferredPopoverTransposerPriority;
-    Class _preferredPopoverTransposerClass;
-    CGFloat _preferredZOrder;
+    NSView *_view APPKIT_IVAR;
+    NSViewController *_viewController APPKIT_IVAR;
+    NSString *_customizationLabel APPKIT_IVAR;
+    NSInteger _preferredPopoverTransposerPriority APPKIT_IVAR;
+    Class _preferredPopoverTransposerClass APPKIT_IVAR;
+    CGFloat _preferredZOrder APPKIT_IVAR;
 #if !__OBJC2__
-    void *_customTouchBarItemReserved[3] __unused;
+    void *_customTouchBarItemReserved[3] __unused APPKIT_IVAR;
 #endif /* !__OBJC2__ */
 }
 

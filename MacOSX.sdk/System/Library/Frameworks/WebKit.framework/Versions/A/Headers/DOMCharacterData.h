@@ -27,21 +27,21 @@
 
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMCharacterData : DOMNode
 @property (copy) NSString *data;
 @property (readonly) unsigned length;
 
-- (NSString *)substringData:(unsigned)offset length:(unsigned)length NS_AVAILABLE_MAC(10_5);
+- (NSString *)substringData:(unsigned)offset length:(unsigned)length WEBKIT_AVAILABLE_MAC(10_5);
 - (void)appendData:(NSString *)data;
-- (void)insertData:(unsigned)offset data:(NSString *)data NS_AVAILABLE_MAC(10_5);
-- (void)deleteData:(unsigned)offset length:(unsigned)length NS_AVAILABLE_MAC(10_5);
-- (void)replaceData:(unsigned)offset length:(unsigned)length data:(NSString *)data NS_AVAILABLE_MAC(10_5);
+- (void)insertData:(unsigned)offset data:(NSString *)data WEBKIT_AVAILABLE_MAC(10_5);
+- (void)deleteData:(unsigned)offset length:(unsigned)length WEBKIT_AVAILABLE_MAC(10_5);
+- (void)replaceData:(unsigned)offset length:(unsigned)length data:(NSString *)data WEBKIT_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMCharacterData (DOMCharacterDataDeprecated)
-- (NSString *)substringData:(unsigned)offset :(unsigned)length NS_DEPRECATED_MAC(10_4, 10_5);
-- (void)insertData:(unsigned)offset :(NSString *)data NS_DEPRECATED_MAC(10_4, 10_5);
-- (void)deleteData:(unsigned)offset :(unsigned)length NS_DEPRECATED_MAC(10_4, 10_5);
-- (void)replaceData:(unsigned)offset :(unsigned)length :(NSString *)data NS_DEPRECATED_MAC(10_4, 10_5);
+- (NSString *)substringData:(unsigned)offset :(unsigned)length WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (void)insertData:(unsigned)offset :(NSString *)data WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (void)deleteData:(unsigned)offset :(unsigned)length WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (void)replaceData:(unsigned)offset :(unsigned)length :(NSString *)data WEBKIT_DEPRECATED_MAC(10_4, 10_5);
 @end

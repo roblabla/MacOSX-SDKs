@@ -1,7 +1,7 @@
 /*
         NSLayoutManager.h
         Application Kit
-        Copyright (c) 1994-2017, Apple Inc.
+        Copyright (c) 1994-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -33,14 +33,14 @@ typedef NS_ENUM(NSInteger, NSTextLayoutOrientation) {
     NSTextLayoutOrientationVertical = 1, // Lines rendered vertically, grow right to left
 } NS_ENUM_AVAILABLE(10_7, 7_0);
 
-typedef NS_ENUM(NSInteger, NSGlyphProperty) {
+typedef NS_OPTIONS(NSInteger, NSGlyphProperty) {
     NSGlyphPropertyNull = (1 << 0), // null glyph ignored for layout and display
     NSGlyphPropertyControlCharacter = (1 << 1), // control character such as tab, attachment, etc that has special behavior associated with
     NSGlyphPropertyElastic = (1 << 2), // glyphs with elastic glyph width behavior such as white spaces
     NSGlyphPropertyNonBaseCharacter = (1 << 3) // glyphs with combining properties. typically characters in Unicode Mn class.
 } NS_ENUM_AVAILABLE(10_11, 7_0);
 
-typedef NS_ENUM(NSInteger, NSControlCharacterAction) {
+typedef NS_OPTIONS(NSInteger, NSControlCharacterAction) {
     NSControlCharacterActionZeroAdvancement = (1 << 0), // glyphs with this action are filtered out from layout (notShownAttribute == YES)
     NSControlCharacterActionWhitespace = (1 << 1), // the width for glyphs with this action are determined by -layoutManager:boundingBoxForControlGlyphAtIndex:forTextContainer:proposedLineFragment:glyphPosition:characterIndex: if the method is implemented; otherwise, same as NSControlCharacterZeroAdvancementAction
     NSControlCharacterActionHorizontalTab = (1 << 2), // Treated as tab character
@@ -69,25 +69,25 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
     /*All instance variables are private*/
     
 @private
-    NSTextStorage *_textStorage;
-    NSGlyphGenerator *_glyphGenerator;
-    NSTypesetter *_typesetter;
+    NSTextStorage *_textStorage APPKIT_IVAR;
+    NSGlyphGenerator *_glyphGenerator APPKIT_IVAR;
+    NSTypesetter *_typesetter APPKIT_IVAR;
     
-    NSMutableArray *_textContainers;
-    NSStorage *_containerUsedRects;
+    NSMutableArray *_textContainers APPKIT_IVAR;
+    NSStorage *_containerUsedRects APPKIT_IVAR;
     
-    NSStorage *_glyphs;
-    NSRunStorage *_containerRuns;
-    NSRunStorage *_fragmentRuns;
-    NSRunStorage *_glyphLocations;
-    NSRunStorage *_glyphRotationRuns;
+    NSStorage *_glyphs APPKIT_IVAR;
+    NSRunStorage *_containerRuns APPKIT_IVAR;
+    NSRunStorage *_fragmentRuns APPKIT_IVAR;
+    NSRunStorage *_glyphLocations APPKIT_IVAR;
+    NSRunStorage *_glyphRotationRuns APPKIT_IVAR;
     
-    NSRect _extraLineFragmentRect;
-    NSRect _extraLineFragmentUsedRect;
-    NSTextContainer *_extraLineFragmentContainer;
+    NSRect _extraLineFragmentRect APPKIT_IVAR;
+    NSRect _extraLineFragmentUsedRect APPKIT_IVAR;
+    NSTextContainer *_extraLineFragmentContainer APPKIT_IVAR;
     
-    NSSortedArray *_glyphHoles;
-    NSSortedArray *_layoutHoles;
+    NSSortedArray *_glyphHoles APPKIT_IVAR;
+    NSSortedArray *_layoutHoles APPKIT_IVAR;
     
     struct __lmFlags {
         unsigned int containersAreFull:1;
@@ -120,51 +120,51 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
         unsigned int flipsIfNeeded:1;
         unsigned int allowNonContig:1;
         unsigned int useNonContig:1;
-    } _lmFlags;
+    } _lmFlags APPKIT_IVAR;
     
-    id _delegate;
+    id _delegate APPKIT_IVAR;
     
     // Enable/disable stacks
-    unsigned short _textViewResizeDisableStack;
-    unsigned short _displayInvalidationDisableStack;
-    NSRange _deferredDisplayCharRange;
+    unsigned short _textViewResizeDisableStack APPKIT_IVAR;
+    unsigned short _displayInvalidationDisableStack APPKIT_IVAR;
+    NSRange _deferredDisplayCharRange APPKIT_IVAR;
     
     // Cache for first text view
-    NSTextView *_firstTextView;
+    NSTextView *_firstTextView APPKIT_IVAR;
     
     // Cache for rectangle arrays
-    NSRect *_cachedRectArray;
-    NSUInteger _cachedRectArrayCapacity;
+    NSRect *_cachedRectArray APPKIT_IVAR;
+    NSUInteger _cachedRectArrayCapacity APPKIT_IVAR;
     
     // Cache for glyph strings
-    char *_glyphBuffer;
-    NSUInteger _glyphBufferSize;
+    char *_glyphBuffer APPKIT_IVAR;
+    NSUInteger _glyphBufferSize APPKIT_IVAR;
     
     // Cache for faster glyph location lookup
-    NSRange _cachedLocationNominalGlyphRange;
-    NSUInteger _cachedLocationGlyphIndex;
-    NSPoint _cachedLocation;
-    NSRange _cachedFontCharRange;
-    NSFont *_cachedFont;
+    NSRange _cachedLocationNominalGlyphRange APPKIT_IVAR;
+    NSUInteger _cachedLocationGlyphIndex APPKIT_IVAR;
+    NSPoint _cachedLocation APPKIT_IVAR;
+    NSRange _cachedFontCharRange APPKIT_IVAR;
+    NSFont *_cachedFont APPKIT_IVAR;
     
     // Cache for first unlaid glyph and character
-    NSUInteger _firstUnlaidGlyphIndex;
-    NSUInteger _firstUnlaidCharIndex;
+    NSUInteger _firstUnlaidGlyphIndex APPKIT_IVAR;
+    NSUInteger _firstUnlaidCharIndex APPKIT_IVAR;
     
     // Outlets for ruler accessory view.
-    NSBox *_rulerAccView;
-    id _rulerAccViewAlignmentButtons;
-    id _rulerAccViewSpacing;
-    NSTabWell *_rulerAccViewLeftTabWell;
-    NSTabWell *_rulerAccViewRightTabWell;
-    NSTabWell *_rulerAccViewCenterTabWell;
-    NSTabWell *_rulerAccViewDecimalTabWell;
-    id _rulerAccViewStyles;
-    id _rulerAccViewLists;
+    NSBox *_rulerAccView APPKIT_IVAR;
+    id _rulerAccViewAlignmentButtons APPKIT_IVAR;
+    id _rulerAccViewSpacing APPKIT_IVAR;
+    NSTabWell *_rulerAccViewLeftTabWell APPKIT_IVAR;
+    NSTabWell *_rulerAccViewRightTabWell APPKIT_IVAR;
+    NSTabWell *_rulerAccViewCenterTabWell APPKIT_IVAR;
+    NSTabWell *_rulerAccViewDecimalTabWell APPKIT_IVAR;
+    id _rulerAccViewStyles APPKIT_IVAR;
+    id _rulerAccViewLists APPKIT_IVAR;
     
-    NSRange _newlyFilledGlyphRange;
+    NSRange _newlyFilledGlyphRange APPKIT_IVAR;
     
-    id _extraData;
+    id _extraData APPKIT_IVAR;
 }
 
 /**************************** Initialization ****************************/
@@ -230,6 +230,9 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
 
 // Even if non-contiguous layout is allowed, it may not always be used, and there may not always be layout holes.  This method returns YES if there might currently be non-contiguous portions of the text laid out.
 @property (readonly) BOOL hasNonContiguousLayout NS_AVAILABLE(10_5, 7_0);
+
+// When YES, enables internal security analysis for malicious inputs and activates defensive behaviors. By enabling this functionality, it's possible certain text such as a very long paragraph might result in unexpected layout. NO by default.
+@property BOOL limitsLayoutForSuspiciousContents API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 
 // These methods allow you to set/query whether the NSLayoutManager will lay out text in the background, i.e. on the main thread when it is idle.  The default is YES, but this should be set to NO whenever the layout manager is being accessed from other threads.
 @property BOOL backgroundLayoutEnabled;

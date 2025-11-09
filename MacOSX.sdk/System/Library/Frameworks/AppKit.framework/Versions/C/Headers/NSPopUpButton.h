@@ -1,7 +1,7 @@
 /*
         NSPopUpButton.h
         Application Kit
-        Copyright (c) 1997-2017, Apple Inc.
+        Copyright (c) 1997-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -20,9 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
     struct __pbFlags {
         unsigned int needsPullsDownFromTemplate:1;  // for decoding old nibs only!
         unsigned int RESERVED:31;
-    } _pbFlags;
+    } _pbFlags APPKIT_IVAR;
 #if __LP64__
-    id _popupReserved __unused;
+    id _popupReserved __unused APPKIT_IVAR;
 #endif
 }
 

@@ -9,6 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import <ApplicationServices/ApplicationServices.h>
+#import <ImageKit/ImageKitBase.h>
 
 /*! 
  @protocol IKSlideshowDataSource

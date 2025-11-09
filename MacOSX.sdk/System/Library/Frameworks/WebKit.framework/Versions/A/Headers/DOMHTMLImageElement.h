@@ -28,7 +28,7 @@
 @class NSString;
 @class NSURL;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMHTMLImageElement : DOMHTMLElement
 @property (copy) NSString *name;
 @property (copy) NSString *align;
@@ -42,12 +42,12 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (copy) NSString *useMap;
 @property int vspace;
 @property int width;
-@property (readonly) BOOL complete NS_AVAILABLE_MAC(10_5);
-@property (copy) NSString *lowsrc NS_AVAILABLE_MAC(10_5);
-@property (readonly) int naturalHeight NS_AVAILABLE_MAC(10_5);
-@property (readonly) int naturalWidth NS_AVAILABLE_MAC(10_5);
-@property (readonly) int x NS_AVAILABLE_MAC(10_5);
-@property (readonly) int y NS_AVAILABLE_MAC(10_5);
-@property (readonly, copy) NSString *altDisplayString NS_AVAILABLE_MAC(10_5);
-@property (readonly, copy) NSURL *absoluteImageURL NS_AVAILABLE_MAC(10_5);
+@property (readonly) BOOL complete WEBKIT_AVAILABLE_MAC(10_5);
+@property (copy) NSString *lowsrc WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int naturalHeight WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int naturalWidth WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int x WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int y WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *altDisplayString WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSURL *absoluteImageURL WEBKIT_AVAILABLE_MAC(10_5);
 @end

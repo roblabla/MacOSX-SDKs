@@ -44,7 +44,7 @@ typedef uint16_t CLBeaconMinorValue;
  *    value.
  *
  */
-NS_CLASS_AVAILABLE(NA, 7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos, tvos, macos)
 @interface CLBeaconRegion : CLRegion
 
 /*
@@ -136,9 +136,10 @@ NS_CLASS_AVAILABLE(NA, 7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
  *    A single beacon within a CLBeaconRegion.
  *
  */
-NS_CLASS_AVAILABLE(NA, 7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos, tvos, macos)
 @interface CLBeacon : NSObject <NSCopying, NSSecureCoding>
 {
+@package
 	CLBeaconInternal *_internal;
 }
 

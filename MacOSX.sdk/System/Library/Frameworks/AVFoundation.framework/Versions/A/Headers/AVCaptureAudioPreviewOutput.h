@@ -22,8 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     Instances of AVCaptureAudioPreviewOutput have an associated Core Audio output device that can be used to play audio being captured by the capture session. The unique ID of a Core Audio device can be obtained from its kAudioDevicePropertyDeviceUID property.
  */
-NS_CLASS_AVAILABLE_MAC(10_7) __TVOS_PROHIBITED
-@interface AVCaptureAudioPreviewOutput : AVCaptureOutput 
+API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos)
+@interface AVCaptureAudioPreviewOutput : AVCaptureOutput
 {
 @private
     AVCaptureAudioPreviewOutputInternal *_internal;

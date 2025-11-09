@@ -1,15 +1,14 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0AC4785C-02BA-3592-9FF9-BA665AE65EE2' ]
+uuids:           [ 'x86_64: E11142A6-62BA-3BA2-AC6F-DE55AC53607D' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CoreDuetDaemonProtocol.framework/Versions/A/CoreDuetDaemonProtocol
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CDAttributeAdmissionBypassUsageHistory, _CDDProtocolMessageXPCFieldBudgetOptions, 
                        _CDDProtocolMessageXPCFieldEndTimestamps, _CDDProtocolMessageXPCFieldStartTimestamps, 
-                       _CDDSetError, __CDDComplicationChangeNotificationString, __CDDComplicationChangeOverCloudNotificationString, 
+                       __CDDComplicationChangeNotificationString, __CDDComplicationChangeOverCloudNotificationString, 
                        __CDDCurrentActiveComplications, __CDDExtensionIdForCompanionBundle ]
-    objc-classes:    [ _CDDClientConnection, _CDDHistoryWindow, _CDDPluginConnection, 
-                       _CDDPluginResponder, _CDDServerResponder, _CDDXPCConnection, 
-                       _CDPClientConnection ]
+    objc-classes:    [ CDDClientConnection, CDDHistoryWindow, CDDServerResponder, 
+                       CDDXPCConnection, CDPClientConnection ]
 ...

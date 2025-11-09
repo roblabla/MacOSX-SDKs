@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Apple Inc.
+ * Copyright (c) 2015, 2018 Apple Inc.
  * All rights reserved.
  */
 
@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NETunnelNetworkSettings : NSObject <NSSecureCoding,NSCopying>
 
 /*!
@@ -31,25 +31,25 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @discussion This function initializes a newly-allocated NETunnelNetworkSettings object with a given tunnel remote address.
  * @param address The address of the remote endpoint that is providing the tunnel service.
  */
-- (instancetype)initWithTunnelRemoteAddress:(NSString *)address NS_AVAILABLE(10_11, 9_0);
+- (instancetype)initWithTunnelRemoteAddress:(NSString *)address API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property tunnelRemoteAddress
  * @discussion A string containing the IP address of the remote endpoint that is providing the tunnel service.
  */
-@property (readonly) NSString *tunnelRemoteAddress NS_AVAILABLE(10_11, 9_0);
+@property (readonly) NSString *tunnelRemoteAddress API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property DNSSettings
  * @discussion An NEDNSSettings object that contains the desired tunnel DNS settings.
  */
-@property (copy, nullable) NEDNSSettings *DNSSettings NS_AVAILABLE(10_11, 9_0);
+@property (copy, nullable) NEDNSSettings *DNSSettings API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property proxySettings
  * @discussion An NEProxySettings object that contains the desired tunnel proxy settings.
  */
-@property (copy, nullable) NEProxySettings *proxySettings NS_AVAILABLE(10_11, 9_0);
+@property (copy, nullable) NEProxySettings *proxySettings API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

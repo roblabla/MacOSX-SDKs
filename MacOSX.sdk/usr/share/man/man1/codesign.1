@@ -256,6 +256,9 @@ Preserve the entitlement data (--entitlements).
 Preserve the internal requirements (--requirements option), including any explicit Designated
 Requirement. Note that all internal requirements are preserved or regenerated as a whole; you
 cannot pick and choose individual elements with this option.
+.It runtime
+Preserve the hardened runtime version (-o runtime flag, --runtime-version option) instead of
+overriding or deriving the version.
 .El
 For historical reasons, this option can be given without a value, which preserves all
 of these values as presently known. This use is deprecated and will eventually be removed;
@@ -289,6 +292,12 @@ If this option is not given at all, a system-specific default behavior is invoke
 This may result in some but not all code signatures being timestamped.
 .br
 The special value \fInone\fR explicitly disables the use of timestamp services.
+.It Fl -runtime-version Ar version
+During signing, when the \fIruntime\fR
+OPTION FLAG is set, explicitly specify the hardened runtime version stored in the code signature.
+If this option is omitted, but the \fIruntime\fR
+OPTION FLAG is set then the hardened runtime version is omitted for non-Mach-O files and derived from the SDK
+version of Mach-O files.
 .El
 .Pp
 .Sh OPERATION
@@ -502,6 +511,11 @@ and plug-in bundles with the same team identifier embedded in the code directory
 Team identifiers are automatically recorded in signatures when signing with suitable Apple-issued signing certificates. 
 Note that the flag is not supported for i386 binaries, and only applies to the main executable. 
 The flag has no effect when set on frameworks and libraries.
+.It runtime
+On macOS versions >= 10.14.0, opts signed processes into a hardened runtime environment which
+includes runtime code signing enforcement, library validation, hard, kill, and debugging restrictions.
+These restrictions can be selectively relaxed via entitlements. Note: macOS versions older than 10.14.0
+ignore the presence of this flag in the code signature.
 .El
 .Pp
 Note that code can set the hard and kill flags on itself at any time. The signing

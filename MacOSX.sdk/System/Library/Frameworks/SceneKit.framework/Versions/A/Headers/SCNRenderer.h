@@ -1,7 +1,8 @@
 //
 //  SCNRenderer.h
+//  SceneKit
 //
-//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
+//  Copyright © 2012-2018 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SCNSceneRenderer.h>
@@ -18,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 /*! @class SCNRenderer
 	@abstract SCNRenderer lets you use the SceneKit renderer in an OpenGL context or Metal render pass descriptor of your own.
  */
-__WATCHOS_PROHIBITED
+API_UNAVAILABLE(watchos)
+SCN_EXPORT
 @interface SCNRenderer : NSObject <SCNSceneRenderer, SCNTechniqueSupport>
 
 /*! 

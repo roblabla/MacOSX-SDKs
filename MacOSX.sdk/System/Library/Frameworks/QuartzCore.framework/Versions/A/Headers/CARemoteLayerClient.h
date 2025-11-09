@@ -1,6 +1,6 @@
 /* CoreAnimation - CARemoteLayerClient.h
 
-   Copyright (c) 2010-2017, Apple Inc.
+   Copyright (c) 2010-2018, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CABase.h>
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-CA_CLASS_AVAILABLE (10.7)
+API_AVAILABLE(macos(10.7))
 @interface CARemoteLayerClient : NSObject
 {
 @private

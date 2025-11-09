@@ -1,7 +1,7 @@
 /*
 	NSTextInputContext.h
 	Application Kit
-	Copyright (c) 2008-2017, Apple Inc.
+	Copyright (c) 2008-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -14,25 +14,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSEvent;
 
-typedef NSString * NSTextInputSourceIdentifier NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSTextInputSourceIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 
 NS_CLASS_AVAILABLE(10_6, NA)
 @interface NSTextInputContext : NSObject {
 @private
-    id _client; // weak reference
+    id _client APPKIT_IVAR; // weak reference
 
-    NSArray *_inputLocales;
+    NSArray *_inputLocales APPKIT_IVAR;
 
-    void *_documentID;
-    id _keyBindings;
-    id _keyBindingManager;
+    void *_documentID APPKIT_IVAR;
+    id _keyBindings APPKIT_IVAR;
+    id _keyBindingManager APPKIT_IVAR;
 
-    NSString *_commandCharacters;
+    NSString *_commandCharacters APPKIT_IVAR;
 
-    NSInteger _documentRefcon;
+    NSInteger _documentRefcon APPKIT_IVAR;
 
-    id _reserved[2] __unused;
-    id _auxiliary;
+    id _reserved[2] __unused APPKIT_IVAR;
+    id _auxiliary APPKIT_IVAR;
 
     struct {
 	unsigned int _acceptsGlyphInfo:1;
@@ -56,7 +56,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
 	unsigned int _unmarkbeforeinsert:1;
 	unsigned int _completionHandlingClient:1;
-    } _ticFlags;
+    } _ticFlags APPKIT_IVAR;
 }
 
 /* The current activated text input context object. The Cocoa Text Input system communicates primarily with the client of the activated input context via the NSTextInputClient protocol.

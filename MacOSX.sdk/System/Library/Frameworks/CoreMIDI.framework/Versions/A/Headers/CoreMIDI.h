@@ -24,4 +24,8 @@
 #import <CoreMIDI/MIDINetworkSession.h>
 #endif
 
+#if __OBJC2__
+#import <CoreMIDI/MIDICapabilityInquiry.h>
+#endif
+
 #endif

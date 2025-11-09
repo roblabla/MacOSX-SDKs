@@ -18,6 +18,7 @@
 
 
 #import <AppKit/AppKit.h>
+#import <ImageKit/ImageKitBase.h>
 
 @class IKFilterBrowserView;
 

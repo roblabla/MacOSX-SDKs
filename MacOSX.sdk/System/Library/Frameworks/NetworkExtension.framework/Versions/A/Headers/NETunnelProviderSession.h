@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Apple Inc.
+ * Copyright (c) 2015, 2018 Apple Inc.
  * All rights reserved.
  */
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  * This API is part of NetworkExtension.framework.
  */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NETunnelProviderSession : NEVPNConnection
 
 /*!
@@ -30,13 +30,13 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  *    2. NEVPNErrorConfigurationDisabled
  * @return YES if the tunnel was started successfully, NO if an error occurred.
  */
-- (BOOL)startTunnelWithOptions:(nullable NSDictionary<NSString *,id> *)options andReturnError:(NSError **)error NS_AVAILABLE(10_11, 9_0);
+- (BOOL)startTunnelWithOptions:(nullable NSDictionary<NSString *,id> *)options andReturnError:(NSError **)error API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method stopTunnel
  * @discussion This function is used to stop the tunnel. The tunnel disconnect process is started and this function returns immediately.
  */
-- (void)stopTunnel NS_AVAILABLE(10_11, 9_0);
+- (void)stopTunnel API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method sendProviderMessage:responseHandler:
@@ -48,7 +48,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param responseHandler A block that handles the response. Can be set to nil if no response is expected.
  * @return YES if the message was sent successfully, NO if an error occurred.
  */
-- (BOOL)sendProviderMessage:(NSData *)messageData returnError:(NSError **)error responseHandler:(nullable void (^)( NSData * __nullable responseData))responseHandler NS_AVAILABLE(10_11, 9_0);
+- (BOOL)sendProviderMessage:(NSData *)messageData returnError:(NSError **)error responseHandler:(nullable void (^)( NSData * __nullable responseData))responseHandler API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

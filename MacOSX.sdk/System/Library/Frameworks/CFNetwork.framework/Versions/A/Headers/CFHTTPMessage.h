@@ -126,16 +126,6 @@ CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeNegotiate2 CF_AVAILABLE(
 CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeXMobileMeAuthToken CF_AVAILABLE(10_6, 4_3);
 
 /*
- *  kCFHTTPAuthenticationSchemeOAuth1
- *
- *  Discussion:
- *	HTTP OAuth 1.0 authentication scheme.
- *
- */
-CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeOAuth1 CF_AVAILABLE(10_9, 7_0);
-
-	
-/*
  *  CFHTTPMessageRef
  *  
  *  Discussion:

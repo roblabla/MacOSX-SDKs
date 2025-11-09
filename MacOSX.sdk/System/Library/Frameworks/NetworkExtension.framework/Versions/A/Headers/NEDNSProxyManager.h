@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Apple Inc.
+ * Copyright (c) 2017-2018 Apple Inc.
  * All rights reserved.
  */
 
@@ -39,13 +39,13 @@ typedef NS_ENUM(NSInteger, NEDNSProxyManagerError) {
 	NEDNSProxyManagerErrorConfigurationStale = 3,
 	/*! @const NEDNSProxyManagerErrorConfigurationCannotBeRemoved The DNS proxy configuration cannot be removed. */
 	NEDNSProxyManagerErrorConfigurationCannotBeRemoved = 4,
-} NS_ENUM_AVAILABLE(NA, 11_0);
+} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*! @const NEDNSProxyManagerErrorDomain The DNS proxy error domain */
-NEDNSPROXY_EXPORT NSString * const NEDNSProxyErrorDomain NS_AVAILABLE(NA, 11_0);
+NEDNSPROXY_EXPORT NSString * const NEDNSProxyErrorDomain API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*! @const NEDNSProxyConfigurationDidChangeNotification Name of the NSNotification that is posted when the DNS proxy configuration changes. */
-NEDNSPROXY_EXPORT NSString * const NEDNSProxyConfigurationDidChangeNotification NS_AVAILABLE(NA, 11_0);
+NEDNSPROXY_EXPORT NSString * const NEDNSProxyConfigurationDidChangeNotification API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @interface NEDNSProxyManager
@@ -55,53 +55,53 @@ NEDNSPROXY_EXPORT NSString * const NEDNSProxyConfigurationDidChangeNotification 
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(NA, 11_0)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface NEDNSProxyManager : NSObject
 
 /*!
  * @method sharedManager
  * @return The singleton NEDNSProxyManager object for the calling process.
  */
-+ (NEDNSProxyManager *)sharedManager NS_AVAILABLE(NA, 11_0);
++ (NEDNSProxyManager *)sharedManager API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method loadFromPreferencesWithCompletionHandler:
  * @discussion This function loads the current DNS proxy configuration from the caller's DNS proxy preferences.
  * @param completionHandler A block that will be called when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
  */
-- (void)loadFromPreferencesWithCompletionHandler:(void (^)(NSError * __nullable error))completionHandler NS_AVAILABLE(NA, 11_0);
+- (void)loadFromPreferencesWithCompletionHandler:(void (^)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method removeFromPreferencesWithCompletionHandler:
  * @discussion This function removes the DNS proxy configuration from the caller's DNS proxy preferences. If the DNS proxy is enabled, the DNS proxy becomes disabled.
  * @param completionHandler A block that will be called when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
  */
-- (void)removeFromPreferencesWithCompletionHandler:(void (^)(NSError * __nullable error))completionHandler NS_AVAILABLE(NA, 11_0);
+- (void)removeFromPreferencesWithCompletionHandler:(void (^)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method saveToPreferencesWithCompletionHandler:
  * @discussion This function saves the DNS proxy configuration in the caller's DNS proxy preferences. If the DNS proxy is enabled, it will become active.
  * @param completionHandler A block that will be called when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
  */
-- (void)saveToPreferencesWithCompletionHandler:(void (^)(NSError * __nullable error))completionHandler NS_AVAILABLE(NA, 11_0);
+- (void)saveToPreferencesWithCompletionHandler:(void (^)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property localizedDescription
  * @discussion A string containing a description of the DNS proxy.
  */
-@property (copy, nullable) NSString *localizedDescription NS_AVAILABLE(NA, 11_0);
+@property (copy, nullable) NSString *localizedDescription API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property providerProtocol
  * @discussion An NEDNSProxyProviderProtocol object containing the provider-specific portion of the DNS proxy configuration.
  */
-@property (strong, nullable) NEDNSProxyProviderProtocol *providerProtocol NS_AVAILABLE(NA, 11_0);
+@property (strong, nullable) NEDNSProxyProviderProtocol *providerProtocol API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property enabled
  * @discussion Toggles the enabled status of the DNS proxy. Setting this property will disable DNS proxy configurations of other apps. This property will be set to NO when other DNS proxy configurations are enabled.
  */
-@property (getter=isEnabled) BOOL enabled NS_AVAILABLE(NA, 11_0);
+@property (getter=isEnabled) BOOL enabled API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 

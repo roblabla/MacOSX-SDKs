@@ -24,8 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     Instances of AVCaptureStillImageOutput can be used to capture, on demand, high quality snapshots from a realtime capture source. Clients can request a still image for the current time using the captureStillImageAsynchronouslyFromConnection:completionHandler: method. Clients can also configure still image outputs to produce still images in specific image formats.
  */
-NS_CLASS_DEPRECATED(10_7, NA, 4_0, 10_0, "Use AVCapturePhotoOutput instead") __TVOS_PROHIBITED
-@interface AVCaptureStillImageOutput : AVCaptureOutput 
+API_AVAILABLE(macos(10.7)) API_DEPRECATED("Use AVCapturePhotoOutput instead.", ios(4.0, 10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+@interface AVCaptureStillImageOutput : AVCaptureOutput
 {
 @private
     AVCaptureStillImageOutputInternal *_internal;
@@ -67,8 +67,6 @@ NS_CLASS_DEPRECATED(10_7, NA, 4_0, 10_0, "Use AVCapturePhotoOutput instead") __T
  */
 @property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableImageDataCodecTypes;
 
-#if TARGET_OS_IPHONE
-
 /*!
  @property stillImageStabilizationSupported
  @abstract
@@ -77,7 +75,7 @@ NS_CLASS_DEPRECATED(10_7, NA, 4_0, 10_0, "Use AVCapturePhotoOutput instead") __T
  @discussion
     The receiver's automaticallyEnablesStillImageStabilizationWhenAvailable property can only be set if this property returns YES. Its value may change as the session's -sessionPreset or input device's -activeFormat changes.
  */
-@property(nonatomic, readonly, getter=isStillImageStabilizationSupported) BOOL stillImageStabilizationSupported NS_AVAILABLE_IOS(7_0);
+@property(nonatomic, readonly, getter=isStillImageStabilizationSupported) BOOL stillImageStabilizationSupported API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property automaticallyEnablesStillImageStabilizationWhenAvailable
@@ -87,7 +85,7 @@ NS_CLASS_DEPRECATED(10_7, NA, 4_0, 10_0, "Use AVCapturePhotoOutput instead") __T
  @discussion
     On a receiver where -isStillImageStabilizationSupported returns YES, image stabilization may be applied to reduce blur commonly found in low light photos. When stabilization is enabled, still image captures incur additional latency. The default value is YES when supported, NO otherwise. Setting this property throws an NSInvalidArgumentException if -isStillImageStabilizationSupported returns NO.
  */
-@property(nonatomic) BOOL automaticallyEnablesStillImageStabilizationWhenAvailable NS_AVAILABLE_IOS(7_0);
+@property(nonatomic) BOOL automaticallyEnablesStillImageStabilizationWhenAvailable API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property stillImageStabilizationActive
@@ -97,7 +95,7 @@ NS_CLASS_DEPRECATED(10_7, NA, 4_0, 10_0, "Use AVCapturePhotoOutput instead") __T
  @discussion
     On a receiver where -isStillImageStabilizationSupported returns YES, and automaticallyEnablesStillImageStabilizationWhenAvailable is set to YES, this property may be key-value observed, or queried from inside your key-value observation callback for the @"capturingStillImage" property, to find out if still image stabilization is being applied to the current capture.
  */
-@property(nonatomic, readonly, getter=isStillImageStabilizationActive) BOOL stillImageStabilizationActive NS_AVAILABLE_IOS(7_0);
+@property(nonatomic, readonly, getter=isStillImageStabilizationActive) BOOL stillImageStabilizationActive API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property highResolutionStillImageOutputEnabled
@@ -107,9 +105,7 @@ NS_CLASS_DEPRECATED(10_7, NA, 4_0, 10_0, "Use AVCapturePhotoOutput instead") __T
  @discussion
     By default, AVCaptureStillImageOutput emits images with the same dimensions as its source AVCaptureDevice's activeFormat.formatDescription. However, if you set this property to YES, the receiver emits still images at its source AVCaptureDevice's activeFormat.highResolutionStillImageDimensions. Note that if you enable video stabilization (see AVCaptureConnection's preferredVideoStabilizationMode) for any output, the high resolution still images emitted by AVCaptureStillImageOutput may be smaller by 10 or more percent.
  */
-@property(nonatomic, getter=isHighResolutionStillImageOutputEnabled) BOOL highResolutionStillImageOutputEnabled NS_AVAILABLE_IOS(8_0);
-
-#endif // TARGET_OS_IPHONE
+@property(nonatomic, getter=isHighResolutionStillImageOutputEnabled) BOOL highResolutionStillImageOutputEnabled API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property capturingStillImage
@@ -119,7 +115,7 @@ NS_CLASS_DEPRECATED(10_7, NA, 4_0, 10_0, "Use AVCapturePhotoOutput instead") __T
  @discussion
     The value of this property is a BOOL that becomes true when a still image is being captured, and false when no still image capture is underway. This property is key-value observable.
  */
-@property(readonly, getter=isCapturingStillImage) BOOL capturingStillImage NS_AVAILABLE(10_8, 5_0);
+@property(readonly, getter=isCapturingStillImage) BOOL capturingStillImage API_AVAILABLE(macos(10.8), ios(5.0));
 
 /*!
  @method captureStillImageAsynchronouslyFromConnection:completionHandler:
@@ -168,7 +164,7 @@ NS_CLASS_DEPRECATED(10_7, NA, 4_0, 10_0, "Use AVCapturePhotoOutput instead") __T
  @discussion
     AVCaptureBracketedStillImageSettings may not be instantiated directly.
  */
-NS_CLASS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED
+API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCaptureBracketedStillImageSettings : NSObject
 
 AV_INIT_UNAVAILABLE
@@ -186,7 +182,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     An AVCaptureManualExposureBracketedStillImageSettings instance defines the exposure duration and ISO settings that should be applied to one image in a bracket. An array of settings objects is passed to -[AVCaptureStillImageOutput captureStillImageBracketAsynchronouslyFromConnection:withSettingsArray:completionHandler:]. Min and max duration and ISO values are queryable properties of the AVCaptureDevice supplying data to an AVCaptureStillImageOutput instance. If you wish to leave exposureDuration unchanged for this bracketed still image, you may pass the special value AVCaptureExposureDurationCurrent. To keep ISO unchanged, you may pass AVCaptureISOCurrent (see AVCaptureDevice.h).
  */
-NS_CLASS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED
+API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCaptureManualExposureBracketedStillImageSettings : AVCaptureBracketedStillImageSettings
 
 /*!
@@ -230,7 +226,7 @@ NS_CLASS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED
  @discussion
     An AVCaptureAutoExposureBracketedStillImageSettings instance defines the exposure target bias setting that should be applied to one image in a bracket. An array of settings objects is passed to -[AVCaptureStillImageOutput captureStillImageBracketAsynchronouslyFromConnection:withSettingsArray:completionHandler:]. Min and max exposure target bias are queryable properties of the AVCaptureDevice supplying data to an AVCaptureStillImageOutput instance. If you wish to leave exposureTargetBias unchanged for this bracketed still image, you may pass the special value AVCaptureExposureTargetBiasCurrent (see AVCaptureDevice.h).
  */
-NS_CLASS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED
+API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCaptureAutoExposureBracketedStillImageSettings : AVCaptureBracketedStillImageSettings
 
 /*!
@@ -275,7 +271,7 @@ NS_CLASS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED
  @discussion
     AVCaptureStillImageOutput can only satisfy a limited number of image requests in a single bracket without exhausting system resources. The maximum number of still images that may be taken in a single bracket depends on the size of the images being captured, and consequently may vary with AVCaptureSession -sessionPreset and AVCaptureDevice -activeFormat. Some formats do not support bracketed capture and return a maxBracketedCaptureStillImageCount of 0. This read-only property is key-value observable. If you exceed -maxBracketedCaptureStillImageCount, then -captureStillImageBracketAsynchronouslyFromConnection:withSettingsArray:completionHandler: fails and the completionHandler is called [settings count] times with a NULL sample buffer and AVErrorMaximumStillImageCaptureRequestsExceeded.
  */
-@property(nonatomic, readonly) NSUInteger maxBracketedCaptureStillImageCount NS_DEPRECATED_IOS(8_0, 10_0, "Use AVCapturePhotoOutput maxBracketedCapturePhotoCount instead");
+@property(nonatomic, readonly) NSUInteger maxBracketedCaptureStillImageCount API_DEPRECATED("Use AVCapturePhotoOutput maxBracketedCapturePhotoCount instead.", ios(8.0, 10.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property lensStabilizationDuringBracketedCaptureSupported
@@ -285,7 +281,7 @@ NS_CLASS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED
  @discussion
     The receiver's lensStabilizationDuringBracketedCaptureEnabled property can only be set if this property returns YES. Its value may change as the session's -sessionPreset or input device's -activeFormat changes. This read-only property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isLensStabilizationDuringBracketedCaptureSupported) BOOL lensStabilizationDuringBracketedCaptureSupported NS_DEPRECATED_IOS(9_0, 10_0, "Use AVCapturePhotoOutput lensStabilizationDuringBracketedCaptureSupported instead");
+@property(nonatomic, readonly, getter=isLensStabilizationDuringBracketedCaptureSupported) BOOL lensStabilizationDuringBracketedCaptureSupported API_DEPRECATED("Use AVCapturePhotoOutput lensStabilizationDuringBracketedCaptureSupported instead.", ios(9.0, 10.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property lensStabilizationDuringBracketedCaptureEnabled
@@ -295,7 +291,7 @@ NS_CLASS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED
  @discussion
     On a receiver where -isLensStabilizationDuringBracketedCaptureSupported returns YES, lens stabilization may be applied to the bracket to reduce blur commonly found in low light photos. When lens stabilization is enabled, bracketed still image captures incur additional latency. Lens stabilization is more effective with longer-exposure captures, and offers limited or no benefit for exposure durations shorter than 1/30 of a second. It is possible that during the bracket, the lens stabilization module may run out of correction range and therefore will not be active for every frame in the bracket. Each emitted CMSampleBuffer from the bracket will have an attachment of kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo indicating additional information about stabilization was applied to the buffer, if any. The default value of -isLensStabilizationDuringBracketedCaptureEnabled is NO. This value will be set to NO when -isLensStabilizationDuringBracketedCaptureSupported changes to NO. Setting this property throws an NSInvalidArgumentException if -isLensStabilizationDuringBracketedCaptureSupported returns NO. This property is key-value observable.
  */
-@property(nonatomic, getter=isLensStabilizationDuringBracketedCaptureEnabled) BOOL lensStabilizationDuringBracketedCaptureEnabled NS_DEPRECATED_IOS(9_0, 10_0, "Use AVCapturePhotoOutput with AVCapturePhotoBracketSettings instead");
+@property(nonatomic, getter=isLensStabilizationDuringBracketedCaptureEnabled) BOOL lensStabilizationDuringBracketedCaptureEnabled API_DEPRECATED("Use AVCapturePhotoOutput with AVCapturePhotoBracketSettings instead.", ios(9.0, 10.0)) API_UNAVAILABLE(macos);
 
 /*!
  @method prepareToCaptureStillImageBracketFromConnection:withSettingsArray:completionHandler:
@@ -312,7 +308,7 @@ NS_CLASS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED
  @discussion
     -maxBracketedCaptureStillImageCount tells you the maximum number of images that may be taken in a single bracket given the current AVCaptureDevice/AVCaptureSession/AVCaptureStillImageOutput configuration. But before taking a still image bracket, additional resources may need to be allocated. By calling -prepareToCaptureStillImageBracketFromConnection:withSettingsArray:completionHandler: first, you are able to deterministically know when the receiver is ready to capture the bracket with the specified settings array.
  */
-- (void)prepareToCaptureStillImageBracketFromConnection:(AVCaptureConnection *)connection withSettingsArray:(NSArray<__kindof AVCaptureBracketedStillImageSettings *> *)settings completionHandler:(void (^)(BOOL prepared, NSError * _Nullable error))handler NS_DEPRECATED_IOS(8_0, 10_0, "Use AVCapturePhotoOutput setPreparedPhotoSettingsArray:completionHandler: instead");
+- (void)prepareToCaptureStillImageBracketFromConnection:(AVCaptureConnection *)connection withSettingsArray:(NSArray<__kindof AVCaptureBracketedStillImageSettings *> *)settings completionHandler:(void (^)(BOOL prepared, NSError * _Nullable error))handler API_DEPRECATED("Use AVCapturePhotoOutput setPreparedPhotoSettingsArray:completionHandler: instead.", ios(8.0, 10.0)) API_UNAVAILABLE(macos);
 
 /*!
  @method captureStillImageBracketAsynchronouslyFromConnection:withSettingsArray:completionHandler:
@@ -329,7 +325,7 @@ NS_CLASS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED
  @discussion
     If you have not called -prepareToCaptureStillImageBracketFromConnection:withSettingsArray:completionHandler: for this still image bracket request, the bracket may not be taken immediately, as the receiver may internally need to prepare resources.
  */
-- (void)captureStillImageBracketAsynchronouslyFromConnection:(AVCaptureConnection *)connection withSettingsArray:(NSArray<__kindof AVCaptureBracketedStillImageSettings *> *)settings completionHandler:(void (^)(CMSampleBufferRef _Nullable sampleBuffer, AVCaptureBracketedStillImageSettings * _Nullable stillImageSettings, NSError * _Nullable error))handler NS_DEPRECATED_IOS(8_0, 10_0, "Use AVCapturePhotoOutput capturePhotoWithSettings:delegate: instead");
+- (void)captureStillImageBracketAsynchronouslyFromConnection:(AVCaptureConnection *)connection withSettingsArray:(NSArray<__kindof AVCaptureBracketedStillImageSettings *> *)settings completionHandler:(void (^)(CMSampleBufferRef _Nullable sampleBuffer, AVCaptureBracketedStillImageSettings * _Nullable stillImageSettings, NSError * _Nullable error))handler API_DEPRECATED("Use AVCapturePhotoOutput capturePhotoWithSettings:delegate: instead.", ios(8.0, 10.0)) API_UNAVAILABLE(macos);
 
 @end
 

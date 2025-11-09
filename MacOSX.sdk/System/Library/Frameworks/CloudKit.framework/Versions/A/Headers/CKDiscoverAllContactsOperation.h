@@ -10,8 +10,12 @@
 
 @class CKDiscoveredUserInfo;
 
-/* Finds all discoverable users in the device's address book. No Address Book access dialog will be displayed */
 NS_ASSUME_NONNULL_BEGIN
+
+/*! @class CKDiscoverAllContactsOperation
+ *
+ *  @abstract Finds all discoverable users in the device's address book. No Contacts access dialog will be displayed
+ */
 API_DEPRECATED_WITH_REPLACEMENT("CKDiscoverAllUserIdentitiesOperation", macos(10.10, 10.12), ios(8.0, 10.0), watchos(3.0, 3.0))
 API_UNAVAILABLE(tvos)
 @interface CKDiscoverAllContactsOperation : CKOperation

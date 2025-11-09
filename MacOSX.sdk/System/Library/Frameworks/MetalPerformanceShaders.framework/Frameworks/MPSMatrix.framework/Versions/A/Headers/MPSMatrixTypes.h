@@ -9,16 +9,29 @@
 #ifndef MPSMatrixTypes_h
 #define MPSMatrixTypes_h
 
+#ifndef __METAL_VERSION__
+#   include <stdint.h>  // For uint32_t.
+#endif
+/*!
+ *  @struct     MPSMatrixOffset
+ *  @memberof   MPSMatrix
+ *  @abstract   Specifies a row and column offset into an MPSMatrix.
+ */
+typedef struct
+{
+    uint32_t    rowOffset;        /**< offset to start of source region to read in rows */
+    uint32_t    columnOffset;     /**< offset to start of source region to read in columns */
+} MPSMatrixOffset;
+
+// Hide the rest of the header from metal shading language
+#ifndef __METAL_VERSION__
+
 #import <MPSCore/MPSKernel.h>
 #import <MPSCore/MPSCoreTypes.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-
-
-    
 /*!
 *  @class      MPSMatrixDescriptor
 *
@@ -320,10 +333,55 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
 -(nonnull instancetype) initWithBuffer: (nonnull id<MTLBuffer>) buffer
                             descriptor: (nonnull MPSMatrixDescriptor*) descriptor;
 
+/*! @abstract   Initialize a MPSMatrix object with a descriptor. Allocate the buffer.
+ *  @param      device      The device with which it will be used
+ *  @param      descriptor  The shape and style of the matrix
+ *  @return     A valid MPSMatrix object or nil
+ *  @discussion The matrix object will be created, but the storage to hold the
+ *              matrix data will only be allocated when it is needed, typically
+ *              when the data property is invoked.  In conjunction
+ *              with -resourceSize, this will allow you to estimate storage needs
+ *              without actually creating the backing store for the matrix.
+ */
+-(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
+                            descriptor: (MPSMatrixDescriptor * __nonnull) descriptor;
+
 /*
  * Use one of the above initialization methods instead.
  */
 -(nonnull instancetype) init NS_UNAVAILABLE;
+
+
+/*! @abstract   Flush the underlying MTLBuffer from the device's caches, and invalidate any CPU caches if needed.
+ *  @discussion This will call [id <MTLBlitEncoder> synchronizeResource: ] on the matrix's MTLBuffer, if any.
+ *              This is necessary for all MTLStorageModeManaged resources. For other resources, including temporary
+ *              resources (these are all MTLStorageModePrivate), and buffers that have not yet been allocated, nothing is done.
+ *              It is more efficient to use this method than to attempt to do this yourself with the data property.
+ *  @param      commandBuffer       The commandbuffer on which to synchronize   */
+-(void) synchronizeOnCommandBuffer: (__nonnull id <MTLCommandBuffer>) commandBuffer
+        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+
+/*! @abstract       Get the number of bytes used to allocate underyling MTLResources
+ *  @discussion     This is the size of the backing store of underlying MTLResources.
+ *                  It does not include all storage used by the object, for example
+ *                  the storage used to hold the MPSMatrix instantiation and MTLBuffer
+ *                  is not included. It only measures the size of the allocation used
+ *                  to hold the matrix data in the buffer. This value is subject to
+ *                  change between different devices and operating systems.
+ *
+ *                  Except when -initWithBuffer:descriptor: is used, most MPSMatrixes are allocated
+ *                  without a backing store. The backing store is allocated lazily when
+ *                  it is needed, typically when the .texture property is called.
+ *                  Consequently, in most cases, it should be inexpensive to make
+ *                  a MPSImage to see how much memory it will need, and release it
+ *                  if it is too large.
+ *
+ *                  This method may fail in certain circumstances, such as when the
+ *                  MPSImage is created with -initWithTexture:featureChannels:. In
+ *                  such cases, 0 will be returned.
+ */
+-(NSUInteger)  resourceSize
+    MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
 
 @end // MPSMatrix
     
@@ -393,10 +451,56 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 -(nonnull instancetype) initWithBuffer: (nonnull id<MTLBuffer>) buffer
                             descriptor: (nonnull MPSVectorDescriptor*) descriptor;
 
+/*! @abstract   Initialize a lazily backed MPSVector object with a descriptor
+ *  @param      device      The device with which it will be used
+ *  @param      descriptor  The shape and style of the matrix
+ *  @return     A valid MPSVector object or nil
+ *  @discussion The vector object will be created, but the storage to hold the
+ *              vector data will only be allocated when it is needed, typically
+ *              when the data property is invoked.  In conjunction
+ *              with -resourceSize, this will allow you to estimate storage needs
+ *              without actually creating the backing store for the vector.
+ */
+-(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
+                            descriptor: (MPSVectorDescriptor * __nonnull) descriptor
+        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+
 /*
  * Use the above initialization methods instead.
  */
 -(nonnull instancetype) init NS_UNAVAILABLE;
+
+
+/*! @abstract   Flush the underlying MTLBuffer from the device's caches, and invalidate any CPU caches if needed.
+ *  @discussion This will call [id <MTLBlitEncoder> synchronizeResource: ] on the vector's MTLBuffer, if any.
+ *              This is necessary for all MTLStorageModeManaged resources. For other resources, including temporary
+ *              resources (these are all MTLStorageModePrivate), and buffers that have not yet been allocated, nothing is done.
+ *              It is more efficient to use this method than to attempt to do this yourself with the data property.
+ *  @param      commandBuffer       The commandbuffer on which to synchronize   */
+-(void) synchronizeOnCommandBuffer: (__nonnull id <MTLCommandBuffer>) commandBuffer
+        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+
+/*! @abstract       Get the number of bytes used to allocate underyling MTLResources
+ *  @discussion     This is the size of the backing store of underlying MTLResources.
+ *                  It does not include all storage used by the object, for example
+ *                  the storage used to hold the MPSVector instantiation and MTLBuffer
+ *                  is not included. It only measures the size of the allocation used
+ *                  to hold the vector data in the buffer. This value is subject to
+ *                  change between different devices and operating systems.
+ *
+ *                  Except when -initWithBuffer:descriptor: is used, most MPSVectors are allocated
+ *                  without a backing store. The backing store is allocated lazily when
+ *                  it is needed, typically when the .texture property is called.
+ *                  Consequently, in most cases, it should be inexpensive to make
+ *                  a MPSMatrix to see how much memory it will need, and release it
+ *                  if it is too large.
+ *
+ *                  This method may fail in certain circumstances, such as when the
+ *                  MPSMatrix is created with -initWithBuffer:descriptor:. In
+ *                  such cases, 0 will be returned.
+ */
+-(NSUInteger)  resourceSize
+    MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
 
 @end // MPSVector
     
@@ -468,7 +572,76 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  */
 @property (readwrite, nonatomic)  NSUInteger  readCount;
 
-@end 
+@end
+    
+/*! @abstract A MPSVector allocated on GPU private memory.
+ *  @discussion It may alias one or more other MPSTemporaryVector objects. Undesired data destruction
+ *              due to aliasing is avoided using the readCount property.
+ */
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+@interface MPSTemporaryVector : MPSVector
+/*!
+ *  @abstract   Initialize a MPSTemporaryVector for use on a MTLCommandBuffer
+ *  @param      commandBuffer       The MTLCommandBuffer on which the MPSTemporaryMatrix will be exclusively used
+ *  @param      descriptor    A valid MPSVectorDescriptor describing the MPSVector format to create
+ *  @return     A valid MPSTemporaryVector.  The object is not managed by a NSAutoreleasePool. The object will be
+ *              released when the command buffer is committed. The underlying buffer will become invalid before
+ *              this time due to the action of the readCount property.  Please read and understand the use of
+ *              the readCount property before using this object.
+ */
++(nonnull instancetype) temporaryVectorWithCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
+                                              descriptor: (nonnull MPSVectorDescriptor*) descriptor;
+
+/*!
+ *  @abstract       Help MPS decide which allocations to make ahead of time
+ *  @discussion     The buffer cache that underlies the MPSTemporaryVector can automatically allocate new storage as
+ *                  needed as you create new temporary vectors.  However, sometimes a more global view of what you
+ *                  plan to make is useful for maximizing memory reuse to get the most efficient operation.
+ *                  This class method hints to the cache what the list of matrices will be.
+ *
+ *                  It is never necessary to call this method. It is purely a performance and memory optimization.
+ *
+ *  @param commandBuffer        The command buffer on which the MPSTemporaryVector will be used
+ *  @param descriptorList       A NSArray of MPSVectorDescriptor objects, indicating vectors that will be created
+ */
++(void) prefetchStorageWithCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
+                          descriptorList: (NSArray <MPSVectorDescriptor*> * __nonnull) descriptorList;
+
+/* MPS can not make a temporary vector with an outside buffer. Please use the above methods. */
+/*! @abstract *** unavailable */
+-(nonnull instancetype) initWithBuffer: (nonnull id<MTLBuffer>) buffer
+                            descriptor: (nonnull MPSVectorDescriptor*) descriptor NS_UNAVAILABLE;
+
+/*!
+ *  @abstract       The number of times a temporary vector may be read by a MPSMatrix... kernel
+ *                  before its contents become undefined.
+ *
+ *  @discussion     MPSTemporaryVector objects must release their underlying buffers for reuse
+ *                  immediately after last use. So as to facilitate *prompt* convenient
+ *                  memory recycling, each time a MPSTemporaryVector is read by a
+ *                  MPSMatrix... -encode... method, its readCount is automatically
+ *                  decremented. When the readCount reaches 0, the underlying buffer is
+ *                  automatically made available for reuse to MPS for its own needs and for
+ *                  other MPSTemporaryVector objects prior to return from the -encode.. function.
+ *                  The contents of the buffer become undefined at this time.
+ *
+ *                  By default, the readCount is initialized to 1, indicating a matrix that
+ *                  may be overwritten any number of times, but read only once.
+ *
+ *                  You may change the readCount as desired to allow MPSMatrix kernels to read
+ *                  the MPSTemporaryVector additional times. However, it is an error to change
+ *                  the readCount once it is zero. It is an error to read or write to a
+ *                  MPSTemporaryVector with a zero readCount. You may set the readCount to 0
+ *                  yourself to cause the underlying buffer to be returned to MPS. Writing
+ *                  to a MPSTemporaryVector does not adjust the readCount.
+ *
+ *                  The Metal API Validation layer will assert if a MPSTemporaryVector is
+ *                  deallocated with non-zero readCount to help identify cases when resources
+ *                  are not returned promptly.
+ */
+@property (readwrite, nonatomic)  NSUInteger  readCount;
+
+@end    // MPSTemporaryVector
 
 /*!
  *  @class      MPSMatrixUnaryKernel
@@ -579,4 +752,5 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 }   // extern "C"
 #endif
 
+#endif // __METAL_VERSION__
 #endif /* MPSMatrixTypes_h */

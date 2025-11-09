@@ -15,12 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
  * An entity is the general purpose object in an entity-component system.
  * Entites have many components but components are associated with only a single entity.
  * 
- * Note: GKEntity supports NSCopying and NSCoding, but your custom GKComponent's must also support NSCopying and NSCoding
+ * Note: GKEntity supports NSCopying and NSSecureCoding, but your custom GKComponent's must also support NSCopying and NSSecureCoding
  *
  * @see GKComponent
  * @see GKComponentSystem
  */
-GK_BASE_AVAILABILITY @interface GKEntity : NSObject <NSCopying, NSCoding>
+GK_BASE_AVAILABILITY @interface GKEntity : NSObject <NSCopying, NSSecureCoding>
 
 /**
  * Creates a new entity ready to have components added to it.

@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 1E6C8919-BC6C-34EC-87A8-9D9C8B8AD990' ]
+uuids:           [ 'x86_64: ACAE4DE2-D4E3-348B-8032-293E493256C3' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libATSServer.dylib
 exports:         

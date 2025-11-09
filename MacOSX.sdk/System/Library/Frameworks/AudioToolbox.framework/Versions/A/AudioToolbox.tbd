@@ -1,49 +1,12 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 03B44101-9ADD-3AEE-BB6C-2DF1EFBC2C7C', 'x86_64: 65F607D3-3967-3212-B899-C22E4F45A6B7' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: F56518BA-B21B-32D8-B077-40A989815F46' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox
 current-version: 492
 objc-constraint: none
 exports:         
-  - archs:           [ i386 ]
-    symbols:         [ '$ld$hide$os10.10$_AudioUnitCarbonViewCreate', '$ld$hide$os10.10$_AudioUnitCarbonViewSetEventListener', 
-                       '$ld$hide$os10.10$_AudioUnitRemovePropertyListener', '$ld$hide$os10.10$_AudioUnitRemoveRenderNotification', 
-                       '$ld$hide$os10.10$_AudioUnitRenderSlice', '$ld$hide$os10.10$_AudioUnitSetRenderNotification', 
-                       '$ld$hide$os10.4$_AudioUnitCarbonViewCreate', '$ld$hide$os10.4$_AudioUnitCarbonViewSetEventListener', 
-                       '$ld$hide$os10.4$_AudioUnitRemovePropertyListener', '$ld$hide$os10.4$_AudioUnitRemoveRenderNotification', 
-                       '$ld$hide$os10.4$_AudioUnitRenderSlice', '$ld$hide$os10.4$_AudioUnitSetRenderNotification', 
-                       '$ld$hide$os10.5$_AudioUnitCarbonViewCreate', '$ld$hide$os10.5$_AudioUnitCarbonViewSetEventListener', 
-                       '$ld$hide$os10.5$_AudioUnitRemovePropertyListener', '$ld$hide$os10.5$_AudioUnitRemoveRenderNotification', 
-                       '$ld$hide$os10.5$_AudioUnitRenderSlice', '$ld$hide$os10.5$_AudioUnitSetRenderNotification', 
-                       '$ld$hide$os10.6$_AudioUnitCarbonViewCreate', '$ld$hide$os10.6$_AudioUnitCarbonViewSetEventListener', 
-                       '$ld$hide$os10.6$_AudioUnitRemovePropertyListener', '$ld$hide$os10.6$_AudioUnitRemoveRenderNotification', 
-                       '$ld$hide$os10.6$_AudioUnitRenderSlice', '$ld$hide$os10.6$_AudioUnitSetRenderNotification', 
-                       '$ld$hide$os10.7$_AudioUnitCarbonViewCreate', '$ld$hide$os10.7$_AudioUnitCarbonViewSetEventListener', 
-                       '$ld$hide$os10.7$_AudioUnitRemovePropertyListener', '$ld$hide$os10.7$_AudioUnitRemoveRenderNotification', 
-                       '$ld$hide$os10.7$_AudioUnitRenderSlice', '$ld$hide$os10.7$_AudioUnitSetRenderNotification', 
-                       '$ld$hide$os10.8$_AudioUnitCarbonViewCreate', '$ld$hide$os10.8$_AudioUnitCarbonViewSetEventListener', 
-                       '$ld$hide$os10.8$_AudioUnitRemovePropertyListener', '$ld$hide$os10.8$_AudioUnitRemoveRenderNotification', 
-                       '$ld$hide$os10.8$_AudioUnitRenderSlice', '$ld$hide$os10.8$_AudioUnitSetRenderNotification', 
-                       '$ld$hide$os10.9$_AudioUnitCarbonViewCreate', '$ld$hide$os10.9$_AudioUnitCarbonViewSetEventListener', 
-                       '$ld$hide$os10.9$_AudioUnitRemovePropertyListener', '$ld$hide$os10.9$_AudioUnitRemoveRenderNotification', 
-                       '$ld$hide$os10.9$_AudioUnitRenderSlice', '$ld$hide$os10.9$_AudioUnitSetRenderNotification', 
-                       _AUGraphRemoveRenderNotification, _AUGraphSetRenderNotification, 
-                       _AUMIDIControllerConnectSource, _AUMIDIControllerCreate, _AUMIDIControllerDisconnectSource, 
-                       _AUMIDIControllerDispose, _AUMIDIControllerExportXMLNames, 
-                       _AUMIDIControllerHandleMIDI, _AUMIDIControllerMapChannelToAU, 
-                       _AUMIDIControllerMapEventToParameter, _AUMIDIControllerUnmapAudioUnit, 
-                       _AudioUnitCarbonViewCreate, _AudioUnitCarbonViewSetEventListener, 
-                       _AudioUnitRemovePropertyListener, _AudioUnitRemoveRenderNotification, 
-                       _AudioUnitRenderSlice, _AudioUnitSetRenderNotification, _MusicSequenceLoadSMF, 
-                       _MusicSequenceLoadSMFData, _MusicSequenceSaveSMF, _OpenDefaultAudioOutput, 
-                       _OpenSystemSoundAudioOutput ]
   - archs:           [ x86_64 ]
-    symbols:         [ _AudioUnitExtensionCopyComponentList, _AudioUnitExtensionSetComponentList ]
-    objc-classes:    [ _AUAudioUnit, _AUAudioUnitBus, _AUAudioUnitBusArray, _AUAudioUnitPreset, 
-                       _AUAudioUnitV2Bridge, _AUHostExtensionContext, _AUParameter, 
-                       _AUParameterGroup, _AUParameterNode, _AUParameterTree, _AURemoteExtensionContext ]
-  - archs:           [ i386, x86_64 ]
     symbols:         [ '$ld$hide$os10.10$_AudioCodecAppendInputBufferList', '$ld$hide$os10.10$_AudioCodecAppendInputData', 
                        '$ld$hide$os10.10$_AudioCodecGetProperty', '$ld$hide$os10.10$_AudioCodecGetPropertyInfo', 
                        '$ld$hide$os10.10$_AudioCodecInitialize', '$ld$hide$os10.10$_AudioCodecProduceOutputBufferList', 
@@ -307,9 +270,10 @@ exports:
                        _AudioServicesRemoveSystemSoundCompletion, _AudioServicesSetProperty, 
                        _AudioServicesStartSystemSound, _AudioServicesStopSystemSound, 
                        _AudioToolboxServerInit, _AudioUnitAddPropertyListener, _AudioUnitAddRenderNotify, 
-                       _AudioUnitComplexRender, _AudioUnitGetParameter, _AudioUnitGetProperty, 
-                       _AudioUnitGetPropertyInfo, _AudioUnitInitialize, _AudioUnitProcess, 
-                       _AudioUnitProcessMultiple, _AudioUnitRemovePropertyListenerWithUserData, 
+                       _AudioUnitComplexRender, _AudioUnitExtensionCopyComponentList, 
+                       _AudioUnitExtensionSetComponentList, _AudioUnitGetParameter, 
+                       _AudioUnitGetProperty, _AudioUnitGetPropertyInfo, _AudioUnitInitialize, 
+                       _AudioUnitProcess, _AudioUnitProcessMultiple, _AudioUnitRemovePropertyListenerWithUserData, 
                        _AudioUnitRemoveRenderNotify, _AudioUnitRender, _AudioUnitReset, 
                        _AudioUnitScheduleParameters, _AudioUnitSetParameter, _AudioUnitSetProperty, 
                        _AudioUnitUninitialize, _CACentralLog, _CACentralLogString, 
@@ -406,5 +370,8 @@ exports:
                        _kMediaKind_iTunesUValue, _kSoundCheck_AvePerceivedPowerCoeffKey, 
                        _kSoundCheck_MaxPerceivedPowerCoeffKey, _kSoundCheck_MaxPerceivedPowerMsecKey, 
                        _kSoundCheck_PeakAmplitudeKey, _kSoundCheck_PeakAmplitudeMsecKey ]
-    objc-classes:    [ _AudioComponentRegistrar ]
+    objc-classes:    [ AUAudioUnit, AUAudioUnitBus, AUAudioUnitBusArray, AUAudioUnitPreset, 
+                       AUAudioUnitV2Bridge, AUHostExtensionContext, AUParameter, 
+                       AUParameterGroup, AUParameterNode, AUParameterTree, AURemoteExtensionContext, 
+                       AudioComponentRegistrar ]
 ...

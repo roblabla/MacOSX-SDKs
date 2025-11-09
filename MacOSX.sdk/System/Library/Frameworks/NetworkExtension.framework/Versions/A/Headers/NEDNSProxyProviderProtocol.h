@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Apple Inc.
+ * Copyright (c) 2017-2018 Apple Inc.
  * All rights reserved.
  */
 
@@ -24,20 +24,20 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Instances of this class are thread safe.
  */
-NS_CLASS_AVAILABLE(10_13, 11_0)
+API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEDNSProxyProviderProtocol : NEVPNProtocol
 
 /*!
  * @property providerConfiguration
  * @discussion A dictionary containing NEDNSProxyProvider vendor-specific configuration parameters. This dictionary is passed as-is to NEDNSProxyProviders when a DNS proxy is started.
  */
-@property (copy, nullable) NSDictionary<NSString *,id> *providerConfiguration NS_AVAILABLE(10_13, 11_0);
+@property (copy, nullable) NSDictionary<NSString *,id> *providerConfiguration API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property providerBundleIdentifier
  * @discussion A string containing the bundle identifier of the NEDNSProxyProvider to be used by this configuration.
  */
-@property (copy, nullable) NSString *providerBundleIdentifier NS_AVAILABLE(10_13, 11_0);
+@property (copy, nullable) NSString *providerBundleIdentifier API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

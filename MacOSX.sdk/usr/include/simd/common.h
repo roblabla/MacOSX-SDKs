@@ -125,7 +125,6 @@
 #include <simd/vector_make.h>
 #include <simd/logic.h>
 #include <simd/math.h>
-#include <simd/matrix_types.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -3584,7 +3583,7 @@ static inline SIMD_CFUNC simd_double8 simd_fast_rsqrt(simd_double8 x) {
 static inline SIMD_CFUNC float simd_precise_rsqrt(float x) {
 #if defined __SSE__
   float r = simd_fast_rsqrt(x);
-  return r*(1.5f - 0.5f*(x == 0 ? -INFINITY : x)*r*r);
+  return r*(1.5f - 0.5f*(r == INFINITY ? -INFINITY : x)*r*r);
 #elif defined __ARM_NEON__
   return simd_precise_rsqrt(simd_make_float2_undef(x)).x;
 #else
@@ -3610,7 +3609,7 @@ static inline SIMD_CFUNC simd_float3 simd_precise_rsqrt(simd_float3 x) {
 static inline SIMD_CFUNC simd_float4 simd_precise_rsqrt(simd_float4 x) {
 #if defined __SSE__
   simd_float4 r = simd_fast_rsqrt(x);
-  return r*(1.5 - 0.5*simd_bitselect(x, -INFINITY, x == 0)*r*r);
+  return r*(1.5 - 0.5*simd_bitselect(x, -INFINITY, r == INFINITY)*r*r);
 #elif defined __ARM_NEON__
   simd_float4 r = simd_fast_rsqrt(x);
   return r*vrsqrtsq_f32(x, r*r);
@@ -3622,7 +3621,7 @@ static inline SIMD_CFUNC simd_float4 simd_precise_rsqrt(simd_float4 x) {
 static inline SIMD_CFUNC simd_float8 simd_precise_rsqrt(simd_float8 x) {
 #if defined __AVX__
   simd_float8 r = simd_fast_rsqrt(x);
-  return r*(1.5 - 0.5*simd_bitselect(x, -INFINITY, x == 0)*r*r);
+  return r*(1.5 - 0.5*simd_bitselect(x, -INFINITY, r == INFINITY)*r*r);
 #else
   return simd_make_float8(simd_precise_rsqrt(x.lo), simd_precise_rsqrt(x.hi));
 #endif
@@ -3631,7 +3630,7 @@ static inline SIMD_CFUNC simd_float8 simd_precise_rsqrt(simd_float8 x) {
 static inline SIMD_CFUNC simd_float16 simd_precise_rsqrt(simd_float16 x) {
 #if defined __AVX512F__
   simd_float16 r = simd_fast_rsqrt(x);
-  return r*(1.5 - 0.5*simd_bitselect(x, -INFINITY, x == 0)*r*r);
+  return r*(1.5 - 0.5*simd_bitselect(x, -INFINITY, r == INFINITY)*r*r);
 #else
   return simd_make_float16(simd_precise_rsqrt(x.lo), simd_precise_rsqrt(x.hi));
 #endif

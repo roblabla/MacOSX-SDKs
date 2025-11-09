@@ -41,6 +41,8 @@ __BEGIN_DECLS
 typedef void *cpu_id_t;
 
 
+extern void lpss_uart_enable (boolean_t on_off);
+
 void PE_enter_debugger(
 	const char *cause);
 
@@ -122,6 +124,8 @@ struct clock_frequency_info_t {
   unsigned long long mem_frequency_max_hz;
   unsigned long long fix_frequency_hz;
 };
+
+extern int debug_cpu_performance_degradation_factor;
 
 typedef struct clock_frequency_info_t clock_frequency_info_t;
 

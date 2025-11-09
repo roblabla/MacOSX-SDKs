@@ -1,11 +1,18 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 21A5F692-4B2F-3A36-85F7-FA30B32C9B23' ]
+uuids:           [ 'x86_64: 92C5BDBA-CFAD-344E-95BD-26EA05033F8A' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/PersonaUI.framework/Versions/A/PersonaUI
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _PRLikenessSnapshotOptionCircular, _PRLikenessSnapshotOptionForceDecode ]
-    objc-classes:    [ _PRLikenessView, _PRMonogram, _PRMonogramView ]
+    symbols:         [ _CGSizeFromPRLikenessCacheSize, _NSStringFromMD5, _NSStringFromPRLikenessCacheSize, 
+                       _PRImageCreateCircularImageInRect, _PRImageCreateWithImageInRect, 
+                       _PRImageForceDecompress, _PRLikenessCacheSizeClosestToSize, 
+                       _PRLikenessCacheSizeGetCost, _PRLikenessSnapshotOptionCircular, 
+                       _PRLikenessSnapshotOptionForceDecode, _PRRectGetMaxLength, 
+                       _PRRectGetMinLength, _PRRectScale, _PRSizeScale, _PersonaUIVersionNumber, 
+                       _PersonaUIVersionString, __InvalidPRLikenessCacheSize ]
+    objc-classes:    [ PRImageView, PRLikenessCache, PRLikenessCacheContext, PRLikenessView, 
+                       PRMonogram, PRMonogramStringFormatter, PRMonogramStringValidator, 
+                       PRMonogramView, _PRMonogramFontSpec ]
 ...

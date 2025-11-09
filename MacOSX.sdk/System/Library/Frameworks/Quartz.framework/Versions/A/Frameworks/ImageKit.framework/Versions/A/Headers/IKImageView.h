@@ -5,10 +5,12 @@
     All rights reserved.
  */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+#ifndef IKImageView_h
+#define IKImageView_h
 
 #import <AppKit/NSView.h>
 #import <QuartzCore/QuartzCore.h>
+#import <ImageKit/ImageKitBase.h>
 
 extern NSString *const IKToolModeNone;
 extern NSString *const IKToolModeMove;
@@ -28,6 +30,7 @@ extern NSString *const IKOverlayTypeImage;
  @class IKImageView
  @abstract The IKImageView class provides an efficient way to display images in a view while at the same time supporting a number of image editing operations.
  */
+IK_CLASS_AVAILABLE(10.5)
 @interface IKImageView : NSView
 {
 @private

@@ -158,6 +158,29 @@ enum
                         A CMIOFeatureControl to specify the power line frequency to properly implement anti-flicker processing. The units for the contorl's absolute value are hertz (Hz).
 	@constant		kCMIONoiseReductionControlClassID
 						A CMIOFeatureControl that controls the noise reduction strength. The units for the control's absolute value are undefined.
+ 	@constant       kCMIOPanTiltAbsoluteControlClassID
+ 						A CMIOFeatureControl that controls a pan/tilt mechanism. It is 8 byte control with first 4 bytes
+ 						representing pan value and last 4 byte representing tilt value .Positive values for pan mean
+ 						clockwise, negative values for pan means counterclockwise.
+ 						Positive values for tilt mean updwards, negative values for tilt  means downwards.
+ 	@constant       kCMIOPanTiltRelativeControlClassID
+ 						A CMIOFeatureControl that controls a pan/tilt mechanism. It is 4 byte control with first 2 bytes
+ 						representing pan value and last 2 bytes representing tilt value. Pan value is composed of two
+ 						parts , Pan Relative(direction) and Pan Speed each having size of 1 byte. For Pan Relative value
+ 						of 0 indicates stop, 1 indicates movement in clockwise direction and 0xff indicates movement in
+ 						counterclockwise direction. For Pan Speed low number indicates a slow speed and high number
+ 						indicates a higher speed. Tilt value of conposed of two parts , Tilt Relative(direction) and Tilt
+ 						Speed each having size of 1 byte. For Tilt Relative value of 0 indicates stop, 1 indicates
+ 						movement in upward direction and 0xff indicates movement in downward direction.
+ 						For Tilt Speed low number indicates slow speed and high number indicates higher speed.
+ 	@constant       kCMIOZoomRelativeControlClassID
+ 						A CMIOFeatureControl that controls the zoom focal length relatively as powered zoom.
+ 						It is 4 byte control. First byte specifies whether zoom lens group is stopped or direction
+ 						of zoom lens. Value of 0 indicates that zoom lens is stopped, 1 indicates that zoom lens
+ 						is moved towards the telephoto direction and 0xff indicates that zoom lens is moved towards
+ 						the wide-angle direction. Second 1 byte specifies whether digital zoom is enabled or disabled.
+ 						Third 1 byte represent speed of control change where low number specifies low speed and
+ 						higher number specifies higher speed. Last 1 byte is padding byte.
 */
 enum
 {
@@ -185,6 +208,9 @@ enum
     kCMIOBacklightCompensationControlClassID    = 'bklt',
     kCMIOPowerLineFrequencyControlClassID       = 'pwfq',
 	kCMIONoiseReductionControlClassID			= 's2nr',
+	kCMIOPanTiltAbsoluteControlClassID          = 'ptab',
+	kCMIOPanTiltRelativeControlClassID          = 'ptrl',
+	kCMIOZoomRelativeControlClassID             = 'zomr',
 };
 
 #pragma mark -

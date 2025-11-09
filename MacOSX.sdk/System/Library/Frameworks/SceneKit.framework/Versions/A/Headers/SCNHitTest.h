@@ -1,7 +1,8 @@
 //
 //  SCNHitTest.h
+//  SceneKit
 //
-//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
+//  Copyright © 2012-2018 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -21,23 +22,18 @@ typedef NS_ENUM(NSInteger, SCNHitTestSearchMode) {
 
 /*! @group Hit-test options */
 
-#if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 3
 typedef NSString * SCNHitTestOption NS_STRING_ENUM;
-#else
-typedef NSString * SCNHitTestOption;
-#endif
+SCN_EXPORT SCNHitTestOption const SCNHitTestClipToZRangeKey;                                                                        // If set to YES ignores the objects clipped by the zNear/zFar range of the current point of view. Defaults to YES.
+SCN_EXPORT SCNHitTestOption const SCNHitTestBackFaceCullingKey;                                                                     // If set to YES ignores the faces not facing to the camera. Defaults to YES.
+SCN_EXPORT SCNHitTestOption const SCNHitTestBoundingBoxOnlyKey;                                                                     // If set to YES only tests the bounding boxes of the 3D objects. Defaults to NO.
+SCN_EXPORT SCNHitTestOption const SCNHitTestIgnoreChildNodesKey;                                                                    // Determines whether the child nodes are ignored. Defaults to NO.
+SCN_EXPORT SCNHitTestOption const SCNHitTestRootNodeKey;                                                                            // Specifies the root node to use for the hit test. Defaults to the root node of the scene.
+SCN_EXPORT SCNHitTestOption const SCNHitTestIgnoreHiddenNodesKey  API_AVAILABLE(macos(10.9));                                       // Determines whether hidden nodes should be ignored. Defaults to YES.
+SCN_EXPORT SCNHitTestOption const SCNHitTestOptionCategoryBitMask API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));               // Determines the node categories to test. Defaults to all bits set.
+SCN_EXPORT SCNHitTestOption const SCNHitTestOptionSearchMode      API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0)); // Determines whether the search should be exhaustive. Defaults to SCNHitTestSearchModeClosest.
 
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestClipToZRangeKey;                                                                        // If set to YES ignores the objects clipped by the zNear/zFar range of the current point of view. Defaults to YES.
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestBackFaceCullingKey;                                                                     // If set to YES ignores the faces not facing to the camera. Defaults to YES.
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestBoundingBoxOnlyKey;                                                                     // If set to YES only tests the bounding boxes of the 3D objects. Defaults to NO.
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestIgnoreChildNodesKey;                                                                    // Determines whether the child nodes are ignored. Defaults to NO.
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestRootNodeKey;                                                                            // Specifies the root node to use for the hit test. Defaults to the root node of the scene.
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestIgnoreHiddenNodesKey  API_AVAILABLE(macos(10.9));                                       // Determines whether hidden nodes should be ignored. Defaults to YES.
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestOptionCategoryBitMask API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));               // Determines the node categories to test. Defaults to all bits set.
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestOptionSearchMode      API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0)); // Determines whether the search should be exhaustive. Defaults to SCNHitTestSearchModeClosest.
-
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestFirstFoundOnlyKey;                                                                      // Deprecated, use SCNHitTestSearchModeAny for the SCNHitTestOptionSearchMode option instead
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestSortResultsKey;                                                                         // Deprecated, use SCNHitTestSearchModeAll for the SCNHitTestOptionSearchMode option instead
+SCN_EXPORT SCNHitTestOption const SCNHitTestFirstFoundOnlyKey;                                                                      // Deprecated, use SCNHitTestSearchModeAny for the SCNHitTestOptionSearchMode option instead
+SCN_EXPORT SCNHitTestOption const SCNHitTestSortResultsKey;                                                                         // Deprecated, use SCNHitTestSearchModeAll for the SCNHitTestOptionSearchMode option instead
 
 #define SCNHitTestOptionFirstFoundOnly    SCNHitTestFirstFoundOnlyKey
 #define SCNHitTestOptionSortResults       SCNHitTestSortResultsKey
@@ -52,33 +48,34 @@ FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestSortResultsKey;              
  @abstract Results returned by the hit-test methods.
  */
 
+SCN_EXPORT
 @interface SCNHitTestResult : NSObject
 
-/*! The node hit. */
+/*! The hit node. */
 @property(nonatomic, readonly) SCNNode *node;
 
-/*! Index of the geometry hit. */
+/*! Index of the hit geometry element. */
 @property(nonatomic, readonly) NSInteger geometryIndex;
 
-/*! Index of the face hit. */
+/*! Index of the hit primitive of the geometry element. */
 @property(nonatomic, readonly) NSInteger faceIndex;
 
-/*! Intersection point in the node local coordinate system. */
+/*! Intersection point in the node's local coordinate system. */
 @property(nonatomic, readonly) SCNVector3 localCoordinates;
 
 /*! Intersection point in the world coordinate system. */
 @property(nonatomic, readonly) SCNVector3 worldCoordinates;
 
-/*! Intersection normal in the node local coordinate system. */
+/*! Intersection normal in the node's local coordinate system. */
 @property(nonatomic, readonly) SCNVector3 localNormal;
 
 /*! Intersection normal in the world coordinate system. */
 @property(nonatomic, readonly) SCNVector3 worldNormal;
 
-/*! World transform of the node intersected. */
+/*! World transform of the hit node. */
 @property(nonatomic, readonly) SCNMatrix4 modelTransform;
 
-/*! The bone node hit. Only available if the node hit has a SCNSkinner attached. */
+/*! The hit bone. Only available if the node hit has a SCNSkinner attached. */
 @property(nonatomic, readonly, nullable) SCNNode *boneNode API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
 
 /*!

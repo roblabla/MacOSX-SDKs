@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, SKRepeatMode) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-SK_EXPORT @interface SKKeyframeSequence : NSObject <NSCoding, NSCopying>
+SK_EXPORT @interface SKKeyframeSequence : NSObject <NSSecureCoding, NSCopying>
 
 /* Designated initializer */
 - (instancetype)initWithKeyframeValues:(NSArray*)values times:(NSArray<NSNumber*> *)times NS_DESIGNATED_INITIALIZER;

@@ -32,11 +32,21 @@ typedef CF_ENUM(uint32_t, CGImageAlphaInfo) {
 
 typedef CF_ENUM(uint32_t, CGImageByteOrderInfo) {
     kCGImageByteOrderMask     = 0x7000,
+    kCGImageByteOrderDefault  = (0 << 12),
     kCGImageByteOrder16Little = (1 << 12),
     kCGImageByteOrder32Little = (2 << 12),
     kCGImageByteOrder16Big    = (3 << 12),
     kCGImageByteOrder32Big    = (4 << 12)
-} CG_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+} CG_AVAILABLE_STARTING(10.0, 2.0);
+
+typedef CF_ENUM(uint32_t, CGImagePixelFormatInfo) {
+    kCGImagePixelFormatMask      = 0xF0000,
+    kCGImagePixelFormatPacked    = (0 << 16),
+    kCGImagePixelFormatRGB555    = (1 << 16), /* Only for RGB 16 bits per pixel */
+    kCGImagePixelFormatRGB565    = (2 << 16), /* Only for RGB 16 bits per pixel */
+    kCGImagePixelFormatRGB101010 = (3 << 16), /* Only for RGB 32 bits per pixel */
+    kCGImagePixelFormatRGBCIF10  = (4 << 16), /* Only for RGB 32 bits per pixel */
+} CG_AVAILABLE_STARTING(10.14, 12.0);
 
 typedef CF_OPTIONS(uint32_t, CGBitmapInfo) {
     kCGBitmapAlphaInfoMask = 0x1F,
@@ -45,12 +55,12 @@ typedef CF_OPTIONS(uint32_t, CGBitmapInfo) {
     kCGBitmapFloatComponents = (1 << 8),
 
     kCGBitmapByteOrderMask     = kCGImageByteOrderMask,
-    kCGBitmapByteOrderDefault  = (0 << 12),
+    kCGBitmapByteOrderDefault  = kCGImageByteOrderDefault,
     kCGBitmapByteOrder16Little = kCGImageByteOrder16Little,
     kCGBitmapByteOrder32Little = kCGImageByteOrder32Little,
     kCGBitmapByteOrder16Big    = kCGImageByteOrder16Big,
     kCGBitmapByteOrder32Big    = kCGImageByteOrder32Big
-} CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+} CG_AVAILABLE_STARTING(10.0, 2.0);
 
 #ifdef __BIG_ENDIAN__
 # define kCGBitmapByteOrder16Host kCGBitmapByteOrder16Big
@@ -63,7 +73,7 @@ typedef CF_OPTIONS(uint32_t, CGBitmapInfo) {
 /* Return the CFTypeID for CGImageRefs. */
 
 CG_EXTERN CFTypeID CGImageGetTypeID(void)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Create an image. */
 
@@ -73,21 +83,24 @@ CG_EXTERN CGImageRef __nullable CGImageCreate(size_t width, size_t height,
     CGDataProviderRef cg_nullable provider,
     const CGFloat * __nullable decode, bool shouldInterpolate,
     CGColorRenderingIntent intent)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.0, 2.0);
 
-/* Create an image mask. */
+/* Create an image mask. Legal values for bits per component are 1, 2, 4 and 8.
+ * Bits per pixel must be either the same as bits per component or 8, with
+ * exception of 8 bits per component where bits per pixel can be also 16 or 32.
+ */
 
 CG_EXTERN CGImageRef __nullable CGImageMaskCreate(size_t width, size_t height,
     size_t bitsPerComponent, size_t bitsPerPixel, size_t bytesPerRow,
     CGDataProviderRef cg_nullable provider, const CGFloat * __nullable decode,
     bool shouldInterpolate)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return a copy of `image'. Only the image structure itself is copied; the
    underlying data is not. */
 
 CG_EXTERN CGImageRef __nullable CGImageCreateCopy(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* Create an image from `source', a data provider of JPEG-encoded data. */
 
@@ -95,7 +108,7 @@ CG_EXTERN CGImageRef __nullable CGImageCreateWithJPEGDataProvider(
     CGDataProviderRef cg_nullable source, const CGFloat * __nullable decode,
     bool shouldInterpolate,
     CGColorRenderingIntent intent)
-    CG_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.1, 2.0);
 
 /* Create an image using `source', a data provider for PNG-encoded data. */
 
@@ -103,7 +116,7 @@ CG_EXTERN CGImageRef __nullable CGImageCreateWithPNGDataProvider(
     CGDataProviderRef cg_nullable source, const CGFloat * __nullable decode,
     bool shouldInterpolate,
     CGColorRenderingIntent intent)
-    CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.2, 2.0);
 
 /* Create an image using the data contained within the subrectangle `rect'
    of `image'.
@@ -128,7 +141,7 @@ CG_EXTERN CGImageRef __nullable CGImageCreateWithPNGDataProvider(
 
 CG_EXTERN CGImageRef __nullable CGImageCreateWithImageInRect(
     CGImageRef cg_nullable image, CGRect rect)
-    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* Create a new image from `image' masked by `mask', which may be an image
    mask or an image.
@@ -158,7 +171,7 @@ CG_EXTERN CGImageRef __nullable CGImageCreateWithImageInRect(
 
 CG_EXTERN CGImageRef __nullable CGImageCreateWithMask(
     CGImageRef cg_nullable image, CGImageRef cg_nullable mask)
-    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* Create a new image from `image' masked by `components', an array of 2N
    values { min[1], max[1], ... min[N], max[N] } where N is the number of
@@ -178,7 +191,7 @@ CG_EXTERN CGImageRef __nullable CGImageCreateWithMask(
 
 CG_EXTERN CGImageRef __nullable CGImageCreateWithMaskingColors(
     CGImageRef cg_nullable image, const CGFloat * cg_nullable components)
-    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* Create a copy of `image', replacing the image's color space with `space'.
    Returns NULL if `image' is an image mask, or if the number of components
@@ -187,88 +200,96 @@ CG_EXTERN CGImageRef __nullable CGImageCreateWithMaskingColors(
 
 CG_EXTERN CGImageRef __nullable CGImageCreateCopyWithColorSpace(
     CGImageRef cg_nullable image, CGColorSpaceRef cg_nullable space)
-    CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.3, 2.0);
 
 /* Equivalent to `CFRetain(image)'. */
 
 CG_EXTERN CGImageRef cg_nullable CGImageRetain(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Equivalent to `CFRelease(image)'. */
 
 CG_EXTERN void CGImageRelease(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return true if `image' is an image mask, false otherwise. */
 
 CG_EXTERN bool CGImageIsMask(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return the width of `image'. */
 
 CG_EXTERN size_t CGImageGetWidth(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return the height of `image'. */
 
 CG_EXTERN size_t CGImageGetHeight(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return the number of bits/component of `image'. */
 
 CG_EXTERN size_t CGImageGetBitsPerComponent(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return the number of bits/pixel of `image'. */
 
 CG_EXTERN size_t CGImageGetBitsPerPixel(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return the number of bytes/row of `image'. */
 
 CG_EXTERN size_t CGImageGetBytesPerRow(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return the color space of `image', or NULL if `image' is an image
    mask. */
 
 CG_EXTERN CGColorSpaceRef __nullable CGImageGetColorSpace(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return the alpha info of `image'. */
 
 CG_EXTERN CGImageAlphaInfo CGImageGetAlphaInfo(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return the data provider of `image'. */
 
 CG_EXTERN CGDataProviderRef __nullable CGImageGetDataProvider(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return the decode array of `image'. */
 
 CG_EXTERN const CGFloat * __nullable CGImageGetDecode(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return the interpolation parameter of `image'. */
 
 CG_EXTERN bool CGImageGetShouldInterpolate(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return the rendering intent of `image'. */
 
 CG_EXTERN CGColorRenderingIntent CGImageGetRenderingIntent(cg_nullable CGImageRef image)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return the bitmap info of `image'. */
 
 CG_EXTERN CGBitmapInfo CGImageGetBitmapInfo(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+    CG_AVAILABLE_STARTING(10.4, 2.0);
+
+/* Return the byte order info of `image'. */
+
+CG_EXTERN CGImageByteOrderInfo CGImageGetByteOrderInfo(CGImageRef cg_nullable image) CG_AVAILABLE_STARTING(10.14, 12.0);
+
+/* Return the pixel format of `image'. */
+
+CG_EXTERN CGImagePixelFormatInfo CGImageGetPixelFormatInfo(CGImageRef cg_nullable image) CG_AVAILABLE_STARTING(10.14, 12.0);
 
 /* Return the UTType of `image'. */
 
 CG_EXTERN CFStringRef  __nullable CGImageGetUTType(cg_nullable CGImageRef image)
-    CG_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+    CG_AVAILABLE_STARTING(10.11, 9.0);
 
 CF_ASSUME_NONNULL_END
 

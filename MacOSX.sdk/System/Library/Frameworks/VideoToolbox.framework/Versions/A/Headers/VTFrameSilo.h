@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
 	
-	Copyright 2012-2013 Apple Inc. All rights reserved.
+	Copyright © 2012-2018 Apple Inc. All rights reserved.
 	
 	A VTFrameSilo stores a large number of sample buffers, as produced by a multi-pass compression session.
 */
@@ -58,7 +58,7 @@ CF_IMPLICIT_BRIDGING_DISABLED
 		Reserved, pass NULL.
 	@param timeRange
 		The valid time range for the frame silo. Must be valid for progress reporting.
-	@param siloOut
+	@param frameSiloOut
 		Points to a VTFrameSiloRef to receive the newly created object.
 		Call CFRelease to release your retain on the created VTFrameSilo object when you are done with it.
 */
@@ -68,7 +68,7 @@ VTFrameSiloCreate(
 	CM_NULLABLE CFURLRef					fileURL,
 	CMTimeRange								timeRange, /* can be kCMTimeRangeInvalid */
 	CM_NULLABLE CFDictionaryRef				options,
-	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTFrameSiloRef * CM_NONNULL siloOut ) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2));
+	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTFrameSiloRef * CM_NONNULL frameSiloOut ) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2));
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -138,8 +138,8 @@ VT_EXPORT OSStatus
 VTFrameSiloCallFunctionForEachSampleBuffer( 
 	CM_NONNULL VTFrameSiloRef	silo,
 	CMTimeRange					timeRange,
-	void * CM_NULLABLE			callbackInfo,
-	OSStatus	(* CM_NONNULL callback)( void * CM_NULLABLE callbackInfo, CM_NONNULL CMSampleBufferRef sampleBuffer ) ) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2)); // return nonzero to abort iteration
+	void * CM_NULLABLE			refcon,
+	OSStatus	(* CM_NONNULL CF_NOESCAPE callback)( void * CM_NULLABLE refcon, CM_NONNULL CMSampleBufferRef sampleBuffer ) ) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2)); // return nonzero to abort iteration
 
 #if __BLOCKS__
 /*!
@@ -163,7 +163,7 @@ VT_EXPORT OSStatus
 VTFrameSiloCallBlockForEachSampleBuffer( 
 	CM_NONNULL VTFrameSiloRef			silo,
 	CMTimeRange							timeRange,
-	OSStatus (^ CM_NONNULL handler)( CM_NONNULL CMSampleBufferRef sampleBuffer ) ) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2)); // return nonzero to abort iteration
+	OSStatus (^ CM_NONNULL CF_NOESCAPE handler)( CM_NONNULL CMSampleBufferRef sampleBuffer ) ) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2)); // return nonzero to abort iteration
 #endif // __BLOCKS__
 
 CF_IMPLICIT_BRIDGING_DISABLED

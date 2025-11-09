@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-    Copyright 2010-2017 Apple Inc. All rights reserved.
+    Copyright 2010-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -46,7 +46,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	The value of this property is one of the media type strings defined in AVMediaFormat.h.
  */
-@property (nonatomic, readonly) NSString *mediaType;
+@property (nonatomic, readonly) AVMediaType mediaType;
 
 /*!
  @property alwaysCopiesSampleData

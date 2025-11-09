@@ -1,24 +1,25 @@
 /*
         NSStoryboardSegue.h
         Application Kit
-        Copyright (c) 2013-2017, Apple Inc.
+        Copyright (c) 2013-2018, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * NSStoryboardSegueIdentifier NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSStoryboardSegueIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface NSStoryboardSegue : NSObject {
 @private
-    void (^_performHandler)(void);
-    NSString *_identifier;
-    id _sourceController;
-    id _destinationController;
-    void (^_prepareHandler)(void);
+    void (^_performHandler)(void) APPKIT_IVAR;
+    NSString *_identifier APPKIT_IVAR;
+    id _sourceController APPKIT_IVAR;
+    id _destinationController APPKIT_IVAR;
+    void (^_prepareHandler)(void) APPKIT_IVAR;
 }
 
 // Convenience constructor for returning a segue that performs a handler block in its -perform method.

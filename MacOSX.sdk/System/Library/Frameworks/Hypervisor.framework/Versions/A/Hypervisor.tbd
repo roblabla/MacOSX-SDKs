@@ -1,12 +1,12 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7B0D5632-382D-3B3F-9FD6-53BFD5130B69' ]
+uuids:           [ 'x86_64: 5A9DFA66-6240-3CE4-BE8E-A21D2A7F150E' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Hypervisor.framework/Versions/A/Hypervisor
 objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _hv_set_tunable, _hv_vcpu_create, _hv_vcpu_destroy, _hv_vcpu_enable_native_msr, 
+    symbols:         [ _hv_vcpu_create, _hv_vcpu_destroy, _hv_vcpu_enable_native_msr, 
                        _hv_vcpu_flush, _hv_vcpu_get_exec_time, _hv_vcpu_interrupt, 
                        _hv_vcpu_invalidate_tlb, _hv_vcpu_read_fpstate, _hv_vcpu_read_msr, 
                        _hv_vcpu_read_register, _hv_vcpu_run, _hv_vcpu_write_fpstate, 
@@ -18,5 +18,5 @@ exports:
                        _hv_vmx_vcpu_read_msr, _hv_vmx_vcpu_read_register, _hv_vmx_vcpu_read_vmcs, 
                        _hv_vmx_vcpu_run, _hv_vmx_vcpu_set_apic_address, _hv_vmx_vcpu_write_fpstate, 
                        _hv_vmx_vcpu_write_msr, _hv_vmx_vcpu_write_register, _hv_vmx_vcpu_write_vmcs, 
-                       _hv_vmx_vm_create, _hv_vmx_vm_destroy, _vm_connection ]
+                       _hv_vmx_vm_create, _hv_vmx_vm_destroy ]
 ...

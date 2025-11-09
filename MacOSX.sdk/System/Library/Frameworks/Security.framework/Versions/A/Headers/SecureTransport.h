@@ -191,6 +191,18 @@ typedef CF_ENUM(int, SSLClientCertificateState) {
 };
 
 /*
+ * Convenience ciphersuite groups that collate ciphersuites of comparable security
+ * properties into a single alias.
+ */
+typedef CF_ENUM(int, SSLCiphersuiteGroup) {
+    kSSLCiphersuiteGroupDefault,
+    kSSLCiphersuiteGroupCompatibility,
+    kSSLCiphersuiteGroupLegacy,
+    kSSLCiphersuiteGroupATS,
+    kSSLCiphersuiteGroupATSCompatibility,
+};
+
+/*
  * R/W functions. The application using this library provides
  * these functions via SSLSetIOFuncs().
  *
@@ -290,6 +302,26 @@ CF_ENUM(OSStatus) {
 
     /* non-fatal result codes */
     errSSLClientHelloReceived   = -9851,    /* SNI */
+
+    /* fatal errors resulting from transport or networking errors */
+    errSSLTransportReset        = -9852,    /* transport (socket) shutdown, e.g., TCP RST or FIN. */
+    errSSLNetworkTimeout        = -9853,    /* network timeout triggered */
+
+    /* fatal errors resulting from software misconfiguration */
+    errSSLConfigurationFailed   = -9854,    /* TLS configuration failed */
+
+    /* additional errors */
+    errSSLUnsupportedExtension  = -9855,    /* unsupported TLS extension */
+    errSSLUnexpectedMessage     = -9856,    /* peer rejected unexpected message */
+    errSSLDecompressFail        = -9857,    /* decompression failed */
+    errSSLHandshakeFail         = -9858,    /* handshake failed */
+    errSSLDecodeError           = -9859,    /* decode failed */
+    errSSLInappropriateFallback = -9860,    /* inappropriate fallback */
+    errSSLMissingExtension      = -9861,    /* missing extension */
+    errSSLBadCertificateStatusResponse = -9862, /* bad OCSP response */
+    errSSLCertificateRequired   = -9863,    /* certificate required */
+    errSSLUnknownPSKIdentity    = -9864,    /* unknown PSK identity */
+    errSSLUnrecognizedName      = -9865,    /* unknown or unrecognized name */
 };
 
 /* DEPRECATED aliases for errSSLPeerAuthCompleted */

@@ -1,7 +1,7 @@
 /*
 	NSDictionaryController.h
 	Application Kit
-	Copyright (c) 2002-2017, Apple Inc.
+	Copyright (c) 2002-2018, Apple Inc.
 	All rights reserved.
  */
 
@@ -31,23 +31,23 @@ NS_CLASS_AVAILABLE(10_11, NA)
 NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSDictionaryController : NSArrayController {
 @private
-    void *_reserved5 __unused;
-    void *_reserved6 __unused;
-    void *_reserved7 __unused;
-	id _contentDictionary;
-	NSString *_initialKey;
-	id _initialValue;
-	NSUInteger _minimumInsertionKeyIndex;
-	NSString *_localizedKeyStringsFileName;
-	NSDictionary *_localizedKeyForKeyDictionary;
-	NSDictionary *_keyForLocalizedKeyDictionary;
-	NSArray *_includedKeys;
-	NSArray *_excludedKeys;
+    void *_reserved5 __unused APPKIT_IVAR;
+    void *_reserved6 __unused APPKIT_IVAR;
+    void *_reserved7 __unused APPKIT_IVAR;
+	id _contentDictionary APPKIT_IVAR;
+	NSString *_initialKey APPKIT_IVAR;
+	id _initialValue APPKIT_IVAR;
+	NSUInteger _minimumInsertionKeyIndex APPKIT_IVAR;
+	NSString *_localizedKeyStringsFileName APPKIT_IVAR;
+	NSDictionary *_localizedKeyForKeyDictionary APPKIT_IVAR;
+	NSDictionary *_keyForLocalizedKeyDictionary APPKIT_IVAR;
+	NSArray *_includedKeys APPKIT_IVAR;
+	NSArray *_excludedKeys APPKIT_IVAR;
     struct __dictionaryControllerFlags {
         unsigned int _deepCopiesValues:1;
         unsigned int _suppressBuildingDictionary:1;
         unsigned int _reservedDictionaryController:30;
-    } _dictionaryControllerFlags;
+    } _dictionaryControllerFlags APPKIT_IVAR;
 }
 
 - (NSDictionaryControllerKeyValuePair *)newObject;    // overridden from the superclass to create a key-value pair to represent an entry in the content dictionary of the controller; method is invoked for insertions of new key-value pairs as well as transforming existing dictionary entries into key-value pairs for display

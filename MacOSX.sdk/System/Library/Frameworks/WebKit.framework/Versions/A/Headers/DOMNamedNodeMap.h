@@ -28,7 +28,7 @@
 @class DOMNode;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMNamedNodeMap : DOMObject
 @property (readonly) unsigned length;
 
@@ -36,12 +36,12 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 - (DOMNode *)setNamedItem:(DOMNode *)node;
 - (DOMNode *)removeNamedItem:(NSString *)name;
 - (DOMNode *)item:(unsigned)index;
-- (DOMNode *)getNamedItemNS:(NSString *)namespaceURI localName:(NSString *)localName NS_AVAILABLE_MAC(10_5);
+- (DOMNode *)getNamedItemNS:(NSString *)namespaceURI localName:(NSString *)localName WEBKIT_AVAILABLE_MAC(10_5);
 - (DOMNode *)setNamedItemNS:(DOMNode *)node;
-- (DOMNode *)removeNamedItemNS:(NSString *)namespaceURI localName:(NSString *)localName NS_AVAILABLE_MAC(10_5);
+- (DOMNode *)removeNamedItemNS:(NSString *)namespaceURI localName:(NSString *)localName WEBKIT_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMNamedNodeMap (DOMNamedNodeMapDeprecated)
-- (DOMNode *)getNamedItemNS:(NSString *)namespaceURI :(NSString *)localName NS_DEPRECATED_MAC(10_4, 10_5);
-- (DOMNode *)removeNamedItemNS:(NSString *)namespaceURI :(NSString *)localName NS_DEPRECATED_MAC(10_4, 10_5);
+- (DOMNode *)getNamedItemNS:(NSString *)namespaceURI :(NSString *)localName WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (DOMNode *)removeNamedItemNS:(NSString *)namespaceURI :(NSString *)localName WEBKIT_DEPRECATED_MAC(10_4, 10_5);
 @end

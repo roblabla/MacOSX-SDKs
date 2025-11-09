@@ -1,7 +1,7 @@
 /*
     NSMigrationManager.h
     Core Data
-    Copyright (c) 2004-2017, Apple Inc.
+    Copyright (c) 2004-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -35,7 +35,8 @@ API_AVAILABLE(macosx(10.5),ios(3.0))
     struct _migrationManagerFlags {
         unsigned int _migrationWasCancelled:1;
         unsigned int _usesStoreSpecificMigrationManager:1;
-        unsigned int _reservedMigrationManager:30;
+        unsigned int _migrationWasInPlace:1;
+        unsigned int _reservedMigrationManager:29;
     } _migrationManagerFlags;
 	NSError *_migrationCancellationError;
 	id _reserved1;

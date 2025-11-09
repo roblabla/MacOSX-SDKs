@@ -3,7 +3,7 @@
 
     Framework:  AVFoundation
  
-    Copyright 2014-2017 Apple Inc. All rights reserved.
+    Copyright 2014-2018 Apple Inc. All rights reserved.
 
 */
 

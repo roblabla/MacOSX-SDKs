@@ -1,7 +1,7 @@
 /*
 	NSPrinter.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -23,21 +23,19 @@ typedef NS_ENUM(NSUInteger, NSPrinterTableStatus) {
     NSPrinterTableError = 2
 };
 
-typedef NSString * NSPrinterTypeName NS_EXTENSIBLE_STRING_ENUM;
-typedef NSString * NSPrinterPaperName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSPrinterTypeName NS_TYPED_EXTENSIBLE_ENUM;
+typedef NSString * NSPrinterPaperName NS_TYPED_EXTENSIBLE_ENUM;
 
 @interface NSPrinter: NSObject<NSCopying, NSCoding> {
     @private
-    NSString *_printerName;
-    void *_printer;
-    NSDictionary *_cachedDeviceDescription;
-    int _ppdCreationNum __unused;
-    void *_ppdNodes __unused;
-    void *_ppdPriv __unused;
-#if __LP64__
-    id _reserved[3] __unused;
-#else
-    unsigned char _compatibilityPadding[20];
+    NSString *_printerName APPKIT_IVAR;
+    void *_printer APPKIT_IVAR;
+    NSDictionary *_cachedDeviceDescription APPKIT_IVAR;
+    int _ppdCreationNum __unused APPKIT_IVAR;
+    void *_ppdNodes __unused APPKIT_IVAR;
+    void *_ppdPriv __unused APPKIT_IVAR;
+#if ! __LP64__
+    unsigned char _compatibilityPadding[20] APPKIT_IVAR;
 #endif
 }
 
@@ -82,11 +80,11 @@ typedef NSString * NSPrinterPaperName NS_EXTENSIBLE_STRING_ENUM;
 @interface NSPrinter(NSDeprecated)
 
 
-/* Deprecated in OS X 10.9. PMPrinter API should be used instead. Return the status of the named table in the printer's PostScript Printer Description (PPD) if the PPD is available. NSPrinterTableNotFound is returned for every table name if no PPD is available.
+/* PMPrinter API should be used instead. Return the status of the named table in the printer's PostScript Printer Description (PPD) if the PPD is available. NSPrinterTableNotFound is returned for every table name if no PPD is available.
  */
 - (NSPrinterTableStatus)statusForTable:(NSString *)tableName NS_DEPRECATED_MAC(10_0, 10_9);
 
-/* Deprecated in OS X 10.9. PMPrinter API should be used instead. Methods for accessing the information in the printer's PPD. If no PPD is available for the printer, values such as NO, 0, NSZeroRect, NSZeroSize, and nil are returned.
+/* PMPrinter API should be used instead. Methods for accessing the information in the printer's PPD. If no PPD is available for the printer, values such as NO, 0, NSZeroRect, NSZeroSize, and nil are returned.
  */
 - (BOOL)isKey:(nullable NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
 - (BOOL)booleanForKey:(nullable NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
@@ -98,18 +96,18 @@ typedef NSString * NSPrinterPaperName NS_EXTENSIBLE_STRING_ENUM;
 - (nullable NSArray *)stringListForKey:(nullable NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
 
 
-/* A method that was deprecated in Mac OS 10.2. -[NSPrinter imageRectForPaper:] will attempt to determine and return the bounds of the imageable area for a particular paper name, but querying such information by paper name alone is not reliable. Use -[NSPrintInfo imageablePageBounds], which was introduced in Mac OS 10.2, instead.
+/* -[NSPrinter imageRectForPaper:] will attempt to determine and return the bounds of the imageable area for a particular paper name, but querying such information by paper name alone is not reliable. Use -[NSPrintInfo imageablePageBounds], which was introduced in Mac OS 10.2, instead.
 */
 - (NSRect)imageRectForPaper:(nullable NSString *)paperName NS_DEPRECATED_MAC(10_0, 10_2);
 
-/* Methods that were deprecated in Mac OS 10.2. NSPrinter's implementations of these methods return values that are not reliable or meaningful for some printers.
+/* NSPrinter's implementations of these methods return values that are not reliable or meaningful for some printers.
 */
 - (BOOL)acceptsBinary NS_DEPRECATED_MAC(10_0, 10_2);
 - (BOOL)isColor NS_DEPRECATED_MAC(10_0, 10_2);
 - (BOOL)isFontAvailable:(nullable NSString *)faceName NS_DEPRECATED_MAC(10_0, 10_2);
 - (BOOL)isOutputStackInReverseOrder NS_DEPRECATED_MAC(10_0, 10_2);
 
-/* Methods that were deprecated in Mac OS 10.2. NSPrinter's implementation of each of these methods returns nil.
+/* NSPrinter's implementation of each of these methods returns nil.
 */
 + (nullable NSPrinter *)printerWithName:(NSString *)name domain:(nullable NSString *)domain includeUnavailable:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_2);
 - (NSString *)domain NS_DEPRECATED_MAC(10_0, 10_2);

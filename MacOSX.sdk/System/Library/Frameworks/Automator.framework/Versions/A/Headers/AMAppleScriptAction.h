@@ -14,8 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 // AMAppleScriptAction
 
 NS_CLASS_AVAILABLE_MAC(10_4)
-@interface AMAppleScriptAction : AMBundleAction {
-   @private
+@interface AMAppleScriptAction : AMBundleAction
+{
+	@private
 	IBOutlet OSAScript *_script;
 }
 

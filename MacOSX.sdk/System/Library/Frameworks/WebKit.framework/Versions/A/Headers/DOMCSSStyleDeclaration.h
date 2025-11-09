@@ -29,7 +29,7 @@
 @class DOMCSSValue;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMCSSStyleDeclaration : DOMObject
 @property (copy) NSString *cssText;
 @property (readonly) unsigned length;
@@ -39,12 +39,12 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 - (DOMCSSValue *)getPropertyCSSValue:(NSString *)propertyName;
 - (NSString *)removeProperty:(NSString *)propertyName;
 - (NSString *)getPropertyPriority:(NSString *)propertyName;
-- (void)setProperty:(NSString *)propertyName value:(NSString *)value priority:(NSString *)priority NS_AVAILABLE_MAC(10_5);
+- (void)setProperty:(NSString *)propertyName value:(NSString *)value priority:(NSString *)priority WEBKIT_AVAILABLE_MAC(10_5);
 - (NSString *)item:(unsigned)index;
-- (NSString *)getPropertyShorthand:(NSString *)propertyName NS_DEPRECATED_MAC(10_5, 10_5);
-- (BOOL)isPropertyImplicit:(NSString *)propertyName NS_AVAILABLE_MAC(10_5);
+- (NSString *)getPropertyShorthand:(NSString *)propertyName WEBKIT_DEPRECATED_MAC(10_5, 10_5);
+- (BOOL)isPropertyImplicit:(NSString *)propertyName WEBKIT_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMCSSStyleDeclaration (DOMCSSStyleDeclarationDeprecated)
-- (void)setProperty:(NSString *)propertyName :(NSString *)value :(NSString *)priority NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)setProperty:(NSString *)propertyName :(NSString *)value :(NSString *)priority WEBKIT_DEPRECATED_MAC(10_4, 10_5);
 @end

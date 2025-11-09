@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
  The contents become undefined if both the CPU and GPU write to the same buffer without a synchronizing action between those writes.
  This is true even when the regions written do not overlap.
  */
-NS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0))
 @protocol MTLBuffer <MTLResource>
 
 /*!
@@ -59,13 +59,13 @@ NS_AVAILABLE(10_11, 8_0)
  It is not valid to invoke this method on buffers of other storage modes.
  @param range The range of bytes that have been modified.
  */
-- (void)didModifyRange:(NSRange)range NS_AVAILABLE_MAC(10_11);
+- (void)didModifyRange:(NSRange)range API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios);
 
 /*!
  @method newTextureWithDescriptor:offset:bytesPerRow:
- @abstract Create a 2D texture that shares storage with this buffer.
-*/
-- (nullable id <MTLTexture>)newTextureWithDescriptor:(MTLTextureDescriptor*)descriptor offset:(NSUInteger)offset bytesPerRow:(NSUInteger)bytesPerRow NS_AVAILABLE(10_13, 8_0);
+ @abstract Create a 2D texture or texture buffer that shares storage with this buffer.
+ */
+- (nullable id <MTLTexture>)newTextureWithDescriptor:(MTLTextureDescriptor*)descriptor offset:(NSUInteger)offset bytesPerRow:(NSUInteger)bytesPerRow API_AVAILABLE(macos(10.13), ios(8.0));
 
 /*!
  @method addDebugMarker:range:
@@ -74,13 +74,14 @@ NS_AVAILABLE(10_11, 8_0)
  @param marker A label used for the marker.
  @param range The range of bytes the marker is using.
  */
-- (void)addDebugMarker:(NSString*)marker range:(NSRange)range NS_AVAILABLE(10_12, 10_0);
+- (void)addDebugMarker:(NSString*)marker range:(NSRange)range API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*!
  @method removeAllDebugMarkers
  @abstract Removes all debug markers from a buffer.
  */
-- (void)removeAllDebugMarkers NS_AVAILABLE(10_12, 10_0);
+- (void)removeAllDebugMarkers API_AVAILABLE(macos(10.12), ios(10.0));
+
 
 @end
 NS_ASSUME_NONNULL_END

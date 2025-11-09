@@ -47,6 +47,10 @@ extern "C"
 {
 #endif
 
+#ifndef PCSC_API
+#define PCSC_API extern __attribute__((visibility ("default")))
+#endif
+
     typedef int32_t SCARDCONTEXT; /**< \p hContext returned by SCardEstablishContext() */
     typedef SCARDCONTEXT *PSCARDCONTEXT;
     typedef SCARDCONTEXT *LPSCARDCONTEXT;
@@ -88,7 +92,7 @@ extern "C"
 
     typedef const SCARD_IO_REQUEST *LPCSCARD_IO_REQUEST;
 
-    extern SCARD_IO_REQUEST g_rgSCardT0Pci, g_rgSCardT1Pci,
+    PCSC_API SCARD_IO_REQUEST g_rgSCardT0Pci, g_rgSCardT1Pci,
 	g_rgSCardRawPci;
 
     /* restore default structure elements alignment */
@@ -313,7 +317,7 @@ PCSCLITE_MAX_APPLICATIONS * PCSCLITE_MAX_APPLICATION_CONTEXTS
     /*
      * Gets a stringified error response 
      */
-    char *pcsc_stringify_error(int32_t err);
+    PCSC_API char *pcsc_stringify_error(int32_t err);
     
 #ifdef __cplusplus
 }

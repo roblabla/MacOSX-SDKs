@@ -1541,6 +1541,12 @@ See
 .Xr clonefileat 2 
 for more details.
 .
+.It VOL_CAP_INT_SNAPSHOT
+If this bit is set, the file system supports snapshots.
+See
+.Xr fs_snapshot_create 2
+for more details.
+.
 .It VOL_CAP_INT_NAMEDSTREAMS
 If this bit is set, the volume format implementation supports
 native named streams.
@@ -1691,6 +1697,10 @@ for
 or
 .Em attrBuf
 points to an invalid address.
+.
+.It Bq Er ERANGE
+.Fa attrBufSize
+is too small to hold a u_int32_t.
 .
 .It Bq Er EINVAL
 The

@@ -1,11 +1,11 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 43F7250F-A1A8-3884-99FD-6095B123611D', 'x86_64: 30F343A0-A026-3BE2-B58E-E41CD7F1C789' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 6A6986E0-B527-3E1E-8833-246C40D16C58' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/AGL.framework/Versions/A/AGL
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _aglChoosePixelFormat, _aglChoosePixelFormatCFM, _aglConfigure, 
                        _aglConfigureCFM, _aglCopyContext, _aglCreateContext, _aglCreateContextCFM, 
                        _aglCreatePBuffer, _aglCreatePixelFormat, _aglCreatePixelFormatCFM, 

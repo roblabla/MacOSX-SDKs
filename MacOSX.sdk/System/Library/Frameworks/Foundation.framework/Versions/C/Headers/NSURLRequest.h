@@ -1,6 +1,6 @@
 /*	
     NSURLRequest.h
-    Copyright (c) 2003-2017, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2018, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -130,6 +130,8 @@ typedef NS_ENUM(NSUInteger, NSURLRequestCachePolicy)
 
  @constant NSURLNetworkServiceTypeVoice Specifies that the request is for voice data.
 
+ @constant NSURLNetworkServiceTypeResponsiveData Specifies that the request is for responsive (time sensitive) data.
+
  @constant NSURLNetworkServiceTypeCallSignaling Specifies that the request is for call signaling.
 */
 typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
@@ -139,9 +141,9 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     NSURLNetworkServiceTypeVideo = 2,	// Video traffic
     NSURLNetworkServiceTypeBackground = 3, // Background traffic
     NSURLNetworkServiceTypeVoice = 4,	   // Voice data
+    NSURLNetworkServiceTypeResponsiveData = 6, // Responsive data
     NSURLNetworkServiceTypeCallSignaling API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = 11, // Call Signaling
 };
-
 
 /*!
     @class NSURLRequest

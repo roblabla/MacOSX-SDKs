@@ -134,6 +134,7 @@ AVF_EXPORT NSString *const AVVideoColorPropertiesKey /* NSDictionary, all 3 belo
 		AVF_EXPORT NSString *const AVVideoColorPrimaries_EBU_3213                                            NS_AVAILABLE(10_7, NA);
 		AVF_EXPORT NSString *const AVVideoColorPrimaries_SMPTE_C                                             NS_AVAILABLE(10_7, 10_0);
 		AVF_EXPORT NSString *const AVVideoColorPrimaries_P3_D65                                              NS_AVAILABLE(10_12, 10_0);
+		AVF_EXPORT NSString *const AVVideoColorPrimaries_ITU_R_2020                                          NS_AVAILABLE(10_13, 11_0);
 	AVF_EXPORT NSString *const AVVideoTransferFunctionKey /* NSString */                                     NS_AVAILABLE(10_7, 10_0);
 		AVF_EXPORT NSString *const AVVideoTransferFunction_ITU_R_709_2                                       NS_AVAILABLE(10_7, 10_0);
 		AVF_EXPORT NSString *const AVVideoTransferFunction_SMPTE_240M_1995                                   NS_AVAILABLE(10_7, NA);
@@ -143,6 +144,8 @@ AVF_EXPORT NSString *const AVVideoColorPropertiesKey /* NSDictionary, all 3 belo
 		AVF_EXPORT NSString *const AVVideoYCbCrMatrix_ITU_R_709_2                                            NS_AVAILABLE(10_7, 10_0);
 		AVF_EXPORT NSString *const AVVideoYCbCrMatrix_ITU_R_601_4                                            NS_AVAILABLE(10_7, 10_0);
 		AVF_EXPORT NSString *const AVVideoYCbCrMatrix_SMPTE_240M_1995                                        NS_AVAILABLE(10_7, NA);
+		AVF_EXPORT NSString *const AVVideoYCbCrMatrix_ITU_R_2020                                             NS_AVAILABLE(10_13, 11_0);
+
 /*!
  @constant	AVVideoAllowWideColorKey
  @abstract	Indicates whether the client can process wide color

@@ -122,7 +122,7 @@
     @result Returns the name to be used to represent the specified selector in the
     scripting environment.
 */
-+ (NSString *)webScriptNameForSelector:(SEL)selector NS_AVAILABLE_MAC(10_4);
++ (NSString *)webScriptNameForSelector:(SEL)selector WEBKIT_AVAILABLE_MAC(10_4);
 
 /*!
     @method isSelectorExcludedFromWebScript:
@@ -132,7 +132,7 @@
     If this method is not implemented on the class no selectors will be exported.
     @result Returns YES to hide the selector, NO to export the selector.
 */
-+ (BOOL)isSelectorExcludedFromWebScript:(SEL)selector NS_AVAILABLE_MAC(10_4);
++ (BOOL)isSelectorExcludedFromWebScript:(SEL)selector WEBKIT_AVAILABLE_MAC(10_4);
 
 /*!
     @method webScriptNameForKey:
@@ -143,7 +143,7 @@
     @result Returns the name to be used to represent the specified property in the
     scripting environment.
 */
-+ (NSString *)webScriptNameForKey:(const char *)name NS_AVAILABLE_MAC(10_4);
++ (NSString *)webScriptNameForKey:(const char *)name WEBKIT_AVAILABLE_MAC(10_4);
 
 /*!
     @method isKeyExcludedFromWebScript:
@@ -153,7 +153,7 @@
     Return YES to prevent the property from being exported to the script environment.
     @result Returns YES to hide the property, NO to export the property.
 */
-+ (BOOL)isKeyExcludedFromWebScript:(const char *)name NS_AVAILABLE_MAC(10_4);
++ (BOOL)isKeyExcludedFromWebScript:(const char *)name WEBKIT_AVAILABLE_MAC(10_4);
 
 /*!
     @method invokeUndefinedMethodFromWebScript:withArguments:
@@ -164,7 +164,7 @@
     @result The return value of the invocation. The value will be converted as appropriate
     for the script environment.
 */
-- (id)invokeUndefinedMethodFromWebScript:(NSString *)name withArguments:(NSArray *)arguments NS_AVAILABLE_MAC(10_4);
+- (id)invokeUndefinedMethodFromWebScript:(NSString *)name withArguments:(NSArray *)arguments WEBKIT_AVAILABLE_MAC(10_4);
 
 /*!
     @method invokeDefaultMethodWithArguments:
@@ -174,7 +174,7 @@
     @result The return value of the call. The value will be converted as appropriate
     for the script environment.
 */
-- (id)invokeDefaultMethodWithArguments:(NSArray *)arguments NS_AVAILABLE_MAC(10_4);
+- (id)invokeDefaultMethodWithArguments:(NSArray *)arguments WEBKIT_AVAILABLE_MAC(10_4);
 
 /*!
     @method finalizeForWebScript
@@ -183,7 +183,7 @@
     Subsequently, any references to WebScriptObjects made by the exposed object will
     be invalid and have undefined consequences.
 */
-- (void)finalizeForWebScript NS_AVAILABLE_MAC(10_4);
+- (void)finalizeForWebScript WEBKIT_AVAILABLE_MAC(10_4);
 
 @end
 
@@ -218,7 +218,7 @@
         - (id)webScriptValueAtIndex:(unsigned)index;
         - (void)setWebScriptValueAtIndex:(unsigned)index value:(id)value;
 */
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface WebScriptObject : NSObject
 {
     WebScriptObjectPrivate *_private;
@@ -237,7 +237,7 @@ NS_CLASS_AVAILABLE_MAC(10_4)
     @discussion Use this method to bridge between the WebScriptObject and 
     JavaScriptCore APIs.
 */
-- (JSObjectRef)JSObject NS_AVAILABLE_MAC(10_5);
+- (JSObjectRef)JSObject WEBKIT_AVAILABLE_MAC(10_5);
 
 /*!
     @method callWebScriptMethod:withArguments:
@@ -319,7 +319,7 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 /*!
     @class WebUndefined
 */
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface WebUndefined : NSObject <NSCoding, NSCopying>
 
 /*!

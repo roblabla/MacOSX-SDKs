@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <Intents/IntentsDefines.h>
 
-typedef NSString *INPersonHandleLabel NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString *INPersonHandleLabel NS_TYPED_EXTENSIBLE_ENUM;
 
 INTENTS_EXTERN INPersonHandleLabel const INPersonHandleLabelHome NS_SWIFT_NAME(INPersonHandleLabel.home) API_AVAILABLE(ios(10.2), watchos(3.2), macosx(10.12.2));
 INTENTS_EXTERN INPersonHandleLabel const INPersonHandleLabelWork NS_SWIFT_NAME(INPersonHandleLabel.work) API_AVAILABLE(ios(10.2), watchos(3.2), macosx(10.12.2));

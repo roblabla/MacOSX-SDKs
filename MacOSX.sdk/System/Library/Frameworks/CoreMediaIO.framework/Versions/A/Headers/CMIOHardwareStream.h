@@ -3,7 +3,7 @@
 
     Contains:   API for communicating with CoreMediaIO hardware
 
-    Copyright:  © 2005-2011 by Apple Inc., all rights reserved.
+    Copyright:  © 2005-2018 by Apple Inc., all rights reserved.
 */
 
 
@@ -77,7 +77,7 @@ struct CMIOStreamDeck
     UInt32  mStatus;
     UInt32  mState;
     UInt32  mState2;
-};
+} API_AVAILABLE(macos(10.7));
 typedef struct CMIOStreamDeck CMIOStreamDeck;
     
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -424,7 +424,7 @@ extern OSStatus
 CMIOStreamCopyBufferQueue(  CMIOStreamID                        streamID,
                             CMIODeviceStreamQueueAlteredProc    queueAlteredProc,
                             void*                               queueAlteredRefCon,
-                            CMSimpleQueueRef*                   queue)                                                                  AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                            CMSimpleQueueRef*                   queue) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIOStreamDeckPlay
@@ -434,7 +434,7 @@ CMIOStreamCopyBufferQueue(  CMIOStreamID                        streamID,
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-CMIOStreamDeckPlay(CMIOStreamID streamID)                                                                                               AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+CMIOStreamDeckPlay(CMIOStreamID streamID) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIOStreamDeckStop
@@ -444,7 +444,7 @@ CMIOStreamDeckPlay(CMIOStreamID streamID)                                       
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-CMIOStreamDeckStop(CMIOStreamID streamID)                                                                                               AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+CMIOStreamDeckStop(CMIOStreamID streamID) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIOStreamDeckJog
@@ -457,7 +457,7 @@ CMIOStreamDeckStop(CMIOStreamID streamID)                                       
 */
 extern OSStatus
 CMIOStreamDeckJog(  CMIOStreamID    streamID,
-                    SInt32          speed)                                                                                              AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                    SInt32          speed) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIOStreamDeckCueTo
@@ -473,7 +473,7 @@ CMIOStreamDeckJog(  CMIOStreamID    streamID,
 extern OSStatus
 CMIOStreamDeckCueTo(    CMIOStreamID    streamID,
                         UInt64          frameNumber,
-                        Boolean         playOnCue)                                                                                          AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                        Boolean         playOnCue) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIOStreamClockCreate
@@ -503,7 +503,7 @@ CMIOStreamClockCreate(  CFAllocatorRef  allocator,
                         CMTime          getTimeCallMinimumInterval,
                         UInt32          numberOfEventsForRateSmoothing,
                         UInt32          numberOfAveragesForRateSmoothing,
-                        CFTypeRef*      clock)                                                                                            AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                        CFTypeRef*      clock) API_AVAILABLE(macos(10.7));
 
 
 /*!
@@ -526,7 +526,7 @@ extern OSStatus
 CMIOStreamClockPostTimingEvent( CMTime      eventTime,
                                 UInt64      hostTime,
                                 Boolean     resynchronize,
-                                CFTypeRef   clock)                                                                                          AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                                CFTypeRef   clock) API_AVAILABLE(macos(10.7));
 
 
 /*!
@@ -540,7 +540,7 @@ CMIOStreamClockPostTimingEvent( CMTime      eventTime,
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-CMIOStreamClockInvalidate(CFTypeRef clock)                                                                                                AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+CMIOStreamClockInvalidate(CFTypeRef clock) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIOStreamClockConvertHostTimeToDeviceTime
@@ -553,7 +553,7 @@ CMIOStreamClockInvalidate(CFTypeRef clock)                                      
 */
 extern CMTime
 CMIOStreamClockConvertHostTimeToDeviceTime( UInt64      hostTime,
-                                            CFTypeRef   clock)                                                                            AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                                            CFTypeRef   clock) API_AVAILABLE(macos(10.7));
 
 
 /*!
@@ -585,7 +585,7 @@ typedef void (*CMIOStreamScheduledOutputNotificationProc)(UInt64 sequenceNumberO
 struct CMIOStreamScheduledOutputNotificationProcAndRefCon {
     CMIOStreamScheduledOutputNotificationProc   scheduledOutputNotificationProc;
     void*                                       scheduledOutputNotificationRefCon;
-};
+} API_AVAILABLE(macos(10.8));
 typedef struct CMIOStreamScheduledOutputNotificationProcAndRefCon CMIOStreamScheduledOutputNotificationProcAndRefCon;
 
 #pragma pack(pop)

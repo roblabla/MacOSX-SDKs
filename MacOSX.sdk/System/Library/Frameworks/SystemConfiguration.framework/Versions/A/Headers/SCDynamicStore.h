@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2000, 2001, 2003-2005, 2008-2010, 2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2000, 2001, 2003-2005, 2008-2010, 2015, 2018 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
  * compliance with the License. Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this
  * file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -17,14 +17,14 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_LICENSE_HEADER_END@
  */
 
 #ifndef _SCDYNAMICSTORE_H
 #define _SCDYNAMICSTORE_H
 
-#include <Availability.h>
+#include <os/availability.h>
 #include <TargetConditionals.h>
 #include <sys/cdefs.h>
 #include <dispatch/dispatch.h>
@@ -119,7 +119,7 @@ __BEGIN_DECLS
 	@discussion Returns the type identifier of all SCDynamicStore instances.
  */
 CFTypeID
-SCDynamicStoreGetTypeID			(void)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+SCDynamicStoreGetTypeID			(void)				API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*!
@@ -147,7 +147,7 @@ SCDynamicStoreCreate			(
 					CFStringRef					name,
 					SCDynamicStoreCallBack		__nullable	callout,
 					SCDynamicStoreContext		* __nullable	context
-					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)				API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreCreateWithOptions
@@ -193,9 +193,9 @@ SCDynamicStoreCreateWithOptions		(
 					CFDictionaryRef			__nullable	storeOptions,
 					SCDynamicStoreCallBack		__nullable	callout,
 					SCDynamicStoreContext		* __nullable	context
-					)				__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
+					)				API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos);
 
-extern const CFStringRef	kSCDynamicStoreUseSessionKeys		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);	/* CFBoolean */
+extern const CFStringRef	kSCDynamicStoreUseSessionKeys		API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos);	/* CFBoolean */
 
 /*!
 	@function SCDynamicStoreCreateRunLoopSource
@@ -225,7 +225,7 @@ SCDynamicStoreCreateRunLoopSource	(
 					CFAllocatorRef			__nullable	allocator,
 					SCDynamicStoreRef				store,
 					CFIndex						order
-					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)				API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreSetDispatchQueue
@@ -241,7 +241,7 @@ Boolean
 SCDynamicStoreSetDispatchQueue		(
 					SCDynamicStoreRef				store,
 					dispatch_queue_t		__nullable	queue
-					)				__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA);
+					)				API_AVAILABLE(macos(10.6)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreCopyKeyList
@@ -258,7 +258,7 @@ CFArrayRef __nullable
 SCDynamicStoreCopyKeyList		(
 					SCDynamicStoreRef		__nullable	store,
 					CFStringRef					pattern
-					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)				API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreAddValue
@@ -275,7 +275,7 @@ SCDynamicStoreAddValue			(
 					SCDynamicStoreRef		__nullable	store,
 					CFStringRef					key,
 					CFPropertyListRef				value
-					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)				API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreAddTemporaryValue
@@ -294,7 +294,7 @@ SCDynamicStoreAddTemporaryValue		(
 					SCDynamicStoreRef		store,
 					CFStringRef			key,
 					CFPropertyListRef		value
-					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)				API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreCopyValue
@@ -309,7 +309,7 @@ CFPropertyListRef __nullable
 SCDynamicStoreCopyValue			(
 					SCDynamicStoreRef		__nullable	store,
 					CFStringRef					key
-					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)				API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreCopyMultiple
@@ -329,7 +329,7 @@ SCDynamicStoreCopyMultiple		(
 					SCDynamicStoreRef		__nullable	store,
 					CFArrayRef			__nullable	keys,
 					CFArrayRef			__nullable	patterns
-					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)				API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreSetValue
@@ -345,7 +345,7 @@ SCDynamicStoreSetValue			(
 					SCDynamicStoreRef		__nullable	store,
 					CFStringRef					key,
 					CFPropertyListRef				value
-					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)				API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreSetMultiple
@@ -362,7 +362,7 @@ SCDynamicStoreSetMultiple		(
 					CFDictionaryRef			__nullable	keysToSet,
 					CFArrayRef			__nullable	keysToRemove,
 					CFArrayRef			__nullable	keysToNotify
-					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)				API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreRemoveValue
@@ -377,7 +377,7 @@ Boolean
 SCDynamicStoreRemoveValue		(
 					SCDynamicStoreRef		__nullable	store,
 					CFStringRef					key
-					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)				API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreNotifyValue
@@ -393,7 +393,7 @@ Boolean
 SCDynamicStoreNotifyValue		(
 					SCDynamicStoreRef		__nullable	store,
 					CFStringRef					key
-					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)				API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreSetNotificationKeys
@@ -412,7 +412,7 @@ SCDynamicStoreSetNotificationKeys	(
 					SCDynamicStoreRef				store,
 					CFArrayRef			__nullable	keys,
 					CFArrayRef			__nullable	patterns
-					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)				API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function SCDynamicStoreCopyNotifiedKeys
@@ -429,7 +429,7 @@ SCDynamicStoreSetNotificationKeys	(
 CFArrayRef __nullable
 SCDynamicStoreCopyNotifiedKeys		(
 					SCDynamicStoreRef		store
-					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
+					)				API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 __END_DECLS
 

@@ -28,10 +28,10 @@
 @class DOMText;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMText : DOMCharacterData
-@property (readonly, copy) NSString *wholeText NS_AVAILABLE_MAC(10_6);
+@property (readonly, copy) NSString *wholeText WEBKIT_AVAILABLE_MAC(10_6);
 
 - (DOMText *)splitText:(unsigned)offset;
-- (DOMText *)replaceWholeText:(NSString *)content NS_AVAILABLE_MAC(10_6);
+- (DOMText *)replaceWholeText:(NSString *)content WEBKIT_AVAILABLE_MAC(10_6);
 @end

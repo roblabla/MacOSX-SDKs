@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  A scene stores and handles loading of data related to a particular scene.
  */
-GK_BASE_AVAILABILITY_2 @interface GKScene : NSObject <NSCopying, NSCoding>
+GK_BASE_AVAILABILITY_2 @interface GKScene : NSObject <NSCopying, NSSecureCoding>
 
 /**
  Loads a scene from a file contained within the bundle.

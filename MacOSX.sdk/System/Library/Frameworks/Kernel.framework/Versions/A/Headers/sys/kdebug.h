@@ -35,13 +35,13 @@
 
 #include <sys/appleapiopts.h>
 #include <sys/cdefs.h>
+
 __BEGIN_DECLS
 
 #ifdef __APPLE_API_UNSTABLE
 
 #include <mach/clock_types.h>
 #include <stdint.h>
-
 
 
 /*
@@ -124,7 +124,7 @@ __BEGIN_DECLS
 #define DBG_DRIVERS     6
 #define DBG_TRACE       7
 #define DBG_DLIL        8
-#define DBG_WORKQUEUE   9
+#define DBG_PTHREAD     9
 #define DBG_CORESTORAGE 10
 #define DBG_CG          11
 #define DBG_MONOTONIC   12
@@ -145,6 +145,7 @@ __BEGIN_DECLS
 #define DBG_DISPATCH    46
 #define DBG_IMG         49
 #define DBG_UMALLOC     51
+#define DBG_TURNSTILE   53
 
 
 #define DBG_MIG         255
@@ -185,12 +186,14 @@ __BEGIN_DECLS
 #define DBG_MACH_ZALLOC         0xA5 /* Zone allocator */
 #define DBG_MACH_THREAD_GROUP   0xA6 /* Thread groups */
 #define DBG_MACH_COALITION      0xA7 /* Coalitions */
+#define DBG_MACH_SHAREDREGION   0xA8 /* Shared region */
 
 /* Interrupt type bits for DBG_MACH_EXCP_INTR */
 #define DBG_INTR_TYPE_UNKNOWN   0x0     /* default/unknown interrupt */
 #define DBG_INTR_TYPE_IPI       0x1     /* interprocessor interrupt */
 #define DBG_INTR_TYPE_TIMER     0x2     /* timer interrupt */
 #define DBG_INTR_TYPE_OTHER     0x3     /* other (usually external) interrupt */
+#define DBG_INTR_TYPE_PMI       0x4     /* performance monitor interrupt */
 
 /* Codes for Scheduler (DBG_MACH_SCHED) */
 #define MACH_SCHED              0x0     /* Scheduler */
@@ -200,8 +203,8 @@ __BEGIN_DECLS
 #define MACH_CALLOUT            0x4     /* callouts */
 #define MACH_STACK_DETACH       0x5
 #define MACH_MAKE_RUNNABLE      0x6     /* make thread runnable */
-#define	MACH_PROMOTE            0x7	/* promoted due to resource */
-#define	MACH_DEMOTE             0x8	/* promotion undone */
+#define MACH_PROMOTE            0x7     /* promoted due to resource (replaced by MACH_PROMOTED) */
+#define MACH_DEMOTE             0x8     /* promotion undone (replaced by MACH_UNPROMOTED) */
 #define MACH_IDLE               0x9	/* processor idling */
 #define MACH_STACK_DEPTH        0xa	/* stack depth at switch */
 #define MACH_MOVED              0xb	/* did not use original scheduling decision */
@@ -243,6 +246,11 @@ __BEGIN_DECLS
 #define MACH_EXEC_DEMOTE           0x31 /* Thread demoted from exec boost */
 #define MACH_AMP_SIGNAL_SPILL      0x32 /* AMP spill signal sent to cpuid */
 #define MACH_AMP_STEAL             0x33 /* AMP thread stolen or spilled */
+#define MACH_SCHED_LOAD_EFFECTIVE  0x34 /* Effective scheduler load */
+#define	MACH_PROMOTED              0x35 /* thread promoted due to mutex priority promotion */
+#define	MACH_UNPROMOTED            0x36 /* thread unpromoted due to mutex priority promotion */
+#define	MACH_PROMOTED_UPDATE       0x37 /* thread already promoted, but promotion priority changed */
+#define	MACH_QUIESCENT_COUNTER     0x38 /* quiescent counter tick */
 
 /* Variants for MACH_MULTIQ_DEQUEUE */
 #define MACH_MULTIQ_BOUND     1
@@ -274,13 +282,15 @@ __BEGIN_DECLS
 #define MACH_IPC_VOUCHER_DESTROY		0x9	/* Voucher removed from global voucher hashtable */
 #define MACH_IPC_KMSG_INFO			0xa	/* Send/Receive info for a kmsg */
 #define MACH_IPC_KMSG_LINK			0xb	/* link a kernel kmsg pointer to user mach_msg_header_t */
+#define MACH_IPC_PORT_ENTRY_MODIFY	0xc	/* A port space gained or lost a port right (reference) */
 
 /* Codes for thread groups (DBG_MACH_THREAD_GROUP) */
-#define MACH_THREAD_GROUP_NEW			0x0
-#define MACH_THREAD_GROUP_FREE			0x1
-#define MACH_THREAD_GROUP_SET			0x2
-#define MACH_THREAD_GROUP_NAME			0x3
-#define MACH_THREAD_GROUP_NAME_FREE		0x4
+#define MACH_THREAD_GROUP_NEW           0x0
+#define MACH_THREAD_GROUP_FREE          0x1
+#define MACH_THREAD_GROUP_SET           0x2
+#define MACH_THREAD_GROUP_NAME          0x3
+#define MACH_THREAD_GROUP_NAME_FREE     0x4
+#define MACH_THREAD_GROUP_FLAGS         0x5
 
 /* Codes for coalitions (DBG_MACH_COALITION) */
 #define	MACH_COALITION_NEW                      0x0
@@ -308,11 +318,12 @@ __BEGIN_DECLS
 #define PMAP__FLUSH_TLBS_TO	0xf
 #define PMAP__FLUSH_EPT 	0x10
 #define PMAP__FAST_FAULT	0x11
+#define PMAP__SWITCH		0x12
+#define PMAP__TTE		0x13
+#define PMAP__SWITCH_USER_TTB	0x14
 
 /* Codes for clock (DBG_MACH_CLOCK) */
 #define	MACH_EPOCH_CHANGE	0x0	/* wake epoch change */
-#define MACH_BRIDGE_RCV_TS	0x1	/* receive timestamp pair from interrupt handler */
-#define MACH_BRIDGE_REMOTE_TIME	0x2	/* calculate remote timestamp */ 
 
 /* Codes for Stackshot/Microstackshot (DBG_MACH_STACKSHOT) */
 #define MICROSTACKSHOT_RECORD	0x0
@@ -433,30 +444,32 @@ __BEGIN_DECLS
 #define DBG_IODISK			DBG_IOSTORAGE		/* OBSOLETE: Use DBG_IOSTORAGE instead */
 
 /* **** The Kernel Debug Sub Classes for Device Drivers (DBG_DRIVERS) **** */
-#define DBG_DRVSTORAGE       1 /* Storage layers */
-#define DBG_DRVNETWORK       2 /* Network layers */
-#define DBG_DRVKEYBOARD      3 /* Keyboard */
-#define DBG_DRVHID           4 /* HID Devices */
-#define DBG_DRVAUDIO         5 /* Audio */
-#define DBG_DRVSERIAL        7 /* Serial */
-#define DBG_DRVSAM           8 /* SCSI Architecture Model layers */
-#define DBG_DRVPARALLELATA   9 /* Parallel ATA */
-#define DBG_DRVPARALLELSCSI 10 /* Parallel SCSI */
-#define DBG_DRVSATA         11 /* Serial ATA */
-#define DBG_DRVSAS          12 /* SAS */
-#define DBG_DRVFIBRECHANNEL 13 /* FiberChannel */
-#define DBG_DRVUSB          14 /* USB */
-#define DBG_DRVBLUETOOTH    15 /* Bluetooth */
-#define DBG_DRVFIREWIRE     16 /* FireWire */
-#define DBG_DRVINFINIBAND   17 /* Infiniband */
-#define DBG_DRVGRAPHICS     18 /* Graphics */
-#define DBG_DRVSD           19 /* Secure Digital */
-#define DBG_DRVNAND         20 /* NAND drivers and layers */
-#define DBG_SSD             21 /* SSD */
-#define DBG_DRVSPI          22 /* SPI */
-#define DBG_DRVWLAN_802_11  23 /* WLAN 802.11 */
-#define DBG_DRVSSM          24 /* System State Manager(AppleSSM) */
-#define DBG_DRVSMC          25 /* System Management Controller */
+#define DBG_DRVSTORAGE        1 /* Storage layers */
+#define DBG_DRVNETWORK        2 /* Network layers */
+#define DBG_DRVKEYBOARD       3 /* Keyboard */
+#define DBG_DRVHID            4 /* HID Devices */
+#define DBG_DRVAUDIO          5 /* Audio */
+#define DBG_DRVSERIAL         7 /* Serial */
+#define DBG_DRVSAM            8 /* SCSI Architecture Model layers */
+#define DBG_DRVPARALLELATA    9 /* Parallel ATA */
+#define DBG_DRVPARALLELSCSI  10 /* Parallel SCSI */
+#define DBG_DRVSATA          11 /* Serial ATA */
+#define DBG_DRVSAS           12 /* SAS */
+#define DBG_DRVFIBRECHANNEL  13 /* FiberChannel */
+#define DBG_DRVUSB           14 /* USB */
+#define DBG_DRVBLUETOOTH     15 /* Bluetooth */
+#define DBG_DRVFIREWIRE      16 /* FireWire */
+#define DBG_DRVINFINIBAND    17 /* Infiniband */
+#define DBG_DRVGRAPHICS      18 /* Graphics */
+#define DBG_DRVSD            19 /* Secure Digital */
+#define DBG_DRVNAND          20 /* NAND drivers and layers */
+#define DBG_SSD              21 /* SSD */
+#define DBG_DRVSPI           22 /* SPI */
+#define DBG_DRVWLAN_802_11   23 /* WLAN 802.11 */
+#define DBG_DRVSSM           24 /* System State Manager(AppleSSM) */
+#define DBG_DRVSMC           25 /* System Management Controller */
+#define DBG_DRVMACEFIMANAGER 26 /* Mac EFI Manager */
+#define DBG_DRVANE           27 /* ANE */
 
 /* Backwards compatibility */
 #define	DBG_DRVPOINTING		DBG_DRVHID	/* OBSOLETE: Use DBG_DRVHID instead */
@@ -470,7 +483,11 @@ __BEGIN_DECLS
 #define DBG_DLIL_IF_FLT 5       /* DLIL Interface FIlter */
 
 
-/* The Kernel Debug Sub Classes for File System (DBG_FSYSTEM) */
+/*
+ * The Kernel Debug Sub Classes for File System (DBG_FSYSTEM)
+ *
+ * Please NOTE: sub class values 0xC and 0xD are currently unused.
+ */
 #define DBG_FSRW      0x1     /* reads and writes to the filesystem */
 #define DBG_DKRW      0x2     /* reads and writes to the disk */
 #define DBG_FSVN      0x3     /* vnode operations (inc. locking/unlocking) */
@@ -481,10 +498,12 @@ __BEGIN_DECLS
 #define DBG_HFS       0x8     /* HFS-specific events; see the hfs project */
 #define DBG_APFS      0x9     /* APFS-specific events; see the apfs project */
 #define DBG_SMB       0xA     /* SMB-specific events; see the smb project */
+#define DBG_MOUNT     0xB     /* Mounting/unmounting operations */
 #define DBG_EXFAT     0xE     /* ExFAT-specific events; see the exfat project */
 #define DBG_MSDOS     0xF     /* FAT-specific events; see the msdosfs project */
 #define DBG_ACFS      0x10    /* Xsan-specific events; see the XsanFS project */
 #define DBG_THROTTLE  0x11    /* I/O Throttling events */
+#define DBG_DECMP     0x12    /* Decmpfs-specific events */
 #define DBG_CONTENT_PROT 0xCF /* Content Protection Events: see bsd/sys/cprotect.h */
 
 /*
@@ -528,6 +547,7 @@ __BEGIN_DECLS
 #define BSD_MEMSTAT_DIRTY_TRACK      9  /* track the process state */
 #define BSD_MEMSTAT_DIRTY_SET       10  /* set the process state */
 #define BSD_MEMSTAT_DIRTY_CLEAR     11  /* clear the process state */
+#define BSD_MEMSTAT_FAST_JETSAM     15  /* Aggressive jetsam ("clear-the-deck") */
 
 /* Codes for BSD subcode class DBG_BSD_KEVENT */
 #define BSD_KEVENT_KQ_PROCESS_BEGIN   1
@@ -551,6 +571,7 @@ __BEGIN_DECLS
 #define BSD_KEVENT_KQWL_BIND          19
 #define BSD_KEVENT_KQWL_UNBIND        20
 #define BSD_KEVENT_KNOTE_ENABLE       21
+#define BSD_KEVENT_KNOTE_VANISHED     22
 
 /* The Kernel Debug Sub Classes for DBG_TRACE */
 #define DBG_TRACE_DATA      0
@@ -585,11 +606,15 @@ __BEGIN_DECLS
 /* Sub-class codes for CoreGraphics (DBG_CG) are defined in its component. */
 
 /* The Kernel Debug Sub Classes for DBG_MONOTONIC */
-#define DBG_MT_CPU 1
+#define DBG_MT_INSTRS_CYCLES 1
+#define DBG_MT_DEBUG 2
+#define DBG_MT_TMPTH 0xfe
+#define DBG_MT_TMPCPU 0xff
 
 /* The Kernel Debug Sub Classes for DBG_MISC */
-#define DBG_EVENT	0x10
-#define	DBG_BUFFER	0x20
+#define DBG_EVENT       0x10
+#define DBG_MISC_LAYOUT 0x1a
+#define DBG_BUFFER      0x20
 
 /* The Kernel Debug Sub Classes for DBG_DYLD */
 #define DBG_DYLD_UUID (5)
@@ -630,9 +655,12 @@ __BEGIN_DECLS
 #define DBG_APP_SYSTEMUI        0x05
 #define DBG_APP_SIGNPOST        0x0A
 #define DBG_APP_APPKIT          0x0C
+#define DBG_APP_UIKIT           0x0D
 #define DBG_APP_DFR             0x0E
+#define DBG_APP_LAYOUT          0x0F
 #define DBG_APP_SAMBA           0x80
 #define DBG_APP_EOSSUPPORT      0x81
+#define DBG_APP_MACEFIMANAGER   0x82
 
 /* Kernel Debug codes for Throttling (DBG_THROTTLE) */
 #define OPEN_THROTTLE_WINDOW	0x1
@@ -685,6 +713,32 @@ __BEGIN_DECLS
 #define IMP_SYNC_IPC_QOS_REMOVED                0x1
 #define IMP_SYNC_IPC_QOS_OVERFLOW               0x2
 #define IMP_SYNC_IPC_QOS_UNDERFLOW              0x3
+
+/* Subclasses for Turnstiles (DBG_TURNSTILE) */
+#define TURNSTILE_HEAP_OPERATIONS               0x10
+#define TURNSTILE_PRIORITY_OPERATIONS           0x20
+#define TURNSTILE_FREELIST_OPERATIONS           0x30
+
+/* Codes for TURNSTILE_HEAP_OPERATIONS */
+#define THREAD_ADDED_TO_TURNSTILE_WAITQ         0x1
+#define THREAD_REMOVED_FROM_TURNSTILE_WAITQ     0x2
+#define THREAD_MOVED_IN_TURNSTILE_WAITQ         0x3
+#define TURNSTILE_ADDED_TO_TURNSTILE_HEAP       0x4
+#define TURNSTILE_REMOVED_FROM_TURNSTILE_HEAP   0x5
+#define TURNSTILE_MOVED_IN_TURNSTILE_HEAP       0x6
+#define TURNSTILE_ADDED_TO_THREAD_HEAP          0x7
+#define TURNSTILE_REMOVED_FROM_THREAD_HEAP      0x8
+#define TURNSTILE_MOVED_IN_THREAD_HEAP          0x9
+#define TURNSTILE_UPDATE_STOPPED_BY_LIMIT       0xa
+#define THREAD_NOT_WAITING_ON_TURNSTILE         0xb
+
+/* Codes for TURNSTILE_PRIORITY_OPERATIONS */
+#define TURNSTILE_PRIORITY_CHANGE               0x1
+#define THREAD_USER_PROMOTION_CHANGE            0x2
+
+/* Codes for TURNSTILE_FREELIST_OPERATIONS */
+#define TURNSTILE_PREPARE                       0x1
+#define TURNSTILE_COMPLETE                      0x2
 
 /* Subclasses for MACH Bank Voucher Attribute Manager (DBG_BANK) */
 #define BANK_ACCOUNT_INFO		0x10	/* Trace points related to bank account struct */
@@ -756,6 +810,7 @@ __BEGIN_DECLS
 #define IMPORTANCE_CODE(SubClass, code) KDBG_CODE(DBG_IMPORTANCE, (SubClass), (code))
 #define BANK_CODE(SubClass, code) KDBG_CODE(DBG_BANK, (SubClass), (code))
 #define ATM_CODE(SubClass, code) KDBG_CODE(DBG_ATM, (SubClass), (code))
+#define TURNSTILE_CODE(SubClass, code) KDBG_CODE(DBG_TURNSTILE, (SubClass), (code))
 
 /* Kernel Debug Macros for specific daemons */
 #define COREDUETDBG_CODE(code) DAEMONDBG_CODE(DBG_DAEMON_COREDUET, code)
@@ -838,16 +893,30 @@ extern unsigned int kdebug_enable;
  * tracing without a typefilter.
  */
 #if (KDEBUG_LEVEL >= KDEBUG_LEVEL_STANDARD)
-#define KERNEL_DEBUG_CONSTANT_FILTERED(x, a, b, c, d, ...)             \
-	do {                                                               \
-		if (KDBG_IMPROBABLE(kdebug_enable & ~KDEBUG_ENABLE_PPT)) {     \
-			kernel_debug_filtered((x), (uintptr_t)(a), (uintptr_t)(b), \
-				(uintptr_t)(c), (uintptr_t)(d));                       \
-		}                                                              \
+#define KERNEL_DEBUG_CONSTANT_FILTERED(x, a, b, c, d, ...)           \
+	do {                                                             \
+		if (KDBG_IMPROBABLE(kdebug_enable & ~KDEBUG_ENABLE_PPT)) {   \
+			kernel_debug_filtered((x), (uintptr_t)(a), (uintptr_t)(b),  \
+				(uintptr_t)(c), (uintptr_t)(d)); \
+		}                                                            \
 	} while (0)
 #else /* (KDEBUG_LEVEL >= KDEBUG_LEVEL_STANDARD) */
 #define KERNEL_DEBUG_CONSTANT_FILTERED(type, x, a, b, c, d, ...) do {} while (0)
 #endif /* (KDEBUG_LEVEL >= KDEBUG_LEVEL_STANDARD) */
+
+#if (KDEBUG_LEVEL >= KDEBUG_LEVEL_IST)
+#define KERNEL_DEBUG_CONSTANT_RELEASE_NOPROCFILT(x, a, b, c, d, ...)   \
+	do {                                                               \
+		if (KDBG_IMPROBABLE(kdebug_enable & ~KDEBUG_ENABLE_PPT)) {     \
+			kernel_debug_flags((x), (uintptr_t)(a), (uintptr_t)(b),    \
+				(uintptr_t)(c), (uintptr_t)(d), KDBG_FLAG_NOPROCFILT); \
+		}                                                              \
+	} while (0)
+#else /* (KDEBUG_LEVEL >= KDEBUG_LEVEL_IST) */
+#define KERNEL_DEBUG_CONSTANT_RELEASE_NOPROCFILT(x, a, b, c, d, ...) \
+	do { } while (0)
+#endif /* (KDEBUG_LEVEL >= KDEBUG_LEVEL_IST) */
+
 
 #if (KDEBUG_LEVEL >= KDEBUG_LEVEL_STANDARD)
 #define KERNEL_DEBUG_CONSTANT(x, a, b, c, d, e)                               \
@@ -898,11 +967,19 @@ extern unsigned int kdebug_enable;
 	do {                                                                      \
 		if (KDBG_IMPROBABLE(kdebug_enable & (type))) {                        \
 			kernel_debug((x), (uintptr_t)(a), (uintptr_t)(b), (uintptr_t)(c), \
-				(uintptr_t)(d), (uintptr_t)(e));                              \
+				(uintptr_t)(d), 0);                                           \
 		}                                                                     \
+	} while (0)
+#define KERNEL_DEBUG_CONSTANT_IST1(x, a, b, c, d, e)                     \
+	do {                                                                       \
+		if (KDBG_IMPROBABLE(kdebug_enable)) {                         \
+			kernel_debug1((x), (uintptr_t)(a), (uintptr_t)(b), (uintptr_t)(c), \
+				(uintptr_t)(d), (uintptr_t)(e));                               \
+		}                                                                      \
 	} while (0)
 #else /* (KDEBUG_LEVEL >= KDEBUG_LEVEL_IST) */
 #define KERNEL_DEBUG_CONSTANT_IST(type, x, a, b, c, d, e) do {} while (0)
+#define KERNEL_DEBUG_CONSTANT_IST1(x, a, b, c, d, e) do {} while (0)
 #endif /* (KDEBUG_LEVEL >= KDEBUG_LEVEL_IST) */
 
 #if NO_KDEBUG
@@ -960,6 +1037,17 @@ extern void kernel_debug1(
 		uintptr_t arg3,
 		uintptr_t arg4,
 		uintptr_t arg5);
+
+#define KDBG_FLAG_FILTERED 0x01
+#define KDBG_FLAG_NOPROCFILT 0x02
+
+extern void kernel_debug_flags(
+		uint32_t  debugid,
+		uintptr_t arg1,
+		uintptr_t arg2,
+		uintptr_t arg3,
+		uintptr_t arg4,
+		uint64_t flags);
 
 extern void kernel_debug_filtered(
 		uint32_t  debugid,

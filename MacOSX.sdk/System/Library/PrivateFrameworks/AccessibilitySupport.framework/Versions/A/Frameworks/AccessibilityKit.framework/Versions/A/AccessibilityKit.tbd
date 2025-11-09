@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 224B8A7F-311A-39E9-9399-DF81A3ED884E' ]
+uuids:           [ 'x86_64: 2A6437ED-0F7E-3D2B-AA57-6B597165C17D' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityKit.framework/Versions/A/AccessibilityKit
 current-version: 2
@@ -8,11 +8,11 @@ exports:
   - archs:           [ x86_64 ]
     symbols:         [ _AXKDebugPrintHierarchy, _AccessibilityKitVersionNumber, _AccessibilityKitVersionString, 
                        __AXKKeyValueObserve, __AXKKeyValueObserveWithBlock ]
-    objc-classes:    [ _AXKAndAction, _AXKApplicationController, _AXKApplicationOperation, 
-                       _AXKBaseAction, _AXKChildrenNavigationMapper, _AXKClickAction, 
-                       _AXKCompositeAction, _AXKElementBasedTextProvider, _AXKElementController, 
-                       _AXKFoundationAction, _AXKOrAction, _AXKRemoteSearchManager, 
-                       _AXKSimpleStringTextProvider, _AXKStringTokenizer, _AXKTextNavigator, 
-                       _AXKWorkspaceManager, __AXKClassPredicate, __AXKClassRegistrar, 
-                       __AXKElementCacheValue ]
+    objc-classes:    [ AXKAndAction, AXKApplicationController, AXKApplicationOperation, 
+                       AXKBaseAction, AXKChildrenNavigationMapper, AXKClickAction, 
+                       AXKCompositeAction, AXKElementBasedTextProvider, AXKElementController, 
+                       AXKFoundationAction, AXKOrAction, AXKRemoteSearchManager, 
+                       AXKSimpleStringTextProvider, AXKStringTokenizer, AXKTextNavigator, 
+                       AXKWorkspaceManager, _AXKClassPredicate, _AXKClassRegistrar, 
+                       _AXKElementCacheValue ]
 ...

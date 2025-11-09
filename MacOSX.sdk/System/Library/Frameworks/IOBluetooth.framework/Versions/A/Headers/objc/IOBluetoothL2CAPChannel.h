@@ -191,6 +191,24 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
 - (IOReturn)requestRemoteMTU:(BluetoothL2CAPMTU)remoteMTU;
 
 /*!
+	@method		writeAsyncTrap:length:refcon:
+	@abstract	Writes the given data over the target L2CAP channel asynchronously to the remote device using
+ 				IOConnectTrap4() call.
+	@discussion	The length of the data may not exceed the L2CAP channel's ougoing MTU.  When the data has
+ 				been successfully passed to the hardware to be transmitted, the delegate method
+ 				-l2capChannelWriteComplete:refcon:status: will be called with the refcon passed
+ 				into this method.
+
+ 				NOTE: This method is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
+	@param		data	Pointer to the buffer containing the data to send.
+	@param		length 	The length of the given data buffer.
+	@param		refcon	User supplied value that gets passed to the write callback.
+	@result		Returns kIOReturnSuccess if the data was buffered successfully.
+*/
+
+- (IOReturn)writeAsyncTrap:(void *)data length:(UInt16)length refcon:(void*)refcon;
+
+/*!
     @method		writeAsync:length:refcon:
 	@abstract	Writes the given data over the target L2CAP channel asynchronously to the remote device.
     @discussion	The length of the data may not exceed the L2CAP channel's ougoing MTU.  When the data has 

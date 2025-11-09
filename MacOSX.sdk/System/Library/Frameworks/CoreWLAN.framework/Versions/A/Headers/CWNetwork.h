@@ -66,7 +66,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @abstract 
  * The operating channel of the Wi-Fi device.
  */
-@property(readonly) CWChannel *wlanChannel NS_AVAILABLE_MAC(10_7);
+@property(readonly, nullable) CWChannel *wlanChannel NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @property

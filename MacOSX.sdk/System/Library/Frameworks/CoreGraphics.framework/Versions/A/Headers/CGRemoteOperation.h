@@ -74,8 +74,7 @@ typedef void (*CGScreenRefreshCallback)(uint32_t count,
 
 CG_EXTERN CGError CGRegisterScreenRefreshCallback(
     CGScreenRefreshCallback  callback, void * __nullable userInfo)
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_8,
-                                __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.0,10.8);
 
 /* Remove a previously registered callback function invoked when local
    displays are refreshed or modified.
@@ -85,8 +84,7 @@ CG_EXTERN CGError CGRegisterScreenRefreshCallback(
 
 CG_EXTERN void CGUnregisterScreenRefreshCallback(
     CGScreenRefreshCallback  callback, void * __nullable userInfo)
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_8,
-                                __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.0,10.8);
 
 /* Wait for screen refresh operations.
 
@@ -103,7 +101,7 @@ CG_EXTERN void CGUnregisterScreenRefreshCallback(
 
 CG_EXTERN CGError CGWaitForScreenRefreshRects(
     CGRect *__nullable * __nullable rects, uint32_t * __nullable count)
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.0, 10.8);
 
 /* A type for `CGWaitForScreenUpdateRects' specifying the desired types of
    screen update operations. */
@@ -152,15 +150,13 @@ typedef void (*CGScreenUpdateMoveCallback)(CGScreenUpdateMoveDelta delta,
 
 CG_EXTERN CGError CGScreenRegisterMoveCallback(
     CGScreenUpdateMoveCallback  callback, void * __nullable userInfo)
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,
-                                __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.3,10.8);
 
 /* Remove a previously registered screen update callback function. */
 
 CG_EXTERN void CGScreenUnregisterMoveCallback(
     CGScreenUpdateMoveCallback  callback, void * __nullable userInfo)
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,
-                                __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.3,10.8);
 
 /* Wait for screen update operations.
 
@@ -194,18 +190,18 @@ CG_EXTERN CGError CGWaitForScreenUpdateRects(
     CGScreenUpdateOperation * __nullable currentOperation,
     CGRect * __nullable * __nullable rects, size_t * __nullable rectCount,
     CGScreenUpdateMoveDelta * __nullable delta)
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8, __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.3,10.8);
 
 /* Deallocate the list of rectangles received from
    `CGWaitForScreenRefreshRects' or `CGWaitForScreenUpdateRects'. */
 
 CG_EXTERN void CGReleaseScreenRefreshRects(CGRect * __nullable rects)
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_8, __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.0,10.8);
 
 /* Return true if the mouse cursor is visible, false otherwise. */
 
 CG_EXTERN boolean_t CGCursorIsVisible(void)
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_9, __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.3,10.9);
 
 /* Return true if the mouse cursor is drawn in frame buffer memory, false
    otherwise. (The cursor could exist in an overlay plane or a similar
@@ -218,13 +214,13 @@ CG_EXTERN boolean_t CGCursorIsVisible(void)
    function returns true. */
 
 CG_EXTERN boolean_t CGCursorIsDrawnInFramebuffer(void)
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_9, __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.3,10.9);
 
 /* Move the mouse cursor to the desired position in global display
    coordinates without generating events. */
 
 CG_EXTERN CGError CGWarpMouseCursorPosition(CGPoint newCursorPosition)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(10.0);
 
 /* After posting a left mouse down with remote mouse drag suppressing
    hardware mouse move events, after some time with no remote mouse drag
@@ -247,7 +243,7 @@ CG_EXTERN CGError CGWarpMouseCursorPosition(CGPoint newCursorPosition)
    or `CGWarpMouseCursorPosition'. */
 
 CG_EXTERN CGError CGAssociateMouseAndMouseCursorPosition(boolean_t connected)
-    CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+    CG_AVAILABLE_STARTING(10.0);
 
 /* Return a CFMachPort that corresponds to the Mac OS X Window Server's
    server port.
@@ -276,21 +272,19 @@ CG_EXTERN CGError CGAssociateMouseAndMouseCursorPosition(boolean_t connected)
    `CFMachPortIsValid' to check whether the port is valid. */
 
 CG_EXTERN CFMachPortRef __nullable CGWindowServerCreateServerPort(void)
-   CG_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+   CG_AVAILABLE_STARTING(10.8);
 
 /* This function is obsolete. Use Quartz events and Quartz event sources
    instead. */
 
 CG_EXTERN CGError CGEnableEventStateCombining(boolean_t combineState)
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_6,
-                                __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.1, 10.6);
 
 /* This function obsolete. Use
    `CGEventSourceSetLocalEventsFilterDuringSuppressionState' instead. */
 
 CG_EXTERN CGError CGInhibitLocalEvents(boolean_t inhibit)
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
-                                __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.0, 10.6);
 
 /* This function is obsolete. Use `CGEventCreateMouseEvent' instead.
 
@@ -321,8 +315,7 @@ CG_EXTERN CGError CGInhibitLocalEvents(boolean_t inhibit)
 CG_EXTERN CGError CGPostMouseEvent(CGPoint mouseCursorPosition,
     boolean_t updateMouseCursorPosition, CGButtonCount buttonCount,
     boolean_t mouseButtonDown, ... )
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
-                                __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.0, 10.6);
 
 /* This function is obsolete. Use `CGEventCreateScrollWheelEvent' instead.
 
@@ -342,13 +335,13 @@ CG_EXTERN CGError CGPostMouseEvent(CGPoint mouseCursorPosition,
 
 CG_EXTERN CGError CGPostScrollWheelEvent(CGWheelCount wheelCount,
     int32_t wheel1, ... )
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.0, 10.6);
 
 /* This function is obsolete. Use `CGEventCreateKeyboardEvent' instead. */
 
 CG_EXTERN CGError CGPostKeyboardEvent(CGCharCode keyChar, CGKeyCode virtualKey,
     boolean_t keyDown)
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.0, 10.6);
 
 /* A type specifying masks for classes of low-level events that can be
    filtered during event suppression states. */
@@ -378,20 +371,19 @@ typedef CF_ENUM(uint32_t, CGEventSuppressionState) {
 
 CG_EXTERN CGError CGSetLocalEventsFilterDuringSuppressionState(
     CGEventFilterMask filter, CGEventSuppressionState state)
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.1, 10.6);
 
 /* This function is obsolete. Use
    `CGEventSourceSetLocalEventsSuppressionInterval' instead. */
 
 CG_EXTERN CGError CGSetLocalEventsSuppressionInterval(CFTimeInterval seconds)
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
-                                __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.0, 10.6);
 
 /* This function is obsolete. Use `CGWindowServerCreateServerPort'
    instead. */
 
 CG_EXTERN CFMachPortRef __nullable CGWindowServerCFMachPort(void) CF_RETURNS_RETAINED
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
+    CG_AVAILABLE_BUT_DEPRECATED(10.1, 10.8);
 
 /* Obsolete. Present for backwards compatibility with old header typos. */
 

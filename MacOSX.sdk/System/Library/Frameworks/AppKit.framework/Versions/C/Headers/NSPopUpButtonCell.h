@@ -1,11 +1,12 @@
 /*
         NSPopUpButtonCell.h
         Application Kit
-        Copyright (c) 1997-2017, Apple Inc.
+        Copyright (c) 1997-2018, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
+#import <AppKit/NSMenu.h>
 #import <AppKit/NSMenuItemCell.h>
 #import <AppKit/NSMenuItem.h>
 
@@ -19,11 +20,11 @@ typedef NS_ENUM(NSUInteger, NSPopUpArrowPosition) {
     NSPopUpArrowAtBottom = 2
 };
 
-@interface NSPopUpButtonCell : NSMenuItemCell {
+@interface NSPopUpButtonCell : NSMenuItemCell <NSMenuItemValidation> {
     /*All instance variables are private*/
     @private
-    NSMenu *_menu;
-    int _selectedIndex;
+    NSMenu *_menu APPKIT_IVAR;
+    int _selectedIndex APPKIT_IVAR;
     struct __pbcFlags {
         unsigned int pullsDown:1;
         unsigned int preferredEdge:3;
@@ -32,13 +33,12 @@ typedef NS_ENUM(NSUInteger, NSPopUpArrowPosition) {
         unsigned int altersStateOfSelectedItem:1;
         unsigned int decoding:1;
         unsigned int arrowPosition:2;
-        unsigned int ignoreMenuLayout:1;
         unsigned int drawing:1;
         unsigned int menuShouldBeUniquedAgainstMain:1;
-        unsigned int RESERVED:19;
-    } _pbcFlags;
+        unsigned int RESERVED:20;
+    } _pbcFlags APPKIT_IVAR;
 #if __LP64__
-    id _popupReserved __unused;
+    id _popupReserved __unused APPKIT_IVAR;
 #endif
 }
 

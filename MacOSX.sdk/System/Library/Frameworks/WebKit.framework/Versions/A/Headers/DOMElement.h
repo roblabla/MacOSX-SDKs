@@ -33,9 +33,9 @@
 
 enum {
     DOM_ALLOW_KEYBOARD_INPUT = 1
-} NS_ENUM_AVAILABLE_MAC(10_4);
+} WEBKIT_ENUM_DEPRECATED_MAC(10_4, 10_14);
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMElement : DOMNode
 @property (readonly, copy) NSString *tagName;
 @property (readonly, strong) DOMCSSStyleDeclaration *style;
@@ -43,8 +43,8 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (readonly) int offsetTop;
 @property (readonly) int offsetWidth;
 @property (readonly) int offsetHeight;
-@property (readonly) int clientLeft NS_AVAILABLE_MAC(10_5);
-@property (readonly) int clientTop NS_AVAILABLE_MAC(10_5);
+@property (readonly) int clientLeft WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int clientTop WEBKIT_AVAILABLE_MAC(10_5);
 @property (readonly) int clientWidth;
 @property (readonly) int clientHeight;
 @property int scrollLeft;
@@ -55,46 +55,46 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (copy) NSString *innerHTML;
 @property (copy) NSString *outerHTML;
 @property (copy) NSString *className;
-@property (readonly, copy) NSString *innerText NS_AVAILABLE_MAC(10_5);
-@property (readonly, strong) DOMElement *previousElementSibling NS_AVAILABLE_MAC(10_6);
-@property (readonly, strong) DOMElement *nextElementSibling NS_AVAILABLE_MAC(10_6);
-@property (readonly, strong) DOMElement *firstElementChild NS_AVAILABLE_MAC(10_6);
-@property (readonly, strong) DOMElement *lastElementChild NS_AVAILABLE_MAC(10_6);
-@property (readonly) unsigned childElementCount NS_AVAILABLE_MAC(10_6);
+@property (readonly, copy) NSString *innerText WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly, strong) DOMElement *previousElementSibling WEBKIT_AVAILABLE_MAC(10_6);
+@property (readonly, strong) DOMElement *nextElementSibling WEBKIT_AVAILABLE_MAC(10_6);
+@property (readonly, strong) DOMElement *firstElementChild WEBKIT_AVAILABLE_MAC(10_6);
+@property (readonly, strong) DOMElement *lastElementChild WEBKIT_AVAILABLE_MAC(10_6);
+@property (readonly) unsigned childElementCount WEBKIT_AVAILABLE_MAC(10_6);
 
 - (NSString *)getAttribute:(NSString *)name;
-- (void)setAttribute:(NSString *)name value:(NSString *)value NS_AVAILABLE_MAC(10_5);
+- (void)setAttribute:(NSString *)name value:(NSString *)value WEBKIT_AVAILABLE_MAC(10_5);
 - (void)removeAttribute:(NSString *)name;
 - (DOMAttr *)getAttributeNode:(NSString *)name;
 - (DOMAttr *)setAttributeNode:(DOMAttr *)newAttr;
 - (DOMAttr *)removeAttributeNode:(DOMAttr *)oldAttr;
 - (DOMNodeList *)getElementsByTagName:(NSString *)name;
-- (NSString *)getAttributeNS:(NSString *)namespaceURI localName:(NSString *)localName NS_AVAILABLE_MAC(10_5);
-- (void)setAttributeNS:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName value:(NSString *)value NS_AVAILABLE_MAC(10_5);
-- (void)removeAttributeNS:(NSString *)namespaceURI localName:(NSString *)localName NS_AVAILABLE_MAC(10_5);
-- (DOMNodeList *)getElementsByTagNameNS:(NSString *)namespaceURI localName:(NSString *)localName NS_AVAILABLE_MAC(10_5);
-- (DOMAttr *)getAttributeNodeNS:(NSString *)namespaceURI localName:(NSString *)localName NS_AVAILABLE_MAC(10_5);
+- (NSString *)getAttributeNS:(NSString *)namespaceURI localName:(NSString *)localName WEBKIT_AVAILABLE_MAC(10_5);
+- (void)setAttributeNS:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName value:(NSString *)value WEBKIT_AVAILABLE_MAC(10_5);
+- (void)removeAttributeNS:(NSString *)namespaceURI localName:(NSString *)localName WEBKIT_AVAILABLE_MAC(10_5);
+- (DOMNodeList *)getElementsByTagNameNS:(NSString *)namespaceURI localName:(NSString *)localName WEBKIT_AVAILABLE_MAC(10_5);
+- (DOMAttr *)getAttributeNodeNS:(NSString *)namespaceURI localName:(NSString *)localName WEBKIT_AVAILABLE_MAC(10_5);
 - (DOMAttr *)setAttributeNodeNS:(DOMAttr *)newAttr;
 - (BOOL)hasAttribute:(NSString *)name;
-- (BOOL)hasAttributeNS:(NSString *)namespaceURI localName:(NSString *)localName NS_AVAILABLE_MAC(10_5);
-- (void)focus NS_AVAILABLE_MAC(10_6);
-- (void)blur NS_AVAILABLE_MAC(10_6);
-- (void)scrollIntoView:(BOOL)alignWithTop NS_AVAILABLE_MAC(10_5);
-- (void)scrollIntoViewIfNeeded:(BOOL)centerIfNeeded NS_AVAILABLE_MAC(10_5);
-- (void)scrollByLines:(int)lines NS_AVAILABLE_MAC(10_5);
-- (void)scrollByPages:(int)pages NS_AVAILABLE_MAC(10_5);
-- (DOMNodeList *)getElementsByClassName:(NSString *)name NS_AVAILABLE_MAC(10_6);
-- (void)webkitRequestFullScreen:(unsigned short)flags NS_AVAILABLE_MAC(10_6);
-- (DOMElement *)querySelector:(NSString *)selectors NS_AVAILABLE_MAC(10_6);
-- (DOMNodeList *)querySelectorAll:(NSString *)selectors NS_AVAILABLE_MAC(10_6);
+- (BOOL)hasAttributeNS:(NSString *)namespaceURI localName:(NSString *)localName WEBKIT_AVAILABLE_MAC(10_5);
+- (void)focus WEBKIT_AVAILABLE_MAC(10_6);
+- (void)blur WEBKIT_AVAILABLE_MAC(10_6);
+- (void)scrollIntoView:(BOOL)alignWithTop WEBKIT_AVAILABLE_MAC(10_5);
+- (void)scrollIntoViewIfNeeded:(BOOL)centerIfNeeded WEBKIT_AVAILABLE_MAC(10_5);
+- (void)scrollByLines:(int)lines WEBKIT_AVAILABLE_MAC(10_5);
+- (void)scrollByPages:(int)pages WEBKIT_AVAILABLE_MAC(10_5);
+- (DOMNodeList *)getElementsByClassName:(NSString *)name WEBKIT_AVAILABLE_MAC(10_6);
+- (void)webkitRequestFullScreen:(unsigned short)flags WEBKIT_AVAILABLE_MAC(10_6);
+- (DOMElement *)querySelector:(NSString *)selectors WEBKIT_AVAILABLE_MAC(10_6);
+- (DOMNodeList *)querySelectorAll:(NSString *)selectors WEBKIT_AVAILABLE_MAC(10_6);
 @end
 
 @interface DOMElement (DOMElementDeprecated)
-- (void)setAttribute:(NSString *)name :(NSString *)value NS_DEPRECATED_MAC(10_4, 10_5);
-- (NSString *)getAttributeNS:(NSString *)namespaceURI :(NSString *)localName NS_DEPRECATED_MAC(10_4, 10_5);
-- (void)setAttributeNS:(NSString *)namespaceURI :(NSString *)qualifiedName :(NSString *)value NS_DEPRECATED_MAC(10_4, 10_5);
-- (void)removeAttributeNS:(NSString *)namespaceURI :(NSString *)localName NS_DEPRECATED_MAC(10_4, 10_5);
-- (DOMNodeList *)getElementsByTagNameNS:(NSString *)namespaceURI :(NSString *)localName NS_DEPRECATED_MAC(10_4, 10_5);
-- (DOMAttr *)getAttributeNodeNS:(NSString *)namespaceURI :(NSString *)localName NS_DEPRECATED_MAC(10_4, 10_5);
-- (BOOL)hasAttributeNS:(NSString *)namespaceURI :(NSString *)localName NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)setAttribute:(NSString *)name :(NSString *)value WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (NSString *)getAttributeNS:(NSString *)namespaceURI :(NSString *)localName WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (void)setAttributeNS:(NSString *)namespaceURI :(NSString *)qualifiedName :(NSString *)value WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (void)removeAttributeNS:(NSString *)namespaceURI :(NSString *)localName WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (DOMNodeList *)getElementsByTagNameNS:(NSString *)namespaceURI :(NSString *)localName WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (DOMAttr *)getAttributeNodeNS:(NSString *)namespaceURI :(NSString *)localName WEBKIT_DEPRECATED_MAC(10_4, 10_5);
+- (BOOL)hasAttributeNS:(NSString *)namespaceURI :(NSString *)localName WEBKIT_DEPRECATED_MAC(10_4, 10_5);
 @end

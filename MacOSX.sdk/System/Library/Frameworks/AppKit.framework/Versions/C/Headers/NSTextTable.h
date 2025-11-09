@@ -1,6 +1,6 @@
 /*
         NSTextTable.h
-        Copyright (c) 2004-2017, Apple Inc.
+        Copyright (c) 2004-2018, Apple Inc.
         All rights reserved.
 
         Classes to represent text tables and other text blocks.
@@ -58,13 +58,13 @@ typedef NS_ENUM(NSUInteger, NSTextTableLayoutAlgorithm) {
 /* NSTextBlock is the basic object for text block layout, and the superclass of the other classes. */
 @interface NSTextBlock : NSObject <NSCoding, NSCopying> {
     /*All instance variables are private*/
-    void *_propVals;
-    NSUInteger _propMask;
-    NSUInteger _typeMask;
-    id _primParamVal;
-    id _otherParamVals;
-    void *_blockPrimary;
-    void *_blockSecondary;
+    void *_propVals APPKIT_IVAR;
+    NSUInteger _propMask APPKIT_IVAR;
+    NSUInteger _typeMask APPKIT_IVAR;
+    id _primParamVal APPKIT_IVAR;
+    id _otherParamVals APPKIT_IVAR;
+    void *_blockPrimary APPKIT_IVAR;
+    void *_blockSecondary APPKIT_IVAR;
 }
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -105,13 +105,13 @@ typedef NS_ENUM(NSUInteger, NSTextTableLayoutAlgorithm) {
 
 /* NSTextTableBlock is a subclass of NSTextBlock used for a block that appears as a cell in a text table. */
 @interface NSTextTableBlock : NSTextBlock {
-    NSTextTable *_table;
-    NSInteger _rowNum;
-    NSInteger _colNum;
-    NSInteger _rowSpan;
-    NSInteger _colSpan;
-    void *_tableBlockPrimary;
-    void *_tableBlockSecondary;
+    NSTextTable *_table APPKIT_IVAR;
+    NSInteger _rowNum APPKIT_IVAR;
+    NSInteger _colNum APPKIT_IVAR;
+    NSInteger _rowSpan APPKIT_IVAR;
+    NSInteger _colSpan APPKIT_IVAR;
+    void *_tableBlockPrimary APPKIT_IVAR;
+    void *_tableBlockSecondary APPKIT_IVAR;
 }
 
 - (instancetype)initWithTable:(NSTextTable *)table startingRow:(NSInteger)row rowSpan:(NSInteger)rowSpan startingColumn:(NSInteger)col columnSpan:(NSInteger)colSpan NS_DESIGNATED_INITIALIZER;     // Designated initializer
@@ -127,11 +127,11 @@ typedef NS_ENUM(NSUInteger, NSTextTableLayoutAlgorithm) {
 
 /* NSTextTable represents a table as a whole. */
 @interface NSTextTable : NSTextBlock {
-    NSUInteger _numCols;
-    NSUInteger _tableFlags;
-    id _lcache;
-    void *_tablePrimary;
-    void *_tableSecondary;
+    NSUInteger _numCols APPKIT_IVAR;
+    NSUInteger _tableFlags APPKIT_IVAR;
+    id _lcache APPKIT_IVAR;
+    void *_tablePrimary APPKIT_IVAR;
+    void *_tableSecondary APPKIT_IVAR;
 }
 
 /* These methods control the basic parameters of the table. */

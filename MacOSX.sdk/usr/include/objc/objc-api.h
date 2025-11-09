@@ -54,15 +54,7 @@
 #   endif
 #endif
 
-#ifndef __BRIDGEOS_AVAILABLE
-#   define __BRIDGEOS_AVAILABLE(v)
-#endif
-#ifndef __BRIDGEOS_DEPRECATED
-#   define __BRIDGEOS_DEPRECATED(v1, v2, m)
-#endif
-#ifndef __BRIDGEOS_UNAVAILABLE
-#   define __BRIDGEOS_UNAVAILABLE
-#endif
+
 
 /*
  * OBJC_API_VERSION 0 or undef: Tiger and earlier API only
@@ -108,7 +100,13 @@
 /* OBJC_OLD_DISPATCH_PROTOTYPES == 0 enforces the rule that the dispatch 
  * functions must be cast to an appropriate function pointer type. */
 #if !defined(OBJC_OLD_DISPATCH_PROTOTYPES)
-#   define OBJC_OLD_DISPATCH_PROTOTYPES 1
+#   if __swift__
+        // Existing Swift code expects IMP to be Comparable.
+        // Variadic IMP is comparable via OpaquePointer; non-variadic IMP isn't.
+#       define OBJC_OLD_DISPATCH_PROTOTYPES 1
+#   else
+#       define OBJC_OLD_DISPATCH_PROTOTYPES 1
+#   endif
 #endif
 
 
@@ -116,7 +114,7 @@
 #if !defined(OBJC_AVAILABLE)
 #   define OBJC_AVAILABLE(x, i, t, w, b)                            \
         __OSX_AVAILABLE(x)  __IOS_AVAILABLE(i)  __TVOS_AVAILABLE(t) \
-        __WATCHOS_AVAILABLE(w)  __BRIDGEOS_AVAILABLE(b)
+        __WATCHOS_AVAILABLE(w)  
 #endif
 
 
@@ -140,7 +138,7 @@
 #       define OBJC2_UNAVAILABLE                                       \
             __OSX_DEPRECATED(10.5, 10.5, "not available in __OBJC2__") \
             __IOS_DEPRECATED(2.0, 2.0, "not available in __OBJC2__")   \
-            __TVOS_UNAVAILABLE __WATCHOS_UNAVAILABLE __BRIDGEOS_UNAVAILABLE
+            __TVOS_UNAVAILABLE __WATCHOS_UNAVAILABLE 
 #   endif
 #endif
 

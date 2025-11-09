@@ -2,7 +2,7 @@
 //  GKGameSession.h
 //  Game Center
 //
-//  Copyright 2016-2017 Apple Inc. All rights reserved.
+//  Copyright 2016-2018 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -21,8 +21,8 @@ typedef NS_ENUM(NSInteger, GKTransportType) {
 };
 
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_12, 10_0) __WATCHOS_PROHIBITED
 
+API_DEPRECATED("For real-time matches, use GKMatchmakerViewController. For turn-based matches, use GKTurnBasedMatchmakerViewController.", ios(10.0, 12.0), tvos(10.0, 12.0), macosx(10.12, 10.14)) API_UNAVAILABLE(watchos)
 @interface GKGameSession : NSObject
 #if !__OBJC2__
 {

@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5BA46C0D-0D76-3F6E-B66B-5D1462F19C1E' ]
+uuids:           [ 'x86_64: 35F80579-653D-3999-A39E-D484BCC8916A' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Jet.framework/Versions/A/Jet
 exports:         
@@ -19,8 +19,9 @@ exports:
                        __Z24jet_debug_option_get_intP8NSString, __Z25jet_debug_option_get_boolP8NSString, 
                        __Z25xglPrintFramebufferStatusv, __Z27jet_debug_option_get_stringP8NSString, 
                        __Z27xglPrintVertexAttribIntegerPKcjj, __Z29jet_Metal_Device_is_supportedPU19objcproto9MTLDevice11objc_object, 
-                       __Z38jet_texture_format_is_framebuffer_only18jet_texture_format, 
-                       __Z43jet_convert_pixel_data_rgb_565_to_rgba_8888PKvPvjj, __Z45jet_convert_pixel_data_rgba_4444_to_rgba_8888PKvPvjj, 
+                       __Z30jet_get_info_plist_flag_is_setP8NSString, __Z38jet_texture_format_is_framebuffer_only18jet_texture_format, 
+                       __Z43jet_convert_pixel_data_rgb_565_to_rgba_8888PKvPvjj, __Z45jet_convert_pixel_data_bgra_8888_to_rgba_8888PKvPvjj, 
+                       __Z45jet_convert_pixel_data_rgba_4444_to_rgba_8888PKvPvjj, 
                        __Z45jet_convert_pixel_data_rgba_5551_to_rgba_8888PKvPvjj, 
                        __Z45jet_convert_pixel_data_rgba_fp32_to_rgba_fp16PKvPvjj, 
                        __Z51jet_convert_pixel_data_rgba_fp32_to_rgb32_101010_a8PKvPvS1_jj, 
@@ -212,7 +213,7 @@ exports:
                        __ZTV15jet_buffer_pool, __ZTV15jet_framebuffer, __ZTV15jet_render_mode, 
                        __ZTV16jet_stencil_mode, __ZTV17jet_context_Metal, __ZTV18jet_context_OpenGL, 
                        __ZTV22jet_depth_stencil_mode, __ZTV9jet_fence ]
-    objc-classes:    [ _JetView ]
+    objc-classes:    [ JetView ]
     weak-def-symbols: [ __ZTI12jet_function, __ZTI13jet_render_op, __ZTI15jet_fence_Metal, 
                         __ZTI16jet_buffer_Metal, __ZTI16jet_fence_OpenGL, __ZTI17jet_buffer_OpenGL, 
                         __ZTI17jet_program_Metal, __ZTI17jet_sampler_Metal, __ZTI17jet_texture_Metal, 

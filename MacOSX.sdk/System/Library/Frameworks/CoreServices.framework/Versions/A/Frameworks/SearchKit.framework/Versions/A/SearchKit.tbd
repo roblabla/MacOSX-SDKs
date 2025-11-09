@@ -1,13 +1,13 @@
---- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: C6E527B5-5F1C-3708-A0DC-20ADD3F5693A', 'x86_64: 8315A86A-BF2D-38CD-B439-C300FB3956BA' ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: C6A34D09-9707-3F28-838F-63B59B8A12D5' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit
 current-version: 200.1
 objc-constraint: none
 parent-umbrella: CoreServices
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _AIATFree, _AIATGetAllocator, _AIATMalloc, _AIATRegisterReportErrorUPP, 
                        _AIATSetAllocator, _DisposeIASearchIsHitFilterUPP, _IACFDataDocAccessorCreate, 
                        _IACFDataDocAccessorDispose, _IADocKeyAccessorCreate, _IADocKeyAccessorLength, 

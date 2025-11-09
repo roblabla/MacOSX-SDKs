@@ -45,7 +45,7 @@ extern "C" {
 typedef struct _CGLContextObject       *CGLContextObj;
 typedef struct _CGLPixelFormatObject   *CGLPixelFormatObj;
 typedef struct _CGLRendererInfoObject  *CGLRendererInfoObj;
-typedef struct _CGLPBufferObject       *CGLPBufferObj OPENGL_DEPRECATED(10_3, 10_7);
+typedef struct _CGLPBufferObject       *CGLPBufferObj OPENGL_DEPRECATED(10.3, 10.7);
 
 /*
 ** Attribute names for CGLChoosePixelFormat and CGLDescribePixelFormat.

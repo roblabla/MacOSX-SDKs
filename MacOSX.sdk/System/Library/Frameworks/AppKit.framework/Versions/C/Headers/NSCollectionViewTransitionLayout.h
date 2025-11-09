@@ -1,7 +1,7 @@
 /*
     NSCollectionViewTransitionLayout.h
     Application Kit
-    Copyright (c) 2015-2017, Apple Inc.
+    Copyright (c) 2015-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -9,32 +9,32 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * NSCollectionViewTransitionLayoutAnimatedKey NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSCollectionViewTransitionLayoutAnimatedKey NS_SWIFT_BRIDGED_TYPEDEF;
 
 NS_CLASS_AVAILABLE_MAC(10_11)
 @interface NSCollectionViewTransitionLayout : NSCollectionViewLayout
 #ifndef __OBJC2__
 {
 @private
-    NSCollectionViewLayout *_fromLayout;
-    NSCollectionViewLayout *_toLayout;
+    NSCollectionViewLayout *_fromLayout APPKIT_IVAR;
+    NSCollectionViewLayout *_toLayout APPKIT_IVAR;
     
-    CGRect _fromVisibleBounds;
-    CGRect _toVisibleBounds;
-    NSSize _contentSize;
+    CGRect _fromVisibleBounds APPKIT_IVAR;
+    CGRect _toVisibleBounds APPKIT_IVAR;
+    NSSize _contentSize APPKIT_IVAR;
     
-    BOOL _haveValidInfos;
-    CGFloat _transitionProgress;
+    BOOL _haveValidInfos APPKIT_IVAR;
+    CGFloat _transitionProgress APPKIT_IVAR;
     
-    NSMutableDictionary *_transitionInformationsDict;
-    NSMutableDictionary *_currentLayoutInfos;
+    NSMutableDictionary *_transitionInformationsDict APPKIT_IVAR;
+    NSMutableDictionary *_currentLayoutInfos APPKIT_IVAR;
     
-    BOOL _layoutIsValid;
+    BOOL _layoutIsValid APPKIT_IVAR;
     
-    NSMutableArray *_disappearingLayoutAttributes;
-    NSMutableArray *_appearingLayoutAttributes;
+    NSMutableArray *_disappearingLayoutAttributes APPKIT_IVAR;
+    NSMutableArray *_appearingLayoutAttributes APPKIT_IVAR;
     
-    CGFloat _accuracy;
+    CGFloat _accuracy APPKIT_IVAR;
 }
 #endif
 

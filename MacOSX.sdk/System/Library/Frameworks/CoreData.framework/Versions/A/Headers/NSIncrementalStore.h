@@ -1,7 +1,7 @@
 /*
     NSIncrementalStore.h
     Core Data
-    Copyright (c) 2004-2017, Apple Inc.
+    Copyright (c) 2004-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -74,7 +74,7 @@ API_AVAILABLE(macosx(10.7),ios(5.0))
 
 // Called before executeRequest with a save request, to assign permanent IDs to newly inserted objects; 
 // must return the objectIDs in the same order as the objects appear in array.
-- (nullable NSArray<NSManagedObjectID *>*)obtainPermanentIDsForObjects:(NSArray<NSManagedObject *>*)array error:(NSError **)error;
+- (nullable NSArray<NSManagedObjectID *> *)obtainPermanentIDsForObjects:(NSArray<NSManagedObject *> *)array error:(NSError **)error;
 
 // Inform the store that the objects with ids in objectIDs are in use in a client NSManagedObjectContext
 - (void)managedObjectContextDidRegisterObjectsWithIDs:(NSArray<NSManagedObjectID *> *)objectIDs;

@@ -1,17 +1,13 @@
 /*
 	NSScrollView.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 #import <Foundation/NSDate.h>
 #import <AppKit/NSView.h>
 #import <AppKit/NSScroller.h>
 #import <AppKit/NSTextFinder.h>
-
-#ifndef NSEDGEINSETS_DEFINED
-#import <AppKit/NSLayoutConstraint.h>
-#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,47 +19,19 @@ typedef NS_ENUM(NSInteger, NSScrollElasticity) {
     NSScrollElasticityAllowed   = 2, // allow content to be scrolled past its bounds on this axis in an elastic fashion
 } NS_ENUM_AVAILABLE_MAC(10_7);
 
-typedef struct __SFlags {
-#ifdef __BIG_ENDIAN__
-    unsigned int vScrollerRequired:1;
-    unsigned int hScrollerRequired:1;
-    unsigned int vScrollerStatus:1;
-    unsigned int hScrollerStatus:1;
-    unsigned int noDynamicScrolling:1;
-    NSBorderType borderType:2;
-    unsigned int oldRulerInstalled:1;
-    unsigned int showRulers:1;
-    unsigned int hasHorizontalRuler:1;
-    unsigned int hasVerticalRuler:1;
-    unsigned int needsTile:1;
-    unsigned int doesNotDrawBackground:1;
-    unsigned int skipRemoveSuperviewCheck:1;
-    unsigned int focusRingNeedsRedisplay:1;
-    unsigned int hasCustomLineBorderColor:1;
-    unsigned int autohidesScrollers:1;
-    unsigned int autoforwardsScrollWheelEvents:1;
-    unsigned int findBarVisible:1;
-    unsigned int unused:1;
-    unsigned int vContentElasticity:2;
-    unsigned int hContentElasticity:2;
-    unsigned int predominantAxisScrolling:1;
-    unsigned int findBarPosition:2;
-    unsigned int registeredForWindowWillClose:1;
-    unsigned int unarchiving:1;
-    unsigned int RESERVED:3;
-#else
-    unsigned int RESERVED:3;
+typedef struct {
+    unsigned int RESERVED1:3;
     unsigned int unarchiving:1;
     unsigned int registeredForWindowWillClose:1;
     unsigned int findBarPosition:2;
     unsigned int predominantAxisScrolling:1;
     unsigned int hContentElasticity:2;
     unsigned int vContentElasticity:2;
-    unsigned int unused:1;
+    unsigned int RESERVED2:1;
     unsigned int findBarVisible:1;
     unsigned int autoforwardsScrollWheelEvents:1;
     unsigned int autohidesScrollers:1;
-    unsigned int hasCustomLineBorderColor:1;
+    unsigned int RESERVED3:1;
     unsigned int focusRingNeedsRedisplay:1;
     unsigned int skipRemoveSuperviewCheck:1;
     unsigned int doesNotDrawBackground:1;
@@ -78,24 +46,23 @@ typedef struct __SFlags {
     unsigned int vScrollerStatus:1;
     unsigned int hScrollerRequired:1;
     unsigned int vScrollerRequired:1;
-#endif
 } _SFlags;
 
 @interface NSScrollView : NSView <NSTextFinderBarContainer>
 {
     /*All instance variables are private*/
-    NSScroller *_vScroller;
-    NSScroller *_hScroller;
-    NSClipView *_contentView;
-    NSClipView *_headerClipView;
-    NSView *    _cornerView;
-    id          _ruler;
-    _SFlags     _sFlags;
-    id          _extraIvars;
+    NSScroller *_vScroller APPKIT_IVAR;
+    NSScroller *_hScroller APPKIT_IVAR;
+    NSClipView *_contentView APPKIT_IVAR;
+    NSClipView *_headerClipView APPKIT_IVAR;
+    NSView     *_cornerView APPKIT_IVAR;
+    id          _ruler APPKIT_IVAR;
+    _SFlags     _sFlags APPKIT_IVAR;
+    id          _extraIvars APPKIT_IVAR;
     
     // new rulers
-    NSRulerView *_horizontalRuler;
-    NSRulerView *_verticalRuler;
+    NSRulerView *_horizontalRuler APPKIT_IVAR;
+    NSRulerView *_verticalRuler APPKIT_IVAR;
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;

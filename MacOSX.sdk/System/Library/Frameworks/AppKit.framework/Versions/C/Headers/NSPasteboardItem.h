@@ -1,7 +1,7 @@
 /*
 	NSPasteboardItem.h
 	Application Kit
-	Copyright (c) 2008-2017, Apple Inc.
+	Copyright (c) 2008-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -37,11 +37,11 @@ The pasteboard item API is very similar to the NSPasteboard API for a single ite
 NS_CLASS_AVAILABLE(10_6, NA)
 @interface NSPasteboardItem : NSObject <NSPasteboardWriting, NSPasteboardReading> {
     @private
-    NSPasteboard    *_pasteboard;
-    NSUInteger	    _index;
-    NSInteger	    _gen;
-    id		    _auxObject;
-    void	    *_reserved __unused;
+    NSPasteboard    *_pasteboard APPKIT_IVAR;
+    NSUInteger	    _index APPKIT_IVAR;
+    NSInteger	    _gen APPKIT_IVAR;
+    id		    _auxObject APPKIT_IVAR;
+    void	    *_reserved __unused APPKIT_IVAR;
 }
 
 /* Returns an array of UTI strings of the data types supported by the receiver.

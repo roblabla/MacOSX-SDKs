@@ -1,5 +1,5 @@
 /*	NSFileManager.h
-	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -13,7 +13,6 @@
 #import <dispatch/dispatch.h>
 
 @class NSArray<ObjectType>, NSData, NSDate, NSDirectoryEnumerator<ObjectType>, NSError, NSNumber, NSFileProviderService, NSXPCConnection, NSLock;
-@class NSFileProviderMessageInterface;
 @protocol NSFileManagerDelegate;
 
 typedef NSString * NSFileAttributeKey NS_EXTENSIBLE_STRING_ENUM;
@@ -496,8 +495,5 @@ FOUNDATION_EXPORT NSFileAttributeKey const NSFileSystemFreeNodes;
 - (nullable NSNumber *)fileOwnerAccountID;
 - (nullable NSNumber *)fileGroupOwnerAccountID;
 @end
-
-
-typedef NSString *NSFileProviderMessageInterfaceName NS_EXTENSIBLE_STRING_ENUM;
 
 NS_ASSUME_NONNULL_END

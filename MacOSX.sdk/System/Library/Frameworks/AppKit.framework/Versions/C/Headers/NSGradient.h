@@ -1,7 +1,7 @@
 /*
 	NSGradient.h
 	Application Kit
-	Copyright (c) 2006-2017, Apple Inc.
+	Copyright (c) 2006-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSGeometry.h>
+#import <AppKit/AppKitDefines.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -47,15 +48,15 @@ An NSGradient has a color space.  When initialized, all colors provided are conv
 */
 
 NS_CLASS_AVAILABLE(10_5, NA)
-@interface NSGradient : NSObject <NSCopying, NSCoding> {
+@interface NSGradient : NSObject <NSCopying, NSSecureCoding> {
 @private
-    NSArray *_colorArray;
-    NSColorSpace *_colorSpace;
-    void *_functionRef;
-    void *_componentArray;
-    void *_reserved1 __unused;
-    void *_reserved2 __unused;
-    void *_reserved3 __unused;
+    NSArray *_colorArray APPKIT_IVAR;
+    NSColorSpace *_colorSpace APPKIT_IVAR;
+    void *_functionRef APPKIT_IVAR;
+    void *_componentArray APPKIT_IVAR;
+    void *_reserved1 __unused APPKIT_IVAR;
+    void *_reserved2 __unused APPKIT_IVAR;
+    void *_reserved3 __unused APPKIT_IVAR;
 }
 
 

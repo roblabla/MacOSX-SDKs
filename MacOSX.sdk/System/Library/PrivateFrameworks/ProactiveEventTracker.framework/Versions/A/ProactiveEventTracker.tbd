@@ -1,15 +1,15 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F3231F7F-EA5D-3190-ADDE-DDB6FF4413EC' ]
+uuids:           [ 'x86_64: E6F93489-CFCE-341F-A858-097810FF1BCD' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/ProactiveEventTracker.framework/Versions/A/ProactiveEventTracker
-objc-constraint: none
+current-version: 126.32
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ProactiveEventTrackerVersionNumber, _ProactiveEventTrackerVersionString ]
-    objc-classes:    [ _PETDeviceInfo, _PETDistributionEventTracker, _PETEventEnumMappedProperty, 
-                       _PETEventFreeValuedProperty, _PETEventNumericalProperty, _PETEventProperty, 
-                       _PETEventStringValidator, _PETEventStringValuedProperty, _PETEventTracker, 
-                       _PETGoalConversionEventTracker, _PETLoggingUtils, _PETScalarEventTracker, 
-                       _PETStringPairs, _PETTestLoggingOutlet ]
+    objc-classes:    [ PETDeviceInfo, PETDistributionEventTracker, PETEventEnumMappedProperty, 
+                       PETEventFreeValuedProperty, PETEventNumericalProperty, PETEventProperty, 
+                       PETEventStringValidator, PETEventStringValuedProperty, PETEventTracker, 
+                       PETGoalConversionEventTracker, PETLoggingUtils, PETMessageTracerLoggingOutlet, 
+                       PETScalarEventTracker, PETStringPairs, PETTestLoggingOutlet ]
 ...

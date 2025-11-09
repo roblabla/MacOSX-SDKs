@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
 	
-    Copyright 2006-2017 Apple Inc. All rights reserved.
+    Copyright 2006-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -13,6 +13,7 @@
 #include <TargetConditionals.h>
 #include <Availability.h>
 #include <AvailabilityMacros.h>
+
 
 // Pre-10.13, weak import
 #ifndef __AVAILABILITY_INTERNAL__MAC_10_13
@@ -118,17 +119,28 @@
 #include <stdint.h>						// int32_t, etc.
 #include <stddef.h>						// size_t
 
-#include <CoreFoundation/CFBase.h>		// OSStatus, Boolean, Float32, Float64
+#include <CoreFoundation/CFBase.h>		// OSStatus, Boolean, Float32, Float64, CF_NOESCAPE
+#if ! TARGET_OS_WINDOWS
+#include <CoreFoundation/CFAvailability.h>	// CF_EXTENSIBLE_STRING_ENUM
+#endif
 
 #ifndef API_AVAILABLE
 #define API_AVAILABLE(...)
 #endif
+
+#ifndef API_UNAVAILABLE
+#define API_UNAVAILABLE(...)
+#endif
+
 
 #ifdef __cplusplus
 extern "C" {
 #endif
     
 #pragma pack(push, 4)
+
+#define COREMEDIA_TRUE (1 && 1)
+#define COREMEDIA_FALSE (0 && 1)
 
 #if TARGET_OS_MAC
 	#define CM_EXPORT extern
@@ -151,39 +163,67 @@ typedef signed long	CMItemIndex;
 #endif
 
 #ifndef COREMEDIA_USE_ALIGNED_CMBASECLASS_VERSION
-#define COREMEDIA_USE_ALIGNED_CMBASECLASS_VERSION 1
+#define COREMEDIA_USE_ALIGNED_CMBASECLASS_VERSION COREMEDIA_TRUE
 #endif
 
 #if ! COREMEDIA_USE_ALIGNED_CMBASECLASS_VERSION
 	typedef uint32_t CMBaseClassVersion, CMStructVersion;
 #else
-#if TARGET_OS_IPHONE && TARGET_RT_64_BIT
-	typedef uint64_t CMBaseClassVersion, CMStructVersion;
-#else
+#if (TARGET_OS_OSX || 0 || TARGET_OS_WINDOWS) && TARGET_CPU_X86_64
 	typedef uint32_t CMBaseClassVersion, CMStructVersion;
+#else
+	typedef uintptr_t CMBaseClassVersion, CMStructVersion;
 #endif
 #endif
 
-#define COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS	(__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
+#if (__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
+#define COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS COREMEDIA_TRUE
+#else
+#define COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS COREMEDIA_FALSE
+#endif
 
 #if (TARGET_OS_IPHONE || TARGET_OS_MAC) && defined(__has_feature)
 #if __has_feature(nullability)
-	#define COREMEDIA_DECLARE_NULLABILITY 1
+	#define COREMEDIA_DECLARE_NULLABILITY COREMEDIA_TRUE
 #endif
 #if __has_feature(assume_nonnull)
-	#define COREMEDIA_DECLARE_NULLABILITY_BEGIN_END 1
+	#define COREMEDIA_DECLARE_NULLABILITY_BEGIN_END COREMEDIA_TRUE
 #endif
 #if __has_feature(objc_bridge_id)
-	#define COREMEDIA_DECLARE_BRIDGED_TYPES 1
+	#define COREMEDIA_DECLARE_BRIDGED_TYPES COREMEDIA_TRUE
 #endif
 #if __has_feature(attribute_cf_returns_retained)
-	#define COREMEDIA_DECLARE_RETURNS_RETAINED 1
+	#define COREMEDIA_DECLARE_RETURNS_RETAINED COREMEDIA_TRUE
 #endif
 #if __has_feature(attribute_cf_returns_on_parameters)
-	#define COREMEDIA_DECLARE_RETURNS_RETAINED_ON_PARAMETERS 1
-	#define COREMEDIA_DECLARE_RETURNS_NOT_RETAINED_ON_PARAMETERS 1
+	#define COREMEDIA_DECLARE_RETURNS_RETAINED_ON_PARAMETERS COREMEDIA_TRUE
+	#define COREMEDIA_DECLARE_RETURNS_NOT_RETAINED_ON_PARAMETERS COREMEDIA_TRUE
 #endif
 #endif // (TARGET_OS_IPHONE || TARGET_OS_MAC) && defined(__has_feature)
+
+#ifndef COREMEDIA_DECLARE_NULLABILITY
+#define COREMEDIA_DECLARE_NULLABILITY COREMEDIA_FALSE
+#endif
+
+#ifndef COREMEDIA_DECLARE_NULLABILITY_BEGIN_END
+#define COREMEDIA_DECLARE_NULLABILITY_BEGIN_END COREMEDIA_FALSE
+#endif
+
+#ifndef COREMEDIA_DECLARE_BRIDGED_TYPES
+#define COREMEDIA_DECLARE_BRIDGED_TYPES COREMEDIA_FALSE
+#endif
+
+#ifndef COREMEDIA_DECLARE_RETURNS_RETAINED
+#define COREMEDIA_DECLARE_RETURNS_RETAINED COREMEDIA_FALSE
+#endif
+
+#ifndef COREMEDIA_DECLARE_RETURNS_RETAINED_ON_PARAMETERS
+#define COREMEDIA_DECLARE_RETURNS_RETAINED_ON_PARAMETERS COREMEDIA_FALSE
+#endif
+
+#ifndef COREMEDIA_DECLARE_RETURNS_NOT_RETAINED_ON_PARAMETERS
+#define COREMEDIA_DECLARE_RETURNS_NOT_RETAINED_ON_PARAMETERS COREMEDIA_FALSE
+#endif
 
 #if COREMEDIA_DECLARE_NULLABILITY
 #define CM_NULLABLE __nullable

@@ -27,6 +27,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <WebKit/WebKitAvailability.h>
 
 #import <AppKit/AppKit.h>
 
@@ -39,6 +40,7 @@
 /*!
     @class WebFrameView
 */
+WEBKIT_CLASS_DEPRECATED_MAC(10_3, 10_14)
 @interface WebFrameView : NSView
 {
 @package

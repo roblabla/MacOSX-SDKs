@@ -19,13 +19,23 @@ typedef NS_OPTIONS(NSUInteger, MTLResourceUsage)
 	MTLResourceUsageRead   = 1 << 0,
 	MTLResourceUsageWrite  = 1 << 1,
 	MTLResourceUsageSample = 1 << 2
-} NS_ENUM_AVAILABLE(10_13, 11_0);
+} API_AVAILABLE(macos(10.13), ios(11.0));
+
+/*!
+ * @brief Describes the types of resources that the a barrier operates on
+ */
+typedef NS_OPTIONS(NSUInteger, MTLBarrierScope)
+{
+    MTLBarrierScopeBuffers = 1 << 0,
+    MTLBarrierScopeTextures = 1 << 1,
+    MTLBarrierScopeRenderTargets API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios) = 1 << 2,
+} API_AVAILABLE(macos(10.14), ios(12.0));
 
 /*!
  @protocol MTLCommandEncoder
  @abstract MTLCommandEncoder is the common interface for objects that write commands into MTLCommandBuffers.
  */
-NS_AVAILABLE(10_11, 8_0)
+API_AVAILABLE(macos(10.11), ios(8.0))
 @protocol MTLCommandEncoder <NSObject>
 
 /*!

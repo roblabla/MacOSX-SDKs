@@ -7,14 +7,14 @@
   Fujitsu, Genoa Technology, Hewlett-Packard, Kofax Imaging Products, and
   Ricoh Corporation.  All rights reserved.
  
-  Copyright © 1998 TWAIN Working Group: Adobe Systems Incorporated, 
+  Copyright ï¿½ 1998 TWAIN Working Group: Adobe Systems Incorporated, 
   Canon Information Systems, Eastman Kodak Company, 
   Fujitsu Computer Products of America, Genoa Technology, 
   Hewlett-Packard Company, Intel Corporation, Kofax Image Products, 
   JFL Peripheral Solutions Inc., Ricoh Corporation, and Xerox Corporation.  
   All rights reserved.
 
-  Copyright © 2000 TWAIN Working Group: Adobe Systems Incorporated, 
+  Copyright ï¿½ 2000 TWAIN Working Group: Adobe Systems Incorporated, 
   Canon Information Systems, Digimarc Corporation, Eastman Kodak Company, 
   Fujitsu Computer Products of America, Hewlett-Packard Company, 
   JFL Peripheral Solutions Inc., Ricoh Corporation, and Xerox Corporation.  
@@ -127,7 +127,7 @@
     #define FAR
     #endif
     
-    typedef char          *TW_HANDLE;
+    typedef char         **TW_HANDLE;
     typedef char          *TW_MEMREF;
 
 #pragma options align = power
@@ -1954,7 +1954,8 @@ extern "C" {
                                                TW_UINT16    MSG, 
                                                TW_MEMREF    pData);
 #elif defined _MAC_
-TW_UINT16 DS_Entry ( pTW_IDENTITY pOrigin, 
+__attribute__((visibility("hidden")))
+    TW_UINT16 DS_Entry ( pTW_IDENTITY pOrigin,
                      TW_UINT32    DG, 
                      TW_UINT16    DAT, 
                      TW_UINT16    MSG, 

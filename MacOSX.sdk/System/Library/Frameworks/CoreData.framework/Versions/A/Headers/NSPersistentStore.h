@@ -1,7 +1,7 @@
 /*
     NSPersistentStore.h
     Core Data
-    Copyright (c) 2004-2017, Apple Inc.
+    Copyright (c) 2004-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSPersistentStore;
 @class NSPersistentStoreRequest;
 @class NSPersistentStoreCoordinator;
+
 @class NSCoreDataCoreSpotlightDelegate;
 
 API_AVAILABLE(macosx(10.5),ios(3.0))
@@ -40,9 +41,9 @@ API_AVAILABLE(macosx(10.5),ios(3.0))
     } _flags;
 	void *_temporaryIDClass;
 	id _coreSpotlightDelegate;
-	int32_t _activeRequests;
+    int32_t _reserved32_1;
 #if __LP64__
-    int32_t _reserved32;
+    int32_t _reserved32_2;
 #endif
 #endif
 }

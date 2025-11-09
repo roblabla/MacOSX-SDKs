@@ -36,4 +36,17 @@
 #define CORE_IMAGE_CLASS_EXPORT __attribute__((visibility("default")))
 
 
+#ifdef CI_SILENCE_GL_DEPRECATION
+  #define CI_GL_DEPRECATED_IOS(from, to)  NS_AVAILABLE_IOS(from)
+  #define CI_GL_DEPRECATED_MAC(from, to)  NS_AVAILABLE_MAC(from)
+  #define CI_GL_DEPRECATED(fromM,toM, fromI,toI)  NS_AVAILABLE(fromM,fromI)
+  #define CIKL_DEPRECATED(fromM,toM, fromI,toI)  NS_AVAILABLE(fromM,fromI)
+#else
+  #define CI_GL_DEPRECATED_IOS(from, to)  NS_DEPRECATED_IOS(from, to, "Core Image OpenGLES API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings)")
+  #define CI_GL_DEPRECATED_MAC(from, to)  NS_DEPRECATED_MAC(from, to, "Core Image OpenGL API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings)")
+  #define CI_GL_DEPRECATED(fromM,toM, fromI,toI)  NS_DEPRECATED(fromM,toM, fromI,toI, "Core Image OpenGL API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings)")
+  #define CIKL_DEPRECATED(fromM,toM, fromI,toI)  NS_DEPRECATED(fromM,toM, fromI,toI, "Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings)")
+#endif
+
+
 #endif /* COREIMAGEDEFINES_H */

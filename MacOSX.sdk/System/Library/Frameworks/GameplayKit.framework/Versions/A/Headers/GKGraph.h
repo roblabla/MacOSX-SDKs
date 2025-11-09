@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Representation of a directed graph of GKGraphNodes
  */
-GK_BASE_AVAILABILITY @interface GKGraph : NSObject <NSCopying, NSCoding>
+GK_BASE_AVAILABILITY @interface GKGraph : NSObject <NSCopying, NSSecureCoding>
 
 /**
  * The list of nodes in this graph

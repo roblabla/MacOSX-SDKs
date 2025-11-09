@@ -19,5 +19,4 @@
 #else
 #import <AVKit/AVCaptureView.h>
 #import <AVKit/AVPlayerView.h>
-#import <AVKit/AVRoutePickerView.h>
 #endif // TARGET_OS_IPHONE

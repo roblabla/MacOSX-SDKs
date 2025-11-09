@@ -1,4 +1,4 @@
-.TH "MPSRNNMatrixInferenceLayer" 3 "Sun Jul 2 2017" "Version MetalPerformanceShaders-84.1" "MetalPerformanceShaders.framework" \" -*- nroff -*-
+.TH "MPSRNNMatrixInferenceLayer" 3 "Mon Jul 9 2018" "Version MetalPerformanceShaders-119.3" "MetalPerformanceShaders.framework" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -21,6 +21,9 @@ Inherits \fBMPSKernel\fP\&.
 .br
 .ti -1c
 .RI "(nonnull instancetype) \- \fBinitWithDevice:\fP"
+.br
+.ti -1c
+.RI "(void) \- \fBencodeSequenceToCommandBuffer:sourceMatrices:sourceOffsets:destinationMatrices:destinationOffsets:recurrentInputState:recurrentOutputStates:\fP"
 .br
 .ti -1c
 .RI "(void) \- \fBencodeSequenceToCommandBuffer:sourceMatrices:destinationMatrices:recurrentInputState:recurrentOutputStates:\fP"
@@ -60,7 +63,25 @@ Inherits \fBMPSKernel\fP\&.
 .SS "Additional Inherited Members"
 .SH "Detailed Description"
 .PP 
-This depends on Metal\&.framework  The \fBMPSRNNMatrixInferenceLayer\fP specifies a recurrent neural network layer for inference on MPSMatrices\&. Currently two types of recurrent layers are supported: ones that operate with convolutions on images: \fBMPSRNNImageInferenceLayer\fP and one that operates on matrices: \fBMPSRNNMatrixInferenceLayer\fP\&. The former can be often used to implement the latter by using 1x1-matrices, but due to image size restrictions and performance, it is advisable to use \fBMPSRNNMatrixInferenceLayer\fP for linear recurrent layers\&. A \fBMPSRNNMatrixInferenceLayer\fP is initialized using a \fBMPSRNNLayerDescriptor\fP, which further specifies the recurrent network layer, or an array of \fBMPSRNNLayerDescriptors\fP, which specifies a stack of recurrent layers, that can operate in parallel a subset of the inputs in a sequence of inputs and recurrent outputs\&. Note that currently stacks with bidirectionally traversing encode functions do not support starting from a previous set of recurrent states, but this can be achieved quite easily by defining two separate unidirectional stacks of layers, and running the same input sequence on them separately (one forwards and one backwards) and ultimately combining the two result sequences as desired with auxiliary functions\&. The input and output vectors in encode calls are stored as rows of the input and output matrices and currently \fBMPSRNNMatrixInferenceLayer\fP supports only matrices with number of rows equal to one\&. The mathematical operation then is strictly speaking y^T = W x^T <=> y = x W^T in the linear transformations of \fBMPSRNNSingleGateDescriptor\fP, \fBMPSLSTMDescriptor\fP and \fBMPSGRUDescriptor\fP\&. 
+This depends on Metal\&.framework  The \fBMPSRNNMatrixInferenceLayer\fP specifies a recurrent neural network layer for inference on MPSMatrices\&. Currently two types of recurrent layers are supported: ones that operate with convolutions on images: \fBMPSRNNImageInferenceLayer\fP and one that operates on matrices: \fBMPSRNNMatrixInferenceLayer\fP\&. The former can be often used to implement the latter by using 1x1-matrices, but due to image size restrictions and performance, it is advisable to use \fBMPSRNNMatrixInferenceLayer\fP for linear recurrent layers\&. \fBA\fP \fBMPSRNNMatrixInferenceLayer\fP is initialized using a \fBMPSRNNLayerDescriptor\fP, which further specifies the recurrent network layer, or an array of \fBMPSRNNLayerDescriptors\fP, which specifies a stack of recurrent layers, that can operate in parallel a subset of the inputs in a sequence of inputs and recurrent outputs\&. Note that currently stacks with bidirectionally traversing encode functions do not support starting from a previous set of recurrent states, but this can be achieved quite easily by defining two separate unidirectional stacks of layers, and running the same input sequence on them separately (one forwards and one backwards) and ultimately combining the two result sequences as desired with auxiliary functions\&. The input and output vectors in encode calls are stored as rows of the input and output matrices and \fBMPSRNNMatrixInferenceLayer\fP supports matrices with decreasing number of rows: The row-indices identify the different sequences that may be of different lengths - for example if we have three sequences: ( x1, x2, x3 ), ( y1, y2, y3, y4 ) and ( z1, z2 ) of vectors xi, yi and zi, then these can be inserted together as a batch to the sequence encoding kernel by using the matrices: 
+.PP
+.nf
+     ( y1 )        ( y2 )        ( y3 )        ( y4 )
+m1 = ( x1 ),  m2 = ( x2 ),  m3 = ( x3 ),  m4 =
+     ( z1 )        ( z2 )
+
+.fi
+.PP
+ If a recurrent output state is requested then it will contain the state corresponding to last inputs to each sequence and if all the intermediate states are requested (see storeAllIntermediateStates), then the shorter sequences will be propagated by copying the state of the previous output if the input vector is not present in the sequence - in the example above the output states would be: 
+.PP
+.nf
+     ( s_y1 )        ( s_y2 )        ( s_y3 )        ( s_y4 )
+s1 = ( s_x1 ),  s2 = ( s_x2 ),  s3 = ( s_x3 ),  s4 = ( s_x3 )
+     ( s_z1 )        ( s_z2 )        ( s_z2 )        ( s_z2 )
+
+.fi
+.PP
+ The mathematical operation described in the linear transformations of \fBMPSRNNSingleGateDescriptor\fP \fBMPSLSTMDescriptor\fP and \fBMPSGRUDescriptor\fP are y^T = W x^T <=> y = x W^T, where x is the matrix containing the input vectors as rows, y is the matrix containing the output vectors as rows and W is the weight matrix\&. 
 .SH "Method Documentation"
 .PP 
 .SS "\- (nonnull instancetype) copyWithZone: (nullable NSZone *) zone(nullable id< MTLDevice >) device"
@@ -91,7 +112,7 @@ Encode an \fBMPSRNNMatrixInferenceLayer\fP kernel stack for an input matrix sequ
 .PP
 \fBParameters:\fP
 .RS 4
-\fIcommandBuffer\fP A valid MTLCommandBuffer to receive the encoded filter 
+\fIcommandBuffer\fP \fBA\fP valid MTLCommandBuffer to receive the encoded filter 
 .br
 \fIsourceSequence\fP An array of valid \fBMPSMatrix\fP objects containing the source matrix sequence (x0, x1, \&.\&.\&. x_n-1)\&. 
 .br
@@ -102,6 +123,8 @@ Encode an \fBMPSRNNMatrixInferenceLayer\fP kernel stack for an input matrix sequ
 .PP
 
 .SS "\- (void) encodeSequenceToCommandBuffer: (nonnull id< MTLCommandBuffer >) commandBuffer(NSArray< \fBMPSMatrix\fP * > *__nonnull) sourceMatrices(NSArray< \fBMPSMatrix\fP * > *__nonnull) destinationMatrices(\fBMPSRNNRecurrentMatrixState\fP *__nullable) recurrentInputState(NSMutableArray< \fBMPSRNNRecurrentMatrixState\fP * > *__nullable) recurrentOutputStates"
+
+.SS "\- (void) encodeSequenceToCommandBuffer: (nonnull id< MTLCommandBuffer >) commandBuffer(NSArray< \fBMPSMatrix\fP * > *__nonnull) sourceMatrices(NSUInteger *__nullable) sourceOffsets(NSArray< \fBMPSMatrix\fP * > *__nonnull) destinationMatrices(NSUInteger *__nullable) destinationOffsets(\fBMPSRNNRecurrentMatrixState\fP *__nullable) recurrentInputState(NSMutableArray< \fBMPSRNNRecurrentMatrixState\fP * > *__nullable) recurrentOutputStates"
 Encode an \fBMPSRNNMatrixInferenceLayer\fP kernel (stack) for a sequence of inputs into a command buffer\&. Note that when encoding using this function the 
 .PP
 \fBSee also:\fP
@@ -111,11 +134,15 @@ layerSequenceDirection is ignored and the layer stack operates as if all layers 
 .PP
 \fBParameters:\fP
 .RS 4
-\fIcommandBuffer\fP A valid MTLCommandBuffer to receive the encoded filter 
+\fIcommandBuffer\fP \fBA\fP valid MTLCommandBuffer to receive the encoded filter 
 .br
 \fIsourceMatrices\fP An array of valid \fBMPSMatrix\fP objects containing the sequence of source matrices\&. 
 .br
+\fIsourceOffsets\fP An array of byte-offsets into the sourceMatrices, if nil zeros are assumed and if not nil must contain offset for every matrix in sourceMatrices\&. 
+.br
 \fIdestinationMatrices\fP An array valid MPSMatrices to be overwritten by result matrix sequence\&. destinationMatrices may not alias sourceMatrices\&. 
+.br
+\fIdestinationOffsets\fP An array of byte-offsets into the destinationMatrices, if nil zeros are assumed and if not nil must contain offset for every matrix in destinationMatrices\&. 
 .br
 \fIrecurrentInputState\fP An optional state containing the output matrices and memory cells (for LSTMs) of the layer obtained from the previous input matrices in a sequence of inputs\&. Has to be the output of a previous call to this function or nil (assumed zero)\&. Note: can be one of the states returned in \fBintermediateRecurrentStates\fP\&. 
 .br
@@ -174,7 +201,7 @@ MPSRNNRecurrentMatrixState* recurrent0 = nil;
 .PP
 \fBReturns:\fP
 .RS 4
-A new \fBMPSRNNMatrixInferenceLayer\fP object, or nil if failure\&. 
+\fBA\fP new \fBMPSRNNMatrixInferenceLayer\fP object, or nil if failure\&. 
 .RE
 .PP
 
@@ -208,7 +235,7 @@ Initializes a linear (fully connected) RNN kernel
 .PP
 \fBReturns:\fP
 .RS 4
-A valid \fBMPSRNNMatrixInferenceLayer\fP object or nil, if failure\&. 
+\fBA\fP valid \fBMPSRNNMatrixInferenceLayer\fP object or nil, if failure\&. 
 .RE
 .PP
 
@@ -224,7 +251,7 @@ Initializes a kernel that implements a stack of linear (fully connected) RNN lay
 .PP
 \fBReturns:\fP
 .RS 4
-A valid \fBMPSRNNMatrixInferenceLayer\fP object or nil, if failure\&. 
+\fBA\fP valid \fBMPSRNNMatrixInferenceLayer\fP object or nil, if failure\&. 
 .RE
 .PP
 

@@ -1,13 +1,13 @@
 /* CoreAnimation - CAEmitterCell.h
 
-   Copyright (c) 2007-2017, Apple Inc.
+   Copyright (c) 2007-2018, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-CA_CLASS_AVAILABLE (10.6, 5.0, 9.0, 2.0)
+API_AVAILABLE(macos(10.6), ios(5.0), watchos(2.0), tvos(9.0))
 @interface CAEmitterCell : NSObject <NSSecureCoding, CAMediaTiming>
 {
 @private

@@ -1,7 +1,7 @@
 /*
 	NSCachedImageRep.h
 	Application Kit
-	Copyright (c) 1994-2017, Apple Inc.
+	Copyright (c) 1994-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -14,9 +14,9 @@
 NS_CLASS_DEPRECATED_MAC(10_0, 10_6)
 @interface NSCachedImageRep : NSImageRep {
     /*All instance variables are private*/
-    NSPoint _origin;
-    NSWindow *_window;
-    void *_cache;
+    NSPoint _origin APPKIT_IVAR;
+    NSWindow *_window APPKIT_IVAR;
+    void *_cache APPKIT_IVAR;
 }
 
 /* References the specified rect within the window; the window is retained */

@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class MPRemoteCommand;
 @class MPSkipIntervalCommand;
 
-MP_API(ios(7.1), tvos(7.1), macos(10.12.2))
+MP_API(ios(7.1), tvos(7.1), macos(10.12.2), watchos(5.0))
 @interface MPRemoteCommandCenter : NSObject
 
 // Playback Commands

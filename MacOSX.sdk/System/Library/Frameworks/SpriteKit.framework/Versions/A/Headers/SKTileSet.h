@@ -101,7 +101,7 @@ typedef NS_OPTIONS(NSUInteger, SKTileAdjacencyMask) {
 /**
  A tile set contains all of the tile definitions that are available for use in a tile map. In addition, it also contains tile groups, which define collections of related tile definitions and the rules that govern their placement.
  */
-SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKTileSet : NSObject <NSCopying, NSCoding>
+SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKTileSet : NSObject <NSCopying, NSSecureCoding>
 
 /**
  Create a tile set with the specified tile groups.
@@ -168,7 +168,7 @@ SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKTileSet : NSObject <NSCopying, 
 /**
  A tile group encapsulates a collection of related tile definitions that are designed to be pieced together within a tile map. How those tiles are pieced together is governed by the set of rules. When a tile group is placed in a tile map, the map evaluates the rules to determine which tiles should be placed to achieve the desired outcome.
  */
-SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKTileGroup : NSObject <NSCopying, NSCoding>
+SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKTileGroup : NSObject <NSCopying, NSSecureCoding>
 
 /**
  Create a simple tile group for a single tile definition. This creates and initializes the SKTileGroupRule necessary to place the provided tile definition in a tile map.
@@ -214,7 +214,7 @@ SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKTileGroup : NSObject <NSCopying
 /**
  A tile group rule defines how a certain type of tile should be placed on the map. These tiles are like puzzle pieces, and the rules define how they should be pieced together. This is accomplished by defining which neighboring spaces need to be filled with tiles that belong to the same group, and which tiles are required to be empty. The required pattern of neighboring tiles is defined using the SKTileAdjacencyMask.
  */
-SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKTileGroupRule : NSObject <NSCopying, NSCoding>
+SK_EXPORT NS_AVAILABLE(10_12, 10_0) @interface SKTileGroupRule : NSObject <NSCopying, NSSecureCoding>
 
 /**
  Create a tile group rule with the specified adjacency and tile definitions.

@@ -1,7 +1,7 @@
 /*
 	NSDockTile.h
 	Application Kit
-	Copyright (c) 2006-2017, Apple Inc.
+	Copyright (c) 2006-2018, Apple Inc.
 	All rights reserved.
 */
 
@@ -19,19 +19,19 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSDockTile : NSObject {
     @private
-    __weak id _owner;
-    void *_dockContextRef;
-    NSView *_contentView;
-    NSView *_frameView;
-    NSView *_backstopView;
-    NSString *_badgeLabel;
+    __weak id _owner APPKIT_IVAR;
+    void *_dockContextRef APPKIT_IVAR;
+    NSView *_contentView APPKIT_IVAR;
+    NSView *_frameView APPKIT_IVAR;
+    NSView *_backstopView APPKIT_IVAR;
+    NSString *_badgeLabel APPKIT_IVAR;
     struct {
         unsigned int showsAppBadge:1;
         unsigned int reserved:31;
-    } _dFlags;
-    NSSize _dockTileSize;
-    id _miniViewController;
-    id reserved[4] __unused;
+    } _dFlags APPKIT_IVAR;
+    NSSize _dockTileSize APPKIT_IVAR;
+    id _miniViewController APPKIT_IVAR;
+    id reserved[4] __unused APPKIT_IVAR;
 }
 
 /* get the size of the dock tile, in screen coordinates

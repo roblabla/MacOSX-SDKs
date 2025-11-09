@@ -1,6 +1,6 @@
 /*
         NSTextAttachment.h
-        Copyright (c) 1994-2017, Apple Inc.
+        Copyright (c) 1994-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -38,14 +38,14 @@ enum {
 NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextAttachment : NSObject <NSTextAttachmentContainer, NSCoding>
 {
     /*All instance variables are private*/
-    NSFileWrapper *_fileWrapper;
-    id <NSTextAttachmentCell>_cell;
+    NSFileWrapper *_fileWrapper APPKIT_IVAR;
+    id <NSTextAttachmentCell>_cell APPKIT_IVAR;
     struct {
         unsigned int cellWasExplicitlySet:1;
         unsigned int ignoresOrientation:1;
         unsigned int allowsEditingContents:1;
         unsigned int :29;
-    } _flags;
+    } _flags APPKIT_IVAR;
 }
 
 /**************************** Initialization ****************************/
@@ -116,7 +116,7 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextAttachment : NSObject <NSTextAtta
 // Simple class to provide basic attachment cell functionality. By default this class causes NSTextView to send out delegate messages when the attachment is clicked on or dragged.
 @interface NSTextAttachmentCell : NSCell <NSTextAttachmentCell> {
     /*All instance variables are private*/
-    NSTextAttachment *_attachment;
+    NSTextAttachment *_attachment APPKIT_IVAR;
 }
 @end
 

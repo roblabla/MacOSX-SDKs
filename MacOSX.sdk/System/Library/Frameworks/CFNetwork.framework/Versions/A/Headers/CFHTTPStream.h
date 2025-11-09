@@ -312,10 +312,8 @@ CFReadStreamCreateForStreamedHTTPRequest(CFAllocatorRef __nullable alloc, CFHTTP
  *	  A boolean indicating whether to redirect or not.
  *  
  */
-CFN_EXPORT void 
+CFN_EXPORT void
 CFHTTPReadStreamSetRedirectsAutomatically(CFReadStreamRef httpStream, Boolean shouldAutoRedirect) CF_DEPRECATED(10_1, 10_3, NA, NA);
-
-
 
 #if PRAGMA_ENUM_ALWAYSINT
 	#pragma enumsalwaysint reset

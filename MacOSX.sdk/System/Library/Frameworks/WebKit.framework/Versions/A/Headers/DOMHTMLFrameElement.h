@@ -29,7 +29,7 @@
 @class DOMDocument;
 @class NSString;
 
-NS_CLASS_AVAILABLE_MAC(10_4)
+WEBKIT_CLASS_DEPRECATED_MAC(10_4, 10_14)
 @interface DOMHTMLFrameElement : DOMHTMLElement
 @property (copy) NSString *frameBorder;
 @property (copy) NSString *longDesc;
@@ -40,8 +40,8 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (copy) NSString *scrolling;
 @property (copy) NSString *src;
 @property (readonly, strong) DOMDocument *contentDocument;
-@property (readonly, strong) DOMAbstractView *contentWindow NS_AVAILABLE_MAC(10_5);
-@property (copy) NSString *location NS_AVAILABLE_MAC(10_5);
-@property (readonly) int width NS_AVAILABLE_MAC(10_5);
-@property (readonly) int height NS_AVAILABLE_MAC(10_5);
+@property (readonly, strong) DOMAbstractView *contentWindow WEBKIT_AVAILABLE_MAC(10_5);
+@property (copy) NSString *location WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int width WEBKIT_AVAILABLE_MAC(10_5);
+@property (readonly) int height WEBKIT_AVAILABLE_MAC(10_5);
 @end

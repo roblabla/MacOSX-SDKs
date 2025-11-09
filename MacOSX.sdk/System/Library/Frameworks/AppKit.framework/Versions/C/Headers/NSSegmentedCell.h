@@ -1,7 +1,7 @@
 /*
     NSSegmentedCell.h
     Application Kit
-    Copyright (c) 2003-2017, Apple Inc.
+    Copyright (c) 2003-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -15,10 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSSegmentedCell : NSActionCell {
   @private
-    NSMutableArray* _segmentItems;
-    NSInteger           _selectedSegment;
-    NSInteger           _keySegment;
-    NSRect          _lastBounds;
+    NSMutableArray* _segmentItems APPKIT_IVAR;
+    NSInteger           _selectedSegment APPKIT_IVAR;
+    NSInteger           _keySegment APPKIT_IVAR;
+    NSRect          _lastBounds APPKIT_IVAR;
     struct {
         unsigned int trackingMode:3;
         unsigned int trimmedLabels:1;
@@ -34,11 +34,11 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int segmentedSeparated:1;
         unsigned int animateNextLayout:1;
         unsigned int reserved:9;
-    } _seFlags;
-    id           _segmentTrackingInfo;
-    id           _menuUniquer;
-    NSInteger    _reserved3;
-    NSInteger    _reserved4;
+    } _seFlags APPKIT_IVAR;
+    id           _segmentTrackingInfo APPKIT_IVAR;
+    id           _menuUniquer APPKIT_IVAR;
+    NSInteger    _reserved3 APPKIT_IVAR;
+    NSInteger    _reserved4 APPKIT_IVAR;
 }
 
 /* Number of segments

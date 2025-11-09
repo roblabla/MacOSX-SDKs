@@ -3,7 +3,7 @@
 
     Contains:   API for communicating with CoreMediaIO hardware
 
-    Copyright:  © 2005-2012 by Apple Inc., all rights reserved.
+    Copyright:  © 2005-2018 by Apple Inc., all rights reserved.
 */
 
 #if !defined(__CMIOHardwareObject_h__)
@@ -89,7 +89,7 @@ struct CMIOObjectPropertyAddress
     CMIOObjectPropertySelector  mSelector;
     CMIOObjectPropertyScope     mScope;
     CMIOObjectPropertyElement   mElement;
-};
+} API_AVAILABLE(macos(10.7));
 typedef struct CMIOObjectPropertyAddress CMIOObjectPropertyAddress;
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -260,7 +260,7 @@ enum
                         The CMIOObject to show.
 */
 extern void
-CMIOObjectShow(CMIOObjectID objectID)                                                                                           AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+CMIOObjectShow(CMIOObjectID objectID) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIOObjectHasProperty
@@ -273,7 +273,7 @@ CMIOObjectShow(CMIOObjectID objectID)                                           
 */
 extern Boolean
 CMIOObjectHasProperty(  CMIOObjectID                        objectID,
-                        const CMIOObjectPropertyAddress*    address)                                                            AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                        const CMIOObjectPropertyAddress*    address) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIOObjectIsPropertySettable
@@ -289,7 +289,7 @@ CMIOObjectHasProperty(  CMIOObjectID                        objectID,
 extern OSStatus
 CMIOObjectIsPropertySettable(   CMIOObjectID                        objectID,
                                 const CMIOObjectPropertyAddress*    address,
-                                Boolean*                            isSettable)                                                 AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                                Boolean*                            isSettable) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIOObjectGetPropertyDataSize
@@ -312,7 +312,7 @@ CMIOObjectGetPropertyDataSize(  CMIOObjectID                        objectID,
                                 const CMIOObjectPropertyAddress*    address,
                                 UInt32                              qualifierDataSize,
                                 const void*                         qualifierData,
-                                UInt32*                             dataSize)                                                   AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                                UInt32*                             dataSize) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIOObjectGetPropertyData
@@ -341,7 +341,7 @@ CMIOObjectGetPropertyData(  CMIOObjectID                        objectID,
                             const void*                         qualifierData,
                             UInt32                              dataSize,
                             UInt32*                             dataUsed,
-                            void*                               data)                                                           AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                            void*                               data) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIOObjectSetPropertyData
@@ -368,7 +368,7 @@ CMIOObjectSetPropertyData(  CMIOObjectID                        objectID,
                             UInt32                              qualifierDataSize,
                             const void*                         qualifierData,
                             UInt32                              dataSize,
-                            const void*                         data)                                                           AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                            const void*                         data) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIOObjectAddPropertyListener
@@ -387,7 +387,7 @@ extern OSStatus
 CMIOObjectAddPropertyListener(  CMIOObjectID                        objectID,
                                 const CMIOObjectPropertyAddress*    address,
                                 CMIOObjectPropertyListenerProc      listener,
-                                void*                               clientData)                                                 AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                                void*                               clientData) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIOObjectRemovePropertyListener
@@ -406,7 +406,7 @@ extern OSStatus
 CMIOObjectRemovePropertyListener(   CMIOObjectID                        objectID,
                                     const CMIOObjectPropertyAddress*    address,
                                     CMIOObjectPropertyListenerProc      listener,
-                                    void*                               clientData)                                             AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+                                    void*                               clientData) API_AVAILABLE(macos(10.7));
 
 /*!
     @function       CMIOObjectAddPropertyListenerBlock
@@ -428,7 +428,7 @@ extern OSStatus
 CMIOObjectAddPropertyListenerBlock( CMIOObjectID                        objectID,
                                     const CMIOObjectPropertyAddress*    address,
                                     dispatch_queue_t                    dispatchQueue,
-                                    CMIOObjectPropertyListenerBlock     listener)                                           AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+                                    CMIOObjectPropertyListenerBlock     listener) API_AVAILABLE(macos(10.8));
 
 /*!
     @function       CMIOObjectRemovePropertyListenerBlock
@@ -449,7 +449,7 @@ extern OSStatus
 CMIOObjectRemovePropertyListenerBlock(  CMIOObjectID                        objectID,
                                         const CMIOObjectPropertyAddress*    address,
                                         dispatch_queue_t                    dispatchQueue,
-                                        CMIOObjectPropertyListenerBlock     listener)                                       AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+                                        CMIOObjectPropertyListenerBlock     listener) API_AVAILABLE(macos(10.8));
 
 
 

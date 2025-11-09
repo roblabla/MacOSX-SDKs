@@ -1,7 +1,7 @@
 /*
  NSTouchBarItem.h
  Application Kit
- Copyright (c) 2015-2017, Apple Inc.
+ Copyright (c) 2015-2018, Apple Inc.
  All rights reserved.
 */
 
@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NSString * NSTouchBarItemIdentifier NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSTouchBarItemIdentifier NS_TYPED_EXTENSIBLE_ENUM;
 
 @class NSTouchBar, NSViewController, NSView, NSImage, NSGestureRecognizer;
 @class NSString;
@@ -26,12 +26,12 @@ static const NSTouchBarItemPriority NSTouchBarItemPriorityLow NS_AVAILABLE_MAC(1
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSTouchBarItem : NSObject <NSCoding> {
 @private
-    NSTouchBarItemIdentifier _identifier;
-    NSTouchBarItemPriority _visibilityPriority;
-    NSInteger _visibilityCount;
+    NSTouchBarItemIdentifier _identifier APPKIT_IVAR;
+    NSTouchBarItemPriority _visibilityPriority APPKIT_IVAR;
+    NSInteger _visibilityCount APPKIT_IVAR;
 
 #if !__OBJC2__
-    void *_touchBarItemReserved[5] __unused;
+    void *_touchBarItemReserved[5] __unused APPKIT_IVAR;
 #endif /* !__OBJC2__ */
 }
 

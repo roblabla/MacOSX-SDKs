@@ -11,6 +11,7 @@
 */
 
 #import <AppKit/AppKit.h>
+#import <ImageKit/ImageKitBase.h>
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
@@ -23,7 +24,7 @@
 @interface IKPictureTaker : NSPanel
 {
 @private
-    void *__strong _ikReserved;
+    void * _ikReserved;
 }
 
 /*!

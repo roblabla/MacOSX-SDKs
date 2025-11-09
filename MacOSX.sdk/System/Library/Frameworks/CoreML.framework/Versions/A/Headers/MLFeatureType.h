@@ -11,9 +11,6 @@
  * Supported data type enumeration
  */
 typedef NS_ENUM(NSInteger, MLFeatureType) {
-    // MUST be kept in sync with DataTypes.proto in libmlmodelspec!
-    // TODO -- make this handle parameterized types and remove constraints
-    // in the Objective-C layer.
 
     MLFeatureTypeInvalid = 0,
 
@@ -34,6 +31,9 @@ typedef NS_ENUM(NSInteger, MLFeatureType) {
 
     /// Numerically weighted hashable objects (e.g. word counts)
     MLFeatureTypeDictionary = 6,
+
+    /// MLSequence. Ordered collection of feature values with the same type
+    MLFeatureTypeSequence API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0)) = 7,
 
 } API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 

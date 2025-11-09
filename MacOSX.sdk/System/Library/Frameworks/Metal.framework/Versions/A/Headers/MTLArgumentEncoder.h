@@ -14,12 +14,15 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MTLTexture;
 @protocol MTLSamplerState;
 @protocol MTLRenderPipelineState;
+@protocol MTLComputePipelineState;
+@protocol MTLIndirectCommandBuffer;
+
 
 /*!
  * @protocol MTLArgumentEncoder
  * @discussion MTLArgumentEncoder encodes buffer, texture, sampler, and constant data into a buffer.
  */
-NS_AVAILABLE(10_13, 11_0)
+API_AVAILABLE(macos(10.13), ios(11.0))
 @protocol MTLArgumentEncoder <NSObject>
 
 /*!
@@ -50,7 +53,7 @@ NS_AVAILABLE(10_13, 11_0)
  * @method setArgumentBuffer:offset:
  * @brief Sets the destination buffer and offset at which the arguments will be encoded.
  */
-- (void)setArgumentBuffer:(id <MTLBuffer>)iargumentBuffer offset:(NSUInteger)offset;
+- (void)setArgumentBuffer:(nullable id <MTLBuffer>)argumentBuffer offset:(NSUInteger)offset;
 
 /*!
  * @method setArgumentBuffer:offset:arrayElement:
@@ -103,12 +106,37 @@ NS_AVAILABLE(10_13, 11_0)
 
 
 /*!
+ * @method setRenderPipelineState:atIndex
+ * @brief Sets a render pipeline state at a given bind point index
+ */
+- (void)setRenderPipelineState:(nullable id <MTLRenderPipelineState>)pipeline atIndex:(NSUInteger)index API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios);
+
+/*!
+ * @method setRenderPipelineStates:withRange
+ * @brief Set an array of render pipeline states at a given bind point index range
+ */
+- (void)setRenderPipelineStates:(const id <MTLRenderPipelineState> __nullable [__nonnull])pipelines withRange:(NSRange)range API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios);
+
+
+/*!
+ * @method setIndirectCommandBuffer:atIndex
+ * @brief Sets an indirect command buffer at a given bind point index
+ */
+- (void)setIndirectCommandBuffer:(nullable id <MTLIndirectCommandBuffer>)indirectCommandBuffer atIndex:(NSUInteger)index API_AVAILABLE(macos(10.14), ios(12.0));
+
+/*!
+ * @method setIndirectCommandBuffers:withRange:
+ * @brief Set an array of indirect command buffers at the given bind point index range.
+ */
+- (void)setIndirectCommandBuffers:(const id <MTLIndirectCommandBuffer> __nullable [__nonnull])buffers withRange:(NSRange)range API_AVAILABLE(macos(10.14), ios(12.0));
+
+/*!
  * @method newArgumentEncoderForBufferAtIndex:
  * @brief Returns a pointer to a new MTLArgumentEncoder that can be used to encode the an argument buffer
  * in the buffer associated with a given index.
  * Returns nil if the resource at the given index is not an argument buffer.
  */
-- (nullable id<MTLArgumentEncoder>)newArgumentEncoderForBufferAtIndex:(NSUInteger)index NS_AVAILABLE_MAC(10_13);
+- (nullable id<MTLArgumentEncoder>)newArgumentEncoderForBufferAtIndex:(NSUInteger)index API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios);
 
 @end
 

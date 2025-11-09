@@ -1,17 +1,20 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BA64BEDB-7F46-32B2-BE3B-879F3751FA12' ]
+uuids:           [ 'x86_64: 49039DEE-D0EC-33FF-BE10-997A520D2E38' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/MetalPerformanceShaders.framework/Frameworks/MPSMatrix.framework/Versions/A/MPSMatrix
-current-version: 86
+current-version: 121.1.1
 parent-umbrella: MetalPerformanceShaders
 exports:         
   - archs:           [ x86_64 ]
     allowable-clients: [ MetalPerformanceShaders ]
-    objc-classes:    [ _MPSMatrix, _MPSMatrixBinaryKernel, _MPSMatrixCopy, _MPSMatrixCopyDescriptor, 
-                       _MPSMatrixDecompositionCholesky, _MPSMatrixDecompositionLU, 
-                       _MPSMatrixDescriptor, _MPSMatrixMultiplication, _MPSMatrixSolveCholesky, 
-                       _MPSMatrixSolveLU, _MPSMatrixSolveTriangular, _MPSMatrixUnaryKernel, 
-                       _MPSMatrixVectorMultiplication, _MPSTemporaryMatrix, _MPSVector, 
-                       _MPSVectorDescriptor ]
+    symbols:         [ __Z21MPSDecrementReadCountP18MPSTemporaryMatrix, __Z21MPSDecrementReadCountP18MPSTemporaryVector ]
+    objc-classes:    [ MPSMatrix, MPSMatrixBinaryKernel, MPSMatrixCopy, MPSMatrixCopyDescriptor, 
+                       MPSMatrixDecompositionCholesky, MPSMatrixDecompositionLU, 
+                       MPSMatrixDescriptor, MPSMatrixFindTopK, MPSMatrixLogSoftMax, 
+                       MPSMatrixLogSoftMaxGradient, MPSMatrixMultiplication, MPSMatrixSoftMax, 
+                       MPSMatrixSoftMaxGradient, MPSMatrixSolveCholesky, MPSMatrixSolveLU, 
+                       MPSMatrixSolveTriangular, MPSMatrixUnaryKernel, MPSMatrixVectorMultiplication, 
+                       MPSTemporaryMatrix, MPSTemporaryVector, MPSVector, MPSVectorDescriptor ]
+    objc-ivars:      [ MPSMatrix._buffer, MPSVector._buffer ]
 ...

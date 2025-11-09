@@ -3,7 +3,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2016-2017 Apple Inc. All rights reserved.
+    Copyright 2016-2018 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVCaptureOutputBase.h>
@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVCaptureResolvedPhotoSettings;
 @class AVCaptureBracketedStillImageSettings;
 @class AVMetadataItem;
+@class AVPortraitEffectsMatte;
 @class AVCapturePhotoOutputInternal;
 
 @protocol AVCapturePhotoCaptureDelegate;
@@ -41,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  
     AVCapturePhotoOutput implicitly supports wide color photo capture, following the activeColorSpace of the source AVCaptureDevice. If the source device's activeColorSpace is AVCaptureColorSpace_P3_D65, photos are encoded with wide color information, unless you've specified an output format of '420v', which does not support wide color.
  */
-NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
+API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCapturePhotoOutput : AVCaptureOutput
 {
 @private
@@ -166,7 +167,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     If you wish to capture a photo that is formatted for a particular file container, such as HEIF, you must ensure that the fileType you desire is present in the receiver's availablePhotoFileTypes array. If you've not yet added your receiver to an AVCaptureSession with a video source, no file types are available. This property is key-value observable.
  */
-@property(nonatomic, readonly) NSArray<AVFileType> *availablePhotoFileTypes NS_AVAILABLE_IOS(11_0);
+@property(nonatomic, readonly) NSArray<AVFileType> *availablePhotoFileTypes API_AVAILABLE(ios(11.0));
 
 /*!
  @property availableRawPhotoFileTypes
@@ -176,7 +177,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     If you wish to capture a RAW photo that is formatted for a particular file container, such as DNG, you must ensure that the fileType you desire is present in the receiver's availableRawPhotoFileTypes array. If you've not yet added your receiver to an AVCaptureSession with a video source, no file types are available. This property is key-value observable.
  */
-@property(nonatomic, readonly) NSArray<AVFileType> *availableRawPhotoFileTypes NS_AVAILABLE_IOS(11_0);
+@property(nonatomic, readonly) NSArray<AVFileType> *availableRawPhotoFileTypes API_AVAILABLE(ios(11.0));
 
 /*!
  @method supportedPhotoPixelFormatTypesForFileType:
@@ -191,7 +192,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     If you wish to capture a photo for storage in a particular file container, such as TIFF, you must ensure that the photo pixel format type you request is valid for that file type. If no pixel format types are supported for a given fileType, an empty array is returned. If you've not yet added your receiver to an AVCaptureSession with a video source, no pixel format types are supported.
  */
-- (NSArray<NSNumber *> *)supportedPhotoPixelFormatTypesForFileType:(AVFileType)fileType NS_AVAILABLE_IOS(11_0);
+- (NSArray<NSNumber *> *)supportedPhotoPixelFormatTypesForFileType:(AVFileType)fileType API_AVAILABLE(ios(11.0));
 
 /*!
  @method supportedPhotoCodecTypesForFileType:
@@ -206,7 +207,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     If you wish to capture a photo for storage in a particular file container, such as HEIF, you must ensure that the photo codec type you request is valid for that file type. If no codec types are supported for a given fileType, an empty array is returned. If you've not yet added your receiver to an AVCaptureSession with a video source, no codec types are supported.
  */
-- (NSArray<AVVideoCodecType> *)supportedPhotoCodecTypesForFileType:(AVFileType)fileType NS_AVAILABLE_IOS(11_0);
+- (NSArray<AVVideoCodecType> *)supportedPhotoCodecTypesForFileType:(AVFileType)fileType API_AVAILABLE(ios(11.0));
 
 /*!
  @method supportedRawPhotoPixelFormatTypesForFileType:
@@ -221,7 +222,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     If you wish to capture a photo for storage in a particular file container, such as DNG, you must ensure that the RAW pixel format type you request is valid for that file type. If no RAW pixel format types are supported for a given fileType, an empty array is returned. If you've not yet added your receiver to an AVCaptureSession with a video source, no pixel format types are supported.
  */
-- (NSArray<NSNumber *> *)supportedRawPhotoPixelFormatTypesForFileType:(AVFileType)fileType NS_AVAILABLE_IOS(11_0);
+- (NSArray<NSNumber *> *)supportedRawPhotoPixelFormatTypesForFileType:(AVFileType)fileType API_AVAILABLE(ios(11.0));
 
 /*!
  @property stillImageStabilizationSupported
@@ -251,7 +252,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     This property may change as the session's -sessionPreset or source device's -activeFormat change. When using the AVCaptureDevice with deviceType AVCaptureDeviceTypeBuiltInDualCamera, the wide-angle and telephoto camera images can be fused together to improve image quality in some configurations. When DualCamera image fusion is not supported by the current configuration, your capture requests always resolve dualCameraFusionEnabled to NO. This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isDualCameraFusionSupported) BOOL dualCameraFusionSupported NS_AVAILABLE_IOS(10_2);
+@property(nonatomic, readonly, getter=isDualCameraFusionSupported) BOOL dualCameraFusionSupported API_AVAILABLE(ios(10.2));
 
 /*!
  @property dualCameraDualPhotoDeliverySupported
@@ -261,7 +262,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     DualCamera dual photo delivery is only supported for certain AVCaptureSession sessionPresets and AVCaptureDevice activeFormats. When switching cameras or formats this property may change. When this property changes from YES to NO, dualCameraDualPhotoDeliveryEnabled also reverts to NO. If you've previously opted in for DualCamera dual photo delivery and then change configurations, you may need to set dualCameraDualPhotoDeliveryEnabled = YES again. This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isDualCameraDualPhotoDeliverySupported) BOOL dualCameraDualPhotoDeliverySupported NS_AVAILABLE_IOS(11_0);
+@property(nonatomic, readonly, getter=isDualCameraDualPhotoDeliverySupported) BOOL dualCameraDualPhotoDeliverySupported API_AVAILABLE(ios(11.0));
 
 /*!
  @property dualCameraDualPhotoDeliveryEnabled
@@ -271,7 +272,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     Default value is NO. This property may only be set to YES if dualCameraDualPhotoDeliverySupported is YES. DualCamera dual photo delivery requires a lengthy reconfiguration of the capture render pipeline, so if you intend to do any dual photo delivery captures, you should set this property to YES before calling -[AVCaptureSession startRunning]. See also -[AVCapturePhotoSettings dualCameraDualPhotoDeliveryEnabled].
  */
-@property(nonatomic, getter=isDualCameraDualPhotoDeliveryEnabled) BOOL dualCameraDualPhotoDeliveryEnabled NS_AVAILABLE_IOS(11_0);
+@property(nonatomic, getter=isDualCameraDualPhotoDeliveryEnabled) BOOL dualCameraDualPhotoDeliveryEnabled API_AVAILABLE(ios(11.0));
 
 /*!
  @property cameraCalibrationDataDeliverySupported
@@ -281,7 +282,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     Camera calibration data delivery (intrinsics, extrinsics, lens distortion characteristics, etc.) is only supported in certain configurations. In iOS 11, its value is only YES if dualCameraDualPhotoDeliveryEnabled is YES. This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isCameraCalibrationDataDeliverySupported) BOOL cameraCalibrationDataDeliverySupported NS_AVAILABLE_IOS(11_0);
+@property(nonatomic, readonly, getter=isCameraCalibrationDataDeliverySupported) BOOL cameraCalibrationDataDeliverySupported API_AVAILABLE(ios(11.0));
 
 /*!
  @property supportedFlashModes
@@ -292,6 +293,17 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
     This property supersedes AVCaptureDevice's isFlashModeSupported: It returns an array of AVCaptureFlashMode constants. To test whether a particular flash mode is supported, use NSArray's containsObject API: [photoOutput.supportedFlashModes containsObject:@(AVCaptureFlashModeAuto)]. This property is key-value observable.
  */
 @property(nonatomic, readonly) NSArray<NSNumber *> *supportedFlashModes;
+
+
+/*!
+ @property autoRedEyeReductionSupported
+ @abstract
+    Indicates whether the receiver supports automatic red-eye reduction for flash captures.
+
+ @discussion
+    Flash images may cause subjects' eyes to appear red, golden, or white. Automatic red-eye reduction detects and corrects for reflected light in eyes, at the cost of additional processing time per image. This property may change as the session's -sessionPreset or source device's -activeFormat change. When red-eye reduction is not supported, your capture requests always resolve redEyeReductionEnabled to NO. This property is key-value observable.
+ */
+@property(nonatomic, readonly, getter=isAutoRedEyeReductionSupported) BOOL autoRedEyeReductionSupported API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  @property isFlashScene
@@ -391,7 +403,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     Prior to iOS 11, all Live Photo movie video tracks are compressed using H.264. Beginning in iOS 11, you can select the Live Photo movie video compression format using one of the AVVideoCodecKey strings presented in this property. The system's default (preferred) video codec is always presented first in the list. If you've not yet added your receiver to an AVCaptureSession with a video source, no codecs are available. This property is key-value observable.
  */
-@property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableLivePhotoVideoCodecTypes NS_AVAILABLE_IOS(11_0);
+@property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableLivePhotoVideoCodecTypes API_AVAILABLE(ios(11.0));
 
 /*!
  @method JPEGPhotoDataRepresentationForJPEGSampleBuffer:previewPhotoSampleBuffer:
@@ -408,7 +420,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     AVCapturePhotoOutput's depecrated -captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error: callback delivers JPEG photos to clients as CMSampleBuffers. To re-package these buffers in a data format suitable for writing to a JPEG file, you may call this class method, optionally inserting your own metadata into the JPEG CMSampleBuffer first, and optionally passing a preview image to be written to the JPEG file format as a thumbnail image.
  */
-+ (nullable NSData *)JPEGPhotoDataRepresentationForJPEGSampleBuffer:(CMSampleBufferRef)JPEGSampleBuffer previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer NS_DEPRECATED_IOS(10_0, 11_0, "Use -[AVCapturePhoto fileDataRepresentation] instead.");
++ (nullable NSData *)JPEGPhotoDataRepresentationForJPEGSampleBuffer:(CMSampleBufferRef)JPEGSampleBuffer previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer API_DEPRECATED("Use -[AVCapturePhoto fileDataRepresentation] instead.", ios(10.0, 11.0));
 
 /*!
  @method DNGPhotoDataRepresentationForRawSampleBuffer:previewPhotoSampleBuffer:
@@ -425,7 +437,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     AVCapturePhotoOutput's deprecated -captureOutput:didFinishProcessingRawPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error: callback delivers RAW photos to clients as CMSampleBuffers. To re-package these buffers in a data format suitable for writing to a DNG file, you may call this class method, optionally inserting your own metadata into the RAW CMSampleBuffer first, and optionally passing a preview image to be written to the DNG file format as a thumbnail image. Only RAW images from Apple built-in cameras are supported.
  */
-+ (nullable NSData *)DNGPhotoDataRepresentationForRawSampleBuffer:(CMSampleBufferRef)rawSampleBuffer previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer NS_DEPRECATED_IOS(10_0, 11_0, "Use -[AVCapturePhoto fileDataRepresentation] instead.");
++ (nullable NSData *)DNGPhotoDataRepresentationForRawSampleBuffer:(CMSampleBufferRef)rawSampleBuffer previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer API_DEPRECATED("Use -[AVCapturePhoto fileDataRepresentation] instead.", ios(10.0, 11.0));
 
 @end
 
@@ -442,7 +454,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     Some cameras and configurations support the delivery of depth data (e.g. disparity maps) along with the photo. This property returns YES if the session's current configuration allows photos to be captured with depth data, from which depth-related filters may be applied. When switching cameras or formats this property may change. When this property changes from YES to NO, depthDataDeliveryEnabled also reverts to NO. If you've previously opted in for depth data delivery and then change configurations, you may need to set depthDataDeliveryEnabled = YES again.This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isDepthDataDeliverySupported) BOOL depthDataDeliverySupported NS_AVAILABLE_IOS(11_0);
+@property(nonatomic, readonly, getter=isDepthDataDeliverySupported) BOOL depthDataDeliverySupported API_AVAILABLE(ios(11.0));
 
 /*!
  @property depthDataDeliveryEnabled
@@ -452,7 +464,27 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     Default is NO. Set to YES if you wish depth data to be delivered with your AVCapturePhotos. This property may only be set to YES if depthDataDeliverySupported is YES. Enabling depth data delivery requires a lengthy reconfiguration of the capture render pipeline, so if you intend to capture depth data, you should set this property to YES before calling -[AVCaptureSession startRunning].
  */
-@property(nonatomic, getter=isDepthDataDeliveryEnabled) BOOL depthDataDeliveryEnabled NS_AVAILABLE_IOS(11_0);
+@property(nonatomic, getter=isDepthDataDeliveryEnabled) BOOL depthDataDeliveryEnabled API_AVAILABLE(ios(11.0));
+
+/*!
+ @property portraitEffectsMatteDeliverySupported
+ @abstract
+    A BOOL value specifying whether portrait effects matte delivery is supported.
+
+ @discussion
+    Some cameras and configurations support the delivery of a matting image to augment depth data and aid in high quality portrait effect rendering (see AVPortraitEffectsMatte.h). This property returns YES if the session's current configuration allows photos to be captured with a portrait effects matte. When switching cameras or formats this property may change. When this property changes from YES to NO, portraitEffectsMatteDeliveryEnabled also reverts to NO. If you've previously opted in for portrait effects matte delivery and then change configurations, you may need to set portraitEffectsMatteDeliveryEnabled = YES again.This property is key-value observable.
+ */
+@property(nonatomic, readonly, getter=isPortraitEffectsMatteDeliverySupported) BOOL portraitEffectsMatteDeliverySupported API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, tvos, watchos);
+
+/*!
+ @property portraitEffectsMatteDeliveryEnabled
+ @abstract
+    A BOOL specifying whether the photo render pipeline is prepared for portrait effects matte delivery.
+
+ @discussion
+    Default is NO. Set to YES if you wish portrait effects mattes to be delivered with your AVCapturePhotos. This property may only be set to YES if portraitEffectsMatteDeliverySupported is YES. Portrait effects matte generation requires depth to be present, so when enabling portrait effects matte delivery, you must also set depthDataDeliveryEnabled to YES. Enabling portrait effects matte delivery requires a lengthy reconfiguration of the capture render pipeline, so if you intend to capture portrait effects mattes, you should set this property to YES before calling -[AVCaptureSession startRunning].
+ */
+@property(nonatomic, getter=isPortraitEffectsMatteDeliveryEnabled) BOOL portraitEffectsMatteDeliveryEnabled API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, tvos, watchos);
 
 @end
 
@@ -471,7 +503,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  
     In the event of an error, all expected callbacks are fired with an appropriate error.
  */
-NS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
+API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @protocol AVCapturePhotoCaptureDelegate <NSObject>
 
 @optional
@@ -535,7 +567,7 @@ NS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     This callback fires resolvedSettings.expectedPhotoCount number of times for a given capture request. Note that the photo parameter is always non nil, even if an error is returned. The delivered AVCapturePhoto's rawPhoto property can be queried to know if it's a RAW image or processed image.
  */
-- (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingPhoto:(AVCapturePhoto *)photo error:(nullable NSError *)error NS_AVAILABLE_IOS(11_0);
+- (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingPhoto:(AVCapturePhoto *)photo error:(nullable NSError *)error API_AVAILABLE(ios(11.0));
 
 /*!
  @method captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error:
@@ -558,7 +590,7 @@ NS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     If you've requested a single processed image (uncompressed or compressed) capture, the photo is delivered here. If you've requested a bracketed capture, this callback is fired bracketedSettings.count times (once for each photo in the bracket).
  */
-- (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingPhotoSampleBuffer:(nullable CMSampleBufferRef)photoSampleBuffer previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer resolvedSettings:(AVCaptureResolvedPhotoSettings *)resolvedSettings bracketSettings:(nullable AVCaptureBracketedStillImageSettings *)bracketSettings error:(nullable NSError *)error NS_DEPRECATED_IOS(10_0, 11_0, "Use -captureOutput:didFinishProcessingPhoto:error: instead.");
+- (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingPhotoSampleBuffer:(nullable CMSampleBufferRef)photoSampleBuffer previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer resolvedSettings:(AVCaptureResolvedPhotoSettings *)resolvedSettings bracketSettings:(nullable AVCaptureBracketedStillImageSettings *)bracketSettings error:(nullable NSError *)error API_DEPRECATED("Use -captureOutput:didFinishProcessingPhoto:error: instead.", ios(10.0, 11.0));
 
 /*!
  @method captureOutput:didFinishProcessingRawPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error:
@@ -581,7 +613,7 @@ NS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     Single RAW image and bracketed RAW photos are delivered here. If you've requested a RAW bracketed capture, this callback is fired bracketedSettings.count times (once for each photo in the bracket).
  */
-- (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingRawPhotoSampleBuffer:(nullable CMSampleBufferRef)rawSampleBuffer previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer resolvedSettings:(AVCaptureResolvedPhotoSettings *)resolvedSettings bracketSettings:(nullable AVCaptureBracketedStillImageSettings *)bracketSettings error:(nullable NSError *)error NS_DEPRECATED_IOS(10_0, 11_0, "Use -captureOutput:didFinishProcessingPhoto:error: instead");
+- (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingRawPhotoSampleBuffer:(nullable CMSampleBufferRef)rawSampleBuffer previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer resolvedSettings:(AVCaptureResolvedPhotoSettings *)resolvedSettings bracketSettings:(nullable AVCaptureBracketedStillImageSettings *)bracketSettings error:(nullable NSError *)error API_DEPRECATED("Use -captureOutput:didFinishProcessingPhoto:error: instead.", ios(10.0, 11.0));
 
 /*!
  @method captureOutput:didFinishRecordingLivePhotoMovieForEventualFileAtURL:resolvedSettings:
@@ -655,7 +687,7 @@ NS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     To take a picture, a client instantiates and configures an AVCapturePhotoSettings object, then calls AVCapturePhotoOutput's -capturePhotoWithSettings:delegate:, passing the settings and a delegate to be informed when events relating to the photo capture occur. Since AVCapturePhotoSettings has no reference to the AVCapturePhotoOutput instance with which it will be used, minimal validation occurs while you configure an AVCapturePhotoSettings instance. The bulk of the validation is executed when you call AVCapturePhotoOutput's -capturePhotoWithSettings:delegate:.
  */
-NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
+API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCapturePhotoSettings : NSObject <NSCopying>
 {
 @private
@@ -741,7 +773,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     rawPixelFormatType must be one of the OSTypes contained in AVCapturePhotoOutput's -availableRawPhotoPixelFormatTypes array. Set rawPixelFormatType to 0 if you do not desire a RAW photo callback. If you are specifying a rawFileType, it must be present in AVCapturePhotoOutput's -availableRawPhotoFileTypes array. If you wish an uncompressed processedFormat, your dictionary must contain kCVPixelBufferPixelFormatTypeKey, and the processedFormat specified must be present in AVCapturePhotoOutput's -availablePhotoPixelFormatTypes array. kCVPixelBufferPixelFormatTypeKey is the only supported key when expressing uncompressed processedFormat. If you wish a compressed format, your dictionary must contain AVVideoCodecKey and the codec specified must be present in AVCapturePhotoOutput's -availablePhotoCodecTypes array. If you are specifying a compressed format, the AVVideoCompressionPropertiesKey is also supported, with a payload dictionary containing a single AVVideoQualityKey. If you are specifying a processedFileType, it must be present in AVCapturePhotoOutput's -availablePhotoFileTypes array. Pass a nil processedFormat dictionary if you only desire a RAW photo capture. See AVCapturePhotoOutput's -capturePhotoWithSettings:delegate: inline documentation for a discussion of restrictions on AVCapturePhotoSettings when requesting RAW capture.
  */
-+ (instancetype)photoSettingsWithRawPixelFormatType:(OSType)rawPixelFormatType rawFileType:(nullable AVFileType)rawFileType processedFormat:(nullable NSDictionary<NSString *, id> *)processedFormat processedFileType:(nullable AVFileType)processedFileType NS_AVAILABLE_IOS(11_0);
++ (instancetype)photoSettingsWithRawPixelFormatType:(OSType)rawPixelFormatType rawFileType:(nullable AVFileType)rawFileType processedFormat:(nullable NSDictionary<NSString *, id> *)processedFormat processedFileType:(nullable AVFileType)processedFileType API_AVAILABLE(ios(11.0));
 
 /*!
  @method photoSettingsFromPhotoSettings:
@@ -786,7 +818,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     The formatting of data within a photo buffer is often dependent on the file format intended for storage. For instance, a JPEG encoded photo buffer intended for storage in a JPEG (JPEG File Interchange Format) file differs from JPEG to be stored in HEIF. The HEIF-containerized JPEG buffer is tiled for readback efficiency and partitioned into the box structure dictated by the HEIF file format. Some codecs are only supported by AVCapturePhotoOutput if containerized. For instance, the AVVideoCodecTypeHEVC is only supported with AVFileTypeHEIF formatting. To discover which photo pixel format types and video codecs are supported for a given file type, you may query AVCapturePhotoOutput's -supportedPhotoPixelFormatTypesForFileType:, or -supportedPhotoCodecTypesForFileType: respectively.
  */
-@property(nullable, readonly) AVFileType processedFileType NS_AVAILABLE_IOS(11_0);
+@property(nullable, readonly) AVFileType processedFileType API_AVAILABLE(ios(11.0));
 
 /*!
  @property rawPhotoPixelFormatType
@@ -806,7 +838,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     The formatting of data within a RAW photo buffer may be dependent on the file format intended for storage. To discover which RAW photo pixel format types are supported for a given file type, you may query AVCapturePhotoOutput's -supportedRawPhotoPixelFormatTypesForFileType:.
  */
-@property(nullable, readonly) AVFileType rawFileType NS_AVAILABLE_IOS(11_0);
+@property(nullable, readonly) AVFileType rawFileType API_AVAILABLE(ios(11.0));
 
 /*!
  @property flashMode
@@ -817,6 +849,17 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
     flashMode takes the place of the deprecated AVCaptureDevice -flashMode API. Setting AVCaptureDevice.flashMode has no effect on AVCapturePhotoOutput, which only pays attention to the flashMode specified in your AVCapturePhotoSettings. The default value is AVCaptureFlashModeOff. Flash modes are defined in AVCaptureDevice.h. If you specify a flashMode of AVCaptureFlashModeOn, it wins over autoStillImageStabilizationEnabled=YES. When the device becomes very hot, the flash becomes temporarily unavailable until the device cools down (see AVCaptureDevice's -flashAvailable). While the flash is unavailable, AVCapturePhotoOutput's -supportedFlashModes property still reports AVCaptureFlashModeOn and AVCaptureFlashModeAuto as being available, thus allowing you to specify a flashMode of AVCaptureModeOn. You should always check the AVCaptureResolvedPhotoSettings provided to you in the AVCapturePhotoCaptureDelegate callbacks, as the resolved flashEnabled property will tell you definitively if the flash is being used.
  */
 @property(nonatomic) AVCaptureFlashMode flashMode;
+
+
+/*!
+ @property autoRedEyeReductionEnabled
+ @abstract
+    Specifies whether red-eye reduction should be applied automatically on flash captures.
+ 
+ @discussion
+    Default is YES on platforms that support automatic red-eye reduction unless you are capturing a bracket using AVCapturePhotoBracketSettings or a RAW photo without a processed photo.  For RAW photos with a processed photo the red-eye reduction will be applied to the processed photo only (RAW photos by definition are not processed). When set to YES, red-eye reduction is applied as needed for flash captures if the photo output's autoRedEyeReductionSupported property returns YES.
+ */
+@property(nonatomic, getter=isAutoRedEyeReductionEnabled) BOOL autoRedEyeReductionEnabled API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  @property autoStillImageStabilizationEnabled
@@ -836,7 +879,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     Default is YES unless you are capturing a RAW photo (RAW photos may not be processed by definition) or a bracket using AVCapturePhotoBracketSettings. When set to YES, and -[AVCapturePhotoOutput isDualCameraFusionSupported] is also YES, wide-angle and telephoto images may be fused to improve still image quality, depending on the current zoom factor, light levels, and focus position. You may determine whether DualCamera fusion is enabled for a particular capture request by inspecting the dualCameraFusionEnabled property of the AVCaptureResolvedPhotoSettings. Note that when using the deprecated AVCaptureStillImageOutput interface with the DualCamera, auto DualCamera fusion is always enabled and may not be turned off.
  */
-@property(nonatomic, getter=isAutoDualCameraFusionEnabled) BOOL autoDualCameraFusionEnabled NS_AVAILABLE_IOS(10_2);
+@property(nonatomic, getter=isAutoDualCameraFusionEnabled) BOOL autoDualCameraFusionEnabled API_AVAILABLE(ios(10.2));
 
 /*!
  @property dualCameraDualPhotoDeliveryEnabled
@@ -846,7 +889,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     Default is NO. When set to YES, your captureOutput:didFinishProcessingPhoto:error: callback will receive twice the number of callbacks, as both the telephoto image(s) and wide-angle image(s) are delivered. You may only set this property to YES if you've set your AVCapturePhotoOutput's dualCameraDualPhotoDeliveryEnabled property to YES, and your delegate responds to the captureOutput:didFinishProcessingPhoto:error: selector.
  */
-@property(nonatomic, getter=isDualCameraDualPhotoDeliveryEnabled) BOOL dualCameraDualPhotoDeliveryEnabled NS_AVAILABLE_IOS(11_0);
+@property(nonatomic, getter=isDualCameraDualPhotoDeliveryEnabled) BOOL dualCameraDualPhotoDeliveryEnabled API_AVAILABLE(ios(11.0));
 
 /*!
  @property highResolutionPhotoEnabled
@@ -865,8 +908,10 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
 
  @discussion
     Default is NO. Set to YES if you wish to receive depth data with your photo. Throws an exception if -[AVCapturePhotoOutput depthDataDeliveryEnabled] is not set to YES or your delegate does not respond to the captureOutput:didFinishProcessingPhoto:error: selector. Note that setting this property to YES may add significant processing time to the delivery of your didFinishProcessingPhoto: callback.
+ 
+    For best rendering results in Apple's Photos.app, portrait photos should be captured with both embedded depth data and a portrait effects matte (see portraitEffectsMatteDeliveryEnabled). When supported, it is recommended to opt in for both of these auxiliary images in your photo captures involving depth.
  */
-@property(nonatomic, getter=isDepthDataDeliveryEnabled) BOOL depthDataDeliveryEnabled NS_AVAILABLE_IOS(11_0);
+@property(nonatomic, getter=isDepthDataDeliveryEnabled) BOOL depthDataDeliveryEnabled API_AVAILABLE(ios(11.0));
 
 /*!
  @property embedsDepthDataInPhoto
@@ -874,9 +919,9 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
     Specifies whether depth data included with this photo should be written to the photo's file structure.
 
  @discussion
-    Default is YES. When depthDataDeliveryEnabled is set to YES, this property specifies whether the included depth data should be written to the resulting photo's internal file structure. Depth data is currently only supported in HEIF, JPEG, and DNG. This property is ignored if depthDataDeliveryEnabled is set to NO.
+    Default is YES. When depthDataDeliveryEnabled is set to YES, this property specifies whether the included depth data should be written to the resulting photo's internal file structure. Depth data is currently only supported in HEIF and JPEG. This property is ignored if depthDataDeliveryEnabled is set to NO.
  */
-@property(nonatomic) BOOL embedsDepthDataInPhoto NS_AVAILABLE_IOS(11_0);
+@property(nonatomic) BOOL embedsDepthDataInPhoto API_AVAILABLE(ios(11.0));
 
 /*!
  @property depthDataFiltered
@@ -886,7 +931,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     Default is YES. This property is ignored unless depthDataDeliveryEnabled is set to YES. Depth data maps may contain invalid pixel values due to a variety of factors including occlusions and low light. When depthDataFiltered is set to YES, the photo output interpolates missing data, filling in all holes.
  */
-@property(nonatomic, getter=isDepthDataFiltered) BOOL depthDataFiltered NS_AVAILABLE_IOS(11_0);
+@property(nonatomic, getter=isDepthDataFiltered) BOOL depthDataFiltered API_AVAILABLE(ios(11.0));
 
 /*!
  @property cameraCalibrationDataDeliveryEnabled
@@ -896,7 +941,29 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     Default is NO. Set to YES if you wish to receive camera calibration data with your photo. Camera calibration data is delivered as a property of an AVCapturePhoto, so if you are using the CMSampleBuffer delegate callbacks rather than -captureOutput:didFinishProcessingPhoto:error:, an exception is thrown. Also, you may only set this property to YES if your AVCapturePhotoOutput's cameraCalibrationDataDeliverySupported property is YES. When requesting dual camera dual photo delivery plus camera calibration data, the wide and tele photos each contain camera calibration data for their respective camera. Note that AVCameraCalibrationData can be delivered as a property of an AVCapturePhoto or an AVDepthData, thus your delegate must respond to the captureOutput:didFinishProcessingPhoto:error: selector.
  */
-@property(nonatomic, getter=isCameraCalibrationDataDeliveryEnabled) BOOL cameraCalibrationDataDeliveryEnabled NS_AVAILABLE_IOS(11_0);
+@property(nonatomic, getter=isCameraCalibrationDataDeliveryEnabled) BOOL cameraCalibrationDataDeliveryEnabled API_AVAILABLE(ios(11.0));
+
+/*!
+ @property portraitEffectsMatteDeliveryEnabled
+ @abstract
+    Specifies whether an AVPortraitEffectsMatte should be captured along with the photo.
+
+ @discussion
+    Default is NO. Set to YES if you wish to receive a portrait effects matte with your photo. Throws an exception if -[AVCapturePhotoOutput portraitEffectsMatteDeliveryEnabled] is not set to YES or your delegate does not respond to the captureOutput:didFinishProcessingPhoto:error: selector. Portrait effects matte generation requires depth to be present, so if you wish to enable portrait effects matte delivery, you must set depthDataDeliveryEnabled to YES. Setting this property to YES does not guarantee that a portrait effects matte will be present in the resulting AVCapturePhoto. As the property name implies, the matte is primarily used to improve the rendering quality of portrait effects on the image. If the photo's content lacks a clear foreground subject, no portrait effects matte is generated, and the -[AVCapturePhoto portraitEffectsMatte] property returns nil. Note that setting this property to YES may add significant processing time to the delivery of your didFinishProcessingPhoto: callback.
+ 
+    For best rendering results in Apple's Photos.app, portrait photos should be captured with both embedded depth data (see depthDataDeliveryEnabled) and a portrait effects matte. When supported, it is recommended to opt in for both of these auxiliary images in your photo captures involving depth.
+ */
+@property(nonatomic, getter=isPortraitEffectsMatteDeliveryEnabled) BOOL portraitEffectsMatteDeliveryEnabled API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, tvos, watchos);
+
+/*!
+ @property embedsPortraitEffectsMatteInPhoto
+ @abstract
+    Specifies whether the portrait effects matte captured with this photo should be written to the photo's file structure.
+
+ @discussion
+    Default is YES. When portraitEffectsMatteDeliveryEnabled is set to YES, this property specifies whether the included portrait effects matte should be written to the resulting photo's internal file structure. Portrait effects mattes are currently only supported in HEIF and JPEG. This property is ignored if portraitEffectsMatteDeliveryEnabled is set to NO.
+ */
+@property(nonatomic) BOOL embedsPortraitEffectsMatteInPhoto API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, tvos, watchos);
 
 /*!
  @property metadata
@@ -906,7 +973,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     Valid metadata keys are found in <ImageIO/CGImageProperties.h>. AVCapturePhotoOutput inserts a base set of metadata into each photo it captures, such as kCGImagePropertyOrientation, kCGImagePropertyExifDictionary, and kCGImagePropertyMakerAppleDictionary. You may specify metadata keys and values that should be written to each photo in the capture request. If you've specified metadata that also appears in AVCapturePhotoOutput's base set, your value replaces the base value. An NSInvalidArgumentException is thrown if you specify keys other than those found in <ImageIO/CGImageProperties.h>.
  */
-@property(nonatomic, copy) NSDictionary<NSString *, id> *metadata NS_AVAILABLE_IOS(11_0);
+@property(nonatomic, copy) NSDictionary<NSString *, id> *metadata API_AVAILABLE(ios(11.0));
 
 /*!
  @property livePhotoMovieFileURL
@@ -926,7 +993,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     Prior to iOS 11, all Live Photo movie video tracks are compressed using H.264. Beginning in iOS 11, you can select the Live Photo movie video compression format by specifying one of the strings present in AVCapturePhotoOutput's availableLivePhotoVideoCodecTypes array.
  */
-@property(nonatomic, copy) AVVideoCodecType livePhotoVideoCodecType NS_AVAILABLE_IOS(11_0);
+@property(nonatomic, copy) AVVideoCodecType livePhotoVideoCodecType API_AVAILABLE(ios(11.0));
 
 /*!
  @property livePhotoMovieMetadata
@@ -964,9 +1031,9 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
     An array of available AVVideoCodecKeys that may be used when specifying an embeddedThumbnailPhotoFormat.
  
  @discussion
-    The array is sorted such that the thumbnail codec type that is most backward compatible is listed first (jpeg).
+    The array is sorted such that the thumbnail codec type that is most backward compatible is listed first.
  */
-@property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableEmbeddedThumbnailPhotoCodecTypes NS_AVAILABLE_IOS(11_0);
+@property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableEmbeddedThumbnailPhotoCodecTypes API_AVAILABLE(ios(11.0));
 
 /*!
  @property embeddedThumbnailPhotoFormat
@@ -974,9 +1041,29 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
     A dictionary of AVVideoSettings keys specifying the thumbnail format to be written to the processed or RAW photo.
 
  @discussion
-    A dictionary of AVVideoSettings keys specifying a smaller version of the RAW or processed photo to be embedded in that image before calling back the AVCapturePhotoCaptureDelegate. This image is sometimes referred to as a "thumbnail image". The AVVideoCodecKey is required and must be present in the receiver's -availableEmbeddedThumbnailPhotoCodecTypes array. Optional keys are { AVVideoWidthKey | AVVideoHeightKey }. If you wish to specify dimensions, you must specify both width and height. If you specify a width and height whose aspect ratio differs from the RAW or processed photo, the larger of the two dimensions is honored and aspect ratio of the RAW or processed photo is always preserved.
+    A dictionary of AVVideoSettings keys specifying a thumbnail (usually smaller) version of the processed photo to be embedded in that image before calling the AVCapturePhotoCaptureDelegate. This image is sometimes referred to as a "thumbnail image". The AVVideoCodecKey is required and must be present in the receiver's -availableEmbeddedThumbnailPhotoCodecTypes array. Optional keys are { AVVideoWidthKey | AVVideoHeightKey }. If you wish to specify dimensions, you must specify both width and height. If you specify a width and height whose aspect ratio differs from the processed photo, the larger of the two dimensions is honored and aspect ratio of the RAW or processed photo is always preserved. For RAW captures, use -rawEmbeddedThumbnailPhotoFormat to specify the thumbnail format you'd like to capture in the RAW image. For apps linked on or after iOS 12, the raw thumbnail format must be specified using the -rawEmbeddedThumbnailPhotoFormat API rather than -embeddedThumbnailPhotoFormat. Beginning in iOS 12, HEIC files may contain thumbnails up to the full resolution of the main image.
  */
-@property(nonatomic, copy, nullable) NSDictionary<NSString *, id> *embeddedThumbnailPhotoFormat NS_AVAILABLE_IOS(11_0);
+@property(nonatomic, copy, nullable) NSDictionary<NSString *, id> *embeddedThumbnailPhotoFormat API_AVAILABLE(ios(11.0));
+
+/*!
+ @property availableRawEmbeddedThumbnailPhotoCodecTypes
+ @abstract
+    An array of available AVVideoCodecKeys that may be used when specifying a rawEmbeddedThumbnailPhotoFormat.
+ 
+ @discussion
+    The array is sorted such that the thumbnail codec type that is most backward compatible is listed first.
+ */
+@property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableRawEmbeddedThumbnailPhotoCodecTypes API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, tvos, watchos);
+
+/*!
+ @property rawEmbeddedThumbnailPhotoFormat
+ @abstract
+    A dictionary of AVVideoSettings keys specifying the thumbnail format to be written to the RAW photo in a RAW photo request.
+
+ @discussion
+    A dictionary of AVVideoSettings keys specifying a thumbnail (usually smaller) version of the RAW photo to be embedded in that image's DNG before calling back the AVCapturePhotoCaptureDelegate. The AVVideoCodecKey is required and must be present in the receiver's -availableRawEmbeddedThumbnailPhotoCodecTypes array. Optional keys are { AVVideoWidthKey | AVVideoHeightKey }. If you wish to specify dimensions, you must specify both width and height. If you specify a width and height whose aspect ratio differs from the RAW or processed photo, the larger of the two dimensions is honored and aspect ratio of the RAW or processed photo is always preserved. For apps linked on or after iOS 12, the raw thumbnail format must be specified using the -rawEmbeddedThumbnailPhotoFormat API rather than -embeddedThumbnailPhotoFormat. Beginning in iOS 12, DNG files may contain thumbnails up to the full resolution of the RAW image.
+ */
+@property(nonatomic, copy, nullable) NSDictionary<NSString *, id> *rawEmbeddedThumbnailPhotoFormat API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, tvos, watchos);
 
 @end
 
@@ -995,7 +1082,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
 
     When you request a bracketed capture, your AVCapturePhotoCaptureDelegate's -captureOutput:didFinishProcessing{Photo | RawPhoto}... callbacks are called back bracketSettings.count times and provided with the corresponding AVCaptureBracketedStillImageSettings object from your request.
  */
-NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
+API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCapturePhotoBracketSettings : AVCapturePhotoSettings
 {
 @private
@@ -1046,7 +1133,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  
     AVCapturePhotoBracketSettings do not support flashMode, autoStillImageStabilizationEnabled, livePhotoMovieFileURL or livePhotoMovieMetadata.
  */
-+ (instancetype)photoBracketSettingsWithRawPixelFormatType:(OSType)rawPixelFormatType rawFileType:(nullable AVFileType)rawFileType processedFormat:(nullable NSDictionary<NSString *, id> *)processedFormat processedFileType:(nullable AVFileType)processedFileType bracketedSettings:(NSArray<AVCaptureBracketedStillImageSettings *> *)bracketedSettings NS_AVAILABLE_IOS(11_0);
++ (instancetype)photoBracketSettingsWithRawPixelFormatType:(OSType)rawPixelFormatType rawFileType:(nullable AVFileType)rawFileType processedFormat:(nullable NSDictionary<NSString *, id> *)processedFormat processedFileType:(nullable AVFileType)processedFileType bracketedSettings:(NSArray<AVCaptureBracketedStillImageSettings *> *)bracketedSettings API_AVAILABLE(ios(11.0));
 
 /*!
  @property bracketedSettings
@@ -1083,7 +1170,7 @@ NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
  @discussion
     When you initiate a photo capture request using -capturePhotoWithSettings:delegate:, some of your settings are not yet certain. For instance, auto flash and auto still image stabilization allow the AVCapturePhotoOutput to decide just in time whether to employ flash or still image stabilization, depending on the current scene. Once the request is issued, AVCapturePhotoOutput begins the capture, resolves the uncertain settings, and in its first callback informs you of its choices through an AVCaptureResolvedPhotoSettings object. This same object is presented to all the callbacks fired for a particular photo capture request. Its uniqueID property matches that of the AVCapturePhotoSettings instance you used to initiate the photo request.
  */
-NS_CLASS_AVAILABLE_IOS(10_0) __TVOS_PROHIBITED
+API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCaptureResolvedPhotoSettings : NSObject
 {
 @private
@@ -1132,12 +1219,32 @@ AV_INIT_UNAVAILABLE
 /*!
  @property embeddedThumbnailDimensions
  @abstract
-    The resolved dimensions of the embedded thumbnail that will be written to the processed or RAW photo delivered to the -captureOutput:didFinishProcessing{Photo | RawPhoto}... AVCapturePhotoCaptureDelegate callbacks.
+    The resolved dimensions of the embedded thumbnail that will be written to the processed photo delivered to the -captureOutput:didFinishProcessingPhoto:error: AVCapturePhotoCaptureDelegate callback.
 
  @discussion
     If you don't request an embedded thumbnail image, embeddedThumbnailDimensions resolve to { 0, 0 }.
  */
-@property(readonly) CMVideoDimensions embeddedThumbnailDimensions NS_AVAILABLE_IOS(11_0);
+@property(readonly) CMVideoDimensions embeddedThumbnailDimensions API_AVAILABLE(ios(11.0));
+
+/*!
+ @property rawEmbeddedThumbnailDimensions
+ @abstract
+    The resolved dimensions of the embedded thumbnail that will be written to the RAW photo delivered to the -captureOutput:didFinishProcessingPhoto:error: AVCapturePhotoCaptureDelegate callback.
+
+ @discussion
+    If you don't request a raw embedded thumbnail image, rawEmbeddedThumbnailDimensions resolve to { 0, 0 }.
+ */
+@property(readonly) CMVideoDimensions rawEmbeddedThumbnailDimensions API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, tvos, watchos);
+
+/*!
+ @property portraitEffectsMatteDimensions
+ @abstract
+    The resolved dimensions of the portrait effects matte that will be delivered to the AVCapturePhoto in the -captureOutput:didFinishProcessingPhoto:error: AVCapturePhotoCaptureDelegate callback.
+
+ @discussion
+    If you request a portrait effects matte by calling -[AVCapturePhotoSettings setPortraitEffectsMatteDeliveryEnabled:YES], portraitEffectsMatteDimensions resolve to the expected dimensions of the portrait effects matte, assuming one is generated (see -[AVCapturePhotoSettings portraitEffectsMatteDeliveryEnabled] for a discussion of why a portrait effects matte might not be delivered). If you don't request a portrait effects matte, portraitEffectsMatteDimensions always resolve to { 0, 0 }.
+ */
+@property(readonly) CMVideoDimensions portraitEffectsMatteDimensions API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  @property livePhotoMovieDimensions
@@ -1159,6 +1266,14 @@ AV_INIT_UNAVAILABLE
  */
 @property(readonly, getter=isFlashEnabled) BOOL flashEnabled;
 
+
+/*!
+ @property redEyeReductionEnabled
+ @abstract
+    Indicates whether red-eye reduction will be applied as necessary when capturing the photo if flashEnabled is YES.
+ */
+@property(readonly, getter=isRedEyeReductionEnabled) BOOL redEyeReductionEnabled API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
 /*!
  @property stillImageStabilizationEnabled
  @abstract
@@ -1171,14 +1286,14 @@ AV_INIT_UNAVAILABLE
  @abstract
     Indicates whether DualCamera wide-angle and telephoto image fusion will be employed when capturing the photo.
  */
-@property(readonly, getter=isDualCameraFusionEnabled) BOOL dualCameraFusionEnabled NS_AVAILABLE_IOS(10_2);
+@property(readonly, getter=isDualCameraFusionEnabled) BOOL dualCameraFusionEnabled API_AVAILABLE(ios(10.2));
 
 /*!
  @property expectedPhotoCount
  @abstract
     Indicates the number of times your -captureOutput:didFinishProcessingPhoto:error: callback will be called. For instance, if you've requested an auto exposure bracket of 3 with JPEG and RAW, the expectedPhotoCount is 6.
  */
-@property(readonly) NSUInteger expectedPhotoCount NS_AVAILABLE_IOS(11_0);
+@property(readonly) NSUInteger expectedPhotoCount API_AVAILABLE(ios(11.0));
 
 @end
 
@@ -1197,7 +1312,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Beginning in iOS 11, AVCapturePhotoOutput's AVCapturePhotoCaptureDelegate supports a simplified callback for delivering image data, namely -captureOutput:didFinishingProcessingPhoto:error:. This callback presents each image result for your capture request as an AVCapturePhoto object, an immutable wrapper from which various properties of the photo capture may be queried, such as the photo's preview pixel buffer, metadata, depth data, camera calibration data, and image bracket specific properties. AVCapturePhoto can wrap file-containerized photo results, such as HEVC encoded image data, containerized in the HEIC file format. CMSampleBufferRef, on the other hand, may only be used to express non file format containerized photo data. For this reason, the AVCapturePhotoCaptureDelegate protocol methods that return CMSampleBuffers have been deprecated in favor of -captureOutput:didFinishingProcessingPhoto:error:. A AVCapturePhoto wraps a single image result. For instance, if you've requested a bracketed capture of 3 images, your callback is called 3 times, each time delivering an AVCapturePhoto.
  */
-NS_CLASS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @interface AVCapturePhoto : NSObject
 {
 @private
@@ -1267,6 +1382,16 @@ AV_INIT_UNAVAILABLE
 @property(nullable, readonly) AVDepthData *depthData;
 
 /*!
+ @property portraitEffectsMatte
+ @abstract
+    An AVPortraitEffectsMatte object wrapping a matte associated with this photo.
+
+ @discussion
+    If you requested portrait effects matte delivery by calling -[AVCapturePhotoSettings setPortraitEffectsMatteDeliveryEnabled:YES], this property offers access to the resulting AVPortraitEffectsMatte object. Nil is returned if you did not request portrait effects matte delivery. Note that the portrait effects matte is only embedded in the photo's internal file format container if you set -[AVCapturePhotoSettings setEmbedsPortraitEffectsMatteInPhoto:YES].
+ */
+@property(nullable, readonly) AVPortraitEffectsMatte *portraitEffectsMatte API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, tvos, watchos);
+
+/*!
  @property metadata
  @abstract
     An ImageIO property style dictionary of metadata associated with this photo.
@@ -1318,6 +1443,7 @@ AV_INIT_UNAVAILABLE
 
 @end
 
+@protocol AVCapturePhotoFileDataRepresentationCustomizer;
 
 @interface AVCapturePhoto (AVCapturePhotoConversions)
 
@@ -1329,7 +1455,19 @@ AV_INIT_UNAVAILABLE
  @result
     An NSData containing bits in the file container's format, or nil if the flattening process fails.
  */
-- (nullable NSData *)fileDataRepresentation NS_AVAILABLE_IOS(11_0);
+- (nullable NSData *)fileDataRepresentation API_AVAILABLE(ios(11.0));
+
+/*!
+ @method fileDataRepresentationWithCustomizer:
+ @abstract
+    Flattens the AVCapturePhoto to an NSData using the file container format (processedFileType or rawFileType) specified in the AVCapturePhotoSettings (e.g. JFIF, HEIF, DNG), and allows you to strip or replace various pieces of metadata in the process.
+ 
+ @param customizer
+    An object conforming to the AVCapturePhotoFileDataRepresentationCustomizer protocol that will be called synchronously to provide customization of metadata written to the container format. An NSInvalidArgumentException is thrown if you pass nil.
+ @result
+    An NSData containing bits in the file container's format, or nil if the flattening process fails.
+ */
+- (nullable NSData *)fileDataRepresentationWithCustomizer:(id<AVCapturePhotoFileDataRepresentationCustomizer>)customizer API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, tvos, watchos);
 
 /*!
  @method fileDataRepresentationWithReplacementMetadata:replacementEmbeddedThumbnailPhotoFormat:replacementEmbeddedThumbnailPixelBuffer:replacementDepthData:
@@ -1347,7 +1485,7 @@ AV_INIT_UNAVAILABLE
  @result
     An NSData containing bits in the file container's format, or nil if the flattening process fails.
  */
-- (nullable NSData *)fileDataRepresentationWithReplacementMetadata:(nullable NSDictionary<NSString *, id> *)replacementMetadata replacementEmbeddedThumbnailPhotoFormat:(nullable NSDictionary<NSString *, id> *)replacementEmbeddedThumbnailPhotoFormat replacementEmbeddedThumbnailPixelBuffer:(nullable CVPixelBufferRef)replacementEmbeddedThumbnailPixelBuffer replacementDepthData:(nullable AVDepthData *)replacementDepthData NS_AVAILABLE_IOS(11_0);
+- (nullable NSData *)fileDataRepresentationWithReplacementMetadata:(nullable NSDictionary<NSString *, id> *)replacementMetadata replacementEmbeddedThumbnailPhotoFormat:(nullable NSDictionary<NSString *, id> *)replacementEmbeddedThumbnailPhotoFormat replacementEmbeddedThumbnailPixelBuffer:(nullable CVPixelBufferRef)replacementEmbeddedThumbnailPixelBuffer replacementDepthData:(nullable AVDepthData *)replacementDepthData API_DEPRECATED("Use fileDataRepresentationWithCustomizer: instead", ios(11.0, 12.0));
 
 /*!
  @method CGImageRepresentation
@@ -1360,7 +1498,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Each time you access this method, AVCapturePhoto generates a new CGImageRef. When backed by a compressed container (such as HEIC), the CGImageRepresentation is decoded lazily as needed. When backed by an uncompressed format such as BGRA, it is copied into a separate backing buffer whose lifetime is not tied to that of the AVCapturePhoto. For a 12 megapixel image, a BGRA CGImage represents ~48 megabytes per call. If you only intend to use the CGImage for on-screen rendering, use the previewCGImageRepresentation instead. Note that the physical rotation of the CGImageRef matches that of the main image. Exif orientation has not been applied. If you wish to apply rotation when working with UIImage, you can do so by querying the photo's metadata[kCGImagePropertyOrientation] value, and passing it as the orientation parameter to +[UIImage imageWithCGImage:scale:orientation:]. RAW images always return a CGImageRepresentation of nil. If you wish to make a CGImageRef from a RAW image, use CIRAWFilter in the CoreImage framework.
  */
-- (nullable CGImageRef)CGImageRepresentation NS_AVAILABLE_IOS(11_0);
+- (nullable CGImageRef)CGImageRepresentation API_AVAILABLE(ios(11.0));
 
 /*!
  @method CGImageRepresentation
@@ -1373,7 +1511,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Each time you access this method, AVCapturePhoto generates a new CGImageRef. This CGImageRepresentation is a RGB rendering of the previewPixelBuffer property. If you did not request a preview photo by setting the -[AVCapturePhotoSettings previewPhotoFormat] property, this method returns nil. Note that the physical rotation of the CGImageRef matches that of the main image. Exif orientation has not been applied. If you wish to apply rotation when working with UIImage, you can do so by querying the photo's metadata[kCGImagePropertyOrientation] value, and passing it as the orientation parameter to +[UIImage imageWithCGImage:scale:orientation:].
  */
-- (nullable CGImageRef)previewCGImageRepresentation NS_AVAILABLE_IOS(11_0);
+- (nullable CGImageRef)previewCGImageRepresentation API_AVAILABLE(ios(11.0));
 
 @end
 
@@ -1400,7 +1538,7 @@ typedef NS_ENUM(NSInteger, AVCaptureLensStabilizationStatus) {
     AVCaptureLensStabilizationStatusActive      = 2,
     AVCaptureLensStabilizationStatusOutOfRange  = 3,
     AVCaptureLensStabilizationStatusUnavailable = 4,
-} NS_AVAILABLE_IOS(11_0) __TVOS_PROHIBITED;
+} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 @interface AVCapturePhoto (AVCapturePhotoBracketedCapture)
 
@@ -1412,7 +1550,7 @@ typedef NS_ENUM(NSInteger, AVCaptureLensStabilizationStatus) {
  @discussion
     When specifying a bracketed capture using AVCapturePhotoBracketSettings, you specify an array of AVCaptureBracketedStillImageSettings -- one per image in the bracket. This property indicates the AVCaptureBracketedStillImageSettings associated with this particular photo, or nil if this photo is not part of a bracketed capture.
  */
-@property(nullable, readonly) AVCaptureBracketedStillImageSettings *bracketSettings NS_AVAILABLE_IOS(11_0);
+@property(nullable, readonly) AVCaptureBracketedStillImageSettings *bracketSettings API_AVAILABLE(ios(11.0));
 
 /*!
  @property sequenceCount
@@ -1422,7 +1560,7 @@ typedef NS_ENUM(NSInteger, AVCaptureLensStabilizationStatus) {
  @discussion
     If this photo is part of a bracketed capture (invoked using AVCapturePhotoBracketSettings), this property indicates the current result's count in the sequence, starting with 1 for the first result, or 0 if this photo is not part of a bracketed capture.
  */
-@property(readonly) NSInteger sequenceCount NS_AVAILABLE_IOS(11_0);
+@property(readonly) NSInteger sequenceCount API_AVAILABLE(ios(11.0));
 
 /*!
  @property lensStabilizationStatus
@@ -1432,7 +1570,84 @@ typedef NS_ENUM(NSInteger, AVCaptureLensStabilizationStatus) {
  @discussion
     In configurations where lens stabilization (OIS) is unsupported, AVCaptureLensStabilizationStatusUnsupported is returned. If lens stabilization is supported, but this photo is not part of a bracketed capture in which -[AVCapturePhotoBracketSettings setLensStabilizationEnabled:YES] was called, AVCaptureLensStabilizationStatusOff is returned. Otherwise a lens stabilization status is returned indicating how lens stabilization was applied during the capture.
  */
-@property(readonly) AVCaptureLensStabilizationStatus lensStabilizationStatus NS_AVAILABLE_IOS(11_0);
+@property(readonly) AVCaptureLensStabilizationStatus lensStabilizationStatus API_AVAILABLE(ios(11.0));
+
+@end
+
+
+/*!
+ @protocol AVCapturePhotoFileDataRepresentationCustomizer
+ @abstract
+    A set of delegate callbacks to be implemented by a client who calls AVCapturePhoto's -fileDataRepresentationWithCustomizer:.
+ 
+ @discussion
+    AVCapturePhoto is a wrapper representing a file-containerized photo in memory. If you simply wish to flatten the photo to an NSData to be written to a file, you may call -[AVCapturePhoto fileDataRepresentation]. For more complex flattening operations in which you wish to replace or strip metadata, you should call -[AVCapturePhoto fileDataRepresentationWithCustomizer:] instead, providing a delegate for customized stripping / replacing behavior. This delegate's methods are called synchronously before the flattening process commences.
+ */
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, tvos, watchos) 
+@protocol AVCapturePhotoFileDataRepresentationCustomizer <NSObject>
+
+@optional
+/*!
+ @method replacementMetadataForPhoto:
+ @abstract
+    A callback in which you may provide replacement metadata, or direct the AVCapturePhoto to strip existing metadata from the flattened file data representation.
+ 
+ @param photo
+    The calling instance of AVCapturePhoto.
+ @return
+    A dictionary of keys and values from <ImageIO/CGImageProperties.h>. To preserve existing metadata, return photo.metadata. To strip existing metadata, return nil. To replace metadata, pass a replacement dictionary.
+
+ @discussion
+    This callback is optional. If your delegate does not implement this callback, the existing metadata in the in-memory AVCapturePhoto container will be written to the file data representation.
+ */
+- (nullable NSDictionary<NSString *, id> *)replacementMetadataForPhoto:(AVCapturePhoto *)photo;
+
+/*!
+ @method replacementEmbeddedThumbnailPixelBufferWithPhotoFormat:forPhoto:
+ @abstract
+    A callback in which you may provide a replacement embedded thumbnail image with compression settings, or strip the existing embedded thumbnail image from the flattened file data representation.
+ 
+ @param replacementEmbeddedThumbnailPhotoFormatOut
+    On output, a pointer to a dictionary of keys and values from <AVFoundation/AVVideoSettings.h> If you pass a non-nil dictionary, AVVideoCodecKey is required, with AVVideoWidthKey and AVVideoHeightKey being optional. To preserve the existing embedded thumbnail photo to the flattened data, set *replacementEmbeddedThumbnailPhotoFormatOut to photo.embeddedThumbnailPhotoFormat and return nil. To strip the existing embedded thumbnail, set *replacementEmbeddedThumbnailPhotoFormatOut to nil and return nil. To replace the existing embedded thumbnail photo, pass a replacement photo format dictionary and return a non-nil replacement pixel buffer.
+ @param photo
+    The calling instance of AVCapturePhoto.
+ @return
+    A pixel buffer containing a source image to be encoded to the file as the replacement thumbnail image. To preserve the existing embedded thumbnail photo to the flattened data, set *replacementEmbeddedThumbnailPhotoFormatOut to photo.embeddedThumbnailPhotoFormat and return nil. To strip the existing embedded thumbnail, set *replacementEmbeddedThumbnailPhotoFormatOut to nil and return nil. To replace the existing embedded thumbnail photo, pass a replacement photo format dictionary and return a non-nil replacement pixel buffer.
+
+ @discussion
+    This callback is optional. If your delegate does not implement this callback, the existing embedded thumbnail photo in the in-memory AVCapturePhoto container will be written to the file data representation.
+ */
+- (nullable CVPixelBufferRef)replacementEmbeddedThumbnailPixelBufferWithPhotoFormat:(NSDictionary<NSString *, id> *_Nullable * _Nonnull)replacementEmbeddedThumbnailPhotoFormatOut forPhoto:(AVCapturePhoto *)photo;
+
+/*!
+ @method replacementDepthDataForPhoto:
+ @abstract
+    A callback in which you may provide replacement depth data, or strip the existing depth data from the flattened file data representation.
+ 
+ @param photo
+    The calling instance of AVCapturePhoto.
+ @return
+    An instance of AVDepthData. To preserve the existing depth data, return photo.depthData. To strip the existing one, return nil. To replace, provide a replacement AVDepthData instance.
+
+ @discussion
+    This callback is optional. If your delegate does not implement this callback, the existing depth data in the in-memory AVCapturePhoto container will be written to the file data representation.
+ */
+- (nullable AVDepthData *)replacementDepthDataForPhoto:(AVCapturePhoto *)photo;
+
+/*!
+ @method replacementPortraitEffectsMatteForPhoto:
+ @abstract
+    A callback in which you may provide a replacement portrait effects matte, or strip the existing portrait effects matte from the flattened file data representation.
+ 
+ @param photo
+    The calling instance of AVCapturePhoto.
+ @return
+    An instance of AVPortraitEffectsMatte. To preserve the existing portrait effects matte, return photo.portraitEffectsMatte. To strip the existing one, return nil. To replace, provide a replacement AVPortraitEffectsMatte instance.
+
+ @discussion
+    This callback is optional. If your delegate does not implement this callback, the existing portrait effects matte in the in-memory AVCapturePhoto container will be written to the file data representation.
+ */
+- (nullable AVPortraitEffectsMatte *)replacementPortraitEffectsMatteForPhoto:(AVCapturePhoto *)photo;
 
 @end
 

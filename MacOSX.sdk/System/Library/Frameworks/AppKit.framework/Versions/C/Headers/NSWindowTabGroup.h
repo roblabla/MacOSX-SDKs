@@ -1,7 +1,7 @@
 /*
     NSWindowTabGroup.h
     Application Kit
-    Copyright (c) 2017, Apple Inc.
+    Copyright (c) 2017-2018, Apple Inc.
     All rights reserved.
 */
 
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_13)
 @interface NSWindowTabGroup : NSObject {
 @private
-    NSWindowTabbingIdentifier _identifier;
+    NSWindowTabbingIdentifier _identifier APPKIT_IVAR;
 }
 
 /* The identifier for this group; all windows in the group will have the same identifier.

@@ -2,7 +2,7 @@
 //  GKLocalPlayer.h
 //  Game Center
 //
-//  Copyright 2010-2017 Apple Inc. All rights reserved.
+//  Copyright 2010-2018 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -19,6 +19,12 @@
 @class NSViewController;
 #endif
 
+typedef NS_ENUM(NSUInteger, GKAuthenticationType) {
+    GKAuthenticatingWithoutUI                = 0,
+    GKAuthenticatingWithGreenBuddyUI         = 1,    // need to accept T&C
+    GKAuthenticatingWithAuthKitInvocation    = 2,    // no account
+};
+
 
 NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
@@ -27,7 +33,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 // Obtain the primary GKLocalPlayer object.
 // The player is only available for offline play until logged in.
 // A temporary player is created if no account is set up.
-+ (GKLocalPlayer *)localPlayer NS_SWIFT_NAME(localPlayer());
+@property (class, readonly, nonnull) GKLocalPlayer *localPlayer;
 
 @property(readonly, getter=isAuthenticated, NS_NONATOMIC_IOSONLY)  BOOL authenticated; // Authentication state
 @property(readonly, getter=isUnderage, NS_NONATOMIC_IOSONLY)       BOOL underage;      // Underage state

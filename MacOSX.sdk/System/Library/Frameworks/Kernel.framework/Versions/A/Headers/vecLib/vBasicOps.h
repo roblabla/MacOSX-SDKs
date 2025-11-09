@@ -3,9 +3,9 @@
  
      Contains:   Basic Algebraic Operations for AltiVec
  
-     Version:    vecLib-622.0
+     Version:    vecLib-671.220
  
-     Copyright:  Copyright (c) 1999-2017 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 1999-2018 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -20,7 +20,7 @@
 
 #include "vecLibTypes.h"
 
-#include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -161,7 +161,7 @@ Following is a short description of functions in this section:
 extern vUInt32 
 vU64FullMulOdd(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 /*
  *  vS64FullMulOdd()
  *  
@@ -173,7 +173,7 @@ vU64FullMulOdd(
 extern vSInt32 
 vS64FullMulOdd(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 /*
  *  vU128Sub()
  *  
@@ -185,7 +185,7 @@ vS64FullMulOdd(
 extern vUInt32 
 vU128Sub(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -199,7 +199,7 @@ vU128Sub(
 extern vUInt32 
 vU128SubS(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 /*
  *  vS128Sub()
  *  
@@ -211,7 +211,7 @@ vU128SubS(
 extern vSInt32 
 vS128Sub(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -225,7 +225,7 @@ vS128Sub(
 extern vSInt32 
 vS64SubS(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -239,7 +239,7 @@ vS64SubS(
 extern vSInt32 
 vS128SubS(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 /*
  *  vU128Add()
  *  
@@ -251,7 +251,7 @@ vS128SubS(
 extern vUInt32 
 vU128Add(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -265,7 +265,7 @@ vU128Add(
 extern vUInt32 
 vU128AddS(
   vUInt32   vA,
-  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 /*
  *  vS128Add()
  *  
@@ -277,7 +277,7 @@ vU128AddS(
 extern vSInt32 
 vS128Add(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -291,7 +291,7 @@ vS128Add(
 extern vSInt32 
 vS128AddS(
   vSInt32   vA,
-  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vSInt32   vB) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 /*
  *  vLL128Shift()
  *  
@@ -303,7 +303,7 @@ vS128AddS(
 extern vUInt32 
 vLL128Shift(
   vUInt32   vA,
-  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+  vUInt8    vShiftFactor) API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 /*
  *  vLR128Shift()
  *  
@@ -315,7 +315,7 @@ vLL128Shift(
 extern vUInt32 
 vLR128Shift(
   vUInt32   vA,
-  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+  vUInt8    vShiftFactor) API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*
@@ -329,7 +329,7 @@ vLR128Shift(
 extern vUInt32 
 vA128Shift(
   vUInt32   vA,
-  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  vUInt8    vShiftFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif  // defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
 
 #endif  /* defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__) */

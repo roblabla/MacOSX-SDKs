@@ -1,6 +1,6 @@
---- !tapi-tbd-v2
+--- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: AEB93B6E-0744-348D-B627-F277541DCD7E' ]
+uuids:           [ 'x86_64: F90C32B3-7964-34AD-8ED0-1B5BAAB5ACAD' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/ServerAccounts.framework/Versions/A/ServerAccounts
 exports:         
@@ -9,5 +9,5 @@ exports:
                        _SVAccountManuallyEnteredHostName, _SVAccountUserTrustedCertificate, 
                        _SVAccountVPNConfigurationIdentifier, _ServerAccountsVersionNumber, 
                        _ServerAccountsVersionString ]
-    objc-classes:    [ _SVATrustHandler, _SVAVPNUtility, _SVAVerifier ]
+    objc-classes:    [ SVATrustHandler, SVAVPNUtility, SVAVerifier ]
 ...

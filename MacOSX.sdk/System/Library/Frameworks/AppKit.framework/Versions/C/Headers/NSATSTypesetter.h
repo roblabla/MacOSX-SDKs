@@ -1,7 +1,7 @@
 /*
         NSATSTypesetter.h
         Application Kit
-        Copyright (c) 2002-2017, Apple Inc.
+        Copyright (c) 2002-2018, Apple Inc.
         All rights reserved.
 */
 
@@ -13,29 +13,29 @@ NS_ASSUME_NONNULL_BEGIN
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSATSTypesetter : NSTypesetter {
 /* Ivars used for primitive typesetting */
-    NSAttributedString *attributedString; // The text backing-store (usually NSTextStorage)
+    NSAttributedString *attributedString APPKIT_IVAR; // The text backing-store (usually NSTextStorage)
 
-    NSRange paragraphGlyphRange; // The current glyph range being processed
+    NSRange paragraphGlyphRange APPKIT_IVAR; // The current glyph range being processed
 
-    NSRange paragraphSeparatorGlyphRange; // The current paragraph separator range (the length == 0 at the end of document)
+    NSRange paragraphSeparatorGlyphRange APPKIT_IVAR; // The current paragraph separator range (the length == 0 at the end of document)
 
-    CGFloat lineFragmentPadding; // The margin on both sides of lines
+    CGFloat lineFragmentPadding APPKIT_IVAR; // The margin on both sides of lines
 
 /* Ivars for the Cocoa Text System interface */
-    NSLayoutManager *layoutManager;
-    NSArray *textContainers;
+    NSLayoutManager *layoutManager APPKIT_IVAR;
+    NSArray *textContainers APPKIT_IVAR;
 
 /* Cached NSTextContainer settings */
-    NSTextContainer *currentTextContainer;
-    NSUInteger currentTextContainerIndex;
-    NSSize currentTextContainerSize;
+    NSTextContainer *currentTextContainer APPKIT_IVAR;
+    NSUInteger currentTextContainerIndex APPKIT_IVAR;
+    NSSize currentTextContainerSize APPKIT_IVAR;
 
 /* Cached NSParagraphStyle */
-    NSParagraphStyle *currentParagraphStyle;
+    NSParagraphStyle *currentParagraphStyle APPKIT_IVAR;
 
 @private
-    void *_atsReserved[8];
-    id _private;
+    void *_atsReserved[8] APPKIT_IVAR;
+    id _private APPKIT_IVAR;
 }
 
 // Factory methods
@@ -43,7 +43,6 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @end
 
 @interface NSATSTypesetter (NSPantherCompatibility)
-// This interface is deprecated.
 // Use -getLineFragmentRect:usedRect:forStartingGlyphAtIndex:proposedRect:lineSpacing:paragraphSpacingBefore:paragraphSpacingAfter:remainingRect: instead
 - (NSRect)lineFragmentRectForProposedRect:(NSRect)proposedRect remainingRect:(null_unspecified NSRectPointer)remainingRect NS_DEPRECATED_MAC(10_3, 10_4);
 @end

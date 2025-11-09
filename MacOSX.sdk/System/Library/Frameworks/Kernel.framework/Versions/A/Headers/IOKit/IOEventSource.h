@@ -106,6 +106,10 @@ is implicitly the first paramter in the target member function's parameter list.
     @discussion Backward compatibilty define for the old non-class scoped type definition.  See $link IOEventSource::Action */
  #define IOEventSourceAction IOEventSource::Action
 
+#ifdef __BLOCKS__
+    typedef IOReturn (^ActionBlock)();
+#endif /* __BLOCKS__ */
+
 protected:
 /*! @var eventChainNext
 	The next event source in the event chain. nil at end of chain. */
@@ -116,6 +120,7 @@ protected:
 
 /*! @var action
 	The action method called when an event has been delivered */
+
     Action action;
 
 /*! @var enabled
@@ -216,6 +221,26 @@ public:
     @abstract Get'ter for $link action variable.
     @result value of action. */
     virtual IOEventSource::Action getAction() const;
+
+#ifdef __BLOCKS__
+/*! @function setActionBlock
+    @abstract Setter for action ivar. The current block is released, & the new block is retained.
+    @param block Block pointer of type IOEventSource::ActionBlock. */
+    void setActionBlock(ActionBlock block);
+/*! @function getActionBlock
+    @abstract Getter for action ivar.
+    @result Block pointer of type IOEventSource::ActionBlock, if set, or NULL. */
+    ActionBlock getActionBlock(ActionBlock) const;
+#endif /* __BLOCKS__ */
+
+/*! @function setRefcon
+    @abstract Setter for refcon ivar. This function will assert if a block action has been set.
+    @param refcon Refcon. */
+    void setRefcon(void *refcon);
+/*! @function getRefcon
+    @abstract Getter for refcon ivar.
+    @result The refcon. This function will assert if a block action has been set. */
+    void * getRefcon() const;
 
 /*! @function enable
     @abstract Enable event source.

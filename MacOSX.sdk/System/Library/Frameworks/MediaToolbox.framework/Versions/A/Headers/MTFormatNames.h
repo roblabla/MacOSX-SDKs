@@ -3,7 +3,7 @@
  
 	Framework:  MediaToolbox
  
-	Copyright 2015 Apple Inc. All rights reserved.
+	Copyright © 2015-2018 Apple Inc. All rights reserved.
  
 */
 
@@ -19,9 +19,9 @@ extern "C"  {
 
 #pragma pack(push, 4)
 
-MT_EXPORT CFStringRef CM_NULLABLE MTCopyLocalizedNameForMediaType( CMMediaType mediaType );
+MT_EXPORT CFStringRef CM_RETURNS_RETAINED CM_NULLABLE MTCopyLocalizedNameForMediaType( CMMediaType mediaType );
 
-MT_EXPORT CFStringRef CM_NULLABLE MTCopyLocalizedNameForMediaSubType( CMMediaType mediaType, FourCharCode mediaSubType );
+MT_EXPORT CFStringRef CM_RETURNS_RETAINED CM_NULLABLE MTCopyLocalizedNameForMediaSubType( CMMediaType mediaType, FourCharCode mediaSubType );
 
 #pragma pack(pop)
 

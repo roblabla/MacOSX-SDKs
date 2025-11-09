@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <Accounts/AccountsDefines.h>
 
-ACCOUNTS_EXTERN NSString * const ACErrorDomain NS_AVAILABLE(10_8, 5_0);
+ACCOUNTS_EXTERN NSString * const ACErrorDomain API_AVAILABLE(ios(5.0), macos(10.8));
 
 typedef enum ACErrorCode {
     ACErrorUnknown = 1,

@@ -15,6 +15,7 @@ extern "C" {
 #endif
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreGraphics/CGRemoteOperation.h>
 #include <ApplicationServices/ApplicationServices.h>
 CF_ASSUME_NONNULL_BEGIN
 CF_IMPLICIT_BRIDGING_ENABLED

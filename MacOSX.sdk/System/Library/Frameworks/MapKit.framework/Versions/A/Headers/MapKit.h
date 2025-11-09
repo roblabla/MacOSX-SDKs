@@ -57,9 +57,12 @@
 #import <MapKit/MKPolylineView.h>
 #import <MapKit/MKCircleView.h>
 #import <MapKit/MKScaleView.h>
+#import <MapKit/MKUserTrackingBarButtonItem.h>
+#endif // TARGET_OS_IPHONE
+
+#if TARGET_OS_IOS
 #import <MapKit/MKCompassButton.h>
 #import <MapKit/MKUserTrackingButton.h>
-#import <MapKit/MKUserTrackingBarButtonItem.h>
-#endif
+#endif // TARGET_OS_IOS
 
-#endif
+#endif // __has_include(<MapKit/MKMapView.h>)

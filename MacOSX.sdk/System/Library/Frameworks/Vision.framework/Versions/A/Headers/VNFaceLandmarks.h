@@ -6,9 +6,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CGGeometry.h>
 #import <Vision/VNDefines.h>
 #import <Vision/VNTypes.h>
 #import <simd/simd.h>
+
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -16,11 +18,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @class VNFaceLandmarkRegion
- @brief VNFaceLandmarkRegion are accessors to the landmark points of that specific region. The VNFaceLandmarkRegion is an abstract baseclass.
+ @brief VNFaceLandmarkRegion the object acting as a collection of landmark points for defining a specific region of the face (including potentially all of the landmark points for a face). The VNFaceLandmarkRegion is an abstract base class.
  */
 
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNFaceLandmarkRegion : NSObject
+
+- (instancetype) init NS_UNAVAILABLE;
+
 /*!
  @brief pointCount returns the amount of points in a given region. This can be zero if no points for a region could be found.
  */
@@ -30,31 +35,52 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 
 
 /*!
- @class VNFaceLandmarkRegion
- @brief VNFaceLandmarkRegion2D gives access to the landmark points in 2D. The points are stored as vector_float2 and must not be modified..
+ @class VNFaceLandmarkRegion2D
+ @brief VNFaceLandmarkRegion2D gives access to the 2D landmark points for the region. The points are stored as vector_float2 and must not be modified.
  */
 
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNFaceLandmarkRegion2D : VNFaceLandmarkRegion
 
 /*!
- @brief All points in the region in form of a C array which can be accessed by points[idx].
- */
-@property (readonly, nullable) const vector_float2 *points; // the values of the points cannot be modified
+	@brief	Obtains the array of normalized landmark points.
+ 
+	@discussion	Provides the address of a buffer containing the array of CGPoints representing the landmark points.  This buffer is owned by the target object and is guaranteed to exist as long as the VNFaceLandmarkRegion2D does.
+
+	@return the address of the array of pointCount points.
+*/
+@property (readonly, assign, nullable) const CGPoint* normalizedPoints NS_RETURNS_INNER_POINTER;
+
 
 /*!
- @brief Returns a landmark point at the given index, if the index is valid otherwise vector_float2 of {0.0f, 0.0f} gets returned.
- */
-- (vector_float2)pointAtIndex:(NSUInteger)index;
+	@brief	Provides the array of landmark points in the coordinate space of a specific image size.
+	
+	@discussion	Provides the address of a buffer containing the array of CGPoints representing the landmark points in the coordinate space of a specific image size.  This buffer is owned by the target object and is guaranteed to exist as long as the VNFaceLandmarkRegion2D does.
+
+	@param	imageSize			The pixel dimensions of the image in which the landmark points are being presented.
+	
+	@return the address of the array of pointCount points, or NULL if the conversion could not take place.
+*/
+- (const CGPoint*) pointsInImageOfSize:(CGSize)imageSize NS_RETURNS_INNER_POINTER;
+
 
 @end
 
 
 
-
+/*!
+ @class VNFaceLandmarks
+ @brief VNFaceLandmarks2D is the result of a face landmarks request. It is an abstract base class.
+ 
+ */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNFaceLandmarks : NSObject
 
+- (instancetype) init NS_UNAVAILABLE;
+
+/*!
+ @brief a confidence estimate for the returned landmarks.
+ */
 @property (readonly) VNConfidence confidence;
 
 @end
@@ -63,74 +89,74 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 
 /*!
  @class VNFaceLandmarks2D
- @brief VNFaceLandmarks2D is the result of a face landmarks 2D request.
+ @brief VNFaceLandmarks2D is the result of a face landmarks 2D request, containing detected facial landmark points organized into VNFaceLandmarkRegion2D regions. The points are accessible as a full list, or as sub-gruops representing pre-defined facial regions.
  
  */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNFaceLandmarks2D : VNFaceLandmarks
 /*!
- @brief allPoints contains all face landmark points.
+ @brief allPoints the region containing all face landmark points.
  */
 @property (readonly, nullable) VNFaceLandmarkRegion2D *allPoints;
 
 /*!
- @brief faceContour contains the point that describe the face contour from cheek over chin to cheek.
+ @brief faceContour the region containing the points that describe the face contour from cheek over chin to cheek.
  */
 @property (readonly, nullable) VNFaceLandmarkRegion2D *faceContour;
 
 /*!
- @brief leftEye contains the points describing the outline of the left eye.
+ @brief leftEye the region containing the points describing the outline of the left eye.
  */
 @property (readonly, nullable) VNFaceLandmarkRegion2D *leftEye;
 
 /*!
- @brief rightEye contains the points describing the outline of the right eye.
+ @brief rightEye the region containing the points describing the outline of the right eye.
  */
 @property (readonly, nullable) VNFaceLandmarkRegion2D *rightEye;
 
 /*!
- @brief leftEyebrow contains the points describing the trace of the left eyebrow.
+ @brief leftEyebrow the region containing the points describing the trace of the left eyebrow.
  */
 @property (readonly, nullable) VNFaceLandmarkRegion2D *leftEyebrow;
 
 /*!
- @brief rightEyebrow contains the points describing the trace of the right eyebrow.
+ @brief rightEyebrow the region containing the points describing the trace of the right eyebrow.
  */
 @property (readonly, nullable) VNFaceLandmarkRegion2D *rightEyebrow;
 
 /*!
- @brief nose contains the points describing the outline of the nose.
+ @brief nose the region containing the points describing the outline of the nose.
  */
 @property (readonly, nullable) VNFaceLandmarkRegion2D *nose;
 
 /*!
- @brief noseCrest contains the points describing the trace of the center crest of the nose.
+ @brief noseCrest the region containing the points describing the trace of the center crest of the nose.
  */
 @property (readonly, nullable) VNFaceLandmarkRegion2D *noseCrest;
 
 /*!
- @brief medianLine contains the points describing the trace of the center line of the face.
+ @brief medianLine the region containing the points describing the trace of the center line of the face.
  */
 @property (readonly, nullable) VNFaceLandmarkRegion2D *medianLine;
 
 /*!
- @brief outer lips contains the points describing the outline of the outside of the lips.
+ @brief outer lips the region containing the points describing the outline of the outside of the lips.
  */
 @property (readonly, nullable) VNFaceLandmarkRegion2D *outerLips;
 
 /*!
- @brief innerLips contains the points describing the outline of the space between the of the lips.
+ @brief innerLips the region containing the points describing the outline of the space between the of the lips.
  */
 @property (readonly, nullable) VNFaceLandmarkRegion2D *innerLips;
 
 /*!
- @brief leftPupil contains the point where the left pupil is located.  This value may be inaccurate if
+ @brief leftPupil the region containing the point where the left pupil is located.  This value may be inaccurate if
  the face isBlinking.
  */
 @property (readonly, nullable) VNFaceLandmarkRegion2D *leftPupil;
 
 /*!
- @brief rightPupil contains the point where the right pupil is located.  This value may be inaccurate if
+ @brief rightPupil the region containing the point where the right pupil is located.  This value may be inaccurate if
  the face isBlinking.
  */
 @property (readonly, nullable) VNFaceLandmarkRegion2D *rightPupil;

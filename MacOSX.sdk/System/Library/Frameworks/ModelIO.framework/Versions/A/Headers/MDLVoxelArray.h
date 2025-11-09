@@ -49,7 +49,7 @@ typedef struct {
           series of shells on the outside and inside of the surface.
  */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 MDL_EXPORT
 @interface MDLVoxelArray : MDLObject
 
@@ -87,7 +87,7 @@ MDL_EXPORT
                     divisions:(int)divisions
                interiorShells:(int)interiorShells
                exteriorShells:(int)exteriorShells
-                  patchRadius:(float)patchRadius;
+                  patchRadius:(float)patchRadius NS_DEPRECATED(10_11, 10_12, NA, NA);
 
 /**
  Initialize a voxel grid from an MDLAsset and dilate the resulting voxels by

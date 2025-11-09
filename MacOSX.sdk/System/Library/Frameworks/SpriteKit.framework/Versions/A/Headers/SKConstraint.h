@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  SKRange object used to define a range of allowable values 
  */
 NS_CLASS_AVAILABLE(10_10, 8_0)
-SK_EXPORT @interface SKRange : NSObject <NSCoding, NSCopying>
+SK_EXPORT @interface SKRange : NSObject <NSSecureCoding, NSCopying>
 
 /* SKRange with a lower and upper limit. Designated initializer. */
 - (instancetype)initWithLowerLimit:(CGFloat)lower upperLimit:(CGFloat)upper NS_DESIGNATED_INITIALIZER;
@@ -60,7 +60,7 @@ SK_EXPORT @interface SKRange : NSObject <NSCoding, NSCopying>
  The node's transform will be changed to staisfy the constarint
  */
 NS_CLASS_AVAILABLE(10_10, 8_0)
-SK_EXPORT @interface SKConstraint : NSObject <NSCoding, NSCopying>
+SK_EXPORT @interface SKConstraint : NSObject <NSSecureCoding, NSCopying>
 
 /* Wether the constraint should apply. Defualts to YES */
 @property BOOL enabled;

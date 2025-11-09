@@ -1,7 +1,8 @@
 //
 //  SCNAudioSource.h
+//  SceneKit
 //
-//  Copyright (c) 2015-2017 Apple Inc. All rights reserved.
+//  Copyright © 2015-2018 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SCNNode.h>
@@ -14,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  @class SCNAudioSource
  @abstract The SCNAudioSource class represents an audio source that can be added to a SCNNode.
  */
-API_AVAILABLE(macos(10.11), ios(9.0))
+SCN_EXPORT API_AVAILABLE(macos(10.11), ios(9.0))
 @interface SCNAudioSource : NSObject <NSCopying, NSSecureCoding>
 
 /*!
@@ -63,13 +64,13 @@ API_AVAILABLE(macos(10.11), ios(9.0))
 
 /*!
  @property loops
- @abstract Specifies whether the audio source should loop or not. Default to NO.
+ @abstract Specifies whether the audio source should loop or not. Defaults to NO.
  */
 @property(nonatomic) BOOL loops;
 
 /*!
  @property shouldStream
- @abstract Specifies whether the audio source should be streamed or not. Default to NO.
+ @abstract Specifies whether the audio source should be streamed or not. Defaults to NO.
  */
 @property(nonatomic) BOOL shouldStream;
 
@@ -82,7 +83,7 @@ API_AVAILABLE(macos(10.11), ios(9.0))
 
 @end
 
-API_AVAILABLE(macos(10.11), ios(9.0))
+SCN_EXPORT API_AVAILABLE(macos(10.11), ios(9.0))
 @interface SCNAudioPlayer : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
