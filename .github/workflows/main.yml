@@ -1,0 +1,40 @@
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+    inputs: {}
+jobs:
+
+  download-data:
+    name: Download information about XCode Releases
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: data
+
+    - run: curl https://xcodereleases.com/data.json > releases.json
+    - run: git diff --exit-code releases.json && echo "FOUND_CHANGES=0" >> $GITHUB_ENV || echo "FOUND_CHANGES=1" >> $GITHUB_ENV
+    - run: echo "LATEST_VERSION=$(jq -r -r '[.[]|select(.version.release.release)][0].version.number' releases.json)" >> $GITHUB_ENV
+    - run: echo ${{ env.LATEST_VERSION }} > latest_version
+    - run: git diff --exit-code latest_version && echo "NEW_VERSION=0" >> $GITHUB_ENV || echo "NEW_VERSION=1" >> $GITHUB_ENV
+    - uses: EndBug/add-and-commit@v7
+      with:
+        branch: data
+        default_author: github_actions
+        message: Update manifest
+        pull_strategy: 'NO-PULL'
+        push: true
+    - name: Create Release
+      uses: actions/create-release@v1
+      if: ${{ env.NEW_VERSION == '1' }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ env.LATEST_VERSION }}
+        release_name: ${{ env.LATEST_VERSION }}
+        # TODO: This is a horrible hack.
+        commitish: "data"
+        draft: false
+        prerelease: false
+  # Make a new release if there's a difference
