@@ -27,4 +27,6 @@ typedef NS_ENUM(NSInteger, SFSpeechRecognitionTaskHint) {
     ///
     /// Use this hint type when you are using speech recognition to handle confirmation commands, such as "yes," "no," or "maybe."
     SFSpeechRecognitionTaskHintConfirmation = 3,
-} API_AVAILABLE(ios(10.0), macos(10.15), tvos(18));
+}
+API_AVAILABLE(ios(10.0), macos(10.15))
+API_UNAVAILABLE(tvos);

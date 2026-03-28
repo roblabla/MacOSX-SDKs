@@ -1,0 +1,10 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ arm64e-macos ]
+install-name:    '/System/Library/PrivateFrameworks/AppleGPIOUser.framework/Versions/A/AppleGPIOUser'
+exports:
+  - targets:         [ arm64e-macos ]
+    symbols:         [ _AppleGPIOUserVersionNumber, _AppleGPIOUserVersionString, 
+                       _GPIOUserCreate, _GPIOUserGetGPIOData, _GPIOUserSetGPIOData ]
+    objc-classes:    [ GPIOUser ]
+...

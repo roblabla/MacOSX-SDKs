@@ -1,7 +1,7 @@
 /*
     NSManagedObjectModelReference.h
     Core Data
-    Copyright (c) 2023-2025, Apple Inc.
+    Copyright (c) 2023-2026, Apple Inc.
     All rights reserved.
 */
 

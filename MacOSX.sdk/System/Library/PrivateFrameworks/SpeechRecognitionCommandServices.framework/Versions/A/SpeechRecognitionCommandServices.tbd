@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpeechRecognitionCommandServices.framework/Versions/A/SpeechRecognitionCommandServices'
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFjPK9CMDPTokenEEE, __ZTSNSt3__110__function6__baseIFjPK9CMDPTokenEEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s32SpeechRecognitionCommandServices19VCCommandCollectionV03allC11CollectionsSayACGvgZ', 
                        '_$s32SpeechRecognitionCommandServices19VCCommandCollectionV03allC11CollectionsSayACGvpZMV', 
                        '_$s32SpeechRecognitionCommandServices19VCCommandCollectionV10identifier11displayName14showInSettings0j11CodingGuidekL08commandsACSS_SSS2bSayAA0E0VGtcfC', 

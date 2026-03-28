@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MDMClientLibrary.framework/Versions/A/MDMClientLibrary'
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/DEPClientLibrary.framework/Versions/A/DEPClientLibrary' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _HTTPResponseKeyBody, _HTTPResponseKeyDownloadURL, _HTTPResponseKeyHeaders, 
                        _HTTPResponseKeyStatusCode, _MDMAuthenticatorAuthParamMethodName, 
                        _MDMAuthenticatorWebAuthScheme, _MDMBearerAuthTokensToken, 
@@ -83,13 +83,14 @@ exports:
                        _kMDMOptionActivationLockAllowedWhileSupervisedKey, _kMDMOptionIdleRebootAllowed, 
                        _kMDMOptionsKey, _kMDMOrganizationInfoKey, _kMDMPQueryAccessibilitySettings, 
                        _kMDMPQueryAppAnalyticsEnabled, _kMDMPQueryAppStoreUserAgent, 
-                       _kMDMPQueryAvailableDeviceCapacity, _kMDMPQueryAwaitingConfiguration, 
-                       _kMDMPQueryBatteryLevel, _kMDMPQueryBluetoothMAC, _kMDMPQueryBuildVersion, 
-                       _kMDMPQueryCarrierSettingsVersion, _kMDMPQueryCellularTechnology, 
-                       _kMDMPQueryCurrentCarrierNetwork, _kMDMPQueryCurrentMCC, _kMDMPQueryCurrentMNC, 
-                       _kMDMPQueryDataRoamingEnabled, _kMDMPQueryDeviceCapacity, 
-                       _kMDMPQueryDeviceID, _kMDMPQueryDeviceName, _kMDMPQueryDevicePropertiesAttestation, 
-                       _kMDMPQueryDiagnosticSubmissionEnabled, _kMDMPQueryEASDeviceIdentifier, 
+                       _kMDMPQueryAuthenticatedTemporarySession, _kMDMPQueryAvailableDeviceCapacity, 
+                       _kMDMPQueryAwaitingConfiguration, _kMDMPQueryBatteryLevel, 
+                       _kMDMPQueryBluetoothMAC, _kMDMPQueryBuildVersion, _kMDMPQueryCarrierSettingsVersion, 
+                       _kMDMPQueryCellularTechnology, _kMDMPQueryCurrentCarrierNetwork, 
+                       _kMDMPQueryCurrentMCC, _kMDMPQueryCurrentMNC, _kMDMPQueryDataRoamingEnabled, 
+                       _kMDMPQueryDeviceCapacity, _kMDMPQueryDeviceID, _kMDMPQueryDeviceName, 
+                       _kMDMPQueryDevicePropertiesAttestation, _kMDMPQueryDiagnosticSubmissionEnabled, 
+                       _kMDMPQueryDirectUserSwitch, _kMDMPQueryEASDeviceIdentifier, 
                        _kMDMPQueryEID, _kMDMPQueryEstimatedResidentUsers, _kMDMPQueryICCID, 
                        _kMDMPQueryIMEI, _kMDMPQueryIsActivationLockEnabled, _kMDMPQueryIsCloudBackupEnabled, 
                        _kMDMPQueryIsDNDInEffect, _kMDMPQueryIsDeviceLocatorServiceEnabled, 
@@ -157,10 +158,10 @@ exports:
                        MDMUserClient, MDMUserConfiguration ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DEPClientLibrary.framework/Versions/A/DEPClientLibrary'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CCConfigurationDidChangeNotification, _DEPClientLibraryVersionNumber, 
                        _DEPClientLibraryVersionString, _DEPCloudConfigErrorDomain, 
                        _DEPErrorArray, _DEPErrorTypeFatal, _DEPErrorTypeKey, _DEPLocalizedString, 

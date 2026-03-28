@@ -1,20 +1,22 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DeviceRegulatoryInfo.framework/Versions/A/DeviceRegulatoryInfo'
-current-version: 1.2.2
+current-version: 1.4.2
 compatibility-version: 0
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ '=', AboutExtension, DeviceRegulatoryInfoTests, LD_DYLIB_ALLOWABLE_CLIENTS, 
                        MacBuddyTests, Setup Assistant, System Information ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s20DeviceRegulatoryInfo0B12AssetLocatorC010regulatoryD3URL10Foundation0G0VSgvg', 
                        '_$s20DeviceRegulatoryInfo0B12AssetLocatorC010regulatoryD3URL10Foundation0G0VSgvpMV', 
                        '_$s20DeviceRegulatoryInfo0B12AssetLocatorC03hasB6AssetsSbvg', 
                        '_$s20DeviceRegulatoryInfo0B12AssetLocatorC03hasB6AssetsSbvpMV', 
+                       '_$s20DeviceRegulatoryInfo0B12AssetLocatorC16noCOORegionCodesShySSGvgZ', 
+                       '_$s20DeviceRegulatoryInfo0B12AssetLocatorC16noCOORegionCodesShySSGvpZMV', 
                        '_$s20DeviceRegulatoryInfo0B12AssetLocatorC6sharedACvgZ', 
                        '_$s20DeviceRegulatoryInfo0B12AssetLocatorC6sharedACvpZMV', 
                        '_$s20DeviceRegulatoryInfo0B12AssetLocatorCMa', '_$s20DeviceRegulatoryInfo0B12AssetLocatorCMm', 

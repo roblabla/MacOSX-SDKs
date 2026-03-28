@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MediaContinuityKit.framework/Versions/A/MediaContinuityKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Identifier18MediaContinuityKit0B19StreamConfigurationPTl', 
                        '_$s13Configuration18MediaContinuityKit0B6StreamPTl', '_$s18MediaContinuityKit0A12StreamErrorsO010unexpectedD10IdentifieryA2CmFWC', 
                        '_$s18MediaContinuityKit0A12StreamErrorsO07missingA23ConnectionPrerequisitesyA2CmFWC', 

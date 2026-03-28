@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz'
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/PDFKit.framework/Versions/A/PDFKit', 
                        '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/ImageKit.framework/Versions/A/ImageKit', 
                        '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzComposer.framework/Versions/A/QuartzComposer', 
@@ -12,10 +12,10 @@ reexported-libraries:
                        '/System/Library/Frameworks/QuickLookUI.framework/Versions/A/QuickLookUI' ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/ImageKit.framework/Versions/A/ImageKit'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _IKAnimationDelayKey, _IKAnimationDurationKey, _IKAnimationFrameRateKey, 
                        _IKAnimationVelocityCurveKey, _IKBestRepresentationFromNSImageForPhysicalSize, 
                        _IKCGBitmapContextRefFromCGImageRef, _IKCGBitmapContextRefFromData, 
@@ -111,9 +111,9 @@ exports:
                        IKImageWrapper, IKInterfaceBuilderImage, IKInterfaceBuilderSharedDatasource, 
                        IKInterfaceBuilderSharedDelegate, IKPTCropView, IKPathPopupButton, 
                        IKPictureTaker, IKPictureTakerController, IKPictureTakerRecentPicture, 
-                       IKPictureTakerRecentPictureRepository, IKProfilePictureAttributedImage, 
-                       IKProfilePictureView, IKReflectiveIconCell, IKSaveOptions, 
-                       IKScannerDeviceView, IKSlideshow, IKiOSStyleGroupCell, _IKiOSStyleGroupCell ]
+                       IKPictureTakerRecentPictureRepository, IKProfilePictureView, 
+                       IKReflectiveIconCell, IKSaveOptions, IKScannerDeviceView, 
+                       IKSlideshow, IKiOSStyleGroupCell, _IKiOSStyleGroupCell ]
     objc-ivars:      [ IKCameraServices._hardwareCapsChangeNotifier, IKCameraServices._irisListener, 
                        IKCameraServices._observerCount, IKFilterBrowserPanel._filterBrowserView, 
                        IKFinderCell._canDrawPlaceholder, IKFinderCell._isMoreButton, 
@@ -227,11 +227,11 @@ exports:
                        _IKiOSStyleGroupCell._titleSelectionImage ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzComposer.framework/Versions/A/QuartzComposer'
 current-version: 168
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _GFArrayFromArgumentList, _GFBacktrace, _GFDebug, _GFDebuggingLevel, 
                        _GFException, _GFFilterStringsWithKeywords, _GFGetDebugMessageCallback, 
                        _GFGetLogMessageCallback, _GFKeywordsFromSearchString, _GFLog, 
@@ -358,7 +358,7 @@ exports:
                        QCArray._array, QCArray._count, QCArray._elementSize, QCContext._iterationManager, 
                        QCParameterInfo.size, QCParameterInfo.type, QCPatch._renderingInfo, 
                        QCPatchRenderingInfo._context, QCPatchRenderingInfo.flags ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ _C3DAddBaseType, _C3DAnimationChannelCreate, _C3DAnimationChannelCreateCopy, 
                        _C3DAnimationChannelGetAnimation, _C3DAnimationChannelGetSID, 
                        _C3DAnimationChannelGetTarget, _C3DAnimationChannelGetTargetPath, 
@@ -3125,10 +3125,10 @@ exports:
                        QCXMLDownloader.outputSignal, QCXMLDownloader.outputStructure ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzFilters.framework/Versions/A/QuartzFilters'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _QuartzFilterApplyToContext, _QuartzFilterCopyContextDict, 
                        _QuartzFilterCreateHostMatchingFilter, _QuartzFilterCreateImageCoverter, 
                        _QuartzFilterCreateWithOutputIntents, _QuartzFilterCreateWithURL, 

@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle/Contents/MacOS/libccid.dylib'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _IFDHCloseChannel, _IFDHControl, _IFDHCreateChannel, _IFDHCreateChannelByName, 
                        _IFDHGetCapabilities, _IFDHICCPresence, _IFDHPowerICC, _IFDHSetCapabilities, 
                        _IFDHSetProtocolParameters, _IFDHTransmitToICC, _g_rgSCardRawPci, 

@@ -86,6 +86,11 @@ CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 // by calling [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithDomainIdentifiers:].
 @property(nullable, copy) NSString *domainIdentifier CS_AVAILABLE(10_13, 10_0) CS_TVOS_UNAVAILABLE;
 
+@property(nonatomic, nullable, copy, readonly) NSString *textContentSummary NS_AVAILABLE(15_4, 18_4);
+
+// Write-only accessor for transcribed textContent. This property can be queried as textContent.
+@property(nonatomic, nullable, strong) NSString *transcribedTextContent NS_AVAILABLE(15_4, 18_4);
+
 @end
 
 CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE

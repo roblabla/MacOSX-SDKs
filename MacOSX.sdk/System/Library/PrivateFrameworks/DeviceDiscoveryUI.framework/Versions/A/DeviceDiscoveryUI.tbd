@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DeviceDiscoveryUI.framework/Versions/A/DeviceDiscoveryUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s17DeviceDiscoveryUI07AirDropB4ViewV03airE6Client8bundleID010pinPairingF5ModelAC7Sharing05SFAireH0C_SSSgAA0de3PinlfM0CtcfC', 
                        '_$s17DeviceDiscoveryUI07AirDropB4ViewV03airE6Client8bundleID18previewImageLoader010pinPairingF5ModelAC7Sharing05SFAireH0C_SSSg10Foundation4DataVSgyYacAA0de3PinofP0CtcfC', 
                        '_$s17DeviceDiscoveryUI07AirDropB4ViewV03airE6Client8bundleID18previewImageLoaderAC7Sharing05SFAireH0C_SSSg10Foundation4DataVSgyYactcfC', 

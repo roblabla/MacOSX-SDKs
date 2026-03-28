@@ -166,5 +166,21 @@
 
 #define GUARD_TYPE_REJECTED_SC  0x6     /* rejected system call trap */
 
+/*
+ * App resumes use the exception codes like this:
+ *
+ * code:
+ * +-------------------------------+----------------------+------------+
+ * |[63:61] GUARD_TYPE_APP_RESUME  | [60:32] unused       | [31:0] pid |
+ * +-------------------------------+----------------------+------------+
+ *
+ * subcode:
+ * +----------------------------------------------------------------+
+ * |[63:0] unused                                                   |
+ * +----------------------------------------------------------------+
+ */
+
+#define GUARD_TYPE_FROZEN_SWAPIN 0x7     /* swapin of frozen app */
+
 
 #endif /* _EXC_GUARD_H_ */

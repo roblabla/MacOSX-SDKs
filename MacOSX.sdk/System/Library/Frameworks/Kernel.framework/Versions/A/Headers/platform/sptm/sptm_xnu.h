@@ -89,8 +89,12 @@
 #define SPTM_FUNCTIONID_BATCH_SIGN_USER_POINTER  40
 #define SPTM_FUNCTIONID_SURT_ALLOC               41
 #define SPTM_FUNCTIONID_SURT_FREE                42
-#define SPTM_FUNCTIONID_SPTM_SERIAL_PUTC         43
-#define SPTM_FUNCTIONID_SPTM_SERIAL_DISABLE      44
+#define SPTM_FUNCTIONID_CONDEMN_LEAF_TABLE       43
+#define SPTM_FUNCTIONID_UNCONDEMN_LEAF_TABLE     44
+#define SPTM_FUNCTIONID_SPTM_SERIAL_PUTC         45
+#define SPTM_FUNCTIONID_SPTM_SERIAL_DISABLE      46
+#define SPTM_FUNCTIONID_PROGRAM_IRGKEY 48
+#define SPTM_FUNCTIONID_REG_SNAPSHOT   49
 
 #ifndef __ASSEMBLER__
 
@@ -106,25 +110,44 @@
 /**
  * SPTM API Return Codes (to be used with sptm_return_t types).
  *
- * The SPTM is designed to either return some flavor of success, or panic in
- * most cases. The only case where an error should be returned is when relaying
- * TXM enforcement errors.
+ * The SPTM will panic in any case when it detects a violation of the security model,
+ * but may return a non-fatal error for cases in which some bit of mapping state doesn't
+ * support the requested operation but also does not violate the security model.
  */
 #define SPTM_SWITCH_RCTX_FLUSH_SHIFT      31
 #define SPTM_SWITCH_ASID_TLBI_FLUSH_SHIFT 30
 #define SPTM_SWITCH_RETURN_CODE_MASK      0xF0000000
 
 enum : uint32_t {
+	/* The operation was successful. */
 	SPTM_SUCCESS,
 
+	/* The mapping update succeeded, and replaced an existing valid mapping. */
 	SPTM_MAP_VALID,
+
+	/**
+	 * The mapping operation could not be completed because a TLBI for a recently-
+	 * removed previous mapping is still in-flight.
+	 */
 	SPTM_MAP_FLUSH_PENDING,
+
+	/* The TXM rejected the mapping due to a code signature validation failure. */
 	SPTM_MAP_CODESIGN_ERROR,
 
+	/* Currently unused. */
 	SPTM_UNMAP_FLUSH_PENDING,
 
 	/* Update is successful, but TLBI is not issued as requested. */
 	SPTM_UPDATE_DELAYED_TLBI,
+
+	/* Mapping already present but with different physical address. */
+	SPTM_MAP_PADDR_CONFLICT,
+
+	/* Page table not present (at any level) for an operation against a VA. */
+	SPTM_TABLE_NOT_PRESENT,
+
+	/* Page table already present (at the specified level) for an operation to install a table. */
+	SPTM_TABLE_ALREADY_PRESENT,
 
 	/* Switch is successful, and there has been an RCTX. */
 	SPTM_SWITCH_RCTX_FLUSH = (1U << SPTM_SWITCH_RCTX_FLUSH_SHIFT),
@@ -136,6 +159,21 @@ enum : uint32_t {
 /* SPTM API Limits. This is used to limit the amount of looping in the SPTM. */
 #define SPTM_BATCHED_OPS_LIMIT 64U
 #define SPTM_MAPPING_LIMIT     SPTM_BATCHED_OPS_LIMIT
+
+/**
+ * This structure is returned by sptm_map_page(), at the beginning of the
+ * per-CPU scratch page.
+ */
+typedef struct {
+	/* Previous value stored in the PTE updated by sptm_map_page(). */
+	sptm_pte_t prev_pte;
+
+	/**
+	 * PAPT virtual address of the PTE updated by sptm_map_page(),
+	 * for xnu bookkeeping purposes.
+	 */
+	sptm_papt_t ptep;
+} sptm_map_page_output_t;
 
 /**
  * Definitions for supported Page Table geometries.
@@ -523,17 +561,16 @@ typedef struct {
 /**
  * Overridable "syscall" entry/exit hooks (weak symbols)
  *
- * @note Each hook is REQUIRED to preserve x0 through x7 and x16 if it clobbers
- *       those registers.
+ * @note Each hook is REQUIRED to preserve x0 through x7 if it clobbers
+ *       those registers. x16 need NOT be preserved: the dispatch ID is
+ *       loaded into x16 after the pre-entry hook returns and immediately
+ *       before genter.
  *
  * @note Each set of hooks is executed before/after entering/exiting
  *       (respectively) the named destination domain.
  */
 void __attribute__((weak)) _sptm_pre_entry_hook(void);
 void __attribute__((weak)) _sptm_post_exit_hook(void);
-
-void __attribute__((weak)) _sk_pre_entry_hook(void);
-void __attribute__((weak)) _sk_post_exit_hook(void);
 
 /**
  * Function called by the SPTM once it is ready for its CTRR and CTXR regions to
@@ -567,6 +604,7 @@ void sptm_init_xnu_fixups_complete(void);
  * This must be called prior to machine lockdown.
  */
 void sptm_disable_kernel_mode_cpa2(void);
+
 
 /**
  * Function called by XNU if XNU ever enters a panic state. When this happens, a
@@ -622,14 +660,17 @@ sptm_return_t sptm_map_page(sptm_root_pt_u root_pt_U,
  *                     For example, when mapping a newly-created L3 table, [target_level]
  *                     should be 2.
  * @param new_tte TTE to write into the page table.
+ *
+ * @return SPTM_TABLE_ALREADY_PRESENT if the TTE for [vaddr] at [target_level] is non-empty,
+ *         otherwise [new_tte] is assigned to the TTE and SPTM_SUCCESS is returned.
  */
 #if !USE_UNSAFE_TYPES
-void sptm_map_table(sptm_paddr_t root_pt_paddr,
+sptm_return_t sptm_map_table(sptm_paddr_t root_pt_paddr,
     sptm_vaddr_t vaddr,
     sptm_pt_level_t target_level,
     sptm_tte_t new_tte);
 #else
-void sptm_map_table(sptm_root_pt_u root_pt_U,
+sptm_return_t sptm_map_table(sptm_root_pt_u root_pt_U,
     sptm_aligned_vaddr_u aligned_vaddr_U,
     sptm_pt_level_u target_level_U,
     sptm_tte_u new_tte_U);
@@ -716,6 +757,52 @@ void sptm_surt_free(sptm_surt_frame_u surt_frame_U, sptm_surt_index_u surt_index
 #endif
 
 /**
+ * Mark a translation table entry at the twig level as "condemned".  This marks the leaf page
+ * table page mapped by the TTE as a candidate for future removal via sptm_unmap_table().
+ * If the chain of TTEs mapping a given valid PTE includes a condemned TTE, that PTE may be
+ * downgraded or removed (using any of the disjoint or region unmap/update calls), but any
+ * attempt to install a new PTE using sptm_map_page() will return SPTM_MAP_TABLE_NOT_PRESENT.
+ * This prevents new references from being added to a page table page that xnu is preparing
+ * to destroy.
+ *
+ * @note This operation is only allowed to be issued against root tables of type
+ *       XNU_USER_ROOT_TABLE, and the table mapped by the TTE to be condemned must be of type
+ *       XNU_PAGE_TABLE.  In other words, kernel page tables, commpage page tables, and
+ *       shared page tables may not be condemned.
+ *
+ * @param root_pt_paddr Physical address of the root page table for the user or stage-2
+ *                      address space in which the leaf table is to be condemned.
+ *
+ * @param vaddr Twig-aligned virtual address mapped by the leaf table to be condemned.
+ *
+ * @return SPTM_TABLE_NOT_PRESENT if the TTE is invalid or already condemned,
+ *         SPTM_SUCCESS otherwise.
+ */
+#if !USE_UNSAFE_TYPES
+sptm_return_t sptm_condemn_leaf_table(sptm_paddr_t root_pt_paddr, sptm_vaddr_t vaddr);
+#else
+sptm_return_t sptm_condemn_leaf_table(sptm_root_pt_u root_pt_U,
+    sptm_aligned_vaddr_u aligned_vaddr_U);
+#endif
+
+/**
+ * Undo a previous operation to condemn a leaf page table.  The twig-level TTE must be
+ * valid and point to a valid leaf table, and the "condemned" flag must be set in the TTE.
+ * xnu may issue this call to abort the intended unmapping and destruction of a leaf page
+ * table if it determines that continued use of the table is required.
+ *
+ * @param root_pt_paddr Physical address of the root page table for the user or stage-2
+ *                      address space in which the leaf table is to be un-condemned.
+ *
+ * @param vaddr Twig-aligned virtual address mapped by the leaf table to be un-condemned.
+ */
+#if !USE_UNSAFE_TYPES
+void sptm_uncondemn_leaf_table(sptm_paddr_t root_pt_paddr, sptm_vaddr_t vaddr);
+#else
+void sptm_uncondemn_leaf_table(sptm_root_pt_u root_pt_U, sptm_aligned_vaddr_u aligned_vaddr_U);
+#endif
+
+/**
  * Output a character onto the dockchannel interface.
  *
  * @note This function is meant to be used only for XNU early panics and not to be used
@@ -734,6 +821,13 @@ void sptm_serial_putc(uint8_t c);
  *       setting bad value for `serial-device` or `serial-device-name` boot-args.
  */
 void sptm_serial_disable(void);
+
+/**
+ * Program the IRGKey registers.
+ *
+ * @param seed a random 64-bit seed
+ */
+void sptm_program_irgkey(uint64_t seed);
 
 /**
  * Flags within the "mask" field used when updating already existing mappings.
@@ -1267,7 +1361,9 @@ void sptm_unnest_region(sptm_user_root_pt_u user_root_pt_U,
  *             set, the corresponding bit in [flags] will be copied to the Root PT's flags.
  */
 #if !USE_UNSAFE_TYPES
-void sptm_configure_root(sptm_paddr_t root_pt_paddr, uint8_t flags, uint8_t mask);
+void sptm_configure_root(sptm_paddr_t root_pt_paddr,
+    sptm_root_flags_t flags,
+    sptm_root_flags_t mask);
 #else
 void sptm_configure_root(sptm_user_root_pt_u user_root_pt_U,
     sptm_root_config_u flags_U,
@@ -1302,8 +1398,8 @@ void sptm_configure_root(sptm_user_root_pt_u user_root_pt_U,
  */
 #if !USE_UNSAFE_TYPES
 sptm_return_t sptm_switch_root(sptm_paddr_t root_pt_paddr,
-    uint8_t override_flags,
-    uint8_t override_mask);
+    sptm_root_flags_t override_flags,
+    sptm_root_flags_t override_mask);
 #else
 sptm_return_t sptm_switch_root(sptm_root_pt_u root_pt_U,
     sptm_root_config_u override_flags_U,
@@ -1543,7 +1639,7 @@ void sptm_batch_sign_user_pointer(sptm_managed_addr_u user_pointer_ops_pa_U,
 #endif /* HAS_APPLE_PAC */
 
 /* The SPTM sysreg RW API is only exposed in DEVELOPMENT || DEBUG builds. */
-#if DEVELOPMENT
+#if DEVELOPMENT || DEBUG
 
 /**
  * SPTM-managed register identifiers.
@@ -1594,6 +1690,13 @@ uint64_t sptm_reg_read(sptm_regid_t regid);
 void sptm_reg_write(sptm_regid_t regid, uint64_t new_value);
 
 /**
+ * Snapshot the guarded mode register state
+ *
+ * @note This is required for reconstruction of trace from LLC req/fill traces.
+ */
+void sptm_reg_snapshot(void);
+
+/**
  * Maps all SK_DOMAIN pages into PAPT with permissions that allow XNU to read
  * the memory.
  *
@@ -1604,7 +1707,7 @@ void sptm_reg_write(sptm_regid_t regid, uint64_t new_value);
  */
 void sptm_map_sk_domain(void);
 
-#endif /* DEVELOPMENT */
+#endif /* DEVELOPMENT || DEBUG */
 
 /**
  * XNU must tell SPTM the vaddr of the SPTM exception return handler via this
@@ -1807,23 +1910,25 @@ uint64_t sptm_sysctl(sptm_sysctl_selector_u selector_U, sptm_sysctl_op_u op_U, u
  * a list of elements. This particular X-macro makes it easy to, for example,
  * generate sysctl accessors for the SPTM event counters on the XNU side.
  */
-#define FOREACH_SPTM_EVENT_COUNTER(DO)                                                     \
-	DO(RETYPES, "Number of retype operations")                                             \
-	DO(SWWA_TLBI_ASID, "Number of extra SWWA OSH TLBI ASIDs (for rdar://154685324)")       \
-	DO(SWWA_TLBI_ALL, "Number of extra SWWA OSH TLBI ALLs (for rdar://154685324)")         \
-	DO(UAT_UNMAP_PROCESSED,                                                                \
-	    "Number of pages processed by the UAT unmapping function (for rdar://154685324)")  \
-	DO(UAT_UNMAP_MARKED,                                                                   \
-	    "Number of pages marked by the UAT unmapping function (for rdar://154685324)")     \
-	DO(UAT_UNMAP_UNMARKED,                                                                 \
-	    "Number of pages not marked by the UAT unmapping function (for rdar://154685324)") \
-	DO(SWWA_TLBI_ASID_ELIDED,                                                              \
-	    "Number of elided SWWA OSH TLBI ASIDs with the epoch counters optimization (for rdar://154685324)")
+#define FOREACH_SPTM_EVENT_COUNTER(DO)                                                                      \
+	DO(RETYPES, "Number of retype operations")                                                              \
+	DO(SWWA_TLBI_ASID, "Number of extra SWWA OSH TLBI ASIDs (for rdar://154685324)")                        \
+	DO(SWWA_TLBI_ALL, "Number of extra SWWA OSH TLBI ALLs (for rdar://154685324)")                          \
+	DO(UAT_UNMAP_PROCESSED,                                                                                 \
+	    "Number of pages processed by the UAT unmapping function (for rdar://154685324)")                   \
+	DO(UAT_UNMAP_MARKED,                                                                                    \
+	    "Number of pages marked by the UAT unmapping function (for rdar://154685324)")                      \
+	DO(UAT_UNMAP_UNMARKED,                                                                                  \
+	    "Number of pages not marked by the UAT unmapping function (for rdar://154685324)")                  \
+	DO(SWWA_TLBI_ASID_ELIDED,                                                                               \
+	    "Number of elided SWWA OSH TLBI ASIDs with the epoch counters optimization (for rdar://154685324)") \
+	DO(SWWA_TLBI_ALL_ELIDED,                                                                                \
+	    "Number of elided SWWA OSH TLBI ALLs with the epoch counters optimization (for rdar://154685324)")
 
 /**
  * Maps an SPTM event counter to its `sptm_get_info()` enum value.
  */
-#define SPTM_EVENT_COUNTER_TO_ENUM(event_counter) INFO_SPTM_EVNT_CNTR_ ## event_counter
+#define SPTM_EVENT_COUNTER_TO_ENUM(event_counter) INFO_SPTM_EVNT_CNTR_##event_counter
 
 /**
  * Values that can be passed to sptm_get_info() to retrieve the corresponding

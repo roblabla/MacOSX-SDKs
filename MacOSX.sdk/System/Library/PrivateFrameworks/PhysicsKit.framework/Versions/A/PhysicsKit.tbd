@@ -1,9 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhysicsKit.framework/Versions/A/PhysicsKit'
-current-version: 41.4.1
+current-version: 42.4.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFvffiEEE, __ZTINSt3__120__shared_ptr_emplaceI12PKCFieldDragNS_9allocatorIS1_EEEE, 
@@ -37,8 +36,7 @@ exports:
                        __ZTSNSt3__120__shared_ptr_emplaceI7PKCGridNS_9allocatorIS1_EEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceI8QuadTreeNS_9allocatorIS1_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIP6PKPathNS_10shared_ptrIS1_E27__shared_ptr_default_deleteIS1_S1_EENS_9allocatorIS1_EEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _PKArrayFromB2ChainShape, _PKArrayFromB2PolygonShape, _PKArrayFromCGPath, 
                        _PKArrayFromPKPath, _PKCGPathCreateFromArray, _PKCGPointFromString, 
                        _PKGetLinkedOnOrAfter, _PKGet_INV_PTM_RATIO, _PKGet_PTM_RATIO, 

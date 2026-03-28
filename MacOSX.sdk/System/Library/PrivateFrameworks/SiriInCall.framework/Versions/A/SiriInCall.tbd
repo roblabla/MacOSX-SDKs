@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriInCall.framework/Versions/A/SiriInCall'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10SiriInCall09ButterflyC12StateManagerO13isUserOnACall__10completionySo32AFRequestDispatcherServiceHelper_p_SSySbctFZ', 
                        '_$s10SiriInCall09ButterflyC12StateManagerO13isUserOnACallySbSo32AFRequestDispatcherServiceHelper_p_SStYaFZ', 
                        '_$s10SiriInCall09ButterflyC12StateManagerO13isUserOnACallySbSo32AFRequestDispatcherServiceHelper_p_SStYaFZTu', 

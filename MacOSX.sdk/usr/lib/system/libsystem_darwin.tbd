@@ -1,15 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_darwin.dylib'
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ ___libdarwin_init, ___os_temporary_resource_shortage, _claimfd_np, 
                        _close_drop_np, _close_drop_optional_np, _crfprintf_np, _dirstat_np, 
                        _dirstatat_np, _dup_np, _err_np, _errc_np, _fcheck_np, _memdup2_np, 
@@ -36,6 +33,6 @@ exports:
                        _sysctlbyname_get_data_np, _sysexit_np, _vcrfprintf_np, _verr_np, 
                        _verrc_np, _vwarn_np, _vwfprintf_np, _warn_np, _wfprintf_np, 
                        _xferfd_np, _zsnprintf_np ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _os_boot_mode_query, _os_variant_is_basesystem ]
 ...

@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NotesAnalytics.framework/Versions/A/NotesAnalytics'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ICCoreAnalyticsNoteViewApproachIOSDeeplinkThumbnail, _ICCoreAnalyticsNoteViewApproachIOSSafariMenuAffordance, 
                        _ICCoreAnalyticsNoteViewApproachIOSSystemPaperShortcut, _ICNAAppSessionDidRestartNotification, 
                        _ICNAAppSessionWillRestartNotification, _ICNABatchLoggingSize, 
@@ -11,16 +11,17 @@ exports:
                        _ICNAInbountURLComponentHandoff, _ICNAInbountURLComponentShortcutItem, 
                        _ICNAInbountURLComponentUserActivity, _ICNAProductionServerStringURL, 
                        _ICNAQAServerStringURL, _ICNARoundTo2SigFigs, _ICNARoundTo2SigFigsInt, 
-                       _ICNASessionDidEndNotification, _ICNASessionFlushTimedDataNotification, 
-                       _ICNASessionTypeGlobal, _ICNASessionTypeNotes, _ICNASessionTypeNotesAndPaper, 
-                       _ICNASessionTypePaper, _ICNASessionWillEndNotification, _ICNAStagingServerStringURL, 
-                       _ICNATestServerStringURL, _ICNAUseDebugProcessor, _NotesAnalyticsVersionNumber, 
-                       _NotesAnalyticsVersionString, _kICAMSBagKeyAppAnalyticsURL, 
-                       _kICInternalSettingsAllowSnapshotEveryLaunch, _kICInternalSettingsForbidAnalyticsSnapshot, 
-                       _kICInternalSettingsMuteSyncHealthTracking, _kICNAAttachmentSubUTTypeAppleMaps, 
-                       _kICNACloudKitShareReferralURL, _kICNADebugDataName, _kICNADeviceIDKey, 
-                       _kICNAEditorExtensionReferralURL, _kICNAEnableBatchDebugging, 
-                       _kICNAFallbackDefaultURL, _kICNAIdentityResetReferralURL, 
+                       _ICNASessionDidEndNotification, _ICNASessionDidResumeNotification, 
+                       _ICNASessionFlushTimedDataNotification, _ICNASessionTypeGlobal, 
+                       _ICNASessionTypeNotes, _ICNASessionTypeNotesAndPaper, _ICNASessionTypePaper, 
+                       _ICNASessionWillEndNotification, _ICNASessionWillResignNotification, 
+                       _ICNAStagingServerStringURL, _ICNATestServerStringURL, _ICNAUseDebugProcessor, 
+                       _NotesAnalyticsVersionNumber, _NotesAnalyticsVersionString, 
+                       _kICAMSBagKeyAppAnalyticsURL, _kICInternalSettingsAllowSnapshotEveryLaunch, 
+                       _kICInternalSettingsForbidAnalyticsSnapshot, _kICInternalSettingsMuteSyncHealthTracking, 
+                       _kICNAAttachmentSubUTTypeAppleMaps, _kICNACloudKitShareReferralURL, 
+                       _kICNADebugDataName, _kICNADeviceIDKey, _kICNAEditorExtensionReferralURL, 
+                       _kICNAEnableBatchDebugging, _kICNAFallbackDefaultURL, _kICNAIdentityResetReferralURL, 
                        _kICNAInactiveSessionID, _kICNAIntentsExtensionReferralURL, 
                        _kICNAInternalServerEnvironmentType, _kICNALastSnapshotRunningTimeStamp, 
                        _kICNALastSnapshotScheduleTimeStamp, _kICNANoteCreateApproachEnumValue, 

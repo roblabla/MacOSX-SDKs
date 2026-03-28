@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_CoreNFC_UIKit.framework/Versions/A/_CoreNFC_UIKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s14_CoreNFC_UIKit19NFCWindowSceneEventO10asBSActionSo0H0CyKF', 
                        '_$s14_CoreNFC_UIKit19NFCWindowSceneEventO11descriptionSSvg', 
                        '_$s14_CoreNFC_UIKit19NFCWindowSceneEventO11descriptionSSvpMV', 

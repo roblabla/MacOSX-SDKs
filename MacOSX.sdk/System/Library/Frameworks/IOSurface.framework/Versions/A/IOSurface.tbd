@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _IOSurfaceAlignProperty, _IOSurfaceAllowsPixelSizeCasting, 
                        _IOSurfaceAppendTransaction, _IOSurfaceBindAccel, _IOSurfaceBindAccelOnPlane, 
                        _IOSurfaceClearDataProperties, _IOSurfaceCopyAllValues, _IOSurfaceCopyDataValueBytes, 
@@ -154,17 +152,17 @@ exports:
                        _kIOSurfacePrefixForUnrecognizedYCbCrMatrixCodePoint, _kIOSurfaceProhibitUseCount, 
                        _kIOSurfaceProtectionOptions, _kIOSurfacePurgeWhenNotInUse, 
                        _kIOSurfaceRemoteServiceName, _kIOSurfaceResetDefaultAttachmentsWhenNotInUse, 
-                       _kIOSurfaceScalerTimes, _kIOSurfaceSceneIllumination, _kIOSurfaceSliceCount, 
-                       _kIOSurfaceSubsampling, _kIOSurfaceSuperbuffer, _kIOSurfaceSysMemOnly, 
-                       _kIOSurfaceTimingInfo, _kIOSurfaceTouchEventTimes, _kIOSurfaceTransferFunction, 
-                       _kIOSurfaceTransferFunction_ARIB_STD_B67_HLG, _kIOSurfaceTransferFunction_ITU_R_2020, 
-                       _kIOSurfaceTransferFunction_ITU_R_2100_HLG, _kIOSurfaceTransferFunction_ITU_R_709_2, 
-                       _kIOSurfaceTransferFunction_Linear, _kIOSurfaceTransferFunction_SMPTE_240M_1995, 
-                       _kIOSurfaceTransferFunction_SMPTE_ST_2084_PQ, _kIOSurfaceTransferFunction_SMPTE_ST_428_1, 
-                       _kIOSurfaceTransferFunction_UseGamma, _kIOSurfaceTransferFunction_aYCC, 
-                       _kIOSurfaceTransferFunction_sRGB, _kIOSurfaceType, _kIOSurfaceUseReserve, 
-                       _kIOSurfaceVersatileSenselArrayPattern, _kIOSurfaceWidth, 
-                       _kIOSurfaceYCbCrMatrix, _kIOSurfaceYCbCrMatrix_IPT_String, 
+                       _kIOSurfaceScalerTimes, _kIOSurfaceSceneIllumination, _kIOSurfaceSidebandVideoPropertiesLookupID, 
+                       _kIOSurfaceSliceCount, _kIOSurfaceSubsampling, _kIOSurfaceSuperbuffer, 
+                       _kIOSurfaceSysMemOnly, _kIOSurfaceTimingInfo, _kIOSurfaceTouchEventTimes, 
+                       _kIOSurfaceTransferFunction, _kIOSurfaceTransferFunction_ARIB_STD_B67_HLG, 
+                       _kIOSurfaceTransferFunction_ITU_R_2020, _kIOSurfaceTransferFunction_ITU_R_2100_HLG, 
+                       _kIOSurfaceTransferFunction_ITU_R_709_2, _kIOSurfaceTransferFunction_Linear, 
+                       _kIOSurfaceTransferFunction_SMPTE_240M_1995, _kIOSurfaceTransferFunction_SMPTE_ST_2084_PQ, 
+                       _kIOSurfaceTransferFunction_SMPTE_ST_428_1, _kIOSurfaceTransferFunction_UseGamma, 
+                       _kIOSurfaceTransferFunction_aYCC, _kIOSurfaceTransferFunction_sRGB, 
+                       _kIOSurfaceType, _kIOSurfaceUseReserve, _kIOSurfaceVersatileSenselArrayPattern, 
+                       _kIOSurfaceWidth, _kIOSurfaceYCbCrMatrix, _kIOSurfaceYCbCrMatrix_IPT_String, 
                        _kIOSurfaceYCbCrMatrix_ITU_R_2020_String, _kIOSurfaceYCbCrMatrix_ITU_R_2100_ICtCp_String, 
                        _kIOSurfaceYCbCrMatrix_ITU_R_601_4_String, _kIOSurfaceYCbCrMatrix_ITU_R_709_2_String, 
                        _kIOSurfaceYCbCrMatrix_Identity_String, _kIOSurfaceYCbCrMatrix_SMPTE_240M_1995_String ]
@@ -175,7 +173,7 @@ exports:
                        IOSurfaceSharedEvent._eventOptions, IOSurfaceSharedEvent._eventPort, 
                        IOSurfaceSharedEvent._globalTraceObjectID, IOSurfaceSharedEvent._signaledValue, 
                        IOSurfaceSharedEventListener._dispatchQueue, IOSurfaceSharedEventListener._notificationPort ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _IOSurfaceCopyGPUPolicies, _IOSurfaceCreateChildSurface, _IOSurfaceGetParentID, 
                        _IOSurfaceSetImageOriginAndExtents ]
 ...

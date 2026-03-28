@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GRPCInProcessTransportInternal.framework/Versions/A/GRPCInProcessTransportInternal'
 current-version: 2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s30GRPCInProcessTransportInternal02InbC0V13serviceConfigAC08GRPCCoreD007ServiceG0V_tcfC', 
                        '_$s30GRPCInProcessTransportInternal02InbC0V6ClientC08GRPCCoreD00fC0AAMc', 
                        '_$s30GRPCInProcessTransportInternal02InbC0V6ClientC10withStream10descriptor7options_x08GRPCCoreD016MethodDescriptorV_AI11CallOptionsVxAI9RPCStreamVyAI16RPCAsyncSequenceVyAI15RPCResponsePartOySays5UInt8VGGs5Error_pGAI9RPCWriterV8ClosableVyAI010RPCRequestT0OyAVG_GG_AI0F7ContextVtYaKXEtYaKlF', 

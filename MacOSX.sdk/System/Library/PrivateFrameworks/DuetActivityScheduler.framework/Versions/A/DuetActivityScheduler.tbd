@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DuetActivityScheduler.framework/Versions/A/DuetActivityScheduler'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __DASActivityDurationInterminable, __DASActivityDurationLong, 
                        __DASActivityDurationModerate, __DASActivityDurationShort, 
                        __DASActivityDurationVeryLong, __DASActivityDurationVeryShort, 
@@ -56,24 +54,24 @@ exports:
                        __DASUpdateActivityWifiTransferKey, __DASUpdateActivityXPCActivityClientStringKey, 
                        __DASUpdateActivityXPCActivityNameKey, __DASWidgetTodayViewHomeScreenPageID, 
                        __DASWidgetTodayViewLockScreenPageID, __DASWidgetTodayViewPageID, 
-                       _kDASActivityRateLimitationName, _kDASBudgetKeyBundleIDs, 
-                       _kDASBudgetKeyDeviceWake, _kDASBudgetKeyEffectiveDate, _kDASBudgetKeyPIDs, 
-                       _kDASBudgetKeyProcessNames, _kDASConfigurationLimitationName, 
+                       __das_xpc_object_string_interned, _kDASActivityRateLimitationName, 
+                       _kDASBudgetKeyBundleIDs, _kDASBudgetKeyDeviceWake, _kDASBudgetKeyEffectiveDate, 
+                       _kDASBudgetKeyPIDs, _kDASBudgetKeyProcessNames, _kDASConfigurationLimitationName, 
                        _kDASDailyBudgetForAllWidgetsKey, _kDASDailyBudgetMaxForIndividualWidgetKey, 
                        _kDASDailyBudgetMaxForSystemAddedIndividualWidgetKey, _kDASDynamicRuntimeLimitationName, 
-                       _kDASImmediateRuntimeLimitationName, _kDASProcessRateLimitationName, 
-                       _kDASRuntimeLimitationName, _kDASSystemContextGPWorkloadRunningState, 
-                       _kDASSystemContextKeyBypassDataBudget, _kDASSystemContextKeyBypassEnergyBudget, 
-                       _kDASSystemContextKeyHeavyDiskUsage, _kDASSystemContextKeyNetworkTask, 
-                       _kDASSystemContextKeyPushTask, _kDASSystemContextMCWorkloadRunningState, 
-                       _kDASSystemContextNonDASCriticalWorkloadRunning, _kDASUninterruptibleRuntimeLimitationName, 
-                       _kDASWidgetMetadataDASInitiated, _kDASWidgetMetadataExtensionBundle, 
-                       _kDASWidgetMetadataRefreshReason, _kDASWidgetOverrideKeyPath, 
-                       _kDASWidgetRefreshMaximumBudgetDailyKey, _kDASWidgetRefreshStreamName, 
-                       _kDASWidgetSystemAddedKeyPath, _kDASWidgetViewMetadataInStack, 
-                       _kDASWidgetViewMetadataPageID, _kDASWidgetViewMetadataTimeUntilContentExpiration, 
-                       _kDASWidgetViewMetadataViewID, _kDASWidgetViewStreamName, 
-                       _kNWEndpointKey, _kNWParametersKey ]
+                       _kDASImmediateRuntimeLimitationName, _kDASOnBatteryRuntimeLimitationName, 
+                       _kDASProcessRateLimitationName, _kDASRuntimeLimitationName, 
+                       _kDASSystemContextGPWorkloadRunningState, _kDASSystemContextKeyBypassDataBudget, 
+                       _kDASSystemContextKeyBypassEnergyBudget, _kDASSystemContextKeyHeavyDiskUsage, 
+                       _kDASSystemContextKeyNetworkTask, _kDASSystemContextKeyPushTask, 
+                       _kDASSystemContextMCWorkloadRunningState, _kDASSystemContextNonDASCriticalWorkloadRunning, 
+                       _kDASUninterruptibleRuntimeLimitationName, _kDASWidgetMetadataDASInitiated, 
+                       _kDASWidgetMetadataExtensionBundle, _kDASWidgetMetadataRefreshReason, 
+                       _kDASWidgetOverrideKeyPath, _kDASWidgetRefreshMaximumBudgetDailyKey, 
+                       _kDASWidgetRefreshStreamName, _kDASWidgetSystemAddedKeyPath, 
+                       _kDASWidgetViewMetadataInStack, _kDASWidgetViewMetadataPageID, 
+                       _kDASWidgetViewMetadataTimeUntilContentExpiration, _kDASWidgetViewMetadataViewID, 
+                       _kDASWidgetViewStreamName, _kNWEndpointKey, _kNWParametersKey ]
     objc-classes:    [ _DASActivity, _DASActivityDependency, _DASActivityGroup, _DASActivityProgressWrapper, 
                        _DASActivityRateLimit, _DASActivityRateLimitConfiguration, 
                        _DASActivityResult, _DASBMHistogramBuilder, _DASBMMinimumSpanConfiguration, 

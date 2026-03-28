@@ -20,7 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
  If you requested partial results from the speech recognizer, the transcriptions may represent only part of the total audio content. Use the ``isFinal`` property to determine if the request contains partial or final results.
  */
-API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
+API_AVAILABLE(ios(10.0), macos(10.15))
+API_UNAVAILABLE(tvos)
 @interface SFSpeechRecognitionResult : NSObject <NSCopying, NSSecureCoding>
 
 /**
@@ -45,7 +46,7 @@ API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
 /**
  An object that contains the metadata results for a speech recognition request.
  */
-@property (nonatomic, nullable, readonly) SFSpeechRecognitionMetadata *speechRecognitionMetadata API_AVAILABLE(ios(14.0), macos(11.0), tvos(18));
+@property (nonatomic, nullable, readonly) SFSpeechRecognitionMetadata *speechRecognitionMetadata API_AVAILABLE(ios(14.0), macos(11.0));
 
 @end
 

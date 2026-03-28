@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libprotobuf.dylib'
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libprotobuf-lite.dylib' ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -13,8 +11,7 @@ exports:
                        __ZTIN20wireless_diagnostics6google8protobuf17DescriptorBuilder17OptionInterpreter21AggregateOptionFinderE, 
                        __ZTSN20wireless_diagnostics6google8protobuf10TextFormat6Parser10ParserImpl20ParserErrorCollectorE, 
                        __ZTSN20wireless_diagnostics6google8protobuf17DescriptorBuilder17OptionInterpreter21AggregateOptionFinderE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN20wireless_diagnostics6google8protobuf10ReflectionD0Ev, 
                        __ZN20wireless_diagnostics6google8protobuf10ReflectionD1Ev, 
                        __ZN20wireless_diagnostics6google8protobuf10ReflectionD2Ev, 
@@ -1357,14 +1354,12 @@ exports:
                        __ZTVN20wireless_diagnostics6google8protobuf8internal29DescriptorPoolExtensionFinderE ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libprotobuf-lite.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZN20wireless_diagnostics6google8protobuf13StringAppendVEPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEPKcP13__va_list_tag ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN20wireless_diagnostics6google8protobuf11LogSilencerC1Ev, 
                        __ZN20wireless_diagnostics6google8protobuf11LogSilencerC2Ev, 
                        __ZN20wireless_diagnostics6google8protobuf11LogSilencerD1Ev, 
@@ -1836,6 +1831,6 @@ exports:
                        __ZTVN20wireless_diagnostics6google8protobuf8internal15ExtensionFinderE, 
                        __ZTVN20wireless_diagnostics6google8protobuf8internal16FunctionClosure0E, 
                        __ZTVN20wireless_diagnostics6google8protobuf8internal24GeneratedExtensionFinderE ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN20wireless_diagnostics6google8protobuf13StringAppendVEPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEPKcPc ]
 ...

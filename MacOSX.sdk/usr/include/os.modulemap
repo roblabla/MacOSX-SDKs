@@ -65,6 +65,7 @@ module os_workgroup [system] {
     header "os/workgroup_interval.h"
     header "os/workgroup_object.h"
     header "os/workgroup_parallel.h"
+
     export *
   }
 }

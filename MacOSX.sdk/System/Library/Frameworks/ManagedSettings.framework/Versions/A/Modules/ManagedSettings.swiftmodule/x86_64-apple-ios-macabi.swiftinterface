@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 266.62.2 -module-name ManagedSettings
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 267.101.1 -module-name ManagedSettings
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Combine
 import Foundation
 import Swift
@@ -16,12 +16,10 @@ import os
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct AccountSettings : ManagedSettings.ManagedSettingsGroup {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var lockAccounts: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let lockAccounts: ManagedSettings.SettingMetadata<Swift.Bool>
 }
 @available(iOS 15.0, *)
@@ -58,26 +56,20 @@ public typealias ApplicationToken = ManagedSettings.Token<ManagedSettings.Applic
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct ApplicationSettings : ManagedSettings.ManagedSettingsGroup {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var blockedApplications: Swift.Set<ManagedSettings.Application>? {
     get
     set
   }
-  #endif
   public static let blockedApplications: ManagedSettings.SettingMetadata<Swift.Set<ManagedSettings.Application>>
-  #if compiler(>=5.3) && $NonescapableTypes
   public var denyAppInstallation: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let denyAppInstallation: ManagedSettings.SettingMetadata<Swift.Bool>
-  #if compiler(>=5.3) && $NonescapableTypes
   public var denyAppRemoval: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let denyAppRemoval: ManagedSettings.SettingMetadata<Swift.Bool>
 }
 @available(iOS 15.0, visionOS 1.0, *)
@@ -99,26 +91,20 @@ public struct Token<T> : Swift.Codable, Swift.Equatable, Swift.Hashable {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct AppStoreSettings : ManagedSettings.ManagedSettingsGroup {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var denyInAppPurchases: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let denyInAppPurchases: ManagedSettings.SettingMetadata<Swift.Bool>
-  #if compiler(>=5.3) && $NonescapableTypes
   public var maximumRating: Swift.Int? {
     get
     set
   }
-  #endif
   public static let maximumRating: ManagedSettings.BoundedSettingMetadata<Swift.Int>
-  #if compiler(>=5.3) && $NonescapableTypes
   public var requirePasswordForPurchases: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let requirePasswordForPurchases: ManagedSettings.SettingMetadata<Swift.Bool>
 }
 @available(iOS 15.0, *)
@@ -127,26 +113,20 @@ public struct AppStoreSettings : ManagedSettings.ManagedSettingsGroup {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct CellularSettings : ManagedSettings.ManagedSettingsGroup {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var lockAppCellularData: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let lockAppCellularData: ManagedSettings.SettingMetadata<Swift.Bool>
-  #if compiler(>=5.3) && $NonescapableTypes
   public var lockCellularPlan: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let lockCellularPlan: ManagedSettings.SettingMetadata<Swift.Bool>
-  #if compiler(>=5.3) && $NonescapableTypes
   public var lockESIM: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let lockESIM: ManagedSettings.SettingMetadata<Swift.Bool>
 }
 @available(iOS 15.0, *)
@@ -157,9 +137,25 @@ public struct CellularSettings : ManagedSettings.ManagedSettingsGroup {
 public enum ShieldAction : Swift.Int {
   case primaryButtonPressed
   case secondaryButtonPressed
-  #if compiler(>=5.3) && $NonescapableTypes
+  @available(iOS 26.4, *)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
+  case firstSecondarySubmenuItemPressed
+  @available(iOS 26.4, *)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
+  case secondSecondarySubmenuItemPressed
+  @available(iOS 26.4, *)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
+  case thirdSecondarySubmenuItemPressed
   public init?(rawValue: Swift.Int)
-  #endif
   @available(iOS 15.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -179,9 +175,7 @@ public enum ShieldActionResponse : Swift.Int {
   case none
   case close
   case `defer`
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
-  #endif
   @available(iOS 15.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -242,19 +236,15 @@ extension ManagedSettings.ShieldSettings {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct GameCenterSettings : ManagedSettings.ManagedSettingsGroup {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var denyAddingFriends: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let denyAddingFriends: ManagedSettings.SettingMetadata<Swift.Bool>
-  #if compiler(>=5.3) && $NonescapableTypes
   public var denyMultiplayerGaming: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let denyMultiplayerGaming: ManagedSettings.SettingMetadata<Swift.Bool>
 }
 @available(iOS 15.0, *)
@@ -263,40 +253,30 @@ public struct GameCenterSettings : ManagedSettings.ManagedSettingsGroup {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct MediaSettings : ManagedSettings.ManagedSettingsGroup {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var denyBookstoreErotica: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let denyBookstoreErotica: ManagedSettings.SettingMetadata<Swift.Bool>
-  #if compiler(>=5.3) && $NonescapableTypes
   public var denyExplicitContent: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let denyExplicitContent: ManagedSettings.SettingMetadata<Swift.Bool>
-  #if compiler(>=5.3) && $NonescapableTypes
   public var denyMusicService: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let denyMusicService: ManagedSettings.SettingMetadata<Swift.Bool>
-  #if compiler(>=5.3) && $NonescapableTypes
   public var maximumMovieRating: Swift.Int? {
     get
     set
   }
-  #endif
   public static let maximumMovieRating: ManagedSettings.BoundedSettingMetadata<Swift.Int>
-  #if compiler(>=5.3) && $NonescapableTypes
   public var maximumTVShowRating: Swift.Int? {
     get
     set
   }
-  #endif
   public static let maximumTVShowRating: ManagedSettings.BoundedSettingMetadata<Swift.Int>
 }
 @available(iOS 15.0, *)
@@ -305,12 +285,10 @@ public struct MediaSettings : ManagedSettings.ManagedSettingsGroup {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct PasscodeSettings : ManagedSettings.ManagedSettingsGroup {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var lockPasscode: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let lockPasscode: ManagedSettings.SettingMetadata<Swift.Bool>
 }
 @available(iOS 15.0, *)
@@ -319,12 +297,10 @@ public struct PasscodeSettings : ManagedSettings.ManagedSettingsGroup {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct DateAndTimeSettings : ManagedSettings.ManagedSettingsGroup {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var requireAutomaticDateAndTime: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let requireAutomaticDateAndTime: ManagedSettings.SettingMetadata<Swift.Bool>
 }
 @available(iOS 15.0, *)
@@ -333,33 +309,25 @@ public struct DateAndTimeSettings : ManagedSettings.ManagedSettingsGroup {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct ShieldSettings : ManagedSettings.ManagedSettingsGroup {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var applications: Swift.Set<ManagedSettings.ApplicationToken>? {
     get
     set
   }
-  #endif
   public static let applications: ManagedSettings.SettingMetadata<Swift.Set<ManagedSettings.ApplicationToken>>
-  #if compiler(>=5.3) && $NonescapableTypes
   public var applicationCategories: ManagedSettings.ShieldSettings.ActivityCategoryPolicy<ManagedSettings.Application>? {
     get
     set
   }
-  #endif
   public static let applicationCategories: ManagedSettings.SettingMetadata<ManagedSettings.ShieldSettings.ActivityCategoryPolicy<ManagedSettings.Application>>
-  #if compiler(>=5.3) && $NonescapableTypes
   public var webDomains: Swift.Set<ManagedSettings.WebDomainToken>? {
     get
     set
   }
-  #endif
   public static let webDomains: ManagedSettings.SettingMetadata<Swift.Set<ManagedSettings.WebDomainToken>>
-  #if compiler(>=5.3) && $NonescapableTypes
   public var webDomainCategories: ManagedSettings.ShieldSettings.ActivityCategoryPolicy<ManagedSettings.WebDomain>? {
     get
     set
   }
-  #endif
   public static let webDomainCategories: ManagedSettings.SettingMetadata<ManagedSettings.ShieldSettings.ActivityCategoryPolicy<ManagedSettings.WebDomain>>
 }
 @available(iOS 15.0, *)
@@ -432,19 +400,19 @@ public class ManagedSettingsStore : Combine.ObservableObject {
   @available(macOS, unavailable)
   @available(watchOS, unavailable)
   @available(visionOS, unavailable)
-  @Combine.Published @_projectedValueProperty($effectiveDenyExplicitContent) public var effectiveDenyExplicitContent: Swift.Bool {
+  @Combine.Published<Swift.Bool> @_projectedValueProperty($effectiveDenyExplicitContent) public var effectiveDenyExplicitContent: Swift.Bool {
     get
   }
   public var $effectiveDenyExplicitContent: Combine.Published<Swift.Bool>.Publisher {
     get
   }
-  @Combine.Published @_projectedValueProperty($effectiveMaximumMovieRating) public var effectiveMaximumMovieRating: Swift.Int {
+  @Combine.Published<Swift.Int> @_projectedValueProperty($effectiveMaximumMovieRating) public var effectiveMaximumMovieRating: Swift.Int {
     get
   }
   public var $effectiveMaximumMovieRating: Combine.Published<Swift.Int>.Publisher {
     get
   }
-  @Combine.Published @_projectedValueProperty($effectiveMaximumTVShowRating) public var effectiveMaximumTVShowRating: Swift.Int {
+  @Combine.Published<Swift.Int> @_projectedValueProperty($effectiveMaximumTVShowRating) public var effectiveMaximumTVShowRating: Swift.Int {
     get
   }
   public var $effectiveMaximumTVShowRating: Combine.Published<Swift.Int>.Publisher {
@@ -471,9 +439,7 @@ public struct SafariSettings : ManagedSettings.ManagedSettingsGroup {
     public var description: Swift.String {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(iOS 15.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
@@ -484,19 +450,15 @@ public struct SafariSettings : ManagedSettings.ManagedSettingsGroup {
       get
     }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var cookiePolicy: ManagedSettings.SafariSettings.CookiePolicy? {
     get
     set
   }
-  #endif
   public static let cookiePolicy: ManagedSettings.SettingMetadata<ManagedSettings.SafariSettings.CookiePolicy>
-  #if compiler(>=5.3) && $NonescapableTypes
   public var denyAutoFill: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let denyAutoFill: ManagedSettings.SettingMetadata<Swift.Bool>
 }
 @available(iOS 15.0, *)
@@ -505,12 +467,10 @@ public struct SafariSettings : ManagedSettings.ManagedSettingsGroup {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct SiriSettings : ManagedSettings.ManagedSettingsGroup {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var denySiri: Swift.Bool? {
     get
     set
   }
-  #endif
   public static let denySiri: ManagedSettings.SettingMetadata<Swift.Bool>
 }
 @available(iOS 15.0, visionOS 1.0, *)
@@ -546,12 +506,10 @@ public struct WebContentSettings : ManagedSettings.ManagedSettingsGroup {
     case all(except: Swift.Set<ManagedSettings.WebDomain> = [])
     public static func == (lhs: ManagedSettings.WebContentSettings.FilterPolicy, rhs: ManagedSettings.WebContentSettings.FilterPolicy) -> Swift.Bool
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var blockedByFilter: ManagedSettings.WebContentSettings.FilterPolicy? {
     get
     set
   }
-  #endif
   public static let blockedByFilter: ManagedSettings.SettingMetadata<ManagedSettings.WebContentSettings.FilterPolicy>
 }
 @available(iOS 15.0, *)

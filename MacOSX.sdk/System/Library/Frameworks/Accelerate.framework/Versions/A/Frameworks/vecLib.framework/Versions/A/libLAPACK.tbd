@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_cbbcsd$NEWLAPACK', '_cbbcsd$NEWLAPACK$ILP64', '_cbdsqr$NEWLAPACK', 
                        '_cbdsqr$NEWLAPACK$ILP64', _cbdsqr_, '_cgbbrd$NEWLAPACK', 
                        '_cgbbrd$NEWLAPACK$ILP64', _cgbbrd_, '_cgbcon$NEWLAPACK', 
@@ -1848,7 +1848,7 @@ exports:
                        '_zunmtr$NEWLAPACK$ILP64', _zunmtr_, '_zupgtr$NEWLAPACK', 
                        '_zupgtr$NEWLAPACK$ILP64', _zupgtr_, '_zupmtr$NEWLAPACK', 
                        '_zupmtr$NEWLAPACK$ILP64', _zupmtr_ ]
-  - targets:         [ x86_64-macos, x86_64h-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64h-macos, arm64e-macos ]
     symbols:         [ _CBDSQR, _CBDSQR_, _CGBBRD, _CGBBRD_, _CGBCON, _CGBCON_, _CGBEQU, 
                        _CGBEQUB, _CGBEQUB_, _CGBEQU_, _CGBRFS, _CGBRFS_, _CGBSV, 
                        _CGBSVX, _CGBSVX_, _CGBSV_, _CGBTF2, _CGBTF2_, _CGBTRF, _CGBTRF_, 

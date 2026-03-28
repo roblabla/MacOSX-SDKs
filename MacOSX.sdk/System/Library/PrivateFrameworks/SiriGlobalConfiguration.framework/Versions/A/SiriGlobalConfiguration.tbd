@@ -1,11 +1,34 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriGlobalConfiguration.framework/Versions/A/SiriGlobalConfiguration'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s23SiriGlobalConfiguration04testabC0SbyF' ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s10Foundation6LocaleV23SiriGlobalConfigurationE11siriLocalesSayACGvgZ', 
+                       '_$s10Foundation6LocaleV23SiriGlobalConfigurationE11siriLocalesSayACGvpZMV', 
+                       '_$s10Foundation6LocaleV23SiriGlobalConfigurationE12siriSupports7featureSbAD0C7FeatureO_tF', 
+                       '_$s23SiriGlobalConfiguration0A7FeatureO10identifierACSgSS_tcfC', 
+                       '_$s23SiriGlobalConfiguration0A7FeatureO10identifierSSvg', 
+                       '_$s23SiriGlobalConfiguration0A7FeatureO10identifierSSvpMV', 
+                       '_$s23SiriGlobalConfiguration0A7FeatureO2eeoiySbAC_ACtFZ', 
+                       '_$s23SiriGlobalConfiguration0A7FeatureO4hash4intoys6HasherVz_tF', 
+                       '_$s23SiriGlobalConfiguration0A7FeatureO7montarayA2CmFWC', 
+                       '_$s23SiriGlobalConfiguration0A7FeatureO8allCasesSayACGvgZ', 
+                       '_$s23SiriGlobalConfiguration0A7FeatureO8allCasesSayACGvpZMV', 
+                       '_$s23SiriGlobalConfiguration0A7FeatureO9hashValueSivg', '_$s23SiriGlobalConfiguration0A7FeatureO9hashValueSivpMV', 
+                       '_$s23SiriGlobalConfiguration0A7FeatureO9supported3forSb10Foundation6LocaleV_tF', 
+                       '_$s23SiriGlobalConfiguration0A7FeatureOMa', '_$s23SiriGlobalConfiguration0A7FeatureOMn', 
+                       '_$s23SiriGlobalConfiguration0A7FeatureON', '_$s23SiriGlobalConfiguration0A7FeatureOSHAAMc', 
+                       '_$s23SiriGlobalConfiguration0A7FeatureOSQAAMc', '_$s23SiriGlobalConfiguration0A7FeatureOs12CaseIterableAAMc', 
+                       '_$sSo14SGCSiriFeatureC23SiriGlobalConfigurationE10identifierABSgSS_tcfC', 
+                       '_$sSo14SGCSiriFeatureC23SiriGlobalConfigurationE10identifierABSgSS_tcfc', 
+                       '_$sSo14SGCSiriFeatureC23SiriGlobalConfigurationE10identifierSSyF', 
+                       '_$sSo14SGCSiriFeatureC23SiriGlobalConfigurationE9supported3forSb10Foundation6LocaleV_tF', 
+                       '_$sSo14SGCSiriFeatureC23SiriGlobalConfigurationEABycfC', 
+                       '_$sSo14SGCSiriFeatureC23SiriGlobalConfigurationEABycfc', 
+                       '_$sSo14SGCSiriFeatureCMa', '_$sSo8NSLocaleC23SiriGlobalConfigurationE08supportsB7FeatureySbSo07SGCSiriF0CF' ]
+    objc-classes:    [ SGCSiriFeature ]
 ...

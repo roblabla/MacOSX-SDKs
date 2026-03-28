@@ -1,14 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AppStoreDaemon.framework/Versions/A/AppStoreDaemon'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s14AppStoreDaemon11FeatureFlagO0D5Flags0dF3KeyAAMc', '_$s14AppStoreDaemon11FeatureFlagO13activeRestoreyA2CmFWC', 
-                       '_$s14AppStoreDaemon11FeatureFlagO16ephemeralAccountyA2CmFWC', 
                        '_$s14AppStoreDaemon11FeatureFlagO2eeoiySbAC_ACtFZ', '_$s14AppStoreDaemon11FeatureFlagO4hash4intoys6HasherVz_tF', 
                        '_$s14AppStoreDaemon11FeatureFlagO6domains12StaticStringVvg', 
                        '_$s14AppStoreDaemon11FeatureFlagO6domains12StaticStringVvpMV', 
@@ -116,10 +113,11 @@ exports:
     objc-classes:    [ ASDAccountLookupRequest, ASDAccountLookupRequestOptions, ASDAccountLookupResponse, 
                        ASDAggregateClusterMappingData, ASDAlertAction, ASDAlertPresentationRequest, 
                        ASDAlertPresentationResult, ASDApp, ASDAppCapabilities, ASDAppCapabilityMetadata, 
-                       ASDAppClusterMapping, ASDAppEvent, ASDAppLibrary, ASDAppMetricsEvent, 
-                       ASDAppMetricsService, ASDAppQuery, ASDAppReviewAppMetadata, 
-                       ASDAppStoreService, ASDAppUsageStats, ASDApplicationMetadata, 
-                       ASDArcadeService, ASDBackgroundAssets, ASDBaseClient, ASDBetaAppDisplayNames, 
+                       ASDAppClusterMapping, ASDAppEvent, ASDAppLedger, ASDAppLedgerItem, 
+                       ASDAppLedgerQuery, ASDAppLibrary, ASDAppMetricsEvent, ASDAppMetricsService, 
+                       ASDAppQuery, ASDAppReviewAppMetadata, ASDAppStoreService, 
+                       ASDAppUsageStats, ASDApplicationMetadata, ASDArcadeService, 
+                       ASDBackgroundAssets, ASDBaseClient, ASDBetaAppDisplayNames, 
                        ASDBetaAppFeedback, ASDBetaAppFeedbackMetadata, ASDBetaAppLaunchInfo, 
                        ASDBetaAppVersion, ASDBundle, ASDCellularIdentity, ASDCellularSettings, 
                        ASDCheckQueueRequest, ASDCheckQueueRequestOptions, ASDClaimApplicationsRequest, 
@@ -154,11 +152,11 @@ exports:
                        ASDRestoreApplicationsRequestOptions, ASDRestoreApplicationsRequestResponse, 
                        ASDRestoreDemotedApplicationsRequest, ASDRestoreDemotedApplicationsRequestOptions, 
                        ASDRollableLog, ASDScreenSyncAppMetadata, ASDServiceBroker, 
-                       ASDSoftwareUpdate, ASDSoftwareUpdateMac, ASDSoftwareUpdateMetrics, 
-                       ASDSoftwareUpdatesStore, ASDStoreKitService, ASDSubscriptionEntitlement, 
-                       ASDSubscriptionEntitlements, ASDSupportedDialogHandlers, ASDSystemAppMetadata, 
-                       ASDSystemAppRequest, ASDTestFlightAppGenre, ASDTestFlightAppMetadata, 
-                       ASDTestFlightFeedback, ASDTestFlightServiceExtension, ASDTestFlightServiceExtensionContext, 
+                       ASDSoftwareUpdate, ASDSoftwareUpdateMetrics, ASDSoftwareUpdatesStore, 
+                       ASDStoreKitService, ASDSubscriptionEntitlement, ASDSubscriptionEntitlements, 
+                       ASDSupportedDialogHandlers, ASDSystemAppMetadata, ASDSystemAppRequest, 
+                       ASDTestFlightAppGenre, ASDTestFlightAppMetadata, ASDTestFlightFeedback, 
+                       ASDTestFlightServiceExtension, ASDTestFlightServiceExtensionContext, 
                        ASDTestFlightServiceExtensionHostContext, ASDTestFlightServiceExtensionPushMessage, 
                        ASDTestFlightServiceExtensionRemoteContext, ASDUpdateMetricsEvent, 
                        ASDUpdateMetricsStore, ASDUpdatePollMetrics, ASDUpdateWatchApps, 

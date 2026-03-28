@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BiomeFoundation.framework/Versions/A/BiomeFoundation'
-current-version: 200.6
+current-version: 209.15
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s15BiomeFoundation14ManagedSettingV12wrappedValue5namedACSb_SStcfC', 
                        '_$s15BiomeFoundation14ManagedSettingV12wrappedValueSbvg', 
                        '_$s15BiomeFoundation14ManagedSettingV12wrappedValueSbvpMV', 
@@ -40,10 +38,10 @@ exports:
                        _BMPrunerEntitlement, _BMReadOnlyEntitlement, _BMReadPropertyList, 
                        _BMReadWriteEntitlement, _BMRegularVariantOfAppleInternalEntitlement, 
                        _BMRemoveItemIfExistsAtPath, _BMRemoveItemIfExistsAtURL, _BMResourceContainerTypeDescription, 
-                       _BMResourceDescriptorErrorDomain, _BMResourceOptionsDescription, 
-                       _BMResourceTypeFromEntitlementResourceTypeString, _BMSandboxReadOperation, 
-                       _BMSandboxWriteOperation, _BMServiceDomainForResource, _BMServiceDomainForSet, 
-                       _BMServiceDomainForStream, _BMServiceDomainOverrideLookupFromConfigurationForSet, 
+                       _BMResourceDescriptorErrorDomain, _BMResourceDescriptorKeySourceIdentifier, 
+                       _BMResourceOptionsDescription, _BMResourceTypeFromEntitlementResourceTypeString, 
+                       _BMSandboxReadOperation, _BMSandboxWriteOperation, _BMServiceDomainForResource, 
+                       _BMServiceDomainForSet, _BMServiceDomainForStream, _BMServiceDomainOverrideLookupFromConfigurationForSet, 
                        _BMSetDescriptorKeyDomainOverride, _BMSetDescriptorValueSystemDomainOverride, 
                        _BMSetError, _BMSetsMergeableDeltasResource, _BMSetsResource, 
                        _BMSharedSyncResource, _BMShouldRetry, _BMStorageErrorDomain, 

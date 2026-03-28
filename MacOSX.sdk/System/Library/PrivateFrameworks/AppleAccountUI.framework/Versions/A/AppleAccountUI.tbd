@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleAccountUI.framework/Versions/A/AppleAccountUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14AppleAccountUI0B14InformationKeyV06RemoteC0016DecodingUserInfoE0AAMc', 
                        '_$s14AppleAccountUI0B14InformationKeyV12defaultValueSo9ACAccountCvgZ', 
                        '_$s14AppleAccountUI0B14InformationKeyV12defaultValueSo9ACAccountCvpZMV', 
@@ -425,9 +425,11 @@ exports:
                        __AAUILogGreenTeaWithFormat, __AAUILogSystem, __AAUIPPSLogSystem, 
                        __AAUISignOutLogSystem, __AAUISignpostCreate, __AAUISignpostGetNanoseconds, 
                        __AAUISignpostLogSystem, _kAAAnalyticEventRecoveryContactCodeEntryLanding, 
-                       _kAAAnalyticEventRecoveryContactRecoveryLanding, _kAATrustedContactsRCUpsellHook, 
-                       _kAATrustedContactsRCUpsellShowSuggestedContacts, _kAATrustedContactsRCUpsellSkipped, 
-                       _kAATrustedContactsRCUpsellSuggestedContactDeviceIntelligence, 
+                       _kAAAnalyticEventRecoveryContactRecoveryLanding, _kAAAnalyticsEventSignInDeleteLocalData, 
+                       _kAAAnalyticsEventSignInMergeLocalData, _kAAAnalyticsEventSignOutEraseFlowSelected, 
+                       _kAAAnalyticsEventSignOutUnsyncedDataAlertDisplayed, _kAAAnalyticsEventSignOutWithoutErasingSelected, 
+                       _kAATrustedContactsRCUpsellHook, _kAATrustedContactsRCUpsellShowSuggestedContacts, 
+                       _kAATrustedContactsRCUpsellSkipped, _kAATrustedContactsRCUpsellSuggestedContactDeviceIntelligence, 
                        _kAATrustedContactsRCUpsellSuggestedContactFamily, _kAATrustedContactsRCUpselluserSelectSuggestedContactDeviceIntelligence, 
                        _kAATrustedContactsRCUpselluserSelectSuggestedContactFamily, 
                        _kAccountAccessBack, _kAccountAccessEditInvite, _kAccountAccessSend ]

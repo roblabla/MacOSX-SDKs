@@ -1,14 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ContainerManagerCommon.framework/Versions/A/ContainerManagerCommon'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ ContainerManagerSystem, ContainerManagerUser, ContainerMigrator, 
                        MobileContainerManager, containermanagerd, containermanagerd_system ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$sSo12MCMAnalyticsC22ContainerManagerCommonE5queue33_99B0A2C63C90E9410251F74CFD176766LLSo012OS_dispatch_E0Cvpfi', 
                        '_$sSo12MCMAnalyticsCMa', '_$sSo13MCMAccessTypeVs12CaseIterable22ContainerManagerCommonMc', 
                        '_$sSo13MCMAccessTypeVs12CaseIterable22ContainerManagerCommonsACP8allCases03AllI0QzvgZTW', 
@@ -45,9 +45,10 @@ exports:
                        _MCMMigrationLastBuildInfoKey, _MCMMigrationTypeACLMigration, 
                        _MCMMigrationTypeBundleMigration, _MCMMigrationTypeCodeSigningMigration, 
                        _MCMMigrationTypeDaemonContainerCleaning, _MCMMigrationTypeDeleteManifestLocationChange, 
-                       _MCMMigrationTypeGroupIdMigration, _MCMUserMigrationTypeRepairTmpDir, 
-                       _MCMUserMigrationTypeSubdirectoryMigration, __containermanagerd_main, 
-                       _containermanager_copy_global_configuration, _containermanager_set_global_configuration ]
+                       _MCMMigrationTypeGroupIdMigration, _MCMMigrationTypeParentBundleIDUpdate, 
+                       _MCMUserMigrationTypeRepairTmpDir, _MCMUserMigrationTypeSubdirectoryMigration, 
+                       __containermanagerd_main, _containermanager_copy_global_configuration, 
+                       _containermanager_set_global_configuration ]
     objc-classes:    [ MCMAnalytics, MCMCommandAuthorize, MCMEntitlementAccess, MCMEntitlementLookup, 
                        MCMGlobalConfiguration, MCMMigrationStatus, MCMPOSIXUser, 
                        MCMSandboxExtension, MCMStaticConfiguration ]

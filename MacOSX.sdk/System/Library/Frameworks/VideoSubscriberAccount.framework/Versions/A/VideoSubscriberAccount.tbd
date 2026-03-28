@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/VideoSubscriberAccount.framework/Versions/A/VideoSubscriberAccount'
-current-version: 593.20.1
+current-version: 593.40.9
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s22VideoSubscriberAccount06VSUserC0V08objcUserC0SoABCvg', 
                        '_$s22VideoSubscriberAccount06VSUserC0V08objcUserC0SoABCvpMV', 
                        '_$s22VideoSubscriberAccount06VSUserC0V0C4TypeO04objcE0So0dcE0Vvg', 
@@ -427,7 +425,7 @@ exports:
                        VSVerificationStateResetOperation, VSVersionMapping, VSViewServiceRequestOperation, 
                        VSViewServiceResponse, VSViewServiceXPCInterface, VSWaitGroup, 
                        VSWeakForwardingTarget ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _VSAccountProviderAuthenticationSchemeAPI, _VSAccountProviderAuthenticationSchemeSAML, 
                        _VSCheckAccessOptionPrompt, _VSErrorDomain, _VSErrorInfoKeyAccountProviderResponse, 
                        _VSErrorInfoKeySAMLResponse, _VSErrorInfoKeySAMLResponseStatus, 

@@ -1,9 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreRealityIO.framework/Versions/A/CoreRealityIO'
-current-version: 221.40.1
+current-version: 221.100.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__110__back_refIcEE, __ZTINSt3__110__function6__baseIFvNS_8functionIFvvEEEEEE, 
@@ -38,8 +37,7 @@ exports:
                        __ZTSNSt3__123__match_any_but_newlineIcEE, __ZTSNSt3__126__end_marked_subexpressionIcEE, 
                        __ZTSNSt3__128__begin_marked_subexpressionIcEE, __ZTSNSt3__16__loopIcEE, 
                        __ZTSNSt3__16__nodeIcEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _GetCoreRealityIOBundleVersion, _IsCoreRIOBundleVersionValid, 
                        _RIOBuilderAddComponent, _RIOBuilderAddComponentByClass, _RIOBuilderAnyValueDirtyPropertyDescriptorCopyMetadataDescriptors, 
                        _RIOBuilderAnyValueDirtyPropertyDescriptorCopyName, _RIOBuilderAnyValueDirtyPropertyDescriptorCreateWithNameAndMetadataDescriptors, 

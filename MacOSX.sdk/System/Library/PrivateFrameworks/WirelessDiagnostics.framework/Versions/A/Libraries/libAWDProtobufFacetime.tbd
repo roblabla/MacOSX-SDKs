@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDProtobufFacetime.dylib'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN3awd7metrics12PLRHistogram10SharedCtorEv, __ZN3awd7metrics12PLRHistogram10SharedDtorEv, 
                        __ZN3awd7metrics12PLRHistogram16default_instanceEv, __ZN3awd7metrics12PLRHistogram17default_instance_E, 
                        __ZN3awd7metrics12PLRHistogram17kNonceFieldNumberE, __ZN3awd7metrics12PLRHistogram21CheckTypeAndMergeFromERKN20wireless_diagnostics6google8protobuf11MessageLiteE, 

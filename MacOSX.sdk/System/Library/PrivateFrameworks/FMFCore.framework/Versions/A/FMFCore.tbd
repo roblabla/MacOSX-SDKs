@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FMFCore.framework/Versions/A/FMFCore'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FMFCoreTests, FMInternalSettingsBundle, FindMy, FindMyNotificationsContent, 
                        FindMySiriIntents, FindMyTesterApp, FindMyTests, FindMyUICore, 
                        FindMyWidgetIntentsPeople, FindMyWidgetPeople, FindMyWidgetTestApp, 
@@ -14,8 +12,7 @@ allowable-clients:
                        SiriFindMy, SiriFindMyTester, SiriFindMyTests, fmfcoretool, 
                        fmfd, peopled, 'peopled Tests (iOS)' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s7FMFCore0A16PreferenceDomainSSvg', '_$s7FMFCore0A6HelperC11displayName3forSSSo9CNContactC_tFZ', 
                        '_$s7FMFCore0A6HelperC7contact3for11keysToFetchSo9CNContactCSgSS_SaySo15CNKeyDescriptor_pGSgtFZ', 
                        '_$s7FMFCore0A6HelperCACycfC', '_$s7FMFCore0A6HelperCACycfc', 

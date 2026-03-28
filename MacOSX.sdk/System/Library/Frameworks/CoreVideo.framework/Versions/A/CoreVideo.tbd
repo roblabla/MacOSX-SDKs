@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo'
-current-version: 726.2
+current-version: 734.4
 compatibility-version: 1.2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s6Buffer9CoreVideo21CVBufferRepresentablePTl', '_$s9CoreVideo11CVImageSizeV2eeoiySbAC_ACtFZ', 
                        '_$s9CoreVideo11CVImageSizeV4hash4intoys6HasherVz_tF', '_$s9CoreVideo11CVImageSizeV4zeroACvgZ', 
                        '_$s9CoreVideo11CVImageSizeV4zeroACvpZMV', '_$s9CoreVideo11CVImageSizeV5width6heightACSi_SitcfC', 
@@ -700,15 +698,16 @@ exports:
                        '_$sSo6CVTimea9CoreVideoE11flagOptionsSo0A5FlagsVvg', '_$sSo6CVTimea9CoreVideoE11flagOptionsSo0A5FlagsVvpMV', 
                        '_$sSo6CVTimea9CoreVideoE11flagOptionsSo0A5FlagsVvs', '_$sSo6CVTimea9CoreVideoE4zeroABvgZ', 
                        '_$sSo6CVTimea9CoreVideoE4zeroABvpZMV', '_$sSo6CVTimea9CoreVideoE9timeValue0D5ScaleABs5Int64V_s5Int32VtcfC', 
-                       _CVBufferCopyAttachment, _CVBufferCopyAttachments, _CVBufferDumpToQTES, 
-                       _CVBufferGetAttachment, _CVBufferGetAttachments, _CVBufferHasAttachment, 
-                       _CVBufferPropagateAttachments, _CVBufferRelease, _CVBufferRemoveAllAttachments, 
-                       _CVBufferRemoveAttachment, _CVBufferRetain, _CVBufferSetAttachment, 
-                       _CVBufferSetAttachments, _CVColorPrimariesGetIntegerCodePointForString, 
-                       _CVColorPrimariesGetStringForIntegerCodePoint, _CVDEBUGPixelBufferGlobalCacheGetColorSpace, 
-                       _CVDEBUGPixelBufferGlobalCacheGetPropertyList, _CVDataBufferCreateWithIOSurface, 
-                       _CVDataBufferDecrementUseCountForCategory, _CVDataBufferGetDataFormatType, 
-                       _CVDataBufferGetDataSize, _CVDataBufferGetIOSurface, _CVDataBufferGetPixelFormatType, 
+                       _CVBufferCopyAttachment, _CVBufferCopyAttachments, _CVBufferCopyNonBridgedAttachments, 
+                       _CVBufferDumpToQTES, _CVBufferGetAttachment, _CVBufferGetAttachments, 
+                       _CVBufferHasAttachment, _CVBufferPropagateAttachments, _CVBufferRelease, 
+                       _CVBufferRemoveAllAttachments, _CVBufferRemoveAttachment, 
+                       _CVBufferRetain, _CVBufferSetAttachment, _CVBufferSetAttachments, 
+                       _CVColorPrimariesGetIntegerCodePointForString, _CVColorPrimariesGetStringForIntegerCodePoint, 
+                       _CVDEBUGPixelBufferGlobalCacheGetColorSpace, _CVDEBUGPixelBufferGlobalCacheGetPropertyList, 
+                       _CVDataBufferCreateWithIOSurface, _CVDataBufferDecrementUseCountForCategory, 
+                       _CVDataBufferGetDataFormatType, _CVDataBufferGetDataSize, 
+                       _CVDataBufferGetIOSurface, _CVDataBufferGetPixelFormatType, 
                        _CVDataBufferGetTypeID, _CVDataBufferIncrementUseCountForCategory, 
                        _CVDataBufferPoolCreate, _CVDataBufferPoolCreateDataBuffer, 
                        _CVDataBufferPoolCreateDataBufferWithAuxAttributes, _CVDataBufferPoolFlush, 
@@ -918,8 +917,14 @@ exports:
                        _kCVPixelFormatOpenGLInternalFormat, _kCVPixelFormatOpenGLType, 
                        _kCVPixelFormatPlanes, _kCVPixelFormatQDCompatibility, _kCVPixelFormatVerticalSubsampling, 
                        _kCVZeroTime ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64-maccatalyst, arm64e-macos, 
-                       arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ _CVPixelBufferCreateWithParentIOSurface, _CVPixelBufferCreateWithParentPixelBuffer, 
+                       _kCVImageBufferPostDecodeProcessingFrameMetadataKey, _kCVImageBufferPostDecodeProcessingSequenceMetadataKey, 
+                       _kCVImageBufferTransferFunction_EBU_3213, _kCVImageBufferTransferFunction_SMPTE_C, 
+                       _kCVPixelBufferIOSurfaceOpenGLESFBOCompatibilityKey, _kCVPixelBufferIOSurfaceOpenGLESTextureCompatibilityKey, 
+                       _kCVPixelBufferOpenGLESCompatibilityKey, _kCVPixelBufferOpenGLESTextureCacheCompatibilityKey, 
+                       _kCVPixelBufferOpenGLTextureCacheCompatibilityKey, _kCVPixelFormatOpenGLESCompatibility ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CVMetalTextureCacheCreateTextureFromSliceOfImage, _CVPixelBufferCalculateCompressedTileDataRegionMemoryUsedOfPlane, 
                        _CVPixelBufferCalculateSparseHistogramOfCompressedTileDataUsageOfPlane, 
                        _kCVPixelBufferCompressedDataRegionAlignmentKey, _kCVPixelBufferCompressedTileHeaderGroupBytesPerRowAlignmentKey, 
@@ -929,11 +934,4 @@ exports:
                        _kCVPixelFormatCompressionMetadataPatternSignallingUncompressed, 
                        _kCVPixelFormatCompressionType, _kCVPixelFormatEquivalentUncompressedPixelFormat, 
                        _kCVPixelFormatMultiSlice, _kCVPixelFormatTiledAddressFormat ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _CVPixelBufferCreateWithParentIOSurface, _CVPixelBufferCreateWithParentPixelBuffer, 
-                       _kCVImageBufferPostDecodeProcessingFrameMetadataKey, _kCVImageBufferPostDecodeProcessingSequenceMetadataKey, 
-                       _kCVImageBufferTransferFunction_EBU_3213, _kCVImageBufferTransferFunction_SMPTE_C, 
-                       _kCVPixelBufferIOSurfaceOpenGLESFBOCompatibilityKey, _kCVPixelBufferIOSurfaceOpenGLESTextureCompatibilityKey, 
-                       _kCVPixelBufferOpenGLESCompatibilityKey, _kCVPixelBufferOpenGLESTextureCacheCompatibilityKey, 
-                       _kCVPixelBufferOpenGLTextureCacheCompatibilityKey, _kCVPixelFormatOpenGLESCompatibility ]
 ...

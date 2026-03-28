@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/LiveExecutionResultsFoundation.framework/Versions/A/LiveExecutionResultsFoundation'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s30LiveExecutionResultsFoundation11PrintSampleV18sourceLocationInfoAA06SourcehI0OSgvM', 
                        '_$s30LiveExecutionResultsFoundation11PrintSampleV18sourceLocationInfoAA06SourcehI0OSgvg', 
                        '_$s30LiveExecutionResultsFoundation11PrintSampleV18sourceLocationInfoAA06SourcehI0OSgvpMV', 

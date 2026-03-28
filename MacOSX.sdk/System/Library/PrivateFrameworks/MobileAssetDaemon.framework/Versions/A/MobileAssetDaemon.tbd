@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64e-macos ]
+install-name:    '/System/Library/PrivateFrameworks/MobileAssetDaemon.framework/Versions/A/MobileAssetDaemon'
+swift-abi-version: 7
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    clients:         [ madownloadservicetool, mobileassetd ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$sSo17MADAnalyticsBiomeC17MobileAssetDaemonEABycfC', '_$sSo17MADAnalyticsBiomeC17MobileAssetDaemonEABycfc', 
+                       '_$sSo17MADAnalyticsBiomeCMa', _mobileassetd_main ]
+    objc-classes:    [ DownloadInfoDTO, MADAnalyticsBiome, MADownloadOutcome, MADownloadParameters, 
+                       MADownloadProgress, MAUnlockMonitor ]
+...

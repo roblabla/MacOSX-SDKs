@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/RTCReporting.framework/Versions/A/RTCReporting'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10RTCUtility10XPCMessageV11MessageTypeO8rawValueAESgs5Int64V_tcfC', 
                        '_$s10RTCUtility10XPCMessageV11MessageTypeO8rawValues5Int64Vvg', 
                        '_$s10RTCUtility10XPCMessageV11MessageTypeO8rawValues5Int64VvpMV', 
@@ -96,7 +94,15 @@ exports:
                        '_$s10RTCUtility21XPCIncomingConnectionV4connSo13OS_xpc_object_pvpMV', 
                        '_$s10RTCUtility21XPCIncomingConnectionVMa', '_$s10RTCUtility21XPCIncomingConnectionVMn', 
                        '_$s10RTCUtility21XPCIncomingConnectionVN', '_$s10RTCUtility24getTimeIntervalSince19704Dates5Int64V10FoundationACV_tF', 
-                       '_$s10RTCUtility8XPCErrorV10Foundation14LocalizedErrorAAMc', 
+                       '_$s10RTCUtility5QueueC15unownedExecutorScevg', '_$s10RTCUtility5QueueC15unownedExecutorScevpMV', 
+                       '_$s10RTCUtility5QueueC3runyxxyYaKcYaKlF', '_$s10RTCUtility5QueueC3runyxxyYaKcYaKlFTq', 
+                       '_$s10RTCUtility5QueueC3runyxxyYaKcYaKlFTu', '_$s10RTCUtility5QueueC5asyncyyyyYaYbcF', 
+                       '_$s10RTCUtility5QueueC5asyncyyyyYaYbcFTq', '_$s10RTCUtility5QueueC6cancelyyF', 
+                       '_$s10RTCUtility5QueueC6cancelyyFTq', '_$s10RTCUtility5QueueCACycfC', 
+                       '_$s10RTCUtility5QueueCACycfCTq', '_$s10RTCUtility5QueueCACycfc', 
+                       '_$s10RTCUtility5QueueCMa', '_$s10RTCUtility5QueueCMm', '_$s10RTCUtility5QueueCMn', 
+                       '_$s10RTCUtility5QueueCN', '_$s10RTCUtility5QueueCScAAAMc', 
+                       '_$s10RTCUtility5QueueCfD', '_$s10RTCUtility5QueueCfd', '_$s10RTCUtility8XPCErrorV10Foundation14LocalizedErrorAAMc', 
                        '_$s10RTCUtility8XPCErrorV11descriptionSSvg', '_$s10RTCUtility8XPCErrorV11descriptionSSvpMV', 
                        '_$s10RTCUtility8XPCErrorV16errorDescriptionSSSgvg', '_$s10RTCUtility8XPCErrorV16errorDescriptionSSSgvpMV', 
                        '_$s10RTCUtility8XPCErrorVMa', '_$s10RTCUtility8XPCErrorVMn', 

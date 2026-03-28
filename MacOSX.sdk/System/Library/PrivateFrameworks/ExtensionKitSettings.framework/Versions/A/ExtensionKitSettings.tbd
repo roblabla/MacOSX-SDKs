@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ExtensionKitSettings.framework/Versions/A/ExtensionKitSettings'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s20ExtensionKitSettings0A10PointGroupV04mainaD10IdentifierSSvg', 
                        '_$s20ExtensionKitSettings0A10PointGroupV04mainaD10IdentifierSSvpMV', 
                        '_$s20ExtensionKitSettings0A10PointGroupV09extensionD11IdentifiersSaySSGvg', 

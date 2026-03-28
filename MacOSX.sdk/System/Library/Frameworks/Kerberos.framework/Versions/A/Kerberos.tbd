@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Kerberos.framework/Versions/A/Kerberos'
 current-version: 6
 compatibility-version: 5
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FSp_krb_get_svc_in_tkt, _FSp_profile_init, _FSp_profile_init_path, 
                        _FSp_put_svc_key, _FSp_read_service_key, _GSS_C_NT_ANONYMOUS, 
                        _GSS_C_NT_EXPORT_NAME, _GSS_C_NT_HOSTBASED_SERVICE, _GSS_C_NT_HOSTBASED_SERVICE_X, 
@@ -193,7 +191,7 @@ exports:
                        _profile_update_relation, _put_svc_key, _read_service_key, 
                        _remove_error_table, _reset_com_err_hook, _set_com_err_hook, 
                        _tkt_string ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _apple_gss_krb5_export_authdata_if_relevant_context, _apple_gss_krb5_free_authdata_if_relevant, 
                        _cc_close, _cc_create, _cc_destroy, _cc_free_NC_info, _cc_free_creds, 
                        _cc_free_name, _cc_free_principal, _cc_get_NC_info, _cc_get_change_time, 

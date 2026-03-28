@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/CoreNFC.framework/Versions/A/CoreNFC'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/usr/lib/swift/libswiftCoreNFC.dylib$$1$10.15$14.4$_$s7CoreNFC19NFCFeliCaStatusFlagV11statusFlag10G5Flag2ACSi_SitcfC$', 
                        '$ld$previous$/usr/lib/swift/libswiftCoreNFC.dylib$$1$10.15$14.4$_$s7CoreNFC19NFCFeliCaStatusFlagV11statusFlag1SivM$', 
                        '$ld$previous$/usr/lib/swift/libswiftCoreNFC.dylib$$1$10.15$14.4$_$s7CoreNFC19NFCFeliCaStatusFlagV11statusFlag1Sivg$', 
@@ -754,18 +754,38 @@ exports:
                        '_$sSo14NFCNDEFPayloadC7CoreNFCE24wellKnownTypeTextPayloadSSSg_10Foundation6LocaleVSgtyF', 
                        '_$sSo19NFCTagReaderSessionC7CoreNFCE12connectedTagAC0A0OSgvg', 
                        '_$sSo19NFCTagReaderSessionC7CoreNFCE12connectedTagAC0A0OSgvpMV', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13ConfigurationV13pollingOption24iso7816SelectIdentifiers17feliCaSystemCodesAESo010NFCPollingH0V_SaySSGAKtcfC', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13ConfigurationV13pollingOptionSo010NFCPollingH0VvM', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13ConfigurationV13pollingOptionSo010NFCPollingH0Vvg', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13ConfigurationV13pollingOptionSo010NFCPollingH0VvpMV', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13ConfigurationV13pollingOptionSo010NFCPollingH0Vvs', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13ConfigurationV17feliCaSystemCodesSaySSGvM', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13ConfigurationV17feliCaSystemCodesSaySSGvg', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13ConfigurationV17feliCaSystemCodesSaySSGvpMV', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13ConfigurationV17feliCaSystemCodesSaySSGvs', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13ConfigurationV24iso7816SelectIdentifiersSaySSGvM', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13ConfigurationV24iso7816SelectIdentifiersSaySSGvg', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13ConfigurationV24iso7816SelectIdentifiersSaySSGvpMV', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13ConfigurationV24iso7816SelectIdentifiersSaySSGvs', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13ConfigurationVMa', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13ConfigurationVMn', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13ConfigurationVN', '_$sSo19NFCTagReaderSessionC7CoreNFCE13configuration8delegate5queueA2bCE13ConfigurationV_AC0abC8Delegate_pSo012OS_dispatch_H0CSgtcfC', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13configuration8delegate5queueA2bCE13ConfigurationV_AC0abC8Delegate_pSo012OS_dispatch_H0CSgtcfc', 
                        '_$sSo19NFCTagReaderSessionC7CoreNFCE13pollingOption8delegate5queueABSgSo010NFCPollingG0V_AC0abC8Delegate_pSo012OS_dispatch_I0CSgtcfC', 
                        '_$sSo19NFCTagReaderSessionC7CoreNFCE13pollingOption8delegate5queueABSgSo010NFCPollingG0V_AC0abC8Delegate_pSo012OS_dispatch_I0CSgtcfc', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE14restartPolling13configurationyAbCE13ConfigurationV_tF', 
                        '_$sSo19NFCTagReaderSessionC7CoreNFCE7connect2to17completionHandleryAC0A0O_ys5Error_pSgctF', 
                        '_$sSo19NFCTagReaderSessionC7CoreNFCE9upcastTagySo0A0_pAcEOF', 
                        '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE09isPaymentD0SbyFZ', 
                        '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE10__delegate5queueABSo06NFCTagcD8Delegate_p_So012OS_dispatch_H0CSgtcfC', 
                        '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE10__delegate5queueABSo06NFCTagcD8Delegate_p_So012OS_dispatch_H0CSgtcfc', 
+                       '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE13configuration8delegate5queueABSo06NFCTagcD13ConfigurationC_So0jcD8Delegate_pSo012OS_dispatch_I0CtcfC', 
+                       '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE13configuration8delegate5queueABSo06NFCTagcD13ConfigurationC_So0jcD8Delegate_pSo012OS_dispatch_I0Ctcfc', 
                        '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE15__pollingOption8delegate5queueABSo010NFCPollingH0V_So06NFCTagcD8Delegate_pSo012OS_dispatch_J0CSgtcfC', 
                        '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE15__pollingOption8delegate5queueABSo010NFCPollingH0V_So06NFCTagcD8Delegate_pSo012OS_dispatch_J0CSgtcfc', 
                        '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE16readingAvailableSbvgZ', 
-                       '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE8delegate19sessionDelegateType5queue10pollMethod0hJ00H6ConfigAByp_So010NFCSessioniJ0VSo012OS_dispatch_K0CSgSo13PollingOptionVSo0eoJ0VSo0dN0VtcfC', 
-                       '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE8delegate19sessionDelegateType5queue10pollMethod0hJ00H6ConfigAByp_So010NFCSessioniJ0VSo012OS_dispatch_K0CSgSo13PollingOptionVSo0eoJ0VSo0dN0Vtcfc', 
+                       '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE8delegate19sessionDelegateType0hJ010pollConfig5queueAByp_So010NFCSessioniJ0VSo0enJ0VSo013NFCoreNFCPollL0CSo012OS_dispatch_M0CSgtcfC', 
+                       '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE8delegate19sessionDelegateType0hJ010pollConfig5queueAByp_So010NFCSessioniJ0VSo0enJ0VSo013NFCoreNFCPollL0CSo012OS_dispatch_M0CSgtcfc', 
                        '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE8delegate5queueAbC06NFCTagcD8Delegate_p_So012OS_dispatch_H0CSgtcfC', 
                        '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE8delegate5queueAbC06NFCTagcD8Delegate_p_So012OS_dispatch_H0CSgtcfc', 
                        '_$sSo26NFCPaymentTagReaderSessionCMa', _NFCErrorDomain, _NFCISO15693TagResponseErrorKey, 
@@ -774,5 +794,6 @@ exports:
                        NFCISO15693ReaderSession, NFCISO7816APDU, NFCNDEFMessage, 
                        NFCNDEFPayload, NFCNDEFReaderSession, NFCPaymentTagReaderSession, 
                        NFCReaderSession, NFCTagCommandConfiguration, NFCTagReaderSession, 
-                       NFCVASCommandConfiguration, NFCVASReaderSession, NFCVASResponse ]
+                       NFCTagReaderSessionConfiguration, NFCVASCommandConfiguration, 
+                       NFCVASReaderSession, NFCVASResponse ]
 ...

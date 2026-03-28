@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Welcome.framework/Versions/A/Welcome'
 current-version: 21
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s13IconImageView7Welcome0D7ContentPTl', '_$s14BackgroundView7Welcome0C7ContentPTl', 
                        '_$s7SwiftUI4ViewP7WelcomeE7welcome4with6detentQrAD0D7Content_p_AA18PresentationDetentVtF', 
                        '_$s7SwiftUI4ViewP7WelcomeE7welcome4with6detentQrAD0D7Content_p_AA18PresentationDetentVtFQOMQ', 

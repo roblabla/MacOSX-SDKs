@@ -1,6 +1,6 @@
-/* iig(DriverKit-451) generated from IOUserServer.iig */
+/* iig(DriverKit-456.100.11) generated from IOUserServer.iig */
 
-/* IOUserServer.iig:1-36 */
+/* IOUserServer.iig:1-39 */
 /*
  * Copyright (c) 2019-2019 Apple Inc. All rights reserved.
  *
@@ -36,8 +36,11 @@
 #include <DriverKit/OSAction.h>  /* .iig include */
 #include <DriverKit/IOService.h>  /* .iig include */
 
+#define kIOUserServrMaxPanicReasonLength    1024
+#define kIOUserServrMaxExitReasonLength     1024
+#define kIOUserServrMaxModulePathLength     1024
 
-/* source class IOUserServer IOUserServer.iig:37-67 */
+/* source class IOUserServer IOUserServer.iig:40-73 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -56,6 +59,9 @@ public:
 		OSString      * bundleID,
 		IOUserServer ** server);
 
+	virtual kern_return_t
+	Panic(const char reason[kIOUserServrMaxPanicReasonLength]);
+
 	virtual bool
 	init() override;
 
@@ -63,10 +69,10 @@ public:
 	free() override;
 
 	virtual kern_return_t
-	Exit(const char reason[1024]) LOCAL;
+	Exit(const char reason[kIOUserServrMaxExitReasonLength]) LOCAL;
 
 	virtual kern_return_t
-	LoadModule(const char path[1024]) LOCAL;
+	LoadModule(const char path[kIOUserServrMaxModulePathLength]) LOCAL;
 
 	virtual kern_return_t
 	RegisterService() override;
@@ -75,9 +81,10 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOUserServer IOUserServer.iig:37-67 */
+/* generated class IOUserServer IOUserServer.iig:40-73 */
 
 #define IOUserServer_Create_ID            0xc1dbaee5e75e22b9ULL
+#define IOUserServer_Panic_ID            0xe204078ce895ada9ULL
 #define IOUserServer_Exit_ID            0xe949d58832ebe980ULL
 #define IOUserServer_LoadModule_ID            0xd96f074a91a53982ULL
 
@@ -87,6 +94,9 @@ public:
         uint64_t options, \
         OSString * bundleID, \
         IOUserServer ** server
+
+#define IOUserServer_Panic_Args \
+        const char * reason
 
 #define IOUserServer_Exit_Args \
         const char * reason
@@ -114,6 +124,11 @@ public:\
         uint64_t options,\
         OSString * bundleID,\
         IOUserServer ** server);\
+\
+    kern_return_t\
+    Panic(\
+        const char * reason,\
+        OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
     Exit(\
@@ -144,6 +159,12 @@ public:\
     Create_Invoke(const IORPC rpc,\
         Create_Handler func);\
 \
+    typedef kern_return_t (*Panic_Handler)(OSMetaClassBase * target, IOUserServer_Panic_Args);\
+    static kern_return_t\
+    Panic_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        Panic_Handler func);\
+\
     typedef kern_return_t (*Exit_Handler)(OSMetaClassBase * target, IOUserServer_Exit_Args);\
     static kern_return_t\
     Exit_Invoke(const IORPC rpc,\
@@ -165,6 +186,9 @@ protected:\
 \
     static kern_return_t\
     Create_Impl(IOUserServer_Create_Args);\
+\
+    kern_return_t\
+    Panic_Impl(IOUserServer_Panic_Args);\
 \
     kern_return_t\
     RegisterService_Impl(IOService_RegisterService_Args);\
@@ -236,6 +260,6 @@ IOUserServer_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOUserServer.iig:69- */
+/* IOUserServer.iig:75- */
 
 #endif /* ! _IOKIT_UIOUSERSERVER_H */

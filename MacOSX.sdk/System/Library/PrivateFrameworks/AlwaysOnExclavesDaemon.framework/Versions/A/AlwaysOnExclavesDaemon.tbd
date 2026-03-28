@@ -1,0 +1,18 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64e-macos ]
+install-name:    '/System/Library/PrivateFrameworks/AlwaysOnExclavesDaemon.framework/Versions/A/AlwaysOnExclavesDaemon'
+swift-abi-version: 7
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s22AlwaysOnExclavesDaemon0D0C5label12mach_serviceACSS_SStcfC', 
+                       '_$s22AlwaysOnExclavesDaemon0D0C5label12mach_serviceACSS_SStcfCTj', 
+                       '_$s22AlwaysOnExclavesDaemon0D0C5label12mach_serviceACSS_SStcfCTq', 
+                       '_$s22AlwaysOnExclavesDaemon0D0C5label12mach_serviceACSS_SStcfc', 
+                       '_$s22AlwaysOnExclavesDaemon0D0C5startyyFTj', '_$s22AlwaysOnExclavesDaemon0D0C5startyyFTq', 
+                       '_$s22AlwaysOnExclavesDaemon0D0CMa', '_$s22AlwaysOnExclavesDaemon0D0CMm', 
+                       '_$s22AlwaysOnExclavesDaemon0D0CMn', '_$s22AlwaysOnExclavesDaemon0D0CMo', 
+                       '_$s22AlwaysOnExclavesDaemon0D0CMu', '_$s22AlwaysOnExclavesDaemon0D0CN', 
+                       '_$s22AlwaysOnExclavesDaemon0D0CfD', '_$s22AlwaysOnExclavesDaemon0D0Cfd', 
+                       _AlwaysOnExclavesDaemonVersionNumber, _AlwaysOnExclavesDaemonVersionString ]
+...

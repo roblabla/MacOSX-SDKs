@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libTelephonyCapabilities.dylib'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN12capabilities10programmer14commandTimeoutEv, __ZN12capabilities10programmer14connectTimeoutEv, 
                        __ZN12capabilities10programmer19connectAttemptCountEv, __ZN12capabilities10programmer23commandTimeoutForVendorE20TelephonyRadioVendor, 
                        __ZN12capabilities10programmer23connectTimeoutForVendorE20TelephonyRadioVendor, 
@@ -110,7 +108,7 @@ exports:
                        __ZN12capabilities2ct29getDefaultEmergencyNumberListEv, __ZN12capabilities2ct29getProvisioningProfileSupportEv, 
                        __ZN12capabilities2ct29requiresIMSStatusUpdateInCSFBEv, __ZN12capabilities2ct29shouldEnableDesenseForProductE16TelephonyProduct, 
                        __ZN12capabilities2ct29shouldRadioInitInAirplaneModeEv, __ZN12capabilities2ct29signalStrengthDisplayMaxValueEv, 
-                       __ZN12capabilities2ct29supportsBIPControllerForRadioE14TelephonyRadio, 
+                       __ZN12capabilities2ct29supportsAntennaSelectionQueryEv, __ZN12capabilities2ct29supportsBIPControllerForRadioE14TelephonyRadio, 
                        __ZN12capabilities2ct29supportsCapabilityeHRPDDeviceEv, __ZN12capabilities2ct29supportsDataPlanNotificationsEv, 
                        __ZN12capabilities2ct29supportsDisableLPANRForVendorE20TelephonyRadioVendor, 
                        __ZN12capabilities2ct29supportsHandoverPDNForProductE16TelephonyProduct, 
@@ -125,7 +123,7 @@ exports:
                        __ZN12capabilities2ct30supportsBB2GMitigationForRadioE14TelephonyRadio, 
                        __ZN12capabilities2ct30supportsCachedNetworkTimeQueryEv, __ZN12capabilities2ct30supportsCampOnlyModeForProductE16TelephonyProduct, 
                        __ZN12capabilities2ct30supportsCarrierSpaceForProductE16TelephonyProduct, 
-                       __ZN12capabilities2ct30supportsDERFileFormatForVendorE20TelephonyRadioVendor, 
+                       __ZN12capabilities2ct30supportsCellSatFringeDetectionEv, __ZN12capabilities2ct30supportsDERFileFormatForVendorE20TelephonyRadioVendor, 
                        __ZN12capabilities2ct30supportsDynamicBootstrapGeminiEv, __ZN12capabilities2ct30supportsEmergencyQMIExtensionsEv, 
                        __ZN12capabilities2ct30supportsGPSVisibilityReportingEv, __ZN12capabilities2ct30supportsIncrementalNetworkScanEv, 
                        __ZN12capabilities2ct30supportsMidCallSRVCCForProductE16TelephonyProduct, 
@@ -222,6 +220,7 @@ exports:
                        __ZN12capabilities2ct35supportsSIMTransferWithSecureIntentEv, 
                        __ZN12capabilities2ct35useLegacyPhoneNumberSelectionMethodEv, 
                        __ZN12capabilities2ct36getRUIMDeprecationStrategyForProductE16TelephonyProduct, 
+                       __ZN12capabilities2ct36requiresBasebandActivatedForFilePushEv, 
                        __ZN12capabilities2ct36supportsEnhanced5GCellularHarvestingEv, 
                        __ZN12capabilities2ct36supportsEnhancedLQMDataStallForRadioE14TelephonyRadio, 
                        __ZN12capabilities2ct36supportsHOVirtualInterfacesForVendorE20TelephonyRadioVendor, 
@@ -260,6 +259,7 @@ exports:
                        __ZN12capabilities2ct39getProvisioningProfileSupportForProductE16TelephonyProduct, 
                        __ZN12capabilities2ct39requiresIMSStatusUpdateInCSFBForProductE16TelephonyProduct, 
                        __ZN12capabilities2ct39shouldEnableSystemDeterminationWatchdogEv, 
+                       __ZN12capabilities2ct39supportsAntennaSelectionQueryForProductE16TelephonyProduct, 
                        __ZN12capabilities2ct39supportsCachedNetworkTimeQueryForVendorE20TelephonyRadioVendor, 
                        __ZN12capabilities2ct39supportsCapabilityTDSCDMADeviceForRadioE14TelephonyRadio, 
                        __ZN12capabilities2ct39supportsCapabilityeHRPDDeviceForProductE16TelephonyProduct, 
@@ -275,6 +275,7 @@ exports:
                        __ZN12capabilities2ct40integratedPDPStatisticsIntervalForVendorE20TelephonyRadioVendor, 
                        __ZN12capabilities2ct40nonPrimaryDLServingCellBandwidthMaxValueEv, 
                        __ZN12capabilities2ct40supportsCSDownlinkDTMFDetectionForVendorE20TelephonyRadioVendor, 
+                       __ZN12capabilities2ct40supportsCellSatFringeDetectionForProductE16TelephonyProduct, 
                        __ZN12capabilities2ct40supportsCompleteCleanupOnFilePushFailureEv, 
                        __ZN12capabilities2ct40supportsDataSystemDeterminationForVendorE20TelephonyRadioVendor, 
                        __ZN12capabilities2ct40supportsDynamicBootstrapGeminiForProductE16TelephonyProduct, 
@@ -320,6 +321,7 @@ exports:
                        __ZN12capabilities2ct44supportsRadioModeWorkaroundForWatchForVendorE20TelephonyRadioVendor, 
                        __ZN12capabilities2ct44supportsSystemSelectionDataRoamingForProductE16TelephonyProduct, 
                        __ZN12capabilities2ct44supportsXcapForUncertifiedCarriersForProductE16TelephonyProduct, 
+                       __ZN12capabilities2ct45requiresBasebandActivatedForFilePushForVendorE20TelephonyRadioVendor, 
                        __ZN12capabilities2ct45shouldUseLastPDPsForHighPriorityMediaForRadioE14TelephonyRadio, 
                        __ZN12capabilities2ct45supportsAudioPolicyForBottomAntennaForProductE16TelephonyProduct, 
                        __ZN12capabilities2ct45supportsFallbackToBrickAfterEmergencyForRadioE14TelephonyRadio, 
@@ -415,7 +417,8 @@ exports:
                        __ZN12capabilities3abs26shouldPanicOnBasebandResetEv, __ZN12capabilities3abs26supportedSARFusionFeaturesEv, 
                        __ZN12capabilities3abs26supportsCPMSConnectedStateEv, __ZN12capabilities3abs26supportsCPMSGetPowerFromBBEv, 
                        __ZN12capabilities3abs26supportsCoexEur5GForVendorE20TelephonyRadioVendor, 
-                       __ZN12capabilities3abs26supportsEFSEraseOnBootLoopEv, __ZN12capabilities3abs26supportsRFSelfTestForRadioE14TelephonyRadio, 
+                       __ZN12capabilities3abs26supportsEFSEraseOnBootLoopEv, __ZN12capabilities3abs26supportsNetworkCoverageMapEv, 
+                       __ZN12capabilities3abs26supportsRFSelfTestForRadioE14TelephonyRadio, 
                        __ZN12capabilities3abs27dataAggregationMaxSizeBytesEv, __ZN12capabilities3abs27radarComponentNameForVendorE20TelephonyRadioVendor, 
                        __ZN12capabilities3abs27supportedHSARTypeForProductE16TelephonyProduct, 
                        __ZN12capabilities3abs27supportsETSProtocolForRadioE14TelephonyRadio, 
@@ -460,6 +463,7 @@ exports:
                        __ZN12capabilities3abs34supportsCPMSConnectedStateForRadioE14TelephonyRadio, 
                        __ZN12capabilities3abs34supportsCPMSGetPowerFromBBForRadioE14TelephonyRadio, 
                        __ZN12capabilities3abs34supportsEFSEraseOnBootLoopForRadioE14TelephonyRadio, 
+                       __ZN12capabilities3abs34supportsNetworkCoverageMapForRadioE14TelephonyRadio, 
                        __ZN12capabilities3abs34traceTransportTimeoutScalingFactorEv, 
                        __ZN12capabilities3abs35bootupAssertionTimeoutScalingFactorEv, 
                        __ZN12capabilities3abs35serviceShutdownTimeoutScalingFactorEv, 
@@ -489,7 +493,7 @@ exports:
                        __ZN12capabilities3abs47shouldUseMinBasebandTransportIOReadSizeForRadioE14TelephonyRadio, 
                        __ZN12capabilities3abs48nonPrimaryDLServingCellBandwidthMaxValueForRadioE14TelephonyRadio, 
                        __ZN12capabilities3abs49shouldUseMinBasebandTransportIOReadCountForVendorE20TelephonyRadioVendor, 
-                       __ZN12capabilities3abs55supportsWirelessTelemetryUsingMultiClientModelForVendorE20TelephonyRadioVendor, 
+                       __ZN12capabilities3abs54supportsWirelessTelemetryUsingMultiClientModelForRadioE14TelephonyRadio, 
                        __ZN12capabilities3abs7usesCDCEv, __ZN12capabilities3abs8asStringENS0_10SARFeatureE, 
                        __ZN12capabilities3abs8asStringENS0_15MobileAssetTypeE, __ZN12capabilities3abs8asStringENS0_16SARFusionFeatureE, 
                        __ZN12capabilities3abs8asStringENS0_8HSARTypeE, __ZN12capabilities3absaNERNS0_10SARFeatureES1_, 

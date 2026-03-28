@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 142.1 -module-name ProximityReader
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 144.5 -module-name ProximityReader
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Contacts
 import Foundation
 import OSLog
@@ -284,11 +284,9 @@ public class PaymentCardReader : @unchecked Swift.Sendable {
   }
   @available(iOS 16.0, macCatalyst 17.0, *)
   public func prepare(using token: ProximityReader.PaymentCardReader.Token) async throws -> ProximityReader.PaymentCardReaderSession
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 15.4, deprecated: 16.0, message: "Use events instead of passing in updateHandler")
   @available(macCatalyst, introduced: 17.0, deprecated: 17.0, message: "Use events instead of passing in updateHandler")
   public func prepare(using token: ProximityReader.PaymentCardReader.Token, updateHandler: ((ProximityReader.PaymentCardReader.UpdateEvent) -> Swift.Void)?) async throws -> ProximityReader.PaymentCardReaderSession
-  #endif
   @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
   public func prepareStoreAndForward() async throws -> ProximityReader.StoreAndForwardPaymentCardReaderSession
   @available(iOS 18.4, macCatalyst 18.4, visionOS 2.4, *)
@@ -418,15 +416,11 @@ public class VASRequest : @unchecked Swift.Sendable {
     @available(macCatalyst, introduced: 17.0, deprecated: 17.0, message: "Not supported")
     public let shouldSendURLOnly: Swift.Bool
     public var localizedName: Swift.String
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS, introduced: 15.4, deprecated: 16.4, message: "Not supported")
     @available(macCatalyst, introduced: 17.0, deprecated: 17.0, message: "Not supported")
     public init(id: Swift.String, url: Foundation.URL? = nil, shouldSendURLOnly: Swift.Bool = false, localizedName: Swift.String? = nil)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS 16.4, macCatalyst 17.0, *)
     public init(id: Swift.String, url: Foundation.URL? = nil, localizedName: Swift.String? = nil)
-    #endif
     @available(iOS 15.4, macCatalyst 17.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
@@ -458,9 +452,7 @@ public struct VASReadResult : Swift.Identifiable, Swift.Sendable {
       case userInterventionRequired
       case incorrectData
       case unsupportedApplicationVersion
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(rawValue: Swift.Int)
-      #endif
       @available(iOS 15.4, macCatalyst 17.0, *)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
@@ -579,34 +571,24 @@ public class PaymentCardReaderSession : @unchecked Swift.Sendable {
   public func cancelRead() async throws -> Swift.Bool
   @available(iOS 16.0, macCatalyst 17.0, *)
   public func readPaymentCard(_ request: ProximityReader.PaymentCardTransactionRequest) async throws -> ProximityReader.PaymentCardReadResult
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 15.4, deprecated: 16.0, message: "Use PaymentCardReader events instead of eventHandler")
   @available(macCatalyst, introduced: 17.0, deprecated: 17.0, message: "Use PaymentCardReader events instead of eventHandler")
   public func readPaymentCard(_ request: ProximityReader.PaymentCardTransactionRequest, eventHandler: ((ProximityReader.PaymentCardReaderSession.Event) -> Swift.Void)? = nil) async throws -> ProximityReader.PaymentCardReadResult
-  #endif
   @available(iOS 16.0, macCatalyst 17.0, *)
   public func readPaymentCard(_ request: ProximityReader.PaymentCardVerificationRequest) async throws -> ProximityReader.PaymentCardReadResult
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 15.4, deprecated: 16.0, message: "Use PaymentCardReader events instead of eventHandler")
   @available(macCatalyst, introduced: 17.0, deprecated: 17.0, message: "Use PaymentCardReader events instead of eventHandler")
   public func readPaymentCard(_ request: ProximityReader.PaymentCardVerificationRequest, eventHandler: ((ProximityReader.PaymentCardReaderSession.Event) -> Swift.Void)? = nil) async throws -> ProximityReader.PaymentCardReadResult
-  #endif
   @available(iOS 16.0, macCatalyst 17.0, *)
   public func readVAS(_ request: ProximityReader.VASRequest) async throws -> ProximityReader.VASReadResult
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 15.4, deprecated: 16.0, message: "Use PaymentCardReader events instead of eventHandler")
   @available(macCatalyst, introduced: 17.0, deprecated: 17.0, message: "Use PaymentCardReader events instead of eventHandler")
   public func readVAS(_ request: ProximityReader.VASRequest, eventHandler: ((ProximityReader.PaymentCardReaderSession.Event) -> Swift.Void)? = nil) async throws -> ProximityReader.VASReadResult
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macCatalyst 17.0, *)
   public func readPaymentCard(_ request: ProximityReader.PaymentCardTransactionRequest, vasRequest: ProximityReader.VASRequest, stopOnVASResult: Swift.Bool) async throws -> (ProximityReader.PaymentCardReadResult?, ProximityReader.VASReadResult?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 15.4, deprecated: 16.0, message: "Use PaymentCardReader events instead of eventHandler")
   @available(macCatalyst, introduced: 17.0, deprecated: 17.0, message: "Use PaymentCardReader events instead of eventHandler")
   public func readPaymentCard(_ request: ProximityReader.PaymentCardTransactionRequest, vasRequest: ProximityReader.VASRequest, stopOnVASResult: Swift.Bool, eventHandler: ((ProximityReader.PaymentCardReaderSession.Event) -> Swift.Void)? = nil) async throws -> (ProximityReader.PaymentCardReadResult?, ProximityReader.VASReadResult?)
-  #endif
   @available(iOS 16.0, macCatalyst 17.0, *)
   public func capturePIN(using token: ProximityReader.PaymentCardReaderSession.PINToken, cardReaderTransactionID: Swift.String) async throws -> ProximityReader.PaymentCardReadResult
 }
@@ -622,9 +604,7 @@ final public class MobileDocumentReader : Swift.Sendable {
   final public var configuration: ProximityReader.MobileDocumentReader.Configuration {
     get async throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func prepare(using token: ProximityReader.MobileDocumentReader.Token? = nil) async throws -> ProximityReader.MobileDocumentReaderSession
-  #endif
   @objc deinit
 }
 @available(iOS 17.0, visionOS 1.0, *)
@@ -672,11 +652,9 @@ public enum MobileDocumentReaderError : Foundation.LocalizedError {
   case invalidToken
   case invalidRequest
   case invalidResponse
-  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
-  #endif
   public static func == (a: ProximityReader.MobileDocumentReaderError, b: ProximityReader.MobileDocumentReaderError) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -774,6 +752,12 @@ extension ProximityReader.MobileDriversLicenseDataRequest {
     public static let organDonorStatus: ProximityReader.MobileDriversLicenseDataRequest.Element
     @available(iOS 26.0, visionOS 26.0, *)
     public static let veteranStatus: ProximityReader.MobileDriversLicenseDataRequest.Element
+    @available(iOS 26.4, visionOS 26.4, *)
+    public static let signatureUsualMark: ProximityReader.MobileDriversLicenseDataRequest.Element
+    @available(iOS 26.4, visionOS 26.4, *)
+    public static let nationality: ProximityReader.MobileDriversLicenseDataRequest.Element
+    @available(iOS 26.4, visionOS 26.4, *)
+    public static let placeOfBirth: ProximityReader.MobileDriversLicenseDataRequest.Element
     public static let issuingAuthority: ProximityReader.MobileDriversLicenseDataRequest.Element
     public static let drivingPrivileges: ProximityReader.MobileDriversLicenseDataRequest.Element
     public static let documentNumber: ProximityReader.MobileDriversLicenseDataRequest.Element
@@ -822,11 +806,9 @@ extension ProximityReader.MobileDriversLicenseDataRequest.Response {
     public let dateOfBirth: Foundation.DateComponents?
     @available(iOS 17.2, visionOS 1.2, *)
     public let sex: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.Sex?
-    #if compiler(>=5.3) && $NonescapableTypes
     public var address: Contacts.CNPostalAddress? {
       get
     }
-    #endif
     @available(iOS 26.0, visionOS 26.0, *)
     public let height: Foundation.Measurement<Foundation.UnitLength>?
     @available(iOS 26.0, visionOS 26.0, *)
@@ -839,6 +821,12 @@ extension ProximityReader.MobileDriversLicenseDataRequest.Response {
     public let isOrganDonor: Swift.Bool?
     @available(iOS 26.0, visionOS 26.0, *)
     public let isVeteran: Swift.Bool?
+    @available(iOS 26.4, visionOS 26.4, *)
+    public let signatureUsualMarkData: Foundation.Data?
+    @available(iOS 26.4, visionOS 26.4, *)
+    public let nationality: Swift.String?
+    @available(iOS 26.4, visionOS 26.4, *)
+    public let placeOfBirth: Swift.String?
     public let issuingAuthority: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.IssuingAuthority?
     public let drivingPrivileges: [ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.DrivingPrivilege]
     public let aamvaDrivingPrivileges: [ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.AAMVADrivingPrivilege]
@@ -1240,11 +1228,9 @@ extension ProximityReader.MobilePhotoIDDataRequest.Response {
     public let age: Swift.Int?
     public let dateOfBirth: Foundation.DateComponents?
     public let sex: ProximityReader.MobilePhotoIDDataRequest.Response.DocumentElements.Sex?
-    #if compiler(>=5.3) && $NonescapableTypes
     public var address: Contacts.CNPostalAddress? {
       get
     }
-    #endif
     public let issuingAuthority: ProximityReader.MobilePhotoIDDataRequest.Response.DocumentElements.IssuingAuthority?
     public let documentNumber: Swift.String?
     public let documentIssueDate: Foundation.DateComponents?
@@ -1635,6 +1621,8 @@ extension ProximityReader.MobileDocumentAnyOfRawDataRequest {
   public struct Response : Swift.Hashable, Swift.Sendable {
     public let responseData: Foundation.Data
     public let sessionTranscript: Foundation.Data
+    @available(iOS 26.4, visionOS 26.4, *)
+    public let ephemeralReaderKey: Foundation.Data
     public static func == (a: ProximityReader.MobileDocumentAnyOfRawDataRequest.Response, b: ProximityReader.MobileDocumentAnyOfRawDataRequest.Response) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -1695,6 +1683,14 @@ extension ProximityReader.MobileDriversLicenseRawDataRequest {
     public static let organDonorStatus: ProximityReader.MobileDriversLicenseRawDataRequest.Element
     @available(iOS 26.0, visionOS 26.0, *)
     public static let veteranStatus: ProximityReader.MobileDriversLicenseRawDataRequest.Element
+    @available(iOS 26.4, visionOS 26.4, *)
+    public static let signatureUsualMark: ProximityReader.MobileDriversLicenseRawDataRequest.Element
+    @available(iOS 26.4, visionOS 26.4, *)
+    public static let nationality: ProximityReader.MobileDriversLicenseRawDataRequest.Element
+    @available(iOS 26.4, visionOS 26.4, *)
+    public static let placeOfBirth: ProximityReader.MobileDriversLicenseRawDataRequest.Element
+    @available(iOS 26.4, visionOS 26.4, *)
+    public static let dhsTemporaryLawfulStatus: ProximityReader.MobileDriversLicenseRawDataRequest.Element
     public static let issuingAuthority: ProximityReader.MobileDriversLicenseRawDataRequest.Element
     public static let drivingPrivileges: ProximityReader.MobileDriversLicenseRawDataRequest.Element
     public static let documentNumber: ProximityReader.MobileDriversLicenseRawDataRequest.Element
@@ -1718,6 +1714,8 @@ extension ProximityReader.MobileDriversLicenseRawDataRequest {
   public struct Response : Swift.Hashable, Swift.Sendable {
     public let responseData: Foundation.Data
     public let sessionTranscript: Foundation.Data
+    @available(iOS 26.4, visionOS 26.4, *)
+    public let ephemeralReaderKey: Foundation.Data
     public static func == (a: ProximityReader.MobileDriversLicenseRawDataRequest.Response, b: ProximityReader.MobileDriversLicenseRawDataRequest.Response) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -1785,6 +1783,8 @@ extension ProximityReader.MobileNationalIDCardRawDataRequest {
   public struct Response : Swift.Hashable, Swift.Sendable {
     public let responseData: Foundation.Data
     public let sessionTranscript: Foundation.Data
+    @available(iOS 26.4, visionOS 26.4, *)
+    public let ephemeralReaderKey: Foundation.Data
     public static func == (a: ProximityReader.MobileNationalIDCardRawDataRequest.Response, b: ProximityReader.MobileNationalIDCardRawDataRequest.Response) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -1846,6 +1846,8 @@ extension ProximityReader.MobilePhotoIDRawDataRequest {
   public struct Response : Swift.Hashable, Swift.Sendable {
     public let responseData: Foundation.Data
     public let sessionTranscript: Foundation.Data
+    @available(iOS 26.4, visionOS 26.4, *)
+    public let ephemeralReaderKey: Foundation.Data
     public static func == (a: ProximityReader.MobilePhotoIDRawDataRequest.Response, b: ProximityReader.MobilePhotoIDRawDataRequest.Response) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {

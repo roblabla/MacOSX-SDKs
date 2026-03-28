@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/QuickLookThumbnailing.framework/Versions/A/QuickLookThumbnailing'
 current-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s21QuickLookThumbnailing14ThumbnailReplyV10cgRenderer4size8rendererACSo6CGSizeV_ySo12CGContextRefaKctFZ', 
                        '_$s21QuickLookThumbnailing14ThumbnailReplyV10colorSpaceSo07CGColorG3RefaSgvM', 
                        '_$s21QuickLookThumbnailing14ThumbnailReplyV10colorSpaceSo07CGColorG3RefaSgvg', 
@@ -55,6 +53,8 @@ exports:
                        '_$s21QuickLookThumbnailing16ThumbnailRequestV4data10Foundation4DataVvg', 
                        '_$s21QuickLookThumbnailing16ThumbnailRequestV4data10Foundation4DataVvgTu', 
                        '_$s21QuickLookThumbnailing16ThumbnailRequestV4data10Foundation4DataVvpMV', 
+                       '_$s21QuickLookThumbnailing16ThumbnailRequestV7OptionsV017userNotificationsF0AA016UserNotificationF0VSgvg', 
+                       '_$s21QuickLookThumbnailing16ThumbnailRequestV7OptionsV017userNotificationsF0AA016UserNotificationF0VSgvpMV', 
                        '_$s21QuickLookThumbnailing16ThumbnailRequestV7OptionsV10iconCorners5Int32Vvg', 
                        '_$s21QuickLookThumbnailing16ThumbnailRequestV7OptionsV10iconCorners5Int32VvpMV', 
                        '_$s21QuickLookThumbnailing16ThumbnailRequestV7OptionsV10iconFlavors5Int32Vvg', 
@@ -63,6 +63,8 @@ exports:
                        '_$s21QuickLookThumbnailing16ThumbnailRequestV7OptionsV11maximumSizeSo6CGSizeVvpMV', 
                        '_$s21QuickLookThumbnailing16ThumbnailRequestV7OptionsV11minimumSizeSo6CGSizeVvg', 
                        '_$s21QuickLookThumbnailing16ThumbnailRequestV7OptionsV11minimumSizeSo6CGSizeVvpMV', 
+                       '_$s21QuickLookThumbnailing16ThumbnailRequestV7OptionsV14generationDataSDys11AnyHashableVypGvg', 
+                       '_$s21QuickLookThumbnailing16ThumbnailRequestV7OptionsV14generationDataSDys11AnyHashableVypGvpMV', 
                        '_$s21QuickLookThumbnailing16ThumbnailRequestV7OptionsV15wantsLowQualitySbvg', 
                        '_$s21QuickLookThumbnailing16ThumbnailRequestV7OptionsV15wantsLowQualitySbvpMV', 
                        '_$s21QuickLookThumbnailing16ThumbnailRequestV7OptionsV20interpolationQualitySo015CGInterpolationH0Vvg', 
@@ -90,7 +92,26 @@ exports:
                        '_$s21QuickLookThumbnailing18ThumbnailExtensionPAAE13configurationQrvg', 
                        '_$s21QuickLookThumbnailing18ThumbnailExtensionPAAE13configurationQrvpMV', 
                        '_$s21QuickLookThumbnailing18ThumbnailExtensionPAAE13configurationQrvpQOMQ', 
-                       '_$s21QuickLookThumbnailing18ThumbnailExtensionTL', '_$s21QuickLookThumbnailing24ThumbnailProviderBuilderV10buildBlockyAA0dE0VAFd_tFZ', 
+                       '_$s21QuickLookThumbnailing18ThumbnailExtensionTL', '_$s21QuickLookThumbnailing23UserNotificationOptionsV0F3KeyO12clippingRectyA2EmFWC', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsV0F3KeyO4timeyA2EmFWC', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsV0F3KeyO8rawValueAESgSS_tcfC', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsV0F3KeyO8rawValueSSvg', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsV0F3KeyO8rawValueSSvpMV', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsV0F3KeyOMa', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsV0F3KeyOMn', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsV0F3KeyON', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsV0F3KeyOSHAAMc', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsV0F3KeyOSQAAMc', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsV0F3KeyOSYAAMc', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsV11frameNumberSiSgvg', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsV11frameNumberSiSgvpMV', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsV8cropRectSo6CGRectVvg', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsV8cropRectSo6CGRectVvpMV', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsV8timeDictSDys11AnyHashableVypGSgvg', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsV8timeDictSDys11AnyHashableVypGSgvpMV', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsVMa', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsVMn', 
+                       '_$s21QuickLookThumbnailing23UserNotificationOptionsVN', '_$s21QuickLookThumbnailing24ThumbnailProviderBuilderV10buildBlockyAA0dE0VAFd_tFZ', 
                        '_$s21QuickLookThumbnailing24ThumbnailProviderBuilderVMa', 
                        '_$s21QuickLookThumbnailing24ThumbnailProviderBuilderVMn', 
                        '_$s21QuickLookThumbnailing24ThumbnailProviderBuilderVN', 
@@ -153,8 +174,8 @@ exports:
                        QLURLHandler._needsAccessToExternalResources, QLURLHandler._physicalFileExtensionHandle, 
                        QLURLHandler._physicalFileExtensionToken, QLURLHandler._sandboxType, 
                        QLUTIAnalyzer._contentType ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _QLTSandboxSetProfile, _QLTSandboxed ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     objc-classes:    [ QLTThumbnailOperation ]
 ...

@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FaceTimeMacHelperCore.framework/Versions/A/FaceTimeMacHelperCore'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s21FaceTimeMacHelperCore06AppKitF5EventO10appDidHideyA2CmFWC', 
                        '_$s21FaceTimeMacHelperCore06AppKitF5EventO11descriptionSSvg', 
                        '_$s21FaceTimeMacHelperCore06AppKitF5EventO11descriptionSSvpMV', 
@@ -56,6 +54,8 @@ exports:
                        '_$s21FaceTimeMacHelperCore0cD0P12fetchAppName16bundleIdentifierSSSgSS_tFTq', 
                        '_$s21FaceTimeMacHelperCore0cD0P12isFullScreen15sceneIdentifierSbSS_tFTj', 
                        '_$s21FaceTimeMacHelperCore0cD0P12isFullScreen15sceneIdentifierSbSS_tFTq', 
+                       '_$s21FaceTimeMacHelperCore0cD0P12reserveSpace6height14hostIdentifiery0E8Graphics7CGFloatV_SStFTj', 
+                       '_$s21FaceTimeMacHelperCore0cD0P12reserveSpace6height14hostIdentifiery0E8Graphics7CGFloatV_SStFTq', 
                        '_$s21FaceTimeMacHelperCore0cD0P14setAlwaysOnTop_15sceneIdentifierySb_SStFTj', 
                        '_$s21FaceTimeMacHelperCore0cD0P14setAlwaysOnTop_15sceneIdentifierySb_SStFTq', 
                        '_$s21FaceTimeMacHelperCore0cD0P14setWindowFrame_15sceneIdentifier8animatedySo6CGRectV_SSSbtFTj', 
@@ -85,6 +85,8 @@ exports:
                        '_$s21FaceTimeMacHelperCore0cD0P18windowEventHandleryAA06WindowG0O_SbSSXEtcSgvgTq', 
                        '_$s21FaceTimeMacHelperCore0cD0P18windowEventHandleryAA06WindowG0O_SbSSXEtcSgvsTj', 
                        '_$s21FaceTimeMacHelperCore0cD0P18windowEventHandleryAA06WindowG0O_SbSSXEtcSgvsTq', 
+                       '_$s21FaceTimeMacHelperCore0cD0P18windowFrameTrackerAA06WindowG8Tracking_pvgTj', 
+                       '_$s21FaceTimeMacHelperCore0cD0P18windowFrameTrackerAA06WindowG8Tracking_pvgTq', 
                        '_$s21FaceTimeMacHelperCore0cD0P19closeContactPopoveryyFTj', 
                        '_$s21FaceTimeMacHelperCore0cD0P19closeContactPopoveryyFTq', 
                        '_$s21FaceTimeMacHelperCore0cD0P19setStoplightsHidden_15sceneIdentifier8animatedySb_SSSbtFTj', 
@@ -243,7 +245,12 @@ exports:
                        '_$s21FaceTimeMacHelperCore18AlertConfigurationV9onDismissySbScMYccSgvs', 
                        '_$s21FaceTimeMacHelperCore18AlertConfigurationVMa', '_$s21FaceTimeMacHelperCore18AlertConfigurationVMn', 
                        '_$s21FaceTimeMacHelperCore18AlertConfigurationVN', '_$s21FaceTimeMacHelperCore18AlertConfigurationVSHAAMc', 
-                       '_$s21FaceTimeMacHelperCore18AlertConfigurationVSQAAMc', '_$s21FaceTimeMacHelperCore20NotificationResponseV11launchedAppSbvg', 
+                       '_$s21FaceTimeMacHelperCore18AlertConfigurationVSQAAMc', '_$s21FaceTimeMacHelperCore19WindowFrameTrackingMp', 
+                       '_$s21FaceTimeMacHelperCore19WindowFrameTrackingP11addObserver_15sceneIdentifier7handleryyXl_SSySo6CGRectVctFTj', 
+                       '_$s21FaceTimeMacHelperCore19WindowFrameTrackingP11addObserver_15sceneIdentifier7handleryyXl_SSySo6CGRectVctFTq', 
+                       '_$s21FaceTimeMacHelperCore19WindowFrameTrackingP14removeObserver_15sceneIdentifieryyXl_SStFTj', 
+                       '_$s21FaceTimeMacHelperCore19WindowFrameTrackingP14removeObserver_15sceneIdentifieryyXl_SStFTq', 
+                       '_$s21FaceTimeMacHelperCore19WindowFrameTrackingTL', '_$s21FaceTimeMacHelperCore20NotificationResponseV11launchedAppSbvg', 
                        '_$s21FaceTimeMacHelperCore20NotificationResponseV11launchedAppSbvpMV', 
                        '_$s21FaceTimeMacHelperCore20NotificationResponseV6ActionO13buttonClickedyA2EmFWC', 
                        '_$s21FaceTimeMacHelperCore20NotificationResponseV6ActionO15contentsClickedyA2EmFWC', 

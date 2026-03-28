@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UniversalDrag.framework/Versions/A/UniversalDrag'
 current-version: 20
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s13UniversalDrag0B10BadgeStyleO10notAllowedyA2CmFWC', '_$s13UniversalDrag0B10BadgeStyleO2eeoiySbAC_ACtFZ', 
                        '_$s13UniversalDrag0B10BadgeStyleO4copyyA2CmFWC', '_$s13UniversalDrag0B10BadgeStyleO4fromACs7Decoder_p_tKcfC', 
                        '_$s13UniversalDrag0B10BadgeStyleO4hash4intoys6HasherVz_tF', 

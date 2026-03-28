@@ -1,23 +1,23 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/ARKit.framework/Versions/A/ARKit'
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/ARKitCore.framework/Versions/A/ARKitCore', 
                        '/System/Library/PrivateFrameworks/ARKitFoundation.framework/Versions/A/ARKitFoundation' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ARKitBuildVersionString ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ARKitCore.framework/Versions/A/ARKitCore'
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/ARKitFoundation.framework/Versions/A/ARKitFoundation' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ARAbortWithError, _ARAdjustIntrincisForMirroring, _ARAdjustIntrincisForOrientation, 
                        _ARAdjustIntrinsicsForViewportSize, _ARAppleDepthAggregationBankCount, 
                        _ARAppleDepthComputeNormals, _ARAppleDepthPersonOcclusionAverageDepthBoundingBox, 
@@ -352,10 +352,10 @@ exports:
                        ARSystemTimeSnapshot, ARUserProfile, ARXPCDictionaryWrapper ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ARKitFoundation.framework/Versions/A/ARKitFoundation'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ARAdaptiveRegistrationInfoDataToDictionary, _ARAdaptiveRegistrationInfoGetDeviceToCompositorHomographySource, 
                        _ARAdaptiveRegistrationInfoGetDeviceToEye, _ARAdaptiveRegistrationInfoGetEyeClampNormal, 
                        _ARAdaptiveRegistrationInfoGetEyeClampOrigin, _ARAdaptiveRegistrationInfoGetHomographyMitigationNearToFarModeFactor, 

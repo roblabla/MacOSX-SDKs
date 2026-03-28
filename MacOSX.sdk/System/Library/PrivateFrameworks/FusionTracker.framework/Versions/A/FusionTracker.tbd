@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/FusionTracker.framework/Versions/A/FusionTracker'
 exports:
   - targets:         [ x86_64-macos ]
@@ -34,7 +34,7 @@ exports:
                        __ZTSNSt3__120__shared_ptr_pointerIP10__CVBufferPFvS2_ENS_9allocatorIS1_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPhNS_10shared_ptrIA_hE27__shared_ptr_default_deleteIS3_hEENS_9allocatorIhEEEE, 
                        __ZTSPFvP10__CVBufferE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AcAttrCreate, _AcAttrDestroy, _AcAttrGetParams, _AcAttrPostProcess, 
                        _AcAttrPreProcess, _AcAttrPreProcessCropResizeRef, _AcAttrStart, 
                        _AcAttrStop, _AcCommitHash, _AcDetCreate, _AcDetDestroy, _AcDetGetParams, 

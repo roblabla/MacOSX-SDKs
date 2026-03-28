@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/VoiceTrigger.framework/Versions/A/VoiceTrigger'
 swift-abi-version: 7
 exports:
@@ -93,8 +92,7 @@ exports:
                        __ZTSN11NLinkedListIN4NMapI7NStringS1_E8HashItemEE8NElementE, 
                        __ZTSN11NLinkedListIN4NMapI7NStringjE8HashItemEE8NElementE, 
                        __ZTSN14NResizingQueueI6NFrameE8NElementE, __ZTSNSt3__113basic_fstreamIcNS_11char_traitsIcEEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12VoiceTrigger11NovDetectorC11analyzeWave6bufferySaySfG_tFTj', 
                        '_$s12VoiceTrigger11NovDetectorC11analyzeWave6bufferySaySfG_tFTq', 
                        '_$s12VoiceTrigger11NovDetectorC11analyzeWave6bufferySays5Int16VG_tFTj', 
@@ -117,6 +115,10 @@ exports:
                        '_$s12VoiceTrigger11NovDetectorC5resetyyFTj', '_$s12VoiceTrigger11NovDetectorC5resetyyFTq', 
                        '_$s12VoiceTrigger11NovDetectorC8endAudioyyFTj', '_$s12VoiceTrigger11NovDetectorC8endAudioyyFTq', 
                        '_$s12VoiceTrigger11NovDetectorC9getOptionySSSgSSFTj', '_$s12VoiceTrigger11NovDetectorC9getOptionySSSgSSFTq', 
+                       '_$s12VoiceTrigger11NovDetectorC9resources6config4name8rootPathACSgSDySS10Foundation4DataVG_S2SSgAMtcfC', 
+                       '_$s12VoiceTrigger11NovDetectorC9resources6config4name8rootPathACSgSDySS10Foundation4DataVG_S2SSgAMtcfCTj', 
+                       '_$s12VoiceTrigger11NovDetectorC9resources6config4name8rootPathACSgSDySS10Foundation4DataVG_S2SSgAMtcfCTq', 
+                       '_$s12VoiceTrigger11NovDetectorC9resources6config4name8rootPathACSgSDySS10Foundation4DataVG_S2SSgAMtcfc', 
                        '_$s12VoiceTrigger11NovDetectorC9resources6config4nameACSgSDySS10Foundation4DataVG_S2SSgtcfC', 
                        '_$s12VoiceTrigger11NovDetectorC9resources6config4nameACSgSDySS10Foundation4DataVG_S2SSgtcfCTj', 
                        '_$s12VoiceTrigger11NovDetectorC9resources6config4nameACSgSDySS10Foundation4DataVG_S2SSgtcfCTq', 
@@ -256,7 +258,7 @@ exports:
                        __ZN12NSATImpostor4loadERK7NString, __ZN12NSATImpostor5scoreERK6NArrayIfERfS4_, 
                        __ZN12NSATImpostorC1Ev, __ZN12NSATImpostorC2Ev, __ZN12NSATImpostorD0Ev, 
                        __ZN12NSATImpostorD1Ev, __ZN12NSATImpostorD2Ev, __ZN13AccelWin2MFCC3runER6NArrayIfE, 
-                       __ZN13AccelWin2MFCC4initERKjS1_RKbS3_S3_S3_S1_RKfS5_S1_S1_S5_S5_S5_S5_, 
+                       __ZN13AccelWin2MFCC4initERKjS1_RKbS3_S3_S3_S1_RKfS5_S1_S1_S5_S5_S5_S5_S5_, 
                        __ZN13AccelWin2MFCC8initDataEv, __ZN13AccelWin2MFCC8initProcEv, 
                        __ZN13AccelWin2MFCCC1Ev, __ZN13AccelWin2MFCCC2Ev, __ZN13AccelWin2MFCCD1Ev, 
                        __ZN13AccelWin2MFCCD2Ev, __ZN13IntNovDetectE12processframeEPKfiPbS2_P9NDEResult, 
@@ -303,24 +305,24 @@ exports:
                        __ZN14NDEHMMDetectorD1Ev, __ZN14NDEHMMDetectorD2Ev, __ZN14NPhoneHMMArray16endReverseLookupEv, 
                        __ZN14NPhoneHMMArray17initReverseLookupEv, __ZN14NPhoneHMMArray4readERK7NStringRKj, 
                        __ZN14NPhoneHMMArrayC1Ev, __ZN14NPhoneHMMArrayC2Ev, __ZN14NPhoneHMMArrayD0Ev, 
-                       __ZN14NPhoneHMMArrayD1Ev, __ZN14NPhoneHMMArrayD2Ev, __ZN15AccelStaticMFCC4initERKjS1_S1_RKbRKfS3_S3_S3_S1_S5_S5_S1_S1_S5_S5_S5_S5_, 
+                       __ZN14NPhoneHMMArrayD1Ev, __ZN14NPhoneHMMArrayD2Ev, __ZN15AccelStaticMFCC4initERKjS1_S1_RKbRKfS3_S3_S3_S3_S3_S5_S1_S5_S5_S1_S1_S5_S5_S5_S5_S5_, 
                        __ZN15AccelStaticMFCC5resetEv, __ZN15AccelStaticMFCC5startEPKvRKjRK11NSampleType, 
-                       __ZN15AccelStaticMFCC7isFrameEv, __ZN15AccelStaticMFCC7preemphEv, 
-                       __ZN15NLRHMMTraceback4dropERK6NArrayIbE, __ZN15NLRHMMTraceback5resetEv, 
-                       __ZN15NLRHMMTraceback6resizeERKjS1_, __ZN15NLRHMMTracebackC1ERKjS1_, 
-                       __ZN15NLRHMMTracebackC2ERKjS1_, __ZN15NRingDropBuffer5resetEv, 
-                       __ZN15NRingDropBuffer6resizeERKj, __ZN15NRingDropBuffer9pushFrameERK6NFrame, 
-                       __ZN15NRingDropBufferC1ERKj, __ZN15NRingDropBufferC2ERKj, 
-                       __ZN17NFixedPointScales10initializeERKiRK6NArrayIiE, __ZN17NFixedPointScales15makeParamScalesEv, 
-                       __ZN17NFixedPointScales4readER8NFilePtrRKjRKb, __ZN17NFixedPointScales5setUpEv, 
-                       __ZN17NFixedPointScalesC1Ev, __ZN17NFixedPointScalesC2Ev, 
-                       __ZN17NFixedPointScalesD0Ev, __ZN17NFixedPointScalesD1Ev, 
-                       __ZN17NFixedPointScalesD2Ev, __ZN17NLRHMMStateTokens4initERKj, 
-                       __ZN17NLRHMMStateTokens5resetEv, __ZN18NFloatDistribution4readERK7NString, 
-                       __ZN18NFloatDistributionC1Ev, __ZN18NFloatDistributionC2Ev, 
-                       __ZN18NFloatDistributionD0Ev, __ZN18NFloatDistributionD1Ev, 
-                       __ZN18NFloatDistributionD2Ev, __ZN19NBNNSIRDistribution14setWeightsFileERK7NString, 
-                       __ZN19NBNNSIRDistribution20determineStateWiringEPKvPKcRK7NString, 
+                       __ZN15AccelStaticMFCC6ditherEv, __ZN15AccelStaticMFCC7isFrameEv, 
+                       __ZN15AccelStaticMFCC7preemphEv, __ZN15NLRHMMTraceback4dropERK6NArrayIbE, 
+                       __ZN15NLRHMMTraceback5resetEv, __ZN15NLRHMMTraceback6resizeERKjS1_, 
+                       __ZN15NLRHMMTracebackC1ERKjS1_, __ZN15NLRHMMTracebackC2ERKjS1_, 
+                       __ZN15NRingDropBuffer5resetEv, __ZN15NRingDropBuffer6resizeERKj, 
+                       __ZN15NRingDropBuffer9pushFrameERK6NFrame, __ZN15NRingDropBufferC1ERKj, 
+                       __ZN15NRingDropBufferC2ERKj, __ZN17NFixedPointScales10initializeERKiRK6NArrayIiE, 
+                       __ZN17NFixedPointScales15makeParamScalesEv, __ZN17NFixedPointScales4readER8NFilePtrRKjRKb, 
+                       __ZN17NFixedPointScales5setUpEv, __ZN17NFixedPointScalesC1Ev, 
+                       __ZN17NFixedPointScalesC2Ev, __ZN17NFixedPointScalesD0Ev, 
+                       __ZN17NFixedPointScalesD1Ev, __ZN17NFixedPointScalesD2Ev, 
+                       __ZN17NLRHMMStateTokens4initERKj, __ZN17NLRHMMStateTokens5resetEv, 
+                       __ZN18NFloatDistribution4readERK7NString, __ZN18NFloatDistributionC1Ev, 
+                       __ZN18NFloatDistributionC2Ev, __ZN18NFloatDistributionD0Ev, 
+                       __ZN18NFloatDistributionD1Ev, __ZN18NFloatDistributionD2Ev, 
+                       __ZN19NBNNSIRDistribution14setWeightsFileERK7NString, __ZN19NBNNSIRDistribution20determineStateWiringEPKvPKcRK7NString, 
                        __ZN19NBNNSIRDistribution4readERK7NString, __ZN19NBNNSIRDistribution5resetEv, 
                        __ZN19NBNNSIRDistributionC1Ev, __ZN19NBNNSIRDistributionC2Ev, 
                        __ZN19NBNNSIRDistributionD0Ev, __ZN19NBNNSIRDistributionD1Ev, 
@@ -394,7 +396,7 @@ exports:
                        __ZN7NStringD2Ev, __ZN7NStringaSEPKc, __ZN7NStringaSERKS_, 
                        __ZN7NStringixERKj, __ZN7NStringpLERKS_, __ZN8AccelFFT11zeroPadDataERK6NArrayIfE, 
                        __ZN8AccelFFT3runER6NArrayIfER15DSPSplitComplex, __ZN8AccelFFT4initERKjS1_S1_, 
-                       __ZN8AccelFFTD1Ev, __ZN8AccelFFTD2Ev, __ZN8AccelPSD4initERKjRKb, 
+                       __ZN8AccelFFTD1Ev, __ZN8AccelFFTD2Ev, __ZN8AccelPSD4initERKjRKbS3_, 
                        __ZN8NFidFile10getSubFileERK7NStringR8NFilePtr, __ZN8NFidFile10readHeaderEv, 
                        __ZN8NFidFile4openERK7NString, __ZN8NFidFile5closeEv, __ZN8NFidFileC1ERK7NString, 
                        __ZN8NFidFileC1Ev, __ZN8NFidFileC2ERK7NString, __ZN8NFidFileC2Ev, 
@@ -621,6 +623,6 @@ exports:
                        _nde_reset ]
     objc-classes:    [ VTBlobBuilder, VTBuiltInRTModel, VTPreferences, VTSpeakerIdUtilities, 
                        VTStateManager, VTUtilities, VTUtteranceMetadataManager, VTVoiceProfileMigration ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN7NString7vprintfEPKcPc ]
 ...

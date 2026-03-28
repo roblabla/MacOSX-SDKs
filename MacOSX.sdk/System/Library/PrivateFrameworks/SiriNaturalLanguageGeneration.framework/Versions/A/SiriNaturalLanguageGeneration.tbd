@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriNaturalLanguageGeneration.framework/Versions/A/SiriNaturalLanguageGeneration'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s29SiriNaturalLanguageGeneration11NLGProviderMp', '_$s29SiriNaturalLanguageGeneration13NLGEntityTypeO3caryA2CmFWC', 
                        '_$s29SiriNaturalLanguageGeneration13NLGEntityTypeO4homeyA2CmFWC', 
                        '_$s29SiriNaturalLanguageGeneration13NLGEntityTypeO5phoneyA2CmFWC', 

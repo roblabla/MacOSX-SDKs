@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligencePlatformCompute.framework/Versions/A/IntelligencePlatformCompute'
-current-version: 200.6
+current-version: 209.15
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s27IntelligencePlatformCompute0C13OrchestrationC10ViewRunnerC0aB4Core0e16UpdateGenerationF0AAMc', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC10ViewRunnerC11fullRebuild8viewName8requestsSaySo26GDViewUpdateSourceResponseCGSS_SaySo0lmN7RequestCGtYaKF', 
                        '_$s27IntelligencePlatformCompute0C13OrchestrationC10ViewRunnerC11fullRebuild8viewName8requestsSaySo26GDViewUpdateSourceResponseCGSS_SaySo0lmN7RequestCGtYaKFTu', 

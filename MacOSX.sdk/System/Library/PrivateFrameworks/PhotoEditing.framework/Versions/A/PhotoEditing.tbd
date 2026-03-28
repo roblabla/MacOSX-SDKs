@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotoEditing.framework/Versions/A/PhotoEditing'
-current-version: 821.0.120
+current-version: 841.0.101
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12PhotoEditing10IdentifierC4nameACSS_tcfC', '_$s12PhotoEditing10IdentifierCMa', 
                        '_$s12PhotoEditing10IdentifierCMm', '_$s12PhotoEditing10IdentifierCMn', 
                        '_$s12PhotoEditing10IdentifierCMo', '_$s12PhotoEditing10IdentifierCMu', 

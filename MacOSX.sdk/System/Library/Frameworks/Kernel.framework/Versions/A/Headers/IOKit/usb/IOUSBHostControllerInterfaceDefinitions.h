@@ -130,7 +130,8 @@ typedef enum
      IOUSBHostCIDeviceSpeedHigh         = kIOUSBHostConnectionSpeedHigh,
      IOUSBHostCIDeviceSpeedSuper        = kIOUSBHostConnectionSpeedSuper,
      IOUSBHostCIDeviceSpeedSuperPlus    = kIOUSBHostConnectionSpeedSuperPlus,
-     IOUSBHostCIDeviceSpeedSuperPlusBy2 = kIOUSBHostConnectionSpeedSuperPlusBy2
+     IOUSBHostCIDeviceSpeedSuperPlusBy2 = kIOUSBHostConnectionSpeedSuperPlusBy2,
+     IOUSBHostCIDeviceSpeedOther        = kIOUSBHostConnectionSpeedOther,
 } IOUSBHostCIDeviceSpeed;
 
 /*!

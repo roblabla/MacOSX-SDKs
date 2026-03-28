@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriSettingsUI.framework/Versions/A/SiriSettingsUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14SiriSettingsUI0aB8UIPluginC07SnippetC00E9ProvidingAAMc', 
                        '_$s14SiriSettingsUI0aB8UIPluginC7snippet3for4mode5idiom05SwiftC07AnyViewVAA13SnippetModelsO_So7VRXModeVSo8VRXIdiomVtKF', 
                        '_$s14SiriSettingsUI0aB8UIPluginCACycfC', '_$s14SiriSettingsUI0aB8UIPluginCACycfCTj', 

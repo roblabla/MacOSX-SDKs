@@ -170,6 +170,9 @@ AV_INIT_UNAVAILABLE
 /// If the AVPlayerInterstitialEvent's templateItems is empty and the assetListResponse is nil, then an asset list read is expected. If the AVPlayerInterstitialEvent's templateItems is not empty and the assetListResponse is nil, then an asset list read is not expected.
 @property (readonly, nullable) NSDictionary * NS_SWIFT_SENDABLE assetListResponse API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4), visionos(1.0));
 
+/// The identifier of the daterange-schedule that produced this event. nil if the event was not a product of a daterange-schedule.
+@property (readonly, nullable) NSString * NS_SWIFT_SENDABLE scheduleIdentifier API_AVAILABLE(macos(26.4), ios(26.4), tvos(26.4), watchos(26.4), visionos(26.4));
+
 /// These constants describe the status of the asset list response for an AVPlayerInterstitialEvent.
 typedef NS_ENUM(NSInteger, AVPlayerInterstitialEventAssetListResponseStatus) {
 	/// Indicates that the asset list response is now available and non-nil, meaning the asset list read was successful.
@@ -384,6 +387,27 @@ AVF_EXPORT NSString *const AVPlayerInterstitialEventMonitorInterstitialEventDidF
 /// The value corresponding to this key is of type NSNumber with a BOOL value.
 AVF_EXPORT NSString *const AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
 
+/// A notification that is posted whenever a daterange-schedule request completes.
+/// 
+/// The userInfo dictionary can contain the following keys and values:
+/// 1. AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey, whose value is an NSString identifying the schedule.
+/// 2. AVPlayerInterstitialEventMonitorScheduleRequestResponseKey, whose value is an NSData carrying the JSON response. Absent if request failed.
+/// 3. AVPlayerInterstitialEventMonitorScheduleRequestErrorKey, whose value is an NSError.
+AVF_EXPORT NSNotificationName const AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification API_AVAILABLE(macos(26.4), ios(26.4), tvos(26.4), watchos(26.4), visionos(26.4));
+
+/// userInfo dictionary key for the AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification. Value is NSString. 
+/// 
+AVF_EXPORT NSString *const AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey API_AVAILABLE(macos(26.4), ios(26.4), tvos(26.4), watchos(26.4), visionos(26.4));
+
+/// userInfo dictionary key for the AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification. Value is NSData. Absent if the request failed.
+/// 
+AVF_EXPORT NSString *const AVPlayerInterstitialEventMonitorScheduleRequestResponseKey API_AVAILABLE(macos(26.4), ios(26.4), tvos(26.4), watchos(26.4), visionos(26.4));
+
+/// userInfo dictionary key for the AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification. Value is NSError. Absent if the request succeeded
+/// 
+AVF_EXPORT NSString *const AVPlayerInterstitialEventMonitorScheduleRequestErrorKey API_AVAILABLE(macos(26.4), ios(26.4), tvos(26.4), watchos(26.4), visionos(26.4));
+
+
 /// An AVPlayerInterstitialEventController allows you to specify a schedule of interstitial events for items played by a primary player. By creating an instance of AVPlayerInterstitialEventController and setting a schedule of interstitial events, you pre-empt directives the are intrinsic to the items played by the primary player, if any exist, causing them to be ignored.
 /// 
 /// The schedule of interstitial events is specified as an array of AVPlayerInterstitialEvents. For each AVPlayerInterstitialEvent, when the primary player's current item is the primary item of the interstitial event and its currentDate reaches the date of the event, playback of the primary item by the primary player is temporarily suspended, i.e. its timeControlStatus changes to AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate and its reasonForWaitingToPlay will change to AVPlayerWaitingDuringInterstitialEventReason. During this suspension, playback of items that replicate the interstitial template items of the event are played by the interstitial player, which temporarily assumes the output configuration of the primary player; for example, its visual content will be routed to AVPlayerLayers that reference the primary player. Once the interstitial player has advanced through playback of the interstitial items specified by the event or its current item otherwise becomes nil, playback of the primary content will resume, at an offset from the time at which it was suspended as specified by the event.
@@ -469,6 +493,9 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /// If the item was created automatically according to a template item for looping, for interstitial playback, or for other purposes, indicates the AVPlayerItem that was used as the template.
 @property (nonatomic, readonly, nullable) AVPlayerItem *templatePlayerItem NS_SWIFT_NONISOLATED API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
+
+/// The identifier of the AVPlayerInterstitialEvent that created this item, or nil if the item was not created from an interstitial event.
+@property (nonatomic, readonly, nullable) NSString *interstitialEventIdentifier NS_SWIFT_NONISOLATED API_AVAILABLE(macos(26.4), ios(26.4), tvos(26.4), watchos(26.4), visionos(26.4));
 
 @end
 

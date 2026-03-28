@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TextGenerationInference.framework/Versions/A/TextGenerationInference'
 exports:
   - targets:         [ x86_64-macos ]
@@ -27,7 +27,7 @@ exports:
                        __ZTSNSt3__120__shared_ptr_pointerIPN13sentencepiece22SentencePieceProcessorENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN4E5RT12BufferObjectENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN4E5RT24ExecutionStreamOperationENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _TextGenerationInferenceVersionNumber, _TextGenerationInferenceVersionString, 
                        __ZN31TGITextGenerationInferenceModel11dumpBuffersERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZN31TGITextGenerationInferenceModel15setInputTokenIDEi, 

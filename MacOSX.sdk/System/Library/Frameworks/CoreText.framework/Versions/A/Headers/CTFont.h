@@ -294,7 +294,7 @@ CTFontRef CTFontCreateWithFontDescriptorAndOptions(
 /*!
     @enum       UI Type constants
     @abstract   These constants represent the specific user interface purpose to specify for font creation.
-    @discussion Use these constants with CTFontCreateUIFontForLanguage to indicate the intended user interface usage of the font reference to be created.
+    @discussion Use these constants with CTFontCreateUIFontForLanguage to indicate the intended user interface usage of the font reference to be created. The system may internally remap the value, so the value returned by CTFontGetUIFontType may return a different value than the one originally passed to CTFontCreateUIFontForLanguage. This remapping may vary by platform and OS version.
 */
 typedef CF_ENUM(uint32_t, CTFontUIFontType) {
     kCTFontUIFontNone                   = (uint32_t)-1,
@@ -404,6 +404,13 @@ CTFontRef _Nullable CTFontCreateUIFontForLanguage(
     CTFontUIFontType    uiType,
     CGFloat             size,
     CFStringRef _Nullable language ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+
+/*!
+    @function   CTFontGetUIFontType
+    @discussion Get the CTFontUIFontType of UI font. Note that this value may differ from the uiType parameter originally passed to CTFontCreateUIFontForLanguage, as the system may use a different uiType value internally.
+ */
+CT_EXPORT
+CTFontUIFontType CTFontGetUIFontType(CTFontRef font) CT_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 #ifdef __swift__
 

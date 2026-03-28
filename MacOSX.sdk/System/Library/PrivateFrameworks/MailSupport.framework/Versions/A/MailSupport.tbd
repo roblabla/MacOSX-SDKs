@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MailSupport.framework/Versions/A/MailSupport'
-current-version: 3864.255.41
+current-version: 3864.255.181
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ EmailDaemon, EmailFunctionalTests, EmailTests, IMAP, MIME, 
                        Mail, MailCompositionService, MailIntentsExtension, MailNotificationContentExtension, 
                        MailQuickLookExtension, MailUI, MailUITests, MailUnitTests, 
@@ -18,8 +16,7 @@ allowable-clients:
                        ProactiveSummarization, QuickTypeDESPlugin, SiriMailInternal, 
                        SiriMailInternalTests, maild, maildTests ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s11MailSupport0A11FeatureFlagO012isGenerativeC7EnabledSbvg', 
                        '_$s11MailSupport0A11FeatureFlagO012isGenerativeC7EnabledSbvpMV', 
                        '_$s11MailSupport0A11FeatureFlagO0C5Flags0cE3KeyAAMc', '_$s11MailSupport0A11FeatureFlagO10blackPearlyA2CmFWC', 
@@ -27,6 +24,7 @@ exports:
                        '_$s11MailSupport0A11FeatureFlagO10quickReplyyA2CmFWC', '_$s11MailSupport0A11FeatureFlagO19catchUpHighlightsV2yA2CmFWC', 
                        '_$s11MailSupport0A11FeatureFlagO19searchImportantTextyA2CmFWC', 
                        '_$s11MailSupport0A11FeatureFlagO20imapSyncMoreMessagesyA2CmFWC', 
+                       '_$s11MailSupport0A11FeatureFlagO22dropToChangeCategoriesyA2CmFWC', 
                        '_$s11MailSupport0A11FeatureFlagO26catchUpManualSummarizationyA2CmFWC', 
                        '_$s11MailSupport0A11FeatureFlagO2eeoiySbAC_ACtFZ', '_$s11MailSupport0A11FeatureFlagO4hash4intoys6HasherVz_tF', 
                        '_$s11MailSupport0A11FeatureFlagO6domains12StaticStringVvg', 
@@ -37,7 +35,26 @@ exports:
                        '_$s11MailSupport0A11FeatureFlagO9isEnabledSbvg', '_$s11MailSupport0A11FeatureFlagO9isEnabledSbvpMV', 
                        '_$s11MailSupport0A11FeatureFlagOMa', '_$s11MailSupport0A11FeatureFlagOMn', 
                        '_$s11MailSupport0A11FeatureFlagON', '_$s11MailSupport0A11FeatureFlagOSHAAMc', 
-                       '_$s11MailSupport0A11FeatureFlagOSQAAMc', '_$sSo34MSBucketBarConfigurationControllerC11MailSupportE03addC8ObserveryySo0abcdH0_pF', 
+                       '_$s11MailSupport0A11FeatureFlagOSQAAMc', '_$s11MailSupport21MSSearchFeedbackProxyC06reportD013queryProvider08snapshotH014sectionBuilderySSSgyc_ypSgycSaySo15SFResultSectionCGSgypctFTj', 
+                       '_$s11MailSupport21MSSearchFeedbackProxyC06reportD013queryProvider08snapshotH014sectionBuilderySSSgyc_ypSgycSaySo15SFResultSectionCGSgypctFTq', 
+                       '_$s11MailSupport21MSSearchFeedbackProxyCACycfC', '_$s11MailSupport21MSSearchFeedbackProxyCACycfc', 
+                       '_$s11MailSupport21MSSearchFeedbackProxyCMa', '_$s11MailSupport21MSSearchFeedbackProxyCMn', 
+                       '_$s11MailSupport21MSSearchFeedbackProxyCMo', '_$s11MailSupport21MSSearchFeedbackProxyCMu', 
+                       '_$s11MailSupport21MSSearchFeedbackProxyCN', '_$s11MailSupport21MSSearchFeedbackProxyCfD', 
+                       '_$s11MailSupport30MSSearchResultsSectionSnapshotC5titleSSvg', 
+                       '_$s11MailSupport30MSSearchResultsSectionSnapshotC5titleSSvpMV', 
+                       '_$s11MailSupport30MSSearchResultsSectionSnapshotC7futures5titleACSo7NSArrayC_SStcfC', 
+                       '_$s11MailSupport30MSSearchResultsSectionSnapshotC7futures5titleACSo7NSArrayC_SStcfCTj', 
+                       '_$s11MailSupport30MSSearchResultsSectionSnapshotC7futures5titleACSo7NSArrayC_SStcfCTq', 
+                       '_$s11MailSupport30MSSearchResultsSectionSnapshotC7futures5titleACSo7NSArrayC_SStcfc', 
+                       '_$s11MailSupport30MSSearchResultsSectionSnapshotC7futuresSo7NSArrayCvg', 
+                       '_$s11MailSupport30MSSearchResultsSectionSnapshotC7futuresSo7NSArrayCvpMV', 
+                       '_$s11MailSupport30MSSearchResultsSectionSnapshotCACycfC', 
+                       '_$s11MailSupport30MSSearchResultsSectionSnapshotCACycfc', 
+                       '_$s11MailSupport30MSSearchResultsSectionSnapshotCMa', '_$s11MailSupport30MSSearchResultsSectionSnapshotCMn', 
+                       '_$s11MailSupport30MSSearchResultsSectionSnapshotCMo', '_$s11MailSupport30MSSearchResultsSectionSnapshotCMu', 
+                       '_$s11MailSupport30MSSearchResultsSectionSnapshotCN', '_$s11MailSupport30MSSearchResultsSectionSnapshotCfD', 
+                       '_$sSo34MSBucketBarConfigurationControllerC11MailSupportE03addC8ObserveryySo0abcdH0_pF', 
                        '_$sSo34MSBucketBarConfigurationControllerC11MailSupportE06bucketbC8Provider_09didChangeC0ySo0abcH0_p_SDySSSo8NSNumberCGtF', 
                        '_$sSo34MSBucketBarConfigurationControllerC11MailSupportE06removeC8ObserveryySo0abcdH0_pF', 
                        '_$sSo34MSBucketBarConfigurationControllerC11MailSupportE08isBucketB6Hidden12forMailboxesSbSaySo0aB7Mailbox_pG_tF', 
@@ -292,6 +309,16 @@ exports:
                        _MSNewNotificationSoundKeyAccountIDOfSoundToPlay, _MSNewNotificationSoundKeyLoudestState, 
                        _MSNewNotificationSoundKeySuppressionContexts, _MSPreferredAbbreviatedNameForAddressAndDisplayName, 
                        _MSPreferredCompositeNameForAddressAndDisplayName, _MSPreferredCompositeNameForContact, 
+                       _MSSearchFeedbackLocalFeatureKeyAuthor, _MSSearchFeedbackLocalFeatureKeyCreationDate, 
+                       _MSSearchFeedbackLocalFeatureKeyExactMatch, _MSSearchFeedbackLocalFeatureKeyHasAttachments, 
+                       _MSSearchFeedbackLocalFeatureKeyHasMailRankingSignals, _MSSearchFeedbackLocalFeatureKeyIsFlagged, 
+                       _MSSearchFeedbackLocalFeatureKeyIsRecent, _MSSearchFeedbackLocalFeatureKeyIsTopHit, 
+                       _MSSearchFeedbackLocalFeatureKeyIsUnread, _MSSearchFeedbackLocalFeatureKeyIsVIP, 
+                       _MSSearchFeedbackLocalFeatureKeyMailboxType, _MSSearchFeedbackLocalFeatureKeyRanking, 
+                       _MSSearchFeedbackLocalFeatureKeyRankingIndex, _MSSearchFeedbackLocalFeatureKeyScope, 
+                       _MSSearchFeedbackSectionTitleInstantAnswers, _MSSearchFeedbackSectionTitleMessages, 
+                       _MSSearchFeedbackSectionTitlePriority, _MSSearchFeedbackSectionTitleServerResults, 
+                       _MSSearchFeedbackSectionTitleSuggestions, _MSSearchFeedbackSectionTitleTopHits, 
                        _MSSearchScopeFrom, _MSSearchScopeMailbox, _MSSearchScopeMessage, 
                        _MSSearchScopeSubject, _MSSearchScopeTo, _MSSearchSuggestionCategoryAttachment, 
                        _MSSearchSuggestionCategoryContact, _MSSearchSuggestionCategoryDates, 
@@ -337,10 +364,11 @@ exports:
                        MSParsecSearchSessionTopHit, MSRadarInteraction, MSRadarURLBuilder, 
                        MSReadLaterTriageAction, MSReadTriageAction, MSRemoveFollowUpTriageAction, 
                        MSRemoveHighImpactTriageAction, MSRestoreModelCategoryForAllMessagesTriageAction, 
-                       MSRichLinkGenerator, MSSendLaterContext, MSSendMailIntent, 
-                       MSSendMailIntentFormatter, MSSendMailIntentResponse, MSSenderBlockingTriageAction, 
-                       MSSiriIntelligenceSettings, MSTriageAction, MSTriageChangeAction, 
-                       MSTriageUndoAction, MSUnsubscribeTriageAction, MSUserDefaultsBucketBarConfigurationProvider, 
+                       MSRichLinkGenerator, MSSearchFeedbackProxy, MSSearchResultsSectionSnapshot, 
+                       MSSendLaterContext, MSSendMailIntent, MSSendMailIntentFormatter, 
+                       MSSendMailIntentResponse, MSSenderBlockingTriageAction, MSSiriIntelligenceSettings, 
+                       MSTriageAction, MSTriageChangeAction, MSTriageUndoAction, 
+                       MSUnsubscribeTriageAction, MSUserDefaultsBucketBarConfigurationProvider, 
                        MSUserNotificationCenterAnalyticsLogger, MSWebKitWebViewConfigurationFactory, 
                        _MSCountableMatchesContext ]
     objc-ivars:      [ _MSCountableMatchesContext._contactsCount ]

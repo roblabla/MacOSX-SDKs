@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SafetyMonitorUI.framework/Versions/A/SafetyMonitorUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15SafetyMonitorUI11PayloadKeysO015recipientHandleD3KeySSvgZ', 
                        '_$s15SafetyMonitorUI11PayloadKeysO015recipientHandleD3KeySSvpZMV', 
                        '_$s15SafetyMonitorUI11PayloadKeysO019workoutActivityTypeD3KeySSvgZ', 

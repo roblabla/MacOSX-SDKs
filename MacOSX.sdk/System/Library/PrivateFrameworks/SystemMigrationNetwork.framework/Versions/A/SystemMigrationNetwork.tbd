@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SystemMigrationNetwork.framework/Versions/A/SystemMigrationNetwork'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _SMActionPlistHeaderKeyExists, _SMNActionUniqueID, _SMNCertificateExchangeErrorDomain, 
                        _SMNCurrentLogLevel, _SMNDE_AttributesKey, _SMNDE_BundleInfoKey, 
                        _SMNDE_DataVolumePath, _SMNDE_EntryTypeKey, _SMNDE_ErrorKey, 

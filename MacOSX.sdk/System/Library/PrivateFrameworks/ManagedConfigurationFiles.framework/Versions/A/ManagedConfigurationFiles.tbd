@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ManagedConfigurationFiles.framework/Versions/A/ManagedConfigurationFiles'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation3URLV25ManagedConfigurationFilesE20getExtendedAttribute7forNameAA4DataVSS_tKF', 
                        '_$s10Foundation3URLV25ManagedConfigurationFilesE20setExtendedAttribute4name5valueySS_AA4DataVtKF', 
                        '_$s25ManagedConfigurationFiles0abC11PersistDataC07persistE0yyKFTj', 

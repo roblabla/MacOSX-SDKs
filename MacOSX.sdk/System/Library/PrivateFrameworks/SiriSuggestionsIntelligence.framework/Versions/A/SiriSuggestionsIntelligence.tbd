@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriSuggestionsIntelligence.framework/Versions/A/SiriSuggestionsIntelligence'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s11OperandType27SiriSuggestionsIntelligence17_FeatureExtractorPTl', 
                        '_$s13SiriRemembers11InteractionV0A23SuggestionsIntelligenceE03getA18SuggestionFeaturesSayA2DO14SourcedFeatureCGSgyKF', 
                        '_$s18SiriSuggestionsKit6LoggerO0aB12IntelligenceE17inferenceCategory2osABVvau', 

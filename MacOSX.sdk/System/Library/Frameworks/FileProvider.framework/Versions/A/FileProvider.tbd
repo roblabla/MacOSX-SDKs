@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/FileProvider.framework/Versions/A/FileProvider'
-current-version: 3882.60.27
+current-version: 4018.101.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$hide$os10.0$_OBJC_CLASS_$_NSFileProviderExtension', '$ld$hide$os10.0$_OBJC_METACLASS_$_NSFileProviderExtension', 
                        '$ld$hide$os10.1$_OBJC_CLASS_$_NSFileProviderExtension', '$ld$hide$os10.1$_OBJC_METACLASS_$_NSFileProviderExtension', 
                        '$ld$hide$os10.2$_OBJC_CLASS_$_NSFileProviderExtension', '$ld$hide$os10.2$_OBJC_METACLASS_$_NSFileProviderExtension', 
@@ -154,8 +152,9 @@ exports:
                        _FPEvictionOnItemWithHardlinkError, _FPEvictionWithUnsyncedEditsError, 
                        _FPExecutableNameForAuditToken, _FPExecutableNameForProcessIdentifier, 
                        _FPExpensiveRequestWithContinuationTokenError, _FPExtendBookmarkForDocumentURL, 
-                       _FPExtensionMatchingDictionaryForItem, _FPFSProviderIsDeniedForFPFS, 
-                       _FPFSProviderIsForcedForFPFS, _FPFavoriteRankXattrName, _FPFeatureFlagBGSTImprovementsIsEnabled, 
+                       _FPExtensionMatchingDictionaryForItem, _FPExtractFrameworkNameFromPath, 
+                       _FPFSProviderIsDeniedForFPFS, _FPFSProviderIsForcedForFPFS, 
+                       _FPFavoriteRankXattrName, _FPFeatureFlagBGSTImprovementsIsEnabled, 
                        _FPFeatureFlagEbihilIsEnabled, _FPFeatureFlagFPFSSimIsEnabled, 
                        _FPFeatureFlagIndexAllRemoteItemsIsEnabled, _FPFeatureFlagResolverIsEnabled, 
                        _FPFeatureFlagSpaceAttributionIsEnabled, _FPFetchAlternateContentsURLForDocumentURL, 
@@ -170,25 +169,26 @@ exports:
                        _FPFilePausedWithNoFilePresenter, _FPFileProviderServiceEndpointCreatingForItemAtURL, 
                        _FPFileProviderServiceEndpointCreatingForItemAtURLSynchronously, 
                        _FPFileSystemFreeBytes, _FPFileSystemNotSupportedError, _FPFileSystemTypeName, 
-                       _FPGetImportCookieForURL, _FPGetItemIDFromCrossDeviceItemID, 
+                       _FPGetCallingFramework, _FPGetImportCookieForURL, _FPGetItemIDFromCrossDeviceItemID, 
                        _FPGetItemURLForCrossDeviceItemID, _FPGetPausedFilesList, 
                        _FPGetQoSValueForClass, _FPGetSharedDomainCachingPath, _FPGetTagsDataForTags, 
                        _FPGetTagsFromTagsData, _FPHelpURL, _FPHelpURLKey, _FPHumanReadableDropReason, 
                        _FPICloudDriveDonNotMigrateOnFPFSUserDefaultsKey, _FPICloudDriveFeaturesUserDefaultsSuiteName, 
                        _FPICloudDriveMovedToFPFSEnabledUserDefaultsKey, _FPICloudDriveOnFPFSEnabledUserDefaultsKey, 
                        _FPICloudDriveOnFPFSLastBootTimestampUserDefaultsKey, _FPICloudDriveOnFPFSLastBootUUIDUserDefaultsKey, 
-                       _FPIgnoresForcedKeyChecks, _FPInvalidBookmarkableStringError, 
-                       _FPInvalidParameterError, _FPInvalidParameterErrorWithExpectation, 
-                       _FPInvalidProtocolError, _FPInvalidURLError, _FPIsBinCompatSymlinkToDetachedRoot, 
-                       _FPIsCloudDocsWithFPFSEnabled, _FPIsFileIndexerEnabled, _FPIsFileProviderBookmark, 
-                       _FPIsImportingDomainsForUserURL, _FPIsImportingInVolumeAtURL, 
-                       _FPIsSuppressed, _FPItemDecorationTypeBadge, _FPItemDecorationTypeFolderBadge, 
-                       _FPItemDecorationTypeFolderStatus, _FPItemDecorationTypeSharing, 
-                       _FPItemFlattenedPackageExtension, _FPItemIDFromCrossDeviceItemID, 
-                       _FPItemNotFoundError, _FPItemNotFoundErrorAtURL, _FPItemPropertyNamesByURLResourceKey, 
-                       _FPItemURLForCrossDeviceItemID, _FPKnownFoldersDescription, 
-                       _FPLastUsedDateXattrName, _FPLoc, _FPLocalizedFileSystemTypeName, 
-                       _FPLocv, _FPMarkAsFileProviderBookmark, _FPMissingAllowsEvictingCapabilitiesError, 
+                       _FPInvalidBookmarkableStringError, _FPInvalidParameterError, 
+                       _FPInvalidParameterErrorWithExpectation, _FPInvalidProtocolError, 
+                       _FPInvalidURLError, _FPIsAddressWithinFileProviderFramework, 
+                       _FPIsBinCompatSymlinkToDetachedRoot, _FPIsCloudDocsWithFPFSEnabled, 
+                       _FPIsFileIndexerEnabled, _FPIsFileProviderBookmark, _FPIsImportingDomainsForUserURL, 
+                       _FPIsImportingInVolumeAtURL, _FPIsSuppressed, _FPItemDecorationTypeBadge, 
+                       _FPItemDecorationTypeFolderBadge, _FPItemDecorationTypeFolderStatus, 
+                       _FPItemDecorationTypeSharing, _FPItemFlattenedPackageExtension, 
+                       _FPItemIDFromCrossDeviceItemID, _FPItemNotFoundError, _FPItemNotFoundErrorAtURL, 
+                       _FPItemPropertyNamesByURLResourceKey, _FPItemURLForCrossDeviceItemID, 
+                       _FPKnownFoldersDescription, _FPLastUsedDateXattrName, _FPLoc, 
+                       _FPLocalizationBundle, _FPLocalizedFileSystemTypeName, _FPLocv, 
+                       _FPMarkAsFileProviderBookmark, _FPMissingAllowsEvictingCapabilitiesError, 
                        _FPNonEvictableChildrenError, _FPNotImplementedError, _FPNotPermittedError, 
                        _FPNotPermittedWriteError, _FPNotSupportedError, _FPNumberOfNonMaterializedFilesForProviderDomainID, 
                        _FPOSVersion, _FPOriginalDocumentURL, _FPPartialErrorsByItemIdentifiers, 
@@ -326,12 +326,12 @@ exports:
                        _fpfs_purge_single_file, _fpfs_recursive_prune_fault, _fpfs_recursive_prune_fault_ciconia, 
                        _fpfs_recursive_unlinkat, _fpfs_remove_before_bounce_filename, 
                        _fpfs_remove_content_dependent_xattrs, _fpfs_remove_resurrected, 
-                       _fpfs_removeat, _fpfs_renameatx_np, _fpfs_restore_thread_skip_mtime_iopolicy, 
-                       _fpfs_revoke_children, _fpfs_root_exposure_symlink_xattr_exists, 
-                       _fpfs_root_exposure_symlink_xattr_is_equal, _fpfs_serialize_favorite_rank, 
-                       _fpfs_serialize_last_use_date, _fpfs_serialize_tags, _fpfs_set_before_bounce_filename, 
-                       _fpfs_set_before_bounce_filename_on_path, _fpfs_set_bplist_xattr, 
-                       _fpfs_set_dataless_cmpfs_attrs, _fpfs_set_dataless_cmpfs_xattr, 
+                       _fpfs_remove_sharing_xattrs, _fpfs_removeat, _fpfs_renameatx_np, 
+                       _fpfs_restore_thread_skip_mtime_iopolicy, _fpfs_revoke_children, 
+                       _fpfs_root_exposure_symlink_xattr_exists, _fpfs_root_exposure_symlink_xattr_is_equal, 
+                       _fpfs_serialize_favorite_rank, _fpfs_serialize_last_use_date, 
+                       _fpfs_serialize_tags, _fpfs_set_before_bounce_filename, _fpfs_set_before_bounce_filename_on_path, 
+                       _fpfs_set_bplist_xattr, _fpfs_set_dataless_cmpfs_attrs, _fpfs_set_dataless_cmpfs_xattr, 
                        _fpfs_set_evictable, _fpfs_set_favorite_rank, _fpfs_set_finder_info, 
                        _fpfs_set_is_ignore_root, _fpfs_set_is_pinned, _fpfs_set_last_use_date, 
                        _fpfs_set_metadata, _fpfs_set_purgeable_non_evictable, _fpfs_set_purgeable_non_evictable_at, 
@@ -344,7 +344,8 @@ exports:
                        _fpfs_supports_bgst_improvements, _fpfs_supports_brm_sparse_files, 
                        _fpfs_supports_download_lazily_v2, _fpfs_supports_fsevents_purge_detection, 
                        _fpfs_supports_gutenberg, _fpfs_supports_indexAllRemoteItems, 
-                       _fpfs_supports_lazy_recursive_deletion, _fpfs_supports_local_storage_less, 
+                       _fpfs_supports_items_permissions_repair, _fpfs_supports_lazy_recursive_deletion, 
+                       _fpfs_supports_local_storage_less, _fpfs_supports_namespace_policy, 
                        _fpfs_supports_nx_for_testing, _fpfs_supports_parent_mtime_iopolicy, 
                        _fpfs_supports_partial_conflicts_resolution, _fpfs_supports_partial_materialization, 
                        _fpfs_supports_pkg_dataless_escape_prevention, _fpfs_supports_sokoban, 
@@ -369,12 +370,12 @@ exports:
                        _kFPDefaultIOContext, _kFPDefaultIOContextForLocalStorage, 
                        _kFPPath_DotCloudStorage_Slash, _kFPPath_Library_Slash_CloudStorage_Slash, 
                        _kFPTaskErrorDomain, _kFetchURLEntitlement, _kFileProviderBackupRestoreEntitlement, 
-                       _kFileProviderMigrationTransferEntitlement, _kFileProviderSearchOnServerEntitlement, 
-                       _kFileProviderStorageManagementEntitlement, _kFileProviderTestingModeEntitlement, 
-                       _kMigrationImportProgressEntitlement, _kNSFileProviderExternalDomainIdentifierPrefix, 
-                       _kPoisonedUUID, _kShareEntitlement, _kSyncRootManagementEntitlement, 
-                       _kTestingHarnessEntitlement, _kiWorkCollaborationMessagingEntitlement, 
-                       _openat_s, _telemetry_default_log ]
+                       _kFileProviderLaunchItemsPermissionsRepairEntitlement, _kFileProviderMigrationTransferEntitlement, 
+                       _kFileProviderSearchOnServerEntitlement, _kFileProviderStorageManagementEntitlement, 
+                       _kFileProviderTestingModeEntitlement, _kMigrationImportProgressEntitlement, 
+                       _kNSFileProviderExternalDomainIdentifierPrefix, _kPoisonedUUID, 
+                       _kShareEntitlement, _kSyncRootManagementEntitlement, _kTestingHarnessEntitlement, 
+                       _kiWorkCollaborationMessagingEntitlement, _openat_s, _telemetry_default_log ]
     objc-classes:    [ FPAccessControlManager, FPActionLocatorAccessToken, FPActionOperation, 
                        FPActionOperationInfo, FPActionOperationLocator, FPAggregateProgress, 
                        FPAppLibraryCollection, FPAppMetadata, FPAppRegistry, FPArchiveOperation, 
@@ -424,10 +425,10 @@ exports:
                        FPFrameworkOverridesIterator._currentIndex, FPFrameworkOverridesIterator._invocation, 
                        FPFrameworkOverridesIterator._mightBeFPURL, FPFrameworkOverridesIterator._noSuitableModuleFoundHandler, 
                        FPFrameworkOverridesIterator._overrides ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _fpfs_set_download_quarantine, _sim_fgetdirentries_helper, 
                        _sim_fpfs_set_evictable, _sim_fset_dataless_cmpfs_xattr, _sim_materialize_file ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _NSFileProviderErrorCollidingItemKey ]
     objc-classes:    [ FPSearchTrashCollection, FPUnionCollection ]
 ...

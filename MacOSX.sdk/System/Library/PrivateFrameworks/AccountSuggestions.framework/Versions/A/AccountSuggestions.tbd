@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccountSuggestions.framework/Versions/A/AccountSuggestions'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s18AccountSuggestions0A10SuggestionV013computersWithA0ShySSGvM', 
                        '_$s18AccountSuggestions0A10SuggestionV013computersWithA0ShySSGvg', 
                        '_$s18AccountSuggestions0A10SuggestionV013computersWithA0ShySSGvpMV', 

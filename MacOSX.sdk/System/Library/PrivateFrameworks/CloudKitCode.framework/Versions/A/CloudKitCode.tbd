@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CloudKitCode.framework/Versions/A/CloudKitCode'
-current-version: 2330.14
+current-version: 2350.34
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12CloudKitCode0C10ConnectionC6invoke8function7request10completionySS_xyq_Sg_s5Error_pSgtct21InternalSwiftProtobuf7MessageRzAkLR_r0_lFTj', 
                        '_$s12CloudKitCode0C10ConnectionC6invoke8function7request10completionySS_xyq_Sg_s5Error_pSgtct21InternalSwiftProtobuf7MessageRzAkLR_r0_lFTq', 
                        '_$s12CloudKitCode0C10ConnectionCAA9InvocableAAMc', '_$s12CloudKitCode0C10ConnectionCAA9InvocableAAWP', 
@@ -388,6 +386,7 @@ exports:
                        '_$sSo16CKRecordObserverC12CloudKitCodeE13recordChangesAbCE06RecordG0Vvg', 
                        '_$sSo16CKRecordObserverC12CloudKitCodeE13recordChangesAbCE06RecordG0VvpMV', 
                        '_$sSo16CKRecordObserverC12CloudKitCodeE9container10recordTypeABSo11CKContainerC_SSSgtcfC', 
+                       '_$sSo22CKMergeableRecordValueC12CloudKitCodeE15addDeltasToSave4from18maxInlineDeltaSizeyAC0A0_p_SitKF', 
                        '_$sSo22CKMergeableRecordValueC12CloudKitCodeE15addDeltasToSave4fromyAC0A0_p_tKF', 
                        '_$sSo39CKSerializeRecordModificationsOperationC12CloudKitCodeE13recordsToSave09recordIDsI6DeleteABSaySo8CKRecordCGSg_SaySo0N2IDCGSgtcfC', 
                        '_$sSo39CKSerializeRecordModificationsOperationC12CloudKitCodeE20serializeResultBlockys0I0Oy10Foundation4DataVs5Error_pGcSgvM', 

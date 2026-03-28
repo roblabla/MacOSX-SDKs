@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SmartReplies.framework/Versions/A/SmartReplies'
-current-version: 116.7.8
+current-version: 122.18
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12SmartReplies02sraB18XPCClientInterfaceSo14NSXPCInterfaceCvg', 
                        '_$s12SmartReplies02sraB18XPCServerInterfaceSo14NSXPCInterfaceCvg', 
                        '_$s12SmartReplies05TrialaB10AssetPathsV13vocabFilePathSSvg', 

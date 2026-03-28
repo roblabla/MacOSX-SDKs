@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ProactivePredictionClient.framework/Versions/A/ProactivePredictionClient'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s25ProactivePredictionClient019ParameterSuggestionC0C07suggestD17ValuesWithRequestyAA0dE8ResponseCAA0deI0CYaKFTj', 
                        '_$s25ProactivePredictionClient019ParameterSuggestionC0C07suggestD17ValuesWithRequestyAA0dE8ResponseCAA0deI0CYaKFTjTu', 
                        '_$s25ProactivePredictionClient019ParameterSuggestionC0C07suggestD17ValuesWithRequestyAA0dE8ResponseCAA0deI0CYaKFTq', 

@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreWLAN.framework/Versions/A/CoreWLAN'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CoreWLANFrameworkBundleID, _WiFiDeviceClientCopyAirplayStatistics, 
                        _WiFiDeviceClientCopyCurrentNetwork, _WiFiDeviceClientCopyProperty, 
                        _WiFiDeviceClientDisassociate, _WiFiDeviceClientGetInterfaceName, 
@@ -57,7 +55,7 @@ exports:
                        __EAPSecIdentityHandleCreate, __EAPSecIdentityHandleCreateSecIdentity, 
                        __EAPSecIdentityListCreate, _kWiFiAutoJoinPowerDiagnosticsKey, 
                        _kWiFiNetworkIsAutoJoinedKey ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ACInterfaceCreate, _ACInterfaceDeviceNameCopy, _ACInterfaceGetPower, 
                        _ACInterfaceSetPower, _ACNetworkAssociate, _ACNetworkCopyBroadcastScanResults, 
                        _ACNetworkCopyDirectedScanResult, _ACNetworkDisassociate, 
@@ -140,14 +138,13 @@ exports:
                        _copyPrimaryWLANNetworkService, _copyTopLevelWLANNetworkServices, 
                        _copyWLANNetworkInterface, _copyWLANNetworkInterfaceForService, 
                        _copyWLANNetworkServices, _correctEthernetAddressFormat, _currentNetworkSetAvailable, 
-                       _dynamicConfigurationForInterface, _findSSIDInBeacon, _generateUUID, 
-                       _globalConfiguration, _globalConfigurationForConfiguration, 
-                       _interfaceConfigurationForConfiguration, _kCWCountryCodeDidChangeNotification, 
-                       _kCWLinkDidChangeNotification, _kCWModeDidChangeNotification, 
-                       _kCWPowerDidChangeNotification, _kCWSSIDDidChangeNotification, 
-                       _knownNetworkEntryForNetworkProfile, _legacySecurityTypeForSecurityType, 
-                       _legacySecurityTypeForSecurityTypeNoTranslate, _locStringForErrorCode, 
-                       _locStringForKey, _locationServicesAuthorizedForCurrentProcess, 
+                       _dynamicConfigurationForInterface, _generateUUID, _globalConfiguration, 
+                       _globalConfigurationForConfiguration, _interfaceConfigurationForConfiguration, 
+                       _kCWCountryCodeDidChangeNotification, _kCWLinkDidChangeNotification, 
+                       _kCWModeDidChangeNotification, _kCWPowerDidChangeNotification, 
+                       _kCWSSIDDidChangeNotification, _knownNetworkEntryForNetworkProfile, 
+                       _legacySecurityTypeForSecurityType, _legacySecurityTypeForSecurityTypeNoTranslate, 
+                       _locStringForErrorCode, _locStringForKey, _locationServicesAuthorizedForCurrentProcess, 
                        _locationServicesAuthorizedForPID, _locationServicesBlockBSSIDAccessForXPCConnection, 
                        _locationServicesEnabled, _locationServicesEnabledForWiFiNetworking, 
                        _networkHiddenOrBroadcast, _readCurrentNetworkFromNVRAM, _readRecoveryNetworksFromNVRAM, 

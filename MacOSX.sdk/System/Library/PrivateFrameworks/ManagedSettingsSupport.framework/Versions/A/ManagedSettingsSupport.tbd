@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ManagedSettingsSupport.framework/Versions/A/ManagedSettingsSupport'
-current-version: 266.62.2
+current-version: 267.101.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s22ManagedSettingsSupport12KeyGeneratorV08generateD4Data10Foundation0G0VyKF', 
                        '_$s22ManagedSettingsSupport12KeyGeneratorVACycfC', '_$s22ManagedSettingsSupport12KeyGeneratorVMa', 
                        '_$s22ManagedSettingsSupport12KeyGeneratorVMn', '_$s22ManagedSettingsSupport12KeyGeneratorVN', 

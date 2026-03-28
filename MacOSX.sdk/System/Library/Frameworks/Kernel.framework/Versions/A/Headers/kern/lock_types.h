@@ -58,7 +58,6 @@ __options_decl(lck_wake_action_t, unsigned int, {
 typedef const struct hw_spin_policy *hw_spin_policy_t;
 
 
-
 __END_DECLS
 
 #endif /* _KERN_LOCK_TYPES_H */

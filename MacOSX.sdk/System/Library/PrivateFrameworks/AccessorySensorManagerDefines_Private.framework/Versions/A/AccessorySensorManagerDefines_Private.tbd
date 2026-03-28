@@ -1,0 +1,17 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64e-macos ]
+install-name:    '/System/Library/PrivateFrameworks/AccessorySensorManagerDefines_Private.framework/Versions/A/AccessorySensorManagerDefines_Private'
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    clients:         [ ASMAccessoryIndicatorStatus, ASMAccessoryIndicatorStatusComponent, 
+                       ASMExclaveDefines_Private, ASMExclaveSupport, ASMExclaveSupportTests, 
+                       ASMInternalServices, AccessorySensorManagerAOEConsumerComponent, 
+                       AccessorySensorManagerDarwin_Private, AccessorySensorManagerDefines_Private, 
+                       AccessorySensorManagerExclaveDaemon, AccessorySensorManagerExclaveTests, 
+                       AccessorySensorManagerServices, AccessorySensorManagerTests, 
+                       accessorysensormgrd, asmdutil ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ _ASMErrorDomain, _ASMErrorF, _ASMXPCGetNextClientID, _ASMXPCGetNextConnectionID ]
+...

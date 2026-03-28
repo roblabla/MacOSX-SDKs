@@ -2,7 +2,7 @@
 //  HKClinicalType.h
 //  HealthKit
 //
-//  Copyright (c) 2018-2024 Apple Inc. All rights reserved.
+//  Copyright © 2018-2024 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

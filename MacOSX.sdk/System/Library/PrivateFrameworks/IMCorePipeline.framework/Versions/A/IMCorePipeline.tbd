@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IMCorePipeline.framework/Versions/A/IMCorePipeline'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14IMCorePipeline0aB10HelloWorldV13printGreetingyyF', '_$s14IMCorePipeline0aB10HelloWorldVACycfC', 
                        '_$s14IMCorePipeline0aB10HelloWorldVMa', '_$s14IMCorePipeline0aB10HelloWorldVMn', 
                        '_$s14IMCorePipeline0aB10HelloWorldVN', '_$s14IMCorePipeline0aB15HelloWorldClassC13printGreetingyyFTj', 

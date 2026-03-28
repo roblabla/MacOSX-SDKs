@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libsystemstats.dylib'
-current-version: 507
+current-version: 510
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __systemstats_boot, __systemstats_copy_cookie_path, __systemstats_enumerate_files, 
                        __systemstats_get_file_stats, __systemstats_get_system_version, 
                        __systemstats_queued_write, __systemstats_read_current_build, 
@@ -21,15 +19,16 @@ exports:
                        _systemstats_create_record, _systemstats_delete_old_files, 
                        _systemstats_dispose_record, _systemstats_foreach_micro, _systemstats_get_microstackshot_cycle_interval_default, 
                        _systemstats_get_microstackshot_cycle_interval_override, _systemstats_get_microstackshots, 
-                       _systemstats_get_pmi_cycle_interval, _systemstats_gettimeofday, 
-                       _systemstats_insert_and_dispose_subrecord, _systemstats_io_hotspot_report_allowed_by_tasking, 
-                       _systemstats_mach_absolute_time, _systemstats_mach_continuous_time, 
-                       _systemstats_microstackshot_checkpoint_async, _systemstats_persistence_is_allowed, 
-                       _systemstats_set_microstackshot_cycle_interval_override, _systemstats_stream_delete, 
-                       _systemstats_stream_flush, _systemstats_stream_get_attr, _systemstats_unlink_if_present, 
-                       _systemstats_write_and_dispose_record, _systemstats_write_checkpoint, 
-                       _systemstats_write_microstackshot, _systemstats_zipper_buffers_foreach_micro ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+                       _systemstats_get_microstackshots_buffer_size, _systemstats_get_pmi_cycle_interval, 
+                       _systemstats_gettimeofday, _systemstats_insert_and_dispose_subrecord, 
+                       _systemstats_io_hotspot_report_allowed_by_tasking, _systemstats_mach_absolute_time, 
+                       _systemstats_mach_continuous_time, _systemstats_microstackshot_checkpoint_async, 
+                       _systemstats_persistence_is_allowed, _systemstats_set_microstackshot_cycle_interval_override, 
+                       _systemstats_stream_delete, _systemstats_stream_flush, _systemstats_stream_get_attr, 
+                       _systemstats_unlink_if_present, _systemstats_write_and_dispose_record, 
+                       _systemstats_write_checkpoint, _systemstats_write_microstackshot, 
+                       _systemstats_zipper_buffers_foreach_micro ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _SystemStatsLogCoreDuetEventsAggregate, _SystemStatsReportDiscretionaryBudgetForDuet, 
                        _SystemStatsReportTotalDiscretionaryEnergyCoreDuet, __systemstats_init, 
                        __systemstats_stream_write, __systemstats_write, _getBatteryChargeAndPowerStateInfo, 

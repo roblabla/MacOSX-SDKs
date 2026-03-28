@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText'
-current-version: 877.2
+current-version: 877.4
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation15AttributeScopesO8CoreTextE0dE10AttributesV010LineHeightB0O13runBoundariesAA16AttributedStringV0b3RunJ0OSgvgZ', 
                        '_$s10Foundation15AttributeScopesO8CoreTextE0dE10AttributesV010LineHeightB0O13runBoundariesAA16AttributedStringV0b3RunJ0OSgvpZMV', 
                        '_$s10Foundation15AttributeScopesO8CoreTextE0dE10AttributesV010LineHeightB0O4nameSSvgZ', 
@@ -108,11 +106,12 @@ exports:
                        _CTFontCollectionCreateWithFontDescriptors, _CTFontCollectionGetTypeID, 
                        _CTFontCopyAttribute, _CTFontCopyAvailableTables, _CTFontCopyCharacterSet, 
                        _CTFontCopyCharacterSetOfDefaultCascadeListForSystemUIFonts, 
-                       _CTFontCopyColorGlyphCoverage, _CTFontCopyConvertedTables, 
-                       _CTFontCopyDefaultCascadeList, _CTFontCopyDefaultCascadeListForLanguages, 
-                       _CTFontCopyDisplayName, _CTFontCopyFamilyName, _CTFontCopyFeatureSettings, 
-                       _CTFontCopyFeatures, _CTFontCopyFeaturesInternal, _CTFontCopyFontDescriptor, 
-                       _CTFontCopyFullName, _CTFontCopyGlyphCoverageForFeature, _CTFontCopyGraphicsFont, 
+                       _CTFontCopyColorGlyphCoverage, _CTFontCopyComplexColorFormatGlyphCoverage, 
+                       _CTFontCopyConvertedTables, _CTFontCopyDefaultCascadeList, 
+                       _CTFontCopyDefaultCascadeListForLanguages, _CTFontCopyDisplayName, 
+                       _CTFontCopyFamilyName, _CTFontCopyFeatureSettings, _CTFontCopyFeatures, 
+                       _CTFontCopyFeaturesInternal, _CTFontCopyFontDescriptor, _CTFontCopyFullName, 
+                       _CTFontCopyGlyphCoverageForFeature, _CTFontCopyGraphicsFont, 
                        _CTFontCopyImageForGlyph, _CTFontCopyImageFromAdaptiveImageProvider, 
                        _CTFontCopyImageFromEmojiImageProvider, _CTFontCopyLocalizedName, 
                        _CTFontCopyLocalizedNameByIDWithLanguages, _CTFontCopyLocalizedNameWithLanguages, 
@@ -185,24 +184,25 @@ exports:
                        _CTFontGetUnderlinePosition, _CTFontGetUnderlineThickness, 
                        _CTFontGetUnitsPerEm, _CTFontGetUnsummedAdvancesForGlyphsAndStyle, 
                        _CTFontGetVerticalGlyphsForCharacters, _CTFontGetVerticalTranslationsForGlyphs, 
-                       _CTFontGetWeight, _CTFontGetWidth, _CTFontGetXHeight, _CTFontHasDerivedOpticalSize, 
-                       _CTFontHasExuberatedLineHeight, _CTFontHasFeatureSettingWithTypeAndSelector, 
-                       _CTFontHasFeatureWithTypeAndSelector, _CTFontHasTable, _CTFontInitializeShapingGlyphs, 
-                       _CTFontIsAppleColorEmoji, _CTFontIsLastResort, _CTFontIsSystemUIFont, 
-                       _CTFontIsTextStyleFont, _CTFontIsVertical, _CTFontManagerCompareFontDescriptors, 
-                       _CTFontManagerCompareFontDescriptors2, _CTFontManagerCompareFontFamilyNames, 
-                       _CTFontManagerCopyAvailableFontFamilyNames, _CTFontManagerCopyAvailablePostScriptNames, 
-                       _CTFontManagerCopyRegisteredFontDescriptors, _CTFontManagerCreateFontDescriptorFromData, 
-                       _CTFontManagerCreateFontDescriptorsFromData, _CTFontManagerCreateFontDescriptorsFromURL, 
-                       _CTFontManagerCreateMemorySafeFontDescriptorFromData, _CTFontManagerInstalledFontsChanged, 
-                       _CTFontManagerRegisterFontDescriptors, _CTFontManagerRegisterFontURLs, 
-                       _CTFontManagerRegisterFontsForURL, _CTFontManagerRegisterFontsForURLs, 
-                       _CTFontManagerRegisterFontsWithAssetNames, _CTFontManagerRegisterGraphicsFont, 
-                       _CTFontManagerRequestFonts, _CTFontManagerUnregisterFontDescriptors, 
-                       _CTFontManagerUnregisterFontURLs, _CTFontManagerUnregisterFontsForURL, 
-                       _CTFontManagerUnregisterFontsForURLs, _CTFontManagerUnregisterGraphicsFont, 
-                       _CTFontRemoveFromCaches, _CTFontSetAltTextStyleSpec, _CTFontSetClientObject, 
-                       _CTFontShapeGlyphs, _CTFontShouldAntiAlias, _CTFontStrikeMetricsCreateDictionaryRepresentation, 
+                       _CTFontGetWeight, _CTFontGetWidth, _CTFontGetXHeight, _CTFontHasComplexColorFormatForGlyph, 
+                       _CTFontHasDerivedOpticalSize, _CTFontHasExuberatedLineHeight, 
+                       _CTFontHasFeatureSettingWithTypeAndSelector, _CTFontHasFeatureWithTypeAndSelector, 
+                       _CTFontHasTable, _CTFontInitializeShapingGlyphs, _CTFontIsAppleColorEmoji, 
+                       _CTFontIsLastResort, _CTFontIsSystemUIFont, _CTFontIsTextStyleFont, 
+                       _CTFontIsVertical, _CTFontManagerCompareFontDescriptors, _CTFontManagerCompareFontDescriptors2, 
+                       _CTFontManagerCompareFontFamilyNames, _CTFontManagerCopyAvailableFontFamilyNames, 
+                       _CTFontManagerCopyAvailablePostScriptNames, _CTFontManagerCopyRegisteredFontDescriptors, 
+                       _CTFontManagerCreateFontDescriptorFromData, _CTFontManagerCreateFontDescriptorsFromData, 
+                       _CTFontManagerCreateFontDescriptorsFromURL, _CTFontManagerCreateMemorySafeFontDescriptorFromData, 
+                       _CTFontManagerInstalledFontsChanged, _CTFontManagerRegisterFontDescriptors, 
+                       _CTFontManagerRegisterFontURLs, _CTFontManagerRegisterFontsForURL, 
+                       _CTFontManagerRegisterFontsForURLs, _CTFontManagerRegisterFontsWithAssetNames, 
+                       _CTFontManagerRegisterGraphicsFont, _CTFontManagerRequestFonts, 
+                       _CTFontManagerUnregisterFontDescriptors, _CTFontManagerUnregisterFontURLs, 
+                       _CTFontManagerUnregisterFontsForURL, _CTFontManagerUnregisterFontsForURLs, 
+                       _CTFontManagerUnregisterGraphicsFont, _CTFontRemoveFromCaches, 
+                       _CTFontSetAltTextStyleSpec, _CTFontSetClientObject, _CTFontShapeGlyphs, 
+                       _CTFontShouldAntiAlias, _CTFontStrikeMetricsCreateDictionaryRepresentation, 
                        _CTFontSupportsConnectedLanguage, _CTFontSwapDefaultLineHeightAdjustment, 
                        _CTFontSwapDefaultSize, _CTFontSwapEmojiPolicy, _CTFontTransformGlyphs, 
                        _CTFontTransformGlyphsWithLanguage, _CTFrameCopyVisibleString, 
@@ -465,7 +465,7 @@ exports:
                        CTGlyphStorageInterface._glyphCount, CTGlyphStorageInterface._glyphs, 
                        CTGlyphStorageInterface._origins, CTGlyphStorageInterface._props, 
                        CTGlyphStorageInterface._stringIndexes ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CTFontCollectionCopyAttributes, _CTFontCollectionCopyExclusionDescriptors, 
                        _CTFontCollectionCopyMatchingOptions, _CTFontCollectionCopyQueryDescriptors, 
                        _CTFontCollectionCreateMatchingFontDescriptorsForFamily, _CTFontCollectionCreateMutableCopy, 

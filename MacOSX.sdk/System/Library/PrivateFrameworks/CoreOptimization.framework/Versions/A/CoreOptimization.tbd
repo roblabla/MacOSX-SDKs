@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreOptimization.framework/Versions/A/CoreOptimization'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __Z15GradientDescentRNSt3__18valarrayIdEEN16CoreOptimization17ObjectiveFunctionEi, 
                        __Z4normRKN16CoreOptimization10gradient_tE, __ZN16CoreOptimization4BFGS11GetSolutionEv, 
                        __ZN16CoreOptimization4BFGS13UpdateHessianERNS_9hessian_tERKNSt3__18valarrayIdEES7_, 

@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FindMyDevice.framework/Versions/A/FindMyDevice'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FMDFMIPManagerUnregisterErrorDomain, _FMDFMMManagerUnregisterErrorDomain, 
                        _FMDLostModeExitAuthCompleteNotification, _FMDRepairDeviceThisDeviceIdentifier, 
                        _FMDSecureLocationsReceivedCommandNotification, _FMDSecureLocationsReceivedPayloadNotification, 
@@ -41,6 +39,7 @@ exports:
                        FMDDeviceIdentityFactory, FMDEraseOptions, FMDEraseProxy, 
                        FMDFMIPAccountInfo, FMDFMMAccountInfo, FMDFMMManager, FMDIdentitySigningRequest, 
                        FMDLocalFindableAccessory, FMDRepairDevice, FMDRepairDeviceContext, 
+                       FMDRepairDeviceLookupContext, FMDRepairDeviceLookupResult, 
                        FMDRepairDeviceResult, FMDSharedConfiguration, FMDSharedConfigurationEntry, 
                        FMDSharedConfigurationFollowUpEntry, FMDVolatileMetaDataRecord, 
                        FMNSXPCConnection, FMNSXPCConnectionCache, FMNSXPCConnectionConfiguration ]

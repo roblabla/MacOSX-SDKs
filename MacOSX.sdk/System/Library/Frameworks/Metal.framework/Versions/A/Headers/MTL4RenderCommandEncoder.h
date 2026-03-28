@@ -602,7 +602,7 @@ API_AVAILABLE(macos(26.0), ios(26.0))
 /// - Parameters:
 ///   - argumentTable: ``MTL4ArgumentTable`` to set.
 ///   - stages: A ``MTLRenderStages`` bitmask that specifies the shader stages with visibility over the table.
-- (void)setArgumentTable:(id<MTL4ArgumentTable>)argumentTable
+- (void)setArgumentTable:(nullable id<MTL4ArgumentTable>)argumentTable
                 atStages:(MTLRenderStages)stages;
 
 /// Configures the vertex winding order that determines which face of a geometric primitive is the front one.

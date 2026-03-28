@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/VFXAssets.framework/Versions/A/VFXAssets'
 current-version: 42.0.3
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s9VFXAssets42__vfx_get_effect_class_comAppleVfxConfettiyXlXpyF', 
                        _VFXAssetsVersionNumber, _VFXAssetsVersionString, __Z33Spawn_comAppleVfxConfetti_graph_5PKvmmR13vfx_int_range, 
                        __Z56ParticleInit_comAppleRealitykitVfxGeneral_particleInit_3PKvjDv4_fS1_jbS1_S1_bbffffmmbmmfDv3_fffmS2_fffmRS1_S3_S3_S3_RfS3_S4_R10simd_quatfRS2_S7_, 

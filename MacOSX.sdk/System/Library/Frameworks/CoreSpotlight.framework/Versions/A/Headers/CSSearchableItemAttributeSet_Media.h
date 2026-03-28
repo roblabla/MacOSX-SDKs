@@ -24,9 +24,6 @@ CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 //as belonging to the project "My movie"
 @property(nullable, copy) NSArray<NSString*> *projects;
 
-// This is the date that the file was last downloaded / received.
-@property(nullable, strong) NSDate *downloadedDate;
-
 //This attribute indicates where the item was obtained from.
 //Examples:
 //- downloaded file may refer to the site they were downloaded from,the refering URL, etc
@@ -50,6 +47,9 @@ CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 
 //This is the date that the item was moved into the current location.
 @property(nullable, strong) NSDate *addedDate;
+
+// This is the date that the file was last downloaded / received.
+@property(nullable, strong) NSDate *downloadedDate;
 
 //This is the duration, in seconds, of the content of the item (if appropriate).
 @property(nullable, strong) NSNumber *duration;

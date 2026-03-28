@@ -1,11 +1,11 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 344.1 -module-name PaperKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 344.4.2 -module-name PaperKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 public import CoreGraphics
 public import Foundation
 public import Observation
-public import PencilKit
+@preconcurrency public import PencilKit
 public import Swift
 public import UIKit.UIImage
 public import UIKit
@@ -23,11 +23,9 @@ public struct PaperMarkup : Swift.Sendable, Swift.Equatable {
   public init(dataRepresentation: Foundation.Data) throws
   public init(bounds: CoreFoundation.CGRect)
   public func dataRepresentation() async throws -> Foundation.Data
-  #if compiler(>=5.3) && $NonescapableTypes
   public var indexableContent: Swift.String? {
     get async
   }
-  #endif
   public var bounds: CoreFoundation.CGRect {
     get
     set
@@ -59,39 +57,29 @@ public struct PaperMarkup : Swift.Sendable, Swift.Equatable {
     func paperMarkupViewControllerDidBeginDrawing(_ paperMarkupViewController: PaperKit.PaperMarkupViewController)
     func paperMarkupViewControllerDidChangeContentVisibleFrame(_ paperMarkupViewController: PaperKit.PaperMarkupViewController)
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency weak public var delegate: (any PaperKit.PaperMarkupViewController.Delegate)? {
     get
     set
     _modify
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var markup: PaperKit.PaperMarkup? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(markup: PaperKit.PaperMarkup? = nil, supportedFeatureSet: PaperKit.FeatureSet)
-  #endif
   @objc deinit
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public var canBecomeFirstResponder: Swift.Bool {
     @objc get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public var undoManager: Foundation.UndoManager? {
     @objc get
   }
-  #endif
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var contentView: UIKit.UIView? {
     get
     set
     _modify
   }
-  #endif
   @_Concurrency.MainActor @preconcurrency public var isEditable: Swift.Bool {
     get
     set
@@ -156,6 +144,20 @@ public struct PaperMarkup : Swift.Sendable, Swift.Equatable {
   @_Concurrency.MainActor @preconcurrency @objc public func toolPickerIsRulerActiveDidChange(_ toolPicker: PencilKit.PKToolPicker)
 }
 @available(iOS 26.0, visionOS 26.0, *)
+extension PaperKit.PaperMarkupViewController : PaperKit.MarkupEditViewController.Delegate {
+  @_Concurrency.MainActor @preconcurrency public func markupEditViewController(_ markupEditViewController: PaperKit.MarkupEditViewController, insertNewShape type: PaperKit.ShapeConfiguration.Shape)
+  @_Concurrency.MainActor @preconcurrency public func markupEditViewControllerInsertNewTextbox(_ markupEditViewController: PaperKit.MarkupEditViewController)
+  @_Concurrency.MainActor @preconcurrency public func markupEditViewController(_ markupEditViewController: PaperKit.MarkupEditViewController, insertNewLineWithStartMarker lineStartMarker: Swift.Bool, endMarker lineEndMarker: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func markupEditViewController(_ markupEditViewController: PaperKit.MarkupEditViewController, insertNewContents toInsert: PaperKit.PaperMarkup)
+}
+@available(iOS 26.0, visionOS 26.0, *)
+extension PaperKit.PaperMarkupViewController.Delegate {
+  public func paperMarkupViewControllerDidChangeMarkup(_ paperMarkupViewController: PaperKit.PaperMarkupViewController)
+  public func paperMarkupViewControllerDidBeginDrawing(_ paperMarkupViewController: PaperKit.PaperMarkupViewController)
+  public func paperMarkupViewControllerDidChangeSelection(_ paperMarkupViewController: PaperKit.PaperMarkupViewController)
+  public func paperMarkupViewControllerDidChangeContentVisibleFrame(_ paperMarkupViewController: PaperKit.PaperMarkupViewController)
+}
+@available(iOS 26.0, visionOS 26.0, *)
 extension PaperKit.PaperMarkupViewController : nonisolated Observation.Observable {
 }
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
@@ -164,9 +166,7 @@ public struct ShapeConfiguration {
   public var fillColor: CoreGraphics.CGColor?
   public var strokeColor: CoreGraphics.CGColor?
   public var lineWidth: CoreFoundation.CGFloat
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(type: PaperKit.ShapeConfiguration.Shape, fillColor: CoreGraphics.CGColor? = CGColor(srgbRed: 0, green: 0, blue: 0, alpha: 1), strokeColor: CoreGraphics.CGColor? = nil, lineWidth: CoreFoundation.CGFloat = 0)
-  #endif
 }
 extension PaperKit.PaperMarkupViewController {
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
@@ -321,9 +321,7 @@ extension PaperKit.FeatureSet {
     public static var latest: PaperKit.FeatureSet.ContentVersion {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
-    #endif
     @available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
     public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
@@ -333,13 +331,11 @@ extension PaperKit.FeatureSet {
 }
 @objc @available(macCatalyst 26.0, *)
 @_Concurrency.MainActor @preconcurrency public class MarkupToolbarViewController : UIKit.UIViewController {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency weak public var delegate: (any PaperKit.MarkupToolbarViewController.Delegate)? {
     get
     set
     _modify
   }
-  #endif
   @_Concurrency.MainActor @preconcurrency public var indirectPointerTouchModes: [PaperKit.PaperMarkupViewController.TouchMode] {
     get
     set
@@ -360,9 +356,7 @@ extension PaperKit.FeatureSet {
   }
   @_Concurrency.MainActor @preconcurrency final public let supportedFeatureSet: PaperKit.FeatureSet
   @_Concurrency.MainActor @preconcurrency public init(supportedFeatureSet: PaperKit.FeatureSet)
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @objc required dynamic public init?(coder: Foundation.NSCoder)
-  #endif
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
   @objc deinit
 }

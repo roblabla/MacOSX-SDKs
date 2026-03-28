@@ -63,6 +63,18 @@ struct __type_to_tensor_ops_datatype<uint8_t>
 {
   static constant __tensor_ops_datatype value = __tensor_ops_datatype_uint8;
 };
+#if __HAVE_INT4B_FORMAT_TYPE__
+template <>
+struct __type_to_tensor_ops_datatype<metal::int4b_format>
+{
+  static constant __tensor_ops_datatype value = __tensor_ops_datatype_int4;
+};
+template <>
+struct __type_to_tensor_ops_datatype<metal::uint4b_format>
+{
+  static constant __tensor_ops_datatype value = __tensor_ops_datatype_uint4;
+};
+#endif
 template <>
 struct __type_to_tensor_ops_datatype<int16_t>
 {

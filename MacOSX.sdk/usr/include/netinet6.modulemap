@@ -1,4 +1,4 @@
-module Darwin.netinet6 [system] {
+module Darwin.netinet6 {
   module ah {
     header "netinet6/ah.h"
     export *

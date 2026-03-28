@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WebDriver.framework/Versions/A/WebDriver'
-current-version: 623.1.14
+current-version: 624.1.16
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s9WebDriver17WDWebSocketServerC11listenerURL10Foundation0G0VvgTj', 
                        '_$s9WebDriver17WDWebSocketServerC11listenerURL10Foundation0G0VvgTq', 
                        '_$s9WebDriver17WDWebSocketServerC11listenerURL10Foundation0G0VvpMV', 

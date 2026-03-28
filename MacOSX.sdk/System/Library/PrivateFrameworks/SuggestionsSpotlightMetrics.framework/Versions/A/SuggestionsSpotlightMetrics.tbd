@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SuggestionsSpotlightMetrics.framework/Versions/A/SuggestionsSpotlightMetrics'
-current-version: 1303.8
+current-version: 1311.6
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _SGSM2ContactOpportunityInSpotlightReadFrom, _SGSM2ContactResultInSpotlightReadFrom, 
                        _SGSM2ContactResultSelectedInSpotlightReadFrom, _SGSM2EventOpportunityInSpotlightReadFrom, 
                        _SGSM2EventResultInSpotlightReadFrom, _SGSM2EventResultSelectedInSpotlightReadFrom, 

@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/libllvm-lmdb.dylib'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _mdb_cmp, _mdb_cursor_close, _mdb_cursor_count, _mdb_cursor_dbi, 
                        _mdb_cursor_del, _mdb_cursor_get, _mdb_cursor_open, _mdb_cursor_put, 
                        _mdb_cursor_renew, _mdb_cursor_txn, _mdb_dbi_close, _mdb_dbi_flags, 

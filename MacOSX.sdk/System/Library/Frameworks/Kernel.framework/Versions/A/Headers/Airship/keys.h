@@ -50,6 +50,11 @@
 
 #define kAirshipDeviceAttachTimeout "AirshipDeviceAttachTimeoutMS"
 
+#define kAirshipVendorCentauri "Centauri"
+#define kAirshipRoleCentauriControl "CentauriControl"
+#define kAirshipRoleCentauriAlpha "CentauriAlpha"
+#define kAirshipRoleCentauriBeta "CentauriBeta"
+#define kAirshipChipsetT2026 "t2026"
 
 #define kAirshipProtocolDaleipc "daleipc"
 #define kAirshipVendorDale "Dale"
@@ -67,8 +72,21 @@ typedef enum airship_driver_error
 
 typedef enum airship_driver_user_client_type
 {
+    kAirshipDriverUserClientTypeCentauriHelperBoot = 0,
+    kAirshipDriverUserClientTypeCentauriHelperInterface = 1,
+    kAirshipDriverUserClientTypeCentauriHelperMemregion = 2,
+    kAirshipDriverUserClientTypeCentauriHelperTimesync = 3,
     kAirshipDriverUserClientTypeDaleTraceInterface = 4,
 } airship_driver_user_client_type_t;
 
+typedef enum airship_proxima_platform
+{
+    kAirshipProximaPlatformPOR = 0,
+    kAirshipProximaPlatformAlphaPrimeFPGA = 1,
+    kAirshipProximaPlatformBetaPrimeFPGA = 2,
+    kAirshipProximaPlatformProtium = 3,
+
+    kAirshipProximaPlatformUnknown = UINT32_MAX,
+} airship_proxima_platform_t;
 
 #endif /* airship__core__api__keys_h */

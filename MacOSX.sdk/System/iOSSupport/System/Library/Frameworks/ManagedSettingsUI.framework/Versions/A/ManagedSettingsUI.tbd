@@ -1,20 +1,23 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ManagedSettingsUI.framework/Versions/A/ManagedSettingsUI'
-current-version: 266.62.2
+current-version: 267.101.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s17ManagedSettingsUI19ShieldConfigurationV15backgroundColorSo7UIColorCSgvg', 
                        '_$s17ManagedSettingsUI19ShieldConfigurationV15backgroundColorSo7UIColorCSgvpMV', 
                        '_$s17ManagedSettingsUI19ShieldConfigurationV18primaryButtonLabelAC0H0VSgvg', 
                        '_$s17ManagedSettingsUI19ShieldConfigurationV18primaryButtonLabelAC0H0VSgvpMV', 
+                       '_$s17ManagedSettingsUI19ShieldConfigurationV19backgroundBlurStyle0F5Color4icon5title8subtitle18primaryButtonLabel0mn10BackgroundI009secondarynO00qN12SubmenuItemsACSo012UIBlurEffectH0VSg_So7UIColorCSgSo7UIImageCSgAC0O0VSgA2xrXSaySSGSgtcfC', 
                        '_$s17ManagedSettingsUI19ShieldConfigurationV19backgroundBlurStyle0F5Color4icon5title8subtitle18primaryButtonLabel0mn10BackgroundI009secondarynO0ACSo012UIBlurEffectH0VSg_So7UIColorCSgSo7UIImageCSgAC0O0VSgA2wqWtcfC', 
                        '_$s17ManagedSettingsUI19ShieldConfigurationV19backgroundBlurStyleSo012UIBlurEffectH0VSgvg', 
                        '_$s17ManagedSettingsUI19ShieldConfigurationV19backgroundBlurStyleSo012UIBlurEffectH0VSgvpMV', 
                        '_$s17ManagedSettingsUI19ShieldConfigurationV20secondaryButtonLabelAC0H0VSgvg', 
                        '_$s17ManagedSettingsUI19ShieldConfigurationV20secondaryButtonLabelAC0H0VSgvpMV', 
+                       '_$s17ManagedSettingsUI19ShieldConfigurationV27secondaryButtonSubmenuItemsSaySSGSgvg', 
+                       '_$s17ManagedSettingsUI19ShieldConfigurationV27secondaryButtonSubmenuItemsSaySSGSgvpMV', 
                        '_$s17ManagedSettingsUI19ShieldConfigurationV28primaryButtonBackgroundColorSo7UIColorCSgvg', 
                        '_$s17ManagedSettingsUI19ShieldConfigurationV28primaryButtonBackgroundColorSo7UIColorCSgvpMV', 
                        '_$s17ManagedSettingsUI19ShieldConfigurationV4iconSo7UIImageCSgvg', 

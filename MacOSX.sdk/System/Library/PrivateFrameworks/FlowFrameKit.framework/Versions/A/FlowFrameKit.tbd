@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/FlowFrameKit.framework/Versions/A/FlowFrameKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Controller12FlowFrameKit0bC15FactoryProtocolPTl', '_$s10Controller12FlowFrameKit0bC8ProtocolPTl', 
                        '_$s12FlowFrameKit03AnyB0C16debugDescriptionSSvgTj', '_$s12FlowFrameKit03AnyB0C16debugDescriptionSSvgTq', 
                        '_$s12FlowFrameKit03AnyB0C16debugDescriptionSSvpMV', '_$s12FlowFrameKit03AnyB0C5unboxqd__SgyAA0aB8ProtocolRd__lFTj', 

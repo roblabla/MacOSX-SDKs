@@ -1,22 +1,22 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libruby.2.6.dylib'
 current-version: 2.6.10
 compatibility-version: 2.6
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/libruby.2.6.dylib' ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/libruby.2.6.dylib'
 current-version: 2.6.10
 compatibility-version: 2.6
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ _backtrace ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _InitVM_Enumerator, _InitVM_Math, _InitVM_Object, _InitVM_Random, 
                        _InitVM_Struct, _InitVM_process, _InitVM_transcode, _Init_Array, 
                        _Init_BareVM, _Init_Bignum, _Init_Binding, _Init_Comparable, 
@@ -719,6 +719,6 @@ exports:
                        _st_numcmp, _st_numhash, _st_reserved_hash_substitution_val, 
                        _st_reserved_hash_val, _st_shift, _st_update, _st_values, 
                        _st_values_check ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ _rb_gc_set_stack_end ]
 ...

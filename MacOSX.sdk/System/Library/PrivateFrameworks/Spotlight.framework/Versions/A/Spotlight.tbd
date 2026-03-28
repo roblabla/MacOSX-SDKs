@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Spotlight.framework/Versions/A/Spotlight'
-current-version: 2400.18.255
+current-version: 2418.4.13
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __Z14getMaxHeapSizeP8NSStringabil, __Z19collectIndexResultsP7NSArrayIP16CSSearchableItemEPK20SPSearchQueryContextailR20IndexResultsRegistry ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s9Spotlight16SPPreferenceRuleV10identifierSSvM', '_$s9Spotlight16SPPreferenceRuleV10identifierSSvg', 
                        '_$s9Spotlight16SPPreferenceRuleV10identifierSSvpMV', '_$s9Spotlight16SPPreferenceRuleV10identifierSSvs', 
                        '_$s9Spotlight16SPPreferenceRuleV13localizedNameSSvM', '_$s9Spotlight16SPPreferenceRuleV13localizedNameSSvg', 
@@ -166,7 +166,7 @@ exports:
                        _SpotlightVersionString, __Z14getContainerIdPK28CSSearchableItemAttributeSet, 
                        __Z18getGreaterOperatoribP8NSString, __Z23isSearchToolDebugModeOnv, 
                        __Z25canLogIdentifierForBundleP8NSString, __ZN12IndexResults12removeResultEyPK8NSStringPK28CSSearchableItemAttributeSet, 
-                       __ZN12IndexResults13collectResultEyPK8NSStringP16CSSearchableItemd, 
+                       __ZN12IndexResults13collectResultEyyPK8NSStringP16CSSearchableItemd, 
                        __ZN12IndexResults13printHeapInfoEyPK8NSStringb, __ZN12IndexResults15printTablesInfoEyPK8NSStringd, 
                        __ZN12IndexResults19printAllResultsInfoEyPK8NSStringdb, __ZN12IndexResults19printRetrievedItemsEyPK8NSString, 
                        __ZN12IndexResultsC1EjP8NSStringP8NSNumberRKNSt3__18functionIFb17SPResultValueItemS6_EEE, 
@@ -179,8 +179,8 @@ exports:
                        __ZN20IndexResultsRegistry23getOrCreateIndexResultsEjP8NSStringP8NSNumberRKNSt3__18functionIFb17SPResultValueItemS6_EEE, 
                        __ZNK37SPResultItemHashTableEntryRankingLessclERK31SPResultValueItemHashTableEntryS2_, 
                        __ZNK37SPResultItemHashTableEntryRecencyLessclERK31SPResultValueItemHashTableEntryS2_, 
-                       _areExplicitBooksForbidden, _bootDriveIsFast, _isEventSearchIntent, 
-                       _sp_analytics_log_timing, _sp_analytics_log_timing_with_bundle_id, 
+                       _areExplicitBooksForbidden, _bootDriveIsFast, _extractSearchTermFromQUParse, 
+                       _isAppOnlySearch, _sp_analytics_log_timing, _sp_analytics_log_timing_with_bundle_id, 
                        _spotlightPrefsId ]
     objc-classes:    [ LimitQueue, PRSCalculationResult, PRSCalculatorResult, PRSConversion, 
                        PRSConversionResult, PRSCurrencyConversionResult, PRSDictionaryAsyncCard, 
@@ -202,6 +202,6 @@ exports:
     objc-ivars:      [ SPCoreSpotlightQuery._queryCanceled, SPCoreSpotlightQuery._queryLock, 
                        SPCoreSpotlightQuery._suggestions, SPQueryTask._queryStartTime, 
                        SPQueryTask._shortcutResultChecked, SPQueryTask._topHitSection ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ __Z14getMaxHeapSizeP8NSStringbbil, __Z19collectIndexResultsP7NSArrayIP16CSSearchableItemEPK20SPSearchQueryContextbilR20IndexResultsRegistry ]
 ...

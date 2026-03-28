@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Geometry.framework/Versions/A/Geometry'
 current-version: 55.0.3
 swift-abi-version: 7
@@ -14,7 +13,7 @@ exports:
                        __ZTINSt3__110__function6__baseIFbjEEE, __ZTINSt3__110__function6__baseIFjRKjEEE, 
                        __ZTINSt3__110__function6__baseIFjRKjS3_EEE, __ZTINSt3__110__function6__baseIFjjEEE, 
                        __ZTINSt3__110__function6__baseIFjjjEEE, __ZTINSt3__110__function6__baseIFvPKDv3_dEEE, 
-                       __ZTINSt3__110__function6__baseIFvPKDv3_fEEE, __ZTINSt3__110__function6__funcINS_8functionIFjRKjEEENS_9allocatorIS6_EEFjjEEE, 
+                       __ZTINSt3__110__function6__baseIFvPKDv3_fEEE, __ZTINSt3__110__function6__funcINS_8functionIFjRKjEEEFjjEEE, 
                        __ZTINSt3__133__unary_function_keep_layout_baseIRKjjEE, __ZTINSt3__18functionIFjRKjEEE, 
                        __ZTSNSt3__110__function34__maybe_derive_from_unary_functionIFjRKjEEE, 
                        __ZTSNSt3__110__function35__maybe_derive_from_binary_functionIFjRKjEEE, 
@@ -23,10 +22,9 @@ exports:
                        __ZTSNSt3__110__function6__baseIFbjEEE, __ZTSNSt3__110__function6__baseIFjRKjEEE, 
                        __ZTSNSt3__110__function6__baseIFjRKjS3_EEE, __ZTSNSt3__110__function6__baseIFjjEEE, 
                        __ZTSNSt3__110__function6__baseIFjjjEEE, __ZTSNSt3__110__function6__baseIFvPKDv3_dEEE, 
-                       __ZTSNSt3__110__function6__baseIFvPKDv3_fEEE, __ZTSNSt3__110__function6__funcINS_8functionIFjRKjEEENS_9allocatorIS6_EEFjjEEE, 
+                       __ZTSNSt3__110__function6__baseIFvPKDv3_fEEE, __ZTSNSt3__110__function6__funcINS_8functionIFjRKjEEEFjjEEE, 
                        __ZTSNSt3__133__unary_function_keep_layout_baseIRKjjEE, __ZTSNSt3__18functionIFjRKjEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Plane3Type8Geometry31ApproximateConvexDecomposition3PTl', 
                        '_$s11OptionsType8Geometry31ApproximateConvexDecomposition3PTl', 
                        '_$s13CreateOptions8Geometry19PointCloudLaplacianPTl', '_$s13CreateOptions8Geometry4BVH2PTl', 

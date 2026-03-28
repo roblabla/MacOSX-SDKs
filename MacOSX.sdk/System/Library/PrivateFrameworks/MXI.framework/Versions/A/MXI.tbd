@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MXI.framework/Versions/A/MXI'
 swift-abi-version: 7
 exports:
@@ -13,8 +12,7 @@ exports:
                        __ZTSN4core10FileReaderE, __ZTSN4core10FileWriterE, __ZTSN4core6ReaderE, 
                        __ZTSN4core6WriterE, __ZTSN5image6ReaderE, __ZTSN5image6WriterE, 
                        __ZTSNSt3__110__function6__baseIFjvEEE, __ZTSNSt3__110__function6__baseIFvvEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MXIAtlasConfigurationCompression, _MXIAtlasConfigurationDownsample, 
                        _MXIAtlasConfigurationTransferFunction, _MXIBuildOptionASTCBlockSize, 
                        _MXIBuildOptionASTCGPUFastSkipThreshold, _MXIBuildOptionASTCGPURankModesCountRatio, 
@@ -128,7 +126,7 @@ exports:
                        MXIRenderer, MXIScene, MXISceneBuilder, MXISceneBuilderTiled, 
                        MXISceneUSDZReader, MXISceneUSDZWriter, MXIUserError, MXIUtilities ]
     weak-symbols:    [ __ZN4core10ThreadPool4Impl18worker_entry_pointEv, __ZNSt3__119piecewise_constructE ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     weak-symbols:    [ __ZGVZ10select_msb7vfloat4S_6vmask4E3msb, __ZGVZ4mask6vmask4E5shift, 
                        __ZZ10select_msb7vfloat4S_6vmask4E3msb, __ZZ4mask6vmask4E5shift ]
 ...

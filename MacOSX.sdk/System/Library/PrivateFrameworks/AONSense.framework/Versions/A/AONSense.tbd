@@ -1,13 +1,32 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AONSense.framework/Versions/A/AONSense.dylib'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s8AONSense11isAvailableSbyF', '_$s8AONSense22ALKappaConfigRequesterC07requestC0yyKFTj', 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s8AONSense11isAvailableSbyF', '_$s8AONSense18ALVLSessionManagerC13stopVLSessionyyKFTj', 
+                       '_$s8AONSense18ALVLSessionManagerC13stopVLSessionyyKFTq', 
+                       '_$s8AONSense18ALVLSessionManagerC14startVLSessionyyKFTj', 
+                       '_$s8AONSense18ALVLSessionManagerC14startVLSessionyyKFTq', 
+                       '_$s8AONSense18ALVLSessionManagerC20onSessionInterruptedyycSgvMTj', 
+                       '_$s8AONSense18ALVLSessionManagerC20onSessionInterruptedyycSgvMTq', 
+                       '_$s8AONSense18ALVLSessionManagerC20onSessionInterruptedyycSgvgTj', 
+                       '_$s8AONSense18ALVLSessionManagerC20onSessionInterruptedyycSgvgTq', 
+                       '_$s8AONSense18ALVLSessionManagerC20onSessionInterruptedyycSgvpMV', 
+                       '_$s8AONSense18ALVLSessionManagerC20onSessionInterruptedyycSgvsTj', 
+                       '_$s8AONSense18ALVLSessionManagerC20onSessionInterruptedyycSgvsTq', 
+                       '_$s8AONSense18ALVLSessionManagerC5queue8callbackACSo012OS_dispatch_D0C_y10Foundation4DataVctKcfC', 
+                       '_$s8AONSense18ALVLSessionManagerC5queue8callbackACSo012OS_dispatch_D0C_y10Foundation4DataVctKcfCTj', 
+                       '_$s8AONSense18ALVLSessionManagerC5queue8callbackACSo012OS_dispatch_D0C_y10Foundation4DataVctKcfCTq', 
+                       '_$s8AONSense18ALVLSessionManagerC5queue8callbackACSo012OS_dispatch_D0C_y10Foundation4DataVctKcfc', 
+                       '_$s8AONSense18ALVLSessionManagerC5queueACSo012OS_dispatch_D0C_tcfC', 
+                       '_$s8AONSense18ALVLSessionManagerC5queueACSo012OS_dispatch_D0C_tcfc', 
+                       '_$s8AONSense18ALVLSessionManagerCMa', '_$s8AONSense18ALVLSessionManagerCMm', 
+                       '_$s8AONSense18ALVLSessionManagerCMn', '_$s8AONSense18ALVLSessionManagerCMo', 
+                       '_$s8AONSense18ALVLSessionManagerCMu', '_$s8AONSense18ALVLSessionManagerCN', 
+                       '_$s8AONSense18ALVLSessionManagerCfD', '_$s8AONSense18ALVLSessionManagerCfd', 
+                       '_$s8AONSense22ALKappaConfigRequesterC07requestC0yyKFTj', 
                        '_$s8AONSense22ALKappaConfigRequesterC07requestC0yyKFTq', 
                        '_$s8AONSense22ALKappaConfigRequesterC10_xpcClient5ALXPC11ALXPCClientCvMTj', 
                        '_$s8AONSense22ALKappaConfigRequesterC10_xpcClient5ALXPC11ALXPCClientCvMTq', 

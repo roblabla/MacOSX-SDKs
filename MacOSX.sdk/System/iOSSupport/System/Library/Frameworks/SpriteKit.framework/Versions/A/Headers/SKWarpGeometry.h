@@ -66,7 +66,6 @@ SK_EXPORT API_AVAILABLE(ios(10.0), tvos(10.0), watchos(3.0), macos(10.12)) @inte
  [0]---[1]---[2]
  
  */
-#if (defined(SWIFT_SDK_OVERLAY_SPRITEKIT_EPOCH) && SWIFT_SDK_OVERLAY_SPRITEKIT_EPOCH >= 1)
 + (instancetype)gridWithColumns:(NSInteger)cols
                            rows:(NSInteger)rows
                 sourcePositions:(nullable const vector_float2 *)sourcePositions
@@ -77,18 +76,6 @@ SK_EXPORT API_AVAILABLE(ios(10.0), tvos(10.0), watchos(3.0), macos(10.12)) @inte
                            rows:(NSInteger)rows
                 sourcePositions:(nullable const vector_float2 *)sourcePositions
                   destPositions:(nullable const vector_float2 *)destPositions NS_DESIGNATED_INITIALIZER NS_REFINED_FOR_SWIFT;
-#else
-+ (instancetype)gridWithColumns:(NSInteger)cols
-                           rows:(NSInteger)rows
-                sourcePositions:(nullable const vector_float2 *)sourcePositions
-                  destPositions:(nullable const vector_float2 *)destPositions;
-
-/* init with the specified dimensions, source and dest positions. */
-- (instancetype)initWithColumns:(NSInteger)cols
-                           rows:(NSInteger)rows
-                sourcePositions:(nullable const vector_float2 *)sourcePositions
-                  destPositions:(nullable const vector_float2 *)destPositions NS_DESIGNATED_INITIALIZER;
-#endif
 
 /* the number of columns in this grid */
 @property (nonatomic, readonly) NSInteger numberOfColumns;
@@ -104,13 +91,9 @@ SK_EXPORT API_AVAILABLE(ios(10.0), tvos(10.0), watchos(3.0), macos(10.12)) @inte
 - (vector_float2)sourcePositionAtIndex:(NSInteger)index;
 - (vector_float2)destPositionAtIndex:(NSInteger)index;
 
-#if (defined(SWIFT_SDK_OVERLAY_SPRITEKIT_EPOCH) && SWIFT_SDK_OVERLAY_SPRITEKIT_EPOCH >= 1)
 - (instancetype)gridByReplacingSourcePositions:(const vector_float2 *)sourcePositions NS_REFINED_FOR_SWIFT;
 - (instancetype)gridByReplacingDestPositions:(const vector_float2 *)destPositions NS_REFINED_FOR_SWIFT;
-#else
-- (instancetype)gridByReplacingSourcePositions:(const vector_float2 *)sourcePositions;
-- (instancetype)gridByReplacingDestPositions:(const vector_float2 *)destPositions;
-#endif
+
 @end
 
 

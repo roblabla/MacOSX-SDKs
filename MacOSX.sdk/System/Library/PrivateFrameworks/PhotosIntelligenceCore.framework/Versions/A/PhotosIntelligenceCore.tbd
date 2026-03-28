@@ -1,18 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosIntelligenceCore.framework/Versions/A/PhotosIntelligenceCore'
-current-version: 821.0.120
+current-version: 841.0.101
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ PhotoAnalysis, PhotoLibraryServices, PhotosGraph, PhotosIntelligence, 
                        PhotosTests, PhotosUICore, PhotosUICoreProto, graphctl, photosctl ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Evaluation22PhotosIntelligenceCore22SummaryItemRequirementPTl', 
                        '_$s11Requirement22PhotosIntelligenceCore011SummaryItemA10EvaluationPTl', 
                        '_$s12ClusterState22PhotosIntelligenceCore24RoundRobinElectionHelperPTl', 

@@ -246,10 +246,11 @@
 #  define NS_SWIFT_ASYNC_NAME(NAME)
 #endif
 #if __has_attribute(swift_attr)
-#  define NS_SWIFT_UI_ACTOR __attribute__((swift_attr("@UIActor")))
+#  define NS_SWIFT_MAIN_ACTOR __attribute__((swift_attr("@MainActor")))
 #else
-#  define NS_SWIFT_UI_ACTOR
+#  define NS_SWIFT_MAIN_ACTOR
 #endif
+#define NS_SWIFT_UI_ACTOR NS_SWIFT_MAIN_ACTOR
 #if __has_attribute(swift_async_error)
 #  define NS_SWIFT_ASYNC_NOTHROW __attribute__((swift_async_error(none)))
 #  define NS_SWIFT_ASYNC_THROWS_ON_TRUE(TRUE_PARAMETER_INDEX) __attribute__((swift_async_error(nonzero_argument, TRUE_PARAMETER_INDEX)))

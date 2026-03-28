@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TeaFoundation.framework/Versions/A/TeaFoundation'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ BookAnalytics,BookCore,Books,BooksInternalExtras,BooksPersonalization,BooksPersonalizationTests,EngagementCollector,AEBookPlugins,NewsInternalExtras,NewsPersonalization,NewsServices,NewsServicesInternal,NewsTag,NewsToday,NewsToday2,NewsTodayIntents,NewsWidgetIntents,News,NVCDemo,ArticleNotificationExtension,ArticleNotificationServiceExtension,NewsNotificationServiceExtension,MarketingNotificationExtension,OpenInNews,Feldspar Tests,NewsInternalSettings,NewsSettings,NewsUI,NewsUITests,newsd,com.apple.news,NewsAnalyticsUpload,NewsUI2,NewsUI2Tests,NewsFeed,NewsFeedTests,NewsKit,NewsKitTests,NewsKitDemo,NewsLiveActivitiesCore,NewsLiveActivitiesCoreTests,NewsArticles,NewsArticlesTests,NewsAds,NewsAdsTests,NewsEngagementCollector,NewsFormat,NewsFormatTests,NewsSubscription,NewsSubscriptionTests,NewsAnalytics,NewsAnalyticsTests,Feldspar,Silex,SilexWeb,NewsArticleViewer,NewsArticleQuickLook,NewsEngagement,NewsEngagementTests,SilexDebugger,NewsDiagnosticExtension,NanoNewsWidgetExtension,NanoNews,NanoNewsInternalExtras,NanoNewsUI,NanoNewsDataService,NanoNewsAnalytics,NanoNewsHeadlines,NewsPersonalizationTests,NewsAudio,NewsDaemon,TodayFeedConfigDecoder,NewsScoringService,NewsCore,FeldsparCore iOS Tests,CookingKit,CookingKitTests,CookingSupport,CookingExampleAppSupport,CookingSupportTests,CookingSupportExampleHostApp,CookingKitExampleApp,,Stocks,StocksAnalytics,StocksAnalyticsTests,StocksCore,StocksCoreTests,StocksDetailIntents,StocksKit,StocksKitTests,StocksKitService,StocksTests,StocksToday,StocksUI,StocksUITests,StocksWidget,StocksDiagnosticExtension,StocksSettingsIntents,StocksPersonalization,Weather,WeatherAppSupport,WeatherAppSupportTests,WeatherCharts,WeatherDemo,Kinsale,WeatherCore,WeatherCoreTests,WeatherKit,WeatherKitDemo,WeatherKitTests,WeatherMaps,WeatherMapsTests,WeatherUI,WeatherUITests,WeatherDaemon,WeatherDaemonTests,weatherd,WeatherSettings,WeatherSettingsIntentsExtension,WeatherWidget,WeatherWidgetExtension,WeatherIntents,WeatherAppIntents,WeatherUnitTests,KinsaleAnalytics,WeatherAnalytics,WeatherAnalyticsTests,KinsaleUI,WeatherUI,WeatherDiagnosticExtension,WeatherNotifications,WeatherDaemonMemoryTests,NanoWeather,NanoWeatherDiagnosticExtension,nanoweatherd,WeatherInternalExtras,WeatherFace,WeatherMenuBar,Urchin,,TeaBreeze,TeaBreezeTests,TeaBreezeInternalExtras,Breeze,TeaCharts,TeaChartsTests,TeaDB,TeaDBTests,TeaDemo,TeaFoundationTests,TeaSettings,TeaSettingsTests,TeaState,TeaStateCatalog,TeaStateTests,TeaStateInternalExtras,TeaSnappy,TeaSnappyTests,TeaTemplate,TeaTemplateTests,TeaUI,TeaUITests,SwiftUI,TeaBreezeInternalExtras,TeaStateTool,TeaBreezeCatalog ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    clients:         [ BookAnalytics,BookCore,Books,BooksInternalExtras,BooksPersonalization,BooksPersonalizationTests,EngagementCollector,AEBookPlugins,NewsInternalExtras,NewsPersonalization,NewsServices,NewsServicesInternal,NewsTag,NewsToday,NewsToday2,NewsTodayIntents,NewsWidgetIntents,News,NVCDemo,ArticleNotificationExtension,ArticleNotificationServiceExtension,NewsNotificationServiceExtension,MarketingNotificationExtension,OpenInNews,Feldspar Tests,NewsInternalSettings,NewsSettings,NewsUI,NewsUITests,newsd,com.apple.news,NewsAnalyticsUpload,NewsUI2,NewsUI2Tests,NewsFeed,NewsFeedTests,NewsKit,NewsKitTests,NewsKitDemo,NewsLiveActivitiesCore,NewsLiveActivitiesCoreTests,NewsArticles,NewsArticlesTests,NewsAds,NewsAdsTests,NewsEngagementCollector,NewsFormat,NewsFormatTests,NewsSubscription,NewsSubscriptionTests,NewsAnalytics,NewsAnalyticsTests,Feldspar,Silex,SilexWeb,NewsArticleViewer,NewsArticleQuickLook,NewsEngagement,NewsEngagementTests,SilexDebugger,NewsDiagnosticExtension,NanoNewsWidgetExtension,NanoNews,NanoNewsInternalExtras,NanoNewsUI,NanoNewsDataService,NanoNewsAnalytics,NanoNewsHeadlines,NewsPersonalizationTests,NewsAudio,NewsDaemon,TodayFeedConfigDecoder,NewsScoringService,NewsUserEvents,NewsCore,FeldsparCore iOS Tests,CookingKit,CookingKitTests,CookingSupport,CookingExampleAppSupport,CookingSupportTests,CookingSupportExampleHostApp,CookingKitExampleApp,,Stocks,StocksAnalytics,StocksAnalyticsTests,StocksCore,StocksCoreTests,StocksDetailIntents,StocksKit,StocksKitTests,StocksKitService,StocksTests,StocksToday,StocksUI,StocksUITests,StocksWidget,StocksDiagnosticExtension,StocksSettingsIntents,StocksPersonalization,Weather,WeatherAppSupport,WeatherAppSupportTests,WeatherCharts,WeatherDemo,Kinsale,WeatherCore,WeatherCoreTests,WeatherKit,WeatherKitDemo,WeatherKitTests,WeatherMaps,WeatherMapsTests,WeatherUI,WeatherUITests,WeatherDaemon,WeatherDaemonTests,weatherd,WeatherSettings,WeatherSettingsIntentsExtension,WeatherWidget,WeatherWidgetExtension,WeatherIntents,WeatherAppIntents,WeatherUnitTests,KinsaleAnalytics,WeatherAnalytics,WeatherAnalyticsTests,KinsaleUI,WeatherUI,WeatherDiagnosticExtension,WeatherNotifications,WeatherDaemonMemoryTests,NanoWeather,NanoWeatherDiagnosticExtension,nanoweatherd,WeatherInternalExtras,WeatherFace,WeatherMenuBar,Urchin,,TeaBreeze,TeaBreezeTests,TeaBreezeInternalExtras,Breeze,TeaCharts,TeaChartsTests,TeaDB,TeaDBTests,TeaDemo,TeaFoundationTests,TeaSettings,TeaSettingsTests,TeaState,TeaStateCatalog,TeaStateTests,TeaStateInternalExtras,TeaSnappy,TeaSnappyTests,TeaTemplate,TeaTemplateTests,TeaUI,TeaUITests,SwiftUI,TeaBreezeInternalExtras,TeaStateTool,TeaBreezeCatalog ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation11JSONDecoderC19KeyDecodingStrategyO03TeaA0E6customyAES2ScFZ', 
                        '_$s10Foundation12DateIntervalV03TeaA0E7tf_safe5start3endAcA0B0V_AItFZ', 
                        '_$s10Foundation3URLV03TeaA015BinaryDecodableADMc', '_$s10Foundation3URLV03TeaA015BinaryDecodableADWP', 
@@ -496,6 +493,16 @@ exports:
                        '_$s13TeaFoundation12SynchronizerCMn', '_$s13TeaFoundation12SynchronizerCMo', 
                        '_$s13TeaFoundation12SynchronizerCMu', '_$s13TeaFoundation12SynchronizerCN', 
                        '_$s13TeaFoundation12SynchronizerCfD', '_$s13TeaFoundation12SynchronizerCfd', 
+                       '_$s13TeaFoundation12ThrowingLazyC11loadedValuexvg', '_$s13TeaFoundation12ThrowingLazyC11loadedValuexvpMV', 
+                       '_$s13TeaFoundation12ThrowingLazyC13valueIfLoadedxSgvg', '_$s13TeaFoundation12ThrowingLazyC13valueIfLoadedxSgvpMV', 
+                       '_$s13TeaFoundation12ThrowingLazyC5valuexvg', '_$s13TeaFoundation12ThrowingLazyC5valuexvpMV', 
+                       '_$s13TeaFoundation12ThrowingLazyC9loadBlockACyxGxyYbKc_tcfC', 
+                       '_$s13TeaFoundation12ThrowingLazyC9loadBlockACyxGxyYbKc_tcfCTj', 
+                       '_$s13TeaFoundation12ThrowingLazyC9loadBlockACyxGxyYbKc_tcfCTq', 
+                       '_$s13TeaFoundation12ThrowingLazyC9loadBlockACyxGxyYbKc_tcfc', 
+                       '_$s13TeaFoundation12ThrowingLazyCMa', '_$s13TeaFoundation12ThrowingLazyCMn', 
+                       '_$s13TeaFoundation12ThrowingLazyCMo', '_$s13TeaFoundation12ThrowingLazyCMu', 
+                       '_$s13TeaFoundation12ThrowingLazyCfD', '_$s13TeaFoundation12ThrowingLazyCfd', 
                        '_$s13TeaFoundation12XPCInterfaceV16asNSXPCInterfaceSo0E0CyF', 
                        '_$s13TeaFoundation12XPCInterfaceV8protocolSo8ProtocolCvg', 
                        '_$s13TeaFoundation12XPCInterfaceV8protocolSo8ProtocolCvpMV', 
@@ -2209,6 +2216,7 @@ exports:
                        '_$s13TeaFoundation29RemoteNotificationFetchResultOMa', '_$s13TeaFoundation29RemoteNotificationFetchResultOMn', 
                        '_$s13TeaFoundation29RemoteNotificationFetchResultON', '_$s13TeaFoundation29RemoteNotificationFetchResultOSHAAMc', 
                        '_$s13TeaFoundation29RemoteNotificationFetchResultOSQAAMc', 
+                       '_$s13TeaFoundation29SafeishKeyedDecodingContainerV15decodeIfPresent_6forKey02orK0qd__Sgqd__m_xxtKSeRd__lF', 
                        '_$s13TeaFoundation29SafeishKeyedDecodingContainerV15decodeIfPresent_6forKeyqd__Sgqd__m_xtKSeRd__lF', 
                        '_$s13TeaFoundation29SafeishKeyedDecodingContainerV4safe9containerACyxGSb_s0deF0VyxGtcfC', 
                        '_$s13TeaFoundation29SafeishKeyedDecodingContainerV6decode_6forKeyqd__Sgqd__m_xtKSeRd__lF', 
@@ -2937,6 +2945,7 @@ exports:
                        '_$sST13TeaFoundationAA12Identifiable7ElementRpzrlE9mapToDictSDySSADGyF', 
                        '_$sST13TeaFoundationE11uniqueByPtrySay7ElementQzGqd__ADKXEKRld__ClF', 
                        '_$sST13TeaFoundationE19uniqueWithOptionals2bySay7ElementQzGqd__SgAEKXE_tKSHRd__lF', 
+                       '_$sST13TeaFoundationE6unique2by8favoringSay7ElementQzGs7KeyPathCyAFqd__G_AIyAFSbGtSHRd__lF', 
                        '_$sST13TeaFoundationE6unique2bySay7ElementQzGqd__AEKXE_tKSHRd__lF', 
                        '_$sST13TeaFoundationE9groupedByySDyqd__Say7ElementQzGGqd__ADXESHRd__lF', 
                        '_$sST13TeaFoundations8Sendable7ElementRpzrlE13concurrentMapySayqd__Gqd__ADYaYbcYasABRd__lF', 
@@ -3016,6 +3025,8 @@ exports:
                        '_$sSo17CLMonitoringStateV13TeaFoundationE14readableStringSSvg', 
                        '_$sSo17CLMonitoringStateV13TeaFoundationE14readableStringSSvpMV', 
                        '_$sSo17OS_dispatch_groupC13TeaFoundationE17notifySyncIfEmpty5queue5blockySo0a1_b1_J0C_yyctF', 
+                       '_$sSo17OS_dispatch_queueC13TeaFoundationE48runBlockOnPrivateQueueInClassThatShouldBeAnActoryxxyq_YKcYaq_YKs5ErrorR_r0_lF', 
+                       '_$sSo17OS_dispatch_queueC13TeaFoundationE48runBlockOnPrivateQueueInClassThatShouldBeAnActoryxxyq_YKcYaq_YKs5ErrorR_r0_lFTu', 
                        '_$sSo17OS_dispatch_queueC13TeaFoundationE9syncValueyxSgAEyclF', 
                        '_$sSo18NSAttributedStringC13TeaFoundationE15addingAttribute_5valueABSo0aB3Keya_yptF', 
                        '_$sSo18NSAttributedStringC13TeaFoundationE_9argumentsA2B_ABdtcfC', 

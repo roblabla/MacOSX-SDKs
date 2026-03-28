@@ -343,9 +343,31 @@ API_AVAILABLE(macos(10.11), ios(8.0)) NS_SWIFT_SENDABLE
 @property (nullable, readonly) NSString *label;
 @property (readonly) id <MTLDevice> device;
 
-/// Obtains a reflection object for this render pipeline.
+/// The render pipeline's reflection information, if available.
 ///
-/// When you create the pipeline through an ``MTLDevice`` instance, reflection is `nil`.
+/// The property is `nil` by default to help reduce your app's memory footprint,
+/// but you can create reflection information when your app needs it.
+///
+/// Create reflection information by building a pipeline from an
+/// ``MTL4Compiler`` instance with the following steps:
+///
+/// 1. Configure the ``MTL4PipelineOptions/shaderReflection`` property of an ``MTL4PipelineOptions`` instance.
+/// 2. Assign that instance to the ``MTL4PipelineDescriptor/options`` property of an ``MTL4PipelineDescriptor`` instance.
+/// 3. Create a compute pipeline state by passing that pipeline descriptor to one of the ``MTL4Compiler`` instance's methods.
+///
+/// During development, the property may contain reflection information without these steps
+/// because a GPU frame capture, Metal API validation layer, or shader validation layer
+/// can request reflection information when you enable them.
+/// You need to request reflection information if your app depends on it
+/// because Metal might not load these layers when you distribute your app.
+
+///
+/// > Tip:
+/// Verify the apps that need reflection information in production by testing them
+/// without a frame capture, Metal API validation layer, or shader validation layer.
+///
+/// The property is `nil` when you create a pipeline state from an``MTLDevice`` instance,
+/// such as with its ``MTLDevice/newRenderPipelineStateWithDescriptor:error:`` method.
 @property (nullable, readonly) MTLRenderPipelineReflection* reflection API_AVAILABLE(macos(26.0), ios(26.0));
 
 /// Obtains a function handle for the a specific function this pipeline links at the Metal IR level.
@@ -647,7 +669,6 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 /*!
  @property requiredThreadsPerThreadgroup
  @abstract Sets the required threads-per-threadgroup during tile dispatches. The `threadsPerTile` argument of any tile dispatch must match to this value if it is set.
-           Optional, unless the pipeline is going to use CooperativeTensors in which case this must be set.
            Setting this to a size of 0 in every dimension disables this property
 */
 @property(readwrite, nonatomic) MTLSize requiredThreadsPerThreadgroup API_AVAILABLE(macos(26.0), ios(26.0));
@@ -873,7 +894,6 @@ MTL_EXPORT API_AVAILABLE(macos(13.0), ios(16.0))
 /*!
  @property requiredThreadsPerObjectThreadgroup
  @abstract Sets the required object threads-per-threadgroup during mesh draws. The `threadsPerObjectThreadgroup` argument of any draw must match to this value if it is set.
-           Optional, unless the pipeline is going to use CooperativeTensors in which case this must be set.
            Setting this to a size of 0 in every dimension disables this property
 */
 @property (readwrite, nonatomic) MTLSize requiredThreadsPerObjectThreadgroup API_AVAILABLE(macos(26.0), ios(26.0));
@@ -881,7 +901,6 @@ MTL_EXPORT API_AVAILABLE(macos(13.0), ios(16.0))
 /*!
  @property requiredThreadsPerMeshThreadgroup
  @abstract Sets the required mesh threads-per-threadgroup during mesh draws. The `threadsPerMeshThreadgroup` argument of any draw must match to this value if it is set.
-           Optional, unless the pipeline is going to use CooperativeTensors in which case this must be set.
            Setting this to a size of 0 in every dimension disables this property
 */
 @property (readwrite, nonatomic) MTLSize requiredThreadsPerMeshThreadgroup API_AVAILABLE(macos(26.0), ios(26.0));

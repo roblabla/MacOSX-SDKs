@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Metal.framework/Versions/A/Metal'
-current-version: 370.64.2
+current-version: 372.16
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MTL4CommandQueueErrorDomain, _MTLAPIDebugEnabled, _MTLAddDevice, 
                        _MTLAddMessageObserver, _MTLBVHDescriptorForMTLAccelerationStructureDescriptor, 
                        _MTLBinaryArchiveDomain, _MTLBinaryFunctionPerformanceKeyFunctionName, 
@@ -52,7 +50,7 @@ exports:
                        _MTLDataTypeGetAlignment, _MTLDataTypeGetComponentCount, _MTLDataTypeGetComponentType, 
                        _MTLDataTypeGetShaderTypeName, _MTLDataTypeGetSignedType, 
                        _MTLDataTypeGetSize, _MTLDataTypeGetVectorDataType, _MTLDataTypeString, 
-                       _MTLDebugValidateMTLPixelFormat, _MTLDispatchListAppendBlock, 
+                       _MTLDebugValidateMTLPixelFormat, _MTLDeviceErrorDomain, _MTLDispatchListAppendBlock, 
                        _MTLDispatchListApply, _MTLDynamicLibraryDomain, _MTLDynamicLibraryLoadOptionsFromPipelineOptions, 
                        _MTLDynamicLibraryPerformanceKeyInstallName, _MTLEnumerateIndirectResources, 
                        _MTLFailureTypeGetEnabled, _MTLFailureTypeGetErrorModeType, 
@@ -155,9 +153,10 @@ exports:
                        __MTLGLLabel, __MTLGPUFamilyString, __MTLGetAttachmentSize, 
                        __MTLGetSerializedVertexFormat, __MTLHashState, __MTLInvalidResourceIndex, 
                        __MTLIsInternalBuild, __MTLLibraryTypeString, __MTLMessageContextBegin_, 
-                       __MTLMessageContextEnd, __MTLMessageContextEndNSError, __MTLMessageContextPush_, 
-                       __MTLMessageTypeFromFailureType, __MTLNotifyDeviceRemovalRequested, 
-                       __MTLNotifyDeviceWasAdded, __MTLNotifyDeviceWasRemoved, __MTLNotifyMessageObservers, 
+                       __MTLMessageContextEnd, __MTLMessageContextEndNewNSError, 
+                       __MTLMessageContextPush_, __MTLMessageTypeFromFailureType, 
+                       __MTLNotifyDeviceRemovalRequested, __MTLNotifyDeviceWasAdded, 
+                       __MTLNotifyDeviceWasRemoved, __MTLNotifyMessageObservers, 
                        __MTLOverrideCurrentPreferredDevice, __MTLSetCompileTimeStatisticsEnabled, 
                        __MTLSystemSupportsRemovableGPUs, __MTLTensorElementCount, 
                        __MTLTensorExtentsAreEqual, __MTLValidateRenderPassDescriptorTileProperties, 
@@ -185,7 +184,7 @@ exports:
                        _kMetalTextureSparseValue, _kMetalTextureSwizzleKey, _kMetalTextureType, 
                        _kMetalTextureUsage, _kMetalTextureWidth, _kMetalTextureWriteAccessPattern, 
                        _logMode, _newDataTypeDescriptionForIndirectArgument, _newFunctionReflectionWithFunctionDescriptor, 
-                       _setShaderCachePath, _validateDispatchThreadsPerThreadgroupWithRTPTG, 
+                       _setShaderCachePath, _tensorDataTypeBitCount, _validateDispatchThreadsPerThreadgroupWithRTPTG, 
                        _validateMTLDataTypeConstant, _validateRequiredThreadsPerThreadgroup, 
                        _verifySlice, _verifyStrides ]
     objc-classes:    [ MTL4AccelerationStructureBoundingBoxGeometryDescriptor, MTL4AccelerationStructureCurveGeometryDescriptor, 
@@ -366,11 +365,13 @@ exports:
                        _MTL4CommandAllocator._device, _MTL4CommandAllocator._globalTraceObjectID, 
                        _MTL4CommandAllocator._privateDataTable, _MTL4CommandBuffer._commandAllocator, 
                        _MTL4CommandBuffer._device, _MTL4CommandBuffer._globalTraceObjectID, 
-                       _MTL4CommandEncoder._commandAllocator, _MTL4CommandEncoder._device, 
-                       _MTL4CommandEncoder._globalTraceObjectID, _MTL4CommandEncoder._labelTraceID, 
-                       _MTL4CommandQueue._backgroundTrackingPID, _MTL4CommandQueue._device, 
-                       _MTL4CommandQueue._globalTraceObjectID, _MTL4CommandQueue._lastCommittedCommandBuffer, 
+                       _MTL4CommandBuffer._labelTraceID, _MTL4CommandEncoder._commandAllocator, 
+                       _MTL4CommandEncoder._device, _MTL4CommandEncoder._globalTraceObjectID, 
+                       _MTL4CommandEncoder._labelTraceID, _MTL4CommandQueue._backgroundTrackingPID, 
+                       _MTL4CommandQueue._device, _MTL4CommandQueue._globalTraceObjectID, 
+                       _MTL4CommandQueue._labelTraceID, _MTL4CommandQueue._lastCommittedCommandBuffer, 
                        _MTL4CommandQueue._lastCommittedCommandBufferGeneration, _MTL4CommandQueue._submissionQueue, 
+                       _MTL4CompilerTask._completionHandlerCondition, _MTL4CompilerTask._hasNoPendingCompletionHandlers, 
                        _MTL4CompilerTask._status, _MTL4CompilerTask._statusCondition, 
                        _MTL4CompilerTask._statusMutex, _MTL4CompilerTask._tokenCondition, 
                        _MTLAllocation._allocationType, _MTLCommandBuffer._StatEnabled, 
@@ -443,17 +444,17 @@ exports:
                        _MTLDevice._commandQueueWaitLock, _MTLDevice._compilerMaximizationReferenceCount, 
                        _MTLDevice._emulationMeshPrefixSum1PSO, _MTLDevice._emulationMeshPrefixSum2PSO, 
                        _MTLDevice._emulationMeshPrefixSum3PSO, _MTLDevice._emulationNoObjectPrefixSumPSO, 
-                       _MTLDevice._emulationObjectPrefixSumPSO, _MTLDevice._featureQueries, 
-                       _MTLDevice._globalTraceObjectID, _MTLDevice._kRateLimitCriticalCommandQueues, 
-                       _MTLDevice._kRateLimitEnabled, _MTLDevice._kRateLimitShouldOnlyLogOnce, 
-                       _MTLDevice._kRateLimitTimePenalty, _MTLDevice._limits, _MTLDevice._logBufferResidencyLock, 
-                       _MTLDevice._logStateDescriptor, _MTLDevice._needsEncoderTypeMatchingProgressBlits, 
-                       _MTLDevice._nextCommandQueueAllowedDateBuffer, _MTLDevice._progressTrackBufferStack, 
-                       _MTLDevice._progressTrackComputePipeline, _MTLDevice._progressTrackRenderPipeline, 
-                       _MTLFunction._debugInstrumentationData, _MTLFunction._device, 
-                       _MTLFunction._functionConstantDictionary, _MTLFunction._functionConstants, 
-                       _MTLFunction._functionType, _MTLFunction._libraryData, _MTLFunction._name, 
-                       _MTLFunction._options, _MTLFunction._precompiledOutput, _MTLFunction._vendorPrivate, 
+                       _MTLDevice._emulationObjectPrefixSumPSO, _MTLDevice._globalTraceObjectID, 
+                       _MTLDevice._kRateLimitCriticalCommandQueues, _MTLDevice._kRateLimitEnabled, 
+                       _MTLDevice._kRateLimitShouldOnlyLogOnce, _MTLDevice._kRateLimitTimePenalty, 
+                       _MTLDevice._limits, _MTLDevice._logBufferResidencyLock, _MTLDevice._logStateDescriptor, 
+                       _MTLDevice._needsEncoderTypeMatchingProgressBlits, _MTLDevice._nextCommandQueueAllowedDateBuffer, 
+                       _MTLDevice._progressTrackBufferStack, _MTLDevice._progressTrackComputePipeline, 
+                       _MTLDevice._progressTrackRenderPipeline, _MTLFunction._debugInstrumentationData, 
+                       _MTLFunction._device, _MTLFunction._functionConstantDictionary, 
+                       _MTLFunction._functionConstants, _MTLFunction._functionType, 
+                       _MTLFunction._libraryData, _MTLFunction._name, _MTLFunction._options, 
+                       _MTLFunction._precompiledOutput, _MTLFunction._vendorPrivate, 
                        _MTLFunction._vertexAttributes, _MTLHeap._heapResourceOptions, 
                        _MTLHeap._heapType, _MTLIOCommandBuffer._currentStagingBuffer, 
                        _MTLIOCommandBuffer._currentStagingBufferOffset, _MTLIOCommandBuffer._currentStagingBufferRemainingBytes, 
@@ -526,7 +527,7 @@ exports:
                        _MTLProgramAddressTableMappedBinary._type, _MTLSamplerState._device, 
                        _MTLSamplerState._gpuAddress, _MTLSamplerState._label, _MTLSamplerState._pixelFormat, 
                        _MTLSamplerState._resourceIndex, _PipelineLibrarySerializer._binarySerializer ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _MTLCopyAllDevicesWithObserver, _MTLDeviceRemovalRequestedNotification, 
                        _MTLDeviceWasAddedNotification, _MTLDeviceWasRemovedNotification, 
                        _MTLRemoveDeviceObserver ]

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MapsUI.framework/Versions/A/MapsUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s6MapsUI13ItemPreloaderC15resultIfPresentxSgyFTj', '_$s6MapsUI13ItemPreloaderC15resultIfPresentxSgyFTq', 
                        '_$s6MapsUI13ItemPreloaderC15unownedExecutorScevg', '_$s6MapsUI13ItemPreloaderC15unownedExecutorScevpMV', 
                        '_$s6MapsUI13ItemPreloaderC5fetchxyYaKFTj', '_$s6MapsUI13ItemPreloaderC5fetchxyYaKFTjTu', 
@@ -51,7 +51,7 @@ exports:
                        _MUPlaceViewControllerWillUpdatePlaceItemNotification, _MUScaledVisionMetric, 
                        _MUStringForGEOAmenityType, _MUViewContactRevealedAnalyticsModuleButton, 
                        _MapsUIConfig_AlwaysSuppressPrimaryActionInActionBar, _MapsUIConfig_AmenityNumberOfInlineItemsBeforeSeeAll, 
-                       _MapsUIConfig_DefaultVisibilityThresholdForPlaceCardModuleImpressions, 
+                       _MapsUIConfig_CategoryIDForTableReservationAnalytics, _MapsUIConfig_DefaultVisibilityThresholdForPlaceCardModuleImpressions, 
                        _MapsUIConfig_EnableARPPhotoCreditOnPhotoSlider, _MapsUIConfig_EnableARPRatingsCountAnimation, 
                        _MapsUIConfig_EnableDirectionsButtonInStaticActionBarLayout, 
                        _MapsUIConfig_EnableDirectionsButtonInStaticUnifiedActionRowLayout, 

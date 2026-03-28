@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-macos26.2 -target-variant x86_64-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 9.3.1 -module-name Vision
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-macos26.4 -target-variant x86_64-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 9.5.4 -module-name Vision
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import AVFoundation
 import Accelerate
 import CoreFoundation
@@ -86,18 +86,14 @@ public struct GenerateObjectnessBasedSaliencyImageRequest : Vision.ImageProcessi
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.GenerateObjectnessBasedSaliencyImageRequest.Revision? = nil)
-  #endif
   public var regionOfInterest: Vision.NormalizedRect
   public let revision: Vision.GenerateObjectnessBasedSaliencyImageRequest.Revision
   public static let supportedRevisions: [Vision.GenerateObjectnessBasedSaliencyImageRequest.Revision]
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.GenerateObjectnessBasedSaliencyImageRequest, b: Vision.GenerateObjectnessBasedSaliencyImageRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -133,12 +129,8 @@ public struct HumanBodyPose3DObservation : Vision.VisionObservation {
   public var description: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func joint(for jointName: Vision.HumanBodyPose3DObservation.JointName) -> Vision.Joint3D?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func allJoints(in groupName: Vision.HumanBodyPose3DObservation.JointsGroupName? = nil) -> [Vision.HumanBodyPose3DObservation.JointName : Vision.Joint3D]
-  #endif
   public func pointInImage(for jointName: Vision.HumanBodyPose3DObservation.JointName) -> Vision.NormalizedPoint
   public func parentJointName(for jointName: Vision.HumanBodyPose3DObservation.JointName) -> Vision.HumanBodyPose3DObservation.JointName
   public func cameraRelativePosition(for jointName: Vision.HumanBodyPose3DObservation.JointName) -> simd.simd_float4x4
@@ -160,9 +152,7 @@ public struct HumanBodyPose3DObservation : Vision.VisionObservation {
     case rightAnkle
     case root
     case spine
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
@@ -176,9 +166,7 @@ public struct HumanBodyPose3DObservation : Vision.VisionObservation {
     case rightArm
     case rightLeg
     case torso
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     public typealias AllCases = [Vision.HumanBodyPose3DObservation.JointsGroupName]
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
@@ -235,12 +223,8 @@ public protocol PoseProviding {
   associatedtype PoseJointsGroupName : Swift.CaseIterable, Swift.RawRepresentable where Self.PoseJointsGroupName.RawValue == Swift.String
   var availableJointNames: [Self.PoseJointName] { get }
   var availableJointsGroupNames: [Self.PoseJointsGroupName] { get }
-  #if compiler(>=5.3) && $NonescapableTypes
   func joint(for jointName: Self.PoseJointName) -> Vision.Joint?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   func allJoints(in groupName: Self.PoseJointsGroupName?) -> [Self.PoseJointName : Vision.Joint]
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public enum CoordinateOrigin {
@@ -296,9 +280,7 @@ public struct DetectAnimalBodyPoseRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.DetectAnimalBodyPoseRequest.Revision? = nil)
-  #endif
   public var supportedJointNames: [Vision.AnimalBodyPoseObservation.JointName] {
     get
   }
@@ -311,9 +293,7 @@ public struct DetectAnimalBodyPoseRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.DetectAnimalBodyPoseRequest, b: Vision.DetectAnimalBodyPoseRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -325,24 +305,12 @@ public protocol TargetedRequest : Vision.VisionRequest {
 }
 @_hasMissingDesignatedInitializers @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 final public class TargetedImageRequestHandler : Swift.Sendable {
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(sourceURL: Foundation.URL, targetURL: Foundation.URL, orientation: ImageIO.CGImagePropertyOrientation? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(source: CoreGraphics.CGImage, target: CoreGraphics.CGImage, orientation: ImageIO.CGImagePropertyOrientation? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(source: CoreImage.CIImage, target: CoreImage.CIImage, orientation: ImageIO.CGImagePropertyOrientation? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(source: CoreVideo.CVPixelBuffer, target: CoreVideo.CVPixelBuffer, orientation: ImageIO.CGImagePropertyOrientation? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(source: CoreMedia.CMSampleBuffer, target: CoreMedia.CMSampleBuffer, orientation: ImageIO.CGImagePropertyOrientation? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(source: Foundation.Data, target: Foundation.Data, orientation: ImageIO.CGImagePropertyOrientation? = nil)
-  #endif
   final public func perform<T>(_ request: T) async throws -> T.Result where T : Vision.TargetedRequest
   final public func perform<each T>(_ request: repeat each T) async throws -> (repeat (each T).Result) where repeat each T : Vision.TargetedRequest
   final public func performAll(_ requests: some Collection<any TargetedRequest>) -> some _Concurrency.AsyncSequence<Vision.VisionResult, Swift.Never>
@@ -363,18 +331,14 @@ public struct GenerateAttentionBasedSaliencyImageRequest : Vision.ImageProcessin
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.GenerateAttentionBasedSaliencyImageRequest.Revision? = nil)
-  #endif
   public var regionOfInterest: Vision.NormalizedRect
   public let revision: Vision.GenerateAttentionBasedSaliencyImageRequest.Revision
   public static let supportedRevisions: [Vision.GenerateAttentionBasedSaliencyImageRequest.Revision]
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.GenerateAttentionBasedSaliencyImageRequest, b: Vision.GenerateAttentionBasedSaliencyImageRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -423,9 +387,7 @@ final public class TrackTranslationalImageRegistrationRequest : Vision.ImageProc
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.TrackTranslationalImageRegistrationRequest.Revision? = nil, frameAnalysisSpacing: CoreMedia.CMTime? = nil)
-  #endif
   final public var supportedComputeStageDevices: [Vision.ComputeStage : [CoreML.MLComputeDevice]] {
     get
   }
@@ -442,9 +404,7 @@ final public class TrackTranslationalImageRegistrationRequest : Vision.ImageProc
   final public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   @objc deinit
   final public var hashValue: Swift.Int {
     get
@@ -473,10 +433,8 @@ public struct OpticalFlowObservation : Vision.VisionObservation, @unchecked Swif
   }
 }
 extension Vision.OpticalFlowObservation {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
   public init?(_ observation: Vision.VNPixelBufferObservation)
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
 public typealias NormalizedRegion = Vision.ContoursObservation.Contour
@@ -523,9 +481,7 @@ public struct DetectFaceCaptureQualityRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.DetectFaceCaptureQualityRequest.Revision? = nil)
-  #endif
   public var inputFaceObservations: [Vision.FaceObservation]?
   public var regionOfInterest: Vision.NormalizedRect
   public let revision: Vision.DetectFaceCaptureQualityRequest.Revision
@@ -533,9 +489,7 @@ public struct DetectFaceCaptureQualityRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.DetectFaceCaptureQualityRequest, b: Vision.DetectFaceCaptureQualityRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -556,9 +510,7 @@ final public class TrackObjectRequest : Vision.ImageProcessingRequest, Vision.St
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(detectedObject: any Vision.BoundingBoxProviding & Vision.VisionObservation, _ revision: Vision.TrackObjectRequest.Revision? = nil, frameAnalysisSpacing: CoreMedia.CMTime? = nil)
-  #endif
   final public let inputObservation: any Vision.BoundingBoxProviding & Vision.VisionObservation
   final public var regionOfInterest: Vision.NormalizedRect {
     get
@@ -570,9 +522,7 @@ final public class TrackObjectRequest : Vision.ImageProcessingRequest, Vision.St
   final public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   @objc deinit
   final public var hashValue: Swift.Int {
     get
@@ -608,9 +558,7 @@ public struct GenerateImageFeaturePrintRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.GenerateImageFeaturePrintRequest.Revision? = nil)
-  #endif
   public var cropAndScaleAction: Vision.ImageCropAndScaleAction
   public var regionOfInterest: Vision.NormalizedRect
   public let revision: Vision.GenerateImageFeaturePrintRequest.Revision
@@ -618,9 +566,7 @@ public struct GenerateImageFeaturePrintRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.GenerateImageFeaturePrintRequest, b: Vision.GenerateImageFeaturePrintRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -630,45 +576,21 @@ public struct GenerateImageFeaturePrintRequest : Vision.ImageProcessingRequest {
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public protocol ImageProcessingRequest : Vision.VisionRequest {
   var regionOfInterest: Vision.NormalizedRect { get set }
-  #if compiler(>=5.3) && $NonescapableTypes
   func perform(on pixelBuffer: CoreVideo.CVPixelBuffer, orientation: ImageIO.CGImagePropertyOrientation?) async throws -> Self.Result
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   func perform(on url: Foundation.URL, orientation: ImageIO.CGImagePropertyOrientation?) async throws -> Self.Result
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   func perform(on image: CoreGraphics.CGImage, orientation: ImageIO.CGImagePropertyOrientation?) async throws -> Self.Result
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   func perform(on image: CoreImage.CIImage, orientation: ImageIO.CGImagePropertyOrientation?) async throws -> Self.Result
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   func perform(on sampleBuffer: CoreMedia.CMSampleBuffer, orientation: ImageIO.CGImagePropertyOrientation?) async throws -> Self.Result
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   func perform(on data: Foundation.Data, orientation: ImageIO.CGImagePropertyOrientation?) async throws -> Self.Result
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 extension Vision.ImageProcessingRequest {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func perform(on pixelBuffer: CoreVideo.CVPixelBuffer, orientation: ImageIO.CGImagePropertyOrientation? = nil) async throws -> Self.Result
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func perform(on url: Foundation.URL, orientation: ImageIO.CGImagePropertyOrientation? = nil) async throws -> Self.Result
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func perform(on image: CoreGraphics.CGImage, orientation: ImageIO.CGImagePropertyOrientation? = nil) async throws -> Self.Result
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func perform(on image: CoreImage.CIImage, orientation: ImageIO.CGImagePropertyOrientation? = nil) async throws -> Self.Result
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func perform(on sampleBuffer: CoreMedia.CMSampleBuffer, orientation: ImageIO.CGImagePropertyOrientation? = nil) async throws -> Self.Result
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func perform(on data: Foundation.Data, orientation: ImageIO.CGImagePropertyOrientation? = nil) async throws -> Self.Result
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public struct TextObservation : Vision.VisionObservation, Vision.QuadrilateralProviding {
@@ -755,15 +677,11 @@ final public class VideoProcessor : Swift.Sendable {
     }
   }
   public init(_ videoURL: Foundation.URL)
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func addRequest<T>(_ request: T, cadence: Vision.VideoProcessor.Cadence? = nil) async throws -> some _Concurrency.AsyncSequence<T.Result, any Swift.Error> where T : Vision.VisionRequest
   
-  #endif
   final public func removeRequest(_ request: any Vision.VisionRequest) async -> Swift.Bool
   final public func cancel() async
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func startAnalysis(of timeRange: CoreMedia.CMTimeRange? = nil)
-  #endif
   @objc deinit
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
@@ -790,11 +708,9 @@ public enum VisionError : Swift.Error {
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 extension Vision.VisionError : Foundation.LocalizedError {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 extension Vision.VisionError {
@@ -816,12 +732,8 @@ public struct HumanHandPoseObservation : Vision.VisionObservation, Vision.PosePr
     public init(from decoder: any Swift.Decoder) throws
   }
   public let chirality: Vision.HumanHandPoseObservation.Chirality?
-  #if compiler(>=5.3) && $NonescapableTypes
   public func joint(for jointName: Vision.HumanHandPoseObservation.JointName) -> Vision.Joint?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func allJoints(in groupName: Vision.HumanHandPoseObservation.JointsGroupName? = nil) -> [Vision.HumanHandPoseObservation.PoseJointName : Vision.Joint]
-  #endif
   public var availableJointNames: [Vision.HumanHandPoseObservation.JointName] {
     get
   }
@@ -862,9 +774,7 @@ public struct HumanHandPoseObservation : Vision.VisionObservation, Vision.PosePr
     case littlePIP
     case littleMCP
     case wrist
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
@@ -877,9 +787,7 @@ public struct HumanHandPoseObservation : Vision.VisionObservation, Vision.PosePr
     case littleFinger
     case middleFinger
     case ringFinger
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     public typealias AllCases = [Vision.HumanHandPoseObservation.JointsGroupName]
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
@@ -919,9 +827,7 @@ public struct DetectFaceLandmarksRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.DetectFaceLandmarksRequest.Revision? = nil)
-  #endif
   public var inputFaceObservations: [Vision.FaceObservation]?
   public var regionOfInterest: Vision.NormalizedRect
   public let revision: Vision.DetectFaceLandmarksRequest.Revision
@@ -929,9 +835,7 @@ public struct DetectFaceLandmarksRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.DetectFaceLandmarksRequest, b: Vision.DetectFaceLandmarksRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -952,15 +856,11 @@ public struct RecognizeAnimalsRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.RecognizeAnimalsRequest.Revision? = nil)
-  #endif
   public enum Animal : Swift.String, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case dog
     case cat
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
@@ -976,9 +876,7 @@ public struct RecognizeAnimalsRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.RecognizeAnimalsRequest, b: Vision.RecognizeAnimalsRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -999,9 +897,7 @@ public struct DetectBarcodesRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.DetectBarcodesRequest.Revision? = nil)
-  #endif
   public var supportedSymbologies: [Vision.BarcodeSymbology] {
     get
   }
@@ -1013,9 +909,7 @@ public struct DetectBarcodesRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.DetectBarcodesRequest, b: Vision.DetectBarcodesRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1028,26 +922,20 @@ extension Vision.VNFaceLandmarkRegion2D {
     get
   }
   @nonobjc public func pointsInImage(imageSize: CoreFoundation.CGSize) -> [CoreFoundation.CGPoint]
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, *)
   @nonobjc public var precisionEstimatesPerPoint: [Swift.Float]? {
     get
   }
-  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, *)
 extension Vision.VNFaceObservation {
-  #if compiler(>=5.3) && $NonescapableTypes
   @nonobjc public var faceCaptureQuality: Swift.Float? {
     get
   }
-  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, *)
 extension Vision.VNRecognizedText {
-  #if compiler(>=5.3) && $NonescapableTypes
   @nonobjc public func boundingBox(for range: Swift.Range<Swift.String.Index>) throws -> Vision.VNRectangleObservation?
-  #endif
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, *)
 extension Vision.VNContour {
@@ -1221,12 +1109,8 @@ extension Vision.VNRequest {
   @nonobjc public var supportedComputeStageDevices: [Vision.VNComputeStage : [CoreML.MLComputeDevice]] {
     get throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @nonobjc public func computeDevice(for computeStage: Vision.VNComputeStage) -> CoreML.MLComputeDevice?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @nonobjc public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.VNComputeStage)
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public struct Joint3D : Swift.Codable, Swift.Equatable, Swift.Hashable, Swift.Sendable {
@@ -1257,9 +1141,7 @@ public struct DetectHumanBodyPoseRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.DetectHumanBodyPoseRequest.Revision? = nil)
-  #endif
   public var supportedJointNames: [Vision.HumanBodyPoseObservation.JointName] {
     get
   }
@@ -1273,9 +1155,7 @@ public struct DetectHumanBodyPoseRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.DetectHumanBodyPoseRequest, b: Vision.DetectHumanBodyPoseRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1296,9 +1176,7 @@ final public class DetectTrajectoriesRequest : Vision.ImageProcessingRequest, Vi
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(trajectoryLength: Swift.Int, _ revision: Vision.DetectTrajectoriesRequest.Revision? = nil, frameAnalysisSpacing: CoreMedia.CMTime? = nil)
-  #endif
   final public var targetFrameTime: CoreMedia.CMTime {
     get
     set
@@ -1328,9 +1206,7 @@ final public class DetectTrajectoriesRequest : Vision.ImageProcessingRequest, Vi
   final public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   @objc deinit
   final public var hashValue: Swift.Int {
     get
@@ -1376,9 +1252,7 @@ public struct DetectHumanHandPoseRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.DetectHumanHandPoseRequest.Revision? = nil)
-  #endif
   public var supportedJointNames: [Vision.HumanHandPoseObservation.JointName] {
     get
   }
@@ -1392,9 +1266,7 @@ public struct DetectHumanHandPoseRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.DetectHumanHandPoseRequest, b: Vision.DetectHumanHandPoseRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1415,9 +1287,7 @@ public struct CalculateImageAestheticsScoresRequest : Vision.ImageProcessingRequ
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.CalculateImageAestheticsScoresRequest.Revision? = nil)
-  #endif
   public var cropAndScaleAction: Vision.ImageCropAndScaleAction
   public var regionOfInterest: Vision.NormalizedRect
   public let revision: Vision.CalculateImageAestheticsScoresRequest.Revision
@@ -1425,9 +1295,7 @@ public struct CalculateImageAestheticsScoresRequest : Vision.ImageProcessingRequ
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.CalculateImageAestheticsScoresRequest, b: Vision.CalculateImageAestheticsScoresRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1546,21 +1414,15 @@ extension Vision.CoreMLFeatureValueObservation : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
 }
 extension Vision.CoreMLFeatureValueObservation {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
   public init?(_ observation: Vision.VNCoreMLFeatureValueObservation)
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public protocol VisionObservation : Swift.CustomStringConvertible, Swift.Decodable, Swift.Encodable, Swift.Hashable, Swift.Sendable {
   var uuid: Foundation.UUID { get }
   var confidence: Swift.Float { get }
-  #if compiler(>=5.3) && $NonescapableTypes
   var timeRange: CoreMedia.CMTimeRange? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   var originatingRequestDescriptor: Vision.RequestDescriptor? { get }
-  #endif
   func hash(into hasher: inout Swift.Hasher)
   var description: Swift.String { get }
 }
@@ -1600,20 +1462,14 @@ extension Vision.ClassificationObservation {
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public protocol VisionRequest : Swift.CustomStringConvertible, Swift.Hashable, Swift.Sendable {
   var supportedComputeStageDevices: [Vision.ComputeStage : [CoreML.MLComputeDevice]] { get }
-  #if compiler(>=5.3) && $NonescapableTypes
   func computeDevice(for computeStage: Vision.ComputeStage) -> CoreML.MLComputeDevice?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   var descriptor: Vision.RequestDescriptor { get }
   associatedtype Result
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 extension Vision.VisionRequest {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func computeDevice(for computeStage: Vision.ComputeStage) -> CoreML.MLComputeDevice?
-  #endif
   public var description: Swift.String {
     get
   }
@@ -1632,18 +1488,14 @@ public struct DetectDocumentSegmentationRequest : Vision.ImageProcessingRequest 
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.DetectDocumentSegmentationRequest.Revision? = nil)
-  #endif
   public var regionOfInterest: Vision.NormalizedRect
   public let revision: Vision.DetectDocumentSegmentationRequest.Revision
   public static let supportedRevisions: [Vision.DetectDocumentSegmentationRequest.Revision]
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.DetectDocumentSegmentationRequest, b: Vision.DetectDocumentSegmentationRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1664,9 +1516,7 @@ final public class TrackHomographicImageRegistrationRequest : Vision.ImageProces
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.TrackHomographicImageRegistrationRequest.Revision? = nil, frameAnalysisSpacing: CoreMedia.CMTime? = nil)
-  #endif
   final public var regionOfInterest: Vision.NormalizedRect {
     get
     set
@@ -1680,9 +1530,7 @@ final public class TrackHomographicImageRegistrationRequest : Vision.ImageProces
   final public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   @objc deinit
   final public var hashValue: Swift.Int {
     get
@@ -1690,9 +1538,7 @@ final public class TrackHomographicImageRegistrationRequest : Vision.ImageProces
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public struct CoreMLModelContainer : Swift.Equatable, @unchecked Swift.Sendable, Swift.Hashable {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(model: CoreML.MLModel, featureProvider: (any CoreML.MLFeatureProvider)? = nil) throws
-  #endif
   public var inputImageFeatureName: Swift.String
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (lhs: Vision.CoreMLModelContainer, rhs: Vision.CoreMLModelContainer) -> Swift.Bool
@@ -1714,15 +1560,11 @@ public struct CoreMLRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(model: Vision.CoreMLModelContainer, _ revision: Vision.CoreMLRequest.Revision? = nil)
-  #endif
   public let modelContainer: Vision.CoreMLModelContainer
-  #if compiler(>=5.3) && $NonescapableTypes
   public var supportedIdentifiers: [Swift.String]? {
     get
   }
-  #endif
   public var cropAndScaleAction: Vision.ImageCropAndScaleAction
   public var regionOfInterest: Vision.NormalizedRect
   public var supportedComputeStageDevices: [Vision.ComputeStage : [CoreML.MLComputeDevice]] {
@@ -1733,9 +1575,7 @@ public struct CoreMLRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.CoreMLRequest, b: Vision.CoreMLRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1756,9 +1596,7 @@ public struct DetectHumanRectanglesRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.DetectHumanRectanglesRequest.Revision? = nil)
-  #endif
   public var upperBodyOnly: Swift.Bool
   public var regionOfInterest: Vision.NormalizedRect
   public let revision: Vision.DetectHumanRectanglesRequest.Revision
@@ -1766,9 +1604,7 @@ public struct DetectHumanRectanglesRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.DetectHumanRectanglesRequest, b: Vision.DetectHumanRectanglesRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1789,9 +1625,7 @@ final public class GeneratePersonSegmentationRequest : Vision.ImageProcessingReq
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.GeneratePersonSegmentationRequest.Revision? = nil, frameAnalysisSpacing: CoreMedia.CMTime? = nil)
-  #endif
   public enum QualityLevel : Swift.CaseIterable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case accurate
     case balanced
@@ -1830,9 +1664,7 @@ final public class GeneratePersonSegmentationRequest : Vision.ImageProcessingReq
   final public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   @objc deinit
   final public var hashValue: Swift.Int {
     get
@@ -1849,9 +1681,7 @@ public struct RecognizedText : Swift.Equatable, Swift.Hashable, @unchecked Swift
   public var description: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func boundingBox(for range: Swift.Range<Swift.String.Index>) -> Vision.RectangleObservation?
-  #endif
   public static func == (a: Vision.RecognizedText, b: Vision.RecognizedText) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1927,18 +1757,14 @@ public struct GeneratePersonInstanceMaskRequest : Vision.ImageProcessingRequest 
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.GeneratePersonInstanceMaskRequest.Revision? = nil)
-  #endif
   public var regionOfInterest: Vision.NormalizedRect
   public let revision: Vision.GeneratePersonInstanceMaskRequest.Revision
   public static let supportedRevisions: [Vision.GeneratePersonInstanceMaskRequest.Revision]
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.GeneratePersonInstanceMaskRequest, b: Vision.GeneratePersonInstanceMaskRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1971,18 +1797,14 @@ public struct GenerateForegroundInstanceMaskRequest : Vision.ImageProcessingRequ
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.GenerateForegroundInstanceMaskRequest.Revision? = nil)
-  #endif
   public var regionOfInterest: Vision.NormalizedRect
   public let revision: Vision.GenerateForegroundInstanceMaskRequest.Revision
   public static let supportedRevisions: [Vision.GenerateForegroundInstanceMaskRequest.Revision]
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.GenerateForegroundInstanceMaskRequest, b: Vision.GenerateForegroundInstanceMaskRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -2030,9 +1852,7 @@ public struct DetectTextRectanglesRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.DetectTextRectanglesRequest.Revision? = nil)
-  #endif
   public var reportCharacterBoxes: Swift.Bool
   public var regionOfInterest: Vision.NormalizedRect
   public let revision: Vision.DetectTextRectanglesRequest.Revision
@@ -2043,9 +1863,7 @@ public struct DetectTextRectanglesRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.DetectTextRectanglesRequest, b: Vision.DetectTextRectanglesRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -2066,9 +1884,7 @@ final public class TrackOpticalFlowRequest : Vision.ImageProcessingRequest, Visi
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.TrackOpticalFlowRequest.Revision? = nil, frameAnalysisSpacing: CoreMedia.CMTime? = nil)
-  #endif
   public enum ComputationAccuracy : Swift.CaseIterable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case low
     case medium
@@ -2108,9 +1924,7 @@ final public class TrackOpticalFlowRequest : Vision.ImageProcessingRequest, Visi
   final public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   @objc deinit
   final public var hashValue: Swift.Int {
     get
@@ -2170,24 +1984,12 @@ extension Vision.BarcodeObservation {
 }
 @_hasMissingDesignatedInitializers @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 final public class ImageRequestHandler : @unchecked Swift.Sendable {
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(_ imageURL: Foundation.URL, orientation: ImageIO.CGImagePropertyOrientation? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(_ image: CoreGraphics.CGImage, orientation: ImageIO.CGImagePropertyOrientation? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(_ image: CoreImage.CIImage, orientation: ImageIO.CGImagePropertyOrientation? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(_ pixelBuffer: CoreVideo.CVPixelBuffer, depthData: AVFoundation.AVDepthData? = nil, orientation: ImageIO.CGImagePropertyOrientation? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(_ sampleBuffer: CoreMedia.CMSampleBuffer, depthData: AVFoundation.AVDepthData? = nil, orientation: ImageIO.CGImagePropertyOrientation? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(_ data: Foundation.Data, orientation: ImageIO.CGImagePropertyOrientation? = nil)
-  #endif
   final public func perform<T>(_ request: T) async throws -> T.Result where T : Vision.VisionRequest
   final public func perform<each T>(_ request: repeat each T) async throws -> (repeat (each T).Result) where repeat each T : Vision.VisionRequest
   final public func performAll(_ requests: some Collection<any VisionRequest>) -> some _Concurrency.AsyncSequence<Vision.VisionResult, Swift.Never>
@@ -2196,9 +1998,7 @@ final public class ImageRequestHandler : @unchecked Swift.Sendable {
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public struct FaceObservation : Vision.VisionObservation, Vision.BoundingBoxProviding {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(boundingBox: Vision.NormalizedRect, revision: Vision.DetectFaceRectanglesRequest.Revision? = nil)
-  #endif
   public var landmarks: Vision.FaceObservation.Landmarks2D? {
     get
   }
@@ -2362,10 +2162,8 @@ extension Vision.InstanceMaskObservation : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
 }
 extension Vision.InstanceMaskObservation {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
   public init?(_ observation: Vision.VNInstanceMaskObservation)
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public protocol BoundingBoxProviding {
@@ -2431,9 +2229,7 @@ public struct RecognizeDocumentsRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.RecognizeDocumentsRequest.Revision? = nil)
-  #endif
   public struct TextRecognitionOptions : Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     public var minimumTextHeightFraction: Swift.Float
     public var automaticallyDetectLanguage: Swift.Bool
@@ -2478,9 +2274,7 @@ public struct RecognizeDocumentsRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.RecognizeDocumentsRequest, b: Vision.RecognizeDocumentsRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -2509,10 +2303,8 @@ extension Vision.SaliencyImageObservation : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
 }
 extension Vision.SaliencyImageObservation {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
   public init?(_ observation: Vision.VNSaliencyImageObservation)
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public struct ImageTranslationAlignmentObservation : Vision.VisionObservation {
@@ -2550,9 +2342,7 @@ public struct DetectRectanglesRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.DetectRectanglesRequest.Revision? = nil)
-  #endif
   public var minimumAspectRatio: Swift.Float
   public var maximumAspectRatio: Swift.Float
   public var quadratureToleranceDegrees: Swift.Float
@@ -2565,9 +2355,7 @@ public struct DetectRectanglesRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.DetectRectanglesRequest, b: Vision.DetectRectanglesRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -2588,9 +2376,7 @@ public struct ClassifyImageRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.ClassifyImageRequest.Revision? = nil)
-  #endif
   public let revision: Vision.ClassifyImageRequest.Revision
   public var supportedIdentifiers: [Swift.String] {
     get
@@ -2601,9 +2387,7 @@ public struct ClassifyImageRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.ClassifyImageRequest, b: Vision.ClassifyImageRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -2624,9 +2408,7 @@ public struct RecognizeTextRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.RecognizeTextRequest.Revision? = nil)
-  #endif
   public enum RecognitionLevel : Swift.CaseIterable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case accurate
     case fast
@@ -2661,9 +2443,7 @@ public struct RecognizeTextRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.RecognizeTextRequest, b: Vision.RecognizeTextRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -2698,9 +2478,7 @@ public struct DocumentObservation : Vision.VisionObservation {
       public var columns: [[Vision.DocumentObservation.Container.Table.Cell]] {
         get
       }
-      #if compiler(>=5.3) && $NonescapableTypes
       public func cell(row: Swift.Int, col: Swift.Int) -> Vision.DocumentObservation.Container.Table.Cell?
-      #endif
       public var boundingRegion: Vision.NormalizedRegion {
         get
       }
@@ -2717,11 +2495,9 @@ public struct DocumentObservation : Vision.VisionObservation {
         public var content: Vision.DocumentObservation.Container {
           get
         }
-        #if compiler(>=5.3) && $NonescapableTypes
         public var markerType: Vision.DocumentObservation.Container.List.Marker? {
           get
         }
-        #endif
         public var markerString: Swift.String {
           get
         }
@@ -2800,25 +2576,19 @@ public struct DocumentObservation : Vision.VisionObservation {
       public var lines: [Vision.RecognizedTextObservation] {
         get
       }
-      #if compiler(>=5.3) && $NonescapableTypes
       public var words: [Vision.RecognizedTextObservation]? {
         get
       }
-      #endif
-      #if compiler(>=5.3) && $NonescapableTypes
       public var textAlignment: Vision.DocumentObservation.Container.Text.Alignment? {
         get
       }
-      #endif
       public var transcript: Swift.String {
         get
       }
       public var boundingRegion: Vision.NormalizedRegion {
         get
       }
-      #if compiler(>=5.3) && $NonescapableTypes
       public func boundingRegion(for range: Swift.Range<Swift.String.Index>) -> Vision.NormalizedRegion?
-      #endif
       public static func == (a: Vision.DocumentObservation.Container.Text, b: Vision.DocumentObservation.Container.Text) -> Swift.Bool
       public func encode(to encoder: any Swift.Encoder) throws
       public func hash(into hasher: inout Swift.Hasher)
@@ -2827,11 +2597,9 @@ public struct DocumentObservation : Vision.VisionObservation {
       }
       public init(from decoder: any Swift.Decoder) throws
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var title: Vision.DocumentObservation.Container.Text? {
       get
     }
-    #endif
     public var text: Vision.DocumentObservation.Container.Text {
       get
     }
@@ -2890,9 +2658,7 @@ final public class TrackRectangleRequest : Vision.ImageProcessingRequest, Vision
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(detectedRectangle: any Vision.QuadrilateralProviding & Vision.VisionObservation, _ revision: Vision.TrackRectangleRequest.Revision? = nil, frameAnalysisSpacing: CoreMedia.CMTime? = nil)
-  #endif
   public enum TrackingLevel : Swift.CaseIterable, Swift.Sendable, Swift.Equatable, Swift.Codable, Swift.Hashable {
     case accurate
     case fast
@@ -2924,9 +2690,7 @@ final public class TrackRectangleRequest : Vision.ImageProcessingRequest, Vision
   final public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   @objc deinit
   final public var hashValue: Swift.Int {
     get
@@ -2954,9 +2718,7 @@ extension Vision.HumanObservation : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
 }
 extension Vision.HumanObservation {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(boundingBox: Vision.NormalizedRect, revision: Vision.DetectHumanRectanglesRequest.Revision? = nil)
-  #endif
 }
 extension Vision.HumanObservation {
   @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
@@ -2976,9 +2738,7 @@ public struct DetectContoursRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.DetectContoursRequest.Revision? = nil)
-  #endif
   public var contrastAdjustment: Swift.Float
   public var contrastPivot: Swift.Float?
   public var detectsDarkOnLight: Swift.Bool
@@ -2989,9 +2749,7 @@ public struct DetectContoursRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.DetectContoursRequest, b: Vision.DetectContoursRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -3095,15 +2853,11 @@ public struct DetectFaceRectanglesRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.DetectFaceRectanglesRequest.Revision? = nil)
-  #endif
   public var regionOfInterest: Vision.NormalizedRect
   public let revision: Vision.DetectFaceRectanglesRequest.Revision
   public static let supportedRevisions: [Vision.DetectFaceRectanglesRequest.Revision]
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public var descriptor: Vision.RequestDescriptor {
     get
   }
@@ -3150,10 +2904,8 @@ extension Vision.DetectedDocumentObservation : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
 }
 extension Vision.DetectedDocumentObservation {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
   public init?(_ observation: Vision.VNRectangleObservation)
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
 public struct DetectLensSmudgeRequest : Vision.ImageProcessingRequest {
@@ -3169,9 +2921,7 @@ public struct DetectLensSmudgeRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.DetectLensSmudgeRequest.Revision? = nil)
-  #endif
   public var regionOfInterest: Vision.NormalizedRect
   public let revision: Vision.DetectLensSmudgeRequest.Revision
   public static var supportedRevisions: [Vision.DetectLensSmudgeRequest.Revision] {
@@ -3181,9 +2931,7 @@ public struct DetectLensSmudgeRequest : Vision.ImageProcessingRequest {
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.DetectLensSmudgeRequest, b: Vision.DetectLensSmudgeRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -3192,12 +2940,8 @@ public struct DetectLensSmudgeRequest : Vision.ImageProcessingRequest {
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public struct HumanBodyPoseObservation : Vision.VisionObservation, Vision.PoseProviding {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func joint(for jointName: Vision.HumanBodyPoseObservation.JointName) -> Vision.Joint?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func allJoints(in groupName: Vision.HumanBodyPoseObservation.JointsGroupName? = nil) -> [Vision.HumanBodyPoseObservation.JointName : Vision.Joint]
-  #endif
   public var availableJointNames: [Vision.HumanBodyPoseObservation.JointName] {
     get
   }
@@ -3236,9 +2980,7 @@ public struct HumanBodyPoseObservation : Vision.VisionObservation, Vision.PosePr
     case rightHip
     case rightKnee
     case rightAnkle
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
@@ -3252,9 +2994,7 @@ public struct HumanBodyPoseObservation : Vision.VisionObservation, Vision.PosePr
     case rightArm
     case leftLeg
     case rightLeg
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     public typealias AllCases = [Vision.HumanBodyPoseObservation.JointsGroupName]
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
@@ -3296,18 +3036,14 @@ public struct DetectHorizonRequest : Vision.ImageProcessingRequest {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.DetectHorizonRequest.Revision? = nil)
-  #endif
   public var regionOfInterest: Vision.NormalizedRect
   public let revision: Vision.DetectHorizonRequest.Revision
   public static let supportedRevisions: [Vision.DetectHorizonRequest.Revision]
   public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   public static func == (a: Vision.DetectHorizonRequest, b: Vision.DetectHorizonRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -3357,12 +3093,8 @@ public struct ContoursObservation : Vision.VisionObservation, @unchecked Swift.S
   public var description: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func contourAtIndex(_ index: Swift.Int) -> Vision.ContoursObservation.Contour?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func countourAtIndexPath(_ indexPath: Foundation.IndexPath) -> Vision.ContoursObservation.Contour?
-  #endif
   public static func == (a: Vision.ContoursObservation, b: Vision.ContoursObservation) -> Swift.Bool
   public var hashValue: Swift.Int {
     get
@@ -3414,12 +3146,8 @@ extension Vision.ContoursObservation {
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 public struct AnimalBodyPoseObservation : Vision.VisionObservation, Vision.PoseProviding {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func joint(for jointName: Vision.AnimalBodyPoseObservation.JointName) -> Vision.Joint?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func allJoints(in groupName: Vision.AnimalBodyPoseObservation.JointsGroupName? = nil) -> [Vision.AnimalBodyPoseObservation.JointName : Vision.Joint]
-  #endif
   public var availableJointNames: [Vision.AnimalBodyPoseObservation.JointName] {
     get
   }
@@ -3461,9 +3189,7 @@ public struct AnimalBodyPoseObservation : Vision.VisionObservation, Vision.PoseP
     case tailTop
     case tailMiddle
     case tailBottom
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
@@ -3476,9 +3202,7 @@ public struct AnimalBodyPoseObservation : Vision.VisionObservation, Vision.PoseP
     case hindlegs
     case tail
     case trunk
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
     public typealias AllCases = [Vision.AnimalBodyPoseObservation.JointsGroupName]
     @available(iOS 18.0, tvOS 18.0, visionOS 2.0, macOS 15.0, *)
@@ -3530,10 +3254,8 @@ public struct PixelBufferObservation : Vision.VisionObservation, @unchecked Swif
   }
 }
 extension Vision.PixelBufferObservation {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
   public init?(_ observation: Vision.VNPixelBufferObservation)
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 final public class DetectHumanBodyPose3DRequest : Vision.ImageProcessingRequest, Vision.StatefulRequest {
@@ -3549,9 +3271,7 @@ final public class DetectHumanBodyPose3DRequest : Vision.ImageProcessingRequest,
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ revision: Vision.DetectHumanBodyPose3DRequest.Revision? = nil, frameAnalysisSpacing: CoreMedia.CMTime? = nil)
-  #endif
   final public var supportedJointNames: [Vision.HumanBodyPose3DObservation.JointName] {
     get
   }
@@ -3571,9 +3291,7 @@ final public class DetectHumanBodyPose3DRequest : Vision.ImageProcessingRequest,
   final public var descriptor: Vision.RequestDescriptor {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.ComputeStage)
-  #endif
   @objc deinit
   final public var hashValue: Swift.Int {
     get

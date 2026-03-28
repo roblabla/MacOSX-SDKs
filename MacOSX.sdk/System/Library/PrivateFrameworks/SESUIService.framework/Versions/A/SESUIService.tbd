@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SESUIService.framework/Versions/A/SESUIService'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12SESUIService12SESPassImageV14passIdentifier5imageACSS_So7NSImageCtcfC', 
                        '_$s12SESUIService12SESPassImageVMa', '_$s12SESUIService12SESPassImageVMn', 
                        '_$s12SESUIService12SESPassImageVN', '_$s12SESUIService13SEStorageViewV10controllerAcA0B20ManagementControllerC_tcfC', 

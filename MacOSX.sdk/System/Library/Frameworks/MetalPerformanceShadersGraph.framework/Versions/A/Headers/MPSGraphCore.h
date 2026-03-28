@@ -14,7 +14,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#if !MPSGRAPH_TOOLCHAIN_BUILD
 MPS_CLASS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0))
+#endif
 /// The common base class for all Metal Performance Shaders Graph objects.
 ///
 /// Only the child classes should be used.

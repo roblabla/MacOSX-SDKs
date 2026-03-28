@@ -1,17 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftAVFoundation.dylib'
-current-version: 2395.6.5
+current-version: 2410.24.5
 swift-abi-version: 7
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/AVFAudio.framework/Versions/A/AVFAudio' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftAVFoundation.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftAVFoundation.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftAVFoundation.dylib', 
@@ -736,6 +733,18 @@ exports:
                        '_$sSo30AVPlayerItemIntegratedTimelineC12AVFoundationE13boundaryTimes3for18offsetsIntoSegmentAbCE08BoundaryG0VSo0abK0C_SaySo6CMTimeaGtF', 
                        '_$sSo30AVPlayerItemIntegratedTimelineC12AVFoundationE13periodicTimes11forIntervalAbCE08PeriodicG0VSo6CMTimea_tF', 
                        '_$sSo31AVVideoCompositionRenderContextC12AVFoundationE22makeMutablePixelBuffer9CoreVideo09CVMutablehI0VyKF', 
+                       '_$sSo32AVPlayerInterstitialEventMonitorC12AVFoundationE24ScheduleRequestCompletedV11makeMessageyAESg10Foundation12NotificationVFZ', 
+                       '_$sSo32AVPlayerInterstitialEventMonitorC12AVFoundationE24ScheduleRequestCompletedV16makeNotificationy10Foundation0J0VAEFZ', 
+                       '_$sSo32AVPlayerInterstitialEventMonitorC12AVFoundationE24ScheduleRequestCompletedV18scheduleIdentifierSSvg', 
+                       '_$sSo32AVPlayerInterstitialEventMonitorC12AVFoundationE24ScheduleRequestCompletedV18scheduleIdentifierSSvpMV', 
+                       '_$sSo32AVPlayerInterstitialEventMonitorC12AVFoundationE24ScheduleRequestCompletedV4nameSo18NSNotificationNameavgZ', 
+                       '_$sSo32AVPlayerInterstitialEventMonitorC12AVFoundationE24ScheduleRequestCompletedV4nameSo18NSNotificationNameavpZMV', 
+                       '_$sSo32AVPlayerInterstitialEventMonitorC12AVFoundationE24ScheduleRequestCompletedV6results6ResultOy10Foundation4DataVs5Error_pGvg', 
+                       '_$sSo32AVPlayerInterstitialEventMonitorC12AVFoundationE24ScheduleRequestCompletedV6results6ResultOy10Foundation4DataVs5Error_pGvpMV', 
+                       '_$sSo32AVPlayerInterstitialEventMonitorC12AVFoundationE24ScheduleRequestCompletedVMa', 
+                       '_$sSo32AVPlayerInterstitialEventMonitorC12AVFoundationE24ScheduleRequestCompletedVMn', 
+                       '_$sSo32AVPlayerInterstitialEventMonitorC12AVFoundationE24ScheduleRequestCompletedVN', 
+                       '_$sSo32AVPlayerInterstitialEventMonitorC12AVFoundationE24ScheduleRequestCompletedVSo20NSNotificationCenterC10FoundationE12AsyncMessageACMc', 
                        '_$sSo32AVPlayerVideoOutputConfigurationC12AVFoundationE22dataChannelDescriptionSaySay9CoreMedia5CMTagCGGvg', 
                        '_$sSo32AVPlayerVideoOutputConfigurationC12AVFoundationE22dataChannelDescriptionSaySay9CoreMedia5CMTagCGGvpMV', 
                        '_$sSo34AVVideoCompositionLayerInstructionC12AVFoundationE11OpacityRampV2eeoiySbAE_AEtFZ', 

@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DocumentUnderstandingClient.framework/Versions/A/DocumentUnderstandingClient'
-current-version: 116.7.8
+current-version: 122.18
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12ProtobufType27DocumentUnderstandingClient27DUProtobufEncodableProtocolPTl', 
                        '_$s27DocumentUnderstandingClient0aB17FeatureFlagReaderC023isSearchAndOrganizationA13IngestEnabledSbvgZ', 
                        '_$s27DocumentUnderstandingClient0aB17FeatureFlagReaderC023isSearchAndOrganizationA13IngestEnabledSbvpZMV', 
@@ -27,6 +25,8 @@ exports:
                        '_$s27DocumentUnderstandingClient0aB17FeatureFlagReaderC33isTopicClassificationModelEnabledSbvpZMV', 
                        '_$s27DocumentUnderstandingClient0aB17FeatureFlagReaderC36isCategoryClassificationModelEnabledSbvgZ', 
                        '_$s27DocumentUnderstandingClient0aB17FeatureFlagReaderC36isCategoryClassificationModelEnabledSbvpZMV', 
+                       '_$s27DocumentUnderstandingClient0aB17FeatureFlagReaderC37isPreExtractionDDSNTVLanguagesEnabledSbvgZ', 
+                       '_$s27DocumentUnderstandingClient0aB17FeatureFlagReaderC37isPreExtractionDDSNTVLanguagesEnabledSbvpZMV', 
                        '_$s27DocumentUnderstandingClient0aB17FeatureFlagReaderC39isFoundInUseLLMExtendedLanguagesEnabledSbvgZ', 
                        '_$s27DocumentUnderstandingClient0aB17FeatureFlagReaderC39isFoundInUseLLMExtendedLanguagesEnabledSbvpZMV', 
                        '_$s27DocumentUnderstandingClient0aB17FeatureFlagReaderCACycfC', 

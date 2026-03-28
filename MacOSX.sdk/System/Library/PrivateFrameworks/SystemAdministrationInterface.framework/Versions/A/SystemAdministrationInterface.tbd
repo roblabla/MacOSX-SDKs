@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SystemAdministrationInterface.framework/Versions/A/SystemAdministrationInterface'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s29SystemAdministrationInterface14AccountOptionsV14unlockPasswordSSSgvM', 
                        '_$s29SystemAdministrationInterface14AccountOptionsV14unlockPasswordSSSgvg', 
                        '_$s29SystemAdministrationInterface14AccountOptionsV14unlockPasswordSSSgvpMV', 

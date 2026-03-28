@@ -1,18 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/JournalShared.framework/Versions/A/JournalShared'
-current-version: 49.60.6
+current-version: 49.100.9
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Journal, JournalDataclassOwner, JournalNotifications, JournalSettings, 
                        JournalShareExtension, JournalUI, JournalWidgets, JournalWidgetsSecure ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation11FormatStyleP13JournalSharedAD016WorkoutHeartRatebC0VRszrlE14beatsPerMinuteAFvgZ', 
                        '_$s10Foundation11FormatStyleP13JournalSharedAD016WorkoutHeartRatebC0VRszrlE14beatsPerMinuteAFvpZMV', 
                        '_$s10Foundation3URLV13JournalSharedE18setProtectionClass010protectionG0ySo09NSURLFileF4Typea_tF', 
@@ -771,13 +768,15 @@ exports:
                        '_$s13JournalShared14AssetPlacementO12maxGridCountSivgZ', 
                        '_$s13JournalShared14AssetPlacementO12maxGridCountSivpZMV', 
                        '_$s13JournalShared14AssetPlacementO12maxGridCountSivsZ', 
+                       '_$s13JournalShared14AssetPlacementO16debugDescriptionSSvg', 
+                       '_$s13JournalShared14AssetPlacementO16debugDescriptionSSvpMV', 
                        '_$s13JournalShared14AssetPlacementO2eeoiySbAC_ACtFZ', '_$s13JournalShared14AssetPlacementO4gridyACSicACmFWC', 
                        '_$s13JournalShared14AssetPlacementO4slimyA2CmFWC', '_$s13JournalShared14AssetPlacementO6canvasyA2CmFWC', 
                        '_$s13JournalShared14AssetPlacementO6hiddenyA2CmFWC', '_$s13JournalShared14AssetPlacementO9sortIndexSivg', 
                        '_$s13JournalShared14AssetPlacementO9sortIndexSivpMV', '_$s13JournalShared14AssetPlacementOMa', 
                        '_$s13JournalShared14AssetPlacementOMn', '_$s13JournalShared14AssetPlacementON', 
-                       '_$s13JournalShared14AssetPlacementOSQAAMc', '_$s13JournalShared14AssetPlacementOyACSicfC', 
-                       '_$s13JournalShared14MergeableColorO02cgD0ACSgSo10CGColorRefa_tcfC', 
+                       '_$s13JournalShared14AssetPlacementOSQAAMc', '_$s13JournalShared14AssetPlacementOs28CustomDebugStringConvertibleAAMc', 
+                       '_$s13JournalShared14AssetPlacementOyACSicfC', '_$s13JournalShared14MergeableColorO02cgD0ACSgSo10CGColorRefa_tcfC', 
                        '_$s13JournalShared14MergeableColorO07catalogD09Coherence12CRExtensibleOyAA012AssetCatalogD0OGSgvg', 
                        '_$s13JournalShared14MergeableColorO07catalogD09Coherence12CRExtensibleOyAA012AssetCatalogD0OGSgvpMV', 
                        '_$s13JournalShared14MergeableColorO07catalogD0yAC9Coherence12CRExtensibleOyAA012AssetCatalogD0OGcACmFWC', 

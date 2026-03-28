@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityFoundation.framework/Versions/A/AccessibilityFoundation'
 current-version: 2
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AXARIAPopupValueDialog, _AXARIAPopupValueGrid, _AXARIAPopupValueListbox, 
                        _AXARIAPopupValueMenu, _AXARIAPopupValueTree, _AXEGetLog, 
                        _AXFAXElementsEqual, _AXFAnnouncementRequestedNotification, 

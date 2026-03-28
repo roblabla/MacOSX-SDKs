@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HeadGestures.framework/Versions/A/HeadGestures'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12HeadGestures15HGConfigurationC011requestPartB0SbvMTj', 
                        '_$s12HeadGestures15HGConfigurationC011requestPartB0SbvMTq', 
                        '_$s12HeadGestures15HGConfigurationC011requestPartB0SbvgTj', 
@@ -64,7 +64,14 @@ exports:
                        '_$s12HeadGestures17HGMLConfigurationCMa', '_$s12HeadGestures17HGMLConfigurationCMn', 
                        '_$s12HeadGestures17HGMLConfigurationCMo', '_$s12HeadGestures17HGMLConfigurationCMu', 
                        '_$s12HeadGestures17HGMLConfigurationCN', '_$s12HeadGestures17HGMLConfigurationCfD', 
-                       '_$s12HeadGestures23RawRepresentableWrapperV5valuexvg', '_$s12HeadGestures23RawRepresentableWrapperV5valuexvpMV', 
+                       '_$s12HeadGestures20ThreadSafeDictionaryCMa', '_$s12HeadGestures20ThreadSafeDictionaryCMn', 
+                       '_$s12HeadGestures20ThreadSafeDictionaryCMo', '_$s12HeadGestures20ThreadSafeDictionaryCMu', 
+                       '_$s12HeadGestures20ThreadSafeDictionaryCfD', '_$s12HeadGestures20ThreadSafeDictionaryCfd', 
+                       '_$s12HeadGestures20ThreadSafeDictionaryCyq_SgxciMTj', '_$s12HeadGestures20ThreadSafeDictionaryCyq_SgxciMTq', 
+                       '_$s12HeadGestures20ThreadSafeDictionaryCyq_SgxcigTj', '_$s12HeadGestures20ThreadSafeDictionaryCyq_SgxcigTq', 
+                       '_$s12HeadGestures20ThreadSafeDictionaryCyq_SgxcipMV', '_$s12HeadGestures20ThreadSafeDictionaryCyq_SgxcisTj', 
+                       '_$s12HeadGestures20ThreadSafeDictionaryCyq_SgxcisTq', '_$s12HeadGestures23RawRepresentableWrapperV5valuexvg', 
+                       '_$s12HeadGestures23RawRepresentableWrapperV5valuexvpMV', 
                        '_$s12HeadGestures23RawRepresentableWrapperV8rawValue0cG0Qzvg', 
                        '_$s12HeadGestures23RawRepresentableWrapperV8rawValue0cG0QzvpMV', 
                        '_$s12HeadGestures23RawRepresentableWrapperVAASE0C5ValueRpzrlE6encode2toys7Encoder_p_tKF', 

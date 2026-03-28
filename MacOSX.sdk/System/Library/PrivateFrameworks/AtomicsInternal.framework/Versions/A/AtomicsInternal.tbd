@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AtomicsInternal.framework/Versions/A/AtomicsInternal'
-current-version: 112
-compatibility-version: 112
+current-version: 154
+compatibility-version: 154
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s11_AtomicBase15AtomicsInternal0A9ReferencePTl', '_$s15AtomicsInternal10DoubleWordV11descriptionSSvg', 
                        '_$s15AtomicsInternal10DoubleWordV11descriptionSSvpMV', '_$s15AtomicsInternal10DoubleWordV20AtomicRepresentationV8_storageACvM', 
                        '_$s15AtomicsInternal10DoubleWordV20AtomicRepresentationV8_storageACvg', 

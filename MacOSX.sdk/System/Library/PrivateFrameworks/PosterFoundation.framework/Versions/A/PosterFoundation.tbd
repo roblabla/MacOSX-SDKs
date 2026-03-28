@@ -1,23 +1,20 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PosterFoundation.framework/Versions/A/PosterFoundation'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ AdaptiveTimePoster, BackdropSamplePoster, BlastDoor, MessageUnpackerTests, 
-                       MessagesBlastDoorService, PaperBoardUI, PaperBoardUITests, 
-                       PosterBoardFramework, PosterBoardFrameworkTests, PosterBoardServices, 
-                       PosterBoardServicesTests, PosterBoardUI, PosterBoardUIServices, 
-                       PosterBoardUIServicesTests, PosterChannelTester, PosterFoundationTests, 
-                       PosterKit, PosterKitTests, PosterModel, PosterPlatformSupport, 
-                       PosterTester, PosterUIFoundation, PosterUIFoundationTests, 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    clients:         [ AdaptiveTimePoster, BackdropSamplePoster, BlastDoor, LoadingPoster, 
+                       MessageUnpackerTests, MessagesBlastDoorService, PaperBoardUI, 
+                       PaperBoardUITests, PosterBoardFramework, PosterBoardFrameworkTests, 
+                       PosterBoardServices, PosterBoardServicesTests, PosterBoardUI, 
+                       PosterBoardUIServices, PosterBoardUIServicesTests, PosterChannelTester, 
+                       PosterFoundationTests, PosterKit, PosterKitTests, PosterModel, 
+                       PosterPlatformSupport, PosterTester, PosterUIFoundation, PosterUIFoundationTests, 
                        SBRendererService, SamplePoster, posterctl ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$ss5ErrorP16PosterFoundationE14pf_descriptionSSvg', '_$ss5ErrorP16PosterFoundationE14pf_descriptionSSvpMV', 
                        _NSStringForPFSQLPredicateOperator, _NSStringFromPFServerPosterType, 
                        _PFArchiverDisallowArchivingAppleArchiveEntitlement, _PFBundleIdentifierRequiresMemoryHogAssertion, 
@@ -45,9 +42,9 @@ exports:
                        _PFSQLiteDatabaseConnectionSharedInit, _PFSQLite_checkDatabaseForWALMode, 
                        _PFSQLite_prepare_and_stepThrough_withBlock, _PFSQLite_statement_reset_withBlock, 
                        _PFSQLite_statement_stepThrough_withBlock, _PFServerPosterTypeEnumerate, 
-                       _PFServerPosterTypeFromDirectoryName, _PFServerPosterTypeIsValid, 
-                       _PFServerPosterTypeToDirectoryName, _PFSetRunningInUnitTest, 
-                       _PFTemporaryDirectory, _PFTemporaryDirectoryCreatingIfItDoesntExist, 
+                       _PFServerPosterTypeFromDirectoryName, _PFServerPosterTypeIsDescriptor, 
+                       _PFServerPosterTypeIsValid, _PFServerPosterTypeToDirectoryName, 
+                       _PFSetRunningInUnitTest, _PFTemporaryDirectory, _PFTemporaryDirectoryCreatingIfItDoesntExist, 
                        _PFTemporaryDirectoryCreatingIfItDoesntExistWithSubdirectoryNamed, 
                        _PFTemporaryDirectoryNamed, _PFValidateDictionaryForClasses, 
                        _PFValidateDictionaryForPropertyListTypes, _PFValidationUtilitiesErrorDomain, 
@@ -86,10 +83,11 @@ exports:
                        PFServerPosterIdentity, PFServerPosterPath, PFTemporaryResource, 
                        PFWorkloop, _PBFSQLiteDeferredPreparedSimpleStatement, _PBFSQLiteFrozenResultRow, 
                        _PBFSQLitePreparedCompoundStatement, _PBFSQLitePreparedSimpleStatement, 
-                       _PFGenericValueTransformerConcreteImplementation, _PFReversibleValueTransformer, 
-                       _PFRoleManifest, _PFSQLiteArchiveReadonlyTransaction, _PFSQLiteArchiveReadwriteTransaction, 
-                       _PFSQLiteKeyedArchiverEntry, _PFSQLiteKeyedArchiverTransaction, 
-                       _PFSQLitePredicateArgumentContainer, _PFUnreversibleValueTransformer ]
+                       _PFGenericValueTransformerConcreteImplementation, _PFPosterExtensionInstanceEntry, 
+                       _PFReversibleValueTransformer, _PFRoleManifest, _PFSQLiteArchiveReadonlyTransaction, 
+                       _PFSQLiteArchiveReadwriteTransaction, _PFSQLiteKeyedArchiverEntry, 
+                       _PFSQLiteKeyedArchiverTransaction, _PFSQLitePredicateArgumentContainer, 
+                       _PFUnreversibleValueTransformer ]
     objc-ivars:      [ PFPosterPath._contentsURL, PFPosterPath._serverIdentity, PFSQLitePreparedStatement._dbConnection, 
                        _PBFSQLitePreparedSimpleStatement._statement, _PFSQLiteArchiveReadonlyTransaction._classToObjectMap, 
                        _PFSQLiteArchiveReadonlyTransaction._connection, _PFSQLiteArchiveReadonlyTransaction._inTransaction, 

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DocumentCamera.framework/Versions/A/DocumentCamera'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s2os6LoggerV14DocumentCameraE11liquidGlassACvgZ', _DCAccessibilityLocalizedNumber, 
                        _DCAccessibilityLocalizedPercent, _DCAccessibilityLocalizedUnsignedInteger, 
                        _DCAccessibilityNeedsAccessibilityElements, _DCAccessibilityPerformBlockOnMainThreadAfterDelay, 

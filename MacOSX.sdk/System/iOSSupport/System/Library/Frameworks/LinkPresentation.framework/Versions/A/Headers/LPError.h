@@ -6,7 +6,7 @@
 #import <LinkPresentation/LPFoundation.h>
 
 /// The domain for Link Presentation errors.
-LP_EXTERN NSErrorDomain const LPErrorDomain API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0));
+LP_EXTERN NSErrorDomain const LPErrorDomain API_AVAILABLE(macos(10.15), ios(13.0), visionos(1.0), tvos(13.0), watchos(9.0));
 
 typedef NS_ERROR_ENUM(LPErrorDomain, LPErrorCode) {
 /// An unknown error.
@@ -22,5 +22,5 @@ typedef NS_ERROR_ENUM(LPErrorDomain, LPErrorCode) {
     LPErrorMetadataFetchTimedOut,
 
 /// An error indicating that the metadata fetch was not allowed due to system policies.
-    LPErrorMetadataFetchNotAllowed API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0))
-} API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0));
+    LPErrorMetadataFetchNotAllowed API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0), tvos(17.0), watchos(10.0))
+} API_AVAILABLE(macos(10.15), ios(13.0), visionos(1.0), tvos(13.0), watchos(9.0));

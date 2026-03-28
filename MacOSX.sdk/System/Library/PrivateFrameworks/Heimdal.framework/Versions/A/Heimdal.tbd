@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Heimdal.framework/Versions/A/Heimdal'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _HeimCredAddNTLMChallenge, _HeimCredCheckNTLMChallenge, _HeimCredCopyAttribute, 
                        _HeimCredCopyAttributes, _HeimCredCopyDefaultCredential, _HeimCredCopyFromUUID, 
                        _HeimCredCopyQuery, _HeimCredCopyStatus, _HeimCredCreate, 
@@ -426,8 +424,7 @@ exports:
                        _wind_ucs4utf8, _wind_ucs4utf8_copy, _wind_utf8ucs2, _wind_utf8ucs2_length, 
                        _wind_utf8ucs4, _wind_utf8ucs4_copy ]
 reexports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _der_copy_bit_string, _der_copy_bmp_string, _der_copy_general_string, 
                        _der_copy_generalized_time, _der_copy_heim_integer, _der_copy_ia5_string, 
                        _der_copy_integer, _der_copy_octet_string, _der_copy_oid, 

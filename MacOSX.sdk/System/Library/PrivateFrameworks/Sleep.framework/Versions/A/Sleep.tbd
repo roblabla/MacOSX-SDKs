@@ -1,15 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Sleep.framework/Versions/A/Sleep'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _HKSPAdjustNotificationSettingsAction, _HKSPAlarmAllowsSnoozeKey, 
                        _HKSPAlarmConfigurationProperties, _HKSPAlarmConfigurationPropertiesForEquivalency, 
-                       _HKSPAlarmConfigurationPropertiesForSignificance, _HKSPAlarmEnabledKey, 
-                       _HKSPAlarmSilentModeOptionsKey, _HKSPAlarmSnoozeDurationKey, 
+                       _HKSPAlarmConfigurationPropertiesForSignificance, _HKSPAlarmCoordinationPolicyKey, 
+                       _HKSPAlarmEnabledKey, _HKSPAlarmSilentModeOptionsKey, _HKSPAlarmSnoozeDurationKey, 
                        _HKSPAlarmSnoozeDurationMinutesDefault, _HKSPAlarmSnoozeDurationMinutesMaximum, 
                        _HKSPAlarmSnoozeDurationMinutesMinimum, _HKSPAlarmSnoozeDurationMinutesStep, 
                        _HKSPAlarmSoundVolumeKey, _HKSPAlarmToneIdentifierKey, _HKSPAlarmVersionKey, 
@@ -128,9 +126,9 @@ exports:
                        _HKSPSleepLogCategoryBridgeSetup, _HKSPSleepLogCategoryClient, 
                        _HKSPSleepLogCategoryDaemon, _HKSPSleepLogCategoryDefault, 
                        _HKSPSleepLogCategoryNotification, _HKSPSleepLogCategoryOnboarding, 
-                       _HKSPSleepLogCategoryPersist, _HKSPSleepLogCategoryQuery, 
-                       _HKSPSleepLogCategorySchedule, _HKSPSleepLogCategoryServer, 
-                       _HKSPSleepLogCategorySleep, _HKSPSleepLogCategorySleepFocus, 
+                       _HKSPSleepLogCategoryOverride, _HKSPSleepLogCategoryPersist, 
+                       _HKSPSleepLogCategoryQuery, _HKSPSleepLogCategorySchedule, 
+                       _HKSPSleepLogCategoryServer, _HKSPSleepLogCategorySleep, _HKSPSleepLogCategorySleepFocus, 
                        _HKSPSleepLogCategorySleepLock, _HKSPSleepLogCategorySleepMode, 
                        _HKSPSleepLogCategorySync, _HKSPSleepLogCategoryTest, _HKSPSleepLogCategoryView, 
                        _HKSPSleepLogCategoryWidgets, _HKSPSleepLogCategoryXPC, _HKSPSleepLogSubsystem, 
@@ -194,10 +192,10 @@ exports:
                        _HKSPWindDownMinutesStep, _HKSPWindDownReminderCategory, _HKSPWindDownTimeIntervalKey, 
                        _HKSleepScheduleWeekdaysFromHKSPWeekdays, _NSDateIsOnHKSPDayInCalendar, 
                        _NSGregorianCalendarDayForHKSPDay, _NSGregorianCalendarDaysForWeekdays, 
-                       _NSStringForHKSPDay, _NSStringFromHKSPAlarmSilentModeOptions, 
-                       _NSStringFromHKSPAlarmSource, _NSStringFromHKSPAnalyticsSleepNotificationAction, 
-                       _NSStringFromHKSPAnalyticsSleepNotificationType, _NSStringFromHKSPDevice, 
-                       _NSStringFromHKSPSleepEventTimelineResultsSleepScheduleInvalidReason, 
+                       _NSStringForHKSPDay, _NSStringFromHKSPAlarmCoordinationPolicy, 
+                       _NSStringFromHKSPAlarmSilentModeOptions, _NSStringFromHKSPAlarmSource, 
+                       _NSStringFromHKSPAnalyticsSleepNotificationAction, _NSStringFromHKSPAnalyticsSleepNotificationType, 
+                       _NSStringFromHKSPDevice, _NSStringFromHKSPSleepEventTimelineResultsSleepScheduleInvalidReason, 
                        _NSStringFromHKSPSleepFocusConfigurationState, _NSStringFromHKSPSleepLockScreenState, 
                        _NSStringFromHKSPSleepMode, _NSStringFromHKSPSleepModeChangeReason, 
                        _NSStringFromHKSPSleepModeOptions, _NSStringFromHKSPSleepScheduleState, 
@@ -232,5 +230,6 @@ exports:
                        HKSPXPCConnectionInfo, HKSPXPCConnectionListener, HKSPXPCConnectionProvider, 
                        HKSPXPCMessage, _HKSPBoolProperty, _HKSPEmptySleepSchedule, 
                        _HKSPNumberBoxedProperty, _HKSPObjectProperty, _HKSPRelationshipProperty, 
-                       _HKSPTimeIntervalProperty, _HKSPUnsignedIntegerProperty, _HKSPUserDefaultsStatePersistence ]
+                       _HKSPTimeIntervalProperty, _HKSPUnknownProperties, _HKSPUnsignedIntegerProperty, 
+                       _HKSPUserDefaultsStatePersistence ]
 ...

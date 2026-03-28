@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Apple Inc. All rights reserved.
+ * Copyright (c) 2023-2026 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -52,6 +52,7 @@
 #define SK_DOMAIN      3U
 #define XNU_HIB_DOMAIN 4U
 #define MAX_DOMAINS    5U
+#define DOMAINS_NONE   (MAX_DOMAINS + 1)
 
 /* Invalid Domain ID to represent a non-panicking domain. */
 #define NO_PANICKING_DOMAIN 255U
@@ -67,10 +68,11 @@
 #define SPTM_DISPATCH_TABLE_UAT            7
 #define SPTM_DISPATCH_TABLE_SHART          8
 #define SPTM_DISPATCH_TABLE_RESERVED 9
-#define SPTM_DISPATCH_TABLE_HIB           10
-#define SPTM_DISPATCH_TABLE_GEN3_DART_XNU 11
-#define SPTM_DISPATCH_TABLE_GEN3_DART_SK  12
-#define SPTM_DISPATCH_TABLE_INVALID       13
+#define SPTM_DISPATCH_TABLE_HIB            10
+#define SPTM_DISPATCH_TABLE_GEN3_DART_XNU  11
+#define SPTM_DISPATCH_TABLE_GEN3_DART_SK   12
+#define SPTM_DISPATCH_TABLE_T6000_DART_XNU 13
+#define SPTM_DISPATCH_TABLE_INVALID        14
 
 #define SPTM_DISPATCH_TABLE_RETURN_TO_CALLER      0xFD
 #define SPTM_DISPATCH_TABLE_PANIC                 0xFE
@@ -101,10 +103,9 @@
  */
 #define USE_UNSAFE_TYPES (SPTM_INTERNAL && !SPTM_TESTS)
 
-#if DEVELOPMENT || DEBUG
-/* Enable tracing on DEV builds */
+#if (DEVELOPMENT || DEBUG) && !defined(SPTM_TRACING_DISABLED)
 #define SPTM_TRACING 1
-#endif /* DEVELOPMENT || DEBUG */
+#endif
 
 #ifndef __ASSEMBLER__
 /**
@@ -119,35 +120,75 @@ _Static_assert(SPTM_DISPATCH_TABLE_T8110_DART_SK ==
 _Static_assert(SPTM_DISPATCH_TABLE_GEN3_DART_SK ==
         (SPTM_DISPATCH_TABLE_GEN3_DART_XNU + IOMMU_SK_DISPATCH_TABLE_ID_OFFSET),
     "GEN3 DART Driver XNU and SK dispatch table IDs not [IOMMU_SK_DISPATCH_TABLE_ID_OFFSET] apart");
-#endif
+
+/**
+ * Choose [y] or [z] depending on whether [x] is a compile-time constant
+ * expression.
+ */
+#define IF_CONST_ELSE(x, y, z) __builtin_choose_expr(__builtin_constant_p(x), y, z)
 
 /**
  * Helper utility for setting the "x"th bit in an unsigned integer type.
- * The result type is the type of `x + 1ULL`.
+ * Result type is a bit-precise type of width [x] + 1 bits. Requires that [x] is
+ * a compile-time constant expression.
  */
-#define SET_BIT(x) ((((x) ^ (x)) + 1ULL) << (x))
+#define SET_BIT_CONST(x) (((unsigned _BitInt((x) + 1))1) << (x))
+
+/**
+ * Helper utility for setting the "x"th bit in an unsigned integer type.
+ *
+ * If [x] is a compile-time constant, then this function is equivalent to
+ * SET_BIT_CONST(x), otherwise it is equivalent to SET_BIT_LEAST_ULL(x).
+ *
+ * NB: The second level of IF_CONST_ELSE() is required because the compiler
+ * implementation requires all expressions given to builtin_choose_expr() be
+ * syntactically valid.
+ */
+#define SET_BIT(x)                                          \
+	IF_CONST_ELSE(x, SET_BIT_CONST(IF_CONST_ELSE(x, x, 0)), \
+	    SET_BIT_LEAST_ULL(IF_CONST_ELSE(x, 0, x)))
+#endif
+
+/**
+ * Helper utility for setting the "x"th bit in an integer type of rank at least
+ * that of the type of [val].
+ */
+#define SET_BIT_LEAST_TYPE(n, val) ((1 + (((n) + (val)) ^ ((n) + (val)))) << (n))
+
+/**
+ * Helper utility for setting the "x"th bit in an unsigned integer type.
+ * The result type is the type of `x + 1ULL`. In other words, the smallest
+ * result type will be a ULL. If the rank of [x] is higher than a ULL, the
+ * result type will be the type of [x].
+ */
+#define SET_BIT_LEAST_ULL(x) SET_BIT_LEAST_TYPE(x, 1ULL)
+
+/**
+ * Return true iff the specific bit [n] is set in [val].
+ */
+#define IS_BIT_SET(val, n) (((val) & SET_BIT_LEAST_TYPE(n, val)) != 0)
 
 /**
  * Set the specified [n] number of LSBs of an unsigned integer type.
- * The result type is the type of `SET_BIT(n)`.
+ * The result type is the type of `SET_BIT_LEAST_ULL(n)`.
  */
-#define _ONES(n) (SET_BIT(n) - 1)
+#define _ONES(n) (SET_BIT_LEAST_ULL(n) - 1)
 
 /**
  * Create a bitfield mask of length [bits] starting at LSB [shift]
- * The result type is the type of `SET_BIT(bits)`.
+ * The result type is the type of `SET_BIT_LEAST_ULL(bits)`.
  */
 #define BITFIELD_MASK(bits, shift) (_ONES((bits)) << (shift))
 
 /**
  * Mask and shift to extract a bitfield.
- * The result type is the type of `val + SET_BIT(width)`.
+ * The result type is the type of `val + SET_BIT_LEAST_ULL(width)`.
  */
 #define EXTRACT_BITFIELD(width, shift, val) (((val) & BITFIELD_MASK((width), (shift))) >> shift)
 
 /**
  * Mask and shift to pack a bitfield.
- * The result type is the type of `val + SET_BIT(width)`.
+ * The result type is the type of `val + SET_BIT_LEAST_ULL(width)`.
  */
 #define PACK_BITFIELD(width, shift, val) (((val) & _ONES(width)) << (shift))
 
@@ -186,6 +227,31 @@ _Static_assert(SPTM_DISPATCH_TABLE_GEN3_DART_SK ==
  */
 /* clang-format off */
 #ifdef __ASSEMBLER__
+
+/**
+ * Assembler macro for emitting a movk instruction with a given 0/16/32/48
+ * shift if the value being set is non zero.
+ *
+ * @param regname The destination resgister name.
+ * @param value The immediate value to set the register to.
+ * @param shift The movk shift value (must be 0, 16, 32 or 48).
+ *
+ *
+ * @note Because the movk instructions might not be emitted when the immediate
+ *       value being set is 0, it is important that the register starts with the
+ *       corresponding bits being 0. A typical sequence looks like this:
+ *
+ *       mov          x_n, #(V & 0xffff) ; sets the 48 top bits to 0
+ *       MOVK_IFNZ    x_n, V, 16
+ *       MOVK_IFNZ    x_n, V, 32
+ *       MOVK_IFNZ    x_n, V, 48
+ */
+.macro MOVK_IFNZ regname, value, shift
+.if ((\value >> \shift) & 0xffff)
+	movk	\regname, #((\value >> \shift) & 0xffff), lsl #\shift
+.endif
+.endm
+
 /**
  * Assembler macro for loading the SPTM call register with the dispatch ID
  *
@@ -194,10 +260,10 @@ _Static_assert(SPTM_DISPATCH_TABLE_GEN3_DART_SK ==
  * @param endpoint_ID The destination endpoint ID
  */
 .macro SPTM_LOAD_DISPATCH_ID domain_ID, table_ID, endpoint_ID
-		movk x16, #((( BUILD_DISPATCH_ID(\domain_ID, \table_ID, \endpoint_ID) ) >> 48) & 0xFFFF), lsl #48
-		movk x16, #((( BUILD_DISPATCH_ID(\domain_ID, \table_ID, \endpoint_ID) ) >> 32) & 0xFFFF), lsl #32
-		movk x16, #((( BUILD_DISPATCH_ID(\domain_ID, \table_ID, \endpoint_ID) ) >> 16) & 0xFFFF), lsl #16
-		movk x16, #((( BUILD_DISPATCH_ID(\domain_ID, \table_ID, \endpoint_ID) ) >> 00) & 0xFFFF)
+	mov		x16, #(BUILD_DISPATCH_ID(\domain_ID, \table_ID, \endpoint_ID) & 0xffff)
+	MOVK_IFNZ	x16, BUILD_DISPATCH_ID(\domain_ID, \table_ID, \endpoint_ID), 16
+	MOVK_IFNZ	x16, BUILD_DISPATCH_ID(\domain_ID, \table_ID, \endpoint_ID), 32
+	MOVK_IFNZ	x16, BUILD_DISPATCH_ID(\domain_ID, \table_ID, \endpoint_ID), 48
 .endm
 #else /* __ASSEMBLER__ */
 /* Helper macro for the stub-generating macros defined below */
@@ -248,6 +314,8 @@ _Static_assert(SPTM_DISPATCH_TABLE_GEN3_DART_SK ==
  *                  wanted domain. "no" otherwise (the default value).
  * @param domain_ID ID of domain to hard-code as part of the entry sequence.
  * @param table_ID ID of the table to hard-code as part of the entry sequence.
+ * @param endpoint_ID ID of the endpoint to hard-code as part of the entry
+ *        sequence.
  *
  * @note pre- and post- entry hooks are generated only when XNU_CLIENT is
  *       defined (when XNU is calling into another domain) and hooks are
@@ -255,16 +323,17 @@ _Static_assert(SPTM_DISPATCH_TABLE_GEN3_DART_SK ==
  *       determined by the second argument (the hook names will be
  *       __<domain_name>_pre_entry_hook and __<domain_name>_post_exit_hook).
  *
- * @note NOT specifying a domain_ID/table_ID implies that the caller has already
- *       set up x16 with the appropriate dispatch target ID, which tells this
- *       macro not to setup x16. Otherwise, the generated stub expects x0 to
- *       contain the endpoint ID ONLY, and x1 must contain a pointer to a
- *       structure of type sptm_call_regs_t (from which x0..x7 will be loaded
- *       just prior to dispatching the call). This macro will then use the
- *       endpoint ID in x0 and the domain_ID/table_ID to generate the correct
- *       dispatch target ID to program x16 with.
+ * @note NOT specifying an endpoint_ID with a domain_ID and table_ID set implies
+ *       that the call is a dynamic dispatcher for which x0 must contain the
+ *       endpoint ID ONLY, and x1 must contain a pointer to a structure of type
+ *       sptm_call_regs_t (from which x0..x7 will be loaded just prior to
+ *       dispatching the call). This macro will then use the endpoint ID in x0
+ *       and the domain_ID/table_ID to generate the correct dispatch target ID
+ *       to program x16 with.
+ *
+ * @note NOT specifying domain_ID implies the caller has filled x16 already.
  */
-.macro GEN_DOMAIN_ENTRY_STUB stub_name, domain_name, has_hooks=no, domain_ID=none, table_ID=none
+.macro GEN_DOMAIN_ENTRY_STUB stub_name, domain_name, has_hooks, domain_ID=none, table_ID=none, endpoint_ID=none
 	.align 2
 	.global EXT(\stub_name)
 LEXT(\stub_name)
@@ -285,36 +354,55 @@ LEXT(\stub_name)
 	mov		fp, sp
 
 	bl		__\domain_name\()_pre_entry_hook
-
-	/* Pop the frame to ensure that the SPTM is saving the caller's FP/LR. */
-	mov		sp, fp
-	ldp		fp, lr, [sp], #16
 .endif
 #endif /* XNU_CLIENT */
 
 .ifnc \domain_ID,none
-
 .ifc \table_ID,none
-.error "If the domain_ID is set, then the table_ID must also be specified."
-.endif /* table_ID == none */
+.error "If domain_ID is set, then table_ID must also be specified."
+.endif
+.ifnc \endpoint_ID,none
 
 	/**
-	 * x0 contains the endpoint ID.
+	 * SPTM Call with static endpoint ID
+	 */
+
+	SPTM_LOAD_DISPATCH_ID \domain_ID, \table_ID, \endpoint_ID
+
+.else /* endpoint_ID == none */
+
+	/**
+	 * SPTM Call with dynamic endpoint ID
 	 *
-	 * Note this code has knowledge of the bitfield sizes, so any change to the
+	 * x0 contains the endpoint ID
+	 * x1 contains a pointer to an sptm_call_regs_t with the call's arguments
+	 */
+
+	.ifc \has_hooks,yes
+	/* Note: this could be supported by preserving x0 and x1 correctly */
+	.error "dispatchers with dynamic endpoint IDs do not support hooks"
+	.endif
+
+	/*
+	 * This code has knowledge of the bitfield sizes, so any change to the
 	 * PACK_*_ID macros above will require changes here as well.
 	 */
-	mov		w16, w0
-	movk	x16, (((PACK_DOMAIN_ID(\domain_ID) | PACK_TABLE_ID(\table_ID)) >> 48) & 0xFFFF), lsl #48
-	movk	x16, (((PACK_DOMAIN_ID(\domain_ID) | PACK_TABLE_ID(\table_ID)) >> 32) & 0xFFFF), lsl #32
+	.ifnc ENDPOINT_ID_SHIFT\()_\()ENDPOINT_ID_WIDTH,0_32
+	.error "assumptions made in the assembly below have broken"
+	.endif
 
-	/* Load argument registers from sptm_call_regs_t passed in x1 */
+	mov		w16, w0
+	MOVK_IFNZ	x16, BUILD_DISPATCH_ID(\domain_ID, \table_ID, 0), 32
+	MOVK_IFNZ	x16, BUILD_DISPATCH_ID(\domain_ID, \table_ID, 0), 48
+
 	mov		x10, x1
 	ldp		x0, x1, [x10]
 	ldp		x2, x3, [x10, 0x10]
 	ldp		x4, x5, [x10, 0x20]
 	ldp		x6, x7, [x10, 0x30]
-.endif /* domain_ID == none */
+
+.endif /* endpoint_ID == none */
+.endif /* domain_ID != none */
 
 	/**
 	 * Actually enter the SPTM dispatch logic. The SPTM will return to this
@@ -325,10 +413,6 @@ LEXT(\stub_name)
 
 #if defined(XNU_CLIENT)
 .ifc \has_hooks,yes
-	/* Push a stack frame to preserve the original caller's FP/LR across the hook. */
-	stp		fp, lr, [sp, #-16]!
-	mov		fp, sp
-
 	bl		__\domain_name\()_post_exit_hook
 
 	/* Pop the original caller's FP/LR to allow for returning later. */
@@ -343,6 +427,69 @@ LEXT(\stub_name)
 	ret
 #endif
 .endm
+
+#if defined(XNU_CLIENT) || defined(TXM_CLIENT) || defined(SK_CLIENT) || defined(SPTM_INTERNAL)
+
+/**
+ * Instantiates a named SPTM entry stub with the specified dispatch information.
+ *
+ * @param function_name The name of the stub.
+ * @param tableID The dispatch table ID of the call's destination.
+ * @param endpointID The dispatch endpoint ID of the call's destination.
+ *
+ * @return If the stub's dispatch destination returns a value (or values), it
+ *         is in accordance with the 64-bit AAPCS.
+ */
+.macro GEN_NAMED_SPTM_STUB function_name, table_ID, endpoint_ID
+	.text
+	GEN_DOMAIN_ENTRY_STUB \function_name, "sptm", yes, SPTM_DOMAIN, \table_ID, \endpoint_ID
+.endm
+
+/**
+ * Instantiates a named SPTM guest vcpu mode entry stub with the specified dispatch information.
+ *
+ * @note The sptm_guest_enter entry stub name does not call any hooks in XNU
+ *       as we want to avoid modifying the XNU thread preemption state when
+ *       operating in guest VCPU context.
+ *
+ * @param function_name The name of the stub.
+ * @param tableID The dispatch table ID of the call's destination.
+ * @param endpointID The dispatch endpoint ID of the call's destination.
+ *
+ * @return If the stub's dispatch destination returns a value (or values), it
+ *         is in accordance with the 64-bit AAPCS.
+ */
+.macro GEN_NAMED_SPTM_GUEST_STUB function_name, table_ID, endpoint_ID
+	.text
+	GEN_DOMAIN_ENTRY_STUB \function_name, "sptm", no, SPTM_DOMAIN, \table_ID, \endpoint_ID
+.endm
+
+/**
+ * Instantiates a named SPTM entry stub with the specified dispatch information
+ * that is callable before virtual address fixups have been applied in the
+ * calling domain.
+ *
+ * @note This stub generator is meant to only be applied to stubs that call into
+ *       the SPTM during the bootstrap process of a calling domain to tell the
+ *       SPTM that it has completed its fixups (and that the SPTM should update
+ *       the permissions for the normal TEXT section). Before this is done, the
+ *       TEXT section (where all other stubs live) is not executable. During
+ *       that time, only code in the BOOT_EXEC section is executable which is
+ *       why this macro is needed.
+ *
+ * @param function_name The name of the stub.
+ * @param tableID The dispatch table ID of the call's destination.
+ * @param endpointID The dispatch endpoint ID of the call's destination.
+ *
+ * @return If the stub's dispatch destination returns a value (or values), it
+ *         is in accordance with the 64-bit AAPCS.
+ */
+.macro GEN_NAMED_SPTM_STUB_BOOTEXEC function_name, table_ID, endpoint_ID
+	.section __TEXT_BOOT_EXEC, __bootcode, regular, pure_instructions
+	GEN_DOMAIN_ENTRY_STUB \function_name, "sptm", yes, SPTM_DOMAIN, \table_ID, \endpoint_ID
+.endm
+
+#endif /* defined(XNU_CLIENT) || defined(TXM_CLIENT) || defined(SK_CLIENT) || defined(SPTM_INTERNAL) */
 
 /* clang-format on */
 
@@ -365,7 +512,7 @@ __BEGIN_DECLS
  * The maximum number of shared regions that can exist at any single point in
  * time. TXM needs this define which is why it's in this file.
  */
-#define SHARED_REGION_MAX 255U
+#define SHARED_REGION_MAX         255U
 
 /* User-facing SPTM-defined types */
 typedef uint64_t sptm_paddr_t;
@@ -384,6 +531,32 @@ typedef uint8_t sptm_pt_level_t;
 typedef uint8_t sptm_iommu_id_t;
 typedef uint16_t sptm_instance_id_t;
 typedef uint32_t sptm_iommu_retype_params_t;
+typedef uint16_t sptm_root_flags_t;
+
+/**
+ * Execution Mode IDs. On non-POE2 devices, each domain supports a single,
+ * default mode. On POE2 devices, the number of modes is arbitrary
+ * (up to 128 for privileged software, and up to 128 for user space).
+ */
+__enum_closed_decl(execution_mode_t,
+    uint8_t,
+    {
+#define FIRST_USER_EXECUTION_MODE EXEC_MODE_XNU_USER_DEFAULT
+        /* Privileged Execution Modes */
+        EXEC_MODE_SPTM_DEFAULT,
+        EXEC_MODE_TXM_DEFAULT,
+        EXEC_MODE_XNU_DEFAULT,
+        EXEC_MODE_XNU_ROZONE_RW,
+
+        /* User Execution Modes */
+        EXEC_MODE_XNU_USER_DEFAULT,
+        EXEC_MODE_XNU_USER_JIT_RW,
+        EXEC_MODE_XNU_USER_TPRO_RW,
+
+        /* Everything below this point is not a real Execution Mode ID */
+        MAX_EXEC_MODES,
+        EXEC_MODES_ALL = 0xFF,
+    });
 
 /**
  * The heart of the SPTM is its type system; here's the exhaustive list :).
@@ -414,6 +587,7 @@ __enum_closed_decl(sptm_frame_type_t,
         XNU_USER_EXEC,
         XNU_USER_DEBUG,
         XNU_USER_JIT,
+        XNU_USER_TPRO,
         XNU_USER_ROOT_TABLE,
         XNU_SHARED_ROOT_TABLE,
         XNU_PAGE_TABLE,
@@ -424,6 +598,7 @@ __enum_closed_decl(sptm_frame_type_t,
         XNU_ROZONE,
         XNU_IO,
         XNU_PROTECTED_IO,
+        XNU_COPROCESSOR_RO_IO,
         XNU_COMMPAGE_RW,
         XNU_COMMPAGE_RO,
         XNU_COMMPAGE_RX,
@@ -774,7 +949,7 @@ typedef struct {
 
 			/* Root table flags to be set at retype time. */
 #if !USE_UNSAFE_TYPES
-			uint8_t flags;
+			sptm_root_flags_t flags;
 #else
 			sptm_root_flags_u flags_U;
 #endif
@@ -920,63 +1095,6 @@ _Static_assert(offsetof(sptm_call_regs_t, x7) == (7 * sizeof(uint64_t)),
 			 "b _" entry_stub_name "\n")
 /* clang-format on */
 
-#if defined(XNU_CLIENT) || defined(TXM_CLIENT) || defined(SK_CLIENT) || defined(SPTM_INTERNAL)
-/**
- * Instantiates a named SPTM entry stub with the specified dispatch information.
- *
- * @param function_name The name of the stub.
- * @param tableID The dispatch table ID of the call's destination.
- * @param endpointID The dispatch endpoint ID of the call's destination.
- *
- * @return If the stub's dispatch destination returns a value (or values), it
- *         is in accordance with the 64-bit AAPCS.
- */
-#define GEN_NAMED_SPTM_STUB(function_name, table_ID, endpoint_ID) \
-	GEN_NAMED_STUB(".text", function_name, "sptm_enter", SPTM_DOMAIN, table_ID, endpoint_ID)
-
-/**
- * Instantiates a named SPTM guest vcpu mode entry stub with the specified dispatch information.
- *
- * @note The sptm_guest_enter entry stub name does not call any hooks in XNU
- *       as we want to avoid modifying the XNU thread preemption state when
- *       operating in guest VCPU context.
- *
- * @param function_name The name of the stub.
- * @param tableID The dispatch table ID of the call's destination.
- * @param endpointID The dispatch endpoint ID of the call's destination.
- *
- * @return If the stub's dispatch destination returns a value (or values), it
- *         is in accordance with the 64-bit AAPCS.
- */
-#define GEN_NAMED_SPTM_GUEST_STUB(function_name, table_ID, endpoint_ID)                    \
-	GEN_NAMED_STUB(".text", function_name, "sptm_guest_mode_enter", SPTM_DOMAIN, table_ID, \
-	    endpoint_ID)
-
-/**
- * Instantiates a named SPTM entry stub with the specified dispatch information
- * that is callable before virtual address fixups have been applied in the
- * calling domain.
- *
- * @note This stub generator is meant to only be applied to stubs that call into
- *       the SPTM during the bootstrap process of a calling domain to tell the
- *       SPTM that it has completed its fixups (and that the SPTM should update
- *       the permissions for the normal TEXT section). Before this is done, the
- *       TEXT section (where all other stubs live) is not executable. During
- *       that time, only code in the BOOT_EXEC section is executable which is
- *       why this macro is needed.
- *
- * @param function_name The name of the stub.
- * @param tableID The dispatch table ID of the call's destination.
- * @param endpointID The dispatch endpoint ID of the call's destination.
- *
- * @return If the stub's dispatch destination returns a value (or values), it
- *         is in accordance with the 64-bit AAPCS.
- */
-#define GEN_NAMED_SPTM_STUB_BOOTEXEC(function_name, table_ID, endpoint_ID)              \
-	GEN_NAMED_STUB(".section __TEXT_BOOT_EXEC, __bootcode, regular, pure_instructions", \
-	    function_name, "sptm_enter", SPTM_DOMAIN, table_ID, endpoint_ID)
-#endif /* defined(XNU_CLIENT) || defined(TXM_CLIENT) || defined(SK_CLIENT) || defined(SPTM_INTERNAL) */
-
 /**
  * Retype frame at a given physical address.
  *
@@ -999,7 +1117,7 @@ void sptm_retype(sptm_paddr_t paddr,
     sptm_retype_params_t retype_params);
 #else
 void sptm_retype(sptm_managed_page_u managed_page_U,
-    sptm_frame_type_t current_type,
+    sptm_frame_type_u current_type_U,
     sptm_frame_type_u new_type_U,
     sptm_retype_params_t retype_params_U);
 #endif

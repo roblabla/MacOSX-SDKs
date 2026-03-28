@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MediaML.framework/Versions/A/MediaML'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s7MediaML01kaB10_binnedSnrSSvau', '_$s7MediaML01kaB10_binnedSnrSSvp', 
                        '_$s7MediaML01kaB10_dayOfWeekSSvau', '_$s7MediaML01kaB10_dayOfWeekSSvp', 
                        '_$s7MediaML01kaB10_hourOfDaySSvau', '_$s7MediaML01kaB10_hourOfDaySSvp', 

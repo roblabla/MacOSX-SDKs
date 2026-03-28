@@ -57,11 +57,19 @@ __BEGIN_DECLS
 #include <kern/clock.h>
 
 /*
- * min/max macros.
+ * IOMin/IOMax macros.
  */
 
-#define min(a, b) ((a) < (b) ? (a) : (b))
-#define max(a, b) ((a) > (b) ? (a) : (b))
+#define IOMin(a, b) ((a) < (b) ? (a) : (b))
+#define IOMax(a, b) ((a) > (b) ? (a) : (b))
+
+/* FIXME(rdar://155575647): Remove deprecated `max` and `min` macros from <IOKit/IOLib.h> */
+#define min(a, b) \
+	_Pragma("message \"min is deprecated. Please use IOMin instead.\"") \
+	IOMin(a, b)
+#define max(a, b) \
+	_Pragma("message \"max is deprecated. Please use IOMax instead.\"") \
+	IOMax(a, b)
 
 /*
  * Safe functions to compute array sizes (saturate to a size that can't be
@@ -121,7 +129,7 @@ void * IOMallocZero(vm_size_t size)  __attribute__((alloc_size(1)));
 void   IOFree(void * address, vm_size_t size);
 
 /*! @function IOMallocAligned
- *   @abstract Allocates wired memory in the kernel map, with an alignment restriction.
+ *   @abstract Allocates wired memory in the shared data heap, with an alignment restriction.
  *   @discussion This is a utility to allocate memory in the kernel, with an alignment restriction which is specified as a byte count. This function may block and so should not be called from interrupt level or while a simple lock is held.
  *   @param size Size of the memory requested.
  *   @param alignment Byte count of the alignment for the memory. For example, pass 256 to get memory allocated at an address with bit 0-7 zero.
@@ -202,19 +210,19 @@ void * IOMallocData(vm_size_t size) __attribute__((alloc_size(1)));
  *   @result Pointer to the allocated memory, or zero on failure. */
 void * IOMallocZeroData(vm_size_t size) __attribute__((alloc_size(1)));
 
-/*! @function IOMallocDataSharable
+/*! @function IOMallocDataShareable
  *   @abstract Allocates wired memory in the kernel map, from a separate section meant for pure data that meant to be shared.
  *   @discussion Same as IOMalloc except that this function should be used for allocating pure data.
  *   @param size Size of the memory requested.
  *   @result Pointer to the allocated memory, or zero on failure. */
-void * IOMallocDataSharable(vm_size_t size) __attribute__((alloc_size(1)));
+void * IOMallocDataShareable(vm_size_t size) __attribute__((alloc_size(1)));
 
-/*! @function IOMallocZeroDataSharable
+/*! @function IOMallocZeroDataShareable
  *   @abstract Allocates wired memory in the kernel map, from a separate section meant for pure data bytes that don't contain pointers and meant to be shared.
- *   @discussion Same as IOMallocDataSharable except that the memory returned is zeroed.
+ *   @discussion Same as IOMallocDataShareable except that the memory returned is zeroed.
  *   @param size Size of the memory requested.
  *   @result Pointer to the allocated memory, or zero on failure. */
-void * IOMallocZeroDataSharable(vm_size_t size) __attribute__((alloc_size(1)));
+void * IOMallocZeroDataShareable(vm_size_t size) __attribute__((alloc_size(1)));
 
 
 /*! @function IOFreeData
@@ -224,12 +232,12 @@ void * IOMallocZeroDataSharable(vm_size_t size) __attribute__((alloc_size(1)));
  *   @param size Size of the memory allocated. It is acceptable to pass 0 size for a NULL address. */
 void IOFreeData(void * address, vm_size_t size);
 
-/*! @function IOFreeDataSharable
- *   @abstract Frees memory allocated with IOMallocDataSharable or IOMallocZeroDataSharable.
- *   @discussion This function frees memory allocated with IOMallocDataSharable/IOMallocZeroDataSharable, it may block and so should not be called from interrupt level or while a simple lock is held.
+/*! @function IOFreeDataShareable
+ *   @abstract Frees memory allocated with IOMallocDataShareable or IOMallocZeroDataShareable.
+ *   @discussion This function frees memory allocated with IOMallocDataShareable/IOMallocZeroDataShareable, it may block and so should not be called from interrupt level or while a simple lock is held.
  *   @param address Virtual address of the allocated memory. Passing NULL here is acceptable.
  *   @param size Size of the memory allocated. It is acceptable to pass 0 size for a NULL address. */
-void IOFreeDataSharable(void * address, vm_size_t size);
+void IOFreeDataShareable(void * address, vm_size_t size);
 
 #define IONewData(type, count) \
 	((type *)IOMallocData(IOMallocArraySize(0, sizeof(type), count)))
@@ -237,10 +245,23 @@ void IOFreeDataSharable(void * address, vm_size_t size);
 #define IONewZeroData(type, count) \
 	((type *)IOMallocZeroData(IOMallocArraySize(0, sizeof(type), count)))
 
+#define IONewDataShareable(type, count) \
+	((type *)IOMallocDataShareable(IOMallocArraySize(0, sizeof(type), count)))
+
+#define IONewZeroDataShareable(type, count) \
+	((type *)IOMallocZeroDataShareable(IOMallocArraySize(0, sizeof(type), count)))
+
 #define IODeleteData(ptr, type, count) ({ \
 	vm_size_t  __count = (vm_size_t)(count);             \
 	IOKIT_TYPE_ASSERT_COMPATIBLE_POINTER(ptr, type);     \
 	IOFreeData(os_ptr_load_and_erase(ptr),               \
+	    IOMallocArraySize(0, sizeof(type), __count));    \
+})
+
+#define IODeleteDataShareable(ptr, type, count) ({ \
+	vm_size_t  __count = (vm_size_t)(count);             \
+	IOKIT_TYPE_ASSERT_COMPATIBLE_POINTER(ptr, type);     \
+	IOFreeDataShareable(os_ptr_load_and_erase(ptr),      \
 	    IOMallocArraySize(0, sizeof(type), __count));    \
 })
 

@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+install-name:    '/System/Library/PrivateFrameworks/UnilogSchemaManifest.framework/Versions/A/UnilogSchemaManifest'
+current-version: 0
+compatibility-version: 0
+swift-abi-version: 7
+exports:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s20UnilogSchemaManifest0abC8ResourceO04makebC014withIdentifier17PoirotSchematizer0bC0VSS_tFZ', 
+                       '_$s20UnilogSchemaManifest0abC8ResourceO18fullyQualifiedName14withIdentifierS2S_tFZ', 
+                       '_$s20UnilogSchemaManifest0abC8ResourceOMa', '_$s20UnilogSchemaManifest0abC8ResourceOMn', 
+                       '_$s20UnilogSchemaManifest0abC8ResourceON', _UnilogSchemaManifestVersionNumber, 
+                       _UnilogSchemaManifestVersionString ]
+...

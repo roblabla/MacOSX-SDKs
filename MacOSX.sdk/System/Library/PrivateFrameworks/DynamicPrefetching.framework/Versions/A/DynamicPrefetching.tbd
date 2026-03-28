@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+install-name:    '/System/Library/PrivateFrameworks/DynamicPrefetching.framework/Versions/A/DynamicPrefetching'
+current-version: 3.4
+compatibility-version: 0
+exports:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ __ZN11Prefetching19kDefaultsDomainFastE, __ZN11Prefetching19kPrefetchingEnabledE, 
+                       __ZN11Prefetching21kLastSeenBuildVersionE, __ZN11Prefetching2V117get_profile_statsERNS0_7ProfileE, 
+                       __ZN11Prefetching2V126print_verbose_profile_infoERNS0_7ProfileE, 
+                       __ZN11Prefetching32get_prefetching_enablement_stateEv, __ZN11Prefetching32set_prefetching_enablement_stateENS_19prefetching_state_tE, 
+                       __ZN11Prefetching34clear_prefetching_enablement_stateEv, _end_scenario, 
+                       _start_scenario ]
+...

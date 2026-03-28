@@ -1,17 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TimeMachinePrivate.framework/Versions/A/TimeMachinePrivate'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ IntegrationTests, SystemUIServer, TMDebugTool, TMHelperAgent, 
                        Time Machine System Restore, TimeMachine, TimeMachineMenuExtra, 
                        TimeMachineSettings, TimeMachineSettings-Debug, TimeMachineWidgetTestExtension, 
                        TimelineUI, UnitTests, backupd, backupd-helper, fscompare, 
                        tmdiagnose, tmutil ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Descriptor18TimeMachinePrivate10CopySourcePTl', '_$s10Descriptor18TimeMachinePrivate15CopyDestinationPTl', 
                        '_$s10Foundation3URLV18TimeMachinePrivate15URLEnumeratableADMc', 
                        '_$s10Foundation3URLV18TimeMachinePrivate15URLEnumeratableADWP', 

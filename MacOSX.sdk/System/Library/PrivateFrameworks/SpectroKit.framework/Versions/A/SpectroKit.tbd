@@ -1,10 +1,22 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpectroKit.framework/Versions/A/SpectroKit'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _revealCRLF, _serialClose, _serialModemPaths, _serialOpen, 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ _CALIBRATION_DESCRIPTION_SIZE, _CUSTOMER_SERIAL_NUMBER_LENGTH, 
+                       _DeviceRemovalCallback, _HARDWARE_VERSION_LENGTH, _HIDInputReportCallback, 
+                       _HLSDK_VersionNumber, _HLSDK_VersionString, _I1D3_DEVICE_KEY_SIZE, 
+                       _I1D3_PASSWORD_SIZE, _MatrixUtilsErrorDomain, _PK2_LENGTH, 
+                       _kI1D3EPROMCalDataHeaderDescriptionLength, _kYxyPaddingLength, 
+                       _revealCRLF, _serialClose, _serialModemPaths, _serialOpen, 
                        _serialRead, _serialSendWithTimeout ]
-    objc-classes:    [ Spectro ]
+    objc-classes:    [ BinaryParser, CIEXYZ1931_2deg, Colorimeter, EDRDescriptor, 
+                       EDRManager, EDRMeasureDataWithYxyAndSpectral, EDRParser, EDRRGBType, 
+                       EDRSpectral, EDRSpectralHeader, EDRYxyType, HLCommandEntry, 
+                       HLCommandPacket, HLCommandProcessor, HLPayloadBuilder, HLResponsePacket, 
+                       HLUSBDevice, HLUnlockResponsePacket, I1D3ExternalEPROM, I1D3ExternalEPROMCalibration, 
+                       I1D3ExternalEPROMHeader, I1D3ExternalEPROMSpectral, I1D3InternalEPROM, 
+                       MatrixUtils, Spectral, SpectralGroup, Spectro, hlDriver, i1d3DriverComms ]
+    objc-ivars:      [ I1D3ExternalEPROMCalibration.matrix, I1D3InternalEPROM.darkCurrent ]
 ...

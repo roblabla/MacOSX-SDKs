@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ApplePushService.framework/Versions/A/ApplePushService'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _APSAlert, _APSBundleIdentifier, _APSCachedIPKey, _APSCarrierNameKey, 
                        _APSClientIdentityUpdatedNotification, _APSConnectionDefaultDebugStyle, 
                        _APSConnectionInitiateEntitlement, _APSConnectionOverrideNamedDelegatePort, 
@@ -40,11 +38,12 @@ exports:
                        _APSPropertyListFromNSData, _APSPubSubError, _APSPubSubErrorDomain, 
                        _APSPubSubPowerLog, _APSPushWakeEntitlement, _APSRollTokenEntitlement, 
                        _APSSafeArrayOfStrings, _APSSetXPCConnectionContext, _APSSystemUsersKey, 
-                       _APSTokenInfosKey, _APSTrustAllHosts, _APSURLTokenError, _APSURLTokenErrorDomain, 
-                       _APSUltraConstrainedEntitlement, _APSUnderlyingError, _APSUseMultiIdentityProvider, 
-                       _APSXPCConfigureConnection, _APSXPCConnectionSetEventHandlers, 
-                       _APSXPCCreateConnectionForService, _APSXPCCreateConnectionForServiceWithQueue, 
-                       _APSXPCCreateServerConnection, _APSXPCMessageTypeKey, _aps_log_reduce_logging ]
+                       _APSTokenInfosKey, _APSTokenValidationKey, _APSTrustAllHosts, 
+                       _APSURLTokenError, _APSURLTokenErrorDomain, _APSUltraConstrainedEntitlement, 
+                       _APSUnderlyingError, _APSUseMultiIdentityProvider, _APSXPCConfigureConnection, 
+                       _APSXPCConnectionSetEventHandlers, _APSXPCCreateConnectionForService, 
+                       _APSXPCCreateConnectionForServiceWithQueue, _APSXPCCreateServerConnection, 
+                       _APSXPCMessageTypeKey, _aps_log_reduce_logging ]
     objc-classes:    [ APSAccessCheck, APSAppTokenInfo, APSChannelSubscriptionFailure, 
                        APSConnection, APSDNSRequest, APSDNSResponse, APSIncomingMessage, 
                        APSLog, APSMessage, APSOutgoingMessage, APSSignDataWithIdentityRequest, 

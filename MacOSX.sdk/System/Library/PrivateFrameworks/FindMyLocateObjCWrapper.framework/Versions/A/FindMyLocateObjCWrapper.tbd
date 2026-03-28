@@ -1,17 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FindMyLocateObjCWrapper.framework/Versions/A/FindMyLocateObjCWrapper'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FindMyLocateTests, Messages, findmydevice-user-agent, findmydeviced, 
                        fmltool ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12FindMyLocate20FriendshipExpirationO0abC11ObjCWrapperE7wrappedSo013FMLFriendshipE0Vvg', 
                        '_$s12FindMyLocate20FriendshipExpirationO0abC11ObjCWrapperE7wrappedSo013FMLFriendshipE0VvpMV', 
                        '_$s23FindMyLocateObjCWrapper0D10CBootstrapC022cachedFriendsFollowingB8LocationSaySo9FMLFriendCGyF', 

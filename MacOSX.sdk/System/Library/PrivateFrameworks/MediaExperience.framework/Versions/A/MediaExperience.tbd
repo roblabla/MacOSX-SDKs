@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MediaExperience.framework/Versions/A/MediaExperience'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/System/Library/Frameworks/MediaToolbox.framework/Versions/A/MediaToolbox$$1$10.15$14.0$_FigSTSCreate', 
                        '$ld$previous$/System/Library/Frameworks/MediaToolbox.framework/Versions/A/MediaToolbox$$1$10.15$14.0$_FigSTSGetCMBaseObject', 
                        '$ld$previous$/System/Library/Frameworks/MediaToolbox.framework/Versions/A/MediaToolbox$$1$10.15$14.0$_FigSTSGetClassID', 
@@ -168,18 +166,19 @@ exports:
                        _kFigEndpointDescriptorKey_SupportsRelay, _kFigEndpointDescriptorKey_SupportsSharePlay, 
                        _kFigEndpointDescriptorKey_SupportsSmartRouting, _kFigEndpointDescriptorKey_TightSyncBuddyNotReachable, 
                        _kFigEndpointDescriptorKey_TightSyncIsGroupLeader, _kFigEndpointDescriptorKey_TightSyncUUID, 
-                       _kFigEndpointDescriptorKey_TransportType, _kFigEndpointDescriptorKey_VehicleInformation, 
-                       _kFigEndpointDescriptorKey_VoiceActivationType, _kFigEndpointDescriptorKey_VolumeControlType, 
-                       _kFigEndpointDescriptorKey_iOSEntityIsDoingTurnByTurn, _kFigEndpointDescriptorValue_MissingEntitlement, 
-                       _kFigEndpointDescriptor_BTDetails_EndpointType_Headphones, 
+                       _kFigEndpointDescriptorKey_TransportType, _kFigEndpointDescriptorKey_TransportTypeForMetrics, 
+                       _kFigEndpointDescriptorKey_VehicleInformation, _kFigEndpointDescriptorKey_VoiceActivationType, 
+                       _kFigEndpointDescriptorKey_VolumeControlType, _kFigEndpointDescriptorKey_iOSEntityIsDoingTurnByTurn, 
+                       _kFigEndpointDescriptorValue_MissingEntitlement, _kFigEndpointDescriptor_BTDetails_EndpointType_Headphones, 
                        _kFigEndpointDescriptor_BTDetails_EndpointType_HearingAid, 
                        _kFigEndpointDescriptor_BTDetails_EndpointType_Other, _kFigEndpointDescriptor_BTDetails_EndpointType_Speakers, 
                        _kFigEndpointDescriptor_BTDetails_EndpointType_TTY, _kFigEndpointDescriptor_BTDetails_EndpointType_Unspecified, 
-                       _kFigEndpointDescriptor_BTDetails_EndpointType_Vehicle, _kFigEndpointDescriptor_ClusterType_HT, 
-                       _kFigEndpointDescriptor_ClusterType_StereoPair, _kFigEndpointDescriptor_ClusterType_Unknown, 
-                       _kFigEndpointDescriptor_MirroringMode_Default, _kFigEndpointDescriptor_MirroringMode_SecondScreen, 
-                       _kFigEndpointDescriptor_RouteType_Default, _kFigEndpointDescriptor_RouteType_Override, 
-                       _kFigEndpointDescriptor_RouteType_Wireless, _kFigEndpointUIAgentNotificationPayloadKey_CopyPasswordFromKeychainContext, 
+                       _kFigEndpointDescriptor_BTDetails_EndpointType_Vehicle, _kFigEndpointDescriptor_ClusterType_GenericAudio, 
+                       _kFigEndpointDescriptor_ClusterType_HT, _kFigEndpointDescriptor_ClusterType_StereoPair, 
+                       _kFigEndpointDescriptor_ClusterType_Unknown, _kFigEndpointDescriptor_MirroringMode_Default, 
+                       _kFigEndpointDescriptor_MirroringMode_SecondScreen, _kFigEndpointDescriptor_RouteType_Default, 
+                       _kFigEndpointDescriptor_RouteType_Override, _kFigEndpointDescriptor_RouteType_Wireless, 
+                       _kFigEndpointUIAgentNotificationPayloadKey_CopyPasswordFromKeychainContext, 
                        _kFigEndpointUIAgentNotificationPayloadKey_CopyPasswordFromKeychainInfo, 
                        _kFigEndpointUIAgentNotificationPayloadKey_EchoedDictionary, 
                        _kFigEndpointUIAgentNotificationPayloadKey_FinishedWithPromptInfo, 
@@ -235,7 +234,7 @@ exports:
                        _kFigRoutingContextNotificationPayloadKey_ConfigUpdateReasonEndedFailed_CurrentRoutes, 
                        _kFigRoutingContextNotificationPayloadKey_ConfigUpdateReasonEndedFailed_DeviceID, 
                        _kFigRoutingContextNotificationPayloadKey_ConfigUpdateReasonEndedFailed_ErrorString, 
-                       _kFigRoutingContextNotificationPayloadKey_CurrentRouteChanged_ShouldPause, 
+                       _kFigRoutingContextNotificationPayloadKey_CorrelationID, _kFigRoutingContextNotificationPayloadKey_CurrentRouteChanged_ShouldPause, 
                        _kFigRoutingContextNotificationPayloadKey_Data, _kFigRoutingContextNotificationPayloadKey_DeviceID, 
                        _kFigRoutingContextNotificationPayloadKey_RemoteControlSessionData, 
                        _kFigRoutingContextNotificationPayloadKey_RemoteControlSessionID, 
@@ -488,8 +487,9 @@ exports:
                        _kMXSessionProperty_InputGainAvailable, _kMXSessionProperty_InputGainScalar, 
                        _kMXSessionProperty_InterruptionFadeDuration, _kMXSessionProperty_InterruptionPriority, 
                        _kMXSessionProperty_InterruptionStyle, _kMXSessionProperty_IsActive, 
-                       _kMXSessionProperty_IsAirPlayReceiverSession, _kMXSessionProperty_IsAudioSession, 
-                       _kMXSessionProperty_IsDucked, _kMXSessionProperty_IsEligibleForBTSmartRoutingConsideration, 
+                       _kMXSessionProperty_IsAirPlayReceiverSession, _kMXSessionProperty_IsAirPlayVideoAllowedByClient, 
+                       _kMXSessionProperty_IsAudioSession, _kMXSessionProperty_IsDucked, 
+                       _kMXSessionProperty_IsEligibleForBTSmartRoutingConsideration, 
                        _kMXSessionProperty_IsEligibleForBTTriangleConsideration, 
                        _kMXSessionProperty_IsEligibleForNowPlayingAppConsideration, 
                        _kMXSessionProperty_IsExpanseCallSession, _kMXSessionProperty_IsExpanseMediaSession, 

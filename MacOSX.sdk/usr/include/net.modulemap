@@ -1,4 +1,4 @@
-module Darwin.POSIX.net [system] {
+module Darwin.POSIX.net {
   module dl {
     header "net/if_dl.h"
     export *
@@ -15,7 +15,7 @@ module Darwin.POSIX.net [system] {
   }
 }
 
-module Darwin.net [system] {
+module Darwin.net {
   module bpf {
     header "net/bpf.h"
     export *

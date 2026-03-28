@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SwiftMedia.framework/Versions/A/SwiftMedia'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ QuickTime Player, SwiftMediaTester, SwiftMediaTests, TV, VideosUI ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Components10SwiftMedia0C3_v1PTl', '_$s10SwiftMedia0B0V0A2UI5SceneAAMc', 
                        '_$s10SwiftMedia0B0V4bodyQrvg', '_$s10SwiftMedia0B0V4bodyQrvpMV', 
                        '_$s10SwiftMedia0B0V4bodyQrvpQOMQ', '_$s10SwiftMedia0B0V6player10experienceACSo8AVPlayerCSg_0A2UI7BindingVyAA17ViewingExperienceOGtcfC', 
@@ -516,5 +516,5 @@ exports:
                        '_$s7SwiftUI4ViewP0A5MediaE30mediaAllowedViewingExperiencesyQrAD0gH0VFQOMQ', 
                        '_$s7SwiftUI4ViewP0A5MediaE5media13playbackState_QrAA7BindingVyAD2v1V08PlaybackG0VG_qd__yXEtAD0d1_I0Rd__lF', 
                        '_$s7SwiftUI4ViewP0A5MediaE5media13playbackState_QrAA7BindingVyAD2v1V08PlaybackG0VG_qd__yXEtAD0d1_I0Rd__lFQOMQ', 
-                       '_$sSo6CGSizeV10SwiftMediaE10fittedRect3forA2B_tF', '_$sSo6CGSizeV10SwiftMediaE11scaleFactor3forA2B_tF' ]
+                       '_$sSo6CGSizeV10SwiftMediaE10fittedRect3forA2B_tF', '_$sSo6CGSizeV10SwiftMediaE27scaleVerticallyToFillFactor3forA2B_tF' ]
 ...

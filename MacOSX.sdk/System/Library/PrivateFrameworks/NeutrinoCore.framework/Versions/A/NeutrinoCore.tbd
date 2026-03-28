@@ -1,9 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/NeutrinoCore.framework/Versions/A/NeutrinoCore'
-current-version: 821.0.120
+current-version: 841.0.101
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN2NU10RectFinderE, __ZTIN2NU14PathRectFinderE, __ZTIN2NU16AnchorRectFinderE, 
@@ -12,8 +11,7 @@ exports:
                        __ZTSN2NU14PathRectFinderE, __ZTSN2NU16AnchorRectFinderE, 
                        __ZTSN2NU16centerRectFinderE, __ZTSN2NU24AnchorRectFinderVerticalE, 
                        __ZTSN2NU26AnchorRectFinderHorizontalE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CGAffineTransformDeterminant, _CGAffineTransformDot, _CGAffineTransformFixedPoint, 
                        _CGAffineTransformForMappingFromRectToRect, _CGAffineTransformHasRotation, 
                        _CGAffineTransformIsValid, _CGAffineTransformMove, _CGAffineTransformRelative, 

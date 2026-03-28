@@ -1,0 +1,29 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64e-macos ]
+install-name:    '/System/Library/PrivateFrameworks/NanoPassKitUI.framework/Versions/A/NanoPassKitUI'
+swift-abi-version: 7
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s11NanoPassKit23LocalizedStringProviderV0abC2UIE04nanobC18UIBundleIdentifierSSvgZ', 
+                       '_$s11NanoPassKit23LocalizedStringProviderV0abC2UIE11peerPaymentACvgZ', 
+                       '_$s11NanoPassKit23LocalizedStringProviderV0abC2UIE12eventTicketsACvgZ', 
+                       '_$s11NanoPassKit23LocalizedStringProviderV0abC2UIE13flightTicketsACvgZ', 
+                       '_$s11NanoPassKit23LocalizedStringProviderV0abC2UIE17nearbyPeerPaymentACvgZ', 
+                       _NPKAttributedStringWithParagraphsFromStrings, _NPKDarkenedControlCenterOverlayEnabled, 
+                       _NPKNewDockDesignEnabled, _NPKProtoRemotePassActionCardTypeForNPKRemotePassActionCardType, 
+                       _NPKProtoRemotePassActionEnvelopeVersion, _NPKProtoRemotePassActionResultForNPKProtoRemotePassActionResponseResult, 
+                       _NPKRemotePassActionAppExtensionIdentifier, _NPKRemotePassActionCardTypeForNPKProtoRemotePassActionCardType, 
+                       _NPKRemotePassActionCardTypeForPass, _NPKRemotePassActionMessageAbsoluteDataURLPrefix, 
+                       _NPKRemotePassActionRequestDestinationAppleID, _NPKRemotePassActionResponseResultForNPKProtoRemotePassActionResult, 
+                       _NPKSideButtonFrameWithScreenSpecs, _NPKUIDateFormatterWithFourDigitYearShortStyle, 
+                       _NPKUIDisplayableLocationForTransaction, _NPKUILocalizedString, 
+                       _NPKUILocalizedStringWithTableSuffix, _NPKUIShouldUseCompactLayout, 
+                       __NPKUIResetShouldUseCompactLayout, __NPKUISetEffectiveMainScreenBounds, 
+                       __NPKUISetShouldUseCompactLayout, __Z35NPKUILocalizedStringWithTableSuffixP8NSStringS0_S0_z, 
+                       _newEventTicketBackgroundLayers ]
+    objc-classes:    [ NPKPassViewGeometry, NPKRemotePassAction, NPKRemotePassActionEnterValueRequest, 
+                       NPKRemotePassActionEnterValueResponse, NPKRemotePassActionRequest, 
+                       NPKRemotePassActionResponse, NPKRemotePassActionSelectItemRequest, 
+                       NPKRemotePassActionSelectItemResponse, NPKWatchDisplayMetrics ]
+...

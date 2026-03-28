@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TextToSpeech.framework/Versions/A/TextToSpeech'
 swift-abi-version: 7
 exports:
@@ -10,8 +9,7 @@ exports:
                        __ZTINSt3__120__shared_ptr_emplaceIN5caulk17lifetime_observedINS_10unique_ptrI9DFTSetupsNS_14default_deleteIS4_EEEENS1_23shared_instance_managerIS4_E8observerEEENS_9allocatorISB_EEEE, 
                        __ZTSN5ausdk11AUExceptionE, __ZTSN5ausdk13ComponentBaseE, 
                        __ZTSNSt3__120__shared_ptr_emplaceIN5caulk17lifetime_observedINS_10unique_ptrI9DFTSetupsNS_14default_deleteIS4_EEEENS1_23shared_instance_managerIS4_E8observerEEENS_9allocatorISB_EEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation3URLV12TextToSpeechE28uncontainerizedHomeDirectoryACvgZ', 
                        '_$s10Foundation3URLV12TextToSpeechE28uncontainerizedHomeDirectoryACvpZMV', 
                        '_$s10Foundation6LocaleV12LanguageCodeV12TextToSpeechE05macroC0AESgvg', 
@@ -2045,6 +2043,8 @@ exports:
                        '_$s12TextToSpeech16TTSMarkupVisitorP5visityyAA0D0O7PhonemeVFTq', 
                        '_$s12TextToSpeech16TTSMarkupVisitorP5visityyAA0D0O7ProsodyVFTj', 
                        '_$s12TextToSpeech16TTSMarkupVisitorP5visityyAA0D0O7ProsodyVFTq', 
+                       '_$s12TextToSpeech16TTSMarkupVisitorP5visityyAA0D0O8EmphasisVFTj', 
+                       '_$s12TextToSpeech16TTSMarkupVisitorP5visityyAA0D0O8EmphasisVFTq', 
                        '_$s12TextToSpeech16TTSMarkupVisitorP5visityyAA0D0O8LanguageVFTj', 
                        '_$s12TextToSpeech16TTSMarkupVisitorP5visityyAA0D0O8LanguageVFTq', 
                        '_$s12TextToSpeech16TTSMarkupVisitorP5visityyAA0D0O8SentenceVFTj', 
@@ -2068,6 +2068,7 @@ exports:
                        '_$s12TextToSpeech16TTSMarkupVisitorPAAE5visityyAA0D0O5VoiceVF', 
                        '_$s12TextToSpeech16TTSMarkupVisitorPAAE5visityyAA0D0O7PhonemeVF', 
                        '_$s12TextToSpeech16TTSMarkupVisitorPAAE5visityyAA0D0O7ProsodyVF', 
+                       '_$s12TextToSpeech16TTSMarkupVisitorPAAE5visityyAA0D0O8EmphasisVF', 
                        '_$s12TextToSpeech16TTSMarkupVisitorPAAE5visityyAA0D0O8LanguageVF', 
                        '_$s12TextToSpeech16TTSMarkupVisitorPAAE5visityyAA0D0O8SentenceVF', 
                        '_$s12TextToSpeech16TTSMarkupVisitorPAAE5visityyAA0D0O9ParagraphVF', 
@@ -4008,4 +4009,5 @@ exports:
                        _TtC12TextToSpeech27TTSMagicFirstPartyAudioUnit ]
     objc-ivars:      [ TTSFormatArgument.attributes, TTSFormatArgument.formatSpecifier, 
                        TTSFormatArgument.formattedArg ]
+    weak-symbols:    [ __ZNSt3__16ranges5__cpo4sortE ]
 ...

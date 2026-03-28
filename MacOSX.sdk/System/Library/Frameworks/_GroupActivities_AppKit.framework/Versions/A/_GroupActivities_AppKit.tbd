@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_GroupActivities_AppKit.framework/Versions/A/_GroupActivities_AppKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s23_GroupActivities_AppKit0A21ActivitySharingResultO2eeoiySbAC_ACtFZ', 
                        '_$s23_GroupActivities_AppKit0A21ActivitySharingResultO4hash4intoys6HasherVz_tF', 
                        '_$s23_GroupActivities_AppKit0A21ActivitySharingResultO7successyA2CmFWC', 

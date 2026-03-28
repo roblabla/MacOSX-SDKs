@@ -214,13 +214,15 @@ enum
  */
 enum tInternalUSBHostConnectionSpeed
 {
-    kUSBHostConnectionSpeedLow          = 0,
-    kUSBHostConnectionSpeedFull         = 1,
-    kUSBHostConnectionSpeedHigh         = 2,
-    kUSBHostConnectionSpeedSuper        = 3,
-    kUSBHostConnectionSpeedSuperPlus    = 4,
-    kUSBHostConnectionSpeedSuperPlusBy2 = 5,
-    kUSBHostConnectionSpeedCount        = 6
+    kUSBHostConnectionSpeedLow              = 0,        // 1.5 Mb/s
+    kUSBHostConnectionSpeedFull             = 1,        // 12 Mb/s
+    kUSBHostConnectionSpeedHigh             = 2,        // 480 Mb/s
+    kUSBHostConnectionSpeedSuper            = 3,        // 5 Gb/s
+    kUSBHostConnectionSpeedSuperPlus        = 4,        // 10 Gb/s
+    kUSBHostConnectionSpeedSuperPlusBy2     = 5,        // 20 Gb/s
+    kUSBHostConnectionSpeedTunneled40Gb     = 6,        // 40 Gb/s
+    kUSBHostConnectionSpeedTunneled80Gb     = 7,        // 80 Gb/s
+    kUSBHostConnectionSpeedCount            = 8
 };
 
 
@@ -303,6 +305,7 @@ enum tUSBHostConnectionSpeed
     kUSBHostPortConnectionSpeedSuper        = kIOUSBHostConnectionSpeedSuper,
     kUSBHostPortConnectionSpeedSuperPlus    = kIOUSBHostConnectionSpeedSuperPlus,
     kUSBHostPortConnectionSpeedSuperPlusBy2 = kIOUSBHostConnectionSpeedSuperPlusBy2,
+    kUSBHostPortConnectionSpeedOther        = kIOUSBHostConnectionSpeedOther,
     kUSBHostPortConnectionSpeedCount        = kIOUSBHostConnectionSpeedCount
 };
 
@@ -354,6 +357,7 @@ enum tUSBHostPortStatus
     kUSBHostPortStatusConnectedSpeedSuper        = kIOUSBHostPortStatusConnectedSpeedSuper,
     kUSBHostPortStatusConnectedSpeedSuperPlus    = kIOUSBHostPortStatusConnectedSpeedSuperPlus,
     kUSBHostPortStatusConnectedSpeedSuperPlusBy2 = kIOUSBHostPortStatusConnectedSpeedSuperPlusBy2,
+    kUSBHostPortStatusConnectedSpeedOther        = kIOUSBHostPortStatusConnectedSpeedOther,
     kUSBHostPortStatusResetting                  = kIOUSBHostPortStatusResetting,
     kUSBHostPortStatusEnabled                    = kIOUSBHostPortStatusEnabled,
     kUSBHostPortStatusSuspended                  = kIOUSBHostPortStatusSuspended,

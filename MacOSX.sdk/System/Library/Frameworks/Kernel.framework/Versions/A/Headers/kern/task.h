@@ -182,12 +182,10 @@ extern bool task_is_x86_64_compat(task_t task);
 #endif
 
 
-#if HAS_MTE
 /* Must be callable from IOKit as it sometimes has need to asynchronously
  * terminate tasks. Takes the task lock.
  */
-void task_set_ast_mte_synthesize_mach_exception(task_t task);
-#endif /* HAS_MTE */
+void task_set_ast_synthesize_async_fault_mach_exception(task_t task);
 
 
 

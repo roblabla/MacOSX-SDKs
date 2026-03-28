@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MetricsKit.framework/Versions/A/MetricsKit'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AMPIDServiceMachServiceName, _MTAMSBagKeyMescalSignedRequests, 
                        _MTAMSBagKeyMescalSignedResponses, _MTAMSBagKeyMetrics, _MTAMSBagKeyPrimingURL, 
                        _MTAMSBagKeySignSapSetupCertURL, _MTAMSBagKeySignSapSetupURL, 

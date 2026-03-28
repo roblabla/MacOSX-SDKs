@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleDepth.framework/Versions/A/AppleDepth'
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/AppleDepthCore.framework/Versions/A/AppleDepthCore' ]
 exports:
   - targets:         [ x86_64-macos ]
@@ -15,7 +15,7 @@ exports:
                        __ZTSSt11logic_error, __ZTSSt12length_error, __ZTSSt12out_of_range, 
                        __ZTSSt13runtime_error, __ZTSSt20bad_array_new_length, __ZTSSt9bad_alloc, 
                        __ZTSSt9exception ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ADExecutorCalibrationAttachmentName, _ADJasperPearlInFieldCalibration_DX_ATTACHMENT_KEY, 
                        _ADJasperPearlInFieldCalibration_DY_ATTACHMENT_KEY, _ADJasperPearlInFieldCalibration_PEARL_DEPTH_ATTACHMENTS_KEY, 
                        _ADJasperPearlInFieldCalibration_SCORE_ATTACHMENT_KEY, _AdaptiveCorrection_applyDistortionModel, 
@@ -68,15 +68,14 @@ exports:
                        __Z24getMaxOneShotEventsCountv, __Z24userNotificationCallbackP20__CFUserNotificationm, 
                        __Z25calibrationFromAttachmentP10__CVBuffer, __Z25findNetworkSupportingFileP8NSStringS0_S0_S0_, 
                        __Z29analyzeOneShotExtremeRotationfffP8NSStringP14NSMutableArray, 
-                       __Z31debugQuickLookObjectFromCGImageP7CGImage, __Z34updatePCECalibWithGMCStereoResults12_GMC_ResultsRK8PCECalibRS0_, 
+                       __Z34updatePCECalibWithGMCStereoResults12_GMC_ResultsRK8PCECalibRS0_, 
                        __Z39fireOneShotLargeRotationEventIfDetectedPK8NSStringff12OneShotIndexPS_P14NSMutableArray, 
                        __Z6dlasr_PKcS0_PlS1_PdS2_S2_S1_, __Z6svd_oslPdS_S_S_, __Z7dbdsqr_PlS_S_PdS0_S0_S_S0_S_S0_S_, 
                        __Z7dlasv2_PdS_S_S_S_S_S_S_S_, __Z9findModelP8NSStringS0_, 
                        __ZN10ImageUtils12CloseRect2x2ERK6MatrixIbEPS1_, __ZN10ImageUtils12CloseRect3x3ERK6MatrixIbEPS1_, 
                        __ZN10ImageUtils12ErodeRect2x2ERK6MatrixIbEPS1_, __ZN10ImageUtils12ErodeRect3x3ERK6MatrixIbEPS1_, 
                        __ZN10ImageUtils13DilateRect2x2ERK6MatrixIbEPS1_, __ZN10ImageUtils13DilateRect3x3ERK6MatrixIbEPS1_, 
-                       __ZN10ImageUtils13OtsuThresholdERK6MatrixIdE, __ZN12ADDebugUtils20isVerboseLogsEnabledEv, 
-                       __ZN12ADDebugUtils21setVerboseLogsEnabledEb, __ZN12SparseMatrix11allocateMemEv, 
+                       __ZN10ImageUtils13OtsuThresholdERK6MatrixIdE, __ZN12SparseMatrix11allocateMemEv, 
                        __ZN12SparseMatrix14SolveLTInPlaceEP11MatrixNxPtsILj1EdE, 
                        __ZN12SparseMatrix22ReverseStorageOfColumnEi, __ZN12SparseMatrix4ZeroEv, 
                        __ZN12SparseMatrix6ExpandEmm, __ZN12SparseMatrix7SqueezeEmm, 
@@ -92,7 +91,8 @@ exports:
                        __ZN12SparseVectorC2Eii, __ZN12SparseVectorC2EiiPiPdb, __ZN12SparseVectorD1Ev, 
                        __ZN12SparseVectorD2Ev, __ZN12SparseVectoraSERKS_, __ZN13ADCommonUtils10rotateSizeE6CGSize10ADRotation, 
                        __ZN13ADCommonUtils11matrixTo4x3E13simd_float4x4, __ZN13ADCommonUtils11matrixTo4x4E13simd_float4x3, 
-                       __ZN13ADCommonUtils15reverseRotationE10ADRotation, __ZN13ADCommonUtils16computeTransformE13simd_float4x3S0_, 
+                       __ZN13ADCommonUtils12systemUptimeEv, __ZN13ADCommonUtils15reverseRotationE10ADRotation, 
+                       __ZN13ADCommonUtils16computeTransformE13simd_float4x3S0_, 
                        __ZN13ADCommonUtils16extrinsicsToFileEPKc13simd_float4x3, 
                        __ZN13ADCommonUtils16extrinsicsToFileEPKc13simd_float4x4, 
                        __ZN13ADCommonUtils16inverseTransformE13simd_float4x3, __ZN13ADCommonUtils16inverseTransformE13simd_float4x4, 
@@ -171,8 +171,8 @@ exports:
                        __ZN16PixelBufferUtils23createPixelBufferNoCopyEP10__CVBufferj6CGRect, 
                        __ZN16PixelBufferUtils23cropAndScalePixelBufferEP10__CVBufferS1_6CGRectS2_b, 
                        __ZN16PixelBufferUtils23cropAndScalePixelBufferEP10__CVBufferS1_6CGRectb, 
-                       __ZN16PixelBufferUtils23isPixelFormatCompressedEj, __ZN16PixelBufferUtils23pixelSizeForPixelFormatEjm, 
-                       __ZN16PixelBufferUtils24convertPixelBufferFormatEP10__CVBufferS1_b, 
+                       __ZN16PixelBufferUtils23isPixelFormatCompressedEj, __ZN16PixelBufferUtils23pixelBufferFromBMTLFileEPKc, 
+                       __ZN16PixelBufferUtils23pixelSizeForPixelFormatEjm, __ZN16PixelBufferUtils24convertPixelBufferFormatEP10__CVBufferS1_b, 
                        __ZN16PixelBufferUtils24createRotatedPixelBufferEP10__CVBufferib, 
                        __ZN16PixelBufferUtils24isSameDimensionAndFormatEP10__CVBufferS1_, 
                        __ZN16PixelBufferUtils24pixelBufferFromImageFileEPKcj, __ZN16PixelBufferUtils24planeCountForPixelFormatEj, 
@@ -181,6 +181,7 @@ exports:
                        __ZN16PixelBufferUtils26pixelFormatAsFileExtensionEj, __ZN16PixelBufferUtils27rotationBetweenOrientationsE26CGImagePropertyOrientationS0_, 
                        __ZN16PixelBufferUtils28pixelFormatFromFileExtensionEPKc, 
                        __ZN16PixelBufferUtils29createPixelBufferWithSameSizeEP10__CVBufferjb, 
+                       __ZN16PixelBufferUtils29pixelFormatFromMTLPixelFormatE14MTLPixelFormat, 
                        __ZN16PixelBufferUtils29scaleConvertRotatePixelBufferEP10__CVBufferi6CGRectS1_PS1_S3_b, 
                        __ZN16PixelBufferUtils31colorizePointCloudOnPixelBufferEP10__CVBuffermPK7CGPointPKfbfff, 
                        __ZN16PixelBufferUtils31createColorizedDepthPixelBufferEP10__CVBufferbffbPfS1_f, 
@@ -409,8 +410,8 @@ exports:
                        __ZTVN3jpc26IFAPJWorkDistOverlapFilterE, __ZTVN3jpc26PORPreprocessorFilterBlockE, 
                        __ZTVN3jpc27IFAPearlFovCoverageCriteriaE, __ZTVN3jpc30PORGMCJ_OutputValidation_BlockE, 
                        __ZTVN3jpc3JPCE, __ZpLR11MatrixNxPtsILj1EdERK12SparseVector, 
-                       _fmincon_spg, _kADDeviceConfigurationDomainName, _kADDeviceConfigurationKeyEnabledLoggers, 
-                       _kADDeviceConfigurationKeyJasperColorInFieldAngularVelocityThreshold, 
+                       _fmincon_spg, _kADDeviceConfigurationDomainName, _kADDeviceConfigurationKeyDensifiedLiDARFocusAssistMinimalDumps, 
+                       _kADDeviceConfigurationKeyEnabledLoggers, _kADDeviceConfigurationKeyJasperColorInFieldAngularVelocityThreshold, 
                        _kADDeviceConfigurationKeyJasperColorInFieldDisableSDF, _kADDeviceConfigurationKeyJasperColorInFieldForceAngularVelocityLogic, 
                        _kADDeviceConfigurationKeyJasperColorInFieldForceRun, _kADDeviceConfigurationKeyJasperColorInFieldSDFHistorySize, 
                        _kADDeviceConfigurationKeyJasperColorIsfCapacity, _kADDeviceConfigurationKeyJasperColorIsfOutliers, 
@@ -473,32 +474,32 @@ exports:
                        ADJasperColorInFieldCalibrationResult, ADJasperColorInFieldCalibrationTelemetryData, 
                        ADJasperColorInfieldCalibrationFlow, ADJasperColorPipeline, 
                        ADJasperColorPipelineParameters, ADJasperColorStillsExecutor, 
-                       ADJasperColorStillsExecutorParameters, ADJasperColorStillsPipeline, 
-                       ADJasperColorStillsPipelineParameters, ADJasperColorV2Executor, 
-                       ADJasperColorV2ExecutorParameters, ADJasperColorV2Pipeline, 
-                       ADJasperColorV2PipelineParameters, ADJasperPearlInFieldCalibrationExecutor, 
-                       ADJasperPearlInFieldCalibrationExecutorParameters, ADJasperPearlInFieldCalibrationInterSessionData, 
-                       ADJasperPearlInFieldCalibrationJasperInput, ADJasperPearlInFieldCalibrationPearlInput, 
-                       ADJasperPearlInFieldCalibrationPipeline, ADJasperPearlInFieldCalibrationPipelineParameters, 
-                       ADJasperPearlInFieldCalibrationResult, ADJasperPearlInFieldCalibrationTelemetry, 
-                       ADJasperPearlTelemetryData, ADJasperPearlTriggeringTelemetryData, 
-                       ADJasperToColorTransformCorrectionResult, ADLKTConfidenceParameters, 
-                       ADLKTExecutor, ADLKTExecutorParameters, ADLKTFlow, ADLKTOpticalFlow, 
-                       ADLKTStatistics, ADLKTTexturesDescriptor, ADLineRansacParameters, 
-                       ADLogManager, ADLogManagerHandler, ADMetalUtils, ADMetricDepthExecutor, 
-                       ADMetricDepthExecutorParameters, ADMetricDepthFlow, ADMetricDepthFrameStatistics, 
-                       ADMetricDepthPipeline, ADMetricDepthPipelineParameters, ADMonocularExecutor, 
-                       ADMonocularExecutorParameters, ADMonocularFlow, ADMonocularPipeline, 
-                       ADMonocularPipelineParameters, ADMonocularStillsExecutor, 
-                       ADMonocularStillsExecutorParameters, ADMonocularStillsPipeline, 
-                       ADMonocularStillsPipelineParameters, ADMonocularV2Executor, 
-                       ADMonocularV2ExecutorParameters, ADMonocularV2Flow, ADMonocularV2Pipeline, 
-                       ADMonocularV2PipelineParameters, ADMonocularVideoExecutor, 
+                       ADJasperColorStillsExecutorParameters, ADJasperColorStillsFlow, 
+                       ADJasperColorStillsPipeline, ADJasperColorStillsPipelineParameters, 
+                       ADJasperColorV2Executor, ADJasperColorV2ExecutorParameters, 
+                       ADJasperColorV2Flow, ADJasperColorV2Pipeline, ADJasperColorV2PipelineParameters, 
+                       ADJasperPearlInFieldCalibrationExecutor, ADJasperPearlInFieldCalibrationExecutorParameters, 
+                       ADJasperPearlInFieldCalibrationInterSessionData, ADJasperPearlInFieldCalibrationJasperInput, 
+                       ADJasperPearlInFieldCalibrationPearlInput, ADJasperPearlInFieldCalibrationPipeline, 
+                       ADJasperPearlInFieldCalibrationPipelineParameters, ADJasperPearlInFieldCalibrationResult, 
+                       ADJasperPearlInFieldCalibrationTelemetry, ADJasperPearlTelemetryData, 
+                       ADJasperPearlTriggeringTelemetryData, ADJasperToColorTransformCorrectionResult, 
+                       ADLKTConfidenceParameters, ADLKTExecutor, ADLKTExecutorParameters, 
+                       ADLKTFlow, ADLKTOpticalFlow, ADLKTStatistics, ADLKTTexturesDescriptor, 
+                       ADLineRansacParameters, ADLogManager, ADLogManagerHandler, 
+                       ADMetalUtils, ADMetricDepthExecutor, ADMetricDepthExecutorParameters, 
+                       ADMetricDepthFlow, ADMetricDepthFrameStatistics, ADMetricDepthPipeline, 
+                       ADMetricDepthPipelineParameters, ADMonocularExecutor, ADMonocularExecutorParameters, 
+                       ADMonocularFlow, ADMonocularPipeline, ADMonocularPipelineParameters, 
+                       ADMonocularStillsExecutor, ADMonocularStillsExecutorParameters, 
+                       ADMonocularStillsFlow, ADMonocularStillsPipeline, ADMonocularStillsPipelineParameters, 
+                       ADMonocularV2Executor, ADMonocularV2ExecutorParameters, ADMonocularV2Flow, 
+                       ADMonocularV2Pipeline, ADMonocularV2PipelineParameters, ADMonocularVideoExecutor, 
                        ADMonocularVideoExecutorParameters, ADMonocularVideoFlow, 
                        ADMonocularVideoPipeline, ADMonocularVideoPipelineParameters, 
                        ADNetworkProvider, ADNetworkProviderLayoutShape, ADNormals, 
                        ADNormalsBuffer, ADPCEDisparityColorExecutor, ADPCEDisparityColorExecutorParameters, 
-                       ADPCEDisparityColorPipeline, ADPCEDisparityColorPipelineParameters, 
+                       ADPCEDisparityColorFlow, ADPCEDisparityColorPipeline, ADPCEDisparityColorPipelineParameters, 
                        ADPearlColorInFieldCalibrationControllerParameters, ADPearlColorInFieldCalibrationExecutor, 
                        ADPearlColorInFieldCalibrationExecutorParameters, ADPearlColorInFieldCalibrationInterSessionData, 
                        ADPearlColorInFieldCalibrationPipeline, ADPearlColorInFieldCalibrationPipelineParameters, 
@@ -599,16 +600,16 @@ exports:
                        __ZN3jpc13JPCConfigKeys6PORISF28ISF_STEP_DETECTION_THRESHOLDE, 
                        __ZN3jpc9JPCConfig21CONFIG_FILE_FILEPATH1E, __ZN3jpc9JPCConfig21CONFIG_FILE_FILEPATH2E, 
                        __ZN3jpc9JPCConfig34GENERATED_DEFAULT_CONFIG_FILE_PATHE, __ZNSt3__119piecewise_constructE ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ __ZN25PixelBufferUtilsTiledView15createTiledViewEmmmmPNS_10TileConfigEb ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleDepthCore.framework/Versions/A/AppleDepthCore'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     objc-classes:    [ ADAggregatedPointCloudRefiner, ADAggregationParameters, ADArgumentParser, 
                        ADArgumentParserCommand, ADArgumentParserOptionalArgument, 
                        ADArgumentParserPositionalArgument, ADCameraCalibration, ADDynamicPolynomialsLensDistortionModel, 

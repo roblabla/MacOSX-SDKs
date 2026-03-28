@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriKitInvocation.framework/Versions/A/SiriKitInvocation'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _RunVoiceShortcutDirectInvocationIdentifier, _SKIAnnounceNotificationDirectInvocationPayloadKeyAnnouncementPlatform, 
                        _SKIAnnounceNotificationDirectInvocationPayloadKeyAppBundleId, 
                        _SKIAnnounceNotificationDirectInvocationPayloadKeyAppBundleIdOfLastAnnouncement, 
@@ -26,9 +26,12 @@ exports:
                        _SKIFitnessDirectInvocationPayloadKeyWorkoutLocationType, 
                        _SKIFitnessDirectInvocationPayloadKeyWorkoutPredictionType, 
                        _SKIFitnessDirectInvocationPayloadKeyWorkoutSwimmingLocationType, 
-                       _SKIFitnessDirectInvocationPayloadKeyWorkoutType, _SKIHomeAutomationInvocationIdentifierAsyncResponse, 
-                       _SKILogSubsystem, _SKIMessagesDirectInvocationIdentifierAnnounceMessage, 
-                       _SKIMessagesDirectInvocationIdentifierNewMessage, _SKIMessagesDirectInvocationIdentifierNewMessageToContact, 
+                       _SKIFitnessDirectInvocationPayloadKeyWorkoutType, _SKIFoundationalAnnounceInvocationIdentifierAnnounceBinaryOutcome, 
+                       _SKIFoundationalAnnounceInvocationPayloadKeyAnnouncePayload, 
+                       _SKIFoundationalAnnounceInvocationPayloadKeyBinaryOutcomeRequest, 
+                       _SKIHomeAutomationInvocationIdentifierAsyncResponse, _SKILogSubsystem, 
+                       _SKIMessagesDirectInvocationIdentifierAnnounceMessage, _SKIMessagesDirectInvocationIdentifierNewMessage, 
+                       _SKIMessagesDirectInvocationIdentifierNewMessageToContact, 
                        _SKIMessagesDirectInvocationIdentifierNewMessageToConversation, 
                        _SKIMessagesDirectInvocationIdentifierNewMessageToHandles, 
                        _SKIMessagesDirectInvocationIdentifierReadFromConversation, 
@@ -110,10 +113,10 @@ exports:
                        _kMessageContentChangedViaSnippetDirectInvocationContentKey, 
                        _kMessageContentChangedViaSnippetDirectInvocationIdentifier, 
                        _kMessageSendViaSnippetDirectInvocationContentKey, _kMessageSendViaSnippetDirectInvocationIdentifier ]
-    objc-classes:    [ SKIAnnounceNotificationDirectInvocationPayload, SKIDirectInvocation, 
-                       SKIDirectInvocationContext, SKIDirectInvocationPayload, SKIFitnessInvocation, 
-                       SKIHomeAutomationInvocation, SKIMapsInvocation, SKIMediaControlsInvocation, 
-                       SKIMessagesGatekeeperPayload, SKIMessagesInvocation, SKIMusicInvocation, 
-                       SKINotebookInvocation, SKINotificationsInvocation, SKIPhoneInvocation, 
-                       SKIVoiceShortcutsInvocation ]
+    objc-classes:    [ SKIAnnounceDirectInvocationUtilities, SKIAnnounceNotificationDirectInvocationPayload, 
+                       SKIDirectInvocation, SKIDirectInvocationContext, SKIDirectInvocationPayload, 
+                       SKIFitnessInvocation, SKIFoundationalAnnounceInvocation, SKIHomeAutomationInvocation, 
+                       SKIMapsInvocation, SKIMediaControlsInvocation, SKIMessagesGatekeeperPayload, 
+                       SKIMessagesInvocation, SKIMusicInvocation, SKINotebookInvocation, 
+                       SKINotificationsInvocation, SKIPhoneInvocation, SKIVoiceShortcutsInvocation ]
 ...

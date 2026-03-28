@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppStoreComponents.framework/Versions/A/AppStoreComponents'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s18AppStoreComponents14ASCLayoutProxyC11descriptionSSvg', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC12lockupLayout6ofSize15traitCollection11artworkView11headingText05titleO008subtitleO005offerO00R6Button5badgeACSo09ASCLockupmI0a_So07JUTraitK0CSo6NSViewCSo11NSTextFieldCSgA2uv2SSgtFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC12measuredSize7fitting2inSo6CGSizeVAH_5JetUI0K16TraitEnvironment_ptF', 
@@ -25,6 +25,7 @@ exports:
                        '_$s18AppStoreComponents14ASCLayoutProxyC24smallLockupEstimatedSize7fitting14compatibleWithSo6CGSizeVAH_So17JUTraitCollectionCtFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC25mediumLockupEstimatedSize7fitting14compatibleWithSo6CGSizeVAH_So17JUTraitCollectionCtFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC26axOfferButtonHeightForSizey12CoreGraphics7CGFloatVSSFZ', 
+                       '_$s18AppStoreComponents14ASCLayoutProxyC26offerIconTextLayoutForSize_19titleBackgroundView0lN005imageN010topPaddingACSS_So6NSViewCSo11NSTextFieldCAJ12CoreGraphics7CGFloatVtFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC28offerProgressDiameterForSizey12CoreGraphics7CGFloatVSSFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC28traitCollectionForMainScreenSo07JUTraitG0CvgZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC28traitCollectionForMainScreenSo07JUTraitG0CvpZMV', 
@@ -96,16 +97,16 @@ exports:
                        _ASCLockupContextNoPrice, _ASCLockupContextOfferOnly, _ASCLockupContextOverlay, 
                        _ASCLockupContextOverlayClip, _ASCLockupContextSafariExtension, 
                        _ASCLockupContextSignInWithApple, _ASCLockupContextSingleSignOn, 
-                       _ASCLockupContextStandard, _ASCLockupContextTVAppOpenIn, _ASCLockupContextTVProvider, 
-                       _ASCLockupContextWallet, _ASCLockupContextWatch, _ASCLockupContextWebBrowser, 
-                       _ASCLockupKindApp, _ASCLockupKindAppBundle, _ASCLockupKindAppDistributionApp, 
-                       _ASCLockupKindInAppPurchase, _ASCLockupPlatformIOS, _ASCLockupPlatformMacOS, 
-                       _ASCLockupPlatformTvOS, _ASCLockupPlatformVisionOS, _ASCLockupPlatformWatchOS, 
-                       _ASCLockupProductDetailsInteractionTypeDismissed, _ASCLockupProductDetailsInteractionTypeOpened, 
-                       _ASCLockupProductDetailsInteractionTypePurchased, _ASCLockupProductDetailsInteractionTypeSelected, 
-                       _ASCLockupViewSizeDefault, _ASCLockupViewSizeGetEstimatedSize, 
-                       _ASCLockupViewSizeGetEstimatedSizeForTraits, _ASCLockupViewSizeGetIconSize, 
-                       _ASCLockupViewSizeLarge, _ASCLockupViewSizeLargeAppShowcase, 
+                       _ASCLockupContextSpringboard, _ASCLockupContextStandard, _ASCLockupContextTVAppOpenIn, 
+                       _ASCLockupContextTVProvider, _ASCLockupContextWallet, _ASCLockupContextWatch, 
+                       _ASCLockupContextWebBrowser, _ASCLockupKindApp, _ASCLockupKindAppBundle, 
+                       _ASCLockupKindAppDistributionApp, _ASCLockupKindInAppPurchase, 
+                       _ASCLockupPlatformIOS, _ASCLockupPlatformMacOS, _ASCLockupPlatformTvOS, 
+                       _ASCLockupPlatformVisionOS, _ASCLockupPlatformWatchOS, _ASCLockupProductDetailsInteractionTypeDismissed, 
+                       _ASCLockupProductDetailsInteractionTypeOpened, _ASCLockupProductDetailsInteractionTypePurchased, 
+                       _ASCLockupProductDetailsInteractionTypeSelected, _ASCLockupViewSizeDefault, 
+                       _ASCLockupViewSizeGetEstimatedSize, _ASCLockupViewSizeGetEstimatedSizeForTraits, 
+                       _ASCLockupViewSizeGetIconSize, _ASCLockupViewSizeLarge, _ASCLockupViewSizeLargeAppShowcase, 
                        _ASCLockupViewSizeMedium, _ASCLockupViewSizeMediumOfferButton, 
                        _ASCLockupViewSizeMini, _ASCLockupViewSizeSmall, _ASCLockupViewSizeSmallOfferButton, 
                        _ASCLockupWebBrowserFlowTypePurchaseAndOpen, _ASCLockupWebBrowserFlowTypeSelectionOnly, 

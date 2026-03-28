@@ -1,17 +1,18 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriCam.framework/Versions/A/SiriCam'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ CAAROverrides, CAMRootFlowPlugin, CAMRootFlowPluginTests, 
                        MessagesFlowDelegatePlugin, MessagesFlowDelegatePlugin-Tests, 
                        SiriCamSmokeTest, SiriCamTests, SiriKitExecutor, SiriKitExecutorBundle-Tests, 
                        SiriKitFlow, SiriKitFlowTests, SiriKitRuntime, SiriKitRuntimeTests, 
-                       SiriMessagesFlow, SiriMessagesFlowTests ]
+                       SiriMessagesFlow, SiriMessagesFlowCommon, SiriMessagesFlowCommonTests, 
+                       SiriMessagesFlowTests ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s21SiriInformationSearch14PommesResponseC0A3CamE6encode2toys7Encoder_p_tKF', 
                        '_$s21SiriInformationSearch14PommesResponseCSE0A3CamMc', '_$s7SiriCam0B0Mp', 
                        '_$s7SiriCam0B0P6action7requestAA0B8ResponseVAA0B7RequestV_tFTj', 
@@ -153,13 +154,16 @@ exports:
                        '_$s7SiriCam14ActionProtocolP9loggingId10Foundation4UUIDVvgTj', 
                        '_$s7SiriCam14ActionProtocolP9loggingId10Foundation4UUIDVvgTq', 
                        '_$s7SiriCam14ActionProtocolPAAE13inferBundleIdSSSgyF', '_$s7SiriCam14ActionProtocolTL', 
-                       '_$s7SiriCam14AutoConfirmingMp', '_$s7SiriCam14AutoConfirmingP17inferConfirmation3for13withRequestId015resultCandidateJ019recipientCrrSignals18featureOptInStatuss6ResultOyAA0C13ConfirmActionOAA0cU5ErrorOGSo15AFSpeechPackageC_S2SSgSDySSSiGSgSbtFTj', 
+                       '_$s7SiriCam14AutoConfirmingMp', '_$s7SiriCam14AutoConfirmingP17inferConfirmation3for13withRequestId015resultCandidateJ019recipientCrrSignals18featureOptInStatus11deviceIdioms6ResultOyAA0C13ConfirmActionOAA0cW5ErrorOGSo15AFSpeechPackageC_S2SSgSDySSSiGSgSb0A9Utilities06DeviceU0OSgtFTj', 
+                       '_$s7SiriCam14AutoConfirmingP17inferConfirmation3for13withRequestId015resultCandidateJ019recipientCrrSignals18featureOptInStatus11deviceIdioms6ResultOyAA0C13ConfirmActionOAA0cW5ErrorOGSo15AFSpeechPackageC_S2SSgSDySSSiGSgSb0A9Utilities06DeviceU0OSgtFTq', 
+                       '_$s7SiriCam14AutoConfirmingP17inferConfirmation3for13withRequestId015resultCandidateJ019recipientCrrSignals18featureOptInStatuss6ResultOyAA0C13ConfirmActionOAA0cU5ErrorOGSo15AFSpeechPackageC_S2SSgSDySSSiGSgSbtFTj', 
                        '_$s7SiriCam14AutoConfirmingP17inferConfirmation3for13withRequestId015resultCandidateJ019recipientCrrSignals18featureOptInStatuss6ResultOyAA0C13ConfirmActionOAA0cU5ErrorOGSo15AFSpeechPackageC_S2SSgSDySSSiGSgSbtFTq', 
                        '_$s7SiriCam14AutoConfirmingP17inferConfirmation3for4from13withRequestId015resultCandidateK019recipientCrrSignals18featureOptInStatuss6ResultOyAA0C13ConfirmActionOAA0cV5ErrorOGSo15AFSpeechPackageC_0aP06SignalV6SourceOyAS_GSgS2SSgSDySSSiGSgSbtFTj', 
                        '_$s7SiriCam14AutoConfirmingP17inferConfirmation3for4from13withRequestId015resultCandidateK019recipientCrrSignals18featureOptInStatuss6ResultOyAA0C13ConfirmActionOAA0cV5ErrorOGSo15AFSpeechPackageC_0aP06SignalV6SourceOyAS_GSgS2SSgSDySSSiGSgSbtFTq', 
                        '_$s7SiriCam14AutoConfirmingP17inferConfirmation3for4from13withRequestId19recipientCrrSignals015resultCandidateK0s6ResultOyAA0C13ConfirmActionOAA0cR5ErrorOGSo15AFSpeechPackageC_0aN06SignalV6SourceOyAR_GSgSSSDySSSiGSgSSSgtFTj', 
                        '_$s7SiriCam14AutoConfirmingP17inferConfirmation3for4from13withRequestId19recipientCrrSignals015resultCandidateK0s6ResultOyAA0C13ConfirmActionOAA0cR5ErrorOGSo15AFSpeechPackageC_0aN06SignalV6SourceOyAR_GSgSSSDySSSiGSgSSSgtFTq', 
                        '_$s7SiriCam14AutoConfirmingP6updateyyKFTj', '_$s7SiriCam14AutoConfirmingP6updateyyKFTq', 
+                       '_$s7SiriCam14AutoConfirmingPAAE17inferConfirmation3for13withRequestId015resultCandidateJ019recipientCrrSignals18featureOptInStatus11deviceIdioms6ResultOyAA0C13ConfirmActionOAA0cW5ErrorOGSo15AFSpeechPackageC_S2SSgSDySSSiGSgSb0A9Utilities06DeviceU0OSgtF', 
                        '_$s7SiriCam14AutoConfirmingTL', '_$s7SiriCam15ActionCandidateV11descriptionSSvg', 
                        '_$s7SiriCam15ActionCandidateV11descriptionSSvpMV', '_$s7SiriCam15ActionCandidateV13affinityScoreSivg', 
                        '_$s7SiriCam15ActionCandidateV13affinityScoreSivpMV', '_$s7SiriCam15ActionCandidateV13flowHandlerId5parse13affinityScore07loggingG08userDataACSS_AA0B5ParseOSi10Foundation4UUIDVSDySSypGSgtcfC', 

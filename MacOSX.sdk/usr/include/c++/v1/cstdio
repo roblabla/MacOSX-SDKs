@@ -155,7 +155,7 @@ using ::perror _LIBCPP_USING_IF_EXISTS;
 
 using ::fopen _LIBCPP_USING_IF_EXISTS;
 using ::freopen _LIBCPP_USING_IF_EXISTS;
-#if !defined(_LIBCPP_ON_RTKIT) && !defined(_LIBCPP_ON_SEP) && !defined(_LIBCPP_ON_DRIVERKIT) && !defined(_LIBCPP_ON_XNU)
+#if !defined(_LIBCPP_ON_RTKIT) && !defined(_LIBCPP_ON_LIBLIBC) && !defined(_LIBCPP_ON_DRIVERKIT) && !defined(_LIBCPP_ON_XNU)
 using ::remove _LIBCPP_USING_IF_EXISTS; // TODO: Regularize this once using_if_exists can handle it
 #endif
 using ::rename _LIBCPP_USING_IF_EXISTS;

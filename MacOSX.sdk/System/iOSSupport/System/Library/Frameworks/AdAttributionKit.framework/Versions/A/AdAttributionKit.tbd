@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AdAttributionKit.framework/Versions/A/AdAttributionKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s16AdAttributionKit0A14AnalyticsErrorO11descriptionSSvg', 
                        '_$s16AdAttributionKit0A14AnalyticsErrorO11descriptionSSvpMV', 
                        '_$s16AdAttributionKit0A14AnalyticsErrorO12invalidPriceyA2CmFWC', 

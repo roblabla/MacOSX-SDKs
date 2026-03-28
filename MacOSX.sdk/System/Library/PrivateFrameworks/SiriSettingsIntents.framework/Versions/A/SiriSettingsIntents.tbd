@@ -1,15 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriSettingsIntents.framework/Versions/A/SiriSettingsIntents'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ DeviceExpertIntents, SettingsCustomPlugin, SettingsFlowDelegatePlugin, 
                        SettingsIntentExtension, SiriSettingsIntentsTests, SiriSettingsSuggestionsPlugin, 
                        SiriSettingsSuggestionsPluginTests, SiriSettingsUIPlugin ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10IntentType19SiriSettingsIntents07SettingA0PTl', '_$s16SiriDialogEngine10SirikitAppC0A15SettingsIntentsE2eeoiySbAC_ACtFZ', 
                        '_$s16SiriDialogEngine10SirikitAppCSQ0A15SettingsIntentsMc', 
                        '_$s16SiriDialogEngine23SirikitLocalizedAppNameC0A15SettingsIntentsE2eeoiySbAC_ACtFZ', 

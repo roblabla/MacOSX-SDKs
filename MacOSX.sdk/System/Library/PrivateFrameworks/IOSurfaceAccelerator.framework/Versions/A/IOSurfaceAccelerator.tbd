@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IOSurfaceAccelerator.framework/Versions/A/IOSurfaceAccelerator'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _IOSurfaceAcceleratorAbortCaptures, _IOSurfaceAcceleratorAbortTransfers, 
                        _IOSurfaceAcceleratorBlitSurface, _IOSurfaceAcceleratorBlitSurfaceWithSwap, 
                        _IOSurfaceAcceleratorCaptureSurface, _IOSurfaceAcceleratorConditionalTransferSurfaceWithSwap, 
@@ -13,12 +13,14 @@ exports:
                        _IOSurfaceAcceleratorGetServiceObject, _IOSurfaceAcceleratorGetTransformEstimation, 
                        _IOSurfaceAcceleratorGetTypeID, _IOSurfaceAcceleratorKernelTests, 
                        _IOSurfaceAcceleratorParavirtProcessGuestData, _IOSurfaceAcceleratorSetCustomFilter, 
-                       _IOSurfaceAcceleratorSetFilterCoefficients, _IOSurfaceAcceleratorTransferSurface, 
-                       _IOSurfaceAcceleratorTransferSurfaceWithSwap, _IOSurfaceAcceleratorTransformSurface, 
-                       _kDisplayColorRemapModeKey, _kIOSurfaceAcceleratorASEApiVersion, 
-                       _kIOSurfaceAcceleratorAlphaOverride, _kIOSurfaceAcceleratorBorderFillAlpha, 
-                       _kIOSurfaceAcceleratorBorderFillBlueCr, _kIOSurfaceAcceleratorBorderFillGreenCb, 
-                       _kIOSurfaceAcceleratorBorderFillHeight, _kIOSurfaceAcceleratorBorderFillRedY, 
+                       _IOSurfaceAcceleratorSetFilterCoefficients, _IOSurfaceAcceleratorSetProperty, 
+                       _IOSurfaceAcceleratorTransferSurface, _IOSurfaceAcceleratorTransferSurfaceWithSwap, 
+                       _IOSurfaceAcceleratorTransformSurface, _kDisplayColorRemapModeKey, 
+                       _kIOSurfaceAcceleratorASEApiVersion, _kIOSurfaceAcceleratorAlphaOverride, 
+                       _kIOSurfaceAcceleratorBorderFillAlpha, _kIOSurfaceAcceleratorBorderFillBlueCr, 
+                       _kIOSurfaceAcceleratorBorderFillGreenCb, _kIOSurfaceAcceleratorBorderFillHeight, 
+                       _kIOSurfaceAcceleratorBorderFillOddSizeYCbCrAlpha, _kIOSurfaceAcceleratorBorderFillOddSizeYCbCrEnable, 
+                       _kIOSurfaceAcceleratorBorderFillOddSizeYCbCrLuma, _kIOSurfaceAcceleratorBorderFillRedY, 
                        _kIOSurfaceAcceleratorBorderFillWidth, _kIOSurfaceAcceleratorBorderFillX, 
                        _kIOSurfaceAcceleratorBorderFillY, _kIOSurfaceAcceleratorComm, 
                        _kIOSurfaceAcceleratorDefaultChromaDownsample, _kIOSurfaceAcceleratorDestinationDisplayBound, 

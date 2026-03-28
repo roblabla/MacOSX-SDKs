@@ -1,16 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeAppIntents.framework/Versions/A/HomeAppIntents'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10AppIntents19EntityPropertyQueryP04HomeaB0E5apply11comparators4mode4dataSayqd__GSay10Foundation9PredicateVyqd___QPGG_AA0cE14ComparatorModeOAItYaKlF', 
                        '_$s10AppIntents19EntityPropertyQueryP04HomeaB0E5apply11comparators4mode4dataSayqd__GSay10Foundation9PredicateVyqd___QPGG_AA0cE14ComparatorModeOAItYaKlFTu', 
                        '_$s10AppIntents19IntentSystemContextV6SourceOSE04HomeaB0Mc', 
                        '_$s10AppIntents19IntentSystemContextV6SourceOSe04HomeaB0Mc', 
                        '_$s13HomeDataModel13StateSnapshotV0A10AppIntentsE15staticAccessory10withNodeIDAA06StaticI0VSgs6UInt64V_tF', 
-                       '_$s13HomeDataModel14TileInfoBearerP0A10AppIntentsE015appEntitiesFromD08snapshotSay0gH00G6Entity_pGAA13StateSnapshotV_tF', 
                        '_$s14HomeAppIntents015SceneEntityFromD12TypeResolverV0bC00H0AAMc', 
                        '_$s14HomeAppIntents015SceneEntityFromD12TypeResolverV2eeoiySbAC_ACtFZ', 
                        '_$s14HomeAppIntents015SceneEntityFromD12TypeResolverV4hash4intoys6HasherVz_tF', 
@@ -277,9 +276,9 @@ exports:
                        '_$s14HomeAppIntents11DeviceErrorO24rvcMopCleaningPadMissingyA2CmFWC', 
                        '_$s14HomeAppIntents11DeviceErrorO25typeDisplayRepresentation0bC004TypegH0VvgZ', 
                        '_$s14HomeAppIntents11DeviceErrorO25typeDisplayRepresentation0bC004TypegH0VvpZMV', 
+                       '_$s14HomeAppIntents11DeviceErrorO25unableToCompleteOperationyA2CmFWC', 
                        '_$s14HomeAppIntents11DeviceErrorO26caseDisplayRepresentationsSDyAC0bC00G14RepresentationVGvgZ', 
                        '_$s14HomeAppIntents11DeviceErrorO26caseDisplayRepresentationsSDyAC0bC00G14RepresentationVGvpZMV', 
-                       '_$s14HomeAppIntents11DeviceErrorO26unableToCompleteOpearationyA2CmFWC', 
                        '_$s14HomeAppIntents11DeviceErrorO27rvcFailedToFindChargingDockyA2CmFWC', 
                        '_$s14HomeAppIntents11DeviceErrorO27rvcNavigationSensorObscuredyA2CmFWC', 
                        '_$s14HomeAppIntents11DeviceErrorO29invalidRequestForCurrentStateyA2CmFWC', 
@@ -1105,11 +1104,7 @@ exports:
                        '_$s14HomeAppIntents22ShowDeviceResultIntentV7performQryYaKFTu', 
                        '_$s14HomeAppIntents22ShowDeviceResultIntentVACycfC', '_$s14HomeAppIntents22ShowDeviceResultIntentVMa', 
                        '_$s14HomeAppIntents22ShowDeviceResultIntentVMn', '_$s14HomeAppIntents22ShowDeviceResultIntentVN', 
-                       '_$s14HomeAppIntents24AnnotationEntityProviderV0bC0012_RepresentedeF0AAMc', 
-                       '_$s14HomeAppIntents24AnnotationEntityProviderV14entitiesInRect4rectSay0bC0012_RepresentedE7ElementCGSo6CGRectV_tF', 
-                       '_$s14HomeAppIntents24AnnotationEntityProviderV8entitiesACSay0bC00bE0_pG_tcfC', 
-                       '_$s14HomeAppIntents24AnnotationEntityProviderVMa', '_$s14HomeAppIntents24AnnotationEntityProviderVMn', 
-                       '_$s14HomeAppIntents24AnnotationEntityProviderVN', '_$s14HomeAppIntents26HumidifierDehumidifierModeO0bC00B4EnumAAMc', 
+                       '_$s14HomeAppIntents26HumidifierDehumidifierModeO0bC00B4EnumAAMc', 
                        '_$s14HomeAppIntents26HumidifierDehumidifierModeO0bC00B5ValueAAMc', 
                        '_$s14HomeAppIntents26HumidifierDehumidifierModeO0bC012_IntentValueAAMc', 
                        '_$s14HomeAppIntents26HumidifierDehumidifierModeO0bC024CaseDisplayRepresentableAAMc', 
@@ -1374,8 +1369,5 @@ exports:
                        '_$s2os6LoggerV14HomeAppIntentsE03appeB0ACvgZ', '_$sSi14HomeAppIntentsE6numberSiSgSo8NSNumberCSg_tcfC', 
                        '_$sSi14HomeAppIntentsE6numberSiSo8NSNumberC_tcfC', '_$sSi14HomeAppIntentsE6uint32SiSgs6UInt32VSg_tcfC', 
                        '_$sSi14HomeAppIntentsE6uint32Sis6UInt32V_tcfC', '_$sSi14HomeAppIntentsE6uint32s6UInt32Vvg', 
-                       '_$sSi14HomeAppIntentsE6uint32s6UInt32VvpMV', '_$sSl14HomeAppIntents0A9DataModel14TileInfoBearer7ElementRpzrlE18annotationProvider8snapshotAA016AnnotationEntityK0VAB13StateSnapshotV_tF', 
-                       '_$sSl14HomeAppIntents0A9DataModel14TileInfoBearer_p7ElementRtzrlE18annotationProvider8snapshotAA016AnnotationEntityK0VAB13StateSnapshotV_tF', 
-                       '_$sSl14HomeAppIntents0A9DataModel15StaticActionSetV7ElementRtzrlE11appEntities8homeNameSayAA11SceneEntityVGSS_tF', 
-                       '_$sSl14HomeAppIntents0A9DataModel15StaticActionSetV7ElementRtzrlE18annotationProvider8homeNameAA016AnnotationEntityK0VSS_tF' ]
+                       '_$sSi14HomeAppIntentsE6uint32s6UInt32VvpMV' ]
 ...

@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ContactsFoundation.framework/Versions/A/ContactsFoundation'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s18ContactsFoundation10BugCaptureC06reportC06domain4type7subType4name5value8priority10completionySS_S4SScPyycSgtFZ', 
                        '_$s18ContactsFoundation10BugCaptureC06reportC06domain4type7subType4name5valueySS_S4StFZ', 
                        '_$s18ContactsFoundation10BugCaptureCACycfC', '_$s18ContactsFoundation10BugCaptureCACycfc', 
@@ -135,6 +133,7 @@ exports:
                        '_$sSo11CNSchedulerP18ContactsFoundationE7perform5after16qualityOfService7executeSo12CNCancelable_pSd_So09CNQualitygH0VySo18CNCancelationTokenCctF', 
                        '_$sSo11CNSchedulerP18ContactsFoundationE7perform5after16qualityOfService7executeSo12CNCancelable_pSd_So09CNQualitygH0VyyctF', 
                        '_$sSo11CNSchedulerP18ContactsFoundationE7performySo12CNCancelable_pySo18CNCancelationTokenCcF', 
+                       '_$sSo20CNDescriptionBuilderC18ContactsFoundationE4withABSo8NSObjectC_tcfC', 
                        '_$sSo21CNRoundRobinSchedulerC18ContactsFoundationE10afterDelay_7perform16qualityOfServiceSo12CNCancelable_pSd_yycSo09CNQualityjK0VtF', 
                        '_$sSo21CNRoundRobinSchedulerC18ContactsFoundationE10afterDelay_7performSo12CNCancelable_pSd_yyctF', 
                        '_$sSo21CNRoundRobinSchedulerC18ContactsFoundationE10schedulersABSaySo11CNScheduler_pG_tcfC', 
@@ -162,12 +161,13 @@ exports:
                        _CNDateMagicInterval, _CNDateUnknownYear, _CNDebugLog, _CNDefaultsCountryCodeKey, 
                        _CNDefaultsDebugDescriptionObfuscation, _CNDefaultsFilteredAccountsAndContainersKey, 
                        _CNDefaultsNewContactNameOrderFamilyNameFirst, _CNDefaultsNewContactNameOrderGivenNameFirst, 
-                       _CNDefaultsNewContactNameOrderKey, _CNDefaultsSortingFormatKey, 
-                       _CNDispatchSemaphoreWait, _CNDowntimeWhitelistAllowed, _CNDowntimeWhitelistDisallowed, 
-                       _CNEitherIsLeft, _CNEitherIsRight, _CNEitherLeft, _CNEitherRight, 
-                       _CNEmailAddressExpandAliasedDomains, _CNEmailAddressNormalize, 
-                       _CNEmailAddressSafeUserVisible, _CNEmailAddressSanitize, _CNEmptyRangeDescription, 
-                       _CNEmptyStringIfNil, _CNEncryptionKeyPronounsLabel, _CNEntitlementNameAvatarStoreAccess, 
+                       _CNDefaultsNewContactNameOrderKey, _CNDefaultsShowContactPhotosKey, 
+                       _CNDefaultsSortingFormatKey, _CNDispatchSemaphoreWait, _CNDowntimeWhitelistAllowed, 
+                       _CNDowntimeWhitelistDisallowed, _CNEitherIsLeft, _CNEitherIsRight, 
+                       _CNEitherLeft, _CNEitherRight, _CNEmailAddressExpandAliasedDomains, 
+                       _CNEmailAddressNormalize, _CNEmailAddressSafeUserVisible, 
+                       _CNEmailAddressSanitize, _CNEmptyRangeDescription, _CNEmptyStringIfNil, 
+                       _CNEncryptionKeyPronounsLabel, _CNEntitlementNameAvatarStoreAccess, 
                        _CNEntitlementNameContactsDatabaseForceOOP, _CNEntitlementNameContactsDatabaseInProcess, 
                        _CNEntitlementNameContactsFrameworkSPI, _CNEntitlementNameContactsInternalPrivateAccessDonor, 
                        _CNEntitlementNameContactsNoteAccess, _CNEntitlementNameContactsServiceProxyConfigurable, 
@@ -375,13 +375,12 @@ exports:
                        CNCoreDelegateInfo._dsid, CNCoreDelegateInfo._isMe, CNCoreDelegateInfo._nameComponents, 
                        CNCoreDelegateInfo._principalPath, CNData._fileManager, CNData._sessionFactory, 
                        CNDateComponentsFormatter._dateFormatPlaceholderString, CNDateComponentsFormatter._lazyFormatterFutures, 
-                       CNDateComponentsFormatter._locale, CNDescriptionBuilder._description, 
-                       CNDescriptionBuilder._object, CNDescriptionBuilder._separator, 
-                       CNDispatchSource._source, CNEither._pair, CNEnvironment._authorizationContext, 
-                       CNEnvironment._currentCountryCode, CNEnvironment._currentLocaleOverride, 
-                       CNEnvironment._currentRegionCode, CNEnvironment._defaultCountryCode, 
-                       CNEnvironment._distributedNotificationCenter, CNEnvironment._entitlementVerifier, 
-                       CNEnvironment._featureFlags, CNEnvironment._fileManager, CNEnvironment._homeCountryCode, 
+                       CNDateComponentsFormatter._locale, CNDispatchSource._source, 
+                       CNEither._pair, CNEnvironment._authorizationContext, CNEnvironment._currentCountryCode, 
+                       CNEnvironment._currentLocaleOverride, CNEnvironment._currentRegionCode, 
+                       CNEnvironment._defaultCountryCode, CNEnvironment._distributedNotificationCenter, 
+                       CNEnvironment._entitlementVerifier, CNEnvironment._featureFlags, 
+                       CNEnvironment._fileManager, CNEnvironment._homeCountryCode, 
                        CNEnvironment._isCommLimitsEnabledStorage, CNEnvironment._isExtendedGreenTeaDeviceStorage, 
                        CNEnvironment._isGreenTeaDeviceStorage, CNEnvironment._isInternalBuildStorage, 
                        CNEnvironment._isKeychainEnabledStorage, CNEnvironment._localizationServices, 

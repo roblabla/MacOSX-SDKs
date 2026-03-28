@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SessionAlert.framework/Versions/A/SessionAlert'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ SessionAlertTests, SessionCore, SessionCoreTests, liveactivitiesd ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12SessionAlert08InMemoryB5StoreV5alert10identifierAA0B0VSgSS_tF', 
                        '_$s12SessionAlert08InMemoryB5StoreV6alertsSDySSAA0B0VGvg', 
                        '_$s12SessionAlert08InMemoryB5StoreV6alertsSDySSAA0B0VGvpMV', 

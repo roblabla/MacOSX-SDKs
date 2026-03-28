@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MobileIdentityServiceUI.framework/Versions/A/MobileIdentityServiceUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$sSo17MISAppDeniedAlertC23MobileIdentityServiceUIE11descriptionSSyF', 
                        '_$sSo17MISAppDeniedAlertC23MobileIdentityServiceUIE12learnMoreURL10Foundation0J0VyF', 
                        '_$sSo17MISAppDeniedAlertC23MobileIdentityServiceUIE16bundleIdentifierABSgSS_tcfC', 

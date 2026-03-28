@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SportsKit.framework/Versions/A/SportsKit'
 current-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s7SwiftUI5ColorV9SportsKitE3hexACSgSS_tcfC', '_$s9SportsKit07DefaultA23JSONInitFailureObserverC14tryingToEncode_11didFailWithyypXp_s5Error_ptF', 
                        '_$s9SportsKit07DefaultA23JSONInitFailureObserverC18tryingToInitialize_11didFailWithyypXp_s5Error_ptF', 
                        '_$s9SportsKit07DefaultA23JSONInitFailureObserverCAA0adeF0AAMc', 

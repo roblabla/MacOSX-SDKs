@@ -5,6 +5,9 @@
 //  Copyright © 2018 Apple Inc. All rights reserved.
 //
 
+#import <os/availability.h>
+#import <CarPlay/CPBarButtonProviding.h>
+#import <CarPlay/CPButton.h>
 #import <CarPlay/CPTemplate.h>
 #import <UIKit/UIKit.h>
 
@@ -46,10 +49,39 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 
 @property (nonatomic, readonly) BOOL repeats;
 
+/**
+ * An array of action buttons displayed in the template.
+ *
+ * These buttons provide user interaction capabilities such as play/pause,
+ * favorite/unfavorite, share, or other content-specific actions. The buttons
+ * are displayed horizontally and are limited by maximumActionButtonCount.
+ *
+ * @discussion Buttons should have clear, concise titles or recognizable icons.
+ *             The order of buttons in the array determines their display order
+ *             from leading to trailing in the interface.
+ */
+@property (nonatomic, copy) NSArray <CPButton *> *actionButtons API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(tvos, visionos) API_UNAVAILABLE(macos, watchos);
+
+/**
+ * The maximum number of action buttons that can be displayed in the CPVoiceControlTemplate.
+ *
+ * This class property defines the upper limit for action buttons to ensure
+ * proper layout and usability within the CarPlay interface constraints.
+ * Any buttons beyond this limit in the actionButtons array will be ignored.
+ *
+ * @return The maximum number of action buttons supported by this template.
+ */
+@property (nonatomic, readonly, class) NSInteger maximumActionButtonCount API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(tvos, visionos) API_UNAVAILABLE(macos, watchos);
+
 @end
 
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_27_0 || __TV_OS_VERSION_MIN_REQUIRED >= __TVOS_27_0
+@interface CPVoiceControlTemplate : CPTemplate <CPBarButtonProviding>
+#else
 @interface CPVoiceControlTemplate : CPTemplate
+#endif
 
 /**
  Initialize a voice control template with a list of voice control states.
@@ -83,6 +115,24 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  The currently-active voice control state identifier.
  */
 @property (nonatomic, readonly, copy, nullable) NSString *activeStateIdentifier;
+
+/**
+ An array of bar buttons to be displayed on the leading side of the navigation bar.
+
+ @note The navigation bar may display a maximum of 2 buttons in the leading space.
+ Setting more than 2 buttons to this property will only display the first 2 buttons.
+ */
+@property (nonatomic, strong) NSArray<CPBarButton *> *leadingNavigationBarButtons API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(tvos, visionos);
+
+/**
+ An array of bar buttons to be displayed on the trailing side of the navigation bar.
+
+ @note The navigation bar may display a maximum of 2 buttons in the trailing space.
+ Setting more than 2 buttons to this property will only display the first 2 buttons.
+ */
+@property (nonatomic, strong) NSArray<CPBarButton *> *trailingNavigationBarButtons API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(tvos, visionos);
+
+@property (nonatomic, strong, nullable) CPBarButton *backButton API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(tvos, visionos);
 
 @end
 

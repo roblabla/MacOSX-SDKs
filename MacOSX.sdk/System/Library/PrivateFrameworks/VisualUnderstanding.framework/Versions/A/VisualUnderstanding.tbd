@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/VisualUnderstanding.framework/Versions/A/VisualUnderstanding'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation4DataV19VisualUnderstandingE10multiArray3for8dataTypeSo07MLMultiF0CSaySo8NSNumberCG_So0jfbI0VtF', 
                        '_$s19VisualUnderstanding10VUIndexTagC11observationAA0C11ObservationCSgvpMV', 
                        '_$s19VisualUnderstanding10VUIndexTagC12fetchRequestSo07NSFetchF0CyACGyFZ', 

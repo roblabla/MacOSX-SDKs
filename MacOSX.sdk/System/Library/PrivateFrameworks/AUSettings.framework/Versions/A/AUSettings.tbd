@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AUSettings.framework/Versions/A/AUSettings'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AUDeveloperSettingsAccessoryFusingStringToType, _AUDeveloperSettingsAccessoryFusingTypeToString, 
                        _AUDeveloperSettingsURLStringToType, _AUDeveloperSettingsURLTypeToString, 
                        _AUSettingsPallasAudienceTypeToString, _AUSettingsPallasStringToAudienceType, 
@@ -44,20 +44,22 @@ exports:
                        _kAUSettingsLocationLivability, _kAUSettingsLocationPallasCustom, 
                        _kAUSettingsLocationPallasCustomer, _kAUSettingsLocationPallasCustomerSeed, 
                        _kAUSettingsLocationPallasInternalLiveOn, _kAUSettingsLocationPallasMAUntested, 
-                       _kAUSettingsLocationPublicSeed, _kAUSettingsMesuStaging, _kAUSettingsPallasAudience, 
-                       _kAUSettingsPallasPlistName, _kAUSettingsPlistName, _kAUSettingsPreReleaseBetaProgram, 
+                       _kAUSettingsLocationPallasSUDefault, _kAUSettingsLocationPublicSeed, 
+                       _kAUSettingsMesuStaging, _kAUSettingsPallasAudience, _kAUSettingsPallasPlistName, 
+                       _kAUSettingsPlistName, _kAUSettingsPreReleaseBetaProgram, 
                        _kAUSettingsProdFusing, _kAUSettingsProgressActiveSerialNumber, 
                        _kAUSettingsProgressActiveUpdate, _kAUSettingsProgressComplete, 
                        _kAUSettingsProgressKeyBuild, _kAUSettingsProgressKeyBytesSent, 
                        _kAUSettingsProgressKeyBytesTotal, _kAUSettingsSelectBasejumperLocation, 
                        _kAUSettingsSelectLocation, _kAUSettingsTableFooterText, _kAUSettingsUnfusedFusing, 
-                       _kAccessoryReachableKey, _kAccessorySupportsDeveloperSettingsKey, 
+                       _kAccessoryForceInstallKey, _kAccessoryReachableKey, _kAccessorySupportsDeveloperSettingsKey, 
                        _kActiveVersionKey, _kAssetLocationKey, _kAssetURLOverrideKey, 
                        _kAuthListingEnabledKey, _kBasejumperBuildKey, _kBasejumperTrainKey, 
                        _kClientIndentifier, _kDownloadedVersionKey, _kDropboxVersionKey, 
                        _kFusingKey, _kHWRevisionKey, _kInternalSettingsPaneURL, _kIsOTADisabledKey, 
                        _kMobileAssetModelNumberKey, _kModelNumberKey, _kNameKey, 
-                       _kPallasAudienceKey, _kPallasAudienceOverrideKey, _kPallasInternalAssetVariant, 
+                       _kPallasAudienceKey, _kPallasAudienceOverrideKey, _kPallasInternalAssetVariantKey, 
+                       _kPallasSoftwareUpdateAssetTypeKey, _kPallasSoftwareUpdateEraseInstallKey, 
                        _kPallasSupportEnabledKey, _kPartnerSerialNumbersKey, _kPersonalizationRequiredKey, 
                        _kSerialNumberKey, _kSettingsFromSeedBuild, _kSupplementalAssetLocationKey, 
                        _kSupplementalBasejumperBuildKey, _kSupplementalBasejumperTrainKey, 

@@ -12,6 +12,7 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 AS_EXTERN API_AVAILABLE(ios(12.0), macos(10.15), tvos(15.0), watchos(6.0))
+NS_SWIFT_SENDABLE
 @interface ASPasswordCredential : NSObject <ASAuthorizationCredential>
 
 /*! @abstract Initializes an ASPasswordCredential object.

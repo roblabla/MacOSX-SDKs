@@ -29,7 +29,7 @@ NS_SWIFT_SENDABLE
 
 #if !TARGET_OS_TV
 
-/// A displayable `CNContact` representing the blocked user.
+/// A displayable CNContact representing the blocked user.
 ///
 /// If the blocked identity does not exist in the user's contacts or is not accessible, returns a newly created `CNContact`.
 /// This provides formatted blocked identity information suitable for display in the application's UI.

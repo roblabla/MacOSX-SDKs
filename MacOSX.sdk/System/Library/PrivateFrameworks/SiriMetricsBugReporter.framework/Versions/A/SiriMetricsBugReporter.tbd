@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriMetricsBugReporter.framework/Versions/A/SiriMetricsBugReporter'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s22SiriMetricsBugReporter019AssistantExperimentB24CalculatorSubTypeContextO12nilUserAggIdyA2CmFWC', 
                        '_$s22SiriMetricsBugReporter019AssistantExperimentB24CalculatorSubTypeContextO14nilDeviceAggIdyA2CmFWC', 
                        '_$s22SiriMetricsBugReporter019AssistantExperimentB24CalculatorSubTypeContextO26missingAggregationIntervalyA2CmFWC', 
@@ -56,6 +56,7 @@ exports:
                        '_$s22SiriMetricsBugReporter12ErrorSubTypeO019dictationExperimentB10CalculatoryA2CmFWC', 
                        '_$s22SiriMetricsBugReporter12ErrorSubTypeO04oddiB10CalculatoryA2CmFWC', 
                        '_$s22SiriMetricsBugReporter12ErrorSubTypeO06digestB10CalculatoryA2CmFWC', 
+                       '_$s22SiriMetricsBugReporter12ErrorSubTypeO26oddiGenAIMetricsCalculatoryA2CmFWC', 
                        '_$s22SiriMetricsBugReporter12ErrorSubTypeO29oddiExperimentationCalculatoryA2CmFWC', 
                        '_$s22SiriMetricsBugReporter12ErrorSubTypeO3fbfyA2CmFWC', 
                        '_$s22SiriMetricsBugReporter12ErrorSubTypeO5biomeyA2CmFWC', 

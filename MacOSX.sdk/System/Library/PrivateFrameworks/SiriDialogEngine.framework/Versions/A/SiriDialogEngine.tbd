@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriDialogEngine.framework/Versions/A/SiriDialogEngine'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s11SiriKitFlow16TemplatingResultV0A12DialogEngineE25withBehaviorAfterSpeakingyAcA0ijK0OF', 
                        '_$s16SiriDialogEngine016ResponseManifestB0V15supportingPrintSSSgvM', 
                        '_$s16SiriDialogEngine016ResponseManifestB0V15supportingPrintSSSgvg', 

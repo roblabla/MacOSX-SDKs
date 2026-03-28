@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/SecurityInterface.framework/Versions/A/SecurityInterface'
-current-version: 55210.40.2
+current-version: 55210.100.6
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '$ld$add$os10.3$.objc_class_name_SFCertificateData', '$ld$add$os10.4$.objc_class_name_SFCertificateData', 
                        '$ld$add$os10.5$.objc_class_name_SFCertificateData', '$ld$add$os10.5$_OBJC_CLASS_$_SFCertificateData', 
                        '$ld$add$os10.6$.objc_class_name_SFCertificateData', '$ld$add$os10.6$_OBJC_CLASS_$_SFCertificateData', 

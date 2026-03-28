@@ -1,20 +1,23 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GamePolicy.framework/Versions/A/GamePolicy'
-current-version: 3.2.1
+current-version: 3.4.5
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10GamePolicy010IdentifiedA5GrantC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s10GamePolicy010IdentifiedA5GrantC5coderACSgSo7NSCoderC_tcfc', 
                        '_$s10GamePolicy010IdentifiedA5GrantCACycfC', '_$s10GamePolicy010IdentifiedA5GrantCACycfc', 
                        '_$s10GamePolicy010IdentifiedA5GrantCMa', '_$s10GamePolicy010IdentifiedA5GrantCMn', 
                        '_$s10GamePolicy010IdentifiedA5GrantCMo', '_$s10GamePolicy010IdentifiedA5GrantCN', 
-                       '_$s10GamePolicy010IdentifiedA5GrantCfD', '_$s10GamePolicy01kaB15ToolEntitlementSSvg', 
-                       '_$s10GamePolicy01kaB17DaemonEntitlementSSvg', '_$s10GamePolicy01kaB25PrivilegedToolEntitlementSSvg', 
+                       '_$s10GamePolicy010IdentifiedA5GrantCfD', '_$s10GamePolicy01kaB14AppEntitlementSSvg', 
+                       '_$s10GamePolicy01kaB15ToolEntitlementSSvg', '_$s10GamePolicy01kaB17DaemonEntitlementSSvg', 
+                       '_$s10GamePolicy01kaB24PrivilegedAppEntitlementSSvg', '_$s10GamePolicy01kaB25PrivilegedToolEntitlementSSvg', 
                        '_$s10GamePolicy0a7LibraryA0C02isA0Sbvg', '_$s10GamePolicy0a7LibraryA0C02isA0SbvpMV', 
+                       '_$s10GamePolicy0a7LibraryA0C17gameMetadataHintsSo0aeF0CSgvg', 
+                       '_$s10GamePolicy0a7LibraryA0C17gameMetadataHintsSo0aeF0CSgvpMV', 
                        '_$s10GamePolicy0a7LibraryA0C20persistentIdentifierSo012LSPersistentE0aSgvg', 
                        '_$s10GamePolicy0a7LibraryA0C20persistentIdentifierSo012LSPersistentE0aSgvpMV', 
                        '_$s10GamePolicy0a7LibraryA0C20supportsSecureCodingSbvgZ', 
@@ -25,7 +28,11 @@ exports:
                        '_$s10GamePolicy0a7LibraryA0C5coderACSgSo7NSCoderC_tcfc', 
                        '_$s10GamePolicy0a7LibraryA0C6ConfigV02isA0SbvM', '_$s10GamePolicy0a7LibraryA0C6ConfigV02isA0Sbvg', 
                        '_$s10GamePolicy0a7LibraryA0C6ConfigV02isA0SbvpMV', '_$s10GamePolicy0a7LibraryA0C6ConfigV02isA0Sbvs', 
-                       '_$s10GamePolicy0a7LibraryA0C6ConfigV20persistentIdentifier8bundleID04adamH002isA0AESo012LSPersistentF0aSg_SSSgSo8NSNumberCSgSbtcfC', 
+                       '_$s10GamePolicy0a7LibraryA0C6ConfigV17gameMetadataHintsSo0afG0CSgvM', 
+                       '_$s10GamePolicy0a7LibraryA0C6ConfigV17gameMetadataHintsSo0afG0CSgvg', 
+                       '_$s10GamePolicy0a7LibraryA0C6ConfigV17gameMetadataHintsSo0afG0CSgvpMV', 
+                       '_$s10GamePolicy0a7LibraryA0C6ConfigV17gameMetadataHintsSo0afG0CSgvs', 
+                       '_$s10GamePolicy0a7LibraryA0C6ConfigV20persistentIdentifier8bundleID04adamH002isA017gameMetadataHintsAESo012LSPersistentF0aSg_SSSgSo8NSNumberCSgSbSo0alM0CSgtcfC', 
                        '_$s10GamePolicy0a7LibraryA0C6ConfigV20persistentIdentifierSo012LSPersistentF0aSgvM', 
                        '_$s10GamePolicy0a7LibraryA0C6ConfigV20persistentIdentifierSo012LSPersistentF0aSgvg', 
                        '_$s10GamePolicy0a7LibraryA0C6ConfigV20persistentIdentifierSo012LSPersistentF0aSgvpMV', 
@@ -558,15 +565,16 @@ exports:
                        _getGPLogger, _gp_isInternalBuild ]
     objc-classes:    [ GPAutoEDRParameters, GPGameCenterMediator, GPGameLibrary, 
                        GPGameLibraryApp, GPGameMonitorEnvoy, GPProcessInfo, GPProcessMonitor, 
-                       GPTransientProcessInfo, GPUserExperienceProxy, GamingMetadataModel, 
-                       TransientProcessState, _GamePolicyAssertion_Attribute, _TtC10GamePolicy14FrontmostGrant, 
-                       _TtC10GamePolicy15FullScreenGrant, _TtC10GamePolicy15GameLibraryGame, 
-                       _TtC10GamePolicy16ConsoleModeGrant, _TtC10GamePolicy16GamePolicyAppXPC, 
-                       _TtC10GamePolicy18GamingMetadataBlob, _TtC10GamePolicy19GamePolicyAssertion, 
-                       _TtC10GamePolicy19IdentifiedGameGrant, _TtC10GamePolicy21ConsoleModeLimitation, 
-                       _TtC10GamePolicy21GamePolicyAgentUpdate, _TtC10GamePolicy23ConsoleModeUserDisabled, 
-                       _TtC10GamePolicy26GamePolicyPrivilegedAppXPC, _TtC10GamePolicy27GamePolicyTargetDescription, 
-                       _TtC10GamePolicy37GamePolicyDaemonPrivilegedProxyBridge, _TtCC10GamePolicy19GamePolicyAssertion10Limitation, 
-                       _TtCC10GamePolicy19GamePolicyAssertion5Grant, _TtCCC10GamePolicy19GamePolicyAssertion9Attribute10Privileged, 
+                       GPTransientProcessInfo, GPUserExperienceProxy, GameMetadataHints, 
+                       GamingMetadataModel, TransientProcessState, _GamePolicyAssertion_Attribute, 
+                       _TtC10GamePolicy14FrontmostGrant, _TtC10GamePolicy15FullScreenGrant, 
+                       _TtC10GamePolicy15GameLibraryGame, _TtC10GamePolicy16ConsoleModeGrant, 
+                       _TtC10GamePolicy16GamePolicyAppXPC, _TtC10GamePolicy18GamingMetadataBlob, 
+                       _TtC10GamePolicy19GamePolicyAssertion, _TtC10GamePolicy19IdentifiedGameGrant, 
+                       _TtC10GamePolicy21ConsoleModeLimitation, _TtC10GamePolicy21GamePolicyAgentUpdate, 
+                       _TtC10GamePolicy23ConsoleModeUserDisabled, _TtC10GamePolicy26GamePolicyPrivilegedAppXPC, 
+                       _TtC10GamePolicy27GamePolicyTargetDescription, _TtC10GamePolicy37GamePolicyDaemonPrivilegedProxyBridge, 
+                       _TtCC10GamePolicy19GamePolicyAssertion10Limitation, _TtCC10GamePolicy19GamePolicyAssertion5Grant, 
+                       _TtCCC10GamePolicy19GamePolicyAssertion9Attribute10Privileged, 
                        __GamePolicyAgentUpdateGameEvent ]
 ...

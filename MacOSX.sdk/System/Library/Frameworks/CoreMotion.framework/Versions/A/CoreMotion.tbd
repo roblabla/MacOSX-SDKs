@@ -1,9 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreMotion.framework/Versions/A/CoreMotion'
-current-version: 3064.0.10
+current-version: 3072.0.46
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -37,8 +36,7 @@ exports:
                        __ZTSNSt3__121__empty_non_own_stateIcEE, __ZTSNSt3__123__match_any_but_newlineIcEE, 
                        __ZTSNSt3__126__end_marked_subexpressionIcEE, __ZTSNSt3__128__begin_marked_subexpressionIcEE, 
                        __ZTSNSt3__16__loopIcEE, __ZTSNSt3__16__nodeIcEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo14CMOdometerDataC10CoreMotionE11maxAbsSlopeSdSgvg', 
                        '_$sSo14CMOdometerDataC10CoreMotionE11maxAbsSlopeSdSgvpMV', 
                        '_$sSo14CMOdometerDataC10CoreMotionE5slopeSdSgvg', '_$sSo14CMOdometerDataC10CoreMotionE5slopeSdSgvpMV', 
@@ -91,8 +89,10 @@ exports:
                        _CMActivityData, _CMAnomalyDetectorEnabled, _CMAnomalyDetectorEvent, 
                        _CMAnomalyEventType, _CMAnomalySensorTestModeEnabled, _CMAuthorized, 
                        _CMAvailable, _CMBackgroundInertialOdometry, _CMBatchedSensorAvailable, 
-                       _CMCameraVcmActuatorId, _CMColdStorageCardioTableNames, _CMColdStorageConfiguration, 
-                       _CMColdStorageDatabasePath, _CMColdStorageMobilityTableNames, 
+                       _CMCameraVcmActuatorId, _CMCardioHealthDataObject, _CMCardioHealthDataTypeId, 
+                       _CMCardioHealthLatestRecordTimeStamp, _CMCardioHealthReadState, 
+                       _CMCardioHealthStartTime, _CMCardioHealthStopTime, _CMColdStorageCardioTableNames, 
+                       _CMColdStorageConfiguration, _CMColdStorageDatabasePath, _CMColdStorageMobilityTableNames, 
                        _CMCompanionRelativeElevationKey, _CMCompassCalibrationData, 
                        _CMContextConfigurationKey, _CMCyclingWorkoutDistanceDataArray, 
                        _CMDataProviderReadForNSecondsKey, _CMDataProviderStreamIndexKey, 
@@ -298,9 +298,9 @@ exports:
                        CMCameraWorkoutEvent, CMCameraWorkoutSession, CMCatherineData, 
                        CMCatherineFeeder, CMCompanionRelativeElevationData, CMContextConfigurationManager, 
                        CMDeviceImpact, CMDeviceImpactManager, CMDeviceMotion, CMDeviceMotionLite, 
-                       CMDistributedSensingManager, CMDyskineticSymptomResult, CMElevation, 
-                       CMElevationData, CMExerciseMinute, CMExerciseMinuteData, CMFacePose, 
-                       CMFitnessMachine, CMFitnessMachineData, CMFitnessMachineWorkout, 
+                       CMDeviceMotionMultiFrame, CMDistributedSensingManager, CMDyskineticSymptomResult, 
+                       CMElevation, CMElevationData, CMExerciseMinute, CMExerciseMinuteData, 
+                       CMFacePose, CMFitnessMachine, CMFitnessMachineData, CMFitnessMachineWorkout, 
                        CMFitnessPlusWorkout, CMFitnessShared, CMFlickGestureEvent, 
                        CMFlickGestureManager, CMGNSSMotionManager, CMGenericWorkout, 
                        CMGestureManager, CMGyroData, CMGyroDataArray, CMHeadphoneActivityManager, 

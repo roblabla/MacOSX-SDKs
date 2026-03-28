@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 403.60.3 -module-name _RealityKit_SwiftUI
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 403.100.11 -module-name _RealityKit_SwiftUI
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import ARKit
 import CoreText
 import Foundation
@@ -31,12 +31,10 @@ extension SwiftUICore.View {
 }
 @available(visionOS 2.0, macOS 15.0, iOS 18.0, tvOS 26.0, *)
 extension RealityFoundation.MeshResource.ShapeExtrusionOptions {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var chamferProfile: SwiftUICore.Path? {
     get
     set
   }
-  #endif
 }
 @available(visionOS 2.0, macOS 15.0, iOS 18.0, tvOS 26.0, *)
 extension RealityFoundation.MeshResource {
@@ -81,9 +79,7 @@ extension _RealityKit_SwiftUI.ObjectCaptureView {
 @_Concurrency.MainActor public class ObjectCaptureSession : Swift.Identifiable {
   public struct Updates<Element> : _Concurrency.AsyncSequence, Swift.Sendable where Element : Swift.Sendable {
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> Element?
-      #endif
       @available(iOS 18.0, *)
       @available(tvOS, unavailable, introduced: 18.0)
       @available(watchOS, unavailable, introduced: 11.0)
@@ -259,6 +255,22 @@ extension _RealityKit_SwiftUI.ObjectCaptureSession.CaptureState : Swift.Sendable
 @available(watchOS, unavailable)
 extension _RealityKit_SwiftUI.ObjectCaptureSession.Feedback : Swift.Sendable {
 }
+@available(iOS 18.0, *)
+@available(macOS, unavailable)
+@available(macCatalyst, unavailable)
+@available(visionOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension _RealityKit_SwiftUI.ObjectCaptureSession {
+  @_Concurrency.MainActor public var shouldPlayHaptics: Swift.Bool {
+    get
+    set
+  }
+  @_Concurrency.MainActor public var isAutoCaptureEnabled: Swift.Bool {
+    get
+    set
+  }
+}
 @available(iOS 17.0, *)
 @available(watchOS, unavailable)
 @available(macOS, unavailable, introduced: 15.0)
@@ -271,18 +283,10 @@ extension _RealityKit_SwiftUI.ObjectCaptureSession : nonisolated Observation.Obs
 @available(visionOS, unavailable)
 @available(watchOS, unavailable)
 public protocol RealityCoordinateSpaceProjecting {
-  #if compiler(>=5.3) && $NonescapableTypes
   func project(point: Swift.SIMD3<Swift.Float>, to space: some CoordinateSpaceProtocol) -> CoreFoundation.CGPoint?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   func unproject(_ point: CoreFoundation.CGPoint, from space: some CoordinateSpaceProtocol, to realitySpace: some RealityCoordinateSpace, ontoPlane planeTransform: simd.float4x4) -> Swift.SIMD3<Swift.Float>?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   func ray(through point: CoreFoundation.CGPoint, in space: some CoordinateSpaceProtocol, to realitySpace: some RealityCoordinateSpace) -> (origin: Swift.SIMD3<Swift.Float>, direction: Swift.SIMD3<Swift.Float>)?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   func entity(at point: CoreFoundation.CGPoint, in space: some CoordinateSpaceProtocol) -> RealityFoundation.Entity?
-  #endif
   func entities(at point: CoreFoundation.CGPoint, in space: some CoordinateSpaceProtocol) -> [RealityFoundation.Entity]
   func hitTest(point: CoreFoundation.CGPoint, in space: some CoordinateSpaceProtocol, query: RealityFoundation.CollisionCastQueryType, mask: RealityFoundation.CollisionGroup) -> [RealityFoundation.CollisionCastHit]
 }
@@ -290,22 +294,14 @@ public protocol RealityCoordinateSpaceProjecting {
 @available(visionOS, unavailable, introduced: 2.0)
 @available(watchOS, unavailable)
 extension _RealityKit_SwiftUI.RealityViewCameraContent : _RealityKit_SwiftUI.RealityCoordinateSpaceProjecting {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS, introduced: 2.0, deprecated: 2.0)
   public func project(point: Swift.SIMD3<Swift.Float>, to space: some CoordinateSpaceProtocol) -> CoreFoundation.CGPoint?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS, introduced: 2.0, deprecated: 2.0)
   public func unproject(_ point: CoreFoundation.CGPoint, from space: some CoordinateSpaceProtocol, to realitySpace: some RealityCoordinateSpace, ontoPlane: simd.float4x4) -> Swift.SIMD3<Swift.Float>?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS, introduced: 2.0, deprecated: 2.0)
   public func ray(through: CoreFoundation.CGPoint, in space: some CoordinateSpaceProtocol, to realitySpace: some RealityCoordinateSpace) -> (origin: Swift.SIMD3<Swift.Float>, direction: Swift.SIMD3<Swift.Float>)?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS, introduced: 2.0, deprecated: 2.0)
   public func entity(at point: CoreFoundation.CGPoint, in space: some CoordinateSpaceProtocol) -> RealityFoundation.Entity?
-  #endif
   @available(visionOS, introduced: 2.0, deprecated: 2.0)
   public func entities(at point: CoreFoundation.CGPoint, in space: some CoordinateSpaceProtocol) -> [RealityFoundation.Entity]
   @available(visionOS, introduced: 2.0, deprecated: 2.0)
@@ -316,22 +312,14 @@ extension _RealityKit_SwiftUI.RealityViewCameraContent : _RealityKit_SwiftUI.Rea
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension _RealityKit_SwiftUI.EntityTargetValue : _RealityKit_SwiftUI.RealityCoordinateSpaceProjecting {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS, introduced: 2.0, deprecated: 2.0)
   public func project(point: Swift.SIMD3<Swift.Float>, to space: some CoordinateSpaceProtocol) -> CoreFoundation.CGPoint?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS, introduced: 2.0, deprecated: 2.0)
   public func unproject(_ point: CoreFoundation.CGPoint, from space: some CoordinateSpaceProtocol, to realitySpace: some RealityCoordinateSpace, ontoPlane: simd.float4x4) -> Swift.SIMD3<Swift.Float>?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS, introduced: 2.0, deprecated: 2.0)
   public func ray(through: CoreFoundation.CGPoint, in space: some CoordinateSpaceProtocol, to realitySpace: some RealityCoordinateSpace) -> (origin: Swift.SIMD3<Swift.Float>, direction: Swift.SIMD3<Swift.Float>)?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS, introduced: 2.0, deprecated: 2.0)
   public func entity(at point: CoreFoundation.CGPoint, in space: some CoordinateSpaceProtocol) -> RealityFoundation.Entity?
-  #endif
   @available(visionOS, introduced: 2.0, deprecated: 2.0)
   public func entities(at point: CoreFoundation.CGPoint, in space: some CoordinateSpaceProtocol) -> [RealityFoundation.Entity]
   @available(visionOS, introduced: 2.0, deprecated: 2.0)
@@ -342,14 +330,10 @@ extension _RealityKit_SwiftUI.EntityTargetValue : _RealityKit_SwiftUI.RealityCoo
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension _RealityKit_SwiftUI.EntityTargetValue {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS, introduced: 2.0, deprecated: 2.0)
   public func unproject(_ keyPath: Swift.KeyPath<Value, CoreFoundation.CGPoint>, to realitySpace: some RealityCoordinateSpace) -> Swift.SIMD3<Swift.Float>?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS, introduced: 2.0, deprecated: 2.0)
   public func unproject(_ point: CoreFoundation.CGPoint, from space: some CoordinateSpaceProtocol, to realitySpace: some RealityCoordinateSpace) -> Swift.SIMD3<Swift.Float>?
-  #endif
 }
 @available(iOS 17.0, *)
 @available(watchOS, unavailable)
@@ -424,19 +408,13 @@ extension _RealityKit_SwiftUI.ObjectCapturePointCloudView {
 public protocol RealityViewContentProtocol {
   associatedtype Entities : RealityFoundation.EntityCollection
   var entities: Self.Entities { get nonmutating set }
-  #if compiler(>=5.3) && $NonescapableTypes
   func subscribe<E>(to event: E.Type, on sourceObject: (any RealityFoundation.EventSource)?, componentType: (any RealityFoundation.Component.Type)?, _ handler: @escaping (E) -> Swift.Void) -> RealityFoundation.EventSubscription where E : RealityFoundation.Event
-  #endif
 }
 @available(visionOS 1.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 26.0, *)
 @available(watchOS, unavailable)
 extension _RealityKit_SwiftUI.RealityViewContentProtocol {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func subscribe<E>(to event: E.Type, on sourceObject: (any RealityFoundation.EventSource)?, _ handler: @escaping (E) -> Swift.Void) -> RealityFoundation.EventSubscription where E : RealityFoundation.Event
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func subscribe<E>(to event: E.Type, componentType: (any RealityFoundation.Component.Type)? = nil, _ handler: @escaping (E) -> Swift.Void) -> RealityFoundation.EventSubscription where E : RealityFoundation.Event
-  #endif
 }
 @available(visionOS 1.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 26.0, *)
 @available(watchOS, unavailable)
@@ -507,23 +485,17 @@ public class Model3DAsset {
       get
     }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var animationPlaybackController: RealityFoundation.AnimationPlaybackController? {
     get
   }
-  #endif
   public var availableAnimations: [_RealityKit_SwiftUI.Model3DAsset.EntityAnimation] {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var selectedAnimation: _RealityKit_SwiftUI.Model3DAsset.EntityAnimation? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(named name: Swift.String, in bundle: Foundation.Bundle? = nil) async throws
-  #endif
   public init(url: Foundation.URL) async throws
   @objc deinit
 }
@@ -537,42 +509,32 @@ extension _RealityKit_SwiftUI.Model3DAsset : nonisolated Observation.Observable 
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, macCatalyst 26.0, visionOS 26.0, *)
 extension RealityFoundation.Entity {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public static func animate(_ animation: SwiftUICore.Animation, body: () -> Swift.Void, completion: (() -> Swift.Void)? = nil)
-  #endif
 }
 @available(visionOS 26.0, iOS 26.0, macCatalyst 26.0, tvOS 26.0, macOS 26.0, *)
 extension SwiftUICore.Binding where Value == RealityFoundation.Entity.Observable.Components {
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript<C>(componentType: C.Type) -> SwiftUICore.Binding<C?> where C : RealityFoundation.Component {
     get
   }
-  #endif
 }
 @available(visionOS 26.0, iOS 26.0, macCatalyst 26.0, tvOS 26.0, macOS 26.0, *)
 extension SwiftUICore.Binding where Value == RealityFoundation.Entity.Observable.Components {
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript<C>(componentType: C.Type) -> SwiftUICore.Binding<C?> where C : RealityFoundation._ImplicitlyAnimatableBuiltinComponent {
     get
   }
-  #endif
 }
 @available(iOS 18.0, macOS 15.0, macCatalyst 18.0, tvOS 26.0, *)
 @available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension _RealityKit_SwiftUI.RealityView {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, macOS 15.0, macCatalyst 18.0, tvOS 26.0, *)
   @available(visionOS, unavailable)
   @available(watchOS, unavailable)
   nonisolated public init<P>(make: @escaping @_Concurrency.MainActor @Sendable (inout _RealityKit_SwiftUI.RealityViewCameraContent) async -> Swift.Void, update: (@_Concurrency.MainActor (inout _RealityKit_SwiftUI.RealityViewCameraContent) -> Swift.Void)? = nil, @SwiftUICore.ViewBuilder placeholder: () -> P) where Content == _RealityKit_SwiftUI.RealityViewCameraContent.Body<P>, P : SwiftUICore.View
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, macOS 15.0, macCatalyst 18.0, tvOS 26.0, *)
   @available(visionOS, unavailable)
   @available(watchOS, unavailable)
   nonisolated public init(make: @escaping @_Concurrency.MainActor @Sendable (inout _RealityKit_SwiftUI.RealityViewCameraContent) async -> Swift.Void, update: (@_Concurrency.MainActor (inout _RealityKit_SwiftUI.RealityViewCameraContent) -> Swift.Void)? = nil) where Content == _RealityKit_SwiftUI.RealityViewCameraContent.Body<_RealityKit_SwiftUI.RealityViewDefaultPlaceholder>
-  #endif
 }
 @available(iOS 18.0, macOS 15.0, macCatalyst 18.0, tvOS 26.0, *)
 @available(visionOS, unavailable)
@@ -611,21 +573,17 @@ public struct RealityViewCameraContent : _RealityKit_SwiftUI.RealityViewContentP
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS, unavailable)
   public var audioListener: RealityFoundation.Entity? {
     get
     set
   }
-  #endif
   @available(visionOS, unavailable)
   public var renderingEffects: _RealityKit_SwiftUI.RealityViewRenderingEffects {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func subscribe<E>(to event: E.Type, on sourceObject: (any RealityFoundation.EventSource)?, componentType: (any RealityFoundation.Component.Type)?, _ handler: @escaping (E) -> Swift.Void) -> RealityFoundation.EventSubscription where E : RealityFoundation.Event
-  #endif
   @available(iOS 18.0, tvOS 26.0, macOS 15.0, macCatalyst 18.0, *)
   @available(watchOS, unavailable)
   @available(visionOS, unavailable)
@@ -635,9 +593,7 @@ public struct RealityViewCameraContent : _RealityKit_SwiftUI.RealityViewContentP
 @available(visionOS, unavailable)
 @available(watchOS, unavailable)
 @_Concurrency.MainActor extension _RealityKit_SwiftUI.RealityViewCameraContent {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor public func animate(body: () -> Swift.Void, completion: (() -> Swift.Void)? = nil)
-  #endif
 }
 @available(iOS 18.0, macOS 15.0, macCatalyst 18.0, *)
 @available(visionOS, unavailable)
@@ -757,16 +713,12 @@ public enum Model3DPhase {
   case empty
   case success(_RealityKit_SwiftUI.ResolvedModel3D)
   case failure(any Swift.Error)
-  #if compiler(>=5.3) && $NonescapableTypes
   public var model: _RealityKit_SwiftUI.ResolvedModel3D? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var error: (any Swift.Error)? {
     get
   }
-  #endif
 }
 @available(visionOS 1.0, *)
 @available(iOS, unavailable)
@@ -778,16 +730,9 @@ public struct Model3D<Content> : SwiftUICore.View, SwiftUICore._RemoveGlobalActo
   nonisolated public init(url: Foundation.URL) where Content == _RealityKit_SwiftUI.ResolvedModel3D
   nonisolated public init<Model, Placeholder>(url: Foundation.URL, @SwiftUICore.ViewBuilder content: @escaping (_RealityKit_SwiftUI.ResolvedModel3D) -> Model, @SwiftUICore.ViewBuilder placeholder: @escaping () -> Placeholder) where Content == _RealityKit_SwiftUI.Model3DPlaceholderContent<Model, Placeholder>, Model : SwiftUICore.View, Placeholder : SwiftUICore.View
   nonisolated public init(url: Foundation.URL, transaction: SwiftUICore.Transaction = Transaction(), @SwiftUICore.ViewBuilder content: @escaping (_RealityKit_SwiftUI.Model3DPhase) -> Content)
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init(named name: Swift.String, bundle: Foundation.Bundle? = nil) where Content == _RealityKit_SwiftUI.ResolvedModel3D
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init<Model, Placeholder>(named name: Swift.String, bundle: Foundation.Bundle? = nil, @SwiftUICore.ViewBuilder content: @escaping (_RealityKit_SwiftUI.ResolvedModel3D) -> Model, @SwiftUICore.ViewBuilder placeholder: @escaping () -> Placeholder) where Content == _RealityKit_SwiftUI.Model3DPlaceholderContent<Model, Placeholder>, Model : SwiftUICore.View, Placeholder : SwiftUICore.View
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init(named name: Swift.String, bundle: Foundation.Bundle? = nil, transaction: SwiftUICore.Transaction = Transaction(), @SwiftUICore.ViewBuilder content: @escaping (_RealityKit_SwiftUI.Model3DPhase) -> Content)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS 26.0, *)
   @available(iOS, unavailable)
   @available(macOS, unavailable)
@@ -795,8 +740,6 @@ public struct Model3D<Content> : SwiftUICore.View, SwiftUICore._RemoveGlobalActo
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
   nonisolated public init(from catalog: RealityFoundation.Entity.ConfigurationCatalog, configurations: [Swift.String : Swift.String]? = nil) where Content == _RealityKit_SwiftUI.ResolvedModel3D
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS 26.0, *)
   @available(iOS, unavailable)
   @available(macOS, unavailable)
@@ -804,8 +747,6 @@ public struct Model3D<Content> : SwiftUICore.View, SwiftUICore._RemoveGlobalActo
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
   nonisolated public init<Model, Placeholder>(from catalog: RealityFoundation.Entity.ConfigurationCatalog, configurations: [Swift.String : Swift.String]? = nil, @SwiftUICore.ViewBuilder content: @escaping (_RealityKit_SwiftUI.ResolvedModel3D) -> Model, @SwiftUICore.ViewBuilder placeholder: @escaping () -> Placeholder) where Content == _RealityKit_SwiftUI.Model3DPlaceholderContent<Model, Placeholder>, Model : SwiftUICore.View, Placeholder : SwiftUICore.View
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS 26.0, *)
   @available(iOS, unavailable)
   @available(macOS, unavailable)
@@ -813,7 +754,6 @@ public struct Model3D<Content> : SwiftUICore.View, SwiftUICore._RemoveGlobalActo
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
   nonisolated public init(from catalog: RealityFoundation.Entity.ConfigurationCatalog, configurations: [Swift.String : Swift.String]? = nil, transaction: SwiftUICore.Transaction = Transaction(), @SwiftUICore.ViewBuilder content: @escaping (_RealityKit_SwiftUI.Model3DPhase) -> Content)
-  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }

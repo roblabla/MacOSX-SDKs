@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/VFX.framework/Versions/A/VFX'
-current-version: 203.40.2
+current-version: 203.100.3
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s11VFXProfiler18EventProbeSequenceV0cD8IteratorV10eventChunk33_738C2C3DA17DE3F83AC6A033E0BA8BA9LLSo06PEventG4DataVvpfi', 
                        '_$s11VFXProfiler18FlameProbeSequenceV0cD8IteratorV10flameChunk33_738C2C3DA17DE3F83AC6A033E0BA8BA9LLSo06PFlameG4DataVvpfi', 
                        '_$s3VFX037vfx_script_color_ramp_create_setting_D0yS2V_SVs5SIMD4VySfGSitF', 

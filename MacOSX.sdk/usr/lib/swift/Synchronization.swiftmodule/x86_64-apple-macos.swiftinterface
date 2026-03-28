@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-macosx26.2 -target-variant x86_64-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSynchronization -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature InoutLifetimeDependence -enable-experimental-feature LifetimeDependenceMutableAccessors -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature RawLayout -enable-experimental-feature StaticExclusiveOnly -enable-experimental-feature Extern -user-module-version 6.2.3.3.2 -enable-builtin-module -module-name Synchronization
-// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -strict-memory-safety -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-macosx26.4 -target-variant x86_64-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSynchronization -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature InoutLifetimeDependence -enable-experimental-feature LifetimeDependenceMutableAccessors -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature RawLayout -enable-experimental-feature StaticExclusiveOnly -enable-experimental-feature Extern -user-module-version 6.3.0.123.11 -enable-builtin-module -module-name Synchronization
+// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -strict-memory-safety -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Builtin
 import Darwin
 import Swift
@@ -16,7 +16,7 @@ import Swift
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent internal var _rawAddress: Builtin.RawPointer {
     @_transparent get {
-    Builtin.unprotectedAddressOfBorrow(self)
+    Builtin.addressOfRawLayout(self)
   }
   }
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -212,7 +212,6 @@ extension Swift.Double : Synchronization.AtomicRepresentable {
     Double(bitPattern: UInt64.decodeAtomicRepresentation(representation))
   }
 }
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 @frozen @_staticExclusiveOnly @safe public struct AtomicLazyReference<Instance> : ~Swift.Copyable where Instance : AnyObject {
   @usableFromInline
@@ -227,30 +226,12 @@ extension Swift.Double : Synchronization.AtomicRepresentable {
     }
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-@frozen @_staticExclusiveOnly public struct AtomicLazyReference<Instance> : ~Swift.Copyable where Instance : AnyObject {
-  @usableFromInline
-  internal let storage: Synchronization.Atomic<Swift.Unmanaged<Instance>?>
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @inlinable public init() {
-    storage = Atomic<Unmanaged<Instance>?>(nil)
-  }
-  @inlinable deinit {
-    if let unmanaged = storage.load(ordering: .acquiring) {
-      unmanaged.release()
-    }
-  }
-}
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.AtomicLazyReference {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public func storeIfNil(_ desired: consuming Instance) -> Instance
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public func load() -> Instance?
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.AtomicLazyReference : @unchecked Swift.Sendable where Instance : Swift.Sendable {
@@ -467,18 +448,13 @@ extension Synchronization.AtomicLoadOrdering {
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 public protocol AtomicOptionalRepresentable : Synchronization.AtomicRepresentable {
   associatedtype AtomicOptionalRepresentation : Swift.BitwiseCopyable
-  #if compiler(>=5.3) && $NonescapableTypes
   static func encodeAtomicOptionalRepresentation(_ value: consuming Self?) -> Self.AtomicOptionalRepresentation
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   static func decodeAtomicOptionalRepresentation(_ representation: consuming Self.AtomicOptionalRepresentation) -> Self?
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.RawRepresentable where Self : Synchronization.AtomicOptionalRepresentable, Self.RawValue : Synchronization.AtomicOptionalRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public typealias AtomicOptionalRepresentation = Self.RawValue.AtomicOptionalRepresentation
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Self?) -> Self.RawValue.AtomicOptionalRepresentation {
      
@@ -491,17 +467,13 @@ extension Swift.RawRepresentable where Self : Synchronization.AtomicOptionalRepr
 
     return RawValue.encodeAtomicOptionalRepresentation(nil)
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Self.RawValue.AtomicOptionalRepresentation) -> Self? {
     RawValue.decodeAtomicOptionalRepresentation(representation).flatMap {
       Self(rawValue: $0)
     }
   }
-  #endif
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.Optional : Synchronization.AtomicRepresentable where Wrapped : Synchronization.AtomicOptionalRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -515,8 +487,6 @@ extension Swift.Optional : Synchronization.AtomicRepresentable where Wrapped : S
     Wrapped.decodeAtomicOptionalRepresentation(representation)
   }
 }
-#endif
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafePointer : @unsafe Synchronization.AtomicRepresentable where Pointee : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -534,71 +504,23 @@ extension Swift.UnsafePointer : @unsafe Synchronization.AtomicRepresentable wher
     )!
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafePointer : Synchronization.AtomicRepresentable where Pointee : ~Copyable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicRepresentation = Swift.Int.AtomicRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafePointer<Pointee>) -> Swift.UnsafePointer<Pointee>.AtomicRepresentation {
-    Int.encodeAtomicRepresentation(
-      Int(bitPattern: value)
-    )
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafePointer<Pointee>.AtomicRepresentation) -> Swift.UnsafePointer<Pointee> {
-    UnsafePointer<Pointee>(
-      bitPattern: Int.decodeAtomicRepresentation(representation)
-    )!
-  }
-}
-#endif
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafePointer : @unsafe Synchronization.AtomicOptionalRepresentable where Pointee : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafePointer<Pointee>?) -> Swift.UnsafePointer<Pointee>.AtomicOptionalRepresentation {
     Int.encodeAtomicRepresentation(
       Int(bitPattern: value)
     )
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafePointer<Pointee>.AtomicOptionalRepresentation) -> Swift.UnsafePointer<Pointee>? {
     UnsafePointer<Pointee>(
       bitPattern: Int.decodeAtomicRepresentation(representation)
     )
   }
-  #endif
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafePointer : Synchronization.AtomicOptionalRepresentable where Pointee : ~Copyable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafePointer<Pointee>?) -> Swift.UnsafePointer<Pointee>.AtomicOptionalRepresentation {
-    Int.encodeAtomicRepresentation(
-      Int(bitPattern: value)
-    )
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafePointer<Pointee>.AtomicOptionalRepresentation) -> Swift.UnsafePointer<Pointee>? {
-    UnsafePointer<Pointee>(
-      bitPattern: Int.decodeAtomicRepresentation(representation)
-    )
-  }
-  #endif
-}
-#endif
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeMutablePointer : @unsafe Synchronization.AtomicRepresentable where Pointee : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -616,71 +538,23 @@ extension Swift.UnsafeMutablePointer : @unsafe Synchronization.AtomicRepresentab
     )!
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeMutablePointer : Synchronization.AtomicRepresentable where Pointee : ~Copyable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicRepresentation = Swift.Int.AtomicRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeMutablePointer<Pointee>) -> Swift.UnsafeMutablePointer<Pointee>.AtomicRepresentation {
-    Int.encodeAtomicRepresentation(
-      Int(bitPattern: value)
-    )
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeMutablePointer<Pointee>.AtomicRepresentation) -> Swift.UnsafeMutablePointer<Pointee> {
-    UnsafeMutablePointer<Pointee>(
-      bitPattern: Int.decodeAtomicRepresentation(representation)
-    )!
-  }
-}
-#endif
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeMutablePointer : @unsafe Synchronization.AtomicOptionalRepresentable where Pointee : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafeMutablePointer<Pointee>?) -> Swift.UnsafeMutablePointer<Pointee>.AtomicOptionalRepresentation {
     Int.encodeAtomicRepresentation(
       Int(bitPattern: value)
     )
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafeMutablePointer<Pointee>.AtomicOptionalRepresentation) -> Swift.UnsafeMutablePointer<Pointee>? {
     UnsafeMutablePointer<Pointee>(
       bitPattern: Int.decodeAtomicRepresentation(representation)
     )
   }
-  #endif
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeMutablePointer : Synchronization.AtomicOptionalRepresentable where Pointee : ~Copyable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafeMutablePointer<Pointee>?) -> Swift.UnsafeMutablePointer<Pointee>.AtomicOptionalRepresentation {
-    Int.encodeAtomicRepresentation(
-      Int(bitPattern: value)
-    )
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafeMutablePointer<Pointee>.AtomicOptionalRepresentation) -> Swift.UnsafeMutablePointer<Pointee>? {
-    UnsafeMutablePointer<Pointee>(
-      bitPattern: Int.decodeAtomicRepresentation(representation)
-    )
-  }
-  #endif
-}
-#endif
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeRawPointer : @unsafe Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -698,71 +572,23 @@ extension Swift.UnsafeRawPointer : @unsafe Synchronization.AtomicRepresentable {
     )!
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeRawPointer : Synchronization.AtomicRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicRepresentation = Swift.Int.AtomicRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeRawPointer) -> Swift.UnsafeRawPointer.AtomicRepresentation {
-    Int.encodeAtomicRepresentation(
-      Int(bitPattern: value)
-    )
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeRawPointer.AtomicRepresentation) -> Swift.UnsafeRawPointer {
-    UnsafeRawPointer(
-      bitPattern: Int.decodeAtomicRepresentation(representation)
-    )!
-  }
-}
-#endif
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeRawPointer : @unsafe Synchronization.AtomicOptionalRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafeRawPointer?) -> Swift.UnsafeRawPointer.AtomicOptionalRepresentation {
     Int.encodeAtomicRepresentation(
       Int(bitPattern: value)
     )
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafeRawPointer.AtomicOptionalRepresentation) -> Swift.UnsafeRawPointer? {
     UnsafeRawPointer(
       bitPattern: Int.decodeAtomicRepresentation(representation)
     )
   }
-  #endif
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeRawPointer : Synchronization.AtomicOptionalRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafeRawPointer?) -> Swift.UnsafeRawPointer.AtomicOptionalRepresentation {
-    Int.encodeAtomicRepresentation(
-      Int(bitPattern: value)
-    )
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafeRawPointer.AtomicOptionalRepresentation) -> Swift.UnsafeRawPointer? {
-    UnsafeRawPointer(
-      bitPattern: Int.decodeAtomicRepresentation(representation)
-    )
-  }
-  #endif
-}
-#endif
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeMutableRawPointer : @unsafe Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -780,71 +606,23 @@ extension Swift.UnsafeMutableRawPointer : @unsafe Synchronization.AtomicRepresen
     )!
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeMutableRawPointer : Synchronization.AtomicRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicRepresentation = Swift.Int.AtomicRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeMutableRawPointer) -> Swift.UnsafeMutableRawPointer.AtomicRepresentation {
-    Int.encodeAtomicRepresentation(
-      Int(bitPattern: value)
-    )
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeMutableRawPointer.AtomicRepresentation) -> Swift.UnsafeMutableRawPointer {
-    UnsafeMutableRawPointer(
-      bitPattern: Int.decodeAtomicRepresentation(representation)
-    )!
-  }
-}
-#endif
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeMutableRawPointer : @unsafe Synchronization.AtomicOptionalRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafeMutableRawPointer?) -> Swift.UnsafeMutableRawPointer.AtomicOptionalRepresentation {
     Int.encodeAtomicRepresentation(
       Int(bitPattern: value)
     )
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafeMutableRawPointer.AtomicOptionalRepresentation) -> Swift.UnsafeMutableRawPointer? {
     UnsafeMutableRawPointer(
       bitPattern: Int.decodeAtomicRepresentation(representation)
     )
   }
-  #endif
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeMutableRawPointer : Synchronization.AtomicOptionalRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafeMutableRawPointer?) -> Swift.UnsafeMutableRawPointer.AtomicOptionalRepresentation {
-    Int.encodeAtomicRepresentation(
-      Int(bitPattern: value)
-    )
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafeMutableRawPointer.AtomicOptionalRepresentation) -> Swift.UnsafeMutableRawPointer? {
-    UnsafeMutableRawPointer(
-      bitPattern: Int.decodeAtomicRepresentation(representation)
-    )
-  }
-  #endif
-}
-#endif
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.Unmanaged : @unsafe Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -862,31 +640,10 @@ extension Swift.Unmanaged : @unsafe Synchronization.AtomicRepresentable {
     )
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.Unmanaged : Synchronization.AtomicRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicRepresentation = Swift.Int.AtomicRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.Unmanaged<Instance>) -> Swift.Unmanaged<Instance>.AtomicRepresentation {
-    Int.encodeAtomicRepresentation(
-      Int(bitPattern: value.toOpaque())
-    )
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.Unmanaged<Instance>.AtomicRepresentation) -> Swift.Unmanaged<Instance> {
-    Unmanaged<Instance>.fromOpaque(
-      UnsafeRawPointer.decodeAtomicRepresentation(representation)
-    )
-  }
-}
-#endif
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.Unmanaged : @unsafe Synchronization.AtomicOptionalRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.Unmanaged<Instance>?) -> Swift.Unmanaged<Instance>.AtomicOptionalRepresentation {
      
@@ -901,48 +658,13 @@ extension Swift.Unmanaged : @unsafe Synchronization.AtomicOptionalRepresentable 
 
     return Int.AtomicRepresentation(0._value)
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.Unmanaged<Instance>.AtomicOptionalRepresentation) -> Swift.Unmanaged<Instance>? {
     UnsafeRawPointer.decodeAtomicOptionalRepresentation(representation).map {
       Unmanaged.fromOpaque($0)
     }
   }
-  #endif
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.Unmanaged : Synchronization.AtomicOptionalRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.Unmanaged<Instance>?) -> Swift.Unmanaged<Instance>.AtomicOptionalRepresentation {
-     
-     
-     
-
-    if let unmanaged = value {
-      return Int.encodeAtomicRepresentation(
-        Int(bitPattern: unmanaged.toOpaque())
-      )
-    }
-
-    return Int.AtomicRepresentation(0._value)
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.Unmanaged<Instance>.AtomicOptionalRepresentation) -> Swift.Unmanaged<Instance>? {
-    UnsafeRawPointer.decodeAtomicOptionalRepresentation(representation).map {
-      Unmanaged.fromOpaque($0)
-    }
-  }
-  #endif
-}
-#endif
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.OpaquePointer : @unsafe Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -960,70 +682,23 @@ extension Swift.OpaquePointer : @unsafe Synchronization.AtomicRepresentable {
     )!
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.OpaquePointer : Synchronization.AtomicRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicRepresentation = Swift.Int.AtomicRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.OpaquePointer) -> Swift.OpaquePointer.AtomicRepresentation {
-    Int.encodeAtomicRepresentation(
-      Int(bitPattern: value)
-    )
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.OpaquePointer.AtomicRepresentation) -> Swift.OpaquePointer {
-    OpaquePointer(
-      bitPattern: Int.decodeAtomicRepresentation(representation)
-    )!
-  }
-}
-#endif
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.OpaquePointer : @unsafe Synchronization.AtomicOptionalRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.OpaquePointer?) -> Swift.OpaquePointer.AtomicOptionalRepresentation {
     Int.encodeAtomicRepresentation(
       Int(bitPattern: value)
     )
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.OpaquePointer.AtomicOptionalRepresentation) -> Swift.OpaquePointer? {
     OpaquePointer(
       bitPattern: Int.decodeAtomicRepresentation(representation)
     )
   }
-  #endif
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.OpaquePointer : Synchronization.AtomicOptionalRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.OpaquePointer?) -> Swift.OpaquePointer.AtomicOptionalRepresentation {
-    Int.encodeAtomicRepresentation(
-      Int(bitPattern: value)
-    )
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.OpaquePointer.AtomicOptionalRepresentation) -> Swift.OpaquePointer? {
-    OpaquePointer(
-      bitPattern: Int.decodeAtomicRepresentation(representation)
-    )
-  }
-  #endif
-}
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.ObjectIdentifier : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -1047,7 +722,6 @@ extension Swift.ObjectIdentifier : Synchronization.AtomicRepresentable {
 extension Swift.ObjectIdentifier : Synchronization.AtomicOptionalRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.ObjectIdentifier?) -> Swift.ObjectIdentifier.AtomicOptionalRepresentation {
     Int.encodeAtomicRepresentation(
@@ -1056,8 +730,6 @@ extension Swift.ObjectIdentifier : Synchronization.AtomicOptionalRepresentable {
       unsafeBitCast(value, to: Int.self)
     )
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.ObjectIdentifier.AtomicOptionalRepresentation) -> Swift.ObjectIdentifier? {
      
@@ -1066,9 +738,7 @@ extension Swift.ObjectIdentifier : Synchronization.AtomicOptionalRepresentable {
       to: ObjectIdentifier?.self
     )
   }
-  #endif
 }
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeBufferPointer : @unsafe Synchronization.AtomicRepresentable where Element : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -1094,34 +764,6 @@ extension Swift.UnsafeBufferPointer : @unsafe Synchronization.AtomicRepresentabl
     )
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeBufferPointer : Synchronization.AtomicRepresentable where Element : ~Copyable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicRepresentation = Synchronization.WordPair.AtomicRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeBufferPointer<Element>) -> Swift.UnsafeBufferPointer<Element>.AtomicRepresentation {
-    let valueCopy = value
-
-    return WordPair.encodeAtomicRepresentation(
-      WordPair(
-        first: UInt(bitPattern: valueCopy.baseAddress),
-        second: UInt(truncatingIfNeeded: valueCopy.count)
-      )
-    )
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeBufferPointer<Element>.AtomicRepresentation) -> Swift.UnsafeBufferPointer<Element> {
-    let wp = WordPair.decodeAtomicRepresentation(representation)
-
-    return UnsafeBufferPointer<Element>(
-      start: UnsafePointer<Element>(bitPattern: wp.first),
-      count: Int(truncatingIfNeeded: wp.second)
-    )
-  }
-}
-#endif
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeMutableBufferPointer : @unsafe Synchronization.AtomicRepresentable where Element : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -1147,34 +789,6 @@ extension Swift.UnsafeMutableBufferPointer : @unsafe Synchronization.AtomicRepre
     )
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeMutableBufferPointer : Synchronization.AtomicRepresentable where Element : ~Copyable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicRepresentation = Synchronization.WordPair.AtomicRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeMutableBufferPointer<Element>) -> Swift.UnsafeMutableBufferPointer<Element>.AtomicRepresentation {
-    let valueCopy = value
-
-    return WordPair.encodeAtomicRepresentation(
-      WordPair(
-        first: UInt(bitPattern: valueCopy.baseAddress),
-        second: UInt(truncatingIfNeeded: valueCopy.count)
-      )
-    )
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeMutableBufferPointer<Element>.AtomicRepresentation) -> Swift.UnsafeMutableBufferPointer<Element> {
-    let wp = WordPair.decodeAtomicRepresentation(representation)
-
-    return UnsafeMutableBufferPointer<Element>(
-      start: UnsafeMutablePointer<Element>(bitPattern: wp.first),
-      count: Int(truncatingIfNeeded: wp.second)
-    )
-  }
-}
-#endif
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeRawBufferPointer : @unsafe Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -1200,34 +814,6 @@ extension Swift.UnsafeRawBufferPointer : @unsafe Synchronization.AtomicRepresent
     )
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeRawBufferPointer : Synchronization.AtomicRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicRepresentation = Synchronization.WordPair.AtomicRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeRawBufferPointer) -> Swift.UnsafeRawBufferPointer.AtomicRepresentation {
-    let valueCopy = value
-
-    return WordPair.encodeAtomicRepresentation(
-      WordPair(
-        first: UInt(bitPattern: valueCopy.baseAddress),
-        second: UInt(truncatingIfNeeded: valueCopy.count)
-      )
-    )
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeRawBufferPointer.AtomicRepresentation) -> Swift.UnsafeRawBufferPointer {
-    let wp = WordPair.decodeAtomicRepresentation(representation)
-
-    return UnsafeRawBufferPointer(
-      start: UnsafeRawPointer(bitPattern: wp.first),
-      count: Int(truncatingIfNeeded: wp.second)
-    )
-  }
-}
-#endif
-#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeMutableRawBufferPointer : @unsafe Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -1253,33 +839,6 @@ extension Swift.UnsafeMutableRawBufferPointer : @unsafe Synchronization.AtomicRe
     )
   }
 }
-#else
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeMutableRawBufferPointer : Synchronization.AtomicRepresentable {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  public typealias AtomicRepresentation = Synchronization.WordPair.AtomicRepresentation
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeMutableRawBufferPointer) -> Swift.UnsafeMutableRawBufferPointer.AtomicRepresentation {
-    let valueCopy = value
-
-    return WordPair.encodeAtomicRepresentation(
-      WordPair(
-        first: UInt(bitPattern: valueCopy.baseAddress),
-        second: UInt(truncatingIfNeeded: valueCopy.count)
-      )
-    )
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeMutableRawBufferPointer.AtomicRepresentation) -> Swift.UnsafeMutableRawBufferPointer {
-    let wp = WordPair.decodeAtomicRepresentation(representation)
-
-    return UnsafeMutableRawBufferPointer(
-      start: UnsafeMutableRawPointer(bitPattern: wp.first),
-      count: Int(truncatingIfNeeded: wp.second)
-    )
-  }
-}
-#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 public protocol AtomicRepresentable {
   associatedtype AtomicRepresentation : Swift.BitwiseCopyable
@@ -1407,176 +966,1844 @@ extension Synchronization.WordPair : Swift.CustomDebugStringConvertible {
 extension Synchronization.WordPair : Swift.Sendable {
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-@usableFromInline
-@frozen @_rawLayout(like: Value) internal struct _Cell<Value> : ~Swift.Copyable where Value : ~Copyable {
+@frozen @_alignment(1) public struct _Atomic8BitStorage {
+  public var _storage: Builtin.Int8
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent internal var _address: Swift.UnsafeMutablePointer<Value> {
-    @_transparent get {
-    UnsafeMutablePointer<Value>(_rawAddress)
-  }
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent internal var _rawAddress: Builtin.RawPointer {
-    @_transparent get {
-    Builtin.addressOfRawLayout(self)
-  }
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent internal init(_ initialValue: consuming Value) {
-    _address.initialize(to: initialValue)
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @inlinable deinit {
-    _address.deinitialize(count: 1)
+  @_alwaysEmitIntoClient @_transparent public init(_ _builtin: Builtin.Int8) {
+    self._storage = _builtin
   }
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-@frozen @_staticExclusiveOnly public struct _MutexHandle : ~Swift.Copyable {
-  @usableFromInline
-  internal let value: Synchronization._Cell<Darwin.os_unfair_lock>
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public init() {
-    value = _Cell(os_unfair_lock())
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent internal borrowing func _lock() {
-    os_unfair_lock_lock(value._address)
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent internal borrowing func _tryLock() -> Swift.Bool {
-    os_unfair_lock_trylock(value._address)
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent internal borrowing func _unlock() {
-    os_unfair_lock_unlock(value._address)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func load(ordering: Synchronization.AtomicLoadOrdering) -> Value {
+    let result = switch ordering {
+ 
+    case .relaxed:
+      Builtin.atomicload_monotonic_Int8(_rawAddress)
+ 
+    case .acquiring:
+      Builtin.atomicload_acquire_Int8(_rawAddress)
+ 
+    case .sequentiallyConsistent:
+      Builtin.atomicload_seqcst_Int8(_rawAddress)
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    return Value.decodeAtomicRepresentation(Value.AtomicRepresentation(result))
   }
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-@frozen @_staticExclusiveOnly public struct Mutex<Value> : ~Swift.Copyable where Value : ~Copyable {
-  @usableFromInline
-  internal let handle: Synchronization._MutexHandle = _MutexHandle()
-  @usableFromInline
-  internal let value: Synchronization._Cell<Value>
-  #if compiler(>=5.3) && $SendingArgsAndResults
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public init(_ initialValue: consuming sending Value) {
-    value = _Cell(initialValue)
-  }
-  #else
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public init(_ initialValue: consuming Value) {
-    value = _Cell(initialValue)
-  }
-  #endif
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Mutex : @unchecked Swift.Sendable where Value : ~Copyable {
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Mutex where Value : ~Copyable {
-  #if compiler(>=5.3) && $SendingArgsAndResults
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func withLock<Result, E>(_ body: (inout sending Value) throws(E) -> sending Result) throws(E) -> sending Result where E : Swift.Error, Result : ~Copyable {
-    handle._lock()
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func store(_ desired: consuming Value, ordering: Synchronization.AtomicStoreOrdering) {
+    switch ordering {
+ 
+    case .relaxed:
+      Builtin.atomicstore_monotonic_Int8(
+        _rawAddress,
+        Value.encodeAtomicRepresentation(desired)._storage
+      )
+ 
+    case .releasing:
+      Builtin.atomicstore_release_Int8(
+        _rawAddress,
+        Value.encodeAtomicRepresentation(desired)._storage
+      )
+ 
+    case .sequentiallyConsistent:
+      Builtin.atomicstore_seqcst_Int8(
+        _rawAddress,
+        Value.encodeAtomicRepresentation(desired)._storage
+      )
+ 
 
-    defer {
-      handle._unlock()
+    default:
+      Builtin.unreachable()
     }
-
-    return try body(&value._address.pointee)
-  }
-  #else
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func withLock<Result, E>(_ body: (inout Value) throws(E) -> Result) throws(E) -> Result where E : Swift.Error, Result : ~Copyable {
-    handle._lock()
-
-    defer {
-      handle._unlock()
-    }
-
-    return try body(&value._address.pointee)
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  #if compiler(>=5.3) && $SendingArgsAndResults
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func withLockIfAvailable<Result, E>(_ body: (inout sending Value) throws(E) -> sending Result) throws(E) -> sending Result? where E : Swift.Error, Result : ~Copyable {
-    guard handle._tryLock() else {
-      return nil
-    }
-
-    defer {
-      handle._unlock()
-    }
-
-    return try body(&value._address.pointee)
-  }
-  #else
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func withLockIfAvailable<Result, E>(_ body: (inout Value) throws(E) -> Result) throws(E) -> Result? where E : Swift.Error, Result : ~Copyable {
-    guard handle._tryLock() else {
-      return nil
-    }
-
-    defer {
-      handle._unlock()
-    }
-
-    return try body(&value._address.pointee)
-  }
-  #endif
-  #endif
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Mutex where Value == () {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func _unsafeLock() {
-    handle._lock()
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func _unsafeTryLock() -> Swift.Bool {
-    handle._tryLock()
-  }
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func _unsafeUnlock() {
-    handle._unlock()
   }
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization._MutexHandle {
-  #if compiler(>=5.3) && $MemorySafetyAttributes
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent @unsafe public borrowing func unsafeLock() {
-    _lock()
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func exchange(_ desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> Value {
+    let desired = Value.encodeAtomicRepresentation(desired)._storage
+
+    let result = switch ordering {
+ 
+    case .relaxed:
+      Builtin.atomicrmw_xchg_monotonic_Int8(_rawAddress, desired)
+ 
+    case .acquiring:
+      Builtin.atomicrmw_xchg_acquire_Int8(_rawAddress, desired)
+ 
+    case .releasing:
+      Builtin.atomicrmw_xchg_release_Int8(_rawAddress, desired)
+ 
+    case .acquiringAndReleasing:
+      Builtin.atomicrmw_xchg_acqrel_Int8(_rawAddress, desired)
+ 
+    case .sequentiallyConsistent:
+      Builtin.atomicrmw_xchg_seqcst_Int8(_rawAddress, desired)
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    let atomicStorage = Value.AtomicRepresentation(result)
+
+    return Value.decodeAtomicRepresentation(atomicStorage)
   }
-  #else
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func unsafeLock() {
-    _lock()
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    compareExchange(
+      expected: expected,
+      desired: desired,
+      successOrdering: ordering,
+      failureOrdering: ._failureOrdering(for: ordering)
+    )
   }
-  #endif
-  #if compiler(>=5.3) && $MemorySafetyAttributes
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent @unsafe public borrowing func unsafeTryLock() -> Swift.Bool {
-    _tryLock()
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    let expected = Value.encodeAtomicRepresentation(expected)._storage
+    let desired = Value.encodeAtomicRepresentation(desired)._storage
+
+    let (ov, won) = switch (successOrdering, failureOrdering) {
+ 
+    case (.relaxed, .relaxed):
+      Builtin.cmpxchg_monotonic_monotonic_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .relaxed):
+      Builtin.cmpxchg_acquire_monotonic_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .relaxed):
+      Builtin.cmpxchg_release_monotonic_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .relaxed):
+      Builtin.cmpxchg_acqrel_monotonic_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .relaxed):
+      Builtin.cmpxchg_seqcst_monotonic_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .acquiring):
+      Builtin.cmpxchg_seqcst_acquire_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    return (
+      exchanged: Bool(won),
+      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
+    )
   }
-  #else
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func unsafeTryLock() -> Swift.Bool {
-    _tryLock()
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    weakCompareExchange(
+      expected: expected,
+      desired: desired,
+      successOrdering: ordering,
+      failureOrdering: ._failureOrdering(for: ordering)
+    )
   }
-  #endif
-  #if compiler(>=5.3) && $MemorySafetyAttributes
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent @unsafe public borrowing func unsafeUnlock() {
-    _unlock()
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    let expected = Value.encodeAtomicRepresentation(expected)._storage
+    let desired = Value.encodeAtomicRepresentation(desired)._storage
+
+    let (ov, won) = switch (successOrdering, failureOrdering) {
+ 
+    case (.relaxed, .relaxed):
+      Builtin.cmpxchg_monotonic_monotonic_weak_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_weak_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .relaxed):
+      Builtin.cmpxchg_acquire_monotonic_weak_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_weak_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .relaxed):
+      Builtin.cmpxchg_release_monotonic_weak_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_weak_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .relaxed):
+      Builtin.cmpxchg_acqrel_monotonic_weak_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_weak_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .relaxed):
+      Builtin.cmpxchg_seqcst_monotonic_weak_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .acquiring):
+      Builtin.cmpxchg_seqcst_acquire_weak_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int8(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    return (
+      exchanged: Bool(won),
+      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
+    )
   }
-  #else
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+@frozen @_alignment(2) public struct _Atomic16BitStorage {
+  public var _storage: Builtin.Int16
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public borrowing func unsafeUnlock() {
-    _unlock()
+  @_alwaysEmitIntoClient @_transparent public init(_ _builtin: Builtin.Int16) {
+    self._storage = _builtin
   }
-  #endif
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func load(ordering: Synchronization.AtomicLoadOrdering) -> Value {
+    let result = switch ordering {
+ 
+    case .relaxed:
+      Builtin.atomicload_monotonic_Int16(_rawAddress)
+ 
+    case .acquiring:
+      Builtin.atomicload_acquire_Int16(_rawAddress)
+ 
+    case .sequentiallyConsistent:
+      Builtin.atomicload_seqcst_Int16(_rawAddress)
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    return Value.decodeAtomicRepresentation(Value.AtomicRepresentation(result))
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func store(_ desired: consuming Value, ordering: Synchronization.AtomicStoreOrdering) {
+    switch ordering {
+ 
+    case .relaxed:
+      Builtin.atomicstore_monotonic_Int16(
+        _rawAddress,
+        Value.encodeAtomicRepresentation(desired)._storage
+      )
+ 
+    case .releasing:
+      Builtin.atomicstore_release_Int16(
+        _rawAddress,
+        Value.encodeAtomicRepresentation(desired)._storage
+      )
+ 
+    case .sequentiallyConsistent:
+      Builtin.atomicstore_seqcst_Int16(
+        _rawAddress,
+        Value.encodeAtomicRepresentation(desired)._storage
+      )
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func exchange(_ desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> Value {
+    let desired = Value.encodeAtomicRepresentation(desired)._storage
+
+    let result = switch ordering {
+ 
+    case .relaxed:
+      Builtin.atomicrmw_xchg_monotonic_Int16(_rawAddress, desired)
+ 
+    case .acquiring:
+      Builtin.atomicrmw_xchg_acquire_Int16(_rawAddress, desired)
+ 
+    case .releasing:
+      Builtin.atomicrmw_xchg_release_Int16(_rawAddress, desired)
+ 
+    case .acquiringAndReleasing:
+      Builtin.atomicrmw_xchg_acqrel_Int16(_rawAddress, desired)
+ 
+    case .sequentiallyConsistent:
+      Builtin.atomicrmw_xchg_seqcst_Int16(_rawAddress, desired)
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    let atomicStorage = Value.AtomicRepresentation(result)
+
+    return Value.decodeAtomicRepresentation(atomicStorage)
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    compareExchange(
+      expected: expected,
+      desired: desired,
+      successOrdering: ordering,
+      failureOrdering: ._failureOrdering(for: ordering)
+    )
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    let expected = Value.encodeAtomicRepresentation(expected)._storage
+    let desired = Value.encodeAtomicRepresentation(desired)._storage
+
+    let (ov, won) = switch (successOrdering, failureOrdering) {
+ 
+    case (.relaxed, .relaxed):
+      Builtin.cmpxchg_monotonic_monotonic_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .relaxed):
+      Builtin.cmpxchg_acquire_monotonic_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .relaxed):
+      Builtin.cmpxchg_release_monotonic_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .relaxed):
+      Builtin.cmpxchg_acqrel_monotonic_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .relaxed):
+      Builtin.cmpxchg_seqcst_monotonic_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .acquiring):
+      Builtin.cmpxchg_seqcst_acquire_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    return (
+      exchanged: Bool(won),
+      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
+    )
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    weakCompareExchange(
+      expected: expected,
+      desired: desired,
+      successOrdering: ordering,
+      failureOrdering: ._failureOrdering(for: ordering)
+    )
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    let expected = Value.encodeAtomicRepresentation(expected)._storage
+    let desired = Value.encodeAtomicRepresentation(desired)._storage
+
+    let (ov, won) = switch (successOrdering, failureOrdering) {
+ 
+    case (.relaxed, .relaxed):
+      Builtin.cmpxchg_monotonic_monotonic_weak_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_weak_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .relaxed):
+      Builtin.cmpxchg_acquire_monotonic_weak_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_weak_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .relaxed):
+      Builtin.cmpxchg_release_monotonic_weak_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_weak_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .relaxed):
+      Builtin.cmpxchg_acqrel_monotonic_weak_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_weak_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .relaxed):
+      Builtin.cmpxchg_seqcst_monotonic_weak_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .acquiring):
+      Builtin.cmpxchg_seqcst_acquire_weak_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int16(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    return (
+      exchanged: Bool(won),
+      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
+    )
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+@frozen @_alignment(4) public struct _Atomic32BitStorage {
+  public var _storage: Builtin.Int32
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public init(_ _builtin: Builtin.Int32) {
+    self._storage = _builtin
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func load(ordering: Synchronization.AtomicLoadOrdering) -> Value {
+    let result = switch ordering {
+ 
+    case .relaxed:
+      Builtin.atomicload_monotonic_Int32(_rawAddress)
+ 
+    case .acquiring:
+      Builtin.atomicload_acquire_Int32(_rawAddress)
+ 
+    case .sequentiallyConsistent:
+      Builtin.atomicload_seqcst_Int32(_rawAddress)
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    return Value.decodeAtomicRepresentation(Value.AtomicRepresentation(result))
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func store(_ desired: consuming Value, ordering: Synchronization.AtomicStoreOrdering) {
+    switch ordering {
+ 
+    case .relaxed:
+      Builtin.atomicstore_monotonic_Int32(
+        _rawAddress,
+        Value.encodeAtomicRepresentation(desired)._storage
+      )
+ 
+    case .releasing:
+      Builtin.atomicstore_release_Int32(
+        _rawAddress,
+        Value.encodeAtomicRepresentation(desired)._storage
+      )
+ 
+    case .sequentiallyConsistent:
+      Builtin.atomicstore_seqcst_Int32(
+        _rawAddress,
+        Value.encodeAtomicRepresentation(desired)._storage
+      )
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func exchange(_ desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> Value {
+    let desired = Value.encodeAtomicRepresentation(desired)._storage
+
+    let result = switch ordering {
+ 
+    case .relaxed:
+      Builtin.atomicrmw_xchg_monotonic_Int32(_rawAddress, desired)
+ 
+    case .acquiring:
+      Builtin.atomicrmw_xchg_acquire_Int32(_rawAddress, desired)
+ 
+    case .releasing:
+      Builtin.atomicrmw_xchg_release_Int32(_rawAddress, desired)
+ 
+    case .acquiringAndReleasing:
+      Builtin.atomicrmw_xchg_acqrel_Int32(_rawAddress, desired)
+ 
+    case .sequentiallyConsistent:
+      Builtin.atomicrmw_xchg_seqcst_Int32(_rawAddress, desired)
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    let atomicStorage = Value.AtomicRepresentation(result)
+
+    return Value.decodeAtomicRepresentation(atomicStorage)
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    compareExchange(
+      expected: expected,
+      desired: desired,
+      successOrdering: ordering,
+      failureOrdering: ._failureOrdering(for: ordering)
+    )
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    let expected = Value.encodeAtomicRepresentation(expected)._storage
+    let desired = Value.encodeAtomicRepresentation(desired)._storage
+
+    let (ov, won) = switch (successOrdering, failureOrdering) {
+ 
+    case (.relaxed, .relaxed):
+      Builtin.cmpxchg_monotonic_monotonic_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .relaxed):
+      Builtin.cmpxchg_acquire_monotonic_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .relaxed):
+      Builtin.cmpxchg_release_monotonic_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .relaxed):
+      Builtin.cmpxchg_acqrel_monotonic_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .relaxed):
+      Builtin.cmpxchg_seqcst_monotonic_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .acquiring):
+      Builtin.cmpxchg_seqcst_acquire_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    return (
+      exchanged: Bool(won),
+      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
+    )
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    weakCompareExchange(
+      expected: expected,
+      desired: desired,
+      successOrdering: ordering,
+      failureOrdering: ._failureOrdering(for: ordering)
+    )
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    let expected = Value.encodeAtomicRepresentation(expected)._storage
+    let desired = Value.encodeAtomicRepresentation(desired)._storage
+
+    let (ov, won) = switch (successOrdering, failureOrdering) {
+ 
+    case (.relaxed, .relaxed):
+      Builtin.cmpxchg_monotonic_monotonic_weak_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_weak_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .relaxed):
+      Builtin.cmpxchg_acquire_monotonic_weak_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_weak_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .relaxed):
+      Builtin.cmpxchg_release_monotonic_weak_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_weak_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .relaxed):
+      Builtin.cmpxchg_acqrel_monotonic_weak_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_weak_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .relaxed):
+      Builtin.cmpxchg_seqcst_monotonic_weak_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .acquiring):
+      Builtin.cmpxchg_seqcst_acquire_weak_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int32(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    return (
+      exchanged: Bool(won),
+      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
+    )
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+@frozen @_alignment(8) public struct _Atomic64BitStorage {
+  public var _storage: Builtin.Int64
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public init(_ _builtin: Builtin.Int64) {
+    self._storage = _builtin
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func load(ordering: Synchronization.AtomicLoadOrdering) -> Value {
+    let result = switch ordering {
+ 
+    case .relaxed:
+      Builtin.atomicload_monotonic_Int64(_rawAddress)
+ 
+    case .acquiring:
+      Builtin.atomicload_acquire_Int64(_rawAddress)
+ 
+    case .sequentiallyConsistent:
+      Builtin.atomicload_seqcst_Int64(_rawAddress)
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    return Value.decodeAtomicRepresentation(Value.AtomicRepresentation(result))
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func store(_ desired: consuming Value, ordering: Synchronization.AtomicStoreOrdering) {
+    switch ordering {
+ 
+    case .relaxed:
+      Builtin.atomicstore_monotonic_Int64(
+        _rawAddress,
+        Value.encodeAtomicRepresentation(desired)._storage
+      )
+ 
+    case .releasing:
+      Builtin.atomicstore_release_Int64(
+        _rawAddress,
+        Value.encodeAtomicRepresentation(desired)._storage
+      )
+ 
+    case .sequentiallyConsistent:
+      Builtin.atomicstore_seqcst_Int64(
+        _rawAddress,
+        Value.encodeAtomicRepresentation(desired)._storage
+      )
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func exchange(_ desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> Value {
+    let desired = Value.encodeAtomicRepresentation(desired)._storage
+
+    let result = switch ordering {
+ 
+    case .relaxed:
+      Builtin.atomicrmw_xchg_monotonic_Int64(_rawAddress, desired)
+ 
+    case .acquiring:
+      Builtin.atomicrmw_xchg_acquire_Int64(_rawAddress, desired)
+ 
+    case .releasing:
+      Builtin.atomicrmw_xchg_release_Int64(_rawAddress, desired)
+ 
+    case .acquiringAndReleasing:
+      Builtin.atomicrmw_xchg_acqrel_Int64(_rawAddress, desired)
+ 
+    case .sequentiallyConsistent:
+      Builtin.atomicrmw_xchg_seqcst_Int64(_rawAddress, desired)
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    let atomicStorage = Value.AtomicRepresentation(result)
+
+    return Value.decodeAtomicRepresentation(atomicStorage)
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    compareExchange(
+      expected: expected,
+      desired: desired,
+      successOrdering: ordering,
+      failureOrdering: ._failureOrdering(for: ordering)
+    )
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    let expected = Value.encodeAtomicRepresentation(expected)._storage
+    let desired = Value.encodeAtomicRepresentation(desired)._storage
+
+    let (ov, won) = switch (successOrdering, failureOrdering) {
+ 
+    case (.relaxed, .relaxed):
+      Builtin.cmpxchg_monotonic_monotonic_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .relaxed):
+      Builtin.cmpxchg_acquire_monotonic_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .relaxed):
+      Builtin.cmpxchg_release_monotonic_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .relaxed):
+      Builtin.cmpxchg_acqrel_monotonic_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .relaxed):
+      Builtin.cmpxchg_seqcst_monotonic_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .acquiring):
+      Builtin.cmpxchg_seqcst_acquire_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    return (
+      exchanged: Bool(won),
+      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
+    )
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    weakCompareExchange(
+      expected: expected,
+      desired: desired,
+      successOrdering: ordering,
+      failureOrdering: ._failureOrdering(for: ordering)
+    )
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    let expected = Value.encodeAtomicRepresentation(expected)._storage
+    let desired = Value.encodeAtomicRepresentation(desired)._storage
+
+    let (ov, won) = switch (successOrdering, failureOrdering) {
+ 
+    case (.relaxed, .relaxed):
+      Builtin.cmpxchg_monotonic_monotonic_weak_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_weak_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .relaxed):
+      Builtin.cmpxchg_acquire_monotonic_weak_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_weak_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .relaxed):
+      Builtin.cmpxchg_release_monotonic_weak_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_weak_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .relaxed):
+      Builtin.cmpxchg_acqrel_monotonic_weak_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_weak_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .relaxed):
+      Builtin.cmpxchg_seqcst_monotonic_weak_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .acquiring):
+      Builtin.cmpxchg_seqcst_acquire_weak_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int64(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    return (
+      exchanged: Bool(won),
+      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
+    )
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+@frozen @_alignment(16) public struct _Atomic128BitStorage {
+  public var _storage: Builtin.Int128
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public init(_ _builtin: Builtin.Int128) {
+    self._storage = _builtin
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func load(ordering: Synchronization.AtomicLoadOrdering) -> Value {
+    let result = switch ordering {
+ 
+    case .relaxed:
+      Builtin.atomicload_monotonic_Int128(_rawAddress)
+ 
+    case .acquiring:
+      Builtin.atomicload_acquire_Int128(_rawAddress)
+ 
+    case .sequentiallyConsistent:
+      Builtin.atomicload_seqcst_Int128(_rawAddress)
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    return Value.decodeAtomicRepresentation(Value.AtomicRepresentation(result))
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func store(_ desired: consuming Value, ordering: Synchronization.AtomicStoreOrdering) {
+    switch ordering {
+ 
+    case .relaxed:
+      Builtin.atomicstore_monotonic_Int128(
+        _rawAddress,
+        Value.encodeAtomicRepresentation(desired)._storage
+      )
+ 
+    case .releasing:
+      Builtin.atomicstore_release_Int128(
+        _rawAddress,
+        Value.encodeAtomicRepresentation(desired)._storage
+      )
+ 
+    case .sequentiallyConsistent:
+      Builtin.atomicstore_seqcst_Int128(
+        _rawAddress,
+        Value.encodeAtomicRepresentation(desired)._storage
+      )
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func exchange(_ desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> Value {
+    let desired = Value.encodeAtomicRepresentation(desired)._storage
+
+    let result = switch ordering {
+ 
+    case .relaxed:
+      Builtin.atomicrmw_xchg_monotonic_Int128(_rawAddress, desired)
+ 
+    case .acquiring:
+      Builtin.atomicrmw_xchg_acquire_Int128(_rawAddress, desired)
+ 
+    case .releasing:
+      Builtin.atomicrmw_xchg_release_Int128(_rawAddress, desired)
+ 
+    case .acquiringAndReleasing:
+      Builtin.atomicrmw_xchg_acqrel_Int128(_rawAddress, desired)
+ 
+    case .sequentiallyConsistent:
+      Builtin.atomicrmw_xchg_seqcst_Int128(_rawAddress, desired)
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    let atomicStorage = Value.AtomicRepresentation(result)
+
+    return Value.decodeAtomicRepresentation(atomicStorage)
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    compareExchange(
+      expected: expected,
+      desired: desired,
+      successOrdering: ordering,
+      failureOrdering: ._failureOrdering(for: ordering)
+    )
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    let expected = Value.encodeAtomicRepresentation(expected)._storage
+    let desired = Value.encodeAtomicRepresentation(desired)._storage
+
+    let (ov, won) = switch (successOrdering, failureOrdering) {
+ 
+    case (.relaxed, .relaxed):
+      Builtin.cmpxchg_monotonic_monotonic_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .relaxed):
+      Builtin.cmpxchg_acquire_monotonic_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .relaxed):
+      Builtin.cmpxchg_release_monotonic_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .relaxed):
+      Builtin.cmpxchg_acqrel_monotonic_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .relaxed):
+      Builtin.cmpxchg_seqcst_monotonic_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .acquiring):
+      Builtin.cmpxchg_seqcst_acquire_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    return (
+      exchanged: Bool(won),
+      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
+    )
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    weakCompareExchange(
+      expected: expected,
+      desired: desired,
+      successOrdering: ordering,
+      failureOrdering: ._failureOrdering(for: ordering)
+    )
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
+    let expected = Value.encodeAtomicRepresentation(expected)._storage
+    let desired = Value.encodeAtomicRepresentation(desired)._storage
+
+    let (ov, won) = switch (successOrdering, failureOrdering) {
+ 
+    case (.relaxed, .relaxed):
+      Builtin.cmpxchg_monotonic_monotonic_weak_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_weak_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.relaxed, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .relaxed):
+      Builtin.cmpxchg_acquire_monotonic_weak_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .acquiring):
+      Builtin.cmpxchg_acquire_acquire_weak_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiring, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .relaxed):
+      Builtin.cmpxchg_release_monotonic_weak_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_weak_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.releasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .relaxed):
+      Builtin.cmpxchg_acqrel_monotonic_weak_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .acquiring):
+      Builtin.cmpxchg_acqrel_acquire_weak_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.acquiringAndReleasing, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .relaxed):
+      Builtin.cmpxchg_seqcst_monotonic_weak_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .acquiring):
+      Builtin.cmpxchg_seqcst_acquire_weak_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+    case (.sequentiallyConsistent, .sequentiallyConsistent):
+      Builtin.cmpxchg_seqcst_seqcst_weak_Int128(
+        _rawAddress,
+        expected,
+        desired
+      )
+ 
+
+    default:
+      Builtin.unreachable()
+    }
+
+    return (
+      exchanged: Bool(won),
+      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
+    )
+  }
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.Int : Synchronization.AtomicRepresentable {
@@ -6573,1843 +7800,116 @@ extension Synchronization.Atomic where Value == Swift.UInt128 {
   }
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-@frozen @_alignment(1) public struct _Atomic8BitStorage {
-  public var _storage: Builtin.Int8
+@frozen @_rawLayout(like: Value) public struct _Cell<Value> : ~Swift.Copyable where Value : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public init(_ _builtin: Builtin.Int8) {
-    self._storage = _builtin
+  @_alwaysEmitIntoClient @_transparent public var _address: Swift.UnsafeMutablePointer<Value> {
+    @_transparent get {
+    UnsafeMutablePointer<Value>(_rawAddress)
+  }
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent internal var _rawAddress: Builtin.RawPointer {
+    @_transparent get {
+    Builtin.addressOfRawLayout(self)
+  }
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public init(_ initialValue: consuming Value) {
+    _address.initialize(to: initialValue)
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @inlinable deinit {
+    _address.deinitialize(count: 1)
   }
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
+@frozen @_staticExclusiveOnly public struct Mutex<Value> : ~Swift.Copyable where Value : ~Copyable {
+  @usableFromInline
+  internal let handle: Synchronization._MutexHandle = _MutexHandle()
+  @usableFromInline
+  internal let value: Synchronization._Cell<Value>
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func load(ordering: Synchronization.AtomicLoadOrdering) -> Value {
-    let result = switch ordering {
- 
-    case .relaxed:
-      Builtin.atomicload_monotonic_Int8(_rawAddress)
- 
-    case .acquiring:
-      Builtin.atomicload_acquire_Int8(_rawAddress)
- 
-    case .sequentiallyConsistent:
-      Builtin.atomicload_seqcst_Int8(_rawAddress)
- 
+  @_alwaysEmitIntoClient @_transparent public init(_ initialValue: consuming sending Value) {
+    value = _Cell(initialValue)
+  }
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Mutex : @unchecked Swift.Sendable where Value : ~Copyable {
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Synchronization.Mutex where Value : ~Copyable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public borrowing func withLock<Result, E>(_ body: (inout sending Value) throws(E) -> sending Result) throws(E) -> sending Result where E : Swift.Error, Result : ~Copyable {
+    handle._lock()
 
-    default:
-      Builtin.unreachable()
+    defer {
+      handle._unlock()
     }
 
-    return Value.decodeAtomicRepresentation(Value.AtomicRepresentation(result))
+    return try body(&value._address.pointee)
   }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func store(_ desired: consuming Value, ordering: Synchronization.AtomicStoreOrdering) {
-    switch ordering {
- 
-    case .relaxed:
-      Builtin.atomicstore_monotonic_Int8(
-        _rawAddress,
-        Value.encodeAtomicRepresentation(desired)._storage
-      )
- 
-    case .releasing:
-      Builtin.atomicstore_release_Int8(
-        _rawAddress,
-        Value.encodeAtomicRepresentation(desired)._storage
-      )
- 
-    case .sequentiallyConsistent:
-      Builtin.atomicstore_seqcst_Int8(
-        _rawAddress,
-        Value.encodeAtomicRepresentation(desired)._storage
-      )
- 
-
-    default:
-      Builtin.unreachable()
-    }
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func exchange(_ desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> Value {
-    let desired = Value.encodeAtomicRepresentation(desired)._storage
-
-    let result = switch ordering {
- 
-    case .relaxed:
-      Builtin.atomicrmw_xchg_monotonic_Int8(_rawAddress, desired)
- 
-    case .acquiring:
-      Builtin.atomicrmw_xchg_acquire_Int8(_rawAddress, desired)
- 
-    case .releasing:
-      Builtin.atomicrmw_xchg_release_Int8(_rawAddress, desired)
- 
-    case .acquiringAndReleasing:
-      Builtin.atomicrmw_xchg_acqrel_Int8(_rawAddress, desired)
- 
-    case .sequentiallyConsistent:
-      Builtin.atomicrmw_xchg_seqcst_Int8(_rawAddress, desired)
- 
-
-    default:
-      Builtin.unreachable()
+  @_alwaysEmitIntoClient @_transparent public borrowing func withLockIfAvailable<Result, E>(_ body: (inout sending Value) throws(E) -> sending Result) throws(E) -> sending Result? where E : Swift.Error, Result : ~Copyable {
+    guard handle._tryLock() else {
+      return nil
     }
 
-    let atomicStorage = Value.AtomicRepresentation(result)
-
-    return Value.decodeAtomicRepresentation(atomicStorage)
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    compareExchange(
-      expected: expected,
-      desired: desired,
-      successOrdering: ordering,
-      failureOrdering: ._failureOrdering(for: ordering)
-    )
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    let expected = Value.encodeAtomicRepresentation(expected)._storage
-    let desired = Value.encodeAtomicRepresentation(desired)._storage
-
-    let (ov, won) = switch (successOrdering, failureOrdering) {
- 
-    case (.relaxed, .relaxed):
-      Builtin.cmpxchg_monotonic_monotonic_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .relaxed):
-      Builtin.cmpxchg_acquire_monotonic_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .relaxed):
-      Builtin.cmpxchg_release_monotonic_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .relaxed):
-      Builtin.cmpxchg_acqrel_monotonic_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .relaxed):
-      Builtin.cmpxchg_seqcst_monotonic_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .acquiring):
-      Builtin.cmpxchg_seqcst_acquire_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-
-    default:
-      Builtin.unreachable()
+    defer {
+      handle._unlock()
     }
 
-    return (
-      exchanged: Bool(won),
-      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
-    )
+    return try body(&value._address.pointee)
   }
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
+extension Synchronization.Mutex where Value == () {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    weakCompareExchange(
-      expected: expected,
-      desired: desired,
-      successOrdering: ordering,
-      failureOrdering: ._failureOrdering(for: ordering)
-    )
+  @_alwaysEmitIntoClient @_transparent public borrowing func _unsafeLock() {
+    handle._lock()
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public borrowing func _unsafeTryLock() -> Swift.Bool {
+    handle._tryLock()
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public borrowing func _unsafeUnlock() {
+    handle._unlock()
   }
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic8BitStorage {
+extension Synchronization._MutexHandle {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    let expected = Value.encodeAtomicRepresentation(expected)._storage
-    let desired = Value.encodeAtomicRepresentation(desired)._storage
-
-    let (ov, won) = switch (successOrdering, failureOrdering) {
- 
-    case (.relaxed, .relaxed):
-      Builtin.cmpxchg_monotonic_monotonic_weak_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_weak_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .relaxed):
-      Builtin.cmpxchg_acquire_monotonic_weak_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_weak_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .relaxed):
-      Builtin.cmpxchg_release_monotonic_weak_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_weak_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .relaxed):
-      Builtin.cmpxchg_acqrel_monotonic_weak_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_weak_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .relaxed):
-      Builtin.cmpxchg_seqcst_monotonic_weak_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .acquiring):
-      Builtin.cmpxchg_seqcst_acquire_weak_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int8(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    return (
-      exchanged: Bool(won),
-      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
-    )
+  @_alwaysEmitIntoClient @_transparent @unsafe public borrowing func unsafeLock() {
+    _lock()
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent @unsafe public borrowing func unsafeTryLock() -> Swift.Bool {
+    _tryLock()
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent @unsafe public borrowing func unsafeUnlock() {
+    _unlock()
   }
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-@frozen @_alignment(2) public struct _Atomic16BitStorage {
-  public var _storage: Builtin.Int16
+@frozen @_staticExclusiveOnly public struct _MutexHandle : ~Swift.Copyable {
+  @usableFromInline
+  internal let value: Synchronization._Cell<Darwin.os_unfair_lock>
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public init(_ _builtin: Builtin.Int16) {
-    self._storage = _builtin
+  @_alwaysEmitIntoClient @_transparent public init() {
+    value = _Cell(os_unfair_lock())
   }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func load(ordering: Synchronization.AtomicLoadOrdering) -> Value {
-    let result = switch ordering {
- 
-    case .relaxed:
-      Builtin.atomicload_monotonic_Int16(_rawAddress)
- 
-    case .acquiring:
-      Builtin.atomicload_acquire_Int16(_rawAddress)
- 
-    case .sequentiallyConsistent:
-      Builtin.atomicload_seqcst_Int16(_rawAddress)
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    return Value.decodeAtomicRepresentation(Value.AtomicRepresentation(result))
+  @_alwaysEmitIntoClient @_transparent internal borrowing func _lock() {
+    os_unfair_lock_lock(value._address)
   }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func store(_ desired: consuming Value, ordering: Synchronization.AtomicStoreOrdering) {
-    switch ordering {
- 
-    case .relaxed:
-      Builtin.atomicstore_monotonic_Int16(
-        _rawAddress,
-        Value.encodeAtomicRepresentation(desired)._storage
-      )
- 
-    case .releasing:
-      Builtin.atomicstore_release_Int16(
-        _rawAddress,
-        Value.encodeAtomicRepresentation(desired)._storage
-      )
- 
-    case .sequentiallyConsistent:
-      Builtin.atomicstore_seqcst_Int16(
-        _rawAddress,
-        Value.encodeAtomicRepresentation(desired)._storage
-      )
- 
-
-    default:
-      Builtin.unreachable()
-    }
+  @_alwaysEmitIntoClient @_transparent internal borrowing func _tryLock() -> Swift.Bool {
+    os_unfair_lock_trylock(value._address)
   }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func exchange(_ desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> Value {
-    let desired = Value.encodeAtomicRepresentation(desired)._storage
-
-    let result = switch ordering {
- 
-    case .relaxed:
-      Builtin.atomicrmw_xchg_monotonic_Int16(_rawAddress, desired)
- 
-    case .acquiring:
-      Builtin.atomicrmw_xchg_acquire_Int16(_rawAddress, desired)
- 
-    case .releasing:
-      Builtin.atomicrmw_xchg_release_Int16(_rawAddress, desired)
- 
-    case .acquiringAndReleasing:
-      Builtin.atomicrmw_xchg_acqrel_Int16(_rawAddress, desired)
- 
-    case .sequentiallyConsistent:
-      Builtin.atomicrmw_xchg_seqcst_Int16(_rawAddress, desired)
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    let atomicStorage = Value.AtomicRepresentation(result)
-
-    return Value.decodeAtomicRepresentation(atomicStorage)
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    compareExchange(
-      expected: expected,
-      desired: desired,
-      successOrdering: ordering,
-      failureOrdering: ._failureOrdering(for: ordering)
-    )
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    let expected = Value.encodeAtomicRepresentation(expected)._storage
-    let desired = Value.encodeAtomicRepresentation(desired)._storage
-
-    let (ov, won) = switch (successOrdering, failureOrdering) {
- 
-    case (.relaxed, .relaxed):
-      Builtin.cmpxchg_monotonic_monotonic_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .relaxed):
-      Builtin.cmpxchg_acquire_monotonic_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .relaxed):
-      Builtin.cmpxchg_release_monotonic_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .relaxed):
-      Builtin.cmpxchg_acqrel_monotonic_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .relaxed):
-      Builtin.cmpxchg_seqcst_monotonic_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .acquiring):
-      Builtin.cmpxchg_seqcst_acquire_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    return (
-      exchanged: Bool(won),
-      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
-    )
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    weakCompareExchange(
-      expected: expected,
-      desired: desired,
-      successOrdering: ordering,
-      failureOrdering: ._failureOrdering(for: ordering)
-    )
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic16BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    let expected = Value.encodeAtomicRepresentation(expected)._storage
-    let desired = Value.encodeAtomicRepresentation(desired)._storage
-
-    let (ov, won) = switch (successOrdering, failureOrdering) {
- 
-    case (.relaxed, .relaxed):
-      Builtin.cmpxchg_monotonic_monotonic_weak_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_weak_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .relaxed):
-      Builtin.cmpxchg_acquire_monotonic_weak_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_weak_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .relaxed):
-      Builtin.cmpxchg_release_monotonic_weak_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_weak_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .relaxed):
-      Builtin.cmpxchg_acqrel_monotonic_weak_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_weak_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .relaxed):
-      Builtin.cmpxchg_seqcst_monotonic_weak_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .acquiring):
-      Builtin.cmpxchg_seqcst_acquire_weak_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int16(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    return (
-      exchanged: Bool(won),
-      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
-    )
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-@frozen @_alignment(4) public struct _Atomic32BitStorage {
-  public var _storage: Builtin.Int32
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public init(_ _builtin: Builtin.Int32) {
-    self._storage = _builtin
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func load(ordering: Synchronization.AtomicLoadOrdering) -> Value {
-    let result = switch ordering {
- 
-    case .relaxed:
-      Builtin.atomicload_monotonic_Int32(_rawAddress)
- 
-    case .acquiring:
-      Builtin.atomicload_acquire_Int32(_rawAddress)
- 
-    case .sequentiallyConsistent:
-      Builtin.atomicload_seqcst_Int32(_rawAddress)
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    return Value.decodeAtomicRepresentation(Value.AtomicRepresentation(result))
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func store(_ desired: consuming Value, ordering: Synchronization.AtomicStoreOrdering) {
-    switch ordering {
- 
-    case .relaxed:
-      Builtin.atomicstore_monotonic_Int32(
-        _rawAddress,
-        Value.encodeAtomicRepresentation(desired)._storage
-      )
- 
-    case .releasing:
-      Builtin.atomicstore_release_Int32(
-        _rawAddress,
-        Value.encodeAtomicRepresentation(desired)._storage
-      )
- 
-    case .sequentiallyConsistent:
-      Builtin.atomicstore_seqcst_Int32(
-        _rawAddress,
-        Value.encodeAtomicRepresentation(desired)._storage
-      )
- 
-
-    default:
-      Builtin.unreachable()
-    }
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func exchange(_ desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> Value {
-    let desired = Value.encodeAtomicRepresentation(desired)._storage
-
-    let result = switch ordering {
- 
-    case .relaxed:
-      Builtin.atomicrmw_xchg_monotonic_Int32(_rawAddress, desired)
- 
-    case .acquiring:
-      Builtin.atomicrmw_xchg_acquire_Int32(_rawAddress, desired)
- 
-    case .releasing:
-      Builtin.atomicrmw_xchg_release_Int32(_rawAddress, desired)
- 
-    case .acquiringAndReleasing:
-      Builtin.atomicrmw_xchg_acqrel_Int32(_rawAddress, desired)
- 
-    case .sequentiallyConsistent:
-      Builtin.atomicrmw_xchg_seqcst_Int32(_rawAddress, desired)
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    let atomicStorage = Value.AtomicRepresentation(result)
-
-    return Value.decodeAtomicRepresentation(atomicStorage)
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    compareExchange(
-      expected: expected,
-      desired: desired,
-      successOrdering: ordering,
-      failureOrdering: ._failureOrdering(for: ordering)
-    )
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    let expected = Value.encodeAtomicRepresentation(expected)._storage
-    let desired = Value.encodeAtomicRepresentation(desired)._storage
-
-    let (ov, won) = switch (successOrdering, failureOrdering) {
- 
-    case (.relaxed, .relaxed):
-      Builtin.cmpxchg_monotonic_monotonic_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .relaxed):
-      Builtin.cmpxchg_acquire_monotonic_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .relaxed):
-      Builtin.cmpxchg_release_monotonic_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .relaxed):
-      Builtin.cmpxchg_acqrel_monotonic_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .relaxed):
-      Builtin.cmpxchg_seqcst_monotonic_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .acquiring):
-      Builtin.cmpxchg_seqcst_acquire_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    return (
-      exchanged: Bool(won),
-      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
-    )
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    weakCompareExchange(
-      expected: expected,
-      desired: desired,
-      successOrdering: ordering,
-      failureOrdering: ._failureOrdering(for: ordering)
-    )
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic32BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    let expected = Value.encodeAtomicRepresentation(expected)._storage
-    let desired = Value.encodeAtomicRepresentation(desired)._storage
-
-    let (ov, won) = switch (successOrdering, failureOrdering) {
- 
-    case (.relaxed, .relaxed):
-      Builtin.cmpxchg_monotonic_monotonic_weak_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_weak_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .relaxed):
-      Builtin.cmpxchg_acquire_monotonic_weak_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_weak_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .relaxed):
-      Builtin.cmpxchg_release_monotonic_weak_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_weak_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .relaxed):
-      Builtin.cmpxchg_acqrel_monotonic_weak_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_weak_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .relaxed):
-      Builtin.cmpxchg_seqcst_monotonic_weak_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .acquiring):
-      Builtin.cmpxchg_seqcst_acquire_weak_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int32(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    return (
-      exchanged: Bool(won),
-      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
-    )
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-@frozen @_alignment(8) public struct _Atomic64BitStorage {
-  public var _storage: Builtin.Int64
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public init(_ _builtin: Builtin.Int64) {
-    self._storage = _builtin
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func load(ordering: Synchronization.AtomicLoadOrdering) -> Value {
-    let result = switch ordering {
- 
-    case .relaxed:
-      Builtin.atomicload_monotonic_Int64(_rawAddress)
- 
-    case .acquiring:
-      Builtin.atomicload_acquire_Int64(_rawAddress)
- 
-    case .sequentiallyConsistent:
-      Builtin.atomicload_seqcst_Int64(_rawAddress)
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    return Value.decodeAtomicRepresentation(Value.AtomicRepresentation(result))
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func store(_ desired: consuming Value, ordering: Synchronization.AtomicStoreOrdering) {
-    switch ordering {
- 
-    case .relaxed:
-      Builtin.atomicstore_monotonic_Int64(
-        _rawAddress,
-        Value.encodeAtomicRepresentation(desired)._storage
-      )
- 
-    case .releasing:
-      Builtin.atomicstore_release_Int64(
-        _rawAddress,
-        Value.encodeAtomicRepresentation(desired)._storage
-      )
- 
-    case .sequentiallyConsistent:
-      Builtin.atomicstore_seqcst_Int64(
-        _rawAddress,
-        Value.encodeAtomicRepresentation(desired)._storage
-      )
- 
-
-    default:
-      Builtin.unreachable()
-    }
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func exchange(_ desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> Value {
-    let desired = Value.encodeAtomicRepresentation(desired)._storage
-
-    let result = switch ordering {
- 
-    case .relaxed:
-      Builtin.atomicrmw_xchg_monotonic_Int64(_rawAddress, desired)
- 
-    case .acquiring:
-      Builtin.atomicrmw_xchg_acquire_Int64(_rawAddress, desired)
- 
-    case .releasing:
-      Builtin.atomicrmw_xchg_release_Int64(_rawAddress, desired)
- 
-    case .acquiringAndReleasing:
-      Builtin.atomicrmw_xchg_acqrel_Int64(_rawAddress, desired)
- 
-    case .sequentiallyConsistent:
-      Builtin.atomicrmw_xchg_seqcst_Int64(_rawAddress, desired)
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    let atomicStorage = Value.AtomicRepresentation(result)
-
-    return Value.decodeAtomicRepresentation(atomicStorage)
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    compareExchange(
-      expected: expected,
-      desired: desired,
-      successOrdering: ordering,
-      failureOrdering: ._failureOrdering(for: ordering)
-    )
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    let expected = Value.encodeAtomicRepresentation(expected)._storage
-    let desired = Value.encodeAtomicRepresentation(desired)._storage
-
-    let (ov, won) = switch (successOrdering, failureOrdering) {
- 
-    case (.relaxed, .relaxed):
-      Builtin.cmpxchg_monotonic_monotonic_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .relaxed):
-      Builtin.cmpxchg_acquire_monotonic_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .relaxed):
-      Builtin.cmpxchg_release_monotonic_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .relaxed):
-      Builtin.cmpxchg_acqrel_monotonic_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .relaxed):
-      Builtin.cmpxchg_seqcst_monotonic_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .acquiring):
-      Builtin.cmpxchg_seqcst_acquire_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    return (
-      exchanged: Bool(won),
-      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
-    )
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    weakCompareExchange(
-      expected: expected,
-      desired: desired,
-      successOrdering: ordering,
-      failureOrdering: ._failureOrdering(for: ordering)
-    )
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic64BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    let expected = Value.encodeAtomicRepresentation(expected)._storage
-    let desired = Value.encodeAtomicRepresentation(desired)._storage
-
-    let (ov, won) = switch (successOrdering, failureOrdering) {
- 
-    case (.relaxed, .relaxed):
-      Builtin.cmpxchg_monotonic_monotonic_weak_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_weak_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .relaxed):
-      Builtin.cmpxchg_acquire_monotonic_weak_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_weak_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .relaxed):
-      Builtin.cmpxchg_release_monotonic_weak_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_weak_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .relaxed):
-      Builtin.cmpxchg_acqrel_monotonic_weak_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_weak_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .relaxed):
-      Builtin.cmpxchg_seqcst_monotonic_weak_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .acquiring):
-      Builtin.cmpxchg_seqcst_acquire_weak_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int64(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    return (
-      exchanged: Bool(won),
-      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
-    )
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-@frozen @_alignment(16) public struct _Atomic128BitStorage {
-  public var _storage: Builtin.Int128
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_alwaysEmitIntoClient @_transparent public init(_ _builtin: Builtin.Int128) {
-    self._storage = _builtin
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func load(ordering: Synchronization.AtomicLoadOrdering) -> Value {
-    let result = switch ordering {
- 
-    case .relaxed:
-      Builtin.atomicload_monotonic_Int128(_rawAddress)
- 
-    case .acquiring:
-      Builtin.atomicload_acquire_Int128(_rawAddress)
- 
-    case .sequentiallyConsistent:
-      Builtin.atomicload_seqcst_Int128(_rawAddress)
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    return Value.decodeAtomicRepresentation(Value.AtomicRepresentation(result))
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func store(_ desired: consuming Value, ordering: Synchronization.AtomicStoreOrdering) {
-    switch ordering {
- 
-    case .relaxed:
-      Builtin.atomicstore_monotonic_Int128(
-        _rawAddress,
-        Value.encodeAtomicRepresentation(desired)._storage
-      )
- 
-    case .releasing:
-      Builtin.atomicstore_release_Int128(
-        _rawAddress,
-        Value.encodeAtomicRepresentation(desired)._storage
-      )
- 
-    case .sequentiallyConsistent:
-      Builtin.atomicstore_seqcst_Int128(
-        _rawAddress,
-        Value.encodeAtomicRepresentation(desired)._storage
-      )
- 
-
-    default:
-      Builtin.unreachable()
-    }
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func exchange(_ desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> Value {
-    let desired = Value.encodeAtomicRepresentation(desired)._storage
-
-    let result = switch ordering {
- 
-    case .relaxed:
-      Builtin.atomicrmw_xchg_monotonic_Int128(_rawAddress, desired)
- 
-    case .acquiring:
-      Builtin.atomicrmw_xchg_acquire_Int128(_rawAddress, desired)
- 
-    case .releasing:
-      Builtin.atomicrmw_xchg_release_Int128(_rawAddress, desired)
- 
-    case .acquiringAndReleasing:
-      Builtin.atomicrmw_xchg_acqrel_Int128(_rawAddress, desired)
- 
-    case .sequentiallyConsistent:
-      Builtin.atomicrmw_xchg_seqcst_Int128(_rawAddress, desired)
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    let atomicStorage = Value.AtomicRepresentation(result)
-
-    return Value.decodeAtomicRepresentation(atomicStorage)
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    compareExchange(
-      expected: expected,
-      desired: desired,
-      successOrdering: ordering,
-      failureOrdering: ._failureOrdering(for: ordering)
-    )
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func compareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    let expected = Value.encodeAtomicRepresentation(expected)._storage
-    let desired = Value.encodeAtomicRepresentation(desired)._storage
-
-    let (ov, won) = switch (successOrdering, failureOrdering) {
- 
-    case (.relaxed, .relaxed):
-      Builtin.cmpxchg_monotonic_monotonic_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .relaxed):
-      Builtin.cmpxchg_acquire_monotonic_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .relaxed):
-      Builtin.cmpxchg_release_monotonic_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .relaxed):
-      Builtin.cmpxchg_acqrel_monotonic_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .relaxed):
-      Builtin.cmpxchg_seqcst_monotonic_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .acquiring):
-      Builtin.cmpxchg_seqcst_acquire_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    return (
-      exchanged: Bool(won),
-      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
-    )
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, ordering: Synchronization.AtomicUpdateOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    weakCompareExchange(
-      expected: expected,
-      desired: desired,
-      successOrdering: ordering,
-      failureOrdering: ._failureOrdering(for: ordering)
-    )
-  }
-}
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Synchronization.Atomic where Value.AtomicRepresentation == Synchronization._Atomic128BitStorage {
-  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-  @_semantics("atomics.requires_constant_orderings") @_alwaysEmitIntoClient @_transparent public func weakCompareExchange(expected: consuming Value, desired: consuming Value, successOrdering: Synchronization.AtomicUpdateOrdering, failureOrdering: Synchronization.AtomicLoadOrdering) -> (exchanged: Swift.Bool, original: Value) {
-    let expected = Value.encodeAtomicRepresentation(expected)._storage
-    let desired = Value.encodeAtomicRepresentation(desired)._storage
-
-    let (ov, won) = switch (successOrdering, failureOrdering) {
- 
-    case (.relaxed, .relaxed):
-      Builtin.cmpxchg_monotonic_monotonic_weak_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_weak_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.relaxed, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .relaxed):
-      Builtin.cmpxchg_acquire_monotonic_weak_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .acquiring):
-      Builtin.cmpxchg_acquire_acquire_weak_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiring, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .relaxed):
-      Builtin.cmpxchg_release_monotonic_weak_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_weak_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.releasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .relaxed):
-      Builtin.cmpxchg_acqrel_monotonic_weak_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .acquiring):
-      Builtin.cmpxchg_acqrel_acquire_weak_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.acquiringAndReleasing, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .relaxed):
-      Builtin.cmpxchg_seqcst_monotonic_weak_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .acquiring):
-      Builtin.cmpxchg_seqcst_acquire_weak_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-    case (.sequentiallyConsistent, .sequentiallyConsistent):
-      Builtin.cmpxchg_seqcst_seqcst_weak_Int128(
-        _rawAddress,
-        expected,
-        desired
-      )
- 
-
-    default:
-      Builtin.unreachable()
-    }
-
-    return (
-      exchanged: Bool(won),
-      original: Value.decodeAtomicRepresentation(Value.AtomicRepresentation(ov))
-    )
+  @_alwaysEmitIntoClient @_transparent internal borrowing func _unlock() {
+    os_unfair_lock_unlock(value._address)
   }
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)

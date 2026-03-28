@@ -1,17 +1,19 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleTracingSupportSymbolication.framework/Versions/A/AppleTracingSupportSymbolication'
 current-version: 69
 exports:
   - targets:         [ x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__110__function6__baseIFvPK8__CFDataEEE, __ZTINSt3__120__shared_ptr_emplaceI10StringPoolNS_9allocatorIS1_EEEE, 
+    weak-symbols:    [ __ZTINSt3__110__function6__baseIFv10_CSTypeRef8_CSRangeEEE, 
+                       __ZTINSt3__110__function6__baseIFvPK8__CFDataEEE, __ZTINSt3__120__shared_ptr_emplaceI10StringPoolNS_9allocatorIS1_EEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceI11SharedCacheNS_9allocatorIS1_EEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceI13SharedLibraryNS_9allocatorIS1_EEEE, 
+                       __ZTSNSt3__110__function6__baseIFv10_CSTypeRef8_CSRangeEEE, 
                        __ZTSNSt3__110__function6__baseIFvPK8__CFDataEEE, __ZTSNSt3__120__shared_ptr_emplaceI10StringPoolNS_9allocatorIS1_EEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceI11SharedCacheNS_9allocatorIS1_EEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceI13SharedLibraryNS_9allocatorIS1_EEEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AppleTracingSupportSymbolicationVersionNumber, _AppleTracingSupportSymbolicationVersionString, 
                        __Z26ats_symbolication_log_initv, __Z28should_prewarm_symbolicatorsv, 
                        __ZN10SourceInfo26initializeWithCSSourceInfoE10_CSTypeRef, 
@@ -26,8 +28,9 @@ exports:
                        __ZN12InlineSymbol37initializeWithCSSymbolAndCSSourceInfoE10_CSTypeRefS0_, 
                        __ZN12InlineSymbol5debugEv, __ZN12InlineSymbolC1E10_CSTypeRefS0_, 
                        __ZN12InlineSymbolC2E10_CSTypeRefS0_, __ZN13MergedLibrary9mergeWithERK18LibraryDescription, 
-                       __ZN13SharedLibrary10addAddressEy, __ZN13SharedLibrary20generateFBSSignatureEv, 
-                       __ZN13SharedLibrary27initializeWithCSSymbolOwnerEv, __ZN13SharedLibrary30generateFBSSignatureWithConfigE48ats_symbolication_instruction_fetching_options_t, 
+                       __ZN13SharedLibrary10addAddressEy, __ZN13SharedLibrary15addAddressRangeEyy, 
+                       __ZN13SharedLibrary20generateFBSSignatureEv, __ZN13SharedLibrary27initializeWithCSSymbolOwnerEv, 
+                       __ZN13SharedLibrary30generateFBSSignatureWithConfigE48ats_symbolication_instruction_fetching_options_t, 
                        __ZN13SharedLibrary37prepareForResymbolicationWithDsymPathEPKc, 
                        __ZN13SharedLibraryC1E10_CSTypeRefRKNSt3__110shared_ptrI10StringPoolEE, 
                        __ZN13SharedLibraryC1E4UUIDNSt3__117basic_string_viewIcNS1_11char_traitsIcEEEERKNS1_10shared_ptrI10StringPoolEE, 
@@ -35,7 +38,8 @@ exports:
                        __ZN13SharedLibraryC2E4UUIDNSt3__117basic_string_viewIcNS1_11char_traitsIcEEEERKNS1_10shared_ptrI10StringPoolEE, 
                        __ZN13SharedLibraryC2Ev, __ZN13SharedLibraryD1Ev, __ZN13SharedLibraryD2Ev, 
                        __ZN14AOTSharedCacheC1E25AOTSharedCacheDescription, __ZN14AOTSharedCacheC2E25AOTSharedCacheDescription, 
-                       __ZN14ProcessLibrary10addAddressEy, __ZN14ProcessLibraryC1EyNSt3__110shared_ptrI13SharedLibraryEE, 
+                       __ZN14ProcessLibrary10addAddressEy, __ZN14ProcessLibrary15addAddressRangeEyy, 
+                       __ZN14ProcessLibraryC1EyNSt3__110shared_ptrI13SharedLibraryEE, 
                        __ZN14ProcessLibraryC2EyNSt3__110shared_ptrI13SharedLibraryEE, 
                        __ZN17DyldKdebugHandler17consumeTracepointEPK11trace_point, 
                        __ZN17DyldKdebugHandler23handleLibraryCompletionER28DyldKdebugLibraryDescription, 
@@ -72,9 +76,9 @@ exports:
                        __ZN20SymbolicationSession18learnAddressForPidEiy, __ZN20SymbolicationSession20processPointerForPidEi, 
                        __ZN20SymbolicationSession22createProcessMapsChunkEP11ktrace_file, 
                        __ZN20SymbolicationSession22parseDyldKdebugEntriesERKNSt3__16vectorI11trace_pointNS0_9allocatorIS2_EEEE, 
-                       __ZN20SymbolicationSession23registerKtraceCallbacksEv, __ZN20SymbolicationSession23updateKdebugLibraryViewEv, 
-                       __ZN20SymbolicationSession25collectAvailableDsymPathsEv, __ZN20SymbolicationSession25isConfiguredToSaveSymbolsEv, 
-                       __ZN20SymbolicationSession26sharedCacheWithDescriptionE22SharedCacheDescription, 
+                       __ZN20SymbolicationSession23learnAddressRangeForPidEiym, __ZN20SymbolicationSession23registerKtraceCallbacksEv, 
+                       __ZN20SymbolicationSession23updateKdebugLibraryViewEv, __ZN20SymbolicationSession25collectAvailableDsymPathsEv, 
+                       __ZN20SymbolicationSession25isConfiguredToSaveSymbolsEv, __ZN20SymbolicationSession26sharedCacheWithDescriptionE22SharedCacheDescription, 
                        __ZN20SymbolicationSession27collectDsymPathsViaDownloadEv, 
                        __ZN20SymbolicationSession27writeSymbolDataToKtraceFileEP11ktrace_file, 
                        __ZN20SymbolicationSession28sharedLibraryWithUUIDAndPathE4UUIDNSt3__117basic_string_viewIcNS1_11char_traitsIcEEEE, 
@@ -143,10 +147,11 @@ exports:
                        __ZN7Process12addLibrariesENSt3__16vectorI14ProcessLibraryNS0_9allocatorIS2_EEEE, 
                        __ZN7Process12setAOTImagesENSt3__16vectorI8AOTImageNS0_9allocatorIS2_EEEE, 
                        __ZN7Process14setSharedCacheERKNSt3__110shared_ptrI11SharedCacheEE, 
-                       __ZN7Process17setAOTSharedCacheE14AOTSharedCache, __ZN7Process18setAOTSymbolicatorENSt3__110shared_ptrIPvEE, 
+                       __ZN7Process15addAddressRangeEyy, __ZN7Process17setAOTSharedCacheE14AOTSharedCache, 
+                       __ZN7Process18setAOTSymbolicatorENSt3__110shared_ptrIPvEE, 
                        __ZN7Process21findLibraryForAddressEy, __ZN7Process27addAddressAndTryTranslationEy, 
                        __ZN7Process29addAddressesAndTryTranslationERKNSt3__16vectorIyNS0_9allocatorIyEEEE, 
-                       __ZN7Process50createTransientProcessSymbolicatorFromDescriptionsEv, 
+                       __ZN7Process32addAddressRangeAndTryTranslationEyy, __ZN7Process50createTransientProcessSymbolicatorFromDescriptionsEv, 
                        __ZN7ProcessC1EiNSt3__16vectorI14ProcessLibraryNS0_9allocatorIS2_EEEE, 
                        __ZN7ProcessC2EiNSt3__16vectorI14ProcessLibraryNS0_9allocatorIS2_EEEE, 
                        __ZN7Section23initializeWithCSSectionE10_CSTypeRef, __ZN7Section5debugEv, 
@@ -207,10 +212,10 @@ exports:
                        __ZNK9Stackshot29allAOTSharedCacheDescriptionsEv, __ZNK9Stackshot29defaultSharedCacheDescriptionEv, 
                        __ZNK9Stackshot29sharedCacheDescriptionsForPidEi, __ZNK9Stackshot32aotSharedCacheDescriptionsForPidEi, 
                        __ZNK9Stackshot32defaultAOTSharedCacheDescriptionEv, _ats_configure_postprocessing, 
-                       _ats_configure_postprocessing_with_additional_address, _ats_configure_postprocessing_with_config, 
-                       _ats_create_symbolication_config, _ats_destroy_symbolication_config, 
-                       _ats_postprocessing_complete, _ats_postprocessing_complete_write_processmaps, 
-                       _ats_should_amend_with_file, _ats_symbolication_enabled, _ats_symbolication_log, 
-                       _ats_will_start_tracing ]
+                       _ats_configure_postprocessing_with_additional_address, _ats_configure_postprocessing_with_additional_address_range, 
+                       _ats_configure_postprocessing_with_config, _ats_create_symbolication_config, 
+                       _ats_destroy_symbolication_config, _ats_postprocessing_complete, 
+                       _ats_postprocessing_complete_write_processmaps, _ats_should_amend_with_file, 
+                       _ats_symbolication_enabled, _ats_symbolication_log, _ats_will_start_tracing ]
     weak-symbols:    [ __ZNSt3__119piecewise_constructE ]
 ...

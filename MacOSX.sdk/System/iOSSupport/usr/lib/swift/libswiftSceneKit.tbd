@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftSceneKit.dylib'
 current-version: 1.2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$sSo10SCNMatrix4V8SceneKitE19_bridgeToObjectiveCSo7NSValueCyF', 
                        '_$sSo10SCNMatrix4V8SceneKitE26_forceBridgeFromObjectiveC_6resultySo7NSValueC_ABSgztFZ', 
                        '_$sSo10SCNMatrix4V8SceneKitE34_conditionallyBridgeFromObjectiveC_6resultSbSo7NSValueC_ABSgztFZ', 

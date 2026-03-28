@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleMediaServicesUIDynamic.framework/Versions/A/AppleMediaServicesUIDynamic'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation4DataV27AppleMediaServicesUIDynamicE13deserializing5usingAC9JetEngine10JSONObjectV_AG11JSONContextVtKcfC', 
                        '_$s10Foundation4DataV9JetEngine17ExpressibleByJSON27AppleMediaServicesUIDynamicMc', 
                        '_$s27AppleMediaServicesUIDynamic10PageLoaderC14pageDefinition12withLocationAA0eH0CAA0J0V_tKF', 

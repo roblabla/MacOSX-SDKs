@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriGestureBridge.framework/Versions/A/SiriGestureBridge'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s17SiriGestureBridge0B16RequestProcessorC11assistantId07sessionG007requestG04name16messagePublisher13serviceHelper04rootdG0ACSS_10Foundation4UUIDVS2S0A12MessageTypes0R10Publishing_pSo026AFRequestDispatcherServiceN0_pSSSgtcfC', 
                        '_$s17SiriGestureBridge0B16RequestProcessorC11assistantId07sessionG007requestG04name16messagePublisher13serviceHelper04rootdG0ACSS_10Foundation4UUIDVS2S0A12MessageTypes0R10Publishing_pSo026AFRequestDispatcherServiceN0_pSSSgtcfc', 
                        '_$s17SiriGestureBridge0B16RequestProcessorC11assistantId07sessionG007requestG04name16messagePublisher13serviceHelper09rootLeveldG0ACSS_10Foundation4UUIDVS2S0A12MessageTypes0S10Publishing_pSo026AFRequestDispatcherServiceN0_pSStcfC', 

@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libmarisa.dylib'
 current-version: 24
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN6marisa4Trie3mapEPKvm, __ZN6marisa4Trie4loadEPKc, __ZN6marisa4Trie4mmapEPKc, 
                        __ZN6marisa4Trie4readEi, __ZN6marisa4Trie4swapERS0_, __ZN6marisa4Trie5buildERNS_6KeysetEi, 
                        __ZN6marisa4Trie5clearEv, __ZN6marisa4TrieC1Ev, __ZN6marisa4TrieC2Ev, 

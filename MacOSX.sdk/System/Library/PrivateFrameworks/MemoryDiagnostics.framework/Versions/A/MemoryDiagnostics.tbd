@@ -1,9 +1,38 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MemoryDiagnostics.framework/Versions/A/MemoryDiagnostics'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _MREBundleStringForUnbundledProcess, _MREErrorDomain, _RMECheckEntitlement, 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ _FPExtractCorpseInfoWithBlock, _MREBundleStringForUnbundledProcess, 
+                       _MRECRBinaryInfoArchitectureKey, _MRECRStackFrameAddressKey, 
+                       _MRECRStackFrameSourceFilenameKey, _MRECRStackFrameSourceLineKey, 
+                       _MRECRStackFrameSymbolAddressRangeLocationKey, _MRECRStackFrameSymbolKey, 
+                       _MRECRStackFrameUUIDKey, _MREErrorDomain, _MREExecutionStackBacktracesKey, 
+                       _MREExecutionStackBinaryImagesKey, _MREExecutionStackCrashedThreadKey, 
+                       _MREExecutionStackThreadNamesKey, _MREIOAccelMemoryInfoCachedCopyKey, 
+                       _MREIOAccelMemoryInfoDescriptionsKey, _MREIOAccelMemoryInfoDirtySizeKey, 
+                       _MREIOAccelMemoryInfoIsPurgeableKey, _MREIOAccelMemoryInfoIsWiredKey, 
+                       _MREIOAccelMemoryInfoMemoryPoolKey, _MREIOAccelMemoryInfoResidentSizeKey, 
+                       _MREIOAccelMemoryInfoSizeKey, _MREIOAccelMemoryInfoSurfaceIDKey, 
+                       _MREIOSurfaceInfoHeightKey, _MREIOSurfaceInfoNameKey, _MREIOSurfaceInfoPixelFormatKey, 
+                       _MREIOSurfaceInfoSizeKey, _MREIOSurfaceInfoSurfaceIDKey, _MREIOSurfaceInfoWidthKey, 
+                       _MREMetaDataBundleIDKey, _MREMetaDataBundleVersionKey, _MREMetaDataCoalitionBundleIDKey, 
+                       _MREMetaDataDirtyFlagsKey, _MREMetaDataExceptionTypeKey, _MREMetaDataExecNameKey, 
+                       _MREMetaDataExecPathKey, _MREMetaDataExecutionStackKey, _MREMetaDataFootprintToolKey, 
+                       _MREMetaDataHWModelKey, _MREMetaDataIOAccelMemoryInfoErrorsKey, 
+                       _MREMetaDataIOAccelMemoryInfoKey, _MREMetaDataIOSurfaceInfoKey, 
+                       _MREMetaDataIs64BitKey, _MREMetaDataLedgerAlternateAccountingCompressedKey, 
+                       _MREMetaDataLedgerAlternateAccountingKey, _MREMetaDataLedgerIOKitMappedKey, 
+                       _MREMetaDataLedgerInternalCompressedKey, _MREMetaDataLedgerInternalKey, 
+                       _MREMetaDataLedgerNetworkNonvolatileCompressedKey, _MREMetaDataLedgerNetworkNonvolatileKey, 
+                       _MREMetaDataLedgerPageTableKey, _MREMetaDataLedgerPhysFootprintKey, 
+                       _MREMetaDataLedgerPhysFootprintPeakKey, _MREMetaDataLedgerPurgeableNonvolatileCompressedKey, 
+                       _MREMetaDataLedgerPurgeableNonvolatileKey, _MREMetaDataLedgerWiredMemKey, 
+                       _MREMetaDataLimitValueKey, _MREMetaDataMSLEnabledKey, _MREMetaDataMemgraphErrorKey, 
+                       _MREMetaDataName, _MREMetaDataOSLogsKey, _MREMetaDataOSVersionKey, 
+                       _MREMetaDataPIDKey, _MREMetaDataPPIDKey, _MREMetaDataUpTimeKey, 
+                       _MREMetaDataVersionKey, _MemoryDiagnosticsVersionNumber, _MemoryDiagnosticsVersionString, 
+                       _RMECheckEntitlement, _RMEDoWithAuthenticationOrTimeout, _RMEGetXPCConnection, 
                        _ReportMemoryExceptionFromTask, _memgraph_from_task_save_immediate ]
 ...

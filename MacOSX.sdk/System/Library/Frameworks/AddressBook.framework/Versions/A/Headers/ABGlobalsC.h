@@ -13,6 +13,10 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 // NOTE: This header is for C programmers. For Objective-C use ABGlobals.h
 
 // ================================================================
@@ -264,6 +268,10 @@ extern CFStringRef const kABDatabaseChangedExternallyNotification;
 extern CFStringRef const kABInsertedRecords         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern CFStringRef const kABUpdatedRecords          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern CFStringRef const kABDeletedRecords          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+#if defined(__cplusplus)
+}
+#endif
 
 #endif
 #endif

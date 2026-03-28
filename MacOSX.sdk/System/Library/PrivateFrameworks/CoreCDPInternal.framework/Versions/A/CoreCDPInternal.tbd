@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreCDPInternal.framework/Versions/A/CoreCDPInternal'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15CoreCDPInternal28CDPExponentialRetrySchedulerC15retrySilentAuth11authContextSDySSSo14NSSecureCoding_So8NSObjectpGSgSo023AKAppleIDAuthenticationJ0C_tYaKF', 
                        '_$s15CoreCDPInternal28CDPExponentialRetrySchedulerC15retrySilentAuth11authContextSDySSSo14NSSecureCoding_So8NSObjectpGSgSo023AKAppleIDAuthenticationJ0C_tYaKFTq', 
                        '_$s15CoreCDPInternal28CDPExponentialRetrySchedulerC15retrySilentAuth11authContextSDySSSo14NSSecureCoding_So8NSObjectpGSgSo023AKAppleIDAuthenticationJ0C_tYaKFTu', 
@@ -21,6 +21,8 @@ exports:
                        '_$s15CoreCDPInternal28CDPExponentialRetrySchedulerCACycfc', 
                        '_$s15CoreCDPInternal28CDPExponentialRetrySchedulerCMa', '_$s15CoreCDPInternal28CDPExponentialRetrySchedulerCMn', 
                        '_$s15CoreCDPInternal28CDPExponentialRetrySchedulerCN', '_$s15CoreCDPInternal28CDPExponentialRetrySchedulerCfD', 
+                       '_$sSo10AKPDPStateV15CoreCDPInternalE11descriptionSSvg', '_$sSo10AKPDPStateV15CoreCDPInternalE11descriptionSSvpMV', 
+                       '_$sSo10AKPDPStateVs23CustomStringConvertible15CoreCDPInternalMc', 
                        '_$sSo15CDPDRPDExecutorC15CoreCDPInternalEABycfC', '_$sSo15CDPDRPDExecutorC15CoreCDPInternalEABycfc', 
                        '_$sSo15CDPDRPDExecutorCMa', '_$sSo21CDPEscapeOffersLedgerC15CoreCDPInternalE07_escapeB9Presented33_8521E6C6299211366B36D8C5094D2F77LLSo32CDPRemoteApprovalEscapeOfferMaskVvpfi', 
                        '_$sSo21CDPEscapeOffersLedgerC15CoreCDPInternalE11descriptionSSvg', 
@@ -54,9 +56,17 @@ exports:
                        _kCDPCAErrorCode, _kCDPCAErrorDomain, _kCDPCAEscrowPreRecordResult, 
                        _kCDPCAEventEscrowPreRecord, _kCDPCAEventLocalSecret, _kCDPCALocalSecretResult, 
                        _kCDPCAPreRecordIdentifier, _kCDPCAUnderlyingErrorCode, _kCDPCAUnderlyingErrorDomain, 
-                       _kCDPCAVersion, _kCDPCAWasSuccess, _kConfirmExistingSecretActionContinue, 
-                       _kConfirmExistingSecretIdentifier, _kDismissFollowup, _kOfflineLocalSecretChangeActionContinue, 
+                       _kCDPCAVersion, _kCDPCAWasSuccess, _kCDP_ACAccountPDPAttemptsRemainingPrimaryKey, 
+                       _kCDP_ACAccountPDPAttemptsRemainingRecoveryKey, _kCDP_ACAccountPDPHealthPrimaryKey, 
+                       _kCDP_ACAccountPDPHealthRecoveryKey, _kCDP_ACAccountPDPPVMatchesKey, 
+                       _kCDP_AKRequestBodyPDPAttemptsRemaining, _kCDP_AKRequestBodyPDPCountOfDBRRecordsMatchedToNewestRecoveryKey, 
+                       _kCDP_AKRequestBodyPDPCountOfRecordIdentities, _kCDP_AKRequestBodyPDPIdentityHash, 
+                       _kCDP_AKRequestBodyPDPPasswordVersionMatchesIdms, _kCDP_AKRequestBodyPDPPrimary, 
+                       _kCDP_AKRequestBodyPDPRecovery, _kCDP_AKRequestBodyPDPState, 
+                       _kConfirmExistingSecretActionContinue, _kConfirmExistingSecretIdentifier, 
+                       _kDismissFollowup, _kOfflineLocalSecretChangeActionContinue, 
                        _kOfflineLocalSecretChangeItemIdentifier, _kOfflineLocalSecretCreateActionContinue, 
+                       _kPDPOnlyRepairActionContinue, _kPDPOnlyRepairIdentifier, 
                        _kRecoveryKeyMismatchHealingCFUIdentifier, _kRegenerateRecoveryKeyIdentifier, 
                        _kRepairCDPStateActionContinue, _kRepairCDPStateActionRecoveryKey, 
                        _kRepairCDPStateItemIdentifier, _kSOSCompatibilityActionContinue, 
@@ -80,9 +90,9 @@ exports:
                        CDPDLocalDeviceSecretProxyImpl, CDPDLocalSecretController, 
                        CDPDLocalSecretFollowUpProviderImpl, CDPDLockAssertion, CDPDManateeStateObserver, 
                        CDPDNetworkObserver, CDPDNetworkObserverClient, CDPDOctagonTrustProxyImpl, 
-                       CDPDPCSController, CDPDRPDExecutor, CDPDRecoveryFlowController, 
-                       CDPDRecoveryKeyController, CDPDRecoveryKeyValidator, CDPDRecoveryKeyValidatorImpl, 
-                       CDPDRecoveryOption, CDPDRecoveryValidatedJoinFlowController, 
+                       CDPDPCSController, CDPDPDPRecoveryController, CDPDRPDExecutor, 
+                       CDPDRecoveryFlowController, CDPDRecoveryKeyController, CDPDRecoveryKeyValidator, 
+                       CDPDRecoveryKeyValidatorImpl, CDPDRecoveryOption, CDPDRecoveryValidatedJoinFlowController, 
                        CDPDRemoteDeviceSecretValidator, CDPDRemoteSecretValidationResult, 
                        CDPDSOSCircleController, CDPDSOSRecoveryValidatedJoinFlowController, 
                        CDPDSOSSecureBackupController, CDPDSecureBackupConfiguration, 

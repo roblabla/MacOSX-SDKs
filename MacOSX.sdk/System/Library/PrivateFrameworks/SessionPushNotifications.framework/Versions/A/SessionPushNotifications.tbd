@@ -1,14 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SessionPushNotifications.framework/Versions/A/SessionPushNotifications'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ SessionCore, SessionCoreTests, SessionPushNotificationsTests, 
                        liveactivitiesd ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s24SessionPushNotifications04MockB7ServingMp', '_$s24SessionPushNotifications04MockB7ServingP10connection18forEnvironmentNameAA0B10Connection_pSgSS_tFTj', 
                        '_$s24SessionPushNotifications04MockB7ServingP10connection18forEnvironmentNameAA0B10Connection_pSgSS_tFTq', 
                        '_$s24SessionPushNotifications04MockB7ServingTL', '_$s24SessionPushNotifications0B10ConnectionMp', 

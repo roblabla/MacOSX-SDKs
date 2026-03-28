@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SearchUI.framework/Versions/A/SearchUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10AppIntents0A10DependencyC8SearchUISo0d5UIAppC0RzrlE7managerACyxGAA0aC7ManagerC_tcfC', 
                        '_$s7SwiftUI4ViewP06SearchB0E18searchUIAppearanceyQrAD0dF0V5StyleOF', 
                        '_$s7SwiftUI4ViewP06SearchB0E18searchUIAppearanceyQrAD0dF0V5StyleOFQOMQ', 

@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreIK.framework/Versions/A/CoreIK'
 current-version: 266.0.17
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ ARKit, ARKitCore, ARKitCoreTests, AltruisticBodyPoseKit, BodyPoseKit, 
                        CoreRE, CoreRETests, Enrollment, FusionTestApp, Fuzz, REAnimationTests, 
                        REAudioTests, RECollisionTests, RECommonTests, REConsensusTests, 
@@ -17,8 +15,7 @@ allowable-clients:
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTSDv3_f ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CoreIKACPFilteringSolve, _CoreIKACPFilteringSolverSetSmoothness, 
                        _CoreIKACPPenetrationConstraintSetPlaneDefinition, _CoreIKACPPenetrationSolve, 
                        _CoreIKACPPenetrationSolverConstraintCount, _CoreIKACPPenetrationSolverGetConstraintByIndex, 

@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libcups.2.dylib'
 current-version: 2.14
 compatibility-version: 2
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __cupsAppleCopyDefaultPaperID, __cupsAppleCopyDefaultPrinter, 
                        __cupsAppleGetUseLastPrinter, __cupsAppleLanguage, __cupsAppleLocale, 
                        __cupsAppleSetDefaultPaperID, __cupsAppleSetDefaultPrinter, 

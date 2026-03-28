@@ -2,7 +2,7 @@
 //  HKUnit.h
 //  HealthKit
 //
-//  Copyright (c) 2013-2024 Apple Inc. All rights reserved.
+//  Copyright © 2013-2024 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

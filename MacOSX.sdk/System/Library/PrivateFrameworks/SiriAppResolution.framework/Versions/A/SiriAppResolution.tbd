@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriAppResolution.framework/Versions/A/SiriAppResolution'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10IntentType17SiriAppResolution0D9ResolvingPTl', '_$s17SiriAppResolution012InstrumentedB9SelectingMp', 
                        '_$s17SiriAppResolution012InstrumentedB9SelectingP06selectB12WithMetadata6intent16fromEligibleApps_ySo8INIntentC_SayAA0B0CGys6ResultOyAA0bcN0OAA0B16SelectionFailureOG_SDySSypGtctFTj', 
                        '_$s17SiriAppResolution012InstrumentedB9SelectingP06selectB12WithMetadata6intent16fromEligibleApps_ySo8INIntentC_SayAA0B0CGys6ResultOyAA0bcN0OAA0B16SelectionFailureOG_SDySSypGtctFTq', 

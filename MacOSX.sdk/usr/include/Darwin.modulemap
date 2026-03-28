@@ -68,24 +68,44 @@ module Darwin [system] {
   exclude header "NSSystemDirectories.h"
 
   module libkern {
-    export *
-
     module OSAtomic {
       header "libkern/OSAtomic.h"
+      export *
+    }
+
+    module OSAtomicDeprecated {
       header "libkern/OSAtomicDeprecated.h"
+      export *
+    }
+
+    module OSSpinLockDeprecated {
       header "libkern/OSSpinLockDeprecated.h"
+      export *
+    }
+
+    module OSAtomicQueue {
       header "libkern/OSAtomicQueue.h"
       export *
     }
 
     module OSByteOrder {
       header "libkern/OSByteOrder.h"
-
-      header "libkern/machine/OSByteOrder.h"
-      header "libkern/i386/OSByteOrder.h"
-      header "libkern/arm/OSByteOrder.h"
-
       export *
+
+      module machine_OSByteOrder {
+        header "libkern/machine/OSByteOrder.h"
+        export *
+
+        module i386 {
+          header "libkern/i386/OSByteOrder.h"
+          export *
+        }
+
+        module arm {
+          header "libkern/arm/OSByteOrder.h"
+          export *
+        }
+      }
     }
   }
 

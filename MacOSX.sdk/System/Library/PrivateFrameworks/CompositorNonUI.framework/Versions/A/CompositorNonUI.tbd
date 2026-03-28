@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CompositorNonUI.framework/Versions/A/CompositorNonUI'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CPLayerRendererDidInvalidate, _CPLayerRendererWillBegin, 
                        _CompositorNonUIVersionNumber, _CompositorNonUIVersionString, 
                        ___cp_mach_timebase, _cp_drawable_add_mtl4_render_context, 

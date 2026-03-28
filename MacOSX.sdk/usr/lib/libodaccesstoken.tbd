@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libodaccesstoken.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _od_cstr_from_cfstring, _od_cstr_from_cfstring_or_cfdata, 
                        _odaccesstoken_get_fv_options_for_disk, _odaccesstoken_get_token_path, 
                        _odaccesstoken_get_uuid, _odaccesstoken_load, _odaccesstoken_set_log, 

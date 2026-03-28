@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ arm64-macos, arm64e-macos ]
+targets:         [ arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SILManager.framework/Versions/A/SILManager'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ '_$s10SILManager11SILManifestC019cursorsByResolutionD4NameSDySiSDySSAA13SILCursorDescCGGvg', 
                        '_$s10SILManager11SILManifestC019cursorsByResolutionD4NameSDySiSDySSAA13SILCursorDescCGGvpMV', 
                        '_$s10SILManager11SILManifestC019cursorsByResolutionD4NameSDySiSDySSAA13SILCursorDescCGGvpWvd', 

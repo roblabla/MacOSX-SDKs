@@ -1,12 +1,16 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TextUnderstandingShared.framework/Versions/A/TextUnderstandingShared'
-current-version: 116.7.8
+current-version: 122.18
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s23TextUnderstandingShared10SignposterV10signposter2os12OSSignposterVvg', 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s23TextUnderstandingShared08truncateA12ByTokenCount4text07maximumfG00I17BackoffIterations6buffer12tokenCounterS2S_S2iSdSiSSYaKXEtYaKF', 
+                       '_$s23TextUnderstandingShared08truncateA12ByTokenCount4text07maximumfG00I17BackoffIterations6buffer12tokenCounterS2S_S2iSdSiSSYaKXEtYaKFTu', 
+                       '_$s23TextUnderstandingShared08truncateA12ByTokenCount4text07maximumfG00I17BackoffIterations6buffer12tokenCounterS2S_S2iSdSiSSYaKXEtYaKFfA1_', 
+                       '_$s23TextUnderstandingShared08truncateA12ByTokenCount4text07maximumfG00I17BackoffIterations6buffer12tokenCounterS2S_S2iSdSiSSYaKXEtYaKFfA2_', 
+                       '_$s23TextUnderstandingShared10SignposterV10signposter2os12OSSignposterVvg', 
                        '_$s23TextUnderstandingShared10SignposterV10signposter2os12OSSignposterVvpMV', 
                        '_$s23TextUnderstandingShared10SignposterV3endyyF', '_$s23TextUnderstandingShared10SignposterV4name5state10signposterACs12StaticStringV_2os23OSSignpostIntervalStateCAI12OSSignposterVtcfC', 
                        '_$s23TextUnderstandingShared10SignposterV4names12StaticStringVvg', 

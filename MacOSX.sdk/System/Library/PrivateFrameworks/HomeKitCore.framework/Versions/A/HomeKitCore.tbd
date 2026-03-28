@@ -1,15 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeKitCore.framework/Versions/A/HomeKitCore'
-current-version: 1388.3.6
+current-version: 1418.5.15
 compatibility-version: 0
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ HomeKitDaemon, HomeKitDaemonLegacy, homeutil ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s11HomeKitCore10HomesStoreC0A0V22legacyUniqueIdentifier10Foundation4UUIDVvg', 
                        '_$s11HomeKitCore10HomesStoreC0A0V22legacyUniqueIdentifier10Foundation4UUIDVvpMV', 
                        '_$s11HomeKitCore10HomesStoreC0A0V2eeoiySbAE_AEtFZ', '_$s11HomeKitCore10HomesStoreC0A0V2id10Foundation4UUIDVvg', 

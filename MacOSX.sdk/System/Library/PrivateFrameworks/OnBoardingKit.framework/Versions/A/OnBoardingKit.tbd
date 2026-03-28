@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/OnBoardingKit.framework/Versions/A/OnBoardingKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$sSo7NSImageC13OnBoardingKitE22disclosureChevronImage13expandedStateABSgSb_tFZ', 
                        _OBPrivacyActivationIdentifier, _OBPrivacyActivityIdentifier, 
                        _OBPrivacyAdvertisingIdentifier, _OBPrivacyAnalyticsAppIdentifier, 

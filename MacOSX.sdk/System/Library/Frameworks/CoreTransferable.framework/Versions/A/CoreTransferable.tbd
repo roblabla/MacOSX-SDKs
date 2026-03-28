@@ -1,16 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreTransferable.framework/Versions/A/CoreTransferable'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$10.15$15.0$_$ss5NeverO7SwiftUIE4bodyABvg$', 
-                       '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$10.15$15.0$_$ss5NeverO7SwiftUIE4bodyABvpMV$', 
-                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$13.0$18.0$_$ss5NeverO7SwiftUIE4bodyABvg$', 
-                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$13.0$18.0$_$ss5NeverO7SwiftUIE4bodyABvpMV$', 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$1.0$15.0$_$ss5NeverO7SwiftUIE4bodyABvg$', 
+                       '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$1.0$15.0$_$ss5NeverO7SwiftUIE4bodyABvpMV$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$1.0$18.0$_$ss5NeverO7SwiftUIE4bodyABvg$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$1.0$18.0$_$ss5NeverO7SwiftUIE4bodyABvpMV$', 
                        '_$s10Foundation16AttributedStringV16CoreTransferable0E0ADMc', 
                        '_$s10Foundation16AttributedStringV16CoreTransferable0E0ADWP', 
                        '_$s10Foundation16AttributedStringV16CoreTransferableE22transferRepresentationQrvgZ', 

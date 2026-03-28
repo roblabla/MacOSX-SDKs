@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/EXSurface.framework/Versions/A/EXSurface'
 current-version: 1.5
 compatibility-version: 1.2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$sSo19EXSurfaceDescriptorC0A0E08validateB0yyKF', '_$sSo19EXSurfaceDescriptorC0A0E08validateB4ObjCSbyF', 
                        '_$sSo24EXSurfaceImageDescriptorC0A0E08validateB0yyKF', _EXSurfaceCreateProxyWithDarwinID, 
                        _EXSurfaceCreateProxyWithMachPort, _EXSurfaceProxyGetDarwinID, 
@@ -28,8 +28,9 @@ exports:
                        EXSurfacePrivImageDesc._elementHeight, EXSurfacePrivImageDesc._elementWidth, 
                        EXSurfacePrivImageDesc._height, EXSurfacePrivImageDesc._offset, 
                        EXSurfacePrivImageDesc._size, EXSurfacePrivImageDesc._width, 
-                       _EXSurfacePriv._allocationSize, _EXSurfacePriv._baseAddress, 
-                       _EXSurfacePriv._imageDesc, _EXSurfacePriv._memory, _EXSurfacePriv._memoryRegion, 
-                       _EXSurfacePriv._pixelFormat, _EXSurfacePriv._planeCount, _EXSurfacePriv._planeData, 
-                       _EXSurfacePriv._surfaceID, _EXSurfacePriv._useCount ]
+                       _EXSurfacePriv._allocationOffset, _EXSurfacePriv._allocationSize, 
+                       _EXSurfacePriv._baseAddress, _EXSurfacePriv._imageDesc, _EXSurfacePriv._memory, 
+                       _EXSurfacePriv._memoryRegion, _EXSurfacePriv._pixelFormat, 
+                       _EXSurfacePriv._planeCount, _EXSurfacePriv._planeData, _EXSurfacePriv._surfaceID, 
+                       _EXSurfacePriv._useCount ]
 ...

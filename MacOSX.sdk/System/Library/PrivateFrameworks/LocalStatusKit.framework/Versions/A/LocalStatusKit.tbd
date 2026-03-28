@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LocalStatusKit.framework/Versions/A/LocalStatusKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation11FormatStyleP14LocalStatusKitAD18OSLogDateFormatterVRszrlE5oslogyA2F0C0OFZ', 
                        '_$s10Foundation11FormatStyleP14LocalStatusKitAD22TinyDateRangeFormatterVRszrlE4tinyAFvgZ', 
                        '_$s10Foundation11FormatStyleP14LocalStatusKitAD22TinyDateRangeFormatterVRszrlE4tinyAFvpZMV', 
@@ -288,6 +288,7 @@ exports:
                        '_$s14LocalStatusKit8LSKErrorO3nilyACSScACmFWC', '_$s14LocalStatusKit8LSKErrorOMa', 
                        '_$s14LocalStatusKit8LSKErrorOMn', '_$s14LocalStatusKit8LSKErrorON', 
                        '_$s14LocalStatusKit8LSKErrorOs5ErrorAAMc', '_$s14LocalStatusKit9LSKDomainO10regulatoryyA2CmFWC', 
+                       '_$s14LocalStatusKit9LSKDomainO11descriptionSSvg', '_$s14LocalStatusKit9LSKDomainO11descriptionSSvpMV', 
                        '_$s14LocalStatusKit9LSKDomainO13atDeskTestingyA2CmFWC', '_$s14LocalStatusKit9LSKDomainO15personalHotspotyA2CmFWC', 
                        '_$s14LocalStatusKit9LSKDomainO27applicationServiceDiscoveryyA2CmFWC', 
                        '_$s14LocalStatusKit9LSKDomainO2idSSvg', '_$s14LocalStatusKit9LSKDomainO2idSSvpMV', 
@@ -299,6 +300,7 @@ exports:
                        '_$s14LocalStatusKit9LSKDomainOSHAAMc', '_$s14LocalStatusKit9LSKDomainOSQAAMc', 
                        '_$s14LocalStatusKit9LSKDomainOSYAAMc', '_$s14LocalStatusKit9LSKDomainOSeAAMc', 
                        '_$s14LocalStatusKit9LSKDomainOs12CaseIterableAAMc', '_$s14LocalStatusKit9LSKDomainOs12IdentifiableAAMc', 
+                       '_$s14LocalStatusKit9LSKDomainOs23CustomStringConvertibleAAMc', 
                        '_$s2os6LoggerV14LocalStatusKitE05localD0ACvgZ' ]
     objc-classes:    [ LocalStatusInvocation, PublishStatusInvocation, SubscribeStatusInvocation ]
 ...

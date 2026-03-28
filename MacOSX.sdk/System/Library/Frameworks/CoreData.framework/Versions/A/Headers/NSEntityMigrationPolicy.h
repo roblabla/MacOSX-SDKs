@@ -1,7 +1,7 @@
 /*
     NSEntityMigrationPolicy.h
     Core Data
-    Copyright (c) 2004-2025, Apple Inc.
+    Copyright (c) 2004-2026, Apple Inc.
     All rights reserved.
 */
 

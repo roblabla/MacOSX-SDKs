@@ -6,7 +6,9 @@
 //
 
 #import <CarPlay/CPManeuver.h>
+#import <CarPlay/CPRerouteReason.h>
 #import <CarPlay/CPRouteInformation.h>
+#import <CarPlay/CPRouteSegment.h>
 #import <CarPlay/CPTemplate.h>
 #import <CarPlay/CPTravelEstimates.h>
 #import <CarPlay/CPTrip.h>
@@ -55,7 +57,16 @@ CARPLAY_TEMPLATE_UI_ACTOR
  
  @param routeInformation The updated route information for the current trip
  */
-- (void)resumeTripWithUpdatedRouteInformation:(CPRouteInformation *)routeInformation NS_SWIFT_NAME(resumeTrip(updatedRouteInformation:)) API_AVAILABLE(ios(17.4));
+- (void)resumeTripWithUpdatedRouteInformation:(CPRouteInformation *)routeInformation NS_SWIFT_NAME(resumeTrip(updatedRouteInformation:)) API_AVAILABLE(ios(17.4)) API_DEPRECATED_WITH_REPLACEMENT("resumeTripWithUpdatedRouteSegments:currentSegment:rerouteReason:", ios(17.4, 26.4));
+
+/**
+ Resume the current trip with updated route segments
+ 
+ @param routeSegments The updated route segments for the current trip
+ @param currentSegment The current route segment
+ @param rerouteReason The reason for the reroute
+ */
+- (void)resumeTripWithUpdatedRouteSegments:(NSArray<CPRouteSegment *> *)routeSegments currentSegment:(CPRouteSegment *)currentSegment rerouteReason:(CPRerouteReason)rerouteReason NS_SWIFT_NAME(resumeTrip(updatedRouteSegments:currentSegment:rerouteReason:)) API_AVAILABLE(ios(26.4));
 
 /**
  Finish the trip.
@@ -93,6 +104,12 @@ CARPLAY_TEMPLATE_UI_ACTOR
 - (void)addLaneGuidances:(NSArray<CPLaneGuidance *> *)laneGuidances API_AVAILABLE(ios(17.4));
 
 /**
+ Use this method to add CPRouteSegments in chronological order to the navigation session.
+ CPRouteSegment objects must be added as soon as they are available.
+ */
+- (void)addRouteSegments:(NSArray<CPRouteSegment *> *)routeSegments API_AVAILABLE(ios(26.4));
+
+/**
  Set this property with variants of the current road name. From most to least verbose.
  */
 @property (nonatomic, copy) NSArray<NSString *> *currentRoadNameVariants API_AVAILABLE(ios(17.4));
@@ -115,6 +132,15 @@ CARPLAY_TEMPLATE_UI_ACTOR
  */
 - (void)updateTravelEstimates:(CPTravelEstimates *)estimates forManeuver:(CPManeuver *)maneuver;
 
+/**
+The route segments associated with this navigation session.
+ */
+@property (nonatomic, readonly, strong) NSArray<CPRouteSegment *> *routeSegments API_AVAILABLE(ios(26.4));
+
+/**
+The current route segment.
+ */
+@property (nonatomic) CPRouteSegment *currentSegment API_AVAILABLE(ios(26.4));
 
 @end
 

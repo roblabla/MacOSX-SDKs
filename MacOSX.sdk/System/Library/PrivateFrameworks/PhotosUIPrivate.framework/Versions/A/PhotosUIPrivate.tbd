@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosUIPrivate.framework/Versions/A/PhotosUIPrivate'
-current-version: 821.0.120
+current-version: 841.0.101
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15PhotosUIPrivate016StoryMusicEditorD6SourceO04flexD14ExportFallbackyA2CmFWC', 
                        '_$s15PhotosUIPrivate016StoryMusicEditorD6SourceO04flexD6ByMoodyA2CmFWC', 
                        '_$s15PhotosUIPrivate016StoryMusicEditorD6SourceO07curatedD11SuggestionsyA2CmFWC', 

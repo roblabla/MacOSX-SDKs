@@ -28,31 +28,5 @@
 #ifndef KERN_MONOTONIC_H
 #define KERN_MONOTONIC_H
 
-#if CONFIG_CPU_COUNTERS
-
-#include <stdbool.h>
-#include <stdint.h>
-#include <sys/cdefs.h>
-
-__BEGIN_DECLS
-
-extern bool mt_debug;
-extern _Atomic uint64_t mt_pmis;
-extern _Atomic uint64_t mt_retrograde;
-
-void mt_fixed_counts(uint64_t *counts);
-uint64_t mt_cur_cpu_instrs(void);
-uint64_t mt_cur_cpu_cycles(void);
-void mt_cur_cpu_cycles_instrs_speculative(uint64_t *cycles, uint64_t *instrs);
-
-bool mt_acquire_counters(void);
-bool mt_owns_counters(void);
-void mt_ownership_change(bool available);
-void mt_release_counters(void);
-
-__END_DECLS
-
-
-#endif /* CONFIG_CPU_COUNTERS */
 
 #endif /* !defined(KERN_MONOTONIC_H) */

@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriTurnTakingManager.framework/Versions/A/SiriTurnTakingManager'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s21SiriTurnTakingManager11TTCandidateV012isResponseToA6PromptSbvg', 
                        '_$s21SiriTurnTakingManager11TTCandidateV012isResponseToA6PromptSbvpMV', 
                        '_$s21SiriTurnTakingManager11TTCandidateV10userParsesSay0A8NLUTypes0A23_Nlu_External_UserParseVGvg', 

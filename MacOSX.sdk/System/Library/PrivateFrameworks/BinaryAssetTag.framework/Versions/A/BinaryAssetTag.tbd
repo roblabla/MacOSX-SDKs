@@ -1,0 +1,10 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64e-macos ]
+install-name:    '/System/Library/PrivateFrameworks/BinaryAssetTag.framework/Versions/A/BinaryAssetTag'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ _PVAppIdentityErrorDomain, _PVAppIdentity_GenerateDigestWithCompletion, 
+                       __PVAppIdentityLogSystem ]
+    objc-classes:    [ PVAppIdentityDigest ]
+...

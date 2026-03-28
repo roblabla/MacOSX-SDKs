@@ -1,13 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GeoAnalytics.framework/Versions/A/GeoAnalytics'
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__113basic_fstreamIcNS_11char_traitsIcEEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _GEOAPEvalEntitlement, _GEOAPGeneralEntitlement, _GEOAPOverrideApplicationId, 
                        _GEOAPTelemetryEntitlement, _GeoAnalyticsConfig_AllowedCountriesForEnrichedResultsCount, 
                        _GeoAnalyticsConfig_AnalyticCollectionDisabled, _GeoAnalyticsConfig_AnalyticEventCollectionProcessDenyList, 

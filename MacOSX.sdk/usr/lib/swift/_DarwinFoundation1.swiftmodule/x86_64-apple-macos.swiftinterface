@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-macos26.2 -target-variant x86_64-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -module-link-name swift_DarwinFoundation1 -swift-version 6 -enforce-exclusivity=checked -O -library-level api -module-abi-name Darwin -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 347.40.2 -module-name _DarwinFoundation1
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-macos26.4 -target-variant x86_64-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -module-link-name swift_DarwinFoundation1 -swift-version 6 -enforce-exclusivity=checked -O -library-level api -module-abi-name Darwin -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 377.100.15 -module-name _DarwinFoundation1
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Swift
 @_exported import _DarwinFoundation1
 import _DarwinFoundation1._errno
@@ -129,9 +129,7 @@ public var errno: Swift.Int32 {
   public static var ELAST: _DarwinFoundation1.POSIXErrorCode {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int32)
-  #endif
   @available(iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, macOS 10.9, *)
   public typealias RawValue = Swift.Int32
   public var rawValue: Swift.Int32 {

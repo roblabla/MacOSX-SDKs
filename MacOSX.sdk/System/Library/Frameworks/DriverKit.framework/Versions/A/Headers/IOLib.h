@@ -219,6 +219,16 @@ enum {
 
 #endif /* NSEC_PER_SEC */
 
+typedef int32_t pid_t;
+/*!
+ * @function getpid
+ * Returns the process ID (pid) of the current driver instance
+ *
+ * @result		Value of the process ID
+ */
+pid_t
+getpid(void);
+
 #endif // TARGET_OS_DRIVERKIT && !DRIVERKIT_PRIVATE
 
 /*!
@@ -631,6 +641,24 @@ struct IOCallOnceFlag {
  *  @param block The block object to execute once.
  */
 void IOCallOnce(struct IOCallOnceFlag * flag, IOCallOnceBlock block);
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/*!
+ * @function IOSysCtlByName
+ * Get or set system information. Depending on the sysctl vector, only priviledged
+ * drivers might be able to set certain system information.
+ *
+ * @param name		An ASCII representation of the sysctl vector
+ * @param oldp		Buffer to receive the system information
+ * @param oldlenp	Length of the buffer receiving the system information
+ * @param newp		Buffer containing the value to be set
+ * @param newlen	Length of the buffer containing the value to be set
+ *
+ * @result		kIOReturnSuccess if successful, or an IOReturn code indicating the error
+ */
+kern_return_t
+IOSysCtlByName(const char *name, void *oldp, size_t *oldlenp, void *newp, size_t newlen);
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

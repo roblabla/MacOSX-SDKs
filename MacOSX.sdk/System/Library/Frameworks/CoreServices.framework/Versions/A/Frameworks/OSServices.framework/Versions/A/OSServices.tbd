@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices'
 current-version: 1141.1
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AlertSoundPlay, _AlertSoundPlayCustomSound, _CSIdentityAuthorityCopyLocalizedName, 
                        _CSIdentityAuthorityGetTypeID, _CSIdentityCreateCopy, _CSIdentityCreatePersistentReference, 
                        _CSIdentityGetAuthority, _CSIdentityGetClass, _CSIdentityGetFullName, 
@@ -69,7 +66,7 @@ exports:
                        _kAppleIDValidationRecordOptionDoNotCheckVersionKey, _kAppleIDValidationRecordOptionDoNotEvaluateTrustRefKey, 
                        _kAppleIDValidationRecordOptionOverrideSuggestedDurationValueKey, 
                        _kCSIdentityErrorDomain ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _BatteryCount, _CSGetDefaultIdentityAuthority, _CSGetLocalIdentityAuthority, 
                        _CSGetManagedIdentityAuthority, _CSIdentityAddAlias, _CSIdentityAddMember, 
                        _CSIdentityAuthenticateUsingPassword, _CSIdentityCommit, _CSIdentityCommitAsynchronously, 

@@ -18,6 +18,7 @@
 #include <Airship/acipc.h>
 #include <Airship/base.h>
 #include <Airship/buffer.h>
+#include <Airship/centauri_alpha.h>
 #include <Airship/client.h>
 #include <Airship/daleipc.h>
 #include <Airship/device_transport.h>

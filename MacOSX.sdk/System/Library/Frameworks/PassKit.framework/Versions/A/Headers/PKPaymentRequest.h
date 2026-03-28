@@ -228,6 +228,17 @@ API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
 // Be sure to select the correct mode that matches your requirement, since this will be displayed to the user.
 @property (nonatomic, assign) PKApplePayLaterAvailability applePayLaterAvailability API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0)) NS_REFINED_FOR_SWIFT;
 
+/// A Boolean value that indicates whether this payment request is being made
+/// by a delegated entity on behalf of a merchant.
+///
+/// Set this property to YES when your app is acting as an Apple Pay
+/// delegate and presenting the payment sheet on behalf of another merchant.
+/// The default value is NO.
+///
+/// @note This property requires your app to be registered as an Apple Pay
+/// delegate and to have the com.apple.developer.in-app-payments-delegate entitlement.
+@property (nonatomic, assign) BOOL isDelegatedRequest API_AVAILABLE(macos(26.4), ios(26.4), watchos(26.4), visionos(26.4)) API_UNAVAILABLE(tvos);
+
 @end
 
 NS_ASSUME_NONNULL_END

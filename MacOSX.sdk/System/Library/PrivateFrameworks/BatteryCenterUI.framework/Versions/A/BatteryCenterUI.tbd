@@ -1,17 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/BatteryCenterUI.framework/Versions/A/BatteryCenterUI'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ BatteriesAvocadoWidgetExtension, BatteriesWidgetExtension, 
                        BatteriesWidgetIntentsExtension, BatteriesWidgetIntentsExtensionUI, 
                        BatteryCenterUITest, ChronoCore, Gaspar, NotificationCenter, 
                        NotificationCenterApp, SpringBoard, SpringBoard-Tests, SpringBoardFramework, 
                        SpringBoardHome, WidgetRenderer ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15BatteryCenterUI0A21AvocadoArchivableViewV05SwiftC001_eF0AAMc', 
                        '_$s15BatteryCenterUI0A21AvocadoArchivableViewV05SwiftC00F0AAMc', 
                        '_$s15BatteryCenterUI0A21AvocadoArchivableViewV4bodyQrvg', 

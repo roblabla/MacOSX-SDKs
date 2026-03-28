@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeKitDaemonLegacy.framework/Versions/A/HomeKitDaemonLegacy'
-current-version: 1388.3.6
+current-version: 1418.5.15
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s19HomeKitDaemonLegacy035CameraRecordingEventDailySummaryLogG0C010serializedjG0SDySSs8Sendable_pGvg', 
                        '_$s19HomeKitDaemonLegacy035CameraRecordingEventDailySummaryLogG0C010serializedjG0SDySSs8Sendable_pGvpMV', 
                        '_$s19HomeKitDaemonLegacy035CameraRecordingEventDailySummaryLogG0C011isHouseholdjG0Sbvg', 
@@ -107,6 +107,7 @@ exports:
                        '_$s19HomeKitDaemonLegacy28HMDRemoteConnectivityMonitorC03hasF0SbvgTq', 
                        '_$s19HomeKitDaemonLegacy28HMDRemoteConnectivityMonitorC03hasF0SbvpMV', 
                        '_$s19HomeKitDaemonLegacy28HMDRemoteConnectivityMonitorC04_hasF033_3F92D769F1F827881EB2A36DBD82BD9ELL15Synchronization5MutexVySbGvpfi', 
+                       '_$s19HomeKitDaemonLegacy28HMDRemoteConnectivityMonitorC12HMFoundation3HMFO7LoggingAAMc', 
                        '_$s19HomeKitDaemonLegacy28HMDRemoteConnectivityMonitorC12timerDidFireyySo8HMFTimerCF', 
                        '_$s19HomeKitDaemonLegacy28HMDRemoteConnectivityMonitorC12timerDidFireyySo8HMFTimerCFTq', 
                        '_$s19HomeKitDaemonLegacy28HMDRemoteConnectivityMonitorC14failedMessages33_3F92D769F1F827881EB2A36DBD82BD9ELLSivpfi', 
@@ -157,6 +158,10 @@ exports:
                        '_$s19HomeKitDaemonLegacy32CameraRecordingEventObserverKeysOMa', 
                        '_$s19HomeKitDaemonLegacy32CameraRecordingEventObserverKeysOMn', 
                        '_$s19HomeKitDaemonLegacy32CameraRecordingEventObserverKeysON', 
+                       '_$s19HomeKitDaemonLegacy7AccountC14ChangeObserverC11logCategorySSvau', 
+                       '_$s19HomeKitDaemonLegacy7AccountC14ChangeObserverC11logCategorySSvgZ', 
+                       '_$s19HomeKitDaemonLegacy7AccountC14ChangeObserverC11logCategorySSvpZ', 
+                       '_$s19HomeKitDaemonLegacy7AccountC14ChangeObserverC12HMFoundation3HMFO7LoggingAAMc', 
                        '_$s19HomeKitDaemonLegacy7AccountC14ChangeObserverC8delegateAE8Delegate_pSgvM', 
                        '_$s19HomeKitDaemonLegacy7AccountC14ChangeObserverC8delegateAE8Delegate_pSgvMTq', 
                        '_$s19HomeKitDaemonLegacy7AccountC14ChangeObserverC8delegateAE8Delegate_pSgvg', 
@@ -186,17 +191,22 @@ exports:
                        '_$sSo047HMDCameraRecordingEventDailySummaryHouseholdLogC7FactoryC19HomeKitDaemonLegacyEABycfC', 
                        '_$sSo047HMDCameraRecordingEventDailySummaryHouseholdLogC7FactoryC19HomeKitDaemonLegacyEABycfc', 
                        '_$sSo047HMDCameraRecordingEventDailySummaryHouseholdLogC7FactoryCMa', 
-                       '_$sSo11HMDRegistryCMa', '_$sSo20HMDEventCounterGroupC19HomeKitDaemonLegacyE7contextSo0aB7Context_pSgvpfi', 
+                       '_$sSo11HMDRegistryCMa', '_$sSo13HMDMainDriverC12HMFoundation3HMFO7Logging19HomeKitDaemonLegacyMc', 
+                       '_$sSo17HMDActionSetEventC12HMFoundation3HMFO7Logging19HomeKitDaemonLegacyAeFP11logCategorySSvgZTW', 
+                       '_$sSo17HMDActionSetEventC12HMFoundation3HMFO7Logging19HomeKitDaemonLegacyMc', 
+                       '_$sSo20HMDEventCounterGroupC19HomeKitDaemonLegacyE7contextSo0aB7Context_pSgvpfi', 
                        '_$sSo20HMDEventCounterGroupC19HomeKitDaemonLegacyEABycfC', 
                        '_$sSo20HMDEventCounterGroupC19HomeKitDaemonLegacyEABycfc', 
                        '_$sSo20HMDEventCounterGroupCMa', '_$sSo20HMDFMFHandlerFactoryC19HomeKitDaemonLegacyEABycfC', 
                        '_$sSo20HMDFMFHandlerFactoryC19HomeKitDaemonLegacyEABycfc', 
                        '_$sSo20HMDFMFHandlerFactoryCMa', '_$sSo24HMDHomeDefaultDataSourceCMa', 
-                       '_$sSo24HMDHomeManagerDataSourceC19HomeKitDaemonLegacyEABycfC', 
-                       '_$sSo24HMDHomeManagerDataSourceC19HomeKitDaemonLegacyEABycfc', 
+                       '_$sSo24HMDHomeManagerDataSourceC19HomeKitDaemonLegacyE25widgetConfigurationReaderSo09HMDWidgetjK0Cvpfi', 
+                       '_$sSo24HMDHomeManagerDataSourceC19HomeKitDaemonLegacyE26darwinNotificationProviderSo08HMDarwinjK0_pvpfi', 
                        '_$sSo24HMDHomeManagerDataSourceCMa', '_$sSo24HMDUserDefaultDataSourceC19HomeKitDaemonLegacyEABycfC', 
                        '_$sSo24HMDUserDefaultDataSourceC19HomeKitDaemonLegacyEABycfc', 
-                       '_$sSo24HMDUserDefaultDataSourceCMa', '_$sSo31HMDCameraRecordingEventObserverC19HomeKitDaemonLegacyE10startMutex33_5C3040B5563DE9DE0480141374DF14DCLL15Synchronization0J0VySbGvpfi', 
+                       '_$sSo24HMDUserDefaultDataSourceCMa', '_$sSo27HMDMediaPlaybackActionEventC12HMFoundation3HMFO7Logging19HomeKitDaemonLegacyAeFP11logCategorySSvgZTW', 
+                       '_$sSo27HMDMediaPlaybackActionEventC12HMFoundation3HMFO7Logging19HomeKitDaemonLegacyMc', 
+                       '_$sSo31HMDCameraRecordingEventObserverC19HomeKitDaemonLegacyE10startMutex33_5C3040B5563DE9DE0480141374DF14DCLL15Synchronization0J0VySbGvpfi', 
                        '_$sSo31HMDCameraRecordingEventObserverC19HomeKitDaemonLegacyEABycfC', 
                        '_$sSo31HMDCameraRecordingEventObserverC19HomeKitDaemonLegacyEABycfc', 
                        '_$sSo31HMDCameraRecordingEventObserverCMa', '_$sSo32HMDCameraStreamManagerDataSourceC19HomeKitDaemonLegacyEABycfC', 
@@ -209,6 +219,8 @@ exports:
                        '_$sSo32HMDRemoteMessageTxReportLogEventCMa', '_$sSo33HMDAccessorySetupMetricDispatcherC19HomeKitDaemonLegacyE07networkC019discoveryController0i4InfoK09sessionID19idsIdentifierString011currentWiFiL00rsT11NetworkRSSI12numResidents0W21AppleMediaAccessories019accessoryDiagnosticL0018primaryResidentIdspQ0025primaryResidentDiagnosticL08homeUUID025primaryResidentDiagnosticL7FetchedSo15HMMHomeLogEventCAC09DiscoveryK0C_AC0ulK0CS2SSo05HMFWituL0Cs5Int32VS2iSo021HMAccessoryDiagnosticl15ProtoDiagnosticL0CSgSSSgA2_10Foundation4UUIDVSbtF', 
                        '_$sSo33HMDAccessorySetupMetricDispatcherC19HomeKitDaemonLegacyE24obtainDiscoveryAssertionyXlyF', 
                        '_$sSo33HMDAccessorySetupMetricDispatcherC19HomeKitDaemonLegacyE25releaseDiscoveryAssertion15assertionHandleyyXl_tF', 
+                       '_$sSo34HMDCharacteristicReadWriteLogEventC12HMFoundation3HMFO7Logging19HomeKitDaemonLegacyAeFP11logCategorySSvgZTW', 
+                       '_$sSo34HMDCharacteristicReadWriteLogEventC12HMFoundation3HMFO7Logging19HomeKitDaemonLegacyMc', 
                        '_$sSo35HMDCameraCloudStorageManagerFactoryC19HomeKitDaemonLegacyEABycfC', 
                        '_$sSo35HMDCameraCloudStorageManagerFactoryC19HomeKitDaemonLegacyEABycfc', 
                        '_$sSo35HMDCameraCloudStorageManagerFactoryCMa', '_$sSo39HMDCameraSettingProactiveReaderLogEventC19HomeKitDaemonLegacyE9startTimeABSd_tcfC', 

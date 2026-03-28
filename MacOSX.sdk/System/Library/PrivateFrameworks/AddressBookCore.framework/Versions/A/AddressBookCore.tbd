@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AddressBookCore.framework/Versions/A/AddressBookCore'
-current-version: 2732.255.11
+current-version: 2732.255.131
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/ContactsPersistence.framework/Versions/A/ContactsPersistence' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ABACAccountPropertyAllowsInsecureAuthentication, _ABACAccountPropertyAltDSID, 
                        _ABACAccountPropertyAutodiscoverURL, _ABACAccountPropertyEWSExternalURL, 
                        _ABACAccountPropertyEWSInternalURL, _ABACAccountPropertyEWSRootFolderID, 
@@ -700,13 +697,11 @@ exports:
                        PHXSource.configurationView, PHXSource.passwordField, _ABBlockTask._block ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ContactsPersistence.framework/Versions/A/ContactsPersistence'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s19ContactsPersistence11URLVerifierC25isExistingPersistentStoreySb10Foundation3URLVFZTj', 
                        '_$s19ContactsPersistence11URLVerifierC25isExistingPersistentStoreySb10Foundation3URLVFZTq', 
                        '_$s19ContactsPersistence11URLVerifierCACycfC', '_$s19ContactsPersistence11URLVerifierCACycfc', 

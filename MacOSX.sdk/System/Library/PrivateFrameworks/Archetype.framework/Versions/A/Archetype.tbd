@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Archetype.framework/Versions/A/Archetype'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s9Archetype15ATCalendarEventC10eventTitleACSS_tcfC', '_$s9Archetype15ATCalendarEventC10eventTitleACSS_tcfCTq', 
                        '_$s9Archetype15ATCalendarEventC10eventTitleACSS_tcfc', '_$s9Archetype15ATCalendarEventC10eventTitleSSvg', 
                        '_$s9Archetype15ATCalendarEventC10eventTitleSSvpMV', '_$s9Archetype15ATCalendarEventC10eventTitleSSvpWvd', 

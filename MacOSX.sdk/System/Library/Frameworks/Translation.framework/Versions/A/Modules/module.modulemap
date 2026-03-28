@@ -1,4 +1,4 @@
-framework module Translation [system] [extern_c] {
+framework module Translation [system] {
     umbrella header "Translation.h"
     module * { export * }
     export *

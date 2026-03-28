@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64e-macos ]
+install-name:    '/System/Library/PrivateFrameworks/TurnManagerService.framework/Versions/A/TurnManagerService'
+current-version: 0
+compatibility-version: 0
+swift-abi-version: 7
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s18TurnManagerService0aB6ClientCACycfC', '_$s18TurnManagerService0aB6ClientCACycfc', 
+                       '_$s18TurnManagerService0aB6ClientCMa', '_$s18TurnManagerService0aB6ClientCMn', 
+                       '_$s18TurnManagerService0aB6ClientCMo', '_$s18TurnManagerService0aB6ClientCMu', 
+                       '_$s18TurnManagerService0aB6ClientCN', '_$s18TurnManagerService0aB6ClientCfD' ]
+    objc-classes:    [ _TtC18TurnManagerService17TurnManagerClient ]
+...

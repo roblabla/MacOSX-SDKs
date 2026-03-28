@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/WirelessDiagnostics'
 current-version: 757
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDSupportFramework.dylib' ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -28,8 +26,7 @@ exports:
                        __ZTSNSt3__120__shared_ptr_pointerIPN3awd7profile22ComponentConfigurationENS_10shared_ptrIS3_E27__shared_ptr_default_deleteIS3_S3_EENS_9allocatorIS3_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPNS_6vectorIhNS_9allocatorIhEEEENS_10shared_ptrIS4_E27__shared_ptr_default_deleteIS4_S4_EENS2_IS4_EEEE, 
                        __ZTSNSt3__123enable_shared_from_thisI12PRNGeneratorEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AWDPostMetric, _AWDPostSimpleMetric, _AWDPostSimpleMetricWithBool, 
                        _AWDPostSimpleMetricWithInteger, _AWDPostSimpleMetricWithString, 
                        _AWDPostSimpleMetricWithUnsignedInteger, _AWDServerConsolidateDeviceDiagnostics, 
@@ -701,12 +698,10 @@ exports:
     objc-classes:    [ AWDMetricContainer, AWDMetricManager, AWDObserver, AWDServerConnection ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDSupportFramework.dylib'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AWDBTLEConnectionStatsReadFrom, _AWDCFNetworkCacheMetricsReadFrom, 
                        _AWDCFNetworkStreamTaskTimingReadFrom, _AWDCFNetworkTaskMetricsReadFrom, 
                        _AWDCFNetworkTransactionMetricsReadFrom, _AWDCFNetworkW3CNavigationTimingReadFrom, 

@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ReflectionInternal.framework/Versions/A/ReflectionInternal'
-current-version: 112
-compatibility-version: 112
+current-version: 154
+compatibility-version: 154
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s18ReflectionInternal11PartialTypeV10descriptor07RuntimeB00D10DescriptorVvg', 
                        '_$s18ReflectionInternal11PartialTypeV10descriptor07RuntimeB00D10DescriptorVvpMV', 
                        '_$s18ReflectionInternal11PartialTypeV17hasParameterPacksSbvg', 

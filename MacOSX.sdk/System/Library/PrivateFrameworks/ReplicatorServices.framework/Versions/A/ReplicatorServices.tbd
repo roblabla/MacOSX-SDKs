@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ReplicatorServices.framework/Versions/A/ReplicatorServices'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation3URLV18ReplicatorServicesE021simulatorRootRelativeB0ACyF', 
                        '_$s10Foundation3URLV18ReplicatorServicesE18extendedAttributesSDySSAA4DataVGyKF', 
                        '_$s10Foundation4DataV18ReplicatorServices12SQLPrimitiveADMc', 
@@ -972,6 +970,7 @@ exports:
                        '_$s18ReplicatorServices14ZoneDescriptorV10CodingKeysO15protocolVersionyA2EmFWC', 
                        '_$s18ReplicatorServices14ZoneDescriptorV10CodingKeysO17publicationMethodyA2EmFWC', 
                        '_$s18ReplicatorServices14ZoneDescriptorV10CodingKeysO19replicationPriorityyA2EmFWC', 
+                       '_$s18ReplicatorServices14ZoneDescriptorV10CodingKeysO23maximumLocalRecordCountyA2EmFWC', 
                        '_$s18ReplicatorServices14ZoneDescriptorV10CodingKeysO2idyA2EmFWC', 
                        '_$s18ReplicatorServices14ZoneDescriptorV10CodingKeysO8intValueAESgSi_tcfC', 
                        '_$s18ReplicatorServices14ZoneDescriptorV10CodingKeysO8intValueSiSgvg', 
@@ -1002,7 +1001,12 @@ exports:
                        '_$s18ReplicatorServices14ZoneDescriptorV19replicationPriorityAA0c11ReplicationF0Ovg', 
                        '_$s18ReplicatorServices14ZoneDescriptorV19replicationPriorityAA0c11ReplicationF0OvpMV', 
                        '_$s18ReplicatorServices14ZoneDescriptorV19replicationPriorityAA0c11ReplicationF0Ovs', 
+                       '_$s18ReplicatorServices14ZoneDescriptorV23maximumLocalRecordCounts6UInt64VSgvM', 
+                       '_$s18ReplicatorServices14ZoneDescriptorV23maximumLocalRecordCounts6UInt64VSgvg', 
+                       '_$s18ReplicatorServices14ZoneDescriptorV23maximumLocalRecordCounts6UInt64VSgvpMV', 
+                       '_$s18ReplicatorServices14ZoneDescriptorV23maximumLocalRecordCounts6UInt64VSgvs', 
                        '_$s18ReplicatorServices14ZoneDescriptorV2eeoiySbAC_ACtFZ', 
+                       '_$s18ReplicatorServices14ZoneDescriptorV2id17publicationMethod19replicationPriority15protocolVersion13compressFiles23maximumLocalRecordCountACSS_AA0c11PublicationG0OAA0c11ReplicationI0OAA0a8ProtocolK0VSbs6UInt64VSgtcfC', 
                        '_$s18ReplicatorServices14ZoneDescriptorV2id17publicationMethod19replicationPriority15protocolVersion13compressFilesACSS_AA0c11PublicationG0OAA0c11ReplicationI0OAA0a8ProtocolK0VSbtcfC', 
                        '_$s18ReplicatorServices14ZoneDescriptorV2id17publicationMethod19replicationPriority15protocolVersionACSS_AA0c11PublicationG0OAA0c11ReplicationI0OAA0a8ProtocolK0VtcfC', 
                        '_$s18ReplicatorServices14ZoneDescriptorV2idSSvM', '_$s18ReplicatorServices14ZoneDescriptorV2idSSvg', 

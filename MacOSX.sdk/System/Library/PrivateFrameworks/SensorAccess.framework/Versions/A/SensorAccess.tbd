@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SensorAccess.framework/Versions/A/SensorAccess'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12SensorAccess0aB5ErrorO03_nsC6DomainSSvgZ', '_$s12SensorAccess0aB5ErrorO03_nsC6DomainSSvpZMV', 
                        '_$s12SensorAccess0aB5ErrorO10Foundation021_ObjectiveCBridgeableC0AAMc', 
                        '_$s12SensorAccess0aB5ErrorO10Foundation15_BridgedNSErrorAAMc', 

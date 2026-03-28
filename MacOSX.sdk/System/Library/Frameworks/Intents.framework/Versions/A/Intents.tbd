@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Intents.framework/Versions/A/Intents'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CNContactRelationForPBContactHandle, _CNLabeledValueForPBContactHandle, 
                        _INAccountTypeGetBackingType, _INAccountTypeGetFacadeType, 
                        _INAccountTypeGetLocalizedName, _INAccountTypeGetName, _INAccountTypeHasBackingType, 
@@ -1991,7 +1989,7 @@ exports:
                        _INVocabularyGenerationDiff, _INVocabularyGenerationDocument, 
                        _INVocabularyItem, _INVocabularyStoreManager, _INVocabularyValidator ]
     objc-ivars:      [ INInteraction._intent, INInteraction._intentResponse ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _INCompressFileIntentIdentifier, _INCompressFileIntentResponseCodeGetName, 
                        _INCopyFileIntentIdentifier, _INCopyFileIntentResponseCodeGetName, 
                        _INCreateFileIntentIdentifier, _INCreateFileIntentResponseCodeGetName, 
@@ -2047,7 +2045,7 @@ exports:
                        INOpenFileIntentResponse, INSearchForFilesIntent, INSearchForFilesIntentResponse, 
                        INShareDestination, INShareFileIntent, INShareFileIntentResponse, 
                        INUncompressFileIntent, INUncompressFileIntentResponse ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _INConfigureHomeIntentIdentifier, _INControlHomeIntentIdentifier, 
                        _INQueryHomeIntentIdentifier, _INThisProcessIsSystemProcess, 
                        _INUpcomingMediaManagerDefaultsDomain ]

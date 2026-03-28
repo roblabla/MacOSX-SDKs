@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/People.framework/Versions/A/People'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation11MeasurementV6PeopleSo14NSUnitDurationCRszrlE12timeIntervalSdvg', 
                        '_$s10Foundation11MeasurementV6PeopleSo14NSUnitDurationCRszrlE12timeIntervalSdvpMV', 
                        '_$s10Foundation11MeasurementV6PeopleSo14NSUnitDurationCRszrlE20dispatchTimeInterval8Dispatch0igH0Ovg', 
@@ -1126,18 +1124,21 @@ exports:
                        '_$s6People17AppBundleResolverC05fetchB4Info8bundleIdAA0cbF0VSS_tYaFTj', 
                        '_$s6People17AppBundleResolverC05fetchB4Info8bundleIdAA0cbF0VSS_tYaFTjTu', 
                        '_$s6People17AppBundleResolverC05fetchB4Info8bundleIdAA0cbF0VSS_tYaFTq', 
+                       '_$s6People17AppBundleResolverC16mediaTaskFactoryACSo08AMSMediaF0CSo0hF4TypeV_S2SSo14AMSBagProtocol_ptc_tcfC', 
+                       '_$s6People17AppBundleResolverC16mediaTaskFactoryACSo08AMSMediaF0CSo0hF4TypeV_S2SSo14AMSBagProtocol_ptc_tcfCTj', 
+                       '_$s6People17AppBundleResolverC16mediaTaskFactoryACSo08AMSMediaF0CSo0hF4TypeV_S2SSo14AMSBagProtocol_ptc_tcfCTq', 
+                       '_$s6People17AppBundleResolverC16mediaTaskFactoryACSo08AMSMediaF0CSo0hF4TypeV_S2SSo14AMSBagProtocol_ptc_tcfc', 
                        '_$s6People17AppBundleResolverC16resolveThumbnaily10Foundation4DataVSgSSSg_AA14FirstPartyAppsOtYaFZ', 
                        '_$s6People17AppBundleResolverC16resolveThumbnaily10Foundation4DataVSgSSSg_AA14FirstPartyAppsOtYaFZTu', 
                        '_$s6People17AppBundleResolverC18firstPartyFallbackyAA0cB4InfoVSSFTj', 
                        '_$s6People17AppBundleResolverC18firstPartyFallbackyAA0cB4InfoVSSFTq', 
                        '_$s6People17AppBundleResolverC6sharedACvgZ', '_$s6People17AppBundleResolverC6sharedACvpZMV', 
                        '_$s6People17AppBundleResolverCAA0cD0AAMc', '_$s6People17AppBundleResolverCAA0cD0AAWP', 
-                       '_$s6People17AppBundleResolverCACycfC', '_$s6People17AppBundleResolverCMa', 
-                       '_$s6People17AppBundleResolverCMm', '_$s6People17AppBundleResolverCMn', 
-                       '_$s6People17AppBundleResolverCMo', '_$s6People17AppBundleResolverCMu', 
-                       '_$s6People17AppBundleResolverCN', '_$s6People17AppBundleResolverCfD', 
-                       '_$s6People17AppBundleResolverCfd', '_$s6People17ApplicationRecordMp', 
-                       '_$s6People17ApplicationRecordP16bundleIdentifierSSvgTj', 
+                       '_$s6People17AppBundleResolverCMa', '_$s6People17AppBundleResolverCMm', 
+                       '_$s6People17AppBundleResolverCMn', '_$s6People17AppBundleResolverCMo', 
+                       '_$s6People17AppBundleResolverCMu', '_$s6People17AppBundleResolverCN', 
+                       '_$s6People17AppBundleResolverCfD', '_$s6People17AppBundleResolverCfd', 
+                       '_$s6People17ApplicationRecordMp', '_$s6People17ApplicationRecordP16bundleIdentifierSSvgTj', 
                        '_$s6People17ApplicationRecordP16bundleIdentifierSSvgTq', 
                        '_$s6People17ApplicationRecordTL', '_$s6People17BiomeStreamReaderC10statusType06readerC0ACyxGAA06StatusF0O_So020BMTimeBasedPublisherC0_pSgtcfC', 
                        '_$s6People17BiomeStreamReaderC10statusType06readerC0ACyxGAA06StatusF0O_So020BMTimeBasedPublisherC0_pSgtcfCTj', 

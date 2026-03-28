@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/InternetAccounts.framework/Versions/A/InternetAccounts'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AOSAccountsFramework, _AOSShimAccountCopyProperty, _AOSShimAccountRefreshLoggedIn, 
                        _AOSShimCopyAccountIDFromMailAlias, _AOSShimCopyAccountType, 
                        _AOSShimCopyLoggedInAccount, _AOSShimGetStringConst, _AOSShimServiceCopyProperty, 

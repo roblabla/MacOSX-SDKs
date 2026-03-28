@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AMPDevices.framework/Versions/A/AMPDevices'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AMPDeviceAppsCategoryKey, _AMPDeviceAskUserAlertStyleKey, 
                        _AMPDeviceAskUserCancelButtonTitleKey, _AMPDeviceAskUserCheckboxTitleKey, 
                        _AMPDeviceAskUserCheckboxValueKey, _AMPDeviceAskUserExplanationKey, 

@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleVirtualPlatform.framework/Versions/A/AppleVirtualPlatform'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AppleVirtualPlatformGuestCopyStrongIdentityData, _AppleVirtualPlatformGuestDeleteStrongIdentityDataCache, 
                        _AppleVirtualPlatformGuestHasHostKey, _AppleVirtualPlatformHostKeyDataCopyUDID, 
                        _AppleVirtualPlatformHostKeyDataCreate, _AppleVirtualPlatformHostKeyDataIsValid, 

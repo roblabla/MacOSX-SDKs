@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DoNotDisturb.framework/Versions/A/DoNotDisturb'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AXTapToSpeakTime, ActionPredictionHeuristics, ActivityDataProvider, 
                        AppIntents, AppPredictionClient, AppPredictionInternal, AppPredictionInternalTests, 
                        BTLEServer, BulletinBoard, BulletinDistributorCompanion, BulletinDistributorCompanionTests, 
@@ -36,8 +34,7 @@ allowable-clients:
                        dmd, dndctl, dndtool, donotdisturbd, emberctl, imagent, itunesstored, 
                        mdmd, ospredictiond, usernoted, usernotificationsd, vot ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DNDCompatibilityVersionCurrent, _DNDCompatibilityVersionMin, 
                        _DNDCompatibilityVersionSilenceListsMin, _DNDCompatibilityVersionStringify, 
                        _DNDCompatibilityVersionToString, _DNDDayForWeekdays, _DNDDefaultModeIdentifier, 

@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsInjection.framework/Versions/A/PreviewsInjection'
-current-version: 23.20.6
+current-version: 23.40.29
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12HostModifier17PreviewsInjection15HostingParadigmPTl', 
                        '_$s12HostedOutput17PreviewsInjection15SceneEntryPointPTl', 
                        '_$s12StaticOutput17PreviewsInjection10EntryPointPTl', '_$s12UpdateInputs17PreviewsInjection15SceneEntryPointPTl', 

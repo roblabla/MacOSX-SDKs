@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PackageKit.framework/Versions/A/PackageKit'
 current-version: 434
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$sSo6PKTrieCMa', _ChecksumContextForType, _ChecksumDigestForType, 
                        _ChecksumUpdateForType, _PKArchiveFolderFileType, _PKArchiveOpenOptionValidatedDigest, 
                        _PKArchiveSignatureTypeCMS, _PKArchiveSignatureTypeCodeSign, 
@@ -76,6 +76,7 @@ exports:
                        _PKMessageResultKey, _PKMessageSecondarySignatureKey, _PKMessageSecondaryValueKey, 
                        _PKMessageTernarySignatureKey, _PKMessageTernaryValueKey, 
                        _PKMessageVersionKey, _PKMutablePackageOptionAllowExoticPayloadEncodings, 
+                       _PKMutablePackageOptionCompressionHint, _PKMutablePackageOptionDisablePayloadCompression, 
                        _PKMutablePackageOptionForcedPayloadEncodingCompatibilityVersion, 
                        _PKNetEnabledProductInfoFilename, _PKPackageCheckFileAttributeKey, 
                        _PKPackageIdentifierKey, _PKPackageInfoAllowCustomInstallLocation, 
@@ -99,7 +100,8 @@ exports:
                        _PKPayloadCopierBOMCopierFatalErrorHandler, _PKPayloadCopierBOMCopierFatalFileErrorHandler, 
                        _PKPayloadCopierBOMCopierFileConflictErrorHandler, _PKPayloadCopierBOMCopierFileErrorHandler, 
                        _PKPayloadNameLargeAndSegmented, _PKPayloadNameRegular, _PKProductArchiveType, 
-                       _PKProductArchiverOptionAllowExoticPayloadEncodings, _PKProductArchiverOptionForcedPayloadEncodingCompatibilityVersion, 
+                       _PKProductArchiverOptionAllowExoticPayloadEncodings, _PKProductArchiverOptionCompressionHint, 
+                       _PKProductArchiverOptionDisablePayloadCompression, _PKProductArchiverOptionForcedPayloadEncodingCompatibilityVersion, 
                        _PKProductErrorDomain, _PKProductNetEnabledType, _PKProductSecureNetEnabledType, 
                        _PKReceiptAdditionalInfo, _PKReceiptClearCacheNotification, 
                        _PKReceiptDefaultReceiptsPath, _PKReceiptInstallDate, _PKReceiptInstallPrefixPath, 

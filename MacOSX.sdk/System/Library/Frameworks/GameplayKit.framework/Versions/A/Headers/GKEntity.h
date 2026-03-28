@@ -63,21 +63,13 @@ GK_BASE_AVAILABILITY @interface GKEntity : NSObject <NSCopying, NSSecureCoding>
  * Removes the component of the indicates class from this entity
  * @param componentClass the class of the component you want to remove
  */
-#if (defined(SWIFT_SDK_OVERLAY_GAMEPLAYKIT_EPOCH) && SWIFT_SDK_OVERLAY_GAMEPLAYKIT_EPOCH >= 1)
 - (void)removeComponentForClass:(Class)componentClass NS_REFINED_FOR_SWIFT;
-#else
-- (void)removeComponentForClass:(Class)componentClass;
-#endif
 
 /**
  * Gets the component of the indicated class.  Returns nil if entity does not have this component
  * @param componentClass the class of the component you want to get
  */
-#if (defined(SWIFT_SDK_OVERLAY_GAMEPLAYKIT_EPOCH) && SWIFT_SDK_OVERLAY_GAMEPLAYKIT_EPOCH >= 1)
 - (nullable GKComponent *)componentForClass:(Class)componentClass NS_REFINED_FOR_SWIFT;
-#else
- - (nullable GKComponent *)componentForClass:(Class)componentClass NS_SWIFT_UNAVAILABLE("Exposed in Swift as componentForClass<ComponentType: GKComponent>(componentClass: ComponentType.Type) -> ComponentType?");
-#endif
 
 @end
 

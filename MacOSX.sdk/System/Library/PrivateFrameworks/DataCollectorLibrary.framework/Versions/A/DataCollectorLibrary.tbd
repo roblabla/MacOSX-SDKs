@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DataCollectorLibrary.framework/Versions/A/DataCollectorLibrary'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A10EventErrorV13decodeMessage7decoderyxz_tK21InternalSwiftProtobuf7DecoderRzlF', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A10EventErrorV13unknownFields21InternalSwiftProtobuf14UnknownStorageVvM', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A10EventErrorV13unknownFields21InternalSwiftProtobuf14UnknownStorageVvg', 
@@ -90,6 +88,10 @@ exports:
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A13EventMetadataV11timestampMss5Int64VvpMV', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A13EventMetadataV11timestampMss5Int64Vvs', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A13EventMetadataV13decodeMessage7decoderyxz_tK21InternalSwiftProtobuf7DecoderRzlF', 
+                       '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A13EventMetadataV13filterHeadersSDyS2SGvM', 
+                       '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A13EventMetadataV13filterHeadersSDyS2SGvg', 
+                       '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A13EventMetadataV13filterHeadersSDyS2SGvpMV', 
+                       '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A13EventMetadataV13filterHeadersSDyS2SGvs', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A13EventMetadataV13legacyHeadersSDyS2SGvM', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A13EventMetadataV13legacyHeadersSDyS2SGvg', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A13EventMetadataV13legacyHeadersSDyS2SGvpMV', 
@@ -140,12 +142,15 @@ exports:
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A14EventErrorCodeO16eventUnsupportedyA2CmFWC', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A14EventErrorCodeO17_protobuf_nameMap21InternalSwiftProtobuf05_NameO0VvgZ', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A14EventErrorCodeO17eventBodyTooLargeyA2CmFWC', 
+                       '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A14EventErrorCodeO17eventTopicMissingyA2CmFWC', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A14EventErrorCodeO18eventSchemaUnknownyA2CmFWC', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A14EventErrorCodeO19eventHeadersInvalidyA2CmFWC', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A14EventErrorCodeO19eventProducerFailedyA2CmFWC', 
+                       '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A14EventErrorCodeO20eventRedactionFailedyA2CmFWC', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A14EventErrorCodeO21InternalSwiftProtobuf19_ProtoNameProvidingAAMc', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A14EventErrorCodeO21InternalSwiftProtobuf4EnumAAMc', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A14EventErrorCodeO8allCasesSayACGvgZ', 
+                       '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A14EventErrorCodeO8allCasesSayACGvpZMV', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A14EventErrorCodeO8rawValueACSgSi_tcfC', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A14EventErrorCodeO8rawValueSivg', 
                        '_$s20DataCollectorLibrary030Com_Apple_Aiml_Dpg_Service_V1_A14EventErrorCodeO8rawValueSivpMV', 
@@ -201,7 +206,9 @@ exports:
                        '_$s20DataCollectorLibrary41Com_Apple_Aiml_Dpg_Service_V1_PayloadTypeO18payloadProtoRecordyA2CmFWC', 
                        '_$s20DataCollectorLibrary41Com_Apple_Aiml_Dpg_Service_V1_PayloadTypeO21InternalSwiftProtobuf19_ProtoNameProvidingAAMc', 
                        '_$s20DataCollectorLibrary41Com_Apple_Aiml_Dpg_Service_V1_PayloadTypeO21InternalSwiftProtobuf4EnumAAMc', 
+                       '_$s20DataCollectorLibrary41Com_Apple_Aiml_Dpg_Service_V1_PayloadTypeO21payloadProtoEnvelopedyA2CmFWC', 
                        '_$s20DataCollectorLibrary41Com_Apple_Aiml_Dpg_Service_V1_PayloadTypeO8allCasesSayACGvgZ', 
+                       '_$s20DataCollectorLibrary41Com_Apple_Aiml_Dpg_Service_V1_PayloadTypeO8allCasesSayACGvpZMV', 
                        '_$s20DataCollectorLibrary41Com_Apple_Aiml_Dpg_Service_V1_PayloadTypeO8rawValueACSgSi_tcfC', 
                        '_$s20DataCollectorLibrary41Com_Apple_Aiml_Dpg_Service_V1_PayloadTypeO8rawValueSivg', 
                        '_$s20DataCollectorLibrary41Com_Apple_Aiml_Dpg_Service_V1_PayloadTypeO8rawValueSivpMV', 
@@ -220,6 +227,7 @@ exports:
                        '_$s20DataCollectorLibrary43Com_Apple_Aiml_Dpg_Service_V1_PublishStatusO21InternalSwiftProtobuf4EnumAAMc', 
                        '_$s20DataCollectorLibrary43Com_Apple_Aiml_Dpg_Service_V1_PublishStatusO2okyA2CmFWC', 
                        '_$s20DataCollectorLibrary43Com_Apple_Aiml_Dpg_Service_V1_PublishStatusO8allCasesSayACGvgZ', 
+                       '_$s20DataCollectorLibrary43Com_Apple_Aiml_Dpg_Service_V1_PublishStatusO8allCasesSayACGvpZMV', 
                        '_$s20DataCollectorLibrary43Com_Apple_Aiml_Dpg_Service_V1_PublishStatusO8rawValueACSgSi_tcfC', 
                        '_$s20DataCollectorLibrary43Com_Apple_Aiml_Dpg_Service_V1_PublishStatusO8rawValueSivg', 
                        '_$s20DataCollectorLibrary43Com_Apple_Aiml_Dpg_Service_V1_PublishStatusO8rawValueSivpMV', 

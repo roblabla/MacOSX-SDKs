@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CloudSharingUI.framework/Versions/A/CloudSharingUI'
-current-version: 215.1.11
+current-version: 215.4.5
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14CloudSharingUI013CreateOrCopyiA10LinkHeaderV05SwiftC04ViewAAMc', 
                        '_$s14CloudSharingUI013CreateOrCopyiA10LinkHeaderV4bodyQrvg', 
                        '_$s14CloudSharingUI013CreateOrCopyiA10LinkHeaderV4bodyQrvpMV', 

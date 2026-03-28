@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftXPC.dylib'
-current-version: 105.0.14
+current-version: 128.100.15
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftXPC.dylib', '$ld$install_name$os10.11$@rpath/libswiftXPC.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftXPC.dylib', '$ld$install_name$os10.13$@rpath/libswiftXPC.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftXPC.dylib', '$ld$install_name$os10.9$@rpath/libswiftXPC.dylib', 
@@ -134,12 +132,14 @@ exports:
                        '_$s3XPC10xpc_retainySo03OS_B7_object_pSoAC_pF', '_$s3XPC11XPCEndpointV16debugDescriptionSSvg', 
                        '_$s3XPC11XPCEndpointV16debugDescriptionSSvpMV', '_$s3XPC11XPCEndpointV2eeoiySbAC_ACtFZ', 
                        '_$s3XPC11XPCEndpointV4fromACs7Decoder_p_tKcfC', '_$s3XPC11XPCEndpointV4hash4intoys6HasherVz_tF', 
-                       '_$s3XPC11XPCEndpointV6encode2toys7Encoder_p_tKF', '_$s3XPC11XPCEndpointV9hashValueSivg', 
-                       '_$s3XPC11XPCEndpointV9hashValueSivpMV', '_$s3XPC11XPCEndpointVMa', 
-                       '_$s3XPC11XPCEndpointVMn', '_$s3XPC11XPCEndpointVN', '_$s3XPC11XPCEndpointVSEAAMc', 
-                       '_$s3XPC11XPCEndpointVSHAAMc', '_$s3XPC11XPCEndpointVSQAAMc', 
-                       '_$s3XPC11XPCEndpointVSeAAMc', '_$s3XPC11XPCEndpointVs28CustomDebugStringConvertibleAAMc', 
-                       '_$s3XPC11XPCListenerC11targetQueue7options22incomingSessionHandlerACSo17OS_dispatch_queueCSg_AC21InitializationOptionsVAC08IncomingG7RequestC8DecisionVAMctcfC', 
+                       '_$s3XPC11XPCEndpointV6encode2toys7Encoder_p_tKF', '_$s3XPC11XPCEndpointV9_endpointSo13OS_xpc_object_pvg', 
+                       '_$s3XPC11XPCEndpointV9_endpointSo13OS_xpc_object_pvpMV', 
+                       '_$s3XPC11XPCEndpointV9hashValueSivg', '_$s3XPC11XPCEndpointV9hashValueSivpMV', 
+                       '_$s3XPC11XPCEndpointVMa', '_$s3XPC11XPCEndpointVMn', '_$s3XPC11XPCEndpointVN', 
+                       '_$s3XPC11XPCEndpointVSEAAMc', '_$s3XPC11XPCEndpointVSHAAMc', 
+                       '_$s3XPC11XPCEndpointVSQAAMc', '_$s3XPC11XPCEndpointVSeAAMc', 
+                       '_$s3XPC11XPCEndpointVs28CustomDebugStringConvertibleAAMc', 
+                       '_$s3XPC11XPCEndpointVyACSo13OS_xpc_object_pcfC', '_$s3XPC11XPCListenerC11targetQueue7options22incomingSessionHandlerACSo17OS_dispatch_queueCSg_AC21InitializationOptionsVAC08IncomingG7RequestC8DecisionVAMctcfC', 
                        '_$s3XPC11XPCListenerC11targetQueue7options22incomingSessionHandlerACSo17OS_dispatch_queueCSg_AC21InitializationOptionsVAC08IncomingG7RequestC8DecisionVAMctcfCTj', 
                        '_$s3XPC11XPCListenerC11targetQueue7options22incomingSessionHandlerACSo17OS_dispatch_queueCSg_AC21InitializationOptionsVAC08IncomingG7RequestC8DecisionVAMctcfCTq', 
                        '_$s3XPC11XPCListenerC11targetQueue7options22incomingSessionHandlerACSo17OS_dispatch_queueCSg_AC21InitializationOptionsVAC08IncomingG7RequestC8DecisionVAMctcfc', 
@@ -218,7 +218,6 @@ exports:
                        '_$s3XPC13XPCDictionaryV4keysSaySSGvg', '_$s3XPC13XPCDictionaryV4keysSaySSGvpMV', 
                        '_$s3XPC13XPCDictionaryV5countSivg', '_$s3XPC13XPCDictionaryV5countSivpMV', 
                        '_$s3XPC13XPCDictionaryV5replyyyACF', '_$s3XPC13XPCDictionaryV6decode2as6forKey12withUserInfoxxm_SSSDys06CodinghiF0VypGtKSeRzlF', 
-                       '_$s3XPC13XPCDictionaryV6decode2as6forKey12withUserInfoxxm_SSSDys06CodinghiF0VypGtKSeRzlFfA_', 
                        '_$s3XPC13XPCDictionaryV6decode2as6forKeyxxm_SStKSeRzlF', 
                        '_$s3XPC13XPCDictionaryV6encode_6forKey12withUserInfoyx_SSSDys06CodingghE0VypGtKSERzlF', 
                        '_$s3XPC13XPCDictionaryV6encode_6forKeyyx_SStKSERzlF', '_$s3XPC13XPCDictionaryV6valuesSaySo13OS_xpc_object_pGvg', 
@@ -226,10 +225,10 @@ exports:
                        '_$s3XPC13XPCDictionaryV7forEachyyySS3key_So13OS_xpc_object_p5valuet_tKXEKF', 
                        '_$s3XPC13XPCDictionaryV7forEachyyySS_So13OS_xpc_object_ptKXEKF', 
                        '_$s3XPC13XPCDictionaryV7isEmptySbvg', '_$s3XPC13XPCDictionaryV7isEmptySbvpMV', 
-                       '_$s3XPC13XPCDictionaryV9hashValueSivg', '_$s3XPC13XPCDictionaryV9hashValueSivpMV', 
-                       '_$s3XPC13XPCDictionaryV9sendReplyyyF', '_$s3XPC13XPCDictionaryVACycfC', 
-                       '_$s3XPC13XPCDictionaryVMa', '_$s3XPC13XPCDictionaryVMn', 
-                       '_$s3XPC13XPCDictionaryVN', '_$s3XPC13XPCDictionaryVSHAAMc', 
+                       '_$s3XPC13XPCDictionaryV8contains3keySbSS_tF', '_$s3XPC13XPCDictionaryV9hashValueSivg', 
+                       '_$s3XPC13XPCDictionaryV9hashValueSivpMV', '_$s3XPC13XPCDictionaryV9sendReplyyyF', 
+                       '_$s3XPC13XPCDictionaryVACycfC', '_$s3XPC13XPCDictionaryVMa', 
+                       '_$s3XPC13XPCDictionaryVMn', '_$s3XPC13XPCDictionaryVN', '_$s3XPC13XPCDictionaryVSHAAMc', 
                        '_$s3XPC13XPCDictionaryVSQAAMc', '_$s3XPC13XPCDictionaryV_2as7defaultSbSS_SbmSbyXKtcig', 
                        '_$s3XPC13XPCDictionaryV_2as7defaultxSS_xmxyXKtcSBRzluig', 
                        '_$s3XPC13XPCDictionaryV_2asAA11XPCEndpointVSgSS_AFmtcig', 
@@ -308,6 +307,11 @@ exports:
                        '_$s3XPC24testEncodeDecodePipeline_8userInfoxx_SDys010CodingUserG3KeyVypGtKSeRzSERzlF', 
                        '_$s3XPC24xpc_listener_reject_peeryySo03OS_B7_object_p_SPys4Int8VGtF', 
                        '_$s3XPC24xpc_session_send_messageySo03OS_B7_object_pSgSoAC_p_SoAC_ptF', 
+                       '_$s3XPC25TopLevelGraphEncodingNodeCMa', '_$s3XPC25TopLevelGraphEncodingNodeCMm', 
+                       '_$s3XPC25TopLevelGraphEncodingNodeCMn', '_$s3XPC25TopLevelGraphEncodingNodeCMo', 
+                       '_$s3XPC25TopLevelGraphEncodingNodeCMu', '_$s3XPC25TopLevelGraphEncodingNodeCN', 
+                       '_$s3XPC25TopLevelGraphEncodingNodeCfD', '_$s3XPC25TopLevelGraphEncodingNodeCfd', 
+                       '_$s3XPC25encodeToEncodingContainer_8userInfoAA013TopLevelGraphD4NodeCx_SDys010CodingUserG3KeyVypGtKSERzlF', 
                        '_$s3XPC26xpc_session_create_flags_tV10privilegedACvgZ', '_$s3XPC26xpc_session_create_flags_tV10privilegedACvpZMV', 
                        '_$s3XPC26xpc_session_create_flags_tV4noneACvgZ', '_$s3XPC26xpc_session_create_flags_tV4noneACvpZMV', 
                        '_$s3XPC26xpc_session_create_flags_tV8inactiveACvgZ', '_$s3XPC26xpc_session_create_flags_tV8inactiveACvpZMV', 
@@ -318,9 +322,9 @@ exports:
                        '_$s3XPC26xpc_session_create_flags_tVN', '_$s3XPC26xpc_session_create_flags_tVSQAAMc', 
                        '_$s3XPC26xpc_session_create_flags_tVSYAAMc', '_$s3XPC26xpc_session_create_flags_tVs10SetAlgebraAAMc', 
                        '_$s3XPC26xpc_session_create_flags_tVs25ExpressibleByArrayLiteralAAMc', 
-                       '_$s3XPC26xpc_session_create_flags_tVs9OptionSetAAMc', '_$s3XPC27xpc_listener_create_flags_tVMa', 
-                       '_$s3XPC27xpc_listener_create_flags_tVMn', '_$s3XPC27xpc_listener_create_flags_tVN', 
-                       '_$s3XPC28xpc_session_copy_descriptionySpys4Int8VGSgSo03OS_B7_object_pF', 
+                       '_$s3XPC26xpc_session_create_flags_tVs9OptionSetAAMc', '_$s3XPC27decodeFromEncodingContainer_4from8userInfoxxm_AA013TopLevelGraphD4NodeCSDys010CodingUserH3KeyVypGtKSeRzlF', 
+                       '_$s3XPC27xpc_listener_create_flags_tVMa', '_$s3XPC27xpc_listener_create_flags_tVMn', 
+                       '_$s3XPC27xpc_listener_create_flags_tVN', '_$s3XPC28xpc_session_copy_descriptionySpys4Int8VGSgSo03OS_B7_object_pF', 
                        '_$s3XPC28xpc_session_set_target_queueyySo03OS_B7_object_p_So0g10_dispatch_F0CSgtF', 
                        '_$s3XPC29XPCCodableObjectRepresentableMp', '_$s3XPC29XPCCodableObjectRepresentableP010xpcCodableC0AA0bC0VvgTj', 
                        '_$s3XPC29XPCCodableObjectRepresentableP010xpcCodableC0AA0bC0VvgTq', 

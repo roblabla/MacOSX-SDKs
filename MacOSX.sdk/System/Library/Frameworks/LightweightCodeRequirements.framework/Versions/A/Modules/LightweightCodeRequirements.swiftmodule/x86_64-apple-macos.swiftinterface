@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-macos26.2 -target-variant x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 20 -module-name LightweightCodeRequirements
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-macos26.4 -target-variant x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 20.100.2 -module-name LightweightCodeRequirements
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Foundation
 import Security
 import Swift
@@ -67,12 +67,10 @@ extension XPC.XPCPeerRequirement {
 }
 @available(macOS 14.4, macCatalyst 17.4, *)
 extension Foundation.Process {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var launchRequirement: LightweightCodeRequirements.LaunchCodeRequirement? {
     get
     set(newRequirement)
   }
-  #endif
 }
 @available(macOS 14.4, iOS 17.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
 public protocol ProcessConstraint : Swift.Decodable, Swift.Encodable, Swift.Sendable {
@@ -82,9 +80,7 @@ public protocol ProcessConstraint : Swift.Decodable, Swift.Encodable, Swift.Send
   public static func buildBlock(_ components: [any LightweightCodeRequirements.ProcessConstraint]...) -> [any LightweightCodeRequirements.ProcessConstraint]
   public static func buildExpression(_ expression: any LightweightCodeRequirements.ProcessConstraint) -> [any LightweightCodeRequirements.ProcessConstraint]
   public static func buildExpression(_ expression: [any LightweightCodeRequirements.ProcessConstraint]) -> [any LightweightCodeRequirements.ProcessConstraint]
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func buildOptional(_ component: [any LightweightCodeRequirements.ProcessConstraint]?) -> [any LightweightCodeRequirements.ProcessConstraint]
-  #endif
   public static func buildEither(first component: [any LightweightCodeRequirements.ProcessConstraint]) -> [any LightweightCodeRequirements.ProcessConstraint]
   public static func buildEither(second component: [any LightweightCodeRequirements.ProcessConstraint]) -> [any LightweightCodeRequirements.ProcessConstraint]
 }
@@ -96,9 +92,7 @@ public protocol LaunchConstraint : Swift.Decodable, Swift.Encodable, Swift.Senda
   public static func buildBlock(_ components: [any LightweightCodeRequirements.LaunchConstraint]...) -> [any LightweightCodeRequirements.LaunchConstraint]
   public static func buildExpression(_ expression: any LightweightCodeRequirements.LaunchConstraint) -> [any LightweightCodeRequirements.LaunchConstraint]
   public static func buildExpression(_ expression: [any LightweightCodeRequirements.LaunchConstraint]) -> [any LightweightCodeRequirements.LaunchConstraint]
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func buildOptional(_ component: [any LightweightCodeRequirements.LaunchConstraint]?) -> [any LightweightCodeRequirements.LaunchConstraint]
-  #endif
   public static func buildEither(first component: [any LightweightCodeRequirements.LaunchConstraint]) -> [any LightweightCodeRequirements.LaunchConstraint]
   public static func buildEither(second component: [any LightweightCodeRequirements.LaunchConstraint]) -> [any LightweightCodeRequirements.LaunchConstraint]
 }
@@ -110,9 +104,7 @@ public protocol OnDiskConstraint : Swift.Decodable, Swift.Encodable, Swift.Senda
   public static func buildBlock(_ components: [any LightweightCodeRequirements.OnDiskConstraint]...) -> [any LightweightCodeRequirements.OnDiskConstraint]
   public static func buildExpression(_ expression: any LightweightCodeRequirements.OnDiskConstraint) -> [any LightweightCodeRequirements.OnDiskConstraint]
   public static func buildExpression(_ expression: [any LightweightCodeRequirements.OnDiskConstraint]) -> [any LightweightCodeRequirements.OnDiskConstraint]
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func buildOptional(_ component: [any LightweightCodeRequirements.OnDiskConstraint]?) -> [any LightweightCodeRequirements.OnDiskConstraint]
-  #endif
   public static func buildEither(first component: [any LightweightCodeRequirements.OnDiskConstraint]) -> [any LightweightCodeRequirements.OnDiskConstraint]
   public static func buildEither(second component: [any LightweightCodeRequirements.OnDiskConstraint]) -> [any LightweightCodeRequirements.OnDiskConstraint]
 }
@@ -194,9 +186,7 @@ public class EntitlementsQuery : @unchecked Swift.Sendable, LightweightCodeRequi
     case integer
     case string
     case boolean
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int64)
-    #endif
     public var rawValue: Swift.Int64 {
       get
     }
@@ -255,9 +245,7 @@ public struct PlatformType : LightweightCodeRequirements.ProcessConstraint, Ligh
   public typealias DataType = LightweightCodeRequirements.PlatformType.Value
   public struct Value {
     public let rawValue: Swift.Int64
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int64)
-    #endif
     public static let macOS: LightweightCodeRequirements.PlatformType.Value
     public static let iOS: LightweightCodeRequirements.PlatformType.Value
     public static let tvOS: LightweightCodeRequirements.PlatformType.Value
@@ -311,9 +299,7 @@ public struct ValidationCategory : LightweightCodeRequirements.ProcessConstraint
   public typealias DataType = LightweightCodeRequirements.ValidationCategory.Value
   public struct Value {
     public let rawValue: Swift.Int64
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int64)
-    #endif
     public static let platform: LightweightCodeRequirements.ValidationCategory.Value
     public static let testflight: LightweightCodeRequirements.ValidationCategory.Value
     public static let development: LightweightCodeRequirements.ValidationCategory.Value

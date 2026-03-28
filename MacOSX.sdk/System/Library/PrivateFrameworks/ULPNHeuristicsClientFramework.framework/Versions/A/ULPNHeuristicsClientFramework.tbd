@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ arm64-macos, arm64e-macos ]
+targets:         [ arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ULPNHeuristicsClientFramework.framework/Versions/A/ULPNHeuristicsClientFramework'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ '_$s29ULPNHeuristicsClientFramework0A0C15reportTelemetry_6eventsyAA13InterfaceTypeO_AA0E4DataOtFTj', 
                        '_$s29ULPNHeuristicsClientFramework0A0C15reportTelemetry_6eventsyAA13InterfaceTypeO_AA0E4DataOtFTq', 
                        '_$s29ULPNHeuristicsClientFramework0A0C16getOffloadAdviceyAA0eF6ResultVAA13InterfaceTypeOFTj', 

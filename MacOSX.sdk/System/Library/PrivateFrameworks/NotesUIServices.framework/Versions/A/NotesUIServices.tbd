@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NotesUIServices.framework/Versions/A/NotesUIServices'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ Calculator, Grey Parrot, MobileNotes, MobileNotesDebug, MobileNotesDuoTests, 
                        MobileNotesStressTests, MobileNotesUnitTests, Notes, NotesAnalytics, 
                        NotesAnalyticsUnitTests, NotesEditor, NotesInternalSettings, 
@@ -15,7 +15,7 @@ allowable-clients:
                        com.apple.Notes.SharingExtension, iOS NotesDigitalSeparation UnitTests, 
                        iOS Test Host, notestool, notestoolUnitTests ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15NotesUIServices0A13IndexModelingMp', '_$s15NotesUIServices0A13IndexModelingP11notesFolderSSSgvgTj', 
                        '_$s15NotesUIServices0A13IndexModelingP11notesFolderSSSgvgTq', 
                        '_$s15NotesUIServices0A13IndexModelingP13attachmentURL10Foundation0F0VSgvgTj', 

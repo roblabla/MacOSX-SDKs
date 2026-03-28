@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ParsecModel.framework/Versions/A/ParsecModel'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s11ParsecModel12PMFlushEventMp', '_$s11ParsecModel12PMFlushEventP4types5Int32VvgTj', 
                        '_$s11ParsecModel12PMFlushEventP4types5Int32VvgTq', '_$s11ParsecModel12PMFlushEventPAA7PMEventTb', 
                        '_$s11ParsecModel12PMFlushEventTL', '_$s11ParsecModel12PMUsageEventMp', 
@@ -255,10 +253,10 @@ exports:
                        '_$s11ParsecModel22PARSpotlightPropensityCMa', '_$s11ParsecModel22PARSpotlightPropensityCMn', 
                        '_$s11ParsecModel22PARSpotlightPropensityCMo', '_$s11ParsecModel22PARSpotlightPropensityCN', 
                        '_$s11ParsecModel22PARSpotlightPropensityCfD', '_$s11ParsecModel22PARSpotlightPropensityCs12IdentifiableAAMc', 
-                       '_$s11ParsecModel22PARUsageEventMigrationC7trackerySbcSgvMZ', 
-                       '_$s11ParsecModel22PARUsageEventMigrationC7trackerySbcSgvgZ', 
-                       '_$s11ParsecModel22PARUsageEventMigrationC7trackerySbcSgvpZMV', 
-                       '_$s11ParsecModel22PARUsageEventMigrationC7trackerySbcSgvsZ', 
+                       '_$s11ParsecModel22PARUsageEventMigrationC7trackerySbYbcSgvMZ', 
+                       '_$s11ParsecModel22PARUsageEventMigrationC7trackerySbYbcSgvgZ', 
+                       '_$s11ParsecModel22PARUsageEventMigrationC7trackerySbYbcSgvpZMV', 
+                       '_$s11ParsecModel22PARUsageEventMigrationC7trackerySbYbcSgvsZ', 
                        '_$s11ParsecModel22PARUsageEventMigrationCACycfC', '_$s11ParsecModel22PARUsageEventMigrationCACycfc', 
                        '_$s11ParsecModel22PARUsageEventMigrationCMa', '_$s11ParsecModel22PARUsageEventMigrationCMn', 
                        '_$s11ParsecModel22PARUsageEventMigrationCMo', '_$s11ParsecModel22PARUsageEventMigrationCN', 

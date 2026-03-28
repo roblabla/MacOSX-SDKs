@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libbootpolicy.dylib'
-current-version: 289.0.1
+current-version: 289.100.5
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _bootpolicy_clear_nvram, _bootpolicy_consume_kcos_auth_token, 
                        _bootpolicy_create_kcos_auth_token, _bootpolicy_create_kcos_auth_token_ex, 
                        _bootpolicy_create_linked_manifest, _bootpolicy_create_local_policy_ex, 

@@ -463,7 +463,7 @@ AV_INIT_UNAVAILABLE
 /// 
 /// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
+API_AVAILABLE(macos(26), ios(26), tvos(26), watchos(26), visionos(26))
 @interface AVMetricDownloadSummaryEvent : AVMetricEvent
 AV_INIT_UNAVAILABLE
 

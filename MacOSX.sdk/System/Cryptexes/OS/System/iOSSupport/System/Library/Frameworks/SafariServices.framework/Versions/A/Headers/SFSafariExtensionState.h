@@ -10,6 +10,7 @@ NS_SWIFT_SENDABLE
 SF_EXTERN API_AVAILABLE(ios(26.2), visionos(26.2)) API_UNAVAILABLE(tvos, watchos)
 @interface SFSafariExtensionState : NSObject
 
+/// A Boolean value that indicates whether the web extension is enabled.
 @property (nonatomic, readonly, getter=isEnabled) BOOL enabled;
 
 @end

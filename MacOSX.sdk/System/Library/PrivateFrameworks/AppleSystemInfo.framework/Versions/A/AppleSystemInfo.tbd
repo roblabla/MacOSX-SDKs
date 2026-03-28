@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/AppleSystemInfo'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ASI_BusSpeedInHz, _ASI_CPUSpeedInHz, _ASI_CopyBusSpeedDescription, 
                        _ASI_CopyCPUDescription, _ASI_CopyCPUKind, _ASI_CopyComputerModelName, 
                        _ASI_CopyConfigCodeForMarketingName, _ASI_CopyConfigCodeForSerialNumberAndMarketingName, 

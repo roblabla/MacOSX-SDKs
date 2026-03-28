@@ -48,7 +48,7 @@ API_AVAILABLE(macos(10.12.2), ios(13.0))
 /// The color list displayed in the list color picker. Defaults to the standard system color list. Setting a custom color list will disable the additional tints/shades that appear on long-press.
 @property (strong, null_resettable) NSColorList *colorList API_UNAVAILABLE(ios);
 
-/// The localized string labelling this item during user customization. The default value is the localized string of "Color Picker".
+/// The localized string labeling this item during user customization. The default value is the localized string of "Color Picker".
 @property (readwrite, copy, null_resettable) NSString *customizationLabel;
 
 @property (weak, nullable) id target;

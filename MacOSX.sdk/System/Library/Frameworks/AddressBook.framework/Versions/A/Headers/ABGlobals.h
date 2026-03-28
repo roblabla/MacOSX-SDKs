@@ -11,6 +11,10 @@
 
 #import <Foundation/Foundation.h>
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 // ================================================================
 //      Global Table properties
 // ================================================================
@@ -285,6 +289,10 @@ extern NSString * const kABDeletedRecords           AVAILABLE_MAC_OS_X_VERSION_1
     // Returns the localized version of built in properties, labels or keys
     // Returns propertyOrLabel if not found (e.g. if not built in)
 NSString *ABLocalizedPropertyOrLabel(NSString *propertyOrLabel);
+
+#if defined(__cplusplus)
+}
+#endif
 
 #endif // __ABGLOBALS__
 

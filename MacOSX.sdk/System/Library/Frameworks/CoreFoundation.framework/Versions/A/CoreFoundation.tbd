@@ -1,17 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation'
-current-version: 4201
+current-version: 4424.1.255
 compatibility-version: 150
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/usr/lib/libobjc.A.dylib' ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation$300$1$1.0$13.0$_OBJC_CLASS_$_NSMachPort$', 
                        '$ld$previous$/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation$300$1$1.0$13.0$_OBJC_CLASS_$_NSPort$', 
                        '$ld$previous$/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation$300$1$1.0$13.0$_OBJC_METACLASS_$_NSMachPort$', 
@@ -224,22 +224,22 @@ exports:
                        _CFPasteboardApplyFunction, _CFPasteboardAttachSecurityScopeToURL, 
                        _CFPasteboardBeginDragAndDrop, _CFPasteboardBeginGeneration, 
                        _CFPasteboardCopyData, _CFPasteboardCopyFlavorsForItem, _CFPasteboardCopyItemsAndFlavors, 
-                       _CFPasteboardCopyName, _CFPasteboardCreate, _CFPasteboardCreateDataForString, 
-                       _CFPasteboardCreateSecurityScopeDataForURL, _CFPasteboardCreateStringFromData, 
-                       _CFPasteboardCreateUnique, _CFPasteboardCreateUniquePromiseFileURL, 
-                       _CFPasteboardDetectMetadataForTypes, _CFPasteboardDetectPatternsForPatterns, 
-                       _CFPasteboardDetectValuesForPatterns, _CFPasteboardEnableBatching, 
-                       _CFPasteboardEndDragAndDrop, _CFPasteboardEnumeratePasteboardUsingBlock, 
-                       _CFPasteboardFlushEntries, _CFPasteboardGeneratePasteVerificationToken, 
-                       _CFPasteboardGetChangeCount, _CFPasteboardGetDataFlags, _CFPasteboardGetFlavorCount, 
-                       _CFPasteboardGetGenerationCount, _CFPasteboardGetIsExcludedFromHistory, 
-                       _CFPasteboardGetItemAtIndex, _CFPasteboardGetItemCount, _CFPasteboardGetTypeID, 
-                       _CFPasteboardIsDataPromised, _CFPasteboardIsPrivacyDeveloperPreviewEnabled, 
-                       _CFPasteboardMakeGenerationLocalOnly, _CFPasteboardPromiseData, 
-                       _CFPasteboardPromiseDataUsingAsyncBlock, _CFPasteboardPromiseDataUsingBlock, 
-                       _CFPasteboardResolveAllPromisedData, _CFPasteboardResolvePromisedData, 
-                       _CFPasteboardRestrictSandboxExtensionAccess, _CFPasteboardSetData, 
-                       _CFPasteboardSetDataFlags, _CFPasteboardSetExpirationDate, 
+                       _CFPasteboardCopyName, _CFPasteboardCopySourceSigningIdentifier, 
+                       _CFPasteboardCreate, _CFPasteboardCreateDataForString, _CFPasteboardCreateSecurityScopeDataForURL, 
+                       _CFPasteboardCreateStringFromData, _CFPasteboardCreateUnique, 
+                       _CFPasteboardCreateUniquePromiseFileURL, _CFPasteboardDetectMetadataForTypes, 
+                       _CFPasteboardDetectPatternsForPatterns, _CFPasteboardDetectValuesForPatterns, 
+                       _CFPasteboardEnableBatching, _CFPasteboardEndDragAndDrop, 
+                       _CFPasteboardEnumeratePasteboardUsingBlock, _CFPasteboardFlushEntries, 
+                       _CFPasteboardGeneratePasteVerificationToken, _CFPasteboardGetChangeCount, 
+                       _CFPasteboardGetDataFlags, _CFPasteboardGetFlavorCount, _CFPasteboardGetGenerationCount, 
+                       _CFPasteboardGetIsExcludedFromHistory, _CFPasteboardGetItemAtIndex, 
+                       _CFPasteboardGetItemCount, _CFPasteboardGetTypeID, _CFPasteboardIsDataPromised, 
+                       _CFPasteboardIsPrivacyDeveloperPreviewEnabled, _CFPasteboardMakeGenerationLocalOnly, 
+                       _CFPasteboardPromiseData, _CFPasteboardPromiseDataUsingAsyncBlock, 
+                       _CFPasteboardPromiseDataUsingBlock, _CFPasteboardResolveAllPromisedData, 
+                       _CFPasteboardResolvePromisedData, _CFPasteboardRestrictSandboxExtensionAccess, 
+                       _CFPasteboardSetData, _CFPasteboardSetDataFlags, _CFPasteboardSetExpirationDate, 
                        _CFPasteboardSetIsExcludedFromHistory, _CFPasteboardSetPasteFileType, 
                        _CFPasteboardSetPasteLocation, _CFPasteboardSetPasteVerificationToken, 
                        _CFPasteboardSetPasteboardValidationCallbacks, _CFPasteboardSetTelemetry, 
@@ -333,10 +333,9 @@ exports:
                        _CFStringCreateWithFormatAndArguments, _CFStringCreateWithPascalString, 
                        _CFStringCreateWithPascalStringNoCopy, _CFStringCreateWithSubstring, 
                        _CFStringDelete, _CFStringEncodingBytesToUnicode, _CFStringEncodingIsValidCombiningCharacterForLatin1, 
-                       _CFStringEncodingPrecomposeLatinCharacter, _CFStringEncodingRegisterFallbackProcedures, 
-                       _CFStringEncodingUnicodeToBytes, _CFStringFileSystemEncoding, 
-                       _CFStringFind, _CFStringFindAndReplace, _CFStringFindCharacterFromSet, 
-                       _CFStringFindWithOptions, _CFStringFindWithOptionsAndLocale, 
+                       _CFStringEncodingPrecomposeLatinCharacter, _CFStringEncodingUnicodeToBytes, 
+                       _CFStringFileSystemEncoding, _CFStringFind, _CFStringFindAndReplace, 
+                       _CFStringFindCharacterFromSet, _CFStringFindWithOptions, _CFStringFindWithOptionsAndLocale, 
                        _CFStringFold, _CFStringGetBytes, _CFStringGetCString, _CFStringGetCStringPtr, 
                        _CFStringGetCharacterAtIndex, _CFStringGetCharacters, _CFStringGetCharactersPtr, 
                        _CFStringGetDoubleValue, _CFStringGetFastestEncoding, _CFStringGetFileSystemRepresentation, 
@@ -743,7 +742,8 @@ exports:
                        __CFStringCreateWithASCIIBytesNoCopyOrIndirectTagged, __CFStringCreateWithASCIICStringNoCopyOrIndirectTagged, 
                        __CFStringCreateWithBytesNoCopy, __CFStringCreateWithFormatAndArgumentsAux, 
                        __CFStringCreateWithFormatAndArgumentsAux2, __CFStringCreateWithFormatAndArgumentsReturningMetadata, 
-                       __CFStringEncodingSetForceASCIICompatibility, __CFStringGetFileSystemRepresentation, 
+                       __CFStringCreateWithNullTerminatedBytesNoCopy, __CFStringEncodingSetForceASCIICompatibility, 
+                       __CFStringGetCStringPtrWithOptions, __CFStringGetFileSystemRepresentation, 
                        __CFStringGetFormatSpecifierConfiguration, __CFStringGetInstallationEncodingAndRegion, 
                        __CFStringGetLength2, __CFStringGetUserDefaultEncoding, __CFStringHyphenationCompileHyphenatorData, 
                        __CFStringSaveUserDefaultEncoding, __CFStringTokenizerCopyPossibleStringLanguages, 
@@ -1242,7 +1242,7 @@ exports:
                        '$ld$add$os10.6$_OBJC_IVAR_$_NSObject.isa', '$ld$add$os10.6$_OBJC_METACLASS_$_NSObject', 
                        '$ld$add$os10.7$_OBJC_CLASS_$_NSObject', '$ld$add$os10.7$_OBJC_IVAR_$_NSObject.isa', 
                        '$ld$add$os10.7$_OBJC_METACLASS_$_NSObject' ]
-  - targets:         [ x86_64-macos, x86_64h-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64h-macos, arm64e-macos ]
     symbols:         [ _CFBundleIsArchitectureLoadable, _CFBundleIsExecutableLoadable, 
                        _CFBundleIsExecutableLoadableForURL, _CFMachPortBoostGetTypeID, 
                        _CFServiceControllerCanConnect, _CFServiceControllerCopyLoadedLocalizations, 
@@ -1319,9 +1319,8 @@ exports:
                        _kCFWebServicesTypeMap, _kCFWebServicesTypeWebSearch, _kCFXMLTreeErrorDescription, 
                        _kCFXMLTreeErrorLineNumber, _kCFXMLTreeErrorLocation, _kCFXMLTreeErrorStatusCode ]
     objc-ivars:      [ NSMessageBuilder._addr, NSMessageBuilder._target ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ ___CFObjCIsCollectable ]
-  - targets:         [ x86_64-maccatalyst, x86_64h-maccatalyst, arm64-maccatalyst, 
-                       arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, x86_64h-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _kCFURLFileProtectionCompleteWhenUserInactive ]
 ...

@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/SensorKit.framework/Versions/A/SensorKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo18SRAcousticSettingsC9SensorKitE25headphoneSafetyAudioLevelSdSgvg', 
                        '_$sSo18SRAcousticSettingsC9SensorKitE25headphoneSafetyAudioLevelSdSgvpMV', 
                        '_$sSo25SRWristTemperatureSessionC9SensorKitE12temperaturesQrvg', 
@@ -43,11 +41,11 @@ exports:
                        _SRSensorElevation, _SRSensorElevationPressure, _SRSensorFaceMetrics, 
                        _SRSensorFacialMetrics, _SRSensorFallStatistics, _SRSensorFilterDeveloperOptOut, 
                        _SRSensorFilterMessagingApp, _SRSensorFilterTelephonyApp, 
-                       _SRSensorGyroscope, _SRSensorHeartRate, _SRSensorKeyboardMetrics, 
-                       _SRSensorMediaEvents, _SRSensorMessagesUsageReport, _SRSensorMobilityMetrics, 
-                       _SRSensorOdometer, _SRSensorOdometerSuitability, _SRSensorOnWristState, 
-                       _SRSensorPPG, _SRSensorPedometerData, _SRSensorPhoneUsageReport, 
-                       _SRSensorPhotoplethysmogram, _SRSensorPhysicalActivityEvents, 
+                       _SRSensorGyroscope, _SRSensorHeadphoneMotion, _SRSensorHeartRate, 
+                       _SRSensorKeyboardMetrics, _SRSensorMediaEvents, _SRSensorMessagesUsageReport, 
+                       _SRSensorMobilityMetrics, _SRSensorOdometer, _SRSensorOdometerSuitability, 
+                       _SRSensorOnWristState, _SRSensorPPG, _SRSensorPedometerData, 
+                       _SRSensorPhoneUsageReport, _SRSensorPhotoplethysmogram, _SRSensorPhysicalActivityEvents, 
                        _SRSensorRotationRate, _SRSensorSiriAudio, _SRSensorSiriSoundDetection, 
                        _SRSensorSiriSpeechEmotion, _SRSensorSiriSpeechMetrics, _SRSensorSleepSessions, 
                        _SRSensorSpeechMetrics, _SRSensorStrideCalibration, _SRSensorTelephonyAudio, 
@@ -58,8 +56,8 @@ exports:
     objc-classes:    [ SRAuthExtensionContext, SRAuthHostExtensionContext, SRAuthorizationClient, 
                        SRAuthorizationStore, SRCursor, SRDevice, SRError, SRFetchRequest, 
                        SRFetchResult, SRSensorDescription, SRSensorPruner, SRSensorReader, 
-                       SRSensorWriter ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+                       SRSensorWriter, SRSourceDevice ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _SRAuthorizationFetchSnapshot, _SRAuthorizationResetWithCompletionHandler, 
                        _SRAuthorizationSnapshot, _SRAuthorizationStatusForBundleIdentifier, 
                        _SRBundleIdentifiersAuthorizedToUseSensorKit, _SRDeletionReasonRTCRollback, 

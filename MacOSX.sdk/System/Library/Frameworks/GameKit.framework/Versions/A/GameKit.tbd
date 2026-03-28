@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/GameKit.framework/Versions/A/GameKit'
-current-version: 820.2.10
+current-version: 820.4.21
 swift-abi-version: 7
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/GameController.framework/Versions/A/GameController', 
                        '/System/Library/Frameworks/GameplayKit.framework/Versions/A/GameplayKit', 
                        '/System/Library/Frameworks/ModelIO.framework/Versions/A/ModelIO', 
@@ -16,7 +16,7 @@ reexported-libraries:
                        '/System/Library/PrivateFrameworks/GameCenterUI.framework/Versions/A/GameCenterUI', 
                        '/System/Library/PrivateFrameworks/GameCenterUICore.framework/Versions/A/GameCenterUICore' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s7GameKit21GSGameActivitySupportCACycfC', '_$s7GameKit21GSGameActivitySupportCACycfc', 
                        '_$s7GameKit21GSGameActivitySupportCMa', '_$s7GameKit21GSGameActivitySupportCMn', 
                        '_$s7GameKit21GSGameActivitySupportCMo', '_$s7GameKit21GSGameActivitySupportCMu', 
@@ -79,13 +79,11 @@ exports:
                        _TtC7GameKit28GKChallengeDefinitionSupport, _TtC7GameKit31GKGameActivityDefinitionSupport ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GameCenterFoundation.framework/Versions/A/GameCenterFoundation'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s20GameCenterFoundation011AppMetadataaB7FeatureO10activitiesyA2CmFWC', 
                        '_$s20GameCenterFoundation011AppMetadataaB7FeatureO10challengesyA2CmFWC', 
                        '_$s20GameCenterFoundation011AppMetadataaB7FeatureO12achievementsyA2CmFWC', 
@@ -1337,31 +1335,31 @@ exports:
                        _GKSignInBannerCooldown, _GKSignInBannerEnabled, _GKSignInBannerInitialLimit, 
                        _GKSignInBannerLimit, _GKSignInBannerMinTimeBetween, _GKSpringboardIdentifier, 
                        _GKStackTraceWithFrameLimit, _GKStashStackTrace, _GKStashedStackTrace, 
-                       _GKSuggestedTransportVersionKey, _GKSuggestedTransportVersionPushShortKey, 
-                       _GKSupportDataRoot, _GKSupportLogRoot, _GKSupportedTransportVersionsKey, 
-                       _GKSupportsFriendingViaPushForIDS, _GKSupportsMultiplayerActivities, 
-                       _GKTTRBulletinKeyRadarID, _GKTTRBulletinKeyRequesterPlayerAlias, 
-                       _GKTTRBulletinKeySubtitle, _GKTTRBulletinKeyType, _GKTTRBulletinKeyURL, 
-                       _GKTVAppStoreIdentifier, _GKTVAppStoreTopShelfExtensionIdentifier, 
-                       _GKTVSettingsIdentifier, _GKTeamPlayerIDKey, _GKTotalInviteReceivedTime, 
-                       _GKTransportAddedGameParticipantsKey, _GKTransportAddedLobbyParticipantsKey, 
-                       _GKTransportPlayerIDKey, _GKTransportPlayerTokenMapKey, _GKTransportPseudonymKey, 
-                       _GKTransportRemovedGameParticipantsKey, _GKTransportRemovedLobbyParticipantsKey, 
-                       _GKTurnBasedGameDataCacheRoot, _GKTurnBasedMatchmakerExtensionIdentifier, 
-                       _GKTurnTimeoutDefault, _GKTurnTimeoutNone, _GKUISetRemote, 
-                       _GKURLComponentAcceptFriendRequest, _GKURLComponentChangePassword, 
-                       _GKURLComponentCreateAccount, _GKURLComponentEditAccount, 
-                       _GKURLComponentFriendRequest, _GKURLComponentFriends, _GKURLComponentGame, 
-                       _GKURLComponentGameCenterScheme, _GKURLComponentGames, _GKURLComponentHTTPSScheme, 
-                       _GKURLComponentHTTPScheme, _GKURLComponentHostProduction, 
-                       _GKURLComponentHostTD1Internal, _GKURLComponentHostTD2Internal, 
-                       _GKURLComponentHostTD3Internal, _GKURLComponentHostTD4Internal, 
-                       _GKURLComponentITMSGCSScheme, _GKURLComponentITMSGCScheme, 
-                       _GKURLComponentMe, _GKURLComponentPlayer, _GKURLComponentRecommendations, 
-                       _GKURLComponentRequests, _GKURLComponentSignIn, _GKURLComponentStore, 
-                       _GKURLComponentVerifyAccount, _GKUnderageKey, _GKUniqueTestCachePath, 
-                       _GKUnknownPlayerID, _GKUpdateGameInviteNotification, _GKVerifiedKey, 
-                       _GKViewFriendListButtonTapped, _GKViewFriendProfileButtonTapped, 
+                       _GKStoreKitAgentIdentifier, _GKStoreKitDaemonIdentifier, _GKSuggestedTransportVersionKey, 
+                       _GKSuggestedTransportVersionPushShortKey, _GKSupportDataRoot, 
+                       _GKSupportLogRoot, _GKSupportedTransportVersionsKey, _GKSupportsFriendingViaPushForIDS, 
+                       _GKSupportsMultiplayerActivities, _GKTTRBulletinKeyRadarID, 
+                       _GKTTRBulletinKeyRequesterPlayerAlias, _GKTTRBulletinKeySubtitle, 
+                       _GKTTRBulletinKeyType, _GKTTRBulletinKeyURL, _GKTVAppStoreIdentifier, 
+                       _GKTVAppStoreTopShelfExtensionIdentifier, _GKTVSettingsIdentifier, 
+                       _GKTeamPlayerIDKey, _GKTotalInviteReceivedTime, _GKTransportAddedGameParticipantsKey, 
+                       _GKTransportAddedLobbyParticipantsKey, _GKTransportPlayerIDKey, 
+                       _GKTransportPlayerTokenMapKey, _GKTransportPseudonymKey, _GKTransportRemovedGameParticipantsKey, 
+                       _GKTransportRemovedLobbyParticipantsKey, _GKTurnBasedGameDataCacheRoot, 
+                       _GKTurnBasedMatchmakerExtensionIdentifier, _GKTurnTimeoutDefault, 
+                       _GKTurnTimeoutNone, _GKUISetRemote, _GKURLComponentAcceptFriendRequest, 
+                       _GKURLComponentChangePassword, _GKURLComponentCreateAccount, 
+                       _GKURLComponentEditAccount, _GKURLComponentFriendRequest, 
+                       _GKURLComponentFriends, _GKURLComponentGame, _GKURLComponentGameCenterScheme, 
+                       _GKURLComponentGames, _GKURLComponentHTTPSScheme, _GKURLComponentHTTPScheme, 
+                       _GKURLComponentHostProduction, _GKURLComponentHostTD1Internal, 
+                       _GKURLComponentHostTD2Internal, _GKURLComponentHostTD3Internal, 
+                       _GKURLComponentHostTD4Internal, _GKURLComponentITMSGCSScheme, 
+                       _GKURLComponentITMSGCScheme, _GKURLComponentMe, _GKURLComponentPlayer, 
+                       _GKURLComponentRecommendations, _GKURLComponentRequests, _GKURLComponentSignIn, 
+                       _GKURLComponentStore, _GKURLComponentVerifyAccount, _GKUnderageKey, 
+                       _GKUniqueTestCachePath, _GKUnknownPlayerID, _GKUpdateGameInviteNotification, 
+                       _GKVerifiedKey, _GKViewFriendListButtonTapped, _GKViewFriendProfileButtonTapped, 
                        _GKVoiceChatServiceErrorDomain, _GKWidgetExtensionIdentifier, 
                        _GKWidgetIdentifier, _GKXCTestInternalAngel, __GKIsRemoteUI, 
                        __gkBeautifyVariableName, __gkMarkFileAsPurgeable, __gkTabStringForTabLevel, 
@@ -1391,17 +1389,17 @@ exports:
                        GKContactsIntegrationCohortState, GKContactsIntegrationControllerSettings, 
                        GKContactsIntegrationIDSUpdateIntervalState, GKContactsIntegrationState, 
                        GKContactsIntegrationUserSettings, GKCredentialRenewalInfo, 
-                       GKDaemonInterface, GKDaemonProxy, GKDevice, GKDispatchGroup, 
-                       GKEntitledContextProvider, GKEventEmitter, GKFamiliarPlayerInternal, 
-                       GKFastSyncTransport, GKFriendActivityInternal, GKFriendCodeDetailInternal, 
-                       GKFriendInviteActivityEvent, GKFriendPlayerInternal, GKFriendRecommendationInternal, 
-                       GKFriendRequestInternal, GKFriendRequestURLModel, GKFriendServiceInterface, 
-                       GKFriendServicePrivateInterface, GKGame, GKGameActivityEventHandler, 
-                       GKGameDescriptor, GKGameGenre, GKGameHighlightInternal, GKGameInternal, 
-                       GKGameKitDirectoryServicePrivateInterface, GKGameMatch, GKGameModeBannerConfig, 
-                       GKGameRecord, GKGameRecordInternal, GKGameServiceInterface, 
-                       GKGameServicePrivateInterface, GKGameSession, GKGameSettingsInternal, 
-                       GKGameStatServiceInterface, GKGameStatServicePrivateInterface, 
+                       GKDaemonInterface, GKDaemonProxy, GKDaemonProxyTelemetry, 
+                       GKDevice, GKDispatchGroup, GKEntitledContextProvider, GKEventEmitter, 
+                       GKFamiliarPlayerInternal, GKFastSyncTransport, GKFriendActivityInternal, 
+                       GKFriendCodeDetailInternal, GKFriendInviteActivityEvent, GKFriendPlayerInternal, 
+                       GKFriendRecommendationInternal, GKFriendRequestInternal, GKFriendRequestURLModel, 
+                       GKFriendServiceInterface, GKFriendServicePrivateInterface, 
+                       GKGame, GKGameActivityEventHandler, GKGameDescriptor, GKGameGenre, 
+                       GKGameHighlightInternal, GKGameInternal, GKGameKitDirectoryServicePrivateInterface, 
+                       GKGameMatch, GKGameModeBannerConfig, GKGameRecord, GKGameRecordInternal, 
+                       GKGameServiceInterface, GKGameServicePrivateInterface, GKGameSession, 
+                       GKGameSettingsInternal, GKGameStatServiceInterface, GKGameStatServicePrivateInterface, 
                        GKGameSummaryInternal, GKImageRestrictions, GKInstallMetadata, 
                        GKInternalRepresentation, GKInvite, GKInviteAcceptResponse, 
                        GKInviteInitiateResponse, GKInviteInternal, GKInviteMessageSupport, 
@@ -1475,11 +1473,11 @@ exports:
                        GKReachability.reachabilityRef, GKRecoveryAttempter._attemptRecovery ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GameCenterUI.framework/Versions/A/GameCenterUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation4DateV12GameCenterUIE24_gkRelativeTimeAgoStringSSyF', 
                        '_$s10Foundation6LocaleV12GameCenterUIE23arcadeWordmarkAssetNameSSvg', 
                        '_$s10Foundation6LocaleV12GameCenterUIE23arcadeWordmarkAssetNameSSvpMV', 
@@ -2936,6 +2934,8 @@ exports:
                        '_$s12GameCenterUI24ActivityFeedLockupVendorV05fetchE5Views5theme14actionHandlers8bundleIDSayAA0deF4ViewVGAA0deF5ThemeV_AA0def6ActionL0VSSSgtYaKFZTu', 
                        '_$s12GameCenterUI24ActivityFeedLockupVendorV05fetchE6Models8bundleIDSayAA0deF9ViewModelVGSSSg_tYaKFZ', 
                        '_$s12GameCenterUI24ActivityFeedLockupVendorV05fetchE6Models8bundleIDSayAA0deF9ViewModelVGSSSg_tYaKFZTu', 
+                       '_$s12GameCenterUI24ActivityFeedLockupVendorV06enrichD20ItemsWithContactInfoyySaySo08GKPlayerD12ItemInternalCGYaFZ', 
+                       '_$s12GameCenterUI24ActivityFeedLockupVendorV06enrichD20ItemsWithContactInfoyySaySo08GKPlayerD12ItemInternalCGYaFZTu', 
                        '_$s12GameCenterUI24ActivityFeedLockupVendorV22makeRemoteDashboardURL10Foundation0K0VSgyFZ', 
                        '_$s12GameCenterUI24ActivityFeedLockupVendorV22makeRemoteDashboardURL8widgetId0L6Family10Foundation0K0VSgSS_SStFZ', 
                        '_$s12GameCenterUI24ActivityFeedLockupVendorV29makeRemoteLaunchTrampolineURL6adamId06bundleN006widgetN00P4Size13localizedName5topic10Foundation0L0VSgSS_S2SSiS2SSgtFZ', 
@@ -4435,13 +4435,11 @@ exports:
                        _UIContentUnavailableView._titleView ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GameCenterUICore.framework/Versions/A/GameCenterUICore'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation15AttributeScopesO16GameCenterUICoreE26ExtendedMarkdownAttributesV05colorB0AcDE0gh5StyleI0V5ColorOvg', 
                        '_$s10Foundation15AttributeScopesO16GameCenterUICoreE26ExtendedMarkdownAttributesV05colorB0AcDE0gh5StyleI0V5ColorOvpMV', 
                        '_$s10Foundation15AttributeScopesO16GameCenterUICoreE26ExtendedMarkdownAttributesVAA0B5ScopeADMc', 
@@ -4732,6 +4730,8 @@ exports:
                        '_$s16GameCenterUICore20GCUILocalizedStringsC36ONBOARDING_WHATSNEW_SUBTITLE_CRYSTALSSvpZMV', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC36SETTINGS_FRIEND_REQUESTS_EMPTY_TITLESSvgZ', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC36SETTINGS_FRIEND_REQUESTS_EMPTY_TITLESSvpZMV', 
+                       '_$s16GameCenterUICore20GCUILocalizedStringsC36SETTINGS_FRIEND_REQUESTS_HEADER_TEXTSSvgZ', 
+                       '_$s16GameCenterUICore20GCUILocalizedStringsC36SETTINGS_FRIEND_REQUESTS_HEADER_TEXTSSvpZMV', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC37CONTACTS_INTEGRATION_ONBOARDING_TITLESSvgZ', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC37CONTACTS_INTEGRATION_ONBOARDING_TITLESSvpZMV', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC37FRIEND_REQUEST_MODULE_SENDER_SUBTITLESSvgZ', 
@@ -4814,6 +4814,8 @@ exports:
                        '_$s16GameCenterUICore20GCUILocalizedStringsC55PLAYER_PICKER_NEARBY_OR_BOOP_INSTRUCTIONAL_MESSAGE_WLANSSvpZMV', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC5RETRYSSvgZ', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC5RETRYSSvpZMV', 
+                       '_$s16GameCenterUICore20GCUILocalizedStringsC65SETTINGS_FRIEND_REQUESTS_CONTACTS_TOGGLE_FOOTER_WITHOUT_GAMES_APPSSvgZ', 
+                       '_$s16GameCenterUICore20GCUILocalizedStringsC65SETTINGS_FRIEND_REQUESTS_CONTACTS_TOGGLE_FOOTER_WITHOUT_GAMES_APPSSvpZMV', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC9DEVELOPERSSvgZ', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC9DEVELOPERSSvpZMV', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsCMa', '_$s16GameCenterUICore20GCUILocalizedStringsCMn', 
@@ -4843,7 +4845,7 @@ exports:
                        GKLocalPlayerAuthenticator._lastAuthDate, GKLocalPlayerAuthenticator._lastAuthPlayerID, 
                        GKLocalPlayerAuthenticator._password, GKLocalPlayerAuthenticator._resultantLocalPlayer, 
                        GKLocalPlayerAuthenticator._username, GKUITheme._resourceCache ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _GKIsVoiceoverEnabled, _GKUIImageJPEGRepresentation, _GKUIImagePNGRepresentation, 
                        _NSStringFromUIEdgeInsets, __UIKitShimGraphicsBeginImageContext, 
                        __UIKitShimGraphicsBeginImageContextWithOptions, __UIKitShimGraphicsEndImageContext, 
@@ -4861,6 +4863,6 @@ exports:
                        GKPanel._sheetOffset, UXAlertAction._enabled, UXAlertAction._handler, 
                        UXAlertAction._style, UXAlertAction._title, UXResizableImage._alwaysStretches, 
                        UXResizableImage._capInsets, UXResizableImage._needsInsetUpdate ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _GKHostUsesXRUIIdiom, _GKSetHostUserInterfaceIdiom ]
 ...

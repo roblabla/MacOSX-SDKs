@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/NeuralNetworks.framework/Versions/A/NeuralNetworks'
 swift-abi-version: 7
 exports:
@@ -28,8 +27,7 @@ exports:
                        __ZTSNSt3__120__shared_ptr_pointerIPN3MIL16IRNamedValueTypeENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN3MIL8LocationENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN3MIL9IRProgramENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s14NeuralNetworks10CollatableMp', '_$s14NeuralNetworks10CollatableP9collatingxqd___tc7ElementQyd__RszSlRd__lufCTj', 
                        '_$s14NeuralNetworks10CollatableP9collatingxqd___tc7ElementQyd__RszSlRd__lufCTq', 
                        '_$s14NeuralNetworks10CollatableTL', '_$s14NeuralNetworks10DataSampleV6labelsq_vM', 
@@ -2817,7 +2815,7 @@ exports:
                        SNNMILProgram, SNNMILProgramBuilder, SNNMILSourceLocation, 
                        SNNMILValue, SNNMILValueDescriptor ]
     weak-symbols:    [ __ZNSt3__119piecewise_constructE ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$ss7Float16V14NeuralNetworks12TensorScalarACMc', '_$ss7Float16V14NeuralNetworks12TensorScalarACWP', 
                        '_$ss7Float16V14NeuralNetworks25TensorFloatingPointScalarACMc', 
                        '_$ss7Float16V14NeuralNetworks25TensorFloatingPointScalarACWP', 

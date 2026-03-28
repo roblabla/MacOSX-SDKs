@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libGIF.dylib'
-current-version: 2784.2.5
+current-version: 2784.4.14
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __cg_DGifCloseFile, __cg_DGifExtensionToGCB, __cg_DGifGetCode, 
                        __cg_DGifGetCodeNext, __cg_DGifGetExtension, __cg_DGifGetExtensionNext, 
                        __cg_DGifGetImageDesc, __cg_DGifGetLZCodes, __cg_DGifGetLine, 

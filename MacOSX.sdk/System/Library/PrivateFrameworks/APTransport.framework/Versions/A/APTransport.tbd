@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/APTransport.framework/Versions/A/APTransport'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _APAdvertiserInfoCopy, _APAdvertiserInfoCopyAirPlayData, _APAdvertiserInfoCopyAirPlayDataWithNANServiceType, 
                        _APAdvertiserInfoCopyAirPlayP2PData, _APAdvertiserInfoCopyAirPlayP2PDataWithNANServiceType, 
                        _APAdvertiserInfoCopyClusterCompatibleAirPlayData, _APAdvertiserInfoCopyProperty, 
@@ -218,7 +218,7 @@ exports:
                        _kAPTransportConnectionOption_IsListener, _kAPTransportConnectionOption_IsPackageArrivalTicksEnabled, 
                        _kAPTransportConnectionOption_IsPackageDeliveryTrackingEnabled, 
                        _kAPTransportConnectionOption_NWContextType, _kAPTransportConnectionOption_QualityOfService, 
-                       _kAPTransportConnectionOption_TrafficRegistrationOptions, 
+                       _kAPTransportConnectionOption_SendSocketBufferSize, _kAPTransportConnectionOption_TrafficRegistrationOptions, 
                        _kAPTransportConnectionOption_TransportProtocol, _kAPTransportConnectionPackageType_APAP, 
                        _kAPTransportConnectionPackageType_BufferedAPAP, _kAPTransportConnectionPackageType_Datagram, 
                        _kAPTransportConnectionPackageType_GenericTCP, _kAPTransportConnectionPackageType_LowPowerKeepAlive, 
@@ -275,30 +275,31 @@ exports:
                        _kAPTransportSessionStreamOption_AllowMessageAggregation, 
                        _kAPTransportSessionStreamOption_AssertPowerDuringEventHandling, 
                        _kAPTransportSessionStreamOption_QualityOfService, _kAPTransportSessionStreamOption_SendBackingProvider, 
-                       _kAPTransportSessionStreamOption_TransportProtocol, _kAPTransportSessionStreamOption_UseLibNetwork, 
-                       _kAPTransportStreamNetworkInfo_AverageLoss, _kAPTransportStreamNetworkInfo_AverageRTT, 
-                       _kAPTransportStreamNetworkInfo_AverageTxCapacity, _kAPTransportStreamNetworkInfo_TxCapacity, 
-                       _kAPTransportStreamOption_EventRecorder, _kAPTransportStreamOption_IssueReporter, 
-                       _kAPTransportStreamOption_NANDataSession, _kAPTransportStreamOption_ReceiveConnection, 
-                       _kAPTransportStreamOption_SendBackingProvider, _kAPTransportStreamOption_SendConnection, 
-                       _kAPTransportStreamProperty_ClientUPID, _kAPTransportStreamProperty_DACPID, 
-                       _kAPTransportStreamProperty_DACPRemoteID, _kAPTransportStreamProperty_DataPacer, 
-                       _kAPTransportStreamProperty_DoNotWakeDevice, _kAPTransportStreamProperty_IssueReporter, 
-                       _kAPTransportStreamProperty_LastDeliveredMessage, _kAPTransportStreamProperty_LocalInterfaceName, 
-                       _kAPTransportStreamProperty_LocalMACAddress, _kAPTransportStreamProperty_LocalNetworkIPAddress, 
-                       _kAPTransportStreamProperty_LocalNetworkInfo, _kAPTransportStreamProperty_LocalNetworkPort, 
-                       _kAPTransportStreamProperty_LocalReverseControlPort, _kAPTransportStreamProperty_LowPowerOffloadBBuf, 
-                       _kAPTransportStreamProperty_LowPowerOffloadInterval, _kAPTransportStreamProperty_MaxMessageSize, 
-                       _kAPTransportStreamProperty_MessageSendTimeout, _kAPTransportStreamProperty_NANDataSession, 
-                       _kAPTransportStreamProperty_NWConnectionUUID, _kAPTransportStreamProperty_NetTransportType, 
-                       _kAPTransportStreamProperty_NetworkInfo, _kAPTransportStreamProperty_Password, 
-                       _kAPTransportStreamProperty_PrimaryPacketDropCount, _kAPTransportStreamProperty_QualityOfService, 
-                       _kAPTransportStreamProperty_ReadyToSendCallbackPriority, _kAPTransportStreamProperty_ReadyToSendThresholdBytes, 
-                       _kAPTransportStreamProperty_RemoteNetworkIPAddress, _kAPTransportStreamProperty_RemoteNetworkInfo, 
-                       _kAPTransportStreamProperty_RemoteNetworkMACAddress, _kAPTransportStreamProperty_RemoteNetworkPort, 
-                       _kAPTransportStreamProperty_RemoteReverseControlPort, _kAPTransportStreamProperty_SendConnection, 
-                       _kAPTransportStreamProperty_TimingInformation, _kAPTransportStreamProperty_UseRFC2617DigestAuth, 
-                       _kAPTransportStreamProperty_UserAgent, _kAPTransportStreamProperty_UserName ]
+                       _kAPTransportSessionStreamOption_SendSocketBufferSize, _kAPTransportSessionStreamOption_TransportProtocol, 
+                       _kAPTransportSessionStreamOption_UseLibNetwork, _kAPTransportStreamNetworkInfo_AverageLoss, 
+                       _kAPTransportStreamNetworkInfo_AverageRTT, _kAPTransportStreamNetworkInfo_AverageTxCapacity, 
+                       _kAPTransportStreamNetworkInfo_TxCapacity, _kAPTransportStreamOption_EventRecorder, 
+                       _kAPTransportStreamOption_IssueReporter, _kAPTransportStreamOption_NANDataSession, 
+                       _kAPTransportStreamOption_ReceiveConnection, _kAPTransportStreamOption_SendBackingProvider, 
+                       _kAPTransportStreamOption_SendConnection, _kAPTransportStreamProperty_ClientUPID, 
+                       _kAPTransportStreamProperty_DACPID, _kAPTransportStreamProperty_DACPRemoteID, 
+                       _kAPTransportStreamProperty_DataPacer, _kAPTransportStreamProperty_DoNotWakeDevice, 
+                       _kAPTransportStreamProperty_IssueReporter, _kAPTransportStreamProperty_LastDeliveredMessage, 
+                       _kAPTransportStreamProperty_LocalInterfaceName, _kAPTransportStreamProperty_LocalMACAddress, 
+                       _kAPTransportStreamProperty_LocalNetworkIPAddress, _kAPTransportStreamProperty_LocalNetworkInfo, 
+                       _kAPTransportStreamProperty_LocalNetworkPort, _kAPTransportStreamProperty_LocalReverseControlPort, 
+                       _kAPTransportStreamProperty_LowPowerOffloadBBuf, _kAPTransportStreamProperty_LowPowerOffloadInterval, 
+                       _kAPTransportStreamProperty_MaxMessageSize, _kAPTransportStreamProperty_MessageSendTimeout, 
+                       _kAPTransportStreamProperty_NANDataSession, _kAPTransportStreamProperty_NWConnectionUUID, 
+                       _kAPTransportStreamProperty_NetTransportType, _kAPTransportStreamProperty_NetworkInfo, 
+                       _kAPTransportStreamProperty_Password, _kAPTransportStreamProperty_PrimaryPacketDropCount, 
+                       _kAPTransportStreamProperty_QualityOfService, _kAPTransportStreamProperty_ReadyToSendCallbackPriority, 
+                       _kAPTransportStreamProperty_ReadyToSendThresholdBytes, _kAPTransportStreamProperty_RemoteNetworkIPAddress, 
+                       _kAPTransportStreamProperty_RemoteNetworkInfo, _kAPTransportStreamProperty_RemoteNetworkMACAddress, 
+                       _kAPTransportStreamProperty_RemoteNetworkPort, _kAPTransportStreamProperty_RemoteReverseControlPort, 
+                       _kAPTransportStreamProperty_SendConnection, _kAPTransportStreamProperty_TimingInformation, 
+                       _kAPTransportStreamProperty_UseRFC2617DigestAuth, _kAPTransportStreamProperty_UserAgent, 
+                       _kAPTransportStreamProperty_UserName ]
     objc-classes:    [ APAssistedModeBrowser, APBonjourCacheEvictionTTL, APBonjourCacheHomeKit, 
                        APBonjourCacheManager, APHomeKitDeviceMonitor ]
 ...

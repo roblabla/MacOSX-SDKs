@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CalendarUIKitInternal.framework/Versions/A/CalendarUIKitInternal'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s19RemindersAppIntents0A35InCalendarEditingReminderPropertiesV0E13UIKitInternalE5eventACSo7EKEventC_tcfC', 
                        '_$s21CalendarUIKitInternal20ReminderDragProviderC16pasteboardWriter3forSo19NSPasteboardWriting_pSgSo7EKEventC_tFZ', 
                        '_$s21CalendarUIKitInternal20ReminderDragProviderCACycfC', 

@@ -1,20 +1,18 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/InertiaCam.framework/Versions/A/InertiaCam'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIFNSt3__16vectorIdNS_9allocatorIdEEEERKS3_S5_dE, __ZTINSt3__110__function6__baseIFNS_6vectorIdNS_9allocatorIdEEEERKS5_S7_dEEE, 
                        __ZTINSt3__110__function6__baseIFbvEEE, __ZTINSt3__110__function6__baseIFvfEEE, 
-                       __ZTINSt3__110__function6__baseIFvmmEEE, __ZTINSt3__110__function6__funcIPFNS_6vectorIdNS_9allocatorIdEEEERKS5_S7_dENS3_IS9_EES8_EE, 
+                       __ZTINSt3__110__function6__baseIFvmmEEE, __ZTINSt3__110__function6__funcIPFNS_6vectorIdNS_9allocatorIdEEEERKS5_S7_dES8_EE, 
                        __ZTIPFNSt3__16vectorIdNS_9allocatorIdEEEERKS3_S5_dE, __ZTSFNSt3__16vectorIdNS_9allocatorIdEEEERKS3_S5_dE, 
                        __ZTSNSt3__110__function6__baseIFNS_6vectorIdNS_9allocatorIdEEEERKS5_S7_dEEE, 
                        __ZTSNSt3__110__function6__baseIFbvEEE, __ZTSNSt3__110__function6__baseIFvfEEE, 
-                       __ZTSNSt3__110__function6__baseIFvmmEEE, __ZTSNSt3__110__function6__funcIPFNS_6vectorIdNS_9allocatorIdEEEERKS5_S7_dENS3_IS9_EES8_EE, 
+                       __ZTSNSt3__110__function6__baseIFvmmEEE, __ZTSNSt3__110__function6__funcIPFNS_6vectorIdNS_9allocatorIdEEEERKS5_S7_dES8_EE, 
                        __ZTSPFNSt3__16vectorIdNS_9allocatorIdEEEERKS3_S5_dE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CreateCorrectionHomographiesWithNewImageCoordinates, _ICAnalysisAddFrame, 
                        _ICAnalysisInit, _ICAnalysisStopAndGetResult, _ICAnalyzeInputMotion, 
                        _ICCalcCanDoTripod, _ICCalcCinematicL1AddData, _ICCalcCinematicL1Corrections, 

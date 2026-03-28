@@ -1,17 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CrashReporterSupport.framework/Versions/A/CrashReporterSupport'
-current-version: 15138
+current-version: 15140
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/OSAnalytics.framework/Versions/A/OSAnalytics', 
                        '/usr/lib/libDiagnosticMessagesClient.dylib' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$add$os10.6$_msgtracer_domain_free', '$ld$add$os10.6$_msgtracer_domain_new', 
                        '$ld$add$os10.6$_msgtracer_log', '$ld$add$os10.6$_msgtracer_log_with_keys', 
                        '$ld$add$os10.6$_msgtracer_msg_free', '$ld$add$os10.6$_msgtracer_msg_new', 
@@ -112,13 +109,11 @@ exports:
     objc-classes:    [ OSALogWriter ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/OSAnalytics.framework/Versions/A/OSAnalytics'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s11OSAnalytics11DeviceStateC15isCustomerFusedSbvgZ', '_$s11OSAnalytics11DeviceStateC15isCustomerFusedSbvpZMV', 
                        '_$s11OSAnalytics11DeviceStateCACycfC', '_$s11OSAnalytics11DeviceStateCACycfc', 
                        '_$s11OSAnalytics11DeviceStateCMa', '_$s11OSAnalytics11DeviceStateCMn', 

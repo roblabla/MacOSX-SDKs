@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GenerativeAssistantSettings.framework/Versions/A/GenerativeAssistantSettings'
-current-version: 3505.21.1
+current-version: 3520.69.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s27GenerativeAssistantSettings0C18RemoteLocalizationV16upgradeIAPStringSSyYaFZ', 
                        '_$s27GenerativeAssistantSettings0C18RemoteLocalizationV16upgradeIAPStringSSyYaFZTu', 
                        '_$s27GenerativeAssistantSettings0C18RemoteLocalizationVMa', 
@@ -206,14 +206,7 @@ exports:
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsCACycfc', 
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsCMa', '_$s27GenerativeAssistantSettings0abC12UserDefaultsCMn', 
                        '_$s27GenerativeAssistantSettings0abC12UserDefaultsCMo', '_$s27GenerativeAssistantSettings0abC12UserDefaultsCN', 
-                       '_$s27GenerativeAssistantSettings0abC12UserDefaultsCfD', '_$s27GenerativeAssistantSettings0abC4ViewV4bodyQrvg', 
-                       '_$s27GenerativeAssistantSettings0abC4ViewV4bodyQrvpMV', '_$s27GenerativeAssistantSettings0abC4ViewV4bodyQrvpQOMQ', 
-                       '_$s27GenerativeAssistantSettings0abC4ViewV4withACSDyS2SG_tcfC', 
-                       '_$s27GenerativeAssistantSettings0abC4ViewV7SwiftUI0D0AAMc', 
-                       '_$s27GenerativeAssistantSettings0abC4ViewV9availableSbyFZ', 
-                       '_$s27GenerativeAssistantSettings0abC4ViewVACycfC', '_$s27GenerativeAssistantSettings0abC4ViewVMa', 
-                       '_$s27GenerativeAssistantSettings0abC4ViewVMn', '_$s27GenerativeAssistantSettings0abC4ViewVN', 
-                       '_$s27GenerativeAssistantSettings0abC8ProviderC11LLMProviderO20localizedDisplayNameSSyF', 
+                       '_$s27GenerativeAssistantSettings0abC12UserDefaultsCfD', '_$s27GenerativeAssistantSettings0abC8ProviderC11LLMProviderO20localizedDisplayNameSSyF', 
                        '_$s27GenerativeAssistantSettings0abC8ProviderC11LLMProviderO7chatGPTyA2EmFWC', 
                        '_$s27GenerativeAssistantSettings0abC8ProviderC11LLMProviderO8rawValueAESgSS_tcfC', 
                        '_$s27GenerativeAssistantSettings0abC8ProviderC11LLMProviderO8rawValueSSvg', 
@@ -238,13 +231,6 @@ exports:
                        '_$s27GenerativeAssistantSettings0abC8ProviderCMn', '_$s27GenerativeAssistantSettings0abC8ProviderCMo', 
                        '_$s27GenerativeAssistantSettings0abC8ProviderCMu', '_$s27GenerativeAssistantSettings0abC8ProviderCN', 
                        '_$s27GenerativeAssistantSettings0abC8ProviderCfD', '_$s27GenerativeAssistantSettings0abC8ProviderCfd', 
-                       '_$s27GenerativeAssistantSettings0abC9ViewModelC18signInFailureError5Anvil04SigngH0Omvg', 
-                       '_$s27GenerativeAssistantSettings0abC9ViewModelC18signInFailureError5Anvil04SigngH0OmvpMV', 
-                       '_$s27GenerativeAssistantSettings0abC9ViewModelC7Combine16ObservableObjectAAMc', 
-                       '_$s27GenerativeAssistantSettings0abC9ViewModelCMa', '_$s27GenerativeAssistantSettings0abC9ViewModelCMm', 
-                       '_$s27GenerativeAssistantSettings0abC9ViewModelCMn', '_$s27GenerativeAssistantSettings0abC9ViewModelCMo', 
-                       '_$s27GenerativeAssistantSettings0abC9ViewModelCMu', '_$s27GenerativeAssistantSettings0abC9ViewModelCN', 
-                       '_$s27GenerativeAssistantSettings0abC9ViewModelCfD', '_$s27GenerativeAssistantSettings0abC9ViewModelCfd', 
                        '_$s27GenerativeAssistantSettings11RequestTypeO04textB0yA2CmFWC', 
                        '_$s27GenerativeAssistantSettings11RequestTypeO14composeViaSiriyA2CmFWC', 
                        '_$s27GenerativeAssistantSettings11RequestTypeO17knowledgeFallbackyA2CmFWC', 

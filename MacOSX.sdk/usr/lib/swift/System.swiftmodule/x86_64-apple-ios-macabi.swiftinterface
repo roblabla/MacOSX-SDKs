@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-ios15.0-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSystem -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 72.2 -module-name System
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-ios15.0-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSystem -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 75 -module-name System
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Darwin
 import Darwin.Mach
 import Swift
@@ -48,6 +48,7 @@ public protocol MachPortRight {
 }
 @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 extension System.Mach.Port where RightType == System.Mach.ReceiveRight {
+  @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
   public init(name: Darwin.mach_port_name_t, context: Darwin.mach_port_context_t)
   @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
   @inlinable public init() {
@@ -60,11 +61,7 @@ extension System.Mach.Port where RightType == System.Mach.ReceiveRight {
     self.init(name: storage)
   }
   @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
-  @inlinable public consuming func relinquish() -> (name: Darwin.mach_port_name_t, context: Darwin.mach_port_context_t) {
-    let destructured = (name: _name, context: _context)
-    discard self
-    return destructured
-  }
+  public consuming func relinquish() -> (name: Darwin.mach_port_name_t, context: Darwin.mach_port_context_t)
   @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
   @inlinable public consuming func unguardAndRelinquish() -> Darwin.mach_port_name_t {
     let (name, context) = self.relinquish()
@@ -138,11 +135,8 @@ extension System.Mach.Port where RightType == System.Mach.ReceiveRight {
 }
 @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 extension System.Mach.Port where RightType == System.Mach.SendRight {
-  @inlinable public consuming func relinquish() -> Darwin.mach_port_name_t {
-    let name = _name
-    discard self
-    return name
-  }
+  @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+  public consuming func relinquish() -> Darwin.mach_port_name_t
   @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
   @inlinable public func copySendRight() throws -> System.Mach.Port<System.Mach.SendRight> {
     let how = MACH_MSG_TYPE_COPY_SEND
@@ -162,11 +156,7 @@ extension System.Mach.Port where RightType == System.Mach.SendRight {
 @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 extension System.Mach.Port where RightType == System.Mach.SendOnceRight {
   @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
-  @inlinable public consuming func relinquish() -> Darwin.mach_port_name_t {
-    let name = _name
-    discard self
-    return name
-  }
+  public consuming func relinquish() -> Darwin.mach_port_name_t
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct FileDescriptor : Swift.RawRepresentable, Swift.Hashable, Swift.Codable {
@@ -398,49 +388,39 @@ extension System.FilePath {
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var root: System.FilePath.Root? {
     get
     set
   }
-  #endif
   public __consuming func removingRoot() -> System.FilePath
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var lastComponent: System.FilePath.Component? {
     get
   }
-  #endif
   public __consuming func removingLastComponent() -> System.FilePath
   @discardableResult
   public mutating func removeLastComponent() -> Swift.Bool
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var `extension`: Swift.String? {
     get
   }
-  #endif
   public var stem: Swift.String {
     get
   }
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var `extension`: Swift.String? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var stem: Swift.String? {
     get
   }
-  #endif
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
@@ -449,9 +429,7 @@ extension System.FilePath {
   }
   public mutating func lexicallyNormalize()
   public __consuming func lexicallyNormalized() -> System.FilePath
-  #if compiler(>=5.3) && $NonescapableTypes
   public __consuming func lexicallyResolving(_ subpath: __owned System.FilePath) -> System.FilePath?
-  #endif
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
@@ -473,12 +451,10 @@ extension System.FilePath {
   public var dirname: System.FilePath {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, unavailable, renamed: "lastComponent")
   public var basename: System.FilePath.Component? {
     get
   }
-  #endif
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension Swift.String {
@@ -510,10 +486,7 @@ extension Swift.String {
       self = platformString
     }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(validatingPlatformString platformString: Swift.UnsafePointer<System.CInterop.PlatformChar>)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable @_alwaysEmitIntoClient public init?(validatingPlatformString platformString: [System.CInterop.PlatformChar]) {
     guard let _ = platformString.firstIndex(of: 0) else {
       fatalError(
@@ -527,8 +500,6 @@ extension Swift.String {
     }
     self = string
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use String(_ scalar: Unicode.Scalar)")
   @inlinable @_alwaysEmitIntoClient public init?(validatingPlatformString platformString: inout System.CInterop.PlatformChar) {
     guard platformString == 0 else {
@@ -538,8 +509,6 @@ extension Swift.String {
     }
     self = ""
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use a copy of the String argument")
   @inlinable @_alwaysEmitIntoClient public init?(validatingPlatformString platformString: Swift.String) {
     if let nullLoc = platformString.firstIndex(of: "\0") {
@@ -548,7 +517,6 @@ extension Swift.String {
       self = platformString
     }
   }
-  #endif
   public func withPlatformString<Result>(_ body: (Swift.UnsafePointer<System.CInterop.PlatformChar>) throws -> Result) rethrows -> Result
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
@@ -640,15 +608,9 @@ extension System.FilePath.ComponentView : Swift.RangeReplaceableCollection {
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init<C>(root: System.FilePath.Root?, _ components: C) where C : Swift.Collection, C.Element == System.FilePath.Component
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(root: System.FilePath.Root?, components: System.FilePath.Component...)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(root: System.FilePath.Root?, _ components: System.FilePath.ComponentView.SubSequence)
-  #endif
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView {
@@ -1200,18 +1162,14 @@ extension System.FileDescriptor {
   @_alwaysEmitIntoClient public func writeAll<S>(_ sequence: S) throws -> Swift.Int where S : Swift.Sequence, S.Element == Swift.UInt8 {
     return try _writeAll(sequence).get()
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _writeAll<S>(_ sequence: S) -> Swift.Result<Swift.Int, System.Errno> where S : Swift.Sequence, S.Element == Swift.UInt8
-  #endif
   @discardableResult
   @_alwaysEmitIntoClient public func writeAll<S>(toAbsoluteOffset offset: Swift.Int64, _ sequence: S) throws -> Swift.Int where S : Swift.Sequence, S.Element == Swift.UInt8 {
     try _writeAll(toAbsoluteOffset: offset, sequence).get()
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _writeAll<S>(toAbsoluteOffset offset: Swift.Int64, _ sequence: S) -> Swift.Result<Swift.Int, System.Errno> where S : Swift.Sequence, S.Element == Swift.UInt8
-  #endif
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
@@ -1249,10 +1207,7 @@ extension System.FilePath {
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(platformString: Swift.UnsafePointer<System.CInterop.PlatformChar>)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable @_alwaysEmitIntoClient public init?(platformString: [System.CInterop.PlatformChar]) {
     guard let _ = platformString.firstIndex(of: 0) else {
       fatalError(
@@ -1266,8 +1221,6 @@ extension System.FilePath.Component {
     }
     self = component
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use FilePath.Component.init(_ scalar: Unicode.Scalar)")
   @inlinable @_alwaysEmitIntoClient public init?(platformString: inout System.CInterop.PlatformChar) {
     guard platformString == 0 else {
@@ -1277,8 +1230,6 @@ extension System.FilePath.Component {
     }
     return nil
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use FilePath.Component.init(_: String)")
   @inlinable @_alwaysEmitIntoClient public init?(platformString: Swift.String) {
     let string: String
@@ -1290,15 +1241,11 @@ extension System.FilePath.Component {
     guard let component = FilePath.Component(string) else { return nil }
     self = component
   }
-  #endif
   public func withPlatformString<Result>(_ body: (Swift.UnsafePointer<System.CInterop.PlatformChar>) throws -> Result) rethrows -> Result
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Root {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(platformString: Swift.UnsafePointer<System.CInterop.PlatformChar>)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable @_alwaysEmitIntoClient public init?(platformString: [System.CInterop.PlatformChar]) {
     guard let _ = platformString.firstIndex(of: 0) else {
       fatalError(
@@ -1312,8 +1259,6 @@ extension System.FilePath.Root {
     }
     self = component
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use FilePath.Root.init(_ scalar: Unicode.Scalar)")
   @inlinable @_alwaysEmitIntoClient public init?(platformString: inout System.CInterop.PlatformChar) {
     guard platformString == 0 else {
@@ -1323,8 +1268,6 @@ extension System.FilePath.Root {
     }
     return nil
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use FilePath.Root.init(_: String)")
   @inlinable @_alwaysEmitIntoClient public init?(platformString: Swift.String) {
     let string: String
@@ -1336,7 +1279,6 @@ extension System.FilePath.Root {
     guard let root = FilePath.Root(string) else { return nil }
     self = root
   }
-  #endif
   public func withPlatformString<Result>(_ body: (Swift.UnsafePointer<System.CInterop.PlatformChar>) throws -> Result) rethrows -> Result
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
@@ -1353,9 +1295,7 @@ extension System.FilePath : Swift.ExpressibleByStringLiteral {
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component : Swift.ExpressibleByStringLiteral {
   public init(stringLiteral: Swift.String)
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ string: Swift.String)
-  #endif
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias ExtendedGraphemeClusterLiteralType = Swift.String
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
@@ -1366,9 +1306,7 @@ extension System.FilePath.Component : Swift.ExpressibleByStringLiteral {
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Root : Swift.ExpressibleByStringLiteral {
   public init(stringLiteral: Swift.String)
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ string: Swift.String)
-  #endif
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias ExtendedGraphemeClusterLiteralType = Swift.String
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
@@ -1427,24 +1365,18 @@ extension Swift.String {
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension Swift.String {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   public init?(validating path: System.FilePath)
-  #endif
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension Swift.String {
   public init(decoding component: System.FilePath.Component)
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(validating component: System.FilePath.Component)
-  #endif
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension Swift.String {
   public init(decoding root: System.FilePath.Root)
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(validating root: System.FilePath.Root)
-  #endif
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension Swift.String {
@@ -1455,7 +1387,6 @@ extension Swift.String {
   @available(visionOS, unavailable, renamed: "init(decoding:)")
   @available(*, deprecated, renamed: "init(decoding:)")
   public init(_ path: System.FilePath)
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, introduced: 11.0, deprecated: 12.0, renamed: "init(validating:)")
   @available(iOS, introduced: 14.0, deprecated: 15.0, renamed: "init(validating:)")
   @available(watchOS, introduced: 7.0, deprecated: 8.0, renamed: "init(validating:)")
@@ -1463,7 +1394,6 @@ extension Swift.String {
   @available(visionOS, unavailable, renamed: "init(validating:)")
   @available(*, deprecated, renamed: "init(validating:)")
   public init?(validatingUTF8 path: System.FilePath)
-  #endif
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FilePath {
@@ -1535,38 +1465,28 @@ extension System.FilePath : Swift.Codable {
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FileDescriptor {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient public static func open(_ path: System.FilePath, _ mode: System.FileDescriptor.AccessMode, options: System.FileDescriptor.OpenOptions = FileDescriptor.OpenOptions(), permissions: System.FilePermissions? = nil, retryOnInterrupt: Swift.Bool = true) throws -> System.FileDescriptor {
     return try path.withCString {
       try FileDescriptor.open(
         $0, mode, options: options, permissions: permissions, retryOnInterrupt: retryOnInterrupt)
     }
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient public static func open(_ path: Swift.UnsafePointer<Swift.CChar>, _ mode: System.FileDescriptor.AccessMode, options: System.FileDescriptor.OpenOptions = FileDescriptor.OpenOptions(), permissions: System.FilePermissions? = nil, retryOnInterrupt: Swift.Bool = true) throws -> System.FileDescriptor {
     try FileDescriptor._open(
       path, mode, options: options, permissions: permissions, retryOnInterrupt: retryOnInterrupt
     ).get()
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal static func _open(_ path: Swift.UnsafePointer<Swift.CChar>, _ mode: System.FileDescriptor.AccessMode, options: System.FileDescriptor.OpenOptions, permissions: System.FilePermissions?, retryOnInterrupt: Swift.Bool) -> Swift.Result<System.FileDescriptor, System.Errno>
-  #endif
   @_alwaysEmitIntoClient public func close() throws { try _close().get() }
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _close() -> Swift.Result<(), System.Errno>
-  #endif
   @discardableResult
   @_alwaysEmitIntoClient public func seek(offset: Swift.Int64, from whence: System.FileDescriptor.SeekOrigin) throws -> Swift.Int64 {
     try _seek(offset: offset, from: whence).get()
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _seek(offset: Swift.Int64, from whence: System.FileDescriptor.SeekOrigin) -> Swift.Result<Swift.Int64, System.Errno>
-  #endif
   @available(*, unavailable, renamed: "seek")
   @_alwaysEmitIntoClient public func lseek(offset: Swift.Int64, from whence: System.FileDescriptor.SeekOrigin) throws -> Swift.Int64 {
     try seek(offset: offset, from: whence)
@@ -1574,10 +1494,8 @@ extension System.FileDescriptor {
   @_alwaysEmitIntoClient public func read(into buffer: Swift.UnsafeMutableRawBufferPointer, retryOnInterrupt: Swift.Bool = true) throws -> Swift.Int {
     try _read(into: buffer, retryOnInterrupt: retryOnInterrupt).get()
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _read(into buffer: Swift.UnsafeMutableRawBufferPointer, retryOnInterrupt: Swift.Bool) throws -> Swift.Result<Swift.Int, System.Errno>
-  #endif
   @_alwaysEmitIntoClient public func read(fromAbsoluteOffset offset: Swift.Int64, into buffer: Swift.UnsafeMutableRawBufferPointer, retryOnInterrupt: Swift.Bool = true) throws -> Swift.Int {
     try _read(
       fromAbsoluteOffset: offset,
@@ -1585,10 +1503,8 @@ extension System.FileDescriptor {
       retryOnInterrupt: retryOnInterrupt
     ).get()
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _read(fromAbsoluteOffset offset: Swift.Int64, into buffer: Swift.UnsafeMutableRawBufferPointer, retryOnInterrupt: Swift.Bool) -> Swift.Result<Swift.Int, System.Errno>
-  #endif
   @available(*, unavailable, renamed: "read")
   @_alwaysEmitIntoClient public func pread(fromAbsoluteOffset offset: Swift.Int64, into buffer: Swift.UnsafeMutableRawBufferPointer, retryOnInterrupt: Swift.Bool = true) throws -> Swift.Int {
     try read(
@@ -1599,17 +1515,13 @@ extension System.FileDescriptor {
   @_alwaysEmitIntoClient public func write(_ buffer: Swift.UnsafeRawBufferPointer, retryOnInterrupt: Swift.Bool = true) throws -> Swift.Int {
     try _write(buffer, retryOnInterrupt: retryOnInterrupt).get()
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _write(_ buffer: Swift.UnsafeRawBufferPointer, retryOnInterrupt: Swift.Bool) -> Swift.Result<Swift.Int, System.Errno>
-  #endif
   @_alwaysEmitIntoClient public func write(toAbsoluteOffset offset: Swift.Int64, _ buffer: Swift.UnsafeRawBufferPointer, retryOnInterrupt: Swift.Bool = true) throws -> Swift.Int {
     try _write(toAbsoluteOffset: offset, buffer, retryOnInterrupt: retryOnInterrupt).get()
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _write(toAbsoluteOffset offset: Swift.Int64, _ buffer: Swift.UnsafeRawBufferPointer, retryOnInterrupt: Swift.Bool) -> Swift.Result<Swift.Int, System.Errno>
-  #endif
   @available(*, unavailable, renamed: "write")
   @_alwaysEmitIntoClient public func pwrite(toAbsoluteOffset offset: Swift.Int64, into buffer: Swift.UnsafeRawBufferPointer, retryOnInterrupt: Swift.Bool = true) throws -> Swift.Int {
     try write(
@@ -1620,17 +1532,13 @@ extension System.FileDescriptor {
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FileDescriptor {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   @_alwaysEmitIntoClient public func duplicate(as target: System.FileDescriptor? = nil, retryOnInterrupt: Swift.Bool = true) throws -> System.FileDescriptor {
     try _duplicate(as: target, retryOnInterrupt: retryOnInterrupt).get()
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   @usableFromInline
   internal func _duplicate(as target: System.FileDescriptor?, retryOnInterrupt: Swift.Bool) throws -> Swift.Result<System.FileDescriptor, System.Errno>
-  #endif
   @available(*, unavailable, renamed: "duplicate")
   @_alwaysEmitIntoClient public func dup() throws -> System.FileDescriptor {
     fatalError("Not implemented")
@@ -1646,11 +1554,9 @@ extension System.FileDescriptor {
   @_alwaysEmitIntoClient public static func pipe() throws -> (readEnd: System.FileDescriptor, writeEnd: System.FileDescriptor) {
     try _pipe().get()
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12.3, iOS 15.4, watchOS 8.5, tvOS 15.4, *)
   @usableFromInline
   internal static func _pipe() -> Swift.Result<(readEnd: System.FileDescriptor, writeEnd: System.FileDescriptor), System.Errno>
-  #endif
 }
 @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 extension System.FileDescriptor {
@@ -1661,11 +1567,9 @@ extension System.FileDescriptor {
       retryOnInterrupt: retryOnInterrupt
     ).get()
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
   @usableFromInline
   internal func _resize(to newSize: Swift.Int64, retryOnInterrupt: Swift.Bool) -> Swift.Result<(), System.Errno>
-  #endif
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct Errno : Swift.RawRepresentable, Swift.Error, Swift.Hashable, Swift.Codable {

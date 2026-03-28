@@ -1,15 +1,49 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Transparency.framework/Versions/A/Transparency'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s12Transparency0A13SWSysdiagnoseV12PublicKeybagV13patLogBeginMss6UInt64VSgvM', 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s12Transparency04CoreA13EnumShimErrorO03_nsE6DomainSSvgZ', 
+                       '_$s12Transparency04CoreA13EnumShimErrorO03_nsE6DomainSSvpZMV', 
+                       '_$s12Transparency04CoreA13EnumShimErrorO10Foundation021_ObjectiveCBridgeableE0AAMc', 
+                       '_$s12Transparency04CoreA13EnumShimErrorO10Foundation13CustomNSErrorAAMc', 
+                       '_$s12Transparency04CoreA13EnumShimErrorO10Foundation15_BridgedNSErrorAAMc', 
+                       '_$s12Transparency04CoreA13EnumShimErrorO8rawValueACSgSi_tcfC', 
+                       '_$s12Transparency04CoreA13EnumShimErrorO8rawValueSivg', '_$s12Transparency04CoreA13EnumShimErrorO8rawValueSivpMV', 
+                       '_$s12Transparency04CoreA13EnumShimErrorOMa', '_$s12Transparency04CoreA13EnumShimErrorOMn', 
+                       '_$s12Transparency04CoreA13EnumShimErrorON', '_$s12Transparency04CoreA13EnumShimErrorOSHAAMc', 
+                       '_$s12Transparency04CoreA13EnumShimErrorOSQAAMc', '_$s12Transparency04CoreA13EnumShimErrorOSYAAMc', 
+                       '_$s12Transparency04CoreA13EnumShimErrorOs0E0AAMc', '_$s12Transparency04CoreA15ApplicationShimO14fromCTRawValueyACSSKFZ', 
+                       '_$s12Transparency04CoreA15ApplicationShimO8allCasesSayACGvgZ', 
+                       '_$s12Transparency04CoreA15ApplicationShimO8allCasesSayACGvpZMV', 
+                       '_$s12Transparency04CoreA15ApplicationShimO8rawValueACSgSi_tcfC', 
+                       '_$s12Transparency04CoreA15ApplicationShimO8rawValueSivg', 
+                       '_$s12Transparency04CoreA15ApplicationShimO8rawValueSivpMV', 
+                       '_$s12Transparency04CoreA15ApplicationShimO8toCTEnum0bA013CTApplicationOyF', 
+                       '_$s12Transparency04CoreA15ApplicationShimOMa', '_$s12Transparency04CoreA15ApplicationShimOMn', 
+                       '_$s12Transparency04CoreA15ApplicationShimON', '_$s12Transparency04CoreA15ApplicationShimOSEAAMc', 
+                       '_$s12Transparency04CoreA15ApplicationShimOSHAAMc', '_$s12Transparency04CoreA15ApplicationShimOSQAAMc', 
+                       '_$s12Transparency04CoreA15ApplicationShimOSYAAMc', '_$s12Transparency04CoreA15ApplicationShimOSeAAMc', 
+                       '_$s12Transparency04CoreA15ApplicationShimOs12CaseIterableAAMc', 
+                       '_$s12Transparency04CoreA21ServerEnvironmentShimO14fromCTRawValueyACSSKFZ', 
+                       '_$s12Transparency04CoreA21ServerEnvironmentShimO8allCasesSayACGvgZ', 
+                       '_$s12Transparency04CoreA21ServerEnvironmentShimO8allCasesSayACGvpZMV', 
+                       '_$s12Transparency04CoreA21ServerEnvironmentShimO8rawValueACSgSi_tcfC', 
+                       '_$s12Transparency04CoreA21ServerEnvironmentShimO8rawValueSivg', 
+                       '_$s12Transparency04CoreA21ServerEnvironmentShimO8rawValueSivpMV', 
+                       '_$s12Transparency04CoreA21ServerEnvironmentShimO8toCTEnum0bA008CTServerD0OyF', 
+                       '_$s12Transparency04CoreA21ServerEnvironmentShimOMa', '_$s12Transparency04CoreA21ServerEnvironmentShimOMn', 
+                       '_$s12Transparency04CoreA21ServerEnvironmentShimON', '_$s12Transparency04CoreA21ServerEnvironmentShimOSEAAMc', 
+                       '_$s12Transparency04CoreA21ServerEnvironmentShimOSHAAMc', 
+                       '_$s12Transparency04CoreA21ServerEnvironmentShimOSQAAMc', 
+                       '_$s12Transparency04CoreA21ServerEnvironmentShimOSYAAMc', 
+                       '_$s12Transparency04CoreA21ServerEnvironmentShimOSeAAMc', 
+                       '_$s12Transparency04CoreA21ServerEnvironmentShimOs12CaseIterableAAMc', 
+                       '_$s12Transparency0A13SWSysdiagnoseV12PublicKeybagV13patLogBeginMss6UInt64VSgvM', 
                        '_$s12Transparency0A13SWSysdiagnoseV12PublicKeybagV13patLogBeginMss6UInt64VSgvg', 
                        '_$s12Transparency0A13SWSysdiagnoseV12PublicKeybagV13patLogBeginMss6UInt64VSgvpMV', 
                        '_$s12Transparency0A13SWSysdiagnoseV12PublicKeybagV13patLogBeginMss6UInt64VSgvs', 

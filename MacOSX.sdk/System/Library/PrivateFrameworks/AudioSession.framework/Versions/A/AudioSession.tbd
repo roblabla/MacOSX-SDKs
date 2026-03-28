@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AudioSession.framework/Versions/A/AudioSession'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/System/Library/Frameworks/AVFoundation.framework/AVFoundation$$6$3.0$14.0$$', 
                        '$ld$previous$/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation$$1$10.14$11.0$$', 
                        _AVAudioApplicationInputMuteHandlerChangeNotification, _AVAudioApplicationInputMuteStateChangeNotification, 

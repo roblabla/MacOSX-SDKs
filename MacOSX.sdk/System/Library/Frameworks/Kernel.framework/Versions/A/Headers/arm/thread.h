@@ -89,6 +89,8 @@ extern arm_debug_state32_t *       find_debug_state32(thread_t);
 extern arm_debug_state32_t *       find_or_allocate_debug_state32(thread_t);
 extern arm_debug_state64_t *       find_debug_state64(thread_t);
 extern arm_debug_state64_t *       find_or_allocate_debug_state64(thread_t);
+extern arm_debug_state_t *         allocate_debug_state64(void);
+extern void                        free_debug_state(arm_debug_state_t *);
 extern void                        set_user_neon_reg(thread_t, unsigned int, uint128_t);
 
 #define FIND_PERFCONTROL_STATE(th) (&th->machine.perfctrl_state)

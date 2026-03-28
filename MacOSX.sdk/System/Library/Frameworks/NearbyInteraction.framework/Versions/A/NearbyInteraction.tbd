@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/NearbyInteraction.framework/Versions/A/NearbyInteraction'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/usr/lib/swift/libswiftNearbyInteraction.dylib$$1$10.16$15.0$_$s17NearbyInteraction28NIAlgorithmConvergenceStatusO12notConvergedyACSayAC6ReasonVGcACmFWC$', 
                        '$ld$previous$/usr/lib/swift/libswiftNearbyInteraction.dylib$$1$10.16$15.0$_$s17NearbyInteraction28NIAlgorithmConvergenceStatusO2eeoiySbAC_ACtFZ$', 
                        '$ld$previous$/usr/lib/swift/libswiftNearbyInteraction.dylib$$1$10.16$15.0$_$s17NearbyInteraction28NIAlgorithmConvergenceStatusO6ReasonV20insufficientLightingAEvgZ$', 

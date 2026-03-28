@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreML.framework/Versions/A/CoreML'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/usr/lib/swift/libswiftCoreML.dylib$$1$10.15$15$_$s6CoreML13MLComputePlanC11DeviceUsageV9preferredAA0cE0Ovg$', 
                        '$ld$previous$/usr/lib/swift/libswiftCoreML.dylib$$1$10.15$15$_$s6CoreML13MLComputePlanC11DeviceUsageV9preferredAA0cE0OvpMV$', 
                        '$ld$previous$/usr/lib/swift/libswiftCoreML.dylib$$1$10.15$15$_$s6CoreML13MLComputePlanC11DeviceUsageV9supportedSayAA0cE0OGvg$', 
@@ -2172,7 +2170,7 @@ exports:
                        MLTreeEnsembleXGBoostUpdateEngine, MLUpdateContext, MLUpdateProgressHandlers, 
                        MLUpdateProgressHandlersUtils, MLUpdateTask, MLVersionInfo, 
                        MLWrappedModel, MLWritableWrappedModel, _MLInternalNLPModelWriter ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s6CoreML17MLComputeFunctionV21ArgumentRepresentablePAaC0E0VRszrlE12float16ArrayyAGSays7Float16VGFZ', 
                        '_$s6CoreML17MLComputeFunctionV21ArgumentRepresentablePAaC0E0VRszrlE7float16yAGs7Float16VFZ', 
                        '_$s6CoreML17MLComputeFunctionV8ArgumentVyAESays7Float16VGcfC', 

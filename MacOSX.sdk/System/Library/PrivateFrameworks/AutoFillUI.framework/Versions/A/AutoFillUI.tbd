@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AutoFillUI.framework/Versions/A/AutoFillUI'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AFKeyboardTypeIsNumberPad, _AFTextContentTypeCellularEIDStaging, 
                        _AFTextContentTypeCellularIMEIStaging, _AFTextContentTypeCreditCardExpirationMonthStaging, 
                        _AFTextContentTypeCreditCardExpirationStaging, _AFTextContentTypeCreditCardExpirationYearStaging, 

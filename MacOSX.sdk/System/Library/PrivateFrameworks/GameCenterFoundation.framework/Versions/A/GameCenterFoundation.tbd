@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GameCenterFoundation.framework/Versions/A/GameCenterFoundation'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s20GameCenterFoundation011AppMetadataaB7FeatureO10activitiesyA2CmFWC', 
                        '_$s20GameCenterFoundation011AppMetadataaB7FeatureO10challengesyA2CmFWC', 
                        '_$s20GameCenterFoundation011AppMetadataaB7FeatureO12achievementsyA2CmFWC', 
@@ -1305,7 +1303,8 @@ exports:
                        _GKSignInBannerCooldown, _GKSignInBannerEnabled, _GKSignInBannerInitialLimit, 
                        _GKSignInBannerLimit, _GKSignInBannerMinTimeBetween, _GKSpecialActivityTypeAddFriends, 
                        _GKSpringboardIdentifier, _GKStackTraceWithFrameLimit, _GKStashStackTrace, 
-                       _GKStashedStackTrace, _GKSuggestedTransportVersionKey, _GKSuggestedTransportVersionPushShortKey, 
+                       _GKStashedStackTrace, _GKStoreKitAgentIdentifier, _GKStoreKitDaemonIdentifier, 
+                       _GKSuggestedTransportVersionKey, _GKSuggestedTransportVersionPushShortKey, 
                        _GKSupportDataRoot, _GKSupportLogRoot, _GKSupportedTransportVersionsKey, 
                        _GKSupportsFriendingViaPushForIDS, _GKSupportsMultiplayerActivities, 
                        _GKTTRBulletinKeyRadarID, _GKTTRBulletinKeyRequesterPlayerAlias, 
@@ -1362,17 +1361,17 @@ exports:
                        GKContactsIntegrationControllerSettings, GKContactsIntegrationIDSUpdateIntervalState, 
                        GKContactsIntegrationState, GKContactsIntegrationUserSettings, 
                        GKContentPropertyList, GKCredentialRenewalInfo, GKDaemonInterface, 
-                       GKDaemonProxy, GKDelayOperation, GKDevice, GKDispatchGroup, 
-                       GKEntitledContextProvider, GKEventEmitter, GKFamiliarPlayerInternal, 
-                       GKFastSyncTransport, GKFriendActivityInternal, GKFriendCodeDetailInternal, 
-                       GKFriendInviteActivityEvent, GKFriendPlayerInternal, GKFriendRecommendationInternal, 
-                       GKFriendRequestInternal, GKFriendRequestURLModel, GKFriendServiceInterface, 
-                       GKFriendServicePrivateInterface, GKGame, GKGameActivityEventHandler, 
-                       GKGameDescriptor, GKGameGenre, GKGameHighlightInternal, GKGameInternal, 
-                       GKGameKitDirectoryServicePrivateInterface, GKGameMatch, GKGameModeBannerConfig, 
-                       GKGameRecord, GKGameRecordInternal, GKGameServiceInterface, 
-                       GKGameServicePrivateInterface, GKGameSession, GKGameSettingsInternal, 
-                       GKGameStatServiceInterface, GKGameStatServicePrivateInterface, 
+                       GKDaemonProxy, GKDaemonProxyTelemetry, GKDelayOperation, GKDevice, 
+                       GKDispatchGroup, GKEntitledContextProvider, GKEventEmitter, 
+                       GKFamiliarPlayerInternal, GKFastSyncTransport, GKFriendActivityInternal, 
+                       GKFriendCodeDetailInternal, GKFriendInviteActivityEvent, GKFriendPlayerInternal, 
+                       GKFriendRecommendationInternal, GKFriendRequestInternal, GKFriendRequestURLModel, 
+                       GKFriendServiceInterface, GKFriendServicePrivateInterface, 
+                       GKGame, GKGameActivityEventHandler, GKGameDescriptor, GKGameGenre, 
+                       GKGameHighlightInternal, GKGameInternal, GKGameKitDirectoryServicePrivateInterface, 
+                       GKGameMatch, GKGameModeBannerConfig, GKGameRecord, GKGameRecordInternal, 
+                       GKGameServiceInterface, GKGameServicePrivateInterface, GKGameSession, 
+                       GKGameSettingsInternal, GKGameStatServiceInterface, GKGameStatServicePrivateInterface, 
                        GKGameSummaryInternal, GKImageRestrictions, GKInstallMetadata, 
                        GKInternalRepresentation, GKInvite, GKInviteAcceptResponse, 
                        GKInviteInitiateResponse, GKInviteInternal, GKInviteMessageSupport, 

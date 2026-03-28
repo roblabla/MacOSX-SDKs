@@ -129,7 +129,7 @@ AV_INIT_UNAVAILABLE
 /// Download interstitial assets as listed in the index file. False by default.
 /// 
 /// Ordinarily, interstitial assets are skipped when downloading content for later playback. Setting this property to true will cause interstitial assets to be downloaded as well. Playback of the downloaded content can then match the experience of online streaming playback as closely as possible.
-@property (nonatomic) BOOL downloadsInterstitialAssets API_UNAVAILABLE(macos, ios, tvos, watchos, visionos);
+@property (nonatomic) BOOL downloadsInterstitialAssets API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), visionos(2.0)) API_UNAVAILABLE(tvos);
 
 /// Sets media selection on interstitials for this asset
 /// 

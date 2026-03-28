@@ -8,12 +8,12 @@
 #ifndef __ABACTIONSC__
 #define __ABACTIONSC__
 
+#include <AddressBook/ABAddressBookC.h>
+#include <CoreFoundation/CoreFoundation.h>
+
 #if defined(__cplusplus)
 extern "C" {
 #endif
-
-#include <AddressBook/ABAddressBookC.h>
-#include <CoreFoundation/CoreFoundation.h>
 
 // --------------------------------------------------------------------------------
 //      Action Support

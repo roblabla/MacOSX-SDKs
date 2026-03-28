@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SMBClientEngine.framework/Versions/A/SMBClientEngine'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ContextFlags2int, _DIFF1970TO1601, _HUNDRED_NSEC_PER_SEC, 
                        _SMBClientEngineVersionNumber, _SMBClientEngineVersionString, 
                        _asn1_ContextFlags, _asn1_ContextFlags_tag__2, _asn1_MechType, 

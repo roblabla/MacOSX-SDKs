@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriFlowEnvironment.framework/Versions/A/SiriFlowEnvironment'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s13SiriUtilities0A11EnvironmentC0a4FlowC0E14currentRequestAD07CurrentF0CvM', 
                        '_$s13SiriUtilities0A11EnvironmentC0a4FlowC0E14currentRequestAD07CurrentF0Cvg', 
                        '_$s13SiriUtilities0A11EnvironmentC0a4FlowC0E14currentRequestAD07CurrentF0CvpMV', 

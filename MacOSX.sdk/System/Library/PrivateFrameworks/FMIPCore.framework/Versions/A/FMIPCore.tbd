@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FMIPCore.framework/Versions/A/FMIPCore'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FMIPCoreTests, FMInternalSettingsBundle, FindDevices, FindItems, 
                        FindMy, FindMyNotificationsContent, FindMySiriIntents, FindMyTesterApp, 
                        FindMyTests, FindMyUICore, FindMyWidgetDevices, FindMyWidgetIntentsDevices, 
@@ -14,8 +12,7 @@ allowable-clients:
                        FindMyWidgetTestApp, FindPeople, SiriFindMy, SiriFindMyBundle, 
                        SiriFindMyTester, SiriFindMyTests, fmipcoretool ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s6Output8FMIPCore41FMIPAccessoryDiscoveryControllerCallbacksPTl', 
                        '_$s7Request8FMIPCore21FMImageCacheOperationPTl', '_$s8FMIPCore0A16PreferenceDomainSSvg', 
                        '_$s8FMIPCore10FMIPDeviceV10beaconTypeAA010FMIPBeaconD0Ovg', 
@@ -42,6 +39,8 @@ exports:
                        '_$s8FMIPCore10FMIPDeviceV12lockMetadataAA08FMIPLockD0VSgvpMV', 
                        '_$s8FMIPCore10FMIPDeviceV12lostMetadataAA0b8LostModeD0VSgvg', 
                        '_$s8FMIPCore10FMIPDeviceV12lostMetadataAA0b8LostModeD0VSgvpMV', 
+                       '_$s8FMIPCore10FMIPDeviceV12repairStatusAA0b6RepairD0VSgvg', 
+                       '_$s8FMIPCore10FMIPDeviceV12repairStatusAA0b6RepairD0VSgvpMV', 
                        '_$s8FMIPCore10FMIPDeviceV13audioChannelsSayAA16FMIPAudioChannelVGvg', 
                        '_$s8FMIPCore10FMIPDeviceV13audioChannelsSayAA16FMIPAudioChannelVGvpMV', 
                        '_$s8FMIPCore10FMIPDeviceV13batteryStatusAA011FMIPBatteryD0Ovg', 
@@ -324,6 +323,8 @@ exports:
                        '_$s8FMIPCore12FMIPFeaturesV26isMultiChannelSoundEnabledACvpZMV', 
                        '_$s8FMIPCore12FMIPFeaturesV26isNotifyWhenFoundSupportedACvgZ', 
                        '_$s8FMIPCore12FMIPFeaturesV26isNotifyWhenFoundSupportedACvpZMV', 
+                       '_$s8FMIPCore12FMIPFeaturesV26isRepairOrTradeInSupportedACvgZ', 
+                       '_$s8FMIPCore12FMIPFeaturesV26isRepairOrTradeInSupportedACvpZMV', 
                        '_$s8FMIPCore12FMIPFeaturesV27isTracksUpdateSwitchEnabledACvgZ', 
                        '_$s8FMIPCore12FMIPFeaturesV27isTracksUpdateSwitchEnabledACvpZMV', 
                        '_$s8FMIPCore12FMIPFeaturesV29isNotifyWhenDetachedSupportedACvgZ', 
@@ -1502,10 +1503,22 @@ exports:
                        '_$s8FMIPCore21FMIPCancelEraseActionCMa', '_$s8FMIPCore21FMIPCancelEraseActionCMm', 
                        '_$s8FMIPCore21FMIPCancelEraseActionCMn', '_$s8FMIPCore21FMIPCancelEraseActionCMo', 
                        '_$s8FMIPCore21FMIPCancelEraseActionCN', '_$s8FMIPCore21FMIPCancelEraseActionCfD', 
-                       '_$s8FMIPCore21FMIPCancelEraseActionCfd', '_$s8FMIPCore21FMIPItemBatteryStatusO4deadyA2CmFWC', 
-                       '_$s8FMIPCore21FMIPItemBatteryStatusO5freshyA2CmFWC', '_$s8FMIPCore21FMIPItemBatteryStatusO7replaceyA2CmFWC', 
-                       '_$s8FMIPCore21FMIPItemBatteryStatusO7unknownyA2CmFWC', '_$s8FMIPCore21FMIPItemBatteryStatusO8lateLifeyA2CmFWC', 
-                       '_$s8FMIPCore21FMIPItemBatteryStatusO8rawValueACSgSi_tcfC', 
+                       '_$s8FMIPCore21FMIPCancelEraseActionCfd', '_$s8FMIPCore21FMIPDeviceRepairStateV02inC0ACvgZ', 
+                       '_$s8FMIPCore21FMIPDeviceRepairStateV02inC0ACvpZMV', '_$s8FMIPCore21FMIPDeviceRepairStateV10authorizedACvgZ', 
+                       '_$s8FMIPCore21FMIPDeviceRepairStateV10authorizedACvpZMV', 
+                       '_$s8FMIPCore21FMIPDeviceRepairStateV11descriptionSSvg', '_$s8FMIPCore21FMIPDeviceRepairStateV11descriptionSSvpMV', 
+                       '_$s8FMIPCore21FMIPDeviceRepairStateV4noneACvgZ', '_$s8FMIPCore21FMIPDeviceRepairStateV4noneACvpZMV', 
+                       '_$s8FMIPCore21FMIPDeviceRepairStateV8rawValueACSS_tcfC', 
+                       '_$s8FMIPCore21FMIPDeviceRepairStateV8rawValueSSvg', '_$s8FMIPCore21FMIPDeviceRepairStateV8rawValueSSvpMV', 
+                       '_$s8FMIPCore21FMIPDeviceRepairStateV9completedACvgZ', '_$s8FMIPCore21FMIPDeviceRepairStateV9completedACvpZMV', 
+                       '_$s8FMIPCore21FMIPDeviceRepairStateVMa', '_$s8FMIPCore21FMIPDeviceRepairStateVMn', 
+                       '_$s8FMIPCore21FMIPDeviceRepairStateVN', '_$s8FMIPCore21FMIPDeviceRepairStateVSEAAMc', 
+                       '_$s8FMIPCore21FMIPDeviceRepairStateVSHAAMc', '_$s8FMIPCore21FMIPDeviceRepairStateVSQAAMc', 
+                       '_$s8FMIPCore21FMIPDeviceRepairStateVSYAAMc', '_$s8FMIPCore21FMIPDeviceRepairStateVSeAAMc', 
+                       '_$s8FMIPCore21FMIPDeviceRepairStateVs23CustomStringConvertibleAAMc', 
+                       '_$s8FMIPCore21FMIPItemBatteryStatusO4deadyA2CmFWC', '_$s8FMIPCore21FMIPItemBatteryStatusO5freshyA2CmFWC', 
+                       '_$s8FMIPCore21FMIPItemBatteryStatusO7replaceyA2CmFWC', '_$s8FMIPCore21FMIPItemBatteryStatusO7unknownyA2CmFWC', 
+                       '_$s8FMIPCore21FMIPItemBatteryStatusO8lateLifeyA2CmFWC', '_$s8FMIPCore21FMIPItemBatteryStatusO8rawValueACSgSi_tcfC', 
                        '_$s8FMIPCore21FMIPItemBatteryStatusO8rawValueSivg', '_$s8FMIPCore21FMIPItemBatteryStatusO8rawValueSivpMV', 
                        '_$s8FMIPCore21FMIPItemBatteryStatusO9earlyLifeyA2CmFWC', 
                        '_$s8FMIPCore21FMIPItemBatteryStatusO9highPoweryA2CmFWC', 
@@ -1667,7 +1680,16 @@ exports:
                        '_$s8FMIPCore22FMIPDeviceImageVariantON', '_$s8FMIPCore22FMIPDeviceImageVariantOSHAAMc', 
                        '_$s8FMIPCore22FMIPDeviceImageVariantOSQAAMc', '_$s8FMIPCore22FMIPDeviceImageVariantOSYAAMc', 
                        '_$s8FMIPCore22FMIPDeviceImageVariantOs12CaseIterableAAMc', 
-                       '_$s8FMIPCore22FMIPHistoricalLocationV12batteryLevelSdvg', 
+                       '_$s8FMIPCore22FMIPDeviceRepairStatusV11repairStateAA0bcF0VSgvg', 
+                       '_$s8FMIPCore22FMIPDeviceRepairStatusV11repairStateAA0bcF0VSgvpMV', 
+                       '_$s8FMIPCore22FMIPDeviceRepairStatusV2eeoiySbAC_ACtFZ', '_$s8FMIPCore22FMIPDeviceRepairStatusV4fromACs7Decoder_p_tKcfC', 
+                       '_$s8FMIPCore22FMIPDeviceRepairStatusV4hash4intoys6HasherVz_tF', 
+                       '_$s8FMIPCore22FMIPDeviceRepairStatusV6encode2toys7Encoder_p_tKF', 
+                       '_$s8FMIPCore22FMIPDeviceRepairStatusV9hashValueSivg', '_$s8FMIPCore22FMIPDeviceRepairStatusV9hashValueSivpMV', 
+                       '_$s8FMIPCore22FMIPDeviceRepairStatusVMa', '_$s8FMIPCore22FMIPDeviceRepairStatusVMn', 
+                       '_$s8FMIPCore22FMIPDeviceRepairStatusVN', '_$s8FMIPCore22FMIPDeviceRepairStatusVSEAAMc', 
+                       '_$s8FMIPCore22FMIPDeviceRepairStatusVSHAAMc', '_$s8FMIPCore22FMIPDeviceRepairStatusVSQAAMc', 
+                       '_$s8FMIPCore22FMIPDeviceRepairStatusVSeAAMc', '_$s8FMIPCore22FMIPHistoricalLocationV12batteryLevelSdvg', 
                        '_$s8FMIPCore22FMIPHistoricalLocationV12batteryLevelSdvpMV', 
                        '_$s8FMIPCore22FMIPHistoricalLocationV12locationTypeAA012FMIPLocationE0Ovg', 
                        '_$s8FMIPCore22FMIPHistoricalLocationV12locationTypeAA012FMIPLocationE0OvpMV', 

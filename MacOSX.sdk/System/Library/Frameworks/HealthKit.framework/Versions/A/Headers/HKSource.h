@@ -2,7 +2,7 @@
 //  HKSource.h
 //  HealthKit
 //
-//  Copyright (c) 2014-2022 Apple Inc. All rights reserved.
+//  Copyright © 2014-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

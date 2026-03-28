@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpeechRecognitionSharedSupport.framework/Versions/A/SpeechRecognitionSharedSupport'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerC16localeIdentifierACSgSS_tcfC', 
                        '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerC16localeIdentifierACSgSS_tcfCTj', 
                        '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerC16localeIdentifierACSgSS_tcfCTq', 

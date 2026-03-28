@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_GroupActivities_UIKit.framework/Versions/A/_GroupActivities_UIKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s12ActivityType22_GroupActivities_UIKit0C20SessionPreviewSourcePTl', 
                        '_$s15GroupActivities0A25SessionEndpointIdentifierV01_aB6_UIKitE32canvasPreviewPresentationManagerACvau', 
                        '_$s15GroupActivities0A25SessionEndpointIdentifierV01_aB6_UIKitE32canvasPreviewPresentationManagerACvgZ', 
@@ -500,18 +500,19 @@ exports:
                        '_$s22_GroupActivities_UIKit13MoreReactionsV7SwiftUI4ViewAAMc', 
                        '_$s22_GroupActivities_UIKit13MoreReactionsVACycfC', '_$s22_GroupActivities_UIKit13MoreReactionsVMa', 
                        '_$s22_GroupActivities_UIKit13MoreReactionsVMn', '_$s22_GroupActivities_UIKit13MoreReactionsVN', 
-                       '_$s22_GroupActivities_UIKit13PopoverBubbleV11anchorPointACSo7CGPointV_tcfC', 
+                       '_$s22_GroupActivities_UIKit13PopoverBubbleV11anchorPoint16shouldApplyGlassACSo7CGPointV_SbtcfC', 
+                       '_$s22_GroupActivities_UIKit13PopoverBubbleV11anchorPoint16shouldApplyGlassACSo7CGPointV_SbtcfcfA0_', 
                        '_$s22_GroupActivities_UIKit13PopoverBubbleV11anchorPointSo7CGPointVvM', 
                        '_$s22_GroupActivities_UIKit13PopoverBubbleV11anchorPointSo7CGPointVvg', 
                        '_$s22_GroupActivities_UIKit13PopoverBubbleV11anchorPointSo7CGPointVvpMV', 
                        '_$s22_GroupActivities_UIKit13PopoverBubbleV11anchorPointSo7CGPointVvs', 
-                       '_$s22_GroupActivities_UIKit13PopoverBubbleV4path2in7SwiftUI4PathVSo6CGRectV_tF', 
-                       '_$s22_GroupActivities_UIKit13PopoverBubbleV5inset2byQr12CoreGraphics7CGFloatV_tF', 
-                       '_$s22_GroupActivities_UIKit13PopoverBubbleV5inset2byQr12CoreGraphics7CGFloatV_tFQOMQ', 
-                       '_$s22_GroupActivities_UIKit13PopoverBubbleV7SwiftUI10AnimatableAAMc', 
-                       '_$s22_GroupActivities_UIKit13PopoverBubbleV7SwiftUI15InsettableShapeAAMc', 
+                       '_$s22_GroupActivities_UIKit13PopoverBubbleV16shouldApplyGlassSbvM', 
+                       '_$s22_GroupActivities_UIKit13PopoverBubbleV16shouldApplyGlassSbvg', 
+                       '_$s22_GroupActivities_UIKit13PopoverBubbleV16shouldApplyGlassSbvpMV', 
+                       '_$s22_GroupActivities_UIKit13PopoverBubbleV16shouldApplyGlassSbvs', 
+                       '_$s22_GroupActivities_UIKit13PopoverBubbleV4bodyQrvg', '_$s22_GroupActivities_UIKit13PopoverBubbleV4bodyQrvpMV', 
+                       '_$s22_GroupActivities_UIKit13PopoverBubbleV4bodyQrvpQOMQ', 
                        '_$s22_GroupActivities_UIKit13PopoverBubbleV7SwiftUI4ViewAAMc', 
-                       '_$s22_GroupActivities_UIKit13PopoverBubbleV7SwiftUI5ShapeAAMc', 
                        '_$s22_GroupActivities_UIKit13PopoverBubbleVMa', '_$s22_GroupActivities_UIKit13PopoverBubbleVMn', 
                        '_$s22_GroupActivities_UIKit13PopoverBubbleVN', '_$s22_GroupActivities_UIKit14ReactionButtonV10isSelectedSbvg', 
                        '_$s22_GroupActivities_UIKit14ReactionButtonV10isSelectedSbvpMV', 
@@ -695,13 +696,18 @@ exports:
                        '_$s22_GroupActivities_UIKit20ReactionHistoryEntryVMa', '_$s22_GroupActivities_UIKit20ReactionHistoryEntryVMn', 
                        '_$s22_GroupActivities_UIKit20ReactionHistoryEntryVN', '_$s22_GroupActivities_UIKit20ReactionHistoryEntryVSHAAMc', 
                        '_$s22_GroupActivities_UIKit20ReactionHistoryEntryVSQAAMc', 
+                       '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV16shouldApplyGlassSbvM', 
+                       '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV16shouldApplyGlassSbvg', 
+                       '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV16shouldApplyGlassSbvpMV', 
+                       '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV16shouldApplyGlassSbvs', 
                        '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV4bodyQrvg', 
                        '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV4bodyQrvpMV', 
                        '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV4bodyQrvpQOMQ', 
+                       '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV5model16shouldApplyGlassAC7SwiftUI17EnvironmentObjectVyAA0dE9ViewModelCG_SbtcfC', 
+                       '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV5model16shouldApplyGlassAC7SwiftUI17EnvironmentObjectVyAA0dE9ViewModelCG_SbtcfcfA0_', 
+                       '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV5model16shouldApplyGlassAC7SwiftUI17EnvironmentObjectVyAA0dE9ViewModelCG_SbtcfcfA_', 
                        '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV5modelAA0dE9ViewModelCvg', 
                        '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV5modelAA0dE9ViewModelCvpMV', 
-                       '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV5modelAC7SwiftUI17EnvironmentObjectVyAA0dE9ViewModelCG_tcfC', 
-                       '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV5modelAC7SwiftUI17EnvironmentObjectVyAA0dE9ViewModelCG_tcfcfA_', 
                        '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV6$model7SwiftUI17EnvironmentObjectV7WrapperVyAA0dE9ViewModelC_Gvg', 
                        '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV6$model7SwiftUI17EnvironmentObjectV7WrapperVyAA0dE9ViewModelC_GvpMV', 
                        '_$s22_GroupActivities_UIKit20ReactionPickerBubbleV7SwiftUI4ViewAAMc', 

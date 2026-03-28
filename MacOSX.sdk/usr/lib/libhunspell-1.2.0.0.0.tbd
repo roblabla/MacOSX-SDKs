@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libhunspell-1.2.0.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _Hunspell_add, _Hunspell_add_with_affix, _Hunspell_analyze, 
                        _Hunspell_create, _Hunspell_create_key, _Hunspell_destroy, 
                        _Hunspell_free_list, _Hunspell_generate, _Hunspell_get_dic_encoding, 

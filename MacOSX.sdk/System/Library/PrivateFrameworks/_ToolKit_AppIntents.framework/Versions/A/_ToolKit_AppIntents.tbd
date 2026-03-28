@@ -1,0 +1,22 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+install-name:    '/System/Library/PrivateFrameworks/_ToolKit_AppIntents.framework/Versions/A/_ToolKit_AppIntents'
+swift-abi-version: 7
+exports:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s10AppIntents09TransientA28EntityConvertibleIntentValueP09_ToolKit_aB0E_8databasexSg0hI005TypedG0O_AG0H8DatabaseCtYaKcfC', 
+                       '_$s10AppIntents09TransientA28EntityConvertibleIntentValueP09_ToolKit_aB0E_8databasexSg0hI005TypedG0O_AG0H8DatabaseCtYaKcfCTu', 
+                       '_$s10AppIntents34SystemIntentValueConvertibleEntityP09_ToolKit_aB0E_8databasexSg0hI005TypedE0O_AG0H8DatabaseCtYaKcfC', 
+                       '_$s10AppIntents34SystemIntentValueConvertibleEntityP09_ToolKit_aB0E_8databasexSg0hI005TypedE0O_AG0H8DatabaseCtYaKcfCTu', 
+                       '_$s19_ToolKit_AppIntents27CurrencyTypeConversionErrorO22unknownSourceContaineryACSScACmFWC', 
+                       '_$s19_ToolKit_AppIntents27CurrencyTypeConversionErrorOMa', 
+                       '_$s19_ToolKit_AppIntents27CurrencyTypeConversionErrorOMn', 
+                       '_$s19_ToolKit_AppIntents27CurrencyTypeConversionErrorON', 
+                       '_$s19_ToolKit_AppIntents27CurrencyTypeConversionErrorOs0H0AAMc', 
+                       '_$s7ToolKit10TypedValueO01_aB11_AppIntentsE_8databaseACx_AA0A8DatabaseCtYaKc0eF0012SystemIntentD17ConvertibleEntityRzlufC', 
+                       '_$s7ToolKit10TypedValueO01_aB11_AppIntentsE_8databaseACx_AA0A8DatabaseCtYaKc0eF0012SystemIntentD17ConvertibleEntityRzlufCTu', 
+                       '_$s7ToolKit10TypedValueO01_aB11_AppIntentsE_8databaseACx_AA0A8DatabaseCtYaKc0eF009Transiente23EntityConvertibleIntentD0RzlufC', 
+                       '_$s7ToolKit10TypedValueO01_aB11_AppIntentsE_8databaseACx_AA0A8DatabaseCtYaKc0eF009Transiente23EntityConvertibleIntentD0RzlufCTu', 
+                       __ToolKit_AppIntentsVersionNumber, __ToolKit_AppIntentsVersionString ]
+...

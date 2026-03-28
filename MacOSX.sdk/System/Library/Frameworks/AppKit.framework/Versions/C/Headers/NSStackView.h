@@ -49,16 +49,18 @@ typedef NS_ENUM(NSInteger, NSStackViewGravity) {
  All NSStackViewDistribution enum values fit first and last stacked views tightly to the container, except for NSStackViewDistributionGravityAreas.
  */
 typedef NS_ENUM(NSInteger, NSStackViewDistribution) {
-    /// Default value. NSStackView will not have any special distribution behavior, relying on behavior described by gravity areas and set hugging priorities along the stacking axis.
+    /// Stacked views will not have any special distribution behavior, relying on behavior described by gravity areas and set hugging priorities along the stacking axis.
+    /// 
+    /// This is the default value.
     NSStackViewDistributionGravityAreas = -1,
 
-    /// The effective hugging priority in the stacking axis is NSLayoutPriorityRequired, causing the stacked views to tightly fill the container along the stacking axis.
+    /// The effective hugging priority in the stacking axis is `NSLayoutPriorityRequired`, causing the stacked views to tightly fill the container along the stacking axis.
     NSStackViewDistributionFill = 0,
 
-    /// Stacked views will have sizes maintained to be equal as much as possible along the stacking axis. The effective hugging priority in the stacking axis is NSLayoutPriorityRequired.
+    /// Stacked views will have sizes maintained to be equal as much as possible along the stacking axis. The effective hugging priority in the stacking axis is `NSLayoutPriorityRequired`.
     NSStackViewDistributionFillEqually,
 
-    /// Stacked views will have sizes maintained to be equal, proportionally to their intrinsicContentSizes, as much as possible. The effective hugging priority in the stacking axis is NSLayoutPriorityRequired.
+    /// Stacked views will have sizes maintained to be equal, proportionally to their `intrinsicContentSize`s, as much as possible. The effective hugging priority in the stacking axis is `NSLayoutPriorityRequired`.
     NSStackViewDistributionFillProportionally,
 
     /// The space separating stacked views along the stacking axis are maintained to be equal as much as possible while still maintaining the minimum spacing.
@@ -121,7 +123,9 @@ API_AVAILABLE(macos(10.9))
 /// Default padding inside the StackView, around all of the subviews.
 @property NSEdgeInsets edgeInsets;
 
-/// The spacing and sizing distribution of stacked views along the primary axis. Defaults to GravityAreas.
+/// The spacing and sizing distribution of stacked views along the primary axis.
+///
+/// The default value is `gravityAreas`.
 @property NSStackViewDistribution distribution API_AVAILABLE(macos(10.11));
 
 /// Default (minimum) spacing between each view

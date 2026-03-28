@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_PermissionKit_SwiftUI.framework/Versions/A/_PermissionKit_SwiftUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s22_PermissionKit_SwiftUI0A6ButtonV4bodyQrvg', '_$s22_PermissionKit_SwiftUI0A6ButtonV4bodyQrvpMV', 
                        '_$s22_PermissionKit_SwiftUI0A6ButtonV4bodyQrvpQOMQ', '_$s22_PermissionKit_SwiftUI0A6ButtonV8question0aB00A8QuestionCyxGvg', 
                        '_$s22_PermissionKit_SwiftUI0A6ButtonV8question0aB00A8QuestionCyxGvpMV', 

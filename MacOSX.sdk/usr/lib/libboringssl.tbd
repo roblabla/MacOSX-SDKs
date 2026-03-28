@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libboringssl.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN4bssl11SSLKeyShareE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BIO_find_type, _BIO_flush, _BIO_free, _BIO_free_all, _BIO_get_fd, 
                        _BIO_get_retry_reason, _BIO_hexdump, _BIO_indent, _BIO_method_type, 
                        _BIO_new, _BIO_new_fp, _BIO_new_mem_buf, _BIO_printf, _BIO_puts, 

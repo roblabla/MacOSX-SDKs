@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreParsec.framework/Versions/A/CoreParsec'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10CoreParsec10ClientNameC07extractcD10FromStringySSSgAEFZ', 
                        '_$s10CoreParsec10ClientNameC07extractcD13FromUserAgent_17allowAbbreviationSSSgAF_SbtFZ', 
                        '_$s10CoreParsec10ClientNameCACycfC', '_$s10CoreParsec10ClientNameCACycfc', 
@@ -53,8 +51,7 @@ exports:
                        '_$s10CoreParsec15PARSearchClientC23receivingStreamDelegateAA020PARFeedbackReceivingfG0_pSgvsTq', 
                        '_$s10CoreParsec15PARSearchClientC3bag_5replyySo23PARSessionConfigurationC_ySo6PARBagCSg_s5Error_pSgtctFTj', 
                        '_$s10CoreParsec15PARSearchClientC3bag_5replyySo23PARSessionConfigurationC_ySo6PARBagCSg_s5Error_pSgtctFTq', 
-                       '_$s10CoreParsec15PARSearchClientC6sharedACvMZ', '_$s10CoreParsec15PARSearchClientC6sharedACvgZ', 
-                       '_$s10CoreParsec15PARSearchClientC6sharedACvpZMV', '_$s10CoreParsec15PARSearchClientC6sharedACvsZ', 
+                       '_$s10CoreParsec15PARSearchClientC6sharedACvgZ', '_$s10CoreParsec15PARSearchClientC6sharedACvpZMV', 
                        '_$s10CoreParsec15PARSearchClientC7request_AD5replys6UInt64VSo23PARSessionConfigurationC_So10PARRequestCyAG_So8PARReplyCSgs5Error_pSgtctFTj', 
                        '_$s10CoreParsec15PARSearchClientC7request_AD5replys6UInt64VSo23PARSessionConfigurationC_So10PARRequestCyAG_So8PARReplyCSgs5Error_pSgtctFTq', 
                        '_$s10CoreParsec15PARSearchClientCACycfC', '_$s10CoreParsec15PARSearchClientCACycfc', 
@@ -145,7 +142,7 @@ exports:
                        '_$s10CoreParsec23PARSessionSwiftInternalC4load_17completionHandlerySo6SFCardC_yAGSg_s5Error_pSgtYbctF', 
                        '_$s10CoreParsec23PARSessionSwiftInternalC4load_7contextSo7SFImageCAG_So0H7ContextCSgtYaKF', 
                        '_$s10CoreParsec23PARSessionSwiftInternalC4load_7contextSo7SFImageCAG_So0H7ContextCSgtYaKFTu', 
-                       '_$s10CoreParsec23PARSessionSwiftInternalC4send_10completionySo16SFCustomFeedbackC_yycSgtF', 
+                       '_$s10CoreParsec23PARSessionSwiftInternalC4send_10completionySo16SFCustomFeedbackC_yyYbcSgtF', 
                        '_$s10CoreParsec23PARSessionSwiftInternalC4sendyySo16SFCustomFeedbackCF', 
                        '_$s10CoreParsec23PARSessionSwiftInternalC4task4with10completionSo7PARTaskCSgSo10PARRequestC_yAH_So11PARResponseCSgs5Error_pSgtctFTj', 
                        '_$s10CoreParsec23PARSessionSwiftInternalC4task4with10completionSo7PARTaskCSgSo10PARRequestC_yAH_So11PARResponseCSgs5Error_pSgtctFTq', 

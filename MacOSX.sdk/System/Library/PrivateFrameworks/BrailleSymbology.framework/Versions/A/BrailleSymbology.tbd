@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/BrailleSymbology.framework/Versions/A/BrailleSymbology'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s13Configuration16BrailleSymbology09PrimitivebC5StylePTl', 
                        '_$s16BrailleSymbology01_A4ViewMp', '_$s16BrailleSymbology01_A4ViewP7SwiftUI0C0Tb', 
                        '_$s16BrailleSymbology01_A4ViewPxycfCTj', '_$s16BrailleSymbology01_A4ViewPxycfCTq', 

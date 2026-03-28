@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/JoinRequests.framework/Versions/A/JoinRequests'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12JoinRequests0A12RequestErrorO8rawValueACSgSS_tcfC', 
                        '_$s12JoinRequests0A12RequestErrorO8rawValueSSvg', '_$s12JoinRequests0A12RequestErrorO8rawValueSSvpMV', 
                        '_$s12JoinRequests0A12RequestErrorOMa', '_$s12JoinRequests0A12RequestErrorOMn', 
@@ -37,7 +37,6 @@ exports:
                        '_$s12JoinRequests16OwnerCredentialsC7decrypt7request9publicKey10Foundation4DataV16decryptedRequest_AI08responsehJ0tAI_AItKFTq', 
                        '_$s12JoinRequests16OwnerCredentialsC7encrypt8response0F7KeyData10Foundation0H0VAI_AItKF', 
                        '_$s12JoinRequests16OwnerCredentialsC7encrypt8response0F7KeyData10Foundation0H0VAI_AItKFTq', 
-                       '_$s12JoinRequests16OwnerCredentialsC9publicKey33_4845E404CDB651ABE8A06FC1B81E753ELL9CryptoKit4P256O0F9AgreementO06PublicF0Vvg', 
                        '_$s12JoinRequests16OwnerCredentialsCACycfC', '_$s12JoinRequests16OwnerCredentialsCACycfCTq', 
                        '_$s12JoinRequests16OwnerCredentialsCACycfc', '_$s12JoinRequests16OwnerCredentialsCMa', 
                        '_$s12JoinRequests16OwnerCredentialsCMm', '_$s12JoinRequests16OwnerCredentialsCMn', 
@@ -62,9 +61,6 @@ exports:
                        '_$s12JoinRequests19RequestKeyAgreementVN', '_$s12JoinRequests20RequesterCredentialsC11isExhaustedSbvg', 
                        '_$s12JoinRequests20RequesterCredentialsC11isExhaustedSbvgTq', 
                        '_$s12JoinRequests20RequesterCredentialsC11isExhaustedSbvpMV', 
-                       '_$s12JoinRequests20RequesterCredentialsC12keyAgreement33_D738BC217E272C14463EFA4F344CEFD8LLAA010RequestKeyF0VvM', 
-                       '_$s12JoinRequests20RequesterCredentialsC12keyAgreement33_D738BC217E272C14463EFA4F344CEFD8LLAA010RequestKeyF0Vvg', 
-                       '_$s12JoinRequests20RequesterCredentialsC12keyAgreement33_D738BC217E272C14463EFA4F344CEFD8LLAA010RequestKeyF0Vvs', 
                        '_$s12JoinRequests20RequesterCredentialsC14ownerPublicKeyAC10Foundation4DataV_tKcfC', 
                        '_$s12JoinRequests20RequesterCredentialsC14ownerPublicKeyAC10Foundation4DataV_tKcfCTq', 
                        '_$s12JoinRequests20RequesterCredentialsC14ownerPublicKeyAC10Foundation4DataV_tKcfc', 
@@ -104,4 +100,8 @@ exports:
                        '_$sSo10IDSServiceC12JoinRequests0A8ProtocolACMc', '_$sSo10IDSServiceC12JoinRequests0A8ProtocolACWP', 
                        '_$ss26DefaultStringInterpolationV12JoinRequestsE06appendC0yyxSglF', 
                        _JoinRequestsVersionNumber, _JoinRequestsVersionString ]
+    weak-symbols:    [ '_$s12JoinRequests16OwnerCredentialsC9publicKey33_4845E404CDB651ABE8A06FC1B81E753ELL9CryptoKit4P256O0F9AgreementO06PublicF0Vvg', 
+                       '_$s12JoinRequests20RequesterCredentialsC12keyAgreement33_D738BC217E272C14463EFA4F344CEFD8LLAA010RequestKeyF0VvM', 
+                       '_$s12JoinRequests20RequesterCredentialsC12keyAgreement33_D738BC217E272C14463EFA4F344CEFD8LLAA010RequestKeyF0Vvg', 
+                       '_$s12JoinRequests20RequesterCredentialsC12keyAgreement33_D738BC217E272C14463EFA4F344CEFD8LLAA010RequestKeyF0Vvs' ]
 ...

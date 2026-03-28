@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WebInspector.framework/Versions/A/WebInspector'
-current-version: 623.1.14
+current-version: 624.1.16
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _NSStringFromRWIDebuggerAvailability, _RWIAutomationAvailabilityFromString, 
                        _RWIErrorDomain, _RWINSStringFromAutomationAvailability, _RWIProtocolInspectorFrontendConnectedNotification, 
                        _RWIProtocolInspectorFrontendDisconnectedNotification, __Z24RWIOSNameFromDeviceClass14RWIDeviceClass, 
@@ -34,25 +34,24 @@ exports:
                        RWIProtocolDOMAudioMediaStats, RWIProtocolDOMDataBinding, 
                        RWIProtocolDOMDomainEventDispatcher, RWIProtocolDOMEventListener, 
                        RWIProtocolDOMFlexOverlayConfig, RWIProtocolDOMGridOverlayConfig, 
-                       RWIProtocolDOMHighlightConfig, RWIProtocolDOMMediaStats, RWIProtocolDOMNode, 
-                       RWIProtocolDOMRGBAColor, RWIProtocolDOMSpatialVideoMetadata, 
+                       RWIProtocolDOMHighlightConfig, RWIProtocolDOMImmersiveVideoMetadata, 
+                       RWIProtocolDOMMediaStats, RWIProtocolDOMNode, RWIProtocolDOMRGBAColor, 
                        RWIProtocolDOMStorageDomainEventDispatcher, RWIProtocolDOMStorageStorageId, 
                        RWIProtocolDOMStyleable, RWIProtocolDOMVideoColorSpace, RWIProtocolDOMVideoMediaStats, 
-                       RWIProtocolDOMVideoPlaybackQuality, RWIProtocolDOMVideoProjectionMetadata, 
-                       RWIProtocolDOMViewportSize, RWIProtocolDebuggerAssertPauseReason, 
-                       RWIProtocolDebuggerBreakpointAction, RWIProtocolDebuggerBreakpointOptions, 
-                       RWIProtocolDebuggerBreakpointPauseReason, RWIProtocolDebuggerCSPViolationPauseReason, 
-                       RWIProtocolDebuggerCallFrame, RWIProtocolDebuggerFunctionDetails, 
-                       RWIProtocolDebuggerLocation, RWIProtocolDebuggerProbeSample, 
-                       RWIProtocolDebuggerScope, RWIProtocolGenericTypesSearchMatch, 
-                       RWIProtocolInspector, RWIProtocolJSONObject, RWIProtocolNetworkCachedResource, 
-                       RWIProtocolNetworkDomainEventDispatcher, RWIProtocolNetworkHeaders, 
-                       RWIProtocolNetworkInitiator, RWIProtocolNetworkMetrics, RWIProtocolNetworkRequest, 
-                       RWIProtocolNetworkResourceTiming, RWIProtocolNetworkResponse, 
-                       RWIProtocolNetworkWebSocketFrame, RWIProtocolNetworkWebSocketRequest, 
-                       RWIProtocolNetworkWebSocketResponse, RWIProtocolPageCookie, 
-                       RWIProtocolPageDomainEventDispatcher, RWIProtocolPageFrame, 
-                       RWIProtocolPageFrameResource, RWIProtocolPageFrameResourceTree, 
+                       RWIProtocolDOMVideoPlaybackQuality, RWIProtocolDOMViewportSize, 
+                       RWIProtocolDebuggerAssertPauseReason, RWIProtocolDebuggerBreakpointAction, 
+                       RWIProtocolDebuggerBreakpointOptions, RWIProtocolDebuggerBreakpointPauseReason, 
+                       RWIProtocolDebuggerCSPViolationPauseReason, RWIProtocolDebuggerCallFrame, 
+                       RWIProtocolDebuggerFunctionDetails, RWIProtocolDebuggerLocation, 
+                       RWIProtocolDebuggerProbeSample, RWIProtocolDebuggerScope, 
+                       RWIProtocolGenericTypesSearchMatch, RWIProtocolInspector, 
+                       RWIProtocolJSONObject, RWIProtocolNetworkCachedResource, RWIProtocolNetworkDomainEventDispatcher, 
+                       RWIProtocolNetworkHeaders, RWIProtocolNetworkInitiator, RWIProtocolNetworkMetrics, 
+                       RWIProtocolNetworkRequest, RWIProtocolNetworkResourceTiming, 
+                       RWIProtocolNetworkResponse, RWIProtocolNetworkWebSocketFrame, 
+                       RWIProtocolNetworkWebSocketRequest, RWIProtocolNetworkWebSocketResponse, 
+                       RWIProtocolPageCookie, RWIProtocolPageDomainEventDispatcher, 
+                       RWIProtocolPageFrame, RWIProtocolPageFrameResource, RWIProtocolPageFrameResourceTree, 
                        RWIProtocolPageSearchResult, RWIProtocolPageUserPreference, 
                        RWIProtocolRuntimeBasicBlock, RWIProtocolRuntimeCallArgument, 
                        RWIProtocolRuntimeCollectionEntry, RWIProtocolRuntimeEntryPreview, 

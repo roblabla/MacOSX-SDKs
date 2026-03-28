@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MLCompilerRuntime.framework/Versions/A/MLCompilerRuntime'
 current-version: 3404.3.1
 compatibility-version: 3404.3.1
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _mlc_binary_create, _mlc_binary_destroy, _mlc_binary_drop_error, 
                        _mlc_binary_error, _mlc_binary_execute, _mlc_binary_execute_sync, 
                        _mlc_binary_input, _mlc_binary_load, _mlc_binary_load_sync, 

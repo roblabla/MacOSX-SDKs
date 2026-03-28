@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TextToSpeechVoiceBankingSupport.framework/Versions/A/TextToSpeechVoiceBankingSupport'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s31TextToSpeechVoiceBankingSupport010TTSVBCloudD11ModelFileMOC10apiVersions5Int16VvpMV', 
                        '_$s31TextToSpeechVoiceBankingSupport010TTSVBCloudD11ModelFileMOC10fileFutureSo013_NSFileBackedL0_pSgvpMV', 
                        '_$s31TextToSpeechVoiceBankingSupport010TTSVBCloudD11ModelFileMOC12fetchRequestSo07NSFetchL0CyACGyFZTj', 

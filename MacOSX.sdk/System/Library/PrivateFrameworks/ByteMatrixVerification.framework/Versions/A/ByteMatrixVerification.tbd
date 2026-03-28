@@ -1,0 +1,53 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+install-name:    '/System/Library/PrivateFrameworks/ByteMatrixVerification.framework/Versions/A/ByteMatrixVerification'
+swift-abi-version: 7
+exports:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC06verifyE7AndHash15verificationKey12matrixBuffer9signature08parallelI0Sb9CryptoKit4P256O7SigningO06PublicK0V_10Foundation4DataVAM14ECDSASignatureVSbtKFZ', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC06verifyE7AndHash15verificationKey16matrixDataBuffer9signature08parallelI0yAC018CKWP256ECDSAPublicK0C_10Foundation0M0VAC0Q14ECDSASignatureCSbtKFZ', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyC17derRepresentationAE10Foundation4DataV_tKcfC', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyC17derRepresentationAE10Foundation4DataV_tKcfCTj', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyC17derRepresentationAE10Foundation4DataV_tKcfCTq', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyC17derRepresentationAE10Foundation4DataV_tKcfc', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyC18x963RepresentationAE10Foundation4DataV_tKcfC', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyC18x963RepresentationAE10Foundation4DataV_tKcfCTj', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyC18x963RepresentationAE10Foundation4DataV_tKcfCTq', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyC18x963RepresentationAE10Foundation4DataV_tKcfc', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyC3rawAE10Foundation4DataV_tKcfC', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyC3rawAE10Foundation4DataV_tKcfCTj', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyC3rawAE10Foundation4DataV_tKcfCTq', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyC3rawAE10Foundation4DataV_tKcfc', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyCAEycfC', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyCAEycfc', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyCMa', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyCMn', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyCMo', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyCMu', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyCN', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSAPublicKeyCfD', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSASignatureC3rawAE10Foundation4DataV_tKcfC', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSASignatureC3rawAE10Foundation4DataV_tKcfCTj', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSASignatureC3rawAE10Foundation4DataV_tKcfCTq', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSASignatureC3rawAE10Foundation4DataV_tKcfc', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSASignatureCAEycfC', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSASignatureCAEycfc', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSASignatureCMa', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSASignatureCMn', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSASignatureCMo', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSASignatureCMu', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSASignatureCN', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierC21CKWP256ECDSASignatureCfD', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierCACycfC', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierCACycfc', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierCMa', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierCMn', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierCMo', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierCN', 
+                       '_$s22ByteMatrixVerification05BytesB17SignatureVerifierCfD', 
+                       _ByteMatrixVerificationVersionNumber, _ByteMatrixVerificationVersionString ]
+    objc-classes:    [ _TtC22ByteMatrixVerification28BytesMatrixSignatureVerifier, 
+                       _TtCC22ByteMatrixVerification28BytesMatrixSignatureVerifier21CKWP256ECDSAPublicKey, 
+                       _TtCC22ByteMatrixVerification28BytesMatrixSignatureVerifier21CKWP256ECDSASignature ]
+...

@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ImagePlaygroundInternal.framework/Versions/A/ImagePlaygroundInternal'
-current-version: 148.2.4
+current-version: 148.4.3
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15ImagePlayground0A10XPCWrapperC0aB8InternalE010playgroundA0AD0bA0Vvg', 
                        '_$s15ImagePlayground0A10XPCWrapperC0aB8InternalE010playgroundA0AD0bA0VvpMV', 
                        '_$s16VisualGeneration14GeneratedImageV0D18PlaygroundInternal0dB0VAbDMc', 
@@ -745,7 +745,7 @@ exports:
                        '_$s23ImagePlaygroundInternal14MagicViewModelCMu', '_$s23ImagePlaygroundInternal14MagicViewModelCN', 
                        '_$s23ImagePlaygroundInternal14MagicViewModelCfD', '_$s23ImagePlaygroundInternal14MagicViewModelCfd', 
                        '_$s23ImagePlaygroundInternal14NonUIGeneratorC14stopGenerationyySo6NSUUIDCF', 
-                       '_$s23ImagePlaygroundInternal14NonUIGeneratorC15startGeneration5style14promptElements26personalizationPolicyValue12replyHandler7batchIDySo8NSStringC_SaySo15GPPromptElementCGSo8NSNumberCy0aB00A10XPCWrapperCSg_s5Error_pSgtYbcSo6NSUUIDCtF', 
+                       '_$s23ImagePlaygroundInternal14NonUIGeneratorC15startGeneration5style14promptElements14optionsWrapper10imageIndex7batchID12replyHandlerySo8NSStringC_SaySo15GPPromptElementCG0aB00aB7OptionsV10XPCWrapperCSo8NSNumberCSo6NSUUIDCyAP0aW0CSg_s5Error_pSgtYbctF', 
                        '_$s23ImagePlaygroundInternal14NonUIGeneratorC16acquireAssertionyyF', 
                        '_$s23ImagePlaygroundInternal14NonUIGeneratorC16releaseAssertionyyF', 
                        '_$s23ImagePlaygroundInternal14NonUIGeneratorC20fetchAvailableStyles10completionyySaySo8NSStringCGYbc_tF', 
@@ -1321,10 +1321,10 @@ exports:
                        '_$s23ImagePlaygroundInternal27GPMultiSelectionPickerSceneVyxG12ExtensionKit03ApphG0AAMc', 
                        '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC015setPreGeneratedA0yy0aB00A10XPCWrapperCFTj', 
                        '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC015setPreGeneratedA0yy0aB00A10XPCWrapperCFTq', 
-                       '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC03setA12ImportPolicyyySo8NSNumberCFTj', 
-                       '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC03setA12ImportPolicyyySo8NSNumberCFTq', 
                        '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC09setSourceA0yy0aB00A10XPCWrapperCSgFTj', 
                        '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC09setSourceA0yy0aB00A10XPCWrapperCSgFTq', 
+                       '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC10setOptionsyy0aB00abI0V10XPCWrapperCFTj', 
+                       '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC10setOptionsyy0aB00abI0V10XPCWrapperCFTq', 
                        '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC13setRecipeDatayy10Foundation0J0VSgFTj', 
                        '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC13setRecipeDatayy10Foundation0J0VSgFTq', 
                        '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC14extensionStateAA013GPUIExtensionI0Cvg', 
@@ -1351,8 +1351,6 @@ exports:
                        '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC23playgroundHomeViewModelAA0bijK0CSgvpMV', 
                        '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC23playgroundHomeViewModelAA0bijK0CSgvsTj', 
                        '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC23playgroundHomeViewModelAA0bijK0CSgvsTq', 
-                       '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC24setPersonalizationPolicyyySo8NSNumberCFTj', 
-                       '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC24setPersonalizationPolicyyySo8NSNumberCFTq', 
                        '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC24setResponsibleAuditTokenyy10Foundation4DataVFTj', 
                        '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC24setResponsibleAuditTokenyy10Foundation4DataVFTq', 
                        '_$s23ImagePlaygroundInternal27GPServiceSideExportedObjectC26setAllowedGenerationStylesyySaySo8NSStringCGFTj', 

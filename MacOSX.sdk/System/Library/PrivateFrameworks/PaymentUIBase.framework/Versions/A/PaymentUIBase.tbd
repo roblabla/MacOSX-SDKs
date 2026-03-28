@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PaymentUIBase.framework/Versions/A/PaymentUIBase'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s13PaymentUIBase0A11DetailSheetO015automaticReloadA7RequestyA2CmFWC', 
                        '_$s13PaymentUIBase0A11DetailSheetO05setupA6MethodyA2CmFWC', 
                        '_$s13PaymentUIBase0A11DetailSheetO08deferredA7RequestyA2CmFWC', 

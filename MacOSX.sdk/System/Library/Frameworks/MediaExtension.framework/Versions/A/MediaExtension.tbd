@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MediaExtension.framework/Versions/A/MediaExtension'
-current-version: 3290.6.5
+current-version: 3305.24.5
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s14MediaExtension26MERAWProcessorNotificationO012readyForMoreA13DataDidChangeSo18NSNotificationNameavgZ', 
                        '_$s14MediaExtension26MERAWProcessorNotificationO012readyForMoreA13DataDidChangeSo18NSNotificationNameavpZMV', 
                        '_$s14MediaExtension26MERAWProcessorNotificationO15valuesDidChangeSo18NSNotificationNameavgZ', 
@@ -48,7 +46,7 @@ exports:
                        '_$sSo32MERAWProcessorPixelBufferManagerC14MediaExtensionE05pixelC10AttributesSDySSs8Sendable_pGvg', 
                        '_$sSo32MERAWProcessorPixelBufferManagerC14MediaExtensionE05pixelC10AttributesSDySSs8Sendable_pGvpMV', 
                        '_$sSo32MERAWProcessorPixelBufferManagerC14MediaExtensionE05pixelC10AttributesSDySSs8Sendable_pGvs' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _MERAWProcessorReadyForMoreMediaDataDidChangeNotification, 
                        _MERAWProcessorValuesDidChangeNotification, _MEVideoDecoderReadyForMoreMediaDataDidChangeNotification, 
                        _MediaExtensionErrorDomain ]

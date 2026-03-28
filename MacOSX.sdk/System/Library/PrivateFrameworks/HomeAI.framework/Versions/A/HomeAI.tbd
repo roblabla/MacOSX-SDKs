@@ -1,19 +1,28 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/HomeAI.framework/Versions/A/HomeAI'
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__120__shared_ptr_emplaceINS_6vectorINS_5tupleIJxxfEEENS_9allocatorIS3_EEEENS4_IS6_EEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceINS_6vectorIxNS_9allocatorIxEEEENS2_IS4_EEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceINS_6vectorINS_5tupleIJxxfEEENS_9allocatorIS3_EEEENS4_IS6_EEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceINS_6vectorIxNS_9allocatorIxEEEENS2_IS4_EEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _HMIAnalysisQOS, _HMIAspectRatioEqualToAspectRatio, _HMIAspectRatioIsValid, 
-                       _HMIAspectRatioMake, _HMICGPointClampWithSize, _HMICGRectArea, 
-                       _HMICGRectCreateArrayRepresentation, _HMICGRectDescription, 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s6HomeAI14KalmanFilter2DV22getVelocityUncertainty12CoreGraphics7CGFloatVyF', 
+                       '_$s6HomeAI14KalmanFilter2DV5stateSay12CoreGraphics7CGFloatVGvM', 
+                       '_$s6HomeAI14KalmanFilter2DV5stateSay12CoreGraphics7CGFloatVGvg', 
+                       '_$s6HomeAI14KalmanFilter2DV5stateSay12CoreGraphics7CGFloatVGvpMV', 
+                       '_$s6HomeAI14KalmanFilter2DV5stateSay12CoreGraphics7CGFloatVGvs', 
+                       '_$s6HomeAI14KalmanFilter2DV6update11measurement9timestampySo7CGPointV_SdtF', 
+                       '_$s6HomeAI14KalmanFilter2DV7predict2dtSo7CGPointV8position_AG8velocityt12CoreGraphics7CGFloatV_tF', 
+                       '_$s6HomeAI14KalmanFilter2DV8getSpeed12CoreGraphics7CGFloatVyF', 
+                       '_$s6HomeAI14KalmanFilter2DV8position9timestampACSo7CGPointV_SdtcfC', 
+                       '_$s6HomeAI14KalmanFilter2DVMa', '_$s6HomeAI14KalmanFilter2DVMn', 
+                       '_$s6HomeAI14KalmanFilter2DVN', _HMIAnalysisQOS, _HMIAspectRatioEqualToAspectRatio, 
+                       _HMIAspectRatioIsValid, _HMIAspectRatioMake, _HMICGPointClampWithSize, 
+                       _HMICGRectArea, _HMICGRectCreateArrayRepresentation, _HMICGRectDescription, 
                        _HMICGRectDivideAlongHeight, _HMICGRectExpandWithinLimit, 
                        _HMICGRectFlipCoordinateSpace, _HMICGRectFlipCoordinateSpaceNormalized, 
                        _HMICGRectGeneralizedIntersectionOverUnion, _HMICGRectIntersectionOverArea, 

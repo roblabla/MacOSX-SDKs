@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UIKitMacHelper.framework/Versions/A/UIKitMacHelper'
-current-version: 9126.2.4
+current-version: 9126.4.27
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CatalystTextInputLog_MacHelper, _HIDTimestampForNSEvent, 
                        _UINSActivationStateForScene, _UINSActivityItemsConfigurationInteractionServicesMenu, 
                        _UINSActivityItemsConfigurationMetadataKeyLinkPresentationMetadata, 
@@ -73,7 +71,7 @@ exports:
                        _UINSShouldHideHostWindowDidChangeNotification, _UINSShouldHideHostWindowForScene, 
                        _UINSSizeRestrictionsForScene, _UINSSupportedInterfaceOrientationsForFullScreenScene, 
                        _UINSSystemAppearanceDecodeColor, _UINSTextInputCurrentHardwareLayoutName, 
-                       _UINSToolbarItemFrame, _UINSTrackingShadowRemoteControllerDebugOverlayEnabled, 
+                       _UINSToolbarItemViewForPopoverAnchorWithPositioningRect, _UINSTrackingShadowRemoteControllerDebugOverlayEnabled, 
                        _UINSUIWindowsForScene, _UINSViewBridgeLog, _UINSViewControllerBridgingLog, 
                        _UINSWindowHostingLog, _UINSWindowMouseEnteredNotification, 
                        _UINSWindowMouseExitedNotification, _UINSWindowProxyForScene, 

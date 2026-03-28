@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Coherence.framework/Versions/A/Coherence'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10CodingKeys9Coherence13CRValueStructPTl', '_$s10Foundation12DateIntervalV9Coherence6CRTypeADMc', 
                        '_$s10Foundation12DateIntervalV9Coherence6CRTypeADWP', '_$s10Foundation12DateIntervalV9Coherence7CRValueADMc', 
                        '_$s10Foundation12DateIntervalV9Coherence7CRValueADWP', '_$s10Foundation12DateIntervalV9Coherence9CRCodableADMc', 

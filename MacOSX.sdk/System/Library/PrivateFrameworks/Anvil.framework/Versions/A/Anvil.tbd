@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Anvil.framework/Versions/A/Anvil'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s5Anvil11BillingPlanV11workspaceIDSSvg', '_$s5Anvil11BillingPlanV11workspaceIDSSvpMV', 
                        '_$s5Anvil11BillingPlanV2eeoiySbAC_ACtFZ', '_$s5Anvil11BillingPlanV4hash4intoys6HasherVz_tF', 
                        '_$s5Anvil11BillingPlanV8CategoryO2eeoiySbAE_AEtFZ', '_$s5Anvil11BillingPlanV8CategoryO4freeyA2EmFWC', 
@@ -380,7 +378,23 @@ exports:
                        '_$s5Anvil28ExternalPartnerAuthenticatorV7signOutyyYaKF', 
                        '_$s5Anvil28ExternalPartnerAuthenticatorV7signOutyyYaKFTu', 
                        '_$s5Anvil28ExternalPartnerAuthenticatorVMa', '_$s5Anvil28ExternalPartnerAuthenticatorVMn', 
-                       '_$s5Anvil28ExternalPartnerAuthenticatorVN', '_$s5Anvil8UserInfoV13AccountStatusO8rawValueAESgSS_tcfC', 
+                       '_$s5Anvil28ExternalPartnerAuthenticatorVN', '_$s5Anvil6MetricV10tokenCountSiSgvM', 
+                       '_$s5Anvil6MetricV10tokenCountSiSgvg', '_$s5Anvil6MetricV10tokenCountSiSgvpMV', 
+                       '_$s5Anvil6MetricV10tokenCountSiSgvs', '_$s5Anvil6MetricV15tokensPerSecondSdSgvM', 
+                       '_$s5Anvil6MetricV15tokensPerSecondSdSgvg', '_$s5Anvil6MetricV15tokensPerSecondSdSgvpMV', 
+                       '_$s5Anvil6MetricV15tokensPerSecondSdSgvs', '_$s5Anvil6MetricV15userAccountTypeAA11BillingPlanV8CategoryOSgvM', 
+                       '_$s5Anvil6MetricV15userAccountTypeAA11BillingPlanV8CategoryOSgvg', 
+                       '_$s5Anvil6MetricV15userAccountTypeAA11BillingPlanV8CategoryOSgvpMV', 
+                       '_$s5Anvil6MetricV15userAccountTypeAA11BillingPlanV8CategoryOSgvs', 
+                       '_$s5Anvil6MetricV21totalLatencyInSecondsSdSgvM', '_$s5Anvil6MetricV21totalLatencyInSecondsSdSgvg', 
+                       '_$s5Anvil6MetricV21totalLatencyInSecondsSdSgvpMV', '_$s5Anvil6MetricV21totalLatencyInSecondsSdSgvs', 
+                       '_$s5Anvil6MetricV22lastTokenTimeInSecondsSdSgvM', '_$s5Anvil6MetricV22lastTokenTimeInSecondsSdSgvg', 
+                       '_$s5Anvil6MetricV22lastTokenTimeInSecondsSdSgvpMV', '_$s5Anvil6MetricV22lastTokenTimeInSecondsSdSgvs', 
+                       '_$s5Anvil6MetricV23firstTokenTimeInSeconds04lastdefG0012totalLatencyfG015tokensPerSecond10tokenCount15userAccountTypeACSdSg_A3JSiSgAA11BillingPlanV8CategoryOSgtcfC', 
+                       '_$s5Anvil6MetricV23firstTokenTimeInSecondsSdSgvM', '_$s5Anvil6MetricV23firstTokenTimeInSecondsSdSgvg', 
+                       '_$s5Anvil6MetricV23firstTokenTimeInSecondsSdSgvpMV', '_$s5Anvil6MetricV23firstTokenTimeInSecondsSdSgvs', 
+                       '_$s5Anvil6MetricVMa', '_$s5Anvil6MetricVMn', '_$s5Anvil6MetricVN', 
+                       '_$s5Anvil8UserInfoV13AccountStatusO8rawValueAESgSS_tcfC', 
                        '_$s5Anvil8UserInfoV13AccountStatusO8rawValueSSvg', '_$s5Anvil8UserInfoV13AccountStatusO8rawValueSSvpMV', 
                        '_$s5Anvil8UserInfoV13AccountStatusO9suspendedyA2EmFWC', '_$s5Anvil8UserInfoV13AccountStatusOMa', 
                        '_$s5Anvil8UserInfoV13AccountStatusOMn', '_$s5Anvil8UserInfoV13AccountStatusON', 

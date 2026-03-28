@@ -1,23 +1,21 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/AVFAudio.framework/Versions/A/AVFAudio'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation$$1$1.0$11.3$$', 
                        '$ld$previous$/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation$$6$1.0$14.5$$', 
-                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$7.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE14orientationTopABvpZMV$', 
-                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$7.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE15orientationBackABvpZMV$', 
-                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$7.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE16orientationFrontABvpZMV$', 
-                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$7.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE17orientationBottomABvpZMV$', 
-                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$7.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE20polarPatternCardioidABvpZMV$', 
-                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$7.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE23polarPatternSubcardioidABvpZMV$', 
-                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$7.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE27polarPatternOmnidirectionalABvpZMV$', 
-                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$8.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE15orientationLeftABvpZMV$', 
-                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$8.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE16orientationRightABvpZMV$', 
+                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$1.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE14orientationTopABvpZMV$', 
+                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$1.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE15orientationBackABvpZMV$', 
+                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$1.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE15orientationLeftABvpZMV$', 
+                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$1.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE16orientationFrontABvpZMV$', 
+                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$1.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE16orientationRightABvpZMV$', 
+                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$1.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE17orientationBottomABvpZMV$', 
+                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$1.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE20polarPatternCardioidABvpZMV$', 
+                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$1.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE23polarPatternSubcardioidABvpZMV$', 
+                       '$ld$previous$/usr/lib/swift/libswiftAVFoundation.dylib$$6$1.0$26.0$_$sSo22AVAudioSessionLocationa12AVFoundationE27polarPatternOmnidirectionalABvpZMV$', 
                        '_$sSo22AVAudioSessionLocationa12AVFoundationE14orientationTopABvpZMV', 
                        '_$sSo22AVAudioSessionLocationa12AVFoundationE15orientationBackABvpZMV', 
                        '_$sSo22AVAudioSessionLocationa12AVFoundationE15orientationLeftABvpZMV', 
@@ -182,9 +180,9 @@ exports:
     objc-ivars:      [ AVAudioBuffer._impl, AVAudioNode._impl, AVAudioSequencer._impl, 
                        AVAudioUnitComponent._impl, AVAudioUnitComponentManager._impl, 
                        AVMIDIPlayer._impl, AVMusicTrack._impl ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AVAudioApplicationInputMuteHandlerChangeNotification, _AVAudioApplicationMuteHandlerIsActiveKey ]
     objc-classes:    [ AVAudioRoutingArbiter ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _AVAudioSessionAudioHardwareFormatChangeNotification ]
 ...

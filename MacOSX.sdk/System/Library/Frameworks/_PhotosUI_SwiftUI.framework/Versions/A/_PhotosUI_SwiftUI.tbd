@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_PhotosUI_SwiftUI.framework/Versions/A/_PhotosUI_SwiftUI'
-current-version: 821.0.120
+current-version: 841.0.101
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s015_PhotosUI_SwiftB00A10PickerItemV12itemProviderSo06NSItemG0Cvg', 
                        '_$s015_PhotosUI_SwiftB00A10PickerItemV12itemProviderSo06NSItemG0CvpMV', 
                        '_$s015_PhotosUI_SwiftB00A10PickerItemV14itemIdentifierACSS_tcfC', 
@@ -103,6 +103,8 @@ exports:
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E30_photosPickerOnSecondaryActionyQryyScMYccFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E30_photosPickerSheetSizeOverrideyQrSo6CGSizeVSgF', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E30_photosPickerSheetSizeOverrideyQrSo6CGSizeVSgFQOMQ', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E31_photosPickerDecoratedQueryDatayQr10Foundation0I0VSgF', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E31_photosPickerDecoratedQueryDatayQr10Foundation0I0VSgFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E31photosPickerAccessoryVisibility_5edgesQrAA0H0O_AA4EdgeO3SetVtF', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E31photosPickerAccessoryVisibility_5edgesQrAA0H0O_AA4EdgeO3SetVtFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E32_photosPickerAlbumsConfigurationyQr0dB0019_PHPickerCollectionH0VSgF', 
@@ -115,6 +117,8 @@ exports:
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E32_photosPickerPeopleConfigurationyQr0dB0019_PHPickerCollectionH0VSgFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E32photosPickerDisabledCapabilitiesyQrSo08PHPickerH0VF', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E32photosPickerDisabledCapabilitiesyQrSo08PHPickerH0VFQOMQ', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E34_photosPickerMinimumSelectionLimityQrSiSgF', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E34_photosPickerMinimumSelectionLimityQrSiSgFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E37_photosPickerAutomaticDismissDisabledyQrSbF', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E37_photosPickerAutomaticDismissDisabledyQrSbFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E40_photosPickerDisabledPrivateCapabilitiesyQrSo09_PHPickerhI0VF', 

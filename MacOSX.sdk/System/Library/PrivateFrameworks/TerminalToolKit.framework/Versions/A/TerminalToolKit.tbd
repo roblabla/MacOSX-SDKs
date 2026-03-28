@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TerminalToolKit.framework/Versions/A/TerminalToolKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation4DateV15TerminalToolKitE06randomB05start3endACSi_SitFZ', 
                        '_$s10Foundation4DateV15TerminalToolKitE15printableString4withS2S_tF', 
                        '_$s15TerminalToolKit10ANSIColorsO1poiyS2S_ACtFZ', '_$s15TerminalToolKit10ANSIColorsO1poiySSAC_SStFZ', 

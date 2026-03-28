@@ -1,18 +1,18 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox'
-current-version: 1248.2
+current-version: 1249.3
 parent-umbrella:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     umbrella:        Carbon
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ AGL, AppKit, AppleShareClient, Backup, Dock, Finder, FinderKit, 
                        ImageKit, Printing_UI, QTKit, QTKitServer, RemoteViewServices, 
                        Shortcut, Suggestions, UIKitMacHelper, ViewBridge, loginwindow ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AEGetInteractionAllowed, _AEGetTheCurrentEvent, _AEInteractWithUser, 
                        _AEProcessAppleEvent, _AEProcessEvent, _AEResetTimer, _AEResumeTheCurrentEvent, 
                        _AESend, _AESetInteractionAllowed, _AESetTheCurrentEvent, 
@@ -462,6 +462,6 @@ exports:
                        _kTISTypeKeyboardLayout, _kTISTypeKeyboardSyntheticRomanMode, 
                        _kTISTypeKeyboardViewer ]
 reexports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ShowHideProcess ]
 ...

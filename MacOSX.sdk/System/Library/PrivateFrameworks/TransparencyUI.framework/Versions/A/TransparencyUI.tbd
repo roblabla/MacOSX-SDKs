@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TransparencyUI.framework/Versions/A/TransparencyUI'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14TransparencyUI16TUIAccountStatusV4uris13loggableDatas11idmsDevicesACSaySSG_SaySo14KTLoggableDataCGSaySo12KTIDMSDeviceCGtcfC', 
                        '_$s14TransparencyUI16TUIAccountStatusVMa', '_$s14TransparencyUI16TUIAccountStatusVMn', 
                        '_$s14TransparencyUI16TUIAccountStatusVN', '_$s14TransparencyUI20TUIAccountStatusViewV05SwiftB00E0AAMc', 

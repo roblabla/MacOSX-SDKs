@@ -1,19 +1,16 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FMNetworking.framework/Versions/A/FMNetworking'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FMFCore, FMFCoreTests, FMIPCore, FMIPCoreTests, FMNetworkingTests, 
                        SPSharedTests, findmylocateagent, findmylocated, findmylocatedTests, 
                        fmipcoretool, searchpartyd, searchpartydTests, searchpartyuseragent, 
                        sptool ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12FMNetworking0A10URLSessionMp', '_$s12FMNetworking0A10URLSessionP10uploadTask4with8fromFile17completionHandlerSo018NSURLSessionUploadD0C10Foundation10URLRequestV_AJ3URLVyAJ4DataVSg_So13NSURLResponseCSgs5Error_pSgtctFTj', 
                        '_$s12FMNetworking0A10URLSessionP10uploadTask4with8fromFile17completionHandlerSo018NSURLSessionUploadD0C10Foundation10URLRequestV_AJ3URLVyAJ4DataVSg_So13NSURLResponseCSgs5Error_pSgtctFTq', 
                        '_$s12FMNetworking0A10URLSessionP24finishTasksAndInvalidateyyFTj', 

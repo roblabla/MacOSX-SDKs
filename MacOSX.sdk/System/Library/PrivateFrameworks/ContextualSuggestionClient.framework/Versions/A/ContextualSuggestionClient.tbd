@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ContextualSuggestionClient.framework/Versions/A/ContextualSuggestionClient'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s26ContextualSuggestionClient010contextualB15ServerInterfaceSo14NSXPCInterfaceCvg', 
                        '_$s26ContextualSuggestionClient010contextualB16ServiceInterfaceSo14NSXPCInterfaceCvg', 
                        '_$s26ContextualSuggestionClient010contextualb11ServiceMachE4NameSSvg', 
@@ -555,7 +555,6 @@ exports:
                        '_$sSo28ATXAmbientSuggestionProviderC010ContextualB6ClientE16logViewDidAppearyyF', 
                        '_$sSo28ATXAmbientSuggestionProviderC010ContextualB6ClientE16stackSuggestionsSaySo014ATXWidgetStackB0CGSgvg', 
                        '_$sSo28ATXAmbientSuggestionProviderC010ContextualB6ClientE16stackSuggestionsSaySo014ATXWidgetStackB0CGSgvpMV', 
-                       '_$sSo28ATXAmbientSuggestionProviderC010ContextualB6ClientE17logStackDidChange2to6reasonySo9ATXWidgetC_So0lgI6ReasonVtF', 
                        '_$sSo28ATXAmbientSuggestionProviderC010ContextualB6ClientE18logWidgetDidAppearyySo9ATXWidgetCF', 
                        '_$sSo28ATXAmbientSuggestionProviderC010ContextualB6ClientE19logViewDidDisappearyyF', 
                        '_$sSo28ATXAmbientSuggestionProviderC010ContextualB6ClientE21logWidgetDidDisappearyySo9ATXWidgetCF', 
@@ -581,8 +580,8 @@ exports:
                        '_$sSo29ATXAmbientConfigurationReaderCMa', _ContextualSuggestionClientVersionNumber, 
                        _ContextualSuggestionClientVersionString, _kATXAmbientConfigDidUpdateNotification ]
     objc-classes:    [ ATXAmbientConfigurationReader, ATXAmbientLog, ATXAmbientSuggestionProvider, 
-                       ATXContextualEngineLog, ATXContextualSuggestionSnapshot, ATXIntentComparator, 
-                       ATXSpotlightSuggestions, ATXWidget, ATXWidgetLocationAuthorizationTracker, 
+                       ATXCSCWidgetPersonality, ATXContextualEngineLog, ATXContextualSuggestionSnapshot, 
+                       ATXIntentComparator, ATXSpotlightSuggestions, ATXWidget, ATXWidgetLocationAuthorizationTracker, 
                        ATXWidgetStack, ATXWidgetStackSuggestion, _TtC26ContextualSuggestionClient20ContextualSuggestion, 
                        _TtC26ContextualSuggestionClient21ContextRepresentation, _TtC26ContextualSuggestionClient26ContextualActionSuggestion, 
                        _TtC26ContextualSuggestionClient26ContextualIntentSuggestion, 

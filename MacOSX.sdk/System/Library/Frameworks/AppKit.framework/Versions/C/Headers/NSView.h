@@ -286,6 +286,9 @@ typedef NSInteger NSToolTipTag;
 
 @property BOOL postsBoundsChangedNotifications;
 
+/*! The nearest ancestor scroll view that contains the current view as part of its document view.
+ * - Note: If the current view is not embedded inside a scroll view, the value of this property is `nil`. This property does not contain the current view if the current view is itself a scroll view. It always contains an ancestor scroll view.
+ */
 @property (nullable, readonly, strong) NSScrollView *enclosingScrollView;
 
 - (nullable NSMenu *)menuForEvent:(NSEvent *)event;
@@ -605,8 +608,10 @@ APPKIT_EXTERN NSDefinitionPresentationType const NSDefinitionPresentationTypeDic
 
 API_AVAILABLE(macos(14.0))
 @interface NSView (NSDisplayLink)
-/*
-    Returns a new display link whose callback will be invoked in-sync with the display the view is on. If the view is hidden, or not on any display, the callback will not be invoked.
+/**
+    Returns a new display link whose callback will be invoked in-sync with the display the view is on.
+    
+    If the view is hidden, or not on any display, the callback will not be invoked.
 */
 - (CADisplayLink *)displayLinkWithTarget:(id)target selector:(SEL)selector NS_SWIFT_NAME(displayLink(target:selector:));
 @end

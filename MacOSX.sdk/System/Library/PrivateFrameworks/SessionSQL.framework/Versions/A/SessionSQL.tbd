@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SessionSQL.framework/Versions/A/SessionSQL'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ SessionCore, SessionCoreTests, SessionSQLTests, liveactivitiesd ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation4DataV10SessionSQL12SQLPrimitiveADMc', '_$s10Foundation4DataV10SessionSQL12SQLPrimitiveADWP', 
                        '_$s10SessionSQL11SQLDatabaseC13inTransaction6reason_SbSS_SbyKXEtKF', 
                        '_$s10SessionSQL11SQLDatabaseC13performSimpleys5Int64VAA12SQLStatementVKF', 

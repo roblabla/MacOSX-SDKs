@@ -1,18 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MediaAnalysisServices.framework/Versions/A/MediaAnalysisServices'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _MADSafetyClassificationGoreViolenceResultKey, _MADSafetyClassificationNudityResultKey, 
-                       _MADSignpostLog, _MADTextEmbeddingCalibrationVersionCurrent, 
-                       _MADUnifiedEmbeddingVersionToString, _MADVIDomainArt, _MADVIDomainMedia, 
-                       _MADVIDomainPackagedProducts, _MADVIFeatureARKitThirdParty, 
-                       _MADVISuggestionTypeAutomatic, _MADVISuggestionTypeGlyph, 
-                       _MADVISuggestionTypeHighlightedSubject, _MADVISuggestionTypeInfoPanel, 
-                       _MediaAnalysisServicesVersionNumber, _MediaAnalysisServicesVersionString ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _MADComputeUnitsToString, _MADSafetyClassificationGoreViolenceResultKey, 
+                       _MADSafetyClassificationNudityResultKey, _MADSignpostLog, 
+                       _MADTextEmbeddingCalibrationVersionCurrent, _MADUnifiedEmbeddingVersionToString, 
+                       _MADVIDomainArt, _MADVIDomainMedia, _MADVIDomainPackagedProducts, 
+                       _MADVIFeatureARKitThirdParty, _MADVISuggestionTypeAutomatic, 
+                       _MADVISuggestionTypeGlyph, _MADVISuggestionTypeHighlightedSubject, 
+                       _MADVISuggestionTypeInfoPanel, _MediaAnalysisServicesVersionNumber, 
+                       _MediaAnalysisServicesVersionString ]
     objc-classes:    [ MADCaptionResult, MADComputeService, MADComputeServiceProxy, 
                        MADCoreMLObservation, MADCoreMLRequest, MADCoreMLResult, MADDetectedFace, 
                        MADDetectedFaceVideoEntry, MADEmbeddingResult, MADExposureImageRequest, 
@@ -41,13 +40,14 @@ exports:
                        MADSharpnessResult, MADTextEmbeddingRequest, MADTextEmbeddingResult, 
                        MADTextInput, MADTextInputSegment, MADTextInputTextSegment, 
                        MADTextInputTokenSegment, MADTextRequest, MADTextResult, MADTextResultsPayload, 
-                       MADTimer, MADUserSafetyPolicy, MADVIDocumentRecognitionRequest, 
-                       MADVIDocumentRecognitionResult, MADVIFaceRequest, MADVIFaceResult, 
-                       MADVIMachineReadableCodeDetectionRequest, MADVIMachineReadableCodeDetectionResult, 
-                       MADVIMachineReadableCodeDetectionResultItem, MADVIRectangleDetectionRequest, 
-                       MADVIRectangleDetectionResult, MADVISceneClassificationRequest, 
-                       MADVISceneClassificationResult, MADVITextLookupRequest, MADVITextLookupResult, 
-                       MADVIUserFeedbackRequest, MADVIUserFeedbackResult, MADVIVisualSearchGatingDomainInfo, 
+                       MADTextTokenizationRequest, MADTextTokenizationResult, MADTimer, 
+                       MADUserSafetyPolicy, MADVIDocumentRecognitionRequest, MADVIDocumentRecognitionResult, 
+                       MADVIFaceRequest, MADVIFaceResult, MADVIMachineReadableCodeDetectionRequest, 
+                       MADVIMachineReadableCodeDetectionResult, MADVIMachineReadableCodeDetectionResultItem, 
+                       MADVIRectangleDetectionRequest, MADVIRectangleDetectionResult, 
+                       MADVISceneClassificationRequest, MADVISceneClassificationResult, 
+                       MADVITextLookupRequest, MADVITextLookupResult, MADVIUserFeedbackRequest, 
+                       MADVIUserFeedbackResult, MADVIVisualSearchGatingDomainInfo, 
                        MADVIVisualSearchGatingRequest, MADVIVisualSearchGatingResult, 
                        MADVIVisualSearchGatingResultItem, MADVIVisualSearchRegionAttributes, 
                        MADVIVisualSearchRequest, MADVIVisualSearchResult, MADVIVisualSearchResultItem, 

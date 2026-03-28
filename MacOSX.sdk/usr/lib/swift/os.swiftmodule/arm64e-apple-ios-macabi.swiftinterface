@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-ios26.2-macabi -enable-objc-interop -assert-config DisableReplacement -autolink-force-load -enable-library-evolution -module-link-name swiftos -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1076.40.2 -module-name os
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-ios26.4-macabi -enable-objc-interop -assert-config DisableReplacement -autolink-force-load -enable-library-evolution -module-link-name swiftos -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1082 -module-name os
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import ObjectiveC
 import Swift
 import _Concurrency
@@ -13,10 +13,8 @@ import _SwiftConcurrencyShims
 @_exported import os.workgroup
 @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 public func os_log(_ type: os.OSLogType, dso: Swift.UnsafeRawPointer = #dsohandle, log: os.OSLog = .default, _ message: Swift.StaticString, _ args: any Swift.CVarArg...)
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
 public func os_log(_ message: Swift.StaticString, dso: Swift.UnsafeRawPointer? = #dsohandle, log: os.OSLog = .default, type: os.OSLogType = .default, _ args: any Swift.CVarArg...)
-#endif
 extension os.OSLogType {
   @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
   public static let `default`: os.OSLogType
@@ -196,13 +194,11 @@ extension os.OSLogInterpolation {
      
     self.appendInterpolation(unsafeBitCast(_bridgeErrorToNSError(error()), to: NSObject.self), privacy: privacy, attributes: attributes)
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_disfavoredOverload @_alwaysEmitIntoClient @_optimize(none) @_semantics("constant_evaluable") @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ error: @autoclosure @escaping () -> (any Swift.Error)?, privacy: os.OSLogPrivacy = .auto, attributes: Swift.String = "") {
      
      
     self.appendInterpolation(error().map({ unsafeBitCast(_bridgeErrorToNSError($0), to: NSObject.self) }), privacy: privacy, attributes: attributes)
   }
-  #endif
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct OSLogFloatFormatting {
@@ -230,7 +226,6 @@ extension os.OSLogInterpolation {
   }
   @usableFromInline
   internal var notation: os.OSLogFloatFormatting.Notation
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   @_transparent internal init(explicitPositiveSign: Swift.Bool = false, uppercase: Swift.Bool = false, precision: (() -> Swift.Int)?, notation: os.OSLogFloatFormatting.Notation) {
     self.explicitPositiveSign = explicitPositiveSign
@@ -238,7 +233,6 @@ extension os.OSLogInterpolation {
     self.precision = precision
     self.notation = notation
   }
-  #endif
   @_semantics("constant_evaluable") @inlinable @_optimize(none) public static var fixed: os.OSLogFloatFormatting {
     get { .fixed() }
   }
@@ -310,7 +304,6 @@ extension os.OSLogInterpolation {
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogFloatFormatting {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_semantics("constant_evaluable") @inlinable @_optimize(none) internal static func _formatStringLengthModifier<I>(_ type: I.Type) -> Swift.String? where I : Swift.FloatingPoint {
     switch type {
      
@@ -319,7 +312,6 @@ extension os.OSLogFloatFormatting {
     default: return nil
     }
   }
-  #endif
   @_semantics("constant_evaluable") @_alwaysEmitIntoClient @_optimize(none) internal func formatSpecifier<I>(for type: I.Type, align: os.OSLogStringAlignment, privacy: os.OSLogPrivacy, attributes: Swift.String) -> Swift.String where I : Swift.FloatingPoint {
     var specification = "%"
      
@@ -463,7 +455,6 @@ extension os.OSLogArguments {
   internal var uppercase: Swift.Bool
   @usableFromInline
   internal var minDigits: (() -> Swift.Int)?
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   @_transparent internal init(radix: Swift.Int = 10, explicitPositiveSign: Swift.Bool = false, includePrefix: Swift.Bool = false, uppercase: Swift.Bool = false, minDigits: (() -> Swift.Int)?) {
     self.radix = radix
@@ -472,7 +463,6 @@ extension os.OSLogArguments {
     self.uppercase = uppercase
     self.minDigits = minDigits
   }
-  #endif
   @_semantics("constant_evaluable") @inlinable @_optimize(none) public static func decimal(explicitPositiveSign: Swift.Bool = false, minDigits: @autoclosure @escaping () -> Swift.Int) -> os.OSLogIntegerFormatting {
     return OSLogIntegerFormatting(
       radix: 10,
@@ -543,7 +533,6 @@ extension os.OSLogIntegerFormatting {
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogIntegerFormatting {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_semantics("constant_evaluable") @inlinable @_optimize(none) internal static func formatSpecifierLengthModifier<I>(_ type: I.Type) -> Swift.String? where I : Swift.FixedWidthInteger {
      
     switch type {
@@ -573,7 +562,6 @@ extension os.OSLogIntegerFormatting {
     default: return nil
     }
   }
-  #endif
   @_semantics("constant_evaluable") @_alwaysEmitIntoClient @_optimize(none) @_effects(readonly) internal func formatSpecifier<I>(for type: I.Type, align: os.OSLogStringAlignment, privacy: os.OSLogPrivacy, attributes: Swift.String) -> Swift.String where I : Swift.FixedWidthInteger {
      
      
@@ -967,7 +955,6 @@ internal typealias ArgumentClosures = [(inout os.ByteBufferPointer, inout os.Obj
     })
   }
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @_semantics("constant_evaluable") @_alwaysEmitIntoClient @_optimize(none) internal func concatPrivacyAndAttributes(privacy: os.OSLogPrivacy, attributes: Swift.String) -> Swift.String? {
   let hasPrivacy: Bool = privacy.needsPrivacySpecifier
@@ -982,20 +969,16 @@ internal typealias ArgumentClosures = [(inout os.ByteBufferPointer, inout os.Obj
   }
   return (tagString == "") ? nil : tagString
 }
-#endif
 @_alwaysEmitIntoClient @inline(__always) internal func serialize(_ value: Swift.UInt8, at bufferPosition: inout os.ByteBufferPointer) {
   bufferPosition[0] = value
   bufferPosition += 1
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @_alwaysEmitIntoClient @inline(__always) internal func createStorage<T>(capacity: Swift.Int, type: T.Type) -> os.ObjectStorage<T> {
   return
     capacity == 0 ?
       nil :
       UnsafeMutablePointer<T>.allocate(capacity: capacity)
 }
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @_alwaysEmitIntoClient @inline(__always) internal func initializeAndAdvance<T>(_ storageOpt: inout os.ObjectStorage<T>, to value: T) {
    
   if let storage = storageOpt {
@@ -1003,8 +986,6 @@ internal typealias ArgumentClosures = [(inout os.ByteBufferPointer, inout os.Obj
     storageOpt = storage.advanced(by: 1)
   }
 }
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @_alwaysEmitIntoClient @inline(__always) internal func destroyStorage<T>(_ storageOpt: os.ObjectStorage<T>, count: Swift.Int) {
    
   if let storage = storageOpt {
@@ -1012,7 +993,6 @@ internal typealias ArgumentClosures = [(inout os.ByteBufferPointer, inout os.Obj
     storage.deallocate()
   }
 }
-#endif
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogInterpolation {
   @_semantics("constant_evaluable") @inlinable @_optimize(none) @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ argumentObject: @autoclosure @escaping () -> ObjectiveC.NSObject, privacy: os.OSLogPrivacy = .auto) {
@@ -1021,7 +1001,6 @@ extension os.OSLogInterpolation {
   @_semantics("constant_evaluable") @_alwaysEmitIntoClient @_optimize(none) @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ argumentObject: @autoclosure @escaping () -> ObjectiveC.NSObject, privacy: os.OSLogPrivacy = .auto, attributes: Swift.String) {
     appendInterpolation(argumentObject() as Optional, privacy: privacy, attributes: attributes)
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient @_optimize(none) @_semantics("constant_evaluable") @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ object: @autoclosure @escaping () -> ObjectiveC.NSObject?, privacy: os.OSLogPrivacy = .auto, attributes: Swift.String = "") {
     guard argumentCount < maxOSLogArgumentCount else { return }
 
@@ -1035,7 +1014,6 @@ extension os.OSLogInterpolation {
     argumentCount += 1
     objectArgumentCount += 1
   }
-  #endif
   @_semantics("constant_evaluable") @inlinable @_optimize(none) internal mutating func addNSObjectHeaders(_ privacy: os.OSLogPrivacy) {
      
     let header = getArgumentHeader(privacy: privacy, type: .object)
@@ -1068,15 +1046,12 @@ extension os.OSLogInterpolation {
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogArguments {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_semantics("constant_evaluable") @inlinable @_optimize(none) internal mutating func append(_ value: @escaping () -> os.ObjectType?) {
     argumentClosures.append({ (position, objectArguments, _) in
       serialize(value(), at: &position, storingObjectsIn: &objectArguments)
     })
   }
-  #endif
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @_alwaysEmitIntoClient @inline(__always) internal func serialize(_ object: os.ObjectType?, at bufferPosition: inout os.ByteBufferPointer, storingObjectsIn objectArguments: inout os.ObjectStorage<os.ObjectType?>) {
   let byteCount = pointerSizeInBytes();
   let dest =
@@ -1099,7 +1074,6 @@ extension os.OSLogArguments {
    
   initializeAndAdvance(&objectArguments, to: object)
 }
-#endif
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public enum OSLogPointerFormat {
   case ipv6Address
@@ -1407,7 +1381,6 @@ extension os.OSLogArguments {
     }
   }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable @_semantics("constant_evaluable") @_optimize(none) internal var privacySpecifier: Swift.String? {
     get {
     let hasMask = self.hasMask
@@ -1439,7 +1412,6 @@ extension os.OSLogArguments {
     return specifier
   }
   }
-  #endif
   @inlinable @_transparent internal var maskSpecifier: Swift.String {
     @_transparent get {
     switch mask {
@@ -1632,13 +1604,11 @@ internal enum OSLogCollectionBound {
   internal var minimumColumnWidth: (() -> Swift.Int)?
   @usableFromInline
   internal var anchor: os.OSLogCollectionBound
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   @_transparent internal init(minimumColumnWidth: (() -> Swift.Int)? = nil, anchor: os.OSLogCollectionBound = .end) {
     self.minimumColumnWidth = minimumColumnWidth
     self.anchor = anchor
   }
-  #endif
   @_semantics("constant_evaluable") @inlinable @_optimize(none) public static var none: os.OSLogStringAlignment {
     get { OSLogStringAlignment(anchor: .end)  }
   }
@@ -1653,9 +1623,13 @@ internal enum OSLogCollectionBound {
 public struct Logger : @unchecked Swift.Sendable {
   @usableFromInline
   internal let logObject: os.OSLog
+  public static var disabled: os.Logger {
+    get
+  }
   public init(subsystem: Swift.String, category: Swift.String)
   public init()
   public init(_ logObj: os.OSLog)
+  public func isEnabled(type: os.OSLogType) -> Swift.Bool
   @_transparent @_optimize(none) @_semantics("oslog.requires_constant_arguments") public func log(_ message: os.OSLogMessage) {
     osLogInternal(message, log: logObject, type: .default)
   }
@@ -1869,7 +1843,6 @@ extension os.OSLogArguments {
 @_transparent @_alwaysEmitIntoClient internal func pointerSizeInBytes() -> Swift.Int {
   return Int.bitWidth &>> logBitsPerByte
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @_alwaysEmitIntoClient @inline(__always) internal func serializeImpl(_ stringValue: Swift.String, at bufferPosition: inout Swift.UnsafeMutablePointer<Swift.UInt8>, storingStringOwnersIn stringArgumentOwners: inout os.ObjectStorage<Any>) {
   let stringPointer =
     getNullTerminatedUTF8PointerImpl(
@@ -1882,8 +1855,6 @@ extension os.OSLogArguments {
   _withUnprotectedUnsafeBytes(of: stringPointer) { dest.copyMemory(from: $0) }
   bufferPosition += byteCount
 }
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @_alwaysEmitIntoClient @inline(never) internal func getNullTerminatedUTF8PointerImpl(_ stringValue: Swift.String, storingStringOwnersIn stringArgumentOwners: inout os.ObjectStorage<Any>) -> Swift.UnsafeRawPointer {
     let (optStorage, bytePointer, _, _, _):
     (AnyObject?, UnsafeRawPointer, Int, Bool, Bool) =
@@ -1895,7 +1866,6 @@ extension os.OSLogArguments {
   }
   return bytePointer
 }
-#endif
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogInterpolation {
   @_optimize(none) @_transparent @_semantics("oslog.requires_constant_arguments") @_disfavoredOverload public mutating func appendInterpolation<T>(_ value: @autoclosure @escaping () -> T, align: os.OSLogStringAlignment = .none, privacy: os.OSLogPrivacy = .auto) where T : Swift.CustomStringConvertible {
@@ -2065,7 +2035,6 @@ public class OSSignpostIntervalState : Swift.Codable, @unchecked Swift.Sendable 
   public func _hasValue(id: os.OSSignpostID, isOpen: Swift.Bool) -> Swift.Bool
   @objc deinit
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 @_transparent @_alwaysEmitIntoClient @_optimize(none) internal func osSignpost(_ message: os.SignpostMetadata, log: os.OSLog, name: Swift.StaticString, id: os.OSSignpostID, type: os.OSSignpostType, state: os.OSSignpostIntervalState?, formatStringTransform: (Swift.String) -> Swift.String = id) {
   let formatString = formatStringTransform(message.interpolation.formatString)
@@ -2108,8 +2077,6 @@ public class OSSignpostIntervalState : Swift.Codable, @unchecked Swift.Sendable 
       $1)
   }
 }
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 @_transparent @_alwaysEmitIntoClient @_optimize(none) internal func osSignpostWithoutMessage(log: os.OSLog, name: Swift.StaticString, id: os.OSSignpostID, type: os.OSSignpostType, state: os.OSSignpostIntervalState?, formatString: Swift.String = "") {
    
@@ -2142,7 +2109,6 @@ public class OSSignpostIntervalState : Swift.Codable, @unchecked Swift.Sendable 
       $1)
   }
 }
-#endif
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 @_transparent @_alwaysEmitIntoClient @_optimize(none) internal func emitSignpost<T>(preamble: Swift.UInt8, argumentCount: Swift.UInt8, bufferSize: Swift.Int, objectCount: Swift.Int, stringCount: Swift.Int, argumentClosures: os.ArgumentClosures, signpostTask: (Swift.UnsafeMutablePointer<Swift.UInt8>, Swift.UInt32) throws -> T) rethrows -> T {
   let uint32bufferSize: UInt32 = UInt32(bufferSize)
@@ -2201,7 +2167,6 @@ public class OSSignpostIntervalState : Swift.Codable, @unchecked Swift.Sendable 
     uint32bufferSize)
   return result
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 @_transparent @_alwaysEmitIntoClient @_optimize(none) internal func checkStateAndGetFormatStringPointer(formatString: Swift.String, state: os.OSSignpostIntervalState?, preamble: inout Swift.UInt8, argumentCount: inout Swift.UInt8) -> Swift.UnsafePointer<Swift.CChar> {
   var formatStringPointer = _getGlobalStringTablePointer(formatString)
@@ -2220,7 +2185,6 @@ public class OSSignpostIntervalState : Swift.Codable, @unchecked Swift.Sendable 
 
   return formatStringPointer
 }
-#endif
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 @usableFromInline
 internal func checkForErrorAndConsumeState(state: os.OSSignpostIntervalState) -> os.OSSignpostError
@@ -2245,7 +2209,6 @@ internal func checkForErrorAndConsumeState(state: os.OSSignpostIntervalState) ->
 @_transparent @_optimize(none) @_alwaysEmitIntoClient @_semantics("constant_evaluable") internal func id(_ s: Swift.String) -> Swift.String {
   return s
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 @_transparent @_alwaysEmitIntoClient @_optimize(none) public func _checkSignpostFormatStringAndBuffer(_ message: os.SignpostMetadata, state: os.OSSignpostIntervalState?, with assertion: (Swift.String, Swift.UnsafeBufferPointer<Swift.UInt8>) -> Swift.Void) {
   let formatString = message.interpolation.formatString
@@ -2277,8 +2240,6 @@ internal func checkForErrorAndConsumeState(state: os.OSSignpostIntervalState) ->
     assertion(newFormatString, UnsafeBufferPointer(start: UnsafePointer($0), count: Int($1)))
   }
 }
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 @_transparent @_alwaysEmitIntoClient @_optimize(none) public func _checkSignpostBufferNoMessage(state: os.OSSignpostIntervalState?, with assertion: (Swift.String, Swift.UnsafeBufferPointer<Swift.UInt8>) -> Swift.Void) {
   var preamble: UInt8 = 0
@@ -2302,8 +2263,6 @@ internal func checkForErrorAndConsumeState(state: os.OSSignpostIntervalState) ->
     assertion(newFormatString, UnsafeBufferPointer(start: UnsafePointer($0), count: Int($1)))
   }
 }
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 @_transparent @_alwaysEmitIntoClient @_optimize(none) public func _checkAnimationSignpostFormatStringAndBuffer(_ message: os.SignpostMetadata, state: os.OSSignpostIntervalState?, with assertion: (Swift.String, Swift.UnsafeBufferPointer<Swift.UInt8>) -> Swift.Void) {
   let formatString = animationFormatString(message.interpolation.formatString)
@@ -2335,7 +2294,6 @@ internal func checkForErrorAndConsumeState(state: os.OSSignpostIntervalState) ->
     assertion(newFormatString, UnsafeBufferPointer(start: UnsafePointer($0), count: Int($1)))
   }
 }
-#endif
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogInterpolation {
   @usableFromInline
@@ -2366,28 +2324,20 @@ extension os.OSLogFloatFormatting {
   @available(*, unavailable)
   internal func formatSpecifier<I>(for type: I.Type, align: os.OSLogStringAlignment, privacy: os.OSLogPrivacy) -> Swift.String where I : Swift.FloatingPoint
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @usableFromInline
 @available(*, unavailable)
 internal func serialize(_ stringValue: Swift.String, at bufferPosition: inout Swift.UnsafeMutablePointer<Swift.UInt8>, using stringStorage: inout os.ObjectStorage<Any>)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @usableFromInline
 @available(*, unavailable)
 internal func getNullTerminatedUTF8Pointer(_ stringValue: Swift.String, using stringStorage: inout os.ObjectStorage<Any>) -> Swift.UnsafeRawPointer
-#endif
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension os_workgroup.WorkGroup {
   @available(macOS 11.0, *)
   public func copyPort() -> _DarwinFoundation2.mach_port_t
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 11.0, *)
   convenience public init?(port: _DarwinFoundation2.mach_port_t, name: Swift.String? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public func copy(name: Swift.String? = nil) -> os_workgroup.WorkGroup?
-  #endif
   public struct JoinToken {
   }
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
@@ -2404,17 +2354,13 @@ extension os_workgroup.WorkGroup {
   public var maxParallelThreads: Swift.Int {
     @_effects(readonly) get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public func setWorkingArena(arena: Swift.UnsafeMutableRawPointer?, max_workers: Swift.UInt32, destruct: @convention(c) (Swift.UnsafeMutableRawPointer?) -> Swift.Void)
-  #endif
   public typealias Index = Swift.UInt32
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public var workingArena: (Swift.UnsafeMutableRawPointer?, os_workgroup.WorkGroup.Index) {
     @_effects(readonly) get
   }
-  #endif
 }
 extension os_workgroup.WorkGroup : os_workgroup.Repeatable {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
@@ -2425,10 +2371,8 @@ extension os_workgroup.WorkGroup : os_workgroup.Repeatable {
   public func finish()
 }
 extension os_workgroup.WorkGroupParallel {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   convenience public init?(name: Swift.String? = nil)
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct OSAllocatedUnfairLockFlags : Swift.OptionSet, Swift.RawRepresentable {
@@ -2496,7 +2440,6 @@ public struct OSAllocatedUnfairLockFlags : Swift.OptionSet, Swift.RawRepresentab
   @_alwaysEmitIntoClient public func withLock<R>(flags: os.OSAllocatedUnfairLockFlags, _ body: @Sendable (inout State) throws -> R) rethrows -> R where R : Swift.Sendable {
 		return try self.withLockUncheckedInternal(flags: flags, body: body)
 	}
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient internal func withLockIfAvailableUncheckedInternal<R>(_ body: (inout State) throws -> R) rethrows -> R? {
 		return try self.__lock.withUnsafeMutablePointers { header, lock in
 			guard os_unfair_lock_trylock(lock) else {
@@ -2508,17 +2451,12 @@ public struct OSAllocatedUnfairLockFlags : Swift.OptionSet, Swift.RawRepresentab
 			return try body(&header.pointee)
 		}
 	}
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient public func withLockIfAvailableUnchecked<R>(_ body: (inout State) throws -> R) rethrows -> R? {
 			return try self.withLockIfAvailableUncheckedInternal(body)
 	}
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient public func withLockIfAvailable<R>(_ body: @Sendable (inout State) throws -> R) rethrows -> R? where R : Swift.Sendable {
 			return try self.withLockIfAvailableUncheckedInternal(body)
 	}
-  #endif
   @frozen public enum Ownership {
     case owner
     case notOwner
@@ -2563,16 +2501,12 @@ extension os.OSAllocatedUnfairLock where State == () {
   @_alwaysEmitIntoClient public func withLock<R>(flags: os.OSAllocatedUnfairLockFlags, _ body: @Sendable () throws -> R) rethrows -> R where R : Swift.Sendable {
 			return try withLock(flags : flags) { _ in try body() }
 	}
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient public func withLockIfAvailableUnchecked<R>(_ body: () throws -> R) rethrows -> R? {
 		return try withLockIfAvailableUnchecked { _ in try body() }
 	}
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient public func withLockIfAvailable<R>(_ body: @Sendable () throws -> R) rethrows -> R? where R : Swift.Sendable {
 		return try withLockIfAvailable { _ in try body() }
 	}
-  #endif
   @_alwaysEmitIntoClient @_unavailableFromAsync(message: "Use withLock for scoped locking") public func lock() {
 		self.__lock.withUnsafeMutablePointerToElements { lock in
 			os_unfair_lock_lock(lock)

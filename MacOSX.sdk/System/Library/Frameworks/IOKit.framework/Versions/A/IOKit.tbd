@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit'
 current-version: 275
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$hide$os10.7$_SCDynamicStoreAddWatchedKey', '$ld$hide$os10.7$_SCDynamicStoreCopyMultiple', 
                        '$ld$hide$os10.7$_SCDynamicStoreCopyValue', '$ld$hide$os10.7$_SCDynamicStoreCreate', 
                        '$ld$hide$os10.7$_SCDynamicStoreCreateRunLoopSource', '$ld$hide$os10.7$_SCDynamicStoreKeyCreate', 
@@ -719,10 +717,11 @@ exports:
                        __IOHIDSessionSetPropertyForClient, __IOHIDSetFixedMouseLocation, 
                        __IOHIDSimpleQueueApplyBlock, __IOHIDSimpleQueueCreate, __IOHIDSimpleQueueDequeue, 
                        __IOHIDSimpleQueueEnqueue, __IOHIDSimpleQueuePeek, __IOHIDStringAppendIndendationAndFormat, 
-                       __IOHIDUnserializeAndVMDealloc, __IOHIDUnserializeAndVMDeallocWithTypeID, 
-                       __IOHIDValueCopyToElementValueHeader, __IOHIDValueCopyToElementValuePtr, 
-                       __IOHIDValueCreateWithElementValuePtr, __IOHIDValueCreateWithStruct, 
-                       __IOHIDValueCreateWithValue, __IOHIDValueGetFlags, __IOHIDVirtuaServiceClientGetEventSystemClient, 
+                       __IOHIDTraverseDevicesFromParentService, __IOHIDUnserializeAndVMDealloc, 
+                       __IOHIDUnserializeAndVMDeallocWithTypeID, __IOHIDValueCopyToElementValueHeader, 
+                       __IOHIDValueCopyToElementValuePtr, __IOHIDValueCreateWithElementValuePtr, 
+                       __IOHIDValueCreateWithStruct, __IOHIDValueCreateWithValue, 
+                       __IOHIDValueGetFlags, __IOHIDVirtuaServiceClientGetEventSystemClient, 
                        __IOHIDVirtualServiceClientCopyEvent, __IOHIDVirtualServiceClientCopyMatchingEvent, 
                        __IOHIDVirtualServiceClientCopyProperty, __IOHIDVirtualServiceClientNotification, 
                        __IOHIDVirtualServiceClientSetOputputEvent, __IOHIDVirtualServiceClientSetProperty, 
@@ -743,9 +742,12 @@ exports:
                        ___IOAVClassMatching, ___IOAVCopyFirstMatchingIOAVObjectOfType, 
                        ___IOCFPlugInLog, ___IODPCopyFirstMatchingPort, ___IODPPortMatching, 
                        ___IODataQueueDequeue, ___IODataQueuePeek, ___IOHIDApplyPropertiesToDeviceFromDictionary, 
-                       ___IOHIDApplyPropertyToDeviceSet, ___IOHIDDeviceGetRootKey, 
-                       ___IOHIDDeviceGetUUIDKey, ___IOHIDDeviceGetUUIDString, ___IOHIDDeviceLoadProperties, 
-                       ___IOHIDDeviceSaveProperties, ___IOHIDElementGetRootKey, ___IOHIDElementLoadProperties, 
+                       ___IOHIDApplyPropertyToDeviceSet, ___IOHIDDeviceAbortPendingCallbacks, 
+                       ___IOHIDDeviceGetRootKey, ___IOHIDDeviceGetUUIDKey, ___IOHIDDeviceGetUUIDString, 
+                       ___IOHIDDeviceLoadProperties, ___IOHIDDeviceRegisterAsyncCommitCallback, 
+                       ___IOHIDDeviceRegisterAsyncReportCallback, ___IOHIDDeviceSaveProperties, 
+                       ___IOHIDDeviceUnregisterAsyncCommitCallback, ___IOHIDDeviceUnregisterAsyncReportCallback, 
+                       ___IOHIDElementGetRootKey, ___IOHIDElementLoadProperties, 
                        ___IOHIDElementSaveProperties, ___IOHIDEventDataAppendFromLegacyEvent, 
                        ___IOHIDEventHasLegacyEventData, ___IOHIDEventPopulateCurrentEventData, 
                        ___IOHIDEventPopulateDigitizerCurrentData, ___IOHIDEventPopulateDigitizerLegacyData, 
@@ -956,7 +958,7 @@ exports:
     objc-ivars:      [ HIDConnection._connection, HIDDevice._device, HIDElement._element, 
                        HIDEvent._event, HIDEventService._service, HIDServiceClient._client, 
                        HIDSession._session ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _IOAVAudioFormatString, _IOAVAudioGetChannelAllocation, _IOAVAudioGetChannelAllocationDefault, 
                        _IOAVAudioGetChannelLayoutData, _IOAVAudioGetSpeakerAllocationMask, 
                        _IOAVAudioLinkGetBitRate, _IOAVAudioLinkGetHDMIAudioPacketType, 

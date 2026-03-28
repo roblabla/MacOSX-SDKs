@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WindowManager.framework/Versions/A/WindowManager'
-current-version: 341.2.2
+current-version: 341.4.4
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s13WindowManager016AppExposeRecentsA0VMa', '_$s13WindowManager016AppExposeRecentsA0VMn', 
                        '_$s13WindowManager016AppExposeRecentsA0VN', '_$s13WindowManager03AppA16GroupingBehaviorO06singleA0yA2CmFWC', 
                        '_$s13WindowManager03AppA16GroupingBehaviorO06singleA13WithPromotionyA2CmFWC', 

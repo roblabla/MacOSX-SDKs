@@ -20,6 +20,7 @@
 .Op Fl -last Ar num Op m|h|d
 .Op Fl -device | Fl -device-name Ar name | Fl -device-udid Ar UDID
 .Op Fl -predicate Ar predicate
+.Op Fl -directory Ar directory
 .Pp
 .Nm
 .Cm config
@@ -27,6 +28,15 @@
 .Op Fl -mode Ar mode(s)
 .Op Fl -subsystem Ar name Op Fl -category Ar name
 .Op Fl -process Ar pid
+.Pp
+.Nm
+.Cm emit
+.Op Fl -type Ar type
+.Op Fl -subsystem Ar name
+.Op Fl -category Ar name
+.Op Fl -signpost-id Ar id
+.Op Fl -public
+.Ar message
 .Pp
 .Nm
 .Cm erase
@@ -41,6 +51,7 @@
 .Op Fl -source
 .Op Fl -style Ar default | compact | json | ndjson | syslog
 .Op Fl -color Ar auto | always | none
+.Op Fl -directory Ar directory
 .Op Fl -start Ar date/time
 .Op Fl -end Ar date/time
 .Op Fl -[no-]info
@@ -116,6 +127,14 @@ Collect system logs from paired device with the given UDID.
 Collect system logs using a given predicate following NSPredicate format or shorthand. This option can significantly
 increase the time and memory usage required to collect an archive.
 Example: "--predicate "process=='kernel.development'"
+.It Fl -directory Ar directory
+Collect content from the provided log store directory, instead of the local log
+store.
+The directory must contain a system logging database similar to what can be
+found in /var/db/diagnostics, and its parent directory must also contain an
+uuidtext directory similar to what can be found in /var/db/uuidtext.
+This option is useful to collect logs from a system partition that is not
+booted, e.g. from a recovery environment or an external drive.
 .El
 .It Cm config
 Configure, reset or read settings for the logging system.
@@ -144,6 +163,57 @@ Modes include:
 level: {off | default | info | debug} The level is a hierarchy, e.g. debug implies debug, info, and default.
 .Pp
 persist: {off | default | info | debug} The persist mode is a hierarchy, e.g. debug implies debug, info, and default.
+.El
+.It Cm emit
+Emit a log message to the system logging facility.
+This command is primarily used for testing and debugging purposes,
+allowing generation of log entries with specific types, subsystems, and categories.
+.Bl -tag -width "--subsystem name "
+.It Fl -type Ar type
+Specify the type of log message to emit.
+Valid types are:
+.Cm debug ,
+.Cm info ,
+.Cm default ,
+.Cm error ,
+.Cm fault ,
+.Cm signpost-event ,
+.Cm signpost-begin ,
+and
+.Cm signpost-end .
+If not specified, 
+.Cm default
+is used.
+.It Fl -subsystem Ar name
+Specify the subsystem identifier for the log message.
+The subsystem is typically a reverse DNS name identifying the component
+generating the log message (e.g.,
+.Cm com.example.myapp ) .
+If not specified, the message uses
+.Dv OS_LOG_DEFAULT .
+.It Fl -category Ar name
+Specify the category within the subsystem.
+Categories provide additional organization within a subsystem.
+This option does nothing unless used with
+.Fl -subsystem .
+If a subsystem is specified but no category is provided, an empty category is used.
+.It Fl -signpost-id Ar id
+Specify the signpost identifier for interval operations.
+This option is used with
+.Cm signpost-begin
+and
+.Cm signpost-end
+types to create matching pairs for performance measurement intervals.
+The id should be a positive integer that uniquely identifies the interval.
+If not specified for signpost operations, 
+.Dv OS_SIGNPOST_ID_EXCLUSIVE
+is used.
+.It Fl -public
+Emit the message publicly.
+.It Ar message
+The text message to emit to the logging system.
+This is a required argument and should be the last argument on the command line.
+By default, this is emitted as a private string.
 .El
 .It Cm erase
 Delete selected log data from the system.
@@ -214,6 +284,14 @@ By default,
 will disable colorized output when not directed to a terminal, unless overidden
 using
 .Ar always .
+.It Fl -directory Ar directory
+Reads content from the provided log store directory, instead of the local log
+store.
+The directory must contain a system logging database similar to what can be
+found in /var/db/diagnostics, and its parent directory must also contain an
+uuidtext directory similar to what can be found in /var/db/uuidtext.
+This option is useful to display logs from a system partition that is not
+booted, e.g. from a recovery environment or an external drive.
 .It Fl -start Ar date/time
 Shows content starting from the provided date.
 The following date/time formats are accepted:
@@ -373,6 +451,55 @@ and cannot be undone.
 Skip purging unused UUIDs from the resulting archive.
 .El
 .El
+.Sh EXAMPLES
+View recent log messages:
+.Bd -literal -offset indent
+log show --last 1h
+.Ed
+.Pp
+Stream live log messages:
+.Bd -literal -offset indent
+log stream
+.Ed
+.Pp
+Emit a test log message:
+.Bd -literal -offset indent
+log emit "Test message"
+.Ed
+.Pp
+Emit an error message with subsystem information:
+.Bd -literal -offset indent
+log emit --type error --subsystem com.example.app "An error occurred"
+.Ed
+.Pp
+Emit a signpost event for performance analysis:
+.Bd -literal -offset indent
+log emit --type signpost-event "Performance marker reached"
+.Ed
+.Pp
+Begin a signpost interval for performance measurement:
+.Bd -literal -offset indent
+log emit --type signpost-begin --signpost-id 42 "Operation started"
+.Ed
+.Pp
+End a signpost interval for performance measurement:
+.Bd -literal -offset indent
+log emit --type signpost-end --signpost-id 42 "Operation completed"
+.Ed
+.Pp
+Begin and end a signpost interval with subsystem information:
+.Bd -literal -offset indent
+log emit --subsystem com.example.app --category performance \\
+         --type signpost-begin --signpost-id 123 "Database query started"
+log emit --subsystem com.example.app --category performance \\
+         --type signpost-end --signpost-id 123 "Database query completed"
+.Ed
+.Pp
+Show help for a specific command:
+.Bd -literal -offset indent
+log help show
+log help emit
+.Ed
 .Sh PREDICATE-BASED FILTERING
 Using predicate-based filters via the
 .Fl -predicate
@@ -457,6 +584,8 @@ Supported keys include:
 The pattern within the message text.
 .It \fBprocess\fR, \fBp\fR
 The name of the process that originated the event.
+.It \fBprocessImagePath\fR, \fBpip\fR
+The full path of the process that originated the event.
 .It \fBpid\fR
 The identifier of the process that originated the event.
 .It \fBsubsystem\fR, \fBs\fR

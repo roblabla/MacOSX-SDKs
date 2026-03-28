@@ -1,21 +1,23 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriAudioInternal.framework/Versions/A/SiriAudioInternal'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ Agora, AudioFlowDelegatePlugin, AudioFlowDelegatePluginTests, 
-                       AudioInternalIntentExtension, AudioSuggestionsPlugin, AudioSuggestionsPluginTests, 
-                       AudioUIPlugin, CloudMediaServicesQueueController, IntelligenceFlowRuntime, 
-                       IntelligenceFlowRuntimeTests, IntentsServices, MediaPlaybackCore, 
-                       Search, SearchUI, ShazamUIPlugin, SiriAudioHeavyweightTests, 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    clients:         [ Agora, AudioAppIntentsExtension, AudioAppIntentsExtensionTests, 
+                       AudioFlowDelegatePlugin, AudioFlowDelegatePluginTests, AudioInternalIntentExtension, 
+                       AudioSuggestionsPlugin, AudioSuggestionsPluginTests, AudioUIPlugin, 
+                       CloudMediaServicesQueueController, ContextStagingTools, ContextStagingToolsTests, 
+                       IntelligenceFlowPlannerSupport, IntelligenceFlowPlannerSupportTests, 
+                       IntelligenceFlowRuntime, IntelligenceFlowRuntimeTests, IntentsServices, 
+                       MediaPlaybackCore, Search, SearchUI, ShazamUIPlugin, SiriAudioHeavyweightTests, 
                        SiriAudioInternal, SiriAudioInternalTests, SiriAudioSupport, 
                        SiriAudioSupportIntegrationTests, SiriAudioSupportTests, SiriMediaFlowDelegatePlugin, 
                        SiriSuggestionsBaseModel, SiriSuggestionsBaseModelTests, Spotlight, 
                        SystemPlugin, UnifiedSiriTest, siriaudio_helper ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s17SiriAudioInternal0B30SuggestionsExecutionParametersV11queueLengthSiSgvpfi', 
                        '_$s17SiriAudioInternal0B30SuggestionsExecutionParametersV11songIsLikedSbSgvpfi', 
                        '_$s17SiriAudioInternal0B30SuggestionsExecutionParametersV13mediaItemTypeSo07INMediahI0VSgvpfi', 

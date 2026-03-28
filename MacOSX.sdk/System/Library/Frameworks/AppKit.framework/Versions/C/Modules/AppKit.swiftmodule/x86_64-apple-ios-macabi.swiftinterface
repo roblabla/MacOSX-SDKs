@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2685.30.107 -module-name AppKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2685.50.119 -module-name AppKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 @_exported import Accessibility
 @_exported import AppKit
 @_exported import CoreGraphics
@@ -33,9 +33,7 @@ import _SwiftConcurrencyShims
     @available(macOS 15.0, macCatalyst 18.0, *)
     public typealias ArrayLiteralElement = AppKit.NSHorizontalDirection.Set.Element
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int8)
-  #endif
   @available(macOS 15.0, macCatalyst 18.0, *)
   public typealias AllCases = [AppKit.NSHorizontalDirection]
   @available(macOS 15.0, macCatalyst 18.0, *)
@@ -53,16 +51,12 @@ extension AppKit.NSHorizontalDirection.Set {
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func insert(_ newMember: __owned AppKit.NSHorizontalDirection) -> (inserted: Swift.Bool, memberAfterInsert: AppKit.NSHorizontalDirection)
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func remove(_ member: AppKit.NSHorizontalDirection) -> AppKit.NSHorizontalDirection?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func update(with newMember: __owned AppKit.NSHorizontalDirection) -> AppKit.NSHorizontalDirection?
-  #endif
 }
 @available(macCatalyst 18.0, macOS 15.0, *)
 @frozen public enum NSVerticalDirection : Swift.Int8, Swift.CaseIterable, Swift.Codable {
@@ -80,9 +74,7 @@ extension AppKit.NSHorizontalDirection.Set {
     @available(macOS 15.0, macCatalyst 18.0, *)
     public typealias ArrayLiteralElement = AppKit.NSVerticalDirection.Set.Element
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int8)
-  #endif
   @available(macOS 15.0, macCatalyst 18.0, *)
   public typealias AllCases = [AppKit.NSVerticalDirection]
   @available(macOS 15.0, macCatalyst 18.0, *)
@@ -100,16 +92,12 @@ extension AppKit.NSVerticalDirection.Set {
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func insert(_ newMember: __owned AppKit.NSVerticalDirection) -> (inserted: Swift.Bool, memberAfterInsert: AppKit.NSVerticalDirection)
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func remove(_ member: AppKit.NSVerticalDirection) -> AppKit.NSVerticalDirection?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func update(with newMember: __owned AppKit.NSVerticalDirection) -> AppKit.NSVerticalDirection?
-  #endif
 }
 @available(macOS 26.0, *)
 public struct NSItemBadge : Swift.Equatable {
@@ -140,9 +128,7 @@ extension AppKit.NSCursor {
       @available(iOS 13.0, macOS 15.0, macCatalyst 18.0, *)
       public typealias ArrayLiteralElement = AppKit.NSCursor.FrameResizeDirection.Set.Element
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int8)
-    #endif
     @available(iOS 13.0, macOS 15.0, macCatalyst 18.0, *)
     public typealias AllCases = [AppKit.NSCursor.FrameResizeDirection]
     @available(iOS 13.0, macOS 15.0, macCatalyst 18.0, *)
@@ -162,16 +148,12 @@ extension AppKit.NSCursor.FrameResizeDirection.Set {
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func insert(_ newMember: __owned AppKit.NSCursor.FrameResizeDirection) -> (inserted: Swift.Bool, memberAfterInsert: AppKit.NSCursor.FrameResizeDirection)
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func remove(_ member: AppKit.NSCursor.FrameResizeDirection) -> AppKit.NSCursor.FrameResizeDirection?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func update(with newMember: __owned AppKit.NSCursor.FrameResizeDirection) -> AppKit.NSCursor.FrameResizeDirection?
-  #endif
 }
 @available(macCatalyst 18.0, macOS 15.0, *)
 extension AppKit.NSCursor.FrameResizePosition : Swift.CaseIterable {
@@ -183,12 +165,10 @@ extension AppKit.NSCursor.FrameResizePosition : Swift.CaseIterable {
 }
 @available(macOS 26.0, *)
 extension AppKit.NSToolbarItem {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var badge: AppKit.NSItemBadge? {
     get
     set
   }
-  #endif
 }
 @available(macCatalyst 18.0, macOS 15.0, *)
 extension AppKit.NSHorizontalDirection : Swift.Equatable {}

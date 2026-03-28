@@ -1,15 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IMAP.framework/Versions/A/IMAP'
-current-version: 3864.255.41
+current-version: 3864.255.181
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ EmailFunctionalTests, EmailTestSupport, IMAPFunctionalTests, 
                        Mail, MailCoreTests, MailFrameworkTests, MailTests, com.apple.MailServiceAgent, 
                        maild, migrationhelper ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _IMAPCreateArrayForMessageFlags, _IMAPGmailLabelChangeKeyAdd, 
                        _IMAPGmailLabelChangeKeyRemove, _IMAPIdAddress, _IMAPIdArguments, 
                        _IMAPIdCommand, _IMAPIdDate, _IMAPIdEnvironment, _IMAPIdName, 

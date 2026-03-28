@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FrontBoard.framework/Versions/A/FrontBoard'
 current-version: 0
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/FrontBoardServices.framework/Versions/A/FrontBoardServices' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FBAnalyticsLogHangTracerEvent, _FBAnalyticsLogWatchdogEvent, 
                        _FBApplicationBadgeValueAccessEntitlement, _FBApplicationProcessHandleEntitlement, 
                        _FBApplicationStoreRepositoryChangeApp, _FBApplicationStoreRepositoryChangeKey, 
@@ -83,13 +80,11 @@ exports:
                        FBProcess._workspace, FBWorkspaceScene._workspaceQueue ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BaseBoard.framework/Versions/A/BaseBoard'
 current-version: 0
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BSASIDForAuditToken, _BSAbsoluteMachTimeNow, _BSAbsoluteTimeFromMachTime, 
                        _BSActionErrorDomain, _BSAffineTransformFromValue, _BSAppendVersionedPIDToStringAppendTarget, 
                        _BSAtomicGetFlag, _BSAtomicSetFlag, _BSAuditTokenForCurrentProcess, 
@@ -256,13 +251,11 @@ exports:
                        BSXPCCoder._message, BSXPCCoder._xpcConnection ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BoardServices.framework/Versions/A/BoardServices'
 current-version: 0
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _NSStringFromBSServiceDomainMultiplexingType ]
     objc-classes:    [ BSMutableServiceInterface, BSServiceCompoundQueue, BSServiceConnection, 
                        BSServiceConnectionEndpoint, BSServiceConnectionEndpointInjector, 
@@ -275,22 +268,19 @@ exports:
                        BSServicesConfigurationRegistration ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FrontBoardServices.framework/Versions/A/FrontBoardServices'
 current-version: 0
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/BaseBoard.framework/Versions/A/BaseBoard', 
                        '/System/Library/PrivateFrameworks/BoardServices.framework/Versions/A/BoardServices' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FBApplicationDataStoreServiceIdentifier, _FBLogAppDataStore, 
                        _FBLogAppLaunch, _FBLogCommon, _FBLogInterfaceOrientationObserver, 
                        _FBLogSceneClient, _FBLogSceneExtension, _FBLogSceneInvocation, 
-                       _FBLogWatchdog, _FBLoggingSubsystem, _FBSActivateForEventOptionTypeBackgroundContentFetching, 
+                       _FBLogShutdown, _FBLogWatchdog, _FBLoggingSubsystem, _FBSActivateForEventOptionTypeBackgroundContentFetching, 
                        _FBSAllSettings, _FBSAllSettingsFromProtocol, _FBSApplicationDataStoreMessageKeyAllChangesInterest, 
                        _FBSApplicationDataStoreMessageKeyAppID, _FBSApplicationDataStoreMessageKeyAppID2, 
                        _FBSApplicationDataStoreMessageKeyAppIDs, _FBSApplicationDataStoreMessageKeyKey, 
@@ -454,7 +444,7 @@ exports:
                        FBSProcessExecutionProvision._violated, FBSSceneUpdate._context, 
                        FBSSceneUpdate._diff, FBSSceneUpdate._instigatingUpdate, FBSSceneUpdate._mutableSettings, 
                        FBSSceneUpdate._previousSettings, FBSSceneUpdate._settings ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _FBSOpenApplicationOptionKeyAppLink, _FBSOpenApplicationOptionKeyBrowserAppLinkState, 
                        _FBSOpenApplicationOptionKeyPayloadIsValid, _FBSProcessResourceAllowanceMakeWithValue, 
                        _FBSProcessResourceAllowanceValue ]

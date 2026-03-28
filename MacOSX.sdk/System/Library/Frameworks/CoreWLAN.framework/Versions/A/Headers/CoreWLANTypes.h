@@ -191,6 +191,7 @@ typedef NS_ENUM(NSInteger, CWPHYMode)
 	kCWPHYMode11n		= 4,
     kCWPHYMode11ac      = 5,
     kCWPHYMode11ax      = 6,
+	kCWPHYMode11be		= 7,
 } NS_ENUM_AVAILABLE_MAC(10_7);
 
 /*!

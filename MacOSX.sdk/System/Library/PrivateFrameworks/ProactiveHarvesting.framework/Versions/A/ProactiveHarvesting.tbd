@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ProactiveHarvesting.framework/Versions/A/ProactiveHarvesting'
-current-version: 1303.8
+current-version: 1311.6
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ CoreSuggestions, CoreSuggestionsInternals, CoreSuggestionsML, 
                        CoreSuggestionsMLTests, CoreSuggestionsPerfTests, CoreSuggestionsTests, 
                        CoreSuggestionsUI, CoreSuggestionsUITests, FoundInAppsPlugins, 
@@ -25,8 +23,7 @@ allowable-clients:
                        pretool, psgtool, reversetemplated, suggest_tool, suggestbench, 
                        suggestd, txtool ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _HVBatteryMonitoringOverrideIsConnectedToPowerForTesting, 
                        _HVBatteryMonitoringStart, _HVDataSourceAssertSingleSource, 
                        _HVDataSourceContentStateKey, _HVDataSourceDescription, _HVDataSourceFileProtection, 

@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CreateML.framework/Versions/A/CreateML'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCreateML.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCreateML.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftCreateML.dylib', 
@@ -3381,7 +3379,7 @@ exports:
                        '_$ss5Int64V8CreateMLE13dataValueTypeAC06MLDataE0O0eF0OvpZMV', 
                        '_$ss5Int64V8CreateMLE4fromABSgAC11MLDataValueO_tcfC', '_$ss5Int64V8CreateMLE9dataValueAC06MLDataE0Ovg', 
                        '_$ss5Int64V8CreateMLE9dataValueAC06MLDataE0OvpMV' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '$ld$install_name$os10.15$/usr/lib/swift/libswiftCreateML.dylib', 
                        '$ld$install_name$os11.0$/usr/lib/swift/libswiftCreateML.dylib', 
                        '$ld$install_name$os11.1$/usr/lib/swift/libswiftCreateML.dylib', 

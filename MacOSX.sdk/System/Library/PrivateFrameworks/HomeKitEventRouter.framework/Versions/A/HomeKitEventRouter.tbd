@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeKitEventRouter.framework/Versions/A/HomeKitEventRouter'
 current-version: 1.2.3
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _HMEErrorDomain, _HMEEventComponentsFromTopic, _HMEProtoEventInfoReadFrom, 
                        _HMEProtoEventMetadataReadFrom, _HMEProtoEventReadFrom ]
     objc-classes:    [ HMEDelegatingEventRouter, HMEEvent, HMEEventInfo, HMEEventMetadata, 

@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/yara.framework/Versions/A/yara'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ __yr_atoms_trim, __yr_base64_create_regexp, __yr_base64_print_nodes, 
                        __yr_bswap16, __yr_bswap32, __yr_bswap64, __yr_compiler_default_include_callback, 
                        __yr_compiler_get_rule_by_idx, __yr_compiler_get_var_frame, 

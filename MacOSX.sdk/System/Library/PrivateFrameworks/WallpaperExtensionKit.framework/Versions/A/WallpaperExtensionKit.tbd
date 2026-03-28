@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WallpaperExtensionKit.framework/Versions/A/WallpaperExtensionKit'
-current-version: 245.2.1
+current-version: 245.4.8
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14WallpaperTypes0A12SettingsItemV0A12ExtensionKitE2id13localizedName13configuration12isDownloaded7options9thumbnailA2C2IDV_SSxSbSayAA0A6Option_pGyXEq_yXEtcSeRzSERz7SwiftUI4ViewR_r0_lufC', 
                        '_$s14WallpaperTypes0A12SettingsItemV0A12ExtensionKitE2id13localizedName17configurationData12isDownloaded7options9thumbnailA2C2IDV_SS10Foundation0K0VSbSayAA0A6Option_pGyXExyctc7SwiftUI4ViewRzlufC', 
                        '_$s14WallpaperTypes16ShuffleFrequencyO0A12ExtensionKitE7triggerAD0C7TriggerOvg', 

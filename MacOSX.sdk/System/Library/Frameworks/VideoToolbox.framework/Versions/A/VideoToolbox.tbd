@@ -1,20 +1,19 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox'
-current-version: 3290.6.5
+current-version: 3305.24.5
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _VTApplyRestrictions, _VTAreVideoDecodersRunningInProcess, 
                        _VTAvoidIOSurfaceBackings, _VTBeginUpdatingIncrementalCodeCoverageData, 
-                       _VTBuildPixelBufferPools, _VTBuildPixelBufferPools2, _VTCompressionSessionBeginPass, 
-                       _VTCompressionSessionCompleteFrames, _VTCompressionSessionCopyProperty, 
-                       _VTCompressionSessionCopySerializableProperties, _VTCompressionSessionCopySupportedPropertyDictionary, 
-                       _VTCompressionSessionCreate, _VTCompressionSessionCreateWithOptions, 
-                       _VTCompressionSessionEncodeFrame, _VTCompressionSessionEncodeFrameWithOutputHandler, 
-                       _VTCompressionSessionEncodeMultiImageFrame, _VTCompressionSessionEncodeMultiImageFrameWithOutputHandler, 
+                       _VTBuildPixelBufferPools, _VTBuildPixelBufferPools2, _VTCFArrayGetIOSurfaceAtIndex, 
+                       _VTCompressionSessionBeginPass, _VTCompressionSessionCompleteFrames, 
+                       _VTCompressionSessionCopyProperty, _VTCompressionSessionCopySerializableProperties, 
+                       _VTCompressionSessionCopySupportedPropertyDictionary, _VTCompressionSessionCreate, 
+                       _VTCompressionSessionCreateWithOptions, _VTCompressionSessionEncodeFrame, 
+                       _VTCompressionSessionEncodeFrameWithOutputHandler, _VTCompressionSessionEncodeMultiImageFrame, 
+                       _VTCompressionSessionEncodeMultiImageFrameWithOutputHandler, 
                        _VTCompressionSessionEndPass, _VTCompressionSessionGetPixelBufferPool, 
                        _VTCompressionSessionGetTimeRangesForNextPass, _VTCompressionSessionGetTypeID, 
                        _VTCompressionSessionInvalidate, _VTCompressionSessionPrepareToEncodeFrames, 
@@ -83,7 +82,7 @@ exports:
                        _VTHDRImageStatisticsGenerationSessionCreateStatistics, _VTHDRImageStatisticsGenerationSessionGetTypeID, 
                        _VTHDRMetadataGenerationSessionCopySessionState, _VTHDRMetadataGenerationSessionCreate, 
                        _VTHDRMetadataGenerationSessionCreateDataFromStatistics, _VTHDRMetadataGenerationSessionCreateDataFromStatisticsDictionary, 
-                       _VTHDRMetadataGenerationSessionCreatePaddingNALUForEncoder, 
+                       _VTHDRMetadataGenerationSessionCreateDataFromVODData, _VTHDRMetadataGenerationSessionCreatePaddingNALUForEncoder, 
                        _VTHDRMetadataGenerationSessionCreateSDRPreservationStaticData, 
                        _VTHDRMetadataGenerationSessionGetTypeID, _VTHDRMetadataGenerationSessionInsertData, 
                        _VTHDRMetadataGenerationSessionInvalidate, _VTHDRMetadataGenerationSessionSetFramesPerSecond, 
@@ -120,9 +119,9 @@ exports:
                        _VTMultiPassStorageGetTypeID, _VTMultiPassStorageSetDataAtTimeStamp, 
                        _VTMultiPassStorageSetIdentifier, _VTMultiPassStorageWriteMerged, 
                        _VTMultiPassStorageWriteSegment, _VTNextUniquePixelBufferPoolSharingIDFromSource, 
-                       _VTParavirtualizationCreateMessageAndByteStream, _VTParavirtualizationCreateReplyAndByteStream, 
-                       _VTParavirtualizationGuestInstallHandlerForUUID, _VTParavirtualizationGuestRemoveHandlerForUUID, 
-                       _VTParavirtualizationGuestSendMessageToHostAndCopyReplySync, 
+                       _VTParavirtualizationCreateChildIOSurface, _VTParavirtualizationCreateMessageAndByteStream, 
+                       _VTParavirtualizationCreateReplyAndByteStream, _VTParavirtualizationGuestInstallHandlerForUUID, 
+                       _VTParavirtualizationGuestRemoveHandlerForUUID, _VTParavirtualizationGuestSendMessageToHostAndCopyReplySync, 
                        _VTParavirtualizationGuestSendMessageToHostAsync, _VTParavirtualizationGuestSendMessageWithIOSurfacesToHostAndCopyReplySync, 
                        _VTParavirtualizationGuestSendMessageWithIOSurfacesToHostAsync, 
                        _VTParavirtualizationHostSessionCompleteInvalidate, _VTParavirtualizationHostSessionCreate, 
@@ -501,11 +500,15 @@ exports:
                        _kVTHDRImageStatisticsInfo_Filtered, _kVTHDRImageStatisticsInfo_Maximum, 
                        _kVTHDRImageStatisticsInfo_MaximumOffset, _kVTHDRImageStatisticsInfo_Minimum, 
                        _kVTHDRImageStatisticsInfo_MinimumOffset, _kVTHDRImageStatisticsInfo_Raw, 
-                       _kVTHDRImageStatisticsInfo_TransferFunction, _kVTHDRMetadataGenerationSessionOptions_HDR10PlusKey, 
-                       _kVTHDRMetadataGenerationSessionOptions_InitialSessionState, 
-                       _kVTHDRMetadataGenerationSessionOptions_PreserveSDRRangeKey, 
-                       _kVTHDRMetadataInsertionMode_Auto, _kVTHDRMetadataInsertionMode_None, 
-                       _kVTHDRMetadataInsertionMode_RequestSDRRangePreservation, 
+                       _kVTHDRImageStatisticsInfo_TransferFunction, _kVTHDRMetadataGenerationSessionOptions_DolbyOptions, 
+                       _kVTHDRMetadataGenerationSessionOptions_DolbyOptions_CrossCompatibility, 
+                       _kVTHDRMetadataGenerationSessionOptions_DolbyOptions_DMVersion, 
+                       _kVTHDRMetadataGenerationSessionOptions_DolbyOptions_Profile, 
+                       _kVTHDRMetadataGenerationSessionOptions_HDR10PlusKey, _kVTHDRMetadataGenerationSessionOptions_InitialSessionState, 
+                       _kVTHDRMetadataGenerationSessionOptions_Mode, _kVTHDRMetadataGenerationSessionOptions_Mode_Live, 
+                       _kVTHDRMetadataGenerationSessionOptions_Mode_VOD, _kVTHDRMetadataGenerationSessionOptions_PreserveSDRRangeKey, 
+                       _kVTHDRMetadataInsertionMode_Auto, _kVTHDRMetadataInsertionMode_DolbyVision8p1, 
+                       _kVTHDRMetadataInsertionMode_None, _kVTHDRMetadataInsertionMode_RequestSDRRangePreservation, 
                        _kVTHDRPerFrameMetadataGenerationHDRFormatType_DolbyVision, 
                        _kVTHDRPerFrameMetadataGenerationOptionsKey_HDRFormats, _kVTHEVCDecoderCapability_PerProfileSupport, 
                        _kVTHEVCDecoderCapability_SupportedProfiles, _kVTHEVCDecoderProfileCapability_IsHardwareAccelerated, 
@@ -762,7 +765,7 @@ exports:
                        VTSuperResolutionScalerParameters, VTTemporalNoiseFilterConfiguration, 
                        VTTemporalNoiseFilterParameters, VTTestProcessorConfiguration, 
                        VTTestProcessorParameters ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _VTCopyRAWProcessorExtensionProperties, _VTCopyVideoDecoderExtensionProperties, 
                        _VTGetGVADecoderAvailability, _VTIsSecTaskEntitledForInProcessH264AndVP9Decode, 
                        _VTRAWProcessingSessionCompleteFrames, _VTRAWProcessingSessionCopyProcessingParameters, 
@@ -793,7 +796,7 @@ exports:
                        _kVTRAWProcessingParameter_SubGroup, _kVTRAWProcessingParameter_ValueType, 
                        _kVTRAWProcessingPropertyKey_MetadataForSidecarFile, _kVTRAWProcessingPropertyKey_MetalDeviceRegistryID, 
                        _kVTRAWProcessingPropertyKey_OutputColorAttachments ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FigCreateIOSurfaceBackedCVPixelBuffer, _FigCreateIOSurfaceBackedCVPixelBufferWithAttributes, 
                        _FigCreateIOSurfacePropertiesDictionary, _FigCreateIOSurfacePropertiesDictionaryWithCacheMode, 
                        _FigCreatePixelBufferAttributesWithIOSurfaceSupport, _FigCreatePixelBufferCacheModeArray, 

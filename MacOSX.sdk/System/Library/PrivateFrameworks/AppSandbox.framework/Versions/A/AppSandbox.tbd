@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AppSandbox.framework/Versions/A/AppSandbox'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10AppSandbox11ASBOwnerSetC05ownerD013serializationACSSSg_tKFZTj', 
                        '_$s10AppSandbox11ASBOwnerSetC05ownerD013serializationACSSSg_tKFZTq', 
                        '_$s10AppSandbox11ASBOwnerSetC11addIdentityyyAA09ASBBinaryF0CFTj', 

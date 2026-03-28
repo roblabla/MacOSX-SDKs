@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SUDocAssetsUI.framework/Versions/A/SUDocAssetsUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10CodingKeys13SUDocAssetsUI15PersistedObjectPTl', '_$s10Foundation6LocaleV12LanguageCodeV13SUDocAssetsUIE11displayNameSSyF', 
                        '_$s10Foundation6LocaleV12LanguageCodeV13SUDocAssetsUIE2idSSvg', 
                        '_$s10Foundation6LocaleV12LanguageCodeV13SUDocAssetsUIE2idSSvpMV', 

@@ -1,17 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DataAccess.framework/Versions/A/DataAccess'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _DAAccountFolderContentsChangedNotification, _DAAccountFolderHierarchyChangedNotification, 
                        _DAAccountFolderHierarchyNeedsUpdateNotification, _DAAccountFolderHierarchyNeedsUpdateRequireChangedFoldersNotification, 
                        _DAAccountFolderUpdatedWithNoChangesNotification, _DAAccountPushedFolderPreferencesChangedNotification, 
-                       _DAAccountValidationDomain, _DAContactsBundleIdentifier, _DAIsRunningInDataAccessD, 
-                       _DAMigrationIsNeeded, _DAModelString, _DAPerformMigrationOnMacOS, 
-                       _DAPhoneBundleIdentifier, _DAProductString, _DAReListenForAccounts, 
-                       _DAStringFromCalEntityType, _DAUpdateMigrationVersion, _DAUserAgent, 
-                       _DAWeakLinkClass, _DAWeakLinkSymbol, __DASecCopyIdentityFromPersist, 
+                       _DAAccountValidationDomain, _DAContactsBundleIdentifier, _DADefaultCalDBInitOptions, 
+                       _DAIsRunningInDataAccessD, _DAMigrationIsNeeded, _DAModelString, 
+                       _DAPerformMigrationOnMacOS, _DAPhoneBundleIdentifier, _DAProductString, 
+                       _DAReListenForAccounts, _DAStringFromCalEntityType, _DAUpdateMigrationVersion, 
+                       _DAUserAgent, _DAWeakLinkClass, _DAWeakLinkSymbol, __DASecCopyIdentityFromPersist, 
                        __DASecDeleteIdentityByPersistentRef, __DASecIdentityCopySSLClientAuthenticationChain, 
                        _acDataclassForDADataclass, _acDataclassesForDADataclasses, 
                        _addNullRunLoopSourceForRunLoopAndModes, _appBundleIDsForDADataclasses, 

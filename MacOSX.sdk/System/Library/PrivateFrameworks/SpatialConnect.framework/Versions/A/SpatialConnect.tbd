@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpatialConnect.framework/Versions/A/SpatialConnect'
 current-version: 5.0.6
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$sSo14sc_warp_mode_taSE14SpatialConnectMc', '_$sSo14sc_warp_mode_taSe14SpatialConnectMc', 
                        '_$sSo16sc_warp_result_ta14SpatialConnectE4data10Foundation4DataVvg', 
                        '_$sSo16sc_warp_result_ta14SpatialConnectE4data10Foundation4DataVvpMV', 

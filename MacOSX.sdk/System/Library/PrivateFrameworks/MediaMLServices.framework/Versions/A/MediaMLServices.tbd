@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MediaMLServices.framework/Versions/A/MediaMLServices'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15MediaMLServices01kA10ML_appNameSSvau', '_$s15MediaMLServices01kA10ML_appNameSSvp', 
                        '_$s15MediaMLServices01kA10ML_carrierSSvau', '_$s15MediaMLServices01kA10ML_carrierSSvp', 
                        '_$s15MediaMLServices01kA12ML_binnedSnrSSvau', '_$s15MediaMLServices01kA12ML_binnedSnrSSvp', 

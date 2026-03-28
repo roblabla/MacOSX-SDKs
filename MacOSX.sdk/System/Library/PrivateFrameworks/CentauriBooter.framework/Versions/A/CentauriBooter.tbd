@@ -1,0 +1,10 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64e-macos ]
+install-name:    '/System/Library/PrivateFrameworks/CentauriBooter.framework/Versions/A/CentauriBooter'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ _CentauriBooterBootChip, _CentauriBooterCertifyChip, _CentauriBooterCopyBootError, 
+                       _CentauriBooterCopyPreflightParameters, _CentauriBooterCreate, 
+                       _CentauriBooterIsFirmwarePresent ]
+...

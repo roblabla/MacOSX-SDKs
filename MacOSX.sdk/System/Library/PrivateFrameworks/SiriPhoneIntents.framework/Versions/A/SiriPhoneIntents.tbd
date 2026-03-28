@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriPhoneIntents.framework/Versions/A/SiriPhoneIntents'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16SiriPhoneIntents13SPHCallCenterMp', '_$s16SiriPhoneIntents13SPHCallCenterP10disconnect_4withySo6TUCallC_So0H18DisconnectedReasonVtFTj', 
                        '_$s16SiriPhoneIntents13SPHCallCenterP10disconnect_4withySo6TUCallC_So0H18DisconnectedReasonVtFTq', 
                        '_$s16SiriPhoneIntents13SPHCallCenterP12incomingCallSo6TUCallCSgvgTj', 

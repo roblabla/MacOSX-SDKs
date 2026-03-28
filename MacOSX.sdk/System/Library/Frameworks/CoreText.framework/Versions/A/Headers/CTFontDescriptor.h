@@ -294,6 +294,13 @@ CT_EXPORT const CFStringRef kCTFontDownloadedAttribute CT_AVAILABLE(macos(10.12)
 */
 CT_EXPORT const CFStringRef kCTFontOpticalSizeAttribute CT_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
+/*!
+    @defined    kCTFontDescriptorLanguageAttribute
+    @abstract   The language identifier for font fallback selection.
+    @discussion The value associated with this key is a CFStringRef. If specified in a font descriptor, it is used to select the appropriate font fallback list for the language. This key should not be confused with kCTLanguageAttributeName, which is defined in CTStringAttributes.h.
+ */
+CT_EXPORT const CFStringRef kCTFontDescriptorLanguageAttribute CT_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
 /*! --------------------------------------------------------------------------
     @group Descriptor Creation
 *///--------------------------------------------------------------------------

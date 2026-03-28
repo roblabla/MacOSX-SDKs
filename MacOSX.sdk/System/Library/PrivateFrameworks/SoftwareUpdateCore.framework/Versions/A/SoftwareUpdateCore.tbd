@@ -1,10 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SoftwareUpdateCore.framework/Versions/A/SoftwareUpdateCore'
+swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _KSUAssetEnablePreSUStagingForOptionalAssetsKey, _KSUAssetMinFreeSpacePostStageOptionalAssetsKey, 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$sSo11SUCoreBiomeC18SoftwareUpdateCoreEABycfC', '_$sSo11SUCoreBiomeC18SoftwareUpdateCoreEABycfc', 
+                       '_$sSo11SUCoreBiomeCMa', _KSUAssetEnablePreSUStagingForOptionalAssetsKey, 
+                       _KSUAssetMinFreeSpacePostStageOptionalAssetsKey, _KSUAssetPreSUStagingCacheDeleteLevelKey, 
                        _KSUAssetPreSUStagingMaxSizeKey, _SUCoreBorder_MAPurgeAll, 
                        _SUCoreBorder_MSUApplyUpdate, _SUCoreBorder_MSUAssetCalculateApplySize, 
                        _SUCoreBorder_MSUAssetCalculatePrepareSize, _SUCoreBorder_MSUBrainIsLoadable, 
@@ -82,13 +85,13 @@ exports:
                        _kSUAssetReleaseDateKey, _kSUAssetReleaseNotesFileNameKey, 
                        _kSUAssetReleaseNotesKey, _kSUAssetReleaseNotesSummaryFileNameKey, 
                        _kSUAssetReleaseNotesSummaryKey, _kSUAssetRequireInstallAssistantUpdateKey, 
-                       _kSUAssetRestoreVersionKey, _kSUAssetRollbackKey, _kSUAssetSEPDigestKey, 
-                       _kSUAssetSEPTBMDigestsKey, _kSUAssetSLAVersionKey, _kSUAssetSUCenteralizedPurgeableFactor, 
-                       _kSUAssetSUDisableAppDemotionKey, _kSUAssetSUDisableCDLevel4Key, 
-                       _kSUAssetSUDisableMASuspensionKey, _kSUAssetSUDisableReserveSpace, 
-                       _kSUAssetSUDisableSiriVoiceDeletionKey, _kSUAssetSUDocumentationIDKey, 
-                       _kSUAssetSUInstallTonightEnabledKey, _kSUAssetSUMaxReserveSpace, 
-                       _kSUAssetSUMinReserveSpace, _kSUAssetSUPluginPurgeableFactor, 
+                       _kSUAssetRestoreVersionKey, _kSUAssetRollbackKey, _kSUAssetRosettaDeprecatedKey, 
+                       _kSUAssetSEPDigestKey, _kSUAssetSEPTBMDigestsKey, _kSUAssetSLAVersionKey, 
+                       _kSUAssetSUCenteralizedPurgeableFactor, _kSUAssetSUDisableAppDemotionKey, 
+                       _kSUAssetSUDisableCDLevel4Key, _kSUAssetSUDisableMASuspensionKey, 
+                       _kSUAssetSUDisableReserveSpace, _kSUAssetSUDisableSiriVoiceDeletionKey, 
+                       _kSUAssetSUDocumentationIDKey, _kSUAssetSUInstallTonightEnabledKey, 
+                       _kSUAssetSUMaxReserveSpace, _kSUAssetSUMinReserveSpace, _kSUAssetSUPluginPurgeableFactor, 
                        _kSUAssetSUUnentitledReserveAmount, _kSUAssetSecurityAdvisoryNotificationBodyKey, 
                        _kSUAssetSecurityAdvisoryNotificationTitleKey, _kSUAssetSemiSplatEnabledKey, 
                        _kSUAssetSemiSplatMustQuitAppsKey, _kSUAssetServerAssetAlgorithmKey, 
@@ -229,6 +232,7 @@ exports:
                        _kSU_S_Startup, _kSU_S_Suspending, _kSU_S_UpdateFound, _seedingProgramDescription, 
                        _seedingProgramToken ]
     objc-classes:    [ SUCoreActivityOptions, SUCoreAnalyticsEvent, SUCoreAnalyticsEventSubmitter, 
+                       SUCoreBiome, SUCoreBiomeEventPayloadBase, SUCoreBiomeEventPayloadPSUSState, 
                        SUCoreConfigParam, SUCoreConfigServer, SUCoreDDMActivityScheduler, 
                        SUCoreDDMDeclaration, SUCoreDDMDeclarationGlobalSettings, 
                        SUCoreDDMUtilities, SUCoreDescriptor, SUCoreDocumentation, 

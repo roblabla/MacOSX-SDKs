@@ -1,19 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/_GeoToolbox_AppIntents.framework/Versions/A/_GeoToolbox_AppIntents'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s10AppIntents28IntentStandardRepresentationV012_GeoToolbox_aB00fG015PlaceDescriptorVRs_rlE9exporting9importingACyxA2gA01_C5ValueADyHCg0_GAGxYaYbKc_xAGYaYbKctcfC', 
-                       '_$s10AppIntents28IntentStandardRepresentationV012_GeoToolbox_aB00fG015PlaceDescriptorVRs_rlE9exportingACyxA2gA01_C5ValueADyHCg0_GAGxYaYbKc_tcfC', 
-                       '_$s10GeoToolbox15PlaceDescriptorV01_aB11_AppIntentsE15convertToEntityAD0cdI0VyF', 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s10GeoToolbox15PlaceDescriptorV01_aB11_AppIntentsE15convertToEntityAD0cdI0VyF', 
                        '_$s10GeoToolbox15PlaceDescriptorV01_aB11_AppIntentsE20persistentIdentifierSSvgZ', 
                        '_$s10GeoToolbox15PlaceDescriptorV01_aB11_AppIntentsE20persistentIdentifierSSvpZMV', 
                        '_$s10GeoToolbox15PlaceDescriptorV01_aB11_AppIntentsE21displayRepresentation0eF007DisplayH0Vvg', 
                        '_$s10GeoToolbox15PlaceDescriptorV01_aB11_AppIntentsE21displayRepresentation0eF007DisplayH0VvpMV', 
+                       '_$s10GeoToolbox15PlaceDescriptorV01_aB11_AppIntentsE23searchableItemAttributeSo14NSSecureCoding_pSgvg', 
+                       '_$s10GeoToolbox15PlaceDescriptorV01_aB11_AppIntentsE23searchableItemAttributeSo14NSSecureCoding_pSgvpMV', 
                        '_$s10GeoToolbox15PlaceDescriptorV01_aB11_AppIntentsE25typeDisplayRepresentation0eF004TypehI0VvMZ', 
                        '_$s10GeoToolbox15PlaceDescriptorV01_aB11_AppIntentsE25typeDisplayRepresentation0eF004TypehI0VvgZ', 
                        '_$s10GeoToolbox15PlaceDescriptorV01_aB11_AppIntentsE25typeDisplayRepresentation0eF004TypehI0VvpZMV', 
@@ -107,9 +105,6 @@ exports:
                        '_$s22_GeoToolbox_AppIntents21PlaceDescriptorEntityV16CoreTransferable0I0AAMc', 
                        '_$s22_GeoToolbox_AppIntents21PlaceDescriptorEntityV20persistentIdentifierSSvgZ', 
                        '_$s22_GeoToolbox_AppIntents21PlaceDescriptorEntityV20persistentIdentifierSSvpZMV', 
-                       '_$s22_GeoToolbox_AppIntents21PlaceDescriptorEntityV22transferRepresentationQrvgZ', 
-                       '_$s22_GeoToolbox_AppIntents21PlaceDescriptorEntityV22transferRepresentationQrvpZMV', 
-                       '_$s22_GeoToolbox_AppIntents21PlaceDescriptorEntityV22transferRepresentationQrvpZQOMQ', 
                        '_$s22_GeoToolbox_AppIntents21PlaceDescriptorEntityV25typeDisplayRepresentation0cD004TypeiJ0VvgZ', 
                        '_$s22_GeoToolbox_AppIntents21PlaceDescriptorEntityV25typeDisplayRepresentation0cD004TypeiJ0VvpZMV', 
                        '_$s22_GeoToolbox_AppIntents21PlaceDescriptorEntityV26convertToSystemIntentValue0aB00eF0VyKF', 

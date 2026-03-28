@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TimelineUI.framework/Versions/A/TimelineUI'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ Finder, TMDebugTool, TimelineUIDebugTool, UnitTests ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10TimelineUI0A10ControllerC17reportClientEventyyAA0eF0OF', 
                        '_$s10TimelineUI0A10ControllerC27clientWillSpawnDetailWindowyySo8NSWindowCF', 
                        '_$s10TimelineUI0A10ControllerC6browse4with17presentationStyleAA0A7RestoreVSo8NSWindowC_AA012PresentationG0OtYaKF', 

@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FindMyCommon.framework/Versions/A/FindMyCommon'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FindMyAutomationKit, FindMyCloudKit, FindMyCommonTests, FindMyCrypto, 
                        FindMyLocate, FindMyLocateObjCWrapper, FindMyServerInteraction, 
                        FindMyServiceValidation, FindMyServiceValidationTests, FindMyStorage, 
@@ -15,8 +13,7 @@ allowable-clients:
                        findmylocateagent, findmylocated, findmylocatedTests, searchpartyd, 
                        searchpartydTests, searchpartyuseragent, sptool ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12FindMyCommon012StateCaptureD4DataV11descriptionSSvg', 
                        '_$s12FindMyCommon012StateCaptureD4DataV11descriptionSSvpMV', 
                        '_$s12FindMyCommon012StateCaptureD4DataV4data10Foundation0F0Vvg', 
@@ -233,7 +230,6 @@ exports:
                        '_$s13NonModularSPI18StateCaptureReasonVs23CustomStringConvertibleAAMc', 
                        '_$s13NonModularSPI18StateCaptureReasonVs25ExpressibleByArrayLiteralAAMc', 
                        '_$s13NonModularSPI18StateCaptureReasonVs9OptionSetAAMc', 
-                       '_$s13NonModularSPI18TMGetReferenceTimeySbSpySdGSg_ADSpys5Int32VGSgtF', 
                        '_$s13NonModularSPI19StateCaptureHintAPIO11descriptionSSvg', 
                        '_$s13NonModularSPI19StateCaptureHintAPIO11descriptionSSvpMV', 
                        '_$s13NonModularSPI19StateCaptureHintAPIO5erroryA2CmFWC', 
@@ -259,6 +255,5 @@ exports:
                        '_$s13NonModularSPI20StateCaptureDateTypeOSQAAMc', '_$s13NonModularSPI20StateCaptureDateTypeOSYAAMc', 
                        '_$s13NonModularSPI20StateCaptureDateTypeOs23CustomStringConvertibleAAMc', 
                        '_$s13NonModularSPI20os_state_add_handler5queue5blockAA18StateCaptureHandleVSgSo012OS_dispatch_H0C_AA0jkJ4DataVSgAA0jK4HintVctF', 
-                       '_$s13NonModularSPI23os_state_remove_handleryyAA18StateCaptureHandleVF', 
-                       '_$s13NonModularSPI24TMIsAutomaticTimeEnabledSbyF' ]
+                       '_$s13NonModularSPI23os_state_remove_handleryyAA18StateCaptureHandleVF' ]
 ...

@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/InstallerDiagnostics.framework/Versions/A/InstallerDiagnostics'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _IDDiagnosticsMessageTypes, _IDDiagnosticsProtocolInterface, 
                        _InstallerDiagnosticsVersionNumber, _InstallerDiagnosticsVersionString, 
                        __IDGetDefaultLogger, __activity, __nvramSema, _kIDInstallerDiagnosticsClientCategoryAPFSConversions, 

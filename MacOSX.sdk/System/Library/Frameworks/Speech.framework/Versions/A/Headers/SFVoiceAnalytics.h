@@ -9,7 +9,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The value of a voice analysis metric.
  */
-API_AVAILABLE(ios(13), macos(10.15), tvos(18))
+API_AVAILABLE(ios(13), macos(10.15))
+API_UNAVAILABLE(tvos)
 @interface SFAcousticFeature : NSObject <NSCopying, NSSecureCoding>
 
 /**
@@ -36,7 +37,8 @@ API_AVAILABLE(ios(13), macos(10.15), tvos(18))
 
  These results are part of the ``SFTranscriptionSegment`` object and are available when the system sends the ``SFSpeechRecognitionResult/isFinal`` flag.
  */
-API_AVAILABLE(ios(13), macos(10.15), tvos(18))
+API_AVAILABLE(ios(13), macos(10.15))
+API_UNAVAILABLE(tvos)
 @interface SFVoiceAnalytics : NSObject <NSCopying, NSSecureCoding>
 
 /**

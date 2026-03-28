@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 821.0.120 -module-name Photos
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 841.0.101 -module-name Photos
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 public import ExtensionFoundation
 @_exported public import Photos
 public import Swift
@@ -18,9 +18,7 @@ public enum PHBackgroundResourceUploadProcessingResult : Swift.Int {
   case failure
   case processing
   case completed
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
-  #endif
   @available(iOS 26.1, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -55,41 +53,29 @@ extension Photos.PHBackgroundResourceUploadExtension {
 }
 @available(iOS 8.0, tvOS 10.0, macOS 10.13, *)
 extension Photos.PHChange {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient public func changeDetails<T>(for object: T) -> Photos.PHObjectChangeDetails<T>? where T : Photos.PHObject {
     return self.__changeDetails(for: object) as! PHObjectChangeDetails<T>?
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient public func changeDetails<T>(for fetchResult: Photos.PHFetchResult<T>) -> Photos.PHFetchResultChangeDetails<T>? where T : Photos.PHObject {
     return self.__changeDetails(
       for: fetchResult as! PHFetchResult<AnyObject>
     ) as! PHFetchResultChangeDetails<T>?
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient public func changeDetails(for fetchResult: Photos.PHFetchResult<Swift.AnyObject>) -> Photos.PHFetchResultChangeDetails<Photos.PHObject>? {
     return self.__changeDetails(for: fetchResult)
   }
-  #endif
 }
 @available(iOS 15, tvOS 15, macOS 12, *)
 extension Photos.PHPhotoLibrary {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func cloudIdentifierMappings(forLocalIdentifiers localIdentifiers: [Swift.String]) -> [Swift.String : Swift.Result<Photos.PHCloudIdentifier, any Swift.Error>]
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func localIdentifierMappings(for cloudIdentifiers: [Photos.PHCloudIdentifier]) -> [Photos.PHCloudIdentifier : Swift.Result<Swift.String, any Swift.Error>]
-  #endif
 }
 @available(iOS 16, macOS 13, tvOS 16, *)
 extension Photos.PHPersistentChangeFetchResult : Swift.Sequence {
   final public class Iterator : Swift.IteratorProtocol {
     public typealias Element = Photos.PHPersistentChange
     public init(fetchResult: Photos.PHPersistentChangeFetchResult)
-    #if compiler(>=5.3) && $NonescapableTypes
     final public func next() -> Photos.PHPersistentChangeFetchResult.Iterator.Element?
-    #endif
     @objc deinit
   }
   public func makeIterator() -> Photos.PHPersistentChangeFetchResult.Iterator

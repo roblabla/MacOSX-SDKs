@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/VoiceActions.framework/Versions/A/VoiceActions'
 current-version: 0
 compatibility-version: 0
@@ -10,8 +9,7 @@ exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN12voiceactions10FstSpotterIfNS_19SingleWordTraceBackEEE, 
                        __ZTSN12voiceactions10FstSpotterIfNS_19SingleWordTraceBackEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12VoiceActions11G2PFactoredC13createIfValidACSgyFZTj', 
                        '_$s12VoiceActions11G2PFactoredC13createIfValidACSgyFZTq', 
                        '_$s12VoiceActions11G2PFactoredC17getPronounciation4wordSaySiGSS_tKFTj', 

@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligenceFlowFeedbackDataCollector.framework/Versions/A/IntelligenceFlowFeedbackDataCollector'
-current-version: 3505.5.1
+current-version: 3520.68.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s37IntelligenceFlowFeedbackDataCollector0cD4ViewC15OriginalContentV13userUtteranceSSSgvM', 
                        '_$s37IntelligenceFlowFeedbackDataCollector0cD4ViewC15OriginalContentV13userUtteranceSSSgvg', 
                        '_$s37IntelligenceFlowFeedbackDataCollector0cD4ViewC15OriginalContentV13userUtteranceSSSgvpMV', 

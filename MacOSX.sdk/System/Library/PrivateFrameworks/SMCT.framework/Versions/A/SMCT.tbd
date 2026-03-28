@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SMCT.framework/Versions/A/SMCT'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s4SMCT11MotionScoreC17computeMeanAndStd9currFrameAA0B7FeatureCSo11CVBufferRefa_tFTj', 
                        '_$s4SMCT11MotionScoreC17computeMeanAndStd9currFrameAA0B7FeatureCSo11CVBufferRefa_tFTq', 
                        '_$s4SMCT11MotionScoreC5width6height9frameRateACSi_SiSftcfC', 

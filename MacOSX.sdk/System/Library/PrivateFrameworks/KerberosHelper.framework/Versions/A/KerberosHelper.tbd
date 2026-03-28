@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/KerberosHelper.framework/Versions/A/KerberosHelper'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _KRBAcquireTicket, _KRBCloseSession, _KRBCopyClientPrincipalInfo, 
                        _KRBCopyKeychainLookupInfo, _KRBCopyRealm, _KRBCopyServicePrincipal, 
                        _KRBCopyServicePrincipalInfo, _KRBCreateNegTokenLegacyKerberos, 

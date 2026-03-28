@@ -49,4 +49,13 @@ framework module SwiftUICore [system] {
     // FIXME: Remove when this lands in the build.
     module Radar161859309 {
     }
+
+    // FIXME: remove this once windowBackgroundIsOpaque has been in the build
+    // and AppKit / DesignLibrary has removed the canImport
+    module Radar166828089 {
+    }
+    
+    // FIXME: Remove once UIKit adopts
+    module Radar170560909 {
+    }
 }

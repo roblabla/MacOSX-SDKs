@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libpcap.A.dylib'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _bpf_dump, _bpf_filter, _bpf_image, _bpf_validate, _dlt_to_linktype, 
                        _linktype_to_dlt, _pcap_activate, _pcap_add_if_info, _pcap_add_proc_info, 
                        _pcap_add_proc_info_uuid, _pcap_apple_set_exthdr, _pcap_breakloop, 

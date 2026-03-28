@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriSuggestionsAPI.framework/Versions/A/SiriSuggestionsAPI'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s13SinkEventType18SiriSuggestionsAPI0E17DispatcherFactoryPTl', 
                        '_$s18SiriSuggestionsAPI010DelegatingaB6ClientMp', '_$s18SiriSuggestionsAPI010DelegatingaB6ClientP8delegateAA0abE0_pvgTj', 
                        '_$s18SiriSuggestionsAPI010DelegatingaB6ClientP8delegateAA0abE0_pvgTq', 

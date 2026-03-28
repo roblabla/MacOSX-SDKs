@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WebBookmarksSwift.framework/Versions/A/WebBookmarksSwift'
-current-version: 623.1.14
+current-version: 624.1.16
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s17WebBookmarksSwift18AsyncBufferedQueueC04makeD8IteratorScS0H0Vyx_GyF', 
                        '_$s17WebBookmarksSwift18AsyncBufferedQueueC15bufferingPolicyACyxGScS12ContinuationV09BufferingH0Oyx__G_tcfC', 
                        '_$s17WebBookmarksSwift18AsyncBufferedQueueC15bufferingPolicyACyxGScS12ContinuationV09BufferingH0Oyx__G_tcfCTj', 

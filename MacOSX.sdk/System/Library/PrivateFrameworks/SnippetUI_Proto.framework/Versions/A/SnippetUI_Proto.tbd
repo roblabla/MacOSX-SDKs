@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SnippetUI_Proto.framework/Versions/A/SnippetUI_Proto'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15SnippetUI_Proto0C22VisualResponseProviderC12responseView3for4mode0aB00eH0V4view_AG7ContextC7contextt10Foundation4DataV_So7VRXModeVtKF', 
                        '_$s15SnippetUI_Proto0C22VisualResponseProviderC12responseView3for4mode10completiony10Foundation4DataV_So7VRXModeVys6ResultOy0aB00eH0VAD_AO7ContextC7contextts5Error_pGctF', 
                        '_$s15SnippetUI_Proto0C22VisualResponseProviderC12setPatternId_07forViewI0ySS_SStFZ', 

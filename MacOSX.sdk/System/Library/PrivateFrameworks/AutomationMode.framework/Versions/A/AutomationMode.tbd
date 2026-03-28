@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AutomationMode.framework/Versions/A/AutomationMode'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _XAMAutomationModeDataVaultPath, _XAMAutomationModeDoesNotRequireAuthenticationFilePath, 
                        _XAMAutomationModeReaderMachServiceName, _XAMAutomationModeRequiresAuthentication, 
                        _XAMAutomationModeStateChangedNotificationName, _XAMAutomationModeStateFilePath, 

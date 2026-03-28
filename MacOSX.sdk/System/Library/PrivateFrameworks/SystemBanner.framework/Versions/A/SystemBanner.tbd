@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SystemBanner.framework/Versions/A/SystemBanner'
-current-version: 682.2.13
+current-version: 682.4.31
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12SystemBanner0aB11ServiceNameSSvg', '_$s12SystemBanner0aB7ServiceSo0abC8Protocol_pyF', 
                        '_$sSo25SystemBannerAccessoryTypeV0aB0E11descriptionSSvg', 
                        '_$sSo25SystemBannerAccessoryTypeV0aB0E11descriptionSSvpMV', 

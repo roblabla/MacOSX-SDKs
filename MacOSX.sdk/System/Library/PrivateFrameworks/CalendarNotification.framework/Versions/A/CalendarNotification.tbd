@@ -1,10 +1,23 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CalendarNotification.framework/Versions/A/CalendarNotification'
+swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _CALNDefaultCalendarDirectory, _CALNOldCalendarDirectory, 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s20CalendarNotification13CALNAppEntityC6update19notificationContent4with10entityTypeySo09UNMutablebG0C_SSAA010CALNEntityJ0OtFZTj', 
+                       '_$s20CalendarNotification13CALNAppEntityC6update19notificationContent4with10entityTypeySo09UNMutablebG0C_SSAA010CALNEntityJ0OtFZTq', 
+                       '_$s20CalendarNotification13CALNAppEntityCACycfC', '_$s20CalendarNotification13CALNAppEntityCACycfc', 
+                       '_$s20CalendarNotification13CALNAppEntityCMa', '_$s20CalendarNotification13CALNAppEntityCMn', 
+                       '_$s20CalendarNotification13CALNAppEntityCMo', '_$s20CalendarNotification13CALNAppEntityCMu', 
+                       '_$s20CalendarNotification13CALNAppEntityCN', '_$s20CalendarNotification13CALNAppEntityCfD', 
+                       '_$s20CalendarNotification14CALNEntityTypeO8rawValueACSgSi_tcfC', 
+                       '_$s20CalendarNotification14CALNEntityTypeO8rawValueSivg', 
+                       '_$s20CalendarNotification14CALNEntityTypeO8rawValueSivpMV', 
+                       '_$s20CalendarNotification14CALNEntityTypeOMa', '_$s20CalendarNotification14CALNEntityTypeOMn', 
+                       '_$s20CalendarNotification14CALNEntityTypeON', '_$s20CalendarNotification14CALNEntityTypeOSHAAMc', 
+                       '_$s20CalendarNotification14CALNEntityTypeOSQAAMc', '_$s20CalendarNotification14CALNEntityTypeOSYAAMc', 
+                       _CALNDefaultCalendarDirectory, _CALNOldCalendarDirectory, 
                        _CALNStringFromNotificationCategoryOptions, _CALNStringFromNotificationPresentationOptions, 
                        _CALNTriggerEmailSenderErrorDomain, _CALNUNUserNotificationCenterErrorDomain, 
                        _CalendarNotificationVersionNumber, _CalendarNotificationVersionString, 
@@ -117,9 +130,10 @@ exports:
                        CALNUNUserNotificationCenterFactory, CALNXPCActivityScheduler, 
                        EKCalendarItemAlertInfo, EKSideAlarm, EKSideTableContext, 
                        EKTravelEngine, EKTravelEngineAgendaEntry, EKTravelEngineOriginalEvent, 
-                       EKTravelEngineThrottle, _EKAlarmEngine ]
-    objc-ivars:      [ CALNNotificationContent._body, CALNNotificationContent._categoryIdentifier, 
-                       CALNNotificationContent._date, CALNNotificationContent._defaultActionURL, 
+                       EKTravelEngineThrottle, _EKAlarmEngine, _TtC20CalendarNotification13CALNAppEntity ]
+    objc-ivars:      [ CALNNotificationContent._appEntityIdentifier, CALNNotificationContent._body, 
+                       CALNNotificationContent._categoryIdentifier, CALNNotificationContent._date, 
+                       CALNNotificationContent._defaultActionURL, CALNNotificationContent._entityType, 
                        CALNNotificationContent._expirationDate, CALNNotificationContent._filterCriteria, 
                        CALNNotificationContent._iconIdentifier, CALNNotificationContent._interruptionLevel, 
                        CALNNotificationContent._peopleIdentifiers, CALNNotificationContent._sectionIdentifier, 

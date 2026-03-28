@@ -1,11 +1,21 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriAppLaunchUIFramework.framework/Versions/A/SiriAppLaunchUIFramework'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s24SiriAppLaunchUIFramework15SnippetProviderO7snippet3for4mode5idiom7SwiftUI7AnyViewV0abC7Intents0bC10DataModelsO_So7VRXModeVSo8VRXIdiomVtKFZ', 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s24SiriAppLaunchUIFramework0B18DisambiguationViewV14_actionHandler33_A236DBFB31EA76618985CAC8008E556FLL9SnippetUI06ActionH0Vvpfi', 
+                       '_$s24SiriAppLaunchUIFramework0B18DisambiguationViewV4bodyQrvg', 
+                       '_$s24SiriAppLaunchUIFramework0B18DisambiguationViewV4bodyQrvpMV', 
+                       '_$s24SiriAppLaunchUIFramework0B18DisambiguationViewV4bodyQrvpQOMQ', 
+                       '_$s24SiriAppLaunchUIFramework0B18DisambiguationViewV5model0abC7Intents0bC10DataModelsO0bE5ModelVvg', 
+                       '_$s24SiriAppLaunchUIFramework0B18DisambiguationViewV5model0abC7Intents0bC10DataModelsO0bE5ModelVvpMV', 
+                       '_$s24SiriAppLaunchUIFramework0B18DisambiguationViewV5modelAC0abC7Intents0bC10DataModelsO0bE5ModelV_tcfC', 
+                       '_$s24SiriAppLaunchUIFramework0B18DisambiguationViewV7SwiftUI0F0AAMc', 
+                       '_$s24SiriAppLaunchUIFramework0B18DisambiguationViewVMa', 
+                       '_$s24SiriAppLaunchUIFramework0B18DisambiguationViewVMn', 
+                       '_$s24SiriAppLaunchUIFramework0B18DisambiguationViewVN', '_$s24SiriAppLaunchUIFramework15SnippetProviderO7snippet3for4mode5idiom7SwiftUI7AnyViewV0abC7Intents0bC10DataModelsO_So7VRXModeVSo8VRXIdiomVtKFZ', 
                        '_$s24SiriAppLaunchUIFramework15SnippetProviderOMa', '_$s24SiriAppLaunchUIFramework15SnippetProviderOMn', 
                        '_$s24SiriAppLaunchUIFramework15SnippetProviderON', _SiriAppLaunchUIFrameworkVersionNumber, 
                        _SiriAppLaunchUIFrameworkVersionString ]

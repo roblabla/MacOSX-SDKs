@@ -30,7 +30,9 @@ typedef NS_ENUM(NSInteger, SFSpeechRecognitionTaskState) {
     
     /// Delivery of recognition requests has finished and audio recording has stopped.
     SFSpeechRecognitionTaskStateCompleted = 4,
-} API_AVAILABLE(ios(10.0), macos(10.15), tvos(18));
+}
+API_AVAILABLE(ios(10.0), macos(10.15))
+API_UNAVAILABLE(tvos);
 
 /**
  A task object for monitoring the speech recognition progress.
@@ -39,7 +41,8 @@ typedef NS_ENUM(NSInteger, SFSpeechRecognitionTaskState) {
 
  You don't create speech recognition task objects directly. Instead, you receive one of these objects after calling ``SFSpeechRecognizer/recognitionTask(with:resultHandler:)`` or ``SFSpeechRecognizer/recognitionTask(with:delegate:)`` on your ``SFSpeechRecognizer`` object.
  */
-API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
+API_AVAILABLE(ios(10.0), macos(10.15))
+API_UNAVAILABLE(tvos)
 @interface SFSpeechRecognitionTask : NSObject
 
 /**
@@ -114,7 +117,8 @@ API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
 
  Adopt the methods of this protocol in an object and pass that object in to the `delegate` parameter of ``SFSpeechRecognizer/recognitionTask(with:delegate:)`` when starting your speech recognition task.
  */
-API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
+API_AVAILABLE(ios(10.0), macos(10.15))
+API_UNAVAILABLE(tvos)
 @protocol SFSpeechRecognitionTaskDelegate <NSObject>
 
 @optional
@@ -183,7 +187,7 @@ API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
    - task: The speech recognition task (an ``SFSpeechRecognitionTask`` object) that represents the request.
    - duration: The seconds of audio input that the recognizer has processed.
  */
-- (void)speechRecognitionTask:(SFSpeechRecognitionTask *)task didProcessAudioDuration:(NSTimeInterval)duration API_AVAILABLE(ios(10.0), macos(10.15), tvos(18));
+- (void)speechRecognitionTask:(SFSpeechRecognitionTask *)task didProcessAudioDuration:(NSTimeInterval)duration API_AVAILABLE(ios(10.0), macos(10.15));
 
 @end
 

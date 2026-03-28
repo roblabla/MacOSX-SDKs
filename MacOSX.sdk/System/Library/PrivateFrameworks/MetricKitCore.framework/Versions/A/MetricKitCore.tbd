@@ -1,13 +1,29 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MetricKitCore.framework/Versions/A/MetricKitCore'
+swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _MetricKitCoreVersionNumber, _MetricKitCoreVersionString ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s13MetricKitCore15MXDateFormatterC10DateFormatO8rawValueAESgSi_tcfC', 
+                       '_$s13MetricKitCore15MXDateFormatterC10DateFormatO8rawValueSivg', 
+                       '_$s13MetricKitCore15MXDateFormatterC10DateFormatO8rawValueSivpMV', 
+                       '_$s13MetricKitCore15MXDateFormatterC10DateFormatOMa', '_$s13MetricKitCore15MXDateFormatterC10DateFormatOMn', 
+                       '_$s13MetricKitCore15MXDateFormatterC10DateFormatON', '_$s13MetricKitCore15MXDateFormatterC10DateFormatOSHAAMc', 
+                       '_$s13MetricKitCore15MXDateFormatterC10DateFormatOSQAAMc', 
+                       '_$s13MetricKitCore15MXDateFormatterC10DateFormatOSYAAMc', 
+                       '_$s13MetricKitCore15MXDateFormatterC14dateFromString_6format10Foundation4DateVSgSS_AC0K6FormatOtFZ', 
+                       '_$s13MetricKitCore15MXDateFormatterC14stringFromDate_6formatSS10Foundation0H0V_AC0H6FormatOtFZ', 
+                       '_$s13MetricKitCore15MXDateFormatterC21dateTruncatedToMinutey10Foundation4DateVSgAGFZ', 
+                       '_$s13MetricKitCore15MXDateFormatterC6oneDaySdvgZ', '_$s13MetricKitCore15MXDateFormatterC6oneDaySdvpZMV', 
+                       '_$s13MetricKitCore15MXDateFormatterCACycfC', '_$s13MetricKitCore15MXDateFormatterCACycfc', 
+                       '_$s13MetricKitCore15MXDateFormatterCMa', '_$s13MetricKitCore15MXDateFormatterCMn', 
+                       '_$s13MetricKitCore15MXDateFormatterCMo', '_$s13MetricKitCore15MXDateFormatterCN', 
+                       '_$s13MetricKitCore15MXDateFormatterCfD', _MetricKitCoreVersionNumber, 
+                       _MetricKitCoreVersionString ]
     objc-classes:    [ MXBundleUtil, MXCleanUtil, MXClientUtil, MXCore, MXCoreHandler, 
-                       MXCorePayloadConstructor, MXDateUtil, MXDeliveryDataCacher, 
-                       MXDeliveryPathUtil, MXDependencyFactory, MXDiagnosticServices, 
-                       MXMetricServices, MXPayloadValidator, MXSource, MXSourceDataCacher, 
-                       MXSourceHandler, MXSourcePathUtil, MXStorageUtil ]
+                       MXCorePayloadConstructor, MXDeliveryDataCacher, MXDeliveryPathUtil, 
+                       MXDependencyFactory, MXDiagnosticServices, MXMetricServices, 
+                       MXPayloadValidator, MXSource, MXSourceDataCacher, MXSourceHandler, 
+                       MXSourcePathUtil, MXStorageUtil, _TtC13MetricKitCore15MXDateFormatter ]
 ...

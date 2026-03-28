@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MediaAnalysisBlastDoorSupport.framework/Versions/A/MediaAnalysisBlastDoorSupport'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s29MediaAnalysisBlastDoorSupport0abcD9InterfaceC16generateMetadata17forAttachmentWith13resultHandlery10Foundation3URLV_ySo8NSObjectCSg_s5Error_pSgtctFTj', 
                        '_$s29MediaAnalysisBlastDoorSupport0abcD9InterfaceC16generateMetadata17forAttachmentWith13resultHandlery10Foundation3URLV_ySo8NSObjectCSg_s5Error_pSgtctFTq', 
                        '_$s29MediaAnalysisBlastDoorSupport0abcD9InterfaceC19generateMovieFrames17forAttachmentWith16targetPixelWidth0mN6Height10frameLimit15uniformSampling13framesPerSync30appliesPreferredTrackTransform13resultHandlery10Foundation3URLV_S3iSbSiSbySo8NSObjectCSg_s5Error_pSgSbtctFTj', 

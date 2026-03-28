@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/NotificationCenter.framework/Versions/A/NotificationCenter'
-current-version: 1553.2.7
+current-version: 1553.4.18
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _NCMaterialComputedStyle, _NCMaterialRegisterDelegate, _NCMaterialUnRegisterDelegate, 
                        _NCMaterialUpdateMaterialStyle, _NCPostDistributedNotification, 
                        _NCPostNotification, _NCRemoveCocoaBindingsForObject, _NCRemoveDistributedNotificationObserver, 

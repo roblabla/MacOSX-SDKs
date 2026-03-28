@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UIIntelligenceSupportAgent.framework/Versions/A/UIIntelligenceSupportAgent'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s26UIIntelligenceSupportAgent012IntelligencebC0C10initializeyyFZ', 
                        '_$s26UIIntelligenceSupportAgent012IntelligencebC0C14TimeoutReasonsV010waitingForC16LaunchXPCMessageSbvM', 
                        '_$s26UIIntelligenceSupportAgent012IntelligencebC0C14TimeoutReasonsV010waitingForC16LaunchXPCMessageSbvg', 
@@ -203,14 +201,30 @@ exports:
                        '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV22includeCustomTypeNamesSbvg', 
                        '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV22includeCustomTypeNamesSbvpMV', 
                        '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV22includeCustomTypeNamesSbvs', 
+                       '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV23collectWindowLayoutOnlySbvM', 
+                       '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV23collectWindowLayoutOnlySbvg', 
+                       '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV23collectWindowLayoutOnlySbvpMV', 
+                       '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV23collectWindowLayoutOnlySbvs', 
+                       '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV23targetActiveWindowsOnlySbvM', 
+                       '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV23targetActiveWindowsOnlySbvg', 
+                       '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV23targetActiveWindowsOnlySbvpMV', 
+                       '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV23targetActiveWindowsOnlySbvs', 
                        '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV24downscaleWindowSnapshotsSbvM', 
                        '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV24downscaleWindowSnapshotsSbvg', 
                        '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV24downscaleWindowSnapshotsSbvpMV', 
                        '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV24downscaleWindowSnapshotsSbvs', 
+                       '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV25excludedWindowIdentifiersShySSGvM', 
+                       '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV25excludedWindowIdentifiersShySSGvg', 
+                       '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV25excludedWindowIdentifiersShySSGvpMV', 
+                       '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV25excludedWindowIdentifiersShySSGvs', 
                        '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV25includeAppIntentsPayloadsSbvM', 
                        '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV25includeAppIntentsPayloadsSbvg', 
                        '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV25includeAppIntentsPayloadsSbvpMV', 
                        '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV25includeAppIntentsPayloadsSbvs', 
+                       '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV25targetedWindowIdentifiersShySSGSgvM', 
+                       '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV25targetedWindowIdentifiersShySSGSgvg', 
+                       '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV25targetedWindowIdentifiersShySSGSgvpMV', 
+                       '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV25targetedWindowIdentifiersShySSGSgvs', 
                        '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV26includeVisibleElementsOnlySbvM', 
                        '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV26includeVisibleElementsOnlySbvg', 
                        '_$s26UIIntelligenceSupportAgent012IntelligencebC0C17RequestParametersV26includeVisibleElementsOnlySbvpMV', 

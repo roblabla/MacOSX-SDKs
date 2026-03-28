@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/CommerceKit'
 current-version: 379
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Frameworks/CommerceCore.framework/Versions/A/CommerceCore' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AMSBagKeyPasswordSettingsURL, _CKAcceptLanguageHeader, _CKAccountPasswordSettingsAlways, 
                        _CKAccountPasswordSettingsFreeDownloadKey, _CKAccountPasswordSettingsKey, 
                        _CKAccountPasswordSettingsNever, _CKAccountPasswordSettingsPaidDownloadKey, 
@@ -109,11 +109,11 @@ exports:
                        _CKDAAPBuffer._data ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Frameworks/CommerceCore.framework/Versions/A/CommerceCore'
 current-version: 379
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CKAdoptionInfoPlistPath, _CKCheckBookDownloadQueue, _CKCreateCriticalUpdateTimeStamp, 
                        _CKCriticalUpdateTimeStamp, _CKDownloadDirectory, _CKInstallPathForIAP, 
                        _CKInstallPathForSharedIAP, _CKInstallPathForiOSApp, _CKMDMDownloadOptionAllowRedownload, 

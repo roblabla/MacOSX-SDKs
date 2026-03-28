@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PowerLog.framework/Versions/A/PowerLog'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _PLBatchDropMessages, _PLBatteryBreakdownResponseTypes, _PLBatteryGaugeGetSnapshot, 
                        _PLBatteryGaugePauseTracingForBundleId, _PLBatteryGaugePauseTracingForPid, 
                        _PLBatteryGaugePauseTracingForProcessName, _PLBatteryGaugeResumeTracingForBundleId, 
@@ -45,6 +43,5 @@ exports:
     objc-classes:    [ PLBatteryUIExternalData, PLCoreDuetEvent, PLCoreDuetEventInterval, 
                        PLDiscretionaryEnergyMonitor, PLDiscretionaryIntervalManager, 
                        PLDuetActivitySchedulerUsageSnapshot, PLEnergyBucket, PLHUDControl, 
-                       PLModelingUtilities, PLNetworkEnergyModel, PLUsageSnapshot, 
-                       SafeguardsClient, SafeguardsManagingClient ]
+                       PLModelingUtilities, PLNetworkEnergyModel, PLUsageSnapshot ]
 ...

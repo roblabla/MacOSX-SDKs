@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MatterPlugin.framework/Versions/A/MatterPlugin'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _MTRAssociateControllerUUIDWithClientInfo, _MTRAssociateControllerWithHomeUUID, 
                        _MTRAssociateNodeIDWithHomeUUID, _MTRBufferedExecutionBlock, 
                        _MTRGetAssociatedClientSessionIDForControllerUUID, _MTRGetAssociatedClientTypeForControllerUUID, 

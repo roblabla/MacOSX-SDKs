@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LiveTranscription.framework/Versions/A/LiveTranscription'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s17LiveTranscription10appNameKeySSvg', '_$s17LiveTranscription11AXLTCaptionC10actionTypeAA0c7ActionsE0OvMTj', 
                        '_$s17LiveTranscription11AXLTCaptionC10actionTypeAA0c7ActionsE0OvMTq', 
                        '_$s17LiveTranscription11AXLTCaptionC10actionTypeAA0c7ActionsE0OvgTj', 
@@ -40,6 +40,13 @@ exports:
                        '_$s17LiveTranscription11AXLTCaptionC14attributedText10Foundation16AttributedStringVvpMV', 
                        '_$s17LiveTranscription11AXLTCaptionC14attributedText10Foundation16AttributedStringVvsTj', 
                        '_$s17LiveTranscription11AXLTCaptionC14attributedText10Foundation16AttributedStringVvsTq', 
+                       '_$s17LiveTranscription11AXLTCaptionC16privilegedLengthSivMTj', 
+                       '_$s17LiveTranscription11AXLTCaptionC16privilegedLengthSivMTq', 
+                       '_$s17LiveTranscription11AXLTCaptionC16privilegedLengthSivgTj', 
+                       '_$s17LiveTranscription11AXLTCaptionC16privilegedLengthSivgTq', 
+                       '_$s17LiveTranscription11AXLTCaptionC16privilegedLengthSivpMV', 
+                       '_$s17LiveTranscription11AXLTCaptionC16privilegedLengthSivsTj', 
+                       '_$s17LiveTranscription11AXLTCaptionC16privilegedLengthSivsTq', 
                        '_$s17LiveTranscription11AXLTCaptionC18textWithConfidenceSo18NSAttributedStringCvgTj', 
                        '_$s17LiveTranscription11AXLTCaptionC18textWithConfidenceSo18NSAttributedStringCvgTq', 
                        '_$s17LiveTranscription11AXLTCaptionC18textWithConfidenceSo18NSAttributedStringCvpMV', 
@@ -110,10 +117,12 @@ exports:
                        '_$s17LiveTranscription14AXLiveCaptionsC21transcriberOutputDatayySo015AXLTTranscribedG0CF', 
                        '_$s17LiveTranscription14AXLiveCaptionsC4stopyyAA0cD10SourceTypeOKFTj', 
                        '_$s17LiveTranscription14AXLiveCaptionsC4stopyyAA0cD10SourceTypeOKFTq', 
+                       '_$s17LiveTranscription14AXLiveCaptionsC4stopyys5Int32VKFTj', 
+                       '_$s17LiveTranscription14AXLiveCaptionsC4stopyys5Int32VKFTq', 
                        '_$s17LiveTranscription14AXLiveCaptionsC5start__11sharedRoute11excludePIDs19transcriptionResultyAA0cD10SourceTypeO_10Foundation6LocaleVSgSbSaySo8NSNumberCGSgyAA0C7CaptionCctKFTj', 
                        '_$s17LiveTranscription14AXLiveCaptionsC5start__11sharedRoute11excludePIDs19transcriptionResultyAA0cD10SourceTypeO_10Foundation6LocaleVSgSbSaySo8NSNumberCGSgyAA0C7CaptionCctKFTq', 
-                       '_$s17LiveTranscription14AXLiveCaptionsC5start___19transcriptionResultyAA0cD10SourceTypeO_10Foundation6LocaleVSgSbyAA0C7CaptionCctKFTj', 
-                       '_$s17LiveTranscription14AXLiveCaptionsC5start___19transcriptionResultyAA0cD10SourceTypeO_10Foundation6LocaleVSgSbyAA0C7CaptionCctKFTq', 
+                       '_$s17LiveTranscription14AXLiveCaptionsC5start__19transcriptionResultys5Int32V_10Foundation6LocaleVSgyAA0C7CaptionCctKFTj', 
+                       '_$s17LiveTranscription14AXLiveCaptionsC5start__19transcriptionResultys5Int32V_10Foundation6LocaleVSgyAA0C7CaptionCctKFTq', 
                        '_$s17LiveTranscription14AXLiveCaptionsC6sharedACvgZ', '_$s17LiveTranscription14AXLiveCaptionsC6sharedACvpZMV', 
                        '_$s17LiveTranscription14AXLiveCaptionsCACycfC', '_$s17LiveTranscription14AXLiveCaptionsCACycfc', 
                        '_$s17LiveTranscription14AXLiveCaptionsCMa', '_$s17LiveTranscription14AXLiveCaptionsCMn', 

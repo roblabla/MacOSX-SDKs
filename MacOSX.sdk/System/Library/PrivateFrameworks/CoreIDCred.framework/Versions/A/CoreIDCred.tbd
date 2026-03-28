@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreIDCred.framework/Versions/A/CoreIDCred'
-current-version: 8.203
+current-version: 8.255.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10CoreIDCred11SessionTypeO10identifierSSvg', '_$s10CoreIDCred11SessionTypeO10identifierSSvpMV', 
                        '_$s10CoreIDCred11SessionTypeO2eeoiySbAC_ACtFZ', '_$s10CoreIDCred11SessionTypeO31authenticationCertificateChainsSaySay10Foundation4DataVGGSgvg', 
                        '_$s10CoreIDCred11SessionTypeO31authenticationCertificateChainsSaySay10Foundation4DataVGGSgvpMV', 
@@ -63,34 +61,7 @@ exports:
                        '_$s10CoreIDCred15DocumentRequestVMa', '_$s10CoreIDCred15DocumentRequestVMn', 
                        '_$s10CoreIDCred15DocumentRequestVN', '_$s10CoreIDCred15DocumentRequestVSEAAMc', 
                        '_$s10CoreIDCred15DocumentRequestVSHAAMc', '_$s10CoreIDCred15DocumentRequestVSQAAMc', 
-                       '_$s10CoreIDCred15DocumentRequestVSeAAMc', '_$s10CoreIDCred21SendableXPCConnectionC10connection9interface19invalidationHandler012interruptionH017exportedInterface0J6Object0E11ErrorMapperACyxGSo15NSXPCConnectionC_So14NSXPCInterfaceCyycSgApOSgypSgs0M0_psAS_pSgYbctcfC', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC10connection9interface19invalidationHandler012interruptionH017exportedInterface0J6Object0E11ErrorMapperACyxGSo15NSXPCConnectionC_So14NSXPCInterfaceCyycSgApOSgypSgs0M0_psAS_pSgYbctcfCTj', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC10connection9interface19invalidationHandler012interruptionH017exportedInterface0J6Object0E11ErrorMapperACyxGSo15NSXPCConnectionC_So14NSXPCInterfaceCyycSgApOSgypSgs0M0_psAS_pSgYbctcfCTq', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC10connection9interface19invalidationHandler012interruptionH017exportedInterface0J6Object0E11ErrorMapperACyxGSo15NSXPCConnectionC_So14NSXPCInterfaceCyycSgApOSgypSgs0M0_psAS_pSgYbctcfc', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC10invalidateyyF', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC14exportedObjectypSgvM', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC14exportedObjectypSgvg', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC14exportedObjectypSgvpMV', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC14exportedObjectypSgvs', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC15machServiceName9interface19invalidationHandler012interruptionJ017exportedInterface0L6Object21connectionErrorMapperACyxGSS_So14NSXPCInterfaceCyycSgAnMSgypSgs0P0_psAQ_pSgYbctcfC', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC16listenerEndpoint9interface19invalidationHandler012interruptionI017exportedInterface0K6Object21connectionErrorMapperACyxGSo013NSXPCListenerF0C_So14NSXPCInterfaceCyycSgApOSgypSgs0O0_psAS_pSgYbctcfC', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC19interruptionHandleryycSgvM', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC19interruptionHandleryycSgvg', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC19interruptionHandleryycSgvpMV', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC19interruptionHandleryycSgvs', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC19invalidationHandleryycSgvM', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC19invalidationHandleryycSgvg', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC19invalidationHandleryycSgvpMV', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC19invalidationHandleryycSgvs', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC28performWithRemoteObjectProxy_8onCancelqd__qd__xYaYbKc_yxYaYbKcSgtYaKs0C0Rd__lF', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC28performWithRemoteObjectProxy_8onCancelqd__qd__xYaYbKc_yxYaYbKcSgtYaKs0C0Rd__lFTu', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC41performSynchronouslyWithRemoteObjectProxyyqd__qd__xXEKlF', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC7wrappedSo15NSXPCConnectionCvg', 
-                       '_$s10CoreIDCred21SendableXPCConnectionC7wrappedSo15NSXPCConnectionCvpMV', 
-                       '_$s10CoreIDCred21SendableXPCConnectionCMa', '_$s10CoreIDCred21SendableXPCConnectionCMn', 
-                       '_$s10CoreIDCred21SendableXPCConnectionCMo', '_$s10CoreIDCred21SendableXPCConnectionCMu', 
-                       '_$s10CoreIDCred21SendableXPCConnectionCfD', '_$s10CoreIDCred21SendableXPCConnectionCfd', 
-                       '_$s10CoreIDCred28CredentialPresentmentRequestV11sessionTypeAA07SessionG0Ovg', 
+                       '_$s10CoreIDCred15DocumentRequestVSeAAMc', '_$s10CoreIDCred28CredentialPresentmentRequestV11sessionTypeAA07SessionG0Ovg', 
                        '_$s10CoreIDCred28CredentialPresentmentRequestV11sessionTypeAA07SessionG0OvpMV', 
                        '_$s10CoreIDCred28CredentialPresentmentRequestV16allDocumentTypesShySSGvg', 
                        '_$s10CoreIDCred28CredentialPresentmentRequestV16allDocumentTypesShySSGvpMV', 
@@ -124,7 +95,8 @@ exports:
                        '_$s10CoreIDCred28CredentialPresentmentRequestVMa', '_$s10CoreIDCred28CredentialPresentmentRequestVMn', 
                        '_$s10CoreIDCred28CredentialPresentmentRequestVN', '_$s10CoreIDCred28CredentialPresentmentRequestVSEAAMc', 
                        '_$s10CoreIDCred28CredentialPresentmentRequestVSHAAMc', '_$s10CoreIDCred28CredentialPresentmentRequestVSQAAMc', 
-                       '_$s10CoreIDCred28CredentialPresentmentRequestVSeAAMc', '_$s10CoreIDCred31XPCCredentialPresentmentRequestC20supportsSecureCodingSbvgZ', 
+                       '_$s10CoreIDCred28CredentialPresentmentRequestVSeAAMc', '_$s10CoreIDCred31XPCCredentialPresentmentRequestC0A9IDVShared17XPCValueContainerAAMc', 
+                       '_$s10CoreIDCred31XPCCredentialPresentmentRequestC20supportsSecureCodingSbvgZ', 
                        '_$s10CoreIDCred31XPCCredentialPresentmentRequestC20supportsSecureCodingSbvpZMV', 
                        '_$s10CoreIDCred31XPCCredentialPresentmentRequestC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s10CoreIDCred31XPCCredentialPresentmentRequestC5coderACSgSo7NSCoderC_tcfc', 
@@ -175,8 +147,6 @@ exports:
                        '_$s10CoreIDCred39CredentialPresentmentElementRequestInfoVSeAAMc', 
                        '_$sSo14NSXPCInterfaceC10CoreIDCredE14presentmentXPCABvgZ', 
                        '_$sSo14NSXPCInterfaceC10CoreIDCredE14presentmentXPCABvpZMV', 
-                       '_$sSo15NSXPCConnectionC10CoreIDCredE28performWithRemoteObjectProxy2of_q_xm_q_xYaYbKctYaKs8SendableR_r0_lF', 
-                       '_$sSo15NSXPCConnectionC10CoreIDCredE28performWithRemoteObjectProxy2of_q_xm_q_xYaYbKctYaKs8SendableR_r0_lFTu', 
                        '_$sSo17DCCredentialStateVs23CustomStringConvertible10CoreIDCredMc', 
                        '_$sSo17DCPresentmentTypeVs23CustomStringConvertible10CoreIDCredMc', 
                        '_$sSo20DCPresentmentRequestC10CoreIDCredE17sessionTranscript10Foundation4DataVSgvg', 
@@ -296,9 +266,9 @@ exports:
                        DCCredentialElement, DCCredentialNonce, DCCredentialOptions, 
                        DCCredentialPayload, DCCredentialProperties, DCCredentialResponse, 
                        DCCredentialRevocationInfo, DCCredentialStore, DCCredentialTrust, 
-                       DCLegacySESlotInfo, DCPresentmentProposal, DCPresentmentProposalReaderAnalytics, 
-                       DCPresentmentProposalReaderMetadata, DCPresentmentRequest, 
-                       DCPresentmentRequestedElement, DCPresentmentResponseEncryptionParameters, 
+                       DCLegacySESlotInfo, DCPayloadProperties, DCPresentmentProposal, 
+                       DCPresentmentProposalReaderAnalytics, DCPresentmentProposalReaderMetadata, 
+                       DCPresentmentRequest, DCPresentmentRequestedElement, DCPresentmentResponseEncryptionParameters, 
                        DCPresentmentSelection, DCPresentmentSession, DCPresentmentSessionOptions, 
                        _TtC10CoreIDCred31XPCCredentialPresentmentRequest ]
 ...

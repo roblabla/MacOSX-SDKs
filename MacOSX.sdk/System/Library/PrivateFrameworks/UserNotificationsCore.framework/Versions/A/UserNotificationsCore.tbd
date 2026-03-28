@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UserNotificationsCore.framework/Versions/A/UserNotificationsCore'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s21UserNotificationsCore012NotificationC13ServiceClientC013removeInvalidD7Records19forBundleIdentifierySS_tFTj', 
                        '_$s21UserNotificationsCore012NotificationC13ServiceClientC013removeInvalidD7Records19forBundleIdentifierySS_tFTq', 
                        '_$s21UserNotificationsCore012NotificationC13ServiceClientC013removeSimilarD7Records_19forBundleIdentifierySaySo21UNSNotificationRecordCG_SStFTj', 
@@ -438,9 +438,9 @@ exports:
                        '_$s21UserNotificationsCore17StateCaptureEntryCfd', '_$s21UserNotificationsCore17ToolServiceClientC12stateCaptureSSyYaKFTj', 
                        '_$s21UserNotificationsCore17ToolServiceClientC12stateCaptureSSyYaKFTjTu', 
                        '_$s21UserNotificationsCore17ToolServiceClientC12stateCaptureSSyYaKFTq', 
-                       '_$s21UserNotificationsCore17ToolServiceClientC32simulateNotificationPushResponse4withSSSDys11AnyHashableVypG_tYaKFTj', 
-                       '_$s21UserNotificationsCore17ToolServiceClientC32simulateNotificationPushResponse4withSSSDys11AnyHashableVypG_tYaKFTjTu', 
-                       '_$s21UserNotificationsCore17ToolServiceClientC32simulateNotificationPushResponse4withSSSDys11AnyHashableVypG_tYaKFTq', 
+                       '_$s21UserNotificationsCore17ToolServiceClientC14appEntityQuery11identifiersSSSaySSG_tYaKFTj', 
+                       '_$s21UserNotificationsCore17ToolServiceClientC14appEntityQuery11identifiersSSSaySSG_tYaKFTjTu', 
+                       '_$s21UserNotificationsCore17ToolServiceClientC14appEntityQuery11identifiersSSSaySSG_tYaKFTq', 
                        '_$s21UserNotificationsCore17ToolServiceClientC3set11isHighlight3for16bundleIdentifierSSSb_S2StYaKFTj', 
                        '_$s21UserNotificationsCore17ToolServiceClientC3set11isHighlight3for16bundleIdentifierSSSb_S2StYaKFTjTu', 
                        '_$s21UserNotificationsCore17ToolServiceClientC3set11isHighlight3for16bundleIdentifierSSSb_S2StYaKFTq', 
@@ -1024,6 +1024,18 @@ exports:
                        '_$s21UserNotificationsCore28NotificationSettingsProviderCyACSbAA0D6SourceV_So014UNNotificationE0CSgt_tcSgcfCTj', 
                        '_$s21UserNotificationsCore28NotificationSettingsProviderCyACSbAA0D6SourceV_So014UNNotificationE0CSgt_tcSgcfCTq', 
                        '_$s21UserNotificationsCore28NotificationSettingsProviderCyACSbAA0D6SourceV_So014UNNotificationE0CSgt_tcSgcfc', 
+                       '_$s21UserNotificationsCore29AlertCoordinationSystemFilterC20shouldShowInSettings3forSbSS_tFTj', 
+                       '_$s21UserNotificationsCore29AlertCoordinationSystemFilterC20shouldShowInSettings3forSbSS_tFTq', 
+                       '_$s21UserNotificationsCore29AlertCoordinationSystemFilterC6systemACvgZ', 
+                       '_$s21UserNotificationsCore29AlertCoordinationSystemFilterC6systemACvpZMV', 
+                       '_$s21UserNotificationsCore29AlertCoordinationSystemFilterCACycfC', 
+                       '_$s21UserNotificationsCore29AlertCoordinationSystemFilterCACycfc', 
+                       '_$s21UserNotificationsCore29AlertCoordinationSystemFilterCMa', 
+                       '_$s21UserNotificationsCore29AlertCoordinationSystemFilterCMn', 
+                       '_$s21UserNotificationsCore29AlertCoordinationSystemFilterCMo', 
+                       '_$s21UserNotificationsCore29AlertCoordinationSystemFilterCMu', 
+                       '_$s21UserNotificationsCore29AlertCoordinationSystemFilterCN', 
+                       '_$s21UserNotificationsCore29AlertCoordinationSystemFilterCfD', 
                        '_$s21UserNotificationsCore29NotificationPipelineAssertionCACycfC', 
                        '_$s21UserNotificationsCore29NotificationPipelineAssertionCACycfc', 
                        '_$s21UserNotificationsCore29NotificationPipelineAssertionCMa', 
@@ -1157,8 +1169,8 @@ exports:
                        '_$s21UserNotificationsCore7timeout5until9tolerance9operationxs15ContinuousClockV7InstantV_s8DurationVSgxyYaYbKXEtYaKs8SendableRzlFTu', 
                        '_$s2os6LoggerV21UserNotificationsCoreE3simACvgZ', '_$s2os6LoggerV21UserNotificationsCoreE6daemonACvgZ', 
                        '_$sSS21UserNotificationsCoreE16vendorIdentifierSSvgZ', '_$sSS21UserNotificationsCoreE35serverRestartDarwinNotificationNameSSvgZ', 
-                       '_$sSo21UNCOneTimeCodeManagerC21UserNotificationsCoreE05foundC0_07displayC011application12notification9timestampySS_S3S10Foundation4DateVtF', 
-                       '_$sSo21UNCOneTimeCodeManagerC21UserNotificationsCoreE14sharedInstanceAByFZ', 
+                       '_$sSo21UNCOneTimeCodeManagerC21UserNotificationsCoreE5found4code07displayC011application12notification9timestampySS_S3S10Foundation4DateVtF', 
+                       '_$sSo21UNCOneTimeCodeManagerC21UserNotificationsCoreE6sharedAByFZ', 
                        '_$sSo21UNCOneTimeCodeManagerC21UserNotificationsCoreEABycfC', 
                        '_$sSo21UNCOneTimeCodeManagerC21UserNotificationsCoreEABycfc', 
                        '_$sSo21UNCOneTimeCodeManagerCMa', '_$sSo21UNNotificationSettingVSE21UserNotificationsCoreMc', 
@@ -1203,7 +1215,8 @@ exports:
                        _kUNNotificationTypeRemote, _kUNSNotificationCategoryBackgroundStyleDark, 
                        _kUNSNotificationCategoryBackgroundStyleSystem, _kUNSNotificationCategoryListPriorityHigh, 
                        _kUNSNotificationCategoryListPriorityTop ]
-    objc-classes:    [ UNCAtomicDataContentProtectionStrategy, UNCAttachmentRecord, 
+    objc-classes:    [ UNCAlertCoordinationSystemFilter, UNCAlertCoordinationSystemFilterImpl, 
+                       UNCAtomicDataContentProtectionStrategy, UNCAttachmentRecord, 
                        UNCAttachmentsRepository, UNCBiometricResource, UNCBlueListMonitor, 
                        UNCBulletin, UNCBulletinDefaults, UNCBulletinServerConnection, 
                        UNCBundleLibrarian, UNCContactRecord, UNCDataStoreReceipt, 

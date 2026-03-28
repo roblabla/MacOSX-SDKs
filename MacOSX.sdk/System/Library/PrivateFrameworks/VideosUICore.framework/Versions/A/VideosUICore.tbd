@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/VideosUICore.framework/Versions/A/VideosUICore'
-current-version: 1061.24.1
+current-version: 1061.40.60
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CALayerKeyBounds, _CALayerKeyBoundsOrigin, _CALayerKeyBoundsSize, 
                        _CALayerKeyPosition, _CALayerKeyShadowPath, _VUIAccessibilityHighContrastFocusIndicatorsEnabledNotification, 
                        _VUIAccessibilityIdDisplayTypeButton, _VUIAccessibilityIdDisplayTypeDocument, 
@@ -17,16 +17,18 @@ exports:
                        _VUICALayerContentGravityFromVUIContentMode, _VUICeilSnap, 
                        _VUICeilValue, _VUIChickenEnabled, _VUICornerRadiiZero, _VUIDefaultsAutoDownloadsEpisodeCount, 
                        _VUIDefaultsAutoDownloadsStorageLimit, _VUIDefaultsAvailabilityEndOverrideInSeconds, 
-                       _VUIDefaultsCanaryURL, _VUIDefaultsCoWatchStartsInPlayingStateInsteadOfPaused, 
-                       _VUIDefaultsCollectionMaxCacheValueKey, _VUIDefaultsCollectionRefreshTypeValueKey, 
-                       _VUIDefaultsDownloadExpirationOverrideInSeconds, _VUIDefaultsEnableCapellaDebugger, 
-                       _VUIDefaultsEnableDebugUI, _VUIDefaultsEnableDemoMode, _VUIDefaultsEnableMetricsExpandedClickLogging, 
+                       _VUIDefaultsCanaryURL, _VUIDefaultsCloseSynchronizedStreamsOnBroadcastEnd, 
+                       _VUIDefaultsCoWatchStartsInPlayingStateInsteadOfPaused, _VUIDefaultsCollectionMaxCacheValueKey, 
+                       _VUIDefaultsCollectionRefreshTypeValueKey, _VUIDefaultsDownloadExpirationOverrideInSeconds, 
+                       _VUIDefaultsEnableCapellaDebugger, _VUIDefaultsEnableDebugUI, 
+                       _VUIDefaultsEnableDemoMode, _VUIDefaultsEnableMetricsExpandedClickLogging, 
                        _VUIDefaultsEnableMetricsExpandedLogging, _VUIDefaultsEnableMetricsLogging, 
                        _VUIDefaultsEnableMetricsPageRenderLogging, _VUIDefaultsEnablePerformanceDebugger, 
                        _VUIDefaultsEnablePerformanceDebuggerVerbose, _VUIDefaultsEnableRefreshEventDebug, 
                        _VUIDefaultsForceGDPRFirstTimeFlow, _VUIDefaultsForceGDPRWhatsNewFlow, 
-                       _VUIDefaultsPageMaxCacheValueKey, _VUIDefaultsPageRefreshTypeValueKey, 
-                       _VUIDefaultsPlaybackURLOverrides, _VUIDefaultsUTSBaseURL, 
+                       _VUIDefaultsIsTapToRadarEnabled, _VUIDefaultsPageMaxCacheValueKey, 
+                       _VUIDefaultsPageRefreshTypeValueKey, _VUIDefaultsPlaybackURLOverrides, 
+                       _VUIDefaultsRequireLSPPToRemoveFromMultiview, _VUIDefaultsUTSBaseURL, 
                        _VUIDefaultsWLKDefaultsDomain, _VUIDurationValueTransformerName, 
                        _VUIError, _VUIErrorCancelled, _VUIErrorCancelledWithUnderlyingError, 
                        _VUIErrorIsCancelled, _VUIErrorIsErrorCode, _VUIErrorIsErrorDomainAndCode, 

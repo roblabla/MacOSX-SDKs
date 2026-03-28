@@ -1,21 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/libWebKitSwift.dylib'
-current-version: 623.1.14
+current-version: 624.1.16
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s11WebKitSwift21CredentialUpdaterShimC013signalUnknownD022relyingPartyIdentifier12credentialIDySS_10Foundation4DataVtYaKFZ', 
-                       '_$s11WebKitSwift21CredentialUpdaterShimC013signalUnknownD022relyingPartyIdentifier12credentialIDySS_10Foundation4DataVtYaKFZTu', 
-                       '_$s11WebKitSwift21CredentialUpdaterShimC24signalCurrentUserDetails22relyingPartyIdentifier10userHandle7newNameySS_10Foundation4DataVSStYaKFZ', 
-                       '_$s11WebKitSwift21CredentialUpdaterShimC24signalCurrentUserDetails22relyingPartyIdentifier10userHandle7newNameySS_10Foundation4DataVSStYaKFZTu', 
-                       '_$s11WebKitSwift21CredentialUpdaterShimC28signalAllAcceptedCredentials22relyingPartyIdentifier10userHandle08acceptedD3IDsySS_10Foundation4DataVSayAJGtYaKFZ', 
-                       '_$s11WebKitSwift21CredentialUpdaterShimC28signalAllAcceptedCredentials22relyingPartyIdentifier10userHandle08acceptedD3IDsySS_10Foundation4DataVSayAJGtYaKFZTu', 
-                       '_$s11WebKitSwift21CredentialUpdaterShimCACycfC', '_$s11WebKitSwift21CredentialUpdaterShimCACycfc', 
-                       '_$s11WebKitSwift21CredentialUpdaterShimCMa', '_$s11WebKitSwift21CredentialUpdaterShimCMn', 
-                       '_$s11WebKitSwift21CredentialUpdaterShimCN', '_$s11WebKitSwift21CredentialUpdaterShimCfD', 
-                       '_$sSo035WKIdentityDocumentPresentmentMobileB11ElementInfoC11WebKitSwiftEABycfC', 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$sSo035WKIdentityDocumentPresentmentMobileB11ElementInfoC11WebKitSwiftEABycfC', 
                        '_$sSo035WKIdentityDocumentPresentmentMobileB11ElementInfoC11WebKitSwiftEABycfc', 
                        '_$sSo035WKIdentityDocumentPresentmentMobileB11ElementInfoCMa', 
                        '_$sSo035WKIdentityDocumentPresentmentMobileB7RequestC11WebKitSwiftEABycfC', 
@@ -33,7 +24,9 @@ exports:
                        '_$sSo14WKGroupSessionCMa', '_$sSo17WKISO18013RequestC11WebKitSwiftE06deviceB0SSSgvpfi', 
                        '_$sSo17WKISO18013RequestC11WebKitSwiftE14encryptionInfoSSSgvpfi', 
                        '_$sSo17WKISO18013RequestC11WebKitSwiftEABycfC', '_$sSo17WKISO18013RequestC11WebKitSwiftEABycfc', 
-                       '_$sSo17WKISO18013RequestCMa', '_$sSo22WKGroupSessionObserverC11WebKitSwiftE03newB8CallbackySo0aB0CcSgvpfi', 
+                       '_$sSo17WKISO18013RequestCMa', '_$sSo21CredentialUpdaterShimC11WebKitSwiftEABycfC', 
+                       '_$sSo21CredentialUpdaterShimC11WebKitSwiftEABycfc', '_$sSo21CredentialUpdaterShimCMa', 
+                       '_$sSo22WKGroupSessionObserverC11WebKitSwiftE03newB8CallbackySo0aB0CcSgvpfi', 
                        '_$sSo22WKGroupSessionObserverC11WebKitSwiftE20incomingSessionsTask33_12A9C0970836639A614F12B8FC57E0EFLLScTyyts5NeverOGSgvpfi', 
                        '_$sSo22WKGroupSessionObserverCMa', '_$sSo36WKIdentityDocumentPresentmentRequestC11WebKitSwiftEABycfC', 
                        '_$sSo36WKIdentityDocumentPresentmentRequestC11WebKitSwiftEABycfc', 

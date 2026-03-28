@@ -1,28 +1,26 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/WirelessProximity.framework/Versions/A/WirelessProximity'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _WPAirPlaySoloAdvertisingMode, _WPAirPlaySoloKeyDeviceAddress, 
                        _WPAirPlaySoloKeyDeviceTime, _WPBeaconAdvInterval, _WPBeaconTX, 
                        _WPBeaconType, _WPBeaconTypeATVSetup, _WPBeaconTypeAirPlayTargetPresence, 
                        _WPBeaconTypeAirPlayTargetPresencePayload, _WPBeaconTypeCompany, 
                        _WPBeaconTypeCompanyConfig, _WPBeaconTypeCompanyMajor, _WPBeaconTypeCompanyMinor, 
                        _WPBeaconTypeCompanyUUID, _WPErrorDomain, _WPHeySiriAdvertisingData, 
-                       _WPHeySiriKeyDeviceAddress, _WPHeySiriKeyDeviceRSSI, _WPHeySiriKeyDeviceTime, 
-                       _WPHeySiriKeyDeviceUUID, _WPHeySiriKeyManufacturerData, _WPHomeKitScanBlobData, 
-                       _WPHomeKitScanDutyCycle, _WPHomeKitScanMaskData, _WPHomeKitScanOptionRange, 
-                       _WPHomeKitScanOptionRetainDuplicates, _WPHomeKitScanOptionWHB, 
-                       _WPHomeKitTypes, _WPLogInitOnce, _WPLoggingInit, _WPMagicSwitchAdvertiseTypeInterval, 
-                       _WPMagicSwitchAdvertisingData, _WPMagicSwitchScanBlobData, 
-                       _WPMagicSwitchScanDutyCycle, _WPMagicSwitchScanMaskData, _WPMagicSwitchScanPeers, 
-                       _WPNearbyKeyConnectLatencyCritical, _WPNearbyKeyDeviceAddress, 
-                       _WPNearbyKeyDeviceTime, _WPNearbyKeyManufacturerData, _WPNearbyKeyPaired, 
-                       _WPNearbyKeyRSSI, _WPNearbyKeyUseCaseList, _WPNearbyLEPipeCapable, 
-                       _WPObjectDiscoveryKeyAddress, _WPObjectDiscoveryKeyChannel, 
+                       _WPHeySiriElectionEndTimeNsec, _WPHeySiriKeyDeviceAddress, 
+                       _WPHeySiriKeyDeviceRSSI, _WPHeySiriKeyDeviceTime, _WPHeySiriKeyDeviceUUID, 
+                       _WPHeySiriKeyManufacturerData, _WPHomeKitScanBlobData, _WPHomeKitScanDutyCycle, 
+                       _WPHomeKitScanMaskData, _WPHomeKitScanOptionRange, _WPHomeKitScanOptionRetainDuplicates, 
+                       _WPHomeKitScanOptionWHB, _WPHomeKitTypes, _WPLogInitOnce, 
+                       _WPLoggingInit, _WPMagicSwitchAdvertiseTypeInterval, _WPMagicSwitchAdvertisingData, 
+                       _WPMagicSwitchScanBlobData, _WPMagicSwitchScanDutyCycle, _WPMagicSwitchScanMaskData, 
+                       _WPMagicSwitchScanPeers, _WPNearbyKeyConnectLatencyCritical, 
+                       _WPNearbyKeyDeviceAddress, _WPNearbyKeyDeviceTime, _WPNearbyKeyManufacturerData, 
+                       _WPNearbyKeyPaired, _WPNearbyKeyRSSI, _WPNearbyKeyUseCaseList, 
+                       _WPNearbyLEPipeCapable, _WPObjectDiscoveryKeyAddress, _WPObjectDiscoveryKeyChannel, 
                        _WPObjectDiscoveryKeyData, _WPObjectDiscoveryKeyOptional, 
                        _WPObjectDiscoveryKeyRSSI, _WPObjectDiscoveryKeySaturated, 
                        _WPObjectDiscoveryKeyStatus, _WPObjectDiscoveryKeyTime, _WPObjectDiscoveryScanKeyAdvBuffer, 

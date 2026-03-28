@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GameCenterUI.framework/Versions/A/GameCenterUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation4DateV12GameCenterUIE24_gkRelativeTimeAgoStringSSyF', 
                        '_$s10Foundation6LocaleV12GameCenterUIE23arcadeWordmarkAssetNameSSvg', 
                        '_$s10Foundation6LocaleV12GameCenterUIE23arcadeWordmarkAssetNameSSvpMV', 
@@ -1452,6 +1452,8 @@ exports:
                        '_$s12GameCenterUI24ActivityFeedLockupVendorV05fetchE5Views5theme14actionHandlers8bundleIDSayAA0deF4ViewVGAA0deF5ThemeV_AA0def6ActionL0VSSSgtYaKFZTu', 
                        '_$s12GameCenterUI24ActivityFeedLockupVendorV05fetchE6Models8bundleIDSayAA0deF9ViewModelVGSSSg_tYaKFZ', 
                        '_$s12GameCenterUI24ActivityFeedLockupVendorV05fetchE6Models8bundleIDSayAA0deF9ViewModelVGSSSg_tYaKFZTu', 
+                       '_$s12GameCenterUI24ActivityFeedLockupVendorV06enrichD20ItemsWithContactInfoyySaySo08GKPlayerD12ItemInternalCGYaFZ', 
+                       '_$s12GameCenterUI24ActivityFeedLockupVendorV06enrichD20ItemsWithContactInfoyySaySo08GKPlayerD12ItemInternalCGYaFZTu', 
                        '_$s12GameCenterUI24ActivityFeedLockupVendorV22makeRemoteDashboardURL10Foundation0K0VSgyFZ', 
                        '_$s12GameCenterUI24ActivityFeedLockupVendorV22makeRemoteDashboardURL8widgetId0L6Family10Foundation0K0VSgSS_SStFZ', 
                        '_$s12GameCenterUI24ActivityFeedLockupVendorV29makeRemoteLaunchTrampolineURL6adamId06bundleN006widgetN00P4Size13localizedName5topic10Foundation0L0VSgSS_S2SSiS2SSgtFZ', 

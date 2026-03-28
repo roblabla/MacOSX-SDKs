@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AVFCapture.framework/Versions/A/AVFCapture'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AVFoundation ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo28AVCaptureSmartFramingMonitorC11Observation10Observable10AVFCaptureMc', 
                        '_$sSo48AVCaptureSmartFramingMonitorObservationRegistrarC10AVFCaptureEABycfC', 
                        '_$sSo48AVCaptureSmartFramingMonitorObservationRegistrarC10AVFCaptureEABycfc', 
@@ -288,8 +285,9 @@ exports:
                        _AVGQCaptureHighPhotoQualityFrameDropAllowed, _AVGQCaptureMFOStabilizationIsAlwaysOn, 
                        _AVGQCaptureMFOSupportsPhotoFormats, _AVGQCaptureMFOVideoSettingsSupportCompressionProperties, 
                        _AVGQCaptureMetadataOutputCapturesFacesByDefault, _AVGQCaptureMicrophoneUsesDecoupledIO, 
-                       _AVGQCaptureMultipleAudioDataOutputsSupported, _AVGQCaptureMultipleVideoDataOutputsSupported, 
-                       _AVGQCaptureMultitaskingCameraAccessVoipAppsSupported, _AVGQCapturePhotoSettingsSupportRawEmbeddedThumbnailFormat, 
+                       _AVGQCaptureMultiCamAudioZoomSupported, _AVGQCaptureMultipleAudioDataOutputsSupported, 
+                       _AVGQCaptureMultipleVideoDataOutputsSupported, _AVGQCaptureMultitaskingCameraAccessVoipAppsSupported, 
+                       _AVGQCapturePhotoSettingsSupportRawEmbeddedThumbnailFormat, 
                        _AVGQCaptureProResRawVDORotationAndMirroringSupported, _AVGQCaptureSessionMaxMultiCamRGBStreamsSupported, 
                        _AVGQCaptureSessionMultiCamCaptureAlwaysRequiresSupportedFormats, 
                        _AVGQCaptureSessionSupportsMultiCamCapture, _AVGQCaptureSessionUsesAppAudioSessionByDefault, 
@@ -298,12 +296,13 @@ exports:
                        _AVGQCaptureVPLOrientationAndMirroringPropertiesAreDeprecated, 
                        _AVGQCaptureZeroShutterLagAutomaticallyEnabled, _AVGQDINRSVRALL7UYNXKHVSIWKZLRA, 
                        _AVGQDJVGPJA65CJA2ZPQZL4GRPYDYA, _AVGQDefaultVariableFrameRateVideoMaxFPS, 
-                       _AVGQDeviceHasAggregateCamera, _AVGQDeviceSupportsAutoLowLightVideo, 
-                       _AVGQDeviceSupportsBravoCamera, _AVGQDeviceSupportsBravoPortrait, 
-                       _AVGQDeviceSupportsCameraCaptureOnTouchDown, _AVGQDeviceSupportsCameraDeferredProcessing, 
-                       _AVGQDeviceSupportsCinematicVideo, _AVGQDeviceSupportsContentAwareDistortionCorrection, 
-                       _AVGQDeviceSupportsDeferredPortraitRendering, _AVGQDeviceSupportsDepthWithDeepFusion, 
-                       _AVGQDeviceSupportsExposureBiasWithoutExposureLock, _AVGQDeviceSupportsExtendedEnhancedCinematicVideoStabilization, 
+                       _AVGQDeviceHasAggregateCamera, _AVGQDeviceSupportsAudioZoom, 
+                       _AVGQDeviceSupportsAutoLowLightVideo, _AVGQDeviceSupportsBravoCamera, 
+                       _AVGQDeviceSupportsBravoPortrait, _AVGQDeviceSupportsCameraCaptureOnTouchDown, 
+                       _AVGQDeviceSupportsCameraDeferredProcessing, _AVGQDeviceSupportsCinematicVideo, 
+                       _AVGQDeviceSupportsContentAwareDistortionCorrection, _AVGQDeviceSupportsDeferredPortraitRendering, 
+                       _AVGQDeviceSupportsDepthWithDeepFusion, _AVGQDeviceSupportsExposureBiasWithoutExposureLock, 
+                       _AVGQDeviceSupportsExtendedEnhancedCinematicVideoStabilization, 
                        _AVGQDeviceSupportsFrontFacingCameraMirroredVideo, _AVGQDeviceSupportsFrontFacingCameraNightMode, 
                        _AVGQDeviceSupportsFrontFacingCameraSmartHDR, _AVGQDeviceSupportsFrontFacingCameraSuperWide, 
                        _AVGQDeviceSupportsFrontFacingCameraZoomToggle, _AVGQDeviceSupportsFrontPortrait, 

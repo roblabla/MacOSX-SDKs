@@ -25,9 +25,7 @@
 #ifndef _TCLUNIXPORT
 #define _TCLUNIXPORT
 
-#ifndef MODULE_SCOPE
-#define MODULE_SCOPE extern
-#endif
+#define MODULE_SCOPE extern __attribute__((__visibility__("hidden")))
 
 /*
  *---------------------------------------------------------------------------
@@ -43,9 +41,7 @@
 #endif
 #include <pwd.h>
 #include <signal.h>
-#ifdef HAVE_SYS_PARAM_H
 #   include <sys/param.h>
-#endif
 #include <sys/types.h>
 #ifdef USE_DIRENT2_H
 #   include "../compat/dirent2.h"
@@ -88,35 +84,19 @@ typedef off_t		Tcl_SeekOffset;
 #   include <sys/select.h>
 #endif
 #include <sys/stat.h>
-#if TIME_WITH_SYS_TIME
 #   include <sys/time.h>
 #   include <time.h>
-#else
-#if HAVE_SYS_TIME_H
-#   include <sys/time.h>
-#else
-#   include <time.h>
-#endif
-#endif
 #ifndef NO_SYS_WAIT_H
 #   include <sys/wait.h>
 #endif
-#if HAVE_INTTYPES_H
 #   include <inttypes.h>
-#endif
 #ifdef NO_LIMITS_H
 #   include "../compat/limits.h"
 #else
 #   include <limits.h>
 #endif
-#if HAVE_STDINT_H
 #   include <stdint.h>
-#endif
-#ifdef HAVE_UNISTD_H
 #   include <unistd.h>
-#else
-#   include "../compat/unistd.h"
-#endif
 
 MODULE_SCOPE int TclUnixSetBlockingMode(int fd, int mode);
 
@@ -143,9 +123,6 @@ MODULE_SCOPE int TclUnixSetBlockingMode(int fd, int mode);
 #ifndef NO_FLOAT_H
 #   include <float.h>
 #else
-#ifndef NO_VALUES_H
-#   include <values.h>
-#endif
 #endif
 
 #ifndef FLT_MAX
@@ -502,13 +479,10 @@ extern char **environ;
  * Include AvailabilityMacros.h here (when available) to ensure any symbolic
  * MAC_OS_X_VERSION_* constants passed on the command line are translated.
  */
-#   ifdef HAVE_AVAILABILITYMACROS_H
 #       include <AvailabilityMacros.h>
-#   endif
 /*
  * Support for weak import.
  */
-#   ifdef HAVE_WEAK_IMPORT
 #       if !defined(HAVE_AVAILABILITYMACROS_H) || !defined(MAC_OS_X_VERSION_MIN_REQUIRED)
 #           undef HAVE_WEAK_IMPORT
 #       else
@@ -516,7 +490,6 @@ extern char **environ;
 #               define WEAK_IMPORT_ATTRIBUTE __attribute__((weak_import))
 #           endif
 #       endif
-#   endif /* HAVE_WEAK_IMPORT */
 /*
  * Support for MAC_OS_X_VERSION_MAX_ALLOWED define from AvailabilityMacros.h:
  * only use API available in the indicated OS version or earlier.
@@ -531,10 +504,8 @@ extern char **environ;
 #           undef HAVE_COPYFILE
 #       endif
 #       if MAC_OS_X_VERSION_MAX_ALLOWED < 1030
-#           ifdef TCL_THREADS
 		/* prior to 10.3, realpath is not threadsafe, c.f. bug 711232 */
 #               define NO_REALPATH 1
-#           endif
 #           undef HAVE_LANGINFO
 #       endif
 #   endif /* MAC_OS_X_VERSION_MAX_ALLOWED */
@@ -599,7 +570,6 @@ typedef int socklen_t;
 
 #define TclpExit		exit
 
-#ifdef TCL_THREADS
 EXTERN struct tm *     	TclpLocaltime(CONST time_t *);
 EXTERN struct tm *     	TclpGmtime(CONST time_t *);
 EXTERN char *          	TclpInetNtoa(struct in_addr);
@@ -625,7 +595,6 @@ EXTERN int pthread_getattr_np _ANSI_ARGS_((pthread_t, pthread_attr_t *));
 #	    endif
 #	endif /* HAVE_PTHREAD_GETATTR_NP */
 #   endif /* HAVE_PTHREAD_ATTR_GET_NP */
-#endif /* TCL_THREADS */
 
 /*
  * Set of MT-safe implementations of some

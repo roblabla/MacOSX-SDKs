@@ -1,15 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosMediaFoundation.framework/Versions/A/PhotosMediaFoundation'
-current-version: 821.0.120
+current-version: 841.0.101
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ GridZero, Photos, PhotosPlayer, PhotosTests, PhotosUICore, 
                        PhotosUIPrivate, TVPhotos ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$sSo24PXAVAudioSessionCategoryV21PhotosMediaFoundationE11descriptionSSvg', 
                        '_$sSo24PXAVAudioSessionCategoryV21PhotosMediaFoundationE11descriptionSSvpMV', 
                        '_$sSo24PXAVAudioSessionCategoryV21PhotosMediaFoundationE8allCasesSayABGvgZ', 

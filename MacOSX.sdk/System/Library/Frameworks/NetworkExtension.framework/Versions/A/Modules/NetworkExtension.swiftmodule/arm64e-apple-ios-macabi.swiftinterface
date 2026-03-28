@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2205.60.9.0.1 -module-name NetworkExtension
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2226.101.1 -module-name NetworkExtension
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 public import ExtensionFoundation
 public import Network
 @_exported public import NetworkExtension
@@ -43,19 +43,13 @@ extension NetworkExtension.NEHotspotEvaluationProvider {
 extension NetworkExtension.NENetworkRule {
   convenience public init(destinationNetworkEndpoint networkEndpoint: Network.NWEndpoint, prefix destinationPrefix: Swift.Int, protocol: NetworkExtension.NENetworkRule.`Protocol`)
   convenience public init(destinationHostEndpoint hostEndpoint: Network.NWEndpoint, protocol: NetworkExtension.NENetworkRule.`Protocol`)
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(remoteNetworkEndpoint: Network.NWEndpoint?, remotePrefix: Swift.Int, localNetworkEndpoint: Network.NWEndpoint?, localPrefix: Swift.Int, protocol: NetworkExtension.NENetworkRule.`Protocol`, direction: NetworkExtension.NETrafficDirection)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var matchRemoteHostOrNetworkEndpoint: Network.NWEndpoint? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var matchLocalNetworkEndpoint: Network.NWEndpoint? {
     get
   }
-  #endif
 }
 @available(iOS 18.0, visionOS 2.0, *)
 @available(macOS, unavailable)
@@ -72,12 +66,10 @@ extension NetworkExtension.NEHotspotHelperCommand {
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 extension NetworkExtension.NEFilterPacketProvider {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var handler: ((NetworkExtension.NEFilterPacketContext, Network.NWInterface, NetworkExtension.NETrafficDirection, Swift.UnsafeRawBufferPointer) -> NetworkExtension.NEFilterPacketProvider.Verdict)? {
     get
     set
   }
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
 @available(watchOS, unavailable)
@@ -91,36 +83,24 @@ extension NetworkExtension.NEAppProxyTCPFlow {
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension NetworkExtension.NEFilterSocketFlow {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var remoteFlowEndpoint: Network.NWEndpoint? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var localFlowEndpoint: Network.NWEndpoint? {
     get
   }
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension NetworkExtension.NEAppProxyUDPFlow {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func readDatagrams(completionHandler: @escaping ([(Foundation.Data, Network.NWEndpoint)]?, (any Swift.Error)?) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func readDatagrams() async -> ([(Foundation.Data, Network.NWEndpoint)]?, (any Swift.Error)?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func writeDatagrams(_ array: [(Foundation.Data, Network.NWEndpoint)], completionHandler: @escaping ((any Swift.Error)?) -> Swift.Void)
-  #endif
   public func writeDatagrams(_ array: [(Foundation.Data, Network.NWEndpoint)]) async throws
-  #if compiler(>=5.3) && $NonescapableTypes
   public var localFlowEndpoint: Network.NWEndpoint? {
     get
   }
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
 @available(watchOS, unavailable)
@@ -128,14 +108,6 @@ extension NetworkExtension.NEAppProxyUDPFlow {
 public protocol NEAppProxyUDPFlowHandling {
   func handleNewUDPFlow(_ flow: NetworkExtension.NEAppProxyUDPFlow, initialRemoteFlowEndpoint remoteEndpoint: Network.NWEndpoint) -> Swift.Bool
 }
-@_hasMissingDesignatedInitializers @available(iOS 26.0, visionOS 26.0, macCatalyst 26.0, macOS 26.0, *)
-@available(watchOS, unavailable)
-@available(tvOS, unavailable)
-@_Concurrency.MainActor @preconcurrency public class NEAppExtensionConfiguration : ExtensionFoundation.AppExtensionConfiguration {
-  nonisolated public func accept(connection: Foundation.NSXPCConnection) -> Swift.Bool
-  @objc deinit
-}
-prefix operator >>
 @available(iOS 26.0, macCatalyst 26.0, macOS 26.0, *)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -166,9 +138,7 @@ public struct NEURLFilterPrefilter {
 public protocol NEURLFilterControlProvider : ExtensionFoundation.AppExtension {
   func start() async throws
   func stop(reason: NetworkExtension.NEProviderStopReason) async throws
-  #if compiler(>=5.3) && $NonescapableTypes
   func fetchPrefilter(existingPrefilterTag: Swift.String?) async throws -> NetworkExtension.NEURLFilterPrefilter?
-  #endif
 }
 @available(iOS 26.0, macCatalyst 26.0, macOS 26.0, *)
 @available(watchOS, unavailable)
@@ -205,9 +175,7 @@ public class NEURLFilterManager : @unchecked Swift.Sendable {
     case starting
     case running
     case stopping
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
-    #endif
     @available(iOS 26.0, macOS 26.0, macCatalyst 26.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
@@ -232,9 +200,7 @@ public class NEURLFilterManager : @unchecked Swift.Sendable {
     case extensionNotFound
     case extensionFailedToLoad
     case unknown
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
-    #endif
     @available(iOS 26.0, macOS 26.0, macCatalyst 26.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
@@ -261,34 +227,22 @@ public class NEURLFilterManager : @unchecked Swift.Sendable {
     set
   }
   public var localizedDescription: Foundation.LocalizedStringResource?
-  #if compiler(>=5.3) && $NonescapableTypes
   public var appBundleIdentifier: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var controlProviderBundleIdentifier: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var pirServerURL: Foundation.URL? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var pirPrivacyPassIssuerURL: Foundation.URL? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var pirAuthenticationToken: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func setConfiguration(pirServerURL: Foundation.URL, pirPrivacyPassIssuerURL: Foundation.URL?, pirAuthenticationToken: Swift.String, controlProviderBundleIdentifier: Swift.String) throws
-  #endif
   public func loadFromPreferences() async throws
   public func saveToPreferences() async throws
   public func removeFromPreferences() async throws
@@ -299,11 +253,9 @@ public class NEURLFilterManager : @unchecked Swift.Sendable {
   }
   public func handleStatusChange() -> any _Concurrency.AsyncSequence<NetworkExtension.NEURLFilterManager.Status, Swift.Never>
   public func handleConfigChange() -> any _Concurrency.AsyncSequence<Swift.Bool, Swift.Never>
-  #if compiler(>=5.3) && $NonescapableTypes
   public var lastDisconnectError: NetworkExtension.NEURLFilterManager.Error? {
     get async
   }
-  #endif
 }
 @available(iOS 26.0, visionOS 26.0, macCatalyst 26.0, *)
 @available(macOS, unavailable)
@@ -352,18 +304,14 @@ final public class NEHotspotManager : @unchecked Swift.Sendable {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var evaluationProviderBundleIdentifier: Swift.String? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var authenticationProviderBundleIdentifier: Swift.String? {
     get
     set
   }
-  #endif
   final public var safariDomains: [Swift.String] {
     get
     set
@@ -377,23 +325,25 @@ final public class NEHotspotManager : @unchecked Swift.Sendable {
   final public func removeFromPreferences() async throws
   @objc deinit
 }
+@_hasMissingDesignatedInitializers @available(iOS 26.0, visionOS 26.0, macCatalyst 26.0, macOS 26.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@_Concurrency.MainActor @preconcurrency public class NEAppExtensionConfiguration : ExtensionFoundation.AppExtensionConfiguration {
+  nonisolated public func accept(connection: Foundation.NSXPCConnection) -> Swift.Bool
+  @objc deinit
+}
+prefix operator >>
 @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension NetworkExtension.NEAppProxyFlow {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func open(withLocalFlowEndpoint localEndpoint: Network.NWEndpoint?, completionHandler: @escaping ((any Swift.Error)?) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func open(withLocalFlowEndpoint localEndpoint: Network.NWEndpoint?) async throws
-  #endif
   public func setMetadata(on parameters: Network.NWParameters)
-  #if compiler(>=5.3) && $NonescapableTypes
   public var interface: Network.NWInterface? {
     get
     set
   }
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
 @available(watchOS, unavailable)
@@ -406,11 +356,9 @@ extension NetworkExtension.NEVPNIKEv2SecurityAssociationParameters {
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 @available(watchOS, unavailable)
 extension NetworkExtension.NEPacketTunnelProvider {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var virtualInterface: Network.NWInterface? {
     get
   }
-  #endif
 }
 @available(iOS 26.0, macCatalyst 26.0, macOS 26.0, *)
 @available(watchOS, unavailable)

@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ManagedBackgroundAssetsHelperFetching.framework/Versions/A/ManagedBackgroundAssetsHelperFetching'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s37ManagedBackgroundAssetsHelperFetching7FetcherC010fetcherForD0ACyKFZ', 
-                       '_$s37ManagedBackgroundAssetsHelperFetching7FetcherC11Distributed0G5ActorAAMc', 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s37ManagedBackgroundAssetsHelperFetching7FetcherC11Distributed0G5ActorAAMc', 
                        '_$s37ManagedBackgroundAssetsHelperFetching7FetcherC11actorSystem0abC3XPC08XPCActorH0Cvg', 
                        '_$s37ManagedBackgroundAssetsHelperFetching7FetcherC11actorSystem0abC3XPC08XPCActorH0CvpMV', 
                        '_$s37ManagedBackgroundAssetsHelperFetching7FetcherC11actorSystemAC0abC3XPC08XPCActorH0C_tcfC', 
@@ -39,6 +36,7 @@ exports:
                        '_$s37ManagedBackgroundAssetsHelperFetching7FetcherC7RequestVSeAAMc', 
                        '_$s37ManagedBackgroundAssetsHelperFetching7FetcherC7RequestVs23CustomStringConvertibleAAMc', 
                        '_$s37ManagedBackgroundAssetsHelperFetching7FetcherC7RequestVyAE10Foundation10URLRequestVcfC', 
+                       '_$s37ManagedBackgroundAssetsHelperFetching7FetcherC7fetcherACyKFZ', 
                        '_$s37ManagedBackgroundAssetsHelperFetching7FetcherC7resolve2id5usingAC0abC3XPC10XPCActorIDV_AG0K6SystemCtKFZ', 
                        '_$s37ManagedBackgroundAssetsHelperFetching7FetcherC9hashValueSivgTj', 
                        '_$s37ManagedBackgroundAssetsHelperFetching7FetcherC9hashValueSivgTq', 

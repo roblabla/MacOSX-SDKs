@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestionsUI.framework/Versions/A/CoreSuggestionsUI'
-current-version: 1303.8
+current-version: 1311.6
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s17CoreSuggestionsUI15SGBannerContentC10suggestionSo12SGSuggestion_pSgvMTj', 
                        '_$s17CoreSuggestionsUI15SGBannerContentC10suggestionSo12SGSuggestion_pSgvMTq', 
                        '_$s17CoreSuggestionsUI15SGBannerContentC10suggestionSo12SGSuggestion_pSgvgTj', 
@@ -420,8 +420,8 @@ exports:
                        '_$s17CoreSuggestionsUI26SGFinanceKitServiceWrapperCACycfc', 
                        '_$s17CoreSuggestionsUI26SGFinanceKitServiceWrapperCMa', '_$s17CoreSuggestionsUI26SGFinanceKitServiceWrapperCMn', 
                        '_$s17CoreSuggestionsUI26SGFinanceKitServiceWrapperCMo', '_$s17CoreSuggestionsUI26SGFinanceKitServiceWrapperCN', 
-                       '_$s17CoreSuggestionsUI26SGFinanceKitServiceWrapperCfD', '_$s17CoreSuggestionsUI30SGTextProcessingServiceWrapperC11suggestions4from14persistResultsSaySo8NSObjectCGSo16CSSearchableItemC_SbtYaF', 
-                       '_$s17CoreSuggestionsUI30SGTextProcessingServiceWrapperC11suggestions4from14persistResultsSaySo8NSObjectCGSo16CSSearchableItemC_SbtYaFTu', 
+                       '_$s17CoreSuggestionsUI26SGFinanceKitServiceWrapperCfD', '_$s17CoreSuggestionsUI30SGTextProcessingServiceWrapperC11suggestions4from14persistResultsSaySo25SGExternalEventExtractionCGSo16CSSearchableItemC_SbtYaF', 
+                       '_$s17CoreSuggestionsUI30SGTextProcessingServiceWrapperC11suggestions4from14persistResultsSaySo25SGExternalEventExtractionCGSo16CSSearchableItemC_SbtYaFTu', 
                        '_$s17CoreSuggestionsUI30SGTextProcessingServiceWrapperCACycfC', 
                        '_$s17CoreSuggestionsUI30SGTextProcessingServiceWrapperCACycfc', 
                        '_$s17CoreSuggestionsUI30SGTextProcessingServiceWrapperCMa', 

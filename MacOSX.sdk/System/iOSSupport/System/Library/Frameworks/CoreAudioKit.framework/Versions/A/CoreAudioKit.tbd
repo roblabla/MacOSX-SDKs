@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/CoreAudioKit.framework/Versions/A/CoreAudioKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s12CoreAudioKit21AUGenericViewInternalC010collectionE0_024willDisplaySupplementaryE014forElementKind2atySo012UICollectionE0C_So0o8ReusableE0CSS10Foundation9IndexPathVtF', 
                        '_$s12CoreAudioKit21AUGenericViewInternalC010collectionE0_11willDisplay9forItemAtySo012UICollectionE0C_So0mE4CellC10Foundation9IndexPathVtF', 
                        '_$s12CoreAudioKit21AUGenericViewInternalC02auB4UnitSo07AUAudioH0CSgvMTj', 
@@ -50,11 +50,18 @@ exports:
                        '_$s12CoreAudioKit23AUAppleCustomViewLoaderCMa', '_$s12CoreAudioKit23AUAppleCustomViewLoaderCMn', 
                        '_$s12CoreAudioKit23AUAppleCustomViewLoaderCMo', '_$s12CoreAudioKit23AUAppleCustomViewLoaderCMu', 
                        '_$s12CoreAudioKit23AUAppleCustomViewLoaderCN', '_$s12CoreAudioKit23AUAppleCustomViewLoaderCfD', 
-                       _CAUI_createCustomViewForAudioUnit, _CAUI_createGenericViewForAudioUnit, 
-                       _CAUI_fetchRemoteAUv3ViewController, _CAUI_retrieveHostIconForAudioUnit ]
+                       '_$sSo27CANetworkMIDIViewControllerC12CoreAudioKitE11viewDidLoadyyF', 
+                       '_$sSo27CANetworkMIDIViewControllerC12CoreAudioKitE5coderABSgSo7NSCoderC_tcfC', 
+                       '_$sSo27CANetworkMIDIViewControllerC12CoreAudioKitE5coderABSgSo7NSCoderC_tcfc', 
+                       '_$sSo27CANetworkMIDIViewControllerC12CoreAudioKitE7nibName6bundleABSSSg_So8NSBundleCSgtcfC', 
+                       '_$sSo27CANetworkMIDIViewControllerC12CoreAudioKitE7nibName6bundleABSSSg_So8NSBundleCSgtcfc', 
+                       '_$sSo27CANetworkMIDIViewControllerCMa', _CAUI_createCustomViewForAudioUnit, 
+                       _CAUI_createGenericViewForAudioUnit, _CAUI_fetchRemoteAUv3ViewController, 
+                       _CAUI_retrieveHostIconForAudioUnit ]
     objc-classes:    [ AUAudioUnitRemoteViewController, AUAudioUnitViewConfiguration, 
                        AUAudioUnitViewService, AUGenericViewController, AUViewController, 
                        CABTMIDICentralViewController, CABTMIDILocalPeripheralViewController, 
                        CAInterAppAudioSwitcherView, CAInterAppAudioTransportView, 
-                       _TtC12CoreAudioKit21AUGenericViewInternal, _TtC12CoreAudioKit23AUAppleCustomViewLoader ]
+                       CANetworkMIDIViewController, _TtC12CoreAudioKit21AUGenericViewInternal, 
+                       _TtC12CoreAudioKit23AUAppleCustomViewLoader ]
 ...

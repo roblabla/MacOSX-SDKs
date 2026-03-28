@@ -1,8 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GESS.framework/Versions/A/GESS'
-current-version: 1.5.26
+current-version: 1.5.27
 compatibility-version: 1.5.24
 exports:
   - targets:         [ x86_64-macos ]
@@ -12,7 +12,7 @@ exports:
                        __ZTSSt11logic_error, __ZTSSt12length_error, __ZTSSt12out_of_range, 
                        __ZTSSt13runtime_error, __ZTSSt20bad_array_new_length, __ZTSSt9bad_alloc, 
                        __ZTSSt9exception ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _GESSAlgAdaptiveCubeInference, _GESSAlgAdaptiveQuadModelConvert, 
                        _GESSAlgAdaptiveQuadModelConvertWithGeometryEnhancement, _GESSAlgCheckDegeneratedTriangles, 
                        _GESSAlgCollapseShortEdges, _GESSAlgConnectedComponentFilter, 
@@ -20,10 +20,10 @@ exports:
                        _GESSAlgFillHole, _GESSAlgGetRecommendedQuadOptions, _GESSAlgImplicitLaplacianSmooth, 
                        _GESSAlgInverseRender, _GESSAlgInverseRenderOutOfCore, _GESSAlgIsometricParameterize, 
                        _GESSAlgIsotropicRemesh, _GESSAlgMeasureGeometryQuality, _GESSAlgMeasureTopologyQuality, 
-                       _GESSAlgMidpointSubdivide, _GESSAlgModelSimplify, _GESSAlgQuadricErrorMetricsSimplify, 
-                       _GESSAlgRepackUV, _GESSAlgRepairDegeneratedTriangles, _GESSAlgRepairTopology, 
-                       _GESSAlgSDDenoise, _GESSAlgSDSmooth, _GESSAlgSplitLongEdges, 
-                       _GESSAlgSplitMeshByComponents, _GESSAlgSplitNGonsToTrianglesAndQuads, 
+                       _GESSAlgMidpointSubdivide, _GESSAlgModelSimplify, _GESSAlgPlanarProjectionParameterize, 
+                       _GESSAlgQuadricErrorMetricsSimplify, _GESSAlgRepackUV, _GESSAlgRepairDegeneratedTriangles, 
+                       _GESSAlgRepairTopology, _GESSAlgSDDenoise, _GESSAlgSDSmooth, 
+                       _GESSAlgSplitLongEdges, _GESSAlgSplitMeshByComponents, _GESSAlgSplitNGonsToTrianglesAndQuads, 
                        _GESSAlgVertexClusterDownsample, _GESSAlgVertexClusterSimplify, 
                        _GESSEnvMLXAvailable, _GESSIOLoadObjFile, _GESSIOLoadTexturedObjFile, 
                        _GESSIOSaveObjFile, _GESSIOSaveTexturedObjFile, _GESSIOSaveTexturedUSDZFile, 
@@ -41,12 +41,13 @@ exports:
                        GESSAlgInverseRenderReport, GESSAlgIsometricParameterizeExtended, 
                        GESSAlgIsometricParameterizeOptions, GESSAlgIsometricParameterizeReport, 
                        GESSAlgIsotropicRemeshOptions, GESSAlgMidpointSubdivideOptions, 
-                       GESSAlgModelSimplifyOptions, GESSAlgParameterizeOptions, GESSAlgQuadricErrorMetricsSimplifyOptions, 
-                       GESSAlgRepairDegeneratedTrianglesOptions, GESSAlgRepairTopologyExtended, 
-                       GESSAlgReport, GESSAlgSDDenoiseExtended, GESSAlgSDDenoiseOptions, 
-                       GESSAlgSDDenoiseReport, GESSAlgSDSmoothExtended, GESSAlgSDSmoothOptions, 
-                       GESSAlgSDSmoothReport, GESSAlgSimplifyOptions, GESSAlgSmoothOptions, 
-                       GESSAlgSplitLongEdgesOptions, GESSAlgSplitMeshByComponentsExtended, 
+                       GESSAlgModelSimplifyOptions, GESSAlgParameterizeOptions, GESSAlgPlanarProjectionParameterizeExtended, 
+                       GESSAlgPlanarProjectionParameterizeOptions, GESSAlgPlanarProjectionParameterizeReport, 
+                       GESSAlgQuadricErrorMetricsSimplifyOptions, GESSAlgRepairDegeneratedTrianglesOptions, 
+                       GESSAlgRepairTopologyExtended, GESSAlgReport, GESSAlgSDDenoiseExtended, 
+                       GESSAlgSDDenoiseOptions, GESSAlgSDDenoiseReport, GESSAlgSDSmoothExtended, 
+                       GESSAlgSDSmoothOptions, GESSAlgSDSmoothReport, GESSAlgSimplifyOptions, 
+                       GESSAlgSmoothOptions, GESSAlgSplitLongEdgesOptions, GESSAlgSplitMeshByComponentsExtended, 
                        GESSAlgSplitMeshByComponentsOptions, GESSAlgTopologyQuality, 
                        GESSAlgVertexClusterSimplifyExtended, GESSAlgVertexClusterSimplifyOptions, 
                        GESSIOPolyMeshCreator, GESSIOQuadMeshCreator, GESSIOTriMeshCreator, 
@@ -54,7 +55,7 @@ exports:
                        GESSMathAABB, GESSPolyMesh, GESSQuadMesh, GESSQuadMeshBase, 
                        GESSSubMaterial, GESSTextureTransferOptions, GESSTriMesh, 
                        GESSTriMeshBase ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ __ZN2NS7Private5Class10s_kNSArrayEv, __ZN2NS7Private5Class10s_kNSErrorEv, 
                        __ZN2NS7Private5Class10s_kNSValueEv, __ZN2NS7Private5Class11s_kNSBundleEv, 
                        __ZN2NS7Private5Class11s_kNSNumberEv, __ZN2NS7Private5Class11s_kNSObjectEv, 

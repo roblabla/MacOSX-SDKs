@@ -1,0 +1,36 @@
+.\"Modified from man(1) of FreeBSD, the NetBSD mdoc.template, and mdoc.samples.
+.\"See Also:
+.\"man mdoc.samples for a complete listing of options
+.\"man mdoc for the short list of editing options
+.\"/usr/share/misc/mdoc.template
+.Dd October 14, 2025
+.Dt ARCHIVEUTIL 1
+.Os Darwin
+.Sh NAME
+.Nm archiveutil
+.Nd command-line interface for the Archive Utility application.
+.Sh SYNOPSIS
+.Nm
+.Ar command
+.Op Ar options
+.Sh DESCRIPTION
+.Nm
+is a command-line utility for working with archive files on macOS. It provides various operations for extracting and manipulating archive formats.
+.Sh COMMANDS
+.Bl -tag -width -indent
+.It Cm extractXcodeAEA Ar path
+Extract an Xcode AEA (Apple Encrypted Archive) file at the specified path.
+.El
+.Sh EXAMPLES
+Extract an Xcode AEA archive:
+.Pp
+.Dl $ archiveutil extractXcodeAEA /path/to/Xcode.aea
+.Sh SEE ALSO
+.Xr ditto 1 ,
+.Xr tar 1 ,
+.Xr zip 1 ,
+.Xr unzip 1
+.Sh HISTORY
+The
+.Nm
+utility first appeared in macOS 15.0.

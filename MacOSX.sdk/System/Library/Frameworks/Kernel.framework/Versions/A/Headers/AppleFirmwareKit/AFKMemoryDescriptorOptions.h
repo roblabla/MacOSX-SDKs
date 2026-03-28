@@ -13,6 +13,7 @@
 
 #include <sys/cdefs.h>
 #include <string.h>
+#include <algorithm>
 
 __BEGIN_DECLS
 
@@ -26,7 +27,7 @@ typedef uint32_t descriptor_options[1];
 
 inline void descriptor_options_init(descriptor_options options)
 {
-    memset(options, 0, sizeof(descriptor_options));
+    std::fill_n(options, sizeof(descriptor_options), 0);
 }
 
 __END_DECLS

@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriReferenceResolver.framework/Versions/A/SiriReferenceResolver'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16ExpectedDataType21SiriReferenceResolver14RRLinkHandlingPTl', 
                        '_$s21SiriReferenceResolver10RRResolverC7resolve5querys6ResultOySay0aB19ResolutionDataModel17RRAnnotatedEntityCGs5Error_pGAH12ResolveQueryC_tFTj', 
                        '_$s21SiriReferenceResolver10RRResolverC7resolve5querys6ResultOySay0aB19ResolutionDataModel17RRAnnotatedEntityCGs5Error_pGAH12ResolveQueryC_tFTq', 

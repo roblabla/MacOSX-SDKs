@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WallpaperAnalytics.framework/Versions/A/WallpaperAnalytics'
-current-version: 245.2.1
+current-version: 245.4.8
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s18WallpaperAnalytics0aB5EventO08EyeCandyB00bC0AAMc', '_$s18WallpaperAnalytics0aB5EventO7installyAcA13InstallMetricVcACmFWC', 
                        '_$s18WallpaperAnalytics0aB5EventO8settingsyAcA14SettingsMetricVcACmFWC', 
                        '_$s18WallpaperAnalytics0aB5EventOMa', '_$s18WallpaperAnalytics0aB5EventOMn', 
@@ -88,6 +88,7 @@ exports:
                        '_$s18WallpaperAnalytics14SettingsMetricV8ProviderO12photoLibraryyA2EmFWC', 
                        '_$s18WallpaperAnalytics14SettingsMetricV8ProviderO5coloryA2EmFWC', 
                        '_$s18WallpaperAnalytics14SettingsMetricV8ProviderO5imageyA2EmFWC', 
+                       '_$s18WallpaperAnalytics14SettingsMetricV8ProviderO5tahoeyA2EmFWC', 
                        '_$s18WallpaperAnalytics14SettingsMetricV8ProviderO6sonomayA2EmFWC', 
                        '_$s18WallpaperAnalytics14SettingsMetricV8ProviderO7aerialsyA2EmFWC', 
                        '_$s18WallpaperAnalytics14SettingsMetricV8ProviderO7dynamicyA2EmFWC', 

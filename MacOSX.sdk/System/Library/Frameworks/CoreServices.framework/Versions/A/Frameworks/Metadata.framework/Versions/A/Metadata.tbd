@@ -1,20 +1,16 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata'
-current-version: 2400.18.255
+current-version: 2418.4.13
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Foundation ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MDBackupBegin, _MDBackupCancel, _MDBackupCreate, _MDBackupEnd, 
                        _MDBackupFileWasIndexed, _MDBackupFinishedForVolume, _MDBackupFlushFallbackBackup, 
                        _MDBackupIndexFile, _MDBackupPendingUnmount, _MDBackupQuiescentForVolume, 
@@ -225,7 +221,7 @@ exports:
                        __MDSchemaCopyShortDisplayNameForAttribute, __MDSchemaCopyShortNamesForAttribute, 
                        __MDSetExclusion, __MDSetExtendedAttributes, __MDSetExtendedAttributesForPath, 
                        __MDSetLastUsedDate, __MDSetMailMessageAttributes, __MDSetMailMessageAttributesAtTime, 
-                       __MDSimpleQueryDeallocate, __MDSimpleQueryGatherRangesForKeyAndValue, 
+                       __MDSetMeCard, __MDSimpleQueryDeallocate, __MDSimpleQueryGatherRangesForKeyAndValue, 
                        __MDSimpleQueryModifyForMatching, __MDSimpleQueryObjectMatches, 
                        __MDSimpleQuerySetWidcardAttributes, __MDSoftwareUpdateComplete, 
                        __MDStaticAppRankOfItem, __MDStringCompareLocalized, __MDStringCopyCollationData, 
@@ -390,8 +386,9 @@ exports:
                        _kMDQueryMatchSupportFiles, _kMDQueryMaxCount, _kMDQueryNoProgress, 
                        _kMDQueryNoRewrite, _kMDQueryOptionContextIdentifier, _kMDQueryOptionFinderLabelsDict, 
                        _kMDQueryOptionFinderLabelsDictLocale, _kMDQueryOptionSPQUParse, 
-                       _kMDQueryProgressNotification, _kMDQueryQoSClass, _kMDQueryResultContentRelevance, 
-                       _kMDQueryResultGroupId, _kMDQueryResultMLRelevance, _kMDQueryResultMatchedDisplayNameField, 
+                       _kMDQueryOptionSPQUParses, _kMDQueryProgressNotification, 
+                       _kMDQueryQoSClass, _kMDQueryResultContentRelevance, _kMDQueryResultGroupId, 
+                       _kMDQueryResultMLRelevance, _kMDQueryResultMatchedDisplayNameField, 
                        _kMDQueryResultMatchedExtraQueriesField, _kMDQueryResultMatchedFields, 
                        _kMDQueryResultMatchingAttributes, _kMDQueryResultMatchingSceneIdentifiers, 
                        _kMDQueryResultMenuRelevance, _kMDQueryResultNewMatchedExtraQueriesField, 
@@ -419,8 +416,7 @@ exports:
                        _mdsServerBootstrap ]
     objc-classes:    [ MDSPathFilter, MDSPathFilterGenerator, _MDLabel, _MDServiceConnection ]
 reexports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MDChildPlistBytesContextCreate, _MDChildPlistBytesContextDestroy, 
                        _MDPlistArrayGetCount, _MDPlistArrayGetPlistObjectAtIndex, 
                        _MDPlistArrayIterate, _MDPlistArrayIterateWithError, _MDPlistBooleanGetValue, 
@@ -435,30 +431,30 @@ reexports:
                        _MDPlistBytesCopyPlistAtIndexWithAllocator, _MDPlistBytesCopyPlistAtIndexWithCallbacks, 
                        _MDPlistBytesCopyPlistAtIndexWithCallbacksAndAllocator, _MDPlistBytesCopyPlistBytesAtIndex, 
                        _MDPlistBytesCreate, _MDPlistBytesCreateMutable, _MDPlistBytesCreateMutableCopy, 
-                       _MDPlistBytesCreateMutableUsingMalloc, _MDPlistBytesCreateUniquedString, 
-                       _MDPlistBytesCreateWithDeallocator, _MDPlistBytesEndArray, 
-                       _MDPlistBytesEndDictionary, _MDPlistBytesEndPlist, _MDPlistBytesGetByteVector, 
-                       _MDPlistBytesGetByteVectorCount, _MDPlistBytesGetMappedByteVector, 
-                       _MDPlistBytesGetTypeID, _MDPlistBytesSetShouldDeallocate, 
-                       _MDPlistBytesSetShouldUseMalloc, _MDPlistContainerAddBooleanValue, 
-                       _MDPlistContainerAddCString, _MDPlistContainerAddDataValue, 
-                       _MDPlistContainerAddDateValue, _MDPlistContainerAddDoubleValue, 
-                       _MDPlistContainerAddFloatValue, _MDPlistContainerAddInt32Value, 
-                       _MDPlistContainerAddInt64Value, _MDPlistContainerAddNullValue, 
-                       _MDPlistContainerAddObject, _MDPlistContainerAddPlistObject, 
-                       _MDPlistContainerAddUUIDValue, _MDPlistContainerAllocFailure, 
-                       _MDPlistContainerBeginArray, _MDPlistContainerBeginContainer, 
-                       _MDPlistContainerBeginDictionary, _MDPlistContainerCopyCSObject, 
-                       _MDPlistContainerCopyDispatchData, _MDPlistContainerCopyObject, 
-                       _MDPlistContainerCopyObjectAtKeyArray, _MDPlistContainerCopyObjectAtKeyPath, 
-                       _MDPlistContainerCopyObjectsAtKeyPath, _MDPlistContainerCopyObjectsAtPlistObject, 
-                       _MDPlistContainerCopyRootObject, _MDPlistContainerCreateCopy, 
-                       _MDPlistContainerCreateMutable, _MDPlistContainerCreateMutableWithStaticBuffer, 
-                       _MDPlistContainerCreateWithBytes, _MDPlistContainerCreateWithBytesAndDeallocator, 
-                       _MDPlistContainerCreateWithCopiedBytes, _MDPlistContainerCreateWithObject, 
-                       _MDPlistContainerEndArray, _MDPlistContainerEndContainer, 
-                       _MDPlistContainerEndDictionary, _MDPlistContainerGetBytes, 
-                       _MDPlistContainerGetLength, _MDPlistContainerGetPlistObjectAtKeyArray, 
+                       _MDPlistBytesCreateMutableUsingMalloc, _MDPlistBytesCreateMutableWithOwner, 
+                       _MDPlistBytesCreateUniquedString, _MDPlistBytesCreateWithDeallocator, 
+                       _MDPlistBytesEndArray, _MDPlistBytesEndDictionary, _MDPlistBytesEndPlist, 
+                       _MDPlistBytesGetByteVector, _MDPlistBytesGetByteVectorCount, 
+                       _MDPlistBytesGetMappedByteVector, _MDPlistBytesGetTypeID, 
+                       _MDPlistBytesSetShouldDeallocate, _MDPlistBytesSetShouldUseMalloc, 
+                       _MDPlistContainerAddBooleanValue, _MDPlistContainerAddCString, 
+                       _MDPlistContainerAddDataValue, _MDPlistContainerAddDateValue, 
+                       _MDPlistContainerAddDoubleValue, _MDPlistContainerAddFloatValue, 
+                       _MDPlistContainerAddInt32Value, _MDPlistContainerAddInt64Value, 
+                       _MDPlistContainerAddNullValue, _MDPlistContainerAddObject, 
+                       _MDPlistContainerAddPlistObject, _MDPlistContainerAddUUIDValue, 
+                       _MDPlistContainerAllocFailure, _MDPlistContainerBeginArray, 
+                       _MDPlistContainerBeginContainer, _MDPlistContainerBeginDictionary, 
+                       _MDPlistContainerCopyCSObject, _MDPlistContainerCopyDispatchData, 
+                       _MDPlistContainerCopyObject, _MDPlistContainerCopyObjectAtKeyArray, 
+                       _MDPlistContainerCopyObjectAtKeyPath, _MDPlistContainerCopyObjectsAtKeyPath, 
+                       _MDPlistContainerCopyObjectsAtPlistObject, _MDPlistContainerCopyRootObject, 
+                       _MDPlistContainerCreateCopy, _MDPlistContainerCreateMutable, 
+                       _MDPlistContainerCreateMutableWithStaticBuffer, _MDPlistContainerCreateWithBytes, 
+                       _MDPlistContainerCreateWithBytesAndDeallocator, _MDPlistContainerCreateWithCopiedBytes, 
+                       _MDPlistContainerCreateWithObject, _MDPlistContainerEndArray, 
+                       _MDPlistContainerEndContainer, _MDPlistContainerEndDictionary, 
+                       _MDPlistContainerGetBytes, _MDPlistContainerGetLength, _MDPlistContainerGetPlistObjectAtKeyArray, 
                        _MDPlistContainerGetPlistObjectAtKeyPath, _MDPlistContainerHasObjectAtKeyPath, 
                        _MDPlistContainerValidateRootObject, _MDPlistContainerValidateRootObjectFromBytes, 
                        _MDPlistContainerWillUseMalloc, _MDPlistDataGetBytePtr, _MDPlistDateGetValue, 
@@ -473,8 +469,9 @@ reexports:
                        _MDStoreOIDArrayApplyBlockParallel, _MDStoreOIDArrayApplyFunction, 
                        _MDStoreOIDArrayApplyParallelFunction, _MDStoreOIDArrayBeginBulkAdd, 
                        _MDStoreOIDArrayBeginSequence, _MDStoreOIDArrayCreate, _MDStoreOIDArrayCreateMutable, 
-                       _MDStoreOIDArrayCreateMutableCopy, _MDStoreOIDArrayCreateMutableUsingMalloc, 
-                       _MDStoreOIDArrayCreateMutableWithOids, _MDStoreOIDArrayCreateWithDeallocator, 
+                       _MDStoreOIDArrayCreateMutableCopy, _MDStoreOIDArrayCreateMutableCopyWithOwner, 
+                       _MDStoreOIDArrayCreateMutableUsingMalloc, _MDStoreOIDArrayCreateMutableWithOids, 
+                       _MDStoreOIDArrayCreateMutableWithOwner, _MDStoreOIDArrayCreateWithDeallocator, 
                        _MDStoreOIDArrayEndBulkAdd, _MDStoreOIDArrayEndSequence, _MDStoreOIDArrayGetMappedVector, 
                        _MDStoreOIDArrayGetTypeID, _MDStoreOIDArrayGetVector, _MDStoreOIDArrayGetVectorCount, 
                        _MDStoreOIDArrayIsMutable, _MDStoreOIDArrayRoom, _MDStoreOIDArraySetShouldDeallocate, 

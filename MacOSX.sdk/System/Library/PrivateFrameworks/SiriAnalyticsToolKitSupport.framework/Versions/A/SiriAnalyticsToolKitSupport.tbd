@@ -1,0 +1,6 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64e-macos ]
+install-name:    '/System/Library/PrivateFrameworks/SiriAnalyticsToolKitSupport.framework/Versions/A/SiriAnalyticsToolKitSupport'
+swift-abi-version: 7
+...

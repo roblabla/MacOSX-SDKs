@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CalendarUIKit.framework/Versions/A/CalendarUIKit'
 current-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s11CodingValue13CalendarUIKit19CodableViaTransformPTl', 
                        '_$s13CalendarUIKit012CreateFamilyA4FlowV10completionACys6ResultOySbs5Error_pGc_tcfC', 
                        '_$s13CalendarUIKit012CreateFamilyA4FlowV4bodyQrvg', '_$s13CalendarUIKit012CreateFamilyA4FlowV4bodyQrvpMV', 
@@ -2711,7 +2711,8 @@ exports:
                        _CUIKSummaryColorForColor, _CUIKSymbolicColorWithName, _CUIKTextColorForCalendarColorForStyle, 
                        _CUIKTimeIntervalStringForDates, _CUIKTimeZoneForChoice, _CUIKTimezoneClarificationStringForDates, 
                        _CUIKTimezonesDivergeAtDate, _CUIKTodayChangedNotification, 
-                       _CUIKTodayComponents, _CUIKTodayDate, _CUIKVeryShortStringForMonthYear, 
+                       _CUIKTodayComponents, _CUIKTodayDate, _CUIKTruncateAttributedStringForAvailableSpace, 
+                       _CUIKTruncateStringForAvailableSpace, _CUIKVeryShortStringForMonthYear, 
                        _CUIKWeekdayAbbreviations, _CUIKWeekdayVeryShortAbbreviations, 
                        _CUIKZeroIndexedWeekStart, _CalAppKitHardPocketEnabled, _CalCanvasPocketEnabled, 
                        _CalCanvasPocketEventIndicatorEnabled, _CalInspectorPocketsEnabled, 

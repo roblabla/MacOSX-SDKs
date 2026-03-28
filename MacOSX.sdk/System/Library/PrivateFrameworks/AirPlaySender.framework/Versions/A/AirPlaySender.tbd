@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AirPlaySender.framework/Versions/A/AirPlaySender'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _APAudioEngineAVCCreate, _APAudioEngineBufferedAdapterCreate, 
                        _APAudioEngineBufferedCreate, _APAudioEngineGetCMBaseObject, 
                        _APAudioEngineVendorCreate, _APAudioEngineVendorGetTypeID, 
@@ -588,6 +588,7 @@ exports:
                        _kAPSenderSessionTransportStreamOption_AllowMessageAggregation, 
                        _kAPSenderSessionTransportStreamOption_GroupID, _kAPSenderSessionTransportStreamOption_QualityOfService, 
                        _kAPSenderSessionTransportStreamOption_SendBackingProvider, 
+                       _kAPSenderSessionTransportStreamOption_SendSocketBufferSize, 
                        _kAPSenderSessionTransportStreamOption_StreamPriority, _kAPSenderSessionTransportStreamOption_TransportProtocol, 
                        _kAPSenderSessionTransportStreamOption_Type, _kAPSenderSessionTransportStreamOption_UseLibNetwork, 
                        _kAPSenderSession_UserName, _kAPSessionSetupRequestKey_HighFreqStatsCollectionEnabled, 

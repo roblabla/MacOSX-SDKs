@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriReferenceResolution.framework/Versions/A/SiriReferenceResolution'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation4DataV23SiriReferenceResolutionE6DigestV3MD59CryptoKit8InsecureO0gF0Vvg', 
                        '_$s10Foundation4DataV23SiriReferenceResolutionE6DigestV3MD59CryptoKit8InsecureO0gF0VvpMV', 
                        '_$s10Foundation4DataV23SiriReferenceResolutionE6DigestV4dataACvg', 

@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MediaControlSender.framework/Versions/A/MediaControlSender'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AirPlayGetEventQueue, _AirPlayGlobalRoute_CopyDestination, 
                        _AirPlayGlobalRoute_CopyInfo, _AirPlayGlobalRoute_CopyPassword, 
                        _AirPlayGlobalRoute_SetDestination, _AirPlayGlobalRoute_SetInfo, 

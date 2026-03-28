@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices'
 current-version: 1226
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork', 
                        '/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation', 
                        '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE', 
@@ -20,22 +18,18 @@ reexported-libraries:
                        '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList' ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE'
 current-version: 944
 compatibility-version: 0
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ DesktopServices, Foundation, HIServices, LaunchServices, PrintCore ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CreateRangeDescriptor, _DisposeAEBlockUPP, _DisposeAEUnblockUPP, 
                        _InvokeAEBlockUPP, _InvokeAEUnblockUPP, _NewAEBlockUPP, _NewAEUnblockUPP, 
                        __AECreateAEReceiveMachPort, __AEInstallAEInteractWithUserCallback, 
@@ -46,7 +40,7 @@ exports:
                        _aeClassicCompatSizeOfFlattenedDesc, _aeConvertCarbonToClassic, 
                        _aeConvertClassicToCarbon, _aeDecodeMachMsg, _aeEventToEppcMsg, 
                        _aeReconstructAppleEvent, _aeReconstructReplyAppleEvent, _aeRemoveFromImplEnd ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AEBuildAppleEvent, _AEBuildDesc, _AEBuildParameters, _AECallObjectAccessor, 
                        _AECheckIsRecord, _AECoerceDesc, _AECoercePtr, _AECoercionHandlersApplyFunction, 
                        _AECompareDesc, _AEConvertFromMsg, _AECountItems, _AECreateAppleEvent, 
@@ -99,10 +93,10 @@ exports:
                        __AEDescRecordIndexedItem, __AEDescToInternalImpl, __AEDoesAppleEventContainAnyTypesWhichRequireAnnotation, 
                        __AEEventDescGetInformation, __AEEventRequiresSecurityHandlerChecks, 
                        __AEEventSecurityHandlerDoChecks, __AEGenerateAnnotations, 
-                       __AEGetEventSecurityHandler, __AEInstallEventHandlerBlock, 
-                       __AEInstallEventSecurityHandler, __AEInstallEventSecurityHandlerBlock, 
-                       __AEIsAppleEventTargetInSandbox, __AERemoveAEReceivePort, 
-                       __AERemoveEventSecurityHandler, __AEUnflattenDescFromBytes, 
+                       __AEGenerateAnnotationsForAuditToken, __AEGetEventSecurityHandler, 
+                       __AEInstallEventHandlerBlock, __AEInstallEventSecurityHandler, 
+                       __AEInstallEventSecurityHandlerBlock, __AEIsAppleEventTargetInSandbox, 
+                       __AERemoveAEReceivePort, __AERemoveEventSecurityHandler, __AEUnflattenDescFromBytes, 
                        __AppleEventsCheckInApp, __AppleEventsCheckInAppWithBlock, 
                        __AppleEventsCopyApplicationEntitlements, __AppleEventsCopyApplicationEntitlementsWithBlock, 
                        __AppleEventsCopyStatusString, __AppleEventsCopyStatusStringWithBlock, 
@@ -124,21 +118,17 @@ exports:
                        _vAEBuildAppleEvent, _vAEBuildDesc, _vAEBuildParameters ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore'
 current-version: 1383.2.1
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AudioToolbox, CarbonCoreFrameworkTests, Foundation, Metadata ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DeclineVolumeNotification, _DeclineVolumeNotificationWithFlags, 
                        _DisposeCollectionNotificationAddUPP, _DisposeCollectionNotificationRemoveUPP, 
                        _DisposeStackListCompareUPP, _DisposeStackListConvertUPP, 
@@ -182,7 +172,7 @@ exports:
                        _kFSEventVolumeUnmounted, _ldtox80, _num2decl, _relationl, 
                        _scCreateSystemServiceVersion, _scGetProcessOptions, _scGetServerCheckinPort, 
                        _scGetServerOptions, _scRunningInCacheServer, _x80told ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AbsoluteDeltaToDuration, _AbsoluteDeltaToNanoseconds, _AbsoluteToDuration, 
                        _AbsoluteToNanoseconds, _AddAbsoluteToAbsolute, _AddAtomic, 
                        _AddAtomic16, _AddAtomic8, _AddCollectionItem, _AddCollectionItemHdl, 
@@ -817,17 +807,14 @@ exports:
                        _str2dec, _x80tod ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices'
 current-version: 373
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DCSActivateDictionaryPanel, _DCSCopyActiveDictionaries, _DCSCopyAvailableDictionaries, 
                        _DCSCopyDefinitionMarkup, _DCSCopyDefinitionRecords, _DCSCopyDefinitions, 
                        _DCSCopyInactiveDictionaries, _DCSCopyLanguagesOfPreparedDefaultDictionaries, 
@@ -887,17 +874,14 @@ exports:
                        _kIDXSearchPrefixMatch, _kIDXSearchWildcardMatch ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents'
-current-version: 1407.60.1
+current-version: 1413.100.6
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FSEventStreamCopyDescription, _FSEventStreamCopyPathsBeingWatched, 
                        _FSEventStreamCreate, _FSEventStreamCreateRelativeToDevice, 
                        _FSEventStreamFlushAsync, _FSEventStreamFlushSync, _FSEventStreamGetDeviceBeingWatched, 
@@ -910,21 +894,17 @@ exports:
                        _FSEventsPurgeEventsForDeviceUpToEventId ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices'
 current-version: 1141.1
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Foundation ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _LSApplicationSINFKey, _LSApplicationWorkspaceErrorDomain, 
                        _LSApplicationsChangedNotificationName, _LSApplyURLOverridesForContacts, 
                        _LSBlockUntilCompleteKey, _LSContinuityErrorDomain, _LSCopyDefaultRoleHandlerForContentType, 
@@ -1179,7 +1159,7 @@ exports:
                        _LSQuery, _LSQueryContext, _LSQueryResult, _LSRecordEnumerator, 
                        _LSStringLocalizer, _LSTemplateApplication, _LSTemplateApplicationActionsManager, 
                        _LSURLOverride, _UTDeclaredTypeRecord ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AcquireIconRef, _CompositeIconRef, _GetCustomIconsEnabled, 
                        _GetIconRef, _GetIconRefFromComponent, _GetIconRefFromFileInfo, 
                        _GetIconRefFromFolder, _GetIconRefFromIconFamilyPtr, _GetIconRefFromTypeInfo, 
@@ -1417,26 +1397,22 @@ exports:
     objc-classes:    [ LSBundleWrapperCreator, LSBundleWrapperStagingReceipt, LSBundleWrapperUpdater, 
                        LSCodeEvaluation, LSCodeEvaluationInfo, LSCodeEvaluationOperation, 
                        LSIconResource, LSOpenWithMenuConstructor, _LSInternetLocator ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ __LSAppStateBlockedKey, __LSAppStateInstalledKey, __LSAppStatePlaceholderKey, 
                        __LSAppStateRemovedKey, __LSAppStateRestrictedKey, __LSAppStateValidKey ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata'
-current-version: 2400.18.255
+current-version: 2418.4.13
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Foundation ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MDBackupBegin, _MDBackupCancel, _MDBackupCreate, _MDBackupEnd, 
                        _MDBackupFileWasIndexed, _MDBackupFinishedForVolume, _MDBackupFlushFallbackBackup, 
                        _MDBackupIndexFile, _MDBackupPendingUnmount, _MDBackupQuiescentForVolume, 
@@ -1647,7 +1623,7 @@ exports:
                        __MDSchemaCopyShortDisplayNameForAttribute, __MDSchemaCopyShortNamesForAttribute, 
                        __MDSetExclusion, __MDSetExtendedAttributes, __MDSetExtendedAttributesForPath, 
                        __MDSetLastUsedDate, __MDSetMailMessageAttributes, __MDSetMailMessageAttributesAtTime, 
-                       __MDSimpleQueryDeallocate, __MDSimpleQueryGatherRangesForKeyAndValue, 
+                       __MDSetMeCard, __MDSimpleQueryDeallocate, __MDSimpleQueryGatherRangesForKeyAndValue, 
                        __MDSimpleQueryModifyForMatching, __MDSimpleQueryObjectMatches, 
                        __MDSimpleQuerySetWidcardAttributes, __MDSoftwareUpdateComplete, 
                        __MDStaticAppRankOfItem, __MDStringCompareLocalized, __MDStringCopyCollationData, 
@@ -1812,8 +1788,9 @@ exports:
                        _kMDQueryMatchSupportFiles, _kMDQueryMaxCount, _kMDQueryNoProgress, 
                        _kMDQueryNoRewrite, _kMDQueryOptionContextIdentifier, _kMDQueryOptionFinderLabelsDict, 
                        _kMDQueryOptionFinderLabelsDictLocale, _kMDQueryOptionSPQUParse, 
-                       _kMDQueryProgressNotification, _kMDQueryQoSClass, _kMDQueryResultContentRelevance, 
-                       _kMDQueryResultGroupId, _kMDQueryResultMLRelevance, _kMDQueryResultMatchedDisplayNameField, 
+                       _kMDQueryOptionSPQUParses, _kMDQueryProgressNotification, 
+                       _kMDQueryQoSClass, _kMDQueryResultContentRelevance, _kMDQueryResultGroupId, 
+                       _kMDQueryResultMLRelevance, _kMDQueryResultMatchedDisplayNameField, 
                        _kMDQueryResultMatchedExtraQueriesField, _kMDQueryResultMatchedFields, 
                        _kMDQueryResultMatchingAttributes, _kMDQueryResultMatchingSceneIdentifiers, 
                        _kMDQueryResultMenuRelevance, _kMDQueryResultNewMatchedExtraQueriesField, 
@@ -1841,8 +1818,7 @@ exports:
                        _mdsServerBootstrap ]
     objc-classes:    [ MDSPathFilter, MDSPathFilterGenerator, _MDLabel, _MDServiceConnection ]
 reexports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MDChildPlistBytesContextCreate, _MDChildPlistBytesContextDestroy, 
                        _MDPlistArrayGetCount, _MDPlistArrayGetPlistObjectAtIndex, 
                        _MDPlistArrayIterate, _MDPlistArrayIterateWithError, _MDPlistBooleanGetValue, 
@@ -1857,30 +1833,30 @@ reexports:
                        _MDPlistBytesCopyPlistAtIndexWithAllocator, _MDPlistBytesCopyPlistAtIndexWithCallbacks, 
                        _MDPlistBytesCopyPlistAtIndexWithCallbacksAndAllocator, _MDPlistBytesCopyPlistBytesAtIndex, 
                        _MDPlistBytesCreate, _MDPlistBytesCreateMutable, _MDPlistBytesCreateMutableCopy, 
-                       _MDPlistBytesCreateMutableUsingMalloc, _MDPlistBytesCreateUniquedString, 
-                       _MDPlistBytesCreateWithDeallocator, _MDPlistBytesEndArray, 
-                       _MDPlistBytesEndDictionary, _MDPlistBytesEndPlist, _MDPlistBytesGetByteVector, 
-                       _MDPlistBytesGetByteVectorCount, _MDPlistBytesGetMappedByteVector, 
-                       _MDPlistBytesGetTypeID, _MDPlistBytesSetShouldDeallocate, 
-                       _MDPlistBytesSetShouldUseMalloc, _MDPlistContainerAddBooleanValue, 
-                       _MDPlistContainerAddCString, _MDPlistContainerAddDataValue, 
-                       _MDPlistContainerAddDateValue, _MDPlistContainerAddDoubleValue, 
-                       _MDPlistContainerAddFloatValue, _MDPlistContainerAddInt32Value, 
-                       _MDPlistContainerAddInt64Value, _MDPlistContainerAddNullValue, 
-                       _MDPlistContainerAddObject, _MDPlistContainerAddPlistObject, 
-                       _MDPlistContainerAddUUIDValue, _MDPlistContainerAllocFailure, 
-                       _MDPlistContainerBeginArray, _MDPlistContainerBeginContainer, 
-                       _MDPlistContainerBeginDictionary, _MDPlistContainerCopyCSObject, 
-                       _MDPlistContainerCopyDispatchData, _MDPlistContainerCopyObject, 
-                       _MDPlistContainerCopyObjectAtKeyArray, _MDPlistContainerCopyObjectAtKeyPath, 
-                       _MDPlistContainerCopyObjectsAtKeyPath, _MDPlistContainerCopyObjectsAtPlistObject, 
-                       _MDPlistContainerCopyRootObject, _MDPlistContainerCreateCopy, 
-                       _MDPlistContainerCreateMutable, _MDPlistContainerCreateMutableWithStaticBuffer, 
-                       _MDPlistContainerCreateWithBytes, _MDPlistContainerCreateWithBytesAndDeallocator, 
-                       _MDPlistContainerCreateWithCopiedBytes, _MDPlistContainerCreateWithObject, 
-                       _MDPlistContainerEndArray, _MDPlistContainerEndContainer, 
-                       _MDPlistContainerEndDictionary, _MDPlistContainerGetBytes, 
-                       _MDPlistContainerGetLength, _MDPlistContainerGetPlistObjectAtKeyArray, 
+                       _MDPlistBytesCreateMutableUsingMalloc, _MDPlistBytesCreateMutableWithOwner, 
+                       _MDPlistBytesCreateUniquedString, _MDPlistBytesCreateWithDeallocator, 
+                       _MDPlistBytesEndArray, _MDPlistBytesEndDictionary, _MDPlistBytesEndPlist, 
+                       _MDPlistBytesGetByteVector, _MDPlistBytesGetByteVectorCount, 
+                       _MDPlistBytesGetMappedByteVector, _MDPlistBytesGetTypeID, 
+                       _MDPlistBytesSetShouldDeallocate, _MDPlistBytesSetShouldUseMalloc, 
+                       _MDPlistContainerAddBooleanValue, _MDPlistContainerAddCString, 
+                       _MDPlistContainerAddDataValue, _MDPlistContainerAddDateValue, 
+                       _MDPlistContainerAddDoubleValue, _MDPlistContainerAddFloatValue, 
+                       _MDPlistContainerAddInt32Value, _MDPlistContainerAddInt64Value, 
+                       _MDPlistContainerAddNullValue, _MDPlistContainerAddObject, 
+                       _MDPlistContainerAddPlistObject, _MDPlistContainerAddUUIDValue, 
+                       _MDPlistContainerAllocFailure, _MDPlistContainerBeginArray, 
+                       _MDPlistContainerBeginContainer, _MDPlistContainerBeginDictionary, 
+                       _MDPlistContainerCopyCSObject, _MDPlistContainerCopyDispatchData, 
+                       _MDPlistContainerCopyObject, _MDPlistContainerCopyObjectAtKeyArray, 
+                       _MDPlistContainerCopyObjectAtKeyPath, _MDPlistContainerCopyObjectsAtKeyPath, 
+                       _MDPlistContainerCopyObjectsAtPlistObject, _MDPlistContainerCopyRootObject, 
+                       _MDPlistContainerCreateCopy, _MDPlistContainerCreateMutable, 
+                       _MDPlistContainerCreateMutableWithStaticBuffer, _MDPlistContainerCreateWithBytes, 
+                       _MDPlistContainerCreateWithBytesAndDeallocator, _MDPlistContainerCreateWithCopiedBytes, 
+                       _MDPlistContainerCreateWithObject, _MDPlistContainerEndArray, 
+                       _MDPlistContainerEndContainer, _MDPlistContainerEndDictionary, 
+                       _MDPlistContainerGetBytes, _MDPlistContainerGetLength, _MDPlistContainerGetPlistObjectAtKeyArray, 
                        _MDPlistContainerGetPlistObjectAtKeyPath, _MDPlistContainerHasObjectAtKeyPath, 
                        _MDPlistContainerValidateRootObject, _MDPlistContainerValidateRootObjectFromBytes, 
                        _MDPlistContainerWillUseMalloc, _MDPlistDataGetBytePtr, _MDPlistDateGetValue, 
@@ -1895,8 +1871,9 @@ reexports:
                        _MDStoreOIDArrayApplyBlockParallel, _MDStoreOIDArrayApplyFunction, 
                        _MDStoreOIDArrayApplyParallelFunction, _MDStoreOIDArrayBeginBulkAdd, 
                        _MDStoreOIDArrayBeginSequence, _MDStoreOIDArrayCreate, _MDStoreOIDArrayCreateMutable, 
-                       _MDStoreOIDArrayCreateMutableCopy, _MDStoreOIDArrayCreateMutableUsingMalloc, 
-                       _MDStoreOIDArrayCreateMutableWithOids, _MDStoreOIDArrayCreateWithDeallocator, 
+                       _MDStoreOIDArrayCreateMutableCopy, _MDStoreOIDArrayCreateMutableCopyWithOwner, 
+                       _MDStoreOIDArrayCreateMutableUsingMalloc, _MDStoreOIDArrayCreateMutableWithOids, 
+                       _MDStoreOIDArrayCreateMutableWithOwner, _MDStoreOIDArrayCreateWithDeallocator, 
                        _MDStoreOIDArrayEndBulkAdd, _MDStoreOIDArrayEndSequence, _MDStoreOIDArrayGetMappedVector, 
                        _MDStoreOIDArrayGetTypeID, _MDStoreOIDArrayGetVector, _MDStoreOIDArrayGetVectorCount, 
                        _MDStoreOIDArrayIsMutable, _MDStoreOIDArrayRoom, _MDStoreOIDArraySetShouldDeallocate, 
@@ -1908,17 +1885,14 @@ reexports:
     objc-classes:    [ _MDMutablePlistBytes, _MDPlistBytes ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices'
 current-version: 1141.1
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AlertSoundPlay, _AlertSoundPlayCustomSound, _CSIdentityAuthorityCopyLocalizedName, 
                        _CSIdentityAuthorityGetTypeID, _CSIdentityCreateCopy, _CSIdentityCreatePersistentReference, 
                        _CSIdentityGetAuthority, _CSIdentityGetClass, _CSIdentityGetFullName, 
@@ -1977,7 +1951,7 @@ exports:
                        _kAppleIDValidationRecordOptionDoNotCheckVersionKey, _kAppleIDValidationRecordOptionDoNotEvaluateTrustRefKey, 
                        _kAppleIDValidationRecordOptionOverrideSuggestedDurationValueKey, 
                        _kCSIdentityErrorDomain ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _BatteryCount, _CSGetDefaultIdentityAuthority, _CSGetLocalIdentityAuthority, 
                        _CSGetManagedIdentityAuthority, _CSIdentityAddAlias, _CSIdentityAddMember, 
                        _CSIdentityAuthenticateUsingPassword, _CSIdentityCommit, _CSIdentityCommitAsynchronously, 
@@ -2053,16 +2027,14 @@ exports:
                        _kcgetkeychainname, _wsCFDateToISO8601String, _wsCreateDateFromISO8601 ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit'
 current-version: 417.5
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _SKCurrentLocaleData, _SKDocumentCopyText, _SKDocumentCopyURL, 
                        _SKDocumentCreate, _SKDocumentCreateWithURL, _SKDocumentGetName, 
                        _SKDocumentGetParent, _SKDocumentGetSchemeName, _SKDocumentGetTypeID, 
@@ -2103,20 +2075,17 @@ exports:
                        _kSKStartTermChars, _kSKStopWords, _kSKSubstitutions, _kSKTermChars ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList'
 current-version: 225
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Foundation ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _LSSharedFileListAddObserver, _LSSharedFileListAddObserverOnQueue, 
                        _LSSharedFileListCopyProperty, _LSSharedFileListCopySnapshot, 
                        _LSSharedFileListCreate, _LSSharedFileListGetSeedValue, _LSSharedFileListGetTypeID, 

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HeadphoneSettingsUI.framework/Versions/A/HeadphoneSettingsUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s19HeadphoneSettingsUI10AAFeaturesO12FeatureFlags0eF3KeyAAMc', 
                        '_$s19HeadphoneSettingsUI10AAFeaturesO17pauseMediaOnSleepyA2CmFWC', 
                        '_$s19HeadphoneSettingsUI10AAFeaturesO6domains12StaticStringVvg', 

@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libnfrestore.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _NfRestore, _NfRestoreBundleCreate, _NfRestoreCopyUniqueFDRKey, 
                        _NfRestoreDumpUART, _NfRestoreInvalidateProhibitTimer, _NfRestoreOpenSEWithOptions, 
                        _NfRestoreOpenWithSE, _NfRestoreOpenWithSEAndResult, _NfRestoreReturnError, 

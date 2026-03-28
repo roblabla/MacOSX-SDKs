@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ServiceExtensionsCore.framework/Versions/A/ServiceExtensionsCore'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s21ServiceExtensionsCore10AuditTokenV3has24browserEngineEntitlementSbAA08_BrowserhI0O_tF', 
                        '_$s21ServiceExtensionsCore10AuditTokenV3pids5Int32Vvg', '_$s21ServiceExtensionsCore10AuditTokenV3pids5Int32VvpMV', 
                        '_$s21ServiceExtensionsCore10AuditTokenV5innerSo13audit_token_tavg', 
@@ -33,7 +33,7 @@ exports:
                        __SEBrowserEngineEntitlementWebContent, __SECheckEntitlmentForAuditToken, 
                        __SECheckEntitlmentForCurrentProcess ]
     objc-classes:    [ _SEUtil ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ _se_memory_inline_jit_restrict_rwx_to_rw_with_witness_impl, 
                        _se_memory_inline_jit_restrict_rwx_to_rx_with_witness_impl, 
                        _se_memory_inline_jit_restrict_with_witness_supported ]

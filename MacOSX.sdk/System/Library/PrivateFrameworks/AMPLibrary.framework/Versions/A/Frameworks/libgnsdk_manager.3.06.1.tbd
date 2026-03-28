@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 flags:           [ not_app_extension_safe ]
 install-name:    '/System/Library/PrivateFrameworks/AMPLibrary.framework/Versions/A/Frameworks/libgnsdk_manager.3.06.1.dylib'
 current-version: 3.6.1
 compatibility-version: 3.6.1
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _g_gcsl_log_callback, _g_gcsl_log_enabled_pkgs, _g_gcsl_thread_store_key, 
                        _gcsl_fs_marker_end, _gcsl_fs_marker_initialize, _gcsl_fs_marker_start, 
                        _gcsl_memory_alloc, _gcsl_memory_calloc, _gcsl_memory_dup, 

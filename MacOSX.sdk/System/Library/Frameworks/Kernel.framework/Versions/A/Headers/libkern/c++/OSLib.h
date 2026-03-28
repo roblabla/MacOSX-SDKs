@@ -32,11 +32,13 @@
 
 #define MACH_ASSERT 1
 
-__BEGIN_DECLS
+#include <kern/lock_types.h>
 
 #include <stdarg.h>
-#include <sys/systm.h>
 
+__BEGIN_DECLS
+
+#include <sys/systm.h>
 #include <kern/assert.h>
 
 __END_DECLS

@@ -1,15 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AppleMediaServicesKitSupport.framework/Versions/A/AppleMediaServicesKitSupport'
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AppleMediaServicesKit ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __07B97A2A9C2643F5AF6FFAC4565D6877, __0BB89349011C402EB170CDDFE613BBC1, 
                        __177599EA7AAA401EB3A8EEBD48DAFD37, __18DC780584EB482DBB696D701E18AE90, 
                        __18E4AC15347E450B8D7DCCC229DFFEF9, __1B929D6B08C74B2DA1397C99F640BDE6, 

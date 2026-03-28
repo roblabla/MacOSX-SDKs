@@ -44,6 +44,8 @@
 .br
 .Ev MTL_SHADER_VALIDATION_REPORT_TO_STDERR
 .br
+.Ev MTL_SHADER_VALIDATION_REPORT_ALLOCATION_STACK_TRACE
+.br
 .Sh DESCRIPTION          \" Section Header - required - don't modify
 Unless otherwise noted all environment variables listed must be set before any
 Metal device is created in the process.
@@ -257,6 +259,13 @@ performance impact.
 Defaults to "0"
 .br
 Setting this value to any value other than "0" will redirect shader validation error messages to stderr. This is useful if there is any issue with the OS logging mechanism.
+.It Sy MTL_SHADER_VALIDATION_REPORT_ALLOCATION_STACK_TRACE
+.br
+Defaults to "0"
+.br
+If this value is set to any non-zero value, shader validation will log the stack trace of the buffer that triggered a shader validation error in the error message. This may help identify where the faulting buffer was allocated.
+.br
+Note that this stack trace may not always be available.
 .El
 .\" .Sh DIAGNOSTICS       \" May not be needed
 .\" .Bl -diag

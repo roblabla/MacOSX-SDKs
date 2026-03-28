@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IOMobileFramebuffer.framework/Versions/A/IOMobileFramebuffer'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AppleDisplayManageDisplayWallDisable, _AppleDisplayManageDisplayWallEnable, 
                        _AppleDisplayManageDisplayWallStatus, _AppleDisplayManageDisplayWallValidateConfig, 
                        _AppleDisplayManagerDisplayWallEnumerate, _AppleDisplayManagerGetTypeID, 
@@ -84,15 +82,16 @@ exports:
                        _IOMobileFramebufferSwapDebugInfo, _IOMobileFramebufferSwapDirtyRegion, 
                        _IOMobileFramebufferSwapEnd, _IOMobileFramebufferSwapGetCurrent, 
                        _IOMobileFramebufferSwapSecureLayer, _IOMobileFramebufferSwapSetAmbientLux, 
-                       _IOMobileFramebufferSwapSetBackgroundColor, _IOMobileFramebufferSwapSetBlit, 
-                       _IOMobileFramebufferSwapSetBrightness, _IOMobileFramebufferSwapSetBrightnessLimit, 
-                       _IOMobileFramebufferSwapSetColorMatrix, _IOMobileFramebufferSwapSetColorRemapMode, 
-                       _IOMobileFramebufferSwapSetDisplayEdr, _IOMobileFramebufferSwapSetDisplayEdrHeadroom, 
-                       _IOMobileFramebufferSwapSetEventSignal, _IOMobileFramebufferSwapSetEventSignalOnGlass, 
-                       _IOMobileFramebufferSwapSetEventWait, _IOMobileFramebufferSwapSetGainMap, 
-                       _IOMobileFramebufferSwapSetGammaTable, _IOMobileFramebufferSwapSetICCCurve, 
-                       _IOMobileFramebufferSwapSetICCMatrix, _IOMobileFramebufferSwapSetIndicatorBrightness, 
-                       _IOMobileFramebufferSwapSetIndicatorBrightnessLimit, _IOMobileFramebufferSwapSetLayer, 
+                       _IOMobileFramebufferSwapSetAppleLook, _IOMobileFramebufferSwapSetBackgroundColor, 
+                       _IOMobileFramebufferSwapSetBlit, _IOMobileFramebufferSwapSetBrightness, 
+                       _IOMobileFramebufferSwapSetBrightnessLimit, _IOMobileFramebufferSwapSetColorMatrix, 
+                       _IOMobileFramebufferSwapSetColorRemapMode, _IOMobileFramebufferSwapSetDisplayEdr, 
+                       _IOMobileFramebufferSwapSetDisplayEdrHeadroom, _IOMobileFramebufferSwapSetEventSignal, 
+                       _IOMobileFramebufferSwapSetEventSignalOnGlass, _IOMobileFramebufferSwapSetEventWait, 
+                       _IOMobileFramebufferSwapSetGainMap, _IOMobileFramebufferSwapSetGammaTable, 
+                       _IOMobileFramebufferSwapSetICCCurve, _IOMobileFramebufferSwapSetICCMatrix, 
+                       _IOMobileFramebufferSwapSetIndicatorBrightness, _IOMobileFramebufferSwapSetIndicatorBrightnessLimit, 
+                       _IOMobileFramebufferSwapSetLFCTimestamps, _IOMobileFramebufferSwapSetLayer, 
                        _IOMobileFramebufferSwapSetLayerEDRCompensation, _IOMobileFramebufferSwapSetParams, 
                        _IOMobileFramebufferSwapSetPulseWidthMaximization, _IOMobileFramebufferSwapSetSecureAnimation, 
                        _IOMobileFramebufferSwapSetTimestamp, _IOMobileFramebufferSwapSetTimestamps, 
@@ -101,5 +100,6 @@ exports:
                        _IOMobileFramebufferSwapSubtitleRegion, _IOMobileFramebufferSwapUIEdgeBlendMode, 
                        _IOMobileFramebufferSwapWait, _IOMobileFramebufferSwapWaitWithTimeout, 
                        _IOMobileFramebufferSwapWorkaroundSettings, _IOMobileFramebufferUnscheduleFromDispatchQueue, 
-                       _IOMobileFramebufferWaitSurface, _kIOMFB_TotalSwaps, _kIOMFB_TotalVBLs ]
+                       _IOMobileFramebufferWaitSurface, _get_int_property_callback_func, 
+                       _kIOMFB_TotalSwaps, _kIOMFB_TotalVBLs, _set_block_callback_func ]
 ...

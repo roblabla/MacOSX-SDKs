@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MessagesBlastDoorSupport.framework/Versions/A/MessagesBlastDoorSupport'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation4DataV24MessagesBlastDoorSupportE23_imOptionallyDecompressACyF', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC11getMetadata17forEmojiImageWith14maxStrikeCount13resultHandlery10Foundation3URLV_SiySo8NSObjectCSg_s5Error_pSgtctFTj', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC11getMetadata17forEmojiImageWith14maxStrikeCount13resultHandlery10Foundation3URLV_SiySo8NSObjectCSg_s5Error_pSgtctFTq', 
@@ -58,8 +58,12 @@ exports:
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC30defuseCollaborationClearNotice7payload13resultHandlery10Foundation4DataV_y0bC0018_ObjCCollaborationhI7WrapperCSg_s5Error_pSgtctFTq', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC31defuseRelayGroupMutationPayload3for0bC0010_ObjCRelayhI14MessageWrapperC10Foundation4DataV_tKFTj', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC31defuseRelayGroupMutationPayload3for0bC0010_ObjCRelayhI14MessageWrapperC10Foundation4DataV_tKFTq', 
+                       '_$s24MessagesBlastDoorSupport0abC9InterfaceC33generatePreviewForMultiFrameImage11withFileURL011destinationmN017maxPixelDimension5scale0pJ5Count9isSticker13progressBlock13resultHandlery10Foundation0N0V_AOS2fSiSbyycSgySb_So6CGSizeVSSSgs5Error_pSgtctFTj', 
+                       '_$s24MessagesBlastDoorSupport0abC9InterfaceC33generatePreviewForMultiFrameImage11withFileURL011destinationmN017maxPixelDimension5scale0pJ5Count9isSticker13progressBlock13resultHandlery10Foundation0N0V_AOS2fSiSbyycSgySb_So6CGSizeVSSSgs5Error_pSgtctFTq', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC33generatePreviewForMultiFrameImage11withFileURL011destinationmN017maxPixelDimension5scale0pJ5Count9isSticker13resultHandlery10Foundation0N0V_ANS2fSiSbySb_So6CGSizeVSSSgs5Error_pSgtctFTj', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC33generatePreviewForMultiFrameImage11withFileURL011destinationmN017maxPixelDimension5scale0pJ5Count9isSticker13resultHandlery10Foundation0N0V_ANS2fSiSbySb_So6CGSizeVSSSgs5Error_pSgtctFTq', 
+                       '_$s24MessagesBlastDoorSupport0abC9InterfaceC33generateSpamDetectionPreviewImage3for17maxPixelDimension5scale13resultHandlery10Foundation3URLV_S2fySo8NSObjectCSg_s5Error_pSgtctFTj', 
+                       '_$s24MessagesBlastDoorSupport0abC9InterfaceC33generateSpamDetectionPreviewImage3for17maxPixelDimension5scale13resultHandlery10Foundation3URLV_S2fySo8NSObjectCSg_s5Error_pSgtctFTq', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC37defuseRelayReachabilityRequestPayload3for0bC0010_ObjCRelayhI7WrapperC10Foundation4DataV_tKFTj', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC37defuseRelayReachabilityRequestPayload3for0bC0010_ObjCRelayhI7WrapperC10Foundation4DataV_tKFTq', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC38defuseRelayReachabilityResponsePayload3for0bC0010_ObjCRelayhI7WrapperC10Foundation4DataV_tKFTj', 

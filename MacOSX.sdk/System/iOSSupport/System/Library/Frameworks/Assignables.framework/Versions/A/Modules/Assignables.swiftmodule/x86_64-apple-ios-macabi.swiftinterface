@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
 // swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2.0.6 -module-name Assignables
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import AppKit
 import AppleArchive
 @_exported import Assignables
@@ -69,13 +69,11 @@ public protocol MergeablePartsContainer : Swift.Hashable {
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
   mutating func merge(partData: Assignables.MergeablePartData, into partID: Self.PartID) async throws -> Swift.Bool
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18, *)
   @available(macOS, unavailable)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
   func makePart(for partID: Self.PartID) throws -> Assignables.MergeablePartData?
-  #endif
   var isPartial: Swift.Bool { get }
   var partIDs: [Self.PartID] { get }
 }
@@ -136,13 +134,11 @@ public struct AssignedWorkDocument : Swift.Identifiable {
   public var partIDs: [Assignables.MergeablePartsContainerPartID] {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18, *)
   @available(macOS, unavailable)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
   public func makePart(for partID: Assignables.AssignedWorkDocument.PartID) throws -> Assignables.MergeablePartData?
-  #endif
   public enum Error : Swift.Error {
     case otherDocumentIsNotAVariant
     case exportFailed(partIDs: [Assignables.AssignedWorkDocument.PartID])
@@ -202,11 +198,9 @@ extension Assignables.AssignableDocument {
     public init(id: Assignables.AssignableDocument.QuestionBox.ID, pageID: Assignables.AssignableDocument.Page.ID, bounds: CoreFoundation.CGRect)
     public static func == (lhs: Assignables.AssignableDocument.QuestionBox, rhs: Assignables.AssignableDocument.QuestionBox) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
-    #if compiler(>=5.3) && $NonescapableTypes
     public var pageID: Assignables.AssignableDocument.Page.ID? {
       get
     }
-    #endif
     public var bounds: CoreFoundation.CGRect {
       get
       set
@@ -221,9 +215,7 @@ extension Assignables.AssignableDocument {
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 public protocol AssignedWorkDocumentConfiguration : Swift.Hashable {
-  #if compiler(>=5.3) && $NonescapableTypes
   var manualScore: Swift.Double? { get set }
-  #endif
 }
 @available(iOS 17.4, *)
 @available(macOS, unavailable)
@@ -392,9 +384,7 @@ extension Assignables.AssignedWorkDocument {
       set
     }
     public typealias Document = Assignables.AssignedWorkDocument
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(id: Assignables.AssignedWorkDocument.ScoreAnnotation.ID, pageID: Assignables.AssignedWorkDocument.Page.ID?, location: CoreFoundation.CGPoint, kind: Assignables.AssignedWorkDocument.ScoreAnnotation.Kind)
-    #endif
     public static func == (lhs: Assignables.AssignedWorkDocument.ScoreAnnotation, rhs: Assignables.AssignedWorkDocument.ScoreAnnotation) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public enum Kind : Swift.Int, Swift.CaseIterable, Swift.CustomDebugStringConvertible {
@@ -405,9 +395,7 @@ extension Assignables.AssignedWorkDocument {
       public var debugDescription: Swift.String {
         get
       }
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(rawValue: Swift.Int)
-      #endif
       @available(iOS 17.4, *)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
@@ -425,12 +413,10 @@ extension Assignables.AssignedWorkDocument {
         get
       }
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var pageID: Assignables.AssignedWorkDocument.Page.ID? {
       get
       set
     }
-    #endif
     public var location: CoreFoundation.CGPoint {
       get
       set
@@ -453,23 +439,19 @@ extension Assignables.AssignedWorkDocument {
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension Assignables.AssignedWorkDocument {
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(pageID: Assignables.AssignedWorkDocument.Page.ID) -> Assignables.AssignedWorkDocument.Page? {
     get
   }
-  #endif
 }
 @available(iOS 17.4, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension Assignables.AssignedWorkDocument {
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(scoreAnnotationID: Assignables.AssignedWorkDocument.ScoreAnnotation.ID) -> Assignables.AssignedWorkDocument.ScoreAnnotation? {
     get
     set
   }
-  #endif
 }
 @available(iOS 17.4, *)
 @available(macOS, unavailable)
@@ -477,17 +459,13 @@ extension Assignables.AssignedWorkDocument {
 @available(watchOS, unavailable)
 @_Concurrency.MainActor @preconcurrency public struct AssignableDocumentView : SwiftUICore.View {
   public typealias Document = Assignables.AssignableDocument
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(document: SwiftUICore.Binding<Assignables.AssignableDocumentView.Document>, activePartID: Assignables.MergeablePartsContainerPartID? = nil, hiddenPartIDs: [Assignables.MergeablePartsContainerPartID] = [], selectedPageID: SwiftUICore.Binding<Assignables.AssignableDocumentView.Document.Page.ID?>? = nil, selectedQuestionID: SwiftUICore.Binding<Assignables.AssignableDocumentView.Document.Question.ID?>? = nil, showsPageThumbnails: Swift.Bool = true, isStructureEditingEnabled: Swift.Bool = true)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.1, *)
   @available(macOS, unavailable)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   @available(visionOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public init(document: SwiftUICore.Binding<Assignables.AssignableDocumentView.Document>, activePartID: Assignables.MergeablePartsContainerPartID? = nil, hiddenPartIDs: [Assignables.MergeablePartsContainerPartID] = [], selectedPageID: SwiftUICore.Binding<Assignables.AssignableDocumentView.Document.Page.ID?>? = nil, selectedQuestionID: SwiftUICore.Binding<Assignables.AssignableDocumentView.Document.Question.ID?>? = nil, showsPageThumbnails: Swift.Bool = true, isStructureEditingEnabled: Swift.Bool = true, allowsPencilDrawing: Swift.Bool = true, onMarkupActivation: @escaping (_ isMarkupActivated: Swift.Bool) -> Swift.Void)
-  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
@@ -502,37 +480,31 @@ extension Assignables.AssignedWorkDocument {
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension Assignables.AssignableDocument {
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(pageID: Assignables.AssignableDocument.Page.ID) -> Assignables.AssignableDocument.Page? {
     get
   }
-  #endif
 }
 @available(iOS 17.4, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension Assignables.AssignableDocument {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, deprecated: 26.0, message: "Access questions using AssignableDocument's questions array instead")
   public subscript(questionID: Assignables.AssignableDocument.Question.ID) -> Assignables.AssignableDocument.Question? {
     get
     set
   }
-  #endif
 }
 @available(iOS 17.4, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension Assignables.AssignableDocument {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, deprecated: 26.0, message: "Access question boxes using AssignableDocument's question's boxes array instead")
   public subscript(questionBoxID: Assignables.AssignableDocument.QuestionBox.ID) -> Assignables.AssignableDocument.QuestionBox? {
     get
     set
   }
-  #endif
 }
 @available(iOS 17.4, *)
 @available(macOS, unavailable)
@@ -655,13 +627,11 @@ public struct AssignableDocument : Swift.Identifiable {
   public var partIDs: [Assignables.AssignableDocument.PartID] {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18, *)
   @available(macOS, unavailable)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
   public func makePart(for partID: Assignables.AssignableDocument.PartID) throws -> Assignables.MergeablePartData?
-  #endif
   public typealias Element = Assignables.AssignableDocumentElement
   public enum Error : Swift.Error {
     case otherDocumentIsNotAVariant
@@ -705,13 +675,9 @@ public struct AssignableDocument : Swift.Identifiable {
   public var authors: [Assignables.AnyUserIdentity] {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use init(pdfURL:id:) instead")
   public init(pdfURL: Foundation.URL, authors: [some UserIdentity], id: Swift.String? = nil) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(pdfURL: Foundation.URL, id: Swift.String? = nil) throws
-  #endif
   @available(*, deprecated, message: "Use async init(id:partData:)")
   public init(id: Assignables.AssignableDocument.ID, partData: [Assignables.AssignableDocument.PartID : Foundation.URL]) throws
   @available(iOS 17.5, *)
@@ -816,9 +782,7 @@ extension Assignables.Assignable {
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 public protocol AssignableDocumentConfiguration : Swift.Hashable {
-  #if compiler(>=5.3) && $NonescapableTypes
   var maxScore: Swift.Double? { get set }
-  #endif
   var pointsPerBonusScoreMark: Swift.Double { get set }
   var correctScoreMarkType: Assignables.AssignableDocument.CorrectMarkType { get set }
   var pointsPerCorrectScoreMark: Swift.Double { get set }
@@ -857,17 +821,13 @@ extension Assignables.AssignableDocument {
       get
     }
     public typealias Document = Assignables.AssignableDocument
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS, deprecated: 26.0, message: "Use init(boxes:maxScore:) instead")
     public init(pageID: Assignables.AssignableDocument.Page.ID, boxes: [Assignables.AssignableDocument.QuestionBox], maxScore: Swift.Double? = nil)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS 26.0, *)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
     @available(tvOS, unavailable)
     public init(boxes: [Assignables.AssignableDocument.QuestionBox], maxScore: Swift.Double? = nil)
-    #endif
     public static func == (lhs: Assignables.AssignableDocument.Question, rhs: Assignables.AssignableDocument.Question) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public struct Thumbnail {
@@ -883,12 +843,10 @@ extension Assignables.AssignableDocument {
       get
       set
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var maxScore: Swift.Double? {
       get
       set
     }
-    #endif
     public var hashValue: Swift.Int {
       get
     }
@@ -897,15 +855,11 @@ extension Assignables.AssignableDocument {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @discardableResult
   public mutating func appendQuestion(pageID: Assignables.AssignableDocument.Page.ID, rect: CoreFoundation.CGRect, maxScore: Swift.Double? = nil) -> Assignables.AssignableDocument.Question.ID
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, deprecated: 26.0, message: "Remove questions from AssignableDocument's questions array instead")
   @discardableResult
   public mutating func removeQuestion(_ questionID: Assignables.AssignableDocument.Question.ID) -> Assignables.AssignableDocument.Question?
-  #endif
   public func questions(on pageID: Assignables.AssignableDocument.Page.ID) -> [Assignables.AssignableDocument.Question]
   public func questionThumbnails(visibleParts: [Assignables.AssignableDocument.PartID]) async -> [Assignables.AssignableDocument.Question.ID : [Assignables.AssignableDocument.Question.Thumbnail]]
 }
@@ -915,17 +869,13 @@ extension Assignables.AssignableDocument {
 @available(watchOS, unavailable)
 @_Concurrency.MainActor @preconcurrency public struct AssignedWorkDocumentView : SwiftUICore.View {
   public typealias Document = Assignables.AssignedWorkDocument
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(document: SwiftUICore.Binding<Assignables.AssignedWorkDocumentView.Document>, activePartID: Assignables.MergeablePartsContainerPartID? = nil, hiddenPartIDs: [Assignables.MergeablePartsContainerPartID], selectedPageID: SwiftUICore.Binding<Assignables.AssignedWorkDocumentView.Document.Page.ID?>? = nil, selectedQuestionID: SwiftUICore.Binding<Assignables.AssignableDocument.Question.ID?>? = nil, showsPageThumbnails: Swift.Bool = true, isStructureEditingEnabled: Swift.Bool = false)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.1, *)
   @available(macOS, unavailable)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   @available(visionOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public init(document: SwiftUICore.Binding<Assignables.AssignedWorkDocumentView.Document>, activePartID: Assignables.MergeablePartsContainerPartID? = nil, hiddenPartIDs: [Assignables.MergeablePartsContainerPartID], selectedPageID: SwiftUICore.Binding<Assignables.AssignedWorkDocumentView.Document.Page.ID?>? = nil, selectedQuestionID: SwiftUICore.Binding<Assignables.AssignableDocument.Question.ID?>? = nil, showsPageThumbnails: Swift.Bool = true, isStructureEditingEnabled: Swift.Bool = false, onMarkupActivation: @escaping (_ isMarkupActivated: Swift.Bool) -> Swift.Void)
-  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
@@ -973,9 +923,7 @@ extension Assignables.MergeableDocument where Self.Page.ID == Self.Page.Document
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension Assignables.AssignableDocument {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func computeMaxScore(defaultQuestionMaxScore: Swift.Double? = Double.zero) -> Swift.Double?
-  #endif
 }
 @available(iOS 17.4, *)
 @available(macOS, unavailable)

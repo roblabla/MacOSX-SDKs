@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeUI.framework/Versions/A/ScreenTimeUI'
-current-version: 605.2.7
+current-version: 605.4.18
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12ScreenTimeUI17PasscodeFieldViewV05SwiftC00F0AAMc', '_$s12ScreenTimeUI17PasscodeFieldViewV10completionACySSc_tcfC', 
                        '_$s12ScreenTimeUI17PasscodeFieldViewV4bodyQrvg', '_$s12ScreenTimeUI17PasscodeFieldViewV4bodyQrvpMV', 
                        '_$s12ScreenTimeUI17PasscodeFieldViewV4bodyQrvpQOMQ', '_$s12ScreenTimeUI17PasscodeFieldViewVMa', 

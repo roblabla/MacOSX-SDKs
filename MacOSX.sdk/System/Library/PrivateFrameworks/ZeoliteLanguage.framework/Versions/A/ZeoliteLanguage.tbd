@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ZeoliteLanguage.framework/Versions/A/ZeoliteLanguage'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15ZeoliteLanguage10NLEmbedderV13useRecognizerACSb_tcfC', 
                        '_$s15ZeoliteLanguage10NLEmbedderV5embed4textSaySfGSgSS_tYaF', 
                        '_$s15ZeoliteLanguage10NLEmbedderV5embed4textSaySfGSgSS_tYaFTu', 

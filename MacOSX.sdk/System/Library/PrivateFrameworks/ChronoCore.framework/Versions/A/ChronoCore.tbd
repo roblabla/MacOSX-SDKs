@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ChronoCore.framework/Versions/A/ChronoCore'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ ChronoCoreTests, Gaspar, Xcode, Xcode Previews, chronod ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10ChronoCore14PushFoundationO20KeepAliveTransactionC10invalidateyyFTj', 
                        '_$s10ChronoCore14PushFoundationO20KeepAliveTransactionC10invalidateyyFTq', 
                        '_$s10ChronoCore14PushFoundationO20KeepAliveTransactionC4with6reason_xSS_xyKXEtKlFZ', 
@@ -74,7 +74,11 @@ exports:
                        '_$s10ChronoCore27ConfigurationCharacteristicO9hashValueSivpMV', 
                        '_$s10ChronoCore27ConfigurationCharacteristicOMa', '_$s10ChronoCore27ConfigurationCharacteristicOMn', 
                        '_$s10ChronoCore27ConfigurationCharacteristicON', '_$s10ChronoCore27ConfigurationCharacteristicOSHAAMc', 
-                       '_$s10ChronoCore27ConfigurationCharacteristicOSQAAMc', '_$s10ChronoCore9EventTypeO11descriptionSSvg', 
+                       '_$s10ChronoCore27ConfigurationCharacteristicOSQAAMc', '_$s10ChronoCore29SignificantTimeChangeProviderCMa', 
+                       '_$s10ChronoCore29SignificantTimeChangeProviderCMm', '_$s10ChronoCore29SignificantTimeChangeProviderCMn', 
+                       '_$s10ChronoCore29SignificantTimeChangeProviderCMo', '_$s10ChronoCore29SignificantTimeChangeProviderCMu', 
+                       '_$s10ChronoCore29SignificantTimeChangeProviderCN', '_$s10ChronoCore29SignificantTimeChangeProviderCfD', 
+                       '_$s10ChronoCore29SignificantTimeChangeProviderCfd', '_$s10ChronoCore9EventTypeO11descriptionSSvg', 
                        '_$s10ChronoCore9EventTypeO11descriptionSSvpMV', '_$s10ChronoCore9EventTypeO11interactionyA2CmFWC', 
                        '_$s10ChronoCore9EventTypeO18controlInteractionyA2CmFWC', 
                        '_$s10ChronoCore9EventTypeO19discoverDescriptorsyACSScACmFWC', 

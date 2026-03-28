@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TextToSpeechKonaSupport.framework/Versions/Current/Frameworks/jpnrom.dylib'
 current-version: 0
 compatibility-version: 0
@@ -16,7 +16,7 @@ exports:
                        __ZTS13QElementParam, __ZTS15RomQueueElement, __ZTS18ConverterInterface, 
                        __ZTS5JPath, __ZTS7DictMan, __ZTS8ListNode, __ZTS9InputChar, 
                        __ZTS9PhraseBuf, __ZTS9SWUnknown ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _NN, _QQ, _UnixReg, __Z7ucs2lenPKt, __ZN10Annotation4SaveEPcss, 
                        __ZN10Annotation5FlushEhP7DynaBuf, __ZN10Annotation6RemoveEs, 
                        __ZN10Annotation6RemoveEv, __ZN10AnnotationC1ER12TextAnalysis, 

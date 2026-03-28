@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libCommCenterCommandDrivers.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -200,7 +200,7 @@ exports:
                        __ZTSNSt3__123enable_shared_from_thisI33DataSubscriptionBaseCommandDriverEE, 
                        __ZTSNSt3__123enable_shared_from_thisIN10subscriber16SimCommandDriverEEE, 
                        __ZTSNSt3__123enable_shared_from_thisIN3awd16AwdCommandDriverEEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ __Z15read_rest_valueR10Cdma1xCellRKN3xpc6objectE, __Z15read_rest_valueR11TDSCDMACellRKN3xpc6objectE, 
                        __Z15read_rest_valueR12CdmaEvdoCellRKN3xpc6objectE, __Z15read_rest_valueR15NRDisableStatusRKN3xpc6objectE, 
                        __Z15read_rest_valueR16CSGSearchRequestRKN3xpc6objectE, __Z15read_rest_valueR16CSGServingSystemRKN3xpc6objectE, 
@@ -250,8 +250,7 @@ exports:
                        __ZN10subscriber16SimCommandDriver16setObservedFilesERKNS_11SimCardInfoERKNSt3__13mapINS_7SimTypeENS4_3setINS_11SimFilePathENS4_4lessIS8_EENS4_9allocatorIS8_EEEENS9_IS6_EENSB_INS4_4pairIKS6_SD_EEEEEE, 
                        __ZN10subscriber16SimCommandDriver8readFileERKNS_11SimCardInfoENS_11SimFilePathERKNSt3__18functionIFvNS5_10shared_ptrINS5_6vectorIhNS5_9allocatorIhEEEEEEEEE, 
                        __ZN10subscriber16SimCommandDriver8readFileERKNS_11SimCardInfoERKNS_6FileIdERKNSt3__18functionIFvNS7_10shared_ptrINS7_6vectorIhNS7_9allocatorIhEEEEEEEEE, 
-                       __ZN10subscriber16SimCommandDriver9bootstrapEN8dispatch13group_sessionE, 
-                       __ZN10subscriber16SimCommandDriver9writeFileERKNS_11SimCardInfoENS_11SimFilePathERKNSt3__16vectorIhNS5_9allocatorIhEEEEU13block_pointerFvbE, 
+                       __ZN10subscriber16SimCommandDriver9bootstrapEv, __ZN10subscriber16SimCommandDriver9writeFileERKNS_11SimCardInfoENS_11SimFilePathERKNSt3__16vectorIhNS5_9allocatorIhEEEEU13block_pointerFvbE, 
                        __ZN10subscriber16SimCommandDriverC2ERKNSt3__110shared_ptrIK8RegistryEERKN8dispatch5queueEPKcNS1_8functionIFKSD_NS_15HardwareSimSlotEEEE, 
                        __ZN10subscriber16SimCommandDriverD0Ev, __ZN10subscriber16SimCommandDriverD1Ev, 
                        __ZN10subscriber16SimCommandDriverD2Ev, __ZN10subscriber16kProvisioningAidE, 
@@ -531,7 +530,7 @@ exports:
                        __ZN31BBDataCommandDriverEventHandlerD2Ev, __ZN32CallAudioDriverDelegateInterfaceD0Ev, 
                        __ZN32CallAudioDriverDelegateInterfaceD1Ev, __ZN32CallAudioDriverDelegateInterfaceD2Ev, 
                        __ZN33AQMCommandDriverDelegateInterfaceD0Ev, __ZN33AQMCommandDriverDelegateInterfaceD1Ev, 
-                       __ZN33AQMCommandDriverDelegateInterfaceD2Ev, __ZN33DataSubscriptionBaseCommandDriver20configureUsableIccidERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEb, 
+                       __ZN33AQMCommandDriverDelegateInterfaceD2Ev, __ZN33DataSubscriptionBaseCommandDriver20configureUsableIccidEN10subscriber15HardwareSimSlotERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEb, 
                        __ZN33DataSubscriptionBaseCommandDriver21configureSubscriptionERK29SubscriptionSlotConfigurationRKNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEEN10subscriber7SimSlotENS3_8functionIFvbSD_EEE, 
                        __ZN33DataSubscriptionBaseCommandDriver23operationCompleted_syncEbN10subscriber7SimSlotE, 
                        __ZN33DataSubscriptionBaseCommandDriver29changeDefaultDataSubscriptionEN10subscriber7SimSlotE23DefaultDataSwitchReasonNSt3__18functionIFvbS1_EEE, 

@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PosterFuturesKit.framework/Versions/A/PosterFuturesKit'
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ BlastDoor, PaperBoardUI, PaperBoardUITests, PosterBoardFramework, 
                        PosterBoardFrameworkTests, PosterBoardServices, PosterBoardServicesTests, 
                        PosterBoardUI, PosterBoardUIServices, PosterBoardUIServicesTests, 
@@ -14,8 +12,7 @@ allowable-clients:
                        PosterUIFoundation, PosterUIFoundationTests, SBRendererService, 
                        posterctl ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BSCancellableCancel, _PFTAbstractMethodException, _PFTAggregateComparator, 
                        _PFTAggregateObjectTest, _PFTArrayFlatten, _PFTDispatchSemaphoreWait, 
                        _PFTFullMethodName, _PFTFutureThrowProtocolExceptionWithReason, 

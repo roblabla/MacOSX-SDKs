@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-macos26.2 -target-variant arm64e-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 1011 -module-name WeatherKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-macos26.4 -target-variant arm64e-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 1318 -module-name WeatherKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import CoreLocation
 import Foundation
 import Network
@@ -29,9 +29,7 @@ public struct WeatherAvailability {
     case temporarilyUnavailable
     case unsupported
     case unknown
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
@@ -225,9 +223,7 @@ public struct UVIndex {
       get
     }
     public static func < (lhs: WeatherKit.UVIndex.ExposureCategory, rhs: WeatherKit.UVIndex.ExposureCategory) -> Swift.Bool
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
     public typealias AllCases = [WeatherKit.UVIndex.ExposureCategory]
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
@@ -326,26 +322,18 @@ extension WeatherKit.HourWeather : Swift.Sendable {
 public enum WeatherError : Foundation.LocalizedError {
   case permissionDenied
   case unknown
-  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var failureReason: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var helpAnchor: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var recoverySuggestion: Swift.String? {
     get
   }
-  #endif
   public static func == (a: WeatherKit.WeatherError, b: WeatherKit.WeatherError) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -431,9 +419,7 @@ public enum WeatherCondition : Swift.String, Swift.CaseIterable, Swift.CustomStr
   public var accessibilityDescription: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
-  #endif
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias AllCases = [WeatherKit.WeatherCondition]
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
@@ -528,37 +514,29 @@ public struct WeatherQuery<T> {
   public static var current: WeatherKit.WeatherQuery<WeatherKit.CurrentWeather> {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public static var minute: WeatherKit.WeatherQuery<WeatherKit.Forecast<WeatherKit.MinuteWeather>?> {
     get
   }
-  #endif
   public static var hourly: WeatherKit.WeatherQuery<WeatherKit.Forecast<WeatherKit.HourWeather>> {
     get
   }
   public static var daily: WeatherKit.WeatherQuery<WeatherKit.Forecast<WeatherKit.DayWeather>> {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public static var alerts: WeatherKit.WeatherQuery<[WeatherKit.WeatherAlert]?> {
     get
   }
-  #endif
   public static var availability: WeatherKit.WeatherQuery<WeatherKit.WeatherAvailability> {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public static var changes: WeatherKit.WeatherQuery<WeatherKit.WeatherChanges?> {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public static var historicalComparisons: WeatherKit.WeatherQuery<WeatherKit.HistoricalComparisons?> {
     get
   }
-  #endif
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension WeatherKit.WeatherQuery where T == WeatherKit.Forecast<WeatherKit.DayWeather> {
@@ -862,9 +840,7 @@ public enum Precipitation : Swift.String, Swift.CaseIterable, Swift.CustomString
   public var accessibilityDescription: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
-  #endif
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias AllCases = [WeatherKit.Precipitation]
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
@@ -934,9 +910,7 @@ public enum PressureTrend : Swift.String, Swift.CaseIterable, Swift.CustomString
   public var accessibilityDescription: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
-  #endif
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias AllCases = [WeatherKit.PressureTrend]
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
@@ -989,9 +963,7 @@ public struct Wind {
     public var accessibilityDescription: Swift.String {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
     public typealias AllCases = [WeatherKit.Wind.CompassDirection]
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
@@ -1120,9 +1092,7 @@ public enum WeatherSeverity : Swift.String, Swift.CaseIterable, Swift.CustomStri
   public var accessibilityDescription: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
-  #endif
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias AllCases = [WeatherKit.WeatherSeverity]
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
@@ -1180,9 +1150,7 @@ extension WeatherKit.Deviation : Swift.Sendable {
   public var symbolName: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
-  #endif
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias AllCases = [WeatherKit.MoonPhase]
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)

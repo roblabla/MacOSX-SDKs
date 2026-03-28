@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreWLANKit.framework/Versions/A/CoreWLANKit'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _kCWImageAlertTriangle, _kCWImageBattery0, _kCWImageBattery10, 
                        _kCWImageBattery100, _kCWImageBattery20, _kCWImageBattery30, 
                        _kCWImageBattery40, _kCWImageBattery50, _kCWImageBattery60, 

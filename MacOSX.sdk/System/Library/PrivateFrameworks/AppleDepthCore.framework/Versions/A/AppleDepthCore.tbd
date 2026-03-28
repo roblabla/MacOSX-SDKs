@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleDepthCore.framework/Versions/A/AppleDepthCore'
 current-version: 0
 compatibility-version: 0
@@ -11,7 +11,7 @@ exports:
                        __ZTIN6docopt19DocoptArgumentErrorE, __ZTIN6docopt19DocoptLanguageErrorE, 
                        __ZTS20PixelBufferSharedPtr, __ZTSN6docopt14DocoptExitHelpE, 
                        __ZTSN6docopt19DocoptArgumentErrorE, __ZTSN6docopt19DocoptLanguageErrorE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AppleDepthCoreVersionNumber, _AppleDepthCoreVersionString, 
                        __Z11isArrayType28ADArgumentParserArgumentType, __Z11setPropertyP11objc_objectP8NSString28ADArgumentParserArgumentTypeN6docopt5valueEP12NSDictionaryIS2_P8NSNumberE, 
                        __Z15getPropertyTypeP13objc_property, __Z17propertyTypeMatch28ADArgumentParserArgumentTypeS_, 
@@ -35,10 +35,9 @@ exports:
                        __ZN10appledepth16JasperPointCloudC1EOS0_, __ZN10appledepth16JasperPointCloudC1Ev, 
                        __ZN10appledepth16JasperPointCloudC2EOS0_, __ZN10appledepth16JasperPointCloudC2Ev, 
                        __ZN10appledepth16JasperPointCloudD1Ev, __ZN10appledepth16JasperPointCloudD2Ev, 
-                       __ZN12ADDebugUtils20isVerboseLogsEnabledEv, __ZN12ADDebugUtils21setVerboseLogsEnabledEb, 
                        __ZN13ADCommonUtils10rotateSizeE6CGSize10ADRotation, __ZN13ADCommonUtils11matrixTo4x3E13simd_float4x4, 
-                       __ZN13ADCommonUtils11matrixTo4x4E13simd_float4x3, __ZN13ADCommonUtils15reverseRotationE10ADRotation, 
-                       __ZN13ADCommonUtils16computeTransformE13simd_float4x3S0_, 
+                       __ZN13ADCommonUtils11matrixTo4x4E13simd_float4x3, __ZN13ADCommonUtils12systemUptimeEv, 
+                       __ZN13ADCommonUtils15reverseRotationE10ADRotation, __ZN13ADCommonUtils16computeTransformE13simd_float4x3S0_, 
                        __ZN13ADCommonUtils16extrinsicsToFileEPKc13simd_float4x3, 
                        __ZN13ADCommonUtils16extrinsicsToFileEPKc13simd_float4x4, 
                        __ZN13ADCommonUtils16inverseTransformE13simd_float4x3, __ZN13ADCommonUtils16inverseTransformE13simd_float4x4, 
@@ -91,8 +90,8 @@ exports:
                        __ZN16PixelBufferUtils23createPixelBufferNoCopyEP10__CVBufferj6CGRect, 
                        __ZN16PixelBufferUtils23cropAndScalePixelBufferEP10__CVBufferS1_6CGRectS2_b, 
                        __ZN16PixelBufferUtils23cropAndScalePixelBufferEP10__CVBufferS1_6CGRectb, 
-                       __ZN16PixelBufferUtils23isPixelFormatCompressedEj, __ZN16PixelBufferUtils23pixelSizeForPixelFormatEjm, 
-                       __ZN16PixelBufferUtils24convertPixelBufferFormatEP10__CVBufferS1_b, 
+                       __ZN16PixelBufferUtils23isPixelFormatCompressedEj, __ZN16PixelBufferUtils23pixelBufferFromBMTLFileEPKc, 
+                       __ZN16PixelBufferUtils23pixelSizeForPixelFormatEjm, __ZN16PixelBufferUtils24convertPixelBufferFormatEP10__CVBufferS1_b, 
                        __ZN16PixelBufferUtils24createRotatedPixelBufferEP10__CVBufferib, 
                        __ZN16PixelBufferUtils24isSameDimensionAndFormatEP10__CVBufferS1_, 
                        __ZN16PixelBufferUtils24pixelBufferFromImageFileEPKcj, __ZN16PixelBufferUtils24planeCountForPixelFormatEj, 
@@ -101,6 +100,7 @@ exports:
                        __ZN16PixelBufferUtils26pixelFormatAsFileExtensionEj, __ZN16PixelBufferUtils27rotationBetweenOrientationsE26CGImagePropertyOrientationS0_, 
                        __ZN16PixelBufferUtils28pixelFormatFromFileExtensionEPKc, 
                        __ZN16PixelBufferUtils29createPixelBufferWithSameSizeEP10__CVBufferjb, 
+                       __ZN16PixelBufferUtils29pixelFormatFromMTLPixelFormatE14MTLPixelFormat, 
                        __ZN16PixelBufferUtils29scaleConvertRotatePixelBufferEP10__CVBufferi6CGRectS1_PS1_S3_b, 
                        __ZN16PixelBufferUtils31colorizePointCloudOnPixelBufferEP10__CVBuffermPK7CGPointPKfbfff, 
                        __ZN16PixelBufferUtils31createColorizedDepthPixelBufferEP10__CVBufferbffbPfS1_f, 
@@ -148,7 +148,8 @@ exports:
                        __ZNK23PixelBufferUtilsSession11verifyInputEP10__CVBuffer, 
                        __ZNK23PixelBufferUtilsSession12verifyOutputEP10__CVBuffer, 
                        __ZNK23PixelBufferUtilsSession23createOutputPixelBufferEv, 
-                       __ZNK23PixelBufferUtilsSession3runEP10__CVBufferS1_, _kADCoreDeviceConfigurationKeyJasperPerformanceEmulatedDevice, 
+                       __ZNK23PixelBufferUtilsSession3runEP10__CVBufferS1_, _kADCoreDeviceConfigurationDomainName, 
+                       _kADCoreDeviceConfigurationKeyJasperPerformanceEmulatedDevice, 
                        _kADCoreDeviceConfigurationKeyJasperPerformanceOverridePath, 
                        _kADCoreDeviceConfigurationKeyVerboseLogs, _kADCoreDeviceConfigurationKeyWriteCoverage, 
                        _peridotSensorMap ]
@@ -174,6 +175,6 @@ exports:
                        ADCameraCalibration._referenceDimensions, ADJasperPointCloud._additionalData, 
                        ADJasperPointCloud._dataBuffer, ADJasperPointCloud._pc, ADPolynomialsLensDistortionModel._polynomials ]
     weak-symbols:    [ __ZNSt3__119piecewise_constructE ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ __ZN25PixelBufferUtilsTiledView15createTiledViewEmmmmPNS_10TileConfigEb ]
 ...

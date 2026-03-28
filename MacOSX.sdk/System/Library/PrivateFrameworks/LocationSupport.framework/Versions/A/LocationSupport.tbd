@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/LocationSupport.framework/Versions/A/LocationSupport'
-current-version: 3064.0.10
+current-version: 3072.0.46
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CLISP_ME_TOKEN, _CLProfilingIdentify, _CLProfilingIdentifySiloInvocation, 
                        _CLWriteStackshot, __ZN12CLConnection10isEntitledERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZN12CLConnection11getUserNameEv, __ZN12CLConnection11sendMessageENSt3__110shared_ptrI19CLConnectionMessageEE, 
@@ -23,7 +21,8 @@ exports:
                        __ZN12CLConnection23initializeConnection_nlEv, __ZN12CLConnection23setDisconnectionHandlerEU13block_pointerFvvE, 
                        __ZN12CLConnection24setDefaultMessageHandlerEU13block_pointerFvNSt3__110shared_ptrI19CLConnectionMessageEEE, 
                        __ZN12CLConnection25getUserNameFromAuditTokenE13audit_token_t, 
-                       __ZN12CLConnection5pauseEv, __ZN12CLConnection5startEv, __ZN12CLConnection7getNameEv, 
+                       __ZN12CLConnection25overrideEnableQOSDonationEv, __ZN12CLConnection5pauseEv, 
+                       __ZN12CLConnection5startEv, __ZN12CLConnection7getNameEv, 
                        __ZN12CLConnectionC1ENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEPU28objcproto17OS_dispatch_queue8NSObject, 
                        __ZN12CLConnectionC1EPU24objcproto13OS_xpc_object8NSObjectPU28objcproto17OS_dispatch_queueS0_, 
                        __ZN12CLConnectionC2ENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEPU28objcproto17OS_dispatch_queue8NSObject, 

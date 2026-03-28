@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GenerativeExperiencesUI.framework/Versions/A/GenerativeExperiencesUI'
-current-version: 209.29
+current-version: 222.35.5
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s23GenerativeExperiencesUI14EnrollmentViewV05SwiftC00E0AAMc', 
                        '_$s23GenerativeExperiencesUI14EnrollmentViewV17useCaseIdentifier7optionsACSS_AA0dE7OptionsVtcfC', 
                        '_$s23GenerativeExperiencesUI14EnrollmentViewV17useCaseIdentifierACSS_tcfC', 

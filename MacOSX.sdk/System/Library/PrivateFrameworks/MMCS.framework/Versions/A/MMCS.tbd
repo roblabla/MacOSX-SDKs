@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MMCS.framework/Versions/A/MMCS'
 current-version: 2300.120
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _C3BaseRelease, _C3BaseRetain, _MMCSComputeSignatureAndRegisterItemWithDescriptor, 
                        _MMCSDuplicateRegisteredfile, _MMCSEngineCancelRequests, _MMCSEngineCopyStatusReport, 
                        _MMCSEngineCreate, _MMCSEngineCreateWithTargetDispatchQueue, 

@@ -1,8 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DiskImages2.framework/Versions/A/DiskImages2'
-current-version: 514.61.1
+current-version: 524.100.22
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
@@ -55,7 +55,7 @@ exports:
                        __ZTSNSt3__121__empty_non_own_stateIcEE, __ZTSNSt3__123__match_any_but_newlineIcEE, 
                        __ZTSNSt3__126__end_marked_subexpressionIcEE, __ZTSNSt3__128__begin_marked_subexpressionIcEE, 
                        __ZTSNSt3__16__loopIcEE, __ZTSNSt3__16__nodeIcEE, __ZTSNSt3__18functionIFvPcEEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _DIErrorDomain, _DIErrorVerboseInfoKey, _DiskImages2_Attach, 
                        __Z15make_error_code11DIErrorEnum, __ZN13diskimage_uio10extents_db6createERNS_17diskimage_contextENS_12blocks_rangeENS_13option_set_ns10option_setINS_11extent_typeEEE, 
                        __ZN13diskimage_uio10extents_dbC1EOS0_, __ZN13diskimage_uio10extents_dbC1ERNS_17diskimage_contextENS_12blocks_rangeENS_13option_set_ns10option_setINS_11extent_typeEEE, 

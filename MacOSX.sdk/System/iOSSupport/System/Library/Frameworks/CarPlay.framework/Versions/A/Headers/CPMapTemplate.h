@@ -8,11 +8,14 @@
 
 #import <CarPlay/CPBarButtonProviding.h>
 #import <CarPlay/CPMapButton.h>
+#import <CarPlay/CPMapTemplateWaypoint.h>
 #import <CarPlay/CPNavigationAlert.h>
 #import <CarPlay/CPNavigationSession.h>
+#import <CarPlay/CPRouteSource.h>
 #import <CarPlay/CPTemplate.h>
 #import <CarPlay/CPTrip.h>
 #import <CarPlay/CPTripPreviewTextConfiguration.h>
+#import <CarPlay/CPNavigationWaypoint.h>
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -192,6 +195,39 @@ CARPLAY_TEMPLATE_UI_ACTOR
  */
 - (BOOL)mapTemplateShouldProvideNavigationMetadata:(CPMapTemplate *)mapTemplate API_AVAILABLE(ios(17.4));
 
+#pragma mark - Route Sharing
+/**
+ Determines if the template should provide route sharing information to the vehicle. Apps that participate in route sharing will donate navigation information to the vehicle including the current route, a list of waypoints, and other metadata that allows the vehicle to track the user's preferred route to their destination.
+ @return YES if the template should provide route sharing, otherwise NO
+ */
+- (BOOL)mapTemplateShouldProvideRouteSharing:(CPMapTemplate *)mapTemplate API_AVAILABLE(ios(26.4));
+
+/**
+ Called when the built-in navigation system sends a waypoint to the device for a specific segment.
+ */
+- (void)mapTemplate:(CPMapTemplate *)mapTemplate
+didRequestToInsertWaypoint:(CPNavigationWaypoint *)waypoint
+         intoSegment:(CPRouteSegment *)segment
+         completion:(void (^)(CPTravelEstimates* travelEstimates))completion API_AVAILABLE(ios(26.4));
+
+/**
+ Called when the user responds to a proposal to add a waypoint as a stop on their route. If the waypoint is accepted, perform a reroute to update the route accordingly for the specified segment to include this new destination.
+ */
+- (void)mapTemplate:(CPMapTemplate *)mapTemplate
+mapTemplateWaypoint:(CPNavigationWaypoint *)waypoint
+           accepted:(BOOL)accepted
+         forSegment:(nullable CPRouteSegment *)segment NS_SWIFT_NAME(mapTemplate(_:waypoint:accepted:forSegment:)) API_AVAILABLE(ios(26.4));
+
+/**
+ Called when the route source status has been updated by the built-in system.
+ */
+- (void)mapTemplate:(CPMapTemplate *)mapTemplate didReceiveUpdatedRouteSource:(CPRouteSource)routeSource;
+
+/**
+ Called when a navigation request is received. Show a trip preview corresponding to this destination and start navigation if the destination is accepted by the user.
+ */
+- (void)mapTemplate:(CPMapTemplate *)mapTemplate didReceiveRequestForDestination:(CPNavigationWaypoint *)waypoint;
+
 #pragma mark - Notification Policy
 /**
  Determines if the maneuver should be presented as a notification when the app is in the background.
@@ -210,6 +246,23 @@ CARPLAY_TEMPLATE_UI_ACTOR
   @return YES if the alert should appear as a notification, otherwise NO
  */
 - (BOOL)mapTemplate:(CPMapTemplate *)mapTemplate shouldShowNotificationForNavigationAlert:(CPNavigationAlert *)navigationAlert;
+
+#pragma mark - Destination Sharing
+
+/**
+ Called when a trip's destination is about to be shared to the vehicle
+ */
+- (void)mapTemplate:(CPMapTemplate *)mapTemplate willShareDestinationForTrip:(CPTrip *)trip API_AVAILABLE(ios(26.4));
+
+/**
+ Called when a vehicle failed to handle a shared trip's destination
+ */
+- (void)mapTemplate:(CPMapTemplate *)mapTemplate didFailToShareDestinationForTrip:(CPTrip *)trip error:(NSError *)error API_AVAILABLE(ios(26.4));
+
+/**
+ Called when a vehicle successfully handled a shared trip's destination
+ */
+- (void)mapTemplate:(CPMapTemplate *)mapTemplate didShareDestinationForTrip:(CPTrip *)trip API_AVAILABLE(ios(26.4));
 
 #pragma mark - Panning
 /**

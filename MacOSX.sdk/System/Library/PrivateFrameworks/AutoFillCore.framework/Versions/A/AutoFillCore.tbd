@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AutoFillCore.framework/Versions/A/AutoFillCore'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AFAutoFillContextAppIdKey, _AFAutoFillContextAssociatedDomainsKey, 
                        _AFAutoFillContextBundleIdKey, _AFAutoFillContextWebViewURLKey, 
                        _AFCredentialManagerOSLogFacility, _AFDispatchAsync, _AFLocalizationManagerOSLogFacility, 

@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CorePhotogrammetry.framework/Versions/A/CorePhotogrammetry'
 current-version: 3.9.4
 compatibility-version: 3.9.4
@@ -10,7 +10,7 @@ exports:
                        __ZTINSt3__110__back_refIcEE, __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKPKcEEE, 
                        __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKcEEE, 
                        __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKjEEE, 
-                       __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__110__function6__funcIPFvvENS_9allocatorIS3_EES2_EE, 
+                       __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__110__function6__funcIPFvvES2_EE, 
                        __ZTINSt3__111__alternateIcEE, __ZTINSt3__111__end_stateIcEE, 
                        __ZTINSt3__111__lookaheadIcNS_12regex_traitsIcEEEE, __ZTINSt3__111__match_anyIcEE, 
                        __ZTINSt3__112__match_charIcEE, __ZTINSt3__112bad_weak_ptrE, 
@@ -46,7 +46,7 @@ exports:
                        __ZTSNSt3__110__back_refIcEE, __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKPKcEEE, 
                        __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKcEEE, 
                        __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKjEEE, 
-                       __ZTSNSt3__110__function6__baseIFvvEEE, __ZTSNSt3__110__function6__funcIPFvvENS_9allocatorIS3_EES2_EE, 
+                       __ZTSNSt3__110__function6__baseIFvvEEE, __ZTSNSt3__110__function6__funcIPFvvES2_EE, 
                        __ZTSNSt3__110shared_ptrIKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE27__shared_ptr_default_deleteIS7_S6_EE, 
                        __ZTSNSt3__110shared_ptrINS_13__empty_stateIcEEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__110shared_ptrINS_14basic_ifstreamIcNS_11char_traitsIcEEEEE27__shared_ptr_default_deleteIS4_S4_EE, 
@@ -84,7 +84,7 @@ exports:
                        __ZTSSt12out_of_range, __ZTSSt13runtime_error, __ZTSSt16invalid_argument, 
                        __ZTSSt18bad_variant_access, __ZTSSt19bad_optional_access, 
                        __ZTSSt20bad_array_new_length, __ZTSSt9bad_alloc, __ZTSSt9exception ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CPGAddSampleCallbackBundleCreate, _CPGAddSampleCallbackBundleRelease, 
                        _CPGAddSampleCallbackBundleRetain, _CPGAddSampleCallbackBundleSetStreamProcessingCallback, 
                        _CPGAddSampleStreamProcessingOutputGetFeatureMatchability, 
@@ -324,7 +324,7 @@ exports:
                        _CPGUpdatedPosesGetStateBySampleID, _CPGUpdatedPosesRelease, 
                        _CPGUpdatedPosesRetain, _CPGVersionHash, _CPGVersionNumberMajor, 
                        _CPGVersionNumberMinor, _CPGVersionNumberPatch ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ _BundleDidLoadNotification, _BundleResourceRequestLowDiskSpaceNotification, 
                        _CocoaErrorDomain, _CommandBufferEncoderInfoErrorKey, _CommonCounterClipperInvocations, 
                        _CommonCounterClipperPrimitivesOut, _CommonCounterComputeKernelInvocations, 

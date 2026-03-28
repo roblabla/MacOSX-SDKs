@@ -89,6 +89,9 @@ GAMECONTROLLER_EXPORT GCInputButtonName GCInputTrigger API_AVAILABLE(macos(26.0)
 GAMECONTROLLER_EXPORT GCInputButtonName GCInputLeftTrigger API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 GAMECONTROLLER_EXPORT GCInputButtonName GCInputRightTrigger API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputLeftSideButton API_AVAILABLE(macos(26.4), ios(26.4), tvos(26.4), visionos(26.4));
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputRightSideButton API_AVAILABLE(macos(26.4), ios(26.4), tvos(26.4), visionos(26.4));
+
 /*
  * Back Buttons
  *

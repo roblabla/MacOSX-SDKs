@@ -1,15 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libTelephonyUtilDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZN3ctu16LogMessageBuffer17vCreateWithFormatEPKcP13__va_list_tag, 
                        __ZN3ctu16LogMessageBuffer19vCreateWithNSFormatEP8NSStringP13__va_list_tag, 
                        __ZN3ctu16LogMessageBuffer7vprintfEPKcP13__va_list_tag ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _TelephonyCapabilitiesGetHardwareModel, _TelephonyCapabilitiesRadioCoreDumpSupportsWakeReadySignal, 
                        _TelephonyCapabilitiesRadioGetSafeResetTime, _TelephonyCapabilitiesSetHardwareModel, 
                        _TelephonyCapabilitiesSetHardwareModelFromString, _TelephonyCapabilitiesSetHardwareModelFromTelephonyProduct, 
@@ -882,7 +880,7 @@ exports:
                        _mav_buffer_queue_get_size_internal, _mav_linked_list_init, 
                        _mav_linked_list_insert_back, _mav_linked_list_insert_front, 
                        _mav_linked_list_remove_back, _mav_linked_list_remove_front ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN3ctu16LogMessageBuffer17vCreateWithFormatEPKcPc, __ZN3ctu16LogMessageBuffer19vCreateWithNSFormatEP8NSStringPc, 
                        __ZN3ctu16LogMessageBuffer7vprintfEPKcPc ]
 ...

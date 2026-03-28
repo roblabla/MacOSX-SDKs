@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/libGPUCompilerImpl.dylib'
-current-version: 32023.255.10
+current-version: 32023.255
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AIRNTAddLegalizationPasses_Legalizer_Default, _AIRNTAddPassesToEmitAssembly_Matching_Default, 
                        _AIRNTAddPassesToEmitBuiltinExecutableImage_Matching_Default, 
                        _AIRNTAddPassesToEmitDylibImage_Matching_Default, _AIRNTAddPassesToEmitExecutableImage_Matching_Default, 
@@ -103,6 +101,7 @@ exports:
                        __ZN4llvm11airdevlower14DeviceLowering11linkRuntimeERKNS0_10RuntimeLibERNS_3air15AIRModuleLinkerE, 
                        __ZN4llvm11airdevlower14DeviceLowering12linkRuntimesEv, __ZN4llvm11airdevlower14DeviceLowering13PipelinesData14runCrtPipelineERNS_6ModuleE, 
                        __ZN4llvm11airdevlower14DeviceLowering13PipelinesData14runOptPipelineERNS_6ModuleE, 
+                       __ZN4llvm11airdevlower14DeviceLowering13PipelinesData16runPreRTPipelineERNS_6ModuleENS_9StringRefE, 
                        __ZN4llvm11airdevlower14DeviceLowering13PipelinesData19runPreRTCrtPipelineERNS_6ModuleE, 
                        __ZN4llvm11airdevlower14DeviceLowering13PipelinesData19runPreRTOptPipelineERNS_6ModuleE, 
                        __ZN4llvm11airdevlower14DeviceLowering13PipelinesData21clearAnalysisManagersEv, 
@@ -232,7 +231,7 @@ exports:
                        __ZN4llvm35createTracepointFinalizerLegacyPassEv, __ZN4llvm35initializeAIRVerifierLegacyPassPassERNS_12PassRegistryE, 
                        __ZN4llvm36createTracepointInstrumentLegacyPassEv, __ZN4llvm36initializeAIRDowngradeLegacyPassPassERNS_12PassRegistryE, 
                        __ZN4llvm36initializeAIRLegalizerLegacyPassPassERNS_12PassRegistryE, 
-                       __ZN4llvm37createTracepointWorkaroundsLegacyPassEv, __ZN4llvm37initializeGlobalCtorOptLegacyPassPassERNS_12PassRegistryE, 
+                       __ZN4llvm37createTracepointWorkaroundsLegacyPassEb, __ZN4llvm37initializeGlobalCtorOptLegacyPassPassERNS_12PassRegistryE, 
                        __ZN4llvm38createSourceMetadataStripperLegacyPassEv, __ZN4llvm39createResourceInstrumentationLegacyPassEv, 
                        __ZN4llvm39initializeAIRLateWorkItemLegacyPassPassERNS_12PassRegistryE, 
                        __ZN4llvm39initializeAIRTLSEmulationLegacyPassPassERNS_12PassRegistryE, 
@@ -671,6 +670,7 @@ exports:
                        __ZN4llvm3air23AIExternallyInitialized7getImplERNS_11LLVMContextEPNS_14GlobalVariableENS_9StringRefES6_NS_8Metadata11StorageTypeEb, 
                        __ZN4llvm3air23AIPatchControlPointType7getImplERNS_11LLVMContextEjjNS_24MDTupleTypedArrayWrapperINS0_10AITypeQualEEEPNS0_6AITypeENS_8Metadata11StorageTypeEb, 
                        __ZN4llvm3air23AIRCallGraphCheckerPass3runERNS_6ModuleERNS_15AnalysisManagerIS2_JEEE, 
+                       __ZN4llvm3air23AIRLateAlwaysInlinePass3runERNS_6ModuleERNS_15AnalysisManagerIS2_JEEE, 
                        __ZN4llvm3air23AIRMetadataStripperPass3runERNS_6ModuleERNS_15AnalysisManagerIS2_JEEE, 
                        __ZN4llvm3air23AIStitchingFunctionNode7getImplERNS_11LLVMContextENS_9StringRefEbS4_NS_24MDTupleTypedArrayWrapperINS0_15AIStitchingNodeEEES7_NS_8Metadata11StorageTypeEb, 
                        __ZN4llvm3air23MetalScriptNameResolver10addLibraryERKNS0_14MetalScriptURIE, 
@@ -772,9 +772,10 @@ exports:
                        __ZN4llvm3air34createAIRVertexAmplifierLegacyPassEv, __ZN4llvm3air34normalizeVisibleFunctionReferencesERNS_6ModuleE, 
                        __ZN4llvm3air35AIRDiagnosticInfoFunctionNotAllowed2DKE, __ZN4llvm3air35AIRDiagnosticInfoInvalidAIRFunction2DKE, 
                        __ZN4llvm3air35AIRDiagnosticInfoUnexpectedTypeName2DKE, __ZN4llvm3air35createAIRCallGraphCheckerLegacyPassEv, 
-                       __ZN4llvm3air35createAIRMetadataStripperLegacyPassEv, __ZN4llvm3air36AIRDiagnosticInfoDistanceRetRequired2DKE, 
-                       __ZN4llvm3air36AIRDiagnosticInfoPositionRetRequired2DKE, __ZN4llvm3air36AIRDiagnosticInfoUnsupportedSizeExpr2DKE, 
-                       __ZN4llvm3air37createAIRFunctionImplMapperLegacyPassEv, __ZN4llvm3air38AIR16BitTextureCoordinateEmulationPass3runERNS_6ModuleERNS_15AnalysisManagerIS2_JEEE, 
+                       __ZN4llvm3air35createAIRLateAlwaysInlineLegacyPassEv, __ZN4llvm3air35createAIRMetadataStripperLegacyPassEv, 
+                       __ZN4llvm3air36AIRDiagnosticInfoDistanceRetRequired2DKE, __ZN4llvm3air36AIRDiagnosticInfoPositionRetRequired2DKE, 
+                       __ZN4llvm3air36AIRDiagnosticInfoUnsupportedSizeExpr2DKE, __ZN4llvm3air37createAIRFunctionImplMapperLegacyPassEv, 
+                       __ZN4llvm3air38AIR16BitTextureCoordinateEmulationPass3runERNS_6ModuleERNS_15AnalysisManagerIS2_JEEE, 
                        __ZN4llvm3air38AIRDiagnosticInfoCannotHaveGlobalCtors2DKE, 
                        __ZN4llvm3air38AIRDiagnosticInfoCannotHaveGlobalDtors2DKE, 
                        __ZN4llvm3air38AIRDiagnosticInfoInvalidBufferLocation2DKE, 
@@ -833,7 +834,7 @@ exports:
                        __ZN4llvm3air52updateQualifiedFunctionReferencesInEmulationMetadataEPNS_8FunctionES2_, 
                        __ZN4llvm3air53AIRDiagnosticInfoDuplicatedFragmentInputAttributeName2DKE, 
                        __ZN4llvm3air54AIRDiagnosticInfoDuplicatedRenderTargetAttachmentIndex2DKE, 
-                       __ZN4llvm3air54createAIRExternallyInitializedInitializationLegacyPassEv, 
+                       __ZN4llvm3air54createAIRExternallyInitializedInitializationLegacyPassENSt3__110shared_ptrIKNS_9StringMapINS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEENS_15MallocAllocatorEEEEE, 
                        __ZN4llvm3air55AIRDiagnosticInfoWritableTextureInNonVoidVertexFunction2DKE, 
                        __ZN4llvm3air55createAIRMeshEmulationLowerQualifiedFunctionsLegacyPassEv, 
                        __ZN4llvm3air56AIRDiagnosticInfoInputImageblockDataOverlapRenderTargets2DKE, 
@@ -892,6 +893,7 @@ exports:
                        __ZN4llvm42initializeAIRVertexAmplifierLegacyPassPassERNS_12PassRegistryE, 
                        __ZN4llvm43createPostMeshDumpInstrumentationLegacyPassEv, 
                        __ZN4llvm43initializeAIRCallGraphCheckerLegacyPassPassERNS_12PassRegistryE, 
+                       __ZN4llvm43initializeAIRLateAlwaysInlineLegacyPassPassERNS_12PassRegistryE, 
                        __ZN4llvm43initializeAIRMetadataStripperLegacyPassPassERNS_12PassRegistryE, 
                        __ZN4llvm43initializeTracepointFinalizerLegacyPassPassERNS_12PassRegistryE, 
                        __ZN4llvm44initializeTracepointInstrumentLegacyPassPassERNS_12PassRegistryE, 

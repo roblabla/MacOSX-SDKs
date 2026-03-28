@@ -1,18 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Gestures.framework/Versions/A/Gestures'
 current-version: 9126.1.5
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AppKit, DesignLibrary, GesturesDemo, GesturesPlayground, GesturesTests, 
                        SwiftUI, SwiftUICore, UIKit, UIKitCore, _UIKitTestTarget ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s5State8Gestures24StatefulGestureComponentPTl', '_$s5Value8Gestures16GestureComponentPTl', 
                        '_$s5Value8Gestures19GestureNodeDelegatePTl', '_$s8Gestures10EventPhaseO2eeoiySbAC_ACtFZ', 
                        '_$s8Gestures10EventPhaseO4hash4intoys6HasherVz_tF', '_$s8Gestures10EventPhaseO5beganyA2CmFWC', 

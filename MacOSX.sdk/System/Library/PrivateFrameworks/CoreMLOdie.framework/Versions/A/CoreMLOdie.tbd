@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreMLOdie.framework/Versions/A/CoreMLOdie'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10CoreMLOdie12BNNSCompilerC2idSSvg', '_$s10CoreMLOdie12BNNSCompilerC2idSSvpMV', 
                        '_$s10CoreMLOdie12BNNSCompilerC4ODIE8CompilerC08DelegateE0AAMc', 
                        '_$s10CoreMLOdie12BNNSCompilerC7compile14moduleBytecode2to10Foundation4DataVAI_AG3URLVtKF', 
@@ -32,7 +30,21 @@ exports:
                        '_$s10CoreMLOdie14ProgramLibraryVMa', '_$s10CoreMLOdie14ProgramLibraryVMn', 
                        '_$s10CoreMLOdie14ProgramLibraryVN', '_$s10CoreMLOdie16AllowedDelegatesV11BNNSOptionsVAEycfC', 
                        '_$s10CoreMLOdie16AllowedDelegatesV11BNNSOptionsVMa', '_$s10CoreMLOdie16AllowedDelegatesV11BNNSOptionsVMn', 
-                       '_$s10CoreMLOdie16AllowedDelegatesV11BNNSOptionsVN', '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV19getEspressocOptionsSaySSGyF', 
+                       '_$s10CoreMLOdie16AllowedDelegatesV11BNNSOptionsVN', '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV13SegmenterTypeO2eeoiySbAG_AGtFZ', 
+                       '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV13SegmenterTypeO4hash4intoys6HasherVz_tF', 
+                       '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV13SegmenterTypeO6coreMLyA2GmFWC', 
+                       '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV13SegmenterTypeO9costModelyA2GmFWC', 
+                       '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV13SegmenterTypeO9hashValueSivg', 
+                       '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV13SegmenterTypeO9hashValueSivpMV', 
+                       '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV13SegmenterTypeOMa', 
+                       '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV13SegmenterTypeOMn', 
+                       '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV13SegmenterTypeON', 
+                       '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV13SegmenterTypeOSHAAMc', 
+                       '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV13SegmenterTypeOSQAAMc', 
+                       '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV16getSegmenterTypeAE0hI0OyF', 
+                       '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV16setSegmenterTypeyyAE0hI0OF', 
+                       '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV17parseComputeUnitsSaySSGyF', 
+                       '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV19getEspressocOptionsSaySSGyF', 
                        '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsV19setEspressocOptions7optionsySaySSG_tF', 
                        '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsVAEycfC', 
                        '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsVMa', '_$s10CoreMLOdie16AllowedDelegatesV11E5MLOptionsVMn', 
@@ -80,8 +92,9 @@ exports:
                        '_$s10CoreMLOdie18TargetArchitectureO4h15pyA2CmFWC', '_$s10CoreMLOdie18TargetArchitectureO4h15syA2CmFWC', 
                        '_$s10CoreMLOdie18TargetArchitectureO4h16cyA2CmFWC', '_$s10CoreMLOdie18TargetArchitectureO4h16gyA2CmFWC', 
                        '_$s10CoreMLOdie18TargetArchitectureO4h16pyA2CmFWC', '_$s10CoreMLOdie18TargetArchitectureO4h16syA2CmFWC', 
-                       '_$s10CoreMLOdie18TargetArchitectureO4h17gyA2CmFWC', '_$s10CoreMLOdie18TargetArchitectureO4h17pyA2CmFWC', 
-                       '_$s10CoreMLOdie18TargetArchitectureO4h18pyA2CmFWC', '_$s10CoreMLOdie18TargetArchitectureO8allCasesSayACGvgZ', 
+                       '_$s10CoreMLOdie18TargetArchitectureO4h17cyA2CmFWC', '_$s10CoreMLOdie18TargetArchitectureO4h17gyA2CmFWC', 
+                       '_$s10CoreMLOdie18TargetArchitectureO4h17pyA2CmFWC', '_$s10CoreMLOdie18TargetArchitectureO4h18pyA2CmFWC', 
+                       '_$s10CoreMLOdie18TargetArchitectureO8allCasesSayACGvgZ', 
                        '_$s10CoreMLOdie18TargetArchitectureO8allCasesSayACGvpZMV', 
                        '_$s10CoreMLOdie18TargetArchitectureO8rawValueACSgSS_tcfC', 
                        '_$s10CoreMLOdie18TargetArchitectureO8rawValueSSvg', '_$s10CoreMLOdie18TargetArchitectureO8rawValueSSvpMV', 

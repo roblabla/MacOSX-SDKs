@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TextToSpeechKonaSupport.framework/Versions/Current/Frameworks/chsrom.dylib'
 current-version: 0
 compatibility-version: 0
@@ -10,7 +10,7 @@ exports:
                        __ZTI18ConverterInterface, __ZTI8ListNode, __ZTI9SWUnknown, 
                        __ZTS13QElementIndex, __ZTS13QElementParam, __ZTS15RomQueueElement, 
                        __ZTS18ConverterInterface, __ZTS8ListNode, __ZTS9SWUnknown ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AlphaDigit2MBCS, _CJKStrComparator, _UnixReg, __Z15getAnsiCharTypePKc, 
                        __Z7ucs2lenPKt, __ZN10StaticDict10aChiBig5TBE, __ZN10StaticDict10aChiHomoTBE, 
                        __ZN10StaticDict10aChiIndTB0E, __ZN10StaticDict10aChiIndTB1E, 

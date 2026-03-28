@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CardioHealth.framework/Versions/A/CardioHealth'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CHErrorDomain, __ZN12CardioHealth18getLabelForWorkoutENS_14CHWorkoutEventE, 
                        __ZN12CardioHealth26getWorkoutTypeWithLocationENS_13CHWorkoutTypeENS_21CHWorkoutLocationTypeE, 
                        __ZN13CHVO2MaxPrior13estimatePriorERKNSt3__16vectorI13VO2MaxSummaryNS0_9allocatorIS2_EEEERKN12CardioHealth13CHBodyMetricsEddRdPP7NSError, 
@@ -16,10 +16,10 @@ exports:
                        __ZN17CHVO2MaxEstimator17feedCalorieUpdateEddN12CardioHealth9GradeTypeEdbddb, 
                        __ZN17CHVO2MaxEstimator17feedHRMaxFeaturesERKN12CardioHealth15CHHRMaxFeaturesE, 
                        __ZN17CHVO2MaxEstimator18retrocomputeVO2MaxEdRKNSt3__16vectorI11VO2MaxInputNS0_9allocatorIS2_EEEERKNS1_I13VO2MaxSummaryNS3_IS8_EEEERKN12CardioHealth13CHBodyMetricsEddNSD_13CHWorkoutTypeENSD_23CHWorkoutSessionDetails4TypeER31VO2MaxRetrocomputeSessionResult, 
-                       __ZN17CHVO2MaxEstimator18setMaxMetsOverrideEf, __ZN17CHVO2MaxEstimator20feedRestingHeartRateEff, 
-                       __ZN17CHVO2MaxEstimator22feedStreamingHeartRateERKN12CardioHealth13HeartRateDataE, 
-                       __ZN17CHVO2MaxEstimator24feedWalkingHighHeartRateEd, __ZN17CHVO2MaxEstimatorC1ENSt3__110shared_ptrI21CHVO2MaxInputDelegateEENS1_I22CHVO2MaxOutputDelegateEENS1_I30CHVO2MaxDataCollectionDelegateEENS_11CacheInputsEjbi, 
-                       __ZN17CHVO2MaxEstimatorC2ENSt3__110shared_ptrI21CHVO2MaxInputDelegateEENS1_I22CHVO2MaxOutputDelegateEENS1_I30CHVO2MaxDataCollectionDelegateEENS_11CacheInputsEjbi, 
+                       __ZN17CHVO2MaxEstimator18setMaxMetsOverrideEf, __ZN17CHVO2MaxEstimator19feedHrAndMetsUpdateEdddd, 
+                       __ZN17CHVO2MaxEstimator20feedRestingHeartRateEff, __ZN17CHVO2MaxEstimator22feedStreamingHeartRateERKN12CardioHealth13HeartRateDataE, 
+                       __ZN17CHVO2MaxEstimator24feedWalkingHighHeartRateEd, __ZN17CHVO2MaxEstimatorC1ENSt3__110shared_ptrI21CHVO2MaxInputDelegateEENS1_I22CHVO2MaxOutputDelegateEENS1_I30CHVO2MaxDataCollectionDelegateEENS_13ConfigurationE, 
+                       __ZN17CHVO2MaxEstimatorC2ENSt3__110shared_ptrI21CHVO2MaxInputDelegateEENS1_I22CHVO2MaxOutputDelegateEENS1_I30CHVO2MaxDataCollectionDelegateEENS_13ConfigurationE, 
                        __ZN17CHVO2MaxEstimatorD1Ev, __ZN17CHVO2MaxEstimatorD2Ev, 
                        _kCHDefaultBodyMetrics, _kCHDefaultUserAge, _kCHDefaultUserBetaBlockerUse, 
                        _kCHDefaultUserCondition, _kCHDefaultUserHeightM, _kCHDefaultUserMaxHr, 

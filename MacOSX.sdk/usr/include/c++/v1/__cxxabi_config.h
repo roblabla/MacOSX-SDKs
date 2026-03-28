@@ -103,12 +103,27 @@
 #define _LIBCXXABI_DTOR_FUNC
 #endif
 
-#if defined(__APPLE__) && defined(__arm64e__) && __has_feature(ptrauth_qualifier)
+#if defined(__APPLE__) && __has_feature(ptrauth_qualifier)
 #  include <ptrauth.h>
-#  define _LIBCXXABI_PTRAUTH(__key, __address_discriminated, __discriminator)                                          \
-    __ptrauth(__key, __address_discriminated, __builtin_ptrauth_string_discriminator(__discriminator))
-#  define _LIBCXXABI_PTRAUTH_RESTRICTED_INTPTR(__key, __address_discriminated, __discriminator)                        \
-    __ptrauth_restricted_intptr(__key, __address_discriminated, __builtin_ptrauth_string_discriminator(__discriminator))
+// This work around is required to support divergence in spelling
+// during the ptrauth upstreaming process.
+#  if __has_feature(ptrauth_restricted_intptr_qualifier)
+#    define _LIBCXXABI_PTRAUTH_RESTRICTED_INTPTR_WRAPPER(...)                                   \
+         __ptrauth_restricted_intptr(__VA_ARGS__)
+#  else
+#    define _LIBCXXABI_PTRAUTH_RESTRICTED_INTPTR_WRAPPER(...)                                   \
+         __ptrauth(__VA_ARGS__)
+#  endif
+#  define _LIBCXXABI_PTRAUTH(__key, __address_discriminated, __discriminator)                   \
+    __ptrauth(                                                                                  \
+        __key,                                                                                  \
+        __address_discriminated,                                                                \
+        __builtin_ptrauth_string_discriminator(__discriminator))
+#  define _LIBCXXABI_PTRAUTH_RESTRICTED_INTPTR(__key, __address_discriminated, __discriminator) \
+    _LIBCXXABI_PTRAUTH_RESTRICTED_INTPTR_WRAPPER(\
+        __key,\
+        __address_discriminated,\
+        __builtin_ptrauth_string_discriminator(__discriminator))
 #else
 #  define _LIBCXXABI_PTRAUTH(__key, __address_discriminated, __discriminator)
 #  define _LIBCXXABI_PTRAUTH_RESTRICTED_INTPTR(__key, __address_discriminated, __discriminator)

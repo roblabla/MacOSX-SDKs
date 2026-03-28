@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WorkoutAnnouncements.framework/Versions/A/WorkoutAnnouncements'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s20WorkoutAnnouncements013VoiceFeedbackA4StepV2eeoiySbAC_ACtFZ', 
                        '_$s20WorkoutAnnouncements013VoiceFeedbackA4StepV4fromACs7Decoder_p_tKcfC', 
                        '_$s20WorkoutAnnouncements013VoiceFeedbackA4StepV6encode2toys7Encoder_p_tKF', 

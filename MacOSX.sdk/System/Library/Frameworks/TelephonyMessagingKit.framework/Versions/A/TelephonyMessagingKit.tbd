@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/TelephonyMessagingKit.framework/Versions/A/TelephonyMessagingKit'
 current-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s21TelephonyMessagingKit07CarrierB17CapabilityRequestV4fromACs7Decoder_p_tKcfC', 
                        '_$s21TelephonyMessagingKit07CarrierB17CapabilityRequestV6encode2toys7Encoder_p_tKF', 
                        '_$s21TelephonyMessagingKit07CarrierB17CapabilityRequestV9messageIDAA0B0O07MessageH0OvgZ', 
@@ -448,7 +446,7 @@ exports:
                        '_$s21TelephonyMessagingKit10RCSMessageV23DispositionNotificationVSQAAMc', 
                        '_$s21TelephonyMessagingKit10RCSMessageV23DispositionNotificationVSeAAMc', 
                        '_$s21TelephonyMessagingKit10RCSMessageV2eeoiySbAC_ACtFZ', 
-                       '_$s21TelephonyMessagingKit10RCSMessageV2id17cellularServiceID7content6handleAcA0dH0V_AA08CellulargH0VAC7ContentOAA9RCSHandleOtcfC', 
+                       '_$s21TelephonyMessagingKit10RCSMessageV2id17cellularServiceID7content6handle08originalH0AcA0dH0V_AA08CellulargH0VAC7ContentOAA9RCSHandleOAJSgtcfC', 
                        '_$s21TelephonyMessagingKit10RCSMessageV2idAA0D2IDVvg', '_$s21TelephonyMessagingKit10RCSMessageV2idAA0D2IDVvpMV', 
                        '_$s21TelephonyMessagingKit10RCSMessageV4TextV13stringLiteralAESS_tcfC', 
                        '_$s21TelephonyMessagingKit10RCSMessageV4TextV2eeoiySbAE_AEtFZ', 

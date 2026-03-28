@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-macos26.2 -target-variant x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature TypedThrows -enable-experimental-feature DebugDescriptionMacro -user-module-version 324.40.4 -module-name CryptoKit -package-name com.apple.security.CryptoKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-macos26.4 -target-variant x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature TypedThrows -enable-experimental-feature DebugDescriptionMacro -user-module-version 324.100.35 -module-name CryptoKit -package-name com.apple.security.CryptoKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Foundation
 import LocalAuthentication
 import Security.SecAccessControl
@@ -279,14 +279,10 @@ public struct HKDF<H> : Swift.Sendable where H : CryptoKit.HashFunction {
   public static func deriveKey<Salt>(inputKeyMaterial: CryptoKit.SymmetricKey, salt: Salt, outputByteCount: Swift.Int) -> CryptoKit.SymmetricKey where Salt : Foundation.DataProtocol
   @available(iOS 14.0, macOS 11.0, watchOS 7.0, tvOS 14.0, macCatalyst 14.0, *)
   public static func deriveKey(inputKeyMaterial: CryptoKit.SymmetricKey, outputByteCount: Swift.Int) -> CryptoKit.SymmetricKey
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, watchOS 7.0, tvOS 14.0, macCatalyst 14.0, *)
   public static func extract<Salt>(inputKeyMaterial: CryptoKit.SymmetricKey, salt: Salt?) -> CryptoKit.HashedAuthenticationCode<H> where Salt : Foundation.DataProtocol
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, watchOS 7.0, tvOS 14.0, macCatalyst 14.0, *)
   public static func expand<PRK, Info>(pseudoRandomKey prk: PRK, info: Info?, outputByteCount: Swift.Int) -> CryptoKit.SymmetricKey where PRK : Foundation.ContiguousBytes, Info : Foundation.DataProtocol
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, watchOS 26.0, tvOS 26.0, macCatalyst 26.0, visionOS 2.0, *)
 public typealias SHA2_256 = CryptoKit.SHA256
@@ -339,12 +335,8 @@ extension CryptoKit.AES {
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)
 public enum ChaChaPoly : Swift.Sendable {
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func seal<Plaintext, AuthenticatedData>(_ message: Plaintext, using key: CryptoKit.SymmetricKey, nonce: CryptoKit.ChaChaPoly.Nonce? = nil, authenticating authenticatedData: AuthenticatedData) throws -> CryptoKit.ChaChaPoly.SealedBox where Plaintext : Foundation.DataProtocol, AuthenticatedData : Foundation.DataProtocol
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func seal<Plaintext>(_ message: Plaintext, using key: CryptoKit.SymmetricKey, nonce: CryptoKit.ChaChaPoly.Nonce? = nil) throws -> CryptoKit.ChaChaPoly.SealedBox where Plaintext : Foundation.DataProtocol
-  #endif
   public static func open<AuthenticatedData>(_ sealedBox: CryptoKit.ChaChaPoly.SealedBox, using key: CryptoKit.SymmetricKey, authenticating authenticatedData: AuthenticatedData) throws -> Foundation.Data where AuthenticatedData : Foundation.DataProtocol
   public static func open(_ sealedBox: CryptoKit.ChaChaPoly.SealedBox, using key: CryptoKit.SymmetricKey) throws -> Foundation.Data
 }
@@ -438,12 +430,8 @@ extension CryptoKit.HashFunction {
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)
 extension CryptoKit.AES {
   public enum GCM : Swift.Sendable {
-    #if compiler(>=5.3) && $NonescapableTypes
     public static func seal<Plaintext, AuthenticatedData>(_ message: Plaintext, using key: CryptoKit.SymmetricKey, nonce: CryptoKit.AES.GCM.Nonce? = nil, authenticating authenticatedData: AuthenticatedData) throws -> CryptoKit.AES.GCM.SealedBox where Plaintext : Foundation.DataProtocol, AuthenticatedData : Foundation.DataProtocol
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public static func seal<Plaintext>(_ message: Plaintext, using key: CryptoKit.SymmetricKey, nonce: CryptoKit.AES.GCM.Nonce? = nil) throws -> CryptoKit.AES.GCM.SealedBox where Plaintext : Foundation.DataProtocol
-    #endif
     public static func open<AuthenticatedData>(_ sealedBox: CryptoKit.AES.GCM.SealedBox, using key: CryptoKit.SymmetricKey, authenticating authenticatedData: AuthenticatedData) throws -> Foundation.Data where AuthenticatedData : Foundation.DataProtocol
     public static func open(_ sealedBox: CryptoKit.AES.GCM.SealedBox, using key: CryptoKit.SymmetricKey) throws -> Foundation.Data
   }
@@ -461,11 +449,9 @@ extension CryptoKit.AES.GCM {
     public var nonce: CryptoKit.AES.GCM.Nonce {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var combined: Foundation.Data? {
       get
     }
-    #endif
     @usableFromInline
     internal init(combined: Foundation.Data)
     @inlinable public init<D>(combined: D) throws where D : Foundation.DataProtocol {
@@ -735,9 +721,7 @@ extension CryptoKit.XWingMLKEM768X25519 {
 @available(iOS 26.0, macOS 26.0, watchOS 26.0, tvOS 26.0, macCatalyst 26.0, visionOS 26.0, *)
 extension CryptoKit.XWingMLKEM768X25519.PrivateKey : CryptoKit.HPKEKEMPrivateKeyGeneration {
   public init() throws
-  #if compiler(>=5.3) && $NonescapableTypes
   public init<D>(seedRepresentation: D, publicKey: CryptoKit.XWingMLKEM768X25519.PublicKey?) throws where D : Foundation.DataProtocol
-  #endif
   public init<D>(integrityCheckedRepresentation: D) throws where D : Foundation.DataProtocol
 }
 @available(iOS 26.0, macOS 26.0, watchOS 26.0, tvOS 26.0, macCatalyst 26.0, visionOS 26.0, *)
@@ -774,12 +758,8 @@ extension CryptoKit.SecureEnclave {
     public struct PrivateKey : Swift.Sendable {
       public let publicKey: CryptoKit.MLDSA65.PublicKey
       public let dataRepresentation: Foundation.Data
-      #if compiler(>=5.3) && $NonescapableTypes
       public init(accessControl: Security.SecAccessControl = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly, [], nil)!, authenticationContext: LocalAuthentication.LAContext? = nil) throws
-      #endif
-      #if compiler(>=5.3) && $NonescapableTypes
       public init<D>(dataRepresentation: D, authenticationContext: LocalAuthentication.LAContext? = nil) throws where D : Foundation.DataProtocol
-      #endif
       public func signature<D>(for data: D) throws -> Foundation.Data where D : Foundation.DataProtocol
       public func signature<D, C>(for data: D, context: C) throws -> Foundation.Data where D : Foundation.DataProtocol, C : Foundation.DataProtocol
     }
@@ -791,12 +771,8 @@ extension CryptoKit.SecureEnclave {
     public struct PrivateKey : Swift.Sendable {
       public let publicKey: CryptoKit.MLDSA87.PublicKey
       public let dataRepresentation: Foundation.Data
-      #if compiler(>=5.3) && $NonescapableTypes
       public init(accessControl: Security.SecAccessControl = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly, [], nil)!, authenticationContext: LocalAuthentication.LAContext? = nil) throws
-      #endif
-      #if compiler(>=5.3) && $NonescapableTypes
       public init<D>(dataRepresentation: D, authenticationContext: LocalAuthentication.LAContext? = nil) throws where D : Foundation.DataProtocol
-      #endif
       public func signature<D>(for data: D) throws -> Foundation.Data where D : Foundation.DataProtocol
       public func signature<D, C>(for data: D, context: C) throws -> Foundation.Data where D : Foundation.DataProtocol, C : Foundation.DataProtocol
     }
@@ -817,9 +793,7 @@ extension CryptoKit.MLDSA65 {
   }
   public struct PrivateKey : Swift.Sendable {
     public init() throws
-    #if compiler(>=5.3) && $NonescapableTypes
     public init<D>(seedRepresentation: D, publicKey: CryptoKit.MLDSA65.PublicKey?) throws where D : Foundation.DataProtocol
-    #endif
     public var seedRepresentation: Foundation.Data {
       get
     }
@@ -849,9 +823,7 @@ extension CryptoKit.MLDSA87 {
   }
   public struct PrivateKey : Swift.Sendable {
     public init() throws
-    #if compiler(>=5.3) && $NonescapableTypes
     public init<D>(seedRepresentation: D, publicKey: CryptoKit.MLDSA87.PublicKey?) throws where D : Foundation.DataProtocol
-    #endif
     public var seedRepresentation: Foundation.Data {
       get
     }
@@ -881,9 +853,7 @@ extension CryptoKit.MLKEM768 {
   public struct PrivateKey : CryptoKit.KEMPrivateKey {
     public static func generate() throws -> CryptoKit.MLKEM768.PrivateKey
     public init() throws
-    #if compiler(>=5.3) && $NonescapableTypes
     public init<D>(seedRepresentation: D, publicKey: CryptoKit.MLKEM768.PublicKey?) throws where D : Foundation.DataProtocol
-    #endif
     public var seedRepresentation: Foundation.Data {
       get
     }
@@ -914,9 +884,7 @@ extension CryptoKit.MLKEM1024 {
   public struct PrivateKey : CryptoKit.KEMPrivateKey {
     public static func generate() throws -> CryptoKit.MLKEM1024.PrivateKey
     public init() throws
-    #if compiler(>=5.3) && $NonescapableTypes
     public init<D>(seedRepresentation: D, publicKey: CryptoKit.MLKEM1024.PublicKey?) throws where D : Foundation.DataProtocol
-    #endif
     public var seedRepresentation: Foundation.Data {
       get
     }
@@ -1123,28 +1091,20 @@ extension CryptoKit.SecureEnclave {
       public struct PrivateKey : Swift.Sendable {
         public let publicKey: CryptoKit.P256.Signing.PublicKey
         public let dataRepresentation: Foundation.Data
-        #if compiler(>=5.3) && $NonescapableTypes
         @available(iOS 13.0, macOS 10.15, macCatalyst 13.0, *)
         public init(dataRepresentation: Foundation.Data, authenticationContext: LocalAuthentication.LAContext? = nil) throws
-        #endif
-        #if compiler(>=5.3) && $NonescapableTypes
         @available(iOS 13.0, macOS 10.15, macCatalyst 13.0, *)
         public init(compactRepresentable: Swift.Bool = true, accessControl: Security.SecAccessControl = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly, [], nil)!, authenticationContext: LocalAuthentication.LAContext? = nil) throws
-        #endif
       }
     }
     public enum KeyAgreement : Swift.Sendable {
       public struct PrivateKey : Swift.Sendable {
         public let publicKey: CryptoKit.P256.KeyAgreement.PublicKey
         public let dataRepresentation: Foundation.Data
-        #if compiler(>=5.3) && $NonescapableTypes
         @available(iOS 13.0, macOS 10.15, macCatalyst 13.0, *)
         public init(dataRepresentation: Foundation.Data, authenticationContext: LocalAuthentication.LAContext? = nil) throws
-        #endif
-        #if compiler(>=5.3) && $NonescapableTypes
         @available(iOS 13.0, macOS 10.15, macCatalyst 13.0, *)
         public init(compactRepresentable: Swift.Bool = true, accessControl: Security.SecAccessControl = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly, [], nil)!, authenticationContext: LocalAuthentication.LAContext? = nil) throws
-        #endif
       }
     }
   }
@@ -1156,12 +1116,8 @@ extension CryptoKit.SecureEnclave {
       public let publicKey: CryptoKit.MLKEM768.PublicKey
       public let dataRepresentation: Foundation.Data
       public static func generate() throws -> CryptoKit.SecureEnclave.MLKEM768.PrivateKey
-      #if compiler(>=5.3) && $NonescapableTypes
       public init(accessControl: Security.SecAccessControl = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly, [], nil)!, authenticationContext: LocalAuthentication.LAContext? = nil) throws
-      #endif
-      #if compiler(>=5.3) && $NonescapableTypes
       public init<D>(dataRepresentation: D, authenticationContext: LocalAuthentication.LAContext? = nil) throws where D : Foundation.DataProtocol
-      #endif
       public func decapsulate<D>(_ encapsulated: D) throws -> CryptoKit.SymmetricKey where D : Foundation.DataProtocol
       @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, macCatalyst 26.0, *)
       public typealias PublicKey = CryptoKit.MLKEM768.PublicKey
@@ -1175,12 +1131,8 @@ extension CryptoKit.SecureEnclave {
       public let publicKey: CryptoKit.MLKEM1024.PublicKey
       public let dataRepresentation: Foundation.Data
       public static func generate() throws -> CryptoKit.SecureEnclave.MLKEM1024.PrivateKey
-      #if compiler(>=5.3) && $NonescapableTypes
       public init(accessControl: Security.SecAccessControl = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly, [], nil)!, authenticationContext: LocalAuthentication.LAContext? = nil) throws
-      #endif
-      #if compiler(>=5.3) && $NonescapableTypes
       public init<D>(dataRepresentation: D, authenticationContext: LocalAuthentication.LAContext? = nil) throws where D : Foundation.DataProtocol
-      #endif
       public func decapsulate<D>(_ encapsulated: D) throws -> CryptoKit.SymmetricKey where D : Foundation.DataProtocol
       @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, macCatalyst 26.0, *)
       public typealias PublicKey = CryptoKit.MLKEM1024.PublicKey
@@ -1200,11 +1152,9 @@ extension CryptoKit.P256 {
       public init(pemRepresentation: Swift.String) throws
       @available(iOS 14.0, macOS 11.0, watchOS 7.0, tvOS 14.0, macCatalyst 14.0, *)
       public init<Bytes>(derRepresentation: Bytes) throws where Bytes : Swift.RandomAccessCollection, Bytes.Element == Swift.UInt8
-      #if compiler(>=5.3) && $NonescapableTypes
       public var compactRepresentation: Foundation.Data? {
         get
       }
-      #endif
       public var rawRepresentation: Foundation.Data {
         get
       }
@@ -1265,11 +1215,9 @@ extension CryptoKit.P256 {
       public init(pemRepresentation: Swift.String) throws
       @available(iOS 14.0, macOS 11.0, watchOS 7.0, tvOS 14.0, macCatalyst 14.0, *)
       public init<Bytes>(derRepresentation: Bytes) throws where Bytes : Swift.RandomAccessCollection, Bytes.Element == Swift.UInt8
-      #if compiler(>=5.3) && $NonescapableTypes
       public var compactRepresentation: Foundation.Data? {
         get
       }
-      #endif
       public var rawRepresentation: Foundation.Data {
         get
       }
@@ -1330,11 +1278,9 @@ extension CryptoKit.P384 {
       public init(pemRepresentation: Swift.String) throws
       @available(iOS 14.0, macOS 11.0, watchOS 7.0, tvOS 14.0, macCatalyst 14.0, *)
       public init<Bytes>(derRepresentation: Bytes) throws where Bytes : Swift.RandomAccessCollection, Bytes.Element == Swift.UInt8
-      #if compiler(>=5.3) && $NonescapableTypes
       public var compactRepresentation: Foundation.Data? {
         get
       }
-      #endif
       public var rawRepresentation: Foundation.Data {
         get
       }
@@ -1395,11 +1341,9 @@ extension CryptoKit.P384 {
       public init(pemRepresentation: Swift.String) throws
       @available(iOS 14.0, macOS 11.0, watchOS 7.0, tvOS 14.0, macCatalyst 14.0, *)
       public init<Bytes>(derRepresentation: Bytes) throws where Bytes : Swift.RandomAccessCollection, Bytes.Element == Swift.UInt8
-      #if compiler(>=5.3) && $NonescapableTypes
       public var compactRepresentation: Foundation.Data? {
         get
       }
-      #endif
       public var rawRepresentation: Foundation.Data {
         get
       }
@@ -1460,11 +1404,9 @@ extension CryptoKit.P521 {
       public init(pemRepresentation: Swift.String) throws
       @available(iOS 14.0, macOS 11.0, watchOS 7.0, tvOS 14.0, macCatalyst 14.0, *)
       public init<Bytes>(derRepresentation: Bytes) throws where Bytes : Swift.RandomAccessCollection, Bytes.Element == Swift.UInt8
-      #if compiler(>=5.3) && $NonescapableTypes
       public var compactRepresentation: Foundation.Data? {
         get
       }
-      #endif
       public var rawRepresentation: Foundation.Data {
         get
       }
@@ -1525,11 +1467,9 @@ extension CryptoKit.P521 {
       public init(pemRepresentation: Swift.String) throws
       @available(iOS 14.0, macOS 11.0, watchOS 7.0, tvOS 14.0, macCatalyst 14.0, *)
       public init<Bytes>(derRepresentation: Bytes) throws where Bytes : Swift.RandomAccessCollection, Bytes.Element == Swift.UInt8
-      #if compiler(>=5.3) && $NonescapableTypes
       public var compactRepresentation: Foundation.Data? {
         get
       }
-      #endif
       public var rawRepresentation: Foundation.Data {
         get
       }

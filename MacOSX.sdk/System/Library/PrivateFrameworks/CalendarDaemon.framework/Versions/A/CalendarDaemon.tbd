@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CalendarDaemon.framework/Versions/A/CalendarDaemon'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CADAccountActionDescription, _CADAppEntityHandle, _CADCatchUpIntegrationSyncRequestedNotification, 
                        _CADCopyEntityInDatabase, _CADDatabaseStorageUsageAttachmentsKey, 
                        _CADDatabaseStorageUsageEventsKey, _CADEKPersistentEventDefaultPropertiesToLoad, 
@@ -27,9 +25,13 @@ exports:
                        _CalRequestAuthorizationForServiceWithCompletion, _GetSharedXPCInterfaceForCADClientInterface, 
                        _GetSharedXPCInterfaceForCADInterface, __CADDaemonStartedNotification, 
                        __CADDeleteEntity, __CADGetEntity, __CalEntitySetProperty, 
-                       _clientIdentifier, _kCalDBCurrentSpotlightIndexVersion, _kCalDBLastABCReport, 
-                       _kCalDBLastSpotlightError, _kCalDBLastSpotlightIndexVersion, 
-                       _kCalDBLastSpotlightReindexDate, _kEventKitTCCUIFullAccessNotificationClientBundleIDKey ]
+                       _clientIdentifier, _kCADSpotlightIndexerLongReindexRetryInterval, 
+                       _kCADSpotlightIndexerReindexBatchSize, _kCADSpotlightIndexerShortReindexRetryInterval, 
+                       _kCalDBCurrentSpotlightIndexCalendarsVersion, _kCalDBCurrentSpotlightIndexEventsVersion, 
+                       _kCalDBLastABCReport, _kCalDBLastSpotlightIndexCalendarsVersion, 
+                       _kCalDBLastSpotlightIndexEventsVersion, _kCalDBLastSpotlightReindexDate, 
+                       _kCalDBReindexAttemptsStartedWithoutProgress, _kCalDBReindexState, 
+                       _kCalIndexedCalendarUniqueIDPrefix, _kEventKitTCCUIFullAccessNotificationClientBundleIDKey ]
     objc-classes:    [ CADAccountAccessHandler, CADAppEntityNotifierModule, CADCalendarDatabaseRedactor, 
                        CADCalendarItemsWithExternalIdentifierPredicate, CADChangeTrackingClientId, 
                        CADCompoundFilter, CADContactEventsPredicate, CADDatabaseInitializationOptions, 
@@ -45,15 +47,16 @@ exports:
                        CADNotificationCenterVisibleEventsPredicate, CADOperationProxy, 
                        CADPredicate, CADPropertyFilter, CADPropertySearchPredicate, 
                        CADRemovedEventWrapper, CADRespondedEventsPredicate, CADRouteHypothesis, 
-                       CADSequenceToken, CADServer, CADSpotlightIndexer, CADSpotlightMockDefaults, 
-                       CADSpotlightServerModule, CADStatCollectionContext, CADStatCollector, 
-                       CADStateDumpModule, CADStatsCalendars, CADStatsCallback, CADStatsEvents, 
-                       CADStatsOccurrences, CADStatsPreferences, CADStatsReminders, 
-                       CADStatsStores, CADSubscribedCalendarEventsPredicate, CADSyntheticRouteHypothesizerCache, 
-                       CADTravelEventsPredicate, CADUnacknowledgedEventsPredicate, 
-                       CADUnalertedEventsPredicate, CADUpNextEventsPredicate, CADUpcomingEventsPredicate, 
-                       CADXPCImplementation, CADXPCProxyHelper, CalDAVTrafficLogScrubber, 
-                       ClientConnection, ClientIdentity, EKAlarmOccurrence, EKMasterEventsPredicate, 
+                       CADSequenceToken, CADServer, CADSpotlightDefaults, CADSpotlightIndexer, 
+                       CADSpotlightMockDefaults, CADSpotlightServerModule, CADStatCollectionContext, 
+                       CADStatCollector, CADStateDumpModule, CADStatsCalendars, CADStatsCallback, 
+                       CADStatsEvents, CADStatsOccurrences, CADStatsPreferences, 
+                       CADStatsReminders, CADStatsStores, CADSubscribedCalendarEventsPredicate, 
+                       CADSyntheticRouteHypothesizerCache, CADTravelEventsPredicate, 
+                       CADUnacknowledgedEventsPredicate, CADUnalertedEventsPredicate, 
+                       CADUpNextEventsPredicate, CADUpcomingEventsPredicate, CADXPCImplementation, 
+                       CADXPCProxyHelper, CalDAVTrafficLogScrubber, ClientConnection, 
+                       ClientIdentity, EKAlarmOccurrence, EKMasterEventsPredicate, 
                        EKPredicate, EKScheduleAgentClientEventsPredicate ]
     objc-ivars:      [ CADXPCImplementation._conn, EKPredicate._timeZone, EKPredicate._uuid ]
 ...

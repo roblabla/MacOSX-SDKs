@@ -36,10 +36,10 @@ HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierAppleMoveTime A
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierAppleStandTime API_AVAILABLE(ios(13.0), watchos(6.0), macCatalyst(13.0), macos(13.0), visionos(1.0));                      // min, Cumulative
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierBasalEnergyBurned API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0), visionos(1.0));                    // kcal, Cumulative
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierCrossCountrySkiingSpeed API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0));            // m/s, Discrete (Arithmetic)
-HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierCyclingCadence API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0), visionos(1.0));                     // count/min, Discrete (Arithmetic)
+HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierCyclingCadence API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0), visionos(1.0));                     // count/min, Discrete (Temporally Weighted)
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierCyclingFunctionalThresholdPower API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0), visionos(1.0));    // W, Discrete (Arithmetic)
-HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierCyclingPower API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0), visionos(1.0));                       // W, Discrete (Arithmetic)
-HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierCyclingSpeed API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0), visionos(1.0));                       // m/s, Discrete (Arithmetic)
+HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierCyclingPower API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0), visionos(1.0));                       // W, Discrete (Temporally Weighted)
+HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierCyclingSpeed API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0), visionos(1.0));                       // m/s, Discrete (Temporally Weighted)
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierDistanceCrossCountrySkiing API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0));         // m, Cumulative
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierDistanceCycling API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0), visionos(1.0));                      // m, Cumulative
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierDistanceDownhillSnowSports API_AVAILABLE(ios(11.2), watchos(4.2), macCatalyst(13.0), macos(13.0), visionos(1.0));          // m, Cumulative
@@ -74,9 +74,9 @@ HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierHeartRate API_A
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierHeartRateRecoveryOneMinute API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0), visionos(1.0));          // count/min, Discrete (Arithmetic)
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierHeartRateVariabilitySDNN API_AVAILABLE(ios(11.0), watchos(4.0), macCatalyst(13.0), macos(13.0), visionos(1.0));            // ms, Discrete (Arithmetic)
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierPeripheralPerfusionIndex API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0), visionos(1.0));             // %, Discrete (Arithmetic)
-HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierRestingHeartRate API_AVAILABLE(ios(11.0), watchos(4.0), macCatalyst(13.0), macos(13.0), visionos(1.0));                    // count/min, Discrete (Arithmetic)
+HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierRestingHeartRate API_AVAILABLE(ios(11.0), watchos(4.0), macCatalyst(13.0), macos(13.0), visionos(1.0));                    // count/min, Discrete (Temporally Weighted)
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierVO2Max API_AVAILABLE(ios(11.0), watchos(4.0), macCatalyst(13.0), macos(13.0), visionos(1.0));                              // ml/(kg*min), Discrete (Arithmetic)
-HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierWalkingHeartRateAverage API_AVAILABLE(ios(11.0), watchos(4.0), macCatalyst(13.0), macos(13.0), visionos(1.0));             // count/min, Discrete (Arithmetic)
+HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierWalkingHeartRateAverage API_AVAILABLE(ios(11.0), watchos(4.0), macCatalyst(13.0), macos(13.0), visionos(1.0));             // count/min, Discrete (Temporally Weighted)
 
 // Mobility
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierAppleWalkingSteadiness API_AVAILABLE(ios(15.0), watchos(8.0), macCatalyst(15.0), macos(13.0), visionos(1.0));              // %, Discrete (Arithmetic)
@@ -174,12 +174,12 @@ HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierHeadphoneAudioE
 
 // Heart
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierHighHeartRateEvent API_AVAILABLE(ios(12.2), watchos(5.2), macCatalyst(13.0), macos(13.0), visionos(1.0));                  // HKCategoryValue
-HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierHypertensionEvent API_AVAILABLE(ios(26.2), watchos(26.2), macCatalyst(26.2), macos(26.2), visionos(26.2));                  // HKCategoryValue
+HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierHypertensionEvent API_AVAILABLE(ios(26.2), watchos(26.2), macCatalyst(26.2), macos(26.2), visionos(26.2));                 // HKCategoryValue
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierIrregularHeartRhythmEvent API_AVAILABLE(ios(12.2), watchos(5.2), macCatalyst(13.0), macos(13.0), visionos(1.0));           // HKCategoryValue
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierLowCardioFitnessEvent API_AVAILABLE(ios(14.3), watchos(7.2), macCatalyst(14.3), macos(13.0), visionos(1.0));               // HKCategoryValueLowCardioFitnessEvent
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierLowHeartRateEvent API_AVAILABLE(ios(12.2), watchos(5.2), macCatalyst(13.0), macos(13.0), visionos(1.0));                   // HKCategoryValue
 
-// Mindfulness
+// Mental Wellbeing
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierMindfulSession API_AVAILABLE(ios(10.0), watchos(3.0), macCatalyst(13.0), macos(13.0), visionos(1.0));                      // HKCategoryValue
 
 // Mobility
@@ -295,7 +295,7 @@ HK_EXTERN HKDocumentTypeIdentifier const HKDocumentTypeIdentifierCDA API_AVAILAB
 
 typedef NSString * HKScoredAssessmentTypeIdentifier NS_STRING_ENUM;
 
-// Mindfulness
+// Mental Wellbeing
 HK_EXTERN HKScoredAssessmentTypeIdentifier const HKScoredAssessmentTypeIdentifierGAD7 API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(17.0), macos(14.0), visionos(2.0));
 HK_EXTERN HKScoredAssessmentTypeIdentifier const HKScoredAssessmentTypeIdentifierPHQ9 API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(17.0), macos(14.0), visionos(2.0));
 
@@ -327,7 +327,8 @@ HK_EXTERN NSString * const HKVisionPrescriptionTypeIdentifier API_AVAILABLE(ios(
 /*   HKStateofMind Identifiers   */
 /*-------------------------------*/
 
-// Mindfulness
+// Mental Wellbeing
+/// A state of mind type that records the user's mental health
 HK_EXTERN NSString * const HKDataTypeIdentifierStateOfMind API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(17.0), macos(14.0), visionos(2.0));
 
 /*---------------------------------------*/
@@ -335,6 +336,7 @@ HK_EXTERN NSString * const HKDataTypeIdentifierStateOfMind API_AVAILABLE(ios(18.
 /*---------------------------------------*/
 
 // Medication Tracking
+/// A medication dose event type that represents a single dose administration for a medication.
 HK_EXTERN NSString * const HKMedicationDoseEventTypeIdentifierMedicationDoseEvent API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0));
 
 /*-------------------------------------------*/
@@ -342,6 +344,7 @@ HK_EXTERN NSString * const HKMedicationDoseEventTypeIdentifierMedicationDoseEven
 /*-------------------------------------------*/
 
 // Medication Tracking
+/// The user annotated medication type that represents a medication concept.
 HK_EXTERN NSString * const HKDataTypeIdentifierUserAnnotatedMedicationConcept API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0));
 
 /*----------------*/

@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/RemoteUI.framework/Versions/A/RemoteUI'
 current-version: 4
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation10URLRequestV8RemoteUIE03addC9UIHeadersyyF', 
                        '_$s10Foundation4DataV8RemoteUIE10xmlElementSo13RUIXMLElementCyKF', 
                        '_$s15ScriptInterface8RemoteUI17ScriptableElementPTl', '_$s5Value8RemoteUI19DecodingUserInfoKeyPTl', 
@@ -90,7 +90,23 @@ exports:
                        '_$s8RemoteUI0A14UIHookResponseV17additionalPayloadSDySSypGSgvs', 
                        '_$s8RemoteUI0A14UIHookResponseV23withContinuationRequestyAC10Foundation10URLRequestVFZ', 
                        '_$s8RemoteUI0A14UIHookResponseVMa', '_$s8RemoteUI0A14UIHookResponseVMn', 
-                       '_$s8RemoteUI0A14UIHookResponseVN', '_$s8RemoteUI0A19UIDataSourceContextV10clientInfoSDySSypGvg', 
+                       '_$s8RemoteUI0A14UIHookResponseVN', '_$s8RemoteUI0A18UIAppKitControllerC10dataSource5hooksAcA0a6UIDataG0_p_AA0A6UIHook_pSgtcfC', 
+                       '_$s8RemoteUI0A18UIAppKitControllerC10dataSource5hooksAcA0a6UIDataG0_p_AA0A6UIHook_pSgtcfCTj', 
+                       '_$s8RemoteUI0A18UIAppKitControllerC10dataSource5hooksAcA0a6UIDataG0_p_AA0A6UIHook_pSgtcfCTq', 
+                       '_$s8RemoteUI0A18UIAppKitControllerC10dataSource5hooksAcA0a6UIDataG0_p_AA0A6UIHook_pSgtcfc', 
+                       '_$s8RemoteUI0A18UIAppKitControllerC10dataSourceAA0a6UIDataG0_pvg', 
+                       '_$s8RemoteUI0A18UIAppKitControllerC10dataSourceAA0a6UIDataG0_pvpMV', 
+                       '_$s8RemoteUI0A18UIAppKitControllerC4loadyy10Foundation3URLVYaKF', 
+                       '_$s8RemoteUI0A18UIAppKitControllerC4loadyy10Foundation3URLVYaKFTu', 
+                       '_$s8RemoteUI0A18UIAppKitControllerC8hostViewSo6NSViewCSgvM', 
+                       '_$s8RemoteUI0A18UIAppKitControllerC8hostViewSo6NSViewCSgvg', 
+                       '_$s8RemoteUI0A18UIAppKitControllerC8hostViewSo6NSViewCSgvpMV', 
+                       '_$s8RemoteUI0A18UIAppKitControllerC8hostViewSo6NSViewCSgvs', 
+                       '_$s8RemoteUI0A18UIAppKitControllerCMa', '_$s8RemoteUI0A18UIAppKitControllerCMm', 
+                       '_$s8RemoteUI0A18UIAppKitControllerCMn', '_$s8RemoteUI0A18UIAppKitControllerCMo', 
+                       '_$s8RemoteUI0A18UIAppKitControllerCMu', '_$s8RemoteUI0A18UIAppKitControllerCN', 
+                       '_$s8RemoteUI0A18UIAppKitControllerCfD', '_$s8RemoteUI0A18UIAppKitControllerCfd', 
+                       '_$s8RemoteUI0A19UIDataSourceContextV10clientInfoSDySSypGvg', 
                        '_$s8RemoteUI0A19UIDataSourceContextV10clientInfoSDySSypGvpMV', 
                        '_$s8RemoteUI0A19UIDataSourceContextV18postbackDictionarySDySSypGvg', 
                        '_$s8RemoteUI0A19UIDataSourceContextV18postbackDictionarySDySSypGvpMV', 
@@ -677,6 +693,7 @@ exports:
                        '_$sSo3RUIC8RemoteUIE12XMLUIDecoderCMn', '_$sSo3RUIC8RemoteUIE12XMLUIDecoderCMo', 
                        '_$sSo3RUIC8RemoteUIE12XMLUIDecoderCMu', '_$sSo3RUIC8RemoteUIE12XMLUIDecoderCN', 
                        '_$sSo3RUIC8RemoteUIE12XMLUIDecoderCfD', '_$sSo3RUIC8RemoteUIE12XMLUIDecoderCfd', 
+                       '_$sSo3RUIC8RemoteUIE6LoggerO13compressedXML2osADVvgZ', '_$sSo3RUIC8RemoteUIE6LoggerO13compressedXML2osADVvpZMV', 
                        '_$sSo3RUIC8RemoteUIE6LoggerO17internalAnalytics2osADVvgZ', 
                        '_$sSo3RUIC8RemoteUIE6LoggerO17internalAnalytics2osADVvpZMV', 
                        '_$sSo3RUIC8RemoteUIE6LoggerO3xml2osADVvgZ', '_$sSo3RUIC8RemoteUIE6LoggerO3xml2osADVvpZMV', 

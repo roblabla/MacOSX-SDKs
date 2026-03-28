@@ -1,19 +1,16 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore'
-current-version: 1193.49.3
+current-version: 1195.9
 compatibility-version: 1.2
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage', 
                        '/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo', 
                        '/usr/lib/libobjc.A.dylib' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CAAtomGetString, _CABackingStoreBeginUpdate, _CABackingStoreBeginUpdateWithFormat, 
                        _CABackingStoreCollect, _CABackingStoreCollectBlocking, _CABackingStoreCollectWithCompletionHandler, 
                        _CABackingStoreCopyCGImage, _CABackingStoreCopyColorSpace, 
@@ -299,7 +296,7 @@ exports:
                        _CARenderUpdateSetDisplayType, _CARenderUpdateSetDisplays, 
                        _CARenderUpdateSetEDRAttributes, _CARenderUpdateSetExcludedLayerIdentifiers, 
                        _CARenderUpdateSetGlobalLightAngle, _CARenderUpdateSetGlobalLightParameters, 
-                       _CARenderUpdateSetInterval, _CARenderUpdateSetIsDisplayStream, 
+                       _CARenderUpdateSetGreedy, _CARenderUpdateSetInterval, _CARenderUpdateSetIsDisplayStream, 
                        _CARenderUpdateSetIsolated, _CARenderUpdateSetProtectionOptions, 
                        _CARenderUpdateSetRect, _CARenderUpdateSetRegion, _CARenderUpdateSetSkipsBackdropCollect, 
                        _CARenderUpdateSetStartTime, _CARenderUpdateSetTonemapAccelerator, 
@@ -676,7 +673,7 @@ exports:
                        CAStateAddElement._object, CAStateElement._source, CAStateElement._target, 
                        CAStateRemoveElement._keyPath, CAStateRemoveElement._object, 
                        CAValueFunction._impl, CAValueFunction._string ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CADeferLockAcquire, _CADeferLockRelease, _CAFramingSlotCreate, 
                        _CAFramingSlotGetData, _CAFramingSlotGetImage, _CAFramingSlotGetTypeID, 
                        _CAGetRuntimeSeparatedVersion, _CALayerRegisterSeparatedCallbacks, 
@@ -711,8 +708,9 @@ exports:
                        _CARenderUpdateSetActiveRemoteEffectLayersForContext, _CARenderUpdateSetCanCreateFlattenSurface, 
                        _CARenderUpdateSetCurrentRenderSeparatedId, _CARenderUpdateSetDirtyHandles, 
                        _CARenderUpdateSetFlattenBackdrops, _CARenderUpdateSetIgnoreFlattenCache, 
-                       _CARenderUpdateSetIsSnapshot, _CARenderUpdateSetRegionAndInvalidateBackdrops, 
-                       _CARenderUpdateSetRegionAndInvalidateBackdropsWithForceOption, 
+                       _CARenderUpdateSetIsSnapshot, _CARenderUpdateSetLFCEnabled, 
+                       _CARenderUpdateSetNextErrorMargin, _CARenderUpdateSetNextExpectedTimestamp, 
+                       _CARenderUpdateSetRegionAndInvalidateBackdrops, _CARenderUpdateSetRegionAndInvalidateBackdropsWithForceOption, 
                        _CARenderUpdateSetSecureIndicatorsEnabled, _CARenderUpdateSetUseSkylightDisplayAttributes, 
                        _CARenderUpdateSetWantsSwapAnnouncement, _CASeparatedOptionMetadataCreate, 
                        _CASeparatedOptionMetadataGetDefaultValue, _CASeparatedOptionMetadataGetName, 
@@ -744,7 +742,7 @@ exports:
                        CALayerHostBindingsRenderReport, CARemoteEffectGroup, CARemotePropertyEffect, 
                        CASecureFlipBookLayer, CASecureIndicatorLayer, CAStereoMetalTexture, 
                        CAWindowServerDisplayManager ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _CAImageQueueGetNominalFrameRate, _CAImageQueueSetNominalFrameRate ]
     objc-classes:    [ CACarPlayRegionLayer, CACloningTerminatorLayer, CADynamicFrameRateSource ]
 ...

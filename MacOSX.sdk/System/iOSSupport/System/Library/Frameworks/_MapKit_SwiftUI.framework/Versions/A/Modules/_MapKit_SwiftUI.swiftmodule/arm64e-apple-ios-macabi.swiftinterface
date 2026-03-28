@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2504.22.10.2.7 -module-name _MapKit_SwiftUI
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2511.24.7.17.30 -module-name _MapKit_SwiftUI
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import CoreLocation
 import DeveloperToolsSupport
 import Foundation
@@ -47,9 +47,7 @@ extension _MapKit_SwiftUI.PointOfInterestCategories : Swift.ExpressibleByArrayLi
   associatedtype Body : _MapKit_SwiftUI.MapContent
   @_MapKit_SwiftUI.MapContentBuilder @_Concurrency.MainActor @preconcurrency var body: Self.Body { get }
   @_Concurrency.MainActor @preconcurrency static func _makeMapContent(content: SwiftUICore._GraphValue<Self>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 public struct _MapContentInputs {
@@ -60,9 +58,7 @@ public struct _MapContentOutputs {
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension _MapKit_SwiftUI.MapContent {
   @_Concurrency.MainActor @preconcurrency public static func _makeMapContent(content: SwiftUICore._GraphValue<Self>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension Swift.Never {
@@ -70,9 +66,7 @@ extension Swift.Never {
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension Swift.Never : _MapKit_SwiftUI.MapContent {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 @_Concurrency.MainActor @preconcurrency public struct EmptyMapContent : _MapKit_SwiftUI.MapContent {
@@ -120,9 +114,7 @@ extension SwiftUICore.ForEach : _MapKit_SwiftUI.DynamicMapContent where Content 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 @available(watchOS, unavailable)
 @_Concurrency.MainActor @preconcurrency public struct MapPitchToggle : SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(scope: SwiftUICore.Namespace.ID? = nil)
-  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
@@ -147,9 +139,7 @@ extension _MapKit_SwiftUI.MapContent {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @_Concurrency.MainActor @preconcurrency public struct MapPitchSlider : SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(scope: SwiftUICore.Namespace.ID? = nil)
-  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
@@ -193,19 +183,15 @@ public struct MapItemDetailSelectionAccessoryStyle {
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func mapFeatureSelectionAccessory(_ style: _MapKit_SwiftUI.MapItemDetailSelectionAccessoryStyle? = .automatic) -> some SwiftUICore.View
   
-  #endif
 }
 @available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension _MapKit_SwiftUI.MapContent {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func mapItemDetailSelectionAccessory(_ style: _MapKit_SwiftUI.MapItemDetailSelectionAccessoryStyle? = .automatic) -> some _MapKit_SwiftUI.MapContent
   
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 @_Concurrency.MainActor @preconcurrency public struct Marker<Label> : _MapKit_SwiftUI.MapContent where Label : SwiftUICore.View {
@@ -261,9 +247,7 @@ extension _MapKit_SwiftUI.MapContent {
     }
   @_disfavoredOverload @_Concurrency.MainActor @preconcurrency public init<S>(_ title: S, image: Swift.String, coordinate: _LocationEssentials.CLLocationCoordinate2D) where Label == SwiftUI.Label<SwiftUICore.Text, SwiftUICore.Image>, S : Swift.StringProtocol
   @_Concurrency.MainActor @preconcurrency public init(item: MapKit.MKMapItem) where Label == SwiftUICore.Text
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
-  #endif
   @_Concurrency.MainActor @preconcurrency public static func _makeMapContent(content: SwiftUICore._GraphValue<_MapKit_SwiftUI.Marker<Label>>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Body = Swift.Never
@@ -327,9 +311,7 @@ extension _MapKit_SwiftUI.MapContent {
   @_disfavoredOverload @_Concurrency.MainActor @preconcurrency public init<S>(_ title: S, image: Swift.String, coordinate: _LocationEssentials.CLLocationCoordinate2D) where Label == SwiftUI.Label<SwiftUICore.Text, SwiftUICore.Image>, S : Swift.StringProtocol
   @_Concurrency.MainActor @preconcurrency public init(item: MapKit.MKMapItem) where Label == SwiftUICore.Text
   @_Concurrency.MainActor @preconcurrency public init(feature: MapKit.MKMapItem) where Label == SwiftUICore.Text
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
-  #endif
   @_Concurrency.MainActor @preconcurrency public static func _makeMapContent(content: SwiftUICore._GraphValue<_MapKit_SwiftUI.SelectedMarker<Label>>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
   @available(iOS, unavailable)
   @available(tvOS, unavailable)
@@ -344,9 +326,7 @@ extension _MapKit_SwiftUI.MapContent {
   @_Concurrency.MainActor @preconcurrency public init() where Content == _MapKit_SwiftUI.DefaultUserAnnotationContent
   @_Concurrency.MainActor @preconcurrency public init(anchor: SwiftUICore.UnitPoint = .center, @SwiftUICore.ViewBuilder content: @escaping () -> Content)
   @_Concurrency.MainActor @preconcurrency public init(anchor: SwiftUICore.UnitPoint = .center, @SwiftUICore.ViewBuilder content: @escaping (_MapKit_SwiftUI.UserLocation) -> Content)
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
-  #endif
   @_Concurrency.MainActor @preconcurrency public static func _makeMapContent(content: SwiftUICore._GraphValue<_MapKit_SwiftUI.UserAnnotation<Content>>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Body = Swift.Never
@@ -369,9 +349,7 @@ extension _MapKit_SwiftUI.MapContent {
   @_Concurrency.MainActor @preconcurrency public init() where Content == _MapKit_SwiftUI.DefaultUserAnnotationContent
   @_Concurrency.MainActor @preconcurrency public init(anchor: SwiftUICore.UnitPoint = .center, @SwiftUICore.ViewBuilder content: @escaping () -> Content)
   @_Concurrency.MainActor @preconcurrency public init(anchor: SwiftUICore.UnitPoint = .center, @SwiftUICore.ViewBuilder content: @escaping (_MapKit_SwiftUI.UserLocation) -> Content)
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
-  #endif
   @_Concurrency.MainActor @preconcurrency public static func _makeMapContent(content: SwiftUICore._GraphValue<_MapKit_SwiftUI.SelectedUserAnnotation<Content>>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
   @available(iOS, unavailable)
   @available(tvOS, unavailable)
@@ -399,9 +377,7 @@ public struct MapAnnotation<Content> : _MapKit_SwiftUI.MapAnnotationProtocol whe
 @available(macOS, introduced: 11.0, deprecated: 13.0, message: "Use Marker")
 @available(watchOS, introduced: 7.0, deprecated: 9.0, message: "Use Marker")
 public struct MapPin : _MapKit_SwiftUI.MapAnnotationProtocol {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(coordinate: _LocationEssentials.CLLocationCoordinate2D, tint: SwiftUICore.Color? = nil)
-  #endif
   public var _annotationData: _MapKit_SwiftUI._MapAnnotationData {
     get
   }
@@ -411,9 +387,7 @@ public struct MapPin : _MapKit_SwiftUI.MapAnnotationProtocol {
 @available(tvOS, introduced: 14.0, deprecated: 17.0, message: "Use Marker along with Map initializers that take a MapContentBuilder instead.")
 @available(watchOS, introduced: 7.0, deprecated: 10.0, message: "Use Marker along with Map initializers that take a MapContentBuilder instead.")
 public struct MapMarker : _MapKit_SwiftUI.MapAnnotationProtocol {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(coordinate: _LocationEssentials.CLLocationCoordinate2D, tint: SwiftUICore.Color? = nil)
-  #endif
   public var _annotationData: _MapKit_SwiftUI._MapAnnotationData {
     get
   }
@@ -436,7 +410,6 @@ extension MapKit.MKMapItemRequest {
   public var feature: _MapKit_SwiftUI.MapFeature {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, visionOS 2.0, *)
   @available(macOS, unavailable)
   @available(tvOS, unavailable)
@@ -444,7 +417,6 @@ extension MapKit.MKMapItemRequest {
   public var mapFeature: _MapKit_SwiftUI.MapFeature? {
     get
   }
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension SwiftUICore.View {
@@ -470,34 +442,26 @@ public struct MapCameraUpdateFrequency {
 }
 @available(iOS 14.0, tvOS 14.0, macOS 11.0, watchOS 7.0, *)
 @_Concurrency.MainActor @preconcurrency public struct Map<Content> : SwiftUICore.View where Content : SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 14.0, deprecated: 17.0, message: "Use Map initializers that take a MapContentBuilder instead.")
   @available(macOS, introduced: 11.0, deprecated: 14.0, message: "Use Map initializers that take a MapContentBuilder instead.")
   @available(tvOS, introduced: 14.0, deprecated: 17.0, message: "Use Map initializers that take a MapContentBuilder instead.")
   @available(watchOS, introduced: 7.0, deprecated: 10.0, message: "Use Map initializers that take a MapContentBuilder instead.")
   @_Concurrency.MainActor @preconcurrency public init<Items, Annotation>(mapRect: SwiftUICore.Binding<MapKit.MKMapRect>, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, showsUserLocation: Swift.Bool = false, userTrackingMode: SwiftUICore.Binding<_MapKit_SwiftUI.MapUserTrackingMode>? = nil, annotationItems: Items, annotationContent: @escaping (Items.Element) -> Annotation) where Content == _MapKit_SwiftUI._DefaultAnnotatedMapContent<Items>, Items : Swift.RandomAccessCollection, Annotation : _MapKit_SwiftUI.MapAnnotationProtocol, Items.Element : Swift.Identifiable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 14.0, deprecated: 17.0, message: "Use Map initializers that take a MapContentBuilder instead.")
   @available(macOS, introduced: 11.0, deprecated: 14.0, message: "Use Map initializers that take a MapContentBuilder instead.")
   @available(tvOS, introduced: 14.0, deprecated: 17.0, message: "Use Map initializers that take a MapContentBuilder instead.")
   @available(watchOS, introduced: 7.0, deprecated: 10.0, message: "Use Map initializers that take a MapContentBuilder instead.")
   @_Concurrency.MainActor @preconcurrency public init<Items, Annotation>(coordinateRegion: SwiftUICore.Binding<MapKit.MKCoordinateRegion>, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, showsUserLocation: Swift.Bool = false, userTrackingMode: SwiftUICore.Binding<_MapKit_SwiftUI.MapUserTrackingMode>? = nil, annotationItems: Items, annotationContent: @escaping (Items.Element) -> Annotation) where Content == _MapKit_SwiftUI._DefaultAnnotatedMapContent<Items>, Items : Swift.RandomAccessCollection, Annotation : _MapKit_SwiftUI.MapAnnotationProtocol, Items.Element : Swift.Identifiable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 14.0, deprecated: 17.0, message: "Use Map initializers that take a MapContentBuilder instead.")
   @available(macOS, introduced: 11.0, deprecated: 14.0, message: "Use Map initializers that take a MapContentBuilder instead.")
   @available(tvOS, introduced: 14.0, deprecated: 17.0, message: "Use Map initializers that take a MapContentBuilder instead.")
   @available(watchOS, introduced: 7.0, deprecated: 10.0, message: "Use Map initializers that take a MapContentBuilder instead.")
   @_Concurrency.MainActor @preconcurrency public init(mapRect: SwiftUICore.Binding<MapKit.MKMapRect>, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, showsUserLocation: Swift.Bool = false, userTrackingMode: SwiftUICore.Binding<_MapKit_SwiftUI.MapUserTrackingMode>? = nil) where Content == _MapKit_SwiftUI._DefaultMapContent
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 14.0, deprecated: 17.0, message: "Use Map initializers that take a MapContentBuilder instead.")
   @available(macOS, introduced: 11.0, deprecated: 14.0, message: "Use Map initializers that take a MapContentBuilder instead.")
   @available(tvOS, introduced: 14.0, deprecated: 17.0, message: "Use Map initializers that take a MapContentBuilder instead.")
   @available(watchOS, introduced: 7.0, deprecated: 10.0, message: "Use Map initializers that take a MapContentBuilder instead.")
   @_Concurrency.MainActor @preconcurrency public init(coordinateRegion: SwiftUICore.Binding<MapKit.MKCoordinateRegion>, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, showsUserLocation: Swift.Bool = false, userTrackingMode: SwiftUICore.Binding<_MapKit_SwiftUI.MapUserTrackingMode>? = nil) where Content == _MapKit_SwiftUI._DefaultMapContent
-  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
@@ -506,77 +470,37 @@ public struct MapCameraUpdateFrequency {
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension _MapKit_SwiftUI.Map {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, scope: SwiftUICore.Namespace.ID? = nil) where Content == _MapKit_SwiftUI.MapContentView<Swift.Never, _MapKit_SwiftUI.EmptyMapContent>
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init<C>(bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, scope: SwiftUICore.Namespace.ID? = nil, @_MapKit_SwiftUI.MapContentBuilder content: () -> C) where Content == _MapKit_SwiftUI.MapContentView<Swift.Never, C>, C : _MapKit_SwiftUI.MapContent
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(initialPosition: _MapKit_SwiftUI.MapCameraPosition, bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, scope: SwiftUICore.Namespace.ID? = nil) where Content == _MapKit_SwiftUI.MapContentView<Swift.Never, _MapKit_SwiftUI.EmptyMapContent>
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init<C>(initialPosition: _MapKit_SwiftUI.MapCameraPosition, bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, scope: SwiftUICore.Namespace.ID? = nil, @_MapKit_SwiftUI.MapContentBuilder content: () -> C) where Content == _MapKit_SwiftUI.MapContentView<Swift.Never, C>, C : _MapKit_SwiftUI.MapContent
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(position: SwiftUICore.Binding<_MapKit_SwiftUI.MapCameraPosition>, bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, scope: SwiftUICore.Namespace.ID? = nil) where Content == _MapKit_SwiftUI.MapContentView<Swift.Never, _MapKit_SwiftUI.EmptyMapContent>
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init<C>(position: SwiftUICore.Binding<_MapKit_SwiftUI.MapCameraPosition>, bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, scope: SwiftUICore.Namespace.ID? = nil, @_MapKit_SwiftUI.MapContentBuilder content: () -> C) where Content == _MapKit_SwiftUI.MapContentView<Swift.Never, C>, C : _MapKit_SwiftUI.MapContent
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_disfavoredOverload @_Concurrency.MainActor @preconcurrency public init<SelectedValue>(bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, selection: SwiftUICore.Binding<SelectedValue?>, scope: SwiftUICore.Namespace.ID? = nil) where Content == _MapKit_SwiftUI.MapContentView<SelectedValue, _MapKit_SwiftUI.EmptyMapContent>, SelectedValue : Swift.Hashable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_disfavoredOverload @_Concurrency.MainActor @preconcurrency public init<SelectedValue, C>(bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, selection: SwiftUICore.Binding<SelectedValue?>, scope: SwiftUICore.Namespace.ID? = nil, @_MapKit_SwiftUI.MapContentBuilder content: () -> C) where Content == _MapKit_SwiftUI.MapContentView<SelectedValue, C>, SelectedValue : Swift.Hashable, C : _MapKit_SwiftUI.MapContent
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_disfavoredOverload @_Concurrency.MainActor @preconcurrency public init<SelectedValue, C>(initialPosition: _MapKit_SwiftUI.MapCameraPosition, bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, selection: SwiftUICore.Binding<SelectedValue?>, scope: SwiftUICore.Namespace.ID? = nil, @_MapKit_SwiftUI.MapContentBuilder content: () -> C) where Content == _MapKit_SwiftUI.MapContentView<SelectedValue, C>, SelectedValue : Swift.Hashable, C : _MapKit_SwiftUI.MapContent
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_disfavoredOverload @_Concurrency.MainActor @preconcurrency public init<SelectedValue, C>(position: SwiftUICore.Binding<_MapKit_SwiftUI.MapCameraPosition>, bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, selection: SwiftUICore.Binding<SelectedValue?>, scope: SwiftUICore.Namespace.ID? = nil, @_MapKit_SwiftUI.MapContentBuilder content: () -> C) where Content == _MapKit_SwiftUI.MapContentView<SelectedValue, C>, SelectedValue : Swift.Hashable, C : _MapKit_SwiftUI.MapContent
-  #endif
 }
 @available(iOS 17.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension _MapKit_SwiftUI.Map {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, selection: SwiftUICore.Binding<_MapKit_SwiftUI.MapFeature?>, scope: SwiftUICore.Namespace.ID? = nil) where Content == _MapKit_SwiftUI.MapContentView<_MapKit_SwiftUI.MapFeature, _MapKit_SwiftUI.EmptyMapContent>
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init<C>(bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, selection: SwiftUICore.Binding<_MapKit_SwiftUI.MapFeature?>, scope: SwiftUICore.Namespace.ID? = nil, @_MapKit_SwiftUI.MapContentBuilder content: () -> C) where Content == _MapKit_SwiftUI.MapContentView<_MapKit_SwiftUI.MapFeature, C>, C : _MapKit_SwiftUI.MapContent
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(initialPosition: _MapKit_SwiftUI.MapCameraPosition, bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, selection: SwiftUICore.Binding<_MapKit_SwiftUI.MapFeature?>, scope: SwiftUICore.Namespace.ID? = nil) where Content == _MapKit_SwiftUI.MapContentView<_MapKit_SwiftUI.MapFeature, _MapKit_SwiftUI.EmptyMapContent>
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init<C>(initialPosition: _MapKit_SwiftUI.MapCameraPosition, bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, selection: SwiftUICore.Binding<_MapKit_SwiftUI.MapFeature?>, scope: SwiftUICore.Namespace.ID? = nil, @_MapKit_SwiftUI.MapContentBuilder content: () -> C) where Content == _MapKit_SwiftUI.MapContentView<_MapKit_SwiftUI.MapFeature, C>, C : _MapKit_SwiftUI.MapContent
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(position: SwiftUICore.Binding<_MapKit_SwiftUI.MapCameraPosition>, bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, selection: SwiftUICore.Binding<_MapKit_SwiftUI.MapFeature?>, scope: SwiftUICore.Namespace.ID? = nil) where Content == _MapKit_SwiftUI.MapContentView<_MapKit_SwiftUI.MapFeature, _MapKit_SwiftUI.EmptyMapContent>
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init<C>(position: SwiftUICore.Binding<_MapKit_SwiftUI.MapCameraPosition>, bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, selection: SwiftUICore.Binding<_MapKit_SwiftUI.MapFeature?>, scope: SwiftUICore.Namespace.ID? = nil, @_MapKit_SwiftUI.MapContentBuilder content: () -> C) where Content == _MapKit_SwiftUI.MapContentView<_MapKit_SwiftUI.MapFeature, C>, C : _MapKit_SwiftUI.MapContent
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init<SelectedValue, C>(bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, selection: SwiftUICore.Binding<SelectedValue?>, scope: SwiftUICore.Namespace.ID? = nil, @_MapKit_SwiftUI.MapContentBuilder content: () -> C) where Content == _MapKit_SwiftUI.MapSelectableContentView<SelectedValue, C>, SelectedValue : _MapKit_SwiftUI.MapSelectable, C : _MapKit_SwiftUI.MapContent
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init<SelectedValue, C>(initialPosition: _MapKit_SwiftUI.MapCameraPosition, bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, selection: SwiftUICore.Binding<SelectedValue?>, scope: SwiftUICore.Namespace.ID? = nil, @_MapKit_SwiftUI.MapContentBuilder content: () -> C) where Content == _MapKit_SwiftUI.MapSelectableContentView<SelectedValue, C>, SelectedValue : _MapKit_SwiftUI.MapSelectable, C : _MapKit_SwiftUI.MapContent
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init<SelectedValue, C>(position: SwiftUICore.Binding<_MapKit_SwiftUI.MapCameraPosition>, bounds: _MapKit_SwiftUI.MapCameraBounds? = nil, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, selection: SwiftUICore.Binding<SelectedValue?>, scope: SwiftUICore.Namespace.ID? = nil, @_MapKit_SwiftUI.MapContentBuilder content: () -> C) where Content == _MapKit_SwiftUI.MapSelectableContentView<SelectedValue, C>, SelectedValue : _MapKit_SwiftUI.MapSelectable, C : _MapKit_SwiftUI.MapContent
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension SwiftUICore.Group : _MapKit_SwiftUI.MapContent where Content : _MapKit_SwiftUI.MapContent {
   public init(@_MapKit_SwiftUI.MapContentBuilder content: () -> Content)
   @_Concurrency.MainActor @preconcurrency public static func _makeMapContent(content: SwiftUICore._GraphValue<SwiftUICore.Group<Content>>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
-  #endif
 }
 @available(iOS 17.0, *)
 @available(macOS, unavailable)
@@ -605,9 +529,7 @@ public struct MapPolygon {
   public init(coordinates: [_LocationEssentials.CLLocationCoordinate2D])
   public init(points: [MapKit.MKMapPoint])
   public init(_ polygon: MapKit.MKPolygon)
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
-  #endif
   public static func _makeMapContent(content: SwiftUICore._GraphValue<_MapKit_SwiftUI.MapPolygon>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
@@ -618,13 +540,9 @@ extension _MapKit_SwiftUI.MapPolygon : _MapKit_SwiftUI.MapContent {
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 @available(watchOS, unavailable)
 @_Concurrency.MainActor @preconcurrency public struct MapScaleView : SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_disfavoredOverload @_Concurrency.MainActor @preconcurrency public init(anchorEdge: SwiftUICore.HorizontalEdge = .leading, scope: SwiftUICore.Namespace.ID? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 26.0, macOS 26.0, tvOS 26.0, visionOS 26.0, *)
   @_Concurrency.MainActor @preconcurrency public init(alignment: SwiftUICore.HorizontalAlignment = .leading, scope: SwiftUICore.Namespace.ID? = nil)
-  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
@@ -636,12 +554,8 @@ extension _MapKit_SwiftUI.MapPolygon : _MapKit_SwiftUI.MapContent {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @_Concurrency.MainActor @preconcurrency public struct LookAroundPreview : SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(initialScene: MapKit.MKLookAroundScene?, allowsNavigation: Swift.Bool = true, showsRoadLabels: Swift.Bool = true, pointsOfInterest: _MapKit_SwiftUI.PointOfInterestCategories = .all, badgePosition: MapKit.MKLookAroundBadgePosition = .topLeading)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(scene: SwiftUICore.Binding<MapKit.MKLookAroundScene?>, allowsNavigation: Swift.Bool = true, showsRoadLabels: Swift.Bool = true, pointsOfInterest: _MapKit_SwiftUI.PointOfInterestCategories = .all, badgePosition: MapKit.MKLookAroundBadgePosition = .topLeading)
-  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
@@ -666,29 +580,21 @@ public struct MapFeature {
   public var coordinate: _LocationEssentials.CLLocationCoordinate2D {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var title: Swift.String? {
     get
   }
-  #endif
   public var kind: _MapKit_SwiftUI.MapFeature.FeatureKind {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var backgroundColor: SwiftUICore.Color? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var image: SwiftUICore.Image? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var pointOfInterestCategory: MapKit.MKPointOfInterestCategory? {
     get
   }
-  #endif
 }
 @available(iOS 17.0, *)
 @available(macOS, unavailable)
@@ -736,18 +642,12 @@ public struct MapProxy {
   public func camera(framing region: MapKit.MKCoordinateRegion) -> _MapKit_SwiftUI.MapCamera
   public func camera(framing rect: MapKit.MKMapRect) -> _MapKit_SwiftUI.MapCamera
   public func camera(framing item: MapKit.MKMapItem, allowPitch: Swift.Bool = true) -> _MapKit_SwiftUI.MapCamera
-  #if compiler(>=5.3) && $NonescapableTypes
   public func convert(_ point: CoreFoundation.CGPoint, from space: some CoordinateSpaceProtocol) -> _LocationEssentials.CLLocationCoordinate2D?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func convert(_ coordinate: _LocationEssentials.CLLocationCoordinate2D, to space: some CoordinateSpaceProtocol) -> CoreFoundation.CGPoint?
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 @_Concurrency.MainActor @preconcurrency public struct MapCompass : SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(scope: SwiftUICore.Namespace.ID? = nil)
-  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
@@ -790,9 +690,7 @@ extension _MapKit_SwiftUI.MapContent {
   @_Concurrency.MainActor @preconcurrency public init<S>(_ title: S, coordinate: _LocationEssentials.CLLocationCoordinate2D, anchor: SwiftUICore.UnitPoint = .center, @SwiftUICore.ViewBuilder content: () -> Content) where Label == SwiftUICore.Text, S : Swift.StringProtocol
   @available(iOS 18.0, macOS 15.0, visionOS 2.0, watchOS 11.0, tvOS 18.0, *)
   @_Concurrency.MainActor @preconcurrency public init(item: MapKit.MKMapItem, anchor: SwiftUICore.UnitPoint = .center, accessoryAnchor: SwiftUICore.UnitPoint = .center, @SwiftUICore.ViewBuilder content: () -> Content) where Label == SwiftUICore.Text
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
-  #endif
   @_Concurrency.MainActor @preconcurrency public static func _makeMapContent(content: SwiftUICore._GraphValue<_MapKit_SwiftUI.Annotation<Label, Content>>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Body = Swift.Never
@@ -814,20 +712,16 @@ extension _MapKit_SwiftUI.MapContent {
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension _MapKit_SwiftUI._ConditionalMapContent : _MapKit_SwiftUI.MapContent where TrueContent : _MapKit_SwiftUI.MapContent, FalseContent : _MapKit_SwiftUI.MapContent {
   @_Concurrency.MainActor @preconcurrency public static func _makeMapContent(content: SwiftUICore._GraphValue<_MapKit_SwiftUI._ConditionalMapContent<TrueContent, FalseContent>>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
-  #endif
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Body = Swift.Never
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension Swift.Optional : _MapKit_SwiftUI.MapContent where Wrapped : _MapKit_SwiftUI.MapContent {
   @_Concurrency.MainActor @preconcurrency public static func _makeMapContent(content: SwiftUICore._GraphValue<Swift.Optional<Wrapped>>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Body = Swift.Never
 }
-#endif
 @available(iOS 14.0, tvOS 14.0, macOS 11.0, watchOS 7.0, *)
 @_Concurrency.MainActor @preconcurrency public struct _DefaultAnnotatedMapContent<Items> : SwiftUICore.View where Items : Swift.RandomAccessCollection, Items.Element : Swift.Identifiable {
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
@@ -848,9 +742,7 @@ extension Swift.Optional : _MapKit_SwiftUI.MapContent where Wrapped : _MapKit_Sw
 @_Concurrency.MainActor @preconcurrency public struct AnyMapContent : _MapKit_SwiftUI.MapContent {
   @_Concurrency.MainActor @preconcurrency public init<Content>(_ base: Content) where Content : _MapKit_SwiftUI.MapContent
   @_Concurrency.MainActor @preconcurrency public static func _makeMapContent(content: SwiftUICore._GraphValue<_MapKit_SwiftUI.AnyMapContent>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
-  #endif
   @available(iOS 17.5, tvOS 17.5, watchOS 10.5, visionOS 1.2, macOS 14.5, *)
   public typealias Body = Swift.Never
 }
@@ -859,16 +751,12 @@ public protocol _MapContentModifier {
   associatedtype Body : _MapKit_SwiftUI._MapContentModifier
   var body: Self.Body { get }
   static func _makeMapContent(modifier: SwiftUICore._GraphValue<Self>, inputs: _MapKit_SwiftUI._MapContentInputs, body: @escaping (_MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs) -> _MapKit_SwiftUI._MapContentOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs, body: @escaping (_MapKit_SwiftUI._MapContentInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension _MapKit_SwiftUI._MapContentModifier {
   public static func _makeMapContent(modifier: SwiftUICore._GraphValue<Self>, inputs: _MapKit_SwiftUI._MapContentInputs, body: @escaping (_MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs) -> _MapKit_SwiftUI._MapContentOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs, body: @escaping (_MapKit_SwiftUI._MapContentInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension Swift.Never : _MapKit_SwiftUI._MapContentModifier {
@@ -876,9 +764,7 @@ extension Swift.Never : _MapKit_SwiftUI._MapContentModifier {
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension SwiftUICore.ModifiedContent : _MapKit_SwiftUI.MapContent where Content : _MapKit_SwiftUI.MapContent, Modifier : _MapKit_SwiftUI._MapContentModifier {
   @_Concurrency.MainActor @preconcurrency public static func _makeMapContent(content: SwiftUICore._GraphValue<SwiftUICore.ModifiedContent<Content, Modifier>>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension _MapKit_SwiftUI.MapContent {
@@ -898,9 +784,7 @@ extension SwiftUICore.ModifiedContent : _MapKit_SwiftUI.DynamicMapContent where 
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @_Concurrency.MainActor @preconcurrency public struct MapZoomStepper : SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(scope: SwiftUICore.Namespace.ID? = nil)
-  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
@@ -922,15 +806,9 @@ public struct MapCamera : Swift.Equatable {
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 public struct MapCameraBounds {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(centerCoordinateBounds: MapKit.MKCoordinateRegion, minimumDistance: Swift.Double? = nil, maximumDistance: Swift.Double? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(centerCoordinateBounds: MapKit.MKMapRect, minimumDistance: Swift.Double? = nil, maximumDistance: Swift.Double? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(minimumDistance: Swift.Double? = nil, maximumDistance: Swift.Double? = nil)
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 public struct MapCameraPosition : Swift.Equatable {
@@ -942,26 +820,18 @@ public struct MapCameraPosition : Swift.Equatable {
   public static func rect(_ rect: MapKit.MKMapRect) -> _MapKit_SwiftUI.MapCameraPosition
   public static func item(_ item: MapKit.MKMapItem, allowsAutomaticPitch: Swift.Bool = true) -> _MapKit_SwiftUI.MapCameraPosition
   public static func userLocation(followsHeading: Swift.Bool = false, fallback: _MapKit_SwiftUI.MapCameraPosition) -> _MapKit_SwiftUI.MapCameraPosition
-  #if compiler(>=5.3) && $NonescapableTypes
   public var camera: _MapKit_SwiftUI.MapCamera? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var region: MapKit.MKCoordinateRegion? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var rect: MapKit.MKMapRect? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var item: MapKit.MKMapItem? {
     get
   }
-  #endif
   public var positionedByUser: Swift.Bool {
     get
   }
@@ -971,11 +841,9 @@ public struct MapCameraPosition : Swift.Equatable {
   public var followsUserHeading: Swift.Bool {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var fallbackPosition: _MapKit_SwiftUI.MapCameraPosition? {
     get
   }
-  #endif
   public var allowsAutomaticPitch: Swift.Bool {
     get
   }
@@ -1022,41 +890,27 @@ extension SwiftUICore.View {
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 public protocol MapSelectable : Swift.Hashable {
-  #if compiler(>=5.3) && $NonescapableTypes
   var feature: _MapKit_SwiftUI.MapFeature? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   init(_ feature: _MapKit_SwiftUI.MapFeature?)
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension Swift.Never : _MapKit_SwiftUI.MapSelectable {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var feature: _MapKit_SwiftUI.MapFeature? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ feature: _MapKit_SwiftUI.MapFeature?)
-  #endif
 }
 @available(iOS 18.0, macOS 15.0, visionOS 2.0, watchOS 11.0, tvOS 18.0, *)
 public struct MapSelection<SelectionValue> : _MapKit_SwiftUI.MapSelectable where SelectionValue : Swift.Hashable {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var value: SelectionValue? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var feature: _MapKit_SwiftUI.MapFeature? {
     get
   }
-  #endif
   public init(_ value: SelectionValue)
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ feature: _MapKit_SwiftUI.MapFeature?)
-  #endif
   public static func == (a: _MapKit_SwiftUI.MapSelection<SelectionValue>, b: _MapKit_SwiftUI.MapSelection<SelectionValue>) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1079,9 +933,7 @@ public struct MapCircle {
   public init(center coordinate: _LocationEssentials.CLLocationCoordinate2D, radius: _LocationEssentials.CLLocationDistance)
   public init(mapRect: MapKit.MKMapRect)
   public init(_ circle: MapKit.MKCircle)
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
-  #endif
   public static func _makeMapContent(content: SwiftUICore._GraphValue<_MapKit_SwiftUI.MapCircle>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
@@ -1112,47 +964,31 @@ extension _MapKit_SwiftUI.MapInteractionModes {
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func mapItemDetailSheet(isPresented: SwiftUICore.Binding<Swift.Bool>, item: MapKit.MKMapItem?, displaysMap: Swift.Bool = true) -> some SwiftUICore.View
   
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func mapItemDetailSheet(item: SwiftUICore.Binding<MapKit.MKMapItem?>, displaysMap: Swift.Bool = true) -> some SwiftUICore.View
   
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func mapItemDetailPopover(isPresented: SwiftUICore.Binding<Swift.Bool>, item: MapKit.MKMapItem?, displaysMap: Swift.Bool = true, attachmentAnchor: SwiftUI.PopoverAttachmentAnchor = .rect(.bounds)) -> some SwiftUICore.View
   
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func mapItemDetailPopover(isPresented: SwiftUICore.Binding<Swift.Bool>, item: MapKit.MKMapItem?, displaysMap: Swift.Bool = true, attachmentAnchor: SwiftUI.PopoverAttachmentAnchor = .rect(.bounds), arrowEdge: SwiftUICore.Edge) -> some SwiftUICore.View
   
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func mapItemDetailPopover(item: SwiftUICore.Binding<MapKit.MKMapItem?>, displaysMap: Swift.Bool = true, attachmentAnchor: SwiftUI.PopoverAttachmentAnchor = .rect(.bounds)) -> some SwiftUICore.View
   
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func mapItemDetailPopover(item: SwiftUICore.Binding<MapKit.MKMapItem?>, displaysMap: Swift.Bool = true, attachmentAnchor: SwiftUI.PopoverAttachmentAnchor = .rect(.bounds), arrowEdge: SwiftUICore.Edge) -> some SwiftUICore.View
   
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 @frozen @_Concurrency.MainActor @preconcurrency public struct TupleMapContent<T> : _MapKit_SwiftUI.MapContent {
   @_Concurrency.MainActor @preconcurrency public var value: T
   @inlinable @_Concurrency.MainActor @preconcurrency internal init(_ value: T) { self.value = value }
   @_Concurrency.MainActor @preconcurrency public static func _makeMapContent(content: SwiftUICore._GraphValue<_MapKit_SwiftUI.TupleMapContent<T>>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
-  #endif
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Body = Swift.Never
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 @_Concurrency.MainActor @preconcurrency public struct MapUserLocationButton : SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(scope: SwiftUICore.Namespace.ID? = nil)
-  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
@@ -1173,9 +1009,7 @@ public struct MapPolyline {
   public init(points: [MapKit.MKMapPoint], contourStyle: _MapKit_SwiftUI.MapPolyline.ContourStyle = .straight)
   public init(_ polyline: MapKit.MKPolyline)
   public init(_ route: MapKit.MKRoute)
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _mapContentCount(inputs: _MapKit_SwiftUI._MapContentInputs) -> Swift.Int?
-  #endif
   public static func _makeMapContent(content: SwiftUICore._GraphValue<_MapKit_SwiftUI.MapPolyline>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
@@ -1194,11 +1028,9 @@ extension _MapKit_SwiftUI.MapPolyline : _MapKit_SwiftUI.MapContent {
   @_alwaysEmitIntoClient public static func buildBlock<C>(_ content: C) -> C where C : _MapKit_SwiftUI.MapContent {
         content
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient public static func buildIf<Content>(_ content: Content?) -> Content? where Content : _MapKit_SwiftUI.MapContent {
         content
     }
-  #endif
   @_alwaysEmitIntoClient public static func buildEither<TrueContent, FalseContent>(first: TrueContent) -> _MapKit_SwiftUI._ConditionalMapContent<TrueContent, FalseContent> where TrueContent : _MapKit_SwiftUI.MapContent, FalseContent : _MapKit_SwiftUI.MapContent {
         _ConditionalMapContent(trueContent: first, falseType: FalseContent.self)
     }
@@ -1258,23 +1090,17 @@ extension _MapKit_SwiftUI.MapContent {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func lookAroundViewer(isPresented: SwiftUICore.Binding<Swift.Bool>, initialScene: MapKit.MKLookAroundScene?, allowsNavigation: Swift.Bool = true, showsRoadLabels: Swift.Bool = true, pointsOfInterest: _MapKit_SwiftUI.PointOfInterestCategories = .all, onDismiss: (() -> Swift.Void)? = nil) -> some SwiftUICore.View
   
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func lookAroundViewer(isPresented: SwiftUICore.Binding<Swift.Bool>, scene: SwiftUICore.Binding<MapKit.MKLookAroundScene?>, allowsNavigation: Swift.Bool = true, showsRoadLabels: Swift.Bool = true, pointsOfInterest: _MapKit_SwiftUI.PointOfInterestCategories = .all, onDismiss: (() -> Swift.Void)? = nil) -> some SwiftUICore.View
   
-  #endif
 }
 @available(watchOS 10.0, *)
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
 @available(macOS, unavailable)
 @_Concurrency.MainActor @preconcurrency public struct MapLocationCompass : SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(scope: SwiftUICore.Namespace.ID? = nil)
-  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/KoaMapper.framework/Versions/A/KoaMapper'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s9KoaMapper13ProviderErrorO2eeoiySbAC_ACtFZ', '_$s9KoaMapper13ProviderErrorO4hash4intoys6HasherVz_tF', 
                        '_$s9KoaMapper13ProviderErrorO9hashValueSivg', '_$s9KoaMapper13ProviderErrorO9hashValueSivpMV', 
                        '_$s9KoaMapper13ProviderErrorOMa', '_$s9KoaMapper13ProviderErrorOMn', 

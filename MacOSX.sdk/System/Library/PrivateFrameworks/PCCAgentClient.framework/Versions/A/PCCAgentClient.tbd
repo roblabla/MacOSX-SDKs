@@ -1,0 +1,18 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64e-macos ]
+install-name:    '/System/Library/PrivateFrameworks/PCCAgentClient.framework/Versions/A/PCCAgentClient'
+swift-abi-version: 7
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s14PCCAgentClient07AgenticB0Mp', '_$s14PCCAgentClient07AgenticB0P11sendRequestyScsy10Foundation4DataVs5Error_pGAGYaKFTj', 
+                       '_$s14PCCAgentClient07AgenticB0P11sendRequestyScsy10Foundation4DataVs5Error_pGAGYaKFTjTu', 
+                       '_$s14PCCAgentClient07AgenticB0P11sendRequestyScsy10Foundation4DataVs5Error_pGAGYaKFTq', 
+                       '_$s14PCCAgentClient07AgenticB0P5closeyyYaKFTj', '_$s14PCCAgentClient07AgenticB0P5closeyyYaKFTjTu', 
+                       '_$s14PCCAgentClient07AgenticB0P5closeyyYaKFTq', '_$s14PCCAgentClient07AgenticB0TL', 
+                       '_$s14PCCAgentClient07AgenticB7FactoryMp', '_$s14PCCAgentClient07AgenticB7FactoryP06createB0AA0cB0_pyYaKFTj', 
+                       '_$s14PCCAgentClient07AgenticB7FactoryP06createB0AA0cB0_pyYaKFTjTu', 
+                       '_$s14PCCAgentClient07AgenticB7FactoryP06createB0AA0cB0_pyYaKFTq', 
+                       '_$s14PCCAgentClient07AgenticB7FactoryTL', _PCCAgentClientVersionNumber, 
+                       _PCCAgentClientVersionString ]
+...

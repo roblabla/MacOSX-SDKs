@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libchannel.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _channel_abandon_message, _channel_bytes_received, _channel_bytes_sent, 
                        _channel_commit_message, _channel_create_asymmetric_endpoint_and_request, 
                        _channel_dispatch_activate, _channel_dispatch_cancel, _channel_dispatch_create_from_reply, 

@@ -1,0 +1,32 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64e-macos ]
+install-name:    '/System/Library/PrivateFrameworks/MacMailSearchProcessing.framework/Versions/A/MacMailSearchProcessing'
+swift-abi-version: 7
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s23MacMailSearchProcessing0aB8SessionsV5build16biomeReadUseCase13maxSessionAgeSci_p22UnilogStreamAlgorithms0L4InfoVySSG7ElementSciRts_s5Error_p7FailureSciRtsXPSS_s8DurationVtFZ', 
+                       '_$s23MacMailSearchProcessing0aB8SessionsVMa', '_$s23MacMailSearchProcessing0aB8SessionsVMn', 
+                       '_$s23MacMailSearchProcessing0aB8SessionsVN', '_$s23MacMailSearchProcessing0abC11PreferencesV13maxSessionAges8DurationVvg', 
+                       '_$s23MacMailSearchProcessing0abC11PreferencesV13maxSessionAges8DurationVvpMV', 
+                       '_$s23MacMailSearchProcessing0abC11PreferencesV17defaultsSuiteNameACSS_tcfC', 
+                       '_$s23MacMailSearchProcessing0abC11PreferencesV17defaultsSuiteNameSSvgZ', 
+                       '_$s23MacMailSearchProcessing0abC11PreferencesV17defaultsSuiteNameSSvpZMV', 
+                       '_$s23MacMailSearchProcessing0abC11PreferencesV20defaultMaxSessionAges8DurationVvgZ', 
+                       '_$s23MacMailSearchProcessing0abC11PreferencesV20defaultMaxSessionAges8DurationVvpZMV', 
+                       '_$s23MacMailSearchProcessing0abC11PreferencesV22maxSessionAgeInSecondsSiSgvg', 
+                       '_$s23MacMailSearchProcessing0abC11PreferencesV22maxSessionAgeInSecondsSiSgvpMV', 
+                       '_$s23MacMailSearchProcessing0abC11PreferencesVMa', '_$s23MacMailSearchProcessing0abC11PreferencesVMn', 
+                       '_$s23MacMailSearchProcessing0abC11PreferencesVN', '_$s23MacMailSearchProcessing16StagedDataMapperV15UnilogIngestion12StagingTopicAAMc', 
+                       '_$s23MacMailSearchProcessing16StagedDataMapperV3all3runSci_p19UnilogCommonLibrary12StagingEventV7ElementSciRts_s5Error_p7FailureSciRtsXP0J9Ingestion12UnstagingRunC_tYaKF', 
+                       '_$s23MacMailSearchProcessing16StagedDataMapperV3all3runSci_p19UnilogCommonLibrary12StagingEventV7ElementSciRts_s5Error_p7FailureSciRtsXP0J9Ingestion12UnstagingRunC_tYaKFTu', 
+                       '_$s23MacMailSearchProcessing16StagedDataMapperV7useCase13maxSessionAge7contextACSS_s8DurationV15UnilogIngestion15WorkflowContextCtcfC', 
+                       '_$s23MacMailSearchProcessing16StagedDataMapperVMa', '_$s23MacMailSearchProcessing16StagedDataMapperVMn', 
+                       '_$s23MacMailSearchProcessing16StagedDataMapperVN', '_$s23MacMailSearchProcessing26UploadDataCollectionPolicyV15UnilogIngestion0fgH0AAMc', 
+                       '_$s23MacMailSearchProcessing26UploadDataCollectionPolicyV5applyy19UnilogCommonLibrary12StagingEventVSgAGKF', 
+                       '_$s23MacMailSearchProcessing26UploadDataCollectionPolicyVACycfC', 
+                       '_$s23MacMailSearchProcessing26UploadDataCollectionPolicyVMa', 
+                       '_$s23MacMailSearchProcessing26UploadDataCollectionPolicyVMn', 
+                       '_$s23MacMailSearchProcessing26UploadDataCollectionPolicyVN', 
+                       _MacMailSearchProcessingVersionNumber, _MacMailSearchProcessingVersionString ]
+...

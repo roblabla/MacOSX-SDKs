@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PassKitUI.framework/Versions/A/PassKitUI'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _PKDropPrivacySheet, _PKEaseInOutFunction, _PKEaseInOutOverFunction, 
                        _PKFlyUpEastFunction, _PKHardEaseOutFunction, _PKSoftEaseOutFunction, 
                        _PKStringByAppendingColon, _PassKitUIVersionNumber, _PassKitUIVersionString, 

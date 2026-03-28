@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccountsUISupport.framework/Versions/A/AccountsUISupport'
-current-version: 3864.255.41
+current-version: 3864.255.181
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s17AccountsUISupport21ConfigurationResolverC16checkIsAvailableyyYaKF', 
                        '_$s17AccountsUISupport21ConfigurationResolverC16checkIsAvailableyyYaKFTu', 
                        '_$s17AccountsUISupport21ConfigurationResolverC7resolvey0aB6Shared15PasswordAccountO08ResolvedH0VAG5KnownVYaAK5ErrorOYKF', 

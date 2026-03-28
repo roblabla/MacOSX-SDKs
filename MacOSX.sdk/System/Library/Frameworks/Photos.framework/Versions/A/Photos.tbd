@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Photos.framework/Versions/A/Photos'
-current-version: 821.0.120
+current-version: 841.0.101
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/usr/lib/swift/libswiftPhotos.dylib$$1$10.15$14.0$_$sSo14PHPhotoLibraryC6PhotosE23cloudIdentifierMappings19forLocalIdentifiersSDySSs6ResultOySo07PHCloudE0Cs5Error_pGGSaySSG_tF$', 
                        '$ld$previous$/usr/lib/swift/libswiftPhotos.dylib$$1$10.15$14.0$_$sSo14PHPhotoLibraryC6PhotosE23localIdentifierMappings3forSDySo07PHCloudE0Cs6ResultOySSs5Error_pGGSayAGG_tF$', 
                        '$ld$previous$/usr/lib/swift/libswiftPhotos.dylib$$1$10.15$14.0$_$sSo22PHProjectChangeRequestC6PhotosE12removeAssetsyySo13PHFetchResultCySo7PHAssetCGF$', 
@@ -210,7 +208,8 @@ exports:
                        _PHCPAnalyticsMediaSceneSubjectNone, _PHCPAnalyticsMediaSceneTypeOther, 
                        _PHCPAnalyticsSceneVersionLatest, _PHChooserListContinueEnumerating, 
                        _PHChooserListLookAheadForNonHintResourcePassingTest, _PHChooserListMoveFirst, 
-                       _PHChooserListSetSortDescriptor, _PHChoosingPolicyName, _PHCloudQuotaBytesUsedMediaTypeKeyDuplicate, 
+                       _PHChooserListSetSortDescriptor, _PHChoosingPolicyName, _PHCloudIdentifierComponentMissing, 
+                       _PHCloudIdentifierSeparatorString, _PHCloudQuotaBytesUsedMediaTypeKeyDuplicate, 
                        _PHCloudQuotaBytesUsedMediaTypeKeyScreenshot, _PHCloudQuotaBytesUsedMediaTypeKeyVideo, 
                        _PHCollectionListReferenceType, _PHCollectionPresentationHintsStringFromQualityCategory, 
                        _PHCollectionPresentationHintsStringFromTripType, _PHCollectionPresentationHintsStringsFromSocialRelationships, 
@@ -497,12 +496,13 @@ exports:
                        PHSmartAlbumChangeRequest, PHSocialGroup, PHSocialGroupChangeRequest, 
                        PHSocialGroupReference, PHSuggestion, PHSuggestionChangeRequest, 
                        PHSuggestionDeleteRequest, PHSuggestionMessageContext, PHTextFeature, 
-                       PHThumbnailAsset, PHTransientAssetCollectionOptions, PHUserFeedback, 
-                       PHUserFeedbackCalculator, PHUserFeedbackDataCache, PHUserFeedbackImportantPerson, 
-                       PHUtilityCollection, PHUtilityCollectionReference, PHValidator, 
-                       PHVideoRequest, PHVideoRequestBehaviorSpec, PHVideoRequestOptions, 
-                       PHVideoResult, PHVideoXPCRequest, PHVisionAnalysisUtilities, 
-                       PHWallpaperAsset, _PHFetchRequestWrapper ]
+                       PHTextUnderstandingIdentificationDocument, PHThumbnailAsset, 
+                       PHTransientAssetCollectionOptions, PHUserFeedback, PHUserFeedbackCalculator, 
+                       PHUserFeedbackDataCache, PHUserFeedbackImportantPerson, PHUtilityCollection, 
+                       PHUtilityCollectionReference, PHValidator, PHVideoRequest, 
+                       PHVideoRequestBehaviorSpec, PHVideoRequestOptions, PHVideoResult, 
+                       PHVideoXPCRequest, PHVisionAnalysisUtilities, PHWallpaperAsset, 
+                       _PHFetchRequestWrapper ]
     objc-ivars:      [ PHAssetPropertySet._asset, PHChangeRequest._helper, PHCompositeMediaResult._imageProperties, 
                        PHCompositeMediaResult._mutableInfo, PHImageRequest._asyncDecodeRequestHandle, 
                        PHImageRequest._imageResult, PHImageRequest._lock, PHImportAsset._source, 
@@ -510,9 +510,9 @@ exports:
                        PHMediaRequest._configurationError, PHResourceChooserList._asset, 
                        PHResourceChooserList._endOfListHandler, PHResourceChooserList._itemHandler, 
                        PHResourceChooserList._nonHintResourceInfos ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _PHLivePhotoEditingErrorDomain ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/usr/lib/swift/libswiftPhotos.dylib$$1$10.15$14.0$_$sSo8PHChangeC6PhotosE13changeDetails3forSo014PHObjectChangeD0CyxGSgx_tSo0F0CRbzlF$', 
                        '$ld$previous$/usr/lib/swift/libswiftPhotos.dylib$$1$10.15$14.0$_$sSo8PHChangeC6PhotosE13changeDetails3forSo019PHFetchResultChangeD0CySo8PHObjectCGSgSo0fG0CyyXlG_tF$', 
                        '$ld$previous$/usr/lib/swift/libswiftPhotos.dylib$$1$10.15$14.0$_$sSo8PHChangeC6PhotosE13changeDetails3forSo019PHFetchResultChangeD0CyxGSgSo0fG0CyxG_tSo8PHObjectCRbzlF$', 

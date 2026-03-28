@@ -146,7 +146,6 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(9.0))
 /*!
  @property requiredThreadsPerThreadgroup
  @abstract Sets the required threads-per-threadgroup during dispatches. The `threadsPerThreadgroup` argument of any dispatch must match this value if it is set.
-           Optional, unless the pipeline is going to use CooperativeTensors in which case this must be set.
            Setting this to a size of 0 in every dimension disables this property
 */
 @property(readwrite, nonatomic) MTLSize requiredThreadsPerThreadgroup API_AVAILABLE(macos(26.0), ios(26.0));
@@ -163,9 +162,31 @@ API_AVAILABLE(macos(10.11), ios(8.0)) NS_SWIFT_SENDABLE
 
 @property (nullable, readonly) NSString *label API_AVAILABLE(macos(10.13), ios(11.0));
 
-/// Provides access to this compute pipeline's reflection.
+/// The compute pipeline's reflection information, if available.
 ///
-/// Reflection is `nil` if you create the pipeline state object directly from the ``MTLDevice`` protocol.
+/// The property is `nil` by default to help reduce your app's memory footprint,
+/// but you can create reflection information when your app needs it.
+///
+/// Create reflection information by building a pipeline from an
+/// ``MTL4Compiler`` instance with the following steps:
+///
+/// 1. Configure the ``MTL4PipelineOptions/shaderReflection`` property of an ``MTL4PipelineOptions`` instance.
+/// 2. Assign that instance to the ``MTL4PipelineDescriptor/options`` property of an ``MTL4PipelineDescriptor`` instance.
+/// 3. Create a compute pipeline state by passing that pipeline descriptor to one of the ``MTL4Compiler`` instance's methods.
+///
+/// During development, the property may contain reflection information without these steps
+/// because a GPU frame capture, Metal API validation layer, or shader validation layer
+/// can request reflection information when you enable them.
+/// You need to request reflection information if your app depends on it
+/// because Metal might not load these layers when you distribute your app.
+
+///
+/// > Tip:
+/// Verify the apps that need reflection information in production by testing them
+/// without a frame capture, Metal API validation layer, or shader validation layer.
+///
+/// The property is `nil` when you create a pipeline state from an``MTLDevice`` instance,
+/// such as with its ``MTLDevice/newComputePipelineStateWithDescriptor:options:completionHandler:`` method.
 @property (nullable, readonly) MTLComputePipelineReflection* reflection API_AVAILABLE(macos(26.0), ios(26.0));
 
 /// Gets the function handle for a function this pipeline links at the Metal IR level by name.
@@ -182,7 +203,7 @@ API_AVAILABLE(macos(10.11), ios(8.0)) NS_SWIFT_SENDABLE
 /// - Parameters:
 ///   - function: A binary function object representing the function binary to find.
 ///
-/// - Returns: A function handle corresponding to the function if the binary function mathces a function in this
+/// - Returns: A function handle corresponding to the function if the binary function matches a function in this
 ///            pipeline state, otherwise `nil`.
 - (nullable id<MTLFunctionHandle>)functionHandleWithBinaryFunction:(id<MTL4BinaryFunction>)function API_AVAILABLE(macos(26.0), ios(26.0));
 

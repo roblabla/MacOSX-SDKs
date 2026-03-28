@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftCompression.dylib'
-current-version: 8
+current-version: 11
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s11Compression11FilterErrorO11invalidDatayA2CmFWC', '_$s11Compression11FilterErrorO12invalidStateyA2CmFWC', 
                        '_$s11Compression11FilterErrorO2eeoiySbAC_ACtFZ', '_$s11Compression11FilterErrorO4hash4intoys6HasherVz_tF', 
                        '_$s11Compression11FilterErrorO9hashValueSivg', '_$s11Compression11FilterErrorO9hashValueSivpMV', 

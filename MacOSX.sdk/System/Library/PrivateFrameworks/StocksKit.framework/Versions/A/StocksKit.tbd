@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/StocksKit.framework/Versions/A/StocksKit'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ NanoStocks,Wallet,Wallet Test,NanoStocksWidgetKitExtension,Calculate,CalculateUI,NewsArticles,NewsArticlesTests,NewsFeed,NewsFeedTests,Stocks,StocksAnalytics,StocksAnalyticsTests,StocksCore,StocksCoreTests,StocksKit,StocksKitService,StocksKitDemo,StocksKitTests,StocksTests,StocksToday,StocksUI,StocksUITests,NewsSubscription,StocksWidget,StocksWidgetUI,StocksAppKitBundle,StocksDiagnosticExtension,StocksPersonalization ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s9StocksKit10ChartRangeO10yearToDateyA2CmFWC', '_$s9StocksKit10ChartRangeO11threeMonthsyA2CmFWC', 
                        '_$s9StocksKit10ChartRangeO12defaultCasesSayACGvgZ', '_$s9StocksKit10ChartRangeO12defaultCasesSayACGvpZMV', 
                        '_$s9StocksKit10ChartRangeO2idSSvg', '_$s9StocksKit10ChartRangeO2idSSvpMV', 

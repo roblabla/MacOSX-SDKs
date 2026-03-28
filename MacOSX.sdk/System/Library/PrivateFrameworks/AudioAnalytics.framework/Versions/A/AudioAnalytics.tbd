@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AudioAnalytics.framework/Versions/A/AudioAnalytics'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14AudioAnalytics0aB11SendMessageyys5Int64V_So15CFDictionaryRefaSo0A13EventCategoryVSo0aH4TypeVtF', 
                        '_$s14AudioAnalytics0aB12StopReporteryys5Int64VF', '_$s14AudioAnalytics0aB12TestReporterC03newD2IDACyt_tcfC', 
                        '_$s14AudioAnalytics0aB12TestReporterC03newD2IDACyt_tcfc', 
@@ -45,8 +45,8 @@ exports:
                        '_$sSo22AudioAnalyticsReporterC0aB0E13configurationSDys11AnyHashableVypGvpMV', 
                        '_$sSo22AudioAnalyticsReporterC0aB0E13configurationSDys11AnyHashableVypGvs', 
                        '_$sSo22AudioAnalyticsReporterC0aB0E14requestMessage3for4type8callbackySo0A13EventCategoryV_So0aI4TypeVySo15CFDictionaryRefaSgctF', 
+                       '_$sSo22AudioAnalyticsReporterC0aB0E14setServiceTypeyySo0aeF0VF', 
                        '_$sSo22AudioAnalyticsReporterC0aB0E22sendSessionlessMessage_8category4typeySDys11AnyHashableVypG_So0A13EventCategoryVSo0aK4TypeVtFZ', 
-                       '_$sSo22AudioAnalyticsReporterC0aB0E3set11serviceTypeySo0a7ServiceF0V_tF', 
                        '_$sSo22AudioAnalyticsReporterC0aB0E4stopyyF', '_$sSo22AudioAnalyticsReporterC0aB0E5startyyF', 
                        '_$sSo22AudioAnalyticsReporterC0aB0E9sessionID11serviceTypeABSgs6UInt32V_So0a7ServiceG0VtcfC', 
                        '_$sSo22AudioAnalyticsReporterC0aB0E9sessionID11serviceTypeABSgs6UInt32V_So0a7ServiceG0Vtcfc', 

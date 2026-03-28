@@ -5,9 +5,10 @@
 //  Copyright © 2015–2023 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <CoreSpotlight/CSBase.h>
 #import <CoreSpotlight/CSPerson.h>
+
+#import <Foundation/Foundation.h>
 #import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 
 NS_ASSUME_NONNULL_BEGIN

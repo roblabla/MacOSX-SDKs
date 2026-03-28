@@ -1,16 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Admin.framework/Versions/A/Admin'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _NetworkTimeStartedNotification, _NetworkTimeStoppedNotification, 
                        _SafeCFBundleGetFunctionPointerForName, _XMLStringFromObject, 
                        _canOpenAccountsPreferencePane, _collectionFromXMLString, 
                        _copyKeyboardType, _coreTimeFrameworkBundle, _debugLoggingEnabled, 
-                       _directorySizeAtPath, _freeSpaceAtPath, _getPIDForProcess, 
-                       _isBootVolumeHCSFDE, _isInternalBuild, _isSIPDisabled, _kickMCXDForUID, 
-                       _loadAppKit, _setSafariLockedSync, _writeKeyboardType ]
+                       _directorySizeAtPath, _fileSharingAllowFullDiskAccess, _freeSpaceAtPath, 
+                       _getPIDForProcess, _isBootVolumeHCSFDE, _isInternalBuild, 
+                       _isSIPDisabled, _kickMCXDForUID, _loadAppKit, _setSafariLockedSync, 
+                       _writeKeyboardType ]
     objc-classes:    [ ARDConfig, Authenticator, DSAuthenticator, DSNode, DSRecord, 
                        DynamicDNSConfig, Group, HostConfig, InternetServices, NetworkTimeClient, 
                        NetworkTimeServer, ParentalControlsConfig, PowerActivityManager, 

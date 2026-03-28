@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-ios19.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 106.300.31.1.3 -module-name LiveCommunicationKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-ios19.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 106.500.211.1.13 -module-name LiveCommunicationKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import AVFoundation
 import Combine
 import ExtensionFoundation
@@ -35,12 +35,8 @@ extension LiveCommunicationKit.ConversationManager {
     public var supportedHandleTypes: Swift.Set<LiveCommunicationKit.Handle.Kind>
     @available(iOS 26.0, *)
     public var supportsAudioTranslation: Swift.Bool
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(ringtoneName: Swift.String?, iconTemplateImageData: Foundation.Data?, maximumConversationGroups: Swift.Int, maximumConversationsPerConversationGroup: Swift.Int, includesConversationInRecents: Swift.Bool, supportsVideo: Swift.Bool, supportedHandleTypes: Swift.Set<LiveCommunicationKit.Handle.Kind>)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(ringtoneName: Swift.String?, iconTemplateImageData: Foundation.Data?, maximumConversationGroups: Swift.Int, maximumConversationsPerConversationGroup: Swift.Int, includesConversationInRecents: Swift.Bool, supportsVideo: Swift.Bool, supportedHandleTypes: Swift.Set<LiveCommunicationKit.Handle.Kind>, supportsAudioTranslation: Swift.Bool)
-    #endif
   }
 }
 @_hasMissingDesignatedInitializers @available(iOS 17.4, watchOS 10.4, visionOS 1.1, macCatalyst 17.4, *)
@@ -51,11 +47,9 @@ final public class Conversation : Swift.Sendable {
   final public var state: LiveCommunicationKit.Conversation.State {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var localMember: LiveCommunicationKit.Handle? {
     get
   }
-  #endif
   @objc deinit
 }
 @available(iOS 17.4, watchOS 10.4, visionOS 1.1, macCatalyst 17.4, *)
@@ -97,9 +91,7 @@ open class ConversationAction {
 @available(visionOS, unavailable)
 public struct StartCellularConversationAction : Swift.Codable, Swift.Hashable, Swift.Sendable {
   public init(_ recentConversation: LiveCommunicationKit.ConversationHistoryManager.RecentConversation)
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ handle: LiveCommunicationKit.Handle, cellularService: LiveCommunicationKit.CellularService? = nil)
-  #endif
   public static func == (a: LiveCommunicationKit.StartCellularConversationAction, b: LiveCommunicationKit.StartCellularConversationAction) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
   public func hash(into hasher: inout Swift.Hasher)
@@ -151,9 +143,7 @@ extension LiveCommunicationKit.Conversation {
     case paused
     case leaving
     case left
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
-    #endif
     @available(iOS 17.4, watchOS 10.4, visionOS 1.1, macCatalyst 17.4, *)
     @available(tvOS, unavailable)
     @available(macOS, unavailable)
@@ -249,28 +239,20 @@ public protocol ConversationManagerDelegate : AnyObject {
 @available(tvOS, unavailable)
 extension LiveCommunicationKit.Conversation {
   public struct Update : Swift.Sendable, Swift.Codable, Swift.Hashable {
-    #if compiler(>=5.3) && $NonescapableTypes
     public var localMember: LiveCommunicationKit.Handle? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var members: Swift.Set<LiveCommunicationKit.Handle>? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var activeRemoteMembers: Swift.Set<LiveCommunicationKit.Handle>? {
       get
       set
     }
-    #endif
     public var capabilities: LiveCommunicationKit.Conversation.Capabilities?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(localMember: LiveCommunicationKit.Handle? = nil, members: Swift.Set<LiveCommunicationKit.Handle>? = nil, activeRemoteMembers: Swift.Set<LiveCommunicationKit.Handle>? = nil, capabilities: LiveCommunicationKit.Conversation.Capabilities? = nil)
-    #endif
     public static func == (a: LiveCommunicationKit.Conversation.Update, b: LiveCommunicationKit.Conversation.Update) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -288,9 +270,7 @@ final public class PlayToneAction : LiveCommunicationKit.ConversationAction {
     case single
     case softPause
     case hardPause
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
-    #endif
     @available(iOS 17.4, watchOS 10.4, visionOS 1.1, macCatalyst 17.4, *)
     @available(tvOS, unavailable)
     @available(macOS, unavailable)
@@ -387,9 +367,7 @@ extension LiveCommunicationKit.ConversationHistoryManager {
       get
     }
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     public static func makeMessage(_ notification: Foundation.Notification) -> LiveCommunicationKit.ConversationHistoryManager.ConversationHistoryDidUpdate?
-    #endif
   }
 }
 @available(iOS 26.0, *)
@@ -413,9 +391,7 @@ extension LiveCommunicationKit.Conversation {
     case unanswered
     case joinedElsewhere
     case declinedElsewhere
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
-    #endif
     @available(iOS 17.4, watchOS 10.4, visionOS 1.1, macCatalyst 17.4, *)
     @available(tvOS, unavailable)
     @available(macOS, unavailable)
@@ -477,9 +453,7 @@ public struct Handle : Swift.Sendable, Swift.Codable, Swift.Hashable {
     case generic
     case phoneNumber
     case emailAddress
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
-    #endif
     @available(iOS 17.4, watchOS 10.4, visionOS 1.1, macCatalyst 17.4, *)
     @available(tvOS, unavailable)
     @available(macOS, unavailable)
@@ -491,9 +465,7 @@ public struct Handle : Swift.Sendable, Swift.Codable, Swift.Hashable {
   public var type: LiveCommunicationKit.Handle.Kind
   public var value: Swift.String
   public var displayName: Swift.String
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(type: LiveCommunicationKit.Handle.Kind, value: Swift.String, displayName: Swift.String? = nil)
-  #endif
   public static func == (a: LiveCommunicationKit.Handle, b: LiveCommunicationKit.Handle) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
   public func hash(into hasher: inout Swift.Hasher)

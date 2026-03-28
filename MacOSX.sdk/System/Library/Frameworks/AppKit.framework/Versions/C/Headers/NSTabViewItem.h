@@ -24,8 +24,10 @@ typedef NS_ENUM(NSUInteger, NSTabState) {
 @interface NSTabViewItem : NSObject <NSCoding>
 
 /*!
- * Creates an autoreleased TabViewItem that wraps the provided ViewController. The viewController is set as the tab view item’s \c -viewController property, which sets several of the tab view item’s other properties.
- * \param viewController The view controller to wrap, used to set the viewController property
+ * Creates an autoreleased `TabViewItem` that wraps the provided view controller.
+ * 
+ * The view controller is set as the tab view item’s `viewController` property, which sets several of the tab view item’s other properties.
+ * \param viewController The view controller to wrap, used to set the `viewController` property
  */
 + (instancetype)tabViewItemWithViewController:(NSViewController *)viewController API_AVAILABLE(macos(10.10));
 
@@ -36,7 +38,9 @@ typedef NS_ENUM(NSUInteger, NSTabState) {
 @property (strong, nullable) id identifier;
 @property (copy) NSColor *color;
 @property (copy) NSString *label;
-/// Get and set the image for this tab view item. The image may only be used in certain tab view styles and options.  The default value is nil.
+/// Gets and set the image for this tab view item. The image may only be used in certain tab view styles and options.
+///
+/// The default value is `nil`.
 @property (nullable, strong) NSImage *image API_AVAILABLE(macos(10.10));
 @property (nullable, strong) NSView *view;
 

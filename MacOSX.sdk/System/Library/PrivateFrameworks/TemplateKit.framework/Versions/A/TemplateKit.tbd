@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TemplateKit.framework/Versions/A/TemplateKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s11TemplateKit10AsyncCacheC14getCachedValue3forq_Sgx_tFTj', 
                        '_$s11TemplateKit10AsyncCacheC14getCachedValue3forq_Sgx_tFTq', 
                        '_$s11TemplateKit10AsyncCacheC15getCachedValues3forSayq_SgGSayxG_tFTj', 

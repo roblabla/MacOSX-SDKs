@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Tcl.framework/Versions/8.5/Tcl'
 current-version: 8.5.9
 compatibility-version: 8.5
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _TclAddLiteralObj, _TclAllocateFreeObjects, _TclBN_epoch, 
                        _TclBN_fast_s_mp_mul_digs, _TclBN_fast_s_mp_sqr, _TclBN_mp_add, 
                        _TclBN_mp_add_d, _TclBN_mp_and, _TclBN_mp_clamp, _TclBN_mp_clear, 

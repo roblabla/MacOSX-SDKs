@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/RealityFusion.framework/Versions/A/RealityFusion'
-current-version: 403.60.3
+current-version: 403.100.11
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _RFAnchorCopyDescription, _RFAnchorCopyReferenceGroup, _RFAnchorCopyReferenceName, 
                        _RFAnchorCreate, _RFAnchorCreateBody, _RFAnchorCreateCamera, 
                        _RFAnchorCreateCustom, _RFAnchorCreateImage, _RFAnchorCreateObject, 

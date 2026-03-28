@@ -394,7 +394,6 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 /*!
  @property requiredThreadsPerThreadgroup
  @abstract Sets the required threads-per-threadgroup during dispatches. The `threadsPerThreadgroup` argument of any dispatch must match this value if it is set.
-           Optional, unless the pipeline is going to use CooperativeTensors in which case this must be set.
            Setting this to a size of 0 in every dimension disables this property
 */
 @property(readwrite, nonatomic) MTLSize requiredThreadsPerThreadgroup API_AVAILABLE(macos(26.0), ios(26.0));

@@ -127,7 +127,7 @@ typedef NS_ENUM(NSInteger, NSWritingToolsCoordinatorTextReplacementReason) {
     /// An option to animate the replacement of text in your view.
     ///
     /// When Writing Tools requests an interactive change in your delegate’s
-    /// ``NSWritingToolsCoordinator/writingToolsCoordinator(_:replaceRange:inContext:proposedText:reason:animationParameters:completion:)``
+    /// ``NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:replace:in:proposedText:reason:animationParameters:completion:)``
     /// method, it passes a valid set of animation parameters to that method.
     /// Update your view’s text storage and use the provided ``NSWritingToolsCoordinator/AnimationParameters``
     /// type to create any view-specific animations you need to support the
@@ -137,7 +137,7 @@ typedef NS_ENUM(NSInteger, NSWritingToolsCoordinatorTextReplacementReason) {
     /// An option to replace the text in your view without animating the change.
     ///
     /// When Writing Tools requests a noninteractive change in your delegate’s
-    /// ``NSWritingToolsCoordinator/writingToolsCoordinator(_:replaceRange:inContext:proposedText:reason:animationParameters:completion:)``
+    /// ``NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:replace:in:proposedText:reason:animationParameters:completion:)``
     /// method, update your view’s text storage without animating the change.
     NSWritingToolsCoordinatorTextReplacementReasonNoninteractive, // an unanimated replacement prompted from writing tools, perhaps copied from the overlay-panel experience, perhaps a reverted rewrite or individual proofreading suggestion, and so forth
 } API_AVAILABLE(macos(15.2)) NS_SWIFT_NAME(NSWritingToolsCoordinator.TextReplacementReason);
@@ -145,7 +145,7 @@ typedef NS_ENUM(NSInteger, NSWritingToolsCoordinatorTextReplacementReason) {
 /// Options that indicate how much of your content Writing Tools requested.
 ///
 /// At the start of any Writing Tools interaction, you provide the text for
-/// the system to evaluate from your ``NS/UIWritingToolsCoordinator/Delegate``
+/// the system to evaluate from your ``NSWritingToolsCoordinator/Delegate``
 /// object. The request for your content comes with a scope constant that
 /// indicates how much of your view’s text to provide.
 typedef NS_ENUM(NSInteger, NSWritingToolsCoordinatorContextScope) {
@@ -318,7 +318,7 @@ API_AVAILABLE(macos(15.2)) NS_SWIFT_UI_ACTOR
 /// The default value of this property is `nil`.
 ///
 /// If you display your view’s text using multiple text containers, implement the
-/// ``NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:singleContainerSubrangesOf:in:)``
+/// ``NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsSingleContainerSubrangesOf:in:completion:)``
 /// method to request multiple previews.
 @property (weak, nullable) NSView *effectContainerView; // When nil, uses the view property. The WTC will have a "real" effect container which will be kept in front of all the public container's subviews. Ignored if the delegate implements -requestsEffectContainerView
 
@@ -335,8 +335,8 @@ API_AVAILABLE(macos(15.2)) NS_SWIFT_UI_ACTOR
 /// in your custom view. The default value of this property is `nil`.
 ///
 /// If you display your view’s text using multiple text containers, implement the
-/// ``NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:singleContainerSubrangesOf:in:)``
-/// and ``NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:decorationContainerViewFor:in:)``
+/// ``NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsSingleContainerSubrangesOf:in:completion:)``
+/// and ``NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsDecorationContainerViewFor:in:completion:)``
 /// methods to provide separate decoration views for each container.
 @property (weak, nullable) NSView *decorationContainerView; // When nil, uses the view property. The WTC will have a "real" decorations container which will be kept behind all the public container's subviews. Ignored if the delegate implements -requestsDecorationContainerView
 
@@ -380,7 +380,7 @@ API_AVAILABLE(macos(15.2)) NS_SWIFT_UI_ACTOR
 /// Writing Tools can create plain text or rich text, and it can format text
 /// using lists or tables as needed. If your view doesn’t support specific
 /// types of content, specify the types you do support in this property.
-/// The default value of this property is ``NSWritingToolsResult/default``,
+/// The default value of this property is ``NSWritingToolsResultOptions/default``,
 /// which lets the system determine the type of content to generate.
 @property NSWritingToolsResultOptions preferredResultOptions; // Defaults to "Default"
 
@@ -578,7 +578,7 @@ API_AVAILABLE(macos(15.2)) NS_SWIFT_NAME(NSWritingToolsCoordinator.Delegate)
 /// you need to modify other parts of your interface to reflect the changes,
 /// use the provided ``NSWritingToolsCoordinator/AnimationParameters`` object
 /// to create additional animations to run at the same time as the system-provided animations.
-- (void)writingToolsCoordinator:(NSWritingToolsCoordinator *)writingToolsCoordinator replaceRange:(NSRange)range inContext:(NSWritingToolsCoordinatorContext *)context proposedText:(NSAttributedString *)replacementText reason:(NSWritingToolsCoordinatorTextReplacementReason)reason  animationParameters:(NSWritingToolsCoordinatorAnimationParameters *__nullable)animationParameters completion:(void(^)(NSAttributedString *__nullable attributedString))completion;
+- (void)writingToolsCoordinator:(NSWritingToolsCoordinator *)writingToolsCoordinator replaceRange:(NSRange)range inContext:(NSWritingToolsCoordinatorContext *)context proposedText:(NSAttributedString *)replacementText reason:(NSWritingToolsCoordinatorTextReplacementReason)reason animationParameters:(NSWritingToolsCoordinatorAnimationParameters *__nullable)animationParameters completion:(void(^)(NSAttributedString *__nullable attributedString))completion;
 
 /// Asks the delegate to update your view’s current text selection.
 ///
@@ -719,7 +719,7 @@ API_AVAILABLE(macos(15.2)) NS_SWIFT_NAME(NSWritingToolsCoordinator.Delegate)
 /// method to undo any changes you make to your content.
 ///
 /// For a single animation type, the system calls this method, followed sequentially
-/// by the ``writingToolsCoordinator(_:previewFor:range:context:completion:)``
+/// by the ``writingToolsCoordinator(_:requestsPreviewFor:of:in:completion:)``
 /// and ``writingToolsCoordinator(_:finish:for:in:completion:)``
 /// methods. Each method executes asynchronously, but the system calls the next
 /// method in the sequence only after you call the completion handler of the previous
@@ -766,7 +766,7 @@ API_AVAILABLE(macos(15.2)) NS_SWIFT_NAME(NSWritingToolsCoordinator.Delegate)
 /// Writing Tools uses this information to place your image directly above the text in your view.
 ///
 /// For a single animation type, the system calls the
-/// ``writingToolsCoordinator(_:prepareFor:range:context:completion:)``
+/// ``writingToolsCoordinator(_:prepareFor:for:in:completion:)``
 /// method, followed sequentially by this method and then the
 /// ``writingToolsCoordinator(_:finish:for:in:completion:)``
 /// method. Each method executes asynchronously, but the system calls the next
@@ -805,7 +805,7 @@ API_AVAILABLE(macos(15.2)) NS_SWIFT_NAME(NSWritingToolsCoordinator.Delegate)
 /// place your image directly above the text in your view.
 ///
 /// For a single animation type, the system calls the
-/// ``writingToolsCoordinator(_:prepareFor:range:context:completion:)``
+/// ``writingToolsCoordinator(_:prepareFor:for:in:completion:)``
 /// method, followed sequentially by this method and then the
 /// ``writingToolsCoordinator(_:finish:for:in:completion:)``
 /// method. Each method executes asynchronously, but the system calls the next
@@ -841,8 +841,8 @@ API_AVAILABLE(macos(15.2)) NS_SWIFT_NAME(NSWritingToolsCoordinator.Delegate)
 /// you finish your cleanup work, call the completion handler to notify Writing Tools.
 ///
 /// Writing Tools calls this method only after previous calls to the
-/// ``writingToolsCoordinator(_:prepareFor:range:context:completion:)``
-/// and ``writingToolsCoordinator(_:previewFor:range:context:completion:)``
+/// ``writingToolsCoordinator(_:prepareFor:for:in:completion:)``
+/// and ``writingToolsCoordinator(_:requestsPreviewFor:of:in:completion:)``
 /// methods for the same animation type. However, Writing Tools can interleave
 /// calls to this method with calls to prepare an animation of a different
 /// type. In your implementation of this method, make sure the actions you
@@ -893,7 +893,7 @@ API_AVAILABLE(macos(15.2)) NS_SWIFT_NAME(NSWritingToolsCoordinator.Delegate)
 ///
 /// When configuring animations for your view, Writing Tools asks your delegate to
 /// provide separate previews for each of your view’s container object. Specifically,
-/// it calls your delegate’s ``writingToolsCoordinator(_:previewFor:range:context:completion:)``
+/// it calls your delegate’s ``writingToolsCoordinator(_:requestsPreviewFor:of:in:completion:)``
 /// method separately for each range of text you return in the completion handler.
 /// Your implementation of that method must create a preview suitable for animating
 /// the content from the underlying text container.
@@ -921,7 +921,7 @@ API_AVAILABLE(macos(15.2)) NS_SWIFT_NAME(NSWritingToolsCoordinator.Delegate)
 ///
 /// If your view uses multiple ``NSTextContainer`` objects to draw text in different
 /// regions, use this method to provide Writing Tools with the view to use for the
-/// specified range of text. After calling your delegate’s ``writingToolsCoordinator(_:singleContainerSubrangesOf:in:)``
+/// specified range of text. After calling your delegate’s ``writingToolsCoordinator(_:requestsSingleContainerSubrangesOf:in:completion:)``
 /// method, Writing Tools calls this method for each subrange of text you provided.
 /// Find or provide a view situated visibly below the specified text in your text
 /// view. It's also satisfactory to provide a view that’s visually in front of the
@@ -963,7 +963,7 @@ API_AVAILABLE(macos(15.2)) NS_SWIFT_NAME(NSWritingToolsCoordinator.Delegate)
 /// When Writing Tools is active, it updates its state to indicate what task
 /// it’s currently performing. Writing Tools starts in the ``NSWritingToolsCoordinator/State/inactive``
 /// state and moves to other states as it presents UI and starts interacting with
-/// your view’s content. For example, it moves to the ``NSWritingToolsCoordinator/State/interactiveUpdating``
+/// your view’s content. For example, it moves to the ``NSWritingToolsCoordinator/State/interactiveResting``
 /// state when it’s making changes to your view’s text storage.
 - (void)writingToolsCoordinator:(NSWritingToolsCoordinator *)writingToolsCoordinator willChangeToState:(NSWritingToolsCoordinatorState)newState completion:(void(^)(void))completion;
 

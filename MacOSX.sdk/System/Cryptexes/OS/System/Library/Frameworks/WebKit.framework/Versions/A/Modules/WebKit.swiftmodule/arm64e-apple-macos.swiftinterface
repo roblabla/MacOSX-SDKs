@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-macos26.2 -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Lifetimes -enable-experimental-feature LifetimeDependence -enable-experimental-feature ImportNonPublicCxxMembers -enable-experimental-feature DebugDescriptionMacro -user-module-version 7623.1.14.11.9 -module-name WebKit
-// swift-module-flags-ignorable: -strict-memory-safety -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-macos26.4 -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Lifetimes -enable-experimental-feature LifetimeDependence -enable-experimental-feature ImportNonPublicCxxMembers -enable-experimental-feature RequiresObjC=Foundation -enable-experimental-feature DebugDescriptionMacro -user-module-version 7624.1.16.11.4 -module-name WebKit
+// swift-module-flags-ignorable: -strict-memory-safety -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=swift-6 -interface-compiler-version 6.3
 import AppKit
 import CoreTransferable
 import Foundation
@@ -17,9 +17,7 @@ import _SwiftConcurrencyShims
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 public struct URLScheme : Swift.Hashable, Swift.Sendable {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor public init?(_ rawValue: Swift.String)
-  #endif
   public let rawValue: Swift.String
   public static func == (a: WebKit.URLScheme, b: WebKit.URLScheme) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
@@ -43,38 +41,24 @@ public protocol URLSchemeHandler {
 }
 @available(iOS 14.0, macOS 11.0, *)
 extension WebKit.WKPDFConfiguration {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var rect: CoreFoundation.CGRect? {
     get
     set
   }
-  #endif
 }
 @available(iOS 14.0, macOS 11.0, *)
 extension WebKit.WKWebView {
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency @_Concurrency.MainActor public func callAsyncJavaScript(_ functionBody: Swift.String, arguments: [Swift.String : Any] = [:], in frame: WebKit.WKFrameInfo? = nil, in contentWorld: WebKit.WKContentWorld, completionHandler: (@_Concurrency.MainActor @Sendable (Swift.Result<Any, any Swift.Error>) -> Swift.Void)? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency @_Concurrency.MainActor public func createPDF(configuration: WebKit.WKPDFConfiguration = .init(), completionHandler: @escaping @_Concurrency.MainActor @Sendable (Swift.Result<Foundation.Data, any Swift.Error>) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency @_Concurrency.MainActor public func createWebArchiveData(completionHandler: @escaping @_Concurrency.MainActor @Sendable (Swift.Result<Foundation.Data, any Swift.Error>) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency @_Concurrency.MainActor public func evaluateJavaScript(_ javaScript: Swift.String, in frame: WebKit.WKFrameInfo? = nil, in contentWorld: WebKit.WKContentWorld, completionHandler: (@_Concurrency.MainActor @Sendable (Swift.Result<Any, any Swift.Error>) -> Swift.Void)? = nil)
-  #endif
   @preconcurrency @_Concurrency.MainActor public func find(_ string: Swift.String, configuration: WebKit.WKFindConfiguration = .init(), completionHandler: @escaping @_Concurrency.MainActor @Sendable (WebKit.WKFindResult) -> Swift.Void)
 }
 @available(iOS 15.0, macOS 12.0, *)
 extension WebKit.WKWebView {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func callAsyncJavaScript(_ functionBody: Swift.String, arguments: [Swift.String : Any] = [:], in frame: WebKit.WKFrameInfo? = nil, contentWorld: WebKit.WKContentWorld) async throws -> Any?
-  #endif
   @_Concurrency.MainActor @preconcurrency public func pdf(configuration: WebKit.WKPDFConfiguration = .init()) async throws -> Foundation.Data
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func evaluateJavaScript(_ javaScript: Swift.String, in frame: WebKit.WKFrameInfo? = nil, contentWorld: WebKit.WKContentWorld) async throws -> Any?
-  #endif
   @_Concurrency.MainActor @preconcurrency public func find(_ string: Swift.String, configuration: WebKit.WKFindConfiguration = .init()) async throws -> WebKit.WKFindResult
 }
 @available(iOS 18.4, macOS 15.4, visionOS 2.4, *)
@@ -89,24 +73,16 @@ extension WebKit.WKWebExtension {
 @available(tvOS, unavailable)
 extension WebKit.WKWebExtensionController {
   @_Concurrency.MainActor @preconcurrency public func didCloseTab(_ closedTab: any WebKit.WKWebExtensionTab, windowIsClosing: Swift.Bool = false)
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func didActivateTab(_ activatedTab: any WebKit.WKWebExtensionTab, previousActiveTab previousTab: (any WebKit.WKWebExtensionTab)? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func didMoveTab(_ movedTab: any WebKit.WKWebExtensionTab, from index: Swift.Int, in oldWindow: (any WebKit.WKWebExtensionWindow)? = nil)
-  #endif
 }
 @available(iOS 18.4, macOS 15.4, visionOS 2.4, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension WebKit.WKWebExtensionContext {
   @_Concurrency.MainActor @preconcurrency public func didCloseTab(_ closedTab: any WebKit.WKWebExtensionTab, windowIsClosing: Swift.Bool = false)
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func didActivateTab(_ activatedTab: any WebKit.WKWebExtensionTab, previousActiveTab previousTab: (any WebKit.WKWebExtensionTab)? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func didMoveTab(_ movedTab: any WebKit.WKWebExtensionTab, from index: Swift.Int, in oldWindow: (any WebKit.WKWebExtensionWindow)? = nil)
-  #endif
 }
 extension WebKit.WebPage {
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
@@ -130,19 +106,15 @@ extension WebKit.WebPage {
     @_Concurrency.MainActor public var backList: [WebKit.WebPage.BackForwardList.Item] {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public var currentItem: WebKit.WebPage.BackForwardList.Item? {
       get
     }
-    #endif
     @_Concurrency.MainActor public var forwardList: [WebKit.WebPage.BackForwardList.Item] {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public subscript(index: Swift.Int) -> WebKit.WebPage.BackForwardList.Item? {
       get
     }
-    #endif
     nonisolated public static func == (a: WebKit.WebPage.BackForwardList, b: WebKit.WebPage.BackForwardList) -> Swift.Bool
   }
 }
@@ -253,9 +225,7 @@ extension WebKit.WebPage {
   public protocol DialogPresenting {
     @_Concurrency.MainActor func handleJavaScriptAlert(message: Swift.String, initiatedBy frame: WebKit.WebPage.FrameInfo) async
     @_Concurrency.MainActor func handleJavaScriptConfirm(message: Swift.String, initiatedBy frame: WebKit.WebPage.FrameInfo) async -> WebKit.WebPage.JavaScriptConfirmResult
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor func handleJavaScriptPrompt(message: Swift.String, defaultText: Swift.String?, initiatedBy frame: WebKit.WebPage.FrameInfo) async -> WebKit.WebPage.JavaScriptPromptResult
-    #endif
     @_Concurrency.MainActor func handleFileInputPrompt(parameters: WebKit.WKOpenPanelParameters, initiatedBy frame: WebKit.WebPage.FrameInfo) async -> WebKit.WebPage.FileInputPromptResult
   }
 }
@@ -265,9 +235,7 @@ extension WebKit.WebPage {
 extension WebKit.WebPage.DialogPresenting {
   @_Concurrency.MainActor public func handleJavaScriptAlert(message: Swift.String, initiatedBy frame: WebKit.WebPage.FrameInfo) async
   @_Concurrency.MainActor public func handleJavaScriptConfirm(message: Swift.String, initiatedBy frame: WebKit.WebPage.FrameInfo) async -> WebKit.WebPage.JavaScriptConfirmResult
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor public func handleJavaScriptPrompt(message: Swift.String, defaultText: Swift.String?, initiatedBy frame: WebKit.WebPage.FrameInfo) async -> WebKit.WebPage.JavaScriptPromptResult
-  #endif
   @_Concurrency.MainActor public func handleFileInputPrompt(parameters: WebKit.WKOpenPanelParameters, initiatedBy frame: WebKit.WebPage.FrameInfo) async -> WebKit.WebPage.FileInputPromptResult
 }
 extension WebKit.WebPage {
@@ -319,11 +287,9 @@ extension WebKit.WebPage {
     @_Concurrency.MainActor public var source: WebKit.WebPage.FrameInfo {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public var target: WebKit.WebPage.FrameInfo? {
       get
     }
-    #endif
     @_Concurrency.MainActor public var navigationType: WebKit.WKNavigationType {
       get
     }
@@ -359,9 +325,7 @@ extension WebKit.WebPage {
   public protocol NavigationDeciding {
     @_Concurrency.MainActor mutating func decidePolicy(for action: WebKit.WebPage.NavigationAction, preferences: inout WebKit.WebPage.NavigationPreferences) async -> WebKit.WKNavigationActionPolicy
     @_Concurrency.MainActor mutating func decidePolicy(for response: WebKit.WebPage.NavigationResponse) async -> WebKit.WKNavigationResponsePolicy
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor mutating func decideAuthenticationChallengeDisposition(for challenge: Foundation.URLAuthenticationChallenge) async -> (Foundation.URLSession.AuthChallengeDisposition, Foundation.URLCredential?)
-    #endif
   }
 }
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
@@ -370,9 +334,7 @@ extension WebKit.WebPage {
 extension WebKit.WebPage.NavigationDeciding {
   @_Concurrency.MainActor public func decidePolicy(for action: WebKit.WebPage.NavigationAction, preferences: inout WebKit.WebPage.NavigationPreferences) async -> WebKit.WKNavigationActionPolicy
   @_Concurrency.MainActor public func decidePolicy(for response: WebKit.WebPage.NavigationResponse) async -> WebKit.WKNavigationResponsePolicy
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor public func decideAuthenticationChallengeDisposition(for challenge: Foundation.URLAuthenticationChallenge) async -> (Foundation.URLSession.AuthChallengeDisposition, Foundation.URLCredential?)
-  #endif
 }
 extension WebKit.WebPage {
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
@@ -400,11 +362,31 @@ extension WebKit.WebPage {
         get
       }
     }
+    @available(iOS 9999, macOS 26.4, visionOS 9999, *)
+    @available(watchOS, unavailable)
+    @available(tvOS, unavailable)
+    public enum SecurityRestrictionMode : Swift.Sendable {
+      case none
+      case maximizeCompatibility
+      case lockdown
+      public static func == (a: WebKit.WebPage.NavigationPreferences.SecurityRestrictionMode, b: WebKit.WebPage.NavigationPreferences.SecurityRestrictionMode) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
+      public var hashValue: Swift.Int {
+        get
+      }
+    }
     public init()
     public var preferredContentMode: WebKit.WebPage.NavigationPreferences.ContentMode
     public var allowsContentJavaScript: Swift.Bool
     public var preferredHTTPSNavigationPolicy: WebKit.WebPage.NavigationPreferences.UpgradeToHTTPSPolicy
     public var isLockdownModeEnabled: Swift.Bool {
+      get
+      set
+    }
+    @available(iOS 9999, macOS 26.4, visionOS 9999, *)
+    @available(watchOS, unavailable)
+    @available(tvOS, unavailable)
+    public var securityRestrictionMode: WebKit.WebPage.NavigationPreferences.SecurityRestrictionMode {
       get
       set
     }
@@ -422,9 +404,7 @@ extension WebKit.WebPage : CoreTransferable.Transferable {
       }
     }
     public static func pdf(region: WebKit.WebPage.ExportedContentConfiguration.Region = .contents, allowTransparentBackground: Swift.Bool = false) -> WebKit.WebPage.ExportedContentConfiguration
-    #if compiler(>=5.3) && $NonescapableTypes
     public static func image(region: WebKit.WebPage.ExportedContentConfiguration.Region = .contents, allowTransparentBackground: Swift.Bool = false, snapshotWidth: CoreFoundation.CGFloat? = nil, afterScreenUpdates: Swift.Bool = true) -> WebKit.WebPage.ExportedContentConfiguration
-    #endif
   }
   nonisolated public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
     get
@@ -438,6 +418,7 @@ extension WebKit.WebPage : CoreTransferable.Transferable {
 @_hasMissingDesignatedInitializers @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
+@_expose(!Cxx)
 @_Concurrency.MainActor final public class WebPage {
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
   @available(watchOS, unavailable)
@@ -477,11 +458,9 @@ extension WebKit.WebPage : CoreTransferable.Transferable {
   @_Concurrency.MainActor final public var navigations: some _Concurrency.AsyncSequence<WebKit.WebPage.NavigationEvent, any Swift.Error> {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor final public var url: Foundation.URL? {
     get
   }
-  #endif
   @_Concurrency.MainActor final public var title: Swift.String {
     get
   }
@@ -491,11 +470,9 @@ extension WebKit.WebPage : CoreTransferable.Transferable {
   @_Concurrency.MainActor final public var isLoading: Swift.Bool {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor final public var serverTrust: Security.SecTrust? {
     get
   }
-  #endif
   @_Concurrency.MainActor final public var hasOnlySecureContent: Swift.Bool {
     get
   }
@@ -515,27 +492,21 @@ extension WebKit.WebPage : CoreTransferable.Transferable {
   @_Concurrency.MainActor final public var microphoneCaptureState: WebKit.WKMediaCaptureState {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor final public var mediaType: WebKit.WebPage.CSSMediaType? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor final public var customUserAgent: Swift.String? {
     get
     set
   }
-  #endif
   @_Concurrency.MainActor final public var isInspectable: Swift.Bool {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @discardableResult
   @_Concurrency.MainActor final public func load(_ url: Foundation.URL?) -> some _Concurrency.AsyncSequence<WebKit.WebPage.NavigationEvent, any Swift.Error>
   
-  #endif
   @discardableResult
   @_Concurrency.MainActor final public func load(_ request: Foundation.URLRequest) -> some _Concurrency.AsyncSequence<WebKit.WebPage.NavigationEvent, any Swift.Error>
   
@@ -558,15 +529,8 @@ extension WebKit.WebPage : CoreTransferable.Transferable {
   @_Concurrency.MainActor final public func reload(fromOrigin: Swift.Bool = false) -> some _Concurrency.AsyncSequence<WebKit.WebPage.NavigationEvent, any Swift.Error>
   
   @_Concurrency.MainActor final public func stopLoading()
-  #if compiler(>=5.3) && $NonescapableTypes
-  #if compiler(>=5.3) && $SendingArgsAndResults
   @discardableResult
   @_Concurrency.MainActor final public func callJavaScript(_ functionBody: Swift.String, arguments: [Swift.String : Any] = [:], in frame: WebKit.WebPage.FrameInfo? = nil, contentWorld: WebKit.WKContentWorld? = nil) async throws -> sending Any?
-  #else
-  @discardableResult
-  @_Concurrency.MainActor final public func callJavaScript(_ functionBody: Swift.String, arguments: [Swift.String : Any] = [:], in frame: WebKit.WebPage.FrameInfo? = nil, contentWorld: WebKit.WKContentWorld? = nil) async throws -> Any?
-  #endif
-  #endif
   @_Concurrency.MainActor final public func pauseAllMediaPlayback() async
   @_Concurrency.MainActor final public func mediaPlaybackState() async -> WebKit.WKMediaPlaybackState
   @_Concurrency.MainActor final public func setAllMediaPlaybackSuspended(_ suspended: Swift.Bool) async
@@ -631,3 +595,11 @@ extension WebKit.WebPage.NavigationPreferences.UpgradeToHTTPSPolicy : Swift.Equa
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension WebKit.WebPage.NavigationPreferences.UpgradeToHTTPSPolicy : Swift.Hashable {}
+@available(iOS 9999, macOS 26.4, visionOS 9999, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension WebKit.WebPage.NavigationPreferences.SecurityRestrictionMode : Swift.Equatable {}
+@available(iOS 9999, macOS 26.4, visionOS 9999, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension WebKit.WebPage.NavigationPreferences.SecurityRestrictionMode : Swift.Hashable {}

@@ -430,7 +430,8 @@ protected:
     void UpdateSCSIMaxLatency ( UInt32 latency, UInt32 * maxLatency, const char * param );
     UInt32 getTimeElapsedUS ( UInt64 beginAbsTime );
     UInt64 getCurrentTimeMS ( );
-    
+    static void SignalABCClient ( const char * type, const char * subType );
+
 	// This static member routine provides a mechanism for retrieving a pointer to
 	// the object that is claimed as the owner of the specified SCSITask.
 	static OSObject *				sGetOwnerForTask ( SCSITaskIdentifier request );

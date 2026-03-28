@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreServicesUI.framework/Versions/A/CoreServicesUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$sSo12CSUIBindableC14CoreServicesUIE11descriptionSSvg', 
                        '_$sSo12CSUIBindableC14CoreServicesUIEABycfC', '_$sSo12CSUIBindableC14CoreServicesUIEABycfc', 
                        '_$sSo12CSUIBindableCMa', '_$sSo16CSUIOpenWithFlowC14CoreServicesUIE04openB25MenuDidSelectAppStoreItem4fromySo0abH11ConstructorC_tF', 

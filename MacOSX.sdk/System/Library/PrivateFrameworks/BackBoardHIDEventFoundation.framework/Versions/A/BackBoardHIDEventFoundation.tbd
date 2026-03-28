@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/BackBoardHIDEventFoundation.framework/Versions/A/BackBoardHIDEventFoundation'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s27BackBoardHIDEventFoundation22UnicodeArtTreeRendererV12gotFirstNode33_77387F2FE86C381C58D563EE66E0135DLLSbvpfi', 
                        '_$s27BackBoardHIDEventFoundation22UnicodeArtTreeRendererV6offset33_77387F2FE86C381C58D563EE66E0135DLLSivpfi', 
                        '_$s27BackBoardHIDEventFoundation22UnicodeArtTreeRendererV6writer33_77387F2FE86C381C58D563EE66E0135DLLAA0efG9PrimitiveAELLVvpfi', 

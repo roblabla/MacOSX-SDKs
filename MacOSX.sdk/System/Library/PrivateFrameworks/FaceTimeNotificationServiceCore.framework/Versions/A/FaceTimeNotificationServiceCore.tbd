@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/FaceTimeNotificationServiceCore.framework/Versions/A/FaceTimeNotificationServiceCore'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s31FaceTimeNotificationServiceCore0c10ViewBridgeD0C10sendAction_2toy0abcE008UpstreamI0C_AF22WrappedAlertIdentifierCtYaKF', 
                        '_$s31FaceTimeNotificationServiceCore0c10ViewBridgeD0C10sendAction_2toy0abcE008UpstreamI0C_AF22WrappedAlertIdentifierCtYaKFTu', 
                        '_$s31FaceTimeNotificationServiceCore0c10ViewBridgeD0C10showNotice_2iny0abcE00I0C_AF22WrappedAlertIdentifierCtYaKF', 

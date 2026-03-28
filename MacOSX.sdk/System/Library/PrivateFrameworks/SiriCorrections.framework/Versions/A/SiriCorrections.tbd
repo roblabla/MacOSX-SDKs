@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriCorrections.framework/Versions/A/SiriCorrections'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15SiriCorrections0B0Mp', '_$s15SiriCorrections0B0P15checkCorrection5inputAA0D9OperationVSg0A8NLUTypes0A23_Nlu_External_UserParseV_tFTj', 
                        '_$s15SiriCorrections0B0P15checkCorrection5inputAA0D9OperationVSg0A8NLUTypes0A23_Nlu_External_UserParseV_tFTq', 
                        '_$s15SiriCorrections0B0P17setUndoInvocation06directE07contextyAA0b6DirectE0V_AA0B7ContextVSgtFTj', 
@@ -20,8 +20,6 @@ exports:
                        '_$s15SiriCorrections0B10SELFHelperC12buildSetUndo27correctionsDirectInvocation7contextSo21SCSchemaSCClientEventCSgAA0bhI0V_AA0B7ContextVSgtF', 
                        '_$s15SiriCorrections0B10SELFHelperC12buildSetUndo27correctionsDirectInvocation7contextSo21SCSchemaSCClientEventCSgAA0bhI0V_AA0B7ContextVSgtFTj', 
                        '_$s15SiriCorrections0B10SELFHelperC12buildSetUndo27correctionsDirectInvocation7contextSo21SCSchemaSCClientEventCSgAA0bhI0V_AA0B7ContextVSgtFTq', 
-                       '_$s15SiriCorrections0B10SELFHelperC13correctionsId33_1015833F1E697A12983252A9765ECC06LL10Foundation4UUIDVvM', 
-                       '_$s15SiriCorrections0B10SELFHelperC13correctionsId33_1015833F1E697A12983252A9765ECC06LL10Foundation4UUIDVvg', 
                        '_$s15SiriCorrections0B10SELFHelperC13correctionsId33_1015833F1E697A12983252A9765ECC06LL10Foundation4UUIDVvs', 
                        '_$s15SiriCorrections0B10SELFHelperC13emitCheckUndo8undoType0G6Reason7contextySo014SCSchemaSCUndoH0V_So0kl7OutcomeI0VAA0B7ContextVSgtF', 
                        '_$s15SiriCorrections0B10SELFHelperC13emitCheckUndo8undoType0G6Reason7contextySo014SCSchemaSCUndoH0V_So0kl7OutcomeI0VAA0B7ContextVSgtFTj', 
@@ -29,9 +27,6 @@ exports:
                        '_$s15SiriCorrections0B10SELFHelperC14buildCheckUndo8undoType0G6Reason7contextSo21SCSchemaSCClientEventCSgSo0k6SCUndoH0V_So0kn7OutcomeI0VAA0B7ContextVSgtF', 
                        '_$s15SiriCorrections0B10SELFHelperC14buildCheckUndo8undoType0G6Reason7contextSo21SCSchemaSCClientEventCSgSo0k6SCUndoH0V_So0kn7OutcomeI0VAA0B7ContextVSgtFTj', 
                        '_$s15SiriCorrections0B10SELFHelperC14buildCheckUndo8undoType0G6Reason7contextSo21SCSchemaSCClientEventCSgSo0k6SCUndoH0V_So0kn7OutcomeI0VAA0B7ContextVSgtFTq', 
-                       '_$s15SiriCorrections0B10SELFHelperC15makeClientEvent33_1015833F1E697A12983252A9765ECC06LL7context_So016SCSchemaSCClientF0CSgAA0B7ContextVSg_AiHXEtF', 
-                       '_$s15SiriCorrections0B10SELFHelperC18executionRequestId33_1015833F1E697A12983252A9765ECC06LL10Foundation4UUIDVvM', 
-                       '_$s15SiriCorrections0B10SELFHelperC18executionRequestId33_1015833F1E697A12983252A9765ECC06LL10Foundation4UUIDVvg', 
                        '_$s15SiriCorrections0B10SELFHelperC18executionRequestId33_1015833F1E697A12983252A9765ECC06LL10Foundation4UUIDVvs', 
                        '_$s15SiriCorrections0B10SELFHelperC22makeClientEventWrapper33_1015833F1E697A12983252A9765ECC06LL7contextSo016SCSchemaSCClientF0CSgAA0B7ContextVSg_tF', 
                        '_$s15SiriCorrections0B10SELFHelperC6sharedACvau', '_$s15SiriCorrections0B10SELFHelperC6sharedACvgZ', 
@@ -162,7 +157,6 @@ exports:
                        '_$s15SiriCorrections0B6EngineC9checkUndo5input7context18correctionsOutcomeAA0E6ActionVSgAA0B5ParseO_AA0B7ContextVSg0A8NLUTypes0a24_Nlu_External_CorrectionI0VSgtFTj', 
                        '_$s15SiriCorrections0B6EngineC9checkUndo5input7context18correctionsOutcomeAA0E6ActionVSgAA0B5ParseO_AA0B7ContextVSg0A8NLUTypes0a24_Nlu_External_CorrectionI0VSgtFTq', 
                        '_$s15SiriCorrections0B6EngineCAA0B0AAMc', '_$s15SiriCorrections0B6EngineCAA0B0AAWP', 
-                       '_$s15SiriCorrections0B6EngineCACyc33_B4A290DC396177E2DE6FD9C9F9B768B2LlfC', 
                        '_$s15SiriCorrections0B6EngineCMa', '_$s15SiriCorrections0B6EngineCMm', 
                        '_$s15SiriCorrections0B6EngineCMn', '_$s15SiriCorrections0B6EngineCMo', 
                        '_$s15SiriCorrections0B6EngineCMu', '_$s15SiriCorrections0B6EngineCN', 
@@ -297,4 +291,10 @@ exports:
                        '_$s15SiriCorrections6LoggerO9SubsystemOSQAAMc', '_$s15SiriCorrections6LoggerO9SubsystemOSYAAMc', 
                        '_$s15SiriCorrections6LoggerOMa', '_$s15SiriCorrections6LoggerOMn', 
                        '_$s15SiriCorrections6LoggerON' ]
+    weak-symbols:    [ '_$s15SiriCorrections0B10SELFHelperC13correctionsId33_1015833F1E697A12983252A9765ECC06LL10Foundation4UUIDVvM', 
+                       '_$s15SiriCorrections0B10SELFHelperC13correctionsId33_1015833F1E697A12983252A9765ECC06LL10Foundation4UUIDVvg', 
+                       '_$s15SiriCorrections0B10SELFHelperC15makeClientEvent33_1015833F1E697A12983252A9765ECC06LL7context_So016SCSchemaSCClientF0CSgAA0B7ContextVSg_AiHXEtF', 
+                       '_$s15SiriCorrections0B10SELFHelperC18executionRequestId33_1015833F1E697A12983252A9765ECC06LL10Foundation4UUIDVvM', 
+                       '_$s15SiriCorrections0B10SELFHelperC18executionRequestId33_1015833F1E697A12983252A9765ECC06LL10Foundation4UUIDVvg', 
+                       '_$s15SiriCorrections0B6EngineCACyc33_B4A290DC396177E2DE6FD9C9F9B768B2LlfC' ]
 ...

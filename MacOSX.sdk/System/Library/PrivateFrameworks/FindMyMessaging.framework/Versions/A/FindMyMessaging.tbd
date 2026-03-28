@@ -1,18 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FindMyMessaging.framework/Versions/A/FindMyMessaging'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FindMy, FindMyMessagingTests, FindMyUICore, findmylocateagent, 
                        findmylocated, findmylocatedTests, fmltool, searchpartyd, 
                        searchpartydTests, searchpartyuseragent ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s15FindMyMessaging05LocalC0C11descriptionSSvg', '_$s15FindMyMessaging05LocalC0C11descriptionSSvpMV', 
                        '_$s15FindMyMessaging05LocalC0C11serviceNameACyxGSS_tYacfC', 
                        '_$s15FindMyMessaging05LocalC0C11serviceNameACyxGSS_tYacfCTj', 

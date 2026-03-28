@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriMailOntology.framework/Versions/A/SiriMailOntology'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12SiriOntology11DynamicTaskV0a4MailB0AD11CommonStockO0G11ChangeStateV6NoVerbVRszlE6entity12userEntitiesACyAJGAA6EntityVyAHGSg_SayAOyAD0F0O04UserO0VGGtcfC', 
                        '_$s12SiriOntology11DynamicTaskV0a4MailB0AD11CommonStockO0G4TypeV6NoVerbVRszlE6entity12userEntitiesACyAJGAA6EntityVyAHGSg_SayAOyAD0F0O04UserN0VGGtcfC', 
                        '_$s12SiriOntology11DynamicTaskV0a4MailB0AD11CommonStockO0G9AttributeV6NoVerbVRszlE6entity12userEntitiesACyAJGAA6EntityVyAHGSg_SayAOyAD0F0O04UserN0VGGtcfC', 

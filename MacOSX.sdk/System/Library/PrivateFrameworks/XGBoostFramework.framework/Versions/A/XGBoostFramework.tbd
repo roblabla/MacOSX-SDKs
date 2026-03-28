@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/XGBoostFramework.framework/Versions/A/XGBoostFramework'
 exports:
   - targets:         [ x86_64-macos ]
@@ -194,9 +194,8 @@ exports:
                        __ZTINSt3__110__function6__baseIFbPPN4dmlc4data17RowBlockContainerIyxEEEEE, 
                        __ZTINSt3__110__function6__baseIFbPPNS_6vectorIN4dmlc4data17RowBlockContainerIjfEENS_9allocatorIS6_EEEEEEE, 
                        __ZTINSt3__110__function6__baseIFbPPNS_6vectorIN4dmlc4data17RowBlockContainerIyfEENS_9allocatorIS6_EEEEEEE, 
-                       __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__110__function6__funcIPFbRKN7xgboost4tree14CPUExpandEntryES6_ENS_9allocatorIS8_EEFbS4_S4_EEE, 
-                       __ZTINSt3__110__function6__funcIPFvvENS_9allocatorIS3_EES2_EE, 
-                       __ZTINSt3__110shared_ptrIN7xgboost4data12ArrayAdapterEEE, 
+                       __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__110__function6__funcIPFbRKN7xgboost4tree14CPUExpandEntryES6_EFbS4_S4_EEE, 
+                       __ZTINSt3__110__function6__funcIPFvvES2_EE, __ZTINSt3__110shared_ptrIN7xgboost4data12ArrayAdapterEEE, 
                        __ZTINSt3__110shared_ptrIN7xgboost4data15CSRArrayAdapterEEE, 
                        __ZTINSt3__111__alternateIcEE, __ZTINSt3__111__end_stateIcEE, 
                        __ZTINSt3__111__lookaheadIcNS_12regex_traitsIcEEEE, __ZTINSt3__111__match_anyIcEE, 
@@ -438,9 +437,8 @@ exports:
                        __ZTSNSt3__110__function6__baseIFbPPN4dmlc4data17RowBlockContainerIyxEEEEE, 
                        __ZTSNSt3__110__function6__baseIFbPPNS_6vectorIN4dmlc4data17RowBlockContainerIjfEENS_9allocatorIS6_EEEEEEE, 
                        __ZTSNSt3__110__function6__baseIFbPPNS_6vectorIN4dmlc4data17RowBlockContainerIyfEENS_9allocatorIS6_EEEEEEE, 
-                       __ZTSNSt3__110__function6__baseIFvvEEE, __ZTSNSt3__110__function6__funcIPFbRKN7xgboost4tree14CPUExpandEntryES6_ENS_9allocatorIS8_EEFbS4_S4_EEE, 
-                       __ZTSNSt3__110__function6__funcIPFvvENS_9allocatorIS3_EES2_EE, 
-                       __ZTSNSt3__110shared_ptrIN7xgboost11EllpackPageEE27__shared_ptr_default_deleteIS2_S2_EE, 
+                       __ZTSNSt3__110__function6__baseIFvvEEE, __ZTSNSt3__110__function6__funcIPFbRKN7xgboost4tree14CPUExpandEntryES6_EFbS4_S4_EEE, 
+                       __ZTSNSt3__110__function6__funcIPFvvES2_EE, __ZTSNSt3__110shared_ptrIN7xgboost11EllpackPageEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__110shared_ptrIN7xgboost13SortedCSCPageEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__110shared_ptrIN7xgboost16GHistIndexMatrixEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__110shared_ptrIN7xgboost17BatchIteratorImplINS1_10SparsePageEEEE27__shared_ptr_default_deleteIS4_S4_EE, 
@@ -510,7 +508,7 @@ exports:
                        __ZTSNSt3__126__end_marked_subexpressionIcEE, __ZTSNSt3__128__begin_marked_subexpressionIcEE, 
                        __ZTSNSt3__16__loopIcEE, __ZTSNSt3__16__nodeIcEE, __ZTSPFbRKN7xgboost4tree14CPUExpandEntryES3_E, 
                        __ZTSPFvvE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _RabitAllgather, _RabitAllreduce, _RabitBroadcast, _RabitCheckPoint, 
                        _RabitFinalize, _RabitGetProcessorName, _RabitGetRank, _RabitGetRingPrevRank, 
                        _RabitGetWorldSize, _RabitInit, _RabitIsDistributed, _RabitLinkTag, 

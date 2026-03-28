@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Calculate.framework/Versions/A/Calculate'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s9Calculate0A10ExpressionC04RichB0C11activeErrors0E0_pSgvgTj', 
                        '_$s9Calculate0A10ExpressionC04RichB0C11activeErrors0E0_pSgvgTq', 
                        '_$s9Calculate0A10ExpressionC04RichB0C11activeErrors0E0_pSgvpMV', 

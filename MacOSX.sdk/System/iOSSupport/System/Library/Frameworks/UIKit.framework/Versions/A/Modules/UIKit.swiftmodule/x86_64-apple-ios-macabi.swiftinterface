@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-ios26.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-abi-name UIKit -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 9126.2.4 -module-name UIKit
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-ios26.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-abi-name UIKit -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 9126.4.27.1.402 -module-name UIKit
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 @_exported import Accessibility
 @_exported import CoreGraphics
 import CoreText
@@ -57,26 +57,18 @@ extension UIKit.UITraitDefinition {
 public protocol _UICustomRawRepresentableTraitDefinition : UIKit.UITraitDefinition {
   associatedtype _CustomRawValue
   static func _customRawValue(for value: Self.Value) -> Self._CustomRawValue
-  #if compiler(>=5.3) && $NonescapableTypes
   static func _value(from customRawValue: Self._CustomRawValue) -> Self.Value?
-  #endif
 }
 @available(iOS 17.0, tvOS 17.0, *)
 @available(watchOS, unavailable)
 public protocol UIMutableTraits {
   subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition { get set }
   subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == CoreFoundation.CGFloat { get set }
-  #if compiler(>=5.3) && $NonescapableTypes
   subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == CoreFoundation.CGFloat? { get set }
-  #endif
   subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == Swift.Double { get set }
-  #if compiler(>=5.3) && $NonescapableTypes
   subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == Swift.Double? { get set }
-  #endif
   subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == Swift.Int { get set }
-  #if compiler(>=5.3) && $NonescapableTypes
   subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == Swift.Int? { get set }
-  #endif
   subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == Swift.Bool { get set }
   subscript<T>(trait: T.Type) -> T.Value where T : UIKit._UICustomRawRepresentableTraitDefinition { get set }
   subscript<T>(trait: T.Type) -> T.Value where T : UIKit._UICustomRawRepresentableTraitDefinition, T._CustomRawValue == CoreFoundation.CGFloat { get set }
@@ -96,27 +88,21 @@ extension UITraitCollection {
   public subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == CoreFoundation.CGFloat {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == CoreFoundation.CGFloat? {
     get
   }
-  #endif
   public subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == Swift.Double {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == Swift.Double? {
     get
   }
-  #endif
   public subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == Swift.Int {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == Swift.Int? {
     get
   }
-  #endif
   public subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == Swift.Bool {
     get
   }
@@ -146,17 +132,11 @@ extension UITraitCollection {
   }
   public func replacing<T>(_ trait: T.Type, value: T.Value) -> UITraitCollection where T : UIKit.UITraitDefinition
   public func replacing<T>(_ trait: T.Type, value: T.Value) -> UITraitCollection where T : UIKit.UITraitDefinition, T.Value == CoreFoundation.CGFloat
-  #if compiler(>=5.3) && $NonescapableTypes
   public func replacing<T>(_ trait: T.Type, value: T.Value) -> UITraitCollection where T : UIKit.UITraitDefinition, T.Value == CoreFoundation.CGFloat?
-  #endif
   public func replacing<T>(_ trait: T.Type, value: T.Value) -> UITraitCollection where T : UIKit.UITraitDefinition, T.Value == Swift.Double
-  #if compiler(>=5.3) && $NonescapableTypes
   public func replacing<T>(_ trait: T.Type, value: T.Value) -> UITraitCollection where T : UIKit.UITraitDefinition, T.Value == Swift.Double?
-  #endif
   public func replacing<T>(_ trait: T.Type, value: T.Value) -> UITraitCollection where T : UIKit.UITraitDefinition, T.Value == Swift.Int
-  #if compiler(>=5.3) && $NonescapableTypes
   public func replacing<T>(_ trait: T.Type, value: T.Value) -> UITraitCollection where T : UIKit.UITraitDefinition, T.Value == Swift.Int?
-  #endif
   public func replacing<T>(_ trait: T.Type, value: T.Value) -> UITraitCollection where T : UIKit.UITraitDefinition, T.Value == Swift.Bool
   public func replacing<T>(_ trait: T.Type, value: T.Value) -> UITraitCollection where T : UIKit._UICustomRawRepresentableTraitDefinition
   public func replacing<T>(_ trait: T.Type, value: T.Value) -> UITraitCollection where T : UIKit._UICustomRawRepresentableTraitDefinition, T._CustomRawValue == CoreFoundation.CGFloat
@@ -168,17 +148,11 @@ extension UITraitCollection {
   public func replacing<T>(_ trait: T.Type, value: T.Value) -> UITraitCollection where T : UIKit.UITraitDefinition, T.Value : Swift.RawRepresentable, T.Value.RawValue == Swift.Int
   convenience public init<T>(_ trait: T.Type, value: T.Value) where T : UIKit.UITraitDefinition
   convenience public init<T>(_ trait: T.Type, value: T.Value) where T : UIKit.UITraitDefinition, T.Value == CoreFoundation.CGFloat
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init<T>(_ trait: T.Type, value: T.Value) where T : UIKit.UITraitDefinition, T.Value == CoreFoundation.CGFloat?
-  #endif
   convenience public init<T>(_ trait: T.Type, value: T.Value) where T : UIKit.UITraitDefinition, T.Value == Swift.Double
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init<T>(_ trait: T.Type, value: T.Value) where T : UIKit.UITraitDefinition, T.Value == Swift.Double?
-  #endif
   convenience public init<T>(_ trait: T.Type, value: T.Value) where T : UIKit.UITraitDefinition, T.Value == Swift.Int
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init<T>(_ trait: T.Type, value: T.Value) where T : UIKit.UITraitDefinition, T.Value == Swift.Int?
-  #endif
   convenience public init<T>(_ trait: T.Type, value: T.Value) where T : UIKit.UITraitDefinition, T.Value == Swift.Bool
   convenience public init<T>(_ trait: T.Type, value: T.Value) where T : UIKit._UICustomRawRepresentableTraitDefinition
   convenience public init<T>(_ trait: T.Type, value: T.Value) where T : UIKit._UICustomRawRepresentableTraitDefinition, T._CustomRawValue == CoreFoundation.CGFloat
@@ -191,9 +165,7 @@ extension UITraitCollection {
   public typealias TraitMutations = (_ mutableTraits: inout any UIKit.UIMutableTraits) -> Swift.Void
   convenience public init(mutations: (_ mutableTraits: inout any UIKit.UIMutableTraits) -> Swift.Void)
   public func modifyingTraits(_ mutations: (_ mutableTraits: inout any UIKit.UIMutableTraits) -> Swift.Void) -> UITraitCollection
-  #if compiler(>=5.3) && $NonescapableTypes
   public func changedTraits(from traitCollection: UITraitCollection?) -> [UIKit.UITrait]
-  #endif
   public static var systemTraitsAffectingColorAppearance: [UIKit.UITrait] {
     get
   }
@@ -214,32 +186,26 @@ public struct UITraitOverrides : UIKit.UIMutableTraits {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == CoreFoundation.CGFloat? {
     get
     set
   }
-  #endif
   public subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == Swift.Double {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == Swift.Double? {
     get
     set
   }
-  #endif
   public subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == Swift.Int {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == Swift.Int? {
     get
     set
   }
-  #endif
   public subscript<T>(trait: T.Type) -> T.Value where T : UIKit.UITraitDefinition, T.Value == Swift.Bool {
     get
     set
@@ -716,24 +682,16 @@ public struct UITraitTypesettingLanguage : UIKit.UITraitDefinition {
 @available(iOS 17.0, tvOS 17.0, *)
 @available(watchOS, unavailable)
 extension UITraitCollection {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var typesettingLanguage: Foundation.Locale.Language? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(typesettingLanguage: Foundation.Locale.Language?)
-  #endif
 }
 @available(iOS 17.0, tvOS 17.0, *)
 @available(watchOS, unavailable)
 extension UIKit.UITraitTypesettingLanguage : UIKit._UICustomRawRepresentableTraitDefinition {
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _customRawValue(for value: Foundation.Locale.Language?) -> Swift.String?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _value(from customRawValue: Swift.String?) -> Foundation.Locale.Language??
-  #endif
   @available(iOS 17.0, tvOS 17.0, *)
   @available(watchOS, unavailable)
   public typealias _CustomRawValue = Swift.String?
@@ -741,12 +699,10 @@ extension UIKit.UITraitTypesettingLanguage : UIKit._UICustomRawRepresentableTrai
 @available(iOS 17.0, tvOS 17.0, *)
 @available(watchOS, unavailable)
 extension UIKit.UIMutableTraits {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var typesettingLanguage: Foundation.Locale.Language? {
     get
     set
   }
-  #endif
 }
 @available(iOS 26.0, tvOS 26.0, visionOS 26.0, *)
 @available(watchOS, unavailable)
@@ -858,9 +814,7 @@ extension UIKit.UIMutableTraits {
 @available(watchOS, unavailable)
 public struct UICornerRadius : Swift.Equatable, Swift.Hashable, Swift.ExpressibleByFloatLiteral, Swift.ExpressibleByIntegerLiteral, Swift.CustomStringConvertible {
   public static func fixed(_ radius: Swift.Double) -> UIKit.UICornerRadius
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func containerConcentric(minimum: CoreFoundation.CGFloat? = nil) -> UIKit.UICornerRadius
-  #endif
   public init(floatLiteral value: Swift.FloatLiteralType)
   public init(integerLiteral value: Swift.IntegerLiteralType)
   public var description: Swift.String {
@@ -911,9 +865,7 @@ public struct UICellAccessory {
     public var isHidden: Swift.Bool
     public var reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension
     public var tintColor: UIColor?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(isHidden: Swift.Bool? = nil, reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension? = nil, tintColor: UIColor? = nil)
-    #endif
   }
   public static func disclosureIndicator(displayed: UIKit.UICellAccessory.DisplayedState = .always, options: UIKit.UICellAccessory.DisclosureIndicatorOptions = DisclosureIndicatorOptions()) -> UIKit.UICellAccessory
   @available(iOS 15.4, tvOS 15.4, *)
@@ -922,22 +874,16 @@ public struct UICellAccessory {
     public var isHidden: Swift.Bool
     public var reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension
     public var tintColor: UIColor?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(isHidden: Swift.Bool? = nil, reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension? = nil, tintColor: UIColor? = nil)
-    #endif
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.4, tvOS 15.4, *)
   @available(watchOS, unavailable)
   public static func detail(displayed: UIKit.UICellAccessory.DisplayedState = .always, options: UIKit.UICellAccessory.DetailOptions = DetailOptions(), actionHandler: UIKit.UICellAccessory.ActionHandler? = nil) -> UIKit.UICellAccessory
-  #endif
   public struct CheckmarkOptions {
     public var isHidden: Swift.Bool
     public var reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension
     public var tintColor: UIColor?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(isHidden: Swift.Bool? = nil, reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension? = nil, tintColor: UIColor? = nil)
-    #endif
   }
   public static func checkmark(displayed: UIKit.UICellAccessory.DisplayedState = .always, options: UIKit.UICellAccessory.CheckmarkOptions = CheckmarkOptions()) -> UIKit.UICellAccessory
   public struct DeleteOptions {
@@ -945,33 +891,23 @@ public struct UICellAccessory {
     public var reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension
     public var tintColor: UIColor?
     public var backgroundColor: UIColor?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(isHidden: Swift.Bool? = nil, reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension? = nil, tintColor: UIColor? = nil, backgroundColor: UIColor? = nil)
-    #endif
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func delete(displayed: UIKit.UICellAccessory.DisplayedState = .whenEditing, options: UIKit.UICellAccessory.DeleteOptions = DeleteOptions(), actionHandler: UIKit.UICellAccessory.ActionHandler? = nil) -> UIKit.UICellAccessory
-  #endif
   public struct InsertOptions {
     public var isHidden: Swift.Bool
     public var reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension
     public var tintColor: UIColor?
     public var backgroundColor: UIColor?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(isHidden: Swift.Bool? = nil, reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension? = nil, tintColor: UIColor? = nil, backgroundColor: UIColor? = nil)
-    #endif
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func insert(displayed: UIKit.UICellAccessory.DisplayedState = .whenEditing, options: UIKit.UICellAccessory.InsertOptions = InsertOptions(), actionHandler: UIKit.UICellAccessory.ActionHandler? = nil) -> UIKit.UICellAccessory
-  #endif
   public struct ReorderOptions {
     public var isHidden: Swift.Bool
     public var reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension
     public var tintColor: UIColor?
     public var showsVerticalSeparator: Swift.Bool
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(isHidden: Swift.Bool? = nil, reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension? = nil, tintColor: UIColor? = nil, showsVerticalSeparator: Swift.Bool? = nil)
-    #endif
   }
   public static func reorder(displayed: UIKit.UICellAccessory.DisplayedState = .whenEditing, options: UIKit.UICellAccessory.ReorderOptions = ReorderOptions()) -> UIKit.UICellAccessory
   public struct MultiselectOptions {
@@ -979,9 +915,7 @@ public struct UICellAccessory {
     public var reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension
     public var tintColor: UIColor?
     public var backgroundColor: UIColor?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(isHidden: Swift.Bool? = nil, reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension? = nil, tintColor: UIColor? = nil, backgroundColor: UIColor? = nil)
-    #endif
   }
   public static func multiselect(displayed: UIKit.UICellAccessory.DisplayedState = .whenEditing, options: UIKit.UICellAccessory.MultiselectOptions = MultiselectOptions()) -> UIKit.UICellAccessory
   public struct OutlineDisclosureOptions {
@@ -999,36 +933,26 @@ public struct UICellAccessory {
     public var isHidden: Swift.Bool
     public var reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension
     public var tintColor: UIColor?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(style: UIKit.UICellAccessory.OutlineDisclosureOptions.Style? = nil, isHidden: Swift.Bool? = nil, reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension? = nil, tintColor: UIColor? = nil)
-    #endif
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func outlineDisclosure(displayed: UIKit.UICellAccessory.DisplayedState = .always, options: UIKit.UICellAccessory.OutlineDisclosureOptions = OutlineDisclosureOptions(), actionHandler: UIKit.UICellAccessory.ActionHandler? = nil) -> UIKit.UICellAccessory
-  #endif
   public typealias MenuSelectedElementDidChangeHandler = (UIMenu) -> Swift.Void
   @available(iOS 16.0, *)
   public struct PopUpMenuOptions {
     public var isHidden: Swift.Bool
     public var reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension
     public var tintColor: UIColor?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(isHidden: Swift.Bool? = nil, reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension? = nil, tintColor: UIColor? = nil)
-    #endif
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, *)
   public static func popUpMenu(_ menu: UIMenu, displayed: UIKit.UICellAccessory.DisplayedState = .always, options: UIKit.UICellAccessory.PopUpMenuOptions = PopUpMenuOptions(), selectedElementDidChangeHandler: UIKit.UICellAccessory.MenuSelectedElementDidChangeHandler? = nil) -> UIKit.UICellAccessory
-  #endif
   public struct LabelOptions {
     public var isHidden: Swift.Bool
     public var reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension
     public var tintColor: UIColor?
     public var font: UIFont
     public var adjustsFontForContentSizeCategory: Swift.Bool
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(isHidden: Swift.Bool? = nil, reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension? = nil, tintColor: UIColor? = nil, font: UIFont? = nil, adjustsFontForContentSizeCategory: Swift.Bool? = nil)
-    #endif
   }
   public static func label(text: Swift.String, displayed: UIKit.UICellAccessory.DisplayedState = .always, options: UIKit.UICellAccessory.LabelOptions = LabelOptions()) -> UIKit.UICellAccessory
   public enum Placement {
@@ -1045,9 +969,7 @@ public struct UICellAccessory {
     public var reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension
     public var tintColor: UIColor?
     public var maintainsFixedSize: Swift.Bool
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(customView: UIView, placement: UIKit.UICellAccessory.Placement, isHidden: Swift.Bool? = nil, reservedLayoutWidth: UIKit.UICellAccessory.LayoutDimension? = nil, tintColor: UIColor? = nil, maintainsFixedSize: Swift.Bool? = nil)
-    #endif
   }
   public static func customView(configuration: UIKit.UICellAccessory.CustomViewConfiguration) -> UIKit.UICellAccessory
   public enum AccessoryType : Swift.Hashable {
@@ -1171,9 +1093,7 @@ extension UIDevice {
     }
     public typealias Subject = UIDevice
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIDevice.BatteryLevelDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, visionOS 26.0, *)
   @available(tvOS, unavailable)
@@ -1184,9 +1104,7 @@ extension UIDevice {
     }
     public typealias Subject = UIDevice
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIDevice.BatteryStateDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, *)
   @available(tvOS, unavailable)
@@ -1198,9 +1116,7 @@ extension UIDevice {
     }
     public typealias Subject = UIDevice
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIDevice.OrientationDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
   @available(watchOS, unavailable)
@@ -1210,9 +1126,7 @@ extension UIDevice {
     }
     public typealias Subject = UIDevice
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIDevice.ProximityStateDidChangeMessage?
-    #endif
   }
 }
 @available(iOS 26.0, macCatalyst 26.0, visionOS 26.0, *)
@@ -1257,9 +1171,7 @@ extension UITextField {
     public typealias Subject = UITextField
     public var textField: UITextField
     public init(textField: UITextField)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UITextField.TextDidBeginEditingMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UITextField.TextDidBeginEditingMessage) -> Foundation.Notification
   }
   public struct TextDidChangeMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -1269,9 +1181,7 @@ extension UITextField {
     public typealias Subject = UITextField
     public var textField: UITextField
     public init(textField: UITextField)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UITextField.TextDidChangeMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UITextField.TextDidChangeMessage) -> Foundation.Notification
   }
   public struct TextDidEndEditingMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -1281,12 +1191,8 @@ extension UITextField {
     public typealias Subject = UITextField
     public var reason: UITextField.DidEndEditingReason?
     public var textField: UITextField
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(reason: UITextField.DidEndEditingReason?, textField: UITextField)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UITextField.TextDidEndEditingMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UITextField.TextDidEndEditingMessage) -> Foundation.Notification
   }
 }
@@ -1404,102 +1310,74 @@ extension UIButton {
       get
       set
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var baseForegroundColor: UIColor? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var baseBackgroundColor: UIColor? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var image: UIImage? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var imageColorTransformer: UIKit.UIConfigurationColorTransformer? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var preferredSymbolConfigurationForImage: UIImage.SymbolConfiguration? {
       get
       set
     }
-    #endif
     public var showsActivityIndicator: Swift.Bool {
       get
       set
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var activityIndicatorColorTransformer: UIKit.UIConfigurationColorTransformer? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var title: Swift.String? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var attributedTitle: Foundation.AttributedString? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var titleTextAttributesTransformer: UIKit.UIConfigurationTextAttributesTransformer? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var subtitle: Swift.String? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var attributedSubtitle: Foundation.AttributedString? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var subtitleTextAttributesTransformer: UIKit.UIConfigurationTextAttributesTransformer? {
       get
       set
     }
-    #endif
     @available(iOS 16.0, tvOS 16.0, *)
     public var indicator: UIButton.Configuration.Indicator {
       get
       set
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS 16.0, tvOS 16.0, *)
     public var indicatorColorTransformer: UIKit.UIConfigurationColorTransformer? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS 26.0, tvOS 26.0, *)
     @available(watchOS, unavailable)
     public var symbolContentTransition: UISymbolContentTransition? {
       get
       set
     }
-    #endif
     public var contentInsets: NSDirectionalEdgeInsets {
       get
       set
@@ -1531,15 +1409,11 @@ extension UIButton {
       get
     }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency convenience public init(configuration: UIButton.Configuration, primaryAction: UIAction? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var configuration: UIButton.Configuration? {
     get
     set
   }
-  #endif
 }
 @available(iOS 15.0, tvOS 15.0, *)
 @available(watchOS, unavailable)
@@ -1576,48 +1450,34 @@ extension UIButton.Configuration {
 @available(watchOS, unavailable)
 extension UIButton.Configuration : Swift._ObjectiveCBridgeable {
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> __UIButtonConfiguration
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ input: __UIButtonConfiguration, result: inout UIButton.Configuration?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ input: __UIButtonConfiguration, result: inout UIButton.Configuration?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_effects(readonly) public static func _unconditionallyBridgeFromObjectiveC(_ _config: __UIButtonConfiguration?) -> UIButton.Configuration
-  #endif
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   public typealias _ObjectiveCType = __UIButtonConfiguration
 }
 @available(iOS 16.0, *)
 extension UIWindowScene.GeometryPreferences.iOS {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var interfaceOrientations: UIInterfaceOrientationMask? {
     get
     set
   }
-  #endif
 }
 @available(iOS 16.0, macCatalyst 16.0, *)
 extension UIWindowScene.GeometryPreferences.Mac {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var systemFrame: CoreFoundation.CGRect? {
     get
     set
   }
-  #endif
 }
 extension UIControl {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, tvOS 14.0, *)
   @_Concurrency.MainActor @preconcurrency public func enumerateEventHandlers(_ iterator: (UIAction?, (Any?, ObjectiveC.Selector)?, UIControl.Event, inout Swift.Bool) -> Swift.Void)
-  #endif
 }
 extension UIButton {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, tvOS 14.0, *)
   @_Concurrency.MainActor @preconcurrency convenience public init(type buttonType: UIButton.ButtonType = .system, primaryAction: UIAction?)
-  #endif
 }
 @available(iOS 18.0, *)
 @available(tvOS, unavailable)
@@ -1639,9 +1499,7 @@ extension UIDocument {
     public typealias Subject = UIDocument
     public var document: UIDocument
     public init(document: UIDocument)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIDocument.StateChangedMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIDocument.StateChangedMessage) -> Foundation.Notification
   }
   public struct DidMoveToWritableLocationMessage : Foundation.NotificationCenter.AsyncMessage {
@@ -1652,9 +1510,7 @@ extension UIDocument {
     public var document: UIDocument
     public var oldURL: Foundation.URL
     public init(document: UIDocument, oldURL: Foundation.URL)
-    #if compiler(>=5.3) && $NonescapableTypes
     public static func makeMessage(_ notification: Foundation.Notification) -> UIDocument.DidMoveToWritableLocationMessage?
-    #endif
     public static func makeNotification(_ message: UIDocument.DidMoveToWritableLocationMessage) -> Foundation.Notification
   }
 }
@@ -1679,24 +1535,18 @@ extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundati
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension UINavigationItem {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var attributedTitle: Foundation.AttributedString? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var attributedSubtitle: Foundation.AttributedString? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var largeAttributedSubtitle: Foundation.AttributedString? {
     get
     set
   }
-  #endif
 }
 @available(iOS 16.0, *)
 @available(tvOS, unavailable)
@@ -1714,7 +1564,6 @@ extension UIKit.UINavigationItemRenameDelegate {
   @_Concurrency.MainActor @preconcurrency public func navigationItem(_ navigationItem: UINavigationItem, shouldEndRenamingWith title: Swift.String) -> Swift.Bool
 }
 extension UINavigationItem {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -1722,19 +1571,16 @@ extension UINavigationItem {
     get
     set(renameDelegate)
   }
-  #endif
 }
 @available(iOS 14.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
 extension UICollectionViewCell {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, tvOS 14.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public var contentConfiguration: (any UIKit.UIContentConfiguration)? {
     get
     set(config)
   }
-  #endif
 }
 @available(iOS 14.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
@@ -1746,14 +1592,12 @@ extension UICollectionViewListCell {
 @available(iOS 14.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
 extension UITableViewCell {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, tvOS 14.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public var contentConfiguration: (any UIKit.UIContentConfiguration)? {
     get
     set(config)
   }
-  #endif
   @available(iOS 14.0, tvOS 14.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public func defaultContentConfiguration() -> UIKit.UIListContentConfiguration
@@ -1761,14 +1605,12 @@ extension UITableViewCell {
 @available(iOS 14.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
 extension UITableViewHeaderFooterView {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, tvOS 14.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public var contentConfiguration: (any UIKit.UIContentConfiguration)? {
     get
     set(config)
   }
-  #endif
   @available(iOS 14.0, tvOS 14.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public func defaultContentConfiguration() -> UIKit.UIListContentConfiguration
@@ -1811,24 +1653,18 @@ public protocol UIContentConfiguration {
 @available(watchOS, unavailable)
 public struct UIListContentConfiguration : UIKit.UIContentConfiguration, Swift.Hashable {
   public struct ImageProperties : Swift.Hashable {
-    #if compiler(>=5.3) && $NonescapableTypes
     public var preferredSymbolConfiguration: UIImage.SymbolConfiguration? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var tintColor: UIColor? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var tintColorTransformer: UIKit.UIConfigurationColorTransformer? {
       get
       set
     }
-    #endif
     public func resolvedTintColor(for tintColor: UIColor) -> UIColor
     public var cornerRadius: CoreFoundation.CGFloat {
       get
@@ -1846,20 +1682,16 @@ public struct UIListContentConfiguration : UIKit.UIContentConfiguration, Swift.H
       get
       set
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS 18.0, tvOS 18.0, *)
     public var strokeColor: UIColor? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS 18.0, tvOS 18.0, *)
     public var strokeColorTransformer: UIKit.UIConfigurationColorTransformer? {
       get
       set
     }
-    #endif
     @available(iOS 18.0, tvOS 18.0, *)
     public func resolvedStrokeColor(for tintColor: UIColor) -> UIColor
     @available(iOS 18.0, tvOS 18.0, *)
@@ -1904,12 +1736,10 @@ public struct UIListContentConfiguration : UIKit.UIContentConfiguration, Swift.H
       get
       set
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var colorTransformer: UIKit.UIConfigurationColorTransformer? {
       get
       set
     }
-    #endif
     public func resolvedColor() -> UIColor
     public var alignment: UIKit.UIListContentConfiguration.TextProperties.TextAlignment {
       get
@@ -1969,44 +1799,34 @@ public struct UIListContentConfiguration : UIKit.UIContentConfiguration, Swift.H
   public static func accompaniedSidebarSubtitleCell() -> UIKit.UIListContentConfiguration
   @_Concurrency.MainActor public func makeContentView() -> any UIView & UIKit.UIContentView
   public func updated(for state: any UIKit.UIConfigurationState) -> UIKit.UIListContentConfiguration
-  #if compiler(>=5.3) && $NonescapableTypes
   public var image: UIImage? {
     get
     set
   }
-  #endif
   public var imageProperties: UIKit.UIListContentConfiguration.ImageProperties {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var text: Swift.String? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var attributedText: Foundation.NSAttributedString? {
     get
     set
   }
-  #endif
   public var textProperties: UIKit.UIListContentConfiguration.TextProperties {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var secondaryText: Swift.String? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var secondaryAttributedText: Foundation.NSAttributedString? {
     get
     set
   }
-  #endif
   public var secondaryTextProperties: UIKit.UIListContentConfiguration.TextProperties {
     get
     set
@@ -2127,35 +1947,27 @@ extension UITextFormattingViewController {
 @available(watchOS, unavailable)
 @available(macCatalyst, unavailable)
 extension UITextFormattingViewController.Configuration {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var formattingStyles: [UITextFormattingViewController.FormattingStyle]? {
     get
     set
   }
-  #endif
 }
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 extension UISheetPresentationController.Detent {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, *)
   @_Concurrency.MainActor @preconcurrency public static func custom(identifier: UISheetPresentationController.Detent.Identifier? = nil, resolver: @escaping (_ context: any UISheetPresentationControllerDetentResolutionContext) -> CoreFoundation.CGFloat?) -> UISheetPresentationController.Detent
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, *)
   @_Concurrency.MainActor @preconcurrency public func resolvedValue(in context: any UISheetPresentationControllerDetentResolutionContext) -> CoreFoundation.CGFloat?
-  #endif
 }
 @available(tvOS, unavailable)
 extension UISheetPresentationController {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, *)
   @available(visionOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public var preferredCornerRadius: CoreFoundation.CGFloat? {
     get
     set
   }
-  #endif
 }
 @available(iOS 7.0, watchOS 2.0, *)
 extension Foundation.IndexPath {
@@ -2175,84 +1987,50 @@ extension Foundation.IndexPath {
   }
 }
 extension Foundation.URLResourceValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 8.0, deprecated: 15.0, message: "Use the QuickLookThumbnailing framework and extension point instead")
   @available(watchOS, introduced: 2.0, deprecated: 8.0, message: "Use the QuickLookThumbnailing framework and extension point instead")
   @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "Use the QuickLookThumbnailing framework and extension point instead")
   public var thumbnailDictionary: [Foundation.URLThumbnailDictionaryItem : UIImage]? {
     get
   }
-  #endif
 }
 @available(iOS 2.0, *)
 extension UIEdgeInsets : Swift._ObjectiveCBridgeable {
   public func _bridgeToObjectiveC() -> Foundation.NSValue
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout UIEdgeInsets?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout UIEdgeInsets?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _unconditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue?) -> UIEdgeInsets
-  #endif
   @available(iOS 2.0, *)
   public typealias _ObjectiveCType = Foundation.NSValue
 }
 @available(iOS 11.0, tvOS 11.0, watchOS 4.0, *)
 extension NSDirectionalEdgeInsets : Swift._ObjectiveCBridgeable {
   public func _bridgeToObjectiveC() -> Foundation.NSValue
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout NSDirectionalEdgeInsets?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout NSDirectionalEdgeInsets?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _unconditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue?) -> NSDirectionalEdgeInsets
-  #endif
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, *)
   public typealias _ObjectiveCType = Foundation.NSValue
 }
 @available(iOS 5.0, *)
 extension UIOffset : Swift._ObjectiveCBridgeable {
   public func _bridgeToObjectiveC() -> Foundation.NSValue
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout UIOffset?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout UIOffset?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _unconditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue?) -> UIOffset
-  #endif
   @available(iOS 5.0, *)
   public typealias _ObjectiveCType = Foundation.NSValue
 }
 @available(iOS 17.0, tvOS 17.0, *)
 extension UIImageView {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func addSymbolEffect(_ effect: some Symbols.SymbolEffect & Symbols.DiscreteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true, completion: UIKit.UISymbolEffectCompletion? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func addSymbolEffect(_ effect: some Symbols.SymbolEffect & Symbols.IndefiniteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true, completion: UIKit.UISymbolEffectCompletion? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func addSymbolEffect(_ effect: some Symbols.SymbolEffect & Symbols.DiscreteSymbolEffect & Symbols.IndefiniteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true, completion: UIKit.UISymbolEffectCompletion? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func removeSymbolEffect(ofType effect: some Symbols.SymbolEffect & Symbols.DiscreteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true, completion: UIKit.UISymbolEffectCompletion? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func removeSymbolEffect(ofType effect: some Symbols.SymbolEffect & Symbols.IndefiniteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true, completion: UIKit.UISymbolEffectCompletion? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func removeSymbolEffect(ofType effect: some Symbols.SymbolEffect & Symbols.DiscreteSymbolEffect & Symbols.IndefiniteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true, completion: UIKit.UISymbolEffectCompletion? = nil)
-  #endif
   @_Concurrency.MainActor @preconcurrency public func removeAllSymbolEffects(options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true)
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func setSymbolImage(_ image: UIImage, contentTransition: some Symbols.SymbolEffect & Symbols.ContentTransitionSymbolEffect, options: Symbols.SymbolEffectOptions = .default, completion: UIKit.UISymbolEffectCompletion? = nil)
-  #endif
 }
 @available(iOS 17.0, tvOS 17.0, *)
 public typealias UISymbolEffectCompletion = (UIKit.UISymbolEffectCompletionContext) -> Swift.Void
@@ -2270,12 +2048,10 @@ public typealias UISymbolEffectCompletion = (UIKit.UISymbolEffectCompletionConte
 }
 @available(iOS 17.0, tvOS 17.0, *)
 extension UIWindowScene.ActivationRequestOptions {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var placement: (any UIKit.UIWindowScenePlacement)? {
     get
     set
   }
-  #endif
 }
 @available(iOS 16.0, *)
 @available(tvOS, unavailable)
@@ -2284,9 +2060,7 @@ extension UIEditMenuConfiguration {
   @_Concurrency.MainActor @preconcurrency public var identifier: Swift.AnyHashable {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency convenience public init(identifier: Swift.AnyHashable?, sourcePoint: CoreFoundation.CGPoint)
-  #endif
 }
 @available(iOS 14.0, *)
 @_Concurrency.MainActor @preconcurrency open class UIIndirectScribbleInteraction<Delegate> : ObjectiveC.NSObject, UIInteraction where Delegate : UIKit.UIIndirectScribbleInteractionDelegate {
@@ -2296,12 +2070,8 @@ extension UIEditMenuConfiguration {
   @_Concurrency.MainActor @preconcurrency weak public var delegate: Delegate? {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc public func willMove(to view: UIView?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc public func didMove(to view: UIView?)
-  #endif
   @_Concurrency.MainActor @preconcurrency public init(delegate: Delegate)
   @_Concurrency.MainActor @preconcurrency public var isHandlingWriting: Swift.Bool {
     get
@@ -2316,13 +2086,9 @@ public protocol UIIndirectScribbleInteractionDelegate : ObjectiveC.NSObjectProto
   @_Concurrency.MainActor func indirectScribbleInteraction(_ interaction: any UIInteraction, requestElementsIn rect: CoreFoundation.CGRect) async -> [Self.ElementIdentifier]
   func indirectScribbleInteraction(_ interaction: any UIInteraction, isElementFocused elementIdentifier: Self.ElementIdentifier) -> Swift.Bool
   func indirectScribbleInteraction(_ interaction: any UIInteraction, frameForElement elementIdentifier: Self.ElementIdentifier) -> CoreFoundation.CGRect
-  #if compiler(>=5.3) && $NonescapableTypes
   func indirectScribbleInteraction(_ interaction: any UIInteraction, focusElementIfNeeded elementIdentifier: Self.ElementIdentifier, referencePoint focusReferencePoint: CoreFoundation.CGPoint, completion: @escaping ((any UIResponder & UITextInput)?) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, *)
   @_Concurrency.MainActor func indirectScribbleInteraction(_ interaction: any UIInteraction, focusElementIfNeeded elementIdentifier: Self.ElementIdentifier, referencePoint focusReferencePoint: CoreFoundation.CGPoint) async -> (any UIResponder & UITextInput)?
-  #endif
   func indirectScribbleInteraction(_ interaction: any UIInteraction, shouldDelayFocusForElement elementIdentifier: Self.ElementIdentifier) -> Swift.Bool
   func indirectScribbleInteraction(_ interaction: any UIInteraction, willBeginWritingInElement elementIdentifier: Self.ElementIdentifier)
   func indirectScribbleInteraction(_ interaction: any UIInteraction, didFinishWritingInElement elementIdentifier: Self.ElementIdentifier)
@@ -2336,9 +2102,7 @@ extension UIKit.UIIndirectScribbleInteractionDelegate {
 @available(iOS 15.0, *)
 extension UIKit.UIIndirectScribbleInteractionDelegate {
   @_Concurrency.MainActor public func indirectScribbleInteraction(_ interaction: any UIInteraction, requestElementsIn rect: CoreFoundation.CGRect) async -> [Self.ElementIdentifier]
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor public func indirectScribbleInteraction(_ interaction: any UIInteraction, focusElementIfNeeded elementIdentifier: Self.ElementIdentifier, referencePoint focusReferencePoint: CoreFoundation.CGPoint) async -> (any UIResponder & UITextInput)?
-  #endif
 }
 @available(iOS 14.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
@@ -2355,9 +2119,7 @@ extension UICollectionView {
     @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "Loading Interface Builder products will not be supported in a future version of visionOS.")
     public init(supplementaryNib: UINib, elementKind: Swift.String, handler: @escaping UICollectionView.SupplementaryRegistration<Supplementary>.Handler)
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func dequeueConfiguredReusableCell<Cell, Item>(using registration: UICollectionView.CellRegistration<Cell, Item>, for indexPath: Foundation.IndexPath, item: Item?) -> Cell where Cell : UICollectionViewCell
-  #endif
   @_Concurrency.MainActor @preconcurrency public func dequeueConfiguredReusableSupplementary<Supplementary>(using registration: UICollectionView.SupplementaryRegistration<Supplementary>, for indexPath: Foundation.IndexPath) -> Supplementary where Supplementary : UICollectionReusableView
 }
 @available(*, unavailable)
@@ -2371,29 +2133,19 @@ public struct UISceneSessionActivationRequest : Swift.Hashable {
   public var role: UISceneSession.Role {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var session: UISceneSession? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var userActivity: Foundation.NSUserActivity? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var options: UIScene.ActivationRequestOptions? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(role: UISceneSession.Role = .windowApplication, userActivity: Foundation.NSUserActivity? = nil, options: UIScene.ActivationRequestOptions? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(session: UISceneSession, userActivity: Foundation.NSUserActivity? = nil, options: UIScene.ActivationRequestOptions? = nil)
-  #endif
   public static func == (a: UIKit.UISceneSessionActivationRequest, b: UIKit.UISceneSessionActivationRequest) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -2402,9 +2154,7 @@ public struct UISceneSessionActivationRequest : Swift.Hashable {
 }
 @available(iOS 17.0, tvOS 17.0, *)
 extension UIApplication {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func activateSceneSession(for request: UIKit.UISceneSessionActivationRequest, errorHandler: ((any Swift.Error) -> Swift.Void)? = nil)
-  #endif
 }
 extension UIPasteboard {
   @available(iOS 15.0, *)
@@ -2418,11 +2168,9 @@ extension UIPasteboard {
     public var probableWebSearch: Swift.String {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var number: Swift.Double? {
       get
     }
-    #endif
     public var links: [DataDetection.DDMatchLink] {
       get
     }
@@ -2450,54 +2198,34 @@ extension UIPasteboard {
   }
 }
 extension UIPasteboard {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 14.0, deprecated: 15.0)
   @available(visionOS, introduced: 1.0, deprecated: 1.0)
   public func detectPatterns(for patterns: Swift.Set<UIPasteboard.DetectionPattern>, completionHandler: @escaping (Swift.Result<Swift.Set<UIPasteboard.DetectionPattern>, any Swift.Error>) -> ())
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, *)
   public func detectPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>, completionHandler: @escaping (Swift.Result<Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>, any Swift.Error>) -> ())
-  #endif
   @available(iOS 15.0, *)
   public func detectedPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>) async throws -> Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 14.0, deprecated: 15.0)
   @available(visionOS, introduced: 1.0, deprecated: 1.0)
   public func detectPatterns(for patterns: Swift.Set<UIPasteboard.DetectionPattern>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[Swift.Set<UIPasteboard.DetectionPattern>], any Swift.Error>) -> ())
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, *)
   public func detectPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>], any Swift.Error>) -> ())
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, *)
   public func detectedPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?) async throws -> [Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>]
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 14.0, deprecated: 15.0)
   @available(visionOS, introduced: 1.0, deprecated: 1.0)
   public func detectValues(for patterns: Swift.Set<UIPasteboard.DetectionPattern>, completionHandler: @escaping (Swift.Result<[UIPasteboard.DetectionPattern : Any], any Swift.Error>) -> ())
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, *)
   public func detectValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>, completionHandler: @escaping (Swift.Result<UIPasteboard.DetectedValues, any Swift.Error>) -> ())
-  #endif
   @available(iOS 15.0, *)
   public func detectedValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>) async throws -> UIPasteboard.DetectedValues
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 14.0, deprecated: 15.0)
   @available(visionOS, introduced: 1.0, deprecated: 1.0)
   public func detectValues(for patterns: Swift.Set<UIPasteboard.DetectionPattern>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[[UIPasteboard.DetectionPattern : Any]], any Swift.Error>) -> ())
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, *)
   public func detectValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[UIPasteboard.DetectedValues], any Swift.Error>) -> ())
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, *)
   public func detectedValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?) async throws -> [UIPasteboard.DetectedValues]
-  #endif
 }
 @available(iOS 26.0, macCatalyst 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
@@ -2511,9 +2239,7 @@ extension UIPasteboard {
     public var typesAdded: [Swift.String]
     public var typesRemoved: [Swift.String]
     public init(typesAdded: [Swift.String], typesRemoved: [Swift.String])
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIPasteboard.ChangedMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIPasteboard.ChangedMessage) -> Foundation.Notification
   }
   public struct RemovedMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -2522,9 +2248,7 @@ extension UIPasteboard {
     }
     public typealias Subject = UIPasteboard
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIPasteboard.RemovedMessage?
-    #endif
   }
 }
 @available(iOS 26.0, macCatalyst 26.0, visionOS 26.0, *)
@@ -2547,36 +2271,26 @@ extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundati
 @available(watchOS, unavailable)
 extension UIKit.UICollectionViewDiffableDataSource {
   @preconcurrency public struct SectionSnapshotHandlers<ItemIdentifierType> where ItemIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Sendable {
-    #if compiler(>=5.3) && $NonescapableTypes
     public var shouldExpandItem: ((ItemIdentifierType) -> Swift.Bool)? {
       get
       set(handler)
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var willExpandItem: ((ItemIdentifierType) -> Swift.Void)? {
       get
       set(handler)
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var shouldCollapseItem: ((ItemIdentifierType) -> Swift.Bool)? {
       get
       set(handler)
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var willCollapseItem: ((ItemIdentifierType) -> Swift.Void)? {
       get
       set(handler)
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var snapshotForExpandingParent: ((ItemIdentifierType, UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>) -> UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>)? {
       get
       set(handler)
     }
-    #endif
     public init()
   }
   @_Concurrency.MainActor @preconcurrency public var sectionSnapshotHandlers: UIKit.UICollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType>.SectionSnapshotHandlers<ItemIdentifierType> {
@@ -2614,18 +2328,10 @@ public struct UIImageReader {
   public var configuration: UIKit.UIImageReader.Configuration {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func image(contentsOf fileURL: Foundation.URL) -> UIImage?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func image(data: Foundation.Data) -> UIImage?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func image(contentsOf fileURL: Foundation.URL) async -> UIImage?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func image(data: Foundation.Data) async -> UIImage?
-  #endif
 }
 @available(iOS 26.0, tvOS 26.0, visionOS 26.0, *)
 @available(watchOS, unavailable)
@@ -2658,18 +2364,12 @@ extension UIScene {
   }
 }
 extension UIBarButtonItem {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, tvOS 14.0, *)
   @_Concurrency.MainActor @preconcurrency convenience public init(systemItem: UIBarButtonItem.SystemItem, primaryAction: UIAction? = nil, menu: UIMenu? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, tvOS 14.0, *)
   @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String? = nil, image: UIImage? = nil, primaryAction: UIAction? = nil, menu: UIMenu? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, *)
   @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String?, image: UIImage?, target: Swift.AnyObject?, action: ObjectiveC.Selector?, menu: UIMenu? = nil)
-  #endif
 }
 extension UIBarButtonItem {
   @available(iOS 16.0, *)
@@ -2705,9 +2405,7 @@ extension UIResponder {
     public var isLocal: Swift.Bool
     public var screen: UIScreen
     public init(beginFrame: CoreFoundation.CGRect, endFrame: CoreFoundation.CGRect, animationDuration: Foundation.TimeInterval, animationCurve: UIView.AnimationCurve, isLocal: Swift.Bool, screen: UIScreen)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIResponder.KeyboardWillShowMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIResponder.KeyboardWillShowMessage) -> Foundation.Notification
   }
   public struct KeyboardDidShowMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -2722,9 +2420,7 @@ extension UIResponder {
     public var isLocal: Swift.Bool
     public var screen: UIScreen
     public init(beginFrame: CoreFoundation.CGRect, endFrame: CoreFoundation.CGRect, animationDuration: Foundation.TimeInterval, animationCurve: UIView.AnimationCurve, isLocal: Swift.Bool, screen: UIScreen)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIResponder.KeyboardDidShowMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIResponder.KeyboardDidShowMessage) -> Foundation.Notification
   }
   public struct KeyboardWillHideMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -2739,9 +2435,7 @@ extension UIResponder {
     public var isLocal: Swift.Bool
     public var screen: UIScreen
     public init(beginFrame: CoreFoundation.CGRect, endFrame: CoreFoundation.CGRect, animationDuration: Foundation.TimeInterval, animationCurve: UIView.AnimationCurve, isLocal: Swift.Bool, screen: UIScreen)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIResponder.KeyboardWillHideMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIResponder.KeyboardWillHideMessage) -> Foundation.Notification
   }
   public struct KeyboardDidHideMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -2756,9 +2450,7 @@ extension UIResponder {
     public var isLocal: Swift.Bool
     public var screen: UIScreen
     public init(beginFrame: CoreFoundation.CGRect, endFrame: CoreFoundation.CGRect, animationDuration: Foundation.TimeInterval, animationCurve: UIView.AnimationCurve, isLocal: Swift.Bool, screen: UIScreen)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIResponder.KeyboardDidHideMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIResponder.KeyboardDidHideMessage) -> Foundation.Notification
   }
   public struct KeyboardWillChangeFrameMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -2773,9 +2465,7 @@ extension UIResponder {
     public var isLocal: Swift.Bool
     public var screen: UIScreen
     public init(beginFrame: CoreFoundation.CGRect, endFrame: CoreFoundation.CGRect, animationDuration: Foundation.TimeInterval, animationCurve: UIView.AnimationCurve, isLocal: Swift.Bool, screen: UIScreen)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIResponder.KeyboardWillChangeFrameMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIResponder.KeyboardWillChangeFrameMessage) -> Foundation.Notification
   }
   public struct KeyboardDidChangeFrameMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -2790,9 +2480,7 @@ extension UIResponder {
     public var isLocal: Swift.Bool
     public var screen: UIScreen
     public init(beginFrame: CoreFoundation.CGRect, endFrame: CoreFoundation.CGRect, animationDuration: Foundation.TimeInterval, animationCurve: UIView.AnimationCurve, isLocal: Swift.Bool, screen: UIScreen)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIResponder.KeyboardDidChangeFrameMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIResponder.KeyboardDidChangeFrameMessage) -> Foundation.Notification
   }
 }
@@ -2874,9 +2562,7 @@ extension UIScreen {
     public typealias Subject = UIScreen
     public var screen: UIScreen
     public init(screen: UIScreen)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIScreen.BrightnessDidChangeMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIScreen.BrightnessDidChangeMessage) -> Foundation.Notification
   }
   public struct ModeDidChangeMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -2886,9 +2572,7 @@ extension UIScreen {
     public typealias Subject = UIScreen
     public var screen: UIScreen
     public init(screen: UIScreen)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIScreen.ModeDidChangeMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIScreen.ModeDidChangeMessage) -> Foundation.Notification
   }
   public struct CapturedDidChangeMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -2898,9 +2582,7 @@ extension UIScreen {
     public typealias Subject = UIScreen
     public var screen: UIScreen
     public init(screen: UIScreen)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIScreen.CapturedDidChangeMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIScreen.CapturedDidChangeMessage) -> Foundation.Notification
   }
   public struct ReferenceDisplayModeStatusDidChangeMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -2910,9 +2592,7 @@ extension UIScreen {
     public typealias Subject = UIScreen
     public var screen: UIScreen
     public init(screen: UIScreen)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIScreen.ReferenceDisplayModeStatusDidChangeMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIScreen.ReferenceDisplayModeStatusDidChangeMessage) -> Foundation.Notification
   }
 }
@@ -2949,7 +2629,6 @@ extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundati
   }
 }
 extension UIFontPickerViewController.Configuration {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, visionOS 2.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -2957,7 +2636,6 @@ extension UIFontPickerViewController.Configuration {
     get
     set
   }
-  #endif
 }
 @available(iOS 14.5, *)
 @available(watchOS, unavailable)
@@ -2998,7 +2676,6 @@ public struct UIListSeparatorConfiguration : Swift.Hashable {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, *)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
@@ -3006,7 +2683,6 @@ public struct UIListSeparatorConfiguration : Swift.Hashable {
     get
     set
   }
-  #endif
   public init(listAppearance: UIKit.UICollectionLayoutListConfiguration.Appearance)
   public static func == (a: UIKit.UIListSeparatorConfiguration, b: UIKit.UIListSeparatorConfiguration) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
@@ -3033,15 +2709,9 @@ extension UIKit.UIListSeparatorConfiguration : Swift.CustomStringConvertible, Sw
 @available(tvOS, unavailable)
 extension UIKit.UIListSeparatorConfiguration : Swift._ObjectiveCBridgeable {
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> __UIListSeparatorConfiguration
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ source: __UIListSeparatorConfiguration, result: inout UIKit.UIListSeparatorConfiguration?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ input: __UIListSeparatorConfiguration, result: inout UIKit.UIListSeparatorConfiguration?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_effects(readonly) public static func _unconditionallyBridgeFromObjectiveC(_ _configuration: __UIListSeparatorConfiguration?) -> UIKit.UIListSeparatorConfiguration
-  #endif
   @available(iOS 14.5, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -3050,25 +2720,15 @@ extension UIKit.UIListSeparatorConfiguration : Swift._ObjectiveCBridgeable {
 @available(iOS 13.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
 extension UIMenuBuilder {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func command(for action: ObjectiveC.Selector, propertyList: Any? = nil) -> UICommand?
-  #endif
 }
 @available(iOS 26.0, tvOS 26.0, *)
 @available(watchOS, unavailable)
 extension UIMenuBuilder {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func replace(command replacedAction: ObjectiveC.Selector, propertyList replacedPropertyList: Any? = nil, with replacementElements: [UIMenuElement])
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func remove(command removedAction: ObjectiveC.Selector, propertyList removedPropertyList: Any? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func insertElements(_ insertedElements: [UIMenuElement], beforeCommand siblingAction: ObjectiveC.Selector, propertyList siblingPropertyList: Any? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func insertElements(_ insertedElements: [UIMenuElement], afterCommand siblingAction: ObjectiveC.Selector, propertyList siblingPropertyList: Any? = nil)
-  #endif
 }
 @available(iOS 13.4, *)
 public enum UIPointerShape {
@@ -3140,78 +2800,54 @@ extension UIPointerAccessory {
 }
 @available(iOS 13.4, *)
 extension UIPointerStyle {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency convenience public init(effect: UIKit.UIPointerEffect, shape: UIKit.UIPointerShape? = nil)
-  #endif
   @_Concurrency.MainActor @preconcurrency convenience public init(shape: UIKit.UIPointerShape, constrainedAxes: UIUtilities.UIAxis = [])
 }
 @available(iOS 13.4, *)
 extension UIPointerRegion {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency convenience public init(rect: CoreFoundation.CGRect, identifier: Swift.AnyHashable? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var identifier: Swift.AnyHashable? {
     get
   }
-  #endif
 }
 @available(iOS 13.4, *)
 extension UIButton {
   public typealias PointerStyleProvider = (_ button: UIButton, _ proposedEffect: UIKit.UIPointerEffect, _ proposedShape: UIKit.UIPointerShape) -> UIPointerStyle?
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var pointerStyleProvider: UIButton.PointerStyleProvider? {
     get
     set
   }
-  #endif
 }
 @available(iOS 13.4, *)
 extension UIKit.UIPointerEffect : Swift._ObjectiveCBridgeable {
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> __UIPointerEffect
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ input: __UIPointerEffect, result: inout UIKit.UIPointerEffect?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ input: __UIPointerEffect, result: inout UIKit.UIPointerEffect?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_effects(readonly) public static func _unconditionallyBridgeFromObjectiveC(_ internalEffect: __UIPointerEffect?) -> UIKit.UIPointerEffect
-  #endif
   @available(iOS 13.4, *)
   public typealias _ObjectiveCType = __UIPointerEffect
 }
 @available(iOS 13.4, *)
 extension UIKit.UIPointerShape : Swift._ObjectiveCBridgeable {
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> __UIPointerShape
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ input: __UIPointerShape, result: inout UIKit.UIPointerShape?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ input: __UIPointerShape, result: inout UIKit.UIPointerShape?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_effects(readonly) public static func _unconditionallyBridgeFromObjectiveC(_ _effect: __UIPointerShape?) -> UIKit.UIPointerShape
-  #endif
   @available(iOS 13.4, *)
   public typealias _ObjectiveCType = __UIPointerShape
 }
 @available(iOS 15.0, *)
 extension UIBandSelectionInteraction {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var selectionRect: CoreFoundation.CGRect? {
     get
   }
-  #endif
 }
 @available(iOS 15.0, *)
 @available(tvOS, unavailable)
 extension UIToolTipConfiguration {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var sourceRect: CoreFoundation.CGRect? {
     get
   }
-  #endif
 }
 @available(iOS 18.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
@@ -3269,19 +2905,15 @@ extension UIBarButtonItem {
     @_Concurrency.MainActor public static func count(_ count: Swift.Int) -> UIBarButtonItem.Badge
     @_Concurrency.MainActor public static func string(_ string: Swift.String) -> UIBarButtonItem.Badge
     @_Concurrency.MainActor public static func indicator() -> UIBarButtonItem.Badge
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public var stringValue: Swift.String? {
       get
     }
-    #endif
     nonisolated public static func == (a: UIBarButtonItem.Badge, b: UIBarButtonItem.Badge) -> Swift.Bool
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var badge: UIBarButtonItem.Badge? {
     get
     set
   }
-  #endif
 }
 @available(visionOS 2.0, *)
 @available(iOS, unavailable)
@@ -3316,9 +2948,7 @@ public protocol UITraitBridgedEnvironmentKey : SwiftUICore.EnvironmentKey {
 @preconcurrency public struct NSDiffableDataSourceSectionSnapshot<ItemIdentifierType> : @unchecked Swift.Sendable where ItemIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Sendable {
   public init()
   public init(_ snapshot: UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>)
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func append(_ items: [ItemIdentifierType], to parent: ItemIdentifierType? = nil)
-  #endif
   public mutating func insert(_ items: [ItemIdentifierType], before item: ItemIdentifierType)
   public mutating func insert(_ items: [ItemIdentifierType], after item: ItemIdentifierType)
   public mutating func delete(_ items: [ItemIdentifierType])
@@ -3332,12 +2962,8 @@ public protocol UITraitBridgedEnvironmentKey : SwiftUICore.EnvironmentKey {
   public func isVisible(_ item: ItemIdentifierType) -> Swift.Bool
   public func contains(_ item: ItemIdentifierType) -> Swift.Bool
   public func level(of item: ItemIdentifierType) -> Swift.Int
-  #if compiler(>=5.3) && $NonescapableTypes
   public func index(of item: ItemIdentifierType) -> Swift.Int?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func parent(of child: ItemIdentifierType) -> ItemIdentifierType?
-  #endif
   public func snapshot(of parent: ItemIdentifierType, includingParent: Swift.Bool = false) -> UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>
   public var items: [ItemIdentifierType] {
     get
@@ -3358,9 +2984,7 @@ public protocol UITraitBridgedEnvironmentKey : SwiftUICore.EnvironmentKey {
 @available(iOS 14.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
 extension UIKit.UICollectionViewDiffableDataSource {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func apply(_ snapshot: UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>, to section: SectionIdentifierType, animatingDifferences: Swift.Bool = true, completion: (() -> Swift.Void)? = nil)
-  #endif
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public func apply(_ snapshot: UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>, to section: SectionIdentifierType, animatingDifferences: Swift.Bool = true) async
@@ -3370,38 +2994,26 @@ extension UIKit.UICollectionViewDiffableDataSource {
 @available(watchOS, unavailable)
 extension UIKit.NSDiffableDataSourceSectionSnapshot : Swift._ObjectiveCBridgeable {
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> NSDiffableDataSourceSectionSnapshotReference
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ input: NSDiffableDataSourceSectionSnapshotReference, result: inout UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ input: NSDiffableDataSourceSectionSnapshotReference, result: inout UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_effects(readonly) public static func _unconditionallyBridgeFromObjectiveC(_ snapshot: NSDiffableDataSourceSectionSnapshotReference?) -> UIKit.NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>
-  #endif
   @available(iOS 14.0, tvOS 14.0, *)
   @available(watchOS, unavailable)
   public typealias _ObjectiveCType = NSDiffableDataSourceSectionSnapshotReference
 }
 extension UIBarButtonItemGroup {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public class func fixedGroup(representativeItem: UIBarButtonItem? = nil, items: [UIBarButtonItem]) -> UIBarButtonItemGroup
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public class func movableGroup(customizationIdentifier: Swift.String, representativeItem: UIBarButtonItem? = nil, items: [UIBarButtonItem]) -> UIBarButtonItemGroup
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public class func optionalGroup(customizationIdentifier: Swift.String, isInDefaultCustomization: Swift.Bool = true, representativeItem: UIBarButtonItem? = nil, items: [UIBarButtonItem]) -> UIBarButtonItemGroup
-  #endif
 }
 @available(iOS 14.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
@@ -3439,24 +3051,18 @@ extension UIBarButtonItemGroup {
 @available(watchOS, unavailable)
 extension UIKit.UICollectionViewDiffableDataSource {
   public struct ReorderingHandlers {
-    #if compiler(>=5.3) && $NonescapableTypes
     public var canReorderItem: ((ItemIdentifierType) -> Swift.Bool)? {
       get
       set(handler)
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var willReorder: ((UIKit.NSDiffableDataSourceTransaction<SectionIdentifierType, ItemIdentifierType>) -> Swift.Void)? {
       get
       set(handler)
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var didReorder: ((UIKit.NSDiffableDataSourceTransaction<SectionIdentifierType, ItemIdentifierType>) -> Swift.Void)? {
       get
       set(handler)
     }
-    #endif
     public init()
   }
   @_Concurrency.MainActor @preconcurrency public var reorderingHandlers: UIKit.UICollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType>.ReorderingHandlers {
@@ -3468,10 +3074,8 @@ extension UIKit.UICollectionViewDiffableDataSource {
 extension UIKit.UICollectionViewDiffableDataSource.ReorderingHandlers : Swift.Sendable {
 }
 extension UIViewController {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, tvOS 15.0, *)
   @_Concurrency.MainActor @preconcurrency public func setContentScrollView(_ scrollView: UIScrollView?)
-  #endif
 }
 @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
 @available(watchOS, unavailable)
@@ -3483,9 +3087,7 @@ extension UIViewController {
     public typealias Subject = UIViewController
     public var viewController: UIViewController
     public init(viewController: UIViewController)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIViewController.ShowDetailTargetDidChangeMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIViewController.ShowDetailTargetDidChangeMessage) -> Foundation.Notification
   }
 }
@@ -3521,9 +3123,7 @@ extension UIContentSizeCategory {
     public var contentSize: Swift.String
     public var screen: UIScreen
     public init(contentSize: Swift.String, screen: UIScreen)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIContentSizeCategory.DidChangeMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIContentSizeCategory.DidChangeMessage) -> Foundation.Notification
   }
 }
@@ -3539,27 +3139,15 @@ extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundati
 @available(watchOS, unavailable)
 public struct UICornerConfiguration : Swift.Equatable, Swift.Hashable, Swift.CustomStringConvertible {
   public static func corners(radius: UIKit.UICornerRadius) -> UIKit.UICornerConfiguration
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func corners(topLeftRadius: UIKit.UICornerRadius?, topRightRadius: UIKit.UICornerRadius?, bottomLeftRadius: UIKit.UICornerRadius?, bottomRightRadius: UIKit.UICornerRadius?) -> UIKit.UICornerConfiguration
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func capsule(maximumRadius: Swift.Double? = nil) -> UIKit.UICornerConfiguration
-  #endif
   public static func uniformCorners(radius: UIKit.UICornerRadius) -> UIKit.UICornerConfiguration
   public static func uniformEdges(topRadius: UIKit.UICornerRadius, bottomRadius: UIKit.UICornerRadius) -> UIKit.UICornerConfiguration
   public static func uniformEdges(leftRadius: UIKit.UICornerRadius, rightRadius: UIKit.UICornerRadius) -> UIKit.UICornerConfiguration
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func uniformTopRadius(_ topRadius: UIKit.UICornerRadius, bottomLeftRadius: UIKit.UICornerRadius? = nil, bottomRightRadius: UIKit.UICornerRadius? = nil) -> UIKit.UICornerConfiguration
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func uniformBottomRadius(_ bottomRadius: UIKit.UICornerRadius, topLeftRadius: UIKit.UICornerRadius? = nil, topRightRadius: UIKit.UICornerRadius? = nil) -> UIKit.UICornerConfiguration
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func uniformLeftRadius(_ leftRadius: UIKit.UICornerRadius, topRightRadius: UIKit.UICornerRadius? = nil, bottomRightRadius: UIKit.UICornerRadius? = nil) -> UIKit.UICornerConfiguration
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func uniformRightRadius(_ rightRadius: UIKit.UICornerRadius, topLeftRadius: UIKit.UICornerRadius? = nil, bottomLeftRadius: UIKit.UICornerRadius? = nil) -> UIKit.UICornerConfiguration
-  #endif
   public func hash(into hasher: inout Swift.Hasher)
   public var description: Swift.String {
     get
@@ -3582,34 +3170,18 @@ public struct UITextSearchAggregator<DocumentIdentifier> where DocumentIdentifie
 @available(iOS 16.0, *)
 public protocol UITextSearching : ObjectiveC.NSObjectProtocol {
   associatedtype DocumentIdentifier : Swift.Hashable = Swift.AnyHashable?
-  #if compiler(>=5.3) && $NonescapableTypes
   var selectedTextRange: UITextRange? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   func compare(_ foundRange: UITextRange, toRange: UITextRange, document: Self.DocumentIdentifier?) -> Foundation.ComparisonResult
-  #endif
   func performTextSearch(queryString: Swift.String, options: UITextSearchOptions, resultAggregator: UIKit.UITextSearchAggregator<Self.DocumentIdentifier>)
-  #if compiler(>=5.3) && $NonescapableTypes
   func decorate(foundTextRange: UITextRange, document: Self.DocumentIdentifier?, usingStyle: UITextSearchFoundTextStyle)
-  #endif
   func clearAllDecoratedFoundText()
   var supportsTextReplacement: Swift.Bool { get }
-  #if compiler(>=5.3) && $NonescapableTypes
   func shouldReplace(foundTextRange: UITextRange, document: Self.DocumentIdentifier?, withText: Swift.String) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   func replace(foundTextRange: UITextRange, document: Self.DocumentIdentifier?, withText: Swift.String)
-  #endif
   func replaceAll(queryString: Swift.String, options: UITextSearchOptions, withText: Swift.String)
-  #if compiler(>=5.3) && $NonescapableTypes
   func willHighlight(foundTextRange: UITextRange, document: Self.DocumentIdentifier?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   func scrollRangeToVisible(_ range: UITextRange, inDocument: Self.DocumentIdentifier?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   var selectedTextSearchDocument: Self.DocumentIdentifier? { get }
-  #endif
   func compare(document: Self.DocumentIdentifier, toDocument: Self.DocumentIdentifier) -> Foundation.ComparisonResult
 }
 @available(iOS 16.0, *)
@@ -3617,24 +3189,14 @@ extension UIKit.UITextSearching {
   public var supportsTextReplacement: Swift.Bool {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func shouldReplace(foundTextRange: UITextRange, document: Self.DocumentIdentifier?, withText: Swift.String) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func replace(foundTextRange: UITextRange, document: Self.DocumentIdentifier?, withText: Swift.String)
-  #endif
   public func replaceAll(queryString: Swift.String, options: UITextSearchOptions, withText: Swift.String)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func willHighlight(foundTextRange: UITextRange, document: Self.DocumentIdentifier?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func scrollRangeToVisible(_ range: UITextRange, inDocument: Self.DocumentIdentifier?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var selectedTextSearchDocument: Self.DocumentIdentifier? {
     get
   }
-  #endif
   public func compare(document: Self.DocumentIdentifier, toDocument: Self.DocumentIdentifier) -> Foundation.ComparisonResult
 }
 @available(iOS 16.0, *)
@@ -3643,28 +3205,14 @@ extension UITextSearchingFindSession {
 }
 @available(iOS 16.0, *)
 extension UITextView : UIKit.UITextSearching {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func compare(_ foundRange: UITextRange, toRange: UITextRange, document: Swift.AnyHashable??) -> Foundation.ComparisonResult
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func performTextSearch(queryString: Swift.String, options: UITextSearchOptions, resultAggregator: UIKit.UITextSearchAggregator<Swift.AnyHashable?>)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func decorate(foundTextRange: UITextRange, document: Swift.AnyHashable??, usingStyle: UITextSearchFoundTextStyle)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func shouldReplace(foundTextRange: UITextRange, document: Swift.AnyHashable??, withText text: Swift.String) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func replace(foundTextRange: UITextRange, document: UITextView.DocumentIdentifier?, withText text: Swift.String)
-  #endif
   @_Concurrency.MainActor @preconcurrency public func replaceAll(queryString: Swift.String, options: UITextSearchOptions, withText text: Swift.String)
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func willHighlight(foundTextRange: UITextRange, document: Swift.AnyHashable??)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func scrollRangeToVisible(_ range: UITextRange, inDocument: Swift.AnyHashable??)
-  #endif
   @available(iOS 16.0, *)
   public typealias DocumentIdentifier = Swift.AnyHashable?
 }
@@ -3754,18 +3302,12 @@ extension UIKit.UIHoverAutomaticEffect : Swift.Sendable {
 @available(iOS 26.0, *)
 @available(watchOS, unavailable)
 extension UIMainMenuSystem {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func setBuildConfiguration(_ configuration: UIMainMenuSystem.Configuration, buildHandler: ((any UIMenuBuilder) -> Swift.Void)? = nil)
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 extension DeveloperToolsSupport.Preview {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor public init(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., body: @escaping @_Concurrency.MainActor () -> UIView)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor public init(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., body: @escaping @_Concurrency.MainActor () -> UIViewController)
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 @freestanding(declaration) public macro Preview(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., @DeveloperToolsSupport.PreviewMacroBodyBuilder<UIView> body: @escaping @_Concurrency.MainActor () -> UIView) = #externalMacro(module: "PreviewsMacros", type: "KitViewMacro")
@@ -3927,12 +3469,10 @@ extension UIView.Invalidations.Tuple : Swift.Sendable {
 @available(watchOS, unavailable)
 @available(macCatalyst, unavailable)
 extension UITextFormattingViewController {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var formattingDescriptor: UITextFormattingViewController.FormattingDescriptor? {
     get
     set
   }
-  #endif
 }
 @available(iOS 18.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
@@ -3969,14 +3509,12 @@ extension UITextFormattingViewController.TextAlignment {
 @available(iOS 17.0, tvOS 17.0, *)
 @available(watchOS, unavailable)
 extension UIViewController {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 17.0, tvOS 17.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public var contentUnavailableConfiguration: (any UIKit.UIContentConfiguration)? {
     get
     set(config)
   }
-  #endif
   @available(iOS 17.0, tvOS 17.0, *)
   @available(watchOS, unavailable)
   @objc(_bridgedContentUnavailableConfigurationState) @_Concurrency.MainActor @preconcurrency dynamic open var contentUnavailableConfigurationState: UIKit.UIContentUnavailableConfigurationState {
@@ -4006,18 +3544,14 @@ extension UIContentUnavailableView : UIKit.UIContentView {
 @available(watchOS, unavailable)
 public struct UIContentUnavailableConfiguration : UIKit.UIContentConfiguration, Swift.Hashable {
   public struct ImageProperties : Swift.Hashable {
-    #if compiler(>=5.3) && $NonescapableTypes
     public var preferredSymbolConfiguration: UIImage.SymbolConfiguration? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var tintColor: UIColor? {
       get
       set
     }
-    #endif
     public var cornerRadius: CoreFoundation.CGFloat {
       get
       set
@@ -4072,18 +3606,14 @@ public struct UIContentUnavailableConfiguration : UIKit.UIContentConfiguration, 
     }
   }
   public struct ButtonProperties : Swift.Hashable {
-    #if compiler(>=5.3) && $NonescapableTypes
     public var primaryAction: UIAction? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var menu: UIMenu? {
       get
       set
     }
-    #endif
     public var isEnabled: Swift.Bool {
       get
       set
@@ -4112,44 +3642,34 @@ public struct UIContentUnavailableConfiguration : UIKit.UIContentConfiguration, 
   public static func search() -> UIKit.UIContentUnavailableConfiguration
   @_Concurrency.MainActor public func makeContentView() -> any UIView & UIKit.UIContentView
   public func updated(for state: any UIKit.UIConfigurationState) -> UIKit.UIContentUnavailableConfiguration
-  #if compiler(>=5.3) && $NonescapableTypes
   public var image: UIImage? {
     get
     set
   }
-  #endif
   public var imageProperties: UIKit.UIContentUnavailableConfiguration.ImageProperties {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var text: Swift.String? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var attributedText: Foundation.NSAttributedString? {
     get
     set
   }
-  #endif
   public var textProperties: UIKit.UIContentUnavailableConfiguration.TextProperties {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var secondaryText: Swift.String? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var secondaryAttributedText: Foundation.NSAttributedString? {
     get
     set
   }
-  #endif
   public var secondaryTextProperties: UIKit.UIContentUnavailableConfiguration.TextProperties {
     get
     set
@@ -4271,12 +3791,10 @@ public struct UIContentUnavailableConfigurationState : UIKit.UIConfigurationStat
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(key: UIConfigurationStateCustomKey) -> Swift.AnyHashable? {
     get
     set
   }
-  #endif
   public init(traitCollection: UITraitCollection)
   public static func == (lhs: UIKit.UIContentUnavailableConfigurationState, rhs: UIKit.UIContentUnavailableConfigurationState) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
@@ -4288,15 +3806,9 @@ public struct UIContentUnavailableConfigurationState : UIKit.UIConfigurationStat
 @available(watchOS, unavailable)
 extension UIKit.UIContentUnavailableConfigurationState : Swift._ObjectiveCBridgeable {
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> __UIContentUnavailableConfigurationState
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ input: __UIContentUnavailableConfigurationState, result: inout UIKit.UIContentUnavailableConfigurationState?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ input: __UIContentUnavailableConfigurationState, result: inout UIKit.UIContentUnavailableConfigurationState?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_effects(readonly) public static func _unconditionallyBridgeFromObjectiveC(_ _state: __UIContentUnavailableConfigurationState?) -> UIKit.UIContentUnavailableConfigurationState
-  #endif
   @available(iOS 17.0, tvOS 17.0, *)
   @available(watchOS, unavailable)
   public typealias _ObjectiveCType = __UIContentUnavailableConfigurationState
@@ -4317,12 +3829,8 @@ extension UIKit.UIContentUnavailableConfigurationState : Swift.CustomStringConve
 @available(iOS 16.0, *)
 @available(tvOS, unavailable)
 extension UICalendarView.Decoration {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public static func `default`(color: UIColor? = nil, size: UICalendarView.DecorationSize = .medium) -> UICalendarView.Decoration
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public static func image(_ image: UIImage?, color: UIColor? = nil, size: UICalendarView.DecorationSize = .medium) -> UICalendarView.Decoration
-  #endif
 }
 @available(iOS 26.0, tvOS 26.0, visionOS 26.0, *)
 @available(watchOS, unavailable)
@@ -4348,9 +3856,7 @@ extension UIScene {
     public typealias Subject = UIScene
     public var scene: UIScene
     public init(scene: UIScene)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIScene.SystemProtectionDidChangeMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIScene.SystemProtectionDidChangeMessage) -> Foundation.Notification
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
@@ -4362,9 +3868,7 @@ extension UIScene {
     public typealias Subject = UIScene
     public var scene: UIScene
     public init(scene: UIScene)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIScene.WillConnectMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIScene.WillConnectMessage) -> Foundation.Notification
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
@@ -4376,9 +3880,7 @@ extension UIScene {
     public typealias Subject = UIScene
     public var scene: UIScene
     public init(scene: UIScene)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIScene.WillEnterForegroundMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIScene.WillEnterForegroundMessage) -> Foundation.Notification
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
@@ -4390,9 +3892,7 @@ extension UIScene {
     public typealias Subject = UIScene
     public var scene: UIScene
     public init(scene: UIScene)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIScene.DidActivateMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIScene.DidActivateMessage) -> Foundation.Notification
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
@@ -4404,9 +3904,7 @@ extension UIScene {
     public typealias Subject = UIScene
     public var scene: UIScene
     public init(scene: UIScene)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIScene.WillDeactivateMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIScene.WillDeactivateMessage) -> Foundation.Notification
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
@@ -4418,9 +3916,7 @@ extension UIScene {
     public typealias Subject = UIScene
     public var scene: UIScene
     public init(scene: UIScene)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIScene.DidEnterBackgroundMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIScene.DidEnterBackgroundMessage) -> Foundation.Notification
   }
 }
@@ -4494,9 +3990,7 @@ extension UIPointerLockState {
     public var scene: UIScene
     public var pointerLockState: UIPointerLockState
     public init(scene: UIScene, pointerLockState: UIPointerLockState)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIPointerLockState.DidChangeMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIPointerLockState.DidChangeMessage) -> Foundation.Notification
   }
 }
@@ -4511,11 +4005,9 @@ extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundati
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, visionOS 1.0, *)
 @available(watchOS, unavailable)
 extension UIView {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, visionOS 1.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public class func animate(springDuration duration: Foundation.TimeInterval = 0.5, bounce: CoreFoundation.CGFloat = 0.0, initialSpringVelocity: CoreFoundation.CGFloat = 0.0, delay: Foundation.TimeInterval = 0.0, options: UIView.AnimationOptions = [], animations: () -> Swift.Void, completion: ((Swift.Bool) -> Swift.Void)? = nil)
-  #endif
 }
 @available(iOS 26.0, tvOS 26.0, visionOS 26.0, *)
 @available(watchOS, unavailable)
@@ -4530,15 +4022,9 @@ extension UIView {
         get
       }
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public static func safeArea(cornerAdaptation: UIView.LayoutRegion.AdaptivityAxis? = nil) -> UIView.LayoutRegion
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public static func margins(cornerAdaptation: UIView.LayoutRegion.AdaptivityAxis? = nil) -> UIView.LayoutRegion
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public static func readableContent(cornerAdaptation: UIView.LayoutRegion.AdaptivityAxis? = nil) -> UIView.LayoutRegion
-    #endif
     public static func == (a: UIView.LayoutRegion, b: UIView.LayoutRegion) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -4605,7 +4091,6 @@ public struct UICollectionLayoutListConfiguration {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.5, *)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
@@ -4613,27 +4098,20 @@ public struct UICollectionLayoutListConfiguration {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var backgroundColor: UIColor? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(tvOS, unavailable)
   public var leadingSwipeActionsConfigurationProvider: UIKit.UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(tvOS, unavailable)
   public var trailingSwipeActionsConfigurationProvider: UIKit.UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider? {
     get
     set
   }
-  #endif
   public var headerMode: UIKit.UICollectionLayoutListConfiguration.HeaderMode {
     get
     set
@@ -4642,14 +4120,12 @@ public struct UICollectionLayoutListConfiguration {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   public var headerTopPadding: CoreFoundation.CGFloat? {
     get
     set
   }
-  #endif
 }
 @available(iOS 18.0, tvOS 18.0, visionOS 2.0, *)
 @available(watchOS, unavailable)
@@ -4686,9 +4162,7 @@ extension NSCollectionLayoutSection {
 @available(iOS 15.0, tvOS 15.0, *)
 @available(watchOS, unavailable)
 extension UIFocusSystem {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public class func focusSystem(for environment: any UIFocusEnvironment) -> UIFocusSystem?
-  #endif
 }
 @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
 @available(watchOS, unavailable)
@@ -4701,12 +4175,8 @@ extension UIFocusSystem {
     public var updateContext: UIFocusUpdateContext?
     public var animationCoordinator: UIFocusAnimationCoordinator?
     public var focusSystem: UIFocusSystem
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(updateContext: UIFocusUpdateContext?, animationCoordinator: UIFocusAnimationCoordinator?, focusSystem: UIFocusSystem)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIFocusSystem.DidUpdateMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIFocusSystem.DidUpdateMessage) -> Foundation.Notification
   }
   public struct MovementDidFailMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -4716,12 +4186,8 @@ extension UIFocusSystem {
     public typealias Subject = UIFocusSystem
     public var updateContext: UIFocusUpdateContext?
     public var focusSystem: UIFocusSystem
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(updateContext: UIFocusUpdateContext?, focusSystem: UIFocusSystem)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIFocusSystem.MovementDidFailMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIFocusSystem.MovementDidFailMessage) -> Foundation.Notification
   }
 }
@@ -4748,9 +4214,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.SwitchControlStatusDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
   public struct ElementFocusedMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -4759,12 +4223,8 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public var element: Swift.AnyObject?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(element: Swift.AnyObject?)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.ElementFocusedMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIAccessibility.ElementFocusedMessage) -> Foundation.Notification
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
@@ -4775,9 +4235,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.ReduceTransparencyStatusDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
   public struct AnnouncementDidFinishMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -4788,9 +4246,7 @@ extension UIAccessibility {
     public var announcement: Swift.String
     public var wasSuccessful: Swift.Bool
     public init(announcement: Swift.String, wasSuccessful: Swift.Bool)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.AnnouncementDidFinishMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIAccessibility.AnnouncementDidFinishMessage) -> Foundation.Notification
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
@@ -4801,9 +4257,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.BoldTextStatusDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
   @available(watchOS, unavailable)
@@ -4813,9 +4267,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.ClosedCaptioningStatusDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
   @available(watchOS, unavailable)
@@ -4825,9 +4277,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.DarkerSystemColorsStatusDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
   @available(watchOS, unavailable)
@@ -4837,9 +4287,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.GrayscaleStatusDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
   @available(watchOS, unavailable)
@@ -4849,9 +4297,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.InvertColorsStatusDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
   @available(watchOS, unavailable)
@@ -4861,9 +4307,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.AssistiveTouchStatusDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
   @available(watchOS, unavailable)
@@ -4873,9 +4317,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.GuidedAccessStatusDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
   @available(watchOS, unavailable)
@@ -4885,9 +4327,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.MonoAudioStatusDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
   @available(watchOS, unavailable)
@@ -4897,9 +4337,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.SpeakScreenStatusDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
   @available(watchOS, unavailable)
@@ -4909,9 +4347,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.SpeakSelectionStatusDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, visionOS 26.0, *)
   @available(tvOS, unavailable)
@@ -4922,9 +4358,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.HearingDevicePairedEarDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
   @available(watchOS, unavailable)
@@ -4934,9 +4368,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.ReduceMotionStatusDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
   @available(watchOS, unavailable)
@@ -4946,9 +4378,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.ShakeToUndoDidChangeMessage?
-    #endif
   }
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
   @available(watchOS, unavailable)
@@ -4958,9 +4388,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.VoiceOverStatusDidChangeMessage?
-    #endif
   }
   @available(iOS, introduced: 26.0, deprecated: 26.1)
   @available(macCatalyst, introduced: 26.0, deprecated: 26.1)
@@ -4973,9 +4401,7 @@ extension UIAccessibility {
     }
     public typealias Subject = UIAccessibility
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIAccessibility.ButtonShapesEnabledStatusDidChangeMessage?
-    #endif
   }
 }
 @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
@@ -5130,9 +4556,7 @@ extension UITableView {
     public typealias Subject = UITableView
     public var tableView: UITableView
     public init(tableView: UITableView)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UITableView.SelectionDidChangeMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UITableView.SelectionDidChangeMessage) -> Foundation.Notification
   }
 }
@@ -5143,12 +4567,10 @@ extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundati
     get { .init() }
   }
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @available(swift, deprecated: 4.2, message: "Use the overload of UIApplicationMain where the type of the second parameter is UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>, which is the same as the type of CommandLine.unsafeArgv.")
 @available(watchOS, deprecated: 2.0, message: "Use the overload of UIApplicationMain where the type of the second parameter is UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>, which is the same as the type of CommandLine.unsafeArgv.")
 @available(watchOS, unavailable)
 public func UIApplicationMain(_ argc: Swift.Int32, _ argv: Swift.UnsafeMutablePointer<Swift.UnsafeMutablePointer<Swift.Int8>>!, _ principalClassName: Swift.String?, _ delegateClassName: Swift.String?) -> Swift.Int32
-#endif
 @available(iOS 2.0, *)
 @available(watchOS, unavailable)
 extension UIApplicationDelegate {
@@ -5196,9 +4618,7 @@ extension UIApplication {
     }
     public typealias Subject = UIApplication
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIApplication.DidFinishLaunchingMessage?
-    #endif
   }
   public struct DidBecomeActiveMessage : Foundation.NotificationCenter.MainActorMessage {
     public static var name: Foundation.Notification.Name {
@@ -5206,9 +4626,7 @@ extension UIApplication {
     }
     public typealias Subject = UIApplication
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIApplication.DidBecomeActiveMessage?
-    #endif
   }
   public struct DidEnterBackgroundMessage : Foundation.NotificationCenter.MainActorMessage {
     public static var name: Foundation.Notification.Name {
@@ -5216,9 +4634,7 @@ extension UIApplication {
     }
     public typealias Subject = UIApplication
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIApplication.DidEnterBackgroundMessage?
-    #endif
   }
   public struct WillEnterForegroundMessage : Foundation.NotificationCenter.MainActorMessage {
     public static var name: Foundation.Notification.Name {
@@ -5226,9 +4642,7 @@ extension UIApplication {
     }
     public typealias Subject = UIApplication
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIApplication.WillEnterForegroundMessage?
-    #endif
   }
   public struct WillResignActiveMessage : Foundation.NotificationCenter.MainActorMessage {
     public static var name: Foundation.Notification.Name {
@@ -5236,9 +4650,7 @@ extension UIApplication {
     }
     public typealias Subject = UIApplication
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIApplication.WillResignActiveMessage?
-    #endif
   }
   public struct WillTerminateMessage : Foundation.NotificationCenter.MainActorMessage {
     public static var name: Foundation.Notification.Name {
@@ -5246,9 +4658,7 @@ extension UIApplication {
     }
     public typealias Subject = UIApplication
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIApplication.WillTerminateMessage?
-    #endif
   }
   public struct DidReceiveMemoryWarningMessage : Foundation.NotificationCenter.MainActorMessage {
     public static var name: Foundation.Notification.Name {
@@ -5256,9 +4666,7 @@ extension UIApplication {
     }
     public typealias Subject = UIApplication
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIApplication.DidReceiveMemoryWarningMessage?
-    #endif
   }
   public struct SignificantTimeChangeMessage : Foundation.NotificationCenter.MainActorMessage {
     public static var name: Foundation.Notification.Name {
@@ -5266,9 +4674,7 @@ extension UIApplication {
     }
     public typealias Subject = UIApplication
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIApplication.SignificantTimeChangeMessage?
-    #endif
   }
   public struct BackgroundRefreshStatusDidChangeMessage : Foundation.NotificationCenter.MainActorMessage {
     public static var name: Foundation.Notification.Name {
@@ -5276,9 +4682,7 @@ extension UIApplication {
     }
     public typealias Subject = UIApplication
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIApplication.BackgroundRefreshStatusDidChangeMessage?
-    #endif
   }
   public struct UserDidTakeScreenshotMessage : Foundation.NotificationCenter.MainActorMessage {
     public static var name: Foundation.Notification.Name {
@@ -5286,9 +4690,7 @@ extension UIApplication {
     }
     public typealias Subject = UIApplication
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIApplication.UserDidTakeScreenshotMessage?
-    #endif
   }
   public struct ProtectedDataDidBecomeAvailableMessage : Foundation.NotificationCenter.MainActorMessage {
     public static var name: Foundation.Notification.Name {
@@ -5296,9 +4698,7 @@ extension UIApplication {
     }
     public typealias Subject = UIApplication
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIApplication.ProtectedDataDidBecomeAvailableMessage?
-    #endif
   }
   public struct ProtectedDataWillBecomeUnavailableMessage : Foundation.NotificationCenter.MainActorMessage {
     public static var name: Foundation.Notification.Name {
@@ -5306,9 +4706,7 @@ extension UIApplication {
     }
     public typealias Subject = UIApplication
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIApplication.ProtectedDataWillBecomeUnavailableMessage?
-    #endif
   }
 }
 @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
@@ -5397,14 +4795,10 @@ extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundati
 }
 @available(iOS 18.0, *)
 extension UIViewController.Transition {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, *)
   public static func zoom(options: UIViewController.Transition.ZoomOptions? = nil, sourceViewProvider: @escaping (_ context: UIViewController.Transition.ZoomSourceViewProviderContext) -> UIView?) -> Self
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 26.0, *)
   public static func zoom(options: UIViewController.Transition.ZoomOptions? = nil, sourceBarButtonItemProvider: @escaping (_ context: UIViewController.Transition.ZoomSourceViewProviderContext) -> UIBarButtonItem?) -> Self
-  #endif
   @available(iOS 18.0, *)
   public static var coverVertical: Self {
     get
@@ -5424,13 +4818,11 @@ extension UIViewController.Transition {
 }
 @available(iOS 18.0, *)
 extension UIViewController.Transition.ZoomOptions {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, *)
   public var alignmentRectProvider: ((_ context: UIViewController.Transition.ZoomOptions.AlignmentRectContext) -> CoreFoundation.CGRect?)? {
     get
     set
   }
-  #endif
 }
 @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
 @available(watchOS, unavailable)
@@ -5442,9 +4834,7 @@ extension UIWindow {
     public typealias Subject = UIWindow
     public var window: UIWindow
     public init(window: UIWindow)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIWindow.DidBecomeVisibleMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIWindow.DidBecomeVisibleMessage) -> Foundation.Notification
   }
   public struct DidBecomeHiddenMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -5454,9 +4844,7 @@ extension UIWindow {
     public typealias Subject = UIWindow
     public var window: UIWindow
     public init(window: UIWindow)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIWindow.DidBecomeHiddenMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIWindow.DidBecomeHiddenMessage) -> Foundation.Notification
   }
   public struct DidBecomeKeyMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -5466,9 +4854,7 @@ extension UIWindow {
     public typealias Subject = UIWindow
     public var window: UIWindow
     public init(window: UIWindow)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIWindow.DidBecomeKeyMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIWindow.DidBecomeKeyMessage) -> Foundation.Notification
   }
   public struct DidResignKeyMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -5478,9 +4864,7 @@ extension UIWindow {
     public typealias Subject = UIWindow
     public var window: UIWindow
     public init(window: UIWindow)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UIWindow.DidResignKeyMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UIWindow.DidResignKeyMessage) -> Foundation.Notification
   }
 }
@@ -5524,18 +4908,14 @@ extension UITabBarController.Sidebar {
     case footer
     case tab(UITab)
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var headerContentConfiguration: (any UIKit.UIContentConfiguration)? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var footerContentConfiguration: (any UIKit.UIContentConfiguration)? {
     get
     set
   }
-  #endif
   @_Concurrency.MainActor @preconcurrency public func scroll(to target: UITabBarController.Sidebar.ScrollTarget, animated: Swift.Bool)
 }
 @available(iOS 18.0, visionOS 2.0, *)
@@ -5581,9 +4961,7 @@ extension UITabSidebarItem.Request {
 @available(iOS 17.0, *)
 @available(tvOS, unavailable)
 extension UIPopoverPresentationControllerSourceItem {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func frame(in referenceView: UIView) -> CoreFoundation.CGRect?
-  #endif
 }
 @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
 @available(watchOS, unavailable)
@@ -5594,9 +4972,7 @@ extension UITextInputMode {
     }
     public typealias Subject = UITextInputMode
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UITextInputMode.CurrentInputModeDidChangeMessage?
-    #endif
   }
 }
 @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
@@ -5853,11 +5229,9 @@ extension Foundation.AttributeScopes.UIKitAttributes {
     public typealias ObjectiveCValue = NSAdaptiveImageGlyph
     public static let name: Swift.String
     public static var inheritedByAddedText: Swift.Bool
-    #if compiler(>=5.3) && $NonescapableTypes
     public static var runBoundaries: Foundation.AttributedString.AttributeRunBoundaries? {
       get
     }
-    #endif
     public static func objectiveCValue(for value: Foundation.AttributedString.AdaptiveImageGlyph) throws -> NSAdaptiveImageGlyph
     public static func value(for object: NSAdaptiveImageGlyph) throws -> Foundation.AttributedString.AdaptiveImageGlyph
     public static func encode(_ value: Foundation.AttributedString.AdaptiveImageGlyph, to encoder: any Swift.Encoder) throws
@@ -5903,9 +5277,7 @@ extension UITextView {
     public typealias Subject = UITextView
     public var textView: UITextView
     public init(textView: UITextView)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UITextView.TextDidBeginEditingMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UITextView.TextDidBeginEditingMessage) -> Foundation.Notification
   }
   public struct TextDidChangeMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -5915,9 +5287,7 @@ extension UITextView {
     public typealias Subject = UITextView
     public var textView: UITextView
     public init(textView: UITextView)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UITextView.TextDidChangeMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UITextView.TextDidChangeMessage) -> Foundation.Notification
   }
   public struct TextDidEndEditingMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -5927,9 +5297,7 @@ extension UITextView {
     public typealias Subject = UITextView
     public var textView: UITextView
     public init(textView: UITextView)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> UITextView.TextDidEndEditingMessage?
-    #endif
     @_Concurrency.MainActor public static func makeNotification(_ message: UITextView.TextDidEndEditingMessage) -> Foundation.Notification
   }
 }
@@ -5963,9 +5331,7 @@ extension UISlider {
       public let position: Swift.Float
       public var title: Swift.String?
       public var image: UIImage?
-      #if compiler(>=5.3) && $NonescapableTypes
       public init(position: Swift.Float, title: Swift.String? = nil, image: UIImage? = nil)
-      #endif
       public static func == (a: UISlider.TrackConfiguration.Tick, b: UISlider.TrackConfiguration.Tick) -> Swift.Bool
       public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
@@ -5984,12 +5350,10 @@ extension UISlider {
       get
     }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var trackConfiguration: UISlider.TrackConfiguration? {
     get
     set
   }
-  #endif
 }
 @available(iOS 17.0, tvOS 17.0, *)
 public struct UIWindowSceneStandardPlacement : UIKit.UIWindowScenePlacement {
@@ -6023,12 +5387,10 @@ public struct UIShadowProperties : Swift.Hashable {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var path: UIBezierPath? {
     get
     set
   }
-  #endif
   public static func == (lhs: UIKit.UIShadowProperties, rhs: UIKit.UIShadowProperties) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -6056,18 +5418,12 @@ extension UIHoverStyle {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var shape: UIKit.UIShape? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency convenience public init(effect: some UIHoverEffect, shape: UIKit.UIShape? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency convenience public init(shape: UIKit.UIShape? = nil)
-  #endif
 }
 @available(*, unavailable)
 extension UIHoverStyle : Swift.Sendable {
@@ -6185,16 +5541,12 @@ public func UIInterfaceOrientationIsLandscape(_ orientation: UIInterfaceOrientat
 @available(iOS, introduced: 2.0, deprecated: 8.3, message: "UIActionSheet is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleActionSheet instead")
 @available(visionOS, unavailable)
 extension UIActionSheet {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String?, delegate: (any UIActionSheetDelegate)?, cancelButtonTitle: Swift.String?, destructiveButtonTitle: Swift.String?, otherButtonTitles firstButtonTitle: Swift.String, _ moreButtonTitles: Swift.String...)
-  #endif
 }
 @available(iOS, introduced: 2.0, deprecated: 9.0, message: "UIAlertView is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleAlert instead")
 @available(visionOS, unavailable)
 extension UIAlertView {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String, message: Swift.String, delegate: (any UIAlertViewDelegate)?, cancelButtonTitle: Swift.String?, otherButtonTitles firstButtonTitle: Swift.String, _ moreButtonTitles: Swift.String...)
-  #endif
 }
 @available(iOS 7.0, *)
 extension UIView : Swift.__DefaultCustomPlaygroundQuickLookable {
@@ -6257,10 +5609,8 @@ extension UIPasteConfiguration {
 extension UIPasteboard {
   @available(iOS 11.0, *)
   public func setObjects<T>(_ objects: [T]) where T : Swift._ObjectiveCBridgeable, T._ObjectiveCType : Foundation.NSItemProviderWriting
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 11.0, *)
   public func setObjects<T>(_ objects: [T], localOnly: Swift.Bool, expirationDate: Foundation.Date?) where T : Swift._ObjectiveCBridgeable, T._ObjectiveCType : Foundation.NSItemProviderWriting
-  #endif
 }
 @available(swift, obsoleted: 4.2, renamed: "UIPrintError.Code.notAvailable.rawValue")
 public let UIPrintingNotAvailableError: Swift.Int
@@ -6271,14 +5621,10 @@ public let UIPrintUnknownImageFormatError: Swift.Int
 @available(swift, obsoleted: 4.2, renamed: "UIPrintError.Code.jobFailed.rawValue")
 public let UIPrintJobFailedError: Swift.Int
 extension UIStoryboard {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 13.0, tvOS 13.0, *)
   @_Concurrency.MainActor @preconcurrency public func instantiateInitialViewController<ViewController>(creator: ((Foundation.NSCoder) -> ViewController?)? = nil) -> ViewController? where ViewController : UIViewController
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 13.0, tvOS 13.0, *)
   @_Concurrency.MainActor @preconcurrency public func instantiateViewController<ViewController>(identifier: Swift.String, creator: ((Foundation.NSCoder) -> ViewController?)? = nil) -> ViewController where ViewController : UIViewController
-  #endif
 }
 @available(iOS 7.0, *)
 extension UIAccessibilityTraits : Swift.OptionSet {
@@ -6325,18 +5671,10 @@ extension UITextDirection {
   }
   public func numberOfItems(inSection identifier: SectionIdentifierType) -> Swift.Int
   public func itemIdentifiers(inSection identifier: SectionIdentifierType) -> [ItemIdentifierType]
-  #if compiler(>=5.3) && $NonescapableTypes
   public func sectionIdentifier(containingItem identifier: ItemIdentifierType) -> SectionIdentifierType?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func indexOfItem(_ identifier: ItemIdentifierType) -> Swift.Int?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func indexOfSection(_ identifier: SectionIdentifierType) -> Swift.Int?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func appendItems(_ identifiers: [ItemIdentifierType], toSection sectionIdentifier: SectionIdentifierType? = nil)
-  #endif
   public mutating func insertItems(_ identifiers: [ItemIdentifierType], beforeItem beforeIdentifier: ItemIdentifierType)
   public mutating func insertItems(_ identifiers: [ItemIdentifierType], afterItem afterIdentifier: ItemIdentifierType)
   public mutating func deleteItems(_ identifiers: [ItemIdentifierType])
@@ -6359,15 +5697,9 @@ extension UITextDirection {
 @available(watchOS, unavailable)
 extension UIKit.NSDiffableDataSourceSnapshot : Swift._ObjectiveCBridgeable {
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> NSDiffableDataSourceSnapshotReference
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ input: NSDiffableDataSourceSnapshotReference, result: inout UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ input: NSDiffableDataSourceSnapshotReference, result: inout UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_effects(readonly) public static func _unconditionallyBridgeFromObjectiveC(_ snapshot: NSDiffableDataSourceSnapshotReference?) -> UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>
-  #endif
   @available(iOS 13.0, tvOS 13.0, *)
   @available(watchOS, unavailable)
   public typealias _ObjectiveCType = NSDiffableDataSourceSnapshotReference
@@ -6377,53 +5709,37 @@ extension UIKit.NSDiffableDataSourceSnapshot : Swift._ObjectiveCBridgeable {
 @preconcurrency @_Concurrency.MainActor open class UICollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType> : ObjectiveC.NSObject, UICollectionViewDataSource where SectionIdentifierType : Swift.Hashable, SectionIdentifierType : Swift.Sendable, ItemIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Sendable {
   public typealias CellProvider = (_ collectionView: UICollectionView, _ indexPath: Foundation.IndexPath, _ itemIdentifier: ItemIdentifierType) -> UICollectionViewCell?
   public typealias SupplementaryViewProvider = (_ collectionView: UICollectionView, _ elementKind: Swift.String, _ indexPath: Foundation.IndexPath) -> UICollectionReusableView?
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var supplementaryViewProvider: UIKit.UICollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType>.SupplementaryViewProvider? {
     get
     set
   }
-  #endif
   @_Concurrency.MainActor @preconcurrency public init(collectionView: UICollectionView, cellProvider: @escaping UIKit.UICollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType>.CellProvider)
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency open func apply(_ snapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>, animatingDifferences: Swift.Bool = true, completion: (() -> Swift.Void)? = nil)
-  #endif
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency open func apply(_ snapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>, animatingDifferences: Swift.Bool = true) async
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency open func applySnapshotUsingReloadData(_ snapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>, completion: (() -> Swift.Void)? = nil)
-  #endif
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency open func applySnapshotUsingReloadData(_ snapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>) async
   @_Concurrency.MainActor @preconcurrency open func snapshot() -> UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency open func sectionIdentifier(for index: Swift.Int) -> SectionIdentifierType?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency open func index(for sectionIdentifier: SectionIdentifierType) -> Swift.Int?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency open func itemIdentifier(for indexPath: Foundation.IndexPath) -> ItemIdentifierType?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency open func indexPath(for itemIdentifier: ItemIdentifierType) -> Foundation.IndexPath?
-  #endif
   @_Concurrency.MainActor @preconcurrency @objc open func numberOfSections(in collectionView: UICollectionView) -> Swift.Int
   @_Concurrency.MainActor @preconcurrency @objc open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
   @_Concurrency.MainActor @preconcurrency @objc open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UICollectionViewCell
   @_Concurrency.MainActor @preconcurrency @objc open func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: Swift.String, at indexPath: Foundation.IndexPath) -> UICollectionReusableView
   @_Concurrency.MainActor @preconcurrency @objc open func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: Foundation.IndexPath) -> Swift.Bool
   @_Concurrency.MainActor @preconcurrency @objc open func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: Foundation.IndexPath, to destinationIndexPath: Foundation.IndexPath)
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc open func indexTitles(for collectionView: UICollectionView) -> [Swift.String]?
-  #endif
   @_Concurrency.MainActor @preconcurrency @objc open func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: Swift.String, at index: Swift.Int) -> Foundation.IndexPath
   @_Concurrency.MainActor @preconcurrency public func description() -> Swift.String
   @objc deinit
@@ -6433,37 +5749,25 @@ extension UIKit.NSDiffableDataSourceSnapshot : Swift._ObjectiveCBridgeable {
 @preconcurrency @_Concurrency.MainActor open class UITableViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType> : ObjectiveC.NSObject, UITableViewDataSource where SectionIdentifierType : Swift.Hashable, SectionIdentifierType : Swift.Sendable, ItemIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Sendable {
   public typealias CellProvider = (_ tableView: UITableView, _ indexPath: Foundation.IndexPath, _ itemIdentifier: ItemIdentifierType) -> UITableViewCell?
   @_Concurrency.MainActor @preconcurrency public init(tableView: UITableView, cellProvider: @escaping UIKit.UITableViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType>.CellProvider)
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency open func apply(_ snapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>, animatingDifferences: Swift.Bool = true, completion: (() -> Swift.Void)? = nil)
-  #endif
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency open func apply(_ snapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>, animatingDifferences: Swift.Bool = true) async
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency open func applySnapshotUsingReloadData(_ snapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>, completion: (() -> Swift.Void)? = nil)
-  #endif
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency open func applySnapshotUsingReloadData(_ snapshot: UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>) async
   @_Concurrency.MainActor @preconcurrency open func snapshot() -> UIKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency open func sectionIdentifier(for index: Swift.Int) -> SectionIdentifierType?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency open func index(for sectionIdentifier: SectionIdentifierType) -> Swift.Int?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency open func itemIdentifier(for indexPath: Foundation.IndexPath) -> ItemIdentifierType?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency open func indexPath(for itemIdentifier: ItemIdentifierType) -> Foundation.IndexPath?
-  #endif
   @_Concurrency.MainActor @preconcurrency public var defaultRowAnimation: UITableView.RowAnimation {
     get
     set
@@ -6471,117 +5775,79 @@ extension UIKit.NSDiffableDataSourceSnapshot : Swift._ObjectiveCBridgeable {
   @_Concurrency.MainActor @preconcurrency @objc open func numberOfSections(in tableView: UITableView) -> Swift.Int
   @_Concurrency.MainActor @preconcurrency @objc open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
   @_Concurrency.MainActor @preconcurrency @objc open func tableView(_ tableView: UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UITableViewCell
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Swift.Int) -> Swift.String?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc open func tableView(_ tableView: UITableView, titleForFooterInSection section: Swift.Int) -> Swift.String?
-  #endif
   @_Concurrency.MainActor @preconcurrency @objc open func tableView(_ tableView: UITableView, canEditRowAt indexPath: Foundation.IndexPath) -> Swift.Bool
   @_Concurrency.MainActor @preconcurrency @objc open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: Foundation.IndexPath)
   @_Concurrency.MainActor @preconcurrency @objc open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: Foundation.IndexPath) -> Swift.Bool
   @_Concurrency.MainActor @preconcurrency @objc open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: Foundation.IndexPath, to destinationIndexPath: Foundation.IndexPath)
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc open func sectionIndexTitles(for tableView: UITableView) -> [Swift.String]?
-  #endif
   @_Concurrency.MainActor @preconcurrency @objc open func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: Swift.String, at index: Swift.Int) -> Swift.Int
   @_Concurrency.MainActor @preconcurrency public func description() -> Swift.String
   @objc deinit
 }
 @available(iOS 13.0, *)
 extension UICommand {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_disfavoredOverload @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String = "", image: UIImage? = nil, action: ObjectiveC.Selector, propertyList: Any? = nil, alternates: [UICommandAlternate] = [], discoverabilityTitle: Swift.String? = nil, attributes: UIMenuElement.Attributes = [], state: UIMenuElement.State = .off)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, tvOS 15.0, *)
   @_disfavoredOverload @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String = "", subtitle: Swift.String? = nil, image: UIImage? = nil, action: ObjectiveC.Selector, propertyList: Any? = nil, alternates: [UICommandAlternate] = [], discoverabilityTitle: Swift.String? = nil, attributes: UIMenuElement.Attributes = [], state: UIMenuElement.State = .off)
-  #endif
 }
 @available(iOS 17.0, tvOS 17.0, *)
 extension UICommand {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String = "", subtitle: Swift.String? = nil, image: UIImage? = nil, selectedImage: UIImage? = nil, action: ObjectiveC.Selector, propertyList: Any? = nil, alternates: [UICommandAlternate] = [], discoverabilityTitle: Swift.String? = nil, attributes: UIMenuElement.Attributes = [], state: UIMenuElement.State = .off)
-  #endif
 }
 @available(iOS 13.0, *)
 extension UIKeyCommand {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String = "", image: UIImage? = nil, action: ObjectiveC.Selector, input: Swift.String, modifierFlags: UIKeyModifierFlags = [], propertyList: Any? = nil, alternates: [UICommandAlternate] = [], discoverabilityTitle: Swift.String? = nil, attributes: UIMenuElement.Attributes = [], state: UIMenuElement.State = .off)
-  #endif
 }
 @available(iOS 13.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
 extension UIAction {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_disfavoredOverload @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String = "", image: UIImage? = nil, identifier: UIAction.Identifier? = nil, discoverabilityTitle: Swift.String? = nil, attributes: UIMenuElement.Attributes = [], state: UIMenuElement.State = .off, handler: @escaping UIActionHandler)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   @_disfavoredOverload @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String = "", subtitle: Swift.String? = nil, image: UIImage? = nil, identifier: UIAction.Identifier? = nil, discoverabilityTitle: Swift.String? = nil, attributes: UIMenuElement.Attributes = [], state: UIMenuElement.State = .off, handler: @escaping UIActionHandler)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 17.0, tvOS 17.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String = "", subtitle: Swift.String? = nil, image: UIImage? = nil, selectedImage: UIImage? = nil, identifier: UIAction.Identifier? = nil, discoverabilityTitle: Swift.String? = nil, attributes: UIMenuElement.Attributes = [], state: UIMenuElement.State = .off, handler: @escaping UIActionHandler)
-  #endif
 }
 @available(iOS 13.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
 extension UIMenu {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_disfavoredOverload @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String = "", image: UIImage? = nil, identifier: UIMenu.Identifier? = nil, options: UIMenu.Options = [], children: [UIMenuElement] = [])
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   @_disfavoredOverload @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String = "", subtitle: Swift.String? = nil, image: UIImage? = nil, identifier: UIMenu.Identifier? = nil, options: UIMenu.Options = [], children: [UIMenuElement] = [])
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String = "", subtitle: Swift.String? = nil, image: UIImage? = nil, identifier: UIMenu.Identifier? = nil, options: UIMenu.Options = [], preferredElementSize: UIMenu.ElementSize = { if #available(iOS 17.0, tvOS 17.0, watchOS 10.0, *) { .automatic } else { .large } }(), children: [UIMenuElement] = [])
-  #endif
 }
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension UIImage {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var baselineOffsetFromBottom: CoreFoundation.CGFloat? {
     get
   }
-  #endif
 }
 @available(iOS 16.0, macCatalyst 16.0, tvOS 16.0, watchOS 9.0, *)
 extension UIImage {
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init?(systemName name: Swift.String, variableValue: Swift.Double, configuration: UIImage.Configuration? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init?(named name: Swift.String, in bundle: Foundation.Bundle? = nil, variableValue: Swift.Double, configuration: UIImage.Configuration? = nil)
-  #endif
 }
 @available(iOS 15.0, *)
 extension UIWindowScene.ActivationConfiguration {
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(userActivity: Foundation.NSUserActivity, options: UIWindowScene.ActivationRequestOptions? = nil, preview: UITargetedPreview? = nil)
-  #endif
 }
 @available(iOS 15.0, *)
 extension UIWindowScene.ActivationAction {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String? = nil, subtitle: Swift.String? = nil, image: UIImage? = nil, identifier: UIAction.Identifier? = nil, discoverabilityTitle: Swift.String? = nil, attributes: UIMenuElement.Attributes = [], alternate: UIAction? = nil, _ configuration: @escaping UIWindowScene.ActivationAction.ConfigurationProvider)
-  #endif
 }
 @available(iOS 13.0, tvOS 17.0, *)
 extension UIContextMenuConfiguration {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency convenience public init(identifier: (any Foundation.NSCopying)? = nil, previewProvider: UIContextMenuContentPreviewProvider? = nil, actionProvider: UIContextMenuActionProvider? = nil) {
         self.init(__identifier: identifier,
                   previewProvider: previewProvider,
                   actionProvider: actionProvider)
     }
-  #endif
 }
 @available(iOS 14.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
@@ -6597,14 +5863,12 @@ extension UICollectionViewCell {
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   public typealias ConfigurationUpdateHandler = (_ cell: UICollectionViewCell, _ state: UIKit.UICellConfigurationState) -> Swift.Void
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public var configurationUpdateHandler: UICollectionViewCell.ConfigurationUpdateHandler? {
     get
     set
   }
-  #endif
 }
 @available(iOS 14.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
@@ -6620,14 +5884,12 @@ extension UITableViewCell {
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   public typealias ConfigurationUpdateHandler = (_ cell: UITableViewCell, _ state: UIKit.UICellConfigurationState) -> Swift.Void
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public var configurationUpdateHandler: UITableViewCell.ConfigurationUpdateHandler? {
     get
     set
   }
-  #endif
 }
 @available(iOS 14.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
@@ -6643,23 +5905,19 @@ extension UITableViewHeaderFooterView {
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   public typealias ConfigurationUpdateHandler = (_ headerFooterView: UITableViewHeaderFooterView, _ state: UIKit.UIViewConfigurationState) -> Swift.Void
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, tvOS 15.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public var configurationUpdateHandler: UITableViewHeaderFooterView.ConfigurationUpdateHandler? {
     get
     set
   }
-  #endif
 }
 @available(iOS 14.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
 public protocol UIConfigurationState {
   init(traitCollection: UITraitCollection)
   var traitCollection: UITraitCollection { get set }
-  #if compiler(>=5.3) && $NonescapableTypes
   subscript(key: UIConfigurationStateCustomKey) -> Swift.AnyHashable? { get set }
-  #endif
 }
 @available(iOS 14.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
@@ -6689,12 +5947,10 @@ public struct UIViewConfigurationState : UIKit.UIConfigurationState, Swift.Hasha
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(key: UIConfigurationStateCustomKey) -> Swift.AnyHashable? {
     get
     set
   }
-  #endif
   public init(traitCollection: UITraitCollection)
   public static func == (lhs: UIKit.UIViewConfigurationState, rhs: UIKit.UIViewConfigurationState) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
@@ -6776,12 +6032,10 @@ public struct UICellConfigurationState : UIKit.UIConfigurationState, Swift.Hasha
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(key: UIConfigurationStateCustomKey) -> Swift.AnyHashable? {
     get
     set
   }
-  #endif
   public init(traitCollection: UITraitCollection)
   public static func == (lhs: UIKit.UICellConfigurationState, rhs: UIKit.UICellConfigurationState) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
@@ -6793,15 +6047,9 @@ public struct UICellConfigurationState : UIKit.UIConfigurationState, Swift.Hasha
 @available(watchOS, unavailable)
 extension UIKit.UIViewConfigurationState : Swift._ObjectiveCBridgeable {
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> __UIViewConfigurationState
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ input: __UIViewConfigurationState, result: inout UIKit.UIViewConfigurationState?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ input: __UIViewConfigurationState, result: inout UIKit.UIViewConfigurationState?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_effects(readonly) public static func _unconditionallyBridgeFromObjectiveC(_ _state: __UIViewConfigurationState?) -> UIKit.UIViewConfigurationState
-  #endif
   @available(iOS 14.0, tvOS 14.0, *)
   @available(watchOS, unavailable)
   public typealias _ObjectiveCType = __UIViewConfigurationState
@@ -6810,15 +6058,9 @@ extension UIKit.UIViewConfigurationState : Swift._ObjectiveCBridgeable {
 @available(watchOS, unavailable)
 extension UIKit.UICellConfigurationState : Swift._ObjectiveCBridgeable {
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> __UICellConfigurationState
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ input: __UICellConfigurationState, result: inout UIKit.UICellConfigurationState?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ input: __UICellConfigurationState, result: inout UIKit.UICellConfigurationState?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_effects(readonly) public static func _unconditionallyBridgeFromObjectiveC(_ _state: __UICellConfigurationState?) -> UIKit.UICellConfigurationState
-  #endif
   @available(iOS 14.0, tvOS 14.0, *)
   @available(watchOS, unavailable)
   public typealias _ObjectiveCType = __UICellConfigurationState
@@ -6889,12 +6131,10 @@ extension UITextFormattingViewController.Delegate {
 @available(watchOS, unavailable)
 @available(macCatalyst, unavailable)
 extension UITextFormattingViewController {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency weak public var delegate: (any UITextFormattingViewController.Delegate)? {
     get
     set
   }
-  #endif
 }
 @available(iOS 17.0, *)
 @available(tvOS, unavailable)
@@ -6915,21 +6155,17 @@ extension UITextItem.MenuConfiguration {
     case `default`
     case view(UIView)
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency convenience public init(preview: UITextItem.MenuConfiguration.Preview? = .default, menu: UIMenu)
-  #endif
 }
 @available(iOS 14.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
 extension UICollectionViewCell {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, tvOS 14.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public var backgroundConfiguration: UIKit.UIBackgroundConfiguration? {
     get
     set(backgroundConfiguration)
   }
-  #endif
   @available(iOS 16.0, tvOS 16.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public func defaultBackgroundConfiguration() -> UIKit.UIBackgroundConfiguration
@@ -6937,14 +6173,12 @@ extension UICollectionViewCell {
 @available(iOS 14.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
 extension UITableViewCell {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, tvOS 14.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public var backgroundConfiguration: UIKit.UIBackgroundConfiguration? {
     get
     set(backgroundConfiguration)
   }
-  #endif
   @available(iOS 16.0, tvOS 16.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public func defaultBackgroundConfiguration() -> UIKit.UIBackgroundConfiguration
@@ -6952,14 +6186,12 @@ extension UITableViewCell {
 @available(iOS 14.0, tvOS 14.0, *)
 @available(watchOS, unavailable)
 extension UITableViewHeaderFooterView {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, tvOS 14.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public var backgroundConfiguration: UIKit.UIBackgroundConfiguration? {
     get
     set(backgroundConfiguration)
   }
-  #endif
   @available(iOS 16.0, tvOS 16.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public func defaultBackgroundConfiguration() -> UIKit.UIBackgroundConfiguration
@@ -6986,12 +6218,10 @@ public struct UIBackgroundConfiguration : Swift.Hashable {
   public static func listFooter() -> UIKit.UIBackgroundConfiguration
   public static func listAccompaniedSidebarCell() -> UIKit.UIBackgroundConfiguration
   public func updated(for state: any UIKit.UIConfigurationState) -> UIKit.UIBackgroundConfiguration
-  #if compiler(>=5.3) && $NonescapableTypes
   public var customView: UIView? {
     get
     set
   }
-  #endif
   public var cornerRadius: CoreFoundation.CGFloat {
     get
     set
@@ -7004,49 +6234,37 @@ public struct UIBackgroundConfiguration : Swift.Hashable {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var backgroundColor: UIColor? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var backgroundColorTransformer: UIKit.UIConfigurationColorTransformer? {
     get
     set
   }
-  #endif
   public func resolvedBackgroundColor(for tintColor: UIColor) -> UIColor
-  #if compiler(>=5.3) && $NonescapableTypes
   public var visualEffect: UIVisualEffect? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, tvOS 15.0, *)
   public var image: UIImage? {
     get
     set
   }
-  #endif
   @available(iOS 15.0, tvOS 15.0, *)
   public var imageContentMode: UIView.ContentMode {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var strokeColor: UIColor? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var strokeColorTransformer: UIKit.UIConfigurationColorTransformer? {
     get
     set
   }
-  #endif
   public func resolvedStrokeColor(for tintColor: UIColor) -> UIColor
   public var strokeWidth: CoreFoundation.CGFloat {
     get

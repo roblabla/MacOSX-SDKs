@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ReminderKit.framework/Versions/A/ReminderKit'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CompletedRemindersCount, _CompletedRemindersCountInList, 
                        _CustomSmartListsCount, _DADREMAccountSetPersonIDAuthorKey, 
                        _DADREMDAChangeTrackingHelperClientName, _DADREMSaveRequestAuthorKey, 
@@ -31,14 +29,17 @@ exports:
                        _RDStoreControllerSuggestConversionToGroceryListActivityAuthor, 
                        _RDStoreControllerUnsetCKDirtyFlagsInNonCKAccountsMigrationAuthor, 
                        _RDStoreControllerUpdateAlternativeDueDatesOfCalDavRemindersMigrationAuthor, 
+                       _RDStoreControllerUpdateReminderIsUrgentStateEnabledForCurrentUserMigratorAuthor, 
                        _RDSyncActivityNotificationEngineAuthor, _RDTemplateOperationAuthor, 
                        _RDTodayNotificationLastBannerPresentationDateAuthor, _RDUrgentAlarmConsumerLastBannerPresentationDateAuthor, 
                        _REMACAccountPropertyDidChooseToMigrate, _REMACAccountPropertyDidFinishMigration, 
                        _REMAccountTypeMaskContainsType, _REMAppBundleIdentifier, 
                        _REMAppGroupBundleIdentifier, _REMAppIntentsGroupEntityName, 
-                       _REMAppIntentsGroupTypeDisplayName, _REMAppIntentsListEntityName, 
+                       _REMAppIntentsGroupSchemaIdentifier, _REMAppIntentsGroupTypeDisplayName, 
+                       _REMAppIntentsListEntityName, _REMAppIntentsListSchemaIdentifier, 
                        _REMAppIntentsListTypeDisplayName, _REMAppIntentsReminderEntityName, 
-                       _REMAppIntentsReminderTypeDisplayName, _REMAppIntentsSectionEntityName, 
+                       _REMAppIntentsReminderSchemaIdentifier, _REMAppIntentsReminderTypeDisplayName, 
+                       _REMAppIntentsSectionEntityName, _REMAppIntentsSectionSchemaIdentifier, 
                        _REMAppIntentsSectionTypeDisplayName, _REMAppStoreCreatedOrCompletedRemindersLastMonthCountFetchResultKey, 
                        _REMBundleGet, _REMCFTypeCast, _REMChangeErrorDomain, _REMCheckedDynamicCast, 
                        _REMCheckedProtocolCast, _REMClassAndProtocolCast, _REMDA_kCalDAVMobileAccountDelegatePrincipalPath, 
@@ -97,7 +98,7 @@ exports:
                        _REMSmartListTypeAll, _REMSmartListTypeAssigned, _REMSmartListTypeCompleted, 
                        _REMSmartListTypeCustom, _REMSmartListTypeFlagged, _REMSmartListTypeScheduled, 
                        _REMSmartListTypeSiriFoundInApps, _REMSmartListTypeTagged, 
-                       _REMSmartListTypeToday, _REMSortingStyleCreationDateNewestFirst, 
+                       _REMSmartListTypeToday, _REMSmartListTypeUrgent, _REMSortingStyleCreationDateNewestFirst, 
                        _REMSortingStyleCreationDateOldestFirst, _REMSortingStyleDefault, 
                        _REMSortingStyleDisplayDateNewestFirst, _REMSortingStyleDisplayDateOldestFirst, 
                        _REMSortingStyleManual, _REMSortingStylePriorityHighestFirst, 
@@ -196,7 +197,7 @@ exports:
                        REMListSection, REMListSectionChangeItem, REMListSectionContext, 
                        REMListSectionContextChangeItem, REMListSectionStorage, REMListSectionsDataView, 
                        REMListSectionsDataViewInvocationResult, REMListSectionsDataViewInvocation_fetchByObjectIDs, 
-                       REMListSectionsDataViewInvocation_fetchListSectionsCountInList, 
+                       REMListSectionsDataViewInvocation_fetchByReminderID, REMListSectionsDataViewInvocation_fetchListSectionsCountInList, 
                        REMListSectionsDataViewInvocation_fetchListSectionsInList, 
                        REMListShareeContext, REMListShareeContextChangeItem, REMListSortDescriptor, 
                        REMListStorage, REMListSublistContext, REMListSublistContextChangeItem, 
@@ -251,7 +252,8 @@ exports:
                        REMSmartListSectionChangeItem, REMSmartListSectionContext, 
                        REMSmartListSectionContextChangeItem, REMSmartListSectionStorage, 
                        REMSmartListSectionsDataView, REMSmartListSectionsDataViewInvocationResult, 
-                       REMSmartListSectionsDataViewInvocation_fetchByObjectIDs, REMSmartListSectionsDataViewInvocation_fetchSmartListSectionsInSmartList, 
+                       REMSmartListSectionsDataViewInvocation_fetchByObjectIDs, REMSmartListSectionsDataViewInvocation_fetchByReminderID, 
+                       REMSmartListSectionsDataViewInvocation_fetchSmartListSectionsInSmartList, 
                        REMSmartListStorage, REMSmartListsDataView, REMSmartListsDataViewInvocationResult, 
                        REMSmartListsDataViewInvocation_fetchAllCustomSmartLists, 
                        REMSmartListsDataViewInvocation_fetchCustomSmartListsInAccount, 

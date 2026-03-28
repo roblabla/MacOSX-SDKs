@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebCore.framework/Versions/A/Frameworks/libANGLE-shared.dylib'
-current-version: 623.1.14
+current-version: 624.1.16
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ WebCore, WebCoreTestSupport ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ANGLEGetDisplayPlatform, _ANGLEResetDisplayPlatform, _EGL_AcquireExternalContextANGLE, 
                        _EGL_BindAPI, _EGL_BindTexImage, _EGL_ChooseConfig, _EGL_ClientWaitSync, 
                        _EGL_ClientWaitSyncKHR, _EGL_CopyBuffers, _EGL_CopyMetalSharedEventANGLE, 

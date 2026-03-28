@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MediaControl.framework/Versions/A/MediaControl'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12MediaControl011ConditionalB0Mp', '_$s12MediaControl011ConditionalB0P10isDisabledSbvgTj', 
                        '_$s12MediaControl011ConditionalB0P10isDisabledSbvgTq', '_$s12MediaControl011ConditionalB0PAAE9isEnabledSbvg', 
                        '_$s12MediaControl011ConditionalB0PAAE9isEnabledSbvpMV', '_$s12MediaControl011ConditionalB0TL', 
@@ -210,6 +210,10 @@ exports:
                        '_$s12MediaControl11PreferencesC29sessionRecentActivityIntervalSdvgZ', 
                        '_$s12MediaControl11PreferencesC29sessionRecentActivityIntervalSdvpZMV', 
                        '_$s12MediaControl11PreferencesC29sessionRecentActivityIntervalSdvsZ', 
+                       '_$s12MediaControl11PreferencesC32artworkCacheRecentlyUsedMaxCountSivMZ', 
+                       '_$s12MediaControl11PreferencesC32artworkCacheRecentlyUsedMaxCountSivgZ', 
+                       '_$s12MediaControl11PreferencesC32artworkCacheRecentlyUsedMaxCountSivpZMV', 
+                       '_$s12MediaControl11PreferencesC32artworkCacheRecentlyUsedMaxCountSivsZ', 
                        '_$s12MediaControl11PreferencesC42hideSourceSessionForTransitionInteractionsSbvMZ', 
                        '_$s12MediaControl11PreferencesC42hideSourceSessionForTransitionInteractionsSbvgZ', 
                        '_$s12MediaControl11PreferencesC42hideSourceSessionForTransitionInteractionsSbvpZMV', 
@@ -471,6 +475,19 @@ exports:
                        '_$s12MediaControl11VolumeGroupCSHAAMc', '_$s12MediaControl11VolumeGroupCSQAAMc', 
                        '_$s12MediaControl11VolumeGroupCSeAAMc', '_$s12MediaControl11VolumeGroupCfD', 
                        '_$s12MediaControl11VolumeGroupCfd', '_$s12MediaControl11VolumeGroupCs23CustomStringConvertibleAAMc', 
+                       '_$s12MediaControl12ArtworkCacheC06cachedC4Data3for10Foundation0F0VSgAA0C5TokenC_tFTj', 
+                       '_$s12MediaControl12ArtworkCacheC06cachedC4Data3for10Foundation0F0VSgAA0C5TokenC_tFTq', 
+                       '_$s12MediaControl12ArtworkCacheC5store11artworkData3fory10Foundation0G0V_AA0C5TokenCtFTj', 
+                       '_$s12MediaControl12ArtworkCacheC5store11artworkData3fory10Foundation0G0V_AA0C5TokenCtFTq', 
+                       '_$s12MediaControl12ArtworkCacheC6assert3for6clientyAA0C5TokenC_yXltFTj', 
+                       '_$s12MediaControl12ArtworkCacheC6assert3for6clientyAA0C5TokenC_yXltFTq', 
+                       '_$s12MediaControl12ArtworkCacheC6remove6clientyyXl_tFTj', 
+                       '_$s12MediaControl12ArtworkCacheC6remove6clientyyXl_tFTq', 
+                       '_$s12MediaControl12ArtworkCacheC6sharedACvgZ', '_$s12MediaControl12ArtworkCacheC6sharedACvpZMV', 
+                       '_$s12MediaControl12ArtworkCacheCMa', '_$s12MediaControl12ArtworkCacheCMm', 
+                       '_$s12MediaControl12ArtworkCacheCMn', '_$s12MediaControl12ArtworkCacheCMo', 
+                       '_$s12MediaControl12ArtworkCacheCMu', '_$s12MediaControl12ArtworkCacheCN', 
+                       '_$s12MediaControl12ArtworkCacheCfD', '_$s12MediaControl12ArtworkCacheCfd', 
                        '_$s12MediaControl12ArtworkTokenC014supportsRemoteC0Sbvg', 
                        '_$s12MediaControl12ArtworkTokenC014supportsRemoteC0SbvpMV', 
                        '_$s12MediaControl12ArtworkTokenC06remoteC4Data10Foundation0F0VSgvg', 
@@ -526,7 +543,9 @@ exports:
                        '_$s12MediaControl12ReplyMessageV6encode2toys7Encoder_p_tKF', 
                        '_$s12MediaControl12ReplyMessageVMa', '_$s12MediaControl12ReplyMessageVMn', 
                        '_$s12MediaControl12ReplyMessageVN', '_$s12MediaControl12ReplyMessageVSEAAMc', 
-                       '_$s12MediaControl12ReplyMessageVSeAAMc', '_$s12MediaControl13ArtworkLoaderC17wouldLoadNewImage3forSbAA0C5TokenCSg_tFTj', 
+                       '_$s12MediaControl12ReplyMessageVSeAAMc', '_$s12MediaControl13ArtworkLoaderC11descriptionSSvgTj', 
+                       '_$s12MediaControl13ArtworkLoaderC11descriptionSSvgTq', '_$s12MediaControl13ArtworkLoaderC11descriptionSSvpMV', 
+                       '_$s12MediaControl13ArtworkLoaderC17wouldLoadNewImage3forSbAA0C5TokenCSg_tFTj', 
                        '_$s12MediaControl13ArtworkLoaderC17wouldLoadNewImage3forSbAA0C5TokenCSg_tFTq', 
                        '_$s12MediaControl13ArtworkLoaderC18artworkDataHandlerACy10Foundation0F0VSg_AA0C5TokenCSgtc_tcfC', 
                        '_$s12MediaControl13ArtworkLoaderC18artworkDataHandlerACy10Foundation0F0VSg_AA0C5TokenCSgtc_tcfCTj', 
@@ -539,6 +558,7 @@ exports:
                        '_$s12MediaControl13ArtworkLoaderCMn', '_$s12MediaControl13ArtworkLoaderCMo', 
                        '_$s12MediaControl13ArtworkLoaderCMu', '_$s12MediaControl13ArtworkLoaderCN', 
                        '_$s12MediaControl13ArtworkLoaderCfD', '_$s12MediaControl13ArtworkLoaderCfd', 
+                       '_$s12MediaControl13ArtworkLoaderCs23CustomStringConvertibleAAMc', 
                        '_$s12MediaControl13RoutingDialogV10detailTextSSSgvg', '_$s12MediaControl13RoutingDialogV10detailTextSSSgvpMV', 
                        '_$s12MediaControl13RoutingDialogV10identifier9titleText06detailG07actionsACSS_SSSgAHSayAC6ActionOGtcfC', 
                        '_$s12MediaControl13RoutingDialogV10identifierSSvg', '_$s12MediaControl13RoutingDialogV10identifierSSvpMV', 
@@ -2165,6 +2185,7 @@ exports:
                        '_$s12MediaControl35PendingItemIdentifiersUpdateMessageVSEAAMc', 
                        '_$s12MediaControl35PendingItemIdentifiersUpdateMessageVSeAAMc', 
                        '_$s12MediaControl8FeaturesO0A6RemoteO12FeatureFlags0eF3KeyAAMc', 
+                       '_$s12MediaControl8FeaturesO0A6RemoteO19cayenneArtworkCacheyA2EmFWC', 
                        '_$s12MediaControl8FeaturesO0A6RemoteO23cayenneClientValidationyA2EmFWC', 
                        '_$s12MediaControl8FeaturesO0A6RemoteO23cayenneMultiItemActionsyA2EmFWC', 
                        '_$s12MediaControl8FeaturesO0A6RemoteO28cayenneConditionalIndicatorsyA2EmFWC', 

@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightUIShared.framework/Versions/A/SpotlightUIShared'
-current-version: 181.2.7
+current-version: 181.4.6
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10DataSource17SpotlightUIShared10TypedQueryPTl', '_$s17SpotlightUIShared06EntityA5QueryV12searchStringSSSgvM', 
                        '_$s17SpotlightUIShared06EntityA5QueryV12searchStringSSSgvg', 
                        '_$s17SpotlightUIShared06EntityA5QueryV12searchStringSSSgvpMV', 
@@ -61,6 +61,8 @@ exports:
                        '_$s17SpotlightUIShared07DefaultA5QueryC15platterBehaviorAA013ResultPlatterF0VvgTj', 
                        '_$s17SpotlightUIShared07DefaultA5QueryC15platterBehaviorAA013ResultPlatterF0VvgTq', 
                        '_$s17SpotlightUIShared07DefaultA5QueryC15platterBehaviorAA013ResultPlatterF0VvpMV', 
+                       '_$s17SpotlightUIShared07DefaultA5QueryC17prepareForHistoryyyFTj', 
+                       '_$s17SpotlightUIShared07DefaultA5QueryC17prepareForHistoryyyFTq', 
                        '_$s17SpotlightUIShared07DefaultA5QueryC19supportsViewOptions3forSbAA0D14RepresentationVSg_tFZ', 
                        '_$s17SpotlightUIShared07DefaultA5QueryC20searchBarButtonItemsSaySo12SFButtonItemCGSgyFTj', 
                        '_$s17SpotlightUIShared07DefaultA5QueryC20searchBarButtonItemsSaySo12SFButtonItemCGSgyFTq', 
@@ -1255,7 +1257,10 @@ exports:
                        '_$s17SpotlightUIShared25ActionsZKWQueryDataSourceCMn', '_$s17SpotlightUIShared25ActionsZKWQueryDataSourceCMo', 
                        '_$s17SpotlightUIShared25ActionsZKWQueryDataSourceCMu', '_$s17SpotlightUIShared25ActionsZKWQueryDataSourceCN', 
                        '_$s17SpotlightUIShared25ActionsZKWQueryDataSourceCfD', '_$s17SpotlightUIShared25ActionsZKWQueryDataSourceCfd', 
-                       '_$s17SpotlightUIShared25HistoryRepresentableQueryMp', '_$s17SpotlightUIShared25HistoryRepresentableQueryPAA0E0Tb', 
+                       '_$s17SpotlightUIShared25HistoryRepresentableQueryMp', '_$s17SpotlightUIShared25HistoryRepresentableQueryP010prepareForC0yyFTj', 
+                       '_$s17SpotlightUIShared25HistoryRepresentableQueryP010prepareForC0yyFTq', 
+                       '_$s17SpotlightUIShared25HistoryRepresentableQueryPAA0E0Tb', 
+                       '_$s17SpotlightUIShared25HistoryRepresentableQueryPAAE010prepareForC0yyF', 
                        '_$s17SpotlightUIShared25HistoryRepresentableQueryTL', '_$s17SpotlightUIShared25QueryRepresentationParserV10ParseErrorO010disallowedC0yAeA0C0_pcAEmFWC', 
                        '_$s17SpotlightUIShared25QueryRepresentationParserV10ParseErrorOMa', 
                        '_$s17SpotlightUIShared25QueryRepresentationParserV10ParseErrorOMn', 

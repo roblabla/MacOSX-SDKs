@@ -1,4 +1,8 @@
 module EndpointSecurity [system] {
-	umbrella header "EndpointSecurity.h"
+	header "EndpointSecurity.h"
+	header "ESTypes.h"
+	header "ESMessageCore.h"
+	header "ESMessage.h"
+	header "ESClient.h"
 	export *
 }

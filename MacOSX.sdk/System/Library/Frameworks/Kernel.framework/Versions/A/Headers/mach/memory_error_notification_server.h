@@ -52,7 +52,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	memory_error_notification_MSG_COUNT
-#define	memory_error_notification_MSG_COUNT	2
+#define	memory_error_notification_MSG_COUNT	3
 #endif	/* memory_error_notification_MSG_COUNT */
 
 #include <Availability.h>
@@ -61,6 +61,7 @@ typedef function_table_entry   *function_table_t;
 #include <mach/mig.h>
 #include <mach/mach_types.h>
 #include <kern/ecc.h>
+#include <kern/llc_error.h>
 
 #ifdef __BeforeMigServerHeader
 __BeforeMigServerHeader
@@ -99,6 +100,20 @@ kern_return_t mcc_memory_error_notification
 	audit_token_t atoken
 );
 
+/* SimpleRoutine llc_memory_error_notification */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+MIG_SERVER_ROUTINE
+kern_return_t llc_memory_error_notification
+(
+	mach_port_t memory_error_port,
+	llc_event_t event,
+	audit_token_t atoken
+);
+
 #ifdef	mig_external
 mig_external
 #else
@@ -125,7 +140,7 @@ extern const struct memory_error_notification_subsystem {
 	unsigned int	maxsize;	/* Max msg size */
 	vm_address_t	reserved;	/* Reserved */
 	struct routine_descriptor	/* Array of routine descriptors */
-		routine[2];
+		routine[3];
 } memory_error_notification_subsystem;
 
 /* typedefs for all requests */
@@ -156,6 +171,18 @@ extern const struct memory_error_notification_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		llc_event_t event;
+	} __Request__llc_memory_error_notification_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Request__memory_error_notification_subsystem__defined */
 
 
@@ -166,6 +193,7 @@ extern const struct memory_error_notification_subsystem {
 union __RequestUnion__memory_error_notification_subsystem {
 	__Request__memory_error_notification_t Request_memory_error_notification;
 	__Request__mcc_memory_error_notification_t Request_mcc_memory_error_notification;
+	__Request__llc_memory_error_notification_t Request_llc_memory_error_notification;
 };
 #endif /* __RequestUnion__memory_error_notification_subsystem__defined */
 /* typedefs for all replies */
@@ -196,6 +224,18 @@ union __RequestUnion__memory_error_notification_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__llc_memory_error_notification_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Reply__memory_error_notification_subsystem__defined */
 
 
@@ -206,13 +246,15 @@ union __RequestUnion__memory_error_notification_subsystem {
 union __ReplyUnion__memory_error_notification_subsystem {
 	__Reply__memory_error_notification_t Reply_memory_error_notification;
 	__Reply__mcc_memory_error_notification_t Reply_mcc_memory_error_notification;
+	__Reply__llc_memory_error_notification_t Reply_llc_memory_error_notification;
 };
 #endif /* __ReplyUnion__memory_error_notification_subsystem__defined */
 
 #ifndef subsystem_to_name_map_memory_error_notification
 #define subsystem_to_name_map_memory_error_notification \
     { "memory_error_notification", 5900 },\
-    { "mcc_memory_error_notification", 5901 }
+    { "mcc_memory_error_notification", 5901 },\
+    { "llc_memory_error_notification", 5902 }
 #endif
 
 #ifdef __AfterMigServerHeader

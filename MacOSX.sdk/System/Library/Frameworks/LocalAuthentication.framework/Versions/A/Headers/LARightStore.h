@@ -38,7 +38,7 @@ API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos, tvos)
 /// @param handler Completion handler with an error on failure.
 - (void)removeRight:(LAPersistedRight *)right completion:(void (NS_SWIFT_SENDABLE ^)(NSError *_Nullable error))handler NS_SWIFT_NAME(removeRight(_:completion:));
 
-/// @brief Removes right with provided identifier from persistant storage.
+/// @brief Removes right with provided identifier from persistent storage.
 /// @param identifier Identifier of @c LAPersistedRight instance to remove.
 /// @param handler Completion handler with an error on failure.
 - (void)removeRightForIdentifier:(NSString *)identifier completion:(void (NS_SWIFT_SENDABLE ^)(NSError *_Nullable error))handler NS_SWIFT_NAME(removeRight(forIdentifier:completion:));

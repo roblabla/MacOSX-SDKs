@@ -78,6 +78,18 @@ API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, tvos)
 /// The user's sex.
 @property (class, nonatomic, readonly) PKIdentityElement *sexElement API_AVAILABLE(ios(17.2));
 
+/// The signature or usual mark of the mobile document holder.
+@property (class, nonatomic, readonly) PKIdentityElement *signatureUsualMarkElement API_AVAILABLE(ios(26.4), visionos(26.4));
+
+/// The place where the mobile document holder was born.
+@property (class, nonatomic, readonly) PKIdentityElement *placeOfBirthElement API_AVAILABLE(ios(26.4), visionos(26.4));
+
+/// The mobile document holder's nationality.
+@property (class, nonatomic, readonly) PKIdentityElement *nationalityElement API_AVAILABLE(ios(26.4), visionos(26.4));
+
+/// Indicates whether the mobile document holder has temporary lawful status based on information from the U.S. Department of Homeland Security (DHS).
+@property (class, nonatomic, readonly) PKIdentityElement *dhsTemporaryLawfulStatusElement API_AVAILABLE(ios(26.4), visionos(26.4));
+
 /// Boolean indicating whether the user's age is at least the given age.
 /// For example, ageThresholdElementWithAge:21 will return true if the user is at least 21 years old.
 /// This value is only available for a given age if it was provided by the issuer. If this value

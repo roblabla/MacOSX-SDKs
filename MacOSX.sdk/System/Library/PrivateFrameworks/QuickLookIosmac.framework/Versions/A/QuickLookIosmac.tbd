@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/QuickLookIosmac.framework/Versions/A/QuickLookIosmac'
 current-version: 0
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _QLActivateGeneratorAtURL, _QLActiveThirdPartyGenerators, 
                        _QLBubbleControlIdentifierKey, _QLBubbleControlKeyEquivalentKey, 
                        _QLBubbleControlLeftAlignedKey, _QLBubbleControlShrinkableKey, 
@@ -264,8 +262,7 @@ exports:
                        QLServerSatelliteManager._sandboxVariants, QLServerSatelliteManager._satellites, 
                        QLThumbnailExtensionInfo._extension, QLThumbnailExtensionInfo._minimumThumbnailSize ]
 reexports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _QLAdaptSizeToRect, _QLScaleRect, _kQLThumbnailOptionIconModeKey, 
                        _kQLThumbnailOptionScaleFactorKey, _kQLThumbnailPropertyIconFlavorKey, 
                        _kQLThumbnailPropertyInlinePreviewModeKey, _kQLThumbnailPropertyYBaselineKey ]

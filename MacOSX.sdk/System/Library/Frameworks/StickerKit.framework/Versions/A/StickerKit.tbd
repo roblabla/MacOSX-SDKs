@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/StickerKit.framework/Versions/A/StickerKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10StickerKit04loadA14EffectRendereryyF', '_$s10StickerKit0A10SourceTypeO8rawValueACSgSi_tcfC', 
                        '_$s10StickerKit0A10SourceTypeO8rawValueSivg', '_$s10StickerKit0A10SourceTypeO8rawValueSivpMV', 
                        '_$s10StickerKit0A10SourceTypeOMa', '_$s10StickerKit0A10SourceTypeOMn', 

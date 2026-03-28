@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PersonalizationPortraitInternals.framework/Versions/A/PersonalizationPortraitInternals'
-current-version: 1303.8
+current-version: 1311.6
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s32PersonalizationPortraitInternals14StringDonationC14labeledStrings8bundleId05groupI008documentI0ACSDyS2SG_S3StcfC', 
                        '_$s32PersonalizationPortraitInternals14StringDonationC14labeledStrings8bundleId05groupI008documentI0ACSDyS2SG_S3StcfCTj', 
                        '_$s32PersonalizationPortraitInternals14StringDonationC14labeledStrings8bundleId05groupI008documentI0ACSDyS2SG_S3StcfCTq', 

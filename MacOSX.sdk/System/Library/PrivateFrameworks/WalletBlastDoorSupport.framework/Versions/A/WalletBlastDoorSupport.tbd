@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WalletBlastDoorSupport.framework/Versions/A/WalletBlastDoorSupport'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s22WalletBlastDoorSupport0A20OrderPreviewUnpackerV0bC0010ContextualG0AAMc', 
                        '_$s22WalletBlastDoorSupport0A20OrderPreviewUnpackerV6unpack4from4with0bC00aeF0V10Foundation4DataV_AI7ContextVtKF', 
                        '_$s22WalletBlastDoorSupport0A20OrderPreviewUnpackerVACycfC', 

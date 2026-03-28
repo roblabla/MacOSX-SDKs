@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AskToCore.framework/Versions/A/AskToCore'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Checkpoint9AskToCore7JourneyPTl', '_$s10Connection9AskToCore14ClientProtocolPTl', 
                        '_$s5AskTo10ATQuestionC03askB13TopicMetadataAC0eF0OSgvM', 
                        '_$s5AskTo10ATQuestionC03askB13TopicMetadataAC0eF0OSgvg', 

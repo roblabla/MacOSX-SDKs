@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Stickers.framework/Support/RecencyService.framework/Versions/A/RecencyService'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s14RecencyService010ImageGlyphA13ModelMigratorMp', '_$s14RecencyService010ImageGlyphA13ModelMigratorP3run4withyAA0cdaE0C_tYaKFTj', 
                        '_$s14RecencyService010ImageGlyphA13ModelMigratorP3run4withyAA0cdaE0C_tYaKFTjTu', 
                        '_$s14RecencyService010ImageGlyphA13ModelMigratorP3run4withyAA0cdaE0C_tYaKFTq', 

@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BiometricKit.framework/Versions/A/BiometricKit'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AppendCommentToPGM, _BKErrorDomain, _BKLogCode, _BKLogEvent, 
                        _LoadRawImageAsPGM, _RIESAdd, _RIESClear, _RIESDelete, _RIESInit, 
                        _RIESLoad, _RIESSave, _RIESUpdate, _SaveRawImageAsPGM, __BKLogEventOrCode, 
@@ -41,6 +39,5 @@ exports:
                        BiometricKitAccessory, BiometricKitAccessoryGroup, BiometricKitEnrollProgressCoordinates, 
                        BiometricKitEnrollProgressInfo, BiometricKitEnrollProgressMergedComponent, 
                        BiometricKitIdentity, BiometricKitMatchInfo, BiometricKitTemplateInfo, 
-                       BiometricKitXPCClient, BiometricKitXPCClientConnection, BiometricPreferences, 
-                       BiometricSupportTools ]
+                       BiometricKitXPCClient, BiometricKitXPCClientConnection, BiometricSupportTools ]
 ...

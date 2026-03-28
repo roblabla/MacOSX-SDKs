@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// ``LPLinkMetadata`` instance are optional.
 ///
 /// - Note: To enable macOS clients to fetch metadata for remote URLs, add the
-/// <doc://com.apple.documentation/documentation/bundleresources/entitlements/com_apple_security_network_client>
+/// <doc://com.apple.documentation/documentation/BundleResources/Entitlements/com.apple.security.network.client>
 /// entitlement.
 ///
 /// ## Fetch link metadata from a URL
@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// For more information about handling errors, see
 /// ``LinkPresentation/LPError``.
-LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0), watchos(9.0), tvos(18.0))
+LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0), visionos(1.0), watchos(9.0), tvos(18.0))
 @interface LPMetadataProvider : NSObject
 
 /// Fetches metadata for the given URL.
@@ -93,7 +93,7 @@ LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0), watchos(9.0), tvos(18.0))
 /// > ```
 /// >
 /// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
-- (void)startFetchingMetadataForRequest:(NSURLRequest *)request completionHandler:(void(^)(LPLinkMetadata *_Nullable metadata, NSError *_Nullable error))completionHandler API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)startFetchingMetadataForRequest:(NSURLRequest *)request completionHandler:(void(^)(LPLinkMetadata *_Nullable metadata, NSError *_Nullable error))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), visionos(1.0), tvos(18.0), watchos(9.0));
 
 /// Cancels a metadata request.
 ///

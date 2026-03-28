@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/MapKit.framework/Versions/A/MapKit'
 current-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _DetailTextsForAdvisoryItem, _ImageForShieldDataSourceTypeShouldBeFlipped, 
                        _MKAddressDictionaryFromCLPlacemark, _MKAddressDictionaryFromContactsDictionary, 
                        _MKAddressDictionaryFromPostalAddress, _MKAddressStringForAddressDictionary, 

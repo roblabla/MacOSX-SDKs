@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libxpc.dylib'
-current-version: 3089.60.7
+current-version: 3102.100.102
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _XPC_ACTIVITY_ALLOW_BATTERY, _XPC_ACTIVITY_APP_REFRESH, _XPC_ACTIVITY_CHECK_IN, 
                        _XPC_ACTIVITY_COMMUNICATES_WITH_PAIRED_DEVICE, _XPC_ACTIVITY_CPU_INTENSIVE, 
                        _XPC_ACTIVITY_DELAY, _XPC_ACTIVITY_DESIRED_MOTION_STATE, _XPC_ACTIVITY_DISK_INTENSIVE, 
@@ -52,10 +49,7 @@ exports:
                        __launch_job_query_routine, __launch_job_routine, __launch_job_routine_async, 
                        __launch_msg2, __launch_server_test_routine, __launch_service_stats_copy_4ppse_impl, 
                        __launch_service_stats_copy_impl, __launch_trial_factors_routine, 
-                       __libxpc_initializer, __spawn_via_launchd, __system_ios_support_version_copy_string_sysctl, 
-                       __system_version_copy_string_plist, __system_version_copy_string_sysctl, 
-                       __system_version_fallback, __system_version_parse_string, 
-                       __system_version_plist_path, __vproc_get_last_exit_status, 
+                       __libxpc_initializer, __spawn_via_launchd, __vproc_get_last_exit_status, 
                        __vproc_grab_subset, __vproc_kickstart_by_label, __vproc_log, 
                        __vproc_log_error, __vproc_logv, __vproc_pid_is_managed, __vproc_post_fork_ping, 
                        __vproc_send_signal_by_label, __vproc_set_global_on_demand, 
@@ -138,7 +132,8 @@ exports:
                        _launch_extension_property_path, _launch_extension_property_pid, 
                        _launch_extension_property_version, _launch_extension_property_xpc_bundle, 
                        _launch_get_fd, _launch_get_service_enabled, _launch_get_system_service_enabled, 
-                       _launch_job_query_get_additional_job_properties, _launch_load_mounted_jetsam_properties, 
+                       _launch_get_user_context, _launch_job_query_get_additional_job_properties, 
+                       _launch_load_jetsam_properties_path, _launch_load_mounted_jetsam_properties, 
                        _launch_msg, _launch_path_for_user_service_4coresim, _launch_perfcheck_property_endpoint_active, 
                        _launch_perfcheck_property_endpoint_event, _launch_perfcheck_property_endpoint_name, 
                        _launch_perfcheck_property_endpoint_needs_activation, _launch_perfcheck_property_endpoints, 

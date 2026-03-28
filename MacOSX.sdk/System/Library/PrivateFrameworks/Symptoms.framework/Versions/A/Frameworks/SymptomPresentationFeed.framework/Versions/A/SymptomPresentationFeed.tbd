@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Versions/A/Frameworks/SymptomPresentationFeed.framework/Versions/A/SymptomPresentationFeed'
-current-version: 2158.60.3
+current-version: 2169.100.30
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/SymptomShared.framework/Versions/A/SymptomShared' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _advisoryToString, _kEstTransferTimeConfidence, _kEstTransferTimeDLSecs, 
                        _kEstTransferTimeULSecs, _kNOIDiscretionaryInvitesWhenForegroundToo, 
                        _kPayloadInfoDLKB, _kPayloadInfoULKB, _kPerformanceFlowAvgUsecsEstabTime, 
@@ -74,14 +71,14 @@ exports:
                        UsageFeed ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SymptomShared.framework/Versions/A/SymptomShared'
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ SymptomEvaluator, SymptomPresentationFeed, SymptomsUnitTests, 
                        symptomstool ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _kDarwinNotificationHasAlternateAdvice, _kDarwinNotificationMaterialLinkQualityChange, 
                        _kNWPVarModelAnalytics, _kNWPVarModelEpsilonGreedyEpsilonDecayRate, 
                        _kNWPVarModelEpsilonGreedyEpsilonDecayedMinimumValue, _kNWPVarModelEpsilonGreedyEpsilonValue, 

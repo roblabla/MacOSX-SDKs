@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SymptomDistribution.framework/Versions/A/SymptomDistribution'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s19SymptomDistribution10NDFBrowserC14startDiscovery3for11cancelAfter10deviceTypeSay7Network10NWEndpointOGSS_SdAH9NWBrowserC10DescriptorO7OptionsV06DeviceJ0VtYaKFTj', 
                        '_$s19SymptomDistribution10NDFBrowserC14startDiscovery3for11cancelAfter10deviceTypeSay7Network10NWEndpointOGSS_SdAH9NWBrowserC10DescriptorO7OptionsV06DeviceJ0VtYaKFTjTu', 
                        '_$s19SymptomDistribution10NDFBrowserC14startDiscovery3for11cancelAfter10deviceTypeSay7Network10NWEndpointOGSS_SdAH9NWBrowserC10DescriptorO7OptionsV06DeviceJ0VtYaKFTq', 

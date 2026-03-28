@@ -101,7 +101,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 - (void)triggerAccessPointForFriendingWithHandler:(void (^ _Nullable)(void))handler NS_SWIFT_NAME(triggerForFriending(handler:)) NS_SWIFT_ASYNC(1) API_AVAILABLE(ios(26.0), macos(26.0)) API_UNAVAILABLE(tvos, visionos, watchos);
 
 /// Brings up the Arcade dashboard.
-- (void)triggerAccessPointForArcadeWithHandler:(void (^ _Nullable)(void))handler NS_SWIFT_NAME(triggerForArcade(handler:)) NS_SWIFT_ASYNC(1) API_AVAILABLE(ios(26.0), macos(26.0)) API_UNAVAILABLE(tvos, visionos, watchos);
+- (void)triggerAccessPointForArcadeWithHandler:(void (^ _Nullable)(void))handler NS_SWIFT_NAME(triggerForArcade(handler:)) NS_SWIFT_ASYNC(1) API_AVAILABLE(ios(26.2), macos(26.2)) API_UNAVAILABLE(tvos, visionos, watchos);
 
 @end
 

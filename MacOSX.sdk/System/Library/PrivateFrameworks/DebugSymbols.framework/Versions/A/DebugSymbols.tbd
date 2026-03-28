@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DebugSymbols.framework/Versions/A/DebugSymbols'
 current-version: 216
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12DebugSymbols10DSYMBinaryV2eeoiySbAC_ACtFZ', '_$s12DebugSymbols10DSYMBinaryV3url10Foundation3URLVvg', 
                        '_$s12DebugSymbols10DSYMBinaryV3url10Foundation3URLVvpMV', 
                        '_$s12DebugSymbols10DSYMBinaryV3urlAC10Foundation3URLV_tcfC', 

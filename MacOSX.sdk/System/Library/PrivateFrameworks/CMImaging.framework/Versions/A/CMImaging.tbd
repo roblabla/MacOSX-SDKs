@@ -1,15 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CMImaging.framework/Versions/A/CMImaging'
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/CMCaptureCore.framework/Versions/A/CMCaptureCore' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CMIDenormalizeCropRect, _CMIGetBaseRGBFromYCCConversionMatrix, 
                        _CMIGetBaseYCCFromRGBConversionMatrix, _CMIGetChromaticAdaptationMatrix, 
                        _CMIGetColorConversionMatrix, _CMIGetColorSpaceWithName, _CMIGetMetalPixelFormatForPixelBuffer, 
@@ -165,12 +162,10 @@ exports:
                        CMISRLv2Plist.toneSimilaritySigma ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CMCaptureCore.framework/Versions/A/CMCaptureCore'
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AppleDarwinCamera, AppleH10DarwinCamera, AppleH16DarwinCamera, 
                        AppleMCTF, AppleProResHWDecoder-Dev.videodecoder, AppleProResHWDecoder.videodecoder, 
                        AppleProResHWEncoder-Dev.videoencoder, AppleProResHWEncoder.videoencoder, 
@@ -187,8 +182,7 @@ allowable-clients:
                        camtestdarwin, darwincameracaptured, h10isp, h10ispdarwin, 
                        h13isp, h16isp, h16ispdarwin ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FigCaptureComputeImageGainFromMetadata, _FigCaptureCopySerializableKeys, 
                        _FigCaptureStreamFocusingMethodIsContrastBased, _FigCaptureStreamFocusingMethodIsPhaseDetectionBased, 
                        _FigCaptureStreamStreamingFaceConfigurationKey_AssistMode, 

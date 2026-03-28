@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/QLCharts.framework/Versions/A/QLCharts'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _OIAxisGetUnit, _OIChartGetAxis, _OIChartGetSeries, _OIChartingCreateImageRef, 
                        _OIChartingCreateImageRefWithFormatterCallback, _OIChartingCreatePDFData, 
                        _OIChartingCreatePDFDataWithFormatterCallback, __OIChartingCreateChartFromData, 

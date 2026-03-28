@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/lighthouse_runtime.framework/Versions/A/lighthouse_runtime'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10ResultType18lighthouse_runtime6WorkerPTl', '_$s10ResultType18lighthouse_runtime8ReporterPTl', 
                        '_$s14DataRecordType18lighthouse_runtime0A8ProviderPTl', '_$s14DataRecordType18lighthouse_runtime6WorkerPTl', 
                        '_$s18lighthouse_runtime10DataRecordMp', '_$s18lighthouse_runtime12DataProviderMp', 

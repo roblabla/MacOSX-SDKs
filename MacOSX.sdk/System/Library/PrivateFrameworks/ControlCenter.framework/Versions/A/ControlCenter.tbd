@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ControlCenter.framework/Versions/A/ControlCenter'
-current-version: 682.2.13
+current-version: 682.4.31
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s13ControlCenter012UserSwitcherC11PreferencesC04userD9MenuStyleAC0cdgH0OvM', 
                        '_$s13ControlCenter012UserSwitcherC11PreferencesC04userD9MenuStyleAC0cdgH0Ovg', 
                        '_$s13ControlCenter012UserSwitcherC11PreferencesC04userD9MenuStyleAC0cdgH0OvpMV', 

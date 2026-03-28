@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/InputToolKitUI.framework/Versions/A/InputToolKitUI'
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIN10ClipperLib16clipperExceptionE, __ZTIN10ClipperLib8PolyNodeE, 
                        __ZTSN10ClipperLib16clipperExceptionE, __ZTSN10ClipperLib8PolyNodeE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$sSo25NSAutoresizingMaskOptionsV14InputToolKitUIE17itk_flexibleWidthABvMZ', 
                        '_$sSo25NSAutoresizingMaskOptionsV14InputToolKitUIE17itk_flexibleWidthABvgZ', 
                        '_$sSo25NSAutoresizingMaskOptionsV14InputToolKitUIE17itk_flexibleWidthABvsZ', 

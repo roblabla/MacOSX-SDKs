@@ -161,6 +161,7 @@ enum
     kAirshipDaleBasebandErrorPCICplTimeout,
     kAirshipDaleBasebandErrorPCILinkDown,
     kAirshipDaleBasebandErrorPCILinkResumeFail,
+    kAirshipDaleBasebandErrorPCILinkBWNotification,
 
     kAirshipDaleBasebandErrorMax
 };

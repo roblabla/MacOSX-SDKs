@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ALDataTypes.framework/Versions/A/ALDataTypes.dylib'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s11ALDataTypes11ALTimeStampV11descriptionSSvg', '_$s11ALDataTypes11ALTimeStampV11descriptionSSvpMV', 
                        '_$s11ALDataTypes11ALTimeStampV17cfAbsoluteTimeSecACSd_tcfC', 
                        '_$s11ALDataTypes11ALTimeStampV17cfAbsoluteTimeSecSdSgvg', 
@@ -295,6 +293,22 @@ exports:
                        '_$s11ALDataTypes17ALBtNotificationsV8_resultsSayAA0C12NotificationVGvs', 
                        '_$s11ALDataTypes17ALBtNotificationsVACycfC', '_$s11ALDataTypes17ALBtNotificationsVMa', 
                        '_$s11ALDataTypes17ALBtNotificationsVMn', '_$s11ALDataTypes17ALBtNotificationsVN', 
+                       '_$s11ALDataTypes17ALVLSessionActionV0D4TypeO2eeoiySbAE_AEtFZ', 
+                       '_$s11ALDataTypes17ALVLSessionActionV0D4TypeO4hash4intoys6HasherVz_tF', 
+                       '_$s11ALDataTypes17ALVLSessionActionV0D4TypeO4stopyA2EmFWC', 
+                       '_$s11ALDataTypes17ALVLSessionActionV0D4TypeO5startyA2EmFWC', 
+                       '_$s11ALDataTypes17ALVLSessionActionV0D4TypeO9hashValueSivg', 
+                       '_$s11ALDataTypes17ALVLSessionActionV0D4TypeO9hashValueSivpMV', 
+                       '_$s11ALDataTypes17ALVLSessionActionV0D4TypeO9undefinedyA2EmFWC', 
+                       '_$s11ALDataTypes17ALVLSessionActionV0D4TypeOMa', '_$s11ALDataTypes17ALVLSessionActionV0D4TypeOMn', 
+                       '_$s11ALDataTypes17ALVLSessionActionV0D4TypeON', '_$s11ALDataTypes17ALVLSessionActionV0D4TypeOSHAAMc', 
+                       '_$s11ALDataTypes17ALVLSessionActionV0D4TypeOSQAAMc', '_$s11ALDataTypes17ALVLSessionActionV6actionA2C0D4TypeO_tcfC', 
+                       '_$s11ALDataTypes17ALVLSessionActionV7_actionAC0D4TypeOSgvM', 
+                       '_$s11ALDataTypes17ALVLSessionActionV7_actionAC0D4TypeOSgvg', 
+                       '_$s11ALDataTypes17ALVLSessionActionV7_actionAC0D4TypeOSgvpMV', 
+                       '_$s11ALDataTypes17ALVLSessionActionV7_actionAC0D4TypeOSgvs', 
+                       '_$s11ALDataTypes17ALVLSessionActionVACycfC', '_$s11ALDataTypes17ALVLSessionActionVMa', 
+                       '_$s11ALDataTypes17ALVLSessionActionVMn', '_$s11ALDataTypes17ALVLSessionActionVN', 
                        '_$s11ALDataTypes18ALWiFiNotificationV10_availableSbSgvM', 
                        '_$s11ALDataTypes18ALWiFiNotificationV10_availableSbSgvg', 
                        '_$s11ALDataTypes18ALWiFiNotificationV10_availableSbSgvpMV', 

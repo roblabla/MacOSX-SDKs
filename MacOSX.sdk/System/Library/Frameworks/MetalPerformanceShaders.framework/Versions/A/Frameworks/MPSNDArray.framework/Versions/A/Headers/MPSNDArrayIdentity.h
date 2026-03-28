@@ -27,9 +27,9 @@ MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER;
 
 /*! @abstract   Do a reshape operation, either by trying to alias the array, returning an arrayview, or by copying.
- *  @param      cmdBuf          The command buffer into which to encode the kernel, or to create a temporary array alias.
- *  @param      sourceArray    Source array. If this function returns a non-nil result, then the readCount of `sourceArray` is decremented.
- *  @param      shape       The new shape, given in TF dimension ordering (as always with MPSShape).
+ *  @param      cmdBuf              `MTLCommandBuffer` into which to encode the kernel, or to create a temporary array alias.
+ *  @param      sourceArray         Source array. If this function returns a non-nil result, then the readCount of `sourceArray` is decremented.
+ *  @param      shape               The new shape, given in TF dimension ordering (as always with MPSShape).
  *  @param      destinationArray    If not nil, then the result of reshape will be copied to this. Shape of `destinationArray` must match `shape`.
  *  @result     If `destinationArray` is not nil, then `destinationArray`. Otherwise aliasing is tried, and if aliasing is not possible
  *              due to existing slices or transposes nil is returned. If aliasing is successful, then a new arrayview of `sourceArray`
@@ -40,19 +40,53 @@ MPS_CLASS_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18
                                         sourceArray: (MPSNDArray * __nonnull) sourceArray
                                               shape: (MPSShape * __nonnull) shape
                                    destinationArray: (MPSNDArray * __nullable) destinationArray;
-// Variant with MPS dimension-ordering
+
+/*! @abstract   Do a reshape operation, either by trying to alias the array, returning an arrayview, or by copying.
+ *  @param      cmdBuf              `MTLCommandBuffer` into which to encode the kernel, or to create a temporary array alias.
+ *  @param      sourceArray         Source array. If this function returns a non-nil result, then the readCount of `sourceArray` is decremented.
+ *  @param      numberOfDimensions  The number of dimensions of the NDArray.
+ *  @param      dimensionSizes      The extents of each dimensions of the NDArray.
+ *  @param      destinationArray    If not nil, then the result of reshape will be copied to this. Shape of `destinationArray` must match `shape`.
+ *  @result     If `destinationArray` is not nil, then `destinationArray`. Otherwise aliasing is tried, and if aliasing is not possible
+ *              due to existing slices or transposes nil is returned. If aliasing is successful, then a new arrayview of `sourceArray`
+ *              is returned; If `sourceArray` is a `MPSTemporaryArray` then a `MPSTemporaryArray` is returned referencing the same data,
+ *              otherwise a `MPSNDArray` type result is returned.
+ *   */
 -(MPSNDArray * __nullable) reshapeWithCommandBuffer: (__nullable id <MTLCommandBuffer>) cmdBuf
                                         sourceArray: (MPSNDArray * __nonnull) sourceArray
                                      dimensionCount: (NSUInteger) numberOfDimensions
                                      dimensionSizes: (NSUInteger*__nonnull) dimensionSizes
                                    destinationArray: (MPSNDArray * __nullable) destinationArray;
 
+/*! @abstract   Do a reshape operation, either by trying to alias the array, returning an arrayview, or by copying.
+ *  @param      encoder             The `MTLComputeCommandEncoder` that the kernel will be encoded with.
+ *  @param      cmdBuf              `MTLCommandBuffer` into which to encode the kernel, or to create a temporary array alias.
+ *  @param      sourceArray         Source array. If this function returns a non-nil result, then the readCount of `sourceArray` is decremented.
+ *  @param      shape               The new shape, given in TF dimension ordering (as always with MPSShape).
+ *  @param      destinationArray    If not nil, then the result of reshape will be copied to this. Shape of `destinationArray` must match `shape`.
+ *  @result     If `destinationArray` is not nil, then `destinationArray`. Otherwise aliasing is tried, and if aliasing is not possible
+ *              due to existing slices or transposes nil is returned. If aliasing is successful, then a new arrayview of `sourceArray`
+ *              is returned; If `sourceArray` is a `MPSTemporaryArray` then a `MPSTemporaryArray` is returned referencing the same data,
+ *              otherwise a `MPSNDArray` type result is returned.
+ *   */
 -(MPSNDArray * __nullable) reshapeWithCommandEncoder: (__nullable id <MTLComputeCommandEncoder>) encoder
                                        commandBuffer: (__nullable id <MTLCommandBuffer>) cmdBuf
                                         sourceArray: (MPSNDArray * __nonnull) sourceArray
                                               shape: (MPSShape * __nonnull) shape
                                    destinationArray: (MPSNDArray * __nullable) destinationArray;
-// Variant with MPS dimension-ordering
+
+/*! @abstract   Do a reshape operation, either by trying to alias the array, returning an arrayview, or by copying.
+ *  @param      encoder             The `MTLComputeCommandEncoder` that the kernel will be encoded with.
+ *  @param      cmdBuf              `MTLCommandBuffer` into which to encode the kernel, or to create a temporary array alias.
+ *  @param      sourceArray         Source array. If this function returns a non-nil result, then the readCount of `sourceArray` is decremented.
+ *  @param      numberOfDimensions  The number of dimensions of the NDArray.
+ *  @param      dimensionSizes      The extents of each dimensions of the NDArray.
+ *  @param      destinationArray    If not nil, then the result of reshape will be copied to this. Shape of `destinationArray` must match `shape`.
+ *  @result     If `destinationArray` is not nil, then `destinationArray`. Otherwise aliasing is tried, and if aliasing is not possible
+ *              due to existing slices or transposes nil is returned. If aliasing is successful, then a new arrayview of `sourceArray`
+ *              is returned; If `sourceArray` is a `MPSTemporaryArray` then a `MPSTemporaryArray` is returned referencing the same data,
+ *              otherwise a `MPSNDArray` type result is returned.
+ *   */
 -(MPSNDArray * __nullable) reshapeWithCommandEncoder: (__nullable id <MTLComputeCommandEncoder>) encoder
                                        commandBuffer: (__nullable id <MTLCommandBuffer>) cmdBuf
                                         sourceArray: (MPSNDArray * __nonnull) sourceArray

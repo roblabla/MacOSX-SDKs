@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AdaptiveMesh.framework/Versions/A/AdaptiveMesh'
 exports:
   - targets:         [ x86_64-macos ]
@@ -9,7 +9,7 @@ exports:
                        __ZTSN3amt31AMTAdaptiveMeshTessellatorBasicE, __ZTSNSt3__110__function6__baseIFbfEEE, 
                        __ZTSNSt3__110__function6__baseIFvxEEE, __ZTSNSt3__110shared_ptrIN3amt12TriangleMeshEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN3amt12TriangleMeshENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AMTAdaptiveMeshCreateWithBaseMesh, _AMTAdaptiveMeshCreateWithBaseMeshOnly, 
                        _AMTAdaptiveMeshCreateWithMesh, _AMTAdaptiveMeshGetAdjacencyAdditionalNeighborCount, 
                        _AMTAdaptiveMeshGetAdjacencyAdditionalNeighbors, _AMTAdaptiveMeshGetAdjacencyConfigurationCount, 
@@ -25,9 +25,9 @@ exports:
                        _AMTMeshElementGetFaceCount, _AMTMeshElementGetFaceType, _AMTMeshElementGetMaterialIndex, 
                        _AMTMeshElementGetSourceIndicesArray, _AMTMeshElementGetSourceIndicesWithSemantic, 
                        _AMTMeshElementGetTypeID, _AMTMeshGetElements, _AMTMeshGetSourceWithSemantic, 
-                       _AMTMeshGetSources, _AMTMeshGetTypeID, _AMTMeshSourceCreateWithData, 
-                       _AMTMeshSourceGetComponentsPerVector, _AMTMeshSourceGetData, 
-                       _AMTMeshSourceGetDataOffset, _AMTMeshSourceGetDataStride, 
+                       _AMTMeshGetSources, _AMTMeshGetTypeID, _AMTMeshSourceComponentsPerVectorCountForSemantic, 
+                       _AMTMeshSourceCreateWithData, _AMTMeshSourceGetComponentsPerVector, 
+                       _AMTMeshSourceGetData, _AMTMeshSourceGetDataOffset, _AMTMeshSourceGetDataStride, 
                        _AMTMeshSourceGetDataType, _AMTMeshSourceGetInstance, _AMTMeshSourceGetSemantic, 
                        _AMTMeshSourceGetTypeID, _AMTMeshSourceGetVectorCount, _AMTMeshSourceIndicesCreateWithData, 
                        _AMTMeshSourceIndicesGetData, _AMTMeshSourceIndicesGetDataOffset, 
@@ -39,7 +39,7 @@ exports:
                        _AdaptiveMeshVersionString, __Z12AMTSaveImageP7CGImagePKc, 
                        __Z17transferNormalMapP9__AMTMeshP7CGImagebPP9__CFError, __Z22AMTCreateAttributeMapsPK13__CFAllocatorP9__AMTMeshS3_PK9__CFArraylPK14__CFDictionary11AMTCallbackPP9__CFError, 
                        __Z22_AMTTypeCreateInstancePK13__CFAllocatormm, __Z26AMTErrorCreateWithMessages12AMTErrorCodePKcS1_, 
-                       __Z27AMTErrorCreateWithErrorCode12AMTErrorCode, __Z29AMTMeshCreateWithTriangleMeshPK13__CFAllocatorRKN3amt12TriangleMeshE, 
+                       __Z27AMTErrorCreateWithErrorCode12AMTErrorCode, __Z29AMTMeshCreateWithTriangleMeshPK13__CFAllocatorRKN3amt12TriangleMeshEPK9__CFArray, 
                        __Z33AMTIndexUnifiedMeshCreateWithMeshPK13__CFAllocatorP9__AMTMeshRNSt3__16vectorIiNS4_9allocatorIiEEEE, 
                        __ZN15__AMTMeshSource10kClassNameE, __ZN15__AMTMeshSource11_cfFinalizeEPKv, 
                        __ZN15__AMTMeshSource23_cfCopyDebugDescriptionEPKv, __ZN15__AMTMeshSource24_cfCopyFormatDescriptionEPKvPK14__CFDictionary, 
@@ -92,6 +92,7 @@ exports:
                        __ZN3amt25TriangleMeshDecimatorImpl8decimateERKNS_31TriangleMeshDecimatorParametersE, 
                        __ZN3amt26computeAdjacentVertexCountEiRKNSt3__16vectorINS_3VecIiLi3EEENS0_9allocatorIS3_EEEERKNS_9AdjacencyIiEERNS1_IaNS4_IaEEEE, 
                        __ZN3amt28computeEdgeAdjacentTrianglesEiiRKNS_9AdjacencyIiEERNSt3__16vectorIaNS4_9allocatorIaEEEERNS5_IiNS6_IiEEEE, 
+                       __ZN3amt28getTrianglesAtNextLowerLevelERKNS_19MeshSubdivisionInfoERKNSt3__16vectorINS_3VecIiLi3EEENS3_9allocatorIS6_EEEE, 
                        __ZN3amt29AMTAdaptiveMeshCreateWithMeshEP9__AMTMeshRNS_15PipelineContextE, 
                        __ZN3amt29incrementTagAdjacentTrianglesEiRKNS_9AdjacencyIiEERNSt3__16vectorIaNS4_9allocatorIaEEEE, 
                        __ZN3amt31AMTAdaptiveMeshTessellatorBasic10tessellateERKNS_34AdaptiveMeshTessellationParametersE, 
@@ -101,6 +102,7 @@ exports:
                        __ZN3amt32computeEdgeAdjacentTriangleCountEiiRKNS_9AdjacencyIiEERNSt3__16vectorIaNS4_9allocatorIaEEEE, 
                        __ZN3amt33AMTAdaptiveMeshCreateWithBaseMeshEP9__AMTMeshP15__AMTMeshSourcePK14__CFDictionaryRNS_17ProcessingContextE, 
                        __ZN3amt33AMTAdaptiveMeshCreateWithBaseMeshEP9__AMTMeshhRNS_17ProcessingContextE, 
+                       __ZN3amt42getBaseMeshTriangleIndexFromSubdvidedIndexERKNS_19MeshSubdivisionInfoEll, 
                        __ZN3amt48AMTAdaptiveMeshInfoCreateWithMeshSubdivisionInfoEPK13__CFAllocatorRKNS_19MeshSubdivisionInfoE, 
                        __ZN9__AMTMesh10kClassNameE, __ZN9__AMTMesh11_cfFinalizeEPKv, 
                        __ZN9__AMTMesh23_cfCopyDebugDescriptionEPKv, __ZN9__AMTMesh24_cfCopyFormatDescriptionEPKvPK14__CFDictionary, 
@@ -129,10 +131,11 @@ exports:
                        _kAMTMeshSourceMaxSemanticInstanceCount, _kAMTMeshSourceMaxVectorCount, 
                        _kAMTOptionAngleQualityThreshold, _kAMTOptionApplySmoothingDeformation, 
                        _kAMTOptionAttributeMapResolution, _kAMTOptionBoundaryWeight, 
-                       _kAMTOptionCoordinateSystem, _kAMTOptionEnableNormalMapTransfer, 
-                       _kAMTOptionEnableParallelProcessing, _kAMTOptionFittingIterationCount, 
-                       _kAMTOptionForceNormalDisplacement, _kAMTOptionGroupAttributeMapTransfer, 
-                       _kAMTOptionGroupDisplacement, _kAMTOptionGroupFitting, _kAMTOptionGroupParameterization, 
+                       _kAMTOptionCoordinateSystem, _kAMTOptionCullingDataSubdivisionLevels, 
+                       _kAMTOptionEnableNormalMapTransfer, _kAMTOptionEnableParallelProcessing, 
+                       _kAMTOptionFittingIterationCount, _kAMTOptionForceNormalDisplacement, 
+                       _kAMTOptionGroupAttributeMapTransfer, _kAMTOptionGroupDisplacement, 
+                       _kAMTOptionGroupFitting, _kAMTOptionGroupParameterization, 
                        _kAMTOptionGroupPreprocessing, _kAMTOptionGroupSimplification, 
                        _kAMTOptionInitialDeformNearestNeighborCount, _kAMTOptionInputNormalMapInWorldFrame, 
                        _kAMTOptionMaxError, _kAMTOptionMaximumStretchRatio, _kAMTOptionMergeClosePointsDistance, 
@@ -149,9 +152,10 @@ exports:
                        _kAMTOptionTargetNumberOfCharts, _kAMTOptionTargetTriangleRatio, 
                        _kAMTOptionTessellationMaxEdgeLength, _kAMTOptionTextureGutter, 
                        _kAMTOptionTextureResolution, _kAMTOptionTrackedPointNormalFlipThreshold, 
-                       _kAMTOptionTrackedTriangleFlipThreshold, _kAMTOptionTriangleFlipPenalty, 
-                       _kAMTOptionTriangleFlipThreshold, _kAMTOptionTriangleNormalFlipThreshold, 
-                       _kAMTOptionUnifyIndices, _kAMTOptionUpdateNormals, _kAMTOptionUseAreaWeightedQuadratics, 
+                       _kAMTOptionTrackedTriangleFlipThreshold, _kAMTOptionTriangleCountOverhead, 
+                       _kAMTOptionTriangleFlipPenalty, _kAMTOptionTriangleFlipThreshold, 
+                       _kAMTOptionTriangleNormalFlipThreshold, _kAMTOptionUnifyIndices, 
+                       _kAMTOptionUpdateNormals, _kAMTOptionUseAreaWeightedQuadratics, 
                        _kAMTOptionUseInitialGeometry, _kAMTOptionVertexPlacementStrategy, 
                        _kAMTPipelineSubSystemCategory, _kAMTSubSystem, _kAMTVersion ]
     objc-classes:    [ AMTMetalWrapper ]

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MailCore.framework/Versions/A/MailCore'
-current-version: 3864.255.41
+current-version: 3864.255.181
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ CoreSuggestionsTests, DebugBundle, EmailAuthenticationPlugin, 
                        EmailFunctionalTests, EmailNotificationPlugin, EmailTestSupport, 
                        EmailUIPlugin, IMAP, IMAPFunctionalTests, Mail, MailCacheDelete, 
@@ -15,7 +15,7 @@ allowable-clients:
                        WebDocumentViewTestApp, com.apple.MailServiceAgent, maild, 
                        mailtool, migrationhelper ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _DefaultsKeyUserOptedIntoAttachmentSending, _ECMessageHeaderKeyReceivedSpf, 
                        _MCAccountBecameReachableNotification, _MCAccountTypeEWS, 
                        _MCAccountTypeIMAP, _MCAccountTypePOP, _MCAccountTypeSMTP, 
@@ -115,9 +115,9 @@ exports:
                        _MCV2ComplexMigrationTracerIdentifier, _MCV2SimpleMigrationTracerExternalIdentifier, 
                        _MCV2SimpleMigrationTracerIdentifier, _MCVerifyCredentialsKeyDiscoverBestSettings, 
                        _MFOldRangeOfBytes, _MFRangeOfBytes, _MimePartOptionParseTextOnly, 
-                       _StringWriterNewString, __ef_log_MCProgressGroup, _createInternetMessageDateFormatter, 
-                       _kQuotingColorListExpectedCount, _mf_stat, _sCommandSpecTable, 
-                       _sStringKeyMimeAttachmentFilename ]
+                       _StringWriterNewString, __ef_log_MCProgressEntry, __ef_log_MCProgressGroup, 
+                       _createInternetMessageDateFormatter, _kQuotingColorListExpectedCount, 
+                       _mf_stat, _sCommandSpecTable, _sStringKeyMimeAttachmentFilename ]
     objc-classes:    [ MCActivity, MCActivityAggregate, MCActivityAggregator, MCActivityMonitor, 
                        MCActivityUpdater, MCAddressManager, MCAggregablePowerLog, 
                        MCAggregateActivity, MCAppleScriptAttachment, MCArchiveFileWrapper, 

@@ -34,11 +34,12 @@
 #import <AVKit/AVPictureInPictureController_AVSampleBufferDisplayLayerSupport.h>
 #import <AVKit/AVPlayerView.h>
 #import <AVKit/AVRoutePickerView.h>
-
+#import <AVKit/AVLegibleMediaOptionsMenuController.h>
 #endif // TARGET_OS_OSX
 
 #if TARGET_OS_IOS
 #import <AVKit/AVInputPickerInteraction.h>
+#import <AVKit/AVLegibleMediaOptionsMenuController.h>
 #endif // TARGET_OS_IOS
 
 #if TARGET_OS_IOS && !TARGET_OS_VISION

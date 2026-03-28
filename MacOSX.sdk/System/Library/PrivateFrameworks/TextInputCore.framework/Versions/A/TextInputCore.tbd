@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TextInputCore.framework/Versions/A/TextInputCore'
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __ZN2KB6String13append_formatEPKcP13__va_list_tag ]
     weak-symbols:    [ __ZTISt13runtime_error, __ZTISt9exception, __ZTSSt13runtime_error, 
                        __ZTSSt9exception ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _TIActiveLexiconDidChangeNotification, _TIActiveLexiconDidChangeUserInfo_ActiveLexicon, 
                        _TIAddressBookFindRecordsMatchingRecipients, _TIAddressBookFindRecordsMatchingRecipientsAsync, 
                        _TIAddressBookFindRecordsMatchingRecipientsOnMainThread, _TIAddressBookGetArrayOfMeCardEmailAddresses, 
@@ -1312,6 +1312,6 @@ exports:
                        TIKeyboardSecureCandidateRenderer._accessibilityLabelCache, 
                        TIKeyboardSecureCandidateRenderer._context, TIKeyboardSecureCandidateRenderer._localeIdentifier, 
                        TIKeyboardSecureCandidateRenderer._secureCandidateCache, TIPersistentQueue._presentedItemURL ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ __ZN2KB6String13append_formatEPKcPc ]
 ...

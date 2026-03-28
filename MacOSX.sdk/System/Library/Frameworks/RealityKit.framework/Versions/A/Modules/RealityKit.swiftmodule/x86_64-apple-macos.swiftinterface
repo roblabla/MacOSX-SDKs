@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-macos26.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 403.60.3 -module-name RealityKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-macos26.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ModuleInterfaceExportAs -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 403.100.11 -module-name RealityKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import AppKit
 import Combine
 import CoreGraphics
@@ -192,9 +192,7 @@ extension RealityFoundation.ParticleEmitterComponent {
     public struct VariableDuration : Swift.Equatable, Swift.Codable {
       public let duration: Foundation.TimeInterval
       public let variation: Foundation.TimeInterval?
-      #if compiler(>=5.3) && $NonescapableTypes
       public init(duration: Foundation.TimeInterval, variation: Foundation.TimeInterval? = nil)
-      #endif
       public static func == (lhs: RealityFoundation.ParticleEmitterComponent.Timing.VariableDuration, rhs: RealityFoundation.ParticleEmitterComponent.Timing.VariableDuration) -> Swift.Bool
       public func encode(to encoder: any Swift.Encoder) throws
       public init(from decoder: any Swift.Decoder) throws
@@ -229,26 +227,14 @@ extension RealityFoundation.PointLightComponent {
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, tvOS 26.0, *)
 @available(visionOS, unavailable)
 extension RealityKit.ARView {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func project(_ point: Swift.SIMD3<Swift.Float>) -> CoreFoundation.CGPoint?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func unproject(_ point: CoreFoundation.CGPoint, viewport: CoreFoundation.CGRect) -> Swift.SIMD3<Swift.Float>?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func unproject(_ point: CoreFoundation.CGPoint, ontoPlane planeTransform: simd.float4x4) -> Swift.SIMD3<Swift.Float>?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 11.0, iOS 14.0, macCatalyst 14.0, tvOS 26.0, *)
   @_Concurrency.MainActor @preconcurrency public func unproject(_ point: CoreFoundation.CGPoint, ontoPlane planeTransform: simd.float4x4, relativeToCamera: Swift.Bool) -> Swift.SIMD3<Swift.Float>?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func ray(through screenPoint: CoreFoundation.CGPoint) -> (origin: Swift.SIMD3<Swift.Float>, direction: Swift.SIMD3<Swift.Float>)?
-  #endif
   @_Concurrency.MainActor @preconcurrency public func hitTest(_ point: CoreFoundation.CGPoint, query: RealityFoundation.CollisionCastQueryType = .all, mask: RealityFoundation.CollisionGroup = .all) -> [RealityFoundation.CollisionCastHit]
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func entity(at point: CoreFoundation.CGPoint) -> RealityFoundation.Entity?
-  #endif
   @_Concurrency.MainActor @preconcurrency public func entities(at point: CoreFoundation.CGPoint) -> [RealityFoundation.Entity]
 }
 @available(visionOS 1.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 26.0, *)
@@ -292,18 +278,14 @@ public enum AccessibilityEvents {
 }
 @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 26.0, *)
 extension RealityFoundation.Entity {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var accessibilityLabelKey: Foundation.LocalizedStringResource? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var accessibilityValue: Foundation.LocalizedStringResource? {
     get
     set
   }
-  #endif
   @_Concurrency.MainActor @preconcurrency public var accessibilityCustomContent: [RealityFoundation.AccessibilityComponent.CustomContent] {
     get
     set
@@ -325,12 +307,8 @@ extension RealityFoundation.HoverEffectComponent.SpotlightHoverEffectStyle {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(color: AppKit.NSColor? = nil, strength: Swift.Float = 1.0, opacityFunction: RealityFoundation.HoverEffectComponent.OpacityFunction)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(color: AppKit.NSColor? = nil, strength: Swift.Float = 1.0)
-  #endif
 }
 @available(iOS 18.0, macCatalyst 18.0, macOS 15.0, visionOS 2.0, *)
 @available(tvOS, unavailable)
@@ -340,12 +318,8 @@ extension RealityFoundation.HoverEffectComponent.HighlightHoverEffectStyle {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(color: AppKit.NSColor? = nil, strength: Swift.Float = 1.0, opacityFunction: RealityFoundation.HoverEffectComponent.OpacityFunction)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(color: AppKit.NSColor? = nil, strength: Swift.Float = 1.0)
-  #endif
 }
 @available(visionOS 1.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 26.0, *)
 extension RealityFoundation.ParticleEmitterComponent.Presets {
@@ -363,9 +337,7 @@ extension RealityFoundation.ParticleEmitterComponent.Presets {
 @available(visionOS, unavailable)
 public protocol __ARViewDelegatePrivate : AnyObject {
   func viewWillProcessTapInteraction(_ view: RealityKit.ARView)
-  #if compiler(>=5.3) && $NonescapableTypes
   func view(_ view: RealityKit.ARView, performedTapInteraction: Swift.Bool, for entity: RealityFoundation.Entity?)
-  #endif
   @available(macOS 11.0, iOS 14.0, macCatalyst 14.0, tvOS 26.0, *)
   func view(_ view: RealityKit.ARView, performedProximityInteractionsForEntities: [RealityFoundation.Entity])
   func update(_ view: RealityKit.ARView, deltaTime: Swift.Float)
@@ -408,18 +380,14 @@ public typealias ARViewBase = AppKit.NSView
   @_Concurrency.MainActor @preconcurrency public var cameraTransform: RealityFoundation.Transform {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var audioListener: RealityFoundation.Entity? {
     get
     set
   }
-  #endif
   @_Concurrency.MainActor @preconcurrency public var __environmentEntity: RealityFoundation.Entity!
   @_Concurrency.MainActor @preconcurrency public var __enableAutomaticFrameRate: Swift.Bool
   @_Concurrency.MainActor @preconcurrency public var __preferredFrameRate: Swift.Float
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder decoder: Foundation.NSCoder)
-  #endif
   @_Concurrency.MainActor @preconcurrency @objc required override dynamic public init(frame frameRect: Foundation.NSRect)
   @_Concurrency.MainActor @preconcurrency public func __setWireframeMode(displayWireframe: Swift.Bool)
   @_Concurrency.MainActor @preconcurrency public var __forceLocalizedProbes: Swift.Bool
@@ -494,9 +462,7 @@ public typealias ARViewBase = AppKit.NSView
   @_Concurrency.MainActor @preconcurrency public func __setProfilerUpdateInterval(newInterval: Swift.Float)
   @_Concurrency.MainActor @preconcurrency public func __frameTime() -> Swift.Float
   public typealias Image = AppKit.NSImage
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func snapshot(saveToHDR: Swift.Bool, completion: @escaping (_ image: RealityKit.ARView.Image?) -> Swift.Void)
-  #endif
   @_Concurrency.MainActor @preconcurrency public func __startAudioEngine()
   @_Concurrency.MainActor @preconcurrency public func __stopAudioEngine()
   @_Concurrency.MainActor @preconcurrency public func __distanceInMetersFromEntity(_ entity: RealityFoundation.Entity) -> Swift.Float
@@ -526,42 +492,30 @@ extension RealityFoundation.DirectionalLightComponent {
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, tvOS 26.0, *)
 extension RealityFoundation.TextureResource {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, noasync, message: "Synchronous loading APIs block the main actor and should not be used in async contexts.  Use init(...) async instead")
   @_Concurrency.MainActor @preconcurrency public static func load(named name: Swift.String, in bundle: Foundation.Bundle? = nil) throws -> RealityFoundation.TextureResource
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, introduced: 10.15, deprecated: 15.0, renamed: "init(named:in:)")
   @available(iOS, introduced: 13.0, deprecated: 18.0, renamed: "init(named:in:)")
   @available(macCatalyst, introduced: 13.0, deprecated: 18.0, renamed: "init(named:in:)")
   @available(visionOS, introduced: 1.0, deprecated: 1.0, renamed: "init(named:in:)")
   @available(tvOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public static func loadAsync(named name: Swift.String, in bundle: Foundation.Bundle? = nil) -> RealityFoundation.LoadRequest<RealityFoundation.TextureResource>
-  #endif
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, tvOS 26.0, *)
 extension RealityFoundation.TextureResource {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, noasync, message: "Synchronous loading APIs block the main actor and should not be used in async contexts.  Use init(...) async instead")
   @_Concurrency.MainActor @preconcurrency public static func load(named name: Swift.String, in bundle: Foundation.Bundle? = nil, options: RealityFoundation.TextureResource.CreateOptions) throws -> RealityFoundation.TextureResource
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, introduced: 12.0, deprecated: 15.0, renamed: "init(named:in:options:)")
   @available(iOS, introduced: 15.0, deprecated: 18.0, renamed: "init(named:in:options:)")
   @available(macCatalyst, introduced: 15.0, deprecated: 18.0, renamed: "init(named:in:options:)")
   @available(visionOS, introduced: 1.0, deprecated: 1.0, renamed: "init(named:in:options:)")
   @available(tvOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public static func loadAsync(named name: Swift.String, in bundle: Foundation.Bundle? = nil, options: RealityFoundation.TextureResource.CreateOptions) -> RealityFoundation.LoadRequest<RealityFoundation.TextureResource>
-  #endif
 }
 @available(visionOS 1.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 26.0, *)
 extension RealityFoundation.TextureResource {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency convenience public init(named name: Swift.String, in bundle: Foundation.Bundle? = nil) async throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency convenience public init(named name: Swift.String, in bundle: Foundation.Bundle? = nil, options: RealityFoundation.TextureResource.CreateOptions) async throws
-  #endif
 }
 @available(visionOS 1.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 26.0, *)
 extension RealityFoundation.ParticleEmitterComponent.Presets {
@@ -579,16 +533,10 @@ public class MultipeerConnectivityService : RealityFoundation.SynchronizationSer
   final public let session: MultipeerConnectivity.MCSession
   public init(session: MultipeerConnectivity.MCSession) throws
   public func setHandshake(count: Swift.UInt32, timeoutMs: Swift.UInt32)
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency @_Concurrency.MainActor public func entity(for identifier: RealityKit.MultipeerConnectivityService.Identifier) -> RealityFoundation.Entity?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency @_Concurrency.MainActor public func owner(of entity: RealityFoundation.Entity) -> (any RealityFoundation.SynchronizationPeerID)?
-  #endif
   @preconcurrency @_Concurrency.MainActor public func giveOwnership(of entity: RealityFoundation.Entity, toPeer peer: any RealityFoundation.SynchronizationPeerID) -> Swift.Bool
-  #if compiler(>=5.3) && $NonescapableTypes
   public func __fromCore(peerID: RealityFoundation.__PeerIDRef) -> (any RealityFoundation.SynchronizationPeerID)?
-  #endif
   public func __toCore(peerID: any RealityFoundation.SynchronizationPeerID) -> RealityFoundation.__PeerIDRef
   public func startSync()
   public func stopSync()
@@ -596,9 +544,7 @@ public class MultipeerConnectivityService : RealityFoundation.SynchronizationSer
 }
 @available(macOS 10.15.4, iOS 13.4, macCatalyst 13.4, tvOS 26.0, *)
 extension RealityFoundation.Entity {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func __accessibilityWrappers(rootEntityWrapper: RealityKit.__EntityAccessibilityWrapper? = nil) -> [RealityKit.__EntityAccessibilityWrapper]
-  #endif
   @available(visionOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public func __calculateScreenBoundingRect(in arView: RealityKit.ARView) -> CoreFoundation.CGRect
 }
@@ -609,12 +555,10 @@ public class __EntityAccessibilityWrapper : ObjectiveC.NSObject {
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, tvOS 26.0, *)
 @available(visionOS, unavailable, introduced: 1.0, message: "ARView is not available on visionOS, use RealityView.")
 extension RealityKit.ARView {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var physicsOrigin: RealityFoundation.Entity? {
     get
     set
   }
-  #endif
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, tvOS 26.0, *)
 extension RealityFoundation.Material {
@@ -670,18 +614,14 @@ extension RealityFoundation.UnlitMaterial {
 }
 @available(visionOS 1.0, macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 26.0, *)
 extension RealityFoundation.MaterialParameters.Value {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var colorValue: AppKit.NSColor? {
     get
   }
-  #endif
   public static func color(_ color: AppKit.NSColor) -> RealityFoundation.MaterialParameters.Value
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, tvOS 26.0, *)
 extension RealityFoundation.PhysicallyBasedMaterial.BaseColor {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(tint: AppKit.NSColor = .white, texture: RealityFoundation.MaterialParameters.Texture? = nil)
-  #endif
   public var tint: AppKit.NSColor {
     get
     set
@@ -689,9 +629,7 @@ extension RealityFoundation.PhysicallyBasedMaterial.BaseColor {
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, tvOS 26.0, *)
 extension RealityFoundation.PhysicallyBasedMaterial.EmissiveColor {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(color: AppKit.NSColor = .black, texture: RealityFoundation.MaterialParameters.Texture? = nil)
-  #endif
   public var color: AppKit.NSColor {
     get
     set
@@ -699,9 +637,7 @@ extension RealityFoundation.PhysicallyBasedMaterial.EmissiveColor {
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, tvOS 26.0, *)
 extension RealityFoundation.PhysicallyBasedMaterial.SheenColor {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(tint: AppKit.NSColor = .white, texture: RealityFoundation.MaterialParameters.Texture? = nil)
-  #endif
   public var tint: AppKit.NSColor {
     get
     set
@@ -710,9 +646,7 @@ extension RealityFoundation.PhysicallyBasedMaterial.SheenColor {
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, tvOS 26.0, *)
 @available(visionOS, unavailable)
 extension RealityFoundation.CustomMaterial.BaseColor {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(tint: AppKit.NSColor = .white, texture: RealityFoundation.CustomMaterial.Texture? = nil)
-  #endif
   public var tint: AppKit.NSColor {
     get
     set
@@ -721,9 +655,7 @@ extension RealityFoundation.CustomMaterial.BaseColor {
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, tvOS 26.0, *)
 @available(visionOS, unavailable)
 extension RealityFoundation.CustomMaterial.EmissiveColor {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(color: AppKit.NSColor = .black, texture: RealityFoundation.CustomMaterial.Texture? = nil)
-  #endif
   public var color: AppKit.NSColor {
     get
     set

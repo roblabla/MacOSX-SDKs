@@ -135,7 +135,6 @@ struct if_packet_stats {
 /*
  * Structure to report link heuristics
  */
-#define HAS_IF_LINK_HEURISTICS_STATS 1
 struct if_linkheuristics {
 	u_int64_t       iflh_link_heuristics_cnt;  /* Count of congested link indications */
 	u_int64_t       iflh_link_heuristics_time; /* Duration of congested link indications (msec) */
@@ -162,6 +161,17 @@ struct if_linkheuristics {
 	u_int64_t       iflh_tcp_linkheur_rxmtfloor;
 
 	u_int64_t       iflh_udp_linkheur_stealthdrop;
+};
+
+/*
+ * Structure to report LPW (Low Power Wake) statistics
+ */
+#define HAS_IF_LPW_STATS 1
+struct if_lpw_stats {
+	u_int64_t       iflpw_ipackets; /* packets received in LPW mode */
+	u_int64_t       iflpw_opackets; /* packets sent in LPW mode */
+	u_int64_t       iflpw_magic_pkt_checked; /* Count of packet_has_magic_pattern invocations */
+	u_int64_t       iflpw_magic_pkt_found;   /* Count of magic packets found */
 };
 
 struct if_description {
@@ -219,6 +229,7 @@ struct if_netem_params {
 
 	/* random packet reordering */
 	uint32_t        ifnetem_reordering_p;/* reorder probability */
+	uint32_t        ifnetem_reordering_ms;/* reorder delay in ms */
 
 	/*
 	 * NetEm output scheduler by default is waken up upon input event as

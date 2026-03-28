@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SwiftCertificate.framework/Versions/A/SwiftCertificate'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s16SwiftCertificate0B0C03secB0So03SecB3RefavgTj', '_$s16SwiftCertificate0B0C03secB0So03SecB3RefavgTq', 
                        '_$s16SwiftCertificate0B0C03secB0So03SecB3RefavpMV', '_$s16SwiftCertificate0B0C10commonNameSSSgvgTj', 
                        '_$s16SwiftCertificate0B0C10commonNameSSSgvgTq', '_$s16SwiftCertificate0B0C10commonNameSSSgvpMV', 

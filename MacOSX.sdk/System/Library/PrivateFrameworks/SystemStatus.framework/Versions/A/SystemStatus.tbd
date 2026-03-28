@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SystemStatus.framework/Versions/A/SystemStatus'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _STActivityAttributionUnsafeAuditTokenForPID, _STAirPlayStatusDomainAirPlayStateDescription, 
                        _STBackgroundActivityContinuousAnimationNone, _STBackgroundActivityContinuousAnimationPulseBackground, 
                        _STBackgroundActivityContinuousAnimationPulseSymbol, _STBackgroundActivityContinuousAnimationRinging, 
@@ -67,8 +67,8 @@ exports:
                        __STBackgroundActivityIdentifierContinuityCaptureStreamingAudio, 
                        __STBackgroundActivityIdentifierContinuityCaptureStreamingNone, 
                        __STBackgroundActivityIdentifierContinuityCaptureStreamingVideo, 
-                       __STBackgroundActivityIdentifierHealthWorkout, __STBackgroundActivityIdentifierMediaRemoteAudioRouted, 
-                       __STBackgroundActivityIdentifierMediaRemoteAudioRoutedPulse, 
+                       __STBackgroundActivityIdentifierHealthWorkout, __STBackgroundActivityIdentifierMediaExperienceCarPlayVideo, 
+                       __STBackgroundActivityIdentifierMediaRemoteAudioRouted, __STBackgroundActivityIdentifierMediaRemoteAudioRoutedPulse, 
                        __STBackgroundActivityIdentifierMediaRemoteVideoRouted, __STBackgroundActivityIdentifierMediaRemoteVideoRoutedPulse, 
                        __STBackgroundActivityIdentifierReplayKitCallRecording, __STBackgroundActivityIdentifierReplayKitCallRecordingReady ]
     objc-classes:    [ STActivityAttribution, STAirPlayStatusDomain, STAirPlayStatusDomainData, 

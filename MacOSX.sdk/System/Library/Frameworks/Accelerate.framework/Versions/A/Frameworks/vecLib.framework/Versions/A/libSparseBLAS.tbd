@@ -1,15 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparseBLAS.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Sparse, vecLib ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _sparse_commit, _sparse_elementwise_norm_double, _sparse_elementwise_norm_double_complex, 
                        _sparse_elementwise_norm_float, _sparse_elementwise_norm_float_complex, 
                        _sparse_extract_block_double, _sparse_extract_block_double_complex, 

@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AudioToolboxCore.framework/Versions/A/AudioToolboxCore'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -25,8 +24,7 @@ exports:
                        __ZTSN5boost9container12out_of_rangeE, __ZTSN5boost9container9bad_allocE, 
                        __ZTSN5boost9container9exceptionE, __ZTSN5boost9exceptionE, 
                        __ZTSN8DSPGraph9ExceptionE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AUEventListenerAddEventType, _AUEventListenerCreate, _AUEventListenerCreateWithDispatchQueue, 
                        _AUEventListenerNotify, _AUEventListenerRemoveEventType, _AUListenerAddParameter, 
                        _AUListenerCreate, _AUListenerCreateWithDispatchQueue, _AUListenerDispose, 
@@ -877,7 +875,7 @@ exports:
                        AVHapticEvent, AVHapticPlayerParameterCurve, AVHapticPlayerParameterCurveControlPoint, 
                        AVHapticProcessTaskToken, AudioComponentRegistrar, _AUAudioUnitV3ViewFactory, 
                        _RemoteAUv2ViewFactory ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DownmixStereoInterleavedInt16ToMono_ARM, _Float32ToNativeInt16Scaled_ARM, 
                        _Float32ToNativeInt32Scaled_ARM, _Float32ToNativeLowAlignedInt32_ARM, 
                        _Float32ToNativeLowAlignedInt64_ARM, _MultiChannelInterleaveFloat32ToNativeLowAlignedInt32_ARM, 

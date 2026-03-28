@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-macos26.2 -target-variant x86_64-apple-ios26.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 56 -module-name Dispatch
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-macos26.4 -target-variant x86_64-apple-ios26.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1542.100.32 -module-name Dispatch
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Combine
 @_exported import Dispatch
 import Swift
@@ -43,9 +43,7 @@ public struct DispatchData : Swift.RandomAccessCollection, Swift._ObjectiveCBrid
   @available(swift, deprecated: 4, message: "Use copyBytes(to: UnsafeMutableRawBufferPointer, from: Range<Index>) instead")
   public func copyBytes(to pointer: Swift.UnsafeMutablePointer<Swift.UInt8>, from range: Swift.Range<Dispatch.DispatchData.Index>)
   public func copyBytes(to pointer: Swift.UnsafeMutableRawBufferPointer, from range: Swift.Range<Dispatch.DispatchData.Index>)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func copyBytes<DestinationType>(to buffer: Swift.UnsafeMutableBufferPointer<DestinationType>, from range: Swift.Range<Dispatch.DispatchData.Index>? = nil) -> Swift.Int
-  #endif
   public subscript(index: Dispatch.DispatchData.Index) -> Swift.UInt8 {
     get
   }
@@ -70,22 +68,14 @@ public struct DispatchData : Swift.RandomAccessCollection, Swift._ObjectiveCBrid
 public struct DispatchDataIterator : Swift.IteratorProtocol, Swift.Sequence, @unchecked Swift.Sendable {
   public typealias Element = Swift.UInt8
   public init(_data: Dispatch.DispatchData)
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func next() -> Dispatch.DispatchData.Element?
-  #endif
   public typealias Iterator = Dispatch.DispatchDataIterator
 }
 extension Dispatch.DispatchData {
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> Dispatch.__DispatchData
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ input: Dispatch.__DispatchData, result: inout Dispatch.DispatchData?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ input: Dispatch.__DispatchData, result: inout Dispatch.DispatchData?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_effects(readonly) public static func _unconditionallyBridgeFromObjectiveC(_ source: Dispatch.__DispatchData?) -> Dispatch.DispatchData
-  #endif
 }
 final public class DispatchSpecificKey<T> {
   public init()
@@ -154,12 +144,8 @@ extension Dispatch.DispatchQueue {
   public class func global(priority: Dispatch.DispatchQueue.GlobalQueuePriority) -> Dispatch.DispatchQueue
   @available(macOS 10.10, iOS 8.0, *)
   public class func global(qos: Dispatch.DispatchQoS.QoSClass = .default) -> Dispatch.DispatchQueue
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency public class func getSpecific<T>(key: Dispatch.DispatchSpecificKey<T>) -> T? where T : Swift.Sendable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(label: Swift.String, qos: Dispatch.DispatchQoS = .unspecified, attributes: Dispatch.DispatchQueue.Attributes = [], autoreleaseFrequency: Dispatch.DispatchQueue.AutoreleaseFrequency = .inherit, target: Dispatch.DispatchQueue? = nil)
-  #endif
   public var label: Swift.String {
     get
   }
@@ -171,13 +157,9 @@ extension Dispatch.DispatchQueue {
   public func asyncAndWait(execute workItem: Dispatch.DispatchWorkItem)
   @available(macOS 10.10, iOS 8.0, *)
   public func async(group: Dispatch.DispatchGroup, execute workItem: Dispatch.DispatchWorkItem)
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
   public func asyncUnsafe(group: Dispatch.DispatchGroup? = nil, qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], execute work: @escaping @convention(block) () -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency public func async(group: Dispatch.DispatchGroup? = nil, qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], execute work: @escaping @Sendable @convention(block) () -> Swift.Void)
-  #endif
   @available(macOS 10.14, iOS 12.0, tvOS 12.0, watchOS 5.0, *)
   public func asyncAndWait<T>(execute work: () throws -> T) rethrows -> T
   @available(macOS 10.14, iOS 12.0, tvOS 12.0, watchOS 5.0, *)
@@ -198,12 +180,8 @@ extension Dispatch.DispatchQueue {
   public var qos: Dispatch.DispatchQoS {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency public func getSpecific<T>(key: Dispatch.DispatchSpecificKey<T>) -> T? where T : Swift.Sendable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency public func setSpecific<T>(key: Dispatch.DispatchSpecificKey<T>, value: T?) where T : Swift.Sendable
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Dispatch._DispatchSerialExecutorQueue : _Concurrency.SerialExecutor {
@@ -212,10 +190,8 @@ extension Dispatch._DispatchSerialExecutorQueue : _Concurrency.SerialExecutor {
   @_alwaysEmitIntoClient public func checkIsolated() {
 		dispatchPrecondition(condition: .onQueue(self))
 	}
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
   public func isIsolatingCurrentContext() -> Swift.Bool?
-  #endif
 }
 @available(macOS 15.4, iOS 18.4, tvOS 18.4, watchOS 11.4, *)
 extension Dispatch.DispatchQueue : _Concurrency.TaskExecutor {
@@ -235,9 +211,7 @@ extension Dispatch.DispatchSerialQueue {
     @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias RawValue = Swift.UInt64
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(label: Swift.String, qos: Dispatch.DispatchQoS = .unspecified, attributes: Dispatch.DispatchSerialQueue.Attributes = [], autoreleaseFrequency: Dispatch.DispatchQueue.AutoreleaseFrequency = .workItem, target: Dispatch.DispatchQueue? = nil)
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Dispatch.DispatchConcurrentQueue {
@@ -252,9 +226,7 @@ extension Dispatch.DispatchConcurrentQueue {
     @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias RawValue = Swift.UInt64
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(label: Swift.String, qos: Dispatch.DispatchQoS = .unspecified, attributes: Dispatch.DispatchConcurrentQueue.Attributes = [], autoreleaseFrequency: Dispatch.DispatchQueue.AutoreleaseFrequency = .workItem, target: Dispatch.DispatchQueue? = nil)
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Dispatch.DispatchWorkloop {
@@ -268,25 +240,17 @@ extension Dispatch.DispatchWorkloop {
     @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias RawValue = Swift.UInt64
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(label: Swift.String, attributes: Dispatch.DispatchWorkloop.Attributes = [], autoreleaseFrequency: Dispatch.DispatchQueue.AutoreleaseFrequency = .workItem, osWorkgroup: os_workgroup.WorkGroup? = nil)
-  #endif
 }
 extension Dispatch.DispatchSourceProtocol {
   public typealias DispatchSourceHandler = @convention(block) () -> Swift.Void
-  #if compiler(>=5.3) && $NonescapableTypes
   public func setEventHandler(qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], handler: Self.DispatchSourceHandler?)
-  #endif
   @available(macOS 10.10, iOS 8.0, *)
   public func setEventHandler(handler: Dispatch.DispatchWorkItem)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func setCancelHandler(qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], handler: Self.DispatchSourceHandler?)
-  #endif
   @available(macOS 10.10, iOS 8.0, *)
   public func setCancelHandler(handler: Dispatch.DispatchWorkItem)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func setRegistrationHandler(qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], handler: Self.DispatchSourceHandler?)
-  #endif
   @available(macOS 10.10, iOS 8.0, *)
   public func setRegistrationHandler(handler: Dispatch.DispatchWorkItem)
   @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
@@ -363,42 +327,18 @@ extension Dispatch.DispatchSource {
     public typealias Element = Dispatch.DispatchSource.FileSystemEvent
     public typealias RawValue = Swift.UInt
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public class func makeMachSendSource(port: _DarwinFoundation2.mach_port_t, eventMask: Dispatch.DispatchSource.MachSendEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceMachSend
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public class func makeMachReceiveSource(port: _DarwinFoundation2.mach_port_t, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceMachReceive
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public class func makeMemoryPressureSource(eventMask: Dispatch.DispatchSource.MemoryPressureEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceMemoryPressure
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public class func makeProcessSource(identifier: _DarwinFoundation2.pid_t, eventMask: Dispatch.DispatchSource.ProcessEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceProcess
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public class func makeReadSource(fileDescriptor: Swift.Int32, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceRead
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public class func makeSignalSource(signal: Swift.Int32, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceSignal
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public class func makeTimerSource(flags: Dispatch.DispatchSource.TimerFlags = [], queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceTimer
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public class func makeUserDataAddSource(queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceUserDataAdd
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public class func makeUserDataOrSource(queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceUserDataOr
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public class func makeUserDataReplaceSource(queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceUserDataReplace
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public class func makeFileSystemObjectSource(fileDescriptor: Swift.Int32, eventMask: Dispatch.DispatchSource.FileSystemEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceFileSystemObject
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public class func makeWriteSource(fileDescriptor: Swift.Int32, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceWrite
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension Dispatch.DispatchSource.MemoryPressureEvent : Swift.CustomStringConvertible {
@@ -554,9 +494,7 @@ extension Dispatch.DispatchQueue : Combine.Scheduler {
       public init(_ timeInterval: Dispatch.DispatchTimeInterval)
       public init(floatLiteral value: Swift.Double)
       public init(integerLiteral value: Swift.Int)
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?<T>(exactly source: T) where T : Swift.BinaryInteger
-      #endif
       public static func < (lhs: Dispatch.DispatchQueue.SchedulerTimeType.Stride, rhs: Dispatch.DispatchQueue.SchedulerTimeType.Stride) -> Swift.Bool
       public static func * (lhs: Dispatch.DispatchQueue.SchedulerTimeType.Stride, rhs: Dispatch.DispatchQueue.SchedulerTimeType.Stride) -> Dispatch.DispatchQueue.SchedulerTimeType.Stride
       public static func + (lhs: Dispatch.DispatchQueue.SchedulerTimeType.Stride, rhs: Dispatch.DispatchQueue.SchedulerTimeType.Stride) -> Dispatch.DispatchQueue.SchedulerTimeType.Stride
@@ -585,9 +523,7 @@ extension Dispatch.DispatchQueue : Combine.Scheduler {
     public var qos: Dispatch.DispatchQoS
     public var flags: Dispatch.DispatchWorkItemFlags
     public var group: Dispatch.DispatchGroup?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], group: Dispatch.DispatchGroup? = nil)
-    #endif
   }
   public var minimumTolerance: Dispatch.DispatchQueue.SchedulerTimeType.Stride {
     get
@@ -595,15 +531,9 @@ extension Dispatch.DispatchQueue : Combine.Scheduler {
   public var now: Dispatch.DispatchQueue.SchedulerTimeType {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func schedule(options: Dispatch.DispatchQueue.SchedulerOptions?, _ action: @escaping () -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func schedule(after date: Dispatch.DispatchQueue.SchedulerTimeType, tolerance: Dispatch.DispatchQueue.SchedulerTimeType.Stride, options: Dispatch.DispatchQueue.SchedulerOptions?, _ action: @escaping () -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func schedule(after date: Dispatch.DispatchQueue.SchedulerTimeType, interval: Dispatch.DispatchQueue.SchedulerTimeType.Stride, tolerance: Dispatch.DispatchQueue.SchedulerTimeType.Stride, options: Dispatch.DispatchQueue.SchedulerOptions?, _ action: @escaping () -> Swift.Void) -> any Combine.Cancellable
-  #endif
 }
 public struct DispatchWorkItemFlags : Swift.OptionSet, Swift.RawRepresentable, Swift.Sendable {
   public let rawValue: Swift.UInt
@@ -644,9 +574,7 @@ extension Dispatch.DispatchIO {
   public enum StreamType : Swift.UInt, Swift.Sendable {
     case stream
     case random
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt)
-    #endif
     public typealias RawValue = Swift.UInt
     public var rawValue: Swift.UInt {
       get
@@ -670,23 +598,15 @@ extension Dispatch.DispatchIO {
     public typealias RawValue = Swift.UInt
   }
   public class func read(fromFileDescriptor: Swift.Int32, maxLength: Swift.Int, runningHandlerOn queue: Dispatch.DispatchQueue, handler: @escaping (_ data: Dispatch.DispatchData, _ error: Swift.Int32) -> Swift.Void)
-  #if compiler(>=5.3) && $NonescapableTypes
   public class func write(toFileDescriptor: Swift.Int32, data: Dispatch.DispatchData, runningHandlerOn queue: Dispatch.DispatchQueue, handler: @escaping (_ data: Dispatch.DispatchData?, _ error: Swift.Int32) -> Swift.Void)
-  #endif
   convenience public init(type: Dispatch.DispatchIO.StreamType, fileDescriptor: Swift.Int32, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (_ error: Swift.Int32) -> Swift.Void)
   @available(swift, obsoleted: 4)
   convenience public init(type: Dispatch.DispatchIO.StreamType, path: Swift.UnsafePointer<Swift.Int8>, oflag: Swift.Int32, mode: _DarwinFoundation2.mode_t, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (_ error: Swift.Int32) -> Swift.Void)
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(swift 4)
   convenience public init?(type: Dispatch.DispatchIO.StreamType, path: Swift.UnsafePointer<Swift.Int8>, oflag: Swift.Int32, mode: _DarwinFoundation2.mode_t, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (_ error: Swift.Int32) -> Swift.Void)
-  #endif
   convenience public init(type: Dispatch.DispatchIO.StreamType, io: Dispatch.DispatchIO, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (_ error: Swift.Int32) -> Swift.Void)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func read(offset: _DarwinFoundation2.off_t, length: Swift.Int, queue: Dispatch.DispatchQueue, ioHandler: @escaping (_ done: Swift.Bool, _ data: Dispatch.DispatchData?, _ error: Swift.Int32) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func write(offset: _DarwinFoundation2.off_t, data: Dispatch.DispatchData, queue: Dispatch.DispatchQueue, ioHandler: @escaping (_ done: Swift.Bool, _ data: Dispatch.DispatchData?, _ error: Swift.Int32) -> Swift.Void)
-  #endif
   public func setInterval(interval: Dispatch.DispatchTimeInterval, flags: Dispatch.DispatchIO.IntervalFlags = [])
   public func close(flags: Dispatch.DispatchIO.CloseFlags = [])
 }
@@ -730,10 +650,8 @@ public struct DispatchQoS : Swift.Equatable, Swift.Sendable {
     @available(macOS 10.10, iOS 8.0, *)
     case userInteractive
     case unspecified
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 10.10, iOS 8.0, *)
     public init?(rawValue: _DarwinFoundation1.qos_class_t)
-    #endif
     @available(macOS 10.10, iOS 8.0, *)
     public var rawValue: _DarwinFoundation1.qos_class_t {
       get
@@ -771,14 +689,10 @@ extension Dispatch.DispatchSemaphore {
   @_unavailableFromAsync(message: "Await a Task handle instead") public func wait(timeout: Dispatch.DispatchTime) -> Dispatch.DispatchTimeoutResult
   @_unavailableFromAsync(message: "Await a Task handle instead") public func wait(wallTimeout: Dispatch.DispatchWallTime) -> Dispatch.DispatchTimeoutResult
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "DispatchQueue.init(label:qos:attributes:autoreleaseFrequency:target:)")
 public func dispatch_queue_create(_ label: Swift.UnsafePointer<Swift.Int8>?, _ attr: Dispatch.__OS_dispatch_queue_attr?) -> Dispatch.DispatchQueue
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "DispatchQueue.init(label:qos:attributes:autoreleaseFrequency:target:)")
 public func dispatch_queue_create_with_target(_ label: Swift.UnsafePointer<Swift.Int8>?, _ attr: Dispatch.__OS_dispatch_queue_attr?, _ queue: Dispatch.DispatchQueue?) -> Dispatch.DispatchQueue
-#endif
 @available(*, unavailable, renamed: "DispatchIO.init(type:fileDescriptor:queue:cleanupHandler:)")
 public func dispatch_io_create(_ type: Swift.UInt, _ fd: Swift.Int32, _ queue: Dispatch.DispatchQueue, _ cleanup_handler: (Swift.Int32) -> Swift.Void) -> Dispatch.DispatchIO
 @available(*, unavailable, renamed: "DispatchIO.init(type:path:oflag:mode:queue:cleanupHandler:)")
@@ -787,16 +701,12 @@ public func dispatch_io_create_with_path(_ type: Swift.UInt, _ path: Swift.Unsaf
 public func dispatch_io_create_with_io(_ type: Swift.UInt, _ io: Dispatch.DispatchIO, _ queue: Dispatch.DispatchQueue, _ cleanup_handler: (Swift.Int32) -> Swift.Void) -> Dispatch.DispatchIO
 @available(*, unavailable, renamed: "DispatchIO.read(fileDescriptor:length:queue:handler:)")
 public func dispatch_read(_ fd: Swift.Int32, _ length: Swift.Int, _ queue: Dispatch.DispatchQueue, _ handler: (Dispatch.__DispatchData, Swift.Int32) -> Swift.Void)
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "DispatchData.init(bytes:)")
 public func dispatch_data_create(_ buffer: Swift.UnsafeRawPointer, _ size: Swift.Int, _ queue: Dispatch.DispatchQueue?, _ destructor: (() -> Swift.Void)?) -> Dispatch.__DispatchData
-#endif
 @available(*, unavailable, renamed: "getter:DispatchData.count(self:)")
 public func dispatch_data_get_size(_ data: Dispatch.__DispatchData) -> Swift.Int
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "DispatchData.withUnsafeBytes(self:body:)")
 public func dispatch_data_create_map(_ data: Dispatch.__DispatchData, _ buffer_ptr: Swift.UnsafeMutablePointer<Swift.UnsafeRawPointer?>?, _ size_ptr: Swift.UnsafeMutablePointer<Swift.Int>?) -> Dispatch.__DispatchData
-#endif
 @available(*, unavailable, renamed: "DispatchData.append(self:_:)")
 public func dispatch_data_create_concat(_ data1: Dispatch.__DispatchData, _ data2: Dispatch.__DispatchData) -> Dispatch.__DispatchData
 @available(*, unavailable, renamed: "DispatchData.subdata(self:in:)")
@@ -823,44 +733,28 @@ public func dispatch_async(_ queue: Dispatch.DispatchQueue, _ block: () -> Swift
 public func dispatch_get_global_queue(_ identifier: Swift.Int, _ flags: Swift.UInt) -> Dispatch.DispatchQueue
 @available(*, unavailable, renamed: "getter:DispatchQueue.main()")
 public func dispatch_get_main_queue() -> Dispatch.DispatchQueue
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "DispatchQueue.Attributes.initiallyInactive")
 public func dispatch_queue_attr_make_initially_inactive(_ attr: Dispatch.__OS_dispatch_queue_attr?) -> Dispatch.__OS_dispatch_queue_attr
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "DispatchQueue.AutoreleaseFrequency.workItem")
 public func dispatch_queue_attr_make_with_autorelease_frequency(_ attr: Dispatch.__OS_dispatch_queue_attr?, _ frequency: Dispatch.__dispatch_autorelease_frequency_t) -> Dispatch.__OS_dispatch_queue_attr
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "DispatchQoS")
 public func dispatch_queue_attr_make_with_qos_class(_ attr: Dispatch.__OS_dispatch_queue_attr?, _ qos_class: _DarwinFoundation1.qos_class_t, _ relative_priority: Swift.Int32) -> Dispatch.__OS_dispatch_queue_attr
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "getter:DispatchQueue.label(self:)")
 public func dispatch_queue_get_label(_ queue: Dispatch.DispatchQueue?) -> Swift.UnsafePointer<Swift.Int8>
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "getter:DispatchQueue.qos(self:)")
 public func dispatch_queue_get_qos_class(_ queue: Dispatch.DispatchQueue, _ relative_priority_ptr: Swift.UnsafeMutablePointer<Swift.Int32>?) -> _DarwinFoundation1.qos_class_t
-#endif
 @available(*, unavailable, renamed: "DispatchQueue.asyncAfter(self:deadline:qos:flags:execute:)")
 public func dispatch_after(_ when: Dispatch.dispatch_time_t, _ queue: Dispatch.DispatchQueue, _ block: () -> Swift.Void)
 @available(*, unavailable, renamed: "DispatchQueue.async(self:group:qos:flags:execute:)")
 public func dispatch_barrier_async(_ queue: Dispatch.DispatchQueue, _ block: () -> Swift.Void)
 @available(*, unavailable, renamed: "DispatchQueue.sync(self:flags:execute:)")
 public func dispatch_barrier_sync(_ queue: Dispatch.DispatchQueue, _ block: () -> Swift.Void)
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "DispatchQueue.setSpecific(self:key:value:)")
 public func dispatch_queue_set_specific(_ queue: Dispatch.DispatchQueue, _ key: Swift.UnsafeRawPointer, _ context: Swift.UnsafeMutableRawPointer?, _ destructor: (@convention(c) (Swift.UnsafeMutableRawPointer?) -> Swift.Void)?)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "DispatchQueue.getSpecific(self:key:)")
 public func dispatch_queue_get_specific(_ queue: Dispatch.DispatchQueue, _ key: Swift.UnsafeRawPointer) -> Swift.UnsafeMutableRawPointer?
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "DispatchQueue.getSpecific(key:)")
 public func dispatch_get_specific(_ key: Swift.UnsafeRawPointer) -> Swift.UnsafeMutableRawPointer?
-#endif
 @available(*, unavailable, renamed: "dispatchPrecondition(_:)")
 public func dispatch_assert_queue(_ queue: Dispatch.DispatchQueue)
 @available(*, unavailable, renamed: "dispatchPrecondition(_:)")
@@ -871,18 +765,12 @@ public func dispatch_assert_queue_not(_ queue: Dispatch.DispatchQueue)
 public func dispatch_semaphore_wait(_ dsema: Dispatch.DispatchSemaphore, _ timeout: Dispatch.dispatch_time_t) -> Swift.Int
 @available(*, unavailable, renamed: "DispatchSemaphore.signal(self:)")
 public func dispatch_semaphore_signal(_ dsema: Dispatch.DispatchSemaphore) -> Swift.Int
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use DispatchSource class methods")
 public func dispatch_source_create(_ type: Dispatch.__dispatch_source_type_t, _ handle: Swift.UInt, _ mask: Swift.UInt, _ queue: Dispatch.DispatchQueue?) -> Dispatch.DispatchSource
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "DispatchSource.setEventHandler(self:handler:)")
 public func dispatch_source_set_event_handler(_ source: Dispatch.DispatchSource, _ handler: (() -> Swift.Void)?)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "DispatchSource.setCancelHandler(self:handler:)")
 public func dispatch_source_set_cancel_handler(_ source: Dispatch.DispatchSource, _ handler: (() -> Swift.Void)?)
-#endif
 @available(*, unavailable, renamed: "DispatchSource.cancel(self:)")
 public func dispatch_source_cancel(_ source: Dispatch.DispatchSource)
 @available(*, unavailable, renamed: "getter:DispatchSource.isCancelled(self:)")
@@ -897,16 +785,12 @@ public func dispatch_source_get_data(_ source: Dispatch.DispatchSource) -> Swift
 public func dispatch_source_merge_data(_ source: Dispatch.DispatchSource, _ value: Swift.UInt)
 @available(*, unavailable, renamed: "DispatchTimerSource.setTimer(self:start:interval:leeway:)")
 public func dispatch_source_set_timer(_ source: Dispatch.DispatchSource, _ start: Dispatch.dispatch_time_t, _ interval: Swift.UInt64, _ leeway: Swift.UInt64)
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "DispatchSource.setRegistrationHandler(self:handler:)")
 public func dispatch_source_set_registration_handler(_ source: Dispatch.DispatchSource, _ handler: (() -> Swift.Void)?)
-#endif
 @available(*, unavailable, renamed: "DispatchTime.now()")
 public func dispatch_time(_ when: Dispatch.dispatch_time_t, _ delta: Swift.Int64) -> Dispatch.dispatch_time_t
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "DispatchWalltime.init(time:)")
 public func dispatch_walltime(_ when: Swift.UnsafePointer<_DarwinFoundation2.timespec>?, _ delta: Swift.Int64) -> Dispatch.dispatch_time_t
-#endif
 @available(*, unavailable, renamed: "DispatchQueue.GlobalQueuePriority.high")
 public var DISPATCH_QUEUE_PRIORITY_HIGH: Swift.Int {
   get

@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SiriCrossDeviceArbitrationFeedback.framework/Versions/A/SiriCrossDeviceArbitrationFeedback'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s34SiriCrossDeviceArbitrationFeedback013AdvertisementC5ClassO020obsoleteMacOrRealityC0yA2CmFWC', 
                        '_$s34SiriCrossDeviceArbitrationFeedback013AdvertisementC5ClassO10appleWatchyA2CmFWC', 
                        '_$s34SiriCrossDeviceArbitrationFeedback013AdvertisementC5ClassO10thirdPartyyA2CmFWC', 

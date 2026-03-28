@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PrivateFederatedLearning.framework/Versions/A/PrivateFederatedLearning'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation4DataV24PrivateFederatedLearningE21toUnsafeBufferPointerSRyxGylF', 
                        '_$s10Foundation4DataV24PrivateFederatedLearningE23withUnsafeBufferPointeryq_q_SRyxGKXEKr0_lF', 
                        '_$s10Foundation4DataV24PrivateFederatedLearningE7toArraySayxGylF', 
@@ -339,6 +339,8 @@ exports:
                        '_$s24PrivateFederatedLearning16EspressoFunctionVs9OptionSetAAMc', 
                        '_$s24PrivateFederatedLearning16PFLPluginConsentV13PrivacyBudgetACvgZ', 
                        '_$s24PrivateFederatedLearning16PFLPluginConsentV13PrivacyBudgetACvpZMV', 
+                       '_$s24PrivateFederatedLearning16PFLPluginConsentV15SiriDataSharingACvgZ', 
+                       '_$s24PrivateFederatedLearning16PFLPluginConsentV15SiriDataSharingACvpZMV', 
                        '_$s24PrivateFederatedLearning16PFLPluginConsentV23DisallowsCellularAccessACvgZ', 
                        '_$s24PrivateFederatedLearning16PFLPluginConsentV23DisallowsCellularAccessACvpZMV', 
                        '_$s24PrivateFederatedLearning16PFLPluginConsentV3DNUACvgZ', 
@@ -376,6 +378,7 @@ exports:
                        '_$s24PrivateFederatedLearning16PFLTaskDiscoveryCSciAAMc', 
                        '_$s24PrivateFederatedLearning16PFLTaskDiscoveryCfD', '_$s24PrivateFederatedLearning16PFLTaskDiscoveryCfd', 
                        '_$s24PrivateFederatedLearning16PFLTaskTargetingO20ensureDeviceUnlockedyyKFZ', 
+                       '_$s24PrivateFederatedLearning16PFLTaskTargetingO21ensureSiriDataSharingyyKFZ', 
                        '_$s24PrivateFederatedLearning16PFLTaskTargetingO9ensureDNUyyKFZ', 
                        '_$s24PrivateFederatedLearning16PFLTaskTargetingO9ensureIHAyyKFZ', 
                        '_$s24PrivateFederatedLearning16PFLTaskTargetingOMa', '_$s24PrivateFederatedLearning16PFLTaskTargetingOMn', 
@@ -595,6 +598,7 @@ exports:
                        '_$s24PrivateFederatedLearning21PFLTaskDiscoveryErrorO25failedToTargetByTimestampyA2CmFWC', 
                        '_$s24PrivateFederatedLearning21PFLTaskDiscoveryErrorO25invalidFedBufferLocalTimeyA2CmFWC', 
                        '_$s24PrivateFederatedLearning21PFLTaskDiscoveryErrorO25malformedFedBufferContextyA2CmFWC', 
+                       '_$s24PrivateFederatedLearning21PFLTaskDiscoveryErrorO25siriDataSharingNotEnabledyA2CmFWC', 
                        '_$s24PrivateFederatedLearning21PFLTaskDiscoveryErrorO26failedToDecodePolicyRecordyA2CmFWC', 
                        '_$s24PrivateFederatedLearning21PFLTaskDiscoveryErrorO26failedToDownloadAttachmentyA2CmFWC', 
                        '_$s24PrivateFederatedLearning21PFLTaskDiscoveryErrorO26invalidAttachmentSignatureyA2CmFWC', 
@@ -758,6 +762,8 @@ exports:
                        '_$s24PrivateFederatedLearning7PFLTaskC14attachmentPath4nameSSSgSS_tFTq', 
                        '_$s24PrivateFederatedLearning7PFLTaskC15taskPreferencesAA0dF0Vvg', 
                        '_$s24PrivateFederatedLearning7PFLTaskC15taskPreferencesAA0dF0VvpMV', 
+                       '_$s24PrivateFederatedLearning7PFLTaskC20attachmentFolderPath4nameSSSgSS_tFTj', 
+                       '_$s24PrivateFederatedLearning7PFLTaskC20attachmentFolderPath4nameSSSgSS_tFTq', 
                        '_$s24PrivateFederatedLearning7PFLTaskC25shouldApplySparsificationSbyFTj', 
                        '_$s24PrivateFederatedLearning7PFLTaskC25shouldApplySparsificationSbyFTq', 
                        '_$s24PrivateFederatedLearning7PFLTaskC4load4from15taskPreferences21excludedFilePostfixesAC10Foundation3URLV_AA0dH0VSaySSGtKFZ', 
@@ -907,42 +913,10 @@ exports:
                        '_$sSf24PrivateFederatedLearningE10inplaceDivyySaySfGz_SftFZ', 
                        '_$sSf24PrivateFederatedLearningE10inplaceSubyySaySfGz_ACtFZ', 
                        '_$sSf24PrivateFederatedLearningE4copy4from2to5countySPySfG_SpySfGSitFZ', 
-                       _BOUND_MAX, _FedStatsErrorDomain, _PFLPrivatize, _PFLPrivatizeCustomNorm, 
-                       _PFLPrivatizeCustomNormWithLowerEpsilon, _PrivateFederatedLearningVersionNumber, 
-                       _PrivateFederatedLearningVersionString, _gFedStatsBoundedULongTypeOutOfBoundsNumber, 
-                       _kCategoryFileResultFileDescriptor, _kCategoryFileResultValue, 
-                       _kFedStatsBoundedULongTypeBound, _kFedStatsBucketedTypeBucketBoundaries, 
-                       _kFedStatsBucketedTypeBucketCount, _kFedStatsBucketedTypeMaxValue, 
-                       _kFedStatsBucketedTypeMinValue, _kFedStatsCategoricalTypeCategories, 
-                       _kFedStatsCategoricalTypeCategoryFile, _kFedStatsCategoricalTypeCategoryMap, 
-                       _kFedStatsCohortMissingField, _kFedStatsCombinationTypeAvailableTypes, 
-                       _kFedStatsCombinationTypeStructure, _kFedStatsDataCohortAllowList, 
-                       _kFedStatsDataEncoderCollectionKeyPrefix, _kFedStatsDataEncoderDataType, 
-                       _kFedStatsDataEncoderMaxVectorDim, _kFedStatsDataEncoderSampleSize, 
-                       _kFedStatsGeoHashMap, _kFedStatsGeoHashTypeHashLength, _kFedStatsOutOfBoundsCategory, 
-                       _kPFLPrivatizeIdentifierAppEmbeddings, _kPFLPrivatizeIdentifierArcadeRanking, 
-                       _kPFLPrivatizeIdentifierCoreSuggestionsSemlPlugin, _kPFLPrivatizeIdentifierEmbeddingTraining, 
-                       _kPFLPrivatizeIdentifierHomeAI, _kPFLPrivatizeIdentifierPeopleSuggesterShareSheetPlugin, 
-                       _kPFLPrivatizeIdentifierPhotos, _kPFLPrivatizeIdentifierPhotosLarge, 
-                       _kPFLPrivatizeIdentifierPhotosSmall, _kPFLPrivatizeIdentifierProactivePhoneEn, 
-                       _kPFLPrivatizeIdentifierProactiveResponses, _kPFLPrivatizeIdentifierQuickTypeLM, 
-                       _kPFLPrivatizeIdentifierReminderKitREMMLPlugin, _kPFLPrivatizeIdentifierSearchAds, 
-                       _kPFLPrivatizeIdentifierSiriInference, _kPFLPrivatizeIdentifierSiriSpeechNNLM, 
-                       _kPFLPrivatizeIdentifierTips, _kPFLPrivatizeIdentifierVocalClassifier, 
-                       _kPFLPrivatizeIdentifierVocalGBDTClassifier, _kPFLPrivatizeTaskIdentifierQuickTypeCNNTextClassification, 
-                       _kPFLPrivatizeTaskIdentifierQuickTypeLM, _stringsToDataTypesMap ]
-    objc-classes:    [ FedStatSQLiteDatabaseQueryResult, FedStatsBooleanType, FedStatsBoundedULongType, 
-                       FedStatsBucketedType, FedStatsCategoricalType, FedStatsCategoricalTypeSubcategory, 
-                       FedStatsCohortFactory, FedStatsCohortQueryDeviceType, FedStatsCohortQueryFieldGeneric, 
-                       FedStatsCohortQueryInstalledApps, FedStatsCohortQueryInstalledAppsMedia, 
-                       FedStatsCohortQueryInstalledAppsPhone, FedStatsCohortQueryLocale, 
-                       FedStatsCohortQueryURLBits, FedStatsCombinationType, FedStatsDataCohort, 
-                       FedStatsDataEncoder, FedStatsDataEncoderDimensionalResult, 
-                       FedStatsDataSampler, FedStatsDataTypeFactory, FedStatsError, 
-                       FedStatsGeoHashType, FedStatsInvalidDataType, FedStatsLog, 
-                       FedStatsSQLiteCategoryDatabase, FedStatsSQLiteDatabase, FedStatsUtil, 
-                       InstalledApp, PFLDiagnosticReporting, _PFLLog ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+                       _PrivateFederatedLearningVersionNumber, _PrivateFederatedLearningVersionString, 
+                       _kFedStatsDataEncoderDataType, _kFedStatsDataEncoderSampleSize ]
+    objc-classes:    [ FedStatsDataEncoder ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ '_$ss7Float16V24PrivateFederatedLearning16VectorArithmeticACMc', 
                        '_$ss7Float16V24PrivateFederatedLearning16VectorArithmeticACWP', 
                        '_$ss7Float16V24PrivateFederatedLearningE10inplaceAddyySayABGz_AEtFZ', 

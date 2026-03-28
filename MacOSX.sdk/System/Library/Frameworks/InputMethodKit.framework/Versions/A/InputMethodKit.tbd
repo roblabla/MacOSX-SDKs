@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/InputMethodKit.framework/Versions/A/InputMethodKit'
 current-version: 506
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _IMKButtonCallbackKey, _IMKButtonCallbackObjectKey, _IMKCandidateControllerFunctionViewPadding, 
                        _IMKCandidateControllerPopoverCloseButtonWidth, _IMKCandidateControllerSingleRowMaxWidth, 
                        _IMKCandidateControllerSingleRowPressAndHoldMaxWidth, _IMKCandidateControllerSingleRowTrackpadCandidatesMaxWidth, 

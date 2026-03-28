@@ -1,12 +1,29 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeSettingsUI.framework/Versions/A/ScreenTimeSettingsUI'
-current-version: 605.2.7
+current-version: 605.4.18
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s20ScreenTimeSettingsUI0C15PresetViewModelC4dsid8childAge14isInitialSetup014restrictionsToe7MappingfG00N10DataSource19agePresetsAnalyticsACSo8NSNumberC_AKSgSbSo014STRestrictionsoepfG8Protocol_pSgSo0wqrX0_pAA05STAgetuX0_ptcfC', 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE22onboardingPasscodeView14withSTSettings10onCompleteSo010OBTemplateJ0CAC0L0V_yAKctFZ', 
+                       '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE8PaneTypeO2eeoiySbAF_AFtFZ', 
+                       '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE8PaneTypeO2idSSvg', 
+                       '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE8PaneTypeO2idSSvpMV', 
+                       '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE8PaneTypeO4hash4intoys6HasherVz_tF', 
+                       '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE8PaneTypeO8allCasesSayAFGvgZ', 
+                       '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE8PaneTypeO8allCasesSayAFGvpZMV', 
+                       '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE8PaneTypeO8passcodeyA2FmFWC', 
+                       '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE8PaneTypeO9hashValueSivg', 
+                       '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE8PaneTypeO9hashValueSivpMV', 
+                       '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE8PaneTypeOMa', 
+                       '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE8PaneTypeOMn', 
+                       '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE8PaneTypeON', 
+                       '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE8PaneTypeOSHADMc', 
+                       '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE8PaneTypeOSQADMc', 
+                       '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE8PaneTypeOs12CaseIterableADMc', 
+                       '_$s15ScreenTimeSwift21STExpressIntroductionO0aB10SettingsUIE8PaneTypeOs12IdentifiableADMc', 
+                       '_$s20ScreenTimeSettingsUI0C15PresetViewModelC4dsid8childAge14isInitialSetup014restrictionsToe7MappingfG00N10DataSource19agePresetsAnalyticsACSo8NSNumberC_AKSgSbSo014STRestrictionsoepfG8Protocol_pSgSo0wqrX0_pAA05STAgetuX0_ptcfC', 
                        '_$s20ScreenTimeSettingsUI0C15PresetViewModelC4dsid8childAge14isInitialSetup014restrictionsToe7MappingfG00N10DataSource19agePresetsAnalyticsACSo8NSNumberC_AKSgSbSo014STRestrictionsoepfG8Protocol_pSgSo0wqrX0_pAA05STAgetuX0_ptcfc', 
                        '_$s20ScreenTimeSettingsUI0C15PresetViewModelC4dsid8childAge14isInitialSetup014restrictionsToe7MappingfG00N20DefaultValueProvider19agePresetsAnalyticsACSo8NSNumberC_AKSgSbSo014STRestrictionsoepfG8Protocol_pSgSo0xqrsY0_pAA05STAgeuvY0_ptcfC', 
                        '_$s20ScreenTimeSettingsUI0C15PresetViewModelC4dsid8childAge14isInitialSetup014restrictionsToe7MappingfG00N20DefaultValueProvider19agePresetsAnalyticsACSo8NSNumberC_AKSgSbSo014STRestrictionsoepfG8Protocol_pSgSo0xqrsY0_pAA05STAgeuvY0_ptcfc', 
@@ -78,20 +95,28 @@ exports:
                        '_$s20ScreenTimeSettingsUI21STAgePresetsAnalyticsCN', '_$s20ScreenTimeSettingsUI21STAgePresetsAnalyticsCfD', 
                        '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryC023makeEyeReliefEnablementF04back6enable7disable05SwiftD003AnyF0Vyyc_yycyyctFZ', 
                        '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryC023makeEyeReliefOnboardingF08continue05SwiftD003AnyF0Vyyc_tFZ', 
-                       '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryC035makeAppAndWebsiteActivityOnboardingF06enable05SwiftD003AnyF0Vyyc_tFZ', 
+                       '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryC035makeAppAndWebsiteActivityOnboardingF021isReplacingThirdParty6enable05SwiftD003AnyF0VSb_yyctFZ', 
                        '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryCACycfC', 
                        '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryCACycfc', 
                        '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryCMa', 
                        '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryCMn', 
                        '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryCMo', 
                        '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryCN', 
-                       '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryCfD' ]
+                       '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryCfD', 
+                       '_$sSo28STRegulatoryUIPolicyProviderC20ScreenTimeSettingsUIE11addObserveryySo0aB9Observing_pF', 
+                       '_$sSo28STRegulatoryUIPolicyProviderC20ScreenTimeSettingsUIE13currentPolicySo0aI0CyF', 
+                       '_$sSo28STRegulatoryUIPolicyProviderC20ScreenTimeSettingsUIE13initialPolicyABSo0aI0C_tcfC', 
+                       '_$sSo28STRegulatoryUIPolicyProviderC20ScreenTimeSettingsUIE13initialPolicyABSo0aI0C_tcfc', 
+                       '_$sSo28STRegulatoryUIPolicyProviderC20ScreenTimeSettingsUIE6updateyySo0A6PolicyCF', 
+                       '_$sSo28STRegulatoryUIPolicyProviderC20ScreenTimeSettingsUIEABycfC', 
+                       '_$sSo28STRegulatoryUIPolicyProviderC20ScreenTimeSettingsUIEABycfc', 
+                       '_$sSo28STRegulatoryUIPolicyProviderCMa' ]
     objc-classes:    [ STActivityIndicatingWebView, STAlwaysAllowedController, STAlwaysAllowedItem, 
                        STChildSetupController, STContentAndPrivacyController, STControlProtection, 
                        STDeviceBedtime, STDowntimeCommunicationViewController, STKeyValuePair, 
                        STMacOSAlertPresenter, STProtectedButton, STProtectedDatePicker, 
-                       STProtectedPopUpButton, STProtectedSegmentedControl, STRequestItem, 
-                       STRequestsController, STScreenTimeCommunicationViewController, 
+                       STProtectedPopUpButton, STProtectedSegmentedControl, STRegulatoryUIPolicyProvider, 
+                       STRequestItem, STRequestsController, STScreenTimeCommunicationViewController, 
                        STTimeAllowancesCompatibilityController, STUsersImageController, 
                        _TtC20ScreenTimeSettingsUI19STEyeReliefMicaView, _TtC20ScreenTimeSettingsUI21STAgePresetsAnalytics, 
                        _TtC20ScreenTimeSettingsUI23SettingsPresetViewModel, _TtC20ScreenTimeSettingsUI36STIntroductionViewControllersFactory ]

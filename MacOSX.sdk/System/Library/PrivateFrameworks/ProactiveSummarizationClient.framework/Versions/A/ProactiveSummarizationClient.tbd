@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ProactiveSummarizationClient.framework/Versions/A/ProactiveSummarizationClient'
-current-version: 1303.8
+current-version: 1311.6
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s28ProactiveSummarizationClient01kB10ServerNameSSvg', '_$s28ProactiveSummarizationClient024ModelInputContentBuilderC0C05modelE13AndOutputKind15forNotification8bundleId21isShowingStackSummaryAA0deijK0OSS_SSSbtYaFTj', 
                        '_$s28ProactiveSummarizationClient024ModelInputContentBuilderC0C05modelE13AndOutputKind15forNotification8bundleId21isShowingStackSummaryAA0deijK0OSS_SSSbtYaFTjTu', 
                        '_$s28ProactiveSummarizationClient024ModelInputContentBuilderC0C05modelE13AndOutputKind15forNotification8bundleId21isShowingStackSummaryAA0deijK0OSS_SSSbtYaFTq', 

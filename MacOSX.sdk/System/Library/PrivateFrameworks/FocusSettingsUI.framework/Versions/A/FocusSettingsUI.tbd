@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/FocusSettingsUI.framework/Versions/A/FocusSettingsUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15FocusSettingsUI0A19InformationIconViewV05SwiftC00F0AAMc', 
                        '_$s15FocusSettingsUI0A19InformationIconViewV12semanticType15symbolImageName9tintColorACSo015DNDModeSemanticH0V_SS05SwiftC00M0VSgtcfC', 
                        '_$s15FocusSettingsUI0A19InformationIconViewV4bodyQrvg', '_$s15FocusSettingsUI0A19InformationIconViewV4bodyQrvpMV', 

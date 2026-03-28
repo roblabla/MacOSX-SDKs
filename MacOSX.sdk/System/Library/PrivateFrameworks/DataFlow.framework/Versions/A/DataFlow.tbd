@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DataFlow.framework/Versions/A/DataFlow'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10LocalState8DataFlow7FeaturePTl', '_$s11SharedState8DataFlow7FeaturePTl', 
                        '_$s6Action8DataFlow7FeaturePTl', '_$s7SwiftUI7BindingV8DataFlowE5store3get6actionACyxGAD5StoreCyqd__G_xAKc6ActionQyd__xcSgtcAD7FeatureRd__lufC', 
                        '_$s8DataFlow10AsyncStateV2eeoiySbACyxG_AEtFZ', '_$s8DataFlow10AsyncStateV3ttlACyxGSd_tcfC', 

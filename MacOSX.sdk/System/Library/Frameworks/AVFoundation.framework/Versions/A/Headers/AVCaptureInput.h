@@ -379,21 +379,12 @@ typedef NS_ENUM(NSInteger, AVCaptureMultichannelAudioMode) {
  
  @discussion
     The receiver's multichannelAudioMode property can only be set to a certain mode if this method returns YES for that mode.
- 
-    Multichannel audio modes are not supported when used in conjunction with AVCaptureMultiCamSession.
  */
 - (BOOL)isMultichannelAudioModeSupported:(AVCaptureMultichannelAudioMode)multichannelAudioMode API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(watchos, visionos);
 
-/*!
- @property multichannelAudioMode
- @abstract
-    Indicates the multichannel audio mode to apply when recording audio.
- 
- @discussion
-    This property only takes effect when audio is being routed through the built-in microphone, and is ignored if an external microphone is in use.
-    
-    The default value is AVCaptureMultichannelAudioModeNone, in which case the default single channel audio recording is used.
- */
+/// Indicates the multichannel audio mode to apply when recording audio.
+///
+/// This property only takes effect when audio is being routed through the built-in microphone, and is ignored if an external microphone is in use. The default value is ``AVCaptureMultichannelAudioModeNone``, in which case the default single channel audio recording is used. In an ``AVCaptureMultiCamSession``, when audio mode is set to any value other than ``AVCaptureMultichannelAudioModeNone``, only one ``sourceDevicePosition`` is allowed for audio ports.
 @property(nonatomic) AVCaptureMultichannelAudioMode multichannelAudioMode API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(watchos, visionos);
 
 /*!
@@ -415,6 +406,17 @@ typedef NS_ENUM(NSInteger, AVCaptureMultichannelAudioMode) {
     Wind noise removal is available when the AVCaptureDeviceInput multichannelAudioMode property is set to any value other than AVCaptureMultichannelAudioModeNone.
  */
 @property(nonatomic, getter=isWindNoiseRemovalEnabled) BOOL windNoiseRemovalEnabled API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// Whether or not audio zoom is supported.
+///
+/// This property returns `true` if the device supports audio zoom.
+@property(nonatomic, readonly, getter=isAudioZoomSupported) BOOL audioZoomSupported API_AVAILABLE(macos(26.4), ios(26.4), macCatalyst(26.4), tvos(26.4)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// Whether or not audio zoom is enabled.
+///
+/// Setting this property to `true` throws an exception if ``isAudioZoomSupported`` is `false`. Default is `true` when supported. When enabled, the sound field narrows or expands to match the field of view of the video device's zoom factor. Set this property to `false` if you want to capture the full sound field regardless of video zoom. This property only takes effect when added to a session with a video device, and ``AVCaptureMultichannelAudioMode`` is set to any value other than ``AVCaptureMultichannelAudioModeNone``. When using multiple cameras in ``AVCaptureMultiCamSession``, audio zoom is determined by the zoom factor of the preferred camera. The preferred camera is selected to match the mic position, either front or back. If more than one camera is available in that position, the camera with the widest field of view is chosen with virtual cameras preferred over single camera ones. If no camera is found to match the mic position, audio zoom is unavailable.
+@property(nonatomic, getter=isAudioZoomEnabled) BOOL audioZoomEnabled API_AVAILABLE(macos(26.4), ios(26.4), macCatalyst(26.4), tvos(26.4)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
 
 /// A BOOL value specifying whether Cinematic Video capture is supported.
 ///

@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Portrait.framework/Versions/A/Portrait'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CGRectFromPTCinematographyDictionary, _CMTimeFromPTCinematographyDictionary, 
                        _NSNumberFromPTTrackID, _PTAEStatsContainsPoint, _PTAEStatsLargestFaceRectIndex, 
                        _PTAEStatsParseFaceRects, _PTAEStatsThumbnailToLuma, _PTAEStatsThumbnailToRGB, 

@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MediaStream.framework/Versions/A/MediaStream'
-current-version: 821.0.120
+current-version: 841.0.101
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MSAlbumSharingInitialize, _MSMSLocalizedString, _MSMediaStreamInitialize, 
                        _XPCSetLogBlocks, __MSASSetDaemon, __MSSetDaemon, __XPCLog, 
                        __XPCShouldLog, _kMSASConnectionErrorDomain, _kMSASServiceName, 

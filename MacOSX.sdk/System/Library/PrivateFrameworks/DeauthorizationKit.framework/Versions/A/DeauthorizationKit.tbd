@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DeauthorizationKit.framework/Versions/A/DeauthorizationKit'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _APMechanismSetContextValue, _APMechanismSetResult, _DKEACSAccountOptionAdminUserID, 
                        _DKEACSAccountOptionAdminUserPassword, _DKEACSAdminInitiated, 
                        _DKEACSBootstrapTokenString, _DKEACSBuddyInitiated, _DKEACSConsiderPreliminaryChecksNonFatal, 

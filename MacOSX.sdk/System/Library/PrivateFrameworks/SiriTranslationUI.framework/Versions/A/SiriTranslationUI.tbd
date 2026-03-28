@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriTranslationUI.framework/Versions/A/SiriTranslationUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s17SiriTranslationUI0B15SnippetProviderC0dC00D9ProvidingAAMc', 
                        '_$s17SiriTranslationUI0B15SnippetProviderC7snippet3for4mode5idiom05SwiftC07AnyViewVAA0aB6ModelsO_So7VRXModeVSo8VRXIdiomVtKF', 
                        '_$s17SiriTranslationUI0B15SnippetProviderCACycfC', '_$s17SiriTranslationUI0B15SnippetProviderCACycfCTj', 

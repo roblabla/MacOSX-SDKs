@@ -9,3 +9,4 @@
 #import <PushKit/PKPushCredentials.h>
 #import <PushKit/PKPushPayload.h>
 #import <PushKit/PKPushRegistry.h>
+#import <PushKit/PKVoIPPushMetadata.h>

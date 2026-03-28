@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_CompositorServices_SwiftUI.framework/Versions/A/_CompositorServices_SwiftUI'
-current-version: 420.40.1
+current-version: 420.100.10
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s27_CompositorServices_SwiftUI07DefaultA18LayerConfigurationV04makeG012capabilities13configurationySo27CP_OBJECT_cp_layer_rendererC0aB0E12CapabilitiesV_AhIE0G0VztF', 
                        '_$s27_CompositorServices_SwiftUI07DefaultA18LayerConfigurationVAA0afG0AAMc', 
                        '_$s27_CompositorServices_SwiftUI07DefaultA18LayerConfigurationVAA0afG0AAWP', 

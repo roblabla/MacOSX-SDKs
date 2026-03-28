@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_PhotosUI_WidgetKit.framework/Versions/A/_PhotosUI_WidgetKit'
-current-version: 821.0.120
+current-version: 841.0.101
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s19_PhotosUI_WidgetKit0A22UIWidgetArchivableViewC08registercG8DecodersyyFZ', 
                        '_$s19_PhotosUI_WidgetKit0A22UIWidgetArchivableViewCMa', '_$s19_PhotosUI_WidgetKit0A22UIWidgetArchivableViewCMm', 
                        '_$s19_PhotosUI_WidgetKit0A22UIWidgetArchivableViewCMn', '_$s19_PhotosUI_WidgetKit0A22UIWidgetArchivableViewCMo', 

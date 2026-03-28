@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BackBoardServices.framework/Versions/A/BackBoardServices'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BKDefaultBrightness, _BKDefaultKeyALSEnabled, _BKLogAlternateSystemApp, 
                        _BKLogBacklight, _BKLogCommon, _BKLogDetailed, _BKLogDisplay, 
                        _BKLogDisplayArchive, _BKLogEndpointProvider, _BKLogEventDelivery, 
@@ -125,14 +123,15 @@ exports:
                        BKSHIDEventAuthenticationMessage._originIdentifier, BKSHIDEventAuthenticationMessage._registrantEntitled, 
                        BKSHIDEventAuthenticationMessage._secureNameStatus, BKSHIDEventAuthenticationMessage._signature, 
                        BKSHIDEventAuthenticationMessage._targetContextID, BKSHIDEventAuthenticationMessage._targetSlotID, 
-                       BKSHIDEventAuthenticationMessage._timestamp, BKSHIDEventAuthenticationMessage._versionedPID, 
-                       BKSHIDEventDeferringPredicate._display, BKSHIDEventDeferringPredicate._environment, 
-                       BKSHIDEventDeferringPredicate._token, BKSHIDEventDeferringResolution._dispatchingTarget, 
-                       BKSHIDEventDeferringResolution._display, BKSHIDEventDeferringResolution._environment, 
-                       BKSHIDEventDeferringResolution._pid, BKSHIDEventDeferringResolution._processDescription, 
-                       BKSHIDEventDeferringResolution._token, BKSHIDEventDeferringResolution._versionedPID, 
-                       BKSHIDEventDeferringTarget._pid, BKSHIDEventDeferringTarget._token, 
-                       BKSHIDEventDiscreteDispatchingPredicate._descriptors, BKSHIDEventDiscreteDispatchingPredicate._fuzzyDescriptors, 
+                       BKSHIDEventAuthenticationMessage._timestamp, BKSHIDEventAuthenticationMessage._touchIdentifier, 
+                       BKSHIDEventAuthenticationMessage._versionedPID, BKSHIDEventDeferringPredicate._display, 
+                       BKSHIDEventDeferringPredicate._environment, BKSHIDEventDeferringPredicate._token, 
+                       BKSHIDEventDeferringResolution._dispatchingTarget, BKSHIDEventDeferringResolution._display, 
+                       BKSHIDEventDeferringResolution._environment, BKSHIDEventDeferringResolution._pid, 
+                       BKSHIDEventDeferringResolution._processDescription, BKSHIDEventDeferringResolution._token, 
+                       BKSHIDEventDeferringResolution._versionedPID, BKSHIDEventDeferringTarget._pid, 
+                       BKSHIDEventDeferringTarget._token, BKSHIDEventDiscreteDispatchingPredicate._descriptors, 
+                       BKSHIDEventDiscreteDispatchingPredicate._fuzzyDescriptors, 
                        BKSHIDEventDiscreteDispatchingPredicate._senderDescriptors, 
                        BKSHIDEventKeyCommandsDispatchingPredicate._senderDescriptors, 
                        BKSHIDEventKeyCommandsRegistration._environment, BKSHIDEventKeyCommandsRegistration._keyCommands, 

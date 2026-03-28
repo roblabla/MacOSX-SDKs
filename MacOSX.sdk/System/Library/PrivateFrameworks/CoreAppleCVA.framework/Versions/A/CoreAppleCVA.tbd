@@ -1,17 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreAppleCVA.framework/Versions/A/CoreAppleCVA'
-current-version: 4.3
-compatibility-version: 4.3
+current-version: 4.4
+compatibility-version: 4.4
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZN3cva10FileTarget7logImplENS_6Logger8SeverityEPKcP13__va_list_tag, 
                        __ZN3cva11OsLogTarget7logImplENS_6Logger8SeverityEPKcP13__va_list_tag, 
                        __ZN3cva13ConsoleTarget7logImplENS_6Logger8SeverityEPKcP13__va_list_tag ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __Z14CVAGetMPSImagePN3cva3mtl11CVAMPSImageE, __Z17CVACreateMPSImageP8MPSImage, 
                        __Z17CVAGetMetalBufferPN3cva3mtl11MetalBufferE, __Z17CVAGetMetalDevicePN3cva3mtl12MetalContextE, 
                        __Z18CVAGetMPSCNNKernelPN3cva3mtl15CVAMPSCNNKernelE, __Z18CVAGetMetalLibraryPN3cva3mtl12MetalContextEPKc, 
@@ -1079,7 +1077,7 @@ exports:
                        __ZTVN3cva12experimental21ResizeStrategyLanczosItLb0EEE, __ZTVN3cva12experimental21ResizeStrategyLanczosItLb1EEE, 
                        __ZTVN3cva6BufferIfEE, __ZTVN3cva6BufferIhEE, __ZTVN3cva6BufferIjEE, 
                        __ZTVN3cva6BufferItEE ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN3cva10FileTarget7logImplENS_6Logger8SeverityEPKcPc, __ZN3cva11OsLogTarget7logImplENS_6Logger8SeverityEPKcPc, 
                        __ZN3cva13ConsoleTarget7logImplENS_6Logger8SeverityEPKcPc ]
 ...

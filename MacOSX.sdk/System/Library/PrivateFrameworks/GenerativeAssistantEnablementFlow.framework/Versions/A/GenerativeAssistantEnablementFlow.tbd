@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GenerativeAssistantEnablementFlow.framework/Versions/A/GenerativeAssistantEnablementFlow'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s33GenerativeAssistantEnablementFlowAAC07SiriKitD00D0AAMc', 
                        '_$s33GenerativeAssistantEnablementFlowAAC2on5inputSb07SiriKitD05InputV_tFTj', 
                        '_$s33GenerativeAssistantEnablementFlowAAC2on5inputSb07SiriKitD05InputV_tFTq', 

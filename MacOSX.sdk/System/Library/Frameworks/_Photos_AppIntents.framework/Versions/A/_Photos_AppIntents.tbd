@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/_Photos_AppIntents.framework/Versions/A/_Photos_AppIntents'
-current-version: 821.0.120
+current-version: 841.0.101
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s18_Photos_AppIntents13PHAssetEntityV0bC0028SystemIntentValueConvertibleE0AAMc', 
                        '_$s18_Photos_AppIntents13PHAssetEntityV0bC009TransientbE0AAMc', 
                        '_$s18_Photos_AppIntents13PHAssetEntityV0bC00B5ValueAAMc', 
@@ -37,6 +35,7 @@ exports:
                        '_$sSo7PHAssetC10AppIntents24PersistentlyIdentifiable08_Photos_bC0Mc', 
                        '_$sSo7PHAssetC10AppIntents24TypeDisplayRepresentable08_Photos_bC0Mc', 
                        '_$sSo7PHAssetC10AppIntents28InstanceDisplayRepresentable08_Photos_bC0Mc', 
+                       '_$sSo7PHAssetC10AppIntents37SystemIntentValueContainerConvertible08_Photos_bC0Mc', 
                        '_$sSo7PHAssetC10Foundation40CustomLocalizedStringResourceConvertible18_Photos_AppIntentsMc', 
                        '_$sSo7PHAssetC18_Photos_AppIntentsE15convertToEntityAC0aG0VyF', 
                        '_$sSo7PHAssetC18_Photos_AppIntentsE20persistentIdentifierSSvgZ', 
@@ -46,5 +45,7 @@ exports:
                        '_$sSo7PHAssetC18_Photos_AppIntentsE25typeDisplayRepresentation0cD004TypefG0VvgZ', 
                        '_$sSo7PHAssetC18_Photos_AppIntentsE25typeDisplayRepresentation0cD004TypefG0VvpZMV', 
                        '_$sSo7PHAssetC18_Photos_AppIntentsE28defaultResolverSpecification0cD005EmptyfG0VyA2bE12_IntentValueACyHCg_GvgZ', 
-                       '_$sSo7PHAssetC18_Photos_AppIntentsE28defaultResolverSpecification0cD005EmptyfG0VyA2bE12_IntentValueACyHCg_GvpZMV' ]
+                       '_$sSo7PHAssetC18_Photos_AppIntentsE28defaultResolverSpecification0cD005EmptyfG0VyA2bE12_IntentValueACyHCg_GvpZMV', 
+                       '_$sSo7PHAssetC21AppIntentsTypeSupport21IntentValueExpressing08_Photos_bC0Mc', 
+                       '_$sSo7PHAssetC21AppIntentsTypeSupport22IntentValueConvertible08_Photos_bC0Mc' ]
 ...

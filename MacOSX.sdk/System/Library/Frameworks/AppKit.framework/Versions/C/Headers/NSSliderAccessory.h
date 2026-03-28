@@ -26,10 +26,12 @@ API_AVAILABLE(macos(10.12), ios(13.0)) NS_SWIFT_UI_ACTOR
 + (NSSliderAccessory *)accessoryWithImage:(UIImage *)image API_AVAILABLE(ios(13.0));
 #endif
 
-/// The effect on interaction with the accessory. Defaults to `automaticBehavior`
+/// The effect on interaction with the accessory.
+/// 
+/// The default value is `automaticBehavior`.
 @property (copy) NSSliderAccessoryBehavior *behavior;
 
-/// Whether or not the accessory is interactive and draws with an enabled appearance. Defaults to YES.
+/// Determines whether or not the accessory is interactive and draws with an enabled appearance. Defaults to `true`.
 @property (getter=isEnabled) BOOL enabled;
 
 @end
@@ -42,7 +44,9 @@ API_AVAILABLE(macos(10.12), ios(13.0)) NS_SWIFT_UI_ACTOR
 API_AVAILABLE(macos(10.12), ios(13.0)) NS_SWIFT_UI_ACTOR
 @interface NSSliderAccessoryBehavior : NSObject <NSCoding, NSCopying>
 
-/// The behavior is automatically picked to be the system standard for the slider's current context, e.g. NSTouchBarItems have `.valueStep` behavior.
+/// The behavior is automatically picked to be the system standard, given the slider's current context.
+///
+/// For example, NSTouchBarItems have `.valueStep` behavior.
 @property (class, readonly, copy) NSSliderAccessoryBehavior *automaticBehavior;
 
 /// The value of the slider moves towards the associated value for the accessory with by a delta of the slider's `altIncrementValue`.
@@ -51,10 +55,13 @@ API_AVAILABLE(macos(10.12), ios(13.0)) NS_SWIFT_UI_ACTOR
 /// The value of the slider is reset to the associated value for the accessory.
 @property (class, readonly, copy) NSSliderAccessoryBehavior *valueResetBehavior;
 
-/// The action is sent to the target on interaction. The optional first parameter is an NSSliderAccessory.
+/// The action is sent to the target on interaction. 
+/// @param target An optional `NSSliderAccessory`.
 + (NSSliderAccessoryBehavior *)behaviorWithTarget:(nullable id)target action:(SEL)action;
 
-/// The handler block is invoked on interaction. This variant is not codable and will assert in `-encodeWithCoder:`.
+/// The handler block is invoked on interaction. 
+/// 
+/// This variant is not codable and will assert in `-encodeWithCoder:`.
 + (NSSliderAccessoryBehavior *)behaviorWithHandler:(void(^)(NSSliderAccessory *))handler;
 
 /// Override point for custom subclasses to handle interaction.

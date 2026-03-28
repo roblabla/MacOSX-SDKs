@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/OpenCL'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _clBuildProgram, _clCompileProgram, _clCreateBuffer, _clCreateCommandQueue, 
                        _clCreateCommandQueueWithPropertiesAPPLE, _clCreateContext, 
                        _clCreateContextAndCommandQueueAPPLE, _clCreateContextFromType, 
@@ -57,7 +55,7 @@ exports:
                        _gcl_malloc, _gcl_map_image, _gcl_map_ptr, _gcl_memcpy, _gcl_memcpy_rect, 
                        _gcl_release_image, _gcl_retain_image, _gcl_set_finalizer, 
                        _gcl_start_timer, _gcl_stop_timer, _gcl_unmap ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _clCreateFromGLTexture2D, _clCreateFromGLTexture3D, _clCreateImage2D, 
                        _clCreateImage3D, _clEnqueueBarrier, _clEnqueueMarker, _clEnqueueWaitForEvents, 
                        _clGetExtensionFunctionAddress, _clSetMemObjectDestructorAPPLE, 

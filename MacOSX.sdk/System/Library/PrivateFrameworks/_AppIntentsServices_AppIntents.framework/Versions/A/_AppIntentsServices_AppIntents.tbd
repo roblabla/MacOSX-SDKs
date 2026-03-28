@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/_AppIntentsServices_AppIntents.framework/Versions/A/_AppIntentsServices_AppIntents'
-current-version: 40.1.6
+current-version: 40.4.45
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10AppIntents10IntentNoteV01_ab9Services_aB0E11lnValueTypeSo07LNValueH0CvgZ', 
                        '_$s10AppIntents10IntentNoteV01_ab9Services_aB0E11lnValueTypeSo07LNValueH0CvpZMV', 
                        '_$s10AppIntents10IntentNoteV01_ab9Services_aB0E4from_7contextACSgSo7LNValueC_0abE00C22ValueConversionContext_ptFZ', 
@@ -84,6 +82,11 @@ exports:
                        '_$s10AppIntents17IntentMediaSearchV0aB8Services0C22ValueOptionalWrappable01_abf1_aB0Mc', 
                        '_$s10AppIntents17IntentMediaSearchV0aB8Services0C5Value01_abf1_aB0Mc', 
                        '_$s10AppIntents17IntentMediaSearchV0aB8Services23EntityPropertyWrappable01_abf1_aB0Mc', 
+                       '_$s10AppIntents17IntentPersonGroupV0aB8Services022StandardRepresentationC5Value01_abf1_aB0Mc', 
+                       '_$s10AppIntents17IntentPersonGroupV0aB8Services0C20ValueSequenceElement01_abf1_aB0Mc', 
+                       '_$s10AppIntents17IntentPersonGroupV0aB8Services0C22ValueOptionalWrappable01_abf1_aB0Mc', 
+                       '_$s10AppIntents17IntentPersonGroupV0aB8Services0C5Value01_abf1_aB0Mc', 
+                       '_$s10AppIntents17IntentPersonGroupV0aB8Services23EntityPropertyWrappable01_abf1_aB0Mc', 
                        '_$s10AppIntents17IntentToggleStateO01_ab9Services_aB0E11lnValueTypeSo07LNValueI0CvgZ', 
                        '_$s10AppIntents17IntentToggleStateO01_ab9Services_aB0E11lnValueTypeSo07LNValueI0CvpZMV', 
                        '_$s10AppIntents17IntentToggleStateO01_ab9Services_aB0E7lnValueSo7LNValueCSgvg', 
@@ -192,16 +195,11 @@ exports:
                        '_$s10AppIntents26_IntentPhotoItemCollectionV0aB8Services0C22ValueOptionalWrappable01_abg1_aB0Mc', 
                        '_$s10AppIntents26_IntentPhotoItemCollectionV0aB8Services0C5Value01_abg1_aB0Mc', 
                        '_$s10AppIntents26_IntentPhotoItemCollectionV0aB8Services23EntityPropertyWrappable01_abg1_aB0Mc', 
-                       '_$s10GeoToolbox15PlaceDescriptorV020_AppIntentsServices_eF0E11lnValueTypeSo07LNValueJ0CvgZ', 
-                       '_$s10GeoToolbox15PlaceDescriptorV020_AppIntentsServices_eF0E11lnValueTypeSo07LNValueJ0CvpZMV', 
-                       '_$s10GeoToolbox15PlaceDescriptorV020_AppIntentsServices_eF0E4from_7contextACSgSo7LNValueC_0efG028IntentValueConversionContext_ptFZ', 
-                       '_$s10GeoToolbox15PlaceDescriptorV020_AppIntentsServices_eF0E7lnValueSo7LNValueCSgvg', 
-                       '_$s10GeoToolbox15PlaceDescriptorV020_AppIntentsServices_eF0E7lnValueSo7LNValueCSgvpMV', 
                        '_$s10GeoToolbox15PlaceDescriptorV18AppIntentsServices11IntentValue01_efg1_eF0Mc', 
                        '_$s10GeoToolbox15PlaceDescriptorV18AppIntentsServices23EntityPropertyWrappable01_efg1_eF0Mc', 
                        '_$s10GeoToolbox15PlaceDescriptorV18AppIntentsServices26IntentValueSequenceElement01_efg1_eF0Mc', 
-                       '_$s10GeoToolbox15PlaceDescriptorV18AppIntentsServices27IntentValueTypeIdentifiable01_efg1_eF0Mc', 
                        '_$s10GeoToolbox15PlaceDescriptorV18AppIntentsServices28IntentValueOptionalWrappable01_efg1_eF0Mc', 
+                       '_$s10GeoToolbox15PlaceDescriptorV18AppIntentsServices33StandardRepresentationIntentValue01_efg1_eF0Mc', 
                        '_$s18AppIntentsServices013_IdentifiableA20EntityRepresentationP01_abc1_aB0AA06CustomaeF4BaseCRbzrlE17queryByIdentifier19instanceIdentifiersAA0ae5QueryF0VyxGSayqd__G_t0aB00eK11ConvertibleRd__lFZ', 
                        '_$s18AppIntentsServices013_IdentifiableA20EntityRepresentationP01_abc1_aB0AA06CustomaeF4BaseCRbzrlE18instanceIdentifierxqd___tc0aB00eJ11ConvertibleRd__lufC' ]
 ...

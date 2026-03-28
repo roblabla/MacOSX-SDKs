@@ -1,15 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_containermanager.dylib'
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CMCONTAINERSEAM_DEFAULT, _CMDISPATCHSEAM_DEFAULT, _CMFSSEAM_DEFAULT, 
                        _CMNOTIFYSEAM_DEFAULT, _CMPWDSEAM_DEFAULT, _CMQUARANTINESEAM_DEFAULT, 
                        _CMSANDBOXSEAM_DEFAULT, _CONTAINER_CLASS_NAMES, _CONTAINER_NOTIFY_GENERATION_INITIAL, 
@@ -201,7 +198,7 @@ exports:
                        _container_xpc_shared_copy_connection, _gCMContainerSeam, 
                        _gCMDispatchSeam, _gCMFSSeam, _gCMNotifySeam, _gCMPWDSeam, 
                        _gCMQuarantineSeam, _gCMSandboxSeam ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _CONTAINER_CURRENT_MOBILE_UID, _CONTAINER_INSTALLATION_UID, 
                        _CONTAINER_SYSTEM_UID, _container_create_or_lookup, _container_create_or_lookup_app_group_paths, 
                        _container_create_or_lookup_group_container_paths_for_current_user, 

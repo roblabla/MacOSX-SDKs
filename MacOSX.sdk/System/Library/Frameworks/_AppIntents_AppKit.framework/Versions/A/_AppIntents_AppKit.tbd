@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/_AppIntents_AppKit.framework/Versions/A/_AppIntents_AppKit'
-current-version: 300.2.3
+current-version: 300.4.48
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s012_AppIntents_A3Kit011NSTableViewaB10DataSourceMp', '_$s012_AppIntents_A3Kit011NSTableViewaB10DataSourceP05tableE0_22appEntityIdentifierFor0aB00jK0VSgSo0dE0C_SitFTj', 
                        '_$s012_AppIntents_A3Kit011NSTableViewaB10DataSourceP05tableE0_22appEntityIdentifierFor0aB00jK0VSgSo0dE0C_SitFTq', 
                        '_$s012_AppIntents_A3Kit011NSTableViewaB10DataSourceP07outlineE0_22appEntityIdentifierFor0aB00jK0VSgSo09NSOutlineE0C_ypSgtFTj', 

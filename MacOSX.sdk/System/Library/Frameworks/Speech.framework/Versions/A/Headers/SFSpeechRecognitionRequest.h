@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
  Don't create ``SFSpeechRecognitionRequest`` objects directly. Create an ``SFSpeechURLRecognitionRequest`` or ``SFSpeechAudioBufferRecognitionRequest`` object instead. Use the properties of this class to configure various aspects of your request object before you start the speech recognition process. For example, use the ``shouldReportPartialResults`` property to specify whether you want partial results or only the final result of speech recognition.
  */
-API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
+API_AVAILABLE(ios(10.0), macos(10.15))
+API_UNAVAILABLE(tvos)
 @interface SFSpeechRecognitionRequest : NSObject
 
 /**
@@ -61,16 +62,16 @@ API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
  > Note:
  > The request only honors this setting if the ``SFSpeechRecognizer/supportsOnDeviceRecognition`` (``SFSpeechRecognizer``) property is also `true`.
  */
-@property (nonatomic) BOOL requiresOnDeviceRecognition API_AVAILABLE(ios(13), macos(10.15), tvos(18));
+@property (nonatomic) BOOL requiresOnDeviceRecognition API_AVAILABLE(ios(13), macos(10.15));
 
 /**
  A Boolean value that indicates whether to add punctuation to speech recognition results.
 
  Set this property to `true` for the speech framework to automatically include punctuation in the recognition results. Punctuation includes a period or question mark at the end of a sentence, and a comma within a sentence.
  */
-@property (nonatomic) BOOL addsPunctuation API_AVAILABLE(ios(16), macos(13), tvos(18));
+@property (nonatomic) BOOL addsPunctuation API_AVAILABLE(ios(16), macos(13));
 
-@property (nonatomic, copy, nullable) SFSpeechLanguageModelConfiguration *customizedLanguageModel API_AVAILABLE(ios(17), macos(14), tvos(18));
+@property (nonatomic, copy, nullable) SFSpeechLanguageModelConfiguration *customizedLanguageModel API_AVAILABLE(ios(17), macos(14));
 
 @end
 
@@ -113,7 +114,8 @@ API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
  }
  ```
  */
-API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
+API_AVAILABLE(ios(10.0), macos(10.15))
+API_UNAVAILABLE(tvos)
 @interface SFSpeechURLRecognitionRequest : SFSpeechRecognitionRequest
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -141,7 +143,8 @@ API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
 
  For a complete example of how to use audio buffers with speech recognition, see [SpeakToMe: Using Speech Recognition with AVAudioEngine](https://developer.apple.com/library/archive/samplecode/SpeakToMe/Introduction/Intro.html#//apple_ref/doc/uid/TP40017110).
  */
-API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
+API_AVAILABLE(ios(10.0), macos(10.15))
+API_UNAVAILABLE(tvos)
 @interface SFSpeechAudioBufferRecognitionRequest : SFSpeechRecognitionRequest
 
 /**

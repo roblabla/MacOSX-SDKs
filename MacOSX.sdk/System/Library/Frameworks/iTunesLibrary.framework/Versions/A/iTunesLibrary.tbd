@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/iTunesLibrary.framework/Versions/A/iTunesLibrary'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '$ld$install_name$os10.10$/Library/Frameworks/iTunesLibrary.framework/iTunesLibrary', 
                        '$ld$install_name$os10.11$/Library/Frameworks/iTunesLibrary.framework/iTunesLibrary', 
                        '$ld$install_name$os10.12$/Library/Frameworks/iTunesLibrary.framework/iTunesLibrary', 

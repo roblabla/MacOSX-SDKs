@@ -42,6 +42,7 @@
 #include <sys/appleapiopts.h>
 
 #include <stdarg.h>
+#include <stdint.h>
 
 
 __BEGIN_DECLS
@@ -188,6 +189,7 @@ typedef enum {
 	CLUSTER_TYPE_SMP     = 0,
 	CLUSTER_TYPE_E       = 1,
 	CLUSTER_TYPE_P       = 2,
+	CLUSTER_TYPE_M       = 3,
 	MAX_CPU_TYPES,
 } cluster_type_t;
 
@@ -484,7 +486,7 @@ void ml_thread_policy(
 	unsigned policy_id,
 	unsigned policy_info);
 
-#define MACHINE_GROUP                                   0x00000001
+#define MACHINE_GROUP                           0x00000001
 #define MACHINE_NETWORK_GROUP                   0x10000000
 #define MACHINE_NETWORK_WORKLOOP                0x00000001
 #define MACHINE_NETWORK_NETISR                  0x00000002

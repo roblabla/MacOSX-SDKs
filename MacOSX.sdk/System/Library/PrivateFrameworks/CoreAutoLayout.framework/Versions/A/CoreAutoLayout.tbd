@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreAutoLayout.framework/Versions/A/CoreAutoLayout'
 current-version: 34
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$hide$os10.4$_OBJC_CLASS_$_NSLayoutConstraint', '$ld$hide$os10.4$_OBJC_METACLASS_$_NSLayoutConstraint', 
                        '$ld$hide$os10.5$_OBJC_CLASS_$_NSLayoutConstraint', '$ld$hide$os10.5$_OBJC_METACLASS_$_NSLayoutConstraint', 
                        '$ld$hide$os10.5$__NSDictionaryOfVariableBindings', '$ld$hide$os10.6$_OBJC_CLASS_$_NSLayoutConstraint', 

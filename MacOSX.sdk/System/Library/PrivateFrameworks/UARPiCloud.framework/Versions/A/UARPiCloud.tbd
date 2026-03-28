@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UARPiCloud.framework/Versions/A/UARPiCloud'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _InternalStorageCacheDirectoryPath, _InternalStorageDirectoryPath, 
                        _UARPiCloudVersionNumber, _UARPiCloudVersionString, _getCachedAccessories, 
                        _getEntryForKey, _getMultiValueHash, _getSuperBinaryVersionForAsset, 

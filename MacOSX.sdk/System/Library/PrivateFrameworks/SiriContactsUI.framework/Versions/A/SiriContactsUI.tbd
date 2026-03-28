@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriContactsUI.framework/Versions/A/SiriContactsUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14SiriContactsUI0B23FlowImageColorGeneratorO013makeThresholdE04from9thresholdSo7CIImageCSgAH_SftFZ', 
                        '_$s14SiriContactsUI0B23FlowImageColorGeneratorO014makeSubtractedE004baseE015imageToSubtractSo7CIImageCSgAH_AHtFZ', 
                        '_$s14SiriContactsUI0B23FlowImageColorGeneratorO016makeTransparencyE013fromThresholdSo7CIImageCSgAG_tFZ', 
@@ -68,6 +68,14 @@ exports:
                        '_$s14SiriContactsUI35GetContactAttributeSingleResultViewVMa', 
                        '_$s14SiriContactsUI35GetContactAttributeSingleResultViewVMn', 
                        '_$s14SiriContactsUI35GetContactAttributeSingleResultViewVN', 
+                       '_$s14SiriContactsUI38UnsupportedNoEmergencyContactFoundViewV05SwiftC00I0AAMc', 
+                       '_$s14SiriContactsUI38UnsupportedNoEmergencyContactFoundViewV4bodyQrvg', 
+                       '_$s14SiriContactsUI38UnsupportedNoEmergencyContactFoundViewV4bodyQrvpMV', 
+                       '_$s14SiriContactsUI38UnsupportedNoEmergencyContactFoundViewV4bodyQrvpQOMQ', 
+                       '_$s14SiriContactsUI38UnsupportedNoEmergencyContactFoundViewV5modelAC0aB6Common0defG12SnippetModelV_tcfC', 
+                       '_$s14SiriContactsUI38UnsupportedNoEmergencyContactFoundViewVMa', 
+                       '_$s14SiriContactsUI38UnsupportedNoEmergencyContactFoundViewVMn', 
+                       '_$s14SiriContactsUI38UnsupportedNoEmergencyContactFoundViewVN', 
                        '_$s14SiriContactsUI6LoggerO04siriB02osABVvgZ', '_$s14SiriContactsUI6LoggerO04siriB02osABVvpZMV', 
                        '_$s14SiriContactsUI6LoggerOMa', '_$s14SiriContactsUI6LoggerOMn', 
                        '_$s14SiriContactsUI6LoggerON', '_$s14SiriContactsUI8SignpostO04OpenD0V3endyyF', 

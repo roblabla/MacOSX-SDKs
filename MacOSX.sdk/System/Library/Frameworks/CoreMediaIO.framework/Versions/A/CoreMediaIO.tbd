@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreMediaIO.framework/Versions/A/CoreMediaIO'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CMIOAddAtExitListener, _CMIOAnalyticsGetPlugInInfo, _CMIOAnalyticsRegisterDevice, 
                        _CMIOAnalyticsSendStart, _CMIODeviceProcessAVCCommand, _CMIODeviceProcessRS422Command, 
                        _CMIODeviceStartStream, _CMIODeviceStopStream, _CMIOExtensionControlFromProperty, 
@@ -205,7 +203,7 @@ exports:
                        CMIOExtensionProvider, CMIOExtensionProviderProperties, CMIOExtensionProxy, 
                        CMIOExtensionScheduledOutput, CMIOExtensionStream, CMIOExtensionStreamCustomClockConfiguration, 
                        CMIOExtensionStreamFormat, CMIOExtensionStreamProperties ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CMIOStreamCaptureAsyncStillImage, _CMIOStreamCopyAndClearEnqueuedReactionEffects, 
                        _CMIOStreamEnqueueReactionEffect, _CMIOStreamRegisterAsyncStillCaptureCallback, 
                        _kCMIOAsyncStillImageOptionsKey_CompressedFormat, _kCMIOAsyncStillImageOptionsKey_FlashMode, 

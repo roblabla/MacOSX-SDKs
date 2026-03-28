@@ -1,10 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MIL.framework/Versions/A/MIL'
-current-version: 3510.2.1
-compatibility-version: 3510.2
+current-version: 3520.4.1
+compatibility-version: 3520.4
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIFN3MIL16ValidationResultERKNS_11IROperationEE, __ZTIFN3MIL4Fp16ES0_E, 
@@ -33,21 +32,16 @@ exports:
                        __ZTINSt3__110__function6__baseIFvRN3MIL11IROperationENS_10shared_ptrIKNS2_7IRValueEEEEEE, 
                        __ZTINSt3__110__function6__baseIFvRN3MIL9Transform12MatchContextENS2_8Matching9MatchViewEEEE, 
                        __ZTINSt3__110__function6__baseIFvRN3MIL9Transform18ProgramTransformerEEEE, 
-                       __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__110__function6__funcIPFN3MIL16ValidationResultERKNS2_11IROperationEENS_9allocatorIS8_EES7_EE, 
-                       __ZTINSt3__110__function6__funcIPFN3MIL4Fp16ES3_ENS_9allocatorIS5_EES4_EE, 
-                       __ZTINSt3__110__function6__funcIPFN3MIL4Fp16ES3_S3_ENS_9allocatorIS5_EES4_EE, 
-                       __ZTINSt3__110__function6__funcIPFffENS_9allocatorIS3_EES2_EE, 
-                       __ZTINSt3__110__function6__funcIPFfffENS_9allocatorIS3_EES2_EE, 
-                       __ZTINSt3__110__function6__funcIPFhN3MIL4Fp16ES3_ENS_9allocatorIS5_EES4_EE, 
-                       __ZTINSt3__110__function6__funcIPFhffENS_9allocatorIS3_EES2_EE, 
-                       __ZTINSt3__110__function6__funcIPFhhENS_9allocatorIS3_EES2_EE, 
-                       __ZTINSt3__110__function6__funcIPFhhhENS_9allocatorIS3_EES2_EE, 
-                       __ZTINSt3__110__function6__funcIPFhiiENS_9allocatorIS3_EES2_EE, 
-                       __ZTINSt3__110__function6__funcIPFiiENS_9allocatorIS3_EES2_EE, 
-                       __ZTINSt3__110__function6__funcIPFiiiENS_9allocatorIS3_EES2_EE, 
-                       __ZTINSt3__111__alternateIcEE, __ZTINSt3__111__end_stateIcEE, 
-                       __ZTINSt3__111__lookaheadIcNS_12regex_traitsIcEEEE, __ZTINSt3__111__match_anyIcEE, 
-                       __ZTINSt3__112__match_charIcEE, __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__110__function6__funcIPFN3MIL16ValidationResultERKNS2_11IROperationEES7_EE, 
+                       __ZTINSt3__110__function6__funcIPFN3MIL4Fp16ES3_ES4_EE, __ZTINSt3__110__function6__funcIPFN3MIL4Fp16ES3_S3_ES4_EE, 
+                       __ZTINSt3__110__function6__funcIPFffES2_EE, __ZTINSt3__110__function6__funcIPFfffES2_EE, 
+                       __ZTINSt3__110__function6__funcIPFhN3MIL4Fp16ES3_ES4_EE, __ZTINSt3__110__function6__funcIPFhffES2_EE, 
+                       __ZTINSt3__110__function6__funcIPFhhES2_EE, __ZTINSt3__110__function6__funcIPFhhhES2_EE, 
+                       __ZTINSt3__110__function6__funcIPFhiiES2_EE, __ZTINSt3__110__function6__funcIPFiiES2_EE, 
+                       __ZTINSt3__110__function6__funcIPFiiiES2_EE, __ZTINSt3__111__alternateIcEE, 
+                       __ZTINSt3__111__end_stateIcEE, __ZTINSt3__111__lookaheadIcNS_12regex_traitsIcEEEE, 
+                       __ZTINSt3__111__match_anyIcEE, __ZTINSt3__112__match_charIcEE, 
+                       __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__113__empty_stateIcEE, __ZTINSt3__113basic_fstreamIcNS_11char_traitsIcEEEE, 
                        __ZTINSt3__115__has_one_stateIcEE, __ZTINSt3__115__word_boundaryIcNS_12regex_traitsIcEEEE, 
                        __ZTINSt3__116__back_ref_icaseIcNS_12regex_traitsIcEEEE, __ZTINSt3__116__owns_one_stateIcEE, 
@@ -140,19 +134,13 @@ exports:
                        __ZTSNSt3__110__function6__baseIFvRN3MIL11IROperationENS_10shared_ptrIKNS2_7IRValueEEEEEE, 
                        __ZTSNSt3__110__function6__baseIFvRN3MIL9Transform12MatchContextENS2_8Matching9MatchViewEEEE, 
                        __ZTSNSt3__110__function6__baseIFvRN3MIL9Transform18ProgramTransformerEEEE, 
-                       __ZTSNSt3__110__function6__baseIFvvEEE, __ZTSNSt3__110__function6__funcIPFN3MIL16ValidationResultERKNS2_11IROperationEENS_9allocatorIS8_EES7_EE, 
-                       __ZTSNSt3__110__function6__funcIPFN3MIL4Fp16ES3_ENS_9allocatorIS5_EES4_EE, 
-                       __ZTSNSt3__110__function6__funcIPFN3MIL4Fp16ES3_S3_ENS_9allocatorIS5_EES4_EE, 
-                       __ZTSNSt3__110__function6__funcIPFffENS_9allocatorIS3_EES2_EE, 
-                       __ZTSNSt3__110__function6__funcIPFfffENS_9allocatorIS3_EES2_EE, 
-                       __ZTSNSt3__110__function6__funcIPFhN3MIL4Fp16ES3_ENS_9allocatorIS5_EES4_EE, 
-                       __ZTSNSt3__110__function6__funcIPFhffENS_9allocatorIS3_EES2_EE, 
-                       __ZTSNSt3__110__function6__funcIPFhhENS_9allocatorIS3_EES2_EE, 
-                       __ZTSNSt3__110__function6__funcIPFhhhENS_9allocatorIS3_EES2_EE, 
-                       __ZTSNSt3__110__function6__funcIPFhiiENS_9allocatorIS3_EES2_EE, 
-                       __ZTSNSt3__110__function6__funcIPFiiENS_9allocatorIS3_EES2_EE, 
-                       __ZTSNSt3__110__function6__funcIPFiiiENS_9allocatorIS3_EES2_EE, 
-                       __ZTSNSt3__110shared_ptrIN3MIL7Builder16OperationBuilderEE27__shared_ptr_default_deleteIS3_S3_EE, 
+                       __ZTSNSt3__110__function6__baseIFvvEEE, __ZTSNSt3__110__function6__funcIPFN3MIL16ValidationResultERKNS2_11IROperationEES7_EE, 
+                       __ZTSNSt3__110__function6__funcIPFN3MIL4Fp16ES3_ES4_EE, __ZTSNSt3__110__function6__funcIPFN3MIL4Fp16ES3_S3_ES4_EE, 
+                       __ZTSNSt3__110__function6__funcIPFffES2_EE, __ZTSNSt3__110__function6__funcIPFfffES2_EE, 
+                       __ZTSNSt3__110__function6__funcIPFhN3MIL4Fp16ES3_ES4_EE, __ZTSNSt3__110__function6__funcIPFhffES2_EE, 
+                       __ZTSNSt3__110__function6__funcIPFhhES2_EE, __ZTSNSt3__110__function6__funcIPFhhhES2_EE, 
+                       __ZTSNSt3__110__function6__funcIPFhiiES2_EE, __ZTSNSt3__110__function6__funcIPFiiES2_EE, 
+                       __ZTSNSt3__110__function6__funcIPFiiiES2_EE, __ZTSNSt3__110shared_ptrIN3MIL7Builder16OperationBuilderEE27__shared_ptr_default_deleteIS3_S3_EE, 
                        __ZTSNSt3__110shared_ptrINS_13__empty_stateIcEEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__110shared_ptrINS_6vectorIPKN3MIL11IRDimensionENS_9allocatorIS5_EEEEE27__shared_ptr_default_deleteIS8_S8_EE, 
                        __ZTSNSt3__110shared_ptrINS_6vectorIPKN3MIL11IRValueTypeENS_9allocatorIS5_EEEEE27__shared_ptr_default_deleteIS8_S8_EE, 
@@ -248,8 +236,7 @@ exports:
                        __ZTSPFN3MIL4Fp16ES0_E, __ZTSPFN3MIL4Fp16ES0_S0_E, __ZTSPFffE, 
                        __ZTSPFfffE, __ZTSPFhN3MIL4Fp16ES0_E, __ZTSPFhffE, __ZTSPFhhE, 
                        __ZTSPFhhhE, __ZTSPFhiiE, __ZTSPFiiE, __ZTSPFiiiE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN3MIL10Attributes11IOAliasInfo11TrySetAliasENSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES8_, 
                        __ZN3MIL10Attributes11IOAliasInfo14TryRemoveAliasENSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN3MIL10Attributes11IOAliasInfo4MakeERNS_10MILContextERKNS_10IRFunctionE, 

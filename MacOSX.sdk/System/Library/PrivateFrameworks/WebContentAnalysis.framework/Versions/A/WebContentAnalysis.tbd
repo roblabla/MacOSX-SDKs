@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WebContentAnalysis.framework/Versions/A/WebContentAnalysis'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ComposeDebugPage, _ComposeDebugPageSimple, _DecodeBase64, 
                        _DecodeBase64WithNewlines, _HolyInquisitionDebugPrint, _HolyInquisitionGetIPv4Proxy, 
                        _HolyInquisitionGetIPv6Proxy, _HolyInquisitionGetManagedUser, 

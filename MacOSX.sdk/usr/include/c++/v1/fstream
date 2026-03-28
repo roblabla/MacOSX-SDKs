@@ -226,7 +226,7 @@ _LIBCPP_EXPORTED_FROM_ABI void* __filebuf_windows_native_handle(FILE* __file) no
 #    endif
 
 template <class _CharT, class _Traits>
-class _LIBCPP_TEMPLATE_VIS basic_filebuf : public basic_streambuf<_CharT, _Traits> {
+class basic_filebuf : public basic_streambuf<_CharT, _Traits> {
 public:
   typedef _CharT char_type;
   typedef _Traits traits_type;
@@ -429,7 +429,7 @@ basic_filebuf<_CharT, _Traits>::basic_filebuf()
       __owns_ib_(false),
       __always_noconv_(false) {
   if (std::has_facet<codecvt<char_type, char, state_type> >(this->getloc())) {
-    __cv_            = &std::use_facet<codecvt<char_type, char, state_type> >(this->getloc());
+    __cv_            = std::addressof(std::use_facet<codecvt<char_type, char, state_type> >(this->getloc()));
     __always_noconv_ = __cv_->always_noconv();
   }
   setbuf(nullptr, 4096);
@@ -762,7 +762,7 @@ typename basic_filebuf<_CharT, _Traits>::int_type basic_filebuf<_CharT, _Traits>
   bool __initial = __read_mode();
   char_type __1buf;
   if (this->gptr() == nullptr)
-    this->setg(&__1buf, &__1buf + 1, &__1buf + 1);
+    this->setg(std::addressof(__1buf), std::addressof(__1buf) + 1, std::addressof(__1buf) + 1);
   const size_t __unget_sz = __initial ? 0 : std::min<size_t>((this->egptr() - this->eback()) / 2, 4);
   int_type __c            = traits_type::eof();
   if (this->gptr() == this->egptr()) {
@@ -806,7 +806,7 @@ typename basic_filebuf<_CharT, _Traits>::int_type basic_filebuf<_CharT, _Traits>
     }
   } else
     __c = traits_type::to_int_type(*this->gptr());
-  if (this->eback() == &__1buf)
+  if (this->eback() == std::addressof(__1buf))
     this->setg(nullptr, nullptr, nullptr);
   return __c;
 }
@@ -837,7 +837,7 @@ typename basic_filebuf<_CharT, _Traits>::int_type basic_filebuf<_CharT, _Traits>
   char_type* __epb_save = this->epptr();
   if (!traits_type::eq_int_type(__c, traits_type::eof())) {
     if (this->pptr() == nullptr)
-      this->setp(&__1buf, &__1buf + 1);
+      this->setp(std::addressof(__1buf), std::addressof(__1buf) + 1);
     *this->pptr() = traits_type::to_char_type(__c);
     this->pbump(1);
   }
@@ -1062,7 +1062,7 @@ int basic_filebuf<_CharT, _Traits>::sync() {
 template <class _CharT, class _Traits>
 void basic_filebuf<_CharT, _Traits>::imbue(const locale& __loc) {
   sync();
-  __cv_            = &std::use_facet<codecvt<char_type, char, state_type> >(__loc);
+  __cv_            = std::addressof(std::use_facet<codecvt<char_type, char, state_type> >(__loc));
   bool __old_anc   = __always_noconv_;
   __always_noconv_ = __cv_->always_noconv();
   if (__old_anc != __always_noconv_) {
@@ -1128,7 +1128,7 @@ void basic_filebuf<_CharT, _Traits>::__write_mode() {
 // basic_ifstream
 
 template <class _CharT, class _Traits>
-class _LIBCPP_TEMPLATE_VIS basic_ifstream : public basic_istream<_CharT, _Traits> {
+class basic_ifstream : public basic_istream<_CharT, _Traits> {
 public:
   typedef _CharT char_type;
   typedef _Traits traits_type;
@@ -1284,7 +1284,7 @@ inline void basic_ifstream<_CharT, _Traits>::close() {
 // basic_ofstream
 
 template <class _CharT, class _Traits>
-class _LIBCPP_TEMPLATE_VIS basic_ofstream : public basic_ostream<_CharT, _Traits> {
+class basic_ofstream : public basic_ostream<_CharT, _Traits> {
 public:
   typedef _CharT char_type;
   typedef _Traits traits_type;
@@ -1443,7 +1443,7 @@ inline void basic_ofstream<_CharT, _Traits>::close() {
 // basic_fstream
 
 template <class _CharT, class _Traits>
-class _LIBCPP_TEMPLATE_VIS basic_fstream : public basic_iostream<_CharT, _Traits> {
+class basic_fstream : public basic_iostream<_CharT, _Traits> {
 public:
   typedef _CharT char_type;
   typedef _Traits traits_type;

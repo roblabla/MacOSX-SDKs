@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SpeechTranslation.framework/Versions/A/SpeechTranslation'
-current-version: 355.5.2
+current-version: 365.8.2
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo16STTextProcessingC17SpeechTranslationE24stripDanglingPunctuation4fromS2S_tFZ', 
                        '_$sSo16STTextProcessingC17SpeechTranslationEABycfC', '_$sSo16STTextProcessingC17SpeechTranslationEABycfc', 
                        '_$sSo16STTextProcessingCMa', '_$sSo18STSpeechTranslatorC17SpeechTranslationE10translator_10didProduceySo021_LTStreamingUtteranceB0C_So01_H15SpeakableOutputCtF', 
@@ -16,6 +14,9 @@ exports:
                        '_$sSo18STSpeechTranslatorC17SpeechTranslationE10translator_27didProduceTranslatedOutputsySo021_LTStreamingUtteranceB0C_SaySo01_J6OutputCGtF', 
                        '_$sSo18STSpeechTranslatorC17SpeechTranslationE13configuration8delegateABSo0aB13ConfigurationC_So0aB8Delegate_ptcfC', 
                        '_$sSo18STSpeechTranslatorC17SpeechTranslationE13configuration8delegateABSo0aB13ConfigurationC_So0aB8Delegate_ptcfc', 
+                       '_$sSo18STSpeechTranslatorC17SpeechTranslationE13logIdentifier10Foundation4UUIDVSgvg', 
+                       '_$sSo18STSpeechTranslatorC17SpeechTranslationE13logIdentifier10Foundation4UUIDVSgvpMV', 
+                       '_$sSo18STSpeechTranslatorC17SpeechTranslationE13logIdentifier10Foundation4UUIDVSgvs', 
                        '_$sSo18STSpeechTranslatorC17SpeechTranslationE19translatorDidFinishyySo021_LTStreamingUtteranceB0CF', 
                        '_$sSo18STSpeechTranslatorC17SpeechTranslationE26preferredOutputAudioFormatSo07AVAudioH0CSgvg', 
                        '_$sSo18STSpeechTranslatorC17SpeechTranslationE26preferredOutputAudioFormatSo07AVAudioH0CSgvpMV', 

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Suggestions.framework/Versions/A/Suggestions'
 current-version: 333
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _GetQueryStringAndAttributesFromInput, _SGTAddressBookAccessAllowed, 
                        _SGTAppCopyDefaultValueKeys, _SGTAppGetDefaultValueForKey, 
                        _SGTCoreRecentsAccessAllowed, _SGTHumanDateRangeLastDay, _SGTHumanDateRangeLastMonth, 

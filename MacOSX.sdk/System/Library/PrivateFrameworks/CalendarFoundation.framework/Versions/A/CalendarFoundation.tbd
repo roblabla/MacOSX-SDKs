@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CalendarFoundation.framework/Versions/A/CalendarFoundation'
-current-version: 1603.2.1
+current-version: 1603.4.5
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s18CalendarFoundation0A12FeatureFlagsO05quickC6ToggleyA2CmFWC', 
                        '_$s18CalendarFoundation0A12FeatureFlagsO0cD00cD3KeyAAMc', 
                        '_$s18CalendarFoundation0A12FeatureFlagsO10appIntentsyA2CmFWC', 
@@ -259,6 +257,7 @@ exports:
                        EKMutableCalendarDate, EKSuggestionsServiceLogger, EKTTLEventTracker, 
                        EKTimeZone, StateData ]
     objc-ivars:      [ CalDefaultDictionary._defaultClass, CalDefaultDictionary._dict, 
-                       EKCalendarDate._calendar, EKCalendarDate._components, EKCalendarDate._date, 
-                       EKCalendarDate._dateCacheKey, EKCalendarDate._lock ]
+                       EKCalendarDate._americanCalendar, EKCalendarDate._calendar, 
+                       EKCalendarDate._components, EKCalendarDate._date, EKCalendarDate._dateCacheKey, 
+                       EKCalendarDate._lock ]
 ...

@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/kperf.framework/Versions/A/kperf'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _kpc_counterbuf_alloc, _kpc_counterbuf_free, _kpc_cpu_string, 
                        _kpc_force_all_ctrs_get, _kpc_force_all_ctrs_set, _kpc_get_actionid, 
                        _kpc_get_config, _kpc_get_config_count, _kpc_get_counter_count, 

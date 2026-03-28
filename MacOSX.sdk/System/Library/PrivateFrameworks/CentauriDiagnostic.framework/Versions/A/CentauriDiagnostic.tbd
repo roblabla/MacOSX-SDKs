@@ -1,0 +1,12 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ arm64e-macos ]
+install-name:    '/System/Library/PrivateFrameworks/CentauriDiagnostic.framework/Versions/A/CentauriDiagnostic'
+exports:
+  - targets:         [ arm64e-macos ]
+    symbols:         [ _CentauriDiagnosticVersionNumber, _CentauriDiagnosticVersionString, 
+                       _collectClientLogsWithSizeAndOverride, _collectSubsystemLogsForClient, 
+                       _isCentauriPlatform, _kCDFCollectionTimeLimitSeconds ]
+    objc-classes:    [ CDFAlphaDiagnostics, CDFBetaDiagnostics, CDFCollectionItem, 
+                       CDFControlDiagnostics, CDFSubsystemDiagnostics ]
+...

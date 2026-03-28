@@ -1,7 +1,7 @@
 /*
     NSFetchRequestExpression.h
     Core Data
-    Copyright (c) 2006-2025, Apple Inc.
+    Copyright (c) 2006-2026, Apple Inc.
     All rights reserved.
 */
 

@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/EventKitUI.framework/Versions/A/EventKitUI'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s10EventKitUI18EKEventViewSceneIDSSvg', '_$s10EventKitUI19EKRemoteUIUtilitiesC39combineHostWithRemoteObjectIDChangeMaps010hostTempToinJ5IDMap06remotea5Storeno9PermanentjP0SDySo10EKObjectIDCAHGAI_AItFZ', 
                        '_$s10EventKitUI19EKRemoteUIUtilitiesCACycfC', '_$s10EventKitUI19EKRemoteUIUtilitiesCACycfc', 
                        '_$s10EventKitUI19EKRemoteUIUtilitiesCMa', '_$s10EventKitUI19EKRemoteUIUtilitiesCMn', 
@@ -476,14 +476,15 @@ exports:
                        _EKUIDebugPreferences_Notification_ShowReportAProblemNotificationButton, 
                        _EKUIDescriptorForRequiredKeysForLabeledDisplayString, _EKUIDeviceCanTransform, 
                        _EKUIEventDetailsContext_AllowsCalendarPreview, _EKUIEventDetailsContext_AllowsConferenceItem, 
-                       _EKUIEventDetailsContext_CalendarPreviewIsInlineDayView, _EKUIEventDetailsContext_MinimalMode, 
-                       _EKUIEventDetailsContext_ModelKey, _EKUIEventDetailsContext_Response, 
-                       _EKUIEventDetailsContext_ShowsDoneButton, _EKUIEventDetailsFromTravelAdvisoryContextKey, 
-                       _EKUIEventNotificationRepresentationContextKey, _EKUIGoldenRatioColumnWidthMajor, 
-                       _EKUIGoldenRatioColumnWidthMinor, _EKUIGoldenRatioPhi, _EKUIHasFallbackSizingContext, 
-                       _EKUIHeightForWindowSizeParadigm, _EKUIHeightSizeClassForViewHierarchy, 
-                       _EKUIInterfaceOrientationForViewHierarchy, _EKUIIsCompactThickWidthRegularTallHeight, 
-                       _EKUIIsExtended, _EKUIIsSizeExtended, _EKUILabeledDisplayStringForContact, 
+                       _EKUIEventDetailsContext_AppIntentTriggered, _EKUIEventDetailsContext_CalendarPreviewIsInlineDayView, 
+                       _EKUIEventDetailsContext_MinimalMode, _EKUIEventDetailsContext_ModelKey, 
+                       _EKUIEventDetailsContext_Response, _EKUIEventDetailsContext_ShowsDoneButton, 
+                       _EKUIEventDetailsFromTravelAdvisoryContextKey, _EKUIEventNotificationRepresentationContextKey, 
+                       _EKUIGoldenRatioColumnWidthMajor, _EKUIGoldenRatioColumnWidthMinor, 
+                       _EKUIGoldenRatioPhi, _EKUIHasFallbackSizingContext, _EKUIHeightForWindowSizeParadigm, 
+                       _EKUIHeightSizeClassForViewHierarchy, _EKUIInterfaceOrientationForViewHierarchy, 
+                       _EKUIIsCompactThickWidthRegularTallHeight, _EKUIIsExtended, 
+                       _EKUIIsSizeExtended, _EKUILabeledDisplayStringForContact, 
                        _EKUILabeledDisplayStringForContactWithStore, _EKUILargeTextRoundedRectCornerRadius, 
                        _EKUILayoutMarginsForFullscreenLayoutRectWithSize, _EKUILayoutMarginsForGoldenLayoutMajorColumnRectWithSize, 
                        _EKUILayoutMarginsForGoldenLayoutMinorColumnRectWithSize, 

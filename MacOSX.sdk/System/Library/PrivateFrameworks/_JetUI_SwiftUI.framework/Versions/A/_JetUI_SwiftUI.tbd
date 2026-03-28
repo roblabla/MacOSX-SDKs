@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/_JetUI_SwiftUI.framework/Versions/A/_JetUI_SwiftUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s012_JetUI_SwiftB00A17ViewRepresentableMp', '_$s012_JetUI_SwiftB00A17ViewRepresentableP04makeD07context0D4TypeQz0cB006NSViewE7ContextVyxG_tFTj', 
                        '_$s012_JetUI_SwiftB00A17ViewRepresentableP04makeD07context0D4TypeQz0cB006NSViewE7ContextVyxG_tFTq', 
                        '_$s012_JetUI_SwiftB00A17ViewRepresentableP06updateD0_7contexty0D4TypeQz_0cB006NSViewE7ContextVyxGtFTj', 

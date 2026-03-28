@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AXRuntime.framework/Versions/A/AXRuntime'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AXAPIEnabled, _AXArrayForString, _AXAttributeAllowsRequeryWhenRemoteElementFails, 
                        _AXAttributeForXCAttribute, _AXAuditClippingTest, _AXAuditContrastDetectionTest, 
                        _AXAuditDynamicTextSupportTest, _AXAuditElementLabelUsesImageNameTest, 
@@ -126,14 +124,15 @@ exports:
                        __AXCreateAXUIElementWithElementUsingLocalRemoteElement, __AXElementForAXUIElementUniqueId, 
                        __AXGetPortFromCache, __AXIgnoreNextNotification, __AXInitializeElementCache, 
                        __AXInitializeObserverAccess, __AXIsInElementCache, __AXIsPidAssociated, 
-                       __AXIsPidAssociatedWithDisplayType, __AXKeyboardAppPid, __AXMIGAddNotification, 
-                       __AXMIGBroadcastNotification, __AXMIGCopyAttributeValue, __AXMIGCopyElementAtPosition, 
-                       __AXMIGCopyMultipleAttributeValues, __AXMIGCopyParameterizedAttributeValue, 
-                       __AXMIGPerformAction, __AXMIGPerformActionWithValue, __AXMIGPostNotification, 
-                       __AXMIGRemoveNotification, __AXMIGSetAttributeValue, __AXManagePidState, 
-                       __AXNextIgnoredNotification, __AXNotificationObserverClientDied, 
-                       __AXObserverCreateInternal, __AXPidFromAuditToken, __AXPidIsAssociatedInternal, 
-                       __AXPidIsSuspended, __AXPidIsSuspendedWithDisplayType, __AXPutPidOnTimeoutProbation, 
+                       __AXIsPidAssociatedWithDisplayType, __AXIsWebTouchContainerType, 
+                       __AXKeyboardAppPid, __AXMIGAddNotification, __AXMIGBroadcastNotification, 
+                       __AXMIGCopyAttributeValue, __AXMIGCopyElementAtPosition, __AXMIGCopyMultipleAttributeValues, 
+                       __AXMIGCopyParameterizedAttributeValue, __AXMIGPerformAction, 
+                       __AXMIGPerformActionWithValue, __AXMIGPostNotification, __AXMIGRemoveNotification, 
+                       __AXMIGSetAttributeValue, __AXManagePidState, __AXNextIgnoredNotification, 
+                       __AXNotificationObserverClientDied, __AXObserverCreateInternal, 
+                       __AXPidFromAuditToken, __AXPidIsAssociatedInternal, __AXPidIsSuspended, 
+                       __AXPidIsSuspendedWithDisplayType, __AXPutPidOnTimeoutProbation, 
                        __AXReleasePortFromCache, __AXRemoveNotificationObserver, 
                        __AXRemoveObserverForPort, __AXRequestingClientForSelfMachMessage, 
                        __AXResetRequestingClient, __AXRetrieveExistingAXUIElementWithElement, 

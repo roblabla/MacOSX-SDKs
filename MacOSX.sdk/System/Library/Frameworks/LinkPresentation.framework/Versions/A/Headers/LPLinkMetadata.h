@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// If you already have an ``LPLinkMetadata`` object for a URL, pass it to the
 /// share sheet to present the preview instantly, without fetching data over the
 /// network. In your implementation of
-/// <doc://com.apple.documentation/documentation/uikit/uiactivityitemsource/3144571-activityviewcontrollerlinkmetada>,
+/// <doc://com.apple.documentation/documentation/UIKit/UIActivityItemSource/activityViewControllerLinkMetadata(_:)>,
 /// return the metadata object.
 ///
 /// ```swift
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// If the user chooses to share to Messages, the same metadata passes directly
 /// through, providing a smooth and seamless experience with no unnecessary
 /// loading.
-LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0))
+LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0), visionos(1.0), tvos(13.0), watchos(9.0))
 @interface LPLinkMetadata : NSObject <NSCopying, NSSecureCoding>
 
 /// The original URL of the metadata request.

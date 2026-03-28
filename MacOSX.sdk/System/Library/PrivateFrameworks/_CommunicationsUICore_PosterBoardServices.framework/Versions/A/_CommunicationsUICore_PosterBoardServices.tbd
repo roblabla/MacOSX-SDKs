@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/_CommunicationsUICore_PosterBoardServices.framework/Versions/A/_CommunicationsUICore_PosterBoardServices'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s41_CommunicationsUICore_PosterBoardServices0C11DataServiceC03getC8TextFont6configSo6UIFontCSgSo22PRSPosterConfigurationC_tF', 
                        '_$s41_CommunicationsUICore_PosterBoardServices0C11DataServiceC03getC9TextColor6configSo7UIColorCSgSo22PRSPosterConfigurationC_tF', 
                        '_$s41_CommunicationsUICore_PosterBoardServices0C11DataServiceC10posterType3forAA0cI0OSgAA0C4SlotO_tF', 
@@ -56,6 +56,7 @@ exports:
                        '_$s41_CommunicationsUICore_PosterBoardServices0C14ViewControllerC14occlusionRectsSDySSSo6CGRectVGvg', 
                        '_$s41_CommunicationsUICore_PosterBoardServices0C14ViewControllerC14occlusionRectsSDySSSo6CGRectVGvpMV', 
                        '_$s41_CommunicationsUICore_PosterBoardServices0C14ViewControllerC14occlusionRectsSDySSSo6CGRectVGvs', 
+                       '_$s41_CommunicationsUICore_PosterBoardServices0C14ViewControllerC18updateDimmingLayer15customGradientsySayAA0iF0C14GradientValuesVG_tF', 
                        '_$s41_CommunicationsUICore_PosterBoardServices0C14ViewControllerC18viewWillTransition2to4withySo6CGSizeV_So06UIViewgJ11Coordinator_ptF', 
                        '_$s41_CommunicationsUICore_PosterBoardServices0C14ViewControllerC21viewDidLayoutSubviewsyyF', 
                        '_$s41_CommunicationsUICore_PosterBoardServices0C14ViewControllerC25updateCallerNameAndStatus5modelyAC0cL9TextModelC_tF', 
@@ -123,9 +124,11 @@ exports:
                        '_$s41_CommunicationsUICore_PosterBoardServices0C5ErrorOs0F0AAMc', 
                        '_$s41_CommunicationsUICore_PosterBoardServices11DimmingViewC10layerClassyXlXpvgZ', 
                        '_$s41_CommunicationsUICore_PosterBoardServices11DimmingViewC14GradientValuesV10startPoint03endK06colorsAESo7CGPointV_AJSaySo7UIColorCGtcfC', 
+                       '_$s41_CommunicationsUICore_PosterBoardServices11DimmingViewC14GradientValuesV2eeoiySbAE_AEtFZ', 
                        '_$s41_CommunicationsUICore_PosterBoardServices11DimmingViewC14GradientValuesVMa', 
                        '_$s41_CommunicationsUICore_PosterBoardServices11DimmingViewC14GradientValuesVMn', 
                        '_$s41_CommunicationsUICore_PosterBoardServices11DimmingViewC14GradientValuesVN', 
+                       '_$s41_CommunicationsUICore_PosterBoardServices11DimmingViewC14GradientValuesVSQAAMc', 
                        '_$s41_CommunicationsUICore_PosterBoardServices11DimmingViewC14layoutSubviewsyyF', 
                        '_$s41_CommunicationsUICore_PosterBoardServices11DimmingViewC15updateGradients4withySayAC14GradientValuesVG_tF', 
                        '_$s41_CommunicationsUICore_PosterBoardServices11DimmingViewC6valuesACSayAC14GradientValuesVG_tcfC', 
@@ -135,6 +138,19 @@ exports:
                        '_$s41_CommunicationsUICore_PosterBoardServices11DimmingViewCMo', 
                        '_$s41_CommunicationsUICore_PosterBoardServices11DimmingViewCN', 
                        '_$s41_CommunicationsUICore_PosterBoardServices11DimmingViewCfD', 
+                       '_$s41_CommunicationsUICore_PosterBoardServices24DimmingViewRepresentableV10makeUIView7contextAA0fG0C7SwiftUI0jH7ContextVyACG_tF', 
+                       '_$s41_CommunicationsUICore_PosterBoardServices24DimmingViewRepresentableV12updateUIView_7contextyAA0fG0C_7SwiftUI0jH7ContextVyACGtF', 
+                       '_$s41_CommunicationsUICore_PosterBoardServices24DimmingViewRepresentableV14gradientValuesACSayAA0fG0C08GradientJ0VG_tcfC', 
+                       '_$s41_CommunicationsUICore_PosterBoardServices24DimmingViewRepresentableV7SwiftUI06UIViewH0AAMc', 
+                       '_$s41_CommunicationsUICore_PosterBoardServices24DimmingViewRepresentableV7SwiftUI0G0AAMc', 
+                       '_$s41_CommunicationsUICore_PosterBoardServices24DimmingViewRepresentableVACycfC', 
+                       '_$s41_CommunicationsUICore_PosterBoardServices24DimmingViewRepresentableVMa', 
+                       '_$s41_CommunicationsUICore_PosterBoardServices24DimmingViewRepresentableVMn', 
+                       '_$s41_CommunicationsUICore_PosterBoardServices24DimmingViewRepresentableVN', 
+                       '_$s41_CommunicationsUICore_PosterBoardServices25DimmingLayerManagingSwiftMp', 
+                       '_$s41_CommunicationsUICore_PosterBoardServices25DimmingLayerManagingSwiftP06updateF20AreaWithCustomValues9gradientsySayAA0F4ViewC08GradientN0VG_tFTj', 
+                       '_$s41_CommunicationsUICore_PosterBoardServices25DimmingLayerManagingSwiftP06updateF20AreaWithCustomValues9gradientsySayAA0F4ViewC08GradientN0VG_tFTq', 
+                       '_$s41_CommunicationsUICore_PosterBoardServices25DimmingLayerManagingSwiftTL', 
                        __CommunicationsUICore_PosterBoardServicesVersionNumber, __CommunicationsUICore_PosterBoardServicesVersionString ]
     objc-classes:    [ _TtC41_CommunicationsUICore_PosterBoardServices11DimmingView, 
                        _TtC41_CommunicationsUICore_PosterBoardServices20PosterViewController, 

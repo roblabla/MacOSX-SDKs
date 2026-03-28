@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WebBookmarks.framework/Versions/A/WebBookmarks'
-current-version: 623.1.14
+current-version: 624.1.16
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _BookmarksBarSpecialID, _BookmarksFrequentlyVisitedSitesSpecialID, 
                        _BookmarksMenuSpecialID, _BookmarksNotificationBookmarkIdentifierKey, 
                        _BookmarksReadingListSpecialID, _BookmarksRootID, _BookmarksWebFilterAllowedSitesSpecialID, 
@@ -65,24 +65,25 @@ exports:
                        _kWebBookmarksEnableImportedExtensionMessageName, _kWebBookmarksEnabledKey, 
                        _kWebBookmarksExportBookmarksMessageName, _kWebBookmarksExportBookmarksSandboxExtensionKey, 
                        _kWebBookmarksExportBookmarksURLKey, _kWebBookmarksExportHistoryMessageName, 
-                       _kWebBookmarksExtensionEnabledKey, _kWebBookmarksExtensionIdentifiersKey, 
-                       _kWebBookmarksFinishedImportingCreditCardsMessageName, _kWebBookmarksFinishedImportingExtensionsMessageName, 
-                       _kWebBookmarksGetExtensionEnabledState, _kWebBookmarksGetNumberOfHistorySitesToBeExportedMessageName, 
+                       _kWebBookmarksExportReadingListMessageName, _kWebBookmarksExportReadingListSandboxExtensionKey, 
+                       _kWebBookmarksExportReadingListURLKey, _kWebBookmarksExtensionEnabledKey, 
+                       _kWebBookmarksExtensionIdentifiersKey, _kWebBookmarksFinishedImportingCreditCardsMessageName, 
+                       _kWebBookmarksFinishedImportingExtensionsMessageName, _kWebBookmarksGetExtensionEnabledState, 
+                       _kWebBookmarksGetNumberOfHistorySitesToBeExportedMessageName, 
                        _kWebBookmarksGetSafariDataUsageSummaryMessageName, _kWebBookmarksGetSafariWebDataUsageMessageName, 
                        _kWebBookmarksHistoryExportSandboxExtensionKey, _kWebBookmarksHistoryExportURLKey, 
                        _kWebBookmarksImportBookmarksFileDescriptorKey, _kWebBookmarksImportBookmarksItemsCountKey, 
-                       _kWebBookmarksImportBookmarksMessageName, _kWebBookmarksImportBookmarksSuggestedNameKey, 
-                       _kWebBookmarksImportChromeExtensionsFileDescriptorKey, _kWebBookmarksImportChromeExtensionsMessageName, 
-                       _kWebBookmarksImportChromeHistoryAgeLimitKey, _kWebBookmarksImportChromeHistoryFileDescriptorKey, 
-                       _kWebBookmarksImportChromeHistoryItemsCountKey, _kWebBookmarksImportChromeHistoryMessageName, 
-                       _kWebBookmarksImportCreditCardsFileDescriptorKey, _kWebBookmarksImportCreditCardsMessageName, 
-                       _kWebBookmarksImportExtensionsFileDescriptorKey, _kWebBookmarksImportExtensionsMessageName, 
-                       _kWebBookmarksImportHistoryAgeLimitKey, _kWebBookmarksImportHistoryFileDescriptorKey, 
-                       _kWebBookmarksImportHistoryItemsCountKey, _kWebBookmarksImportHistoryMessageName, 
-                       _kWebBookmarksImportSandboxExtensionsKey, _kWebBookmarksImportURLsKey, 
-                       _kWebBookmarksImportURLsResultKey, _kWebBookmarksItemKey, 
-                       _kWebBookmarksNoExtensionFoundKey, _kWebBookmarksNumberOfHistorySitesToBeExportedKey, 
-                       _kWebBookmarksNumberOfHistorySitesToBeExportedProfileIdentifiersKey, 
+                       _kWebBookmarksImportBookmarksMessageName, _kWebBookmarksImportChromeExtensionsFileDescriptorKey, 
+                       _kWebBookmarksImportChromeExtensionsMessageName, _kWebBookmarksImportChromeHistoryAgeLimitKey, 
+                       _kWebBookmarksImportChromeHistoryFileDescriptorKey, _kWebBookmarksImportChromeHistoryItemsCountKey, 
+                       _kWebBookmarksImportChromeHistoryMessageName, _kWebBookmarksImportCreditCardsFileDescriptorKey, 
+                       _kWebBookmarksImportCreditCardsMessageName, _kWebBookmarksImportExtensionsFileDescriptorKey, 
+                       _kWebBookmarksImportExtensionsMessageName, _kWebBookmarksImportHistoryAgeLimitKey, 
+                       _kWebBookmarksImportHistoryFileDescriptorKey, _kWebBookmarksImportHistoryItemsCountKey, 
+                       _kWebBookmarksImportHistoryMessageName, _kWebBookmarksImportSandboxExtensionsKey, 
+                       _kWebBookmarksImportURLsKey, _kWebBookmarksImportURLsResultKey, 
+                       _kWebBookmarksItemKey, _kWebBookmarksNoExtensionFoundKey, 
+                       _kWebBookmarksNumberOfHistorySitesToBeExportedKey, _kWebBookmarksNumberOfHistorySitesToBeExportedProfileIdentifiersKey, 
                        _kWebBookmarksOpenSafariExportSettings, _kWebBookmarksOpenSafariWebExtensionsSettings, 
                        _kWebBookmarksPreviewTextKey, _kWebBookmarksProgressKey, _kWebBookmarksSFSafariSettingsExceededRateLimitKey, 
                        _kWebBookmarksSFSafariSettingsFailedKey, _kWebBookmarksSFSafariSettingsMissingEntitlementKey, 

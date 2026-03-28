@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MatterSupport.framework/Versions/A/MatterSupport'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s13MatterSupport0A16AddDeviceRequestV04showD8CriteriaAC0dG0OvM', 
                        '_$s13MatterSupport0A16AddDeviceRequestV04showD8CriteriaAC0dG0Ovg', 
                        '_$s13MatterSupport0A16AddDeviceRequestV04showD8CriteriaAC0dG0OvpMV', 
@@ -267,15 +265,14 @@ exports:
                        _MTSDevicePairingAppleVendorID, _MTSDevicePairingSystemCommissionerVendorID, 
                        _MTSErrorDomain, _MTSXPCEntitlementNameAllowSetupPayload, 
                        _MTSXPCEntitlementNameDevicePairing, _MTSXPCEntitlementNamePrivateHomeKit, 
-                       _MTSXPCEntitlementNameThreadCredentials, _MTSXPCMachServiceName ]
+                       _MTSXPCMachServiceName ]
     objc-classes:    [ MTSAuthorization, MTSDeviceCredential, MTSDevicePairing, MTSDevicePairingEcosystem, 
                        MTSDevicePairingFabric, MTSDevicePairingManager, MTSDevicePairingVendor, 
                        MTSDeviceSetupDevicePredicate, MTSDeviceSetupExtensionMessenger, 
                        MTSDeviceSetupHome, MTSDeviceSetupRequest, MTSDeviceSetupRequestPairingDescription, 
                        MTSDeviceSetupRoom, MTSDeviceSetupTopology, MTSKeyValueStore, 
-                       MTSNetworkCredentialManager, MTSSystemCommissionerPairing, 
-                       MTSSystemCommissionerPairingManager, MTSThreadNetworkAssociation, 
-                       MTSThreadNetworkCredential, MTSThreadScanResult, MTSWiFiNetworkAssociation, 
+                       MTSSystemCommissionerPairing, MTSSystemCommissionerPairingManager, 
+                       MTSThreadNetworkAssociation, MTSThreadScanResult, MTSWiFiNetworkAssociation, 
                        MTSWiFiScanResult, MTSXPCClientProxy, MTSXPCConnection, MTSXPCServer, 
                        _TtC13MatterSupport38MatterAddDeviceExtensionRequestHandler ]
 ...

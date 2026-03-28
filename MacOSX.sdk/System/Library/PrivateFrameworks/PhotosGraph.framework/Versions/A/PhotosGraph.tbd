@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosGraph.framework/Versions/A/PhotosGraph'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ PhotoAnalysis, PhotosTests, graphctl ]
 exports:
   - targets:         [ x86_64-macos ]
@@ -13,7 +13,7 @@ exports:
                        __ZTSNSt3__114default_deleteIN4E5RT12BufferObjectEEE, __ZTSNSt3__114default_deleteIN4E5RT24ExecutionStreamOperationEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN4E5RT12BufferObjectENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN4E5RT24ExecutionStreamOperationENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10EntityType11PhotosGraph40ImportantEntitiesEngineContainerProtocolPTl', 
                        '_$s10Foundation4DateV11PhotosGraphE15dayTimeIntervalSdvgZ', 
                        '_$s10Foundation4DateV11PhotosGraphE15dayTimeIntervalSdvpZMV', 
@@ -980,6 +980,7 @@ exports:
                        '_$s11PhotosGraph12ShazamClientV023dateOfEarliestAvailableC4Data10Foundation4DateVvgZ', 
                        '_$s11PhotosGraph12ShazamClientV023dateOfEarliestAvailableC4Data10Foundation4DateVvpZMV', 
                        '_$s11PhotosGraph12ShazamClientV17fetchPopularMusic2at4date17completionHandlerySo10CLLocationC_10Foundation4DateVys6ResultOyShySSGAC05FetchfG5ErrorOGctFZ', 
+                       '_$s11PhotosGraph12ShazamClientV20shouldTreatAsFailure5errorSbs5Error_pSg_tFZ', 
                        '_$s11PhotosGraph12ShazamClientV22FetchPopularMusicErrorO17failedRegionQueryyAEs0H0_pSg_tcAEmFWC', 
                        '_$s11PhotosGraph12ShazamClientV22FetchPopularMusicErrorO18failedClusterQueryyAEs0H0_pSg_tcAEmFWC', 
                        '_$s11PhotosGraph12ShazamClientV22FetchPopularMusicErrorOMa', 
@@ -4645,8 +4646,7 @@ exports:
                        _PGCityscapeWallpaperSuggesterFilteringContextMinimumCropScore, 
                        _PGCityscapeWallpaperSuggesterFilteringContextMinimumWallpaperScore, 
                        _PGCityscapeWallpaperSuggesterFilteringContextTimeIntervalForCandidateDeduping, 
-                       _PGConsolidatedAddressExpansionTimeInterval, _PGCurationAlgorithmVersionNotSet, 
-                       _PGCurationManagerDefaultLocationAddressLevelMaximumDistance, 
+                       _PGCurationAlgorithmVersionNotSet, _PGCurationManagerDefaultLocationAddressLevelMaximumDistance, 
                        _PGCurationManagerDefaultLocationAreaLevelMaximumDistance, 
                        _PGCurationManagerDefaultLocationCityLevelMaximumDistance, 
                        _PGCurationOptionsAbsoluteMinimumNumberOfAssets, _PGCurationOptionsAggregationMinimumNumberOfAssets, 

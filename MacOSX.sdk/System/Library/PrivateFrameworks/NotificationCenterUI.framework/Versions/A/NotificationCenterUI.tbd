@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NotificationCenterUI.framework/Versions/A/NotificationCenterUI'
-current-version: 1553.2.7
+current-version: 1553.4.18
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16EyeCandyGraphics23MaterialLayerControllerV05buildE4Tree5layer8material5style9groupName16wallpaperTintingSo010CABackdropE0CSgSo7CALayerC_AC0D0OAC5StyleOSSSgSbtFZ', 
                        '_$s16EyeCandyGraphics23MaterialLayerControllerV0D0O2eeoiySbAE_AEtFZ', 
                        '_$s16EyeCandyGraphics23MaterialLayerControllerV0D0O4hash4intoys6HasherVz_tF', 

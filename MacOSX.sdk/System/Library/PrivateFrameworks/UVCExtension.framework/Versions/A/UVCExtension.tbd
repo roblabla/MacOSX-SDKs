@@ -1,14 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UVCExtension.framework/Versions/A/UVCExtension'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _CMIOExtensionPropertyCenterStageEnabled, _CMIOExtensionPropertyStreamCenterStageFramingMode, 
-                       _CMIOExtensionPropertyStreamCenterStageRectOfInterest, _CMIOExtensionPropertyStreamDeviceHasUltraWideCamera, 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ _CMIOExtensionPropertyStreamCenterStageActive, _CMIOExtensionPropertyStreamCenterStageEnabled, 
+                       _CMIOExtensionPropertyStreamCenterStageFramingMode, _CMIOExtensionPropertyStreamCenterStageRectOfInterest, 
+                       _CMIOExtensionPropertyStreamDeviceHasUltraWideCamera, _CMIOExtensionPropertyStreamForceEnableCenterStageAllowed, 
+                       _CMIOExtensionPropertyStreamForceEnableCenterStageClientsData, 
                        _CMIOExtensionPropertyStreamManualFramingDeviceType, _CMIOExtensionPropertyStreamManualFramingSupported, 
-                       _CMIOExtensionPropertyStreamPanWithTranslation, _CMIOExtensionPropertyStreamStartPanningAtPoint, 
-                       _CMIOExtensionPropertyStreamZoom, _CMIOExtensionPropertyStreamZoomFactorConstantsByManualFramingDeviceType, 
+                       _CMIOExtensionPropertyStreamPanWithTranslation, _CMIOExtensionPropertyStreamRestoreForceEnableCenterStageClientsStatesCompleted, 
+                       _CMIOExtensionPropertyStreamStartPanningAtPoint, _CMIOExtensionPropertyStreamZoom, 
+                       _CMIOExtensionPropertyStreamZoomFactorConstantsByManualFramingDeviceType, 
                        _ManualFramingZoomFactorConstantsKey_DefaultValue, _ManualFramingZoomFactorConstantsKey_MaxValue, 
                        _ManualFramingZoomFactorConstantsKey_MinValue, _UVCExtensionLog, 
                        _UVCExtensionSMCreateTransitionsFromStateToDestinationOnEvents, 
@@ -42,8 +45,10 @@ exports:
                        _validSMEvent ]
     objc-classes:    [ UVCExtensionAnalytics, UVCExtensionAnalyticsAggregateEvent, 
                        UVCExtensionAnalyticsEvent, UVCExtensionAnalyticsHistogramEvent, 
-                       UVCExtensionAppleDevice, UVCExtensionAppleDisplayDevice, UVCExtensionAppleDisplayStream, 
-                       UVCExtensionAppleStream, UVCExtensionDevice, UVCExtensionProvider, 
-                       UVCExtensionState, UVCExtensionStateMachine, UVCExtensionStateMachineEvent, 
-                       UVCExtensionStateTransition, UVCExtensionStream ]
+                       UVCExtensionAppleDevice, UVCExtensionAppleDisplayDeskViewDevice, 
+                       UVCExtensionAppleDisplayDeskViewStream, UVCExtensionAppleDisplayDevice, 
+                       UVCExtensionAppleDisplayStream, UVCExtensionAppleStream, UVCExtensionDevice, 
+                       UVCExtensionProvider, UVCExtensionState, UVCExtensionStateMachine, 
+                       UVCExtensionStateMachineEvent, UVCExtensionStateTransition, 
+                       UVCExtensionStream ]
 ...

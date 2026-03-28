@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HearingModeSettingsUIMacOS.framework/Versions/A/HearingModeSettingsUIMacOS'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s26HearingModeSettingsUIMacOS018macOSHeadphoneViewA6AssistV3for8hpDeviceAC16HeadphoneManager0A6RecordC_AF0mL0CtcfC', 
                        '_$s26HearingModeSettingsUIMacOS018macOSHeadphoneViewA6AssistV4bodyQrvg', 
                        '_$s26HearingModeSettingsUIMacOS018macOSHeadphoneViewA6AssistV4bodyQrvpMV', 
@@ -135,6 +135,15 @@ exports:
                        '_$s26HearingModeSettingsUIMacOS25EnrollmentAnalyticManagerC0F6ResultOSHAAMc', 
                        '_$s26HearingModeSettingsUIMacOS25EnrollmentAnalyticManagerC0F6ResultOSQAAMc', 
                        '_$s26HearingModeSettingsUIMacOS25EnrollmentAnalyticManagerC0F6ResultOSYAAMc', 
+                       '_$s26HearingModeSettingsUIMacOS25EnrollmentAnalyticManagerC0F7VersionO8rawValueAESgSi_tcfC', 
+                       '_$s26HearingModeSettingsUIMacOS25EnrollmentAnalyticManagerC0F7VersionO8rawValueSivg', 
+                       '_$s26HearingModeSettingsUIMacOS25EnrollmentAnalyticManagerC0F7VersionO8rawValueSivpMV', 
+                       '_$s26HearingModeSettingsUIMacOS25EnrollmentAnalyticManagerC0F7VersionOMa', 
+                       '_$s26HearingModeSettingsUIMacOS25EnrollmentAnalyticManagerC0F7VersionOMn', 
+                       '_$s26HearingModeSettingsUIMacOS25EnrollmentAnalyticManagerC0F7VersionON', 
+                       '_$s26HearingModeSettingsUIMacOS25EnrollmentAnalyticManagerC0F7VersionOSHAAMc', 
+                       '_$s26HearingModeSettingsUIMacOS25EnrollmentAnalyticManagerC0F7VersionOSQAAMc', 
+                       '_$s26HearingModeSettingsUIMacOS25EnrollmentAnalyticManagerC0F7VersionOSYAAMc', 
                        '_$s26HearingModeSettingsUIMacOS25EnrollmentAnalyticManagerC10HAEventKeyO8rawValueAESgSi_tcfC', 
                        '_$s26HearingModeSettingsUIMacOS25EnrollmentAnalyticManagerC10HAEventKeyO8rawValueSivg', 
                        '_$s26HearingModeSettingsUIMacOS25EnrollmentAnalyticManagerC10HAEventKeyO8rawValueSivpMV', 

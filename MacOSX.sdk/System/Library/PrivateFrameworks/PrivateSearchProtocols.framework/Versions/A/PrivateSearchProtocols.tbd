@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PrivateSearchProtocols.framework/Versions/A/PrivateSearchProtocols'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s22PrivateSearchProtocols07StorageB6ResultV18bloomFilterBitSizeSivg', 
                        '_$s22PrivateSearchProtocols07StorageB6ResultV18bloomFilterBitSizeSivpMV', 
                        '_$s22PrivateSearchProtocols07StorageB6ResultV27requestedEncryptedIndexBitsSays5UInt8VGvg', 

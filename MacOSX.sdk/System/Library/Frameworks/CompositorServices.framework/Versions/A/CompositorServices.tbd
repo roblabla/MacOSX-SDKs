@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/CompositorServices.framework/Versions/A/CompositorServices'
 swift-abi-version: 7
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/CompositorNonUI.framework/Versions/A/CompositorNonUI' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s18CompositorServices015StateControllerC0Mp', '_$s18CompositorServices015StateControllerC0P9isInvalids5Error_pSgvgTj', 
                        '_$s18CompositorServices015StateControllerC0P9isInvalids5Error_pSgvgTq', 
                        '_$s18CompositorServices015StateControllerC0TL', '_$s18CompositorServices06RemoteA0V12MachDurationVMa', 
@@ -266,10 +266,13 @@ exports:
                        '_$s18CompositorServices06RemoteA0V18HIDEventCollectionVyAESayAE5EventVGcfC', 
                        '_$s18CompositorServices06RemoteA0V19ClockSyncControllerC0E5StateVMa', 
                        '_$s18CompositorServices06RemoteA0V19ClockSyncControllerC0E5StateVMn', 
+                       '_$s18CompositorServices06RemoteA0V19ClockSyncControllerC0E5StateVN', 
                        '_$s18CompositorServices06RemoteA0V19ClockSyncControllerCMa', 
+                       '_$s18CompositorServices06RemoteA0V19ClockSyncControllerCMm', 
                        '_$s18CompositorServices06RemoteA0V19ClockSyncControllerCMn', 
                        '_$s18CompositorServices06RemoteA0V19ClockSyncControllerCMo', 
                        '_$s18CompositorServices06RemoteA0V19ClockSyncControllerCMu', 
+                       '_$s18CompositorServices06RemoteA0V19ClockSyncControllerCN', 
                        '_$s18CompositorServices06RemoteA0V19ClockSyncControllerCfD', 
                        '_$s18CompositorServices06RemoteA0V19ClockSyncControllerCfd', 
                        '_$s18CompositorServices06RemoteA0V19InProcessConnectionC05setupF014onInvalidationyys5Error_pAA13AppStateActorCYcc_tYaKFTj', 
@@ -573,6 +576,8 @@ exports:
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC11VideoStreamC5FrameV12colorTextureSo10MTLTexture_pvpMV', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC11VideoStreamC5FrameV12depthTextureSo10MTLTexture_pvg', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC11VideoStreamC5FrameV12depthTextureSo10MTLTexture_pvpMV', 
+                       '_$s18CompositorServices06RemoteA6ServerC7SessionC11VideoStreamC5FrameV12physicalSizes5SIMD2VySiGvg', 
+                       '_$s18CompositorServices06RemoteA6ServerC7SessionC11VideoStreamC5FrameV12physicalSizes5SIMD2VySiGvpMV', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC11VideoStreamC5FrameV13TrackingAreasV17trackingAreaCounts6UInt16Vvg', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC11VideoStreamC5FrameV13TrackingAreasV17trackingAreaCounts6UInt16VvpMV', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC11VideoStreamC5FrameV13TrackingAreasV6buffer10Foundation4DataVvg', 
@@ -587,7 +592,7 @@ exports:
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC11VideoStreamC5FrameVMa', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC11VideoStreamC5FrameVMn', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC11VideoStreamC5FrameVN', 
-                       '_$s18CompositorServices06RemoteA6ServerC7SessionC11VideoStreamC8RendererV31createRenderEncoderAndDrawFrame5frame16intoColorTexture24downsampledDepthTextures013trackingAreasR09viewports20rasterizationRateMap13commandBufferSo016MTLRenderCommandK0_pAG0N0V_So10MTLTexture_pSaySoAU_pGSoAU_pSgSaySo11MTLViewportaGSgSo016MTLRasterizationZ3Map_pSgSo16MTLCommandBuffer_ptKF', 
+                       '_$s18CompositorServices06RemoteA6ServerC7SessionC11VideoStreamC8RendererV31createRenderEncoderAndDrawFrame5frame16intoColorTexture24downsampledDepthTextures013trackingAreasR09viewports20rasterizationRateMap13commandBufferSo016MTLRenderCommandK0_pAG0N0V_So10MTLTexture_pSaySoAU_pGSoAU_pSgSaySo11MTLViewportaGSo016MTLRasterizationZ3Map_pSgSo16MTLCommandBuffer_ptKF', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC11VideoStreamC8RendererV6device11colorFormat05depthK0013trackingAreasK0AISo9MTLDevice_p_So08MTLPixelK0VA2PtYaKcfC', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC11VideoStreamC8RendererV6device11colorFormat05depthK0013trackingAreasK0AISo9MTLDevice_p_So08MTLPixelK0VA2PtYaKcfCTu', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC11VideoStreamC8RendererVMa', 
@@ -657,9 +662,9 @@ exports:
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC15stateControllerAA05StateG0CyAE0H0OAE5EventOGSgvgTj', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC15stateControllerAA05StateG0CyAE0H0OAE5EventOGSgvgTq', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC15stateControllerAA05StateG0CyAE0H0OAE5EventOGSgvpMV', 
-                       '_$s18CompositorServices06RemoteA6ServerC7SessionC19clockSyncControllerAA0cA0V05ClockgH0Cy_AE5StateOAE5EventOGSgvgTj', 
-                       '_$s18CompositorServices06RemoteA6ServerC7SessionC19clockSyncControllerAA0cA0V05ClockgH0Cy_AE5StateOAE5EventOGSgvgTq', 
-                       '_$s18CompositorServices06RemoteA6ServerC7SessionC19clockSyncControllerAA0cA0V05ClockgH0Cy_AE5StateOAE5EventOGSgvpMV', 
+                       '_$s18CompositorServices06RemoteA6ServerC7SessionC19clockSyncControllerAA0cA0V05ClockgH0CvgTj', 
+                       '_$s18CompositorServices06RemoteA6ServerC7SessionC19clockSyncControllerAA0cA0V05ClockgH0CvgTq', 
+                       '_$s18CompositorServices06RemoteA6ServerC7SessionC19clockSyncControllerAA0cA0V05ClockgH0CvpMV', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC2eeoiySbAE_AEtFZ', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC4hash4intoys6HasherVz_tF', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC5ErrorO014failToSyncTimeI5ClockyAgA0jI0C0K2IdV_ALtcAGmFWC', 
@@ -705,8 +710,8 @@ exports:
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC5SceneC8SettingsV15stateControllerAA05StateI0CyAE0J0OAE5EventOGvpMV', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC5SceneC8SettingsV19clientConfigurationAA06ClientI0Vvg', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC5SceneC8SettingsV19clientConfigurationAA06ClientI0VvpMV', 
-                       '_$s18CompositorServices06RemoteA6ServerC7SessionC5SceneC8SettingsV19clockSyncControllerAA0cA0V05ClockiJ0Cy_AE5StateOAE5EventOGvg', 
-                       '_$s18CompositorServices06RemoteA6ServerC7SessionC5SceneC8SettingsV19clockSyncControllerAA0cA0V05ClockiJ0Cy_AE5StateOAE5EventOGvpMV', 
+                       '_$s18CompositorServices06RemoteA6ServerC7SessionC5SceneC8SettingsV19clockSyncControllerAA0cA0V05ClockiJ0Cvg', 
+                       '_$s18CompositorServices06RemoteA6ServerC7SessionC5SceneC8SettingsV19clockSyncControllerAA0cA0V05ClockiJ0CvpMV', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC5SceneC8SettingsV20statisticsControllerAA0cA0V015FrameStatisticsI0CSgvg', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC5SceneC8SettingsV20statisticsControllerAA0cA0V015FrameStatisticsI0CSgvpMV', 
                        '_$s18CompositorServices06RemoteA6ServerC7SessionC5SceneC8SettingsVMa', 
@@ -794,6 +799,7 @@ exports:
                        '_$s18CompositorServices13KDebugEventIDO29SERVER_RECEIVE_REPEATED_FRAMEyA2CmFWC', 
                        '_$s18CompositorServices13KDebugEventIDO35CLIENT_FRAME_COMPRESSION_ENCODE_ENDyA2CmFWC', 
                        '_$s18CompositorServices13KDebugEventIDO37CLIENT_FRAME_COMPRESSION_ENCODE_BEGINyA2CmFWC', 
+                       '_$s18CompositorServices13KDebugEventIDO4emityys6UInt64V_A3FtF', 
                        '_$s18CompositorServices13KDebugEventIDO8rawValueACSgs6UInt32V_tcfC', 
                        '_$s18CompositorServices13KDebugEventIDO8rawValues6UInt32Vvg', 
                        '_$s18CompositorServices13KDebugEventIDO8rawValues6UInt32VvpMV', 
@@ -820,6 +826,8 @@ exports:
                        '_$s18CompositorServices13StreamedValueC09projectedD0ScSyxGvgTj', 
                        '_$s18CompositorServices13StreamedValueC09projectedD0ScSyxGvgTq', 
                        '_$s18CompositorServices13StreamedValueC09projectedD0ScSyxGvpMV', 
+                       '_$s18CompositorServices13StreamedValueC12cancelStreamyyFTj', 
+                       '_$s18CompositorServices13StreamedValueC12cancelStreamyyFTq', 
                        '_$s18CompositorServices13StreamedValueCMa', '_$s18CompositorServices13StreamedValueCMn', 
                        '_$s18CompositorServices13StreamedValueCMo', '_$s18CompositorServices13StreamedValueCMu', 
                        '_$s18CompositorServices13StreamedValueCfD', '_$s18CompositorServices13StreamedValueCfd', 
@@ -904,10 +912,7 @@ exports:
                        '_$s18CompositorServices15StateControllerCMa', '_$s18CompositorServices15StateControllerCMn', 
                        '_$s18CompositorServices15StateControllerCMo', '_$s18CompositorServices15StateControllerCMu', 
                        '_$s18CompositorServices15StateControllerCfD', '_$s18CompositorServices15StateControllerCfd', 
-                       '_$s18CompositorServices16KDebugSignposterV10emit_eventyyAA0C7EventIDO_s6UInt64VA3HtFZ', 
-                       '_$s18CompositorServices16KDebugSignposterVMa', '_$s18CompositorServices16KDebugSignposterVMn', 
-                       '_$s18CompositorServices16KDebugSignposterVN', '_$s18CompositorServices17CollectionMessageMp', 
-                       '_$s18CompositorServices17CollectionMessageP10collectionSay7ElementQzGvgTj', 
+                       '_$s18CompositorServices17CollectionMessageMp', '_$s18CompositorServices17CollectionMessageP10collectionSay7ElementQzGvgTj', 
                        '_$s18CompositorServices17CollectionMessageP10collectionSay7ElementQzGvgTq', 
                        '_$s18CompositorServices17CollectionMessageP7ElementAC_AA017MemoryCopyChannelD0Tn', 
                        '_$s18CompositorServices17CollectionMessagePAA07ChannelD0Tb', 
@@ -1030,6 +1035,8 @@ exports:
                        '_$s18CompositorServices20MCKVideoStreamOutputC13mediaEndpointAA05MediaG0OvpMV', 
                        '_$s18CompositorServices20MCKVideoStreamOutputC15startConnection22timeSyncInitCompletion14onInvalidationyyAA04TimeI5Clock_pKXE_ys5Error_pctYaKF', 
                        '_$s18CompositorServices20MCKVideoStreamOutputC15startConnection22timeSyncInitCompletion14onInvalidationyyAA04TimeI5Clock_pKXE_ys5Error_pctYaKFTu', 
+                       '_$s18CompositorServices20MCKVideoStreamOutputC23setSceneReadyCheckPointyyYaF', 
+                       '_$s18CompositorServices20MCKVideoStreamOutputC23setSceneReadyCheckPointyyYaFTu', 
                        '_$s18CompositorServices20MCKVideoStreamOutputC27waitForAudioAndVideoStreamsyyYaKF', 
                        '_$s18CompositorServices20MCKVideoStreamOutputC27waitForAudioAndVideoStreamsyyYaKFTu', 
                        '_$s18CompositorServices20MCKVideoStreamOutputC9nextFrameAA011RemoteVideoD0V0eG0VyYaKF', 
@@ -1110,6 +1117,9 @@ exports:
                        '_$s18CompositorServices23RemoteVideoStreamOutputP15startConnection22timeSyncInitCompletion14onInvalidationyyAA04TimeJ5Clock_pKXE_ys5Error_pctYaKFTj', 
                        '_$s18CompositorServices23RemoteVideoStreamOutputP15startConnection22timeSyncInitCompletion14onInvalidationyyAA04TimeJ5Clock_pKXE_ys5Error_pctYaKFTjTu', 
                        '_$s18CompositorServices23RemoteVideoStreamOutputP15startConnection22timeSyncInitCompletion14onInvalidationyyAA04TimeJ5Clock_pKXE_ys5Error_pctYaKFTq', 
+                       '_$s18CompositorServices23RemoteVideoStreamOutputP23setSceneReadyCheckPointyyYaFTj', 
+                       '_$s18CompositorServices23RemoteVideoStreamOutputP23setSceneReadyCheckPointyyYaFTjTu', 
+                       '_$s18CompositorServices23RemoteVideoStreamOutputP23setSceneReadyCheckPointyyYaFTq', 
                        '_$s18CompositorServices23RemoteVideoStreamOutputP9nextFrameAA0cdE0V0fH0VyYaKFTj', 
                        '_$s18CompositorServices23RemoteVideoStreamOutputP9nextFrameAA0cdE0V0fH0VyYaKFTjTu', 
                        '_$s18CompositorServices23RemoteVideoStreamOutputP9nextFrameAA0cdE0V0fH0VyYaKFTq', 
@@ -1162,6 +1172,8 @@ exports:
                        '_$s18CompositorServices27InProccessVideoStreamOutputC13mediaEndpointAA05MediaI0OvpMV', 
                        '_$s18CompositorServices27InProccessVideoStreamOutputC15startConnection22timeSyncInitCompletion14onInvalidationyyAA04TimeK5Clock_pKXE_ys5Error_pctYaKF', 
                        '_$s18CompositorServices27InProccessVideoStreamOutputC15startConnection22timeSyncInitCompletion14onInvalidationyyAA04TimeK5Clock_pKXE_ys5Error_pctYaKFTu', 
+                       '_$s18CompositorServices27InProccessVideoStreamOutputC23setSceneReadyCheckPointyyYaF', 
+                       '_$s18CompositorServices27InProccessVideoStreamOutputC23setSceneReadyCheckPointyyYaFTu', 
                        '_$s18CompositorServices27InProccessVideoStreamOutputC9nextFrameAA06RemoteeF0V0gI0VyYaKF', 
                        '_$s18CompositorServices27InProccessVideoStreamOutputC9nextFrameAA06RemoteeF0V0gI0VyYaKFTu', 
                        '_$s18CompositorServices27InProccessVideoStreamOutputCAA06RemoteefG0AAMc', 
@@ -1601,10 +1613,10 @@ exports:
                        _TtCC18CompositorServices9CLIServer10XPCService ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CompositorNonUI.framework/Versions/A/CompositorNonUI'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CPLayerRendererDidInvalidate, _CPLayerRendererWillBegin, 
                        _CompositorNonUIVersionNumber, _CompositorNonUIVersionString, 
                        ___cp_mach_timebase, _cp_drawable_add_mtl4_render_context, 

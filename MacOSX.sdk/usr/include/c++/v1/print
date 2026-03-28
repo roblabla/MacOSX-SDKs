@@ -34,7 +34,7 @@ namespace std {
 */
 
 #if __cplusplus < 201103L && defined(_LIBCPP_USE_FROZEN_CXX03_HEADERS)
-#  include <__cxx03/print>
+#  include <__cxx03/__config>
 #else
 #  include <__assert>
 #  include <__concepts/same_as.h>
@@ -123,7 +123,7 @@ _LIBCPP_HIDE_FROM_ABI constexpr void __encode(_OutIt& __out_it, char32_t __value
   _LIBCPP_ASSERT_UNCATEGORIZED(__is_scalar_value(__value), "an invalid unicode scalar value results in invalid UTF-16");
 
   if (__value < 0x10000) {
-    *__out_it++ = __value;
+    *__out_it++ = static_cast<iter_value_t<_OutIt>>(__value);
     return;
   }
 
@@ -206,8 +206,8 @@ _LIBCPP_HIDE_FROM_ABI inline bool __is_terminal([[maybe_unused]] FILE* __stream)
   return false;
 #    elif defined(_LIBCPP_WIN32API)
   return std::__is_windows_terminal(__stream);
-#    elif defined(_LIBCPP_ON_SEP)
-  return false; // no TTYs on SEP
+#    elif defined(_LIBCPP_ON_LIBLIBC)
+  return false; // no TTYs in liblibc
 #    elif __has_include(<unistd.h>)
   return std::__is_posix_terminal(__stream);
 #    else

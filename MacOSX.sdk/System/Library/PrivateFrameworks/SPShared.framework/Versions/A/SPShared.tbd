@@ -1,18 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SPShared.framework/Versions/A/SPShared'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FMNetworking, FindMy, SPSharedTests, findmylocateagent, findmylocated, 
                        findmylocatedTests, searchpartyd, searchpartydTests, searchpartyuseragent, 
                        sptool ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation4DataV8SPSharedE4hash9algorithmAcD13HashAlgorithmO_tF', 
                        '_$s10Foundation4DataV8SPSharedE4hmac3key9algorithmA2C_AD13HmacAlgorithmOtF', 
                        '_$s10Foundation4DataV8SPSharedE9spEncrypt3key8ivLengthAD09EncryptedB0VAC_SitKF', 

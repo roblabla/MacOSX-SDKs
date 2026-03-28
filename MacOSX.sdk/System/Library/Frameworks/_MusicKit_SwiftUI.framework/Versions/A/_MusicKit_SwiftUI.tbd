@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_MusicKit_SwiftUI.framework/Versions/A/_MusicKit_SwiftUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV17MessageIdentifierV03addA0AEvgZ', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV17MessageIdentifierV03addA0AEvpZMV', 
                        '_$s17_MusicKit_SwiftUI0A17SubscriptionOfferV17MessageIdentifierV04playA0AEvgZ', 
@@ -154,8 +154,7 @@ exports:
                        '_$s17_MusicKit_SwiftUI0A5AngelCN', '_$s17_MusicKit_SwiftUI0A5AngelCfD', 
                        '_$s17_MusicKit_SwiftUI0A5AngelCfd', '_$s17_MusicKit_SwiftUI12ArtworkImageV03rawF6FormatSSSgvg', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV03rawF6FormatSSSgvpMV', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV0cD04ViewAAMc', '_$s17_MusicKit_SwiftUI12ArtworkImageV11_artworkTagyACSSF', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV11contentMode0cD007ContentH0OSgvg', 
+                       '_$s17_MusicKit_SwiftUI12ArtworkImageV0cD04ViewAAMc', '_$s17_MusicKit_SwiftUI12ArtworkImageV11contentMode0cD007ContentH0OSgvg', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV11contentMode0cD007ContentH0OSgvpMV', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV11reusePolicyAC06_ReuseH0Ovg', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV11reusePolicyAC06_ReuseH0OvpMV', 
@@ -183,7 +182,8 @@ exports:
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV17overrideFrameSizeSbvg', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV17overrideFrameSizeSbvpMV', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV18automaticallySized4withAC0aB00E0V_tFZ', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV4base16idealAspectRatio11contentMode15backgroundColor12rawCropStyle0oF6Format11reusePolicy17overrideFrameSize14externalLoaderA2C_12CoreGraphics7CGFloatVSg0cD007ContentL0OSgAQ0N0VSgSSSgAxC06_ReuseT0OSgSbSgAQ7BindingVyAA0eY0CGSgtcfC', 
+                       '_$s17_MusicKit_SwiftUI12ArtworkImageV3tagSSSgvg', '_$s17_MusicKit_SwiftUI12ArtworkImageV3tagSSSgvpMV', 
+                       '_$s17_MusicKit_SwiftUI12ArtworkImageV4base16idealAspectRatio11contentMode15backgroundColor12rawCropStyle0oF6Format11reusePolicy17overrideFrameSize3tag14externalLoaderA2C_12CoreGraphics7CGFloatVSg0cD007ContentL0OSgAR0N0VSgSSSgAyC06_ReuseT0OSgSbSgAyR7BindingVyAA0eZ0CGSgtcfC', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV4bodyQrvg', '_$s17_MusicKit_SwiftUI12ArtworkImageV4bodyQrvpMV', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV4bodyQrvpQOMQ', '_$s17_MusicKit_SwiftUI12ArtworkImageV5width12CoreGraphics7CGFloatVSgvg', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV5width12CoreGraphics7CGFloatVSgvpMV', 
@@ -200,7 +200,7 @@ exports:
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV6height12CoreGraphics7CGFloatVSgvpMV', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV7artwork0aB00E0Vvg', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV7artwork0aB00E0VvpMV', 
-                       '_$s17_MusicKit_SwiftUI12ArtworkImageV7artwork5width6height16idealAspectRatio11contentMode15backgroundColor12rawCropStyle0qF6Format11reusePolicy17overrideFrameSize14externalLoaderAC0aB00E0V_12CoreGraphics7CGFloatVSgA2U0cD007ContentN0OSgAV0P0VSgSSSgA1_AC06_ReuseV0OSbAV7BindingVyAA0E6LoaderCGSgtcfC', 
+                       '_$s17_MusicKit_SwiftUI12ArtworkImageV7artwork5width6height16idealAspectRatio11contentMode15backgroundColor12rawCropStyle0qF6Format11reusePolicy17overrideFrameSize3tag14externalLoaderAC0aB00E0V_12CoreGraphics7CGFloatVSgA2V0cD007ContentN0OSgAW0P0VSgSSSgA2_AC06_ReuseV0OSbA2_AW7BindingVyAA0E6LoaderCGSgtcfC', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageVMa', '_$s17_MusicKit_SwiftUI12ArtworkImageVMn', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageVN', '_$s17_MusicKit_SwiftUI12ArtworkImageV_5width6heightAC0aB00E0V_12CoreGraphics7CGFloatVAKtcfC', 
                        '_$s17_MusicKit_SwiftUI12ArtworkImageV_5widthAC0aB00E0V_12CoreGraphics7CGFloatVtcfC', 

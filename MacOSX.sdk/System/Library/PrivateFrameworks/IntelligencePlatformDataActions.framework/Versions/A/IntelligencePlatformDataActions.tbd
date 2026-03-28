@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligencePlatformDataActions.framework/Versions/A/IntelligencePlatformDataActions'
-current-version: 155.10
+current-version: 165.6.3
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s31IntelligencePlatformDataActions0C11ActionErrorO07networkF0yA2CmFWC', 
                        '_$s31IntelligencePlatformDataActions0C11ActionErrorO10Foundation40CustomLocalizedStringResourceConvertibleAAMc', 
                        '_$s31IntelligencePlatformDataActions0C11ActionErrorO15executionFailedyA2CmFWC', 
@@ -50,13 +50,15 @@ exports:
                        '_$s31IntelligencePlatformDataActions10DeviceUserVs12IdentifiableAAMc', 
                        '_$s31IntelligencePlatformDataActions10SportsTeamV05imageC0SSvg', 
                        '_$s31IntelligencePlatformDataActions10SportsTeamV05imageC0SSvpMV', 
-                       '_$s31IntelligencePlatformDataActions10SportsTeamV2id4name6league05imageC0ACSgSS_S3StcfC', 
+                       '_$s31IntelligencePlatformDataActions10SportsTeamV2id4name8fullName6league05imageC0ACSgSS_S2SSgS2StcfC', 
                        '_$s31IntelligencePlatformDataActions10SportsTeamV2idSSvg', 
                        '_$s31IntelligencePlatformDataActions10SportsTeamV2idSSvpMV', 
                        '_$s31IntelligencePlatformDataActions10SportsTeamV4nameSSvg', 
                        '_$s31IntelligencePlatformDataActions10SportsTeamV4nameSSvpMV', 
                        '_$s31IntelligencePlatformDataActions10SportsTeamV6leagueSSvg', 
                        '_$s31IntelligencePlatformDataActions10SportsTeamV6leagueSSvpMV', 
+                       '_$s31IntelligencePlatformDataActions10SportsTeamV8fullNameSSvg', 
+                       '_$s31IntelligencePlatformDataActions10SportsTeamV8fullNameSSvpMV', 
                        '_$s31IntelligencePlatformDataActions10SportsTeamVMa', '_$s31IntelligencePlatformDataActions10SportsTeamVMn', 
                        '_$s31IntelligencePlatformDataActions10SportsTeamVN', '_$s31IntelligencePlatformDataActions10SportsTeamVs12IdentifiableAAMc', 
                        '_$s31IntelligencePlatformDataActions11PublicEventV11descriptionSSSgvg', 

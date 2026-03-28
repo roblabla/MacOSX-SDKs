@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/KeyboardServices.framework/KeyboardServices'
 current-version: 153
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _KSCKErrorDomain, _KSCategory, _KSCloudKitAccountDidChange, 
                        _KSCloudKitAccountDidChangeAccountChangedKey, _KSCloudKitAccountDidChangeDeviceToDeviceKey, 
                        _KSCloudKitAccountDidChangeStatusKey, _KSCloudKitAccountDidChangeUserChangedKey, 

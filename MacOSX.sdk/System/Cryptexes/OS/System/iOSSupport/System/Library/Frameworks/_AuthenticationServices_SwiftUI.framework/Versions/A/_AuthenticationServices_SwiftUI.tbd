@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_AuthenticationServices_SwiftUI.framework/Versions/A/_AuthenticationServices_SwiftUI'
-current-version: 623.1.14
+current-version: 624.1.16
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0V10standaloneAEvgZ', 
                        '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0V10standaloneAEvpZMV', 
                        '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0V6sharedAEvgZ', 

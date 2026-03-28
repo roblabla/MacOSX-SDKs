@@ -172,7 +172,9 @@ API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @property (readonly, getter=isVisible) BOOL visible API_AVAILABLE(macos(12.0), ios(16.0));
 
 /**
- When an item is hidden it will not be visible in the toolbar. The item will still be visible in the customization panel. Because hidden items may be visible during user customization, use the `visible` property to determine if an item is currently displayed. Note that even hidden toolbar items are sync'd to other toolbars with a shared identifier, but its `hidden` state can be unique to each instance. Use this property to show a toolbar item in one toolbar instance but not another.
+ Determines whether an item is visible in the toolbar.
+
+ The item will still be visible in the customization panel. Because hidden items may be visible during user customization, use the `visible` property to determine if an item is currently displayed. Note that even hidden toolbar items are sync'd to other toolbars with a shared identifier, but its `hidden` state can be unique to each instance. Use this property to show a toolbar item in one toolbar instance but not another.
  */
 @property (getter=isHidden) BOOL hidden API_AVAILABLE(macos(15.0), ios(18.0));
 
@@ -295,13 +297,15 @@ APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarCloudSharingItemIdentifier API_AV
 APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarWritingToolsItemIdentifier API_AVAILABLE(macos(15.2));
 
 /**
- Creates a new NSTrackingSeparatorToolbarItem and automatically configures it to track the divider of the sidebar if one is discovered.
+ Creates a new `NSTrackingSeparatorToolbarItem` and automatically configures it to track the divider of the sidebar if one is discovered.
+ 
  Only applies to windows with `NSWindowStyleMaskFullSizeContentView` applied.
  */
 APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarSidebarTrackingSeparatorItemIdentifier API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios);
 
 /**
- Creates a new NSTrackingSeparatorToolbarItem and automatically configures it to track the divider of the inspector if one is discovered.
+ Creates a new `NSTrackingSeparatorToolbarItem` and automatically configures it to track the divider of the inspector if one is discovered.
+
  Only applies to windows with `NSWindowStyleMaskFullSizeContentView` applied.
  */
 APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarInspectorTrackingSeparatorItemIdentifier API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios);

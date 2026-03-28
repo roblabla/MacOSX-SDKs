@@ -5,6 +5,7 @@
 //  Copyright © 2025 Apple Inc. All rights reserved.
 //
 
+#import <CarPlay/CPPlaybackConfiguration.h>
 #import <CarPlay/CPTemplate.h>
 #import <UIKit/UIKit.h>
 
@@ -39,6 +40,13 @@ CARPLAY_TEMPLATE_UI_ACTOR
  @discussion Set the value of this property to @c YES to enable the list element or @c NO to disable it. The default value of this property is @c YES.
  */
 @property (nonatomic, assign, getter=isEnabled) BOOL enabled;
+
+@end
+
+API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+@interface CPListImageRowItemElement() <CPPlayableItem>
+
+@property (nonatomic, copy, nullable) NSString *accessibilityLabel API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(tvos, visionos) API_UNAVAILABLE(macos, watchos);
 
 @end
 

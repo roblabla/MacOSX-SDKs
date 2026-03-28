@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AssetViewer.framework/Versions/A/AssetViewer'
-current-version: 533.40.3
+current-version: 533.100.2
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ASVConnectionInterrupted, _ASVInitLogging, _ASVInlinePreviewErrorDomain, 
                        _ASVInlinePreviewRuntimeCurrentTimeKey, _ASVInlinePreviewRuntimeDurationKey, 
                        _ASVInlinePreviewRuntimeHasAudioKey, _ASVInlinePreviewRuntimeIsPlayingKey, 

@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ arm64-macos, arm64e-macos ]
+targets:         [ arm64e-macos ]
 install-name:    '/usr/lib/updaters/libT200Updater.dylib'
 exports:
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ _BC__commitImage, _BC__connect, _BC__disconnect, _BC__getInfo, 
                        _BC__readSMCKey, _BC__receive, _BC__sendImage, _BC__startUpdate, 
                        _BC__transmit, _BC__writeSMCKey, _Enable_smc_communication, 

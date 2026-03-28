@@ -158,6 +158,7 @@ extern void thread_reference(
 extern void thread_deallocate(
 	thread_t        thread);
 
+
 /*! @function kernel_thread_start
  *   @abstract Create a kernel thread.
  *   @discussion This function takes three input parameters, namely reference

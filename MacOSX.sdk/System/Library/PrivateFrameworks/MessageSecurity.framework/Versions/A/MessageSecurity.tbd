@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MessageSecurity.framework/Versions/A/MessageSecurity'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s15MessageSecurity10MSCMSErrorO10Foundation13CustomNSErrorAAMc', 
                        '_$s15MessageSecurity10MSCMSErrorO10Foundation14LocalizedErrorAAMc', 
                        '_$s15MessageSecurity10MSCMSErrorO11errorDomainSSvgZ', '_$s15MessageSecurity10MSCMSErrorO11errorDomainSSvpZMV', 
@@ -238,8 +236,10 @@ exports:
                        _MSSignatureAlgorithmECDSAX962SHA512, _MSSignatureAlgorithmRSAPKCS1v5MD5, 
                        _MSSignatureAlgorithmRSAPKCS1v5SHA1, _MSSignatureAlgorithmRSAPKCS1v5SHA224, 
                        _MSSignatureAlgorithmRSAPKCS1v5SHA256, _MSSignatureAlgorithmRSAPKCS1v5SHA384, 
-                       _MSSignatureAlgorithmRSAPKCS1v5SHA512, _MS_DEFAULT_LOG_BLOCK, 
-                       _MS_DEFAULT_LOG_INTERNAL, _MessageSecurityVersionNumber, _MessageSecurityVersionString, 
+                       _MSSignatureAlgorithmRSAPKCS1v5SHA512, _MSTimestampErrorCreate, 
+                       _MSTimestampErrorCreateWithFormat, _MSTimestampErrorCreateWithUnderlying, 
+                       _MSTimestampErrorDomain, _MS_DEFAULT_LOG_BLOCK, _MS_DEFAULT_LOG_INTERNAL, 
+                       _MessageSecurityVersionNumber, _MessageSecurityVersionString, 
                        _NSDataFromAny, _NSDataFromAnySet, _NSDataFromBaseData, _NSDataFromBitString, 
                        _NSDataFromInteger, _NSDataFromOctetString, _NSStringFromUTF8String, 
                        _PKIFailureInfo2int, __MSLog, _add_CRLDistributionPoints, 
@@ -654,6 +654,7 @@ exports:
                        _free_UniqueIdentifier, _free_UnprotectedAttributes, _free_UserKeyingMaterial, 
                        _free_ValidationParms, _free_Validity, _free_Version, _getKeyTypeForCertificate, 
                        _int2DistributionPointReasonFlags, _int2KeyUsage, _int2PKIFailureInfo, 
+                       _kMSAppleTimestampEndpoint_ECC_ts_ec, _kMSAppleTimestampEndpoint_RSA_ts01, 
                        _length_AES_CCM_ICVlen, _length_AES_GCM_ICVlen, _length_AccessDescription, 
                        _length_Accuracy, _length_AlgorithmIdentifier, _length_AppleAgileHash, 
                        _length_AppleHashAgilityValue, _length_Attribute, _length_AttributeType, 
@@ -782,5 +783,6 @@ exports:
                        MSCMSMutableAttributeArray, MSCMSRecipientInfo, MSCMSSMIMECapabilitiesAttribute, 
                        MSCMSSignedData, MSCMSSignerInfo, MSCMSSigningTimeAttribute, 
                        MSCMSTimestampAttribute, MSCMSTimestampAttributeInternal, 
-                       MSDecodeOptions, MSError, MSOID ]
+                       MSDecodeOptions, MSError, MSMessageImprint, MSOID, MSPKIStatusInfo, 
+                       MSTimestampRequest, MSTimestampResponse ]
 ...

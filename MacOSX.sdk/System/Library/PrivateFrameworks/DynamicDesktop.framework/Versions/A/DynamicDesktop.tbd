@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DynamicDesktop.framework/Versions/A/DynamicDesktop'
-current-version: 2427.2.4
+current-version: 2427.4.7
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14DynamicDesktop010AppearanceB0V09canSelectC0Sbvg', '_$s14DynamicDesktop010AppearanceB0V09canSelectC0SbvpMV', 
                        '_$s14DynamicDesktop010AppearanceB0V17appearanceIndexess6UInt32V10lightIndex_AF04darkH0tSgvg', 
                        '_$s14DynamicDesktop010AppearanceB0V17appearanceIndexess6UInt32V10lightIndex_AF04darkH0tSgvpMV', 

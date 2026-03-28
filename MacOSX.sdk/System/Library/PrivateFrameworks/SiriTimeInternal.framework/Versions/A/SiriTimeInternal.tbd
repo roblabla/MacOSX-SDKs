@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriTimeInternal.framework/Versions/A/SiriTimeInternal'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation14DateComponentsV16SiriTimeInternalE6update4with5valueyAA8CalendarV9ComponentO_SitF', 
                        '_$s11SiriKitFlow11DeviceStateP0A12TimeInternalE12isPhoneOrPadSbvg', 
                        '_$s11SiriKitFlow11DeviceStateP0A12TimeInternalE12isPhoneOrPadSbvpMV', 
@@ -276,6 +276,7 @@ exports:
                        '_$s16SiriTimeInternal0aB11PluginModelO13snippetHidden3for5idiomSb0A9Utilities12ResponseModeV_AG11DeviceIdiomOtF', 
                        '_$s16SiriTimeInternal0aB11PluginModelO13timerSelectoryAcA05TimergE0VcACmFWC', 
                        '_$s16SiriTimeInternal0aB11PluginModelO17timerConfirmationyAcA05TimergE0VcACmFWC', 
+                       '_$s16SiriTimeInternal0aB11PluginModelO19disambiguationTimeryAcA0ag7SnippetE0VcACmFWC', 
                        '_$s16SiriTimeInternal0aB11PluginModelO4fromACs7Decoder_p_tKcfC', 
                        '_$s16SiriTimeInternal0aB11PluginModelO6encode2toys7Encoder_p_tKF', 
                        '_$s16SiriTimeInternal0aB11PluginModelOMa', '_$s16SiriTimeInternal0aB11PluginModelOMn', 
@@ -328,7 +329,29 @@ exports:
                        '_$s16SiriTimeInternal0aB3LogO6logger8category2os6LoggerVSS_tFZ', 
                        '_$s16SiriTimeInternal0aB3LogO9clockFlow2os6LoggerVvgZ', '_$s16SiriTimeInternal0aB3LogO9clockFlow2os6LoggerVvpZMV', 
                        '_$s16SiriTimeInternal0aB3LogOMa', '_$s16SiriTimeInternal0aB3LogOMn', 
-                       '_$s16SiriTimeInternal0aB3LogON', '_$s16SiriTimeInternal11PunchOutAppO10sleepAlarmyA2CmFWC', 
+                       '_$s16SiriTimeInternal0aB3LogON', '_$s16SiriTimeInternal0aB7BundlesO9siriAlarmAA10BundleInfoCvgZ', 
+                       '_$s16SiriTimeInternal0aB7BundlesO9siriAlarmAA10BundleInfoCvpZMV', 
+                       '_$s16SiriTimeInternal0aB7BundlesO9siriClockAA10BundleInfoCvgZ', 
+                       '_$s16SiriTimeInternal0aB7BundlesO9siriClockAA10BundleInfoCvpZMV', 
+                       '_$s16SiriTimeInternal0aB7BundlesO9siriTimerAA10BundleInfoCvgZ', 
+                       '_$s16SiriTimeInternal0aB7BundlesO9siriTimerAA10BundleInfoCvpZMV', 
+                       '_$s16SiriTimeInternal0aB7BundlesOMa', '_$s16SiriTimeInternal0aB7BundlesOMn', 
+                       '_$s16SiriTimeInternal0aB7BundlesON', '_$s16SiriTimeInternal10BundleInfoC10bundlePathSSvg', 
+                       '_$s16SiriTimeInternal10BundleInfoC10bundlePathSSvpMV', '_$s16SiriTimeInternal10BundleInfoC16bundleIdentifierSSvg', 
+                       '_$s16SiriTimeInternal10BundleInfoC16bundleIdentifierSSvpMV', 
+                       '_$s16SiriTimeInternal10BundleInfoC17templateDirectorySSyFTj', 
+                       '_$s16SiriTimeInternal10BundleInfoC17templateDirectorySSyFTq', 
+                       '_$s16SiriTimeInternal10BundleInfoC6bundleSo8NSBundleCSgyFTj', 
+                       '_$s16SiriTimeInternal10BundleInfoC6bundleSo8NSBundleCSgyFTq', 
+                       '_$s16SiriTimeInternal10BundleInfoC8bundleId0F4PathACSS_SStcfC', 
+                       '_$s16SiriTimeInternal10BundleInfoC8bundleId0F4PathACSS_SStcfCTj', 
+                       '_$s16SiriTimeInternal10BundleInfoC8bundleId0F4PathACSS_SStcfCTq', 
+                       '_$s16SiriTimeInternal10BundleInfoC8bundleId0F4PathACSS_SStcfc', 
+                       '_$s16SiriTimeInternal10BundleInfoCMa', '_$s16SiriTimeInternal10BundleInfoCMm', 
+                       '_$s16SiriTimeInternal10BundleInfoCMn', '_$s16SiriTimeInternal10BundleInfoCMo', 
+                       '_$s16SiriTimeInternal10BundleInfoCMu', '_$s16SiriTimeInternal10BundleInfoCN', 
+                       '_$s16SiriTimeInternal10BundleInfoCfD', '_$s16SiriTimeInternal10BundleInfoCfd', 
+                       '_$s16SiriTimeInternal11PunchOutAppO10sleepAlarmyA2CmFWC', 
                        '_$s16SiriTimeInternal11PunchOutAppO32toResponseFrameworkCommandAction0A12DialogEngine15SpeakableStringVSgyF', 
                        '_$s16SiriTimeInternal11PunchOutAppO3url10Foundation3URLVSgvg', 
                        '_$s16SiriTimeInternal11PunchOutAppO3url10Foundation3URLVSgvpMV', 
@@ -491,6 +514,7 @@ exports:
                        '_$s16SiriTimeInternal21DirectInvocationUtilsO5AlarmO18buttonPressPayload7verbStr9isConfirmSDySSypGSS_SbtFZ', 
                        '_$s16SiriTimeInternal21DirectInvocationUtilsO5AlarmO23handleVerbActionPayload7verbStr7alarmId0H8SilentlySDySSypGSS_SSSbtFZ', 
                        '_$s16SiriTimeInternal21DirectInvocationUtilsO5AlarmO3URIO04stopG0yA2GmFWC', 
+                       '_$s16SiriTimeInternal21DirectInvocationUtilsO5AlarmO3URIO06snoozeG0yA2GmFWC', 
                        '_$s16SiriTimeInternal21DirectInvocationUtilsO5AlarmO3URIO11buttonPressyA2GmFWC', 
                        '_$s16SiriTimeInternal21DirectInvocationUtilsO5AlarmO3URIO14disambiguationyA2GmFWC', 
                        '_$s16SiriTimeInternal21DirectInvocationUtilsO5AlarmO3URIO16handleVerbActionyA2GmFWC', 

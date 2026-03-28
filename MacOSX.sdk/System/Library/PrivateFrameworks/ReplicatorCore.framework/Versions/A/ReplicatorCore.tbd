@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ReplicatorCore.framework/Versions/A/ReplicatorCore'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ ReplicatorCoreTests, replicatord ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14ReplicatorCore12DataMigratorC7migrateyyKFTj', '_$s14ReplicatorCore12DataMigratorC7migrateyyKFTq', 
                        '_$s14ReplicatorCore12DataMigratorCMa', '_$s14ReplicatorCore12DataMigratorCMm', 
                        '_$s14ReplicatorCore12DataMigratorCMn', '_$s14ReplicatorCore12DataMigratorCMo', 

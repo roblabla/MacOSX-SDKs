@@ -371,7 +371,7 @@ module _DarwinFoundation2 [system] {
   // is used by <string.h>.)
   explicit module strings {
     header "_strings.h"
-    textual header "secure/_strings.h"
+    private textual header "secure/_strings.h"
     export *
   }
 
@@ -555,7 +555,7 @@ module _DarwinFoundation2 [system] {
     }
 
     header "_stdio.h"
-    textual header "secure/_stdio.h"
+    private textual header "secure/_stdio.h"
     export *
 
     module sys_stdio {
@@ -588,7 +588,7 @@ module _DarwinFoundation2 [system] {
     }
 
     header "_string.h"
-    textual header "secure/_string.h"
+    private textual header "secure/_string.h"
     export *
   }
 

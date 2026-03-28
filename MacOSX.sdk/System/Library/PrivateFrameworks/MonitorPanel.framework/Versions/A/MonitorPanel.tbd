@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MonitorPanel.framework/Versions/A/MonitorPanel'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CalibrateDisplay, _ClearDisplayModeFlag, _ClearDisplayModeFlags, 
                        _CopyDisplayModes, _CopyPreferredModes, _DisplayHasMultipleScanRates, 
                        _GetDisplayModeFlags, _GetDisplayModeFlagsPtr, _IsDisplayModeFlagSet, 

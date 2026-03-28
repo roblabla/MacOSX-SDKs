@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriInferenceIntents.framework/Versions/A/SiriInferenceIntents'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s20SiriInferenceIntents0A14LinkFlowIntentC16actionIdentifierSSSgvpMV', 
                        '_$s20SiriInferenceIntents0A14LinkFlowIntentC16bundleIdentifierSSSgvpMV', 
                        '_$s20SiriInferenceIntents0A14LinkFlowIntentC5coderACSgSo7NSCoderC_tcfC', 

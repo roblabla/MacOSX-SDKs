@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_sandbox.dylib'
-current-version: 2680.60.11
+current-version: 2680.100.174
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _APP_SANDBOX_IOKIT_CLIENT, _APP_SANDBOX_MACH, _APP_SANDBOX_READ, 
                        _APP_SANDBOX_READ_WRITE, _IOS_SANDBOX_APPLICATION_GROUP, _IOS_SANDBOX_CONTAINER, 
                        _SANDBOX_CHECK_ALLOW_APPROVAL, _SANDBOX_CHECK_CANONICAL, _SANDBOX_CHECK_NOFOLLOW, 
@@ -43,13 +40,15 @@ exports:
                        _sandbox_check_by_audit_token, _sandbox_check_by_reference, 
                        _sandbox_check_by_uniqueid, _sandbox_check_finder_automation_for_path, 
                        _sandbox_check_message_filter_integer, _sandbox_check_message_filter_string, 
-                       _sandbox_check_process_signal_target, _sandbox_check_protected_app_container, 
-                       _sandbox_check_self_signal_target, _sandbox_check_storage_class, 
-                       _sandbox_check_with_attribution, _sandbox_consume_extension, 
-                       _sandbox_consume_fs_extension, _sandbox_consume_mach_extension, 
-                       _sandbox_container_path_for_audit_token, _sandbox_container_path_for_pid, 
-                       _sandbox_enable_local_state_flag, _sandbox_enable_root_translation, 
-                       _sandbox_enable_state_flag, _sandbox_extension_consume, _sandbox_extension_issue_file, 
+                       _sandbox_check_network, _sandbox_check_process_signal_target, 
+                       _sandbox_check_protected_app_container, _sandbox_check_self_signal_target, 
+                       _sandbox_check_storage_class, _sandbox_check_with_attribution, 
+                       _sandbox_checkattr_alloc, _sandbox_checkattr_disable_reporting, 
+                       _sandbox_checkattr_free, _sandbox_consume_extension, _sandbox_consume_fs_extension, 
+                       _sandbox_consume_mach_extension, _sandbox_container_path_for_audit_token, 
+                       _sandbox_container_path_for_pid, _sandbox_enable_local_state_flag, 
+                       _sandbox_enable_root_translation, _sandbox_enable_state_flag, 
+                       _sandbox_extension_consume, _sandbox_extension_issue_file, 
                        _sandbox_extension_issue_file_to_process, _sandbox_extension_issue_file_to_process_by_pid, 
                        _sandbox_extension_issue_file_to_self, _sandbox_extension_issue_generic, 
                        _sandbox_extension_issue_generic_to_process, _sandbox_extension_issue_generic_to_process_by_pid, 
@@ -81,7 +80,7 @@ exports:
                        _sandbox_suspend, _sandbox_unregister_app_bundle, _sandbox_unregister_app_container, 
                        _sandbox_unregister_bastion_profile, _sandbox_unregister_disk_image_backing_store, 
                        _sandbox_unsuspend ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _SANDBOX_EXTENSION_MACL_LEARNING, _SANDBOX_EXTENSION_USER_INTENT, 
                        _gpu_bundle_find_trusted, _gpu_bundle_is_path_trusted, _rootless_apply, 
                        _rootless_apply_internal, _rootless_apply_relative, _rootless_manifest_free, 

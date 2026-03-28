@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MatrixKit.framework/Versions/A/MatrixKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10ColumnType9MatrixKit10SIMDMatrixPTl', '_$s12ExprDataType9MatrixKit0D10ExpressionPTl', 
                        '_$s13ColSquareType9MatrixKit17SVDMatrixProtocolPTl', '_$s13RowSquareType9MatrixKit17SVDMatrixProtocolPTl', 
                        '_$s13TransposeType9MatrixKit0C8ProtocolPTl', '_$s13TransposeType9MatrixKit0C9SpecifierPTl', 

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 3505.4.1 -module-name CoreML
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 3520.5.1 -module-name CoreML
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 @_exported import CoreML
 import CoreVideo
 import Foundation
@@ -80,9 +80,7 @@ extension CoreML.MLShapedArraySlice {
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension CoreML.MLFeatureValue {
   convenience public init<Scalar>(shapedArray: CoreML.MLShapedArray<Scalar>) where Scalar : CoreML.MLShapedArrayScalar
-  #if compiler(>=5.3) && $NonescapableTypes
   public func shapedArrayValue<Scalar>(of type: Scalar.Type) -> CoreML.MLShapedArray<Scalar>? where Scalar : CoreML.MLShapedArrayScalar
-  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension CoreML.MLShapedArray : Swift.Encodable where Scalar : Swift.Encodable {
@@ -114,50 +112,32 @@ public struct MLSendableFeatureValue : Swift.Equatable, Swift.Sendable {
   public var isShapedArray: Swift.Bool {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var integerValue: Swift.Int? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public var float16Value: Swift.Float16? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var floatValue: Swift.Float? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var doubleValue: Swift.Double? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var stringValue: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var stringArrayValue: [Swift.String]? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var stringDictionaryValue: [Swift.String : Swift.Double]? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var integerDictionaryValue: [Swift.Int : Swift.Double]? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func shapedArrayValue<Scalar>(of type: Scalar.Type) -> CoreML.MLShapedArray<Scalar>? where Scalar : CoreML.MLShapedArrayScalar
-  #endif
   public init(undefined type: CoreML.MLFeatureType)
   public init(_ value: Swift.Int)
   public init(_ value: Swift.Int32)
@@ -172,9 +152,7 @@ public struct MLSendableFeatureValue : Swift.Equatable, Swift.Sendable {
   public init(_ value: [Swift.Int : Swift.Double])
   public init(_ value: [Swift.Int : Swift.Int])
   public init<Scalar>(_ value: CoreML.MLShapedArray<Scalar>) where Scalar : CoreML.MLShapedArrayScalar
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ value: CoreML.MLFeatureValue)
-  #endif
   public static func == (a: CoreML.MLSendableFeatureValue, b: CoreML.MLSendableFeatureValue) -> Swift.Bool
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -252,12 +230,10 @@ extension CoreML.MLShapedArrayProtocol {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var scalar: Self.Scalar? {
     get
     set
   }
-  #endif
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension CoreML.MLShapedArrayProtocol {
@@ -620,31 +596,21 @@ extension CoreML.MLTensor {
     internal let beginMask: Swift.Int, endMask: Swift.Int, ellipsisMask: Swift.Int, newAxisMask: Swift.Int, squeezeAxisMask: Swift.Int
     public init(begin: [Swift.Int], end: [Swift.Int], strides: [Swift.Int], beginMask: Swift.Int, endMask: Swift.Int, ellipsisMask: Swift.Int, newAxisMask: Swift.Int, squeezeAxisMask: Swift.Int)
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(firstRange: (Swift.UnboundedRange_) -> (), trailingRanges: (any CoreML.MLTensorRangeExpression)?...) -> CoreML.MLTensor {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(firstRange: (any CoreML.MLTensorRangeExpression)?, secondRange: (Swift.UnboundedRange_) -> (), trailingRanges: (any CoreML.MLTensorRangeExpression)?...) -> CoreML.MLTensor {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(firstRange: (any CoreML.MLTensorRangeExpression)?, secondRange: (any CoreML.MLTensorRangeExpression)?, thirdRange: (Swift.UnboundedRange_) -> (), trailingRanges: (any CoreML.MLTensorRangeExpression)?...) -> CoreML.MLTensor {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(firstRange: (any CoreML.MLTensorRangeExpression)?, secondRange: (any CoreML.MLTensorRangeExpression)?, thirdRange: (any CoreML.MLTensorRangeExpression)?, fourthRange: (Swift.UnboundedRange_) -> (), trailingRanges: (any CoreML.MLTensorRangeExpression)?...) -> CoreML.MLTensor {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(ranges: (any CoreML.MLTensorRangeExpression)?...) -> CoreML.MLTensor {
     get
   }
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension CoreML.MLTensor {
@@ -719,21 +685,15 @@ extension CoreML.MLTensor {
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension CoreML.MLTensor {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init<Scalar>(randomNormal shape: [Swift.Int], mean: Scalar = Scalar.init(0.0), standardDeviation: Scalar = Scalar.init(1.0), seed: Swift.UInt64? = nil, scalarType: Scalar.Type = Scalar.self) where Scalar : CoreML.MLTensorScalar, Scalar : Swift.BinaryFloatingPoint
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension CoreML.MLTensor {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init<Scalar>(randomUniform shape: [Swift.Int], in bounds: Swift.Range<Scalar> = 0..<1, seed: Swift.UInt64? = nil, scalarType: Scalar.Type = Scalar.self) where Scalar : CoreML.MLTensorScalar, Scalar : Swift.BinaryFloatingPoint
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension CoreML.MLTensor {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init<Scalar>(randomUniform shape: [Swift.Int], in bounds: Swift.ClosedRange<Scalar> = 0...1, seed: Swift.UInt64? = nil, scalarType: Scalar.Type = Scalar.self) where Scalar : CoreML.MLTensorScalar, Scalar : Swift.BinaryInteger
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension CoreML.MLTensor {
@@ -820,15 +780,9 @@ public class MLComputePlan {
   final public let modelStructure: CoreML.MLModelStructure
   public static func load(asset: CoreML.MLModelAsset, configuration: CoreML.MLModelConfiguration) async throws -> CoreML.MLComputePlan
   public static func load(contentsOf url: Foundation.URL, configuration: CoreML.MLModelConfiguration) async throws -> CoreML.MLComputePlan
-  #if compiler(>=5.3) && $NonescapableTypes
   public func estimatedCost(of operation: CoreML.MLModelStructure.Program.Operation) -> CoreML.MLComputePlan.Cost?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func deviceUsage(for layer: CoreML.MLModelStructure.NeuralNetwork.Layer) -> CoreML.MLComputePlan.DeviceUsage?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func deviceUsage(for operation: CoreML.MLModelStructure.Program.Operation) -> CoreML.MLComputePlan.DeviceUsage?
-  #endif
   @objc deinit
 }
 @available(*, unavailable)
@@ -840,9 +794,7 @@ public struct MLOptimizationHints : Swift.Equatable, Swift.Sendable {
   public enum ReshapeFrequency : Swift.Int, Swift.Sendable {
     case frequent
     case infrequent
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
-    #endif
     @available(iOS 17.4, tvOS 17.4, watchOS 10.4, macOS 14.4, *)
     public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
@@ -853,9 +805,7 @@ public struct MLOptimizationHints : Swift.Equatable, Swift.Sendable {
   public enum SpecializationStrategy : Swift.Int, Swift.Sendable {
     case `default`
     case fastPrediction
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
-    #endif
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
@@ -891,14 +841,10 @@ public struct MLShapedArray<Scalar> : CoreML.MLShapedArrayProtocol, @unchecked S
   }
   public func withUnsafeShapedBufferPointer<R>(_ body: (_ ptr: Swift.UnsafeBufferPointer<Scalar>, _ shape: [Swift.Int], _ strides: [Swift.Int]) throws -> R) rethrows -> R
   public mutating func withUnsafeMutableShapedBufferPointer<R>(_ body: (inout Swift.UnsafeMutableBufferPointer<Scalar>, _ shape: [Swift.Int], _ strides: [Swift.Int]) throws -> R) rethrows -> R
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, *)
   public func withPixelBufferIfAvailable<R>(_ body: (_ pixelBuffer: CoreVideo.CVPixelBuffer) throws -> R) rethrows -> R?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, *)
   public mutating func withMutablePixelBufferIfAvailable<R>(_ body: (_ pixelBuffer: CoreVideo.CVPixelBuffer) throws -> R) rethrows -> R?
-  #endif
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias Element = CoreML.MLShapedArraySlice<Scalar>
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
@@ -1004,12 +950,8 @@ extension Swift.Float16 : CoreML.MLShapedArrayScalar {
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension CoreML.MLModelCollection {
-  #if compiler(>=5.3) && $NonescapableTypes
   public class func beginAccessing(identifier: Swift.String, completionHandler handler: @escaping (Swift.Result<CoreML.MLModelCollection, any Swift.Error>) -> Swift.Void) -> Foundation.Progress
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public class func endAccessing(identifier: Swift.String, completionHandler handler: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 extension CoreML.MLShapedArray : Swift.Equatable where Scalar : Swift.Equatable {
@@ -1266,16 +1208,12 @@ extension CoreML.MLTensor {
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension CoreML.MLModel {
-  #if compiler(>=5.3) && $NonescapableTypes
   public class func load(contentsOf url: Foundation.URL, configuration: CoreML.MLModelConfiguration = MLModelConfiguration(), completionHandler handler: @escaping (Swift.Result<CoreML.MLModel, any Swift.Error>) -> Swift.Void)
-  #endif
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   public class func load(contentsOf url: Foundation.URL, configuration: CoreML.MLModelConfiguration = MLModelConfiguration()) async throws -> CoreML.MLModel
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
   @available(watchOS, unavailable)
   public class func compileModel(at url: Foundation.URL, completionHandler handler: @escaping (Swift.Result<Foundation.URL, any Swift.Error>) -> Swift.Void)
-  #endif
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
   @available(watchOS, unavailable)
   public class func compileModel(at url: Foundation.URL) async throws -> Foundation.URL

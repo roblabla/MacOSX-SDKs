@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/ACIPCBTLib.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ __ZN12ACIPCBTClass10writeAsyncEPKvjPFvPviS2_ES2_, __ZN12ACIPCBTClass12readRegisterEjPvPj, 
                        __ZN12ACIPCBTClass14clearIteratorsEv, __ZN12ACIPCBTClass14sendImageAsyncEPKvjPFvPviS2_S2_ES2_, 
                        __ZN12ACIPCBTClass16interfaceMatchedEPvj, __ZN12ACIPCBTClass17abortChannelAsyncE14acipcDirectionPFvPviES1_, 

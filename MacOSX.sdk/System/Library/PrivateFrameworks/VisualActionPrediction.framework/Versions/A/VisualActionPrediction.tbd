@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/VisualActionPrediction.framework/Versions/A/VisualActionPrediction'
-current-version: 619.14
+current-version: 627.11
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s22VisualActionPrediction0abC6ClientC014registerCustomB7Handler3for2on_y0abC7Support0fB8IdentityO_So17OS_dispatch_queueCSgyAG0A7ContextV_AG10ImageFrameVys6ResultOyyts5Error_pGYbctYbctF', 
                        '_$s22VisualActionPrediction0abC6ClientC016unregisterCustomB7Handler3fory0abC7Support0fB8IdentityO_tF', 
                        '_$s22VisualActionPrediction0abC6ClientC030isBundleEligibleForAcceleratedB03for_y0abC7Support0A7ContextV_ys6ResultOySbs5Error_pGYbctF', 

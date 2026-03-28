@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CalendarIntegrationSupport.framework/Versions/A/CalendarIntegrationSupport'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s26CalendarIntegrationSupport0B10CollectionV10dataSourceAA0bd4DataF0_pvM', 
                        '_$s26CalendarIntegrationSupport0B10CollectionV10dataSourceAA0bd4DataF0_pvg', 
                        '_$s26CalendarIntegrationSupport0B10CollectionV10dataSourceAA0bd4DataF0_pvpMV', 

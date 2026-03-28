@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreLocation.framework/Versions/A/CoreLocation'
-current-version: 3064.0.10
+current-version: 3072.0.46
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/_LocationEssentials.framework/Versions/A/_LocationEssentials' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CLAppResetChangedNotification, _CLAppStatusChangedNotification, 
                        _CLApplyArchivedAuthorizationDecisions, _CLAuthorizationStatusChangedNotification, 
                        _CLBeaconRegionAnyIdentifier, _CLClientCreateWithBundleIdentifierAndPath, 
@@ -128,8 +125,8 @@ exports:
                        _CLSignificantRegion, _CLVIOEstimation, _CLVLLocalizationDebugInfo, 
                        _CLVLLocalizationMaps488Details, _CLVLLocalizationResult, 
                        _CLVertex ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CLAuthStatusChangedNotification, _CLDaemonShutdownNotification ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     objc-classes:    [ CLBackgroundActivitySession, CLBackgroundActivitySessionDiagnostic ]
 ...

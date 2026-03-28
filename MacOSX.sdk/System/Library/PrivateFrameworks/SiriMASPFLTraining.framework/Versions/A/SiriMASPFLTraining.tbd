@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriMASPFLTraining.framework/Versions/A/SiriMASPFLTraining'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s18SiriMASPFLTraining0A18MASPFLPluginRunnerC15isDataAvailable15taskPreferencesSb24PrivateFederatedLearning07PFLTaskI0V_tYaFTj', 
-                       '_$s18SiriMASPFLTraining0A18MASPFLPluginRunnerC15isDataAvailable15taskPreferencesSb24PrivateFederatedLearning07PFLTaskI0V_tYaFTjTu', 
-                       '_$s18SiriMASPFLTraining0A18MASPFLPluginRunnerC15isDataAvailable15taskPreferencesSb24PrivateFederatedLearning07PFLTaskI0V_tYaFTq', 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s18SiriMASPFLTraining0A18MASPFLPluginRunnerC22ensureDataAvailability15taskPreferencesy24PrivateFederatedLearning07PFLTaskI0V_tYaKFTj', 
+                       '_$s18SiriMASPFLTraining0A18MASPFLPluginRunnerC22ensureDataAvailability15taskPreferencesy24PrivateFederatedLearning07PFLTaskI0V_tYaKFTjTu', 
+                       '_$s18SiriMASPFLTraining0A18MASPFLPluginRunnerC22ensureDataAvailability15taskPreferencesy24PrivateFederatedLearning07PFLTaskI0V_tYaKFTq', 
                        '_$s18SiriMASPFLTraining0A18MASPFLPluginRunnerC24PrivateFederatedLearning07PFLTaskD0AAMc', 
                        '_$s18SiriMASPFLTraining0A18MASPFLPluginRunnerC3run4task7useCase7context24PrivateFederatedLearning13PFLTaskResultCAH0M0C_SS20LighthouseBackground22MLHostExtensionContextCtYaKFTj', 
                        '_$s18SiriMASPFLTraining0A18MASPFLPluginRunnerC3run4task7useCase7context24PrivateFederatedLearning13PFLTaskResultCAH0M0C_SS20LighthouseBackground22MLHostExtensionContextCtYaKFTjTu', 

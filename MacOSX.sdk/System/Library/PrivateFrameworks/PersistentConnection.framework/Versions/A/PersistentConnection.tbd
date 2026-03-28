@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PersistentConnection.framework/Versions/A/PersistentConnection'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _PCForceDemoMaxKeepAliveIntervalKey, _PCForceMinKeepAliveIntervalKey, 
                        _PCIntervalCacheAddressFamilyKey, _PCIntervalCacheChangedNotification, 
                        _PCIntervalCacheDateKey, _PCIntervalCacheInInitialGrowthKey, 
@@ -17,8 +15,8 @@ exports:
                        _PCSettingsPurgeDictionariesExceptForCurrent, _PCSettingsSetClassPollInterval, 
                        _PCSettingsSetClassPushEnabled, _PCSettingsSetDefaultStyle, 
                        _PCSettingsSetForceManualWhenRoamingForMCCAccount, _PCSettingsSetGlobalMCCForceManualWhenRoaming, 
-                       _PCSettingsSetStyle, _PCTimerFireEarlyToCoalesceKey, _PCWiFiInterfaceNameKey, 
-                       __PCSettingsGetStyle ]
+                       _PCSettingsSetGlobalMCCForceManualWhenRoaming_Failable, _PCSettingsSetStyle, 
+                       _PCTimerFireEarlyToCoalesceKey, _PCWiFiInterfaceNameKey, __PCSettingsGetStyle ]
     objc-classes:    [ PCCarrierBundleHelper, PCConnectionManager, PCInterfaceMonitor, 
                        PCKeepAliveState, PCLog, PCLogging, PCPersistentInterfaceManager, 
                        PCPersistentTimer, PCSimpleTimer ]

@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreIDVRGBLiveness.framework/Versions/A/CoreIDVRGBLiveness'
-current-version: 8.203
+current-version: 8.255.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s18CoreIDVRGBLiveness16RGBLivenessErrorO08internalD0yA2CmFWC', 
                        '_$s18CoreIDVRGBLiveness16RGBLivenessErrorO12faceTooSmallyA2CmFWC', 
                        '_$s18CoreIDVRGBLiveness16RGBLivenessErrorO12internalTestyA2CmFWC', 
@@ -13,6 +13,7 @@ exports:
                        '_$s18CoreIDVRGBLiveness16RGBLivenessErrorO13userCancelledyA2CmFWC', 
                        '_$s18CoreIDVRGBLiveness16RGBLivenessErrorO14stitchDetectedyA2CmFWC', 
                        '_$s18CoreIDVRGBLiveness16RGBLivenessErrorO15faceOutOfBoundsyA2CmFWC', 
+                       '_$s18CoreIDVRGBLiveness16RGBLivenessErrorO16livePhotoTimeoutyA2CmFWC', 
                        '_$s18CoreIDVRGBLiveness16RGBLivenessErrorO18selfieWithIMQErroryA2CmFWC', 
                        '_$s18CoreIDVRGBLiveness16RGBLivenessErrorO19sessionBackgroundedyA2CmFWC', 
                        '_$s18CoreIDVRGBLiveness16RGBLivenessErrorO2eeoiySbAC_ACtFZ', 

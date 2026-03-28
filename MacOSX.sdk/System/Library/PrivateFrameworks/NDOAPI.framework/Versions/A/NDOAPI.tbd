@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NDOAPI.framework/Versions/A/NDOAPI'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ NDOUI, NewDeviceOutreach, NewDeviceOutreachExtension, ndoagent ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s1T6NDOAPI23NDOCheckInActionHandlerPTl', '_$s1T6NDOAPI9NDOLoaderPTl', 
                        '_$s21InternalSwiftProtobuf7MessageP6NDOAPIE11ensureOneOfySbs7KeyPathCyxSbGd_tF', 
                        '_$s21InternalSwiftProtobuf7MessageP6NDOAPIE11getOptionalyqd__Sgs7KeyPathCyxqd__G_AHyxSbGtlF', 

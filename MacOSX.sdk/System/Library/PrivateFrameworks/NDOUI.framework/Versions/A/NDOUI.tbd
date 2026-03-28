@@ -1,14 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NDOUI.framework/Versions/A/NDOUI'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ CoverageSettingsPane_macOS, NewDeviceOutreachMacUI, NewDeviceOutreachTests, 
                        NewDeviceOutreachUI, ndoagent ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s5NDOUI10NDOSectionV10isExpandedSbvM', '_$s5NDOUI10NDOSectionV10isExpandedSbvg', 
                        '_$s5NDOUI10NDOSectionV10isExpandedSbvpMV', '_$s5NDOUI10NDOSectionV10isExpandedSbvs', 
                        '_$s5NDOUI10NDOSectionV10removeItem4withySi_tF', '_$s5NDOUI10NDOSectionV16isPlacardSectionSbvg', 

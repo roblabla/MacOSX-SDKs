@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/BackgroundAssets.framework/Versions/A/BackgroundAssets'
 swift-abi-version: 7
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/CloudKit.framework/Versions/A/CloudKit' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s16BackgroundAssets07ManagedaB5ErrorO10Foundation09LocalizedD0AAMc', 
                        '_$s16BackgroundAssets07ManagedaB5ErrorO11descriptionSSvg', 
                        '_$s16BackgroundAssets07ManagedaB5ErrorO11descriptionSSvpMV', 
@@ -31,8 +28,13 @@ exports:
                        '_$s16BackgroundAssets16AssetPackManagerC05assetD06withIDAA0cD0VSS_tYaKFTj', 
                        '_$s16BackgroundAssets16AssetPackManagerC05assetD06withIDAA0cD0VSS_tYaKFTjTu', 
                        '_$s16BackgroundAssets16AssetPackManagerC05assetD06withIDAA0cD0VSS_tYaKFTq', 
+                       '_$s16BackgroundAssets16AssetPackManagerC05assetD18IsAvailableLocally6withIDSbSS_tFTj', 
+                       '_$s16BackgroundAssets16AssetPackManagerC05assetD18IsAvailableLocally6withIDSbSS_tFTq', 
                        '_$s16BackgroundAssets16AssetPackManagerC10descriptor3for011searchingIncD6WithID6System14FileDescriptorVAG0M4PathV_SSSgtKFTj', 
                        '_$s16BackgroundAssets16AssetPackManagerC10descriptor3for011searchingIncD6WithID6System14FileDescriptorVAG0M4PathV_SSSgtKFTq', 
+                       '_$s16BackgroundAssets16AssetPackManagerC11localStatus02ofcD6WithIDAA0cD0V0G0VSS_tYaFTj', 
+                       '_$s16BackgroundAssets16AssetPackManagerC11localStatus02ofcD6WithIDAA0cD0V0G0VSS_tYaFTjTu', 
+                       '_$s16BackgroundAssets16AssetPackManagerC11localStatus02ofcD6WithIDAA0cD0V0G0VSS_tYaFTq', 
                        '_$s16BackgroundAssets16AssetPackManagerC13statusUpdates03forcD6WithIDQrSS_tFQOMQ', 
                        '_$s16BackgroundAssets16AssetPackManagerC13statusUpdates03forcD6WithIDQrSS_tFTj', 
                        '_$s16BackgroundAssets16AssetPackManagerC13statusUpdates03forcD6WithIDQrSS_tFTq', 
@@ -57,6 +59,9 @@ exports:
                        '_$s16BackgroundAssets16AssetPackManagerC20DownloadStatusUpdateOMn', 
                        '_$s16BackgroundAssets16AssetPackManagerC20DownloadStatusUpdateON', 
                        '_$s16BackgroundAssets16AssetPackManagerC20DownloadStatusUpdateOs23CustomStringConvertibleAAMc', 
+                       '_$s16BackgroundAssets16AssetPackManagerC23ensureLocalAvailability2of20requireLatestVersionyAA0cD0V_SbtYaKFTj', 
+                       '_$s16BackgroundAssets16AssetPackManagerC23ensureLocalAvailability2of20requireLatestVersionyAA0cD0V_SbtYaKFTjTu', 
+                       '_$s16BackgroundAssets16AssetPackManagerC23ensureLocalAvailability2of20requireLatestVersionyAA0cD0V_SbtYaKFTq', 
                        '_$s16BackgroundAssets16AssetPackManagerC23ensureLocalAvailability2ofyAA0cD0V_tYaKFTj', 
                        '_$s16BackgroundAssets16AssetPackManagerC23ensureLocalAvailability2ofyAA0cD0V_tYaKFTjTu', 
                        '_$s16BackgroundAssets16AssetPackManagerC23ensureLocalAvailability2ofyAA0cD0V_tYaKFTq', 
@@ -71,6 +76,9 @@ exports:
                        '_$s16BackgroundAssets16AssetPackManagerC6status02ofcD6WithIDAA0cD0V6StatusVSS_tYaKFTj', 
                        '_$s16BackgroundAssets16AssetPackManagerC6status02ofcD6WithIDAA0cD0V6StatusVSS_tYaKFTjTu', 
                        '_$s16BackgroundAssets16AssetPackManagerC6status02ofcD6WithIDAA0cD0V6StatusVSS_tYaKFTq', 
+                       '_$s16BackgroundAssets16AssetPackManagerC6status10relativeToAA0cD0V6StatusVAG_tYaKFTj', 
+                       '_$s16BackgroundAssets16AssetPackManagerC6status10relativeToAA0cD0V6StatusVAG_tYaKFTjTu', 
+                       '_$s16BackgroundAssets16AssetPackManagerC6status10relativeToAA0cD0V6StatusVAG_tYaKFTq', 
                        '_$s16BackgroundAssets16AssetPackManagerC8contents2at011searchingIncD6WithID7options10Foundation4DataV6System8FilePathV_SSSgSo20NSDataReadingOptionsVtKFTj', 
                        '_$s16BackgroundAssets16AssetPackManagerC8contents2at011searchingIncD6WithID7options10Foundation4DataV6System8FilePathV_SSSgSo20NSDataReadingOptionsVtKFTq', 
                        '_$s16BackgroundAssets16AssetPackManagerC8fullPath3for011searchingIncD6WithID6System04FileG0VAI_SSSgtKFTj', 

@@ -1,12 +1,14 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-ios19.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 279 -module-name CoreAudioKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 279.506 -module-name CoreAudioKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import AVFoundation
 import AudioToolbox
 import AudioUnit
 @_exported import CoreAudioKit
+import CoreAudioKitPrivate
 import CoreFoundation
+import CoreMIDI
 import DeveloperToolsSupport
 import Foundation
 import Swift
@@ -30,12 +32,8 @@ public typealias AUGenericViewInternalBase = UIKit.UIView
     set
   }
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
-  #endif
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func removeFromSuperview()
   @objc @_Concurrency.MainActor @preconcurrency public func removeScheduledUpdatesTimer()
   @objc deinit
@@ -47,9 +45,7 @@ extension CoreAudioKit.AUGenericViewInternal {
 }
 @_inheritsConvenienceInitializers @available(iOS 17, *)
 @objc public class AUAppleCustomViewLoader : ObjectiveC.NSObject {
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func customViewController(for componentDescription: AudioToolbox.AudioComponentDescription, audioUnit: AudioToolbox.AudioUnit, v3AU: AudioToolbox.AUAudioUnit? = nil) -> UIKit.UIViewController?
-  #endif
   @objc override dynamic public init()
   @objc deinit
 }

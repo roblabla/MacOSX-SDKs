@@ -19,7 +19,7 @@ typedef NS_OPTIONS(NSUInteger, BAAssetPackStatus) {
     
     /// A status value that indicates that the downloaded asset pack is out of date.
     ///
-    /// The presence of this status value doesn’t necessarily imply that an update to the asset pack can be downloaded over the current network connection. Check for the presence of ``BAAssetPackStatus/updateAvailable`` to determine whether an update can currently be downloaded.
+    /// The presence of this status value doesn’t necessarily imply that an update to the asset pack can be downloaded over the current network connection. Check for the presence of ``BAAssetPackStatus/BAAssetPackStatusUpdateAvailable`` to determine whether an update can currently be downloaded.
     BAAssetPackStatusOutOfDate = 1 << 3,
     
     /// A status value that indicates that the asset pack is no longer available to download.

@@ -94,6 +94,22 @@ AV_INIT_UNAVAILABLE
 /// The key system used for retrieving keys
 @property (readonly) AVContentKeySystem keySystem;
 
+/// Boolean indicating whether advisory keys are enabled on the client.
+///
+/// Set to true to enable advisory key loading, false to disable. false by default.
+///
+/// Advisory key loading allows applications to make use of content keys provided speculatively
+/// by the key server. When enabled, FairPlay may cache these keys and return them immediately
+/// on subsequent requests without requiring a round-trip to the key server.
+///
+/// The delegate must be prepared to handle advisory key requests by checking the `canBeFulfilledWithAdvisoryKey` property on
+/// `AVContentKeyRequest` objects.
+///
+/// When an advisory key is already cached by FairPlay, `makeStreamingContentKeyRequestData`
+/// will return nil for the SPC data, and `canBeFulfilledWithAdvisoryKey` will return true. In this case,
+/// no request to the key server is necessary.
+@property (readwrite) BOOL supportsAdvisoryKeys API_UNAVAILABLE(ios, tvos) API_UNAVAILABLE(macos, watchos, visionos, macCatalyst);
+
 /// Tells the receiver to treat the session as having been intentionally and normally expired.
 /// 
 /// When an instance of AVContentKeySession receives an expire message, all of its associated objects conforming to the AVContentKeyRecipient protocol will become inoperable. Send this message only after you have finished operating on the media data.
@@ -398,7 +414,24 @@ API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2), watchos(7.0), visionos(1.0)
 /// must ensure their AVContentKeySession is attached to these interstitial AVURLAssets.
 /// 
 /// These interstitial AVURLAssets may be retrieved from the primary AVURLAsset via AVPlayerInterstitialEventMonitor.
-@property (readonly, nullable, weak) id <AVContentKeyRecipient> originatingRecipient API_AVAILABLE(macos(15.4), ios(18.4), tvos(18.4), watchos(11.4), visionos(2.4));
+@property (readonly, nullable, weak) id <AVContentKeyRecipient> originatingRecipient API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// Indicates whether this key request was initiated for an advisory key.
+///
+/// This property is set to true when:
+/// 	1. Advisory key loading is enabled on the parent AVContentKeySession
+/// 	2. The key was previously loaded as an advisory key and cached by FairPlay
+/// 	3. A subsequent request for the same key is made
+///
+/// When `canBeFulfilledWithAdvisoryKey` is true and `makeStreamingContentKeyRequestData` returns nil
+/// for the SPC data, this indicates FairPlay has already cached the key. No request to the
+/// key server for a key response is necessary, and the application should simply return from the completion handler.
+///
+/// This property should be checked in the completion handler of
+/// `makeStreamingContentKeyRequestData(forApp:contentIdentifier:options:completionHandler:)`
+/// whenever the SPC data is nil to distinguish advisory keys from actual errors.
+
+@property (readonly) BOOL canBeFulfilledWithAdvisoryKey API_UNAVAILABLE(ios, tvos) API_UNAVAILABLE(macos, watchos, visionos, macCatalyst);
 
 /// Request secure token to have extended validation data. The value for the key should be previously created offline key using -[AVContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:].
 AVF_EXPORT NSString *const AVContentKeyRequestRequiresValidationDataInSecureTokenKey API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0));

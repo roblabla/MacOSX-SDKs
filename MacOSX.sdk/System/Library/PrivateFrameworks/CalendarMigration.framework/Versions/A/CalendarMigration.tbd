@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CalendarMigration.framework/Versions/A/CalendarMigration'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _kCalACAccountIDPlistKey, _kCalAccountIdentifierDictionaryKey, 
                        _kCalAccountTypeDictionaryKey, _kCalAlarmFilterPlistKey, _kCalAlarmsDisabledPlistKey, 
                        _kCalAttachmentFilterPlistKey, _kCalAttachmentsDirectoryName, 

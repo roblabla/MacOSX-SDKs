@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TCC.framework/Versions/A/TCC'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _TCCAccessCheckAuditToken, _TCCAccessCopyBundleIdentifiersDisabledForService, 
                        _TCCAccessCopyBundleIdentifiersForService, _TCCAccessCopyInformation, 
                        _TCCAccessCopyInformationForBundle, _TCCAccessCopyInformationForBundleId, 
@@ -120,12 +118,13 @@ exports:
                        _tcc_message_options_create, _tcc_message_options_get_cache_policy, 
                        _tcc_message_options_get_client_dict, _tcc_message_options_get_database_type, 
                        _tcc_message_options_get_has_prompted_for_allow, _tcc_message_options_get_include_policy, 
-                       _tcc_message_options_get_nokill_policy, _tcc_message_options_get_prompt_string_type, 
-                       _tcc_message_options_get_reply_handler_policy, _tcc_message_options_get_request_prompt_policy, 
-                       _tcc_message_options_get_request_prompt_rights_mask, _tcc_message_options_get_request_record_upgrade_policy, 
-                       _tcc_message_options_get_request_usage_string_policy, _tcc_message_options_set_cache_policy, 
-                       _tcc_message_options_set_client_dict, _tcc_message_options_set_database_type, 
-                       _tcc_message_options_set_has_prompted_for_allow, _tcc_message_options_set_include_policy, 
+                       _tcc_message_options_get_learn_more_link, _tcc_message_options_get_nokill_policy, 
+                       _tcc_message_options_get_prompt_string_type, _tcc_message_options_get_reply_handler_policy, 
+                       _tcc_message_options_get_request_prompt_policy, _tcc_message_options_get_request_prompt_rights_mask, 
+                       _tcc_message_options_get_request_record_upgrade_policy, _tcc_message_options_get_request_usage_string_policy, 
+                       _tcc_message_options_set_cache_policy, _tcc_message_options_set_client_dict, 
+                       _tcc_message_options_set_database_type, _tcc_message_options_set_has_prompted_for_allow, 
+                       _tcc_message_options_set_include_policy, _tcc_message_options_set_learn_more_link, 
                        _tcc_message_options_set_nokill_policy, _tcc_message_options_set_prompt_string_type, 
                        _tcc_message_options_set_reply_handler_policy, _tcc_message_options_set_request_prompt_policy, 
                        _tcc_message_options_set_request_prompt_rights_mask, _tcc_message_options_set_request_record_upgrade_policy, 

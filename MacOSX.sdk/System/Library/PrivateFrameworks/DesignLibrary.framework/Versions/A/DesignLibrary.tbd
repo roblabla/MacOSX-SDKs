@@ -1,20 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DesignLibrary.framework/Versions/A/DesignLibrary'
-current-version: 7.2.5
+current-version: 7.4.27
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ '-allowable_client', AppKit, DesignLibraryTests, Dock, DockCore, 
                        MRUIKit, MaterialTester, MaterialsCatalog, MicaKit, SaltUICore, 
                        SwiftUI, SwiftUINoKit, TVUIKit, TextAnimationSupport, UIKit, 
                        UIKitCore, WindowManagerFramework ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s13DesignLibrary0A5IdiomO2eeoiySbAC_ACtFZ', '_$s13DesignLibrary0A5IdiomO2tvyA2CmFWC', 
                        '_$s13DesignLibrary0A5IdiomO3macyA2CmFWC', '_$s13DesignLibrary0A5IdiomO3padyA2CmFWC', 
                        '_$s13DesignLibrary0A5IdiomO4hash4intoys6HasherVz_tF', '_$s13DesignLibrary0A5IdiomO5phoneyA2CmFWC', 
@@ -309,6 +306,8 @@ exports:
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV11focusOffsetyAE7SwiftUI9UnitPointVF', 
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV11siriSnippetAEvgZ', 
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV11siriSnippetAEvpZMV', 
+                       '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV12carplayUltraAEvgZ', 
+                       '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV12carplayUltraAEvpZMV', 
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV12focusPlatterAEvgZ', 
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV12focusPlatterAEvpZMV', 
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV12optimization5levelAeC17OptimizationLevelVSg_tF', 
@@ -329,6 +328,7 @@ exports:
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV17adaptiveLuminance5fixedAESf_tF', 
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV17adaptiveLuminance7initialAESf_tF', 
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV17externalLuminanceyAESbF', 
+                       '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV18isBaseVariantEqual2toSbAE_tF', 
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV18notificationCenterAEvgZ', 
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV18notificationCenterAEvpZMV', 
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV20fixedBackgroundColoryAE7SwiftUI0I0VAGE11ResolvedHDRVSgF', 

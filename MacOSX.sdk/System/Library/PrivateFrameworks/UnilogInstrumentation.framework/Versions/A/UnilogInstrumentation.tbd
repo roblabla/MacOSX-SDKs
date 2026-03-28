@@ -1,0 +1,56 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+install-name:    '/System/Library/PrivateFrameworks/UnilogInstrumentation.framework/Versions/A/UnilogInstrumentation'
+swift-abi-version: 7
+exports:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s21UnilogInstrumentation0B7ContextV3log_9timestampyx_10Foundation4DateVSgt0A13CommonLibrary17LogPayloadMessageRzlF', 
+                       '_$s21UnilogInstrumentation0B7ContextV4fromACs7Decoder_p_tKcfC', 
+                       '_$s21UnilogInstrumentation0B7ContextV6encode2toys7Encoder_p_tKF', 
+                       '_$s21UnilogInstrumentation0B7ContextV7endSpan6statusy0A13CommonLibrary0E6StatusO_tF', 
+                       '_$s21UnilogInstrumentation0B7ContextV8withSpan4name_xSS_xAA0E0CKXEtKlF', 
+                       '_$s21UnilogInstrumentation0B7ContextV8withSpan4name_xSS_xAA0E0CYaKYCXEtYaKlF', 
+                       '_$s21UnilogInstrumentation0B7ContextV8withSpan4name_xSS_xAA0E0CYaKYCXEtYaKlFTu', 
+                       '_$s21UnilogInstrumentation0B7ContextV9clientRaws5Int32Vvg', 
+                       '_$s21UnilogInstrumentation0B7ContextV9clientRaws5Int32VvpMV', 
+                       '_$s21UnilogInstrumentation0B7ContextV9startSpan4nameAA0E0CSS_tF', 
+                       '_$s21UnilogInstrumentation0B7ContextVMa', '_$s21UnilogInstrumentation0B7ContextVMn', 
+                       '_$s21UnilogInstrumentation0B7ContextVN', '_$s21UnilogInstrumentation0B7ContextVSEAAMc', 
+                       '_$s21UnilogInstrumentation0B7ContextVSeAAMc', '_$s21UnilogInstrumentation0B7ContextV_8spanNameAC0A13CommonLibrary6ClientO_SStcfC', 
+                       '_$s21UnilogInstrumentation0B7ContextVyAC0A13CommonLibrary6ClientOcfC', 
+                       '_$s21UnilogInstrumentation4SpanC05startC04nameACSS_tF', '_$s21UnilogInstrumentation4SpanC2idAA0C2IdVvg', 
+                       '_$s21UnilogInstrumentation4SpanC2idAA0C2IdVvpMV', '_$s21UnilogInstrumentation4SpanC3addyyx0A13CommonLibrary0C16AttributeMessageRzlF', 
+                       '_$s21UnilogInstrumentation4SpanC3end6statusy0A13CommonLibrary0C6StatusO_tF', 
+                       '_$s21UnilogInstrumentation4SpanC3log5event9timestampyx_10Foundation4DateVSgt0A13CommonLibrary17LogPayloadMessageRzlF', 
+                       '_$s21UnilogInstrumentation4SpanC4nameSSvg', '_$s21UnilogInstrumentation4SpanC4nameSSvpMV', 
+                       '_$s21UnilogInstrumentation4SpanC6parentACSgvg', '_$s21UnilogInstrumentation4SpanC6parentACSgvpMV', 
+                       '_$s21UnilogInstrumentation4SpanC7traceID10Foundation4UUIDVvg', 
+                       '_$s21UnilogInstrumentation4SpanC7traceID10Foundation4UUIDVvpMV', 
+                       '_$s21UnilogInstrumentation4SpanCMa', '_$s21UnilogInstrumentation4SpanCMm', 
+                       '_$s21UnilogInstrumentation4SpanCMn', '_$s21UnilogInstrumentation4SpanCMo', 
+                       '_$s21UnilogInstrumentation4SpanCMu', '_$s21UnilogInstrumentation4SpanCN', 
+                       '_$s21UnilogInstrumentation4SpanCfD', '_$s21UnilogInstrumentation4SpanCfd', 
+                       '_$s21UnilogInstrumentation5TraceC2id10Foundation4UUIDVvg', 
+                       '_$s21UnilogInstrumentation5TraceC2id10Foundation4UUIDVvpMV', 
+                       '_$s21UnilogInstrumentation5TraceC3endyyF', '_$s21UnilogInstrumentation5TraceCMa', 
+                       '_$s21UnilogInstrumentation5TraceCMm', '_$s21UnilogInstrumentation5TraceCMn', 
+                       '_$s21UnilogInstrumentation5TraceCMo', '_$s21UnilogInstrumentation5TraceCMu', 
+                       '_$s21UnilogInstrumentation5TraceCN', '_$s21UnilogInstrumentation5TraceCfD', 
+                       '_$s21UnilogInstrumentation5TraceCfd', '_$s21UnilogInstrumentation6SpanIdV2eeoiySbAC_ACtFZ', 
+                       '_$s21UnilogInstrumentation6SpanIdV4fromACs7Decoder_p_tKcfC', 
+                       '_$s21UnilogInstrumentation6SpanIdV4hash4intoys6HasherVz_tF', 
+                       '_$s21UnilogInstrumentation6SpanIdV5valueAC10Foundation4DataV_tcfC', 
+                       '_$s21UnilogInstrumentation6SpanIdV6encode2toys7Encoder_p_tKF', 
+                       '_$s21UnilogInstrumentation6SpanIdV9hashValueSivg', '_$s21UnilogInstrumentation6SpanIdV9hashValueSivpMV', 
+                       '_$s21UnilogInstrumentation6SpanIdVACycfC', '_$s21UnilogInstrumentation6SpanIdVMa', 
+                       '_$s21UnilogInstrumentation6SpanIdVMn', '_$s21UnilogInstrumentation6SpanIdVN', 
+                       '_$s21UnilogInstrumentation6SpanIdVSEAAMc', '_$s21UnilogInstrumentation6SpanIdVSHAAMc', 
+                       '_$s21UnilogInstrumentation6SpanIdVSQAAMc', '_$s21UnilogInstrumentation6SpanIdVSeAAMc', 
+                       '_$sSo28UnilogInstrumentationContextC0aB0E6addLog_13withTimestampySo13ULGLogPayload_p_10Foundation4DateVtF', 
+                       '_$sSo28UnilogInstrumentationContextC0aB0E6addLogyySo13ULGLogPayload_pF', 
+                       '_$sSo28UnilogInstrumentationContextC0aB0EABycfC', '_$sSo28UnilogInstrumentationContextC0aB0EABycfc', 
+                       '_$sSo28UnilogInstrumentationContextCMa', _UnilogInstrumentationVersionNumber, 
+                       _UnilogInstrumentationVersionString ]
+    objc-classes:    [ UnilogInstrumentationContext ]
+...

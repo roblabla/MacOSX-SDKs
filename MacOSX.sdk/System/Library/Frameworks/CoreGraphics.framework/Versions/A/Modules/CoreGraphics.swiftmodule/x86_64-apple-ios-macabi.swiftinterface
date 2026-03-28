@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-ios26.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1965.2.3.4.1 -module-name CoreGraphics
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-ios26.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1965.4.5 -module-name CoreGraphics
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 @_exported import CoreFoundation
 @_exported import CoreGraphics
 import Foundation
@@ -11,17 +11,13 @@ import _StringProcessing
 import _SwiftConcurrencyShims
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 extension CoreGraphics.CGColor {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var components: [CoreFoundation.CGFloat]? {
     get
   }
-  #endif
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 public protocol _CGColorInitTrampoline {
-  #if compiler(>=5.3) && $NonescapableTypes
   init?(colorSpace space: CoreGraphics.CGColorSpace, components: Swift.UnsafePointer<CoreFoundation.CGFloat>)
-  #endif
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 extension CoreGraphics._CGColorInitTrampoline {
@@ -35,204 +31,106 @@ extension CoreGraphics.CGColor : @unchecked Swift.Sendable {
 }
 @available(*, unavailable, message: "Use == instead")
 public func CGAffineTransformEqualToTransform(_ t1: CoreFoundation.CGAffineTransform, _ t2: CoreFoundation.CGAffineTransform) -> Swift.Bool
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use class var white/black/clear instead")
 public func CGColorGetConstantColor(_ colorName: CoreFoundation.CFString?) -> CoreGraphics.CGColor?
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use == instead")
 public func CGColorEqualToColor(_ color1: CoreGraphics.CGColor?, _ color2: CoreGraphics.CGColor?) -> Swift.Bool
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "getter:CGColor.components(self:)")
 public func CGColorGetComponents(_ color: CoreGraphics.CGColor?) -> Swift.UnsafePointer<CoreFoundation.CGFloat>
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use colorTable.count instead")
 public func CGColorSpaceGetColorTableCount(_ space: CoreGraphics.CGColorSpace?) -> Swift.Int
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "CGColorSpace.colorTable(self:_:)")
 public func CGColorSpaceGetColorTable(_ space: CoreGraphics.CGColorSpace?, _ table: Swift.UnsafeMutablePointer<Swift.UInt8>)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use setLineDash(self:phase:lengths:)")
 public func CGContextSetLineDash(_ c: CoreGraphics.CGContext?, _ phase: CoreFoundation.CGFloat, _ lengths: Swift.UnsafePointer<CoreFoundation.CGFloat>, _ count: Swift.Int)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use move(to:) instead")
 public func CGContextMoveToPoint(_ c: CoreGraphics.CGContext?, _ x: CoreFoundation.CGFloat, _ y: CoreFoundation.CGFloat)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addLine(to:) instead")
 public func CGContextAddLineToPoint(_ c: CoreGraphics.CGContext?, _ x: CoreFoundation.CGFloat, _ y: CoreFoundation.CGFloat)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addCurve(to:control1:control2:) instead")
 public func CGContextAddCurveToPoint(_ c: CoreGraphics.CGContext?, _ cp1x: CoreFoundation.CGFloat, _ cp1y: CoreFoundation.CGFloat, _ cp2x: CoreFoundation.CGFloat, _ cp2y: CoreFoundation.CGFloat, _ x: CoreFoundation.CGFloat, _ y: CoreFoundation.CGFloat)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addQuadCurve(to:control:)")
 public func CGContextAddQuadCurveToPoint(_ c: CoreGraphics.CGContext?, _ cpx: CoreFoundation.CGFloat, _ cpy: CoreFoundation.CGFloat, _ x: CoreFoundation.CGFloat, _ y: CoreFoundation.CGFloat)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addRects(_:)")
 public func CGContextAddRects(_ c: CoreGraphics.CGContext?, _ rects: Swift.UnsafePointer<CoreFoundation.CGRect>, _ count: Swift.Int)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addLines(between:)")
 public func CGContextAddLines(_ c: CoreGraphics.CGContext?, _ points: Swift.UnsafePointer<CoreFoundation.CGPoint>, _ count: Swift.Int)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addArc(center:radius:startAngle:endAngle:clockwise:)")
 public func CGContextAddArc(_ c: CoreGraphics.CGContext?, _ x: CoreFoundation.CGFloat, _ y: CoreFoundation.CGFloat, _ radius: CoreFoundation.CGFloat, _ startAngle: CoreFoundation.CGFloat, _ endAngle: CoreFoundation.CGFloat, _ clockwise: Swift.Int32)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addArc(self:x1:y1:x2:y2:radius:)")
 public func CGContextAddArcToPoint(_ c: CoreGraphics.CGContext?, _ x1: CoreFoundation.CGFloat, _ y1: CoreFoundation.CGFloat, _ x2: CoreFoundation.CGFloat, _ y2: CoreFoundation.CGFloat, _ radius: CoreFoundation.CGFloat)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use fill(self:_:count:)")
 public func CGContextFillRects(_ c: CoreGraphics.CGContext?, _ rects: Swift.UnsafePointer<CoreFoundation.CGRect>, _ count: Swift.Int)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use strokeLineSegments(self:between:count:)")
 public func CGContextStrokeLineSegments(_ c: CoreGraphics.CGContext?, _ points: Swift.UnsafePointer<CoreFoundation.CGPoint>, _ count: Swift.Int)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use clip(to:)")
 public func CGContextClipToRects(_ c: CoreGraphics.CGContext?, _ rects: Swift.UnsafePointer<CoreFoundation.CGRect>, _ count: Swift.Int)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use draw(_:in:)")
 public func CGContextDrawImage(_ c: CoreGraphics.CGContext?, _ rect: CoreFoundation.CGRect, _ image: CoreGraphics.CGImage?)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use draw(_:in:byTiling:)")
 public func CGContextDrawTiledImage(_ c: CoreGraphics.CGContext?, _ rect: CoreFoundation.CGRect, _ image: CoreGraphics.CGImage?)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use draw(_:in:by:options:)")
 public func CGContextDrawImageApplyingToneMapping(_ c: CoreGraphics.CGContext?, _ rect: CoreFoundation.CGRect, _ image: CoreGraphics.CGImage?, applying: CoreGraphics.CGToneMapping, options: CoreFoundation.CFDictionary?) -> Swift.Bool
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "getter:CGContext.textPosition(self:)")
 public func CGContextGetTextPosition(_ c: CoreGraphics.CGContext?) -> CoreFoundation.CGPoint
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use var textPosition")
 public func CGContextSetTextPosition(_ c: CoreGraphics.CGContext?, _ x: CoreFoundation.CGFloat, _ y: CoreFoundation.CGFloat)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use showGlyphs(_:at:)")
 public func CGContextShowGlyphsAtPositions(_ c: CoreGraphics.CGContext?, _ glyphs: Swift.UnsafePointer<CoreGraphics.CGGlyph>, _ Lpositions: Swift.UnsafePointer<CoreFoundation.CGPoint>, _ count: Swift.Int)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "CGContext.fillPath(self:)")
 public func CGContextFillPath(_ c: CoreGraphics.CGContext?)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use fillPath(using:)")
 public func CGContextEOFillPath(_ c: CoreGraphics.CGContext?)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "CGContext.clip(self:)")
 public func CGContextClip(_ c: CoreGraphics.CGContext?)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use clip(using:)")
 public func CGContextEOClip(_ c: CoreGraphics.CGContext?)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "CGGetLastMouseDelta")
 public func CGGetLastMouseDelta(_ deltaX: Swift.UnsafeMutablePointer<Swift.Int32>?, _ deltaY: Swift.UnsafeMutablePointer<Swift.Int32>?)
-#endif
 @available(*, unavailable, message: "Use divided(atDistance:from:)")
 public func CGRectDivide(_ rect: CoreFoundation.CGRect, _ slice: Swift.UnsafeMutablePointer<CoreFoundation.CGRect>, _ remainder: Swift.UnsafeMutablePointer<CoreFoundation.CGRect>, _ amount: CoreFoundation.CGFloat, _ edge: CoreFoundation.CGRectEdge)
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use CGPoint.init(dictionaryRepresentation:)")
 public func CGPointMakeWithDictionaryRepresentation(_ dict: CoreFoundation.CFDictionary?, _ point: Swift.UnsafeMutablePointer<CoreFoundation.CGPoint>) -> Swift.Bool
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use CGSize.init(dictionaryRepresentation:)")
 public func CGSizeMakeWithDictionaryRepresentation(_ dict: CoreFoundation.CFDictionary?, _ size: Swift.UnsafeMutablePointer<CoreFoundation.CGSize>) -> Swift.Bool
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use CGRect.init(dictionaryRepresentation:)")
 public func CGRectMakeWithDictionaryRepresentation(_ dict: CoreFoundation.CFDictionary?, _ rect: Swift.UnsafeMutablePointer<CoreFoundation.CGRect>) -> Swift.Bool
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, renamed: "CGImage.copy(self:maskingColorComponents:)")
 public func CGImageCreateWithMaskingColors(_ image: CoreGraphics.CGImage?, _ components: Swift.UnsafePointer<CoreFoundation.CGFloat>) -> CoreGraphics.CGImage?
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use draw(_:in:)")
 public func CGContextDrawLayerInRect(_ context: CoreGraphics.CGContext?, _ rect: CoreFoundation.CGRect, _ layer: CoreGraphics.CGLayer?)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use draw(_:at:)")
 public func CGContextDrawLayerAtPoint(_ context: CoreGraphics.CGContext?, _ point: CoreFoundation.CGPoint, _ layer: CoreGraphics.CGLayer?)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use copy(byDashingWithPhase:lengths:transform:)")
 public func CGPathCreateCopyByDashingPath(_ path: CoreGraphics.CGPath?, _ transform: Swift.UnsafePointer<CoreFoundation.CGAffineTransform>, _ phase: CoreFoundation.CGFloat, _ lengths: Swift.UnsafePointer<CoreFoundation.CGFloat>, _ count: Swift.Int) -> CoreGraphics.CGPath?
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use copy(byStroking:lineWidth:lineCap:lineJoin:miterLimit:transform:)")
 public func CGPathCreateCopyByStrokingPath(_ path: CoreGraphics.CGPath?, _ transform: Swift.UnsafePointer<CoreFoundation.CGAffineTransform>, _ lineWidth: CoreFoundation.CGFloat, _ lineCap: CoreGraphics.CGLineCap, _ lineJoin: CoreGraphics.CGLineJoin, _ miterLimit: CoreFoundation.CGFloat) -> CoreGraphics.CGPath?
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use == instead")
 public func CGPathEqualToPath(_ path1: CoreGraphics.CGPath?, _ path2: CoreGraphics.CGPath?) -> Swift.Bool
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use move(to:transform:)")
 public func CGPathMoveToPoint(_ path: CoreGraphics.CGMutablePath?, _ m: Swift.UnsafePointer<CoreFoundation.CGAffineTransform>, _ x: CoreFoundation.CGFloat, _ y: CoreFoundation.CGFloat)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addLine(to:transform:)")
 public func CGPathAddLineToPoint(_ path: CoreGraphics.CGMutablePath?, _ m: Swift.UnsafePointer<CoreFoundation.CGAffineTransform>, _ x: CoreFoundation.CGFloat, _ y: CoreFoundation.CGFloat)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addCurve(to:control1:control2:transform:)")
 public func CGPathAddCurveToPoint(_ path: CoreGraphics.CGMutablePath?, _ m: Swift.UnsafePointer<CoreFoundation.CGAffineTransform>, _ cp1x: CoreFoundation.CGFloat, _ cp1y: CoreFoundation.CGFloat, _ cp2x: CoreFoundation.CGFloat, _ cp2y: CoreFoundation.CGFloat, _ x: CoreFoundation.CGFloat, _ y: CoreFoundation.CGFloat)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addQuadCurve(to:control:transform:)")
 public func CGPathAddQuadCurveToPoint(_ path: CoreGraphics.CGMutablePath?, _ m: Swift.UnsafePointer<CoreFoundation.CGAffineTransform>, _ cpx: CoreFoundation.CGFloat, _ cpy: CoreFoundation.CGFloat, _ x: CoreFoundation.CGFloat, _ y: CoreFoundation.CGFloat)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addRect(_:transform:)")
 public func CGPathAddRect(_ path: CoreGraphics.CGMutablePath?, _ m: Swift.UnsafePointer<CoreFoundation.CGAffineTransform>, _ rect: CoreFoundation.CGRect)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addRects(_:transform:)")
 public func CGPathAddRects(_ path: CoreGraphics.CGMutablePath?, _ m: Swift.UnsafePointer<CoreFoundation.CGAffineTransform>, _ rects: Swift.UnsafePointer<CoreFoundation.CGRect>, _ count: Swift.Int)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addLines(between:transform:)")
 public func CGPathAddLines(_ path: CoreGraphics.CGMutablePath?, _ m: Swift.UnsafePointer<CoreFoundation.CGAffineTransform>, _ points: Swift.UnsafePointer<CoreFoundation.CGPoint>, _ count: Swift.Int)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addEllipse(rect:transform:)")
 public func CGPathAddEllipseInRect(_ path: CoreGraphics.CGMutablePath?, _ m: Swift.UnsafePointer<CoreFoundation.CGAffineTransform>, _ rect: CoreFoundation.CGRect)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addRelativeArc(center:radius:startAngle:delta:transform:)")
 public func CGPathAddRelativeArc(_ path: CoreGraphics.CGMutablePath?, _ matrix: Swift.UnsafePointer<CoreFoundation.CGAffineTransform>, _ x: CoreFoundation.CGFloat, _ y: CoreFoundation.CGFloat, _ radius: CoreFoundation.CGFloat, _ startAngle: CoreFoundation.CGFloat, _ delta: CoreFoundation.CGFloat)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addArc(center:radius:startAngle:endAngle:clockwise:transform:)")
 public func CGPathAddArc(_ path: CoreGraphics.CGMutablePath?, _ m: Swift.UnsafePointer<CoreFoundation.CGAffineTransform>, _ x: CoreFoundation.CGFloat, _ y: CoreFoundation.CGFloat, _ radius: CoreFoundation.CGFloat, _ startAngle: CoreFoundation.CGFloat, _ endAngle: CoreFoundation.CGFloat, _ clockwise: Swift.Bool)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addArc(tangent1End:tangent2End:radius:transform:)")
 public func CGPathAddArcToPoint(_ path: CoreGraphics.CGMutablePath?, _ m: Swift.UnsafePointer<CoreFoundation.CGAffineTransform>, _ x1: CoreFoundation.CGFloat, _ y1: CoreFoundation.CGFloat, _ x2: CoreFoundation.CGFloat, _ y2: CoreFoundation.CGFloat, _ radius: CoreFoundation.CGFloat)
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(*, unavailable, message: "Use addPath(_:transform:)")
 public func CGPathAddPath(_ path1: CoreGraphics.CGMutablePath?, _ m: Swift.UnsafePointer<CoreFoundation.CGAffineTransform>, _ path2: CoreGraphics.CGPath?)
-#endif
 @available(*, unavailable, message: "Use CGColor.white")
 public var kCGColorWhite: CoreFoundation.CFString {
   get
@@ -492,9 +390,7 @@ extension CoreFoundation.CGPoint {
   @_transparent public init(x: Swift.Double, y: Swift.Double) {
         self.init(x: CGFloat(x), y: CGFloat(y))
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(dictionaryRepresentation dict: CoreFoundation.CFDictionary)
-  #endif
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 extension CoreFoundation.CGPoint : Swift.CustomReflectable {
@@ -553,39 +449,29 @@ internal func CGPointNearlyEqualToPoint(_ lhs: CoreFoundation.CGPoint, _ rhs: Co
 internal func CGPointNearlyEqualToPointWithTolerance(_ lhs: CoreFoundation.CGPoint, _ rhs: CoreFoundation.CGPoint, _ tolerance: CoreFoundation.CGFloat) -> Swift.Bool
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 extension CoreGraphics.CGImage {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func copy(maskingColorComponents components: [CoreFoundation.CGFloat]) -> CoreGraphics.CGImage?
-  #endif
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 extension CoreGraphics.CGImage : @unchecked Swift.Sendable {
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension CoreGraphics.CGEvent {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var data: CoreFoundation.CFData? {
     get
   }
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 public protocol _CGRenderingBufferProviderInit {
-  #if compiler(>=5.3) && $NonescapableTypes
   init?<T>(info: T, size: Swift.Int) where T : CoreGraphics.CGRenderingBufferProvider.Info
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension CoreGraphics._CGRenderingBufferProviderInit where Self : CoreGraphics.CGRenderingBufferProvider {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?<T>(info: T, size: Swift.Int) where T : CoreGraphics.CGRenderingBufferProvider.Info
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension CoreGraphics.CGRenderingBufferProvider : CoreGraphics._CGRenderingBufferProviderInit {
   public protocol Info : AnyObject {
-    #if compiler(>=5.3) && $NonescapableTypes
     func lock() -> Swift.UnsafeMutableRawPointer?
-    #endif
     func unlock(_: Swift.UnsafeMutableRawPointer)
   }
 }
@@ -624,9 +510,7 @@ extension CoreFoundation.CGRect {
   @_transparent public init(x: Swift.Int, y: Swift.Int, width: Swift.Int, height: Swift.Int) {
         self.init(origin: CGPoint(x: x, y: y), size: CGSize(width: width, height: height))
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(dictionaryRepresentation dict: CoreFoundation.CFDictionary)
-  #endif
   @_transparent public func divided(atDistance: CoreFoundation.CGFloat, from fromEdge: CoreFoundation.CGRectEdge) -> (slice: CoreFoundation.CGRect, remainder: CoreFoundation.CGRect) {
         var slice = CGRect.zero
         var remainder = CGRect.zero
@@ -1005,7 +889,6 @@ extension CoreGraphics.CGBitmapInfo {
         }
         return result
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, deprecated: 10000.0, message: "Use init(alpha:component:byteOrder:pixelFormat:) instead")
   @available(iOS, deprecated: 10000.0, message: "Use init(alpha:component:byteOrder:pixelFormat:) instead")
   @available(tvOS, deprecated: 10000.0, message: "Use init(alpha:component:byteOrder:pixelFormat:) instead")
@@ -1021,8 +904,6 @@ extension CoreGraphics.CGBitmapInfo {
         subtract(member)
         return intersectionElements
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, deprecated: 10000.0, message: "Use init(alpha:component:byteOrder:pixelFormat:) instead")
   @available(iOS, deprecated: 10000.0, message: "Use init(alpha:component:byteOrder:pixelFormat:) instead")
   @available(tvOS, deprecated: 10000.0, message: "Use init(alpha:component:byteOrder:pixelFormat:) instead")
@@ -1034,7 +915,6 @@ extension CoreGraphics.CGBitmapInfo {
         formUnion(newMember)
         return r.isEmpty ? nil : r
     }
-  #endif
   @available(macOS, deprecated: 10000.0, message: "Use init(alpha:component:byteOrder:pixelFormat:) instead")
   @available(iOS, deprecated: 10000.0, message: "Use init(alpha:component:byteOrder:pixelFormat:) instead")
   @available(tvOS, deprecated: 10000.0, message: "Use init(alpha:component:byteOrder:pixelFormat:) instead")
@@ -1114,9 +994,7 @@ extension CoreGraphics.CGBitmapInfo {
 public enum CGPathFillRule : Swift.Int {
   case winding
   case evenOdd
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
-  #endif
   @available(iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, macOS 10.9, *)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
@@ -1152,9 +1030,7 @@ extension CoreFoundation.CGSize {
   @_transparent public init(width: Swift.Double, height: Swift.Double) {
         self.init(width: CGFloat(width), height: CGFloat(height))
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(dictionaryRepresentation dict: CoreFoundation.CFDictionary)
-  #endif
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 extension CoreFoundation.CGSize : Swift.CustomReflectable {
@@ -1531,11 +1407,9 @@ extension CoreFoundation.CGRect {
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 extension CoreGraphics.CGColorSpace {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var colorTable: [Swift.UInt8]? {
     get
   }
-  #endif
 }
 @available(macOS 10.9, iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
 extension CoreGraphics.CGColorSpace : @unchecked Swift.Sendable {
@@ -1557,10 +1431,8 @@ extension CoreGraphics.CGContext {
   public func strokeLineSegments(between points: [CoreFoundation.CGPoint])
   public func clip(to rects: [CoreFoundation.CGRect])
   public func draw(_ image: CoreGraphics.CGImage, in rect: CoreFoundation.CGRect, byTiling: Swift.Bool = false)
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public func draw(_ image: CoreGraphics.CGImage, in rect: CoreFoundation.CGRect, by toneMapping: CoreGraphics.CGToneMapping = .default, options: CoreFoundation.CFDictionary?) -> Swift.Bool
-  #endif
   public var textPosition: CoreFoundation.CGPoint {
     get
     set
@@ -1604,21 +1476,13 @@ extension CoreGraphics.CGContext {
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 public protocol _CGContextInit {
-  #if compiler(>=5.3) && $NonescapableTypes
   init?(width: Swift.Int, height: Swift.Int, auxiliaryInfo: CoreGraphics.CGContext.AuxiliaryInfo, onResolve: ((CoreGraphics.CGContentInfo, inout CoreGraphics.CGBitmapParameters) -> Swift.Bool)?, onAllocate: ((CoreGraphics.CGContentInfo, CoreGraphics.CGBitmapParameters) -> CoreGraphics.CGRenderingBufferProvider?)?, onRelease: ((CoreGraphics.CGRenderingBufferProvider?, CoreGraphics.CGContentInfo, CoreGraphics.CGBitmapParameters) -> Swift.Void)?, onError: ((Foundation.NSError, CoreGraphics.CGContentInfo, CoreGraphics.CGBitmapParameters) -> Swift.Void)?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   init?(width: Swift.Int, height: Swift.Int, auxiliaryInfo: CoreGraphics.CGContext.AuxiliaryInfo, onResolve: ((CoreGraphics.CGContentInfo, inout CoreGraphics.CGBitmapParameters) -> Swift.Bool)?)
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension CoreGraphics._CGContextInit where Self : CoreGraphics.CGContext {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(width: Swift.Int, height: Swift.Int, auxiliaryInfo: CoreGraphics.CGContext.AuxiliaryInfo = CGContext.AuxiliaryInfo(), onResolve: ((CoreGraphics.CGContentInfo, inout CoreGraphics.CGBitmapParameters) -> Swift.Bool)? = nil, onAllocate: ((CoreGraphics.CGContentInfo, CoreGraphics.CGBitmapParameters) -> CoreGraphics.CGRenderingBufferProvider?)? = nil, onRelease: ((CoreGraphics.CGRenderingBufferProvider?, CoreGraphics.CGContentInfo, CoreGraphics.CGBitmapParameters) -> Swift.Void)? = nil, onError: ((Foundation.NSError, CoreGraphics.CGContentInfo, CoreGraphics.CGBitmapParameters) -> Swift.Void)? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(width: Swift.Int, height: Swift.Int, auxiliaryInfo: CoreGraphics.CGContext.AuxiliaryInfo, onResolve: ((CoreGraphics.CGContentInfo, inout CoreGraphics.CGBitmapParameters) -> Swift.Bool)? = nil)
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension CoreGraphics.CGContext : CoreGraphics._CGContextInit {

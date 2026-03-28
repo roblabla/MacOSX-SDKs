@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ContactsWidgetUI.framework/Versions/A/ContactsWidgetUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16ContactsWidgetUI08registerB12ViewDecodersyyF', '_$s16ContactsWidgetUI18AnimatedMemojiViewV05SwiftC00F0AAMc', 
                        '_$s16ContactsWidgetUI18AnimatedMemojiViewV05SwiftC019NSViewRepresentableAAMc', 
                        '_$s16ContactsWidgetUI18AnimatedMemojiViewV10makeNSView7contextQr05SwiftC00H20RepresentableContextVyACG_tF', 

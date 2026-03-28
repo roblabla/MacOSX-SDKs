@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/PhotosUI.framework/Versions/A/PhotosUI'
-current-version: 821.0.120
+current-version: 841.0.101
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/System/iOSSupport/usr/lib/swift/libswiftPhotosUI.dylib$$6$13.0$17.0$_$s8PhotosUI14PHPickerFilterV011depthEffectA0ACvgZ$', 
                        '$ld$previous$/System/iOSSupport/usr/lib/swift/libswiftPhotosUI.dylib$$6$13.0$17.0$_$s8PhotosUI14PHPickerFilterV04liveA0ACvgZ$', 
                        '$ld$previous$/System/iOSSupport/usr/lib/swift/libswiftPhotosUI.dylib$$6$13.0$17.0$_$s8PhotosUI14PHPickerFilterV11screenshotsACvgZ$', 
@@ -401,6 +401,10 @@ exports:
                        '_$s8PhotosUI21PHPickerConfigurationV18_primaryButtonTypeSo01_c7PrimaryfG0Vvg', 
                        '_$s8PhotosUI21PHPickerConfigurationV18_primaryButtonTypeSo01_c7PrimaryfG0VvpMV', 
                        '_$s8PhotosUI21PHPickerConfigurationV18_primaryButtonTypeSo01_c7PrimaryfG0Vvs', 
+                       '_$s8PhotosUI21PHPickerConfigurationV19_decoratedQueryData10Foundation0G0VSgvM', 
+                       '_$s8PhotosUI21PHPickerConfigurationV19_decoratedQueryData10Foundation0G0VSgvg', 
+                       '_$s8PhotosUI21PHPickerConfigurationV19_decoratedQueryData10Foundation0G0VSgvpMV', 
+                       '_$s8PhotosUI21PHPickerConfigurationV19_decoratedQueryData10Foundation0G0VSgvs', 
                        '_$s8PhotosUI21PHPickerConfigurationV20_containerIdentifierSSSgvM', 
                        '_$s8PhotosUI21PHPickerConfigurationV20_containerIdentifierSSSgvg', 
                        '_$s8PhotosUI21PHPickerConfigurationV20_containerIdentifierSSSgvpMV', 
@@ -480,6 +484,10 @@ exports:
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV017_sharedAlbumSheetD0So01_c5ShareghD0CSgvg', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV017_sharedAlbumSheetD0So01_c5ShareghD0CSgvpMV', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV017_sharedAlbumSheetD0So01_c5ShareghD0CSgvs', 
+                       '_$s8PhotosUI21PHPickerConfigurationV6UpdateV11_searchTextSSSgvM', 
+                       '_$s8PhotosUI21PHPickerConfigurationV6UpdateV11_searchTextSSSgvg', 
+                       '_$s8PhotosUI21PHPickerConfigurationV6UpdateV11_searchTextSSSgvpMV', 
+                       '_$s8PhotosUI21PHPickerConfigurationV6UpdateV11_searchTextSSSgvs', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV14selectionLimitSiSgvM', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV14selectionLimitSiSgvg', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV14selectionLimitSiSgvpMV', 
@@ -488,6 +496,10 @@ exports:
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV18_primaryButtonTypeSo01_c7PrimarygH0VSgvg', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV18_primaryButtonTypeSo01_c7PrimarygH0VSgvpMV', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV18_primaryButtonTypeSo01_c7PrimarygH0VSgvs', 
+                       '_$s8PhotosUI21PHPickerConfigurationV6UpdateV19_decoratedQueryData10Foundation0H0VSgvM', 
+                       '_$s8PhotosUI21PHPickerConfigurationV6UpdateV19_decoratedQueryData10Foundation0H0VSgvg', 
+                       '_$s8PhotosUI21PHPickerConfigurationV6UpdateV19_decoratedQueryData10Foundation0H0VSgvpMV', 
+                       '_$s8PhotosUI21PHPickerConfigurationV6UpdateV19_decoratedQueryData10Foundation0H0VSgvs', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV20_secondaryButtonTypeSo01_c9SecondarygH0VSgvM', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV20_secondaryButtonTypeSo01_c9SecondarygH0VSgvg', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV20_secondaryButtonTypeSo01_c9SecondarygH0VSgvpMV', 

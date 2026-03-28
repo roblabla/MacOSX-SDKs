@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-macos26.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7623.1.14.11.9 -module-name AuthenticationServices
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-macos26.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7624.1.16.11.4 -module-name AuthenticationServices
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 @_exported import AuthenticationServices
 import CryptoKit
 import DeveloperToolsSupport
@@ -25,37 +25,25 @@ extension AuthenticationServices.ASAuthorizationProviderExtensionLoginManager {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct ASPasskeyAssertionCredentialExtensionInput {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var largeBlob: AuthenticationServices.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var prf: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFAssertionInput? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(largeBlob: AuthenticationServices.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput? = nil, prf: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFAssertionInput? = nil)
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct ASPasskeyAssertionCredentialExtensionOutput {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var largeBlob: AuthenticationServices.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var prf: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFAssertionOutput? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(largeBlob: AuthenticationServices.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput? = nil, prf: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFAssertionOutput? = nil)
-  #endif
 }
 @objc @_hasMissingDesignatedInitializers @available(macOS 26.0, iOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
@@ -75,29 +63,31 @@ public class ASAuthorizationAccountCreationPlatformPublicKeyCredentialRequest : 
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct ASPasskeyRegistrationCredentialExtensionOutput {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var largeBlob: AuthenticationServices.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var prf: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFRegistrationOutput? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(largeBlob: AuthenticationServices.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput? = nil, prf: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFRegistrationOutput? = nil)
-  #endif
+}
+@available(macOS 26.4, iOS 26.4, *)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+@available(watchOS, unavailable)
+extension AuthenticationServices.ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
+  public var prf: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFRegistrationInput? {
+    get
+    set
+  }
 }
 @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension AuthenticationServices.ASAuthorizationPlatformPublicKeyCredentialRegistration {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var prf: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFRegistrationOutput? {
     get
   }
-  #endif
 }
 @available(iOS 26.2, visionOS 26.2, macOS 26.2, *)
 @available(watchOS, unavailable)
@@ -106,9 +96,7 @@ public struct ASAutoFillURLScope : Swift.Codable, Swift.Hashable, Swift.Sendable
   public enum Scheme : Swift.String, Swift.Codable, Swift.Sendable {
     case http
     case https
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(iOS 26.2, visionOS 26.2, macOS 26.2, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
@@ -121,17 +109,11 @@ public struct ASAutoFillURLScope : Swift.Codable, Swift.Hashable, Swift.Sendable
   public var host: Swift.String
   public var port: Swift.Int?
   public var path: Swift.String
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(scheme: AuthenticationServices.ASAutoFillURLScope.Scheme = .https, host: Swift.String, port: Swift.Int? = nil, path: Swift.String = "")
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(url: Foundation.URL)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var url: Foundation.URL? {
     get
   }
-  #endif
   public static func == (a: AuthenticationServices.ASAutoFillURLScope, b: AuthenticationServices.ASAutoFillURLScope) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
   public func hash(into hasher: inout Swift.Hasher)
@@ -172,6 +154,13 @@ final public class ASCredentialUpdater {
   final public func reportUnusedPasswordCredential(domain: Swift.String, userName: Swift.String) async throws
   @objc deinit
 }
+extension AuthenticationServices.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
+  @available(macOS 26.4, iOS 26.4, *)
+  public var prf: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFAssertionInput? {
+    get
+    set
+  }
+}
 @available(macOS 14.0, *)
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
@@ -185,12 +174,10 @@ extension AuthenticationServices.ASAuthorizationProviderExtensionLoginConfigurat
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension AuthenticationServices.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var prf: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFRegistrationInput? {
     get
     set
   }
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, *)
 @available(tvOS, unavailable)
@@ -231,12 +218,10 @@ public struct ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   public static func read(data: Foundation.Data?) -> AuthenticationServices.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput
-  #endif
   @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -269,61 +254,47 @@ public struct ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension AuthenticationServices.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var largeBlob: AuthenticationServices.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput? {
     get
     set
   }
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension AuthenticationServices.ASAuthorizationPlatformPublicKeyCredentialAssertionRequest {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var largeBlob: AuthenticationServices.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput? {
     get
     set
   }
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension AuthenticationServices.ASAuthorizationPlatformPublicKeyCredentialRegistration {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var largeBlob: AuthenticationServices.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput? {
     get
   }
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension AuthenticationServices.ASAuthorizationPlatformPublicKeyCredentialAssertion {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var largeBlob: AuthenticationServices.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput? {
     get
   }
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct ASAuthorizationPublicKeyCredentialPRFAssertionInput {
   public struct InputValues {
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(saltInput1: Foundation.Data, saltInput2: Foundation.Data? = nil)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public static func saltInput1(_ saltInput1: Foundation.Data, saltInput2: Foundation.Data? = nil) -> AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFAssertionInput.InputValues
-    #endif
     public var saltInput1: Foundation.Data
     public var saltInput2: Foundation.Data?
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func inputValues(_ inputValues: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFAssertionInput.InputValues, perCredentialInputValues: [Foundation.Data : AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFAssertionInput.InputValues]? = nil) -> AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFAssertionInput
-  #endif
   public static func perCredentialInputValues(_ perCredentialInputValues: [Foundation.Data : AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFAssertionInput.InputValues]) -> AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFAssertionInput
   public let inputValues: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFAssertionInput.InputValues?
   public let perCredentialInputValues: [Foundation.Data : AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFAssertionInput.InputValues]?
@@ -334,9 +305,7 @@ public struct ASAuthorizationPublicKeyCredentialPRFAssertionInput {
 public struct ASAuthorizationPublicKeyCredentialPRFAssertionOutput {
   public let first: CryptoKit.SymmetricKey
   public let second: CryptoKit.SymmetricKey?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(first: CryptoKit.SymmetricKey, second: CryptoKit.SymmetricKey?)
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
 @available(tvOS, unavailable)
@@ -363,9 +332,7 @@ public struct ASAuthorizationPublicKeyCredentialPRFRegistrationOutput {
   public let isSupported: Swift.Bool
   public let first: CryptoKit.SymmetricKey?
   public let second: CryptoKit.SymmetricKey?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(first: CryptoKit.SymmetricKey, second: CryptoKit.SymmetricKey?)
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
 @available(tvOS, unavailable)
@@ -379,11 +346,9 @@ extension AuthenticationServices.__ASAuthorizationPublicKeyCredentialPRFRegistra
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension AuthenticationServices.ASPasskeyCredentialRequestParameters {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var extensionInput: AuthenticationServices.ASPasskeyAssertionCredentialExtensionInput? {
     get
   }
-  #endif
 }
 @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, *)
 extension AuthenticationServices.ASAuthorization : @unchecked Swift.Sendable {
@@ -467,6 +432,7 @@ extension AuthenticationServices.ASAuthorizationSecurityKeyPublicKeyCredentialAs
 @available(iOS 16.4, macOS 13.3, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension AuthenticationServices.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest : @unchecked Swift.Sendable {
 }
 @available(iOS 16.4, macOS 13.3, *)
@@ -518,22 +484,18 @@ extension AuthenticationServices.ASAuthorizationWebBrowserPublicKeyCredentialMan
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension AuthenticationServices.ASAuthorizationWebBrowserPlatformPublicKeyCredentialRegistrationRequest {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var clientData: AuthenticationServices.ASPublicKeyCredentialClientData? {
     get
   }
-  #endif
 }
 @available(macOS 13.5, macCatalyst 16.6, *)
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension AuthenticationServices.ASAuthorizationWebBrowserPlatformPublicKeyCredentialAssertionRequest {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var clientData: AuthenticationServices.ASPublicKeyCredentialClientData? {
     get
   }
-  #endif
 }
 @available(macOS 13.5, macCatalyst 16.6, iOS 17.4, *)
 @available(tvOS, unavailable)
@@ -563,22 +525,18 @@ extension AuthenticationServices.ASAuthorizationPlatformPublicKeyCredentialProvi
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension AuthenticationServices.ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialAssertionRequest {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var clientData: AuthenticationServices.ASPublicKeyCredentialClientData? {
     get
   }
-  #endif
 }
 @available(macOS 14.4, iOS 17.4, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension AuthenticationServices.ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialRegistrationRequest {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var clientData: AuthenticationServices.ASPublicKeyCredentialClientData? {
     get
   }
-  #endif
 }
 @available(macOS 14.4, iOS 17.4, *)
 @available(tvOS, unavailable)
@@ -607,10 +565,8 @@ final public class ASCredentialDataManager {
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension AuthenticationServices.ASCredentialDataManager {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, unavailable)
   final public func save(password: AuthenticationServices.ASPasswordCredential, for scope: AuthenticationServices.ASAutoFillURLScope, title: Swift.String? = nil, anchor: AuthenticationServices.ASPresentationAnchor) async throws
-  #endif
 }
 @available(iOS 26.2, macOS 26.2, visionOS 26.2, *)
 @available(watchOS, unavailable)
@@ -631,24 +587,27 @@ public class ASAuthorizationAccountCreationPlatformPublicKeyCredential : Objecti
     get
   }
   public var credentialRegistration: AuthenticationServices.ASAuthorizationPlatformPublicKeyCredentialRegistration
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  #endif
   @objc public func encode(with coder: Foundation.NSCoder)
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc required convenience public init?(coder: Foundation.NSCoder)
-  #endif
   @objc deinit
 }
 @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension AuthenticationServices.ASAuthorizationPlatformPublicKeyCredentialAssertion {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var prf: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFAssertionOutput? {
     get
   }
-  #endif
+}
+extension AuthenticationServices.ASAuthorizationSecurityKeyPublicKeyCredentialRegistration {
+  @available(macOS 26.4, iOS 26.4, *)
+  @available(tvOS, unavailable)
+  @available(visionOS, unavailable)
+  @available(watchOS, unavailable)
+  public var prf: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFRegistrationOutput? {
+    get
+  }
 }
 @objc @_inheritsConvenienceInitializers @available(macOS 26.0, iOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
@@ -662,38 +621,28 @@ public class ASAuthorizationAccountCreationProvider : ObjectiveC.NSObject, Authe
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension AuthenticationServices.ASPasskeyAssertionCredential {
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(userHandle: Foundation.Data, relyingParty: Swift.String, signature: Foundation.Data, clientDataHash: Foundation.Data, authenticatorData: Foundation.Data, credentialID: Foundation.Data, extensionOutput: AuthenticationServices.ASPasskeyAssertionCredentialExtensionOutput?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var extensionOutput: AuthenticationServices.ASPasskeyAssertionCredentialExtensionOutput? {
     get
     set
   }
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension AuthenticationServices.ASPasskeyCredentialIdentity {
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(relyingPartyIdentifier: Swift.String, userName: Swift.String, credentialID: Foundation.Data, userHandle: Foundation.Data, recordIdentifier: Swift.String? = nil)
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct ASPasskeyRegistrationCredentialExtensionInput {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var largeBlob: AuthenticationServices.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var prf: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFRegistrationInput? {
     get
   }
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
 @available(tvOS, unavailable)
@@ -706,18 +655,14 @@ public enum ASPasskeyCredentialExtensionInput {
 @available(iOS 17.0, macOS 14.0, *)
 extension AuthenticationServices.ASPasskeyCredentialRequest {
   convenience public init(credentialIdentity: AuthenticationServices.ASPasskeyCredentialIdentity, clientDataHash: Foundation.Data, userVerificationPreference: AuthenticationServices.ASAuthorizationPublicKeyCredentialUserVerificationPreference, supportedAlgorithms: [AuthenticationServices.ASCOSEAlgorithmIdentifier])
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   convenience public init(credentialIdentity: AuthenticationServices.ASPasskeyCredentialIdentity, clientDataHash: Foundation.Data, userVerificationPreference: AuthenticationServices.ASAuthorizationPublicKeyCredentialUserVerificationPreference, supportedAlgorithms: [AuthenticationServices.ASCOSEAlgorithmIdentifier], extensionInput: AuthenticationServices.ASPasskeyRegistrationCredentialExtensionInput?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   convenience public init(credentialIdentity: AuthenticationServices.ASPasskeyCredentialIdentity, clientDataHash: Foundation.Data, userVerificationPreference: AuthenticationServices.ASAuthorizationPublicKeyCredentialUserVerificationPreference, supportedAlgorithms: [AuthenticationServices.ASCOSEAlgorithmIdentifier], extensionInput: AuthenticationServices.ASPasskeyAssertionCredentialExtensionInput?)
-  #endif
   public var supportedAlgorithms: [AuthenticationServices.ASCOSEAlgorithmIdentifier] {
     get
   }
@@ -728,27 +673,27 @@ extension AuthenticationServices.ASPasskeyCredentialRequest {
     get
   }
 }
+extension AuthenticationServices.ASAuthorizationSecurityKeyPublicKeyCredentialAssertion {
+  @available(macOS 26.4, iOS 26.4, *)
+  public var prf: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFAssertionOutput? {
+    get
+  }
+}
 @available(macOS 14.4, iOS 17.4, visionOS 1.1, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension AuthenticationServices.ASCredentialIdentityStore {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func credentialIdentities(forService serviceIdentifier: AuthenticationServices.ASCredentialServiceIdentifier? = nil, credentialIdentityTypes: AuthenticationServices.ASCredentialIdentityStore.IdentityTypes = []) async -> [any AuthenticationServices.ASCredentialIdentity]
-  #endif
 }
 @available(macOS 15.0, iOS 18.0, visionOS 2.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension AuthenticationServices.ASPasskeyRegistrationCredential {
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(relyingParty: Swift.String, clientDataHash: Foundation.Data, credentialID: Foundation.Data, attestationObject: Foundation.Data, extensionOutput: AuthenticationServices.ASPasskeyRegistrationCredentialExtensionOutput?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var extensionOutput: AuthenticationServices.ASPasskeyRegistrationCredentialExtensionOutput? {
     get
     set
   }
-  #endif
 }
 @available(macOS 13.5, macCatalyst 16.6, iOS 17.4, *)
 @available(tvOS, unavailable)
@@ -768,9 +713,7 @@ public struct ASPublicKeyCredentialClientData : Swift.Sendable {
   public var origin: Swift.String
   public var topOrigin: Swift.String?
   public var crossOrigin: AuthenticationServices.ASPublicKeyCredentialClientData.CrossOriginValue?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(challenge: Foundation.Data, origin: Swift.String, topOrigin: Swift.String? = nil, crossOrigin: AuthenticationServices.ASPublicKeyCredentialClientData.CrossOriginValue? = nil)
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(watchOS, unavailable)
@@ -788,9 +731,7 @@ public struct ASExportedCredentialData : Swift.Codable, Swift.Hashable, Swift.Se
     case v1
     public init(from decoder: any Swift.Decoder) throws
     public func encode(to encoder: any Swift.Encoder) throws
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
@@ -830,9 +771,7 @@ public struct ASImportableAccount : Swift.Codable, Swift.Hashable, Swift.Sendabl
   public var fullName: Swift.String?
   public var collections: [AuthenticationServices.ASImportableCollection]
   public var items: [AuthenticationServices.ASImportableItem]
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(id: Foundation.Data, userName: Swift.String, email: Swift.String, fullName: Swift.String? = nil, collections: [AuthenticationServices.ASImportableCollection], items: [AuthenticationServices.ASImportableItem])
-  #endif
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
   public static func == (a: AuthenticationServices.ASImportableAccount, b: AuthenticationServices.ASImportableAccount) -> Swift.Bool
@@ -852,9 +791,7 @@ public struct ASImportableCollection : Swift.Codable, Swift.Hashable, Swift.Send
   public var subtitle: Swift.String?
   public var items: [AuthenticationServices.ASImportableLinkedItem]
   public var subcollections: [AuthenticationServices.ASImportableCollection]
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(id: Foundation.Data, created: Foundation.Date?, lastModified: Foundation.Date?, title: Swift.String, subtitle: Swift.String? = nil, items: [AuthenticationServices.ASImportableLinkedItem], subcollections: [AuthenticationServices.ASImportableCollection] = [])
-  #endif
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
   public static func == (a: AuthenticationServices.ASImportableCollection, b: AuthenticationServices.ASImportableCollection) -> Swift.Bool
@@ -869,9 +806,7 @@ public struct ASImportableCollection : Swift.Codable, Swift.Hashable, Swift.Send
 public struct ASImportableLinkedItem : Swift.Codable, Swift.Hashable, Swift.Sendable {
   public var item: Foundation.Data
   public var account: Foundation.Data?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(item: Foundation.Data, account: Foundation.Data? = nil)
-  #endif
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
   public static func == (a: AuthenticationServices.ASImportableLinkedItem, b: AuthenticationServices.ASImportableLinkedItem) -> Swift.Bool
@@ -893,15 +828,19 @@ public struct ASImportableItem : Swift.Codable, Swift.Hashable, Swift.Sendable {
   public var scope: AuthenticationServices.ASImportableCredentialScope?
   public var tags: [Swift.String]
   public var credentials: [AuthenticationServices.ASImportableCredential]
-  #if compiler(>=5.3) && $NonescapableTypes
+  @available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  public var extensions: [AuthenticationServices.ASImportableExtension]
+  @available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  public init(id: Foundation.Data, created: Foundation.Date? = nil, lastModified: Foundation.Date? = nil, title: Swift.String, subtitle: Swift.String? = nil, favorite: Swift.Bool = false, scope: AuthenticationServices.ASImportableCredentialScope? = nil, credentials: [AuthenticationServices.ASImportableCredential], tags: [Swift.String] = [], extensions: [AuthenticationServices.ASImportableExtension] = [])
   @available(iOS 26.1, macOS 26.1, visionOS 26.1, *)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
   public init(id: Foundation.Data, title: Swift.String, subtitle: Swift.String? = nil, favorite: Swift.Bool = false, scope: AuthenticationServices.ASImportableCredentialScope? = nil, credentials: [AuthenticationServices.ASImportableCredential], tags: [Swift.String] = [])
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(id: Foundation.Data, created: Foundation.Date, lastModified: Foundation.Date, title: Swift.String, subtitle: Swift.String? = nil, favorite: Swift.Bool = false, scope: AuthenticationServices.ASImportableCredentialScope? = nil, credentials: [AuthenticationServices.ASImportableCredential], tags: [Swift.String] = [])
-  #endif
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
   public static func == (a: AuthenticationServices.ASImportableItem, b: AuthenticationServices.ASImportableItem) -> Swift.Bool
@@ -933,9 +872,7 @@ extension AuthenticationServices.ASImportableCredentialScope {
     public var bundleID: Swift.String
     public var certificate: AuthenticationServices.ASImportableCredentialScope.AndroidAppCertificationFingerprint?
     public var name: Swift.String?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(bundleID: Swift.String, certificate: AuthenticationServices.ASImportableCredentialScope.AndroidAppCertificationFingerprint?, name: Swift.String?)
-    #endif
     public static func == (a: AuthenticationServices.ASImportableCredentialScope.AndroidAppID, b: AuthenticationServices.ASImportableCredentialScope.AndroidAppID) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -975,9 +912,7 @@ public struct ASImportableEditableField : Swift.Codable, Swift.Hashable, Swift.S
     case wifiNetworkSecurityType
     case countryCode
     case subdivisionCode
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
@@ -990,9 +925,7 @@ public struct ASImportableEditableField : Swift.Codable, Swift.Hashable, Swift.S
   public var fieldType: AuthenticationServices.ASImportableEditableField.FieldType
   public var value: Swift.String
   public var label: Swift.String?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(id: Foundation.Data?, fieldType: AuthenticationServices.ASImportableEditableField.FieldType, value: Swift.String, label: Swift.String? = nil)
-  #endif
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
   public static func == (a: AuthenticationServices.ASImportableEditableField, b: AuthenticationServices.ASImportableEditableField) -> Swift.Bool
@@ -1028,9 +961,7 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
     public var territory: AuthenticationServices.ASImportableEditableField?
     public var country: AuthenticationServices.ASImportableEditableField?
     public var telephone: AuthenticationServices.ASImportableEditableField?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(streetAddress: AuthenticationServices.ASImportableEditableField?, postalCode: AuthenticationServices.ASImportableEditableField?, city: AuthenticationServices.ASImportableEditableField?, territory: AuthenticationServices.ASImportableEditableField?, country: AuthenticationServices.ASImportableEditableField?, telephone: AuthenticationServices.ASImportableEditableField?)
-    #endif
     public static func == (a: AuthenticationServices.ASImportableCredential.Address, b: AuthenticationServices.ASImportableCredential.Address) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1046,9 +977,7 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
     public var url: AuthenticationServices.ASImportableEditableField?
     public var validFrom: AuthenticationServices.ASImportableEditableField?
     public var expiryDate: AuthenticationServices.ASImportableEditableField?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(key: AuthenticationServices.ASImportableEditableField?, userName: AuthenticationServices.ASImportableEditableField?, keyType: AuthenticationServices.ASImportableEditableField?, url: AuthenticationServices.ASImportableEditableField?, validFrom: AuthenticationServices.ASImportableEditableField?, expiryDate: AuthenticationServices.ASImportableEditableField?)
-    #endif
     public static func == (a: AuthenticationServices.ASImportableCredential.APIKey, b: AuthenticationServices.ASImportableCredential.APIKey) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1060,9 +989,7 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
   public struct BasicAuthentication : Swift.Codable, Swift.Hashable, Swift.Sendable {
     public var userName: AuthenticationServices.ASImportableEditableField?
     public var password: AuthenticationServices.ASImportableEditableField?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(userName: AuthenticationServices.ASImportableEditableField? = nil, password: AuthenticationServices.ASImportableEditableField? = nil)
-    #endif
     public static func == (a: AuthenticationServices.ASImportableCredential.BasicAuthentication, b: AuthenticationServices.ASImportableCredential.BasicAuthentication) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1079,9 +1006,7 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
     public var pin: AuthenticationServices.ASImportableEditableField?
     public var expiryDate: AuthenticationServices.ASImportableEditableField?
     public var validFrom: AuthenticationServices.ASImportableEditableField?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(number: AuthenticationServices.ASImportableEditableField?, fullName: AuthenticationServices.ASImportableEditableField?, cardType: AuthenticationServices.ASImportableEditableField?, verificationNumber: AuthenticationServices.ASImportableEditableField?, pin: AuthenticationServices.ASImportableEditableField?, expiryDate: AuthenticationServices.ASImportableEditableField?, validFrom: AuthenticationServices.ASImportableEditableField?)
-    #endif
     public static func == (a: AuthenticationServices.ASImportableCredential.CreditCard, b: AuthenticationServices.ASImportableCredential.CreditCard) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1094,9 +1019,7 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
     public var id: Foundation.Data?
     public var label: Swift.String?
     public var fields: [AuthenticationServices.ASImportableEditableField]
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(id: Foundation.Data? = nil, label: Swift.String? = nil, fields: [AuthenticationServices.ASImportableEditableField])
-    #endif
     public init(from decoder: any Swift.Decoder) throws
     public func encode(to encoder: any Swift.Encoder) throws
     public static func == (a: AuthenticationServices.ASImportableCredential.CustomFields, b: AuthenticationServices.ASImportableCredential.CustomFields) -> Swift.Bool
@@ -1115,9 +1038,7 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
     public var country: AuthenticationServices.ASImportableEditableField?
     public var licenseNumber: AuthenticationServices.ASImportableEditableField?
     public var licenseClass: AuthenticationServices.ASImportableEditableField?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(fullName: AuthenticationServices.ASImportableEditableField?, birthDate: AuthenticationServices.ASImportableEditableField?, issueDate: AuthenticationServices.ASImportableEditableField?, expiryDate: AuthenticationServices.ASImportableEditableField?, issuingAuthority: AuthenticationServices.ASImportableEditableField?, territory: AuthenticationServices.ASImportableEditableField?, country: AuthenticationServices.ASImportableEditableField?, licenseNumber: AuthenticationServices.ASImportableEditableField?, licenseClass: AuthenticationServices.ASImportableEditableField?)
-    #endif
     public static func == (a: AuthenticationServices.ASImportableCredential.DriversLicense, b: AuthenticationServices.ASImportableCredential.DriversLicense) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1149,9 +1070,7 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
     public var issueDate: AuthenticationServices.ASImportableEditableField?
     public var expiryDate: AuthenticationServices.ASImportableEditableField?
     public var issuingAuthority: AuthenticationServices.ASImportableEditableField?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(issuingCountry: AuthenticationServices.ASImportableEditableField?, documentNumber: AuthenticationServices.ASImportableEditableField?, identificationNumber: AuthenticationServices.ASImportableEditableField?, nationality: AuthenticationServices.ASImportableEditableField?, fullName: AuthenticationServices.ASImportableEditableField?, birthDate: AuthenticationServices.ASImportableEditableField?, birthPlace: AuthenticationServices.ASImportableEditableField?, sex: AuthenticationServices.ASImportableEditableField?, issueDate: AuthenticationServices.ASImportableEditableField?, expiryDate: AuthenticationServices.ASImportableEditableField?, issuingAuthority: AuthenticationServices.ASImportableEditableField?)
-    #endif
     public static func == (a: AuthenticationServices.ASImportableCredential.IdentityDocument, b: AuthenticationServices.ASImportableCredential.IdentityDocument) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1189,6 +1108,14 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
     public var userDisplayName: Swift.String
     public var userHandle: Foundation.Data
     public var key: Foundation.Data
+    @available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+    @available(watchOS, unavailable)
+    @available(tvOS, unavailable)
+    public var fido2Extensions: AuthenticationServices.ASImportableFIDO2Extensions?
+    @available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+    @available(watchOS, unavailable)
+    @available(tvOS, unavailable)
+    public init(credentialID: Foundation.Data, relyingPartyIdentifier: Swift.String, userName: Swift.String, userDisplayName: Swift.String, userHandle: Foundation.Data, key: Foundation.Data, fido2Extensions: AuthenticationServices.ASImportableFIDO2Extensions?)
     public init(credentialID: Foundation.Data, relyingPartyIdentifier: Swift.String, userName: Swift.String, userDisplayName: Swift.String, userHandle: Foundation.Data, key: Foundation.Data)
     public init(from decoder: any Swift.Decoder) throws
     public func encode(to encoder: any Swift.Encoder) throws
@@ -1211,9 +1138,7 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
     public var issueDate: AuthenticationServices.ASImportableEditableField?
     public var expiryDate: AuthenticationServices.ASImportableEditableField?
     public var issuingAuthority: AuthenticationServices.ASImportableEditableField?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(issuingCountry: AuthenticationServices.ASImportableEditableField?, passportType: AuthenticationServices.ASImportableEditableField?, passportNumber: AuthenticationServices.ASImportableEditableField?, nationalIdentificationNumber: AuthenticationServices.ASImportableEditableField?, nationality: AuthenticationServices.ASImportableEditableField?, fullName: AuthenticationServices.ASImportableEditableField?, birthDate: AuthenticationServices.ASImportableEditableField?, birthPlace: AuthenticationServices.ASImportableEditableField?, sex: AuthenticationServices.ASImportableEditableField?, issueDate: AuthenticationServices.ASImportableEditableField?, expiryDate: AuthenticationServices.ASImportableEditableField?, issuingAuthority: AuthenticationServices.ASImportableEditableField?)
-    #endif
     public static func == (a: AuthenticationServices.ASImportableCredential.Passport, b: AuthenticationServices.ASImportableCredential.Passport) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1232,9 +1157,7 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
     public var surname2: AuthenticationServices.ASImportableEditableField?
     public var credentials: AuthenticationServices.ASImportableEditableField?
     public var generation: AuthenticationServices.ASImportableEditableField?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(title: AuthenticationServices.ASImportableEditableField?, given: AuthenticationServices.ASImportableEditableField?, givenInformal: AuthenticationServices.ASImportableEditableField?, given2: AuthenticationServices.ASImportableEditableField?, surnamePrefix: AuthenticationServices.ASImportableEditableField?, surname: AuthenticationServices.ASImportableEditableField?, surname2: AuthenticationServices.ASImportableEditableField?, credentials: AuthenticationServices.ASImportableEditableField?, generation: AuthenticationServices.ASImportableEditableField?)
-    #endif
     public static func == (a: AuthenticationServices.ASImportableCredential.PersonName, b: AuthenticationServices.ASImportableCredential.PersonName) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1250,9 +1173,7 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
     public var creationDate: AuthenticationServices.ASImportableEditableField?
     public var expiryDate: AuthenticationServices.ASImportableEditableField?
     public var keyGenerationSource: AuthenticationServices.ASImportableEditableField?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(keyType: Swift.String, privateKey: Foundation.Data, keyComment: Swift.String?, creationDate: AuthenticationServices.ASImportableEditableField?, expiryDate: AuthenticationServices.ASImportableEditableField?, keyGenerationSource: AuthenticationServices.ASImportableEditableField?)
-    #endif
     public init(from decoder: any Swift.Decoder) throws
     public func encode(to encoder: any Swift.Encoder) throws
     public static func == (a: AuthenticationServices.ASImportableCredential.SSHKey, b: AuthenticationServices.ASImportableCredential.SSHKey) -> Swift.Bool
@@ -1266,9 +1187,7 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
       case sha1
       case sha256
       case sha512
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(rawValue: Swift.String)
-      #endif
       @available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
@@ -1283,9 +1202,7 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
     public var userName: Swift.String?
     public var algorithm: AuthenticationServices.ASImportableCredential.TOTP.Algorithm
     public var issuer: Swift.String?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(secret: Foundation.Data, period: Swift.UInt16, digits: Swift.UInt16, userName: Swift.String?, algorithm: AuthenticationServices.ASImportableCredential.TOTP.Algorithm, issuer: Swift.String? = nil)
-    #endif
     public init(from decoder: any Swift.Decoder) throws
     public func encode(to encoder: any Swift.Encoder) throws
     public static func == (a: AuthenticationServices.ASImportableCredential.TOTP, b: AuthenticationServices.ASImportableCredential.TOTP) -> Swift.Bool
@@ -1299,9 +1216,7 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
     public var networkSecurityType: AuthenticationServices.ASImportableEditableField?
     public var passphrase: AuthenticationServices.ASImportableEditableField?
     public var hidden: AuthenticationServices.ASImportableEditableField?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(ssid: AuthenticationServices.ASImportableEditableField?, networkSecurityType: AuthenticationServices.ASImportableEditableField?, passphrase: AuthenticationServices.ASImportableEditableField?, hidden: AuthenticationServices.ASImportableEditableField? = nil)
-    #endif
     public static func == (a: AuthenticationServices.ASImportableCredential.WiFi, b: AuthenticationServices.ASImportableCredential.WiFi) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
@@ -1313,6 +1228,130 @@ public enum ASImportableCredential : Swift.Codable, Swift.Hashable, Swift.Sendab
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
   public static func == (a: AuthenticationServices.ASImportableCredential, b: AuthenticationServices.ASImportableCredential) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+public struct ASImportableFIDO2Extensions : Swift.Codable, Swift.Hashable, Swift.Sendable {
+  public var hmacCredentials: AuthenticationServices.ASImportableFIDO2HMACCredential?
+  public var largeBlob: AuthenticationServices.ASImportableFIDO2LargeBlob?
+  public init(hmacCredentials: AuthenticationServices.ASImportableFIDO2HMACCredential? = nil, largeBlob: AuthenticationServices.ASImportableFIDO2LargeBlob? = nil)
+  public static func == (a: AuthenticationServices.ASImportableFIDO2Extensions, b: AuthenticationServices.ASImportableFIDO2Extensions) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+public struct ASImportableFIDO2HMACCredential : Swift.Codable, Swift.Hashable, Swift.Sendable {
+  public enum Algorithm : Swift.String, Swift.Codable, Swift.Sendable {
+    case sha256
+    public init?(rawValue: Swift.String)
+    @available(iOS 26.4, visionOS 26.4, macOS 26.4, *)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public var algorithm: AuthenticationServices.ASImportableFIDO2HMACCredential.Algorithm
+  public var credentialWithUV: Foundation.Data
+  public var credentialWithoutUV: Foundation.Data
+  public init(algorithm: AuthenticationServices.ASImportableFIDO2HMACCredential.Algorithm, credentialWithUV: Foundation.Data, credentialWithoutUV: Foundation.Data)
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public static func == (a: AuthenticationServices.ASImportableFIDO2HMACCredential, b: AuthenticationServices.ASImportableFIDO2HMACCredential) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+public struct ASImportableFIDO2LargeBlob : Swift.Codable, Swift.Hashable, Swift.Sendable {
+  public var uncompressedSize: Swift.Int
+  public var data: Foundation.Data
+  public init(uncompressedSize: Swift.Int, data: Foundation.Data)
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public static func == (a: AuthenticationServices.ASImportableFIDO2LargeBlob, b: AuthenticationServices.ASImportableFIDO2LargeBlob) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+public enum ASImportableExtension : Swift.Codable, Swift.Hashable, Swift.Sendable {
+  case shared(AuthenticationServices.ASImportableExtension.Shared)
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public struct Shared : Swift.Codable, Swift.Hashable, Swift.Sendable {
+    public struct SharingAccessor : Swift.Codable, Swift.Hashable, Swift.Sendable {
+      public enum AccessorType : Swift.String, Swift.Codable, Swift.Sendable {
+        case user
+        case group
+        public init?(rawValue: Swift.String)
+        @available(iOS 26.4, visionOS 26.4, macOS 26.4, *)
+        @available(tvOS, unavailable)
+        @available(watchOS, unavailable)
+        public typealias RawValue = Swift.String
+        public var rawValue: Swift.String {
+          get
+        }
+      }
+      public enum Permission : Swift.String, Swift.Codable, Swift.Sendable {
+        case read
+        case readSecret
+        case update
+        case create
+        case delete
+        case share
+        case manage
+        public init?(rawValue: Swift.String)
+        @available(iOS 26.4, visionOS 26.4, macOS 26.4, *)
+        @available(tvOS, unavailable)
+        @available(watchOS, unavailable)
+        public typealias RawValue = Swift.String
+        public var rawValue: Swift.String {
+          get
+        }
+      }
+      public var type: AuthenticationServices.ASImportableExtension.Shared.SharingAccessor.AccessorType
+      public var accountID: Foundation.Data
+      public var name: Swift.String
+      public var permissions: [AuthenticationServices.ASImportableExtension.Shared.SharingAccessor.Permission]
+      public init(type: AuthenticationServices.ASImportableExtension.Shared.SharingAccessor.AccessorType, accountID: Foundation.Data, name: Swift.String, permissions: [AuthenticationServices.ASImportableExtension.Shared.SharingAccessor.Permission])
+      public init(from decoder: any Swift.Decoder) throws
+      public func encode(to encoder: any Swift.Encoder) throws
+      public static func == (a: AuthenticationServices.ASImportableExtension.Shared.SharingAccessor, b: AuthenticationServices.ASImportableExtension.Shared.SharingAccessor) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
+      public var hashValue: Swift.Int {
+        get
+      }
+    }
+    public var accessors: [AuthenticationServices.ASImportableExtension.Shared.SharingAccessor]
+    public init(accessors: [AuthenticationServices.ASImportableExtension.Shared.SharingAccessor])
+    public init(from decoder: any Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    public static func == (a: AuthenticationServices.ASImportableExtension.Shared, b: AuthenticationServices.ASImportableExtension.Shared) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public static func == (a: AuthenticationServices.ASImportableExtension, b: AuthenticationServices.ASImportableExtension) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
@@ -1332,9 +1371,7 @@ public class ASCredentialExportManager {
     }
     public init(from decoder: any Swift.Decoder) throws
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func requestExport(for extensionBundleIdentifier: Swift.String? = nil) async throws -> AuthenticationServices.ASCredentialExportManager.ExportOptions
-  #endif
   public func exportCredentials(_ credentialData: AuthenticationServices.ASExportedCredentialData) async throws
   convenience public init(presentationAnchor: AuthenticationServices.ASPresentationAnchor)
   @objc deinit
@@ -1368,12 +1405,10 @@ extension AuthenticationServices.ASContactIdentifierRequest : Swift.Codable {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension AuthenticationServices.ASAuthorizationPlatformPublicKeyCredentialAssertionRequest {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var prf: AuthenticationServices.ASAuthorizationPublicKeyCredentialPRFAssertionInput? {
     get
     set
   }
-  #endif
 }
 @available(iOS 26.2, visionOS 26.2, macOS 26.2, *)
 @available(watchOS, unavailable)
@@ -1417,6 +1452,42 @@ extension AuthenticationServices.ASImportableEditableField.FieldType : Swift.Raw
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension AuthenticationServices.ASImportableCredential.TOTP.Algorithm : Swift.RawRepresentable {}
+@available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension AuthenticationServices.ASImportableFIDO2HMACCredential.Algorithm : Swift.Equatable {}
+@available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension AuthenticationServices.ASImportableFIDO2HMACCredential.Algorithm : Swift.Hashable {}
+@available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension AuthenticationServices.ASImportableFIDO2HMACCredential.Algorithm : Swift.RawRepresentable {}
+@available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension AuthenticationServices.ASImportableExtension.Shared.SharingAccessor.AccessorType : Swift.Equatable {}
+@available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension AuthenticationServices.ASImportableExtension.Shared.SharingAccessor.AccessorType : Swift.Hashable {}
+@available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension AuthenticationServices.ASImportableExtension.Shared.SharingAccessor.AccessorType : Swift.RawRepresentable {}
+@available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension AuthenticationServices.ASImportableExtension.Shared.SharingAccessor.Permission : Swift.Equatable {}
+@available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension AuthenticationServices.ASImportableExtension.Shared.SharingAccessor.Permission : Swift.Hashable {}
+@available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension AuthenticationServices.ASImportableExtension.Shared.SharingAccessor.Permission : Swift.RawRepresentable {}
 @available(macOS 26.0, iOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

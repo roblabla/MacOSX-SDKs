@@ -1,18 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FindMyUnsafeAsyncBridging.framework/Versions/A/FindMyUnsafeAsyncBridging'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FindMyRemoteUIService, SPShared, SPSharedTests, findmylocateagent, 
                        findmylocated, findmylocatedTests, searchpartyd, searchpartydTests, 
                        searchpartyuseragent ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s25FindMyUnsafeAsyncBridging010unsafeFromD4TaskyxxyYaYbKcKlF', 
                        '_$s25FindMyUnsafeAsyncBridging010unsafeFromD4TaskyxxyYaYbclF', 
                        '_$s25FindMyUnsafeAsyncBridging03setC18QueueConfiguration7context6configySS_AA0c8BlockinggH0VtF', 

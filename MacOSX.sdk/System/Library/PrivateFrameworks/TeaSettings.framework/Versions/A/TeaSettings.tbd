@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TeaSettings.framework/Versions/A/TeaSettings'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ BookAnalytics,BookCore,Books,BooksInternalExtras,BooksPersonalization,BooksPersonalizationTests,EngagementCollector,AEBookPlugins,NewsInternalExtras,NewsPersonalization,NewsServices,NewsServicesInternal,NewsTag,NewsToday,NewsToday2,NewsTodayIntents,NewsWidgetIntents,News,NVCDemo,ArticleNotificationExtension,ArticleNotificationServiceExtension,NewsNotificationServiceExtension,MarketingNotificationExtension,OpenInNews,Feldspar Tests,NewsInternalSettings,NewsSettings,NewsUI,NewsUITests,newsd,com.apple.news,NewsAnalyticsUpload,NewsUI2,NewsUI2Tests,NewsFeed,NewsFeedTests,NewsKit,NewsKitTests,NewsKitDemo,NewsLiveActivitiesCore,NewsLiveActivitiesCoreTests,NewsArticles,NewsArticlesTests,NewsAds,NewsAdsTests,NewsEngagementCollector,NewsFormat,NewsFormatTests,NewsSubscription,NewsSubscriptionTests,NewsAnalytics,NewsAnalyticsTests,Feldspar,Silex,SilexWeb,NewsArticleViewer,NewsArticleQuickLook,NewsEngagement,NewsEngagementTests,SilexDebugger,NewsDiagnosticExtension,NanoNewsWidgetExtension,NanoNews,NanoNewsInternalExtras,NanoNewsUI,NanoNewsDataService,NanoNewsAnalytics,NanoNewsHeadlines,NewsPersonalizationTests,NewsAudio,NewsDaemon,TodayFeedConfigDecoder,NewsScoringService,NewsCore,FeldsparCore iOS Tests,CookingKit,CookingKitTests,CookingSupport,CookingExampleAppSupport,CookingSupportTests,CookingSupportExampleHostApp,CookingKitExampleApp,,Stocks,StocksAnalytics,StocksAnalyticsTests,StocksCore,StocksCoreTests,StocksDetailIntents,StocksKit,StocksKitTests,StocksKitService,StocksTests,StocksToday,StocksUI,StocksUITests,StocksWidget,StocksDiagnosticExtension,StocksSettingsIntents,StocksPersonalization,Weather,WeatherAppSupport,WeatherAppSupportTests,WeatherCharts,WeatherDemo,Kinsale,WeatherCore,WeatherCoreTests,WeatherKit,WeatherKitDemo,WeatherKitTests,WeatherMaps,WeatherMapsTests,WeatherUI,WeatherUITests,WeatherDaemon,WeatherDaemonTests,weatherd,WeatherSettings,WeatherSettingsIntentsExtension,WeatherWidget,WeatherWidgetExtension,WeatherIntents,WeatherAppIntents,WeatherUnitTests,KinsaleAnalytics,WeatherAnalytics,WeatherAnalyticsTests,KinsaleUI,WeatherUI,WeatherDiagnosticExtension,WeatherNotifications,WeatherDaemonMemoryTests,NanoWeather,NanoWeatherDiagnosticExtension,nanoweatherd,WeatherInternalExtras,WeatherFace,WeatherMenuBar,Urchin,,TeaBreeze,TeaBreezeTests,TeaBreezeInternalExtras,Breeze,TeaCharts,TeaChartsTests,TeaDB,TeaDBTests,TeaDemo,TeaFoundationTests,TeaSettings,TeaSettingsTests,TeaState,TeaStateCatalog,TeaStateTests,TeaStateInternalExtras,TeaSnappy,TeaSnappyTests,TeaTemplate,TeaTemplateTests,TeaUI,TeaUITests,SwiftUI,TeaBreezeInternalExtras,TeaStateTool,TeaBreezeCatalog ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    clients:         [ BookAnalytics,BookCore,Books,BooksInternalExtras,BooksPersonalization,BooksPersonalizationTests,EngagementCollector,AEBookPlugins,NewsInternalExtras,NewsPersonalization,NewsServices,NewsServicesInternal,NewsTag,NewsToday,NewsToday2,NewsTodayIntents,NewsWidgetIntents,News,NVCDemo,ArticleNotificationExtension,ArticleNotificationServiceExtension,NewsNotificationServiceExtension,MarketingNotificationExtension,OpenInNews,Feldspar Tests,NewsInternalSettings,NewsSettings,NewsUI,NewsUITests,newsd,com.apple.news,NewsAnalyticsUpload,NewsUI2,NewsUI2Tests,NewsFeed,NewsFeedTests,NewsKit,NewsKitTests,NewsKitDemo,NewsLiveActivitiesCore,NewsLiveActivitiesCoreTests,NewsArticles,NewsArticlesTests,NewsAds,NewsAdsTests,NewsEngagementCollector,NewsFormat,NewsFormatTests,NewsSubscription,NewsSubscriptionTests,NewsAnalytics,NewsAnalyticsTests,Feldspar,Silex,SilexWeb,NewsArticleViewer,NewsArticleQuickLook,NewsEngagement,NewsEngagementTests,SilexDebugger,NewsDiagnosticExtension,NanoNewsWidgetExtension,NanoNews,NanoNewsInternalExtras,NanoNewsUI,NanoNewsDataService,NanoNewsAnalytics,NanoNewsHeadlines,NewsPersonalizationTests,NewsAudio,NewsDaemon,TodayFeedConfigDecoder,NewsScoringService,NewsUserEvents,NewsCore,FeldsparCore iOS Tests,CookingKit,CookingKitTests,CookingSupport,CookingExampleAppSupport,CookingSupportTests,CookingSupportExampleHostApp,CookingKitExampleApp,,Stocks,StocksAnalytics,StocksAnalyticsTests,StocksCore,StocksCoreTests,StocksDetailIntents,StocksKit,StocksKitTests,StocksKitService,StocksTests,StocksToday,StocksUI,StocksUITests,StocksWidget,StocksDiagnosticExtension,StocksSettingsIntents,StocksPersonalization,Weather,WeatherAppSupport,WeatherAppSupportTests,WeatherCharts,WeatherDemo,Kinsale,WeatherCore,WeatherCoreTests,WeatherKit,WeatherKitDemo,WeatherKitTests,WeatherMaps,WeatherMapsTests,WeatherUI,WeatherUITests,WeatherDaemon,WeatherDaemonTests,weatherd,WeatherSettings,WeatherSettingsIntentsExtension,WeatherWidget,WeatherWidgetExtension,WeatherIntents,WeatherAppIntents,WeatherUnitTests,KinsaleAnalytics,WeatherAnalytics,WeatherAnalyticsTests,KinsaleUI,WeatherUI,WeatherDiagnosticExtension,WeatherNotifications,WeatherDaemonMemoryTests,NanoWeather,NanoWeatherDiagnosticExtension,nanoweatherd,WeatherInternalExtras,WeatherFace,WeatherMenuBar,Urchin,,TeaBreeze,TeaBreezeTests,TeaBreezeInternalExtras,Breeze,TeaCharts,TeaChartsTests,TeaDB,TeaDBTests,TeaDemo,TeaFoundationTests,TeaSettings,TeaSettingsTests,TeaState,TeaStateCatalog,TeaStateTests,TeaStateInternalExtras,TeaSnappy,TeaSnappyTests,TeaTemplate,TeaTemplateTests,TeaUI,TeaUITests,SwiftUI,TeaBreezeInternalExtras,TeaStateTool,TeaBreezeCatalog ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation4DataV11TeaSettings10OptionTypeADMc', '_$s10Foundation4DataV11TeaSettings10OptionTypeADWP', 
                        '_$s10Foundation4DataV11TeaSettings8SettableADMc', '_$s10Foundation4DataV11TeaSettings8SettableADWP', 
                        '_$s10Foundation4DataV11TeaSettingsE02toB0ypyF', '_$s10Foundation4DataV11TeaSettingsE7convert4fromACSgyp_tFZ', 
@@ -217,9 +214,9 @@ exports:
                        '_$s11TeaSettings16SettingCellStyleO6slideryACSf_AA4ItemC16RangeControlTypeO9PrecisionOySf__GS2fSayAA0C6ActionCGySfctcACmFWC', 
                        '_$s11TeaSettings16SettingCellStyleO6switchyACSb_SayAA0C6ActionCGAA14ChangeBehaviorOSbctcACmFWC', 
                        '_$s11TeaSettings16SettingCellStyleO6toggleyACSayAA0C6ActionCG_SbycySbctcACmFWC', 
-                       '_$s11TeaSettings16SettingCellStyleO7optionsyACSayAA5GroupVG_AA9Groupable_pSgyctcACmFWC', 
                        '_$s11TeaSettings16SettingCellStyleO7stepperyACSf_S3fSayAA0C6ActionCGySfctcACmFWC', 
-                       '_$s11TeaSettings16SettingCellStyleO7unknownyA2CmFWC', '_$s11TeaSettings16SettingCellStyleO9textFieldyACSS_SayAA0C6ActionCGySSctcACmFWC', 
+                       '_$s11TeaSettings16SettingCellStyleO7unknownyA2CmFWC', '_$s11TeaSettings16SettingCellStyleO8pageItemyACSayAA5GroupVG_AA9Groupable_pSgyctcACmFWC', 
+                       '_$s11TeaSettings16SettingCellStyleO9textFieldyACSS_SayAA0C6ActionCGySSctcACmFWC', 
                        '_$s11TeaSettings16SettingCellStyleOMa', '_$s11TeaSettings16SettingCellStyleOMn', 
                        '_$s11TeaSettings16SettingCellStyleON', '_$s11TeaSettings17PresetManagerTypeMp', 
                        '_$s11TeaSettings17PresetManagerTypeP5applyyySaySSGFTj', '_$s11TeaSettings17PresetManagerTypeP5applyyySaySSGFTq', 
@@ -370,13 +367,29 @@ exports:
                        '_$s11TeaSettings8DataTypeO9hashValueSivg', '_$s11TeaSettings8DataTypeO9hashValueSivpMV', 
                        '_$s11TeaSettings8DataTypeOMa', '_$s11TeaSettings8DataTypeOMn', 
                        '_$s11TeaSettings8DataTypeON', '_$s11TeaSettings8DataTypeOSHAAMc', 
-                       '_$s11TeaSettings8DataTypeOSQAAMc', '_$s11TeaSettings8SettableMp', 
-                       '_$s11TeaSettings8SettableP6toDataypyFTj', '_$s11TeaSettings8SettableP6toDataypyFTq', 
-                       '_$s11TeaSettings8SettableP7convert4fromxSgyp_tFZTj', '_$s11TeaSettings8SettableP7convert4fromxSgyp_tFZTq', 
-                       '_$s11TeaSettings8SettableP8dataTypeAA04DataE0OvgZTj', '_$s11TeaSettings8SettableP8dataTypeAA04DataE0OvgZTq', 
-                       '_$s11TeaSettings8SettablePSQTb', '_$s11TeaSettings8SettableTL', 
-                       '_$s11TeaSettings9GroupableMp', '_$s11TeaSettings9GroupableP5labelSSvgTj', 
-                       '_$s11TeaSettings9GroupableP5labelSSvgTq', '_$s11TeaSettings9GroupableP9cellStyleAA011SettingCellE0OvgTj', 
+                       '_$s11TeaSettings8DataTypeOSQAAMc', '_$s11TeaSettings8PageItemC4item4pageACyxGAA0D0CyxG_SayAA5GroupVGtcfC', 
+                       '_$s11TeaSettings8PageItemC4item4pageACyxGAA0D0CyxG_SayAA5GroupVGtcfCTj', 
+                       '_$s11TeaSettings8PageItemC4item4pageACyxGAA0D0CyxG_SayAA5GroupVGtcfCTq', 
+                       '_$s11TeaSettings8PageItemC4item4pageACyxGAA0D0CyxG_SayAA5GroupVGtcfc', 
+                       '_$s11TeaSettings8PageItemC5labelSSvg', '_$s11TeaSettings8PageItemC5labelSSvpMV', 
+                       '_$s11TeaSettings8PageItemC5resetSayAA13SettingActionCGyF', 
+                       '_$s11TeaSettings8PageItemC9cellStyleAA011SettingCellF0Ovg', 
+                       '_$s11TeaSettings8PageItemC9cellStyleAA011SettingCellF0OvpMV', 
+                       '_$s11TeaSettings8PageItemC9isEnabledSbvg', '_$s11TeaSettings8PageItemC9isEnabledSbvpMV', 
+                       '_$s11TeaSettings8PageItemCMa', '_$s11TeaSettings8PageItemCMn', 
+                       '_$s11TeaSettings8PageItemCMo', '_$s11TeaSettings8PageItemCMu', 
+                       '_$s11TeaSettings8PageItemCfD', '_$s11TeaSettings8PageItemCfd', 
+                       '_$s11TeaSettings8PageItemCyxGAA10ResettableAAMc', '_$s11TeaSettings8PageItemCyxGAA10ResettableAAWP', 
+                       '_$s11TeaSettings8PageItemCyxGAA12ConfigurableAAMc', '_$s11TeaSettings8PageItemCyxGAA12ConfigurableAAWP', 
+                       '_$s11TeaSettings8PageItemCyxGAA9GroupableAAMc', '_$s11TeaSettings8PageItemCyxGAA9GroupableAAWP', 
+                       '_$s11TeaSettings8PageItemCyxGAA9UpdatableAAMc', '_$s11TeaSettings8PageItemCyxGAA9UpdatableAAWP', 
+                       '_$s11TeaSettings8SettableMp', '_$s11TeaSettings8SettableP6toDataypyFTj', 
+                       '_$s11TeaSettings8SettableP6toDataypyFTq', '_$s11TeaSettings8SettableP7convert4fromxSgyp_tFZTj', 
+                       '_$s11TeaSettings8SettableP7convert4fromxSgyp_tFZTq', '_$s11TeaSettings8SettableP8dataTypeAA04DataE0OvgZTj', 
+                       '_$s11TeaSettings8SettableP8dataTypeAA04DataE0OvgZTq', '_$s11TeaSettings8SettablePSQTb', 
+                       '_$s11TeaSettings8SettableTL', '_$s11TeaSettings9GroupableMp', 
+                       '_$s11TeaSettings9GroupableP5labelSSvgTj', '_$s11TeaSettings9GroupableP5labelSSvgTq', 
+                       '_$s11TeaSettings9GroupableP9cellStyleAA011SettingCellE0OvgTj', 
                        '_$s11TeaSettings9GroupableP9cellStyleAA011SettingCellE0OvgTq', 
                        '_$s11TeaSettings9GroupableP9isEnabledSbvgTj', '_$s11TeaSettings9GroupableP9isEnabledSbvgTq', 
                        '_$s11TeaSettings9GroupableP9isVisibleSbvgTj', '_$s11TeaSettings9GroupableP9isVisibleSbvgTq', 

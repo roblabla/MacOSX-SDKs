@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Leonardo.framework/Versions/A/Leonardo'
 current-version: 2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s8Leonardo10DiagnosticV11descriptionSSvg', '_$s8Leonardo10DiagnosticV11descriptionSSvpMV', 
                        '_$s8Leonardo10DiagnosticV2eeoiySbAC_ACtFZ', '_$s8Leonardo10DiagnosticV4KindO11descriptionSSvg', 
                        '_$s8Leonardo10DiagnosticV4KindO11descriptionSSvpMV', '_$s8Leonardo10DiagnosticV4KindO11noMaterialsyA2EmFWC', 
@@ -540,7 +540,11 @@ exports:
                        '_$s8Leonardo18SyntheticGeneratorV8generateAC8SequenceVyYaKFTu', 
                        '_$s8Leonardo18SyntheticGeneratorVMa', '_$s8Leonardo18SyntheticGeneratorVMn', 
                        '_$s8Leonardo18SyntheticGeneratorVN', '_$s8Leonardo19analyzeWithMetadata9objectURLAA07AnalyzecD6ResultV10Foundation0F0V_tKF', 
-                       '_$s8Leonardo20TransformationMatrixV05scaleC0yACSfFZ', '_$s8Leonardo20TransformationMatrixV16debugDescriptionSSvg', 
+                       '_$s8Leonardo20TransformationMatrixV05scaleC0yACSfFZ', '_$s8Leonardo20TransformationMatrixV15rowMajorScalarsSaySfGvM', 
+                       '_$s8Leonardo20TransformationMatrixV15rowMajorScalarsSaySfGvg', 
+                       '_$s8Leonardo20TransformationMatrixV15rowMajorScalarsSaySfGvpMV', 
+                       '_$s8Leonardo20TransformationMatrixV15rowMajorScalarsSaySfGvs', 
+                       '_$s8Leonardo20TransformationMatrixV16debugDescriptionSSvg', 
                        '_$s8Leonardo20TransformationMatrixV16debugDescriptionSSvpMV', 
                        '_$s8Leonardo20TransformationMatrixV1moiyA2C_ACtFZ', '_$s8Leonardo20TransformationMatrixV2eeoiySbAC_ACtFZ', 
                        '_$s8Leonardo20TransformationMatrixV4hash4intoys6HasherVz_tF', 

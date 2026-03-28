@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpatialDataStreaming.framework/Versions/A/SpatialDataStreaming'
 swift-abi-version: 7
 exports:
@@ -11,7 +11,7 @@ exports:
                        __ZTSN5apple4aiml12flatbuffers210objc_apple18AllocatorExceptionE, 
                        __ZTSN5apple4aiml12flatbuffers216DefaultAllocatorE, __ZTSN5apple4aiml12flatbuffers29AllocatorE, 
                        __ZTSNSt3__110__function6__baseIFN5apple4aiml12flatbuffers26OffsetIvEEmEEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$sSo10SDSSessionC20SpatialDataStreamingE11descriptionSSvg', 
                        '_$sSo10SDSSessionC20SpatialDataStreamingE13requestStream4with13streamHandlerySo22SDSStreamConfiguration_pSg_ySo0J0_pSg_s5Error_pSgtctF', 
                        '_$sSo10SDSSessionC20SpatialDataStreamingE14setTargetQueueyySo17OS_dispatch_queueCF', 

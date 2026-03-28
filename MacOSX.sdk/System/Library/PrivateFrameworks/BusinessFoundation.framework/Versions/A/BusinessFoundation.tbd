@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BusinessFoundation.framework/Versions/A/BusinessFoundation'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s18BusinessFoundation10AsyncMutexC5labelACSS_tcfC', '_$s18BusinessFoundation10AsyncMutexC5labelACSS_tcfCTj', 
                        '_$s18BusinessFoundation10AsyncMutexC5labelACSS_tcfCTq', '_$s18BusinessFoundation10AsyncMutexC5labelACSS_tcfc', 
                        '_$s18BusinessFoundation10AsyncMutexC7performyxxyYaKcYaKlFTj', 

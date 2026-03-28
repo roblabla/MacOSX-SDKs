@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AuthKitUI.framework/Versions/A/AuthKitUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s2os6LoggerV9AuthKitUIE06RemoteE0ACvgZ', '_$s9AuthKitUI26AKHarvestedDataUserInfoKeySSvg', 
                        '_$sSo23AKMacOSRemoteUIProviderC9AuthKitUIEABycfC', '_$sSo23AKMacOSRemoteUIProviderC9AuthKitUIEABycfc', 
                        '_$sSo23AKMacOSRemoteUIProviderCMa', _AKAppleIDButtonDefaultCornerRadius, 
@@ -134,7 +134,7 @@ exports:
                        AKLegacyInlineSignInViewController, AKLoginRowData, AKMacOSRemoteUIProvider, 
                        AKMaxLengthFormatter, AKModalSignInViewController, AKNameTextField, 
                        AKNavigationController, AKNavigationItem, AKNoCodeReceivedController, 
-                       AKPaddedTextFieldCell, AKParentalApprovalRequestViewController, 
+                       AKPDPBlobGenerationHook, AKPaddedTextFieldCell, AKParentalApprovalRequestViewController, 
                        AKPaymentVerificationController, AKPinFieldBoxUIElement, AKPinFieldView, 
                        AKPrivateEmailRVSBootstrapper, AKPrivateEmailRVSRemoteViewController, 
                        AKPrivateEmailRVSWindowController, AKPrivateEmailUIProviderImp, 

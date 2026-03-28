@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriPaymentsIntents.framework/Versions/A/SiriPaymentsIntents'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ PaymentsFlowDelegatePlugin, SiriPaymentsIntentsTests ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s11SiriKitFlow5ParseO0A15PaymentsIntentsE15isFirstPartyAppSbyF', 
                        '_$s11SiriKitFlow5ParseO16DirectInvocationV0A15PaymentsIntentsE17getSelectionIndexSiyKF', 
                        '_$s11SiriKitFlow8USOParseV0A15PaymentsIntentsE24isRequestForAppleSavingsSbvg', 

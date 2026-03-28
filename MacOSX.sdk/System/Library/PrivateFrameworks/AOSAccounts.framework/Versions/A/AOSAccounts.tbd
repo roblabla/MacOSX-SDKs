@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AOSAccounts.framework/Versions/A/AOSAccounts'
 current-version: 1.9.95
 exports:
@@ -9,7 +9,7 @@ exports:
                        __ZTINSt3__119basic_ostringstreamIwNS_11char_traitsIwEENS_9allocatorIwEEEE, 
                        __ZTSNSt3__115basic_stringbufIwNS_11char_traitsIwEENS_9allocatorIwEEEE, 
                        __ZTSNSt3__119basic_ostringstreamIwNS_11char_traitsIwEENS_9allocatorIwEEEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AOSAccountsGetLogLevel, _AOSAccountsSetLogLevel, _AOSDebugUserDictValueForKey, 
                        _AOSLogSafeDictionaryForDictionary, _AuthenticateAccount, 
                        _CopyAOSValue, _CopyAOSValueFromMMDomain, _CopyAccountPrefsForAltDSID, 

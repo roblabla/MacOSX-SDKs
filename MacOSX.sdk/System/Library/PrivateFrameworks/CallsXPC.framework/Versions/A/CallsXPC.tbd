@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CallsXPC.framework/Versions/A/CallsXPC'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12HostMessages8CallsXPC12XPCInterfacePTl', '_$s14ClientMessages8CallsXPC12XPCInterfacePTl', 
                        '_$s4Kind8CallsXPC12XPCInterfacePTl', '_$s5Reply8CallsXPC10XPCMessagePTl', 
                        '_$s7Failure8CallsXPC10XPCMessagePTl', '_$s8CallsXPC05OneToC0OAA16XPCInterfaceKindAAMc', 

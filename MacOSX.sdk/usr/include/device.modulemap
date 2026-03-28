@@ -1,6 +1,11 @@
-module Darwin.device [system] {
-  header "device/device_types.h"
-  header "device/device_port.h"
+module Darwin.device {
+  module device_port {
+    header "device/device_port.h"
+    export *
+  }
 
-  export *
+  module device_types {
+    header "device/device_types.h"
+    export *
+  }
 }

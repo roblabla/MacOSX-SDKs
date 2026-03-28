@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleMobileFileIntegrity.framework/Versions/A/AppleMobileFileIntegrity'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AMFIArmSecurityBootMode, _AMFICompleteSecurityBootMode, _AMFICopySwiftPlaygroundsSigningKey, 
                        _AMFIDemoModeSetState, _AMFIDeveloperModeCommit, _AMFIExecutionPreflight, 
                        _AMFIGetSEPDeviceState, _AMFIGetSecurityBootMode, _AMFIGetSecurityBootModeArmed, 

@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/APConfigurationSystem.framework/Versions/A/APConfigurationSystem'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s21APConfigurationSystem013ConfigurationB9ConstantsO21machServiceIdentifierSSvgZ', 
                        '_$s21APConfigurationSystem013ConfigurationB9ConstantsO21machServiceIdentifierSSvpZMV', 
                        '_$s21APConfigurationSystem013ConfigurationB9ConstantsOMa', 
@@ -51,6 +49,7 @@ exports:
                        '_$s21APConfigurationSystem13ConfigurationO11featureFlagyA2CmFWC', 
                        '_$s21APConfigurationSystem13ConfigurationO12placementSLPyA2CmFWC', 
                        '_$s21APConfigurationSystem13ConfigurationO13configurationyA2CmFWC', 
+                       '_$s21APConfigurationSystem13ConfigurationO20featureFlagEnforcingyA2CmFWC', 
                        '_$s21APConfigurationSystem13ConfigurationO22experimentationReportsyA2CmFWC', 
                        '_$s21APConfigurationSystem13ConfigurationO28eventCollectionClientMetricsyA2CmFWC', 
                        '_$s21APConfigurationSystem13ConfigurationO2eeoiySbAC_ACtFZ', 
@@ -197,6 +196,19 @@ exports:
                        '_$s21APConfigurationSystem32ConfigurationStorefrontValidatorCMu', 
                        '_$s21APConfigurationSystem32ConfigurationStorefrontValidatorCN', 
                        '_$s21APConfigurationSystem32ConfigurationStorefrontValidatorCfD', 
+                       '_$s21APConfigurationSystem33FeatureFlagEnforcingConfigurationV12retryTimeoutSdSgvg', 
+                       '_$s21APConfigurationSystem33FeatureFlagEnforcingConfigurationV12retryTimeoutSdSgvpMV', 
+                       '_$s21APConfigurationSystem33FeatureFlagEnforcingConfigurationV14restartEnabledSbvg', 
+                       '_$s21APConfigurationSystem33FeatureFlagEnforcingConfigurationV14restartEnabledSbvpMV', 
+                       '_$s21APConfigurationSystem33FeatureFlagEnforcingConfigurationV4fromACs7Decoder_p_tKcfC', 
+                       '_$s21APConfigurationSystem33FeatureFlagEnforcingConfigurationV5delaySdSgvg', 
+                       '_$s21APConfigurationSystem33FeatureFlagEnforcingConfigurationV5delaySdSgvpMV', 
+                       '_$s21APConfigurationSystem33FeatureFlagEnforcingConfigurationV6encode2toys7Encoder_p_tKF', 
+                       '_$s21APConfigurationSystem33FeatureFlagEnforcingConfigurationVMa', 
+                       '_$s21APConfigurationSystem33FeatureFlagEnforcingConfigurationVMn', 
+                       '_$s21APConfigurationSystem33FeatureFlagEnforcingConfigurationVN', 
+                       '_$s21APConfigurationSystem33FeatureFlagEnforcingConfigurationVSEAAMc', 
+                       '_$s21APConfigurationSystem33FeatureFlagEnforcingConfigurationVSeAAMc', 
                        '_$sSo9OS_os_logC21APConfigurationSystemE013configurationE0ABvgZ', 
                        '_$sSo9OS_os_logC21APConfigurationSystemE013configurationE0ABvpZMV', 
                        _APConfigurationSystemVersionNumber, _APConfigurationSystemVersionString, 

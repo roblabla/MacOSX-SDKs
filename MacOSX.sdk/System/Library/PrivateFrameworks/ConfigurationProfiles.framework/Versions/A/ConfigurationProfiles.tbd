@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ConfigurationProfiles.framework/Versions/A/ConfigurationProfiles'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _BZip2Compress, _BZip2Decompress, _CPClearActivationInfo, 
                        _CPCloudConfigInfoDidFail, _CPCloudConfigInfoDidSucceed, _CPCloudConfigIsMDMv2Notification, 
                        _CPCloudDeviceEnabledBitsDidChange, _CPCreateProvisioningDictionaries, 

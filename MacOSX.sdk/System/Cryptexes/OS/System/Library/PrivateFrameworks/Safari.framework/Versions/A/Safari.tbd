@@ -1,8 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Safari.framework/Versions/A/Safari'
-current-version: 623.1.14
+current-version: 624.1.16
 compatibility-version: 528
 swift-abi-version: 7
 exports:
@@ -10,8 +10,21 @@ exports:
     symbols:         [ __ZN6Safari23PasswordAutoFillStrings38originDescriptionForSFSafariCredentialEP18SFSafariCredentialP8NSStringaa, 
                        __ZN6Safari23PasswordAutoFillStrings40originDescriptionForSFCredentialIdentityEP20SFCredentialIdentityP8NSStringa, 
                        __ZN6Safari23PasswordAutoFillStrings40originDescriptionForWBSSavedAccountMatchEP20WBSSavedAccountMatchP5NSURLaa ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s6Safari0A21OnboardingCoordinatorC011didCompleteB0yySo21WBSOnboardingProvider_pF', 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s15WallpaperAccess06publicA5Image11forUserUUIDSo10CGImageRefa10Foundation0G0V_tKF', 
+                       '_$s15WallpaperAccess06publicA5Image9forUserIDSo10CGImageRefas6UInt32V_tKF', 
+                       '_$s15WallpaperAccess07defaultA9Thumbnail4sizeSo10CGImageRefaSo6CGSizeV_tKF', 
+                       '_$s15WallpaperAccess0aB5ErrorO23couldNotCreateThumbnailyA2CmFWC', 
+                       '_$s15WallpaperAccess0aB5ErrorO25couldNotCreateImageSourceyA2CmFWC', 
+                       '_$s15WallpaperAccess0aB5ErrorO2eeoiySbAC_ACtFZ', '_$s15WallpaperAccess0aB5ErrorO4hash4intoys6HasherVz_tF', 
+                       '_$s15WallpaperAccess0aB5ErrorO9hashValueSivg', '_$s15WallpaperAccess0aB5ErrorO9hashValueSivpMV', 
+                       '_$s15WallpaperAccess0aB5ErrorOMa', '_$s15WallpaperAccess0aB5ErrorOMn', 
+                       '_$s15WallpaperAccess0aB5ErrorON', '_$s15WallpaperAccess0aB5ErrorOSHAAMc', 
+                       '_$s15WallpaperAccess0aB5ErrorOSQAAMc', '_$s15WallpaperAccess0aB5ErrorOs0C0AAMc', 
+                       '_$s15WallpaperAccess9ModelInfoO24desktopPictureSystemPathSSSgvgZ', 
+                       '_$s15WallpaperAccess9ModelInfoO24desktopPictureSystemPathSSSgvpZMV', 
+                       '_$s15WallpaperAccess9ModelInfoOMa', '_$s15WallpaperAccess9ModelInfoOMn', 
+                       '_$s15WallpaperAccess9ModelInfoON', '_$s6Safari0A21OnboardingCoordinatorC011didCompleteB0yySo21WBSOnboardingProvider_pF', 
                        '_$s6Safari0A21OnboardingCoordinatorC014pauseStartPageB0yyF', 
                        '_$s6Safari0A21OnboardingCoordinatorC06sharedC0ACvgZ', '_$s6Safari0A21OnboardingCoordinatorC06sharedC0ACvpZMV', 
                        '_$s6Safari0A21OnboardingCoordinatorC09startPageB32CollectionViewItemConfigurationsSayAA05StartebfgH13ConfigurationCGvg', 
@@ -44,7 +57,21 @@ exports:
                        '_$s6Safari21OnDeviceSummarizationCACycfC', '_$s6Safari21OnDeviceSummarizationCACycfc', 
                        '_$s6Safari21OnDeviceSummarizationCMa', '_$s6Safari21OnDeviceSummarizationCMn', 
                        '_$s6Safari21OnDeviceSummarizationCMo', '_$s6Safari21OnDeviceSummarizationCN', 
-                       '_$s6Safari21OnDeviceSummarizationCfD', '_$s6Safari24CompletionListActionDataC06deleteD0yycSgvM', 
+                       '_$s6Safari21OnDeviceSummarizationCfD', '_$s6Safari22ClamshellStateObserverC09clamshellC14ChangeCallbackACyyc_tcfC', 
+                       '_$s6Safari22ClamshellStateObserverC09clamshellC14ChangeCallbackACyyc_tcfCTj', 
+                       '_$s6Safari22ClamshellStateObserverC09clamshellC14ChangeCallbackACyyc_tcfCTq', 
+                       '_$s6Safari22ClamshellStateObserverC09clamshellC14ChangeCallbackACyyc_tcfc', 
+                       '_$s6Safari22ClamshellStateObserverCACycfC', '_$s6Safari22ClamshellStateObserverCACycfc', 
+                       '_$s6Safari22ClamshellStateObserverCMa', '_$s6Safari22ClamshellStateObserverCMn', 
+                       '_$s6Safari22ClamshellStateObserverCMo', '_$s6Safari22ClamshellStateObserverCMu', 
+                       '_$s6Safari22ClamshellStateObserverCN', '_$s6Safari22ClamshellStateObserverCfD', 
+                       '_$s6Safari23WallpaperAccessProviderC07defaultB9Thumbnail4size5scaleSo7NSImageCSgSo6CGSizeV_12CoreGraphics7CGFloatVtFZTj', 
+                       '_$s6Safari23WallpaperAccessProviderC07defaultB9Thumbnail4size5scaleSo7NSImageCSgSo6CGSizeV_12CoreGraphics7CGFloatVtFZTq', 
+                       '_$s6Safari23WallpaperAccessProviderCACycfC', '_$s6Safari23WallpaperAccessProviderCACycfc', 
+                       '_$s6Safari23WallpaperAccessProviderCMa', '_$s6Safari23WallpaperAccessProviderCMn', 
+                       '_$s6Safari23WallpaperAccessProviderCMo', '_$s6Safari23WallpaperAccessProviderCMu', 
+                       '_$s6Safari23WallpaperAccessProviderCN', '_$s6Safari23WallpaperAccessProviderCfD', 
+                       '_$s6Safari24CompletionListActionDataC06deleteD0yycSgvM', 
                        '_$s6Safari24CompletionListActionDataC06deleteD0yycSgvg', 
                        '_$s6Safari24CompletionListActionDataC06deleteD0yycSgvpMV', 
                        '_$s6Safari24CompletionListActionDataC06deleteD0yycSgvs', 
@@ -697,6 +724,19 @@ exports:
                        '_$s6Safari39CompletionListCollectionViewHostingItemCMn', 
                        '_$s6Safari39CompletionListCollectionViewHostingItemCMo', 
                        '_$s6Safari39CompletionListCollectionViewHostingItemCN', '_$s6Safari39CompletionListCollectionViewHostingItemCfD', 
+                       '_$s6Safari39OnDemandSummarizationFeedbackControllerC04viewF15ForPresentation10controllerSo06NSViewF0C0E0013FBKEvaluationF0C_tF', 
+                       '_$s6Safari39OnDemandSummarizationFeedbackControllerC06sharedF0ACvgZ', 
+                       '_$s6Safari39OnDemandSummarizationFeedbackControllerC06sharedF0ACvpZMV', 
+                       '_$s6Safari39OnDemandSummarizationFeedbackControllerC0E0013FBKEvaluationF12DelegateBaseAAMc', 
+                       '_$s6Safari39OnDemandSummarizationFeedbackControllerC0E0013FBKEvaluationF24DelegateDynamicPresenterAAMc', 
+                       '_$s6Safari39OnDemandSummarizationFeedbackControllerC13reportConcern11summaryText06readerj7UsedForD025associateWithAppleAccount014presentingViewF0ySS_SSSbSo06NSViewF0CtF', 
+                       '_$s6Safari39OnDemandSummarizationFeedbackControllerC19userDidSelectOption10actionType11summaryText011textUsedForD025associateWithAppleAccount014presentingViewF0ySo21WBSUserReportedActionV_S2SSbSo06NSViewF0CtF', 
+                       '_$s6Safari39OnDemandSummarizationFeedbackControllerCACycfC', 
+                       '_$s6Safari39OnDemandSummarizationFeedbackControllerCACycfc', 
+                       '_$s6Safari39OnDemandSummarizationFeedbackControllerCMa', 
+                       '_$s6Safari39OnDemandSummarizationFeedbackControllerCMn', 
+                       '_$s6Safari39OnDemandSummarizationFeedbackControllerCMo', 
+                       '_$s6Safari39OnDemandSummarizationFeedbackControllerCN', '_$s6Safari39OnDemandSummarizationFeedbackControllerCfD', 
                        '_$s6Safari40CompletionListCollectionViewSearchUIItemC012shouldUpdateF12UICellHeightSbvM', 
                        '_$s6Safari40CompletionListCollectionViewSearchUIItemC012shouldUpdateF12UICellHeightSbvg', 
                        '_$s6Safari40CompletionListCollectionViewSearchUIItemC012shouldUpdateF12UICellHeightSbvpMV', 
@@ -955,27 +995,28 @@ exports:
                        _readingListItemThumbnailWasLoadedNotification, _resetCloudHistoryDefaultsKey, 
                        _safariFrameworkBundleIdentifier, _safariProductionApplicationBundleIdentifier, 
                        _safariQuickLookPreviewBundleIdentifier, _safariSharedFrameworkBundleIdentifier, 
-                       _safariTechnologyPreviewApplicationBundleIdentifier, _startPageCornerRadius, 
-                       _startPageCornerRadiusForInnerElement, _touchIDAvailabilityMayHaveChangedNotification, 
-                       _touchIDToAutoFillToggledNotification, _unknownSymbolFallbackSymbolName, 
-                       _webBookmarkLeafNewURLStringUserInfoKey, _webBookmarkLeafOldURLStringUserInfoKey, 
-                       _webBookmarkLeafURLStringDidChangeNotification ]
+                       _safariTechnologyPreviewApplicationBundleIdentifier, _shouldAllowDraggingWindowForCompactTabButtonViewWithEvent, 
+                       _startPageCornerRadius, _startPageCornerRadiusForInnerElement, 
+                       _touchIDAvailabilityMayHaveChangedNotification, _touchIDToAutoFillToggledNotification, 
+                       _unknownSymbolFallbackSymbolName, _webBookmarkLeafNewURLStringUserInfoKey, 
+                       _webBookmarkLeafOldURLStringUserInfoKey, _webBookmarkLeafURLStringDidChangeNotification ]
     objc-classes:    [ AutoFillAuthorizationController, AutoFillLocalAuthenticationManager, 
                        AutoFillPasswordManagerUICredentialPicker, BookmarksController, 
                        CompletionListVendorForHistoryService, CompletionListWindow, 
                        CompletionListWindowController, CredentialCompletionAutoFillCellView, 
                        FeatureAvailability, FolderSuggestionManager, MacSafariBookmarkDBAccess, 
-                       MenuTableRowView, MenuTableSeparatorRowView, OnDeviceSummarization, 
-                       OneTimeCodeAutoFillCellView, PurgeableDirectory, PurgeableItemController, 
-                       PurgeableWebCache, ReadingListController, ReadingListDataStore, 
-                       ReadingListItem, ReadingListThumbnailProvider, RestrictedSandboxBroker, 
-                       SafariAppExtensionsController, SafariContentBlockerAppExtensionsController, 
+                       MenuTableRowView, MenuTableSeparatorRowView, OnDemandSummarizationFeedbackController, 
+                       OnDeviceSummarization, OneTimeCodeAutoFillCellView, PurgeableDirectory, 
+                       PurgeableItemController, PurgeableWebCache, ReadingListController, 
+                       ReadingListDataStore, ReadingListItem, ReadingListThumbnailProvider, 
+                       RestrictedSandboxBroker, SafariAppExtensionsController, SafariContentBlockerAppExtensionsController, 
                        SafariSandboxBroker, SafariSettingsSyncEngineAccessMac, SafariWebBookmark, 
                        SafariWebBookmarkList, SafariWebExtensionsController, SearchProvider, 
                        SearchProvidersController, SnapshotCache, SnapshotRequest, 
                        SnapshotResponse, StartPageOnboardingCollectionViewItemConfiguration, 
                        SummarizationAnimationCoordinator, TouchIconCache, WebBookmarkGroup, 
                        WebBookmarkLeaf, WebBookmarkProxy, _TtC6Safari16BookmarkTileCell, 
+                       _TtC6Safari22ClamshellStateObserver, _TtC6Safari23WallpaperAccessProvider, 
                        _TtC6Safari24CompletionListActionData, _TtC6Safari24CompletionListBannerData, 
                        _TtC6Safari25RWIAutoInspectionSettings, _TtC6Safari27SafariOnboardingCoordinator, 
                        _TtC6Safari30HistoryItemAutoFillViewHosting, _TtC6Safari31CompletionListSuggestedSiteData, 
@@ -995,7 +1036,7 @@ exports:
                        _TtCC6Safari38CompletionListCollectionViewController21CollectionViewSection, 
                        _TtCC6Safari38CompletionListCollectionViewController22InterItemSeparatorView, 
                        _TtCC6Safari38CompletionListCollectionViewController24CollectionViewSuggestion ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ __ZN6Safari23PasswordAutoFillStrings38originDescriptionForSFSafariCredentialEP18SFSafariCredentialP8NSStringbb, 
                        __ZN6Safari23PasswordAutoFillStrings40originDescriptionForSFCredentialIdentityEP20SFCredentialIdentityP8NSStringb, 
                        __ZN6Safari23PasswordAutoFillStrings40originDescriptionForWBSSavedAccountMatchEP20WBSSavedAccountMatchP5NSURLbb ]

@@ -41,6 +41,10 @@ AX_EXTERN NSNotificationName const AXPrefersActionSliderAlternativeDidChangeNoti
 AX_EXTERN BOOL AXShowBordersEnabled(void) API_AVAILABLE(ios(26.1), macos(26.1), tvos(26.1), watchos(26.1), visionos(26.1)) NS_REFINED_FOR_SWIFT;
 AX_EXTERN NSNotificationName const AXShowBordersEnabledStatusDidChangeNotification API_AVAILABLE(ios(26.1), macos(26.1), tvos(26.1), watchos(26.1), visionos(26.1)) NS_SWIFT_NAME(AccessibilitySettings.showBordersEnabledStatusDidChangeNotification);
 
+// Returns whether the system preference for reduce highlighting effects is enabled
+AX_EXTERN BOOL AXReduceHighlightingEffectsEnabled(void) API_AVAILABLE(ios(26.4), macos(26.4), tvos(26.4), watchos(26.4), visionos(26.4)) NS_SWIFT_NAME(getter:AccessibilitySettings.isReduceHighlightingEffectsEnabled());
+AX_EXTERN NSNotificationName const AXReduceHighlightingEffectsEnabledDidChangeNotification API_AVAILABLE(ios(26.4), macos(26.4), tvos(26.4), watchos(26.4), visionos(26.4)) NS_SWIFT_NAME(AccessibilitySettings.reduceHighlightingEffectsEnabledDidChangeNotification);
+
 typedef NS_ENUM(NSInteger, AXSettingsFeature) {
     // Jump to the setting for "Allow Apps to Request to Use" in Personal Voice. This is relevant for the AVSpeechSynthesis.personalVoiceAuthorizationStatus API.
     AXSettingsFeaturePersonalVoiceAllowAppsToRequestToUse = 1,
@@ -48,11 +52,13 @@ typedef NS_ENUM(NSInteger, AXSettingsFeature) {
     AXSettingsFeatureAllowAppsToAddAudioToCalls API_AVAILABLE(ios(18.2), macos(15.2), tvos(18.2), watchos(11.2), visionos(2.2)),
     AXSettingsFeatureAssistiveTouch API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), watchos(26.0), visionos(26.0)),
     AXSettingsFeatureAssistiveTouchDevices API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), watchos(26.0), visionos(26.0)),
-    AXSettingsFeatureDwellControl API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), watchos(26.0), visionos(26.0))
+    AXSettingsFeatureDwellControl API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), watchos(26.0), visionos(26.0)),
+    AXSettingsFeatureCaptionStyles API_AVAILABLE(ios(26.4), macos(26.4), tvos(26.4), watchos(26.4), visionos(26.4))
 } NS_SWIFT_NAME(AccessibilitySettings.Feature) API_AVAILABLE(ios(18.0), macos(15.0), tvos(18.0), watchos(11.0), visionos(2.0));
 
 // Open the Settings app to a specific section.
 // If successful, the completion handler will set error to nil.
 AX_EXTERN void AXOpenSettingsFeature(AXSettingsFeature feature, void(^_Nullable completionHandler)(NSError *_Nullable error)) API_AVAILABLE(ios(18.0), macos(15.0), tvos(18.0), watchos(11.0), visionos(2.0)) NS_REFINED_FOR_SWIFT;
+AX_EXTERN Boolean AXOpenSettingsFeatureIsSupported(AXSettingsFeature feature) API_AVAILABLE(ios(26.4), macos(26.4), tvos(26.4), watchos(26.4), visionos(26.4)) NS_REFINED_FOR_SWIFT;
 
 NS_ASSUME_NONNULL_END

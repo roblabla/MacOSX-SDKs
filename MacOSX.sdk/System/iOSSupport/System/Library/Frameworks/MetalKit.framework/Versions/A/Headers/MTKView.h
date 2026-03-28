@@ -234,6 +234,13 @@ NS_SWIFT_UI_ACTOR
  */
 - (void)draw;
 
+/*!
+ @property residencySet
+ @abstract Get the view's residency set.
+ @discussion Get the view's residency set. The residency set contains all MTLTextures created by the view. Applications should use this residency set and the residency set of the view's underlying CAMetalLayer to ensure all required MTLTextures are resident before use.
+ */
+@property (nonatomic, nonnull, readonly) id<MTLResidencySet> residencySet API_AVAILABLE(macos(26.4), ios(26.4));
+
 @end
 
 /*!

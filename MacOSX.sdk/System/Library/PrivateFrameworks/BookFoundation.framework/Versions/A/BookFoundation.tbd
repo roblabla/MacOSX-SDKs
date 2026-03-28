@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BookFoundation.framework/Versions/A/BookFoundation'
-current-version: 2271
+current-version: 2287
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation11JSONDecoderC04BookA0E6decode_14withJSONObject7optionsxxm_ypSo20NSJSONWritingOptionsVtKSeRzlF', 
                        '_$s10Foundation12DateIntervalV04BookA0E8distance_8calendarSiSgAA8CalendarV9ComponentO_AItF', 
                        '_$s10Foundation3URLV04BookA0E12isEquivalent2toSbAC_tF', '_$s10Foundation3URLV04BookA0E23pathWithoutLeadingSlashSSyF', 

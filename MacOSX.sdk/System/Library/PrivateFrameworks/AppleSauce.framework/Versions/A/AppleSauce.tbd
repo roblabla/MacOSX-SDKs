@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AppleSauce.framework/Versions/A/AppleSauce'
 current-version: 0
 compatibility-version: 0
@@ -40,8 +39,7 @@ exports:
                        __ZTSNSt3__121__empty_non_own_stateIcEE, __ZTSNSt3__123__match_any_but_newlineIcEE, 
                        __ZTSNSt3__126__end_marked_subexpressionIcEE, __ZTSNSt3__128__begin_marked_subexpressionIcEE, 
                        __ZTSNSt3__16__loopIcEE, __ZTSNSt3__16__nodeIcEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN10applesauce3xpc10auto_reply16create_from_dictERKNS0_4dictERKNS0_10connectionE, 
                        __ZN10applesauce3xpc10auto_reply17create_from_replyERKNS0_4dictE, 
                        __ZN10applesauce3xpc10auto_reply19create_from_requestERKNS0_4dictE, 

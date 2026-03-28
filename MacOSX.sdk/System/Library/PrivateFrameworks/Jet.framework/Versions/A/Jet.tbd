@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Jet.framework/Versions/A/Jet'
-current-version: 11.4.3
+current-version: 13.4.1
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ __Z10jet_assertbP8NSString, __Z13xglCheckErrorv, __Z13xglPrintErrorv, 
                        __Z13xglPrintFloatPKcj, __Z13xglPrintStatev, __Z14jet_util_isPOTjj, 
                        __Z14xglLinkProgramj, __Z15xglPrintBooleanPKcj, __Z15xglPrintIntegerPKcj, 

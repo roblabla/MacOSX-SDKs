@@ -1,11 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UserNotificationsKit.framework/Versions/A/UserNotificationsKit'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ BuddyMigrator, BulletinDistributorCompanion, BulletinDistributorGizmo, 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    clients:         [ AccessoryNotificationsSetupExtension, AccessoryNotificationsSourceSelection, 
+                       BuddyMigrator, BulletinDistributorCompanion, BulletinDistributorGizmo, 
                        Carousel, CarouselFramework, CarouselUIServices, ContentExtensionSimulator, 
                        CoreMuseBuddy, CoverSheet, MacBuddy, MacBuddyTests, MiniLauncher, 
                        NotificationCenter, Notifications, NotificationsSettings, 
@@ -18,7 +19,7 @@ allowable-clients:
                        UserNotificationsUIKitTests, VoiceTriggerUI, mbuseragent, 
                        usernoted, usernoted_unit_tests ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s20UserNotificationsKit28ChinSuggestionAnalyticsEventV0E4TypeO16priorityFeedbackyA2EmFWC', 
                        '_$s20UserNotificationsKit28ChinSuggestionAnalyticsEventV0E4TypeO20disableSummarizationyA2EmFWC', 
                        '_$s20UserNotificationsKit28ChinSuggestionAnalyticsEventV0E4TypeO8rawValueAESgSS_tcfC', 
@@ -35,6 +36,14 @@ exports:
                        '_$s20UserNotificationsKit28ChinSuggestionAnalyticsEventVMa', 
                        '_$s20UserNotificationsKit28ChinSuggestionAnalyticsEventVMn', 
                        '_$s20UserNotificationsKit28ChinSuggestionAnalyticsEventVN', 
+                       '_$s20UserNotificationsKit28NotificationSourceToggleListV4bodyQrvg', 
+                       '_$s20UserNotificationsKit28NotificationSourceToggleListV4bodyQrvpMV', 
+                       '_$s20UserNotificationsKit28NotificationSourceToggleListV4bodyQrvpQOMQ', 
+                       '_$s20UserNotificationsKit28NotificationSourceToggleListV7SwiftUI4ViewAAMc', 
+                       '_$s20UserNotificationsKit28NotificationSourceToggleListV7sources10headerText06footerJ09isEnabled18onEnablementChangeACSaySo014UNNotificationE0CG_SSSgALSbAJcyAJ_SbtctcfC', 
+                       '_$s20UserNotificationsKit28NotificationSourceToggleListVMa', 
+                       '_$s20UserNotificationsKit28NotificationSourceToggleListVMn', 
+                       '_$s20UserNotificationsKit28NotificationSourceToggleListVN', 
                        '_$sSo20UNNotificationSourceC20UserNotificationsKitE2idSSvg', 
                        '_$sSo20UNNotificationSourceC20UserNotificationsKitE2idSSvpMV', 
                        '_$sSo20UNNotificationSourceCs12Identifiable20UserNotificationsKitMc', 

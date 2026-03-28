@@ -1,29 +1,24 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation'
 current-version: 2
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/AVFAudio.framework/Versions/A/AVFAudio', 
                        '/System/Library/Frameworks/AVRouting.framework/Versions/A/AVRouting', 
                        '/System/Library/PrivateFrameworks/AVFCapture.framework/Versions/A/AVFCapture', 
                        '/System/Library/PrivateFrameworks/AVFCore.framework/Versions/A/AVFCore' ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AVFCapture.framework/Versions/A/AVFCapture'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AVFoundation ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo28AVCaptureSmartFramingMonitorC11Observation10Observable10AVFCaptureMc', 
                        '_$sSo48AVCaptureSmartFramingMonitorObservationRegistrarC10AVFCaptureEABycfC', 
                        '_$sSo48AVCaptureSmartFramingMonitorObservationRegistrarC10AVFCaptureEABycfc', 
@@ -295,8 +290,9 @@ exports:
                        _AVGQCaptureHighPhotoQualityFrameDropAllowed, _AVGQCaptureMFOStabilizationIsAlwaysOn, 
                        _AVGQCaptureMFOSupportsPhotoFormats, _AVGQCaptureMFOVideoSettingsSupportCompressionProperties, 
                        _AVGQCaptureMetadataOutputCapturesFacesByDefault, _AVGQCaptureMicrophoneUsesDecoupledIO, 
-                       _AVGQCaptureMultipleAudioDataOutputsSupported, _AVGQCaptureMultipleVideoDataOutputsSupported, 
-                       _AVGQCaptureMultitaskingCameraAccessVoipAppsSupported, _AVGQCapturePhotoSettingsSupportRawEmbeddedThumbnailFormat, 
+                       _AVGQCaptureMultiCamAudioZoomSupported, _AVGQCaptureMultipleAudioDataOutputsSupported, 
+                       _AVGQCaptureMultipleVideoDataOutputsSupported, _AVGQCaptureMultitaskingCameraAccessVoipAppsSupported, 
+                       _AVGQCapturePhotoSettingsSupportRawEmbeddedThumbnailFormat, 
                        _AVGQCaptureProResRawVDORotationAndMirroringSupported, _AVGQCaptureSessionMaxMultiCamRGBStreamsSupported, 
                        _AVGQCaptureSessionMultiCamCaptureAlwaysRequiresSupportedFormats, 
                        _AVGQCaptureSessionSupportsMultiCamCapture, _AVGQCaptureSessionUsesAppAudioSessionByDefault, 
@@ -305,12 +301,13 @@ exports:
                        _AVGQCaptureVPLOrientationAndMirroringPropertiesAreDeprecated, 
                        _AVGQCaptureZeroShutterLagAutomaticallyEnabled, _AVGQDINRSVRALL7UYNXKHVSIWKZLRA, 
                        _AVGQDJVGPJA65CJA2ZPQZL4GRPYDYA, _AVGQDefaultVariableFrameRateVideoMaxFPS, 
-                       _AVGQDeviceHasAggregateCamera, _AVGQDeviceSupportsAutoLowLightVideo, 
-                       _AVGQDeviceSupportsBravoCamera, _AVGQDeviceSupportsBravoPortrait, 
-                       _AVGQDeviceSupportsCameraCaptureOnTouchDown, _AVGQDeviceSupportsCameraDeferredProcessing, 
-                       _AVGQDeviceSupportsCinematicVideo, _AVGQDeviceSupportsContentAwareDistortionCorrection, 
-                       _AVGQDeviceSupportsDeferredPortraitRendering, _AVGQDeviceSupportsDepthWithDeepFusion, 
-                       _AVGQDeviceSupportsExposureBiasWithoutExposureLock, _AVGQDeviceSupportsExtendedEnhancedCinematicVideoStabilization, 
+                       _AVGQDeviceHasAggregateCamera, _AVGQDeviceSupportsAudioZoom, 
+                       _AVGQDeviceSupportsAutoLowLightVideo, _AVGQDeviceSupportsBravoCamera, 
+                       _AVGQDeviceSupportsBravoPortrait, _AVGQDeviceSupportsCameraCaptureOnTouchDown, 
+                       _AVGQDeviceSupportsCameraDeferredProcessing, _AVGQDeviceSupportsCinematicVideo, 
+                       _AVGQDeviceSupportsContentAwareDistortionCorrection, _AVGQDeviceSupportsDeferredPortraitRendering, 
+                       _AVGQDeviceSupportsDepthWithDeepFusion, _AVGQDeviceSupportsExposureBiasWithoutExposureLock, 
+                       _AVGQDeviceSupportsExtendedEnhancedCinematicVideoStabilization, 
                        _AVGQDeviceSupportsFrontFacingCameraMirroredVideo, _AVGQDeviceSupportsFrontFacingCameraNightMode, 
                        _AVGQDeviceSupportsFrontFacingCameraSmartHDR, _AVGQDeviceSupportsFrontFacingCameraSuperWide, 
                        _AVGQDeviceSupportsFrontFacingCameraZoomToggle, _AVGQDeviceSupportsFrontPortrait, 
@@ -490,7 +487,7 @@ exports:
                        AVMomentCaptureSettings, AVOfflineVideoStabilizer, AVPointCloudData, 
                        AVPortraitEffectsMatte, AVSemanticSegmentationMatte, AVSemanticStyle, 
                        AVSpatialOverCaptureVideoPreviewLayer, AVZoomRange ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AVCaptureSessionPreset320x240, _AVCaptureSessionPreset960x540, 
                        _AVControlCenterIsDockedTrackingActiveForDevice, _AVControlCenterVideoEffectsModuleGetBackgroundReplacementPixelBuffer, 
                        _AVControlCenterVideoEffectsModuleGetBackgroundReplacementURL, 
@@ -501,20 +498,17 @@ exports:
                        AVCaptureScreenInput, AVContinuityCaptureCapabilitiesCache ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AVFCore.framework/Versions/A/AVFCore'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AVFCapture, AVFoundation, AVHapticWriter, avbuildmovie, avconvert, 
                        avdumpmovieinfo, avexporttest, avimagegenerator, avmediainfo, 
                        avmetareadwrite, avplay, avreadwrite, avroute, avsbufplay, 
                        avsyncplay, swiftAVFoundation ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo12AVPlayerItemC11Observation10Observable7AVFCoreMc', 
                        '_$sSo17AVPlayerItemTrackC11Observation10Observable7AVFCoreMc', 
                        '_$sSo28AVPlayerObservationRegistrarC7AVFCoreEABycfC', '_$sSo28AVPlayerObservationRegistrarC7AVFCoreEABycfc', 
@@ -1091,6 +1085,10 @@ exports:
                        _AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey, 
                        _AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey, 
                        _AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification, 
+                       _AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification, 
+                       _AVPlayerInterstitialEventMonitorScheduleRequestErrorKey, 
+                       _AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey, 
+                       _AVPlayerInterstitialEventMonitorScheduleRequestResponseKey, 
                        _AVPlayerInterstitialEventNoCue, _AVPlayerInterstitialPlayerDidChangeNotification, 
                        _AVPlayerItemAudibleDRMInfoGroupID, _AVPlayerItemBecameCurrentNotification, 
                        _AVPlayerItemDidPlayToEndTimeNotification, _AVPlayerItemFailedToPlayToEndTimeErrorKey, 
@@ -1135,6 +1133,7 @@ exports:
                        _AVPlayerRateDidChangeReasonAudioSessionInterrupted, _AVPlayerRateDidChangeReasonCoordinatedPlayback, 
                        _AVPlayerRateDidChangeReasonKey, _AVPlayerRateDidChangeReasonPauseAtItemEnd, 
                        _AVPlayerRateDidChangeReasonPlaybackResumed, _AVPlayerRateDidChangeReasonPlaybackStalled, 
+                       _AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge, _AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange, 
                        _AVPlayerRateDidChangeReasonRouteChanged, _AVPlayerRateDidChangeReasonSetRateCalled, 
                        _AVPlayerRateDidChangeReasonSetRateFailed, _AVPlayerRateDidChangeReasonStatusChanged, 
                        _AVPlayerRateDidChangeRouteChangedReason, _AVPlayerRateDidChangeSetRateCalledReason, 
@@ -1334,20 +1333,22 @@ exports:
                        AVMutableMovieTrack, AVMutableScheduledAudioParameters, AVMutableTimedMetadataGroup, 
                        AVMutableVideoComposition, AVMutableVideoCompositionInstruction, 
                        AVMutableVideoCompositionLayerInstruction, AVObservationBlockFactory, 
-                       AVOccasionalTimebaseObserver, AVOnceTimebaseObserver, AVOperationQueueWithFundamentalDependency, 
-                       AVOutputSettings, AVOutputSettingsAssistant, AVPeriodicTimebaseObserver, 
-                       AVPersistableContentKeyRequest, AVPlannedSegmentConfiguration, 
-                       AVPlannedSegmentWritingRequest, AVPlannedVideoSegmentConfiguration, 
-                       AVPlaybackCoordinationMedium, AVPlaybackCoordinator, AVPlayer, 
-                       AVPlayerCaptionLayer, AVPlayerInterstitialEvent, AVPlayerInterstitialEventController, 
-                       AVPlayerInterstitialEventMonitor, AVPlayerItem, AVPlayerItemAccessLog, 
-                       AVPlayerItemAccessLogEvent, AVPlayerItemErrorLog, AVPlayerItemErrorLogEvent, 
-                       AVPlayerItemIntegratedTimeline, AVPlayerItemIntegratedTimelineSnapshot, 
-                       AVPlayerItemLegibleOutput, AVPlayerItemMediaDataCollector, 
-                       AVPlayerItemMetadataCollector, AVPlayerItemMetadataOutput, 
-                       AVPlayerItemObservationRegistrar, AVPlayerItemOutput, AVPlayerItemRenderedLegibleOutput, 
-                       AVPlayerItemSampleBufferOutput, AVPlayerItemSampleBufferOutputConfiguration, 
-                       AVPlayerItemSegment, AVPlayerItemTrack, AVPlayerItemTrackObservationRegistrar, 
+                       AVOccasionalTimebaseObserver, AVOfflineMediaContentKeyInfo, 
+                       AVOfflineMediaSegmentInfo, AVOfflineMediaStreamInfo, AVOnceTimebaseObserver, 
+                       AVOperationQueueWithFundamentalDependency, AVOutputSettings, 
+                       AVOutputSettingsAssistant, AVPeriodicTimebaseObserver, AVPersistableContentKeyRequest, 
+                       AVPlannedSegmentConfiguration, AVPlannedSegmentWritingRequest, 
+                       AVPlannedVideoSegmentConfiguration, AVPlaybackCoordinationMedium, 
+                       AVPlaybackCoordinator, AVPlayer, AVPlayerCaptionLayer, AVPlayerInterstitialEvent, 
+                       AVPlayerInterstitialEventController, AVPlayerInterstitialEventMonitor, 
+                       AVPlayerItem, AVPlayerItemAccessLog, AVPlayerItemAccessLogEvent, 
+                       AVPlayerItemErrorLog, AVPlayerItemErrorLogEvent, AVPlayerItemIntegratedTimeline, 
+                       AVPlayerItemIntegratedTimelineSnapshot, AVPlayerItemLegibleOutput, 
+                       AVPlayerItemMediaDataCollector, AVPlayerItemMetadataCollector, 
+                       AVPlayerItemMetadataOutput, AVPlayerItemObservationRegistrar, 
+                       AVPlayerItemOutput, AVPlayerItemRenderedLegibleOutput, AVPlayerItemSampleBufferOutput, 
+                       AVPlayerItemSampleBufferOutputConfiguration, AVPlayerItemSegment, 
+                       AVPlayerItemTrack, AVPlayerItemTrackObservationRegistrar, 
                        AVPlayerItemVideoOutput, AVPlayerLayer, AVPlayerLooper, AVPlayerMediaSelectionCriteria, 
                        AVPlayerObservationRegistrar, AVPlayerPlaybackCoordinator, 
                        AVPlayerSetRateOptions, AVPlayerTaggedBufferOutput, AVPlayerVideoOutput, 
@@ -1370,7 +1371,7 @@ exports:
                        AVWeakReference, AVWeakReferencingDelegateStorage ]
     objc-ivars:      [ AVAssetWriterInputMetadataAdaptor._internal, AVChapterMetadataItem._privChapter, 
                        AVMetadataItem._priv, AVMutableMetadataItem._mutablePriv ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AVApplicationAuthorizationChallengeProviderNone, _AVAssetAnalysisMovieParsingMessageTypeInvalidAtomStructure, 
                        _AVAssetAnalysisMovieParsingMessageTypeInvalidMovieAtom, _AVAssetAnalysisMovieParsingMessageTypeInvalidTopLevelAtom, 
                        _AVAssetAnalysisMovieParsingMessageTypeInvalidTrackAtom, _AVAssetAnalysisTextParsingMessageTypeInvalidValue, 
@@ -1445,7 +1446,7 @@ exports:
                        AVMediaFileSegmenter, AVMovieAtom, AVSearchCursor, AVSearchMatchDescription, 
                        AVSearchPredicate, AVSegmentedMediaClosedCaptionReport, AVSegmentedMediaReport, 
                        AVStreamSession ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _AVResetMediaServices, _AVURLAssetAlternativeConfigurationContentProviderKey, 
                        _AVURLAssetAlternativeConfigurationMediaIdentifierKey, _AVURLAssetAlternativeConfigurationServiceInformationKey ]
 ...

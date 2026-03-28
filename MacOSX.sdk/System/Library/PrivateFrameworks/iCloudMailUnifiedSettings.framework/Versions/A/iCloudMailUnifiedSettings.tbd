@@ -1,23 +1,53 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/iCloudMailUnifiedSettings.framework/Versions/A/iCloudMailUnifiedSettings'
+current-version: 0
+compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s25iCloudMailUnifiedSettings01iabcD8ProviderC8accounts3forSDySo15AIDAServiceTypeaSo9ACAccountCGSo18AIDAAccountManagerC_tF', 
                        '_$s25iCloudMailUnifiedSettings01iabcD8ProviderCACycfC', '_$s25iCloudMailUnifiedSettings01iabcD8ProviderCACycfc', 
                        '_$s25iCloudMailUnifiedSettings01iabcD8ProviderCMa', '_$s25iCloudMailUnifiedSettings01iabcD8ProviderCMn', 
                        '_$s25iCloudMailUnifiedSettings01iabcD8ProviderCMo', '_$s25iCloudMailUnifiedSettings01iabcD8ProviderCMu', 
                        '_$s25iCloudMailUnifiedSettings01iabcD8ProviderCN', '_$s25iCloudMailUnifiedSettings01iabcD8ProviderCfD', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB11SectionViewV10$viewModel7SwiftUI14ObservedObjectV7WrapperVyAA0ebgI0C_Gvg', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB11SectionViewV10$viewModel7SwiftUI14ObservedObjectV7WrapperVyAA0ebgI0C_GvpMV', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB11SectionViewV4bodyQrvg', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB11SectionViewV4bodyQrvpMV', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB11SectionViewV4bodyQrvpQOMQ', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB11SectionViewV7SwiftUI0G0AAMc', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB11SectionViewV7accountACSo9ACAccountC_tcfC', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB11SectionViewV7accountSo9ACAccountCvg', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB11SectionViewV7accountSo9ACAccountCvpMV', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB11SectionViewV9viewModelAA0ebgI0CvM', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB11SectionViewV9viewModelAA0ebgI0Cvg', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB11SectionViewV9viewModelAA0ebgI0CvpMV', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB11SectionViewV9viewModelAA0ebgI0Cvs', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB11SectionViewVMa', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB11SectionViewVMn', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB11SectionViewVN', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV10$viewModel7SwiftUI14ObservedObjectV7WrapperVyAA0ebhJ0C_Gvg', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV10$viewModel7SwiftUI14ObservedObjectV7WrapperVyAA0ebhJ0C_GvpMV', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV4bodyQrvg', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV4bodyQrvpMV', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV4bodyQrvpQOMQ', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV4isOnSbvM', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV4isOnSbvg', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV4isOnSbvpMV', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV4isOnSbvs', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV5$isOn7SwiftUI7BindingVySbGvg', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV5$isOn7SwiftUI7BindingVySbGvpMV', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV7SwiftUI0H0AAMc', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV9viewModelAA0ebhJ0CvM', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV9viewModelAA0ebhJ0Cvg', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV9viewModelAA0ebhJ0CvpMV', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV9viewModelAA0ebhJ0Cvs', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewV9viewModelAcA0ebhJ0C_tcfC', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewVMa', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewVMn', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB13DrillDownViewVN', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB9ViewModelC012fetchIsEndToJ12EncryptionOn12emailAddress10completionySS_ySbctFTj', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB9ViewModelC012fetchIsEndToJ12EncryptionOn12emailAddress10completionySS_ySbctFTq', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB9ViewModelC02iseB7EnabledSbvMTj', 
@@ -43,6 +73,8 @@ exports:
                        '_$s25iCloudMailUnifiedSettings09EncryptedB9ViewModelC7account02iseB7EnabledACSo9ACAccountC_SbtcfCTj', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB9ViewModelC7account02iseB7EnabledACSo9ACAccountC_SbtcfCTq', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB9ViewModelC7account02iseB7EnabledACSo9ACAccountC_Sbtcfc', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB9ViewModelC7accountSo9ACAccountCvg', 
+                       '_$s25iCloudMailUnifiedSettings09EncryptedB9ViewModelC7accountSo9ACAccountCvpMV', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB9ViewModelCMa', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB9ViewModelCMm', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB9ViewModelCMn', 
@@ -51,6 +83,9 @@ exports:
                        '_$s25iCloudMailUnifiedSettings09EncryptedB9ViewModelCN', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB9ViewModelCfD', 
                        '_$s25iCloudMailUnifiedSettings09EncryptedB9ViewModelCfd', 
+                       '_$s2os6LoggerV25iCloudMailUnifiedSettingsE7currentACvau', 
+                       '_$s2os6LoggerV25iCloudMailUnifiedSettingsE7currentACvgZ', 
+                       '_$s2os6LoggerV25iCloudMailUnifiedSettingsE7currentACvpZ', 
                        _iCloudMailUnifiedSettingsVersionNumber, _iCloudMailUnifiedSettingsVersionString ]
     objc-classes:    [ iCloudMailUnifiedSettingsProvider ]
 ...

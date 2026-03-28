@@ -1,22 +1,101 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Dyld.framework/Versions/A/Dyld'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ UnitTests-framework, libdyld.dylib ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    clients:         [ PerfTests-framework, UnitTests-framework, libdyld.dylib ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s4Dyld17unwrapCompactInfo_4sizeSbSv_Spys6UInt64VGtF', '_$sSo10_DYProcessCMa', 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s4Dyld11EnvironmentV8rootPathSSSgvg', '_$s4Dyld11EnvironmentV8rootPathSSSgvpMV', 
+                       '_$s4Dyld11EnvironmentVMa', '_$s4Dyld11EnvironmentVMn', '_$s4Dyld11EnvironmentVN', 
+                       '_$s4Dyld11SharedCacheV06systemB6Caches4pathSayACG6System8FilePathV_tFZ', 
+                       '_$s4Dyld11SharedCacheV09installedB6CachesSayACGyFZ', '_$s4Dyld11SharedCacheV10aotAddressAA07RebasedE0VSgvg', 
+                       '_$s4Dyld11SharedCacheV10aotAddressAA07RebasedE0VSgvpMV', 
+                       '_$s4Dyld11SharedCacheV13mappedPrivateSbvg', '_$s4Dyld11SharedCacheV13mappedPrivateSbvpMV', 
+                       '_$s4Dyld11SharedCacheV15localSymbolPathSSSgvg', '_$s4Dyld11SharedCacheV15localSymbolPathSSSgvpMV', 
+                       '_$s4Dyld11SharedCacheV20preferredLoadAddressAA09PreferredF0Vvg', 
+                       '_$s4Dyld11SharedCacheV20preferredLoadAddressAA09PreferredF0VvpMV', 
+                       '_$s4Dyld11SharedCacheV24withLocalSymbolFileBytesyxxSWKXEKlF', 
+                       '_$s4Dyld11SharedCacheV4uuid10Foundation4UUIDVvg', '_$s4Dyld11SharedCacheV4uuid10Foundation4UUIDVvpMV', 
+                       '_$s4Dyld11SharedCacheV6imagesSayAA5ImageVGvg', '_$s4Dyld11SharedCacheV6imagesSayAA5ImageVGvpMV', 
+                       '_$s4Dyld11SharedCacheV6vmSizes6UInt64Vvg', '_$s4Dyld11SharedCacheV6vmSizes6UInt64VvpMV', 
+                       '_$s4Dyld11SharedCacheV7addressAA14RebasedAddressVvg', '_$s4Dyld11SharedCacheV7addressAA14RebasedAddressVvpMV', 
+                       '_$s4Dyld11SharedCacheV7aotUuid10Foundation4UUIDVSgvg', '_$s4Dyld11SharedCacheV7aotUuid10Foundation4UUIDVSgvpMV', 
+                       '_$s4Dyld11SharedCacheV9filePathsSaySSGvg', '_$s4Dyld11SharedCacheV9filePathsSaySSGvpMV', 
+                       '_$s4Dyld11SharedCacheV9subCachesSayAA03SubC0VGvg', '_$s4Dyld11SharedCacheV9subCachesSayAA03SubC0VGvpMV', 
+                       '_$s4Dyld11SharedCacheVMa', '_$s4Dyld11SharedCacheVMn', '_$s4Dyld11SharedCacheVN', 
+                       '_$s4Dyld14RebasedAddressV5values6UInt64Vvg', '_$s4Dyld14RebasedAddressV5values6UInt64VvpMV', 
+                       '_$s4Dyld14RebasedAddressV9hashValueSivg', '_$s4Dyld14RebasedAddressV9hashValueSivpMV', 
+                       '_$s4Dyld14RebasedAddressVAA0C0AAMc', '_$s4Dyld14RebasedAddressVAA0C0AAWP', 
+                       '_$s4Dyld14RebasedAddressVMa', '_$s4Dyld14RebasedAddressVMn', 
+                       '_$s4Dyld14RebasedAddressVN', '_$s4Dyld14RebasedAddressVSHAAMc', 
+                       '_$s4Dyld14RebasedAddressVSLAAMc', '_$s4Dyld14RebasedAddressVSQAAMc', 
+                       '_$s4Dyld14RebasedAddressVSxAAMc', '_$s4Dyld14RebasedAddressVs23CustomStringConvertibleAAMc', 
+                       '_$s4Dyld14RebasedAddressVs27ExpressibleByIntegerLiteralAAMc', 
+                       '_$s4Dyld14RebasedAddressVyACs6UInt64VcfC', '_$s4Dyld16PreferredAddressV5values6UInt64Vvg', 
+                       '_$s4Dyld16PreferredAddressV5values6UInt64VvpMV', '_$s4Dyld16PreferredAddressV9hashValueSivg', 
+                       '_$s4Dyld16PreferredAddressV9hashValueSivpMV', '_$s4Dyld16PreferredAddressVAA0C0AAMc', 
+                       '_$s4Dyld16PreferredAddressVAA0C0AAWP', '_$s4Dyld16PreferredAddressVMa', 
+                       '_$s4Dyld16PreferredAddressVMn', '_$s4Dyld16PreferredAddressVN', 
+                       '_$s4Dyld16PreferredAddressVSHAAMc', '_$s4Dyld16PreferredAddressVSLAAMc', 
+                       '_$s4Dyld16PreferredAddressVSQAAMc', '_$s4Dyld16PreferredAddressVSxAAMc', 
+                       '_$s4Dyld16PreferredAddressVs23CustomStringConvertibleAAMc', 
+                       '_$s4Dyld16PreferredAddressVs27ExpressibleByIntegerLiteralAAMc', 
+                       '_$s4Dyld16PreferredAddressVyACs6UInt64VcfC', '_$s4Dyld17unwrapCompactInfo_4sizeSbSv_Spys6UInt64VGtF', 
+                       '_$s4Dyld5ImageV11installnameSSSgvg', '_$s4Dyld5ImageV11installnameSSSgvpMV', 
+                       '_$s4Dyld5ImageV11pointerSizes6UInt64Vvg', '_$s4Dyld5ImageV11pointerSizes6UInt64VvpMV', 
+                       '_$s4Dyld5ImageV11sharedCacheAA06SharedD0VSgvg', '_$s4Dyld5ImageV11sharedCacheAA06SharedD0VSgvpMV', 
+                       '_$s4Dyld5ImageV20preferredLoadAddressAA09PreferredE0Vvg', 
+                       '_$s4Dyld5ImageV20preferredLoadAddressAA09PreferredE0VvpMV', 
+                       '_$s4Dyld5ImageV4uuid10Foundation4UUIDVSgvg', '_$s4Dyld5ImageV4uuid10Foundation4UUIDVSgvpMV', 
+                       '_$s4Dyld5ImageV7addressAA14RebasedAddressVvg', '_$s4Dyld5ImageV7addressAA14RebasedAddressVvpMV', 
+                       '_$s4Dyld5ImageV8filePathSSSgvg', '_$s4Dyld5ImageV8filePathSSSgvpMV', 
+                       '_$s4Dyld5ImageV8segmentsSayAA7SegmentVGvg', '_$s4Dyld5ImageV8segmentsSayAA7SegmentVGvpMV', 
+                       '_$s4Dyld5ImageVMa', '_$s4Dyld5ImageVMn', '_$s4Dyld5ImageVN', 
+                       '_$s4Dyld7AddressMp', '_$s4Dyld7AddressP14integerLiteralxs6UInt64V_tcfCTj', 
+                       '_$s4Dyld7AddressP14integerLiteralxs6UInt64V_tcfCTq', '_$s4Dyld7AddressP5values6UInt64VvgTj', 
+                       '_$s4Dyld7AddressP5values6UInt64VvgTq', '_$s4Dyld7AddressPAAE11descriptionSSvg', 
+                       '_$s4Dyld7AddressPAAE11descriptionSSvpMV', '_$s4Dyld7AddressPAAE11pageAlignedSbvg', 
+                       '_$s4Dyld7AddressPAAE11pageAlignedSbvpMV', '_$s4Dyld7AddressPAAE14integerLiteralxs6UInt64V_tcfC', 
+                       '_$s4Dyld7AddressPAAE1loiySbx_xtFZ', '_$s4Dyld7AddressPAAE2eeoiySbx_xtFZ', 
+                       '_$s4Dyld7AddressPAAE4hash4intoys6HasherVz_tF', '_$s4Dyld7AddressPAAE8advanced2byxs5Int64V_tF', 
+                       '_$s4Dyld7AddressPAAE8distance2tos5Int64Vx_tF', '_$s4Dyld7AddressPSHTb', 
+                       '_$s4Dyld7AddressPSxTb', '_$s4Dyld7AddressPs23CustomStringConvertibleTb', 
+                       '_$s4Dyld7AddressPs27ExpressibleByIntegerLiteralTb', '_$s4Dyld7AddressPyxs6UInt64VcfCTj', 
+                       '_$s4Dyld7AddressPyxs6UInt64VcfCTq', '_$s4Dyld7AddressTL', 
+                       '_$s4Dyld7ProcessV14forCurrentTaskACyFZ', '_$s4Dyld7ProcessV18getCurrentSnapshotAA0E0VyKF', 
+                       '_$s4Dyld7ProcessV4task5queueACs6UInt32V_So012OS_dispatch_D0CSgtKcfC', 
+                       '_$s4Dyld7ProcessVMa', '_$s4Dyld7ProcessVMn', '_$s4Dyld7ProcessVN', 
+                       '_$s4Dyld7SegmentV11permissionss6UInt64Vvg', '_$s4Dyld7SegmentV11permissionss6UInt64VvpMV', 
+                       '_$s4Dyld7SegmentV20preferredLoadAddressAA09PreferredE0Vvg', 
+                       '_$s4Dyld7SegmentV20preferredLoadAddressAA09PreferredE0VvpMV', 
+                       '_$s4Dyld7SegmentV4data10Foundation4DataVvg', '_$s4Dyld7SegmentV4data10Foundation4DataVvpMV', 
+                       '_$s4Dyld7SegmentV4nameSSvg', '_$s4Dyld7SegmentV4nameSSvpMV', 
+                       '_$s4Dyld7SegmentV6vmSizes6UInt64Vvg', '_$s4Dyld7SegmentV6vmSizes6UInt64VvpMV', 
+                       '_$s4Dyld7SegmentV7addressAA14RebasedAddressVvg', '_$s4Dyld7SegmentV7addressAA14RebasedAddressVvpMV', 
+                       '_$s4Dyld7SegmentVMa', '_$s4Dyld7SegmentVMn', '_$s4Dyld7SegmentVN', 
+                       '_$s4Dyld8AOTImageV10aotAddressAA07RebasedD0Vvg', '_$s4Dyld8AOTImageV10aotAddressAA07RebasedD0VvpMV', 
+                       '_$s4Dyld8AOTImageV10x86AddressAA07RebasedD0Vvg', '_$s4Dyld8AOTImageV10x86AddressAA07RebasedD0VvpMV', 
+                       '_$s4Dyld8AOTImageV11aotImageKeys11InlineArrayVy$31_s5UInt8VGvg', 
+                       '_$s4Dyld8AOTImageV11aotImageKeys11InlineArrayVy$31_s5UInt8VGvpMV', 
+                       '_$s4Dyld8AOTImageV7aotSizes6UInt64Vvg', '_$s4Dyld8AOTImageV7aotSizes6UInt64VvpMV', 
+                       '_$s4Dyld8AOTImageVMa', '_$s4Dyld8AOTImageVMn', '_$s4Dyld8AOTImageVN', 
+                       '_$s4Dyld8SnapshotV11sharedCacheAA06SharedD0VSgvg', '_$s4Dyld8SnapshotV11sharedCacheAA06SharedD0VSgvpMV', 
+                       '_$s4Dyld8SnapshotV4dataAC10Foundation4DataV_tKcfC', '_$s4Dyld8SnapshotV6imagesSayAA5ImageVGvg', 
+                       '_$s4Dyld8SnapshotV6imagesSayAA5ImageVGvpMV', '_$s4Dyld8SnapshotVMa', 
+                       '_$s4Dyld8SnapshotVMn', '_$s4Dyld8SnapshotVN', '_$s4Dyld8SubCacheVMa', 
+                       '_$s4Dyld8SubCacheVMn', '_$s4Dyld8SubCacheVN', '_$sSo10_DYProcessCMa', 
                        '_$sSo10_DYSegmentCMa', '_$sSo11_DYAOTImageCMa', '_$sSo11_DYSnapshotCMa', 
                        '_$sSo11_DYSubCacheCMa', '_$sSo14_DYEnvironmentCMa', '_$sSo14_DYSharedCacheCMa', 
                        '_$sSo20_DYEventHandlerTokenC4DyldE5valueABs6UInt32V_tcfC', 
                        '_$sSo20_DYEventHandlerTokenC4DyldE5valueABs6UInt32V_tcfc', 
-                       '_$sSo20_DYEventHandlerTokenCMa', '_$sSo8_DYImageCMa', __dyld_legacy_introspection_vtable, 
-                       _unwrapCompactInfo ]
+                       '_$sSo20_DYEventHandlerTokenCMa', '_$sSo8_DYImageCMa', __Z8crc32cSWNSt3__14spanISt4byteLm18446744073709551615EEE, 
+                       __dyld_legacy_introspection_vtable, _dyld_shared_cache_find_iterate_text, 
+                       _dyld_shared_cache_iterate_text, _unwrapCompactInfo ]
     objc-classes:    [ _DYAOTImage, _DYEnvironment, _DYEventHandlerToken, _DYImage, 
                        _DYProcess, _DYSegment, _DYSharedCache, _DYSnapshot, _DYSubCache ]
 ...

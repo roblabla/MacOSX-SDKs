@@ -9,8 +9,6 @@
 */
 
 #import <AVFoundation/AVBase.h>
-#if ( TARGET_OS_OSX || ( TARGET_OS_IOS && ! TARGET_OS_VISION ) )
-
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVCaption.h>
 #import <QuartzCore/QuartzCore.h>
@@ -31,12 +29,14 @@ NS_ASSUME_NONNULL_BEGIN
 	An instance of AVCaptionRenderer performs drawing of a caption "scene" from a population of captions given a time. If there are no captions or no captions at the specified time, "emptiness" will still be drawn (e.g., flood filling with zero alpha or a color).
  */
 NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos)
+API_AVAILABLE(macos(12.0), ios(18.0), tvos(26.4), visionos(26.4), macCatalyst(15.0)) API_UNAVAILABLE(watchos)
 @interface AVCaptionRenderer : NSObject
 {
 @private
 	AVCaptionRendererInternal * _internal;
 }
+
+- (instancetype)init API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
  @property captions
@@ -45,7 +45,7 @@ API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, w
  @discussion
 	This is the array of AVCaptions to consider when drawing. The array can contain no captions.
  */
-@property (nonatomic, copy) NSArray<AVCaption *> * captions;
+@property (nonatomic, copy) NSArray<AVCaption *> * captions API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
  @property bounds
@@ -54,7 +54,7 @@ API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, w
  @discussion
 	This is a CGRect indicating where captions are drawn using renderInContext:atTime: Once established, this CGRect is used in each call to renderInContext:atTime: until it is changed to another value. This should be set up earlier than drawing.
  */
-@property (nonatomic) CGRect bounds;
+@property (nonatomic) CGRect bounds API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
  @method		captionSceneChangesInRange:
@@ -69,7 +69,7 @@ API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, w
 				
 	The consideredTimeRange parameter is a CMTimeRange expressing the limits for consideration. The extent of this range does not need to correspond to the timing of captions. It might be the range from 0 to some duration. For efficiency, the range can be limited to a window of time. It is also possible to use the range anchored at a time and extending in the direction of playback.
  */
-- (NSArray<AVCaptionRendererScene *> *)captionSceneChangesInRange:(CMTimeRange)consideredTimeRange;
+- (NSArray<AVCaptionRendererScene *> *)captionSceneChangesInRange:(CMTimeRange)consideredTimeRange API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 
 /*!
@@ -77,7 +77,29 @@ API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, w
  @abstract		Draw the captions corresponding to a time established by the AVCaptions to a CGContext.
  @discussion	Captions are drawn into the CGContextRef based upon their activation at the specified time. If there are no captions or no captions at the specified time, "emptiness" will still be drawn (e.g., flood filling with zero alpha or a color).
  */
-- (void)renderInContext:(CGContextRef)ctx forTime:(CMTime)time;
+- (void)renderInContext:(CGContextRef)ctx forTime:(CMTime)time API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
+
+@end
+
+#pragma mark --- AVCaptionRenderer_CaptionPreview ---
+
+API_AVAILABLE(macos(26.4), ios(26.4), tvos(26.4), visionos(26.4)) API_UNAVAILABLE(watchos)
+@interface AVCaptionRenderer (AVCaptionRenderer_CaptionPreview)
+
+/*!
+ @method		captionPreviewForProfileID:extendedLanguageTag:renderSize:
+ @abstract		Generate a caption preview attributed string for the specified profile ID.
+ @discussion	Returns an attributed string containing a preview of captions rendered using the specified profile ID.
+ @param			profileID
+				The identifier of the accessibility profile to use for caption appearance. Profile IDs can be obtained from MACaptionAppearanceCopyProfileIDs(). This determines font, color, background, and other visual characteristics.
+ @param			extendedLanguageTag
+				The IETF BCP 47 (RFC 4646) language identifier that will be used to generate the localized caption preview text.  If nil, the system language will be used.
+ @param			renderSize
+				The size of the layer into which the captions will be rendered. This determines the layout and positioning of the caption text.
+ @result		An NSAttributedString containing the caption preview.
+ @discussion	It is strongly recommended that the caller take appropriate measures to prevent blocking essential services such as the user interface, for example, by avoiding calling this method in the main thread.
+ */
++ (NSAttributedString *)captionPreviewForProfileID:(NSString *)profileID extendedLanguageTag:(nullable NSString *)extendedLanguageTag renderSize:(CGSize)renderSize;
 
 @end
 
@@ -134,9 +156,6 @@ AV_INIT_UNAVAILABLE
 
 
 NS_ASSUME_NONNULL_END
-
-#endif // ( TARGET_OS_OSX || ( TARGET_OS_IOS && ! TARGET_OS_VISION ) )
-
 
 #else
 #import <AVFCore/AVCaptionRenderer.h>

@@ -1,11 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AlwaysOnExclavesServices.framework/Versions/A/AlwaysOnExclavesServices'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s24AlwaysOnExclavesServices10ConnectionC7service3for2asxSS_xmtK9Tightbeam0I19ServiceInitProtocolRzlF', 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s24AlwaysOnExclavesServices10ConnectionC6enable4fromySS_tKF', 
+                       '_$s24AlwaysOnExclavesServices10ConnectionC7disable4fromySS_tKF', 
+                       '_$s24AlwaysOnExclavesServices10ConnectionC7service3for2asxSS_xmtK9Tightbeam0I19ServiceInitProtocolRzlF', 
                        '_$s24AlwaysOnExclavesServices10ConnectionC7service5queue12errorHandlerACSS_So012OS_dispatch_G0CSgyAA0E6StatusOctcfC', 
                        '_$s24AlwaysOnExclavesServices10ConnectionC7service5queue12errorHandlerACSS_So012OS_dispatch_G0CSgyAA0E6StatusOctcfCTj', 
                        '_$s24AlwaysOnExclavesServices10ConnectionC7service5queue12errorHandlerACSS_So012OS_dispatch_G0CSgyAA0E6StatusOctcfCTq', 
@@ -24,6 +26,7 @@ exports:
                        '_$s24AlwaysOnExclavesServices16ConnectionStatusOMa', '_$s24AlwaysOnExclavesServices16ConnectionStatusOMn', 
                        '_$s24AlwaysOnExclavesServices16ConnectionStatusON', '_$s24AlwaysOnExclavesServices16ConnectionStatusOSHAAMc', 
                        '_$s24AlwaysOnExclavesServices16ConnectionStatusOSQAAMc', 
+                       '_$s24AlwaysOnExclavesServices5ErrorO10disallowedyA2CmFWC', 
                        '_$s24AlwaysOnExclavesServices5ErrorO14missingServiceyA2CmFWC', 
                        '_$s24AlwaysOnExclavesServices5ErrorO17serverUnavailableyA2CmFWC', 
                        '_$s24AlwaysOnExclavesServices5ErrorO18missingEntitlementyA2CmFWC', 

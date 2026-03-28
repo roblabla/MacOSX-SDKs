@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AppleLDAP.framework/Versions/A/AppleLDAP'
 current-version: 63
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _LDAP_CRED_MECHANISM_CRAM_MD5, _LDAP_CRED_MECHANISM_DIGEST_MD5, 
                        _LDAP_CRED_MECHANISM_GSSAPI, _LDAP_CRED_MECHANISM_SIMPLE, 
                        _LDAP_CRED_MECHANISM_SRP, _LDAP_MECHANISM_OPTION_GSSAPI_CONFIDENTIALITY, 

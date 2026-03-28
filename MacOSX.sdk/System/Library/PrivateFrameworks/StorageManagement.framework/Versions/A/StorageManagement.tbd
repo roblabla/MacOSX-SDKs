@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/StorageManagement.framework/Versions/A/StorageManagement'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _DispatchSourcesDictionary, _ITEM_DATE_COLUMN, _ITEM_MINIMAL_VISIBLE_SIZE, 
                        _STMConvertNSErrorToDictionary, _STMExtensionOperationErrorDomain, 
                        _STMExtensionTotalSpaceUsedGreaterThanZero, _STMExtensionTotalSpaceUsedUnknown, 

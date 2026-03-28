@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/VoiceControl.framework/Versions/A/VoiceControl'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12VoiceControl10VCSettingsC029removeAllVocabularyEntriesForE7LocalesSiyF', 
                        '_$s12VoiceControl10VCSettingsC12activeLocale10Foundation0E0Vvg', 
                        '_$s12VoiceControl10VCSettingsC12activeLocale10Foundation0E0VvpMV', 
@@ -287,7 +287,8 @@ exports:
                        '_$s12VoiceControl8VCLoggery2os6LoggerVAA9VCLoggingV8CategoryOF', 
                        '_$s12VoiceControl9VCFeatureMp', '_$s12VoiceControl9VCFeaturePSHTb', 
                        '_$s12VoiceControl9VCFeatureTL', '_$s12VoiceControl9VCLoggingV8CategoryO05osLogD0SSvg', 
-                       '_$s12VoiceControl9VCLoggingV8CategoryO05osLogD0SSvpMV', '_$s12VoiceControl9VCLoggingV8CategoryO10cacContextyA2EmFWC', 
+                       '_$s12VoiceControl9VCLoggingV8CategoryO05osLogD0SSvpMV', '_$s12VoiceControl9VCLoggingV8CategoryO10axElementsyA2EmFWC', 
+                       '_$s12VoiceControl9VCLoggingV8CategoryO10cacContextyA2EmFWC', 
                        '_$s12VoiceControl9VCLoggingV8CategoryO10cacGeneralyA2EmFWC', 
                        '_$s12VoiceControl9VCLoggingV8CategoryO10codingModeyA2EmFWC', 
                        '_$s12VoiceControl9VCLoggingV8CategoryO10dsrContextyA2EmFWC', 
@@ -325,7 +326,7 @@ exports:
                        '_$s12VoiceControl9VCLoggingV8CategoryO20cacElementCollectionyA2EmFWC', 
                        '_$s12VoiceControl9VCLoggingV8CategoryO20cacElementEvaluationyA2EmFWC', 
                        '_$s12VoiceControl9VCLoggingV8CategoryO20dsrRecognitionEventsyA2EmFWC', 
-                       '_$s12VoiceControl9VCLoggingV8CategoryO3ASRyA2EmFWC', '_$s12VoiceControl9VCLoggingV8CategoryO6assetsyA2EmFWC', 
+                       '_$s12VoiceControl9VCLoggingV8CategoryO3asryA2EmFWC', '_$s12VoiceControl9VCLoggingV8CategoryO6assetsyA2EmFWC', 
                        '_$s12VoiceControl9VCLoggingV8CategoryO6localeyA2EmFWC', '_$s12VoiceControl9VCLoggingV8CategoryO7cacGridyA2EmFWC', 
                        '_$s12VoiceControl9VCLoggingV8CategoryO7featureyA2EmFWC', 
                        '_$s12VoiceControl9VCLoggingV8CategoryO8allCasesSayAEGvgZ', 

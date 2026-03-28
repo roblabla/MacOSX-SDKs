@@ -1027,6 +1027,33 @@ MPS_SWIFT_NAME( imaginaryPartOfTensor(tensor:name:) );
 MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0))
 MPS_SWIFT_NAME( complexTensor(realTensor:imaginaryTensor:name:) );
 
+/// Returns a real-valued tensor from a complex-valued tensor with real and imaginary planes separated.
+///
+/// Creates a complexToPlanar operation and returns the result tensor.
+/// In case the input tensor is a complex tensor the result tensor is twice as wide
+/// as the input tensor in the last dimension, and its datatype will be the underlying datatype of
+/// the input tensor - for example `<3xcomplex<f16>>` becomes `<6xf16>`.
+/// In case the input is not complex-valued, this op simply returns the input tensor.
+/// For complex input:
+/// ```md
+/// { resultTensor[...,i] = realPart(inputTensor[...,i])
+/// { resultTensor[...,i+DimSize(inputTensor,-1)] = imagPart(inputTensor[...,i])
+/// ```
+/// For real-valued input:
+/// ```md
+/// resultTensor = inputTensor
+/// ```
+///
+/// - Parameters:
+///   - tensor: The input tensor.
+///   - name: An optional string which serves as an identifier for the operation..
+/// - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+-(MPSGraphTensor *) planarTensorWithComplexTensor:(MPSGraphTensor *) tensor
+                                             name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(26.3), ios(26.3), tvos(26.3))
+MPS_SWIFT_NAME( planarTensor(tensor:name:) );
+
+
 @end
 
 NS_ASSUME_NONNULL_END

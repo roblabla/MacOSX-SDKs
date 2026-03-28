@@ -6,17 +6,13 @@
 //
 
 #if __OBJC__
-#if defined(__cplusplus)
-extern "C" {
-#endif
-    #import <AddressBook/ABPeoplePickerView.h>
+
+#import <AddressBook/ABPeoplePickerView.h>
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
-    #import <AddressBook/ABPersonView.h>
+#import <AddressBook/ABPersonView.h>
 #endif
-    #import <AddressBook/ABActions.h>
-#if defined(__cplusplus)
-}
-#endif
+#import <AddressBook/ABActions.h>
+
 #else
     #include <AddressBook/ABPeoplePickerC.h>
     #include <AddressBook/ABActionsC.h>

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Install.framework/Frameworks/DistributionKit.framework/Versions/A/DistributionKit'
 current-version: 1000
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _IFJS_ChoiceItemClassDefinition, _IFJS_MyEvaluatorMakeGetProperty, 
                        _IFJS_MySearchResultsMakeGetProperty, _IFJS_SystemBootROMFeatureFlagsMakeGetProperty, 
                        _IFJS_SystemBootROMSupportsAPFSMakeGetProperty, _PKDistributionControllerErrorDomain, 

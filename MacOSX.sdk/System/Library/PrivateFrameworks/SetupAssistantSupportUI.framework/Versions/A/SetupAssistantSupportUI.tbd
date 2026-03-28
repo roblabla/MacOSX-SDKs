@@ -1,17 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SetupAssistantSupportUI.framework/Versions/A/SetupAssistantSupportUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s23SetupAssistantSupportUI11SASUILoggerVMa', '_$s23SetupAssistantSupportUI11SASUILoggerVMn', 
-                       '_$s23SetupAssistantSupportUI11SASUILoggerVN', '_$s23SetupAssistantSupportUI15CursiveTextViewC5frameACSo6CGRectV_tcfC', 
-                       '_$s23SetupAssistantSupportUI15CursiveTextViewC5frameACSo6CGRectV_tcfc', 
-                       '_$s23SetupAssistantSupportUI15CursiveTextViewCMa', '_$s23SetupAssistantSupportUI15CursiveTextViewCMn', 
-                       '_$s23SetupAssistantSupportUI15CursiveTextViewCMo', '_$s23SetupAssistantSupportUI15CursiveTextViewCMu', 
-                       '_$s23SetupAssistantSupportUI15CursiveTextViewCN', '_$s23SetupAssistantSupportUI15CursiveTextViewCfD', 
-                       '_$s23SetupAssistantSupportUI18NewFeaturesContextC11descriptionSSvg', 
+                       '_$s23SetupAssistantSupportUI11SASUILoggerVN', '_$s23SetupAssistantSupportUI18NewFeaturesContextC11descriptionSSvg', 
                        '_$s23SetupAssistantSupportUI18NewFeaturesContextC11descriptionSSvpMV', 
                        '_$s23SetupAssistantSupportUI18NewFeaturesContextC1loiySbAC_ACtFZ', 
                        '_$s23SetupAssistantSupportUI18NewFeaturesContextC2eeoiySbAC_ACtFZ', 
@@ -204,6 +199,7 @@ exports:
                        '_$sSo22SASBookendViewProviderC23SetupAssistantSupportUIE15currentLanguageSSSgvpMV', 
                        '_$sSo22SASBookendViewProviderC23SetupAssistantSupportUIE15updateLanguagesyySaySSGF', 
                        '_$sSo22SASBookendViewProviderC23SetupAssistantSupportUIE17setBackgroundDatayy10Foundation0J0VF', 
+                       '_$sSo22SASBookendViewProviderC23SetupAssistantSupportUIE18pauseTextAnimationyyF', 
                        '_$sSo22SASBookendViewProviderC23SetupAssistantSupportUIE19willAnimateWithLogoSbyF', 
                        '_$sSo22SASBookendViewProviderC23SetupAssistantSupportUIE20setBackgroundTextureyySo10MTLTexture_pF', 
                        '_$sSo22SASBookendViewProviderC23SetupAssistantSupportUIE22totalAnimationDurationSo8NSNumberCSgvg', 
@@ -238,8 +234,8 @@ exports:
                        SASBookendCurrentAnimationData, SASBookendNextAnimationData, 
                        SASBookendViewProvider, SASCursiveTextPath, SASCursiveTextView, 
                        SASCursiveTextWindow, SASLogging, SASPathPoint, SASPreferencesManager, 
-                       SASUILogging, SASUIProximityCloudPlayerItem, SASWelcomeToDeviceViewControllerProvider, 
-                       SASWelcomeView, _TtC23SetupAssistantSupportUI15CursiveTextView ]
+                       SASUILogging, SASUIProximityCloudPlayerItem, SASUITapToRadar, 
+                       SASWelcomeToDeviceViewControllerProvider, SASWelcomeView ]
     objc-ivars:      [ SASCursiveTextPath._boundingBoxOfPath, SASCursiveTextPath._duration, 
                        SASCursiveTextPath._finalWeight, SASCursiveTextPath._initialWeight, 
                        SASCursiveTextPath._length, SASCursiveTextPath._pathDefinition, 

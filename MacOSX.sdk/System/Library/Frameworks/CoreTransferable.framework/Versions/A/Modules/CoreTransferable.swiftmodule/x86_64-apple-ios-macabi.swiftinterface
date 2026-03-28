@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-compiler-version: Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
 // swift-module-flags: -target x86_64-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -library-level api -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 7.1.9 -module-name CoreTransferable
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Combine
 @_exported import CoreTransferable
 import Foundation
@@ -40,26 +40,14 @@ extension CoreTransferable.Transferable {
   public static func importedContentTypes() -> [UniformTypeIdentifiers.UTType]
   public func exportedContentTypes(_ visibility: CoreTransferable.TransferRepresentationVisibility = .all) -> [UniformTypeIdentifiers.UTType]
   public func importedContentTypes() -> [UniformTypeIdentifiers.UTType]
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(importing file: Foundation.URL, contentType: UniformTypeIdentifiers.UTType?) async throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func export(to destinationDirectory: Foundation.URL, contentType: UniformTypeIdentifiers.UTType?) async throws -> Foundation.URL
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func withExportedFile<Result>(contentType: UniformTypeIdentifiers.UTType?, fileHandler: (Foundation.URL) async throws -> Result) async throws -> Result
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var suggestedFilename: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(importing data: Foundation.Data, contentType: UniformTypeIdentifiers.UTType?) async throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func exported(as contentType: UniformTypeIdentifiers.UTType?) async throws -> Foundation.Data
-  #endif
 }
 @available(iOS 16.1, macOS 13.0, tvOS 16.1, watchOS 9.1, *)
 extension Foundation.AttributedString : CoreTransferable.Transferable {
@@ -175,11 +163,9 @@ public struct _ConditionalTransferRepresentation<Base> : CoreTransferable.Transf
 extension CoreTransferable.TransferRepresentation {
   public func suggestedFileName(_ fileName: Swift.String) -> some CoreTransferable.TransferRepresentation<Self.Item>
   
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   public func suggestedFileName(_ fileName: @escaping @Sendable (Self.Item) -> Swift.String?) -> some CoreTransferable.TransferRepresentation<Self.Item>
   
-  #endif
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @preconcurrency public struct CodableRepresentation<Item, Encoder, Decoder> : CoreTransferable.TransferRepresentation, Swift.Sendable where Item : CoreTransferable.Transferable, Item : Swift.Decodable, Item : Swift.Encodable, Encoder : Combine.TopLevelEncoder, Encoder : Swift.Sendable, Decoder : Combine.TopLevelDecoder, Decoder : Swift.Sendable, Encoder.Output == Foundation.Data, Decoder.Input == Foundation.Data {
@@ -271,7 +257,5 @@ public struct TransferRepresentationVisibility : Swift.Sendable, Swift.Equatable
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Foundation.NSItemProvider {
   public func register<T>(_ transferable: @autoclosure @escaping @Sendable () -> T) where T : CoreTransferable.Transferable
-  #if compiler(>=5.3) && $NonescapableTypes
   public func loadTransferable<T>(type transferableType: T.Type, completionHandler: @escaping @Sendable (Swift.Result<T, any Swift.Error>) -> Swift.Void) -> Foundation.Progress where T : CoreTransferable.Transferable
-  #endif
 }

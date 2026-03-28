@@ -1,11 +1,16 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MobileInBoxUpdate.framework/Versions/A/MobileInBoxUpdate'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s17MobileInBoxUpdate24MIBULoopbackServerClientC04stopF0yyKF', 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s17MobileInBoxUpdate22MIBUAppleArchiveHelperC06createF04from2toSbSS_SStFZ', 
+                       '_$s17MobileInBoxUpdate22MIBUAppleArchiveHelperC07extractF04from2toSbSS_SStFZ', 
+                       '_$s17MobileInBoxUpdate22MIBUAppleArchiveHelperCACycfC', '_$s17MobileInBoxUpdate22MIBUAppleArchiveHelperCACycfc', 
+                       '_$s17MobileInBoxUpdate22MIBUAppleArchiveHelperCMa', '_$s17MobileInBoxUpdate22MIBUAppleArchiveHelperCMn', 
+                       '_$s17MobileInBoxUpdate22MIBUAppleArchiveHelperCMo', '_$s17MobileInBoxUpdate22MIBUAppleArchiveHelperCN', 
+                       '_$s17MobileInBoxUpdate22MIBUAppleArchiveHelperCfD', '_$s17MobileInBoxUpdate24MIBULoopbackServerClientC04stopF0yyKF', 
                        '_$s17MobileInBoxUpdate24MIBULoopbackServerClientC05startF07webPort0I4Root12waitTillDoneys6UInt16V_SSSbtKF', 
                        '_$s17MobileInBoxUpdate24MIBULoopbackServerClientC14sharedInstanceACvgZ', 
                        '_$s17MobileInBoxUpdate24MIBULoopbackServerClientC14sharedInstanceACvpZMV', 
@@ -153,6 +158,7 @@ exports:
                        _find_digest, _find_digestOID_for_signingOID, _find_digest_by_type, 
                        _iPhoneCAName, _iPhoneCAName_str, _icdpFederationAnchors, 
                        _kMIBUBatteryDetailRectifiedPowerKey, _kMIBUBatteryDetailRectifiedVoltageKey, 
+                       _kMIBUClientLPMOptionDelayStartInMinutes, _kMIBUClientLPMOptionScanDelayStart, 
                        _kMIBUClientLPMOptionScanPayload, _kMIBUClientLPMOptionTemplateFile, 
                        _kMIBUNFCCommandAIDKey, _kMIBUNFCCommandBandKey, _kMIBUNFCCommandBandwidthKey, 
                        _kMIBUNFCCommandCertChainBlobKey, _kMIBUNFCCommandChallengeBlobKey, 
@@ -160,9 +166,10 @@ exports:
                        _kMIBUNFCCommandEnableRateAdapterKey, _kMIBUNFCCommandEnvelopedAPDUKey, 
                        _kMIBUNFCCommandGroupAddressKey, _kMIBUNFCCommandGroupPortKey, 
                        _kMIBUNFCCommandHeartbeatPeriodKey, _kMIBUNFCCommandHeartbeatTimeout, 
-                       _kMIBUNFCCommandHostPortKey, _kMIBUNFCCommandInterfaceNameKey, 
+                       _kMIBUNFCCommandHostPortKey, _kMIBUNFCCommandMulticastKeysBlobKey, 
                        _kMIBUNFCCommandNFCInactivityTimeoutKey, _kMIBUNFCCommandOperationTimeoutKey, 
                        _kMIBUNFCCommandRQBasicParametersKey, _kMIBUNFCCommandRQExtendedParametersKey, 
+                       _kMIBUNFCCommandRQFIFileRangesKey, _kMIBUNFCCommandRQSUFileRangesKey, 
                        _kMIBUNFCCommandRQThresholdKey, _kMIBUNFCCommandRetryAfterKey, 
                        _kMIBUNFCCommandServiceNameKey, _kMIBUNFCCommandSignatureBlobKey, 
                        _kMIBUNFCCommandTCPAddressKey, _kMIBUNFCCommandTCPPingIntervalKey, 
@@ -192,7 +199,8 @@ exports:
                        MIBUDeserializer, MIBUDeviceBase, MIBUDeviceInfoResponse, 
                        MIBUDeviceNFC, MIBUDeviceStatus, MIBUEAPConfiguartion, MIBUNFCCommand, 
                        MIBUNFCReaderSession, MIBUNFCResponse, MIBUNetworkInfo, MIBUNetworkInfoResponse, 
-                       MIBUPersonalizationManager, MIBUReaderService, MIBUSelectResponse, 
-                       MIBUSerializationUtil, MIBUSerializer, MIBUStatusResponse, 
-                       MIBUTestPreferences, _TtC17MobileInBoxUpdate24MIBULoopbackServerClient ]
+                       MIBUPMUHelper, MIBUPersonalizationManager, MIBUReaderService, 
+                       MIBUSelectResponse, MIBUSerializationUtil, MIBUSerializer, 
+                       MIBUStatusResponse, MIBUTestPreferences, _TtC17MobileInBoxUpdate22MIBUAppleArchiveHelper, 
+                       _TtC17MobileInBoxUpdate24MIBULoopbackServerClient ]
 ...

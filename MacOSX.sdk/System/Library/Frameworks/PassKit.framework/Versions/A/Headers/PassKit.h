@@ -175,13 +175,7 @@
 #import <PassKit/PKIdentityButton.h>
 #endif
 #endif // TARGET_OS_IPHONE || TARGET_OS_OSX
-#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
-#if __has_include(<PassKit/PKPayLaterView.h>)
 #import <PassKit/PKPayLaterView.h>
-#endif
-#if __has_include(<PassKit/PKPayLaterValidator.h>)
 #import <PassKit/PKPayLaterValidator.h>
-#endif
-#endif // TARGET_OS_IOS && !TARGET_OS_MACCATALYST
 #import <PassKit/PKPassRelevantDate.h>
 #import <PassKit/PKPaymentAuthorizationViewControllerDelegate.h>

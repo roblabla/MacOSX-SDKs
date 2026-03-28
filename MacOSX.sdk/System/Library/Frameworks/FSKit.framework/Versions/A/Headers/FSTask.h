@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// A class that enables a file system module to pass log messages and completion notifications to clients.
 ///
 /// FSKit creates an instance of this class for each long-running operations.
+NS_SWIFT_SENDABLE
 FSKIT_API_AVAILABILITY_V1
 @interface FSTask : NSObject
 
@@ -35,7 +36,7 @@ FSKIT_API_AVAILABILITY_V1
 /// The task object clears its `cancellationHandler` property after the task's cancellation or completion.
 /// This helps accelerate the cleanup of retained state.
 ///
-/// The exact structuring of the completion handler depends on the structuring of the code imlementing the task.
+/// The exact structuring of the completion handler depends on the structuring of the code implementing the task.
 /// As a concrete example, consider a check operation with the following class:
 ///
 /// @TabNavigator {
@@ -112,14 +113,14 @@ FSKIT_API_AVAILABILITY_V1
 ///   }
 /// }
 ///
-/// When canceled, the handler block in this example sets the checker's `interrupted` property, and then calls the <doc://com.apple.documentation/documentation/dispatch/dispatchgroup> method <doc://com.apple.documentation/documentation/dispatch/dispatchgroup/wait()> (Swift) or the function <doc://com.apple.documentation/documentation/dispatch/1452794-dispatch_group_wait> (Objective-C) on the checker's work group.
+/// When canceled, the handler block in this example sets the checker's `interrupted` property, and then calls the <doc://com.apple.documentation/documentation/dispatch/dispatchgroup> method <doc://com.apple.documentation/documentation/dispatch/dispatchgroup/wait()> (Swift) or the function <doc://com.apple.documentation/documentation/dispatch/dispatch_group_wait> (Objective-C) on the checker's work group.
 /// Because neither of these operations can fail, the handler returns `nil` to indicate it didn't encounter an error.
 ///
 /// For simplicity, this example doesn't account for errors, whereas production code must do so.
 /// Furthermore, when fully implemented, the `performCheck` method should perform a check operation.
 /// Specifically, it should periodically update the progress object and check its `interrupted` variable.
 /// The check can either complete successfully, complete with an error, or enter the interrupted state.
-/// It should then call ``FSTask/didComplete(error:)`` wtih the appropriate error value or `nil`.
+/// It should then call ``FSTask/didComplete(error:)`` with the appropriate error value or `nil`.
 /// Finally it should call `context.work_group.leave()` (Swift) or `dispatch_group_leave(context.work_group)` (Objective-C) to remove itself from its dispatch group.
 @property (nullable, copy) NSError * _Nullable(^NS_SWIFT_SENDABLE  cancellationHandler)(void) FSKIT_API_AVAILABILITY_V2;
 

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WorkflowUICore.framework/Versions/A/WorkflowUICore'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ ActionKitUI, AddShortcutExtension, AppIntentsTestHarness-iOS, 
                        AppIntentsTestHarness-macOS, AutomationNotificationContent, 
                        CatalystContentExtension, EditorSnapshotTests, FocusConfigurationExtension, 
@@ -17,7 +17,7 @@ allowable-clients:
                        WorkflowEditor, WorkflowEditorTests, WorkflowUI, WorkflowUITests, 
                        arckive2 ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14AttachmentType14WorkflowUICore22AttributedTextEditablePTl', 
                        '_$s14WorkflowUICore0A15TypeDisplayableMp', '_$s14WorkflowUICore0A15TypeDisplayableP10showInNameSSSgvgTj', 
                        '_$s14WorkflowUICore0A15TypeDisplayableP10showInNameSSSgvgTq', 
@@ -918,7 +918,18 @@ exports:
                        '_$s14WorkflowUICore25AnyAutocompleteDataSourceCyACxcAA0deF0RzlufCTj', 
                        '_$s14WorkflowUICore25AnyAutocompleteDataSourceCyACxcAA0deF0RzlufCTq', 
                        '_$s14WorkflowUICore25AnyAutocompleteDataSourceCyACxcAA0deF0Rzlufc', 
-                       '_$s14WorkflowUICore25WFAskLLMFeedbackPresenterC10presentRACyyF', 
+                       '_$s14WorkflowUICore25PlatformViewRepresentableMp', '_$s14WorkflowUICore25PlatformViewRepresentableP04makecD07context10NSViewTypeQz7SwiftUI0hE7ContextVyxG_tFTj', 
+                       '_$s14WorkflowUICore25PlatformViewRepresentableP04makecD07context10NSViewTypeQz7SwiftUI0hE7ContextVyxG_tFTq', 
+                       '_$s14WorkflowUICore25PlatformViewRepresentableP06updatecD0_7contexty10NSViewTypeQz_7SwiftUI0hE7ContextVyxGtFTj', 
+                       '_$s14WorkflowUICore25PlatformViewRepresentableP06updatecD0_7contexty10NSViewTypeQz_7SwiftUI0hE7ContextVyxGtFTq', 
+                       '_$s14WorkflowUICore25PlatformViewRepresentableP09dismantlecD0_11coordinatory10NSViewTypeQz_11CoordinatorQztFZTj', 
+                       '_$s14WorkflowUICore25PlatformViewRepresentableP09dismantlecD0_11coordinatory10NSViewTypeQz_11CoordinatorQztFZTq', 
+                       '_$s14WorkflowUICore25PlatformViewRepresentableP7SwiftUI06NSViewE0Tb', 
+                       '_$s14WorkflowUICore25PlatformViewRepresentablePAAE09dismantlecD0_11coordinatory10NSViewTypeQz_11CoordinatorQztFZ', 
+                       '_$s14WorkflowUICore25PlatformViewRepresentablePAAE10makeNSView7context0G4TypeQz7SwiftUI0gE7ContextVyxG_tF', 
+                       '_$s14WorkflowUICore25PlatformViewRepresentablePAAE12updateNSView_7contexty0G4TypeQz_7SwiftUI0gE7ContextVyxGtF', 
+                       '_$s14WorkflowUICore25PlatformViewRepresentablePAAE15dismantleNSView_11coordinatory0G4TypeQz_11CoordinatorQztFZ', 
+                       '_$s14WorkflowUICore25PlatformViewRepresentableTL', '_$s14WorkflowUICore25WFAskLLMFeedbackPresenterC10presentRACyyF', 
                        '_$s14WorkflowUICore25WFAskLLMFeedbackPresenterC21evaluationDidComplete10controller0F0y8Feedback23FBKEvaluationControllerC_0J7Service14FBKSEvaluationCtF', 
                        '_$s14WorkflowUICore25WFAskLLMFeedbackPresenterC29viewControllerForPresentation10controllerSo06NSViewG0C8Feedback013FBKEvaluationG0C_tF', 
                        '_$s14WorkflowUICore25WFAskLLMFeedbackPresenterC5model12conversation10controller18wasBlockedBySafety29viewControllerForPresentationAC10ContentKit21WFGenerativeModelNameO_AI0C15LLMConversationC8Feedback013FBKEvaluationN0CSbSo06NSViewN0CSgtcfC', 
@@ -1476,6 +1487,9 @@ exports:
                        '_$sSo20WFQuickActionSurfacea14WorkflowUICoreE8allCasesSayABGvgZ', 
                        '_$sSo20WFQuickActionSurfacea14WorkflowUICoreE8allCasesSayABGvpZMV', 
                        '_$sSo20WFQuickActionSurfaceas12CaseIterable14WorkflowUICoreMc', 
+                       '_$sSo21WFDurationContentItemC14WorkflowUICore0bC16PreviewProvidingACMc', 
+                       '_$sSo21WFDurationContentItemC14WorkflowUICore0bC16PreviewProvidingACWP', 
+                       '_$sSo21WFDurationContentItemC14WorkflowUICoreE7preview13configuration7SwiftUI7AnyViewVAC0bC7PreviewV13ConfigurationV_tF', 
                        '_$sSo21WFReminderContentItemC14WorkflowUICore0bC16PreviewProvidingACMc', 
                        '_$sSo21WFReminderContentItemC14WorkflowUICore0bC16PreviewProvidingACWP', 
                        '_$sSo21WFReminderContentItemC14WorkflowUICoreE13primaryActionAC0bC7PreviewV0G0VSgvg', 
@@ -1487,6 +1501,10 @@ exports:
                        '_$sSo21WFRichTextContentItemC14WorkflowUICoreE23shouldPresentActionMenuSbvg', 
                        '_$sSo21WFRichTextContentItemC14WorkflowUICoreE23shouldPresentActionMenuSbvpMV', 
                        '_$sSo21WFRichTextContentItemC14WorkflowUICoreE7preview13configuration7SwiftUI7AnyViewVAC0cD7PreviewV13ConfigurationV_tF', 
+                       '_$sSo22WFCharacterContentItemC14WorkflowUICore0bC16PreviewProvidingACMc', 
+                       '_$sSo22WFCharacterContentItemC14WorkflowUICore0bC16PreviewProvidingACWP', 
+                       '_$sSo22WFCharacterContentItemC14WorkflowUICoreE20shouldIgnoreSafeArea3forSbAC0bC7PreviewV13ConfigurationV_tF', 
+                       '_$sSo22WFCharacterContentItemC14WorkflowUICoreE7preview13configuration7SwiftUI7AnyViewVAC0bC7PreviewV13ConfigurationV_tF', 
                        '_$sSo22WFGeneratedContentItemC14WorkflowUICore0bC16PreviewProvidingACMc', 
                        '_$sSo22WFGeneratedContentItemC14WorkflowUICore0bC16PreviewProvidingACWP', 
                        '_$sSo22WFGeneratedContentItemC14WorkflowUICoreE20shouldIgnoreSafeArea3forSbAC0bC7PreviewV13ConfigurationV_tF', 
@@ -1514,11 +1532,20 @@ exports:
                        '_$sSo24WFPhoneNumberContentItemC14WorkflowUICoreE23shouldPresentActionMenuSbvg', 
                        '_$sSo24WFPhoneNumberContentItemC14WorkflowUICoreE23shouldPresentActionMenuSbvpMV', 
                        '_$sSo24WFPhoneNumberContentItemC14WorkflowUICoreE7preview13configuration7SwiftUI7AnyViewVAC0cD7PreviewV13ConfigurationV_tF', 
+                       '_$sSo25WFDateIntervalContentItemC14WorkflowUICore0cD16PreviewProvidingACMc', 
+                       '_$sSo25WFDateIntervalContentItemC14WorkflowUICore0cD16PreviewProvidingACWP', 
+                       '_$sSo25WFDateIntervalContentItemC14WorkflowUICoreE7preview13configuration7SwiftUI7AnyViewVAC0cD7PreviewV13ConfigurationV_tF', 
                        '_$sSo25WFEmailAddressContentItemC14WorkflowUICore0cD16PreviewProvidingACMc', 
                        '_$sSo25WFEmailAddressContentItemC14WorkflowUICore0cD16PreviewProvidingACWP', 
                        '_$sSo25WFEmailAddressContentItemC14WorkflowUICoreE23shouldPresentActionMenuSbvg', 
                        '_$sSo25WFEmailAddressContentItemC14WorkflowUICoreE23shouldPresentActionMenuSbvpMV', 
                        '_$sSo25WFEmailAddressContentItemC14WorkflowUICoreE7preview13configuration7SwiftUI7AnyViewVAC0cD7PreviewV13ConfigurationV_tF', 
+                       '_$sSo25WFLinkMetadataContentItemC14WorkflowUICore0cD16PreviewProvidingACMc', 
+                       '_$sSo25WFLinkMetadataContentItemC14WorkflowUICore0cD16PreviewProvidingACWP', 
+                       '_$sSo25WFLinkMetadataContentItemC14WorkflowUICoreE20shouldIgnoreSafeArea3forSbAC0cD7PreviewV13ConfigurationV_tF', 
+                       '_$sSo25WFLinkMetadataContentItemC14WorkflowUICoreE23shouldPresentActionMenuSbvg', 
+                       '_$sSo25WFLinkMetadataContentItemC14WorkflowUICoreE23shouldPresentActionMenuSbvpMV', 
+                       '_$sSo25WFLinkMetadataContentItemC14WorkflowUICoreE7preview13configuration7SwiftUI7AnyViewVAC0cD7PreviewV13ConfigurationV_tF', 
                        '_$sSo26WFCalendarEventContentItemC14WorkflowUICore0cD16PreviewProvidingACMc', 
                        '_$sSo26WFCalendarEventContentItemC14WorkflowUICore0cD16PreviewProvidingACWP', 
                        '_$sSo26WFCalendarEventContentItemC14WorkflowUICoreE7preview13configuration7SwiftUI7AnyViewVAC0cD7PreviewV13ConfigurationV_tF', 
@@ -1551,6 +1578,10 @@ exports:
                        '_$sSo26WFShowContentDialogRequestC14WorkflowUICoreE16ImageLoadingViewVMa', 
                        '_$sSo26WFShowContentDialogRequestC14WorkflowUICoreE16ImageLoadingViewVMn', 
                        '_$sSo26WFShowContentDialogRequestC14WorkflowUICoreE16ImageLoadingViewVy_xG7SwiftUI0I0ACMc', 
+                       '_$sSo27WFRecurrenceRuleContentItemC14WorkflowUICore0cD16PreviewProvidingACMc', 
+                       '_$sSo27WFRecurrenceRuleContentItemC14WorkflowUICore0cD16PreviewProvidingACWP', 
+                       '_$sSo27WFRecurrenceRuleContentItemC14WorkflowUICoreE20shouldIgnoreSafeArea3forSbAC0cD7PreviewV13ConfigurationV_tF', 
+                       '_$sSo27WFRecurrenceRuleContentItemC14WorkflowUICoreE7preview13configuration7SwiftUI7AnyViewVAC0cD7PreviewV13ConfigurationV_tF', 
                        '_$sSo28WFAppKitAutocompleteTextViewC14WorkflowUICore08PlatformdE0ACMc', 
                        '_$sSo28WFAppKitAutocompleteTextViewC14WorkflowUICore08PlatformdE0ACWP', 
                        '_$sSo28WFAppKitAutocompleteTextViewC14WorkflowUICoreE14wf_textStorageSo06NSTextJ0CSgvg', 
@@ -1559,6 +1590,9 @@ exports:
                        '_$sSo28WFAppKitAutocompleteTextViewC14WorkflowUICoreE16wf_layoutManagerSo08NSLayoutJ0CSgvpMV', 
                        '_$sSo28WFAppKitAutocompleteTextViewC14WorkflowUICoreE18makeFirstResponderyyF', 
                        '_$sSo31WFEmbeddableActionUserInterfaceC14WorkflowUICoreE11presentViewyyx7SwiftUI0H0RzlF', 
+                       '_$sSo33WFPersonNameComponentsContentItemC14WorkflowUICore0dE16PreviewProvidingACMc', 
+                       '_$sSo33WFPersonNameComponentsContentItemC14WorkflowUICore0dE16PreviewProvidingACWP', 
+                       '_$sSo33WFPersonNameComponentsContentItemC14WorkflowUICoreE7preview13configuration7SwiftUI7AnyViewVAC0dE7PreviewV13ConfigurationV_tF', 
                        '_$sSo6WFIconC14WorkflowUICoreE2idSOvg', '_$sSo6WFIconC14WorkflowUICoreE2idSOvpMV', 
                        '_$sSo6WFIconCs12Identifiable14WorkflowUICoreMc', '_$sSo7WFAlertC14WorkflowUICoreE16PresentationKindOMa', 
                        '_$sSo7WFAlertC14WorkflowUICoreE16PresentationKindOMn', '_$sSo7WFAlertC14WorkflowUICoreE16PresentationKindON', 

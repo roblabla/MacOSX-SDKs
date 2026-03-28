@@ -11,6 +11,10 @@
 #import <AddressBook/ABTypedefs.h>
 #import <AddressBook/ABGlobals.h>
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 enum {
 	ABAddRecordsError = 1001,
 	ABRemoveRecordsError = 1002,
@@ -21,6 +25,10 @@ enum {
 
 extern NSString *ABAddressBookErrorDomain AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 extern NSString *ABMultiValueIdentifiersErrorKey AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+#if defined(__cplusplus)
+}
+#endif
 
 @class ABRecord;
 @class ABPerson;

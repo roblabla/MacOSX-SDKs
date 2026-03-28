@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NewDeviceOutreachMacUI.framework/Versions/A/NewDeviceOutreachMacUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s22NewDeviceOutreachMacUI0B16WarrantyMainViewV05SwiftE00H0AAMc', 
                        '_$s22NewDeviceOutreachMacUI0B16WarrantyMainViewV4bodyQrvg', 
                        '_$s22NewDeviceOutreachMacUI0B16WarrantyMainViewV4bodyQrvpMV', 

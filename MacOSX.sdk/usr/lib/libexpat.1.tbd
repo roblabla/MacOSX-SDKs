@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libexpat.1.dylib'
 current-version: 8
 compatibility-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _XML_DefaultCurrent, _XML_ErrorString, _XML_ExpatVersion, 
                        _XML_ExpatVersionInfo, _XML_ExternalEntityParserCreate, _XML_FreeContentModel, 
                        _XML_GetBase, _XML_GetBuffer, _XML_GetCurrentByteCount, _XML_GetCurrentByteIndex, 
@@ -16,7 +14,8 @@ exports:
                        _XML_GetParsingStatus, _XML_GetSpecifiedAttributeCount, _XML_MemFree, 
                        _XML_MemMalloc, _XML_MemRealloc, _XML_Parse, _XML_ParseBuffer, 
                        _XML_ParserCreate, _XML_ParserCreateNS, _XML_ParserCreate_MM, 
-                       _XML_ParserFree, _XML_ParserReset, _XML_ResumeParser, _XML_SetAttlistDeclHandler, 
+                       _XML_ParserFree, _XML_ParserReset, _XML_ResumeParser, _XML_SetAllocTrackerActivationThreshold, 
+                       _XML_SetAllocTrackerMaximumAmplification, _XML_SetAttlistDeclHandler, 
                        _XML_SetBase, _XML_SetBillionLaughsAttackProtectionActivationThreshold, 
                        _XML_SetBillionLaughsAttackProtectionMaximumAmplification, 
                        _XML_SetCdataSectionHandler, _XML_SetCharacterDataHandler, 

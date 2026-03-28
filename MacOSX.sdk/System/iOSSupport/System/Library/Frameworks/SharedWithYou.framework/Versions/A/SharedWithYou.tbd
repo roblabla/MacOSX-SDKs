@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/SharedWithYou.framework/Versions/A/SharedWithYou'
 swift-abi-version: 7
 reexported-libraries:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/SharedWithYouCore.framework/Versions/A/SharedWithYouCore' ]
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s13SharedWithYou24_CollaborationDetailViewV12itemProvider11listContentACyxGSo06NSItemH0C_xyXEtcfC', 
                        '_$s13SharedWithYou24_CollaborationDetailViewV12itemProvider12contentTitle13collaborators11listContentACyxGSo06NSItemH0C_SSSaySo8SWPersonCGSgxyXEtcfC', 
                        '_$s13SharedWithYou24_CollaborationDetailViewV4bodyQrvg', 

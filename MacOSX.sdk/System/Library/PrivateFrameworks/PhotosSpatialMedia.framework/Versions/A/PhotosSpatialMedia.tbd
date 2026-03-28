@@ -1,17 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosSpatialMedia.framework/Versions/A/PhotosSpatialMedia'
-current-version: 821.0.120
+current-version: 841.0.101
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ Photos, PhotosSpatialMediaProtoApp, PhotosSpatialMediaTests, 
                        PhotosTests, PhotosUICore, PhotosUICoreProto, PhotosUICoreProto-iOS, 
                        PhotosUICoreProtoApp, PhotosUIPrivate, PhotosUITests, PhotosXRUI, 
                        _PhotosUI_SwiftUI, _PhotosUI_WidgetKit ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s22PhotosSpatialMediaCore0B5PhotoO0abC0E10GyroFilterV11targetValueSo12SPRotation3DaSgvg', 
                        '_$s22PhotosSpatialMediaCore0B5PhotoO0abC0E10GyroFilterV11targetValueSo12SPRotation3DaSgvpMV', 
                        '_$s22PhotosSpatialMediaCore0B5PhotoO0abC0E10GyroFilterV12currentValueSo12SPRotation3Davg', 

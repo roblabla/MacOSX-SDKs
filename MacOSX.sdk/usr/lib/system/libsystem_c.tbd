@@ -1,28 +1,27 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_c.dylib'
-current-version: 1725.40.4
+current-version: 1752.100.10
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ '___opendir2$INODE64', '__readdir_unlocked$INODE64', '__seekdir$INODE64', 
                        '_alphasort$INODE64', '_daemon$1050', '_fdopendir$INODE64', 
-                       _fstatx64_np, '_fstatx_np$INODE64', '_fts_children$INODE64', 
-                       '_fts_close$INODE64', '_fts_open$INODE64', '_fts_open_b$INODE64', 
-                       '_fts_read$INODE64', '_fts_set$INODE64', '_ftw$INODE64', '_getmntinfo$INODE64', 
+                       '_fdscandir$INODE64', '_fdscandir_b$INODE64', _fstatx64_np, 
+                       '_fstatx_np$INODE64', '_fts_children$INODE64', '_fts_close$INODE64', 
+                       '_fts_open$INODE64', '_fts_open_b$INODE64', '_fts_read$INODE64', 
+                       '_fts_set$INODE64', '_ftw$INODE64', '_getmntinfo$INODE64', 
                        _getmntinfo64, '_getmntinfo_r_np$INODE64', '_glob$INODE64', 
                        '_glob_b$INODE64', _lstatx64_np, '_lstatx_np$INODE64', '_nftw$INODE64', 
                        '_opendir$INODE64', '_readdir$INODE64', '_readdir_r$INODE64', 
                        '_rewinddir$INODE64', '_scandir$INODE64', '_scandir_b$INODE64', 
-                       '_seekdir$INODE64', _statx64_np, '_statx_np$INODE64', _strtoencf80_l, 
-                       '_telldir$INODE64', mcount ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+                       '_scandirat$INODE64', '_scandirat_b$INODE64', '_seekdir$INODE64', 
+                       _statx64_np, '_statx_np$INODE64', _strtoencf80_l, '_telldir$INODE64', 
+                       mcount ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$weak$os10.11$_basename_r', '$ld$weak$os10.11$_clock_getres', 
                        '$ld$weak$os10.11$_clock_gettime', '$ld$weak$os10.11$_clock_settime', 
                        '$ld$weak$os10.11$_dirname_r', '$ld$weak$os10.11$_getentropy', 
@@ -127,10 +126,11 @@ exports:
                        _environ_unlock_np, _erand48, _err, _err_set_exit, _err_set_exit_b, 
                        _err_set_file, _errc, _errx, _execl, _execle, _execlp, _execv, 
                        _execvP, _execvp, _exit, _f_prealloc, _fchmodx_np, _fclose, 
-                       _fcvt, _fdopen, '_fdopen$DARWIN_EXTSN', _fdopendir, _feof, 
-                       _feof_unlocked, _ferror, _ferror_unlocked, _fflagstostr, _fflush, 
-                       _fgetc, _fgetln, _fgetpos, _fgetrune, _fgets, _fgetwc, _fgetwc_l, 
-                       _fgetwln, _fgetwln_l, _fgetws, _fgetws_l, _fileno, _fileno_unlocked, 
+                       _fcvt, _fdclosedir, _fdopen, '_fdopen$DARWIN_EXTSN', _fdopendir, 
+                       _fdscandir, _fdscandir_b, _feof, _feof_unlocked, _ferror, 
+                       _ferror_unlocked, _fflagstostr, _fflush, _fgetc, _fgetln, 
+                       _fgetpos, _fgetrune, _fgets, _fgetwc, _fgetwc_l, _fgetwln, 
+                       _fgetwln_l, _fgetws, _fgetws_l, _fileno, _fileno_unlocked, 
                        _filesec_dup, _filesec_free, _filesec_get_property, _filesec_init, 
                        _filesec_query_property, _filesec_set_property, _filesec_unset_property, 
                        _flockfile, _fmemopen, _fmtcheck, _fmtmsg, _fnmatch, _fopen, 
@@ -211,16 +211,17 @@ exports:
                        _regncomp, _regncomp_l, _regnexec, _regwcomp, _regwcomp_l, 
                        _regwexec, _regwncomp, _regwncomp_l, _regwnexec, _remove, 
                        _remque, _rewind, _rewinddir, _rindex, _rpmatch, _sbrk, _scandir, 
-                       _scandir_b, _scanf, _scanf_l, _seed48, _seekdir, _send, '_send$NOCANCEL', 
-                       _setbuf, _setbuffer, _setenv, _sethostid, _sethostname, _setinvalidrune, 
-                       _setipv4sourcefilter, _setkey, _setlinebuf, _setlocale, _setlogin, 
-                       _setmode, _setpgrp, _setprogname, _setrgid, _setruid, _setrunelocale, 
-                       _setsourcefilter, _setstate, _settimeofday, _setttyent, _setusershell, 
-                       _setutxent, _setutxent_wtmp, _setvbuf, _sigaction, _sigaddset, 
-                       _sigaltstack, _sigblock, _sigdelset, _sigemptyset, _sigfillset, 
-                       _sighold, _sigignore, _siginterrupt, _sigismember, _signal, 
-                       _sigpause, '_sigpause$NOCANCEL', _sigrelse, _sigset, _sigsetmask, 
-                       _sigvec, _sl_add, _sl_find, _sl_free, _sl_init, _sleep, '_sleep$NOCANCEL', 
+                       _scandir_b, _scandirat, _scandirat_b, _scanf, _scanf_l, _seed48, 
+                       _seekdir, _send, '_send$NOCANCEL', _setbuf, _setbuffer, _setenv, 
+                       _sethostid, _sethostname, _setinvalidrune, _setipv4sourcefilter, 
+                       _setkey, _setlinebuf, _setlocale, _setlogin, _setmode, _setpgrp, 
+                       _setprogname, _setrgid, _setruid, _setrunelocale, _setsourcefilter, 
+                       _setstate, _settimeofday, _setttyent, _setusershell, _setutxent, 
+                       _setutxent_wtmp, _setvbuf, _sigaction, _sigaddset, _sigaltstack, 
+                       _sigblock, _sigdelset, _sigemptyset, _sigfillset, _sighold, 
+                       _sigignore, _siginterrupt, _sigismember, _signal, _sigpause, 
+                       '_sigpause$NOCANCEL', _sigrelse, _sigset, _sigsetmask, _sigvec, 
+                       _sl_add, _sl_find, _sl_free, _sl_init, _sleep, '_sleep$NOCANCEL', 
                        _snprintf, _snprintf_l, _snvis, _sockatmark, _sprintf, _sprintf_l, 
                        _sradixsort, _srand, _srand48, _sranddev, _srandom, _srandomdev, 
                        _sscanf, _sscanf_l, _stat_with_subsystem, _statvfs, _statx_np, 
@@ -289,8 +290,7 @@ exports:
                        _xprintf_exec ]
     weak-symbols:    [ __os_debug_log_redirect_func ]
 reexports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _bcmp, _bzero, _index, _memccpy, _memchr, _memcmp, _memcpy, 
                        _memmove, _memset, _memset_pattern16, _memset_pattern4, _memset_pattern8, 
                        _strchr, _strcmp, _strcpy, _strlcat, _strlcpy, _strlen, _strncmp, 

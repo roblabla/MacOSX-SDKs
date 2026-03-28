@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 1.1.7 -module-name FoundationModels -package-name com.apple.foundationmodels
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 1.4.34 -module-name FoundationModels -package-name com.apple.foundationmodels
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 public import BackgroundAssets
 public import CoreGraphics
 public import Foundation
@@ -14,6 +14,10 @@ public import _SwiftConcurrencyShims
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @attached(extension, conformances: FoundationModels.Generable, names: named(init(_:)), named(generatedContent)) @attached(member, names: arbitrary) public macro Generable(description: Swift.String? = nil) = #externalMacro(module: "FoundationModelsMacros", type: "GenerableMacro")
+@available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@attached(extension, conformances: FoundationModels.Generable, names: named(init(_:)), named(generatedContent)) @attached(member, names: arbitrary) public macro Generable(description: Swift.String? = nil, representNilExplicitlyInGeneratedContent: Swift.Bool) = #externalMacro(module: "FoundationModelsMacros", type: "GenerableMacro")
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -68,15 +72,12 @@ extension FoundationModels.ConvertibleToGeneratedContent {
 extension FoundationModels.Generable {
   public typealias PartiallyGenerated = Self
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension Swift.Optional where Wrapped : FoundationModels.Generable {
   public typealias PartiallyGenerated = Wrapped.PartiallyGenerated
 }
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -85,7 +86,6 @@ extension Swift.Optional : FoundationModels.ConvertibleToGeneratedContent, Found
     get
   }
 }
-#endif
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -205,15 +205,9 @@ public struct GeneratedContent : Swift.Sendable, Swift.Equatable, FoundationMode
   public var generatedContent: FoundationModels.GeneratedContent {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(properties: Swift.KeyValuePairs<Swift.String, any FoundationModels.ConvertibleToGeneratedContent>, id: FoundationModels.GenerationID? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init<S>(properties: S, id: FoundationModels.GenerationID? = nil, uniquingKeysWith combine: (FoundationModels.GeneratedContent, FoundationModels.GeneratedContent) throws -> some ConvertibleToGeneratedContent) rethrows where S : Swift.Sequence, S.Element == (Swift.String, any FoundationModels.ConvertibleToGeneratedContent)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init<S>(elements: S, id: FoundationModels.GenerationID? = nil) where S : Swift.Sequence, S.Element == any FoundationModels.ConvertibleToGeneratedContent
-  #endif
   public init(_ value: some ConvertibleToGeneratedContent)
   public init(_ value: some ConvertibleToGeneratedContent, id: FoundationModels.GenerationID)
   public init(json: Swift.String) throws
@@ -222,9 +216,7 @@ public struct GeneratedContent : Swift.Sendable, Swift.Equatable, FoundationMode
   }
   public func value<Value>(_ type: Value.Type = Value.self) throws -> Value where Value : FoundationModels.ConvertibleFromGeneratedContent
   public func value<Value>(_ type: Value.Type = Value.self, forProperty property: Swift.String) throws -> Value where Value : FoundationModels.ConvertibleFromGeneratedContent
-  #if compiler(>=5.3) && $NonescapableTypes
   public func value<Value>(_ type: Value?.Type = Value?.self, forProperty property: Swift.String) throws -> Value? where Value : FoundationModels.ConvertibleFromGeneratedContent
-  #endif
   public var debugDescription: Swift.String {
     get
   }
@@ -246,9 +238,7 @@ extension FoundationModels.GeneratedContent {
     case structure(properties: [Swift.String : FoundationModels.GeneratedContent], orderedKeys: [Swift.String])
     public static func == (a: FoundationModels.GeneratedContent.Kind, b: FoundationModels.GeneratedContent.Kind) -> Swift.Bool
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(kind: FoundationModels.GeneratedContent.Kind, id: FoundationModels.GenerationID? = nil)
-  #endif
   public var kind: FoundationModels.GeneratedContent.Kind {
     get
   }
@@ -332,20 +322,25 @@ final public class LanguageModelSession {
   final public var transcript: FoundationModels.Transcript {
     get
   }
+  @objc deinit
+}
+@available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension FoundationModels.LanguageModelSession : nonisolated Observation.Observable {
+}
+@available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension FoundationModels.LanguageModelSession {
   final public var isResponding: Swift.Bool {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_disfavoredOverload convenience public init(model: FoundationModels.SystemLanguageModel = .default, tools: [any FoundationModels.Tool] = [], instructions: Swift.String? = nil)
-  #endif
   convenience public init(model: FoundationModels.SystemLanguageModel = .default, tools: [any FoundationModels.Tool] = [], @FoundationModels.InstructionsBuilder instructions: () throws -> FoundationModels.Instructions) rethrows
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(model: FoundationModels.SystemLanguageModel = .default, tools: [any FoundationModels.Tool] = [], instructions: FoundationModels.Instructions? = nil)
-  #endif
   convenience public init(model: FoundationModels.SystemLanguageModel = .default, tools: [any FoundationModels.Tool] = [], transcript: FoundationModels.Transcript)
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func prewarm(promptPrefix: FoundationModels.Prompt? = nil)
-  #endif
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -390,18 +385,10 @@ final public class LanguageModelSession {
   @discardableResult
   nonisolated(nonsending) final public func respond<Content>(generating type: Content.Type = Content.self, includeSchemaInPrompt: Swift.Bool = true, options: FoundationModels.GenerationOptions = GenerationOptions(), @FoundationModels.PromptBuilder prompt: () throws -> FoundationModels.Prompt) async throws -> FoundationModels.LanguageModelSession.Response<Content> where Content : FoundationModels.Generable
   #endif
-  #if compiler(>=5.3) && $SendingArgsAndResults
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   final public func streamResponse(to prompt: FoundationModels.Prompt, schema: FoundationModels.GenerationSchema, includeSchemaInPrompt: Swift.Bool = true, options: FoundationModels.GenerationOptions = GenerationOptions()) -> sending FoundationModels.LanguageModelSession.ResponseStream<FoundationModels.GeneratedContent>
-  #else
-  @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
-  @available(tvOS, unavailable)
-  @available(watchOS, unavailable)
-  final public func streamResponse(to prompt: FoundationModels.Prompt, schema: FoundationModels.GenerationSchema, includeSchemaInPrompt: Swift.Bool = true, options: FoundationModels.GenerationOptions = GenerationOptions()) -> FoundationModels.LanguageModelSession.ResponseStream<FoundationModels.GeneratedContent>
-  #endif
-  @objc deinit
 }
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
@@ -411,8 +398,6 @@ extension FoundationModels.LanguageModelSession : @unchecked Swift.Sendable {
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-extension FoundationModels.LanguageModelSession : nonisolated Observation.Observable {
-}
 extension FoundationModels.LanguageModelSession {
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
   @available(tvOS, unavailable)
@@ -446,21 +431,15 @@ extension FoundationModels.LanguageModelSession {
     case rateLimited(FoundationModels.LanguageModelSession.GenerationError.Context)
     case concurrentRequests(FoundationModels.LanguageModelSession.GenerationError.Context)
     case refusal(FoundationModels.LanguageModelSession.GenerationError.Refusal, FoundationModels.LanguageModelSession.GenerationError.Context)
-    #if compiler(>=5.3) && $NonescapableTypes
     public var errorDescription: Swift.String? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var recoverySuggestion: Swift.String? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var failureReason: Swift.String? {
       get
     }
-    #endif
   }
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
   @available(tvOS, unavailable)
@@ -469,13 +448,14 @@ extension FoundationModels.LanguageModelSession {
     public var tool: any FoundationModels.Tool
     public var underlyingError: any Swift.Error
     public init(tool: any FoundationModels.Tool, underlyingError: any Swift.Error)
-    #if compiler(>=5.3) && $NonescapableTypes
     public var errorDescription: Swift.String? {
       get
     }
-    #endif
   }
 }
+@available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension FoundationModels.LanguageModelSession {
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
   @available(tvOS, unavailable)
@@ -496,75 +476,37 @@ extension FoundationModels.LanguageModelSession.ResponseStream : _Concurrency.As
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
-    #if compiler(>=5.3) && $NonescapableTypes
     public mutating func next(isolation actor: isolated (any _Concurrency.Actor)? = #isolation) async throws -> FoundationModels.LanguageModelSession.ResponseStream<Content>.Snapshot?
-    #endif
     @available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public typealias Element = FoundationModels.LanguageModelSession.ResponseStream<Content>.Snapshot
     @available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
-    @available(tvOS, unavailable, introduced: 18.0)
-    @available(watchOS, unavailable, introduced: 11.0)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
   }
   public func makeAsyncIterator() -> FoundationModels.LanguageModelSession.ResponseStream<Content>.AsyncIterator
   #if compiler(>=5.3) && $AsyncExecutionBehaviorAttributes
-  #if compiler(>=5.3) && $SendingArgsAndResults
   nonisolated(nonsending) public func collect() async throws -> sending FoundationModels.LanguageModelSession.Response<Content>
-  #else
-  nonisolated(nonsending) public func collect() async throws -> FoundationModels.LanguageModelSession.Response<Content>
-  #endif
   #endif
   @available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
-  @available(tvOS, unavailable, introduced: 18.0)
-  @available(watchOS, unavailable, introduced: 11.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
   @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
 }
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension FoundationModels.LanguageModelSession {
-  #if compiler(>=5.3) && $SendingArgsAndResults
   @_disfavoredOverload final public func streamResponse(to prompt: Swift.String, schema: FoundationModels.GenerationSchema, includeSchemaInPrompt: Swift.Bool = true, options: FoundationModels.GenerationOptions = GenerationOptions()) -> sending FoundationModels.LanguageModelSession.ResponseStream<FoundationModels.GeneratedContent>
-  #else
-  @_disfavoredOverload final public func streamResponse(to prompt: Swift.String, schema: FoundationModels.GenerationSchema, includeSchemaInPrompt: Swift.Bool = true, options: FoundationModels.GenerationOptions = GenerationOptions()) -> FoundationModels.LanguageModelSession.ResponseStream<FoundationModels.GeneratedContent>
-  #endif
-  #if compiler(>=5.3) && $SendingArgsAndResults
   final public func streamResponse(schema: FoundationModels.GenerationSchema, includeSchemaInPrompt: Swift.Bool = true, options: FoundationModels.GenerationOptions = GenerationOptions(), @FoundationModels.PromptBuilder prompt: () throws -> FoundationModels.Prompt) rethrows -> sending FoundationModels.LanguageModelSession.ResponseStream<FoundationModels.GeneratedContent>
-  #else
-  final public func streamResponse(schema: FoundationModels.GenerationSchema, includeSchemaInPrompt: Swift.Bool = true, options: FoundationModels.GenerationOptions = GenerationOptions(), @FoundationModels.PromptBuilder prompt: () throws -> FoundationModels.Prompt) rethrows -> FoundationModels.LanguageModelSession.ResponseStream<FoundationModels.GeneratedContent>
-  #endif
-  #if compiler(>=5.3) && $SendingArgsAndResults
   final public func streamResponse<Content>(to prompt: FoundationModels.Prompt, generating type: Content.Type = Content.self, includeSchemaInPrompt: Swift.Bool = true, options: FoundationModels.GenerationOptions = GenerationOptions()) -> sending FoundationModels.LanguageModelSession.ResponseStream<Content> where Content : FoundationModels.Generable
-  #else
-  final public func streamResponse<Content>(to prompt: FoundationModels.Prompt, generating type: Content.Type = Content.self, includeSchemaInPrompt: Swift.Bool = true, options: FoundationModels.GenerationOptions = GenerationOptions()) -> FoundationModels.LanguageModelSession.ResponseStream<Content> where Content : FoundationModels.Generable
-  #endif
-  #if compiler(>=5.3) && $SendingArgsAndResults
   @_disfavoredOverload final public func streamResponse<Content>(to prompt: Swift.String, generating type: Content.Type = Content.self, includeSchemaInPrompt: Swift.Bool = true, options: FoundationModels.GenerationOptions = GenerationOptions()) -> sending FoundationModels.LanguageModelSession.ResponseStream<Content> where Content : FoundationModels.Generable
-  #else
-  @_disfavoredOverload final public func streamResponse<Content>(to prompt: Swift.String, generating type: Content.Type = Content.self, includeSchemaInPrompt: Swift.Bool = true, options: FoundationModels.GenerationOptions = GenerationOptions()) -> FoundationModels.LanguageModelSession.ResponseStream<Content> where Content : FoundationModels.Generable
-  #endif
-  #if compiler(>=5.3) && $SendingArgsAndResults
   final public func streamResponse<Content>(generating type: Content.Type = Content.self, includeSchemaInPrompt: Swift.Bool = true, options: FoundationModels.GenerationOptions = GenerationOptions(), @FoundationModels.PromptBuilder prompt: () throws -> FoundationModels.Prompt) rethrows -> sending FoundationModels.LanguageModelSession.ResponseStream<Content> where Content : FoundationModels.Generable
-  #else
-  final public func streamResponse<Content>(generating type: Content.Type = Content.self, includeSchemaInPrompt: Swift.Bool = true, options: FoundationModels.GenerationOptions = GenerationOptions(), @FoundationModels.PromptBuilder prompt: () throws -> FoundationModels.Prompt) rethrows -> FoundationModels.LanguageModelSession.ResponseStream<Content> where Content : FoundationModels.Generable
-  #endif
-  #if compiler(>=5.3) && $SendingArgsAndResults
   final public func streamResponse(to prompt: FoundationModels.Prompt, options: FoundationModels.GenerationOptions = GenerationOptions()) -> sending FoundationModels.LanguageModelSession.ResponseStream<Swift.String>
-  #else
-  final public func streamResponse(to prompt: FoundationModels.Prompt, options: FoundationModels.GenerationOptions = GenerationOptions()) -> FoundationModels.LanguageModelSession.ResponseStream<Swift.String>
-  #endif
-  #if compiler(>=5.3) && $SendingArgsAndResults
   @_disfavoredOverload final public func streamResponse(to prompt: Swift.String, options: FoundationModels.GenerationOptions = GenerationOptions()) -> sending FoundationModels.LanguageModelSession.ResponseStream<Swift.String>
-  #else
-  @_disfavoredOverload final public func streamResponse(to prompt: Swift.String, options: FoundationModels.GenerationOptions = GenerationOptions()) -> FoundationModels.LanguageModelSession.ResponseStream<Swift.String>
-  #endif
-  #if compiler(>=5.3) && $SendingArgsAndResults
   final public func streamResponse(options: FoundationModels.GenerationOptions = GenerationOptions(), @FoundationModels.PromptBuilder prompt: () throws -> FoundationModels.Prompt) rethrows -> sending FoundationModels.LanguageModelSession.ResponseStream<Swift.String>
-  #else
-  final public func streamResponse(options: FoundationModels.GenerationOptions = GenerationOptions(), @FoundationModels.PromptBuilder prompt: () throws -> FoundationModels.Prompt) rethrows -> FoundationModels.LanguageModelSession.ResponseStream<Swift.String>
-  #endif
 }
 @_hasMissingDesignatedInitializers @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
@@ -585,6 +527,11 @@ final public class SystemLanguageModel : Swift.Sendable {
     public static func == (a: FoundationModels.SystemLanguageModel.UseCase, b: FoundationModels.SystemLanguageModel.UseCase) -> Swift.Bool
   }
   @objc deinit
+}
+@available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension FoundationModels.SystemLanguageModel : nonisolated Observation.Observable {
 }
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
@@ -626,7 +573,9 @@ extension FoundationModels.SystemLanguageModel {
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
-  public static let `default`: FoundationModels.SystemLanguageModel
+  public static var `default`: FoundationModels.SystemLanguageModel {
+    get
+  }
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -640,10 +589,59 @@ extension FoundationModels.SystemLanguageModel {
   }
   final public func supportsLocale(_ locale: Foundation.Locale = Locale.current) -> Swift.Bool
 }
+@available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension FoundationModels.SystemLanguageModel {
+  #if compiler(>=5.3) && $AsyncExecutionBehaviorAttributes
+  @available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  nonisolated(nonsending) final public func tokenCount(for prompt: some PromptRepresentable) async throws -> Swift.Int
+  #endif
+  #if compiler(>=5.3) && $AsyncExecutionBehaviorAttributes
+  @available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  nonisolated(nonsending) final public func tokenCount(for instructions: FoundationModels.Instructions) async throws -> Swift.Int
+  #endif
+  #if compiler(>=5.3) && $AsyncExecutionBehaviorAttributes
+  @available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  nonisolated(nonsending) final public func tokenCount(for tools: [any FoundationModels.Tool]) async throws -> Swift.Int
+  #endif
+  #if compiler(>=5.3) && $AsyncExecutionBehaviorAttributes
+  @available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  nonisolated(nonsending) final public func tokenCount(for schema: FoundationModels.GenerationSchema) async throws -> Swift.Int
+  #endif
+  #if compiler(>=5.3) && $AsyncExecutionBehaviorAttributes
+  @available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  nonisolated(nonsending) final public func tokenCount(for transcriptEntries: some Collection<Transcript.Entry>) async throws -> Swift.Int
+  #endif
+}
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-extension FoundationModels.SystemLanguageModel : nonisolated Observation.Observable {
+extension FoundationModels.SystemLanguageModel {
+  @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
+  @backDeployed(before: iOS 26.4, macOS 26.4, visionOS 26.4)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  final public var contextSize: Swift.Int {
+    get {
+     
+     
+     
+     
+     
+    4096
+  }
+  }
 }
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
@@ -664,7 +662,9 @@ extension FoundationModels.SystemLanguageModel {
 extension FoundationModels.SystemLanguageModel.Adapter {
   public init(fileURL: Foundation.URL) throws
   public init(name: Swift.String) throws
-  public func compile() async throws
+  #if compiler(>=5.3) && $AsyncExecutionBehaviorAttributes
+  @concurrent public func compile() async throws
+  #endif
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -690,16 +690,12 @@ extension FoundationModels.SystemLanguageModel.Adapter {
     case invalidAsset(FoundationModels.SystemLanguageModel.Adapter.AssetError.Context)
     case invalidAdapterName(FoundationModels.SystemLanguageModel.Adapter.AssetError.Context)
     case compatibleAdapterNotFound(FoundationModels.SystemLanguageModel.Adapter.AssetError.Context)
-    #if compiler(>=5.3) && $NonescapableTypes
     public var errorDescription: Swift.String? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var recoverySuggestion: Swift.String? {
       get
     }
-    #endif
   }
 }
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
@@ -803,7 +799,7 @@ public struct Transcript : Swift.Sendable, Swift.Equatable, Swift.RandomAccessCo
     public var description: Swift.String
     public init(name: Swift.String, description: Swift.String, parameters: FoundationModels.GenerationSchema)
     public init(tool: some Tool)
-    public static func == (a: FoundationModels.Transcript.ToolDefinition, b: FoundationModels.Transcript.ToolDefinition) -> Swift.Bool
+    public static func == (lhs: FoundationModels.Transcript.ToolDefinition, rhs: FoundationModels.Transcript.ToolDefinition) -> Swift.Bool
   }
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
   @available(tvOS, unavailable)
@@ -813,9 +809,7 @@ public struct Transcript : Swift.Sendable, Swift.Equatable, Swift.RandomAccessCo
     public var segments: [FoundationModels.Transcript.Segment]
     public var options: FoundationModels.GenerationOptions
     public var responseFormat: FoundationModels.Transcript.ResponseFormat?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(id: Swift.String = UUID().uuidString, segments: [FoundationModels.Transcript.Segment], options: FoundationModels.GenerationOptions = GenerationOptions(), responseFormat: FoundationModels.Transcript.ResponseFormat? = nil)
-    #endif
     public static func == (a: FoundationModels.Transcript.Prompt, b: FoundationModels.Transcript.Prompt) -> Swift.Bool
     @available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
     @available(tvOS, unavailable)
@@ -1086,11 +1080,9 @@ extension Swift.Array : FoundationModels.InstructionsRepresentable where Element
   @_alwaysEmitIntoClient public static func buildEither(second component: some InstructionsRepresentable) -> FoundationModels.Instructions {
     Instructions(component)
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient public static func buildOptional(_ instructions: FoundationModels.Instructions?) -> FoundationModels.Instructions {
     instructions ?? Instructions()
   }
-  #endif
   @_alwaysEmitIntoClient public static func buildLimitedAvailability(_ instructions: some InstructionsRepresentable) -> FoundationModels.Instructions {
     Instructions(instructions)
   }
@@ -1165,11 +1157,9 @@ extension Swift.Array : FoundationModels.PromptRepresentable where Element : Fou
   @_alwaysEmitIntoClient public static func buildEither(second component: some PromptRepresentable) -> FoundationModels.Prompt {
     Prompt(component)
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient public static func buildOptional(_ component: FoundationModels.Prompt?) -> FoundationModels.Prompt {
     component ?? Prompt()
   }
-  #endif
   @_alwaysEmitIntoClient public static func buildLimitedAvailability(_ prompt: some PromptRepresentable) -> FoundationModels.Prompt {
     Prompt(prompt)
   }
@@ -1200,7 +1190,9 @@ public protocol Tool<Arguments, Output> : Swift.Sendable {
   var description: Swift.String { get }
   var parameters: FoundationModels.GenerationSchema { get }
   var includesSchemaInInstructions: Swift.Bool { get }
-  func call(arguments: Self.Arguments) async throws -> Self.Output
+  #if compiler(>=5.3) && $AsyncExecutionBehaviorAttributes
+  @concurrent func call(arguments: Self.Arguments) async throws -> Self.Output
+  #endif
 }
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
@@ -1279,27 +1271,27 @@ extension FoundationModels.Tool where Self.Arguments == Swift.Bool {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct DynamicGenerationSchema : Swift.Sendable {
-  #if compiler(>=5.3) && $NonescapableTypes
+  @available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  public static var null: FoundationModels.DynamicGenerationSchema {
+    get
+  }
   public init(name: Swift.String, description: Swift.String? = nil, properties: [FoundationModels.DynamicGenerationSchema.Property])
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
+  @available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  public init(name: Swift.String, description: Swift.String? = nil, representNilExplicitlyInGeneratedContent explicitNil: Swift.Bool, properties: [FoundationModels.DynamicGenerationSchema.Property])
   public init(name: Swift.String, description: Swift.String? = nil, anyOf choices: [FoundationModels.DynamicGenerationSchema])
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(name: Swift.String, description: Swift.String? = nil, anyOf choices: [Swift.String])
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(arrayOf itemSchema: FoundationModels.DynamicGenerationSchema, minimumElements: Swift.Int? = nil, maximumElements: Swift.Int? = nil)
-  #endif
   public init<Value>(type: Value.Type, guides: [FoundationModels.GenerationGuide<Value>] = []) where Value : FoundationModels.Generable
   public init(referenceTo name: Swift.String)
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   public struct Property {
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(name: Swift.String, description: Swift.String? = nil, schema: FoundationModels.DynamicGenerationSchema, isOptional: Swift.Bool = false)
-    #endif
   }
 }
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
@@ -1324,20 +1316,14 @@ public struct GenerationOptions : Swift.Sendable, Swift.Equatable {
     public static var greedy: FoundationModels.GenerationOptions.SamplingMode {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public static func random(top k: Swift.Int, seed: Swift.UInt64? = nil) -> FoundationModels.GenerationOptions.SamplingMode
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public static func random(probabilityThreshold: Swift.Double, seed: Swift.UInt64? = nil) -> FoundationModels.GenerationOptions.SamplingMode
-    #endif
     public static func == (a: FoundationModels.GenerationOptions.SamplingMode, b: FoundationModels.GenerationOptions.SamplingMode) -> Swift.Bool
   }
   public var sampling: FoundationModels.GenerationOptions.SamplingMode?
   public var temperature: Swift.Double?
   public var maximumResponseTokens: Swift.Int?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(sampling: FoundationModels.GenerationOptions.SamplingMode? = nil, temperature: Swift.Double? = nil, maximumResponseTokens: Swift.Int? = nil)
-  #endif
   public static func == (a: FoundationModels.GenerationOptions, b: FoundationModels.GenerationOptions) -> Swift.Bool
 }
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
@@ -1348,31 +1334,21 @@ public struct GenerationSchema : Swift.Sendable, Swift.Codable, Swift.CustomDebu
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   public struct Property : Swift.Sendable {
-    #if compiler(>=5.3) && $NonescapableTypes
     public init<Value>(name: Swift.String, description: Swift.String? = nil, type: Value.Type, guides: [FoundationModels.GenerationGuide<Value>] = []) where Value : FoundationModels.Generable
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public init<Value>(name: Swift.String, description: Swift.String? = nil, type: Value?.Type, guides: [FoundationModels.GenerationGuide<Value>] = []) where Value : FoundationModels.Generable
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public init<RegexOutput>(name: Swift.String, description: Swift.String? = nil, type: Swift.String.Type, guides: [_StringProcessing.Regex<RegexOutput>] = [])
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public init<RegexOutput>(name: Swift.String, description: Swift.String? = nil, type: Swift.String?.Type, guides: [_StringProcessing.Regex<RegexOutput>] = [])
-    #endif
   }
   public var debugDescription: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(type: any FoundationModels.Generable.Type, description: Swift.String? = nil, properties: [FoundationModels.GenerationSchema.Property])
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
+  @available(iOS 26.4, macOS 26.4, visionOS 26.4, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  public init(type: any FoundationModels.Generable.Type, description: Swift.String? = nil, representNilExplicitlyInGeneratedContent explicitNil: Swift.Bool, properties: [FoundationModels.GenerationSchema.Property])
   public init(type: any FoundationModels.Generable.Type, description: Swift.String? = nil, anyOf choices: [Swift.String])
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(type: any FoundationModels.Generable.Type, description: Swift.String? = nil, anyOf types: [any FoundationModels.Generable.Type])
-  #endif
   public init(root: FoundationModels.DynamicGenerationSchema, dependencies: [FoundationModels.DynamicGenerationSchema]) throws
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
   @available(tvOS, unavailable)
@@ -1389,16 +1365,12 @@ public struct GenerationSchema : Swift.Sendable, Swift.Codable, Swift.CustomDebu
     case duplicateProperty(schema: Swift.String, property: Swift.String, context: FoundationModels.GenerationSchema.SchemaError.Context)
     case emptyTypeChoices(schema: Swift.String, context: FoundationModels.GenerationSchema.SchemaError.Context)
     case undefinedReferences(schema: Swift.String?, references: [Swift.String], context: FoundationModels.GenerationSchema.SchemaError.Context)
-    #if compiler(>=5.3) && $NonescapableTypes
     public var errorDescription: Swift.String? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var recoverySuggestion: Swift.String? {
       get
     }
-    #endif
   }
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
@@ -1456,20 +1428,18 @@ public struct LanguageModelFeedback {
         get
       }
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(category: FoundationModels.LanguageModelFeedback.Issue.Category, explanation: Swift.String? = nil)
-    #endif
   }
 }
+@available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension FoundationModels.LanguageModelSession {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   @discardableResult
   final public func logFeedbackAttachment(sentiment: FoundationModels.LanguageModelFeedback.Sentiment?, issues: [FoundationModels.LanguageModelFeedback.Issue] = [], desiredOutput: FoundationModels.Transcript.Entry? = nil) -> Foundation.Data
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
   @backDeployed(before: iOS 26.1, macOS 26.1, visionOS 26.1)
   @available(tvOS, unavailable)
@@ -1489,8 +1459,6 @@ extension FoundationModels.LanguageModelSession {
       desiredOutput: entry
     )
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
   @backDeployed(before: iOS 26.1, macOS 26.1, visionOS 26.1)
   @available(tvOS, unavailable)
@@ -1512,7 +1480,6 @@ extension FoundationModels.LanguageModelSession {
       desiredOutput: entry
     )
   }
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)

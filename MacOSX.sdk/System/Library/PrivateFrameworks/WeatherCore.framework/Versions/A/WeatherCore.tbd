@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/WeatherCore.framework/Versions/A/WeatherCore'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Weather,WeatherAppSupport,WeatherAppSupportTests,WeatherUnitTests,WeatherAnalytics,WeatherAnalyticsTests,WeatherCore,WeatherCoreTests,weatherd,WeatherDaemon,WeatherDaemonTests,WeatherDiagnosticExtension,WeatherIntents,WeatherAppIntents,WeatherKit,WeatherKitDemo,WeatherKitTests,WeatherMaps,WeatherMapsDemo,WeatherMapsTests,WeatherUI,WeatherUITests,WeatherSettings,WeatherSettingsIntentsExtension,WeatherWidget,WeatherPoster,WeatherUIAutomationTests,Polaris,com.apple.weather.appremoval,WeatherNotifications,WeatherDaemonMemoryTests,nanoweatherd,NanoWeather,NanoWeatherDiagnosticExtension,nanoweatherprefsd,NanoWeatherWidgetsExtension,NanoWeatherKitUI,NanoWeatherKitUICompanion,WeatherInternalExtras,WeatherFace,WeatherMenu,RealityWeatherWidget,RealityWeatherForecastWidgetExtension,Urchin,UrchinKit,UrchinKitUI,UrchinWidgetsExtension,,NewsUI2,NewsUI2Tests,NewsFeed,NewsFeedTests,NewsArticles,NewsArticlesTests,Feldspar,ActionKit,Fitness,FitnessTests,NanoUniverse,SleepLockScreen,SleepHealthUI,Maps,SearchUI,Spotlight,ActivityMonitorApp,PassKitUI,SiriInformationSearch,WorkoutUI ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10AppIntents0A17DependencyManagerC11WeatherCoreE03addE12Dependencies4fromy13TeaFoundation12ResolverType_p_tF', 
                        '_$s10Foundation10URLRequestV11WeatherCoreE23addGeoCountryCodeHeaderyyF', 
                        '_$s10Foundation11FormatStyleP11WeatherCoreAA4DateVABVADE04HourbC0VRszrlE012localizationG08calendar8timeZoneAiA8CalendarV_AA04TimeK0VtFZ', 
@@ -705,6 +702,7 @@ exports:
                        '_$s11WeatherCore10SyncedDataV9Coherence9CRCodableAAMc', '_$s11WeatherCore10SyncedDataV9hashValueSivg', 
                        '_$s11WeatherCore10SyncedDataV9hashValueSivpMV', '_$s11WeatherCore10SyncedDataV9locationsAC9Coherence19CROrderedDictionaryVyAA0C11LocationKeyVAA0cI0VG_tcfC', 
                        '_$s11WeatherCore10SyncedDataV9locationsACSayAA8LocationVG_tcfC', 
+                       '_$s11WeatherCore10SyncedDataV9serialize5using10Foundation0D0VAA0cD19ContextProviderType_p_tKF', 
                        '_$s11WeatherCore10SyncedDataVAA15UniqueMergeableAAMc', '_$s11WeatherCore10SyncedDataVAA15UniqueMergeableAAWP', 
                        '_$s11WeatherCore10SyncedDataVACycfC', '_$s11WeatherCore10SyncedDataVMa', 
                        '_$s11WeatherCore10SyncedDataVMn', '_$s11WeatherCore10SyncedDataVN', 
@@ -957,6 +955,7 @@ exports:
                        '_$s11WeatherCore13SavedLocationO15lastRefreshDate10Foundation0G0VSgvpMV', 
                        '_$s11WeatherCore13SavedLocationO16shortDescription13TeaFoundation05ShortF4Type_pvg', 
                        '_$s11WeatherCore13SavedLocationO16shortDescription13TeaFoundation05ShortF4Type_pvpMV', 
+                       '_$s11WeatherCore13SavedLocationO17locationDataModelAcA0dfG0V_tcfC', 
                        '_$s11WeatherCore13SavedLocationO19locationPreciseNameSSSgvg', 
                        '_$s11WeatherCore13SavedLocationO19locationPreciseNameSSSgvpMV', 
                        '_$s11WeatherCore13SavedLocationO21locationSecondaryNameSSSgvg', 
@@ -2477,6 +2476,7 @@ exports:
                        '_$s11WeatherCore20CoherenceDataManagerC06syncedD15ContextProviderAcA06SynceddgH4Type_p_tcfCTj', 
                        '_$s11WeatherCore20CoherenceDataManagerC06syncedD15ContextProviderAcA06SynceddgH4Type_p_tcfCTq', 
                        '_$s11WeatherCore20CoherenceDataManagerC06syncedD15ContextProviderAcA06SynceddgH4Type_p_tcfc', 
+                       '_$s11WeatherCore20CoherenceDataManagerC09getSyncedD017cachedIfAvailableAA0gD0VSgSb_tF', 
                        '_$s11WeatherCore20CoherenceDataManagerC09getSyncedD0AA0gD0VSgyF', 
                        '_$s11WeatherCore20CoherenceDataManagerC10locationID2bySSSgSi_tYaF', 
                        '_$s11WeatherCore20CoherenceDataManagerC10locationID2bySSSgSi_tYaFTu', 
@@ -2867,6 +2867,8 @@ exports:
                        '_$s11WeatherCore21SavedLocationsManagerC14removeLocation2byySS_tYaF', 
                        '_$s11WeatherCore21SavedLocationsManagerC14removeLocation2byySS_tYaFTu', 
                        '_$s11WeatherCore21SavedLocationsManagerC14removeObserveryyAA0cdeG0_pF', 
+                       '_$s11WeatherCore21SavedLocationsManagerC20handleExternalChange_8fromNanoyAA10SyncedDataV_SbtYaF', 
+                       '_$s11WeatherCore21SavedLocationsManagerC20handleExternalChange_8fromNanoyAA10SyncedDataV_SbtYaFTu', 
                        '_$s11WeatherCore21SavedLocationsManagerC21addLocationWithChecks_22locationDisplayContextyAA0G0V_AA0gkL0VSgtYaKF', 
                        '_$s11WeatherCore21SavedLocationsManagerC21addLocationWithChecks_22locationDisplayContextyAA0G0V_AA0gkL0VSgtYaKFTu', 
                        '_$s11WeatherCore21SavedLocationsManagerC22reloadFromLocalStorageyyF', 
@@ -3379,6 +3381,8 @@ exports:
                        '_$s11WeatherCore24CoherenceDataManagerTypeP012removeSyncedD0yyFTq', 
                        '_$s11WeatherCore24CoherenceDataManagerTypeP04makeD04from10Foundation0D0VSgAA06SyncedD0V_tFTj', 
                        '_$s11WeatherCore24CoherenceDataManagerTypeP04makeD04from10Foundation0D0VSgAA06SyncedD0V_tFTq', 
+                       '_$s11WeatherCore24CoherenceDataManagerTypeP09getSyncedD017cachedIfAvailableAA0hD0VSgSb_tFTj', 
+                       '_$s11WeatherCore24CoherenceDataManagerTypeP09getSyncedD017cachedIfAvailableAA0hD0VSgSb_tFTq', 
                        '_$s11WeatherCore24CoherenceDataManagerTypeP09getSyncedD0AA0hD0VSgyFTj', 
                        '_$s11WeatherCore24CoherenceDataManagerTypeP09getSyncedD0AA0hD0VSgyFTq', 
                        '_$s11WeatherCore24CoherenceDataManagerTypeP10locationID2bySSSgSi_tYaFTj', 
@@ -3877,6 +3881,9 @@ exports:
                        '_$s11WeatherCore25SavedLocationsManagerTypeP14removeLocation2byySS_tYaFTq', 
                        '_$s11WeatherCore25SavedLocationsManagerTypeP14removeObserveryyAA0cdeH0_pFTj', 
                        '_$s11WeatherCore25SavedLocationsManagerTypeP14removeObserveryyAA0cdeH0_pFTq', 
+                       '_$s11WeatherCore25SavedLocationsManagerTypeP20handleExternalChange_8fromNanoyAA10SyncedDataV_SbtYaKFTj', 
+                       '_$s11WeatherCore25SavedLocationsManagerTypeP20handleExternalChange_8fromNanoyAA10SyncedDataV_SbtYaKFTjTu', 
+                       '_$s11WeatherCore25SavedLocationsManagerTypeP20handleExternalChange_8fromNanoyAA10SyncedDataV_SbtYaKFTq', 
                        '_$s11WeatherCore25SavedLocationsManagerTypeP21addLocationWithChecks_22locationDisplayContextyAA0H0V_AA0hlM0VSgtYaKFTj', 
                        '_$s11WeatherCore25SavedLocationsManagerTypeP21addLocationWithChecks_22locationDisplayContextyAA0H0V_AA0hlM0VSgtYaKFTjTu', 
                        '_$s11WeatherCore25SavedLocationsManagerTypeP21addLocationWithChecks_22locationDisplayContextyAA0H0V_AA0hlM0VSgtYaKFTq', 
@@ -3890,6 +3897,8 @@ exports:
                        '_$s11WeatherCore25SavedLocationsManagerTypeP23fetchLocationDataModelsSayAA0hI5ModelVGyYaFTq', 
                        '_$s11WeatherCore25SavedLocationsManagerTypePAAE10dataStatusAA0cde4DataH0Ovg', 
                        '_$s11WeatherCore25SavedLocationsManagerTypePAAE10dataStatusAA0cde4DataH0OvpMV', 
+                       '_$s11WeatherCore25SavedLocationsManagerTypePAAE20handleExternalChange_8fromNanoyAA10SyncedDataV_SbtYaKF', 
+                       '_$s11WeatherCore25SavedLocationsManagerTypePAAE20handleExternalChange_8fromNanoyAA10SyncedDataV_SbtYaKFTu', 
                        '_$s11WeatherCore25SavedLocationsManagerTypeTL', '_$s11WeatherCore25StubPPTWeatherDataManagerC05setupcE03for16defaultConditionySDyAC16CoordinateStringV0A6Daemon0J4CodeOG_AKtF', 
                        '_$s11WeatherCore25StubPPTWeatherDataManagerC05setupcE03fory0A6Daemon13ConditionCodeO_tF', 
                        '_$s11WeatherCore25StubPPTWeatherDataManagerC05setupcE0yyF', 
@@ -4335,6 +4344,8 @@ exports:
                        '_$s11WeatherCore28StubPPTSavedLocationsManagerC14removeLocation2byySS_tYaF', 
                        '_$s11WeatherCore28StubPPTSavedLocationsManagerC14removeLocation2byySS_tYaFTu', 
                        '_$s11WeatherCore28StubPPTSavedLocationsManagerC14removeObserveryyAA05SavedefH0_pF', 
+                       '_$s11WeatherCore28StubPPTSavedLocationsManagerC20handleExternalChangeyyAA10SyncedDataVYaKF', 
+                       '_$s11WeatherCore28StubPPTSavedLocationsManagerC20handleExternalChangeyyAA10SyncedDataVYaKFTu', 
                        '_$s11WeatherCore28StubPPTSavedLocationsManagerC21addLocationWithChecks_22locationDisplayContextyAA0H0V_AA0hlM0VSgtYaKF', 
                        '_$s11WeatherCore28StubPPTSavedLocationsManagerC21addLocationWithChecks_22locationDisplayContextyAA0H0V_AA0hlM0VSgtYaKFTu', 
                        '_$s11WeatherCore28StubPPTSavedLocationsManagerC21addLocationWithChecksyyAA0H0VKF', 
@@ -5005,6 +5016,8 @@ exports:
                        '_$s11WeatherCore33StubPPTSavedSingleLocationManagerC14savedLocationsSayAA05SavedF0OGvg', 
                        '_$s11WeatherCore33StubPPTSavedSingleLocationManagerC14savedLocationsSayAA05SavedF0OGvpMV', 
                        '_$s11WeatherCore33StubPPTSavedSingleLocationManagerC14savedLocationsSayAA05SavedF0OGvs', 
+                       '_$s11WeatherCore33StubPPTSavedSingleLocationManagerC20handleExternalChangeyyAA10SyncedDataVYaKF', 
+                       '_$s11WeatherCore33StubPPTSavedSingleLocationManagerC20handleExternalChangeyyAA10SyncedDataVYaKFTu', 
                        '_$s11WeatherCore33StubPPTSavedSingleLocationManagerC22reloadFromLocalStorageyyF', 
                        '_$s11WeatherCore33StubPPTSavedSingleLocationManagerC22reloadFromLocalStorageyyYaF', 
                        '_$s11WeatherCore33StubPPTSavedSingleLocationManagerC22reloadFromLocalStorageyyYaFTu', 
@@ -5131,6 +5144,8 @@ exports:
                        '_$s11WeatherCore35StubAutomationSavedLocationsManagerC14removeLocation2byySS_tYaF', 
                        '_$s11WeatherCore35StubAutomationSavedLocationsManagerC14removeLocation2byySS_tYaFTu', 
                        '_$s11WeatherCore35StubAutomationSavedLocationsManagerC14removeObserveryyAA0efgI0_pF', 
+                       '_$s11WeatherCore35StubAutomationSavedLocationsManagerC20handleExternalChangeyyAA10SyncedDataVYaKF', 
+                       '_$s11WeatherCore35StubAutomationSavedLocationsManagerC20handleExternalChangeyyAA10SyncedDataVYaKFTu', 
                        '_$s11WeatherCore35StubAutomationSavedLocationsManagerC21addLocationWithChecks_22locationDisplayContextyAA0I0V_AA0imN0VSgtYaKF', 
                        '_$s11WeatherCore35StubAutomationSavedLocationsManagerC21addLocationWithChecks_22locationDisplayContextyAA0I0V_AA0imN0VSgtYaKFTu', 
                        '_$s11WeatherCore35StubAutomationSavedLocationsManagerC21addLocationWithChecksyyAA0I0VKF', 

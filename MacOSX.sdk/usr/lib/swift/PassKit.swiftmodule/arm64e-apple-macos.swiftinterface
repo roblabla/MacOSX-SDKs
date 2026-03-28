@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-macos26.2 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPassKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1642.3.4.1 -module-name PassKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-macos26.4 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPassKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1642.5.17.2 -module-name PassKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import LocalAuthentication
 @_exported import PassKit
 import Swift
@@ -146,16 +146,12 @@ extension PassKit.PKStoredValuePassBalance {
   }
 }
 extension PassKit.PKPaymentRequest {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12.0, iOS 15.0, *)
   @available(watchOS, unavailable)
   public static func paymentCouponCodeInvalidError(localizedDescription: Swift.String? = nil) -> any Swift.Error
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12.0, iOS 15.0, *)
   @available(watchOS, unavailable)
   public static func paymentCouponCodeExpiredError(localizedDescription: Swift.String? = nil) -> any Swift.Error
-  #endif
   @available(macOS 14.0, iOS 17.0, *)
   public var applePayLaterAvailability: PassKit.PKPaymentRequest.ApplePayLaterAvailability {
     get
@@ -176,22 +172,18 @@ extension PassKit.PKPaymentRequest {
       }
     }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, *)
   @available(tvOS, unavailable)
   public var merchantCategoryCode: PassKit.PKPaymentRequest.MerchantCategoryCode? {
     get
     set
   }
-  #endif
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, *)
   @available(tvOS, unavailable)
   public struct MerchantCategoryCode : Swift.Codable, Swift.Hashable, Swift.RawRepresentable, Swift.Sendable, Swift.LosslessStringConvertible {
     public init(rawValue: Swift.Int16)
     public let rawValue: Swift.Int16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(_ description: Swift.String)
-    #endif
     public var description: Swift.String {
       get
     }
@@ -245,12 +237,10 @@ extension PassKit.PKDisbursementRequest {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var supportedRegions: [Foundation.Locale.Region]? {
     get
     set
   }
-  #endif
   convenience public init(merchantIdentifier: Swift.String, currency: Foundation.Locale.Currency, region: Foundation.Locale.Region, supportedNetworks: [PassKit.PKPaymentNetwork], merchantCapabilities: PassKit.PKMerchantCapability, summaryItems: [PassKit.PKPaymentSummaryItem])
 }
 @available(iOS 18.0, *)
@@ -258,12 +248,10 @@ extension PassKit.PKDisbursementRequest {
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 extension PassKit.PKIdentityNationalIDCardDescriptor {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var region: Foundation.Locale.Region? {
     get
     set
   }
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, *)
 extension PassKit.PKPaymentRequest.ApplePayLaterAvailability.Reason : Swift.Equatable {}

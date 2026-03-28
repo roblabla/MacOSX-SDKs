@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriIntentEvents.framework/Versions/A/SiriIntentEvents'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16SiriIntentEvents0B10EventStoreV04findC08intentId9eventType9startDate03endL05limit8reversedSayAA0bD0CGSSSg_AA0bdJ0OSg10Foundation0L0VSgAUSiSgSbtF', 
                        '_$s16SiriIntentEvents0B10EventStoreV3log5eventyAA0bD0C_tF', 
                        '_$s16SiriIntentEvents0B10EventStoreV9temporaryACyFZ', '_$s16SiriIntentEvents0B10EventStoreVACycfC', 

@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage'
 current-version: 7
 compatibility-version: 1.0.1
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CIDetectorAccuracy, _CIDetectorAccuracyHigh, _CIDetectorAccuracyLow, 
                        _CIDetectorAspectRatio, _CIDetectorBetterEyeLocs, _CIDetectorDetectDiacritics, 
                        _CIDetectorExtraCharacters, _CIDetectorEyeBlink, _CIDetectorFocalLength, 
@@ -198,7 +196,7 @@ exports:
                        CIRectangleFeature.bounds, CIRectangleFeature.topLeft, CIRectangleFeature.topRight, 
                        CIRenderDestination._priv, CIRenderInfo._priv, CIRenderTask._priv, 
                        CISampler._priv, CIVector._count, CIVector._u ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '$ld$install_name$os10.10$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 
                        '$ld$install_name$os10.11$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 
                        '$ld$install_name$os10.4$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 

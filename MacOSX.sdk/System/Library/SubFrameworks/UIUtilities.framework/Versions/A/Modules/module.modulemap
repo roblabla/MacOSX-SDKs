@@ -1,4 +1,4 @@
-framework module UIUtilities [system] [extern_c] {
+framework module UIUtilities [system] {
   umbrella "Headers"
 
   export *

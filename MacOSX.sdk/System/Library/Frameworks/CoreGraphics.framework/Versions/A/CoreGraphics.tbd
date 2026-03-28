@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics'
-current-version: 1965.2.3
+current-version: 1965.4.5
 compatibility-version: 64
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.4$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.5$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.6$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
@@ -2229,7 +2227,7 @@ exports:
                        _CGPDFContentStreamGetXObjectStream, _CGPDFContentStreamRelease, 
                        _CGPDFContentStreamRetain, _CGPDFContextAddAnnotation, _CGPDFContextAddCatalogEntry, 
                        _CGPDFContextAddDestinationAtPoint, _CGPDFContextAddDocumentMetadata, 
-                       _CGPDFContextAddPDFXInfo, _CGPDFContextAddStructureTreeRootChild, 
+                       _CGPDFContextAddInfoEntry, _CGPDFContextAddPDFXInfo, _CGPDFContextAddStructureTreeRootChild, 
                        _CGPDFContextBeginDrawingHiddenText, _CGPDFContextBeginMarkedContentSequence, 
                        _CGPDFContextBeginObjectReference, _CGPDFContextBeginPage, 
                        _CGPDFContextBeginStructuralMarkedContentSequence, _CGPDFContextBeginTag, 
@@ -3285,7 +3283,7 @@ exports:
                        __Z18CGPreferencesCheckI37CGImageMarkAllowTemplateMethodIntegerENT_10ResultTypeEv, 
                        __Z18CGPreferencesCheckI37CGPDFPageLayoutSimpleSelectionEnabledENT_10ResultTypeEv, 
                        __Z18CGPreferencesCheckI38CGPDFDocumentPageResourcesCacheLoggingENT_10ResultTypeEv ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CGContextDrawPDFDocument, _CGContextGetDefaultUserSpaceToDeviceSpaceTransform, 
                        _CGFontCreateWithPlatformFont, _CGFontRenderingGetFontSmoothingDisabled, 
                        _CGPDFDocumentGetArtBox, _CGPDFDocumentGetBleedBox, _CGPDFDocumentGetCropBox, 

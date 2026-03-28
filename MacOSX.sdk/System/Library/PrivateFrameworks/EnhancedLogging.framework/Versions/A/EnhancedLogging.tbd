@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/EnhancedLogging.framework/Versions/A/EnhancedLogging'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15EnhancedLogging11MachServiceO16bugSessionStatusyA2CmFWC', 
                        '_$s15EnhancedLogging11MachServiceO8rawValueACSgSS_tcfC', 
                        '_$s15EnhancedLogging11MachServiceO8rawValueSSvg', '_$s15EnhancedLogging11MachServiceO8rawValueSSvpMV', 
@@ -63,6 +63,8 @@ exports:
                        '_$s15EnhancedLogging12TargetDeviceV13idsIdentifierSSSgvpMV', 
                        '_$s15EnhancedLogging12TargetDeviceV13marketingNameSSSgvg', 
                        '_$s15EnhancedLogging12TargetDeviceV13marketingNameSSSgvpMV', 
+                       '_$s15EnhancedLogging12TargetDeviceV14deviceHomeNameSSSgvg', 
+                       '_$s15EnhancedLogging12TargetDeviceV14deviceHomeNameSSSgvpMV', 
                        '_$s15EnhancedLogging12TargetDeviceV14enclosureColorSSSgvg', 
                        '_$s15EnhancedLogging12TargetDeviceV14enclosureColorSSSgvpMV', 
                        '_$s15EnhancedLogging12TargetDeviceV16isPrimaryHomeHubSbvg', 
@@ -72,7 +74,7 @@ exports:
                        '_$s15EnhancedLogging12TargetDeviceV24dictionaryRepresentationACSgSDySSypG_tcfC', 
                        '_$s15EnhancedLogging12TargetDeviceV24dictionaryRepresentationSDySSypGvg', 
                        '_$s15EnhancedLogging12TargetDeviceV24dictionaryRepresentationSDySSypGvpMV', 
-                       '_$s15EnhancedLogging12TargetDeviceV2eeoiySbAC_ACtFZ', '_$s15EnhancedLogging12TargetDeviceV2id13idsIdentifier12serialNumber10deviceType0J5Class07productK016userAssignedName09marketingP00J5Color09enclosureR06status7isLocal0U14PrimaryHomeHubACSS_SSSgAqC0dK0OS3SA3qC6StatusOS2btcfC', 
+                       '_$s15EnhancedLogging12TargetDeviceV2eeoiySbAC_ACtFZ', '_$s15EnhancedLogging12TargetDeviceV2id13idsIdentifier12serialNumber10deviceType0J5Class07productK016userAssignedName09marketingP00J5Color09enclosureR06status7isLocal0U14PrimaryHomeHub0jxP0ACSS_SSSgArC0dK0OS3SA3rC6StatusOS2bARtcfC', 
                        '_$s15EnhancedLogging12TargetDeviceV2idSSvg', '_$s15EnhancedLogging12TargetDeviceV2idSSvpMV', 
                        '_$s15EnhancedLogging12TargetDeviceV4hash4intoys6HasherVz_tF', 
                        '_$s15EnhancedLogging12TargetDeviceV6StatusO11unavailableyA2EmFWC', 

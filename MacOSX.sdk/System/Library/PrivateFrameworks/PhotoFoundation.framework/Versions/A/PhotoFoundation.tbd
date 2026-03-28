@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotoFoundation.framework/Versions/A/PhotoFoundation'
-current-version: 821.0.120
+current-version: 841.0.101
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s15PhotoFoundation18PhotosFeatureFlagsO016isAnyAlchemistV2D7EnabledSbvgZ', 
                        '_$s15PhotoFoundation18PhotosFeatureFlagsO016isAnyAlchemistV2D7EnabledSbvpZMV', 
                        '_$s15PhotoFoundation18PhotosFeatureFlagsO0C14PosterBackdropyA2CmFWC', 
@@ -50,21 +48,21 @@ exports:
                        _PFFloatNan, _PFFullMethodName, _PFIsCamera, _PFIsCameraAppAnyPlatform, 
                        _PFIsCameraMessagesApp, _PFIsLockScreenCamera, _PFIsMacPhotosApp, 
                        _PFIsMessagesApp, _PFIsPhotosAppAnyPlatform, _PFIsPhotosMessagesApp, 
-                       _PFIsPhotosPicker, _PFIsPreferences, _PFIsSpotlight, _PFIsTVPhotosApp, 
-                       _PFIsVisionCameraApp, _PFIsVisionPhotosApp, _PFIsiOSPhotosApp, 
-                       _PFKTraceSpatialPhotoCameraTechniqueChanged, _PFKTraceSpatialPhotoCameraTransformsChanged, 
-                       _PFKTraceSpatialPhotoGyroFilter, _PFKTraceSpatialPhotoInvalidateCamera, 
-                       _PFKTraceSpatialPhotoRenderEnd, _PFKTraceSpatialPhotoRenderStart, 
-                       _PFKTraceSpatialPhotoSetCameraTechnique, _PFKTraceSpatialPhotoSetNeedsRender, 
-                       _PFLargestSalientAspectFilledCropRect, _PFLocalizedStringWithValidatedFormat, 
-                       _PFMap, _PFMapDictionary, _PFMapIndexes, _PFMethodNotImplementedException, 
-                       _PFMicrosecondAccurateStringFromDate, _PFNilObjectDescription, 
-                       _PFOSVariantHasInternalDiagnostics, _PFOSVariantHasInternalUI, 
-                       _PFObjc_classIsSubclassOfClass, _PFObjc_enumerateClassNamesForImageHeader, 
-                       _PFObjc_enumerateSubclassesForHeader, _PFObjc_implementingClassForInstanceMethod, 
-                       _PFObjc_implementsClassMethod, _PFObjc_implementsInstanceMethod, 
-                       _PFPhotoFoundationBinaryImageUUID, _PFPhotosBackendLogSubsystem, 
-                       _PFPhotosUILogSubsystem, _PFProcessIsLaunchedToExecuteTests, 
+                       _PFIsPhotosPicker, _PFIsPhotosUITestClient, _PFIsPreferences, 
+                       _PFIsSiri, _PFIsSpotlight, _PFIsTVPhotosApp, _PFIsVisionCameraApp, 
+                       _PFIsVisionPhotosApp, _PFIsiOSPhotosApp, _PFKTraceSpatialPhotoCameraTechniqueChanged, 
+                       _PFKTraceSpatialPhotoCameraTransformsChanged, _PFKTraceSpatialPhotoGyroFilter, 
+                       _PFKTraceSpatialPhotoInvalidateCamera, _PFKTraceSpatialPhotoRenderEnd, 
+                       _PFKTraceSpatialPhotoRenderStart, _PFKTraceSpatialPhotoSetCameraTechnique, 
+                       _PFKTraceSpatialPhotoSetNeedsRender, _PFLargestSalientAspectFilledCropRect, 
+                       _PFLocalizedStringWithValidatedFormat, _PFMap, _PFMapDictionary, 
+                       _PFMapIndexes, _PFMethodNotImplementedException, _PFMicrosecondAccurateStringFromDate, 
+                       _PFNilObjectDescription, _PFOSVariantHasInternalDiagnostics, 
+                       _PFOSVariantHasInternalUI, _PFObjc_classIsSubclassOfClass, 
+                       _PFObjc_enumerateClassNamesForImageHeader, _PFObjc_enumerateSubclassesForHeader, 
+                       _PFObjc_implementingClassForInstanceMethod, _PFObjc_implementsClassMethod, 
+                       _PFObjc_implementsInstanceMethod, _PFPhotoFoundationBinaryImageUUID, 
+                       _PFPhotosBackendLogSubsystem, _PFPhotosUILogSubsystem, _PFProcessIsLaunchedToExecuteTests, 
                        _PFRectByFlippingHorizontallyInRect, _PFRectIsNull, _PFRectIsValid, 
                        _PFRectNull, _PFRectUnit, _PFReduce, _PFReduceF, _PFScaleFactorForMaximumPixelCount, 
                        _PFSizeLargerThanSize, _PFSizeNull, _PFSizeWithAspectRatioFillingSize, 

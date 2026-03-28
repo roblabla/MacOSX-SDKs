@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriNLUOverrides.framework/Versions/A/SiriNLUOverrides'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12SiriNLUTypes0A27_Nlu_Internal_ParseOverrideV0A12NLUOverrides0a1_c1_d1_F0ADMc', 
                        '_$s12SiriNLUTypes0A27_Nlu_Internal_ParseOverrideV0A12NLUOverrides0a1_c1_d1_F0ADWP', 
                        '_$s12SiriNLUTypes0A27_Nlu_Internal_ParseOverrideV0A12NLUOverridesE010serializedF5Value10Foundation4DataVvg', 

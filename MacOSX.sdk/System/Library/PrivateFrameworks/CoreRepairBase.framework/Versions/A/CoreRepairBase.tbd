@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ arm64-macos, arm64e-macos ]
+targets:         [ arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreRepairBase.framework/Versions/A/CoreRepairBase'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ '_$s14CoreRepairBase13AssetAudienceO012fieldServiceB0yA2CmFWC', 
                        '_$s14CoreRepairBase13AssetAudienceO11macOSTooOldyA2CmFWC', 
                        '_$s14CoreRepairBase13AssetAudienceO12fieldServiceyA2CmFWC', 
@@ -91,6 +91,8 @@ exports:
                        '_$s14CoreRepairBase23CRBaseBootIntentManagerCMa', '_$s14CoreRepairBase23CRBaseBootIntentManagerCMn', 
                        '_$s14CoreRepairBase23CRBaseBootIntentManagerCMo', '_$s14CoreRepairBase23CRBaseBootIntentManagerCMu', 
                        '_$s14CoreRepairBase23CRBaseBootIntentManagerCN', '_$s14CoreRepairBase23CRBaseBootIntentManagerCfD', 
+                       '_$s14CoreRepairBase5NVRAMC15readNvramStringySSSgSSFZ', '_$s14CoreRepairBase5NVRAMC17deleteNvramStringyySSKFZ', 
+                       '_$s14CoreRepairBase5NVRAMC20setBodegaNvramString_5valueySS_SStKFZ', 
                        '_$s14CoreRepairBase5NVRAMC21readBodegaNvramStringySSSgSSFZ', 
                        '_$s14CoreRepairBase5NVRAMC23deleteBodegaNvramStringyySSKFZ', 
                        '_$s14CoreRepairBase5NVRAMCMa', '_$s14CoreRepairBase5NVRAMCMm', 
@@ -105,7 +107,7 @@ exports:
                        _DERParseInteger, _DERParseInteger64, _DERParseInteger64Signed, 
                        _DERParseIntegerSigned, _DERParseSequence, _DERParseSequenceContent, 
                        _DERParseSequenceContentToObject, _DERParseSequenceToObject, 
-                       __logHandler, _handleForCategory ]
+                       __logHandler, __verboseLogHandler, _handleForCategory ]
     objc-classes:    [ CRBaseUtils, CRBootIntentController, CRFDRRetryController, 
                        CRFDRUtils, CRInputDeviceController, CRInputDeviceManager, 
                        CRLASController, CRNVRAMController, CRSmcController, CRUserDefaults, 

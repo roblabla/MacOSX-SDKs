@@ -8,12 +8,12 @@
 #ifndef __PEOPLEPICKERC__
 #define __PEOPLEPICKERC__
 
+#include <CoreFoundation/CoreFoundation.h>
+#include <AddressBook/ABAddressBookC.h>
+
 #if defined(__cplusplus)
 extern "C" {
 #endif
-
-#include <CoreFoundation/CoreFoundation.h>
-#include <AddressBook/ABAddressBookC.h>
 
 #if TARGET_OS_OSX
 #include <Carbon/Carbon.h>

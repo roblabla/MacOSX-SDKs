@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/WorkoutKit.framework/Versions/A/WorkoutKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation11MeasurementV10WorkoutKitSo11NSUnitPowerCRszrlE10hkQuantitySo10HKQuantityCvg', 
                        '_$s10Foundation11MeasurementV10WorkoutKitSo11NSUnitPowerCRszrlE10hkQuantitySo10HKQuantityCvpMV', 
                        '_$s10Foundation11MeasurementV10WorkoutKitSo11NSUnitSpeedCRszrlE10hkQuantitySo10HKQuantityCvg', 

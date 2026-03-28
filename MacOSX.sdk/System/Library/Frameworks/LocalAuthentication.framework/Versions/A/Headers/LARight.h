@@ -7,7 +7,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class LAAuthenticationRequirement;
-@protocol LARightDelegate;
 
 #pragma mark -
 
@@ -22,11 +21,11 @@ typedef NS_ENUM(NSInteger, LARightState) {
     LARightStateAuthorizing = 1,
 
     /// @brief Authorization was granted
-    /// @discussion This can be achieved by succesful authorization.
+    /// @discussion This can be achieved by successful authorization.
     LARightStateAuthorized = 2,
 
     /// @brief Authorization was rejected.
-    /// @discussion This can be caused by several reasons. For example requirements were not satisified or user rejects to authorize.
+    /// @discussion This can be caused by several reasons. For example requirements were not satisfied or user rejects to authorize.
     LARightStateNotAuthorized = 3,
 } NS_SWIFT_NAME(LARight.State) API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos, tvos);
 
@@ -41,7 +40,7 @@ API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos, tvos)
 /// @brief Provides the current authorization state of the @c LARight instance
 @property (nonatomic, readonly) LARightState state;
 
-/// @brief An application-supplied integer that can be used to identify right intances. The default value is @c 0.
+/// @brief An application-supplied integer that can be used to identify right instances. The default value is @c 0.
 @property (nonatomic) NSInteger tag;
 
 #pragma mark - Initialization
@@ -51,7 +50,7 @@ API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos, tvos)
 /// @return @c LARight instance
 - (instancetype)init;
 
-/// @brief Constructs a right that will be granted only when the given @c LAAuthenticationRequirement is statisfied.
+/// @brief Constructs a right that will be granted only when the given @c LAAuthenticationRequirement is satisfied.
 /// @param requirement Requirement that needs to be satisfied to authorize the right
 /// @return @c LARight instance
 - (instancetype)initWithRequirement:(LAAuthenticationRequirement *)requirement;

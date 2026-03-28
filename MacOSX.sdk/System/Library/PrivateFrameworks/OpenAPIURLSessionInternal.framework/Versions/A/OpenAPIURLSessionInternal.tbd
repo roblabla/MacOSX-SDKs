@@ -1,14 +1,20 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/OpenAPIURLSessionInternal.framework/Versions/A/OpenAPIURLSessionInternal'
-current-version: 1.0.2
+current-version: 1.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s25OpenAPIURLSessionInternal19URLSessionTransportV0a10APIRuntimeC006ClientE0AAMc', 
+                       '_$s25OpenAPIURLSessionInternal19URLSessionTransportV13ConfigurationV22HTTPBodyProcessingModeV15platformDefaultAGvgZ', 
+                       '_$s25OpenAPIURLSessionInternal19URLSessionTransportV13ConfigurationV22HTTPBodyProcessingModeV15platformDefaultAGvpZMV', 
+                       '_$s25OpenAPIURLSessionInternal19URLSessionTransportV13ConfigurationV22HTTPBodyProcessingModeV8bufferedAGvgZ', 
+                       '_$s25OpenAPIURLSessionInternal19URLSessionTransportV13ConfigurationV22HTTPBodyProcessingModeV8bufferedAGvpZMV', 
+                       '_$s25OpenAPIURLSessionInternal19URLSessionTransportV13ConfigurationV22HTTPBodyProcessingModeVMa', 
+                       '_$s25OpenAPIURLSessionInternal19URLSessionTransportV13ConfigurationV22HTTPBodyProcessingModeVMn', 
+                       '_$s25OpenAPIURLSessionInternal19URLSessionTransportV13ConfigurationV22HTTPBodyProcessingModeVN', 
+                       '_$s25OpenAPIURLSessionInternal19URLSessionTransportV13ConfigurationV7session22httpBodyProcessingModeAESo12NSURLSessionC_AE08HTTPBodyjK0VtcfC', 
                        '_$s25OpenAPIURLSessionInternal19URLSessionTransportV13ConfigurationV7sessionAESo12NSURLSessionC_tcfC', 
                        '_$s25OpenAPIURLSessionInternal19URLSessionTransportV13ConfigurationV7sessionSo12NSURLSessionCvM', 
                        '_$s25OpenAPIURLSessionInternal19URLSessionTransportV13ConfigurationV7sessionSo12NSURLSessionCvg', 

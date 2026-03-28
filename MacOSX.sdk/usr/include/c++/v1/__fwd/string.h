@@ -19,8 +19,11 @@
 
 _LIBCPP_BEGIN_NAMESPACE_STD
 
+// This only marks the base template as deprecated, not its specializations.
 template <class _CharT>
-struct _LIBCPP_TEMPLATE_VIS char_traits;
+struct _LIBCPP_DEPRECATED_(
+    "char_traits<T> for T not equal to char, wchar_t, char8_t, char16_t or char32_t is non-standard and is provided "
+    "for a temporary period. It will be removed in a future release, so please migrate off of it.") char_traits;
 template <>
 struct char_traits<char>;
 
@@ -40,7 +43,7 @@ struct char_traits<wchar_t>;
 #endif
 
 template <class _CharT, class _Traits = char_traits<_CharT>, class _Allocator = allocator<_CharT> >
-class _LIBCPP_TEMPLATE_VIS basic_string;
+class basic_string;
 
 using string = basic_string<char>;
 

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/_MusicKitInternal_SwiftUI.framework/Versions/A/_MusicKitInternal_SwiftUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16MusicKitInternal0A24LibraryPlaylistViewModelC01_abC8_SwiftUIE19coverArtworkRecipesSayAA05CoverK6RecipeVGvg', 
                        '_$s16MusicKitInternal0A24LibraryPlaylistViewModelC01_abC8_SwiftUIE19coverArtworkRecipesSayAA05CoverK6RecipeVGvpMV', 
                        '_$s16MusicKitInternal0A24LibraryPlaylistViewModelC01_abC8_SwiftUIE21rawCoverArtworkRecipeSSSgvM', 

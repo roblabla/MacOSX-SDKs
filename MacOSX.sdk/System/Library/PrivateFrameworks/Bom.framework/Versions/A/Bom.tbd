@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Bom.framework/Versions/A/Bom'
 current-version: 195
 compatibility-version: 2
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BOMAppleDoubleADPathToPath, _BOMAppleDoubleCopyHeader, _BOMAppleDoubleIsADFile, 
                        _BOMAppleDoublePathToADPath, _BOMAppleDoubleReadHeader, _BOMAppleDoubleSize, 
                        _BOMAppleDoubleWriteHeader, _BOMArchFlagForFile, _BOMArchFlagForFileWithSys, 
@@ -94,9 +92,10 @@ exports:
                        _BOMCopierSourceEntryIsStreamed, _BOMCopierSourceEntryModeToType, 
                        _BOMCopierSourceEntryNew, _BOMCopierSourceEntryNewFromAppleArchive, 
                        _BOMCopierSourceEntryNewFromDataArchive, _BOMCopierSourceEntryNewFromFSObject, 
-                       _BOMCopierSourceEntryNewFromFTSENT, _BOMCopierSourceEntryNewFromLibarchive, 
-                       _BOMCopierSourceEntryNewFromPath, _BOMCopierSourceEntryNewFromResourceFork, 
-                       _BOMCopierSourceEntryRead, _BOMCopierSourceEntrySeek, _BOMCopierSourceEntrySetAccessTime, 
+                       _BOMCopierSourceEntryNewFromFTSAgent, _BOMCopierSourceEntryNewFromFTSENT, 
+                       _BOMCopierSourceEntryNewFromLibarchive, _BOMCopierSourceEntryNewFromPath, 
+                       _BOMCopierSourceEntryNewFromResourceFork, _BOMCopierSourceEntryRead, 
+                       _BOMCopierSourceEntrySeek, _BOMCopierSourceEntrySetAccessTime, 
                        _BOMCopierSourceEntrySetAppleDoubleTarget, _BOMCopierSourceEntrySetData, 
                        _BOMCopierSourceEntrySetGroupID, _BOMCopierSourceEntrySetHonorsSetuid, 
                        _BOMCopierSourceEntrySetMode, _BOMCopierSourceEntrySetModificationTime, 

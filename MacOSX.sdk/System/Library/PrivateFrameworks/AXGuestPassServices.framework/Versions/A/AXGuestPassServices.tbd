@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AXGuestPassServices.framework/Versions/A/AXGuestPassServices'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s19AXGuestPassServices0aB14SharedInstanceAA0aB7ServiceCvg', 
                        '_$s19AXGuestPassServices0aB15NetworkListenerC6listenyyF', 
                        '_$s19AXGuestPassServices0aB15NetworkListenerCACycfC', '_$s19AXGuestPassServices0aB15NetworkListenerCACycfc', 

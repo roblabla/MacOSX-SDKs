@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CryptoTokenKit.framework/Versions/A/CryptoTokenKit'
-current-version: 805.60.5
+current-version: 805.100.44
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/usr/lib/swift/libswiftCryptoTokenKit.dylib$1.0.0$1$11.0$26.2$_$sSo11TKSmartCardC14CryptoTokenKitE11withSessionyxxyKcKlF$', 
                        '$ld$previous$/usr/lib/swift/libswiftCryptoTokenKit.dylib$1.0.0$1$11.0$26.2$_$sSo11TKSmartCardC14CryptoTokenKitE4send3ins2p12p24data2le5replyys5UInt8V_A2L10Foundation4DataVSgSiSgyAP_s6UInt16Vs5Error_pSgtctF$', 
                        '$ld$previous$/usr/lib/swift/libswiftCryptoTokenKit.dylib$1.0.0$1$11.0$26.2$_$sSo11TKSmartCardC14CryptoTokenKitE4send3ins2p12p24data2les6UInt16V2sw_10Foundation4DataV8responsets5UInt8V_A2rOSgSiSgtKF$', 
@@ -103,8 +101,8 @@ exports:
                        TKTokenKeychainContents, TKTokenKeychainItem, TKTokenKeychainKey, 
                        TKTokenPasswordAuthOperation, TKTokenSession, TKTokenSmartCardPINAuthOperation, 
                        TKTokenWatcher, TKTokenWatcherTokenInfo ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     objc-classes:    [ TKAhpTools ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     objc-classes:    [ TKSmartCardSlotNFCSession, TKSmartCardTokenRegistrationManager ]
 ...

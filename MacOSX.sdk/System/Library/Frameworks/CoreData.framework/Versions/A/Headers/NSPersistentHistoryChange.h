@@ -1,7 +1,7 @@
 /*
     NSPersistentHistoryChange.h
     Core Data
-    Copyright (c) 2016-2025, Apple Inc.
+    Copyright (c) 2016-2026, Apple Inc.
     All rights reserved.
 */
 

@@ -14,47 +14,45 @@
 ///
 /// ## Creating an Objective-C Downloader Extension
 /// Xcode’s Background Download extension template generates Swift code when you select either the “Apple-Hosted, Managed” option or the “Self-Hosted, Managed” option, but you can easily switch to Objective-C instead if you prefer. To do so, follow these steps:
-/// 1. Remove `BackgroundDownloadHandler.swift`.
-/// 2. Create `DownloaderExtension.h` with the following contents:
-///   ### Apple Hosting
-///   ```objc
-///   #import <StoreKit/StoreKit.h>
+/// 1.	Remove `BackgroundDownloadHandler.swift`.
+/// 2.	Create `DownloaderExtension.h` with the following contents:
+/// 	### Apple Hosting
+/// 	```objc
+/// 	#import <StoreKit/StoreKit.h>
 ///
-///   \@interface DownloaderExtension : NSObject <SKDownloaderExtension>
+/// 	@interface DownloaderExtension : NSObject <SKDownloaderExtension>
 ///
-///   @end
-///   ```
+/// 	@end
+/// 	```
 ///
-///   ### Self Hosting
-///   ```objc
-///   #import <BackgroundAssets/BackgroundAssets.h>
+/// 	### Self Hosting
+/// 	```objc
+/// 	#import <BackgroundAssets/BackgroundAssets.h>
 ///
-///   \@interface DownloaderExtension : NSObject <BAManagedDownloaderExtension>
+/// 	@interface DownloaderExtension : NSObject <BAManagedDownloaderExtension>
 ///
-///   @end
-///   ```
-///   
-///   (Remove any backslash characters that may be rendered in the above code snippets.)
+/// 	@end
+/// 	```
+/// 3.	Create `DownloaderExtension.m` with the following contents:
+/// 	```objc
+/// 	#import "DownloaderExtension.h"
 ///
-/// 3. Create `DownloaderExtension.m` with the following contents:
-///   ```objc
-///   #import "DownloaderExtension.h"
+/// 	@implementation DownloaderExtension
 ///
-///   @implementation DownloaderExtension
+/// 	- (BOOL)shouldDownloadAssetPack:(BAAssetPack *)assetPack {
+/// 	    // Use this method to filter out asset packs that the system would otherwise download automatically. You can also remove this method entirely if you just want to rely on the default download behavior.
+/// 	    return true;
+/// 	}
 ///
-///   - (BOOL)shouldDownloadAssetPack:(BAAssetPack *)assetPack {
-///       // Use this method to filter out asset packs that the system would otherwise download automatically. You can also remove this method entirely if you just want to rely on the default download behavior.
-///       return true;
-///   }
-///
-///   @end
-///   ```
-/// 4. Add `DownloaderExtension.m` to your extension’s target.
-/// 5. Add the following snippet inside your extension’s `Info.plist`’s `EXAppExtensionAttributes` dictionary:
-///   ```plist
-///   <key>EXPrincipalClass</key>
-///   <string>DownloaderExtension</string>
-///   ```
+/// 	@end
+/// 	```
+/// 4.	Add `DownloaderExtension.m` to your extension’s target.
+/// 5.	Add the following snippet inside your extension’s `Info.plist`’s `EXAppExtensionAttributes` dictionary:
+/// 	```plist
+/// 	<key>EXPrincipalClass</key>
+/// 	<string>DownloaderExtension</string>
+/// 	```
+/// 6.	Check that the downloader extension’s target explicitly links the Background Assets framework under Frameworks and Libraries in the target editor’s General tab. If it doesn’t, then click to add an item to the list. Select “BackgroundAssets.framework” under Apple SDKs, then click Add.
 API_AVAILABLE(ios(26), macos(26), tvos(26), visionos(26))
 API_UNAVAILABLE(watchos)
 NS_REFINED_FOR_SWIFT

@@ -90,7 +90,7 @@ BG_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(macos) API_UNAVAI
 /// - Important: Register each task identifier only once. The system kills the app on the second registration of the same task identifier.
 - (BOOL)registerForTaskWithIdentifier:(NSString *)identifier
                            usingQueue:(nullable dispatch_queue_t)queue
-                        launchHandler:(void (^)(__kindof BGTask *task))launchHandler NS_EXTENSION_UNAVAILABLE("Only the host application may register launch handlers");
+                        launchHandler:(void (^)(__kindof BGTask *task))launchHandler;
 
 /// Submit a previously registered background task for execution.
 ///

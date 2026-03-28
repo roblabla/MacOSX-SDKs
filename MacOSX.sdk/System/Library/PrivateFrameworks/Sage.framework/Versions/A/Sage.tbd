@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Sage.framework/Versions/A/Sage'
-current-version: 209.29
+current-version: 222.35.5
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s19VisualPromptOptions4Sage0aB10ThreadablePTl', '_$s20SummarizationOptions4Sage10ThreadablePTl', 
                        '_$s21ClassificationOptions4Sage10ThreadablePTl', '_$s25ThreadVisualPromptOptions4Sage0bC10ThreadablePTl', 
                        '_$s26GenerativeModelsFoundation0aB7LoggingO4SageE13summarization2os6LoggerVvgZ', 

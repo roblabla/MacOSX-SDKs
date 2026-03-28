@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/NetworkExtension.framework/Versions/A/NetworkExtension'
 swift-abi-version: 7
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/Network.framework/Versions/A/Network' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s16NetworkExtension05NEAppB13ConfigurationC0B10Foundation03AppbD0AAMc', 
                        '_$s16NetworkExtension05NEAppB13ConfigurationC6accept10connectionSbSo15NSXPCConnectionC_tFTj', 
                        '_$s16NetworkExtension05NEAppB13ConfigurationC6accept10connectionSbSo15NSXPCConnectionC_tFTq', 
@@ -619,16 +616,17 @@ exports:
                        NEFilterProvider, NEFilterProviderConfiguration, NEFilterRemediationVerdict, 
                        NEFilterReport, NEFilterRule, NEFilterSettings, NEFilterSocketFlow, 
                        NEFilterSource, NEFilterVerdict, NEFlowDivertFileHandle, NEFlowMetaData, 
-                       NEFlowNexus, NEHasher, NEHelper, NEHotspot, NEHotspotAuthenticationProviderHost, 
-                       NEHotspotConfiguration, NEHotspotConfigurationManager, NEHotspotEAPSettings, 
-                       NEHotspotEvaluationProviderHost, NEHotspotHS20Settings, NEHotspotHelper, 
-                       NEHotspotHelperCommand, NEHotspotHelperResponse, NEHotspotNetwork, 
-                       NEIKEv2ASN1DNIdentifier, NEIKEv2AddressAttribute, NEIKEv2AddressIdentifier, 
-                       NEIKEv2AppVersionAttribute, NEIKEv2AuthenticationProtocol, 
-                       NEIKEv2ChildSAConfiguration, NEIKEv2ChildSAProposal, NEIKEv2ConfigurationAttribute, 
-                       NEIKEv2ConfigurationMessage, NEIKEv2CryptoKitHPKE, NEIKEv2CryptoKitSPAKE2Plus, 
-                       NEIKEv2CustomData, NEIKEv2DNSDomainAttribute, NEIKEv2EAPProtocol, 
-                       NEIKEv2ESPSPI, NEIKEv2EncryptedKeyIDIdentifier, NEIKEv2EncryptionProtocol, 
+                       NEFlowNexus, NEGuardProxyManager, NEHasher, NEHelper, NEHotspot, 
+                       NEHotspotAuthenticationProviderHost, NEHotspotConfiguration, 
+                       NEHotspotConfigurationManager, NEHotspotEAPSettings, NEHotspotEvaluationProviderHost, 
+                       NEHotspotHS20Settings, NEHotspotHelper, NEHotspotHelperCommand, 
+                       NEHotspotHelperResponse, NEHotspotNetwork, NEIKEv2ASN1DNIdentifier, 
+                       NEIKEv2AddressAttribute, NEIKEv2AddressIdentifier, NEIKEv2AppVersionAttribute, 
+                       NEIKEv2AuthenticationProtocol, NEIKEv2ChildSAConfiguration, 
+                       NEIKEv2ChildSAProposal, NEIKEv2ConfigurationAttribute, NEIKEv2ConfigurationMessage, 
+                       NEIKEv2CryptoKitHPKE, NEIKEv2CryptoKitSPAKE2Plus, NEIKEv2CustomData, 
+                       NEIKEv2DNSDomainAttribute, NEIKEv2EAPProtocol, NEIKEv2ESPSPI, 
+                       NEIKEv2EncryptedKeyIDIdentifier, NEIKEv2EncryptionProtocol, 
                        NEIKEv2FQDNIdentifier, NEIKEv2IKESAConfiguration, NEIKEv2IKESAProposal, 
                        NEIKEv2IKESPI, NEIKEv2IPv4AddressAttribute, NEIKEv2IPv4DHCPAttribute, 
                        NEIKEv2IPv4DNSAttribute, NEIKEv2IPv4NetmaskAttribute, NEIKEv2IPv4PCSCFAttribute, 
@@ -671,7 +669,7 @@ exports:
                        NEVPNProtocol, NEVPNProtocolIKEv2, NEVPNProtocolIPSec, NEVPNProtocolL2TP, 
                        NEVPNProtocolPPP, NEVPNProtocolPPTP, NEVPNProtocolPlugin, 
                        NEVirtualInterfaceParameters, NWTLSParameters ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CertTypeFormat, _NEGetRefFromConfigProfileUUID, _NEImportKeychainPayload, 
                        _NEKeychainSystemRemoveWithPersistentID, _NEVerifyDesignatedRequirement, 
                        _kNEProfilePayloadVPNAppMappingDomain ]

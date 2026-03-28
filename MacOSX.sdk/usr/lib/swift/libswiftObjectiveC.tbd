@@ -1,16 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftObjectiveC.dylib'
-current-version: 951.1
+current-version: 951.7
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ '_$s10ObjectiveC8ObjCBoolV6_values4Int8VvM', '_$s10ObjectiveC8ObjCBoolV6_values4Int8Vvg', 
                        '_$s10ObjectiveC8ObjCBoolV6_values4Int8VvpMV', '_$s10ObjectiveC8ObjCBoolV6_values4Int8Vvs' ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$@rpath/libswiftObjectiveC.dylib$$1$10.9$10.14.4$$', 
                        '_$s10ObjectiveC13ObjCClassListV12makeIteratorAC0F0CyF', '_$s10ObjectiveC13ObjCClassListV8IteratorC4nextyXlXpSgyFTj', 
                        '_$s10ObjectiveC13ObjCClassListV8IteratorC4nextyXlXpSgyFTq', 
@@ -57,7 +55,7 @@ exports:
                        '_$sSo8NSObjectC10ObjectiveCE9hashValueSivg', '_$sSo8NSObjectC10ObjectiveCE9hashValueSivpMV', 
                        '_$sSo8NSObjectCSH10ObjectiveCMc', '_$sSo8NSObjectCSQ10ObjectiveCMc', 
                        '_$sSo8NSObjectCs7CVarArg10ObjectiveCMc', '__swift_FORCE_LOAD_$_swiftObjectiveC' ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10ObjectiveC8ObjCBoolV6_valueSbvM', '_$s10ObjectiveC8ObjCBoolV6_valueSbvg', 
                        '_$s10ObjectiveC8ObjCBoolV6_valueSbvpMV', '_$s10ObjectiveC8ObjCBoolV6_valueSbvs' ]
 ...

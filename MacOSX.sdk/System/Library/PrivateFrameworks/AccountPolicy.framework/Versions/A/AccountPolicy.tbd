@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccountPolicy.framework/Versions/A/AccountPolicy'
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/AccountPolicy.framework/Frameworks/CFAccountPolicy.framework/Versions/A/CFAccountPolicy' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _APCreateError, _APCreateErrorWithEvalDetails, _kAPErrorDomain, 
                        _kAPMessageDataKeyCacheContents, _kAPMessageDataKeyEvaluationDetails, 
                        _kAPMessageDataKeyExpiresIn, _kAPMessageDataKeyFailureReason, 
@@ -41,10 +41,10 @@ exports:
                        APPolicySet, APRequest, AccountPolicy ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccountPolicy.framework/Frameworks/CFAccountPolicy.framework/Versions/A/CFAccountPolicy'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _APAttributesUsedByPolicies, _APAuthenticationAllowed, _APCategoryAndIdentifierForLegacyPolicyName, 
                        _APCopyLocalizedEvaluationDetails, _APCopyLocalizedPasswordContentSummary, 
                        _APInvalidateCacheForPolicySet, _APLegacyPoliciesWithPolicySet, 

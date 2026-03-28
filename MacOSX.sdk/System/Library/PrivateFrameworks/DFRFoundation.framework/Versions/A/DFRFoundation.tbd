@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DFRFoundation.framework/Versions/A/DFRFoundation'
 current-version: 293.1.1
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _DFRAccessibilityRemoteUIElementsChangedNotification, _DFRControlStripPlayPauseButtonIdentifier, 
                        _DFRCopyAttributes, _DFRCopyCustomization, _DFRCreateCAContext, 
                        _DFRDSetDimmingStep, _DFRDisplayStreamCreate, _DFRElementAnimationWhitePoint, 

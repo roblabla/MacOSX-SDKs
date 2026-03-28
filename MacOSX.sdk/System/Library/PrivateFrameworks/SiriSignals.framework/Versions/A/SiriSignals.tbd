@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriSignals.framework/Versions/A/SiriSignals'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s11SiriSignals08AudioAppB0C09candidateD9BundleIds12signalValues4appsACSaySSG_SDySSAA11SignalValueOGSayAA0D8MetadataCGtcfC', 
                        '_$s11SiriSignals08AudioAppB0C09candidateD9BundleIdsSaySSGvg', 
                        '_$s11SiriSignals08AudioAppB0C09candidateD9BundleIdsSaySSGvpMV', 
@@ -386,7 +386,9 @@ exports:
                        '_$s11SiriSignals16NowPlayingSignalVAA012AppSelectionE9ComponentAAWP', 
                        '_$s11SiriSignals16NowPlayingSignalVAA0E9ProvidingAAMc', '_$s11SiriSignals16NowPlayingSignalVAA0E9ProvidingAAWP', 
                        '_$s11SiriSignals16NowPlayingSignalVMa', '_$s11SiriSignals16NowPlayingSignalVMn', 
-                       '_$s11SiriSignals16NowPlayingSignalVN', '_$s11SiriSignals16SignalRepositoryC13hourlyPrewarmyyFTj', 
+                       '_$s11SiriSignals16NowPlayingSignalVN', '_$s11SiriSignals16SignalRepositoryC13hourlyPrewarm10DASExpiredySbyc_tFTj', 
+                       '_$s11SiriSignals16SignalRepositoryC13hourlyPrewarm10DASExpiredySbyc_tFTq', 
+                       '_$s11SiriSignals16SignalRepositoryC13hourlyPrewarmyyFTj', 
                        '_$s11SiriSignals16SignalRepositoryC13hourlyPrewarmyyFTq', 
                        '_$s11SiriSignals16SignalRepositoryC19mainPrewarmingQueueSo17OS_dispatch_queueCvgZ', 
                        '_$s11SiriSignals16SignalRepositoryC19mainPrewarmingQueueSo17OS_dispatch_queueCvpZMV', 
@@ -395,6 +397,8 @@ exports:
                        '_$s11SiriSignals16SignalRepositoryC23startAppInstallListeneryyFTj', 
                        '_$s11SiriSignals16SignalRepositoryC23startAppInstallListeneryyFTq', 
                        '_$s11SiriSignals16SignalRepositoryC6sharedACvgZ', '_$s11SiriSignals16SignalRepositoryC6sharedACvpZMV', 
+                       '_$s11SiriSignals16SignalRepositoryC7prewarm23matchingCachingStrategy15userInteractive10DASExpiredyShyAA0cgH6OptionOG_S2byctFTj', 
+                       '_$s11SiriSignals16SignalRepositoryC7prewarm23matchingCachingStrategy15userInteractive10DASExpiredyShyAA0cgH6OptionOG_S2byctFTq', 
                        '_$s11SiriSignals16SignalRepositoryC7prewarm23matchingCachingStrategy15userInteractiveyShyAA0cgH6OptionOG_SbtFTj', 
                        '_$s11SiriSignals16SignalRepositoryC7prewarm23matchingCachingStrategy15userInteractiveyShyAA0cgH6OptionOG_SbtFTq', 
                        '_$s11SiriSignals16SignalRepositoryC7prewarm23matchingCachingStrategyyShyAA0cgH6OptionOG_tFTj', 

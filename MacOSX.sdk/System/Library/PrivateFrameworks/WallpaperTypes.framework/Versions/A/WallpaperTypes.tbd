@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WallpaperTypes.framework/Versions/A/WallpaperTypes'
-current-version: 245.2.1
+current-version: 245.4.8
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14WallpaperTypes011ScreenSaverA19ChoiceConfigurationV10CodingKeysO11stringValueAESgSS_tcfC', 
                        '_$s14WallpaperTypes011ScreenSaverA19ChoiceConfigurationV10CodingKeysO11stringValueSSvg', 
                        '_$s14WallpaperTypes011ScreenSaverA19ChoiceConfigurationV10CodingKeysO11stringValueSSvpMV', 
@@ -901,8 +901,7 @@ exports:
                        '_$s14WallpaperTypes11ContextMenuVMa', '_$s14WallpaperTypes11ContextMenuVMn', 
                        '_$s14WallpaperTypes11ContextMenuVN', '_$s14WallpaperTypes11ContextMenuVSEAAMc', 
                        '_$s14WallpaperTypes11ContextMenuVSQAAMc', '_$s14WallpaperTypes11ContextMenuVSeAAMc', 
-                       '_$s14WallpaperTypes11ImageFolderV10imageFilesSayAA0C4FileVGvg', 
-                       '_$s14WallpaperTypes11ImageFolderV10imageFilesSayAA0C4FileVGvpMV', 
+                       '_$s14WallpaperTypes11ImageFolderV04findC5FilesSayAA0C4FileVGyKF', 
                        '_$s14WallpaperTypes11ImageFolderV11originalURL10Foundation0F0Vvg', 
                        '_$s14WallpaperTypes11ImageFolderV11originalURL10Foundation0F0VvpMV', 
                        '_$s14WallpaperTypes11ImageFolderV13localizedNameSSvg', '_$s14WallpaperTypes11ImageFolderV13localizedNameSSvpMV', 
@@ -916,8 +915,10 @@ exports:
                        '_$s14WallpaperTypes11ImageFolderV2id9dateAdded11originalURL0H15URLBookmarkData05cloneI0AC10Foundation4UUIDV_AI4DateVAI0I0VAI0K0VSgAOSgtcfC', 
                        '_$s14WallpaperTypes11ImageFolderV4fromACs7Decoder_p_tKcfC', 
                        '_$s14WallpaperTypes11ImageFolderV6encode2toys7Encoder_p_tKF', 
+                       '_$s14WallpaperTypes11ImageFolderV8cloneURL10Foundation0F0VSgvM', 
                        '_$s14WallpaperTypes11ImageFolderV8cloneURL10Foundation0F0VSgvg', 
                        '_$s14WallpaperTypes11ImageFolderV8cloneURL10Foundation0F0VSgvpMV', 
+                       '_$s14WallpaperTypes11ImageFolderV8cloneURL10Foundation0F0VSgvs', 
                        '_$s14WallpaperTypes11ImageFolderV9dateAdded10Foundation4DateVvg', 
                        '_$s14WallpaperTypes11ImageFolderV9dateAdded10Foundation4DateVvpMV', 
                        '_$s14WallpaperTypes11ImageFolderVMa', '_$s14WallpaperTypes11ImageFolderVMn', 
@@ -1301,8 +1302,10 @@ exports:
                        '_$s14WallpaperTypes9ImageFileV2idSSvg', '_$s14WallpaperTypes9ImageFileV2idSSvpMV', 
                        '_$s14WallpaperTypes9ImageFileV4fromACs7Decoder_p_tKcfC', 
                        '_$s14WallpaperTypes9ImageFileV6encode2toys7Encoder_p_tKF', 
+                       '_$s14WallpaperTypes9ImageFileV7copyURL10Foundation0F0VSgvM', 
                        '_$s14WallpaperTypes9ImageFileV7copyURL10Foundation0F0VSgvg', 
                        '_$s14WallpaperTypes9ImageFileV7copyURL10Foundation0F0VSgvpMV', 
+                       '_$s14WallpaperTypes9ImageFileV7copyURL10Foundation0F0VSgvs', 
                        '_$s14WallpaperTypes9ImageFileV9dateAdded10Foundation4DateVvg', 
                        '_$s14WallpaperTypes9ImageFileV9dateAdded10Foundation4DateVvpMV', 
                        '_$s14WallpaperTypes9ImageFileV9dateAdded11originalURL0G15URLBookmarkData04copyH027originatingBundleIdentifier0lM4NameAC10Foundation4DateV_AJ0H0VAJ0J0VSgANSgSSSgAStcfC', 

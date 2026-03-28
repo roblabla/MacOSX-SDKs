@@ -31,7 +31,7 @@ CT_EXPORT const CFStringRef kCTFontWeightTrait CT_AVAILABLE(macos(10.5), ios(3.2
 /*!
     @defined    kCTFontWidthTrait
     @abstract   Dictionary key to access the width (condense/expand) trait value.
-    @discussion Use this key to access the normalized proportion trait from the font traits dictionary. This value corresponds to the relative inter-glyph spacing for a given font. The value returned is a CFNumberRef representing a float between -1.0 and 1.0. The value of 0.0 corresponds to regular glyph spacing while negative values represent condensed glyph spacing.
+    @discussion Use this key to access the normalized proportion trait from the font traits dictionary. This value corresponds to the design width of the font, which is usually related to the overall width of glyphs in a font relative to their height (and the 'wdth' axis for variable fonts). The value is a CFNumberRef representing a float between -1.0 and 1.0. The value of 0.0 corresponds to a normal width, negative values correspond to a condensed width, and positive values correspond to an expanded width.
 */
 CT_EXPORT const CFStringRef kCTFontWidthTrait CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!

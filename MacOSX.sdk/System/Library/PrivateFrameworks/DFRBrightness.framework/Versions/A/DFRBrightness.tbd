@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DFRBrightness.framework/Versions/A/DFRBrightness'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _DFRBrightnessClientCopyProperty, _DFRBrightnessClientCreate, 
                        _DFRBrightnessClientDisplaySetDimmingStep, _DFRBrightnessClientDisplaySetDimmingStepWithOptions, 
                        _DFRBrightnessClientDisplayTurnOff, _DFRBrightnessClientDisplayTurnOffWithPeriod, 

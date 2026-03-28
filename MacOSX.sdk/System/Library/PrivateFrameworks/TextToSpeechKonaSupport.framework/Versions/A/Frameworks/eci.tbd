@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TextToSpeechKonaSupport.framework/Versions/Current/Frameworks/eci.dylib'
 current-version: 0
 compatibility-version: 0
@@ -29,7 +29,7 @@ exports:
                        __ZTS21ETImsgSoundFileStatus, __ZTS24ETImsgSetPhonemeIndicies, 
                        __ZTS26ETImsgSoundFileInsertIndex, __ZTS31ETImsgSoundFileSetIndexCallback, 
                        __ZTS5EList, __ZTS9EIterator, __ZTS9EListIter, __ZTSN15ETImessageQueue5QueueE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AudiotoETIencoding, _ETItoAudioencoding, _MBCSConverter, 
                        _UnicodeConverter, __Z11setECIerrorlP14oldECIInstData, __Z12eciTraceTextPKcPvllz, 
                        __Z13eci2RealWorldi13ECIVoiceParami, __Z13realWorld2ecii13ECIVoiceParamiii, 

@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/ImageCaptureCore.framework/Versions/A/ImageCaptureCore'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ICCameraDeviceCanAcceptPTPCommands, _ICCameraDeviceCanDeleteAllFiles, 
                        _ICCameraDeviceCanDeleteOneFile, _ICCameraDeviceCanReceiveFile, 
                        _ICCameraDeviceCanSyncClock, _ICCameraDeviceCanTakePicture, 
@@ -26,7 +24,7 @@ exports:
                        _ICTransportTypeTCPIP, _ICTransportTypeUSB, _ICTruncateAfterSuccessfulDownload ]
     objc-classes:    [ ICCameraDevice, ICCameraFile, ICCameraFolder, ICCameraItem, 
                        ICDevice, ICDeviceBrowser ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ICADevicesFrameworkPath, _ICButtonTypeCopy, _ICButtonTypeMail, 
                        _ICButtonTypePrint, _ICButtonTypeScan, _ICButtonTypeTransfer, 
                        _ICButtonTypeWeb, _ICLocalizedStatusNotificationKey, _ICRawExtension, 
@@ -43,7 +41,7 @@ exports:
                        ICScannerFunctionalUnit, ICScannerFunctionalUnitDocumentFeeder, 
                        ICScannerFunctionalUnitFlatbed, ICScannerFunctionalUnitNegativeTransparency, 
                        ICScannerFunctionalUnitPositiveTransparency, ICScannerImageRep ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _ICAuthorizationStatusAuthorized, _ICAuthorizationStatusDenied, 
                        _ICAuthorizationStatusNotDetermined, _ICAuthorizationStatusRestricted, 
                        _ICTransportTypeExFAT ]

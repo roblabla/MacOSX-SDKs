@@ -1,9 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreMotionAlgorithms.framework/Versions/A/CoreMotionAlgorithms'
-current-version: 3064.0.10
+current-version: 3072.0.46
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__110__back_refIcEE, __ZTINSt3__111__alternateIcEE, 
@@ -35,8 +34,7 @@ exports:
                        __ZTSNSt3__121__empty_non_own_stateIcEE, __ZTSNSt3__123__match_any_but_newlineIcEE, 
                        __ZTSNSt3__126__end_marked_subexpressionIcEE, __ZTSNSt3__128__begin_marked_subexpressionIcEE, 
                        __ZTSNSt3__16__loopIcEE, __ZTSNSt3__16__nodeIcEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ CMAAltimeterData, CMADeviceMotion, CMADeviceMotionVisionFusionPlayer, 
                        CMAPeerState, CMAPencilFusion, CMAPencilFusionResult, CMAPosition, 
                        CMAPrecisionFindingManager, CMARange, CMAWatchOrientation ]

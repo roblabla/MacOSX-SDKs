@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/RoomPlan.framework/Versions/A/RoomPlan'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s8RoomPlan08CapturedA0V10ConfidenceO2eeoiySbAE_AEtFZ', 
                        '_$s8RoomPlan08CapturedA0V10ConfidenceO3lowyA2EmFWC', '_$s8RoomPlan08CapturedA0V10ConfidenceO4fromAEs7Decoder_p_tKcfC', 
                        '_$s8RoomPlan08CapturedA0V10ConfidenceO4hash4intoys6HasherVz_tF', 

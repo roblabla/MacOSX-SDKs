@@ -1,14 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/QuickLookUI.framework/Versions/A/QuickLookUI'
 current-version: 0
 swift-abi-version: 7
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/QuickLook.framework/Versions/A/QuickLook' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '$ld$previous$/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz$$1$1.0$12.0$$', 
                        _QLDisplayBundleDisplayStateCurrentEDRStrengthKey, _QLDisplayBundleDisplayStateCurrentPageKey, 
                        _QLDisplayBundleDisplayStateCurrentScrollKey, _QLDisplayBundleDisplayStateCurrentTimeKey, 

@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IMSharedUI.framework/Versions/A/IMSharedUI'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _IMAnonymizeContentAndContacts, _IMAnonymizeContentAndContactsDidChangeNotification, 
                        _IMAttachmentLogSubtype, _IMAudioSessionControllerSessionNotificationOptionsKey, 
                        _IMAudioSessionControllerSessionOptionsWillChangeNotification, 

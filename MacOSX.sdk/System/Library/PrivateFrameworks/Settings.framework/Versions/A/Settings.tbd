@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Settings.framework/Versions/A/Settings'
-current-version: 224.1.3
+current-version: 224.4.3
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation3URLV8SettingsE26relatedAppBundleIdentifierSSSgyF', 
                        '_$s12ExtensionKit4RoleV8SettingsE7sidebarACvgZ', '_$s4Body8Settings01_B23ExperiencePluginLoadingPTl', 
                        '_$s4Body8Settings0B10ExperiencePTl', '_$s7Content8Settings0b10ExperienceA0PTl', 

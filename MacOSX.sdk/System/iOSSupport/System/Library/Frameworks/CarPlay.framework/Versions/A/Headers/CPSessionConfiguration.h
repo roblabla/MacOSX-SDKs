@@ -37,6 +37,12 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
 
 @property (nonatomic, weak) id<CPSessionConfigurationDelegate> delegate;
 
+/**
+ The connected CarPlay system supports video playback.
+ @note Video playback will remain supported throughout the session but the availability of video playback may change at any time.
+ */
+@property (nonatomic, readonly) BOOL supportsVideoPlayback API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(tvos, visionos) API_UNAVAILABLE(macos, watchos);
+
 @end
 
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)

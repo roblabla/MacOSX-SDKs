@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleMediaServicesUIPaymentSheets.framework/Versions/A/AppleMediaServicesUIPaymentSheets'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s33AppleMediaServicesUIPaymentSheets19PrimaryTextColorKeyV12defaultValue7SwiftUI0H0VvMZ', 
                        '_$s33AppleMediaServicesUIPaymentSheets19PrimaryTextColorKeyV12defaultValue7SwiftUI0H0VvgZ', 
                        '_$s33AppleMediaServicesUIPaymentSheets19PrimaryTextColorKeyV12defaultValue7SwiftUI0H0VvpZMV', 

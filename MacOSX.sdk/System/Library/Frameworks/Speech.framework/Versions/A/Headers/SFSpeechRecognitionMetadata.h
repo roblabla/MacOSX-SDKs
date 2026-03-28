@@ -13,7 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The metadata of speech in the audio of a speech recognition request.
  */
-API_AVAILABLE(ios(14.5), macos(11.3), tvos(18))
+API_AVAILABLE(ios(14.5), macos(11.3))
+API_UNAVAILABLE(tvos)
 @interface SFSpeechRecognitionMetadata : NSObject <NSCopying, NSSecureCoding>
 
 /**

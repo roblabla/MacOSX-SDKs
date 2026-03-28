@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UserActivity.framework/Versions/A/UserActivity'
 current-version: 551
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _UAAlwaysAdvertise, _UABestAppSuggestionManagerServiceName, 
                        _UAContinuityErrorDomain, _UACreateUserActivityDataDoNotEncodeFileURLs, 
                        _UAResumableActivitiesManagerServiceName, _UASharedPasteboardAUXServiceName, 
@@ -43,8 +41,7 @@ exports:
                        UASharedPasteboardManager, UASharedPasteboardTypeInfo, UAUserActivity, 
                        UAUserActivityInfo, UAUserActivityManager, UAUserActivityProxy ]
 reexports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __LSUserActivityContainsFileProviderURLKey, __LSUserActivityContainsUnsynchronizedCloudDocsKey, 
                        __LSUserActivityOptionInvalidateAfterFetchKey ]
 ...

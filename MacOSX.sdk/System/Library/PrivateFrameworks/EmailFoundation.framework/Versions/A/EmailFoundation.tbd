@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/EmailFoundation.framework/Versions/A/EmailFoundation'
-current-version: 3864.255.41
+current-version: 3864.255.181
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s15EmailFoundation5EventV16debugDescriptionSSvg', '_$s15EmailFoundation5EventV16debugDescriptionSSvpMV', 
                        '_$s15EmailFoundation5EventV2eeoiySbAC_ACtFZ', '_$s15EmailFoundation5EventV4dataSDySSAC5ValueOGvM', 
                        '_$s15EmailFoundation5EventV4dataSDySSAC5ValueOGvg', '_$s15EmailFoundation5EventV4dataSDySSAC5ValueOGvpMV', 
@@ -42,13 +40,17 @@ exports:
                        '_$s15EmailFoundation8EFFutureC10isFinishedSbvg', '_$s15EmailFoundation8EFFutureC10isFinishedSbvpMV', 
                        '_$s15EmailFoundation8EFFutureC11asAnyObjectyyXlSgxFZ', '_$s15EmailFoundation8EFFutureC11isCancelledSbvg', 
                        '_$s15EmailFoundation8EFFutureC11isCancelledSbvpMV', '_$s15EmailFoundation8EFFutureC3map2on9transformACyqd__GSo11EFScheduler_p_qd__xctlF', 
+                       '_$s15EmailFoundation8EFFutureC4joinyACySayxGGSayACyxGGFZ', 
                        '_$s15EmailFoundation8EFFutureC4then2on5blockACyqd__GSo11EFScheduler_p_AGxctlF', 
-                       '_$s15EmailFoundation8EFFutureC6always2on5blockACyxGXDSo11EFScheduler_p_yyctF', 
+                       '_$s15EmailFoundation8EFFutureC5async10completionyys6ResultOyxs5Error_pGYbc_tF', 
+                       '_$s15EmailFoundation8EFFutureC5chainyACyxGSayAEGFZ', '_$s15EmailFoundation8EFFutureC6always2on5blockACyxGXDSo11EFScheduler_p_yyctF', 
                        '_$s15EmailFoundation8EFFutureC6result10beforeDatex0B00F0V_tKF', 
                        '_$s15EmailFoundation8EFFutureC6result11withTimeoutxSd_tKF', 
                        '_$s15EmailFoundation8EFFutureC6resultxyKF', '_$s15EmailFoundation8EFFutureC7asValueyxSgyXlSgFZ', 
+                       '_$s15EmailFoundation8EFFutureC7combineyACySayxGGSayACyxGGFZ', 
                        '_$s15EmailFoundation8EFFutureC7onError0D05blockACyxGXDSo11EFScheduler_p_ys0E0_pctF', 
                        '_$s15EmailFoundation8EFFutureC7recover2on5blockACyqd__GSo11EFScheduler_p_AGs5Error_pctlF', 
+                       '_$s15EmailFoundation8EFFutureC8sequenceyACySayxGGSayACyxGGFZ', 
                        '_$s15EmailFoundation8EFFutureC9onSuccess0D05blockACyxGXDSo11EFScheduler_p_yxctF', 
                        '_$s15EmailFoundation8EFFutureCMa', '_$s15EmailFoundation8EFFutureCMn', 
                        '_$s15EmailFoundation8EFFutureCMo', '_$s15EmailFoundation8EFFutureCMu', 
@@ -86,9 +88,9 @@ exports:
                        _EFLogRegisterStateCaptureBlock, _EFMarkFileAsPurgeable, _EFMarkFileAsPurgeableFD, 
                        _EFMurmurHash3Data, _EFMurmurHash3Mix, _EFMurmurHash3String, 
                        _EFNonContainerizedHomeDirectory, _EFNumbersAreEqual, _EFObjectsAreEqual, 
-                       _EFPerformSyncWithProtectedDataAvailability, _EFPostUTF8FormData, 
-                       _EFPriorityDesignatorKey, _EFProductName, _EFProtectedDataAvailable, 
-                       _EFProtectedDataAvailableInState, _EFPublicErrorInfoKey, _EFRegisterContentProtectionObserver, 
+                       _EFPostUTF8FormData, _EFPriorityDesignatorKey, _EFProductName, 
+                       _EFProtectedDataAvailable, _EFProtectedDataAvailableInState, 
+                       _EFPublicErrorInfoKey, _EFRegisterContentProtectionObserver, 
                        _EFRoundUnsignedInteger, _EFSQLSchemaColumnNameRowID, _EFSQLSchemaDatabaseNameMain, 
                        _EFSQLStringForCollation, _EFSQLStringForConflictResolution, 
                        _EFSQLStringForOrderDirection, _EFSQLVerboseDebugLoggingEnabled, 

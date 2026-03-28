@@ -1,18 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ProactiveSummarization.framework/Versions/A/ProactiveSummarization'
-current-version: 1303.8
+current-version: 1311.6
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ CoreSuggestionsInternals, PersonalizationPortraitInternals, 
                        ProactiveSummarizationTests ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo24PSUSummarizationPipelineC22ProactiveSummarizationEABycfC', 
                        '_$sSo24PSUSummarizationPipelineC22ProactiveSummarizationEABycfc', 
                        '_$sSo24PSUSummarizationPipelineCMa', '_$sSo25PSUSummarizationAnalyticsC22ProactiveSummarizationEABycfC', 

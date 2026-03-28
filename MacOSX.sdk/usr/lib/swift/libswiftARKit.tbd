@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/swift/libswiftARKit.dylib'
-current-version: 746.60.7
+current-version: 746.100.3
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s5ARKit0A5ErrorV10Foundation09LocalizedB0AAMc', '_$s5ARKit0A5ErrorV11descriptionSSvg', 
                        '_$s5ARKit0A5ErrorV11descriptionSSvpMV', '_$s5ARKit0A5ErrorV13failureReasonSSSgvg', 
                        '_$s5ARKit0A5ErrorV13failureReasonSSSgvpMV', '_$s5ARKit0A5ErrorV16errorDescriptionSSSgvg', 

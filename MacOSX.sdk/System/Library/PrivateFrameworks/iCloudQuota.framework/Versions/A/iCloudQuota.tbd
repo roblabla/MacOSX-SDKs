@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/iCloudQuota.framework/Versions/A/iCloudQuota'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s11iCloudQuota0B6LoggerO4core2os0C0VvgZ', '_$s11iCloudQuota0B6LoggerO4core2os0C0VvpZMV', 
                        '_$s11iCloudQuota0B6LoggerO6banner2os0C0VvgZ', '_$s11iCloudQuota0B6LoggerO6banner2os0C0VvpZMV', 
                        '_$s11iCloudQuota0B6LoggerOMa', '_$s11iCloudQuota0B6LoggerOMn', 
@@ -161,7 +161,8 @@ exports:
                        '_$s11iCloudQuota20AppLaunchLinkTrackerCMa', '_$s11iCloudQuota20AppLaunchLinkTrackerCMn', 
                        '_$s11iCloudQuota20AppLaunchLinkTrackerCMo', '_$s11iCloudQuota20AppLaunchLinkTrackerCMu', 
                        '_$s11iCloudQuota20AppLaunchLinkTrackerCN', '_$s11iCloudQuota20AppLaunchLinkTrackerCfD', 
-                       _ICQAccountManagerKey, _ICQAccountQuotaFetchOffersForBuddyURLKey, 
+                       _ICQAMSActParamsKey, _ICQAMSOriginatorBundleIdentifierKey, 
+                       _ICQAMSUserAgentSuffixKey, _ICQAccountManagerKey, _ICQAccountQuotaFetchOffersForBuddyURLKey, 
                        _ICQAccountQuotaFetchOffersURLKey, _ICQAccountQuotaOfferResetKey, 
                        _ICQAccountQuotaRefreshOfferDetailsURLKey, _ICQAccountQuotaUpdateOfferURLKey, 
                        _ICQActionParameterAlertKey, _ICQActionParameterDismissLockScreenKey, 
@@ -256,10 +257,11 @@ exports:
                        __ICQUpgradeSuccessWiFiPageIdentifier, _kICQOpportunitySheetDefaultKey, 
                        _kICQOpportunitySheetMessageFormat, _kICQOpportunitySheetMessageKey, 
                        _kICQOpportunitySheetUnlimitedKey, _kICQPrefEnableUnifiedMessagingKey ]
-    objc-classes:    [ ICQActionBasedUniversalLinkSpecification, ICQActionInfo, ICQAppCloudStorage, 
-                       ICQAppCloudStorageCache, ICQAppInfo, ICQAppLaunchLinkTracker, 
-                       ICQAppsSyncingToDrive, ICQAppsSyncingToDriveCache, ICQAsyncValueLoader, 
-                       ICQBackupDevice, ICQBackupDeviceGroup, ICQBackupInfo, ICQBubbleBannerTracker, 
+    objc-classes:    [ ICQAMSEngagementPresenter, ICQAMSFlowManager, ICQActionBasedUniversalLinkSpecification, 
+                       ICQActionInfo, ICQAppCloudStorage, ICQAppCloudStorageCache, 
+                       ICQAppInfo, ICQAppLaunchLinkTracker, ICQAppsSyncingToDrive, 
+                       ICQAppsSyncingToDriveCache, ICQAsyncValueLoader, ICQBackupDevice, 
+                       ICQBackupDeviceGroup, ICQBackupInfo, ICQBubbleBannerTracker, 
                        ICQCloudStorageApps, ICQCloudStorageDataController, ICQCloudStorageSummary, 
                        ICQCloudStorageSummaryCache, ICQConfirmationActionInfo, ICQConfirmationInfo, 
                        ICQDaemonAlert, ICQDaemonBuddyOffer, ICQDaemonDefaultOffer, 

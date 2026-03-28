@@ -172,7 +172,7 @@ public:
      * @brief       Factory method for creating an IOUSBHostPipe object
      * @discussion  This method should not be called by function drivers.  To create an IOUSBHostPipe, use IOUSBHostInterface::copyPipe(...)
      * @param       descriptor EndpointDescriptor for the endpoint
-     * @param       companionDescriptor SuperSpeedEndpointCompanionDescriptor for the endpoint, or NULL
+     * @param       configurationDescriptor current configuration descriptor for the device, or NULL
      * @param       controller AppleUSBHostController to which the USB endpoint is associated
      * @param       device IOUSBHostDevice to which this endpoint belongs, or NULL
      * @param       interface IOUSBHostInterface to which this endpoint belongs, or NULL
@@ -181,7 +181,7 @@ public:
      * @return      Pointer to an IOUSBHostPipe object if successful, otherwise NULL
      */
     static IOUSBHostPipe* withDescriptorsAndOwners(const StandardUSB::EndpointDescriptor* descriptor,
-                                                   const StandardUSB::SuperSpeedEndpointCompanionDescriptor* companionDescriptor,
+                                                   const StandardUSB::ConfigurationDescriptor* configurationDescriptor,
                                                    AppleUSBHostController* controller,
                                                    IOUSBHostDevice* device,
                                                    IOUSBHostInterface* interface,
@@ -190,7 +190,7 @@ public:
 
 protected:
     virtual bool initWithDescriptorsAndOwners(const StandardUSB::EndpointDescriptor* descriptor,
-                                              const StandardUSB::SuperSpeedEndpointCompanionDescriptor* companionDescriptor,
+                                              const StandardUSB::ConfigurationDescriptor* configurationDescriptor,
                                               AppleUSBHostController* controller,
                                               IOUSBHostDevice* device,
                                               IOUSBHostInterface* interface,

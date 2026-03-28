@@ -1,12 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreCaptureDaemon.framework/Versions/A/CoreCaptureDaemon'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _CoreCaptureStart, _CoreCaptureStop, __Z24CCSubmitLogToCrashTracerPKci, 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ _CCCacheDeleteDisablePurgeNotification, _CCCacheDeleteEnablePurgeNotification, 
+                       _CoreCaptureStart, _CoreCaptureStop, __Z24CCSubmitLogToCrashTracerPKci, 
                        __Z27CCSubmitBinaryToCrashTracerPKci, __Z43NSJSONSerializationCreateDataWithJSONObjectPKvjPv, 
                        __ZN10CCDataFile13sendTelemetryEv, __ZN10CCDataFile15openCaptureFileEPKcS1_11CCTimestamp, 
                        __ZN10CCDataFile16generateFileNameEPKc, __ZN10CCDataFile17withRegistryEntryEj, 
@@ -21,7 +20,8 @@ exports:
                        __ZN11CCConfigure15withPipeMonitorEP13CCPipeMonitor, __ZN11CCConfigure16captureDirectoryEP18CCConfigureContextPKv, 
                        __ZN11CCConfigure18applyConfigurationEPK14__CFDictionaryP18CCConfigureContext, 
                        __ZN11CCConfigure19configureLogOptionsEP18CCConfigureContextPKv, 
-                       __ZN11CCConfigure19initWithPipeMonitorEP13CCPipeMonitor, __ZN11CCConfigure23findTapWithOwnerAndPipeEP18CCConfigureContext, 
+                       __ZN11CCConfigure19initWithPipeMonitorEP13CCPipeMonitor, __ZN11CCConfigure20getLogTapWithContextEP18CCConfigureContext, 
+                       __ZN11CCConfigure23findTapWithOwnerAndPipeEP18CCConfigureContext, 
                        __ZN11CCConfigure27pipePipeCFDictionaryApplierEPKvS1_Pv, __ZN11CCConfigure28pipeOwnerCFDictionaryApplierEPKvS1_Pv, 
                        __ZN11CCConfigure29streamPipeCFDictionaryApplierEPKvS1_Pv, 
                        __ZN11CCConfigure30streamOwnerCFDictionaryApplierEPKvS1_Pv, 
@@ -183,18 +183,20 @@ exports:
                        __ZN6CCFile8copyFileEPKcb, __ZN6CCFileC2Ev, __ZN6CCFileD0Ev, 
                        __ZN6CCFileD1Ev, __ZN6CCFileD2Ev, __ZN8CCDaemon11fIsCCDaemonE, 
                        __ZN8CCDaemon11fWorkingDirE, __ZN8CCDaemon11initializedE, 
-                       __ZN8CCDaemon13activityCheckEv, __ZN8CCDaemon13freeResourcesEv, 
-                       __ZN8CCDaemon13resumeAllTapsEv, __ZN8CCDaemon14quiesceAllTapsEv, 
-                       __ZN8CCDaemon16startPipeMonitorEv, __ZN8CCDaemon17runShutdownThreadEPv, 
-                       __ZN8CCDaemon21setCaptureIdAndReasonEP11CCTimestampPc, __ZN8CCDaemon22smcNotificationHandlerEhhh, 
-                       __ZN8CCDaemon23enablePowerNotificationEv, __ZN8CCDaemon23initCCDaemonWithOptionsEPKcS1_b, 
-                       __ZN8CCDaemon24disablePowerNotificationEv, __ZN8CCDaemon26activityCheckTimerCallbackEPv, 
-                       __ZN8CCDaemon28sysPowerNotificationCallbackEPvjjS0_, __ZN8CCDaemon29fEnableDumpToDiskinRecoveryOSE, 
-                       __ZN8CCDaemon29sendProfileChangeNotificationEi, __ZN8CCDaemon4lockEv, 
-                       __ZN8CCDaemon6ccfreeEv, __ZN8CCDaemon6unlockEv, __ZN8CCDaemon7ccstartEPKcS1_b, 
-                       __ZN8CCDaemon8fSaveDirE, __ZN8CCDaemon8instanceE, __ZN8CCDaemon8shutdownEv, 
-                       __ZN8CCDaemon9onceTokenE, __ZN8CCDaemonC1Ev, __ZN8CCDaemonC2Ev, 
-                       __ZN8CCDaemonD0Ev, __ZN8CCDaemonD1Ev, __ZN8CCDaemonD2Ev, __ZN8CCLogTap11setLogFlagsEP33CCLogPipeUserClientStreamLogFlags, 
+                       __ZN8CCDaemon12cleanupQueueERP16dispatch_queue_s, __ZN8CCDaemon13activityCheckEv, 
+                       __ZN8CCDaemon13freeResourcesEv, __ZN8CCDaemon13resumeAllTapsEv, 
+                       __ZN8CCDaemon14quiesceAllTapsEv, __ZN8CCDaemon16startPipeMonitorEv, 
+                       __ZN8CCDaemon17runShutdownThreadEPv, __ZN8CCDaemon21setCaptureIdAndReasonEP11CCTimestampPc, 
+                       __ZN8CCDaemon22smcNotificationHandlerEhhh, __ZN8CCDaemon23enablePowerNotificationEv, 
+                       __ZN8CCDaemon23enablePurgeNotificationEv, __ZN8CCDaemon23initCCDaemonWithOptionsEPKcS1_b, 
+                       __ZN8CCDaemon24disablePowerNotificationEv, __ZN8CCDaemon24disablePurgeNotificationEv, 
+                       __ZN8CCDaemon26activityCheckTimerCallbackEPv, __ZN8CCDaemon28sysPowerNotificationCallbackEPvjjS0_, 
+                       __ZN8CCDaemon29fEnableDumpToDiskinRecoveryOSE, __ZN8CCDaemon29sendProfileChangeNotificationEi, 
+                       __ZN8CCDaemon4lockEv, __ZN8CCDaemon6ccfreeEv, __ZN8CCDaemon6unlockEv, 
+                       __ZN8CCDaemon7ccstartEPKcS1_b, __ZN8CCDaemon8fSaveDirE, __ZN8CCDaemon8instanceE, 
+                       __ZN8CCDaemon8shutdownEv, __ZN8CCDaemon9onceTokenE, __ZN8CCDaemonC1Ev, 
+                       __ZN8CCDaemonC2Ev, __ZN8CCDaemonD0Ev, __ZN8CCDaemonD1Ev, __ZN8CCDaemonD2Ev, 
+                       __ZN8CCLogTap11setLogFlagsEP33CCLogPipeUserClientStreamLogFlags, 
                        __ZN8CCLogTap11setLogLevelEP33CCLogPipeUserClientStreamLogLevel, 
                        __ZN8CCLogTap11tapLoopImplEv, __ZN8CCLogTap12processEventEv, 
                        __ZN8CCLogTap13freeResourcesEv, __ZN8CCLogTap13profileLoadedEv, 
@@ -264,6 +266,6 @@ exports:
                        _isClientValid, _isClientWiFi, _isMegaWiFiProfileInstalled, 
                        _isMultipleProfilesSupported, _isSeedAndiOS, _lowPriorityActivities, 
                        _mkdirRecursive, _pruneDirectoryOnOSUpgrade, _setgBootArgsParsed, 
-                       _shouldReduceLogRetention, _sortByDirectoryName, _validCFObjectReference, 
-                       _writeMetadataFiles ]
+                       _shouldReduceLogRetention, _sortByDirectoryName, _triggerStackshot, 
+                       _validCFObjectReference, _writeMetadataFiles ]
 ...

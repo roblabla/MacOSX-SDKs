@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-macos26.2 -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 2222.60.11 -module-name CoreHID
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-macos26.4 -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 2238.100.59 -module-name CoreHID
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Foundation
 import IOKit
 import Swift
@@ -26,11 +26,9 @@ public struct HIDElementCollection : Swift.Sendable {
     }
   }
   unowned public var client: CoreHID.HIDDeviceClient
-  #if compiler(>=5.3) && $NonescapableTypes
   public var parentCollection: CoreHID.HIDElementCollection? {
     get
   }
-  #endif
   public var childCollections: [CoreHID.HIDElementCollection] {
     get
   }
@@ -108,19 +106,11 @@ extension CoreHID.HIDElement.Value : Swift.Hashable {
 @available(macOS 15, *)
 extension CoreHID.HIDElement.Value {
   public func integerValue<IntegerType>(asTypeTruncatingIfNeeded: IntegerType.Type) -> IntegerType where IntegerType : Swift.FixedWidthInteger
-  #if compiler(>=5.3) && $NonescapableTypes
   public func logicalValue<IntegerType>(asTypeTruncatingIfNeeded: IntegerType.Type) -> IntegerType? where IntegerType : Swift.FixedWidthInteger
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func physicalValue<IntegerType, FloatingType>(fromTypeTruncatingIfNeeded: IntegerType.Type, as: FloatingType.Type) -> FloatingType? where IntegerType : Swift.FixedWidthInteger, FloatingType : Swift.BinaryFloatingPoint
-  #endif
   public init<IntegerType>(element: CoreHID.HIDElement, fromIntegerTruncatingIfNeeded: IntegerType, timestamp: _Concurrency.SuspendingClock.Instant) where IntegerType : Swift.FixedWidthInteger
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?<IntegerType>(element: CoreHID.HIDElement, fromLogicalValueTruncatingIfNeeded: IntegerType, timestamp: _Concurrency.SuspendingClock.Instant) where IntegerType : Swift.FixedWidthInteger
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?<FloatingPointType>(element: CoreHID.HIDElement, fromPhysicalValue: FloatingPointType, timestamp: _Concurrency.SuspendingClock.Instant) where FloatingPointType : Swift.BinaryFloatingPoint
-  #endif
 }
 @available(macOS 15, *)
 extension CoreHID.HIDElement.Value : Swift.CustomStringConvertible {
@@ -143,14 +133,10 @@ public actor HIDVirtualDevice {
     public let uniqueID: Swift.String?
     public let locationID: Swift.UInt64?
     public let localizationCode: CoreHID.HIDDeviceLocalizationCode?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(descriptor: Foundation.Data, vendorID: Swift.UInt32, productID: Swift.UInt32? = nil, transport: CoreHID.HIDDeviceTransport? = nil, product: Swift.String? = nil, manufacturer: Swift.String? = nil, modelNumber: Swift.String? = nil, versionNumber: Swift.UInt64? = nil, serialNumber: Swift.String? = nil, uniqueID: Swift.String? = nil, locationID: Swift.UInt64? = nil, localizationCode: CoreHID.HIDDeviceLocalizationCode? = nil, extraProperties: Swift.Dictionary<Swift.String, Swift.AnyObject>? = nil)
-    #endif
   }
   nonisolated final public let deviceReference: CoreHID.HIDDeviceClient.DeviceReference
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(properties: CoreHID.HIDVirtualDevice.Properties)
-  #endif
   @objc deinit
   public func activate(delegate: any CoreHID.HIDVirtualDeviceDelegate)
   public func dispatchInputReport(data: Foundation.Data, timestamp: _Concurrency.SuspendingClock.Instant) async throws
@@ -178,20 +164,14 @@ extension CoreHID.HIDVirtualDevice : Swift.CustomStringConvertible {
 }
 @available(macOS 15, *)
 public protocol HIDVirtualDeviceDelegate : Swift.Sendable {
-  #if compiler(>=5.3) && $NonescapableTypes
   func hidVirtualDevice(_ device: CoreHID.HIDVirtualDevice, receivedSetReportRequestOfType type: CoreHID.HIDReportType, id: CoreHID.HIDReportID?, data: Foundation.Data) async throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   func hidVirtualDevice(_ device: CoreHID.HIDVirtualDevice, receivedGetReportRequestOfType type: CoreHID.HIDReportType, id: CoreHID.HIDReportID?, maxSize: Swift.Int) async throws -> Foundation.Data
-  #endif
 }
 @available(macOS 26.0, *)
 extension CoreHID.HIDVirtualDevice {
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public var hidDevice: IOKit.IOHIDUserDevice? {
     get
   }
-  #endif
 }
 @available(macOS 15, *)
 public actor HIDDeviceManager {
@@ -210,9 +190,7 @@ public actor HIDDeviceManager {
     public var locationID: Swift.UInt64?
     public var localizationCode: CoreHID.HIDDeviceLocalizationCode?
     public var isBuiltIn: Swift.Bool?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(primaryUsage: CoreHID.HIDUsage? = nil, deviceUsages: [CoreHID.HIDUsage]? = nil, vendorID: Swift.UInt32? = nil, productID: Swift.UInt32? = nil, transport: CoreHID.HIDDeviceTransport? = nil, product: Swift.String? = nil, manufacturer: Swift.String? = nil, modelNumber: Swift.String? = nil, versionNumber: Swift.UInt64? = nil, serialNumber: Swift.String? = nil, uniqueID: Swift.String? = nil, locationID: Swift.UInt64? = nil, localizationCode: CoreHID.HIDDeviceLocalizationCode? = nil, isBuiltIn: Swift.Bool? = nil, extraProperties: Swift.Dictionary<Swift.String, Swift.AnyObject>? = nil)
-    #endif
   }
   public init()
   public enum Notification : Swift.Sendable {
@@ -276,14 +254,10 @@ public enum HIDUsage : Swift.Hashable, Swift.Sendable {
   public var page: Swift.UInt16 {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var usage: Swift.UInt16? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(page: Swift.UInt16, usage: Swift.UInt16?)
-  #endif
   public static func == (lhs: CoreHID.HIDUsage, rhs: CoreHID.HIDUsage) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -414,9 +388,7 @@ extension CoreHID.HIDUsage {
     case callMuteToggle
     case callMuteLED
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -479,9 +451,7 @@ extension CoreHID.HIDUsage {
     case frontBrake
     case rearBrake
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -505,9 +475,7 @@ extension CoreHID.HIDUsage {
     case stereoEnable
     case displayEnable
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -553,9 +521,7 @@ extension CoreHID.HIDUsage {
     case sevenWood
     case nineWood
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -596,9 +562,7 @@ extension CoreHID.HIDUsage {
     case gamepadTrigger
     case formFittingGamepad
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -634,9 +598,7 @@ extension CoreHID.HIDUsage {
     case gripPoseOffset
     case pointerPoseOffset
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -866,9 +828,7 @@ extension CoreHID.HIDUsage {
     case keyboardRightAlt
     case keyboardRightGUI
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -976,9 +936,7 @@ extension CoreHID.HIDUsage {
     case player7
     case player8
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -1101,9 +1059,7 @@ extension CoreHID.HIDUsage {
     case callDuration
     case dualModePhone
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -1565,9 +1521,7 @@ extension CoreHID.HIDUsage {
     case contactStatusFlag
     case contactMiscellaneous
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -1687,9 +1641,7 @@ extension CoreHID.HIDUsage {
     case transducerIndexSelector
     case buttonPressThreshold
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -1730,9 +1682,7 @@ extension CoreHID.HIDUsage {
     case waveformEraserContinuous
     case waveformSparkleContinuous
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -1849,9 +1799,7 @@ extension CoreHID.HIDUsage {
     case createNewEffectParameterBlockReport
     case ramPoolAvailable
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -1873,9 +1821,7 @@ extension CoreHID.HIDUsage {
     case fileTransferStop
     case fileTransferTillEnd
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -1921,9 +1867,7 @@ extension CoreHID.HIDUsage {
     case configurationStatus
     case deviceModeRequest
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -2010,9 +1954,7 @@ extension CoreHID.HIDUsage {
     case characterPageMapping
     case requestReport
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -2689,9 +2631,7 @@ extension CoreHID.HIDUsage {
     case modifierChangeSensitivityPercentRelative
     case modifierVendorReserved
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -2732,9 +2672,7 @@ extension CoreHID.HIDUsage {
     case softControlSelect
     case softControlAdjust
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -2789,9 +2727,7 @@ extension CoreHID.HIDUsage {
     case brailleRockerDown
     case brailleRockerPress
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -2836,9 +2772,7 @@ extension CoreHID.HIDUsage {
     case lampArrayControlReport
     case autonomousMode
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -2854,9 +2788,7 @@ extension CoreHID.HIDUsage {
     case vdifInformation
     case vesaVersion
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -2919,9 +2851,7 @@ extension CoreHID.HIDUsage {
     case onScreenDisplay
     case stereoMode
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -3010,9 +2940,7 @@ extension CoreHID.HIDUsage {
     case iProduct
     case iSerialNumber
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -3115,9 +3043,7 @@ extension CoreHID.HIDUsage {
     case level2
     case level3
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -3323,9 +3249,7 @@ extension CoreHID.HIDUsage {
     case usd5SlugCode
     case veriCode
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -3383,9 +3307,7 @@ extension CoreHID.HIDUsage {
     case zeroScale
     case enforcedZeroReturn
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -3407,9 +3329,7 @@ extension CoreHID.HIDUsage {
     case track3Data
     case trackJISData
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -3423,9 +3343,7 @@ extension CoreHID.HIDUsage {
     case cameraAutoFocus
     case cameraShutter
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -3464,9 +3382,7 @@ extension CoreHID.HIDUsage {
     case pinPadOutput
     case pinPadCommand
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -3481,9 +3397,7 @@ extension CoreHID.HIDUsage {
     case inputReportData
     case outputReportData
     public static let page: Swift.UInt16
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     @available(macOS 15.0, *)
     public typealias RawValue = Swift.UInt16
     public var rawValue: Swift.UInt16 {
@@ -3495,9 +3409,7 @@ extension CoreHID.HIDUsage {
 public struct HIDReportID : Swift.RawRepresentable, Swift.Comparable, Swift.Hashable, Swift.Sendable {
   public typealias RawValue = Swift.UInt8
   public var rawValue: CoreHID.HIDReportID.RawValue
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.UInt8)
-  #endif
   public static func < (lhs: CoreHID.HIDReportID, rhs: CoreHID.HIDReportID) -> Swift.Bool
   public static let allReports: Swift.ClosedRange<CoreHID.HIDReportID>
 }
@@ -3599,11 +3511,9 @@ public enum HIDDeviceError : Swift.Equatable, Swift.Sendable, Foundation.Localiz
   case aborted
   case notResponding
   case unknown(Swift.Int32)
-  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
-  #endif
   public static func == (a: CoreHID.HIDDeviceError, b: CoreHID.HIDDeviceError) -> Swift.Bool
 }
 @available(macOS 15, *)
@@ -3622,46 +3532,30 @@ public actor HIDDeviceClient {
   final public let deviceUsages: [CoreHID.HIDUsage]
   final public let vendorID: Swift.UInt32
   final public let productID: Swift.UInt32
-  #if compiler(>=5.3) && $NonescapableTypes
   public var transport: CoreHID.HIDDeviceTransport? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var product: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var manufacturer: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var modelNumber: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var versionNumber: Swift.UInt64? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var serialNumber: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var uniqueID: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var locationID: Swift.UInt64? {
     get
   }
-  #endif
   public var localizationCode: CoreHID.HIDDeviceLocalizationCode {
     get
   }
@@ -3671,16 +3565,9 @@ public actor HIDDeviceClient {
   public var elements: [CoreHID.HIDElement] {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(deviceReference: CoreHID.HIDDeviceClient.DeviceReference)
-  #endif
-  #if compiler(>=5.3) && $IsolatedDeinit
   @objc @available(macOS 15.4, *)
   isolated deinit
-  #else
-  @objc @available(macOS 15.4, *)
-  deinit
-  #endif
   public func seizeDevice() throws
   public enum Notification : Swift.Sendable {
     case inputReport(id: CoreHID.HIDReportID?, data: Foundation.Data, timestamp: _Concurrency.SuspendingClock.Instant)
@@ -3693,18 +3580,12 @@ public actor HIDDeviceClient {
   public struct UnsafeProperty : @unchecked Swift.Sendable {
     public let unsafeObject: Swift.AnyObject
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(key: Swift.String) -> CoreHID.HIDDeviceClient.UnsafeProperty? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func dispatchSetReportRequest(type: CoreHID.HIDReportType, id: CoreHID.HIDReportID? = nil, data: Foundation.Data, timeout: Swift.Duration? = nil) async throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func dispatchGetReportRequest(type: CoreHID.HIDReportType, id: CoreHID.HIDReportID? = nil, timeout: Swift.Duration? = nil) async throws -> Foundation.Data
-  #endif
   public struct ProvideElementUpdate : CoreHID.HIDElementUpdate {
     public var values: [CoreHID.HIDElement.Value]
     public init(values: [CoreHID.HIDElement.Value])
@@ -3725,20 +3606,14 @@ public actor HIDDeviceClient {
     }
   }
   public struct HIDElementUpdateResult : Swift.Sendable {
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(originalRequest: CoreHID.HIDDeviceClient.ProvideElementUpdate) -> Swift.Result<Swift.Void, any Swift.Error>? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(originalRequest: CoreHID.HIDDeviceClient.RequestElementUpdate) -> Swift.Result<[CoreHID.HIDElement.Value], any Swift.Error>? {
       get
     }
-    #endif
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func updateElements(_ updates: [any CoreHID.HIDElementUpdate], timeout: Swift.Duration? = nil) async -> CoreHID.HIDDeviceClient.HIDElementUpdateResult
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 15, *)
   @_semantics("defaultActor") nonisolated final public var unownedExecutor: _Concurrency.UnownedSerialExecutor {
     get

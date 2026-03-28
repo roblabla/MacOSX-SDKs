@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AdaptiveVoiceShortcuts.framework/Versions/A/AdaptiveVoiceShortcuts'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation4UUIDV22AdaptiveVoiceShortcutsE18avsFormattedStringSSvg', 
                        '_$s10Foundation4UUIDV22AdaptiveVoiceShortcutsE18avsFormattedStringSSvpMV', 
                        '_$s22AdaptiveVoiceShortcuts0aB8ShortcutV4fromACs7Decoder_p_tKcfC', 

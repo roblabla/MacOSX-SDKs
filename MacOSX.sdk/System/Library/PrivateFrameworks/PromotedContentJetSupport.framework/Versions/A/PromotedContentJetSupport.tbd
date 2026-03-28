@@ -1,18 +1,18 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PromotedContentJetSupport.framework/Versions/A/PromotedContentJetSupport'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10ReturnType25PromotedContentJetSupport0E12SerializablePTl', 
                        '_$s24PromotedContentJetClient0C12ServiceErrorO0abC7SupportE4from3anyACs0F0_p_tFZ', 
                        '_$s24PromotedContentJetClient15ProofOfPurchaseV0C6Engine24CustomJSValueConvertible0abC7SupportMc', 
                        '_$s24PromotedContentJetClient15ProofOfPurchaseV0abC7SupportE16jsRepresentation2in0C6Engine24CustomJSValueConvertible_pSo9JSContextC_tKF', 
                        '_$s24PromotedContentJetClient16ConversionParamsV0C6Engine24CustomJSValueConvertible0abC7SupportMc', 
                        '_$s24PromotedContentJetClient16ConversionParamsV0abC7SupportE16jsRepresentation2in0C6Engine24CustomJSValueConvertible_pSo9JSContextC_tKF', 
-                       '_$s24PromotedContentJetClient16ConversionSignalO0C6Engine24CustomJSValueConvertible0abC7SupportMc', 
-                       '_$s24PromotedContentJetClient16ConversionSignalO0abC7SupportE16jsRepresentation2in0C6Engine24CustomJSValueConvertible_pSo9JSContextC_tKF', 
+                       '_$s24PromotedContentJetClient16ConversionSignalV0C6Engine24CustomJSValueConvertible0abC7SupportMc', 
+                       '_$s24PromotedContentJetClient16ConversionSignalV0abC7SupportE16jsRepresentation2in0C6Engine24CustomJSValueConvertible_pSo9JSContextC_tKF', 
                        '_$s24PromotedContentJetClient17AttributionConfigV0C6Engine17ExpressibleByJSON0abC7SupportMc', 
                        '_$s24PromotedContentJetClient17AttributionConfigV0C6Engine24CustomJSValueConvertible0abC7SupportMc', 
                        '_$s24PromotedContentJetClient17AttributionConfigV0abC7SupportE16jsRepresentation2in0C6Engine24CustomJSValueConvertible_pSo9JSContextC_tKF', 
@@ -35,14 +35,14 @@ exports:
                        '_$s24PromotedContentJetClient22AttributionMatchIntentV0abC7Support0C12SerializableADWP', 
                        '_$s24PromotedContentJetClient22AttributionMatchIntentV0abC7SupportE6encode2in7contextySo7JSValueC_So9JSContextCtKF', 
                        '_$s24PromotedContentJetClient22AttributionMatchIntentV10ReturnTypeV0C6Engine17ExpressibleByJSON0abC7SupportMc', 
-                       '_$s24PromotedContentJetClient23StandaloneAppOpenSignalV0C6Engine24CustomJSValueConvertible0abC7SupportMc', 
-                       '_$s24PromotedContentJetClient23StandaloneAppOpenSignalV0abC7SupportE16jsRepresentation2in0C6Engine24CustomJSValueConvertible_pSo9JSContextC_tKF', 
+                       '_$s24PromotedContentJetClient23StandaloneAppOpenActionV0C6Engine24CustomJSValueConvertible0abC7SupportMc', 
+                       '_$s24PromotedContentJetClient23StandaloneAppOpenActionV0abC7SupportE16jsRepresentation2in0C6Engine24CustomJSValueConvertible_pSo9JSContextC_tKF', 
                        '_$s24PromotedContentJetClient25AttributionPreMatchIntentV0abC7Support0C12SerializableADMc', 
                        '_$s24PromotedContentJetClient25AttributionPreMatchIntentV0abC7Support0C12SerializableADWP', 
                        '_$s24PromotedContentJetClient25AttributionPreMatchIntentV0abC7SupportE6encode2in7contextySo7JSValueC_So9JSContextCtKF', 
                        '_$s24PromotedContentJetClient25AttributionPreMatchIntentV10ReturnTypeV0C6Engine17ExpressibleByJSON0abC7SupportMc', 
-                       '_$s24PromotedContentJetClient26AppStoreInstallationSignalV0C6Engine24CustomJSValueConvertible0abC7SupportMc', 
-                       '_$s24PromotedContentJetClient26AppStoreInstallationSignalV0abC7SupportE16jsRepresentation2in0C6Engine24CustomJSValueConvertible_pSo9JSContextC_tKF', 
+                       '_$s24PromotedContentJetClient26AppStoreInstallationActionV0C6Engine24CustomJSValueConvertible0abC7SupportMc', 
+                       '_$s24PromotedContentJetClient26AppStoreInstallationActionV0abC7SupportE16jsRepresentation2in0C6Engine24CustomJSValueConvertible_pSo9JSContextC_tKF', 
                        '_$s24PromotedContentJetClient26AttributionPostMatchIntentV0abC7Support0C12SerializableADMc', 
                        '_$s24PromotedContentJetClient26AttributionPostMatchIntentV0abC7Support0C12SerializableADWP', 
                        '_$s24PromotedContentJetClient26AttributionPostMatchIntentV0abC7SupportE6encode2in7contextySo7JSValueC_So9JSContextCtKF', 

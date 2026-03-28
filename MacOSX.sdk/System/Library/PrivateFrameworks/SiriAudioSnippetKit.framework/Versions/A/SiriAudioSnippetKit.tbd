@@ -1,15 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriAudioSnippetKit.framework/Versions/A/SiriAudioSnippetKit'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ AudioFlowDelegatePlugin, AudioFlowDelegatePluginTests, AudioUIPlugin, 
                        ControlsFlowDelegatePlugin, PlaybackControlsUIPlugin, SiriPlaybackControlIntents, 
                        SiriPlaybackControlIntentsTests ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s19SiriAudioSnippetKit06ShazamC4RoleO4fromACs7Decoder_p_tKcfC', 
                        '_$s19SiriAudioSnippetKit06ShazamC4RoleO6encode2toys7Encoder_p_tKF', 
                        '_$s19SiriAudioSnippetKit06ShazamC4RoleO7noMatchyA2CmFWC', 

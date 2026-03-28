@@ -134,6 +134,7 @@
 #import <Foundation/NSUserActivity.h>
 
 #import <Foundation/NSUUID.h>
+#import <Foundation/NSPredicateValidating.h>
 
 #endif /* TARGET_OS_OSX || TARGET_OS_IPHONE */
 

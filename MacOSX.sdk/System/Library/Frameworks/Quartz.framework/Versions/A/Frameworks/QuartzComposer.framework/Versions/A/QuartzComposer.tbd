@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzComposer.framework/Versions/A/QuartzComposer'
 current-version: 168
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _GFArrayFromArgumentList, _GFBacktrace, _GFDebug, _GFDebuggingLevel, 
                        _GFException, _GFFilterStringsWithKeywords, _GFGetDebugMessageCallback, 
                        _GFGetLogMessageCallback, _GFKeywordsFromSearchString, _GFLog, 
@@ -131,7 +131,7 @@ exports:
                        QCArray._array, QCArray._count, QCArray._elementSize, QCContext._iterationManager, 
                        QCParameterInfo.size, QCParameterInfo.type, QCPatch._renderingInfo, 
                        QCPatchRenderingInfo._context, QCPatchRenderingInfo.flags ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ _C3DAddBaseType, _C3DAnimationChannelCreate, _C3DAnimationChannelCreateCopy, 
                        _C3DAnimationChannelGetAnimation, _C3DAnimationChannelGetSID, 
                        _C3DAnimationChannelGetTarget, _C3DAnimationChannelGetTargetPath, 

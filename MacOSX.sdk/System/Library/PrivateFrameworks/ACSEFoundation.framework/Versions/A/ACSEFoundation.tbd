@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ACSEFoundation.framework/Versions/A/ACSEFoundation'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s14ACSEFoundation11TaskLimiterC15unownedExecutorScevg', 
                        '_$s14ACSEFoundation11TaskLimiterC15unownedExecutorScevpMV', 
                        '_$s14ACSEFoundation11TaskLimiterC7perform10identifier9operationxSS_xyYaYbKctYaKs8SendableRzlFTj', 
@@ -22,8 +22,9 @@ exports:
                        '_$s14ACSEFoundation12NetworkErrorO16invalidURLStringyACSS_tcACmFWC', 
                        '_$s14ACSEFoundation12NetworkErrorO18noResponseReceivedyAC10Foundation10URLRequestV_tcACmFWC', 
                        '_$s14ACSEFoundation12NetworkErrorO24noAccountPropertiesFoundyACSo18ACAccountDataclassa_tcACmFWC', 
-                       '_$s14ACSEFoundation12NetworkErrorOMa', '_$s14ACSEFoundation12NetworkErrorOMn', 
-                       '_$s14ACSEFoundation12NetworkErrorON', '_$s14ACSEFoundation12NetworkErrorOs0C0AAMc', 
+                       '_$s14ACSEFoundation12NetworkErrorO2eeoiySbAC_ACtFZ', '_$s14ACSEFoundation12NetworkErrorOMa', 
+                       '_$s14ACSEFoundation12NetworkErrorOMn', '_$s14ACSEFoundation12NetworkErrorON', 
+                       '_$s14ACSEFoundation12NetworkErrorOSQAAMc', '_$s14ACSEFoundation12NetworkErrorOs0C0AAMc', 
                        '_$s14ACSEFoundation12TaskLimitersC15unownedExecutorScevg', 
                        '_$s14ACSEFoundation12TaskLimitersC15unownedExecutorScevpMV', 
                        '_$s14ACSEFoundation12TaskLimitersC7limiter3key7timeoutAA0B7LimiterCSS_s6UInt64VtF', 
@@ -82,7 +83,9 @@ exports:
                        '_$s14ACSEFoundation16iCloudTapToRadarO8settingsAA0cdE5DraftVvgZ', 
                        '_$s14ACSEFoundation16iCloudTapToRadarO8settingsAA0cdE5DraftVvpZMV', 
                        '_$s14ACSEFoundation16iCloudTapToRadarOMa', '_$s14ACSEFoundation16iCloudTapToRadarOMn', 
-                       '_$s14ACSEFoundation16iCloudTapToRadarON', '_$s14ACSEFoundation17NetworkControllerV7account0D9Dataclass10urlSessionACSo9ACAccountC_So0hE0aSo12NSURLSessionCtcfC', 
+                       '_$s14ACSEFoundation16iCloudTapToRadarON', '_$s14ACSEFoundation17NetworkControllerV14fetchURLString6forKeyS2S_tYaKF', 
+                       '_$s14ACSEFoundation17NetworkControllerV14fetchURLString6forKeyS2S_tYaKFTu', 
+                       '_$s14ACSEFoundation17NetworkControllerV7account0D9Dataclass10urlSessionACSo9ACAccountC_So0hE0aSo12NSURLSessionCtcfC', 
                        '_$s14ACSEFoundation17NetworkControllerV8fetchURL6forKey10Foundation0E0VSS_tYaKF', 
                        '_$s14ACSEFoundation17NetworkControllerV8fetchURL6forKey10Foundation0E0VSS_tYaKFTu', 
                        '_$s14ACSEFoundation17NetworkControllerV9fetchData13forURLRequest10Foundation0E0V_So17NSHTTPURLResponseCtSo09NSMutableG0C_tYaKF', 
@@ -140,7 +143,11 @@ exports:
                        '_$s14ACSEFoundation9ACSEErrorPAAE8userInfoSDySSypGvg', '_$s14ACSEFoundation9ACSEErrorPAAE8userInfoSDySSypGvpMV', 
                        '_$s14ACSEFoundation9ACSEErrorPAAE9errorCodeSivg', '_$s14ACSEFoundation9ACSEErrorPAAE9errorCodeSivpMV', 
                        '_$s14ACSEFoundation9ACSEErrorPs12CaseIterableTb', '_$s14ACSEFoundation9ACSEErrorTL', 
-                       _ACSEFoundationVersionNumber, _ACSEFoundationVersionString ]
+                       '_$sSo19NSMutableURLRequestC14ACSEFoundationE14addAuthHeaders10forAccountySo9ACAccountC_tF', 
+                       '_$sSo19NSMutableURLRequestC14ACSEFoundationE15addBasicHeadersyyF', 
+                       '_$sSo19NSMutableURLRequestC14ACSEFoundationE17addAccountHeaders03forE0ySo9ACAccountC_tF', 
+                       _ACSEFoundationVersionNumber, _ACSEFoundationVersionString, 
+                       __ACSEGetLogSystem ]
     objc-classes:    [ ACSENetworkRequestController, ACSERetryController, _TtC14ACSEFoundation16BAARequestSigner, 
                        _TtC14ACSEFoundation16TaskLimitersObjC ]
 ...

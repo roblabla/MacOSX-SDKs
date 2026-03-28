@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ANEServices.framework/Versions/A/ANEServices'
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTI12ZinException, __ZTS12ZinException ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ANEServicesCheckPrivilegedVMAccess, _ANEServicesDeviceClose, 
                        _ANEServicesDeviceOpen, _ANEServicesDeviceUpdateParameters, 
                        _ANEServicesHandleDeviceOpen, _ANEServicesInitializePlatformServices, 

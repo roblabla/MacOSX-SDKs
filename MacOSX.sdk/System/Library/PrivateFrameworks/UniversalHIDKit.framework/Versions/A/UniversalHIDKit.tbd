@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UniversalHIDKit.framework/Versions/A/UniversalHIDKit'
 current-version: 80
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s11CGEventType15UniversalHIDKit15NSEventProtocolPTl', '_$s15UniversalHIDKit13EventObserverC07processC0ySay0A3HID9HIDReportV6report_s6UInt64V8senderIDtGxF', 
                        '_$s15UniversalHIDKit13EventObserverC11translators7filtersACyxGqd___qd_0_tcSTRd__STRd_0_AA0C10Translator_px0C4TypeRts_XP7ElementRtd__0A3HID0C14FilterProtocol_pAJRtd_0_r0_lufC', 
                        '_$s15UniversalHIDKit13EventObserverC11translators7filtersACyxGqd___qd_0_tcSTRd__STRd_0_AA0C10Translator_px0C4TypeRts_XP7ElementRtd__0A3HID0C14FilterProtocol_pAJRtd_0_r0_lufCTj', 

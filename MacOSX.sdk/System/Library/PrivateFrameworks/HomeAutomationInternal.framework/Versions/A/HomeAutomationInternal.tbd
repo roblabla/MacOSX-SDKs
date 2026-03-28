@@ -1,17 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeAutomationInternal.framework/Versions/A/HomeAutomationInternal'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ HomeAutomationFlowDelegatePlugin, HomeAutomationFlowDelegatePluginTests, 
                        HomeAutomationFunctionalNonUITests, HomeAutomationFunctionalTests, 
                        HomeAutomationInternalTests, HomeAutomationSiriSuggestions, 
                        HomeAutomationSuggestionIntegrationTests, HomeAutomationSuggestionTests, 
                        MorphunAssetsTests, MorphunAssetsTests-Runner ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10ActionType22HomeAutomationInternal0A11SetProtocolPTl', 
                        '_$s11ServiceType22HomeAutomationInternal0A13GroupProtocolPTl', 
                        '_$s11ServiceType22HomeAutomationInternal17AccessoryProtocolPTl', 
@@ -5364,6 +5364,8 @@ exports:
                        '_$s22HomeAutomationInternal8SignpostO4NameO05queryA9DataModels12StaticStringVvpZMV', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO07parseToaB6Intents12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO07parseToaB6Intents12StaticStringVvpZMV', 
+                       '_$s22HomeAutomationInternal8SignpostO4NameO08invokeIrA13SuggestionApis12StaticStringVvgZ', 
+                       '_$s22HomeAutomationInternal8SignpostO4NameO08invokeIrA13SuggestionApis12StaticStringVvpZMV', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO11makeFlowFors12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO11makeFlowFors12StaticStringVvpZMV', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO11writeRecords12StaticStringVvgZ', 
@@ -5380,6 +5382,8 @@ exports:
                        '_$s22HomeAutomationInternal8SignpostO4NameO13homeKitWarmUps12StaticStringVvpZMV', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO13modifyRequests12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO13modifyRequests12StaticStringVvpZMV', 
+                       '_$s22HomeAutomationInternal8SignpostO4NameO13openIRSessions12StaticStringVvgZ', 
+                       '_$s22HomeAutomationInternal8SignpostO4NameO13openIRSessions12StaticStringVvpZMV', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO13reasonToBlocks12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO13reasonToBlocks12StaticStringVvpZMV', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO14getTrialFactors12StaticStringVvgZ', 

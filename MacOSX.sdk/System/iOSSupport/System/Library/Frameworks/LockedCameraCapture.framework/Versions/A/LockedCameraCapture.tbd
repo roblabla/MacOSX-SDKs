@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/LockedCameraCapture.framework/Versions/A/LockedCameraCapture'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s19LockedCameraCapture0abC14ExtensionSceneMp', '_$s19LockedCameraCapture0abC14ExtensionSceneP0D3Kit03AppdE0Tb', 
                        '_$s19LockedCameraCapture0abC14ExtensionSceneTL', '_$s19LockedCameraCapture0abC7ManagerC18sessionContentURLsSay10Foundation3URLVGvg', 
                        '_$s19LockedCameraCapture0abC7ManagerC18sessionContentURLsSay10Foundation3URLVGvpMV', 

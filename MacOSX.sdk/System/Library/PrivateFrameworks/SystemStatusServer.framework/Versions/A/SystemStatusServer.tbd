@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SystemStatusServer.framework/Versions/A/SystemStatusServer'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _STEntitledDomainsForEntitlementValue, _STStatusDomainNameForEntitlementValue, 
                        _STSystemStatusLogEntityResolving, _STSystemStatusLogServer, 
                        _SystemStatusServerVersionNumber, _SystemStatusServerVersionString ]

@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligencePlatformCore.framework/Versions/A/IntelligencePlatformCore'
-current-version: 155.10
+current-version: 165.6.3
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation11JSONDecoderC24IntelligencePlatformCoreE6decode_7fromURLxSgxm_AA0H0VtSeRzSERzlF', 
                        '_$s10Foundation4DateV24IntelligencePlatformCoreE24dateComponentsJSONString8isAllDay8calendarSSSb_AA8CalendarVtF', 
                        '_$s12GRDBInternal13DatabaseValueV24IntelligencePlatformCoreE05emptyC07forTypeAA0bC11Convertible_pAA0B0C06ColumnI0V_tFZ', 
@@ -1157,6 +1157,8 @@ exports:
                        '_$s24IntelligencePlatformCore13ConfigurationV34isGlobalKnowledgePrototypesEnabledSbvpMV', 
                        '_$s24IntelligencePlatformCore13ConfigurationV35isLongitudinalDataCollectionEnabledSbvg', 
                        '_$s24IntelligencePlatformCore13ConfigurationV35isLongitudinalDataCollectionEnabledSbvpMV', 
+                       '_$s24IntelligencePlatformCore13ConfigurationV35isPersistentEntityIdentifierEnabledSbvg', 
+                       '_$s24IntelligencePlatformCore13ConfigurationV35isPersistentEntityIdentifierEnabledSbvpMV', 
                        '_$s24IntelligencePlatformCore13ConfigurationV36isAutonamingMessagesIngestionEnabledSbvg', 
                        '_$s24IntelligencePlatformCore13ConfigurationV36isAutonamingMessagesIngestionEnabledSbvpMV', 
                        '_$s24IntelligencePlatformCore13ConfigurationV36isEntityRelevanceBiomeSourcesEnabledSbvg', 
@@ -4845,6 +4847,8 @@ exports:
                        '_$s24IntelligencePlatformCore7OptionsV31enableGlobalKnowledgePrototypesACvpZMV', 
                        '_$s24IntelligencePlatformCore7OptionsV32enableLongitudinalDataCollectionACvgZ', 
                        '_$s24IntelligencePlatformCore7OptionsV32enableLongitudinalDataCollectionACvpZMV', 
+                       '_$s24IntelligencePlatformCore7OptionsV32enablePersistentEntityIdentifierACvgZ', 
+                       '_$s24IntelligencePlatformCore7OptionsV32enablePersistentEntityIdentifierACvpZMV', 
                        '_$s24IntelligencePlatformCore7OptionsV32inferenceSupportBackendInProcessACvgZ', 
                        '_$s24IntelligencePlatformCore7OptionsV32inferenceSupportBackendInProcessACvpZMV', 
                        '_$s24IntelligencePlatformCore7OptionsV32updateGlobalKnowledgeStoreAssetsACvgZ', 

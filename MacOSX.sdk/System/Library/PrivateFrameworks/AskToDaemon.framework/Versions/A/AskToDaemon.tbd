@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AskToDaemon.framework/Versions/A/AskToDaemon'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation3URLV11AskToDaemonE18getQueryParametersSayAA12URLQueryItemVGvg', 
                        '_$s10Foundation3URLV11AskToDaemonE18getQueryParametersSayAA12URLQueryItemVGvpMV', 
                        '_$s11AskToDaemon0C0C7startupyyF', '_$s11AskToDaemon0C0CACycfC', 

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LockdownMode.framework/Versions/A/LockdownMode'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12LockdownMode0aB12ManagerErrorO17invalidConnectionyA2CmFWC', 
                        '_$s12LockdownMode0aB12ManagerErrorO2eeoiySbAC_ACtFZ', '_$s12LockdownMode0aB12ManagerErrorO4hash4intoys6HasherVz_tF', 
                        '_$s12LockdownMode0aB12ManagerErrorO9hashValueSivg', '_$s12LockdownMode0aB12ManagerErrorO9hashValueSivpMV', 

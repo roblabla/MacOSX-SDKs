@@ -1,6 +1,0 @@
-framework module MarketplaceKit {
-  umbrella header "MarketplaceKit.h"
-  export *
-
-  module * { export * }
-}

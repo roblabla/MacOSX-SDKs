@@ -35,13 +35,15 @@ typedef NS_ENUM(NSInteger, SRAcousticSettingsAccessibilityBackgroundSoundsName) 
 } API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos);
 
 typedef NS_ENUM(NSInteger, SRAcousticSettingsAccessibilityHeadphoneAccommodationsMediaEnhanceTuning) {
-    SRAcousticSettingsAccessibilityHeadphoneAccommodationsMediaEnhanceTuningBalancedTone = 1,
+    SRAcousticSettingsAccessibilityHeadphoneAccommodationsMediaEnhanceTuningNone API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos) = 0,
+    SRAcousticSettingsAccessibilityHeadphoneAccommodationsMediaEnhanceTuningBalancedTone,
     SRAcousticSettingsAccessibilityHeadphoneAccommodationsMediaEnhanceTuningVocalRange,
     SRAcousticSettingsAccessibilityHeadphoneAccommodationsMediaEnhanceTuningBrightness
 } API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos);
 
 typedef NS_ENUM(NSInteger, SRAcousticSettingsAccessibilityHeadphoneAccommodationsMediaEnhanceBoosting) {
-    SRAcousticSettingsAccessibilityHeadphoneAccommodationsMediaEnhanceBoostingSlight = 1,
+    SRAcousticSettingsAccessibilityHeadphoneAccommodationsMediaEnhanceBoostingNone API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos) = 0,
+    SRAcousticSettingsAccessibilityHeadphoneAccommodationsMediaEnhanceBoostingSlight,
     SRAcousticSettingsAccessibilityHeadphoneAccommodationsMediaEnhanceBoostingModerate,
     SRAcousticSettingsAccessibilityHeadphoneAccommodationsMediaEnhanceBoostingStrong
 } API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos);

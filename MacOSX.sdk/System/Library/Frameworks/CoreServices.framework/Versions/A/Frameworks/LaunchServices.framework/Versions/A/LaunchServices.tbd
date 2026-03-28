@@ -1,20 +1,16 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices'
 current-version: 1141.1
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Foundation ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _LSApplicationSINFKey, _LSApplicationWorkspaceErrorDomain, 
                        _LSApplicationsChangedNotificationName, _LSApplyURLOverridesForContacts, 
                        _LSBlockUntilCompleteKey, _LSContinuityErrorDomain, _LSCopyDefaultRoleHandlerForContentType, 
@@ -269,7 +265,7 @@ exports:
                        _LSQuery, _LSQueryContext, _LSQueryResult, _LSRecordEnumerator, 
                        _LSStringLocalizer, _LSTemplateApplication, _LSTemplateApplicationActionsManager, 
                        _LSURLOverride, _UTDeclaredTypeRecord ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AcquireIconRef, _CompositeIconRef, _GetCustomIconsEnabled, 
                        _GetIconRef, _GetIconRefFromComponent, _GetIconRefFromFileInfo, 
                        _GetIconRefFromFolder, _GetIconRefFromIconFamilyPtr, _GetIconRefFromTypeInfo, 
@@ -507,7 +503,7 @@ exports:
     objc-classes:    [ LSBundleWrapperCreator, LSBundleWrapperStagingReceipt, LSBundleWrapperUpdater, 
                        LSCodeEvaluation, LSCodeEvaluationInfo, LSCodeEvaluationOperation, 
                        LSIconResource, LSOpenWithMenuConstructor, _LSInternetLocator ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ __LSAppStateBlockedKey, __LSAppStateInstalledKey, __LSAppStatePlaceholderKey, 
                        __LSAppStateRemovedKey, __LSAppStateRestrictedKey, __LSAppStateValidKey ]
 ...

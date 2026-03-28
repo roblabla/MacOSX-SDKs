@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotoLibraryServicesCore.framework/Versions/A/PhotoLibraryServicesCore'
-current-version: 821.0.120
+current-version: 841.0.101
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ALGetLibrarySizes, _ALGetPhotosAndVideosCount, _ALPhotosAndVideosCountNotificationName, 
                        _ALRegisterForPhotosAndVideosCount, _ALSecondsNeededToMigrateStore, 
                        _ALUnregisterForPhotosAndVideosCount, _DCFFileGroupNameFormat, 
@@ -39,12 +37,15 @@ exports:
                        _PLAddTIFFDPIPropertiesToDictionary, _PLAdjustmentBaseVersionDescription, 
                        _PLAdjustmentBaseVersionKey, _PLAdjustmentDataBlobKey, _PLAdjustmentEditorBundleIDKey, 
                        _PLAdjustmentFormatIdentifierKey, _PLAdjustmentFormatVersionKey, 
-                       _PLAdjustmentRenderTypesKey, _PLAdjustmentTimestampKey, _PLAggdGetLog, 
-                       _PLAggregateComparator, _PLAirPlayGetLog, _PLAllowedResourceTypesForOriginalResources, 
+                       _PLAdjustmentRenderTypeDescription, _PLAdjustmentRenderTypesKey, 
+                       _PLAdjustmentTimestampKey, _PLAggdGetLog, _PLAggregateComparator, 
+                       _PLAirPlayGetLog, _PLAllowedResourceTypesForOriginalResources, 
                        _PLAmbientPhotoFrameGetLog, _PLAnalysisCoordinatorGetLog, 
-                       _PLAnimationTelemetryGetLog, _PLAppIntentsGetLog, _PLArchiveDataFromUUIDStringsSet, 
-                       _PLArrayFromXPCDictionary, _PLArrayFromXPCObject, _PLAssetAnalysisGetLog, 
-                       _PLAssetCountsByType, _PLAssetExplorerGetLog, _PLAssetFormatsAllKnownFormatIDs, 
+                       _PLAnimationTelemetryGetLog, _PLAppIntentsAnnotationGetLog, 
+                       _PLAppIntentsEntityGetLog, _PLAppIntentsExecutionGetLog, _PLAppIntentsGetLog, 
+                       _PLArchiveDataFromUUIDStringsSet, _PLArrayFromXPCDictionary, 
+                       _PLArrayFromXPCObject, _PLAssetAnalysisGetLog, _PLAssetCountsByType, 
+                       _PLAssetExplorerGetLog, _PLAssetFormatsAllKnownFormatIDs, 
                        _PLAssetImportGetLog, _PLAssetStackGetLog, _PLAssetTypeForItems, 
                        _PLAssetUUIDRecoveryMappingFileName, _PLAssetsLibraryLocalizedFrameworkString, 
                        _PLAssetsToAlbumsMappingFileName, _PLAssetsdClientMainBundleSandboxedURL, 
@@ -76,8 +77,8 @@ exports:
                        _PLConvertMercuryUUIDString, _PLConvertPathToSRGBPath, _PLCopySQLiteDatabase, 
                        _PLCoreAnalyticsAddedToLibraryToProcessingDurationKey, _PLCoreAnalyticsAnalysisStateEvent, 
                        _PLCoreAnalyticsAnalysisStateEventProcessedPercentKey, _PLCoreAnalyticsAnalysisStateEventUnavailablePercentKey, 
-                       _PLCoreAnalyticsAssetFinalizationEvent, _PLCoreAnalyticsBackgroundResourceUploadEvent, 
-                       _PLCoreAnalyticsBackgroundResourceUploadEventBundleIdentifiersKey, 
+                       _PLCoreAnalyticsAssetDuration, _PLCoreAnalyticsAssetFinalizationEvent, 
+                       _PLCoreAnalyticsBackgroundResourceUploadEvent, _PLCoreAnalyticsBackgroundResourceUploadEventBundleIdentifiersKey, 
                        _PLCoreAnalyticsBackgroundResourceUploadEventCPLEnabledKey, 
                        _PLCoreAnalyticsBackgroundResourceUploadEventTotalAssetCountKey, 
                        _PLCoreAnalyticsBackgroundResourceUploadTotalConfigurationAttemptCountKey, 
@@ -122,6 +123,7 @@ exports:
                        _PLCoreAnalyticsCollectionsStatisticsEventAvgNumAssetsKey, 
                        _PLCoreAnalyticsCollectionsStatisticsEventMedianNumAssetsKey, 
                        _PLCoreAnalyticsCollectionsStatisticsEventNumberOfCollectionsKey, 
+                       _PLCoreAnalyticsDeferredMediadProcessingAdjustmentRenderType, 
                        _PLCoreAnalyticsDeferredMediadProcessingAssetKind, _PLCoreAnalyticsDeferredMediadProcessingClientBundleIdentifier, 
                        _PLCoreAnalyticsDeferredMediadProcessingDeferredProcessingNeededKey, 
                        _PLCoreAnalyticsDeferredMediadProcessingDimensions, _PLCoreAnalyticsDeferredMediadProcessingErrorKey, 
@@ -473,8 +475,8 @@ exports:
                        _PLLibraryServicesOperationNameInitChangeHandling, _PLLibraryServicesOperationNameLocaleChangeCheck, 
                        _PLLibraryServicesOperationNameNotifyLibraryAvailability, 
                        _PLLibraryServicesOperationNamePrefetchSensitiveContentAnalysisPolicy, 
-                       _PLLibraryServicesOperationNameSpaceAttribution, _PLLibraryServicesOperationNameStartJournalManager, 
-                       _PLLibraryServicesOperationNameSyndicationProcessRecordedDeletes, 
+                       _PLLibraryServicesOperationNameSignalCascadeDonation, _PLLibraryServicesOperationNameSpaceAttribution, 
+                       _PLLibraryServicesOperationNameStartJournalManager, _PLLibraryServicesOperationNameSyndicationProcessRecordedDeletes, 
                        _PLLibraryServicesOperationNameThumbnailRebuildReq, _PLLibraryServicesOperationNameUpdateGraphLabels, 
                        _PLLibraryServicesOperationNameUpdatePADLibraryOpened, _PLLibraryViewBulletinSuppresionContext, 
                        _PLLightweightReimportPhotoCloudSharingAlbumInfoFileName, 
@@ -521,8 +523,8 @@ exports:
                        _PLPhotoLibraryUsageDescriptionKey, _PLPhotoPickerGetLog, 
                        _PLPhotoSharingGetLog, _PLPhotoStreamDataDirectoryName, _PLPhotosAccessAllowed, 
                        _PLPhotosAccessAllowedResultForClientAuditToken, _PLPhotosAppBundleID, 
-                       _PLPhotosApplicationSettingsDomain, _PLPhotosBackendSearchLogSubsystem, 
-                       _PLPhotosBundleId, _PLPhotosErrorCodeFromUnderlyingError, 
+                       _PLPhotosAppIntentsLogSubsystem, _PLPhotosApplicationSettingsDomain, 
+                       _PLPhotosBackendSearchLogSubsystem, _PLPhotosBundleId, _PLPhotosErrorCodeFromUnderlyingError, 
                        _PLPhotosErrorDomain, _PLPhotosErrorKeyNewURLSandboxExtension, 
                        _PLPhotosErrorKeyValidationFailureReasons, _PLPhotosFullAccessAllowed, 
                        _PLPhotosIntelligenceLogSubsystem, _PLPhotosLimitedAccessAllowed, 

@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/JetPack.framework/Versions/A/JetPack'
 exports:
   - targets:         [ x86_64-macos ]
@@ -34,8 +34,8 @@ exports:
                        __ZTINSt3__110__function6__baseIFbRN7JetPack12ReaderConfigENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10shared_ptrINS2_10BaseStreamEEEEEE, 
                        __ZTINSt3__110__function6__baseIFbRN7JetPack12ReaderConfigEPvNS_10shared_ptrINS2_13ArchiveStreamEEEEEE, 
                        __ZTINSt3__110__function6__baseIFmPhmEEE, __ZTINSt3__110__function6__baseIFmvEEE, 
-                       __ZTINSt3__110__function6__baseIFvmEEE, __ZTINSt3__110__function6__funcIPFbRN7JetPack12ReaderConfigENS2_10SegmentTagENS_10shared_ptrINS2_10BaseStreamEEEENS_9allocatorISA_EES9_EE, 
-                       __ZTINSt3__110__function6__funcIPFbRN7JetPack12ReaderConfigENS_10shared_ptrINS2_10BaseStreamEEEENS_9allocatorIS9_EES8_EE, 
+                       __ZTINSt3__110__function6__baseIFvmEEE, __ZTINSt3__110__function6__funcIPFbRN7JetPack12ReaderConfigENS2_10SegmentTagENS_10shared_ptrINS2_10BaseStreamEEEES9_EE, 
+                       __ZTINSt3__110__function6__funcIPFbRN7JetPack12ReaderConfigENS_10shared_ptrINS2_10BaseStreamEEEES8_EE, 
                        __ZTINSt3__120__shared_ptr_emplaceIN7JetPack10FileStreamENS_9allocatorIS2_EEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceIN7JetPack12BufferStreamENS_9allocatorIS2_EEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceIN7JetPack12ReaderConfigENS_9allocatorIS2_EEEE, 
@@ -93,8 +93,8 @@ exports:
                        __ZTSNSt3__110__function6__baseIFbRN7JetPack12ReaderConfigENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10shared_ptrINS2_10BaseStreamEEEEEE, 
                        __ZTSNSt3__110__function6__baseIFbRN7JetPack12ReaderConfigEPvNS_10shared_ptrINS2_13ArchiveStreamEEEEEE, 
                        __ZTSNSt3__110__function6__baseIFmPhmEEE, __ZTSNSt3__110__function6__baseIFmvEEE, 
-                       __ZTSNSt3__110__function6__baseIFvmEEE, __ZTSNSt3__110__function6__funcIPFbRN7JetPack12ReaderConfigENS2_10SegmentTagENS_10shared_ptrINS2_10BaseStreamEEEENS_9allocatorISA_EES9_EE, 
-                       __ZTSNSt3__110__function6__funcIPFbRN7JetPack12ReaderConfigENS_10shared_ptrINS2_10BaseStreamEEEENS_9allocatorIS9_EES8_EE, 
+                       __ZTSNSt3__110__function6__baseIFvmEEE, __ZTSNSt3__110__function6__funcIPFbRN7JetPack12ReaderConfigENS2_10SegmentTagENS_10shared_ptrINS2_10BaseStreamEEEES9_EE, 
+                       __ZTSNSt3__110__function6__funcIPFbRN7JetPack12ReaderConfigENS_10shared_ptrINS2_10BaseStreamEEEES8_EE, 
                        __ZTSNSt3__120__shared_ptr_emplaceIN7JetPack10FileStreamENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceIN7JetPack12BufferStreamENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceIN7JetPack12ReaderConfigENS_9allocatorIS2_EEEE, 
@@ -122,7 +122,7 @@ exports:
                        __ZTSSt8__nestedIN7JetPack34UnableToParseMultiSegmentExceptionEE, 
                        __ZTSSt8__nestedIN7JetPack38UnableToParseEncryptedSegmentExceptionEE, 
                        __ZTSSt8__nestedIN7JetPack42UnableToParseSerializationSegmentExceptionEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _JetPackCreateDataStream, _JetPackCreateFileStream, _JetPackFileEntryGetPathname, 
                        _JetPackFileEntryWriteToDirectory, _JetPackReaderCreate, _JetPackReaderDestroy, 
                        _JetPackReaderGetErrorMessage, _JetPackReaderGetProperty, 

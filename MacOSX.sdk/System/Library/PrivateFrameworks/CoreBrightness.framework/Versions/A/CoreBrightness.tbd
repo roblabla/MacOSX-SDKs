@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreBrightness.framework/Versions/A/CoreBrightness'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CBALCALSCopyALSServiceClient, _CBALCDisplayFeatureAvailable, 
                        _CBALCGetBoolPreferenceForKey, _CBALCGetDictPreferenceForKey, 
                        _CBALCGetDisplayAutoBrightnessEnabled, _CBALCGetFloatPreferenceForKey, 
@@ -21,7 +19,7 @@ exports:
     objc-classes:    [ BrightnessSystem, BrightnessSystemClient, BrightnessSystemClientInternal, 
                        CBAdaptationClient, CBBlueLightClient, CBClient, CBKeyboardPreferencesManager, 
                        CBTrueToneClient, DisplayServicesClient, KeyboardBrightnessClient ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo12CBPMClientIDVs23CustomStringConvertible14CoreBrightnessMc', 
                        '_$sSo12CBPMClientIDVs23CustomStringConvertible14CoreBrightnesssACP11descriptionSSvgTW', 
                        '_$sSo14CBPMBudgetTypeas12CaseIterable14CoreBrightnessMc', 

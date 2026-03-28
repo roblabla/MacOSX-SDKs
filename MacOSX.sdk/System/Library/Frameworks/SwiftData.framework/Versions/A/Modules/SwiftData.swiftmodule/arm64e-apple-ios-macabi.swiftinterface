@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature VariadicGenerics -enable-experimental-feature ExtensionMacros -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 130 -module-name SwiftData
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature VariadicGenerics -enable-experimental-feature ExtensionMacros -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 135 -module-name SwiftData
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 public import Foundation
 @_exported public import Observation
 public import Swift
@@ -44,12 +44,8 @@ public struct ModelConfiguration : Swift.Identifiable, Swift.Hashable {
   }
   public init(isStoredInMemoryOnly: Swift.Bool = false)
   public init(for forTypes: any SwiftData.PersistentModel.Type..., isStoredInMemoryOnly: Swift.Bool = false)
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ name: Swift.String? = nil, schema: SwiftData.Schema? = nil, isStoredInMemoryOnly: Swift.Bool = false, allowsSave: Swift.Bool = true, groupContainer: SwiftData.ModelConfiguration.GroupContainer = .automatic, cloudKitDatabase: SwiftData.ModelConfiguration.CloudKitDatabase = .automatic)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ name: Swift.String? = nil, schema: SwiftData.Schema? = nil, url: Foundation.URL, allowsSave: Swift.Bool = true, cloudKitDatabase: SwiftData.ModelConfiguration.CloudKitDatabase = .automatic)
-  #endif
   public var id: Foundation.URL {
     get
   }
@@ -90,9 +86,7 @@ extension SwiftData.ModelConfiguration.CloudKitDatabase : Swift.Sendable {
 final public class DefaultStore : SwiftData.DataStore, SwiftData.DataStoreBatching {
   public typealias Configuration = SwiftData.ModelConfiguration
   public typealias Snapshot = SwiftData.DefaultSnapshot
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(_ configuration: SwiftData.ModelConfiguration, migrationPlan: (any SwiftData.SchemaMigrationPlan.Type)? = nil) throws
-  #endif
   final public let name: Swift.String
   final public let schema: SwiftData.Schema
   final public var identifier: Swift.String {
@@ -162,11 +156,9 @@ extension SwiftData.DefaultSerialModelExecutor : _Concurrency.SerialExecutor {
 @available(swift 5.9)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 extension SwiftData.ModelActor {
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript<T>(id: SwiftData.PersistentIdentifier, as as: T.Type) -> T? where T : SwiftData.PersistentModel {
     get
   }
-  #endif
 }
 @_hasMissingDesignatedInitializers @available(swift 5.9)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
@@ -181,15 +173,9 @@ public class ModelContainer : Swift.Equatable, @unchecked Swift.Sendable {
     get
   }
   public static func == (lhs: SwiftData.ModelContainer, rhs: SwiftData.ModelContainer) -> Swift.Bool
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(for forTypes: any SwiftData.PersistentModel.Type..., migrationPlan: (any SwiftData.SchemaMigrationPlan.Type)? = nil, configurations: SwiftData.ModelConfiguration...) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(for givenSchema: SwiftData.Schema, migrationPlan: (any SwiftData.SchemaMigrationPlan.Type)? = nil, configurations: SwiftData.ModelConfiguration...) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(for givenSchema: SwiftData.Schema, migrationPlan: (any SwiftData.SchemaMigrationPlan.Type)? = nil, configurations: [SwiftData.ModelConfiguration]) throws
-  #endif
   @available(swift 5.9)
   @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
   convenience public init(for forTypes: any SwiftData.PersistentModel.Type..., configurations: any SwiftData.DataStoreConfiguration...) throws
@@ -216,9 +202,7 @@ public protocol DataStore : AnyObject {
   var identifier: Swift.String { get }
   var schema: SwiftData.Schema { get }
   var configuration: Self.Configuration { get }
-  #if compiler(>=5.3) && $NonescapableTypes
   init(_ configuration: Self.Configuration, migrationPlan: (any SwiftData.SchemaMigrationPlan.Type)?) throws
-  #endif
   func erase() throws
   func fetch<T>(_ request: SwiftData.DataStoreFetchRequest<T>) throws -> SwiftData.DataStoreFetchResult<T, Self.Snapshot> where T : SwiftData.PersistentModel
   func fetchCount<T>(_ request: SwiftData.DataStoreFetchRequest<T>) throws -> Swift.Int where T : SwiftData.PersistentModel
@@ -246,9 +230,7 @@ public enum DataStoreError : Swift.Error {
 public protocol DataStoreConfiguration : Swift.Hashable {
   associatedtype Store : SwiftData.DataStore where Self == Self.Store.Configuration
   var name: Swift.String { get }
-  #if compiler(>=5.3) && $NonescapableTypes
   var schema: SwiftData.Schema? { get set }
-  #endif
   func validate() throws
 }
 @available(swift 5.9)
@@ -259,9 +241,7 @@ public typealias DataStoreSnapshotValue = Swift.Codable & Swift.Sendable
 public protocol DataStoreSnapshot : Swift.Decodable, Swift.Encodable, Swift.Sendable {
   var persistentIdentifier: SwiftData.PersistentIdentifier { get }
   init(from: any SwiftData.BackingData, relatedBackingDatas: inout [SwiftData.PersistentIdentifier : any SwiftData.BackingData])
-  #if compiler(>=5.3) && $NonescapableTypes
   func copy(persistentIdentifier: SwiftData.PersistentIdentifier, remappedIdentifiers: [SwiftData.PersistentIdentifier : SwiftData.PersistentIdentifier]?) -> Self
-  #endif
 }
 @available(swift 5.9)
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
@@ -271,17 +251,11 @@ public enum DataStoreSnapshotCodingKey : Swift.CodingKey {
   public var stringValue: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(stringValue: Swift.String)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var intValue: Swift.Int? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(intValue: Swift.Int)
-  #endif
 }
 @available(swift 5.9)
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
@@ -290,9 +264,7 @@ public struct DefaultSnapshot : SwiftData.DataStoreSnapshot {
   public init(from backingData: any SwiftData.BackingData, relatedBackingDatas: inout [SwiftData.PersistentIdentifier : any SwiftData.BackingData])
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
-  #if compiler(>=5.3) && $NonescapableTypes
   public func copy(persistentIdentifier: SwiftData.PersistentIdentifier, remappedIdentifiers: [SwiftData.PersistentIdentifier : SwiftData.PersistentIdentifier]? = [:]) -> SwiftData.DefaultSnapshot
-  #endif
 }
 @available(swift 5.9)
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
@@ -398,14 +370,12 @@ extension SwiftData.SwiftDataError {
 @available(swift 5.9)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 public class ModelContext : Swift.Equatable, Swift.SendableMetatype {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(swift 5.9)
   @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
   public var author: Swift.String? {
     get
     set
   }
-  #endif
   public var undoManager: Foundation.UndoManager? {
     get
     set
@@ -436,15 +406,11 @@ public class ModelContext : Swift.Equatable, Swift.SendableMetatype {
     get
   }
   public func model(for persistentModelID: SwiftData.PersistentIdentifier) -> any SwiftData.PersistentModel
-  #if compiler(>=5.3) && $NonescapableTypes
   public func registeredModel<T>(for persistentModelID: SwiftData.PersistentIdentifier) -> T? where T : SwiftData.PersistentModel
-  #endif
   public func insert<T>(_ model: T) where T : SwiftData.PersistentModel
   public func rollback()
   public func processPendingChanges()
-  #if compiler(>=5.3) && $NonescapableTypes
   public func delete<T>(model: T.Type, where predicate: Foundation.Predicate<T>? = nil, includeSubclasses: Swift.Bool = true) throws where T : SwiftData.PersistentModel
-  #endif
   public func delete<T>(_ model: T) where T : SwiftData.PersistentModel
   public func transaction(block: () throws -> Swift.Void) throws
   public func save() throws
@@ -462,9 +428,7 @@ public class ModelContext : Swift.Equatable, Swift.SendableMetatype {
     case insertedIdentifiers
     case updatedIdentifiers
     case deletedIdentifiers
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     @available(swift 5.9)
     @available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
     public typealias RawValue = Swift.String
@@ -528,25 +492,19 @@ extension SwiftData.PersistentModel {
   
   @_disfavoredOverload public func getValue<Value>(forKey: Swift.KeyPath<Self, Value>) -> Value where Value : Swift.Decodable
   public func getValue<Value>(forKey: Swift.KeyPath<Self, Value>) -> Value where Value : SwiftData.PersistentModel
-  #if compiler(>=5.3) && $NonescapableTypes
   public func getValue<Value>(forKey: Swift.KeyPath<Self, Value?>) -> Value? where Value : SwiftData.PersistentModel
-  #endif
   public func getValue<Value, OtherModel>(forKey: Swift.KeyPath<Self, Value>) -> Value where Value : SwiftData.RelationshipCollection, OtherModel == Value.PersistentElement
   public func getValue<Value, OtherModel>(forKey: Swift.KeyPath<Self, Value>) -> Value where Value : Swift.Decodable, Value : SwiftData.RelationshipCollection, OtherModel == Value.PersistentElement
   public func getTransformableValue<Value>(forKey: Swift.KeyPath<Self, Value>) -> Value
   @_disfavoredOverload public func setValue<Value>(forKey: Swift.KeyPath<Self, Value>, to newValue: Value) where Value : Swift.Encodable
   public func setValue<Value>(forKey: Swift.KeyPath<Self, Value>, to newValue: Value) where Value : SwiftData.PersistentModel
-  #if compiler(>=5.3) && $NonescapableTypes
   public func setValue<Value>(forKey: Swift.KeyPath<Self, Value?>, to newValue: Value?) where Value : SwiftData.PersistentModel
-  #endif
   public func setValue<Value, OtherModel>(forKey: Swift.KeyPath<Self, Value>, to newValue: Value) where Value : SwiftData.RelationshipCollection, OtherModel == Value.PersistentElement
   public func setValue<Value, OtherModel>(forKey: Swift.KeyPath<Self, Value>, to newValue: Value) where Value : Swift.Encodable, Value : SwiftData.RelationshipCollection, OtherModel == Value.PersistentElement
   public func setTransformableValue<Value>(forKey: Swift.KeyPath<Self, Value>, to newValue: Value)
-  #if compiler(>=5.3) && $NonescapableTypes
   public var modelContext: SwiftData.ModelContext? {
     get
   }
-  #endif
   public var persistentModelID: SwiftData.PersistentIdentifier {
     get
   }
@@ -572,9 +530,7 @@ public protocol HistoryTransaction : Swift.Hashable, Swift.Identifiable, Swift.S
   var token: Self.TokenType { get }
   var transactionIdentifier: Self.TransactionIdentifier { get }
   var storeIdentifier: Swift.String { get }
-  #if compiler(>=5.3) && $NonescapableTypes
   var author: Swift.String? { get }
-  #endif
 }
 @available(swift 5.9)
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
@@ -623,9 +579,7 @@ public protocol HistoryDelete<Model> : Swift.Sendable {
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
 public protocol HistoryToken : Swift.Comparable, Swift.Decodable, Swift.Encodable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   associatedtype TokenType : Swift.Decodable, Swift.Encodable, Swift.Hashable, Swift.Sendable
-  #if compiler(>=5.3) && $NonescapableTypes
   var tokenValue: Self.TokenType? { get }
-  #endif
 }
 @available(swift 5.9)
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
@@ -633,18 +587,14 @@ public struct HistoryTombstone<Model> : Swift.Sequence, @unchecked Swift.Sendabl
   @available(swift 5.9)
   @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
   public struct Iterator : Swift.IteratorProtocol {
-    #if compiler(>=5.3) && $NonescapableTypes
     public mutating func next() -> Any?
-    #endif
     @available(swift 5.9)
     @available(iOS 18, tvOS 18, watchOS 11, visionOS 2, macOS 15, *)
     public typealias Element = Any
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(keyPath: Swift.PartialKeyPath<Model>) -> (any Swift.Sendable)? {
     get
   }
-  #endif
   public func makeIterator() -> SwiftData.HistoryTombstone<Model>.Iterator
   @available(swift 5.9)
   @available(iOS 18, tvOS 18, watchOS 11, visionOS 2, macOS 15, *)
@@ -657,13 +607,9 @@ public struct HistoryDescriptor<TransactionType> where TransactionType : SwiftDa
   public var fetchLimit: Swift.UInt64
   @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
   public var sortBy: [Foundation.SortDescriptor<TransactionType>]
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(predicate: Foundation.Predicate<TransactionType>? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
   public init(predicate: Foundation.Predicate<TransactionType>? = nil, sortBy: [Foundation.SortDescriptor<TransactionType>] = [])
-  #endif
 }
 @available(swift 5.9)
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
@@ -741,11 +687,9 @@ public struct DefaultHistoryToken : SwiftData.HistoryToken, Swift.Comparable & S
   public var id: Swift.Int {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var tokenValue: SwiftData.DefaultHistoryToken.TokenType? {
     get
   }
-  #endif
   public static func == (lhs: SwiftData.DefaultHistoryToken, rhs: SwiftData.DefaultHistoryToken) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public static func < (lhs: SwiftData.DefaultHistoryToken, rhs: SwiftData.DefaultHistoryToken) -> Swift.Bool
@@ -796,11 +740,9 @@ final public class Schema : Swift.Codable, Swift.Hashable {
   final public func hash(into hasher: inout Swift.Hasher)
   final public func save(to toURL: Foundation.URL) throws
   public static func load(from fromURL: Foundation.URL) throws -> SwiftData.Schema
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(swift 5.9)
   @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
   final public func entity<T>(for type: T.Type) -> SwiftData.Schema.Entity? where T : SwiftData.PersistentModel
-  #endif
   @available(swift 5.9)
   @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
   public static func entityName<T>(for type: T.Type) -> Swift.String where T : SwiftData.PersistentModel
@@ -826,9 +768,7 @@ final public class Schema : Swift.Codable, Swift.Hashable {
   @available(swift 5.9)
   @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
   public struct PropertyMetadata {
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(name: Swift.String, keypath: Swift.AnyKeyPath, defaultValue: Any? = nil, metadata: (any SwiftData.SchemaProperty)? = nil)
-    #endif
   }
   @objc deinit
   final public var hashValue: Swift.Int {
@@ -858,9 +798,7 @@ public struct FetchDescriptor<T> where T : SwiftData.PersistentModel {
   public var includePendingChanges: Swift.Bool
   public var propertiesToFetch: [Swift.PartialKeyPath<T>]
   public var relationshipKeyPathsForPrefetching: [Swift.PartialKeyPath<T>]
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(predicate: Foundation.Predicate<T>? = nil, sortBy: [Foundation.SortDescriptor<T>] = [])
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension SwiftData.FetchDescriptor : Swift.Equatable {
@@ -878,12 +816,10 @@ extension SwiftData.Schema {
     final public var name: Swift.String
     final public var subentities: Swift.Set<SwiftData.Schema.Entity>
     final public var superentityName: Swift.String?
-    #if compiler(>=5.3) && $NonescapableTypes
     final public var superentity: SwiftData.Schema.Entity? {
       get
       set
     }
-    #endif
     final public var storedProperties: [any SwiftData.SchemaProperty] {
       get
       set
@@ -987,12 +923,8 @@ extension SwiftData.Schema {
         get
       }
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(_ options: SwiftData.Schema.Attribute.Option..., originalName: Swift.String? = nil, hashModifier: Swift.String? = nil)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(name: Swift.String, originalName: Swift.String? = nil, options: [SwiftData.Schema.Attribute.Option] = [], valueType: any Any.Type, defaultValue: Any? = nil, hashModifier: Swift.String? = nil)
-    #endif
     required public init(from decoder: any Swift.Decoder) throws
     public func encode(to encoder: any Swift.Encoder) throws
     public static func == (lhs: SwiftData.Schema.Attribute, rhs: SwiftData.Schema.Attribute) -> Swift.Bool
@@ -1024,9 +956,7 @@ extension SwiftData.Schema {
   @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
   final public class CompositeAttribute : SwiftData.Schema.Attribute {
     final public var properties: [SwiftData.Schema.Attribute]
-    #if compiler(>=5.3) && $NonescapableTypes
     override public init(name: Swift.String, originalName: Swift.String? = nil, options: [SwiftData.Schema.Attribute.Option] = [], valueType: any Any.Type, defaultValue: Any? = nil, hashModifier: Swift.String? = nil)
-    #endif
     required public init(from decoder: any Swift.Decoder) throws
     override final public func encode(to encoder: any Swift.Encoder) throws
     @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
@@ -1061,9 +991,7 @@ extension SwiftData.Schema {
       case nullify
       case cascade
       case deny
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(rawValue: Swift.String)
-      #endif
       @available(swift 5.9)
       @available(iOS 17, tvOS 17, watchOS 10, macOS 14, *)
       public typealias RawValue = Swift.String
@@ -1088,9 +1016,7 @@ extension SwiftData.Schema {
       }
       public init(from decoder: any Swift.Decoder) throws
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(_ options: SwiftData.Schema.Relationship.Option..., deleteRule: SwiftData.Schema.Relationship.DeleteRule = .nullify, minimumModelCount: Swift.Int? = 0, maximumModelCount: Swift.Int? = 0, originalName: Swift.String? = nil, inverse: Swift.AnyKeyPath? = nil, hashModifier: Swift.String? = nil)
-    #endif
     public init(from decoder: any Swift.Decoder) throws
     final public func encode(to encoder: any Swift.Encoder) throws
     final public var isUnique: Swift.Bool {
@@ -1144,22 +1070,16 @@ extension SwiftData.Schema {
     }
     public enum CodingKeys : Swift.CodingKey {
       case indices
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(stringValue: Swift.String)
-      #endif
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(intValue: Swift.Int)
-      #endif
       public static func == (a: SwiftData.Schema.Index<T>.CodingKeys, b: SwiftData.Schema.Index<T>.CodingKeys) -> Swift.Bool
       public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
-      #if compiler(>=5.3) && $NonescapableTypes
       public var intValue: Swift.Int? {
         get
       }
-      #endif
       public var stringValue: Swift.String {
         get
       }
@@ -1198,22 +1118,16 @@ extension SwiftData.Schema {
     }
     public enum CodingKeys : Swift.CodingKey {
       case constraints
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(stringValue: Swift.String)
-      #endif
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(intValue: Swift.Int)
-      #endif
       public static func == (a: SwiftData.Schema.Unique<T>.CodingKeys, b: SwiftData.Schema.Unique<T>.CodingKeys) -> Swift.Bool
       public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
-      #if compiler(>=5.3) && $NonescapableTypes
       public var intValue: Swift.Int? {
         get
       }
-      #endif
       public var stringValue: Swift.String {
         get
       }
@@ -1266,11 +1180,9 @@ public struct PersistentIdentifier : Swift.Hashable, Swift.Identifiable, Swift.E
   public var entityName: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var storeIdentifier: Swift.String? {
     get
   }
-  #endif
   public init(from decoder: any Swift.Decoder) throws
   public static func == (lhs: SwiftData.PersistentIdentifier, rhs: SwiftData.PersistentIdentifier) -> Swift.Bool
   public static func < (lhs: SwiftData.PersistentIdentifier, rhs: SwiftData.PersistentIdentifier) -> Swift.Bool
@@ -1300,35 +1212,27 @@ public protocol RelationshipCollection {
 extension Swift.Array : SwiftData.RelationshipCollection where Element : SwiftData.PersistentModel {
   public typealias PersistentElement = Element
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @available(swift 5.9)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 extension Swift.Optional : SwiftData.RelationshipCollection where Wrapped : Swift.Sequence, Wrapped.Element : SwiftData.PersistentModel {
   public typealias PersistentElement = Wrapped.Element
 }
-#endif
 @available(swift 5.9)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 public protocol BackingData<Model> {
   associatedtype Model : SwiftData.PersistentModel
   init(for modelType: Self.Model.Type)
-  #if compiler(>=5.3) && $NonescapableTypes
   var persistentModelID: SwiftData.PersistentIdentifier? { get set }
-  #endif
   var metadata: Any { get }
   @_disfavoredOverload func getValue<Value>(forKey: Swift.KeyPath<Self.Model, Value>) -> Value where Value : Swift.Decodable
   func getValue<Value>(forKey: Swift.KeyPath<Self.Model, Value>) -> Value where Value : SwiftData.PersistentModel
-  #if compiler(>=5.3) && $NonescapableTypes
   func getValue<Value>(forKey: Swift.KeyPath<Self.Model, Value?>) -> Value? where Value : SwiftData.PersistentModel
-  #endif
   func getValue<Value, OtherModel>(forKey: Swift.KeyPath<Self.Model, Value>) -> Value where Value : SwiftData.RelationshipCollection, OtherModel == Value.PersistentElement
   func getValue<Value, OtherModel>(forKey: Swift.KeyPath<Self.Model, Value>) -> Value where Value : Swift.Decodable, Value : SwiftData.RelationshipCollection, OtherModel == Value.PersistentElement
   func getTransformableValue<Value>(forKey: Swift.KeyPath<Self.Model, Value>) -> Value
   @_disfavoredOverload func setValue<Value>(forKey: Swift.KeyPath<Self.Model, Value>, to newValue: Value) where Value : Swift.Encodable
   func setValue<Value>(forKey: Swift.KeyPath<Self.Model, Value>, to newValue: Value) where Value : SwiftData.PersistentModel
-  #if compiler(>=5.3) && $NonescapableTypes
   func setValue<Value>(forKey: Swift.KeyPath<Self.Model, Value?>, to newValue: Value?) where Value : SwiftData.PersistentModel
-  #endif
   func setValue<Value, OtherModel>(forKey: Swift.KeyPath<Self.Model, Value>, to newValue: Value) where Value : SwiftData.RelationshipCollection, OtherModel == Value.PersistentElement
   func setValue<Value, OtherModel>(forKey: Swift.KeyPath<Self.Model, Value>, to newValue: Value) where Value : Swift.Encodable, Value : SwiftData.RelationshipCollection, OtherModel == Value.PersistentElement
   func setTransformableValue<Value>(forKey: Swift.KeyPath<Self.Model, Value>, to newValue: Value)

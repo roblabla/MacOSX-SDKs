@@ -1,20 +1,18 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CPAnalytics.framework/Versions/A/CPAnalytics'
-current-version: 821.0.120
+current-version: 841.0.101
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AssetExplorer, CPAnalyticsTestSupport, MediaMiningKit, Photo Booth, 
                        PhotoAnalysis, PhotoVision, Photos, PhotosFileProvider, PhotosGraph, 
                        PhotosIntelligence, PhotosTests, PhotosUICore, PhotosUIEdit, 
                        PhotosUIPrivate, graphctl ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CPAnalyticKnowledgeStoreVersionType, _CPAnalyticKnowledgeStoreVersionValue, 
+                       _CPAnalyticsAppLaunchSource, _CPAnalyticsAppLaunchSourceEvent, 
                        _CPAnalyticsBiomeConfigEventsKey, _CPAnalyticsBiomeMemoryCreationGlobalTraitsKey, 
                        _CPAnalyticsBiomeMemoryCreationMaxGlobalTraitsToDonate, _CPAnalyticsBiomeMemoryCreationQueryActivityEntities, 
                        _CPAnalyticsBiomeMemoryCreationSanitizedPromptKey, _CPAnalyticsBiomePayloadActivityTypeKey, 
@@ -36,17 +34,17 @@ exports:
                        _CPAnalyticsEventAssetExportPreparationCompleted, _CPAnalyticsEventAssetExportPreparationFailed, 
                        _CPAnalyticsEventAssetFavorited, _CPAnalyticsEventAssetUnfavorited, 
                        _CPAnalyticsEventAssetViewed, _CPAnalyticsEventAssetsDeleted, 
-                       _CPAnalyticsEventExitEdit, _CPAnalyticsEventFeatureUsageCounts, 
-                       _CPAnalyticsEventInterval, _CPAnalyticsEventMediaViewed, _CPAnalyticsEventPropertyDayOfWeek, 
-                       _CPAnalyticsEventPropertyHourOfDay, _CPAnalyticsEventPropertyIsAppEvent, 
-                       _CPAnalyticsEventScreenManagerUnknownView, _CPAnalyticsEventScreenView, 
-                       _CPAnalyticsEventScreenshotTaken, _CPAnalyticsEventSearchEngaged, 
-                       _CPAnalyticsEventShareCanceled, _CPAnalyticsEventShareCompleted, 
-                       _CPAnalyticsEventShareFailed, _CPAnalyticsEventTabIdentifierChanged, 
-                       _CPAnalyticsEventUnknownIntervalName, _CPAnalyticsEventViewDidAppear, 
-                       _CPAnalyticsEventViewDidDisappear, _CPAnalyticsKnowledgeStoreSampleIdentifierKey, 
-                       _CPAnalyticsKnowledgeStoreSampleSubsetKey, _CPAnalyticsLog, 
-                       _CPAnalyticsMediaPropertyAdjusted, _CPAnalyticsMediaPropertyCameraType, 
+                       _CPAnalyticsEventEditEntered, _CPAnalyticsEventExitEdit, _CPAnalyticsEventFeatureUsageCounts, 
+                       _CPAnalyticsEventFeatureUsed, _CPAnalyticsEventInterval, _CPAnalyticsEventMediaViewed, 
+                       _CPAnalyticsEventPropertyDayOfWeek, _CPAnalyticsEventPropertyHourOfDay, 
+                       _CPAnalyticsEventPropertyIsAppEvent, _CPAnalyticsEventScreenManagerUnknownView, 
+                       _CPAnalyticsEventScreenView, _CPAnalyticsEventScreenshotTaken, 
+                       _CPAnalyticsEventSearchEngaged, _CPAnalyticsEventShareCanceled, 
+                       _CPAnalyticsEventShareCompleted, _CPAnalyticsEventShareFailed, 
+                       _CPAnalyticsEventTabIdentifierChanged, _CPAnalyticsEventUnknownIntervalName, 
+                       _CPAnalyticsEventViewDidAppear, _CPAnalyticsEventViewDidDisappear, 
+                       _CPAnalyticsKnowledgeStoreSampleIdentifierKey, _CPAnalyticsKnowledgeStoreSampleSubsetKey, 
+                       _CPAnalyticsLog, _CPAnalyticsMediaPropertyAdjusted, _CPAnalyticsMediaPropertyCameraType, 
                        _CPAnalyticsMediaPropertyCurationScore, _CPAnalyticsMediaPropertyFavorite, 
                        _CPAnalyticsMediaPropertyHasSyndicationIdentifier, _CPAnalyticsMediaPropertyImportSource, 
                        _CPAnalyticsMediaPropertyLibraryType, _CPAnalyticsMediaPropertyLocalIdentifier, 
@@ -99,22 +97,23 @@ exports:
                        _CPAnalyticsSignpostEndEvent, _CPAnalyticsSignpostEventAppVisiblePeriod, 
                        _CPAnalyticsSignpostEventNamePayloadKey, _CPAnalyticsSignpostEventViewTime, 
                        _CPAnalyticsSignpostIDPayloadKey, _CPAnalyticsSignpostStartEvent, 
-                       _CPAnalyticsSystemPropertyCollectionCount, _CPAnalyticsSystemPropertyDeviceFreeSpace, 
-                       _CPAnalyticsSystemPropertyDeviceModel, _CPAnalyticsSystemPropertyFaceAnalysisProgress, 
-                       _CPAnalyticsSystemPropertyLibrarySizeRange, _CPAnalyticsSystemPropertyLowPowerModeEnabled, 
-                       _CPAnalyticsSystemPropertyMediaAnalysisImageProgress, _CPAnalyticsSystemPropertyMediaAnalysisVideoProgress, 
-                       _CPAnalyticsSystemPropertyMomentCount, _CPAnalyticsSystemPropertyMomentCountRange, 
-                       _CPAnalyticsSystemPropertyOSVersion, _CPAnalyticsSystemPropertyPersonCount, 
-                       _CPAnalyticsSystemPropertyPersonCountRange, _CPAnalyticsSystemPropertyPhotosCount, 
-                       _CPAnalyticsSystemPropertyProcess, _CPAnalyticsSystemPropertySceneAnalysisProgress, 
-                       _CPAnalyticsSystemPropertyVideosCount, _CPAnalyticsUserPropertySharedLibraryEnabled, 
-                       _CPAnalyticsUserPropertyiCPLEnabled, _CPAnalyticsUserPropertyiCPLExceedingQuota, 
-                       _CPAnalyticsUserPropertyiCPLHasChangesToProcess, _CPAnalyticsUserPropertyiCPLLowDiskSpace, 
-                       _CPAnalyticsUserPropertyiCPLVeryLowDiskSpace, _CPAnalyticstMemoryAssetCollectionDeletedKey, 
-                       _CPAnalyticstMemoryAssetCollectionFavoritedKey, _CPAnalyticstMemoryAssetCollectionUnfavoritedKey, 
-                       _CPAnalyticstMemoryAssetCollectionnBlockedKey, _CPAnalyticstMemoryNotificationPrefixKey, 
-                       _CPAnalyticstMemoryNotificationRespondedKey, _CPAnalyticstMemoryNotificationSeenKey, 
-                       _CPAnalyticstMoviePlayedPrefixKey, _ScreenViewTrackerNoScreenName ]
+                       _CPAnalyticsSystemPropertyAppLaunchSource, _CPAnalyticsSystemPropertyCollectionCount, 
+                       _CPAnalyticsSystemPropertyDeviceFreeSpace, _CPAnalyticsSystemPropertyDeviceModel, 
+                       _CPAnalyticsSystemPropertyFaceAnalysisProgress, _CPAnalyticsSystemPropertyLibrarySizeRange, 
+                       _CPAnalyticsSystemPropertyLowPowerModeEnabled, _CPAnalyticsSystemPropertyMediaAnalysisImageProgress, 
+                       _CPAnalyticsSystemPropertyMediaAnalysisVideoProgress, _CPAnalyticsSystemPropertyMomentCount, 
+                       _CPAnalyticsSystemPropertyMomentCountRange, _CPAnalyticsSystemPropertyOSVersion, 
+                       _CPAnalyticsSystemPropertyPersonCount, _CPAnalyticsSystemPropertyPersonCountRange, 
+                       _CPAnalyticsSystemPropertyPhotosCount, _CPAnalyticsSystemPropertyProcess, 
+                       _CPAnalyticsSystemPropertySceneAnalysisProgress, _CPAnalyticsSystemPropertyVideosCount, 
+                       _CPAnalyticsUserPropertySharedLibraryEnabled, _CPAnalyticsUserPropertyiCPLEnabled, 
+                       _CPAnalyticsUserPropertyiCPLExceedingQuota, _CPAnalyticsUserPropertyiCPLHasChangesToProcess, 
+                       _CPAnalyticsUserPropertyiCPLLowDiskSpace, _CPAnalyticsUserPropertyiCPLVeryLowDiskSpace, 
+                       _CPAnalyticstMemoryAssetCollectionDeletedKey, _CPAnalyticstMemoryAssetCollectionFavoritedKey, 
+                       _CPAnalyticstMemoryAssetCollectionUnfavoritedKey, _CPAnalyticstMemoryAssetCollectionnBlockedKey, 
+                       _CPAnalyticstMemoryNotificationPrefixKey, _CPAnalyticstMemoryNotificationRespondedKey, 
+                       _CPAnalyticstMemoryNotificationSeenKey, _CPAnalyticstMoviePlayedPrefixKey, 
+                       _ScreenViewTrackerNoScreenName ]
     objc-classes:    [ CPAnalytics, CPAnalyticsAppStateDestination, CPAnalyticsBiomeBaseSample, 
                        CPAnalyticsBiomeDestination, CPAnalyticsCompoundEventMatcher, 
                        CPAnalyticsConditional, CPAnalyticsCoreAnalyticsHelper, CPAnalyticsCoreDuetEventMatcher, 

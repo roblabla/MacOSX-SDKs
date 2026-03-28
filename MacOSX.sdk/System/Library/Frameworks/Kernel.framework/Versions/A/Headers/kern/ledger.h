@@ -32,8 +32,9 @@
 #ifndef _KERN_LEDGER_H_
 #define _KERN_LEDGER_H_
 
-#include <mach/mach_types.h>    /* ledger_t */
+#include <mach/mach_types.h>    /* ledger_t, ledger_entry_id_t */
 
+__BEGIN_DECLS
 
 #define LEDGER_INFO             0
 #define LEDGER_ENTRY_INFO       1
@@ -56,7 +57,6 @@ struct ledger_template_info {
 	char            lti_group[LEDGER_NAME_MAX];
 	char            lti_units[LEDGER_NAME_MAX];
 };
-
 
 struct ledger_entry_info {
 	int64_t         lei_balance;
@@ -84,5 +84,7 @@ struct ledger_limit_args {
 	uint64_t        lla_refill_period;
 };
 
+
+__END_DECLS
 
 #endif  /* _KERN_LEDGER_H_ */

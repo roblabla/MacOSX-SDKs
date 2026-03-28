@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UIGrounding.framework/Versions/A/UIGrounding'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s11UIGrounding0A10ActionTypeO3tapyA2CmFWC', '_$s11UIGrounding0A10ActionTypeO4stopyA2CmFWC', 
                        '_$s11UIGrounding0A10ActionTypeO5swipeyA2CmFWC', '_$s11UIGrounding0A10ActionTypeO7unknownyA2CmFWC', 
                        '_$s11UIGrounding0A10ActionTypeO8rawValueACSS_tcfC', '_$s11UIGrounding0A10ActionTypeO8rawValueSSvg', 

@@ -38,7 +38,7 @@ MDL_EXPORT
 /*!
  @class MDLMesh
  @abstract A vertex buffer with info to interpret vertex data
- @discussion Includes a collection of submeshs which have indexbuffer and
+ @discussion Includes a collection of submeshes which have indexbuffer and
              material information
  */
 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
@@ -111,7 +111,7 @@ MDL_EXPORT
 
 /*!
  @property boundingBox
- @abstract Bounding box encompasing the mesh
+ @abstract Bounding box encompassing the mesh
  @discussion Calculated by iterating through MDLVertexAttributePosition to find
              min and max bounds. If no attribute is named MDLVertexAttributePosition
              this will be a invalid bounds where maxBounds is less than minBounds.
@@ -245,8 +245,8 @@ MDL_EXPORT
  @discussion Uses the attribute named MDLVertexAttributePosition and
              textureCoordinateAttributeName to calculate tangent and bitangent
              attributes. The mesh's vertexDescriptor will be updated to reflect
-             the new attributes if necessary. The basis may not be orthogonal; to gaurantee an orthogonal
-              tangent basis please use addOrthTanBasisForTextureCoordinateAttibuteNamed selector.
+             the new attributes if necessary. The basis may not be orthogonal; to guarantee an orthogonal
+              tangent basis please use addOrthTanBasisForTextureCoordinateAttributeNamed selector.
  */
 - (void)addTangentBasisForTextureCoordinateAttributeNamed:(NSString*)textureCoordinateAttributeName
                                     tangentAttributeNamed:(NSString *)tangentAttributeName
@@ -314,7 +314,7 @@ MDL_EXPORT
  @abstract Deindexes the vertex array
  @discussion If any vertices are shared on multiple faces, duplicate those
              vertices so faces do not share vertices. The vertex buffer and index
-             buffers on submeshes may grow to accomadate any vertices added.
+             buffers on submeshes may grow to accommodate any vertices added.
  */
 - (void)makeVerticesUnique NS_DEPRECATED(10.11,10.13,9.0,11.0);
 
@@ -324,7 +324,7 @@ MDL_EXPORT
  @abstract Deindexes the vertex array
  @discussion If any vertices are shared on multiple faces, duplicate those
  vertices so faces do not share vertices. The vertex buffer and index
- buffers on submeshes may grow to accomadate any vertices added.
+ buffers on submeshes may grow to accommodate any vertices added.
  */
 - (BOOL)makeVerticesUniqueAndReturnError:(NSError **)error API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
@@ -387,11 +387,11 @@ MDL_EXPORT
 /*!
  @method initSphereWithExtent:segments:inwardNormals:geometryType:allocator
  @abstract Factory method for generating a mesh with an ellipsoid shape
- @return MDLMesh epllipsoid with desired attributes
+ @return MDLMesh ellipsoid with desired attributes
  @param geometryType Must be MDLGeometryTypeTriangles or MDLGeometryTypeLines
  @param inwardNormals If true, generated normals will face inwards. Useful for
         generating a skydome.
-        actual nubmer of vertical slices will be half of 'vertical' segments
+        Actual number of vertical slices will be half of 'vertical' segments
  @param allocator A mesh buffer allocator used to allocate memory to back buffers
         for the returned mesh.  If nil, a default allocator will be used
  @discussion Specifying inward normals and hemisphere is useful for generating a skydome.
@@ -467,7 +467,7 @@ MDL_EXPORT
              Will raise an exception if radialSegments is < 3 or if hemisphereSegments < 1
              or if an unsupported geometry type is specified.
              Generated texture coordinates for top and bottom caps are wrapped 
-             in a similar manner as for asphere, laid out as follows:
+             in a similar manner as for a sphere, laid out as follows:
                                       ___
                                      /   \   <- T texcoord = 0.0
  Texture for top of cylinder   ---> [-----]

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/EncoreXPCService.framework/Versions/A/EncoreXPCService'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10ChangeType16EncoreXPCService20SynchronizableObjectPTl', 
                        '_$s16EncoreXPCService0A5EventC11serviceNameAA07ServiceE0VSgvg', 
                        '_$s16EncoreXPCService0A5EventC11serviceNameAA07ServiceE0VSgvpMV', 

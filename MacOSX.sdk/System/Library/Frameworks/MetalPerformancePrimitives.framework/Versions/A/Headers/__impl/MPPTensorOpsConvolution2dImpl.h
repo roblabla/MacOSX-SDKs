@@ -4213,7 +4213,10 @@ __tensorops_impl_conv2d_cooperative_destination_data_size(
 extern "C" TENSOROPS_EXPORT EXTERNALLY_DEFINED_ATTR uint16_t
 __tensorops_impl_conv2d_cooperative_destination_tensor_num_elements(
     const thread convolution2d_descriptor &descriptor,
-    __tensor_ops_detail::__const_thread_void_t, int threads);
+    __tensor_ops_detail::__const_thread_void_t,
+    __tensor_ops_detail::__tensor_ops_datatype,
+    __tensor_ops_detail::__tensor_ops_datatype,
+    __tensor_ops_detail::__tensor_ops_datatype, int threads);
 extern "C" TENSOROPS_EXPORT
     EXTERNALLY_DEFINED_ATTR __tensor_ops_detail::__thread_void_t
     __tensorops_impl_conv2d_cooperative_destination_tensor_elements(
@@ -4225,6 +4228,9 @@ __tensorops_impl_conv2d_cooperative_destination_tensor_get_coordinate(
     __tensor_ops_detail::__thread_void_t, uint16_t,
     __tensor_ops_detail::__tensor_ops_datatype,
     __tensor_ops_detail::__thread_void_t,
+    __tensor_ops_detail::__tensor_ops_datatype,
+    __tensor_ops_detail::__tensor_ops_datatype,
+    __tensor_ops_detail::__tensor_ops_datatype,
     __tensor_ops_detail::__tensor_ops_datatype, int threads);
 extern "C" TENSOROPS_EXPORT EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_conv2d_cooperative_destination_tensor_init(
@@ -4256,6 +4262,9 @@ extern "C" TENSOROPS_EXPORT EXTERNALLY_DEFINED_ATTR bool
 __tensorops_impl_conv2d_cooperative_destination_tensor_is_valid_element(
     const thread convolution2d_descriptor &,
     __tensor_ops_detail::__thread_void_t, uint16_t,
+    __tensor_ops_detail::__tensor_ops_datatype,
+    __tensor_ops_detail::__tensor_ops_datatype,
+    __tensor_ops_detail::__tensor_ops_datatype,
     __tensor_ops_detail::__tensor_ops_datatype, int threads);
 extern "C" TENSOROPS_EXPORT EXTERNALLY_DEFINED_ATTR uint16_t
 __tensorops_impl_conv2d_cooperative_destination_tensor_get_element_index(
@@ -4266,98 +4275,148 @@ __tensorops_impl_convolution2d_op_cooperative_destination_tensor_load_dv_f32(
     thread convolution2d_descriptor &desc, thread void *storage,
     const thread void *source,
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type sourceDescType,
-    int sourceRank, int threads);
+    int sourceRank, __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             int threads);
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_convolution2d_op_cooperative_destination_tensor_load_tg_f32(
     thread convolution2d_descriptor &desc, thread void *storage,
     const thread void *source,
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type sourceDescType,
-    int sourceRank, int threads);
+    int sourceRank, __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             int threads);
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_convolution2d_op_cooperative_destination_tensor_load_dv_i32(
     thread convolution2d_descriptor &desc, thread void *storage,
     const thread void *source,
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type sourceDescType,
-    int sourceRank, int threads);
+    int sourceRank, __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             int threads);
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_convolution2d_op_cooperative_destination_tensor_load_tg_i32(
     thread convolution2d_descriptor &desc, thread void *storage,
     const thread void *source,
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type sourceDescType,
-    int sourceRank, int threads);
+    int sourceRank, __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             int threads);
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_convolution2d_op_cooperative_destination_tensor_load_dv_f16(
     thread convolution2d_descriptor &desc, thread void *storage,
     const thread void *source,
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type sourceDescType,
-    int sourceRank, int threads);
+    int sourceRank, __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             int threads);
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_convolution2d_op_cooperative_destination_tensor_load_tg_f16(
     thread convolution2d_descriptor &desc, thread void *storage,
     const thread void *source,
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type sourceDescType,
-    int sourceRank, int threads);
+    int sourceRank, __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             int threads);
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_convolution2d_op_cooperative_destination_tensor_load_dv_bf(
     thread convolution2d_descriptor &desc, thread void *storage,
     const thread void *source,
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type sourceDescType,
-    int sourceRank, int threads);
+    int sourceRank,
+                                                                            __tensor_ops_detail::__tensor_ops_datatype,
+                                                                            __tensor_ops_detail::__tensor_ops_datatype,
+                                                                            __tensor_ops_detail::__tensor_ops_datatype,
+                                                                            int threads);
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_convolution2d_op_cooperative_destination_tensor_load_tg_bf(
     thread convolution2d_descriptor &desc, thread void *storage,
     const thread void *source,
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type sourceDescType,
-    int sourceRank, int threads);
+    int sourceRank,
+                                                                            __tensor_ops_detail::__tensor_ops_datatype,
+                                                                            __tensor_ops_detail::__tensor_ops_datatype,
+                                                                            __tensor_ops_detail::__tensor_ops_datatype,
+                                                                            int threads);
 
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_convolution2d_op_cooperative_destination_tensor_store_dv_f32(
     thread convolution2d_descriptor &desc, const thread void *storage,
     const thread void *destination,
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destDescType,
-    int threads);
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              int threads);
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_convolution2d_op_cooperative_destination_tensor_store_tg_f32(
     thread convolution2d_descriptor &desc, const thread void *storage,
     const thread void *destination,
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destDescType,
-    int threads);
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              int threads);
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_convolution2d_op_cooperative_destination_tensor_store_dv_i32(
     thread convolution2d_descriptor &desc, const thread void *storage,
     const thread void *destination,
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destDescType,
-    int threads);
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              int threads);
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_convolution2d_op_cooperative_destination_tensor_store_tg_i32(
     thread convolution2d_descriptor &desc, const thread void *storage,
     const thread void *destination,
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destDescType,
-    int threads);
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              int threads);
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_convolution2d_op_cooperative_destination_tensor_store_dv_f16(
     thread convolution2d_descriptor &desc, const thread void *storage,
     const thread void *destination,
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destDescType,
-    int threads);
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              int threads);
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_convolution2d_op_cooperative_destination_tensor_store_tg_f16(
     thread convolution2d_descriptor &desc, const thread void *storage,
     const thread void *destination,
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destDescType,
-    int threads);
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              __tensor_ops_detail::__tensor_ops_datatype,
+                                                                              int threads);
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_convolution2d_op_cooperative_destination_tensor_store_dv_bf(
     thread convolution2d_descriptor &desc, const thread void *storage,
     const thread void *destination,
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destDescType,
-    int threads);
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             int threads);
 extern "C" EXTERNALLY_DEFINED_ATTR void
 __tensorops_impl_convolution2d_op_cooperative_destination_tensor_store_tg_bf(
     thread convolution2d_descriptor &desc, const thread void *storage,
     const thread void *destination,
     __tensor_ops_detail::__tensor_ops_tensor_descriptor_type destDescType,
-    int threads);
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             __tensor_ops_detail::__tensor_ops_datatype,
+                                                                             int threads);
 
 template <convolution2d_descriptor descriptor,
           convolution2d_cooperative_operand operand, typename scope,
@@ -4424,8 +4483,14 @@ struct __operand_layout
   {
     metal::execution_threads t = scope();
     int threads = t.size();
+      __tensor_ops_detail::__tensor_ops_datatype d_data_type =
+          __tensor_ops_detail::__type_to_tensor_ops_datatype<element_t>::value;
+      __tensor_ops_detail::__tensor_ops_datatype a_data_type =
+          __tensor_ops_detail::__type_to_tensor_ops_datatype<a_value_type>::value;
+      __tensor_ops_detail::__tensor_ops_datatype w_data_type =
+          __tensor_ops_detail::__type_to_tensor_ops_datatype<w_value_type>::value;
     return __tensorops_impl_conv2d_cooperative_destination_tensor_num_elements(
-        descriptor, storage, threads);
+        descriptor, storage, d_data_type, a_data_type, w_data_type, threads);
   }
 
   static void construct(thread void *this_)
@@ -4544,16 +4609,23 @@ struct __operand_layout
             tensorType>();
 
     const thread void *source = (const thread void *)(&sourceT);
+      
+      __tensor_ops_detail::__tensor_ops_datatype d_data_type =
+          __tensor_ops_detail::__type_to_tensor_ops_datatype<element_t>::value;
+      __tensor_ops_detail::__tensor_ops_datatype a_data_type =
+          __tensor_ops_detail::__type_to_tensor_ops_datatype<a_value_type>::value;
+      __tensor_ops_detail::__tensor_ops_datatype w_data_type =
+          __tensor_ops_detail::__type_to_tensor_ops_datatype<w_value_type>::value;
 
     if constexpr (__tensor_ops_detail::__is_same_v<elem_t, half>)
     {
       if constexpr (__tensor_ops_detail::__is_device_addrspace_v<sourcePtrType>)
         __tensorops_impl_convolution2d_op_cooperative_destination_tensor_load_dv_f16(
-            desc, storage, source, sourceDescType, sourceRank, threads);
+            desc, storage, source, sourceDescType, sourceRank, d_data_type, a_data_type, w_data_type, threads);
       else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<
                              sourcePtrType>)
         __tensorops_impl_convolution2d_op_cooperative_destination_tensor_load_tg_f16(
-            desc, storage, source, sourceDescType, sourceRank, threads);
+            desc, storage, source, sourceDescType, sourceRank, d_data_type, a_data_type, w_data_type, threads);
       else
         static_assert(__tensor_ops_detail::__assert_false_v<sourcePtrType>,
                       "Unsupported address space");
@@ -4562,11 +4634,11 @@ struct __operand_layout
     {
       if constexpr (__tensor_ops_detail::__is_device_addrspace_v<sourcePtrType>)
         __tensorops_impl_convolution2d_op_cooperative_destination_tensor_load_dv_i32(
-            desc, storage, source, sourceDescType, sourceRank, threads);
+            desc, storage, source, sourceDescType, sourceRank, d_data_type, a_data_type, w_data_type, threads);
       else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<
                              sourcePtrType>)
         __tensorops_impl_convolution2d_op_cooperative_destination_tensor_load_tg_i32(
-            desc, storage, source, sourceDescType, sourceRank, threads);
+            desc, storage, source, sourceDescType, sourceRank, d_data_type, a_data_type, w_data_type, threads);
       else
         static_assert(__tensor_ops_detail::__assert_false_v<sourcePtrType>,
                       "Unsupported address space");
@@ -4575,11 +4647,11 @@ struct __operand_layout
     {
       if constexpr (__tensor_ops_detail::__is_device_addrspace_v<sourcePtrType>)
         __tensorops_impl_convolution2d_op_cooperative_destination_tensor_load_dv_f32(
-            desc, storage, source, sourceDescType, sourceRank, threads);
+            desc, storage, source, sourceDescType, sourceRank, d_data_type, a_data_type, w_data_type, threads);
       else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<
                              sourcePtrType>)
         __tensorops_impl_convolution2d_op_cooperative_destination_tensor_load_tg_f32(
-            desc, storage, source, sourceDescType, sourceRank, threads);
+            desc, storage, source, sourceDescType, sourceRank, d_data_type, a_data_type, w_data_type, threads);
       else
         static_assert(__tensor_ops_detail::__assert_false_v<sourcePtrType>,
                       "Unsupported address space");
@@ -4589,11 +4661,11 @@ struct __operand_layout
     {
       if constexpr (__tensor_ops_detail::__is_device_addrspace_v<sourcePtrType>)
         __tensorops_impl_convolution2d_op_cooperative_destination_tensor_load_dv_bf(
-            desc, storage, source, sourceDescType, sourceRank, threads);
+            desc, storage, source, sourceDescType, sourceRank, d_data_type, a_data_type, w_data_type, threads);
       else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<
                              sourcePtrType>)
         __tensorops_impl_convolution2d_op_cooperative_destination_tensor_load_tg_bf(
-            desc, storage, source, sourceDescType, sourceRank, threads);
+            desc, storage, source, sourceDescType, sourceRank, d_data_type, a_data_type, w_data_type, threads);
       else
         static_assert(__tensor_ops_detail::__assert_false_v<sourcePtrType>,
                       "Unsupported address space");
@@ -4631,17 +4703,24 @@ struct __operand_layout
                 tensorType>();
 
     const thread void *destination = (const thread void *)(&destinationT);
+      
+      __tensor_ops_detail::__tensor_ops_datatype d_data_type =
+          __tensor_ops_detail::__type_to_tensor_ops_datatype<element_t>::value;
+      __tensor_ops_detail::__tensor_ops_datatype a_data_type =
+          __tensor_ops_detail::__type_to_tensor_ops_datatype<a_value_type>::value;
+      __tensor_ops_detail::__tensor_ops_datatype w_data_type =
+          __tensor_ops_detail::__type_to_tensor_ops_datatype<w_value_type>::value;
 
     if constexpr (__tensor_ops_detail::__is_same_v<elem_t, half>)
     {
       if constexpr (__tensor_ops_detail::__is_device_addrspace_v<
                         destination_ptr_type>)
         __tensorops_impl_convolution2d_op_cooperative_destination_tensor_store_dv_f16(
-            desc, storage, destination, destination_desc_type, threads);
+            desc, storage, destination, destination_desc_type, d_data_type, a_data_type, w_data_type, threads);
       else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<
                              destination_ptr_type>)
         __tensorops_impl_convolution2d_op_cooperative_destination_tensor_store_tg_f16(
-            desc, storage, destination, destination_desc_type, threads);
+            desc, storage, destination, destination_desc_type, d_data_type, a_data_type, w_data_type, threads);
       else
         static_assert(
             __tensor_ops_detail::__assert_false_v<destination_ptr_type>,
@@ -4652,11 +4731,11 @@ struct __operand_layout
       if constexpr (__tensor_ops_detail::__is_device_addrspace_v<
                         destination_ptr_type>)
         __tensorops_impl_convolution2d_op_cooperative_destination_tensor_store_dv_i32(
-            desc, storage, destination, destination_desc_type, threads);
+            desc, storage, destination, destination_desc_type, d_data_type, a_data_type, w_data_type, threads);
       else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<
                              destination_ptr_type>)
         __tensorops_impl_convolution2d_op_cooperative_destination_tensor_store_tg_i32(
-            desc, storage, destination, destination_desc_type, threads);
+            desc, storage, destination, destination_desc_type, d_data_type, a_data_type, w_data_type, threads);
       else
         static_assert(
             __tensor_ops_detail::__assert_false_v<destination_ptr_type>,
@@ -4667,11 +4746,11 @@ struct __operand_layout
       if constexpr (__tensor_ops_detail::__is_device_addrspace_v<
                         destination_ptr_type>)
         __tensorops_impl_convolution2d_op_cooperative_destination_tensor_store_dv_f32(
-            desc, storage, destination, destination_desc_type, threads);
+            desc, storage, destination, destination_desc_type, d_data_type, a_data_type, w_data_type, threads);
       else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<
                              destination_ptr_type>)
         __tensorops_impl_convolution2d_op_cooperative_destination_tensor_store_tg_f32(
-            desc, storage, destination, destination_desc_type, threads);
+            desc, storage, destination, destination_desc_type, d_data_type, a_data_type, w_data_type, threads);
       else
         static_assert(
             __tensor_ops_detail::__assert_false_v<destination_ptr_type>,
@@ -4683,11 +4762,11 @@ struct __operand_layout
       if constexpr (__tensor_ops_detail::__is_device_addrspace_v<
                         destination_ptr_type>)
         __tensorops_impl_convolution2d_op_cooperative_destination_tensor_store_dv_bf(
-            desc, storage, destination, destination_desc_type, threads);
+            desc, storage, destination, destination_desc_type, d_data_type, a_data_type, w_data_type, threads);
       else if constexpr (__tensor_ops_detail::__is_threadgroup_addrspace_v<
                              destination_ptr_type>)
         __tensorops_impl_convolution2d_op_cooperative_destination_tensor_store_tg_bf(
-            desc, storage, destination, destination_desc_type, threads);
+            desc, storage, destination, destination_desc_type, d_data_type, a_data_type, w_data_type, threads);
       else
         static_assert(
             __tensor_ops_detail::__assert_false_v<destination_ptr_type>,
@@ -4726,9 +4805,16 @@ struct __operand_layout
     int threads = t.size();
     __tensor_ops_detail::__tensor_ops_datatype dataType = __tensor_ops_detail::__type_to_tensor_ops_datatype<element_t>::value;
 
+      __tensor_ops_detail::__tensor_ops_datatype d_data_type =
+          __tensor_ops_detail::__type_to_tensor_ops_datatype<element_t>::value;
+      __tensor_ops_detail::__tensor_ops_datatype a_data_type =
+          __tensor_ops_detail::__type_to_tensor_ops_datatype<a_value_type>::value;
+      __tensor_ops_detail::__tensor_ops_datatype w_data_type =
+          __tensor_ops_detail::__type_to_tensor_ops_datatype<w_value_type>::value;
+
     return __tensorops_impl_conv2d_cooperative_destination_tensor_is_valid_element(
         descriptor, (__tensor_ops_detail::__thread_void_t)storage, idx,
-        dataType, threads);
+        dataType, d_data_type, a_data_type, w_data_type, threads);
   }
 
   template <typename index_t, __tensor_ops_detail::__rank_t rank>
@@ -4742,13 +4828,21 @@ struct __operand_layout
     static_assert(rank == 4, "multidimensional_indices returns 4D indices");
 
     __tensor_ops_detail::__tensor_ops_datatype dataType = __tensor_ops_detail::__type_to_tensor_ops_datatype<element_t>::value;
+      
+      __tensor_ops_detail::__tensor_ops_datatype d_data_type =
+          __tensor_ops_detail::__type_to_tensor_ops_datatype<element_t>::value;
+      __tensor_ops_detail::__tensor_ops_datatype a_data_type =
+          __tensor_ops_detail::__type_to_tensor_ops_datatype<a_value_type>::value;
+      __tensor_ops_detail::__tensor_ops_datatype w_data_type =
+          __tensor_ops_detail::__type_to_tensor_ops_datatype<w_value_type>::value;
+
     if constexpr (__tensor_ops_detail::__is_same_v<coord_t, ushort>)
     {
       ushort coords[4];
       __tensorops_impl_conv2d_cooperative_destination_tensor_get_coordinate(
           descriptor, (__tensor_ops_detail::__thread_void_t)storage, idx,
           dataType, coords, __tensor_ops_detail::__tensor_ops_datatype_uint16,
-          threads);
+          d_data_type, a_data_type, w_data_type, threads);
       return {coords[0], coords[1], coords[2], coords[3]};
     }
     else if constexpr (__tensor_ops_detail::__is_same_v<coord_t, short>)
@@ -4757,7 +4851,7 @@ struct __operand_layout
       __tensorops_impl_conv2d_cooperative_destination_tensor_get_coordinate(
           descriptor, (__tensor_ops_detail::__thread_void_t)storage, idx,
           dataType, coords, __tensor_ops_detail::__tensor_ops_datatype_int16,
-          threads);
+          d_data_type, a_data_type, w_data_type, threads);
       return {coords[0], coords[1], coords[2], coords[3]};
     }
     else if constexpr (__tensor_ops_detail::__is_same_v<coord_t, uint>)
@@ -4766,7 +4860,7 @@ struct __operand_layout
       __tensorops_impl_conv2d_cooperative_destination_tensor_get_coordinate(
           descriptor, (__tensor_ops_detail::__thread_void_t)storage, idx,
           dataType, coords, __tensor_ops_detail::__tensor_ops_datatype_uint32,
-          threads);
+          d_data_type, a_data_type, w_data_type, threads);
       return {coords[0], coords[1], coords[2], coords[3]};
     }
     else if constexpr (__tensor_ops_detail::__is_same_v<coord_t, int>)
@@ -4775,7 +4869,7 @@ struct __operand_layout
       __tensorops_impl_conv2d_cooperative_destination_tensor_get_coordinate(
           descriptor, (__tensor_ops_detail::__thread_void_t)storage, idx,
           dataType, coords, __tensor_ops_detail::__tensor_ops_datatype_int32,
-          threads);
+          d_data_type, a_data_type, w_data_type, threads);
       return {coords[0], coords[1], coords[2], coords[3]};
     }
   }

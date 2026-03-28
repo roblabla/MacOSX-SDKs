@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftRuntime.dylib'
 current-version: 0
 swift-abi-version: 7
@@ -21,8 +20,7 @@ exports:
                        '_$s7Runtime20FramePointerUnwinderV7context6images12memoryReaderACyxq_Gx_AA8ImageMapVSgq_tcfCAA13X86_64ContextV_AA017UnsafeLocalMemoryH0VTs5', 
                        '_$s7Runtime20FramePointerUnwinderV9isAsyncPC33_583BD3DC6086CD51034D27459FABCDBALLySb7AddressQzFAA13X86_64ContextV_AA19CachingMemoryReaderCyAA014UncachedRemoteqR0VGTs5', 
                        '_$s7Runtime20FramePointerUnwinderV9isAsyncPC33_583BD3DC6086CD51034D27459FABCDBALLySb7AddressQzFAA13X86_64ContextV_AA23UnsafeLocalMemoryReaderVTs5' ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s4Size7Runtime7ContextPTl', '_$s7Address7Runtime7ContextPTl', 
                        '_$s7Runtime10ARMContextV11descriptionSSvg', '_$s7Runtime10ARMContextV11descriptionSSvpMV', 
                        '_$s7Runtime10ARMContextV11getRegisterys6UInt32VSgAA11ARMRegisterOF', 
@@ -842,7 +840,7 @@ exports:
                        '_$s8GPRValue7Runtime7ContextPTl', '_$s8Register7Runtime7ContextPTl', 
                        '_$ss17FixedWidthIntegerP7RuntimeEyxSgAC9BacktraceV7AddressVcfC', 
                        __swift_get_cpu_context ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s7Runtime12ARM64ContextV011withCurrentC02fnxxACKXE_tKlFZ', 
                        '_$s7Runtime12ARM64ContextV14fromHostThreadyACSgypFZ', '_$s7Runtime12ARM64ContextV16fromHostMContextyACypFZ', 
                        '_$s7Runtime20FramePointerUnwinderV07isAsyncB033_583BD3DC6086CD51034D27459FABCDBALLySb7AddressQzFAA12ARM64ContextV_AA19CachingMemoryReaderCyAA014UncachedRemotepQ0VGTs5', 

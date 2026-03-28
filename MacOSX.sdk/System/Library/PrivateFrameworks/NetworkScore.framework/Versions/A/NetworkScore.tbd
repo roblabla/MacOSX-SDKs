@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NetworkScore.framework/Versions/A/NetworkScore'
 exports:
   - targets:         [ x86_64-macos ]
@@ -33,7 +33,7 @@ exports:
                        __ZTSNSt3__121__empty_non_own_stateIcEE, __ZTSNSt3__123__match_any_but_newlineIcEE, 
                        __ZTSNSt3__126__end_marked_subexpressionIcEE, __ZTSNSt3__128__begin_marked_subexpressionIcEE, 
                        __ZTSNSt3__16__loopIcEE, __ZTSNSt3__16__nodeIcEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _send_connection_report, _send_http_metrics ]
     objc-classes:    [ NWSAlgosConnectionScore, NWSAlgosScoreCSVReader, NWSAlgosScoreCombiner, 
                        NWSAlgosScoreDataCSV, NWSAlgosScoreFaceTimeDataCSV, NWSAlgosScoreStreamDataCSV, 

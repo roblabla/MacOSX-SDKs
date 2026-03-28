@@ -1,17 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FindMyBluetooth.framework/Versions/A/FindMyBluetooth'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FindMyBluetoothTests, findmylocateagent, findmylocated, searchpartyd, 
                        searchpartydTests, searchpartyuseragent, sptool ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10FindMyBase10IdentifierV0aB9BluetoothAD14CharacteristicCRszlE11descriptionSSvg', 
                        '_$s10FindMyBase10IdentifierV0aB9BluetoothAD14CharacteristicCRszlE11descriptionSSvpMV', 
                        '_$s10FindMyBase10IdentifierV0aB9BluetoothAD7ServiceCRszlE11descriptionSSvg', 
@@ -971,6 +968,8 @@ exports:
                        '_$s15FindMyBluetooth18MockCentralManagerCScAAAMc', '_$s15FindMyBluetooth18MockCentralManagerCfD', 
                        '_$s15FindMyBluetooth18MockCentralManagerCfd', '_$s15FindMyBluetooth18MockCentralManagerCs12IdentifiableAAMc', 
                        '_$s15FindMyBluetooth18MockCentralManagerCs23CustomStringConvertibleAAMc', 
+                       '_$s15FindMyBluetooth18MockCharacteristicC020writeWithoutResponseG16TaskCancellation4dataySay10Foundation4DataVG_tYaKF', 
+                       '_$s15FindMyBluetooth18MockCharacteristicC020writeWithoutResponseG16TaskCancellation4dataySay10Foundation4DataVG_tYaKFTu', 
                        '_$s15FindMyBluetooth18MockCharacteristicC03setD13ReadResponderyyScsy10Foundation4DataVs5Error_pGyYaYbKcFTj', 
                        '_$s15FindMyBluetooth18MockCharacteristicC03setD13ReadResponderyyScsy10Foundation4DataVs5Error_pGyYaYbKcFTq', 
                        '_$s15FindMyBluetooth18MockCharacteristicC03setD14WriteResponderyyScsy10Foundation4DataVs5Error_pGAIYaYbcFTj', 
@@ -996,6 +995,7 @@ exports:
                        '_$s15FindMyBluetooth18MockCharacteristicC12mockBehaviorAA0dG0OvpMV', 
                        '_$s15FindMyBluetooth18MockCharacteristicC12mockBehaviorAA0dG0OvsTj', 
                        '_$s15FindMyBluetooth18MockCharacteristicC12mockBehaviorAA0dG0OvsTq', 
+                       '_$s15FindMyBluetooth18MockCharacteristicC13didWriteValue4withys5Error_pSg_tF', 
                        '_$s15FindMyBluetooth18MockCharacteristicC14readUnderlyingyyYaKFTj', 
                        '_$s15FindMyBluetooth18MockCharacteristicC14readUnderlyingyyYaKFTjTu', 
                        '_$s15FindMyBluetooth18MockCharacteristicC14readUnderlyingyyYaKFTq', 
@@ -1009,7 +1009,9 @@ exports:
                        '_$s15FindMyBluetooth18MockCharacteristicC3mtuSivMTj', '_$s15FindMyBluetooth18MockCharacteristicC3mtuSivMTq', 
                        '_$s15FindMyBluetooth18MockCharacteristicC3mtuSivgTj', '_$s15FindMyBluetooth18MockCharacteristicC3mtuSivgTq', 
                        '_$s15FindMyBluetooth18MockCharacteristicC3mtuSivpMV', '_$s15FindMyBluetooth18MockCharacteristicC3mtuSivsTj', 
-                       '_$s15FindMyBluetooth18MockCharacteristicC3mtuSivsTq', '_$s15FindMyBluetooth18MockCharacteristicC4readScsy10Foundation4DataVs5Error_pGyYaKFTj', 
+                       '_$s15FindMyBluetooth18MockCharacteristicC3mtuSivsTq', '_$s15FindMyBluetooth18MockCharacteristicC40writeWithoutResponseWithTaskCancellation4dataySay10Foundation4DataVG_tYaKF', 
+                       '_$s15FindMyBluetooth18MockCharacteristicC40writeWithoutResponseWithTaskCancellation4dataySay10Foundation4DataVG_tYaKFTu', 
+                       '_$s15FindMyBluetooth18MockCharacteristicC4readScsy10Foundation4DataVs5Error_pGyYaKFTj', 
                        '_$s15FindMyBluetooth18MockCharacteristicC4readScsy10Foundation4DataVs5Error_pGyYaKFTjTu', 
                        '_$s15FindMyBluetooth18MockCharacteristicC4readScsy10Foundation4DataVs5Error_pGyYaKFTq', 
                        '_$s15FindMyBluetooth18MockCharacteristicC5write4dataScsy10Foundation4DataVs5Error_pGSayAHG_tYaKFTj', 

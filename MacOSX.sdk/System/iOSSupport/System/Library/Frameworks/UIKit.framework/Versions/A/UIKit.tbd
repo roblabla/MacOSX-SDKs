@@ -1,26 +1,23 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/UIKit.framework/Versions/A/UIKit'
-current-version: 9126.2.4
+current-version: 9126.4.27
 reexported-libraries:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/iOSSupport/System/Library/PrivateFrameworks/DocumentManager.framework/Versions/A/DocumentManager', 
                        '/System/iOSSupport/System/Library/PrivateFrameworks/PrintKitUI.framework/Versions/A/PrintKitUI', 
                        '/System/iOSSupport/System/Library/PrivateFrameworks/ShareSheet.framework/Versions/A/ShareSheet', 
                        '/System/iOSSupport/System/Library/PrivateFrameworks/UIKitCore.framework/Versions/A/UIKitCore' ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CollectionViewCore.framework/Versions/A/CollectionViewCore'
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AppKit, UIFoundation, UIKitCore ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BUG_IN_CLIENT_OF_DIFFABLE_DATA_SOURCE__EQUAL_IDENTIFIERS_HAVE_DIFFERENT_HASH_VALUES, 
                        _BUG_IN_CLIENT_OF_DIFFABLE_DATA_SOURCE__IDENTIFIERS_ARE_NOT_UNIQUE, 
                        _BUG_IN_CLIENT_OF_DIFFABLE_DATA_SOURCE__IDENTIFIER_ALREADY_EXISTS, 
@@ -43,18 +40,15 @@ exports:
                        _UIDiffableDataSourceUpdate, __UIDiffableDataSourceSnapshot ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 1016
+current-version: 1018.1
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AppKit, CoreTransferable, SwiftUICore, TextAnimationSupport, 
                        UIKitCore, UserNotificationsCore, _SwiftUICore ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _NSAccessibilitySpellingStateAttributeName, _NSAdaptiveImageGlyphAttributeName, 
                        _NSAllRomanInputSourcesLocaleIdentifier, _NSAntialiasThresholdChangedNotification, 
                        _NSAppearanceDocumentAttribute, _NSAttachmentAttributeName, 
@@ -420,31 +414,27 @@ exports:
                        __NSFontTypefaceInfo._postscriptName, __NSFontTypefaceInfo._tiFlags, 
                        __NSFontTypefaceInfo._verticalOriginDeltaCache ]
 reexports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ NSEmojiImageAsset, NSEmojiImageStrike ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/SubFrameworks/UIUtilities.framework/Versions/A/UIUtilities'
-current-version: 9126.2.4
+current-version: 9126.4.27
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FocusEngine, LayeredImageDisplay, UIKitCore ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ _UIDebugLogMessage, _UIDebugLogNode, _UIDebugLogNodeTreeStyle, 
                        _UIDebugLogStack ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/DocumentManager.framework/Versions/A/DocumentManager'
-current-version: 367.2.4
+current-version: 367.4.8
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _DOCAdaptSizeToRect, _DOCAlertItemIsNotReadable, _DOCAlertUserTheNetworkIsNotReachable, 
                        _DOCAlertUserTrashedFileCanNotBeOpened, _DOCAssertWithIntenalBuildAlert, 
                        _DOCCenterSizeInRect, _DOCConvertToUINSDocumentBrowserImportMode, 
@@ -520,11 +510,11 @@ exports:
                        UIDocumentBrowserTransitionController, UIDocumentBrowserViewController ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/PrintKitUI.framework/Versions/A/PrintKitUI'
-current-version: 78.4
+current-version: 78.8
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _UIPrintErrorDomain ]
     objc-classes:    [ UIMarkupTextPrintFormatter, UIPrintFormatter, UIPrintInfo, 
                        UIPrintInteractionController, UIPrintPageRenderer, UIPrintPaper, 
@@ -533,11 +523,11 @@ exports:
                        UISimpleTextPrintFormatter, UIViewPrintFormatter ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/ShareSheet.framework/Versions/A/ShareSheet'
-current-version: 2094.30.41
+current-version: 2094.51.31
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _UIActivityItemsConfigurationMetadataKeyCollaborationModeRestrictions, 
                        _UIActivityItemsConfigurationMetadataKeyRecipients, _UIActivityItemsConfigurationMetadataKeyShareRecipients, 
                        _UIActivityTypeAddToHomeScreen, _UIActivityTypeAddToReadingList, 
@@ -586,22 +576,22 @@ exports:
                        _UIActivityUserDefaultsManager, _UIUserDefaultsActivityProxy ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/UIKitCore.framework/Versions/A/UIKitCore'
-current-version: 9126.2.4
+current-version: 9126.4.27
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     clients:         [ DocumentManager, FocusEngine, KeyboardArbiter, OverlayUI, 
                        PreviewsUIKit, PrintKitUI, ShareSheet, UIKit, _UIKitTestTarget, 
                        com.apple.UIKit.ShareUI, com.apple.UIKit.screenpicker ]
 reexported-libraries:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/CollectionViewCore.framework/Versions/A/CollectionViewCore', 
                        '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation', 
                        '/System/Library/SubFrameworks/UIUtilities.framework/Versions/A/UIUtilities' ]
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '$ld$add$os10.0$_OBJC_CLASS_$_NSFileProviderExtension', '$ld$add$os10.0$_OBJC_METACLASS_$_NSFileProviderExtension', 
                        '$ld$add$os10.1$_OBJC_CLASS_$_NSFileProviderExtension', '$ld$add$os10.1$_OBJC_METACLASS_$_NSFileProviderExtension', 
                        '$ld$add$os10.2$_OBJC_CLASS_$_NSFileProviderExtension', '$ld$add$os10.2$_OBJC_METACLASS_$_NSFileProviderExtension', 
@@ -618,13 +608,13 @@ exports:
                        '$ld$add$os9.1$_OBJC_CLASS_$_NSFileProviderExtension', '$ld$add$os9.1$_OBJC_METACLASS_$_NSFileProviderExtension', 
                        '$ld$add$os9.2$_OBJC_CLASS_$_NSFileProviderExtension', '$ld$add$os9.2$_OBJC_METACLASS_$_NSFileProviderExtension', 
                        '$ld$add$os9.3$_OBJC_CLASS_$_NSFileProviderExtension', '$ld$add$os9.3$_OBJC_METACLASS_$_NSFileProviderExtension', 
-                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$17.0$26.0$_$s7SwiftUI28UITraitBridgedEnvironmentKeyMp$', 
-                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$17.0$26.0$_$s7SwiftUI28UITraitBridgedEnvironmentKeyP4read4from5ValueQzSo0C10CollectionC_tFZTj$', 
-                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$17.0$26.0$_$s7SwiftUI28UITraitBridgedEnvironmentKeyP4read4from5ValueQzSo0C10CollectionC_tFZTq$', 
-                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$17.0$26.0$_$s7SwiftUI28UITraitBridgedEnvironmentKeyP5write2to5valuey5UIKit15UIMutableTraits_pz_5ValueQztFZTj$', 
-                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$17.0$26.0$_$s7SwiftUI28UITraitBridgedEnvironmentKeyP5write2to5valuey5UIKit15UIMutableTraits_pz_5ValueQztFZTq$', 
-                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$17.0$26.0$_$s7SwiftUI28UITraitBridgedEnvironmentKeyPAA0eF0Tb$', 
-                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$17.0$26.0$_$s7SwiftUI28UITraitBridgedEnvironmentKeyTL$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$1.0$26.0$_$s7SwiftUI28UITraitBridgedEnvironmentKeyMp$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$1.0$26.0$_$s7SwiftUI28UITraitBridgedEnvironmentKeyP4read4from5ValueQzSo0C10CollectionC_tFZTj$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$1.0$26.0$_$s7SwiftUI28UITraitBridgedEnvironmentKeyP4read4from5ValueQzSo0C10CollectionC_tFZTq$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$1.0$26.0$_$s7SwiftUI28UITraitBridgedEnvironmentKeyP5write2to5valuey5UIKit15UIMutableTraits_pz_5ValueQztFZTj$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$1.0$26.0$_$s7SwiftUI28UITraitBridgedEnvironmentKeyP5write2to5valuey5UIKit15UIMutableTraits_pz_5ValueQztFZTq$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$1.0$26.0$_$s7SwiftUI28UITraitBridgedEnvironmentKeyPAA0eF0Tb$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$1.0$26.0$_$s7SwiftUI28UITraitBridgedEnvironmentKeyTL$', 
                        '$ld$previous$/System/iOSSupport/usr/lib/swift/libswiftUIKit.dylib$1.0.0$6$13.0$17.0$_$s10Foundation15AttributeScopesO5UIKitE0D10AttributesV010AttachmentB0O4nameSSvgZ$', 
                        '$ld$previous$/System/iOSSupport/usr/lib/swift/libswiftUIKit.dylib$1.0.0$6$13.0$17.0$_$s10Foundation15AttributeScopesO5UIKitE0D10AttributesV010AttachmentB0OAA19AttributedStringKeyADMc$', 
                        '$ld$previous$/System/iOSSupport/usr/lib/swift/libswiftUIKit.dylib$1.0.0$6$13.0$17.0$_$s10Foundation15AttributeScopesO5UIKitE0D10AttributesV010AttachmentB0OAA28DecodableAttributedStringKeyADMc$', 
@@ -5815,21 +5805,7 @@ exports:
                        '_$s5UIKit24_UITraitHDRHeadroomUsageVAA0B10DefinitionAAMc', 
                        '_$s5UIKit24_UITraitHDRHeadroomUsageVAA0B10DefinitionAAWP', 
                        '_$s5UIKit24_UITraitHDRHeadroomUsageVMa', '_$s5UIKit24_UITraitHDRHeadroomUsageVMn', 
-                       '_$s5UIKit24_UITraitHDRHeadroomUsageVN', '_$s5UIKit25CornerMaskingContextTraitV10_isPrivateSbvgZ', 
-                       '_$s5UIKit25CornerMaskingContextTraitV10_isPrivateSbvpZMV', 
-                       '_$s5UIKit25CornerMaskingContextTraitV10identifierSSvgZ', 
-                       '_$s5UIKit25CornerMaskingContextTraitV10identifierSSvpZMV', 
-                       '_$s5UIKit25CornerMaskingContextTraitV12defaultValueSo09_UICornercD0CvgZ', 
-                       '_$s5UIKit25CornerMaskingContextTraitV12defaultValueSo09_UICornercD0CvpZMV', 
-                       '_$s5UIKit25CornerMaskingContextTraitV22affectsColorAppearanceSbvgZ', 
-                       '_$s5UIKit25CornerMaskingContextTraitV22affectsColorAppearanceSbvpZMV', 
-                       '_$s5UIKit25CornerMaskingContextTraitV34_defaultValueRepresentsUnspecifiedSbvgZ', 
-                       '_$s5UIKit25CornerMaskingContextTraitV34_defaultValueRepresentsUnspecifiedSbvpZMV', 
-                       '_$s5UIKit25CornerMaskingContextTraitV4nameSSvgZ', '_$s5UIKit25CornerMaskingContextTraitV4nameSSvpZMV', 
-                       '_$s5UIKit25CornerMaskingContextTraitVAA17UITraitDefinitionAAMc', 
-                       '_$s5UIKit25CornerMaskingContextTraitVAA17UITraitDefinitionAAWP', 
-                       '_$s5UIKit25CornerMaskingContextTraitVMa', '_$s5UIKit25CornerMaskingContextTraitVMn', 
-                       '_$s5UIKit25CornerMaskingContextTraitVN', '_$s5UIKit25UIBackgroundConfigurationV10customViewSo6UIViewCSgvM', 
+                       '_$s5UIKit24_UITraitHDRHeadroomUsageVN', '_$s5UIKit25UIBackgroundConfigurationV10customViewSo6UIViewCSgvM', 
                        '_$s5UIKit25UIBackgroundConfigurationV10customViewSo6UIViewCSgvg', 
                        '_$s5UIKit25UIBackgroundConfigurationV10customViewSo6UIViewCSgvpMV', 
                        '_$s5UIKit25UIBackgroundConfigurationV10customViewSo6UIViewCSgvs', 
@@ -5941,10 +5917,13 @@ exports:
                        '_$s5UIKit25UIHostingViewBaseDelegateP29baseKeyboardSafeAreaDidChange_9oldHeight03newM0yAA0bcD0C_12CoreGraphics7CGFloatVAKtFTq', 
                        '_$s5UIKit25UIHostingViewBaseDelegateP33baseSceneActivationStateDidChange_03oldI003newI0yAA0bcD0C_So07UIScenehI0VSgAKtFTj', 
                        '_$s5UIKit25UIHostingViewBaseDelegateP33baseSceneActivationStateDidChange_03oldI003newI0yAA0bcD0C_So07UIScenehI0VSgAKtFTq', 
+                       '_$s5UIKit25UIHostingViewBaseDelegateP41baseShouldAllowKeyboardSafeAreaAnimationsySbAA0bcD0CFTj', 
+                       '_$s5UIKit25UIHostingViewBaseDelegateP41baseShouldAllowKeyboardSafeAreaAnimationsySbAA0bcD0CFTq', 
                        '_$s5UIKit25UIHostingViewBaseDelegatePAAE18baseSceneBecameKeyyyAA0bcD0CF', 
                        '_$s5UIKit25UIHostingViewBaseDelegatePAAE20baseSceneResignedKeyyyAA0bcD0CF', 
                        '_$s5UIKit25UIHostingViewBaseDelegatePAAE29baseKeyboardSafeAreaDidChange_9oldHeight03newM0yAA0bcD0C_12CoreGraphics7CGFloatVAKtF', 
                        '_$s5UIKit25UIHostingViewBaseDelegatePAAE33baseSceneActivationStateDidChange_03oldI003newI0yAA0bcD0C_So07UIScenehI0VSgAKtF', 
+                       '_$s5UIKit25UIHostingViewBaseDelegatePAAE41baseShouldAllowKeyboardSafeAreaAnimationsySbAA0bcD0CF', 
                        '_$s5UIKit25UIHostingViewBaseDelegateTL', '_$s5UIKit25UILayoutComponentResponseO11unmapEntityyAcA012UITransitionF0VcACmFWC', 
                        '_$s5UIKit25UILayoutComponentResponseO16updateInputModelyA2CmFWC', 
                        '_$s5UIKit25UILayoutComponentResponseO17updateOutputModel10callbackID5styleAC10Foundation4UUIDV_AC06UpdatefG13CallbackStyleOtFZ', 
@@ -7622,28 +7601,8 @@ exports:
                        '_$s5UIKit33UITraitUserInterfaceRenderingModeVAA0B10DefinitionAAMc', 
                        '_$s5UIKit33UITraitUserInterfaceRenderingModeVAA0B10DefinitionAAWP', 
                        '_$s5UIKit33UITraitUserInterfaceRenderingModeVMa', '_$s5UIKit33UITraitUserInterfaceRenderingModeVMn', 
-                       '_$s5UIKit33UITraitUserInterfaceRenderingModeVN', '_$s5UIKit33_UIConcentricCornerMaskingSupportC026dirtyConcentricDescendantsD21ConfigurationIfNeededyyFTj', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportC026dirtyConcentricDescendantsD21ConfigurationIfNeededyyFTq', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportC031registerDescendantForGeometryOrD20ConfigurationChanges_17invalidationBlockyycSo25_UIMaskingCoordinateSpace_p_yyctFTj', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportC031registerDescendantForGeometryOrD20ConfigurationChanges_17invalidationBlockyycSo25_UIMaskingCoordinateSpace_p_yyctFTq', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportC17invalidationBlockACyACcSg_tcfC', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportC17invalidationBlockACyACcSg_tcfCTj', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportC17invalidationBlockACyACcSg_tcfCTq', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportC17invalidationBlockACyACcSg_tcfc', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportC24resolvedConcentricRadius09containerH00I15CoordinateSpace10descendant6corner12CoreGraphics7CGFloatVAK_So010_UIMaskingjK0_pSoAL_pSo06UIRectC0VtFTj', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportC24resolvedConcentricRadius09containerH00I15CoordinateSpace10descendant6corner12CoreGraphics7CGFloatVAK_So010_UIMaskingjK0_pSoAL_pSo06UIRectC0VtFTq', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportC24resolvedConcentricRadius09containerH00I15CoordinateSpace10descendant6corner12CoreGraphics7CGFloatVAK_So010_UIMaskingjK0_pSoAL_pSo06UIRectC0VtFZ', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportC27_boundingPathMayHaveChanged3for26relativeToBoundsOriginOnlyySo6UIViewCSg_SbtFTj', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportC27_boundingPathMayHaveChanged3for26relativeToBoundsOriginOnlyySo6UIViewCSg_SbtFTq', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportC28registerConcentricDependencyyyyycFTj', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportC28registerConcentricDependencyyyyycFTq', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportC43unregisterConcentricDependenciesIfNecessaryyyFTj', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportC43unregisterConcentricDependenciesIfNecessaryyyFTq', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportCACycfC', '_$s5UIKit33_UIConcentricCornerMaskingSupportCACycfc', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportCMa', '_$s5UIKit33_UIConcentricCornerMaskingSupportCMn', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportCMo', '_$s5UIKit33_UIConcentricCornerMaskingSupportCMu', 
-                       '_$s5UIKit33_UIConcentricCornerMaskingSupportCN', '_$s5UIKit33_UIConcentricCornerMaskingSupportCfD', 
-                       '_$s5UIKit33_UIIntelligenceLightSceneDelegateMp', '_$s5UIKit33_UIIntelligenceLightSceneDelegateP5scene_09didUpdateC13ConfigurationySo08UIWindowD0C_AA01_bc6SourceI0VtFTj', 
+                       '_$s5UIKit33UITraitUserInterfaceRenderingModeVN', '_$s5UIKit33_UIIntelligenceLightSceneDelegateMp', 
+                       '_$s5UIKit33_UIIntelligenceLightSceneDelegateP5scene_09didUpdateC13ConfigurationySo08UIWindowD0C_AA01_bc6SourceI0VtFTj', 
                        '_$s5UIKit33_UIIntelligenceLightSceneDelegateP5scene_09didUpdateC13ConfigurationySo08UIWindowD0C_AA01_bc6SourceI0VtFTq', 
                        '_$s5UIKit33_UIIntelligenceLightSceneDelegateTL', '_$s5UIKit33_UIScrollEdgeEffectContainerProxyV2eeoiySbAC_ACtFZ', 
                        '_$s5UIKit33_UIScrollEdgeEffectContainerProxyVMa', '_$s5UIKit33_UIScrollEdgeEffectContainerProxyVMn', 
@@ -9148,12 +9107,10 @@ exports:
                        '_$sSo13UIWindowSceneC5UIKitE14traitOverridesAC07UITraitE0Vvg', 
                        '_$sSo13UIWindowSceneC5UIKitE14traitOverridesAC07UITraitE0VvpMV', 
                        '_$sSo13UIWindowSceneC5UIKitE14traitOverridesAC07UITraitE0Vvs', 
-                       '_$sSo13UIWindowSceneC5UIKitE17contextIdentifierSivg', '_$sSo13UIWindowSceneC5UIKitE17contextIdentifierSivpMV', 
                        '_$sSo13UIWindowSceneC5UIKitE23registerForTraitChanges_6actionSo25UITraitChangeRegistration_pSayAC0I10Definition_pXpG_10ObjectiveC8SelectorVtF', 
                        '_$sSo13UIWindowSceneC5UIKitE23registerForTraitChanges_6target6actionSo25UITraitChangeRegistration_pSayAC0J10Definition_pXpG_yp10ObjectiveC8SelectorVtF', 
                        '_$sSo13UIWindowSceneC5UIKitE23registerForTraitChanges_7handlerSo25UITraitChangeRegistration_pSayAC0I10Definition_pXpG_yx_So0I10CollectionCtctSo0I11EnvironmentRzlF', 
                        '_$sSo13UIWindowSceneC5UIKitE25unregisterForTraitChangesyySo25UITraitChangeRegistration_pF', 
-                       '_$sSo13UIWindowSceneC5UIKitE6boundsSo6CGRectVvg', '_$sSo13UIWindowSceneC5UIKitE6boundsSo6CGRectVvpMV', 
                        '_$sSo13_UIBarSectionC5UIKitEABycfC', '_$sSo13_UIBarSectionC5UIKitEABycfc', 
                        '_$sSo13_UIBarSectionCMa', '_$sSo13_UIRemoteViewC5UIKitE22_intelligenceBaseClassyXlXpvg', 
                        '_$sSo13_UIRemoteViewC5UIKitE27_intelligenceCollectContent2in9collectorySo6CGRectV_21UIIntelligenceSupport0J16ElementCollectorCtF', 
@@ -9555,8 +9512,6 @@ exports:
                        '_$sSo17UITraitCollectionC5UIKitE19typesettingLanguage10Foundation6LocaleV0E0VSgvpMV', 
                        '_$sSo17UITraitCollectionC5UIKitE19typesettingLanguageAB10Foundation6LocaleV0E0VSg_tcfC', 
                        '_$sSo17UITraitCollectionC5UIKitE19typesettingLanguageAB10Foundation6LocaleV0E0VSg_tcfc', 
-                       '_$sSo17UITraitCollectionC5UIKitE20cornerMaskingContextSo09_UICornereF0Cvg', 
-                       '_$sSo17UITraitCollectionC5UIKitE20cornerMaskingContextSo09_UICornereF0CvpMV', 
                        '_$sSo17UITraitCollectionC5UIKitE21_barButtonItemMetricsAC06_UIBarefG0VSgvg', 
                        '_$sSo17UITraitCollectionC5UIKitE21_barButtonItemMetricsAC06_UIBarefG0VSgvpMV', 
                        '_$sSo17UITraitCollectionC5UIKitE23coreResolvedEnvironment4base7SwiftUI0F6ValuesVAH_tF', 
@@ -9892,6 +9847,7 @@ exports:
                        '_$sSo22UIToolTipConfigurationC5UIKitE10sourceRectSo6CGRectVSgvpMV', 
                        '_$sSo22_UIFloatingContentViewC5UIKitE18backgroundMaterial3forSo6UIViewCACE0F0_pSgSo14UIControlStateV_tF', 
                        '_$sSo22_UIFloatingContentViewC5UIKitE21setBackgroundMaterial_3forySo6UIViewCACE0G0_pSg_So14UIControlStateVtF', 
+                       '_$sSo22_UIFloatingContentViewC5UIKitE24removeBackgroundMaterial3forySo14UIControlStateV_tF', 
                        '_$sSo22_UIFloatingContentViewC5UIKitE5glass3forAC6_GlassVSgSo14UIControlStateV_tF', 
                        '_$sSo22_UIFloatingContentViewC5UIKitE8setGlass_3foryAC01_F0VSg_So14UIControlStateVtF', 
                        '_$sSo23NSCollectionLayoutGroupC5UIKitE010horizontalC04with16repeatingSubitem5countABSo0aB4SizeC_So0aB4ItemCSitFZ', 
@@ -10611,11 +10567,6 @@ exports:
                        '_$sSo46_UIContextMenuLiquidMorphPresentationAnimationC5UIKitEABycfC', 
                        '_$sSo46_UIContextMenuLiquidMorphPresentationAnimationC5UIKitEABycfc', 
                        '_$sSo46_UIContextMenuLiquidMorphPresentationAnimationCMa', 
-                       '_$sSo46_UIRelativeCornerMaskingProviderSceneComponentC5UIKitE5sceneABSo7UISceneC_tcfC', 
-                       '_$sSo46_UIRelativeCornerMaskingProviderSceneComponentC5UIKitE5sceneABSo7UISceneC_tcfc', 
-                       '_$sSo46_UIRelativeCornerMaskingProviderSceneComponentC5UIKitEABycfC', 
-                       '_$sSo46_UIRelativeCornerMaskingProviderSceneComponentC5UIKitEABycfc', 
-                       '_$sSo46_UIRelativeCornerMaskingProviderSceneComponentCMa', 
                        '_$sSo46_UISplitViewControllerAdaptiveLayoutTransitionC5UIKitEABycfC', 
                        '_$sSo46_UISplitViewControllerAdaptiveLayoutTransitionC5UIKitEABycfc', 
                        '_$sSo46_UISplitViewControllerAdaptiveLayoutTransitionCMa', 
@@ -10737,12 +10688,10 @@ exports:
                        '_$sSo6UIViewC5UIKitE15_ManagedContentVAEycfC', '_$sSo6UIViewC5UIKitE15_ManagedContentVMa', 
                        '_$sSo6UIViewC5UIKitE15_ManagedContentVMn', '_$sSo6UIViewC5UIKitE15_ManagedContentVN', 
                        '_$sSo6UIViewC5UIKitE15_ManagedContentVSHACMc', '_$sSo6UIViewC5UIKitE15_ManagedContentVSQACMc', 
-                       '_$sSo6UIViewC5UIKitE17contextIdentifierSivg', '_$sSo6UIViewC5UIKitE17contextIdentifierSivpMV', 
                        '_$sSo6UIViewC5UIKitE19cornerConfigurationAC08UICornerD0VvM', 
                        '_$sSo6UIViewC5UIKitE19cornerConfigurationAC08UICornerD0Vvg', 
                        '_$sSo6UIViewC5UIKitE19cornerConfigurationAC08UICornerD0VvpMV', 
                        '_$sSo6UIViewC5UIKitE19cornerConfigurationAC08UICornerD0Vvs', 
-                       '_$sSo6UIViewC5UIKitE20resolvedCornerRadius3for7context6corner12CoreGraphics7CGFloatVSo25_UIMaskingCoordinateSpace_p_So23_UICornerMaskingContextCSo06UIRectD0VtF', 
                        '_$sSo6UIViewC5UIKitE20updateManagedContent6ofType5using7keyPath10neededWhen0C05setUp8tearDownyq0_m_xs03KeyJ0Cyxq_GSbyq0__q_So01_ae6UpdateG0VtXEq0_q_XEyq0_ctr1_lF', 
                        '_$sSo6UIViewC5UIKitE20updateManagedContent_10neededWhen0C05setUp8tearDownyAbCE01_dE0V_SbySo01_aE10UpdateTypeVXEyyXEyyctF', 
                        '_$sSo6UIViewC5UIKitE21directionalEdgeInsets3forSo013NSDirectionaldE0VAbCE12LayoutRegionV_tF', 
@@ -10767,13 +10716,9 @@ exports:
                        '_$sSo6UIViewC5UIKitE33_defaultCustomPlaygroundQuickLooks01_efG0Ovg', 
                        '_$sSo6UIViewC5UIKitE33_defaultCustomPlaygroundQuickLooks01_efG0OvpMV', 
                        '_$sSo6UIViewC5UIKitE33_intelligenceCollectRemoteContent2in20remoteContextWrapperySo6CGRectV_21UIIntelligenceSupport0l10CollectioneiJ0CtF', 
-                       '_$sSo6UIViewC5UIKitE58registerDescendantForGeometryOrMaskingConfigurationChanges_17invalidationBlockyycSo25_UIMaskingCoordinateSpace_p_yyctF', 
-                       '_$sSo6UIViewC5UIKitE64registerBoundingPathObserverForCornerMaskingConfigurationChangesyySo01_ade6ChangeF0_pF', 
                        '_$sSo6UIViewC5UIKitE7animate14springDuration6bounce21initialSpringVelocity5delay7options10animations10completionySd_12CoreGraphics7CGFloatVANSdSo0A16AnimationOptionsVyyXEySbcSgtFZ', 
                        '_$sSo6UIViewC5UIKitE7animate16bridgedAnimation10animations10completiony7SwiftUI0E0V_yycySb_SbtctFZ', 
                        '_$sSo6UIViewC5UIKitE7animate16bridgedAnimation10animations10completionyx_yycySb_SbtctAC09UIBridgedE0RzlFZ', 
-                       '_$sSo6UIViewC5UIKitE7convert_24toMaskingCoordinateSpaceSo6CGRectVAG_So010_UIMaskingfG0_ptF', 
-                       '_$sSo6UIViewC5UIKitE7convert_26fromMaskingCoordinateSpaceSo6CGRectVAG_So010_UIMaskingfG0_ptF', 
                        '_$sSo6UIViewC5UIKitE8MaterialMp', '_$sSo6UIViewC5UIKitE8MaterialP010_isEqualToC0ySbxFTj', 
                        '_$sSo6UIViewC5UIKitE8MaterialP010_isEqualToC0ySbxFTq', '_$sSo6UIViewC5UIKitE8MaterialP8resolved5using4sizeAbCEAD_pSgSo17UITraitCollectionC_So6CGSizeVtFTj', 
                        '_$sSo6UIViewC5UIKitE8MaterialP8resolved5using4sizeAbCEAD_pSgSo17UITraitCollectionC_So6CGSizeVtFTq', 
@@ -11196,7 +11141,6 @@ exports:
                        '_$sSo8UIOffsetV5UIKitE4fromABs7Decoder_p_tKcfC', '_$sSo8UIOffsetV5UIKitE6encode2toys7Encoder_p_tKF', 
                        '_$sSo8UIOffsetVSE5UIKitMc', '_$sSo8UIOffsetVSQ5UIKitMc', 
                        '_$sSo8UIOffsetVSe5UIKitMc', '_$sSo8UIOffsetVs21_ObjectiveCBridgeable5UIKitMc', 
-                       '_$sSo8UIScreenC5UIKitE17contextIdentifierSivg', '_$sSo8UIScreenC5UIKitE17contextIdentifierSivpMV', 
                        '_$sSo8UIScreenC5UIKitE20ModeDidChangeMessageV04makeF0yAESg10Foundation12NotificationVFZ', 
                        '_$sSo8UIScreenC5UIKitE20ModeDidChangeMessageV16makeNotificationy10Foundation0H0VAEFZ', 
                        '_$sSo8UIScreenC5UIKitE20ModeDidChangeMessageV4nameSo18NSNotificationNameavgZ', 
@@ -11824,32 +11768,33 @@ exports:
                        _UIKBDeleteLargeGlyph, _UIKBDeleteSmallGlyph, _UIKBDetachHardwareKeyboardDelayInterval, 
                        _UIKBDictationKeyGlyph, _UIKBDictationMenuReturnPauseInterval, 
                        _UIKBDidShowGestureKeyboardIntroduction, _UIKBDidShowInlineCompletionEducationTip, 
-                       _UIKBDismissKeyGlyph, _UIKBDotKeyHitAreaPercentage, _UIKBDotKeyUseOvalHitArea, 
-                       _UIKBDrawCTLineAtPoint, _UIKBDrawLinearGradient, _UIKBEditingVariantStringCopy, 
-                       _UIKBEditingVariantStringCut, _UIKBEditingVariantStringPaste, 
-                       _UIKBEditingVariantStringRedo, _UIKBEditingVariantStringUndo, 
-                       _UIKBEmojiBackgroundGradient, _UIKBEmojiCategoryNature, _UIKBEmojiCategoryObjects, 
-                       _UIKBEmojiCategoryPeople, _UIKBEmojiCategoryPlaces, _UIKBEmojiCategoryRecents, 
-                       _UIKBEmojiCategorySymbolColor, _UIKBEmojiCategorySymbols, 
-                       _UIKBEmojiControlDelete, _UIKBEmojiControlDeleteKey, _UIKBEmojiControlDismissKey, 
-                       _UIKBEmojiControlInternational, _UIKBEmojiControlInternationalKey, 
-                       _UIKBEmojiControlSpaceKey, _UIKBEmojiDarkDivider, _UIKBEmojiDivider, 
-                       _UIKBEmojiLightControlSymbolActiveColor, _UIKBEmojiLightControlSymbolColor, 
-                       _UIKBEmojiNatureGlyph, _UIKBEmojiObjectsGlyph, _UIKBEmojiPageIndicator, 
-                       _UIKBEmojiPageIndicatorCurrent, _UIKBEmojiPeopleGlyph, _UIKBEmojiPeopleGlyphHighlighted, 
-                       _UIKBEmojiPlacesGlyph, _UIKBEmojiRecentsGlyph, _UIKBEmojiSelectedDivider, 
-                       _UIKBEmojiSymbolsGlyph, _UIKBGetFlickDirection, _UIKBGetFontAttributes, 
-                       _UIKBGetFontAttributesWithSymbolStyle, _UIKBGetNamedColor, 
-                       _UIKBGetNamedLinearGradient, _UIKBGetXHeight, _UIKBGlyphForCharacter, 
-                       _UIKBGlyphForCharacterWithSymbolStyle, _UIKBGraphicsCacheRelease, 
-                       _UIKBHandwritingAutoConfirmationEnabled, _UIKBHandwritingAutoConfirmationMaxTimeout, 
-                       _UIKBHandwritingAutoConfirmationMinTimeout, _UIKBInlineCompletionAcceptedBySpaceEventCount, 
-                       _UIKBInputGesturesEnabled, _UIKBIntHash, _UIKBInternationalGlobeSymbolUniChar, 
-                       _UIKBKanaHandGlyph, _UIKBKeyDisplayTypeBIUStr, _UIKBKeyDisplayTypeBoldStr, 
-                       _UIKBKeyDisplayTypeBrailleStr, _UIKBKeyDisplayTypeCandidateListStr, 
-                       _UIKBKeyDisplayTypeCapsLockStr, _UIKBKeyDisplayTypeCommandStr, 
-                       _UIKBKeyDisplayTypeCopyStr, _UIKBKeyDisplayTypeCustomActionStr, 
-                       _UIKBKeyDisplayTypeCutStr, _UIKBKeyDisplayTypeDeleteStr, _UIKBKeyDisplayTypeDictationDisplayStr, 
+                       _UIKBDismissKeyGlyph, _UIKBDotKeyHitAreaLeftInsetPercentage, 
+                       _UIKBDotKeyUseModifiedHitArea, _UIKBDrawCTLineAtPoint, _UIKBDrawLinearGradient, 
+                       _UIKBEditingVariantStringCopy, _UIKBEditingVariantStringCut, 
+                       _UIKBEditingVariantStringPaste, _UIKBEditingVariantStringRedo, 
+                       _UIKBEditingVariantStringUndo, _UIKBEmojiBackgroundGradient, 
+                       _UIKBEmojiCategoryNature, _UIKBEmojiCategoryObjects, _UIKBEmojiCategoryPeople, 
+                       _UIKBEmojiCategoryPlaces, _UIKBEmojiCategoryRecents, _UIKBEmojiCategorySymbolColor, 
+                       _UIKBEmojiCategorySymbols, _UIKBEmojiControlDelete, _UIKBEmojiControlDeleteKey, 
+                       _UIKBEmojiControlDismissKey, _UIKBEmojiControlInternational, 
+                       _UIKBEmojiControlInternationalKey, _UIKBEmojiControlSpaceKey, 
+                       _UIKBEmojiDarkDivider, _UIKBEmojiDivider, _UIKBEmojiLightControlSymbolActiveColor, 
+                       _UIKBEmojiLightControlSymbolColor, _UIKBEmojiNatureGlyph, 
+                       _UIKBEmojiObjectsGlyph, _UIKBEmojiPageIndicator, _UIKBEmojiPageIndicatorCurrent, 
+                       _UIKBEmojiPeopleGlyph, _UIKBEmojiPeopleGlyphHighlighted, _UIKBEmojiPlacesGlyph, 
+                       _UIKBEmojiRecentsGlyph, _UIKBEmojiSelectedDivider, _UIKBEmojiSymbolsGlyph, 
+                       _UIKBGetFlickDirection, _UIKBGetFontAttributes, _UIKBGetFontAttributesWithSymbolStyle, 
+                       _UIKBGetNamedColor, _UIKBGetNamedLinearGradient, _UIKBGetXHeight, 
+                       _UIKBGlyphForCharacter, _UIKBGlyphForCharacterWithSymbolStyle, 
+                       _UIKBGraphicsCacheRelease, _UIKBHandwritingAutoConfirmationEnabled, 
+                       _UIKBHandwritingAutoConfirmationMaxTimeout, _UIKBHandwritingAutoConfirmationMinTimeout, 
+                       _UIKBInlineCompletionAcceptedBySpaceEventCount, _UIKBInputGesturesEnabled, 
+                       _UIKBIntHash, _UIKBInternationalGlobeSymbolUniChar, _UIKBKanaHandGlyph, 
+                       _UIKBKeyDisplayTypeBIUStr, _UIKBKeyDisplayTypeBoldStr, _UIKBKeyDisplayTypeBrailleStr, 
+                       _UIKBKeyDisplayTypeCandidateListStr, _UIKBKeyDisplayTypeCapsLockStr, 
+                       _UIKBKeyDisplayTypeCommandStr, _UIKBKeyDisplayTypeCopyStr, 
+                       _UIKBKeyDisplayTypeCustomActionStr, _UIKBKeyDisplayTypeCutStr, 
+                       _UIKBKeyDisplayTypeDeleteStr, _UIKBKeyDisplayTypeDictationDisplayStr, 
                        _UIKBKeyDisplayTypeDictationStr, _UIKBKeyDisplayTypeDismissStr, 
                        _UIKBKeyDisplayTypeDividerStr, _UIKBKeyDisplayTypeDragStr, 
                        _UIKBKeyDisplayTypeDualStringStr, _UIKBKeyDisplayTypeDynamicStringStr, 
@@ -11902,12 +11847,12 @@ exports:
                        _UIKBKeyVariantsTypeExtendedSkinToneEmojiStr, _UIKBKeyVariantsTypeImmediateAccentsStr, 
                        _UIKBKeyVariantsTypeInputModesStr, _UIKBKeyVariantsTypeKeyplaneAccentsStr, 
                        _UIKBKeyVariantsTypeKeyplaneSwitcherStr, _UIKBKeyVariantsTypePrepopulatedExtendedSkinToneEmojiStr, 
-                       _UIKBKeyVariantsTypePrepopulatedSkinToneEmojiStr, _UIKBKeyVariantsTypeSkinToneEmojiStr, 
-                       _UIKBKeyVariantsTypeURLStr, _UIKBKeyboardAutomaticDimension, 
-                       _UIKBKeyboardDockItemHitAreaReductionPercent, _UIKBKeyboardDrawsOpaque, 
-                       _UIKBKeyboardIsEmailKeyboard, _UIKBKeyboardIsLandscape, _UIKBKeyboardIsPortrait, 
-                       _UIKBKeyboardIsSplit, _UIKBKeyboardIsURLKeyboard, _UIKBLegacyCandidateGridCellAlternativeText, 
-                       _UIKBLegacyCandidateGridCellHighlightedBackgroundGradient, 
+                       _UIKBKeyVariantsTypePrepopulatedSkinToneEmojiStr, _UIKBKeyVariantsTypeRelevantLanguagesStr, 
+                       _UIKBKeyVariantsTypeSkinToneEmojiStr, _UIKBKeyVariantsTypeURLStr, 
+                       _UIKBKeyboardAutomaticDimension, _UIKBKeyboardDockItemHitAreaReductionPercent, 
+                       _UIKBKeyboardDrawsOpaque, _UIKBKeyboardIsEmailKeyboard, _UIKBKeyboardIsLandscape, 
+                       _UIKBKeyboardIsPortrait, _UIKBKeyboardIsSplit, _UIKBKeyboardIsURLKeyboard, 
+                       _UIKBLegacyCandidateGridCellAlternativeText, _UIKBLegacyCandidateGridCellHighlightedBackgroundGradient, 
                        _UIKBLegacyCandidateGridCellHighlightedBackgroundGradientEnd, 
                        _UIKBLegacyCandidateGridCellHighlightedBackgroundGradientStart, 
                        _UIKBLegacyCandidateGridCellOutline, _UIKBLegacyCandidateGridCellOutlineShadow, 
@@ -12956,7 +12901,8 @@ exports:
                        __UIScrollViewDidEndDraggingWillDecelerateUserInfoKey, __UIScrollViewNotifyForScrollView, 
                        __UIScrollViewWillBeginDraggingNotification, __UISearchBarLayoutStateDebugDescription, 
                        __UISearchBarLayoutStateIsRestingEquivalent, __UISearchSuggestionAllSuggestionsFromGroups, 
-                       __UISearchSuggestionNumberOfSuggestionsFromGroups, __UISearchTextFieldMovedToWindowNotification, 
+                       __UISearchSuggestionNumberOfSuggestionsFromGroups, __UISearchTabHidesCollapseButtonWithExpandedSearch, 
+                       __UISearchTabPrefersUnifiedBar, __UISearchTextFieldMovedToWindowNotification, 
                        __UISelectionHighlightColorDidChangeNewColor, __UISelectionHighlightColorDidChangeNotification, 
                        __UISelectionHighlightColorDidChangeOldColor, __UISelectionHighlightColorWillChangeNotification, 
                        __UISetDefaultSpringParameters, __UISetHidesUpdatedVisualStyle, 
@@ -13014,18 +12960,19 @@ exports:
                        __UIStatusBarRegionAxisSquishyLayoutValueAutomatic, __UIStatusBarRegionIdentifierBattery, 
                        __UIStatusBarResolvedStyleFromStyle, __UIStatusBarStyleFromLegibilityStyle, 
                        __UIStatusBarStyleFromPartStyle, __UIStatusBarStyleFromResolvedStyle, 
-                       __UIStickerCreateAdaptiveImageGlyphFromSticker, __UIStickerCreateDownsampledHEICS, 
-                       __UIStickerCreateDownsampledImage, __UIStickerCreateEmojiTextAttachmentFromSticker, 
-                       __UIStickerCreateFramedSizedSticker, __UIStickerCreateImageFromData, 
-                       __UIStickerCreateResizedImage, __UIStickerCreateSquareSticker, 
-                       __UIStickerCreateStickerFromTextInputPayload, __UIStickerCreateTextInputPayloadFromSticker, 
-                       __UIStickerDataFromImage, __UIStickerDataFromImageWithMetadata, 
-                       __UIStickerImageScaleForMaxLength, __UIStickerItemProviderWithMetadata, 
-                       __UIStickerRepresentationRoleAnimated, __UIStickerRepresentationRoleKeyboard, 
-                       __UIStickerRepresentationRoleStill, __UIStickerRepresentationRoleStill_160, 
-                       __UIStickerRepresentationRoleStill_320, __UIStickerRepresentationRoleStill_40, 
-                       __UIStickerRepresentationRoleStill_64, __UIStickerRepresentationRoleStill_96, 
-                       __UIStickerTypeIdentifier, __UIStoryboardIdentifierKey, __UIStringFromContentInsetsReference, 
+                       __UIStickerCopyMetadataFromRepresentationImageData, __UIStickerCreateAdaptiveImageGlyphFromSticker, 
+                       __UIStickerCreateDownsampledHEICS, __UIStickerCreateDownsampledImage, 
+                       __UIStickerCreateEmojiTextAttachmentFromSticker, __UIStickerCreateFramedSizedSticker, 
+                       __UIStickerCreateImageFromData, __UIStickerCreateResizedImage, 
+                       __UIStickerCreateSquareSticker, __UIStickerCreateStickerFromTextInputPayload, 
+                       __UIStickerCreateTextInputPayloadFromSticker, __UIStickerDataFromImage, 
+                       __UIStickerDataFromImageWithMetadata, __UIStickerImageScaleForMaxLength, 
+                       __UIStickerItemProviderWithMetadata, __UIStickerRepresentationRoleAnimated, 
+                       __UIStickerRepresentationRoleKeyboard, __UIStickerRepresentationRoleStill, 
+                       __UIStickerRepresentationRoleStill_160, __UIStickerRepresentationRoleStill_320, 
+                       __UIStickerRepresentationRoleStill_40, __UIStickerRepresentationRoleStill_64, 
+                       __UIStickerRepresentationRoleStill_96, __UIStickerTypeIdentifier, 
+                       __UIStoryboardIdentifierKey, __UIStringFromContentInsetsReference, 
                        __UIStringFromFocusHeading, __UIStringFromGroupFilter, __UIStringFromWhitePointAdaptivityStyle, 
                        __UIStyledEffectConvertAutomaticStyle, __UIStyledEffectConvertToString, 
                        __UISubclassOverridesSelector, __UISwipeOccurrenceStateDisallowsUserInteraction, 
@@ -13034,8 +12981,7 @@ exports:
                        __UISystemGestureLocationForScrollEventInView, __UISystemGestureLocationForTouchInView, 
                        __UISystemGestureLocationInView, __UISystemGesturePreviousLocationForTouchInView, 
                        __UISystemGestureTranslationInView, __UISystemGestureVelocityInView, 
-                       __UITabBarControllerWantsFloatingTabBar, __UITabBarControllerWantsNavigationBarExtensionForFloatingTabBar, 
-                       __UITableConstantsBackgroundColorTransformerHasMinimalImpact, 
+                       __UITabBarControllerSupportsUITab, __UITableConstantsBackgroundColorTransformerHasMinimalImpact, 
                        __UITableConstantsBackgroundPropertiesDefault, __UITableConstantsContentPropertiesDefault, 
                        __UITableConstantsEffectiveBackgroundFillStyleFromProperties, 
                        __UITableConstantsForTraitCollection, __UITableConstantsGetBackgroundProperties, 
@@ -13125,9 +13071,8 @@ exports:
                        __UIViewEnumerateLayoutConstraintsAndAdjustForConstantChangeForSelectedAttributes, 
                        __UIViewEnumerateLayoutConstraintsAndAdjustForSelectedLayoutVariables, 
                        __UIViewHasBaselinePropertyChangedNotification, __UIViewIsTransparentFocusItem, 
-                       __UIViewMaskingConfigurationSPIEnabled, __UIViewPreLayoutEnabled, 
-                       __UIViewReadableWidthForView, __UIViewResolvedMargins, __UIViewSafeAreaWidthExceedsReadableWidth, 
-                       __UIViewServiceClientViewControllerMaterializerExtensionContextNotFoundError, 
+                       __UIViewPreLayoutEnabled, __UIViewReadableWidthForView, __UIViewResolvedMargins, 
+                       __UIViewSafeAreaWidthExceedsReadableWidth, __UIViewServiceClientViewControllerMaterializerExtensionContextNotFoundError, 
                        __UIViewServiceClientViewControllerMaterializerInvalidExtensionStoryboardOrPrincipleClassError, 
                        __UIViewServiceClientViewControllerMaterializerNotViewControllerSubclassError, 
                        __UIViewServiceClientViewControllerMaterializerViewControllerClassNotFoundError, 
@@ -13529,10 +13474,9 @@ exports:
                        _TtC5UIKit21_UIIntelligenceButton, _TtC5UIKit22UIPromptBackgroundView, 
                        _TtC5UIKit22UIPromptSuggestionView, _TtC5UIKit23_UILiquidMorphAnimation, 
                        _TtC5UIKit28UIDirectionalLightEffectView, _TtC5UIKit30UIRBDirectionalLightEffectView, 
-                       _TtC5UIKit31UIPromptSuggestionContainerView, _TtC5UIKit33_UIConcentricCornerMaskingSupport, 
-                       _TtCC5UIKit21_UIIntelligenceButton8FillView, _TtCO5UIKit14IntelligenceUI15PromptEntryView, 
-                       _TtCO5UIKit14IntelligenceUI17PromptComposeView, _TtCO5UIKit14IntelligenceUI22RotaryPlaceholderLabel, 
-                       _TtCO5UIKit14IntelligenceUI27PromptComposeViewController, 
+                       _TtC5UIKit31UIPromptSuggestionContainerView, _TtCC5UIKit21_UIIntelligenceButton8FillView, 
+                       _TtCO5UIKit14IntelligenceUI15PromptEntryView, _TtCO5UIKit14IntelligenceUI17PromptComposeView, 
+                       _TtCO5UIKit14IntelligenceUI22RotaryPlaceholderLabel, _TtCO5UIKit14IntelligenceUI27PromptComposeViewController, 
                        _UI3DPanGestureRecognizer, _UIAccessDeniedView, _UIActionSheetPresentationController, 
                        _UIActionSlider, _UIActivityIndicatorViewStyleView, _UIAlertControllerView, 
                        _UIAlignmentRegion, _UIAnimatedColor, _UIAnimatedTextAttachment, 
@@ -13584,8 +13528,7 @@ exports:
                        _UIContextMenuLiquidMorphPresentationAnimation, _UIContextMenuModifierKeyService, 
                        _UIContextMenuPinnedFooterView, _UIContextMenuPlatformMetrics, 
                        _UIContextMenuStyle, _UIContextualMenuGestureRecognizer, _UIContinuousFeedback, 
-                       _UICoreUICatalogColorWrapper, _UICoreUIEffect, _UICornerMaskingContext, 
-                       _UICornerMaskingProviderMux, _UICurrentContextPresentationController, 
+                       _UICoreUICatalogColorWrapper, _UICoreUIEffect, _UICurrentContextPresentationController, 
                        _UICursorAccessory, _UICustomBlurEffect, _UIDataTransferMonitor, 
                        _UIDataTransferRequest, _UIDatePickerOverlayPresentation, 
                        _UIDatePickerStyle, _UIDatePickerStyle_Glass, _UIDatePickerStyle_iOS, 
@@ -13721,21 +13664,20 @@ exports:
                        _UIPreviewTarget, _UIPreviewTransitionDelegate, _UIProgressiveBlurContextController, 
                        _UIProgressiveBlurPresentationAnimator, _UIProgressiveBlurPresentationController, 
                        _UIPrototypingMenuSlider, _UIProxyDismissInteraction, _UIReflectingView, 
-                       _UIRelativeCornerMaskingProviderSceneComponent, _UIRemoteKeyboards, 
-                       _UIRemoteView, _UIRemoteViewController, _UIRemoteViewService, 
-                       _UIRepeatingPressGestureRecognizer, _UIResilientRemoteViewContainerViewController, 
-                       _UIRootWindow, _UIRopeAnimation, _UIRotaryGestureRecognizer, 
-                       _UIRotatingAlertController, _UISceneApplicationActionsHandler, 
-                       _UISceneBaseLifecycleSettingsDiffAction, _UISceneCarPlaySessionTouchpad, 
-                       _UISceneClassicModeExternalSettingsModifier, _UISceneConnectionOptionDefinitionActionHandler, 
-                       _UISceneConnectionOptionDefinitionPayloadStorage, _UISceneConnectionOptionsContext, 
-                       _UISceneDestructionCondition, _UISceneDestructionHostComponent, 
-                       _UISceneHostGeometrySceneExtension, _UISceneHostingActionClientToHost, 
-                       _UISceneHostingActionHostToClient, _UISceneHostingController, 
-                       _UISceneHostingControllerAdvancedConfiguration, _UISceneHostingDisconnectingActivationController, 
-                       _UISceneHostingReconnectingActivationController, _UISceneHostingSceneSpecification, 
-                       _UISceneHostingTraitCollectionPropagationExtension, _UISceneHostingView, 
-                       _UISceneKeyValueStorageExtension, _UISceneLifecycleMonitor, 
+                       _UIRemoteKeyboards, _UIRemoteView, _UIRemoteViewController, 
+                       _UIRemoteViewService, _UIRepeatingPressGestureRecognizer, 
+                       _UIResilientRemoteViewContainerViewController, _UIRootWindow, 
+                       _UIRopeAnimation, _UIRotaryGestureRecognizer, _UIRotatingAlertController, 
+                       _UISceneApplicationActionsHandler, _UISceneBaseLifecycleSettingsDiffAction, 
+                       _UISceneCarPlaySessionTouchpad, _UISceneClassicModeExternalSettingsModifier, 
+                       _UISceneConnectionOptionDefinitionActionHandler, _UISceneConnectionOptionDefinitionPayloadStorage, 
+                       _UISceneConnectionOptionsContext, _UISceneDestructionCondition, 
+                       _UISceneDestructionHostComponent, _UISceneHostGeometrySceneExtension, 
+                       _UISceneHostingActionClientToHost, _UISceneHostingActionHostToClient, 
+                       _UISceneHostingController, _UISceneHostingControllerAdvancedConfiguration, 
+                       _UISceneHostingDisconnectingActivationController, _UISceneHostingReconnectingActivationController, 
+                       _UISceneHostingSceneSpecification, _UISceneHostingTraitCollectionPropagationExtension, 
+                       _UISceneHostingView, _UISceneKeyValueStorageExtension, _UISceneLifecycleMonitor, 
                        _UIScenePresenterGeometryDriverStorage, _UISceneResizeFinishedAction, 
                        _UISceneSafeAreaCornerInsetCompositeResolver, _UISceneSafeAreaCornerInsetConcreteResolver, 
                        _UISceneSafeAreaCornerInsetResolver, _UISceneSafeAreaEdgeInsetCompositeResolver, 

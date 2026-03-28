@@ -1,8 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PAImagingCore.framework/Versions/A/PAImagingCore'
-current-version: 821.0.120
+current-version: 841.0.101
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIN2PA10RectFinderE, __ZTIN2PA14PathRectFinderE, __ZTIN2PA16AnchorRectFinderE, 
@@ -11,7 +11,7 @@ exports:
                        __ZTSN2PA14PathRectFinderE, __ZTSN2PA16AnchorRectFinderE, 
                        __ZTSN2PA16centerRectFinderE, __ZTSN2PA24AnchorRectFinderVerticalE, 
                        __ZTSN2PA26AnchorRectFinderHorizontalE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CompareLab, _PAImageFormatInvalid, _PMRDurationUnits, _PMRFPSUnits, 
                        _PMRTimestampUnits, __Z12clippedPointRKN2PA8Vector2dERKNS_13LineSegment2dE, 
                        __Z15CGRectTranslate6CGRectN2PA8Vector2dE, __Z15projectionPointRKN2PA8Vector2dERKNS_13LineSegment2dE, 

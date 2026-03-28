@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libcmark-gfm.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CMARK_NODE_LAST_BLOCK, _CMARK_NODE_LAST_INLINE, _CMARK_NODE_STRIKETHROUGH, 
                        _CMARK_NODE_TABLE, _CMARK_NODE_TABLE_CELL, _CMARK_NODE_TABLE_ROW, 
                        _cmark_arena_pop, _cmark_arena_push, _cmark_arena_reset, _cmark_consolidate_text_nodes, 

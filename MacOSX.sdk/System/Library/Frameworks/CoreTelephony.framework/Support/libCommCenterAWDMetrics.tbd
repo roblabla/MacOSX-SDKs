@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libCommCenterAWDMetrics.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ __ZN3awd7configs22ComponentConfigurationC1Ev, __ZN3awd7configs22ComponentConfigurationD1Ev, 
                        __ZN3awd7metrics14AWDNetworkTimeC1Ev, __ZN3awd7metrics15CommCenterStartC1Ev, 
                        __ZN3awd7metrics15RatType_IsValidEi, __ZN3awd7metrics16CommCenterBundleC1Ev, 

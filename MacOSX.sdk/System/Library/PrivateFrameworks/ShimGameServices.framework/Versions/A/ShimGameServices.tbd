@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ShimGameServices.framework/Versions/A/ShimGameServices'
-current-version: 820.2.10
+current-version: 820.4.21
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12GameServices7ArtworkV04ShimaB0E11templateURL8metadataACSgSS_So17GKArtworkMetadataCtcfC', 
                        '_$s16ShimGameServices0A13FriendServiceV04listD11Suggestions6playerSay0bC03RefVyAF0D16SuggestionEntity_pGGAHyAF6Player_pG_tYaKF', 
                        '_$s16ShimGameServices0A13FriendServiceV04listD11Suggestions6playerSay0bC03RefVyAF0D16SuggestionEntity_pGGAHyAF6Player_pG_tYaKFTu', 

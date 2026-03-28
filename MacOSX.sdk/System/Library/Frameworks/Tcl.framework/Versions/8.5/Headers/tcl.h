@@ -122,11 +122,7 @@ extern "C" {
  * using threads.
  */
 
-#ifdef TCL_THREADS
 #define TCL_DECLARE_MUTEX(name) static Tcl_Mutex name;
-#else
-#define TCL_DECLARE_MUTEX(name)
-#endif
 
 /*
  * Tcl's public routine Tcl_FSSeek() uses the values SEEK_SET, SEEK_CUR, and
@@ -353,54 +349,12 @@ typedef long LONG;
  * sprintf(...,"%" TCL_LL_MODIFIER "d",...).
  */
 
-#if !defined(TCL_WIDE_INT_TYPE)&&!defined(TCL_WIDE_INT_IS_LONG)
-#   if defined(__GNUC__)
-#      define TCL_WIDE_INT_TYPE long long
-#      if defined(__WIN32__) && !defined(__CYGWIN__)
-#         define TCL_LL_MODIFIER        "I64"
-#      else
-#         define TCL_LL_MODIFIER	"ll"
-#      endif
-typedef struct stat	Tcl_StatBuf;
-#   elif defined(__WIN32__)
-#      define TCL_WIDE_INT_TYPE __int64
-#      ifdef __BORLANDC__
-typedef struct stati64 Tcl_StatBuf;
-#         define TCL_LL_MODIFIER	"L"
-#      else /* __BORLANDC__ */
-#         if _MSC_VER < 1400 || !defined(_M_IX86)
-typedef struct _stati64	Tcl_StatBuf;
-#         else
-typedef struct _stat64	Tcl_StatBuf;
-#         endif /* _MSC_VER < 1400 */
-#         define TCL_LL_MODIFIER	"I64"
-#      endif /* __BORLANDC__ */
-#   else /* __WIN32__ */
-/*
- * Don't know what platform it is and configure hasn't discovered what is
- * going on for us. Try to guess...
- */
-#      ifdef NO_LIMITS_H
-#	  error please define either TCL_WIDE_INT_TYPE or TCL_WIDE_INT_IS_LONG
-#      else /* !NO_LIMITS_H */
-#	  include <limits.h>
-#	  if (INT_MAX < LONG_MAX)
-#	     define TCL_WIDE_INT_IS_LONG	1
-#	  else
-#	     define TCL_WIDE_INT_TYPE long long
-#         endif
-#      endif /* NO_LIMITS_H */
-#   endif /* __WIN32__ */
-#endif /* !TCL_WIDE_INT_TYPE & !TCL_WIDE_INT_IS_LONG */
-#ifdef TCL_WIDE_INT_IS_LONG
 #   undef TCL_WIDE_INT_TYPE
 #   define TCL_WIDE_INT_TYPE	long
-#endif /* TCL_WIDE_INT_IS_LONG */
 
 typedef TCL_WIDE_INT_TYPE		Tcl_WideInt;
 typedef unsigned TCL_WIDE_INT_TYPE	Tcl_WideUInt;
 
-#ifdef TCL_WIDE_INT_IS_LONG
 typedef struct stat	Tcl_StatBuf;
 #   define Tcl_WideAsLong(val)		((long)(val))
 #   define Tcl_LongAsWide(val)		((long)(val))
@@ -409,24 +363,6 @@ typedef struct stat	Tcl_StatBuf;
 #   ifndef TCL_LL_MODIFIER
 #      define TCL_LL_MODIFIER		"l"
 #   endif /* !TCL_LL_MODIFIER */
-#else /* TCL_WIDE_INT_IS_LONG */
-/*
- * The next short section of defines are only done when not running on Windows
- * or some other strange platform.
- */
-#   ifndef TCL_LL_MODIFIER
-#      ifdef HAVE_STRUCT_STAT64
-typedef struct stat64	Tcl_StatBuf;
-#      else
-typedef struct stat	Tcl_StatBuf;
-#      endif /* HAVE_STRUCT_STAT64 */
-#      define TCL_LL_MODIFIER		"ll"
-#   endif /* !TCL_LL_MODIFIER */
-#   define Tcl_WideAsLong(val)		((long)((Tcl_WideInt)(val)))
-#   define Tcl_LongAsWide(val)		((Tcl_WideInt)((long)(val)))
-#   define Tcl_WideAsDouble(val)	((double)((Tcl_WideInt)(val)))
-#   define Tcl_DoubleAsWide(val)	((Tcl_WideInt)((double)(val)))
-#endif /* TCL_WIDE_INT_IS_LONG */
 
 /*
  * Data structures defined opaquely in this module. The definitions below just
@@ -2234,9 +2170,7 @@ EXTERN void		Tcl_Main _ANSI_ARGS_((int argc, char **argv,
 			    Tcl_AppInitProc *appInitProc));
 EXTERN CONST char *	Tcl_PkgInitStubsCheck _ANSI_ARGS_((Tcl_Interp *interp,
 			    CONST char *version, int exact));
-#if defined(TCL_THREADS) && defined(USE_THREAD_ALLOC)
 EXTERN void		Tcl_GetMemoryInfo _ANSI_ARGS_((Tcl_DString *dsPtr));
-#endif
 
 /*
  * Include the public function declarations that are accessible via the stubs
@@ -2376,20 +2310,6 @@ EXTERN void		Tcl_GetMemoryInfo _ANSI_ARGS_((Tcl_DString *dsPtr));
  * when compiling without thread support.
  */
 
-#ifndef TCL_THREADS
-#undef  Tcl_MutexLock
-#define Tcl_MutexLock(mutexPtr)
-#undef  Tcl_MutexUnlock
-#define Tcl_MutexUnlock(mutexPtr)
-#undef  Tcl_MutexFinalize
-#define Tcl_MutexFinalize(mutexPtr)
-#undef  Tcl_ConditionNotify
-#define Tcl_ConditionNotify(condPtr)
-#undef  Tcl_ConditionWait
-#define Tcl_ConditionWait(condPtr, mutexPtr, timePtr)
-#undef  Tcl_ConditionFinalize
-#define Tcl_ConditionFinalize(condPtr)
-#endif /* TCL_THREADS */
 
 #ifndef TCL_NO_DEPRECATED
     /*

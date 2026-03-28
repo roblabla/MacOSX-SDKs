@@ -1,13 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SiriVOX.framework/Versions/A/SiriVOX'
 current-version: 0
 compatibility-version: 0
+swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _SVXActivationContextKey, _SVXActivationSourceGetFromName, 
                        _SVXActivationSourceGetIsValid, _SVXActivationSourceGetIsValidAndSpecified, 
                        _SVXActivationSourceGetName, _SVXAlarmAndTimerFiringContextCreateSpeechSynthesisRequest, 
@@ -48,8 +47,7 @@ exports:
                        _SVXLocalizationKeyStoreDemoStyle3Stage3, _SVXLocalizationKeyStoreDemoStyle3Stage4, 
                        _SVXLocalizationKeyWiFiError0, _SVXLocalizationKeyWiFiError1, 
                        _SVXLocalizationTableClock, _SVXLocalizationTableDefault, 
-                       _SVXLocalizationTableDeviceSetup, _SVXLocalizationTableErrors, 
-                       _SVXLocalizationTableInterstitials, _SVXLocalizationTableStoreDemo, 
+                       _SVXLocalizationTableErrors, _SVXLocalizationTableStoreDemo, 
                        _SVXPerformingOptionsGetFromNames, _SVXPerformingOptionsGetNames, 
                        _SVXPerformingOptionsValidate, _SVXPlatformDependencyTypeGetFromName, 
                        _SVXPlatformDependencyTypeGetIsValid, _SVXPlatformDependencyTypeGetIsValidAndSpecified, 

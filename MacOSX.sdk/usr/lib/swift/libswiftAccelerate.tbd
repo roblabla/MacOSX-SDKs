@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftAccelerate.dylib'
-current-version: 77
+current-version: 77.100.2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftAccelerate.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftAccelerate.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftAccelerate.dylib', 
@@ -2768,6 +2766,10 @@ exports:
                        '_$s10Accelerate9BNNSGraphO14CompileOptionsV22optimizationPreferenceAE012OptimizationF0Vvg', 
                        '_$s10Accelerate9BNNSGraphO14CompileOptionsV22optimizationPreferenceAE012OptimizationF0VvpMV', 
                        '_$s10Accelerate9BNNSGraphO14CompileOptionsV22optimizationPreferenceAE012OptimizationF0Vvs', 
+                       '_$s10Accelerate9BNNSGraphO14CompileOptionsV23predefinedOptimizationss6UInt32VvM', 
+                       '_$s10Accelerate9BNNSGraphO14CompileOptionsV23predefinedOptimizationss6UInt32Vvg', 
+                       '_$s10Accelerate9BNNSGraphO14CompileOptionsV23predefinedOptimizationss6UInt32VvpMV', 
+                       '_$s10Accelerate9BNNSGraphO14CompileOptionsV23predefinedOptimizationss6UInt32Vvs', 
                        '_$s10Accelerate9BNNSGraphO14CompileOptionsVAEycfC', '_$s10Accelerate9BNNSGraphO14CompileOptionsVMa', 
                        '_$s10Accelerate9BNNSGraphO14CompileOptionsVMn', '_$s10Accelerate9BNNSGraphO14CompileOptionsVN', 
                        '_$s10Accelerate9BNNSGraphO15PointerArgumentMp', '_$s10Accelerate9BNNSGraphO15PointerArgumentP11baseAddressSpy7ElementQzGSgvgTj', 
@@ -3485,7 +3487,7 @@ exports:
                        '_$ss7Float16V10AccelerateE12bnnsDataTypeSo08BNNSDataE0avgZ', 
                        '_$ss7Float16V10AccelerateE12bnnsDataTypeSo08BNNSDataE0avpZMV', 
                        '__swift_FORCE_LOAD_$_swiftAccelerate' ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Accelerate0A13MutableBufferPAAs7Float16V7ElementRtzrlE015withUnsafePixelC04bodyqd__qd__AA6vImageO0hC0Vy_AK9Planar16FVGKXE_tKlF', 
                        '_$s10Accelerate4vDSPO14float16ToFloatySaySfGxAA0A6BufferRzs7Float16V7ElementRtzlFZ', 
                        '_$s10Accelerate4vDSPO14floatToFloat16ySays0E0VGxAA0A6BufferRzSf7ElementRtzlFZ', 

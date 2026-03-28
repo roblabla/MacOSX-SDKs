@@ -90,11 +90,6 @@ CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 
 @property(nonatomic, nullable, strong, readonly) NSNumber *isPriority NS_AVAILABLE(15_4, 18_4);
 
-@property(nonatomic, nullable, copy, readonly) NSString *textContentSummary NS_AVAILABLE(15_4, 18_4);
-
-// Write-only accessor for transcribed textContent. This property can be queried as textContent.
-@property(nonatomic, nullable, strong) NSString *transcribedTextContent NS_AVAILABLE(15_4, 18_4);
-
 @end
 
 NS_ASSUME_NONNULL_END

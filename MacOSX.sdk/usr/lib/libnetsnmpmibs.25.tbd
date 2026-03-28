@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libnetsnmpmibs.25.dylib'
 current-version: 26.2
 compatibility-version: 26
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _Add_Entry, _Check_HR_FileSys_NFS, _End_HR_FileSys, _Exit, 
                        _Get_FSIndex, _Get_FSSize, _Get_HR_Disk_Label, _Get_Next_Device, 
                        _Get_Next_HR_CoProc, _Get_Next_HR_Disk, _Get_Next_HR_Disk_Partition, 

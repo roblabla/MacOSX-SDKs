@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NotesUI.framework/Versions/A/NotesUI'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ Notes, NotesAccountNotificationPlugin, NotesAnalytics, NotesAnalyticsUnitTests, 
                        NotesDebug, NotesEditor, NotesEditorUnitTests, NotesIAAccountMigratorPlugin, 
                        NotesPreviewKitUnitTests, NotesSiriUI, NotesSiriUIFrameworkTests, 
@@ -13,7 +13,7 @@ allowable-clients:
                        com.apple.Notes.SpotlightIndexExtension, com.apple.NotesImporter, 
                        notesexport, notestool, notestoolUnitTests ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation4DateV7NotesUIE09formattedB11HeadersYearSSvg', 
                        '_$s10Foundation4DateV7NotesUIE09formattedB11HeadersYearSSvpMV', 
                        '_$s10Foundation4DateV7NotesUIE09formattedB12HeadersMonthSSvg', 
@@ -1267,7 +1267,18 @@ exports:
                        '_$sSo12ICAttachmentC7NotesUIE28AttachmentChangeNotificationVMn', 
                        '_$sSo12ICAttachmentC7NotesUIE28AttachmentChangeNotificationVN', 
                        '_$sSo12ICAttachmentC7NotesUIE7changes3for10attachmentAbCE19ChangeNotificationsVx_ABSgtSTRzAbCE010AttachmentG12NotificationV7ElementRtzlFZ', 
-                       '_$sSo13NSTextElementC7NotesUIE16ttParagraphStyleSo013ICTTParagraphG0CSgvg', 
+                       '_$sSo13ICLinkUIModelC7NotesUIE10attachmentABSo18ICInlineAttachmentC_tcfC', 
+                       '_$sSo13ICLinkUIModelC7NotesUIE10attachmentABSo18ICInlineAttachmentC_tcfc', 
+                       '_$sSo13ICLinkUIModelC7NotesUIE10labelColorSo7NSColorCvg', 
+                       '_$sSo13ICLinkUIModelC7NotesUIE12highlighting_25withSurroundingAttributesSo18NSAttributedStringCAG_SDySo0iJ3KeyaypGtF', 
+                       '_$sSo13ICLinkUIModelC7NotesUIE14highlightRange19forTextFindingMatchSo8_NSRangeVAG_tF', 
+                       '_$sSo13ICLinkUIModelC7NotesUIE16attributedString21surroundingAttributes9formatterSo012NSAttributedF0CSDySo0jF3KeyaypG_S2S_So22ICInlineAttachmentTypeVtcSgtF', 
+                       '_$sSo13ICLinkUIModelC7NotesUIE17noteLinkGlyphNameSSvg', '_$sSo13ICLinkUIModelC7NotesUIE17noteLinkGlyphNameSSvpMV', 
+                       '_$sSo13ICLinkUIModelC7NotesUIE22paragraphLinkGlyphNameSSvg', 
+                       '_$sSo13ICLinkUIModelC7NotesUIE22paragraphLinkGlyphNameSSvpMV', 
+                       '_$sSo13ICLinkUIModelC7NotesUIE9glyphNameSSvg', '_$sSo13ICLinkUIModelC7NotesUIE9glyphNameSSvpMV', 
+                       '_$sSo13ICLinkUIModelC7NotesUIEABycfC', '_$sSo13ICLinkUIModelC7NotesUIEABycfc', 
+                       '_$sSo13ICLinkUIModelCMa', '_$sSo13NSTextElementC7NotesUIE16ttParagraphStyleSo013ICTTParagraphG0CSgvg', 
                        '_$sSo13NSTextElementC7NotesUIE16ttParagraphStyleSo013ICTTParagraphG0CSgvpMV', 
                        '_$sSo13NSTextElementC7NotesUIE4uuid10Foundation4UUIDVSgvg', 
                        '_$sSo13NSTextElementC7NotesUIE4uuid10Foundation4UUIDVSgvpMV', 

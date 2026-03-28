@@ -71,6 +71,12 @@ template <
 	>
 using OSAllocation = libkern::safe_allocation<T, Allocator, os_detail::panic_trapping_policy>;
 
+template <
+	typename T,
+	typename Allocator = os_detail::IOKit_allocator
+	>
+using OSSharedAllocation = libkern::safe_allocation<T, Allocator, os_detail::panic_trapping_policy>;
+
 
 inline constexpr auto OSAllocateMemory = libkern::allocate_memory;
 inline constexpr auto OSAllocateMemoryZero = libkern::allocate_memory_zero;

@@ -109,7 +109,7 @@ static int const DEBUG_HEADER_ENTRY_TXM = 2;
  *
  * Adjust CONSISTENT_DEBUG_PANIC_LEN if required when adding any new panic strings.
  */
-static size_t const CONSISTENT_DEBUG_PANIC_LEN = 1088;
+static size_t const CONSISTENT_DEBUG_PANIC_LEN = 2600;
 
 typedef struct __attribute__((__packed__)) sptm_consistent_debug {
 	uint64_t magic;
@@ -134,4 +134,4 @@ static uint64_t const CONSISTENT_DEBUG_PANIC_SOURCE_TXM = 1;
 static uint64_t const CONSISTENT_DEBUG_PANIC_SOURCE_SK = 2;
 
 static int const CONSISTENT_DEBUG_MAGIC_VAL = 'MTPS'; /* "SPTM" in little endian */
-static int const CONSISTENT_DEBUG_VERSION_VAL = 2;
+static int const CONSISTENT_DEBUG_VERSION_VAL = 3;

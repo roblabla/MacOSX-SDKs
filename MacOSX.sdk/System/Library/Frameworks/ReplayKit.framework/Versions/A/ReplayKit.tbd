@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/ReplayKit.framework/Versions/A/ReplayKit'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _RPApplicationInfoBundleIdentifierKey, _RPAudioPacketPool_Alloc, 
                        _RPAudioPacketPool_Create, _RPAudioPacketPool_Destroy, _RPAudioPacketPool_Free, 
                        _RPLogSetLogLevel, _RPMathUtilityNewsroomPositionTransitionScreenRect, 

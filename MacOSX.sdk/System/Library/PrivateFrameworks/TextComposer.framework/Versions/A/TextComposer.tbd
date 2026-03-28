@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TextComposer.framework/Versions/A/TextComposer'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12TextComposer08ExternalaB6ClientC13cancelRequest5tokenySi_tFTj', 
                        '_$s12TextComposer08ExternalaB6ClientC13cancelRequest5tokenySi_tFTq', 
                        '_$s12TextComposer08ExternalaB6ClientC28requestShortFormSmartReplies4with14documentFormat7optionsSo07TCSmartI8ResponseC_SDySSypGtSo21TCInputContextHistoryC_AA08DocumentL0VAJSgtYaKFTj', 
@@ -383,7 +381,8 @@ exports:
                        _TCTextCompositionAssistantOptionKeySeed, _TCTextCompositionAssistantOptionKeySmartDashesType, 
                        _TCTextCompositionAssistantOptionKeySmartQuotesType, _TCTextCompositionAssistantOptionKeyStringCount, 
                        _TCTextCompositionAssistantOptionKeyStringEnumerationFinished, 
-                       _TCTextCompositionAssistantOptionKeyStringIndex, _TCTextCompositionAssistantOptionKeySuppressClassification, 
+                       _TCTextCompositionAssistantOptionKeyStringIndex, _TCTextCompositionAssistantOptionKeySupportsHinglish, 
+                       _TCTextCompositionAssistantOptionKeySuppressClassification, 
                        _TCTextCompositionAssistantOptionKeySuppressListMarkers, _TCTextCompositionAssistantOptionKeySuppressValidation, 
                        _TCTextCompositionAssistantOptionKeyTextAutocapitalizationOn, 
                        _TCTextCompositionAssistantOptionKeyThreadIdentifier, _TCTextCompositionAssistantOptionKeyToken, 

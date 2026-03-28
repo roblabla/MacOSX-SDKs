@@ -1,8 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/usd/libusd_ms.dylib'
-current-version: 23.3.1
+current-version: 23.5.1
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -11,7 +11,7 @@ exports:
                        __ZN32pxrInternal__aapl__pxrReserved__15TfVStringPrintfEPKcP13__va_list_tag, 
                        __ZN32pxrInternal__aapl__pxrReserved__15TfVStringPrintfERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEP13__va_list_tag, 
                        __ZN32pxrInternal__aapl__pxrReserved__17ArchVStringPrintfEPKcP13__va_list_tag ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10value_type8swiftUsd17_OpenUSD_SequencePTl', '_$s10value_type8swiftUsd32_OpenUSD_Sequence_const_iteratorPTl', 
                        '_$s10value_type8swiftUsd36_StdVector_ExpressibleByArrayLiteralPTl', 
                        '_$s11ElementType8swiftUsd022_VtArray_ExpressibleByF7LiteralPTl', 
@@ -2233,7 +2233,6 @@ exports:
                        '_$sSo019pxrInternal__aapl__A10Reserved__O12VtDictionaryV3Cxx0gF08swiftUsdMc', 
                        '_$sSo019pxrInternal__aapl__A10Reserved__O12VtDictionaryV8swiftUsdE11descriptionSSvg', 
                        '_$sSo019pxrInternal__aapl__A10Reserved__O12VtDictionaryV8swiftUsdE11descriptionSSvpMV', 
-                       '_$sSo019pxrInternal__aapl__A10Reserved__O12VtDictionaryV8swiftUsdE12__findUnsafeyAD00854IteratorUnsafePointerstd__1mapstd__1basic_stringCCharstd__1char_traitsCCharstd__1allocatorCCharpxrInternal__aapl__pxrReserved__VtValuestd__1lessVoidstd__1allocatorstd__1pair__cxxConststd__1basic_stringCCharstd__1char_traitsCCharstd__1allocatorCCharpxrInternal__aapl__pxrReserved__VtValuestd__1__map_const_iteratorstd__1__tree_const_iteratorstd__1__value_typestd__1basic_stringCCharstd__1char_traitsCCharstd__1allocatorCCharpxrInternal__aapl__pxrReserved__VtValueUnsafeMutablePointerstd__1__tree_nodestd__1__value_typestd__1basic_stringCCharstd__1char_traitsCCharstd__1allocatorCCharpxrInternal__aapl__pxrReserved__VtValueUnsafeMutablePointerVoidCLong_sFIEEAawauDboCdwauDbIfwauDbEewauDbyaCDFexavEbpDdxavEbJfxavEbFexavEbzaCDedgdwdvdCcmdndmdrdwdvdCcmdxdydpdwdvdCcGadodpdwdvdCcxJEenaluAayFdxamkuAayBfDauuAayDetauuAayDeADczaaFdwfzaaaGbaaaJkzaaGbHhzaaGbBaaahaaVSo3stdO3__1O0088basic_stringCCharstd__1char_traitsCCharstd__1allocatorCChar_cyHBywaEDexaCidvdFCgAayGjzaaVF', 
                        '_$sSo019pxrInternal__aapl__A10Reserved__O12VtDictionaryV8swiftUsdE13__eraseUnsafeyAD00849IteratorUnsafeMutablePointerstd__1mapstd__1basic_stringCCharstd__1char_traitsCCharstd__1allocatorCCharpxrInternal__aapl__pxrReserved__VtValuestd__1lessVoidstd__1allocatorstd__1pair__cxxConststd__1basic_stringCCharstd__1char_traitsCCharstd__1allocatorCCharpxrInternal__aapl__pxrReserved__VtValuestd__1__map_iteratorstd__1__tree_iteratorstd__1__value_typestd__1basic_stringCCharstd__1char_traitsCCharstd__1allocatorCCharpxrInternal__aapl__pxrReserved__VtValueUnsafeMutablePointerstd__1__tree_nodestd__1__value_typestd__1basic_stringCCharstd__1char_traitsCCharstd__1allocatorCCharpxrInternal__aapl__pxrReserved__VtValueUnsafeMutablePointerVoidCLong_JuDCCAawauDboCdwauDbIewauDbEewauDbyaEIEexavEbpDdxavEbJexavEbFexavEbzaEDedgdwdvdCcmdndmdrdwdvdCcmdrdsdpdwdvdCcGadodpdwdvdCcxEEeualuAayFdxamkuAayFexauuAayDetauuAayDeCDczaaFdwfzaaaGbaaaHjzaaGbHhzaaGbBaaahaaVAHF', 
                        '_$sSo019pxrInternal__aapl__A10Reserved__O12VtDictionaryV8swiftUsdE14__insertUnsafeySo3stdO3__1O00910pairpxrInternal__aapl__pxrReserved__VtDictionaryIteratorUnsafeMutablePointerstd__1mapstd__1basic_stringCCharstd__1char_traitsCCharstd__1allocatorCCharpxrInternal__aapl__pxrReserved__VtValuestd__1lessVoidstd__1allocatorstd__1pair__cxxConststd__1basic_stringCCharstd__1char_traitsCCharstd__1allocatorCCharpxrInternal__aapl__pxrReserved__VtValuestd__1__map_iteratorstd__1__tree_iteratorstd__1__value_typestd__1basic_stringCCharstd__1char_traitsCCharstd__1allocatorCCharpxrInternal__aapl__pxrReserved__VtValueUnsafeMutablePointerstd__1__tree_nodestd__1__value_typestd__1basic_stringCCharstd__1char_traitsCCharstd__1allocatorCCharpxrInternal__aapl__pxrReserved__VtValueUnsafeMutablePointerVoidCLongCBool_HEBBGCawauDboCdwauDbIewauDbEewauDbyafGCBfxavEbpDdxavEbJexavEbFexavEbzagEJemaFadgdwdvdCcmdndmdrdwdvdCcmdrdsdpdwdvdCcGadodpdwdvdCcABAftbuluAayFdxamkuAayFexauuAayDetauuAayDezAdzaaFdwfzaaaGbaaaHjzaaGbHhzaaGbBaaahaahVAJ00160pair__cxxConststd__1basic_stringCCharstd__1char_traitsCCharstd__1allocatorCCharpxrInternal__aapl__pxrReserved__VtValue_clGHEcwauDDlxavHpdwdvdCczFkkauAayIwzaaaGbVF', 
                        '_$sSo019pxrInternal__aapl__A10Reserved__O12VtDictionaryV8swiftUsdE17dictionaryLiteralADSo3stdO3__1O0088basic_stringCCharstd__1char_traitsCCharstd__1allocatorCChar_cyHBywaEDexaCidvdFCgAayGjzaaV_AB0E5ValueVtd_tcfC', 
@@ -7719,6 +7718,7 @@ exports:
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec11inspectUSDZENSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEENS_12VtDictionaryERS8_, 
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec11inspectUSDZERKNSt3__16vectorISt4byteNS1_9allocatorIS3_EEEENS_12VtDictionaryERS9_, 
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec12analyseStageENS_8TfRefPtrINS_8UsdStageEEERNS_12VtDictionaryE, 
+                       __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec12analyseStageENS_8TfRefPtrINS_8UsdStageEEERNS_12VtDictionaryEb, 
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec12compressMeshERNS_11UsdGeomMeshERKNS_12VtDictionaryERS3_, 
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec13compressStageENS_8TfRefPtrINS_8UsdStageEEENS_12VtDictionaryENSt3__112basic_stringIcNS5_11char_traitsIcEENS5_9allocatorIcEEEERS4_t, 
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec13compressStageENS_8TfRefPtrINS_8UsdStageEEENS_12VtDictionaryERS4_t, 
@@ -7730,6 +7730,9 @@ exports:
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec17kOptionCloneStageE, 
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec17setUSDZTimeStampsENSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES7_, 
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec17setUSDZTimeStampsERKNSt3__16vectorISt4byteNS1_9allocatorIS3_EEEERS6_, 
+                       __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec18kResultOptionsUsedE, 
+                       __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec19exportStageToBufferENS_8TfRefPtrINS_8UsdStageEEERNSt3__16vectorISt4byteNS4_9allocatorIS6_EEEE, 
+                       __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec19kResultCompressTypeE, 
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec20kOptionMeshesInsertsE, 
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec20kOptionOutputUSDPathE, 
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec21kOptionForceOverwriteE, 
@@ -7752,6 +7755,7 @@ exports:
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec26kOptionMeshConcurrentTasksE, 
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec26kResultOutputLayersCounterE, 
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec26kResultOutputMeshesCounterE, 
+                       __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec27kOptionSilenceStageWarningsE, 
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec27kResultCompressedBitstreamsE, 
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec28kOptionTexturesInsertsOptionE, 
                        __ZN32pxrInternal__aapl__pxrReserved__15aaplUsdGclCodec28kOptionUseTemporaryDirectoryE, 
@@ -9777,6 +9781,7 @@ exports:
                        __ZN32pxrInternal__aapl__pxrReserved__19AaplBinUtilsCrusherC1ENS_8TfRefPtrINS_8UsdStageEEERNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEENS_27AaplBinUtilsCrushParametersE, 
                        __ZN32pxrInternal__aapl__pxrReserved__19AaplBinUtilsCrusherC2ENS_8TfRefPtrINS_8UsdStageEEERNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEENS_27AaplBinUtilsCrushParametersE, 
                        __ZN32pxrInternal__aapl__pxrReserved__19AaplUtilsCloneStageENS_8TfRefPtrINS_8UsdStageEEENS_16StageCloneConfigEPNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEE, 
+                       __ZN32pxrInternal__aapl__pxrReserved__19AaplUtilsCloneStageENS_8TfRefPtrINS_8UsdStageEEERNSt3__16vectorISt4byteNS3_9allocatorIS5_EEEERS2_, 
                        __ZN32pxrInternal__aapl__pxrReserved__19AaplUtilsCloneStageERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEENS_16StageCloneConfigEPS6_, 
                        __ZN32pxrInternal__aapl__pxrReserved__19AppleTextAnnotation14_IsTypedSchemaEv, 
                        __ZN32pxrInternal__aapl__pxrReserved__19AppleTextAnnotation16_GetStaticTfTypeEv, 
@@ -30768,7 +30773,7 @@ exports:
                        __ZNK32pxrInternal__aapl__pxrReserved__9SdfListOpIyE8_AddKeysENS_13SdfListOpTypeERKNSt3__18functionIFNS3_8optionalIyEES2_RKyEEEPNS3_4listIyNS3_9allocatorIyEEEEPNS3_3mapIyNS3_15__list_iteratorIyPvEENS3_4lessIyEENSE_INS3_4pairIS7_SL_EEEEEE, 
                        __ZNK32pxrInternal__aapl__pxrReserved__9SdfListOpIyEeqERKS1_, 
                        __ZNK32pxrInternal__aapl__pxrReserved__9SdfListOpIyEneERKS1_ ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ __ZN32pxrInternal__aapl__pxrReserved__13ArchVsnprintfEPcmPKcS0_, 
                        __ZN32pxrInternal__aapl__pxrReserved__15TfVStringPrintfEPKcPc, 
                        __ZN32pxrInternal__aapl__pxrReserved__15TfVStringPrintfERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEPc, 

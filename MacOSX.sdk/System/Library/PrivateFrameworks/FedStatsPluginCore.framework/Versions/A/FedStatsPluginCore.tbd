@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/FedStatsPluginCore.framework/Versions/A/FedStatsPluginCore'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s18FedStatsPluginCore0aB10KnownErrorMp', '_$s18FedStatsPluginCore0aB10KnownErrorPs0F0Tb', 
                        '_$s18FedStatsPluginCore0aB10KnownErrorTL', '_$s18FedStatsPluginCore0aB15CKAssetProviderC11fetchAssetsyySDySSSaySSGGKFTj', 
                        '_$s18FedStatsPluginCore0aB15CKAssetProviderC11fetchAssetsyySDySSSaySSGGKFTq', 
@@ -49,6 +49,7 @@ exports:
                        '_$s18FedStatsPluginCore0aB5ErrorO14invalidArgTypeyA2CmFWC', 
                        '_$s18FedStatsPluginCore0aB5ErrorO14partialSuccessyA2CmFWC', 
                        '_$s18FedStatsPluginCore0aB5ErrorO14recipeNotFoundyA2CmFWC', 
+                       '_$s18FedStatsPluginCore0aB5ErrorO15notUsingPhoenixyA2CmFWC', 
                        '_$s18FedStatsPluginCore0aB5ErrorO16invalidPrecisionyA2CmFWC', 
                        '_$s18FedStatsPluginCore0aB5ErrorO16regionNotAllowedyA2CmFWC', 
                        '_$s18FedStatsPluginCore0aB5ErrorO17experimentExpiredyA2CmFWC', 
@@ -132,7 +133,8 @@ exports:
                        '_$s18FedStatsPluginCore0aB6EngineO19parseTaskParameters7contextAA0abC11AccessLevelO_AA0abcG4TypeOSDySSypGt20LighthouseBackground22MLHostExtensionContextC_tKFZ', 
                        '_$s18FedStatsPluginCore0aB6EngineO26parseExperimentRecordNames11accessLevel8taskName0L10ParametersSaySSGAA0abc6AccessK0O_SSSDySSypGtKFZ', 
                        '_$s18FedStatsPluginCore0aB6EngineOMa', '_$s18FedStatsPluginCore0aB6EngineOMn', 
-                       '_$s18FedStatsPluginCore0aB6EngineON', '_$s18FedStatsPluginCore0abC11AccessLevelO11descriptionSSvg', 
+                       '_$s18FedStatsPluginCore0aB6EngineON', '_$s18FedStatsPluginCore0abC11AccessLevelO02asC4NameSSyF', 
+                       '_$s18FedStatsPluginCore0abC11AccessLevelO11descriptionSSvg', 
                        '_$s18FedStatsPluginCore0abC11AccessLevelO11descriptionSSvpMV', 
                        '_$s18FedStatsPluginCore0abC11AccessLevelO6ClassAyA2CmFWC', 
                        '_$s18FedStatsPluginCore0abC11AccessLevelO6ClassByA2CmFWC', 
@@ -211,6 +213,7 @@ exports:
                        '_$s18FedStatsPluginCore14ExecutionStageO21taskParametersParsingyA2CmFWC', 
                        '_$s18FedStatsPluginCore14ExecutionStageO24experimentConfigDownloadyA2CmFWC', 
                        '_$s18FedStatsPluginCore14ExecutionStageO28experimentRecordNamesParsingyA2CmFWC', 
+                       '_$s18FedStatsPluginCore14ExecutionStageO7phoenixyA2CmFWC', 
                        '_$s18FedStatsPluginCore14ExecutionStageO8allCasesSayACGvgZ', 
                        '_$s18FedStatsPluginCore14ExecutionStageO8allCasesSayACGvpZMV', 
                        '_$s18FedStatsPluginCore14ExecutionStageO8rawValueACSgSS_tcfC', 
@@ -230,7 +233,11 @@ exports:
                        '_$s18FedStatsPluginCore19TelemetrySendPolicyO9onFailureyA2CmFWC', 
                        '_$s18FedStatsPluginCore19TelemetrySendPolicyOMa', '_$s18FedStatsPluginCore19TelemetrySendPolicyOMn', 
                        '_$s18FedStatsPluginCore19TelemetrySendPolicyON', '_$s18FedStatsPluginCore19TelemetrySendPolicyOSHAAMc', 
-                       '_$s18FedStatsPluginCore19TelemetrySendPolicyOSQAAMc', '_$s18FedStatsPluginCore9TelemetryC09withReachE05stage6plugin6taskId7useCase6policy4workxAA14ExecutionStageO_S3SAA0E10SendPolicyOxyYaKXEtYaKlFZ', 
+                       '_$s18FedStatsPluginCore19TelemetrySendPolicyOSQAAMc', '_$s18FedStatsPluginCore9TelemetryC09withReachE05stage6plugin6taskId7useCase5error6policy4workSbAA14ExecutionStageO_S3Ss5Error_pAA0E10SendPolicyOSbyXEtFZ', 
+                       '_$s18FedStatsPluginCore9TelemetryC09withReachE05stage6plugin6taskId7useCase5error6policy4workSbAA14ExecutionStageO_S3Ss5Error_pAA0E10SendPolicyOSbyYaXEtYaFZ', 
+                       '_$s18FedStatsPluginCore9TelemetryC09withReachE05stage6plugin6taskId7useCase5error6policy4workSbAA14ExecutionStageO_S3Ss5Error_pAA0E10SendPolicyOSbyYaXEtYaFZTu', 
+                       '_$s18FedStatsPluginCore9TelemetryC09withReachE05stage6plugin6taskId7useCase6policy4workxAA14ExecutionStageO_S3SAA0E10SendPolicyOxyKXEtKlFZ', 
+                       '_$s18FedStatsPluginCore9TelemetryC09withReachE05stage6plugin6taskId7useCase6policy4workxAA14ExecutionStageO_S3SAA0E10SendPolicyOxyYaKXEtYaKlFZ', 
                        '_$s18FedStatsPluginCore9TelemetryC09withReachE05stage6plugin6taskId7useCase6policy4workxAA14ExecutionStageO_S3SAA0E10SendPolicyOxyYaKXEtYaKlFZTu', 
                        '_$s18FedStatsPluginCore9TelemetryCMa', '_$s18FedStatsPluginCore9TelemetryCMm', 
                        '_$s18FedStatsPluginCore9TelemetryCMn', '_$s18FedStatsPluginCore9TelemetryCMo', 

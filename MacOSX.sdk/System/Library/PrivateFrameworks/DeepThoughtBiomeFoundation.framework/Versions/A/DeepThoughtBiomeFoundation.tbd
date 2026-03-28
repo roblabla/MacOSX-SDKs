@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DeepThoughtBiomeFoundation.framework/Versions/A/DeepThoughtBiomeFoundation'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10ReturnType26DeepThoughtBiomeFoundation12PreprocessorPTl', 
                        '_$s26DeepThoughtBiomeFoundation08SiriPostE26EngagementFeatureExtractorCACycfC', 
                        '_$s26DeepThoughtBiomeFoundation08SiriPostE26EngagementFeatureExtractorCACycfc', 
@@ -195,7 +195,7 @@ exports:
                        '_$s26DeepThoughtBiomeFoundation12FilterOptionOSQAAMc', '_$s26DeepThoughtBiomeFoundation12FilterOptionOSYAAMc', 
                        '_$s26DeepThoughtBiomeFoundation12PreprocessorMp', '_$s26DeepThoughtBiomeFoundation12PreprocessorP7process5value10ReturnTypeQz05InputI0Qz_tFTj', 
                        '_$s26DeepThoughtBiomeFoundation12PreprocessorP7process5value10ReturnTypeQz05InputI0Qz_tFTq', 
-                       '_$s26DeepThoughtBiomeFoundation12PreprocessorTL', '_$s26DeepThoughtBiomeFoundation12SchemaMapperO03getcE014dataModelClassSo11BMSQLSchemaCAA19UnifiedSiriTurnBaseCm_tFZ', 
+                       '_$s26DeepThoughtBiomeFoundation12PreprocessorTL', '_$s26DeepThoughtBiomeFoundation12SchemaMapperO03getcE014dataModelClassSo11BMSQLSchemaCxm_tAA0C23VirtualTableConvertibleRzlFZ', 
                        '_$s26DeepThoughtBiomeFoundation12SchemaMapperOMa', '_$s26DeepThoughtBiomeFoundation12SchemaMapperOMn', 
                        '_$s26DeepThoughtBiomeFoundation12SchemaMapperON', '_$s26DeepThoughtBiomeFoundation12TurnFeaturesC05ValidE0C010isAnnounceE0SSvgZ', 
                        '_$s26DeepThoughtBiomeFoundation12TurnFeaturesC05ValidE0C010isAnnounceE0SSvpZMV', 
@@ -1026,6 +1026,8 @@ exports:
                        '_$s26DeepThoughtBiomeFoundation15StreamsBookmarkC21getStagedTimeInterval9eventTypeSdSgAA05EventL0O_tFTj', 
                        '_$s26DeepThoughtBiomeFoundation15StreamsBookmarkC21getStagedTimeInterval9eventTypeSdSgAA05EventL0O_tFTq', 
                        '_$s26DeepThoughtBiomeFoundation15StreamsBookmarkC2eeoiySbAC_ACtFZ', 
+                       '_$s26DeepThoughtBiomeFoundation15StreamsBookmarkC4copy4withyp10ObjectiveC6NSZoneVSg_tFTj', 
+                       '_$s26DeepThoughtBiomeFoundation15StreamsBookmarkC4copy4withyp10ObjectiveC6NSZoneVSg_tFTq', 
                        '_$s26DeepThoughtBiomeFoundation15StreamsBookmarkC4name13timeIntervalsACSS_SDySSSdGtcfC', 
                        '_$s26DeepThoughtBiomeFoundation15StreamsBookmarkC4name13timeIntervalsACSS_SDySSSdGtcfCTj', 
                        '_$s26DeepThoughtBiomeFoundation15StreamsBookmarkC4name13timeIntervalsACSS_SDySSSdGtcfCTq', 

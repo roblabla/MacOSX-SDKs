@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AirPlaySupport.framework/Versions/A/AirPlaySupport'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _APAudioFormatAPACIsAllowedForCurrentDeviceAsSender, _APAudioFormatASBDArrayToAPAudioFormats, 
                        _APAudioFormatAtmosIsAllowedForCurrentDeviceAsReceiver, _APAudioFormatAtmosIsAllowedForCurrentDeviceAsSender, 
                        _APAudioFormatAudioCompressionTypeSupportsVBR, _APAudioFormatChooseFromPreferredAudioFormats, 
@@ -204,10 +204,11 @@ exports:
                        _APSCreateSecureMemAllocator, _APSCryptorCBCCreate, _APSCryptorCTRCreate, 
                        _APSCryptorChaCha20Poly1305Create, _APSCryptorGetClassID, 
                        _APSCryptorGetNull, _APSCryptorGetTypeID, _APSDataPacerBitRateChangeToSteadyState, 
-                       _APSDataPacerBitRateCreate, _APSDataPacerBitRateUpdate, _APSDataPacerCongestionControlCreate, 
-                       _APSDataPacerCongestionControlSetProbing, _APSDataPacerCongestionControlSetRateControllerPrimed, 
-                       _APSDataPacerGetCMBaseObject, _APSDataPacerGetClassID, _APSDataPacerGetTypeID, 
-                       _APSDataPacerHoseCountCreateWithCapacity, _APSDataPacerHoseCountCreateWithDefaultCapacityForCurrentDevice, 
+                       _APSDataPacerBitRateCreate, _APSDataPacerBitRateReset, _APSDataPacerBitRateUpdate, 
+                       _APSDataPacerCongestionControlCreate, _APSDataPacerCongestionControlSetProbing, 
+                       _APSDataPacerCongestionControlSetRateControllerPrimed, _APSDataPacerGetCMBaseObject, 
+                       _APSDataPacerGetClassID, _APSDataPacerGetTypeID, _APSDataPacerHoseCountCreateWithCapacity, 
+                       _APSDataPacerHoseCountCreateWithDefaultCapacityForCurrentDevice, 
                        _APSDataPacerHoseCountDecrement, _APSDataPacerHoseCountGetCount, 
                        _APSDataPacerHoseCountIncrement, _APSDataSetStatisticsAddValue, 
                        _APSDataSetStatisticsInit, _APSDebugAllocatorCreate, _APSDispatchAsyncBatchAssignment, 

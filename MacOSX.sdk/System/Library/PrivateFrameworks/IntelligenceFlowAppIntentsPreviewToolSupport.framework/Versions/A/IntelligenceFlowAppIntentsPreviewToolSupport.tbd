@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligenceFlowAppIntentsPreviewToolSupport.framework/Versions/A/IntelligenceFlowAppIntentsPreviewToolSupport'
-current-version: 3505.5.1
+current-version: 3520.68.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s44IntelligenceFlowAppIntentsPreviewToolSupport018ResponseGenerationeF0V10testStringSSvgZ', 
                        '_$s44IntelligenceFlowAppIntentsPreviewToolSupport018ResponseGenerationeF0V10testStringSSvpZMV', 
                        '_$s44IntelligenceFlowAppIntentsPreviewToolSupport018ResponseGenerationeF0V7preview16responseManifest14toolDefinition0M2Id0ab7PlannerG07SessionO5EventV0aB00hL0VSg_0F3Kit0fN0VSStYaKFZ', 

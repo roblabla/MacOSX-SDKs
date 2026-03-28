@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TextToSpeechKonaSupport.framework/Versions/Current/Frameworks/esp.dylib'
 current-version: 0
 compatibility-version: 0
@@ -10,7 +10,7 @@ exports:
                        __ZTI5EList, __ZTI9EIterator, __ZTI9EListIter, __ZTI9SWUnknown, 
                        __ZTS10EListQueue, __ZTS10IndexQueue, __ZTS12ECollectIter, 
                        __ZTS5EList, __ZTS9EIterator, __ZTS9EListIter, __ZTS9SWUnknown ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ALLNSQ, _CLRALLNSQ, _CLRNONSEQ, _CLRONESTM, _COLS, _DELSPINE, 
                        _DeltaProc_end, _DeltaProc_flush, _DeltaProc_getInputCharCount, 
                        _DeltaProc_main, _DeltaProc_process_remaining, _DeltaProc_process_sentences, 

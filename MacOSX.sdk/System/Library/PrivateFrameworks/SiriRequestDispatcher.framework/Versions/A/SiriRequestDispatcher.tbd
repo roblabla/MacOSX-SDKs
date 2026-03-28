@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriRequestDispatcher.framework/Versions/A/SiriRequestDispatcher'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14MessagesStream21SiriRequestDispatcher30IFSessionServiceClientProtocolPTl', 
                        '_$s16SiriMessageTypes010MUXContextB0C0A17RequestDispatcherE19userIdOfPrimaryUserAA0K2IDVSgyF', 
                        '_$s16SiriMessageTypes18XPCListeningBridgeP0A17RequestDispatcherEyxSS_AA0B10Publishing_pSo09AFRequestG13ServiceHelper_pSo17OS_dispatch_queueCAA28ConversationSessionsManaging_ptcfC', 
@@ -296,6 +296,10 @@ exports:
                        '_$s21SiriRequestDispatcher14FeatureCheckerC30deviceSupportsOfflineDictationSbvpMV', 
                        '_$s21SiriRequestDispatcher14FeatureCheckerC31deviceSupportsAsrOnServerForUODSbvg', 
                        '_$s21SiriRequestDispatcher14FeatureCheckerC31deviceSupportsAsrOnServerForUODSbvpMV', 
+                       '_$s21SiriRequestDispatcher14FeatureCheckerC33isInterruptibleUserSessionEnabledSbvg', 
+                       '_$s21SiriRequestDispatcher14FeatureCheckerC33isInterruptibleUserSessionEnabledSbvpMV', 
+                       '_$s21SiriRequestDispatcher14FeatureCheckerC34isIFOrchestrationRunningForSessionSbvg', 
+                       '_$s21SiriRequestDispatcher14FeatureCheckerC34isIFOrchestrationRunningForSessionSbvpMV', 
                        '_$s21SiriRequestDispatcher14FeatureCheckerC36isSystemAssistantExperienceSupportedSbvg', 
                        '_$s21SiriRequestDispatcher14FeatureCheckerC36isSystemAssistantExperienceSupportedSbvpMV', 
                        '_$s21SiriRequestDispatcher14FeatureCheckerCAA0D8CheckingAAMc', 
@@ -347,6 +351,10 @@ exports:
                        '_$s21SiriRequestDispatcher15FeatureCheckingP30deviceSupportsOfflineDictationSbvgTq', 
                        '_$s21SiriRequestDispatcher15FeatureCheckingP31deviceSupportsAsrOnServerForUODSbvgTj', 
                        '_$s21SiriRequestDispatcher15FeatureCheckingP31deviceSupportsAsrOnServerForUODSbvgTq', 
+                       '_$s21SiriRequestDispatcher15FeatureCheckingP33isInterruptibleUserSessionEnabledSbvgTj', 
+                       '_$s21SiriRequestDispatcher15FeatureCheckingP33isInterruptibleUserSessionEnabledSbvgTq', 
+                       '_$s21SiriRequestDispatcher15FeatureCheckingP34isIFOrchestrationRunningForSessionSbvgTj', 
+                       '_$s21SiriRequestDispatcher15FeatureCheckingP34isIFOrchestrationRunningForSessionSbvgTq', 
                        '_$s21SiriRequestDispatcher15FeatureCheckingP36isSystemAssistantExperienceSupportedSbvgTj', 
                        '_$s21SiriRequestDispatcher15FeatureCheckingP36isSystemAssistantExperienceSupportedSbvgTq', 
                        '_$s21SiriRequestDispatcher15FeatureCheckingTL', '_$s21SiriRequestDispatcher18ActorBridgeWrapperC12setupContextACyxGqd___t5ErrorQzYKcAA0e5SetupH0Rd__lufC', 
@@ -428,6 +436,8 @@ exports:
                        '_$s21SiriRequestDispatcher23AsyncSequentialExecutorC17awaitMainLoopExityyYaFTj', 
                        '_$s21SiriRequestDispatcher23AsyncSequentialExecutorC17awaitMainLoopExityyYaFTjTu', 
                        '_$s21SiriRequestDispatcher23AsyncSequentialExecutorC17awaitMainLoopExityyYaFTq', 
+                       '_$s21SiriRequestDispatcher23AsyncSequentialExecutorC22scheduleFinishMainLoopyyFTj', 
+                       '_$s21SiriRequestDispatcher23AsyncSequentialExecutorC22scheduleFinishMainLoopyyFTq', 
                        '_$s21SiriRequestDispatcher23AsyncSequentialExecutorC5async7executeyyyYaYbKc_tFTj', 
                        '_$s21SiriRequestDispatcher23AsyncSequentialExecutorC5async7executeyyyYaYbKc_tFTq', 
                        '_$s21SiriRequestDispatcher23AsyncSequentialExecutorC5label8priority6loggerACSS_ScPSg2os6LoggerVtcfC', 

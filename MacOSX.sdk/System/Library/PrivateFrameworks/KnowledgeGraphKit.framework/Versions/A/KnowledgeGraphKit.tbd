@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/KnowledgeGraphKit.framework/Versions/A/KnowledgeGraphKit'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ IntelligencePlatformCore, PhotoAnalysis, PhotosGraph, PhotosKnowledgeGraph, 
                        PhotosTests, SpotlightKnowledgeDaemon, graphctl, spotlightknowledged ]
 exports:
@@ -99,8 +97,7 @@ exports:
                        __ZTSNSt3__120__shared_ptr_pointerIPN5degas23UncountedPathCollectionENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN5degas6BitmapENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN5degas9StatementENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Accelerate0A6BufferP17KnowledgeGraphKitSF7ElementRpzrlE18approximatelyEqual2to21maxAbsoluteDifference0j8RelativeL0Sbqd___A2FtAaBRd__AEQyd__AFRSlF', 
                        '_$s10Accelerate0A6BufferP17KnowledgeGraphKitSF7ElementRpzrlE18approximatelyEqual2toSbqd___tAaBRd__AEQyd__AFRSlF', 
                        '_$s10SourceNode17KnowledgeGraphKit4EdgePTl', '_$s10TargetNode17KnowledgeGraphKit4EdgePTl', 

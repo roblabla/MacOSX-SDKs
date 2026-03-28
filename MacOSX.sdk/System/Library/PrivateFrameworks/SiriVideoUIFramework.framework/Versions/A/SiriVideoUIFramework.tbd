@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriVideoUIFramework.framework/Versions/A/SiriVideoUIFramework'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s20SiriVideoUIFramework0B24ResultDisambiguationListV4bodyQrvg', 
                        '_$s20SiriVideoUIFramework0B24ResultDisambiguationListV4bodyQrvpMV', 
                        '_$s20SiriVideoUIFramework0B24ResultDisambiguationListV4bodyQrvpQOMQ', 

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriReferenceResolutionDataModel.framework/Versions/A/SiriReferenceResolutionDataModel'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12SiriOntology9UsoEntityC0A28ReferenceResolutionDataModelE11debugStringSSvg', 
                        '_$s12SiriOntology9UsoEntityC0A28ReferenceResolutionDataModelE11debugStringSSvpMV', 
                        '_$s32SiriReferenceResolutionDataModel10RRMetadataO10dataSourceyAcA06RRDataH13MetadataValueOcACmFWC', 

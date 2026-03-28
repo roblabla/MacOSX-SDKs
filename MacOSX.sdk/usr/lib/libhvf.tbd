@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libhvf.dylib'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s3hvf0A14LibraryVersionSi5major_Si5minorSi5patchtvg', '_$s3hvf10PartResultO5shapeyAcA11ShapeWriter_pcACmFWC', 
                        '_$s3hvf10PartResultO8notFoundyA2CmFWC', '_$s3hvf10PartResultO9compositeyAcA15CompositeWriter_pcACmFWC', 
                        '_$s3hvf10PartResultOMa', '_$s3hvf10PartResultOMn', '_$s3hvf10PartResultON', 
@@ -321,6 +319,4 @@ exports:
                        _HVF_open_part_renderer, _HVF_part_count, _HVF_part_renderer_storage_size, 
                        _HVF_render_current_part, _HVF_render_part_axis_count, _HVF_set_axis_value, 
                        _HVF_set_render_part, _HVF_table_version ]
-    weak-symbols:    [ __ZNSt3__116__variant_detail12__visitation6__base12__dispatcherIJLm0EEE10__dispatchB8ne200100IOZNS0_6__ctorINS0_8__traitsIJN3HVF5ShapeENS8_9CompositeEEEEE19__generic_constructB8ne200100IRKNS0_18__copy_constructorISB_LNS0_6_TraitE1EEEEEvRSC_OT_EUlSL_E_JRKNS0_6__baseILSF_1EJS9_SA_EEEEEEDcSK_DpT0_, 
-                       __ZNSt3__116__variant_detail12__visitation6__base12__dispatcherIJLm1EEE10__dispatchB8ne200100IOZNS0_6__ctorINS0_8__traitsIJN3HVF5ShapeENS8_9CompositeEEEEE19__generic_constructB8ne200100IRKNS0_18__copy_constructorISB_LNS0_6_TraitE1EEEEEvRSC_OT_EUlSL_E_JRKNS0_6__baseILSF_1EJS9_SA_EEEEEEDcSK_DpT0_ ]
 ...

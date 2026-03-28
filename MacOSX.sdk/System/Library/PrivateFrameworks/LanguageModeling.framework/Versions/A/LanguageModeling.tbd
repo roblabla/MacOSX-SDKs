@@ -1,9 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/LanguageModeling.framework/Versions/A/LanguageModeling'
-current-version: 432
+current-version: 433.5
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN5boost10wrapexceptINS_17bad_function_callEEE, __ZTIN5boost16exception_detail10clone_baseE, 
@@ -23,8 +22,7 @@ exports:
                        __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceINS_6vectorIN17language_modeling2v110PredictionENS_9allocatorIS4_EEEENS5_IS7_EEEE, 
                        __ZTSNSt3__15dequeIiNS_9allocatorIiEEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _LMCreateMontrealIDsFromLMTokenIDSequence, _LMEnumerateAssetDataItems, 
                        _LMLanguageContextCreate, _LMLanguageContextSetFeatures, _LMLanguageLikelihoodModelAddEvidenceForLanguage, 
                        _LMLanguageLikelihoodModelGetEmojiUsageCountForApp, _LMLanguageLikelihoodModelGetLanguagePriorProbabilities, 

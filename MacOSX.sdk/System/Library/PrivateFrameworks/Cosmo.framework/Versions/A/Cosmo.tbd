@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Cosmo.framework/Versions/A/Cosmo'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation3URLV5CosmoE8fileSizes6UInt64VSgvg', '_$s10Foundation3URLV5CosmoE8fileSizes6UInt64VSgvpMV', 
                        '_$s5Cosmo0A10ConnectionC10descriptor10connection5queueAcA17NetworkDescriptorO_0F012NWConnectionCSo012OS_dispatch_E0CSgtcfC', 
                        '_$s5Cosmo0A10ConnectionC10descriptor5queueAcA17NetworkDescriptorO_So012OS_dispatch_D0CSgtcfC', 

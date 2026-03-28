@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2020 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2020, 2026 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -93,6 +93,7 @@ enum {
 #ifdef __LP64__
 	kIOMemoryTypeVirtual64      = kIOMemoryTypeVirtual,
 	kIOMemoryTypePhysical64     = kIOMemoryTypePhysical,
+	kIOMemoryTypeVnode          = 0x00000060,
 #else /* !__LP64__ */
 	kIOMemoryTypeVirtual64      = 0x00000060,
 	kIOMemoryTypePhysical64     = 0x00000070,
@@ -197,7 +198,6 @@ enum{
 	kIOPreparationIDUnsupported = 1,
 	kIOPreparationIDAlwaysPrepared = 2,
 };
-
 
 
 
@@ -461,6 +461,7 @@ public:
 		UInt32           rangeCount,
 		IOOptionBits     options,
 		task_t           task);
+
 
 /*! @function withOptions
  *   @abstract Master initialiser for all variants of memory descriptors.

@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/WeatherDaemon.framework/Versions/A/WeatherDaemon'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Weather,WeatherAppSupport,WeatherAppSupportTests,WeatherUnitTests,WeatherAnalytics,WeatherAnalyticsTests,WeatherCore,WeatherCoreTests,weatherd,WeatherDaemon,WeatherDaemonTests,WeatherDiagnosticExtension,WeatherIntents,WeatherAppIntents,WeatherKit,WeatherKitDemo,WeatherKitTests,WeatherMaps,WeatherMapsDemo,WeatherMapsTests,WeatherUI,WeatherUITests,WeatherSettings,WeatherSettingsIntentsExtension,WeatherWidget,WeatherPoster,WeatherUIAutomationTests,Polaris,com.apple.weather.appremoval,WeatherNotifications,WeatherDaemonMemoryTests,nanoweatherd,NanoWeather,NanoWeatherDiagnosticExtension,nanoweatherprefsd,NanoWeatherWidgetsExtension,NanoWeatherKitUI,NanoWeatherKitUICompanion,WeatherInternalExtras,WeatherFace,WeatherMenu,RealityWeatherWidget,RealityWeatherForecastWidgetExtension,Urchin,UrchinKit,UrchinKitUI,UrchinWidgetsExtension,,NewsUI2,NewsUI2Tests,NewsFeed,NewsFeedTests,NewsArticles,NewsArticlesTests,Feldspar,ActionKit,Fitness,FitnessTests,NanoUniverse,SleepLockScreen,SleepHealthUI,Maps,SearchUI,Spotlight,ActivityMonitorApp,PassKitUI,SiriInformationSearch,WorkoutUI ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation10URLRequestV13WeatherDaemonE20addAcceptedMimeTypesyySaySSGF', 
                        '_$s10Foundation10URLRequestV13WeatherDaemonE6HeaderO11contentTypeyA2FmFWC', 
                        '_$s10Foundation10URLRequestV13WeatherDaemonE6HeaderO13authorizationyA2FmFWC', 
@@ -1459,7 +1456,7 @@ exports:
                        '_$s13WeatherDaemon0A9DataStoreC3raw_5querySayxGxm_SStK5TeaDB17PartialEntityTypeRzlF', 
                        '_$s13WeatherDaemon0A9DataStoreC4news5TeaDB5TableCyAA11CacheEntityVyAA14NewsDescriptorVAA0K0VGGvg', 
                        '_$s13WeatherDaemon0A9DataStoreC4news5TeaDB5TableCyAA11CacheEntityVyAA14NewsDescriptorVAA0K0VGGvpMV', 
-                       '_$s13WeatherDaemon0A9DataStoreC8location5TeaDB8DatabaseC8LocationOvMZ', 
+                       '_$s13WeatherDaemon0A9DataStoreC6sharedACyKFZ', '_$s13WeatherDaemon0A9DataStoreC8location5TeaDB8DatabaseC8LocationOvMZ', 
                        '_$s13WeatherDaemon0A9DataStoreC8location5TeaDB8DatabaseC8LocationOvgZ', 
                        '_$s13WeatherDaemon0A9DataStoreC8location5TeaDB8DatabaseC8LocationOvsZ', 
                        '_$s13WeatherDaemon0A9DataStoreC8metadata5TeaDB5TableCyAA14MetadataEntityVGvg', 

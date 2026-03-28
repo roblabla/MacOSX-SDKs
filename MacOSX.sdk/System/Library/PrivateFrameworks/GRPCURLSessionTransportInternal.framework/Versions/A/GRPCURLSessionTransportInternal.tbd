@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GRPCURLSessionTransportInternal.framework/Versions/A/GRPCURLSessionTransportInternal'
 current-version: 1.3
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s16GRPCCoreInternal11CallOptionsV023GRPCURLSessionTransportB0E5union4withAcA12MethodConfigVSg_tF', 
                        '_$s16GRPCCoreInternal11CallOptionsV023GRPCURLSessionTransportB0E9formUnion4withyAA12MethodConfigVSg_tF', 
                        '_$s16GRPCCoreInternal15ClientTransportP014GRPCURLSessiondB0AD010URLSessionD0CRszrlE10urlSession7baseURL13serviceConfig7session6configAF10Foundation0J0V_AA07ServiceL0VSo12NSURLSessionCAF0L0VtFZ', 

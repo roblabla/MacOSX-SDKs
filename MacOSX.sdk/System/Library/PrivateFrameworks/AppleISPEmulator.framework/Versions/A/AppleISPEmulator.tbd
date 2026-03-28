@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleISPEmulator.framework/Versions/A/AppleISPEmulator'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CopyISPEmulatorConfigurationDictionary, _CreateISPEmulator, 
                        _DestroyISPEmulator, _EnqueueFrame, _SetISPEmulatorConfigurationDictionary, 
                        _kAppleISPEmulatorConfiguration_AlgorithmProfile, _kAppleISPEmulatorConfiguration_AlgorithmProfileVersion, 

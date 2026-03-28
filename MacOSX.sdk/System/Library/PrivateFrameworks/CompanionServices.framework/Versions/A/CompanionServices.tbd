@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CompanionServices.framework/Versions/A/CompanionServices'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14CoreUtilsSwift19CUEnvironmentValuesV17CompanionServicesE12cpsXPCClientAD12CPSXPCClientCSgvM', 
                        '_$s14CoreUtilsSwift19CUEnvironmentValuesV17CompanionServicesE12cpsXPCClientAD12CPSXPCClientCSgvg', 
                        '_$s14CoreUtilsSwift19CUEnvironmentValuesV17CompanionServicesE12cpsXPCClientAD12CPSXPCClientCSgvpMV', 
@@ -146,6 +146,7 @@ exports:
                        '_$s17CompanionServices19CPSXPCClientRequestO11descriptionSSvpMV', 
                        '_$s17CompanionServices19CPSXPCClientRequestO4fromACs7Decoder_p_tKcfC', 
                        '_$s17CompanionServices19CPSXPCClientRequestO6encode2toys7Encoder_p_tKF', 
+                       '_$s17CompanionServices19CPSXPCClientRequestO9remoteLLMyAcA26CPSRemoteLLMRequestMessageOcACmFWC', 
                        '_$s17CompanionServices19CPSXPCClientRequestO9requesteryAcA0c9RequesterD0OcACmFWC', 
                        '_$s17CompanionServices19CPSXPCClientRequestOMa', '_$s17CompanionServices19CPSXPCClientRequestOMn', 
                        '_$s17CompanionServices19CPSXPCClientRequestON', '_$s17CompanionServices19CPSXPCClientRequestOSEAAMc', 
@@ -367,6 +368,7 @@ exports:
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV0dE0O12iCloudPhotosyA2EmFWC', 
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV0dE0O13genericQRCodeyA2EmFWC', 
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV0dE0O16recognizeMyVoiceyA2EmFWC', 
+                       '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV0dE0O16unrecognizedUseryA2EmFWC', 
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV0dE0O19genericAppleAccountyA2EmFWC', 
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV0dE0O8allCasesSayAEGvgZ', 
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV0dE0O8allCasesSayAEGvpZMV', 
@@ -394,6 +396,8 @@ exports:
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV16requesterBodyKeySSSgvg', 
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV16requesterBodyKeySSSgvpMV', 
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV16requesterBodyKeySSSgvs', 
+                       '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV16unrecognizedUserACvgZ', 
+                       '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV16unrecognizedUserACvpZMV', 
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV17requesterTitleKeySSSgvM', 
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV17requesterTitleKeySSSgvg', 
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV17requesterTitleKeySSSgvpMV', 
@@ -424,6 +428,10 @@ exports:
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV20requesterAlternativeAC09RequesterH0OSgvg', 
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV20requesterAlternativeAC09RequesterH0OSgvpMV', 
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV20requesterAlternativeAC09RequesterH0OSgvs', 
+                       '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV21bannerTitleParametersSaySSGSgvM', 
+                       '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV21bannerTitleParametersSaySSGSgvg', 
+                       '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV21bannerTitleParametersSaySSGSgvpMV', 
+                       '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV21bannerTitleParametersSaySSGSgvs', 
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV23requesterBodyParametersSaySSGSgvM', 
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV23requesterBodyParametersSaySSGSgvg', 
                        '_$s17CompanionServices32CPSRequesterUseCaseConfigurationV23requesterBodyParametersSaySSGSgvpMV', 
@@ -463,6 +471,10 @@ exports:
                        '_$s17CompanionServices32CPSResponderUseCaseConfigurationV15bannerImageNameSSSgvg', 
                        '_$s17CompanionServices32CPSResponderUseCaseConfigurationV15bannerImageNameSSSgvpMV', 
                        '_$s17CompanionServices32CPSResponderUseCaseConfigurationV15bannerImageNameSSSgvs', 
+                       '_$s17CompanionServices32CPSResponderUseCaseConfigurationV15watchSideButtonSbSgvM', 
+                       '_$s17CompanionServices32CPSResponderUseCaseConfigurationV15watchSideButtonSbSgvg', 
+                       '_$s17CompanionServices32CPSResponderUseCaseConfigurationV15watchSideButtonSbSgvpMV', 
+                       '_$s17CompanionServices32CPSResponderUseCaseConfigurationV15watchSideButtonSbSgvs', 
                        '_$s17CompanionServices32CPSResponderUseCaseConfigurationV16bannerCategoryIDSSSgvM', 
                        '_$s17CompanionServices32CPSResponderUseCaseConfigurationV16bannerCategoryIDSSSgvg', 
                        '_$s17CompanionServices32CPSResponderUseCaseConfigurationV16bannerCategoryIDSSSgvpMV', 
@@ -542,15 +554,14 @@ exports:
                        _CompanionServicesVersionString, _cps_daemon_log, _cps_service_connection_log, 
                        _cps_service_listener_log, _cps_service_log, _cps_session_log, 
                        _cps_signpost_log ]
-    objc-classes:    [ CASPasswordCredential, CPSAmbientSetupRequest, CPSAppSignInRequest, 
-                       CPSAppSignInResponse, CPSAuthenticationRequest, CPSAuthenticationResponse, 
-                       CPSAuthenticationServiceInterface, CPSAuthenticationSession, 
-                       CPSDevice, CPSMetrics, CPSRestrictedAccessRequest, CPSRestrictedAccessResponse, 
-                       CPSSharingRequest, CPSSharingResponse, CPSStoreAuthenticationRequest, 
-                       CPSStoreAuthenticationResponse, CPSStorePurchaseRequest, CPSStorePurchaseResponse, 
-                       CPSSystemAuthenticationRequest, CPSSystemAuthenticationResponse, 
-                       CPSTVProviderButtonHandlingInterface, CPSTVProviderRequest, 
-                       CPSUserDefaultsReadInfo, CPSUserDefaultsRequest, CPSUserDefaultsResponse, 
-                       CPSUserDefaultsWriteInfo, CPSViewServiceInterface, CPSViewServicePresentationContext, 
-                       CPSWatchAlertPresentationContext ]
+    objc-classes:    [ CASPasswordCredential, CPSAppSignInRequest, CPSAppSignInResponse, 
+                       CPSAuthenticationRequest, CPSAuthenticationResponse, CPSAuthenticationServiceInterface, 
+                       CPSAuthenticationSession, CPSDevice, CPSMetrics, CPSPhotosConfigurationRequest, 
+                       CPSRestrictedAccessRequest, CPSRestrictedAccessResponse, CPSSharingRequest, 
+                       CPSSharingResponse, CPSStoreAuthenticationRequest, CPSStoreAuthenticationResponse, 
+                       CPSStorePurchaseRequest, CPSStorePurchaseResponse, CPSSystemAuthenticationRequest, 
+                       CPSSystemAuthenticationResponse, CPSTVProviderButtonHandlingInterface, 
+                       CPSTVProviderRequest, CPSUserDefaultsReadInfo, CPSUserDefaultsRequest, 
+                       CPSUserDefaultsResponse, CPSUserDefaultsWriteInfo, CPSViewServiceInterface, 
+                       CPSViewServicePresentationContext, CPSWatchAlertPresentationContext ]
 ...

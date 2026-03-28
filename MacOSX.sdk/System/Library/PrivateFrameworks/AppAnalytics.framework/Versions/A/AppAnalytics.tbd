@@ -1,22 +1,21 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AppAnalytics.framework/Versions/A/AppAnalytics'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AppAnalyticsDemo,, AppAnalyticsDemoAnalytics,BookAnalytics,BookCore,iBooksProductPageExtension,iBooksSpotlightExtension,Books,NanoBooks,BookStoreUI,BooksNotificationContentExtension,BooksUI,BookStoreUITests,AEBookPlugins,NewsServices,NewsServicesInternal,NewsToday,News,NVCDemo,ArticleNotificationExtension,ArticleNotificationServiceExtension,NewsNotificationServiceExtension,MarketingNotificationExtension,OpenInNews,Feldspar Tests,NewsInternalSettings,NewsSettings,NewsUI,newsd,com.apple.news,NewsAnalyticsUpload,NewsUI2,NewsUI2Tests,NewsFeed,NewsFeedTests,NewsKit,NewsKitTests,NewsKitDemo,NewsArticles,NewsArticlesTests,NewsAds,NewsAdsTests,NewsFormat,NewsFormatTests,NewsSubscription,NewsSubscriptionTests,NewsAnalytics,NewsAnalyticsTests,NewsPersonalization,NewsPersonalizationTests,NewsDiagnosticExtension,NanoNews,NanoNewsAnalytics,NanoNewsWidgetExtension,NanoNewsInternalExtras,NanoNewsHeadlines, 
-                       AppAnalyticsTests,, AppSubscriptionsDemo,, AppSubscriptionsTests,VoiceMemos,NanoVoiceMemos,VoiceMemosTests,NanoVoiceMemosTests, 
+                       AppAnalyticsTests,, AppSubscriptionsDemo,, AppSubscriptionsTests,AppUserEvents,, 
+                       AppUserEventsDemo,, AppUserEventsTests,VoiceMemos,NanoVoiceMemos,VoiceMemosTests,NanoVoiceMemosTests, 
                        Freeform_iOS, Freeform_macOS, Freeform_xrOS,AppSubscriptions,, 
-                       JournalSharedTests,JournalAnalytics,TSMediaLibraryModel, JournalUITests,JournalShared,, 
-                       NotesAnalytics,NewsArticles,NewsArticlesTests,NewsFeed,NewsFeedTests,Stocks,StocksAnalytics,StocksAnalyticsTests,StocksCore,StocksCoreTests,StocksKit,StocksKitTests,StocksTests,StocksToday,StocksUI,StocksUITests,NewsSubscription,StocksDiagnosticExtension,StocksPersonalization,WeatherAnalytics,WeatherAnalyticsTests,Weather,WeatherUnitTests,WeatherUI,WeatherAppTests,WeatherUITests,WeatherFrameworkTests,WeatherCore,WeatherKit,WeatherMaps,WeatherMapsTests,WeatherDaemon,weatherd,WeatherUI,WeatherAnalytics,WeatherWidget,WeatherWidgetExtension,Kinsale,KinsaleUI,KinsaleAnalytics,WeatherMenu,MomentsTesting,MomentsTestingTests,MomentsTestingAnalytics,Jurassic,JournalTests,JournalUI,, 
-                       TSAnalytics, TSMediaLibrary, TSMediaLibraryModelTests, TSMediaLibraryTests, 
-                       TSMediaLibraryUI, TSMediaLibraryUITests,, TSSubscription, ]
+                       JournalShareExtension,TSMediaLibraryModel, JournalSharedTests,JournalAnalytics,, 
+                       JournalUITests,JournalShared,, NotesAnalytics,NewsArticles,NewsArticlesTests,NewsFeed,NewsFeedTests,Stocks,StocksAnalytics,StocksAnalyticsTests,StocksCore,StocksCoreTests,StocksKit,StocksKitTests,StocksTests,StocksToday,StocksUI,StocksUITests,NewsSubscription,StocksDiagnosticExtension,StocksPersonalization,WeatherAnalytics,WeatherAnalyticsTests,Weather,WeatherUnitTests,WeatherUI,WeatherAppTests,WeatherUITests,WeatherFrameworkTests,WeatherCore,WeatherKit,WeatherMaps,WeatherMapsTests,WeatherDaemon,weatherd,WeatherUI,WeatherAnalytics,WeatherWidget,WeatherWidgetExtension,Kinsale,KinsaleUI,KinsaleAnalytics,WeatherMenu,MomentsTesting,MomentsTestingTests,MomentsTestingAnalytics,Jurassic,JournalTests,JournalUI,, 
+                       TSAnalytics, TSContentHub, TSContentHubModel, TSContentHubUI, 
+                       TSMediaLibrary, TSMediaLibraryModelTests, TSMediaLibraryTests, 
+                       TSMediaLibraryUI, TSMediaLibraryUITests, TSSubscription ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12AppAnalytics07BridgedA14SessionManagerC03appD12DidTerminateyyF', 
                        '_$s12AppAnalytics07BridgedA14SessionManagerC03endaD0yyyycF', 
                        '_$s12AppAnalytics07BridgedA14SessionManagerC05startaD028shouldCorrelateSceneSessionsySb_tF', 
@@ -57,7 +56,7 @@ exports:
                        '_$s12AppAnalytics0A14SessionManagerC04lastC12CrashDetailsAA0fG0VSgvpMV', 
                        '_$s12AppAnalytics0A14SessionManagerC05startaC028shouldCorrelateSceneSessionsySb_tF', 
                        '_$s12AppAnalytics0A14SessionManagerC05startaC0yyF', '_$s12AppAnalytics0A14SessionManagerC06createcD04withAA0cD0CAA0cD13ConfigurationV_tF', 
-                       '_$s12AppAnalytics0A14SessionManagerC07forEachcD05blockyyAA06AccesscD0C_AA0H7TrackerCtc_tF', 
+                       '_$s12AppAnalytics0A14SessionManagerC07forEachcD0011scopeDataToC05blockySb_yAA06AccesscD0C_AA0K7TrackerCtctF', 
                        '_$s12AppAnalytics0A14SessionManagerC08wasPriorC13CrashDetectedSbvg', 
                        '_$s12AppAnalytics0A14SessionManagerC08wasPriorC13CrashDetectedSbvpMV', 
                        '_$s12AppAnalytics0A14SessionManagerC11accessQueue15trackingConsent13crashDetector25summaryEventConfigurationAcA06AccessF0C_AA08TrackingH0CAA05CrashJ4Type_pAA07SummarylM0VtcfC', 
@@ -519,6 +518,7 @@ exports:
                        '_$s12AppAnalytics14RotationPeriodVMa', '_$s12AppAnalytics14RotationPeriodVMn', 
                        '_$s12AppAnalytics14RotationPeriodVN', '_$s12AppAnalytics14RotationPeriodVSEAAMc', 
                        '_$s12AppAnalytics14RotationPeriodVSQAAMc', '_$s12AppAnalytics14RotationPeriodVSeAAMc', 
+                       '_$s12AppAnalytics14SessionManagerC07forEachcD0yyyAA06AccesscD0C_AA0G7TrackerCtAA0B5ActorCYccFZ', 
                        '_$s12AppAnalytics14SessionManagerC07forEachcD7ForeveryyyAA06AccesscD0C_AA0H7TrackerCtAA0B5ActorCYccFZ', 
                        '_$s12AppAnalytics14SessionManagerC09processorD0AA09ProcessorD0Cvg', 
                        '_$s12AppAnalytics14SessionManagerC09processorD0AA09ProcessorD0CvpMV', 
@@ -619,6 +619,7 @@ exports:
                        '_$s12AppAnalytics15TrackingConsentC0C10PermissionO11descriptionSSvpMV', 
                        '_$s12AppAnalytics15TrackingConsentC0C10PermissionO16debugDescriptionSSvg', 
                        '_$s12AppAnalytics15TrackingConsentC0C10PermissionO16debugDescriptionSSvpMV', 
+                       '_$s12AppAnalytics15TrackingConsentC0C10PermissionO1loiySbAE_AEtFZ', 
                        '_$s12AppAnalytics15TrackingConsentC0C10PermissionO2eeoiySbAE_AEtFZ', 
                        '_$s12AppAnalytics15TrackingConsentC0C10PermissionO4fromAEs7Decoder_p_tKcfC', 
                        '_$s12AppAnalytics15TrackingConsentC0C10PermissionO4hash4intoys6HasherVz_tF', 
@@ -632,6 +633,7 @@ exports:
                        '_$s12AppAnalytics15TrackingConsentC0C10PermissionOMa', '_$s12AppAnalytics15TrackingConsentC0C10PermissionOMn', 
                        '_$s12AppAnalytics15TrackingConsentC0C10PermissionON', '_$s12AppAnalytics15TrackingConsentC0C10PermissionOSEAAMc', 
                        '_$s12AppAnalytics15TrackingConsentC0C10PermissionOSHAAMc', 
+                       '_$s12AppAnalytics15TrackingConsentC0C10PermissionOSLAAMc', 
                        '_$s12AppAnalytics15TrackingConsentC0C10PermissionOSQAAMc', 
                        '_$s12AppAnalytics15TrackingConsentC0C10PermissionOSeAAMc', 
                        '_$s12AppAnalytics15TrackingConsentC0C10PermissionOs12CaseIterableAAMc', 
@@ -679,6 +681,13 @@ exports:
                        '_$s12AppAnalytics16BridgedTimedDataCMa', '_$s12AppAnalytics16BridgedTimedDataCMn', 
                        '_$s12AppAnalytics16BridgedTimedDataCMo', '_$s12AppAnalytics16BridgedTimedDataCMu', 
                        '_$s12AppAnalytics16BridgedTimedDataCN', '_$s12AppAnalytics16BridgedTimedDataCfD', 
+                       '_$s12AppAnalytics16OSReleaseChannelO11descriptionSSvg', '_$s12AppAnalytics16OSReleaseChannelO11descriptionSSvpMV', 
+                       '_$s12AppAnalytics16OSReleaseChannelO2eeoiySbAC_ACtFZ', '_$s12AppAnalytics16OSReleaseChannelO4betayACSS_tcACmFWC', 
+                       '_$s12AppAnalytics16OSReleaseChannelO7releaseyACSS_tcACmFWC', 
+                       '_$s12AppAnalytics16OSReleaseChannelO7unknownyA2CmFWC', '_$s12AppAnalytics16OSReleaseChannelO8internalyACSS_tcACmFWC', 
+                       '_$s12AppAnalytics16OSReleaseChannelOMa', '_$s12AppAnalytics16OSReleaseChannelOMn', 
+                       '_$s12AppAnalytics16OSReleaseChannelON', '_$s12AppAnalytics16OSReleaseChannelOSQAAMc', 
+                       '_$s12AppAnalytics16OSReleaseChannelOs23CustomStringConvertibleAAMc', 
                        '_$s12AppAnalytics16ProcessEventTypeMp', '_$s12AppAnalytics16ProcessEventTypeP011nonJitteredD9Timestamp10Foundation4DateVvgTj', 
                        '_$s12AppAnalytics16ProcessEventTypeP011nonJitteredD9Timestamp10Foundation4DateVvgTq', 
                        '_$s12AppAnalytics16ProcessEventTypeP012groupContentE0AA0gE0OSgvgTj', 
@@ -977,6 +986,8 @@ exports:
                        '_$s12AppAnalytics20BridgedIDSessionKindC016telemetrySessionE0ACvpZMV', 
                        '_$s12AppAnalytics20BridgedIDSessionKindC017userEventsSessionE0ACvgZ', 
                        '_$s12AppAnalytics20BridgedIDSessionKindC017userEventsSessionE0ACvpZMV', 
+                       '_$s12AppAnalytics20BridgedIDSessionKindC022essentialEventsSessionE0ACvgZ', 
+                       '_$s12AppAnalytics20BridgedIDSessionKindC022essentialEventsSessionE0ACvpZMV', 
                        '_$s12AppAnalytics20BridgedIDSessionKindC4copy4withyp10ObjectiveC6NSZoneVSg_tF', 
                        '_$s12AppAnalytics20BridgedIDSessionKindC4hashSivg', '_$s12AppAnalytics20BridgedIDSessionKindC4kind4nameAcA0c7SessionE0O_SSSgtcfC', 
                        '_$s12AppAnalytics20BridgedIDSessionKindC4kind4nameAcA0c7SessionE0O_SSSgtcfCTj', 
@@ -1365,7 +1376,10 @@ exports:
                        '_$s12AppAnalytics24DiagnosticsConsentStatusO9hashValueSivpMV', 
                        '_$s12AppAnalytics24DiagnosticsConsentStatusOMa', '_$s12AppAnalytics24DiagnosticsConsentStatusOMn', 
                        '_$s12AppAnalytics24DiagnosticsConsentStatusON', '_$s12AppAnalytics24DiagnosticsConsentStatusOSHAAMc', 
-                       '_$s12AppAnalytics24DiagnosticsConsentStatusOSQAAMc', '_$s12AppAnalytics24UserStartDateStorageTypeMp', 
+                       '_$s12AppAnalytics24DiagnosticsConsentStatusOSQAAMc', '_$s12AppAnalytics24OSReleaseChannelDetectorV7currentAA0cD0OvgZ', 
+                       '_$s12AppAnalytics24OSReleaseChannelDetectorV7currentAA0cD0OvpZMV', 
+                       '_$s12AppAnalytics24OSReleaseChannelDetectorVMa', '_$s12AppAnalytics24OSReleaseChannelDetectorVMn', 
+                       '_$s12AppAnalytics24OSReleaseChannelDetectorVN', '_$s12AppAnalytics24UserStartDateStorageTypeMp', 
                        '_$s12AppAnalytics24UserStartDateStorageTypeP04userdE029isDiagnosticSubmissionAllowed0i15TrackingConsentL010Foundation0E0VSgSb_SbtKFTj', 
                        '_$s12AppAnalytics24UserStartDateStorageTypeP04userdE029isDiagnosticSubmissionAllowed0i15TrackingConsentL010Foundation0E0VSgSb_SbtKFTq', 
                        '_$s12AppAnalytics24UserStartDateStorageTypeP04userdE029isDiagnosticSubmissionAllowed10Foundation0E0VSgSb_tKFTj', 
@@ -1839,8 +1853,8 @@ exports:
                        '_$s12AppAnalytics7SessionV10identifierSSvg', '_$s12AppAnalytics7SessionV10identifierSSvpMV', 
                        '_$s12AppAnalytics7SessionV11sessionDataSDySSypGvg', '_$s12AppAnalytics7SessionV11sessionDataSDySSypGvpMV', 
                        '_$s12AppAnalytics7SessionV4KindO10userEventsyA2EmFWC', '_$s12AppAnalytics7SessionV4KindO11descriptionSSvg', 
-                       '_$s12AppAnalytics7SessionV4KindO11descriptionSSvpMV', '_$s12AppAnalytics7SessionV4KindO2eeoiySbAE_AEtFZ', 
-                       '_$s12AppAnalytics7SessionV4KindO4fromAEs7Decoder_p_tKcfC', 
+                       '_$s12AppAnalytics7SessionV4KindO11descriptionSSvpMV', '_$s12AppAnalytics7SessionV4KindO15essentialEventsyA2EmFWC', 
+                       '_$s12AppAnalytics7SessionV4KindO2eeoiySbAE_AEtFZ', '_$s12AppAnalytics7SessionV4KindO4fromAEs7Decoder_p_tKcfC', 
                        '_$s12AppAnalytics7SessionV4KindO4hash4intoys6HasherVz_tF', 
                        '_$s12AppAnalytics7SessionV4KindO6customyAESScAEmFWC', '_$s12AppAnalytics7SessionV4KindO6encode2toys7Encoder_p_tKF', 
                        '_$s12AppAnalytics7SessionV4KindO8realtimeyA2EmFWC', '_$s12AppAnalytics7SessionV4KindO9hashValueSivg', 

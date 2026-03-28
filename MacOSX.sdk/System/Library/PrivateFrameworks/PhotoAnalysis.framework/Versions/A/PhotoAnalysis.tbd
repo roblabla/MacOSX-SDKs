@@ -1,15 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotoAnalysis.framework/Versions/A/PhotoAnalysis'
-current-version: 821.0.120
+current-version: 841.0.101
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ PhotoAnalysisLighthousePlugin, PhotosPFLPlugin, PhotosTests, 
                        photoanalysisd ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s13PhotoAnalysis0A14KitChangeTokenC010persistentdE0ACSo012PHPersistentdE0C_tcfC', 
                        '_$s13PhotoAnalysis0A14KitChangeTokenC010persistentdE0ACSo012PHPersistentdE0C_tcfCTj', 
                        '_$s13PhotoAnalysis0A14KitChangeTokenC010persistentdE0ACSo012PHPersistentdE0C_tcfCTq', 
@@ -611,7 +611,12 @@ exports:
                        '_$s13PhotoAnalysis27PromptSuggestionQUProcessorCfD', '_$s13PhotoAnalysis27PromptSuggestionQUProcessorCfd', 
                        '_$s13PhotoAnalysis27PromptSuggestionQUProvidingMp', '_$s13PhotoAnalysis27PromptSuggestionQUProvidingP7quParse4hashS2S_tKFTj', 
                        '_$s13PhotoAnalysis27PromptSuggestionQUProvidingP7quParse4hashS2S_tKFTq', 
-                       '_$s13PhotoAnalysis27PromptSuggestionQUProvidingTL', '_$s13PhotoAnalysis28PersonalTraitsDictionaryKeysO10assetUUIDsyA2CmFWC', 
+                       '_$s13PhotoAnalysis27PromptSuggestionQUProvidingTL', '_$s13PhotoAnalysis27PublicEventCacheRefreshTaskCACycfC', 
+                       '_$s13PhotoAnalysis27PublicEventCacheRefreshTaskCACycfc', 
+                       '_$s13PhotoAnalysis27PublicEventCacheRefreshTaskCMa', '_$s13PhotoAnalysis27PublicEventCacheRefreshTaskCMn', 
+                       '_$s13PhotoAnalysis27PublicEventCacheRefreshTaskCMo', '_$s13PhotoAnalysis27PublicEventCacheRefreshTaskCMu', 
+                       '_$s13PhotoAnalysis27PublicEventCacheRefreshTaskCN', '_$s13PhotoAnalysis27PublicEventCacheRefreshTaskCfD', 
+                       '_$s13PhotoAnalysis28PersonalTraitsDictionaryKeysO10assetUUIDsyA2CmFWC', 
                        '_$s13PhotoAnalysis28PersonalTraitsDictionaryKeysO11descriptionSSvg', 
                        '_$s13PhotoAnalysis28PersonalTraitsDictionaryKeysO11descriptionSSvpMV', 
                        '_$s13PhotoAnalysis28PersonalTraitsDictionaryKeysO12sceneClassIdyA2CmFWC', 
@@ -1177,19 +1182,19 @@ exports:
                        PHAPrivateFederatedLearningRecipeDecoder, PHAPrivateFederatedLearningRecipeOptions, 
                        PHAPrivateFederatedLearningRunner, PHAPrivateFederatedLearningRunnerResponse, 
                        PHAPrivateFederatedLearningTransformersDecoder, PHAPromptSuggestionCachingTask, 
-                       PHAPublicEventCacheInvalidationTask, PHAPublicEventCachingTask, 
-                       PHAQuestionController, PHARemoveFeaturedContentTask, PHARevGeocodeSyndicationTask, 
-                       PHASearchEnrichmentTask, PHAServiceCancelableOperation, PHASharedLibrarySuggestionGenerationTask, 
-                       PHASharingSuggestionGenerationTask, PHAStorytellingClientRequestHandler, 
-                       PHAStorytellingClientRequestUtils, PHAStorytellingOnDemandTaskHandler, 
-                       PHASuggestionController, PHASuggestionGenerationTask, PHASyndicationTask, 
-                       PHAUserAnalyticsBiomeTask, PHAUserAnalyticsUtilities, PHAUserFeedbackUpdater, 
-                       PHAWallpaperSettlingEffectGenerationTask, PHAWallpaperShuffleDescriptorGenerator, 
-                       PHAWallpaperSuggestionAnalyticsSender, PHAWallpaperSuggestionGenerationNightlyTask, 
-                       PHAWallpaperSuggestionGenerationUtils, PHAWallpaperSuggestionGenerationWeeklyTask, 
-                       PHAWallpaperSuggestionRefreshSession, PHAWallpaperSuggestionUpgradeSession, 
-                       PHAWhimsicalPromptSuggestionTask, PHAWorker, PVCanceler, PVFace, 
-                       PVFaceCrop, PVFaceCropGenerator, PVFaceCropSourceDescriptor, 
-                       PVFaceCropUtils, PVFaceprint, PVImage, PVObject, PVUtils, 
-                       _PHAWallpaperSuggestionCount ]
+                       PHAPublicEventCacheInvalidationTask, PHAPublicEventCacheRefreshTask, 
+                       PHAPublicEventCachingTask, PHAQuestionController, PHARemoveFeaturedContentTask, 
+                       PHARevGeocodeSyndicationTask, PHASearchEnrichmentTask, PHAServiceCancelableOperation, 
+                       PHASharedLibrarySuggestionGenerationTask, PHASharingSuggestionGenerationTask, 
+                       PHAStorytellingClientRequestHandler, PHAStorytellingClientRequestUtils, 
+                       PHAStorytellingOnDemandTaskHandler, PHASuggestionController, 
+                       PHASuggestionGenerationTask, PHASyndicationTask, PHAUserAnalyticsBiomeTask, 
+                       PHAUserAnalyticsUtilities, PHAUserFeedbackUpdater, PHAWallpaperSettlingEffectGenerationTask, 
+                       PHAWallpaperShuffleDescriptorGenerator, PHAWallpaperSuggestionAnalyticsSender, 
+                       PHAWallpaperSuggestionGenerationNightlyTask, PHAWallpaperSuggestionGenerationUtils, 
+                       PHAWallpaperSuggestionGenerationWeeklyTask, PHAWallpaperSuggestionRefreshSession, 
+                       PHAWallpaperSuggestionUpgradeSession, PHAWhimsicalPromptSuggestionTask, 
+                       PHAWorker, PVCanceler, PVFace, PVFaceCrop, PVFaceCropGenerator, 
+                       PVFaceCropSourceDescriptor, PVFaceCropUtils, PVFaceprint, 
+                       PVImage, PVObject, PVUtils, _PHAWallpaperSuggestionCount ]
 ...

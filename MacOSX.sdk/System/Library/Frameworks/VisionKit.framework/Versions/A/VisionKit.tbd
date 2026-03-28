@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/VisionKit.framework/Versions/A/VisionKit'
 swift-abi-version: 7
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/DocumentCamera.framework/Versions/A/DocumentCamera' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s9VisionKit13ImageAnalysisC10hasResults3forSbAA0C8AnalyzerC0D5TypesV_tF', 
                        '_$s9VisionKit13ImageAnalysisC10transcriptSSvg', '_$s9VisionKit13ImageAnalysisC10transcriptSSvpMV', 
                        '_$s9VisionKit13ImageAnalysisCMa', '_$s9VisionKit13ImageAnalysisCMm', 
@@ -241,11 +241,11 @@ exports:
     objc-classes:    [ _TtC9VisionKit24ImageAnalysisOverlayView ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DocumentCamera.framework/Versions/A/DocumentCamera'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s2os6LoggerV14DocumentCameraE11liquidGlassACvgZ', '_$s2os6LoggerV14DocumentCameraE11liquidGlassACvpZMV', 
                        _DCScanWasDeletedNotification, _DCTransformFromImageOrientation, 
                        _dc_clockwiseRotationsFromUpToMatchOrientation, _dc_counterClockwiseRotationsFromUpToMatchOrientation, 

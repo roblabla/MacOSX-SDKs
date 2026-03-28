@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AutoBugCaptureCore.framework/Versions/A/AutoBugCaptureCore'
 current-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _adminLogHandle, _analyticsLogHandle, _archiverLogHandle, 
                        _basicLogHandle, _casemanagementLogHandle, _configurationLogHandle, 
                        _crossdeviceLogHandle, _diagcaseLogHandle, _diagcollectLogHandle, 

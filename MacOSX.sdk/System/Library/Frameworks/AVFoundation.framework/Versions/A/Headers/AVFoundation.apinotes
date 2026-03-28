@@ -1409,6 +1409,10 @@ Globals:
   SwiftName: audioSessionInterrupted
 - Name: AVPlayerRateDidChangeAppBackgroundedReason
   SwiftName: appBackgrounded
+- Name: AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge
+  SwiftName: playheadReachedLiveEdge
+- Name: AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange
+  SwiftName: reversePlaybackReachedStartOfSeekableRange
   
 SwiftVersions:
 - Version: 3

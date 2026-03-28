@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ProtoDataExtractor.framework/Versions/A/ProtoDataExtractor'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s13SiriAnalytics18MonotonicTimestampV18ProtoDataExtractorE05biomeD0AC27IntelligencePlatformLibraryABV_tcfC', 
                        '_$s13SiriAnalytics18MonotonicTimestampV18ProtoDataExtractorE05biomeD0ACSgSo011BMMonotonicD0C_tcfC', 
                        '_$s18ProtoDataExtractor0bC0V013getMultiEventB04data8Dendrite0A7TagPathV_10Foundation0B0VtSgAK_tF', 

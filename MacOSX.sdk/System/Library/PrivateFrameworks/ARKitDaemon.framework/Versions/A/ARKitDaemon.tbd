@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ARKitDaemon.framework/Versions/A/ARKitDaemon'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ARCoreAnalyticsDaemonEvent, _ARCoreAnalyticsDaemonEventFieldAllClientsCountInt, 
                        _ARCoreAnalyticsDaemonEventFieldAllServicesUsedStr, _ARCoreAnalyticsDaemonEventFieldDisconnectedClientStr, 
                        _ARCoreAnalyticsDaemonEventFieldPeakMemInt, _ARCoreAnalyticsDaemonHeartbeatEvent, 

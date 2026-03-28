@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ScreenSharing.framework/Versions/A/Frameworks/ScreenSharingUI.framework/Versions/A/ScreenSharingUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15ScreenSharingUI0aB13QualityLabelsV11descriptionSSvg', 
                        '_$s15ScreenSharingUI0aB13QualityLabelsV11descriptionSSvpMV', 
                        '_$s15ScreenSharingUI0aB13QualityLabelsV5titleSSvg', '_$s15ScreenSharingUI0aB13QualityLabelsV5titleSSvpMV', 

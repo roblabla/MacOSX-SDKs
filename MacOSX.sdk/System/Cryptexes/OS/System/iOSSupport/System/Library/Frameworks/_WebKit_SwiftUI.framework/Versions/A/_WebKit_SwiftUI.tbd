@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_WebKit_SwiftUI.framework/Versions/A/_WebKit_SwiftUI'
-current-version: 623.1.14
+current-version: 624.1.16
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s15_WebKit_SwiftUI0A4ViewV0cD00E0AAMc', '_$s15_WebKit_SwiftUI0A4ViewV19LinkPreviewBehaviorV7enabledAEvgZ', 
                        '_$s15_WebKit_SwiftUI0A4ViewV19LinkPreviewBehaviorV7enabledAEvpZMV', 
                        '_$s15_WebKit_SwiftUI0A4ViewV19LinkPreviewBehaviorV8disabledAEvgZ', 

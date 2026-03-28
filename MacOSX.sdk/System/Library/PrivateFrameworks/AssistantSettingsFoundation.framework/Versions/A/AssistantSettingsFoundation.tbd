@@ -1,10 +1,46 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AssistantSettingsFoundation.framework/Versions/A/AssistantSettingsFoundation'
+swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _ASFDistributedPreferencesDidChangeNotification, _AssistantSettingsFoundationVersionNumber, 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s27AssistantSettingsFoundation15ASFSettingStateC11descriptionSSvgTj', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC11descriptionSSvgTq', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC11descriptionSSvpMV', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC12currentValue013userPresentedG0ACyxGx_xtcfC', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC12currentValue013userPresentedG0ACyxGx_xtcfCTj', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC12currentValue013userPresentedG0ACyxGx_xtcfCTq', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC12currentValue013userPresentedG0ACyxGx_xtcfc', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC12currentValueACyxGx_tcfC', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC12currentValueACyxGx_tcfCTj', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC12currentValueACyxGx_tcfCTq', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC12currentValueACyxGx_tcfc', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC14committedValuexvMTj', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC14committedValuexvMTq', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC14committedValuexvgTj', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC14committedValuexvgTq', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC14committedValuexvpMV', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC14committedValuexvsTj', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC14committedValuexvsTq', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC18userPresentedValuexvMTj', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC18userPresentedValuexvMTq', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC18userPresentedValuexvgTj', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC18userPresentedValuexvgTq', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC18userPresentedValuexvpMV', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC18userPresentedValuexvsTj', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC18userPresentedValuexvsTq', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC6commityyFTj', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC6commityyFTq', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC6revertyyFTj', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateC6revertyyFTq', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateCAASQRzrlE2eeoiySbACyxG_AEtFZ', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateCMa', '_$s27AssistantSettingsFoundation15ASFSettingStateCMn', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateCMo', '_$s27AssistantSettingsFoundation15ASFSettingStateCMu', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateCfD', '_$s27AssistantSettingsFoundation15ASFSettingStateCfd', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateCyxGSQAASQRzrlMc', 
+                       '_$s27AssistantSettingsFoundation15ASFSettingStateCyxGs23CustomStringConvertibleAAMc', 
+                       _ASFDistributedPreferencesDidChangeNotification, _AssistantSettingsFoundationVersionNumber, 
                        _AssistantSettingsFoundationVersionString, _SiriSettingsAppDisabledKey, 
                        _SiriSettingsBundleDisabledKey, _SiriSettingsDomainDisabledKey, 
                        _SiriSettingsDuetExpertPrefsDomain, _SiriSettingsLockScreenDisabledKey, 

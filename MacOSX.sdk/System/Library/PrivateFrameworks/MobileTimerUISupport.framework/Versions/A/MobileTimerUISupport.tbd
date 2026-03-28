@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MobileTimerUISupport.framework/Versions/A/MobileTimerUISupport'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s20MobileTimerUISupport0B16TimelineScheduleV4with8isPaused13timerDurationAC10Foundation4DateVSg_SbSdtcfC', 
                        '_$s20MobileTimerUISupport0B16TimelineScheduleV7SwiftUI0dE0AAMc', 
                        '_$s20MobileTimerUISupport0B16TimelineScheduleV7entries4from4modes11AnyIteratorVy10Foundation4DateVGAK_7SwiftUI0dE4ModeOtF', 

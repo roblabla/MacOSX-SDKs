@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Frameworks/BrailleTranslation.framework/Versions/A/BrailleTranslation'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s18BrailleTranslation13BRLTJLogEvent2os6LoggerVvM', '_$s18BrailleTranslation13BRLTJLogEvent2os6LoggerVvg', 
                        '_$s18BrailleTranslation13BRLTJLogEvent2os6LoggerVvs', '_$s18BrailleTranslation14BRLTEditStringC012NSContiguousA5RangeSo8_NSRangeVvg', 
                        '_$s18BrailleTranslation14BRLTEditStringC012NSContiguousA5RangeSo8_NSRangeVvpMV', 

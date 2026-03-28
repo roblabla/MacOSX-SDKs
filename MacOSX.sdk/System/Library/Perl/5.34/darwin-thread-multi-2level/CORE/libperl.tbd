@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Perl/5.34/darwin-thread-multi-2level/CORE/libperl.dylib'
 current-version: 5.34.1
 compatibility-version: 5.34
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ASCII_TO_NEED, _NATIVE_TO_NEED, _PL_C_locale_obj, _PL_EXACTFish_bitmask, 
                        _PL_EXACT_REQ8_bitmask, _PL_No, _PL_WARN_ALL, _PL_WARN_NONE, 
                        _PL_Yes, _PL_Zero, _PL_bincompat_options, _PL_bitcount, _PL_block_type, 

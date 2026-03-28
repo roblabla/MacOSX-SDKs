@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccelerateGPU.framework/Versions/A/AccelerateGPU'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _gpuBlockInfoGetSession, _gpuCreateSession, _gpuExecuteBlockBegin, 
                        _gpuExecuteBlockEnd, _gpuExecuteBlockEndWithCompletionHandler, 
                        _gpuGetLibrary, _gpuImageAlphaBlend_ARGB8888, _gpuImageBoxConvolve_ARGB8888, 

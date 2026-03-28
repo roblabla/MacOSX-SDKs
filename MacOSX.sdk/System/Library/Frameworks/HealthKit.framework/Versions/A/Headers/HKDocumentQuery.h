@@ -2,7 +2,7 @@
 //  HKDocumentQuery.h
 //  HealthKit
 //
-//  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
+//  Copyright © 2016-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

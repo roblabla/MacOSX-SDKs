@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeKitDaemonShared.framework/Versions/A/HomeKitDaemonShared'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s19HomeKitDaemonShared17LogEventSubmitterC06submiteF0_5errorySo06HMMLogF0C_s5Error_pSgtF', 
                        '_$s19HomeKitDaemonShared17LogEventSubmitterC06submiteF0yySo06HMMLogF0CF', 
                        '_$s19HomeKitDaemonShared17LogEventSubmitterCACycfC', '_$s19HomeKitDaemonShared17LogEventSubmitterCACycfc', 
@@ -28,8 +28,9 @@ exports:
                        '_$s19HomeKitDaemonShared19StatusChannelRecordVMa', '_$s19HomeKitDaemonShared19StatusChannelRecordVMn', 
                        '_$s19HomeKitDaemonShared19StatusChannelRecordVN', '_$s19HomeKitDaemonShared19StatusChannelRecordVSEAAMc', 
                        '_$s19HomeKitDaemonShared19StatusChannelRecordVSHAAMc', '_$s19HomeKitDaemonShared19StatusChannelRecordVSQAAMc', 
-                       '_$s19HomeKitDaemonShared19StatusChannelRecordVSeAAMc', '_$s19HomeKitDaemonShared19notAnEmptyFrameworkyyF' ]
+                       '_$s19HomeKitDaemonShared19StatusChannelRecordVSeAAMc' ]
     objc-classes:    [ HMDSKPresenceProvider, HMDStatusChannel, HMDStatusChannelManagementLogEvent, 
                        HMDStatusChannelObserveLogEvent, HMDStatusChannelPublishLogEvent, 
-                       HMDStatusChannelRecord, _TtC19HomeKitDaemonShared17LogEventSubmitter ]
+                       HMDStatusChannelRecord, HMDStatusChannelSubscriptionDetailsLogEvent, 
+                       _TtC19HomeKitDaemonShared17LogEventSubmitter ]
 ...

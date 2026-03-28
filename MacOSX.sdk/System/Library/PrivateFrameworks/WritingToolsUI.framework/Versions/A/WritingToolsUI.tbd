@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WritingToolsUI.framework/Versions/A/WritingToolsUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14WritingToolsUI19SettingsDestinationC7rootURL10Foundation0G0VvgZTj', 
                        '_$s14WritingToolsUI19SettingsDestinationC7rootURL10Foundation0G0VvgZTq', 
                        '_$s14WritingToolsUI19SettingsDestinationC7rootURL10Foundation0G0VvpZMV', 

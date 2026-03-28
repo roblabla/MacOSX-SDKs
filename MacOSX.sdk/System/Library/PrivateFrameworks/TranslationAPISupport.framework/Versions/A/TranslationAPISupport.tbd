@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TranslationAPISupport.framework/Versions/A/TranslationAPISupport'
-current-version: 355.5.2
+current-version: 365.8.2
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s21TranslationAPISupport20PreflightHostingViewV22preflightConfiguration10completionACSo012_LTPreflightG0C_yAGSg_So7NSErrorCSgtcSgtcfC', 
                        '_$s21TranslationAPISupport20PreflightHostingViewV22preflightConfigurationSo012_LTPreflightG0CvM', 
                        '_$s21TranslationAPISupport20PreflightHostingViewV22preflightConfigurationSo012_LTPreflightG0Cvg', 

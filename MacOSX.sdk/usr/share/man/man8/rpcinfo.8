@@ -155,6 +155,14 @@ Specify the netid to use. Supported netids are
 .Dq udp6 ,
 and
 .Dq tcp6 .
+If
+.Ar netid
+is not specified, the system will attempt netids in the following order:
+.Dq tcp ,
+.Dq udp ,
+.Dq tcp6 ,
+and finally
+.Dq udp6 .
 .It \*[Fll timeout] Ar seconds 
 Timeout used in creating client handles and the client calls
 to

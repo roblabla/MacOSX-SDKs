@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TextInputMenuUI.framework/Versions/A/TextInputMenuUI'
 current-version: 306
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AmTargetProcess, _CarbonModifiersToAppkitModifiers, _CreateClassFromKey, 
                        _CreateNSImageFromIconRef, _GetKeyFocusProcess, _ISWHotKeyDidPressedNotification, 
                        _MessageTracerLogDidSwitch, _TISMakeRectWithAspectRatioInsideRect, 

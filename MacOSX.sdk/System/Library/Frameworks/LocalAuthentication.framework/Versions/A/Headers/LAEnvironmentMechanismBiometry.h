@@ -3,7 +3,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <LocalAuthentication/LAContext.h>
+#import <LocalAuthentication/LABiometryType.h>
 #import <LocalAuthentication/LAEnvironmentMechanism.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -32,7 +32,7 @@ NS_SWIFT_SENDABLE
 
 /// @brief The application specific state of the biometric enrollment as returned by @c LAContext.domainState.biometry.stateHash
 /// @discussion This value represents the state of the enrollment and changes whenever the biometric enrollment is changed.
-///             It does not directly map to the enrolled templates, e.g. if a finger is added to Touch ID enrollement and then
+///             It does not directly map to the enrolled templates, e.g. if a finger is added to Touch ID enrollment and then
 ///             removed, the final state would be different.
 ///             It also returns different values to different apps to prevent tracking of user identity.
 @property (nonatomic, readonly) NSData *stateHash;

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libc++.1.dylib'
-current-version: 2000.67
+current-version: 2100.43
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZTINSt3__110__time_getE, __ZTINSt3__110__time_putE, __ZTINSt3__110ctype_baseE, 
@@ -13,8 +13,7 @@ exports:
                        __ZTINSt3__113messages_baseE, __ZTINSt3__114__num_get_baseE, 
                        __ZTINSt3__114__num_put_baseE, __ZTINSt3__118__time_get_storageIcEE, 
                        __ZTINSt3__118__time_get_storageIwEE, __ZTINSt3__120__time_get_c_storageIcEE, 
-                       __ZTINSt3__120__time_get_c_storageIwEE, __ZTINSt3__13pmr26__null_memory_resource_impE, 
-                       __ZTINSt3__13pmr32__new_delete_memory_resource_impE, __ZTINSt3__19__num_getIcEE, 
+                       __ZTINSt3__120__time_get_c_storageIwEE, __ZTINSt3__19__num_getIcEE, 
                        __ZTINSt3__19__num_getIwEE, __ZTINSt3__19__num_putIcEE, __ZTINSt3__19__num_putIwEE, 
                        __ZTINSt3__19time_baseE, __ZTSNSt3__110__time_getE, __ZTSNSt3__110__time_putE, 
                        __ZTSNSt3__110ctype_baseE, __ZTSNSt3__110money_baseE, __ZTSNSt3__111__money_getIcEE, 
@@ -23,8 +22,7 @@ exports:
                        __ZTSNSt3__113messages_baseE, __ZTSNSt3__114__num_get_baseE, 
                        __ZTSNSt3__114__num_put_baseE, __ZTSNSt3__118__time_get_storageIcEE, 
                        __ZTSNSt3__118__time_get_storageIwEE, __ZTSNSt3__120__time_get_c_storageIcEE, 
-                       __ZTSNSt3__120__time_get_c_storageIwEE, __ZTSNSt3__13pmr26__null_memory_resource_impE, 
-                       __ZTSNSt3__13pmr32__new_delete_memory_resource_impE, __ZTSNSt3__19__num_getIcEE, 
+                       __ZTSNSt3__120__time_get_c_storageIwEE, __ZTSNSt3__19__num_getIcEE, 
                        __ZTSNSt3__19__num_getIwEE, __ZTSNSt3__19__num_putIcEE, __ZTSNSt3__19__num_putIwEE, 
                        __ZTSNSt3__19time_baseE ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -191,10 +189,10 @@ exports:
                        __ZNKSt3__115basic_streambufIcNS_11char_traitsIcEEE6getlocEv, 
                        __ZNKSt3__115basic_streambufIwNS_11char_traitsIwEEE6getlocEv, 
                        __ZNKSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEE3strEv, 
-                       __ZNKSt3__115error_condition7messageEv, __ZNKSt3__117moneypunct_bynameIcLb0EE11do_groupingEv, 
-                       __ZNKSt3__117moneypunct_bynameIcLb0EE13do_neg_formatEv, __ZNKSt3__117moneypunct_bynameIcLb0EE13do_pos_formatEv, 
-                       __ZNKSt3__117moneypunct_bynameIcLb0EE14do_curr_symbolEv, __ZNKSt3__117moneypunct_bynameIcLb0EE14do_frac_digitsEv, 
-                       __ZNKSt3__117moneypunct_bynameIcLb0EE16do_decimal_pointEv, 
+                       __ZNKSt3__115error_condition7messageEv, __ZNKSt3__117bad_function_call4whatEv, 
+                       __ZNKSt3__117moneypunct_bynameIcLb0EE11do_groupingEv, __ZNKSt3__117moneypunct_bynameIcLb0EE13do_neg_formatEv, 
+                       __ZNKSt3__117moneypunct_bynameIcLb0EE13do_pos_formatEv, __ZNKSt3__117moneypunct_bynameIcLb0EE14do_curr_symbolEv, 
+                       __ZNKSt3__117moneypunct_bynameIcLb0EE14do_frac_digitsEv, __ZNKSt3__117moneypunct_bynameIcLb0EE16do_decimal_pointEv, 
                        __ZNKSt3__117moneypunct_bynameIcLb0EE16do_negative_signEv, 
                        __ZNKSt3__117moneypunct_bynameIcLb0EE16do_positive_signEv, 
                        __ZNKSt3__117moneypunct_bynameIcLb0EE16do_thousands_sepEv, 
@@ -591,7 +589,8 @@ exports:
                        __ZNSt3__112system_errorC2EiRKNS_14error_categoryE, __ZNSt3__112system_errorC2EiRKNS_14error_categoryEPKc, 
                        __ZNSt3__112system_errorC2EiRKNS_14error_categoryERKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZNSt3__112system_errorD0Ev, __ZNSt3__112system_errorD1Ev, 
-                       __ZNSt3__112system_errorD2Ev, __ZNSt3__113basic_filebufIcNS_11char_traitsIcEEE11__read_modeEv, 
+                       __ZNSt3__112system_errorD2Ev, __ZNSt3__113__hash_memoryEPKvm, 
+                       __ZNSt3__113basic_filebufIcNS_11char_traitsIcEEE11__read_modeEv, 
                        __ZNSt3__113basic_filebufIcNS_11char_traitsIcEEE12__write_modeEv, 
                        __ZNSt3__113basic_filebufIcNS_11char_traitsIcEEE4openEPKcj, 
                        __ZNSt3__113basic_filebufIcNS_11char_traitsIcEEE4swapERS3_, 
@@ -907,8 +906,8 @@ exports:
                        __ZNSt3__127__from_chars_floating_pointIfEENS_19__from_chars_resultIT_EEPKcS5_NS_12chars_formatE, 
                        __ZNSt3__131__arrive_barrier_algorithm_baseEPNS_24__barrier_algorithm_baseEh, 
                        __ZNSt3__132__destroy_barrier_algorithm_baseEPNS_24__barrier_algorithm_baseE, 
-                       __ZNSt3__134__construct_barrier_algorithm_baseERl, __ZNSt3__13cinE, 
-                       __ZNSt3__13pmr15memory_resourceD0Ev, __ZNSt3__13pmr15memory_resourceD1Ev, 
+                       __ZNSt3__132__internal_log_hardening_failureEPKc, __ZNSt3__134__construct_barrier_algorithm_baseERl, 
+                       __ZNSt3__13cinE, __ZNSt3__13pmr15memory_resourceD0Ev, __ZNSt3__13pmr15memory_resourceD1Ev, 
                        __ZNSt3__13pmr15memory_resourceD2Ev, __ZNSt3__13pmr19new_delete_resourceEv, 
                        __ZNSt3__13pmr20get_default_resourceEv, __ZNSt3__13pmr20null_memory_resourceEv, 
                        __ZNSt3__13pmr20set_default_resourceEPNS0_15memory_resourceE, 

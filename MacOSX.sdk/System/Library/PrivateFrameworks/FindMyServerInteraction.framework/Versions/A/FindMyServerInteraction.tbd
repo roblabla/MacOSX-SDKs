@@ -1,21 +1,18 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FindMyServerInteraction.framework/Versions/A/FindMyServerInteraction'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ FindMyDeviceSharedConfigurationXPCService, FindMyLocateTests, 
-                       FindMyServerInteractionTests, FindMyServiceValidation, FindMyServiceValidationTests, 
-                       findmybeaconingd, findmydevice-user-agent, findmydeviced, 
-                       findmydevicetool, findmylocateagent, findmylocated, findmylocatedTests, 
-                       fmltool, searchpartyd, searchpartydTests, searchpartyuseragent, 
-                       sptool ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    clients:         [ FMFCore, FMIPCore, FindMyDeviceSharedConfigurationXPCService, 
+                       FindMyLocateTests, FindMyServerInteractionTests, FindMyServiceValidation, 
+                       FindMyServiceValidationTests, GreenTorch, findmybeaconingd, 
+                       findmydevice-user-agent, findmydeviced, findmydevicetool, 
+                       findmylocateagent, findmylocated, findmylocatedTests, fmltool, 
+                       searchpartyd, searchpartydTests, searchpartyuseragent, sptool ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12FindMyCommon18SearchpartyAccountV0aB17ServerInteraction17RequestCredentialADMc', 
                        '_$s12FindMyCommon18SearchpartyAccountV0aB17ServerInteraction17RequestCredentialADWP', 
                        '_$s12FindMyCommon18SearchpartyAccountV0aB17ServerInteractionE8passwordSSvg', 

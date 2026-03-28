@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 726.2 -module-name CoreVideo -module-alias Module___CoreVideo=CoreVideo -module-alias Module____StringProcessing=_StringProcessing -module-alias Module____SwiftConcurrencyShims=_SwiftConcurrencyShims -module-alias Module____Concurrency=_Concurrency -module-alias Module___IOSurface=IOSurface -module-alias Module___CoreGraphics=CoreGraphics
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 734.4 -module-name CoreVideo -module-alias Module___CoreVideo=CoreVideo -module-alias Module____StringProcessing=_StringProcessing -module-alias Module____SwiftConcurrencyShims=_SwiftConcurrencyShims -module-alias Module____Concurrency=_Concurrency -module-alias Module___IOSurface=IOSurface -module-alias Module___CoreGraphics=CoreGraphics
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Module___CoreGraphics
 @_exported import Module___CoreVideo
 import Foundation
@@ -21,16 +21,10 @@ extension Module___CoreVideo.CVMutablePixelBuffer {
     }
     public struct AllocationAttributes : Swift.Equatable, Swift.Sendable {
       public var allocationThreshold: Swift.Int?
-      #if compiler(>=5.3) && $NonescapableTypes
       public init(allocationThreshold: Swift.Int? = nil)
-      #endif
       public static func == (a: Module___CoreVideo.CVMutablePixelBuffer.Pool.AllocationAttributes, b: Module___CoreVideo.CVMutablePixelBuffer.Pool.AllocationAttributes) -> Swift.Bool
     }
-    #if compiler(>=5.3) && $SendingArgsAndResults
     public init(unsafePool: sending Module___CoreVideo.CVPixelBufferPool)
-    #else
-    public init(unsafePool: __owned Module___CoreVideo.CVPixelBufferPool)
-    #endif
     public init(pixelBufferAttributes attributes: Module___CoreVideo.CVPixelBufferCreationAttributes, configuration: Module___CoreVideo.CVMutablePixelBuffer.Pool.Configuration = .init()) throws
     final public var pixelBufferAttributes: Module___CoreVideo.CVPixelBufferCreationAttributes {
       get
@@ -48,11 +42,9 @@ public struct CVPixelFormatDescription : Swift.Sendable, Swift.Equatable {
     final public var formatDescriptions: [Module___CoreVideo.CVPixelFormatDescription] {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     final public subscript(pixelFormatType: Module___CoreVideo.CVPixelFormatType) -> Module___CoreVideo.CVPixelFormatDescription? {
       get
     }
-    #endif
     @objc deinit
   }
   public struct Dimensions : Swift.Hashable, Swift.Sendable {
@@ -113,9 +105,7 @@ public struct CVPixelFormatDescription : Swift.Sendable, Swift.Equatable {
     public var blackBlock: Foundation.Data?
     public var fillExtendedPixels: (@Sendable (inout Module___CoreVideo.CVMutablePixelBuffer) -> Swift.Void)?
     public var cgBitmapInfo: Module___CoreGraphics.CGBitmapInfo?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(blockSize: Module___CoreVideo.CVImageSize = .init(width: 1, height: 1), bitsPerBlock: Swift.Int, bitsPerComponent: Swift.Int? = nil, blockAlignment: Module___CoreVideo.CVPixelFormatDescription.Dimensions = .init(horizontal: 1, vertical: 1), subsampling: Module___CoreVideo.CVPixelFormatDescription.Dimensions = .init(horizontal: 1, vertical: 1), blackBlock: Foundation.Data? = nil, fillExtendedPixels: (@Sendable (inout Module___CoreVideo.CVMutablePixelBuffer) -> Swift.Void)? = nil, cgBitmapInfo: Module___CoreGraphics.CGBitmapInfo? = nil)
-    #endif
     public static func == (lhs: Module___CoreVideo.CVPixelFormatDescription.PixelLayout, rhs: Module___CoreVideo.CVPixelFormatDescription.PixelLayout) -> Swift.Bool
   }
   public enum PlaneConfiguration : Swift.Sendable, Swift.Equatable {
@@ -128,9 +118,7 @@ public struct CVPixelFormatDescription : Swift.Sendable, Swift.Equatable {
   public var components: Module___CoreVideo.CVPixelFormatDescription.Components
   public var componentRange: Module___CoreVideo.CVPixelFormatDescription.ComponentRange?
   public var planeConfiguration: Module___CoreVideo.CVPixelFormatDescription.PlaneConfiguration
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(pixelFormatType: Module___CoreVideo.CVPixelFormatType, name: Swift.String, components: Module___CoreVideo.CVPixelFormatDescription.Components, componentRange: Module___CoreVideo.CVPixelFormatDescription.ComponentRange? = nil, planeConfiguration: Module___CoreVideo.CVPixelFormatDescription.PlaneConfiguration)
-  #endif
   public static func == (a: Module___CoreVideo.CVPixelFormatDescription, b: Module___CoreVideo.CVPixelFormatDescription) -> Swift.Bool
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
@@ -150,11 +138,9 @@ extension Module___CoreVideo.CVImageBufferRepresentable where Self : ~Copyable {
   public var originPosition: Module___CoreVideo.CVImageBufferOriginPosition {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var colorSpace: Module___CoreGraphics.CGColorSpace? {
     get
   }
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 public enum CVImageBufferOriginPosition : Swift.Hashable, Swift.Sendable {
@@ -206,49 +192,21 @@ public struct CVPixelFormatType : Swift.RawRepresentable, Swift.Sendable, Swift.
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 final public class CVReadOnlyPixelBuffer : Module___CoreVideo.CVPixelBufferRepresentable, Swift.Sendable {
   public init(_ mutableBuffer: consuming Module___CoreVideo.CVMutablePixelBuffer)
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public init(unsafeBuffer: sending Module___CoreVideo.CVPixelBuffer)
-  #else
-  public init(unsafeBuffer: __owned Module___CoreVideo.CVPixelBuffer)
-  #endif
-  #if compiler(>=5.3) && $SendingArgsAndResults
   final public func withUnsafeBuffer<R>(_ body: (Module___CoreVideo.CVPixelBuffer) throws -> sending R) rethrows -> sending R where R : ~Copyable
-  #else
-  final public func withUnsafeBuffer<R>(_ body: (Module___CoreVideo.CVPixelBuffer) throws -> R) rethrows -> R where R : ~Copyable
-  #endif
-  #if compiler(>=5.3) && $SendingArgsAndResults
   @_disfavoredOverload final public func withUnsafeBuffer<R>(_ body: (Module___CoreVideo.CVPixelBuffer) throws -> sending R) rethrows -> sending R
-  #else
-  @_disfavoredOverload final public func withUnsafeBuffer<R>(_ body: (Module___CoreVideo.CVPixelBuffer) throws -> R) rethrows -> R
-  #endif
   @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
   public typealias Buffer = Module___CoreVideo.CVPixelBuffer
   @objc deinit
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 public struct CVMutablePixelBuffer : ~Swift.Copyable, Swift.Sendable, Module___CoreVideo.CVPixelBufferRepresentable {
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public init(unsafeBuffer: sending Module___CoreVideo.CVPixelBuffer)
-  #else
-  public init(unsafeBuffer: __owned Module___CoreVideo.CVPixelBuffer)
-  #endif
   public init(_ attributes: Module___CoreVideo.CVPixelBufferCreationAttributes) throws
   public init(unsafeBacking ioSurface: Module___IOSurface.IOSurface, matching attributes: Module___CoreVideo.CVPixelBufferCreationAttributes) throws
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public func withUnsafeBuffer<R>(_ body: (Module___CoreVideo.CVPixelBuffer) throws -> sending R) rethrows -> sending R where R : ~Copyable
-  #else
-  public func withUnsafeBuffer<R>(_ body: (Module___CoreVideo.CVPixelBuffer) throws -> R) rethrows -> R where R : ~Copyable
-  #endif
-  #if compiler(>=5.3) && $SendingArgsAndResults
   @_disfavoredOverload public func withUnsafeBuffer<R>(_ body: (Module___CoreVideo.CVPixelBuffer) throws -> sending R) rethrows -> sending R
-  #else
-  @_disfavoredOverload public func withUnsafeBuffer<R>(_ body: (Module___CoreVideo.CVPixelBuffer) throws -> R) rethrows -> R
-  #endif
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public mutating func accessUnsafeMutableRawPlaneBytes<R>(_ block: ([(properties: Module___CoreVideo.CVPixelBufferPlaneProperties, bytes: Swift.UnsafeMutableRawBufferPointer)]) throws -> sending R) rethrows -> sending R
-  #else
-  public mutating func accessUnsafeMutableRawPlaneBytes<R>(_ block: ([(properties: Module___CoreVideo.CVPixelBufferPlaneProperties, bytes: Swift.UnsafeMutableRawBufferPointer)]) throws -> R) rethrows -> R
-  #endif
   @discardableResult
   public mutating func fillExtendedPixels() -> Swift.Bool
   @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
@@ -269,12 +227,8 @@ public struct CVPixelBufferCreationAttributes : Swift.Sendable, Swift.Equatable 
   public var planeAlignment: Swift.Int?
   public var bytesPerRowAlignment: Swift.Int?
   public var extendedPixels: Module___CoreVideo.CVPixelBufferPadding?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(pixelFormatType: Module___CoreVideo.CVPixelFormatType, size: Module___CoreVideo.CVImageSize, compatibility: Module___CoreVideo.CVPixelFormatDescription.Compatibility = [], bytesPerRowAlignment: Swift.Int? = nil, planeAlignment: Swift.Int? = nil, extendedPixels: Module___CoreVideo.CVPixelBufferPadding? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ attributes: Module___CoreVideo.CVPixelBufferAttributes)
-  #endif
   public static func == (a: Module___CoreVideo.CVPixelBufferCreationAttributes, b: Module___CoreVideo.CVPixelBufferCreationAttributes) -> Swift.Bool
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
@@ -284,30 +238,20 @@ public struct CVPixelBufferCreationAttributes : Swift.Sendable, Swift.Equatable 
   }
   public init(rawAttributes: [Swift.String : any Swift.Sendable])
   public init(_ attributes: Module___CoreVideo.CVPixelBufferCreationAttributes)
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(pixelFormatTypes: [Module___CoreVideo.CVPixelFormatType]? = nil, size: Module___CoreVideo.CVImageSize? = nil, compatibility: Module___CoreVideo.CVPixelFormatDescription.Compatibility = [], bytesPerRowAlignment: Swift.Int? = nil, planeAlignment: Swift.Int? = nil, extendedPixels: Module___CoreVideo.CVPixelBufferPadding? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(merging values: [Module___CoreVideo.CVPixelBufferAttributes])
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var pixelFormatTypes: [Module___CoreVideo.CVPixelFormatType]? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(dynamicMember keyPath: Swift.WritableKeyPath<Module___CoreVideo.CVPixelBufferCreationAttributes, Module___CoreVideo.CVPixelFormatType>) -> Module___CoreVideo.CVPixelFormatType? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(dynamicMember keyPath: Swift.WritableKeyPath<Module___CoreVideo.CVPixelBufferCreationAttributes, Module___CoreVideo.CVImageSize>) -> Module___CoreVideo.CVImageSize? {
     get
     set
   }
-  #endif
   public subscript(dynamicMember keyPath: Swift.WritableKeyPath<Module___CoreVideo.CVPixelBufferCreationAttributes, Module___CoreVideo.CVPixelBufferCreationAttributes.Backing>) -> Module___CoreVideo.CVPixelBufferCreationAttributes.Backing {
     get
     set
@@ -316,30 +260,22 @@ public struct CVPixelBufferCreationAttributes : Swift.Sendable, Swift.Equatable 
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(dynamicMember keyPath: Swift.WritableKeyPath<Module___CoreVideo.CVPixelBufferCreationAttributes, Module___CoreVideo.CVPixelBufferPadding?>) -> Module___CoreVideo.CVPixelBufferPadding? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(dynamicMember keyPath: Swift.WritableKeyPath<Module___CoreVideo.CVPixelBufferCreationAttributes, Module___CoreVideo.CVPixelFormatDescription?>) -> Module___CoreVideo.CVPixelFormatDescription? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(dynamicMember keyPath: Swift.WritableKeyPath<Module___CoreVideo.CVPixelBufferCreationAttributes, Swift.Int?>) -> Swift.Int? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(dynamicMember keyPath: Swift.WritableKeyPath<Module___CoreVideo.CVPixelBufferCreationAttributes, Swift.Bool>) -> Swift.Bool? {
     get
     set
   }
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension Module___CoreVideo.CVBuffer {
@@ -358,12 +294,8 @@ extension Module___CoreVideo.CVBuffer {
     public var planeAlignment: Swift.Int?
     public var bytesPerRowAlignment: Swift.Int?
     public var extendedPixels: Module___CoreVideo.CVPixelBufferPadding?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(pixelFormatType: Module___CoreVideo.CVPixelFormatType, size: Module___CoreVideo.CVImageSize, compatibility: Module___CoreVideo.CVPixelFormatDescription.Compatibility = [], bytesPerRowAlignment: Swift.Int? = nil, planeAlignment: Swift.Int? = nil, extendedPixels: Module___CoreVideo.CVPixelBufferPadding? = nil)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(_ attributes: Module___CoreVideo.CVBuffer.Attributes)
-    #endif
     public static func == (a: Module___CoreVideo.CVBuffer.CreationAttributes, b: Module___CoreVideo.CVBuffer.CreationAttributes) -> Swift.Bool
   }
   @available(*, deprecated, renamed: "CVPixelBufferAttributes")
@@ -373,30 +305,20 @@ extension Module___CoreVideo.CVBuffer {
     }
     public init(rawAttributes: [Swift.String : any Swift.Sendable])
     public init(_ attributes: Module___CoreVideo.CVBuffer.CreationAttributes)
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(pixelFormatTypes: [Module___CoreVideo.CVPixelFormatType]? = nil, size: Module___CoreVideo.CVImageSize? = nil, compatibility: Module___CoreVideo.CVPixelFormatDescription.Compatibility = [], bytesPerRowAlignment: Swift.Int? = nil, planeAlignment: Swift.Int? = nil, extendedPixels: Module___CoreVideo.CVPixelBufferPadding? = nil)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(merging values: [Module___CoreVideo.CVBuffer.Attributes])
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var pixelFormatTypes: [Module___CoreVideo.CVPixelFormatType]? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(dynamicMember keyPath: Swift.WritableKeyPath<Module___CoreVideo.CVBuffer.CreationAttributes, Module___CoreVideo.CVPixelFormatType>) -> Module___CoreVideo.CVPixelFormatType? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(dynamicMember keyPath: Swift.WritableKeyPath<Module___CoreVideo.CVBuffer.CreationAttributes, Module___CoreVideo.CVImageSize>) -> Module___CoreVideo.CVImageSize? {
       get
       set
     }
-    #endif
     public subscript(dynamicMember keyPath: Swift.WritableKeyPath<Module___CoreVideo.CVBuffer.CreationAttributes, Module___CoreVideo.CVBuffer.CreationAttributes.Backing>) -> Module___CoreVideo.CVBuffer.CreationAttributes.Backing {
       get
       set
@@ -405,47 +327,35 @@ extension Module___CoreVideo.CVBuffer {
       get
       set
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(dynamicMember keyPath: Swift.WritableKeyPath<Module___CoreVideo.CVBuffer.CreationAttributes, Module___CoreVideo.CVPixelBufferPadding?>) -> Module___CoreVideo.CVPixelBufferPadding? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(dynamicMember keyPath: Swift.WritableKeyPath<Module___CoreVideo.CVBuffer.CreationAttributes, Module___CoreVideo.CVPixelFormatDescription?>) -> Module___CoreVideo.CVPixelFormatDescription? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(dynamicMember keyPath: Swift.WritableKeyPath<Module___CoreVideo.CVBuffer.CreationAttributes, Swift.Int?>) -> Swift.Int? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(dynamicMember keyPath: Swift.WritableKeyPath<Module___CoreVideo.CVBuffer.CreationAttributes, Swift.Bool>) -> Swift.Bool? {
       get
       set
     }
-    #endif
   }
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 @frozen public struct CVError : Swift.Error, Swift.RawRepresentable, Swift.Hashable, Swift.CustomStringConvertible {
   public var rawValue: Module___CoreVideo.CVReturn
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Module___CoreVideo.CVReturn)
-  #endif
   public static func check(_ status: Module___CoreVideo.CVReturn) throws(Module___CoreVideo.CVError)
   public var description: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
-  #endif
   public static let internalError: Module___CoreVideo.CVError
   public static let invalidArgument: Module___CoreVideo.CVError
   public static let allocationFailed: Module___CoreVideo.CVError
@@ -463,51 +373,50 @@ extension Module___CoreVideo.CVBuffer {
 }
 extension Module___CoreVideo.CVTime {
   @available(macOS 10.4, iOS 4.0, tvOS 9.0, watchOS 4.0, visionOS 1.0, *)
-  @backDeployed(before: macOS 16.0, iOS 19.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+  @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
   public init(timeValue: Swift.Int64, timeScale: Swift.Int32) {
 		precondition(timeValue == 0 || timeScale > 0)
 		self.init(timeValue: timeValue, timeScale: timeScale, flags: 0)
 	}
   @available(macOS 10.4, iOS 4.0, tvOS 9.0, watchOS 4.0, visionOS 1.0, *)
-  @backDeployed(before: macOS 16.0, iOS 19.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+  @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
   public var flagOptions: Module___CoreVideo.CVTimeFlags {
     get { .init(rawValue: self.flags) }
     set { self.flags = newValue.rawValue }
   }
   @available(macOS 10.4, iOS 4.0, tvOS 9.0, watchOS 4.0, visionOS 1.0, *)
-  @backDeployed(before: macOS 16.0, iOS 19.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+  @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
   public static var zero: Module___CoreVideo.CVTime {
     get { kCVZeroTime }
   }
   @available(macOS 10.4, iOS 4.0, tvOS 9.0, watchOS 4.0, visionOS 1.0, *)
-  @backDeployed(before: macOS 16.0, iOS 19.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+  @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
   public static var indefinite: Module___CoreVideo.CVTime {
     get { kCVIndefiniteTime }
   }
 }
 extension Module___CoreVideo.CVSMPTETime {
   @available(macOS 10.4, iOS 4.0, tvOS 9.0, watchOS 4.0, visionOS 1.0, *)
-  @backDeployed(before: macOS 16.0, iOS 19.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+  @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
   public init(subframes: Swift.Int16, subframeDivisor: Swift.Int16, counter: Swift.UInt32, type: Module___CoreVideo.CVSMPTETimeType, flags: Module___CoreVideo.CVSMPTETimeFlags = .valid, hours: Swift.Int16, minutes: Swift.Int16, seconds: Swift.Int16, frames: Swift.Int16) {
 		self.init(subframes: subframes, subframeDivisor: subframeDivisor, counter: counter, type: type.rawValue, flags: flags.rawValue, hours: hours, minutes: minutes, seconds: seconds, frames: frames)
 	}
   @available(macOS 10.4, iOS 4.0, tvOS 9.0, watchOS 4.0, visionOS 1.0, *)
-  @backDeployed(before: macOS 16.0, iOS 19.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+  @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
   public var typeOptions: Module___CoreVideo.CVSMPTETimeType {
     get { .init(rawValue: self.type)! }
     set { self.type = newValue.rawValue }
   }
   @available(macOS 10.4, iOS 4.0, tvOS 9.0, watchOS 4.0, visionOS 1.0, *)
-  @backDeployed(before: macOS 16.0, iOS 19.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+  @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
   public var flagOptions: Module___CoreVideo.CVSMPTETimeFlags {
     get { .init(rawValue: self.flags) }
     set { self.flags = newValue.rawValue }
   }
 }
 extension Module___CoreVideo.CVTimeStamp {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.4, iOS 4.0, tvOS 9.0, watchOS 4.0, visionOS 1.0, *)
-  @backDeployed(before: macOS 16.0, iOS 19.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+  @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
   public init(videoTime: Module___CoreVideo.CVTime? = nil, hostTime: Swift.UInt64? = nil, rateScaler: Swift.Double? = nil, videoRefreshPeriod: Swift.Int64? = nil, smpteTime: Module___CoreVideo.CVSMPTETime? = nil, topField: Swift.Bool = false, bottomField: Swift.Bool = false) {
 		self.init(version: 0, videoTimeScale: 0, videoTime: 0, hostTime: 0, rateScalar: 0, videoRefreshPeriod: 0, smpteTime: .init(subframes: 0, subframeDivisor: 0, counter: 0, type: 0, flags: 0, hours: 0, minutes: 0, seconds: 0, frames: 0), flags: 0, reserved: 0)
 		var flags: CVTimeStampFlags = []
@@ -540,9 +449,8 @@ extension Module___CoreVideo.CVTimeStamp {
 		}
 		self.flags = flags.rawValue
 	}
-  #endif
   @available(macOS 10.4, iOS 4.0, tvOS 9.0, watchOS 4.0, visionOS 1.0, *)
-  @backDeployed(before: macOS 16.0, iOS 19.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+  @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
   public var flagOptions: Module___CoreVideo.CVTimeStampFlags {
     get { .init(rawValue: self.flags) }
     set { self.flags = newValue.rawValue }
@@ -599,20 +507,10 @@ extension Module___CoreVideo.CVPixelBufferRepresentable where Self : ~Copyable {
   public var planeProperties: [Module___CoreVideo.CVPixelBufferPlaneProperties] {
     get
   }
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public func accessUnsafeRawPlaneBytes<R>(_ block: ([(properties: Module___CoreVideo.CVPixelBufferPlaneProperties, bytes: Swift.UnsafeRawBufferPointer)]) throws -> sending R) rethrows -> sending R
-  #else
-  public func accessUnsafeRawPlaneBytes<R>(_ block: ([(properties: Module___CoreVideo.CVPixelBufferPlaneProperties, bytes: Swift.UnsafeRawBufferPointer)]) throws -> R) rethrows -> R
-  #endif
   public func isCompatibleWith(_ attributes: Module___CoreVideo.CVPixelBufferCreationAttributes) -> Swift.Bool
   public func isCompatibleWith(_ attributes: Module___CoreVideo.CVPixelBufferAttributes) -> Swift.Bool
-  #if compiler(>=5.3) && $NonescapableTypes
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public func withUnsafeBackingIOSurfaceIfPresent<R>(_ block: (Module___IOSurface.IOSurface) throws -> sending R) rethrows -> sending R?
-  #else
-  public func withUnsafeBackingIOSurfaceIfPresent<R>(_ block: (Module___IOSurface.IOSurface) throws -> R) rethrows -> R?
-  #endif
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension Module___CoreVideo.CVBuffer {
@@ -624,11 +522,7 @@ extension Module___CoreVideo.CVBuffer {
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 public protocol CVBufferRepresentable<Buffer> : ~Copyable {
   associatedtype Buffer : Module___CoreVideo.CVBuffer
-  #if compiler(>=5.3) && $SendingArgsAndResults
   @inlinable func withUnsafeBuffer<R>(_ body: (Self.Buffer) throws -> sending R) rethrows -> sending R where R : ~Copyable
-  #else
-  @inlinable func withUnsafeBuffer<R>(_ body: (Self.Buffer) throws -> R) rethrows -> R where R : ~Copyable
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension Module___CoreVideo.CVBufferRepresentable where Self : ~Copyable {

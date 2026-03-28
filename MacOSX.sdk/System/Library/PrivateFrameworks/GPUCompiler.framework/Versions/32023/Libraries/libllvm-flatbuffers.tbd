@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/libllvm-flatbuffers.dylib'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN11flatbuffers10CopyInlineERNS_17FlatBufferBuilderERKN10reflection5FieldERKNS_5TableEmm, 
                        __ZN11flatbuffers10Definition21DeserializeAttributesERNS_6ParserEPKNS_6VectorINS_6OffsetIN10reflection8KeyValueEEEEE, 
                        __ZN11flatbuffers10FileExistsEPKc, __ZN11flatbuffers10ServiceDef11DeserializeERNS_6ParserEPKN10reflection7ServiceE, 
@@ -124,7 +122,6 @@ exports:
                        __ZZN11flatbuffers4dataINS_6OffsetIN10reflection7EnumValEEENSt3__19allocatorIS4_EEEEPKT_RKNS5_6vectorIS8_T0_EEE1t, 
                        __ZZN11flatbuffers4dataINS_6OffsetIN10reflection7RPCCallEEENSt3__19allocatorIS4_EEEEPKT_RKNS5_6vectorIS8_T0_EEE1t, 
                        __ZZN11flatbuffers4dataINS_6OffsetIN10reflection7ServiceEEENSt3__19allocatorIS4_EEEEPT_RNS5_6vectorIS8_T0_EEE1t, 
-                       __ZZN11flatbuffers4dataINS_6OffsetIN10reflection8KeyValueEEENSt3__19allocatorIS4_EEEEPT_RNS5_6vectorIS8_T0_EEE1t, 
                        __ZZN11flatbuffers4dataINS_6OffsetINS_6StringEEENSt3__19allocatorIS3_EEEEPKT_RKNS4_6vectorIS7_T0_EEE1t, 
                        __ZZN11flatbuffers4dataINS_6OffsetIPKNS_5TableEEENSt3__19allocatorIS5_EEEEPKT_RKNS6_6vectorIS9_T0_EEE1t, 
                        __ZZN11flatbuffers4dataINS_6OffsetIPKNS_6StringEEENSt3__19allocatorIS5_EEEEPKT_RKNS6_6vectorIS9_T0_EEE1t, 

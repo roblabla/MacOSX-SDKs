@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleConvergedFirmwareUpdater.framework/Versions/A/AppleConvergedFirmwareUpdater'
 exports:
   - targets:         [ x86_64-macos ]
@@ -13,11 +13,11 @@ exports:
                        __ZTINSt3__110__function6__baseIFNS_10unique_ptrI17ACFUDataContainerNS_14default_deleteIS3_EEEERKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
                        __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKS7_EEE, 
                        __ZTINSt3__110__function6__baseIFPK8__CFDataNS_10shared_ptrI12ACFUFirmwareEEEEE, 
-                       __ZTINSt3__110__function6__funcIN18ACFUACIPCTransport20ACIPCClientCallbacks16copyBTILoadImageMUlNS_10shared_ptrI12ACFUFirmwareEEE_ENS_9allocatorIS7_EEFPK8__CFDataS6_EEE, 
-                       __ZTINSt3__110__function6__funcIN18ACFUACIPCTransport20ACIPCClientCallbacks18copyRTIClientImageMUlRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE_ENS7_ISC_EEFNS_10unique_ptrI17ACFUDataContainerNS_14default_deleteISF_EEEESB_EEE, 
-                       __ZTINSt3__110__function6__funcIN18ACFUACIPCTransport20ACIPCClientCallbacks26getRTIWriteNameFromFileTagMUlRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE_ENS7_ISC_EEFS9_SB_EEE, 
-                       __ZTINSt3__110__function6__funcIN7ACFUROM29UpdateFirmwareActionCallbacks7preBootMUlNS_10shared_ptrI13ACFUTransportEENS4_I12ACFUFirmwareEEE_ENS_9allocatorIS9_EEF13ACFUErrorCodeS6_S8_EEE, 
-                       __ZTINSt3__110__function6__funcIN7ACFUROM29UpdateFirmwareActionCallbacks7preSaveMUlNS_10shared_ptrI13ACFUTransportEENS4_I12ACFUFirmwareEEE_ENS_9allocatorIS9_EEF13ACFUErrorCodeS6_S8_EEE, 
+                       __ZTINSt3__110__function6__funcIN18ACFUACIPCTransport20ACIPCClientCallbacks16copyBTILoadImageMUlNS_10shared_ptrI12ACFUFirmwareEEE_EFPK8__CFDataS6_EEE, 
+                       __ZTINSt3__110__function6__funcIN18ACFUACIPCTransport20ACIPCClientCallbacks18copyRTIClientImageMUlRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE_EFNS_10unique_ptrI17ACFUDataContainerNS_14default_deleteISE_EEEESB_EEE, 
+                       __ZTINSt3__110__function6__funcIN18ACFUACIPCTransport20ACIPCClientCallbacks26getRTIWriteNameFromFileTagMUlRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE_EFS9_SB_EEE, 
+                       __ZTINSt3__110__function6__funcIN7ACFUROM29UpdateFirmwareActionCallbacks7preBootMUlNS_10shared_ptrI13ACFUTransportEENS4_I12ACFUFirmwareEEE_EF13ACFUErrorCodeS6_S8_EEE, 
+                       __ZTINSt3__110__function6__funcIN7ACFUROM29UpdateFirmwareActionCallbacks7preSaveMUlNS_10shared_ptrI13ACFUTransportEENS4_I12ACFUFirmwareEEE_EF13ACFUErrorCodeS6_S8_EEE, 
                        __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__117bad_function_callE, __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceI9ACFUErrorNS_9allocatorIS1_EEEE, 
@@ -32,18 +32,18 @@ exports:
                        __ZTSNSt3__110__function6__baseIFNS_10unique_ptrI17ACFUDataContainerNS_14default_deleteIS3_EEEERKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
                        __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKS7_EEE, 
                        __ZTSNSt3__110__function6__baseIFPK8__CFDataNS_10shared_ptrI12ACFUFirmwareEEEEE, 
-                       __ZTSNSt3__110__function6__funcIN18ACFUACIPCTransport20ACIPCClientCallbacks16copyBTILoadImageMUlNS_10shared_ptrI12ACFUFirmwareEEE_ENS_9allocatorIS7_EEFPK8__CFDataS6_EEE, 
-                       __ZTSNSt3__110__function6__funcIN18ACFUACIPCTransport20ACIPCClientCallbacks18copyRTIClientImageMUlRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE_ENS7_ISC_EEFNS_10unique_ptrI17ACFUDataContainerNS_14default_deleteISF_EEEESB_EEE, 
-                       __ZTSNSt3__110__function6__funcIN18ACFUACIPCTransport20ACIPCClientCallbacks26getRTIWriteNameFromFileTagMUlRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE_ENS7_ISC_EEFS9_SB_EEE, 
-                       __ZTSNSt3__110__function6__funcIN7ACFUROM29UpdateFirmwareActionCallbacks7preBootMUlNS_10shared_ptrI13ACFUTransportEENS4_I12ACFUFirmwareEEE_ENS_9allocatorIS9_EEF13ACFUErrorCodeS6_S8_EEE, 
-                       __ZTSNSt3__110__function6__funcIN7ACFUROM29UpdateFirmwareActionCallbacks7preSaveMUlNS_10shared_ptrI13ACFUTransportEENS4_I12ACFUFirmwareEEE_ENS_9allocatorIS9_EEF13ACFUErrorCodeS6_S8_EEE, 
+                       __ZTSNSt3__110__function6__funcIN18ACFUACIPCTransport20ACIPCClientCallbacks16copyBTILoadImageMUlNS_10shared_ptrI12ACFUFirmwareEEE_EFPK8__CFDataS6_EEE, 
+                       __ZTSNSt3__110__function6__funcIN18ACFUACIPCTransport20ACIPCClientCallbacks18copyRTIClientImageMUlRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE_EFNS_10unique_ptrI17ACFUDataContainerNS_14default_deleteISE_EEEESB_EEE, 
+                       __ZTSNSt3__110__function6__funcIN18ACFUACIPCTransport20ACIPCClientCallbacks26getRTIWriteNameFromFileTagMUlRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE_EFS9_SB_EEE, 
+                       __ZTSNSt3__110__function6__funcIN7ACFUROM29UpdateFirmwareActionCallbacks7preBootMUlNS_10shared_ptrI13ACFUTransportEENS4_I12ACFUFirmwareEEE_EF13ACFUErrorCodeS6_S8_EEE, 
+                       __ZTSNSt3__110__function6__funcIN7ACFUROM29UpdateFirmwareActionCallbacks7preSaveMUlNS_10shared_ptrI13ACFUTransportEENS4_I12ACFUFirmwareEEE_EF13ACFUErrorCodeS6_S8_EEE, 
                        __ZTSNSt3__114default_deleteI12ACFURTKitROMEE, __ZTSNSt3__114default_deleteI15ACFUDiagnosticsEE, 
                        __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceI9ACFUErrorNS_9allocatorIS1_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIP12ACFURTKitROMNS_14default_deleteIS1_EENS_9allocatorIS1_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIP15ACFUDiagnosticsNS_14default_deleteIS1_EENS_9allocatorIS1_EEEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AVPSecureBootG2Rsa4kSha384IM4C, _AVPSecureBootG2Rsa4kSha384IM4C_len, 
                        _AppleConvergedFirmwareUpdaterVersionNumber, _AppleConvergedFirmwareUpdaterVersionString, 
                        _CryptexG1Rsa4kSha384IM4C, _CryptexG1Rsa4kSha384IM4C_len, 
@@ -447,9 +447,17 @@ exports:
                        _oidLocalityName, _oidMSNTPrincipalName, _oidMd2, _oidMd2Rsa, 
                        _oidMd4, _oidMd4Rsa, _oidMd5, _oidMd5Fee, _oidMd5Rsa, _oidMessageDigest, 
                        _oidMfg1, _oidMicrosoftSpcIndirectDataContext, _oidMicrosoftSpcPEImageData, 
-                       _oidMicrosoftSpcSpOpusInfo, _oidNameConstraints, _oidNetscapeCertType, 
-                       _oidOCSPNoCheck, _oidOrganizationName, _oidOrganizationalUnitName, 
-                       _oidPSSRsa, _oidPkcs7SignedData, _oidPolicyConstraints, _oidPolicyMappings, 
+                       _oidMicrosoftSpcSpOpusInfo, _oidMldsa44EcdsaP256Sha256, _oidMldsa44Ed25519Sha512, 
+                       _oidMldsa44Rsa2048Pkcs15Sha256, _oidMldsa44Rsa2048PssSha256, 
+                       _oidMldsa65EcdsaBrainpoolP256r1Sha512, _oidMldsa65EcdsaP256Sha512, 
+                       _oidMldsa65EcdsaP384Sha512, _oidMldsa65Ed25519Sha512, _oidMldsa65Rsa3072Pkcs15Sha512, 
+                       _oidMldsa65Rsa3072PssSha512, _oidMldsa65Rsa4096Pkcs15Sha512, 
+                       _oidMldsa65Rsa4096PssSha512, _oidMldsa87EcdsaBrainpoolP384r1Sha512, 
+                       _oidMldsa87EcdsaP384Sha512, _oidMldsa87EcdsaP521Sha512, _oidMldsa87Ed448Shake256, 
+                       _oidMldsa87Rsa3072PssSha512, _oidMldsa87Rsa4096PssSha512, 
+                       _oidNameConstraints, _oidNetscapeCertType, _oidOCSPNoCheck, 
+                       _oidOrganizationName, _oidOrganizationalUnitName, _oidPSSRsa, 
+                       _oidPkcs7SignedData, _oidPolicyConstraints, _oidPolicyMappings, 
                        _oidPrivateKeyUsagePeriod, _oidQCCompliance, _oidQCDisclosures, 
                        _oidQCEuRetentionPeriod, _oidQCLimitValue, _oidQCStatements, 
                        _oidQCSyntaxv1, _oidQCSyntaxv2, _oidQCType, _oidQCTypeEseal, 

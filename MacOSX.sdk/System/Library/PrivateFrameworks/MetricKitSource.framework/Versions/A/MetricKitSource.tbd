@@ -1,11 +1,27 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MetricKitSource.framework/Versions/A/MetricKitSource'
+swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _MetricKitSourceVersionNumber, _MetricKitSourceVersionString ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s15MetricKitSource15MXDateFormatterC10DateFormatO8rawValueAESgSi_tcfC', 
+                       '_$s15MetricKitSource15MXDateFormatterC10DateFormatO8rawValueSivg', 
+                       '_$s15MetricKitSource15MXDateFormatterC10DateFormatO8rawValueSivpMV', 
+                       '_$s15MetricKitSource15MXDateFormatterC10DateFormatOMa', '_$s15MetricKitSource15MXDateFormatterC10DateFormatOMn', 
+                       '_$s15MetricKitSource15MXDateFormatterC10DateFormatON', '_$s15MetricKitSource15MXDateFormatterC10DateFormatOSHAAMc', 
+                       '_$s15MetricKitSource15MXDateFormatterC10DateFormatOSQAAMc', 
+                       '_$s15MetricKitSource15MXDateFormatterC10DateFormatOSYAAMc', 
+                       '_$s15MetricKitSource15MXDateFormatterC14dateFromString_6format10Foundation4DateVSgSS_AC0K6FormatOtFZ', 
+                       '_$s15MetricKitSource15MXDateFormatterC14stringFromDate_6formatSS10Foundation0H0V_AC0H6FormatOtFZ', 
+                       '_$s15MetricKitSource15MXDateFormatterC21dateTruncatedToMinutey10Foundation4DateVSgAGFZ', 
+                       '_$s15MetricKitSource15MXDateFormatterC6oneDaySdvgZ', '_$s15MetricKitSource15MXDateFormatterC6oneDaySdvpZMV', 
+                       '_$s15MetricKitSource15MXDateFormatterCACycfC', '_$s15MetricKitSource15MXDateFormatterCACycfc', 
+                       '_$s15MetricKitSource15MXDateFormatterCMa', '_$s15MetricKitSource15MXDateFormatterCMn', 
+                       '_$s15MetricKitSource15MXDateFormatterCMo', '_$s15MetricKitSource15MXDateFormatterCN', 
+                       '_$s15MetricKitSource15MXDateFormatterCfD', _MetricKitSourceVersionNumber, 
+                       _MetricKitSourceVersionString ]
     objc-classes:    [ MXHangTracerData, MXPowerlogData, MXReportCrashData, MXSampleAnalysisParser, 
                        MXSourceData, MXSourceManager, MXSourceUtilities, MXSourceXPCPayload, 
-                       MXSpaceAttributionData, MXSpinTracerData ]
+                       MXSpaceAttributionData, MXSpinTracerData, _TtC15MetricKitSource15MXDateFormatter ]
 ...

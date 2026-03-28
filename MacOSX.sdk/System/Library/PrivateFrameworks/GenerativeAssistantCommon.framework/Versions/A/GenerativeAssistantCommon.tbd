@@ -1,14 +1,18 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GenerativeAssistantCommon.framework/Versions/A/GenerativeAssistantCommon'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s25GenerativeAssistantCommon0aB12RestrictionsMp', '_$s25GenerativeAssistantCommon0aB12RestrictionsP017userNeedsToSignInG9WorkspaceSbvgTj', 
                        '_$s25GenerativeAssistantCommon0aB12RestrictionsP017userNeedsToSignInG9WorkspaceSbvgTq', 
                        '_$s25GenerativeAssistantCommon0aB12RestrictionsP10isSignedInSbvgTj', 
                        '_$s25GenerativeAssistantCommon0aB12RestrictionsP10isSignedInSbvgTq', 
+                       '_$s25GenerativeAssistantCommon0aB12RestrictionsP14isHardDisabled7useCaseSbAA0ab3UseI0O_tFTj', 
+                       '_$s25GenerativeAssistantCommon0aB12RestrictionsP14isHardDisabled7useCaseSbAA0ab3UseI0O_tFTq', 
+                       '_$s25GenerativeAssistantCommon0aB12RestrictionsP16hasAvailableLLMsSbyFTj', 
+                       '_$s25GenerativeAssistantCommon0aB12RestrictionsP16hasAvailableLLMsSbyFTq', 
                        '_$s25GenerativeAssistantCommon0aB12RestrictionsP16isMontaraAllowedSbvgTj', 
                        '_$s25GenerativeAssistantCommon0aB12RestrictionsP16isMontaraAllowedSbvgTq', 
                        '_$s25GenerativeAssistantCommon0aB12RestrictionsP16workspaceAllowed0E2IdSbSSSg_tFTj', 
@@ -78,6 +82,8 @@ exports:
                        '_$s25GenerativeAssistantCommon0aB18FeatureFlagManagerVN', 
                        '_$s25GenerativeAssistantCommon0aB18RestrictionManagerV10isSignedInSbvg', 
                        '_$s25GenerativeAssistantCommon0aB18RestrictionManagerV10isSignedInSbvpMV', 
+                       '_$s25GenerativeAssistantCommon0aB18RestrictionManagerV14isHardDisabled7useCaseSbAA0ab3UseJ0O_tF', 
+                       '_$s25GenerativeAssistantCommon0aB18RestrictionManagerV16hasAvailableLLMsSbyF', 
                        '_$s25GenerativeAssistantCommon0aB18RestrictionManagerV18isMontaraAvailableSbvg', 
                        '_$s25GenerativeAssistantCommon0aB18RestrictionManagerV18isMontaraAvailableSbvpMV', 
                        '_$s25GenerativeAssistantCommon0aB18RestrictionManagerV18isUseCaseAvailable03useH0SbAA0abgH0O_tF', 
@@ -268,9 +274,12 @@ exports:
                        '_$s25GenerativeAssistantCommon23SessionPersistenceUtilsV15getVISessionKeySSyFZ', 
                        '_$s25GenerativeAssistantCommon23SessionPersistenceUtilsV15setConfirmation07forTextD0ySS_tFZ', 
                        '_$s25GenerativeAssistantCommon23SessionPersistenceUtilsV15setConfirmation08forMediaD0ySS_tFZ', 
+                       '_$s25GenerativeAssistantCommon23SessionPersistenceUtilsV17carPlayDisclaimerSbyFZ', 
                        '_$s25GenerativeAssistantCommon23SessionPersistenceUtilsV18getExtensionDomainSSyFZ', 
                        '_$s25GenerativeAssistantCommon23SessionPersistenceUtilsV19setRemoveAttachment03forD0ySS_tFZ', 
+                       '_$s25GenerativeAssistantCommon23SessionPersistenceUtilsV20setCarPlayDisclaimer03cariJ0ySb_tFZ', 
                        '_$s25GenerativeAssistantCommon23SessionPersistenceUtilsV30setVisualIntelligenceImageData_03forD0y10Foundation0K0VSg_SStFZ', 
+                       '_$s25GenerativeAssistantCommon23SessionPersistenceUtilsV31clearStoredValuesForAllSessionsyyFZ', 
                        '_$s25GenerativeAssistantCommon23SessionPersistenceUtilsV31setDidSelectAlternateAttachment_03forD0ySb_SStFZ', 
                        '_$s25GenerativeAssistantCommon23SessionPersistenceUtilsV40clearStoredVisualIntelligenceImageValuesyyFZ', 
                        '_$s25GenerativeAssistantCommon23SessionPersistenceUtilsVMa', 

@@ -137,6 +137,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
  */
 @property (nonatomic, readonly) BOOL proprietaryApplicationDataCoding API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
+@property (nonatomic, readonly) BOOL supportsPACE API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 /*!
  * @method sendCommandAPDU:completionHandler:
  *

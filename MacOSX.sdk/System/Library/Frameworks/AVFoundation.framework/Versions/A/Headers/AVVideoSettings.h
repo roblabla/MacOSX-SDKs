@@ -5,14 +5,6 @@
 	Framework:  AVFoundation
  
 	Copyright 2010-2020,2022-2025 Apple Inc. All rights reserved.
- 
-	$Log$
-	07jul2025 jbailey
-	<rdar://153021932> Update availability to 26.0 for all platforms. <dcasey, abhi>
-
-	1apr2024 dcasey
-	<rdar://125102733> AVF - Warning _TEMP_AVVideoTransferFunction_IEC_sRGB <jbailey>
-
 */
 
 #import <AVFoundation/AVBase.h>
@@ -276,7 +268,7 @@ AVF_EXPORT NSString *const AVVideoCompressionPropertiesKey /* NSDictionary */   
  
  Most keys can only be used for certain decoders.  Look at individual keys for details.
  */
-AVF_EXPORT NSString *const AVVideoDecompressionPropertiesKey /* NSDictionary */   API_AVAILABLE(macos(10.13), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);
+AVF_EXPORT NSString *const AVVideoDecompressionPropertiesKey /* NSDictionary */   API_AVAILABLE(macos(10.13), ios(17.0), visionos(1.0), tvos(26.4), watchos(26.4));
 
 /*!
 	@constant AVVideoEncoderSpecificationKey

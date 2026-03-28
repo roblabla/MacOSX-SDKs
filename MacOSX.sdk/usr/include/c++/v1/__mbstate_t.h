@@ -45,14 +45,14 @@
 #  include <sys/_types/_mbstate_t.h> // works on Darwin
 #elif defined(_LIBCPP_ON_RTKIT)      // <wchar.h> is provided even though wide character support is disabled
 #  include_next <wchar.h>
-#elif defined(_LIBCPP_ON_SEP)
+#elif defined(_LIBCPP_ON_LIBLIBC)
 struct mbstate_t {};
-#elif _LIBCPP_HAS_WIDE_CHARACTERS && __has_include_next(<wchar.h>)
-#  include_next <wchar.h> // fall back to the C standard provider of mbstate_t
+#elif __has_include_next(<wchar.h>)
+#  include_next <wchar.h> // use the C standard provider of mbstate_t if present
 #elif __has_include_next(<uchar.h>)
-#  include_next <uchar.h> // <uchar.h> is also required to make mbstate_t visible
+#  include_next <uchar.h> // Try <uchar.h> in absence of <wchar.h> for mbstate_t
 #else
-#  error "We don't know how to get the definition of mbstate_t without <wchar.h> on your platform."
+#  error "We don't know how to get the definition of mbstate_t on your platform."
 #endif
 
 #endif // _LIBCPP___MBSTATE_T_H

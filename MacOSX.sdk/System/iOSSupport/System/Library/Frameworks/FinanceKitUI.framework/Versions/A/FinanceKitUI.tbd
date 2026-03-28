@@ -1,11 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/FinanceKitUI.framework/Versions/A/FinanceKitUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-    symbols:         [ '_$s10FinanceKit16ThumbnailOptionsV11ColorSchemeO0aB2UIE4withAE05SwiftG0ADO_tcfC', 
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
+    symbols:         [ '_$s10FinanceKit15TapToRadarDraftV0aB2UIE4openyyYaKF', '_$s10FinanceKit15TapToRadarDraftV0aB2UIE4openyyYaKFTu', 
+                       '_$s10FinanceKit16ThumbnailOptionsV11ColorSchemeO0aB2UIE4withAE05SwiftG0ADO_tcfC', 
                        '_$s10FinanceKit16ThumbnailOptionsV11ContentModeO0aB2UIE07contentF0AeF15OrderImageModelVADO_tcfC', 
                        '_$s10FinanceKit16ThumbnailOptionsV15LayoutDirectionO0aB2UIEyAE05SwiftG0ADOcfC', 
                        '_$s12FinanceKitUI10OrderImageV10imageNames22orderVersionIdentifier11contentMode8fallbackACyxGSaySSG_0aB00D0V0iJ0VAA0dE5ModelV07ContentL0OxyctcfC', 
@@ -235,6 +236,8 @@ exports:
                        '_$s12FinanceKitUI20OrderManagementModelC11ImportStateOMn', 
                        '_$s12FinanceKitUI20OrderManagementModelC11ImportStateON', 
                        '_$s12FinanceKitUI20OrderManagementModelC16ConfirmationDataC05orderH0AE10Foundation0H0V_tKcfC', 
+                       '_$s12FinanceKitUI20OrderManagementModelC16ConfirmationDataC05orderH0AE10Foundation0H0V_tKcfCTj', 
+                       '_$s12FinanceKitUI20OrderManagementModelC16ConfirmationDataC05orderH0AE10Foundation0H0V_tKcfCTq', 
                        '_$s12FinanceKitUI20OrderManagementModelC16ConfirmationDataC05orderH0AE10Foundation0H0V_tKcfc', 
                        '_$s12FinanceKitUI20OrderManagementModelC16ConfirmationDataC14orderBundleURLAE10Foundation0K0V_tKcfC', 
                        '_$s12FinanceKitUI20OrderManagementModelC16ConfirmationDataC14orderBundleURLAE10Foundation0K0V_tKcfc', 
@@ -445,7 +448,6 @@ exports:
                        '_$s12FinanceKitUI25OrderBundleResourceLoaderC16loadReceiptNamedyAA0dI0CSgSSYaKFTu', 
                        '_$s12FinanceKitUI25OrderBundleResourceLoaderC20loadReturnLabelNamedyAA0diJ0CSgSSYaKF', 
                        '_$s12FinanceKitUI25OrderBundleResourceLoaderC20loadReturnLabelNamedyAA0diJ0CSgSSYaKFTu', 
-                       '_$s12FinanceKitUI25OrderBundleResourceLoaderC5closeyyKF', 
                        '_$s12FinanceKitUI25OrderBundleResourceLoaderC7content0aB003RawD7ContentOvg', 
                        '_$s12FinanceKitUI25OrderBundleResourceLoaderC7content0aB003RawD7ContentOvpMV', 
                        '_$s12FinanceKitUI25OrderBundleResourceLoaderCAA0dfG0AAMc', 

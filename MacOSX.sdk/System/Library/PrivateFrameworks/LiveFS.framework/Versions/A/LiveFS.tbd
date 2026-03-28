@@ -1,14 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LiveFS.framework/Versions/A/LiveFS'
+reexported-libraries:
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    libraries:       [ '/System/Library/Frameworks/FSKit.framework/Versions/A/FSKit' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _FSKitVolumeMachPortForKernelMount, _LISearchFileContentsInclude, 
-                       _LISearchFileNameContains, _LISearchFileNameEndsWith, _LISearchObjModifiedAfter, 
-                       _LISearchObjTypeReturnAll, _LISearchObjTypeReturnDirs, _LISearchObjTypeReturnFiles, 
-                       _LISearchObjTypeReturnLinks, _LISearchObjXattrsInclude, _LISearchObjXattrsToReturn, 
-                       _LIUpdateNSFileProviderRootContainerItemIdentifier, _LIUpdateNSFileProviderWorkingSetContainerItemIdentifier, 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ _LISearchFileContentsInclude, _LISearchFileNameContains, _LISearchFileNameEndsWith, 
+                       _LISearchObjModifiedAfter, _LISearchObjTypeReturnAll, _LISearchObjTypeReturnDirs, 
+                       _LISearchObjTypeReturnFiles, _LISearchObjTypeReturnLinks, 
+                       _LISearchObjXattrsInclude, _LISearchObjXattrsToReturn, _LIUpdateNSFileProviderRootContainerItemIdentifier, 
+                       _LIUpdateNSFileProviderWorkingSetContainerItemIdentifier, 
                        _LiveFSAuthCredPasswordKey, _LiveFSAuthCredUsernameKey, _LiveFSFileSystemTypeName, 
                        _LiveFSMounterDisplayNameKey, _LiveFSMounterDomainErasable, 
                        _LiveFSMounterDomainErrorKey, _LiveFSMounterDomainHidden, 
@@ -17,13 +20,12 @@ exports:
                        _LiveFSMounterVolumeProviderNameKey, _LiveFSVersionNumber, 
                        _LiveFSVersionString, _getBootUUID, _getNSErrorFromLiveFSErrno, 
                        _livefs_std_log ]
-    objc-classes:    [ LiveFSAppleDouble, LiveFSAppleDoubleManager, LiveFSClient, 
-                       LiveFSDiskUnlock, LiveFSGatedWork, LiveFSIDHelper, LiveFSItemPair, 
-                       LiveFSLRUCache, LiveFSMachPort, LiveFSMemoryMap, LiveFSMountClient, 
-                       LiveFSPathHelper, LiveFSRBTree, LiveFSServiceClient, LiveFSServiceConnection, 
-                       LiveFSServiceUserClient, LiveFSSharedMutableBuffer, LiveFSUserClient, 
-                       LiveFSVolume, LiveFSVolumeClient, LiveFSVolumeManager, LiveFSVolumeSearchResultConnector, 
-                       LiveFSXattrCache, LiveFSXattrCacheEntry ]
+    objc-classes:    [ FSKitDiskArbHelper, LiveFSAppleDouble, LiveFSAppleDoubleManager, 
+                       LiveFSClient, LiveFSDiskUnlock, LiveFSGatedWork, LiveFSIDHelper, 
+                       LiveFSItemPair, LiveFSLRUCache, LiveFSMountClient, LiveFSRBTree, 
+                       LiveFSServiceClient, LiveFSServiceConnection, LiveFSServiceUserClient, 
+                       LiveFSUserClient, LiveFSVolume, LiveFSVolumeClient, LiveFSVolumeManager, 
+                       LiveFSVolumeSearchResultConnector, LiveFSXattrCache, LiveFSXattrCacheEntry ]
     objc-ivars:      [ LiveFSClient.conn, LiveFSMountClient.conn, LiveFSMountClient.helper, 
                        LiveFSMountClient.provider, LiveFSServiceConnection._ourID, 
                        LiveFSServiceConnection.mount, LiveFSServiceConnection.ourConnection, 

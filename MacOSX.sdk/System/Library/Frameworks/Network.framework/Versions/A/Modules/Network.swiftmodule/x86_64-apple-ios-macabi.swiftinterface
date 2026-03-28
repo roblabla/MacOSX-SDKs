@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftNetwork -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 5000.0.25 -module-name Network
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftNetwork -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 5000.0.28 -module-name Network
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Darwin
 import Dispatch
 import Distributed
@@ -35,9 +35,7 @@ public class NWProtocolWebSocket : Network.NWProtocol {
     case close
     case ping
     case pong
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt8)
-    #endif
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     public typealias RawValue = Swift.UInt8
     public var rawValue: Swift.UInt8 {
@@ -58,9 +56,7 @@ public class NWProtocolWebSocket : Network.NWProtocol {
       case mandatoryExtension
       case internalServerError
       case tlsHandshake
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(rawValue: Swift.UInt16)
-      #endif
       @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
       public typealias RawValue = Swift.UInt16
       public var rawValue: Swift.UInt16 {
@@ -99,19 +95,13 @@ public class NWProtocolWebSocket : Network.NWProtocol {
       get
       set
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     @preconcurrency public func setPongHandler(_ queue: Dispatch.DispatchQueue, handler: @escaping @Sendable (Network.NWError?) -> Swift.Void)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var selectedSubprotocol: Swift.String? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var additionalServerHeaders: [(Swift.String, Swift.String)]? {
       get
     }
-    #endif
     @objc deinit
   }
   public struct Response : Swift.Sendable {
@@ -127,9 +117,7 @@ public class NWProtocolWebSocket : Network.NWProtocol {
     public let status: Network.NWProtocolWebSocket.Response.Status
     public let subprotocol: Swift.String?
     public let additionalHeaders: [(name: Swift.String, value: Swift.String)]?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(status: Network.NWProtocolWebSocket.Response.Status, subprotocol: Swift.String?, additionalHeaders: [(name: Swift.String, value: Swift.String)]? = nil)
-    #endif
   }
   @objc deinit
 }
@@ -155,9 +143,7 @@ final public class NetworkBrowser<Provider> : Swift.Sendable, Swift.CustomDebugS
     case waiting(Network.NWError)
     public static func == (a: Network.NetworkBrowser<Provider>.State, b: Network.NetworkBrowser<Provider>.State) -> Swift.Bool
   }
-  #if compiler(>=5.3) && $IsolatedAny
   public typealias StateUpdateHandler = @isolated(any) @Sendable (Network.NetworkBrowser<Provider>, Network.NetworkBrowser<Provider>.State) -> Swift.Void
-  #endif
   public enum RunResult<T> {
     case finish(T)
     case `continue`
@@ -165,19 +151,11 @@ final public class NetworkBrowser<Provider> : Swift.Sendable, Swift.CustomDebugS
   final public var debugDescription: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(for provider: Provider, using parameters: Network.NWParameters? = nil)
-  #endif
-  #if compiler(>=5.3) && $IsolatedAny
   @discardableResult
   final public func onStateUpdate(@_inheritActorContext _ handler: @escaping @isolated(any) @Sendable (Network.NetworkBrowser<Provider>, Network.NetworkBrowser<Provider>.State) -> Swift.Void) -> Self
-  #endif
-  #if compiler(>=5.3) && $IsolatedAny
   final public func run(@_inheritActorContext _ handler: @escaping @isolated(any) @Sendable ([Provider.Endpoint]) async throws -> Swift.Void) async throws
-  #endif
-  #if compiler(>=5.3) && $IsolatedAny
   final public func run<Return>(@_inheritActorContext _ handler: @escaping @isolated(any) @Sendable ([Provider.Endpoint]) async throws -> Network.NetworkBrowser<Provider>.RunResult<Return>) async throws -> Return
-  #endif
   @objc deinit
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -248,9 +226,7 @@ final public class NWBrowser : Swift.CustomDebugStringConvertible {
         @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
         public typealias RawValue = Swift.UInt8
       }
-      #if compiler(>=5.3) && $NonescapableTypes
       public init(between old: Network.NWBrowser.Result?, _ new: Network.NWBrowser.Result?)
-      #endif
       public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
@@ -277,23 +253,17 @@ final public class NWBrowser : Swift.CustomDebugStringConvertible {
   final public var browseResults: Swift.Set<Network.NWBrowser.Result> {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var queue: Dispatch.DispatchQueue? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public var stateUpdateHandler: (@Sendable (_ newState: Network.NWBrowser.State) -> Swift.Void)? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public var browseResultsChangedHandler: (@Sendable (_ newResults: Swift.Set<Network.NWBrowser.Result>, _ changes: Swift.Set<Network.NWBrowser.Result.Change>) -> Swift.Void)? {
     get
     set
   }
-  #endif
   public init(for descriptor: Network.NWBrowser.Descriptor, using parameters: Network.NWParameters)
   final public func start(queue: Dispatch.DispatchQueue)
   final public func cancel()
@@ -305,15 +275,9 @@ extension Network.NWBrowser : Swift.Sendable {
 @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 public protocol IPAddress : Swift.Sendable {
   var rawValue: Foundation.Data { get }
-  #if compiler(>=5.3) && $NonescapableTypes
   init?(_ rawValue: Foundation.Data, _ interface: Network.NWInterface?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   init?(_ string: Swift.String)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   var interface: Network.NWInterface? { get }
-  #endif
   var isLoopback: Swift.Bool { get }
   var isLinkLocal: Swift.Bool { get }
   var isMulticast: Swift.Bool { get }
@@ -339,12 +303,8 @@ public struct IPv4Address : Network.IPAddress, Swift.Hashable, Swift.CustomDebug
   public var rawValue: Foundation.Data {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ rawValue: Foundation.Data, _ interface: Network.NWInterface? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ string: Swift.String)
-  #endif
   public let interface: Network.NWInterface?
   public static func == (lhs: Network.IPv4Address, rhs: Network.IPv4Address) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
@@ -369,9 +329,7 @@ public struct IPv6Address : Network.IPAddress, Swift.Hashable, Swift.CustomDebug
     case siteLocal
     case organizationLocal
     case global
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt8)
-    #endif
     @available(iOS 12.0, tvOS 12.0, watchOS 5.0, macOS 10.14, *)
     public typealias RawValue = Swift.UInt8
     public var rawValue: Swift.UInt8 {
@@ -390,11 +348,9 @@ public struct IPv6Address : Network.IPAddress, Swift.Hashable, Swift.CustomDebug
   public var isIPv4Mapped: Swift.Bool {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var asIPv4: Network.IPv4Address? {
     get
   }
-  #endif
   public var is6to4: Swift.Bool {
     get
   }
@@ -404,11 +360,9 @@ public struct IPv6Address : Network.IPAddress, Swift.Hashable, Swift.CustomDebug
   public var isMulticast: Swift.Bool {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var multicastScope: Network.IPv6Address.Scope? {
     get
   }
-  #endif
   @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
   @backDeployed(before: macOS 14, iOS 17, watchOS 10, tvOS 17)
   public var isUniqueLocal: Swift.Bool {
@@ -416,12 +370,8 @@ public struct IPv6Address : Network.IPAddress, Swift.Hashable, Swift.CustomDebug
 		return [0xfc, 0xfd].contains(self.rawValue[0])
 	}
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ rawValue: Foundation.Data, _ interface: Network.NWInterface? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ string: Swift.String)
-  #endif
   public let interface: Network.NWInterface?
   public var rawValue: Foundation.Data {
     get
@@ -451,11 +401,9 @@ public enum NWEndpoint : Swift.Hashable, Swift.CustomDebugStringConvertible, Swi
     case ipv6(Network.IPv6Address)
     public init(stringLiteral: Network.NWEndpoint.Host.StringLiteralType)
     public init(_ string: Swift.String)
-    #if compiler(>=5.3) && $NonescapableTypes
     public var interface: Network.NWInterface? {
       get
     }
-    #endif
     public var debugDescription: Swift.String {
       get
     }
@@ -483,30 +431,24 @@ public enum NWEndpoint : Swift.Hashable, Swift.CustomDebugStringConvertible, Swi
     public var rawValue: Swift.UInt16 {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(_ service: Swift.String)
-    #endif
     public init(integerLiteral value: Network.NWEndpoint.Port.IntegerLiteralType)
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt16)
-    #endif
     public var debugDescription: Swift.String {
       get
     }
     @available(iOS 12.0, tvOS 12.0, watchOS 5.0, macOS 10.14, *)
     public typealias RawValue = Swift.UInt16
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var interface: Network.NWInterface? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   public var txtRecord: Network.NWTXTRecord? {
     get
   }
-  #endif
+  @available(macOS 26.4, iOS 26.4, watchOS 26.4, tvOS 26.4, visionOS 26.4, *)
+  public init?(copying endpoint: Network.NWEndpoint, newPort: Network.NWEndpoint.Port)
   public static func == (lhs: Network.NWEndpoint, rhs: Network.NWEndpoint) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var debugDescription: Swift.String {
@@ -590,9 +532,7 @@ public class NWProtocolQUIC : Network.NWProtocol {
     public let code: Swift.UInt64
     public let reason: Swift.String?
     public init(integerLiteral code: Swift.UInt64)
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(code: Swift.UInt64, reason: Swift.String? = nil)
-    #endif
     @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias IntegerLiteralType = Swift.UInt64
   }
@@ -600,11 +540,9 @@ public class NWProtocolQUIC : Network.NWProtocol {
     public var securityProtocolMetadata: Security.sec_protocol_metadata_t {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var negotiatedALPN: Swift.String? {
       get
     }
-    #endif
     public var streamIdentifier: Swift.UInt64 {
       get
     }
@@ -687,26 +625,20 @@ extension Network.NWError : Foundation.CustomNSError {
     public let name: Swift.String?
     public let type: Swift.String
     public let domain: Swift.String?
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public var txtRecordObject: Network.NWTXTRecord? {
       get
       set
     }
-    #endif
     public let txtRecord: Foundation.Data?
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public var noAutoRename: Swift.Bool {
       get
       set
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(name: Swift.String? = nil, type: Swift.String, domain: Swift.String? = nil, txtRecord: Foundation.Data? = nil)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public init(name: Swift.String? = nil, type: Swift.String, domain: Swift.String? = nil, txtRecord: Network.NWTXTRecord)
-    #endif
     @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
     public init(applicationService: Swift.String)
   }
@@ -718,35 +650,27 @@ extension Network.NWError : Foundation.CustomNSError {
     case cancelled
     public static func == (a: Network.NWListener.State, b: Network.NWListener.State) -> Swift.Bool
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public var newConnectionHandler: (@Sendable (_ connection: Network.NWConnection) -> Swift.Void)? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   @preconcurrency final public var newConnectionGroupHandler: (@Sendable (_ group: Network.NWConnectionGroup) -> Swift.Void)? {
     get
     set
   }
-  #endif
   final public var state: Network.NWListener.State {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public var stateUpdateHandler: (@Sendable (_ newState: Network.NWListener.State) -> Swift.Void)? {
     get
     set
   }
-  #endif
   final public let parameters: Network.NWParameters
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var service: Network.NWListener.Service? {
     get
     set
   }
-  #endif
   @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public static let InfiniteConnectionLimit: Swift.Int
   @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
@@ -754,33 +678,27 @@ extension Network.NWError : Foundation.CustomNSError {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var port: Network.NWEndpoint.Port? {
     get
   }
-  #endif
   public enum ServiceRegistrationChange : Swift.Sendable {
     case add(Network.NWEndpoint)
     case remove(Network.NWEndpoint)
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public var serviceRegistrationUpdateHandler: (@Sendable (_ change: Network.NWListener.ServiceRegistrationChange) -> Swift.Void)? {
     get
     set
   }
-  #endif
   public init(using: Network.NWParameters, on: Network.NWEndpoint.Port = .any) throws
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   convenience public init(applicationService name: Swift.String, using parameters: Network.NWParameters = .applicationService) throws
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   convenience public init(service: Network.NWListener.Service, using parameters: Network.NWParameters) throws
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, introduced: 13.0, deprecated: 15.0, message: "Use init(launchdSocketKey:parameters:)")
   @available(iOS, unavailable)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
   convenience public init?(launchd key: Swift.String, using parameters: Network.NWParameters)
-  #endif
   @available(macOS 13.0, *)
   @backDeployed(before: macOS 15.0)
   @available(iOS, unavailable)
@@ -788,11 +706,9 @@ extension Network.NWError : Foundation.CustomNSError {
   @available(tvOS, unavailable)
   convenience public init(launchdSocketKey: Swift.String, parameters: Network.NWParameters)
   final public func start(queue: Dispatch.DispatchQueue)
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var queue: Dispatch.DispatchQueue? {
     get
   }
-  #endif
   final public func cancel()
   @objc deinit
 }
@@ -949,19 +865,15 @@ public struct NWPath : Swift.Equatable, Swift.CustomDebugStringConvertible, Swif
     @available(tvOS, introduced: 12.0, deprecated: 17.0, message: "setting currentPath not supported")
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public var pathUpdateHandler: (@Sendable (_ newPath: Network.NWPath) -> Swift.Void)? {
     get
     set
   }
-  #endif
   final public func start(queue: Dispatch.DispatchQueue)
   final public func cancel()
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var queue: Dispatch.DispatchQueue? {
     get
   }
-  #endif
   public init()
   @objc deinit
   @available(macOS 13.0, *)
@@ -985,9 +897,7 @@ extension Network.NWPathMonitor : Swift.Sendable, Swift.CustomDebugStringConvert
   }
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
   public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-    #if compiler(>=5.3) && $NonescapableTypes
     public mutating func next() async -> Network.NWPathMonitor.Element?
-    #endif
     @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias Element = Network.NWPathMonitor.Element
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
@@ -1021,12 +931,10 @@ final public class NWEthernetChannel : Swift.CustomDebugStringConvertible {
   final public var state: Network.NWEthernetChannel.State {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public var stateUpdateHandler: (@Sendable (_ state: Network.NWEthernetChannel.State) -> Swift.Void)? {
     get
     set
   }
-  #endif
   final public let etherType: Swift.UInt16
   final public let interface: Network.NWInterface
   public init(on interface: Network.NWInterface, etherType: Swift.UInt16)
@@ -1043,19 +951,13 @@ final public class NWEthernetChannel : Swift.CustomDebugStringConvertible {
     get
   }
   final public func start(queue: Dispatch.DispatchQueue)
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var queue: Dispatch.DispatchQueue? {
     get
   }
-  #endif
   final public func cancel()
   public struct EthernetAddress : Swift.Hashable, Swift.CustomDebugStringConvertible, Swift.Sendable {
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(_ rawValue: Foundation.Data)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(_ string: Swift.String)
-    #endif
     public var debugDescription: Swift.String {
       get
     }
@@ -1068,15 +970,11 @@ final public class NWEthernetChannel : Swift.CustomDebugStringConvertible {
       get
     }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public func send(content: Foundation.Data, to remoteAddress: Network.NWEthernetChannel.EthernetAddress, vlanTag: Swift.UInt16, completion: @escaping @Sendable (_ error: Network.NWError?) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public var receiveHandler: (@Sendable (_ content: Foundation.Data, _ vlanTag: Swift.UInt16, _ localAddress: Network.NWEthernetChannel.EthernetAddress, _ remoteAddress: Network.NWEthernetChannel.EthernetAddress) -> Swift.Void)? {
     get
     set
   }
-  #endif
   @objc deinit
 }
 @available(macOS 14.0, *)
@@ -1184,58 +1082,38 @@ final public class NetworkListener<ApplicationProtocol> : Swift.Sendable, Swift.
     case add(Network.NWEndpoint)
     case remove(Network.NWEndpoint)
   }
-  #if compiler(>=5.3) && $IsolatedAny
   public typealias StateUpdateHandler = @isolated(any) @Sendable (_ listener: Network.NetworkListener<ApplicationProtocol>, _ state: Network.NetworkListener<ApplicationProtocol>.State) -> Swift.Void
-  #endif
-  #if compiler(>=5.3) && $IsolatedAny
   public typealias ServiceRegistrationUpdateHandler = @isolated(any) @Sendable (_ listener: Network.NetworkListener<ApplicationProtocol>, _ change: Network.NetworkListener<ApplicationProtocol>.ServiceRegistrationChange) -> Swift.Void
-  #endif
   final public var debugDescription: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(for provider: (any Network.ListenerProvider)? = nil, @Network.ProtocolStackBuilder<ApplicationProtocol> using builder: () -> ApplicationProtocol) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(for provider: (any Network.ListenerProvider)? = nil, using builder: Network.NWParametersBuilder<ApplicationProtocol>) throws
-  #endif
-  #if compiler(>=5.3) && $IsolatedAny
   @discardableResult
   final public func onStateUpdate(@_inheritActorContext _ handler: @escaping @isolated(any) @Sendable (_ listener: Network.NetworkListener<ApplicationProtocol>, _ state: Network.NetworkListener<ApplicationProtocol>.State) -> Swift.Void) -> Self
-  #endif
-  #if compiler(>=5.3) && $IsolatedAny
   @discardableResult
   final public func onServiceRegistrationUpdate(@_inheritActorContext _ handler: @escaping @isolated(any) @Sendable (_ listener: Network.NetworkListener<ApplicationProtocol>, _ change: Network.NetworkListener<ApplicationProtocol>.ServiceRegistrationChange) -> Swift.Void) -> Self
-  #endif
   final public func newConnectionLimit(_ limit: Swift.Int) -> Self
   final public var newConnectionLimit: Swift.Int {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var service: Network.NWListener.Service? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var port: Network.NWEndpoint.Port? {
     get
   }
-  #endif
   @objc deinit
 }
 @available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
 extension Network.NetworkListener where ApplicationProtocol : Network.OneToOneProtocol {
-  #if compiler(>=5.3) && $IsolatedAny
   final public func run(@_inheritActorContext _ handler: @escaping @isolated(any) @Sendable (Network.NetworkConnection<ApplicationProtocol>) async throws -> Swift.Void) async throws
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
 extension Network.NetworkListener where ApplicationProtocol : Network.MultiplexProtocol {
-  #if compiler(>=5.3) && $IsolatedAny
   final public func run(@_inheritActorContext _ handler: @escaping @isolated(any) @Sendable (Network.NetworkConnection<ApplicationProtocol>) async throws -> Swift.Void) async throws
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
 public protocol ListenerProvider {
@@ -1243,18 +1121,14 @@ public protocol ListenerProvider {
 }
 @available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
 public struct BonjourListenerProvider : Network.ListenerProvider {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(name: Swift.String? = nil, type: Swift.String, domain: Swift.String? = nil, txtRecord: Network.NWTXTRecord? = nil)
-  #endif
   public var service: Network.NWListener.Service {
     get
   }
 }
 @available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
 extension Network.ListenerProvider where Self == Network.BonjourListenerProvider {
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func bonjour(name: Swift.String? = nil, type: Swift.String, domain: Swift.String? = nil, txtRecord: Network.NWTXTRecord? = nil) -> Network.BonjourListenerProvider
-  #endif
 }
 @_hasMissingDesignatedInitializers @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 @_objcRuntimeName(_TtC7Network21_NWProtocolDefinition) public class NWProtocolDefinition : Swift.Equatable, Swift.CustomDebugStringConvertible, @unchecked Swift.Sendable {
@@ -1285,24 +1159,20 @@ public class NWProtocolFramer : Network.NWProtocol {
   }
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class Options : Network.NWProtocolOptions {
     public init(definition: Network.NWProtocolFramer.Definition)
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 12.3, iOS 15.4, watchOS 8.4, tvOS 15.4, *)
     public subscript(key: Swift.String) -> Any? {
       get
       set(value)
     }
-    #endif
     @objc deinit
   }
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class Message : Network.NWProtocolMetadata {
     public init(definition: Network.NWProtocolFramer.Definition)
     public init(instance: Network.NWProtocolFramer.Instance)
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(key: Swift.String) -> Any? {
       get
       set(value)
     }
-    #endif
     @objc deinit
   }
   @_hasMissingDesignatedInitializers final public class Instance : Swift.CustomDebugStringConvertible, Swift.Sendable {
@@ -1310,18 +1180,12 @@ public class NWProtocolFramer : Network.NWProtocol {
       get
     }
     final public func markReady()
-    #if compiler(>=5.3) && $NonescapableTypes
     final public func markFailed(error: Network.NWError?)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     final public func parseInput(minimumIncompleteLength: Swift.Int, maximumLength: Swift.Int, parse: (_ buffer: Swift.UnsafeMutableRawBufferPointer?, _ isComplete: Swift.Bool) -> Swift.Int) -> Swift.Bool
-    #endif
     final public func deliverInput(data: Foundation.Data, message: Network.NWProtocolFramer.Message, isComplete: Swift.Bool)
     final public func deliverInputNoCopy(length: Swift.Int, message: Network.NWProtocolFramer.Message, isComplete: Swift.Bool) -> Swift.Bool
     final public func passThroughInput()
-    #if compiler(>=5.3) && $NonescapableTypes
     final public func parseOutput(minimumIncompleteLength: Swift.Int, maximumLength: Swift.Int, parse: (_ buffer: Swift.UnsafeMutableRawBufferPointer?, _ isComplete: Swift.Bool) -> Swift.Int) -> Swift.Bool
-    #endif
     final public func writeOutput(data: Foundation.Data)
     @usableFromInline
     final internal func writeOutput(discontiguousData: Dispatch.DispatchData)
@@ -1342,21 +1206,15 @@ public class NWProtocolFramer : Network.NWProtocol {
     }
     final public func scheduleWakeup(wakeupTime: Network.NWProtocolFramer.Instance.WakeupTime)
     final public func async(execute: @escaping () -> Swift.Void)
-    #if compiler(>=5.3) && $NonescapableTypes
     final public var remote: Network.NWEndpoint? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     final public var local: Network.NWEndpoint? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     final public var parameters: Network.NWParameters? {
       get
     }
-    #endif
     @available(macOS 12.3, iOS 15.4, watchOS 8.4, tvOS 15.4, *)
     final public var options: Network.NWProtocolFramer.Options {
       get
@@ -1484,9 +1342,7 @@ public protocol NWParametersProvider {
   func expensivePathsProhibited(_ prohibited: Swift.Bool) -> Self
   func constrainedPathsProhibited(_ prohibited: Swift.Bool) -> Self
   func noProxiesPreferred(_ preferred: Swift.Bool) -> Self
-  #if compiler(>=5.3) && $NonescapableTypes
   func localEndpoint(_ endpoint: Network.NWEndpoint?) -> Self
-  #endif
   func localPort(_ port: Network.NWEndpoint.Port) -> Self
   func localEndpointReuseAllowed(_ allowed: Swift.Bool) -> Self
   func localOnly(_ local: Swift.Bool) -> Self
@@ -1507,9 +1363,7 @@ extension Network.NWParametersProvider {
   public func expensivePathsProhibited(_ prohibited: Swift.Bool) -> Self
   public func constrainedPathsProhibited(_ prohibited: Swift.Bool) -> Self
   public func noProxiesPreferred(_ noProxies: Swift.Bool) -> Self
-  #if compiler(>=5.3) && $NonescapableTypes
   public func localEndpoint(_ endpoint: Network.NWEndpoint?) -> Self
-  #endif
   public func localPort(_ port: Network.NWEndpoint.Port) -> Self
   public func localEndpointReuseAllowed(_ allowed: Swift.Bool) -> Self
   public func localOnly(_ local: Swift.Bool) -> Self
@@ -1550,9 +1404,7 @@ public struct TLS : Network.StreamProtocol {
   public init()
   public init(@Network.ProtocolStackBuilder<Network.TCP> _ builder: () -> Network.TCP)
   public func localIdentity(_ identity: Security.sec_identity_t) -> Network.TLS
-  #if compiler(>=5.3) && $IsolatedAny
   public func certificateValidator(@_inheritActorContext _ handler: @escaping @isolated(any) @Sendable (Security.sec_protocol_metadata_t, Security.sec_trust_t) async -> Swift.Bool) -> Network.TLS
-  #endif
   public enum PeerAuthentication {
     case none
     case optional
@@ -1569,9 +1421,7 @@ public struct TLS : Network.StreamProtocol {
   public func cipherSuiteGroups(_ groups: [Security.tls_ciphersuite_group_t]) -> Network.TLS
   public func earlyDataEnabled(_ enabled: Swift.Bool) -> Network.TLS
   public func ticketsEnabled(_ enabled: Swift.Bool) -> Network.TLS
-  #if compiler(>=5.3) && $NonescapableTypes
   public func version(min: Security.tls_protocol_version_t? = nil, max: Security.tls_protocol_version_t? = nil) -> Network.TLS
-  #endif
   @available(*, unavailable, message: "Pass a minimum or maximum version")
   public func version() -> Network.TLS
   @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
@@ -1627,9 +1477,7 @@ public struct QUIC : Network.MultiplexProtocol {
   }
   public struct TLS {
     public func localIdentity(_ identity: Security.sec_identity_t) -> Network.QUIC
-    #if compiler(>=5.3) && $IsolatedAny
     public func certificateValidator(@_inheritActorContext _ handler: @escaping @isolated(any) @Sendable (Security.sec_protocol_metadata_t, Security.sec_trust_t) async -> Swift.Bool) -> Network.QUIC
-    #endif
     public func peerAuthentication(_ preference: Network.TLS.PeerAuthentication) -> Network.QUIC
     public func cipherSuites(_ suites: [Security.tls_ciphersuite_t]) -> Network.QUIC
     public func ciphersuiteGroups(_ groups: [Security.tls_ciphersuite_group_t]) -> Network.QUIC
@@ -1782,9 +1630,7 @@ public struct Framer<T> : Network.MessageProtocol where T : Network.FramerProtoc
     public let isComplete: Swift.Bool
     public let lastMessage: Swift.Bool
     public let other: [Network.NWProtocolMetadata]
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(framer: Network.NWProtocolFramer.Message, isComplete: Swift.Bool, lastMessage: Swift.Bool, other: [Network.NWProtocolMetadata]?)
-    #endif
   }
   public typealias ContentType = Foundation.Data
   public var options: Network.NWProtocolFramer.Options
@@ -1876,26 +1722,18 @@ extension Network.NWProtocolIP.Metadata {
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
 final public class NetworkConnection<ApplicationProtocol> : Network.NetworkChannel<ApplicationProtocol>, @unchecked Swift.Sendable where ApplicationProtocol : Network.NetworkProtocolOptions {
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var currentPath: Network.NWPath? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var localEndpoint: Network.NWEndpoint? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var remoteEndpoint: Network.NWEndpoint? {
     get
   }
-  #endif
   final public func tryNextEndpoint()
-  #if compiler(>=5.3) && $IsolatedAny
   @discardableResult
   final public func onStateUpdate(@_inheritActorContext _ handler: @escaping @isolated(any) @Sendable (_ connection: Network.NetworkConnection<ApplicationProtocol>, _ state: Network.NetworkChannel<ApplicationProtocol>.State) -> Swift.Void) -> Self
-  #endif
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
@@ -1926,9 +1764,7 @@ public class NetworkChannel<ApplicationProtocol> : Swift.CustomDebugStringConver
   public var parameters: Network.NWParameters {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func metadata(definition: Network.NWProtocolDefinition) -> Network.NWProtocolMetadata?
-  #endif
   public func establishmentReport() async throws -> Network.NWConnection.EstablishmentReport
   public func dataTransferReport() async throws -> Network.NWConnection.DataTransferReport
   @objc deinit
@@ -1958,18 +1794,12 @@ extension Network.NetworkConnection where ApplicationProtocol : Network.Multiple
 }
 @available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
 extension Network.NetworkConnection where ApplicationProtocol : Network.OneToOneProtocol {
-  #if compiler(>=5.3) && $IsolatedAny
   @discardableResult
   final public func onPathUpdate(@_inheritActorContext _ handler: @escaping @isolated(any) @Sendable (_ connection: Network.NetworkConnection<ApplicationProtocol>, _ newPath: Network.NWPath) -> Swift.Void) -> Self
-  #endif
-  #if compiler(>=5.3) && $IsolatedAny
   @discardableResult
   final public func onViabilityUpdate(@_inheritActorContext _ handler: @escaping @isolated(any) @Sendable (_ connection: Network.NetworkConnection<ApplicationProtocol>, _ newViable: Swift.Bool) -> Swift.Void) -> Self
-  #endif
-  #if compiler(>=5.3) && $IsolatedAny
   @discardableResult
   final public func onBetterPathUpdate(@_inheritActorContext _ handler: @escaping @isolated(any) @Sendable (_ connection: Network.NetworkConnection<ApplicationProtocol>, _ newValue: Swift.Bool) -> Swift.Void) -> Self
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
 extension Network.QUIC {
@@ -2000,11 +1830,9 @@ extension Network.NetworkConnection where ApplicationProtocol == Network.QUIC {
   final public var securityProtocolMetadata: Security.sec_protocol_metadata_t {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var negotiatedALPN: Swift.String? {
     get
   }
-  #endif
   final public var remoteIdleTimeout: Swift.Int {
     get
   }
@@ -2030,12 +1858,8 @@ extension Network.NetworkConnection where ApplicationProtocol == Network.QUIC {
   final public var datagrams: Network.QUIC.Datagrams<Network.QUICDatagram> {
     get async throws
   }
-  #if compiler(>=5.3) && $IsolatedAny
   final public func inboundStreams(@_inheritActorContext _ handler: @escaping @isolated(any) @Sendable (Network.QUIC.Stream<Network.QUICStream>) async throws -> Swift.Void) async throws
-  #endif
-  #if compiler(>=5.3) && $IsolatedAny
   final public func inboundStreams<NewApplicationProtocol>(@Network.ProtocolStackBuilder<NewApplicationProtocol> prepending: @escaping (Network.QUICStream) -> NewApplicationProtocol, @_inheritActorContext _ handler: @escaping @isolated(any) @Sendable (Network.QUIC.Stream<NewApplicationProtocol>) async throws -> Swift.Void) async throws where NewApplicationProtocol : Network.OneToOneProtocol
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
 extension Network.NetworkChannel where ApplicationProtocol : Network.StreamProtocol {
@@ -2060,15 +1884,9 @@ extension Network.NetworkChannel where ApplicationProtocol == Network.WebSocket 
   public func sendIdempotent<Content>(_ content: Content, @Network.ProtocolMetadataBuilder metadata builder: () -> [Network.NWProtocolMetadata] = {[]}) where Content : Foundation.DataProtocol
   public func startSend(_ content: Swift.String, @Network.ProtocolMetadataBuilder metadata builder: () -> [Network.NWProtocolMetadata] = {[]}, handler: (_ send: (_ content: Swift.String, _ isComplete: Swift.Bool) async throws -> Swift.Void) async throws -> Swift.Void) async throws
   public func startSend<Content>(_ content: Content, @Network.ProtocolMetadataBuilder metadata builder: () -> [Network.NWProtocolMetadata] = {[]}, handler: (_ send: (_ content: Content, _ isComplete: Swift.Bool) async throws -> Swift.Void) async throws -> Swift.Void) async throws where Content : Foundation.DataProtocol
-  #if compiler(>=5.3) && $NonescapableTypes
   public func ping<Content>(_ content: Content? = nil, @Network.ProtocolMetadataBuilder metadata builder: () -> [Network.NWProtocolMetadata] = {[]}) async throws where Content : Foundation.DataProtocol
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func pong<Content>(_ content: Content? = nil, @Network.ProtocolMetadataBuilder metadata builder: () -> [Network.NWProtocolMetadata] = {[]}) async throws where Content : Foundation.DataProtocol
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func close(code: Network.NWProtocolWebSocket.CloseCode = .protocolCode(.normalClosure), reason: Swift.String? = nil, @Network.ProtocolMetadataBuilder metadata builder: () -> [Network.NWProtocolMetadata] = {[]}) async throws
-  #endif
   public func receive() async throws -> ApplicationProtocol.Message<Foundation.Data>
   public func startReceive(_ handler: (_ receive: (_ atLeast: Swift.Int, _ atMost: Swift.Int) async throws -> ApplicationProtocol.Message<Foundation.Data>) async throws -> Swift.Void) async throws
 }
@@ -2085,10 +1903,8 @@ extension Network.NetworkChannel {
 }
 @available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
 extension Network.NetworkChannel {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
   public func send<T>(_ content: Foundation.Data, lastMessage: Swift.Bool = false, metadata: Network.NWProtocolFramer.Message? = nil, @Network.ProtocolMetadataBuilder other builder: () -> [Network.NWProtocolMetadata] = {[]}) async throws where ApplicationProtocol == Network.Framer<T>, T : Network.FramerProtocol
-  #endif
   @available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
   public func receive<T>() async throws -> ApplicationProtocol.Message<Foundation.Data> where ApplicationProtocol == Network.Framer<T>, T : Network.FramerProtocol
 }
@@ -2209,49 +2025,37 @@ nonisolated(nonsending) public func withNetworkConnection<ApplicationProtocol>(t
   final public var state: Network.NWConnection.State {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public var stateUpdateHandler: (@Sendable (_ state: Network.NWConnection.State) -> Swift.Void)? {
     get
     set
   }
-  #endif
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
   final public var maximumDatagramSize: Swift.Int {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var currentPath: Network.NWPath? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public var pathUpdateHandler: (@Sendable (_ newPath: Network.NWPath) -> Swift.Void)? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public var viabilityUpdateHandler: (@Sendable (_ newIsViable: Swift.Bool) -> Swift.Void)? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public var betterPathUpdateHandler: (@Sendable (_ newHasBetterPath: Swift.Bool) -> Swift.Void)? {
     get
     set
   }
-  #endif
   final public let endpoint: Network.NWEndpoint
   final public let parameters: Network.NWParameters
   public init(to: Network.NWEndpoint, using: Network.NWParameters)
   convenience public init(host: Network.NWEndpoint.Host, port: Network.NWEndpoint.Port, using: Network.NWParameters)
   final public func start(queue: Dispatch.DispatchQueue)
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var queue: Dispatch.DispatchQueue? {
     get
   }
-  #endif
   final public func cancel()
   final public func forceCancel()
   final public func cancelCurrentEndpoint()
@@ -2265,42 +2069,27 @@ nonisolated(nonsending) public func withNetworkConnection<ApplicationProtocol>(t
     public var protocolMetadata: [Network.NWProtocolMetadata] {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public func protocolMetadata(definition: Network.NWProtocolDefinition) -> Network.NWProtocolMetadata?
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(identifier: Swift.String, expiration: Swift.UInt64 = 0, priority: Swift.Double = 0.5, isFinal: Swift.Bool = false, antecedent: Network.NWConnection.ContentContext? = nil, metadata: [Network.NWProtocolMetadata]? = [])
-    #endif
     public static let defaultMessage: Network.NWConnection.ContentContext
     public static let finalMessage: Network.NWConnection.ContentContext
     public static let defaultStream: Network.NWConnection.ContentContext
     @objc deinit
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public func receive(minimumIncompleteLength: Swift.Int, maximumLength: Swift.Int, completion: @escaping @Sendable (_ content: Foundation.Data?, _ contentContext: Network.NWConnection.ContentContext?, _ isComplete: Swift.Bool, _ error: Network.NWError?) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
   @preconcurrency final public func receiveDiscontiguous(minimumIncompleteLength: Swift.Int, maximumLength: Swift.Int, completion: @escaping @Sendable (_ content: Dispatch.DispatchData?, _ contentContext: Network.NWConnection.ContentContext?, _ isComplete: Swift.Bool, _ error: Network.NWError?) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public func receiveMessage(completion: @escaping @Sendable (_ content: Foundation.Data?, _ contentContext: Network.NWConnection.ContentContext?, _ isComplete: Swift.Bool, _ error: Network.NWError?) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
   @preconcurrency final public func receiveMessageDiscontiguous(completion: @escaping @Sendable (_ content: Dispatch.DispatchData?, _ contentContext: Network.NWConnection.ContentContext?, _ isComplete: Swift.Bool, _ error: Network.NWError?) -> Swift.Void)
-  #endif
   public enum SendCompletion {
     @preconcurrency case contentProcessed(@Sendable (_ error: Network.NWError?) -> Swift.Void)
     case idempotent
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public func send(content: Foundation.Data?, contentContext: Network.NWConnection.ContentContext = .defaultMessage, isComplete: Swift.Bool = true, completion: Network.NWConnection.SendCompletion)
-  #endif
   @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   @usableFromInline
   @preconcurrency final internal func send(discontiguousContent: Dispatch.DispatchData, contentContext: Network.NWConnection.ContentContext = .defaultMessage, isComplete: Swift.Bool = true, completion: Network.NWConnection.SendCompletion)
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   @preconcurrency @inlinable final public func send<Content>(content: Content?, contentContext: Network.NWConnection.ContentContext = .defaultMessage, isComplete: Swift.Bool = true, completion: Network.NWConnection.SendCompletion) where Content : Foundation.DataProtocol {
 		if let dispatchData = content as? DispatchData {
@@ -2313,11 +2102,8 @@ nonisolated(nonsending) public func withNetworkConnection<ApplicationProtocol>(t
 			send(content: nil, contentContext: contentContext, isComplete: isComplete, completion: completion)
 		}
 	}
-  #endif
   final public func batch(_ block: () -> Swift.Void)
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func metadata(definition: Network.NWProtocolDefinition) -> Network.NWProtocolMetadata?
-  #endif
   @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public struct EstablishmentReport : Swift.CustomDebugStringConvertible, Swift.Sendable {
     public var debugDescription: Swift.String {
@@ -2371,10 +2157,8 @@ nonisolated(nonsending) public func withNetworkConnection<ApplicationProtocol>(t
     }
     public let handshakes: [Network.NWConnection.EstablishmentReport.Handshake]
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   @preconcurrency final public func requestEstablishmentReport(queue: Dispatch.DispatchQueue, completion: @escaping @Sendable (_ report: Network.NWConnection.EstablishmentReport?) -> Swift.Void)
-  #endif
   @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public struct DataTransferReport : Swift.CustomDebugStringConvertible, Swift.Sendable {
     public var debugDescription: Swift.String {
@@ -2383,12 +2167,10 @@ nonisolated(nonsending) public func withNetworkConnection<ApplicationProtocol>(t
     public let duration: Foundation.TimeInterval
     public struct PathReport : Swift.Sendable {
       public let interface: Network.NWInterface
-      #if compiler(>=5.3) && $NonescapableTypes
       @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
       public var radioType: Network.NWInterface.RadioType? {
         get
       }
-      #endif
       public let receivedIPPacketCount: Swift.UInt64
       public let sentIPPacketCount: Swift.UInt64
       public let receivedTransportByteCount: Swift.UInt64
@@ -2428,9 +2210,7 @@ public class NWMulticastGroup : Network.NWGroupDescriptor, @unchecked Swift.Send
   }
   final public let sourceFilter: Network.NWEndpoint?
   final public let isUnicastDisabled: Swift.Bool
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(for groupAddresses: [Network.NWEndpoint], from: Network.NWEndpoint? = nil, disableUnicast: Swift.Bool = false) throws
-  #endif
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
@@ -2457,78 +2237,50 @@ final public class NWConnectionGroup : Swift.CustomDebugStringConvertible {
   final public var state: Network.NWConnectionGroup.State {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public var stateUpdateHandler: (@Sendable (_ state: Network.NWConnectionGroup.State) -> Swift.Void)? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   final public func metadata(definition: Network.NWProtocolDefinition) -> Network.NWProtocolMetadata?
-  #endif
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class Message : Network.NWConnection.ContentContext {
     public static let `default`: Network.NWConnectionGroup.Message
-    #if compiler(>=5.3) && $NonescapableTypes
     public var remoteEndpoint: Network.NWEndpoint? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var localEndpoint: Network.NWEndpoint? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
     public func metadata(definition: Network.NWProtocolDefinition) -> Network.NWProtocolMetadata?
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var path: Network.NWPath? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public func reply(content: Foundation.Data?, message: Network.NWConnectionGroup.Message = .default)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public func extractConnection() -> Network.NWConnection?
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     override public init(identifier: Swift.String, expiration: Swift.UInt64 = super, priority: Swift.Double = super, isFinal: Swift.Bool = super, antecedent: Network.NWConnection.ContentContext? = nil, metadata: [Network.NWProtocolMetadata]? = super)
-    #endif
     @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public init(nw: Network.nw_content_context_t)
     @objc deinit
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public func setReceiveHandler(maximumMessageSize: Swift.Int = Int.max, rejectOversizedMessages: Swift.Bool = true, handler: (@Sendable (_ message: Network.NWConnectionGroup.Message, _ content: Foundation.Data?, _ isComplete: Swift.Bool) -> Swift.Void)?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @preconcurrency final public func send(content: Foundation.Data?, to: Network.NWEndpoint? = nil, message: Network.NWConnectionGroup.Message = .default, completion: @escaping (_ error: Network.NWError?) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   @preconcurrency final public var newConnectionHandler: (@Sendable (_ connection: Network.NWConnection) -> Swift.Void)? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   final public func extract(connectionTo: Network.NWEndpoint? = nil, using: Network.NWProtocolOptions? = nil) -> Network.NWConnection?
-  #endif
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   final public func reinsert(connection: Network.NWConnection) -> Swift.Bool
   final public let descriptor: any Network.NWGroupDescriptor
   final public let parameters: Network.NWParameters
   public init(with: any Network.NWGroupDescriptor, using: Network.NWParameters)
   final public func start(queue: Dispatch.DispatchQueue)
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var queue: Dispatch.DispatchQueue? {
     get
   }
-  #endif
   final public func cancel()
   @objc deinit
 }
@@ -2537,14 +2289,10 @@ extension Network.NWConnectionGroup : Swift.Sendable {
 }
 @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWConnection {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   convenience public init?(message: Network.NWConnectionGroup.Message)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   convenience public init?(from: Network.NWConnectionGroup, to: Network.NWEndpoint? = nil, using: Network.NWProtocolOptions? = nil)
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
 public struct Bonjour : Network.BrowserProvider {
@@ -2571,9 +2319,7 @@ public struct Bonjour : Network.BrowserProvider {
 }
 @available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
 extension Network.BrowserProvider where Self == Network.Bonjour {
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func bonjour(_ type: Swift.String, domain: Swift.String? = nil, includeTxtRecord: Swift.Bool = false) -> Network.Bonjour
-  #endif
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public struct NWTXTRecord : Swift.Sendable {
@@ -2583,16 +2329,12 @@ public struct NWTXTRecord : Swift.Sendable {
     case string(Swift.String)
     @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
     case data(Foundation.Data)
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
     public var data: Foundation.Data? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
     public init(_ data: Foundation.Data?)
-    #endif
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (lhs: Network.NWTXTRecord.Entry, rhs: Network.NWTXTRecord.Entry) -> Swift.Bool
     public var debugDescription: Swift.String {
@@ -2603,26 +2345,34 @@ public struct NWTXTRecord : Swift.Sendable {
     }
   }
   public init(_ dictionary: [Swift.String : Swift.String] = [:])
+  @available(macOS 26.4, iOS 26.4, watchOS 26.4, tvOS 26.4, visionOS 26.4, *)
+  public init(_ dataDictionary: [Swift.String : Foundation.Data])
+  @available(macOS 26.4, iOS 26.4, watchOS 26.4, tvOS 26.4, visionOS 26.4, *)
+  public init(_ entryDictionary: [Swift.String : Network.NWTXTRecord.Entry])
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   public init(_ data: Foundation.Data)
   @discardableResult
   public mutating func removeEntry(key: Swift.String) -> Swift.Bool
-  #if compiler(>=5.3) && $NonescapableTypes
   public func getEntry(for key: Swift.String) -> Network.NWTXTRecord.Entry?
-  #endif
+  @available(macOS 26.4, iOS 26.4, watchOS 26.4, tvOS 26.4, visionOS 26.4, *)
+  public var entries: [Swift.String : Network.NWTXTRecord.Entry] {
+    get
+  }
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   public var data: Foundation.Data {
     get
   }
   @discardableResult
   public mutating func setEntry(_ entry: Network.NWTXTRecord.Entry, for key: Swift.String) -> Swift.Bool
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(key: Swift.String) -> Swift.String? {
     get
     set
   }
-  #endif
   public var dictionary: [Swift.String : Swift.String] {
+    get
+  }
+  @available(macOS 26.4, iOS 26.4, watchOS 26.4, tvOS 26.4, visionOS 26.4, *)
+  public var dataDictionary: [Swift.String : Foundation.Data] {
     get
   }
 }
@@ -2665,12 +2415,8 @@ extension Network.NWTXTRecord : Swift.CustomDebugStringConvertible {
   final public var debugDescription: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(tls: Network.NWProtocolTLS.Options?, tcp: Network.NWProtocolTCP.Options = NWProtocolTCP.Options())
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(dtls: Network.NWProtocolTLS.Options?, udp: Network.NWProtocolUDP.Options = NWProtocolUDP.Options())
-  #endif
   @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
   convenience public init(quic: Network.NWProtocolQUIC.Options)
   public init()
@@ -2694,28 +2440,22 @@ extension Network.NWTXTRecord : Swift.CustomDebugStringConvertible {
   final public class var udp: Network.NWParameters {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var requiredInterface: Network.NWInterface? {
     get
     set
   }
-  #endif
   final public var requiredInterfaceType: Network.NWInterface.InterfaceType {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var prohibitedInterfaces: [Network.NWInterface]? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var prohibitedInterfaceTypes: [Network.NWInterface.InterfaceType]? {
     get
     set
   }
-  #endif
   final public var prohibitExpensivePaths: Swift.Bool {
     get
     set
@@ -2734,12 +2474,10 @@ extension Network.NWTXTRecord : Swift.CustomDebugStringConvertible {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var requiredLocalEndpoint: Network.NWEndpoint? {
     get
     set
   }
-  #endif
   final public var allowLocalEndpointReuse: Swift.Bool {
     get
     set
@@ -2814,18 +2552,14 @@ extension Network.NWTXTRecord : Swift.CustomDebugStringConvertible {
       get
       set
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var transportProtocol: Network.NWProtocolOptions? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var internetProtocol: Network.NWProtocolOptions? {
       get
       set
     }
-    #endif
     @objc deinit
   }
   final public var defaultProtocolStack: Network.NWParameters.ProtocolStack {
@@ -2847,9 +2581,7 @@ extension Network.NWTXTRecord : Swift.CustomDebugStringConvertible {
       case tls(_: Network.NWEndpoint, serverAddresses: [Network.NWEndpoint])
       case https(_: Foundation.URL, serverAddresses: [Network.NWEndpoint])
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public func requireEncryptedNameResolution(_ requireEncryption: Swift.Bool, fallbackResolver: Network.NWParameters.PrivacyContext.ResolverConfiguration?)
-    #endif
     @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
     public var proxyConfigurations: [Network.ProxyConfiguration] {
       get
@@ -2902,16 +2634,12 @@ public struct ProxyConfiguration : Swift.CustomDebugStringConvertible, Swift.Sen
   }
   public func applyCredential(username: Swift.String, password: Swift.String)
   public init(socksv5Proxy: Network.NWEndpoint)
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(httpCONNECTProxy: Network.NWEndpoint, tlsOptions: Network.NWProtocolTLS.Options? = nil)
-  #endif
   public struct RelayHop : Swift.CustomDebugStringConvertible, Swift.Sendable {
     public var debugDescription: Swift.String {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(http3RelayEndpoint: Network.NWEndpoint, http2RelayEndpoint: Network.NWEndpoint? = nil, tlsOptions: Network.NWProtocolTLS.Options = .init(), additionalHTTPHeaderFields: [Swift.String : Swift.String] = [:])
-    #endif
     public init(http2RelayEndpoint: Network.NWEndpoint, tlsOptions: Network.NWProtocolTLS.Options = .init(), additionalHTTPHeaderFields: [Swift.String : Swift.String] = [:])
   }
   public init(relayHops: [Network.ProxyConfiguration.RelayHop])
@@ -2931,7 +2659,6 @@ extension Foundation.URLSessionConfiguration {
     set
   }
 }
-prefix operator >>
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Network.NWProtocolWebSocket.Version : Swift.Equatable {}
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)

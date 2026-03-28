@@ -36,7 +36,9 @@ typedef NS_ENUM(NSInteger, SFSpeechRecognizerAuthorizationStatus) {
 
     /// The user granted your app's request to perform speech recognition.
     SFSpeechRecognizerAuthorizationStatusAuthorized,
-} API_AVAILABLE(ios(10.0), macos(10.15), tvos(18));
+}
+API_AVAILABLE(ios(10.0), macos(10.15))
+API_UNAVAILABLE(tvos);
 
 /**
  An object you use to check for the availability of the speech recognition service, and to initiate the speech recognition process.
@@ -71,7 +73,8 @@ typedef NS_ENUM(NSInteger, SFSpeechRecognizerAuthorizationStatus) {
  - **Remind the user when your app is recording.** For example, display a visual indicator and play sounds at the beginning and end of speech recognition to help users understand that they're being actively recorded. You can also display speech as it is being recognized so that users understand what your app is doing and see any mistakes made during the recognition process.
  - **Do not perform speech recognition on private or sensitive information.** Some speech is not appropriate for recognition. Don't send passwords, health or financial data, and other sensitive speech for recognition.
  */
-API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
+API_AVAILABLE(ios(10.0), macos(10.15))
+API_UNAVAILABLE(tvos)
 @interface SFSpeechRecognizer : NSObject
 
 /**
@@ -158,7 +161,7 @@ API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
 
  An ``SFSpeechRecognitionRequest`` can only honor its ``SFSpeechRecognitionRequest/requiresOnDeviceRecognition`` property if ``supportsOnDeviceRecognition`` is `true`. If ``supportsOnDeviceRecognition`` is `false`, the ``SFSpeechRecognizer`` requires a network in order to recognize speech.
  */
-@property (nonatomic) BOOL supportsOnDeviceRecognition API_AVAILABLE(ios(13), tvos(18));
+@property (nonatomic) BOOL supportsOnDeviceRecognition API_AVAILABLE(ios(13));
 
 /**
  The delegate object that handles changes to the availability of speech recognition services.
@@ -223,7 +226,8 @@ API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
 
  A speech recognizer's availability can change due to the device's Internet connection or other factors. Use this protocol's optional method to track those changes and provide an appropriate response. For example, when speech recognition becomes unavailable, you might disable related features in your app.
  */
-API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
+API_AVAILABLE(ios(10.0), macos(10.15))
+API_UNAVAILABLE(tvos)
 @protocol SFSpeechRecognizerDelegate <NSObject>
 @optional
 

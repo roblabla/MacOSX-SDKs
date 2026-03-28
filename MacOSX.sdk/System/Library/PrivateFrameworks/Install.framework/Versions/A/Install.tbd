@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Install.framework/Versions/A/Install'
 current-version: 1000
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AddMacroToPlistMacroList, _BundleIdentifierSearch, _BundleIdentifierSearchArgs, 
                        _BundleIdentifierValidationProc, _BundleVersionFilter, _BundleVersionFilterArgs, 
                        _CStringCopy, _CStringEqual, _CStringFree, _CStringHash, _CheckPathArgs, 

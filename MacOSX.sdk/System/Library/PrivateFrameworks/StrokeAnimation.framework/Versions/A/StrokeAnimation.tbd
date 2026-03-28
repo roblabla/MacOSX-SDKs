@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/StrokeAnimation.framework/Versions/A/StrokeAnimation'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15StrokeAnimation06_ProtoaB14RepresentationV03hasA5ColorSbvg', 
                        '_$s15StrokeAnimation06_ProtoaB14RepresentationV03hasA5ColorSbvpMV', 
                        '_$s15StrokeAnimation06_ProtoaB14RepresentationV05clearA5ColoryyF', 

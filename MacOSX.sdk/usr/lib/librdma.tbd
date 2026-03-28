@@ -1,20 +1,20 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ arm64-macos, arm64e-macos ]
+targets:         [ arm64e-macos ]
 install-name:    '/usr/lib/librdma.dylib'
 reexported-libraries:
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     libraries:       [ '/usr/lib/rdma/libibmad.dylib', '/usr/lib/rdma/libibumad.dylib', 
                        '/usr/lib/rdma/libibverbs.dylib', '/usr/lib/rdma/libmlx5.dylib' ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ arm64-macos, arm64e-macos ]
+targets:         [ arm64e-macos ]
 install-name:    '/usr/lib/rdma/libibmad.dylib'
 allowable-clients:
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     clients:         [ rdma ]
 exports:
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ _bm_call_via, _cc_config_status_via, _cc_query_status_via, 
                        _drpath2str, _ib_node_query_via, _ib_path_query, _ib_path_query_via, 
                        _ib_resolve_gid_via, _ib_resolve_guid_via, _ib_resolve_portid_str, 
@@ -68,10 +68,10 @@ exports:
                        _smp_set_status_via, _smp_set_via, _str2drpath, _xdump ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ arm64-macos, arm64e-macos ]
+targets:         [ arm64e-macos ]
 install-name:    '/usr/lib/rdma/libibumad.dylib'
 exports:
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ _sys_read_gid, _sys_read_guid, _sys_read_string, _sys_read_uint, 
                        _sys_read_uint64, _umad_addr_dump, _umad_attribute_str, _umad_class_str, 
                        _umad_close_port, _umad_common_mad_status_str, _umad_debug, 
@@ -86,13 +86,13 @@ exports:
                        _umad_status, _umad_unregister ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ arm64-macos, arm64e-macos ]
+targets:         [ arm64e-macos ]
 install-name:    '/usr/lib/rdma/libibverbs.dylib'
 allowable-clients:
-  - targets:         [ arm64-macos, arm64e-macos ]
-    clients:         [ ibumad, mlx5, rdma, rxe, thunderboltrdma ]
+  - targets:         [ arm64e-macos ]
+    clients:         [ fabric, ibumad, mlx5, rdma, rxe, thunderboltrdma ]
 exports:
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ ___ibv_query_gid_ex, ___ioctl_final_num_attrs, ___lib_query_port, 
                        ___verbs_log, __check_legacy, __execute_cmd_write, __execute_cmd_write_ex, 
                        __execute_ioctl_fallback, __ibv_query_gid_ex, __ibv_query_gid_table, 
@@ -158,13 +158,13 @@ exports:
                        _xorshift32 ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ arm64-macos, arm64e-macos ]
+targets:         [ arm64e-macos ]
 install-name:    '/usr/lib/rdma/libmlx5.dylib'
 allowable-clients:
-  - targets:         [ arm64-macos, arm64e-macos ]
-    clients:         [ rdma ]
+  - targets:         [ arm64e-macos ]
+    clients:         [ fabric, rdma ]
 exports:
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ ___mlx5_cq_clean, __mlx5dv_create_flow, __mlx5dv_mkey_check, 
                        __mlx5dv_query_port, _clean_dyn_uars, _dr_actions_build_attr, 
                        _dr_actions_build_ste_arr, _dr_arg_get_obj, _dr_arg_get_object_id, 

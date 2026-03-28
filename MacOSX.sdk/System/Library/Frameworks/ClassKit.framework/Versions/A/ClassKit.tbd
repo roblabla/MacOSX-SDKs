@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/ClassKit.framework/Versions/A/ClassKit'
-current-version: 151.1.4
+current-version: 151.4.18
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CLSAdminRequestNewAccountPlaceholderAppleID, _CLSAdoptPersona, 
                        _CLSAnswerActionFromString, _CLSAnswerStateFromString, _CLSAnswerTypeFromString, 
                        _CLSAppleContactsPrivateEntitlement, _CLSAppleContactsPrivateUIEntitlement, 
@@ -20,19 +18,18 @@ exports:
                        _CLSClassKitEnvironmentDevelopment, _CLSClassKitEnvironmentEntitlement, 
                        _CLSClassKitEnvironmentProduction, _CLSClassKitInternalEntitlement, 
                        _CLSClassKitRegisterDashboardEntitlement, _CLSClassKitSearchEntitlement, 
-                       _CLSClassKitUIEntitlement, _CLSClientInterface, _CLSClientRemoteObjectInterface, 
-                       _CLSCollaborationStateClasses, _CLSCollectionItemTypeFromString, 
-                       _CLSCollectionTypeFromString, _CLSConfigFileName, _CLSContextClasses, 
-                       _CLSContextPropertyAssignable, _CLSContextPropertyContentStoreIdentifier, 
-                       _CLSContextPropertyCurrentActivityID, _CLSContextPropertyCustomTypeName, 
-                       _CLSContextPropertyDisplayOrder, _CLSContextPropertyIdentifierPath, 
-                       _CLSContextPropertyObjectIDPath, _CLSContextPropertyStableObjectIDPath, 
-                       _CLSContextPropertyStoreIdentifier, _CLSContextPropertyStoreTeamID, 
-                       _CLSContextPropertySuggestedAge, _CLSContextPropertySuggestedAgeLen, 
-                       _CLSContextPropertySuggestedAgeLoc, _CLSContextPropertySuggestedCompletionTime, 
-                       _CLSContextPropertySuggestedCompletionTimeLen, _CLSContextPropertySuggestedCompletionTimeLoc, 
-                       _CLSContextPropertySummary, _CLSContextPropertyThumbnail, 
-                       _CLSContextPropertyType, _CLSContextThumbnailMaximumAllowedDimension, 
+                       _CLSClientInterface, _CLSClientRemoteObjectInterface, _CLSCollaborationStateClasses, 
+                       _CLSCollectionItemTypeFromString, _CLSCollectionTypeFromString, 
+                       _CLSConfigFileName, _CLSContextClasses, _CLSContextPropertyAssignable, 
+                       _CLSContextPropertyContentStoreIdentifier, _CLSContextPropertyCurrentActivityID, 
+                       _CLSContextPropertyCustomTypeName, _CLSContextPropertyDisplayOrder, 
+                       _CLSContextPropertyIdentifierPath, _CLSContextPropertyObjectIDPath, 
+                       _CLSContextPropertyStableObjectIDPath, _CLSContextPropertyStoreIdentifier, 
+                       _CLSContextPropertyStoreTeamID, _CLSContextPropertySuggestedAge, 
+                       _CLSContextPropertySuggestedAgeLen, _CLSContextPropertySuggestedAgeLoc, 
+                       _CLSContextPropertySuggestedCompletionTime, _CLSContextPropertySuggestedCompletionTimeLen, 
+                       _CLSContextPropertySuggestedCompletionTimeLoc, _CLSContextPropertySummary, 
+                       _CLSContextPropertyThumbnail, _CLSContextPropertyType, _CLSContextThumbnailMaximumAllowedDimension, 
                        _CLSContextThumbnailMinimumAllowedDimension, _CLSContextTopicArtsAndMusic, 
                        _CLSContextTopicComputerScienceAndEngineering, _CLSContextTopicHealthAndFitness, 
                        _CLSContextTopicLiteracyAndWriting, _CLSContextTopicMath, 
@@ -165,7 +162,7 @@ exports:
                        CLSSettingsVisibilityController, CLSSliderAnswerFormat, CLSSurvey, 
                        CLSSurveyAnswerItem, CLSSurveyStep, CLSTimeInterval, CLSUserDefaults, 
                        CLSUtil, CLSUtilityService ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '$ld$install_name$os10.14$/System/Library/PrivateFrameworks/ClassKit.framework/Versions/A/ClassKit', 
                        '$ld$install_name$os10.15$/System/Library/PrivateFrameworks/ClassKit.framework/Versions/A/ClassKit' ]
 ...

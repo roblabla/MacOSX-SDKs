@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ScreenSharing.framework/Versions/A/ScreenSharing'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AskToCancelFileActiveFileTransfers, _AuthGetRandomBytes, 
                        _GetFlatInterfaceList, _GetSharedTimebase, _InterfaceItemToSocketAddress, 
                        _RDCreateSemaphore, _RDCreateTask, _RDDeleteSemaphore, _RDMutexDestroy, 

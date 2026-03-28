@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Feedback.framework/Versions/A/Feedback'
 swift-abi-version: 7
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/FeedbackService.framework/Versions/A/FeedbackService' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15FeedbackService15FBKSInteractionC0A0E05idealA8UIHeight12CoreGraphics7CGFloatVvg', 
                        '_$s15FeedbackService15FBKSInteractionC0A0E05idealA8UIHeight12CoreGraphics7CGFloatVvpMV', 
                        '_$s15FeedbackService15FBKSInteractionC0A0E12feedbackForm11interaction6action19attachmentDirectoryAD011FBKFeedbackE0CAC_AA14FBKSEvaluationC6ActionO10Foundation3URLVSgtYaF', 
@@ -901,13 +901,11 @@ exports:
                        _TtC8Feedback30FBKFeedbackDraftViewController, _TtC8Feedback32FBKFeedbackDraftLaunchController ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FeedbackService.framework/Versions/A/FeedbackService'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s15FeedbackService011CentralizedA15DaemonInterfaceCACycfC', 
                        '_$s15FeedbackService011CentralizedA15DaemonInterfaceCACycfc', 
                        '_$s15FeedbackService011CentralizedA15DaemonInterfaceCMa', 
@@ -1925,6 +1923,7 @@ exports:
                        '_$s15FeedbackService23FBKSLaunchConfigurationCMo', '_$s15FeedbackService23FBKSLaunchConfigurationCMu', 
                        '_$s15FeedbackService23FBKSLaunchConfigurationCN', '_$s15FeedbackService23FBKSLaunchConfigurationCSEAAMc', 
                        '_$s15FeedbackService23FBKSLaunchConfigurationCSeAAMc', '_$s15FeedbackService23FBKSLaunchConfigurationCfD', 
+                       '_$s15FeedbackService24ReportAConcernObjCBridgeC8evaluate11interaction6action04showA4Form25associateWithAppleAccount7sceneID18presentingBundleId010completionM6ResultySo19FBKSInteractionObjcC_So20FBKSEvaluationActionVS2bSSSgAPySDySSypGSg_s5Error_pSgtYbctFZ', 
                        '_$s15FeedbackService24ReportAConcernObjCBridgeC8evaluate11interaction6action04showA4Form25associateWithAppleAccount7sceneID18presentingBundleId10completionySo19FBKSInteractionObjcC_So20FBKSEvaluationActionVS2bSSSgAPys5Error_pSgctFZ', 
                        '_$s15FeedbackService24ReportAConcernObjCBridgeC9presented11interaction10completionySo19FBKSInteractionObjcC_ys5Error_pSgctFZ', 
                        '_$s15FeedbackService24ReportAConcernObjCBridgeCACycfC', '_$s15FeedbackService24ReportAConcernObjCBridgeCACycfc', 
@@ -2154,7 +2153,7 @@ exports:
                        _TtC15FeedbackService16DaemonConnection, _TtC15FeedbackService19CFBDaemonConnection, 
                        _TtC15FeedbackService23FeedbackDaemonInterface, _TtC15FeedbackService24ReportAConcernObjCBridge, 
                        _TtC15FeedbackService28FeedbackDaemonAdminInterface, _TtC15FeedbackService34CentralizedFeedbackDaemonInterface ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     objc-classes:    [ FBKSCampaign, FBKSCampaignError, FBKSDraftLauncher, FBKSFeedback, 
                        FBKSFeedbackCount, FBKSForm ]
 ...

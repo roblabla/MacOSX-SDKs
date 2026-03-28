@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_RealityKit_SwiftUI.framework/Versions/A/_RealityKit_SwiftUI'
-current-version: 403.60.3
+current-version: 403.100.11
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation16AttributedStringV07RealityA00bC9Converter01_D11Kit_SwiftUIMc', 
                        '_$s10Foundation16AttributedStringV19_RealityKit_SwiftUIE12convertBlockySo012NSAttributedC0CACcvMZ', 
                        '_$s10Foundation16AttributedStringV19_RealityKit_SwiftUIE12convertBlockySo012NSAttributedC0CACcvgZ', 
@@ -340,6 +340,10 @@ exports:
                        '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC015canRequestImageF7UpdatesAC0K0Vy_SbGvgTj', 
                        '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC015canRequestImageF7UpdatesAC0K0Vy_SbGvgTq', 
                        '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC015canRequestImageF7UpdatesAC0K0Vy_SbGvpMV', 
+                       '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC06isAutoF7EnabledSbvM', 
+                       '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC06isAutoF7EnabledSbvg', 
+                       '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC06isAutoF7EnabledSbvpMV', 
+                       '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC06isAutoF7EnabledSbvs', 
                        '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC0F5StateO12initializingyA2EmFWC', 
                        '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC0F5StateO2eeoiySbAE_AEtFZ', 
                        '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC0F5StateO5readyyA2EmFWC', 
@@ -390,6 +394,10 @@ exports:
                        '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC15isPausedUpdatesAC0J0Vy_SbGvpMV', 
                        '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC16beginNewScanPassyyFTj', 
                        '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC16beginNewScanPassyyFTq', 
+                       '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC17shouldPlayHapticsSbvM', 
+                       '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC17shouldPlayHapticsSbvg', 
+                       '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC17shouldPlayHapticsSbvpMV', 
+                       '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC17shouldPlayHapticsSbvs', 
                        '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC18numberOfShotsTakenSivgTj', 
                        '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC18numberOfShotsTakenSivgTq', 
                        '_$s19_RealityKit_SwiftUI20ObjectCaptureSessionC18numberOfShotsTakenSivpMV', 

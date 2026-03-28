@@ -1,17 +1,18 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GenerativeExperiencesRuntime.framework/Versions/A/GenerativeExperiencesRuntime'
-current-version: 209.29
+current-version: 222.35.5
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16GenerativeModels17AvailabilityStoreO0A18ExperiencesRuntimeE3set15lastUpdateEndedy10Foundation4DateV_tFZ', 
                        '_$s16GenerativeModels17AvailabilityStoreO0A18ExperiencesRuntimeE3set17lastUpdateChangedySb_tFZ', 
                        '_$s16GenerativeModels17AvailabilityStoreO0A18ExperiencesRuntimeE3set17lastUpdateStartedy10Foundation4DateV_tFZ', 
                        '_$s16GenerativeModels17AvailabilityStoreO0A18ExperiencesRuntimeE3set18latestNotificationySS_tFZ', 
                        '_$s16GenerativeModels17AvailabilityStoreO0A18ExperiencesRuntimeE3set19lastReadinessChangey10Foundation4DateV_tFZ', 
                        '_$s16GenerativeModels17AvailabilityStoreO0A18ExperiencesRuntimeE3set20lastCheckedReadinessy10Foundation4DateV_tFZ', 
+                       '_$s16GenerativeModels17AvailabilityStoreO0A18ExperiencesRuntimeE3set22assetDeliverySuspendedS2b_tFZ', 
                        '_$s16GenerativeModels17AvailabilityStoreO0A18ExperiencesRuntimeE3set7reasons6forAll6secureSbSayAC13UnifiedReasonOG_ST_pSS7ElementSTRts_XPSbtFZ', 
                        '_$s16GenerativeModels17AvailabilityStoreO0A18ExperiencesRuntimeE3set7reasons6forAll6secureSbSayAC13UnifiedReasonOG_ST_pSS7ElementSTRts_XPSbtFZfA1_', 
                        '_$s16GenerativeModels17AvailabilityStoreO0A18ExperiencesRuntimeE3set7reasons9forAllBut6secureSbSayAC13UnifiedReasonOG_ST_pSS7ElementSTRts_XPSbtFZ', 
@@ -198,14 +199,13 @@ exports:
                        '_$s28GenerativeExperiencesRuntime26OutputDenyListBundleRunnerON', 
                        '_$s28GenerativeExperiencesRuntime7CountryVMa', '_$s28GenerativeExperiencesRuntime7CountryVMn', 
                        '_$s28GenerativeExperiencesRuntime7CountryVN', '_$sSo14FLFollowUpItemC28GenerativeExperiencesRuntimeE024createOutOfStorageFollowbC016uniqueIdentifier22remainingSpaceRequired29timeInSecondsBeforeExpirationABSgSS_s6UInt64VSdtFZ', 
-                       '_$sSo14FLFollowUpItemC28GenerativeExperiencesRuntimeE029createAppleIntelligenceFollowbC016uniqueIdentifierABSgSS_tFZ', 
                        '_$sSo18NSNotificationNamea28GenerativeExperiencesRuntimeE13localeChangedABvgZ', 
                        '_$sSo18NSNotificationNamea28GenerativeExperiencesRuntimeE19siriLanguageChangedABvgZ', 
                        '_$sSo18NSNotificationNamea28GenerativeExperiencesRuntimeE25preferredLanguagesChangedABvgZ', 
                        '_$sSo20FLFollowUpControllerC28GenerativeExperiencesRuntime06FollowbC8ProtocolACMc', 
                        '_$sSo20FLFollowUpControllerC28GenerativeExperiencesRuntime06FollowbC8ProtocolACWP' ]
     objc-classes:    [ ProfilePreferencesChangeHandler ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ '_$s28GenerativeExperiencesRuntime29UniversalEmbeddingModelClientC5embed_7versionSay10Foundation4DataVGSaySSG_SutYaKF', 
                        '_$s28GenerativeExperiencesRuntime29UniversalEmbeddingModelClientC5embed_7versionSay10Foundation4DataVGSaySSG_SutYaKFTu', 
                        '_$s28GenerativeExperiencesRuntime29UniversalEmbeddingModelClientCACyKcfC', 

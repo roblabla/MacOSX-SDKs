@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-macos26.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 13.2.8 -module-name GameController
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-macos26.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 13.4.9 -module-name GameController
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import CoreServices
 import Dispatch
 @_exported import GameController
@@ -13,11 +13,9 @@ import os.log
 import os
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct GCPhysicalInputElementCollection<T> : Swift.Collection where T : GameController.GCPhysicalInputElement {
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(elementName: Swift.String) -> T? {
     get
   }
-  #endif
   public typealias Element = T
   public struct Index : Swift.Comparable {
     public static func == (lhs: GameController.GCPhysicalInputElementCollection<T>.Index, rhs: GameController.GCPhysicalInputElementCollection<T>.Index) -> Swift.Bool
@@ -63,40 +61,30 @@ extension GameController.GCPhysicalInputElementName : GameController.GCPhysicalI
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension GameController.GCPhysicalInputElementCollection where T == any GameController.GCPhysicalInputElement {
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(elementName: GameController.GCPhysicalInputElementName) -> T? {
     get
   }
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
 extension GameController.GCPhysicalInputElementCollection {
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript<Name>(elementName: Name) -> Name.PhysicalInputElement? where Name : GameController.GCPhysicalInputElementTypedName {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript<Name>(elementName: Name) -> (any GameController.GCPhysicalInputElement)? where T == any GameController.GCPhysicalInputElement, Name : GameController.GCPhysicalInputElementTypedName {
     get
   }
-  #endif
 }
 extension GameController.GCDevicePhysicalInputStateDiff {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
   @_transparent @_disfavoredOverload public func changedElements() -> Foundation.NSEnumerator? {
         return __changedElements()
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
   @backDeployed(before: macOS 14.0, iOS 17.0, tvOS 17.0)
   @inlinable public func changedElements() -> (some Swift.Sequence<any GameController.GCPhysicalInputElement>)? {
         return __changedElements()?.lazy.compactMap { $0 as? any GCPhysicalInputElement }
     }
   
-  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct GCAxisElementName : Swift.RawRepresentable, Swift.Hashable, Swift.Sendable {
@@ -113,11 +101,9 @@ public struct GCAxisElementName : Swift.RawRepresentable, Swift.Hashable, Swift.
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension GameController.GCPhysicalInputElementCollection where T == any GameController.GCAxisElement {
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(elementName: GameController.GCAxisElementName) -> T? {
     get
   }
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
 extension GameController.GCAxisElementName : GameController.GCPhysicalInputElementTypedName {
@@ -133,9 +119,7 @@ extension GameController.GCMouse {
     }
     public var mouse: GameController.GCMouse
     public init(mouse: GameController.GCMouse)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> GameController.GCMouse.DidConnectMessage?
-    #endif
   }
   @available(macOS 26, iOS 26, tvOS 26, visionOS 26, *)
   public struct DidDisconnectMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -145,9 +129,7 @@ extension GameController.GCMouse {
     }
     public var mouse: GameController.GCMouse
     public init(mouse: GameController.GCMouse)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> GameController.GCMouse.DidDisconnectMessage?
-    #endif
   }
   @available(macOS 26, iOS 26, tvOS 26, visionOS 26, *)
   public struct DidBecomeCurrentMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -157,9 +139,7 @@ extension GameController.GCMouse {
     }
     public var mouse: GameController.GCMouse
     public init(mouse: GameController.GCMouse)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> GameController.GCMouse.DidBecomeCurrentMessage?
-    #endif
   }
   @available(macOS 26, iOS 26, tvOS 26, visionOS 26, *)
   public struct DidStopBeingCurrentMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -169,9 +149,7 @@ extension GameController.GCMouse {
     }
     public var mouse: GameController.GCMouse
     public init(mouse: GameController.GCMouse)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> GameController.GCMouse.DidStopBeingCurrentMessage?
-    #endif
   }
 }
 @available(macOS 26, iOS 26, tvOS 26, visionOS 26, *)
@@ -208,9 +186,7 @@ extension GameController.GCKeyboard {
     }
     public var keyboard: GameController.GCKeyboard
     public init(keyboard: GameController.GCKeyboard)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> GameController.GCKeyboard.DidConnectMessage?
-    #endif
   }
   @available(macOS 26, iOS 26, tvOS 26, visionOS 26, *)
   public struct DidDisconnectMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -220,9 +196,7 @@ extension GameController.GCKeyboard {
     }
     public var keyboard: GameController.GCKeyboard
     public init(keyboard: GameController.GCKeyboard)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> GameController.GCKeyboard.DidDisconnectMessage?
-    #endif
   }
 }
 @available(macOS 26, iOS 26, tvOS 26, visionOS 26, *)
@@ -253,9 +227,7 @@ extension GameController.GCRacingWheel {
     }
     public var racingWheel: GameController.GCRacingWheel
     public init(racingWheel: GameController.GCRacingWheel)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> GameController.GCRacingWheel.DidConnectMessage?
-    #endif
   }
   @available(macOS 26.0, macCatalyst 26.0, *)
   @available(iOS, unavailable)
@@ -268,9 +240,7 @@ extension GameController.GCRacingWheel {
     }
     public var racingWheel: GameController.GCRacingWheel
     public init(racingWheel: GameController.GCRacingWheel)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> GameController.GCRacingWheel.DidDisconnectMessage?
-    #endif
   }
 }
 @available(macOS 26.0, macCatalyst 26.0, *)
@@ -325,11 +295,9 @@ public struct GCDirectionPadElementName : Swift.RawRepresentable, Swift.Hashable
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension GameController.GCPhysicalInputElementCollection where T == any GameController.GCDirectionPadElement {
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(elementName: GameController.GCDirectionPadElementName) -> T? {
     get
   }
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
 extension GameController.GCDirectionPadElementName : GameController.GCPhysicalInputElementTypedName {
@@ -351,9 +319,7 @@ extension GameController.GCStylus {
     }
     public var stylus: GameController.GCStylus
     public init(stylus: GameController.GCStylus)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> GameController.GCStylus.DidConnectMessage?
-    #endif
   }
   @available(visionOS 26.0, *)
   @available(macOS, unavailable)
@@ -366,9 +332,7 @@ extension GameController.GCStylus {
     }
     public var stylus: GameController.GCStylus
     public init(stylus: GameController.GCStylus)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> GameController.GCStylus.DidDisconnectMessage?
-    #endif
   }
 }
 @available(visionOS 26.0, *)
@@ -559,11 +523,9 @@ public struct GCSwitchElementName : Swift.RawRepresentable, Swift.Hashable, Swif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension GameController.GCPhysicalInputElementCollection where T == any GameController.GCSwitchElement {
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(elementName: GameController.GCSwitchElementName) -> T? {
     get
   }
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
 extension GameController.GCSwitchElementName : GameController.GCPhysicalInputElementTypedName {
@@ -579,9 +541,7 @@ extension GameController.GCController {
     }
     public var controller: GameController.GCController
     public init(controller: GameController.GCController)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> GameController.GCController.DidConnectMessage?
-    #endif
   }
   @available(macOS 26, iOS 26, tvOS 26, visionOS 26, *)
   public struct DidDisconnectMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -591,9 +551,7 @@ extension GameController.GCController {
     }
     public var controller: GameController.GCController
     public init(controller: GameController.GCController)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> GameController.GCController.DidDisconnectMessage?
-    #endif
   }
   @available(macOS 26, iOS 26, tvOS 26, visionOS 26, *)
   public struct DidBecomeCurrentMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -603,9 +561,7 @@ extension GameController.GCController {
     }
     public var controller: GameController.GCController
     public init(controller: GameController.GCController)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> GameController.GCController.DidBecomeCurrentMessage?
-    #endif
   }
   @available(macOS 26, iOS 26, tvOS 26, visionOS 26, *)
   public struct DidStopBeingCurrentMessage : Foundation.NotificationCenter.MainActorMessage {
@@ -615,9 +571,7 @@ extension GameController.GCController {
     }
     public var controller: GameController.GCController
     public init(controller: GameController.GCController)
-    #if compiler(>=5.3) && $NonescapableTypes
     @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> GameController.GCController.DidStopBeingCurrentMessage?
-    #endif
   }
 }
 @available(macOS 26, iOS 26, tvOS 26, visionOS 26, *)
@@ -666,6 +620,10 @@ public struct GCButtonElementName : Swift.RawRepresentable, Swift.Hashable, Swif
   public static let trigger: GameController.GCButtonElementName
   public static let leftTrigger: GameController.GCButtonElementName
   public static let rightTrigger: GameController.GCButtonElementName
+  @available(macOS 26.4, iOS 26.4, tvOS 26.4, visionOS 26.4, *)
+  public static let leftSideButton: GameController.GCButtonElementName
+  @available(macOS 26.4, iOS 26.4, tvOS 26.4, visionOS 26.4, *)
+  public static let rightSideButton: GameController.GCButtonElementName
   @available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
   public static let thumbstickButton: GameController.GCButtonElementName
   public static let leftThumbstickButton: GameController.GCButtonElementName
@@ -720,11 +678,9 @@ public struct GCButtonElementName : Swift.RawRepresentable, Swift.Hashable, Swif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension GameController.GCPhysicalInputElementCollection where T == any GameController.GCButtonElement {
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(elementName: GameController.GCButtonElementName) -> T? {
     get
   }
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
 extension GameController.GCButtonElementName : GameController.GCPhysicalInputElementTypedName {

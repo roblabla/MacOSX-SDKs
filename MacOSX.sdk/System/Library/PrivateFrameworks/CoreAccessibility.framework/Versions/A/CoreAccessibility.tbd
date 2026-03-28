@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreAccessibility.framework/Versions/A/CoreAccessibility'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Collection17CoreAccessibility0c7ElementA9GeneratorPTl', 
                        '_$s10Foundation15AttributeScopesO17CoreAccessibilityE0E14TextAttributesV010BlockQuoteB0O12markdownNameSSvgZ', 
                        '_$s10Foundation15AttributeScopesO17CoreAccessibilityE0E14TextAttributesV010BlockQuoteB0O12markdownNameSSvpZMV', 

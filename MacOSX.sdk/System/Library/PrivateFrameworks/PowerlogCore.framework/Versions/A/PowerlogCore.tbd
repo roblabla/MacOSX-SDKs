@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PowerlogCore.framework/Versions/A/PowerlogCore'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _EnterSandbox, _PLADClientAddValueForScalarKey, _PLADClientBatchKeys, 
                        _PLADClientPushValueForDistributionKey, _PLADClientSetValueForScalarKey, 
                        _PLADMonotonicTimeGetCurrent, _PLADPushTimeIntervalForDistributionKeySinceStartTime, 
@@ -17,8 +17,10 @@ exports:
                        _PLLogThreadStats, _PLLogTimeManager, _PLLogZlib, _PLOSAMoveFileForSubmissions, 
                        _PLOSAPreferencesGetValue, _PLOSAPreferencesSetValue, _PLOSAPreferencesSynchronize, 
                        _PPSCoreStorageLog, _PPSDataStreamLog, _PPSLogAPFS, _PPSLogCommon, 
-                       _PPSLogSignpostController, _Stage, _eventBlock, _guiPrefix, 
-                       _kOSAProblemTypePowerLog, _kPLAccountingOperatorAggregateNameQualificationEnergy, 
+                       _PPSLogSignpostController, _Stage, _eventBlock, _getAllowblocklist, 
+                       _getClientPermissions, _getPerfPowerServicesTelemetryAllowlist, 
+                       _getPowermodels, _getRapidAllowblocklist, _getSessionsAllowlist, 
+                       _guiPrefix, _kOSAProblemTypePowerLog, _kPLAccountingOperatorAggregateNameQualificationEnergy, 
                        _kPLAccountingOperatorAggregateNameQualificationEnergyEnergy, 
                        _kPLAccountingOperatorAggregateNameQualificationEnergyNodeID, 
                        _kPLAccountingOperatorAggregateNameQualificationEnergyQualificationID, 

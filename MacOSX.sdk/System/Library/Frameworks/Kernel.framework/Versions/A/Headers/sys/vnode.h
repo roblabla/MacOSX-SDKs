@@ -1293,6 +1293,8 @@ int     vnode_getwithvid(vnode_t, uint32_t);
  *  On success, vnode_getwithref() returns with an iocount held on the vnode; this type of reference is intended to be held only for short periods of time (e.g.
  *  across a function call) and provides a strong guarantee about the life of the vnode. vnodes with positive iocounts cannot be
  *  recycled. An iocount is required for any operation on a vnode.
+ *  @warning vnode_getwithref() should NOT be called with an existing iocount already held by the caller as this can deadlock during vnode reclaim.
+ *
  *  @return 0 for success, ENOENT if the vnode is dead, in the process of being reclaimed, or has been recycled and reused.
  */
 int     vnode_getwithref(vnode_t vp);
@@ -1801,11 +1803,15 @@ int     vnode_isdirty(vnode_t vp);
 
 /*!
  *  @function vnode_getbackingvnode
- *  @abstract If the input vnode is a NULLFS mirrored vnode, then return the vnode it wraps.
- *  @Used to un-mirror files, primarily for security purposes. On success, out_vp is always set to a vp with an iocount. The caller must release the iocount.
- *  @param in_vp The vnode being asked about
- *  @param out_vpp A pointer to the output vnode, unchanged on error
- *  @return 0 on Success, ENOENT if in_vp doesn't mirror anything, EINVAL on parameter errors.
+ *  @abstract If the input vnode is a NULLFS mirrored vnode or devfs fdesc vnode, then return the vnode it wraps or references.
+ *  @discussion This function handles two types of vnodes that reference other vnodes:
+ *              1. NULLFS mirrored vnodes - returns the vnode being mirrored
+ *              2. devfs fdesc vnodes - resolves the file descriptor to find the backing vnode
+ *  @Used to un-mirror files and resolve fdesc references, primarily for security purposes. On success, out_vp is always set to a vp with an iocount. The caller must release the iocount.
+ *  @param in_vp The vnode being asked about (must not be NULL)
+ *  @param out_vpp A pointer to the output vnode (must not be NULL), unchanged on error
+ *  @return 0 on Success, ENOENT if in_vp doesn't mirror/reference anything, EINVAL if in_vp or out_vpp is NULL.
+ *          For fdesc vnodes: ESRCH if no current process context is available.
  */
 int vnode_getbackingvnode(vnode_t in_vp, vnode_t* out_vpp);
 

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MemoryAccounting.framework/Versions/A/MemoryAccounting'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16MemoryAccounting0A9SubsystemV11descriptionSSvg', '_$s16MemoryAccounting0A9SubsystemV11descriptionSSvpMV', 
                        '_$s16MemoryAccounting0A9SubsystemV4nameSSvM', '_$s16MemoryAccounting0A9SubsystemV4nameSSvg', 
                        '_$s16MemoryAccounting0A9SubsystemV4nameSSvpMV', '_$s16MemoryAccounting0A9SubsystemV4nameSSvs', 

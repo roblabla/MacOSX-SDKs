@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_DeviceActivity_SwiftUI.framework/Versions/A/_DeviceActivity_SwiftUI'
-current-version: 392.2.3
+current-version: 392.4.9
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s13Configuration23_DeviceActivity_SwiftUI0bC11ReportScenePTl', 
                        '_$s14DeviceActivity0aB4DataV01_aB8_SwiftUIE16activitySegmentsAD0aB7ResultsVyAC0B7SegmentVGvg', 
                        '_$s14DeviceActivity0aB4DataV01_aB8_SwiftUIE16activitySegmentsAD0aB7ResultsVyAC0B7SegmentVGvpMV', 

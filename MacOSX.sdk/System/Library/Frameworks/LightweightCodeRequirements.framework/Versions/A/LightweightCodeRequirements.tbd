@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/LightweightCodeRequirements.framework/Versions/A/LightweightCodeRequirements'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s27LightweightCodeRequirements03SecB34CheckValidityWithOnDiskRequirement4code5flags11requirementAA16ValidationResultVSo0dB3Refa_So0D7CSFlagsVAA0hibJ0VtF', 
                        '_$s27LightweightCodeRequirements03SecB35CheckValidityWithProcessRequirement4code5flags11requirementAA16ValidationResultVSo0dB3Refa_So0D7CSFlagsVAA0hbI0VtF', 
                        '_$s27LightweightCodeRequirements06LaunchB11RequirementV12dataEncoding10Foundation4DataVvg', 

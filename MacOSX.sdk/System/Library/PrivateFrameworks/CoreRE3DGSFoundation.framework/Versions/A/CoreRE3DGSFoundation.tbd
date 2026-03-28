@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreRE3DGSFoundation.framework/Versions/A/CoreRE3DGSFoundation'
-current-version: 1.3.1
-compatibility-version: 1.3.1
+current-version: 1.3.2
+compatibility-version: 1.3.2
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIN4avir13CImageResizerINS_11fpclass_defIffNS_27CImageResizerDithererDefINLIfEEEEE11CThreadDataIhhEE, 
@@ -26,7 +26,7 @@ exports:
                        __ZTINSt3__110__function6__baseIFvPU27objcproto16MTLCommandBuffer11objc_objectjN9apple3dgs14ConvertMXIFaceEPU21objcproto10MTLTexture11objc_objectS7_N4simd8float4x4EEEE, 
                        __ZTINSt3__110__function6__baseIFvRN4cv3d9aspenbase11concurrency12AsyncManager13ThreadContextEEEE, 
                        __ZTINSt3__110__function6__baseIFvmEEE, __ZTINSt3__110__function6__baseIFvmRN4cv3d9aspenbase11concurrency12AsyncManager13ThreadContextEEEE, 
-                       __ZTINSt3__110__function6__funcINS_6__bindIRNS_8functionIFvmRN4cv3d9aspenbase11concurrency12AsyncManager13ThreadContextEEEEJRmRKNS_12placeholders4__phILi1EEEEEENS_9allocatorISJ_EEFvS9_EEE, 
+                       __ZTINSt3__110__function6__funcINS_6__bindIRNS_8functionIFvmRN4cv3d9aspenbase11concurrency12AsyncManager13ThreadContextEEEEJRmRKNS_12placeholders4__phILi1EEEEEEFvS9_EEE, 
                        __ZTINSt3__117bad_function_callE, __ZTINSt3__118__weak_result_typeINS_8functionIFvmRN4cv3d9aspenbase11concurrency12AsyncManager13ThreadContextEEEEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceIN4cv3d9aspenbase11concurrency12AsyncManager13ThreadContextENS_9allocatorIS5_EEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceIN4cv3d9aspenbase11concurrency6ThreadENS_9allocatorIS4_EEEE, 
@@ -66,7 +66,7 @@ exports:
                        __ZTSNSt3__110__function6__baseIFvPU27objcproto16MTLCommandBuffer11objc_objectjN9apple3dgs14ConvertMXIFaceEPU21objcproto10MTLTexture11objc_objectS7_N4simd8float4x4EEEE, 
                        __ZTSNSt3__110__function6__baseIFvRN4cv3d9aspenbase11concurrency12AsyncManager13ThreadContextEEEE, 
                        __ZTSNSt3__110__function6__baseIFvmEEE, __ZTSNSt3__110__function6__baseIFvmRN4cv3d9aspenbase11concurrency12AsyncManager13ThreadContextEEEE, 
-                       __ZTSNSt3__110__function6__funcINS_6__bindIRNS_8functionIFvmRN4cv3d9aspenbase11concurrency12AsyncManager13ThreadContextEEEEJRmRKNS_12placeholders4__phILi1EEEEEENS_9allocatorISJ_EEFvS9_EEE, 
+                       __ZTSNSt3__110__function6__funcINS_6__bindIRNS_8functionIFvmRN4cv3d9aspenbase11concurrency12AsyncManager13ThreadContextEEEEJRmRKNS_12placeholders4__phILi1EEEEEEFvS9_EEE, 
                        __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118__weak_result_typeINS_8functionIFvmRN4cv3d9aspenbase11concurrency12AsyncManager13ThreadContextEEEEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceIN4cv3d9aspenbase11concurrency12AsyncManager13ThreadContextENS_9allocatorIS5_EEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceIN4cv3d9aspenbase11concurrency6ThreadENS_9allocatorIS4_EEEE, 
@@ -86,7 +86,7 @@ exports:
                        __ZTSNSt3__134__maybe_derive_from_unary_functionINS_8functionIFvmRN4cv3d9aspenbase11concurrency12AsyncManager13ThreadContextEEEELb0EEE, 
                        __ZTSNSt3__135__maybe_derive_from_binary_functionINS_8functionIFvmRN4cv3d9aspenbase11concurrency12AsyncManager13ThreadContextEEEELb1EEE, 
                        __ZTSNSt3__16__bindIRNS_8functionIFvmRN4cv3d9aspenbase11concurrency12AsyncManager13ThreadContextEEEEJRmRKNS_12placeholders4__phILi1EEEEEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ __Z13GSVersionHashv, __Z20GSVersionNumberMajorv, __Z20GSVersionNumberMinorv, 
                        __Z20GSVersionNumberPatchv, __ZN12MetalContext19renderPipelineStateERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEES8_, 
                        __ZN12MetalContext20computePipelineStateERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEENS0_8optionalIU8__strongP29MTLStageInputOutputDescriptorEENS9_IU8__strongP25MTLFunctionConstantValuesEE, 

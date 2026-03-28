@@ -18,94 +18,181 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
+/// The system type that identifies a share record.
 CK_EXTERN CKRecordType const CKRecordTypeShare API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
-/*! A zone-wide CKShare always uses the record name @c CKRecordNameZoneWideShare.
- *  You can use this to fetch the @c CKShare record for the zone with a @c CKFetchRecordsOperation.
- */
+/// The name of a share record that manages a shared record zone.
+///
+/// When you create an instance of ``CKShare`` for sharing a record zone, CloudKit automatically assigns this constant as the ``CKRecord/ID/recordName`` element of the share record's ``CKRecord/recordID``. After you save the share record to iCloud, you can fetch it by reconstructing the record ID using this constant, as the following example shows:
+///
+/// ```swift
+/// func fetchShare(
+///     forZone zone: CKRecordZone,
+///     completion: @escaping (Result<CKShare, any Error>) -> Void
+/// ) {
+///     let database = CKContainer.default().privateCloudDatabase
+///
+///     // Use the 'CKRecordNameZoneWideShare' constant to create the record ID.
+///     let recordID = CKRecord.ID(recordName: CKRecordNameZoneWideShare,
+///                                zoneID: zone.zoneID)
+///
+///     // Fetch the share record from the specified record zone.
+///     database.fetch(withRecordID: recordID) { share, error in
+///         if let error = error {
+///             // If the fetch fails, inform the caller.
+///             completion(.failure(error))
+///         } else if let share = share as? CKShare {
+///             // Otherwise, pass the fetched share record to the
+///             // completion handler.
+///             completion(.success(share))
+///         } else {
+///             fatalError("Unable to fetch record with ID: \(recordID)")
+///         }
+///     }
+/// }
+/// ```
 CK_EXTERN NSString * const CKRecordNameZoneWideShare API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
-/*! Predefined keys in the @c CKRecordTypeShare schema.  They're used by the out of process UI flow to send a share, and as part of the share acceptance flow.  These are optional */
-
-/*! Value is a string.  Example for a recipe sharing app: "Pot Roast" */
+/// The system field key for the share's title.
+///
+/// This predefined key is part of the `CKRecordTypeShare` schema. The out of process UI flow uses this key to send a share, and as part of the share acceptance flow. It is an optional value on a `CKShare` record.
 CK_EXTERN CKRecordFieldKey const CKShareTitleKey API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
-/*! Value is a data blob suitable to pass into @code -[NSImage imageWithData:] or -[UIImage imageWithData:] @endcode */
+
+/// The system field key for the share's thumbnail image data.
+///
+/// This predefined key is part of the `CKRecordTypeShare` schema.  It is used by the out of process UI flow to send a share, and as part of the share acceptance flow.  It is an optional value on a `CKShare` record.
 CK_EXTERN CKRecordFieldKey const CKShareThumbnailImageDataKey API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
-/*! Value is a string representing a UTI.  Example for a recipe sharing app: "com.mycompany.recipe" */
+
+/// The system field key for the share's type.
+///
+/// This predefined key is part of the `CKRecordTypeShare` schema.  It is used by the out of process UI flow to send a share, and as part of the share acceptance flow.  It is an optional value on a `CKShare` record.
 CK_EXTERN CKRecordFieldKey const CKShareTypeKey API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
-/*! @class CKShare
- *
- *  @discussion Like CKRecords, CKShares can store arbitrary key-value pairs.  They are modified and fetched in the same manner.
- *  A share, its root record, and its root record's children records will only appear in a participant's CKFetchRecordChangesOperation's results after the share has been accepted by that participant.
- *  Clients have access to the share (and optionally the root record) before accepting a share, via the CKShareMetadata object.  Note that in order to access a root record before accepting a share, you must run a CKFetchShareMetadataOperation requesting the root record.
- *  A CKShare will appear in a CKFetchRecordChangesOperation's results set whenever the participant list is updated.  For that reason, you shouldn't place heavy key-value pairs in it.
- */
-
+/// A specialized record type that manages a collection of shared records.
+///
+/// A share is a specialized record type that facilitates the sharing of one or more records with many participants. You store shareable records in a custom record zone in the user's private database. As you create records in that zone, they become eligible for record zone sharing. If you want to share a specific hierarchy of related records, rather than the entire record zone, set each record's ``CKRecord/parent`` property to define the relationship with its parent. CloudKit infers the shared hierarchy using only the ``CKRecord/parent`` property, and ignores any custom reference fields.
+///
+/// You create a share with either the ID of the record zone to share, or the root record, which defines the point in a record hierarchy where you want to start sharing. CloudKit shares all the records in the record zone, or every record in the hierarchy below the root. If you set the root record's ``CKRecord/parent`` property, CloudKit ignores it. A record can take part in only a single share. This applies to every record in the shared record zone or hierarchy. If a record is participating in another share, any attempt to save the share fails, and CloudKit returns an ``CKError/alreadyShared`` error.
+///
+/// Use ``CKModifyRecordsOperation`` to save the share to the server. The initial set of records the share includes must exist on the server or be part of the same save operation to succeed. CloudKit then updates the share's ``url`` property. Use <doc://com.apple.documentation/documentation/uikit/uicloudsharingcontroller> to present options to the user for sharing the URL. Otherwise, distribute the URL to any participants you add to the share. You can allow anyone with the URL to take part in the share by setting ``publicPermission`` to a value more permissive than ``ParticipantPermission/none``.
+///
+/// - Important: You must add the <doc://com.apple.documentation/documentation/bundleresources/information-property-list/cksharingsupported> key to your app's `Info.plist` file with a value of `true`. This allows the system to launch your app when a user taps or clicks the URL.
+///
+/// After CloudKit saves the share, a participant can fetch its corresponding metadata, which includes a reference to the share, information about the user's participation, and, for shared hierarchies, the root record's record ID. Create an instance of ``CKFetchShareMetadataOperation`` using the share's URL and add it to the container's queue to execute it. The operation returns an instance of ``Metadata`` for each URL you provide. This is only applicable if you manually process share acceptance. If a user receives the share URL and taps or clicks it, CloudKit automatically processes their participation.
+///
+/// To determine the configuration of a fetched share, inspect the ``CKRecord/ID/recordName`` property of its ``CKRecord/recordID``. If the value is ``CKRecordNameZoneWideShare``, the share is managing a shared record zone; otherwise, it's managing a shared record hierarchy.
+///
+/// ```swift
+/// let isZoneWide = (metadata.share.recordID.recordName == CKRecordNameZoneWideShare)
+/// ```
+///
+/// CloudKit limits the number of participants in a share to 100, and each participant must have an active iCloud account. You don't create participants. Instead, use <doc://com.apple.documentation/documentation/uikit/uicloudsharingcontroller> to manage a share's participants and their permissions. Alternatively, create an instance of ``CKUserIdentity/LookupInfo`` for each user. Provide the user's email address or phone number, and use ``CKFetchShareParticipantsOperation`` to fetch the corresponding participants. CloudKit queries iCloud for corresponding accounts as part of the operation. If it doesn't find an account, the server updates the participant's ``Participant/userIdentity`` to reflect that by setting the ``CKUserIdentity/hasiCloudAccount`` property to <doc://com.apple.documentation/documentation/swift/false>. CloudKit associates the participant with their iCloud account when they accept the share if they launch the process by tapping or clicking the share URL.
+///
+/// Participants with write permissions can modify or delete any record that you include in the share. However, only the owner can delete a shared hierarchy's root record. If a participant attempts to delete the share, CloudKit removes the participant. The share remains active for all other participants. If the owner deletes a share that manages a record hierarchy, CloudKit sets the root record's ``CKRecord/share`` property to `nil`. CloudKit deletes the share if the owner of the shared heirarchy deletes its root record.
+///
+/// You can customize the title and image the system displays when initiating a share or accepting an invitation to participate. You can also provide a custom UTI to indicate the content of the shared records. Use the keys that ``SystemFieldKey`` defines, as the following example shows:
+///
+/// ```swift
+/// let share = CKShare(rootRecord: album)
+///
+/// // Configure the share so the system displays the album's
+/// // name and cover when the user initiates sharing or accepts
+/// // an invitation to participate.
+/// share[CKShare.SystemFieldKey.title] = album["name"]
+/// if let cover = album["cover"] as? UIImage, let data = cover.pngData() {
+///     share[CKShare.SystemFieldKey.thumbnailImageData] = data
+/// }
+/// // Include a custom UTI that describes the share's content.
+/// share[CKShare.SystemFieldKey.shareType] = "com.example.app.album"
+/// ```
 API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 // This class should not be subclassed. If it is, Sendable may no longer apply.
 // NS_SWIFT_SENDABLE on macos(14.0), ios(17.0), tvos(17.0), watchos(10.0)
 @interface CKShare : CKRecord <NSSecureCoding, NSCopying>
 
-/*! When saving a newly created CKShare, you must save the share and its rootRecord in the same CKModifyRecordsOperation batch. */
+/// Creates a new share for the specified record.
+///
+/// - Parameters:
+///   - rootRecord: The record to share.
+///
+/// When saving a newly created ``CKShare``, you save both the share and its ``CKShare/Metadata/rootRecord`` in the same ``CKModifyRecordsOperation`` batch.
 - (instancetype)initWithRootRecord:(CKRecord *)rootRecord;
+
+/// Creates a new share for the specified record and record ID.
+///
+/// - Parameters:
+///   - rootRecord: The record to share.
+///   - shareID: The ``CKRecord/ID`` for the share.
+///
+/// When saving a newly created ``CKShare``, you save both the share and its ``CKShare/Metadata/rootRecord`` in the same ``CKModifyRecordsOperation`` batch.
 - (instancetype)initWithRootRecord:(CKRecord *)rootRecord shareID:(CKRecordID *)shareID NS_DESIGNATED_INITIALIZER;
 
-/*! Creates a zone-wide @c CKShare.  A zone-wide @c CKShare can only exist in a zone with sharing capability @c CKRecordZoneCapabilityZoneWideSharing.
- * Only one such share can exist in a zone at a time.
- *
- * All records in this zone will appear in a participant's @c CKFetchRecordZoneChangesOperation results in the shared database after the
- * share has been accepted by the participant.
- *
- * Since these shares do not have an associated root record, @c shouldFetchRootRecord and @c rootRecordDesiredKeys are always ignored when
- * running a @c CKFetchShareMetadataOperation on a zone-wide share URL. Additionally, @c rootRecordID on the resulting @c CKShareMetadata is
- * always absent.
- */
+/// Creates a new share for the specified record zone.
+///
+/// - Parameters:
+///   - recordZoneID: The ID of the record zone to share.
+///
+/// A shared record zone must have the ``CKRecordZone/Capabilities/zoneWideSharing`` capability. Custom record zones that you create in the user's private database have this capability by default. A record zone, and the records it contains, can take part in only a single share.
+///
+/// After accepting a share invite, CloudKit adds the records of the shared record zone to a new zone in the participant's shared database. Use ``CKFetchDatabaseChangesOperation`` to fetch the ID of the new record zone. Then configure ``CKFetchRecordZoneChangesOperation`` with that record zone ID and execute the operation to fetch the records.
+///
+/// If you use ``CKFetchShareMetadataOperation`` to fetch the metadata for a shared record zone, the operation ignores the ``CKFetchShareMetadataOperation/shouldFetchRootRecord`` and ``CKFetchShareMetadataOperation/rootRecordDesiredKeys-3xrex`` properties because, unlike a shared record hierarchy, a record zone doesn't have a nominated root record.
 - (instancetype)initWithRecordZoneID:(CKRecordZoneID *)recordZoneID NS_DESIGNATED_INITIALIZER API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
+/// Creates a share from a serialized instance.
+///
+/// - Parameters:
+///   - aDecoder: The coder to use when deserializing the share.
+///
+/// When saving a newly created ``CKShare``, you must save the share and its ``CKShare/Metadata/rootRecord`` in the same ``CKModifyRecordsOperation`` batch.
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
-/*! @abstract Defines what permission a user has when not explicitly added to the share.
- *
- *  @discussion Shares with @c publicPermission more permissive than @c CKShareParticipantPermissionNone can be joined by any user with access to the share's shareURL.
- *  By default, public permission is @c CKShareParticipantPermissionNone.
- *  Changing the public permission to @c CKShareParticipantPermissionReadOnly or @c CKShareParticipantPermissionReadWrite will result in all pending participants being removed.  Already-accepted participants will remain on the share.
- *  Changing the public permission to @c CKShareParticipantPermissionNone will result in all participants being removed from the share.  You may subsequently choose to call @c addParticipant: before saving the share, those participants will be added to the share.
- */
+/// The permission for anyone with access to the share's URL.
+///
+/// Setting this property's value to be more permissive than ``CKShare/ParticipantPermission/none`` allows any user with the share's URL to join. CloudKit removes all public participants when you save the share if you set the property's value to ``CKShare/ParticipantPermission/none``.
+///
+/// The default value is ``CKShare/ParticipantPermission/none``
 @property (assign) CKShareParticipantPermission publicPermission;
 
-/*! @abstract A URL that can be used to invite participants to this share.
- *
- *  @discussion Only available after share record has been saved to the server.  This url is stable, and is tied to the rootRecord.  That is, if you share a rootRecord, delete the share, and re-share the same rootRecord via a newly created share, that newly created share's url will be identical to the prior share's url
- */
+/// The Uniform Resource Locator (URL) for inviting participants to the share.
+///
+/// This property is only available after saving a share record to the server. This URL is stable and persists across shares and reshares of the same root record.
 @property (nullable, readonly, copy) NSURL *URL;
 
-/*! @abstract All participants on the share that the current user has permissions to see.
- *
- *  @discussion At the minimum that will include the owner and the current user.
- */
+/// An array that contains the share's participants.
+///
+/// The property's value contains all of the share's participants that the current user has permissions to see. At a minimum, it includes the share's owner and the current user.
 @property (readonly, copy) NSArray<CKShareParticipant *> *participants;
 
-/*! Convenience methods for fetching special users from the participant array */
+/// The participant that represents the share's owner.
 @property (readonly, copy) CKShareParticipant *owner;
+
+/// The participant that represents the current user.
 @property (nullable, readonly, copy) CKShareParticipant *currentUserParticipant;
 
-/*! @discussion If a participant with a matching userIdentity already exists, then that existing participant's properties will be updated; no new participant will be added.
- *  A ``CKShareParticipant`` instance that has already been added to one ``CKShare`` cannot be added to another, unless it is removed from the first ``CKShare`` through `removeParticipant`.
- *  In order to modify the list of participants, a share must have publicPermission set to @c CKShareParticipantPermissionNone.  That is, you cannot mix-and-match private users and public users in the same share.
- *  @see CKShareParticipantRole
- */
+/// Adds a participant to the share.
+///
+/// - Parameters:
+///   - participant: The participant to add to the share.
+///
+/// If a participant with a matching ``CKShare/Participant/userIdentity`` already exists in the share, the system updates the existing participant's properties and doesn't add a new participant.
+///
+/// To modify the list of participants, a share's ``CKShare/publicPermission`` must be ``CKShare/ParticipantPermission/none``. You can't mix and match public and private users in the same share. You can only add certain participant types with this API. See ``CKShare/Participant`` for more information.
 - (void)addParticipant:(CKShareParticipant *)participant;
 
-/*! @discussion It's not allowed to call `removeParticipant` on a ``CKShare`` with a ``CKShareParticipant`` that has never been added to that share through `addParticipant`.
- */
+/// Removes a participant from the share.
+///
+/// - Parameters:
+///   - participant: The participant to remove from the share.
+///
+/// To modify the list of participants, a share's ``CKShare/publicPermission`` must be ``CKShare/ParticipantPermission/none``. You can't mix and match public and private users in the same share. You can only add certain participant types with this API. See ``CKShare/Participant`` for more information.
 - (void)removeParticipant:(CKShareParticipant *)participant;
 
-/// Invitation URLs that can be used by any receiver to claim the associated participantID and join the share.
+/// Invitation URLs that any receiver can use to claim the associated participantID and join the share.
 ///
 /// Only available after a share record has been saved to the server for participants created via ``CKShareParticipant/oneTimeURLParticipant``.
 /// One-time URLs are stable, and tied to the associated participantIDs as long as the participant is part of the share.
-/// Typically, a recipient user invited via their handle is provided a ``URL`` directly by the share's owner.
+/// Typically, a share owner provides a ``URL`` directly to a user invited via their handle.
 /// However, any user can also use a one-time URL in the same manner to fetch share metadata and accept the share.
 /// After share acceptance, the one-time URL becomes functionally equivalent to the regular ``URL``.
 ///
@@ -113,7 +200,7 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 ///   - participantID: The ``CKShareParticipant/participantID`` corresponding to the ``CKShareParticipant/oneTimeURLParticipant`` added to the share.
 - (nullable NSURL *)oneTimeURLForParticipantID:(NSString *)participantID API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0)) NS_REFINED_FOR_SWIFT;
 
-/*! These superclass-provided initializers are not allowed for CKShare */
+// These superclass-provided initializers are not allowed for CKShare.
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)initWithRecordType:(CKRecordType)recordType NS_UNAVAILABLE;
@@ -122,8 +209,8 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 
 /// A list of all uninvited users who have requested access to this share.
 ///
-/// When share access requests are allowed, uninvited users can request to join the share.
-/// All pending access requests appear in this array. Each requester is returned with name components
+/// When an originator or administrator allows share access requests, uninvited users can request to join the share.
+/// All pending access requests appear in this array. CloudKit returns each requester with name components
 /// and either an email or phone number.
 ///
 /// Either share owners or administrators can respond to these access requests.
@@ -136,36 +223,36 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 ///     - Add the resulting participant to the share.
 ///
 /// - **Deny Requesters:**
-///     - Use ``CloudKit/CKShare/denyRequesters:`` to remove the requester from the requesters list.
+///     - Use ``CloudKit/CKShare/denyRequesters(_:)`` to remove the requester from the requesters list.
 ///
 /// - **Block Requesters:**
-///     - Use ``CloudKit/CKShare/blockRequesters:`` to block requesters.
+///     - Use ``CloudKit/CKShare/blockRequesters(_:)`` to block requesters.
 ///     - Blocking a requester prevents them from sending future access requests to the share.
 @property (readonly, copy) NSArray<CKShareAccessRequester *> *requesters CKSHARE_REQUEST_ACCESS_INTERFACES_AVAILABILITY;
 
 /// A list of users blocked from requesting access to this share.
 ///
-/// Identities remain in this list until an owner or administrator calls ``CloudKit/CKShare/unblockIdentities:``.
+/// Identities remain in this list until an owner or administrator calls ``CloudKit/CKShare/unblockIdentities(_:)``.
 @property (readonly, copy) NSArray<CKShareBlockedIdentity *> *blockedIdentities CKSHARE_REQUEST_ACCESS_INTERFACES_AVAILABILITY;
 
 /// Indicates whether uninvited users can request access to this share.
 ///
-/// By default, this property is set to `NO`. When set to `YES`, uninvited users can request
-/// access to the share if they discover the share URL. When set to `NO`, the server prevents uninvited users
+/// By default, this property is `NO`. When this property is `YES`, uninvited users can request
+/// access to the share if they discover the share URL. When this property is `NO`, the server prevents uninvited users
 /// from requesting access and does not indicate whether the share exists.
 ///
-/// Only the share owner or an administrator can modify this property. Attempts by other participants
-/// to modify this property result in an exception.
+/// Only the share owner or an administrator can modify this property. If another participant attempts to modify
+/// this property, CloudKit throws an exception.
 @property (readwrite, assign) BOOL allowsAccessRequests CKSHARE_REQUEST_ACCESS_INTERFACES_AVAILABILITY;
 
 /// Denies access requests from specified users.
 ///
-/// Use this method to deny pending access requests from uninvited users. Denied requesters are removed
+/// Use this method to deny pending access requests from uninvited users. CloudKit removes denied requesters
 /// from the ``CloudKit/CKShare/requesters`` array. To persist the changes, save the share to the server
 /// after calling this method.
 ///
 /// After denial, requesters can still submit new access requests unless explicitly blocked using
-/// ``CloudKit/CKShare/blockRequesters:``.
+/// ``CloudKit/CKShare/blockRequesters(_:)``.
 ///
 /// Only the share owner or an administrator can invoke this method. Attempts by other participants
 /// result in an exception.
@@ -188,8 +275,8 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 
 /// Unblocks previously blocked users, allowing them to request access again.
 ///
-/// Use this method to remove specified identities from the ``CloudKit/CKShare/blockedIdentities`` array.
-/// Unblocked identities can request access again if access requests are enabled.
+/// Use this method to remove specified identities from the ``CKShare/blockedIdentities`` array.
+/// Unblocked identities can request access again if the ``CKShare/allowsAccessRequests`` is enabled.
 ///
 /// To persist this change, save the share to the server after calling this method.
 ///

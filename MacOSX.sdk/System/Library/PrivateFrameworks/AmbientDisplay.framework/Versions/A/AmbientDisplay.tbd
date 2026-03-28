@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AmbientDisplay.framework/Versions/A/AmbientDisplay'
 current-version: 110
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ALSHIDManager_start, _ALSHIDManager_stop, _AMBDCreateIntentionContext, 
                        _AMBDDestroyIntentionContext, _AMBDEnableHDR, _AMBDGetCurrentDisplayBrightness, 
                        _AMBDGetTargetDisplayBrightness, _AMBDInitializeDisplayHDRState, 
@@ -30,12 +30,13 @@ exports:
                        _AMBDintentionDictionarySetDisplayID, _AMBDintentionDictionarySetValue, 
                        _AMBDlerpParameters, _AMBDnotifyAssemblyBufferFlush, _AMBDpipelineFrozen, 
                        _AMBDrectifyIntentionDictionary, _AMBDsetCompensationState, 
-                       _AMBDsetDSOOTFsessionContentAveragePixelValue, _AMBDsetDSOOTFsessionEnablement, 
-                       _AMBDsetDisplayParameters, _AMBDsetIntention, _AMBDsetPipelineFreezeState, 
-                       _AMBDsetSystemGammaMode, _AMBDsetUpdateRateLimitState, _AMBDsetWakeState, 
-                       _AMBDstateMachineConsistent, _AMBDstopAccessingLUT, _AMBDsynthAttenuationTable, 
-                       _AMBDterminate, _AMBDthawIntention, _AMBDuserPreferences, 
-                       _AMBDverifySession, _AMBDwhitePointModeUnitUse, _AmbientDisplayTerminate, 
+                       _AMBDsetCompensationStateAsync, _AMBDsetDSOOTFsessionContentAveragePixelValue, 
+                       _AMBDsetDSOOTFsessionEnablement, _AMBDsetDisplayParameters, 
+                       _AMBDsetIntention, _AMBDsetPipelineFreezeState, _AMBDsetSystemGammaMode, 
+                       _AMBDsetUpdateRateLimitState, _AMBDsetWakeState, _AMBDstateMachineConsistent, 
+                       _AMBDstopAccessingLUT, _AMBDsynthAttenuationTable, _AMBDterminate, 
+                       _AMBDthawIntention, _AMBDuserPreferences, _AMBDverifySession, 
+                       _AMBDwake, _AMBDwhitePointModeUnitUse, _AmbientDisplayTerminate, 
                        _CGSSetDisplayIntentionPtr, _CGSSetDisplayIntentionWiperPtr, 
                        _CIECAM16getSurround, _CIELABL, _CIELABLtoNits, _CreateUUIDFromDisplayID, 
                        _GetCurrentTimeInMilliseconds, _GetHWLinearizationConfigID, 
@@ -65,12 +66,13 @@ exports:
                        __updateImmutableDeviceContextList, _addContextToDeviceContextList, 
                        _addDisplay, _addMatrix, _addOnlineDisplaysNotOnContextList, 
                        _addScreens, _allocate3Matrix, _allocateMatrix, _allocateVector, 
+                       _ambientBrightnessChangedCallBack, _ambientResetChangedCallBack, 
                        _anyDisplayCompensationStateEnabled, _applyWhitePoint, _assertionFailureWarn, 
                        _backlightDimLimit, _brightContentToEnvironmentSystemGammaWithHysteresis, 
                        _cacheCoreDisplayDesiredWhitePointMode, _calculateAndSetBlackPointsForAllDisplays, 
                        _calculateBlackPointAndGammaBasedOnParameters, _calculateBlackPointLinearFromBlackPointGammad, 
                        _calculateCIECAM16adaptationNits, _calculateInstanteneousAdaptationBasedOnParameters, 
-                       _calculateSystemGamma, _canEnableCompensation, _clip, _computeAndAddWhitePointIntentionToIntentionDictionary, 
+                       _calculateSystemGamma, _clip, _compensationEnableable, _computeAndAddWhitePointIntentionToIntentionDictionary, 
                        _computeGestaltLuxFromAllALSonContextList, _computeRGBscaleFromHueSaturation, 
                        _computeWarpParametersBasedOnDifferentialAdaptation, _convertTemperatureToXYZ, 
                        _convertXYZtoLMS, _copy3Matrix, _copyCFStringToCString, _copyDeviceContextListForReading, 
@@ -104,14 +106,14 @@ exports:
                        _createtXYZvectorFromProfileDataRef, _createvectorXYZfromxyY, 
                        _defaultOptimizationMode, _destroyAMBDNCLCdictionary, _destroyAMBDenvironmentDictionary, 
                        _destroyAMBDmodelStateDictionary, _diagonalVectorFromMatrix3, 
-                       _differentMatrix, _displayServicesQueue, _dynamicallyLoadCoreDisplay, 
-                       _equality, _extractXYZtagFromICCProfileAndUnAdapt, _findAndCopyDeviceContextByDeviceID, 
-                       _findDisplayIDbyHIDcontainerID, _forwardPQEOTF, _geometricDistance, 
-                       _getALSLMUdataPort, _getActualEnvironment, _getAnimationString, 
-                       _getBacklightMaxNit, _getBrightnessUpdateThreshold, _getCompensationState, 
-                       _getCoreDisplayDesiredWhitePointMode, _getCustomWhitePointXYZ, 
-                       _getEnvironmentFromNCLCdictionary, _getHIDserviceContainerID, 
-                       _getHIDserviceLocation, _getIODisplayServiceForDisplayID, 
+                       _differentMatrix, _displayServicesQueue, _displayUSBHotplugCallBack, 
+                       _dynamicallyLoadCoreDisplay, _equality, _extractXYZtagFromICCProfileAndUnAdapt, 
+                       _findAndCopyDeviceContextByDeviceID, _findDisplayIDbyHIDcontainerID, 
+                       _forwardPQEOTF, _geometricDistance, _getALSLMUdataPort, _getActualEnvironment, 
+                       _getAnimationString, _getBacklightMaxNit, _getBrightnessUpdateThreshold, 
+                       _getCompensationState, _getCoreDisplayDesiredWhitePointMode, 
+                       _getCustomWhitePointXYZ, _getEnvironmentFromNCLCdictionary, 
+                       _getHIDserviceContainerID, _getHIDserviceLocation, _getIODisplayServiceForDisplayID, 
                        _getInstanteneousAdaptationLux, _getInstanteneousCIECAMadaptationNits, 
                        _getInternalDisplayID, _getModelStateParametersFromModelStateDictionary, 
                        _getModelStateParametersFromXPCmodelStateDictionary, _getMostRecentLuxValuesForDisplayIDviaHID, 
@@ -159,8 +161,10 @@ exports:
                        _vectorSwap, _warmMathLib, _warpLUT, _warpPreviousNotWarpedToNextWarpedbyIntention, 
                        _warpPreviousNotWarpedToPreviousWarpedByIntention, _weightedSum, 
                        _xyYtoXYZ, _xytoXYZ ]
-    objc-classes:    [ ALSHIDManager, DeviceGammaContext ]
-    objc-ivars:      [ DeviceGammaContext.ALS_LMUdataPort, DeviceGammaContext.IODisplayService, 
+    objc-classes:    [ ALSHIDManager, BrightnessModule, DeviceGammaContext ]
+    objc-ivars:      [ BrightnessModule._displayID, BrightnessModule._dsClient, BrightnessModule._hasALSCompensation, 
+                       BrightnessModule._hasALSReset, BrightnessModule._observer, 
+                       DeviceGammaContext.ALS_LMUdataPort, DeviceGammaContext.IODisplayService, 
                        DeviceGammaContext.deviceID, DeviceGammaContext.displayContainerID, 
                        DeviceGammaContext.frontALSservice, DeviceGammaContext.numSamples, 
                        DeviceGammaContext.rearALSservice ]

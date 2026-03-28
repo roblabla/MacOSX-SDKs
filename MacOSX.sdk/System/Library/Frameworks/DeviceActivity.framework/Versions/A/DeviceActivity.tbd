@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/DeviceActivity.framework/Versions/A/DeviceActivity'
-current-version: 392.2.3
+current-version: 392.4.9
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation12DateIntervalV14DeviceActivityE14lastThirtyDaysACvgZ', 
                        '_$s10Foundation12DateIntervalV14DeviceActivityE14lastThirtyDaysACvpZMV', 
                        '_$s10Foundation12DateIntervalV14DeviceActivityE19roundedToNearestDayACvg', 
@@ -474,6 +472,8 @@ exports:
                        '_$s14DeviceActivity0aB4DataV08CategoryB0VN', '_$s14DeviceActivity0aB4DataV08CategoryB0VSHAAMc', 
                        '_$s14DeviceActivity0aB4DataV08CategoryB0VSQAAMc', '_$s14DeviceActivity0aB4DataV08CategoryB0V_05totalB8Duration21applicationActivities09webDomainH0AE15ManagedSettings0bD0V_SdSayAC011ApplicationB0VGSayAC03WebjB0VGtcfC', 
                        '_$s14DeviceActivity0aB4DataV08CategoryB0VyAESgAA01_abC0VADVcfC', 
+                       '_$s14DeviceActivity0aB4DataV08activityC010filteredBy5usingQrAA0aB6FilterV_AC6PolicyOtFZ', 
+                       '_$s14DeviceActivity0aB4DataV08activityC010filteredBy5usingQrAA0aB6FilterV_AC6PolicyOtFZQOMQ', 
                        '_$s14DeviceActivity0aB4DataV09WebDomainB0V03webE015ManagedSettings0dE0VvM', 
                        '_$s14DeviceActivity0aB4DataV09WebDomainB0V03webE015ManagedSettings0dE0Vvg', 
                        '_$s14DeviceActivity0aB4DataV09WebDomainB0V03webE015ManagedSettings0dE0VvpMV', 
@@ -598,12 +598,29 @@ exports:
                        '_$s14DeviceActivity0aB4DataV4hash4intoys6HasherVz_tF', '_$s14DeviceActivity0aB4DataV4user6device15segmentInterval15lastUpdatedDate26activitySegmentRecordNames14elementFetcherA2C4UserV_AC0A0VAA0aB6FilterV0lG0O10Foundation0J0VSaySSGAA15ElementFetching_ptcfC', 
                        '_$s14DeviceActivity0aB4DataV4userAC4UserVvM', '_$s14DeviceActivity0aB4DataV4userAC4UserVvg', 
                        '_$s14DeviceActivity0aB4DataV4userAC4UserVvpMV', '_$s14DeviceActivity0aB4DataV4userAC4UserVvs', 
-                       '_$s14DeviceActivity0aB4DataV6deviceAC0A0VvM', '_$s14DeviceActivity0aB4DataV6deviceAC0A0Vvg', 
-                       '_$s14DeviceActivity0aB4DataV6deviceAC0A0VvpMV', '_$s14DeviceActivity0aB4DataV6deviceAC0A0Vvs', 
-                       '_$s14DeviceActivity0aB4DataV9hashValueSivg', '_$s14DeviceActivity0aB4DataV9hashValueSivpMV', 
-                       '_$s14DeviceActivity0aB4DataVMa', '_$s14DeviceActivity0aB4DataVMn', 
-                       '_$s14DeviceActivity0aB4DataVN', '_$s14DeviceActivity0aB4DataVSHAAMc', 
-                       '_$s14DeviceActivity0aB4DataVSQAAMc', '_$s14DeviceActivity0aB4DataV_15segmentInterval14elementFetcherACSgAA01_abC0V_AA0aB6FilterV07SegmentE0OAA15ElementFetching_ptcfC', 
+                       '_$s14DeviceActivity0aB4DataV5ErrorO07missingC0yA2EmFWC', 
+                       '_$s14DeviceActivity0aB4DataV5ErrorO10Foundation09LocalizedD0AAMc', 
+                       '_$s14DeviceActivity0aB4DataV5ErrorO11unavailableyA2EmFWC', 
+                       '_$s14DeviceActivity0aB4DataV5ErrorO12unauthorizedyA2EmFWC', 
+                       '_$s14DeviceActivity0aB4DataV5ErrorO16errorDescriptionSSSgvg', 
+                       '_$s14DeviceActivity0aB4DataV5ErrorO16errorDescriptionSSSgvpMV', 
+                       '_$s14DeviceActivity0aB4DataV5ErrorO2eeoiySbAE_AEtFZ', '_$s14DeviceActivity0aB4DataV5ErrorO4hash4intoys6HasherVz_tF', 
+                       '_$s14DeviceActivity0aB4DataV5ErrorO9hashValueSivg', '_$s14DeviceActivity0aB4DataV5ErrorO9hashValueSivpMV', 
+                       '_$s14DeviceActivity0aB4DataV5ErrorOMa', '_$s14DeviceActivity0aB4DataV5ErrorOMn', 
+                       '_$s14DeviceActivity0aB4DataV5ErrorON', '_$s14DeviceActivity0aB4DataV5ErrorOSHAAMc', 
+                       '_$s14DeviceActivity0aB4DataV5ErrorOSQAAMc', '_$s14DeviceActivity0aB4DataV5ErrorOsAdAMc', 
+                       '_$s14DeviceActivity0aB4DataV6PolicyO2eeoiySbAE_AEtFZ', '_$s14DeviceActivity0aB4DataV6PolicyO4hash4intoys6HasherVz_tF', 
+                       '_$s14DeviceActivity0aB4DataV6PolicyO4liveyA2EmFWC', '_$s14DeviceActivity0aB4DataV6PolicyO6cachedyA2EmFWC', 
+                       '_$s14DeviceActivity0aB4DataV6PolicyO9hashValueSivg', '_$s14DeviceActivity0aB4DataV6PolicyO9hashValueSivpMV', 
+                       '_$s14DeviceActivity0aB4DataV6PolicyOMa', '_$s14DeviceActivity0aB4DataV6PolicyOMn', 
+                       '_$s14DeviceActivity0aB4DataV6PolicyON', '_$s14DeviceActivity0aB4DataV6PolicyOSHAAMc', 
+                       '_$s14DeviceActivity0aB4DataV6PolicyOSQAAMc', '_$s14DeviceActivity0aB4DataV6deviceAC0A0VvM', 
+                       '_$s14DeviceActivity0aB4DataV6deviceAC0A0Vvg', '_$s14DeviceActivity0aB4DataV6deviceAC0A0VvpMV', 
+                       '_$s14DeviceActivity0aB4DataV6deviceAC0A0Vvs', '_$s14DeviceActivity0aB4DataV9hashValueSivg', 
+                       '_$s14DeviceActivity0aB4DataV9hashValueSivpMV', '_$s14DeviceActivity0aB4DataVMa', 
+                       '_$s14DeviceActivity0aB4DataVMn', '_$s14DeviceActivity0aB4DataVN', 
+                       '_$s14DeviceActivity0aB4DataVSHAAMc', '_$s14DeviceActivity0aB4DataVSQAAMc', 
+                       '_$s14DeviceActivity0aB4DataV_15segmentInterval14elementFetcherACSgAA01_abC0V_AA0aB6FilterV07SegmentE0OAA15ElementFetching_ptcfC', 
                        '_$s14DeviceActivity0aB4NameV11userInfoKeySSvgZ', '_$s14DeviceActivity0aB4NameV11userInfoKeySSvpZMV', 
                        '_$s14DeviceActivity0aB4NameV7timeoutACvgZ', '_$s14DeviceActivity0aB4NameV7timeoutACvpZMV', 
                        '_$s14DeviceActivity0aB4NameV8rawValueACSS_tcfC', '_$s14DeviceActivity0aB4NameV8rawValueSSvM', 
@@ -933,6 +950,12 @@ exports:
                        '_$s14DeviceActivity7FeatureC08overrideaB9UIEnabledSbSgvgZ', 
                        '_$s14DeviceActivity7FeatureC08overrideaB9UIEnabledSbSgvpZMV', 
                        '_$s14DeviceActivity7FeatureC08overrideaB9UIEnabledSbSgvsZ', 
+                       '_$s14DeviceActivity7FeatureC19isDataAccessEnabledSbvgZ', 
+                       '_$s14DeviceActivity7FeatureC19isDataAccessEnabledSbvpZMV', 
+                       '_$s14DeviceActivity7FeatureC25overrideDataAccessEnabledSbSgvMZ', 
+                       '_$s14DeviceActivity7FeatureC25overrideDataAccessEnabledSbSgvgZ', 
+                       '_$s14DeviceActivity7FeatureC25overrideDataAccessEnabledSbSgvpZMV', 
+                       '_$s14DeviceActivity7FeatureC25overrideDataAccessEnabledSbSgvsZ', 
                        '_$s14DeviceActivity7FeatureCACycfC', '_$s14DeviceActivity7FeatureCACycfc', 
                        '_$s14DeviceActivity7FeatureCMa', '_$s14DeviceActivity7FeatureCMn', 
                        '_$s14DeviceActivity7FeatureCMo', '_$s14DeviceActivity7FeatureCN', 

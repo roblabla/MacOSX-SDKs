@@ -1,9 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Trial.framework/Versions/A/Trial'
-current-version: 474.2
+current-version: 474.2.18
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN5apple4aiml12flatbuffers216DefaultAllocatorE, __ZTIN5apple4aiml12flatbuffers29AllocatorE, 
@@ -13,8 +12,7 @@ exports:
                        __ZTSN5apple4aiml12flatbuffers29AllocatorE, __ZTSNSt3__110__function6__baseIFN5apple4aiml12flatbuffers26OffsetIvEEmEEE, 
                        __ZTSNSt3__110__function6__baseIFvmP10BoxedInt64EEE, __ZTSNSt3__110__function6__baseIFvmP11BoxedDoubleEEE, 
                        __ZTSNSt3__110__function6__baseIFvmP9BoxedBoolEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _TRICloudKitComparator_Equals, _TRICloudKitComparator_GreaterThan, 
                        _TRICloudKitComparator_In, _TRICloudKitComparator_ListContains, 
                        _TRICloudKitComparator_ListContainsAny, _TRICloudKitComparator_NotEquals, 

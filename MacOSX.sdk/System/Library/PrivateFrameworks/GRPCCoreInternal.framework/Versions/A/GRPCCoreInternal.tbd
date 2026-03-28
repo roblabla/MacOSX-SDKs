@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GRPCCoreInternal.framework/Versions/A/GRPCCoreInternal'
 current-version: 2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s16GRPCCoreInternal10GRPCClientC14runConnectionsyyYaKF', 
                        '_$s16GRPCCoreInternal10GRPCClientC14runConnectionsyyYaKFTu', 
                        '_$s16GRPCCoreInternal10GRPCClientC15clientStreaming7request10descriptor10serializer12deserializer7options10onResponseqd_1_AA0E13ClientRequestVyqd__G_AA16MethodDescriptorVqd_2_qd_3_AA11CallOptionsVqd_1_AA0mL0Vyqd_0_GYaYbKctYaKs8SendableRd__7MessageQyd_2_Rsd__sAURd_0_AVQyd_3_Rsd_0_sAURd_1_AA0T10SerializerRd_2_AA0T12DeserializerRd_3_r3_lF', 

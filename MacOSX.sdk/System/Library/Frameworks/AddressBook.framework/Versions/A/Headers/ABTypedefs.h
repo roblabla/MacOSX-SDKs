@@ -11,6 +11,10 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 // These typedefs are CFIndexes rather then NSIntegers because
 // they're used in the C API as well as the Obj-C one.
 
@@ -89,5 +93,8 @@ enum _ABSearchConjunction {
 };
 typedef CFIndex ABSearchConjunction;
 
+#if defined(__cplusplus)
+}
+#endif
 
 #endif

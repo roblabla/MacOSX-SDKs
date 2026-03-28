@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DMCTools.framework/Versions/A/DMCTools'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation4DateV8DMCToolsE15isWithin24HoursSbyF', '_$s10Foundation4DateV8DMCToolsE16DMCDateFormatterSo06NSDateE0CvgZ', 
                        '_$s10Foundation4DateV8DMCToolsE16DMCDateFormatterSo06NSDateE0CvpZMV', 
                        '_$s10Foundation4DateV8DMCToolsE9DMCStringSSvg', '_$s10Foundation4DateV8DMCToolsE9DMCStringSSvpMV', 

@@ -1,17 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IconServices.framework/Versions/A/IconServices'
-current-version: 742.255
+current-version: 743.4.2
 swift-abi-version: 7
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/IconFoundation.framework/Versions/A/IconFoundation' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ISCreateCGImageFromBindingWithSizeScaleAndOptions, _ISIsResourceKey, 
                        _NSStringFromISIconTreatment, __ISCopyCacheContentsDescription, 
                        __ISCopyCachePath, __ISCopyICNSDataFromBinding, __ISCreateCGImageForTypeAtScaleInternal, 
@@ -73,14 +70,12 @@ exports:
                        ISwatchOSAppRecipe ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IconFoundation.framework/Versions/A/IconFoundation'
-current-version: 742.255
+current-version: 743.4.2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BOMCFArrayMaxRange, _BOMExceptionHandlerMessage, _BOMExceptionHandlerSet, 
                        _BOMExceptionHandlerSetDefault, _BOMMemoryDump, _BOMStackCount, 
                        _BOMStackFree, _BOMStackIsEmpty, _BOMStackNew, _BOMStackPeek, 

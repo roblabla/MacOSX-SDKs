@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libapr-1.0.dylib'
 current-version: 5.8
 compatibility-version: 5
@@ -9,7 +9,7 @@ exports:
     symbols:         [ '_apr_dir_open$INODE64', '_apr_dir_read$INODE64', '_apr_dir_rewind$INODE64', 
                        '_apr_file_info_get$INODE64', '_apr_file_info_get_locked$INODE64', 
                        '_apr_stat$INODE64' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _apr__SHA256_Data, _apr__SHA256_End, _apr__SHA256_Final, _apr__SHA256_Init, 
                        _apr__SHA256_Transform, _apr__SHA256_Update, _apr_allocator_alloc, 
                        _apr_allocator_create, _apr_allocator_destroy, _apr_allocator_free, 

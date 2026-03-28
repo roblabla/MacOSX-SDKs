@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libtailspin.dylib'
-current-version: 241
+current-version: 250
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _TSPConfiguration_CPUTraceEnabledKey, _TSPConfiguration_CPUTraceEnabledModifierKey, 
                        _TSPConfiguration_CPUTraceKey, _TSPConfiguration_EnabledKey, 
                        _TSPConfiguration_EnabledModifierKey, _TSPConfiguration_EnforcedByManualConfigurationKey, 

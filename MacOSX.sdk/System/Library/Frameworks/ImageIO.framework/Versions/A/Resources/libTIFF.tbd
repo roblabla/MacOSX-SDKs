@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libTIFF.dylib'
-current-version: 2784.2.5
+current-version: 2784.4.14
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __cg_TIFFClientOpen, __cg_TIFFClientdata, __cg_TIFFClose, 
                        __cg_TIFFComputeStrip, __cg_TIFFComputeTile, __cg_TIFFCurrentDirOffset, 
                        __cg_TIFFDefaultStripSize, __cg_TIFFFindCODEC, __cg_TIFFFreeDirectory, 

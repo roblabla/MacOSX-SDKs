@@ -1,14 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UXKit.framework/Versions/A/UXKit'
-current-version: 821.0.120
+current-version: 841.0.101
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ Mondrian, PhotoPrintProduct, Photos, PhotosTests, PhotosUI, 
                        PhotosUICore, PhotosUICoreProtoApp, PhotosUIPrivate ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _NSImageDynamicRangeFromUXImageDynamicRange, _NSStringFromUXCollectionViewLayoutDropPosition, 
                        _UXCollectionElementKindCell, _UXCollectionElementKindSectionFooter, 
                        _UXCollectionElementKindSectionHeader, _UXCollectionViewDraggingPasteboardItemType, 

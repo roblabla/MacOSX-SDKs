@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccessibilityAudit.framework/Versions/A/AccessibilityAudit'
-current-version: 187.20
+current-version: 187.40
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AXAuditAddInformationToCrashTracerLog, _AXAuditAttributeWithPrefixLocString, 
                        _AXAuditAttributeWithPrefixLocStringExists, _AXAuditCGEventIsTrusted, 
                        _AXAuditDeviceSettingIdentifierBoldFonts, _AXAuditDeviceSettingIdentifierButtonShapes, 

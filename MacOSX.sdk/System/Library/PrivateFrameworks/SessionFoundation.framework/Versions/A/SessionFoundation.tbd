@@ -1,18 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SessionFoundation.framework/Versions/A/SessionFoundation'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ ActivityKit, SessionAlert, SessionAssertion, SessionCore, 
                        SessionCoreTests, SessionFoundationTests, SessionPushNotifications, 
                        SessionPushNotificationsTests, SessionSyncEngine, liveactivitiesd ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s15ClientInterface17SessionFoundation22XPCInterfaceDefinitionPTl', 
                        '_$s15ServerInterface17SessionFoundation22XPCInterfaceDefinitionPTl', 
                        '_$s17SessionFoundation11TaskRequestV11explanationSSvM', '_$s17SessionFoundation11TaskRequestV11explanationSSvg', 

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TextToSpeechVoiceBankingUI.framework/Versions/A/TextToSpeechVoiceBankingUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s26TextToSpeechVoiceBankingUI013CoreSynthesisD15PickableFetcherC04SiriD6PolicyO12screenreaderyA2EmFWC', 
                        '_$s26TextToSpeechVoiceBankingUI013CoreSynthesisD15PickableFetcherC04SiriD6PolicyO2eeoiySbAE_AEtFZ', 
                        '_$s26TextToSpeechVoiceBankingUI013CoreSynthesisD15PickableFetcherC04SiriD6PolicyO4hash4intoys6HasherVz_tF', 

@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightLinguistics.framework/Versions/A/SpotlightLinguistics'
-current-version: 2400.18.255
+current-version: 2418.4.13
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _SICurrenciesGetCurrencyCode, _SICurrenciesGetCurrencyFromCode, 
                        _SICurrenciesGetCurrencyFromID, _SICurrenciesGetCurrencyID, 
                        _SIDataMapAddKey, _SIDataMapAddKeyWithPayload, _SIDataMapAddStringKey, 
@@ -32,11 +30,12 @@ exports:
                        _SIGeneralTrieSetStringKeyWithScore, _SIGeneralTrieTraverseFromCursor, 
                        _SIGeneralTrieWriteToFileDescriptor, _SIGeneralTrieWriteToFileURL, 
                        _SIGeoIndexAddEntry, _SIGeoIndexAddStringKeyForID, _SIGeoIndexContainsStringKey, 
-                       _SIGeoIndexContainsStringKeyForLocale, _SIGeoIndexCreateMutableWithOptions, 
-                       _SIGeoIndexCreateWithOptions, _SIGeoIndexEnumerateGeoEntriesForString, 
-                       _SIGeoIndexEnumerateGeoExpansionsForID, _SIGeoIndexEnumerateGeoIDForString, 
-                       _SIGeoIndexGetCount, _SIGeoIndexLookupEntry, _SIGeoIndexRelease, 
-                       _SIGeoIndexRetain, _SIGeoIndexWrite, _SIGetResourceRootURLsForLocaleOfType, 
+                       _SIGeoIndexContainsStringKeyForLocale, _SIGeoIndexCopyKeyForID, 
+                       _SIGeoIndexCreateMutableWithOptions, _SIGeoIndexCreateWithOptions, 
+                       _SIGeoIndexEnumerateGeoEntriesForString, _SIGeoIndexEnumerateGeoExpansionsForID, 
+                       _SIGeoIndexEnumerateGeoIDForString, _SIGeoIndexGetCount, _SIGeoIndexInsertEntry, 
+                       _SIGeoIndexInsertLookupKeysForLocaleWithID, _SIGeoIndexLookupEntry, 
+                       _SIGeoIndexRelease, _SIGeoIndexRetain, _SIGeoIndexWrite, _SIGetResourceRootURLsForLocaleOfType, 
                        _SIGetResourceURLsForLocaleOfType, _SIIsLanguagePreferred, 
                        _SILanguageModelCopyLocale, _SILanguageModelCopyLocaleInString, 
                        _SILanguageModelCreateWithOptions, _SILanguageModelEnumerateKeyPhrases, 
@@ -51,6 +50,8 @@ exports:
                        _SILanguageModelUnreserve, _SILanguagesCopyLocaleIdentifier, 
                        _SILanguagesGetLanguage, _SILanguagesGetLanguageID, _SILanguagesGetLanguageIDForIdentifier, 
                        _SILanguagesGetLocale, _SILanguagesGetRegion, _SILanguagesGetRegionID, 
+                       _SILanguagesGetRegionIDForIdentifier, _SILanguagesGetScript, 
+                       _SILanguagesGetScriptID, _SILanguagesGetScriptIDForIdentifier, 
                        _SILanguagesGuessLanguageInString, _SILanguagesGuessLanguageInStringWithHints, 
                        _SILanguagesIsCJK, _SILexiconCacheContainsTokenID, _SILexiconCacheContainsTokenIDInString, 
                        _SILexiconCacheCreateWithOptions, _SILexiconCacheEnumerateAnnotations, 
@@ -67,19 +68,20 @@ exports:
                        _SIStringCacheAdd, _SIStringCacheContains, _SIStringCacheCreateWithOptions, 
                        _SIStringCacheEnumerateStrings, _SIStringCacheGetCount, _SIStringCachePrune, 
                        _SIStringCacheRelease, _SIStringCacheRetain, _SIStringCopyComposedString, 
-                       _SIStringCopyIndexableStringForLocale, _SITextTokenizerEnumerateTokensInString, 
-                       _SITokenInit, _SITrieCompletionGetCompletion, _SITrieCompletionGetLength, 
-                       _SITrieCompletionGetPayload, _SITrieCompletionGetScore, _SITrieCompletionQueueCreate, 
-                       _SITrieCompletionRelease, _SITrieCompletionRetain, _SITrieCursorQueueCreate, 
-                       _SpotlightLinguisticsVersionNumber, _SpotlightLinguisticsVersionString, 
-                       __SILanguageModelGetCacheCount, _kSIDataMapOptionEnablePayloads, 
-                       _kSILanguageModelOptionBundleIdentifier, _kSILanguageModelOptionCacheResourcePaths, 
-                       _kSILanguageModelOptionCacheResults, _kSILanguageModelOptionEnableAdaptation, 
-                       _kSILanguageModelOptionEnableLanguageModel, _kSILanguageModelOptionEnableLexicon, 
-                       _kSILanguageModelOptionEnableTokenizer, _kSILanguageModelOptionFilterByAllowlist, 
-                       _kSILanguageModelOptionFilterByBlocklist, _kSILanguageModelOptionFilterByLexicon, 
-                       _kSILanguageModelOptionLocale, _kSILanguageModelOptionNoTimeout, 
-                       _kSILanguageModelOptionNormalizeText, _kSILanguageModelOptionPreferredLanguages, 
-                       _kSILanguageModelOptionReducedResources, _kSILanguageModelOptionThresholdKeyphrases, 
-                       _kSIStringCacheOptionCacheGrowthFactor, _kSIStringCacheOptionMaxCacheSize ]
+                       _SIStringCopyIndexableStringForLocale, _SIStringCopyNormalizedStringForLocale, 
+                       _SITextTokenizerEnumerateTokensInString, _SITokenInit, _SITrieCompletionGetCompletion, 
+                       _SITrieCompletionGetLength, _SITrieCompletionGetPayload, _SITrieCompletionGetScore, 
+                       _SITrieCompletionQueueCreate, _SITrieCompletionRelease, _SITrieCompletionRetain, 
+                       _SITrieCursorQueueCreate, _SpotlightLinguisticsVersionNumber, 
+                       _SpotlightLinguisticsVersionString, __SILanguageModelGetCacheCount, 
+                       _kSIDataMapOptionEnablePayloads, _kSILanguageModelOptionBundleIdentifier, 
+                       _kSILanguageModelOptionCacheResourcePaths, _kSILanguageModelOptionCacheResults, 
+                       _kSILanguageModelOptionEnableAdaptation, _kSILanguageModelOptionEnableLanguageModel, 
+                       _kSILanguageModelOptionEnableLexicon, _kSILanguageModelOptionEnableTokenizer, 
+                       _kSILanguageModelOptionFilterByAllowlist, _kSILanguageModelOptionFilterByBlocklist, 
+                       _kSILanguageModelOptionFilterByLexicon, _kSILanguageModelOptionLocale, 
+                       _kSILanguageModelOptionNoTimeout, _kSILanguageModelOptionNormalizeText, 
+                       _kSILanguageModelOptionPreferredLanguages, _kSILanguageModelOptionReducedResources, 
+                       _kSILanguageModelOptionThresholdKeyphrases, _kSIStringCacheOptionCacheGrowthFactor, 
+                       _kSIStringCacheOptionMaxCacheSize ]
 ...

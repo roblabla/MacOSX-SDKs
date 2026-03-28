@@ -1,18 +1,20 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/RemoteConfiguration.framework/Versions/A/RemoteConfiguration'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo22RCConfigurationManagerC19RemoteConfigurationE010fetchMultiD08settings15networkActivitySDySS10Foundation4DataVG25configurationByRequestKey_Says5Int64VG12treatmentIDsSays5Int32VG010segmentSetR0tSo0A8SettingsC_So09RCNetworkI0CycSgtYaKF', 
                        '_$sSo22RCConfigurationManagerC19RemoteConfigurationE010fetchMultiD08settings15networkActivitySDySS10Foundation4DataVG25configurationByRequestKey_Says5Int64VG12treatmentIDsSays5Int32VG010segmentSetR0tSo0A8SettingsC_So09RCNetworkI0CycSgtYaKFTu', 
                        '_$sSo22RCConfigurationManagerC19RemoteConfigurationE011fetchSingleD08settings15networkActivity10Foundation4DataV13configuration_Says5Int64VG12treatmentIDsSays5Int32VG010segmentSetO0tSo0A8SettingsC_So09RCNetworkI0CycSgtYaKF', 
                        '_$sSo22RCConfigurationManagerC19RemoteConfigurationE011fetchSingleD08settings15networkActivity10Foundation4DataV13configuration_Says5Int64VG12treatmentIDsSays5Int32VG010segmentSetO0tSo0A8SettingsC_So09RCNetworkI0CycSgtYaKFTu', 
                        '_$sSo22RCConfigurationManagerC19RemoteConfigurationE5fetch_8settings7decoder15networkActivityx13configuration_Says5Int64VG12treatmentIDsSays5Int32VG010segmentSetM0txm_So0A8SettingsC10Foundation11JSONDecoderCSo09RCNetworkI0CycSgtYaKSeRzlF', 
                        '_$sSo22RCConfigurationManagerC19RemoteConfigurationE5fetch_8settings7decoder15networkActivityx13configuration_Says5Int64VG12treatmentIDsSays5Int32VG010segmentSetM0txm_So0A8SettingsC10Foundation11JSONDecoderCSo09RCNetworkI0CycSgtYaKSeRzlFTu', 
+                       '_$sSo27RCDebugOverridesEnvironmentV19RemoteConfigurationE2QAABvgZ', 
+                       '_$sSo27RCDebugOverridesEnvironmentV19RemoteConfigurationE2QAABvpZMV', 
+                       '_$sSo27RCEndpointConfigEnvironmentV19RemoteConfigurationE2QAABvgZ', 
+                       '_$sSo27RCEndpointConfigEnvironmentV19RemoteConfigurationE2QAABvpZMV', 
                        _NSErrorRCAdditionsIsNetworkUnavailable, _NSErrorRCAdditionsShouldRetry, 
                        _RCAppBundleID, _RCAppVersion, _RCBlockConjunction, _RCBlockWithQualityOfService, 
                        _RCCFTypeCast, _RCChangeTagContentHashKey, _RCChangeTagIdentifierKey, 

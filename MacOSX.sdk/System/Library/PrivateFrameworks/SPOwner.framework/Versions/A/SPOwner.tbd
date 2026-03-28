@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SPOwner.framework/Versions/A/SPOwner'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AWAudioProductService, AWBluetoothService, AciBtBridge, AirWave, 
                        BlueAvengers, BluetoothSettings, BluetoothTestCases, CoreAutomationDevice, 
                        DaemoniOSTests, DaemoniOSTestsWithUnitTestApp, DigitalSeparationUI, 
@@ -26,14 +24,13 @@ allowable-clients:
                        SiriFindMy, SiriFindMyTests, SpringBoard, SpringBoardUIServices, 
                        TipsDaemon, UWBTestCases, WPDaemon, WayFinder, bluetoothd, 
                        bluetoothd_CITests, com.apple.DiagnosticExtensions.B389, findmybeaconingd, 
-                       findmydeviced, findmydevicetool, findmylocateagent, findmylocated, 
-                       findmylocatedTests, fmdautomationtool, fmfd, fmipcoretool, 
-                       handsfree_hci, identityservicesd, locationd, log_bluetooth, 
-                       sco_perf, searchpartyd, searchpartydTests, searchpartyuseragent, 
-                       sharingd, sptool, tagtool ]
+                       findmydevice-user-agent-macos, findmydeviced, findmydevicetool, 
+                       findmylocateagent, findmylocated, findmylocatedTests, fmdautomationtool, 
+                       fmfd, fmipcoretool, handsfree_hci, identityservicesd, locationd, 
+                       log_bluetooth, sco_perf, searchpartyd, searchpartydTests, 
+                       searchpartyuseragent, sharingd, sptool, tagtool ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s7SPOwner15ObjCSwiftBridgeC9bootstrap7contextySS_tYaKFZ', 
                        '_$s7SPOwner15ObjCSwiftBridgeC9bootstrap7contextySS_tYaKFZTu', 
                        '_$s7SPOwner15ObjCSwiftBridgeCACycfC', '_$s7SPOwner15ObjCSwiftBridgeCACycfc', 

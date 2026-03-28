@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment'
 current-version: 67
 exports:
@@ -10,8 +9,7 @@ exports:
                        __ZN27IOPresentmentFailTracerImpl6tracevEPKcS1_S1_mP13__va_list_tag ]
     weak-symbols:    [ __ZTI23IOPresentmentFailTracer, __ZTI35IOPresentmentTransactionDisplayPipe, 
                        __ZTS23IOPresentmentFailTracer, __ZTS35IOPresentmentTransactionDisplayPipe ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _IOPresentmentBegin, _IOPresentmentBindIOAccelSurfaceToResource, 
                        _IOPresentmentBindIOSurfaceToResourcePlane, _IOPresentmentBindIOSurfaceToResourcePlaneWithDirtyRect, 
                        _IOPresentmentCancel, _IOPresentmentCapabilitiesStructureFree, 
@@ -426,7 +424,7 @@ exports:
                        _kIOPresentmentVerticalBlankingExtension, _kIOPresentmentVerticalSyncConfig, 
                        _kIOPresentmentVerticalSyncOffset, _kIOPresentmentVerticalSyncPulseWidth, 
                        _kIOPresentmentWidth, _kIOPresentmentWorstDictionary ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN27IOPresentmentFailTracerImpl12format_traceEPKcS1_S1_mPc, 
                        __ZN27IOPresentmentFailTracerImpl6tracevEPKcS1_S1_mPc ]
 ...

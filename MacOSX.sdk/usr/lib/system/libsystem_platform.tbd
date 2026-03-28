@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_platform.dylib'
-current-version: 359.60.3
+current-version: 375.100.10
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -60,15 +60,15 @@ exports:
                        _ffs, _ffsl, _ffsll, _fls, _flsl, _flsll, _getcontext, _longjmp, 
                        _makecontext, _os_apt_msg_async_task_running_4swift, _os_apt_msg_async_task_waiting_on_4swift, 
                        _os_lock_lock, _os_lock_trylock, _os_lock_unlock, _os_log_simple_now, 
-                       _os_log_simple_type_from_asl, _os_security_config_get, _os_security_config_get_for_proc, 
-                       _os_security_config_get_for_task, _os_sync_wait_on_address, 
-                       _os_sync_wait_on_address_with_deadline, _os_sync_wait_on_address_with_timeout, 
-                       _os_sync_wake_by_address_all, _os_sync_wake_by_address_any, 
-                       _os_unfair_lock_assert_not_owner, _os_unfair_lock_assert_owner, 
-                       _os_unfair_lock_lock, _os_unfair_lock_lock_no_tsd, _os_unfair_lock_lock_with_flags, 
-                       _os_unfair_lock_lock_with_options, _os_unfair_lock_trylock, 
-                       _os_unfair_lock_trylock_with_options, _os_unfair_lock_unlock, 
-                       _os_unfair_lock_unlock_no_tsd, _os_unfair_recursive_lock_lock_with_options, 
+                       _os_log_simple_type_from_asl, _os_script_config_storage, _os_security_config_get, 
+                       _os_security_config_get_for_proc, _os_security_config_get_for_task, 
+                       _os_sync_wait_on_address, _os_sync_wait_on_address_with_deadline, 
+                       _os_sync_wait_on_address_with_timeout, _os_sync_wake_by_address_all, 
+                       _os_sync_wake_by_address_any, _os_unfair_lock_assert_not_owner, 
+                       _os_unfair_lock_assert_owner, _os_unfair_lock_lock, _os_unfair_lock_lock_no_tsd, 
+                       _os_unfair_lock_lock_with_flags, _os_unfair_lock_lock_with_options, 
+                       _os_unfair_lock_trylock, _os_unfair_lock_trylock_with_options, 
+                       _os_unfair_lock_unlock, _os_unfair_lock_unlock_no_tsd, _os_unfair_recursive_lock_lock_with_options, 
                        _os_unfair_recursive_lock_owned, _os_unfair_recursive_lock_trylock, 
                        _os_unfair_recursive_lock_tryunlock4objc, _os_unfair_recursive_lock_unlock, 
                        _os_unfair_recursive_lock_unlock_forked_child, _setcontext, 
@@ -77,5 +77,5 @@ exports:
                        _sys_icache_invalidate, _timingsafe_enable_if_supported, _timingsafe_restore_if_supported ]
   - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ ___sme_memchr, ___sme_memcpy, ___sme_memmove, ___sme_memset, 
-                       __ctx_done ]
+                       __ctx_done, _os_apt_msg_async_task_stopped_4swift ]
 ...

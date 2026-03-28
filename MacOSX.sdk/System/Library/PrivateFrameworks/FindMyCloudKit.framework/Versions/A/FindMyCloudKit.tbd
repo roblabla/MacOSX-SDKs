@@ -1,17 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FindMyCloudKit.framework/Versions/A/FindMyCloudKit'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FindMyCloudKitTests, findmylocateagent, findmylocated, findmylocatedTests, 
                        searchpartyd, searchpartydTests, searchpartyuseragent ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s14FindMyCloudKit0C6BackedMp', '_$s14FindMyCloudKit0C6BackedP10recordTypeSSvgZTj', 
                        '_$s14FindMyCloudKit0C6BackedP10recordTypeSSvgZTq', '_$s14FindMyCloudKit0C6BackedP11deltaUpdate8ckRecord07updatedI0ySo8CKRecordCz_qd__tAaBRd__lFTj', 
                        '_$s14FindMyCloudKit0C6BackedP11deltaUpdate8ckRecord07updatedI0ySo8CKRecordCz_qd__tAaBRd__lFTq', 

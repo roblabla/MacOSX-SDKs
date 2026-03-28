@@ -1,10 +1,11 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -disable-objc-attr-requires-foundation-module -target x86_64-apple-macosx26.2 -target-variant x86_64-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftDistributed -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature InoutLifetimeDependence -enable-experimental-feature LifetimeDependenceMutableAccessors -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature AllowUnsafeAttribute -user-module-version 6.2.3.3.2 -module-name Distributed
-// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -strict-memory-safety -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-macosx26.4 -target-variant x86_64-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftDistributed -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature InoutLifetimeDependence -enable-experimental-feature LifetimeDependenceMutableAccessors -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature AllowUnsafeAttribute -user-module-version 6.3.0.123.11 -module-name Distributed
+// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -strict-memory-safety -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Darwin
 import Swift
 import _Concurrency
+import Darwin.os.lock
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol DistributedActor : AnyObject, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   associatedtype ActorSystem : Distributed.DistributedActorSystem where Self.ID == Self.ActorSystem.ActorID
@@ -34,7 +35,6 @@ extension Distributed.DistributedActor where Self.ID : Swift.Encodable {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Distributed.DistributedActor {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_silgen_name("$s11Distributed0A5ActorPAAE20whenLocalTypedThrowsyqd__Sgqd__xYiYaYbqd_0_YKXEYaqd_0_YKs8SendableRd__s5ErrorRd_0_r0_lF")
   @_alwaysEmitIntoClient nonisolated public func whenLocal<T, E>(_ body: @Sendable (isolated Self) async throws(E) -> T) async throws(E) -> T? where T : Swift.Sendable, E : Swift.Error {
     if __isLocalActor(self) {
@@ -44,17 +44,12 @@ extension Distributed.DistributedActor {
       return nil
     }
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   @_silgen_name("$s11Distributed0A5ActorPAAE9whenLocalyqd__Sgqd__xYiYaYbqd_0_YKXEYaqd_0_YKs8SendableRd__s5ErrorRd_0_r0_lF")
   nonisolated internal func __abi_whenLocal<T, E>(_ body: @Sendable (isolated Self) async throws(E) -> T) async throws(E) -> T? where T : Swift.Sendable, E : Swift.Error
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_silgen_name("$s11Distributed0A5ActorPAAE9whenLocalyqd__Sgqd__xYiYaYbKXEYaKs8SendableRd__lF")
   @usableFromInline
   nonisolated internal func __abi_whenLocal<T>(_ body: @Sendable (isolated Self) async throws -> T) async rethrows -> T? where T : Swift.Sendable
-  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Distributed.DistributedActor {
@@ -90,9 +85,7 @@ public protocol DistributedActorSystem<SerializationRequirement> : Swift.Sendabl
   associatedtype InvocationDecoder : Distributed.DistributedTargetInvocationDecoder where Self.InvocationDecoder.SerializationRequirement == Self.InvocationEncoder.SerializationRequirement
   associatedtype ResultHandler : Distributed.DistributedTargetInvocationResultHandler
   associatedtype SerializationRequirement where Self.SerializationRequirement == Self.InvocationDecoder.SerializationRequirement
-  #if compiler(>=5.3) && $NonescapableTypes
   func resolve<Act>(id: Self.ActorID, as actorType: Act.Type) throws -> Act? where Act : Distributed.DistributedActor, Self.ActorID == Act.ID
-  #endif
   func assignID<Act>(_ actorType: Act.Type) -> Self.ActorID where Act : Distributed.DistributedActor, Self.ActorID == Act.ID
   func actorReady<Act>(_ actor: Act) where Act : Distributed.DistributedActor, Self.ActorID == Act.ID
   func resignID(_ id: Self.ActorID)
@@ -141,9 +134,7 @@ public struct RemoteCallArgument<Value> {
   }
   public let name: Swift.String
   public let value: Value
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(label: Swift.String?, name: Swift.String, value: Value)
-  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol DistributedTargetInvocationDecoder<SerializationRequirement> {
@@ -151,12 +142,8 @@ public protocol DistributedTargetInvocationDecoder<SerializationRequirement> {
   mutating func decodeGenericSubstitutions() throws -> [any Any.Type]
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   mutating func decodeNextArgument<Argument>() throws -> Argument
-  #if compiler(>=5.3) && $NonescapableTypes
   mutating func decodeErrorType() throws -> (any Any.Type)?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   mutating func decodeReturnType() throws -> (any Any.Type)?
-  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol DistributedTargetInvocationResultHandler<SerializationRequirement> {
@@ -271,30 +258,20 @@ public func _getParameterCount(mangledMethodName name: Swift.String) -> Swift.In
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 @_silgen_name("swift_func_getParameterCount")
 public func __getParameterCount(_ typeNameStart: Swift.UnsafePointer<Swift.UInt8>, _ typeNameLength: Swift.UInt) -> Swift.Int32
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public func _getParameterTypeInfo(mangledMethodName name: Swift.String, genericEnv: Swift.UnsafeRawPointer?, genericArguments: Swift.UnsafeRawPointer?, into typesBuffer: Builtin.RawPointer, length typesLength: Swift.Int) -> Swift.Int32
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 @_silgen_name("swift_func_getParameterTypeInfo")
 public func __getParameterTypeInfo(_ typeNameStart: Swift.UnsafePointer<Swift.UInt8>, _ typeNameLength: Swift.UInt, _ genericEnv: Swift.UnsafeRawPointer?, _ genericArguments: Swift.UnsafeRawPointer?, _ types: Builtin.RawPointer, _ typesLength: Swift.Int) -> Swift.Int32
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 @available(*, deprecated, message: "Use `__getReturnTypeInfo(_:_:_:_:)` directly")
 public func _getReturnTypeInfo(mangledMethodName name: Swift.String, genericEnv: Swift.UnsafeRawPointer?, genericArguments: Swift.UnsafeRawPointer?) -> (any Any.Type)?
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 @_silgen_name("swift_func_getReturnTypeInfo")
 public func __getReturnTypeInfo(_ typeNameStart: Swift.UnsafePointer<Swift.UInt8>, _ typeNameLength: Swift.UInt, _ genericEnv: Swift.UnsafeRawPointer?, _ genericArguments: Swift.UnsafeRawPointer?) -> (any Any.Type)?
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 @_silgen_name("swift_distributed_getGenericEnvironment")
 public func _getGenericEnvironmentOfDistributedTarget(_ targetNameStart: Swift.UnsafePointer<Swift.UInt8>, _ targetNameLength: Swift.UInt) -> Swift.UnsafeRawPointer?
-#endif
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 @_silgen_name("swift_distributed_getWitnessTables")
 public func _getWitnessTablesFor(environment: Swift.UnsafeRawPointer, genericArguments: Swift.UnsafeRawPointer) -> (Swift.UnsafeRawPointer, Swift.Int)
@@ -306,9 +283,7 @@ final public class LocalTestingDistributedActorSystem : Distributed.DistributedA
   public typealias InvocationDecoder = Distributed.LocalTestingInvocationDecoder
   public typealias SerializationRequirement = Swift.Codable
   public init()
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func resolve<Act>(id: Distributed.LocalTestingDistributedActorSystem.ActorID, as actorType: Act.Type) throws -> Act? where Act : Distributed.DistributedActor
-  #endif
   final public func assignID<Act>(_ actorType: Act.Type) -> Distributed.LocalTestingDistributedActorSystem.ActorID where Act : Distributed.DistributedActor
   final public func actorReady<Act>(_ actor: Act) where Act : Distributed.DistributedActor, Act.ID == Distributed.LocalTestingActorID
   final public func resignID(_ id: Distributed.LocalTestingDistributedActorSystem.ActorID)
@@ -353,12 +328,8 @@ final public class LocalTestingInvocationDecoder : Distributed.DistributedTarget
   public typealias SerializationRequirement = Swift.Codable
   final public func decodeGenericSubstitutions() throws -> [any Any.Type]
   final public func decodeNextArgument<Argument>() throws -> Argument where Argument : Swift.Decodable, Argument : Swift.Encodable
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func decodeErrorType() throws -> (any Any.Type)?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func decodeReturnType() throws -> (any Any.Type)?
-  #endif
   @objc deinit
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)

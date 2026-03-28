@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/swift/libswiftQuickLookUI.dylib'
-current-version: 1018.3.2
+current-version: 1018.5.5
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$sSo14QLPreviewReplyC11QuickLookUIE11contextSize8isBitmap9drawUsingABSo6CGSizeV_SbySo12CGContextRefa_ABtKctcfC', 
                        '_$sSo14QLPreviewReplyC11QuickLookUIE11contextSize8isBitmap9drawUsingABSo6CGSizeV_SbySo12CGContextRefa_ABtKctcfc', 
                        '_$sSo14QLPreviewReplyC11QuickLookUIE14stringEncodingSS10FoundationE0G0VvM', 

@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GenerativeFunctions.framework/Versions/A/GenerativeFunctions'
-current-version: 209.29
+current-version: 222.35.5
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s19GenerativeFunctions01_A19FunctionExtractableMp', '_$s19GenerativeFunctions01_A19FunctionExtractableP10syntaxTreeSSvgZTj', 
                        '_$s19GenerativeFunctions01_A19FunctionExtractableP10syntaxTreeSSvgZTq', 
                        '_$s19GenerativeFunctions01_A19FunctionExtractableP2idSSvgZTj', 

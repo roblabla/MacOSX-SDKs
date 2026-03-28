@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MagnifierServices.framework/Versions/A/MagnifierServices'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s17MagnifierServices10MAGServiceC10stopSpeechyyKF', '_$s17MagnifierServices10MAGServiceC12currentStateSSyKF', 
                        '_$s17MagnifierServices10MAGServiceC13describeSceneyyKF', 
                        '_$s17MagnifierServices10MAGServiceC13simulateEventyyAA012MAGSimulatedE0VKF', 
@@ -17,11 +17,25 @@ exports:
                        '_$s17MagnifierServices10MAGServiceC21togglePeopleDetectionyyKF', 
                        '_$s17MagnifierServices10MAGServiceC23toggleImageDescriptionsyyKF', 
                        '_$s17MagnifierServices10MAGServiceC24toggleFurnitureDetectionyyKF', 
+                       '_$s17MagnifierServices10MAGServiceC30performOneShotSceneDescriptionyyKF', 
+                       '_$s17MagnifierServices10MAGServiceC32toggleLiveRecognitionControlsHUDyyKF', 
+                       '_$s17MagnifierServices10MAGServiceC33dismissLiveRecognitionControlsHUDyyKF', 
+                       '_$s17MagnifierServices10MAGServiceC33presentLiveRecognitionControlsHUDyyKF', 
+                       '_$s17MagnifierServices10MAGServiceC33simulateEventForAutomationTestingyyAA012MAGSimulatedE0VKF', 
+                       '_$s17MagnifierServices10MAGServiceC38generateSceneAndEnvironmentDescriptionyyKF', 
+                       '_$s17MagnifierServices10MAGServiceC56currentLiveRecognitionDetectorsStateForAutomationTestingSSyKF', 
                        '_$s17MagnifierServices10MAGServiceC6hideUIyyKF', '_$s17MagnifierServices10MAGServiceC8toggleUIyyKF', 
                        '_$s17MagnifierServices10MAGServiceC9dismissUIyyKF', '_$s17MagnifierServices10MAGServiceCACycfC', 
                        '_$s17MagnifierServices10MAGServiceCACycfc', '_$s17MagnifierServices10MAGServiceCMa', 
                        '_$s17MagnifierServices10MAGServiceCMn', '_$s17MagnifierServices10MAGServiceCMo', 
                        '_$s17MagnifierServices10MAGServiceCN', '_$s17MagnifierServices10MAGServiceCfD', 
+                       '_$s17MagnifierServices12MAGAnalyticsV23oneShotSceneDescription13totalDuration018deviceImageCaptureI00jkL10ErrorLabel016peripheralLookupI00opmN00oklI00oklmN00o14EnvironmentMaplI00oqrmN0017captionGenerationI00sT5StyleySdSg_APSSSgApqpqpqpQtFZ', 
+                       '_$s17MagnifierServices12MAGAnalyticsVMa', '_$s17MagnifierServices12MAGAnalyticsVMn', 
+                       '_$s17MagnifierServices12MAGAnalyticsVN', '_$s17MagnifierServices16MAGServicesErrorO11descriptionSSvg', 
+                       '_$s17MagnifierServices16MAGServicesErrorO11descriptionSSvpMV', 
+                       '_$s17MagnifierServices16MAGServicesErrorOMa', '_$s17MagnifierServices16MAGServicesErrorOMn', 
+                       '_$s17MagnifierServices16MAGServicesErrorON', '_$s17MagnifierServices16MAGServicesErrorOs0D0AAMc', 
+                       '_$s17MagnifierServices16MAGServicesErrorOs23CustomStringConvertibleAAMc', 
                        '_$s17MagnifierServices17MAGAngelConstantsV11MachServiceO011launchAngelE4NameSSvgZ', 
                        '_$s17MagnifierServices17MAGAngelConstantsV11MachServiceO011launchAngelE4NameSSvpZMV', 
                        '_$s17MagnifierServices17MAGAngelConstantsV11MachServiceO011launchAngeleF2IDSSvgZ', 

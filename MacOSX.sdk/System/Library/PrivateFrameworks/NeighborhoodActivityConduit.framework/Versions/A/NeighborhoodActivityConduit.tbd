@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NeighborhoodActivityConduit.framework/Versions/A/NeighborhoodActivityConduit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s27NeighborhoodActivityConduit11FaceTimeURLO15incomingHandoffyAcA08IncomingH7ContextVcACmFWC', 
                        '_$s27NeighborhoodActivityConduit11FaceTimeURLO16callUpdateBanneryAcA04CallhI7ContextVcACmFWC', 
                        '_$s27NeighborhoodActivityConduit11FaceTimeURLO22postIncomingCallBanneryAcA0hiJ7ContextVcACmFWC', 

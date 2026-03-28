@@ -7,42 +7,52 @@
 
 
 #import <CarPlay/CPListImageRowItemElement.h>
+#import <CarPlay/CPThumbnailImage.h>
 #import <CarPlay/CPTemplate.h>
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+
 API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 CARPLAY_TEMPLATE_UI_ACTOR
-@interface CPListImageRowItemCardElement: CPListImageRowItemElement
+@interface CPListImageRowItemCardElement: CPListImageRowItemElement <NSSecureCoding>
 
 /**
- Initialize an element that is constituted of an image, boolean to entirely cover the element with the image, title, subtitle and a tint color.
+ Initialize a card element with an image.
  
- When providing an image, your app should provide a @c UIImage that is display-ready. If necessary for the image, provide
- light and dark styles by using an asset from your asset catalog, prepared with light and dark styles
- or by using @c UIImageAsset to combine two @c UIImage instances into a single image with
- both styles.
- 
- UIImageAsset is used to combine multiple UIImages with different trait collections into a single UIImage.
- 
- @note The expected image size is given by +[CPListImageRowItemCardElement maximumImageSize] or by +[CPListImageRowItemCardElement maximumFullHeightImageSize] if @c showsImageFullHeight is true. Images provided will be resized to this size if necessary.
-
- @discussion To properly size your images, your app should size them to the display scale of the car screen.
- See -[CPInterfaceController carTraitCollection].
- 
- @param image The image associated to the element.
- @param showsImageFullHeight Determines if the image should entirely cover the card
- @param title The title of the element.
- @param subtitle The subtitle of the element.
- @param tintColor The color used as background if @c showsImageFullHeight is true, part of the gradient color at the bottom of the card otherwise.
+ @param image The image to display in the card.
+ @param showsImageFullHeight Whether the image should fill the full height of the card.
+ @param title The title text for the card.
+ @param subtitle The subtitle text for the card.
+ @param tintColor The tint color for the card.
  */
-
 - (instancetype)initWithImage:(UIImage *)image
-          showsImageFullHeight:(BOOL)showsImageFullHeight
+         showsImageFullHeight:(BOOL)showsImageFullHeight
                         title:(nullable NSString *)title
                      subtitle:(nullable NSString *)subtitle
                     tintColor:(nullable UIColor *)tintColor;
+
+/**
+ Initialize an element with a thumbnail, title, subtitle, and tint color.
+ 
+ This initializer uses a CPThumbnailImage which encapsulates the image, aspect ratio,
+ image, and sports overlay information.
+
+ @param thumbnail The thumbnail containing image, aspect ratio, image, and sports overlay information.
+ @param title The title of the element.
+ @param subtitle The subtitle of the element.
+ @param tintColor The color used for styling the element.
+ */
+- (instancetype)initWithThumbnail:(CPThumbnailImage *)thumbnail
+                            title:(nullable NSString *)title
+                         subtitle:(nullable NSString *)subtitle
+                        tintColor:(nullable UIColor *)tintColor API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(tvos, visionos) API_UNAVAILABLE(macos, watchos);
+
+/**
+ The thumbnail associated with this element.
+ */
+@property (nonatomic, strong, nullable) CPThumbnailImage *thumbnail API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(tvos, visionos) API_UNAVAILABLE(macos, watchos);
 
 /**
  The title associated with this element.

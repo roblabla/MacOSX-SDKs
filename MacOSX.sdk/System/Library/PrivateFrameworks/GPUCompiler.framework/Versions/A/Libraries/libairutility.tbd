@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/A/Libraries/libairutility.dylib'
 current-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _MTLAddAIRFunctionArgOptPass, _MTLAddAIRMetadataPrunerPass, 
                        _MTLAddAIRVerifierPass, _MTLAddGlobalCtorOptPass, _MTLAddPipelineLevelPasses, 
                        _MTLAddUberFunctionConstantsRequiredPass, _MTLGetArgumentFunctionConstants, 

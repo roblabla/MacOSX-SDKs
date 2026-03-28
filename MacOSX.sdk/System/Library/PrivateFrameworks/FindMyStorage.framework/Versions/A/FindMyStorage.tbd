@@ -1,20 +1,18 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FindMyStorage.framework/Versions/A/FindMyStorage'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FindMyCloudKit, FindMyStorageTests, findmybeaconingd, findmylocateagent, 
                        findmylocated, findmylocatedTests, searchpartyd, searchpartydTests, 
                        searchpartyuseragent ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s13FindMyStorage13DatabaseErrorO010encryptionE0yA2CmFWC', 
-                       '_$s13FindMyStorage13DatabaseErrorO07unknownE0yA2CmFWC', '_$s13FindMyStorage13DatabaseErrorO12notConnectedyA2CmFWC', 
+                       '_$s13FindMyStorage13DatabaseErrorO07unknownE0yA2CmFWC', '_$s13FindMyStorage13DatabaseErrorO09migrationE0yACs5Int32V_AFs0E0_ptcACmFWC', 
+                       '_$s13FindMyStorage13DatabaseErrorO12notConnectedyA2CmFWC', 
                        '_$s13FindMyStorage13DatabaseErrorO20unknownSchemaVersionyACs5Int32V_tcACmFWC', 
                        '_$s13FindMyStorage13DatabaseErrorOMa', '_$s13FindMyStorage13DatabaseErrorOMn', 
                        '_$s13FindMyStorage13DatabaseErrorON', '_$s13FindMyStorage13DatabaseErrorOs0E0AAMc', 

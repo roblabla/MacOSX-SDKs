@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AudioServerDriver.framework/Versions/A/AudioServerDriver'
 exports:
   - targets:         [ x86_64-macos ]
@@ -13,7 +13,7 @@ exports:
                        __ZTSNSt3__117bad_function_callE, __ZTSSt11logic_error, __ZTSSt12length_error, 
                        __ZTSSt12out_of_range, __ZTSSt13runtime_error, __ZTSSt20bad_array_new_length, 
                        __ZTSSt9bad_alloc, __ZTSSt9exception ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ASDStereoPanControlCenter, _ASDStereoPanControlFullLeft, 
                        _ASDStereoPanControlFullRight, _ASD_AddAudioDeviceRealTimeOperations, 
                        _ASD_AddClockDeviceRealTimeOperations, _ASD_AddStreamRealTimeOperations, 
@@ -46,9 +46,9 @@ exports:
                        __Z23ASD_IOThreadStateChangePP45AudioServerPlugInIOThreadStateChangeInterfacejPK14__CFDictionary, 
                        __Z25ASD_DoIsolatedIOOperationPP40AudioServerPlugInIsolatedDriverInterfacejjjjjPK28AudioServerPlugInIOCycleInfo, 
                        __Z25ASD_TeardownForIsolatedIOPP40AudioServerPlugInIsolatedDriverInterfacejjj, 
-                       __Z27CACFPreferencesCopyAppValuePK10__CFStringS1_, __Z29ASD_IOThreadStateChangeAddRefPv, 
-                       __Z30ASD_IOThreadStateChangeReleasePv, __Z31CACFPreferencesGetAppFloatValuePK10__CFStringS1_Pb, 
-                       __Z32CACFPreferencesGetAppFourCCValuePK10__CFStringS1_Pb, 
+                       __Z27CACFPreferencesCopyAppValuePK10__CFStringS1_, __Z28ASD_GetIsolatedZeroTimeStampPP40AudioServerPlugInIsolatedDriverInterfacejjPdPyS3_, 
+                       __Z29ASD_IOThreadStateChangeAddRefPv, __Z30ASD_IOThreadStateChangeReleasePv, 
+                       __Z31CACFPreferencesGetAppFloatValuePK10__CFStringS1_Pb, __Z32CACFPreferencesGetAppFourCCValuePK10__CFStringS1_Pb, 
                        __Z33CACFPreferencesGetAppBooleanValuePK10__CFStringS1_Pb, 
                        __Z33CACFPreferencesGetAppIntegerValuePK10__CFStringS1_Pb, 
                        __Z34ASD_AbortDeviceConfigurationChangePP32AudioServerPlugInDriverInterfacejyPv, 
@@ -90,7 +90,8 @@ exports:
                        __ZN18ASDDSPStreamHelper16resumeProcessingEv, __ZN18ASDDSPStreamHelper17readIsolatedInputEyjPK28AudioServerPlugInIOCycleInfo, 
                        __ZN18ASDDSPStreamHelper17suspendProcessingEv, __ZN18ASDDSPStreamHelper18setBypassGraphModeEb, 
                        __ZN18ASDDSPStreamHelper18validateGraphAudioEP17ASDDSPGraphHelperPK24CAStreamBasicDescriptionS4_, 
-                       __ZN18ASDDSPStreamHelper26allocateStreamingResourcesEj, __ZN18ASDDSPStreamHelper27setGraphAudioValidationModeE36ASDDSPStreamGraphAudioValidationMode, 
+                       __ZN18ASDDSPStreamHelper20prewarmInputDSPGraphEj, __ZN18ASDDSPStreamHelper26allocateStreamingResourcesEj, 
+                       __ZN18ASDDSPStreamHelper27setGraphAudioValidationModeE36ASDDSPStreamGraphAudioValidationMode, 
                        __ZN18ASDDSPStreamHelper28deallocateStreamingResourcesEv, 
                        __ZN18ASDDSPStreamHelper8writeMixEjPK28AudioServerPlugInIOCycleInfoPvS3_j, 
                        __ZN18ASDDSPStreamHelper9DSPStream17readIsolatedInputEyjPK28AudioServerPlugInIOCycleInfo, 
@@ -191,7 +192,7 @@ exports:
                        ASDSRCStream, ASDSampleRateRange, ASDSelectorControl, ASDSelectorValue, 
                        ASDSliderControl, ASDStereoPanControl, ASDStream, ASDStreamDSPConfiguration, 
                        ASDStreamFormat ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ __ZN5CALog6log_vaEiPKNS_5ScopeEPKciS4_S4_PK10__CFStringPc, 
                        __ZN5CALog7vprintfEiPKcPc ]
 ...

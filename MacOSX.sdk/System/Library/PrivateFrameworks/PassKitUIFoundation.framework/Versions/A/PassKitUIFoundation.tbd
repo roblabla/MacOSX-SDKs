@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PassKitUIFoundation.framework/Versions/A/PassKitUIFoundation'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _PKGlyphViewSize, _PKIconForGenericBusiness, _PKIconForPDFName, 
                        _PKIconWithImageAndBackgroundColor, _PKMapsColorForMerchant, 
                        _PKMapsColorForMerchantCategory, _PKMapsIconForMerchant, _PKMapsIconForMerchantCategory, 

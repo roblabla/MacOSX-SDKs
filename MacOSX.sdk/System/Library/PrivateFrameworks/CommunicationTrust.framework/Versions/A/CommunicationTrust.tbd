@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CommunicationTrust.framework/Versions/A/CommunicationTrust'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s18CommunicationTrust0aB12ScoreOptionsV012ignoreServerB0ACvgZ', 
                        '_$s18CommunicationTrust0aB12ScoreOptionsV012ignoreServerB0ACvpZMV', 
                        '_$s18CommunicationTrust0aB12ScoreOptionsV10junkSignalACvgZ', 
@@ -160,6 +158,8 @@ exports:
                        '_$s18CommunicationTrust7ServiceOSHAAMc', '_$s18CommunicationTrust7ServiceOSQAAMc', 
                        '_$s18CommunicationTrust7ServiceOSYAAMc', '_$s18CommunicationTrust7ServiceOSeAAMc', 
                        '_$s18CommunicationTrust7ServiceOs12CaseIterableAAMc', '_$s18CommunicationTrust7ServiceOs23CustomStringConvertibleAAMc', 
+                       '_$s18CommunicationTrust9BlockListC0cD34CacheDidInvalidateNotificationNameSo014NSNotificationI0avgZ', 
+                       '_$s18CommunicationTrust9BlockListC0cD34CacheDidInvalidateNotificationNameSo014NSNotificationI0avpZMV', 
                        '_$s18CommunicationTrust9BlockListC15isHandleBlockedySb04LiveA3Kit0F0VF', 
                        '_$s18CommunicationTrust9BlockListC17areHandlesBlockedySDy04LiveA3Kit6HandleVSbGShyAGGYaKF', 
                        '_$s18CommunicationTrust9BlockListC17areHandlesBlockedySDy04LiveA3Kit6HandleVSbGShyAGGYaKFTu', 

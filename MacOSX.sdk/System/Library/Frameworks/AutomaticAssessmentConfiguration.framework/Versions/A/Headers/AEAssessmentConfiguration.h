@@ -204,6 +204,12 @@ typedef NS_OPTIONS(NSUInteger, AEAutocorrectMode) {
 ///
 @property (nonatomic, assign) BOOL allowsScreenshots API_AVAILABLE(macos(26.1), macCatalyst(26.1)) API_UNAVAILABLE(ios);
 
+/// A Boolean value that indicates whether to allow the emoji keyboard during an assessment.
+///
+/// Users can access the emoji keyboard by tapping the emoji button on the keyboard. An assessment session disables access to the emoji keyboard by default, but you can allow it by setting ``AEAssessmentConfiguration/allowsEmojiKeyboard`` to `true` in the ``AEAssessmentConfiguration`` instance that you use to initialize a session.
+///
+@property (nonatomic, assign) BOOL allowsEmojiKeyboard API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(macos, macCatalyst);
+
 /// The app-specific configuration for the app that invokes the assessment.
 ///
 /// Use this property to get and customize the app-specific configuration that's applied to your own app. For example, you can set the `allowsNetworkAccess` property for your own app:

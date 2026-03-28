@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DeviceSpecSupport.framework/Versions/A/DeviceSpecSupport'
 current-version: 6
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s17DeviceSpecSupport0A12ComputeTypesO11ValueOrListO02toH0SayxGSgyF', 
                        '_$s17DeviceSpecSupport0A12ComputeTypesO11ValueOrListO04hashF0Sivg', 
                        '_$s17DeviceSpecSupport0A12ComputeTypesO11ValueOrListO04hashF0SivpMV', 

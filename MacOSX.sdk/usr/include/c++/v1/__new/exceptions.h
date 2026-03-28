@@ -18,8 +18,7 @@
 #  pragma GCC system_header
 #endif
 
-// purposefully not using versioning namespace
-namespace std {
+_LIBCPP_BEGIN_UNVERSIONED_NAMESPACE_STD
 #if !defined(_LIBCPP_ABI_VCRUNTIME)
 
 class _LIBCPP_EXPORTED_FROM_ABI bad_alloc : public exception {
@@ -73,6 +72,6 @@ public:
   ::abort();
 #endif
 }
-} // namespace std
+_LIBCPP_END_UNVERSIONED_NAMESPACE_STD
 
 #endif // _LIBCPP___NEW_EXCEPTIONS_H

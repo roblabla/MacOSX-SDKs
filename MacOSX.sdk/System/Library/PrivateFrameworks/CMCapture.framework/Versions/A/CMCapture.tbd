@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CMCapture.framework/Versions/A/CMCapture'
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/CMCaptureCore.framework/Versions/A/CMCaptureCore', 
                        '/System/Library/PrivateFrameworks/CMCaptureDevice.framework/Versions/A/CMCaptureDevice' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BWAspectRatioValueFromAspectRatio, _BWAttachedMediaKey_Depth, 
                        _BWAttachedMediaKey_DepthData_DX, _BWAttachedMediaKey_DepthData_DY, 
                        _BWAttachedMediaKey_PrimaryFormat, _BWAttachedMediaKey_SynchronizedSlaveFrame, 
@@ -86,8 +83,10 @@ exports:
                        _FigCaptureFrameRateAsFloat, _FigCaptureFrameRateAsInt, _FigCaptureFrameRateAsString, 
                        _FigCaptureFrameRateClamp, _FigCaptureFrameRateEqual, _FigCaptureFrameRateFromCMTime, 
                        _FigCaptureFrameRateFromData, _FigCaptureFrameRateFromFloat, 
-                       _FigCaptureFrameRateFromInt, _FigCaptureFrameRateInvalid, 
+                       _FigCaptureFrameRateFromInt, _FigCaptureFrameRateGreaterThan, 
+                       _FigCaptureFrameRateGreaterThanOrEqual, _FigCaptureFrameRateInvalid, 
                        _FigCaptureFrameRateIsInvalid, _FigCaptureFrameRateIsValidRational, 
+                       _FigCaptureFrameRateLessThan, _FigCaptureFrameRateLessThanOrEqual, 
                        _FigCaptureFrameRateNominal, _FigCaptureFrameRateNotEqual, 
                        _FigCaptureFrameRateZero, _FigCaptureFrontCameraRotationAngle, 
                        _FigCaptureFrontDepthDataToRGBRotationAngle, _FigCaptureFullRangePixelFormatForPixelFormat, 
@@ -482,10 +481,13 @@ exports:
                        _kFigCaptureFlatDictionaryAppleMakerNote_Timestamp, _kFigCaptureFlatDictionaryAppleMakerNote_UBMethod, 
                        _kFigCaptureFlatDictionaryAppleMakerNote_Version, _kFigCaptureFlatDictionaryAppleMakerNote_ZeroShutterLagFailureReason, 
                        _kFigCaptureFlatDictionaryAppleMakerNote_iCloudServerSoftwareVersionForDynamicallyGeneratedMedia, 
+                       _kFigCaptureFrameRateThrottlingForThermalMitigationConfigurationKey_HighLevelLimit, 
+                       _kFigCaptureFrameRateThrottlingForThermalMitigationConfigurationKey_MediumLevelLimit, 
                        _kFigCaptureMetadata_CameraCaptureStillImageMetadataVersion, 
                        _kFigCaptureMetadata_CompositeImage, _kFigCaptureMetadata_ExifWhiteBalance, 
                        _kFigCaptureMetadata_SourceExposureTimesOfCompositeImage, 
                        _kFigCaptureMetadata_SourceImageNumberOfCompositeImage, _kFigCaptureMotionCompensatedTemporalFilterNoiseReductionConfigurationKey_ForceEnabled, 
+                       _kFigCaptureMotionCompensatedTemporalFilterNoiseReductionConfigurationKey_OutputPoolSize, 
                        _kFigCaptureMotionCompensatedTemporalFilterNoiseReductionConfigurationKey_Supported, 
                        _kFigCaptureOfflineStillImageVideoStabilizationOverscanPercentage_BackCamera, 
                        _kFigCaptureOfflineStillImageVideoStabilizationOverscanPercentage_FrontCamera, 
@@ -721,6 +723,7 @@ exports:
                        _kFigCaptureSourceAttributeKey_Flash, _kFigCaptureSourceAttributeKey_FocalLength, 
                        _kFigCaptureSourceAttributeKey_FocalLengthCharacterization, 
                        _kFigCaptureSourceAttributeKey_Focus, _kFigCaptureSourceAttributeKey_FocusPointOfInterest, 
+                       _kFigCaptureSourceAttributeKey_FrameRateThrottlingForThermalMitigationConfiguration, 
                        _kFigCaptureSourceAttributeKey_GeometricDistortionCorrection, 
                        _kFigCaptureSourceAttributeKey_GeometricDistortionCorrectionExpandsImageDimensions, 
                        _kFigCaptureSourceAttributeKey_GeometricDistortionCorrectionForSmartCropEnabled, 
@@ -1082,12 +1085,10 @@ exports:
                        FigCaptureCMIOExtensionStream._streaming ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CMCaptureCore.framework/Versions/A/CMCaptureCore'
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AppleDarwinCamera, AppleH10DarwinCamera, AppleH16DarwinCamera, 
                        AppleMCTF, AppleProResHWDecoder-Dev.videodecoder, AppleProResHWDecoder.videodecoder, 
                        AppleProResHWEncoder-Dev.videoencoder, AppleProResHWEncoder.videoencoder, 
@@ -1104,8 +1105,7 @@ allowable-clients:
                        camtestdarwin, darwincameracaptured, h10isp, h10ispdarwin, 
                        h13isp, h16isp, h16ispdarwin ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FigCaptureComputeImageGainFromMetadata, _FigCaptureCopySerializableKeys, 
                        _FigCaptureStreamFocusingMethodIsContrastBased, _FigCaptureStreamFocusingMethodIsPhaseDetectionBased, 
                        _FigCaptureStreamStreamingFaceConfigurationKey_AssistMode, 
@@ -3006,12 +3006,10 @@ exports:
                        _kLensShadingCorrectionGainMapParametersKey_SensorDimensionWidth ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CMCaptureDevice.framework/Versions/A/CMCaptureDevice'
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AppleCVHWA, AppleDarwinCamera, AppleH10DarwinCamera, AppleH16DarwinCamera, 
                        CMCapture, CMCaptureDarwin, CMCaptureTests-Desktop, CMCaptureTests-Embedded, 
                        CMImaging, FirstLight, H10ISP.mediacapture, H10ISPDarwin.mediacapture, 
@@ -3026,8 +3024,7 @@ allowable-clients:
                        h10isp, h10ispdarwin, h13isp, h16isp, h16ispdarwin, test_VIO_HWFeatureDetection, 
                        vcd.mediacapture ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FigCaptureDeviceGetClassID, _FigCaptureDeviceGetFigBaseObject, 
                        _FigCaptureDeviceGetNotificationCenter, _FigCaptureDeviceGetTypeID, 
                        _FigCaptureISPProcessingSessionGetClassID, _FigCaptureISPProcessingSessionGetTypeID, 
@@ -3115,7 +3112,7 @@ exports:
                        _kFigSupportedFormat_VideoBinningFactorHorizontal, _kFigSupportedFormat_VideoBinningFactorVertical, 
                        _kFigSupportedFormat_VideoIsBinned, _kFigSupportedFormat_VideoMaxFrameRate, 
                        _kFigSupportedFormat_VideoMinFrameRate, _kFigSupportedFormat_VideoScaleFactor ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _kFigCaptureStreamNotification_CMIOCenterStageFramingModeChanged, 
                        _kFigCaptureStreamNotification_CMIOCenterStageRectOfInterestChanged, 
                        _kFigCaptureStreamNotification_CMIOVideoZoomFactorChanged, 

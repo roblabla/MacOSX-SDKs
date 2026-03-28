@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DiskImages.framework/Versions/A/DiskImages'
-current-version: 681.60.1
+current-version: 683.100.3
 compatibility-version: 1.0.8
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _DIAddPermission, _DIAddRunToBLKX, _DIAttachDrive, _DIAttachImage, 
                        _DIAuthOpen, _DIBackingStoreAllowExpandability, _DIBackingStoreCanEnumerateDirectory, 
                        _DIBackingStoreChangeKey, _DIBackingStoreCloseDataFork, _DIBackingStoreCloseResourceFile, 

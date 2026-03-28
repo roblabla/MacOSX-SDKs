@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation'
 current-version: 55293
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/Security.framework/Versions/A/Security' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _SFAccessibilityMakeWithMode, _SFCertificateAuthorityInputParmKeyDestinationKeychain, 
                        _SFCertificateAuthorityInputParmKeySignerKeychain, _SFCoreCryptoErrorDomain, 
                        _SFCryptoServicesErrorBadType, _SFCryptoServicesErrorDecryptionFailed, 
@@ -66,7 +63,7 @@ exports:
                        _SFSHA224DigestOperation, _SFSHA256DigestOperation, _SFSHA384DigestOperation, 
                        _SFSHA512DigestOperation, _SFSignedData, _SFSymmetricKey, 
                        _SFSymmetricKeySpecifier, _SFTripleDESKeySpecifier ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ __ZN10CertParser10initFieldsEv, __ZN10CertParser11fieldForOidERK9cssm_dataj, 
                        __ZN10CertParser12initWithDataERK9cssm_data, __ZN10CertParser14initWithCFDataEPK8__CFData, 
                        __ZN10CertParser15extensionForOidERK9cssm_data, __ZN10CertParser15initWithSecCertEP16__SecCertificate, 

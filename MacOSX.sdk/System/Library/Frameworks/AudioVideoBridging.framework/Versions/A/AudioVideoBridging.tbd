@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/AudioVideoBridging.framework/Versions/A/AudioVideoBridging'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AVB17221AECPAEMMaximumAudioMappingsPerCommand, _AVB17221AECPAEMMaximumSensorMappingsPerCommand, 
                        _AVB17221AECPAEMMaximumVideoMappingsPerCommand, _AVB17221AEMAspectRatioHeightKey, 
                        _AVB17221AEMAspectRatioWidthKey, _AVB17221AEMBodePlotFrequencyKey, 

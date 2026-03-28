@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SearchAds.framework/Versions/A/SearchAds'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s9SearchAds010MinimumAgeA8AdFilterC6filter3adsAA0aeF6ResultOSaySo18ADAppAdvertisementCG_tFTj', 
                        '_$s9SearchAds010MinimumAgeA8AdFilterC6filter3adsAA0aeF6ResultOSaySo18ADAppAdvertisementCG_tFTq', 
                        '_$s9SearchAds010MinimumAgeA8AdFilterC6policy9analyticsAC0E15PlatformsCommon0cD6Policy_p_AF0cdE9Analytics_ptcfC', 
@@ -104,8 +102,11 @@ exports:
                        '_$s9SearchAds0A14AdFilterResultON', '_$s9SearchAds0A14AdFilterResultOSQAAMc', 
                        '_$s9SearchAds0A8AdFilterMp', '_$s9SearchAds0A8AdFilterP6filter3adsAA0acD6ResultOSaySo18ADAppAdvertisementCG_tFTj', 
                        '_$s9SearchAds0A8AdFilterP6filter3adsAA0acD6ResultOSaySo18ADAppAdvertisementCG_tFTq', 
-                       '_$s9SearchAds0A8AdFilterTL', '_$s9SearchAds14ADTrialManagerC05trialD017AdPlatformsCommon05TrialD0CvgZ', 
-                       '_$s9SearchAds14ADTrialManagerC05trialD017AdPlatformsCommon05TrialD0CvpZMV', 
+                       '_$s9SearchAds0A8AdFilterTL', '_$s9SearchAds14ADTrialManagerC05trialD8Instance17AdPlatformsCommon15TrialDataSource_pSgvMZ', 
+                       '_$s9SearchAds14ADTrialManagerC05trialD8Instance17AdPlatformsCommon15TrialDataSource_pSgvgZ', 
+                       '_$s9SearchAds14ADTrialManagerC05trialD8Instance17AdPlatformsCommon15TrialDataSource_pSgvpZMV', 
+                       '_$s9SearchAds14ADTrialManagerC05trialD8Instance17AdPlatformsCommon15TrialDataSource_pSgvsZ', 
+                       '_$s9SearchAds14ADTrialManagerC08setTrialD0yy17AdPlatformsCommon0F10DataSource_pSgFZ', 
                        '_$s9SearchAds14ADTrialManagerC15addTrialTrigger2toySo011ADSponsoredA7RequestC_tFTj', 
                        '_$s9SearchAds14ADTrialManagerC15addTrialTrigger2toySo011ADSponsoredA7RequestC_tFTq', 
                        '_$s9SearchAds14ADTrialManagerC4withAC17AdPlatformsCommon15TrialDataSource_p_tcfC', 

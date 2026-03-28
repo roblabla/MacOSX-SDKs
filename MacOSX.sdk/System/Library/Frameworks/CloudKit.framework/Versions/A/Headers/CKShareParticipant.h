@@ -11,82 +11,139 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
+/// Constants that represent the status of a participant.
 typedef NS_ENUM(NSInteger, CKShareParticipantAcceptanceStatus) {
+    /// The participant's status is unknown.
     CKShareParticipantAcceptanceStatusUnknown,
+
+    /// The participant's acceptance of the share request is pending.
     CKShareParticipantAcceptanceStatusPending,
+
+    /// The participant accepted the share request.
     CKShareParticipantAcceptanceStatusAccepted,
+
+    /// The system removed the participant from the share.
     CKShareParticipantAcceptanceStatusRemoved,
 } API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
-/*! These permissions determine what share participants can do with records inside that share */
+/// Constants that represent the permissions to grant to a share participant.
 typedef NS_ENUM(NSInteger, CKShareParticipantPermission) {
+    /// The participant's permissions are unknown.
     CKShareParticipantPermissionUnknown,
+
+    /// The participant doesn't have any permissions for the share.
     CKShareParticipantPermissionNone,
+
+    /// The participant has read-only permissions for the share.
     CKShareParticipantPermissionReadOnly,
+
+    /// The participant has read-and-write permissions for the share.
     CKShareParticipantPermissionReadWrite,
 } API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
-/// Defines the participant role in a share:
-/// - `owner`: Can add private users.
-/// - `privateUser`: Can access the share.
-/// - `publicUser`: Self-added when accessing the share URL (owners cannot add public users).
-/// - `administrator`: Can add and remove participants and change their permissions.
-///
-/// Shares with ``CloudKit/CKShareParticipantRole/CKShareParticipantRoleAdministrator`` participants will be returned as read-only to devices running OS versions prior to this role being introduced.
-/// Administrator participants on these read-only shares will be returned as ``CloudKit/CKShareParticipantRole/CKShareParticipantRolePrivateUser``.
+/// Constants that represent the role of a share's participant.
 typedef NS_ENUM(NSInteger, CKShareParticipantRole) {
+    /// The participant's role is unknown.
     CKShareParticipantRoleUnknown = 0,
+
+    /// The participant is the share's owner.
+    ///
+    /// The owner of a share can invite private users.
     CKShareParticipantRoleOwner = 1,
+
+    /// The participant has the private role.
+    ///
+    /// A private user of a share can access the share.
     CKShareParticipantRolePrivateUser = 3,
+
+    /// The participant has the public role.
+    ///
+    /// A public user of a share is self-added when accessing the share URL.
     CKShareParticipantRolePublicUser = 4,
+    
+    /// The participant has the administrator role.
+    ///
+    /// An administrator of a share can add and remove participants and change their permissions.
+    ///
+    /// CloudKit returns shares with `administrator` participants as read-only to devices running OS versions prior to this role being introduced.
+    /// CloudKit returns administrator participants on such read-only shares as ``CloudKit/CKShareParticipantRole/CKShareParticipantRolePrivateUser``.
     CKShareParticipantRoleAdministrator API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0)) = 2,
 } API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
 
+/// The role of a participant.
 typedef NS_ENUM(NSInteger, CKShareParticipantType) {
+    /// An unknown role.
     CKShareParticipantTypeUnknown = 0,
+
+    /// The type of an owner.
     CKShareParticipantTypeOwner = 1,
+
+    /// The type of a private user.
     CKShareParticipantTypePrivateUser = 3,
+
+    /// The type of a public owner.
     CKShareParticipantTypePublicUser = 4,
 } API_OBSOLETED_WITH_REPLACEMENT("CKShareParticipantRole", macos(10.12, 10.14, 16.0), ios(10.0, 12.0, 19.0), tvos(10.0, 12.0, 19.0), watchos(3.0, 5.0, 12.0));
 
+/// An object that describes a user's participation in a share.
+///
+/// Participants are a key element of sharing in CloudKit. A participant provides information about an iCloud user and their participation in a share, including their identity, acceptance status, permissions, and role.
+///
+/// The acceptance status determines the participant's visibilty of the shared records. Statuses are: `pending`, `accepted`, `removed`, and `unknown`. If the status is `pending`, use ``CKAcceptSharesOperation`` to accept the share. Upon acceptance, CloudKit makes the shared records available in the participant's shared database. The records remain accessible for as long as the participant's status is `accepted`.
+///
+/// You don't create participants. Use the share's ``CKShare/participants`` property to access its existing participants. Use <doc://com.apple.documentation/documentation/uikit/uicloudsharingcontroller> to manage the share's participants and their permissions. Alternatively, you can generate participants using ``CKFetchShareParticipantsOperation``. Participants must have an active iCloud account.
+///
+/// Anyone with the URL of a public share can become a participant in that share. Participants of a public share assume the `publicUser` role. For private shares, the owner manages the participants. An owner is any participant with the `owner` role. A participant of a private share can't accept the share unless the owner adds them first. Private share participants assume the `privateUser` role. CloudKit removes any pending participants if the owner changes the share's ``CKShare/publicPermission``. CloudKit removes all participants if the new permission is `none`.
+///
+/// Participants with write permissions can modify or delete any record that you include in the share. However, only the owner can delete a shared hierarchy's root record. If a participant attempts to delete the share, CloudKit removes the participant. The share remains active for all other participants.
 API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 // This class should not be subclassed. If it is, Sendable may no longer apply.
 // NS_SWIFT_SENDABLE on macos(14.0), ios(17.0), tvos(17.0), watchos(10.0)
 @interface CKShareParticipant : NSObject <NSSecureCoding, NSCopying>
 
-/*! Use @c CKFetchShareParticipantsOperation to create a @c CKShareParticipant object */
+// Use CKFetchShareParticipantsOperation to create a CKShareParticipant object
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
+/// The identity of the participant.
+///
+/// This property contains a reference to the user identity for the share participant.
 @property (readonly, copy) CKUserIdentity *userIdentity;
 
-/*! The default participant role is @c CKShareParticipantRolePrivateUser. */
+/// The participant's role for the share.
 @property (assign) CKShareParticipantRole role API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
 
-/// The default participant type is ``CloudKit/CKShareParticipantType/CKShareParticipantTypePrivateUser``.
+/// The participant type.
+///
+/// The property controls the participant type for the share. For a list of possible values, see ``CKShareParticipantType``.
 @property (assign) CKShareParticipantType type API_OBSOLETED_WITH_REPLACEMENT("role", macos(10.12, 10.14, 16.0), ios(10.0, 12.0, 19.0), tvos(10.0, 12.0, 19.0), watchos(3.0, 5.0, 12.0));
 
+/// The current state of the user's acceptance of the share.
+///
+/// This property contains the current state of the participant's acceptance of the share. For a list of possible values, see ``CKShare/ParticipantAcceptanceStatus``.
 @property (readonly, assign) CKShareParticipantAcceptanceStatus acceptanceStatus;
 
-/*! The default permission for a new participant is @c CKShareParticipantPermissionReadOnly. */
+/// The participant's permission level for the share.
+///
+/// This property controls the permissions that the participant has for the share. For a list of possible values, see ``CKShare/ParticipantPermission``.
 @property (assign) CKShareParticipantPermission permission;
 
-/*! A unique identifier for this participant. */
+/// A unique identifier for this participant.
 @property (readonly, copy) NSString *participantID API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) NS_REFINED_FOR_SWIFT;
 
-/// Indicates whether the participant was originally a requester who was approved to join the share.
+/// Indicates whether the participant was originally a requester that an originator or administrator approved to join the share.
 @property (readonly, assign, nonatomic) BOOL isApprovedRequester API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
 
-/// The date and time when the participant was added to the share.
+/// The date and time when an originator or administrator added this participant to the share.
 ///
-/// This timestamp is set when the share is successfully saved to the server.
+/// CloudKit sets this timestamp when the share is successfully saved to the server.
 @property (nullable, readonly, copy, nonatomic) NSDate *dateAddedToShare API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
 
 /// Generate a unique URL for inviting a participant without knowing their handle
 ///
-/// When a participant's email address / phone number / userRecordID isn't known up-front, a ``CKShareParticipant/oneTimeURLParticipant`` can be added
-/// to the share. Once the share is saved, a custom invitation link or one-time URL is available for the added participant via ``CKShare/oneTimeURLForParticipantID:``.
-/// This custom link can be used by any recipient user to fetch share metadata and accept the share.
+/// When a participant's email address / phone number / userRecordID isn't known up-front, you can add a ``CKShareParticipant/oneTimeURLParticipant``
+/// to the share. Once you save the share, you can get a custom invitation link or one-time URL for the added participant via ``CKShare/oneTimeURL(for:)``.
+/// Any recipient user can use this custom link to fetch share metadata and accept the share.
 ///
 /// Note that a one-time URL participant in the ``ParticipantAcceptanceStatus/pending`` state has empty ``CKUserIdentity/nameComponents``
 /// and a nil ``CKUserIdentity/lookupInfo``.

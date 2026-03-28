@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticRequestService.framework/Versions/A/DiagnosticRequestService'
 current-version: 4
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s24DiagnosticRequestService018RapidCloudFunctionC10ConnectionV11EnvironmentO8rawValueAESgSi_tcfC', 
                        '_$s24DiagnosticRequestService018RapidCloudFunctionC10ConnectionV11EnvironmentO8rawValueSivg', 
                        '_$s24DiagnosticRequestService018RapidCloudFunctionC10ConnectionV11EnvironmentO8rawValueSivpMV', 
@@ -398,10 +398,10 @@ exports:
                        _kDRSDMMicrostackLostMSSBeforeThisDrain, _kDRSDMMicrostackLostMSSInThisDrain, 
                        _kDRSDMMicrostackshotsTeamID, _kDRSDMNandAutoGBBSweepIssueCategory, 
                        _kDRSDMNandGBBTeamID, _kDRSDMNandTeamID, _kDRSDMNewsSlowFeedIssueCategory, 
-                       _kDRSDMNewsTeamID, _kDRSDMNoCap, _kDRSDMNoHysteresis, _kDRSDMPPSArchiveIssueCategory, 
-                       _kDRSDMPPSBGArchiveIssueCategory, _kDRSDMPPSCEArchiveIssueCategory, 
-                       _kDRSDMPPSSafeguardArchiveIssueCategory, _kDRSDMPPSTeamID, 
-                       _kDRSDMPPSUpgradeArchiveIssueCategory, _kDRSDMPPSXCArchiveIssueCategory, 
+                       _kDRSDMNewsTeamID, _kDRSDMNoCap, _kDRSDMNoHysteresis, _kDRSDMPPSAppleCareIssueCategory, 
+                       _kDRSDMPPSArchiveIssueCategory, _kDRSDMPPSBGArchiveIssueCategory, 
+                       _kDRSDMPPSCEArchiveIssueCategory, _kDRSDMPPSSafeguardArchiveIssueCategory, 
+                       _kDRSDMPPSTeamID, _kDRSDMPPSUpgradeArchiveIssueCategory, _kDRSDMPPSXCArchiveIssueCategory, 
                        _kDRSDMPearlAFileBundleCategory, _kDRSDMPearlTeamID, _kDRSDMRMEMemoryExceptionIssueCategory, 
                        _kDRSDMRapidMicroDiagnosticIssueCategory, _kDRSDMRapidTeamID, 
                        _kDRSDMReportMemoryExceptionTeamID, _kDRSDMSentryAppLaunchIssueCategory, 

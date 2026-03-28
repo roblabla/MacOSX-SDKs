@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GenerativeFunctionsInstrumentation.framework/Versions/A/GenerativeFunctionsInstrumentation'
-current-version: 209.29
+current-version: 222.35.5
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s27IntelligencePlatformLibrary39GenerativeFunctionsInstrumentationEventV0deF0E7latency5sinceSdSgAC_tF', 
                        '_$s34GenerativeFunctionsInstrumentation08IdentityC20ProcessorErrorMapperV03mapF25ForCoreAnalyticsReportingy27IntelligencePlatformLibrary0abcF0OAGF', 
                        '_$s34GenerativeFunctionsInstrumentation08IdentityC20ProcessorErrorMapperVAA0ceF7MappingAAMc', 
@@ -124,10 +122,6 @@ exports:
                        '_$s34GenerativeFunctionsInstrumentation12InstrumenterON', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC10sendSystem24eventBuiltWithPresetsAnd27IntelligencePlatformLibrary0abcD0VyAHzKXE_tKF', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC10sendSystem5eventy27IntelligencePlatformLibrary0abcD0V_tKF', 
-                       '_$s34GenerativeFunctionsInstrumentation13EventReporterC10sourceLock2os017OSAllocatedUnfairG0Vy27IntelligencePlatformLibrary6Source_pAH0M0O7StreamsO0A6ModelsO0aB0O0C0O6StreamAhIPRts_XPSgGvg', 
-                       '_$s34GenerativeFunctionsInstrumentation13EventReporterC10sourceLock2os017OSAllocatedUnfairG0Vy27IntelligencePlatformLibrary6Source_pAH0M0O7StreamsO0A6ModelsO0aB0O0C0O6StreamAhIPRts_XPSgGvpMV', 
-                       '_$s34GenerativeFunctionsInstrumentation13EventReporterC12systemStream27IntelligencePlatformLibrary0J0O7StreamsO0A6ModelsO0aB0O06SystemC0OmvgZ', 
-                       '_$s34GenerativeFunctionsInstrumentation13EventReporterC12systemStream27IntelligencePlatformLibrary0J0O7StreamsO0A6ModelsO0aB0O06SystemC0OmvpZMV', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC14userIdentifier13reportToBiomeACs6UInt32VSg_SbtcfC', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC14userIdentifier13reportToBiomeACs6UInt32VSg_SbtcfCTj', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC14userIdentifier13reportToBiomeACs6UInt32VSg_SbtcfCTq', 
@@ -135,17 +129,15 @@ exports:
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC14userIdentifierACs6UInt32VSg_tcfC', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC14userIdentifiers6UInt32VSgvg', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC14userIdentifiers6UInt32VSgvpMV', 
-                       '_$s34GenerativeFunctionsInstrumentation13EventReporterC16systemSourceLock2os017OSAllocatedUnfairH0Vy27IntelligencePlatformLibrary0G0_pAH0N0O7StreamsO0A6ModelsO0aB0O06SystemC0O6StreamAhIPRts_XPSgGvg', 
-                       '_$s34GenerativeFunctionsInstrumentation13EventReporterC16systemSourceLock2os017OSAllocatedUnfairH0Vy27IntelligencePlatformLibrary0G0_pAH0N0O7StreamsO0A6ModelsO0aB0O06SystemC0O6StreamAhIPRts_XPSgGvpMV', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC24onBehalfOfUserIdentifierACs6UInt32V_tcfC', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC2eeoiySbAC_ACtFZ', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC4fromACs7Decoder_p_tKcfC', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC4hash4intoys6HasherVz_tF', 
+                       '_$s34GenerativeFunctionsInstrumentation13EventReporterC4implAA0dE4ImplCvg', 
+                       '_$s34GenerativeFunctionsInstrumentation13EventReporterC4implAA0dE4ImplCvpMV', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC4send24eventBuiltWithPresetsAnd27IntelligencePlatformLibrary0abcD0VyAHzKXE_tKF', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC4send5eventy27IntelligencePlatformLibrary0abcD0V_tKF', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC6encode2toys7Encoder_p_tKF', 
-                       '_$s34GenerativeFunctionsInstrumentation13EventReporterC6stream27IntelligencePlatformLibrary0I0O7StreamsO0A6ModelsO0aB0O0C0OmvgZ', 
-                       '_$s34GenerativeFunctionsInstrumentation13EventReporterC6stream27IntelligencePlatformLibrary0I0O7StreamsO0A6ModelsO0aB0O0C0OmvpZMV', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC6warmupyyKF', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC9hashValueSivg', 
                        '_$s34GenerativeFunctionsInstrumentation13EventReporterC9hashValueSivpMV', 
@@ -197,6 +189,15 @@ exports:
                        '_$s34GenerativeFunctionsInstrumentation16IdentifierLookupOMa', 
                        '_$s34GenerativeFunctionsInstrumentation16IdentifierLookupOMn', 
                        '_$s34GenerativeFunctionsInstrumentation16IdentifierLookupON', 
+                       '_$s34GenerativeFunctionsInstrumentation17EventReporterImplC12resetSourcesyyFZ', 
+                       '_$s34GenerativeFunctionsInstrumentation17EventReporterImplCMa', 
+                       '_$s34GenerativeFunctionsInstrumentation17EventReporterImplCMm', 
+                       '_$s34GenerativeFunctionsInstrumentation17EventReporterImplCMn', 
+                       '_$s34GenerativeFunctionsInstrumentation17EventReporterImplCMo', 
+                       '_$s34GenerativeFunctionsInstrumentation17EventReporterImplCMu', 
+                       '_$s34GenerativeFunctionsInstrumentation17EventReporterImplCN', 
+                       '_$s34GenerativeFunctionsInstrumentation17EventReporterImplCfD', 
+                       '_$s34GenerativeFunctionsInstrumentation17EventReporterImplCfd', 
                        '_$s34GenerativeFunctionsInstrumentation18AssetLoadProcessorC12processEventyy27IntelligencePlatformLibrary0abcH0VF', 
                        '_$s34GenerativeFunctionsInstrumentation18AssetLoadProcessorCAA0cF0AAMc', 
                        '_$s34GenerativeFunctionsInstrumentation18AssetLoadProcessorCAA0cF0AAWP', 

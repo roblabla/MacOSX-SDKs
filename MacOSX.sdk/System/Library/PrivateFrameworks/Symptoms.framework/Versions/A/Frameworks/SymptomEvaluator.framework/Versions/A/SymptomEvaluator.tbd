@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Versions/A/Frameworks/SymptomEvaluator.framework/Versions/A/SymptomEvaluator'
-current-version: 2158.60.3
+current-version: 2169.100.30
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$sSo11NDFCoreShimCMa', _AlgosPackScore, _AlgosUnpackScore, 
                        _CLIPS_BASEBAND_DAL_MODULE, _CLIPS_BASEBAND_INT_MODULE, _CLIPS_BASEBAND_MAV_MODULE, 
                        _CLIPS_BASEBAND_MODULE, _CLIPS_COMMON_MODULE, _CLIPS_MAIN_MODULE, 
@@ -37,15 +37,16 @@ exports:
                        _init_managed_event_listening, _init_symptom_evaluator_listening, 
                        _isDateWithinScope, _kAnalyticsCLIPSTemplateKey, _kAnalyticsCLIPSTemplateModuleKey, 
                        _kCellularMaskedID, _kConfigurationParamsRestoreDefaults, 
-                       _kHashFailedString, _kLQMJournalPrefix, _kMixedJournalPrefix, 
-                       _kNetDiagnosticsShim_TaskArchiveBaseDuration, _kNetDiagnosticsShim_TaskArchiveBaseSize, 
-                       _kNetDiagnosticsShim_TaskArchiveHVDuration, _kNetDiagnosticsShim_TaskArchiveHVSize, 
-                       _kNetDiagnosticsShim_TaskArchiveTTLDuration, _kNetDiagnosticsShim_TaskArchiveTTLSize, 
-                       _kNetDiagnosticsShim_TaskFileDicts, _kNetDiagnosticsShim_TaskFileGroupID, 
-                       _kNetDiagnosticsShim_TaskFileMode, _kNetDiagnosticsShim_TaskFilePath, 
-                       _kNetDiagnosticsShim_TaskFileUserID, _kNetDiagnosticsShim_TaskGNINDFInfo, 
-                       _kNetDiagnosticsShim_TaskGNISensitive, _kNetDiagnosticsShim_TaskGNISysConfig, 
-                       _kNetDiagnosticsShim_TaskName, _kNotificationAlgosScore, _kNotificationAlgosScoreBundleName, 
+                       _kDarwinNotificationLiveLinkHasAdvice, _kHashFailedString, 
+                       _kLQMJournalPrefix, _kMixedJournalPrefix, _kNetDiagnosticsShim_TaskArchiveBaseDuration, 
+                       _kNetDiagnosticsShim_TaskArchiveBaseSize, _kNetDiagnosticsShim_TaskArchiveHVDuration, 
+                       _kNetDiagnosticsShim_TaskArchiveHVSize, _kNetDiagnosticsShim_TaskArchiveTTLDuration, 
+                       _kNetDiagnosticsShim_TaskArchiveTTLSize, _kNetDiagnosticsShim_TaskFileDicts, 
+                       _kNetDiagnosticsShim_TaskFileGroupID, _kNetDiagnosticsShim_TaskFileMode, 
+                       _kNetDiagnosticsShim_TaskFilePath, _kNetDiagnosticsShim_TaskFileUserID, 
+                       _kNetDiagnosticsShim_TaskGNINDFInfo, _kNetDiagnosticsShim_TaskGNISensitive, 
+                       _kNetDiagnosticsShim_TaskGNISysConfig, _kNetDiagnosticsShim_TaskName, 
+                       _kNotificationAlgosScore, _kNotificationAlgosScoreBundleName, 
                        _kNotificationAlgosScoreValue, _kNotificationCellLinkQualityChange, 
                        _kNotificationCellLinkStateChange, _kNotificationCellLinkStateReportCapable, 
                        _kNotificationCellThroughputAdvisoryCapable, _kNotificationCellTrafficClassReportCapable, 
@@ -157,14 +158,15 @@ exports:
                        AppHistoryScreenerEpisode, ApparentTimeHandler, AutoLinkUpgradeHandler, 
                        CLIPSShim, COSMEventSummary, COSMStateSummary, CellFallbackHandler, 
                        CellOutrankHandler, CellOutrankHandlerSTM, CellularStateRelay, 
-                       ConfigurationParams, CoreTelephonyShim, CountDown, DailyMaintenanceActivity, 
-                       DateRounder, DecisionDetails, Evaluation, EventDescription, 
-                       ExpertSystemHandlerCore, ExpertSystemStateCore, FlowAnalyticsEngine, 
-                       HourlyMaintenanceActivity, ImpoExpoService, JournalTimeStamp, 
-                       LQMPredictionInternalRecord, LightweightTimer, ManagedEventHandler, 
-                       ManagedEventTransport, MathUtility, NDFCoreShim, NWPVarStoreImpoExpo, 
-                       NetDiagnosticsShim, NetDomainsHandler, NetworkAnalyticsEngine, 
-                       NetworkAnalyticsModel, NetworkAnalyticsQueueStatistics, NetworkAnalyticsQueueStatisticsSlotEntry, 
+                       CellularStateSnapshot, ConfigurationParams, CoreTelephonyShim, 
+                       CountDown, DailyMaintenanceActivity, DateRounder, DecisionDetails, 
+                       Evaluation, EventDescription, ExpertSystemHandlerCore, ExpertSystemStateCore, 
+                       FlowAnalyticsEngine, HourlyMaintenanceActivity, ImpoExpoService, 
+                       JournalTimeStamp, LQMPredictionInternalRecord, LightweightTimer, 
+                       LiveLinkHandler, LiveLinkObserver, ManagedEventHandler, ManagedEventTransport, 
+                       MathUtility, NDFCoreShim, NWPVarStoreImpoExpo, NetDiagnosticsShim, 
+                       NetDomainsHandler, NetworkAnalyticsEngine, NetworkAnalyticsModel, 
+                       NetworkAnalyticsQueueStatistics, NetworkAnalyticsQueueStatisticsSlotEntry, 
                        NetworkDomainsUtility, NetworkExtensionStateRelay, NetworkStateRelay, 
                        NoBackhaulHandler, PeriodicMaintenanceActivity, SFAOVPNConnSession, 
                        SFActivityBitmaps, SFContentFilterSession, SFDNSProxySession, 
@@ -173,5 +175,8 @@ exports:
                        SymptomEvaluator, SymptomExpertSystemHandler, SystemProperties, 
                        SystemSettingsRelay, TCPProgressProbe, TraceRecorder, WeeklyMaintenanceActivity, 
                        WiFiStateRelay ]
-    objc-ivars:      [ AnalyticsEngineCore.workspace ]
+    objc-ivars:      [ AnalyticsEngineCore.workspace, NetworkStateRelay._knownGood, 
+                       NetworkStateRelay._linkQuality, NetworkStateRelay._networkStateRelayLock, 
+                       NetworkStateRelay._powerCostDL, NetworkStateRelay._powerCostUL, 
+                       NetworkStateRelay._radioTechnology, NetworkStateRelay._signalBars ]
 ...

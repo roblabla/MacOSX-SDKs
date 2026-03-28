@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libsqlite3.dylib'
-current-version: 380
+current-version: 381
 compatibility-version: 9
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __sqlite3_apple_archive, __sqlite3_apple_archive_type, __sqlite3_apple_unarchive, 
                        __sqlite3_db_clone, __sqlite3_db_copy, __sqlite3_db_copy_compact, 
                        __sqlite3_db_truncate, __sqlite3_integrity_check, __sqlite3_lockstate, 

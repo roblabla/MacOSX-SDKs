@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ arm64-macos, arm64e-macos ]
+targets:         [ arm64e-macos ]
 install-name:    '/usr/lib/libPPMDataModel.dylib'
 exports:
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ _OTABMUResistanceReadFrom, _OTAParamRCReadFrom, _OTAResistanceDataReadFrom ]
     objc-classes:    [ OTABMUResistance, OTAParamRC, OTAResistanceData ]
     objc-ivars:      [ OTABMUResistance._downstreamCommonResistance, OTABMUResistance._downstreamNorthResistance, 

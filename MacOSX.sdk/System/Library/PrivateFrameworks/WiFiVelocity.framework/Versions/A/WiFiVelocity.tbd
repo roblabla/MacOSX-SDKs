@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WiFiVelocity.framework/Versions/A/WiFiVelocity'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _W5DebugDescriptionForAWDLSyncChannelSequence, _W5DebugDescriptionForAWDLSyncState, 
                        _W5DescriptionForAWDLElectionParameters, _W5DescriptionForAWDLOpMode, 
                        _W5DescriptionForAWDLScheduleState, _W5DescriptionForAWDLSyncChannelSequence, 

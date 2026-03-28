@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/_Coherence_CloudKit_Private.framework/Versions/A/_Coherence_CloudKit_Private'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s27_Coherence_CloudKit_Private13CRCKMergeableV15mergeableDeltas3forSaySo16CKMergeableDeltaCGSo0iJ8MetadataCSg_tKF', 
                        '_$s27_Coherence_CloudKit_Private13CRCKMergeableV4crdt7contextACyxGxSg_0A09CRContextCtcfC', 
                        '_$s27_Coherence_CloudKit_Private13CRCKMergeableV4crdtxSgvM', 

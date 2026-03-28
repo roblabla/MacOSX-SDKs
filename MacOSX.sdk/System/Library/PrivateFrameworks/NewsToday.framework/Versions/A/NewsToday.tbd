@@ -1,20 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/NewsToday.framework/Versions/A/NewsToday'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Health, HealthArticles, HealthArticlesPlugin, HealthArticlesPluginTests, 
                        Home, HomeArticles, NanoNews, NanoNewsHeadlines, NewsEngagement, 
                        NewsEngagementTests, NewsInternalSettings, NewsPersonalization, 
                        NewsServices, NewsTag, NewsToday, NewsToday2, NewsTodayIntents, 
                        NewsTodayTests, NewsTodayUI, nanonewscd, nanonewsgd, newsd ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s9NewsToday18ProxyForYouServiceC05fetchdE04with13configuration0G0SaySo12NTPBFeedItemCG_SDySSSo13FCFeedContextCGSbtSo05NTForE7RequestC_So22FCNewsAppConfiguration_p10Foundation4DateVtYaKF', 
                        '_$s9NewsToday18ProxyForYouServiceC05fetchdE04with13configuration0G0SaySo12NTPBFeedItemCG_SDySSSo13FCFeedContextCGSbtSo05NTForE7RequestC_So22FCNewsAppConfiguration_p10Foundation4DateVtYaKFTu', 
                        '_$s9NewsToday18ProxyForYouServiceC16feedPersonalizerACSo19FCFeedPersonalizing_p_tcfC', 
@@ -100,9 +97,10 @@ exports:
                        NTProxyForYouService, NTQueueConfigSectionQueueDescriptor, 
                        NTSection, NTSectionConfigSectionDescriptor, NTSectionFeedFilterTransformation, 
                        NTSectionPlaceholderDescriptor, NTSourceAvailabilityManager, 
-                       NTTagSectionFetchDescriptor, NTTodayBanner, NTTodayConfigConversionOperation, 
-                       NTTodayConfigOperation, NTTodayContext, NTTodayHeadlineProtoitem, 
-                       NTTodayItemOperation, NTTodayModuleDescriptorsOperation, NTTodayPrivateData, 
-                       NTTodayResultOperation, NTTodayResults, NTTodayResultsSource, 
-                       NTWidgetConfigDataOperation, NTWidgetDebugInspection, NTWidgetDebugInspectionSection ]
+                       NTStabilizingTransformation, NTTagSectionFetchDescriptor, 
+                       NTTodayBanner, NTTodayConfigConversionOperation, NTTodayConfigOperation, 
+                       NTTodayContext, NTTodayHeadlineProtoitem, NTTodayItemOperation, 
+                       NTTodayModuleDescriptorsOperation, NTTodayPrivateData, NTTodayResultOperation, 
+                       NTTodayResults, NTTodayResultsSource, NTWidgetConfigDataOperation, 
+                       NTWidgetDebugInspection, NTWidgetDebugInspectionSection ]
 ...

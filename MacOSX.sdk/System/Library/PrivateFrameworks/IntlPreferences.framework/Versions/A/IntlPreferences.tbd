@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntlPreferences.framework/Versions/A/IntlPreferences'
-current-version: 475.4
+current-version: 475.4.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$sSo8NSLocaleC15IntlPreferencesE17_sameLocalizationySbSS_SStFZ', 
                        '_$sSo8NSLocaleC15IntlPreferencesE32_localeIdentifierForRegionChange4from2toSS10Foundation6LocaleV_SStFZ', 
                        _IPAllowToChangeEnablingStatePropertyKey, _IPAppleLanguagesSchemaVersionCrystalglowE, 

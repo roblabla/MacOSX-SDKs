@@ -2,7 +2,7 @@
 //  HKClinicalRecord.h
 //  HealthKit
 //
-//  Copyright (c) 2018-2022 Apple Inc. All rights reserved.
+//  Copyright © 2018-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

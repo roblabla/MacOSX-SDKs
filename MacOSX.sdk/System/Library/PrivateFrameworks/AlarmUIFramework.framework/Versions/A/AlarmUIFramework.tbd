@@ -1,11 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AlarmUIFramework.framework/Versions/A/AlarmUIFramework'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s16AlarmUIFramework0A12ConfirmationV12snippetModelAC08SiriTimeA8Internal0acE0V_tcfC', 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s16AlarmUIFramework014DisambiguationA4ViewV12snippetModelAC08SiriTimeA8Internal0ga4ItemF0V_tcfC', 
+                       '_$s16AlarmUIFramework014DisambiguationA4ViewV4bodyQrvg', 
+                       '_$s16AlarmUIFramework014DisambiguationA4ViewV4bodyQrvpMV', 
+                       '_$s16AlarmUIFramework014DisambiguationA4ViewV4bodyQrvpQOMQ', 
+                       '_$s16AlarmUIFramework014DisambiguationA4ViewV7SwiftUI0D0AAMc', 
+                       '_$s16AlarmUIFramework014DisambiguationA4ViewVMa', '_$s16AlarmUIFramework014DisambiguationA4ViewVMn', 
+                       '_$s16AlarmUIFramework014DisambiguationA4ViewVN', '_$s16AlarmUIFramework0A12ConfirmationV12snippetModelAC08SiriTimeA8Internal0acE0V_tcfC', 
                        '_$s16AlarmUIFramework0A12ConfirmationV4bodyQrvg', '_$s16AlarmUIFramework0A12ConfirmationV4bodyQrvpMV', 
                        '_$s16AlarmUIFramework0A12ConfirmationV4bodyQrvpQOMQ', '_$s16AlarmUIFramework0A12ConfirmationV7SwiftUI4ViewAAMc', 
                        '_$s16AlarmUIFramework0A12ConfirmationVMa', '_$s16AlarmUIFramework0A12ConfirmationVMn', 
@@ -19,7 +25,11 @@ exports:
                        '_$s16AlarmUIFramework0A7SnippetV4bodyQrvg', '_$s16AlarmUIFramework0A7SnippetV4bodyQrvpMV', 
                        '_$s16AlarmUIFramework0A7SnippetV4bodyQrvpQOMQ', '_$s16AlarmUIFramework0A7SnippetV7SwiftUI4ViewAAMc', 
                        '_$s16AlarmUIFramework0A7SnippetVMa', '_$s16AlarmUIFramework0A7SnippetVMn', 
-                       '_$s16AlarmUIFramework0A7SnippetVN', '_$s16AlarmUIFramework0A8SelectorV12snippetModelAC08SiriTimeA8Internal0acE0V_tcfC', 
+                       '_$s16AlarmUIFramework0A7SnippetVN', '_$s16AlarmUIFramework0A8ItemViewV12snippetModelAC08SiriTimeA8Internal0gacF0V_tcfC', 
+                       '_$s16AlarmUIFramework0A8ItemViewV4bodyQrvg', '_$s16AlarmUIFramework0A8ItemViewV4bodyQrvpMV', 
+                       '_$s16AlarmUIFramework0A8ItemViewV4bodyQrvpQOMQ', '_$s16AlarmUIFramework0A8ItemViewV7SwiftUI0D0AAMc', 
+                       '_$s16AlarmUIFramework0A8ItemViewVMa', '_$s16AlarmUIFramework0A8ItemViewVMn', 
+                       '_$s16AlarmUIFramework0A8ItemViewVN', '_$s16AlarmUIFramework0A8SelectorV12snippetModelAC08SiriTimeA8Internal0acE0V_tcfC', 
                        '_$s16AlarmUIFramework0A8SelectorV4bodyQrvg', '_$s16AlarmUIFramework0A8SelectorV4bodyQrvpMV', 
                        '_$s16AlarmUIFramework0A8SelectorV4bodyQrvpQOMQ', '_$s16AlarmUIFramework0A8SelectorV7SwiftUI4ViewAAMc', 
                        '_$s16AlarmUIFramework0A8SelectorVMa', '_$s16AlarmUIFramework0A8SelectorVMn', 

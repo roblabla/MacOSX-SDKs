@@ -12,9 +12,14 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// An object that contains the opaque data and other information for a signature.
 ///
-/// Save your signature to a file and share it with others by writing the data to a file. You can use the saved signatures of reference recordings to populate a custom catalog.
+/// You can save signatures to files and share them with others. Use saved signatures
+/// to populate a custom catalog.
 ///
-/// Check whether your captured query signature is long enough to search for a match by comparing ``duration`` to the ``SHCatalog/minimumQuerySignatureDuration`` and ``SHCatalog/maximumQuerySignatureDuration`` of a catalog.
+/// Check whether your captured query signature is long enough to search for a match by comparing
+/// ``duration`` to the ``SHCatalog/minimumQuerySignatureDuration`` and ``SHCatalog/maximumQuerySignatureDuration`` of a catalog.
+///
+/// For signatures longer than ``SHCatalog/maximumQuerySignatureDuration``, use
+/// ``slices(from:duration:stride:)`` to create multiple segments that meet the duration requirement.
 SH_EXPORT NS_SWIFT_SENDABLE API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 @interface SHSignature : NSObject <NSSecureCoding, NSCopying>
 

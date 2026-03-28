@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ARKit.framework/Versions/A/ARKit'
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _ARAdjustIntrincisForMirroring, _ARAdjustIntrincisForOrientation, 
                        _ARAdjustIntrinsicsForViewportSize, _ARAnchorsForPoseGraphUpdates, 
                        _ARAnchorsForPublicDelegate, _ARAppClipCodePerformanceTestModeDefaultsKey, 

@@ -30,7 +30,7 @@ NS_SWIFT_SENDABLE
  *  available to the App Store by appending the query params "action=write-review" to a product URL.
  */
 + (void)requestReview
-API_DEPRECATED("Use -[SKStoreReviewController requestReviewInScene:].", ios(10.3, 14.0))
+API_DEPRECATED("Use +[SKStoreReviewController requestReviewInScene:].", ios(10.3, 14.0))
 API_DEPRECATED("Use AppStore.requestReview(in:).", macos(10.14, 15.0))
 API_UNAVAILABLE(visionos)
 API_UNAVAILABLE(watchos)

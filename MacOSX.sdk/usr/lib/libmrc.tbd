@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libmrc.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _mrc_cached_local_record_key_first_label, _mrc_cached_local_record_key_name, 
                        _mrc_cached_local_record_key_rdata, _mrc_cached_local_record_key_source_address, 
                        _mrc_cached_local_records_inquiry_activate, _mrc_cached_local_records_inquiry_create, 

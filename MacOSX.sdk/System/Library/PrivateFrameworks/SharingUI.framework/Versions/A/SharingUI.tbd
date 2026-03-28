@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SharingUI.framework/Versions/A/SharingUI'
-current-version: 2094.30.41
+current-version: 2094.51.31
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s7Sharing22SFShockwaveEffectStateO0A2UIE05assetD0SSvg', 
                        '_$s7Sharing22SFShockwaveEffectStateO0A2UIE05assetD0SSvpMV', 
                        '_$s7Sharing22SFShockwaveEffectStateO0A2UIE19isLogicallyCompleteSbvg', 
@@ -59,7 +59,15 @@ exports:
                        '_$s9SharingUI18SFAirDropUtilitiesCfD', '_$s9SharingUI18SFAirDropUtilitiesCfd', 
                        '_$s9SharingUI18ShockwaveAnimationMp', '_$s9SharingUI18ShockwaveAnimationP8timelineSayAA13TimelineEntryVy0A022SFShockwaveEffectStateOGGvgTj', 
                        '_$s9SharingUI18ShockwaveAnimationP8timelineSayAA13TimelineEntryVy0A022SFShockwaveEffectStateOGGvgTq', 
-                       '_$s9SharingUI18ShockwaveAnimationTL', '_$s9SharingUI23SFUIContactIconProviderC07contactD8FallBack15backgroundStyleSo7NSImageCSo020SFUIAvatarBackgroundJ0V_tYaKFTj', 
+                       '_$s9SharingUI18ShockwaveAnimationPA2A017DefaultShockewaveD0VRszrlE7defaultAEvgZ', 
+                       '_$s9SharingUI18ShockwaveAnimationPA2A017DefaultShockewaveD0VRszrlE7defaultAEvpZMV', 
+                       '_$s9SharingUI18ShockwaveAnimationPA2A04FastcD0VRszrlE4fastAEvgZ', 
+                       '_$s9SharingUI18ShockwaveAnimationPA2A04FastcD0VRszrlE4fastAEvpZMV', 
+                       '_$s9SharingUI18ShockwaveAnimationTL', '_$s9SharingUI22FastShockwaveAnimationV8timelineSayAA13TimelineEntryVy0A022SFShockwaveEffectStateOGGvg', 
+                       '_$s9SharingUI22FastShockwaveAnimationV8timelineSayAA13TimelineEntryVy0A022SFShockwaveEffectStateOGGvpMV', 
+                       '_$s9SharingUI22FastShockwaveAnimationVAA0dE0AAMc', '_$s9SharingUI22FastShockwaveAnimationVAA0dE0AAWP', 
+                       '_$s9SharingUI22FastShockwaveAnimationVMa', '_$s9SharingUI22FastShockwaveAnimationVMn', 
+                       '_$s9SharingUI22FastShockwaveAnimationVN', '_$s9SharingUI23SFUIContactIconProviderC07contactD8FallBack15backgroundStyleSo7NSImageCSo020SFUIAvatarBackgroundJ0V_tYaKFTj', 
                        '_$s9SharingUI23SFUIContactIconProviderC07contactD8FallBack15backgroundStyleSo7NSImageCSo020SFUIAvatarBackgroundJ0V_tYaKFTjTu', 
                        '_$s9SharingUI23SFUIContactIconProviderC07contactD8FallBack15backgroundStyleSo7NSImageCSo020SFUIAvatarBackgroundJ0V_tYaKFTq', 
                        '_$s9SharingUI23SFUIContactIconProviderC15getImageForName05givenI006familyI015backgroundStyleSo7NSImageCSS_SSSgSo020SFUIAvatarBackgroundM0VtYaKFTj', 
@@ -79,7 +87,12 @@ exports:
                        '_$s9SharingUI23SFUIContactIconProviderCMa', '_$s9SharingUI23SFUIContactIconProviderCMn', 
                        '_$s9SharingUI23SFUIContactIconProviderCMo', '_$s9SharingUI23SFUIContactIconProviderCMu', 
                        '_$s9SharingUI23SFUIContactIconProviderCN', '_$s9SharingUI23SFUIContactIconProviderCfD', 
-                       '_$s9SharingUI29ShockwaveAnimationCoordinatorC09waitUntilD9Completes7timeoutys8DurationV_tYaFTj', 
+                       '_$s9SharingUI26DefaultShockewaveAnimationV8timelineSayAA13TimelineEntryVy0A022SFShockwaveEffectStateOGGvg', 
+                       '_$s9SharingUI26DefaultShockewaveAnimationV8timelineSayAA13TimelineEntryVy0A022SFShockwaveEffectStateOGGvpMV', 
+                       '_$s9SharingUI26DefaultShockewaveAnimationVAA09ShockwaveE0AAMc', 
+                       '_$s9SharingUI26DefaultShockewaveAnimationVAA09ShockwaveE0AAWP', 
+                       '_$s9SharingUI26DefaultShockewaveAnimationVMa', '_$s9SharingUI26DefaultShockewaveAnimationVMn', 
+                       '_$s9SharingUI26DefaultShockewaveAnimationVN', '_$s9SharingUI29ShockwaveAnimationCoordinatorC09waitUntilD9Completes7timeoutys8DurationV_tYaFTj', 
                        '_$s9SharingUI29ShockwaveAnimationCoordinatorC09waitUntilD9Completes7timeoutys8DurationV_tYaFTjTu', 
                        '_$s9SharingUI29ShockwaveAnimationCoordinatorC09waitUntilD9Completes7timeoutys8DurationV_tYaFTq', 
                        '_$s9SharingUI29ShockwaveAnimationCoordinatorC15stopIfNecessaryyyFTj', 

@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Virtualization.framework/Versions/A/Virtualization'
-current-version: 259.3.3
+current-version: 259.5.15
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __VZVirtualMachineGuestTypeMacOS ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '$ld$previous$/usr/lib/swift/libswiftVirtualization.dylib$$1$11.0$14.0$_$sSo16VZMacOSInstallerC14VirtualizationE7install17completionHandleryys6ResultOyyts5Error_pGc_tF$', 
                        '$ld$previous$/usr/lib/swift/libswiftVirtualization.dylib$$1$11.0$14.0$_$sSo16VZVirtualMachineC14VirtualizationE5pause17completionHandleryys6ResultOyyts5Error_pGc_tF$', 
                        '$ld$previous$/usr/lib/swift/libswiftVirtualization.dylib$$1$11.0$14.0$_$sSo16VZVirtualMachineC14VirtualizationE5start17completionHandleryys6ResultOyyts5Error_pGc_tF$', 
@@ -90,7 +90,7 @@ exports:
                        _VZVirtioQueue, _VZVirtioQueueElement, _VZVirtioSocketDeviceObserver, 
                        _VZVirtioSoundDevice, _VZVirtualMachineConfigurationDecoder, 
                        _VZVirtualMachineConfigurationEncoder, _VZVirtualMachineSaveOptions ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ '_$sSo16VZMacOSInstallerC14VirtualizationE7install17completionHandleryys6ResultOyyts5Error_pGc_tF', 
                        '_$sSo19VZMacOSRestoreImageC14VirtualizationE20fetchLatestSupported17completionHandleryys6ResultOyABs5Error_pGc_tFZ', 
                        '_$sSo19VZMacOSRestoreImageC14VirtualizationE4load4from17completionHandlery10Foundation3URLV_ys6ResultOyABs5Error_pGctFZ', 
@@ -118,10 +118,11 @@ exports:
                        _VZBifrostAttachment, _VZBifrostDeviceConfiguration, _VZBinaryBootLoader, 
                        _VZBinaryBootLoaderSegment, _VZCPUEmulatorConfiguration, _VZCPUExitContext, 
                        _VZCoprocessor, _VZCoprocessorBootLoader, _VZCoprocessorConfiguration, 
-                       _VZCustomCPUEmulatorConfiguration, _VZDRMLayer, _VZMacBatteryPowerSourceDevice, 
+                       _VZCustomCPUEmulatorConfiguration, _VZDRMLayer, _VZHIDDevice, 
+                       _VZHIDDeviceConfiguration, _VZIOHIDEvent, _VZMacBatteryPowerSourceDevice, 
                        _VZMacBatteryPowerSourceDeviceConfiguration, _VZMacBatterySource, 
-                       _VZMacBifrostDeviceConfiguration, _VZMacHardwareModelDescriptor, 
-                       _VZMacHostBatterySource, _VZMacNeuralEngineDeviceConfiguration, 
+                       _VZMacBifrostDeviceConfiguration, _VZMacHIDDeviceConfiguration, 
+                       _VZMacHardwareModelDescriptor, _VZMacHostBatterySource, _VZMacNeuralEngineDeviceConfiguration, 
                        _VZMacRemoteServiceDiscoveryConfiguration, _VZMacScalerAcceleratorDeviceConfiguration, 
                        _VZMacSerialNumber, _VZMacSyntheticBatterySource, _VZMacTouchIDDeviceConfiguration, 
                        _VZMacVideoToolboxDeviceConfiguration, _VZMacWallPowerSourceDevice, 

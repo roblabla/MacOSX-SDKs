@@ -2,7 +2,7 @@
 //  HKActivitySummaryQuery.h
 //  HealthKit
 //
-//  Copyright (c) 2015-2022 Apple Inc. All rights reserved.
+//  Copyright © 2015-2022 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

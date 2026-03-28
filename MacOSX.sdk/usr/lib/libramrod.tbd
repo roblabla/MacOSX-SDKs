@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libramrod.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _RAMROD_AMRERROR, _RAMROD_ERROR, _RAMROD_GOODBYE, _RAMROD_HARDWARE_INFO, 
                        _RAMROD_HARDWARE_MODEL, _RAMROD_HW_INFO_BOARD_ID, _RAMROD_HW_INFO_CHIP_ID, 
                        _RAMROD_HW_INFO_EFFECTIVE_PRODUCTION, _RAMROD_HW_INFO_EFFECTIVE_SECURITY, 
@@ -126,8 +126,8 @@ exports:
                        _ramrod_device_expects_baseband_volume, _ramrod_device_has_PS190, 
                        _ramrod_device_has_ace3, _ramrod_device_has_appletcon, _ramrod_device_has_appletconuarp, 
                        _ramrod_device_has_baseband, _ramrod_device_has_baseband_legacy, 
-                       _ramrod_device_has_hoover, _ramrod_device_has_penguin, _ramrod_device_has_rose, 
-                       _ramrod_device_has_sep, _ramrod_device_has_sep_with_persistent_storage, 
+                       _ramrod_device_has_centauri, _ramrod_device_has_hoover, _ramrod_device_has_penguin, 
+                       _ramrod_device_has_rose, _ramrod_device_has_sep, _ramrod_device_has_sep_with_persistent_storage, 
                        _ramrod_device_has_stockholm, _ramrod_device_has_usbcretimer, 
                        _ramrod_device_has_usbcretimer_legacy, _ramrod_device_has_usbcretimer_uarp, 
                        _ramrod_device_has_veridian, _ramrod_device_hide_fdr_failure, 
@@ -137,8 +137,9 @@ exports:
                        _ramrod_device_update_penguin, _ramrod_disable_fsevents_rescan, 
                        _ramrod_disable_fsevents_rescan_ramdisk_only, _ramrod_display_get_num_progress_segments, 
                        _ramrod_display_get_progress, _ramrod_display_has_framebuffer, 
-                       _ramrod_display_retry_framebuffer_create, _ramrod_display_set_aux_image_path, 
-                       _ramrod_display_set_background_color, _ramrod_display_set_granular_progress, 
+                       _ramrod_display_power_cycle, _ramrod_display_retry_framebuffer_create, 
+                       _ramrod_display_set_aux_image_path, _ramrod_display_set_background_color, 
+                       _ramrod_display_set_brightness_nits, _ramrod_display_set_granular_progress, 
                        _ramrod_display_set_granular_progress_forced, _ramrod_display_set_minimum_progress_blink, 
                        _ramrod_display_set_progress, _ramrod_display_set_showprogress, 
                        _ramrod_display_set_showui, _ramrod_display_show_image, _ramrod_display_show_image_with_alpha, 
@@ -203,9 +204,9 @@ exports:
                        _ramrod_receive_message, _ramrod_recovery_os_ticket_copy, 
                        _ramrod_recovery_os_ticket_copy_data_object_property, _ramrod_recovery_os_ticket_update_verify, 
                        _ramrod_recovery_os_ticket_write, _ramrod_recv_bytes, _ramrod_register_for_button_click, 
-                       _ramrod_register_for_button_event, _ramrod_remove_log_fd, 
-                       _ramrod_remove_regulatory_images_from_volume, _ramrod_reprobe_media, 
-                       _ramrod_reset_usbcretimer, _ramrod_seal_system_volume_with_root_hash_return, 
+                       _ramrod_register_for_button_event, _ramrod_register_for_button_event_with_first_event_handler, 
+                       _ramrod_remove_log_fd, _ramrod_remove_regulatory_images_from_volume, 
+                       _ramrod_reprobe_media, _ramrod_reset_usbcretimer, _ramrod_seal_system_volume_with_root_hash_return, 
                        _ramrod_seal_system_volume_with_root_hash_verify, _ramrod_send_bytes, 
                        _ramrod_send_data_array, _ramrod_send_message, _ramrod_set_NVRAM_persistent_path, 
                        _ramrod_set_NVRAM_shadow, _ramrod_set_NVRAM_shadow_limit, 
@@ -219,26 +220,27 @@ exports:
                        _ramrod_should_have_hardware_partition, _ramrod_should_have_scratch_partition, 
                        _ramrod_should_have_xart_partition, _ramrod_should_update_PS190, 
                        _ramrod_should_update_ace3, _ramrod_should_update_appletconuarp, 
-                       _ramrod_should_update_rose, _ramrod_should_update_stockholm, 
-                       _ramrod_should_update_usbcretimer, _ramrod_should_update_usbcretimer_uarp, 
-                       _ramrod_should_use_sep, _ramrod_shrink_main_os_container, 
-                       _ramrod_shrink_main_os_container_with_error, _ramrod_shutdown_gigalocker, 
-                       _ramrod_socket_get_error, _ramrod_socket_log_statistics, _ramrod_socket_recv, 
-                       _ramrod_socket_reset_on_close, _ramrod_socket_send, _ramrod_socket_send_eof_and_wait, 
-                       _ramrod_socket_set_buffer_limits, _ramrod_socket_set_idle_timeouts_active, 
-                       _ramrod_socket_set_idle_timeouts_passive, _ramrod_socket_set_keepalive, 
-                       _ramrod_socket_set_nopush, _ramrod_socket_set_nosigpipe, _ramrod_socket_set_recv_timeout, 
-                       _ramrod_socket_shutdown, _ramrod_socket_sockaddr_to_string, 
-                       _ramrod_socket_wait_for_eof, _ramrod_splat_cleanup, _ramrod_splat_commit_proposed, 
-                       _ramrod_splat_copy_object_path, _ramrod_splat_copy_rollback_assets_path, 
-                       _ramrod_splat_copy_ticket_path, _ramrod_splat_enabled, _ramrod_splat_get_total_cryptex_size, 
+                       _ramrod_should_update_centauri, _ramrod_should_update_rose, 
+                       _ramrod_should_update_stockholm, _ramrod_should_update_usbcretimer, 
+                       _ramrod_should_update_usbcretimer_uarp, _ramrod_should_use_sep, 
+                       _ramrod_shrink_main_os_container, _ramrod_shrink_main_os_container_with_error, 
+                       _ramrod_shutdown_gigalocker, _ramrod_socket_get_error, _ramrod_socket_log_statistics, 
+                       _ramrod_socket_recv, _ramrod_socket_reset_on_close, _ramrod_socket_send, 
+                       _ramrod_socket_send_eof_and_wait, _ramrod_socket_set_buffer_limits, 
+                       _ramrod_socket_set_idle_timeouts_active, _ramrod_socket_set_idle_timeouts_passive, 
+                       _ramrod_socket_set_keepalive, _ramrod_socket_set_nopush, _ramrod_socket_set_nosigpipe, 
+                       _ramrod_socket_set_recv_timeout, _ramrod_socket_shutdown, 
+                       _ramrod_socket_sockaddr_to_string, _ramrod_socket_wait_for_eof, 
+                       _ramrod_splat_cleanup, _ramrod_splat_commit_proposed, _ramrod_splat_copy_object_path, 
+                       _ramrod_splat_copy_rollback_assets_path, _ramrod_splat_copy_ticket_path, 
+                       _ramrod_splat_enabled, _ramrod_splat_get_total_cryptex_size, 
                        _ramrod_splat_install, _ramrod_splat_local_policy_supported, 
                        _ramrod_splat_object_4cc, _ramrod_splat_object_image_patch_tag, 
                        _ramrod_splat_stage_rollback, _ramrod_splat_verify, _ramrod_splat_write_cryptex_upgrade_manifest, 
                        _ramrod_splat_write_personalized_ticket, _ramrod_split_data_volume, 
-                       _ramrod_stash_info_to_file, _ramrod_sync_NVRAM, _ramrod_sync_apfs_metrics_nvram, 
-                       _ramrod_sync_apfs_metrics_nvram_checkpoint, _ramrod_sync_readwrite_ramdisk, 
-                       _ramrod_ticket_copy, _ramrod_ticket_copy_boolean_object_property, 
+                       _ramrod_split_data_volume_with_migrator_status, _ramrod_stash_info_to_file, 
+                       _ramrod_sync_NVRAM, _ramrod_sync_apfs_metrics_nvram, _ramrod_sync_apfs_metrics_nvram_checkpoint, 
+                       _ramrod_sync_readwrite_ramdisk, _ramrod_ticket_copy, _ramrod_ticket_copy_boolean_object_property, 
                        _ramrod_ticket_copy_data_manifest_property, _ramrod_ticket_copy_data_object_property, 
                        _ramrod_ticket_copy_data_object_property_from_ticket_data, 
                        _ramrod_ticket_copy_hash_data, _ramrod_ticket_copy_hash_string, 
@@ -273,7 +275,7 @@ exports:
                        _update_NAND, _update_generic_firmware, _update_usbc, _wait_for_device ]
     objc-classes:    [ MSUBootObjectCopier, MSUCheckpointAsyncBlockContext, MSUCheckpointAsyncContext, 
                        MSUMigrationHelper ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ _ramrod_generate_default_local_policy, _ramrod_init_bootpolicy_logging, 
                        _ramrod_wrap_generate_default_remote_policy_end, _ramrod_wrap_generate_default_remote_policy_reset ]
 ...

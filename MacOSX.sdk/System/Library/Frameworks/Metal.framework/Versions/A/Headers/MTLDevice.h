@@ -359,6 +359,21 @@ typedef NS_ENUM(NSUInteger, MTLCounterSamplingPoint)
     MTLCounterSamplingPointAtBlitBoundary
 } API_AVAILABLE(macos(11.0), ios(14.0));
 
+
+/// Enumeration of kinds of errors that methods on MTLDevice can produce.
+typedef NS_ENUM(NSInteger, MTLDeviceError)
+{
+    /// Indicates the absence of any problems.
+    MTLDeviceErrorNone         = 0,
+    
+    /// Indicates the requested feature is not supported by the current device.
+    MTLDeviceErrorNotSupported = 1,
+} API_AVAILABLE(macos(26.4), ios(26.4));
+
+API_AVAILABLE(macos(26.4), ios(26.4))
+MTL_EXTERN NSErrorDomain const MTLDeviceErrorDomain;
+
+
 /*!
  @abstract Represent a memory size and alignment in bytes.
  */
@@ -1232,6 +1247,8 @@ typedef uint64_t MTLTimestamp;
 - (nullable id<MTLBinaryArchive>) newBinaryArchiveWithDescriptor:(MTLBinaryArchiveDescriptor*)descriptor
                                                            error:(NSError**)error API_AVAILABLE(macos(11.0), ios(14.0));
 
+/// A Boolean value that indicates whether the device supports placement sparse resources.
+@property (readonly) BOOL supportsPlacementSparse API_AVAILABLE(macos(26.4), ios(26.4));
 /*!
 @property supportsRaytracing
 @abstract Query device support for using ray tracing from compute pipelines.

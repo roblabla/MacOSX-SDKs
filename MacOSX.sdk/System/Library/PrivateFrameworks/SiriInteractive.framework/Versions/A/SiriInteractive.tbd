@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriInteractive.framework/Versions/A/SiriInteractive'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15SiriInteractive0A19SceneViewControllerC11viewDidLoadyyF', 
                        '_$s15SiriInteractive0A19SceneViewControllerC7nibName6bundleACSSSg_So8NSBundleCSgtcfC', 
                        '_$s15SiriInteractive0A19SceneViewControllerC7nibName6bundleACSSSg_So8NSBundleCSgtcfc', 

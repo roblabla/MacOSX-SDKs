@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/EmojiFoundation.framework/Versions/A/EmojiFoundation'
 swift-abi-version: 7
 exports:
@@ -19,7 +19,7 @@ exports:
                        __ZTSNSt3__110__function6__baseIFvmNS_17basic_string_viewIcNS_11char_traitsIcEEEERbEEE, 
                        __ZTSNSt3__110__function6__baseIFvtNS_17basic_string_viewIDsNS_11char_traitsIDsEEEERbEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceIN3CEM18AdaptationDatabaseENS_9allocatorIS2_EEEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15EmojiFoundation016centeredImageForA0_2in9frameSize13contentsScale12transformOut17isLowerLeftOriginSo10CGImageRefaSgSS_So6CGRectVSo6CGSizeV12CoreGraphics7CGFloatVSo17CGAffineTransformVzSbtF', 
                        '_$s15EmojiFoundation016centeredImageForA0_9frameSize13contentsScale12transformOut17isLowerLeftOriginSo10CGImageRefaSgSS_So6CGSizeV12CoreGraphics7CGFloatVSo17CGAffineTransformVzSbtF', 
                        '_$s15EmojiFoundation016centeredImageForD6Source_2in9frameSize13contentsScale12transformOut17isLowerLeftOriginSo10CGImageRefaSgSo0rfS0a_So6CGRectVSo6CGSizeV12CoreGraphics7CGFloatVSo17CGAffineTransformVzSbtF', 

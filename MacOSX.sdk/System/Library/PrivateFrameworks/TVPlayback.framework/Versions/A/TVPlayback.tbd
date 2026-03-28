@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TVPlayback.framework/Versions/A/TVPlayback'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _TVPAVMetadataItemUndeterminedLanguageTag, _TVPDurationIndefinite, 
                        _TVPDurationUnknown, _TVPElapsedTimeLive, _TVPElapsedTimeStart, 
                        _TVPErrorIsFatalSKDError, _TVPErrorIsSKDError, _TVPMediaItemCellularSettingsDidChange, 
@@ -213,8 +213,8 @@ exports:
                        TVPMediaRemoteManager, TVPMutableChapter, TVPMutableChapterCollection, 
                        TVPMutableInterstitial, TVPOffSubtitleOption, TVPPlaybackReportingEventCollection, 
                        TVPPlaybackStartupEvent, TVPPlaybackState, TVPPlaybackUtilities, 
-                       TVPPlayer, TVPPlayerItem, TVPPlaylist, TVPReachabilityMonitor, 
-                       TVPReportingSession, TVPResourceLoadingRequest, TVPRoutingManager, 
-                       TVPSecureKeyRequest, TVPStateMachine, TVPSubtitleOption, TVPTimeRange, 
-                       TVPURLMediaItem, TVPVideoView ]
+                       TVPPlayer, TVPPlaylist, TVPReachabilityMonitor, TVPReportingSession, 
+                       TVPResourceLoadingRequest, TVPRoutingManager, TVPSecureKeyRequest, 
+                       TVPStateMachine, TVPSubtitleOption, TVPTimeRange, TVPURLMediaItem, 
+                       TVPVideoView ]
 ...

@@ -1,17 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 1016
+current-version: 1018.1
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AppKit, CoreTransferable, SwiftUICore, TextAnimationSupport, 
                        UIKitCore, UserNotificationsCore, _SwiftUICore ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _NSAccessibilitySpellingStateAttributeName, _NSAdaptiveImageGlyphAttributeName, 
                        _NSAllRomanInputSourcesLocaleIdentifier, _NSAntialiasThresholdChangedNotification, 
                        _NSAppearanceDocumentAttribute, _NSAttachmentAttributeName, 
@@ -377,7 +374,6 @@ exports:
                        __NSFontTypefaceInfo._postscriptName, __NSFontTypefaceInfo._tiFlags, 
                        __NSFontTypefaceInfo._verticalOriginDeltaCache ]
 reexports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ NSEmojiImageAsset, NSEmojiImageStrike ]
 ...

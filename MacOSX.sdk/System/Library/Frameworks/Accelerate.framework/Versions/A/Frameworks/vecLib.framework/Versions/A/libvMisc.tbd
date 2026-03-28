@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib'
-current-version: 1123.40.1
+current-version: 1126.100.7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _VVACOS, _VVACOSF, _VVACOSF_, _VVACOSH, _VVACOSHF, _VVACOSHF_, 
                        _VVACOSH_, _VVACOS_, _VVASIN, _VVASINF, _VVASINF_, _VVASINH, 
                        _VVASINHF, _VVASINHF_, _VVASINH_, _VVASIN_, _VVATAN, _VVATAN2, 
@@ -71,7 +71,7 @@ exports:
                        _vvsqrtf, _vvsqrtf_, _vvtan, _vvtan_, _vvtanf, _vvtanf_, _vvtanh, 
                        _vvtanh_, _vvtanhf, _vvtanhf_, _vvtanpi, _vvtanpi_, _vvtanpif, 
                        _vvtanpif_ ]
-  - targets:         [ x86_64-macos, x86_64h-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64h-macos, arm64e-macos ]
     symbols:         [ ___cblas_isamax, ___cblas_sasum, ___cblas_saxpy, ___cblas_sgemm, 
                        ___cblas_sgemv, ___cblas_srot, ___cblas_sscal, ___cblas_sswap, 
                        _dMultMatMat_16x16, _dMultMatMat_32x32, _dMultMatMat_4x4, 

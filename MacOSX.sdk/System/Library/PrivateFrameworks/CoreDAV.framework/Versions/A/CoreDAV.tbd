@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreDAV.framework/Versions/A/CoreDAV'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CDVAbstractMethod, _CDVAppleClientInfoString, _CDVCleanedStringsFromResponseHeaders, 
                        _CDVDefaultUserAgent, _CDVExtractValuesFromRedirectString, 
                        _CDVHTTPStatusCodeAsStatusString, _CDVHTTPStatusCodeFromStatusLine, 
@@ -237,16 +235,7 @@ exports:
                        CoreDAVCopyOrMoveTask._priorOrderedURL, CoreDAVCopyOrMoveTask._shouldSendOrder, 
                        CoreDAVCurrentUserPrincipalItem._href, CoreDAVCurrentUserPrincipalItem._unauthenticated, 
                        CoreDAVCurrentUserPrivilegeSetItem._privileges, CoreDAVDeleteTask._previousETag, 
-                       CoreDAVDenyItem._privileges, CoreDAVDiscoveryAccountInfo._accountID, 
-                       CoreDAVDiscoveryAccountInfo._backingAccountInfoProvider, CoreDAVDiscoveryAccountInfo._error, 
-                       CoreDAVDiscoveryAccountInfo._host, CoreDAVDiscoveryAccountInfo._identityPersist, 
-                       CoreDAVDiscoveryAccountInfo._password, CoreDAVDiscoveryAccountInfo._port, 
-                       CoreDAVDiscoveryAccountInfo._principalURL, CoreDAVDiscoveryAccountInfo._scheme, 
-                       CoreDAVDiscoveryAccountInfo._serverComplianceClasses, CoreDAVDiscoveryAccountInfo._serverHeaders, 
-                       CoreDAVDiscoveryAccountInfo._serverRoot, CoreDAVDiscoveryAccountInfo._shouldFailAllTasks, 
-                       CoreDAVDiscoveryAccountInfo._started, CoreDAVDiscoveryAccountInfo._success, 
-                       CoreDAVDiscoveryAccountInfo._user, CoreDAVDiscoveryAccountInfo._userAgentHeader, 
-                       CoreDAVDiscoveryTaskGroup._didReceiveAuthenticationError, 
+                       CoreDAVDenyItem._privileges, CoreDAVDiscoveryTaskGroup._didReceiveAuthenticationError, 
                        CoreDAVDiscoveryTaskGroup._discoveredAccountInfo, CoreDAVDiscoveryTaskGroup._discoveries, 
                        CoreDAVDiscoveryTaskGroup._httpPorts, CoreDAVDiscoveryTaskGroup._httpServiceString, 
                        CoreDAVDiscoveryTaskGroup._httpsPorts, CoreDAVDiscoveryTaskGroup._httpsServiceString, 

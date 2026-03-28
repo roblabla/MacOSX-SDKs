@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/kperfdata.framework/Versions/A/kperfdata'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _kpdecode_cursor_clearchunk, _kpdecode_cursor_create, _kpdecode_cursor_flush, 
                        _kpdecode_cursor_free, _kpdecode_cursor_get_stats, _kpdecode_cursor_next_record, 
                        _kpdecode_cursor_set_option, _kpdecode_cursor_setchunk, _kpdecode_record_free, 

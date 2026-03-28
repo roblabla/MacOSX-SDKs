@@ -36,19 +36,53 @@
 
 __BEGIN_DECLS
 
+
 typedef struct __lck_rw_t__     lck_rw_t;
 
-#if DEVELOPMENT || DEBUG
-#endif /* DEVELOPMENT || DEBUG */
-
-typedef unsigned int     lck_rw_type_t;
-
-#define LCK_RW_TYPE_SHARED              0x01
-#define LCK_RW_TYPE_EXCLUSIVE           0x02
 
 #define decl_lck_rw_data(class, name)   class lck_rw_t name
 
 
+#pragma mark alloc/init/destroy/free
+
+/*
+ * Auto-initializing rw-locks declarations
+ * ------------------------------------
+ *
+ * Unless you need to configure your locks in very specific ways,
+ * there is no point creating explicit lock attributes. For most
+ * static locks, this declaration macro can be used:
+ *
+ * - LCK_RW_DEFINE.
+ *
+ * For cases when some particular attributes need to be used,
+ * LCK_RW_DEFINE_ATTR takes a variable declared with
+ * LCK_ATTR_DEFINE as an argument.
+ */
+
+#define LCK_RW_DEFINE_ATTR(var, grp, attr) \
+	lck_rw_t var; \
+	static __startup_data struct lck_rw_startup_spec \
+	__startup_lck_rw_spec_ ## var = { &var, grp, attr }; \
+	STARTUP_ARG(LOCKS, STARTUP_RANK_FOURTH, lck_rw_startup_init, \
+	    &__startup_lck_rw_spec_ ## var)
+
+#define LCK_RW_DEFINE(var, grp) \
+	LCK_RW_DEFINE_ATTR(var, grp, LCK_ATTR_NULL)
+
+#define LCK_RW_OLD_DEFINE(var, grp) \
+	lck_rw_old_t var; \
+	static __startup_data struct lck_rw_old_startup_spec \
+	__startup_lck_rw_spec_ ## var = { &var, grp, NULL }; \
+	STARTUP_ARG(LOCKS, STARTUP_RANK_FOURTH, lck_rw_old_startup_init, \
+	    &__startup_lck_rw_spec_ ## var)
+
+#define LCK_RW_NEW_DEFINE(var, grp) \
+	lck_rw_new_t var; \
+	static __startup_data struct lck_rw_new_startup_spec \
+	__startup_lck_rw_spec_ ## var = { &var, grp, NULL }; \
+	STARTUP_ARG(LOCKS, STARTUP_RANK_FOURTH, lck_rw_new_startup_init, \
+	    &__startup_lck_rw_spec_ ## var)
 
 /*!
  * @function lck_rw_alloc_init
@@ -119,6 +153,19 @@ extern void             lck_rw_destroy(
 	lck_rw_t                *lck,
 	lck_grp_t               *grp);
 
+
+/* obsolete names, use LCK_RW_DEFINE* instead */
+#define LCK_RW_DECLARE_ATTR(...)  LCK_RW_DEFINE_ATTR(__VA_ARGS__)
+#define LCK_RW_DECLARE(...)       LCK_RW_DEFINE(__VA_ARGS__)
+
+
+#pragma mark generic interfaces
+
+__enum_closed_decl(lck_rw_type_t, uint32_t, {
+	LCK_RW_TYPE_SHARED              = 1,
+	LCK_RW_TYPE_EXCLUSIVE           = 2,
+});
+
 /*!
  * @function lck_rw_lock
  *
@@ -139,7 +186,7 @@ extern void             lck_rw_lock(
  * @function lck_rw_try_lock
  *
  * @abstract
- * Tries to locks a rw_lock with the specified type.
+ * Tries to lock a rw_lock with the specified type.
  *
  * @discussion
  * This function will return and not wait/block in case the lock is already held.
@@ -152,7 +199,7 @@ extern void             lck_rw_lock(
  */
 extern boolean_t        lck_rw_try_lock(
 	lck_rw_t                *lck,
-	lck_rw_type_t           lck_rw_type);
+	lck_rw_type_t           lck_rw_type) __result_use_check;
 
 /*!
  * @function lck_rw_unlock
@@ -172,6 +219,8 @@ extern void             lck_rw_unlock(
 	lck_rw_t                *lck,
 	lck_rw_type_t           lck_rw_type);
 
+#pragma mark shared locking
+
 /*!
  * @function lck_rw_lock_shared
  *
@@ -180,20 +229,23 @@ extern void             lck_rw_unlock(
  *
  * @discussion
  * This function can block.
- * Multiple threads can acquire the lock in shared mode at the same time, but only one thread at a time
- * can acquire it in exclusive mode.
- * If the lock is held in shared mode and there are no writers waiting, a reader will be able to acquire
- * the lock without waiting.
- * If the lock is held in shared mode and there is at least a writer waiting, a reader will wait
- * for all the writers to make progress.
- * NOTE: the thread cannot return to userspace while the lock is held. Recursive locking is not supported.
+ *
+ * Multiple threads can acquire the lock in shared mode at the same time,
+ * but only one thread at a time can acquire it in exclusive mode.
+ *
+ * If the lock is held in shared mode and there are no writers waiting,
+ * a reader will be able to acquire the lock without waiting.
+ *
+ * If the lock is held in shared mode and there is at least a writer waiting,
+ * a reader will wait for all the writers to make progress.
+ *
+ * NOTE: the thread cannot return to userspace while the lock is held.
+ *       Recursive locking is not supported.
  *
  * @param lck           rw_lock to lock.
  */
 extern void             lck_rw_lock_shared(
 	lck_rw_t                *lck);
-
-
 
 /*!
  * @function lck_rw_lock_shared_to_exclusive
@@ -203,8 +255,10 @@ extern void             lck_rw_lock_shared(
  *
  * @discussion
  * This function can block.
- * Only one reader at a time can upgrade to exclusive mode. If the upgrades fails the function will
- * return with the lock not held.
+ * Only one reader at a time can upgrade to exclusive mode.
+ *
+ * If the upgrade fails the function will return with the lock not held.
+ *
  * The caller needs to hold the lock in shared mode to upgrade it.
  *
  * @param lck           rw_lock already held in shared mode to upgrade.
@@ -230,6 +284,8 @@ extern boolean_t        lck_rw_lock_shared_to_exclusive(
 extern void             lck_rw_unlock_shared(
 	lck_rw_t                *lck);
 
+#pragma mark exclusive locking
+
 /*!
  * @function lck_rw_lock_exclusive
  *
@@ -238,9 +294,12 @@ extern void             lck_rw_unlock_shared(
  *
  * @discussion
  * This function can block.
- * Multiple threads can acquire the lock in shared mode at the same time, but only one thread at a time
- * can acquire it in exclusive mode.
- * NOTE: the thread cannot return to userspace while the lock is held. Recursive locking is not supported.
+ *
+ * Multiple threads can acquire the lock in shared mode at the same time,
+ * but only one thread at a time can acquire it in exclusive mode.
+ *
+ * NOTE: the thread cannot return to userspace while the lock is held.
+ *       Recursive locking is not supported.
  *
  * @param lck           rw_lock to lock.
  */
@@ -254,6 +313,8 @@ extern void             lck_rw_lock_exclusive(
  * Downgrades a rw_lock held in exclusive mode to shared.
  *
  * @discussion
+ * This function never blocks.
+ *
  * The caller needs to hold the lock in exclusive mode to be able to downgrade it.
  *
  * @param lck           rw_lock already held in exclusive mode to downgrade.
@@ -274,6 +335,9 @@ extern void             lck_rw_lock_exclusive_to_shared(
  */
 extern void             lck_rw_unlock_exclusive(
 	lck_rw_t                *lck);
+
+#pragma mark assertions
+#pragma mark sleeping
 
 /*!
  * @function lck_rw_sleep
@@ -322,7 +386,6 @@ extern wait_result_t    lck_rw_sleep_deadline(
 	event_t                 event,
 	wait_interrupt_t        interruptible,
 	uint64_t                deadline);
-
 
 
 

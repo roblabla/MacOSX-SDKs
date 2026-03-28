@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Slideshows.framework/Versions/A/Frameworks/OpusKit.framework/Versions/A/OpusKit'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _OKErrorDomain, _OKPlatformDescriptionATV, _OKPlatformDescriptionDekstop, 
                        _OKPlatformDescriptionPad, _OKPlatformDescriptionPhone, _OKPlatformDescriptionWeb, 
                        _OKResolutionSize1024x768, _OKResolutionSize768x1024, _OKResolutionSizeDefault, 

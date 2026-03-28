@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MapsSuggestions.framework/Versions/A/MapsSuggestions'
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZN3MSg7jsonForEa ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s15MapsSuggestions0aB10FinanceKitC10uniqueNameSSvMTj', 
                        '_$s15MapsSuggestions0aB10FinanceKitC10uniqueNameSSvMTq', 
                        '_$s15MapsSuggestions0aB10FinanceKitC10uniqueNameSSvgTj', 
@@ -254,7 +252,8 @@ exports:
                        _CLLocationCoordinateFromNSData, _CLLocationFromGEOLocation, 
                        _CLLocationFromGEOLocationCoordinate2D, _GEOComposedWaypointFromMapsSuggestionsEntry, 
                        _GEOConfigFromMapsSuggestionsEntryType, _GEOConfigMNMapsBundleIDPhone, 
-                       _GEOConfigMNMapsBundleIDWatch, _GEOConfigMapsSuggestionContactActivityRank, 
+                       _GEOConfigMNMapsBundleIDWatch, _GEOConfigMapsIntelligenceTMPSignalInjection, 
+                       _GEOConfigMapsIntelligenceTMPSignalPList, _GEOConfigMapsSuggestionContactActivityRank, 
                        _GEOConfigMapsSuggestionContactActivitySourceEnabled, _GEOConfigMapsSuggestionsAirportArrivalAnnouncerBudgetState, 
                        _GEOConfigMapsSuggestionsAirportArrivalAnnouncerNotificationFrequency, 
                        _GEOConfigMapsSuggestionsAirportArrivalAnnouncerNotificationFrequencyWindowDuration, 
@@ -713,8 +712,9 @@ exports:
                        _MapsSuggestionsEntriesAreBothOfType, _MapsSuggestionsEntriesAtLeastOneIsOfType, 
                        _MapsSuggestionsEntriesFromNSData, _MapsSuggestionsEntriesShouldBeOfOneOfEachType, 
                        _MapsSuggestionsEntryFromShortcut, _MapsSuggestionsEntryIsNearbyTransit, 
-                       _MapsSuggestionsEntryTypeCouldBeShortcut, _MapsSuggestionsEntryTypeEnumerate, 
-                       _MapsSuggestionsEntryTypeFromShortcutType, _MapsSuggestionsEntryTypeFromString, 
+                       _MapsSuggestionsEntrySourceTypeToRGAnalyticsEntryType, _MapsSuggestionsEntryTypeCouldBeShortcut, 
+                       _MapsSuggestionsEntryTypeEnumerate, _MapsSuggestionsEntryTypeFromShortcutType, 
+                       _MapsSuggestionsEntryTypeFromString, _MapsSuggestionsEntryTypeToRGAnalyticsEntryType, 
                        _MapsSuggestionsFakeNow, _MapsSuggestionsFakeTimeZone, _MapsSuggestionsFindMyAppBundleID, 
                        _MapsSuggestionsFlightUpdateAlreadyThere, _MapsSuggestionsGetTransportationModeDebugPanelSetting, 
                        _MapsSuggestionsIPCPayloadForNSString, _MapsSuggestionsIPCPeerIdentifier, 
@@ -856,11 +856,11 @@ exports:
                        _isAuthorizedToUseContacts, _isExtensionHidden, _isExtensionLocked, 
                        _isFinanceSourceEnabled, _isInChina, _isLikelyMeetup, _isLikelyMeetupThroughFindMy, 
                        _isLikelyMeetupThroughMessages, _isRecentlyShared, _isSharingStopped, 
-                       _kMLModelTrainingDateKey, _kMLModelTypeKey, _kMLModelVersionKey, 
-                       _kTrainingType_DeepLearning, _kTrainingType_PLF, _kTrainingType_TransferLearning, 
-                       _kTrainingType_XGBoost, _kVersionKey, _rtLOITypeForMSgLOIType, 
-                       _rtVisitSourceForMSgVisitSource, _rtVisitTypeForMSgVisitType, 
-                       _shortcutTypeForLOIType, _startEventKitStreamer ]
+                       _kExperimentIDKey, _kExperimentTreatmentIDKey, _kMLModelTrainingDateKey, 
+                       _kMLModelTypeKey, _kMLModelVersionKey, _kTrainingType_DeepLearning, 
+                       _kTrainingType_PLF, _kTrainingType_TransferLearning, _kTrainingType_XGBoost, 
+                       _kVersionKey, _rtLOITypeForMSgLOIType, _rtVisitSourceForMSgVisitSource, 
+                       _rtVisitTypeForMSgVisitType, _shortcutTypeForLOIType, _startEventKitStreamer ]
     objc-classes:    [ MapsSuggestionsActionCircuit, MapsSuggestionsAirportArrivalBudget, 
                        MapsSuggestionsAllShortcutsMatcher, MapsSuggestionsAlreadyThereFilter, 
                        MapsSuggestionsAppConnectionAndRecentsDeduper, MapsSuggestionsAppConnectionDeduper, 
@@ -967,11 +967,13 @@ exports:
                        _TtC15MapsSuggestions38MapsSuggestionsContactActivityImprover, 
                        _TtC15MapsSuggestions38MapsSuggestionsFakeFinanceKitConnector, 
                        _TtC15MapsSuggestions38MapsSuggestionsRealFinanceKitConnector ]
-    objc-ivars:      [ MapsSuggestionsBaseShortcutMatcher._hasLoadedShortcuts, MapsSuggestionsBaseShortcutMatcher._mapsSync, 
+    objc-ivars:      [ MapsSuggestionsBaseShortcutMatcher._didUpdateOffloadQueue, 
+                       MapsSuggestionsBaseShortcutMatcher._hasLoadedShortcuts, MapsSuggestionsBaseShortcutMatcher._isLoading, 
+                       MapsSuggestionsBaseShortcutMatcher._loadingGroup, MapsSuggestionsBaseShortcutMatcher._mapsSync, 
                        MapsSuggestionsBaseShortcutMatcher._matchingDistance, MapsSuggestionsBaseShortcutMatcher._queue, 
                        MapsSuggestionsBaseShortcutMatcher._shortcuts, _MonitorState._isMonitoring, 
                        _MonitorState._shouldBeMonitoring ]
     weak-symbols:    [ __ZNSt3__119piecewise_constructE ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN3MSg7jsonForEb ]
 ...

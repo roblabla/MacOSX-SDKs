@@ -1,21 +1,41 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LegalAndRegulatorySettingsSupport.framework/Versions/A/LegalAndRegulatorySettingsSupport'
-current-version: 1056.2.4
+current-version: 1056.4.2
 compatibility-version: 0
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ AboutExtension, LARSMacOSTest, LARSSwiftUIPreviewHost, LegalAndRegulatoryAppIntents, 
-                       LegalAndRegulatorySettings, MacBuddyTests, Setup, Setup Assistant ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    clients:         [ AboutExtension, Bridge, LARSMacOSTest, LARSSwiftUIPreviewHost, 
+                       LegalAndRegulatoryAppIntents, LegalAndRegulatorySettings, 
+                       MacBuddyTests, Setup, Setup Assistant ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s33LegalAndRegulatorySettingsSupport0a14DocumentSafetyB12HandlingViewV10shouldShow8language6regionSbSSSg_AGtFZ', 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingV0H5ValueO04hashI0Sivg', 
+                       '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingV0H5ValueO04hashI0SivpMV', 
+                       '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingV0H5ValueO2eeoiySbAE_AEtFZ', 
+                       '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingV0H5ValueO4boolyAESbcAEmFWC', 
+                       '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingV0H5ValueO4hash4intoys6HasherVz_tF', 
+                       '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingV0H5ValueO6stringyAESScAEmFWC', 
+                       '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingV0H5ValueOMa', 
+                       '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingV0H5ValueOMn', 
+                       '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingV0H5ValueON', 
+                       '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingV0H5ValueOSHAAMc', 
+                       '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingV0H5ValueOSQAAMc', 
+                       '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingV13deviceGestaltACvgZ', 
+                       '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingV13deviceGestaltACvpZMV', 
+                       '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingV6customyACSDySSAC0H5ValueOGFZ', 
+                       '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingVMa', 
+                       '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingVMn', 
+                       '_$s33LegalAndRegulatorySettingsSupport06SafetyB17HandlingTargetingVN', 
+                       '_$s33LegalAndRegulatorySettingsSupport0a14DocumentSafetyB12HandlingViewV10shouldShow8language6region9targetingSbSSSg_AhA0gbH9TargetingVtFZ', 
+                       '_$s33LegalAndRegulatorySettingsSupport0a14DocumentSafetyB12HandlingViewV10shouldShow8language6regionSbSSSg_AGtFZ', 
                        '_$s33LegalAndRegulatorySettingsSupport0a14DocumentSafetyB12HandlingViewV4bodyQrvg', 
                        '_$s33LegalAndRegulatorySettingsSupport0a14DocumentSafetyB12HandlingViewV4bodyQrvpMV', 
                        '_$s33LegalAndRegulatorySettingsSupport0a14DocumentSafetyB12HandlingViewV4bodyQrvpQOMQ', 
                        '_$s33LegalAndRegulatorySettingsSupport0a14DocumentSafetyB12HandlingViewV7SwiftUI0I0AAMc', 
+                       '_$s33LegalAndRegulatorySettingsSupport0a14DocumentSafetyB12HandlingViewV8language6region9targetingACSSSg_AgA0gbH9TargetingVtcfC', 
                        '_$s33LegalAndRegulatorySettingsSupport0a14DocumentSafetyB12HandlingViewV8language6regionACSSSg_AFtcfC', 
                        '_$s33LegalAndRegulatorySettingsSupport0a14DocumentSafetyB12HandlingViewVMa', 
                        '_$s33LegalAndRegulatorySettingsSupport0a14DocumentSafetyB12HandlingViewVMn', 

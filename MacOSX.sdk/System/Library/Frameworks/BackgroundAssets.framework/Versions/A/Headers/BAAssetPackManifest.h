@@ -49,7 +49,7 @@ NS_SWIFT_NAME(init(from:appGroupID:));
 ///
 /// The returned download objects can be scheduled with the download manager.
 /// - Returns: A collection of download objects.
-/// - Remark: Use this method in your main app; use `-allDownloadsForContentRequest:` in your downloader extension.
+/// - Remark: Use this method in your main application; use ``allDownloadsForContentRequest:`` in your downloader extension.
 - (NSSet<BADownload*>*)allDownloads;
 
 /// Creates download objects for every asset pack in this manifest.
@@ -57,7 +57,7 @@ NS_SWIFT_NAME(init(from:appGroupID:));
 /// The returned download objects can be scheduled with the download manager.
 /// - Parameter contentRequest: The content request for the current extension invocation.
 /// - Returns: A collection of download objects.
-/// - Remark: Use this method in your downloader extension; use `-allDownloads` instead in your main app.
+/// - Remark: Use this method in your downloader extension; use ``allDownloads`` instead in your main application.
 - (NSSet<BADownload*>*)allDownloadsForContentRequest:(BAContentRequest)contentRequest;
 
 @end

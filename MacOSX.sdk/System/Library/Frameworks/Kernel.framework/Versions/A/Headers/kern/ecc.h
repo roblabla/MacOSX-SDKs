@@ -29,22 +29,11 @@
 #pragma once
 
 #include <mach/kern_return.h>
-#include <stdint.h>
-#include <sys/cdefs.h>
 #include <mach/vm_types.h>
+#include <stddef.h>
+#include <sys/cdefs.h>
 
 __BEGIN_DECLS
-
-
-/* Old ECC logging mechanism */
-
-#define ECC_EVENT_INFO_DATA_ENTRIES     8
-struct ecc_event {
-	uint8_t         id;     // ID of memory (e.g. L2C), platform-specific
-	uint8_t         count;  // Of uint64_t's used, starting at index 0
-	uint64_t        data[ECC_EVENT_INFO_DATA_ENTRIES] __attribute__((aligned(8))); // Event-specific data
-};
-
 
 
 #define ECC_TESTING (DEVELOPMENT || DEBUG)
@@ -65,8 +54,8 @@ __options_decl(ecc_flags_t, uint32_t, {
 	ECC_IS_TEST_ERROR               = 0x00000004,
 	/* Do not trigger a CA report, just record to the DB (for testing purposes) */
 	ECC_DB_ONLY                     = 0x00000008,
-	/* Filter out the given address from the DB*/
-	ECC_REMOVE_ADDR                     = 0x00000010
+	/* Remove the address from the DB. */
+	ECC_REMOVE_ADDR                 = 0x00000010
 });
 
 /**
@@ -156,7 +145,20 @@ typedef struct {
 	/* MemCache one bit error bit offset of first one bit error with in half cache line. */
 	uint32_t bit_off_within_hcl;
 } mcc_ecc_event_t;
-_Static_assert(sizeof(mcc_ecc_event_t) == 10 * sizeof(uint32_t), "ecc_event_t size must be updated in memory_error_notification.defs");
+_Static_assert(sizeof(mcc_ecc_event_t) == 10 * sizeof(uint32_t), "mcc_ecc_event_t size must be updated in memory_error_notification.defs");
+
+
+/**
+ * Old ECC logging mechanism.
+ */
+
+#define ECC_EVENT_INFO_DATA_ENTRIES     8
+struct ecc_event {
+	uint8_t         id;     // ID of memory (e.g. L2C), platform-specific
+	uint8_t         count;  // Of uint64_t's used, starting at index 0
+	uint64_t        data[ECC_EVENT_INFO_DATA_ENTRIES] __attribute__((aligned(8))); // Event-specific data
+};
+
 
 
 __END_DECLS

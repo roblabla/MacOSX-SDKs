@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/AutomaticAssessmentConfiguration.framework/Versions/A/Frameworks/AACClient.framework/Versions/A/AACClient'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s9AACClient15AECPublicErrorsC6domainSSvgZ', '_$s9AACClient15AECPublicErrorsC6domainSSvpZMV', 
                        '_$s9AACClient15AECPublicErrorsCACycfC', '_$s9AACClient15AECPublicErrorsCACycfc', 
                        '_$s9AACClient15AECPublicErrorsCMa', '_$s9AACClient15AECPublicErrorsCMn', 
@@ -68,6 +66,13 @@ exports:
                        '_$s9AACClient26AECAssessmentConfigurationC17allowsScreenshotsSbvpMV', 
                        '_$s9AACClient26AECAssessmentConfigurationC17allowsScreenshotsSbvsTj', 
                        '_$s9AACClient26AECAssessmentConfigurationC17allowsScreenshotsSbvsTq', 
+                       '_$s9AACClient26AECAssessmentConfigurationC19allowsEmojiKeyboardSbvMTj', 
+                       '_$s9AACClient26AECAssessmentConfigurationC19allowsEmojiKeyboardSbvMTq', 
+                       '_$s9AACClient26AECAssessmentConfigurationC19allowsEmojiKeyboardSbvgTj', 
+                       '_$s9AACClient26AECAssessmentConfigurationC19allowsEmojiKeyboardSbvgTq', 
+                       '_$s9AACClient26AECAssessmentConfigurationC19allowsEmojiKeyboardSbvpMV', 
+                       '_$s9AACClient26AECAssessmentConfigurationC19allowsEmojiKeyboardSbvsTj', 
+                       '_$s9AACClient26AECAssessmentConfigurationC19allowsEmojiKeyboardSbvsTq', 
                        '_$s9AACClient26AECAssessmentConfigurationC20_allowsNetworkAccessSbvMTj', 
                        '_$s9AACClient26AECAssessmentConfigurationC20_allowsNetworkAccessSbvMTq', 
                        '_$s9AACClient26AECAssessmentConfigurationC20_allowsNetworkAccessSbvgTj', 

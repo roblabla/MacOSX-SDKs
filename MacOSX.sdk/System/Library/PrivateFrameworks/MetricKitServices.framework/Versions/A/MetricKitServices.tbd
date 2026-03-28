@@ -1,11 +1,29 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MetricKitServices.framework/Versions/A/MetricKitServices'
+swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _MetricKitServicesVersionNumber, _MetricKitServicesVersionString ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s17MetricKitServices15MXDateFormatterC10DateFormatO8rawValueAESgSi_tcfC', 
+                       '_$s17MetricKitServices15MXDateFormatterC10DateFormatO8rawValueSivg', 
+                       '_$s17MetricKitServices15MXDateFormatterC10DateFormatO8rawValueSivpMV', 
+                       '_$s17MetricKitServices15MXDateFormatterC10DateFormatOMa', 
+                       '_$s17MetricKitServices15MXDateFormatterC10DateFormatOMn', 
+                       '_$s17MetricKitServices15MXDateFormatterC10DateFormatON', 
+                       '_$s17MetricKitServices15MXDateFormatterC10DateFormatOSHAAMc', 
+                       '_$s17MetricKitServices15MXDateFormatterC10DateFormatOSQAAMc', 
+                       '_$s17MetricKitServices15MXDateFormatterC10DateFormatOSYAAMc', 
+                       '_$s17MetricKitServices15MXDateFormatterC14dateFromString_6format10Foundation4DateVSgSS_AC0K6FormatOtFZ', 
+                       '_$s17MetricKitServices15MXDateFormatterC14stringFromDate_6formatSS10Foundation0H0V_AC0H6FormatOtFZ', 
+                       '_$s17MetricKitServices15MXDateFormatterC21dateTruncatedToMinutey10Foundation4DateVSgAGFZ', 
+                       '_$s17MetricKitServices15MXDateFormatterC6oneDaySdvgZ', '_$s17MetricKitServices15MXDateFormatterC6oneDaySdvpZMV', 
+                       '_$s17MetricKitServices15MXDateFormatterCACycfC', '_$s17MetricKitServices15MXDateFormatterCACycfc', 
+                       '_$s17MetricKitServices15MXDateFormatterCMa', '_$s17MetricKitServices15MXDateFormatterCMn', 
+                       '_$s17MetricKitServices15MXDateFormatterCMo', '_$s17MetricKitServices15MXDateFormatterCN', 
+                       '_$s17MetricKitServices15MXDateFormatterCfD', _MetricKitServicesVersionNumber, 
+                       _MetricKitServicesVersionString ]
     objc-classes:    [ MXHangTracerService, MXPowerlogService, MXReportCrashService, 
                        MXService, MXSpaceAttributionService, MXSpinTracerService, 
-                       MXUtilities ]
+                       MXUtilities, _TtC17MetricKitServices15MXDateFormatter ]
 ...

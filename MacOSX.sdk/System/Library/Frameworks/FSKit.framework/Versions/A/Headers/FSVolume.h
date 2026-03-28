@@ -56,6 +56,13 @@ typedef NS_ENUM(NSInteger, FSSyncFlags) {
     FSSyncFlagsDWait = 4,
 };
 
+/// Mount options to be requested from FSKit using the `requestedMountOptions` property.
+FSKIT_API_AVAILABILITY_V2
+typedef NS_OPTIONS(NSUInteger, FSMountOptions) {
+    /// An option to request a read-only mount.
+    FSMountOptionsReadOnly = 1 << 0
+} NS_SWIFT_NAME(FSVolume.MountOptions);
+
 /// A type that identifies a volume.
 ///
 /// For most volumes, the volume identifier is the UUID identifying the volume.
@@ -396,6 +403,12 @@ NS_SWIFT_NAME(FSVolume.Operations)
 /// FSKit reads this value after the file system replies to the `loadResource` message.
 /// Changing the returned value during the runtime of the volume has no effect.
 @property BOOL enableOpenUnlinkEmulation FSKIT_API_AVAILABILITY_V2;
+
+/// A property that allows the file system to request for specific mount options from FSKit.
+///
+/// FSKit reads this value after the volume replies to the ``mount(options:replyHandler:)`` call.
+/// Changing the returned value during the runtime of the volume has no effect.
+@property FSMountOptions requestedMountOptions FSKIT_API_AVAILABILITY_V2;
 
 @required
 

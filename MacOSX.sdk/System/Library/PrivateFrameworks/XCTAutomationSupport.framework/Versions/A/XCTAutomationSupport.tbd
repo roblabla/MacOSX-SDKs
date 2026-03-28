@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/XCTAutomationSupport.framework/Versions/A/XCTAutomationSupport'
-current-version: 24507
+current-version: 24823
 compatibility-version: 0
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AXHierarchyTool, AutomationInfrastructureIntegrationTests, 
                        IDEApplicationTests, IDEFoundationTestingTests, IDEXcodeUITesting, 
                        TestResultsUI, XCTAutomationSupportTests, XCTDaemon, XCTDaemonControl, 
@@ -18,9 +16,21 @@ allowable-clients:
                        XCTestCore, XCTestSwiftSupport, XCUIAutomation, XCUIRecorderService, 
                        testmanagerd, xctest ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$sSo20XCTScreenshotOptionsV20XCTAutomationSupportE11descriptionSSvg', 
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s20XCTAutomationSupport16SpindumpProviderC13specificationACSo31XCTSpindumpRequestSpecificationC_tcfC', 
+                       '_$s20XCTAutomationSupport16SpindumpProviderC13specificationACSo31XCTSpindumpRequestSpecificationC_tcfCTj', 
+                       '_$s20XCTAutomationSupport16SpindumpProviderC13specificationACSo31XCTSpindumpRequestSpecificationC_tcfCTq', 
+                       '_$s20XCTAutomationSupport16SpindumpProviderC13specificationACSo31XCTSpindumpRequestSpecificationC_tcfc', 
+                       '_$s20XCTAutomationSupport16SpindumpProviderC15unownedExecutorScevg', 
+                       '_$s20XCTAutomationSupport16SpindumpProviderC15unownedExecutorScevpMV', 
+                       '_$s20XCTAutomationSupport16SpindumpProviderC7execute10Foundation4DataVyYaKF', 
+                       '_$s20XCTAutomationSupport16SpindumpProviderC7execute10Foundation4DataVyYaKFTu', 
+                       '_$s20XCTAutomationSupport16SpindumpProviderCACycfC', '_$s20XCTAutomationSupport16SpindumpProviderCACycfc', 
+                       '_$s20XCTAutomationSupport16SpindumpProviderCMa', '_$s20XCTAutomationSupport16SpindumpProviderCMn', 
+                       '_$s20XCTAutomationSupport16SpindumpProviderCMo', '_$s20XCTAutomationSupport16SpindumpProviderCMu', 
+                       '_$s20XCTAutomationSupport16SpindumpProviderCN', '_$s20XCTAutomationSupport16SpindumpProviderCScAAAMc', 
+                       '_$s20XCTAutomationSupport16SpindumpProviderCfD', '_$s20XCTAutomationSupport16SpindumpProviderCfd', 
+                       '_$sSo20XCTScreenshotOptionsV20XCTAutomationSupportE11descriptionSSvg', 
                        '_$sSo20XCTScreenshotOptionsV20XCTAutomationSupportE11descriptionSSvpMV', 
                        '_$sSo20XCTScreenshotOptionsVs23CustomStringConvertible20XCTAutomationSupportMc', 
                        _NSStringFromXCTAttachmentFutureMetadataFinalizationState, 
@@ -142,7 +152,7 @@ exports:
                        XCTMainRunLoopIdleNotifier, XCTMatchingElementIterator, XCTProcessInfoUtilities, 
                        XCTProcessSpecifier, XCTRuntimeIssueContext, XCTScreenRecordingRequest, 
                        XCTScreenshotRequest, XCTSerializedTransportWrapper2, XCTSignpostEvent, 
-                       XCTSignpostInterval, XCTSpindumpRequestSpecification, XCTTailspinRequest, 
-                       XCTTimeoutControls, XCTVideoEncoding, XCUIElementSnapshotRequestResult, 
-                       XCUIPoint, XCUIRect ]
+                       XCTSignpostInterval, XCTSpindumpProvider, XCTSpindumpRequestSpecification, 
+                       XCTTailspinRequest, XCTTimeoutControls, XCTVideoEncoding, 
+                       XCUIElementSnapshotRequestResult, XCUIPoint, XCUIRect ]
 ...

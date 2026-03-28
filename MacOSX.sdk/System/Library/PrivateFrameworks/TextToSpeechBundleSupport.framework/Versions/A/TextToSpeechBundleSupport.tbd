@@ -1,15 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TextToSpeechBundleSupport.framework/Versions/A/TextToSpeechBundleSupport'
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFiN14TTSSynthesizer15CallbackMessageEEEE, 
                        __ZTSNSt3__110__function6__baseIFiN14TTSSynthesizer15CallbackMessageEEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s25TextToSpeechBundleSupport21TTSSiriSynthAudioUnitC08registerhI0yyFZ', 
                        '_$s25TextToSpeechBundleSupport21TTSSiriSynthAudioUnitC15_hostAuditTokenSo13audit_token_tavMTj', 
                        '_$s25TextToSpeechBundleSupport21TTSSiriSynthAudioUnitC15_hostAuditTokenSo13audit_token_tavMTq', 

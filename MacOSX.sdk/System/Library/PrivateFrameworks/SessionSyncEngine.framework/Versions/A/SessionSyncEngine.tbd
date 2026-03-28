@@ -1,14 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SessionSyncEngine.framework/Versions/A/SessionSyncEngine'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ SessionAlert, SessionAlertTests, SessionCore, SessionCoreTests, 
                        SessionSyncEngineTests, liveactivitiesd ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s17SessionSyncEngine0B15ProtocolVersionO1loiySbAC_ACtFZ', 
                        '_$s17SessionSyncEngine0B15ProtocolVersionO6sydneyyA2CmFWC', 
                        '_$s17SessionSyncEngine0B15ProtocolVersionO7invalidyA2CmFWC', 

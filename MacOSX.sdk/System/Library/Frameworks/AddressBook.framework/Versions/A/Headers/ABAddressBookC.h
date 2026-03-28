@@ -8,13 +8,13 @@
 #ifndef __ADDRESSBOOKC__
 #define __ADDRESSBOOKC__
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
-
 #include <CoreFoundation/CoreFoundation.h>
 #include <AddressBook/ABTypedefs.h>
 #include <AddressBook/ABGlobalsC.h>
+
+#if defined(__cplusplus)
+extern "C" {
+#endif
 
 typedef void                            *ABRecordRef;
 typedef struct __ABPerson               *ABPersonRef;

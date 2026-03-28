@@ -7,8 +7,11 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import <CarPlay/CPLocation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class CPNavigationWaypoint;
 
 /**
  @c CPRouteChoice describes a possible route for a @c CPTrip.
@@ -58,22 +61,38 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPTrip : NSObject <NSSecureCoding>
 
+
+/**
+ Initialize a @c CPTrip with an origin waypoint, destination waypoint, and route choices.
+ */
+- (instancetype)initWithOriginWaypoint:(CPNavigationWaypoint *)origin destinationWaypoint:(CPNavigationWaypoint *)destination routeChoices:(NSArray<CPRouteChoice *> *)routeChoices NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(26.4));
+
 /**
  Initialize a @c CPTrip with an origin item, destination item, and route choices.
  */
-- (instancetype)initWithOrigin:(MKMapItem *)origin destination:(MKMapItem *)destination routeChoices:(NSArray<CPRouteChoice *> *)routeChoices NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithOrigin:(MKMapItem *)origin destination:(MKMapItem *)destination routeChoices:(NSArray<CPRouteChoice *> *)routeChoices API_DEPRECATED_WITH_REPLACEMENT("initWithOriginWaypoint:destinationWaypoint:routeChoices:", ios(12.0, 26.4));
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
 /**
  @c MKMapItem representing the origin for the trip.
  */
-@property (nonatomic, readonly, strong) MKMapItem *origin;
+@property (nonatomic, readonly, strong) MKMapItem *origin API_DEPRECATED_WITH_REPLACEMENT("originWaypoint", ios(12.0, 26.4));
 
 /**
  @c MKMapItem representing the destination for the trip.
  */
-@property (nonatomic, readonly, strong) MKMapItem *destination;
+@property (nonatomic, readonly, strong) MKMapItem *destination API_DEPRECATED_WITH_REPLACEMENT("destinationWaypoint", ios(12.0, 26.4));
+
+/**
+ @c CPNavigationWaypoint representing the origin for the trip.
+ */
+@property(nonatomic, readonly) CPNavigationWaypoint *originWaypoint API_AVAILABLE(ios(26.4));
+
+/**
+ @c CPNavigationWaypoint representing the destination for the trip.
+ */
+@property(nonatomic, readonly) CPNavigationWaypoint *destinationWaypoint API_AVAILABLE(ios(26.4));
 
 /**
  Array of @c CPRouteChoices for the trip.
@@ -91,6 +110,16 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  The variant strings should be provided as localized, displayable content.
  */
 @property (nonatomic, copy, nullable) NSArray<NSString *> *destinationNameVariants API_AVAILABLE(ios(17.4));
+
+/**
+ Set to @YES to enable sharing of the destination of this trip.
+ */
+@property (nonatomic) BOOL hasShareableDestination API_AVAILABLE(ios(26.1));
+
+/**
+ Set to @NO to disable route sharing for this trip when route sharing is not supported in the current region.
+ */
+@property (nonatomic) BOOL routeSegmentsAvailableForRegion API_AVAILABLE(ios(26.4));
 
 @end
 

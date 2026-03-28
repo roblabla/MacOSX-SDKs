@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TestFlightCore.framework/Versions/A/TestFlightCore'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14TestFlightCore06WhatToA4ViewV4bodyQrvg', '_$s14TestFlightCore06WhatToA4ViewV4bodyQrvpMV', 
                        '_$s14TestFlightCore06WhatToA4ViewV4bodyQrvpQOMQ', '_$s14TestFlightCore06WhatToA4ViewV7SwiftUI0F0AAMc', 
                        '_$s14TestFlightCore06WhatToA4ViewVMa', '_$s14TestFlightCore06WhatToA4ViewVMn', 

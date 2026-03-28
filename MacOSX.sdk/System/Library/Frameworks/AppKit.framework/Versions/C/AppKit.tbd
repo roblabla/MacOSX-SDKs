@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit'
-current-version: 2685.30.107
+current-version: 2685.50.119
 compatibility-version: 45
 swift-abi-version: 7
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation', 
                        '/System/Library/PrivateFrameworks/CollectionViewCore.framework/Versions/A/CollectionViewCore', 
@@ -22,8 +20,7 @@ exports:
                        '$ld$add$os10.6$_OBJC_METACLASS_$_NSLayoutConstraint', '$ld$add$os10.6$__NSDictionaryOfVariableBindings', 
                        '$ld$add$os10.7$_OBJC_CLASS_$_NSLayoutConstraint', '$ld$add$os10.7$_OBJC_METACLASS_$_NSLayoutConstraint', 
                        '$ld$add$os10.7$__NSDictionaryOfVariableBindings' ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/usr/lib/swift/libswiftAppKit.dylib$1.0.0$1$10.15$14.0$_$s10Foundation10CocoaErrorV4CodeV6AppKitE016ServiceMalformedg10DictionaryC0AEvgZ$', 
                        '$ld$previous$/usr/lib/swift/libswiftAppKit.dylib$1.0.0$1$10.15$14.0$_$s10Foundation10CocoaErrorV4CodeV6AppKitE017fontAssetDownloadC0AEvgZ$', 
                        '$ld$previous$/usr/lib/swift/libswiftAppKit.dylib$1.0.0$1$10.15$14.0$_$s10Foundation10CocoaErrorV4CodeV6AppKitE020ServiceMiscellaneousC0AEvgZ$', 
@@ -3050,6 +3047,7 @@ exports:
                        '_$s6AppKit14NSScrollPocketC12captureColorSo7NSColorCSgvs', 
                        '_$s6AppKit14NSScrollPocketC13removeElementyySo6NSViewCF', 
                        '_$s6AppKit14NSScrollPocketC13viewDidUnhideyyF', '_$s6AppKit14NSScrollPocketC14didChangeValue6forKeyySS_tF', 
+                       '_$s6AppKit14NSScrollPocketC14removeElementsyyxSTRzSo6NSViewC7ElementRtzlF', 
                        '_$s6AppKit14NSScrollPocketC19addElementContaineryySo6NSViewCF', 
                        '_$s6AppKit14NSScrollPocketC19viewDidMoveToWindowyyF', '_$s6AppKit14NSScrollPocketC22removeElementContaineryySo6NSViewCF', 
                        '_$s6AppKit14NSScrollPocketC27allowsColorSchemeAdaptivitySbvM', 
@@ -6075,15 +6073,16 @@ exports:
                        _NSTouchBarItemIdentifierFixedSpaceLarge, _NSTouchBarItemIdentifierFixedSpaceSmall, 
                        _NSTouchBarItemIdentifierFlexibleSpace, _NSTouchBarItemIdentifierOtherItemsProxy, 
                        _NSTouchBarItemIdentifierSystemCloseButton, _NSTypedFilenamesPboardType, 
-                       _NSUpdateCycleAddToRunLoopMode, _NSUpdateCycleEnabled, _NSUpdateCycleSetAddToRunLoopModeAction, 
-                       _NSUpdateCycleSetEnabledPreference, _NSUserAccentColorGetHardwareAccentColorName, 
-                       _NSUserAccentHasHardwareColor, _ResetNSAlertConstraintBasedLayout, 
-                       _ResetNSAlertWeakDelegate, _ResetNSAllowApplicationDisableScreenUpdates, 
-                       _ResetNSAllowMultipleDrags, _ResetNSAutoFillHeuristicsEnabled, 
-                       _ResetNSAutomaticallyTrackKeyValueDependencies, _ResetNSBoxUseLegacyMetrics, 
-                       _ResetNSCollectionViewWeakDelegate, _ResetNSConservativeTAMICConstraintCreation, 
-                       _ResetNSConstraintBasedLayoutDetectAmbiguousViews, _ResetNSConstraintBasedLayoutEngageNonLazily, 
-                       _ResetNSControlUseTextStyleFonts, _ResetNSDragAsync, _ResetNSDynamicPropertiesCaptureDependencyContextMetadata, 
+                       _NSUpdateCycleAddToRunLoopMode, _NSUpdateCycleEnabled, _NSUpdateCycleGetModelMediaTime, 
+                       _NSUpdateCycleSetAddToRunLoopModeAction, _NSUpdateCycleSetEnabledPreference, 
+                       _NSUserAccentColorGetHardwareAccentColorName, _NSUserAccentHasHardwareColor, 
+                       _ResetNSAlertConstraintBasedLayout, _ResetNSAlertWeakDelegate, 
+                       _ResetNSAllowApplicationDisableScreenUpdates, _ResetNSAllowMultipleDrags, 
+                       _ResetNSAutoFillHeuristicsEnabled, _ResetNSAutomaticallyTrackKeyValueDependencies, 
+                       _ResetNSBoxUseLegacyMetrics, _ResetNSCollectionViewWeakDelegate, 
+                       _ResetNSConservativeTAMICConstraintCreation, _ResetNSConstraintBasedLayoutDetectAmbiguousViews, 
+                       _ResetNSConstraintBasedLayoutEngageNonLazily, _ResetNSControlUseTextStyleFonts, 
+                       _ResetNSDragAsync, _ResetNSDynamicPropertiesCaptureDependencyContextMetadata, 
                        _ResetNSFocusItemCachingEnabled, _ResetNSFocusNavigationLoopValidationEnabled, 
                        _ResetNSISIconPreparationMode, _ResetNSImageCompositeFromRectIsInRepCoords, 
                        _ResetNSImageRepHardDeprecateEPS, _ResetNSLifeguardOnDuty, 
@@ -6302,7 +6301,7 @@ exports:
                        _NSServiceFilter.entry, _NSServiceFilter.flags, _NSServiceFilter.linkSchemes, 
                        _NSServiceFilter.textScript, _NSServiceFilter.wordLimit, _NSToolbarItemViewerLabelCellPopUpCell._realTitle, 
                        _NSToolbarSeparator._inPalette ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _IBAppleScriptFramework, _IBCarbonFramework, _IBCocoaFramework, 
                        _IBSwingFramework, _NSAbortModalException, _NSAbortPrintingException, 
                        _NSAboutPanelOptionApplicationIcon, _NSAboutPanelOptionApplicationName, 
@@ -6998,9 +6997,9 @@ exports:
                        _NSSharingServiceNameUseAsTwitterProfileImage, _NSSharingServiceOptionAlternateItemDisplayNameKey, 
                        _NSSharingServiceOptionAlternateItemIdentifierKey, _NSSharingServiceOptionAlternateItemUTIKey, 
                        _NSSharingServiceOptionAlternateItemsKey, _NSSharingServiceParametersAccountHintKey, 
-                       _NSSharingServiceParametersAccountNameKey, _NSSharingServiceParametersAttachmentURLsKey, 
-                       _NSSharingServiceParametersDefaultRecipientsKey, _NSSharingServiceParametersDefaultSubjectKey, 
-                       _NSSharingServiceParametersDisableServiceWindowPresentationKey, 
+                       _NSSharingServiceParametersAccountNameKey, _NSSharingServiceParametersAllowUpgradeShareKey, 
+                       _NSSharingServiceParametersAttachmentURLsKey, _NSSharingServiceParametersDefaultRecipientsKey, 
+                       _NSSharingServiceParametersDefaultSubjectKey, _NSSharingServiceParametersDisableServiceWindowPresentationKey, 
                        _NSSharingServiceParametersDisplayStateKey, _NSSharingServiceParametersIsCloudSharingServiceKey, 
                        _NSSharingServiceParametersItemURLKey, _NSSharingServiceParametersMaskClientWindowKey, 
                        _NSSharingServiceParametersMenuItemCustomTitleKey, _NSSharingServiceParametersMenuItemIsAlternateKey, 
@@ -7008,9 +7007,10 @@ exports:
                        _NSSharingServiceParametersMessageKey, _NSSharingServiceParametersNarrowServiceWindowKey, 
                        _NSSharingServiceParametersPermaLinkKey, _NSSharingServiceParametersQuoteContentKey, 
                        _NSSharingServiceParametersRecipientsKey, _NSSharingServiceParametersSelectContentKey, 
-                       _NSSharingServiceParametersSubjectKey, _NSSharingServiceParametersWebPageURLKey, 
-                       _NSShellCommandFileType, _NSShowAnimationEffect, _NSShowSystemInfoPanel, 
-                       _NSShowsServicesMenuItem, _NSSidebarCurrentLabelFont, _NSSidebarCurrentLabelFont_isSolariumEnabled, 
+                       _NSSharingServiceParametersSubjectKey, _NSSharingServiceParametersUpgradeLocalShareKey, 
+                       _NSSharingServiceParametersWebPageURLKey, _NSShellCommandFileType, 
+                       _NSShowAnimationEffect, _NSShowSystemInfoPanel, _NSShowsServicesMenuItem, 
+                       _NSSidebarCurrentLabelFont, _NSSidebarCurrentLabelFont_isSolariumEnabled, 
                        _NSSidebarFontForRowSize, _NSSidebarFontForRowSize_isSolariumEnabled, 
                        _NSSidebarGroupRowFont, _NSSidebarGroupRowFont_isSolariumEnabled, 
                        _NSSidebarGroupRowInsets_isFirstRow, _NSSidebarGroupRowTextColorForState, 
@@ -7230,23 +7230,24 @@ exports:
                        __NSKeyboardUITranslateToSymbolicHotKey, __NSLibraryPathsForType, 
                        __NSLocalizedUserInterfaceWidthFactor, __NSMainMenuName, __NSMenuDidCloseNotification, 
                        __NSMenuItemSelectedNotification, __NSMenuLocalUserKEsDidChangeNotification, 
-                       __NSMenuWillOpenNotification, __NSOSPTranslateAllowedFileTypes, 
-                       __NSObjectForItem, __NSParseWithFormat, __NSPathForSystemFramework, 
-                       __NSPersistentUICreateCGImageFromFile, __NSPersistentUICrossEncrypt, 
-                       __NSPersistentUIMetadataWasSignedWithKey, __NSPersistentUIReadMetadataFromOpenFile, 
-                       __NSPersistentUIReadMetadataFromURL, __NSPopUpCarbonMenu3, 
-                       __NSPreferencesSetPrefsBundleSearchBundle, __NSPrintProtected, 
-                       __NSPrintersPath, __NSQuickActionPresentationModeFinder, __NSQuickActionPresentationModeTouchBar, 
-                       __NSReboundDeltaForElasticDelta, __NSReboundDeltaForElasticDelta2, 
-                       __NSRecentDocumentsMenuName, __NSRecommendedScrollerStyle, 
-                       __NSResetServiceActions, __NSResetUnusedServiceActions, __NSRevertDocumentMenuName, 
-                       __NSSavePanelFilenameExtensionIndexOfFileType, __NSSavePanelInitOptionKeyAuditToken, 
-                       __NSSavePanelInitOptionKeyPID, __NSSavePanelInitOptionKeyService, 
-                       __NSSavePanelPAPerfOperation, __NSSavePanelPAPerfOperationMarkInterval, 
-                       __NSSavePanelPAPerfOperationMarkName, __NSSavePresentationModeServiceActionOrder, 
-                       __NSSaveServiceActions, __NSSendDirectTouchesEvent, __NSServicesMenuName, 
-                       __NSServicesUIAgentMain, __NSSetDefaultControlTint, __NSSetDraggingSourceForDrag, 
-                       __NSSetOpaqueForEvents, __NSSetUseCoreUI, __NSSetViewsPostSubviewHierarchyChangedNotifications, 
+                       __NSMenuWillOpenNotification, __NSOSPStringByRemovingInvalidCharacters, 
+                       __NSOSPTranslateAllowedFileTypes, __NSObjectForItem, __NSParseWithFormat, 
+                       __NSPathForSystemFramework, __NSPersistentUICreateCGImageFromFile, 
+                       __NSPersistentUICrossEncrypt, __NSPersistentUIMetadataWasSignedWithKey, 
+                       __NSPersistentUIReadMetadataFromOpenFile, __NSPersistentUIReadMetadataFromURL, 
+                       __NSPopUpCarbonMenu3, __NSPreferencesSetPrefsBundleSearchBundle, 
+                       __NSPrintProtected, __NSPrintersPath, __NSQuickActionPresentationModeFinder, 
+                       __NSQuickActionPresentationModeTouchBar, __NSReboundDeltaForElasticDelta, 
+                       __NSReboundDeltaForElasticDelta2, __NSRecentDocumentsMenuName, 
+                       __NSRecommendedScrollerStyle, __NSResetServiceActions, __NSResetUnusedServiceActions, 
+                       __NSRevertDocumentMenuName, __NSSavePanelFilenameExtensionIndexOfFileType, 
+                       __NSSavePanelInitOptionKeyAuditToken, __NSSavePanelInitOptionKeyPID, 
+                       __NSSavePanelInitOptionKeyService, __NSSavePanelPAPerfOperation, 
+                       __NSSavePanelPAPerfOperationMarkInterval, __NSSavePanelPAPerfOperationMarkName, 
+                       __NSSavePresentationModeServiceActionOrder, __NSSaveServiceActions, 
+                       __NSSendDirectTouchesEvent, __NSServicesMenuName, __NSServicesUIAgentMain, 
+                       __NSSetDefaultControlTint, __NSSetDraggingSourceForDrag, __NSSetOpaqueForEvents, 
+                       __NSSetUseCoreUI, __NSSetViewsPostSubviewHierarchyChangedNotifications, 
                        __NSShakeForAuthenticationFailureAmplitude, __NSShakeForAuthenticationFailureDuration, 
                        __NSSharingServiceNameCloudSharingCopyLink, __NSSharingServiceNameCloudSharingInvitation, 
                        __NSSharingServiceNameLaunchMessages, __NSSubviewHierarchyDidChangeNotification, 
@@ -7478,16 +7479,13 @@ exports:
                        NSWindowTemplate.windowView ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CollectionViewCore.framework/Versions/A/CollectionViewCore'
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AppKit, UIFoundation, UIKitCore ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BUG_IN_CLIENT_OF_DIFFABLE_DATA_SOURCE__EQUAL_IDENTIFIERS_HAVE_DIFFERENT_HASH_VALUES, 
                        _BUG_IN_CLIENT_OF_DIFFABLE_DATA_SOURCE__IDENTIFIERS_ARE_NOT_UNIQUE, 
                        _BUG_IN_CLIENT_OF_DIFFABLE_DATA_SOURCE__IDENTIFIER_ALREADY_EXISTS, 
@@ -7510,18 +7508,15 @@ exports:
                        _UIDiffableDataSourceUpdate, __UIDiffableDataSourceSnapshot ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 1016
+current-version: 1018.1
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AppKit, CoreTransferable, SwiftUICore, TextAnimationSupport, 
                        UIKitCore, UserNotificationsCore, _SwiftUICore ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _NSAccessibilitySpellingStateAttributeName, _NSAdaptiveImageGlyphAttributeName, 
                        _NSAllRomanInputSourcesLocaleIdentifier, _NSAntialiasThresholdChangedNotification, 
                        _NSAppearanceDocumentAttribute, _NSAttachmentAttributeName, 
@@ -7887,7 +7882,6 @@ exports:
                        __NSFontTypefaceInfo._postscriptName, __NSFontTypefaceInfo._tiFlags, 
                        __NSFontTypefaceInfo._verticalOriginDeltaCache ]
 reexports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ NSEmojiImageAsset, NSEmojiImageStrike ]
 ...

@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ANECompiler.framework/Versions/A/ANECompiler'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ANECAffineTransformLayerDescInitialize, _ANECBatchToSpaceLayerDescInitialize, 
                        _ANECChannelToSpaceLayerDescInitialize, _ANECCompile, _ANECCompileJIT, 
                        _ANECCompileOffline, _ANECCompileOnline, _ANECConcatLayerDescInitialize, 

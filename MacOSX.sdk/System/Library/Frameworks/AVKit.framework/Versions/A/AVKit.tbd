@@ -1,15 +1,20 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/AVKit.framework/Versions/A/AVKit'
 swift-abi-version: 7
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/AVKitCore.framework/Versions/A/AVKitCore' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _AVAddAudibleMediaSelectionOptionsToMenu, _AVAddLegibleMediaSelectionOptionsToMenu, 
-                       _AVAssetSlowMotionTimeRangeFromNormalizedSlowMotionTimeRange, 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$sSo25AVMediaOptionsMenuBuilderC5AVKitE21includesStylesSubmenuSbvg', 
+                       '_$sSo25AVMediaOptionsMenuBuilderC5AVKitE21includesStylesSubmenuSbvpMV', 
+                       '_$sSo25AVMediaOptionsMenuBuilderC5AVKitE21includesStylesSubmenuSbvpWvd', 
+                       '_$sSo25AVMediaOptionsMenuBuilderC5AVKitE21includesStylesSubmenuSbvs', 
+                       '_$sSo25AVMediaOptionsMenuBuilderC5AVKitEABycfC', '_$sSo25AVMediaOptionsMenuBuilderC5AVKitEABycfc', 
+                       '_$sSo25AVMediaOptionsMenuBuilderCMa', _AVAddAudibleMediaSelectionOptionsToMenu, 
+                       _AVAddLegibleMediaSelectionOptionsToMenu, _AVAssetSlowMotionTimeRangeFromNormalizedSlowMotionTimeRange, 
                        _AVMarginEqual, _AVMarginFromString, _AVMarginZero, _AVNormalizedSlowMotionTimeRangeFromAssetSlowMotionTimeRange, 
                        _AVPictureInPictureControllerContentSourceKey, _AVPictureInPictureControllerDidStartNotification, 
                        _AVPictureInPictureControllerDidStopNotification, _AVPictureInPictureControllerPlaybackStateDidChangeNotification, 
@@ -18,6 +23,7 @@ exports:
                        _AVStringFromMargin ]
     objc-classes:    [ AVAudioLevelIndicatorView, AVAudioView, AVCaptureView, AVControlsContainerViewController, 
                        AVControlsPresentationContext, AVControlsViewController, AVDesktopGestureController, 
+                       AVLegibleMediaOptionsMenuController, AVMediaOptionsMenuBuilder, 
                        AVMediaTimelineControl, AVMediaTimelineControlConfiguration, 
                        AVMediaTimelineControlLabelsConfiguration, AVOutputDeviceMenuController, 
                        AVPictureInPictureController, AVPictureInPictureControllerContentSource, 
@@ -28,23 +34,45 @@ exports:
                        AVTrimView, AVVolumeControlSlider, AVVolumeControlView ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AVKitCore.framework/Versions/A/AVKitCore'
+swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ AVKit, AVKitMacHelper, OutputDeviceMenuService, RoutePickerViewService ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _AVIntervalSkipGlyphStateNameState1, _AVIntervalSkipGlyphStateNameState2, 
-                       _AVMicaPackageFilterNamePlusL, _AVMicaPackageNameIntervalSkipGlyph, 
-                       _AVMicaPackageNamePlayPauseGlyph, _AVMicaPackageNameRoutePickerCircularGlyph, 
-                       _AVMicaPackageNameRoutePickerCustomDevicesGlyph, _AVMicaPackageNameRoutePickerSquareGlyph, 
-                       _AVMicaPackageNameVolumeGlyph, _AVPhotosensitivityMetadataClass, 
-                       _AVPlayPauseGlyphStateNamePause, _AVPlayPauseGlyphStateNamePlay, 
-                       _AVPlayerControllerContentDimensionsChangedNotification, _AVPlayerControllerCurrentTimeJumpedNotification, 
-                       _AVPlayerControllerDidBeginScanningNotification, _AVPlayerControllerDidEndScanningNotification, 
-                       _AVPlayerControllerDidSeekChapterChapterKey, _AVPlayerControllerDidSeekChapterNotification, 
-                       _AVPlayerControllerPIPActivitySessionIdentifierDidChangeNotification, 
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$sSo24AVMediaOptionsControllerC9AVKitCoreE012legibleTrackB033_322942C351CF021205944DE0320D6825LLSaySo17MediaOptionSource_pGvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE017captionAppearanceB033_322942C351CF021205944DE0320D6825LLSaySo17MediaOptionSource_pGvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE07legibleB15EnablementState33_322942C351CF021205944DE0320D6825LLSo015AVLegibleOptiongH0Vvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE09avLegibleB0SaySo0A15SelectionOptionCGvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE10dataSourceSo0a9SelectionbG0_pSgvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE12optionLookup33_322942C351CF021205944DE0320D6825LLSDySSAC11MediaOptionCGvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE16cachedAudioGroup33_322942C351CF021205944DE0320D6825LLSo0a9SelectionH0CSgvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE17lastProcessedItem33_322942C351CF021205944DE0320D6825LLSo08AVPlayerH0CSgvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE18cachedLegibleGroup33_322942C351CF021205944DE0320D6825LLSo0a9SelectionH0CSgvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE20currentLegibleOptionSo05MediaH6Source_pSgvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE20preferredSortIndexesSDySSSiGvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE22currentItemObservation33_322942C351CF021205944DE0320D6825LL10Foundation010NSKeyValueH0CSgvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE23playerStatusObservation33_322942C351CF021205944DE0320D6825LL10Foundation010NSKeyValueH0CSgvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE24currentAudioLanguageCode33_322942C351CF021205944DE0320D6825LLSSSgvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE27bestChoiceForRecentLanguageShySSGvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE30allowedSubtitleOptionLanguagesSaySSGSgvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE30currentCaptionAppearanceOption33_322942C351CF021205944DE0320D6825LLSo05MediaI6Source_pSgvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE31userExplicitlyDisabledSubtitles33_322942C351CF021205944DE0320D6825LLSbvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE33cachedAudibleMediaSelectionOption33_322942C351CF021205944DE0320D6825LLSo0aiJ0CSgvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE6player33_322942C351CF021205944DE0320D6825LLSo8AVPlayerCSgvpfi', 
+                       '_$sSo24AVMediaOptionsControllerC9AVKitCoreE8delegateSo0abC8Delegate_pSgvpfi', 
+                       '_$sSo24AVMediaOptionsControllerCMa', _AVIntervalSkipGlyphStateNameState1, 
+                       _AVIntervalSkipGlyphStateNameState2, _AVMicaPackageFilterNamePlusL, 
+                       _AVMicaPackageNameIntervalSkipGlyph, _AVMicaPackageNamePlayPauseGlyph, 
+                       _AVMicaPackageNameRoutePickerCircularGlyph, _AVMicaPackageNameRoutePickerCustomDevicesGlyph, 
+                       _AVMicaPackageNameRoutePickerSquareGlyph, _AVMicaPackageNameVolumeGlyph, 
+                       _AVPhotosensitivityMetadataClass, _AVPlayPauseGlyphStateNamePause, 
+                       _AVPlayPauseGlyphStateNamePlay, _AVPlayerControllerContentDimensionsChangedNotification, 
+                       _AVPlayerControllerCurrentTimeJumpedNotification, _AVPlayerControllerDidBeginScanningNotification, 
+                       _AVPlayerControllerDidEndScanningNotification, _AVPlayerControllerDidSeekChapterChapterKey, 
+                       _AVPlayerControllerDidSeekChapterNotification, _AVPlayerControllerPIPActivitySessionIdentifierDidChangeNotification, 
                        _AVPlayerControllerPlaybackDidEndNotification, _AVPlayerControllerScanningDirectionKey, 
                        _AVPlayerControllerSelectedMediaOptionDidChangeNotification, 
                        _AVPlayerItemAVKitCoreDataHighlightedTimeRangesDidChangeNotification, 
@@ -58,10 +86,11 @@ exports:
                        _AVWaveformFinishedLoadingNotification, _AVWaveformSamplesDidBecomeAvailableNotification, 
                        __AVDebugLog, __AVLog, __AVMethodProem, __isNetworkAvailable ]
     objc-classes:    [ AVAssetIdentifier, AVChapter, AVCustomMediaSelectionOption, 
-                       AVKeyValueChange, AVKitGlobalSettings, AVMicaPackage, AVMutableValueTiming, 
-                       AVObservationController, AVPhotosensitiveTimeRange, AVPlaybackRate, 
-                       AVPlaybackRateCollection, AVPlaybackSpeed, AVPlaybackSpeedCollection, 
-                       AVPlayerController, AVPlayerControllerTimeResolver, AVPlayerItemPhotosensitivityMetadataHandler, 
+                       AVKeyValueChange, AVKitGlobalSettings, AVMediaOptionsController, 
+                       AVMicaPackage, AVMutableValueTiming, AVObservationController, 
+                       AVPhotosensitiveTimeRange, AVPlaybackRate, AVPlaybackRateCollection, 
+                       AVPlaybackSpeed, AVPlaybackSpeedCollection, AVPlayerController, 
+                       AVPlayerControllerTimeResolver, AVPlayerItemPhotosensitivityMetadataHandler, 
                        AVRouteDetectorCoordinator, AVThumbnail, AVThumbnailCache, 
                        AVThumbnailGenerator, AVTimecode, AVTimecodeController, AVTimer, 
                        AVTouchBarMediaSelectionOption, AVTrackIdentifier, AVValueTiming, 

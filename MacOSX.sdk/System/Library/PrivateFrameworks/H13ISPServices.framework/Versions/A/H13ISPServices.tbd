@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ arm64-macos, arm64e-macos ]
+targets:         [ arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/H13ISPServices.framework/Versions/A/H13ISPServices'
 exports:
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ __Z13GetNamedValueP9__CFArrayi, __Z16AppendNamedValueP9__CFArrayPK14__CFDictionary, 
                        __Z16ClearNamedValuesP9__CFArray, __Z16CountNamedValuesP9__CFArray, 
                        __Z16CreateNamedValuePKcS0_P9__CFArray, __Z17CreateNamedValuesv, 

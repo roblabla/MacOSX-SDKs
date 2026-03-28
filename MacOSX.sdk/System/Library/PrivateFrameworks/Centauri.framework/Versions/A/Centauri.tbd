@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ arm64e-macos ]
+install-name:    '/System/Library/PrivateFrameworks/Centauri.framework/Versions/A/Centauri'
+exports:
+  - targets:         [ arm64e-macos ]
+    symbols:         [ _CENCastPowerTableVote, _CENCheckForNewPowerTables, _CENCollectLogs, 
+                       _CENGetPMUFaultInfo, _CENGetPowerStats, _CENGetSiKPublicKey, 
+                       _CENPowerTableEvaluationNewAssetVersions, _CENPowerTableEvaluationNotification, 
+                       _CENPowerTableEvaluationPreviousAssetVersions, _CENPowerTableEvaluationReadinessTimeout, 
+                       _CENPowerTableEvaluationSessionIdentifier, _CENPowerTableEvaluationSessionState, 
+                       _CENPowerTableEvaluationTimestamp, _CENPowerTableEvaluationVotingTimeout, 
+                       _CENPreflightQuery, _CENRebootIntoLowPowerMode, _CENRebootIntoLowPowerModeAsync, 
+                       _CENSendHelloCommand, _CENSendRawCommand, _CENSendShellCommand, 
+                       _CENSetPowerTableEvaluationReadiness ]
+...

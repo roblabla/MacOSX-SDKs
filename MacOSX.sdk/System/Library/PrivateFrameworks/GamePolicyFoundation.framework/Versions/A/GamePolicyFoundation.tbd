@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GamePolicyFoundation.framework/Versions/A/GamePolicyFoundation'
-current-version: 3.2.1
+current-version: 3.4.5
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s20GamePolicyFoundation012ModelManagerA15AssertionStatusC14enablementDate0C00I0VSgvg', 
                        '_$s20GamePolicyFoundation012ModelManagerA15AssertionStatusC14enablementDate0C00I0VSgvpMV', 
                        '_$s20GamePolicyFoundation012ModelManagerA15AssertionStatusC14policyStrategyAA0debI0Ovg', 
@@ -508,8 +508,9 @@ exports:
                        '_$s2os6LoggerV20GamePolicyFoundationE17policyCoordinatorACvgZ', 
                        '_$s2os6LoggerV20GamePolicyFoundationE4toolACvgZ', '_$s2os6LoggerV20GamePolicyFoundationE5agentACvgZ', 
                        '_$s2os6LoggerV20GamePolicyFoundationE6assetsACvgZ', '_$s2os6LoggerV20GamePolicyFoundationE6commonACvgZ', 
-                       '_$s2os6LoggerV20GamePolicyFoundationE6daemonACvgZ', '_$s2os6LoggerV20GamePolicyFoundationE9gameStoreACvgZ', 
-                       _gpf_gameCategories, _gpf_gameModeOptInCategories ]
+                       '_$s2os6LoggerV20GamePolicyFoundationE6daemonACvgZ', '_$s2os6LoggerV20GamePolicyFoundationE9analyticsACvgZ', 
+                       '_$s2os6LoggerV20GamePolicyFoundationE9gameStoreACvgZ', _gpf_gameCategories, 
+                       _gpf_gameModeOptInCategories ]
     objc-classes:    [ _TtC20GamePolicyFoundation14GameModeStatus, _TtC20GamePolicyFoundation21DynamicSplitterStatus, 
                        _TtC20GamePolicyFoundation24SustainedExecutionStatus, _TtC20GamePolicyFoundation31ModelManagerGameAssertionStatus ]
 ...

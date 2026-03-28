@@ -1,14 +1,13 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-macos26.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 737.40.13 -module-name FSKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
-import ExtensionFoundation
-@_exported import FSKit
-import Foundation
-import Swift
-import _Concurrency
-import _StringProcessing
-import _SwiftConcurrencyShims
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-macos26.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 737.101.2 -module-name FSKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
+@_exported public import ExtensionFoundation
+@_exported public import FSKit
+public import Swift
+public import _Concurrency
+public import _StringProcessing
+public import _SwiftConcurrencyShims
 @available(macOS 15.4, *)
 @available(iOS, unavailable)
 @available(watchOS, unavailable)
@@ -106,18 +105,14 @@ extension FSKit.FSEntityIdentifier : Swift.Identifiable, @unchecked Swift.Sendab
 extension FSKit.FSBlockDeviceResource {
   @available(macOS 15.4, *)
   public func read(into buffer: Swift.UnsafeMutableRawBufferPointer, startingAt offset: _DarwinFoundation2.off_t, length: Swift.Int) async throws -> Swift.Int
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.4, *)
   public func read(into buffer: Swift.UnsafeMutableRawBufferPointer, startingAt offset: _DarwinFoundation2.off_t, length: Swift.Int, completionHandler: @escaping (Swift.Int, (any Swift.Error)?) -> Swift.Void)
-  #endif
   @available(macOS 15.4, *)
   public func read(into buffer: Swift.UnsafeMutableRawBufferPointer, startingAt offset: _DarwinFoundation2.off_t, length: Swift.Int) throws -> Swift.Int
   @available(macOS 15.4, *)
   public func write(from buffer: Swift.UnsafeRawBufferPointer, startingAt offset: _DarwinFoundation2.off_t, length: Swift.Int) async throws -> Swift.Int
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.4, *)
   public func write(from buffer: Swift.UnsafeRawBufferPointer, startingAt offset: _DarwinFoundation2.off_t, length: Swift.Int, completionHandler: @escaping (Swift.Int, (any Swift.Error)?) -> Swift.Void)
-  #endif
   @available(macOS 15.4, *)
   public func write(from buffer: Swift.UnsafeRawBufferPointer, startingAt offset: _DarwinFoundation2.off_t, length: Swift.Int) throws -> Swift.Int
   @available(macOS 15.4, *)

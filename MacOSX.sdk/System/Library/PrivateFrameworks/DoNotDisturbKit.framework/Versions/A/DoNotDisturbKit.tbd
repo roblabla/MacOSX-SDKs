@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DoNotDisturbKit.framework/Versions/A/DoNotDisturbKit'
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ DoNotDisturbKitTests, DoNotDisturbModule, DoNotDisturbSettings, 
                        Focus, NanoSettings, NanoSettingsGlance, SpringBoard ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _DNDEndOfEventAssertionIdentifier, _DNDKitRegisterLogging, 
                        _DNDLocalizedStringHelper, _DNDLogLocation, _DNDLogNotifications, 
                        _DNDLogToggleManager, _DNDOneHourLifetimeIdentifier, _DNDStringFromToggleTargetState, 

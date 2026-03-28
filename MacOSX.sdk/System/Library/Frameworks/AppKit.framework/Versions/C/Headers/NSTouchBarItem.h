@@ -60,7 +60,7 @@ API_AVAILABLE(macos(10.12.2), ios(13.0)) NS_SWIFT_UI_ACTOR
 */
 @property (readonly, nullable) NSViewController *viewController;
 
-/*
+/**
     The user visible string identifying this item during customization. By default this method returns the empty string.
 */
 @property (readonly, copy) NSString *customizationLabel API_AVAILABLE(ios(13.0));

@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CloudCoreInternal.framework/Versions/A/CloudCoreInternal'
-current-version: 2330.14
+current-version: 2350.34
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s11SessionType17CloudCoreInternal0A12AcquiredInfoPTl', 
                        '_$s11SessionType17CloudCoreInternal0A13ConfigurationPTl', 
                        '_$s13Configuration17CloudCoreInternal7SessionPTl', '_$s17CloudCoreInternal0aB14ThrowingStreamV04makeE02of8throwing15bufferingPolicyACyxq_G6stream_AC12ContinuationVyxq__G12continuationtxm_q_mAK09BufferingJ0Oyxq___GtFZ', 
@@ -1267,8 +1265,6 @@ exports:
                        '_$s17CloudCoreInternal26SessionInvalidationContextVSQAAMc', 
                        '_$s17CloudCoreInternal26SessionInvalidationContextVSeAAMc', 
                        '_$s17CloudCoreInternal26SessionInvalidationContextVs23CustomStringConvertibleAAMc', 
-                       '_$s17CloudCoreInternal26withInterruptibleChildTask4name18executorPreference8priority9isolation9operationxSSSg_Sch_pSgScPSgScA_pSgYixScTAAE12CancelHandleVyxs5Error_p_GYaKYAcntYaKs8SendableRzlF', 
-                       '_$s17CloudCoreInternal26withInterruptibleChildTask4name18executorPreference8priority9isolation9operationxSSSg_Sch_pSgScPSgScA_pSgYixScTAAE12CancelHandleVyxs5Error_p_GYaKYAcntYaKs8SendableRzlFTu', 
                        '_$s17CloudCoreInternal30NonCopyablePropertyDescribableMp', 
                        '_$s17CloudCoreInternal30NonCopyablePropertyDescribableP20propertyDescriptionsSayAA0F11DescriptionVGvgTj', 
                        '_$s17CloudCoreInternal30NonCopyablePropertyDescribableP20propertyDescriptionsSayAA0F11DescriptionVGvgTq', 
@@ -1351,10 +1347,5 @@ exports:
                        '_$s17CloudCoreInternal9_SecurityV8standardACvgZ', '_$s17CloudCoreInternal9_SecurityV8standardACvpZMV', 
                        '_$s17CloudCoreInternal9_SecurityVAA01_D8ProtocolAAMc', '_$s17CloudCoreInternal9_SecurityVAA01_D8ProtocolAAWP', 
                        '_$s17CloudCoreInternal9_SecurityVMa', '_$s17CloudCoreInternal9_SecurityVMn', 
-                       '_$s17CloudCoreInternal9_SecurityVN', '_$sScT17CloudCoreInternalE12CancelHandleV2eeoiySbACyxq__G_AEtFZ', 
-                       '_$sScT17CloudCoreInternalE12CancelHandleV4hash4intoys6HasherVz_tF', 
-                       '_$sScT17CloudCoreInternalE12CancelHandleV6cancelyyF', '_$sScT17CloudCoreInternalE12CancelHandleV9hashValueSivg', 
-                       '_$sScT17CloudCoreInternalE12CancelHandleV9hashValueSivpMV', 
-                       '_$sScT17CloudCoreInternalE12CancelHandleVMa', '_$sScT17CloudCoreInternalE12CancelHandleVMn', 
-                       '_$sScT17CloudCoreInternalE12CancelHandleVyxq__GSHAAMc', '_$sScT17CloudCoreInternalE12CancelHandleVyxq__GSQAAMc' ]
+                       '_$s17CloudCoreInternal9_SecurityVN' ]
 ...

@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreThreadRadio.framework/Versions/A/CoreThreadRadio'
 exports:
   - targets:         [ x86_64-macos ]
@@ -25,7 +25,7 @@ exports:
                        __ZTSNSt3__120__shared_ptr_pointerIPN6CtrXPC7Command5StateENS_10shared_ptrIS3_E27__shared_ptr_default_deleteIS3_S3_EENS_9allocatorIS3_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN6CtrXPC7CommandENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPNS_3mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN8dispatch8callbackIU13block_pointerFvNS_10shared_ptrIN6CtrXPC5EventEEEEEENS_4lessIS7_EENS5_INS_4pairIKS7_SG_EEEEEENSA_ISN_E27__shared_ptr_default_deleteISN_SN_EENS5_ISN_EEEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CoreThreadRadioVersionNumber, _CoreThreadRadioVersionString, 
                        __Z22dump_info_from_xpc_msgP7__sFILEPvy, __Z22xpc_parse_network_infoP19wpan_network_info_sPv, 
                        __Z24checkEntitlementInServerN3xpc10connectionENS_4dictEN8dispatch8callbackIU13block_pointerFvhS1_EEE, 
@@ -86,7 +86,9 @@ exports:
                        __Z54CtrXpcClient_provideExtendedMACAddress_response_helperRN6CtrXPC6ResultEN3xpc4dictE, 
                        __Z55CtrXpcClient_provideExtendedMACAddress_interface_helperN3xpc4dictEPv, 
                        __Z57CtrXpcClient_threadMeshInfoForHomeMetrics_response_helperRN6CtrXPC6ResultEN3xpc4dictE, 
+                       __Z58CtrXpcClient_getThreadMeshWirelessInsights_response_helperRN6CtrXPC6ResultEN3xpc4dictE, 
                        __Z58CtrXpcClient_threadMeshInfoForHomeMetrics_interface_helperN3xpc4dictEPv, 
+                       __Z59CtrXpcClient_getThreadMeshWirelessInsights_interface_helperN3xpc4dictEPv, 
                        __ZN6CtrXPC11kKeyCommandE, __ZN6CtrXPC11kKeyTimeoutE, __ZN6CtrXPC13kKeyErrorCodeE, 
                        __ZN6CtrXPC13kKeyEventDataE, __ZN6CtrXPC13kValueInvalidE, 
                        __ZN6CtrXPC14kKeyClientNameE, __ZN6CtrXPC14kKeyEventsListE, 
@@ -132,6 +134,7 @@ exports:
                        __ZN6CtrXPC6Client26populateStatsAccessoryDataENSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEjS7_ibP31Ctr_triggerAccessoryStatsResult, 
                        __ZN6CtrXPC6Client28processStatsDataPerAccessoryEP31Ctr_triggerAccessoryStatsResultPv, 
                        __ZN6CtrXPC6Client28threadMeshInfoForHomeMetricsEP36Ctr_getThreadInfoForMetricsInputListU13block_pointerFvNS_6ResultEN3xpc4dictEE, 
+                       __ZN6CtrXPC6Client29getThreadMeshWirelessInsightsEbU13block_pointerFvNS_6ResultEN3xpc4dictEE, 
                        __ZN6CtrXPC6Client30processClientApiWithCompletionER8cmd_dataU13block_pointerFvNS_6ResultEERKNSt3__112basic_stringIcNS6_11char_traitsIcEENS6_9allocatorIcEEEE, 
                        __ZN6CtrXPC6Client32captureTriggerDataWithCompletionEP21Ctr_triggerBasedStats, 
                        __ZN6CtrXPC6Client35processClientApiAsyncWithCompletionER8cmd_dataU13block_pointerFvNS_6ResultEN3xpc4dictEERKNSt3__112basic_stringIcNS8_11char_traitsIcEENS8_9allocatorIcEEEE, 
@@ -166,5 +169,12 @@ exports:
                        _wpantund_status_to_cstr ]
     objc-classes:    [ CtrAccessoryInfoType, CtrAccessorySpecificThreadInfoInput, 
                        CtrAccessorySpecificThreadInfoOutput, CtrAccessorySpecificTriggerResult, 
-                       CtrClient, CtrClientSysdiag, CtrTriggerResult ]
+                       CtrClient, CtrClientSysdiag, CtrMeshDiagAnalysisResults, CtrMeshDiagAsymmetricLinkInfo, 
+                       CtrMeshDiagAsymmetricLinksResult, CtrMeshDiagBottleneckNodeInfo, 
+                       CtrMeshDiagBottleneckNodesResult, CtrMeshDiagCriticalNodeInfo, 
+                       CtrMeshDiagCriticalNodesResult, CtrMeshDiagResilienceMetadata, 
+                       CtrMeshDiagResilienceResult, CtrMeshDiagUnreachableNodeInfo, 
+                       CtrMeshDiagUnreachableNodesResult, CtrMeshDiagUnreliableNodeInfo, 
+                       CtrMeshDiagUnreliableNodesResult, CtrMeshDiagUnsupportedEnhancedDiagnosticsNodeInfo, 
+                       CtrMeshDiagUnsupportedEnhancedDiagnosticsResult, CtrTriggerResult ]
 ...

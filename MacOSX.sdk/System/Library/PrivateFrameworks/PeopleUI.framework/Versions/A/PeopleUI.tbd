@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PeopleUI.framework/Versions/A/PeopleUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation6LocaleV8PeopleUI0B8ProtocolADMc', '_$s10Foundation6LocaleV8PeopleUI0B8ProtocolADWP', 
                        '_$s10Foundation6LocaleV8PeopleUIE18characterDirection11forLanguageSo08NSLocalehF0VSS_tF', 
                        '_$s6People18MotionPersonStatusV0A2UI015LockScreenBadgeD0ADMc', 

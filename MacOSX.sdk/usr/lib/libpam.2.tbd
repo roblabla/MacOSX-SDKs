@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libpam.2.dylib'
 current-version: 3
 compatibility-version: 3
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __openpam_debug, __openpam_log, __pam_apple_err_name, __pam_control_flag_name, 
                        __pam_err_name, __pam_facility_name, __pam_func_name, __pam_item_name, 
                        __pam_sm_func_name, _misc_conv, _openpam_borrow_cred, _openpam_clear_chains, 

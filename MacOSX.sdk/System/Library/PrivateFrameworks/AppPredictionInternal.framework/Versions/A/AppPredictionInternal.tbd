@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppPredictionInternal.framework/Versions/A/AppPredictionInternal'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s21AppPredictionInternal08OnScreenA15EntitiesManagerC024getSuggestedDocumentsFordeaF0SaySo28ATXPredictedDocumentIdentityCGyKFTj', 
                        '_$s21AppPredictionInternal08OnScreenA15EntitiesManagerC024getSuggestedDocumentsFordeaF0SaySo28ATXPredictedDocumentIdentityCGyKFTq', 
                        '_$s21AppPredictionInternal08OnScreenA15EntitiesManagerC026retrieveSimilarFileURLsForJ8WithPathySay10Foundation3URLVGSSYaKFTj', 
@@ -360,8 +360,6 @@ exports:
                        '_$s21AppPredictionInternal25ContextualActionPrewarmerC22prewarmToolInvocations26forOnScreenSelectedContentyAA0A13EntityContextC0klmN0C_tYaFTj', 
                        '_$s21AppPredictionInternal25ContextualActionPrewarmerC22prewarmToolInvocations26forOnScreenSelectedContentyAA0A13EntityContextC0klmN0C_tYaFTjTu', 
                        '_$s21AppPredictionInternal25ContextualActionPrewarmerC22prewarmToolInvocations26forOnScreenSelectedContentyAA0A13EntityContextC0klmN0C_tYaFTq', 
-                       '_$s21AppPredictionInternal25ContextualActionPrewarmerC24getLastKnownSelectedTextSSSgyKFTj', 
-                       '_$s21AppPredictionInternal25ContextualActionPrewarmerC24getLastKnownSelectedTextSSSgyKFTq', 
                        '_$s21AppPredictionInternal25ContextualActionPrewarmerC31TypeMetadataForOnScreenEntitiesCMa', 
                        '_$s21AppPredictionInternal25ContextualActionPrewarmerC31TypeMetadataForOnScreenEntitiesCMm', 
                        '_$s21AppPredictionInternal25ContextualActionPrewarmerC31TypeMetadataForOnScreenEntitiesCMn', 
@@ -370,15 +368,9 @@ exports:
                        '_$s21AppPredictionInternal25ContextualActionPrewarmerC31TypeMetadataForOnScreenEntitiesCN', 
                        '_$s21AppPredictionInternal25ContextualActionPrewarmerC31TypeMetadataForOnScreenEntitiesCfD', 
                        '_$s21AppPredictionInternal25ContextualActionPrewarmerC31TypeMetadataForOnScreenEntitiesCfd', 
-                       '_$s21AppPredictionInternal25ContextualActionPrewarmerC38fetchEncodedToolInvocationsViaSlowPathSay09ProactiveB6Client09SpotlightohiE0CGyYaKFTj', 
-                       '_$s21AppPredictionInternal25ContextualActionPrewarmerC38fetchEncodedToolInvocationsViaSlowPathSay09ProactiveB6Client09SpotlightohiE0CGyYaKFTjTu', 
-                       '_$s21AppPredictionInternal25ContextualActionPrewarmerC38fetchEncodedToolInvocationsViaSlowPathSay09ProactiveB6Client09SpotlightohiE0CGyYaKFTq', 
-                       '_$s21AppPredictionInternal25ContextualActionPrewarmerC43getPrewarmedTypeMetadataForOnScreenEntitiesSayAC0ijklmN0CGyKFTj', 
-                       '_$s21AppPredictionInternal25ContextualActionPrewarmerC43getPrewarmedTypeMetadataForOnScreenEntitiesSayAC0ijklmN0CGyKFTq', 
-                       '_$s21AppPredictionInternal25ContextualActionPrewarmerC47getRawPrewarmedToolInvocationsForCurrentContextSay0J3Kit0J10InvocationVGyKFTj', 
-                       '_$s21AppPredictionInternal25ContextualActionPrewarmerC47getRawPrewarmedToolInvocationsForCurrentContextSay0J3Kit0J10InvocationVGyKFTq', 
-                       '_$s21AppPredictionInternal25ContextualActionPrewarmerC51getEncodedPrewarmedToolInvocationsForCurrentContextSay09ProactiveB6Client09SpotlightphjE0CGyKFTj', 
-                       '_$s21AppPredictionInternal25ContextualActionPrewarmerC51getEncodedPrewarmedToolInvocationsForCurrentContextSay09ProactiveB6Client09SpotlightphjE0CGyKFTq', 
+                       '_$s21AppPredictionInternal25ContextualActionPrewarmerC36fetchPrewarmedEncodedToolInvocationsSay09ProactiveB6Client09SpotlightmijE0CGyYaKFTj', 
+                       '_$s21AppPredictionInternal25ContextualActionPrewarmerC36fetchPrewarmedEncodedToolInvocationsSay09ProactiveB6Client09SpotlightmijE0CGyYaKFTjTu', 
+                       '_$s21AppPredictionInternal25ContextualActionPrewarmerC36fetchPrewarmedEncodedToolInvocationsSay09ProactiveB6Client09SpotlightmijE0CGyYaKFTq', 
                        '_$s21AppPredictionInternal25ContextualActionPrewarmerC66fetchRawToolInvocationAndSelectedTextForOnScreenContentViaSlowPathSay0I3Kit0iJ0VG_SSSgSayAC012TypeMetadatanoP8EntitiesCGtyYaKFTj', 
                        '_$s21AppPredictionInternal25ContextualActionPrewarmerC66fetchRawToolInvocationAndSelectedTextForOnScreenContentViaSlowPathSay0I3Kit0iJ0VG_SSSgSayAC012TypeMetadatanoP8EntitiesCGtyYaKFTjTu', 
                        '_$s21AppPredictionInternal25ContextualActionPrewarmerC66fetchRawToolInvocationAndSelectedTextForOnScreenContentViaSlowPathSay0I3Kit0iJ0VG_SSSgSayAC012TypeMetadatanoP8EntitiesCGtyYaKFTq', 
@@ -448,23 +440,6 @@ exports:
                        '_$s21AppPredictionInternal26ATXCompanionBundleIdMapperCMo', 
                        '_$s21AppPredictionInternal26ATXCompanionBundleIdMapperCN', 
                        '_$s21AppPredictionInternal26ATXCompanionBundleIdMapperCfD', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerC06createF14RotationEvents4withSay26ContextualSuggestionClient0defjG5EventVGSo23ATXBackgroundSystemTaskCSg_tFTj', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerC06createF14RotationEvents4withSay26ContextualSuggestionClient0defjG5EventVGSo23ATXBackgroundSystemTaskCSg_tFTq', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerC06createF19ConfigurationEvents6stacksSay26ContextualSuggestionClient0defjG5EventVGSaySo14ATXWidgetStackCG_tFTj', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerC06createF19ConfigurationEvents6stacksSay26ContextualSuggestionClient0defjG5EventVGSaySo14ATXWidgetStackCG_tFTq', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerC29createStackConfigurationEvent6stacks26ContextualSuggestionClient0dejkgL0VSaySo09ATXWidgetJ0CG_tFTj', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerC29createStackConfigurationEvent6stacks26ContextualSuggestionClient0dejkgL0VSaySo09ATXWidgetJ0CG_tFTq', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerC7collect4withySo23ATXBackgroundSystemTaskC_tYaFTj', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerC7collect4withySo23ATXBackgroundSystemTaskC_tYaFTjTu', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerC7collect4withySo23ATXBackgroundSystemTaskC_tYaFTq', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerCACycfC', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerCACycfc', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerCMa', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerCMn', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerCMo', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerCMu', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerCN', 
-                       '_$s21AppPredictionInternal26CarPlayWidgetMetricsLoggerCfD', 
                        '_$s21AppPredictionInternal26ContextHeuristicsSchedulerC07contextE0ACSo010ATXContextE0C_tcfC', 
                        '_$s21AppPredictionInternal26ContextHeuristicsSchedulerC07contextE0ACSo010ATXContextE0C_tcfCTj', 
                        '_$s21AppPredictionInternal26ContextHeuristicsSchedulerC07contextE0ACSo010ATXContextE0C_tcfCTq', 
@@ -827,7 +802,7 @@ exports:
                        ATXCandidateRelevanceModelTrainingCoordinator, ATXCarPlayConnectedAnchor, 
                        ATXCarPlayConnectedMMExpert, ATXCarPlayDisconnectedAnchor, 
                        ATXCarPlayDisconnectedMMExpert, ATXCarPlayDuetDataProvider, 
-                       ATXCarPlayDuetEvent, ATXCarPlayWidgetMetricsLogger, ATXCategoricalFeatureAmbientLightType, 
+                       ATXCarPlayDuetEvent, ATXCategoricalFeatureAmbientLightType, 
                        ATXCategoricalFeatureCoarseGeohash, ATXCategoricalFeatureCross_TimeOfDayInterval_FuzzyPartOfWeek_WifiSSID_LocationOfInterest, 
                        ATXCategoricalFeatureDayOfWeek, ATXCategoricalFeatureFuzzyPartOfWeek, 
                        ATXCategoricalFeatureLargeGeohash, ATXCategoricalFeatureLocationOfInterest, 

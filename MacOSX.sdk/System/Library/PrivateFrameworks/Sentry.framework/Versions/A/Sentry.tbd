@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Sentry.framework/Versions/A/Sentry'
-current-version: 2
+current-version: 3
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _HTConfigChangeNotificationToken, _HangTracerCollectOSSignposts, 
                        _STYAbsoluteTimeToMachContinuousTime, _STYDiagnosticsCollectorErrorDomain, 
                        _STYFrameworkDefaults, _STYMachAbsoluteTimeToMachContinuousTime, 

@@ -44,9 +44,9 @@
 #define StandardUSBBitRange64(start, end)       IOUSBBitRange64(start, end)
 #define StandardUSBBitRangePhase(start, end)    IOUSBBitRangePhase(start, end)
 
-#define kUSB30Bitrate5Gbps  kIOUSB30Bitrate5Gbps
-#define kUSB30Bitrate10Gbps kIOUSB30Bitrate10Gbps
-#define kUSB32Bitrate20Gbps kIOUSB32Bitrate20Gbps
+#define kUSB30Bitrate5Gbps  kIOUSBLinkSpeed5Gbps
+#define kUSB30Bitrate10Gbps kIOUSBLinkSpeed10Gbps
+#define kUSB32Bitrate20Gbps kIOUSBLinkSpeed20Gbps
 
 #ifdef __cplusplus
 
@@ -612,7 +612,7 @@ namespace StandardUSB
         uint8_t   bDevCapabilityType;
 #endif
         uint8_t   bIndex;
-        uint16_t  dwAlternateModeVdo;
+        uint32_t  dwAlternateModeVdo;
     }__attribute__((packed));
 
     typedef struct BillboardAltModeCapabilityDescriptor BillboardAltModeCapabilityDescriptor;

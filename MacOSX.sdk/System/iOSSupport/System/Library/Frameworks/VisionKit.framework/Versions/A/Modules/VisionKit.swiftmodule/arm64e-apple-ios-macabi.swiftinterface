@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
 // swift-module-flags: -target arm64e-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 324.1 -module-name VisionKit -package-name com.apple.VisionKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import CoreGraphics
 import Foundation
 import Swift
@@ -76,12 +76,8 @@ public enum RecognizedItem : Swift.Identifiable {
 @_Concurrency.MainActor public protocol ImageAnalysisInteractionDelegate : AnyObject {
   @_Concurrency.MainActor func interaction(_ interaction: VisionKit.ImageAnalysisInteraction, shouldBeginAt point: CoreFoundation.CGPoint, for interactionType: VisionKit.ImageAnalysisInteraction.InteractionTypes) -> Swift.Bool
   @_Concurrency.MainActor func contentsRect(for interaction: VisionKit.ImageAnalysisInteraction) -> CoreFoundation.CGRect
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor func contentView(for interaction: VisionKit.ImageAnalysisInteraction) -> UIKit.UIView?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor func presentingViewController(for interaction: VisionKit.ImageAnalysisInteraction) -> UIKit.UIViewController?
-  #endif
   @_Concurrency.MainActor func interaction(_ interaction: VisionKit.ImageAnalysisInteraction, liveTextButtonDidChangeToVisible visible: Swift.Bool)
   @_Concurrency.MainActor func interaction(_ interaction: VisionKit.ImageAnalysisInteraction, highlightSelectedItemsDidChange highlightSelectedItems: Swift.Bool)
   @available(iOS 17.0, *)
@@ -91,23 +87,17 @@ public enum RecognizedItem : Swift.Identifiable {
 extension VisionKit.ImageAnalysisInteractionDelegate {
   @_Concurrency.MainActor public func interaction(_ interaction: VisionKit.ImageAnalysisInteraction, shouldBeginAt point: CoreFoundation.CGPoint, for interactionType: VisionKit.ImageAnalysisInteraction.InteractionTypes) -> Swift.Bool
   @_Concurrency.MainActor public func contentsRect(for interaction: VisionKit.ImageAnalysisInteraction) -> CoreFoundation.CGRect
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor public func contentView(for interaction: VisionKit.ImageAnalysisInteraction) -> UIKit.UIView?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor public func presentingViewController(for interaction: VisionKit.ImageAnalysisInteraction) -> UIKit.UIViewController?
-  #endif
   @_Concurrency.MainActor public func interaction(_ interaction: VisionKit.ImageAnalysisInteraction, liveTextButtonDidChangeToVisible visible: Swift.Bool)
   @_Concurrency.MainActor public func interaction(_ interaction: VisionKit.ImageAnalysisInteraction, highlightSelectedItemsDidChange highlightSelectedItems: Swift.Bool)
   @_Concurrency.MainActor public func textSelectionDidChange(_ interaction: VisionKit.ImageAnalysisInteraction)
 }
 @objc @_inheritsConvenienceInitializers @available(iOS 16.0, macCatalyst 17.0, *)
 @_Concurrency.MainActor final public class ImageAnalysisInteraction : ObjectiveC.NSObject, UIKit.UIInteraction {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc weak final public var view: UIKit.UIView? {
     @objc get
   }
-  #endif
   public struct InteractionTypes : Swift.OptionSet {
     public var rawValue: Swift.UInt
     public init(rawValue: Swift.UInt)
@@ -134,12 +124,8 @@ extension VisionKit.ImageAnalysisInteractionDelegate {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc final public func willMove(to view: UIKit.UIView?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc final public func didMove(to view: UIKit.UIView?)
-  #endif
   @_Concurrency.MainActor final public var preferredInteractionTypes: VisionKit.ImageAnalysisInteraction.InteractionTypes {
     get
     set
@@ -197,12 +183,10 @@ extension VisionKit.ImageAnalysisInteractionDelegate {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor final public var supplementaryInterfaceFont: UIKit.UIFont? {
     get
     set
   }
-  #endif
   @available(iOS 17.0, *)
   public enum SubjectUnavailable : Swift.Error {
     case imageUnavailable
@@ -232,9 +216,7 @@ extension VisionKit.ImageAnalysisInteractionDelegate {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor final public func subject(at point: CoreFoundation.CGPoint) async -> VisionKit.ImageAnalysisInteraction.Subject?
-  #endif
   @_Concurrency.MainActor final public func image(for subjects: Swift.Set<VisionKit.ImageAnalysisInteraction.Subject>) async throws -> UIKit.UIImage
   @objc deinit
 }
@@ -305,9 +287,7 @@ extension VisionKit.DataScannerViewControllerDelegate {
 @available(macCatalyst, unavailable)
 @_Concurrency.MainActor public class DataScannerViewController : UIKit.UIViewController {
   public struct RecognizedDataType : Swift.Hashable {
-    #if compiler(>=5.3) && $NonescapableTypes
     public static func text(languages: [Swift.String] = [], textContentType: VisionKit.DataScannerViewController.TextContentType? = nil) -> VisionKit.DataScannerViewController.RecognizedDataType
-    #endif
     public static func barcode(symbologies: [Vision.VNBarcodeSymbology] = []) -> VisionKit.DataScannerViewController.RecognizedDataType
     public static func == (lhs: VisionKit.DataScannerViewController.RecognizedDataType, rhs: VisionKit.DataScannerViewController.RecognizedDataType) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
@@ -390,14 +370,10 @@ extension VisionKit.DataScannerViewControllerDelegate {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, unavailable)
   @_Concurrency.MainActor @objc required dynamic public init?(coder: Foundation.NSCoder)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, unavailable)
   @_Concurrency.MainActor @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
-  #endif
   @_Concurrency.MainActor public init(recognizedDataTypes: Swift.Set<VisionKit.DataScannerViewController.RecognizedDataType>, qualityLevel: VisionKit.DataScannerViewController.QualityLevel = .balanced, recognizesMultipleItems: Swift.Bool = false, isHighFrameRateTrackingEnabled: Swift.Bool = true, isPinchToZoomEnabled: Swift.Bool = true, isGuidanceEnabled: Swift.Bool = true, isHighlightingEnabled: Swift.Bool = false)
   @objc deinit
   @_Concurrency.MainActor @objc override dynamic public func loadView()

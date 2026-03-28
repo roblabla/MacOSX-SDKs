@@ -1,22 +1,20 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/HearingUtilities.framework/Versions/A/HearingUtilities'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AXHAServerAvailableNotification, _AXHearingAidAudioRoutesChangedNotification, 
                        _AXHearingAidControlCenterPath, _AXHearingAidsControlCenterBundleID, 
-                       _AXHearingControlCenterBundleID, _AXLEAudioServiceUUIDString, 
-                       _AXLEHIAuthServiceUUIDString, _AXLEHIAuthVersionCharacteristicUUIDString, 
-                       _AXLEHIDISFirmwareVersionCharacteristicUUIDString, _AXLEHIDISHardwareVersionCharacteristicUUIDString, 
-                       _AXLEHIDISManufacturerCharacteristicUUIDString, _AXLEHIDISModelNumberCharacteristicUUIDString, 
-                       _AXLEHIDISServiceUUIDString, _AXLEHIServiceUUIDString, _AXLogHearingHalPlugin, 
-                       _HUAudioTransferAvailabilityDidChangeNotification, _HUBackgroundSoundsEnabledStatusChangedNotification, 
-                       _HUBluetoothProductIdentifierB298, _HUBluetoothProductIdentifierB515, 
-                       _HUBluetoothProductIdentifierB515C, _HUBluetoothProductIdentifierB698, 
+                       _AXHearingControlCenterBundleID, _AXLEHIAuthServiceUUIDString, 
+                       _AXLEHIAuthVersionCharacteristicUUIDString, _AXLEHIDISFirmwareVersionCharacteristicUUIDString, 
+                       _AXLEHIDISHardwareVersionCharacteristicUUIDString, _AXLEHIDISManufacturerCharacteristicUUIDString, 
+                       _AXLEHIDISModelNumberCharacteristicUUIDString, _AXLEHIDISServiceUUIDString, 
+                       _AXLEHIServiceUUIDString, _AXLogHearingHalPlugin, _HUAudioTransferAvailabilityDidChangeNotification, 
+                       _HUBackgroundSoundsEnabledStatusChangedNotification, _HUBluetoothProductIdentifierB298, 
+                       _HUBluetoothProductIdentifierB515, _HUBluetoothProductIdentifierB515C, 
+                       _HUBluetoothProductIdentifierB515D, _HUBluetoothProductIdentifierB698, 
                        _HUBluetoothProductIdentifierB698C, _HUBluetoothProductIdentifierB788, 
                        _HUComfortSoundsAvailableAssetsKey, _HUComfortSoundsDownloadAssetKey, 
                        _HUComfortSoundsDownloadProgressKey, _HUComfortSoundsPreviewKey, 
@@ -44,9 +42,10 @@ exports:
                        _getCallStatus, _headphoneStreamSelected, _headphoneStreamSelectedForAddresses, 
                        _hearingAidReceivingAudio, _hearingAidStreamAvailable, _hearingAidStreamAvailableAsync, 
                        _hearingAidStreamSelected, _hearingAidStreamSelectedAsync, 
-                       _hearingDeamonShouldBeRunning, _hearingEarFromInputOption, 
-                       _hearingInputRouteStringForOption, _hearingLocString, _hearingPropertyDescription, 
-                       _hearingUIShouldBeAvailable, _inputOptionFromHearingEar, _iterateConnectedBluetoothDevicesOnQueue, 
+                       _hearingDaemonShouldBeRunning, _hearingDeamonShouldBeRunning, 
+                       _hearingEarFromInputOption, _hearingInputRouteStringForOption, 
+                       _hearingLocString, _hearingPropertyDescription, _hearingUIShouldBeAvailable, 
+                       _inputOptionFromHearingEar, _iterateConnectedBluetoothDevicesOnQueue, 
                        _iteratePairedBluetoothDevicesOnQueue, _kAXSAvailableHearingDeviceNamePreference, 
                        _kAXSClearPartialPairingPreference, _kAXSCloudHearingAidsPreference, 
                        _kAXSCloudHearingDevicesPreference, _kAXSCountKey, _kAXSDomainCountKey, 
@@ -72,8 +71,8 @@ exports:
                        _supportsBinauralStreamingForHearingAid ]
     objc-classes:    [ AXFakeHearingAidDevice, AXHAController, AXHAListenerHelper, 
                        AXHAMessageHandlerContext, AXHAServer, AXHASettings, AXHeardController, 
-                       AXHearingAidDevice, AXHearingAidDeviceController, AXHearingAidLEAudioDevice, 
-                       AXHearingAidMode, AXRemoteHearingAidDevice, HANanoSettings, 
+                       AXHearingAidDevice, AXHearingAidDeviceController, AXHearingAidMode, 
+                       AXRemoteHearingAidDevice, HANanoSettings, HUAccessoryCompatibilityUtilities, 
                        HUAccessoryHearingSettings, HUAccessoryHearingSyncManager, 
                        HUAccessoryListenerHelper, HUAccessoryManager, HUAudioBuffer, 
                        HUAudioHalController, HUComfortSound, HUComfortSoundsAssetManager, 

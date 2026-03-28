@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PlatformSSOCore.framework/Versions/A/PlatformSSOCore'
-current-version: 483.60.4
+current-version: 483.100.73
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '$ld$previous$/System/Library/PrivateFrameworks/PlatformSSO.framework/Versions/A/PlatformSSO$$1$13.0$15.0$$', 
                        '_$s10Foundation4DataV15PlatformSSOCoreE16base64URLEncodedACSgSS_tcfC', 
                        '_$s10Foundation4DataV15PlatformSSOCoreE22base64URLEncodedStringSSyF', 
@@ -39,6 +39,11 @@ exports:
                        '_$s15PlatformSSOCore16POPrebootDataKeyC7encrypt4data3key10Foundation0D0VAI_So03SecE3RefatKFZTq', 
                        '_$s15PlatformSSOCore16POPrebootDataKeyCMa', '_$s15PlatformSSOCore16POPrebootDataKeyCMn', 
                        '_$s15PlatformSSOCore16POPrebootDataKeyCN', '_$s15PlatformSSOCore16POPrebootDataKeyCfD', 
+                       '_$s15PlatformSSOCore17POSmartCardHelperC19sendECPToAllReaders12authRequired7tciDataySb_10Foundation0M0VtFZ', 
+                       '_$s15PlatformSSOCore17POSmartCardHelperC19sendECPToAllReaders12authRequired7tciDataySb_10Foundation0M0VtFZTq', 
+                       '_$s15PlatformSSOCore17POSmartCardHelperCACycfC', '_$s15PlatformSSOCore17POSmartCardHelperCACycfc', 
+                       '_$s15PlatformSSOCore17POSmartCardHelperCMa', '_$s15PlatformSSOCore17POSmartCardHelperCMn', 
+                       '_$s15PlatformSSOCore17POSmartCardHelperCN', '_$s15PlatformSSOCore17POSmartCardHelperCfD', 
                        '_$s15PlatformSSOCore18POCurve25519VerifyC9verifyKeyySbSo03SecF3RefaF', 
                        '_$s15PlatformSSOCore18POCurve25519VerifyCACycfC', '_$s15PlatformSSOCore18POCurve25519VerifyCACycfc', 
                        '_$s15PlatformSSOCore18POCurve25519VerifyCMa', '_$s15PlatformSSOCore18POCurve25519VerifyCMn', 
@@ -160,14 +165,16 @@ exports:
                        _kDeviceConfigurationFileName, _kHPKE_Curve25519_SHA256_ChachaPoly, 
                        _kHPKE_P256_SHA256_AES_GCM_256, _kHPKE_P384_SHA384_AES_GCM_256, 
                        _kLoginConfigurationFileMask, _kLoginConfigurationFileName, 
-                       _kPOConfigurationVersionDevice, _kPOTestAccessKeyScanned, 
-                       _kPendingSSOConfigurationFileMask, _kPlatformSSOConfigurationPath, 
-                       _kPlatformSSODevModeFileName, _kPlatformSSOPendingSSOTokens, 
-                       _kPlatformSSOPrebootConfigurationPath, _kPlatformSSOTriggerFileName, 
+                       _kOldPlatformSSOPrebootConfigurationPath, _kPOConfigurationVersionDevice, 
+                       _kPOTestAccessKeyScanned, _kPendingSSOConfigurationFileMask, 
+                       _kPlatformSSOConfigurationPath, _kPlatformSSODevModeFileName, 
+                       _kPlatformSSOPendingSSOTokens, _kPlatformSSOPrebootConfigurationPath, 
+                       _kPlatformSSOPrebootResetPath, _kPlatformSSOTriggerFileName, 
                        _kPrebootConfigurationFileName, _kSAML11Namespace, _kSAML11URI, 
                        _kSAML20Namespace, _kSAML20URI, _kStashedContextFileMask, 
                        _kStashedSSOConfigurationFileMask, _kStashedUserLoginStateFileName, 
-                       _kTemporaryUserAccountName, _kTemporaryUserFullName, _kTokenExpiration, 
+                       _kTCIDataLength, _kTemporaryUserAccountName, _kTemporaryUserAccountName1, 
+                       _kTemporaryUserAccountName2, _kTemporaryUserFullName, _kTokenExpiration, 
                        _kTokenReceived, _kUserConfigurationFileMask, _kUserLoginStateFileName, 
                        _kWSTrust13IssueResponse, _kWSTrust13KeyType, _kWSTrust13NameSpace, 
                        _kWSTrust13RequestType, _kWSTrust13SOAPAction, _kWSTrust13SecurityPolicy, 
@@ -221,8 +228,9 @@ exports:
                        POXSRFC3339DateDefinition, POXSRawDataDefinition, POXSSimpleTypeDefinition, 
                        POXSStringDefinition, POXSTimeDefinition, SOAPBaseDocument, 
                        _POJWTBodyBase, _TtC15PlatformSSOCore15POCryptoKitHPKE, _TtC15PlatformSSOCore16POPrebootDataKey, 
-                       _TtC15PlatformSSOCore18POCurve25519Verify, _TtC15PlatformSSOCore20POUserUnlockKeySwift, 
-                       _TtC15PlatformSSOCore30POCryptoKitAlgorithmCurve25519, _TtC15PlatformSSOCore39POCryptoKitHPKE_P256_SHA256_AES_GCM_128, 
+                       _TtC15PlatformSSOCore17POSmartCardHelper, _TtC15PlatformSSOCore18POCurve25519Verify, 
+                       _TtC15PlatformSSOCore20POUserUnlockKeySwift, _TtC15PlatformSSOCore30POCryptoKitAlgorithmCurve25519, 
+                       _TtC15PlatformSSOCore39POCryptoKitHPKE_P256_SHA256_AES_GCM_128, 
                        _TtC15PlatformSSOCore39POCryptoKitHPKE_P256_SHA256_AES_GCM_256, 
                        _TtC15PlatformSSOCore39POCryptoKitHPKE_P384_SHA384_AES_GCM_256, 
                        _TtC15PlatformSSOCore44POCryptoKitHPKE_Curve25519_SHA256_ChachaPoly ]

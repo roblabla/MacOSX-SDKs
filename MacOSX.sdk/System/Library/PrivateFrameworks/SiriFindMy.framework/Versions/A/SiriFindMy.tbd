@@ -1,15 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriFindMy.framework/Versions/A/SiriFindMy'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ ContactsFlowDelegatePlugin, FindMyFlowPlugin, FindMyUIPlugin, 
                        KoaMapper, SharingViewService, SiriContactsIntentsTests, SiriFindMyBundle, 
                        SiriFindMyTester, SiriFindMyTests, SiriFindMyUI, SiriFindMyUIPlugin ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10SiriFindMy05ForceB27DeviceOnAceSettingProvidingMp', 
                        '_$s10SiriFindMy05ForceB27DeviceOnAceSettingProvidingP05forcebefG0SbvgTj', 
                        '_$s10SiriFindMy05ForceB27DeviceOnAceSettingProvidingP05forcebefG0SbvgTq', 

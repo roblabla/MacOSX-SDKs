@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
  
  Pass this object to ``SFSpeechLanguageModel/prepareCustomLanguageModelForUrl:configuration:completion:`` to indicate where that method should create the custom language model file, and to ``SFSpeechRecognitionRequest/customizedLanguageModel`` or ``DictationTranscriber/ContentHint/customizedLanguage(modelConfiguration:)`` to indicate where the system should find that model to use.
  */
-API_AVAILABLE(ios(17), macos(14), tvos(18))
+API_AVAILABLE(ios(17), macos(14))
+API_UNAVAILABLE(tvos)
 NS_SWIFT_SENDABLE
 NS_SWIFT_NAME(SFSpeechLanguageModel.Configuration)
 @interface SFSpeechLanguageModelConfiguration : NSObject <NSCopying, NSSecureCoding>
@@ -27,7 +28,9 @@ NS_SWIFT_NAME(SFSpeechLanguageModel.Configuration)
 @property (nonatomic, readonly, nullable, copy) NSURL *vocabulary;
 
 /** The relative weight of the language model customization. Value must be between 0.0 and 1.0 inclusive. */
-@property (nonatomic, readonly, nullable, copy) NSNumber *weight API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0));
+@property (nonatomic, readonly, nullable, copy) NSNumber *weight
+API_AVAILABLE(ios(26.0), macos(26.0))
+API_UNAVAILABLE(tvos);
 
 /** Creates a configuration with the location of a language model file. */
 - (instancetype)initWithLanguageModel:(NSURL *)languageModel;
@@ -36,7 +39,9 @@ NS_SWIFT_NAME(SFSpeechLanguageModel.Configuration)
 - (instancetype)initWithLanguageModel:(NSURL *)languageModel vocabulary:(NSURL * __nullable)vocabulary;
 
 /** Creates a configuration with the locations of language model and vocabulary files, and custom weight. */
-- (instancetype)initWithLanguageModel:(NSURL *)languageModel vocabulary:(NSURL * __nullable)vocabulary weight:(NSNumber * __nullable)weight API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0));
+- (instancetype)initWithLanguageModel:(NSURL *)languageModel vocabulary:(NSURL * __nullable)vocabulary weight:(NSNumber * __nullable)weight
+API_AVAILABLE(ios(26.0), macos(26.0))
+API_UNAVAILABLE(tvos);
 
 @end
 
@@ -45,7 +50,8 @@ NS_SWIFT_NAME(SFSpeechLanguageModel.Configuration)
  
  Create this object using ``SFSpeechLanguageModel/prepareCustomLanguageModelForUrl:configuration:completion:`` or ``SFSpeechLanguageModel/prepareCustomLanguageModelForUrl:configuration:ignoresCache:completion:``.
  */
-API_AVAILABLE(ios(17), macos(14), tvos(18))
+API_AVAILABLE(ios(17), macos(14))
+API_UNAVAILABLE(tvos)
 @interface SFSpeechLanguageModel : NSObject
   
 + (void)prepareCustomLanguageModelForUrl:(NSURL *)asset clientIdentifier:(NSString *)clientIdentifier configuration:(SFSpeechLanguageModelConfiguration *)configuration completion:(void(^)(NSError * __nullable error))completion

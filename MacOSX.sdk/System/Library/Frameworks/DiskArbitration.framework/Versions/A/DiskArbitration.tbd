@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DAApprovalSessionCreate, _DAApprovalSessionGetTypeID, _DAApprovalSessionScheduleWithRunLoop, 
                        _DAApprovalSessionUnscheduleFromRunLoop, _DADiskClaim, _DADiskClaimWithBlock, 
                        _DADiskCopyDescription, _DADiskCopyIOMedia, _DADiskCopyWholeDisk, 

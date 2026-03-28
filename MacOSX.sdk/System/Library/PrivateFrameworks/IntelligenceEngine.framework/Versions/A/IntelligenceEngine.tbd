@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligenceEngine.framework/Versions/A/IntelligenceEngine'
 current-version: 3500.3.1
 exports:
@@ -126,7 +126,7 @@ exports:
                        __ZTSNSt3__121__empty_non_own_stateIcEE, __ZTSNSt3__123__match_any_but_newlineIcEE, 
                        __ZTSNSt3__126__end_marked_subexpressionIcEE, __ZTSNSt3__128__begin_marked_subexpressionIcEE, 
                        __ZTSNSt3__16__loopIcEE, __ZTSNSt3__16__nodeIcEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _IEValidationTypeError, _IEValidationTypeInfo, _IEValidationTypeWarning, 
                        _IntelligenceEngineVersionNumber, _IntelligenceEngineVersionString, 
                        __Z15IE_GetClassNamePK8NSObject, __Z18IE_IEEventToIntentPK7IEEvent, 

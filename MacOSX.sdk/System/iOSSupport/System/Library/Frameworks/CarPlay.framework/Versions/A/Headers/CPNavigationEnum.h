@@ -9,6 +9,7 @@
 
 #import <CarPlay/CPLane.h>
 #import <CarPlay/CPManeuver.h>
+#import <CarPlay/CPRerouteReason.h>
 
 #pragma mark - Maneuver
 NSString *NSStringFromCPManeuverType(CPManeuverType maneuverType) API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
@@ -18,3 +19,5 @@ NSString *NSStringFromCPTrafficSide(CPTrafficSide trafficSide) API_AVAILABLE(ios
 #pragma mark - Lane
 NSString *NSStringFromCPLaneStatus(CPLaneStatus laneStatus) API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
+#pragma mark - Rerouting
+NSString *NSStringFromCPRerouteReason(CPRerouteReason reason) API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);

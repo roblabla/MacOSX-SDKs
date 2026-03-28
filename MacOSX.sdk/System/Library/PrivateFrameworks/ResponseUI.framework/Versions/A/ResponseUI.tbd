@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ResponseUI.framework/Versions/A/ResponseUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10ResponseUI11CodableCardV12wrappedValueACSo6SFCardC_tcfC', 
                        '_$s10ResponseUI11CodableCardV12wrappedValueSo6SFCardCvM', 
                        '_$s10ResponseUI11CodableCardV12wrappedValueSo6SFCardCvg', 

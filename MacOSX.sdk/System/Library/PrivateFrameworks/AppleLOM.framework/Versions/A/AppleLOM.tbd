@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleLOM.framework/Versions/A/AppleLOM'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AppleLOMVersionNumber, _AppleLOMVersionString, _LOMDebugConfigInit, 
                        _LOMDumpDeviceStatusData, _LOMEnqueuePersistentLog, _LOMLog, 
                        _LOMLogAnalytics, _LOMLogAnalyticsForName, _LOMNVEnableNetworkInterface, 

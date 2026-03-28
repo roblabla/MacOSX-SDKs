@@ -1,11 +1,12 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-macos26.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1223 -module-name FamilyControls
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-macos26.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1223.100.16 -module-name FamilyControls
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Combine
 import CoreServices
 import DeveloperToolsSupport
 import Foundation
+import ManagedSettings
 import Swift
 import _Concurrency
 import _StringProcessing
@@ -28,11 +29,16 @@ public enum FamilyControlsError : Foundation.LocalizedError {
   @available(iOS 16.0, *)
   @available(macCatalyst, unavailable)
   case authenticationMethodUnavailable
-  #if compiler(>=5.3) && $NonescapableTypes
+  @available(iOS 26.4, *)
+  @available(macCatalyst, unavailable)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(visionOS, unavailable)
+  @available(watchOS, unavailable)
+  case unauthorized
   public var errorDescription: Swift.String? {
     get
   }
-  #endif
 }
 @available(iOS 16.4, macOS 13.3, *)
 @available(macCatalyst, unavailable)
@@ -40,9 +46,7 @@ public enum FamilyControlsError : Foundation.LocalizedError {
 @available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension FamilyControls.FamilyControlsError : Swift.RawRepresentable, Foundation.CustomNSError {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
-  #endif
   public var rawValue: Swift.Int {
     get
   }
@@ -56,6 +60,25 @@ extension FamilyControls.FamilyControlsError : Swift.RawRepresentable, Foundatio
   @available(macCatalyst, unavailable)
   public typealias RawValue = Swift.Int
 }
+@_hasMissingDesignatedInitializers @available(iOS 26.4, *)
+@available(macOS, unavailable)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+@available(watchOS, unavailable)
+public class FamilyActivityData {
+  public static let shared: FamilyControls.FamilyActivityData
+  @objc deinit
+  public var installedApplications: [ManagedSettings.Application] {
+    get async throws
+  }
+  public var visitedWebDomains: [ManagedSettings.WebDomain] {
+    get async throws
+  }
+  public var activityCategories: Swift.Set<ManagedSettings.ActivityCategory> {
+    get async throws
+  }
+}
 @available(iOS 15.0, *)
 @available(macCatalyst, unavailable)
 @available(macOS, unavailable)
@@ -66,12 +89,17 @@ public enum AuthorizationStatus : Swift.Int, Swift.Codable, Swift.CustomStringCo
   case notDetermined
   case denied
   case approved
+  @available(iOS 26.4, *)
+  @available(macCatalyst, unavailable)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(visionOS, unavailable)
+  @available(watchOS, unavailable)
+  case approvedWithDataAccess
   public var description: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
-  #endif
   @available(iOS 15.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -95,9 +123,7 @@ public enum AuthorizationStatus : Swift.Int, Swift.Codable, Swift.CustomStringCo
   public var description: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
-  #endif
   @available(iOS 16.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -117,26 +143,22 @@ public enum AuthorizationStatus : Swift.Int, Swift.Codable, Swift.CustomStringCo
 @available(watchOS, unavailable)
 public class AuthorizationCenter : Combine.ObservableObject {
   public static let shared: FamilyControls.AuthorizationCenter
-  @Combine.Published @_projectedValueProperty($authorizationStatus) public var authorizationStatus: FamilyControls.AuthorizationStatus {
+  @Combine.Published<FamilyControls.AuthorizationStatus> @_projectedValueProperty($authorizationStatus) public var authorizationStatus: FamilyControls.AuthorizationStatus {
     get
   }
   public var $authorizationStatus: Combine.Published<FamilyControls.AuthorizationStatus>.Publisher {
     get
   }
   @objc deinit
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, deprecated: 16.0, message: "Use requestAuthorization(for:) instead")
   @available(watchOS, unavailable)
   public func requestAuthorization(completionHandler: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
-  #endif
   @available(iOS 16.0, *)
   @available(macCatalyst, unavailable)
   @available(watchOS, unavailable)
   public func requestAuthorization(for member: FamilyControls.FamilyControlsMember) async throws
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(watchOS, unavailable)
   public func revokeAuthorization(completionHandler: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
-  #endif
   @available(iOS 15.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)

@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _APL_dgemm, _APL_dgemm_LU, _APL_dgemm_QR, _APL_dsyrk, _APL_dtrsm, 
                        _APL_sgemm, _APL_sgemm_LU, _APL_sgemm_QR, _APL_ssyrk, _APL_strsm, 
                        _APPLE_NTHREADS, _ATLU_DestroyThreadMemory, _BLASGetThreading, 
@@ -301,7 +301,7 @@ exports:
                        '_ztrmv$NEWLAPACK', '_ztrmv$NEWLAPACK$ILP64', _ztrmv_, '_ztrsm$NEWLAPACK', 
                        '_ztrsm$NEWLAPACK$ILP64', _ztrsm_, '_ztrsv$NEWLAPACK', '_ztrsv$NEWLAPACK$ILP64', 
                        _ztrsv_ ]
-  - targets:         [ x86_64-macos, x86_64h-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64h-macos, arm64e-macos ]
     symbols:         [ _CAXPY, _CAXPY_, _CCOPY, _CCOPY_, _CDOTC, _CDOTC_, _CDOTU, 
                        _CDOTU_, _CGBMV, _CGBMV_, _CGEMM, _CGEMM_, _CGEMV, _CGEMV_, 
                        _CGERC, _CGERC_, _CGERU, _CGERU_, _CHBMV, _CHBMV_, _CHEMM, 
@@ -363,7 +363,7 @@ exports:
                        _zher, _zher2, _zher2k, _zherk, _zhpmv, _zhpr, _zhpr2, _zrotg, 
                        _zscal, _zswap, _zsymm, _zsyr2k, _zsyrk, _ztbmv, _ztbsv, _ztpmv, 
                        _ztpsv, _ztrmm, _ztrmv, _ztrsm, _ztrsv ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ '_cblas_cgemm_spi$NEWLAPACK', '_cblas_cgemm_spi$NEWLAPACK$ILP64', 
                        '_cblas_cgemm_spi_mem_requirement$NEWLAPACK', '_cblas_cgemm_spi_mem_requirement$NEWLAPACK$ILP64', 
                        '_cblas_ctrsm_spi$NEWLAPACK', '_cblas_ctrsm_spi$NEWLAPACK$ILP64', 

@@ -60,6 +60,51 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 
 @end
 
+/*!
+ * @enum NFCPollingOption
+ *
+ * @constant NFCPollingISO14443     Support both Type A & B modulation.  NFCTagTypeISO7816Compatible and NFCTagTypeMiFare tags will be discovered.
+ * @constant NFCPollingISO15693     NFCTagTypeISO15693 tag will be discovered.
+ * @constant NFCPollingISO18092     NFCTagTypeFeliCa tag will be discovered.
+ * @constant NFCPollingPACE         NFCTagTypeISO7816Compatible with Password Authenticated Connection Establishment (PACE) supported will be discovered.
+  *                                  It will also detects applications listed in "com.apple.developer.nfc.readersession.iso7816.select-identifiers" if PACE detection fails.
+  *                                  Tag's PACE support is indicated by the NFCISO7816Tag.paceSupport property.
+  *                                  Prior to iOS 26.4 this is an exclusive value that cannot be combine with NFCPollingISO14443; it supersedes NFCPollingISO14443 and only returns PACE compatible tag.
+  *                                  From iOS 26.4 this can be combine with all polling options; NFCISO7816Tag.paceSupport identifies PACE conformance of a detected ISO7816 compatible tag. */
+typedef NS_OPTIONS(NSInteger, NFCPollingOption) {
+    NFCPollingISO14443 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)     = 0x1,
+    NFCPollingISO15693 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)     = 0x2,
+    NFCPollingISO18092 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)     = 0x4,
+    NFCPollingPACE API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)         = 0x8,
+};
+
+API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(watchos, macos, tvos, visionos) NS_SWIFT_UNAVAILABLE("Use NFCTagReaderSession.Configuration")
+@interface NFCTagReaderSessionConfiguration : NSObject
+
+/// Configures the RF polling of the reader session; multiple options can be OR'ed together.  This option affects the possible NFC tag type discover.
+@property (nonatomic) NFCPollingOption polling;
+
+/// Application identifiers (subset of entries defined in "com.apple.developer.nfc.readersession.iso7816.select-identifiers") used during ISO7816 tag discovery.
+@property (nonatomic, strong) NSArray<NSString *> *iso7816SelectIdentifiers;
+
+/// System codes (subset of entries defined in "com.apple.developer.nfc.readersession.felica.systemcodes") used during FeliCa tag discovery.
+@property (nonatomic, strong) NSArray<NSString *> *felicaSystemCodes;
+
+/*!
+ * @param option   RF polling types to perform tag discovery.
+ *
+ * @param iso7816SelectIdentifiers  List of ISO7816 Application Identifiers to be used in tag detection when NFCTagReaderSession is configured with NFCPollingISO14443 and/or NFCPollingPACE option.
+ *              Entries must be specified in "com.apple.developer.nfc.readersession.iso7816.select-identifiers" in Info.plist; all unknown / not matched entries will be dropped.
+ *              An empty NSArray indicates all applications specified in Info.plist will be used.  Repeated entries will get filter out via NSOrderedSet conversion.
+ *
+ * @param felicaSystemCodes  List of FeliCa System Codes to be used in tag detection when NFCTagReaderSession is configured with NFCPollingISO18092 option.
+ *              Entries must be specified in "com.apple.developer.nfc.readersession.felica.systemcodes" in Info.plist; all unknown / not matched entries will be dropped.
+ *              An empty NSArray indicates all applications specified in Info.plist will be used.
+ */
+- (instancetype)initWithPollingOption:(NFCPollingOption)option iso7816SelectIdentifiers:(NSArray<NSString*> *)iso7816SelectIdentifiers felicaSystemCodes:(NSArray<NSString *> *)felicaSystemCodes API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
+
+@end
+
 
 #pragma mark - Raw tag reader session
 
@@ -86,22 +131,6 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
  */
 @property (nonatomic, readonly, retain, nullable) id<NFCTag> connectedTag API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
-/*!
- * @enum NFCPollingOption
- *
- * @constant NFCPollingISO14443     Support both Type A & B modulation.  NFCTagTypeISO7816Compatible and NFCTagTypeMiFare tags will be discovered.
- * @constant NFCPollingISO15693     NFCTagTypeISO15693 tag will be discovered.
- * @constant NFCPollingISO18092     NFCTagTypeFeliCa tag will be discovered.
- * @constant NFCPollingPACE         NFCTagTypeISO7816Compatible will be discovered; only tags with Password Authenticated Connection Establishment (PACE) supported is returned.
- *                                  This is an exclusive value that cannot be combine with other NFCPollingOption values; this will override all other combinations.
- */
-typedef NS_OPTIONS(NSInteger, NFCPollingOption) {
-    NFCPollingISO14443 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)     = 0x1,
-    NFCPollingISO15693 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)     = 0x2,
-    NFCPollingISO18092 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)     = 0x4,
-    NFCPollingPACE API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)         = 0x8,
-};
-
 - (instancetype)init NS_UNAVAILABLE;
 
 /*!
@@ -117,6 +146,30 @@ typedef NS_OPTIONS(NSInteger, NFCPollingOption) {
 - (instancetype)initWithPollingOption:(NFCPollingOption)pollingOption
                              delegate:(id<NFCTagReaderSessionDelegate>)delegate
                                 queue:(nullable dispatch_queue_t)queue API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos) NS_EXTENSION_UNAVAILABLE("Not available to extensions") ;
+
+/*!
+ * @method initWithConfiguration:delegate:queue:
+ *
+ * @param configuration Reader configuration for the session.  The configuration is applied when `[NFCTagReaderSession beginSession]` or `[NFCTagReaderSession restartPolling]` is called.
+ * @param delegate      The session will hold a weak ARC reference to this `NFCTagReaderSessionDelegate` object.
+ * @param queue         A dispatch queue where NFCTagReaderSessionDelegate delegate callbacks will be dispatched to.  A <i>nil</i> value will
+ *                      cause the creation of a serial dispatch queue internally for the session.  The session object will retain the provided dispatch queue.
+ *
+ * @return              A new NFCTagReaderSession instance.
+ */
+- (instancetype)initWithConfiguration:(NFCTagReaderSessionConfiguration *)configuration delegate:(id<NFCTagReaderSessionDelegate>)delegate queue:(dispatch_queue_t)queue API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(watchos, macos, tvos, visionos) NS_EXTENSION_UNAVAILABLE("Not available to extensions");
+
+/*!
+ * @method restartPollingWithConfiguration:
+ *
+ * @param configuration Reader configuration used for the polling restart.  The configuration does not persist in the current active session, i.e. `[NFCTagReaderSession restartPolling]` would use
+ *                      the original configuration from session instance initialization.
+ *
+ * @discussion Restart the polling sequence in this session to discover new tags using the provided configuration.  New tags discovered from polling will return in the subsequent
+ *             `[NFCTagReaderSessionDelegate tagReaderSession:didDetectTags:]` call. Tags that are returned previously by `[NFCTagReaderSessionDelegate tagReaderSession:didDetectTags:]` will become invalid,
+ *             and all references to these tags shall be removed to properly release the resources.  Calling this method on an invalidated session will have no effect; a new reader session is required to restart the reader.
+ */
+- (void)restartPollingWithConfiguration:(NFCTagReaderSessionConfiguration *)configuration API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method restartPolling

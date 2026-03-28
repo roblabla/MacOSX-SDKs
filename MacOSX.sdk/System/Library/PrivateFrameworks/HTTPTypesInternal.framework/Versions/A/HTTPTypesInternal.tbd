@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/HTTPTypesInternal.framework/Versions/A/HTTPTypesInternal'
-current-version: 5569.60.39
+current-version: 5812.101.2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s17HTTPTypesInternal10HTTPFieldsV10startIndexSivg', '_$s17HTTPTypesInternal10HTTPFieldsV10startIndexSivpMV', 
                        '_$s17HTTPTypesInternal10HTTPFieldsV15replaceSubrange_4withySnySiG_xtSlRzAA9HTTPFieldV7ElementRtzlF', 
                        '_$s17HTTPTypesInternal10HTTPFieldsV15reserveCapacityyySiF', 

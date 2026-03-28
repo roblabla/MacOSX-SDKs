@@ -264,6 +264,22 @@ typedef enum {
 
 	// The following events are available beginning in macOS 15.4
 	ES_EVENT_TYPE_NOTIFY_TCC_MODIFY,
+
+	// The following events are available beginning in macOS 26.3
+
+	ES_EVENT_TYPE_RESERVED_0,
+	ES_EVENT_TYPE_RESERVED_1,
+	ES_EVENT_TYPE_RESERVED_2,
+
+
+	// The following events are available beginning in macOS 26.4.0
+
+	ES_EVENT_TYPE_RESERVED_3,
+	ES_EVENT_TYPE_RESERVED_4,
+	ES_EVENT_TYPE_RESERVED_5,
+	ES_EVENT_TYPE_RESERVED_6,
+
+
 	// ES_EVENT_TYPE_LAST is not a valid event type but a convenience
 	// value for operating on the range of defined event types.
 	// This value may change between releases and was available
@@ -387,16 +403,28 @@ typedef struct {
 
 /*
  * @brief Values that will be paired with path strings to describe the type of the path
+ * @note: Be careful with symlinks, muting happens AFTER symlink resolution.
+ * muting '/tmp' won't work because it's a symlink to '/private/tmp'
  */
 typedef enum {
-	/// Value to describe a path prefix
+	/// Value to describe a prefix for the path to the instigating program
+	/// eg `/bin` would match `/bin/ls` and `/bin/sleep`
+	/// This is a type of *program* muting. It could match multiple proccesses
 	ES_MUTE_PATH_TYPE_PREFIX,
-	/// Value to describe a path literal
+	/// Value to describe the exact path to the instigating program
+	/// *must match exactly*
+	/// eg `/bin/ls`would match `/bin/ls` but NOT match `/bin/lsa`
 	ES_MUTE_PATH_TYPE_LITERAL,
 	/// Value to describe a target path prefix
+	/// target here has a very specific meaning
+	/// @see es_mute_path()
+	/// briefly, this type of muting matches the *argument(s)* to syscalls, rather than the instigating program
+	/// prefix matching means `/private/tmp` would match `open(/private/tmp/cake)`
 	ES_MUTE_PATH_TYPE_TARGET_PREFIX
 	API_AVAILABLE(macos(13.0)),
 	/// Value to describe a target path literal
+	/// Behaves just like ES_MUTE_PATH_TYPE_TARGET_PREFIX except that the target path must match *exactly*
+	/// eg `/private/tmp/foo` would match `open(/private/tmp/foo)` but NOT match `open(/private/tmp/foobar)`
 	ES_MUTE_PATH_TYPE_TARGET_LITERAL
 	API_AVAILABLE(macos(13.0))
 } es_mute_path_type_t;

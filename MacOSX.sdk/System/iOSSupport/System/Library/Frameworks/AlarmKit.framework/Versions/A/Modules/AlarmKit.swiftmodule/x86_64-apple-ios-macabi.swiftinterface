@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-ios19.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2303.2.4 -module-name AlarmKit -package-name com.apple.AlarmKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-ios19.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2303.4.20 -module-name AlarmKit -package-name com.apple.AlarmKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import ActivityKit
 @_exported import AlarmKit
 import AppIntents
@@ -18,9 +18,7 @@ public struct AlarmAttributes<Metadata> : ActivityKit.ActivityAttributes, Swift.
   public var presentation: AlarmKit.AlarmPresentation
   public var metadata: Metadata?
   public var tintColor: SwiftUICore.Color
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(presentation: AlarmKit.AlarmPresentation, metadata: Metadata? = nil, tintColor: SwiftUICore.Color)
-  #endif
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
@@ -61,23 +59,17 @@ public struct AlarmPresentation : Swift.Codable, Swift.Sendable {
     }
     public var secondaryButton: AlarmKit.AlarmButton?
     public var secondaryButtonBehavior: AlarmKit.AlarmPresentation.Alert.SecondaryButtonBehavior?
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS 26.1, *)
     public init(title: Foundation.LocalizedStringResource, secondaryButton: AlarmKit.AlarmButton? = nil, secondaryButtonBehavior: AlarmKit.AlarmPresentation.Alert.SecondaryButtonBehavior? = nil)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS, deprecated: 26.1, message: "stopButton is deprecated and will no longer be used")
     public init(title: Foundation.LocalizedStringResource, stopButton: AlarmKit.AlarmButton, secondaryButton: AlarmKit.AlarmButton? = nil, secondaryButtonBehavior: AlarmKit.AlarmPresentation.Alert.SecondaryButtonBehavior? = nil)
-    #endif
     public func encode(to encoder: any Swift.Encoder) throws
     public init(from decoder: any Swift.Decoder) throws
   }
   public struct Countdown : Swift.Codable, Swift.Sendable {
     public var title: Foundation.LocalizedStringResource
     public var pauseButton: AlarmKit.AlarmButton?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(title: Foundation.LocalizedStringResource, pauseButton: AlarmKit.AlarmButton? = nil)
-    #endif
     public func encode(to encoder: any Swift.Encoder) throws
     public init(from decoder: any Swift.Decoder) throws
   }
@@ -91,9 +83,7 @@ public struct AlarmPresentation : Swift.Codable, Swift.Sendable {
   public var alert: AlarmKit.AlarmPresentation.Alert
   public var countdown: AlarmKit.AlarmPresentation.Countdown?
   public var paused: AlarmKit.AlarmPresentation.Paused?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(alert: AlarmKit.AlarmPresentation.Alert, countdown: AlarmKit.AlarmPresentation.Countdown? = nil, paused: AlarmKit.AlarmPresentation.Paused? = nil)
-  #endif
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
@@ -212,9 +202,7 @@ public struct Alarm : Swift.Identifiable, Swift.Codable, Swift.Sendable {
   public struct CountdownDuration : Swift.Codable, Swift.Sendable, Swift.Equatable {
     public var preAlert: Foundation.TimeInterval?
     public var postAlert: Foundation.TimeInterval?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(preAlert: Foundation.TimeInterval?, postAlert: Foundation.TimeInterval?)
-    #endif
     public static func == (a: AlarmKit.Alarm.CountdownDuration, b: AlarmKit.Alarm.CountdownDuration) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public init(from decoder: any Swift.Decoder) throws
@@ -266,15 +254,9 @@ public class AlarmManager {
     public init(from decoder: any Swift.Decoder) throws
   }
   public struct AlarmConfiguration<Metadata> where Metadata : AlarmKit.AlarmMetadata {
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(countdownDuration: AlarmKit.Alarm.CountdownDuration? = nil, schedule: AlarmKit.Alarm.Schedule? = nil, attributes: AlarmKit.AlarmAttributes<Metadata>, stopIntent: (any AppIntents.LiveActivityIntent)? = nil, secondaryIntent: (any AppIntents.LiveActivityIntent)? = nil, sound: ActivityKit.AlertConfiguration.AlertSound = .default)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public static func timer(duration: Foundation.TimeInterval, attributes: AlarmKit.AlarmAttributes<Metadata>, stopIntent: (any AppIntents.LiveActivityIntent)? = nil, secondaryIntent: (any AppIntents.LiveActivityIntent)? = nil, sound: ActivityKit.AlertConfiguration.AlertSound = .default) -> AlarmKit.AlarmManager.AlarmConfiguration<Metadata>
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public static func alarm(schedule: AlarmKit.Alarm.Schedule? = nil, attributes: AlarmKit.AlarmAttributes<Metadata>, stopIntent: (any AppIntents.LiveActivityIntent)? = nil, secondaryIntent: (any AppIntents.LiveActivityIntent)? = nil, sound: ActivityKit.AlertConfiguration.AlertSound = .default) -> AlarmKit.AlarmManager.AlarmConfiguration<Metadata>
-    #endif
   }
   public static let shared: AlarmKit.AlarmManager
   public func schedule<Metadata>(id: AlarmKit.Alarm.ID, configuration: AlarmKit.AlarmManager.AlarmConfiguration<Metadata>) async throws -> AlarmKit.Alarm where Metadata : AlarmKit.AlarmMetadata
@@ -300,9 +282,7 @@ public class AlarmManager {
     public typealias Element = [AlarmKit.Alarm]
     public func makeAsyncIterator() -> AlarmKit.AlarmManager.AlarmUpdates.Iterator
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> AlarmKit.AlarmManager.AlarmUpdates.Element?
-      #endif
       @available(iOS 26.0, *)
       @available(macCatalyst, unavailable)
       public typealias Element = AlarmKit.AlarmManager.AlarmUpdates.Element
@@ -321,9 +301,7 @@ public class AlarmManager {
     public typealias Element = AlarmKit.AlarmManager.AuthorizationState
     public func makeAsyncIterator() -> AlarmKit.AlarmManager.AlarmAuthorizationStateUpdates.Iterator
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> AlarmKit.AlarmManager.AuthorizationState?
-      #endif
       @available(iOS 26.0, *)
       @available(macCatalyst, unavailable)
       public typealias Element = AlarmKit.AlarmManager.AuthorizationState

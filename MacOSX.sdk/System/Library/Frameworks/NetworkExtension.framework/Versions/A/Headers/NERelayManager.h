@@ -70,6 +70,8 @@ typedef NS_ENUM(NSInteger, NERelayManagerClientError) {
 	NERelayManagerClientErrorServerCertificateExpired = 9,
 	/*! @const NERelayManagerClientErrorOther The client detected an error that has not yet been enumerated */
 	NERelayManagerClientErrorOther = 10,
+	/*! @const NERelayManagerClientErrorPvDConfigurationTruncated The PvD configuration exceeded the maximum number of proxy-match rules and was truncated */
+	NERelayManagerClientErrorPvDConfigurationTruncated = 11,
 } API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0)) API_UNAVAILABLE(watchos);
 
 /*! @const NERelayClientErrorDomain The NERelay error domain as detected by the client*/

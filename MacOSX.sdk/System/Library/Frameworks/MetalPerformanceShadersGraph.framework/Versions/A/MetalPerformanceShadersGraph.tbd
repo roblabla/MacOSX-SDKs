@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MetalPerformanceShadersGraph.framework/Versions/A/MetalPerformanceShadersGraph'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s28MetalPerformanceShadersGraph16MPSGraphDelegateC11ExecutablesV13mpsExecutable07adapterI0AESo0eI0CSg_AJtcfC', 
                        '_$s28MetalPerformanceShadersGraph16MPSGraphDelegateC11ExecutablesV13mpsExecutable07adapterI0AESo0eI0CSg_AJtcfcfA0_', 
                        '_$s28MetalPerformanceShadersGraph16MPSGraphDelegateC11ExecutablesV13mpsExecutable07adapterI0AESo0eI0CSg_AJtcfcfA_', 
@@ -75,10 +73,12 @@ exports:
                        '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV13gCommandQueueSo010MTLCommandI0_pvpMV', 
                        '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV17adapterExecutableSo0eI0CSgvg', 
                        '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV17adapterExecutableSo0eI0CSgvpMV', 
+                       '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV24dumpOptimizedBytecodeDir10Foundation3URLVSgvg', 
+                       '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV24dumpOptimizedBytecodeDir10Foundation3URLVSgvpMV', 
                        '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV29executableExecutionDescriptorSo0e10ExecutableiJ0Cvg', 
                        '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV29executableExecutionDescriptorSo0e10ExecutableiJ0CvpMV', 
                        '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV4ODIE0G0AAMc', 
-                       '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV4name10executable17adapterExecutable7gDevice13gCommandQueue12functionName12stateIndicesACSS_So0eK0CALSgSo9MTLDevice_pSo010MTLCommandN0_pSSSaySo8NSNumberCGSgtcfC', 
+                       '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV4name10executable17adapterExecutable7gDevice13gCommandQueue12functionName12stateIndices24dumpOptimizedBytecodeDirACSS_So0eK0CAMSgSo9MTLDevice_pSo010MTLCommandN0_pSSSaySo8NSNumberCGSg10Foundation3URLVSgtcfC', 
                        '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV4nameSSvM', 
                        '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV4nameSSvg', 
                        '_$s28MetalPerformanceShadersGraph22MPSGraphDelegateKernelV4nameSSvpMV', 

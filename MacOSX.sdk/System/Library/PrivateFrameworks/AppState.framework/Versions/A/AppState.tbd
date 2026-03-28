@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppState.framework/Versions/A/AppState'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s8AppState010StorefrontaB10ControllerC010transitionB003forA02toSbAA0A0V_AA0B0OtF', 
                        '_$s8AppState010StorefrontaB10ControllerC011prospectiveB003forA08applyingAA0B0OAA0A0V_AA0A5OfferVtF', 
                        '_$s8AppState010StorefrontaB10ControllerC013canTransitionB003forA02toSbAA0A0V_AA0B0OtF', 
@@ -23,6 +23,7 @@ exports:
                        '_$s8AppState010StorefrontaB10ControllerC13ConfigurationVMa', 
                        '_$s8AppState010StorefrontaB10ControllerC13ConfigurationVMn', 
                        '_$s8AppState010StorefrontaB10ControllerC13ConfigurationVN', 
+                       '_$s8AppState010StorefrontaB10ControllerC15isUpdateEnabled3appSbAA0A0V_tF', 
                        '_$s8AppState010StorefrontaB10ControllerC15loadDataSourcesyyYaKF', 
                        '_$s8AppState010StorefrontaB10ControllerC15loadDataSourcesyyYaKFTu', 
                        '_$s8AppState010StorefrontaB10ControllerC15reloadAllStates13synchronizingySb_tYaKF', 
@@ -130,6 +131,7 @@ exports:
                        '_$s8AppState06DeviceaB10DataSourceC4loadyyYaKF', '_$s8AppState06DeviceaB10DataSourceC4loadyyYaKFTu', 
                        '_$s8AppState06DeviceaB10DataSourceC5query7fetcher14updateRegistry5storeAcA0cA5QueryO_AA0cA7Fetcher_pAA06UpdateI0_pSgAA0A9StoreTypeOtcfC', 
                        '_$s8AppState06DeviceaB10DataSourceC5state03forA4WithAA0B0OSgAA6AdamIDV_tF', 
+                       '_$s8AppState06DeviceaB10DataSourceC9isManaged7appWithSbAA6AdamIDV_tF', 
                        '_$s8AppState06DeviceaB10DataSourceCAA0abdE0AAMc', '_$s8AppState06DeviceaB10DataSourceCAA0abdE0AAWP', 
                        '_$s8AppState06DeviceaB10DataSourceCMa', '_$s8AppState06DeviceaB10DataSourceCMm', 
                        '_$s8AppState06DeviceaB10DataSourceCMn', '_$s8AppState06DeviceaB10DataSourceCMo', 
@@ -326,6 +328,8 @@ exports:
                        '_$s8AppState0aB10ControllerP12clearWaiting03forA007refreshB0SbAA0A0V_SbtFTq', 
                        '_$s8AppState0aB10ControllerP12postsChanges03forA0SbAA0A0V_tFTj', 
                        '_$s8AppState0aB10ControllerP12postsChanges03forA0SbAA0A0V_tFTq', 
+                       '_$s8AppState0aB10ControllerP15isUpdateEnabled3appSbAA0A0V_tFTj', 
+                       '_$s8AppState0aB10ControllerP15isUpdateEnabled3appSbAA0A0V_tFTq', 
                        '_$s8AppState0aB10ControllerP15loadDataSourcesyyYaKFTj', '_$s8AppState0aB10ControllerP15loadDataSourcesyyYaKFTjTu', 
                        '_$s8AppState0aB10ControllerP15loadDataSourcesyyYaKFTq', '_$s8AppState0aB10ControllerP15reloadAllStates13synchronizingySb_tYaKFTj', 
                        '_$s8AppState0aB10ControllerP15reloadAllStates13synchronizingySb_tYaKFTjTu', 

@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DarwinDirectoryInternal.framework/Versions/A/DarwinDirectoryInternal'
 current-version: 122
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s23DarwinDirectoryInternal17ObjcCompatibilityC034swiftInitializeLocalUsersAndGroupsJ7PerformyyySo14NSMutableArrayC_AFtXBFZ', 
                        '_$s23DarwinDirectoryInternal17ObjcCompatibilityC30swiftUpdateLocalUsersAndGroups7performyySo14NSMutableArrayC_AGSAySo7NSErrorCSgGSgtXB_tKFZ', 
                        '_$s23DarwinDirectoryInternal17ObjcCompatibilityCACycfC', 

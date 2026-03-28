@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpeechObjects.framework/Versions/A/Frameworks/DictationServices.framework/Versions/A/DictationServices'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ContinueOnMainThreadOrAsyncDispatchToMainQueue, _DSRLogAppCompatibility, 
                        _DSRLogAssetDownload, _DSRLogAudioDevice, _DSRLogAudioLogging, 
                        _DSRLogContext, _DSRLogGeneral, _DSRLogHUDPositioning, _DSRLogIOKit, 

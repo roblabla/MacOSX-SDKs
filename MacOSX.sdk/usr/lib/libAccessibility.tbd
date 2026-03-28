@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libAccessibility.dylib'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AXBeginListeningToUserDefaultsChanges, _AXCPCopySharedResourcesPreferencesDomainForDomain, 
                        _AXCPSharedResourcesDirectory, _AXCatchUserDefaultsInconsistencies, 
                        _AXDisallowsUIBasedAccessibilityFeatures, _AXLocalizationForLocale, 
@@ -141,10 +139,12 @@ exports:
                        __AXSQuickSpeakSetHighlightTextEnabled, __AXSQuickSpeakSetPreferredLocaleForLanguage, 
                        __AXSQuickTypePredictionFeedbackEnabled, __AXSRedGreenFilterEnabled, 
                        __AXSRedGreenFilterIntensity, __AXSRedGreenFilterSetEnabled, 
-                       __AXSRedGreenFilterSetIntensity, __AXSReduceMotionAutoplayAnimatedImagesEnabled, 
-                       __AXSReduceMotionAutoplayMessagesEffectsEnabled, __AXSReduceMotionAutoplayVideoPreviewsEnabled, 
-                       __AXSReduceMotionAutoplayVideoPreviewsEnabledApp, __AXSReduceMotionAutoplayVideoPreviewsEnabledGlobal, 
-                       __AXSReduceMotionEnabled, __AXSReduceMotionEnabledApp, __AXSReduceMotionEnabledGlobal, 
+                       __AXSRedGreenFilterSetIntensity, __AXSReduceHighlightingEffectsEnabled, 
+                       __AXSReduceHighlightingEffectsEnabledApp, __AXSReduceHighlightingEffectsEnabledGlobal, 
+                       __AXSReduceMotionAutoplayAnimatedImagesEnabled, __AXSReduceMotionAutoplayMessagesEffectsEnabled, 
+                       __AXSReduceMotionAutoplayVideoPreviewsEnabled, __AXSReduceMotionAutoplayVideoPreviewsEnabledApp, 
+                       __AXSReduceMotionAutoplayVideoPreviewsEnabledGlobal, __AXSReduceMotionEnabled, 
+                       __AXSReduceMotionEnabledApp, __AXSReduceMotionEnabledGlobal, 
                        __AXSReduceMotionReduceSlideTransitionsEnabled, __AXSReduceMotionReduceSlideTransitionsEnabledApp, 
                        __AXSReduceMotionReduceSlideTransitionsEnabledGlobal, __AXSReduceWhitePointEnabled, 
                        __AXSReportValidationErrors, __AXSResetAccessibilityFeatures, 
@@ -185,7 +185,8 @@ exports:
                        __AXSSetPreferredContentSizeCategoryName, __AXSSetPreferredContentSizeCategoryNameApp, 
                        __AXSSetPrefersHorizontalTextLayout, __AXSSetPrefersHorizontalTextLayoutApp, 
                        __AXSSetPrefersNonBlinkingCursorIndicator, __AXSSetPrefersNonBlinkingCursorIndicatorApp, 
-                       __AXSSetQuickTypePredictionFeedbackEnabled, __AXSSetReduceMotionAutoplayAnimatedImagesEnabled, 
+                       __AXSSetQuickTypePredictionFeedbackEnabled, __AXSSetReduceHighlightingEffectsEnabled, 
+                       __AXSSetReduceHighlightingEffectsEnabledApp, __AXSSetReduceMotionAutoplayAnimatedImagesEnabled, 
                        __AXSSetReduceMotionAutoplayMessagesEffectsEnabled, __AXSSetReduceMotionAutoplayVideoPreviewsEnabled, 
                        __AXSSetReduceMotionAutoplayVideoPreviewsEnabledApp, __AXSSetReduceMotionEnabled, 
                        __AXSSetReduceMotionEnabledApp, __AXSSetReduceMotionReduceSlideTransitionsEnabled, 
@@ -357,7 +358,8 @@ exports:
                        _kAXSQuickSpeakHighlightTextEnabledNotification, _kAXSQuickSpeakHighlightTextEnabledPreference, 
                        _kAXSQuickSpeakLocaleForLanguageNotification, _kAXSQuickSpeakLocaleForLanguagePreference, 
                        _kAXSQuickSpeakPreferenceDomain, _kAXSQuickTypePredictionFeedbackEnabledNotification, 
-                       _kAXSRedColorFilterEnabledNotification, _kAXSReduceMotionAutoplayAnimatedImagesChangedNotification, 
+                       _kAXSRedColorFilterEnabledNotification, _kAXSReduceHighlightingEffectsEnabledNotification, 
+                       _kAXSReduceMotionAutoplayAnimatedImagesChangedNotification, 
                        _kAXSReduceMotionAutoplayAnimatedImagesPreference, _kAXSReduceMotionAutoplayMessagesEffectsChangedNotification, 
                        _kAXSReduceMotionAutoplayVideoPreviewsChangedNotification, 
                        _kAXSReduceMotionChangedNotification, _kAXSReduceMotionPreference, 
@@ -424,7 +426,7 @@ exports:
                        _kLargeTextUsesExtendedRange, _kPAPersonalMediaConfigPreference, 
                        _kPreferencesFrameworkDomain ]
     objc-classes:    [ AccessibilitySupportOverrides ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AXSAirPodsDictionaryForPreference, _AXSAirPodsUpdatedDictionaryForPreference, 
                        __AXSAirPodsDefaultToneVolume, __AXSAirPodsHoldDuration, __AXSAirPodsNoiseCancellationWithOneUnit, 
                        __AXSAirPodsTapSpeed, __AXSAirPodsToneVolume, __AXSAirPodsVolumeSwipeDuration, 

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccessibilityReaderData.framework/Versions/A/AccessibilityReaderData'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation9IndexPathV23AccessibilityReaderDataE2neoiySbAC_ACtFZ', 
                        '_$s10Foundation9IndexPathV23AccessibilityReaderDataEySiAD08AXRIndexcB0Ocig', 
                        '_$s10Foundation9IndexPathV23AccessibilityReaderDataEySiAD08AXRIndexcB0OcipMV', 
@@ -116,7 +116,10 @@ exports:
                        '_$s23AccessibilityReaderData10AXRArticleVSHAAMc', '_$s23AccessibilityReaderData10AXRArticleVSQAAMc', 
                        '_$s23AccessibilityReaderData10AXRArticleVSeAAMc', '_$s23AccessibilityReaderData10AXRArticleVs12IdentifiableAAMc', 
                        '_$s23AccessibilityReaderData10AXRDataLog2os6LoggerVvM', '_$s23AccessibilityReaderData10AXRDataLog2os6LoggerVvg', 
-                       '_$s23AccessibilityReaderData10AXRDataLog2os6LoggerVvs', '_$s23AccessibilityReaderData12AXRTextBlockC010attributedE4Text10Foundation16AttributedStringVSgvMTj', 
+                       '_$s23AccessibilityReaderData10AXRDataLog2os6LoggerVvs', '_$s23AccessibilityReaderData11AXRSignpostV3app2os12OSSignposterVvgZ', 
+                       '_$s23AccessibilityReaderData11AXRSignpostV3app2os12OSSignposterVvpZMV', 
+                       '_$s23AccessibilityReaderData11AXRSignpostVMa', '_$s23AccessibilityReaderData11AXRSignpostVMn', 
+                       '_$s23AccessibilityReaderData11AXRSignpostVN', '_$s23AccessibilityReaderData12AXRTextBlockC010attributedE4Text10Foundation16AttributedStringVSgvMTj', 
                        '_$s23AccessibilityReaderData12AXRTextBlockC010attributedE4Text10Foundation16AttributedStringVSgvMTq', 
                        '_$s23AccessibilityReaderData12AXRTextBlockC010attributedE4Text10Foundation16AttributedStringVSgvgTj', 
                        '_$s23AccessibilityReaderData12AXRTextBlockC010attributedE4Text10Foundation16AttributedStringVSgvgTq', 
@@ -1643,6 +1646,9 @@ exports:
                        '_$sSo7NSImageC23AccessibilityReaderDataE12averageColorSo7NSColorCSgvg', 
                        '_$sSo7NSImageC23AccessibilityReaderDataE12averageColorSo7NSColorCSgvpMV', 
                        '_$sSo7NSImageC23AccessibilityReaderDataE20applyBackgroundColor_19backgroundImageSizeABSo7NSColorC_So6CGSizeVtF', 
+                       '_$ss12StaticStringV23AccessibilityReaderDataE21AXRTriggerToAXRuntimeABvgZ', 
+                       '_$ss12StaticStringV23AccessibilityReaderDataE23AXRFormatRuntimeContentABvgZ', 
+                       '_$ss12StaticStringV23AccessibilityReaderDataE24AXRRuntimeTextProcessingABvgZ', 
                        _AccessibilityReaderDataVersionNumber, _AccessibilityReaderDataVersionString ]
     objc-classes:    [ AXFUIElementObjCBridge, AXKScreenDescriberObjCBridge, AXRArticleObjCBridge, 
                        _TtC23AccessibilityReaderData13AXRTabManager, _TtC23AccessibilityReaderData13AXRmacOSStore, 

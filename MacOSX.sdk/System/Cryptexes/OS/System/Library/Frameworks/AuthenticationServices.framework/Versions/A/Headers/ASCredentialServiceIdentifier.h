@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger, ASCredentialServiceIdentifierType) {
 } API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_NAME(ASCredentialServiceIdentifier.IdentifierType);
 
 AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILABLE(tvos, watchos)
+NS_SWIFT_SENDABLE
 @interface ASCredentialServiceIdentifier : NSObject <NSCopying, NSSecureCoding>
 
 /*! @abstract Initializes an ASCredentialServiceIdentifier object.

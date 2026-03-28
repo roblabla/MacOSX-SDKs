@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ArgumentParserInternal.framework/Versions/A/ArgumentParserInternal'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s22ArgumentParserInternal013ExpressibleByA0Mp', '_$s22ArgumentParserInternal013ExpressibleByA0P15allValueStringsSaySSGvgZTj', 
                        '_$s22ArgumentParserInternal013ExpressibleByA0P15allValueStringsSaySSGvgZTq', 
                        '_$s22ArgumentParserInternal013ExpressibleByA0P21defaultCompletionKindAA0gH0VvgZTj', 

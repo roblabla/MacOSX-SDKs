@@ -1201,12 +1201,7 @@ MODULE_SCOPE int	TclWordKnownAtCompileTime(Tcl_Token *tokenPtr,
 #ifndef __CHAR_UNSIGNED__
 #   define TclGetInt1AtPtr(p) ((int) *((char *) p))
 #else
-#   ifdef HAVE_SIGNED_CHAR
 #	define TclGetInt1AtPtr(p) ((int) *((signed char *) p))
-#   else
-#	define TclGetInt1AtPtr(p) (((int) *((char *) p)) \
-		| ((*(p) & 0200) ? (-256) : 0))
-#   endif
 #endif
 
 #define TclGetInt4AtPtr(p) (((int) TclGetInt1AtPtr(p) << 24) | \

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreRecognition.framework/Versions/A/CoreRecognition'
 current-version: 157
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CRCameraReaderErrorDomain, _CRCameraReaderIDCardCapturePathAutomatic, 
                        _CRCameraReaderIDCardCapturePathFallback, _CRCodeRedeemerErrorDomain, 
                        _CRCodeRedeemerInfoCodeKey, _CRCodeRedeemerInfoErrorKey, _CRCodeRedeemerInfoStatsKey, 
@@ -70,7 +70,7 @@ exports:
                        CRMLEmbossedCardholderModel, CRMLEmbossedExpirationModel, 
                        CRMLEmbossedNumberModel, CRMLFlatModel, CRPollingTimer ]
 reexports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_OBJC_CLASS_$_CRTextFeature', '_OBJC_CLASS_$_CRTextFeatureMultiRegion', 
                        _writeBuffer, _writeCGImageToPNG ]
     objc-classes:    [ CRImage ]

@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/JavaRuntimeSupport.framework/Versions/A/JavaRuntimeSupport'
 current-version: 84
 exports:
@@ -9,7 +9,7 @@ exports:
                        _JRSCopyOSName, _JRSCopyOSVersion, _JRSCopyPrimaryLanguage, 
                        _JRSSetDefaultLocalization ]
     objc-classes:    [ JRSSecurity ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '$ld$previous$/System/Library/Frameworks/JavaVM.framework/Versions/A/Frameworks/JavaRuntimeSupport.framework/Versions/A/JavaRuntimeSupport$$1$10.0$10.16$$', 
                        _JRSAccessibilityUnregisterUniqueIdForUIElement, _JRSFontAlignStyleForFractionalMeasurement, 
                        _JRSFontAlignStyleForIntegerMeasurement, _JRSFontCreateFallbackFontForCharacters, 

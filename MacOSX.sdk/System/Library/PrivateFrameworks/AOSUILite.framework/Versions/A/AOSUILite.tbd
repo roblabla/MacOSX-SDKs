@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AOSUILite.framework/Versions/A/AOSUILite'
 current-version: 415
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AddGlobalObject, _CallJSFunctionWithParameters, _EvaluateJavaScript, 
                        _JSCopyStringValue, _JSValueFromNSArray, _JSValueFromNSDictionary, 
                        _JSValueFromNSObject, _JSValueFromNSString, _JSValueRefsAreEqual, 

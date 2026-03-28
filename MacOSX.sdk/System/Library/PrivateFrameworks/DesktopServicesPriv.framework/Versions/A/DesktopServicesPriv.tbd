@@ -1,25 +1,27 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DesktopServicesPriv.framework/Versions/A/DesktopServicesPriv'
-current-version: 1827.2.1
+current-version: 1827.4.7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CopyNodeRef, _DSArchiveServiceErrorDomain, _DSArchiveServiceStreamingXPCInterface, 
                        _DSArchiveServiceXPCInterface, _DSDebugBreak_, _DSDebugStateString, 
                        _DSMoveAsideSyncedDocumentsAndDesktopToHome, _DSMoveSyncDirectoriesToHome, 
                        _DSMoveSyncedHomeSubDirectoriesBackToSyncRoot, _DSPopDebugStateString, 
                        _DSPropertyTypeToPropertyReferenceDataType, _DSPushDebugStateString, 
-                       _DSRemoveSharedSpotlightAttributesForINode, _DSSetDefaultPermissionOnHomeSubdirectories, 
-                       _DSSetSuppressMainThreadOpenPropertyStoreAssert, _DSSizeICloudCopyMergeStatistics, 
-                       _DS_CStringICloudFaultName, _DS_CopyFaultDictionary, _DS_CopyICloudMergeDirectories, 
-                       _DS_CreateFaultFile, _DS_DateIsBusyFolderDate, _DS_DeleteItem, 
-                       _DS_DeleteItemDeep, _DS_DeleteItemsDeep, _DS_FaultFileNameForFile, 
-                       _DS_IsICloudFaultFile, _DS_IsICloudFaultName, _DS_Unit_Test, 
-                       _DS_Unit_Tests, _DeleteNode, _DisposeNode, _DisposeNodeIterator, 
-                       _DisposeVolumeIterator, _FinderPreflightFPOperation, _FlushCatalogs, 
-                       _GetAEDescAsNode, _GetBootNode, _GetFSRefAsNode, _GetNodeAsAEDesc, 
-                       _GetNodeAsFSRef, _GetNodeAsPathName, _GetNodeAsURL, _GetNodeDataAsClipping, 
+                       _DSRemoveSharedSpotlightAttributesForINode, _DSRepairPermissionsForCloudItems, 
+                       _DSRepairPermissionsForCloudItemsInDomain, _DSRepairPermissionsNeededForCloudItem, 
+                       _DSSetDefaultPermissionOnHomeSubdirectories, _DSSetSuppressMainThreadOpenPropertyStoreAssert, 
+                       _DSSizeICloudCopyMergeStatistics, _DS_CStringICloudFaultName, 
+                       _DS_CopyFaultDictionary, _DS_CopyICloudMergeDirectories, _DS_CreateFaultFile, 
+                       _DS_DateIsBusyFolderDate, _DS_DeleteItem, _DS_DeleteItemDeep, 
+                       _DS_DeleteItemsDeep, _DS_FaultFileNameForFile, _DS_IsICloudFaultFile, 
+                       _DS_IsICloudFaultName, _DS_Unit_Test, _DS_Unit_Tests, _DeleteNode, 
+                       _DisposeNode, _DisposeNodeIterator, _DisposeVolumeIterator, 
+                       _FinderPreflightFPOperation, _FlushCatalogs, _GetAEDescAsNode, 
+                       _GetBootNode, _GetFSRefAsNode, _GetNodeAsAEDesc, _GetNodeAsFSRef, 
+                       _GetNodeAsPathName, _GetNodeAsURL, _GetNodeDataAsClipping, 
                        _GetNodeDataAsURL, _GetNodeParent, _GetNodePropertyAsInt16, 
                        _GetNodePropertyAsInt32, _GetNodePropertyAsInt64, _GetNodePropertyAsOSType, 
                        _GetNodePropertyAsPoint, _GetPathNameAsNode, _GetRootNode, 

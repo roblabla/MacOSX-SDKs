@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightServerKit.framework/Versions/A/SpotlightServerKit'
-current-version: 2400.18.255
+current-version: 2418.4.13
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _BWA_Create, _BWA_DataAllocate, _BWA_DataDeallocate, _CFDataCreateWithContentsOfURL, 
                        _CF_MaxRange, _CF_RangeIntersection, _CF_RangeUnion, _GetSystemBuildVersionStringLocal, 
                        _MDAddNanoseconds, _MDArrayCreateMutable, _MDArrayIterate, 
@@ -39,15 +39,14 @@ exports:
                        _XPCUtil_CopyCFFromDictionary, _XPCUtil_CopyCFFromObject, 
                        _XPCUtil_CopyXPCObjectFromCF, _XPCUtil_PackCFIntoArray, _XPCUtil_PackCFIntoDictionary, 
                        __MDIsAppleInternal, __MDSLogInit, __MDSTokenRegistryInitialize, 
-                       __initThreadContext, __mdsLogPrint, __mdsLogPrintObjC, __mdsLogWrite, 
-                       __mdsLogWriteObjC, _allow_COW_exempt, _bsearch_aux, _cStringFromCFString, 
-                       _directPostAction, _drop_COW_extents, _findExtension, _findNameAndExtension, 
-                       _gIsSystemServer, _gMDSCrashReporterInfo, _gMDSCrashReporterLock, 
-                       _gMDSCrashReporterSignature, _gMDSLogArray, _gMDSLogInitOnce, 
-                       _gMDSLogLevels, _gMDSMainThreadRunLoopIsStopped, _gMDSObjectShutdownInProgress, 
-                       _gMDSObjectShutdownSentinel, _gThreadStateKey, _isValidUUID, 
-                       _kCFContainerReleaseCallBack, _kCFContainerRetainCallBack, 
-                       _kCStringArrayCallBacks, _kCStringDictionaryKeyCallBacks, 
+                       __initThreadContext, __mdsLogPrint, __mdsLogWrite, _allow_COW_exempt, 
+                       _bsearch_aux, _cStringFromCFString, _directPostAction, _drop_COW_extents, 
+                       _findExtension, _findNameAndExtension, _gIsSystemServer, _gMDSCrashReporterInfo, 
+                       _gMDSCrashReporterLock, _gMDSCrashReporterSignature, _gMDSLogArray, 
+                       _gMDSLogInitOnce, _gMDSLogLevels, _gMDSMainThreadRunLoopIsStopped, 
+                       _gMDSObjectShutdownInProgress, _gMDSObjectShutdownSentinel, 
+                       _gThreadStateKey, _isValidUUID, _kCFContainerReleaseCallBack, 
+                       _kCFContainerRetainCallBack, _kCStringArrayCallBacks, _kCStringDictionaryKeyCallBacks, 
                        _kCStringDictionaryValueCallBacks, _kCStringSetCallBacks, 
                        _kDispatchObjectArrayCallbacks, _kDispatchObjectDictionaryValueCallbacks, 
                        _kIntDictionaryKeyCallBacks, _kIntDictionaryValueCallBacks, 

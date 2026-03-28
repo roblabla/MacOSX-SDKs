@@ -1,14 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NotesEditor.framework/Versions/A/NotesEditor'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ Notes, NotesDebug, NotesEditorUnitTests, NotesSiriUI, NotesUnitTests, 
                        com.apple.notes.EditorExtension, com.apple.notes.SpotlightExtension ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s11NotesEditor04LinkB10ControllerC022acceleratorHostingViewD0So06NSViewD0CSgvg', 
                        '_$s11NotesEditor04LinkB10ControllerC022acceleratorHostingViewD0So06NSViewD0CSgvpMV', 
                        '_$s11NotesEditor04LinkB10ControllerC11addApproachSo09ICLinkAddF0VvMTj', 
@@ -111,7 +111,13 @@ exports:
                        '_$s11NotesEditor04LinkB4ViewV4bodyQrvpQOMQ', '_$s11NotesEditor04LinkB4ViewV7SwiftUI0D0AAMc', 
                        '_$s11NotesEditor04LinkB4ViewV9viewModelAC0A2UI0cbdF0C_tcfC', 
                        '_$s11NotesEditor04LinkB4ViewVMa', '_$s11NotesEditor04LinkB4ViewVMn', 
-                       '_$s11NotesEditor04LinkB4ViewVN', '_$s11NotesEditor12SummaryAlertVMa', 
+                       '_$s11NotesEditor04LinkB4ViewVN', '_$s11NotesEditor11LinkActionsC06removeC10Attachment_4from2atySo08ICInlineF0C_So15ICTTTextStorageCSo8_NSRangeVtFZ', 
+                       '_$s11NotesEditor11LinkActionsC06removeC4From11textStorage5rangeySo08ICTTTextH0C_So8_NSRangeVtFZ', 
+                       '_$s11NotesEditor11LinkActionsC15removeLinksFrom11textStorage5rangeySo08ICTTTextI0C_So8_NSRangeVtFZ', 
+                       '_$s11NotesEditor11LinkActionsCACycfC', '_$s11NotesEditor11LinkActionsCACycfc', 
+                       '_$s11NotesEditor11LinkActionsCMa', '_$s11NotesEditor11LinkActionsCMn', 
+                       '_$s11NotesEditor11LinkActionsCMo', '_$s11NotesEditor11LinkActionsCN', 
+                       '_$s11NotesEditor11LinkActionsCfD', '_$s11NotesEditor12SummaryAlertVMa', 
                        '_$s11NotesEditor12SummaryAlertVMn', '_$s11NotesEditor12SummaryAlertVN', 
                        '_$s11NotesEditor13TextSelectionV4text3url10attachment06stringD05rangeACSSSg_10Foundation3URLVSgSo18ICInlineAttachmentCSgSo019ICTTMergeableStringD0CSo8_NSRangeVtcfC', 
                        '_$s11NotesEditor13TextSelectionVMa', '_$s11NotesEditor13TextSelectionVMn', 
@@ -977,13 +983,6 @@ exports:
                        '_$s11NotesEditor29ICInlineDrawingFindResult_MacCMa', '_$s11NotesEditor29ICInlineDrawingFindResult_MacCMn', 
                        '_$s11NotesEditor29ICInlineDrawingFindResult_MacCMo', '_$s11NotesEditor29ICInlineDrawingFindResult_MacCMu', 
                        '_$s11NotesEditor29ICInlineDrawingFindResult_MacCN', '_$s11NotesEditor29ICInlineDrawingFindResult_MacCfD', 
-                       '_$s11NotesEditor29LinkAcceleratorViewControllerC013didSelectNoteC10Completiony0A6Shared0C10SuggestionVcSgvMTj', 
-                       '_$s11NotesEditor29LinkAcceleratorViewControllerC013didSelectNoteC10Completiony0A6Shared0C10SuggestionVcSgvMTq', 
-                       '_$s11NotesEditor29LinkAcceleratorViewControllerC013didSelectNoteC10Completiony0A6Shared0C10SuggestionVcSgvgTj', 
-                       '_$s11NotesEditor29LinkAcceleratorViewControllerC013didSelectNoteC10Completiony0A6Shared0C10SuggestionVcSgvgTq', 
-                       '_$s11NotesEditor29LinkAcceleratorViewControllerC013didSelectNoteC10Completiony0A6Shared0C10SuggestionVcSgvpMV', 
-                       '_$s11NotesEditor29LinkAcceleratorViewControllerC013didSelectNoteC10Completiony0A6Shared0C10SuggestionVcSgvsTj', 
-                       '_$s11NotesEditor29LinkAcceleratorViewControllerC013didSelectNoteC10Completiony0A6Shared0C10SuggestionVcSgvsTq', 
                        '_$s11NotesEditor29LinkAcceleratorViewControllerC015syncContainerTodE0yyFTj', 
                        '_$s11NotesEditor29LinkAcceleratorViewControllerC015syncContainerTodE0yyFTq', 
                        '_$s11NotesEditor29LinkAcceleratorViewControllerC04hideD0yyFTj', 
@@ -1316,7 +1315,7 @@ exports:
                        ICTextFindingMatch, ICTextFindingResult, ICTextLayoutFragment, 
                        ICTextViewAccessibility, ICTextViewRenderingSurfaceView, ICTextViewScrollState, 
                        ICTrackedParagraphImageInfo, ICTrackedParagraphTreeNode, ICVisualAssetImportController, 
-                       LinkEditorController, _TtC11NotesEditor22ICPDFTextFindingResult, 
+                       LinkEditorController, _TtC11NotesEditor11LinkActions, _TtC11NotesEditor22ICPDFTextFindingResult, 
                        _TtC11NotesEditor23OutlineDisclosureButton, _TtC11NotesEditor28ICSystemPaperPreviewProvider, 
                        _TtC11NotesEditor29ICInlineDrawingFindResult_Mac, _TtC11NotesEditor29LinkAcceleratorViewController, 
                        _TtC11NotesEditor32MacLinkAcceleratorViewController ]

@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/EmailCore.framework/Versions/A/EmailCore'
-current-version: 3864.255.41
+current-version: 3864.255.181
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo22ECLocalMessageActionIDC9EmailCoreE08databaseD0ABs5Int64V_tcfC', 
                        '_$sSo22ECLocalMessageActionIDC9EmailCoreE08databaseD0ABs5Int64V_tcfc', 
                        '_$sSo22ECLocalMessageActionIDC9EmailCoreE08databaseD0s5Int64Vvg', 
@@ -31,7 +29,7 @@ exports:
                        _ECAuthSchemeOAuth2, _ECAuthenticationErrorDomain, _ECAuthenticationSchemeAPOP, 
                        _ECAuthenticationSchemeCramMD5, _ECAuthenticationSchemeDigestMD5, 
                        _ECAuthenticationSchemeGSSAPI, _ECAuthenticationSchemeKerberos4, 
-                       _ECAuthenticationSchemeNTLM, _ECBeginDisallowingNetworkActivity, 
+                       _ECAuthenticationSchemeNTLM, _ECBIMIInfoErrorDomain, _ECBeginDisallowingNetworkActivity, 
                        _ECBytesInEncodingCanBeConcatenated, _ECCMSErrorDomain, _ECCMSRecipientErrorsKey, 
                        _ECConvertCharacterSetNameToEncoding, _ECConvertEncodingToCharacterSetName, 
                        _ECDKIMMessageHeaderParseErrorDomain, _ECDKIMVerifierErrorDomain, 
@@ -101,7 +99,8 @@ exports:
                        _ECMessageBodyHTMLParserErrorDomain, _ECMessageHeaderKeyAttachments, 
                        _ECMessageHeaderKeyAuthenticationResults, _ECMessageHeaderKeyAutoSubmitted, 
                        _ECMessageHeaderKeyBCC, _ECMessageHeaderKeyBIMIIndicator, 
-                       _ECMessageHeaderKeyBIMILocation, _ECMessageHeaderKeyCC, _ECMessageHeaderKeyContentDescription, 
+                       _ECMessageHeaderKeyBIMILocation, _ECMessageHeaderKeyBIMISelector, 
+                       _ECMessageHeaderKeyCC, _ECMessageHeaderKeyContentDescription, 
                        _ECMessageHeaderKeyContentDisposition, _ECMessageHeaderKeyContentID, 
                        _ECMessageHeaderKeyContentLanguage, _ECMessageHeaderKeyContentLocation, 
                        _ECMessageHeaderKeyContentTransferEncoding, _ECMessageHeaderKeyContentType, 
@@ -164,7 +163,7 @@ exports:
                        ECTransferActionIMAPReplayer, ECTransferActionReplayer, ECTransferMessageAction, 
                        ECTransferMessageActionItem, ECTransferMessageActionResults, 
                        ECTransferUndownloadedActionIMAPReplayer, ECTransferUndownloadedMessageAction, 
-                       _ECBIMIHeaderParser, _ECHeaderAuthenticationResultsParser, 
+                       _ECBIMIDNSRecordParser, _ECBIMIHeaderParser, _ECHeaderAuthenticationResultsParser, 
                        _ECMessageBodyConsumableNewline, _ECMessageBodyHTMLElement, 
                        _ECParsedHTMLNode, _ECParsedHTMLTag, _ECParsedHTMLText, _ECSVGProfileExtractor, 
                        _ECSubjectFormatterContext ]

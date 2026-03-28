@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <CarPlay/CPListItemTypes.h>
+#import <CarPlay/CPPlaybackConfiguration.h>
 #import <CarPlay/CPTemplate.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -261,6 +262,11 @@ typedef NS_ENUM(NSInteger, CPListItemPlayingIndicatorLocation) {
                   detailText:(nullable NSString *)detailText
                        image:(nullable UIImage *)image
     showsDisclosureIndicator:(BOOL)showsDisclosureIndicator API_DEPRECATED_WITH_REPLACEMENT("initWithText:detailText:image:accessoryImage:accessoryType:", ios(12.0, 14.0));
+
+@end
+
+API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+@interface CPListItem() <CPPlayableItem>
 
 @end
 

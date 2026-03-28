@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork'
-current-version: 3860.255.31
+current-version: 3860.255.112
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CFCachedURLResponseCopyReceiverDataArray, _CFCachedURLResponseCreateWithData, 
                        _CFCachedURLResponseGetReceiverData, _CFCachedURLResponseGetStoragePolicy, 
                        _CFCachedURLResponseGetWrappedResponse, _CFCachedURLResponseSetStoragePolicy, 
@@ -184,9 +182,10 @@ exports:
                        __CFHTTPAuthenticationGetAuthHeadersFromAppSSO, __CFHTTPAuthenticationGetPATAuthHeaders, 
                        __CFHTTPAuthenticationGetPATSchemes, __CFHTTPAuthenticationGetSchemesDict, 
                        __CFHTTPAuthenticationIsSecondNTLMTransaction, __CFHTTPAuthenticationPasswordInClear, 
-                       __CFHTTPAuthenticationSetPreferredScheme, __CFHTTPAuthenticationUpdateFromResponse, 
-                       __CFHTTPAuthenticationUsingAppSSO, __CFHTTPCookieCreateCookiesWithResponseMessage, 
-                       __CFHTTPCookieCreateWithStringAndPartition, __CFHTTPCookieStorageCopyCookiesForURLWithMainDocumentURL, 
+                       __CFHTTPAuthenticationSetKerberosUnitTestMode, __CFHTTPAuthenticationSetPreferredScheme, 
+                       __CFHTTPAuthenticationUpdateFromResponse, __CFHTTPAuthenticationUsingAppSSO, 
+                       __CFHTTPCookieCreateCookiesWithResponseMessage, __CFHTTPCookieCreateWithStringAndPartition, 
+                       __CFHTTPCookieStorageCopyCookiesForURLWithMainDocumentURL, 
                        __CFHTTPCookieStorageCopyRequestHeaderFieldsForURL, __CFHTTPCookieStorageCreateInMemory, 
                        __CFHTTPCookieStorageCreateWithProperties, __CFHTTPCookieStorageFlushCookieStores, 
                        __CFHTTPCookieStorageGetDefault, __CFHTTPCookieStorageSetCookiesWithResponseHeaderFields, 
@@ -211,9 +210,10 @@ exports:
                        __CFHTTPServerSetDispatchQueue, __CFHTTPServerSetProperty, 
                        __CFHostGetTopLevelDomain, __CFHostIsDomainTopLevel, __CFHostIsDomainTopLevelForCertificatePolicy, 
                        __CFHostIsDomainTopLevelForCookiePolicy, __CFHostStartInfoResolutionForInterface, 
-                       __CFN_isSafeRequestForBackgroundDownload, __CFN_isSafeResumeDataForBackgroundDownload, 
-                       __CFN_requestFromResumeData, __CFNetServiceCreateFromServiceName, 
-                       __CFNetServiceCreateFromURL, __CFNetworkCopyATSContext, __CFNetworkCopyDefaultUserAgentString, 
+                       __CFN_createNewResumeDataWithExtractor, __CFN_isSafeRequestForBackgroundDownload, 
+                       __CFN_isSafeResumeDataForBackgroundDownload, __CFN_requestFromResumeData, 
+                       __CFNetServiceCreateFromServiceName, __CFNetServiceCreateFromURL, 
+                       __CFNetworkCopyATSContext, __CFNetworkCopyDefaultUserAgentString, 
                        __CFNetworkCopyHSTSPolicies, __CFNetworkCopyPreferredLanguageCode, 
                        __CFNetworkErrorCopyLocalizedDescriptionWithHostname, __CFNetworkErrorGetLocalizedDescription, 
                        __CFNetworkErrorGetLocalizedFailureReason, __CFNetworkErrorGetLocalizedRecoverySuggestion, 
@@ -413,7 +413,7 @@ exports:
                        _NSHTTPConnectionInfo, _NSURLSessionBackgroundTaskOverrides, 
                        __CFN_TaskMetrics, __NSCFURLSessionTaskInfo, __NSCFURLSessionXPC, 
                        __NSURLSessionStatistics ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CFNetServiceGetProtocolSpecificInformation, _CFNetServiceRegister, 
                        _CFNetServiceResolve, _CFNetServiceSetProtocolSpecificInformation, 
                        __CFURLCredentialCreateWithInitialAccess, _kCFNetworkProxiesExceptionsList, 
@@ -425,6 +425,6 @@ exports:
                        _kCFNetworkProxiesProxyAutoDiscoveryEnable, _kCFNetworkProxiesRTSPEnable, 
                        _kCFNetworkProxiesRTSPPort, _kCFNetworkProxiesRTSPProxy, _kCFNetworkProxiesSOCKSEnable, 
                        _kCFNetworkProxiesSOCKSPort, _kCFNetworkProxiesSOCKSProxy ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _kCFStreamPropertyDataConnectionServiceType ]
 ...

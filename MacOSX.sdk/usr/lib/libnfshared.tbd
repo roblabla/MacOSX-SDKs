@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libnfshared.dylib'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _GetElapsedTimeInMillisecondsFromMachTime, _NFBuildVersion, 
                        _NFCreateWorkLoop, _NFDataAppend, _NFDataAppendBytes, _NFDataAsHexString, 
                        _NFDataCreateWithBytes, _NFDataCreateWithBytesNoCopy, _NFDataCreateWithFile, 
@@ -16,12 +14,12 @@ exports:
                        _NFDataScannerReadData, _NFDataScannerRelease, _NFDataScannerRetain, 
                        _NFDataToCFDataCreateOwnership, _NFGetOrCreateRootQueue, _NFGetProductType, 
                        _NFGetRootQueue, _NFGetThreadPriority, _NFIsChinaSku, _NFIsDarwinOS, 
-                       _NFIsInternalBuild, _NFIsNonRFDeviceWithLPMSupport, _NFIsProductType, 
-                       _NFIsRestoreOS, _NFIsSEinOFFSupported, _NFIsSeashipSupported, 
+                       _NFIsEUiccSupported, _NFIsInternalBuild, _NFIsNonRFDeviceWithLPMSupport, 
+                       _NFIsProductType, _NFIsRestoreOS, _NFIsSEinOFFSupported, _NFIsSeashipSupported, 
                        _NFIsSimulator, _NFIsUIBuild, _NFLogGetLogger, _NFLogGetProcessNCIOnly, 
                        _NFLogSetLogger, _NFLogSetProcessNCIOnly, _NFPlatformShouldLimitAccessoryReaderTime, 
                        _NFPlatformShouldUseLookbackRestrictor, _NFProductAllowsWiredInDLMode, 
-                       _NFProductGetName, _NFProductHasB0LPKey, _NFProductHasModuleCal, 
+                       _NFProductCopyName, _NFProductHasB0LPKey, _NFProductHasModuleCal, 
                        _NFProductHasNFCRadio, _NFProductHasThermistor, _NFProductIsASMac, 
                        _NFProductIsBridge, _NFProductIsDevBoard, _NFProductIsMac, 
                        _NFProductIsNED, _NFProductIsPad, _NFProductIsPhone, _NFProductIsSIP, 
@@ -36,11 +34,12 @@ exports:
                        _postAnalyticsMainSERemovedEvent, _postAnalyticsMiddlewareExceptionEvent, 
                        _postAnalyticsTxLdoErrorEvent, _postAnalyticsTxLdoOverCurrentErrorEvent, 
                        _postCADynamicRFChangedEvent, _resetCALoadStackExceptionCount ]
-    objc-classes:    [ NFAssertionCALogger, NFAssertionInternal, NFCALogger, NFCTKPollConfig, 
-                       NFCardSessionConfig, NFCommandAPDU, NFExceptionsCALogger, 
-                       NFGeneralStatisticsCALogger, NFLPCDStatisticsCALogger, NFMSEIParser, 
-                       NFNSCheckedDecoder, NFNdefMessageInternal, NFNdefRecordInternal, 
-                       NFPowerAssertion, NFPowerObserver, NFPreferenceObserver, NFReaderModeCardIngestionCALogger, 
+    objc-classes:    [ NFAssertionCALogger, NFAssertionInternal, NFAssertionInternalWrapper, 
+                       NFCALogger, NFCTKPollConfig, NFCardSessionConfig, NFCommandAPDU, 
+                       NFCoreNFCPollConfig, NFExceptionsCALogger, NFGeneralStatisticsCALogger, 
+                       NFLPCDStatisticsCALogger, NFMSEIParser, NFNSCheckedDecoder, 
+                       NFNdefMessageInternal, NFNdefRecordInternal, NFPowerAssertion, 
+                       NFPowerObserver, NFPreferenceObserver, NFReaderModeCardIngestionCALogger, 
                        NFReaderSessionConfig, NFReaderSessionPollConfig, NFResponseAPDU, 
                        NFRunScriptParametersInternal, NFServiceWhitelistChecker, 
                        NFTLV, NFTagInternal, NFTimer, NFVASPassConfig, NFXPCConnectionUserInfoDictionary, 

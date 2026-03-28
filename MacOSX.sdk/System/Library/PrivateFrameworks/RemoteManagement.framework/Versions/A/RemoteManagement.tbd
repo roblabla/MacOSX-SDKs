@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/RemoteManagement.framework/Versions/A/RemoteManagement'
 current-version: 2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s16RemoteManagement15ManagedKeychainC10assignCert12withAssetKey5scope7persona015toConfigurationI013accessibility11accessGroup10Foundation4DataVSS_AA7MKScopeOSSSgSSyXlSStKFTj', 
                        '_$s16RemoteManagement15ManagedKeychainC10assignCert12withAssetKey5scope7persona015toConfigurationI013accessibility11accessGroup10Foundation4DataVSS_AA7MKScopeOSSSgSSyXlSStKFTq', 
                        '_$s16RemoteManagement15ManagedKeychainC10debugState5scope7personaSDySSypGAA7MKScopeO_SSSgtFTj', 

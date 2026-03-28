@@ -1,0 +1,9 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64e-macos ]
+install-name:    '/usr/lib/updaters/libCentauriUpdater.dylib'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ _CentauriUpdaterCopySiKPublicKey, _CentauriUpdaterCreate, 
+                       _CentauriUpdaterExecCommand, _CentauriUpdaterIsDone ]
+...

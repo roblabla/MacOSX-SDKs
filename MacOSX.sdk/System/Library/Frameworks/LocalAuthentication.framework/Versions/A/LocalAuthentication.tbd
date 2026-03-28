@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Versions/A/LocalAuthentication'
-current-version: 2005.60.9
+current-version: 2005.100.186
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo11LAUserStoreC19LocalAuthenticationEABycfC', '_$sSo11LAUserStoreC19LocalAuthenticationEABycfc', 
                        '_$sSo11LAUserStoreCMa', '_$sSo12LASRPManagerC19LocalAuthenticationEABycfC', 
                        '_$sSo12LASRPManagerC19LocalAuthenticationEABycfc', '_$sSo12LASRPManagerCMa', 
@@ -107,12 +105,13 @@ exports:
                        LAStorage, LAUser, LAUserCredential, LAUserCredentialHash, 
                        LAUserLockState, LAUserLockoutState, LAUserPassword, LAUserPasswordHash, 
                        LAUserStore, LAVolumeOwnership ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _LAEnabledBiometryUsers, _LAUserErrorCodeGeneric, _LAUserErrorCodeIncorrectPassword, 
-                       _LAUserErrorCodeInternal, _LAUserErrorCodeUserNotFound, _LAUserErrorCodeUserNotReady, 
-                       _LAUserErrorDomain, _kAPKekPassword, _kAPMasterKey ]
+                       _LAUserErrorCodeInternal, _LAUserErrorCodePolicy, _LAUserErrorCodeUserNotFound, 
+                       _LAUserErrorCodeUserNotReady, _LAUserErrorDomain, _kAPKekPassword, 
+                       _kAPMasterKey ]
     objc-classes:    [ LAAuthenticationProvider ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     objc-classes:    [ LAAuthenticationBiometricMethod, LAAuthenticationBiometricMethodConfiguration, 
                        LAAuthenticationBiometricMethodState, LAAuthenticationMethod, 
                        LAAuthenticationMethodConfiguration, LAAuthenticationMethodResult, 

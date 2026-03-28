@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libAudioToolboxUtility.dylib'
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AudioDiagnostics, AudioToolbox, AudioToolboxCore, CoreAudio, 
                        CoreAudioInternal, EmbeddedSystemAUs, PerformanceTests, ValidationCapsule, 
                        VibeSynthEngine, audiomxd, aupbregistrarservice, com.apple.audio.DiagnosticExtension, 
@@ -15,8 +13,7 @@ exports:
     weak-symbols:    [ __ZTI11CAException, __ZTI12CAXException, __ZTIN3gsl15narrowing_errorE, 
                        __ZTIN4swix9exceptionE, __ZTS11CAException, __ZTS12CAXException, 
                        __ZTSN3gsl15narrowing_errorE, __ZTSN4swix9exceptionE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CAShowAudioBufferList, _CAShowAudioChannelLayout, _CAVectorUnit_Examine, 
                        _CAVectorUnit_GetByteWidth, _CrashIfClientProvidedBogusAudioBufferList, 
                        _MSHCreateMIGServerSource, _MSHCreateMachServerSource, _MSHGetMachPortFromSource, 

@@ -1,10 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-macos26.2 -target-variant x86_64-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 267.300.11 -module-name GroupActivities
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-macos26.4 -target-variant x86_64-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 267.500.141 -module-name GroupActivities
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import AVFoundation
 import CloudKit
-import Combine
+@preconcurrency import Combine
 import CoreGraphics
 import CoreImage
 import CoreTransferable
@@ -30,13 +30,13 @@ final public class GroupSession<ActivityType> : Combine.ObservableObject where A
     case invalidated(reason: any Swift.Error)
   }
   final public let id: Foundation.UUID
-  @Combine.Published @_projectedValueProperty($state) final public var state: GroupActivities.GroupSession<ActivityType>.State {
+  @Combine.Published<GroupActivities.GroupSession<ActivityType>.State> @_projectedValueProperty($state) final public var state: GroupActivities.GroupSession<ActivityType>.State {
     get
   }
   final public var $state: Combine.Published<GroupActivities.GroupSession<ActivityType>.State>.Publisher {
     get
   }
-  @Combine.Published @_projectedValueProperty($activity) final public var activity: ActivityType {
+  @Combine.Published<ActivityType> @_projectedValueProperty($activity) final public var activity: ActivityType {
     get
     @available(iOS 15, tvOS 15, macOS 12, *)
     @available(watchOS, unavailable, introduced: 6.0)
@@ -48,7 +48,7 @@ final public class GroupSession<ActivityType> : Combine.ObservableObject where A
     @available(watchOS, unavailable, introduced: 7.0)
     set
   }
-  @Combine.Published @_projectedValueProperty($activeParticipants) final public var activeParticipants: Swift.Set<GroupActivities.Participant> {
+  @Combine.Published<Swift.Set<GroupActivities.Participant>> @_projectedValueProperty($activeParticipants) final public var activeParticipants: Swift.Set<GroupActivities.Participant> {
     get
   }
   final public var $activeParticipants: Combine.Published<Swift.Set<GroupActivities.Participant>>.Publisher {
@@ -150,11 +150,9 @@ public protocol GroupActivity : Swift.Decodable, Swift.Encodable {
   static var activityIdentifier: Swift.String { get }
   var metadata: GroupActivities.GroupActivityMetadata { get async }
   static func _identifiable(by activityIdentifier: Swift.String) -> Swift.Bool
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 26.0, macOS 26.0, tvOS 26.0, *)
   @available(watchOS, unavailable)
   static func _identifiable(by activityIdentifier: Swift.String, staticIdentifier: Swift.String?) -> Swift.Bool
-  #endif
 }
 @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
@@ -163,11 +161,9 @@ extension GroupActivities.GroupActivity {
     get
   }
   public static func _identifiable(by activityIdentifier: Swift.String) -> Swift.Bool
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 26.0, macOS 26.0, tvOS 26.0, *)
   @available(watchOS, unavailable)
   public static func _identifiable(by activityIdentifier: Swift.String, staticIdentifier: Swift.String?) -> Swift.Bool
-  #endif
 }
 @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
@@ -222,9 +218,7 @@ extension GroupActivities.SpatialTemplate {
 @available(macOS, unavailable)
 public struct SpatialTemplateConfiguration : Swift.Hashable, Swift.Sendable {
   public let defaultInitiatorRole: (any GroupActivities.SpatialTemplateRole)?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(defaultInitiatorRole: (any GroupActivities.SpatialTemplateRole)? = nil)
-  #endif
   public static func == (lhs: GroupActivities.SpatialTemplateConfiguration, rhs: GroupActivities.SpatialTemplateConfiguration) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -234,7 +228,7 @@ public struct SpatialTemplateConfiguration : Swift.Hashable, Swift.Sendable {
 @_hasMissingDesignatedInitializers @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
 final public class GroupStateObserver : Combine.ObservableObject {
-  @Combine.Published @_projectedValueProperty($isEligibleForGroupSession) final public var isEligibleForGroupSession: Swift.Bool {
+  @Combine.Published<Swift.Bool> @_projectedValueProperty($isEligibleForGroupSession) final public var isEligibleForGroupSession: Swift.Bool {
     get
   }
   final public var $isEligibleForGroupSession: Combine.Published<Swift.Bool>.Publisher {
@@ -278,9 +272,7 @@ extension GroupActivities.GroupSessionJournal {
     public typealias Element = [GroupActivities.GroupSessionJournal.Attachment]
     public func makeAsyncIterator() -> GroupActivities.GroupSessionJournal.Attachments.Iterator
     public struct Iterator : _Concurrency.AsyncIteratorProtocol, Swift.Sendable {
-      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> GroupActivities.GroupSessionJournal.Attachments.Element?
-      #endif
       @available(iOS 17, tvOS 17, macOS 14, *)
       @available(watchOS, unavailable)
       public typealias Element = GroupActivities.GroupSessionJournal.Attachments.Element
@@ -355,12 +347,8 @@ extension GroupActivities.GroupSessionMessenger {
   }
 }
 extension GroupActivities.GroupSessionMessenger {
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func send<Message>(_ value: Message, to participants: GroupActivities.Participants = .all, completion: @escaping ((any Swift.Error)?) -> Swift.Void) where Message : Swift.Decodable, Message : Swift.Encodable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func send(_ value: Foundation.Data, to participants: GroupActivities.Participants = .all, completion: @escaping ((any Swift.Error)?) -> Swift.Void)
-  #endif
 }
 @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
@@ -436,9 +424,7 @@ extension GroupActivities.SystemCoordinator {
     public typealias Element = GroupActivities.SystemCoordinator.ParticipantState
     public func makeAsyncIterator() -> GroupActivities.SystemCoordinator.ParticipantStates.Iterator
     public struct Iterator : _Concurrency.AsyncIteratorProtocol, @unchecked Swift.Sendable {
-      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> GroupActivities.SystemCoordinator.ParticipantStates.Element?
-      #endif
       @available(visionOS 1.0, *)
       @available(iOS, unavailable)
       @available(tvOS, unavailable)
@@ -474,9 +460,7 @@ extension GroupActivities.SystemCoordinator {
 public protocol SpatialTemplateElement : Swift.Hashable, Swift.Sendable {
   var position: GroupActivities.SpatialTemplateElementPosition { get }
   var direction: GroupActivities.SpatialTemplateElementDirection { get }
-  #if compiler(>=5.3) && $NonescapableTypes
   var role: (any GroupActivities.SpatialTemplateRole)? { get }
-  #endif
   var _output: GroupActivities._SpatialTemplateElementOutput { get }
 }
 @available(visionOS 2.0, *)
@@ -498,9 +482,7 @@ public struct SpatialTemplateSeatElement : GroupActivities.SpatialTemplateElemen
   public var _output: GroupActivities._SpatialTemplateElementOutput {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(position: GroupActivities.SpatialTemplateElementPosition, direction: GroupActivities.SpatialTemplateElementDirection = .lookingAt(.app), role: (any GroupActivities.SpatialTemplateRole)? = nil)
-  #endif
   public static func == (lhs: GroupActivities.SpatialTemplateSeatElement, rhs: GroupActivities.SpatialTemplateSeatElement) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -513,9 +495,7 @@ public struct SpatialTemplateSeatElement : GroupActivities.SpatialTemplateElemen
 @available(tvOS, unavailable)
 @available(macOS, unavailable)
 extension GroupActivities.SpatialTemplateElement where Self == GroupActivities.SpatialTemplateSeatElement {
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func seat(position: GroupActivities.SpatialTemplateElementPosition, direction: GroupActivities.SpatialTemplateElementDirection = .lookingAt(.app), role: (any GroupActivities.SpatialTemplateRole)? = nil) -> Self
-  #endif
 }
 @available(visionOS 2.0, *)
 @available(iOS, unavailable)
@@ -570,9 +550,7 @@ public struct GroupSessionEvent {
   public let originator: GroupActivities.Participant
   public let action: GroupActivities.GroupSessionEvent.Action
   public let url: Foundation.URL?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(originator: GroupActivities.Participant, action: GroupActivities.GroupSessionEvent.Action, url: Foundation.URL?)
-  #endif
 }
 @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
@@ -646,9 +624,7 @@ extension GroupActivities.GroupSessionMessenger {
     @available(iOS 15, macOS 12, tvOS 15, *)
     @available(watchOS, unavailable)
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> GroupActivities.GroupSessionMessenger.Messages<Message>.Element?
-      #endif
       @available(iOS 15, tvOS 15, macOS 12, *)
       @available(watchOS, unavailable)
       public typealias Element = GroupActivities.GroupSessionMessenger.Messages<Message>.Element
@@ -689,9 +665,7 @@ extension GroupActivities.GroupSession {
     @available(iOS 15, macOS 12, tvOS 15, *)
     @available(watchOS, unavailable)
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> GroupActivities.GroupSession<ActivityType>?
-      #endif
       @available(iOS 15, tvOS 15, macOS 12, *)
       @available(watchOS, unavailable)
       public typealias Element = GroupActivities.GroupSession<ActivityType>
@@ -729,11 +703,9 @@ extension GroupActivities.SceneAssociationBehavior {
 @available(tvOS, unavailable)
 @available(macOS, unavailable)
 extension GroupActivities.GroupSession {
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var systemCoordinator: GroupActivities.SystemCoordinator? {
     get async
   }
-  #endif
 }
 @_hasMissingDesignatedInitializers @available(visionOS 1.0, *)
 @available(iOS, unavailable)
@@ -860,9 +832,7 @@ extension GroupActivities.GroupActivityMetadata {
   @available(*, deprecated, renamed: "ActivityType")
   public enum Experience : Swift.Int, Swift.Codable {
     case watchTogether, listenTogether
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
-    #endif
     @available(iOS 15, tvOS 15, macOS 12, *)
     @available(*, deprecated, renamed: "ActivityType")
     @available(watchOS, unavailable)
@@ -871,27 +841,21 @@ extension GroupActivities.GroupActivityMetadata {
       get
     }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, renamed: "type")
   public var experience: GroupActivities.GroupActivityMetadata.Experience? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, renamed: "title")
   public var localizedTitle: Swift.String? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, renamed: "subtitle")
   public var localizedSubtitle: Swift.String? {
     get
     set
   }
-  #endif
 }
 @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)

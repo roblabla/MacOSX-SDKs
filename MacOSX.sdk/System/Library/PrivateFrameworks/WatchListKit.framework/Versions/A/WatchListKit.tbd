@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/WatchListKit.framework/Versions/A/WatchListKit'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _TVASDefaultSupportPath, _TVASTVAppGroupSharedContainer, _TVAppExtensionBundleID, 
                        _TVProductPageExtensionBundleID, _VideosAppAppearanceOptionDark, 
                        _VideosAppAppearanceOptionLight, _VideosAppAppearanceOptionSystem, 
@@ -69,19 +67,19 @@ exports:
                        _WLKMovieClipAssetFlavorVideoHD720p, _WLKMovieClipAssetFlavorVideoSD, 
                        _WLKMovieClipAssetFlavorVideoSD480p, _WLKMySportsCacheFavoritesKey, 
                        _WLKMySportsCacheFavoritesLastModifiedDateKey, _WLKMySportsCacheOnboardingStatusKey, 
-                       _WLKMySportsCacheOnboardingStatusLastModifiedDateKey, _WLKNetworkRequestOptionsBypassTVGDPRForFavoritesForNews, 
-                       _WLKNetworkRequestOptionsUseSharedCache, _WLKNetworkSignpostLogObject, 
-                       _WLKNetworkingLogObject, _WLKNewsAppBundleID, _WLKNotificationActionMetricsDefaultsKey, 
-                       _WLKNotificationBadgeIdentifierDefaultsKey, _WLKNotificationListOfODJBadges, 
-                       _WLKNotificationsBadgingIdentifierDefaultValue, _WLKNotificationsKeyActionMetrics, 
-                       _WLKNotificationsKeyActionURL, _WLKNotificationsKeyAppearance, 
-                       _WLKNotificationsKeyBannerOnly, _WLKNotificationsKeyBody, 
-                       _WLKNotificationsKeyButtonType, _WLKNotificationsKeyCategory, 
-                       _WLKNotificationsKeyExpirationDate, _WLKNotificationsKeyFooter, 
-                       _WLKNotificationsKeyIdentifier, _WLKNotificationsKeyImageData, 
-                       _WLKNotificationsKeyInterruptionLevel, _WLKNotificationsKeyIsSession, 
-                       _WLKNotificationsKeyMetrics, _WLKNotificationsKeyNotificationSubType, 
-                       _WLKNotificationsKeySound, _WLKNotificationsKeySource, _WLKNotificationsKeySymbolName, 
+                       _WLKMySportsCacheOnboardingStatusLastModifiedDateKey, _WLKNetworkRequestOptionsUseSharedCache, 
+                       _WLKNetworkSignpostLogObject, _WLKNetworkingLogObject, _WLKNewsAppBundleID, 
+                       _WLKNotificationActionMetricsDefaultsKey, _WLKNotificationBadgeIdentifierDefaultsKey, 
+                       _WLKNotificationListOfODJBadges, _WLKNotificationsBadgingIdentifierDefaultValue, 
+                       _WLKNotificationsKeyActionMetrics, _WLKNotificationsKeyActionURL, 
+                       _WLKNotificationsKeyAppearance, _WLKNotificationsKeyBannerOnly, 
+                       _WLKNotificationsKeyBody, _WLKNotificationsKeyButtonType, 
+                       _WLKNotificationsKeyCategory, _WLKNotificationsKeyExpirationDate, 
+                       _WLKNotificationsKeyFooter, _WLKNotificationsKeyIdentifier, 
+                       _WLKNotificationsKeyImageData, _WLKNotificationsKeyInterruptionLevel, 
+                       _WLKNotificationsKeyIsSession, _WLKNotificationsKeyMetrics, 
+                       _WLKNotificationsKeyNotificationSubType, _WLKNotificationsKeySound, 
+                       _WLKNotificationsKeySource, _WLKNotificationsKeySymbolName, 
                        _WLKNotificationsKeyThreadID, _WLKNotificationsKeyTimeout, 
                        _WLKNotificationsKeyTitle, _WLKNotificationsKeyType, _WLKNotificationsKeyUserInfo, 
                        _WLKNotificationsOnActionKeyReason, _WLKNotificationsOnActionKeyReasonActivation, 

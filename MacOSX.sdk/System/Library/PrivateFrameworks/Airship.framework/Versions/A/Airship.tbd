@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Airship.framework/Versions/A/Airship'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _airship_accelerated_async, _airship_accelerated_async_f, 
                        _airship_acipc_boot_create, _airship_acipc_boot_create_state_monitor, 
                        _airship_acipc_boot_destroy, _airship_acipc_boot_get_image_response, 
@@ -59,7 +59,15 @@ exports:
                        _airship_async_flusher_create, _airship_async_flusher_destroy, 
                        _airship_buffer_create, _airship_buffer_destroy, _airship_buffer_get_addr, 
                        _airship_buffer_get_paddr, _airship_buffer_get_size, _airship_buffer_map, 
-                       _airship_buffer_read, _airship_buffer_write, _airship_client_acquire_resource, 
+                       _airship_buffer_read, _airship_buffer_write, _airship_centauri_alpha_cr_pool_create, 
+                       _airship_centauri_alpha_cr_pool_destroy, _airship_centauri_alpha_cr_pool_get_base_id, 
+                       _airship_centauri_alpha_cr_pool_get_count, _airship_centauri_alpha_cr_pool_is_empty, 
+                       _airship_centauri_alpha_cr_pool_release, _airship_centauri_alpha_cr_pool_reserve, 
+                       _airship_centauri_alpha_cr_pool_reserve_next, _airship_centauri_alpha_tr_pool_create, 
+                       _airship_centauri_alpha_tr_pool_destroy, _airship_centauri_alpha_tr_pool_get_base_id, 
+                       _airship_centauri_alpha_tr_pool_get_count, _airship_centauri_alpha_tr_pool_is_empty, 
+                       _airship_centauri_alpha_tr_pool_release, _airship_centauri_alpha_tr_pool_reserve, 
+                       _airship_centauri_alpha_tr_pool_reserve_next, _airship_client_acquire_resource, 
                        _airship_client_create_direct, _airship_client_create_exec_stage_monitor, 
                        _airship_client_create_resource_monitor, _airship_client_destroy, 
                        _airship_client_get_exec_stage, _airship_client_release_resource, 
@@ -116,6 +124,6 @@ exports:
                        _airship_monitor_set_queue, _airship_monitor_suspend, _airship_monitor_timedwait, 
                        _airship_monitor_wait, _airship_platform_get_airship_uuid, 
                        _airship_platform_get_fallback_queue, _airship_platform_get_global_logger, 
-                       _airship_platform_init_time_metadata, _airship_platform_set_crash_reason, 
-                       _airship_strerror ]
+                       _airship_platform_get_proxima_platform, _airship_platform_init_time_metadata, 
+                       _airship_platform_set_crash_reason, _airship_strerror ]
 ...

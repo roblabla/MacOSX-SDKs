@@ -1,9 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswift_DarwinFoundation1.dylib'
-current-version: 347.40.2
+current-version: 377.100.15
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -100,8 +99,7 @@ exports:
                        '_$s6Darwin6remquoys7Float80V_SitAD_ADtF', '_$s6Darwin6tgammays7Float80VADF', 
                        '_$s6Darwin8copysignys7Float80VAD_ADtF', '_$s6Darwin9nearbyintys7Float80VADF', 
                        '_$s6Darwin9nextafterys7Float80VAD_ADtF' ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/usr/lib/swift/libswiftDarwin.dylib$$1$10.14.4$15.0$$', 
                        '$ld$previous$/usr/lib/swift/libswiftDarwin.dylib$$6$13.1$18.0$$', 
                        '$ld$previous$/usr/lib/swift/libswift_errno.dylib$$1$15.0$26.0$_$s6Darwin14POSIXErrorCodeO10EOPNOTSUPPACvgZ$', 

@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/swift/libswiftDemangle.dylib'
 current-version: 0
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __ZN5swift8Demangle5warnvEjPKcP13__va_list_tag, __ZN5swift8Demangle6fatalvEjPKcP13__va_list_tag ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ __Z20matchSequenceOfKindsPN5swift8Demangle4NodeENSt3__16vectorINS3_5tupleIJNS1_4KindEmEEENS3_9allocatorIS7_EEEE, 
                        __ZN5swift6Mangle10isNonAsciiEN4llvm9StringRefE, __ZN5swift6Mangle17translateOperatorEN4llvm9StringRefE, 
                        __ZN5swift6Mangle20getStandardTypeSubstEN4llvm9StringRefEb, 
@@ -22,6 +22,7 @@ exports:
                        __ZN5swift8Demangle11NodeFactory10createNodeENS0_4Node4KindEPKc, 
                        __ZN5swift8Demangle11NodeFactory10createNodeENS0_4Node4KindERKNS0_10CharVectorE, 
                        __ZN5swift8Demangle11NodeFactory10createNodeENS0_4Node4KindEy, 
+                       __ZN5swift8Demangle11NodeFactory10createNodeENS0_4Node4KindEyh, 
                        __ZN5swift8Demangle11NodeFactory13popCheckpointENS1_10CheckpointE, 
                        __ZN5swift8Demangle11NodeFactory27createNodeWithAllocatedTextENS0_4Node4KindEN4llvm9StringRefE, 
                        __ZN5swift8Demangle11NodeFactory5clearEv, __ZN5swift8Demangle11NodeFactory9freeSlabsEPNS1_13AllocatedSlabE, 
@@ -42,6 +43,7 @@ exports:
                        __ZN5swift8Demangle11NodePrinter21printGenericSignatureEPNS0_4NodeEj, 
                        __ZN5swift8Demangle11NodePrinter21printImplFunctionTypeEPNS0_4NodeEj, 
                        __ZN5swift8Demangle11NodePrinter23printFunctionParametersEPNS0_4NodeES3_jb, 
+                       __ZN5swift8Demangle11NodePrinter23printNextParamChildNodeEPNS0_4NodeERjNS0_34FunctionSigSpecializationParamKindEj, 
                        __ZN5swift8Demangle11NodePrinter24printBoundGenericNoSugarEPNS0_4NodeEj, 
                        __ZN5swift8Demangle11NodePrinter25printSpecializationPrefixEPNS0_4NodeEN4llvm9StringRefEjS5_, 
                        __ZN5swift8Demangle11NodePrinter36printFunctionSigSpecializationParamsEPNS0_4NodeEj, 
@@ -187,6 +189,6 @@ exports:
                        __swift_mangleSimpleClass, __swift_mangleSimpleProtocol, _fnd_get_demangled_name, 
                        _swift_demangle_getDemangledName, _swift_demangle_getModuleName, 
                        _swift_demangle_getSimplifiedDemangledName, _swift_demangle_hasSwiftCallingConvention ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ __ZN5swift8Demangle5warnvEjPKcPc, __ZN5swift8Demangle6fatalvEjPKcPc ]
 ...

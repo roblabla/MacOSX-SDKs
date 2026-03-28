@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MigrationKit.framework/Versions/A/MigrationKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12MigrationKit11AccessPointC4stopyyF', '_$s12MigrationKit11AccessPointC4stopyyFTq', 
                        '_$s12MigrationKit11AccessPointC5start11pairingCodeSbAA07PairingG0C_tF', 
                        '_$s12MigrationKit11AccessPointC5start11pairingCodeSbAA07PairingG0C_tFTq', 

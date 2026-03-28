@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreData.framework/Versions/A/CoreData'
-current-version: 1523
+current-version: 1526
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/usr/lib/swift/libswiftCoreData.dylib$$1$10.15$13.0$_$s10Foundation10CocoaErrorV4CodeV8CoreDataE018managedObjectMergeC0AEvgZ$', 
                        '$ld$previous$/usr/lib/swift/libswiftCoreData.dylib$$1$10.15$13.0$_$s10Foundation10CocoaErrorV4CodeV8CoreDataE018migrationCancelledC0AEvgZ$', 
                        '$ld$previous$/usr/lib/swift/libswiftCoreData.dylib$$1$10.15$13.0$_$s10Foundation10CocoaErrorV4CodeV8CoreDataE019persistentStoreOpenC0AEvgZ$', 
@@ -1826,7 +1824,7 @@ exports:
                        NSSaveChangesRequest, NSStagedMigrationManager, NSXPCStore, 
                        NSXPCStoreConnectionInfo, NSXPCStoreServer, NSXPCStoreServerConnectionContext, 
                        NSXPCStoreServerRequestHandlingPolicy, _NSPersistenceUtilities ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _NSAutomaticMigrationUseDocumentDestinationOption, _NSBinaryExternalRecordType, 
                        _NSEntityNameInPathKey, _NSExternalRecordExtensionOption, 
                        _NSExternalRecordsDirectoryOption, _NSExternalRecordsFileFormatOption, 

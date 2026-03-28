@@ -27,6 +27,7 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 + (NSMenuItem *)separatorItem;
 
 /// Creates a menu item representing a section header with the provided title.
+///
 /// Section header items are used to provide context to a grouping of menu items.
 /// Items created using this method are non-interactive and do not perform an action.
 + (instancetype)sectionHeaderWithTitle:(NSString *)title API_AVAILABLE(macos(14.0)) NS_REFINED_FOR_SWIFT;
@@ -115,10 +116,9 @@ When a menu item is copied via NSCopying, any attached view is copied via archiv
 
 @property (nullable, copy) NSString *toolTip;
 
-/// A badge used to provide additional quantitative information specific to
-/// the menu item, such as the number of available updates.
+/// A badge used to provide additional quantitative information specific to the menu item, such as the number of available updates.
 ///
-/// @note The default value of this property is @c nil.
+/// The default value of this property is `nil`.
 @property (nullable, copy) NSMenuItemBadge *badge API_AVAILABLE(macos(14.0));
 
 @end

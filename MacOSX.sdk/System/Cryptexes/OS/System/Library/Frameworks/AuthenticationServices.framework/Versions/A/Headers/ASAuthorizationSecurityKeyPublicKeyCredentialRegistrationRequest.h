@@ -7,6 +7,8 @@
 #import <AuthenticationServices/ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialRegistrationRequest.h>
 #import <Foundation/Foundation.h>
 
+@class ASAuthorizationPublicKeyCredentialPRFRegistrationInput;
+
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
@@ -23,6 +25,8 @@ API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
 /*! @abstract A preference whether the authenticator should store the private key of the newly created credential.
  */
 @property (nonatomic) ASAuthorizationPublicKeyCredentialResidentKeyPreference residentKeyPreference;
+
+@property (nonatomic, nullable) ASAuthorizationPublicKeyCredentialPRFRegistrationInput *prf NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(26.4), ios(26.4));
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;

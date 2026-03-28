@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosUIEdit.framework/Versions/A/PhotosUIEdit'
-current-version: 821.0.120
+current-version: 841.0.101
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12PhotosUIEdit14PhotoStyleDPadV13ConfigurationV04gridD0AE0cde4GridD0OvM', 
                        '_$s12PhotosUIEdit14PhotoStyleDPadV13ConfigurationV04gridD0AE0cde4GridD0Ovg', 
                        '_$s12PhotosUIEdit14PhotoStyleDPadV13ConfigurationV04gridD0AE0cde4GridD0OvpMV', 
@@ -118,23 +118,24 @@ exports:
                        _PEAdjustmentDepthMediaTypeErrorKey, _PEAdjustmentErrorDomain, 
                        _PEAdjustmentFilterErrorDomain, _PEAdjustmentFilterMediaTypeErrorKey, 
                        _PEAdjustmentPlaybackRateErrorDomain, _PEAdjustmentStraightenErrorDomain, 
-                       _PEAdjustmentStyleErrorDomain, _PEAnalyticsEditSessionThirdPartyPlugin, 
-                       _PEAnalyticsEventEditAction, _PEAnalyticsEventEditCopyAdjustmentsAction, 
-                       _PEAnalyticsEventEditSession, _PEAutoWhiteBalanceFaceIKey, 
-                       _PEAutoWhiteBalanceFaceQKey, _PEAutoWhiteBalanceFaceStrengthKey, 
-                       _PEAutoWhiteBalanceFaceWarmthKey, _PEAutoWhiteBalanceGrayColor, 
-                       _PEAutoWhiteBalanceTemperature, _PEAutoWhiteBalanceTint, _PEAutoWhiteBalanceType, 
-                       _PEAutoWhiteBalanceWarmFace, _PEAutoWhiteBalanceWarmTemp, 
-                       _PEAutoWhiteBalanceWarmTint, _PECanRenderPortrait, _PECopyEditsSettingIdentifierName, 
-                       _PEEditActionErrorDomain, _PEEditActionTypeString, _PEExteriorAngleSum, 
-                       _PELocalizedString, _PELocalizedStringWithValidatedFormat, 
-                       _PEModelDeliveryErrorDomain, _PEPhotoEditSessionEndString, 
-                       _PEPhotoEditSessionEntryPointString, _PEPhotoEditSessionSaveActionTypeString, 
-                       _PESCAPActionTypeString, _PESCAPReviewFallbackReasonString, 
-                       _PESerializationUtilityErrorDomain, _PESignedAngleBetweenPoints, 
-                       _PESingleActionKey, _PEStringWithValidatedFormat, _PEVectorAngle, 
-                       _PEVectorMagnitude, _PEVectorNormalize, _PEVectorScale, _PEVideoTrimBurnInUtilityErrorDomain, 
-                       _kDiffAddedKey, _kDiffModifiedKey, _kDiffRemovedKey ]
+                       _PEAdjustmentStraightenMediaTypeErrorKey, _PEAdjustmentStyleErrorDomain, 
+                       _PEAnalyticsEditSessionThirdPartyPlugin, _PEAnalyticsEventEditAction, 
+                       _PEAnalyticsEventEditCopyAdjustmentsAction, _PEAnalyticsEventEditSession, 
+                       _PEAutoWhiteBalanceFaceIKey, _PEAutoWhiteBalanceFaceQKey, 
+                       _PEAutoWhiteBalanceFaceStrengthKey, _PEAutoWhiteBalanceFaceWarmthKey, 
+                       _PEAutoWhiteBalanceGrayColor, _PEAutoWhiteBalanceTemperature, 
+                       _PEAutoWhiteBalanceTint, _PEAutoWhiteBalanceType, _PEAutoWhiteBalanceWarmFace, 
+                       _PEAutoWhiteBalanceWarmTemp, _PEAutoWhiteBalanceWarmTint, 
+                       _PECanRenderPortrait, _PECopyEditsSettingIdentifierName, _PEEditActionErrorDomain, 
+                       _PEEditActionTypeString, _PEExteriorAngleSum, _PELocalizedString, 
+                       _PELocalizedStringWithValidatedFormat, _PEModelDeliveryErrorDomain, 
+                       _PEPhotoEditSessionEndString, _PEPhotoEditSessionEntryPointString, 
+                       _PEPhotoEditSessionSaveActionTypeString, _PESCAPActionTypeString, 
+                       _PESCAPReviewFallbackReasonString, _PESerializationUtilityErrorDomain, 
+                       _PESignedAngleBetweenPoints, _PESingleActionKey, _PEStringWithValidatedFormat, 
+                       _PEVectorAngle, _PEVectorMagnitude, _PEVectorNormalize, _PEVectorScale, 
+                       _PEVideoTrimBurnInUtilityErrorDomain, _kDiffAddedKey, _kDiffModifiedKey, 
+                       _kDiffRemovedKey ]
     objc-classes:    [ PEAdjustmentAperture, PEAdjustmentAudioMix, PEAdjustmentAutoEnhance, 
                        PEAdjustmentCleanup, PEAdjustmentCrop, PEAdjustmentDataCache, 
                        PEAdjustmentDataCacheEntry, PEAdjustmentDataCacheKey, PEAdjustmentDepth, 

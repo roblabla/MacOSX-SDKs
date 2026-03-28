@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Charts.framework/Versions/A/Charts'
-current-version: 4.1.4
+current-version: 4.4.4
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation4DateV6Charts26PrimitivePlottableProtocolADMc', 
                        '_$s10Foundation4DateV6Charts26PrimitivePlottableProtocolADWP', 
                        '_$s10Foundation4DateV6Charts9PlottableADMc', '_$s10Foundation4DateV6Charts9PlottableADWP', 
@@ -1549,7 +1549,7 @@ exports:
                        '_$sxSg6Charts14Chart3DContentA2bCRzlMc', '_$sxSg6Charts14Chart3DContentA2bCRzlWP', 
                        '_$sxSg6Charts14ContourContentA2bCRzlMc', '_$sxSg6Charts14ContourContentA2bCRzlWP', 
                        '_$sxSg6Charts8AxisMarkA2bCRzlMc', '_$sxSg6Charts8AxisMarkA2bCRzlWP' ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ '_$ss7Float16V6Charts26PrimitivePlottableProtocolACMc', '_$ss7Float16V6Charts26PrimitivePlottableProtocolACWP', 
                        '_$ss7Float16V6Charts9PlottableACMc', '_$ss7Float16V6Charts9PlottableACWP', 
                        '_$ss7Float16V6ChartsE23_primitivePlottableKindAC010_PrimitivedE0VyABGvgZ', 

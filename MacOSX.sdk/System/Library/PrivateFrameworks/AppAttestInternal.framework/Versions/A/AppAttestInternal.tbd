@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AppAttestInternal.framework/Versions/A/AppAttestInternal'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s17AppAttestInternal06DeviceB7HandlerC11isSupportedSbyF', 
                        '_$s17AppAttestInternal06DeviceB7HandlerC4withACSo13audit_token_ta_tcfC', 
                        '_$s17AppAttestInternal06DeviceB7HandlerC4withACSo13audit_token_ta_tcfCTj', 

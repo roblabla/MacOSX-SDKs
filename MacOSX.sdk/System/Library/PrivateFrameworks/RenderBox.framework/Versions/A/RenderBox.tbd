@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/RenderBox.framework/Versions/A/RenderBox'
-current-version: 7.2.3
+current-version: 7.4.25
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _RBArchiveDelegate, _RBArchiveToFile, _RBArchiveToFileWithMetadata, 
                        _RBCodableErrorDomain, _RBColorAdd, _RBColorBlack, _RBColorClear, 
                        _RBColorConvert, _RBColorConvertArray, _RBColorCopyCGColor, 
@@ -41,13 +39,13 @@ exports:
                        _RBDrawingStateAddGrayscaleFilter, _RBDrawingStateAddHueRotationFilter, 
                        _RBDrawingStateAddLuminanceCurveFilter, _RBDrawingStateAddLuminanceCurveFilter2, 
                        _RBDrawingStateAddLuminanceToAlphaFilter, _RBDrawingStateAddPathProjectionStyle, 
-                       _RBDrawingStateAddPredicateStyle, _RBDrawingStateAddProjectionStyle, 
-                       _RBDrawingStateAddRGBACurvesFilter, _RBDrawingStateAddRotation3DStyle, 
-                       _RBDrawingStateAddRotationStyle, _RBDrawingStateAddSaturationFilter, 
-                       _RBDrawingStateAddScaleStyle, _RBDrawingStateAddShaderFilter, 
-                       _RBDrawingStateAddShaderFilterLayer, _RBDrawingStateAddShadowStyle, 
-                       _RBDrawingStateAddShadowStyle2, _RBDrawingStateAddShadowStyle3, 
-                       _RBDrawingStateAddStyle, _RBDrawingStateAddTransformStyle, 
+                       _RBDrawingStateAddPlaceholderStyle, _RBDrawingStateAddPredicateStyle, 
+                       _RBDrawingStateAddProjectionStyle, _RBDrawingStateAddRGBACurvesFilter, 
+                       _RBDrawingStateAddRotation3DStyle, _RBDrawingStateAddRotationStyle, 
+                       _RBDrawingStateAddSaturationFilter, _RBDrawingStateAddScaleStyle, 
+                       _RBDrawingStateAddShaderFilter, _RBDrawingStateAddShaderFilterLayer, 
+                       _RBDrawingStateAddShadowStyle, _RBDrawingStateAddShadowStyle2, 
+                       _RBDrawingStateAddShadowStyle3, _RBDrawingStateAddStyle, _RBDrawingStateAddTransformStyle, 
                        _RBDrawingStateAddTranslationStyle, _RBDrawingStateAddVariableBlurFilter, 
                        _RBDrawingStateAddVariableBlurLayer, _RBDrawingStateAssign, 
                        _RBDrawingStateBeginCGContext, _RBDrawingStateBeginLayer, 
@@ -55,9 +53,9 @@ exports:
                        _RBDrawingStateConcatCTM, _RBDrawingStateCopyTransition, _RBDrawingStateDestroy, 
                        _RBDrawingStateDrawDisplayList, _RBDrawingStateDrawDisplayList2, 
                        _RBDrawingStateDrawLayer, _RBDrawingStateDrawLayerByReference, 
-                       _RBDrawingStateDrawMetal, _RBDrawingStateDrawShape, _RBDrawingStateEndCGContext, 
-                       _RBDrawingStateFromCGContext, _RBDrawingStateGetAttribute, 
-                       _RBDrawingStateGetCTM, _RBDrawingStateGetClipBoundingBox, 
+                       _RBDrawingStateDrawMetal, _RBDrawingStateDrawPlaceholder, 
+                       _RBDrawingStateDrawShape, _RBDrawingStateEndCGContext, _RBDrawingStateFromCGContext, 
+                       _RBDrawingStateGetAttribute, _RBDrawingStateGetCTM, _RBDrawingStateGetClipBoundingBox, 
                        _RBDrawingStateGetDefaultColorSpace, _RBDrawingStateGetDeviceClipBoundingBox, 
                        _RBDrawingStateGetDisplayList, _RBDrawingStateGetIdentifier, 
                        _RBDrawingStateGetIdentifierNamespace, _RBDrawingStateGetIdentifierNamespace2, 

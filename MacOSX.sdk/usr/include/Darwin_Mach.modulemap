@@ -260,8 +260,12 @@ module Darwin.Mach {
 
   module sdt {
     header "mach/sdt.h"
-    header "sys/sdt.h"
     export *
+
+    module sys_sdt {
+      header "sys/sdt.h"
+      export *
+    }
   }
 
   module semaphore {

@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UniversalHID.framework/Versions/A/UniversalHID'
 current-version: 80
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12UniversalHID014GenericGestureD0C8dispatch6reportSayAA16HIDEventProtocol_pGAA0cD6ReportV_tF', 
                        '_$s12UniversalHID014GenericGestureD0CAA0D8ProtocolAAMc', 
                        '_$s12UniversalHID014GenericGestureD0CAA0D8ProtocolAAWP', 

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SymptomNetworkDiagnosticsCore.framework/Versions/A/SymptomNetworkDiagnosticsCore'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s29SymptomNetworkDiagnosticsCore12NDFConstantsO11idsDeviceID10Foundation4UUIDVSgvgZ', 
                        '_$s29SymptomNetworkDiagnosticsCore12NDFConstantsO11idsDeviceID10Foundation4UUIDVSgvpZMV', 
                        '_$s29SymptomNetworkDiagnosticsCore12NDFConstantsO14HomeNetworkingO10natCountV4SSvgZ', 

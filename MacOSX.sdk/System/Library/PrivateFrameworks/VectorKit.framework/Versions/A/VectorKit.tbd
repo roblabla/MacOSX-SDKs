@@ -1,9 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/VectorKit.framework/Versions/A/VectorKit'
-current-version: 1991.22.10
+current-version: 2001.24.7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFvimEEE, __ZTINSt3__110__function6__baseIFvmPKyEEE, 
@@ -13,8 +12,7 @@ exports:
                        __ZTSNSt3__110__function6__baseIFvmPKyEEE, __ZTSNSt3__110__function6__baseIFvmfEEE, 
                        __ZTSNSt3__110__function6__baseIFvmmPKcEEE, __ZTSNSt3__120__shared_ptr_emplaceINS_6vectorIhNS_9allocatorIhEEEENS2_IS4_EEEE, 
                        __ZTSSt9exception ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _GEOMapRectEnclosingCameraProperties, _GEOPDCameraPathFrameFromVKCameraFrame, 
                        _VKAnimationCurveCubicEaseOut, _VKAnimationCurveDefaultCameraSpring, 
                        _VKAnimationCurveDefaultSpring, _VKAnimationCurveEaseIn, _VKAnimationCurveEaseInOut, 
@@ -108,17 +106,18 @@ exports:
                        _VectorKitDebugConfig_DecodeStyleNames, _VectorKitDebugConfig_DisableAllAssets, 
                        _VectorKitDebugConfig_DisableMSAA, _VectorKitDebugConfig_DisableMetros, 
                        _VectorKitDebugConfig_DisableShadows, _VectorKitDebugConfig_DisabledAssetList, 
-                       _VectorKitDebugConfig_DisplayAllLabelsInARDebugString, _VectorKitDebugConfig_EnableEnhancedCommandBufferErrors, 
-                       _VectorKitDebugConfig_EnableFlyoverUnification, _VectorKitDebugConfig_EnableRTEVChargerInfo, 
-                       _VectorKitDebugConfig_EnableRenderableCollectorLogic, _VectorKitDebugConfig_EnableShadowMapCache, 
-                       _VectorKitDebugConfig_EnableVerboseEntityLogging, _VectorKitDebugConfig_EnableVerboseLayoutReasonLogging, 
-                       _VectorKitDebugConfig_FixedLightingHour, _VectorKitDebugConfig_HideLabels, 
-                       _VectorKitDebugConfig_HikingDisplayEnabled, _VectorKitDebugConfig_HikingOverrideEnabled, 
-                       _VectorKitDebugConfig_HillshadeDisplayEnabled, _VectorKitDebugConfig_LabelHighlighting, 
-                       _VectorKitDebugConfig_LabelLayoutSettings, _VectorKitDebugConfig_LabelLogMissingStyles, 
-                       _VectorKitDebugConfig_LabelLogStyleQueries, _VectorKitDebugConfig_LockWatchFpsTo30hz, 
-                       _VectorKitDebugConfig_LogStreamingPoiFeatureID, _VectorKitDebugConfig_NavCameraDebugPage, 
-                       _VectorKitDebugConfig_NavCameraDisableFrameBlending, _VectorKitDebugConfig_NavCameraDynamicFramerateShowMotionVectors, 
+                       _VectorKitDebugConfig_DisplayAllLabelsInARDebugString, _VectorKitDebugConfig_Enable32BitSPRAssetIndices, 
+                       _VectorKitDebugConfig_EnableEnhancedCommandBufferErrors, _VectorKitDebugConfig_EnableFlyoverUnification, 
+                       _VectorKitDebugConfig_EnableRTEVChargerInfo, _VectorKitDebugConfig_EnableRenderableCollectorLogic, 
+                       _VectorKitDebugConfig_EnableShadowMapCache, _VectorKitDebugConfig_EnableVerboseEntityLogging, 
+                       _VectorKitDebugConfig_EnableVerboseLayoutReasonLogging, _VectorKitDebugConfig_FixedLightingHour, 
+                       _VectorKitDebugConfig_HideLabels, _VectorKitDebugConfig_HikingDisplayEnabled, 
+                       _VectorKitDebugConfig_HikingOverrideEnabled, _VectorKitDebugConfig_HillshadeDisplayEnabled, 
+                       _VectorKitDebugConfig_LabelHighlighting, _VectorKitDebugConfig_LabelLayoutSettings, 
+                       _VectorKitDebugConfig_LabelLogMissingStyles, _VectorKitDebugConfig_LabelLogStyleQueries, 
+                       _VectorKitDebugConfig_LockWatchFpsTo30hz, _VectorKitDebugConfig_LogStreamingPoiFeatureID, 
+                       _VectorKitDebugConfig_NavCameraDebugPage, _VectorKitDebugConfig_NavCameraDisableFrameBlending, 
+                       _VectorKitDebugConfig_NavCameraDynamicFramerateShowMotionVectors, 
                        _VectorKitDebugConfig_NavCameraEnableLegend, _VectorKitDebugConfig_NavCameraEnableOverlay, 
                        _VectorKitDebugConfig_NavCameraEnableValidations, _VectorKitDebugConfig_NavCameraInsetCurrentRoadLabel, 
                        _VectorKitDebugConfig_OverrideMSAASampleCount, _VectorKitDebugConfig_OverrideStylizedShading, 

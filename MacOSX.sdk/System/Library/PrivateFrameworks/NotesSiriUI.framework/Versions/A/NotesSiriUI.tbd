@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NotesSiriUI.framework/Versions/A/NotesSiriUI'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ Notes, NotesDebug, NotesSiriUIFrameworkTests, SiriNotebookUI ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s11NotesSiriUI0aB14ListHeaderViewV05SwiftC00F0AAMc', '_$s11NotesSiriUI0aB14ListHeaderViewV10fetchLimitSivg', 
                        '_$s11NotesSiriUI0aB14ListHeaderViewV10fetchLimitSivpMV', 
                        '_$s11NotesSiriUI0aB14ListHeaderViewV10headerTextSSvg', '_$s11NotesSiriUI0aB14ListHeaderViewV10headerTextSSvpMV', 

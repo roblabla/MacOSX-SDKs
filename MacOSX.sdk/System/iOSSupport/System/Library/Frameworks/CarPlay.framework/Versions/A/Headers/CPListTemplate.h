@@ -9,6 +9,7 @@
 #import <CarPlay/CPGridButton.h>
 #import <CarPlay/CPListItemTypes.h>
 #import <CarPlay/CPListSection.h>
+#import <CarPlay/CPListTemplateDetailsHeader.h>
 #import <CarPlay/CPTemplate.h>
 #import <Foundation/Foundation.h>
 
@@ -112,6 +113,25 @@ CARPLAY_TEMPLATE_UI_ACTOR
                      sections:(NSArray <CPListSection *> *)sections
    assistantCellConfiguration:(nullable CPAssistantCellConfiguration *)assistantCellConfiguration
    headerGridButtons:(nullable NSArray<CPGridButton *> *)headerGridButtons API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, watchos);
+
+/**
+ Initialize a list template with a details list header.
+ */
+- (instancetype)initWithTitle:(nullable NSString *)title
+                   listHeader:(nullable CPListTemplateDetailsHeader *)listHeader
+                     sections:(NSArray <CPListSection *> *)sections
+   assistantCellConfiguration:(nullable CPAssistantCellConfiguration *)assistantCellConfiguration API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(tvos);
+
+/**
+ An optional details header displayed at the top of the list template.
+ 
+ The list header provides a way to display additional context or summary information
+ above the list sections. When set, the header appears between the navigation bar
+ and the first list section.
+ 
+ Assigning to this property will dynamically update the List Template to show or hide the header.
+ */
+@property (nonatomic, strong, nullable) CPListTemplateDetailsHeader *listHeader API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(tvos);
 
 /**
  The list template's delegate is informed of list selection events.

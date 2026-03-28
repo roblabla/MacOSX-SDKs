@@ -3,3 +3,7 @@ framework module CoreAudioKit [system] {
     export *
     module * { export * }
 }
+
+module CoreAudioKitPrivate {
+    export *
+}

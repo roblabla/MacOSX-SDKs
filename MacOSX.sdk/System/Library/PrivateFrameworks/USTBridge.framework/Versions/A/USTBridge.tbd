@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/USTBridge.framework/Versions/A/USTBridge'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s9USTBridge19USTRequestProcessorC11assistantId07sessionE007requestE04name16messagePublisher13serviceHelper011rootRequestE0ACSS_10Foundation4UUIDVS2S16SiriMessageTypes0R10Publishing_pSo026AFRequestDispatcherServiceL0_pSSSgtcfC', 
                        '_$s9USTBridge19USTRequestProcessorC11assistantId07sessionE007requestE04name16messagePublisher13serviceHelper011rootRequestE0ACSS_10Foundation4UUIDVS2S16SiriMessageTypes0R10Publishing_pSo026AFRequestDispatcherServiceL0_pSSSgtcfc', 
                        '_$s9USTBridge19USTRequestProcessorC11assistantId07sessionE007requestE04name16messagePublisher13serviceHelper016rootLevelRequestE0ACSS_10Foundation4UUIDVS2S16SiriMessageTypes0S10Publishing_pSo026AFRequestDispatcherServiceL0_pSStcfC', 

@@ -22,7 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
  An `SFTranscription` represents only a potential version of the speech. It might not be an accurate representation of the utterances.
  */
-API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
+API_AVAILABLE(ios(10.0), macos(10.15))
+API_UNAVAILABLE(tvos)
 @interface SFTranscription : NSObject <NSCopying, NSSecureCoding>
 
 /**

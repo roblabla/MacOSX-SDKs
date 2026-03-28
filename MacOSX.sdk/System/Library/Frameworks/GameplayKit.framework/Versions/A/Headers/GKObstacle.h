@@ -56,13 +56,9 @@ GK_BASE_AVAILABILITY @interface GKPolygonObstacle : GKObstacle <NSSecureCoding>
  * @param points array of points in counter-clockwise order that are the vertices of a convex polygon
  * @param numPoints the number of points in the array
  */
-#if (defined(SWIFT_SDK_OVERLAY_GAMEPLAYKIT_EPOCH) && SWIFT_SDK_OVERLAY_GAMEPLAYKIT_EPOCH >= 1)
 + (instancetype)obstacleWithPoints:(vector_float2 *)points count:(size_t)numPoints NS_REFINED_FOR_SWIFT;
 - (instancetype)initWithPoints:(vector_float2 *)points count:(size_t)numPoints NS_DESIGNATED_INITIALIZER NS_REFINED_FOR_SWIFT;
-#else
-+ (instancetype)obstacleWithPoints:(vector_float2 *)points count:(size_t)numPoints;
-- (instancetype)initWithPoints:(vector_float2 *)points count:(size_t)numPoints NS_DESIGNATED_INITIALIZER;
-#endif
+
 
 /**
  * Returns the vertex at the indicated index

@@ -18,14 +18,28 @@ typedef void (^CKSharePreparationHandler)(CKSharePreparationCompletionHandler) N
 
 @interface NSItemProvider (CKSharingSupport)
 
-/*!
- Use this method when you want to share a collection of @c CKRecords but don't currently have a @c CKShare. When the @c preparationHandler is called, you should create a new @c CKShare with the appropriate root @c CKRecord or @c CKRecordZoneID. After ensuring the share and all records have been saved to the server, invoke the @c preparationCompletionHandler with either the resulting @c CKShare, or an @c NSError if saving failed. Invoking the share sheet with a @c CKShare registered with this method will prompt the user to start sharing.
- */
+/// Creates and registers a new collaboration object using a collection of records to share.
+///
+/// - Parameters:
+///   - container: A ``CKContainer`` the system uses to coordinate all the interactions between your app and the server.
+///   - allowedOptions: The ``CKAllowedSharingOptions``. The standard option is the default.
+///   - preparationHandler: The handler the system calls in your app to create a new ``CKShare``.
+///
+/// Use this method to share a collection of ``CKRecord`` objects that aren’t assigned to an existing ``CKShare``. When the system calls the `preparationHandler`, your app creates a new ``CKShare`` with the appropriate root ``CKRecord`` or ``CKRecordZoneID``.
+///
+/// After the server successfully saves the share, invoke the ``CKSharePreparationCompletionHandler`` with either the resulting `CKShare` or an `NSError`, if the save failed.
+///
+/// When the system invokes the share sheet with a `CKShare` registered with this method, it prompts the user to start sharing.
 - (void)registerCKShareWithContainer:(CKContainer *)container allowedSharingOptions:(CKAllowedSharingOptions *)allowedOptions preparationHandler:(CKSharePreparationHandler)preparationHandler API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(tvos, watchos) NS_REFINED_FOR_SWIFT;
 
-/*!
- Use this method when you have a @c CKShare that is already saved to the server. Invoking the share sheet with a @c CKShare registered with this method will allow the owner to make modifications to the share settings, or will allow a participant to view the share settings.
- */
+/// Registers an existing collaboration object on a server.
+///
+/// - Parameters:
+///   - share: An existing ``CKShare`` on the server.
+///   - container: A ``CKContainer`` the system uses to coordinate all the interactions between your app and the server.
+///   - allowedOptions: The ``CKAllowedSharingOptions``. The standard option is the default.
+///
+/// Use this method when a ``CKShare`` currently exists on the server. When the system invokes the share sheet with a `CKShare` that you register with this method, it allows the owner to make modifications to the share settings, and allows a participant to view the share settings.
 - (void)registerCKShare:(CKShare *)share container:(CKContainer *)container allowedSharingOptions:(CKAllowedSharingOptions *)allowedOptions API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(tvos, watchos) NS_REFINED_FOR_SWIFT;
 
 @end

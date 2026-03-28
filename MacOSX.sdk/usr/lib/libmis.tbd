@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libmis.dylib'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo12MISDBManagerC3misE22addMonotonicTimeOffset_6cdHashySi_10Foundation4DataVSgtKF', 
                        '_$sSo12MISDBManagerC3misE22addRTCResetCountOffset_6cdHashySi_10Foundation4DataVSgtKF', 
                        '_$sSo14MISAgentClientC3misE11migrateDatayys5Int32VKF', '_$sSo14MISAgentClientC3misE11trustTeamID_9signatureySS_10Foundation4DataVSgtKF', 
@@ -37,6 +35,7 @@ exports:
                        '_$sSo18MISProfileDBClientC3misE24existsIndeterminatesSoon15withProfileUUID0G6CDHashSbSSSg_10Foundation4DataVSgtF', 
                        '_$sSo18MISProfileDBClientC3misE24existsIndeterminatesSoonSbyF', 
                        '_$sSo18MISProfileDBClientC3misE24trustedSigningIdentitiesSaySSGyF', 
+                       '_$sSo18MISProfileDBClientC3misE25legacyProfileGracePeriodsSaySDySSypGGyF', 
                        '_$sSo18MISProfileDBClientC3misE27profileProvisionsAllDevicesySbSSF', 
                        '_$sSo18MISProfileDBClientC3misE29profileIsForLocalProvisioningySbSSF', 
                        '_$sSo18MISProfileDBClientC3misE32teamIDSupportsAuxiliarySignatureySbSSF', 

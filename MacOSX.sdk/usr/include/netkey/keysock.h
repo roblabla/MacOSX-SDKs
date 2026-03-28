@@ -63,4 +63,5 @@ struct pfkeystat {
 #define KEY_SENDUP_REGISTERED   2
 
 
+
 #endif /*_NETKEY_KEYSOCK_H_*/

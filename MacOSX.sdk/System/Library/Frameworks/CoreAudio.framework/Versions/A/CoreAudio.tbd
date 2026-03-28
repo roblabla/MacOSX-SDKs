@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AudioConvertHostTimeToNanos, _AudioConvertNanosToHostTime, 
                        _AudioDeviceAddIOProc, _AudioDeviceAddPropertyListener, _AudioDeviceCreateIOProcID, 
                        _AudioDeviceCreateIOProcIDWithBlock, _AudioDeviceCreateIOProcIDWithClockedBlock, 
@@ -25,12 +23,12 @@ exports:
                        _AudioHardwareBeMaster, _AudioHardwareCreateAggregateDevice, 
                        _AudioHardwareDestroyAggregateDevice, _AudioHardwareDisposeForTesting, 
                        _AudioHardwareGetProperty, _AudioHardwareGetPropertyInfo, 
-                       _AudioHardwareInitializeForTesting, _AudioHardwareReloadServerSettings, 
-                       _AudioHardwareRemovePropertyListener, _AudioHardwareRemoveRunLoopSource, 
-                       _AudioHardwareSetProperty, _AudioHardwareStartServer, _AudioHardwareUnload, 
-                       _AudioObjectAddPropertyListener, _AudioObjectAddPropertyListenerBlock, 
-                       _AudioObjectAddPropertyListenerInternal, _AudioObjectExists, 
-                       _AudioObjectGetPropertyData, _AudioObjectGetPropertyDataSize, 
+                       _AudioHardwareInitializeForTesting, _AudioHardwareInitializeHALForTesting, 
+                       _AudioHardwareReloadServerSettings, _AudioHardwareRemovePropertyListener, 
+                       _AudioHardwareRemoveRunLoopSource, _AudioHardwareSetProperty, 
+                       _AudioHardwareStartServer, _AudioHardwareUnload, _AudioObjectAddPropertyListener, 
+                       _AudioObjectAddPropertyListenerBlock, _AudioObjectAddPropertyListenerInternal, 
+                       _AudioObjectExists, _AudioObjectGetPropertyData, _AudioObjectGetPropertyDataSize, 
                        _AudioObjectHasProperty, _AudioObjectIsOnListenerThread, _AudioObjectIsPropertySettable, 
                        _AudioObjectRemovePropertyListener, _AudioObjectRemovePropertyListenerBlock, 
                        _AudioObjectSetPropertyData, _AudioObjectShow, _AudioServerPlugInRegisterRemote, 
@@ -358,7 +356,7 @@ exports:
                        __ZTVN4AMCP6ObjectE, __ZTVN4AMCP6StreamE, __ZTVN4AMCP6SystemE, 
                        __ZTVN4AMCP7ControlE, __ZTVN4AMCP8DSP_NodeE, __ZTVN4AMCP9IOContextE ]
     objc-classes:    [ CATapDescription ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AudioHardwareCreateProcessTap, _AudioHardwareDestroyProcessTap, 
                        _AudioServerPlugInMain ]
 ...

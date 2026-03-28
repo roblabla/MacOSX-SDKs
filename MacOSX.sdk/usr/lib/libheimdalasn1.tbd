@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libheimdalasn1.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ ___gen2_asn1_bmember_isset_bit, ___gen2_asn1_bmember_put_bit, 
                        ___gen2_asn1_copy, ___gen2_asn1_copy_top, ___gen2_asn1_decode, 
                        ___gen2_asn1_decode_top, ___gen2_asn1_encode, ___gen2_asn1_free, 

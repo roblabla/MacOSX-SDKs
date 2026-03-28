@@ -51,6 +51,17 @@ API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos, tvos)
 // It will be signed and included in the resulting PKPaymentToken.
 @property (nonatomic, copy, nullable) NSData *applicationData;
 
+/// A Boolean value that indicates whether this disbursement request is being made
+/// by a delegated entity on behalf of a merchant.
+///
+/// Set this property to YES when your application is acting as an Apple Pay
+/// delegate and presenting the payment sheet on behalf of another merchant.
+/// The default value is NO.
+///
+/// @note This property requires your application to be registered as an Apple Pay
+/// delegate and to have the com.apple.developer.in-app-payments-delegate entitlement.
+@property (nonatomic, assign) BOOL isDelegatedRequest API_AVAILABLE(ios(26.4), visionos(26.4)) API_UNAVAILABLE(watchos, tvos);
+
 // Initialise a disbursement request with all required fields.
 - (instancetype)initWithMerchantIdentifier:(NSString *)merchantIdentifier
                               currencyCode:(NSString *)currencyCode

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DMCApps.framework/Versions/A/DMCApps'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s7DMCApps0A11PreservableMp', '_$s7DMCApps0A11PreservableP12preserveAppsyyYaKFTj', 
                        '_$s7DMCApps0A11PreservableP12preserveAppsyyYaKFTjTu', '_$s7DMCApps0A11PreservableP12preserveAppsyyYaKFTq', 
                        '_$s7DMCApps0A11PreservableP15preservedAppIDsShySSGyKFTj', 

@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ arm64-macos, arm64e-macos ]
+targets:         [ arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AudioServerDriverTransports_IOA2.framework/Versions/A/AudioServerDriverTransports_IOA2'
 exports:
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ _ASDTIOA2LogType, __ZN12CADeprecated15CADispatchQueue11EventSource6RetainEv, 
                        __ZN12CADeprecated15CADispatchQueue11EventSource7ReleaseEv, 
                        __ZN12CADeprecated15CADispatchQueue13Dispatch_MainEbPvPFvS1_E, 
@@ -267,7 +267,8 @@ exports:
                        __ZTSN4ASDT8UCObjectE, __ZTVN12CADeprecated15CADispatchQueueE, 
                        __ZTVN12CADeprecated7CAMutexE, __ZTVN4ASDT12IOA2UCDeviceE, 
                        __ZTVN4ASDT8UCObjectE, _kASDTIOA2ConfigKeyExclavesInjectionBufferName, 
-                       _kASDTIOA2ConfigKeyExclavesInputBufferName, _kASDTIOA2ConfigKeyIsolatedInputUseCaseID, 
+                       _kASDTIOA2ConfigKeyExclavesInputBufferName, _kASDTIOA2ConfigKeyExclavesOutputBufferName, 
+                       _kASDTIOA2ConfigKeyIsolatedInputUseCaseID, _kASDTIOA2ConfigKeyIsolatedOutputUseCaseID, 
                        _kASDTIOA2ControlPropertySelectorInfoKeyDataType, _kASDTIOA2ControlPropertySelectorInfoKeySelector, 
                        _kASDTIOA2DeviceKeyDeviceUID, _kASDTIOA2DeviceKeyIsPrivate, 
                        _kASDTIOA2HeadsetInfoPropertyAddress, _kASDTIOA2LegacyDeviceKeyDeviceUID, 

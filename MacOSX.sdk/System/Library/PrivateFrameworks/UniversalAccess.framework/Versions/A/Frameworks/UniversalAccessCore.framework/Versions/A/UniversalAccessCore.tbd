@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Frameworks/UniversalAccessCore.framework/Versions/A/UniversalAccessCore'
 current-version: 236
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Libraries/libUAPreferences.dylib' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _UAAIncreaseContrastMacBuddySettingsToTransfer, _UAAccessibilityReaderCopyHotkeyForIdentifier, 
                        _UAAccessibilityReaderCopyHotkeys, _UAAccessibilityReaderGetHotkey, 
                        _UAAccessibilityReaderLog, _UAAccessibilityReaderSetHotkey, 
@@ -261,10 +261,10 @@ exports:
                        UAUserSwitch, UAZoomSettings ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Libraries/libUAPreferences.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _UAAXFeatureIDAccessibilityReader, _UAAXFeatureIDAdaptiveVoiceShortcuts, 
                        _UAAXFeatureIDAlternateMouseButtons, _UAAXFeatureIDAudioDescriptions, 
                        _UAAXFeatureIDBackgroundSounds, _UAAXFeatureIDCaptions, _UAAXFeatureIDDisplayContrast, 

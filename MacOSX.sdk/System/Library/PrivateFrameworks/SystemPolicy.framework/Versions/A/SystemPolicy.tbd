@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SystemPolicy.framework/Versions/A/SystemPolicy'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _GKErrorDomain, _SPErrorDomain, _SPReportScriptExecutionViaFallback, 
                        _SystemPolicyVersionNumber, _SystemPolicyVersionString, _URLisDirectory, 
                        _areGatekeeperOverridesDisabledByMDM, _calculateTotalPathSize, 
@@ -30,11 +30,12 @@ exports:
                        _isAdhocSignature, _isAppleInternalMachine, _isAppleSignedCode, 
                        _isCodelessKext, _isConnectionEntitled, _isConnectionFromTrustedIdentifier, 
                        _isDarwinOSEnvironment, _isDeveloperIDKextSignedCode, _isDeveloperIDSignedCode, 
-                       _isInstallerOrRecoveryEnvironment, _isKernelExtensionShippedWithOS, 
-                       _isKernelExtensionSystemRequired, _isKextAllowedWithoutNotarization, 
-                       _isKextSecurityDisabledMachine, _isMacAppStoreSignedCode, 
-                       _isNotarizedKext, _isQAAppStoreCertsAllowed, _isResourceDirectorySlotPolicyEnabled, 
-                       _isSIPDisabledMachine, _isSKELDisabledMachine, _isSkipXprotectScansOnSeenSoftwareEnabled, 
+                       _isInstallerOrRecoveryEnvironment, _isInterpreterScansEnabled, 
+                       _isKernelExtensionShippedWithOS, _isKernelExtensionSystemRequired, 
+                       _isKextAllowedWithoutNotarization, _isKextSecurityDisabledMachine, 
+                       _isMacAppStoreSignedCode, _isNotarizedKext, _isQAAppStoreCertsAllowed, 
+                       _isResourceDirectorySlotPolicyEnabled, _isSIPDisabledMachine, 
+                       _isSKELDisabledMachine, _isSkipXprotectScansOnSeenSoftwareEnabled, 
                        _isTerminalLikePath, _isUnconditionalRevocationTicketLookupEnabled, 
                        _isValidInfoPlist, _isValidationCategoryPolicyEnabled, _isXProtectCloudKitUpdatesEnabledMachine, 
                        _kMaxASBSWaitTime, _normalizeURL, _opaqueSignCode, _removePrefixPath, 
@@ -43,11 +44,12 @@ exports:
                        _shouldFilterOutScanTarget, _systemUptime, _urlLooksLikeBundle ]
     objc-classes:    [ AKELData, AMFI, AppWrapper, AppWrapperPolicy, AppWrapperPolicyResult, 
                        BundleData, GKScanResult, MIS, PolicyCacheMeta, PolicyScanTarget, 
-                       ProvenanceEntry, SPBundleProtection, SPDeveloperPolicy, SPExecutionHistoryItem, 
-                       SPExecutionPolicy, SPExecutionPolicyExportedObject, SPExecutionPolicyItem, 
-                       SPFilePolicy, SPInstallationPolicy, SPKernelExtensionHistory, 
-                       SPKernelExtensionHistoryItem, SPKernelExtensionPolicy, SPKernelExtensionPolicyItem, 
-                       SPLog, SPMalwareSampling, SPMetrics, SPMigration, SPMigrationScanner, 
+                       ProvenanceEntry, SPBundleProtection, SPCodeEvaluationProxy, 
+                       SPDeveloperPolicy, SPExecutionHistoryItem, SPExecutionPolicy, 
+                       SPExecutionPolicyExportedObject, SPExecutionPolicyItem, SPFilePolicy, 
+                       SPInstallationPolicy, SPKernelExtensionHistory, SPKernelExtensionHistoryItem, 
+                       SPKernelExtensionPolicy, SPKernelExtensionPolicyItem, SPLog, 
+                       SPMalwareSampling, SPMetrics, SPMigration, SPMigrationScanner, 
                        SPProvenanceMetadata, SPProvenanceTracking, SPSamplingTasking, 
                        SPScriptScanEvaluation, SPScriptScanner, StagedBundleData, 
                        TrackingAttributes ]

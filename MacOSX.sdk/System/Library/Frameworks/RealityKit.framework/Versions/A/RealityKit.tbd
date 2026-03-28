@@ -1,14 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit'
-current-version: 403.60.3
+current-version: 403.100.11
 swift-abi-version: 7
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/RealityFoundation.framework/Versions/A/RealityFoundation' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10RealityKit12MeshResourceC12generateText_14extrusionDepth4font14containerFrame9alignment13lineBreakModeACSS_SfSo6NSFontCSo6CGRectVSo15CTTextAlignmentVSo06CTLinenO0VtFZ', 
                        '_$s10RealityKit12MeshResourceC14__generateText_14extrusionDepth4font14containerFrame9alignment13lineBreakMode12segmentCountACSS_SfSo6NSFontCSo6CGRectVSo15CTTextAlignmentVSo06CTLinenO0Vs5UInt8VtFZ', 
                        '_$s10RealityKit13UnlitMaterialV5color23applyPostProcessToneMapACSo7NSColorC_SbtcfC', 

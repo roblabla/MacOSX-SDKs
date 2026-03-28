@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Planks.framework/Versions/A/Planks'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14NeuralNetworks10ScalarTypeO6PlanksE05fieldD0ACSgAD05FieldD0O_tcfC', 
                        '_$s14NeuralNetworks10ScalarTypeO6PlanksE11descriptionSSvg', 
                        '_$s14NeuralNetworks10ScalarTypeO6PlanksE11descriptionSSvpMV', 
@@ -76,6 +76,7 @@ exports:
                        '_$s6Planks0A6WriterC14initializeFile2fdSi6System0D10DescriptorV_tKFZ', 
                        '_$s6Planks0A6WriterC14writeDataFrame2df5label11columnTypes9batchSizeSb07TabularD00dE0V_SSSDySSAA9FieldTypeOGSitF', 
                        '_$s6Planks0A6WriterC15nextChunkOffsets5Int64VyFTj', '_$s6Planks0A6WriterC15nextChunkOffsets5Int64VyFTq', 
+                       '_$s6Planks0A6WriterC17writeChunkedArray_5label14maxChunkLength0G12RowsPerGroupSbSayxG_SSS2itAA20FieldTypeConvertibleRzlF', 
                        '_$s6Planks0A6WriterC5closeyyFTj', '_$s6Planks0A6WriterC5closeyyFTq', 
                        '_$s6Planks0A6WriterC8filePath6System04FileD0Vvg', '_$s6Planks0A6WriterC8filePath6System04FileD0VvpMV', 
                        '_$s6Planks0A6WriterC8filePath6appendACSgSS_SbtcfC', '_$s6Planks0A6WriterC8filePath6appendACSgSS_SbtcfCTj', 
@@ -102,6 +103,8 @@ exports:
                        '_$s6Planks0A7NDArrayCyxSaySiGcipMV', '_$s6Planks0A7NDArrayCyxSaySiGcis', 
                        '_$s6Planks0A7NDArrayCyxSid_tciM', '_$s6Planks0A7NDArrayCyxSid_tcig', 
                        '_$s6Planks0A7NDArrayCyxSid_tcipMV', '_$s6Planks0A7NDArrayCyxSid_tcis', 
+                       '_$s6Planks0A8DefaultsO14maxChunkLengthSivgZ', '_$s6Planks0A8DefaultsO14maxChunkLengthSivpZMV', 
+                       '_$s6Planks0A8DefaultsO15maxRowsPerGroupSivgZ', '_$s6Planks0A8DefaultsO15maxRowsPerGroupSivpZMV', 
                        '_$s6Planks0A8DefaultsO9batchSizeSivgZ', '_$s6Planks0A8DefaultsO9batchSizeSivpZMV', 
                        '_$s6Planks0A8DefaultsOMa', '_$s6Planks0A8DefaultsOMn', '_$s6Planks0A8DefaultsON', 
                        '_$s6Planks0A8OrderingO14computeStrides5shape5orderSaySiGAG_ACtFZ', 
@@ -308,7 +311,7 @@ exports:
                        '_$ss6UInt64V6Planks20FieldTypeConvertibleACWP', '_$ss6UInt64V6PlanksE9fieldTypeAC05FieldD0OvgZ', 
                        '_$ss6UInt64V6PlanksE9fieldTypeAC05FieldD0OvpZMV', _PlanksVersionNumber, 
                        _PlanksVersionString ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ '_$ss7Float16V6Planks20FieldTypeConvertibleACMc', '_$ss7Float16V6Planks20FieldTypeConvertibleACWP', 
                        '_$ss7Float16V6PlanksE9fieldTypeAC05FieldD0OvgZ', '_$ss7Float16V6PlanksE9fieldTypeAC05FieldD0OvpZMV' ]
 ...

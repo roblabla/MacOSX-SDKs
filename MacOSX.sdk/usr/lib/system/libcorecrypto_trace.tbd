@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libcorecrypto_trace.dylib'
-current-version: 1922.60.11
+current-version: 1922.101.2
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -18,8 +16,7 @@ exports:
                        _ccaes_intel_xts_encrypt_aesni_mode, _ccaes_intel_xts_encrypt_opt_mode, 
                        _ccsha1_vng_intel_SupplementalSSE3_di, _ccsha224_vng_intel_SupplementalSSE3_di, 
                        _ccsha256_vng_intel_SupplementalSSE3_di ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CCEC_FAULT_CANARY, _CCMLDSA_FAULT_CANARY, _CCRSA_PKCS1_FAULT_CANARY, 
                        _CCRSA_PSS_FAULT_CANARY, _CCSS_PRIME_P192, _CCSS_PRIME_P224, 
                        _CCSS_PRIME_P256, _CCSS_PRIME_P384, _CCSS_PRIME_P521, _cc_abort, 
@@ -164,15 +161,16 @@ exports:
                        _ccec_rfc6637_unwrap_sha512_kek_aes256, _ccec_rfc6637_wrap_key, 
                        _ccec_rfc6637_wrap_key_diversified, _ccec_rfc6637_wrap_key_size, 
                        _ccec_rfc6637_wrap_sha256_kek_aes128, _ccec_rfc6637_wrap_sha512_kek_aes256, 
-                       _ccec_sign, _ccec_sign_composite, _ccec_sign_composite_msg, 
-                       _ccec_sign_msg, _ccec_signature_r_s_size, _ccec_unblind, _ccec_validate_pub, 
-                       _ccec_verify, _ccec_verify_composite, _ccec_verify_composite_digest, 
-                       _ccec_verify_composite_msg, _ccec_verify_digest, _ccec_verify_msg, 
-                       _ccec_x963_export, _ccec_x963_import_priv, _ccec_x963_import_priv_size, 
-                       _ccec_x963_import_pub, _ccec_x963_import_pub_size, _ccecb_block_size, 
-                       _ccecb_context_size, _ccecb_init, _ccecb_one_shot, _ccecb_one_shot_explicit, 
-                       _ccecb_update, _ccecdh_compute_shared_secret, _ccecdh_generate_key, 
-                       _ccecies_decrypt_gcm, _ccecies_decrypt_gcm_composite, _ccecies_decrypt_gcm_from_shared_secret, 
+                       _ccec_sign, _ccec_sign_composite, _ccec_sign_composite_hedged, 
+                       _ccec_sign_composite_msg, _ccec_sign_msg, _ccec_signature_r_s_size, 
+                       _ccec_unblind, _ccec_validate_pub, _ccec_verify, _ccec_verify_composite, 
+                       _ccec_verify_composite_digest, _ccec_verify_composite_msg, 
+                       _ccec_verify_digest, _ccec_verify_msg, _ccec_x963_export, 
+                       _ccec_x963_import_priv, _ccec_x963_import_priv_size, _ccec_x963_import_pub, 
+                       _ccec_x963_import_pub_size, _ccecb_block_size, _ccecb_context_size, 
+                       _ccecb_init, _ccecb_one_shot, _ccecb_one_shot_explicit, _ccecb_update, 
+                       _ccecdh_compute_shared_secret, _ccecdh_generate_key, _ccecies_decrypt_gcm, 
+                       _ccecies_decrypt_gcm_composite, _ccecies_decrypt_gcm_from_shared_secret, 
                        _ccecies_decrypt_gcm_plaintext_size, _ccecies_decrypt_gcm_plaintext_size_cp, 
                        _ccecies_decrypt_gcm_setup, _ccecies_encrypt_gcm, _ccecies_encrypt_gcm_ciphertext_size, 
                        _ccecies_encrypt_gcm_composite, _ccecies_encrypt_gcm_from_shared_secret, 
@@ -318,23 +316,27 @@ exports:
                        _ccsha1_ltc_di, _ccsha224_di, _ccsha224_ltc_di, _ccsha256_di, 
                        _ccsha256_ltc_di, _ccsha384_di, _ccsha384_ltc_di, _ccsha3_224_di, 
                        _ccsha3_256_di, _ccsha3_384_di, _ccsha3_512_di, _ccsha512_256_di, 
-                       _ccsha512_256_ltc_di, _ccsha512_di, _ccsha512_ltc_di, _ccsigma_clear, 
+                       _ccsha512_256_ltc_di, _ccsha512_di, _ccsha512_ltc_di, _ccshake128, 
+                       _ccshake128_xi, _ccshake256, _ccshake256_xi, _ccsigma_clear, 
                        _ccsigma_clear_key, _ccsigma_compute_mac, _ccsigma_derive_session_keys, 
-                       _ccsigma_exclave_pairing_info, _ccsigma_export_key_share, 
-                       _ccsigma_import_peer_key_share, _ccsigma_import_peer_verification_key, 
-                       _ccsigma_import_signing_key, _ccsigma_init, _ccsigma_kex_init_ctx, 
-                       _ccsigma_kex_resp_ctx, _ccsigma_mfi_info, _ccsigma_mfi_nvm_info, 
-                       _ccsigma_open, _ccsigma_peer_role, _ccsigma_seal, _ccsigma_set_signing_function, 
-                       _ccsigma_sign, _ccsigma_verify, _ccsiv_aad, _ccsiv_block_size, 
-                       _ccsiv_ciphertext_size, _ccsiv_context_size, _ccsiv_crypt, 
-                       _ccsiv_hmac_aad, _ccsiv_hmac_block_size, _ccsiv_hmac_ciphertext_size, 
-                       _ccsiv_hmac_context_size, _ccsiv_hmac_crypt, _ccsiv_hmac_init, 
-                       _ccsiv_hmac_one_shot, _ccsiv_hmac_plaintext_size, _ccsiv_hmac_reset, 
-                       _ccsiv_hmac_set_nonce, _ccsiv_init, _ccsiv_one_shot, _ccsiv_plaintext_size, 
-                       _ccsiv_reset, _ccsiv_set_nonce, _ccspake_cp_256, _ccspake_cp_256_rfc, 
-                       _ccspake_cp_384, _ccspake_cp_384_rfc, _ccspake_cp_521, _ccspake_cp_521_rfc, 
-                       _ccspake_generate_L, _ccspake_get_session_key, _ccspake_kex_generate, 
-                       _ccspake_kex_process, _ccspake_mac_compute, _ccspake_mac_hkdf_cmac_aes128_sha256, 
+                       _ccsigma_exclave_pairing_info, _ccsigma_exclave_pairing_session_info, 
+                       _ccsigma_export_key_share, _ccsigma_import_peer_key_share, 
+                       _ccsigma_import_peer_verification_key, _ccsigma_import_signing_key, 
+                       _ccsigma_init, _ccsigma_kex_init_ctx, _ccsigma_kex_resp_ctx, 
+                       _ccsigma_mfi_info, _ccsigma_mfi_nvm_info, _ccsigma_open, _ccsigma_peer_role, 
+                       _ccsigma_seal, _ccsigma_session_clear, _ccsigma_session_export, 
+                       _ccsigma_session_import, _ccsigma_session_init, _ccsigma_session_open, 
+                       _ccsigma_session_seal, _ccsigma_set_signing_function, _ccsigma_sign, 
+                       _ccsigma_verify, _ccsiv_aad, _ccsiv_block_size, _ccsiv_ciphertext_size, 
+                       _ccsiv_context_size, _ccsiv_crypt, _ccsiv_hmac_aad, _ccsiv_hmac_block_size, 
+                       _ccsiv_hmac_ciphertext_size, _ccsiv_hmac_context_size, _ccsiv_hmac_crypt, 
+                       _ccsiv_hmac_init, _ccsiv_hmac_one_shot, _ccsiv_hmac_plaintext_size, 
+                       _ccsiv_hmac_reset, _ccsiv_hmac_set_nonce, _ccsiv_init, _ccsiv_one_shot, 
+                       _ccsiv_plaintext_size, _ccsiv_reset, _ccsiv_set_nonce, _ccspake_cp_256, 
+                       _ccspake_cp_256_rfc, _ccspake_cp_384, _ccspake_cp_384_rfc, 
+                       _ccspake_cp_521, _ccspake_cp_521_rfc, _ccspake_generate_L, 
+                       _ccspake_get_session_key, _ccspake_kex_generate, _ccspake_kex_process, 
+                       _ccspake_mac_compute, _ccspake_mac_hkdf_cmac_aes128_sha256, 
                        _ccspake_mac_hkdf_hmac_sha256, _ccspake_mac_hkdf_hmac_sha512, 
                        _ccspake_mac_verify_and_get_session_key, _ccspake_prover_init, 
                        _ccspake_prover_initialize, _ccspake_reduce_w, _ccspake_reduce_w_RFC9383, 
@@ -364,13 +366,14 @@ exports:
                        _ccvrf_sizeof_public_key, _ccvrf_sizeof_secret_key, _ccvrf_verify, 
                        _ccwrap_auth_decrypt, _ccwrap_auth_decrypt_withiv, _ccwrap_auth_encrypt, 
                        _ccwrap_auth_encrypt_withiv, _ccwrap_unwrapped_size, _ccwrap_wrapped_size, 
-                       _ccxts_block_size, _ccxts_context_size, _ccxts_init, _ccxts_one_shot, 
-                       _ccxts_set_tweak, _ccxts_update, _ccz_add, _ccz_addi, _ccz_bit, 
-                       _ccz_bitlen, _ccz_capacity, _ccz_cmp, _ccz_cmpi, _ccz_divmod, 
-                       _ccz_expmod, _ccz_free, _ccz_init, _ccz_is_negative, _ccz_is_one, 
-                       _ccz_is_prime, _ccz_is_zero, _ccz_lsl, _ccz_lsr, _ccz_mod, 
-                       _ccz_mul, _ccz_muli, _ccz_mulmod, _ccz_n, _ccz_neg, _ccz_random_bits, 
-                       _ccz_read_radix, _ccz_read_uint, _ccz_set, _ccz_set_bit, _ccz_set_capacity, 
+                       _ccxof_absorb, _ccxof_init, _ccxof_squeeze, _ccxts_block_size, 
+                       _ccxts_context_size, _ccxts_init, _ccxts_one_shot, _ccxts_set_tweak, 
+                       _ccxts_update, _ccz_add, _ccz_addi, _ccz_bit, _ccz_bitlen, 
+                       _ccz_capacity, _ccz_cmp, _ccz_cmpi, _ccz_divmod, _ccz_expmod, 
+                       _ccz_free, _ccz_init, _ccz_is_negative, _ccz_is_one, _ccz_is_prime, 
+                       _ccz_is_zero, _ccz_lsl, _ccz_lsr, _ccz_mod, _ccz_mul, _ccz_muli, 
+                       _ccz_mulmod, _ccz_n, _ccz_neg, _ccz_random_bits, _ccz_read_radix, 
+                       _ccz_read_uint, _ccz_set, _ccz_set_bit, _ccz_set_capacity, 
                        _ccz_set_n, _ccz_set_sign, _ccz_seti, _ccz_sign, _ccz_size, 
                        _ccz_sub, _ccz_subi, _ccz_trailing_zeros, _ccz_write_int, 
                        _ccz_write_int_size, _ccz_write_radix, _ccz_write_radix_size, 
@@ -378,7 +381,7 @@ exports:
                        _cczp_bitlen, _cczp_inv, _cczp_mod, _cczp_mul, _cczp_n, _cczp_prime, 
                        _cczp_sub, _csss_shamir_share_bag_can_recover_secret, _fipspost_post, 
                        _fipspost_trace_vtable, _map_to_curve_sswu ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ccaes_arm_cbc_decrypt_mode, _ccaes_arm_cbc_encrypt_mode, 
                        _ccaes_arm_cfb_decrypt_mode, _ccaes_arm_cfb_encrypt_mode, 
                        _ccaes_arm_ecb_decrypt_mode, _ccaes_arm_ecb_encrypt_mode, 

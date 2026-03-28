@@ -1,9 +1,8 @@
-module Darwin.POSIX.netinet [system] {
+module Darwin.POSIX.netinet {
   module in {
     header "netinet/in.h"
+    private textual header "netinet6/in6.h"
     export *
-
-    exclude header "netinet6/in6.h"
   }
 
   module tcp {
@@ -12,7 +11,7 @@ module Darwin.POSIX.netinet [system] {
   }
 }
 
-module Darwin.netinet [system] {
+module Darwin.netinet {
   module bootp {
     header "netinet/bootp.h"
     export *

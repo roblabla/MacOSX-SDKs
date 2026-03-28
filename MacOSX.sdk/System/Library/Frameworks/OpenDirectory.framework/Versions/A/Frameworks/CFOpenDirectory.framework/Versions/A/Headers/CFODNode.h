@@ -320,7 +320,7 @@ bool ODNodeSetPolicies(ODNodeRef node, CFDictionaryRef policies, CFErrorRef *err
     @abstract   This will set a specific policy setting for the node.
     @discussion This will set a specific policy setting for the node.
     @param      node an ODNodeRef to use
-    @param      policy a valid ODPolicyType
+    @param      policyType a valid ODPolicyType
     @param      value a CFTypeRef to be set (should be of appropriate type for the policy)
     @param      error an optional CFErrorRef reference for error details
     @result     a bool which signifies if the policy set succeeded, otherwise error is set.
@@ -333,7 +333,7 @@ bool ODNodeSetPolicy(ODNodeRef node, ODPolicyType policyType, CFTypeRef value, C
     @abstract   This will remove a specific policy setting from the node.
     @discussion This will remove a specific policy setting from the node.
     @param      node an ODNodeRef to use
-    @param      policy a valid ODPolicyType
+    @param      policyType a valid ODPolicyType
     @param      error an optional CFErrorRef reference for error details
     @result     a bool which signifies if the policy removal succeeded, otherwise error is set.
 */

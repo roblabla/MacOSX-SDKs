@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HIDRMClientKit.framework/Versions/A/HIDRMClientKit'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14HIDRMClientKit0A0C0A6DeviceV11descriptionSSvg', '_$s14HIDRMClientKit0A0C0A6DeviceV11descriptionSSvpMV', 
                        '_$s14HIDRMClientKit0A0C0A6DeviceV2eeoiySbAE_AEtFZ', '_$s14HIDRMClientKit0A0C0A6DeviceV4hash4intoys6HasherVz_tF', 
                        '_$s14HIDRMClientKit0A0C0A6DeviceV4hashSSvg', '_$s14HIDRMClientKit0A0C0A6DeviceV4hashSSvpMV', 
@@ -26,9 +26,9 @@ exports:
                        '_$s14HIDRMClientKit0A0C0A6DeviceV5StateOs12CaseIterableAAMc', 
                        '_$s14HIDRMClientKit0A0C0A6DeviceV5stateAE5StateOvM', '_$s14HIDRMClientKit0A0C0A6DeviceV5stateAE5StateOvg', 
                        '_$s14HIDRMClientKit0A0C0A6DeviceV5stateAE5StateOvpMV', '_$s14HIDRMClientKit0A0C0A6DeviceV5stateAE5StateOvs', 
-                       '_$s14HIDRMClientKit0A0C0A6DeviceV6revokeyyF', '_$s14HIDRMClientKit0A0C0A6DeviceV7approveyyF', 
-                       '_$s14HIDRMClientKit0A0C0A6DeviceV9hashValueSivg', '_$s14HIDRMClientKit0A0C0A6DeviceV9hashValueSivpMV', 
-                       '_$s14HIDRMClientKit0A0C0A6DeviceV9serviceIDs6UInt64Vvg', 
+                       '_$s14HIDRMClientKit0A0C0A6DeviceV6forgetyyF', '_$s14HIDRMClientKit0A0C0A6DeviceV6revokeyyF', 
+                       '_$s14HIDRMClientKit0A0C0A6DeviceV7approveyyF', '_$s14HIDRMClientKit0A0C0A6DeviceV9hashValueSivg', 
+                       '_$s14HIDRMClientKit0A0C0A6DeviceV9hashValueSivpMV', '_$s14HIDRMClientKit0A0C0A6DeviceV9serviceIDs6UInt64Vvg', 
                        '_$s14HIDRMClientKit0A0C0A6DeviceV9serviceIDs6UInt64VvpMV', 
                        '_$s14HIDRMClientKit0A0C0A6DeviceVMa', '_$s14HIDRMClientKit0A0C0A6DeviceVMn', 
                        '_$s14HIDRMClientKit0A0C0A6DeviceVN', '_$s14HIDRMClientKit0A0C0A6DeviceVSHAAMc', 
@@ -37,8 +37,7 @@ exports:
                        '_$s14HIDRMClientKit0A0C12NotificationO18deviceStateChangedyAeC0A6DeviceV_AH0E0OtcAEmFWC', 
                        '_$s14HIDRMClientKit0A0C12NotificationOMa', '_$s14HIDRMClientKit0A0C12NotificationOMn', 
                        '_$s14HIDRMClientKit0A0C12NotificationON', '_$s14HIDRMClientKit0A0C15unownedExecutorScevg', 
-                       '_$s14HIDRMClientKit0A0C15unownedExecutorScevpMV', '_$s14HIDRMClientKit0A0C16revokeAllDevicesyyFTj', 
-                       '_$s14HIDRMClientKit0A0C16revokeAllDevicesyyFTq', '_$s14HIDRMClientKit0A0C20monitorNotificationsScSyAC12NotificationOGyFTj', 
+                       '_$s14HIDRMClientKit0A0C15unownedExecutorScevpMV', '_$s14HIDRMClientKit0A0C20monitorNotificationsScSyAC12NotificationOGyFTj', 
                        '_$s14HIDRMClientKit0A0C20monitorNotificationsScSyAC12NotificationOGyFTq', 
                        '_$s14HIDRMClientKit0A0C7devicesSayAC0A6DeviceVGvgTj', '_$s14HIDRMClientKit0A0C7devicesSayAC0A6DeviceVGvgTq', 
                        '_$s14HIDRMClientKit0A0C7devicesSayAC0A6DeviceVGvpMV', '_$s14HIDRMClientKit0A0CACycfC', 

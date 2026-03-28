@@ -37,8 +37,33 @@ API_AVAILABLE(ios(26.1)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos, wat
 /// The destination to send the job's resource.
 @property (strong, readonly) NSURLRequest *destination;
 
+/// The HTTP response headers received from the server upon completion of the upload.
+///
+/// This property is populated when the job reaches a terminal state (`PHAssetResourceUploadJobStateSucceeded`
+/// or `PHAssetResourceUploadJobStateFailed`). It contains the HTTP response headers returned by the
+/// destination server.
+///
+/// Header field names are normalized to lowercase for consistent lookup.
+///
+/// - Returns: A dictionary of response header fields, or `nil` if the job has not completed or no HTTP response was received.
+@property (copy, readonly, nullable) NSDictionary<NSString *, NSString *> *responseHeaderFields API_AVAILABLE(ios(26.4));
+
 /// The state of this upload job.
 @property (readonly) PHAssetResourceUploadJobState state;
+
+/// The type of this upload job.
+@property (readonly) PHAssetResourceUploadJobType type;
+
+/// The error that caused the job to fail.
+///
+/// This property is populated when the job reaches the `PHAssetResourceUploadJobStateFailed` state.
+/// It provides detailed information about why the upload failed, including network errors,
+/// server errors, or client-side errors.
+///
+/// - Note: The error provided is sanitized and may not be the actual error returned from URLResponse.
+///
+/// - Returns: An error object describing the failure, or `nil` if the job has not failed.
+@property (readonly, nullable) NSError *error API_AVAILABLE(ios(26.4));
 
 /// Returns all asset resource upload jobs applicable for a given action.
 ///

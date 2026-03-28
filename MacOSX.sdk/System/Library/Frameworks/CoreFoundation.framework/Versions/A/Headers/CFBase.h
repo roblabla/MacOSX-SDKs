@@ -349,6 +349,51 @@ typedef unsigned long long CFAllocatorTypeID;
 #  define CF_SWIFT_UNAVAILABLE_FROM_ASYNC(msg)
 #endif
 
+#if __has_attribute(swift_attr)
+#  define CF_SWIFT_MAIN_ACTOR __attribute__((swift_attr("@MainActor")))
+#else
+#  define CF_SWIFT_MAIN_ACTOR
+#endif
+
+#define __CF_HEADER_AUDIT_BEGIN_nullability _Pragma("clang assume_nonnull begin")
+#define __CF_HEADER_AUDIT_END_nullability   _Pragma("clang assume_nonnull end")
+
+#if __SWIFT_ATTR_SUPPORTS_SENDABLE_DECLS
+// Indicates that the thing it is applied to should be imported as 'Sendable' in Swift:
+// * Type declarations are imported into Swift with a 'Sendable' conformance.
+// * Block parameters are imported into Swift with an '@Sendable' function type. (Write it in the same place you would put 'CF_NOESCAPE'.)
+// * 'id' parameters are imported into Swift as 'Sendable', not 'Any'.
+// * Other object-type parameters are imported into Swift with an '& Sendable' requirement.
+#  define CF_SWIFT_SENDABLE __attribute__((swift_attr("@Sendable")))
+
+// Indicates that the thing it is applied to should *not* be imported as 'Sendable' in Swift even if it normally would be.
+#  define CF_SWIFT_NONSENDABLE __attribute__((swift_attr("@_nonSendable")))
+
+// Indicates that a specific member of an 'CF_SWIFT_UI_ACTOR'-isolated type is "threadsafe" and should be callable from outside the main actor.
+#  define CF_SWIFT_NONISOLATED __attribute__((swift_attr("nonisolated")))
+
+#  define __CF_HEADER_AUDIT_BEGIN_sendability _Pragma("clang attribute CF_HEADER_AUDIT_sendability.push (__attribute__((swift_attr(\"@_nonSendable(_assumed)\"))), apply_to = any(objc_interface, record, enum))")
+#  define __CF_HEADER_AUDIT_END_sendability   _Pragma("clang attribute CF_HEADER_AUDIT_sendability.pop")
+#else
+#  define CF_SWIFT_SENDABLE
+#  define CF_SWIFT_NONSENDABLE
+#  define CF_SWIFT_NONISOLATED
+
+#  define __CF_HEADER_AUDIT_BEGIN_sendability
+#  define __CF_HEADER_AUDIT_END_sendability
+#endif
+
+#define __CF_HEADER_AUDIT_BEGIN1(_1) __CF_HEADER_AUDIT_BEGIN_##_1
+#define __CF_HEADER_AUDIT_BEGIN2(_1, _2) __CF_HEADER_AUDIT_BEGIN1(_1) __CF_HEADER_AUDIT_BEGIN1(_2)
+
+#define __CF_HEADER_AUDIT_END1(_1) __CF_HEADER_AUDIT_END_##_1
+#define __CF_HEADER_AUDIT_END2(_1, _2) __CF_HEADER_AUDIT_END1(_1) __CF_HEADER_AUDIT_END1(_2)
+
+#define __CF_HEADER_AUDIT_GET_MACRO(_2, _1, NAME, ...) NAME
+
+#define CF_HEADER_AUDIT_BEGIN(...) __CF_HEADER_AUDIT_GET_MACRO(__VA_ARGS__, __CF_HEADER_AUDIT_BEGIN2, __CF_HEADER_AUDIT_BEGIN1, 0)(__VA_ARGS__)
+#define CF_HEADER_AUDIT_END(...) __CF_HEADER_AUDIT_GET_MACRO(__VA_ARGS__, __CF_HEADER_AUDIT_END2, __CF_HEADER_AUDIT_END1, 0)(__VA_ARGS__)
+
 #if __has_attribute(noescape)
 #define CF_NOESCAPE __attribute__((noescape))
 #else

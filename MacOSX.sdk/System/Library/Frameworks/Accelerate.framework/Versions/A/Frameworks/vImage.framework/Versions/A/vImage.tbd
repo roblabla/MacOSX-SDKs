@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage'
-current-version: 630
+current-version: 632.100.6
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _Init_vImage, _SetvImageThreadCount, _SetvImageThreadState, 
                        _SetvImageVectorAvailable, __vImage_TempBuffer_Enable_Legacy, 
                        _kvImageConstDecodeArray0, _kvImageDecodeArray_16Q12Format, 
@@ -369,7 +369,7 @@ exports:
                        _vImageVerticalShear_Planar8, _vImageVerticalShear_PlanarF, 
                        _vImageVerticalShear_XRGB2101010W, _vImage_SILBuffer_Allocate_RGBAFFFF, 
                        _vImage_SILBuffer_Free_RGBAFFFF, _vImage_SILBuffer_Init_RGBAFFFF ]
-  - targets:         [ x86_64-macos, x86_64h-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64h-macos, arm64e-macos ]
     symbols:         [ _vImageGetMinimumGeometryTempBufferSize, _vImageGetMinimumTempBufferSizeForConvolution, 
                        _vImageGetMinimumTempBufferSizeForHistogram, _vImageGetMinimumTempBufferSizeForMinMax ]
 ...

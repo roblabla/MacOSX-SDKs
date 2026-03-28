@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WallpaperFoundation.framework/Versions/A/WallpaperFoundation'
-current-version: 245.2.1
+current-version: 245.4.8
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation3URLV09WallpaperA0E11isAliasFileSbvg', '_$s10Foundation3URLV09WallpaperA0E11isAliasFileSbvpMV', 
                        '_$s10Foundation3URLV09WallpaperA0E14cloneDirectory2to10isIncludedyAC_SbACXEtKF', 
                        '_$s10Foundation3URLV09WallpaperA0E16isSupportedImageSbvg', 

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TimeMachine.framework/Versions/A/TimeMachine'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation3URLV11TimeMachineE10attributes3for7optionsSDyAD8AttrListV3KeyOypGx_AI7OptionsVtKSTRzAK7ElementRtzlF', 
                        '_$s10Foundation3URLV11TimeMachineE3for7optionsSDyAD8AttrListV3KeyOypGx_AH7OptionsVtcSTRzAJ7ElementRtzluig', 
                        '_$s10Foundation3URLV11TimeMachineE3for7optionsSDyAD8AttrListV3KeyOypGx_AH7OptionsVtcSTRzAJ7ElementRtzluipMV', 
@@ -583,24 +583,24 @@ exports:
                        _kTMStructureReuseURLKey, _kTMStructureTypeKey, _kTMVolumeStorePreviousVolumeUUIDXAttrKey, 
                        _kTMVolumeStoreVolumeGroupUUIDXAttrKey, _kTMVolumeStoreVolumeRoleXAttrKey, 
                        _kTMVolumeStoreVolumeUUIDXAttrKey ]
-    objc-classes:    [ TMAPFSBackup, TMAPFSDisk, TMAPFSMachineStore, TMAttrListDiskFactory, 
-                       TMBackup, TMBackupDataSource, TMBackupDeleter, TMBackupInfo, 
-                       TMBackupProxy, TMBackupStorage, TMBackupdConnection, TMConfiguration, 
-                       TMDADisk, TMDefaultConfigurationAdapter, TMDeviceRulesEngine, 
-                       TMDisk, TMDiskArbiter, TMDiskImage, TMFirmLinkMap, TMIOKitDisk, 
-                       TMIdentity, TMImageDisk, TMInProgressContainer, TMLocalSnapshot, 
-                       TMLocalSnapshotMessenger, TMLogRecord, TMLogging, TMLoggingFormatter, 
-                       TMLoggingHandler, TMMachineStore, TMMailPersistenceInfo, TMMonoStructure, 
-                       TMNodeCache, TMOtherIODisk, TMOtherMachineStore, TMPathExclusion, 
-                       TMPathFilterGenerator, TMPathTreeNode, TMQueryScopeInfo, TMQueryTarget, 
-                       TMRAMDisk, TMReadOnlyBackup, TMRulesEngine, TMRulesEngineBOM, 
-                       TMRulesEngineBuilder, TMRulesEngineConstructionContext, TMSerialDeleter, 
-                       TMSession, TMSnapshot, TMSpotlightOracle, TMStatFSDisk, TMStructure, 
-                       TMStructureAnnotatedDiskState, TMStructureMetadata, TMSubdirectorySourceDisk, 
-                       TMSystemInformation, TMSystemPathsOracle, TMTarget, TMTargetCache, 
-                       TMTestDisk, TMThinningAlgorithm, TMURLDisk, TMVolumeStore, 
-                       TMXPCConnectionInvalidator, TMXPCListener, _TtC11TimeMachine12XPCTaskGroup, 
-                       _TtC11TimeMachine22TMAttrListDiskInternal ]
+    objc-classes:    [ TMAPFSBackup, TMAPFSDisk, TMAPFSMachineStore, TMAsyncDelegate, 
+                       TMAttrListDiskFactory, TMBackup, TMBackupDataSource, TMBackupDeleter, 
+                       TMBackupInfo, TMBackupProxy, TMBackupStorage, TMBackupdConnection, 
+                       TMConfiguration, TMDADisk, TMDefaultConfigurationAdapter, 
+                       TMDeviceRulesEngine, TMDisk, TMDiskArbiter, TMDiskImage, TMFirmLinkMap, 
+                       TMIOKitDisk, TMIdentity, TMImageDisk, TMInProgressContainer, 
+                       TMLocalSnapshot, TMLocalSnapshotMessenger, TMLogRecord, TMLogging, 
+                       TMLoggingFormatter, TMLoggingHandler, TMMachineStore, TMMailPersistenceInfo, 
+                       TMMonoStructure, TMNodeCache, TMOtherIODisk, TMOtherMachineStore, 
+                       TMPathExclusion, TMPathFilterGenerator, TMPathTreeNode, TMQueryScopeInfo, 
+                       TMQueryTarget, TMRAMDisk, TMReadOnlyBackup, TMRulesEngine, 
+                       TMRulesEngineBOM, TMRulesEngineBuilder, TMRulesEngineConstructionContext, 
+                       TMSerialDeleter, TMSession, TMSnapshot, TMSpotlightOracle, 
+                       TMStatFSDisk, TMStructure, TMStructureAnnotatedDiskState, 
+                       TMStructureMetadata, TMSubdirectorySourceDisk, TMSystemInformation, 
+                       TMSystemPathsOracle, TMTarget, TMTargetCache, TMTestDisk, 
+                       TMThinningAlgorithm, TMURLDisk, TMVolumeStore, TMXPCConnectionInvalidator, 
+                       TMXPCListener, _TtC11TimeMachine12XPCTaskGroup, _TtC11TimeMachine22TMAttrListDiskInternal ]
     objc-ivars:      [ TMBackup._snapshotVolumeIdentifier, TMTestDisk._apfsContainerDevice, 
                        TMTestDisk._apfsFirstVolumeDevice, TMTestDisk._apfsPhysicalDevice, 
                        TMTestDisk._baseDevice, TMTestDisk._baseDiskRef, TMTestDisk._capacity, 

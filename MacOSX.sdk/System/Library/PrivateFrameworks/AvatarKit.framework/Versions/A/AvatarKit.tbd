@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AvatarKit.framework/Versions/A/AvatarKit'
-current-version: 356.100
+current-version: 356.255
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AVTAnimojiThumbnailCameraKey, _AVTAnimojiThumbnailLargeSizeKey, 
                        _AVTAvatarKitSnapshotVersionNumber, _AVTAvatarKitSnapshotVersionNumberFromString, 
                        _AVTAvatarKitSnapshotVersionString, _AVTAvatarKitVersionNumber, 

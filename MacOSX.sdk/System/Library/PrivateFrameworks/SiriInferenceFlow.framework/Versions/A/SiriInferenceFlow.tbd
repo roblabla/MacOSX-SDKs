@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriInferenceFlow.framework/Versions/A/SiriInferenceFlow'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s13SiriInference8LocationV0aB4FlowE18formattedPlaceNameSSSgvg', 
                        '_$s13SiriInference8LocationV0aB4FlowE18formattedPlaceNameSSSgvpMV', 
                        '_$s16SiriDialogEngine17PhonemeDataParserO0A13InferenceFlowE5parse4fromAA0dE0VSgSo9CNContactC_tFZ', 

@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftos.dylib'
-current-version: 1076.40.2
+current-version: 1082
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftos.dylib', '$ld$install_name$os10.11$@rpath/libswiftos.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftos.dylib', '$ld$install_name$os10.13$@rpath/libswiftos.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftos.dylib', '$ld$install_name$os10.9$@rpath/libswiftos.dylib', 
@@ -437,10 +435,12 @@ exports:
                        '_$s2os6LoggerV5debugyyAA12OSLogMessageVF', '_$s2os6LoggerV5erroryyAA12OSLogMessageVF', 
                        '_$s2os6LoggerV5faultyyAA12OSLogMessageVF', '_$s2os6LoggerV5traceyyAA12OSLogMessageVF', 
                        '_$s2os6LoggerV6noticeyyAA12OSLogMessageVF', '_$s2os6LoggerV7warningyyAA12OSLogMessageVF', 
-                       '_$s2os6LoggerV8criticalyyAA12OSLogMessageVF', '_$s2os6LoggerV9logObjectSo03OS_a1_C0Cvg', 
-                       '_$s2os6LoggerV9logObjectSo03OS_a1_C0CvpMV', '_$s2os6LoggerV9subsystem8categoryACSS_SStcfC', 
-                       '_$s2os6LoggerVACycfC', '_$s2os6LoggerVMa', '_$s2os6LoggerVMn', 
-                       '_$s2os6LoggerVN', '_$s2os6LoggerVyACSo03OS_A4_logCcfC', '_$s2os9serialize_2at5usingySS_Spys5UInt8VGzSpyypGSgztF', 
+                       '_$s2os6LoggerV8criticalyyAA12OSLogMessageVF', '_$s2os6LoggerV8disabledACvgZ', 
+                       '_$s2os6LoggerV8disabledACvpZMV', '_$s2os6LoggerV9isEnabled4typeSbSo0a5_log_E2_ta_tF', 
+                       '_$s2os6LoggerV9logObjectSo03OS_a1_C0Cvg', '_$s2os6LoggerV9logObjectSo03OS_a1_C0CvpMV', 
+                       '_$s2os6LoggerV9subsystem8categoryACSS_SStcfC', '_$s2os6LoggerVACycfC', 
+                       '_$s2os6LoggerVMa', '_$s2os6LoggerVMn', '_$s2os6LoggerVN', 
+                       '_$s2os6LoggerVyACSo03OS_A4_logCcfC', '_$s2os9serialize_2at5usingySS_Spys5UInt8VGzSpyypGSgztF', 
                        '_$sSS2osE20percentEscapedStringSSvg', '_$sSS2osE20percentEscapedStringSSvpMV', 
                        '_$sSo13os_log_type_ta0A0E4infoABvgZ', '_$sSo13os_log_type_ta0A0E4infoABvpZMV', 
                        '_$sSo13os_log_type_ta0A0E5debugABvgZ', '_$sSo13os_log_type_ta0A0E5debugABvpZMV', 

@@ -99,6 +99,10 @@ private:
     static void             AbortPMTransition ( thread_call_param_t whichDevice );
 
 #if !TARGET_OS_IPHONE
+    bool                    InquirePage80 ( SCSICmd_INQUIRY_StandardDataAll *   inqData );
+
+    bool                    InquireATATranslation ( void );
+
 	bool                    IsSMARTSupported ( UInt8 passThroughOpcode );
 #endif
 

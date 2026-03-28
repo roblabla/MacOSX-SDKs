@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ChronoUIServices.framework/Versions/A/ChronoUIServices'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16ChronoUIServices10LaunchTypeO11entitledUrlyAC10Foundation3URLVcACmFWC', 
                        '_$s16ChronoUIServices10LaunchTypeO3urlyAC10Foundation3URLVcACmFWC', 
                        '_$s16ChronoUIServices10LaunchTypeO4noneyA2CmFWC', '_$s16ChronoUIServices10LaunchTypeO8activityyACSo14NSUserActivityCcACmFWC', 

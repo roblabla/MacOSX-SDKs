@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PersonalSearch.framework/Versions/A/PersonalSearch'
-current-version: 3510.2.1
+current-version: 3520.84.2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14PersonalSearch0aB6ClientC10connection3XPC10XPCSessionCyKFTj', 
                        '_$s14PersonalSearch0aB6ClientC10connection3XPC10XPCSessionCyKFTq', 
                        '_$s14PersonalSearch0aB6ClientC10deactivateyyYaKFTj', '_$s14PersonalSearch0aB6ClientC10deactivateyyYaKFTjTu', 

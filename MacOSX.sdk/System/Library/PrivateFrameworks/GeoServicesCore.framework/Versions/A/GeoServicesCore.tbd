@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GeoServicesCore.framework/Versions/A/GeoServicesCore'
-current-version: 2027.22.10
+current-version: 2031.24.7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _GEOAbsoluteTimeIsGreaterThanZero, _GEOGetCountryConfigurationLog, 
                        _GEOGetCuratedCollectionsLog, _GEOGetLaunchLog, _GEOGetMonotonicTime, 
                        _GEOGetPOIBusynessLog, _GEOGetPlaceCardLayoutLog, _GEOGetPlaceRequestLog, 

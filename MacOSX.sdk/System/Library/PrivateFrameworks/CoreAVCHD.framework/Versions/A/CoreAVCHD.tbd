@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreAVCHD.framework/Versions/A/CoreAVCHD'
 current-version: 6000
 compatibility-version: 5600
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CAVCHCreateMediaContainer, _CAVCHDCopyClipInfoDictionary, 
                        _CAVCHDCopyClipLocationTable, _CAVCHDGetClipNumberFromFingerprint, 
                        _CAVCHDGetNumClips, _CAVCHDIsValidMediaContainerURL, _kCAVCHDClipInfoProperty_AVCHDDaylightSavingTimeFlag, 

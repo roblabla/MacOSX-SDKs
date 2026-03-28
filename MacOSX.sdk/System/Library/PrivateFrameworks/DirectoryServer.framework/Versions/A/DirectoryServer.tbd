@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DirectoryServer.framework/Versions/A/DirectoryServer'
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/DirectoryServer.framework/Frameworks/CFDirectoryServer.framework/Versions/A/CFDirectoryServer' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _DSCopyFQDNForSelf, _DSRunTask, _DSRunTaskAsync, _kDefaultLocaleName, 
                        _kKeyLocaleInterfaces, _kKeyNumLocalesUsedIn, _kLdapiNodeName, 
                        _kLdapiURI, _kLocaleConfigRecName, _kLocaleGroupPrefix, _kODAttributeTypeDNSDomain, 
@@ -15,10 +15,10 @@ exports:
     objc-ivars:      [ DSLog.asl, DSLog.logfd ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DirectoryServer.framework/Frameworks/CFDirectoryServer.framework/Versions/A/CFDirectoryServer'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _DSCStringCreate, _DSChangePasswordWithPolicy, _DSConfigCopyEnabledAuthMechs, 
                        _DSConfigCopyEnabledAuthMechsFromServer, _DSConfigCopyIdentityName, 
                        _DSConfigCopyServerComputerRecord, _DSConfigDisableAuthMech, 

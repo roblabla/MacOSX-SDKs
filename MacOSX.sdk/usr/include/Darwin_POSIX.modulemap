@@ -1,8 +1,12 @@
 module Darwin.POSIX {
   module aio {
     header "aio.h"
-    header "sys/aio.h"
     export *
+
+    module sys_aio {
+      header "sys/aio.h"
+      export *
+    }
   }
 
   module arpa {
@@ -20,9 +24,17 @@ module Darwin.POSIX {
 
   module dirent {
     header "dirent.h"
-    header "sys/dir.h"
-    header "sys/dirent.h"
     export *
+
+    module sys_dirent {
+      header "sys/dirent.h"
+      export *
+    }
+
+    module dir {
+      header "sys/dir.h"
+      export *
+    }
   }
 
   module dlfcn {
@@ -32,8 +44,12 @@ module Darwin.POSIX {
 
   module fcntl {
     header "fcntl.h"
-    header "sys/fcntl.h"
     export *
+
+    module sys_fcntl {
+      header "sys/fcntl.h"
+      export *
+    }
   }
 
   module fmtmsg {
@@ -121,8 +137,12 @@ module Darwin.POSIX {
 
   module poll {
     header "poll.h"
-    header "sys/poll.h"
     export *
+
+    module sys_poll {
+      header "sys/poll.h"
+      export *
+    }
   }
 
   module pthread {
@@ -173,8 +193,12 @@ module Darwin.POSIX {
 
   module spawn {
     header "spawn.h"
-    header "sys/spawn.h"
     export *
+
+    module sys_spawn {
+      header "sys/spawn.h"
+      export *
+    }
   }
 
   module strings {
@@ -367,8 +391,12 @@ module Darwin.POSIX {
 
   module syslog {
     header "syslog.h"
-    header "sys/syslog.h"
     export *
+
+    module sys_syslog {
+      header "sys/syslog.h"
+      export *
+    }
   }
 
   module tar {
@@ -378,8 +406,12 @@ module Darwin.POSIX {
 
   module termios {
     header "termios.h"
-    header "sys/termios.h"
     export *
+
+    module sys_termios {
+      header "sys/termios.h"
+      export *
+    }
   }
 
   module ulimit {

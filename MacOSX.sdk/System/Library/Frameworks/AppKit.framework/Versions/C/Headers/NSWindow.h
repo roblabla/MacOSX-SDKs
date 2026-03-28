@@ -729,19 +729,20 @@ typedef NSString * NSWindowTabbingIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 
 #pragma mark - Window Sharing
 
-/*!
-     @abstract Attempt to move window sharing (i.e. within a SharePlay session) from the receiver to another window. In response to this request, the user may choose to transfer sharing to the new window, or simply stop sharing the content.
+/**
+     Attempts to move window sharing (i.e. within a SharePlay session) from the receiver to another window. In response to this request, the user may choose to transfer sharing to the new window, or simply stop sharing the content.
+
+     In the event of a failed transfer request, a non-`nil` error contains details about the failure.
+
      @param window
         A window that is replacing the reciever in representing the user's current activity.
      @param completionHandler
         A completion block that is called after the request finishes.
-        @c error
-            In the event of a failed transfer request, a non-nil error contains details about the failure.
 */
 - (void)transferWindowSharingToWindow:(NSWindow *)window completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(macos(13.3));
 
-/*!
- @abstract Indicates whether the receiver is the subject of an active SharePlay sharing session.
+/**
+ Indicates whether the receiver is the subject of an active SharePlay sharing session.
  */
 @property (readonly) BOOL hasActiveWindowSharingSession API_AVAILABLE(macos(13.3));
 
@@ -816,8 +817,10 @@ typedef NSString * NSWindowTabbingIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 
 API_AVAILABLE(macos(14.0))
 @interface NSWindow (NSDisplayLink)
-/*
-    Returns a new display link whose callback will be invoked in-sync with the display the window is on. If the window is not on any display the callback will not be invoked.
+/**
+    Returns a new display link whose callback will be invoked in-sync with the display the window is on.
+    
+    If the window is not on any display the callback will not be invoked.
 */
 - (CADisplayLink *)displayLinkWithTarget:(id)target selector:(SEL)selector NS_SWIFT_NAME(displayLink(target:selector:));
 @end
@@ -891,8 +894,7 @@ API_AVAILABLE(macos(14.0))
 */
 - (void)window:(NSWindow *)window didDecodeRestorableState:(NSCoder *)state NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.7));
 
-/*! Preview representable activity items, used for sharing and collaboration.
-*/
+/// A collection of Preview-representable activity items, used for sharing and collaboration.
 - (NSArray<id<NSPreviewRepresentableActivityItem>> *_Nullable)previewRepresentableActivityItemsForWindow:(NSWindow *)window NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(13.2)) API_UNAVAILABLE(ios);
 
 /*! Method called to get the window to share once sharing is confirmed, after a request is initiated by requestSharingOfWindowUsingPreview:title:completionHandler:. Implement this on the delegate of the requesting window

@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libCellularDecoders.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -35,7 +35,7 @@ exports:
                        __ZTSNSt3__121__empty_non_own_stateIcEE, __ZTSNSt3__123__match_any_but_newlineIcEE, 
                        __ZTSNSt3__126__end_marked_subexpressionIcEE, __ZTSNSt3__128__begin_marked_subexpressionIcEE, 
                        __ZTSNSt3__16__loopIcEE, __ZTSNSt3__16__nodeIcEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ __Z15CSIboolAsStringb, __Z8asString12SmsTPPduType, __Z8asStringN19NetworkNotification16NotificationTypeE, 
                        __ZN10C2KVmnInfo16readVMNumberInfoERNSt3__16vectorIcNS0_9allocatorIcEEEERKNS1_IhNS2_IhEEEEmRiR14CSIPhoneNumber, 
                        __ZN10C2KVmnInfo25decodeSubparamEnhancedVMNERN3ctu13TextConverterE, 

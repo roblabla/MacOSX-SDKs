@@ -1,23 +1,23 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate'
 current-version: 4
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage', 
                        '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/vecLib' ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage'
-current-version: 630
+current-version: 632.100.6
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _Init_vImage, _SetvImageThreadCount, _SetvImageThreadState, 
                        _SetvImageVectorAvailable, __vImage_TempBuffer_Enable_Legacy, 
                        _kvImageConstDecodeArray0, _kvImageDecodeArray_16Q12Format, 
@@ -380,17 +380,17 @@ exports:
                        _vImageVerticalShear_Planar8, _vImageVerticalShear_PlanarF, 
                        _vImageVerticalShear_XRGB2101010W, _vImage_SILBuffer_Allocate_RGBAFFFF, 
                        _vImage_SILBuffer_Free_RGBAFFFF, _vImage_SILBuffer_Init_RGBAFFFF ]
-  - targets:         [ x86_64-macos, x86_64h-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64h-macos, arm64e-macos ]
     symbols:         [ _vImageGetMinimumGeometryTempBufferSize, _vImageGetMinimumTempBufferSizeForConvolution, 
                        _vImageGetMinimumTempBufferSizeForHistogram, _vImageGetMinimumTempBufferSizeForMinMax ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _APL_dgemm, _APL_dgemm_LU, _APL_dgemm_QR, _APL_dsyrk, _APL_dtrsm, 
                        _APL_sgemm, _APL_sgemm_LU, _APL_sgemm_QR, _APL_ssyrk, _APL_strsm, 
                        _APPLE_NTHREADS, _ATLU_DestroyThreadMemory, _BLASGetThreading, 
@@ -686,7 +686,7 @@ exports:
                        '_ztrmv$NEWLAPACK', '_ztrmv$NEWLAPACK$ILP64', _ztrmv_, '_ztrsm$NEWLAPACK', 
                        '_ztrsm$NEWLAPACK$ILP64', _ztrsm_, '_ztrsv$NEWLAPACK', '_ztrsv$NEWLAPACK$ILP64', 
                        _ztrsv_ ]
-  - targets:         [ x86_64-macos, x86_64h-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64h-macos, arm64e-macos ]
     symbols:         [ _CAXPY, _CAXPY_, _CCOPY, _CCOPY_, _CDOTC, _CDOTC_, _CDOTU, 
                        _CDOTU_, _CGBMV, _CGBMV_, _CGEMM, _CGEMM_, _CGEMV, _CGEMV_, 
                        _CGERC, _CGERC_, _CGERU, _CGERU_, _CHBMV, _CHBMV_, _CHEMM, 
@@ -748,7 +748,7 @@ exports:
                        _zher, _zher2, _zher2k, _zherk, _zhpmv, _zhpr, _zhpr2, _zrotg, 
                        _zscal, _zswap, _zsymm, _zsyr2k, _zsyrk, _ztbmv, _ztbsv, _ztpmv, 
                        _ztpsv, _ztrmm, _ztrmv, _ztrsm, _ztrsv ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ '_cblas_cgemm_spi$NEWLAPACK', '_cblas_cgemm_spi$NEWLAPACK$ILP64', 
                        '_cblas_cgemm_spi_mem_requirement$NEWLAPACK', '_cblas_cgemm_spi_mem_requirement$NEWLAPACK$ILP64', 
                        '_cblas_ctrsm_spi$NEWLAPACK', '_cblas_ctrsm_spi$NEWLAPACK$ILP64', 
@@ -768,15 +768,15 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBNNS.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     clients:         [ vecLib ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BNNSAffineGridSample, _BNNSApplyMultiheadAttention, _BNNSApplyMultiheadAttentionBackward, 
                        _BNNSArithmeticFilterApplyBackwardBatch, _BNNSArithmeticFilterApplyBatch, 
                        _BNNSBandPart, _BNNSBitTranspose, _BNNSClearNetwork, _BNNSClipByGlobalNorm, 
@@ -814,16 +814,17 @@ exports:
                        _BNNSFusedFilterApplyMultiInputBatch, _BNNSGather, _BNNSGatherND, 
                        _BNNSGetPointer, _BNNSGraphAnalyzeIRSize, _BNNSGraphCompileFromFile, 
                        _BNNSGraphCompileFromFile_v2, _BNNSGraphCompileMLIR, _BNNSGraphCompileOptionShareIOPointer, 
-                       _BNNSGraphCompileOptionsDestroy, _BNNSGraphCompileOptionsGetCompilationEnableSignposts, 
-                       _BNNSGraphCompileOptionsGetDeduplicationMode, _BNNSGraphCompileOptionsGetDownconvertMode, 
-                       _BNNSGraphCompileOptionsGetFileWriteFSyncBarrier, _BNNSGraphCompileOptionsGetGenerateDebugInfo, 
-                       _BNNSGraphCompileOptionsGetOptimizationPreference, _BNNSGraphCompileOptionsGetOutputFD, 
-                       _BNNSGraphCompileOptionsGetOutputPath, _BNNSGraphCompileOptionsGetPreallocateOutputFile, 
-                       _BNNSGraphCompileOptionsGetPredefinedOptimizations, _BNNSGraphCompileOptionsGetShapeBounding, 
-                       _BNNSGraphCompileOptionsGetTarget, _BNNSGraphCompileOptionsGetTargetSingleThread, 
-                       _BNNSGraphCompileOptionsGetUpconvertMode, _BNNSGraphCompileOptionsGetUserData, 
-                       _BNNSGraphCompileOptionsGetValidateMILFile, _BNNSGraphCompileOptionsGetWeightsFD, 
-                       _BNNSGraphCompileOptionsGetWeightsPath, _BNNSGraphCompileOptionsMakeDefault, 
+                       _BNNSGraphCompileOptionsDestroy, _BNNSGraphCompileOptionsGetBlockSize, 
+                       _BNNSGraphCompileOptionsGetCompilationEnableSignposts, _BNNSGraphCompileOptionsGetDeduplicationMode, 
+                       _BNNSGraphCompileOptionsGetDownconvertMode, _BNNSGraphCompileOptionsGetFileWriteFSyncBarrier, 
+                       _BNNSGraphCompileOptionsGetGenerateDebugInfo, _BNNSGraphCompileOptionsGetOptimizationPreference, 
+                       _BNNSGraphCompileOptionsGetOutputFD, _BNNSGraphCompileOptionsGetOutputPath, 
+                       _BNNSGraphCompileOptionsGetPreallocateOutputFile, _BNNSGraphCompileOptionsGetPredefinedOptimizations, 
+                       _BNNSGraphCompileOptionsGetShapeBounding, _BNNSGraphCompileOptionsGetTarget, 
+                       _BNNSGraphCompileOptionsGetTargetSingleThread, _BNNSGraphCompileOptionsGetUpconvertMode, 
+                       _BNNSGraphCompileOptionsGetUserData, _BNNSGraphCompileOptionsGetValidateMILFile, 
+                       _BNNSGraphCompileOptionsGetWeightsFD, _BNNSGraphCompileOptionsGetWeightsPath, 
+                       _BNNSGraphCompileOptionsMakeDefault, _BNNSGraphCompileOptionsSetBlockSize, 
                        _BNNSGraphCompileOptionsSetCompilationEnableSignposts, _BNNSGraphCompileOptionsSetDeduplicationMode, 
                        _BNNSGraphCompileOptionsSetDownconvertMode, _BNNSGraphCompileOptionsSetFileWriteFSyncBarrier, 
                        _BNNSGraphCompileOptionsSetGenerateDebugInfo, _BNNSGraphCompileOptionsSetInputFormat, 
@@ -868,21 +869,20 @@ exports:
                        _BNNSGraphGetPackageVersion, _BNNSGraphGetPerformanceDataSize, 
                        _BNNSGraphGetSize, _BNNSGraphGetTensor, _BNNSGraphGetTensorDescriptor, 
                        _BNNSGraphGetTensorDescriptor_v2, _BNNSGraphGetUserData, _BNNSGraphGetWorkspaceSize, 
-                       _BNNSGraphGetWorkspaceSize_v2, _BNNSGraphIRtoDot_v2, _BNNSGraphOptionsCreateDefault, 
-                       _BNNSGraphOptionsSetDebugInfo, _BNNSGraphOptionsSetDownconvertMode, 
-                       _BNNSGraphOptionsSetOptimizationPreference, _BNNSGraphOptionsSetOutputPath, 
-                       _BNNSGraphOptionsSetPredefinedOptimizations, _BNNSGraphOptionsSetSingleThread, 
-                       _BNNSGraphTensorFillStrides, _BNNSGumbelMax, _BNNSInitGumbel, 
-                       _BNNSLossFilterApplyBackwardBatch, _BNNSLossFilterApplyBatch, 
-                       _BNNSMatMul, _BNNSMatMulWorkspaceSize, _BNNSNDArrayConvolutionSparsify, 
-                       _BNNSNDArrayConvolutionSparsifySparseCOO, _BNNSNDArrayFullyConnectedSparsify, 
-                       _BNNSNDArrayFullyConnectedSparsifySparseCOO, _BNNSNDArrayFullyConnectedSparsifySparseCSR, 
-                       _BNNSNDArrayGetDataSize, _BNNSNearestNeighborsGetInfo, _BNNSNearestNeighborsLoad, 
-                       _BNNSNormalizationFilterApplyBackwardBatch, _BNNSNormalizationFilterApplyBatch, 
-                       _BNNSOptimizerStep, _BNNSPermuteFilterApplyBackwardBatch, 
+                       _BNNSGraphGetWorkspaceSize_v2, _BNNSGraphIRtoDot_v2, _BNNSGraphIRtoModelExplorerDict, 
+                       _BNNSGraphOptionsCreateDefault, _BNNSGraphOptionsSetDebugInfo, 
+                       _BNNSGraphOptionsSetDownconvertMode, _BNNSGraphOptionsSetOptimizationPreference, 
+                       _BNNSGraphOptionsSetOutputPath, _BNNSGraphOptionsSetPredefinedOptimizations, 
+                       _BNNSGraphOptionsSetSingleThread, _BNNSGraphTensorFillStrides, 
+                       _BNNSGumbelMax, _BNNSInitGumbel, _BNNSLossFilterApplyBackwardBatch, 
+                       _BNNSLossFilterApplyBatch, _BNNSMatMul, _BNNSMatMulWorkspaceSize, 
+                       _BNNSNDArrayConvolutionSparsify, _BNNSNDArrayConvolutionSparsifySparseCOO, 
+                       _BNNSNDArrayFullyConnectedSparsify, _BNNSNDArrayFullyConnectedSparsifySparseCOO, 
+                       _BNNSNDArrayFullyConnectedSparsifySparseCSR, _BNNSNDArrayGetDataSize, 
+                       _BNNSNearestNeighborsGetInfo, _BNNSNearestNeighborsLoad, _BNNSNormalizationFilterApplyBackwardBatch, 
+                       _BNNSNormalizationFilterApplyBatch, _BNNSOptimizerStep, _BNNSPermuteFilterApplyBackwardBatch, 
                        _BNNSPoolingFilterApplyBackwardBatch, _BNNSPoolingFilterApplyBackwardBatchEx, 
                        _BNNSPoolingFilterApplyBatch, _BNNSPoolingFilterApplyBatchEx, 
-                       _BNNSPose384InitFromPointers, _BNNSPoseExecute, _BNNSPoseInitFromPointers, 
                        _BNNSRandomFillCategoricalFloat, _BNNSRandomFillNormalFloat, 
                        _BNNSRandomFillUniformFloat, _BNNSRandomFillUniformInt, _BNNSRandomGeneratorGetState, 
                        _BNNSRandomGeneratorSetState, _BNNSRandomGeneratorStateSize, 
@@ -900,9 +900,8 @@ exports:
                        __ZN4bnns12GraphOptionsD0Ev, __ZN4bnns12GraphOptionsD1Ev, 
                        __ZN4bnns12GraphOptionsD2Ev, __ZN4bnns13RepackWeightsEONSt3__110unique_ptrIN3MIL9IRProgramENS0_14default_deleteIS3_EEEE12bnns_graph_t28bnns_graph_compile_options_t, 
                        __ZN4bnns13RepackWeightsERKN3MIL9IRProgramE12bnns_graph_t28bnns_graph_compile_options_t, 
-                       __ZN4bnns14RegisterOpsetsERN3MIL10MILContextE, __ZN4bnns15PoseInitFromMILEPvPKN3MIL9IRProgramE, 
-                       __ZNK4bnns12GraphOptions17get_single_threadEv, __ZNK4bnns12GraphOptions23get_generate_debug_infoEv, 
-                       __ZNK4bnns12GraphOptions28get_predefined_optimizationsEv, 
+                       __ZN4bnns14RegisterOpsetsERN3MIL10MILContextE, __ZNK4bnns12GraphOptions17get_single_threadEv, 
+                       __ZNK4bnns12GraphOptions23get_generate_debug_infoEv, __ZNK4bnns12GraphOptions28get_predefined_optimizationsEv, 
                        __ZTIN4bnns12GraphOptionsE, __ZTSN4bnns12GraphOptionsE, __ZTVN4bnns12GraphOptionsE, 
                        __bnns_graph_builder_finalize, __bnns_graph_builder_make, 
                        __bnns_graph_builder_register_abs, __bnns_graph_builder_register_acos, 
@@ -965,15 +964,16 @@ exports:
                        __bnns_graph_builder_register_threshold, __bnns_graph_builder_register_thresholded_relu, 
                        __bnns_graph_builder_register_topk, __bnns_graph_builder_register_transpose, 
                        __bnns_graph_builder_register_unsqueeze, __bnns_graph_builder_register_xor, 
-                       __bnns_graph_builder_tensor_from_tensor_ref ]
+                       __bnns_graph_builder_tensor_from_tensor_ref, __bnns_hgemm, 
+                       __bnns_hgemm_mem_requirement ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_cbbcsd$NEWLAPACK', '_cbbcsd$NEWLAPACK$ILP64', '_cbdsqr$NEWLAPACK', 
                        '_cbdsqr$NEWLAPACK$ILP64', _cbdsqr_, '_cgbbrd$NEWLAPACK', 
                        '_cgbbrd$NEWLAPACK$ILP64', _cgbbrd_, '_cgbcon$NEWLAPACK', 
@@ -2816,7 +2816,7 @@ exports:
                        '_zunmtr$NEWLAPACK$ILP64', _zunmtr_, '_zupgtr$NEWLAPACK', 
                        '_zupgtr$NEWLAPACK$ILP64', _zupgtr_, '_zupmtr$NEWLAPACK', 
                        '_zupmtr$NEWLAPACK$ILP64', _zupmtr_ ]
-  - targets:         [ x86_64-macos, x86_64h-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64h-macos, arm64e-macos ]
     symbols:         [ _CBDSQR, _CBDSQR_, _CGBBRD, _CGBBRD_, _CGBCON, _CGBCON_, _CGBEQU, 
                        _CGBEQUB, _CGBEQUB_, _CGBEQU_, _CGBRFS, _CGBRFS_, _CGBSV, 
                        _CGBSVX, _CGBSVX_, _CGBSV_, _CGBTF2, _CGBTF2_, _CGBTRF, _CGBTRF_, 
@@ -3455,15 +3455,15 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLinearAlgebra.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     clients:         [ vecLib ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _la_add_attributes, _la_diagonal_matrix_from_vector, _la_difference, 
                        _la_elementwise_product, _la_identity_matrix, _la_inner_product, 
                        _la_matrix_cols, _la_matrix_from_double_buffer, _la_matrix_from_double_buffer_nocopy, 
@@ -3480,29 +3480,23 @@ exports:
                        _la_vector_to_double_buffer, _la_vector_to_float_buffer ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libQuadrature.dylib'
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ vecLib ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _quadrature_integrate ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparse.dylib'
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ vecLib ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _SparseRankTwoInitialSparseFactor, _SparseRankTwoUpdateSparseCleanup, 
                        _SparseRankTwoUpdateSparseFactor, _SparseRankTwoUpdateSparseSolve, 
                        __SparseAMD, __SparseAMDWorkspaceSize, __SparseAMDWorkspaceSizeWithOverflowCheck, 
@@ -3857,15 +3851,15 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparseBLAS.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Sparse, vecLib ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _sparse_commit, _sparse_elementwise_norm_double, _sparse_elementwise_norm_double_complex, 
                        _sparse_elementwise_norm_float, _sparse_elementwise_norm_float_complex, 
                        _sparse_extract_block_double, _sparse_extract_block_double_complex, 
@@ -3932,11 +3926,11 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvDSP.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _vDSP_DCT_CreateSetup, _vDSP_DCT_Execute, _vDSP_DFT_CreateSetup, 
                        _vDSP_DFT_DestroySetup, _vDSP_DFT_DestroySetupD, _vDSP_DFT_Execute, 
                        _vDSP_DFT_ExecuteD, _vDSP_DFT_Interleaved_CreateSetup, _vDSP_DFT_Interleaved_CreateSetupD, 
@@ -4053,12 +4047,12 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib'
-current-version: 1123.40.1
+current-version: 1126.100.7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _VVACOS, _VVACOSF, _VVACOSF_, _VVACOSH, _VVACOSHF, _VVACOSHF_, 
                        _VVACOSH_, _VVACOS_, _VVASIN, _VVASINF, _VVASINF_, _VVASINH, 
                        _VVASINHF, _VVASINHF_, _VVASINH_, _VVASIN_, _VVATAN, _VVATAN2, 
@@ -4123,7 +4117,7 @@ exports:
                        _vvsqrtf, _vvsqrtf_, _vvtan, _vvtan_, _vvtanf, _vvtanf_, _vvtanh, 
                        _vvtanh_, _vvtanhf, _vvtanhf_, _vvtanpi, _vvtanpi_, _vvtanpif, 
                        _vvtanpif_ ]
-  - targets:         [ x86_64-macos, x86_64h-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64h-macos, arm64e-macos ]
     symbols:         [ ___cblas_isamax, ___cblas_sasum, ___cblas_saxpy, ___cblas_sgemm, 
                        ___cblas_sgemv, ___cblas_srot, ___cblas_sscal, ___cblas_sswap, 
                        _dMultMatMat_16x16, _dMultMatMat_32x32, _dMultMatMat_4x4, 
@@ -4174,16 +4168,16 @@ exports:
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/vecLib'
-current-version: 1123.40.1
+current-version: 1126.100.7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Accelerate ]
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib', 
                        '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBNNS.dylib', 
                        '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib', 

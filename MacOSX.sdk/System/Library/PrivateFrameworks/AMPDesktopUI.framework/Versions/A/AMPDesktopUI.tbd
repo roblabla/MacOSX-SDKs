@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AMPDesktopUI.framework/Versions/A/AMPDesktopUI'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12AMPDesktopUI10TrackTableC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s12AMPDesktopUI10TrackTableC5coderACSgSo7NSCoderC_tcfc', 
                        '_$s12AMPDesktopUI10TrackTableC5frameACSo6CGRectV_tcfC', '_$s12AMPDesktopUI10TrackTableC5frameACSo6CGRectV_tcfc', 
@@ -541,6 +541,9 @@ exports:
                        '_$sSo27AMPLargeProductHeaderLockupCMa', '_$sSo28NotificationWindowControllerC12AMPDesktopUIE02isB6LoadedSbvg', 
                        '_$sSo28NotificationWindowControllerC12AMPDesktopUIE04loadB0yyF', 
                        '_$sSo28NotificationWindowControllerC12AMPDesktopUIE13windowDidLoadyyF', 
+                       '_$sSo30AMPEditingPlaylistHeaderLockupC12AMPDesktopUIE17titleVisualOffsetSdvg', 
+                       '_$sSo30AMPEditingPlaylistHeaderLockupC12AMPDesktopUIE17titleVisualOffsetSdvpMV', 
+                       '_$sSo30AMPEditingPlaylistHeaderLockupC12AMPDesktopUIE17titleVisualOffsetSdvpWvd', 
                        '_$sSo30AMPEditingPlaylistHeaderLockupC12AMPDesktopUIE5coderABSgSo7NSCoderC_tcfC', 
                        '_$sSo30AMPEditingPlaylistHeaderLockupC12AMPDesktopUIE5coderABSgSo7NSCoderC_tcfc', 
                        '_$sSo30AMPEditingPlaylistHeaderLockupC12AMPDesktopUIE5frameABSo6CGRectV_tcfC', 
@@ -549,7 +552,9 @@ exports:
                        '_$sSo30AMPEditingPlaylistHeaderLockupC12AMPDesktopUIE9viewModelSo0abcdH0_pSgvpMV', 
                        '_$sSo30AMPEditingPlaylistHeaderLockupC12AMPDesktopUIE9viewModelSo0abcdH0_pSgvpWvd', 
                        '_$sSo30AMPEditingPlaylistHeaderLockupC12AMPDesktopUIE9viewModelSo0abcdH0_pSgvs', 
-                       '_$sSo30AMPEditingPlaylistHeaderLockupCMa', _AMPVolumeSliderAppearance, 
+                       '_$sSo30AMPEditingPlaylistHeaderLockupCMa', '_$sSo34NSAttributedStringFormattingHelperC12AMPDesktopUIEABycfC', 
+                       '_$sSo34NSAttributedStringFormattingHelperC12AMPDesktopUIEABycfc', 
+                       '_$sSo34NSAttributedStringFormattingHelperCMa', _AMPVolumeSliderAppearance, 
                        _AMPVolumeSliderDarkAppearance, _AssignLayerImageContents, 
                        _CAEncodeAllLayerTrees, _ConvertTimestampToSeconds, _CreateShadowLayer, 
                        _GetContentsPixelDimensions, _GetImageLayerInset, _GetResultingFavoritingStateForClick, 
@@ -598,17 +603,19 @@ exports:
                        AMPSyncTaskScheduler, AMPTrackGridLockup, AMPTrackSectionModel, 
                        AMPTrackTableLockup, AMPTracklistFooterLockup, AMPVibrantContainerView, 
                        AMPVideoDetailHeaderLockup, AMPVideoPrerollLockup, AMPViewByOption, 
-                       AMPViewController, AMPViewableByMenuHelper, ActionTimer, AlbumDetailLockup, 
-                       AppColors, AppNotificationCenter, BadgeStackLockup, ContainerView, 
-                       ContainerViewController, DefaultArtwork, DualMaskedView, FloatingHeaderSupportingCollectionView, 
+                       AMPViewController, AMPViewableByMenuHelper, AMPWelcomeViewController, 
+                       AMPWelcomeViewTemplateController, AMPWhatsNewViewController, 
+                       ActionTimer, AlbumDetailLockup, AppColors, AppNotificationCenter, 
+                       BadgeStackLockup, ContainerView, ContainerViewController, 
+                       DefaultArtwork, DualMaskedView, FloatingHeaderSupportingCollectionView, 
                        IdleActions, ImageDataCache, ImageMenuItemView, KeyColorButton, 
                        LibraryCreditsLockupSectionModel, LoadingViewController, MarqueeView, 
-                       Metrics, MovieDetailLockup, NSLayoutPinningConstraint, NSViewSpy, 
-                       NSWindowCatchBadSheetClosing, NotificationWindowController, 
-                       OTTColorView, RatingControl, SimpleListLockup, TVShowDetailLockup, 
-                       TempAppKitSPI, TestWindowController, UXID, UXItem, UXItemSection, 
-                       UXItemSectionList, VideoHUDAudioMenuItem, VideoHUDAudioMenuSection, 
-                       VideoHUDMoreBrickLockupModel, VideoHUDPlaybackDestinationItem, 
+                       Metrics, MovieDetailLockup, NSAttributedStringFormattingHelper, 
+                       NSLayoutPinningConstraint, NSViewSpy, NSWindowCatchBadSheetClosing, 
+                       NotificationWindowController, OTTColorView, RatingControl, 
+                       SimpleListLockup, TVShowDetailLockup, TempAppKitSPI, TestWindowController, 
+                       UXID, UXItem, UXItemSection, UXItemSectionList, VideoHUDAudioMenuItem, 
+                       VideoHUDAudioMenuSection, VideoHUDMoreBrickLockupModel, VideoHUDPlaybackDestinationItem, 
                        ViewSpyPropertySection, VizPackage, _AllCapsStringTransformer, 
                        _TtC12AMPDesktopUI10TrackTable, _TtC12AMPDesktopUI15PlayStateButton, 
                        _TtC12AMPDesktopUI15TracklistLockup, _TtC12AMPDesktopUI16AMPArtworkLockup, 

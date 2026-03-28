@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UserNotificationsServices.framework/Versions/A/UserNotificationsServices'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s25UserNotificationsServices0A12NotificationV029bundleIdentifierFromSpotlightF0ySSSgSSFZ', 
                        '_$s25UserNotificationsServices0A12NotificationV030requestIdentifierFromSpotlightF0ySSSgSSFZ', 
                        '_$s25UserNotificationsServices0A12NotificationV10IdentifierV11descriptionSSvg', 
@@ -205,6 +205,10 @@ exports:
                        '_$s25UserNotificationsServices0A12NotificationV14LegacyCategoryVSeAAMc', 
                        '_$s25UserNotificationsServices0A12NotificationV14attributedBodySSSgvg', 
                        '_$s25UserNotificationsServices0A12NotificationV14attributedBodySSSgvpMV', 
+                       '_$s25UserNotificationsServices0A12NotificationV14hasOneTimeCodeSbSgvM', 
+                       '_$s25UserNotificationsServices0A12NotificationV14hasOneTimeCodeSbSgvg', 
+                       '_$s25UserNotificationsServices0A12NotificationV14hasOneTimeCodeSbSgvpMV', 
+                       '_$s25UserNotificationsServices0A12NotificationV14hasOneTimeCodeSbSgvs', 
                        '_$s25UserNotificationsServices0A12NotificationV14priorityStatusAA0d8PriorityF0OSgvM', 
                        '_$s25UserNotificationsServices0A12NotificationV14priorityStatusAA0d8PriorityF0OSgvg', 
                        '_$s25UserNotificationsServices0A12NotificationV14priorityStatusAA0d8PriorityF0OSgvpMV', 
@@ -498,6 +502,28 @@ exports:
                        '_$s25UserNotificationsServices25NotificationSummaryStatusOSQAAMc', 
                        '_$s25UserNotificationsServices25NotificationSummaryStatusOSYAAMc', 
                        '_$s25UserNotificationsServices25NotificationSummaryStatusOSeAAMc', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderMp', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderP12contentTitleSSSgvgTj', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderP12contentTitleSSSgvgTq', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderP12customHeaderSSSgvgTj', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderP12customHeaderSSSgvgTq', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderP14attributedBodySo18NSAttributedStringCSgvgTj', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderP14attributedBodySo18NSAttributedStringCSgvgTq', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderP15contentSubtitleSSSgvgTj', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderP15contentSubtitleSSSgvgTq', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderP17sourceDisplayNameSSSgvgTj', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderP17sourceDisplayNameSSSgvgTq', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderP22unCommunicationContextSo015_UNNotificationhI0CSgvgTj', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderP22unCommunicationContextSo015_UNNotificationhI0CSgvgTq', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderP4bodySSSgvgTj', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderP4bodySSSgvgTq', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderPAAE11derivedBodySo18NSAttributedStringCSgvg', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderPAAE11derivedBodySo18NSAttributedStringCSgvpMV', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderPAAE12derivedTitleSSSgvg', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderPAAE12derivedTitleSSSgvpMV', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderPAAE15derivedSubtitleSSSgvg', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderPAAE15derivedSubtitleSSSgvpMV', 
+                       '_$s25UserNotificationsServices26NotificationContentBuilderTL', 
                        '_$s25UserNotificationsServices26NotificationPriorityStatusO02isE0yA2CmFWC', 
                        '_$s25UserNotificationsServices26NotificationPriorityStatusO05isNotE0yA2CmFWC', 
                        '_$s25UserNotificationsServices26NotificationPriorityStatusO10ineligibleyA2CmFWC', 

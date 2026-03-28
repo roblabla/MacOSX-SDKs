@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libcurl.4.dylib'
 current-version: 9
 compatibility-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _curl_easy_cleanup, _curl_easy_duphandle, _curl_easy_escape, 
                        _curl_easy_getinfo, _curl_easy_header, _curl_easy_init, _curl_easy_nextheader, 
                        _curl_easy_option_by_id, _curl_easy_option_by_name, _curl_easy_option_next, 

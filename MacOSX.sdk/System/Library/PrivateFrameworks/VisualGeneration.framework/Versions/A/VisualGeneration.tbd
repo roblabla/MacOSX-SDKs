@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/VisualGeneration.framework/Versions/A/VisualGeneration'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation4UUIDV16VisualGeneration27RadarDescriptionConvertibleADMc', 
                        '_$s10Foundation4UUIDV16VisualGeneration27RadarDescriptionConvertibleADWP', 
                        '_$s13DiffusionBase010AdapatableA16PipelineProtocolMp', '_$s13DiffusionBase010AdapatableA16PipelineProtocolPAA0abdE0Tb', 
@@ -488,25 +486,12 @@ exports:
                        '_$s13DiffusionBase0A11ImageResultV18emojiHasBackgroundSbSgvg', 
                        '_$s13DiffusionBase0A11ImageResultV18emojiHasBackgroundSbSgvpMV', 
                        '_$s13DiffusionBase0A11ImageResultVMa', '_$s13DiffusionBase0A11ImageResultVMn', 
-                       '_$s13DiffusionBase0A11ImageResultVN', '_$s13DiffusionBase0aB10XLPipelineV11textEncoder0D8Encoder24unet0G7Refiner7decoder7encoder12reduceMemoryAcA04TextE7XLModel_pSg_AlA4UnetVANSgAA7DecoderVAA0E0VSgSbtcfC', 
-                       '_$s13DiffusionBase0aB10XLPipelineV11textEncoderAA04TextE7XLModel_pSgvpfi', 
+                       '_$s13DiffusionBase0A11ImageResultVN', '_$s13DiffusionBase0aB10XLPipelineV11textEncoderAA04TextE7XLModel_pSgvpfi', 
                        '_$s13DiffusionBase0aB10XLPipelineV11unetRefinerAA4UnetVSgvpfi', 
                        '_$s13DiffusionBase0aB10XLPipelineV12reduceMemorySbvpfi', 
                        '_$s13DiffusionBase0aB10XLPipelineV12textEncoder2AA18TextEncoderXLModel_pSgvpfi', 
-                       '_$s13DiffusionBase0aB10XLPipelineV13loadResourcesyyKF', '_$s13DiffusionBase0aB10XLPipelineV14decodeToImages_13configuration20inferenceDiagnosticsSayAA0A11ImageResultVSgGSay6CoreML13MLShapedArrayVySfGG_AA21PipelineConfigurationVAQ014InferenceFrameiQ0VSgtYaKF', 
-                       '_$s13DiffusionBase0aB10XLPipelineV14decodeToImages_13configuration20inferenceDiagnosticsSayAA0A11ImageResultVSgGSay6CoreML13MLShapedArrayVySfGG_AA21PipelineConfigurationVAQ014InferenceFrameiQ0VSgtYaKFTu', 
-                       '_$s13DiffusionBase0aB10XLPipelineV14generateImages13configuration17requestIdentifier12generationID19diagnosticsAccessor15progressHandlerSayAA0A11ImageResultVSgGAA21PipelineConfigurationV_10Foundation4UUIDVArA020InferenceDiagnosticsL0VSgzSbAA0Q8ProgressVXEtYaKF', 
-                       '_$s13DiffusionBase0aB10XLPipelineV14generateImages13configuration17requestIdentifier12generationID19diagnosticsAccessor15progressHandlerSayAA0A11ImageResultVSgGAA21PipelineConfigurationV_10Foundation4UUIDVArA020InferenceDiagnosticsL0VSgzSbAA0Q8ProgressVXEtYaKFTu', 
-                       '_$s13DiffusionBase0aB10XLPipelineV15unloadResourcesyyF', 
-                       '_$s13DiffusionBase0aB10XLPipelineV16prewarmResourcesyyKF', 
                        '_$s13DiffusionBase0aB10XLPipelineV7encoderAA7EncoderVSgvpfi', 
-                       '_$s13DiffusionBase0aB10XLPipelineVAA0aB16PipelineProtocolAAMc', 
-                       '_$s13DiffusionBase0aB10XLPipelineVAA0aB16PipelineProtocolAAWP', 
-                       '_$s13DiffusionBase0aB10XLPipelineVAA16ResourceManagingAAMc', 
-                       '_$s13DiffusionBase0aB10XLPipelineVAA16ResourceManagingAAWP', 
-                       '_$s13DiffusionBase0aB10XLPipelineVMa', '_$s13DiffusionBase0aB10XLPipelineVMn', 
-                       '_$s13DiffusionBase0aB10XLPipelineVN', '_$s13DiffusionBase0aB16PipelineProtocolMp', 
-                       '_$s13DiffusionBase0aB16PipelineProtocolPAA16ResourceManagingTb', 
+                       '_$s13DiffusionBase0aB16PipelineProtocolMp', '_$s13DiffusionBase0aB16PipelineProtocolPAA16ResourceManagingTb', 
                        '_$s13DiffusionBase0aB16PipelineProtocolPAAE14canSafetyCheckSbvg', 
                        '_$s13DiffusionBase0aB16PipelineProtocolPAAE14canSafetyCheckSbvpMV', 
                        '_$s13DiffusionBase0aB16PipelineProtocolTL', '_$s13DiffusionBase0aB3RNGO21__derived_enum_equalsySbAC_ACtFZ', 
@@ -2597,6 +2582,10 @@ exports:
                        '_$s16VisualGeneration20GenerativePlaygroundC26AssignmentConfiguration_V2V24genericCharacterFilenameSSSgvg', 
                        '_$s16VisualGeneration20GenerativePlaygroundC26AssignmentConfiguration_V2V24genericCharacterFilenameSSSgvpMV', 
                        '_$s16VisualGeneration20GenerativePlaygroundC26AssignmentConfiguration_V2V24genericCharacterFilenameSSSgvs', 
+                       '_$s16VisualGeneration20GenerativePlaygroundC26AssignmentConfiguration_V2V25discreteRequestIdentifier10Foundation4UUIDVSgvM', 
+                       '_$s16VisualGeneration20GenerativePlaygroundC26AssignmentConfiguration_V2V25discreteRequestIdentifier10Foundation4UUIDVSgvg', 
+                       '_$s16VisualGeneration20GenerativePlaygroundC26AssignmentConfiguration_V2V25discreteRequestIdentifier10Foundation4UUIDVSgvpMV', 
+                       '_$s16VisualGeneration20GenerativePlaygroundC26AssignmentConfiguration_V2V25discreteRequestIdentifier10Foundation4UUIDVSgvs', 
                        '_$s16VisualGeneration20GenerativePlaygroundC26AssignmentConfiguration_V2V26personDescriptionDirectiveSSSgvM', 
                        '_$s16VisualGeneration20GenerativePlaygroundC26AssignmentConfiguration_V2V26personDescriptionDirectiveSSSgvg', 
                        '_$s16VisualGeneration20GenerativePlaygroundC26AssignmentConfiguration_V2V26personDescriptionDirectiveSSSgvpMV', 
@@ -3498,6 +3487,10 @@ exports:
                        '_$s16VisualGeneration22KeyboardEmojiGeneratorC26AssignmentConfiguration_V2V19allowImageRejectionSbvg', 
                        '_$s16VisualGeneration22KeyboardEmojiGeneratorC26AssignmentConfiguration_V2V19allowImageRejectionSbvpMV', 
                        '_$s16VisualGeneration22KeyboardEmojiGeneratorC26AssignmentConfiguration_V2V19allowImageRejectionSbvs', 
+                       '_$s16VisualGeneration22KeyboardEmojiGeneratorC26AssignmentConfiguration_V2V25discreteRequestIdentifier10Foundation4UUIDVSgvM', 
+                       '_$s16VisualGeneration22KeyboardEmojiGeneratorC26AssignmentConfiguration_V2V25discreteRequestIdentifier10Foundation4UUIDVSgvg', 
+                       '_$s16VisualGeneration22KeyboardEmojiGeneratorC26AssignmentConfiguration_V2V25discreteRequestIdentifier10Foundation4UUIDVSgvpMV', 
+                       '_$s16VisualGeneration22KeyboardEmojiGeneratorC26AssignmentConfiguration_V2V25discreteRequestIdentifier10Foundation4UUIDVSgvs', 
                        '_$s16VisualGeneration22KeyboardEmojiGeneratorC26AssignmentConfiguration_V2V26personDescriptionDirectiveSSSgvM', 
                        '_$s16VisualGeneration22KeyboardEmojiGeneratorC26AssignmentConfiguration_V2V26personDescriptionDirectiveSSSgvg', 
                        '_$s16VisualGeneration22KeyboardEmojiGeneratorC26AssignmentConfiguration_V2V26personDescriptionDirectiveSSSgvpMV', 

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppPlaceholderSync.framework/Versions/A/AppPlaceholderSync'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s18AppPlaceholderSync0C4ItemC10identifier10Foundation4UUIDVvg', 
                        '_$s18AppPlaceholderSync0C4ItemC10identifier10Foundation4UUIDVvpMV', 
                        '_$s18AppPlaceholderSync0C4ItemC11descriptionSSvg', '_$s18AppPlaceholderSync0C4ItemC11descriptionSSvpMV', 

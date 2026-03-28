@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// `SBElementArray` defines methods beyond those of
 /// <doc://com.apple.documentation/documentation/foundation/nsarray> for
 /// obtaining individual objects. In addition to
-/// <doc://com.apple.documentation/documentation/foundation/nsarray/1417555-objectatindex>,
+/// <doc://com.apple.documentation/documentation/Foundation/NSArray/object(at:)>,
 /// `SBElementArray` also defines ``SBElementArray/objectWithName:``,
 ///  ``SBElementArray/objectWithID:``, and ``SBElementArray/objectAtLocation:``.
 ///
@@ -39,7 +39,7 @@ API_AVAILABLE(macos(10.5), macCatalyst(13.0))
 /// Returns the object in the array with the given name.
 ///
 /// This method is provided as an alternative
-/// to <doc://com.apple.documentation/documentation/foundation/nsarray/1417555-objectatindex>
+/// to <doc://com.apple.documentation/documentation/Foundation/NSArray/object(at:)>
 /// for applications where a name is available instead of (or in addition to) an
 /// index. A name is generally more stable than an index. For example, it is
 /// typically more useful to identify a mailbox in Mail by its name than by its
@@ -55,7 +55,7 @@ API_AVAILABLE(macos(10.5), macCatalyst(13.0))
 /// Returns the object in the array with the given identifier.
 ///
 /// This method is provided as an alternative to
-/// <doc://com.apple.documentation/documentation/foundation/nsarray/1417555-objectatindex>
+/// <doc://com.apple.documentation/documentation/Foundation/NSArray/object(at:)>
 /// for applications where an identifier is available instead of (or in addition
 /// to) an index. A unique ID is generally more stable than an index. For
 /// example, it may be more useful to identify a contact in Address Book by its
@@ -72,7 +72,7 @@ API_AVAILABLE(macos(10.5), macCatalyst(13.0))
 /// Returns the object at the given location in the receiver.
 ///
 /// This method is a generalization of
-/// <doc://com.apple.documentation/documentation/foundation/nsarray/1417555-objectatindex>
+/// <doc://com.apple.documentation/documentation/Foundation/NSArray/object(at:)>
 /// for applications where the "index" is not simply an integer. For example,
 /// Finder can specify objects using a
 /// <doc://com.apple.documentation/documentation/foundation/nsurl> object as a

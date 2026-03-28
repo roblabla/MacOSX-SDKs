@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/CoreAudioKit.framework/Versions/A/CoreAudioKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12CoreAudioKit21AUGenericViewInternalC010collectionE0_024willDisplaySupplementaryE014forElementKind2atySo012NSCollectionE0C_So6NSViewCSS10Foundation9IndexPathVtF', 
                        '_$s12CoreAudioKit21AUGenericViewInternalC010collectionE0_11willDisplay22forRepresentedObjectAtySo012NSCollectionE0C_So0nE4ItemC10Foundation9IndexPathVtF', 
                        '_$s12CoreAudioKit21AUGenericViewInternalC02auB4UnitSo07AUAudioH0CSgvMTj', 
@@ -44,20 +44,27 @@ exports:
                        '_$s12CoreAudioKit21AUGenericViewInternalCMa', '_$s12CoreAudioKit21AUGenericViewInternalCMn', 
                        '_$s12CoreAudioKit21AUGenericViewInternalCMo', '_$s12CoreAudioKit21AUGenericViewInternalCMu', 
                        '_$s12CoreAudioKit21AUGenericViewInternalCN', '_$s12CoreAudioKit21AUGenericViewInternalCfD', 
-                       _CAUI_fetchRemoteAUv2ViewController, _CAUI_fetchRemoteAUv3ViewController, 
-                       _kEQViewGraphSizeChangedNotification, _kEQViewParameterChangedNotification, 
-                       _kFilterControlSelectedNotification, _kGraphViewBeginGestureNotification, 
-                       _kGraphViewEndGestureNotification, _kTooltipTextBeganEditingNotification, 
-                       _kTooltipTextValueChangedNotification, _logValueForNumber ]
+                       '_$sSo27CANetworkMIDIViewControllerC12CoreAudioKitE11viewDidLoadyyF', 
+                       '_$sSo27CANetworkMIDIViewControllerC12CoreAudioKitE5coderABSgSo7NSCoderC_tcfC', 
+                       '_$sSo27CANetworkMIDIViewControllerC12CoreAudioKitE5coderABSgSo7NSCoderC_tcfc', 
+                       '_$sSo27CANetworkMIDIViewControllerC12CoreAudioKitE7nibName6bundleABSSSg_So8NSBundleCSgtcfC', 
+                       '_$sSo27CANetworkMIDIViewControllerC12CoreAudioKitE7nibName6bundleABSSSg_So8NSBundleCSgtcfc', 
+                       '_$sSo27CANetworkMIDIViewControllerC12CoreAudioKitE8loadViewyyF', 
+                       '_$sSo27CANetworkMIDIViewControllerCMa', _CAUI_fetchRemoteAUv2ViewController, 
+                       _CAUI_fetchRemoteAUv3ViewController, _kEQViewGraphSizeChangedNotification, 
+                       _kEQViewParameterChangedNotification, _kFilterControlSelectedNotification, 
+                       _kGraphViewBeginGestureNotification, _kGraphViewEndGestureNotification, 
+                       _kTooltipTextBeganEditingNotification, _kTooltipTextValueChangedNotification, 
+                       _logValueForNumber ]
     objc-classes:    [ AUAudioUnitRemoteViewController, AUAudioUnitViewConfiguration, 
                        AUAudioUnitViewService, AUGenericView, AUGenericViewController, 
                        AUPannerView, AUPannerViewLoader, AUPannerViewPriv, AUViewController, 
                        CAAppleAUCustomViewBase, CAAppleAUGraphView, CAAppleAU_ToolTipWindow, 
                        CAAppleEQGraphView, CAAxisSettings, CABTLEMIDIWindowController, 
                        CACustomToolTipView, CAFilterControl, CAInterDeviceAudioViewController, 
-                       CANetworkBrowserWindowController, CAToolTipEditTextField, 
-                       CAToolTipParameterStrip, CAToolTipPopupMenuStrip, _TtC12CoreAudioKit21AUGenericViewInternal, 
-                       iDamDevice ]
+                       CANetworkBrowserWindowController, CANetworkMIDIViewController, 
+                       CAToolTipEditTextField, CAToolTipParameterStrip, CAToolTipPopupMenuStrip, 
+                       _TtC12CoreAudioKit21AUGenericViewInternal, iDamDevice ]
     objc-ivars:      [ CAAppleAUCustomViewBase.auRendering, CAAppleAUCustomViewBase.backgroundGradient, 
                        CAAppleAUCustomViewBase.blueGradient, CAAppleAUCustomViewBase.cachedGenericViewData, 
                        CAAppleAUCustomViewBase.cachedPersistantViewData, CAAppleAUCustomViewBase.detailsButton, 

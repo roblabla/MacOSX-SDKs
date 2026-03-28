@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 52 -module-name TabularData
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 52 -module-name TabularData
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Combine
 import Dispatch
 import Foundation
@@ -22,9 +22,7 @@ public protocol AnyColumnProtocol {
   var name: Swift.String { get set }
   var count: Swift.Int { get }
   var wrappedElementType: any Any.Type { get }
-  #if compiler(>=5.3) && $NonescapableTypes
   subscript(position: Swift.Int) -> Any? { get }
-  #endif
   subscript(range: Swift.Range<Swift.Int>) -> TabularData.AnyColumnSlice { get }
 }
 extension TabularData.DataFrame {
@@ -54,9 +52,7 @@ extension TabularData.DataFrame {
   public init()
   public init<S>(columns: S) where S : Swift.Sequence, S.Element == TabularData.AnyColumn
   public init(_ other: TabularData.DataFrame.Slice)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func indexOfColumn(_ columnName: Swift.String) -> Swift.Int?
-  #endif
   @available(macOS 12.3, iOS 15.4, tvOS 15.4, watchOS 8.5, *)
   @inlinable public func containsColumn<T>(_ id: TabularData.ColumnID<T>) -> Swift.Bool {
         guard let index = indexOfColumn(id.name) else {
@@ -86,25 +82,13 @@ extension TabularData.DataFrame {
   public mutating func removeColumn<T>(_ id: TabularData.ColumnID<T>) -> TabularData.Column<T>
   @discardableResult
   public mutating func removeColumn(_ name: Swift.String) -> TabularData.AnyColumn
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func transformColumn<From, To>(_ id: TabularData.ColumnID<From>, _ transform: (From?) throws -> To?) rethrows
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func transformColumn<From, To>(_ id: TabularData.ColumnID<From>, _ transform: (From) throws -> To?) rethrows
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func transformColumn<From, To>(_ name: Swift.String, _ transform: (From?) throws -> To?) rethrows
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func transformColumn<From, To>(_ name: Swift.String, _ transform: (From) throws -> To?) rethrows
-  #endif
   public mutating func append(row: TabularData.DataFrame.Row)
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func append(row: Any?...)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func append(valuesByColumn dictionary: [Swift.String : Any?])
-  #endif
   public mutating func appendEmptyRow()
   public mutating func insert(row: TabularData.DataFrame.Row, at index: Swift.Int)
   public mutating func removeRow(at index: Swift.Int)
@@ -113,12 +97,8 @@ extension TabularData.DataFrame {
   public mutating func append(rowsOf other: TabularData.DataFrame)
   public mutating func append(_ other: TabularData.DataFrame)
   public mutating func append(_ other: TabularData.DataFrame.Slice)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func filter<T>(on columnName: Swift.String, _ type: T.Type, _ isIncluded: (T?) throws -> Swift.Bool) rethrows -> TabularData.DataFrame.Slice
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func filter<T>(on columnID: TabularData.ColumnID<T>, _ isIncluded: (T?) throws -> Swift.Bool) rethrows -> TabularData.DataFrame.Slice
-  #endif
   public func filter(_ isIncluded: (TabularData.DataFrame.Row) throws -> Swift.Bool) rethrows -> TabularData.DataFrame.Slice
   public func selecting<S>(columnNames: S) -> TabularData.DataFrame where S : Swift.Sequence, S.Element == Swift.String
   public func selecting(columnNames: Swift.String...) -> TabularData.DataFrame
@@ -151,7 +131,6 @@ extension TabularData.DataFrame {
             }
         }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @backDeployed(before: macOS 15.4, iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4)
   @_disfavoredOverload public subscript<T>(columnName: Swift.String, type: T.Type = T.self) -> [T?] {
     get {
@@ -168,7 +147,6 @@ extension TabularData.DataFrame {
             }
         }
   }
-  #endif
   public subscript<T>(columnName: Swift.String, type: T.Type) -> TabularData.Column<T> {
     get
     @backDeployed(before: macOS 15.4, iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4)
@@ -228,9 +206,7 @@ extension TabularData.DataFrame : Swift.Hashable {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.DataFrame : Swift.ExpressibleByDictionaryLiteral {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(dictionaryLiteral elements: (Swift.String, [Any?])...)
-  #endif
   @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Key = Swift.String
   @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
@@ -243,25 +219,13 @@ public protocol AnyColumnPrototype {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.DataFrameProtocol {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func randomSplit(by proportion: Swift.Double, seed: Swift.Int? = nil) -> (TabularData.DataFrame.Slice, TabularData.DataFrame.Slice)
-  #endif
   public func randomSplit<G>(by proportion: Swift.Double, using generator: inout G) -> (TabularData.DataFrame.Slice, TabularData.DataFrame.Slice) where G : Swift.RandomNumberGenerator
-  #if compiler(>=5.3) && $NonescapableTypes
   public func stratifiedSplit(on columnName: Swift.String, by proportion: Swift.Double, randomSeed: Swift.Int? = nil) -> (TabularData.DataFrame, TabularData.DataFrame)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func stratifiedSplit(on columnNames: Swift.String..., by proportion: Swift.Double, randomSeed: Swift.Int? = nil) -> (TabularData.DataFrame, TabularData.DataFrame)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func stratifiedSplit<T>(on columnID: TabularData.ColumnID<T>, by proportion: Swift.Double, randomSeed: Swift.Int? = nil) -> (TabularData.DataFrame, TabularData.DataFrame) where T : Swift.Hashable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func stratifiedSplit<T0, T1>(on columnID0: TabularData.ColumnID<T0>, _ columnID1: TabularData.ColumnID<T1>, by proportion: Swift.Double, randomSeed: Swift.Int? = nil) -> (TabularData.DataFrame, TabularData.DataFrame) where T0 : Swift.Hashable, T1 : Swift.Hashable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func stratifiedSplit<T0, T1, T2>(on columnID0: TabularData.ColumnID<T0>, _ columnID1: TabularData.ColumnID<T1>, _ columnID2: TabularData.ColumnID<T2>, by proportion: Swift.Double, randomSeed: Swift.Int? = nil) -> (TabularData.DataFrame, TabularData.DataFrame) where T0 : Swift.Hashable, T1 : Swift.Hashable, T2 : Swift.Hashable
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.Column where WrappedElement : Swift.Hashable {
@@ -448,12 +412,8 @@ extension TabularData.DataFrame.Slice {
   public subscript<S>(columnNames: S) -> TabularData.DataFrame.Slice where S : Swift.Sequence, S.Element == Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func filter<T>(on columnName: Swift.String, _ type: T.Type, _ isIncluded: (T?) throws -> Swift.Bool) rethrows -> TabularData.DataFrame.Slice
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func filter<T>(on columnID: TabularData.ColumnID<T>, _ isIncluded: (T?) throws -> Swift.Bool) rethrows -> TabularData.DataFrame.Slice
-  #endif
   public func prefix(_ length: Swift.Int) -> TabularData.DataFrame.Slice
   public func prefix(through position: Swift.Int) -> TabularData.DataFrame.Slice
   public func prefix(upTo position: Swift.Int) -> TabularData.DataFrame.Slice
@@ -489,37 +449,21 @@ public struct Column<WrappedElement> : TabularData.OptionalColumnProtocol {
   }
   public init(name: Swift.String, capacity: Swift.Int)
   public init(_ id: TabularData.ColumnID<WrappedElement>, capacity: Swift.Int)
-  #if compiler(>=5.3) && $NonescapableTypes
   public init<S>(name: Swift.String, contents: S) where S : Swift.Sequence, S.Element == WrappedElement?
-  #endif
   public init<S>(name: Swift.String, contents: S) where WrappedElement == S.Element, S : Swift.Sequence
-  #if compiler(>=5.3) && $NonescapableTypes
   public init<S>(_ id: TabularData.ColumnID<S.Element>, contents: S) where S : Swift.Sequence, S.Element == WrappedElement?
-  #endif
   public init<S>(_ id: TabularData.ColumnID<S.Element>, contents: S) where WrappedElement == S.Element, S : Swift.Sequence
   public init(_ slice: TabularData.ColumnSlice<WrappedElement>)
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func append(_ element: TabularData.Column<WrappedElement>.Element)
-  #endif
   public mutating func append(_ element: WrappedElement)
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func append<S>(contentsOf sequence: S) where S : Swift.Sequence, S.Element == WrappedElement?
-  #endif
   public mutating func append<S>(contentsOf sequence: S) where WrappedElement == S.Element, S : Swift.Sequence
   public mutating func remove(at index: Swift.Int)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func map<T>(_ transform: (TabularData.Column<WrappedElement>.Element) throws -> T?) rethrows -> TabularData.Column<T>
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func mapNonNil<T>(_ transform: (WrappedElement) throws -> T?) rethrows -> TabularData.Column<T>
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func transform(_ transform: (TabularData.Column<WrappedElement>.Element) throws -> TabularData.Column<WrappedElement>.Element) rethrows
-  #endif
   public mutating func transform(_ transform: (WrappedElement) throws -> WrappedElement) rethrows
-  #if compiler(>=5.3) && $NonescapableTypes
   public func filter(_ isIncluded: (TabularData.Column<WrappedElement>.Element) throws -> Swift.Bool) rethrows -> TabularData.DiscontiguousColumnSlice<WrappedElement>
-  #endif
   public func eraseToAnyColumn() -> TabularData.AnyColumn
   @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Index = Swift.Int
@@ -540,12 +484,10 @@ extension TabularData.Column : Swift.RandomAccessCollection, Swift.MutableCollec
   }
   public func index(after i: Swift.Int) -> Swift.Int
   public func index(before i: Swift.Int) -> Swift.Int
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(position: Swift.Int) -> TabularData.Column<WrappedElement>.Element {
     get
     set
   }
-  #endif
   @usableFromInline
   internal func isNil(at index: Swift.Int) -> Swift.Bool
   public subscript(bounds: Swift.Range<Swift.Int>) -> TabularData.ColumnSlice<WrappedElement> {
@@ -563,20 +505,12 @@ extension TabularData.Column : Swift.RandomAccessCollection, Swift.MutableCollec
   public subscript<C>(mask: C) -> TabularData.DiscontiguousColumnSlice<WrappedElement> where C : Swift.Collection, C.Element == Swift.Bool {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func withContiguousStorageIfAvailable<R>(_ body: (Swift.UnsafeBufferPointer<WrappedElement?>) throws -> R) rethrows -> R?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func withContiguousMutableStorageIfAvailable<R>(_ body: (inout Swift.UnsafeMutableBufferPointer<WrappedElement?>) throws -> R) rethrows -> R?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   public func withContiguousStorageIfAvailable<R>(_ body: (Swift.UnsafeBufferPointer<WrappedElement>) throws -> R) rethrows -> R?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   public mutating func withContiguousMutableStorageIfAvailable<R>(_ body: (inout Swift.UnsafeMutableBufferPointer<WrappedElement>) throws -> R) rethrows -> R?
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.Column : Swift.Equatable where WrappedElement : Swift.Equatable {
@@ -647,14 +581,10 @@ public struct ColumnSlice<WrappedElement> : TabularData.OptionalColumnProtocol {
   @inlinable public init(_ column: TabularData.Column<WrappedElement>) {
         self.init(base: column, bounds: 0 ..< column.count)
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func map<T>(_ transform: (TabularData.ColumnSlice<WrappedElement>.Element) throws -> T?) rethrows -> TabularData.Column<T> {
         try Column<T>(name: name, contents: slice.map(transform))
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func filter(_ isIncluded: (TabularData.ColumnSlice<WrappedElement>.Element) throws -> Swift.Bool) rethrows -> TabularData.DiscontiguousColumnSlice<WrappedElement>
-  #endif
   public func eraseToAnyColumn() -> TabularData.AnyColumnSlice
   @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Indices = Swift.Range<TabularData.ColumnSlice<WrappedElement>.Index>
@@ -691,7 +621,6 @@ extension TabularData.ColumnSlice : Swift.RandomAccessCollection, Swift.MutableC
         indices.filter({ slice.base.isNil(at: $0) }).count
     }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public subscript(position: Swift.Int) -> TabularData.ColumnSlice<WrappedElement>.Element {
     get {
             slice[position]
@@ -700,7 +629,6 @@ extension TabularData.ColumnSlice : Swift.RandomAccessCollection, Swift.MutableC
             slice[position] = newValue
         }
   }
-  #endif
   public func isNil(at index: Swift.Int) -> Swift.Bool
   @inlinable public subscript(range: Swift.Range<Swift.Int>) -> TabularData.ColumnSlice<WrappedElement> {
     get {
@@ -945,7 +873,6 @@ internal struct PackedOptionalsBuffer<Element> {
         setNil(at: index)
         nilCount += 1
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable internal func append(_ newElement: Element?) {
         assert(count < capacity)
         assert(isNil(at: count))
@@ -958,7 +885,6 @@ internal struct PackedOptionalsBuffer<Element> {
         }
         count += 1
     }
-  #endif
   @inlinable internal func swapAt(_ i: Swift.Int, _ j: Swift.Int) {
         let elements = firstElementAddress
 
@@ -1015,7 +941,6 @@ extension TabularData.PackedOptionalsBuffer : Swift.MutableCollection, Swift.Ran
   @inlinable internal var underestimatedCount: Swift.Int {
     get { count }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable internal subscript(position: Swift.Int) -> Element? {
     get {
             return isNil(at: position) ? nil : firstElementAddress[position]
@@ -1034,7 +959,6 @@ extension TabularData.PackedOptionalsBuffer : Swift.MutableCollection, Swift.Ran
             }
         }
   }
-  #endif
   @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   @usableFromInline
   internal typealias Index = Swift.Int
@@ -1052,12 +976,9 @@ extension TabularData.PackedOptionalsBuffer : Swift.MutableCollection, Swift.Ran
 extension TabularData.PackedOptionalsBuffer : Swift.RangeReplaceableCollection {
   @usableFromInline
   internal init()
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable internal func replaceSubrange<C>(_ subrange: Swift.Range<Swift.Int>, with newValues: C) where C : Swift.Collection, C.Element == Element? {
         self.replaceSubrange(subrange, with: newValues.count, elementsOf: newValues)
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable internal func replaceSubrange<C>(_ subrange: Swift.Range<Swift.Int>, with newCount: Swift.Int, elementsOf newValues: C) where C : Swift.Collection, C.Element == Element? {
         let oldCount = self.count
         let eraseCount = subrange.count
@@ -1128,7 +1049,6 @@ extension TabularData.PackedOptionalsBuffer : Swift.RangeReplaceableCollection {
             resize(by: growth)
         }
     }
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.PackedOptionalsBuffer : Swift.CustomReflectable {
@@ -1174,18 +1094,10 @@ extension TabularData.DataFrame.Slice {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.DataFrame {
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func combineColumns<E1, E2, R>(_ columnName1: Swift.String, _ columnName2: Swift.String, into newColumnName: Swift.String, transform: (E1?, E2?) throws -> R?) rethrows
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func combineColumns<E1, E2, R>(_ columnID1: TabularData.ColumnID<E1>, _ columnID2: TabularData.ColumnID<E2>, into newColumnName: Swift.String, transform: (E1?, E2?) throws -> R?) rethrows
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func combineColumns<E1, E2, E3, R>(_ columnName1: Swift.String, _ columnName2: Swift.String, _ columnName3: Swift.String, into newColumnName: Swift.String, transform: (E1?, E2?, E3?) throws -> R?) rethrows
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func combineColumns<E1, E2, E3, R>(_ columnID1: TabularData.ColumnID<E1>, _ columnID2: TabularData.ColumnID<E2>, _ columnID3: TabularData.ColumnID<E3>, into newColumnName: Swift.String, transform: (E1?, E2?, E3?) throws -> R?) rethrows
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public enum SFrameReadingError : Swift.Error {
@@ -1205,28 +1117,18 @@ extension TabularData.SFrameReadingError : Swift.CustomStringConvertible {
 }
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 extension TabularData.SFrameReadingError : Foundation.LocalizedError {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.DataFrame {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(contentsOfCSVFile url: Foundation.URL, columns: [Swift.String]? = nil, rows: Swift.Range<Swift.Int>? = nil, types: [Swift.String : TabularData.CSVType] = [:], options: TabularData.CSVReadingOptions = .init()) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(csvData data: Foundation.Data, columns: [Swift.String]? = nil, rows: Swift.Range<Swift.Int>? = nil, types: [Swift.String : TabularData.CSVType] = [:], options: TabularData.CSVReadingOptions = .init()) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.4, iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
   public init<each T>(contentsOfCSVFile url: Foundation.URL, columns: repeat TabularData.ColumnID<each T>, rows: Swift.Range<Swift.Int>? = nil, options: TabularData.CSVReadingOptions = .init()) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.4, iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
   public init<each T>(csvData data: Foundation.Data, columns: repeat TabularData.ColumnID<each T>, rows: Swift.Range<Swift.Int>? = nil, options: TabularData.CSVReadingOptions = .init()) throws
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public protocol DataFrameProtocol {
@@ -1301,9 +1203,7 @@ public struct ColumnDecodingError : Swift.Error, Foundation.LocalizedError, Swif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public protocol GroupSummaries : Swift.CustomStringConvertible {
-  #if compiler(>=5.3) && $NonescapableTypes
   subscript(keys: Any?...) -> TabularData.DataFrame? { get }
-  #endif
   var description: Swift.String { get }
   func description(options: TabularData.FormattingOptions) -> Swift.String
 }
@@ -1342,11 +1242,9 @@ extension TabularData.JSONReadingError : Swift.CustomStringConvertible {
 }
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 extension TabularData.JSONReadingError : Foundation.LocalizedError {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public struct CategoricalSummary<Element> : Swift.Hashable, Swift.CustomDebugStringConvertible where Element : Swift.Hashable {
@@ -1427,11 +1325,9 @@ public enum CSVReadingError : Swift.Error {
   public var row: Swift.Int {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var column: Swift.Int? {
     get
   }
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.CSVReadingError : Swift.CustomStringConvertible {
@@ -1441,11 +1337,9 @@ extension TabularData.CSVReadingError : Swift.CustomStringConvertible {
 }
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 extension TabularData.CSVReadingError : Foundation.LocalizedError {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.Column {
@@ -1513,12 +1407,8 @@ public struct DiscontiguousColumnSlice<WrappedElement> : TabularData.OptionalCol
   }
   public init(_ column: TabularData.Column<WrappedElement>)
   public init(column: TabularData.Column<WrappedElement>, ranges: [Swift.Range<Swift.Int>])
-  #if compiler(>=5.3) && $NonescapableTypes
   public func map<T>(_ transform: (TabularData.DiscontiguousColumnSlice<WrappedElement>.Element) throws -> T?) rethrows -> TabularData.Column<T>
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func filter(_ isIncluded: (TabularData.DiscontiguousColumnSlice<WrappedElement>.Element) throws -> Swift.Bool) rethrows -> TabularData.DiscontiguousColumnSlice<WrappedElement>
-  #endif
   public func eraseToAnyColumn() -> TabularData.AnyColumnSlice
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -1541,12 +1431,10 @@ extension TabularData.DiscontiguousColumnSlice : Swift.BidirectionalCollection, 
   public var missingCount: Swift.Int {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(position: Swift.Int) -> TabularData.DiscontiguousColumnSlice<WrappedElement>.Element {
     get
     set
   }
-  #endif
   public func isNil(at index: Swift.Int) -> Swift.Bool
   public subscript(range: Swift.Range<Swift.Int>) -> TabularData.DiscontiguousColumnSlice<WrappedElement> {
     get
@@ -1590,80 +1478,46 @@ extension TabularData.DiscontiguousColumnSlice : Swift.Hashable where WrappedEle
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.Column {
   public static func += <C>(lhs: inout TabularData.Column<WrappedElement>, rhs: C) where WrappedElement : Swift.AdditiveArithmetic, WrappedElement == C.Element, C : Swift.Collection
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func += <C>(lhs: inout TabularData.Column<WrappedElement>, rhs: C) where WrappedElement : Swift.AdditiveArithmetic, C : Swift.Collection, C.Element == WrappedElement?
-  #endif
   public static func -= <C>(lhs: inout TabularData.Column<WrappedElement>, rhs: C) where WrappedElement : Swift.AdditiveArithmetic, WrappedElement == C.Element, C : Swift.Collection
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func -= <C>(lhs: inout TabularData.Column<WrappedElement>, rhs: C) where WrappedElement : Swift.AdditiveArithmetic, C : Swift.Collection, C.Element == WrappedElement?
-  #endif
   public static func *= <C>(lhs: inout TabularData.Column<WrappedElement>, rhs: C) where WrappedElement : Swift.Numeric, WrappedElement == C.Element, C : Swift.Collection
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func *= <C>(lhs: inout TabularData.Column<WrappedElement>, rhs: C) where WrappedElement : Swift.Numeric, C : Swift.Collection, C.Element == WrappedElement?
-  #endif
   public static func /= <C>(lhs: inout TabularData.Column<WrappedElement>, rhs: C) where WrappedElement : Swift.BinaryInteger, WrappedElement == C.Element, C : Swift.Collection
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func /= <C>(lhs: inout TabularData.Column<WrappedElement>, rhs: C) where WrappedElement : Swift.BinaryInteger, C : Swift.Collection, C.Element == WrappedElement?
-  #endif
   public static func /= <C>(lhs: inout TabularData.Column<WrappedElement>, rhs: C) where WrappedElement : Swift.FloatingPoint, WrappedElement == C.Element, C : Swift.Collection
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func /= <C>(lhs: inout TabularData.Column<WrappedElement>, rhs: C) where WrappedElement : Swift.FloatingPoint, C : Swift.Collection, C.Element == WrappedElement?
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.ColumnSlice {
   public static func += <C>(lhs: inout TabularData.ColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.AdditiveArithmetic, WrappedElement == C.Element, C : Swift.Collection
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func += <C>(lhs: inout TabularData.ColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.AdditiveArithmetic, C : Swift.Collection, C.Element == WrappedElement?
-  #endif
   public static func -= <C>(lhs: inout TabularData.ColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.AdditiveArithmetic, WrappedElement == C.Element, C : Swift.Collection
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func -= <C>(lhs: inout TabularData.ColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.AdditiveArithmetic, C : Swift.Collection, C.Element == WrappedElement?
-  #endif
   public static func *= <C>(lhs: inout TabularData.ColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.Numeric, WrappedElement == C.Element, C : Swift.Collection
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func *= <C>(lhs: inout TabularData.ColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.Numeric, C : Swift.Collection, C.Element == WrappedElement?
-  #endif
   public static func /= <C>(lhs: inout TabularData.ColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.BinaryInteger, WrappedElement == C.Element, C : Swift.Collection
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func /= <C>(lhs: inout TabularData.ColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.BinaryInteger, C : Swift.Collection, C.Element == WrappedElement?
-  #endif
   public static func /= <C>(lhs: inout TabularData.ColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.FloatingPoint, WrappedElement == C.Element, C : Swift.Collection
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func /= <C>(lhs: inout TabularData.ColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.FloatingPoint, C : Swift.Collection, C.Element == WrappedElement?
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.DiscontiguousColumnSlice {
   public static func += <C>(lhs: inout TabularData.DiscontiguousColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.AdditiveArithmetic, WrappedElement == C.Element, C : Swift.Collection
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func += <C>(lhs: inout TabularData.DiscontiguousColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.AdditiveArithmetic, C : Swift.Collection, C.Element == WrappedElement?
-  #endif
   public static func -= <C>(lhs: inout TabularData.DiscontiguousColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.AdditiveArithmetic, WrappedElement == C.Element, C : Swift.Collection
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func -= <C>(lhs: inout TabularData.DiscontiguousColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.AdditiveArithmetic, C : Swift.Collection, C.Element == WrappedElement?
-  #endif
   public static func *= <C>(lhs: inout TabularData.DiscontiguousColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.Numeric, WrappedElement == C.Element, C : Swift.Collection
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func *= <C>(lhs: inout TabularData.DiscontiguousColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.Numeric, C : Swift.Collection, C.Element == WrappedElement?
-  #endif
   public static func /= <C>(lhs: inout TabularData.DiscontiguousColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.BinaryInteger, WrappedElement == C.Element, C : Swift.Collection
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func /= <C>(lhs: inout TabularData.DiscontiguousColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.BinaryInteger, C : Swift.Collection, C.Element == WrappedElement?
-  #endif
   public static func /= <C>(lhs: inout TabularData.DiscontiguousColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.FloatingPoint, WrappedElement == C.Element, C : Swift.Collection
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func /= <C>(lhs: inout TabularData.DiscontiguousColumnSlice<WrappedElement>, rhs: C) where WrappedElement : Swift.FloatingPoint, C : Swift.Collection, C.Element == WrappedElement?
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.DataFrame {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(contentsOfJSONFile url: Foundation.URL, columns: [Swift.String]? = nil, types: [Swift.String : TabularData.JSONType] = [:], options: TabularData.JSONReadingOptions = .init()) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(jsonData data: Foundation.Data, columns: [Swift.String]? = nil, types: [Swift.String : TabularData.JSONType] = [:], options: TabularData.JSONReadingOptions = .init()) throws
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.Column where WrappedElement : Swift.Encodable {
@@ -1721,12 +1575,10 @@ extension TabularData.AnyColumnSlice : Swift.RandomAccessCollection, Swift.Mutab
   }
   public func index(after i: Swift.Int) -> Swift.Int
   public func index(before i: Swift.Int) -> Swift.Int
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(position: Swift.Int) -> Any? {
     get
     set
   }
-  #endif
   public subscript(range: Swift.Range<Swift.Int>) -> TabularData.AnyColumnSlice {
     get
     set
@@ -1771,63 +1623,31 @@ extension TabularData.DataFrame {
 public protocol RowGroupingProtocol : Swift.CustomStringConvertible {
   var count: Swift.Int { get }
   func ungrouped() -> TabularData.DataFrame
-  #if compiler(>=5.3) && $NonescapableTypes
   func counts(order: TabularData.Order?) -> TabularData.DataFrame
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   func aggregated<Element, Result>(on columnNames: [Swift.String], naming: (Swift.String) -> Swift.String, transform: (TabularData.DiscontiguousColumnSlice<Element>) throws -> Result?) rethrows -> TabularData.DataFrame
-  #endif
   @available(macOS 12.3, iOS 15.4, tvOS 15.4, watchOS 8.5, *)
   func filter(_ isIncluded: (TabularData.DataFrame.Slice) throws -> Swift.Bool) rethrows -> Self
   func mapGroups(_ transform: (TabularData.DataFrame.Slice) throws -> TabularData.DataFrame) rethrows -> Self
-  #if compiler(>=5.3) && $NonescapableTypes
   func randomSplit(by proportion: Swift.Double, seed: Swift.Int?) -> (Self, Self)
-  #endif
   func summary() -> any TabularData.GroupSummaries
   func summary(of columnNames: [Swift.String]) -> any TabularData.GroupSummaries
-  #if compiler(>=5.3) && $NonescapableTypes
   subscript(keys: Any?...) -> TabularData.DataFrame.Slice? { get }
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.RowGroupingProtocol {
   public func counts() -> TabularData.DataFrame
-  #if compiler(>=5.3) && $NonescapableTypes
   public func sums<N>(_ columnName: Swift.String, _ type: N.Type, order: TabularData.Order? = nil) -> TabularData.DataFrame where N : Swift.AdditiveArithmetic, N : Swift.Comparable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func sums<N>(_ columnID: TabularData.ColumnID<N>, order: TabularData.Order? = nil) -> TabularData.DataFrame where N : Swift.AdditiveArithmetic, N : Swift.Comparable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func means<N>(_ columnName: Swift.String, _ type: N.Type, order: TabularData.Order? = nil) -> TabularData.DataFrame where N : Swift.FloatingPoint
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func means<N>(_ columnID: TabularData.ColumnID<N>, order: TabularData.Order? = nil) -> TabularData.DataFrame where N : Swift.FloatingPoint
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func quantiles<N>(_ columnName: Swift.String, _ type: N.Type, quantile: N, order: TabularData.Order? = nil) -> TabularData.DataFrame where N : Swift.BinaryFloatingPoint
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func quantiles<N>(_ columnID: TabularData.ColumnID<N>, quantile: N, order: TabularData.Order? = nil) -> TabularData.DataFrame where N : Swift.BinaryFloatingPoint
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func minimums<N>(_ columnName: Swift.String, _ type: N.Type, order: TabularData.Order? = nil) -> TabularData.DataFrame where N : Swift.Comparable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func minimums<N>(_ columnID: TabularData.ColumnID<N>, order: TabularData.Order? = nil) -> TabularData.DataFrame where N : Swift.Comparable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func maximums<N>(_ columnName: Swift.String, _ type: N.Type, order: TabularData.Order? = nil) -> TabularData.DataFrame where N : Swift.Comparable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func maximums<N>(_ columnID: TabularData.ColumnID<N>, order: TabularData.Order? = nil) -> TabularData.DataFrame where N : Swift.Comparable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func aggregated<Element, Result>(on columnNames: Swift.String..., naming: (Swift.String) -> Swift.String, transform: (TabularData.DiscontiguousColumnSlice<Element>) throws -> Result?) rethrows -> TabularData.DataFrame
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func aggregated<Element, Result>(on columnID: TabularData.ColumnID<Element>, into aggregatedColumnName: Swift.String? = nil, transform: (TabularData.DiscontiguousColumnSlice<Element>) throws -> Result) rethrows -> TabularData.DataFrame
-  #endif
   public func randomSplit(by proportion: Swift.Double) -> (Self, Self)
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -1843,38 +1663,22 @@ public enum Order : Swift.Sendable {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.FilledColumn where Base.WrappedElement : Swift.Comparable {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func min() -> TabularData.FilledColumn<Base>.Element?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func max() -> TabularData.FilledColumn<Base>.Element?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func argmin() -> TabularData.FilledColumn<Base>.Index?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func argmax() -> TabularData.FilledColumn<Base>.Index?
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.FilledColumn where Base.WrappedElement : Swift.BinaryInteger {
   public func sum() -> TabularData.FilledColumn<Base>.Element
-  #if compiler(>=5.3) && $NonescapableTypes
   public func mean() -> Swift.Double?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func standardDeviation(deltaDegreesOfFreedom: Swift.Int = 1) -> Swift.Double?
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.FilledColumn where Base.WrappedElement : Swift.FloatingPoint {
   public func sum() -> TabularData.FilledColumn<Base>.Element
-  #if compiler(>=5.3) && $NonescapableTypes
   public func mean() -> TabularData.FilledColumn<Base>.Element?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func standardDeviation(deltaDegreesOfFreedom: Swift.Int = 1) -> TabularData.FilledColumn<Base>.Element?
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.OptionalColumnProtocol {
@@ -1919,9 +1723,7 @@ extension TabularData.FilledColumn : Swift.Sendable where Base : Swift.Sendable,
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.DataFrame {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(contentsOfSFrameDirectory url: Foundation.URL, columns: [Swift.String]? = nil, rows: Swift.Range<Swift.Int>? = nil) throws
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public struct CSVReadingOptions {
@@ -1973,10 +1775,8 @@ public struct CSVWritingOptions {
             delimiter: ","
         )
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use dateFormatter instead or dateFormat.")
   public init(includesHeader: Swift.Bool = true, dateFormat: Swift.String?, nilEncoding: Swift.String = "", trueEncoding: Swift.String = "true", falseEncoding: Swift.String = "false", newline: Swift.String = "\n", delimiter: Swift.Character = ",")
-  #endif
   @_alwaysEmitIntoClient public init(includesHeader: Swift.Bool = true, nilEncoding: Swift.String = "", trueEncoding: Swift.String = "true", falseEncoding: Swift.String = "false", newline: Swift.String = "\n", delimiter: Swift.Character = ",") {
         self.init()
         self.includesHeader = includesHeader
@@ -1992,11 +1792,9 @@ public enum CSVWritingError : Swift.Error {
   public var row: Swift.Int {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var column: Swift.String? {
     get
   }
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.CSVWritingError : Swift.CustomStringConvertible {
@@ -2009,30 +1807,20 @@ public struct RowGrouping<GroupingKey> : TabularData.RowGroupingProtocol where G
   public var description: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init<D>(groups: [(GroupingKey?, D)], groupKeysColumnName: Swift.String) where D : TabularData.DataFrameProtocol
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func counts(order: TabularData.Order? = nil) -> TabularData.DataFrame
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func aggregated<Element, Result>(on columnNames: [Swift.String], naming: (Swift.String) -> Swift.String, transform: (TabularData.DiscontiguousColumnSlice<Element>) throws -> Result?) rethrows -> TabularData.DataFrame
-  #endif
   public func ungrouped() -> TabularData.DataFrame
   @available(macOS 12.3, iOS 15.4, tvOS 15.4, watchOS 8.5, *)
   public func filter(_ isIncluded: (TabularData.DataFrame.Slice) throws -> Swift.Bool) rethrows -> TabularData.RowGrouping<GroupingKey>
   public func mapGroups(_ transform: (TabularData.DataFrame.Slice) throws -> TabularData.DataFrame) rethrows -> TabularData.RowGrouping<GroupingKey>
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(keys: Any?...) -> TabularData.DataFrame.Slice? {
     get
   }
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.RowGrouping {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func randomSplit(by proportion: Swift.Double, seed: Swift.Int? = nil) -> (TabularData.RowGrouping<GroupingKey>, TabularData.RowGrouping<GroupingKey>)
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.RowGrouping {
@@ -2051,11 +1839,9 @@ extension TabularData.RowGrouping : Swift.RandomAccessCollection {
   public var count: Swift.Int {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(position: Swift.Int) -> (key: GroupingKey?, group: TabularData.DataFrame.Slice) {
     get
   }
-  #endif
   @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Element = (key: GroupingKey?, group: TabularData.DataFrame.Slice)
   @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
@@ -2102,30 +1888,22 @@ extension TabularData.DataFrame {
       get
     }
     public let index: Swift.Int
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript<T>(position: Swift.Int, type: T.Type) -> T? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript<T>(columnName: Swift.String, type: T.Type) -> T? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(columnName: Swift.String) -> Any? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript<T>(columnID: TabularData.ColumnID<T>) -> T? {
       get
       set
     }
-    #endif
   }
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -2175,12 +1953,10 @@ extension TabularData.DataFrame.Row : Swift.RandomAccessCollection, Swift.Mutabl
   public var count: Swift.Int {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(position: Swift.Int) -> Any? {
     get
     set
   }
-  #endif
   public subscript(bounds: Swift.Range<Swift.Int>) -> Swift.Slice<TabularData.DataFrame.Row> {
     get
     set
@@ -2206,48 +1982,24 @@ extension TabularData.DataFrame.Row : Swift.Hashable {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.Column where WrappedElement : Swift.Comparable {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func min() -> TabularData.Column<WrappedElement>.Element
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func max() -> TabularData.Column<WrappedElement>.Element
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func argmin() -> Swift.Int?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func argmax() -> Swift.Int?
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.DiscontiguousColumnSlice where WrappedElement : Swift.Comparable {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func min() -> TabularData.DiscontiguousColumnSlice<WrappedElement>.Element
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func max() -> TabularData.DiscontiguousColumnSlice<WrappedElement>.Element
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func argmin() -> Swift.Int?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func argmax() -> Swift.Int?
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.ColumnSlice where WrappedElement : Swift.Comparable {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func min() -> TabularData.ColumnSlice<WrappedElement>.Element
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func max() -> TabularData.ColumnSlice<WrappedElement>.Element
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func argmin() -> Swift.Int?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func argmax() -> Swift.Int?
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.Column where WrappedElement : Swift.AdditiveArithmetic {
@@ -2263,57 +2015,33 @@ extension TabularData.ColumnSlice where WrappedElement : Swift.AdditiveArithmeti
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.Column where WrappedElement : Swift.FloatingPoint {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func mean() -> TabularData.Column<WrappedElement>.Element
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func standardDeviation(deltaDegreesOfFreedom: Swift.Int = 1) -> TabularData.Column<WrappedElement>.Element
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.DiscontiguousColumnSlice where WrappedElement : Swift.FloatingPoint {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func mean() -> TabularData.DiscontiguousColumnSlice<WrappedElement>.Element
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func standardDeviation(deltaDegreesOfFreedom: Swift.Int = 1) -> TabularData.DiscontiguousColumnSlice<WrappedElement>.Element
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.ColumnSlice where WrappedElement : Swift.FloatingPoint {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func mean() -> TabularData.ColumnSlice<WrappedElement>.Element
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func standardDeviation(deltaDegreesOfFreedom: Swift.Int = 1) -> TabularData.ColumnSlice<WrappedElement>.Element
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.Column where WrappedElement : Swift.BinaryInteger {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func mean() -> Swift.Double?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func standardDeviation(deltaDegreesOfFreedom: Swift.Int = 1) -> Swift.Double?
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.DiscontiguousColumnSlice where WrappedElement : Swift.BinaryInteger {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func mean() -> Swift.Double?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func standardDeviation(deltaDegreesOfFreedom: Swift.Int = 1) -> Swift.Double?
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.ColumnSlice where WrappedElement : Swift.BinaryInteger {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func mean() -> Swift.Double?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func standardDeviation(deltaDegreesOfFreedom: Swift.Int = 1) -> Swift.Double?
-  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension TabularData.DataFrameProtocol {
@@ -2346,12 +2074,8 @@ extension TabularData.DataFrame.Slice {
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.DataFrameProtocol {
   public func grouped<GroupingKey>(by columnID: TabularData.ColumnID<GroupingKey>) -> TabularData.RowGrouping<GroupingKey> where GroupingKey : Swift.Hashable
-  #if compiler(>=5.3) && $NonescapableTypes
   public func grouped<InputKey, GroupingKey>(by columnName: Swift.String, transform: (InputKey?) -> GroupingKey?) -> TabularData.RowGrouping<GroupingKey> where GroupingKey : Swift.Hashable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func grouped<InputKey, GroupingKey>(by columnID: TabularData.ColumnID<InputKey>, transform: (InputKey?) -> GroupingKey?) -> TabularData.RowGrouping<GroupingKey> where GroupingKey : Swift.Hashable
-  #endif
   public func grouped(by columnName: Swift.String, timeUnit: Foundation.Calendar.Component) -> TabularData.RowGrouping<Swift.Int>
   public func grouped(by columnID: TabularData.ColumnID<Foundation.Date>, timeUnit: Foundation.Calendar.Component) -> TabularData.RowGrouping<Swift.Int>
   public func grouped(by columnNames: Swift.String...) -> some TabularData.RowGroupingProtocol
@@ -2407,11 +2131,9 @@ final internal class PackedOptionalsStorage<Element> {
   @inlinable final internal func resize(by change: Swift.Int) {
         buffer.resize(by: change)
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable final internal func append(_ element: Element?) {
         buffer.append(element)
     }
-  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.Column : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible, Swift.CustomReflectable {
@@ -2503,9 +2225,7 @@ public struct AnyColumn : TabularData.AnyColumnProtocol, Swift.Hashable {
   }
   public func assumingType<T>(_ type: T.Type) -> TabularData.Column<T>
   public func isNil(at index: Swift.Int) -> Swift.Bool
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func append(_ element: Any?)
-  #endif
   public mutating func append(contentsOf other: TabularData.AnyColumn)
   public mutating func append(contentsOf other: TabularData.AnyColumnSlice)
   public mutating func remove(at index: Swift.Int)
@@ -2523,12 +2243,10 @@ extension TabularData.AnyColumn : Swift.RandomAccessCollection, Swift.MutableCol
   }
   public func index(after i: Swift.Int) -> Swift.Int
   public func index(before i: Swift.Int) -> Swift.Int
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(position: Swift.Int) -> Any? {
     get
     set
   }
-  #endif
   public subscript(range: Swift.Range<Swift.Int>) -> TabularData.AnyColumnSlice {
     get
     set

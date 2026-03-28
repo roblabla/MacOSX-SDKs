@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-macos26.2 -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature ABIAttribute -enable-experimental-feature GlobalActorInferenceCutoff -enable-experimental-feature ABIAttribute -enable-experimental-feature GlobalActorInferenceCutoff -package-name com.apple.TipKit -target-min-inlining-version min -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -user-module-version 120.1.4 -module-name TipKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-macos26.4 -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature ABIAttribute -enable-experimental-feature GlobalActorInferenceCutoff -enable-experimental-feature ABIAttribute -enable-experimental-feature GlobalActorInferenceCutoff -package-name com.apple.TipKit -target-min-inlining-version min -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -user-module-version 120.4.4 -module-name TipKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Foundation
 import Swift
 @_exported import SwiftUI
@@ -99,14 +99,10 @@ extension TipKit.Tips.Event {
   public func donate() async where DonationInfo == TipKit.Tips.EmptyDonation
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   public func donate(_ donation: DonationInfo) async
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   public func sendDonation(_ completion: (@Sendable () -> Swift.Void)? = nil) where DonationInfo == TipKit.Tips.EmptyDonation
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   public func sendDonation(_ donation: DonationInfo, _ completion: (@Sendable () -> Swift.Void)? = nil)
-  #endif
 }
 extension TipKit.Tips.Event {
   @available(macOS 26.0, iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, watchOS 26.0, *)
@@ -119,10 +115,8 @@ extension TipKit.Tips {
     public let maximumCount: Swift.Int
     @available(macOS 26.0, iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, watchOS 26.0, *)
     public let maximumAge: TipKit.Tips.DonationTimeRange?
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 26.0, iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, watchOS 26.0, *)
     public init(maximumCount: Swift.Int, maximumAge: TipKit.Tips.DonationTimeRange? = nil)
-    #endif
   }
 }
 @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
@@ -259,28 +253,21 @@ extension TipKit.Tips {
   }
 }
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 26.0, iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
   @available(watchOS, unavailable)
   @preconcurrency nonisolated public func popoverTip(_ tip: (any TipKit.Tip)?, isPresented: SwiftUICore.Binding<Swift.Bool>? = nil, attachmentAnchor: SwiftUI.PopoverAttachmentAnchor = .rect(.bounds), arrowEdge: SwiftUICore.Edge? = nil, action: @escaping @_Concurrency.MainActor @Sendable (TipKit.Tips.Action) -> Swift.Void = { _ in }) -> some SwiftUICore.View
   
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, *)
   @available(macOS, unavailable)
   @available(watchOS, unavailable)
   @preconcurrency nonisolated public func popoverTip(_ tip: (any TipKit.Tip)?, isPresented: SwiftUICore.Binding<Swift.Bool>? = nil, attachmentAnchor: SwiftUI.PopoverAttachmentAnchor = .rect(.bounds), arrowEdges: SwiftUICore.Edge.Set, action: @escaping @_Concurrency.MainActor @Sendable (TipKit.Tips.Action) -> Swift.Void = { _ in }) -> some SwiftUICore.View
   
-  #endif
 }
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.4, iOS 18.4, macCatalyst 18.4, tvOS 18.4, visionOS 2.4, *)
   @available(watchOS, unavailable)
   @_disfavoredOverload @preconcurrency nonisolated public func popoverTip(_ tip: (any TipKit.Tip)?, arrowEdge: SwiftUICore.Edge? = nil, action: @escaping @_Concurrency.MainActor @Sendable (TipKit.Tips.Action) -> Swift.Void = { _ in }) -> some SwiftUICore.View
   
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, introduced: 15.0, obsoleted: 15.4)
   @available(iOS, introduced: 18.0, obsoleted: 18.4)
   @available(macCatalyst, introduced: 18.0, obsoleted: 18.4)
@@ -289,7 +276,6 @@ extension SwiftUICore.View {
   @available(watchOS, unavailable)
   @_disfavoredOverload @_documentation(visibility: private) @preconcurrency nonisolated public func popoverTip(_ tip: (any TipKit.Tip)?, arrowEdge: SwiftUICore.Edge = .top, action: @escaping @_Concurrency.MainActor @Sendable (TipKit.Tips.Action) -> Swift.Void = { _ in }) -> some SwiftUICore.View
   
-  #endif
   @available(macOS, introduced: 14.0, obsoleted: 15.0)
   @available(iOS, introduced: 17.0, obsoleted: 18.0)
   @available(macCatalyst, introduced: 17.0, obsoleted: 18.0)
@@ -341,28 +327,20 @@ extension TipKit.Tips {
     public static func buildBlock() -> [TipKit.Tips.Rule]
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     public static func buildExpression(_ child: TipKit.Tips.Rule) -> [TipKit.Tips.Rule]
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     @_disfavoredOverload public static func buildExpression(_ child: TipKit.Tips.Rule?) -> [TipKit.Tips.Rule]
-    #endif
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     public static func buildExpression(_ child: [TipKit.Tips.Rule]) -> [TipKit.Tips.Rule]
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     @_disfavoredOverload public static func buildExpression(_ child: [TipKit.Tips.Rule?]) -> [TipKit.Tips.Rule]
-    #endif
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     public static func buildEither(first: [TipKit.Tips.Rule]) -> [TipKit.Tips.Rule]
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     public static func buildEither(second: [TipKit.Tips.Rule]) -> [TipKit.Tips.Rule]
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     public static func buildOptional(_ component: TipKit.Tips.Rule?) -> [TipKit.Tips.Rule]
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     public static func buildOptional(_ component: [TipKit.Tips.Rule?]) -> [TipKit.Tips.Rule]
-    #endif
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     public static func buildPartialBlock(first: [TipKit.Tips.Rule]) -> [TipKit.Tips.Rule]
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
@@ -390,12 +368,8 @@ extension TipKit.Tips.Event : TipKit.Tips.RuleInput {
 @_typeEraser(AnyTip) public protocol Tip : Swift.Identifiable, Swift.Sendable {
   var id: Swift.String { get }
   var title: SwiftUICore.Text { get }
-  #if compiler(>=5.3) && $NonescapableTypes
   var message: SwiftUICore.Text? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   var image: SwiftUICore.Image? { get }
-  #endif
   @TipKit.Tips.ActionBuilder var actions: [Self.Action] { get }
   @TipKit.Tips.RuleBuilder var rules: [Self.Rule] { get }
   @TipKit.Tips.OptionsBuilder var options: [any TipKit.TipOption] { get }
@@ -429,18 +403,14 @@ extension TipKit.Tip {
   @_documentation(visibility: private) public var id: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   @_documentation(visibility: private) public var message: SwiftUICore.Text? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   @_documentation(visibility: private) public var image: SwiftUICore.Image? {
     get
   }
-  #endif
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   @_documentation(visibility: private) public var rules: [Self.Rule] {
     get
@@ -465,15 +435,11 @@ extension TipKit.Tips {
     public let label: @Sendable () -> SwiftUICore.Text
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     @preconcurrency public let handler: @_Concurrency.MainActor @Sendable () -> Swift.Void
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     @_silgen_name("$s6TipKit4TipsO6ActionV2id7perform_AESSSg_yyc7SwiftUI4TextVyYbctcfC")
     @preconcurrency public init(id: Swift.String? = nil, perform handler: @escaping @_Concurrency.MainActor @Sendable () -> Swift.Void = {}, _ label: @escaping @Sendable () -> SwiftUICore.Text)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     @preconcurrency nonisolated public init(id: Swift.String? = nil, title: some StringProtocol, perform handler: @escaping @_Concurrency.MainActor @Sendable () -> Swift.Void = {})
-    #endif
     @usableFromInline
     internal func with(index: Swift.Int) -> TipKit.Tips.Action
     @available(iOS 17.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
@@ -518,12 +484,10 @@ extension TipKit.Tips {
     @inlinable public static func buildLimitedAvailability(_ component: [TipKit.Tips.Action]) -> [TipKit.Tips.Action] {
             component
         }
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     @inlinable public static func buildOptional(_ component: [TipKit.Tips.Action]?) -> [TipKit.Tips.Action] {
             component ?? []
         }
-    #endif
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     @inlinable public static func buildFinalResult(_ component: [TipKit.Tips.Action]) -> [TipKit.Tips.Action] {
             component
@@ -545,18 +509,14 @@ public struct AnyTip : TipKit.Tip {
   @_documentation(visibility: private) public var title: SwiftUICore.Text {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   @_documentation(visibility: private) public var message: SwiftUICore.Text? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   @_documentation(visibility: private) public var image: SwiftUICore.Image? {
     get
   }
-  #endif
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   @_documentation(visibility: private) public var actions: [TipKit.AnyTip.Action] {
     get
@@ -606,35 +566,27 @@ extension TipKit.Tips {
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     public static func buildExpression(_ child: some TipOption) -> some TipKit.TipOption
     
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     @_disfavoredOverload public static func buildExpression(_ child: (any TipKit.TipOption)?) -> some TipKit.TipOption
     
-    #endif
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     public static func buildExpression(_ child: [some TipOption]) -> some TipKit.TipOption
     
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     @_disfavoredOverload public static func buildExpression(_ child: [(any TipKit.TipOption)?]) -> some TipKit.TipOption
     
-    #endif
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     public static func buildEither(first: some TipOption) -> some TipKit.TipOption
     
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     public static func buildEither(second: some TipOption) -> some TipKit.TipOption
     
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     public static func buildOptional(_ component: (any TipKit.TipOption)?) -> some TipKit.TipOption
     
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     public static func buildOptional(_ component: [(any TipKit.TipOption)?]) -> some TipKit.TipOption
     
-    #endif
     @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
     public static func buildBlock() -> some TipKit.TipOption
     
@@ -707,12 +659,10 @@ extension TipKit.Tips {
 }
 @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
 final public class TipGroup : Swift.Sendable {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
   @_Concurrency.MainActor final public var currentTip: (any TipKit.Tip)? {
     get
   }
-  #endif
   @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
   final public var currentTipUpdates: some _Concurrency.AsyncSequence<any TipKit.Tip, Swift.Never> {
     get
@@ -743,10 +693,8 @@ extension TipKit.Tips {
     public static func buildPartialBlock(first: Swift.Void) -> [any TipKit.Tip]
     @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
     public static func buildPartialBlock(first: Swift.Never) -> [any TipKit.Tip]
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
     public static func buildIf(_ element: [any TipKit.Tip]?) -> [any TipKit.Tip]
-    #endif
     @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
     public static func buildEither(first: [any TipKit.Tip]) -> [any TipKit.Tip]
     @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
@@ -776,12 +724,10 @@ public struct TipKitError : Swift.Error, Foundation.LocalizedError, Swift.Hashab
   public var description: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   public var errorDescription: Swift.String? {
     get
   }
-  #endif
   public static func == (a: TipKit.TipKitError, b: TipKit.TipKitError) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -813,21 +759,14 @@ extension TipKit.TipKitError {
 extension TipKit.TipView : Swift.Sendable {
 }
 extension TipKit.TipView {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 26.0, iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, watchOS 26.0, *)
   @preconcurrency @_Concurrency.MainActor public init(_ tip: (any TipKit.Tip)?, isPresented: SwiftUICore.Binding<Swift.Bool>? = nil, arrowEdge: SwiftUICore.Edge? = nil, action: @escaping @_Concurrency.MainActor @Sendable (TipKit.Tips.Action) -> Swift.Void = { _ in }) where Content == TipKit.AnyTip
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 26.0, iOS 26.0, macCatalyst 26.0, tvOS 26.0, visionOS 26.0, watchOS 26.0, *)
   @preconcurrency @_Concurrency.MainActor public init<AnchorID>(_ tip: (any TipKit.Tip)?, isPresented: SwiftUICore.Binding<Swift.Bool>? = nil, arrowEdge: SwiftUICore.Edge? = nil, anchorID: AnchorID, action: @escaping @_Concurrency.MainActor @Sendable (TipKit.Tips.Action) -> Swift.Void = { _ in }) where Content == TipKit.AnyTip, AnchorID : Swift.Hashable, AnchorID : Swift.Sendable
-  #endif
 }
 extension TipKit.TipView {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
   @_disfavoredOverload @preconcurrency @_Concurrency.MainActor public init(_ tip: (any TipKit.Tip)?, arrowEdge: SwiftUICore.Edge? = nil, action: @escaping @_Concurrency.MainActor @Sendable (TipKit.Tips.Action) -> Swift.Void = { _ in }) where Content == TipKit.AnyTip
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, introduced: 14.0, obsoleted: 15.0)
   @available(iOS, introduced: 17.0, obsoleted: 18.0)
   @available(macCatalyst, introduced: 17.0, obsoleted: 18.0)
@@ -835,7 +774,6 @@ extension TipKit.TipView {
   @available(visionOS, introduced: 1.0, obsoleted: 2.0)
   @available(watchOS, introduced: 10.0, obsoleted: 11.0)
   @_disfavoredOverload @_documentation(visibility: private) @preconcurrency @_Concurrency.MainActor public init(_ tip: Content, arrowEdge: SwiftUICore.Edge? = nil, action: @escaping @_Concurrency.MainActor @Sendable (TipKit.Tips.Action) -> Swift.Void = { _ in })
-  #endif
 }
 extension SwiftUICore.View {
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
@@ -887,24 +825,18 @@ public struct TipViewStyleConfiguration {
   public let tip: any TipKit.Tip
 }
 extension TipKit.TipViewStyleConfiguration {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   @preconcurrency @_Concurrency.MainActor public var image: SwiftUICore.Image? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   @preconcurrency @_Concurrency.MainActor public var title: SwiftUICore.Text? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   @preconcurrency @_Concurrency.MainActor public var message: SwiftUICore.Text? {
     get
   }
-  #endif
   @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
   @preconcurrency @_Concurrency.MainActor public var actions: [TipKit.Tips.Action] {
     get
@@ -935,10 +867,8 @@ extension TipKit.Tips {
   }
 }
 extension TipKit.Tips.ConfigurationOption {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
   public static func cloudKitContainer(_ cloudKitContainer: TipKit.Tips.ConfigurationOption.CloudKitContainer?) -> TipKit.Tips.ConfigurationOption
-  #endif
   @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
   public struct CloudKitContainer : Swift.Equatable, Swift.Sendable {
     @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 18.0, visionOS 2.0, watchOS 11.0, *)
@@ -1018,13 +948,11 @@ extension TipKit.Tips {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, *)
   @_Concurrency.MainActor @preconcurrency final public var backgroundColor: AppKit.NSColor? {
     get
     set
   }
-  #endif
   @available(macOS 14.0, *)
   @_Concurrency.MainActor @preconcurrency final public var cornerRadius: CoreFoundation.CGFloat {
     get
@@ -1035,13 +963,11 @@ extension TipKit.Tips {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, *)
   @_Concurrency.MainActor @preconcurrency final public var imageStyle: (any SwiftUICore.ShapeStyle)? {
     get
     set
   }
-  #endif
   @available(macOS 14.0, *)
   @_Concurrency.MainActor @preconcurrency final public var viewStyle: any TipKit.TipViewStyle {
     get
@@ -1052,18 +978,12 @@ extension TipKit.Tips {
     @objc get
     @objc set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, *)
   @preconcurrency @_Concurrency.MainActor required public init(_ tip: any TipKit.Tip, delegate: (any AppKit.NSPopoverDelegate)? = nil, actionHandler: @escaping @_Concurrency.MainActor @Sendable (TipKit.Tips.Action) -> Swift.Void = { _ in })
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, *)
   @_disfavoredOverload @_documentation(visibility: private) @preconcurrency @_Concurrency.MainActor required public init(_ tip: some Tip, delegate: (any AppKit.NSPopoverDelegate)? = nil, actionHandler: @escaping @_Concurrency.MainActor @Sendable (TipKit.Tips.Action) -> Swift.Void = { _ in })
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, unavailable)
   @_documentation(visibility: private) @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
-  #endif
   @available(macOS 14.0, *)
   @_documentation(visibility: private) @objc @_Concurrency.MainActor @preconcurrency final public func popoverWillShow(_ notification: Foundation.Notification)
   @objc deinit
@@ -1080,13 +1000,11 @@ extension TipKit.Tips {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, *)
   @_Concurrency.MainActor @preconcurrency final public var backgroundColor: AppKit.NSColor? {
     get
     set
   }
-  #endif
   @available(macOS 14.0, *)
   @_Concurrency.MainActor @preconcurrency final public var cornerRadius: CoreFoundation.CGFloat {
     get
@@ -1097,30 +1015,22 @@ extension TipKit.Tips {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, *)
   @_Concurrency.MainActor @preconcurrency final public var imageStyle: (any SwiftUICore.ShapeStyle)? {
     get
     set
   }
-  #endif
   @available(macOS 14.0, *)
   @_Concurrency.MainActor @preconcurrency final public var viewStyle: any TipKit.TipViewStyle {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, *)
   @preconcurrency @_Concurrency.MainActor convenience public init(_ tip: any TipKit.Tip, arrowEdge: SwiftUICore.Edge? = nil, actionHandler: @escaping @_Concurrency.MainActor @Sendable (TipKit.Tips.Action) -> Swift.Void = { _ in })
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, *)
   @_disfavoredOverload @_documentation(visibility: private) @preconcurrency @_Concurrency.MainActor convenience public init(_ tip: some Tip, arrowEdge: SwiftUICore.Edge? = nil, actionHandler: @escaping @_Concurrency.MainActor @Sendable (TipKit.Tips.Action) -> Swift.Void = { _ in })
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, unavailable)
   @_documentation(visibility: private) @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
-  #endif
   @available(macOS 14.0, *)
   @_documentation(visibility: private) @_Concurrency.MainActor @preconcurrency @objc override final public func viewWillDraw()
   @objc deinit

@@ -1,14 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/QuickLook.framework/Versions/A/QuickLook'
-current-version: 1016.203.1
+current-version: 1016.205.3
 swift-abi-version: 7
 reexported-libraries:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/QuickLookIosmac.framework/Versions/A/QuickLookIosmac' ]
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '$ld$previous$/System/Library/Frameworks/ARKit.framework/Versions/A/ARKit$$6$13.1$19$_OBJC_CLASS_$_ARQuickLookPreviewItem$', 
                        '$ld$previous$/System/Library/Frameworks/ARKit.framework/Versions/A/ARKit$$6$13.1$19$_OBJC_METACLASS_$_ARQuickLookPreviewItem$', 
                        '$ld$previous$/usr/lib/swift/libswiftQuickLook.dylib$$6$15.0$17.0$_$sSo14QLPreviewReplyC9QuickLookE11contextSize8isBitmap9drawUsingABSo6CGSizeV_SbySo12CGContextRefa_ABtKctcfC$', 
@@ -39,13 +39,11 @@ exports:
                        QLPreviewSceneOptions ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/QuickLookIosmac.framework/Versions/A/QuickLookIosmac'
 current-version: 0
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _QLActivateGeneratorAtURL, _QLActiveThirdPartyGenerators, 
                        _QLAdaptSizeToRect, _QLBubbleControlIdentifierKey, _QLBubbleControlKeyEquivalentKey, 
                        _QLBubbleControlLeftAlignedKey, _QLBubbleControlShrinkableKey, 

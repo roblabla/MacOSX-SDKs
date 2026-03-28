@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/APFS.framework/Versions/A/APFS'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _APFSCancelContainerResize, _APFSCaptureCreatePreallocFile, 
                        _APFSCaptureDeletePreallocFile, _APFSCaptureExtendPreallocSizeForFile, 
                        _APFSCaptureFinishCaptureForFile, _APFSCaptureStartCaptureInFile, 
@@ -25,16 +23,18 @@ exports:
                        _APFSDecodeMetricsString, _APFSExtendedSpaceInfo, _APFSGetExclavePath, 
                        _APFSGetFragmentationHistogram, _APFSGetVolumeGroupID, _APFSMakeCompatibleName, 
                        _APFSOverProvModel, _APFSPersonaVolumeNeedsCryptoMigration, 
-                       _APFSSetupMetadataRollingMediaKey, _APFSShouldSealSystemVolume, 
-                       _APFSStatistics, _APFSStatisticsProcessContainer, _APFSStreamCreateEstimateProgress, 
-                       _APFSStreamCreateFinish, _APFSStreamCreatePrepare, _APFSStreamCreateRead, 
-                       _APFSStreamFingerprintFinish, _APFSStreamFingerprintPrepare, 
-                       _APFSStreamFingerprintWrite, _APFSStreamRestoreFinish, _APFSStreamRestorePrepare, 
-                       _APFSStreamRestoreWrite, _APFSUniquifyName, _APFSVolumeAddHints, 
-                       _APFSVolumeAddHintsWithOptions, _APFSVolumeAddUnlockRecords, 
-                       _APFSVolumeAddUnlockRecordsWithOptions, _APFSVolumeBindNewKEKToVEK, 
-                       _APFSVolumeBindNewKEKToVEKWithOptions, _APFSVolumeCacheKey, 
-                       _APFSVolumeCancelOfflinePurge, _APFSVolumeConvertToUserCrypto, 
+                       _APFSPurgeExtentIteratorCopyState, _APFSPurgeExtentIteratorCreate, 
+                       _APFSPurgeExtentIteratorCreateWithState, _APFSPurgeExtentIteratorDestroy, 
+                       _APFSPurgeExtentIteratorIterate, _APFSSetupMetadataRollingMediaKey, 
+                       _APFSShouldSealSystemVolume, _APFSStatistics, _APFSStatisticsProcessContainer, 
+                       _APFSStreamCreateEstimateProgress, _APFSStreamCreateFinish, 
+                       _APFSStreamCreatePrepare, _APFSStreamCreateRead, _APFSStreamFingerprintFinish, 
+                       _APFSStreamFingerprintPrepare, _APFSStreamFingerprintWrite, 
+                       _APFSStreamRestoreFinish, _APFSStreamRestorePrepare, _APFSStreamRestoreWrite, 
+                       _APFSUniquifyName, _APFSVolumeAddHints, _APFSVolumeAddHintsWithOptions, 
+                       _APFSVolumeAddUnlockRecords, _APFSVolumeAddUnlockRecordsWithOptions, 
+                       _APFSVolumeBindNewKEKToVEK, _APFSVolumeBindNewKEKToVEKWithOptions, 
+                       _APFSVolumeCacheKey, _APFSVolumeCancelOfflinePurge, _APFSVolumeConvertToUserCrypto, 
                        _APFSVolumeCreate, _APFSVolumeCreateForMSU, _APFSVolumeDelete, 
                        _APFSVolumeDeleteOtiLockerData, _APFSVolumeDisableFileVault, 
                        _APFSVolumeDisableFileVaultWithOptions, _APFSVolumeEnableFilevault, 
@@ -61,12 +61,14 @@ exports:
                        _kAPFSContainerBlocksizeKey, _kAPFSContainerExtentAddressKey, 
                        _kAPFSContainerExtentLengthKey, _kAPFSContainerExtentsListKey, 
                        _kAPFSContainerFSTypeKey, _kAPFSContainerSizeKey, _kAPFSContainerTidemarkKey, 
-                       _kAPFSStreamCreateEmbedCRC, _kAPFSStreamCreateReadAlignment, 
-                       _kAPFSStreamRestoreSkipSnapshot, _kAPFSVolumeAllowUnwrittenExtents, 
-                       _kAPFSVolumeCaseSensitiveKey, _kAPFSVolumeContentProtectedKey, 
-                       _kAPFSVolumeCreateSynchronousKey, _kAPFSVolumeEffaceableKey, 
-                       _kAPFSVolumeEncryptedACMKey, _kAPFSVolumeEncryptedKey, _kAPFSVolumeFSIndexKey, 
-                       _kAPFSVolumeGroupSiblingFSIndexKey, _kAPFSVolumeNameKey, _kAPFSVolumeNoAutomountAtCreateKey, 
-                       _kAPFSVolumeQuotaSizeKey, _kAPFSVolumeReserveSizeKey, _kAPFSVolumeRoleKey, 
-                       _kAPFSVolumeSkipEAPFSKey, _kAPFSVolumeUUIDKey ]
+                       _kAPFSPurgeExtentIteratorBatchSize, _kAPFSPurgeExtentIteratorOptions, 
+                       _kAPFSPurgeExtentIteratorUrgency, _kAPFSStreamCreateEmbedCRC, 
+                       _kAPFSStreamCreateReadAlignment, _kAPFSStreamRestoreSkipSnapshot, 
+                       _kAPFSVolumeAllowUnwrittenExtents, _kAPFSVolumeCaseSensitiveKey, 
+                       _kAPFSVolumeContentProtectedKey, _kAPFSVolumeCreateSynchronousKey, 
+                       _kAPFSVolumeEffaceableKey, _kAPFSVolumeEncryptedACMKey, _kAPFSVolumeEncryptedKey, 
+                       _kAPFSVolumeFSIndexKey, _kAPFSVolumeGroupSiblingFSIndexKey, 
+                       _kAPFSVolumeNameKey, _kAPFSVolumeNoAutomountAtCreateKey, _kAPFSVolumeQuotaSizeKey, 
+                       _kAPFSVolumeReserveSizeKey, _kAPFSVolumeRoleKey, _kAPFSVolumeSkipEAPFSKey, 
+                       _kAPFSVolumeUUIDKey ]
 ...

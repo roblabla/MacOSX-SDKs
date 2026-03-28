@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ProactiveDaemonSupport.framework/Versions/A/ProactiveDaemonSupport'
-current-version: 3505.5.1
+current-version: 3520.68.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s11ClientProxy22ProactiveDaemonSupport37XPCServiceBidirectionalServerInstancePTl', 
                        '_$s12LocalService22ProactiveDaemonSupport013BidirectionalB18ConnectionProtocolPTl', 
                        '_$s12PrewarmError22ProactiveDaemonSupport27ReferenceCountedCacheMemberPTl', 
@@ -204,8 +202,11 @@ exports:
                        '_$s22ProactiveDaemonSupport17MachIdentityTokenCMu', '_$s22ProactiveDaemonSupport17MachIdentityTokenCN', 
                        '_$s22ProactiveDaemonSupport17MachIdentityTokenCfD', '_$s22ProactiveDaemonSupport17MachIdentityTokenCfd', 
                        '_$s22ProactiveDaemonSupport18ConcurrentLRUCacheC5clearyyF', 
+                       '_$s22ProactiveDaemonSupport18ConcurrentLRUCacheC5countSivg', 
+                       '_$s22ProactiveDaemonSupport18ConcurrentLRUCacheC5countSivpMV', 
                        '_$s22ProactiveDaemonSupport18ConcurrentLRUCacheC6getKeyyq_SgxF', 
                        '_$s22ProactiveDaemonSupport18ConcurrentLRUCacheC6setKey_2toyx_q_tF', 
+                       '_$s22ProactiveDaemonSupport18ConcurrentLRUCacheC9allValuesSayq_GyF', 
                        '_$s22ProactiveDaemonSupport18ConcurrentLRUCacheC9cacheSizeACyxq_GSi_tcfC', 
                        '_$s22ProactiveDaemonSupport18ConcurrentLRUCacheC9cacheSizeACyxq_GSi_tcfCTj', 
                        '_$s22ProactiveDaemonSupport18ConcurrentLRUCacheC9cacheSizeACyxq_GSi_tcfCTq', 

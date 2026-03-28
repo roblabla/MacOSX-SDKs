@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreCDPUI.framework/Versions/A/CoreCDPUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s9CoreCDPUI10DeviceTypeO2tvyA2CmFWC', '_$s9CoreCDPUI10DeviceTypeO3macyA2CmFWC', 
                        '_$s9CoreCDPUI10DeviceTypeO4iPadyA2CmFWC', '_$s9CoreCDPUI10DeviceTypeO5watchyA2CmFWC', 
                        '_$s9CoreCDPUI10DeviceTypeO6iPhoneyA2CmFWC', '_$s9CoreCDPUI10DeviceTypeO7unknownyA2CmFWC', 
@@ -123,6 +123,7 @@ exports:
                        '_$s9CoreCDPUI21QuotaStorageViewModelCMa', '_$s9CoreCDPUI21QuotaStorageViewModelCMn', 
                        '_$s9CoreCDPUI21QuotaStorageViewModelCMo', '_$s9CoreCDPUI21QuotaStorageViewModelCMu', 
                        '_$s9CoreCDPUI21QuotaStorageViewModelCN', '_$s9CoreCDPUI21QuotaStorageViewModelCfD', 
+                       '_$s9CoreCDPUI27AdvancedDataProtectionStateO03pdpF7UnknownyA2CmFWC', 
                        '_$s9CoreCDPUI27AdvancedDataProtectionStateO11repairErroryA2CmFWC', 
                        '_$s9CoreCDPUI27AdvancedDataProtectionStateO11unavailableyA2CmFWC', 
                        '_$s9CoreCDPUI27AdvancedDataProtectionStateO12networkErroryA2CmFWC', 

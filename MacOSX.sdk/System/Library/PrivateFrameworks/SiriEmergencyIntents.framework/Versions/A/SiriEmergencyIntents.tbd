@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriEmergencyIntents.framework/Versions/A/SiriEmergencyIntents'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12SiriNLUTypes0A23_Nlu_External_UserParseV0A16EmergencyIntentsE11identifiersSayAA0a1_c1_D20_UsoEntityIdentifierVGvg', 
                        '_$s12SiriNLUTypes0A23_Nlu_External_UserParseV0A16EmergencyIntentsE11identifiersSayAA0a1_c1_D20_UsoEntityIdentifierVGvpMV', 
                        '_$s12SiriNLUTypes0A23_Nlu_External_UserParseV0A16EmergencyIntentsE13userDialogActAA0a1_c1_d1_ejK0VSgvg', 

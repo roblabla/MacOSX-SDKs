@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/CoreUI'
-current-version: 972.1
+current-version: 974.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CSIEqualMetrics, _CSIIllegalMetrics, _CUIAccumulateSVGShapesIntoJoinedPath, 
                        _CUIAccumulateSVGShapesIntoPath, _CUIAddPathToSVGShapeNode, 
                        _CUIBlendModeDescriptionFromCGBlendMode, _CUIBlendModeLSRDescriptionFromCGBlendMode, 

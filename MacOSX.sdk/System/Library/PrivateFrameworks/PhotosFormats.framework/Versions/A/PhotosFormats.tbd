@@ -1,9 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosFormats.framework/Versions/A/PhotosFormats'
-current-version: 821.0.120
+current-version: 841.0.101
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN2pf17ArchiveLineParserE, __ZTIN5boost10wrapexceptINS_7bad_getEEE, 
@@ -62,8 +61,7 @@ exports:
                        __ZTSN5boost9unordered13unordered_mapINS_9container12basic_stringIcNSt3__111char_traitsIcEENS_12interprocess9allocatorIcNS7_15segment_managerIcNS7_15rbtree_best_fitINS7_17null_mutex_familyENS7_10offset_ptrIvlmLm0EEELm0EEENS7_10iset_indexEEEEEEEN2pf17SceneTaxonomyNodeENS_4hashISI_EENS4_8equal_toISI_EENS8_INS4_4pairIKSI_SK_EESG_EEEE, 
                        __ZTSN5boost9unordered13unordered_mapINS_9container12basic_stringIcNSt3__111char_traitsIcEENS_12interprocess9allocatorIcNS7_15segment_managerIcNS7_15rbtree_best_fitINS7_17null_mutex_familyENS7_10offset_ptrIvlmLm0EEELm0EEENS7_10iset_indexEEEEEEEN2pf18SceneGeographyNodeENS_4hashISI_EENS4_8equal_toISI_EENS8_ISK_SG_EEEE, 
                        __ZTSN5boost9unordered13unordered_mapIyNS_12interprocess10offset_ptrIN2pf17SceneTaxonomyNodeElmLm0EEENS_4hashIyEENSt3__18equal_toIyEENS2_9allocatorINS9_4pairIKyS6_EENS2_15segment_managerIcNS2_15rbtree_best_fitINS2_17null_mutex_familyENS3_IvlmLm0EEELm0EEENS2_10iset_indexEEEEEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CAMUserPreferenceCaptureEncodingBehavior, _CAMUserPreferenceSlomoConfiguration, 
                        _CAMUserPreferenceVideoConfiguration, _PFAdjustmentIdentifierInPaint, 
                        _PFAdjustmentIdentifierSemanticStyle, _PFAdjustmentStyleCastFromString, 

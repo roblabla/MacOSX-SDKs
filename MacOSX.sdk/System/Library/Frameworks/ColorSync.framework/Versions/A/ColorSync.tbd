@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/ColorSync.framework/Versions/A/ColorSync'
-current-version: 3813.2.2
+current-version: 3813.3.3
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.11$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.12$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
@@ -104,8 +102,8 @@ exports:
                        _kColorSyncMinLuminance, _kColorSyncMissingDescription, _kColorSyncMonoFlexGTCNodeTable, 
                        _kColorSyncMonoGainMapParams, _kColorSyncNormalQuality, _kColorSyncPQDerivative, 
                        _kColorSyncPerceptualStandardRGBProfile, _kColorSyncPostGainMapCICP, 
-                       _kColorSyncPreGainMapCICP, _kColorSyncPrimaries, _kColorSyncProfile, 
-                       _kColorSyncProfileASCIIDescription, _kColorSyncProfileCacheSeed, 
+                       _kColorSyncPreGainMapCICP, _kColorSyncPreservePureGamma, _kColorSyncPrimaries, 
+                       _kColorSyncProfile, _kColorSyncProfileASCIIDescription, _kColorSyncProfileCacheSeed, 
                        _kColorSyncProfileClass, _kColorSyncProfileColorSpace, _kColorSyncProfileDescription, 
                        _kColorSyncProfileHeader, _kColorSyncProfileIsValid, _kColorSyncProfileMD5Digest, 
                        _kColorSyncProfilePCS, _kColorSyncProfileURL, _kColorSyncROMMRGBProfile, 
@@ -144,7 +142,7 @@ exports:
                        _kColorSyncTransformSrcSpace, _kColorSyncTransformTRCSize, 
                        _kColorSyncTransformTag, _kColorSyncTransformUseITU709OETF, 
                        _kColorSyncUseBT1886ForCoreVideoGamma, _kColorSyncWebSafeColorsProfile ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CGDisplayCreateUUIDFromDisplayID, _CGDisplayGetDisplayIDFromUUID, 
                        _CMProfileFromColorSyncProfile, _ColorSyncCMMCopyCMMIdentifier, 
                        _ColorSyncCMMCopyLocalizedName, _ColorSyncCMMCreate, _ColorSyncCMMGetBundle, 

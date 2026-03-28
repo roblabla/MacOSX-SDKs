@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriCalendarUI.framework/Versions/A/SiriCalendarUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14SiriCalendarUI0B15SnippetProviderC0dC00D9ProvidingAAMc', 
                        '_$s14SiriCalendarUI0B15SnippetProviderC7snippet3for4mode5idiom05SwiftC07AnyViewV0aB7Intents0D0O_So7VRXModeVSo8VRXIdiomVtKF', 
                        '_$s14SiriCalendarUI0B15SnippetProviderCACycfC', '_$s14SiriCalendarUI0B15SnippetProviderCACycfCTj', 

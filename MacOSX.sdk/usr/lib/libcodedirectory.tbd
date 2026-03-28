@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libcodedirectory.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _libcd_add_raw_blob_no_copy, _libcd_add_signature_space, _libcd_add_sslot_data_no_copy, 
                        _libcd_cd_size, _libcd_create, _libcd_free, _libcd_get_cdhash_for_type, 
                        _libcd_get_input_func_ctx, _libcd_get_output_func_ctx, _libcd_is_blob_a_linker_signature, 

@@ -36,7 +36,7 @@ API_AVAILABLE(macos(26.0), ios(26.0))
 /// The argument table provides inputs to all subsequent Machine Learning dispatches.
 /// - Parameters:
 ///   - argumentTable: An argument table to set on the command encoder's Machine Learning stage.
--(void)setArgumentTable:(id <MTL4ArgumentTable>)argumentTable;
+-(void)setArgumentTable:(nullable id <MTL4ArgumentTable>)argumentTable;
 
 /// Dispatches a machine learning network using the current pipeline state and argument table.
 ///

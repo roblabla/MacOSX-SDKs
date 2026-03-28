@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySettingsUI.framework/Versions/A/AccessibilitySettingsUI'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s23AccessibilitySettingsUI010AXSUIVoiceB0V05SwiftC04ViewAAMc', 
                        '_$s23AccessibilitySettingsUI010AXSUIVoiceB0V0B0V08perVoiceB0AEvgZ', 
                        '_$s23AccessibilitySettingsUI010AXSUIVoiceB0V0B0V08perVoiceB0AEvpZMV', 
@@ -48,8 +48,20 @@ exports:
                        '_$s23AccessibilitySettingsUI014AXSUIGuestPassB4ViewV8settingsACSo10AXSettingsC0A9UtilitiesE05GuestE0C_tcfC', 
                        '_$s23AccessibilitySettingsUI014AXSUIGuestPassB4ViewVMa', 
                        '_$s23AccessibilitySettingsUI014AXSUIGuestPassB4ViewVMn', 
-                       '_$s23AccessibilitySettingsUI014AXSUIGuestPassB4ViewVN', '_$s23AccessibilitySettingsUI14AXSUILocStringyS2SF', 
-                       '_$s23AccessibilitySettingsUI15AXRSettingsViewV05SwiftC00E0AAMc', 
+                       '_$s23AccessibilitySettingsUI014AXSUIGuestPassB4ViewVN', '_$s23AccessibilitySettingsUI015LiveRecognitionB4ViewV05SwiftC00F0AAMc', 
+                       '_$s23AccessibilitySettingsUI015LiveRecognitionB4ViewV4bodyQrvg', 
+                       '_$s23AccessibilitySettingsUI015LiveRecognitionB4ViewV4bodyQrvpMV', 
+                       '_$s23AccessibilitySettingsUI015LiveRecognitionB4ViewV4bodyQrvpQOMQ', 
+                       '_$s23AccessibilitySettingsUI015LiveRecognitionB4ViewV8settingsACSo10AXSettingsC_tcfC', 
+                       '_$s23AccessibilitySettingsUI015LiveRecognitionB4ViewVMa', 
+                       '_$s23AccessibilitySettingsUI015LiveRecognitionB4ViewVMn', 
+                       '_$s23AccessibilitySettingsUI015LiveRecognitionB4ViewVN', 
+                       '_$s23AccessibilitySettingsUI06LiveOnB4ViewV05SwiftC00F0AAMc', 
+                       '_$s23AccessibilitySettingsUI06LiveOnB4ViewV4bodyQrvg', '_$s23AccessibilitySettingsUI06LiveOnB4ViewV4bodyQrvpMV', 
+                       '_$s23AccessibilitySettingsUI06LiveOnB4ViewV4bodyQrvpQOMQ', 
+                       '_$s23AccessibilitySettingsUI06LiveOnB4ViewVACycfC', '_$s23AccessibilitySettingsUI06LiveOnB4ViewVMa', 
+                       '_$s23AccessibilitySettingsUI06LiveOnB4ViewVMn', '_$s23AccessibilitySettingsUI06LiveOnB4ViewVN', 
+                       '_$s23AccessibilitySettingsUI14AXSUILocStringyS2SF', '_$s23AccessibilitySettingsUI15AXRSettingsViewV05SwiftC00E0AAMc', 
                        '_$s23AccessibilitySettingsUI15AXRSettingsViewV4bodyQrvg', 
                        '_$s23AccessibilitySettingsUI15AXRSettingsViewV4bodyQrvpMV', 
                        '_$s23AccessibilitySettingsUI15AXRSettingsViewV4bodyQrvpQOMQ', 

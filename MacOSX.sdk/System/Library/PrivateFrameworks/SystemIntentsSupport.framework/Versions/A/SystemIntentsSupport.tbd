@@ -2,6 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SystemIntentsSupport.framework/Versions/A/SystemIntentsSupport'
-current-version: 5.2.2
+current-version: 5.4.4
 compatibility-version: 0
+swift-abi-version: 7
 ...

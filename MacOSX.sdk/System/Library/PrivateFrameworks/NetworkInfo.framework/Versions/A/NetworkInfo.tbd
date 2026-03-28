@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NetworkInfo.framework/Versions/A/NetworkInfo'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s11NetworkInfo0aB10AssessmentC13configurationAcA0aB13ConfigurationC_tcfC', 
                        '_$s11NetworkInfo0aB10AssessmentC13configurationAcA0aB13ConfigurationC_tcfCTj', 
                        '_$s11NetworkInfo0aB10AssessmentC13configurationAcA0aB13ConfigurationC_tcfCTq', 

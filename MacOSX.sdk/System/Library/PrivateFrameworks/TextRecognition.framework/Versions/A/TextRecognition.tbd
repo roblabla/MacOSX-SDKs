@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/TextRecognition.framework/Versions/A/TextRecognition'
 current-version: 157
 swift-abi-version: 7
@@ -71,8 +70,7 @@ exports:
                        __ZTSNSt3__110__function6__baseIFvRKNS_6vectorImNS_9allocatorImEEEEddddddEEE, 
                        __ZTSNSt3__110shared_ptrIN15CoreRecognition7decoder9BaseStateEE27__shared_ptr_default_deleteIS3_S3_EE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPN15CoreRecognition7decoder9BaseStateENS_10shared_ptrIS3_E27__shared_ptr_default_deleteIS3_S3_EENS_9allocatorIS3_EEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s15TextRecognition010CRLanguageB7ContextC15unownedExecutorScevg', 
                        '_$s15TextRecognition010CRLanguageB7ContextC15unownedExecutorScevpMV', 
                        '_$s15TextRecognition010CRLanguageB7ContextC6script13defaultLocaleACSo21CRDisambiguatedScriptV_AA8CRLocaleOtcfC', 
@@ -1353,7 +1351,7 @@ exports:
                        __ZGVZNK15CoreRecognition7decoder17LexiconBeamScorerINS0_12LexiconStateEE11expandStateEPKS2_mPS2_mE17WORD_MIN_LOG_PROB, 
                        __ZNSt3__119piecewise_constructE, __ZZNK15CoreRecognition7decoder17LexiconBeamScorerINS0_12LexiconStateEE11expandStateEPKS2_mPS2_mE16CONTEXT_LOG_PROB, 
                        __ZZNK15CoreRecognition7decoder17LexiconBeamScorerINS0_12LexiconStateEE11expandStateEPKS2_mPS2_mE17WORD_MIN_LOG_PROB ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __Z26generateIntegralImage_NEON13vImage_BufferPKS_, __ZN11CRCHNetwork10kBestPathsEmmmPK10_LXLexiconPK9_LXCursorPS0_S5_P18CRCHPatternNetworkP17CRCHNetworkCursor24CHRecognitionContentTypePvbU13block_pointerFdRK11NetworkEdgeEU13block_pointerFdP15CRCHLatticePathEbbbbRKNSt3__18functionIFvRKNSM_6vectorImNSM_9allocatorImEEEEddddddEEE, 
                        __ZN17InstantLogPrinter5printEPKcPc, __ZN20CRDetectorOutputMaps9scaleMapsEb, 
                        __ZN23CRDetectorPostProcessV328splitIsthmusMergedComponentsEPN15CRDetectorUtils38CRTextDetectorConnectedComponentResultEb ]

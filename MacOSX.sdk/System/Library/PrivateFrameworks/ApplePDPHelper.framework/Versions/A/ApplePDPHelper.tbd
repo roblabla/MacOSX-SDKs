@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ApplePDPHelper.framework/Versions/A/ApplePDPHelper'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ __ZN23ApplePDPHelperInterface10callMethodEjPKcPyjPvmS2_PjS3_Pm, 
                        __ZN23ApplePDPHelperInterface10cleanup_nlEv, __ZN23ApplePDPHelperInterface10removeFlowE27AppleIPAppenderTrafficClass, 
                        __ZN23ApplePDPHelperInterface11getInstanceEv, __ZN23ApplePDPHelperInterface12ipcConfigSetERK33AppleIPAppenderIPCConfigSetParams, 

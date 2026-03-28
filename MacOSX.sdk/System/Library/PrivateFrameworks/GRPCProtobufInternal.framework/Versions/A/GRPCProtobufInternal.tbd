@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GRPCProtobufInternal.framework/Versions/A/GRPCProtobufInternal'
 current-version: 2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s16GRPCCoreInternal8RPCErrorV012GRPCProtobufB0E21unpackGoogleRPCStatusAD0fG0VSgyKF', 
                        '_$s20GRPCProtobufInternal12ErrorDetailsV0C4InfoV11descriptionSSvg', 
                        '_$s20GRPCProtobufInternal12ErrorDetailsV0C4InfoV11descriptionSSvpMV', 

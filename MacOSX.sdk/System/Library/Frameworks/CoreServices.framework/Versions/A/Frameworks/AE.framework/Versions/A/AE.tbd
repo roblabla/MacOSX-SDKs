@@ -1,21 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE'
 current-version: 944
 compatibility-version: 0
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ DesktopServices, Foundation, HIServices, LaunchServices, PrintCore ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CreateRangeDescriptor, _DisposeAEBlockUPP, _DisposeAEUnblockUPP, 
                        _InvokeAEBlockUPP, _InvokeAEUnblockUPP, _NewAEBlockUPP, _NewAEUnblockUPP, 
                        __AECreateAEReceiveMachPort, __AEInstallAEInteractWithUserCallback, 
@@ -26,7 +22,7 @@ exports:
                        _aeClassicCompatSizeOfFlattenedDesc, _aeConvertCarbonToClassic, 
                        _aeConvertClassicToCarbon, _aeDecodeMachMsg, _aeEventToEppcMsg, 
                        _aeReconstructAppleEvent, _aeReconstructReplyAppleEvent, _aeRemoveFromImplEnd ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AEBuildAppleEvent, _AEBuildDesc, _AEBuildParameters, _AECallObjectAccessor, 
                        _AECheckIsRecord, _AECoerceDesc, _AECoercePtr, _AECoercionHandlersApplyFunction, 
                        _AECompareDesc, _AEConvertFromMsg, _AECountItems, _AECreateAppleEvent, 
@@ -79,10 +75,10 @@ exports:
                        __AEDescRecordIndexedItem, __AEDescToInternalImpl, __AEDoesAppleEventContainAnyTypesWhichRequireAnnotation, 
                        __AEEventDescGetInformation, __AEEventRequiresSecurityHandlerChecks, 
                        __AEEventSecurityHandlerDoChecks, __AEGenerateAnnotations, 
-                       __AEGetEventSecurityHandler, __AEInstallEventHandlerBlock, 
-                       __AEInstallEventSecurityHandler, __AEInstallEventSecurityHandlerBlock, 
-                       __AEIsAppleEventTargetInSandbox, __AERemoveAEReceivePort, 
-                       __AERemoveEventSecurityHandler, __AEUnflattenDescFromBytes, 
+                       __AEGenerateAnnotationsForAuditToken, __AEGetEventSecurityHandler, 
+                       __AEInstallEventHandlerBlock, __AEInstallEventSecurityHandler, 
+                       __AEInstallEventSecurityHandlerBlock, __AEIsAppleEventTargetInSandbox, 
+                       __AERemoveAEReceivePort, __AERemoveEventSecurityHandler, __AEUnflattenDescFromBytes, 
                        __AppleEventsCheckInApp, __AppleEventsCheckInAppWithBlock, 
                        __AppleEventsCopyApplicationEntitlements, __AppleEventsCopyApplicationEntitlementsWithBlock, 
                        __AppleEventsCopyStatusString, __AppleEventsCopyStatusStringWithBlock, 

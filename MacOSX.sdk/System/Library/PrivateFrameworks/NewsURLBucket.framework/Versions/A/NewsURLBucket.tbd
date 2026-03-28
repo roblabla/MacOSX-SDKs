@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/NewsURLBucket.framework/Versions/A/NewsURLBucket'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s11ElementType13NewsURLBucket06HasherB0PTl', '_$s13NewsURLBucket10HasherTypeMp', 
                        '_$s13NewsURLBucket10HasherTypeTL', '_$s13NewsURLBucket12HashBucketerC6bucket3for0E5CountSi10Foundation4DataV_SitF', 
                        '_$s13NewsURLBucket12HashBucketerCAA0cD4TypeAAMc', '_$s13NewsURLBucket12HashBucketerCAA0cD4TypeAAWP', 

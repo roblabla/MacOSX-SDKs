@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MathTypesetting.framework/Versions/A/MathTypesetting'
 current-version: 4.0.5
 swift-abi-version: 7
@@ -12,8 +11,7 @@ exports:
                        __ZTSNSt3__110shared_ptrIKNS_6vectorImNS_9allocatorImEEEEE27__shared_ptr_default_deleteIS5_S4_EE, 
                        __ZTSNSt3__119basic_ostringstreamIwNS_11char_traitsIwEENS_9allocatorIwEEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIPNS_6vectorImNS_9allocatorImEEEENS_10shared_ptrIKS4_E27__shared_ptr_default_deleteIS7_S4_EENS2_IS4_EEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s15MathTypesetting0A12PresentationV11EnvironmentV17sourceAttributionSbvM', 
                        '_$s15MathTypesetting0A12PresentationV11EnvironmentV17sourceAttributionSbvg', 
                        '_$s15MathTypesetting0A12PresentationV11EnvironmentV17sourceAttributionSbvpMV', 

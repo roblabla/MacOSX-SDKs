@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AliroReader.framework/Versions/A/AliroReader'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10PrivateKey11AliroReader0cD6ConfigPTl', '_$s11AliroReader0A24MessageConversionFailureO11invalidDatayACSS_s5Error_pSgtcACmFWC', 
                        '_$s11AliroReader0A24MessageConversionFailureO15invalidDataSizeyACSS_s5Error_pSgtcACmFWC', 
                        '_$s11AliroReader0A24MessageConversionFailureO15tlvParsingErroryACs0H0_pSg_tcACmFWC', 
@@ -102,12 +102,12 @@ exports:
                        '_$s11AliroReader0aB9InterfaceCMa', '_$s11AliroReader0aB9InterfaceCMn', 
                        '_$s11AliroReader0aB9InterfaceCMo', '_$s11AliroReader0aB9InterfaceCMu', 
                        '_$s11AliroReader0aB9InterfaceCfD', '_$s11AliroReader0aB9InterfaceCfd', 
+                       '_$s11AliroReader0aB9InterfaceCyACyxGxKcfC', '_$s11AliroReader0aB9InterfaceCyACyxGxKcfCTj', 
+                       '_$s11AliroReader0aB9InterfaceCyACyxGxKcfCTq', '_$s11AliroReader0aB9InterfaceCyACyxGxKcfc', 
                        '_$s11AliroReader15ConnectedDeviceMp', '_$s11AliroReader15ConnectedDeviceP11sendCommandy10Foundation4DataVAGKFTj', 
                        '_$s11AliroReader15ConnectedDeviceP11sendCommandy10Foundation4DataVAGKFTq', 
-                       '_$s11AliroReader15ConnectedDeviceTL', '_$s11AliroReader17InvalidRandomDataO010invalidHexE6LengthyACSS_tcACmFWC', 
-                       '_$s11AliroReader17InvalidRandomDataOMa', '_$s11AliroReader17InvalidRandomDataOMn', 
-                       '_$s11AliroReader17InvalidRandomDataON', '_$s11AliroReader17InvalidRandomDataOs5ErrorAAMc', 
-                       '_$s11AliroReader17SigningPrivateKeyMp', '_$s11AliroReader17SigningPrivateKeyP06publicE09CryptoKit4P256O0C0O06PublicE0VvgTj', 
+                       '_$s11AliroReader15ConnectedDeviceTL', '_$s11AliroReader17SigningPrivateKeyMp', 
+                       '_$s11AliroReader17SigningPrivateKeyP06publicE09CryptoKit4P256O0C0O06PublicE0VvgTj', 
                        '_$s11AliroReader17SigningPrivateKeyP06publicE09CryptoKit4P256O0C0O06PublicE0VvgTq', 
                        '_$s11AliroReader17SigningPrivateKeyP9signature3for9CryptoKit4P256O0C0O14ECDSASignatureV10Foundation4DataV_tKFTj', 
                        '_$s11AliroReader17SigningPrivateKeyP9signature3for9CryptoKit4P256O0C0O14ECDSASignatureV10Foundation4DataV_tKFTq', 

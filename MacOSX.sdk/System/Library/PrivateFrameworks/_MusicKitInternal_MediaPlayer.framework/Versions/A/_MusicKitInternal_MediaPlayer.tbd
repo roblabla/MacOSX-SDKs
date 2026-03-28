@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/_MusicKitInternal_MediaPlayer.framework/Versions/A/_MusicKitInternal_MediaPlayer'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16MusicKitInternal07GenericA4ItemO01_abC12_MediaPlayer28LegacyModelObjectConvertibleADMc', 
                        '_$s16MusicKitInternal07GenericA4ItemO01_abC12_MediaPlayer28LegacyModelObjectConvertibleADWP', 
                        '_$s16MusicKitInternal07GenericA4ItemO01_abC12_MediaPlayerEyACSgSo13MPModelObjectCcfC', 
@@ -89,6 +89,17 @@ exports:
                        '_$s16MusicKitInternal9TVEpisodeV01_abC12_MediaPlayer28LegacyModelObjectConvertibleADMc', 
                        '_$s16MusicKitInternal9TVEpisodeV01_abC12_MediaPlayer28LegacyModelObjectConvertibleADWP', 
                        '_$s21LegacyModelObjectType29_MusicKitInternal_MediaPlayer0abC11ConvertiblePTl', 
+                       '_$s29_MusicKitInternal_MediaPlayer0A22LibraryManagerProviderV07libraryG0So0afG0_pSgvM', 
+                       '_$s29_MusicKitInternal_MediaPlayer0A22LibraryManagerProviderV07libraryG0So0afG0_pSgvg', 
+                       '_$s29_MusicKitInternal_MediaPlayer0A22LibraryManagerProviderV07libraryG0So0afG0_pSgvpMV', 
+                       '_$s29_MusicKitInternal_MediaPlayer0A22LibraryManagerProviderV07libraryG0So0afG0_pSgvs', 
+                       '_$s29_MusicKitInternal_MediaPlayer0A22LibraryManagerProviderV6sharedACvMZ', 
+                       '_$s29_MusicKitInternal_MediaPlayer0A22LibraryManagerProviderV6sharedACvgZ', 
+                       '_$s29_MusicKitInternal_MediaPlayer0A22LibraryManagerProviderV6sharedACvpZMV', 
+                       '_$s29_MusicKitInternal_MediaPlayer0A22LibraryManagerProviderV6sharedACvsZ', 
+                       '_$s29_MusicKitInternal_MediaPlayer0A22LibraryManagerProviderVMa', 
+                       '_$s29_MusicKitInternal_MediaPlayer0A22LibraryManagerProviderVMn', 
+                       '_$s29_MusicKitInternal_MediaPlayer0A22LibraryManagerProviderVN', 
                        '_$s29_MusicKitInternal_MediaPlayer28LegacyModelObjectConvertibleMp', 
                        '_$s29_MusicKitInternal_MediaPlayer28LegacyModelObjectConvertibleP14canBeConverted4fromSb0fgH4TypeQz_tFZTj', 
                        '_$s29_MusicKitInternal_MediaPlayer28LegacyModelObjectConvertibleP14canBeConverted4fromSb0fgH4TypeQz_tFZTq', 

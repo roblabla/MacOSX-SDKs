@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleMediaServicesUIKitInternal.framework/Versions/A/AppleMediaServicesUIKitInternal'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s31AppleMediaServicesUIKitInternal14OnBoardingViewV4bodyQrvg', 
                        '_$s31AppleMediaServicesUIKitInternal14OnBoardingViewV4bodyQrvpMV', 
                        '_$s31AppleMediaServicesUIKitInternal14OnBoardingViewV4bodyQrvpQOMQ', 
@@ -31,6 +31,7 @@ exports:
                        '_$s31AppleMediaServicesUIKitInternal16AccountImageViewV23defaultMonogramUIConfigAA0jK0VvgZ', 
                        '_$s31AppleMediaServicesUIKitInternal16AccountImageViewV23defaultMonogramUIConfigAA0jK0VvpZMV', 
                        '_$s31AppleMediaServicesUIKitInternal16AccountImageViewV3bag16monogramUIConfigAC0abc3KitE010BagServiceV_AA08MonogramK0VtcfC', 
+                       '_$s31AppleMediaServicesUIKitInternal16AccountImageViewV3bag16monogramUIConfigACx_AA08MonogramK0Vtc0abc3KitE03BagRzlufC', 
                        '_$s31AppleMediaServicesUIKitInternal16AccountImageViewV4bodyQrvg', 
                        '_$s31AppleMediaServicesUIKitInternal16AccountImageViewV4bodyQrvpMV', 
                        '_$s31AppleMediaServicesUIKitInternal16AccountImageViewV4bodyQrvpQOMQ', 

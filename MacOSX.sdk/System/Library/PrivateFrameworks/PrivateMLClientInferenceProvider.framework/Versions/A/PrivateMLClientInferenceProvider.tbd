@@ -1,14 +1,16 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PrivateMLClientInferenceProvider.framework/Versions/A/PrivateMLClientInferenceProvider'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15TokenGeneration11ConstraintsO32PrivateMLClientInferenceProviderE16toTMLConstraints6logger0dE00dE12ModelOptionsV0I0OSg2os6LoggerV_tKF', 
                        '_$s2os6LoggerV32PrivateMLClientInferenceProviderE9viewCycleACvgZ', 
                        '_$s32PrivateMLClientInferenceProvider03NewcD0C11prewarmHintyy20ModelManagerServices0cD18PrewarmInformationVYaF', 
                        '_$s32PrivateMLClientInferenceProvider03NewcD0C11prewarmHintyy20ModelManagerServices0cD18PrewarmInformationVYaFTu', 
+                       '_$s32PrivateMLClientInferenceProvider03NewcD0C11sessionHint2to4withy20ModelManagerServices12SessionStateO_AG0cdM11InformationVtYaAG0C5ErrorOYKF', 
+                       '_$s32PrivateMLClientInferenceProvider03NewcD0C11sessionHint2to4withy20ModelManagerServices12SessionStateO_AG0cdM11InformationVtYaAG0C5ErrorOYKFTu', 
                        '_$s32PrivateMLClientInferenceProvider03NewcD0C13requestStream10clientData13configurationSci_p10Foundation0I0V_20ModelManagerServices0cD20RequestConfigurationVtF', 
                        '_$s32PrivateMLClientInferenceProvider03NewcD0C13requestStream10clientData13configurationSci_p20ModelManagerServices06ClientI0V_AG0cD20RequestConfigurationVtF', 
                        '_$s32PrivateMLClientInferenceProvider03NewcD0C14requestOneShot10clientData13configuration10Foundation0J0VAI_20ModelManagerServices0cD20RequestConfigurationVtYaKF', 
@@ -45,8 +47,10 @@ exports:
                        '_$s32PrivateMLClientInferenceProvider0abcD5ErrorO18invalidSessionUUIDyA2CmFWC', 
                        '_$s32PrivateMLClientInferenceProvider0abcD5ErrorO18unknownImageFormatyA2CmFWC', 
                        '_$s32PrivateMLClientInferenceProvider0abcD5ErrorO19unknownResponseTypeyA2CmFWC', 
+                       '_$s32PrivateMLClientInferenceProvider0abcD5ErrorO19unknownToolCallKindyA2CmFWC', 
                        '_$s32PrivateMLClientInferenceProvider0abcD5ErrorO20deniedDueToRateLimityA2C7ContextVcACmFWC', 
                        '_$s32PrivateMLClientInferenceProvider0abcD5ErrorO23deniedDueToAvailabilityyA2C7ContextVcACmFWC', 
+                       '_$s32PrivateMLClientInferenceProvider0abcD5ErrorO23nodeConfigurationStatusyACs5Int32V_SSSbtcACmFWC', 
                        '_$s32PrivateMLClientInferenceProvider0abcD5ErrorO25unknownRequestPayloadCaseyA2CmFWC', 
                        '_$s32PrivateMLClientInferenceProvider0abcD5ErrorO26AppleIntelligenceReporting0fgE0AAMc', 
                        '_$s32PrivateMLClientInferenceProvider0abcD5ErrorO28descriptionWithoutUnderlyingSSvg', 
@@ -89,20 +93,6 @@ exports:
                        '_$s32PrivateMLClientInferenceProvider0cD11WithPrewarmP11prewarmHintyy20ModelManagerServices0cdF11InformationVYaFTjTu', 
                        '_$s32PrivateMLClientInferenceProvider0cD11WithPrewarmP11prewarmHintyy20ModelManagerServices0cdF11InformationVYaFTq', 
                        '_$s32PrivateMLClientInferenceProvider0cD11WithPrewarmTL', 
-                       '_$s32PrivateMLClientInferenceProvider14MediaProcessorC08completeE10CandidatesSay15TokenGeneration16PromptCompletionV9CandidateVGyKFTj', 
-                       '_$s32PrivateMLClientInferenceProvider14MediaProcessorC08completeE10CandidatesSay15TokenGeneration16PromptCompletionV9CandidateVGyKFTq', 
-                       '_$s32PrivateMLClientInferenceProvider14MediaProcessorC12handleStream5mediaSay15TokenGeneration21PromptCompletionEvent_pG0aB00A9MLRequestV0E0O_tKFTj', 
-                       '_$s32PrivateMLClientInferenceProvider14MediaProcessorC12handleStream5mediaSay15TokenGeneration21PromptCompletionEvent_pG0aB00A9MLRequestV0E0O_tKFTq', 
-                       '_$s32PrivateMLClientInferenceProvider14MediaProcessorC18handleAccumulating5mediay0aB00A9MLRequestV0E0O_tKFTj', 
-                       '_$s32PrivateMLClientInferenceProvider14MediaProcessorC18handleAccumulating5mediay0aB00A9MLRequestV0E0O_tKFTq', 
-                       '_$s32PrivateMLClientInferenceProvider14MediaProcessorCMa', 
-                       '_$s32PrivateMLClientInferenceProvider14MediaProcessorCMm', 
-                       '_$s32PrivateMLClientInferenceProvider14MediaProcessorCMn', 
-                       '_$s32PrivateMLClientInferenceProvider14MediaProcessorCMo', 
-                       '_$s32PrivateMLClientInferenceProvider14MediaProcessorCMu', 
-                       '_$s32PrivateMLClientInferenceProvider14MediaProcessorCN', 
-                       '_$s32PrivateMLClientInferenceProvider14MediaProcessorCfD', 
-                       '_$s32PrivateMLClientInferenceProvider14MediaProcessorCfd', 
                        '_$s32PrivateMLClientInferenceProvider23ErrorCodeDifferentiatorO018requestStreamCatchabE0yA2CmFWC', 
                        '_$s32PrivateMLClientInferenceProvider23ErrorCodeDifferentiatorO019requestOneShotCatchabE0yA2CmFWC', 
                        '_$s32PrivateMLClientInferenceProvider23ErrorCodeDifferentiatorO024noVariableBindingSupporta8MLCLientE0yA2CmFWC', 
@@ -119,6 +109,7 @@ exports:
                        '_$s32PrivateMLClientInferenceProvider23ErrorCodeDifferentiatorOSHAAMc', 
                        '_$s32PrivateMLClientInferenceProvider23ErrorCodeDifferentiatorOSQAAMc', 
                        '_$s32PrivateMLClientInferenceProvider23ErrorCodeDifferentiatorOSYAAMc', 
+                       '_$s32PrivateMLClientInferenceProvider29getFinishReasonAndTokenCounts010completionG00I10Generation0fG0O_s6UInt32VAHt0aB00A9MLRequestV8ResponseV010CompletionG0O_tF', 
                        '_$s32PrivateMLClientInferenceProvider9OSVariantO15isCustomerBuildSbvMZ', 
                        '_$s32PrivateMLClientInferenceProvider9OSVariantO15isCustomerBuildSbvgZ', 
                        '_$s32PrivateMLClientInferenceProvider9OSVariantO15isCustomerBuildSbvpZMV', 

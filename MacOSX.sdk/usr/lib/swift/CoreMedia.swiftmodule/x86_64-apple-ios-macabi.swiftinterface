@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-ios26.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreMedia -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 3290.6.5.5 -module-name CoreMedia
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-ios26.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreMedia -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 3305.24.5.2 -module-name CoreMedia
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 public import CoreAudio
 public import CoreAudioTypes
 public import CoreFoundation
@@ -30,28 +30,16 @@ extension CoreMedia._CMObjectiveCBridgeableWithRawValue where Self.RawValue : Sw
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia._CMObjectiveCBridgeableWithRawValue where Self.RawValue == CoreFoundation.CFString, Self._ObjectiveCType == CoreFoundation.CFString {
   public func _bridgeToObjectiveC() -> Self._ObjectiveCType
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ source: Self._ObjectiveCType, result: inout Self?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ source: Self._ObjectiveCType, result: inout Self?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _unconditionallyBridgeFromObjectiveC(_ source: Self._ObjectiveCType?) -> Self
-  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia._CMObjectiveCBridgeableWithRawValue where Self.RawValue : Swift._ObjectiveCBridgeable, Self._ObjectiveCType == Self.RawValue._ObjectiveCType {
   public func _bridgeToObjectiveC() -> Self._ObjectiveCType
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ source: Self._ObjectiveCType, result: inout Self?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ source: Self._ObjectiveCType, result: inout Self?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _unconditionallyBridgeFromObjectiveC(_ source: Self._ObjectiveCType?) -> Self
-  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia.CMClock {
@@ -143,13 +131,10 @@ extension CoreMedia.CMTimebase {
   public static var typeID: CoreFoundation.CFTypeID {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
   public var sourceTimebase: CoreMedia.CMTimebase? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, introduced: 10.15, deprecated: 12.0, renamed: "sourceTimebase")
   @available(iOS, introduced: 13.0, deprecated: 15.0, renamed: "sourceTimebase")
   @available(tvOS, introduced: 13.0, deprecated: 15.0, renamed: "sourceTimebase")
@@ -157,14 +142,10 @@ extension CoreMedia.CMTimebase {
   public var masterTimebase: CoreMedia.CMTimebase? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
   public var sourceClock: CoreMedia.CMClock? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, introduced: 10.15, deprecated: 12.0, renamed: "sourceClock")
   @available(iOS, introduced: 13.0, deprecated: 15.0, renamed: "sourceClock")
   @available(tvOS, introduced: 13.0, deprecated: 15.0, renamed: "sourceClock")
@@ -172,7 +153,6 @@ extension CoreMedia.CMTimebase {
   public var masterClock: CoreMedia.CMClock? {
     get
   }
-  #endif
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
   public var source: any CoreMedia.CMSyncProtocol {
     get
@@ -354,40 +334,22 @@ public struct CMTaggedDynamicBuffer : Swift.Sendable {
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension CoreMedia.CMTaggedDynamicBuffer {
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public init(unsafeBuffer: sending CoreMedia.CMTaggedBuffer)
-  #else
-  public init(unsafeBuffer: __owned CoreMedia.CMTaggedBuffer)
-  #endif
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public func withUnsafeTaggedBuffer<R>(_ body: (CoreMedia.CMTaggedBuffer) throws -> sending R) rethrows -> sending R
-  #else
-  public func withUnsafeTaggedBuffer<R>(_ body: (CoreMedia.CMTaggedBuffer) throws -> R) rethrows -> R
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension Swift.Array where Element == CoreMedia.CMTaggedDynamicBuffer {
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public func withUnsafeTaggedBuffers<R>(_ body: ([CoreMedia.CMTaggedBuffer]) throws -> sending R) rethrows -> sending R where R : ~Copyable
-  #else
-  public func withUnsafeTaggedBuffers<R>(_ body: ([CoreMedia.CMTaggedBuffer]) throws -> R) rethrows -> R where R : ~Copyable
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 public struct CMReadySampleBuffer<Content> : Swift.Sendable where Content : CoreMedia.CMSampleBuffer.Content {
   public var contentType: CoreMedia.CMSampleBuffer.ContentType {
     get
   }
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public func withUnsafeSampleBuffer<R>(_ body: (CoreMedia.CMSampleBuffer) throws -> sending R) rethrows -> sending R where R : ~Copyable
-  #else
-  public func withUnsafeSampleBuffer<R>(_ body: (CoreMedia.CMSampleBuffer) throws -> R) rethrows -> R where R : ~Copyable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_disfavoredOverload public var formatDescription: CoreMedia.CMFormatDescription? {
     get
   }
-  #endif
   public var duration: CoreMedia.CMTime {
     get
   }
@@ -427,39 +389,23 @@ extension CoreMedia.CMReadySampleBuffer where Content : CoreMedia.CMSampleBuffer
   public var totalSampleSize: Swift.Int {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var outputSampleTimings: CoreMedia.CMSampleBuffer.TimingPerSample? {
     get
   }
-  #endif
   public func splitSamples() -> [CoreMedia.CMReadySampleBuffer<Content>]
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 public struct CMReadOnlyDataBlockBuffer : Swift.Sendable {
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public init(unsafeBlockBuffer: sending CoreMedia.CMBlockBuffer)
-  #else
-  public init(unsafeBlockBuffer: __owned CoreMedia.CMBlockBuffer)
-  #endif
   public init(subBlockCapacity: Swift.Int = 0)
   public init(_ source: consuming CoreMedia.CMMutableDataBlockBuffer)
   public init(_ data: Foundation.Data)
   public init(_ dispatchData: Dispatch.DispatchData)
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public func withUnsafeBlockBuffer<R>(_ body: (CoreMedia.CMBlockBuffer) throws -> sending R) rethrows -> sending R where R : ~Copyable
-  #else
-  public func withUnsafeBlockBuffer<R>(_ body: (CoreMedia.CMBlockBuffer) throws -> R) rethrows -> R where R : ~Copyable
-  #endif
   public var isContiguous: Swift.Bool {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public func withContiguousStorageIfAvailable<R>(_ body: (Swift.UnsafeRawBufferPointer) throws -> sending R) rethrows -> sending R?
-  #else
-  public func withContiguousStorageIfAvailable<R>(_ body: (Swift.UnsafeRawBufferPointer) throws -> R) rethrows -> R?
-  #endif
-  #endif
   public mutating func append(referenceOf other: CoreMedia.CMReadOnlyDataBlockBuffer, optimizeDepth: Swift.Bool = true)
   public mutating func append(referenceOf other: consuming CoreMedia.CMMutableDataBlockBuffer, optimizeDepth: Swift.Bool = true)
   public static func + (a: CoreMedia.CMReadOnlyDataBlockBuffer, b: CoreMedia.CMReadOnlyDataBlockBuffer) -> CoreMedia.CMReadOnlyDataBlockBuffer
@@ -497,9 +443,7 @@ extension CoreMedia.CMReadOnlyDataBlockBuffer : Foundation.DataProtocol {
   public subscript(range: Swift.Range<CoreMedia.CMReadOnlyDataBlockBuffer.Index>) -> CoreMedia.CMReadOnlyDataBlockBuffer {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_disfavoredOverload public func withContiguousStorageIfAvailable<R>(_ body: (Swift.UnsafeBufferPointer<Swift.UInt8>) throws -> R) rethrows -> R?
-  #endif
   public struct BlockRegion : Foundation.DataProtocol, Foundation.ContiguousBytes {
     public typealias Index = CoreMedia.CMReadOnlyDataBlockBuffer.Index
     public typealias Indices = CoreMedia.CMReadOnlyDataBlockBuffer.Indices
@@ -518,9 +462,7 @@ extension CoreMedia.CMReadOnlyDataBlockBuffer : Foundation.DataProtocol {
       get
     }
     public func withUnsafeBytes<ResultType>(_ body: (Swift.UnsafeRawBufferPointer) throws -> ResultType) rethrows -> ResultType
-    #if compiler(>=5.3) && $NonescapableTypes
     public func withContiguousStorageIfAvailable<R>(_ body: (Swift.UnsafeBufferPointer<Swift.UInt8>) throws -> R) rethrows -> R?
-    #endif
     @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
     public typealias Element = Swift.UInt8
     @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
@@ -538,30 +480,16 @@ extension CoreMedia.CMReadOnlyDataBlockBuffer.BlockRegion : Swift.Sendable {
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 public struct CMMutableDataBlockBuffer : ~Swift.Copyable, Swift.Sendable {
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public init(unsafeBlockBuffer: sending CoreMedia.CMBlockBuffer)
-  #else
-  public init(unsafeBlockBuffer: __owned CoreMedia.CMBlockBuffer)
-  #endif
   public struct BlockSource : Swift.Sendable {
     public var allocate: @Sendable (Swift.Int) -> Swift.UnsafeMutableRawBufferPointer
     public var deallocate: @Sendable (Swift.UnsafeMutableRawBufferPointer) -> Swift.Void
     public init(allocate: @escaping @Sendable (Swift.Int) -> Swift.UnsafeMutableRawBufferPointer, deallocate: @escaping @Sendable (Swift.UnsafeMutableRawBufferPointer) -> Swift.Void)
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(count: Swift.Int = 0, blockSource: CoreMedia.CMMutableDataBlockBuffer.BlockSource? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(subBlockCapacity: Swift.Int, blockSource: CoreMedia.CMMutableDataBlockBuffer.BlockSource? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(copying audioBuffers: Swift.UnsafePointer<CoreAudioTypes.AudioBufferList>, blockSource: CoreMedia.CMMutableDataBlockBuffer.BlockSource? = nil)
-  #endif
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public func withUnsafeBlockBuffer<R>(_ body: (CoreMedia.CMBlockBuffer) throws -> sending R) rethrows -> sending R where R : ~Copyable
-  #else
-  public func withUnsafeBlockBuffer<R>(_ body: (CoreMedia.CMBlockBuffer) throws -> R) rethrows -> R where R : ~Copyable
-  #endif
   public var isEmpty: Swift.Bool {
     get
   }
@@ -572,35 +500,13 @@ public struct CMMutableDataBlockBuffer : ~Swift.Copyable, Swift.Sendable {
     get
   }
   public func isRangeContiguous(_ range: Swift.Range<Swift.Int>) -> Swift.Bool
-  #if compiler(>=5.3) && $NonescapableTypes
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public func withContiguousStorageIfAvailable<R>(in range: Swift.Range<Swift.Int>? = nil, _ body: (Swift.UnsafeRawBufferPointer) throws -> sending R) rethrows -> sending R?
-  #else
-  public func withContiguousStorageIfAvailable<R>(in range: Swift.Range<Swift.Int>? = nil, _ body: (Swift.UnsafeRawBufferPointer) throws -> R) rethrows -> R?
-  #endif
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public mutating func withContiguousMutableStorageIfAvailable<R>(in range: Swift.Range<Swift.Int>? = nil, _ body: (Swift.UnsafeMutableRawBufferPointer) throws -> sending R) rethrows -> sending R?
-  #else
-  public mutating func withContiguousMutableStorageIfAvailable<R>(in range: Swift.Range<Swift.Int>? = nil, _ body: (Swift.UnsafeMutableRawBufferPointer) throws -> R) rethrows -> R?
-  #endif
-  #endif
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public func withUnsafeBlockRegions<R>(_ body: ([CoreMedia.CMReadOnlyDataBlockBuffer.BlockRegion]) throws -> sending R) rethrows -> sending R
-  #else
-  public func withUnsafeBlockRegions<R>(_ body: ([CoreMedia.CMReadOnlyDataBlockBuffer.BlockRegion]) throws -> R) rethrows -> R
-  #endif
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public mutating func withUnsafeMutableBlockRegions<R>(_ body: ([CoreMedia.CMMutableDataBlockBuffer.BlockRegion]) throws -> sending R) rethrows -> sending R
-  #else
-  public mutating func withUnsafeMutableBlockRegions<R>(_ body: ([CoreMedia.CMMutableDataBlockBuffer.BlockRegion]) throws -> R) rethrows -> R
-  #endif
   public func copyBytes<R>(to destination: Swift.UnsafeMutableRawBufferPointer, from range: R) where R : Swift.RangeExpression, R.Bound == Swift.Int
   public func copyBytes(to destination: Swift.UnsafeMutableRawBufferPointer)
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func append(referenceOf other: consuming CoreMedia.CMMutableDataBlockBuffer, range: Swift.Range<Swift.Int>? = nil, optimizeDepth: Swift.Bool = true)
-  #endif
   public static func += (lhs: inout CoreMedia.CMMutableDataBlockBuffer, rhs: consuming CoreMedia.CMMutableDataBlockBuffer)
   public mutating func extend(by count: Swift.Int)
   public mutating func replaceSubrange(_ range: Swift.Range<Swift.Int>, with bytes: Swift.UnsafeRawBufferPointer)
@@ -682,22 +588,18 @@ public struct CMAttachmentBearerAttachments {
   public enum Mode : CoreMedia.CMAttachmentMode, Swift.Sendable {
     case shouldNotPropagate
     case shouldPropagate
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: CoreMedia.CMAttachmentMode)
-    #endif
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, macOS 10.15, *)
     public typealias RawValue = CoreMedia.CMAttachmentMode
     public var rawValue: CoreMedia.CMAttachmentMode {
       get
     }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public subscript(key: Swift.String) -> CoreMedia.CMAttachmentBearerAttachments.Value? {
     get
     set(newValue)
   }
-  #endif
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func removeAll()
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
@@ -771,11 +673,7 @@ extension CoreMedia.CMSampleBuffer {
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension CoreMedia.CMReadySampleBuffer where Content == CoreMedia.CMSampleBuffer.DynamicContent {
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public init(unsafeBuffer: sending CoreMedia.CMSampleBuffer)
-  #else
-  public init(unsafeBuffer: __owned CoreMedia.CMSampleBuffer)
-  #endif
   public init(_ other: CoreMedia.CMReadySampleBuffer<some CMSampleBuffer.Content>)
   public var content: CoreMedia.CMSampleBuffer.DynamicContent {
     get
@@ -787,14 +685,8 @@ extension Swift.Never : CoreMedia.CMSampleBuffer.Content {
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension CoreMedia.CMReadySampleBuffer where Content == Swift.Never {
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public init(unsafeMarkerOnlySampleBuffer unsafeBuffer: sending CoreMedia.CMSampleBuffer)
-  #else
-  public init(unsafeMarkerOnlySampleBuffer unsafeBuffer: __owned CoreMedia.CMSampleBuffer)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ other: CoreMedia.CMReadySampleBuffer<CoreMedia.CMSampleBuffer.DynamicContent>)
-  #endif
   public init(markerAt markerTime: CoreMedia.CMTime, duration: CoreMedia.CMTime = .invalid)
   public var markerTimeStamp: CoreMedia.CMTime {
     get
@@ -810,17 +702,9 @@ extension CoreVideo.CVReadOnlyPixelBuffer : CoreMedia.CMSampleBuffer.ContentWith
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension CoreMedia.CMReadySampleBuffer where Content == CoreVideo.CVReadOnlyPixelBuffer {
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public init(unsafeWithPixelBuffer unsafeBuffer: sending CoreMedia.CMSampleBuffer)
-  #else
-  public init(unsafeWithPixelBuffer unsafeBuffer: __owned CoreMedia.CMSampleBuffer)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ other: CoreMedia.CMReadySampleBuffer<CoreMedia.CMSampleBuffer.DynamicContent>)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(pixelBuffer content: Content, formatDescription: CoreMedia.CMVideoFormatDescription? = nil, presentationTimeStamp: CoreMedia.CMTime, duration: CoreMedia.CMTime = .invalid)
-  #endif
   public var content: CoreVideo.CVReadOnlyPixelBuffer {
     get
     set
@@ -879,16 +763,12 @@ extension CoreMedia.CMSimpleQueue {
   }
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func enqueue(_ element: Swift.UnsafeRawPointer) throws
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func dequeue() -> Swift.UnsafeRawPointer?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public var head: Swift.UnsafeRawPointer? {
     get
   }
-  #endif
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func reset() throws
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
@@ -917,11 +797,7 @@ public struct CMSampleDataReference : Swift.Sendable, Swift.Hashable, CoreMedia.
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension CoreMedia.CMReadySampleBuffer where Content == CoreMedia.CMSampleDataReference {
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public init(unsafeSampleDataReferenceBuffer unsafeBuffer: sending CoreMedia.CMSampleBuffer)
-  #else
-  public init(unsafeSampleDataReferenceBuffer unsafeBuffer: __owned CoreMedia.CMSampleBuffer)
-  #endif
   public init(sampleDataReference content: Content, formatDescription: CoreMedia.CMFormatDescription, sampleProperties: CoreMedia.CMSampleBuffer.SamplePropertiesCollection)
   public var content: CoreMedia.CMSampleDataReference {
     get
@@ -985,14 +861,8 @@ extension CoreMedia.CMReadOnlyDataBlockBuffer : CoreMedia.CMSampleBuffer.MultiSa
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension CoreMedia.CMReadySampleBuffer where Content == CoreMedia.CMReadOnlyDataBlockBuffer {
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public init(unsafeWithDataBuffer unsafeBuffer: sending CoreMedia.CMSampleBuffer)
-  #else
-  public init(unsafeWithDataBuffer unsafeBuffer: __owned CoreMedia.CMSampleBuffer)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ other: CoreMedia.CMReadySampleBuffer<CoreMedia.CMSampleBuffer.DynamicContent>)
-  #endif
   public init(dataBuffer content: Content, formatDescription: CoreMedia.CMFormatDescription, sampleProperties: CoreMedia.CMSampleBuffer.SamplePropertiesCollection)
   public init(audioDataBuffer content: Content, formatDescription: CoreMedia.CMAudioFormatDescription, sampleCount: Swift.Int, presentationTimeStamp: CoreMedia.CMTime)
   public init(compressedAudioDataBuffer content: Content, formatDescription: CoreMedia.CMAudioFormatDescription, presentationTimeStamp: CoreMedia.CMTime, packetDescriptions: [CoreAudioTypes.AudioStreamPacketDescription])
@@ -1000,11 +870,9 @@ extension CoreMedia.CMReadySampleBuffer where Content == CoreMedia.CMReadOnlyDat
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var audioStreamPacketDescriptions: [CoreAudioTypes.AudioStreamPacketDescription]? {
     get
   }
-  #endif
   public func copyPCMData(fromRange range: Swift.Range<Swift.Int>, into bufferList: Swift.UnsafeMutablePointer<CoreAudioTypes.AudioBufferList>) throws
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
@@ -1012,22 +880,14 @@ public protocol _CMSampleBufferInitTrampoline : CoreMedia._CMInitTrampoline wher
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia._CMSampleBufferInitTrampoline {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(dataBuffer: CoreMedia.CMBlockBuffer?, formatDescription: CoreMedia.CMFormatDescription?, numSamples: CoreMedia.CMItemCount, sampleTimings: [CoreMedia.CMSampleTimingInfo], sampleSizes: [Swift.Int]) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(dataBuffer: CoreMedia.CMBlockBuffer?, dataReady: Swift.Bool = false, formatDescription: CoreMedia.CMFormatDescription?, numSamples: CoreMedia.CMItemCount, sampleTimings: [CoreMedia.CMSampleTimingInfo], sampleSizes: [Swift.Int], makeDataReadyHandler: @escaping CoreMedia.CMSampleBufferMakeDataReadyHandler) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(dataBuffer: CoreMedia.CMBlockBuffer?, formatDescription: CoreMedia.CMFormatDescription, numSamples: CoreMedia.CMItemCount, presentationTimeStamp: CoreMedia.CMTime, packetDescriptions: [CoreAudioTypes.AudioStreamPacketDescription]) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(dataBuffer: CoreMedia.CMBlockBuffer?, dataReady: Swift.Bool = false, formatDescription: CoreMedia.CMFormatDescription, numSamples: CoreMedia.CMItemCount, presentationTimeStamp: CoreMedia.CMTime, packetDescriptions: [CoreAudioTypes.AudioStreamPacketDescription], makeDataReadyHandler: @escaping CoreMedia.CMSampleBufferMakeDataReadyHandler) throws
-  #endif
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(imageBuffer: CoreVideo.CVImageBuffer, formatDescription: CoreMedia.CMVideoFormatDescription, sampleTiming: CoreMedia.CMSampleTimingInfo) throws
   @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
@@ -1092,32 +952,22 @@ extension CoreMedia.CMSampleBuffer {
   }
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func setDataBuffer(_ dataBuffer: CoreMedia.CMBlockBuffer) throws
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public var dataBuffer: CoreMedia.CMBlockBuffer? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public var imageBuffer: CoreVideo.CVImageBuffer? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
   public var taggedBuffers: [CoreMedia.CMTaggedBuffer]? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func setDataBuffer(fromAudioBufferList bufferList: Swift.UnsafePointer<CoreAudioTypes.AudioBufferList>, blockBufferMemoryAllocator: CoreFoundation.CFAllocator? = kCFAllocatorDefault, flags: CoreMedia.CMSampleBuffer.Flags = []) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func withAudioBufferList<R>(blockBufferMemoryAllocator: CoreFoundation.CFAllocator? = kCFAllocatorDefault, flags: CoreMedia.CMSampleBuffer.Flags = [], body: (CoreAudio.UnsafeMutableAudioBufferListPointer, CoreMedia.CMBlockBuffer) throws -> R) throws -> R
-  #endif
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func audioStreamPacketDescriptions() throws -> [CoreAudioTypes.AudioStreamPacketDescription]
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
@@ -1197,12 +1047,10 @@ extension CoreMedia.CMSampleBuffer {
   public var totalSampleSize: Swift.Int {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public var formatDescription: CoreMedia.CMFormatDescription? {
     get
   }
-  #endif
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public struct PerSampleAttachmentsDictionary : Swift.Sequence {
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
@@ -1227,19 +1075,15 @@ extension CoreMedia.CMSampleBuffer {
     }
     public typealias Element = (key: CoreMedia.CMSampleBuffer.PerSampleAttachmentsDictionary.Key, value: Any)
     public struct Iterator : Swift.IteratorProtocol {
-      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() -> (key: CoreMedia.CMSampleBuffer.PerSampleAttachmentsDictionary.Key, value: Any)?
-      #endif
       @available(iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, macOS 10.15, *)
       public typealias Element = (key: CoreMedia.CMSampleBuffer.PerSampleAttachmentsDictionary.Key, value: Any)
     }
     public func makeIterator() -> CoreMedia.CMSampleBuffer.PerSampleAttachmentsDictionary.Iterator
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(key: CoreMedia.CMSampleBuffer.PerSampleAttachmentsDictionary.Key) -> Any? {
       get
       set
     }
-    #endif
   }
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public struct SampleAttachmentsArray : Swift.Collection {
@@ -1272,9 +1116,7 @@ extension CoreMedia.CMSampleBuffer {
   public struct SingleSampleBuffers : Swift.Sequence {
     public typealias Element = CoreMedia.CMSampleBuffer
     public struct Iterator : Swift.IteratorProtocol {
-      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() -> CoreMedia.CMSampleBuffer?
-      #endif
       @available(iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, macOS 10.15, *)
       public typealias Element = CoreMedia.CMSampleBuffer
     }
@@ -1317,13 +1159,11 @@ extension CoreMedia.CMSampleBuffer {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia.CMAttachmentBearerAttachments {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public subscript(key: CoreMedia.CMSampleBuffer.AttachmentKey) -> CoreMedia.CMAttachmentBearerAttachments.Value? {
     get
     set(newValue)
   }
-  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia.CMSampleBuffer {
@@ -1380,9 +1220,7 @@ public class CMTag : Swift.Equatable, Swift.CustomStringConvertible, @unchecked 
   final public let rawCategory: CoreMedia.CMTag.RawCategory
   final public let rawTagValue: CoreMedia.CMTag.Value
   public init(rawCategory: CoreMedia.CMTag.RawCategory, rawTagValue: CoreMedia.CMTag.Value)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func value<T>(onlyIfMatching category: CoreMedia.CMTypedTag<T>.Category) -> T? where T : Swift.Sendable
-  #endif
   public static func == (lhs: CoreMedia.CMTag, rhs: CoreMedia.CMTag) -> Swift.Bool
   public var description: Swift.String {
     get
@@ -1393,13 +1231,9 @@ public class CMTag : Swift.Equatable, Swift.CustomStringConvertible, @unchecked 
 public class CMTypedTag<TypedValue> : CoreMedia.CMTag, @unchecked Swift.Sendable where TypedValue : Swift.Sendable {
   public struct Category : Swift.Sendable {
     public let rawCategory: CoreMedia.CMTypedTag<TypedValue>.RawCategory
-    #if compiler(>=5.3) && $NonescapableTypes
     public func value(for tagValue: CoreMedia.CMTag.Value) -> TypedValue?
-    #endif
     public func tagValue(for value: TypedValue) -> CoreMedia.CMTag.Value
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(rawCategory: CoreMedia.CMTypedTag<TypedValue>.RawCategory, valueForTagValue: @escaping @Sendable (CoreMedia.CMTag.Value) -> TypedValue?, tagValueForValue: @escaping @Sendable (TypedValue) -> CoreMedia.CMTag.Value)
-    #endif
   }
   final public let category: CoreMedia.CMTypedTag<TypedValue>.Category
   public var value: TypedValue {
@@ -1457,29 +1291,17 @@ extension CoreMedia.CMTag {
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 extension Swift.Sequence where Self.Element : CoreMedia.CMTag {
   public func filter<T>(matchingCategory category: CoreMedia.CMTypedTag<T>.Category) -> [CoreMedia.CMTypedTag<T>] where T : Swift.Sendable
-  #if compiler(>=5.3) && $NonescapableTypes
   public func firstValue<T>(matchingCategory category: CoreMedia.CMTypedTag<T>.Category) -> T? where T : Swift.Sendable
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func first<T>(matchingCategory category: CoreMedia.CMTypedTag<T>.Category) -> CoreMedia.CMTypedTag<T>? where T : Swift.Sendable
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension Swift.Array : CoreMedia.CMSampleBuffer.Content, CoreMedia.CMSampleBuffer.ContentWithFormatDescription where Element == CoreMedia.CMTaggedDynamicBuffer {
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension CoreMedia.CMReadySampleBuffer where Content == [CoreMedia.CMTaggedDynamicBuffer] {
-  #if compiler(>=5.3) && $SendingArgsAndResults
   public init(unsafeWithTaggedBuffers unsafeBuffer: sending CoreMedia.CMSampleBuffer)
-  #else
-  public init(unsafeWithTaggedBuffers unsafeBuffer: __owned CoreMedia.CMSampleBuffer)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ other: CoreMedia.CMReadySampleBuffer<CoreMedia.CMSampleBuffer.DynamicContent>)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(taggedBuffers content: Content, formatDescription: CoreMedia.CMTaggedBufferGroupFormatDescription? = nil, presentationTimeStamp: CoreMedia.CMTime, duration: CoreMedia.CMTime = .invalid)
-  #endif
   public var content: Swift.Array<CoreMedia.CMTaggedDynamicBuffer> {
     get
     set
@@ -1572,20 +1394,14 @@ extension CoreMedia.CMBufferQueue {
   }
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func enqueue(_ buffer: CoreMedia.CMBuffer) throws
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func dequeue() -> CoreMedia.CMBuffer?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func dequeueIfDataReady() -> CoreMedia.CMBuffer?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public var head: CoreMedia.CMBuffer? {
     get
   }
-  #endif
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public var isEmpty: Swift.Bool {
     get
@@ -1640,10 +1456,8 @@ extension CoreMedia.CMBufferQueue {
   public var totalSize: Swift.Int {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func installTrigger(condition: CoreMedia.CMBufferQueue.TriggerCondition, _ body: CoreMedia.CMBufferQueueTriggerHandler? = nil) throws -> CoreMedia.CMBufferQueue.TriggerToken
-  #endif
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func removeTrigger(_ triggerToken: CoreMedia.CMBufferQueue.TriggerToken) throws
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
@@ -1652,9 +1466,7 @@ extension CoreMedia.CMBufferQueue {
   public struct Buffers : Swift.Sequence {
     public typealias Element = AnyObject
     public struct Iterator : Swift.IteratorProtocol {
-      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() -> CoreMedia.CMBuffer?
-      #endif
       @available(iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, macOS 10.15, *)
       public typealias Element = CoreMedia.CMBuffer
     }
@@ -1969,9 +1781,7 @@ extension CoreMedia.CMFormatDescription {
         @available(iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, macOS 10.15, *)
         public typealias Element = CoreMedia.CMFormatDescription.Extensions.Value.FontFace
       }
-      #if compiler(>=5.3) && $NonescapableTypes
       public static func qtTextDefaultStyle(startChar: Swift.Int, height: Swift.Int, ascent: Swift.Int, localFontID: Swift.Int, fontFace: CoreMedia.CMFormatDescription.Extensions.Value.FontFace, fontSize: Swift.Int, foregroundColor: CoreMedia.CMFormatDescription.Extensions.Value, defaultFontName: Swift.String?) -> CoreMedia.CMFormatDescription.Extensions.Value
-      #endif
       public static func mobile3GPPTextDefaultStyle(startChar: Swift.Int, endChar: Swift.Int, localFontID: Swift.Int, fontFace: CoreMedia.CMFormatDescription.Extensions.Value.FontFace, fontSize: Swift.Int, foregroundColor: CoreMedia.CMFormatDescription.Extensions.Value) -> CoreMedia.CMFormatDescription.Extensions.Value
       public static func textRect(top: Swift.Int, left: Swift.Int, bottom: Swift.Int, right: Swift.Int) -> CoreMedia.CMFormatDescription.Extensions.Value
       public struct TextDisplayFlags : CoreMedia._CMObjectiveCBridgeableWithRawValue, Swift.Sendable {
@@ -2062,15 +1872,11 @@ extension CoreMedia.CMFormatDescription {
         public var minimumLuminance: Swift.UInt32?
         public var maximumLuminance: Swift.UInt32?
         public var averageLuminance: Swift.UInt32?
-        #if compiler(>=5.3) && $NonescapableTypes
         public init(colorPrimaries: CoreMedia.CMFormatDescription.Extensions.Value.ContentColorVolume.ColorPrimaries? = nil, minimumLuminance: Swift.UInt32? = nil, maximumLuminance: Swift.UInt32? = nil, averageLuminance: Swift.UInt32? = nil)
-        #endif
         public var rawValue: CoreMedia.CMFormatDescription.Extensions.Value {
           get
         }
-        #if compiler(>=5.3) && $NonescapableTypes
         public init?(rawValue: CoreMedia.CMFormatDescription.Extensions.Value)
-        #endif
         @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
         public typealias RawValue = CoreMedia.CMFormatDescription.Extensions.Value
       }
@@ -2106,9 +1912,7 @@ extension CoreMedia.CMFormatDescription {
           public var rawValue: CoreFoundation.CFString {
             get
           }
-          #if compiler(>=5.3) && $NonescapableTypes
           public init?(rawValue: CoreFoundation.CFString)
-          #endif
           @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
           public typealias RawValue = CoreFoundation.CFString
         }
@@ -2119,9 +1923,7 @@ extension CoreMedia.CMFormatDescription {
           public var rawValue: CoreFoundation.CFString {
             get
           }
-          #if compiler(>=5.3) && $NonescapableTypes
           public init?(rawValue: CoreFoundation.CFString)
-          #endif
           @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
           public typealias RawValue = CoreFoundation.CFString
         }
@@ -2130,9 +1932,7 @@ extension CoreMedia.CMFormatDescription {
           public var rawValue: CoreFoundation.CFString {
             get
           }
-          #if compiler(>=5.3) && $NonescapableTypes
           public init?(rawValue: CoreFoundation.CFString)
-          #endif
           @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
           public typealias RawValue = CoreFoundation.CFString
         }
@@ -2141,9 +1941,7 @@ extension CoreMedia.CMFormatDescription {
           public var rawValue: CoreFoundation.CFString {
             get
           }
-          #if compiler(>=5.3) && $NonescapableTypes
           public init?(rawValue: CoreFoundation.CFString)
-          #endif
           @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
           public typealias RawValue = CoreFoundation.CFString
         }
@@ -2165,9 +1963,7 @@ extension CoreMedia.CMFormatDescription {
           public var rawValue: CoreFoundation.CFDictionary {
             get
           }
-          #if compiler(>=5.3) && $NonescapableTypes
           public init?(rawValue: CoreFoundation.CFDictionary)
-          #endif
           @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
           public typealias RawValue = CoreFoundation.CFDictionary
         }
@@ -2176,9 +1972,7 @@ extension CoreMedia.CMFormatDescription {
         public var rawValue: CoreFoundation.CFArray {
           get
         }
-        #if compiler(>=5.3) && $NonescapableTypes
         public init?(rawValue: CoreFoundation.CFArray)
-        #endif
         @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
         public typealias RawValue = CoreFoundation.CFArray
       }
@@ -2186,21 +1980,15 @@ extension CoreMedia.CMFormatDescription {
       public static func cameraCalibrationDataLensCollection(_ value: CoreMedia.CMFormatDescription.Extensions.Value.CameraCalibrationDataLensCollection) -> CoreMedia.CMFormatDescription.Extensions.Value
     }
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(base: [CoreFoundation.CFString : CoreFoundation.CFPropertyList]?)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(key: CoreMedia.CMFormatDescription.Extensions.Key) -> CoreMedia.CMFormatDescription.Extensions.Value? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(key: CoreFoundation.CFString) -> CoreFoundation.CFPropertyList? {
       get
       set
     }
-    #endif
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
@@ -2265,30 +2053,22 @@ public protocol _CMFormatDescriptionInitTrampoline : CoreMedia._CMInitTrampoline
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia._CMFormatDescriptionInitTrampoline {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(mediaType: CoreMedia.CMFormatDescription.MediaType, mediaSubType: CoreMedia.CMFormatDescription.MediaSubType, extensions: CoreMedia.CMFormatDescription.Extensions? = nil) throws
-  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia._CMFormatDescriptionInitTrampoline {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(audioStreamBasicDescription: CoreAudioTypes.AudioStreamBasicDescription, layoutSize: Swift.Int, layout: Swift.UnsafePointer<CoreAudioTypes.AudioChannelLayout>?, magicCookie: Foundation.Data?, extensions: CoreMedia.CMFormatDescription.Extensions? = nil) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(audioStreamBasicDescription: CoreAudioTypes.AudioStreamBasicDescription, layout: CoreAudio.ManagedAudioChannelLayout? = nil, magicCookie: Foundation.Data? = nil, extensions: CoreMedia.CMFormatDescription.Extensions? = nil) throws
-  #endif
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(audioFormatDescriptionArray: [CoreMedia.CMAudioFormatDescription]) throws
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia._CMFormatDescriptionInitTrampoline {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(videoCodecType: CoreMedia.CMFormatDescription.MediaSubType, width: Swift.Int, height: Swift.Int, extensions: CoreMedia.CMFormatDescription.Extensions? = nil) throws
-  #endif
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(imageBuffer: CoreVideo.CVImageBuffer) throws
   @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
@@ -2297,37 +2077,27 @@ extension CoreMedia._CMFormatDescriptionInitTrampoline {
   public init(pixelBuffer: borrowing CoreVideo.CVMutablePixelBuffer)
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(h264ParameterSets: [Foundation.Data], nalUnitHeaderLength: Swift.Int = 4) throws
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(hevcParameterSets: [Foundation.Data], nalUnitHeaderLength: Swift.Int = 4, extensions: CoreMedia.CMFormatDescription.Extensions? = nil) throws
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 extension CoreMedia._CMFormatDescriptionInitTrampoline {
   @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
   public init(taggedBuffers: [CoreMedia.CMTaggedBuffer])
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
   public init(taggedBuffers: [CoreMedia.CMTaggedBuffer], extensions: CoreMedia.CMFormatDescription.Extensions?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
   public init(taggedBuffers: [CoreMedia.CMTaggedDynamicBuffer], extensions: CoreMedia.CMFormatDescription.Extensions? = nil)
-  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia._CMFormatDescriptionInitTrampoline {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(muxedStreamType: CoreMedia.CMFormatDescription.MediaSubType, extensions: CoreMedia.CMFormatDescription.Extensions? = nil) throws
-  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia._CMFormatDescriptionInitTrampoline {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(timeCodeFormatType: CoreMedia.CMFormatDescription.MediaSubType, frameDuration: CoreMedia.CMTime, frameQuanta: Swift.Int, flags: CoreMedia.CMTimeCodeFormatDescription.TimeCode.Flag, extensions: CoreMedia.CMFormatDescription.Extensions? = nil) throws
-  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia._CMFormatDescriptionInitTrampoline {
@@ -2545,44 +2315,32 @@ extension CoreMedia.CMFormatDescription {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia.CMFormatDescription {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public var audioStreamBasicDescription: CoreAudioTypes.AudioStreamBasicDescription? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func withMagicCookie<R>(_ body: (Swift.UnsafeRawBufferPointer?) throws -> R) rethrows -> R
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public var magicCookie: Foundation.Data? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public var audioChannelLayout: CoreAudio.ManagedAudioChannelLayout? {
     get
   }
-  #endif
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public var audioFormatList: [CoreAudioTypes.AudioFormatListItem] {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public var richestDecodableFormat: CoreAudioTypes.AudioFormatListItem? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public var mostCompatibleFormat: CoreAudioTypes.AudioFormatListItem? {
     get
   }
-  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia.CMFormatDescription {
@@ -2632,12 +2390,10 @@ extension CoreMedia.CMFormatDescription.ParameterSetCollection : Swift.Sendable 
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia.CMFormatDescription {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public var nalUnitHeaderLength: Swift.Int? {
     get
   }
-  #endif
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public var parameterSets: CoreMedia.CMFormatDescription.ParameterSetCollection {
     get
@@ -2659,12 +2415,10 @@ extension CoreMedia.CMFormatDescription {
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 extension CoreMedia.CMFormatDescription {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
   public var tagCollections: [[CoreMedia.CMTag]]? {
     get
   }
-  #endif
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 extension CoreMedia.CMFormatDescription {
@@ -2718,10 +2472,8 @@ extension CoreMedia.CMFormatDescription {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia.CMFormatDescription {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func keyWithLocalID(_ localKeyID: Darwin.OSType) -> [Swift.String : CoreFoundation.CFPropertyList]?
-  #endif
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public var identifiers: [Swift.String] {
     get
@@ -2734,12 +2486,10 @@ extension CoreMedia.CMSampleBuffer {
     public var dictionaryRepresentation: [Swift.String : any Swift.Sendable] {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(rawAttachment key: Swift.String) -> (any Swift.Sendable)? {
       get
       set
     }
-    #endif
     public var isNotSync: Swift.Bool {
       get
       set
@@ -2748,30 +2498,22 @@ extension CoreMedia.CMSampleBuffer {
       get
       set
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var hasRedundantCoding: Swift.Bool? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var isDependedOnByOthers: Swift.Bool? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var dependsOnOthers: Swift.Bool? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var earlierDisplayTimesAllowed: Swift.Bool? {
       get
       set
     }
-    #endif
     public var displayImmediately: Swift.Bool {
       get
       set
@@ -2780,12 +2522,10 @@ extension CoreMedia.CMSampleBuffer {
       get
       set
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var hevcTemporalInfo: CoreMedia.CMSampleBuffer.HEVCTemporalInfo? {
       get
       set
     }
-    #endif
     public var hevcTemporalSubLayerAccess: Swift.Bool {
       get
       set
@@ -2794,30 +2534,22 @@ extension CoreMedia.CMSampleBuffer {
       get
       set
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var hevcSyncSampleNALUnitType: Swift.Int? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var audioIndependentSampleDecoderRefreshCount: Swift.Int? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var cryptorSubsampleAuxiliaryData: Foundation.Data? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var hdr10PlusPerFrameData: Foundation.Data? {
       get
       set
     }
-    #endif
     public static func == (a: CoreMedia.CMSampleBuffer.SampleAttachments, b: CoreMedia.CMSampleBuffer.SampleAttachments) -> Swift.Bool
   }
   public struct HEVCTemporalInfo : Swift.Equatable, Swift.Sendable {
@@ -2828,9 +2560,7 @@ extension CoreMedia.CMSampleBuffer {
     public var profileCompatibilityFlags: Foundation.Data?
     public var constraintIndicatorFlags: Foundation.Data?
     public var levelIndex: Swift.Int
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(temporalLayerID: Swift.Int, profileSpace: Swift.Int, tierFlag: Swift.Int, profileIndex: Swift.Int, profileCompatibilityFlags: Foundation.Data?, constraintIndicatorFlags: Foundation.Data?, levelIndex: Swift.Int)
-    #endif
     public static func == (a: CoreMedia.CMSampleBuffer.HEVCTemporalInfo, b: CoreMedia.CMSampleBuffer.HEVCTemporalInfo) -> Swift.Bool
   }
 }
@@ -2840,9 +2570,7 @@ extension CoreMedia.CMSampleBuffer {
     public var size: Swift.Int?
     public var timing: CoreMedia.CMSampleTimingInfo
     public var attachments: CoreMedia.CMSampleBuffer.SampleAttachments
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(size: Swift.Int? = nil, timing: CoreMedia.CMSampleTimingInfo, attachments: CoreMedia.CMSampleBuffer.SampleAttachments = .init())
-    #endif
     public static func == (a: CoreMedia.CMSampleBuffer.SampleProperties, b: CoreMedia.CMSampleBuffer.SampleProperties) -> Swift.Bool
   }
   public enum SizePerSample : Swift.Sendable {
@@ -2865,27 +2593,19 @@ extension CoreMedia.CMSampleBuffer {
     public typealias Indices = Swift.Range<Swift.Int>
     public typealias Element = CoreMedia.CMSampleBuffer.SampleProperties
     public init()
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(sampleCount: Swift.Int, sizes: CoreMedia.CMSampleBuffer.SizePerSample?, timings: CoreMedia.CMSampleBuffer.TimingPerSample?, attachments: [CoreMedia.CMSampleBuffer.SampleAttachments]? = nil)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var sizes: CoreMedia.CMSampleBuffer.SizePerSample? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var timings: CoreMedia.CMSampleBuffer.TimingPerSample? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var attachments: [CoreMedia.CMSampleBuffer.SampleAttachments]? {
       get
       set
     }
-    #endif
     public var startIndex: Swift.Int {
       get
     }
@@ -3099,26 +2819,18 @@ extension CoreMedia.CMBlockBuffer {
 extension CoreMedia._CMBlockBufferInitTrampoline {
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(capacity: Swift.Int = 0, flags: CoreMedia.CMBlockBuffer.Flags = []) throws
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(buffer: Swift.UnsafeMutableRawBufferPointer, allocator: CoreFoundation.CFAllocator? = kCFAllocatorDefault, flags: CoreMedia.CMBlockBuffer.Flags = []) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(buffer: Swift.Slice<Swift.UnsafeMutableRawBufferPointer>, allocator: CoreFoundation.CFAllocator? = kCFAllocatorDefault, flags: CoreMedia.CMBlockBuffer.Flags = []) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(length: Swift.Int, allocator: CoreFoundation.CFAllocator? = kCFAllocatorDefault, range: Swift.Range<Swift.Int>? = nil, flags: CoreMedia.CMBlockBuffer.Flags = []) throws
-  #endif
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(buffer: Swift.UnsafeMutableRawBufferPointer, deallocator: @escaping CoreMedia.CMBlockBuffer.CustomBlockDeallocator, flags: CoreMedia.CMBlockBuffer.Flags = []) throws
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(buffer: Swift.Slice<Swift.UnsafeMutableRawBufferPointer>, deallocator: @escaping CoreMedia.CMBlockBuffer.CustomBlockDeallocator, flags: CoreMedia.CMBlockBuffer.Flags = []) throws
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init(length: Swift.Int, allocator: @escaping CoreMedia.CMBlockBuffer.CustomBlockAllocator, deallocator: @escaping CoreMedia.CMBlockBuffer.CustomBlockDeallocator, range: Swift.Range<Swift.Int>? = nil, flags: CoreMedia.CMBlockBuffer.Flags = []) throws
-  #endif
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public init<T>(bufferReference: T, flags: CoreMedia.CMBlockBuffer.Flags = []) throws where T : CoreMedia.CMBlockBufferProtocol
 }
@@ -3162,31 +2874,21 @@ extension CoreMedia.CMBlockBuffer {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia.CMBlockBufferProtocol {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func makeContiguous(allocator: CoreFoundation.CFAllocator? = kCFAllocatorDefault, flags: CoreMedia.CMBlockBuffer.Flags = []) throws -> CoreMedia.CMBlockBuffer
-  #endif
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func makeContiguous(allocator: @escaping CoreMedia.CMBlockBuffer.CustomBlockAllocator, deallocator: @escaping CoreMedia.CMBlockBuffer.CustomBlockDeallocator, flags: CoreMedia.CMBlockBuffer.Flags = []) throws -> CoreMedia.CMBlockBuffer
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
 extension CoreMedia.CMBlockBuffer {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func append(length: Swift.Int, allocator: CoreFoundation.CFAllocator? = kCFAllocatorDefault, range: Swift.Range<Swift.Int>? = nil, flags: CoreMedia.CMBlockBuffer.Flags = []) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func append(buffer: Swift.UnsafeMutableRawBufferPointer, allocator: CoreFoundation.CFAllocator? = kCFAllocatorDefault, flags: CoreMedia.CMBlockBuffer.Flags = []) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func append(buffer: Swift.Slice<Swift.UnsafeMutableRawBufferPointer>, allocator: CoreFoundation.CFAllocator? = kCFAllocatorDefault, flags: CoreMedia.CMBlockBuffer.Flags = []) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func append(length: Swift.Int, allocator: @escaping CoreMedia.CMBlockBuffer.CustomBlockAllocator, deallocator: @escaping CoreMedia.CMBlockBuffer.CustomBlockDeallocator, range: Swift.Range<Swift.Int>? = nil, flags: CoreMedia.CMBlockBuffer.Flags = []) throws
-  #endif
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)
   public func append(buffer: Swift.UnsafeMutableRawBufferPointer, deallocator: @escaping CoreMedia.CMBlockBuffer.CustomBlockDeallocator, flags: CoreMedia.CMBlockBuffer.Flags = []) throws
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, visionOS 1.0, *)

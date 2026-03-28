@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/A/Libraries/libLLVMContainer.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -246,7 +246,7 @@ exports:
                        __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
                        __ZTSNSt3__16vectorIPKN4llvm8PassInfoENS_9allocatorIS4_EEEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ARMCompilationCallback, _ARMCompilationCallbackC, _ConvertUTF16toUTF32, 
                        _ConvertUTF16toUTF8, _ConvertUTF32toUTF16, _ConvertUTF32toUTF8, 
                        _ConvertUTF8toUTF16, _ConvertUTF8toUTF32, _ConvertUTF8toUTF32Partial, 

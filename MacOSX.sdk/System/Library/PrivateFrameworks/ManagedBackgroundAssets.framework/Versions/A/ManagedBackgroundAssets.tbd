@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ManagedBackgroundAssets.framework/Versions/A/ManagedBackgroundAssets'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s23ManagedBackgroundAssets12StreamWriterMp', '_$s23ManagedBackgroundAssets12StreamWriterP7streams11readingFrom12AppleArchive0jD0C5input_AH6outputtAF0j4ByteD0C_tKFTj', 
                        '_$s23ManagedBackgroundAssets12StreamWriterP7streams11readingFrom12AppleArchive0jD0C5input_AH6outputtAF0j4ByteD0C_tKFTq', 
                        '_$s23ManagedBackgroundAssets12StreamWriterTL', '_$s23ManagedBackgroundAssets14DownloadPolicyO11descriptionSSvg', 
@@ -137,9 +135,9 @@ exports:
                        '_$s23ManagedBackgroundAssets21StreamPipelineBuilderVMn', 
                        '_$s23ManagedBackgroundAssets21StreamPipelineBuilderVN', '_$s23ManagedBackgroundAssets22AsyncMultiplexSequenceC04makeD8IteratorAC0dH0Cyx_GyFTj', 
                        '_$s23ManagedBackgroundAssets22AsyncMultiplexSequenceC04makeD8IteratorAC0dH0Cyx_GyFTq', 
-                       '_$s23ManagedBackgroundAssets22AsyncMultiplexSequenceC0D8IteratorC4next7ElementQzSgyYaKFTj', 
-                       '_$s23ManagedBackgroundAssets22AsyncMultiplexSequenceC0D8IteratorC4next7ElementQzSgyYaKFTjTu', 
-                       '_$s23ManagedBackgroundAssets22AsyncMultiplexSequenceC0D8IteratorC4next7ElementQzSgyYaKFTq', 
+                       '_$s23ManagedBackgroundAssets22AsyncMultiplexSequenceC0D8IteratorC4next9isolation7ElementQzSgScA_pSgYi_tYa7FailureQzYKFTj', 
+                       '_$s23ManagedBackgroundAssets22AsyncMultiplexSequenceC0D8IteratorC4next9isolation7ElementQzSgScA_pSgYi_tYa7FailureQzYKFTjTu', 
+                       '_$s23ManagedBackgroundAssets22AsyncMultiplexSequenceC0D8IteratorC4next9isolation7ElementQzSgScA_pSgYi_tYa7FailureQzYKFTq', 
                        '_$s23ManagedBackgroundAssets22AsyncMultiplexSequenceC0D8IteratorCMa', 
                        '_$s23ManagedBackgroundAssets22AsyncMultiplexSequenceC0D8IteratorCMn', 
                        '_$s23ManagedBackgroundAssets22AsyncMultiplexSequenceC0D8IteratorCMo', 
@@ -165,8 +163,8 @@ exports:
                        '_$s23ManagedBackgroundAssets22DecompressionProcessorVMn', 
                        '_$s23ManagedBackgroundAssets22DecompressionProcessorVN', 
                        '_$s23ManagedBackgroundAssets26AsyncTruncateAfterSequenceV04makeD8IteratorAC0dI0Vyx_GyF', 
-                       '_$s23ManagedBackgroundAssets26AsyncTruncateAfterSequenceV0D8IteratorV4next7ElementQzSgyYaKF', 
-                       '_$s23ManagedBackgroundAssets26AsyncTruncateAfterSequenceV0D8IteratorV4next7ElementQzSgyYaKFTu', 
+                       '_$s23ManagedBackgroundAssets26AsyncTruncateAfterSequenceV0D8IteratorV4next9isolation7ElementQzSgScA_pSgYi_tYa7FailureQzYKF', 
+                       '_$s23ManagedBackgroundAssets26AsyncTruncateAfterSequenceV0D8IteratorV4next9isolation7ElementQzSgScA_pSgYi_tYa7FailureQzYKFTu', 
                        '_$s23ManagedBackgroundAssets26AsyncTruncateAfterSequenceV0D8IteratorVMa', 
                        '_$s23ManagedBackgroundAssets26AsyncTruncateAfterSequenceV0D8IteratorVMn', 
                        '_$s23ManagedBackgroundAssets26AsyncTruncateAfterSequenceV0D8IteratorVyx_GScIAAMc', 
@@ -175,21 +173,24 @@ exports:
                        '_$s23ManagedBackgroundAssets26AsyncTruncateAfterSequenceVyxGSciAAMc', 
                        '_$s23ManagedBackgroundAssets27StreamPipelineWithoutWriterVMa', 
                        '_$s23ManagedBackgroundAssets27StreamPipelineWithoutWriterVMn', 
-                       '_$sSDyxq_G23ManagedBackgroundAssets15UserInfoCodableABSSRszAbC_pRs_rlMc', 
-                       '_$sSDyxq_G23ManagedBackgroundAssets15UserInfoCodableABSSRszAbC_pRs_rlWP', 
+                       '_$sSD23ManagedBackgroundAssetsSSRszAA15UserInfoCodable_pSgRs_rlE4jsonSDySSACGSgyp_tcfC', 
+                       '_$sSDyxq_G23ManagedBackgroundAssets15UserInfoCodableABSSRszAbC_pSgRs_rlMc', 
+                       '_$sSDyxq_G23ManagedBackgroundAssets15UserInfoCodableABSSRszAbC_pSgRs_rlWP', 
                        '_$sSS23ManagedBackgroundAssets15UserInfoCodableAAMc', '_$sSS23ManagedBackgroundAssets15UserInfoCodableAAWP', 
-                       '_$sSayxG23ManagedBackgroundAssets15UserInfoCodableA2bC_pRszlMc', 
-                       '_$sSayxG23ManagedBackgroundAssets15UserInfoCodableA2bC_pRszlWP', 
+                       '_$sSa23ManagedBackgroundAssetsAA15UserInfoCodable_pSgRszlE4jsonSayACGSgyp_tcfC', 
+                       '_$sSayxG23ManagedBackgroundAssets15UserInfoCodableA2bC_pSgRszlMc', 
+                       '_$sSayxG23ManagedBackgroundAssets15UserInfoCodableA2bC_pSgRszlWP', 
                        '_$sSb23ManagedBackgroundAssets15UserInfoCodableAAMc', '_$sSb23ManagedBackgroundAssets15UserInfoCodableAAWP', 
-                       '_$sSci23ManagedBackgroundAssetsE8truncate5afterAA26AsyncTruncateAfterSequenceVyxGSb7ElementQzYaYbc_tF', 
+                       '_$sSci23ManagedBackgroundAssetss8Sendable7ElementRpzrlE8truncate5afterAA26AsyncTruncateAfterSequenceVyxGSbADYaYbc_tF', 
                        '_$sSci23ManagedBackgroundAssetss8SendableRzs0D8Metatype13AsyncIteratorRpzsAB7ElementRpzrlE9multiplexAA0F17MultiplexSequenceCyxGyF', 
                        '_$sSd23ManagedBackgroundAssets15UserInfoCodableAAMc', '_$sSd23ManagedBackgroundAssets15UserInfoCodableAAWP', 
                        '_$ss22KeyedDecodingContainerV23ManagedBackgroundAssetsE14decodeUserInfo6forKeySDySSAC0hI7Codable_pGx_tKF', 
-                       '_$ss22KeyedDecodingContainerV23ManagedBackgroundAssetsE14decodeUserInfo6forKeySayAC0hI7Codable_pGx_tKF', 
-                       '_$ss22KeyedEncodingContainerV23ManagedBackgroundAssetsE6encode8userInfo6forKeyySDySSAC04UserI7Codable_pG_xtKF', 
-                       '_$ss22KeyedEncodingContainerV23ManagedBackgroundAssetsE6encode8userInfo6forKeyySayAC04UserI7Codable_pG_xtKF', 
-                       '_$ss24UnkeyedDecodingContainerP23ManagedBackgroundAssetsE14decodeUserInfoSDySSAC0hI7Codable_pGyKF', 
-                       '_$ss24UnkeyedDecodingContainerP23ManagedBackgroundAssetsE14decodeUserInfoSayAC0hI7Codable_pGyKF', 
-                       '_$ss24UnkeyedEncodingContainerP23ManagedBackgroundAssetsE6encode8userInfoySDySSAC04UserI7Codable_pG_tKF', 
-                       '_$ss24UnkeyedEncodingContainerP23ManagedBackgroundAssetsE6encode8userInfoySayAC04UserI7Codable_pG_tKF' ]
+                       '_$ss22KeyedDecodingContainerV23ManagedBackgroundAssetsE14decodeUserInfo6forKeySDySSAC0hI7Codable_pSgGx_tKF', 
+                       '_$ss22KeyedDecodingContainerV23ManagedBackgroundAssetsE14decodeUserInfo6forKeySayAC0hI7Codable_pSgGx_tKF', 
+                       '_$ss22KeyedEncodingContainerV23ManagedBackgroundAssetsE6encode8userInfo6forKeyySDySSAC04UserI7Codable_pSgG_xtKF', 
+                       '_$ss22KeyedEncodingContainerV23ManagedBackgroundAssetsE6encode8userInfo6forKeyySayAC04UserI7Codable_pSgG_xtKF', 
+                       '_$ss24UnkeyedDecodingContainerP23ManagedBackgroundAssetsE14decodeUserInfoSDySSAC0hI7Codable_pSgGyKF', 
+                       '_$ss24UnkeyedDecodingContainerP23ManagedBackgroundAssetsE14decodeUserInfoSayAC0hI7Codable_pSgGyKF', 
+                       '_$ss24UnkeyedEncodingContainerP23ManagedBackgroundAssetsE6encode8userInfoySDySSAC04UserI7Codable_pSgG_tKF', 
+                       '_$ss24UnkeyedEncodingContainerP23ManagedBackgroundAssetsE6encode8userInfoySayAC04UserI7Codable_pSgG_tKF' ]
 ...

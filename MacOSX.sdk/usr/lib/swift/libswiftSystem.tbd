@@ -1,9 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftSystem.dylib'
-current-version: 72.2
+current-version: 75
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -11,8 +10,7 @@ exports:
                        '_$s6System4MachO4PortV8_contexts6UInt64Vvs', '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE10relinquishs6UInt32V4name_s6UInt64V7contexttyF', 
                        '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE16withBorrowedName4bodyqd__qd__s6UInt32V_s6UInt64VtXE_tlF', 
                        '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE4name7contextAEy_AGGs6UInt32V_s6UInt64VtcfC' ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s6System13MachPortRightMp', '_$s6System13MachPortRightTL', 
                        '_$s6System14FileDescriptorV10AccessModeV11descriptionSSvg', 
                        '_$s6System14FileDescriptorV10AccessModeV11descriptionSSvpMV', 
@@ -397,7 +395,7 @@ exports:
                        '_$sSS6SystemE8decodingSSAA8FilePathV4RootV_tcfC', '_$sSS6SystemE8decodingSSAA8FilePathV9ComponentV_tcfC', 
                        '_$sSS6SystemE8decodingSSAA8FilePathV_tcfC', '_$sSS6SystemEySSAA8FilePathVcfC', 
                        '__swift_FORCE_LOAD_$_swiftSystem' ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s6System4MachO4PortV8_contextSuvM', '_$s6System4MachO4PortV8_contextSuvg', 
                        '_$s6System4MachO4PortV8_contextSuvs', '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE10relinquishs6UInt32V4name_Su7contexttyF', 
                        '_$s6System4MachO4PortVAaC12ReceiveRightVRszrlE16withBorrowedName4bodyqd__qd__s6UInt32V_SutXE_tlF', 

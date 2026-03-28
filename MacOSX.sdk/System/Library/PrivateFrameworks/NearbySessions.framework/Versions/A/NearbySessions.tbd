@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NearbySessions.framework/Versions/A/NearbySessions'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14NearbySessions011Invitation_C4DataV11displayNameSSvM', 
                        '_$s14NearbySessions011Invitation_C4DataV11displayNameSSvg', 
                        '_$s14NearbySessions011Invitation_C4DataV11displayNameSSvpMV', 

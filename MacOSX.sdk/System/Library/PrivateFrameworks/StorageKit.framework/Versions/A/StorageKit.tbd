@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/StorageKit.framework/Versions/A/StorageKit'
-current-version: 1024.60.3
+current-version: 1037.101.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10StorageKit14SKAnalyticsHubC7addSinkyyAA0cF0_pFZ', '_$s10StorageKit14SKAnalyticsHubC9sendEvent4name19eventPayloadBuilderySS_SDySSSo8NSObjectCGSgyctFZ', 
                        '_$s10StorageKit14SKAnalyticsHubCACycfC', '_$s10StorageKit14SKAnalyticsHubCACycfc', 
                        '_$s10StorageKit14SKAnalyticsHubCMa', '_$s10StorageKit14SKAnalyticsHubCMn', 

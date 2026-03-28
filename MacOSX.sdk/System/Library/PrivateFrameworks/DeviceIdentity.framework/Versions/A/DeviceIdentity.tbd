@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DeviceIdentity.framework/Versions/A/DeviceIdentity'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DeviceIdentityCopyAttestationDictionary, _DeviceIdentityCopyCertificateProperties, 
                        _DeviceIdentityCreateClientCertificateRequest, _DeviceIdentityCreateHostSignature, 
                        _DeviceIdentityCreateHostSignatureWithCompletion, _DeviceIdentityIsSupported, 
@@ -28,8 +26,8 @@ exports:
                        _kMAOptionsBAAMFiPropertiesAttestationKeyByte, _kMAOptionsBAAMFiPropertiesAttestationKeyMask, 
                        _kMAOptionsBAAMFiPropertiesDomainByte, _kMAOptionsBAAMFiPropertiesDomainMask, 
                        _kMAOptionsBAAMFiPropertiesProvisioningHostByte, _kMAOptionsBAAMFiPropertiesProvisioningHostMask, 
-                       _kMAOptionsBAANetworkTimeoutInterval, _kMAOptionsBAANonce, 
-                       _kMAOptionsBAAOIDAccessControls, _kMAOptionsBAAOIDDeviceIdentifiers, 
+                       _kMAOptionsBAAMatterSubjectDN, _kMAOptionsBAANetworkTimeoutInterval, 
+                       _kMAOptionsBAANonce, _kMAOptionsBAAOIDAccessControls, _kMAOptionsBAAOIDDeviceIdentifiers, 
                        _kMAOptionsBAAOIDDeviceIntent, _kMAOptionsBAAOIDDeviceOSInformation, 
                        _kMAOptionsBAAOIDEDAAttestationPublicKey, _kMAOptionsBAAOIDEDABuildVariant, 
                        _kMAOptionsBAAOIDEDAFirmwareVersion, _kMAOptionsBAAOIDEDAMDMManaged, 
@@ -41,8 +39,8 @@ exports:
                        _kMAOptionsBAAOIDHardwareProperties, _kMAOptionsBAAOIDIMG4Manifest, 
                        _kMAOptionsBAAOIDImageCertificateProperties, _kMAOptionsBAAOIDKeyUsageProperties, 
                        _kMAOptionsBAAOIDMFiAccessoryData, _kMAOptionsBAAOIDMFiAccessoryProperties, 
-                       _kMAOptionsBAAOIDMFiProductPlanUID, _kMAOptionsBAAOIDNonce, 
-                       _kMAOptionsBAAOIDProductType, _kMAOptionsBAAOIDSToInclude, 
+                       _kMAOptionsBAAOIDMFiProductPlanUID, _kMAOptionsBAAOIDMatterSubjectDN, 
+                       _kMAOptionsBAAOIDNonce, _kMAOptionsBAAOIDProductType, _kMAOptionsBAAOIDSToInclude, 
                        _kMAOptionsBAAOIDUCRTDeviceIdentifiers, _kMAOptionsBAAPerformOperationsOverIPC, 
                        _kMAOptionsBAARepairImage4Manifest, _kMAOptionsBAAReturnReferenceDate, 
                        _kMAOptionsBAASCRTAttestation, _kMAOptionsBAASkipNetworkRequest, 

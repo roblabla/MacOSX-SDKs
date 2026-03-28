@@ -1,15 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBNNS.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     clients:         [ vecLib ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BNNSAffineGridSample, _BNNSApplyMultiheadAttention, _BNNSApplyMultiheadAttentionBackward, 
                        _BNNSArithmeticFilterApplyBackwardBatch, _BNNSArithmeticFilterApplyBatch, 
                        _BNNSBandPart, _BNNSBitTranspose, _BNNSClearNetwork, _BNNSClipByGlobalNorm, 
@@ -47,16 +47,17 @@ exports:
                        _BNNSFusedFilterApplyMultiInputBatch, _BNNSGather, _BNNSGatherND, 
                        _BNNSGetPointer, _BNNSGraphAnalyzeIRSize, _BNNSGraphCompileFromFile, 
                        _BNNSGraphCompileFromFile_v2, _BNNSGraphCompileMLIR, _BNNSGraphCompileOptionShareIOPointer, 
-                       _BNNSGraphCompileOptionsDestroy, _BNNSGraphCompileOptionsGetCompilationEnableSignposts, 
-                       _BNNSGraphCompileOptionsGetDeduplicationMode, _BNNSGraphCompileOptionsGetDownconvertMode, 
-                       _BNNSGraphCompileOptionsGetFileWriteFSyncBarrier, _BNNSGraphCompileOptionsGetGenerateDebugInfo, 
-                       _BNNSGraphCompileOptionsGetOptimizationPreference, _BNNSGraphCompileOptionsGetOutputFD, 
-                       _BNNSGraphCompileOptionsGetOutputPath, _BNNSGraphCompileOptionsGetPreallocateOutputFile, 
-                       _BNNSGraphCompileOptionsGetPredefinedOptimizations, _BNNSGraphCompileOptionsGetShapeBounding, 
-                       _BNNSGraphCompileOptionsGetTarget, _BNNSGraphCompileOptionsGetTargetSingleThread, 
-                       _BNNSGraphCompileOptionsGetUpconvertMode, _BNNSGraphCompileOptionsGetUserData, 
-                       _BNNSGraphCompileOptionsGetValidateMILFile, _BNNSGraphCompileOptionsGetWeightsFD, 
-                       _BNNSGraphCompileOptionsGetWeightsPath, _BNNSGraphCompileOptionsMakeDefault, 
+                       _BNNSGraphCompileOptionsDestroy, _BNNSGraphCompileOptionsGetBlockSize, 
+                       _BNNSGraphCompileOptionsGetCompilationEnableSignposts, _BNNSGraphCompileOptionsGetDeduplicationMode, 
+                       _BNNSGraphCompileOptionsGetDownconvertMode, _BNNSGraphCompileOptionsGetFileWriteFSyncBarrier, 
+                       _BNNSGraphCompileOptionsGetGenerateDebugInfo, _BNNSGraphCompileOptionsGetOptimizationPreference, 
+                       _BNNSGraphCompileOptionsGetOutputFD, _BNNSGraphCompileOptionsGetOutputPath, 
+                       _BNNSGraphCompileOptionsGetPreallocateOutputFile, _BNNSGraphCompileOptionsGetPredefinedOptimizations, 
+                       _BNNSGraphCompileOptionsGetShapeBounding, _BNNSGraphCompileOptionsGetTarget, 
+                       _BNNSGraphCompileOptionsGetTargetSingleThread, _BNNSGraphCompileOptionsGetUpconvertMode, 
+                       _BNNSGraphCompileOptionsGetUserData, _BNNSGraphCompileOptionsGetValidateMILFile, 
+                       _BNNSGraphCompileOptionsGetWeightsFD, _BNNSGraphCompileOptionsGetWeightsPath, 
+                       _BNNSGraphCompileOptionsMakeDefault, _BNNSGraphCompileOptionsSetBlockSize, 
                        _BNNSGraphCompileOptionsSetCompilationEnableSignposts, _BNNSGraphCompileOptionsSetDeduplicationMode, 
                        _BNNSGraphCompileOptionsSetDownconvertMode, _BNNSGraphCompileOptionsSetFileWriteFSyncBarrier, 
                        _BNNSGraphCompileOptionsSetGenerateDebugInfo, _BNNSGraphCompileOptionsSetInputFormat, 
@@ -101,21 +102,20 @@ exports:
                        _BNNSGraphGetPackageVersion, _BNNSGraphGetPerformanceDataSize, 
                        _BNNSGraphGetSize, _BNNSGraphGetTensor, _BNNSGraphGetTensorDescriptor, 
                        _BNNSGraphGetTensorDescriptor_v2, _BNNSGraphGetUserData, _BNNSGraphGetWorkspaceSize, 
-                       _BNNSGraphGetWorkspaceSize_v2, _BNNSGraphIRtoDot_v2, _BNNSGraphOptionsCreateDefault, 
-                       _BNNSGraphOptionsSetDebugInfo, _BNNSGraphOptionsSetDownconvertMode, 
-                       _BNNSGraphOptionsSetOptimizationPreference, _BNNSGraphOptionsSetOutputPath, 
-                       _BNNSGraphOptionsSetPredefinedOptimizations, _BNNSGraphOptionsSetSingleThread, 
-                       _BNNSGraphTensorFillStrides, _BNNSGumbelMax, _BNNSInitGumbel, 
-                       _BNNSLossFilterApplyBackwardBatch, _BNNSLossFilterApplyBatch, 
-                       _BNNSMatMul, _BNNSMatMulWorkspaceSize, _BNNSNDArrayConvolutionSparsify, 
-                       _BNNSNDArrayConvolutionSparsifySparseCOO, _BNNSNDArrayFullyConnectedSparsify, 
-                       _BNNSNDArrayFullyConnectedSparsifySparseCOO, _BNNSNDArrayFullyConnectedSparsifySparseCSR, 
-                       _BNNSNDArrayGetDataSize, _BNNSNearestNeighborsGetInfo, _BNNSNearestNeighborsLoad, 
-                       _BNNSNormalizationFilterApplyBackwardBatch, _BNNSNormalizationFilterApplyBatch, 
-                       _BNNSOptimizerStep, _BNNSPermuteFilterApplyBackwardBatch, 
+                       _BNNSGraphGetWorkspaceSize_v2, _BNNSGraphIRtoDot_v2, _BNNSGraphIRtoModelExplorerDict, 
+                       _BNNSGraphOptionsCreateDefault, _BNNSGraphOptionsSetDebugInfo, 
+                       _BNNSGraphOptionsSetDownconvertMode, _BNNSGraphOptionsSetOptimizationPreference, 
+                       _BNNSGraphOptionsSetOutputPath, _BNNSGraphOptionsSetPredefinedOptimizations, 
+                       _BNNSGraphOptionsSetSingleThread, _BNNSGraphTensorFillStrides, 
+                       _BNNSGumbelMax, _BNNSInitGumbel, _BNNSLossFilterApplyBackwardBatch, 
+                       _BNNSLossFilterApplyBatch, _BNNSMatMul, _BNNSMatMulWorkspaceSize, 
+                       _BNNSNDArrayConvolutionSparsify, _BNNSNDArrayConvolutionSparsifySparseCOO, 
+                       _BNNSNDArrayFullyConnectedSparsify, _BNNSNDArrayFullyConnectedSparsifySparseCOO, 
+                       _BNNSNDArrayFullyConnectedSparsifySparseCSR, _BNNSNDArrayGetDataSize, 
+                       _BNNSNearestNeighborsGetInfo, _BNNSNearestNeighborsLoad, _BNNSNormalizationFilterApplyBackwardBatch, 
+                       _BNNSNormalizationFilterApplyBatch, _BNNSOptimizerStep, _BNNSPermuteFilterApplyBackwardBatch, 
                        _BNNSPoolingFilterApplyBackwardBatch, _BNNSPoolingFilterApplyBackwardBatchEx, 
                        _BNNSPoolingFilterApplyBatch, _BNNSPoolingFilterApplyBatchEx, 
-                       _BNNSPose384InitFromPointers, _BNNSPoseExecute, _BNNSPoseInitFromPointers, 
                        _BNNSRandomFillCategoricalFloat, _BNNSRandomFillNormalFloat, 
                        _BNNSRandomFillUniformFloat, _BNNSRandomFillUniformInt, _BNNSRandomGeneratorGetState, 
                        _BNNSRandomGeneratorSetState, _BNNSRandomGeneratorStateSize, 
@@ -133,9 +133,8 @@ exports:
                        __ZN4bnns12GraphOptionsD0Ev, __ZN4bnns12GraphOptionsD1Ev, 
                        __ZN4bnns12GraphOptionsD2Ev, __ZN4bnns13RepackWeightsEONSt3__110unique_ptrIN3MIL9IRProgramENS0_14default_deleteIS3_EEEE12bnns_graph_t28bnns_graph_compile_options_t, 
                        __ZN4bnns13RepackWeightsERKN3MIL9IRProgramE12bnns_graph_t28bnns_graph_compile_options_t, 
-                       __ZN4bnns14RegisterOpsetsERN3MIL10MILContextE, __ZN4bnns15PoseInitFromMILEPvPKN3MIL9IRProgramE, 
-                       __ZNK4bnns12GraphOptions17get_single_threadEv, __ZNK4bnns12GraphOptions23get_generate_debug_infoEv, 
-                       __ZNK4bnns12GraphOptions28get_predefined_optimizationsEv, 
+                       __ZN4bnns14RegisterOpsetsERN3MIL10MILContextE, __ZNK4bnns12GraphOptions17get_single_threadEv, 
+                       __ZNK4bnns12GraphOptions23get_generate_debug_infoEv, __ZNK4bnns12GraphOptions28get_predefined_optimizationsEv, 
                        __ZTIN4bnns12GraphOptionsE, __ZTSN4bnns12GraphOptionsE, __ZTVN4bnns12GraphOptionsE, 
                        __bnns_graph_builder_finalize, __bnns_graph_builder_make, 
                        __bnns_graph_builder_register_abs, __bnns_graph_builder_register_acos, 
@@ -198,5 +197,6 @@ exports:
                        __bnns_graph_builder_register_threshold, __bnns_graph_builder_register_thresholded_relu, 
                        __bnns_graph_builder_register_topk, __bnns_graph_builder_register_transpose, 
                        __bnns_graph_builder_register_unsqueeze, __bnns_graph_builder_register_xor, 
-                       __bnns_graph_builder_tensor_from_tensor_ref ]
+                       __bnns_graph_builder_tensor_from_tensor_ref, __bnns_hgemm, 
+                       __bnns_hgemm_mem_requirement ]
 ...

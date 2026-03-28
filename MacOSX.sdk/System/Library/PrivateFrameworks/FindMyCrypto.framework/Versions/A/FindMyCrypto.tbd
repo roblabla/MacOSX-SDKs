@@ -1,20 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FindMyCrypto.framework/Versions/A/FindMyCrypto'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FMFCore, FMIPCore, FindMy, FindMyBluetooth, FindMyCryptoTests, 
                        FindMyLocateTests, FindMyServiceValidation, FindMyServiceValidationTests, 
                        FindingUI, FindingUIAngel, SPSharedTests, findmybeaconingd, 
                        findmydevicetool, findmylocateagent, findmylocated, findmylocatedTests, 
                        fmltool, searchpartyd, searchpartydTests, searchpartyuseragent ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12FindMyCrypto0C10TokenErrorO07missingD21GenerationEntitlementyA2CmFWC', 
                        '_$s12FindMyCrypto0C10TokenErrorO11unsupportedyA2CmFWC', '_$s12FindMyCrypto0C10TokenErrorO17unableToExpandKeyyA2CmFWC', 
                        '_$s12FindMyCrypto0C10TokenErrorO18unableToCompactKeyyA2CmFWC', 

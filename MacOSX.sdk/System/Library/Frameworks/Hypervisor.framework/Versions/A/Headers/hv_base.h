@@ -2,7 +2,7 @@
 //  hv_base.h
 //  Hypervisor
 //
-//  Copyright © 2019-2023 Apple Inc. All rights reserved.
+//  Copyright © 2019-2025 Apple Inc. All rights reserved.
 //
 
 #pragma once
@@ -21,3 +21,4 @@
 #define HV_API_AVAILABLE_ARM64(...)
 #define HV_API_AVAILABLE_X86_64(...) API_AVAILABLE(__VA_ARGS__)
 #endif
+

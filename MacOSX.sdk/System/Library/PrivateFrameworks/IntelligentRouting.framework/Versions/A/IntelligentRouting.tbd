@@ -1,22 +1,40 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligentRouting.framework/Versions/A/IntelligentRouting'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _IRAppleTVControlEventSubTypeToString, _IRAppleTVControlEventTypeToString, 
-                       _IRCandidateClassificationToString, _IRContextAppleTVControlKey, 
-                       _IRContextHomeKey, _IRContextMediaControlKey, _IRContextMediaRouteKey, 
+                       _IRBundleIdentifierAVKitRoutePickerViewService, _IRBundleIdentifierBlueAtlas, 
+                       _IRBundleIdentifierControlCenter, _IRBundleIdentifierHome, 
+                       _IRBundleIdentifierHomeIntegrationTests, _IRBundleIdentifierHomeKit, 
+                       _IRBundleIdentifierHomeTestKitTests, _IRBundleIdentifierHomeUtil, 
+                       _IRBundleIdentifierHomeWidgetInteractive, _IRBundleIdentifierHomeWidgetTV, 
+                       _IRBundleIdentifierIntelligentRoutingClient, _IRBundleIdentifierIntelligentRoutingClientAppleTVControl, 
+                       _IRBundleIdentifierIntelligentRoutingClientHome, _IRBundleIdentifierIntelligentRoutingClientMedia, 
+                       _IRBundleIdentifierIntelligentRoutingHostTests, _IRBundleIdentifierIntelligentRoutingHostTestsAppleTVControl, 
+                       _IRBundleIdentifierIntelligentRoutingHostTestsHome, _IRBundleIdentifierIntelligentRoutingHostTestsMedia, 
+                       _IRBundleIdentifierMediaRemote, _IRBundleIdentifierMusic, 
+                       _IRBundleIdentifierMusicUIService, _IRBundleIdentifierNanoHome, 
+                       _IRBundleIdentifierNeighborhoodActivityConduitService, _IRBundleIdentifierRoverApp, 
+                       _IRBundleIdentifierSiriAssistantService, _IRBundleIdentifierSpringboard, 
+                       _IRBundleIdentifierTVRemote, _IRBundleIdentifierTVSystemUIService, 
+                       _IRBundleIdentifierTelephonyUtilities, _IRCandidateClassificationToString, 
+                       _IRContextAppleTVControlKey, _IRContextHomeKey, _IRContextMediaControlKey, 
+                       _IRContextMediaRouteKey, _IRContextMetadataIsMicroLocationMapValidKey, 
+                       _IRContextMetadataIsMicroLocationPredictionValidKey, _IRContextMetadataIsPeripheralAvailableKey, 
                        _IRErrorDomain, _IRHomeEventSubTypeToString, _IRHomeEventTypeToString, 
+                       _IRHomeSuggestionPresentationModeAuto, _IRHomeSuggestionPresentationModeExplicit, 
+                       _IRHomeSuggestionPresentationModeImplicit, _IRHomeSuggestionPresentationModeUnknown, 
+                       _IRHomeSuggestionReQueryNotification, _IRHomeSuggestionTypeToString, 
                        _IRLogObject, _IRLogObjectLongTerm, _IRLogObjectQE, _IRMakeXPCClientInterface, 
                        _IRMakeXPCServerInterface, _IRMediaBundleTypeToString, _IRMediaEventSubTypeToString, 
                        _IRMediaEventTypeToString, _IRServicePackageString, _IRSessionAvailableNotification, 
                        _IRSetupLogging, _kIREventNameAppleTVControl, _kIREventNameHome, 
                        _kIREventNameMedia, _kIRServiceLogPrefixKey ]
     objc-classes:    [ IRAppleTVControlEvent, IRBundle, IRCandidate, IRCandidateResult, 
-                       IRConfiguration, IRContext, IREvent, IRHomeEvent, IRMediaBundle, 
-                       IRMediaEvent, IRNode, IRServiceParameters, IRServiceToken, 
-                       IRSession, IRSessionSpotOnLocationParameters, IRXPCSessionClient ]
+                       IRConfiguration, IRContext, IREvent, IRHomeEvent, IRHomeSuggestion, 
+                       IRHomeSuggestionTarget, IRMediaBundle, IRMediaEvent, IRNode, 
+                       IRServiceParameters, IRServiceToken, IRSession, IRSessionSpotOnLocationParameters, 
+                       IRXPCSessionClient ]
 ...

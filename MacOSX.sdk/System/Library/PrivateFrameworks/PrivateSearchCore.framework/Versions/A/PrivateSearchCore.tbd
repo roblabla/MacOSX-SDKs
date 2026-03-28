@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PrivateSearchCore.framework/Versions/A/PrivateSearchCore'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation4DataV17PrivateSearchCoreE12toUInt8ArraySays0G0VGyF', 
                        '_$s17PrivateSearchCore08EnhancedaB5StoreMp', '_$s17PrivateSearchCore08EnhancedaB5StoreP0aB9Protocols0abE0Tb', 
                        '_$s17PrivateSearchCore08EnhancedaB5StoreTL', '_$s17PrivateSearchCore0B15IndexStoreErrorO21__derived_enum_equalsySbAC_ACtFZ', 

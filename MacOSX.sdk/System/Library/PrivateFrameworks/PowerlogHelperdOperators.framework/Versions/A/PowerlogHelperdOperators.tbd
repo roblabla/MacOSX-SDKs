@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PowerlogHelperdOperators.framework/Versions/A/PowerlogHelperdOperators'
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ _kPCurrentKernelWakeTime, _kPLSleepWakeAgentEventPointNameCurrentKernelWakeTime ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ARSessionDidPauseDarwinNotification, _ARSessionDidRunDarwinNotification, 
                        _KPLBatteryAgentStringOVPCount, _KPLBatteryAgentStringSlowChargerReason, 
                        _KPSlope, _PLBatteryUIDrainComparisonTypes, _PLEmitPowerSignpost, 
@@ -324,6 +324,9 @@ exports:
                        _kPLScreenStateAgentEventForwardNameScreenState, _kPLScreenStateAgentEventForwardNameWindowMode, 
                        _kPLScreenStateAgentEventPointNameBacklightEvent, _kPLSelectedChargeLimit, 
                        _kPLSleepWakeAgentEventForwardNamePowerState, _kPLSleepWakeAgentEventForwardNameUserIdle, 
+                       _kPLSleepWakeAgentEventIntervalNameKernelAssertions, _kPLSleepWakeAgentEventIntervalNameKernelAssertionsCount, 
+                       _kPLSleepWakeAgentEventIntervalNameKernelAssertionsID, _kPLSleepWakeAgentEventNoneNameKernelAssertionsLookup, 
+                       _kPLSleepWakeAgentEventNoneNameKernelAssertionsLookupID, _kPLSleepWakeAgentEventNoneNameKernelAssertionsLookupName, 
                        _kPLSleepWakeAgentEventPointNameCoSocPower, _kPLSleepWakeAgentEventPointNameCoSocPowerActiveClients, 
                        _kPLSleepWakeAgentEventPointNameCoSocPowerState, _kPLSleepWakeAgentEventPointNameCoSocPowerTriggerType, 
                        _kPLSleepWakeAgentEventPointNameKernelState, _kPLSleepWakeAgentEventPointNameScheduledWake, 
@@ -476,15 +479,16 @@ exports:
                        _sourceIPKey, _sourcePortKey, _strictLookupKey, _systemPrefix, 
                        _uikitAppPrefix, _updateDisplayIOReportAZLStats, _userPrefix, 
                        _wildCardHybridStr, _wildCardIPv4Str, _wildCardIPv6Str ]
-    objc-classes:    [ AFKEndpointInterfacePowerlogDisplay, CoalitionMemoryUsage, 
-                       KernelTaskMonitorStats, OverallMemoryUsage, PLARKitAgent, 
-                       PLASMetric, PLAggregateSummarizationService, PLApplicationAgent, 
-                       PLBatteryAgent, PLBatteryUIResponderService, PLBatteryUIResponseTypeChargingIntervals, 
-                       PLBatteryUIResponseTypeIOSUISOCDrain, PLBatteryUIResponseTypeLastChargeLevel, 
-                       PLBatteryUIResponseTypeNoteworthyInformation, PLBatteryUIResponseTypeUISOCDrain, 
-                       PLBatteryUIResponseTypeUISOCLevel, PLBatteryUIResponseTypeUsageTimes, 
-                       PLCameraAgent, PLCameraDeviceMetadata, PLCoalitionAgent, PLCoalitionDataObject, 
-                       PLDisplayAPLStats, PLDisplayAZLStats, PLDisplayAgent, PLDisplayIOReportStats, 
+    objc-classes:    [ AFKEndpointInterfacePowerlogDisplay, CoalitionComputeMetrics, 
+                       CoalitionMemoryUsage, KernelTaskMonitorStats, OverallMemoryUsage, 
+                       PLARKitAgent, PLASMetric, PLAggregateSummarizationService, 
+                       PLApplicationAgent, PLBatteryAgent, PLBatteryUIResponderService, 
+                       PLBatteryUIResponseTypeChargingIntervals, PLBatteryUIResponseTypeIOSUISOCDrain, 
+                       PLBatteryUIResponseTypeLastChargeLevel, PLBatteryUIResponseTypeNoteworthyInformation, 
+                       PLBatteryUIResponseTypeUISOCDrain, PLBatteryUIResponseTypeUISOCLevel, 
+                       PLBatteryUIResponseTypeUsageTimes, PLCameraAgent, PLCameraDeviceMetadata, 
+                       PLCoalitionAgent, PLCoalitionDataObject, PLDisplayAPLStats, 
+                       PLDisplayAZLStats, PLDisplayAgent, PLDisplayIOReportStats, 
                        PLDuetServiceLpmSource, PLEventBackwardBatteryEntry, PLEventForwardDisplayEntry, 
                        PLEventForwardPowerStateEntry, PLLedgerEntryData, PLLocationAgent, 
                        PLMetricsFormatterJSON, PLMetricsFormatterMetricKit, PLPidAndProcessName, 
@@ -495,7 +499,7 @@ exports:
                        PPSFileUtilities, ProcessMemoryUsage, ProcessMonitorStats, 
                        SignpostReaderHelper ]
     objc-ivars:      [ AFKEndpointInterfacePowerlogDisplay._notification ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ _PLLogPowerMetricMonitor, _PLLogPowerSignpost, _PLLogSMC, 
                        _kPCurrentMachWakeTime, _kPLBatteryAgentEventPointNameCPMSClientState, 
                        _kPLBatteryAgentEventPointNameCPMSControlState, _kPLBatteryAgentStringCPMSBattPowConsumptionTemplate, 

@@ -199,8 +199,16 @@ typedef NS_ENUM(NSInteger, PHAssetResourceUploadJobState) {
     PHAssetResourceUploadJobStatePending = 2,       /// A request has been made to send the asset resource to the destination, but has not yet been fulfilled.
     PHAssetResourceUploadJobStateFailed = 3,        /// The job has failed to send over.
     PHAssetResourceUploadJobStateSucceeded = 4,     /// The job has sent over successfully.
+    PHAssetResourceUploadJobStateCancelled API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos, watchos) = 5,  /// The job has been cancelled.
 
 } NS_SWIFT_NAME(PHAssetResourceUploadJob.State) API_AVAILABLE(ios(26.1)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos);
+
+
+/// The types of an upload job
+typedef NS_ENUM(int16_t, PHAssetResourceUploadJobType) {
+    PHAssetResourceUploadJobTypeUpload = 0,         /// An upload job type (will download the resource from iCloud if required. then upload)
+    PHAssetResourceUploadJobTypeDownloadOnly = 1,   /// A download job type (will download the resource from iCloud if required)
+} NS_SWIFT_NAME(PHAssetResourceUploadJob.Type) API_AVAILABLE(ios(26.4)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos);
 
 /// An action to perform on an upload job.
 ///

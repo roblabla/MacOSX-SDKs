@@ -8,6 +8,7 @@
 #import <Foundation/NSOrderedSet.h>
 
 @class NSDictionary <KeyType, ObjectType>, NSString;
+@protocol NSPredicateValidating;
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
@@ -44,6 +45,8 @@ API_AVAILABLE(macos(10.4), ios(3.0), watchos(2.0), tvos(9.0))
 - (BOOL)evaluateWithObject:(nullable id)object substitutionVariables:(nullable NSDictionary<NSString *, id> *)bindings API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0)); // single pass evaluation substituting variables from the bindings dictionary for any variable expressions encountered
 
 - (void)allowEvaluation API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0)); // Force a predicate which was securely decoded to allow evaluation
+- (BOOL)allowEvaluationWithValidator:(id<NSPredicateValidating>)validator
+                               error:(NSError * _Nullable *)error NS_SWIFT_NAME(allowEvaluation(validator:)) API_AVAILABLE(macosx(26.4),ios(26.4),tvos(26.4),watchos(26.4),visionos(26.4));
 
 @end
 

@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/VisualActionPredictionCore.framework/Versions/A/VisualActionPredictionCore'
-current-version: 619.14
+current-version: 627.11
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s26VisualActionPredictionCore0aB5EventC11dataVersions6UInt32VvM', 
                        '_$s26VisualActionPredictionCore0aB5EventC11dataVersions6UInt32Vvg', 
                        '_$s26VisualActionPredictionCore0aB5EventC11dataVersions6UInt32VvpMV', 

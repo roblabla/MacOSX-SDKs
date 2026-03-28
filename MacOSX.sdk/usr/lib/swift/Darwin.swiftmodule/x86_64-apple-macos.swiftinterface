@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-macos26.2 -target-variant x86_64-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftDarwin -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 347.40.2 -module-name Darwin
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-macos26.4 -target-variant x86_64-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftDarwin -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 377.100.15 -module-name Darwin
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 @_exported import Darwin
 import Swift
 @_exported import _Builtin_float
@@ -10,12 +10,10 @@ import Swift
 @_exported import _DarwinFoundation3
 import Darwin.Mach.message
 @_exported import sys_types
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
 public var environ: Swift.UnsafeMutablePointer<Swift.UnsafeMutablePointer<Swift.CChar>?> {
   get
 }
-#endif
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
 public func open(_ path: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32) -> Swift.Int32
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
@@ -84,9 +82,7 @@ public func fcntl(_ fd: Swift.Int32, _ cmd: Swift.Int32, _ ptr: Swift.UnsafeMuta
   case operationTimedOut = 49
   case codesignError = 50
   case policyStatic = 51
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int32)
-  #endif
   @available(iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, macOS 10.9, *)
   public typealias RawValue = Swift.Int32
   public var rawValue: Swift.Int32 {
@@ -108,8 +104,8 @@ public let INVALID_AUDIT_TOKEN_VALUE: (Swift.UInt32, Swift.UInt32, Swift.UInt32,
 @available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
 public let KERNEL_AUDIT_TOKEN_VALUE: (Swift.UInt32, Swift.UInt32, Swift.UInt32, Swift.UInt32, Swift.UInt32, Swift.UInt32, Swift.UInt32, Swift.UInt32)
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var noErr: Darwin.OSStatus {
-  get
+@inlinable public var noErr: Darwin.OSStatus {
+  get { return 0 }
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
 @frozen public struct DarwinBoolean : Swift.ExpressibleByBooleanLiteral, Swift.Sendable {
@@ -156,20 +152,14 @@ extension Darwin.DarwinBoolean : Swift.Equatable {
     return x.boolValue
 }
 public typealias Semaphore = Swift.UnsafeMutablePointer<Darwin.sem_t>
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
 public var SEM_FAILED: Darwin.Semaphore? {
   get
 }
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
 public func sem_open(_ name: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32) -> Darwin.Semaphore?
-#endif
-#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
 public func sem_open(_ name: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32, _ mode: _DarwinFoundation2.mode_t, _ value: Swift.CUnsignedInt) -> Darwin.Semaphore?
-#endif
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
 public func ioctl(_ fd: Swift.CInt, _ request: Swift.UInt, _ value: Swift.CInt) -> Swift.CInt
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)

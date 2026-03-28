@@ -82,6 +82,7 @@
  * @constant   kIOUSBHostConnectionSpeedSuper A superspeed (5 Gb/s) device is connected)
  * @constant   kIOUSBHostConnectionSpeedSuperPlus A superspeed (10 Gb/s) device is connected)
  * @constant   kIOUSBHostConnectionSpeedSuperPlusBy2 A superspeed (20 Gb/s) device is connected)
+ * @constant   kIOUSBHostConnectionSpeedOther A speed not identified by previous definitions
  */
 enum tIOUSBHostConnectionSpeed
 {
@@ -92,7 +93,8 @@ enum tIOUSBHostConnectionSpeed
     kIOUSBHostConnectionSpeedSuper        = 4,
     kIOUSBHostConnectionSpeedSuperPlus    = 5,
     kIOUSBHostConnectionSpeedSuperPlusBy2 = 6,
-    kIOUSBHostConnectionSpeedCount        = 7
+    kIOUSBHostConnectionSpeedOther        = 7,
+    kIOUSBHostConnectionSpeedCount        = 8
 };
 
 /*!
@@ -155,6 +157,7 @@ enum tIOUSBHostPortStatus
     kIOUSBHostPortStatusConnectedSpeedSuper        = (kIOUSBHostConnectionSpeedSuper << IOUSBHostFamilyBitRangePhase(8, 10)),
     kIOUSBHostPortStatusConnectedSpeedSuperPlus    = (kIOUSBHostConnectionSpeedSuperPlus << IOUSBHostFamilyBitRangePhase(8, 10)),
     kIOUSBHostPortStatusConnectedSpeedSuperPlusBy2 = (kIOUSBHostConnectionSpeedSuperPlusBy2 << IOUSBHostFamilyBitRangePhase(8, 10)),
+    kIOUSBHostPortStatusConnectedSpeedOther        = (kIOUSBHostConnectionSpeedOther << IOUSBHostFamilyBitRangePhase(8, 10)),
     kIOUSBHostPortStatusResetting                  = IOUSBHostFamilyBit(11),
     kIOUSBHostPortStatusEnabled                    = IOUSBHostFamilyBit(12),
     kIOUSBHostPortStatusSuspended                  = IOUSBHostFamilyBit(13),
@@ -173,6 +176,8 @@ enum tIOUSBHostPortStatus
 
 #define kIOUSBHostDeviceClassName                               "IOUSBHostDevice"
 #define kIOUSBHostInterfaceClassName                            "IOUSBHostInterface"
+
+#define IOUSBHOST_PROPERTY_DEPRECATED _Pragma("message \"IORegistry property is deprecated.\"")
 
 #pragma mark USB Service matching properties
 
@@ -207,7 +212,7 @@ enum tIOUSBHostPortStatus
 #define kUSBHostPropertyBusCurrentPoolID                        "UsbBusCurrentPoolID"
 #define kUSBHostPropertySmcBusCurrentPoolID                     "UsbSmcBusCurrentPoolID"
 #define kUSBHostPropertyForcePower                              "UsbForcePower"
-#define kUSBHostPropertyForceLinkSpeed                          "UsbLinkSpeed"
+#define kUSBHostPropertyLinkSpeed                               "UsbLinkSpeed"
 #define kUSBHostPropertyForceHardwareException                  "UsbHardwareException"
 #define kUSBHostPropertyAllowSoftRetry                          "UsbAllowSoftRetry"
 #define kUSBHostPropertyExclusiveOwner                          "UsbExclusiveOwner"                 // OSString describing the service or process with an exclusive session to the USB service
@@ -253,6 +258,7 @@ enum tIOUSBHostPortStatus
 #define kUSBHostDevicePropertyIdlePolicy                        "UsbIdlePolicy"                         // OSNumber ms before idle or unused device is suspended
 
 #define kUSBHostBillboardDevicePropertyVersion                  "UsbBillboardVersion"
+#define kUSBHostBillboardDevicePropertySupportedModes           "UsbBillboardSupportedModes"
 #define kUSBHostBillboardDevicePropertyPreferredMode            "UsbBillboardPreferredMode"
 #define kUSBHostBillboardDevicePropertyCurrentMode              "UsbBillboardCurrentMode"
 #define kUSBHostBillboardDevicePropertyModeValueUSB4            "USB4"
@@ -260,20 +266,19 @@ enum tIOUSBHostPortStatus
 #define kUSBHostBillboardDevicePropertyModeValueDisplayPort     "DisplayPort"
 #define kUSBHostBillboardDevicePropertyAltModeFailed            "UsbBillboardAltModeFailed"
 #define kUSBHostBillboardDevicePropertyAltModePowerFailed       "UsbBillboardAltModePowerFailed"
-// Obsolete Billboard properties
-#define kUSBHostBillboardDevicePropertyNumberOfAlternateModes   "bNumberOfAlternateModes"
-#define kUSBHostBillboardDevicePropertyPreferredAlternateMode   "bPreferredAlternateMode"
-#define kUSBHostBillboardDevicePropertyVCONNPower               "VCONNPower"
-#define kUSBHostBillboardDevicePropertyConfigured               "bmConfigured"
-#define kUSBHostBillboardDevicePropertyAdditionalFailureInfo    "bAdditonalFailureInfo"
-#define kUSBHostBillboardDevicePropertyBcdVersion               "BcdVersion"
-#define kUSBHostBillboardDevicePropertySVID                     "wSVID"
-#define kUSBHostBillboardDevicePropertyAlternateMode            "bAlternateMode"
-#define kUSBHostBillboardDevicePropertyAlternateModeStringIndex "iAlternateModeString"
-#define kUSBHostBillboardDevicePropertyAlternateModeString      "AlternateModeString"
-#define kUSBHostBillboardDevicePropertyAddtionalInfoURLIndex    "iAddtionalInfoURL"
-#define kUSBHostBillboardDevicePropertyAddtionalInfoURL         "AddtionalInfoURL"
-#define kUSBHostBillboardDevicePropertydwAlternateModeVdo       "dwAlternateModeVdo"
+#define kUSBHostBillboardDevicePropertyNumberOfAlternateModes   IOUSBHOST_PROPERTY_DEPRECATED "bNumberOfAlternateModes"
+#define kUSBHostBillboardDevicePropertyPreferredAlternateMode   IOUSBHOST_PROPERTY_DEPRECATED "bPreferredAlternateMode"
+#define kUSBHostBillboardDevicePropertyVCONNPower               IOUSBHOST_PROPERTY_DEPRECATED "VCONNPower"
+#define kUSBHostBillboardDevicePropertyConfigured               IOUSBHOST_PROPERTY_DEPRECATED "bmConfigured"
+#define kUSBHostBillboardDevicePropertyAdditionalFailureInfo    IOUSBHOST_PROPERTY_DEPRECATED "bAdditonalFailureInfo"
+#define kUSBHostBillboardDevicePropertyBcdVersion               IOUSBHOST_PROPERTY_DEPRECATED "BcdVersion"
+#define kUSBHostBillboardDevicePropertySVID                     IOUSBHOST_PROPERTY_DEPRECATED "wSVID"
+#define kUSBHostBillboardDevicePropertyAlternateMode            IOUSBHOST_PROPERTY_DEPRECATED "bAlternateMode"
+#define kUSBHostBillboardDevicePropertyAlternateModeStringIndex IOUSBHOST_PROPERTY_DEPRECATED "iAlternateModeString"
+#define kUSBHostBillboardDevicePropertyAlternateModeString      IOUSBHOST_PROPERTY_DEPRECATED "AlternateModeString"
+#define kUSBHostBillboardDevicePropertyAddtionalInfoURLIndex    IOUSBHOST_PROPERTY_DEPRECATED "iAddtionalInfoURL"
+#define kUSBHostBillboardDevicePropertyAddtionalInfoURL         IOUSBHOST_PROPERTY_DEPRECATED "AddtionalInfoURL"
+#define kUSBHostBillboardDevicePropertydwAlternateModeVdo       IOUSBHOST_PROPERTY_DEPRECATED "dwAlternateModeVdo"
 
 #define kUSBHostInterfacePropertyAlternateSetting               "bAlternateSetting"
 
@@ -307,6 +312,10 @@ enum tIOUSBHostPortStatus
 #define kUSBHostPortPropertyProtocolRevision1                   "UsbProtocol (1.x)"                     // OSBoolean true to indicate USB 1.x (low-speed, full-speed) is supported
 #define kUSBHostPortPropertyProtocolRevision2                   "UsbProtocol (2.0)"                     // OSBoolean true to indicate USB 2.0 (high-speed) is supported
 #define kUSBHostPortPropertyProtocolRevision3                   "UsbProtocol (3.x)"                     // OSBoolean true to indicate USB 3.x (superspeed, superspeed plus) is supported
+#define kUSBHostPortPropertyProtocolRevision4                   "UsbProtocol (4.0)"                     // OSBoolean true to indicate USB 4.0 (GenT) is supported
+#define kUSBHostPortPropertyUSB2Repeater                        "Usb2Repeater"                          // OSBoolean true to indicate there is a USB2 repeater in the hardware channel
+#define kUSBHostPortPropertyUSB2ExternalRemoteWake              "Usb2ExternalRemoteWake"                // OSBoolean true to indicate port microcontroller is responsible for USB2 remote wake
+#define kUSBHostPortPropertyTransportState                      "UsbTransportState"                     // OSString registry path of the IOPortTransportState service associated with the port
 
 #define kUSBHostHubPropertyPowerSupply                          "kUSBHubPowerSupply"                    // OSNumber mA available for downstream ports, 0 for bus-powered
 #define kUSBHostHubPropertyIdlePolicy                           "kUSBHubIdlePolicy"                     // OSNumber ms to be used as device idle policy

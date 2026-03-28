@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ActivityKit.framework/Versions/A/ActivityKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s11ActivityKit010SubscribedA0V2eeoiySbAC_ACtFZ', '_$s11ActivityKit010SubscribedA0V4fromACs7Decoder_p_tKcfC', 
                        '_$s11ActivityKit010SubscribedA0V6encode2toys7Encoder_p_tKF', 
                        '_$s11ActivityKit010SubscribedA0VMa', '_$s11ActivityKit010SubscribedA0VMn', 
@@ -803,6 +803,7 @@ exports:
                        '_$s11ActivityKit0A19PresentationOptionsV02acacD0So010ACActivitycD0CvpMV', 
                        '_$s11ActivityKit0A19PresentationOptionsV0aC11DestinationO10fullScreenyA2EmFWC', 
                        '_$s11ActivityKit0A19PresentationOptionsV0aC11DestinationO10lockscreenyA2EmFWC', 
+                       '_$s11ActivityKit0A19PresentationOptionsV0aC11DestinationO12siriAnnounceyA2EmFWC', 
                        '_$s11ActivityKit0A19PresentationOptionsV0aC11DestinationO14systemApertureyA2EmFWC', 
                        '_$s11ActivityKit0A19PresentationOptionsV0aC11DestinationO18systemApertureOnlySayAEGvgZ', 
                        '_$s11ActivityKit0A19PresentationOptionsV0aC11DestinationO18systemApertureOnlySayAEGvpZMV', 

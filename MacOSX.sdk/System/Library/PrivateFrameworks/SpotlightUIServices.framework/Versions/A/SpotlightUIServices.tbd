@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightUIServices.framework/Versions/A/SpotlightUIServices'
-current-version: 181.2.7
+current-version: 181.4.6
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s19SpotlightUIServices11LogCategoryO7generalyA2CmFWC', 
                        '_$s19SpotlightUIServices11LogCategoryO8rawValueACSgSS_tcfC', 
                        '_$s19SpotlightUIServices11LogCategoryO8rawValueSSvg', '_$s19SpotlightUIServices11LogCategoryO8rawValueSSvpMV', 

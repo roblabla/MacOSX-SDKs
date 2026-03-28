@@ -15,7 +15,7 @@
 #  pragma GCC system_header
 #endif
 
-#if defined(_LIBCPP_ON_SEP)
+#if defined(_LIBCPP_ON_LIBLIBC)
 #  include <__locale_dir/support/liblibc.h>
 #else
 #  include <__locale_dir/support/bsd_like.h>

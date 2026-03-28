@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AskToUI.framework/Versions/A/AskToUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s4Body7AskToUI19ResponseUIExtensionPTl', '_$s4Body7AskToUI23MessageComposeExtensionPTl', 
                        '_$s7AskToUI04SendaB16PayloadFlowErrorO02sbE12FailedDecodeyA2CmFWC', 
                        '_$s7AskToUI04SendaB16PayloadFlowErrorO02sbE13ActionMissingyA2CmFWC', 

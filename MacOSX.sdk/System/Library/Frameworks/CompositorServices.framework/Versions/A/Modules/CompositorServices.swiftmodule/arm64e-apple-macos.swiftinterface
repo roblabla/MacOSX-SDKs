@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-macos26.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 420.40.1.0.2 -module-name CompositorServices
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-macos26.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 420.100.10 -module-name CompositorServices
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import ARKit
 import Combine
 @_exported import CompositorServices
@@ -81,15 +81,9 @@ extension CompositorServices.LayerRenderer.Capabilities {
 extension CompositorServices.LayerRenderer.Capabilities : Swift._ObjectiveCBridgeable {
   public typealias _ObjectiveCType = CompositorServices.__CP_OBJECT_cp_layer_renderer_capabilities
   public func _bridgeToObjectiveC() -> CompositorServices.LayerRenderer.Capabilities._ObjectiveCType
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ source: CompositorServices.LayerRenderer.Capabilities._ObjectiveCType, result: inout CompositorServices.LayerRenderer.Capabilities?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ source: CompositorServices.LayerRenderer.Capabilities._ObjectiveCType, result: inout CompositorServices.LayerRenderer.Capabilities?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _unconditionallyBridgeFromObjectiveC(_ source: CompositorServices.LayerRenderer.Capabilities._ObjectiveCType?) -> CompositorServices.LayerRenderer.Capabilities
-  #endif
 }
 @available(visionOS 1.0, macOS 26.0, *)
 extension CompositorServices.LayerRenderer {
@@ -110,13 +104,9 @@ extension CompositorServices.LayerRenderer.Clock : _Concurrency.Clock {
   public var minimumResolution: Swift.Duration {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func sleep(until deadline: CompositorServices.LayerRenderer.Clock.Instant, tolerance: Swift.Duration?) async throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, noasync)
   public func wait(until deadline: CompositorServices.LayerRenderer.Clock.Instant, tolerance: Swift.Duration? = nil)
-  #endif
   @available(visionOS 1.0, macOS 26.0, *)
   public typealias Duration = Swift.Duration
 }
@@ -210,15 +200,9 @@ extension CompositorServices.LayerRenderer.Configuration {
 extension CompositorServices.LayerRenderer.Configuration : Swift._ObjectiveCBridgeable {
   public typealias _ObjectiveCType = CompositorServices.__CP_OBJECT_cp_layer_renderer_configuration
   public func _bridgeToObjectiveC() -> CompositorServices.LayerRenderer.Configuration._ObjectiveCType
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ source: CompositorServices.LayerRenderer.Configuration._ObjectiveCType, result: inout CompositorServices.LayerRenderer.Configuration?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ source: CompositorServices.LayerRenderer.Configuration._ObjectiveCType, result: inout CompositorServices.LayerRenderer.Configuration?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _unconditionallyBridgeFromObjectiveC(_ source: CompositorServices.LayerRenderer.Configuration._ObjectiveCType?) -> CompositorServices.LayerRenderer.Configuration
-  #endif
 }
 @available(visionOS 1.0, macOS 26.0, *)
 extension CompositorServices.LayerRenderer.Drawable {
@@ -241,13 +225,11 @@ extension CompositorServices.LayerRenderer.Drawable {
   public var views: [CompositorServices.LayerRenderer.Drawable.View] {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 26.0, *)
   public var deviceAnchor: ARKit.DeviceAnchor? {
     get
     nonmutating set
   }
-  #endif
   @available(visionOS 2.0, *)
   public func computeProjection(convention: CompositorServices.AxisDirectionConvention = .rightUpBack, viewIndex: Swift.Int) -> simd.matrix_float4x4
 }
@@ -276,9 +258,7 @@ public enum LayerRendererConfigurationError : Swift.Int, Foundation.LocalizedErr
   public var description: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
-  #endif
   @available(visionOS 1.0, macOS 26.0, *)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
@@ -287,14 +267,10 @@ public enum LayerRendererConfigurationError : Swift.Int, Foundation.LocalizedErr
 }
 @available(visionOS 1.0, macOS 26.0, *)
 extension CompositorServices.LayerRenderer.Frame {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func predictTiming() -> CompositorServices.LayerRenderer.Frame.Timing?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS, introduced: 1.0, deprecated: 26.0, renamed: "queryDrawables")
   @available(macOS, unavailable)
   public func queryDrawable() -> CompositorServices.LayerRenderer.Drawable?
-  #endif
   @available(visionOS 26.0, *)
   public func queryDrawables() -> [CompositorServices.LayerRenderer.Drawable]
   @available(visionOS 26.0, *)
@@ -314,9 +290,7 @@ extension CompositorServices.LayerRenderer {
   public var configuration: CompositorServices.LayerRenderer.Configuration {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func queryNextFrame() -> CompositorServices.LayerRenderer.Frame?
-  #endif
 }
 extension CompositorServices.LayerRenderer {
   @available(visionOS 1.0, macOS 26.0, *)
@@ -341,15 +315,9 @@ extension CompositorServices.LayerRenderer.Properties {
 extension CompositorServices.LayerRenderer.Properties : Swift._ObjectiveCBridgeable {
   public typealias _ObjectiveCType = CompositorServices.__CP_OBJECT_cp_layer_renderer_properties
   public func _bridgeToObjectiveC() -> CompositorServices.LayerRenderer.Properties._ObjectiveCType
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ source: CompositorServices.LayerRenderer.Properties._ObjectiveCType, result: inout CompositorServices.LayerRenderer.Properties?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ source: CompositorServices.LayerRenderer.Properties._ObjectiveCType, result: inout CompositorServices.LayerRenderer.Properties?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _unconditionallyBridgeFromObjectiveC(_ source: CompositorServices.LayerRenderer.Properties._ObjectiveCType?) -> CompositorServices.LayerRenderer.Properties
-  #endif
 }
 @available(visionOS 1.0, macOS 26.0, *)
 extension CompositorServices.LayerRenderer.Frame.Timing {

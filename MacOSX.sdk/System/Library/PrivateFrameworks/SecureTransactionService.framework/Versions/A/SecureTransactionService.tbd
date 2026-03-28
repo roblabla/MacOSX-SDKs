@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SecureTransactionService.framework/Versions/A/SecureTransactionService'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo9STSReaderC24SecureTransactionServiceE10StateEventO10tnepFailedyAEs5Error_pcAEmFWC', 
                        '_$sSo9STSReaderC24SecureTransactionServiceE10StateEventO11invalidatedyAEs5Error_pSgcAEmFWC', 
                        '_$sSo9STSReaderC24SecureTransactionServiceE10StateEventO13tnepCompletedyA2EmFWC', 

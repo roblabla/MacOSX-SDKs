@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/RuntimeInternal.framework/Versions/A/RuntimeInternal'
-current-version: 112
-compatibility-version: 112
+current-version: 154
+compatibility-version: 154
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s15RuntimeInternal10BufferViewV10endAddressSVvg', '_$s15RuntimeInternal10BufferViewV10endAddressSVvpMV', 
                        '_$s15RuntimeInternal10BufferViewV10startIndexSivg', '_$s15RuntimeInternal10BufferViewV10startIndexSivpMV', 
                        '_$s15RuntimeInternal10BufferViewV5countSivg', '_$s15RuntimeInternal10BufferViewV5countSivpMV', 

@@ -261,18 +261,18 @@ NS_SWIFT_SENDABLE
 @property (class, strong, readonly) NSColor *systemMintColor API_AVAILABLE(macos(10.12));
 @property (class, strong, readonly) NSColor *systemCyanColor API_AVAILABLE(macos(12.0));
 
-/*! Fill colors for UI elements.
- These are meant to be used over the background colors, since their alpha component is less than 1.
- */
-/// systemFillColor is appropriate for filling thin shapes, such as the track of a slider.
+// Fill colors for UI elements.
+// These are meant to be used over the background colors, since their alpha component is less than 1.
+
+/// A color appropriate for filling thin shapes, such as the track of a slider.
 @property (class, strong, readonly) NSColor *systemFillColor API_AVAILABLE(macos(14.0));
-/// secondarySystemFillColor is appropriate for filling small-size shapes, such as the backing of a progress indicator.
+/// A color appropriate for filling small-size shapes, such as the backing of a progress indicator.
 @property (class, strong, readonly) NSColor *secondarySystemFillColor API_AVAILABLE(macos(14.0));
-/// tertiarySystemFillColor is appropriate for filling medium-size shapes,  such as the backing of a switch.
+/// A color appropriate for filling medium-size shapes, such as the backing of a switch.
 @property (class, strong, readonly) NSColor *tertiarySystemFillColor API_AVAILABLE(macos(14.0));
-/// quaternarySystemFillColor is appropriate for filling large areas, such as a group box or tab pane.
+/// A color appropriate for filling large areas, such as a group box or tab pane.
 @property (class, strong, readonly) NSColor *quaternarySystemFillColor API_AVAILABLE(macos(14.0));
-/// quinarySystemFillColor is appropriate for filling large areas that require subtle emphasis, such as content of a form..
+/// A color appropriate for filling large areas that require subtle emphasis, such as content of a form.
 @property (class, strong, readonly) NSColor *quinarySystemFillColor API_AVAILABLE(macos(14.0));
 
 /*! A dynamic color that reflects the user's current preferred accent color. This color automatically updates when the accent color preference changes. Do not make assumptions about the color space of this color, which may change across releases. */

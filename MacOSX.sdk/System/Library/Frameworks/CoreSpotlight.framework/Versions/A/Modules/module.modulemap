@@ -1,4 +1,4 @@
-framework module CoreSpotlight [extern_c][system] {
+framework module CoreSpotlight [system] {
   umbrella header "CoreSpotlight.h"
   export *
   module * { export * }

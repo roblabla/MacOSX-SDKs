@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccessibilityReadingUI.framework/Versions/A/AccessibilityReadingUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s22AccessibilityReadingUI10SSRootViewV4bodyQrvg', '_$s22AccessibilityReadingUI10SSRootViewV4bodyQrvpMV', 
                        '_$s22AccessibilityReadingUI10SSRootViewV4bodyQrvpQOMQ', '_$s22AccessibilityReadingUI10SSRootViewVMa', 
                        '_$s22AccessibilityReadingUI10SSRootViewVMn', '_$s22AccessibilityReadingUI10SSRootViewVyACyxGxcfC', 
@@ -14,7 +14,10 @@ exports:
                        '_$s22AccessibilityReadingUI11AXRRootViewV4bodyQrvg', '_$s22AccessibilityReadingUI11AXRRootViewV4bodyQrvpMV', 
                        '_$s22AccessibilityReadingUI11AXRRootViewV4bodyQrvpQOMQ', 
                        '_$s22AccessibilityReadingUI11AXRRootViewVMa', '_$s22AccessibilityReadingUI11AXRRootViewVMn', 
-                       '_$s22AccessibilityReadingUI11AXRRootViewVN', '_$s22AccessibilityReadingUI11SSSpeedMenuV05SwiftC04ViewAAMc', 
+                       '_$s22AccessibilityReadingUI11AXRRootViewVN', '_$s22AccessibilityReadingUI11AXRSignpostV3app2os12OSSignposterVvgZ', 
+                       '_$s22AccessibilityReadingUI11AXRSignpostV3app2os12OSSignposterVvpZMV', 
+                       '_$s22AccessibilityReadingUI11AXRSignpostVMa', '_$s22AccessibilityReadingUI11AXRSignpostVMn', 
+                       '_$s22AccessibilityReadingUI11AXRSignpostVN', '_$s22AccessibilityReadingUI11SSSpeedMenuV05SwiftC04ViewAAMc', 
                        '_$s22AccessibilityReadingUI11SSSpeedMenuV4bodyQrvg', '_$s22AccessibilityReadingUI11SSSpeedMenuV4bodyQrvpMV', 
                        '_$s22AccessibilityReadingUI11SSSpeedMenuV4bodyQrvpQOMQ', 
                        '_$s22AccessibilityReadingUI11SSSpeedMenuVMa', '_$s22AccessibilityReadingUI11SSSpeedMenuVMn', 
@@ -233,6 +236,9 @@ exports:
                        '_$sSS22AccessibilityReadingUIE9localizedSSvg', '_$sSS22AccessibilityReadingUIE9localizedSSvpMV', 
                        '_$sSd22AccessibilityReadingUIE17timeDisplayStringSSyF', '_$sSo17NSNumberFormatterC22AccessibilityReadingUIE7decimalABvgZ', 
                        '_$sSo7NSImageC22AccessibilityReadingUIE10systemNameABSgSS_tcfC', 
+                       '_$ss12StaticStringV22AccessibilityReadingUIE21AXRTriggerToAXRuntimeABvgZ', 
+                       '_$ss12StaticStringV22AccessibilityReadingUIE23AXRFormatRuntimeContentABvgZ', 
+                       '_$ss12StaticStringV22AccessibilityReadingUIE24AXRRuntimeTextProcessingABvgZ', 
                        _AccessibilityReadingUIVersionNumber, _AccessibilityReadingUIVersionString ]
     objc-classes:    [ _TtCV22AccessibilityReadingUI21AXRNSFontSizeComboBox11Coordinator ]
 ...

@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/swift/libswiftMapKit.dylib'
-current-version: 14.22.10
+current-version: 14.24.7
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftMapKit.dylib', '$ld$install_name$os10.11$@rpath/libswiftMapKit.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftMapKit.dylib', '$ld$install_name$os10.13$@rpath/libswiftMapKit.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftMapKit.dylib', '$ld$install_name$os10.9$@rpath/libswiftMapKit.dylib', 

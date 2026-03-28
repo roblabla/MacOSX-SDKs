@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  Use this class to save entries into ASCredentialIdentityStore.
  */
 AS_EXTERN API_AVAILABLE(ios(18.0), macos(15.0), visionos(2.0)) API_UNAVAILABLE(tvos, watchos)
+NS_SWIFT_SENDABLE
 @interface ASOneTimeCodeCredentialIdentity : NSObject<NSCopying, NSSecureCoding, ASCredentialIdentity>
 
 - (instancetype)init NS_UNAVAILABLE;

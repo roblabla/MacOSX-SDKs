@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, FSMatchResult) {
 /// A resource's type also determines its life cycle.
 /// Resources based on block storage devices come into being when the system probes the media underlying the volumes and container.
 /// Other kinds of resources, like those based on URLs, might have different life cycles.
-/// For example, a resource based on a `file://` URL might iniitalize when a person uses the "Connect to server" command in the macOS Finder.
+/// For example, a resource based on a `file://` URL might initialize when a person uses the "Connect to server" command in the macOS Finder.
 ///
 /// ### Proxying resources
 ///
@@ -438,7 +438,7 @@ FSKIT_API_AVAILABILITY_V1
 ///   - task: A task object you use to communicate back to the client.
 ///   - options: Options for performing the check.
 ///   - error: In Objective-C, a pointer to an <doc://com.apple.documentation/documentation/Foundation/NSError>. Populate this with any error that occurs when starting the check. In Swift, throw an <doc://com.apple.documentation/documentation/Swift/Error> instead.
-/// - Returns: An <doc://com.apple.documentation/documentation/Foundation/NSProgress> object that you use to update progress as the check operation progresses. Return `nil` if starting the file system check encountered an error.
+/// - Returns: An <doc://com.apple.documentation/documentation/Foundation/Progress> object that you use to update progress as the check operation progresses. Return `nil` if starting the file system check encountered an error.
 -(NSProgress * _Nullable)startCheckWithTask:(FSTask *)task
                                     options:(FSTaskOptions *)options
                                       error:(NSError**)error FSKIT_API_AVAILABILITY_V1 NS_SWIFT_NAME(startCheck(task:options:));
@@ -449,7 +449,7 @@ FSKIT_API_AVAILABILITY_V1
 ///   - task: A task object you use to communicate back to the client.
 ///   - options: Options for performing the format.
 ///   - error: In Objective-C, a pointer to an <doc://com.apple.documentation/documentation/Foundation/NSError>. Populate this with any error that occurs when starting the format. In Swift, throw an <doc://com.apple.documentation/documentation/Swift/Error> instead.
-/// - Returns: An <doc://com.apple.documentation/documentation/Foundation/NSProgress> object that you use to update progress as the format operation progresses. Return `nil` if starting to format the file system encountered an error.
+/// - Returns: An <doc://com.apple.documentation/documentation/Foundation/Progress> object that you use to update progress as the format operation progresses. Return `nil` if starting to format the file system encountered an error.
 -(NSProgress * _Nullable)startFormatWithTask:(FSTask *)task
                                      options:(FSTaskOptions *)options
                                        error:(NSError**)error FSKIT_API_AVAILABILITY_V1 NS_SWIFT_NAME(startFormat(task:options:));

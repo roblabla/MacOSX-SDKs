@@ -65,6 +65,8 @@ typedef NS_OPTIONS(NSUInteger, MPSGraphReducedPrecisionFastMath)
     MPSGraphReducedPrecisionFastMathNone                                               MPS_SWIFT_NAME(none) = 0,
     /// Execute winograd transform intermediate as FP16.
     MPSGraphReducedPrecisionFastMathAllowFP16Conv2DWinogradTransformIntermediate                            = 1 << 1,
+    /// Allow conversion of operands to FP19 or TF32 from FP32 when needed by dropping 13 mantissa bits.
+    MPSGraphReducedPrecisionFastMathAllowConvertingOperandsFromFP32ToFP19                                   = 1 << 2,
     /// Curated list allowing intermediates for multi-pass GPU kernels to be FP16.
     MPSGraphReducedPrecisionFastMathAllowFP16Intermediates                                                  = MPSGraphReducedPrecisionFastMathAllowFP16Conv2DWinogradTransformIntermediate,
     /// Default selection.
@@ -114,6 +116,9 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 
 /// Turns off type inference and relies on type inference during runtime.
 -(void) disableTypeInference;
+
+/// Turns on Automatic Layout Conversion (for conv like operations) for GPU.
+-(void) convertLayoutToNHWC MPS_AVAILABLE_STARTING(macos(26.4), ios(26.4), tvos(26.4));
 
 /// The optimization level for the graph execution, default is MPSGraphOptimizationLevel1.
 @property (readwrite, nonatomic) MPSGraphOptimization optimizationLevel MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));

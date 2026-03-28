@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ConsoleKit.framework/Versions/A/ConsoleKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10ConsoleKit23CSKReportTransformationC25transformDiagnosticReport7fileURLSS10Foundation0I0V_tKFZ', 
                        '_$s10ConsoleKit23CSKReportTransformationCACycfC', '_$s10ConsoleKit23CSKReportTransformationCACycfc', 
                        '_$s10ConsoleKit23CSKReportTransformationCMa', '_$s10ConsoleKit23CSKReportTransformationCMn', 

@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TextToSpeechKonaSupport.framework/Versions/Current/Frameworks/korrom.dylib'
 current-version: 0
 compatibility-version: 0
@@ -12,7 +12,7 @@ exports:
                        __ZTS13QElementIndex, __ZTS13QElementParam, __ZTS15RomQueueElement, 
                        __ZTS15korTextAnalysis, __ZTS18ConverterInterface, __ZTS8ListNode, 
                        __ZTS8korToken, __ZTS9SWUnknown ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _UnixReg, __Z7ucs2lenPKt, __ZN11RomInstance10MBCSToUCS2EPKcPPt, 
                        __ZN11RomInstance10UCS2ToMBCSEPKtPPch, __ZN11RomInstance10clearInputEv, 
                        __ZN11RomInstance10deleteDictEPv, __ZN11RomInstance10progStatusEv, 

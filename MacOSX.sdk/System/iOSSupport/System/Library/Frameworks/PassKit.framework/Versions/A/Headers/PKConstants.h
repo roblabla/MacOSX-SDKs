@@ -17,8 +17,8 @@ extern PKEncryptionScheme const PKEncryptionSchemeRSA_V2 API_AVAILABLE(ios(10.0)
 
 typedef NSString * PKPaymentNetwork NS_EXTENSIBLE_STRING_ENUM;
 extern PKPaymentNetwork const PKPaymentNetworkAmex API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0));
-extern PKPaymentNetwork const PKPaymentNetworkBancomat API_DEPRECATED("Use PKPaymentNetworkPagoBancomat instead.", macos(12.0, 14.0), ios(16.0, 17.0), watchos(9.0, 10.0));
-extern PKPaymentNetwork const PKPaymentNetworkPagoBancomat API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0));
+extern PKPaymentNetwork const PKPaymentNetworkBancomat API_AVAILABLE(macos(12.0), ios(16.0), watchos(9.0));
+extern PKPaymentNetwork const PKPaymentNetworkPagoBancomat API_DEPRECATED("Use PKPaymentNetworkBancomat instead.", macos(14.0, 26.4), ios(17.0, 26.4), watchos(10.0, 26.4));
 extern PKPaymentNetwork const PKPaymentNetworkBancontact API_AVAILABLE(macos(12.0), ios(16.0), watchos(9.0));
 extern PKPaymentNetwork const PKPaymentNetworkCarteBancaire API_DEPRECATED("Use PKPaymentNetworkCartesBancaires instead.", macos(10.13, 11.0), ios(10.3, 11.0), watchos(3.2, 4.0));
 extern PKPaymentNetwork const PKPaymentNetworkCarteBancaires API_DEPRECATED("Use PKPaymentNetworkCartesBancaires instead.", macos(10.13, 11.0), ios(11.0, 11.2), watchos(4.0, 4.2));
@@ -54,6 +54,7 @@ extern PKPaymentNetwork const PKPaymentNetworkHimyan API_AVAILABLE(macos(15.4), 
 extern PKPaymentNetwork const PKPaymentNetworkJaywan API_AVAILABLE(macos(15.4), ios(18.4), watchos(11.4));
 extern PKPaymentNetwork const PKPaymentNetworkMyDebit API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0));
 extern PKPaymentNetwork const PKPaymentNetworkConecs API_AVAILABLE(macos(26.2), ios(26.2), watchos(26.2));
+extern PKPaymentNetwork const PKPaymentNetworkElCorteIngles API_AVAILABLE(macos(26.4), ios(26.4), watchos(26.4));
 
 typedef NSString * PKContactField NS_STRING_ENUM;
 extern PKContactField const PKContactFieldPostalAddress API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0));

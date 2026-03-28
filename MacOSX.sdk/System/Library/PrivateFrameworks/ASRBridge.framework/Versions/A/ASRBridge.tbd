@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ASRBridge.framework/Versions/A/ASRBridge'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s9ASRBridge14SignpostLoggerMp', '_$s9ASRBridge14SignpostLoggerP3endyy2os12OSSignpostIDV_s12StaticStringVtFZTj', 
                        '_$s9ASRBridge14SignpostLoggerP3endyy2os12OSSignpostIDV_s12StaticStringVtFZTq', 
                        '_$s9ASRBridge14SignpostLoggerP3logSo06OS_os_D0CvgZTj', '_$s9ASRBridge14SignpostLoggerP3logSo06OS_os_D0CvgZTq', 

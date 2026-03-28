@@ -12,35 +12,38 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-/// A batch of record zone changes that `CKSyncEngine` will send to the server in a single request.
+/// An object that contains the record changes for a single send operation.
 API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0))
 NS_REFINED_FOR_SWIFT
 CK_SUBCLASSING_RESTRICTED
 NS_SWIFT_SENDABLE
 @interface CKSyncEngineRecordZoneChangeBatch : NSObject
 
-/// Creates a batch of record zone changes according to a list of pending changes.
+/// Creates a batch of records to modify using the provided record zone changes.
 ///
-/// This will iterate over the pending changes in order and add them to the batch until it reaches the max batch size.
+/// - Parameters:
+///   - pendingChanges: The record zone changes to process.
+///   - recordProvider: A block that returns the record for the specified record identifier.
 ///
-/// When it sees a pending save, it will ask the record provider for the actual ``CKRecord`` to send to the server.
-/// If you return `nil` from the record provider, this will skip to the next pending change.
+/// - Returns: The batch of records to modify, or `nil` if there are no pending changes.
 ///
-/// This will return `nil` if there are no pending changes to send.
+/// This method iterates over `pendingChanges` and adds the necessary information to the new batch, until there are no more changes or the size of the batch reaches the maximum limit.
+/// If the type of change is a record save, the method asks the specified `recordProvider` block for that record.
+/// If the closure returns `nil`, the method skips that change.
 - (nullable instancetype)initWithPendingChanges:(NSArray<CKSyncEnginePendingRecordZoneChange *> *)pendingChanges
                                  recordProvider:(CKRecord * _Nullable (NS_SWIFT_SENDABLE NS_NOESCAPE ^)(CKRecordID *recordID))recordProvider;
 
-/// Creates a batch of record zone changes to send to the server with a specific set of changes.
+/// Creates a batch of records to modify.
 ///
-/// If you'd like to construct your own custom batches of changes to send to the server, you can do so with this initializer.
+/// - Parameters:
+///   - recordsToSave: The records to save.
+///   - recordIDsToDelete: The identifiers of the records to delete.
+///   - atomicByZone: A Boolean value that determines whether CloudKit modifies the specified records atomically by record zone.
 ///
-/// ## Batch size limitations
+/// - Returns: An initialized change batch.
 ///
-/// When creating your own batches, you need to consider batch size limitations.
-/// There is a maximum count and size of records that can be sent to the server in a single batch.
-/// If you supply too many changes, or if the total size of the records is too large, then you might get a ``CKError/limitExceeded``.
-///
-/// > Tip: These batch size limitations are handled automatically by the ``initWithPendingChanges:recordProvider:`` initializer.
+/// - Important: When using this initializer to create batches, consider the number of records you specify and their combined size.
+/// If you specify too many records, or their combined size is too large, the send operation may fail with an error of type ``CKError/Code/limitExceeded``.
 - (instancetype)initWithRecordsToSave:(nullable NSArray<CKRecord *> *)recordsToSave
                     recordIDsToDelete:(nullable NSArray<CKRecordID *> *)recordIDsToDelete
                          atomicByZone:(BOOL)atomicByZone;
@@ -48,17 +51,17 @@ NS_SWIFT_SENDABLE
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
-/// The records to save to the server.
+/// The records to save.
 @property (readonly, copy) NSArray<CKRecord *> *recordsToSave;
 
-/// The IDs of the records to delete from the server.
+/// The unique identifiers of the records to delete.
 @property (readonly, copy) NSArray<CKRecordID *> *recordIDsToDelete;
 
-/// If set to true, the sync engine will modify these records atomically by zone.
+/// A Boolean value that determines whether CloudKit modifies records atomically by record zone.
 ///
-/// If this is true, and if any record change fails, then any other changes from that zone in this batch will also fail with ``CKError/batchRequestFailed``.
+/// When <doc://com.apple.documentation/documentation/swift/true>, CloudKit processes record changes atomically by record zone, and if any individual change fails, all other changes in that record's record zone fail and return an error of type ``CKError/Code/batchRequestFailed``.
 ///
-/// Records that exist in different zones will not be modified together atomically.
+/// The default value is <doc://com.apple.documentation/documentation/swift/false>.
 @property (assign) BOOL atomicByZone;
 
 @end

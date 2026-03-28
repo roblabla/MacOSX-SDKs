@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Proximity.framework/Versions/A/Proximity'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _PRCollectLogs, _PRDebugConfigArgAccessoryState, _PRDebugConfigArgDebugLevel, 
                        _PRDebugConfigArgIsoCountry, _PRDebugConfigArgLeadingEdgeThresholds, 
                        _PRDebugConfigArgMcc, _PRDebugConfigArgNAccessSlotsMax, _PRDebugConfigArgNAccessSlotsMin, 

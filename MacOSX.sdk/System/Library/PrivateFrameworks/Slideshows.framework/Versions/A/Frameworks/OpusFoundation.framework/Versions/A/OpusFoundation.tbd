@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Slideshows.framework/Versions/A/Frameworks/OpusFoundation.framework/Versions/A/OpusFoundation'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _CLLocationCoordinate2DFromString, _MKCoordinateRegionFromString, 
                        _NSColorFromString, _NSEdgeInsetsFromString, _NSIndexPath2DFromString, 
                        _NSStringFromCLLocationCoordinate2D, _NSStringFromMKCoordinateRegion, 

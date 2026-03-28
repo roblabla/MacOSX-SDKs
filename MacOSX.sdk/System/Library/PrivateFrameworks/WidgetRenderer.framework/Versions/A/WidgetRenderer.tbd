@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WidgetRenderer.framework/Versions/A/WidgetRenderer'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s14WidgetRenderer011InteractiveA17SetupViewModifierV4body7contentQr7SwiftUI01_eF8_ContentVyACG_tF', 
                        '_$s14WidgetRenderer011InteractiveA17SetupViewModifierV4body7contentQr7SwiftUI01_eF8_ContentVyACG_tFQOMQ', 
                        '_$s14WidgetRenderer011InteractiveA17SetupViewModifierV6logger9viewModelAC2os6LoggerV_xtcAA012InteractableeI0RzlufC', 

@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/ICADevices.framework/Versions/A/ICADevices'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _DisconnectFWDevice, _DisconnectFWDeviceWithIORegPath, _DisconnectMassStorageDevice, 
                        _DisconnectUSBDevice, _DisconnectUSBDeviceWithIORegPath, _FWDeviceSendScanEventNotification, 
                        _ICACloseSession, _ICAConvertJPEGDataToICADataInPlace, _ICAConvertTIFFDataToICADataInPlace, 

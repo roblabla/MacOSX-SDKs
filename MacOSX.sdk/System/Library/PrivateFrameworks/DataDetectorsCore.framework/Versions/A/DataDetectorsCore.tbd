@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DataDetectorsCore.framework/Versions/A/DataDetectorsCore'
-current-version: 821.1
+current-version: 821.6
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DDAddressBookAccessAllowed, _DDAddressResultCanBeMergedWith, 
                        _DDApplyOptions, _DDBinderAIMOrEmailKey, _DDBinderAddressBookContactNameKey, 
                        _DDBinderAirlineCodeKey, _DDBinderApproxTimeKey, _DDBinderAuthCodeKey, 
@@ -132,7 +130,7 @@ exports:
                        _kDDWorkFAXLabel, _kDDWorkLabel, _kDDiPhoneLabel ]
     objc-classes:    [ DDScannerResult, DDScannerService, DDScannerServiceConfiguration, 
                        DDURLMatch, DDURLifier, DataDetectorsSourceAccess ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DDResultMatchesMLClassification, _DDResultTypeIsMLSupported, 
                        _DDScannerIsCancelled, _DDScannerSetMLSupportedTypes, _DDScannerSetMockMLResults ]
 ...

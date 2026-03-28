@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PAImaging.framework/Versions/A/PAImaging'
-current-version: 821.0.120
+current-version: 841.0.101
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AddedAdjustmentNotificationKey, _CATransform3DFromNSString, 
                        _CATransform3DIsValid, _CATransform3DMakeRotationWithImageRect, 
                        _CATransform3DMove, _CATransform3DRelative, _CGAffineTransformFromNSString, 

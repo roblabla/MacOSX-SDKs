@@ -1,14 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligenceFlowContextRuntime.framework/Versions/A/IntelligenceFlowContextRuntime'
-current-version: 3505.5.1
+current-version: 3520.68.1
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ IntelligenceFlowContextRuntimeTests, iftool, intelligencecontextd ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    clients:         [ IntelligenceFlowContextRuntimeTests, ifrunner, iftool, intelligencecontextd ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s20IntelligencePlatform16EntityIdentifierV0A18FlowContextRuntimeE7getmdIDSSyF', 
                        '_$s20IntelligencePlatform17CustomGraphPersonV0A18FlowContextRuntimeE10toINPerson5usingSo0J0CAD16GroundableEntityO_tF', 
                        '_$s20IntelligencePlatform17CustomGraphPersonV0A18FlowContextRuntimeE11getFullNameSSSgyF', 

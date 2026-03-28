@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CallHistoryToolKit.framework/Versions/A/CallHistoryToolKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation4DateV18CallHistoryToolKitE06randomB05start3endACSi_SitFZ', 
                        '_$s10Foundation4DateV18CallHistoryToolKitE15printableString4withS2S_tF', 
                        '_$s18CallHistoryToolKit06DeleteA0V22ArgumentParserInternal15ParsableCommandAAMc', 

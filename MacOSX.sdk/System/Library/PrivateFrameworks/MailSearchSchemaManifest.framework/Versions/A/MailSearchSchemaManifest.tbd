@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+install-name:    '/System/Library/PrivateFrameworks/MailSearchSchemaManifest.framework/Versions/A/MailSearchSchemaManifest'
+current-version: 0
+compatibility-version: 0
+swift-abi-version: 7
+exports:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s24MailSearchSchemaManifest0abcD8ResourceO04makecD014withIdentifier17PoirotSchematizer0cD0VSS_tFZ', 
+                       '_$s24MailSearchSchemaManifest0abcD8ResourceO18fullyQualifiedName14withIdentifierS2S_tFZ', 
+                       '_$s24MailSearchSchemaManifest0abcD8ResourceOMa', '_$s24MailSearchSchemaManifest0abcD8ResourceOMn', 
+                       '_$s24MailSearchSchemaManifest0abcD8ResourceON', _MailSearchSchemaManifestVersionNumber, 
+                       _MailSearchSchemaManifestVersionString ]
+...

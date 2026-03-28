@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SwiftTLS.framework/Versions/A/SwiftTLS'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s8SwiftTLS0A10TLSOptionsV022serverRawPublicKeyP256F4KeysSay9CryptoKit0H0O7SigningO0fG0VGSgvM', 
                        '_$s8SwiftTLS0A10TLSOptionsV022serverRawPublicKeyP256F4KeysSay9CryptoKit0H0O7SigningO0fG0VGSgvg', 
                        '_$s8SwiftTLS0A10TLSOptionsV022serverRawPublicKeyP256F4KeysSay9CryptoKit0H0O7SigningO0fG0VGSgvpMV', 
@@ -159,8 +157,7 @@ exports:
                        '_$s8SwiftTLS10NamedGroupVSHAAMc', '_$s8SwiftTLS10NamedGroupVSQAAMc', 
                        '_$s8SwiftTLS10NamedGroupVSYAAMc', '_$s8SwiftTLS10NamedGroupVs23CustomStringConvertibleAAMc', 
                        '_$s8SwiftTLS10PAKESchemeV11descriptionSSvg', '_$s8SwiftTLS10PAKESchemeV11descriptionSSvpMV', 
-                       '_$s8SwiftTLS10PAKESchemeV15Spake2PlusV1RFCACvgZ', '_$s8SwiftTLS10PAKESchemeV16fromFeatureFlagsACyFZ', 
-                       '_$s8SwiftTLS10PAKESchemeV18Spake2PlusV1NonRFCACvgZ', '_$s8SwiftTLS10PAKESchemeV1loiySbAC_ACtFZ', 
+                       '_$s8SwiftTLS10PAKESchemeV15Spake2PlusV1RFCACvgZ', '_$s8SwiftTLS10PAKESchemeV1loiySbAC_ACtFZ', 
                        '_$s8SwiftTLS10PAKESchemeV8rawValueACs6UInt16V_tcfC', '_$s8SwiftTLS10PAKESchemeV8rawValues6UInt16VvM', 
                        '_$s8SwiftTLS10PAKESchemeV8rawValues6UInt16Vvg', '_$s8SwiftTLS10PAKESchemeV8rawValues6UInt16VvpMV', 
                        '_$s8SwiftTLS10PAKESchemeV8rawValues6UInt16Vvs', '_$s8SwiftTLS10PAKESchemeVMa', 

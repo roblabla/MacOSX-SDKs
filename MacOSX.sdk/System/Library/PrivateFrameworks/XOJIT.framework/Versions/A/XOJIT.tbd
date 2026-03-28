@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/XOJIT.framework/Versions/A/XOJIT'
-current-version: 77
+current-version: 80.2
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s5XOJIT10XOJITErrorC11descriptionSSvg', '_$s5XOJIT10XOJITErrorC11descriptionSSvpMV', 
                        '_$s5XOJIT10XOJITErrorC4KindO19failedToMaterializeyA2EmFWC', 
                        '_$s5XOJIT10XOJITErrorC4KindO29unsatisfiedSymbolDependenciesyA2EmFWC', 

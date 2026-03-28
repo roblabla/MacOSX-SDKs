@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libaprutil-1.0.dylib'
 current-version: 4
 compatibility-version: 4
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ __crypt_blowfish_rn, __crypt_gensalt_blowfish_rn, __crypt_output_magic, 
                        _apr_base64_decode, _apr_base64_decode_binary, _apr_base64_decode_len, 
                        _apr_base64_encode, _apr_base64_encode_binary, _apr_base64_encode_len, 

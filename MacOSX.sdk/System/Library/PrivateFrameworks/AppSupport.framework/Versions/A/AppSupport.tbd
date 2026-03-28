@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AppSupport.framework/Versions/A/AppSupport'
 current-version: 29
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ALCityCountryNameKey, _ALCityCountryOverrideKey, _ALCityDisplayNameIncludingCountryUsesOnlyCountry, 
                        _ALCityIdentifierKey, _ALCityLatitudeKey, _ALCityLocaleCodeKey, 
                        _ALCityLongitudeKey, _ALCityNameKey, _ALCityPropertiesCount, 
@@ -302,13 +299,11 @@ exports:
                        _ReachabilityRequest._receivedAtLeastOneCallback ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s16CorePhoneNumbers0B6NumberV010normalizedD0SSSgvg', '_$s16CorePhoneNumbers0B6NumberV010normalizedD0SSSgvpMV', 
                        '_$s16CorePhoneNumbers0B6NumberV09formattedD04with11compressionSSSgAA18FormatLocalizationO_AA0H11CompressionOtF', 
                        '_$s16CorePhoneNumbers0B6NumberV13isoCodeString6numberACSgSS_SStcfC', 
@@ -496,14 +491,15 @@ exports:
                        _CFPhoneNumberStringTransformCreateCopy, _INIT_DECOMPOSED_PHONE_NUMBER, 
                        _PNCopyBestGuessCountryCodeForNumber, _PNCopyBestGuessNormalizedNumberForCountry, 
                        _PNCopyCompressedFormattedStringWithCountry, _PNCopyFormattedStringWithCountry, 
-                       _PNCreateFormattedStringWithCountry, _PNDecomposeForCountry, 
-                       _PNIsValidPhoneNumberForCountry, _PNPhoneNumbersEqual, _PNSetFormatFileHeader, 
-                       _UIPhoneFormatFileFirstPrefixSectionHeader, _UIPhoneFormatFileGetCountryHeader, 
-                       _UIPhoneFormatFileGetCountryLength, _UIPhoneFormatFileNextPrefixSectionHeader, 
-                       _UIPhoneFormatGetFirstFormatString, _UIPhoneFormatGetInternationalAccessCode, 
-                       _UIPhoneFormatGetNationalAccessCode, __PNCopyAreaCodeForCountry, 
-                       __PNCopyBestGuessNumberForCountry, __PNCopyCountryCodeForInternationalCode, 
-                       __PNCopyFormattedNumberForDigitsWithCountry, __PNCopyFormattedNumberForDigitsWithCountryByRemovingAtIndex, 
+                       _PNCopyFormattedStringWithVerticalServiceCodePreserved, _PNCreateFormattedStringWithCountry, 
+                       _PNDecomposeForCountry, _PNIsValidPhoneNumberForCountry, _PNPhoneNumbersEqual, 
+                       _PNSetFormatFileHeader, _UIPhoneFormatFileFirstPrefixSectionHeader, 
+                       _UIPhoneFormatFileGetCountryHeader, _UIPhoneFormatFileGetCountryLength, 
+                       _UIPhoneFormatFileNextPrefixSectionHeader, _UIPhoneFormatGetFirstFormatString, 
+                       _UIPhoneFormatGetInternationalAccessCode, _UIPhoneFormatGetNationalAccessCode, 
+                       __PNCopyAreaCodeForCountry, __PNCopyBestGuessNumberForCountry, 
+                       __PNCopyCountryCodeForInternationalCode, __PNCopyFormattedNumberForDigitsWithCountry, 
+                       __PNCopyFormattedNumberForDigitsWithCountryByRemovingAtIndex, 
                        __PNCopyFormattedNumberSuggestionForDigitsWithCountry, __PNCopyFullyQualifiedNumberForCountry, 
                        __PNCopyFullyQualifiedNumberForCountryInternal, __PNCopyIndexStringsForAddressBookSearch, 
                        __PNCopyInternationalCodeForCountry, __PNCopyInternationalDirectDialingPrefixForCountry, 

@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AutoLoop.framework/Versions/A/AutoLoop'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AUTOLOOP_LAR_KEY_ERROR, _AUTOLOOP_LAR_KEY_FRAMETRANSFORM_GAPBRIDGE, 
                        _AUTOLOOP_LAR_KEY_FRAMETRANSFORM_HOMOGRAPHY, _AUTOLOOP_LAR_KEY_FRAMETRANSFORM_RAWTIME, 
                        _AUTOLOOP_LAR_KEY_MIN_VERSION, _AUTOLOOP_LAR_KEY_NORMSTABILIZE, 

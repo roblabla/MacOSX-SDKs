@@ -1,10 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 310.2.3 -module-name FinanceKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 310.4.18 -module-name FinanceKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 public import ExtensionFoundation
 @_exported public import FinanceKit
-public import Foundation
+@preconcurrency public import Foundation
 public import Swift
 public import _Concurrency
 public import _StringProcessing
@@ -39,9 +39,7 @@ extension FinanceKit.FinanceStore {
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 extension FinanceKit.FinanceStore {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func containsOrder(matching fqoid: FinanceKit.FullyQualifiedOrderIdentifier, updatedDate: Foundation.Date? = nil) async throws -> FinanceKit.FinanceStore.ContainsOrderResult
-  #endif
 }
 @available(iOS 17.4, *)
 @available(tvOS, unavailable)
@@ -65,9 +63,7 @@ public struct CurrencyAmount : Swift.Hashable, Swift.Sendable {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension FinanceKit.FinanceStore {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func accountHistory(since token: FinanceKit.FinanceStore.HistoryToken? = nil, isMonitoring: Swift.Bool = true) -> FinanceKit.FinanceStore.History<FinanceKit.Account>
-  #endif
   public func accounts(query: FinanceKit.AccountQuery) async throws -> [FinanceKit.Account]
 }
 @available(iOS 26.0, *)
@@ -118,9 +114,7 @@ extension FinanceKit.FinanceStore {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct AccountQuery : @unchecked Swift.Sendable {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(sortDescriptors: [Foundation.SortDescriptor<FinanceKit.Account>] = [], predicate: Foundation.Predicate<FinanceKit.Account>? = nil, limit: Swift.Int? = nil, offset: Swift.Int? = nil)
-  #endif
 }
 @available(iOS 17.4, *)
 @available(tvOS, unavailable)
@@ -129,9 +123,7 @@ public struct AccountQuery : @unchecked Swift.Sendable {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct AccountBalanceQuery : @unchecked Swift.Sendable {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(sortDescriptors: [Foundation.SortDescriptor<FinanceKit.AccountBalance>] = [], predicate: Foundation.Predicate<FinanceKit.AccountBalance>? = nil, limit: Swift.Int? = nil, offset: Swift.Int? = nil)
-  #endif
 }
 @available(iOS 17.4, *)
 @available(tvOS, unavailable)
@@ -140,12 +132,8 @@ public struct AccountBalanceQuery : @unchecked Swift.Sendable {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension FinanceKit.AccountBalanceQuery {
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func predicate(availableSince startDate: Foundation.Date, until endDate: Foundation.Date? = nil) -> Foundation.Predicate<FinanceKit.AccountBalance>
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func predicate(bookedSince startDate: Foundation.Date, until endDate: Foundation.Date? = nil) -> Foundation.Predicate<FinanceKit.AccountBalance>
-  #endif
 }
 @available(iOS 17.4, *)
 @available(tvOS, unavailable)
@@ -160,18 +148,15 @@ public enum Account : Swift.Codable, Swift.Equatable, Swift.Identifiable, Swift.
   public var displayName: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var accountDescription: Swift.String? {
     get
   }
-  #endif
   public var institutionName: Swift.String {
     get
   }
   public var currencyCode: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18, *)
   @available(tvOS, unavailable)
   @available(macCatalyst, unavailable)
@@ -181,7 +166,6 @@ public enum Account : Swift.Codable, Swift.Equatable, Swift.Identifiable, Swift.
   public var openingDate: Foundation.Date? {
     get
   }
-  #endif
   case asset(FinanceKit.AssetAccount)
   case liability(FinanceKit.LiabilityAccount)
   public static func == (a: FinanceKit.Account, b: FinanceKit.Account) -> Swift.Bool
@@ -202,16 +186,12 @@ public enum Account : Swift.Codable, Swift.Equatable, Swift.Identifiable, Swift.
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension FinanceKit.Account {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var liabilityAccount: FinanceKit.LiabilityAccount? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var assetAccount: FinanceKit.AssetAccount? {
     get
   }
-  #endif
 }
 @available(iOS 17.4, *)
 @available(tvOS, unavailable)
@@ -333,9 +313,7 @@ extension FinanceKit.FinanceStore {
 public enum CreditDebitIndicator : Swift.Int16, Swift.Codable, Swift.CaseIterable, Swift.Equatable, Swift.Sendable {
   case credit
   case debit
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int16)
-  #endif
   @available(iOS 17.4, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -421,16 +399,12 @@ public struct AccountBalance : Swift.Codable, Swift.Equatable, Swift.Identifiabl
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension FinanceKit.AccountBalance {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var available: FinanceKit.Balance? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var booked: FinanceKit.Balance? {
     get
   }
-  #endif
   public var currencyCode: Swift.String {
     get
   }
@@ -454,9 +428,7 @@ extension FinanceKit.FinanceStore {
   }
   public struct History<Model> : _Concurrency.AsyncSequence, Swift.Sendable where Model : Swift.Identifiable {
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-      #if compiler(>=5.3) && $NonescapableTypes
       public func next() async throws -> FinanceKit.FinanceStore.Changes<Model>?
-      #endif
       @available(iOS 17.4, *)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
@@ -590,9 +562,7 @@ public class FinanceStore : @unchecked Swift.Sendable {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension FinanceKit.FinanceStore {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func transactionHistory(forAccountID accountID: Foundation.UUID, since token: FinanceKit.FinanceStore.HistoryToken? = nil, isMonitoring: Swift.Bool = true) -> FinanceKit.FinanceStore.History<FinanceKit.Transaction>
-  #endif
   public func transactions(query: FinanceKit.TransactionQuery) async throws -> [FinanceKit.Transaction]
 }
 @available(iOS 17.4, *)
@@ -602,9 +572,7 @@ extension FinanceKit.FinanceStore {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension FinanceKit.FinanceStore {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func accountBalanceHistory(forAccountID accountID: Foundation.UUID, since token: FinanceKit.FinanceStore.HistoryToken? = nil, isMonitoring: Swift.Bool = true) -> FinanceKit.FinanceStore.History<FinanceKit.AccountBalance>
-  #endif
   public func accountBalances(query: FinanceKit.AccountBalanceQuery) async throws -> [FinanceKit.AccountBalance]
 }
 @available(iOS 17.4, *)
@@ -614,9 +582,7 @@ extension FinanceKit.FinanceStore {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct TransactionQuery : @unchecked Swift.Sendable {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(sortDescriptors: [Foundation.SortDescriptor<FinanceKit.Transaction>] = [], predicate: Foundation.Predicate<FinanceKit.Transaction>? = nil, limit: Swift.Int? = nil, offset: Swift.Int? = nil)
-  #endif
 }
 @available(iOS 17.4, *)
 @available(tvOS, unavailable)
@@ -650,16 +616,12 @@ public enum FinanceError : Foundation.CustomNSError, Foundation.LocalizedError, 
   public static var errorDomain: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var failureReason: Swift.String? {
     get
   }
-  #endif
   public static func == (a: FinanceKit.FinanceError, b: FinanceKit.FinanceError) -> Swift.Bool
 }
 @available(iOS 17.4, *)
@@ -696,9 +658,7 @@ public enum TransactionType : Swift.Int16, Swift.Codable, Swift.CaseIterable, Sw
   case directDebit
   case loan
   case refund
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int16)
-  #endif
   @available(iOS 17.4, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -744,9 +704,7 @@ public struct MerchantCategoryCode : Swift.Codable, Swift.Hashable, Swift.RawRep
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension FinanceKit.MerchantCategoryCode : Swift.LosslessStringConvertible {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ description: Swift.String)
-  #endif
   public var description: Swift.String {
     get
   }
@@ -801,9 +759,7 @@ public enum TransactionStatus : Swift.Int16, Swift.Codable, Swift.CaseIterable, 
   case pending
   case booked
   case rejected
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int16)
-  #endif
   @available(iOS 17.4, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)

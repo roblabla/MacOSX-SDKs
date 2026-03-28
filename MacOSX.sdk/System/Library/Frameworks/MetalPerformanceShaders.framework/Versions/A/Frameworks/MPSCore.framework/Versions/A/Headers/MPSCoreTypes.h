@@ -255,6 +255,7 @@ MPSFloatDataTypeShift
  *  @constant   MPSDataTypeUnorm8       Unsigned 8-bit normalized value.
  *  @constant   MPSDataTypeComplexFloat32      Complex number composed of two 32-bit floating point numbers (single-precision).
  *  @constant   MPSDataTypeComplexFloat16      Complex number composed of two 16-bit floating point numbers (half-precision).  (IEEE-754-2008 float16 exchange format)
+ *  @constant   MPSDataTypeComplexBFloat16      Complex number composed of two 16-bit brain floating point numbers (1 sign bit, 8 exponent bits, 7 mantissa bits per component)
  */
 #if defined(DOXYGEN)
     typedef enum MPSDataType
@@ -293,6 +294,8 @@ MPSFloatDataTypeShift
     MPSDataTypeAlternateEncodingBit MPS_ENUM_AVAILABLE_STARTING( macos(12.0), ios(15.0), tvos(15.0))         = 0x80000000,
     MPSDataTypeBool                 MPS_ENUM_AVAILABLE_STARTING( macos(12.0), ios(15.0), tvos(15.0))         = MPSDataTypeAlternateEncodingBit | 8,
     MPSDataTypeBFloat16 MPS_ENUM_AVAILABLE_STARTING( macos(14.0), ios(16.0), tvos(16.0))                     = MPSDataTypeAlternateEncodingBit | MPSDataTypeFloat16,
+
+    MPSDataTypeComplexBFloat16 MPS_ENUM_AVAILABLE_STARTING( macos(26.3), ios(26.3), tvos(26.3), visionos(26.3))  = MPSDataTypeAlternateEncodingBit | MPSDataTypeFloatBit | MPSDataTypeComplexBit | 32,
 
     // unsigned normalized  (see for example Metal's unorm8 and unorm16 pixel formats). Range: [0, 1.0]
     MPSDataTypeNormalizedBit MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))   = 0x40000000,

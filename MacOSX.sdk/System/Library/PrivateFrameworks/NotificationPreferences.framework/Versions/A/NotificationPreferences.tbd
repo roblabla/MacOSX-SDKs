@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NotificationPreferences.framework/Versions/A/NotificationPreferences'
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ '_$s12EyeCandyCore8MachPortV7contexts6UInt64VvM', '_$s12EyeCandyCore8MachPortV7contexts6UInt64Vvg', 
                        '_$s12EyeCandyCore8MachPortV7contexts6UInt64VvpMV', '_$s12EyeCandyCore8MachPortV7contexts6UInt64Vvs' ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation4DataV12EyeCandyCore18ECXPCConstructableADMc', 
                        '_$s10Foundation4DataV12EyeCandyCore18ECXPCConstructableADWP', 
                        '_$s10Foundation4DataV12EyeCandyCoreE2ofACSPyxG_tclufC', '_$s10Foundation4DataV12EyeCandyCoreE4withyq_q_SPyxGXEr0_lF', 
@@ -335,7 +335,24 @@ exports:
                        '_$s23NotificationPreferences12NotifierTypeO9hashValueSivpMV', 
                        '_$s23NotificationPreferences12NotifierTypeOMa', '_$s23NotificationPreferences12NotifierTypeOMn', 
                        '_$s23NotificationPreferences12NotifierTypeON', '_$s23NotificationPreferences12NotifierTypeOSHAAMc', 
-                       '_$s23NotificationPreferences12NotifierTypeOSQAAMc', '_$s23NotificationPreferences15NotifierDetailsV10identifier4type10backupPath012preferBackupH09skipImageACSgSS_AA0C4TypeOSSSgS2btcfC', 
+                       '_$s23NotificationPreferences12NotifierTypeOSQAAMc', '_$s23NotificationPreferences15NotifierDetailsV10identifier4type10backupPath7optionsACSgSS_AA0C4TypeOSSSgAC17ResolutionOptionsVtcfC', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsV16preferBackupPathAEvgZ', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsV16preferBackupPathAEvpZMV', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsV8rawValueAESu_tcfC', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsV8rawValueSuvM', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsV8rawValueSuvg', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsV8rawValueSuvpMV', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsV8rawValueSuvs', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsV9skipImageAEvgZ', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsV9skipImageAEvpZMV', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsVMa', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsVMn', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsVN', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsVSQAAMc', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsVSYAAMc', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsVs10SetAlgebraAAMc', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsVs25ExpressibleByArrayLiteralAAMc', 
+                       '_$s23NotificationPreferences15NotifierDetailsV17ResolutionOptionsVs9OptionSetAAMc', 
                        '_$s23NotificationPreferences15NotifierDetailsV3url10Foundation3URLVvg', 
                        '_$s23NotificationPreferences15NotifierDetailsV3url10Foundation3URLVvpMV', 
                        '_$s23NotificationPreferences15NotifierDetailsV4iconAC7AppIconOSgvg', 
@@ -533,7 +550,7 @@ exports:
                        '_$ss6UInt64V12EyeCandyCoreE9xpcobjectSo13OS_xpc_object_pvg', 
                        '_$ss6UInt64V12EyeCandyCoreE9xpcobjectSo13OS_xpc_object_pvpMV' ]
     objc-classes:    [ _TtC23NotificationPreferences33NotificationPreferencesConnection ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ '_$s12EyeCandyCore8MachPortV7contextSuvM', '_$s12EyeCandyCore8MachPortV7contextSuvg', 
                        '_$s12EyeCandyCore8MachPortV7contextSuvpMV', '_$s12EyeCandyCore8MachPortV7contextSuvs' ]
 ...

@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftARKit.dylib'
-current-version: 746.60.7
+current-version: 746.100.3
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$sSo11ARGeoAnchorC5ARKitE10coordinate8altitudeABSo22CLLocationCoordinate2DV_SdSgtcfC', 
                        '_$sSo11ARGeoAnchorC5ARKitE10coordinate8altitudeABSo22CLLocationCoordinate2DV_SdSgtcfc', 
                        '_$sSo11ARGeoAnchorC5ARKitE4name10coordinate8altitudeABSS_So22CLLocationCoordinate2DVSdSgtcfC', 

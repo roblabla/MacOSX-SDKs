@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target arm64e-apple-macos26.2 -target-variant arm64e-apple-ios26.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUniformTypeIdentifiers -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 877.2.4.200 -module-name UniformTypeIdentifiers
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target arm64e-apple-macos26.4 -target-variant arm64e-apple-ios26.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUniformTypeIdentifiers -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 877.4.9.400 -module-name UniformTypeIdentifiers
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Foundation
 import Swift
 @_exported import UniformTypeIdentifiers
@@ -10,11 +10,9 @@ import _StringProcessing
 import _SwiftConcurrencyShims
 @available(macOS 11.0, macCatalyst 14.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension Foundation.URLResourceValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var contentType: UniformTypeIdentifiers.UTType? {
     get
   }
-  #endif
 }
 @available(macOS 11.0, macCatalyst 14.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension Foundation.URL {
@@ -35,43 +33,27 @@ public struct UTType : Swift.Sendable {
 }
 @available(macOS 11.0, macCatalyst 14.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UniformTypeIdentifiers.UTType {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ identifier: Swift.String)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(filenameExtension: Swift.String, conformingTo supertype: UniformTypeIdentifiers.UTType = .data)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(mimeType: Swift.String, conformingTo supertype: UniformTypeIdentifiers.UTType = .data)
-  #endif
   public var identifier: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var preferredFilenameExtension: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var preferredMIMEType: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var localizedDescription: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var version: Swift.Int? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var referenceURL: Foundation.URL? {
     get
   }
-  #endif
   public var isDynamic: Swift.Bool {
     get
   }
@@ -93,24 +75,16 @@ extension UniformTypeIdentifiers.UTType {
 }
 @available(macOS 11.0, macCatalyst 14.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UniformTypeIdentifiers.UTType {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(tag: Swift.String, tagClass: UniformTypeIdentifiers.UTTagClass, conformingTo supertype: UniformTypeIdentifiers.UTType?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func types(tag: Swift.String, tagClass: UniformTypeIdentifiers.UTTagClass, conformingTo supertype: UniformTypeIdentifiers.UTType?) -> [UniformTypeIdentifiers.UTType]
-  #endif
   public var tags: [UniformTypeIdentifiers.UTTagClass : [Swift.String]] {
     get
   }
 }
 @available(macOS 11.0, macCatalyst 14.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UniformTypeIdentifiers.UTType {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(exportedAs identifier: Swift.String, conformingTo parentType: UniformTypeIdentifiers.UTType? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(importedAs identifier: Swift.String, conformingTo parentType: UniformTypeIdentifiers.UTType? = nil)
-  #endif
 }
 @available(macOS 11.0, macCatalyst 14.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UniformTypeIdentifiers.UTType : Swift.Equatable, Swift.Hashable {
@@ -133,15 +107,9 @@ extension UniformTypeIdentifiers.UTType : Swift.CustomStringConvertible, Swift.C
 extension UniformTypeIdentifiers.UTType : Foundation.ReferenceConvertible {
   public typealias ReferenceType = UniformTypeIdentifiers.UTTypeReference
   public func _bridgeToObjectiveC() -> UniformTypeIdentifiers.UTTypeReference
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ source: UniformTypeIdentifiers.UTTypeReference, result: inout UniformTypeIdentifiers.UTType?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ source: UniformTypeIdentifiers.UTTypeReference, result: inout UniformTypeIdentifiers.UTType?) -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _unconditionallyBridgeFromObjectiveC(_ source: UniformTypeIdentifiers.UTTypeReference?) -> UniformTypeIdentifiers.UTType
-  #endif
   @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, macCatalyst 14.0, *)
   public typealias _ObjectiveCType = UniformTypeIdentifiers.UTTypeReference
 }
@@ -585,21 +553,11 @@ extension UniformTypeIdentifiers.UTType {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Foundation.NSItemProvider {
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(contentsOf fileURL: Foundation.URL, contentType: UniformTypeIdentifiers.UTType?, openInPlace: Swift.Bool = false, coordinated: Swift.Bool = false, visibility: Foundation.NSItemProviderRepresentationVisibility = .all)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func registerDataRepresentation(for contentType: UniformTypeIdentifiers.UTType, visibility: Foundation.NSItemProviderRepresentationVisibility = .all, loadHandler: @escaping @Sendable (@escaping (Foundation.Data?, (any Swift.Error)?) -> Swift.Void) -> Foundation.Progress?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func registerFileRepresentation(for contentType: UniformTypeIdentifiers.UTType, visibility: Foundation.NSItemProviderRepresentationVisibility = .all, openInPlace: Swift.Bool = false, loadHandler: @escaping @Sendable (@escaping (Foundation.URL?, Swift.Bool, (any Swift.Error)?) -> Swift.Void) -> Foundation.Progress?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func loadDataRepresentation(for contentType: UniformTypeIdentifiers.UTType, completionHandler: @escaping @Sendable (Foundation.Data?, (any Swift.Error)?) -> Swift.Void) -> Foundation.Progress
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func loadFileRepresentation(for contentType: UniformTypeIdentifiers.UTType, openInPlace: Swift.Bool = false, completionHandler: @escaping @Sendable (Foundation.URL?, Swift.Bool, (any Swift.Error)?) -> Swift.Void) -> Foundation.Progress
-  #endif
 }
 @available(macOS 11.0, macCatalyst 14.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public struct UTTagClass : Swift.RawRepresentable {

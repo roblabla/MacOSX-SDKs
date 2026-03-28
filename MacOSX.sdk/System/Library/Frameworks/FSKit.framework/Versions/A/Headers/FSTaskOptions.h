@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <FSKit/FSKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

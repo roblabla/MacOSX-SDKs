@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Symbolication.framework/Versions/A/Symbolication'
-current-version: 64573.4.1
+current-version: 64575.69.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo31VMUAttributeGraphTypeIdentifierC13SymbolicationEABycfC', 
                        '_$sSo31VMUAttributeGraphTypeIdentifierC13SymbolicationEABycfc', 
                        '_$sSo31VMUAttributeGraphTypeIdentifierCMa', '_$sSo33VMUAttributeGraphRegionIdentifierC13SymbolicationEABycfC', 
@@ -32,13 +30,20 @@ exports:
                        _VMUScanTypeScanDescription, _VMUScanningMaskForAllReferences, 
                        _VMUScanningMaskForOwningReferences, _VMUSimplifyCPlusPlusSymbolName, 
                        _VMUSortIndexForLibraryPath, _VMUTask_foreach_malloc_zone, 
-                       _VMUUnionRange, _VMUVMRegionShareModeName, _VMUWithRootNodeMarkingMap, 
+                       _VMUUnionRange, _VMUVMRegionShareModeName, _VMUValidateTaskIsNotMinimalCorpse, 
+                       _VMUVersionFromString, _VMUVersionStringFromPath, _VMUWithRootNodeMarkingMap, 
                        _VMUmallocMetadataLabel, _VMUmallocOtherRegionLabel, _VMUmappedFileLabel, 
                        _VMUuntaggedRegionLabel, _VMUunusedSharedLibDataLabel, _VMUunusedSharedLibLabelOrPathPrefix, 
                        _VMUunusedSharedLibLabelPrefix, _VMUunusedSharedLibTextLabel, 
-                       __VMUEnumerateMarkedObjects, _dispositionDescription, _kVMUAnalysisDataKey, 
-                       _kVMUAnalysisErrorKey, _kVMUAnalysisHeaderKey, _kVMUAnalysisSummaryKey, 
-                       _kVMUAnalysisWarningKey, _kVMUAutoreleasePoolBoundaryClassName, 
+                       __VMUEnumerateMarkedObjects, _amfi_developer_mode_resolved, 
+                       _amfi_developer_mode_status, _amfi_interface_authorize_local_signing, 
+                       _amfi_interface_cdhash_in_trustcache, _amfi_interface_get_local_signing_private_key, 
+                       _amfi_interface_get_local_signing_public_key, _amfi_interface_query_bootarg_state, 
+                       _amfi_interface_set_local_signing_public_key, _amfi_launch_constraint_matches_process, 
+                       _amfi_launch_constraint_set_spawnattr, _amfi_restricted_execution_mode_enable, 
+                       _amfi_restricted_execution_mode_status, _dispositionDescription, 
+                       _kVMUAnalysisDataKey, _kVMUAnalysisErrorKey, _kVMUAnalysisHeaderKey, 
+                       _kVMUAnalysisSummaryKey, _kVMUAnalysisWarningKey, _kVMUAutoreleasePoolBoundaryClassName, 
                        _kVMUAutoreleasePoolThreadSpecificDataKeyString, _kVMUMallocEnumerationFailedErrorDomain, 
                        _kVMUPrintArchivingTiming, _kVMURootRetainCycle, _kVMUThreadSpecificDataKeyString, 
                        _pidFromHint, _psName, _task_enumerate_malloc_blocks, _task_foreach_malloc_zone, 
@@ -51,8 +56,8 @@ exports:
                        _vmu_print_backtrace_uniquing_table, _vmu_ptrSized_stack_frames_for_uniqued_stack, 
                        _vmu_remove_stack_from_backtrace_uniquing_table, _vmu_stack_frames_for_uniqued_stack, 
                        _withPeekFunctionForVMUTask ]
-    objc-classes:    [ VMUAnalyzerBase, VMUAnalyzerSummaryField, VMUArchitecture, 
-                       VMUAttributeGraphRegionIdentifier, VMUAttributeGraphTypeIdentifier, 
+    objc-classes:    [ VMUAnalyticsEvent, VMUAnalyzerBase, VMUAnalyzerSummaryField, 
+                       VMUArchitecture, VMUAttributeGraphRegionIdentifier, VMUAttributeGraphTypeIdentifier, 
                        VMUAutoreleasePoolsAnalyzer, VMUBacktrace, VMUBacktraceRecursionInfo, 
                        VMUCallTreeNode, VMUCallTreeRoot, VMUCallTreeRootWithBacktrace, 
                        VMUClassInfo, VMUClassInfoMap, VMUClassPatternMatcher, VMUDebugTimer, 
@@ -69,11 +74,13 @@ exports:
                        VMUObjectIdentifierDriverKitSupport, VMUOptionParser, VMUPeakFootprintAnalyzer, 
                        VMUProcInfo, VMUProcList, VMUProcessDescription, VMUProcessLedger, 
                        VMUProcessObjectGraph, VMUProgressBar, VMURangeArray, VMURangeToStringMap, 
-                       VMUReverseGraphEnumerator, VMUSampler, VMUScanOverlay, VMUSourceInfo, 
-                       VMUStackLogConsolidator, VMUStackLogReaderBase, VMUSwiftRuntimeInfo, 
-                       VMUSymbol, VMUSymbolOwnerCache, VMUSymbolStore, VMUSymbolicator, 
-                       VMUTask, VMUTaskMemoryCache, VMUTaskMemoryScanner, VMUTaskStackLogReader, 
-                       VMUTaskThreadStates, VMUTerminalColorizer, VMUVMRegion, VMUVMRegionIdentifier, 
+                       VMUReferenceTreeAnalyzer, VMUReverseGraphEnumerator, VMUSampler, 
+                       VMUScanOverlay, VMUSourceInfo, VMUStackLogConsolidator, VMUStackLogReaderBase, 
+                       VMUSwiftRemoteMirrorCallbackCache, VMUSwiftRuntimeInfo, VMUSymbol, 
+                       VMUSymbolOwnerCache, VMUSymbolStore, VMUSymbolicator, VMUTask, 
+                       VMUTaskMemoryCache, VMUTaskMemoryScanner, VMUTaskStackLogReader, 
+                       VMUTaskThreadStates, VMUTerminalColorizer, VMUTraceTreeAnalyzer, 
+                       VMUTraceTreeAnalyzerResult, VMUVMRegion, VMUVMRegionIdentifier, 
                        VMUVMRegionRangeInfo, VMUVMRegionTracker, VMUWiredMemoryInfo ]
     objc-ivars:      [ VMUAnalyzerBase._debugTimer, VMUAnalyzerBase._graph, VMUAnalyzerBase._regionIdentifier, 
                        VMUBacktrace._asyncCallstack, VMUBacktrace._callstack, VMUBacktrace._flavor, 
@@ -113,6 +120,6 @@ exports:
                        VMUVMRegion.user_tag, VMUVMRegion.virtual_pages, VMUVMRegion.zone_index, 
                        VMUVMRegionRangeInfo.address, VMUVMRegionRangeInfo.size, VMUVMRegionRangeInfo.stackIdentifier, 
                        VMUVMRegionRangeInfo.userTag ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     objc-ivars:      [ VMUVMRegion.is_extra_bits ]
 ...

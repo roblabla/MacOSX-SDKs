@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FontServices.framework/libFontParser.dylib'
 swift-abi-version: 7
 exports:
@@ -9,8 +8,7 @@ exports:
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFvjPbEEE, __ZTINSt3__120__shared_ptr_pointerIP10MCacheDataNS_10shared_ptrIS1_E27__shared_ptr_default_deleteIS1_S1_EENS_9allocatorIS1_EEEE, 
                        __ZTSNSt3__110__function6__baseIFvjPbEEE, __ZTSNSt3__110shared_ptrI10MCacheDataE27__shared_ptr_default_deleteIS1_S1_EE, 
                        __ZTSNSt3__120__shared_ptr_pointerIP10MCacheDataNS_10shared_ptrIS1_E27__shared_ptr_default_deleteIS1_S1_EENS_9allocatorIS1_EEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10FontParser010PostScriptA5ErrorO21__derived_enum_equalsySbAC_ACtFZ', 
                        '_$s10FontParser010PostScriptA5ErrorO4hash4intoys6HasherVz_tF', 
                        '_$s10FontParser010PostScriptA5ErrorO9hashValueSivg', '_$s10FontParser010PostScriptA5ErrorO9hashValueSivpMV', 

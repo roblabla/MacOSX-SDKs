@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/_IconServices_SwiftUI.framework/Versions/A/_IconServices_SwiftUI'
-current-version: 742.255
+current-version: 743.4.2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s21_IconServices_SwiftUI05AsyncA10ImagePhaseO5errors5Error_pSgvg', 
                        '_$s21_IconServices_SwiftUI05AsyncA10ImagePhaseO5errors5Error_pSgvpMV', 
                        '_$s21_IconServices_SwiftUI05AsyncA10ImagePhaseO5image0cD00F0VSgvg', 

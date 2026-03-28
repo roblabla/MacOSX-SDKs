@@ -47,6 +47,7 @@ typedef CGFLOAT_TYPE CGFloat;
 
 /* Points. */
 struct
+CF_SWIFT_SENDABLE
 CGPoint {
     CGFloat x;
     CGFloat y;
@@ -55,7 +56,7 @@ typedef struct CF_BOXABLE CGPoint CGPoint;
 
 /* Sizes. */
 
-struct CGSize {
+struct CF_SWIFT_SENDABLE CGSize {
     CGFloat width;
     CGFloat height;
 };
@@ -65,7 +66,7 @@ typedef struct CF_BOXABLE CGSize CGSize;
 
 #define CGVECTOR_DEFINED 1
 
-struct CGVector {
+struct CF_SWIFT_SENDABLE CGVector {
     CGFloat dx;
     CGFloat dy;
 };
@@ -73,7 +74,7 @@ typedef struct CF_BOXABLE CGVector CGVector;
 
 /* Rectangles. */
 
-struct CGRect {
+struct CF_SWIFT_SENDABLE CGRect {
     CGPoint origin;
     CGSize size;
 };
@@ -87,7 +88,7 @@ typedef CF_CLOSED_ENUM(uint32_t, CGRectEdge) {
 
 typedef struct CGAffineTransform CGAffineTransform;
 
-struct CGAffineTransform {
+struct CF_SWIFT_SENDABLE CGAffineTransform {
     CGFloat a, b, c, d;
     CGFloat tx, ty;
 };
@@ -104,7 +105,7 @@ struct CGAffineTransform {
 typedef struct CGAffineTransformComponents CGAffineTransformComponents
     CF_SWIFT_NAME(CGAffineTransform.Components);
 
-struct CGAffineTransformComponents {
+struct CF_SWIFT_SENDABLE CGAffineTransformComponents {
 
     /* initial scaling in X and Y dimensions. {sx,sy} */
     /* Negative values indicate the image has been flipped in this dimension. */

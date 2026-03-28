@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreMIDI.framework/Versions/A/CoreMIDI'
 current-version: 69
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MIDIBluetoothDriverActivateAllConnections, _MIDIBluetoothDriverDisconnect, 
                        _MIDICIDeviceObjectKey, _MIDICIDeviceWasAddedNotification, 
                        _MIDICIDeviceWasRemovedNotification, _MIDICIProfileObjectKey, 
@@ -20,10 +18,10 @@ exports:
                        _MIDIDeviceAddEntity, _MIDIDeviceCreate, _MIDIDeviceDispose, 
                        _MIDIDeviceGetEntity, _MIDIDeviceGetNumberOfEntities, _MIDIDeviceListAddDevice, 
                        _MIDIDeviceListDispose, _MIDIDeviceListGetDevice, _MIDIDeviceListGetNumberOfDevices, 
-                       _MIDIDeviceNewEntity, _MIDIDeviceRemoveEntity, _MIDIEndpointDispose, 
-                       _MIDIEndpointGetEntity, _MIDIEndpointGetRefCons, _MIDIEndpointSetRefCons, 
-                       _MIDIEntityAddOrRemoveEndpoints, _MIDIEntityGetDestination, 
-                       _MIDIEntityGetDevice, _MIDIEntityGetNumberOfDestinations, 
+                       _MIDIDeviceNewEntity, _MIDIDeviceRemoveEntity, _MIDIDriverGetDictionaryForKey, 
+                       _MIDIDriverSetDictionaryForKey, _MIDIEndpointDispose, _MIDIEndpointGetEntity, 
+                       _MIDIEndpointGetRefCons, _MIDIEndpointSetRefCons, _MIDIEntityAddOrRemoveEndpoints, 
+                       _MIDIEntityGetDestination, _MIDIEntityGetDevice, _MIDIEntityGetNumberOfDestinations, 
                        _MIDIEntityGetNumberOfSources, _MIDIEntityGetSource, _MIDIEventListAdd, 
                        _MIDIEventListForEachEvent, _MIDIEventListInit, _MIDIEventPacketSysexBytesForGroup, 
                        _MIDIExternalDeviceCreate, _MIDIFlushOutput, _MIDIGetDestination, 
@@ -56,12 +54,13 @@ exports:
                        __ZN4MIDI11StreamState5resetERNS_10PacketizerE, __ZN4MIDI11StreamStateC1Ej, 
                        __ZN4MIDI11StreamStateC2Ej, __ZN4MIDI16LegacyPacketList4dumpEPKS0_, 
                        __ZN4MIDI16LegacyPacketList6createE14MIDIProtocolIDyNSt3__14spanIKhLm18446744073709551615EEE, 
-                       __ZN4MIDI23LegacyPacketListDeleterclEPNS_16LegacyPacketListE, 
+                       __ZN4MIDI16LegacyPacketList9to_stringEPKS0_, __ZN4MIDI23LegacyPacketListDeleterclEPNS_16LegacyPacketListE, 
                        __ZN4MIDI9EventList4dumpEPKS0_, __ZN4MIDI9EventList6createE14MIDIProtocolIDyNSt3__14spanIKjLm18446744073709551615EEE, 
-                       __ZN4MIDI9EventList6createEPKS0_, __ZNK4MIDI9EventList4sizeEv, 
-                       _kMIDIPropertyAdvanceScheduleTimeMuSec, _kMIDIPropertyAssociatedEndpoint, 
-                       _kMIDIPropertyCanRoute, _kMIDIPropertyConnectionUniqueID, 
-                       _kMIDIPropertyDeviceID, _kMIDIPropertyDisplayName, _kMIDIPropertyDriverDeviceEditorApp, 
+                       __ZN4MIDI9EventList6createEPKS0_, __ZN4MIDI9EventList9to_stringEPKS0_, 
+                       __ZNK4MIDI9EventList4sizeEv, _kMIDIPropertyAdvanceScheduleTimeMuSec, 
+                       _kMIDIPropertyAssociatedEndpoint, _kMIDIPropertyCanRoute, 
+                       _kMIDIPropertyConnectionUniqueID, _kMIDIPropertyDeviceID, 
+                       _kMIDIPropertyDisplayName, _kMIDIPropertyDriverDeviceEditorApp, 
                        _kMIDIPropertyDriverOwner, _kMIDIPropertyDriverVersion, _kMIDIPropertyImage, 
                        _kMIDIPropertyIsBroadcast, _kMIDIPropertyIsDrumMachine, _kMIDIPropertyIsEffectUnit, 
                        _kMIDIPropertyIsEmbeddedEntity, _kMIDIPropertyIsMixer, _kMIDIPropertyIsSampler, 
@@ -79,7 +78,8 @@ exports:
                        _kMIDIPropertyTransmitsBankSelectMSB, _kMIDIPropertyTransmitsClock, 
                        _kMIDIPropertyTransmitsMTC, _kMIDIPropertyTransmitsNotes, 
                        _kMIDIPropertyTransmitsProgramChanges, _kMIDIPropertyUMPActiveGroupBitmap, 
-                       _kMIDIPropertyUMPCanTransmitGroupless, _kMIDIPropertyUniqueID ]
+                       _kMIDIPropertyUMPCanTransmitGroupless, _kMIDIPropertyUMPEnabled, 
+                       _kMIDIPropertyUniqueID ]
     objc-classes:    [ BLEMIDIAccessor, MIDI2DeviceInfo, MIDICIDevice, MIDICIDeviceInfo, 
                        MIDICIDeviceManager, MIDICIDiscoveredNode, MIDICIDiscoveryManager, 
                        MIDICIMutableDevice, MIDICIProfile, MIDICIProfileState, MIDICIResponder, 
@@ -87,7 +87,7 @@ exports:
                        MIDIUMPCIProfile, MIDIUMPEndpoint, MIDIUMPEndpointManager, 
                        MIDIUMPFunctionBlock, MIDIUMPMutableCIProfile, MIDIUMPMutableEndpoint, 
                        MIDIUMPMutableFunctionBlock ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _MIDIDeviceDBGetManufModelProperties, _MIDIDeviceDBGetManufacturers, 
                        _MIDIDeviceDBGetModels, _MIDIDriverEnableMonitoring, _MIDIGet32BitOnlyDrivers, 
                        _MIDIGetSerialPortDrivers, _MIDIGetSerialPortOwner, _MIDIServerIs32Bit, 

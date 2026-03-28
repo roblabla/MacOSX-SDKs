@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/ScreenReader'
 current-version: 390
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12ScreenReader18SCRCSpeechSettingsC10rotorPitchSivMTj', 
                        '_$s12ScreenReader18SCRCSpeechSettingsC10rotorPitchSivMTq', 
                        '_$s12ScreenReader18SCRCSpeechSettingsC10rotorPitchSivgTj', 
@@ -60,8 +60,18 @@ exports:
                        '_$s12ScreenReader18SCRCSpeechSettingsC6sharedACvMZ', '_$s12ScreenReader18SCRCSpeechSettingsC6sharedACvgZ', 
                        '_$s12ScreenReader18SCRCSpeechSettingsC6sharedACvpZMV', '_$s12ScreenReader18SCRCSpeechSettingsC6sharedACvsZ', 
                        '_$s12ScreenReader18SCRCSpeechSettingsC7enabledSbvgTj', '_$s12ScreenReader18SCRCSpeechSettingsC7enabledSbvgTq', 
-                       '_$s12ScreenReader18SCRCSpeechSettingsC7enabledSbvpMV', '_$s12ScreenReader18SCRCSpeechSettingsC7migrateyyFTj', 
-                       '_$s12ScreenReader18SCRCSpeechSettingsC7migrateyyFTq', '_$s12ScreenReader18SCRCSpeechSettingsC9rotorRateSivMTj', 
+                       '_$s12ScreenReader18SCRCSpeechSettingsC7enabledSbvpMV', '_$s12ScreenReader18SCRCSpeechSettingsC7getRate10forVoiceIdSiSSSg_tFTj', 
+                       '_$s12ScreenReader18SCRCSpeechSettingsC7getRate10forVoiceIdSiSSSg_tFTq', 
+                       '_$s12ScreenReader18SCRCSpeechSettingsC7migrateyyFTj', '_$s12ScreenReader18SCRCSpeechSettingsC7migrateyyFTq', 
+                       '_$s12ScreenReader18SCRCSpeechSettingsC7setRate_10forVoiceIdySi_SSSgtFTj', 
+                       '_$s12ScreenReader18SCRCSpeechSettingsC7setRate_10forVoiceIdySi_SSSgtFTq', 
+                       '_$s12ScreenReader18SCRCSpeechSettingsC8getPitch10forVoiceIdSiSSSg_tFTj', 
+                       '_$s12ScreenReader18SCRCSpeechSettingsC8getPitch10forVoiceIdSiSSSg_tFTq', 
+                       '_$s12ScreenReader18SCRCSpeechSettingsC8setPitch_10forVoiceIdySi_SSSgtFTj', 
+                       '_$s12ScreenReader18SCRCSpeechSettingsC8setPitch_10forVoiceIdySi_SSSgtFTq', 
+                       '_$s12ScreenReader18SCRCSpeechSettingsC9getVolume10forVoiceIdSiSSSg_tFTj', 
+                       '_$s12ScreenReader18SCRCSpeechSettingsC9getVolume10forVoiceIdSiSSSg_tFTq', 
+                       '_$s12ScreenReader18SCRCSpeechSettingsC9rotorRateSivMTj', 
                        '_$s12ScreenReader18SCRCSpeechSettingsC9rotorRateSivMTq', 
                        '_$s12ScreenReader18SCRCSpeechSettingsC9rotorRateSivgTj', 
                        '_$s12ScreenReader18SCRCSpeechSettingsC9rotorRateSivgTq', 
@@ -71,6 +81,8 @@ exports:
                        '_$s12ScreenReader18SCRCSpeechSettingsC9selection9forLocale15AXCoreUtilities14VoiceSelectionVSg10Foundation0G0VSg_tYaFTj', 
                        '_$s12ScreenReader18SCRCSpeechSettingsC9selection9forLocale15AXCoreUtilities14VoiceSelectionVSg10Foundation0G0VSg_tYaFTjTu', 
                        '_$s12ScreenReader18SCRCSpeechSettingsC9selection9forLocale15AXCoreUtilities14VoiceSelectionVSg10Foundation0G0VSg_tYaFTq', 
+                       '_$s12ScreenReader18SCRCSpeechSettingsC9setVolume_10forVoiceIdySi_SSSgtFTj', 
+                       '_$s12ScreenReader18SCRCSpeechSettingsC9setVolume_10forVoiceIdySi_SSSgtFTq', 
                        '_$s12ScreenReader18SCRCSpeechSettingsCACycfC', '_$s12ScreenReader18SCRCSpeechSettingsCACycfc', 
                        '_$s12ScreenReader18SCRCSpeechSettingsCMa', '_$s12ScreenReader18SCRCSpeechSettingsCMn', 
                        '_$s12ScreenReader18SCRCSpeechSettingsCMo', '_$s12ScreenReader18SCRCSpeechSettingsCMu', 
@@ -156,13 +168,14 @@ exports:
                        _SCRTotalDisplayBounds, _SCRUpdateLocaleFromLanguageChange, 
                        _SCRUpdateLocaleTo, _SCRVirtualKeyCodeForSymbolicHotKey, _SCRVirtualKeyboardKeyForCommand, 
                        __eventUserDefaultChanged, _clearSynthesizerBaseSettingsCache, 
-                       _hotKeyIDForNumPadKeyCode, _kSCRAudioOutputSelector, _kSCRAudioOutputSelectorDefaultOutput, 
-                       _kSCRAudioOutputSelectorHALOutput, _kSCRAudioOutputSelectorSystemOutput, 
-                       _kSCRAudioRenderingQuality3D, _kSCRAudioRenderingQualityHigh, 
-                       _kSCRAudioRenderingQualityNormal, _kSCRCOutputGryphonSynthID, 
-                       _kSCRCOutputNashvilleSynthID, _kSCRCategoryIsEnabledKey, _kSCRColorListKey, 
-                       _kSCRDeleteCharModeNone, _kSCRDeleteCharModePitch, _kSCRDeleteCharModeSpeak, 
-                       _kSCRDeleteCharModeTone, _kSCRDeleteCharacterModeKey, _kSCRDesiredRequestRunnerNameKey, 
+                       _defaultVoice, _hotKeyIDForNumPadKeyCode, _kSCRAudioOutputSelector, 
+                       _kSCRAudioOutputSelectorDefaultOutput, _kSCRAudioOutputSelectorHALOutput, 
+                       _kSCRAudioOutputSelectorSystemOutput, _kSCRAudioRenderingQuality3D, 
+                       _kSCRAudioRenderingQualityHigh, _kSCRAudioRenderingQualityNormal, 
+                       _kSCRCOutputGryphonSynthID, _kSCRCOutputNashvilleSynthID, 
+                       _kSCRCategoryIsEnabledKey, _kSCRColorListKey, _kSCRDeleteCharModeNone, 
+                       _kSCRDeleteCharModePitch, _kSCRDeleteCharModeSpeak, _kSCRDeleteCharModeTone, 
+                       _kSCRDeleteCharacterModeKey, _kSCRDesiredRequestRunnerNameKey, 
                        _kSCRDictationIMObservationDoCancelListening, _kSCRDisplayNameKey, 
                        _kSCRExcludedVoiceIdentifiersKey, _kSCRFallbackVoiceIdentifierKey, 
                        _kSCRHIDDetectionDeviceConnectedNotification, _kSCRHIDDetectionDeviceDisconnectedNotification, 

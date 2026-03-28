@@ -2,7 +2,7 @@
 //  HealthKit.h
 //  HealthKit
 //
-//  Copyright (c) 2013-2025 Apple Inc. All rights reserved.
+//  Copyright © 2013-2025 Apple Inc. All rights reserved.
 //
 
 #import <HealthKit/HKActivitySummary.h>
@@ -44,8 +44,8 @@
 #import <HealthKit/HKGAD7Assessment.h>
 #import <HealthKit/HKGlassesLensSpecification.h>
 #import <HealthKit/HKGlassesPrescription.h>
-#import <HealthKit/HKHealthStore.h>
 #import <HealthKit/HKHealthConceptIdentifier.h>
+#import <HealthKit/HKHealthStore.h>
 #import <HealthKit/HKHeartbeatSeriesBuilder.h>
 #import <HealthKit/HKHeartbeatSeriesQuery.h>
 #import <HealthKit/HKHeartbeatSeriesSample.h>
@@ -55,11 +55,13 @@
 #import <HealthKit/HKMedicationConcept.h>
 #import <HealthKit/HKMedicationDoseEvent.h>
 #import <HealthKit/HKMetadata.h>
+#import <HealthKit/HKMetadataEnums.h>
 #import <HealthKit/HKObject.h>
 #import <HealthKit/HKObjectType.h>
 #import <HealthKit/HKObserverQuery.h>
 #import <HealthKit/HKPHQ9Assessment.h>
 #import <HealthKit/HKQuantity.h>
+#import <HealthKit/HKQuantityAggregationStyle.h>
 #import <HealthKit/HKQuantitySample.h>
 #import <HealthKit/HKQuantitySeriesSampleBuilder.h>
 #import <HealthKit/HKQuantitySeriesSampleQuery.h>

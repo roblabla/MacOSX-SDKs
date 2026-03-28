@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MapKit.framework/Versions/A/MapKit'
 current-version: 14
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _CLLocationCoordinatesFromNSData, _DetailTextsForAdvisoryItem, 
                        _ImageForArtwork, _ImageForArtworkDataSource, _ImageForShieldDataSourceTypeShouldBeFlipped, 
                        _MKAddressDictionaryFromCLPlacemark, _MKAddressDictionaryFromContactsDictionary, 

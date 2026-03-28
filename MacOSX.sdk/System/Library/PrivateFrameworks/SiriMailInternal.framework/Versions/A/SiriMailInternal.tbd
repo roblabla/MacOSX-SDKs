@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriMailInternal.framework/Versions/A/SiriMailInternal'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10AppIntents20MailMessagePrototypeV04SiriC8InternalE16debugDescriptionSSvg', 
                        '_$s10AppIntents20MailMessagePrototypeV04SiriC8InternalE16debugDescriptionSSvpMV', 
                        '_$s10AppIntents20MailMessagePrototypeV04SiriC8InternalE1loiySbAC_ACtFZ', 
@@ -138,8 +138,24 @@ exports:
                        '_$s16SiriMailInternal21LinkServicesProvidingP17markMessageAsRead7messageSb10AppIntents0bH9PrototypeV_tYaKFTj', 
                        '_$s16SiriMailInternal21LinkServicesProvidingP17markMessageAsRead7messageSb10AppIntents0bH9PrototypeV_tYaKFTjTu', 
                        '_$s16SiriMailInternal21LinkServicesProvidingP17markMessageAsRead7messageSb10AppIntents0bH9PrototypeV_tYaKFTq', 
-                       '_$s16SiriMailInternal21LinkServicesProvidingTL', '_$s16SiriMailInternal6LoggerO04siriB02osABVvgZ', 
-                       '_$s16SiriMailInternal6LoggerO04siriB02osABVvpZMV', '_$s16SiriMailInternal6LoggerO11logAndCrash_4file4lines5NeverOSS_s12StaticStringVSutFZ', 
+                       '_$s16SiriMailInternal21LinkServicesProvidingTL', '_$s16SiriMailInternal38AutoConfirmingPerformAppIntentDelegateC0G15IntentsServices0fghI0AAMc', 
+                       '_$s16SiriMailInternal38AutoConfirmingPerformAppIntentDelegateC10needsValue6dialog9parameter10dispatcherSay0G15IntentsServices0K8ProviderVGAH6Dialog_pSg_AH0H17ParameterMetadata_pAH22EntityQueryDispatching_ptF', 
+                       '_$s16SiriMailInternal38AutoConfirmingPerformAppIntentDelegateC17needsConfirmationySb0G15IntentsServices0fgH0O0K7RequestVYaKF', 
+                       '_$s16SiriMailInternal38AutoConfirmingPerformAppIntentDelegateC17needsConfirmationySb0G15IntentsServices0fgH0O0K7RequestVYaKFTu', 
+                       '_$s16SiriMailInternal38AutoConfirmingPerformAppIntentDelegateC19needsDisambiguationySi0G15IntentsServices0fgH0O0K7RequestVYaKF', 
+                       '_$s16SiriMailInternal38AutoConfirmingPerformAppIntentDelegateC19needsDisambiguationySi0G15IntentsServices0fgH0O0K7RequestVYaKFTu', 
+                       '_$s16SiriMailInternal38AutoConfirmingPerformAppIntentDelegateC23needsActionConfirmationySb0G15IntentsServices0fgH0O0kL7RequestVYaKF', 
+                       '_$s16SiriMailInternal38AutoConfirmingPerformAppIntentDelegateC23needsActionConfirmationySb0G15IntentsServices0fgH0O0kL7RequestVYaKFTu', 
+                       '_$s16SiriMailInternal38AutoConfirmingPerformAppIntentDelegateCMa', 
+                       '_$s16SiriMailInternal38AutoConfirmingPerformAppIntentDelegateCMm', 
+                       '_$s16SiriMailInternal38AutoConfirmingPerformAppIntentDelegateCMn', 
+                       '_$s16SiriMailInternal38AutoConfirmingPerformAppIntentDelegateCMo', 
+                       '_$s16SiriMailInternal38AutoConfirmingPerformAppIntentDelegateCMu', 
+                       '_$s16SiriMailInternal38AutoConfirmingPerformAppIntentDelegateCN', 
+                       '_$s16SiriMailInternal38AutoConfirmingPerformAppIntentDelegateCfD', 
+                       '_$s16SiriMailInternal38AutoConfirmingPerformAppIntentDelegateCfd', 
+                       '_$s16SiriMailInternal6LoggerO04siriB02osABVvgZ', '_$s16SiriMailInternal6LoggerO04siriB02osABVvpZMV', 
+                       '_$s16SiriMailInternal6LoggerO11logAndCrash_4file4lines5NeverOSS_s12StaticStringVSutFZ', 
                        '_$s16SiriMailInternal6LoggerOMa', '_$s16SiriMailInternal6LoggerOMn', 
                        '_$s16SiriMailInternal6LoggerON', '_$s16SiriMailInternal9AppHelperO12mailBundleIdSSvgZ', 
                        '_$s16SiriMailInternal9AppHelperO12mailBundleIdSSvpZMV', '_$s16SiriMailInternal9AppHelperOMa', 

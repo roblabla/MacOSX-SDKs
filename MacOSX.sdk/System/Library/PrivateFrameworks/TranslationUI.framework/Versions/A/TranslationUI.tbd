@@ -1,18 +1,20 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TranslationUI.framework/Versions/A/TranslationUI'
-current-version: 355.5.2
+current-version: 365.8.2
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation3URLV13TranslationUIE016topLevelSettingsB0ACvgZ', 
                        '_$s10Foundation3URLV13TranslationUIE016topLevelSettingsB0ACvpZMV', 
                        '_$s10Foundation3URLV13TranslationUIE017downloadLanguagesB0ACvgZ', 
                        '_$s10Foundation3URLV13TranslationUIE017downloadLanguagesB0ACvpZMV', 
                        '_$s10Foundation3URLV13TranslationUIE017translateSettingsB0ACvgZ', 
                        '_$s10Foundation3URLV13TranslationUIE017translateSettingsB0ACvpZMV', 
+                       '_$s10Foundation3URLV13TranslationUIE025appleIntelligenceSettingsB0ACvgZ', 
+                       '_$s10Foundation3URLV13TranslationUIE025appleIntelligenceSettingsB0ACvpZMV', 
                        '_$s10Foundation6LocaleV13TranslationUIE12ltIdentifierSSvg', 
                        '_$s10Foundation6LocaleV13TranslationUIE12ltIdentifierSSvpMV', 
                        '_$s10Foundation6LocaleV13TranslationUIE13sqDisplayName7context2inSSSgAD0fG7ContextO_ACtF', 
@@ -336,7 +338,7 @@ exports:
                        '_$s13TranslationUI11NetworkPathOs23CustomStringConvertibleAAMc', 
                        '_$s13TranslationUI12LanguageMenuV05SwiftB04ViewAAMc', '_$s13TranslationUI12LanguageMenuV4bodyQrvg', 
                        '_$s13TranslationUI12LanguageMenuV4bodyQrvpMV', '_$s13TranslationUI12LanguageMenuV4bodyQrvpQOMQ', 
-                       '_$s13TranslationUI12LanguageMenuV7locales9selection16suggestedLocalesACSay10Foundation6LocaleVG_05SwiftB07BindingVyAISgGAJSgtcfC', 
+                       '_$s13TranslationUI12LanguageMenuV7locales9selection16suggestedLocales24includesExpandedVariantsACSay10Foundation6LocaleVG_05SwiftB07BindingVyAJSgGAKSgSbtcfC', 
                        '_$s13TranslationUI12LanguageMenuVMa', '_$s13TranslationUI12LanguageMenuVMn', 
                        '_$s13TranslationUI12LanguageMenuVN', '_$s13TranslationUI12ReachabilityC07networkC0ACSo09SCNetworkC3Refa_tcfC', 
                        '_$s13TranslationUI12ReachabilityC07networkC0ACSo09SCNetworkC3Refa_tcfCTj', 

@@ -157,26 +157,26 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 
 
 @optional
-/*!
- @method getTextureAccessCounters:region:mipLevel:slice:type:resetCounters:countersBuffer:countersBufferOffset
- @abstract Copies tile access counters within specified region into provided buffer
- */
--(void) getTextureAccessCounters:(id<MTLTexture>)texture
-                          region:(MTLRegion)region
-                        mipLevel:(NSUInteger)mipLevel
-                           slice:(NSUInteger)slice
-                   resetCounters:(BOOL)resetCounters
-                  countersBuffer:(id<MTLBuffer>)countersBuffer
-            countersBufferOffset:(NSUInteger)countersBufferOffset API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0), tvos(16.0));
+    /*!
+     @method getTextureAccessCounters:region:mipLevel:slice:type:resetCounters:countersBuffer:countersBufferOffset
+     @abstract Copies tile access counters within specified region into provided buffer
+     */
+    -(void) getTextureAccessCounters:(id<MTLTexture>)texture
+                              region:(MTLRegion)region
+                            mipLevel:(NSUInteger)mipLevel
+                               slice:(NSUInteger)slice
+                       resetCounters:(BOOL)resetCounters
+                      countersBuffer:(id<MTLBuffer>)countersBuffer
+                countersBufferOffset:(NSUInteger)countersBufferOffset API_DEPRECATED("Access counters are no longer supported in Metal", macos(11.0, 26.4), macCatalyst(14.0, 26.4), ios(13.0, 26.4), tvos(16.0, 26.4));
 
-/*!
- @method resetTextureAccessCounters:region:mipLevel:slice:type:
- @abstract Resets tile access counters within specified region
- */
--(void) resetTextureAccessCounters:(id<MTLTexture>)texture
-                            region:(MTLRegion)region
-                          mipLevel:(NSUInteger)mipLevel
-                             slice:(NSUInteger)slice API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0), tvos(16.0));
+    /*!
+     @method resetTextureAccessCounters:region:mipLevel:slice:type:
+     @abstract Resets tile access counters within specified region
+     */
+    -(void) resetTextureAccessCounters:(id<MTLTexture>)texture
+                                region:(MTLRegion)region
+                              mipLevel:(NSUInteger)mipLevel
+                                 slice:(NSUInteger)slice API_DEPRECATED("Access counters are no longer supported in Metal", macos(11.0, 26.4), macCatalyst(14.0, 26.4), ios(13.0, 26.4), tvos(16.0, 26.4));
 @required
 
 

@@ -1,9 +1,8 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestionsInternals.framework/Versions/A/CoreSuggestionsInternals'
-current-version: 1303.8
+current-version: 1311.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -15,8 +14,7 @@ exports:
                        __ZTSN3re219NamedCapturesWalkerE, __ZTSN3re26Regexp6WalkerINS_4FragEEE, 
                        __ZTSN3re26Regexp6WalkerIPNS_9Prefilter4InfoEEE, __ZTSN3re26Regexp6WalkerIPS0_EE, 
                        __ZTSN3re26Regexp6WalkerIbEE, __ZTSN3re26Regexp6WalkerIiEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s24CoreSuggestionsInternals25TextUnderstandingImporterC15unownedExecutorScevg', 
                        '_$s24CoreSuggestionsInternals25TextUnderstandingImporterC15unownedExecutorScevpMV', 
                        '_$s24CoreSuggestionsInternals25TextUnderstandingImporterC22documentBatchCompletedyyYaFTj', 

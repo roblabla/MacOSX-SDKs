@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AXMediaUtilities.framework/Versions/A/AXMediaUtilities'
 swift-abi-version: 7
 exports:
@@ -11,8 +10,7 @@ exports:
                        __ZTSNSt3__120__shared_ptr_emplaceI17espresso_buffer_tNS_9allocatorIS1_EEEE, 
                        __ZTSNSt3__120__shared_ptr_pointerIP7CGImagePFvS2_ENS_9allocatorIS1_EEEE, 
                        __ZTSPFvP7CGImageE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s16AXMediaUtilities11AXModelTypeO8rawValueACSgSi_tcfC', 
                        '_$s16AXMediaUtilities11AXModelTypeO8rawValueSivg', '_$s16AXMediaUtilities11AXModelTypeO8rawValueSivpMV', 
                        '_$s16AXMediaUtilities11AXModelTypeOMa', '_$s16AXMediaUtilities11AXModelTypeOMn', 

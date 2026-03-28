@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/BrowserEngineKit.framework/Versions/A/BrowserEngineKit'
 swift-abi-version: 7
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/BrowserEngineCore.framework/Versions/A/BrowserEngineCore' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16BrowserEngineKit16MediaEnvironmentV17xpcRepresentationACSo03OS_F7_object_p_tKcfC', 
                        '_$s16BrowserEngineKit16MediaEnvironmentV18makeCaptureSessionSo09AVCaptureH0CyKF', 
                        '_$s16BrowserEngineKit16MediaEnvironmentV23createXPCRepresentationSo13OS_xpc_object_pyF', 

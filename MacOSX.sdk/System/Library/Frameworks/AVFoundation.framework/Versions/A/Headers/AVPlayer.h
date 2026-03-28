@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2024 Apple Inc. All rights reserved.
+	Copyright 2010-2026 Apple Inc. All rights reserved.
 
 */
 
@@ -132,6 +132,10 @@ AVF_EXPORT AVPlayerRateDidChangeReason const AVPlayerRateDidChangeReasonSetRateC
 AVF_EXPORT AVPlayerRateDidChangeReason const AVPlayerRateDidChangeReasonSetRateFailed API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 AVF_EXPORT AVPlayerRateDidChangeReason const AVPlayerRateDidChangeReasonAudioSessionInterrupted API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 AVF_EXPORT AVPlayerRateDidChangeReason const AVPlayerRateDidChangeReasonAppBackgrounded API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+// Indicates that the player automatically switched the playback rate from > 1.0 back to 1.0 when the playhead reached the live edge during live streaming.
+AVF_EXPORT AVPlayerRateDidChangeReason const AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge API_AVAILABLE(macos(26.4), ios(26.4), tvos(26.4), watchos(26.4), visionos(26.4));
+// Indicates that the player automatically switched rate to 1.0 when the reverse playback reached start of seekable range. only for live.
+AVF_EXPORT AVPlayerRateDidChangeReason const AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange API_AVAILABLE(macos(26.4), ios(26.4), tvos(26.4), watchos(26.4), visionos(26.4));
 
 @interface AVPlayer (AVPlayerPlaybackControl)
 
@@ -797,6 +801,17 @@ API_AVAILABLE(ios(26.0), tvos(26.0)) API_UNAVAILABLE(macos, watchos, visionos)
 ///
 /// For more information regarding management of class objects in SwiftUI, please refer to https://developer.apple.com/documentation/swiftui/state.
 @property (class, readwrite, getter=isObservationEnabled) BOOL observationEnabled NS_SWIFT_NONISOLATED API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+@end
+
+@interface AVPlayer (AVPlayerAllowsCaptureOfClearKeyVideo)
+
+/// Indicates whether the video output of ClearKey Encrypted Video can be captured
+///
+/// When set to YES, and the video being played by AVPlayer is Clear Key encrypted, allows video to be captured in screenshots and screen recordings, and via APIs like AVPlayerItemVideoOutput and ScreenCaptureKit. When NO, Clear Key encrypted video will not be included in such captured video. This property has no effect on content protected by FairPlay Streaming.
+/// Default is NO.
+
+@property (nonatomic) BOOL allowsCaptureOfClearKeyVideo NS_SWIFT_NONISOLATED API_AVAILABLE(macos(26.4), ios(26.4), tvos(26.4), watchos(26.4), visionos(26.4));
+
 @end
 
 @interface AVPlayer (AVPlayerDeprecated)

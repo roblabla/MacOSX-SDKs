@@ -14,6 +14,12 @@ typedef NSString *SRPhotoplethysmogramOpticalSampleCondition NS_TYPED_ENUM API_A
 SR_EXTERN SRPhotoplethysmogramOpticalSampleCondition const SRPhotoplethysmogramOpticalSampleConditionSignalSaturation API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos);
 SR_EXTERN SRPhotoplethysmogramOpticalSampleCondition const SRPhotoplethysmogramOpticalSampleConditionUnreliableNoise API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos);
 
+/*!
+ * @class SRPhotoplethysmogramOpticalSample
+ *
+ * @brief A data sample from the photoplethysmogram (PPG) optical sensor.
+ *
+ */
 NS_SWIFT_SENDABLE
 SR_EXTERN API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRPhotoplethysmogramOpticalSample : NSObject <NSCopying, NSSecureCoding>
@@ -87,9 +93,12 @@ SR_EXTERN API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos, visionos) API_UNAVAI
 /*!
  * @property normalizedReflectance
  *
- * @brief The PPG waveform
+ * @brief The photoplethysmogram waveform in normalized units.
  *
- * @discussion This may be \c nil when the sensor data reading is invalid
+ * @discussion
+ * The scale of the normalized signal may vary. For more information on how Apple Watch uses
+ * photoplethysmography, see the “How Apple Watch measures your heart rate" section in
+ * [Monitor your heart rate with Apple Watch](https://support.apple.com/en-us/120277).
  *
  */
 @property (nonatomic, readonly, strong, nullable) NSNumber *normalizedReflectance NS_REFINED_FOR_SWIFT;
@@ -97,9 +106,14 @@ SR_EXTERN API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos, visionos) API_UNAVAI
 /*!
  * @property whiteNoise
  *
- * @brief White noise estimation
+ * @brief An estimate of the white noise of the sensor.
  *
- * @discussion This may be \c nil when the sensor data reading is invalid
+ * @discussion
+ * This value represents the white noise variance estimate per Hz in the ``normalizedReflectance``
+ * signal (Normalized Units²/Hz). Apply the noise equivalent bandwidth factor to account for
+ * in-band noise for your setup.
+ *
+ * This may be \c nil when the sensor data reading is invalid
  *
  */
 @property (nonatomic, readonly, strong, nullable) NSNumber *whiteNoise NS_REFINED_FOR_SWIFT;
@@ -107,9 +121,13 @@ SR_EXTERN API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos, visionos) API_UNAVAI
 /*!
  * @property pinkNoise
  *
- * @brief Pink noise estimation
+ * @brief An estimate of the pink noise of the sensor.
  *
- * @discussion This may be \c nil when the sensor data reading is invalid
+ * @discussion
+ * The total pink noise variance estimate in the ``normalizedReflectance``
+ * signal (Normalized Units²).
+ *
+ * This may be \c nil when the sensor data reading is invalid
  *
  */
 @property (nonatomic, readonly, strong, nullable) NSNumber *pinkNoise NS_REFINED_FOR_SWIFT;
@@ -117,9 +135,13 @@ SR_EXTERN API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos, visionos) API_UNAVAI
 /*!
  * @property backgroundNoise
  *
- * @brief Estimated ambient noise intrusion
+ * @brief An estimated timeseries of ambient noise intrusion.
  *
- * @discussion This may be \c nil when the sensor data reading is invalid
+ * @discussion
+ * The sensor's estimate of ambient noise intrusion in the ``normalizedReflectance``
+ * signal (Normalized Units).
+ *
+ * This may be \c nil when the sensor data reading is invalid
  *
  */
 @property (nonatomic, readonly, strong, nullable) NSNumber *backgroundNoise NS_REFINED_FOR_SWIFT;
@@ -127,12 +149,17 @@ SR_EXTERN API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos, visionos) API_UNAVAI
 /*!
  * @property backgroundNoiseOffset
  *
- * @brief Estimated electronics noise floor level of the sensor
+ * @brief The white noise variance estimate in the background noise signal.
  *
- * @discussion 
- * To estimate the total ambient noise, subtract scaled background noise offset 
+ * @discussion
+ * This value represents the white noise variance estimate per Hz in the ``backgroundNoise``
+ * signal (Normalized Units²/Hz). Apply the noise equivalent bandwidth factor to
+ * account for in-band noise for your setup.
+ *
+ * To estimate the total ambient noise, subtract scaled background noise offset
  * from the background noise. The scaling factor can be computed based on
  * the researcher's digital filter setup.
+ *
  * This may be \c nil when the sensor data reading is invalid
  *
  */

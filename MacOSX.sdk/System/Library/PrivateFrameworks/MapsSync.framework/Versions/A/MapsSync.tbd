@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MapsSync.framework/Versions/A/MapsSync'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s8MapsSync0aB10ExpressionC10expression3key10returnTypeACSo12NSExpressionC_SSAA0ab11NSAttributeG0OtcfC', 
                        '_$s8MapsSync0aB10ExpressionC10expression3key10returnTypeACSo12NSExpressionC_SSAA0ab11NSAttributeG0OtcfCTj', 
                        '_$s8MapsSync0aB10ExpressionC10expression3key10returnTypeACSo12NSExpressionC_SSAA0ab11NSAttributeG0OtcfCTq', 
@@ -2293,7 +2291,7 @@ exports:
                        _MapsSyncConfig_MapsSyncShouldCleanupCachedCuratedCollections, 
                        _MapsSyncConfig_MapsSyncShouldCleanupExpiredFavoriteItems, 
                        _MapsSyncConfig_MapsSyncShouldCleanupOrphanedMapItems, _MapsSyncConfig_MapsSyncShouldCleanupTransactionHistory, 
-                       _MapsSyncConfig_MapsSyncShouldCleanupVisits, _MapsSyncConfig_MapsSyncShouldDeleteDuplicates, 
+                       _MapsSyncConfig_MapsSyncShouldCleanupVisitsV2, _MapsSyncConfig_MapsSyncShouldDeleteDuplicates, 
                        _MapsSyncConfig_MapsSyncShouldForceUnregisterFaults, _MapsSyncConfig_MapsSyncShouldMigrateFavoriteItemsSource, 
                        _MapsSyncConfig_MapsSyncShouldPrepareForSearch, _MapsSyncConfig_MapsSyncShouldRefreshMapItems, 
                        _MapsSyncConfig_MapsSyncShouldStampMapItemsWithDate, _MapsSyncConfig_MapsSyncShouldSyncInDaemon, 

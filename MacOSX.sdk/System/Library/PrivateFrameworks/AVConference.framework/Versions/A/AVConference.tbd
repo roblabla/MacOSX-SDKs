@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Versions/A/AVConference'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AVCKeyDaemonProcessInfoError, _AVCKeyDaemonProcessInfoUniquePID, 
                        _AVCMediaStreamNegotiatorAccessNetworkType, _AVCMediaStreamNegotiatorDirection, 
                        _AVCMediaStreamNegotiatorHDRMode, _AVCMediaStreamNegotiatorRemoteCameraDisparityFormat, 
@@ -118,7 +116,7 @@ exports:
                        _VCConnection_GetWorstCaseNetworkOverhead, _VCCoreMotionDetectionEnabled, 
                        _VCDisableSIPEnableThreshold, _VCDisallowAlternateConnectionForRTXSupportWhenVideoDegraded, 
                        _VCDuplicateImportantPktsEnableThreshold, _VCDuplicationEnhancementEnableThreshold, 
-                       _VCECNEnabledForP2POnly, _VCEnableJBLatencySensitiveMode, 
+                       _VCECNEnabledForDTCommSlice, _VCECNEnabledForP2POnly, _VCEnableJBLatencySensitiveMode, 
                        _VCEnhancedJBAdaptationsFTA, _VCEnhancedJBAdaptationsFTV, 
                        _VCFECFeedbackAnalyzerBufferMaxLength, _VCFECFeedbackAnalyzerCameraFECLevelCappingBitrate, 
                        _VCFECFeedbackAnalyzerInterpolationThreshold, _VCFECFeedbackAnalyzerLevelMatchPercentile, 

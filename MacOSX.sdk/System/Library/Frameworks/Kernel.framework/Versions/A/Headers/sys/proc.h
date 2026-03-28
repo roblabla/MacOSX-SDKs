@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2018 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2025 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -83,7 +83,6 @@
 
 
 
-
 __BEGIN_DECLS
 
 extern proc_t kernproc;
@@ -92,7 +91,6 @@ extern int proc_is_classic(proc_t p);
 extern bool proc_is_exotic(proc_t p);
 extern bool proc_is_alien(proc_t p);
 proc_t current_proc_EXTERNAL(void);
-
 
 /*
  * __unsafe_indexable is a workaround for
@@ -164,6 +162,8 @@ extern uint32_t proc_platform(const proc_t);
 extern uint32_t proc_min_sdk(proc_t);
 /* returns the sdk version used by the current process */
 extern uint32_t proc_sdk(proc_t);
+/* returns whether the proc's sdk version is OS 26.4 (Fall 2025 SU E) aligned or greater */
+extern bool proc_sdk_26_4_or_later(proc_t proc);
 /* returns 1 if the process is marked for no remote hangs */
 extern int proc_noremotehang(proc_t);
 /* returns 1 if the process is marked for force quota */
@@ -227,9 +227,6 @@ pid_t proc_pgrpid(proc_t p);
  *  @return session id of current process.
  */
 pid_t proc_sessionid(proc_t p);
-
-
-
 
 __END_DECLS
 

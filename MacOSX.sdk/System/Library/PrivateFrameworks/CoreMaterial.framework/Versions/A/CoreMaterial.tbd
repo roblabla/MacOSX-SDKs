@@ -1,18 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreMaterial.framework/Versions/A/CoreMaterial'
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AssetViewer, CoreMaterialTester, MaterialKit, Materials, MaterialsPlugIn, 
                        MicaKit, PointerUIServices, SpringBoard, SpringBoard-Tests, 
                        SpringBoardHome, SwiftUI, SwiftUICore, UIKitCore, UIKitester, 
                        VisionKitCore, _SwiftUICore ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CoreMaterialVersionNumber, _CoreMaterialVersionString, _MTAllOrdinalVisualStyles, 
                        _MTAllPlatformColorVisualStyles, _MTAllVisualStyleCategories, 
                        _MTBuiltInScreenScale, _MTCAColorMatrixCreateDictionaryRepresentation, 

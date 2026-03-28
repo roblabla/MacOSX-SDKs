@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ParsingInternal.framework/Versions/A/ParsingInternal'
-current-version: 112
-compatibility-version: 112
+current-version: 154
+compatibility-version: 154
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10ParserType15ParsingInternal0A9ComponentPTl', '_$s15ParsingInternal0A5ErrorV04userC0ACs0C0_p_tcfC', 
                        '_$s15ParsingInternal0A5ErrorV04userC0s0C0_pSgvM', '_$s15ParsingInternal0A5ErrorV04userC0s0C0_pSgvg', 
                        '_$s15ParsingInternal0A5ErrorV04userC0s0C0_pSgvpMV', '_$s15ParsingInternal0A5ErrorV04userC0s0C0_pSgvpfi', 

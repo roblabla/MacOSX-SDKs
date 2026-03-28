@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MobileTimer.framework/Versions/A/MobileTimer'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s11MobileTimer0aB12FeatureFlagsO02isC7EnabledSbvg', '_$s11MobileTimer0aB12FeatureFlagsO02isC7EnabledSbvpMV', 
                        '_$s11MobileTimer0aB12FeatureFlagsO0cD00cD3KeyAAMc', '_$s11MobileTimer0aB12FeatureFlagsO19liveActivityBannersyA2CmFWC', 
                        '_$s11MobileTimer0aB12FeatureFlagsO20liveActivityAlertingyA2CmFWC', 
@@ -167,6 +165,7 @@ exports:
                        '_$s11MobileTimer9MTCDAlarmC16keepOffUntilDate10Foundation0G0VSgvpMV', 
                        '_$s11MobileTimer9MTCDAlarmC16lastModifiedDate10Foundation0F0VSgvpMV', 
                        '_$s11MobileTimer9MTCDAlarmC17silentModeOptionss5Int64VvpMV', 
+                       '_$s11MobileTimer9MTCDAlarmC18coordinationPolicys5Int64VvpMV', 
                        '_$s11MobileTimer9MTCDAlarmC18siriContextDecodedSo12NSDictionaryCSgyFTj', 
                        '_$s11MobileTimer9MTCDAlarmC18siriContextDecodedSo12NSDictionaryCSgyFTq', 
                        '_$s11MobileTimer9MTCDAlarmC3days5Int64VvpMV', '_$s11MobileTimer9MTCDAlarmC4hours5Int64VvpMV', 
@@ -227,7 +226,8 @@ exports:
                        _DetailDateMaskToString, _FormatTime, _FormatTimeWithConfig, 
                        _GetTimeComponents, _GetTimeComponentsWithConfig, _GetTimeFormats, 
                        _LatestUpdateVersion, _LocStrWithUILanguage, _MTActivityForName, 
-                       _MTAlarmCategory, _MTAlarmClientInterface, _MTAlarmDefaultTitleLocStringKey, 
+                       _MTAlarmCategory, _MTAlarmClientInterface, _MTAlarmCoordinationPolicyKey, 
+                       _MTAlarmCoordinationPolicyString, _MTAlarmDefaultTitleLocStringKey, 
                        _MTAlarmDidFireNotificationName, _MTAlarmDismissAction, _MTAlarmGoToBedAction, 
                        _MTAlarmIntentCreate, _MTAlarmIntentDelete, _MTAlarmIntentDisable, 
                        _MTAlarmIntentEnable, _MTAlarmIntentExtensionBundleID, _MTAlarmIntentIdentifierKey, 
@@ -296,10 +296,11 @@ exports:
                        _MTTimerServerLifecycleNotification, _MTTimerServerReadyNotification, 
                        _MTTimerStorageMigratedToCoreData, _MTTimerStorageVersionKey, 
                        _MTTimerTimesAreEqual, _MTTimerUserTitleKey, _MTWakeUpAlarmCategory, 
-                       _MTWakeUpAlarmNoSnoozeCategory, _MTWatchAlarmWidgetKind, _MTWatchThreeUpAlarmWidgetKind, 
-                       _MTWatchThreeUpTimerWidgetKind, _MTWatchTimerWidgetKind, _MTisDeviceUnlocked, 
-                       _MobileTimerAppID, _MobileTimerFrameworkLocalNotificationsChanged, 
-                       _MobileTimerFrameworkLocalNotificationsChangedExternally, 
+                       _MTWakeUpAlarmNoSnoozeCategory, _MTWakeUpAlarmNoSnoozeUncoordinatedCategory, 
+                       _MTWakeUpAlarmUncoordinatedCategory, _MTWatchAlarmWidgetKind, 
+                       _MTWatchThreeUpAlarmWidgetKind, _MTWatchThreeUpTimerWidgetKind, 
+                       _MTWatchTimerWidgetKind, _MTisDeviceUnlocked, _MobileTimerAppID, 
+                       _MobileTimerFrameworkLocalNotificationsChanged, _MobileTimerFrameworkLocalNotificationsChangedExternally, 
                        _MobileTimerFrameworkPreferencesAndLocalNotificationsChanged, 
                        _MobileTimerFrameworkPreferencesAndLocalNotificationsChangedExternally, 
                        _MobileTimerFrameworkPreferencesChanged, _MobileTimerFrameworkPreferencesChangedExternally, 
@@ -317,8 +318,8 @@ exports:
                        _kMTAlarmBedtimeFiredDateEncodingKey, _kMTAlarmBedtimeHourEncodingKey, 
                        _kMTAlarmBedtimeLegacyEncodingKey, _kMTAlarmBedtimeMinuteEncodingKey, 
                        _kMTAlarmBedtimeReminderEncodingKey, _kMTAlarmBedtimeSnoozeFireDateEncodingKey, 
-                       _kMTAlarmBypassReloadDateEncodingKey, _kMTAlarmDataVersion, 
-                       _kMTAlarmDataVersionEncodingKey, _kMTAlarmDefaultSnoozeDuration, 
+                       _kMTAlarmBypassReloadDateEncodingKey, _kMTAlarmCoordinationPolicyEncodingKey, 
+                       _kMTAlarmDataVersion, _kMTAlarmDataVersionEncodingKey, _kMTAlarmDefaultSnoozeDuration, 
                        _kMTAlarmDismissedActionEncodingKey, _kMTAlarmDismissedDateEncodingKey, 
                        _kMTAlarmEnabledEncodingKey, _kMTAlarmFiredDateEncodingKey, 
                        _kMTAlarmFiringEncodingKey, _kMTAlarmHourEncodingKey, _kMTAlarmIDEncodingKey, 

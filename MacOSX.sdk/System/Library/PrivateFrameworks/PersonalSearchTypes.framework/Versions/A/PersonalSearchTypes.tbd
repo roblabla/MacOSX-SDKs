@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PersonalSearchTypes.framework/Versions/A/PersonalSearchTypes'
-current-version: 3510.2.1
+current-version: 3520.84.2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16ProgressReporter19PersonalSearchTypes15ServiceProtocolPTl', 
                        '_$s19PersonalSearchTypes0aB11ServiceNameSSvg', '_$s19PersonalSearchTypes0aB12QueryOptionsV2eeoiySbAC_ACtFZ', 
                        '_$s19PersonalSearchTypes0aB12QueryOptionsV4fromACs7Decoder_p_tKcfC', 
@@ -177,9 +177,9 @@ exports:
                        '_$s19PersonalSearchTypes15ServiceProtocolP21buildProgressReporter7session0gH0QzSg3XPC10XPCSessionCSg_tFTq', 
                        '_$s19PersonalSearchTypes15ServiceProtocolP6cancelyyFTj', 
                        '_$s19PersonalSearchTypes15ServiceProtocolP6cancelyyFTq', 
-                       '_$s19PersonalSearchTypes15ServiceProtocolP6handle_16progressReporter8ResponseQz7RequestQz_08ProgressH0QzSgtYaFTj', 
-                       '_$s19PersonalSearchTypes15ServiceProtocolP6handle_16progressReporter8ResponseQz7RequestQz_08ProgressH0QzSgtYaFTjTu', 
-                       '_$s19PersonalSearchTypes15ServiceProtocolP6handle_16progressReporter8ResponseQz7RequestQz_08ProgressH0QzSgtYaFTq', 
+                       '_$s19PersonalSearchTypes15ServiceProtocolP6handle_16progressReporter7session8ResponseQz7RequestQz_08ProgressH0QzSg3XPC10XPCSessionCSgtYaFTj', 
+                       '_$s19PersonalSearchTypes15ServiceProtocolP6handle_16progressReporter7session8ResponseQz7RequestQz_08ProgressH0QzSg3XPC10XPCSessionCSgtYaFTjTu', 
+                       '_$s19PersonalSearchTypes15ServiceProtocolP6handle_16progressReporter7session8ResponseQz7RequestQz_08ProgressH0QzSg3XPC10XPCSessionCSgtYaFTq', 
                        '_$s19PersonalSearchTypes15ServiceProtocolP6handley8ResponseQz7RequestQzYaFTj', 
                        '_$s19PersonalSearchTypes15ServiceProtocolP6handley8ResponseQz7RequestQzYaFTjTu', 
                        '_$s19PersonalSearchTypes15ServiceProtocolP6handley8ResponseQz7RequestQzYaFTq', 
@@ -283,6 +283,8 @@ exports:
                        '_$s19PersonalSearchTypes7LoggingO8endpoint2os6LoggerVvpZMV', 
                        '_$s19PersonalSearchTypes7LoggingOMa', '_$s19PersonalSearchTypes7LoggingOMn', 
                        '_$s19PersonalSearchTypes7LoggingON', '_$s7Request19PersonalSearchTypes15ServiceProtocolPTl', 
-                       '_$s8Response19PersonalSearchTypes15ServiceProtocolPTl', _PersonalSearchTypesVersionNumber, 
-                       _PersonalSearchTypesVersionString ]
+                       '_$s8Response19PersonalSearchTypes15ServiceProtocolPTl', '_$sSo17OS_dispatch_queueC19PersonalSearchTypesE20serviceDispatchQueueSo0a1_b1_C7_serialCvau', 
+                       '_$sSo17OS_dispatch_queueC19PersonalSearchTypesE20serviceDispatchQueueSo0a1_b1_C7_serialCvgZ', 
+                       '_$sSo17OS_dispatch_queueC19PersonalSearchTypesE20serviceDispatchQueueSo0a1_b1_C7_serialCvpZ', 
+                       _PersonalSearchTypesVersionNumber, _PersonalSearchTypesVersionString ]
 ...

@@ -1,6 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/asmp.framework/Versions/A/asmp'
 current-version: 1.0.1
 compatibility-version: 1.0.1
@@ -14,7 +14,7 @@ exports:
                        __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
                        __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ASMPAddAccelerometerSample, _ASMPAddAccelerometerTrace, _ASMPAddAccelerometerTraceTag, 
                        _ASMPAddEncoderSample, _ASMPAddEncoderTrace, _ASMPAddEncoderTraceTag, 
                        _ASMPAddGyroscopeSample, _ASMPAddGyroscopeTrace, _ASMPAddGyroscopeTraceTag, 

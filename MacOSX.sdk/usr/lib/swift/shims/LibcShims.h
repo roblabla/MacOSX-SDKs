@@ -61,8 +61,10 @@ SWIFT_READONLY
 static inline int _swift_stdlib_memcmp(const void *s1, const void *s2,
                                        __swift_size_t n) {
 #if defined(__APPLE__)
-  // Darwin defines memcmp with optional pointers, preserve the same type here.
-  extern int memcmp(const void * _Nullable, const void * _Nullable, __swift_size_t);
+
+    // Darwin defines memcmp with optional pointers, preserve the same type here.
+    extern int memcmp(const void * _Nullable, const void * _Nullable, __swift_size_t);
+
 // FIXME: Is there a way to identify Glibc specifically?
 #elif (defined(__gnu_linux__) || defined(__ANDROID__)) && !defined(__musl__)
   extern int memcmp(const void * _Nonnull, const void * _Nonnull, __swift_size_t);

@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IsolatedContextLogging.framework/Versions/A/IsolatedContextLogging'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation15ContiguousBytesP22IsolatedContextLoggingE18dataRepresentationAA4DataVvg', 
                        '_$s10Foundation15ContiguousBytesP22IsolatedContextLoggingE18dataRepresentationAA4DataVvpMV', 
                        '_$s22IsolatedContextLogging0abC5ErrorOMa', '_$s22IsolatedContextLogging0abC5ErrorOMn', 
@@ -41,15 +39,28 @@ exports:
                        '_$s22IsolatedContextLogging8ICLoggerC15isInternalBuildSbvsZ', 
                        '_$s22IsolatedContextLogging8ICLoggerC15keychainAccountSSvg', 
                        '_$s22IsolatedContextLogging8ICLoggerC15keychainAccountSSvpMV', 
+                       '_$s22IsolatedContextLogging8ICLoggerC16iclEncryptionKey9CryptoKit09SymmetricG0VSgvMTj', 
+                       '_$s22IsolatedContextLogging8ICLoggerC16iclEncryptionKey9CryptoKit09SymmetricG0VSgvMTq', 
+                       '_$s22IsolatedContextLogging8ICLoggerC16iclEncryptionKey9CryptoKit09SymmetricG0VSgvgTj', 
+                       '_$s22IsolatedContextLogging8ICLoggerC16iclEncryptionKey9CryptoKit09SymmetricG0VSgvgTq', 
+                       '_$s22IsolatedContextLogging8ICLoggerC16iclEncryptionKey9CryptoKit09SymmetricG0VSgvpMV', 
+                       '_$s22IsolatedContextLogging8ICLoggerC16iclEncryptionKey9CryptoKit09SymmetricG0VSgvsTj', 
+                       '_$s22IsolatedContextLogging8ICLoggerC16iclEncryptionKey9CryptoKit09SymmetricG0VSgvsTq', 
+                       '_$s22IsolatedContextLogging8ICLoggerC18encryptionDisabledSbvg', 
+                       '_$s22IsolatedContextLogging8ICLoggerC18encryptionDisabledSbvpMV', 
                        '_$s22IsolatedContextLogging8ICLoggerC19deleteEncryptionKeyyyFTj', 
                        '_$s22IsolatedContextLogging8ICLoggerC19deleteEncryptionKeyyyFTq', 
                        '_$s22IsolatedContextLogging8ICLoggerC21decryptMessageWithKey_3keySSSg10Foundation4DataV_AItFTj', 
                        '_$s22IsolatedContextLogging8ICLoggerC21decryptMessageWithKey_3keySSSg10Foundation4DataV_AItFTq', 
+                       '_$s22IsolatedContextLogging8ICLoggerC21encryptionDisabledKeySSvg', 
+                       '_$s22IsolatedContextLogging8ICLoggerC21encryptionDisabledKeySSvpMV', 
                        '_$s22IsolatedContextLogging8ICLoggerC27createAndStoreEncryptionKey9CryptoKit09SymmetricI0VSgyFTj', 
                        '_$s22IsolatedContextLogging8ICLoggerC27createAndStoreEncryptionKey9CryptoKit09SymmetricI0VSgyFTq', 
                        '_$s22IsolatedContextLogging8ICLoggerC5oslogSo9OS_os_logCvg', 
                        '_$s22IsolatedContextLogging8ICLoggerC5oslogSo9OS_os_logCvpMV', 
                        '_$s22IsolatedContextLogging8ICLoggerC7icl_logyySSFTj', '_$s22IsolatedContextLogging8ICLoggerC7icl_logyySSFTq', 
+                       '_$s22IsolatedContextLogging8ICLoggerC7logWith5level_ySo03os_E7_type_ta_SStFTj', 
+                       '_$s22IsolatedContextLogging8ICLoggerC7logWith5level_ySo03os_E7_type_ta_SStFTq', 
                        '_$s22IsolatedContextLogging8ICLoggerC8categorySSvg', '_$s22IsolatedContextLogging8ICLoggerC8categorySSvpMV', 
                        '_$s22IsolatedContextLogging8ICLoggerC8icl_infoyySSFTj', '_$s22IsolatedContextLogging8ICLoggerC8icl_infoyySSFTq', 
                        '_$s22IsolatedContextLogging8ICLoggerC9iclLogger2os0F0Vvg', 
@@ -65,6 +76,7 @@ exports:
                        '_$s22IsolatedContextLogging8ICLoggerC9subsystem8categoryACSS_SStcfCTq', 
                        '_$s22IsolatedContextLogging8ICLoggerC9subsystem8categoryACSS_SStcfc', 
                        '_$s22IsolatedContextLogging8ICLoggerC9subsystemSSvg', '_$s22IsolatedContextLogging8ICLoggerC9subsystemSSvpMV', 
+                       '_$s22IsolatedContextLogging8ICLoggerC9suiteNameSSvg', '_$s22IsolatedContextLogging8ICLoggerC9suiteNameSSvpMV', 
                        '_$s22IsolatedContextLogging8ICLoggerCACycfC', '_$s22IsolatedContextLogging8ICLoggerCACycfc', 
                        '_$s22IsolatedContextLogging8ICLoggerCMa', '_$s22IsolatedContextLogging8ICLoggerCMn', 
                        '_$s22IsolatedContextLogging8ICLoggerCMo', '_$s22IsolatedContextLogging8ICLoggerCMu', 

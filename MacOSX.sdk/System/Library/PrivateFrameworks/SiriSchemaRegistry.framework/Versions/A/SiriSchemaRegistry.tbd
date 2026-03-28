@@ -1,0 +1,33 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64e-macos ]
+install-name:    '/System/Library/PrivateFrameworks/SiriSchemaRegistry.framework/Versions/A/SiriSchemaRegistry'
+swift-abi-version: 7
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ '_$s18SiriSchemaRegistry0B10ExtensionsOMa', '_$s18SiriSchemaRegistry0B10ExtensionsOMn', 
+                       '_$s18SiriSchemaRegistry0B10ExtensionsON', '_$s18SiriSchemaRegistry11ComponentIdV2eeoiySbAC_ACtFZ', 
+                       '_$s18SiriSchemaRegistry11ComponentIdV4hash4intoys6HasherVz_tF', 
+                       '_$s18SiriSchemaRegistry11ComponentIdV4uuid10Foundation4UUIDVvg', 
+                       '_$s18SiriSchemaRegistry11ComponentIdV4uuid10Foundation4UUIDVvpMV', 
+                       '_$s18SiriSchemaRegistry11ComponentIdV9components5Int32Vvg', 
+                       '_$s18SiriSchemaRegistry11ComponentIdV9components5Int32VvpMV', 
+                       '_$s18SiriSchemaRegistry11ComponentIdV9hashValueSivg', '_$s18SiriSchemaRegistry11ComponentIdV9hashValueSivpMV', 
+                       '_$s18SiriSchemaRegistry11ComponentIdVMa', '_$s18SiriSchemaRegistry11ComponentIdVMn', 
+                       '_$s18SiriSchemaRegistry11ComponentIdVN', '_$s18SiriSchemaRegistry11ComponentIdVSHAAMc', 
+                       '_$s18SiriSchemaRegistry11ComponentIdVSQAAMc', '_$s18SiriSchemaRegistry15ComponentIdEdgeV2eeoiySbAC_ACtFZ', 
+                       '_$s18SiriSchemaRegistry15ComponentIdEdgeV4hash4intoys6HasherVz_tF', 
+                       '_$s18SiriSchemaRegistry15ComponentIdEdgeV4leftAA0dE0Vvg', 
+                       '_$s18SiriSchemaRegistry15ComponentIdEdgeV4leftAA0dE0VvpMV', 
+                       '_$s18SiriSchemaRegistry15ComponentIdEdgeV5rightAA0dE0Vvg', 
+                       '_$s18SiriSchemaRegistry15ComponentIdEdgeV5rightAA0dE0VvpMV', 
+                       '_$s18SiriSchemaRegistry15ComponentIdEdgeV9hashValueSivg', 
+                       '_$s18SiriSchemaRegistry15ComponentIdEdgeV9hashValueSivpMV', 
+                       '_$s18SiriSchemaRegistry15ComponentIdEdgeVMa', '_$s18SiriSchemaRegistry15ComponentIdEdgeVMn', 
+                       '_$s18SiriSchemaRegistry15ComponentIdEdgeVN', '_$s18SiriSchemaRegistry15ComponentIdEdgeVSHAAMc', 
+                       '_$s18SiriSchemaRegistry15ComponentIdEdgeVSQAAMc', '_$s18SiriSchemaRegistry21ScalarValueExtractionV7extract4fromSayxGSg8Dendrite18ProtoScopedMessageC_tAH0bD13RepresentableRzlF', 
+                       '_$s18SiriSchemaRegistry21ScalarValueExtractionV7extract4fromxSg8Dendrite18ProtoScopedMessageC_tAG0bD13RepresentableRzlF', 
+                       '_$s18SiriSchemaRegistry21ScalarValueExtractionVMa', '_$s18SiriSchemaRegistry21ScalarValueExtractionVMn', 
+                       '_$s18SiriSchemaRegistry21ScalarValueExtractionVN', '_$s18SiriSchemaRegistry21ScalarValueExtractionVyAC8Dendrite16ProtoTagPathStemVcfC', 
+                       _SiriSchemaRegistryVersionNumber, _SiriSchemaRegistryVersionString ]
+...

@@ -37,17 +37,10 @@ GK_BASE_AVAILABILITY @interface GKPath : NSObject
  * @param radius radius of the path to create
  * @param cyclical is the path a cycle that loops back on itself?
  */
-#if (defined(SWIFT_SDK_OVERLAY_GAMEPLAYKIT_EPOCH) && SWIFT_SDK_OVERLAY_GAMEPLAYKIT_EPOCH >= 1)
 + (instancetype)pathWithPoints:(vector_float2 *)points count:(size_t)count radius:(float)radius cyclical:(BOOL)cyclical NS_REFINED_FOR_SWIFT;
 - (instancetype)initWithPoints:(vector_float2 *)points count:(size_t)count radius:(float)radius cyclical:(BOOL)cyclical NS_REFINED_FOR_SWIFT;
 + (instancetype)pathWithFloat3Points:(vector_float3 *)points count:(size_t)count radius:(float)radius cyclical:(BOOL)cyclical NS_AVAILABLE(10_12, 10_0) NS_REFINED_FOR_SWIFT;
 - (instancetype)initWithFloat3Points:(vector_float3 *)points count:(size_t)count radius:(float)radius cyclical:(BOOL)cyclical NS_AVAILABLE(10_12, 10_0) NS_REFINED_FOR_SWIFT;
-#else
-+ (instancetype)pathWithPoints:(vector_float2 *)points count:(size_t)count radius:(float)radius cyclical:(BOOL)cyclical;
-- (instancetype)initWithPoints:(vector_float2 *)points count:(size_t)count radius:(float)radius cyclical:(BOOL)cyclical;
-+ (instancetype)pathWithFloat3Points:(vector_float3 *)points count:(size_t)count radius:(float)radius cyclical:(BOOL)cyclical NS_AVAILABLE(10_12, 10_0);
-- (instancetype)initWithFloat3Points:(vector_float3 *)points count:(size_t)count radius:(float)radius cyclical:(BOOL)cyclical NS_AVAILABLE(10_12, 10_0);
-#endif
 
 /**
  * Creates a path from an array of graph nodes (often a result of pathfinding)

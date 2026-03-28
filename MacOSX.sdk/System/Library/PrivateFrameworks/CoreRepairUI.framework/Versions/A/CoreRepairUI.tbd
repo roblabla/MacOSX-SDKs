@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ arm64-macos, arm64e-macos ]
+targets:         [ arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreRepairUI.framework/CoreRepairUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ '_$s12CoreRepairUI10DetailItemV10repairDateSSSgvg', '_$s12CoreRepairUI10DetailItemV10repairDateSSSgvpMV', 
                        '_$s12CoreRepairUI10DetailItemV13componentTypeSo011CRComponentG0avg', 
                        '_$s12CoreRepairUI10DetailItemV13componentTypeSo011CRComponentG0avpMV', 
@@ -21,8 +21,8 @@ exports:
                        '_$s12CoreRepairUI11ActiveAlertO9hashValueSivpMV', '_$s12CoreRepairUI11ActiveAlertOMa', 
                        '_$s12CoreRepairUI11ActiveAlertOMn', '_$s12CoreRepairUI11ActiveAlertON', 
                        '_$s12CoreRepairUI11ActiveAlertOSHAAMc', '_$s12CoreRepairUI11ActiveAlertOSQAAMc', 
-                       '_$s12CoreRepairUI14ComponentStateO06finishB0yA2CmFWC', '_$s12CoreRepairUI14ComponentStateO2eeoiySbAC_ACtFZ', 
-                       '_$s12CoreRepairUI14ComponentStateO4hash4intoys6HasherVz_tF', 
+                       '_$s12CoreRepairUI14ComponentStateO06finishB0yA2CmFWC', '_$s12CoreRepairUI14ComponentStateO10unverifiedyA2CmFWC', 
+                       '_$s12CoreRepairUI14ComponentStateO2eeoiySbAC_ACtFZ', '_$s12CoreRepairUI14ComponentStateO4hash4intoys6HasherVz_tF', 
                        '_$s12CoreRepairUI14ComponentStateO4usedyA2CmFWC', '_$s12CoreRepairUI14ComponentStateO5issueyA2CmFWC', 
                        '_$s12CoreRepairUI14ComponentStateO7genuineyA2CmFWC', '_$s12CoreRepairUI14ComponentStateO7unknownyA2CmFWC', 
                        '_$s12CoreRepairUI14ComponentStateO9hashValueSivg', '_$s12CoreRepairUI14ComponentStateO9hashValueSivpMV', 
@@ -132,5 +132,4 @@ exports:
                        '_$s12CoreRepairUI30PartsAndServiceHistoryFormViewVN', '_$sSo8NSBundleC12CoreRepairUIEAcBvgZ', 
                        '_$sSo8NSBundleC12CoreRepairUIEAcBvpZMV', _CoreRepairUIVersionNumber, 
                        _CoreRepairUIVersionString ]
-    objc-classes:    [ CRUIAnalytics, CoreRepairUIUtils ]
 ...

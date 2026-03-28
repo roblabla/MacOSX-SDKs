@@ -1,10 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriNotificationsIntents.framework/Versions/A/SiriNotificationsIntents'
 swift-abi-version: 7
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    clients:         [ NotificationsFlowDelegatePlugin, SiriNotificationsIntentsTests, 
+                       SiriNotificationsTests ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16SiriDialogEngine10SirikitAppC0A20NotificationsIntentsE2eeoiySbAC_ACtFZ', 
                        '_$s16SiriDialogEngine10SirikitAppCSQ0A20NotificationsIntentsMc', 
                        '_$s16SiriDialogEngine23SirikitLocalizedAppNameC0A20NotificationsIntentsE2eeoiySbAC_ACtFZ', 

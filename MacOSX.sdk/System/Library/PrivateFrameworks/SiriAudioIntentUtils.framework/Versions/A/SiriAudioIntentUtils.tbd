@@ -1,16 +1,16 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriAudioIntentUtils.framework/Versions/A/SiriAudioIntentUtils'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ AudioFlowDelegatePlugin, AudioFlowDelegatePluginTests, AudioSuggestionsPlugin, 
                        AudioSuggestionsPluginTests, SiriAudioIntentUtilsTests, SiriAudioInternal, 
                        SiriAudioInternalTests, SiriAudioSupport, SiriAudioSupportTests, 
                        SiriInformationSearch ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s12SiriOntology20UsoEntity_common_AppC0A16AudioIntentUtilsE16bundleIdentifierSSSgvg', 
                        '_$s12SiriOntology20UsoEntity_common_AppC0A16AudioIntentUtilsE16bundleIdentifierSSSgvpMV', 
                        '_$s12SiriOntology24UsoEntity_common_SettingC0A16AudioIntentUtilsE08usoMediaF5NamesSayAD0ckF4NameOGyF', 

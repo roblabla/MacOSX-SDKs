@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SiriNLUTypes.framework/Versions/A/SiriNLUTypes'
 swift-abi-version: 7
 exports:
@@ -13,8 +12,7 @@ exports:
                        __ZTSN4siri8ontology17OntologyExceptionE, __ZTSN4siri8ontology21OntologyBaseExceptionE, 
                        __ZTSN4siri8ontology28UsoGraphProtoReaderExceptionE, __ZTSN4siri8ontology28UsoGraphProtoWriterExceptionE, 
                        __ZTSN5apple4aiml12flatbuffers216DefaultAllocatorE, __ZTSN5apple4aiml12flatbuffers29AllocatorE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12SiriNLUTypes0A17_Common_BoolValueV03hasE0Sbvg', '_$s12SiriNLUTypes0A17_Common_BoolValueV03hasE0SbvpMV', 
                        '_$s12SiriNLUTypes0A17_Common_BoolValueV04hashE0Sivg', '_$s12SiriNLUTypes0A17_Common_BoolValueV04hashE0SivpMV', 
                        '_$s12SiriNLUTypes0A17_Common_BoolValueV05clearE0yyF', '_$s12SiriNLUTypes0A17_Common_BoolValueV13decodeMessage7decoderyxz_tK21InternalSwiftProtobuf7DecoderRzlF', 

@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriAutoCompleteAPI.framework/Versions/A/SiriAutoCompleteAPI'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s19SiriAutoCompleteAPI025StopWordAndNonSignificantF11ListUpdaterMp', 
                        '_$s19SiriAutoCompleteAPI025StopWordAndNonSignificantF11ListUpdaterP06updatefJ06localeySS_tFTj', 
                        '_$s19SiriAutoCompleteAPI025StopWordAndNonSignificantF11ListUpdaterP06updatefJ06localeySS_tFTq', 

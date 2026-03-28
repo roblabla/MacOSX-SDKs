@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDSupport.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -11,8 +10,7 @@ exports:
                        __ZTS17AwdMetadataLoader, __ZTSN5boost6system6detail12std_categoryE, 
                        __ZTSN5boost6system6detail21system_error_categoryE, __ZTSN5boost6system6detail22generic_error_categoryE, 
                        __ZTSNSt3__120__shared_ptr_emplaceI17AwdMetadataLoaderNS_9allocatorIS1_EEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __Z14sDumpMetricLogNSt3__110shared_ptrI17AwdMetadataLoaderEEPKvm10DumpFormat, 
                        __Z14sGetMetricNameRKNSt3__110shared_ptrI17AwdMetadataLoaderEEj, 
                        __Z15sDumpMetricFileNSt3__110shared_ptrI17AwdMetadataLoaderEEPKvm10DumpFormat, 

@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UniversalControl.framework/Versions/A/UniversalControl'
-current-version: 174.1.5
+current-version: 174.4.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16UniversalControl08UniveralB9ErrorCodeO21connectionDeviceLimityA2CmFWC', 
                        '_$s16UniversalControl08UniveralB9ErrorCodeO7genericyA2CmFWC', 
                        '_$s16UniversalControl08UniveralB9ErrorCodeO8rawValueACSgSi_tcfC', 

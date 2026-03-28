@@ -1,16 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreServicesInternal.framework/Versions/A/CoreServicesInternal'
-current-version: 579.2.3
+current-version: 579.4.8
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ CoreFoundation, CoreServicesInternalUnitTests, ScopedBookmarkAgent ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __CFURLBookmarkDataCopyDescription, __CFURLBookmarkDataCreateByAddingSecurityScope, 
                        __CFURLBookmarkDataCreateByAddingSecurityScopeWithKey, __CFURLBookmarkDataIsSecurityScoped, 
                        __CFURLBookmarkToAliasHandle, __CFURLCompareBookmarkData, 
@@ -47,8 +44,7 @@ exports:
                        __URLEnumeratorGetTypeID, __URLEnumeratorGetURLsBulk, __URLEnumeratorSkipDescendents, 
                        __URLReplaceObject ]
 reexports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _kCFURLBookmarkOriginalPathKey, _kCFURLBookmarkOriginalRelativePathComponentsArrayKey, 
                        _kCFURLBookmarkOriginalRelativePathKey, _kCFURLBookmarkOriginalVolumeCreationDateKey, 
                        _kCFURLBookmarkOriginalVolumeNameKey ]

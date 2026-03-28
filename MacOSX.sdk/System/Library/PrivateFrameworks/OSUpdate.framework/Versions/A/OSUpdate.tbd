@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/OSUpdate.framework/Versions/A/OSUpdate'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _OSInstallDidFail, _OSInstallDidStart, _OSInstallDidSucceed, 
                        _OSInstallInProgress, _OSInstallRecoveryDidFail, _OSInstallRecoveryDidStart, 
                        _OSInstallRecoveryDidSucceed, _OSUpdateVersionNumber, _OSUpdateVersionString, 
@@ -31,8 +31,8 @@ exports:
                        _SUOSUAudienceDictionaryNameKey, _SUOSUAudienceDictionaryPallasIDKey, 
                        _SUOSUAudienceDictionaryProfileLinkKey, _SUOSUAutoEnrolledInAutoUpdateIdentifier, 
                        _SUOSUAutoScheduledOSUpdateAvailableIdentifier, _SUOSUAutomaticBackgroundScanFinishedNotification, 
-                       _SUOSUAutomaticBackgroundScanInitiatedNotification, _SUOSUClientInitiatedScanSucceeded, 
-                       _SUOSUConfigurationDictionaryAutoAppUpdatesEnabledKey, _SUOSUConfigurationDictionaryAutoUpdatesEnabledKey, 
+                       _SUOSUAutomaticBackgroundScanInitiatedNotification, _SUOSUBetaEnrollmentChangedNotification, 
+                       _SUOSUClientInitiatedScanSucceeded, _SUOSUConfigurationDictionaryAutoUpdatesEnabledKey, 
                        _SUOSUConfigurationDictionaryAutomaticallyCheckForUpdatesEnabledKey, 
                        _SUOSUConfigurationDictionaryBackgroundDownloadsEnabledKey, 
                        _SUOSUConfigurationDictionaryIsDefaultLegacyCatalogKey, _SUOSUConfigurationDictionaryLegacyCatalogURLKey, 
@@ -156,19 +156,21 @@ exports:
                        _SUOSUUserActionDetailsKeyLicenseAgreementText, _SUOSUUserActionDetailsKeyMajorProduct, 
                        _SUOSUUserActionDetailsKeyMoreInfoLink, _SUOSUUserActionDetailsKeyMustCloseBundleIdentifiers, 
                        _SUOSUUserActionDetailsKeyTitle, _SUOSUUserActionDetailsKeyWarningText, 
-                       _SUOSUUserActionString, __reachability_callback, __scheduledWakePowerNotificationCallback, 
-                       _k2GiB, _kAutoUpdatePolicyUpdateEligibilityPeriod, _kSplatNotificationMinimumDelaySinceFirstOffer ]
+                       _SUOSUUserActionString, _TelemetryStringForReclamationType, 
+                       __scheduledWakePowerNotificationCallback, _k2GiB, _kAppleInternalTimeInPreparedStateBeforeBackgroundScan, 
+                       _kAutoUpdatePolicyUpdateEligibilityPeriod, _kSplatNotificationMinimumDelaySinceFirstOffer ]
     objc-classes:    [ SUOSUAppQuitObserver, SUOSUAppStoreAuditInfo, SUOSUAuthenticationManager, 
                        SUOSUAuthorizationController, SUOSUBackgroundDownloadEvaluator, 
-                       SUOSUBadgePolicy, SUOSUCatalogConfiguration, SUOSUCatalogManager, 
-                       SUOSUCatalogServer, SUOSUClient, SUOSUCloudDevice, SUOSUCloudDeviceManager, 
-                       SUOSUDDMController, SUOSUEANReader, SUOSUError, SUOSUExternalUpdateProvider, 
-                       SUOSUFollowUpHelper, SUOSUInactivityPredictor, SUOSUInstallTonightManager, 
-                       SUOSULastLockActionScheduler, SUOSULaterObserver, SUOSULoginCredentialPolicy, 
-                       SUOSULoginCredentialPolicyManager, SUOSULogoutObserver, SUOSUMDMController, 
-                       SUOSUMSUScanOptions, SUOSUMacBuddyController, SUOSUMachineState, 
-                       SUOSUMajorProduct, SUOSUMajorProductStubImpl, SUOSUManagedServiceDaemon, 
-                       SUOSUNetworkReachabilityMonitor, SUOSUNotificationManagerController, 
+                       SUOSUBackgroundScanPolicy, SUOSUBadgePolicy, SUOSUBetaEnrollmentManager, 
+                       SUOSUCatalogConfiguration, SUOSUCatalogManager, SUOSUCatalogServer, 
+                       SUOSUClient, SUOSUCloudDevice, SUOSUCloudDeviceManager, SUOSUDDMController, 
+                       SUOSUDDMErrorReporter, SUOSUEANReader, SUOSUError, SUOSUExternalUpdateProvider, 
+                       SUOSUFollowUpHelper, SUOSUInBoxUpdateController, SUOSUInactivityPredictor, 
+                       SUOSUInstallTonightManager, SUOSULastLockActionScheduler, 
+                       SUOSULaterObserver, SUOSULoginCredentialPolicy, SUOSULoginCredentialPolicyManager, 
+                       SUOSULogoutObserver, SUOSUMDMController, SUOSUMSUScanOptions, 
+                       SUOSUMacBuddyController, SUOSUMachineState, SUOSUMajorProduct, 
+                       SUOSUMajorProductStubImpl, SUOSUManagedServiceDaemon, SUOSUNotificationManagerController, 
                        SUOSUPostLogoutInstallOperation, SUOSUPostLogoutInstallOptions, 
                        SUOSUPostLogoutModeRestarter, SUOSUPowerEventObserver, SUOSUPowerPolicy, 
                        SUOSUPowerSource, SUOSUProduct, SUOSUProductStub, SUOSUProductStubImpl, 

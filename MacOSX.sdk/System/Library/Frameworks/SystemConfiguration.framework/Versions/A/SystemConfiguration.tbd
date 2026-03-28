@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration'
-current-version: 1385.60.3
+current-version: 1405.100.8
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CNCopyCurrentNetworkInfo, _CNCopySupportedInterfaces, _CNMarkPortalOffline, 
                        _CNMarkPortalOnline, _CNSetSupportedSSIDs, _DHCPClientPreferencesCopyApplicationOptions, 
                        _DHCPClientPreferencesSetApplicationOptions, _DHCPInfoGetLeaseExpirationTime, 
@@ -474,7 +472,7 @@ exports:
                        _kSCValNetVPNOnDemandRuleInterfaceTypeMatchWiFi, _kSCValNetVPNPluginCapabilityAuth, 
                        _kSCValNetVPNPluginCapabilityConnect, _kVPNConfigurationKeyCertificateRef, 
                        _kVPNConfigurationKeyPersistentRef, _kVPNConfigurationOptionTunnelType ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _SCBondInterfaceCopyAll, _SCBondInterfaceCopyAvailableMemberInterfaces, 
                        _SCBondInterfaceCopyStatus, _SCBondInterfaceCreate, _SCBondInterfaceGetMemberInterfaces, 
                        _SCBondInterfaceGetMode, _SCBondInterfaceGetOptions, _SCBondInterfaceRemove, 

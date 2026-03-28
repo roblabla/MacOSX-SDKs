@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-macos26.2 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftARKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature StrictConcurrency -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 746.60.7 -module-name ARKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-macos26.4 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftARKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature StrictConcurrency -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 746.100.3 -module-name ARKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 @_exported import ARKit
 import Foundation
 import Network
@@ -59,9 +59,7 @@ public struct AnchorUpdateSequence<AnchorType> : _Concurrency.AsyncSequence wher
   public func makeAsyncIterator() -> ARKit.AnchorUpdateSequence<AnchorType>.Iterator<AnchorType>
   public struct Iterator<TypeOfAnchor> : _Concurrency.AsyncIteratorProtocol, @unchecked Swift.Sendable where TypeOfAnchor : ARKit.Anchor {
     public typealias Element = ARKit.AnchorUpdate<TypeOfAnchor>
-    #if compiler(>=5.3) && $NonescapableTypes
     public mutating func next() async -> ARKit.AnchorUpdateSequence<AnchorType>.Iterator<TypeOfAnchor>.Element?
-    #endif
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
     @available(macOS, unavailable, introduced: 15.0)
     @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
@@ -90,21 +88,15 @@ final public class ARKitSession : Swift.CustomStringConvertible, @unchecked Swif
         get
       }
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var failureReason: Swift.String? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var recoverySuggestion: Swift.String? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var errorDescription: Swift.String? {
       get
     }
-    #endif
     public var code: ARKit.ARKitSession.Error.Code {
       get
     }
@@ -133,9 +125,7 @@ final public class ARKitSession : Swift.CustomStringConvertible, @unchecked Swif
     public typealias Element = ARKit.ARKitSession.Event
     public func makeAsyncIterator() -> ARKit.ARKitSession.Events.Iterator
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> ARKit.ARKitSession.Events.Element?
-      #endif
       @available(visionOS 1.0, macOS 26.0, *)
       public typealias Element = ARKit.ARKitSession.Events.Element
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 26.0, *)
@@ -246,11 +236,9 @@ public struct BarcodeAnchor : ARKit.Anchor, @unchecked Swift.Sendable {
   public var symbology: ARKit.BarcodeAnchor.Symbology {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var payloadString: Swift.String? {
     get
   }
-  #endif
   public var payloadData: Foundation.Data {
     get
   }
@@ -312,16 +300,12 @@ final public class CameraFrameProvider : ARKit.DataProvider, @unchecked Swift.Se
   }
   public init()
   @objc deinit
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func cameraFrameUpdates(for cameraVideoFormat: ARKit.CameraVideoFormat) -> ARKit.CameraFrameProvider.CameraFrameUpdates?
-  #endif
   public struct CameraFrameUpdates : _Concurrency.AsyncSequence {
     public typealias Element = ARKit.CameraFrame
     public func makeAsyncIterator() -> ARKit.CameraFrameProvider.CameraFrameUpdates.Iterator
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> ARKit.CameraFrameProvider.CameraFrameUpdates.Element?
-      #endif
       @available(visionOS 2.0, *)
       @available(macOS, unavailable)
       public typealias Element = ARKit.CameraFrameProvider.CameraFrameUpdates.Element
@@ -435,9 +419,7 @@ public struct CameraFrame : @unchecked Swift.Sendable, Swift.CustomStringConvert
       get
     }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func sample(for position: ARKit.CameraFrameProvider.CameraPosition) -> ARKit.CameraFrame.Sample?
-  #endif
   public var primarySample: ARKit.CameraFrame.Sample {
     get
   }
@@ -516,11 +498,9 @@ public struct EnvironmentProbeAnchor : ARKit.Anchor, @unchecked Swift.Sendable, 
   public var originFromAnchorTransform: simd.simd_float4x4 {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var environmentTexture: (any Metal.MTLTexture)? {
     get
   }
-  #endif
   @available(visionOS 2.0, *)
   public var cameraScaleReference: Swift.Float {
     get
@@ -647,11 +627,9 @@ extension ARKit.HandSkeleton : Swift.Equatable {
 extension ARKit.HandSkeleton {
   @available(visionOS 1.0, *)
   public struct Joint : Swift.CustomStringConvertible, @unchecked Swift.Sendable {
-    #if compiler(>=5.3) && $NonescapableTypes
     public var parentJoint: ARKit.HandSkeleton.Joint? {
       get
     }
-    #endif
     public var name: ARKit.HandSkeleton.JointName {
       get
     }
@@ -721,11 +699,9 @@ extension ARKit.HandSkeleton.Joint : Swift.Equatable {
 @available(visionOS 1.0, *)
 @available(macOS, unavailable)
 final public class HandTrackingProvider : ARKit.DataProvider, @unchecked Swift.Sendable {
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var latestAnchors: (leftHand: ARKit.HandAnchor?, rightHand: ARKit.HandAnchor?) {
     get
   }
-  #endif
   final public var state: ARKit.DataProviderState {
     get
   }
@@ -740,10 +716,8 @@ final public class HandTrackingProvider : ARKit.DataProvider, @unchecked Swift.S
   final public var anchorUpdates: ARKit.AnchorUpdateSequence<ARKit.HandAnchor> {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS 2.0, *)
   final public func handAnchors(at timestamp: Foundation.TimeInterval) -> (leftHand: ARKit.HandAnchor?, rightHand: ARKit.HandAnchor?)
-  #endif
   final public var description: Swift.String {
     get
   }
@@ -782,11 +756,9 @@ public struct HandAnchor : ARKit.TrackableAnchor, @unchecked Swift.Sendable {
   public var originFromAnchorTransform: simd.simd_float4x4 {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var handSkeleton: ARKit.HandSkeleton? {
     get
   }
-  #endif
   public var chirality: ARKit.HandAnchor.Chirality {
     get
   }
@@ -883,9 +855,7 @@ public struct MeshAnchor : ARKit.Anchor, @unchecked Swift.Sendable {
     case homeAppliance
     case tv
     case plant
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: ObjectiveC.NSInteger)
-    #endif
     @available(visionOS, introduced: 1.0, deprecated: 26.0, renamed: "SurfaceClassification")
     @available(macOS, unavailable)
     public typealias RawValue = ObjectiveC.NSInteger
@@ -903,11 +873,9 @@ public struct MeshAnchor : ARKit.Anchor, @unchecked Swift.Sendable {
     public var faces: ARKit.GeometryElement {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var classifications: ARKit.GeometrySource? {
       get
     }
-    #endif
     public var description: Swift.String {
       get
     }
@@ -959,21 +927,15 @@ final public class ObjectTrackingProvider : ARKit.DataProvider, @unchecked Swift
     public var code: ARKit.ObjectTrackingProvider.Error.Code {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var failureReason: Swift.String? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var recoverySuggestion: Swift.String? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var errorDescription: Swift.String? {
       get
     }
-    #endif
     public var description: Swift.String {
       get
     }
@@ -989,9 +951,7 @@ final public class ObjectTrackingProvider : ARKit.DataProvider, @unchecked Swift
     }
     public init()
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(referenceObjects: [ARKit.ReferenceObject], trackingConfiguration: ARKit.ObjectTrackingProvider.TrackingConfiguration? = nil)
-  #endif
   final public var trackingConfiguration: ARKit.ObjectTrackingProvider.TrackingConfiguration {
     get
   }
@@ -1074,9 +1034,7 @@ public enum SurfaceClassification : Swift.Int, Swift.Sendable, Swift.CustomStrin
   public var description: Swift.String {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
-  #endif
   @available(visionOS 26.0, *)
   @available(macOS, unavailable)
   public typealias RawValue = Swift.Int
@@ -1223,24 +1181,18 @@ extension ARKit.PlaneAnchor.Geometry.Extent : Swift.Equatable {
 @available(visionOS 1.0, *)
 @available(macOS, unavailable)
 public struct ReferenceImage : Swift.CustomStringConvertible, @unchecked Swift.Sendable {
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func loadReferenceImages(inGroupNamed groupName: Swift.String, bundle: Foundation.Bundle? = nil) -> [ARKit.ReferenceImage]
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var name: Swift.String? {
     get
     set
   }
-  #endif
   public var physicalSize: CoreFoundation.CGSize {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS 2.0, *)
   public var resourceGroupName: Swift.String? {
     get
   }
-  #endif
   public init(pixelBuffer: CoreVideo.CVPixelBuffer, physicalSize: CoreFoundation.CGSize, orientation: ImageIO.CGImagePropertyOrientation = .up)
   public init(cgimage: CoreGraphics.CGImage, physicalSize: CoreFoundation.CGSize, orientation: ImageIO.CGImagePropertyOrientation = .up)
   public var description: Swift.String {
@@ -1258,23 +1210,17 @@ public struct ReferenceObject : Swift.CustomStringConvertible, @unchecked Swift.
   @available(visionOS 2.0, *)
   public static func == (lhs: ARKit.ReferenceObject, rhs: ARKit.ReferenceObject) -> Swift.Bool
   public init(from url: Foundation.URL) async throws
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(named: Swift.String, from bundle: Foundation.Bundle? = nil) async throws
-  #endif
   public typealias ID = Foundation.UUID
   public var id: Foundation.UUID {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var inputFile: Foundation.URL? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var usdzFile: Foundation.URL? {
     get
   }
-  #endif
   public var name: Swift.String {
     get
   }
@@ -1303,11 +1249,9 @@ final public class RoomTrackingProvider : ARKit.DataProvider, @unchecked Swift.S
   final public var anchorUpdates: ARKit.AnchorUpdateSequence<ARKit.RoomAnchor> {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var currentRoomAnchor: ARKit.RoomAnchor? {
     get
   }
-  #endif
   final public var description: Swift.String {
     get
   }
@@ -1400,11 +1344,9 @@ public struct ViewpointProperties : @unchecked Swift.Sendable, Swift.CustomStrin
 @available(macOS, unavailable)
 final public class StereoPropertiesProvider : ARKit.DataProvider, @unchecked Swift.Sendable {
   public init()
-  #if compiler(>=5.3) && $NonescapableTypes
   final public var latestViewpointProperties: ARKit.ViewpointProperties? {
     get
   }
-  #endif
   final public var state: ARKit.DataProviderState {
     get
   }
@@ -1437,21 +1379,15 @@ final public class WorldTrackingProvider : ARKit.DataProvider, @unchecked Swift.
         get
       }
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var failureReason: Swift.String? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var recoverySuggestion: Swift.String? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var errorDescription: Swift.String? {
       get
     }
-    #endif
     public var code: ARKit.WorldTrackingProvider.Error.Code {
       get
     }
@@ -1471,16 +1407,12 @@ final public class WorldTrackingProvider : ARKit.DataProvider, @unchecked Swift.
   @available(visionOS 26.0, *)
   @available(macOS, unavailable)
   final public func removeAllAnchors() async throws
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(visionOS 2.0, *)
   @available(macOS, unavailable)
   final public var allAnchors: [ARKit.WorldAnchor]? {
     get async
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func queryDeviceAnchor(atTimestamp timestamp: Foundation.TimeInterval) -> ARKit.DeviceAnchor?
-  #endif
   public init()
   public static var isSupported: Swift.Bool {
     get

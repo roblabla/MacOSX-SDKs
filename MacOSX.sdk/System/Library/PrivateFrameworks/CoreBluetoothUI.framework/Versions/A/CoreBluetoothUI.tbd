@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreBluetoothUI.framework/Versions/A/CoreBluetoothUI'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _BluetoothInquiryCacheTimeout, _CBUILogComponent, _CBUILogInit, 
                        _CBUILogInitOnce, _CoreBluetoothUIVersionNumber, _CoreBluetoothUIVersionString, 
                        _closeButtonIconColor, _closeButtonIconColorPushed, _closeButtonImage, 

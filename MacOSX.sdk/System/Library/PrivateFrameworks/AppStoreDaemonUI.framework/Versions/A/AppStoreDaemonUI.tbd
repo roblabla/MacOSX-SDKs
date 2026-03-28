@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppStoreDaemonUI.framework/Versions/A/AppStoreDaemonUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16AppStoreDaemonUI21ChooseVolumePresenterC11Observation10ObservableAAMc', 
                        '_$s16AppStoreDaemonUI21ChooseVolumePresenterC4name4size4icon09offerBootF0ACSS_s6UInt64VSo7NSImageCSbtcfC', 
                        '_$s16AppStoreDaemonUI21ChooseVolumePresenterC4name4size4icon09offerBootF0ACSS_s6UInt64VSo7NSImageCSbtcfCTj', 

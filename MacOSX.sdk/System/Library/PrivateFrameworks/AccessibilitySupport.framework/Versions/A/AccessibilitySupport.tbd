@@ -1,26 +1,26 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/AccessibilitySupport'
 current-version: 0
 compatibility-version: 0
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityEvents.framework/Versions/A/AccessibilityEvents', 
                        '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityFoundation.framework/Versions/A/AccessibilityFoundation', 
                        '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityKit.framework/Versions/A/AccessibilityKit', 
                        '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityVisuals.framework/Versions/A/AccessibilityVisuals' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AccessibilitySupportVersionNumber, _AccessibilitySupportVersionString ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityEvents.framework/Versions/A/AccessibilityEvents'
 current-version: 2
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AXEFixedGlyphForMacKeyCode, _AXEGlyphForMacKeyCode, _AXEGlyphForPureModifierFlags, 
                        _AXEHIDDeviceGetDeviceInfo, _AXEHIDDeviceGetDeviceInfoUsingCache, 
                        _AXEHIDDeviceHidServiceIDKey, _AXEHIDDeviceInfoKeys, _AXEIsSynthesizedEvent, 
@@ -51,12 +51,12 @@ exports:
                        AXEVirtualKeyboard ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityFoundation.framework/Versions/A/AccessibilityFoundation'
 current-version: 2
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AXARIAPopupValueDialog, _AXARIAPopupValueGrid, _AXARIAPopupValueListbox, 
                        _AXARIAPopupValueMenu, _AXARIAPopupValueTree, _AXEGetLog, 
                        _AXFAXElementsEqual, _AXFAnnouncementRequestedNotification, 
@@ -181,12 +181,12 @@ exports:
                        _AXFSelectorMap ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityKit.framework/Versions/A/AccessibilityKit'
 current-version: 2
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AXKBundle, _AXKCmyk2rgb, _AXKContrastRatioForColor, _AXKCursorDidCrossScreenNotification, 
                        _AXKCursorDidTeleportToScreenNotification, _AXKDebugPrintHierarchy, 
                        _AXKDisableTRMStateIfNeeded, _AXKDisableTRMStateIfNeededWithCompletionBlock, 
@@ -221,12 +221,12 @@ exports:
                        _AXKClassRegistrar ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityVisuals.framework/Versions/A/AccessibilityVisuals'
 current-version: 2
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AXVAccessibilityVisualsSpaceUUID, _AXVBrailleTransliterationAttribute, 
                        _AXVBundle, _AXVCaptionWindowLevel, _AXVCreateIconWithImageMask, 
                        _AXVDefaultVoiceOverStyleBorderWidth, _AXVFiniteRectForRect, 

@@ -81,12 +81,25 @@
 #define HostToUSB64 OSSwapHostToLittleInt64
 #endif
 
-#define kIOUSB20BitrateLow    (1500 * 1000ULL)
-#define kIOUSB20BitrateFull   (  12 * 1000 * 1000ULL)
-#define kIOUSB20BitrateHigh   ( 480 * 1000 * 1000ULL)
-#define kIOUSB30Bitrate5Gbps  (   5 * 1000 * 1000 * 1000ULL)
-#define kIOUSB30Bitrate10Gbps (  10 * 1000 * 1000 * 1000ULL)
-#define kIOUSB32Bitrate20Gbps (  20 * 1000 * 1000 * 1000ULL)
+enum
+{
+    kIOUSBLinkSpeedLow          = (              1500 * 1000ULL),
+    kIOUSBLinkSpeedFull         = (         12 * 1000 * 1000ULL),
+    kIOUSBLinkSpeedHigh         = (        480 * 1000 * 1000ULL),
+    kIOUSBLinkSpeed5Gbps        = (   5 * 1000 * 1000 * 1000ULL),
+    kIOUSBLinkSpeed10Gbps       = (  10 * 1000 * 1000 * 1000ULL),
+    kIOUSBLinkSpeed20Gbps       = (  20 * 1000 * 1000 * 1000ULL),
+    kIOUSBLinkSpeed40Gbps       = (  40 * 1000 * 1000 * 1000ULL),
+    kIOUSBLinkSpeed80Gbps       = (  80 * 1000 * 1000 * 1000ULL),
+};
+
+// Obsolete definitions
+#define kIOUSB20BitrateLow    kIOUSBLinkSpeedLow
+#define kIOUSB20BitrateFull   kIOUSBLinkSpeedFull
+#define kIOUSB20BitrateHigh   kIOUSBLinkSpeedHigh
+#define kIOUSB30Bitrate5Gbps  kIOUSBLinkSpeed5Gbps
+#define kIOUSB30Bitrate10Gbps kIOUSBLinkSpeed10Gbps
+#define kIOUSB32Bitrate20Gbps kIOUSBLinkSpeed20Gbps
 
 /*!
  * @enum       kIOUSBAppleVendorID
@@ -727,7 +740,7 @@ struct IOUSBDeviceCapabilityBillboardAltMode
     uint8_t  bDescriptorType;
     uint8_t  bDevCapabilityType;
     uint8_t  bIndex;
-    uint16_t dwAlternateModeVdo;
+    uint32_t dwAlternateModeVdo;
 } __attribute__((packed));
 
 typedef struct IOUSBDeviceCapabilityBillboardAltMode IOUSBDeviceCapabilityBillboardAltMode;
@@ -773,8 +786,8 @@ typedef struct IOUSBSuperSpeedEndpointCompanionDescriptor IOUSBSuperSpeedEndpoin
 
 enum
 {
-    kIOUSBSuperSpeedEndpointCompanionDescriptorMaxBurst      = IOUSBBitRange(0, 4),
-    kIOUSBSuperSpeedEndpointCompanionDescriptorMaxBurstPhase = IOUSBBitRangePhase(0, 4),
+    kIOUSBSuperSpeedEndpointCompanionDescriptorMaxBurst      = IOUSBBitRange(0, 7),
+    kIOUSBSuperSpeedEndpointCompanionDescriptorMaxBurstPhase = IOUSBBitRangePhase(0, 7),
 
     kIOUSBSuperSpeedEndpointCompanionDescriptorBulkMaxStreams      = IOUSBBitRange(0, 4),
     kIOUSBSuperSpeedEndpointCompanionDescriptorBulkMaxStreamsPhase = IOUSBBitRangePhase(0, 4),
@@ -1237,6 +1250,14 @@ enum tIOUSB30HubExtStatus
 
     kIOUSB30HubExtStatusTxLaneCount      = IOUSBBitRange(12, 15),
     kIOUSB30HubExtStatusTxLaneCountPhase = IOUSBBitRangePhase(12, 15)
+};
+
+#pragma mark USB 4.0 constants
+// USB 4.0 V2 Table 9-12
+enum tIOUSB40LinkStateTimeout
+{
+    kPortReadyTimeout = 1100,   // ms
+    kKeepAliveTimeout = 20,     // us
 };
 
 #endif /* AppleUSBCommon_AppleUSBDefinitions_h */

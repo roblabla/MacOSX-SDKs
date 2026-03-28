@@ -14,27 +14,17 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-/// An object that tracks some state required for proper and efficient operation of ``CKSyncEngine-5sie5``.
+/// An object that manages the sync engine's state.
 ///
-/// ``CKSyncEngine-5sie5`` needs to track several things in order to properly sync.
-/// For example, it needs to remember the last server change tokens for your database and zones.
-/// It also needs to keep track of things like the last known user record ID and other various pieces of state.
+/// To reliably and consistently sync your app's data, a sync engine keeps a record of several important pieces of data, such as server changes tokens (for databases and record zones), subscription identifiers, the most recent ``CKUserIdentity/userRecordID``, and so on.
+/// This class automatically manages that state on behalf of your app, but there are certain elements you can modify.
+/// For example, you control the list of pending changes to send to the iCloud servers and manipulate that list using the ``addPendingDatabaseChanges:`` and ``addPendingRecordZoneChanges:`` methods.
+/// If there aren't any scheduled sync operations when you invoke these methods, the engine automatically schedules one.
 ///
-/// A lot of this state is hidden internally, but some of it you can control.
-///
-/// ## Pending changes
-///
-/// One of the main things you can control is the list of pending changes to send to the server.
-/// You can control these by calling functions like ``addPendingDatabaseChanges:`` and ``addPendingRecordZoneChanges:``.
-/// When you add new pending changes, the sync engine will automatically schedule a task to sync with the server.
-///
-/// ## State serialization
-///
-/// ``CKSyncEngine-5sie5`` will occasionally update its state in the background.
-/// When it updates its state, your delegate will receive a ``CKSyncEngineStateUpdateEvent``.
-///
-/// This event will contain a ``CKSyncEngineStateSerialization``, which you should persist locally.
-/// The next time your process launches, you initialize your sync engine with the last state serialization you received.
+/// An engine's state changes periodically and, when it does, the sync engine dispatches an event of type  ``CKSyncEngineStateUpdateEvent`` to your delegate.
+/// The event contains an instance of ``CKSyncEngineStateSerialization`` and, on receipt of such an event, it's your responsibility to persist the serialized state to disk so that it's available across app launches.
+/// On the next initialization of the sync engine, you provide the most recently persisted state as part of the engine's configuration.
+/// For more information, see ``CKSyncEngineConfiguration/initWithDatabase:stateSerialization:delegate:``.
 API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0))
 NS_REFINED_FOR_SWIFT
 CK_SUBCLASSING_RESTRICTED
@@ -44,65 +34,108 @@ NS_SWIFT_SENDABLE
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
-/// A list of record changes that need to be sent to the server.
+#pragma mark - Pending Changes
+
+/// A list of record zone changes that the sync engine has yet to send to the iCloud servers.
 ///
-/// ``CKSyncEngine-5sie5`` provides the convenience of tracking your pending record zone changes.
-/// When the user makes some changes that need to be sent to the server, you can track them in this list.
-/// Then, you can use this list when creating your next ``CKSyncEngineRecordZoneChangeBatch`` in your ``CKSyncEngineDelegate-1q7g8``.
+/// This array contains any pending record zone changes to send to the iCloud servers.
+/// After the sync engine sends those changes, your app's sync delegate receives an event of type ``CKSyncEngineSentRecordZoneChangesEvent``.
 ///
-/// The sync engine will ensure consistency and deduplicate these pending changes under the hood.
-/// For example, if you add a pending save for record A, then record B, then record A again, this will result in a list of `[saveRecordA, saveRecordB]`.
-/// Similarly, if you add a pending save for record A, then add a pending delete for the same record A, this will result in a single pending change of `[deleteRecordA]`.
+/// The sync engine keeps this list up-to-date while sending changes to the server.
+/// For example, when it successfully saves a record, it removes that change from this list.
+/// If it fails to send a change due to some retryable error (e.g. a network failure), it keeps that change in this list.
 ///
-/// The sync engine will manage this list while it sends changes to the server.
-/// For example, when it successfully saves a record, it will remove that change from this list.
-/// If it fails to send a change due to some retryable error (e.g. a network failure), it will keep that change in this list.
-///
-/// If you'd prefer to track pending changes yourself, you can use ``CKSyncEngine/State/hasPendingUntrackedChanges`` instead.
+/// Use the ``CKSyncEngineState/addPendingRecordZoneChanges:`` and ``CKSyncEngineState/removePendingRecordZoneChanges:`` methods to modify the array's contents.
 @property (readonly, copy) NSArray<CKSyncEnginePendingRecordZoneChange *> *pendingRecordZoneChanges;
 
-/// A list of database changes that need to be sent to the server, similar to `pendingRecordZoneChanges`.
+/// A list of database changes that the sync engine has yet to send to the iCloud servers.
+///
+/// This array contains any pending database changes to send to the iCloud servers.
+/// After the sync engine sends those changes, your app's sync delegate receives an event of type ``CKSyncEngineSentDatabaseChangesEvent``.
+///
+/// The sync engine keeps this list up-to-date while sending changes to the server.
+/// For example, when it successfully saves a zone, it will remove that change from this list.
+/// If it fails to send a change due to some retryable error (e.g. a network failure), it will keep that change in this list.
+///
+/// Use the ``CKSyncEngineState/addPendingDatabaseChanges:`` and ``CKSyncEngineState/removePendingDatabaseChanges:`` methods to modify the array's contents.
 @property (readonly, copy) NSArray<CKSyncEnginePendingDatabaseChange *> *pendingDatabaseChanges;
 
-/// This represents whether or not you have pending changes to send to the server that aren't tracked in ``CKSyncEngine/State/pendingRecordZoneChanges``.
-/// This is useful if you want to track pending changes in your own local database instead of the sync engine state.
+/// A Boolean value that indicates whether there are pending changes that the sync engine is unaware of.
 ///
-/// When this property is set, the sync engine will automatically schedule a sync.
-/// When the sync task runs, it will ask your delegate for pending changes in ``CKSyncEngineDelegate/nextRecordZoneChangeBatch(_:syncEngine:)``.
+/// Use this property to inform the sync engine that there are pending changes other than those available in ``CKSyncEngineState/pendingRecordZoneChanges``.
+/// After you set this property, the sync engine automatically schedules a send operation and, when that operation executes, asks your delegate to provide those changes by invoking the ``CKSyncEngineDelegate/syncEngine:nextRecordZoneChangeBatchForContext:`` method.
+///
+/// Using this property is optional and is necessary only if you track pending changes manually, outside of the sync engine's state.
 @property (assign) BOOL hasPendingUntrackedChanges;
 
-/// The list of zone IDs that have new changes to fetch from the server.
-/// ``CKSyncEngine-5sie5`` keeps track of these zones and will update this list as it receives new information.
+/// The identifiers of zones with changes on the server that have not yet been fetched.
+///
+/// The sync engine populates this list automatically, for example when receiving a push notification indicating new changes.
 @property (readonly, copy) NSArray<CKRecordZoneID *> *zoneIDsWithUnfetchedServerChanges;
 
-/// Adds to the list of pending record zone changes.
+/// Adds the specified record zone changes to the state.
 ///
-/// When you add a new pending change, the sync engine will automatically schedule a sync task.
+/// - Parameters:
+///   - changes: An array of record zone changes.
 ///
-/// The sync engine will ensure consistency and deduplicate these changes under the hood.
+/// Use this method to enable the sync engine to manage your pending record zone changes.
+/// For example, when someone makes a change that your app needs to send to the server, use this method to record the change.
+/// Then, when creating the change batch for the next send operation, retrieve the pending changes from the ``CKSyncEngineState/pendingRecordZoneChanges`` property.
+///
+/// If there are no scheduled sync operations when you invoke this method, the sync engine automatically schedules one to send the changes.
+/// After the engine sends those changes, it notifies your app's sync delegate with an event of type ``CKSyncEngineSentRecordZoneChangesEvent``.
+///
+/// The sync engine maintains a consistent collection of tracked pending changes, deduplicating them as necessary.
+/// The engine removes changes from the list as it sends them, but retains any that fail due to a recoverable error, such as a network issue or exceeding the rate limit.
+///
+/// - Note: The order in which you apply record zone changes is important.
+///
+///   For example:
+///   - If you add a `CKSyncEnginePendingRecordZoneChange` with type `CKSyncEnginePendingRecordZoneChangeTypeSaveRecord` for recordA then another with type `CKSyncEnginePendingRecordZoneChangeTypeDeleteRecord`, the sync engine discards the save and sends only the delete change.
+///   - If you add a `CKSyncEnginePendingRecordZoneChange` with type `CKSyncEnginePendingRecordZoneChangeTypeDeleteRecord` for recordA then another with type `CKSyncEnginePendingRecordZoneChangeTypeSaveRecord`, the sync engine discards the delete and sends only the save change.
 - (void)addPendingRecordZoneChanges:(NSArray<CKSyncEnginePendingRecordZoneChange *> *)changes NS_SWIFT_NAME(add(pendingRecordZoneChanges:));
 
-/// Removes from the list of pending record zone changes.
+/// Removes the specified record zone changes from the state.
+///
+/// - Parameters:
+///   - changes: An array of record zone changes.
+///
+/// Use this method when you no longer want the sync engine to send certain pending changes.
 - (void)removePendingRecordZoneChanges:(NSArray<CKSyncEnginePendingRecordZoneChange *> *)changes NS_SWIFT_NAME(remove(pendingRecordZoneChanges:));
 
-/// Adds to the list of pending database changes.
+/// Adds the specified database changes to the state.
 ///
-/// When you add a new pending change, the sync engine will automatically schedule a sync task.
+/// - Parameters:
+///   - changes: An array of database changes.
 ///
-/// The sync engine will ensure consistency and deduplicate these changes under the hood.
+/// Use this method to enable the sync engine to manage your pending database changes.
+/// For example, when someone makes a change that your app needs to send to the server, use this method to record the change.
+/// If there are no scheduled sync operations when you invoke this method, the sync engine automatically schedules one to send the changes.
+/// After the engine sends those changes, it notifies your app's sync delegate with an event of type ``CKSyncEngineSentDatabaseChangesEvent``.
+///
+/// The sync engine maintains a consistent collection of tracked pending changes, deduplicating them as necessary.
+/// The engine removes changes from the list as it sends them, but retains any that fail due to a recoverable error, such as a network issue, or exceeding the rate limit.
+///
+/// - Note: The order in which you apply database changes is important.
+///
+///   For example:
+///   - If you add a `CKSyncEnginePendingDatabaseChange` with type `CKSyncEnginePendingDatabaseChangeTypeSaveZone` for zoneA then another with type `CKSyncEnginePendingDatabaseChangeTypeDeleteZone`, the sync engine discards the save and sends only the delete change.
+///   - If you add a `CKSyncEnginePendingDatabaseChange` with type `CKSyncEnginePendingDatabaseChangeTypeDeleteZone` for zoneA then another with type `CKSyncEnginePendingDatabaseChangeTypeSaveZone`, the sync engine discards the delete and sends only the save change.
 - (void)addPendingDatabaseChanges:(NSArray<CKSyncEnginePendingDatabaseChange *> *)changes NS_SWIFT_NAME(add(pendingDatabaseChanges:));
 
-/// Removes from the list of pending database changes.
+/// Removes the specified database changes from the state.
+///
+/// - Parameters:
+///   - changes: An array of database changes.
+///
+/// Use this method when you no longer want the sync engine to send certain pending changes.
 - (void)removePendingDatabaseChanges:(NSArray<CKSyncEnginePendingDatabaseChange *> *)changes NS_SWIFT_NAME(remove(pendingDatabaseChanges:));
 
 @end
 
 #pragma mark - CKSyncEngineStateSerialization
 
-/// A serialized representation of a ``CKSyncEngineState``.
-///
-/// This will be passed to your delegate via ``CKSyncEngine/Event/StateUpdate``.
-/// You should use `NSSecureCoding` to persist this locally alongside your other data and use it the next time you initialize your sync engine.
+/// An opaque object that contains the serialized representation of a sync engine's current state.
 API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0))
 NS_REFINED_FOR_SWIFT
 CK_SUBCLASSING_RESTRICTED
@@ -116,6 +149,7 @@ NS_SWIFT_SENDABLE
 
 #pragma mark - CKSyncEnginePendingRecordZoneChange
 
+/// A type of change in a record zone that needs to be sent to the server.
 API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0))
 NS_REFINED_FOR_SWIFT
 typedef NS_ENUM(NSInteger, CKSyncEnginePendingRecordZoneChangeType) {
@@ -123,26 +157,37 @@ typedef NS_ENUM(NSInteger, CKSyncEnginePendingRecordZoneChangeType) {
     CKSyncEnginePendingRecordZoneChangeTypeDeleteRecord,
 };
 
-/// A change in a record zone that needs to be sent to the server.
+/// An object that describes an unsent record modification.
 API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0))
 NS_REFINED_FOR_SWIFT
 CK_SUBCLASSING_RESTRICTED
 NS_SWIFT_SENDABLE
 @interface CKSyncEnginePendingRecordZoneChange : NSObject
 
+/// Creates a record zone change of the specified type for the given record.
+///
+/// - Parameters:
+///   - recordID: The identifier of the record to change.
+///   - type: The type of change to make.
+///
+/// - Returns: An initialized record zone change.
 - (instancetype)initWithRecordID:(CKRecordID *)recordID
                             type:(CKSyncEnginePendingRecordZoneChangeType)type NS_DESIGNATED_INITIALIZER NS_SWIFT_NAME(init(_:type:));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
+/// The identifier of the modified record.
 @property (readonly, copy, nonatomic) CKRecordID *recordID;
+
+/// The type of change to make.
 @property (readonly, assign, nonatomic) CKSyncEnginePendingRecordZoneChangeType type;
 
 @end
 
 #pragma mark - CKSyncEnginePendingDatabaseChange
 
+/// Describes the type of a pending database change.
 API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0))
 NS_REFINED_FOR_SWIFT
 typedef NS_ENUM(NSInteger, CKSyncEnginePendingDatabaseChangeType) {
@@ -150,7 +195,7 @@ typedef NS_ENUM(NSInteger, CKSyncEnginePendingDatabaseChangeType) {
     CKSyncEnginePendingDatabaseChangeTypeDeleteZone,
 };
 
-/// A change in a database that needs to be sent to the server.
+/// An object that describes an unsent database modification.
 API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0))
 NS_REFINED_FOR_SWIFT
 // This class should not be subclassed. If it is, Sendable may no longer apply.
@@ -160,31 +205,47 @@ NS_SWIFT_SENDABLE
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
+/// The identifier of the record zone to change.
 @property (readonly, copy, nonatomic) CKRecordZoneID *zoneID;
+
+/// The type of database change.
 @property (readonly, assign, nonatomic) CKSyncEnginePendingDatabaseChangeType type;
 
 @end
 
-/// A zone save that needs to be sent to the server.
+/// An object that describes an unsent record zone modification.
 API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0))
 NS_REFINED_FOR_SWIFT
 CK_SUBCLASSING_RESTRICTED
 NS_SWIFT_SENDABLE
 @interface CKSyncEnginePendingZoneSave : CKSyncEnginePendingDatabaseChange
 
+/// Creates a pending zone save for the specified record zone.
+///
+/// - Parameters:
+///   - zone: The record zone to save.
+///
+/// - Returns: An initialized pending zone save.
 - (instancetype)initWithZone:(CKRecordZone *)zone NS_SWIFT_NAME(init(_:));
 
+/// The record zone to save.
 @property (readonly, copy, nonatomic) CKRecordZone *zone;
 
 @end
 
-/// A zone delete that needs to be sent to the server.
+/// An object that describes an unsent record zone deletion.
 API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0))
 NS_REFINED_FOR_SWIFT
 CK_SUBCLASSING_RESTRICTED
 NS_SWIFT_SENDABLE
 @interface CKSyncEnginePendingZoneDelete : CKSyncEnginePendingDatabaseChange
 
+/// Creates a pending zone delete for the specified record zone identifier.
+///
+/// - Parameters:
+///   - zoneID: The unique identifier of the record zone to delete.
+///
+/// - Returns: An initialized pending zone delete.
 - (instancetype)initWithZoneID:(CKRecordZoneID *)zoneID NS_SWIFT_NAME(init(_:));
 
 @end

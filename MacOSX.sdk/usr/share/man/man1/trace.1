@@ -1,6 +1,6 @@
-.\" Copyright (c) 2022-2023, Apple Inc.  All rights reserved.
+.\" Copyright (c) 2022-2025, Apple Inc.  All rights reserved.
 .\"
-.Dd December 1, 2023
+.Dd September 25, 2025
 .Dt TRACE 1
 .Os "Darwin"
 .Sh NAME
@@ -128,7 +128,7 @@ Emit a Darwin notification named
 .Ar notification-name
 with
 .Xr notify 3
-after the trace session has finished.
+after the trace session has finished and the file is completely written.
 .It Xo
 .Fl Fl end-after-duration
 .Ar duration Ns
@@ -157,6 +157,13 @@ In other words, keep a ringbuffer of events, dropping any that are older than
 time in the past.
 This can be used to reduce the impact of recording's I/O on storage,
 at the cost of higher CPU usage spent processing incoming events.
+.It Fl Fl command | Fl c Ar command Op command-options
+Target tracing at a subprocess created from the command.
+Recording ends when the command exits.
+.It Fl Fl process | Fl p Ar pid-or-name
+Target tracing at an existing process by ID (pid) or name.
+This option can be supplied multiple times and combined with
+.Fl Fl command .
 .It Fl Fl start-on-notification Ar notification-name
 Wait to start tracing until a Darwin notification matching the
 .Ar notification-name
@@ -214,6 +221,8 @@ Use the highest collection priority possible, or the value specified by
 Potentially interferes with other processes.
 .It Fl Fl collection-priority
 Set priority of collection, potentially interfering with other processes.
+.It Fl Fl kdebug-continuous-time
+Record kdebug events with continuous timestamps.
 .El
 .
 .Sh AMEND

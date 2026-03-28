@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ClockKit.framework/Versions/A/ClockKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s12CoreGraphics7CGFloatV8ClockKit14InterpolatableADMc', 
                        '_$s12CoreGraphics7CGFloatV8ClockKit14InterpolatableADWP', 
                        '_$s12CoreGraphics7CGFloatV8ClockKitE11interpolate5start3end8fractionA2C_A2CtFZ', 

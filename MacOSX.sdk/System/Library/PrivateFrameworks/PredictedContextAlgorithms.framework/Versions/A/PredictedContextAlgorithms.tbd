@@ -1,14 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PredictedContextAlgorithms.framework/Versions/A/PredictedContextAlgorithms'
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTI19IDistanceCalculator, __ZTS19IDistanceCalculator ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _PCAdler32, _PCDecodeLittleEndianUInt32, _PCDecodeVarintFromData, 
                        _PCEncodeLittleEndianUInt32, _PCEncodeVarint, _PCErrorDomain, 
                        _PCEventBundleTypeActivity, _PCEventBundleTypeOuting, _PCEventBundleTypeUnknown, 

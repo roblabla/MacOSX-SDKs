@@ -50,11 +50,7 @@
 #else
 #include <string.h>
 #endif
-#ifdef STDC_HEADERS
 #include <stddef.h>
-#else
-typedef int ptrdiff_t;
-#endif
 
 /*
  * Ensure WORDS_BIGENDIAN is defined correctly:
@@ -62,12 +58,8 @@ typedef int ptrdiff_t;
  * Darwin (where configure runs only once for multiple architectures).
  */
 
-#ifdef HAVE_SYS_TYPES_H
 #    include <sys/types.h>
-#endif
-#ifdef HAVE_SYS_PARAM_H
 #    include <sys/param.h>
-#endif
 #ifdef BYTE_ORDER
 #    ifdef BIG_ENDIAN
 #	 if BYTE_ORDER == BIG_ENDIAN
@@ -87,21 +79,17 @@ typedef int ptrdiff_t;
  * built and not outside it (where this is supported by the linker).
  */
 
-#ifndef MODULE_SCOPE
 #   ifdef __cplusplus
-#	define MODULE_SCOPE extern "C"
+#	define MODULE_SCOPE extern "C" __attribute__((__visibility__("hidden")))
 #   else
-#	define MODULE_SCOPE extern
+#	define MODULE_SCOPE extern __attribute__((__visibility__("hidden")))
 #   endif
-#endif
 
 /*
  * When Tcl_WideInt and long are the same type, there's no value in
  * having a tclWideIntType separate from the tclIntType.
  */
-#ifdef TCL_WIDE_INT_IS_LONG
 #define NO_WIDE_TYPE
-#endif
 
 /*
  * Macros used to cast between pointers and integers (e.g. when storing an int
@@ -110,22 +98,12 @@ typedef int ptrdiff_t;
  */
 
 #if !defined(INT2PTR) && !defined(PTR2INT)
-#   if defined(HAVE_INTPTR_T) || defined(intptr_t)
 #	define INT2PTR(p) ((void *)(intptr_t)(p))
 #	define PTR2INT(p) ((int)(intptr_t)(p))
-#   else
-#	define INT2PTR(p) ((void *)(p))
-#	define PTR2INT(p) ((int)(p))
-#   endif
 #endif
 #if !defined(UINT2PTR) && !defined(PTR2UINT)
-#   if defined(HAVE_UINTPTR_T) || defined(uintptr_t)
 #	define UINT2PTR(p) ((void *)(uintptr_t)(p))
 #	define PTR2UINT(p) ((unsigned int)(uintptr_t)(p))
-#   else
-#	define UINT2PTR(p) ((void *)(p))
-#	define PTR2UINT(p) ((unsigned int)(p))
-#   endif
 #endif
 
 /*
@@ -2766,19 +2744,15 @@ MODULE_SCOPE int	TclpDlopen(Tcl_Interp *interp, Tcl_Obj *pathPtr,
 			    Tcl_LoadHandle *loadHandle,
 			    Tcl_FSUnloadFileProc **unloadProcPtr);
 MODULE_SCOPE int	TclpUtime(Tcl_Obj *pathPtr, struct utimbuf *tval);
-#ifdef TCL_LOAD_FROM_MEMORY
 MODULE_SCOPE void *	TclpLoadMemoryGetBuffer(Tcl_Interp *interp, int size);
 MODULE_SCOPE int	TclpLoadMemory(Tcl_Interp *interp, void *buffer,
 			    int size, int codeSize, Tcl_LoadHandle *loadHandle,
 			    Tcl_FSUnloadFileProc **unloadProcPtr);
-#endif
 MODULE_SCOPE void	TclInitThreadStorage(void);
 MODULE_SCOPE void	TclpFinalizeThreadDataThread(void);
 MODULE_SCOPE void	TclFinalizeThreadStorage(void);
-#ifdef TCL_WIDE_CLICKS
 MODULE_SCOPE Tcl_WideInt TclpGetWideClicks(void);
 MODULE_SCOPE double	TclpWideClicksToNanoseconds(Tcl_WideInt clicks);
-#endif
 MODULE_SCOPE Tcl_Obj *	TclDisassembleByteCodeObj(Tcl_Obj *objPtr);
 
 /*
@@ -3382,14 +3356,8 @@ MODULE_SCOPE unsigned	TclHashObjKey(Tcl_HashTable *tablePtr, void *keyPtr);
  * DTrace object allocation probe macros.
  */
 
-#ifdef USE_DTRACE
-#include "tclDTrace.h"
-#define	TCL_DTRACE_OBJ_CREATE(objPtr)	TCL_OBJ_CREATE(objPtr)
-#define	TCL_DTRACE_OBJ_FREE(objPtr)	TCL_OBJ_FREE(objPtr)
-#else /* USE_DTRACE */
 #define	TCL_DTRACE_OBJ_CREATE(objPtr)	{}
 #define	TCL_DTRACE_OBJ_FREE(objPtr)	{}
-#endif /* USE_DTRACE */
 
 #ifdef TCL_COMPILE_STATS
 #  define TclIncrObjsAllocated() \
@@ -3450,7 +3418,7 @@ MODULE_SCOPE unsigned	TclHashObjKey(Tcl_HashTable *tablePtr, void *keyPtr);
 	ckfree((char *) (objPtr))
 
 #undef USE_THREAD_ALLOC
-#elif defined(TCL_THREADS) && defined(USE_THREAD_ALLOC)
+#else
 
 /*
  * The TCL_THREADS mode is like the regular mode but allocates Tcl_Obj's from
@@ -3472,28 +3440,6 @@ MODULE_SCOPE void	TclpFreeAllocCache(void *);
 #  define TclFreeObjStorage(objPtr) \
 	TclThreadFreeObj((objPtr))
 
-#else /* not PURIFY or USE_THREAD_ALLOC */
-
-#ifdef TCL_THREADS
-/* declared in tclObj.c */
-MODULE_SCOPE Tcl_Mutex	tclObjMutex;
-#endif
-
-#  define TclAllocObjStorage(objPtr) \
-	Tcl_MutexLock(&tclObjMutex); \
-	if (tclFreeObjList == NULL) { \
-	    TclAllocateFreeObjects(); \
-	} \
-	(objPtr) = tclFreeObjList; \
-	tclFreeObjList = (Tcl_Obj *) \
-		tclFreeObjList->internalRep.otherValuePtr; \
-	Tcl_MutexUnlock(&tclObjMutex)
-
-#  define TclFreeObjStorage(objPtr) \
-	Tcl_MutexLock(&tclObjMutex); \
-	(objPtr)->internalRep.otherValuePtr = (void *) tclFreeObjList; \
-	tclFreeObjList = (objPtr); \
-	Tcl_MutexUnlock(&tclObjMutex)
 #endif
 
 #else /* TCL_MEM_DEBUG */

@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Hydra.framework/Versions/C/Hydra'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ __Z12HYDLerpCubicd, __Z12HYDWrapAngled, __Z14GetMetalDevicev, 
                        __Z14HYDLerpDegreesdRK7HYDVec3S1_, __Z14HYDLerpDegreesddd, 
                        __Z15_buildHierarchylP12HYDSceneNodeP7NSArray, __Z15_normalizePoint7CGPoint6CGSize, 

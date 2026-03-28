@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NearField.framework/Versions/A/NearField'
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     libraries:       [ '/usr/lib/libnfshared.dylib' ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _MAX_HANDOVER_SELECT_DELAY, _NFAppletGetClassification, _NFSecureElementManagerSessionECDSACertificateKey, 
                        _NFSecureElementManagerSessionRSAACertificateKey, _NFSecureElementSerialNumberToString, 
                        _NFSelectVASResponseKeyAppLabel, _NFSelectVASResponseKeyAppVersion, 

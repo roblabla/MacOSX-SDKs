@@ -1,13 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/swift/libswiftRemoteMirror.dylib'
 current-version: 0
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __ZN5swift8Demangle9__runtime5warnvEjPKcP13__va_list_tag, 
                        __ZN5swift8Demangle9__runtime6fatalvEjPKcP13__va_list_tag ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ __Z15getTypeInfoKindRKN5swift10reflection8TypeInfoE, __Z20matchSequenceOfKindsPN5swift8Demangle9__runtime4NodeENSt3__16vectorINS4_5tupleIJNS2_4KindEmEEENS4_9allocatorIS8_EEEE, 
                        __ZN5swift10reflection13ArrayTypeInfoC1ElPKNS0_8TypeInfoE, 
                        __ZN5swift10reflection13ArrayTypeInfoC2ElPKNS0_8TypeInfoE, 
@@ -27,6 +27,7 @@ exports:
                        __ZN5swift10reflection13TypeConverter24getThickFunctionTypeInfoEv, 
                        __ZN5swift10reflection13TypeConverter30getDefaultActorStorageTypeInfoEv, 
                        __ZN5swift10reflection13TypeConverter32getRawUnsafeContinuationTypeInfoEv, 
+                       __ZN5swift10reflection13TypeConverter8setErrorEPKcPKNS0_7TypeRefE, 
                        __ZN5swift10reflection14TypeRefBuilder16getFieldTypeRefsEPKNS0_7TypeRefERNS0_19FieldDescriptorBaseEPNS_6remote16TypeInfoProviderERNSt3__16vectorINS0_13FieldTypeInfoENSA_9allocatorISC_EEEE, 
                        __ZN5swift10reflection14TypeRefBuilder16lookupSuperclassEPKNS0_7TypeRefE, 
                        __ZN5swift10reflection14TypeRefBuilder17decodeMangledTypeEPNS_8Demangle9__runtime4NodeEb, 
@@ -52,6 +53,7 @@ exports:
                        __ZN5swift10reflection14TypeRefBuilder30ReflectionTypeDescriptorFinder26findFieldDescriptorAtIndexEmRKNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE, 
                        __ZN5swift10reflection14TypeRefBuilder30ReflectionTypeDescriptorFinder27dumpMultiPayloadEnumSectionERNSt3__113basic_ostreamIcNS3_11char_traitsIcEEEE, 
                        __ZN5swift10reflection14TypeRefBuilder30ReflectionTypeDescriptorFinder29getMultiPayloadEnumDescriptorEPKNS0_7TypeRefE, 
+                       __ZN5swift10reflection14TypeRefBuilder30ReflectionTypeDescriptorFinder31ensureAllFieldDescriptorsCachedEv, 
                        __ZN5swift10reflection14TypeRefBuilder30ReflectionTypeDescriptorFinder35getFieldDescriptorFromExternalCacheERKNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE, 
                        __ZN5swift10reflection14TypeRefBuilder30ReflectionTypeDescriptorFinder46findReflectionInfoWithTypeRefContainingAddressENS_6remote13RemoteAddressE, 
                        __ZN5swift10reflection14TypeRefBuilder30ReflectionTypeDescriptorFinder47populateFieldTypeInfoCacheWithReflectionAtIndexEm, 
@@ -78,6 +80,7 @@ exports:
                        __ZN5swift8Demangle9__runtime11NodeFactory10createNodeENS1_4Node4KindEPKc, 
                        __ZN5swift8Demangle9__runtime11NodeFactory10createNodeENS1_4Node4KindERKNS1_10CharVectorE, 
                        __ZN5swift8Demangle9__runtime11NodeFactory10createNodeENS1_4Node4KindEy, 
+                       __ZN5swift8Demangle9__runtime11NodeFactory10createNodeENS1_4Node4KindEyh, 
                        __ZN5swift8Demangle9__runtime11NodeFactory13popCheckpointENS2_10CheckpointE, 
                        __ZN5swift8Demangle9__runtime11NodeFactory27createNodeWithAllocatedTextENS1_4Node4KindEN7__swift9__runtime4llvm9StringRefE, 
                        __ZN5swift8Demangle9__runtime11NodeFactory5clearEv, __ZN5swift8Demangle9__runtime11NodeFactory9freeSlabsEPNS2_13AllocatedSlabE, 
@@ -98,6 +101,7 @@ exports:
                        __ZN5swift8Demangle9__runtime11NodePrinter21printGenericSignatureEPNS1_4NodeEj, 
                        __ZN5swift8Demangle9__runtime11NodePrinter21printImplFunctionTypeEPNS1_4NodeEj, 
                        __ZN5swift8Demangle9__runtime11NodePrinter23printFunctionParametersEPNS1_4NodeES4_jb, 
+                       __ZN5swift8Demangle9__runtime11NodePrinter23printNextParamChildNodeEPNS1_4NodeERjNS1_34FunctionSigSpecializationParamKindEj, 
                        __ZN5swift8Demangle9__runtime11NodePrinter24printBoundGenericNoSugarEPNS1_4NodeEj, 
                        __ZN5swift8Demangle9__runtime11NodePrinter25printSpecializationPrefixEPNS1_4NodeEN7__swift9__runtime4llvm9StringRefEjS8_, 
                        __ZN5swift8Demangle9__runtime11NodePrinter36printFunctionSigSpecializationParamsEPNS1_4NodeEj, 
@@ -371,6 +375,6 @@ exports:
                        __ZNK7__swift9__runtime4llvm15SmallVectorBaseIyE4sizeEv, __ZNK7__swift9__runtime4llvm15SmallVectorBaseIyE5emptyEv, 
                        __ZNK7__swift9__runtime4llvm15SmallVectorBaseIyE8capacityEv, 
                        __ZNSt3__119piecewise_constructE ]
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ __ZN5swift8Demangle9__runtime5warnvEjPKcPc, __ZN5swift8Demangle9__runtime6fatalvEjPKcPc ]
 ...

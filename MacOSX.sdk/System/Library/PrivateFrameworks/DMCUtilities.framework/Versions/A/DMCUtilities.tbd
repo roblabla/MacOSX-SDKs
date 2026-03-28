@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DMCUtilities.framework/Versions/A/DMCUtilities'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _DMCAIDAMutableServiceContextClass, _DMCAIDAServiceOwnersManagerClass, 
                        _DMCAIDAServiceTypeCloud, _DMCAIDAServiceTypeFaceTime, _DMCAIDAServiceTypeGameCenter, 
                        _DMCAIDAServiceTypeMessages, _DMCAIDAServiceTypeStore, _DMCAKAnisetteProvisioningControllerClass, 
@@ -82,10 +82,11 @@ exports:
                        _DMCIOBluetoothMAC, _DMCIOModelPrefixString, _DMCIOModelString, 
                        _DMCIOSerialString, _DMCInstallationErrorDomain, _DMCInternalErrorDomain, 
                        _DMCIsBundleIDRunning, _DMCIsDeviceLocked, _DMCIsGreenTea, 
-                       _DMCIsSetupBuddyDone, _DMCKeybagErrorDomain, _DMCKeychainErrorDomain, 
-                       _DMCLocalizedFormat, _DMCLocalizedString, _DMCLocalizedStringByDevice, 
-                       _DMCLocalizedStringForDevice, _DMCLocationErrorDomain, _DMCLockdownSetDeviceName, 
-                       _DMCLogObjects, _DMCLoggingDirectory, _DMCManagedEventsDaemonKeepAliveFilePath, 
+                       _DMCIsSetupBuddyDone, _DMCIsSetupBuddyRunning, _DMCKeybagErrorDomain, 
+                       _DMCKeychainErrorDomain, _DMCLocalizedFormat, _DMCLocalizedString, 
+                       _DMCLocalizedStringByDevice, _DMCLocalizedStringForDevice, 
+                       _DMCLocationErrorDomain, _DMCLockdownSetDeviceName, _DMCLogObjects, 
+                       _DMCLoggingDirectory, _DMCMCInstallationErrorDomain, _DMCManagedEventsDaemonKeepAliveFilePath, 
                        _DMCManagedEventsDomain, _DMCMigrationEligibilityDescriptionABE, 
                        _DMCMigrationEligibilityDescriptionEligible, _DMCMigrationEligibilityDescriptionRRTS, 
                        _DMCMigrationEligibilityDescriptionSharedIPad, _DMCMigrationEligibilityDescriptionUnenrolled, 
@@ -98,8 +99,9 @@ exports:
                        _DMCReturnToServiceErrorDomain, _DMCSBUserNotificationDismissOnLock, 
                        _DMCSBUserNotificationDontDismissOnUnlock, _DMCSafelyCopyItemAtPathToDestinationPath, 
                        _DMCSafelyCopyItemAtPathToDestinationPathFM, _DMCSendNagDeadlineNotification, 
-                       _DMCSendSettingsChangedNotification, _DMCSendUPPTrustFailedNotification, 
-                       _DMCSendUPPVerificationOfflineNotification, _DMCSendUserSettingsChangedNotification, 
+                       _DMCSendSessionTimeoutChangedNotification, _DMCSendSettingsChangedNotification, 
+                       _DMCSendUPPTrustFailedNotification, _DMCSendUPPVerificationOfflineNotification, 
+                       _DMCSendUserSettingsChangedNotification, _DMCSessionTimeoutChangedNotification, 
                        _DMCSetSkipBackupAttributeToItemAtPath, _DMCSettingsChangedNotification, 
                        _DMCSettingsErrorDomain, _DMCSetupAssistantBundleIdentifier, 
                        _DMCStoreErrorDomain, _DMCStringForBool, _DMCSystemContainerPathWithBundleIdentifier, 
@@ -115,12 +117,12 @@ exports:
                        _MDMCloudConfigurationDetailsFilePath, _MDMCloudConfigurationPendingMigrationDetailsFilePath, 
                        _MDMCloudConfigurationSetAsideDetailsFilePath, _MDMDEPPushServiceDirectory, 
                        _MDMDEPTokenSyncActivitiesFilePath, _MDMDEPTokenSyncPropertiesFilePath, 
-                       _MDMDatabaseReturnToServiceStorageDirectory, _MDMDirtyEnrollmentStateFilePath, 
-                       _MDMDirtyPersonaFilePath, _MDMErrorDomain, _MDMEventsFilePath, 
-                       _MDMFilePath, _MDMLegacyManagedNonStoreBooksDirectory, _MDMManagedNonStoreBooksDirectory, 
-                       _MDMManagedNonStoreBooksManifestPath, _MDMManagedNonStoreBooksSystemGroupContainer, 
-                       _MDMManagedStoreBooksManifestPath, _MDMMigrationConfigFilePath, 
-                       _MDMMigrationDirectory, _MDMOutstandingActivitiesFilePath, 
+                       _MDMDatabasePerformanceStorageDirectory, _MDMDatabaseReturnToServiceStorageDirectory, 
+                       _MDMDirtyEnrollmentStateFilePath, _MDMDirtyPersonaFilePath, 
+                       _MDMErrorDomain, _MDMEventsFilePath, _MDMFilePath, _MDMLegacyManagedNonStoreBooksDirectory, 
+                       _MDMManagedNonStoreBooksDirectory, _MDMManagedNonStoreBooksManifestPath, 
+                       _MDMManagedNonStoreBooksSystemGroupContainer, _MDMManagedStoreBooksManifestPath, 
+                       _MDMMigrationConfigFilePath, _MDMMigrationDirectory, _MDMOutstandingActivitiesFilePath, 
                        _MDMPostSetupAutoInstallProfilePath, _MDMPostSetupAutoInstallSetAsideProfilePath, 
                        _MDMPropertiesFilePath, _MDMPropertiesUserFilePath, _MDMSetupAssistantSettingsFilePath, 
                        _MDMSystemRestartLogPath, _MDMSystemReturnToServiceStorageDirectory, 
@@ -132,7 +134,8 @@ exports:
                        _kDMCErrorDetailsPairingParametersKey, _kDMCErrorDetailsSUInfoKey, 
                        _kDMCErrorDetailsSecurityTokenKey, _kDMCErrorLoginPromptKey, 
                        _kDMCLockdownCloudConfigurationFlagsKey, _kDMCPairingParametersSecurityTokenKey, 
-                       _kDMCPairingParametersWatchUDIDKey, _kDMCProfileInstallationSourceAccountDrivenDeviceEnrollment, 
+                       _kDMCPairingParametersWatchUDIDKey, _kDMCPerformanceDurationKey, 
+                       _kDMCPerformanceEndKey, _kDMCPerformanceStartKey, _kDMCProfileInstallationSourceAccountDrivenDeviceEnrollment, 
                        _kDMCProfileInstallationSourceAccountDrivenUserEnrollment, 
                        _kDMCProfileInstallationSourceMDMMigration, _kDMCProfileInstallationSourceReturnToService, 
                        _kDMCRapidReturntoServiceSnapshotName, _kMDMMetaLastMigratedBuildKey, 

@@ -1,0 +1,22 @@
+.Dd August 5, 2025
+.Dt userauthd 8
+.Os
+.Sh NAME
+.Nm userauthd
+.Nd User Authentication Daemon
+.Sh DESCRIPTION
+.Nm
+is a system daemon responsible for managing user authentication data. It handles multiple authentication methods including password verifiers, SRP verifiers, NTLM verifiers, recovery keys, and smart cards. The daemon provides comprehensive functionality including managing authentication methods (adding, removing, resetting), performing core operations (login, logout, verify, lock, unlock), as well as monitoring the availability and lockout status of each authentication method.
+.Pp
+The
+.Nm
+command should not be run directly.
+.Sh FILES
+.Bl -tag -width indent
+.It Pa /System/Library/Frameworks/LocalAuthentication.framework/Support/userauthd
+The daemon executable
+.It Pa /System/Library/LaunchDaemons/com.apple.LocalAuthentication.userauthd.plist
+Launch daemon configuration
+.El
+.Sh SEE ALSO
+.Xr coreauthd 8

@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FaceTimeFeatureControl.framework/Versions/A/FaceTimeFeatureControl'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s22FaceTimeFeatureControl05CallsC0O06remoteD0yA2CmFWC', 
                        '_$s22FaceTimeFeatureControl05CallsC0O2eeoiySbAC_ACtFZ', '_$s22FaceTimeFeatureControl05CallsC0O4fromACs7Decoder_p_tKcfC', 
                        '_$s22FaceTimeFeatureControl05CallsC0O4hash4intoys6HasherVz_tF', 

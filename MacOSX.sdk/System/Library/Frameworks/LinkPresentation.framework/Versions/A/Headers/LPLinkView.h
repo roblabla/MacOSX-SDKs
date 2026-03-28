@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class LPLinkMetadata;
 
-LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0))
+LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0), visionos(1.0), tvos(13.0)) API_UNAVAILABLE(watchos)
 #if TARGET_OS_IPHONE
 /// A rich visual representation of a link.
 ///
@@ -39,7 +39,7 @@ LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0))
 /// ```
 ///
 /// ``LPLinkView`` has an intrinsic size, but it also responds to
-/// <doc://com.apple.documentation/documentation/uikit/uiview/1622630-sizetofit>
+/// <doc://com.apple.documentation/documentation/UIKit/UIView/sizeToFit()>
 /// to present a layout at any size.
 @interface LPLinkView : UIView
 #else
@@ -65,7 +65,7 @@ LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0))
 /// ```
 ///
 /// ``LPLinkView`` has an intrinsic size, but it also responds to
-/// <doc://com.apple.documentation/documentation/uikit/uiview/1622630-sizetofit>
+/// <doc://com.apple.documentation/documentation/UIKit/UIView/sizeToFit()>
 /// to present a layout at any size.
 @interface LPLinkView : NSView
 #endif

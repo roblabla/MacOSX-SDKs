@@ -70,7 +70,7 @@ struct __lconv_t {
   char int_n_sign_posn;
 };
 
-inline constexpr char* __empty_string     = "";
+inline constexpr char* __empty_string             = "";
 inline _LIBCPP_CONSTINIT __lconv_t __unique_lconv = {
     .decimal_point      = __empty_string,
     .thousands_sep      = __empty_string,

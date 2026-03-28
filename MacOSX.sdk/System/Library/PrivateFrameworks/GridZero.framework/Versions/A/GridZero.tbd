@@ -1,15 +1,15 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GridZero.framework/Versions/A/GridZero'
-current-version: 821.0.120
+current-version: 841.0.101
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ PhotosTests, PhotosUICore, PhotosUICoreProto, PhotosUICoreProtoApp, 
                        PhotosUIPrivate, PhotosUITester ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s18PhotosUIFoundation0A17EnvironmentValuesV8GridZeroE24photosViewCollectionKindAD0ahiJ0VSgvM', 
                        '_$s18PhotosUIFoundation0A17EnvironmentValuesV8GridZeroE24photosViewCollectionKindAD0ahiJ0VSgvg', 
                        '_$s18PhotosUIFoundation0A17EnvironmentValuesV8GridZeroE24photosViewCollectionKindAD0ahiJ0VSgvpMV', 

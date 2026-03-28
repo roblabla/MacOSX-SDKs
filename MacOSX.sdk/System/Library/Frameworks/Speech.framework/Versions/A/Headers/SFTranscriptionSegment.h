@@ -23,7 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
  - A ``confidence`` value, indicating how likely it is that the specified string matches the audible speech.
  - A ``timestamp`` and ``duration`` value, indicating the position of the segment within the provided audio stream.
  */
-API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
+API_AVAILABLE(ios(10.0), macos(10.15))
+API_UNAVAILABLE(tvos)
 @interface SFTranscriptionSegment : NSObject <NSCopying, NSSecureCoding>
 
 /**

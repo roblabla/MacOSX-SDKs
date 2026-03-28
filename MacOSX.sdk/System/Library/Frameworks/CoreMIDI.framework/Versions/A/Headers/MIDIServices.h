@@ -1398,6 +1398,11 @@ extern const CFStringRef kMIDIPropertyUMPCanTransmitGroupless API_AVAILABLE(maco
 */
 extern const CFStringRef kMIDIPropertyAssociatedEndpoint API_AVAILABLE(macos(15.0), ios(18.0)) API_UNAVAILABLE(tvos, watchos);
 
+///	kMIDIPropertyUMPEnabled
+///
+/// device property, MIDIUniqueID. If this property is present and set to 1 then the device is UMP capable.
+extern const CFStringRef kMIDIPropertyUMPEnabled API_UNAVAILABLE(macos, ios, tvos, watchos);
+
 //==================================================================================================
 #pragma mark	Clients
 

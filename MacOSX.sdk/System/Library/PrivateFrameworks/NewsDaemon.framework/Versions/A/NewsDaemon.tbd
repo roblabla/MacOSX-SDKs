@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/NewsDaemon.framework/Versions/A/NewsDaemon'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10NewsDaemon12MachServicesV14LiveActivities13TeaFoundation0C7ServiceVvgZ', 
                        '_$s10NewsDaemon12MachServicesV14LiveActivities13TeaFoundation0C7ServiceVvpZMV', 
                        '_$s10NewsDaemon12MachServicesVMa', '_$s10NewsDaemon12MachServicesVMn', 
@@ -169,7 +167,16 @@ exports:
                        '_$s10NewsDaemon27NDScoringServiceEnvironmentCMo', '_$s10NewsDaemon27NDScoringServiceEnvironmentCMu', 
                        '_$s10NewsDaemon27NDScoringServiceEnvironmentCN', '_$s10NewsDaemon27NDScoringServiceEnvironmentCSEAAMc', 
                        '_$s10NewsDaemon27NDScoringServiceEnvironmentCSeAAMc', '_$s10NewsDaemon27NDScoringServiceEnvironmentCfD', 
-                       '_$s10NewsDaemon28NDManagedFeedItemPoolOptionsC015preferredFilterG0So06FCFeediG0Vvg', 
+                       '_$s10NewsDaemon28EngagementDataEnqueueHandlerC07enqueuecD0yySDys11AnyHashableVypGF', 
+                       '_$s10NewsDaemon28EngagementDataEnqueueHandlerCAA0cdeF4TypeAAMc', 
+                       '_$s10NewsDaemon28EngagementDataEnqueueHandlerCAA0cdeF4TypeAAWP', 
+                       '_$s10NewsDaemon28EngagementDataEnqueueHandlerCACycfC', '_$s10NewsDaemon28EngagementDataEnqueueHandlerCACycfCTj', 
+                       '_$s10NewsDaemon28EngagementDataEnqueueHandlerCACycfCTq', 
+                       '_$s10NewsDaemon28EngagementDataEnqueueHandlerCACycfc', '_$s10NewsDaemon28EngagementDataEnqueueHandlerCMa', 
+                       '_$s10NewsDaemon28EngagementDataEnqueueHandlerCMm', '_$s10NewsDaemon28EngagementDataEnqueueHandlerCMn', 
+                       '_$s10NewsDaemon28EngagementDataEnqueueHandlerCMo', '_$s10NewsDaemon28EngagementDataEnqueueHandlerCMu', 
+                       '_$s10NewsDaemon28EngagementDataEnqueueHandlerCN', '_$s10NewsDaemon28EngagementDataEnqueueHandlerCfD', 
+                       '_$s10NewsDaemon28EngagementDataEnqueueHandlerCfd', '_$s10NewsDaemon28NDManagedFeedItemPoolOptionsC015preferredFilterG0So06FCFeediG0Vvg', 
                        '_$s10NewsDaemon28NDManagedFeedItemPoolOptionsC015preferredFilterG0So06FCFeediG0VvpMV', 
                        '_$s10NewsDaemon28NDManagedFeedItemPoolOptionsC12widgetForYou14preferredCount05localA5TagIDACSi_SSSgtFZ', 
                        '_$s10NewsDaemon28NDManagedFeedItemPoolOptionsC14preferredCountSivg', 
@@ -245,7 +252,10 @@ exports:
                        '_$s10NewsDaemon31ProxyTodayFeedServiceConnectionC6sharedACvpZMV', 
                        '_$s10NewsDaemon31ProxyTodayFeedServiceConnectionCMa', '_$s10NewsDaemon31ProxyTodayFeedServiceConnectionCMn', 
                        '_$s10NewsDaemon31ProxyTodayFeedServiceConnectionCMo', '_$s10NewsDaemon31ProxyTodayFeedServiceConnectionCN', 
-                       '_$s10NewsDaemon31ProxyTodayFeedServiceConnectionCfD', '_$s10NewsDaemon34LiveActivityScheduleRequestOptionsV05retryE10TimeWindowSdvg', 
+                       '_$s10NewsDaemon31ProxyTodayFeedServiceConnectionCfD', '_$s10NewsDaemon32EngagementDataEnqueueHandlerTypeMp', 
+                       '_$s10NewsDaemon32EngagementDataEnqueueHandlerTypeP07enqueuecD0yySDys11AnyHashableVypGFTj', 
+                       '_$s10NewsDaemon32EngagementDataEnqueueHandlerTypeP07enqueuecD0yySDys11AnyHashableVypGFTq', 
+                       '_$s10NewsDaemon32EngagementDataEnqueueHandlerTypeTL', '_$s10NewsDaemon34LiveActivityScheduleRequestOptionsV05retryE10TimeWindowSdvg', 
                        '_$s10NewsDaemon34LiveActivityScheduleRequestOptionsV05retryE10TimeWindowSdvpMV', 
                        '_$s10NewsDaemon34LiveActivityScheduleRequestOptionsV08originalE4Date10Foundation0I0Vvg', 
                        '_$s10NewsDaemon34LiveActivityScheduleRequestOptionsV08originalE4Date10Foundation0I0VvpMV', 
@@ -282,13 +292,14 @@ exports:
                        '_$s10NewsDaemon34LiveActivityScheduleRequestOptionsVSeAAMc', 
                        '_$s2os6LoggerV10NewsDaemonE012liveActivityD0ACvgZ', '_$s2os6LoggerV10NewsDaemonE12feedItemPoolACvgZ', 
                        '_$s2os6LoggerV10NewsDaemonE13notificationsACvgZ', '_$s2os6LoggerV10NewsDaemonE14scoringServiceACvgZ', 
-                       '_$s2os6LoggerV10NewsDaemonE16todayFeedServiceACvgZ', _NDANFDecodingServiceXPCConnection, 
-                       _NDANFDecodingServiceXPCInterface, _NDAnalyticsMachServiceName, 
-                       _NDArticleIDFromAudioContentID, _NDAudioContentIDFromArticleID, 
-                       _NDAudioContentIDPrefix, _NDDownloadMachServiceName, _NDDownloadServiceHasUnfinishedWorkKey, 
-                       _NDDownloadServiceXPCConnection, _NDDownloadServiceXPCInterface, 
-                       _NDLiveActivityMachServiceName, _NDNewsdDataContainerClass, 
-                       _NDNewsdDataContainerIdentifier, _NDNewsdProcessName, _NDSharedClientLog, 
+                       '_$s2os6LoggerV10NewsDaemonE16todayFeedServiceACvgZ', '_$sSo14AMSPushHandlerC10NewsDaemonE08newsPushB0AByFZ', 
+                       _NDANFDecodingServiceXPCConnection, _NDANFDecodingServiceXPCInterface, 
+                       _NDAnalyticsMachServiceName, _NDArticleIDFromAudioContentID, 
+                       _NDAudioContentIDFromArticleID, _NDAudioContentIDPrefix, _NDDownloadMachServiceName, 
+                       _NDDownloadServiceHasUnfinishedWorkKey, _NDDownloadServiceXPCConnection, 
+                       _NDDownloadServiceXPCInterface, _NDLiveActivityMachServiceName, 
+                       _NDNewsdDataContainerClass, _NDNewsdDataContainerIdentifier, 
+                       _NDNewsdProcessName, _NDPushNotificationMachServiceName, _NDSharedClientLog, 
                        _NDSharedServiceLog, _NDTodayFeedConfigDecodingServiceXPCConnection, 
                        _NDTodayFeedConfigDecodingServiceXPCInterface, _NDTodayFeedMachServiceName, 
                        _NDTodayMachServiceName, _NDURLResolutionMachServiceName, 

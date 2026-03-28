@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GeoKit.framework/Versions/A/GeoKit'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _GEOAlignPointToUserSpace, _GEOAlignRectToUserSpace, _GEOBundle, 
                        _GEOCityCountryCodeKey, _GEOCityFormatVersion, _GEOCityGeonameIDKey, 
                        _GEOCityLatitudeKey, _GEOCityLocalizedNamesKey, _GEOCityLongitudeKey, 

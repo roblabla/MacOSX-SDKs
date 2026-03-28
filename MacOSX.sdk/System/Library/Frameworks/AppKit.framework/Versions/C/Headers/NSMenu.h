@@ -280,7 +280,14 @@ API_AVAILABLE(macos(14.0)) NS_REFINED_FOR_SWIFT;
 - (void)menuWillOpen:(NSMenu *)menu API_AVAILABLE(macos(10.5)) NS_SWIFT_UI_ACTOR;
 - (void)menuDidClose:(NSMenu *)menu API_AVAILABLE(macos(10.5)) NS_SWIFT_UI_ACTOR;
 
-/* Indicates that menu is about to highlight item.  Only one item per menu can be highlighted at a time.  If item is nil, it means all items in the menu are about to be unhighlighted. */
+/*!
+ Indicates that a menu is about to highlight an item. Only one item per menu can be highlighted at a time. If item is nil, it means all items in the menu are about to be unhighlighted.
+ 
+ The behavior of this method varies when closing a menu with a highlighted item.
+ In macOS 26.4 and later, this method is sent with a nil item for both the topmost open menu and its submenus, to any menu that has a highlighted item.
+ In macOS 14.0 and later, this method is sent with a nil item when closing a submenu with a highlighted item. This method is not sent for the topmost open menu, even if it has a highlighted item.
+ Prior to macOS 14.0, this method is not sent when a menu is closed, even if it has a highlighted item.
+ */
 - (void)menu:(NSMenu *)menu willHighlightItem:(nullable NSMenuItem *)item API_AVAILABLE(macos(10.5)) NS_SWIFT_UI_ACTOR;
 
 

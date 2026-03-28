@@ -115,6 +115,26 @@ API_DEPRECATED_WITH_REPLACEMENT("displayedReadOnlyPixelBuffer", macos(13.0, API_
 API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 #endif
 ;
+
+/// Starts displaying a caption preview with the specified accessibility profile.
+///
+/// This method enables a preview mode that displays sample caption text using the visual appearance settings from the specified accessibility profile. The preview replaces any currently active subtitles and/or closed captions while active. The sample caption text position can be specified to avoid UI controls.
+///
+/// - Parameters:
+///   - profileID: The identifier of the accessibility profile to use for caption appearance.
+///                Profile IDs can be obtained from `MACaptionAppearanceCopyProfileIDs()`.
+///                This determines font, color, background, and other visual characteristics.
+///   - position: A CGPoint that defines the position (in points) of the caption preview relative to the default positioning of content captions (centered near the bottom of the video). Position values can be negative. (0, 0) represents the default positioning.
+///   - text: Optional custom text to display in the preview. If `nil`, a standard localized preview message will be shown.
+///
+/// - Note: You must call ``stopShowingCaptionPreview`` to exit the preview.
+- (void)setCaptionPreviewProfileID:(NSString *)profileID position:(CGPoint)position text:(nullable NSString *)text API_AVAILABLE(macos(26.4), ios(26.4), tvos(26.4), visionos(26.4)) API_UNAVAILABLE(watchos);
+
+/// Stops showing the caption preview.
+///
+/// This method stops the caption preview and restores any currently active subtitles and/or closed captions.
+- (void)stopShowingCaptionPreview API_AVAILABLE(macos(26.4), ios(26.4), tvos(26.4), visionos(26.4)) API_UNAVAILABLE(watchos);
+
 @end
 
 NS_ASSUME_NONNULL_END

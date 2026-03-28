@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosSpatialMediaCore.framework/Versions/A/PhotosSpatialMediaCore'
-current-version: 821.0.120
+current-version: 841.0.101
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ MediaAnalysis, MediaAnalysisGeneration, PhotoImaging, Photos, 
                        PhotosIntelligence, PhotosSpatialMediaCoreTests, PhotosSpatialMediaProtoApp, 
                        PhotosTests, PhotosUICore, PhotosUICoreProto, PhotosUICoreProto-iOS, 
@@ -15,8 +13,7 @@ allowable-clients:
                        _PhotosUI_SwiftUI, _PhotosUI_WidgetKit, jujubectl, mediaanalysisd, 
                        mediaanalysisd-generation, mediaanalysisd-service ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s22PhotosSpatialMediaCore0B13PhotoAnalyzerC11CachePolicyO12conservativeyA2EmFWC', 
                        '_$s22PhotosSpatialMediaCore0B13PhotoAnalyzerC11CachePolicyO2eeoiySbAE_AEtFZ', 
                        '_$s22PhotosSpatialMediaCore0B13PhotoAnalyzerC11CachePolicyO4hash4intoys6HasherVz_tF', 

@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libQMIParserDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__120__shared_ptr_emplaceINS_6vectorIhNS_9allocatorIhEEEENS2_IS4_EEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceINS_6vectorIhNS_9allocatorIhEEEENS2_IS4_EEEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ __ZN3qmi11MessageBase13validateMsgIdEt, __ZN3qmi11MessageBase14validateBufferEv, 
                        __ZN3qmi11MessageBase20sParsingErrorHandlerE, __ZN3qmi11MessageBase22setParsingErrorHandlerEPFbttPKhmE, 
                        __ZN3qmi11MessageBase4swapERS0_, __ZN3qmi11MessageBase8setErrorENS_5ErrorEb, 

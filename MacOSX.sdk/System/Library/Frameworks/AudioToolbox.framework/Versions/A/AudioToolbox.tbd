@@ -1,17 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox'
 current-version: 1000
 swift-abi-version: 7
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/AudioToolboxCore.framework/Versions/A/AudioToolboxCore' ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$hide$os10.10$_AudioCodecAppendInputBufferList', '$ld$hide$os10.10$_AudioCodecAppendInputData', 
                        '$ld$hide$os10.10$_AudioCodecGetProperty', '$ld$hide$os10.10$_AudioCodecGetPropertyInfo', 
                        '$ld$hide$os10.10$_AudioCodecInitialize', '$ld$hide$os10.10$_AudioCodecProduceOutputBufferList', 
@@ -182,8 +179,10 @@ exports:
                        _ATAudioProcessingNodeGetProperty, _ATAudioProcessingNodeGetPropertyInfo, 
                        _ATAudioProcessingNodeInstantiate, _ATAudioProcessingNodeScheduleParameter, 
                        _ATAudioProcessingNodeScheduleParameters, _ATAudioProcessingNodeSetParameter, 
-                       _ATAudioProcessingNodeSetProperty, _ATSubmixTapDispose, _ATSubmixTapGetSourceAudio, 
-                       _ATSubmixTapGetTime, _ATSubmixTapNew, _ATSubmixTapNew_CMClient, 
+                       _ATAudioProcessingNodeSetProperty, _ATSubmixTapDispose, _ATSubmixTapGetChannelLayout, 
+                       _ATSubmixTapGetSourceAudio, _ATSubmixTapGetTime, _ATSubmixTapNew, 
+                       _ATSubmixTapNewWithFormat, _ATSubmixTapNewWithFormat_CMClient, 
+                       _ATSubmixTapNewWithFormat_CMServer, _ATSubmixTapNew_CMClient, 
                        _ATSubmixTapNew_CMServer, _ATSubmixTapSetTimelineInfo, _AUGraphAddNode, 
                        _AUGraphAddRenderNotify, _AUGraphClearConnections, _AUGraphClose, 
                        _AUGraphConnectNodeInput, _AUGraphCountNodeInteractions, _AUGraphDisconnectNodeInput, 
@@ -313,7 +312,7 @@ exports:
                        _readHapticCommand ]
     objc-classes:    [ ATAudioTap, ATAudioTapDescription, ATBlurMixer, ATIOBinding, 
                        STSController ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ATGetDefaultDeviceAggregateID, _ATGetDefaultDeviceAggregateUID, 
                        _AUGraphCountNodeConnections, _AUGraphGetConnectionInfo, _AUGraphGetNodeConnections, 
                        _AUGraphGetNodeInfo, _AUGraphGetNodeInfoSubGraph, _AUGraphGetNumberOfConnections, 
@@ -346,7 +345,7 @@ exports:
                        __ZNK2AT9IOBinding9sessionIDEv ]
     objc-classes:    [ ATCallTranslatorInsert, ATDefaultDeviceAggregate, ATMicrophoneInjectionInsert, 
                        ATMicrophoneInjectionInsertManager, MicrophoneInjectionTapSourceDescription ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _AudioSessionAddPropertyListener, _AudioSessionGetProperty, 
                        _AudioSessionGetPropertySize, _AudioSessionInitialize, _AudioSessionRemovePropertyListener, 
                        _AudioSessionRemovePropertyListenerWithUserData, _AudioSessionSetActive, 
@@ -356,8 +355,7 @@ exports:
                        _kAudioSessionOutputRoute_Thunderbolt ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AudioToolboxCore.framework/Versions/A/AudioToolboxCore'
 exports:
   - targets:         [ x86_64-macos ]
@@ -373,8 +371,7 @@ exports:
                        _SwapInt16ToFloat32_X86, _SwapInt24ToFloat32_X86, _SwapInt32ToFloat32_X86, 
                        _SwapPCM16_X86, _SwapPCM32_X86, _UpmixMonoToStereoInterleaved16_X86, 
                        _UpmixMonoToStereoInterleaved32_X86 ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AUEventListenerAddEventType, _AUEventListenerCreate, _AUEventListenerCreateWithDispatchQueue, 
                        _AUEventListenerNotify, _AUEventListenerRemoveEventType, _AUListenerAddParameter, 
                        _AUListenerCreate, _AUListenerCreateWithDispatchQueue, _AUListenerDispose, 
@@ -1201,7 +1198,7 @@ exports:
                        AURemoteHost, AVAudioChannelGroupSemantics, AVAudioSemantics, 
                        AVHapticEvent, AVHapticPlayerParameterCurve, AVHapticPlayerParameterCurveControlPoint, 
                        AVHapticProcessTaskToken, AudioComponentRegistrar ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _AudioComponentApplyServerRegistrations, _AudioComponentCopyComponentURL, 
                        _AudioComponentEnableNonSystemPlugIns, _AudioComponentFetchServerRegistrations, 
                        _AudioComponentGetIcon, _AudioComponentNoComponentManager, 
@@ -1223,10 +1220,10 @@ exports:
                        _AudioFileOpen, _ExtAudioFileCreateNew, _ExtAudioFileOpen, 
                        _MusicDevicePrepareInstrument, _MusicDeviceReleaseInstrument ]
     objc-classes:    [ _AUAudioUnitV3ViewFactory, _RemoteAUv2ViewFactory ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _AudioComponentGetLastActiveTime, _AudioOutputUnitGetHostIcon, 
                        _AudioOutputUnitPublish, _AudioUnitURLOpen ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DownmixStereoInterleavedInt16ToMono_ARM, _Float32ToNativeInt16Scaled_ARM, 
                        _Float32ToNativeInt32Scaled_ARM, _Float32ToNativeLowAlignedInt32_ARM, 
                        _Float32ToNativeLowAlignedInt64_ARM, _MultiChannelInterleaveFloat32ToNativeLowAlignedInt32_ARM, 

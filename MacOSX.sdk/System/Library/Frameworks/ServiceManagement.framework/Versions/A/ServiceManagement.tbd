@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/ServiceManagement.framework/Versions/A/ServiceManagement'
-current-version: 3089.60.7
+current-version: 3102.100.102
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _SMAppServiceErrorDomain, _SMAppServiceUpdateDispositionSync_4BTM, 
                        _SMAppServiceUpdateDisposition_4BTM, _SMCopyAllJobDictionaries, 
                        _SMCopyEnabledLoginItems_4BTM, _SMJobBless, _SMJobCopyDictionary, 

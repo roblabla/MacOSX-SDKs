@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosIntelligence.framework/Versions/A/PhotosIntelligence'
-current-version: 821.0.120
+current-version: 841.0.101
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AmbientPhotoFramePosterProvider, ChatKit, GenerativeSearch, 
                        ImagePlayground, MediaAnalysis, MediaMiningKit, NTKParmesanFaceBundleCompanion, 
                        PhotoAnalysis, PhotosGraph, PhotosPosterProvider, PhotosReliveWidget, 
@@ -16,8 +14,7 @@ allowable-clients:
                        PhotosUITester, graphctl, iCloudQuotaUI, jujubectl, mediaanalysisd, 
                        mediaanalysisd-service, photosctl, photosfaced ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation8CalendarV18PhotosIntelligenceE11lastWeekend3forAA12DateIntervalVSgAA0H0V_tF', 
                        '_$s10Foundation8CalendarV18PhotosIntelligenceE15nearestMidnight3forAA4DateVAH_tF', 
                        '_$s10Foundation8CalendarV18PhotosIntelligenceE17enclosingInterval3for12intervalSizeAA04DateF0VSgAA0J0V_AC9ComponentOtF', 
@@ -52,17 +49,25 @@ exports:
                        '_$s18PhotosIntelligence010StoryAppleB9ReportingPA2A0cdB13EventReporterCRszrlE6ignoreQrvgZ', 
                        '_$s18PhotosIntelligence010StoryAppleB9ReportingPA2A0cdB13EventReporterCRszrlE6ignoreQrvpZMV', 
                        '_$s18PhotosIntelligence010StoryAppleB9ReportingPA2A0cdB13EventReporterCRszrlE6ignoreQrvpZQOMQ', 
-                       '_$s18PhotosIntelligence010StoryAppleB9ReportingTL', '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV13curatedAssets4from7optionsSaySSGAG_SDySSs8Sendable_pGtYaKF', 
+                       '_$s18PhotosIntelligence010StoryAppleB9ReportingTL', '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV12requestSongs10forAdamIDs7optionsSSSaySSG_SDySSs8Sendable_pGtYaKF', 
+                       '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV12requestSongs10forAdamIDs7optionsSSSaySSG_SDySSs8Sendable_pGtYaKFTu', 
+                       '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV13curatedAssets4from7optionsSaySSGAG_SDySSs8Sendable_pGtYaKF', 
                        '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV13curatedAssets4from7optionsSaySSGAG_SDySSs8Sendable_pGtYaKFTu', 
                        '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV15serviceProviderACSo07PLPhotodF6ClientC_tcfC', 
                        '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV16hastingsCuration4from7optionsSaySSGAG_AA8HastingsV0H7OptionsVtYaKF', 
                        '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV16hastingsCuration4from7optionsSaySSGAG_AA8HastingsV0H7OptionsVtYaKFTu', 
                        '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV19computeCacheDidLoadyyYaKF', 
                        '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV19computeCacheDidLoadyyYaKFTu', 
+                       '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV20requestMusicCuration7optionsSSSDySSs8Sendable_pG_tYaKF', 
+                       '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV20requestMusicCuration7optionsSSSDySSs8Sendable_pG_tYaKFTu', 
                        '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV21extendedCuratedAssets4from7optionsSaySSGAG_SDySSs8Sendable_pGtYaKF', 
                        '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV21extendedCuratedAssets4from7optionsSaySSGAG_SDySSs8Sendable_pGtYaKFTu', 
                        '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV23exportMomentContextDataSSyYaKF', 
                        '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV23exportMomentContextDataSSyYaKFTu', 
+                       '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV24requestFlexMusicCuration7optionsSSSDySSs8Sendable_pG_tYaKF', 
+                       '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV24requestFlexMusicCuration7optionsSSSDySSs8Sendable_pG_tYaKFTu', 
+                       '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV24requestRecentlyUsedSongs7optionsSDySSSay10Foundation4DateVGGSDySSs8Sendable_pG_tYaKF', 
+                       '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV24requestRecentlyUsedSongs7optionsSDySSSay10Foundation4DateVGGSDySSs8Sendable_pG_tYaKFTu', 
                        '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV25keyAssetUUIDOfSocialGroup4with09candidateH5UUIDsSSShySSG_AGtYaKF', 
                        '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV25keyAssetUUIDOfSocialGroup4with09candidateH5UUIDsSSShySSG_AGtYaKFTu', 
                        '_$s18PhotosIntelligence013PhotoAnalysisC14LibraryServiceV28updateKeyAssetOfSocialGroups9withUUIDsyShySSG_tYaKF', 
@@ -6360,6 +6365,7 @@ exports:
                        '_$s18PhotosIntelligence23StoryMusicCurationErrorO2eeoiySbAC_ACtFZ', 
                        '_$s18PhotosIntelligence23StoryMusicCurationErrorO31photoAnalysisClientNotAvailableyA2CmFWC', 
                        '_$s18PhotosIntelligence23StoryMusicCurationErrorO4hash4intoys6HasherVz_tF', 
+                       '_$s18PhotosIntelligence23StoryMusicCurationErrorO9cancelledyA2CmFWC', 
                        '_$s18PhotosIntelligence23StoryMusicCurationErrorO9hashValueSivg', 
                        '_$s18PhotosIntelligence23StoryMusicCurationErrorO9hashValueSivpMV', 
                        '_$s18PhotosIntelligence23StoryMusicCurationErrorOMa', '_$s18PhotosIntelligence23StoryMusicCurationErrorOMn', 

@@ -1,0 +1,9 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64e-macos ]
+install-name:    '/System/Library/PrivateFrameworks/_DeviceExpertIntents_AppIntents.framework/Versions/A/_DeviceExpertIntents_AppIntents'
+swift-abi-version: 7
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos ]
+    symbols:         [ __DeviceExpertIntents_AppIntentsVersionNumber, __DeviceExpertIntents_AppIntentsVersionString ]
+...

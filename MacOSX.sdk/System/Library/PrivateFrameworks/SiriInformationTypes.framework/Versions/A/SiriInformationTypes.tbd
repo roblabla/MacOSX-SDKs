@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriInformationTypes.framework/Versions/A/SiriInformationTypes'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '$ld$hide$os12.10$_$s21SiriInformationSearch10ExperienceC13catCategoriesSaySSGvgTj', 
                        '$ld$hide$os12.10$_$s21SiriInformationSearch10ExperienceC13catCategoriesSaySSGvgTq', 
                        '$ld$hide$os12.10$_$s21SiriInformationSearch10ExperienceC13catCategoriesSaySSGvpMV', 
@@ -32620,7 +32620,19 @@ exports:
                        '_$s20SiriInformationTypes17PommesCandidateIdOMa', '_$s20SiriInformationTypes17PommesCandidateIdOMn', 
                        '_$s20SiriInformationTypes17PommesCandidateIdON', '_$s20SiriInformationTypes17PommesCandidateIdOSEAAMc', 
                        '_$s20SiriInformationTypes17PommesCandidateIdOSHAAMc', '_$s20SiriInformationTypes17PommesCandidateIdOSQAAMc', 
-                       '_$s20SiriInformationTypes17PommesCandidateIdOSeAAMc', '_$s20SiriInformationTypes18PommesSearchReasonO03runD7RequestyA2CmFWC', 
+                       '_$s20SiriInformationTypes17PommesCandidateIdOSeAAMc', '_$s20SiriInformationTypes17TranscriptContextCACycfC', 
+                       '_$s20SiriInformationTypes17TranscriptContextCACycfCTj', '_$s20SiriInformationTypes17TranscriptContextCACycfCTq', 
+                       '_$s20SiriInformationTypes17TranscriptContextCACycfc', '_$s20SiriInformationTypes17TranscriptContextCMa', 
+                       '_$s20SiriInformationTypes17TranscriptContextCMm', '_$s20SiriInformationTypes17TranscriptContextCMn', 
+                       '_$s20SiriInformationTypes17TranscriptContextCMo', '_$s20SiriInformationTypes17TranscriptContextCMu', 
+                       '_$s20SiriInformationTypes17TranscriptContextCN', '_$s20SiriInformationTypes17TranscriptContextCfD', 
+                       '_$s20SiriInformationTypes17TranscriptContextCfd', '_$s20SiriInformationTypes17TranscriptWrapperCACycfC', 
+                       '_$s20SiriInformationTypes17TranscriptWrapperCACycfCTj', '_$s20SiriInformationTypes17TranscriptWrapperCACycfCTq', 
+                       '_$s20SiriInformationTypes17TranscriptWrapperCACycfc', '_$s20SiriInformationTypes17TranscriptWrapperCMa', 
+                       '_$s20SiriInformationTypes17TranscriptWrapperCMm', '_$s20SiriInformationTypes17TranscriptWrapperCMn', 
+                       '_$s20SiriInformationTypes17TranscriptWrapperCMo', '_$s20SiriInformationTypes17TranscriptWrapperCMu', 
+                       '_$s20SiriInformationTypes17TranscriptWrapperCN', '_$s20SiriInformationTypes17TranscriptWrapperCfD', 
+                       '_$s20SiriInformationTypes17TranscriptWrapperCfd', '_$s20SiriInformationTypes18PommesSearchReasonO03runD7RequestyA2CmFWC', 
                        '_$s20SiriInformationTypes18PommesSearchReasonO15infoDomainParseyA2CmFWC', 
                        '_$s20SiriInformationTypes18PommesSearchReasonO15noParseFallbackyA2CmFWC', 
                        '_$s20SiriInformationTypes18PommesSearchReasonO22personalDomainFallbackyA2CmFWC', 

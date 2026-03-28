@@ -1,19 +1,16 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AVFCore.framework/Versions/A/AVFCore'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AVFCapture, AVFoundation, AVHapticWriter, avbuildmovie, avconvert, 
                        avdumpmovieinfo, avexporttest, avimagegenerator, avmediainfo, 
                        avmetareadwrite, avplay, avreadwrite, avroute, avsbufplay, 
                        avsyncplay, swiftAVFoundation ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$sSo12AVPlayerItemC11Observation10Observable7AVFCoreMc', 
                        '_$sSo17AVPlayerItemTrackC11Observation10Observable7AVFCoreMc', 
                        '_$sSo28AVPlayerObservationRegistrarC7AVFCoreEABycfC', '_$sSo28AVPlayerObservationRegistrarC7AVFCoreEABycfc', 
@@ -650,6 +647,10 @@ exports:
                        _AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey, 
                        _AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey, 
                        _AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification, 
+                       _AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification, 
+                       _AVPlayerInterstitialEventMonitorScheduleRequestErrorKey, 
+                       _AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey, 
+                       _AVPlayerInterstitialEventMonitorScheduleRequestResponseKey, 
                        _AVPlayerInterstitialEventNoCue, _AVPlayerInterstitialPlayerDidChangeNotification, 
                        _AVPlayerItemAudibleDRMInfoGroupID, _AVPlayerItemBecameCurrentNotification, 
                        _AVPlayerItemDidPlayToEndTimeNotification, _AVPlayerItemFailedToPlayToEndTimeErrorKey, 
@@ -695,6 +696,7 @@ exports:
                        _AVPlayerRateDidChangeReasonAudioSessionInterrupted, _AVPlayerRateDidChangeReasonCoordinatedPlayback, 
                        _AVPlayerRateDidChangeReasonKey, _AVPlayerRateDidChangeReasonPauseAtItemEnd, 
                        _AVPlayerRateDidChangeReasonPlaybackResumed, _AVPlayerRateDidChangeReasonPlaybackStalled, 
+                       _AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge, _AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange, 
                        _AVPlayerRateDidChangeReasonRouteChanged, _AVPlayerRateDidChangeReasonSetRateCalled, 
                        _AVPlayerRateDidChangeReasonSetRateFailed, _AVPlayerRateDidChangeReasonStatusChanged, 
                        _AVPlayerRateDidChangeRouteChangedReason, _AVPlayerRateDidChangeSetRateCalledReason, 
@@ -702,7 +704,8 @@ exports:
                        _AVPlayerRolePIP, _AVPlayerRoleScanning, _AVPlayerWaitingDuringInterstitialEventReason, 
                        _AVPlayerWaitingForCoordinatedPlaybackReason, _AVPlayerWaitingToMinimizeStallsReason, 
                        _AVPlayerWaitingWhileEvaluatingBufferingRateReason, _AVPlayerWaitingWithNoItemToPlayReason, 
-                       _AVPotentialRaceCondition, _AVPropertyListForProxyCreationOption_ReduceMetadataForPhotoLibrary, 
+                       _AVPotentialRaceCondition, _AVPreferredLocalizationLanguage, 
+                       _AVPropertyListForProxyCreationOption_ReduceMetadataForPhotoLibrary, 
                        _AVProtectedContentProviderFairPlay, _AVQueuePlayerCanOverlapPlaybackConditionsDidChangeNotification, 
                        _AVRampsIncludesRampThatOverlapsTimeRange, _AVRequestConcreteImplementation, 
                        _AVRequireConcreteObject, _AVResetMediaServices, _AVRouteDetectorMultipleRoutesDetectedDidChangeNotification, 
@@ -915,12 +918,14 @@ exports:
                        AVMutableScheduledAudioParameters, AVMutableTimedMetadataGroup, 
                        AVMutableVideoComposition, AVMutableVideoCompositionInstruction, 
                        AVMutableVideoCompositionLayerInstruction, AVObservationBlockFactory, 
-                       AVOccasionalTimebaseObserver, AVOnceTimebaseObserver, AVOperationQueueWithFundamentalDependency, 
-                       AVOutputSettings, AVOutputSettingsAssistant, AVPeriodicTimebaseObserver, 
-                       AVPersistableContentKeyRequest, AVPlannedSegmentConfiguration, 
-                       AVPlannedSegmentWritingRequest, AVPlannedVideoSegmentConfiguration, 
-                       AVPlaybackCoordinationMedium, AVPlaybackCoordinationMediumParticipant, 
-                       AVPlaybackCoordinator, AVPlayer, AVPlayerCaptionLayer, AVPlayerInterstitialEvent, 
+                       AVOccasionalTimebaseObserver, AVOfflineMediaContentKeyInfo, 
+                       AVOfflineMediaSegmentInfo, AVOfflineMediaStreamInfo, AVOnceTimebaseObserver, 
+                       AVOperationQueueWithFundamentalDependency, AVOutputSettings, 
+                       AVOutputSettingsAssistant, AVPeriodicTimebaseObserver, AVPersistableContentKeyRequest, 
+                       AVPlannedSegmentConfiguration, AVPlannedSegmentWritingRequest, 
+                       AVPlannedVideoSegmentConfiguration, AVPlaybackCoordinationMedium, 
+                       AVPlaybackCoordinationMediumParticipant, AVPlaybackCoordinator, 
+                       AVPlayer, AVPlayerCaptionLayer, AVPlayerInterstitialEvent, 
                        AVPlayerInterstitialEventController, AVPlayerInterstitialEventMonitor, 
                        AVPlayerItem, AVPlayerItemAccessLog, AVPlayerItemAccessLogEvent, 
                        AVPlayerItemErrorLog, AVPlayerItemErrorLogEvent, AVPlayerItemIntegratedTimeline, 
@@ -955,7 +960,6 @@ exports:
     objc-ivars:      [ AVAssetWriterInputMetadataAdaptor._internal, AVChapterMetadataItem._privChapter, 
                        AVMetadataItem._priv, AVMutableMetadataItem._mutablePriv ]
 reexports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     objc-classes:    [ AVAssetDownloadTask, AVAssetDownloadURLSession ]
 ...

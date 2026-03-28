@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/DVDPlayback.framework/Versions/A/DVDPlayback'
 current-version: 5960
 compatibility-version: 5000
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _DVDClearLastPlayBookmark, _DVDCloseMediaFile, _DVDCloseMediaVolume, 
                        _DVDCopyBuildVersion, _DVDDisableAllAudioFeatures, _DVDDisplaySubPicture, 
                        _DVDDispose, _DVDDoButtonActivate, _DVDDoMenuCGClick, _DVDDoMenuCGMouseOver, 

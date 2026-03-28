@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/AVRouting.framework/Versions/A/AVRouting'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AVCreateFigRouteDescriptorFromOutputDeviceDescription, _AVCreateRouteDiscovererWithType, 
                        _AVCustomRoutingControllerActiveRoutesDidChangeNotification, 
                        _AVCustomRoutingControllerAuthorizedRoutesDidChangeNotification, 
@@ -159,17 +157,17 @@ exports:
                        AVFigRoutingContextOutputContextImpl, AVInputContext, AVInputContextDestinationChange, 
                        AVInputDevice, AVInputDeviceDiscoverySession, AVOutputContext, 
                        AVOutputContextCommunicationChannel, AVOutputContextDestinationChange, 
-                       AVOutputContextManager, AVOutputDevice, AVOutputDeviceAuthorizationRequest, 
-                       AVOutputDeviceAuthorizationSession, AVOutputDeviceAuthorizedPeer, 
-                       AVOutputDeviceCommunicationChannel, AVOutputDeviceDiscoverySession, 
-                       AVOutputDeviceDiscoverySessionAvailableOutputDevices, AVOutputDeviceGroup, 
-                       AVOutputDeviceGroupMembershipChangeResult, AVOutputDeviceHID, 
-                       AVOutputDeviceIcon, AVOutputDeviceScreenBorrowToken, AVOutputDeviceScreenInfo, 
-                       AVOutputDeviceTurnByTurnToken, AVOutputDeviceViewAreaInfo, 
+                       AVOutputContextManager, AVOutputContextPredictedDevicesOptions, 
+                       AVOutputDevice, AVOutputDeviceAuthorizationRequest, AVOutputDeviceAuthorizationSession, 
+                       AVOutputDeviceAuthorizedPeer, AVOutputDeviceCommunicationChannel, 
+                       AVOutputDeviceDiscoverySession, AVOutputDeviceDiscoverySessionAvailableOutputDevices, 
+                       AVOutputDeviceGroup, AVOutputDeviceGroupMembershipChangeResult, 
+                       AVOutputDeviceHID, AVOutputDeviceIcon, AVOutputDeviceScreenBorrowToken, 
+                       AVOutputDeviceScreenInfo, AVOutputDeviceTurnByTurnToken, AVOutputDeviceViewAreaInfo, 
                        AVPairedDevice, AVRoutingPlaybackArbiter, AVRoutingSession, 
                        AVRoutingSessionDestination, AVRoutingSessionManager ]
     objc-ivars:      [ AVOutputDeviceScreenBorrowToken._client, AVOutputDeviceScreenBorrowToken._endpoint, 
                        AVOutputDeviceScreenBorrowToken._reason, AVOutputDeviceTurnByTurnToken._endpoint ]
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _AVOutputContextRemoveOutputDeviceOptionContinuePlayingAfterLastDeviceRemoved ]
 ...

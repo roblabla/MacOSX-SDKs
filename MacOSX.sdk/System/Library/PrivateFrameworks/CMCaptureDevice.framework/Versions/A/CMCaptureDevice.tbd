@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CMCaptureDevice.framework/Versions/A/CMCaptureDevice'
 allowable-clients:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AppleCVHWA, AppleDarwinCamera, AppleH10DarwinCamera, AppleH16DarwinCamera, 
                        CMCapture, CMCaptureDarwin, CMCaptureTests-Desktop, CMCaptureTests-Embedded, 
                        CMImaging, FirstLight, H10ISP.mediacapture, H10ISPDarwin.mediacapture, 
@@ -20,8 +18,7 @@ allowable-clients:
                        h10isp, h10ispdarwin, h13isp, h16isp, h16ispdarwin, test_VIO_HWFeatureDetection, 
                        vcd.mediacapture ]
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FigCaptureDeviceGetClassID, _FigCaptureDeviceGetFigBaseObject, 
                        _FigCaptureDeviceGetNotificationCenter, _FigCaptureDeviceGetTypeID, 
                        _FigCaptureISPProcessingSessionGetClassID, _FigCaptureISPProcessingSessionGetTypeID, 

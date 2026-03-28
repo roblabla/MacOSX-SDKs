@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/SceneKit.framework/Versions/A/SceneKit'
-current-version: 608.200
+current-version: 608.255
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _C3DGetFileDecryptionCallbacks, _C3DSetFileDecryptionCallbacks, 
                        _SCNAnimationCommitOnCompletion, _SCNBindingValueTransformerKey, 
                        _SCNCaptureDeviceOutputConsumerOptionContainsAlpha, _SCNConsistencyElementIDErrorKey, 
@@ -141,7 +141,7 @@ exports:
                        SCNTechnique, SCNText, SCNTextureSource, SCNTimingFunction, 
                        SCNTorus, SCNTransaction, SCNTransformConstraint, SCNTube, 
                        SCNView, _SCNShadableCompilationIssue ]
-  - targets:         [ arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst ]
     symbols:         [ _SCNMatrix4FromGLKMatrix4, _SCNMatrix4ToGLKMatrix4, _SCNPreferredRenderingAPIKey, 
                        _SCNViewOptionPreferredRenderingAPI ]
 ...

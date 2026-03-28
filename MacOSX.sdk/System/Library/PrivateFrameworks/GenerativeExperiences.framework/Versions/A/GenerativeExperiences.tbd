@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GenerativeExperiences.framework/Versions/A/GenerativeExperiences'
-current-version: 209.29
+current-version: 222.35.5
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s21GenerativeExperiences020TempFailureTracking_dE9XPCClientC06safetyD014userIdentifier10Foundation4DataVs6UInt32V_tYaKF', 
                        '_$s21GenerativeExperiences020TempFailureTracking_dE9XPCClientC06safetyD014userIdentifier10Foundation4DataVs6UInt32V_tYaKFTu', 
                        '_$s21GenerativeExperiences020TempFailureTracking_dE9XPCClientC3uidACs6UInt32V_tcfC', 
@@ -48,6 +46,14 @@ exports:
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientC14removeBuddyCFUSbyYaKFTj', 
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientC14removeBuddyCFUSbyYaKFTjTu', 
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientC14removeBuddyCFUSbyYaKFTq', 
+                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC16postReadinessCFU5forceS2b_tYaKFTj', 
+                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC16postReadinessCFU5forceS2b_tYaKFTjTu', 
+                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC16postReadinessCFU5forceS2b_tYaKFTq', 
+                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC16postReadinessCFU5forceS2b_tYaKFfA_', 
+                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC18removeReadinessCFU5forceS2b_tYaKFTj', 
+                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC18removeReadinessCFU5forceS2b_tYaKFTjTu', 
+                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC18removeReadinessCFU5forceS2b_tYaKFTq', 
+                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC18removeReadinessCFU5forceS2b_tYaKFfA_', 
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientC19postOutOfStorageCFU5force22remainingSpaceRequiredS2b_s6UInt64VtYaKFTj', 
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientC19postOutOfStorageCFU5force22remainingSpaceRequiredS2b_s6UInt64VtYaKFTjTu', 
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientC19postOutOfStorageCFU5force22remainingSpaceRequiredS2b_s6UInt64VtYaKFTq', 
@@ -62,14 +68,6 @@ exports:
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientC32removeAutoEnablementNotification5forceS2b_tYaKFTjTu', 
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientC32removeAutoEnablementNotification5forceS2b_tYaKFTq', 
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientC32removeAutoEnablementNotification5forceS2b_tYaKFfA_', 
-                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC33postAppleIntelligenceReadinessCFU5forceS2b_tYaKFTj', 
-                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC33postAppleIntelligenceReadinessCFU5forceS2b_tYaKFTjTu', 
-                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC33postAppleIntelligenceReadinessCFU5forceS2b_tYaKFTq', 
-                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC33postAppleIntelligenceReadinessCFU5forceS2b_tYaKFfA_', 
-                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC35removeAppleIntelligenceReadinessCFU5forceS2b_tYaKFTj', 
-                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC35removeAppleIntelligenceReadinessCFU5forceS2b_tYaKFTjTu', 
-                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC35removeAppleIntelligenceReadinessCFU5forceS2b_tYaKFTq', 
-                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC35removeAppleIntelligenceReadinessCFU5forceS2b_tYaKFfA_', 
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientCACycfC', 
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientCACycfCTj', 
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientCACycfCTq', 

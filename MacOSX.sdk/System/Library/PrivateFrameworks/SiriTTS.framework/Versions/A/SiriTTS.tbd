@@ -1,11 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SiriTTS.framework/Versions/A/SiriTTS'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ZN10Observable15remove_observerENSt3__110shared_ptrI8ObserverEE, 
                        __ZN10Observable4emitEPKcPKv, __ZN10Observable8on_eventEPKcNSt3__18functionIFvPKvEEE, 
                        __ZN12FastRewriter12merge_groupsENSt3__110shared_ptrINS0_6vectorI13FRReplaceInstNS0_9allocatorIS3_EEEEEES7_RKNS0_12basic_stringIcNS0_11char_traitsIcEENS4_IcEEEE, 
@@ -27,8 +25,7 @@ exports:
                        __ZN14NeuralTTSUtils23should_use_neural_voiceEPKc, __ZN14NeuralTTSUtils25check_fallback_conditionsEv, 
                        __ZN14NeuralTTSUtils25current_model_sample_rateEPKc, __ZN14NeuralTTSUtils27has_compact_neural_fallbackEPKc, 
                        __ZN14NeuralTTSUtils33check_thermal_critical_conditionsEv, 
-                       __ZN14TTSSynthesizer10get_localeEv, __ZN14TTSSynthesizer10initializeERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEENS0_8functionIFP10VE_INSTALLvEEE, 
-                       __ZN14TTSSynthesizer10initializeERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEERKNS0_6vectorINS_20EngineParamsOverrideENS4_ISA_EEEES8_S8_, 
+                       __ZN14TTSSynthesizer10get_localeEv, __ZN14TTSSynthesizer10initializeERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEERKNS0_6vectorINS_20EngineParamsOverrideENS4_ISA_EEEES8_S8_, 
                        __ZN14TTSSynthesizer10initializeERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEES8_S8_, 
                        __ZN14TTSSynthesizer11set_fe_onlyEb, __ZN14TTSSynthesizer13dump_analysisERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZN14TTSSynthesizer13get_event_busEv, __ZN14TTSSynthesizer13load_resourceERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEES8_, 
@@ -77,9 +74,10 @@ exports:
                        __ZN7SiriTTS13TextToPhonemeC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_, 
                        __ZN7SiriTTS13TextToPhonemeC2ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_, 
                        __ZN7SiriTTS15TTSFrontendTool10initializeEv, __ZN7SiriTTS15TTSFrontendTool14stitch_executeERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES7_, 
+                       __ZN7SiriTTS15TTSFrontendTool15context_executeERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES7_, 
                        __ZN7SiriTTS15TTSFrontendTool16execute_pipelineERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEENS1_8functionIFvRNS1_18basic_stringstreamIcS4_S6_EEEEES7_, 
                        __ZN7SiriTTS15TTSFrontendTool17sentence_breakingERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
-                       __ZN7SiriTTS15TTSFrontendTool25set_frontend_module_paramERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_S9_, 
+                       __ZN7SiriTTS15TTSFrontendTool25set_frontend_module_paramERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_PKc, 
                        __ZN7SiriTTS15TTSFrontendToolC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_S9_S9_, 
                        __ZN7SiriTTS15TTSFrontendToolC2ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_S9_S9_, 
                        __ZN7SiriTTS16PhonemeSystemLHPE, __ZN7SiriTTS16PhoneticAlphabet27greedy_symbols_from_phonemeERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
@@ -94,6 +92,7 @@ exports:
                        _gryphon_HasPhaticResponses, _gryphon_ReportSubstitution, 
                        _gryphon_SetDisablePrompts, _gryphon_SetOriginalText, _siritts_create_text_to_phoneme, 
                        _siritts_delete_text_to_phoneme, _siritts_text_to_phoneme, 
+                       _ttsfrontend_context_execute, _ttsfrontend_create_context_pipeline, 
                        _ttsfrontend_create_sentence_detector, _ttsfrontend_create_stitch_pipeline, 
                        _ttsfrontend_destrory, _ttsfrontend_sentence_breaking, _ttsfrontend_stitch_execute, 
                        _ttsfrontend_stitch_result_release, _ve_ttsAnalyzeText, _ve_ttsClose, 

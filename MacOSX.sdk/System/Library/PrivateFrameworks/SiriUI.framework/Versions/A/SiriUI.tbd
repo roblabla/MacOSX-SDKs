@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriUI.framework/Versions/A/SiriUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$sSo22GMAvailabilityListenerC6SiriUIEABycfC', '_$sSo22GMAvailabilityListenerCMa', 
                        _AFUIPresentationPropertiesRequestSourceKey, _AFUIPresentationPropertiesSupportsTouchKey, 
                        _AFUISpeechSynthesisQueueDidEmptyNotification, _AFUISpeechSynthesisWillStartSpeakingNotification, 
@@ -54,8 +54,8 @@ exports:
                        SiriUIAnimationUtilities, SiriUIAppInfoRepository, SiriUIApplicationHelper, 
                        SiriUIAttributedButtonFooterView, SiriUIAttributionImage, 
                        SiriUIAudioDeviceManager, SiriUIAudioManager, SiriUIAutoDismissalController, 
-                       SiriUIBaseSnippetViewController, SiriUIBuddyController, SiriUIBuddyGMEnrollmentSplashView, 
-                       SiriUIButton, SiriUICard, SiriUICardAttributeManager, SiriUICardContentViewController, 
+                       SiriUIBaseSnippetViewController, SiriUIBuddyController, SiriUIButton, 
+                       SiriUICard, SiriUICardAttributeManager, SiriUICardContentViewController, 
                        SiriUICardHeaderView, SiriUICardView, SiriUIChevronButton, 
                        SiriUIClearBackgroundCell, SiriUIClumpView, SiriUIClumpViewCollectionView, 
                        SiriUICollectionViewItem, SiriUIConfiguration, SiriUIContentButton, 
@@ -76,8 +76,9 @@ exports:
                        SiriUISiriView, SiriUISlider, SiriUISnippetBridgeViewManager, 
                        SiriUISnippetControllerCell, SiriUISnippetManager, SiriUISnippetViewController, 
                        SiriUISpeechSynthesisVoiceManager, SiriUISuggestionsView, 
-                       SiriUIThumbnailView, SiriUITintedImageView, SiriUITitledSectionHeaderView, 
-                       SiriUITranscriptItem, SiriUITwoButtonFooterView, SiriUIURLSession, 
-                       SiriUIVoicePickerTableView, SiriUIVoicePreviewManager, SiriUIVoiceTriggerController, 
-                       VTUIStringsHelper, VTUIStyle, VTUITrainingViewController ]
+                       SiriUITextInputView, SiriUIThumbnailView, SiriUITintedImageView, 
+                       SiriUITitledSectionHeaderView, SiriUITranscriptItem, SiriUITwoButtonFooterView, 
+                       SiriUIURLSession, SiriUIVoicePickerTableView, SiriUIVoicePreviewManager, 
+                       SiriUIVoiceTriggerController, VTUIStringsHelper, VTUIStyle, 
+                       VTUITrainingViewController ]
 ...

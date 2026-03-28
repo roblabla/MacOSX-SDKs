@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AlarmKit.framework/Versions/A/AlarmKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s15ClientInterface8AlarmKit22XPCInterfaceDefinitionPTl', 
                        '_$s15ServerInterface8AlarmKit22XPCInterfaceDefinitionPTl', 
                        '_$s7SwiftUI5ColorV8AlarmKitE4fromAC10Foundation4DataV_tKcfC', 
@@ -444,8 +444,11 @@ exports:
                        '_$s8AlarmKit0A6ClientCMu', '_$s8AlarmKit0A6ClientCN', '_$s8AlarmKit0A6ClientCfD', 
                        '_$s8AlarmKit0A6ClientCfd', '_$s8AlarmKit0A7ManagerC08supportsaB08bundleIDSbSS_tKF', 
                        '_$s8AlarmKit0A7ManagerC0A13ConfigurationV17countdownDuration8schedule10attributes10stopIntent09secondaryJ05soundAEy_xGAA0A0V09CountdownF0VSg_AN8ScheduleOSgAA0A10AttributesVyxG10AppIntents012LiveActivityJ0_pSgAZ0sB005AlertD0V0T5SoundVtcfC', 
+                       '_$s8AlarmKit0A7ManagerC0A13ConfigurationV17countdownDuration8schedule10attributes19appEntityIdentifier10stopIntent09secondaryM05soundAEy_xGAA0A0V09CountdownF0VSg_AO8ScheduleOSgAA0A10AttributesVyxG10AppIntents0jK0VSgAY012LiveActivityM0_pSgA2_0vB005AlertD0V0W5SoundVtcfC', 
                        '_$s8AlarmKit0A7ManagerC0A13ConfigurationV5alarm8schedule10attributes10stopIntent09secondaryI05soundAEy_xGAA0A0V8ScheduleOSg_AA0A10AttributesVyxG10AppIntents012LiveActivityI0_pSgAW0qB005AlertD0V0R5SoundVtFZ', 
+                       '_$s8AlarmKit0A7ManagerC0A13ConfigurationV5alarm8schedule10attributes19appEntityIdentifier10stopIntent09secondaryL05soundAEy_xGAA0A0V8ScheduleOSg_AA0A10AttributesVyxG10AppIntents0iJ0VSgAV012LiveActivityL0_pSgA_0tB005AlertD0V0U5SoundVtFZ', 
                        '_$s8AlarmKit0A7ManagerC0A13ConfigurationV5timer8duration10attributes10stopIntent09secondaryI05soundAEy_xGSd_AA0A10AttributesVyxG10AppIntents012LiveActivityI0_pSgAR0pB005AlertD0V0Q5SoundVtFZ', 
+                       '_$s8AlarmKit0A7ManagerC0A13ConfigurationV5timer8duration10attributes19appEntityIdentifier10stopIntent09secondaryL05soundAEy_xGSd_AA0A10AttributesVyxG10AppIntents0iJ0VSgAQ012LiveActivityL0_pSgAV0sB005AlertD0V0T5SoundVtFZ', 
                        '_$s8AlarmKit0A7ManagerC0A13ConfigurationVMa', '_$s8AlarmKit0A7ManagerC0A13ConfigurationVMn', 
                        '_$s8AlarmKit0A7ManagerC0A25AuthorizationStateUpdatesV17makeAsyncIteratorAE0I0VyF', 
                        '_$s8AlarmKit0A7ManagerC0A25AuthorizationStateUpdatesV8IteratorV4nextAC0dE0OSgyYaF', 
@@ -546,11 +549,15 @@ exports:
                        '_$s8AlarmKit0A7RequestV18alertConfiguration08ActivityB005AlertE0Vvg', 
                        '_$s8AlarmKit0A7RequestV18alertConfiguration08ActivityB005AlertE0VvpMV', 
                        '_$s8AlarmKit0A7RequestV18alertConfiguration08ActivityB005AlertE0Vvs', 
+                       '_$s8AlarmKit0A7RequestV19appEntityIdentifierSo08LNEntityF0CSgvM', 
+                       '_$s8AlarmKit0A7RequestV19appEntityIdentifierSo08LNEntityF0CSgvg', 
+                       '_$s8AlarmKit0A7RequestV19appEntityIdentifierSo08LNEntityF0CSgvpMV', 
+                       '_$s8AlarmKit0A7RequestV19appEntityIdentifierSo08LNEntityF0CSgvs', 
                        '_$s8AlarmKit0A7RequestV2id10Foundation4UUIDVvM', '_$s8AlarmKit0A7RequestV2id10Foundation4UUIDVvg', 
                        '_$s8AlarmKit0A7RequestV2id10Foundation4UUIDVvpMV', '_$s8AlarmKit0A7RequestV2id10Foundation4UUIDVvs', 
-                       '_$s8AlarmKit0A7RequestV2id17countdownDuration8schedule10attributes10stopAction09secondaryJ018alertConfigurationAC10Foundation4UUIDV_AA0A0V09CountdownF0VSgAO8ScheduleOSgAA0A10AttributesVyxGSo8LNActionCSgA_08ActivityB005AlertM0VtKcAA0A8MetadataRzlufC', 
-                       '_$s8AlarmKit0A7RequestV2id17countdownDuration8schedule10attributes10stopAction09secondaryJ018alertConfigurationAC10Foundation4UUIDV_AA0A0V09CountdownF0VSgAO8ScheduleOSgAA0A10AttributesVyxGSo8LNActionCSgA_08ActivityB005AlertM0VtKcAA0A8MetadataRzlufcfA0_', 
-                       '_$s8AlarmKit0A7RequestV2id17countdownDuration8schedule10attributes10stopAction09secondaryJ018alertConfigurationAC10Foundation4UUIDV_AA0A0V09CountdownF0VSgAO8ScheduleOSgAA0A10AttributesVyxGSo8LNActionCSgA_08ActivityB005AlertM0VtKcAA0A8MetadataRzlufcfA1_', 
+                       '_$s8AlarmKit0A7RequestV2id17countdownDuration8schedule10attributes19appEntityIdentifier10stopAction09secondaryM018alertConfigurationAC10Foundation4UUIDV_AA0A0V09CountdownF0VSgAP8ScheduleOSgAA0A10AttributesVyxGSo08LNEntityK0CSgSo8LNActionCSgA3_08ActivityB005AlertP0VtKcAA0A8MetadataRzlufC', 
+                       '_$s8AlarmKit0A7RequestV2id17countdownDuration8schedule10attributes19appEntityIdentifier10stopAction09secondaryM018alertConfigurationAC10Foundation4UUIDV_AA0A0V09CountdownF0VSgAP8ScheduleOSgAA0A10AttributesVyxGSo08LNEntityK0CSgSo8LNActionCSgA3_08ActivityB005AlertP0VtKcAA0A8MetadataRzlufcfA0_', 
+                       '_$s8AlarmKit0A7RequestV2id17countdownDuration8schedule10attributes19appEntityIdentifier10stopAction09secondaryM018alertConfigurationAC10Foundation4UUIDV_AA0A0V09CountdownF0VSgAP8ScheduleOSgAA0A10AttributesVyxGSo08LNEntityK0CSgSo8LNActionCSgA3_08ActivityB005AlertP0VtKcAA0A8MetadataRzlufcfA1_', 
                        '_$s8AlarmKit0A7RequestV4fromACs7Decoder_p_tKcfC', '_$s8AlarmKit0A7RequestV6encode2toys7Encoder_p_tKF', 
                        '_$s8AlarmKit0A7RequestV8scheduleAA0A0V8ScheduleOSgvM', '_$s8AlarmKit0A7RequestV8scheduleAA0A0V8ScheduleOSgvg', 
                        '_$s8AlarmKit0A7RequestV8scheduleAA0A0V8ScheduleOSgvpMV', 

@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ arm64-macos, arm64e-macos ]
+targets:         [ arm64e-macos ]
 install-name:    '/usr/lib/libUSBCfwflasher.dylib'
 exports:
-  - targets:         [ arm64-macos, arm64e-macos ]
+  - targets:         [ arm64e-macos ]
     symbols:         [ _USBCFlasherCreate, _USBCFlasherExecCmd, _USBCFlasherIsDone, 
                        _USBCFlasherSupported ]
     objc-classes:    [ IECSInterface, IOKitUtilities, flashUpdater, iecsUpdater, 

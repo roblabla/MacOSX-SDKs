@@ -62,9 +62,9 @@
 .Sh SYNOPSIS
 .Nm pfctl
 .Bk -words
-.Op Fl AdeghmNnOqRrvz
+.Op Fl AdeglhmNnOqRrvz
 .Op Fl a Ar anchor
-.Oo Fl D Ar macro Ns =
+.Oo Fl D Ar macro Ns = Ns
 .Ar value Oc
 .Op Fl F Ar modifier
 .Op Fl f Ar file
@@ -301,6 +301,9 @@ To kill all states with the target
 .Dq host2 :
 .Pp
 .Dl # pfctl -k 0.0.0.0/0 -k host2
+.It Fl l
+Use a local protocol database instead of
+.Xr getprotobynumber 3
 .It Fl m
 Merge in explicitly given options without resetting those
 which are omitted.

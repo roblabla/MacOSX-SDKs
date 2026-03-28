@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-ios26.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftSpatial -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 108 -module-name Spatial
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-ios26.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftSpatial -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 108 -module-name Spatial
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 @_exported import Spatial
 import Swift
 import _Concurrency
@@ -251,24 +251,19 @@ extension Spatial.Pose3D {
   @inlinable public func translated(by size: Spatial.Size3D) -> Spatial.Pose3D {
         return self.translated(by: Vector3D(size))
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, renamed: "init(_:)")
   @inlinable public init?(matrix: simd.simd_double4x4) {
         
         self.init(matrix)
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, renamed: "init(_:)")
   @inlinable public init?(matrix: simd.simd_float4x4) {
         
         self.init(matrix)
     }
-  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.AffineTransform3D {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use `AffineTransform3D.init(truncating:)` instead.")
   @inlinable public init?(projectiveTransform transform: Spatial.ProjectiveTransform3D) {
         
@@ -280,8 +275,6 @@ extension Spatial.AffineTransform3D {
             return nil
         }
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use `AffineTransform3D.init(truncating:)` instead.")
   @inlinable public init?(_ matrix: simd.simd_double4x4) {
 
@@ -293,7 +286,6 @@ extension Spatial.AffineTransform3D {
             return nil
         }
     }
-  #endif
   @available(*, deprecated, renamed: "init(offset:)", message: "Use `Vector3D` variant.")
   @inlinable public init(translation: Spatial.Size3D) {
         self.init(translation: Vector3D(translation))
@@ -311,31 +303,24 @@ extension Spatial.AffineTransform3D {
             __SPAffineTransform3DSetTranslation(&self, newValue)
         }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use `AffineTransform3D.getter:inverse` instead.")
   @inlinable public func inverted() -> Spatial.AffineTransform3D? {
         
         return inverse
     }
-  #endif
   @available(*, deprecated, renamed: "init(_:)")
   @inlinable public init(matrix: simd.simd_float4x3) {
         self.init(matrix)
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, renamed: "init(_:)")
   @inlinable public init?(matrix: simd.simd_float4x4) {
         self.init(matrix)
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, renamed: "init(_:)")
   @inlinable public init?(matrix: simd.simd_double4x4) {
         
         self.init(matrix)
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use `AffineTransform3D.init(truncating:)` instead.")
   @inlinable public init?(_ matrix: simd.simd_float4x4) {
 
@@ -363,7 +348,6 @@ extension Spatial.AffineTransform3D {
             return nil
         }
     }
-  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.ProjectiveTransform3D {
@@ -384,13 +368,11 @@ extension Spatial.ProjectiveTransform3D {
             __SPProjectiveTransform3DSetTranslation(&self, newValue)
         }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use `ProjectiveTransform3D.getter:inverse` instead.")
   @inlinable public func inverted() -> Spatial.ProjectiveTransform3D? {
         
         return inverse
     }
-  #endif
   @available(*, deprecated, renamed: "init(_:)")
   @inlinable public init(matrix: simd.simd_float4x4) {
         self.init(matrix)
@@ -571,7 +553,6 @@ extension Spatial.ProjectiveTransform3DFloat {
                 fatalError("Unsupported shear")
         }
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var rotation: Spatial.Rotation3DFloat? {
     get {
         
@@ -584,8 +565,6 @@ extension Spatial.ProjectiveTransform3DFloat {
         }
     }
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var inverse: Spatial.ProjectiveTransform3DFloat? {
     get {
         
@@ -598,7 +577,6 @@ extension Spatial.ProjectiveTransform3DFloat {
         }
     }
   }
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension Spatial.ProjectiveTransform3DFloat : Swift.Equatable {
@@ -1110,7 +1088,6 @@ extension Spatial.ScaledPose3D {
         
         self = __SPScaledPose3DMakeLookAt(forward, scale, up)
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init?(transform: Spatial.AffineTransform3D) {
         
         let p = __SPScaledPose3DMakeWithAffineTransform(transform)
@@ -1121,8 +1098,6 @@ extension Spatial.ScaledPose3D {
             return nil
         }
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init?(transform: Spatial.ProjectiveTransform3D) {
         
         let t = __SPScaledPose3DMakeWithProjectiveTransform(transform)
@@ -1133,8 +1108,6 @@ extension Spatial.ScaledPose3D {
             return nil
         }
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init?(_ matrix: simd.simd_double4x4) {
         
         let p = __SPScaledPose3DMakeWith4x4Matrix(matrix)
@@ -1145,8 +1118,6 @@ extension Spatial.ScaledPose3D {
             return nil
         }
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init?(_ matrix: simd.simd_float4x4) {
         
         let m = simd_double4x4(simd_double(matrix.columns.0),
@@ -1162,7 +1133,6 @@ extension Spatial.ScaledPose3D {
             return nil
         }
     }
-  #endif
   @inlinable public var matrix: simd.simd_double4x4 {
     get {
         return __SPScaledPose3DGet4x4Matrix(self)
@@ -1281,7 +1251,6 @@ extension Spatial.Pose3D {
         
         self = __SPPose3DMakeLookAt(forward, up)
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init?(transform: Spatial.AffineTransform3D) {
         
         let p = __SPPose3DMakeWithAffineTransform(transform)
@@ -1292,8 +1261,6 @@ extension Spatial.Pose3D {
             return nil
         }
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init?(transform: Spatial.ProjectiveTransform3D) {
         
         let t = __SPPose3DMakeWithProjectiveTransform(transform)
@@ -1304,8 +1271,6 @@ extension Spatial.Pose3D {
             return nil
         }
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init?(_ matrix: simd.simd_double4x4) {
         
         let p = __SPPose3DMakeWith4x4Matrix(matrix)
@@ -1316,8 +1281,6 @@ extension Spatial.Pose3D {
             return nil
         }
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init?(_ matrix: simd.simd_float4x4) {
         
         let m = simd_double4x4(simd_double(matrix.columns.0),
@@ -1333,7 +1296,6 @@ extension Spatial.Pose3D {
             return nil
         }
     }
-  #endif
   @inlinable public var matrix: simd.simd_double4x4 {
     get {
         return __SPPose3DGet4x4Matrix(self)
@@ -1621,7 +1583,6 @@ extension Spatial.Rect3DFloat {
         
         self = self.inset(by: dXYZ)
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func intersection(_ other: Spatial.Rect3DFloat) -> Spatial.Rect3DFloat? {
         let intersection = __SPRect3DFloatIntersection(self, other)
         
@@ -1631,7 +1592,6 @@ extension Spatial.Rect3DFloat {
             return nil
         }
     }
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension Spatial.Rect3DFloat : Swift.Equatable {
@@ -2786,14 +2746,10 @@ public protocol Transform3DProtocol : Spatial.SpatialTypeProtocol {
   func isUniform(overDimensions: Spatial.Dimension3DSet) -> Swift.Bool
   var isRectilinear: Swift.Bool { get }
   func concatenating(_ transform: Self) -> Self
-  #if compiler(>=5.3) && $NonescapableTypes
   var inverse: Self? { get }
-  #endif
   func isApproximatelyEqual(to other: Self, tolerance: Self.Scalar) -> Swift.Bool
   var translation: Self.Vector { get set }
-  #if compiler(>=5.3) && $NonescapableTypes
   var rotation: Self.Rotation? { get }
-  #endif
   mutating func flip(along axis: Spatial.Axis3D)
   func flipped(along axis: Spatial.Axis3D) -> Self
 }
@@ -2815,9 +2771,7 @@ public protocol VolumetricProtocol<Scalar> : Spatial.SpatialTypeProtocol {
   func contains(_ other: Self) -> Swift.Bool
   func contains(point: Self.Point) -> Swift.Bool
   func union(_ other: Self) -> Self
-  #if compiler(>=5.3) && $NonescapableTypes
   func intersection(_ other: Self) -> Self?
-  #endif
   mutating func formIntersection(_ other: Self)
   mutating func formUnion(_ other: Self)
   func contains(anyOf points: [Self.Point]) -> Swift.Bool
@@ -2918,7 +2872,6 @@ extension Spatial.ProjectiveTransform3D {
                 fatalError("Unsupported shear")
         }
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var rotation: Spatial.Rotation3D? {
     get {
         
@@ -2931,8 +2884,6 @@ extension Spatial.ProjectiveTransform3D {
         }
     }
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, renamed: "scaleComponent")
   @inlinable public var scale: Spatial.Size3D? {
     get {
@@ -2946,8 +2897,6 @@ extension Spatial.ProjectiveTransform3D {
         }
     }
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var inverse: Spatial.ProjectiveTransform3D? {
     get {
         
@@ -2960,7 +2909,6 @@ extension Spatial.ProjectiveTransform3D {
         }
     }
   }
-  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.ProjectiveTransform3D : Swift.Equatable {
@@ -3066,7 +3014,6 @@ extension Spatial.Rect3D : Spatial.Volumetric {
         
         self = self.inset(by: dXYZ)
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func intersection(_ other: Spatial.Rect3D) -> Spatial.Rect3D? {
         let intersection = __SPRect3DIntersection(self, other)
         
@@ -3076,7 +3023,6 @@ extension Spatial.Rect3D : Spatial.Volumetric {
             return nil
         }
     }
-  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Rect3D : Swift.Equatable {
@@ -3948,7 +3894,6 @@ extension Spatial.ScaledPose3DFloat {
         
         self = __SPScaledPose3DFloatMakeLookAt(forward, scale, up)
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init?(transform: Spatial.AffineTransform3DFloat) {
         
         let p = __SPScaledPose3DFloatMakeWithAffineTransform(transform)
@@ -3959,8 +3904,6 @@ extension Spatial.ScaledPose3DFloat {
             return nil
         }
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init?(transform: Spatial.ProjectiveTransform3DFloat) {
         
         let t = __SPScaledPose3DFloatMakeWithProjectiveTransform(transform)
@@ -3971,8 +3914,6 @@ extension Spatial.ScaledPose3DFloat {
             return nil
         }
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init?(_ matrix: simd.simd_float4x4) {
         
         let p = __SPScaledPose3DFloatMakeWith4x4Matrix(matrix)
@@ -3983,7 +3924,6 @@ extension Spatial.ScaledPose3DFloat {
             return nil
         }
     }
-  #endif
   @inlinable public var matrix: simd.simd_float4x4 {
     get {
         return __SPScaledPose3DFloatGet4x4Matrix(self)
@@ -4067,9 +4007,7 @@ extension Spatial.Pose3DFloat {
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 public protocol CoordinateSpace3D {
   associatedtype AncestorCoordinateSpace : Spatial.CoordinateSpace3D
-  #if compiler(>=5.3) && $NonescapableTypes
   var ancestorSpace: Self.AncestorCoordinateSpace? { get }
-  #endif
   func ancestorFromSpaceTransform() throws -> Spatial.ProjectiveTransform3D
   func transform(from targetCoordinateSpace: Self) throws -> Spatial.ProjectiveTransform3D
 }
@@ -4137,7 +4075,6 @@ extension Spatial.Size3DFloat {
                                                points,
                                                Int32(points.count))
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func intersection(_ other: Spatial.Size3DFloat) -> Spatial.Size3DFloat? {
         let intersection = __SPSize3DFloatIntersection(self, other)
         
@@ -4147,7 +4084,6 @@ extension Spatial.Size3DFloat {
             return nil
         }
     }
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension Spatial.Size3DFloat : Swift.Equatable {
@@ -4280,9 +4216,7 @@ public protocol Volumetric {
   func contains(_ other: Self) -> Swift.Bool
   func contains(point: Spatial.Point3D) -> Swift.Bool
   func union(_ other: Self) -> Self
-  #if compiler(>=5.3) && $NonescapableTypes
   func intersection(_ other: Self) -> Self?
-  #endif
   mutating func formIntersection(_ other: Self)
   mutating func formUnion(_ other: Self)
   @available(*, deprecated, renamed: "contains(anyOf:)")
@@ -4385,7 +4319,6 @@ extension Spatial.Size3D : Spatial.Volumetric {
                                           points,
                                           Int32(points.count))
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func intersection(_ other: Spatial.Size3D) -> Spatial.Size3D? {
         let intersection = __SPSize3DIntersection(self, other)
         
@@ -4395,7 +4328,6 @@ extension Spatial.Size3D : Spatial.Volumetric {
             return nil
         }
     }
-  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Size3D : Swift.Equatable {
@@ -4608,7 +4540,6 @@ extension Spatial.AffineTransform3DFloat {
         return __SPAffineTransform3DFloatFlip(self, axis)
     }
   public mutating func flip(along axis: Spatial.Axis3D)
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var rotation: Spatial.Rotation3DFloat? {
     get {
         
@@ -4621,8 +4552,6 @@ extension Spatial.AffineTransform3DFloat {
         }
     }
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var inverse: Spatial.AffineTransform3DFloat? {
     get {
         
@@ -4635,10 +4564,7 @@ extension Spatial.AffineTransform3DFloat {
         }
     }
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func changeBasis(from: Spatial.AffineTransform3DFloat = .identity, to: Spatial.AffineTransform3DFloat) -> Spatial.AffineTransform3DFloat?
-  #endif
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension Spatial.AffineTransform3DFloat : Swift.Equatable {
@@ -4678,11 +4604,9 @@ extension Spatial.AffineTransform3DFloat {
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 public struct WorldReferenceCoordinateSpace : Spatial.CoordinateSpace3D {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var ancestorSpace: Swift.Never? {
     get
   }
-  #endif
   public func ancestorFromSpaceTransform() throws -> Spatial.ProjectiveTransform3D
   @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
   public typealias AncestorCoordinateSpace = Swift.Never
@@ -4693,11 +4617,9 @@ extension Spatial.WorldReferenceCoordinateSpace : Spatial.CoordinateSpace3DFloat
 }
 @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension Swift.Never : Spatial.CoordinateSpace3D, Spatial.CoordinateSpace3DFloat {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var ancestorSpace: Swift.Never? {
     get
   }
-  #endif
   public typealias AncestorCoordinateSpace = Swift.Never
   public func ancestorFromSpaceTransform() throws -> Spatial.ProjectiveTransform3D
   public func ancestorFromSpaceTransformFloat() throws -> Spatial.ProjectiveTransform3DFloat
@@ -4919,7 +4841,6 @@ extension Spatial.AffineTransform3D {
         return __SPAffineTransform3DFlip(self, axis)
     }
   public mutating func flip(along axis: Spatial.Axis3D)
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var rotation: Spatial.Rotation3D? {
     get {
         
@@ -4932,8 +4853,6 @@ extension Spatial.AffineTransform3D {
         }
     }
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var inverse: Spatial.AffineTransform3D? {
     get {
         
@@ -4946,7 +4865,6 @@ extension Spatial.AffineTransform3D {
         }
     }
   }
-  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.AffineTransform3D : Swift.Equatable {
@@ -4968,9 +4886,7 @@ extension Spatial.AffineTransform3D : Swift.Codable {
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
 extension Spatial.AffineTransform3D {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func changeBasis(from: Spatial.AffineTransform3D = .identity, to: Spatial.AffineTransform3D) -> Spatial.AffineTransform3D?
-  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.AffineTransform3D : Swift.CustomStringConvertible {
@@ -5076,7 +4992,6 @@ extension Spatial.Pose3DFloat {
         
         self = __SPPose3DFloatMakeLookAt(forward, up)
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init?(transform: Spatial.AffineTransform3DFloat) {
         
         let p = __SPPose3DFloatMakeWithAffineTransform(transform)
@@ -5087,8 +5002,6 @@ extension Spatial.Pose3DFloat {
             return nil
         }
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init?(transform: Spatial.ProjectiveTransform3DFloat) {
         
         let t = __SPPose3DFloatMakeWithProjectiveTransform(transform)
@@ -5099,8 +5012,6 @@ extension Spatial.Pose3DFloat {
             return nil
         }
     }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init?(_ matrix: simd.simd_float4x4) {
         
         let p = __SPPose3DFloatMakeWith4x4Matrix(matrix)
@@ -5111,7 +5022,6 @@ extension Spatial.Pose3DFloat {
             return nil
         }
     }
-  #endif
   @inlinable public var matrix: simd.simd_float4x4 {
     get {
         return __SPPose3DFloatGet4x4Matrix(self)

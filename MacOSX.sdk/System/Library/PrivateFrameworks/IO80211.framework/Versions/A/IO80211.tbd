@@ -1,9 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IO80211.framework/Versions/A/IO80211'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ _ASL_LOG, _Apple80211Associate, _Apple80211Associate2, _Apple80211BindToInterface, 
                        _Apple80211BindToInterfaceWithParams, _Apple80211BindToInterfaceWithService, 
                        _Apple80211CalculateShortSSIDCopy, _Apple80211Close, _Apple80211CopyAwdlPreferredChannels, 

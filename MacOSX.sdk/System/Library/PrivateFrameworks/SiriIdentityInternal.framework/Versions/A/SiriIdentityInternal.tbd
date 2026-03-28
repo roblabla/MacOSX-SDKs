@@ -1,14 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriIdentityInternal.framework/Versions/A/SiriIdentityInternal'
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ IdentityFlowPlugin, IdentityIntentExtension, SiriIdentityAssistant, 
                        SiriIdentityInternal, SiriIdentityInternalTests ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s13IntentHandler20SiriIdentityInternal25InProcessHandlingStrategyPTl', 
                        '_$s13SiriUtilities0A11EnvironmentC0A16IdentityInternalE07getUserD00A7KitFlow0gD8ProviderCSgyFZ', 
                        '_$s20SiriIdentityInternal012UserIdentifyB16ResolutionResultC11unsupported9forReasonACXDAA0deb11UnsupportedJ0O_tFZ', 

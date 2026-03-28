@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/DeclaredAgeRange.framework/Versions/A/DeclaredAgeRange'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16DeclaredAgeRange0abC6ActionV14callAsFunction8ageGates__AA0bC7ServiceV8ResponseOSi_SiSgAJtYaKF', 
                        '_$s16DeclaredAgeRange0abC6ActionV14callAsFunction8ageGates__AA0bC7ServiceV8ResponseOSi_SiSgAJtYaKFTu', 
                        '_$s16DeclaredAgeRange0abC6ActionVMa', '_$s16DeclaredAgeRange0abC6ActionVMn', 
@@ -61,6 +61,21 @@ exports:
                        '_$s16DeclaredAgeRange0bC7ServiceV16ParentalControlsVs10SetAlgebraAAMc', 
                        '_$s16DeclaredAgeRange0bC7ServiceV16ParentalControlsVs25ExpressibleByArrayLiteralAAMc', 
                        '_$s16DeclaredAgeRange0bC7ServiceV16ParentalControlsVs9OptionSetAAMc', 
+                       '_$s16DeclaredAgeRange0bC7ServiceV17RegulatoryFeatureO08declaredbC8RequiredyA2EmFWC', 
+                       '_$s16DeclaredAgeRange0bC7ServiceV17RegulatoryFeatureO2eeoiySbAE_AEtFZ', 
+                       '_$s16DeclaredAgeRange0bC7ServiceV17RegulatoryFeatureO43significantAppChangeRequiresParentalConsentyA2EmFWC', 
+                       '_$s16DeclaredAgeRange0bC7ServiceV17RegulatoryFeatureO45significantAppChangeRequiresAdultNotificationyA2EmFWC', 
+                       '_$s16DeclaredAgeRange0bC7ServiceV17RegulatoryFeatureO4hash4intoys6HasherVz_tF', 
+                       '_$s16DeclaredAgeRange0bC7ServiceV17RegulatoryFeatureO9hashValueSivg', 
+                       '_$s16DeclaredAgeRange0bC7ServiceV17RegulatoryFeatureO9hashValueSivpMV', 
+                       '_$s16DeclaredAgeRange0bC7ServiceV17RegulatoryFeatureOMa', 
+                       '_$s16DeclaredAgeRange0bC7ServiceV17RegulatoryFeatureOMn', 
+                       '_$s16DeclaredAgeRange0bC7ServiceV17RegulatoryFeatureON', 
+                       '_$s16DeclaredAgeRange0bC7ServiceV17RegulatoryFeatureOSHAAMc', 
+                       '_$s16DeclaredAgeRange0bC7ServiceV17RegulatoryFeatureOSQAAMc', 
+                       '_$s16DeclaredAgeRange0bC7ServiceV26requiredRegulatoryFeaturesShyAC0F7FeatureOGvg', 
+                       '_$s16DeclaredAgeRange0bC7ServiceV26requiredRegulatoryFeaturesShyAC0F7FeatureOGvgTu', 
+                       '_$s16DeclaredAgeRange0bC7ServiceV26requiredRegulatoryFeaturesShyAC0F7FeatureOGvpMV', 
                        '_$s16DeclaredAgeRange0bC7ServiceV5ErrorO10Foundation09LocalizedE0AAMc', 
                        '_$s16DeclaredAgeRange0bC7ServiceV5ErrorO12notAvailableyA2EmFWC', 
                        '_$s16DeclaredAgeRange0bC7ServiceV5ErrorO14invalidRequestyA2EmFWC', 
@@ -77,6 +92,11 @@ exports:
                        '_$s16DeclaredAgeRange0bC7ServiceV8ResponseOMa', '_$s16DeclaredAgeRange0bC7ServiceV8ResponseOMn', 
                        '_$s16DeclaredAgeRange0bC7ServiceV8ResponseON', '_$s16DeclaredAgeRange0bC7ServiceVMa', 
                        '_$s16DeclaredAgeRange0bC7ServiceVMn', '_$s16DeclaredAgeRange0bC7ServiceVN', 
-                       '_$s7SwiftUI17EnvironmentValuesV16DeclaredAgeRangeE07requestfG0AD0efG6ActionVvg', 
-                       '_$s7SwiftUI17EnvironmentValuesV16DeclaredAgeRangeE07requestfG0AD0efG6ActionVvpMV' ]
+                       '_$s16DeclaredAgeRange23SignificantUpdateActionV14callAsFunction17updateDescriptionySS_tYaKF', 
+                       '_$s16DeclaredAgeRange23SignificantUpdateActionV14callAsFunction17updateDescriptionySS_tYaKFTu', 
+                       '_$s16DeclaredAgeRange23SignificantUpdateActionVMa', '_$s16DeclaredAgeRange23SignificantUpdateActionVMn', 
+                       '_$s16DeclaredAgeRange23SignificantUpdateActionVN', '_$s7SwiftUI17EnvironmentValuesV16DeclaredAgeRangeE07requestfG0AD0efG6ActionVvg', 
+                       '_$s7SwiftUI17EnvironmentValuesV16DeclaredAgeRangeE07requestfG0AD0efG6ActionVvpMV', 
+                       '_$s7SwiftUI17EnvironmentValuesV16DeclaredAgeRangeE35showSignificantUpdateAcknowledgmentAD0iJ6ActionVvg', 
+                       '_$s7SwiftUI17EnvironmentValuesV16DeclaredAgeRangeE35showSignificantUpdateAcknowledgmentAD0iJ6ActionVvpMV' ]
 ...

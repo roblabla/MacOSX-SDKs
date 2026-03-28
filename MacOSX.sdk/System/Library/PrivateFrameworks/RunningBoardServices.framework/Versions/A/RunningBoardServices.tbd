@@ -1,12 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/RunningBoardServices.framework/Versions/A/RunningBoardServices'
-current-version: 1008.60.3
+current-version: 1015.100.16
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _NSStringFromRBSAcquisitionCompletionPolicy, _NSStringFromRBSCPUMaximumUsageViolationPolicy, 
                        _NSStringFromRBSDebugState, _NSStringFromRBSDurationEndPolicy, 
                        _NSStringFromRBSDurationStartPolicy, _NSStringFromRBSGPURole, 
@@ -85,19 +83,19 @@ exports:
                        RBSLegacyAttribute, RBSLimitation, RBSMacAppProcessIdentity, 
                        RBSMachEndpoint, RBSMachPort, RBSMachPortTaskNameRight, RBSMimicTaskSuspensionAttribute, 
                        RBSNotPredicate, RBSOSServiceProcessIdentity, RBSOpaqueProcessIdentity, 
-                       RBSPersistentAttribute, RBSPreserveBaseMemoryGrant, RBSPreventIdleSleepGrant, 
-                       RBSPreventLaunchLimitation, RBSPrewarmAttribute, RBSProcessApplicationPredicate, 
-                       RBSProcessAssertionInfo, RBSProcessBKSLegacyPredicate, RBSProcessBundle, 
-                       RBSProcessCollectionPredicateImpl, RBSProcessEndowmentInfo, 
+                       RBSPersistentAttribute, RBSPrefetchPageAttribute, RBSPreserveBaseMemoryGrant, 
+                       RBSPreventIdleSleepGrant, RBSPreventLaunchLimitation, RBSPrewarmAttribute, 
+                       RBSProcessApplicationPredicate, RBSProcessAssertionInfo, RBSProcessBKSLegacyPredicate, 
+                       RBSProcessBundle, RBSProcessCollectionPredicateImpl, RBSProcessEndowmentInfo, 
                        RBSProcessEverythingPredicate, RBSProcessExitContext, RBSProcessExitEvent, 
                        RBSProcessExitStatus, RBSProcessHandle, RBSProcessIdentifier, 
                        RBSProcessIdentity, RBSProcessInfoPlistResult, RBSProcessInstance, 
                        RBSProcessIntPredicate, RBSProcessLimitations, RBSProcessMonitor, 
                        RBSProcessMonitorConfiguration, RBSProcessPredicate, RBSProcessPredicateImpl, 
-                       RBSProcessState, RBSProcessStateDescriptor, RBSProcessStateUpdate, 
-                       RBSProcessStringPredicate, RBSRequest, RBSResistTerminationGrant, 
-                       RBSResourceViolationHandler, RBSRunningReasonAttribute, RBSSavedEndowment, 
-                       RBSSavedEndowmentGrant, RBSService, RBSSubordinateProcessAttribute, 
+                       RBSProcessPrefetchPageScenario, RBSProcessState, RBSProcessStateDescriptor, 
+                       RBSProcessStateUpdate, RBSProcessStringPredicate, RBSRequest, 
+                       RBSResistTerminationGrant, RBSResourceViolationHandler, RBSRunningReasonAttribute, 
+                       RBSSavedEndowment, RBSSavedEndowmentGrant, RBSService, RBSSubordinateProcessAttribute, 
                        RBSSuspendableCPUGrant, RBSTagAttribute, RBSTarget, RBSTerminateContext, 
                        RBSTerminateRequest, RBSTerminationAssertion, RBSWorkloop, 
                        RBSWrappedLSInfo, RBSXPCCoder, RBSXPCMessage, RBSXPCMessageContext, 

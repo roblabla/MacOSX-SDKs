@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriTimeAlarmInternal.framework/Versions/A/SiriTimeAlarmInternal'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s16SiriTimeInternal21HALAlarmDeviceContextV0ab5AlarmC0E08toSnoozeG6IntentAD0ig3HalJ0Cvg', 
                        '_$s16SiriTimeInternal21HALAlarmDeviceContextV0ab5AlarmC0E08toSnoozeG6IntentAD0ig3HalJ0CvpMV', 
                        '_$s16SiriTimeInternal21HALAlarmDeviceContextV0ab5AlarmC0E09toDismissG6IntentAD0ig3HalJ0Cvg', 
@@ -935,6 +935,7 @@ exports:
                        '_$s21SiriTimeAlarmInternal0aC12SnippetModelVMa', '_$s21SiriTimeAlarmInternal0aC12SnippetModelVMn', 
                        '_$s21SiriTimeAlarmInternal0aC12SnippetModelVN', '_$s21SiriTimeAlarmInternal0aC12SnippetModelVSEAAMc', 
                        '_$s21SiriTimeAlarmInternal0aC12SnippetModelVSeAAMc', '_$s21SiriTimeAlarmInternal0aC12SnippetModelVs12IdentifiableAAMc', 
+                       '_$s21SiriTimeAlarmInternal0aC13SnippetModelsO014disambiguationC0yAcA0aC9ItemModelVcACmFWC', 
                        '_$s21SiriTimeAlarmInternal0aC13SnippetModelsO0E3Kit0E11PluginModelAAMc', 
                        '_$s21SiriTimeAlarmInternal0aC13SnippetModelsO10alarmMultiyAcA0cE5ModelVcACmFWC', 
                        '_$s21SiriTimeAlarmInternal0aC13SnippetModelsO10bundleNameSSvgZ', 

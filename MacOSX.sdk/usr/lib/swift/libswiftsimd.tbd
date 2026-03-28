@@ -1,13 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftsimd.dylib'
 current-version: 23
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftsimd.dylib', '$ld$install_name$os10.11$@rpath/libswiftsimd.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftsimd.dylib', '$ld$install_name$os10.13$@rpath/libswiftsimd.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftsimd.dylib', '$ld$install_name$os10.9$@rpath/libswiftsimd.dylib', 
@@ -848,7 +846,7 @@ exports:
                        '_$ss5SIMD3V4simdE19_descriptionAsArraySSvg', '_$ss5SIMD3V4simdE19_descriptionAsArraySSvpMV', 
                        '_$ss5SIMD4V4simdE19_descriptionAsArraySSvg', '_$ss5SIMD4V4simdE19_descriptionAsArraySSvpMV', 
                        '__swift_FORCE_LOAD_$_swiftsimd' ]
-  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s4simd3absys5SIMD2Vys7Float16VGAGF', '_$s4simd3absys5SIMD3Vys7Float16VGAGF', 
                        '_$s4simd3absys5SIMD4Vys7Float16VGAGF', '_$s4simd3absys5SIMD8Vys7Float16VGAGF', 
                        '_$s4simd3absys6SIMD16Vys7Float16VGAGF', '_$s4simd3absys6SIMD32Vys7Float16VGAGF', 

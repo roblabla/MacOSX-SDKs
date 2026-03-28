@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SiriContactsCommon.framework/Versions/A/SiriContactsCommon'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation14DateComponentsV18SiriContactsCommonE12startOfTodayACvgZ', 
                        '_$s10Foundation14DateComponentsV18SiriContactsCommonE12startOfTodayACvpZMV', 
                        '_$s10Foundation14DateComponentsV18SiriContactsCommonE15startOfTodayGMTACvgZ', 
@@ -130,6 +130,7 @@ exports:
                        '_$s18SiriContactsCommon0B18SnippetPluginModelO14responseViewIDSSSgvpMV', 
                        '_$s18SiriContactsCommon0B18SnippetPluginModelO19getContactAttributeyAcA03GethidF0V_tcACmFWC', 
                        '_$s18SiriContactsCommon0B18SnippetPluginModelO22modifyContactAttributeyAcA06ModifyhidF0V_tcACmFWC', 
+                       '_$s18SiriContactsCommon0B18SnippetPluginModelO29unsupportedNoEmergencyContactyAcA011UnsupportedhijdF0V_tcACmFWC', 
                        '_$s18SiriContactsCommon0B18SnippetPluginModelO4fromACs7Decoder_p_tKcfC', 
                        '_$s18SiriContactsCommon0B18SnippetPluginModelO6encode2toys7Encoder_p_tKF', 
                        '_$s18SiriContactsCommon0B18SnippetPluginModelOMa', '_$s18SiriContactsCommon0B18SnippetPluginModelOMn', 
@@ -399,6 +400,17 @@ exports:
                        '_$s18SiriContactsCommon34ModifyContactAttributeSnippetModelVN', 
                        '_$s18SiriContactsCommon34ModifyContactAttributeSnippetModelVSEAAMc', 
                        '_$s18SiriContactsCommon34ModifyContactAttributeSnippetModelVSeAAMc', 
+                       '_$s18SiriContactsCommon41UnsupportedNoEmergencyContactSnippetModelV0H3Kit0hI0AAMc', 
+                       '_$s18SiriContactsCommon41UnsupportedNoEmergencyContactSnippetModelV11buttonLabelACSS_tcfC', 
+                       '_$s18SiriContactsCommon41UnsupportedNoEmergencyContactSnippetModelV11buttonLabelSSvg', 
+                       '_$s18SiriContactsCommon41UnsupportedNoEmergencyContactSnippetModelV11buttonLabelSSvpMV', 
+                       '_$s18SiriContactsCommon41UnsupportedNoEmergencyContactSnippetModelV4fromACs7Decoder_p_tKcfC', 
+                       '_$s18SiriContactsCommon41UnsupportedNoEmergencyContactSnippetModelV6encode2toys7Encoder_p_tKF', 
+                       '_$s18SiriContactsCommon41UnsupportedNoEmergencyContactSnippetModelVMa', 
+                       '_$s18SiriContactsCommon41UnsupportedNoEmergencyContactSnippetModelVMn', 
+                       '_$s18SiriContactsCommon41UnsupportedNoEmergencyContactSnippetModelVN', 
+                       '_$s18SiriContactsCommon41UnsupportedNoEmergencyContactSnippetModelVSEAAMc', 
+                       '_$s18SiriContactsCommon41UnsupportedNoEmergencyContactSnippetModelVSeAAMc', 
                        '_$s18SiriContactsCommon6LoggerO04siriB02osABVvgZ', '_$s18SiriContactsCommon6LoggerO04siriB02osABVvpZMV', 
                        '_$s18SiriContactsCommon6LoggerOMa', '_$s18SiriContactsCommon6LoggerOMn', 
                        '_$s18SiriContactsCommon6LoggerON', '_$sSS18SiriContactsCommonE10phoneAppIDSSvgZ', 

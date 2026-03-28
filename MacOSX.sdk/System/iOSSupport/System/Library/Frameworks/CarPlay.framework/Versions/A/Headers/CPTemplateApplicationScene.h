@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class CPTemplateApplicationScene;
 
 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @protocol CPTemplateApplicationSceneDelegate <UISceneDelegate>
 
 @optional

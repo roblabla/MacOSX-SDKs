@@ -1,7 +1,6 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics'
 swift-abi-version: 7
 exports:
@@ -15,7 +14,7 @@ exports:
                        __ZTINSt3__110__function35__maybe_derive_from_binary_functionIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
                        __ZTINSt3__110__function6__baseIFvNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
                        __ZTINSt3__110__function6__baseIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
-                       __ZTINSt3__110__function6__funcINS_8functionIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEENS6_ISC_EEFvS8_EEE, 
+                       __ZTINSt3__110__function6__funcINS_8functionIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEEFvS8_EEE, 
                        __ZTINSt3__133__unary_function_keep_layout_baseIRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEvEE, 
                        __ZTINSt3__18functionIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
                        __ZTSN5boost10wrapexceptINS_9gregorian16bad_day_of_monthEEE, 
@@ -27,11 +26,10 @@ exports:
                        __ZTSNSt3__110__function35__maybe_derive_from_binary_functionIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
                        __ZTSNSt3__110__function6__baseIFvNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
                        __ZTSNSt3__110__function6__baseIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
-                       __ZTSNSt3__110__function6__funcINS_8functionIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEENS6_ISC_EEFvS8_EEE, 
+                       __ZTSNSt3__110__function6__funcINS_8functionIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEEFvS8_EEE, 
                        __ZTSNSt3__133__unary_function_keep_layout_baseIRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEvEE, 
                        __ZTSNSt3__18functionIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s13CoreAnalytics0B14QueryValuesFor9argumentsSo13OS_xpc_object_pSo5NSSetC_tF', 
                        _AnalyticsDisableAllTransformSampling, _AnalyticsIsEventUsed, 
                        _AnalyticsNotifyTaskingAvailable, _AnalyticsReenableAllTransformSampling, 

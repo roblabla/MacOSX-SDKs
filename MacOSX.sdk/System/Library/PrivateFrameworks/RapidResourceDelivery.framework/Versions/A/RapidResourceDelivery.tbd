@@ -1,12 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/RapidResourceDelivery.framework/Versions/A/RapidResourceDelivery'
 current-version: 0
 compatibility-version: 0
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s21RapidResourceDelivery0B4InfoV022AssetValidationFailureD0V2eeoiySbAE_AEtFZ', 
                        '_$s21RapidResourceDelivery0B4InfoV022AssetValidationFailureD0V4fromAEs7Decoder_p_tKcfC', 
                        '_$s21RapidResourceDelivery0B4InfoV022AssetValidationFailureD0V6encode2toys7Encoder_p_tKF', 

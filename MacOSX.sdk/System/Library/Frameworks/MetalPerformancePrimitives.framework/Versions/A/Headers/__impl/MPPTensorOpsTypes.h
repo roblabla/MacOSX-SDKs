@@ -69,6 +69,7 @@ enum __tensor_ops_tensor_descriptor_type
   __tensor_ops_tensor_descriptor_type_handle,
   __tensor_ops_tensor_descriptor_type_offset,
   __tensor_ops_tensor_descriptor_type_inline,
+  __tensor_ops_tensor_descriptor_type_none,   // raw data pointer (thread*)
 };
 
 template <typename PointerType>
@@ -108,6 +109,12 @@ constexpr __tensor_ops_datatype __element_type_to_tensor_ops_datatype()
 #endif
   else if constexpr (__is_same_v<ElementType, half>)
     return __tensor_ops_datatype_float16;
+#if __HAVE_INT4B_FORMAT_TYPE__
+  else if constexpr (__is_same_v<ElementType, metal::int4b_format>)
+    return __tensor_ops_datatype_int4;
+  else if constexpr (__is_same_v<ElementType, metal::uint4b_format>)
+    return __tensor_ops_datatype_uint4;
+#endif
   else if constexpr (__is_same_v<ElementType, int8_t>)
     return __tensor_ops_datatype_int8;
   else if constexpr (__is_same_v<ElementType, uint8_t>)

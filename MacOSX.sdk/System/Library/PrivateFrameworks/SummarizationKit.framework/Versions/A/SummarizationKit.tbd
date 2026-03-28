@@ -1,17 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SummarizationKit.framework/Versions/A/SummarizationKit'
-current-version: 2.2
+current-version: 2.4.9
 compatibility-version: 2
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     clients:         [ GenerativeExperiencesRuntime, SummarizationKitIntegrationTests, 
                        SummarizationKitQATests, SummarizationKitTests, SummarizationTool, 
                        summarizationctl ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15TokenGeneration6PromptV9RenderingV16SummarizationKitE05fixedC0SSvg', 
                        '_$s15TokenGeneration6PromptV9RenderingV16SummarizationKitE05fixedC0SSvpMV', 
                        '_$s16SummarizationKit033Com_Apple_Summarizationkit_Proto_A5StyleO12UNRECOGNIZEDyACSicACmFWC', 
@@ -1431,7 +1431,8 @@ exports:
                        '_$s16SummarizationKit67Com_Apple_Summarizationkit_Proto_SKClassificationClientSafetyConfigVSHAAMc', 
                        '_$s16SummarizationKit67Com_Apple_Summarizationkit_Proto_SKClassificationClientSafetyConfigVSQAAMc', 
                        '_$s16SummarizationKit67Com_Apple_Summarizationkit_Proto_SKClassificationClientSafetyConfigVs28CustomDebugStringConvertibleAAMc', 
-                       '_$s16SummarizationKit6SKTextV013isEligibleForA0Sbvg', '_$s16SummarizationKit6SKTextV013isEligibleForA0SbvpMV', 
+                       '_$s16SummarizationKit6SKTextV013isEligibleForA017useCaseIdentifierSbSS_tF', 
+                       '_$s16SummarizationKit6SKTextV018checkIsEligibleForA017useCaseIdentifierySS_tKF', 
                        '_$s16SummarizationKit6SKTextV10preprocess17sharedSessionDataSSAA06SharedfG0V_tYaKF', 
                        '_$s16SummarizationKit6SKTextV10preprocess17sharedSessionDataSSAA06SharedfG0V_tYaKFTu', 
                        '_$s16SummarizationKit6SKTextV26preprocessForLanguageCheckSSyF', 

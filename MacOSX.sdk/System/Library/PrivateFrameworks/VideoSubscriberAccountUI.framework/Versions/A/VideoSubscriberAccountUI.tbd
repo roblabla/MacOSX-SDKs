@@ -1,11 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/VideoSubscriberAccountUI.framework/Versions/A/VideoSubscriberAccountUI'
-current-version: 593.20.1
+current-version: 593.40.9
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation3URLV24VideoSubscriberAccountUIE8vsStringACSgSS_tcfC', 
                        '_$s24VideoSubscriberAccountUI13VSDestinationO6signInyA2CmFWC', 
                        '_$s24VideoSubscriberAccountUI13VSDestinationO7signOutyA2CmFWC', 

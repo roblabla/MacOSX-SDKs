@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
-// swift-module-flags: -target x86_64-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -module-abi-name SwiftUI -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7.2.5.1.401 -module-name SwiftUICore -package-name SwiftUI
-// swift-module-flags-ignorable: -public-module-name SwiftUI -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)
+// swift-module-flags: -target x86_64-apple-ios26.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -module-abi-name SwiftUI -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7.4.27 -module-name SwiftUICore -package-name SwiftUI
+// swift-module-flags-ignorable: -public-module-name SwiftUI -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
 import Accessibility
 import Combine
 import CoreFoundation
@@ -10,6 +10,7 @@ import DeveloperToolsSupport
 import Foundation
 import OSLog
 import Observation
+import Spatial
 import Swift
 @_exported import SwiftUICore
 import Symbols
@@ -19,6 +20,7 @@ import _StringProcessing
 import _SwiftConcurrencyShims
 import os.log
 import os
+import simd
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -328,10 +330,8 @@ extension SwiftUICore._CALayerView where LayerType == QuartzCore.CALayer {
 extension SwiftUICore.View {
   @_Concurrency.MainActor @preconcurrency public func _ignoresAutomaticPadding(_ ignoresPadding: Swift.Bool) -> some SwiftUICore.View
   
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func _automaticPadding(_ edgeInsets: SwiftUICore.EdgeInsets? = nil) -> some SwiftUICore.View
   
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -676,18 +676,10 @@ extension SwiftUICore.SystemFormatStyle.DateReference : Foundation.FormatStyle {
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension SwiftUICore.SystemFormatStyle.DateReference : Foundation.DiscreteFormatStyle {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func discreteInput(before referenceDate: Foundation.Date) -> Foundation.Date?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func discreteInput(after referenceDate: Foundation.Date) -> Foundation.Date?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func input(before referenceDate: Foundation.Date) -> Foundation.Date?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func input(after referenceDate: Foundation.Date) -> Foundation.Date?
-  #endif
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -704,10 +696,8 @@ public struct ScrollPosition : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @_originallyDefinedIn(module: "SwiftUI", visionOS 2.0)
 extension SwiftUICore.ScrollPosition {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public init(id: some Hashable & Sendable, anchor: SwiftUICore.UnitPoint? = nil)
-  #endif
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public init(idType: (some Hashable & Sendable).Type = Never.self)
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -728,10 +718,8 @@ extension SwiftUICore.ScrollPosition {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @_originallyDefinedIn(module: "SwiftUI", visionOS 2.0)
 extension SwiftUICore.ScrollPosition {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public mutating func scrollTo(id: some Hashable & Sendable, anchor: SwiftUICore.UnitPoint? = nil)
-  #endif
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public mutating func scrollTo(edge: SwiftUICore.Edge)
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -755,40 +743,28 @@ extension SwiftUICore.ScrollPosition {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public var edge: SwiftUICore.Edge? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public var point: CoreFoundation.CGPoint? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
   public var x: CoreFoundation.CGFloat? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
   public var y: CoreFoundation.CGFloat? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public var viewID: (any Swift.Hashable & Swift.Sendable)? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public func viewID<T>(type: T.Type) -> T? where T : Swift.Hashable, T : Swift.Sendable
-  #endif
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -816,9 +792,7 @@ extension SwiftUICore.ScrollPosition : Swift.Equatable {
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     public typealias RawValue = Swift.Int8
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int8)
-  #endif
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias AllCases = [SwiftUICore.HorizontalDirection]
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
@@ -847,9 +821,7 @@ extension SwiftUICore.ScrollPosition : Swift.Equatable {
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
     public typealias RawValue = Swift.Int8
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int8)
-  #endif
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias AllCases = [SwiftUICore.VerticalDirection]
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
@@ -1156,7 +1128,6 @@ extension SwiftUICore.SimultaneousGesture.Value : Swift.Hashable where First.Val
 @frozen public struct VStack<Content> : SwiftUICore.View where Content : SwiftUICore.View {
   @usableFromInline
   internal var _tree: SwiftUICore._VariadicView.Tree<SwiftUICore._VStackLayout, Content>
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(alignment: SwiftUICore.HorizontalAlignment = .center, spacing: CoreFoundation.CGFloat? = nil, @SwiftUICore.ViewBuilder content: () -> Content) {
         _tree = .init(
             _VStackLayout(alignment: alignment, spacing: spacing)
@@ -1164,7 +1135,6 @@ extension SwiftUICore.SimultaneousGesture.Value : Swift.Hashable where First.Val
             content()
         }
     }
-  #endif
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.VStack<Content>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
@@ -1180,12 +1150,10 @@ extension SwiftUICore.VStack : Swift.Sendable {
 @frozen public struct _VStackLayout {
   public var alignment: SwiftUICore.HorizontalAlignment
   public var spacing: CoreFoundation.CGFloat?
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(alignment: SwiftUICore.HorizontalAlignment = .center, spacing: CoreFoundation.CGFloat? = nil) {
         self.alignment = alignment
         self.spacing = spacing
     }
-  #endif
 }
 extension SwiftUICore._VStackLayout {
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -1205,12 +1173,10 @@ extension SwiftUICore._VStackLayout : SwiftUICore.Layout {
 @frozen public struct VStackLayout : SwiftUICore.Layout {
   public var alignment: SwiftUICore.HorizontalAlignment
   public var spacing: CoreFoundation.CGFloat?
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(alignment: SwiftUICore.HorizontalAlignment = .center, spacing: CoreFoundation.CGFloat? = nil) {
         self.alignment = alignment
         self.spacing = spacing
     }
-  #endif
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias AnimatableData = SwiftUICore.EmptyAnimatableData
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
@@ -1240,9 +1206,7 @@ extension SwiftUICore._VStackLayout : SwiftUICore.Layout {
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     public typealias RawValue = Swift.Int8
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int8)
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias AllCases = [SwiftUICore.Edge]
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -1288,9 +1252,7 @@ extension SwiftUICore.Edge {
     @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias RawValue = Swift.Int8
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int8)
-  #endif
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias AllCases = [SwiftUICore.HorizontalEdge]
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
@@ -1323,9 +1285,7 @@ extension SwiftUICore.Edge {
     @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias RawValue = Swift.Int8
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int8)
-  #endif
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias AllCases = [SwiftUICore.VerticalEdge]
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
@@ -1355,16 +1315,12 @@ public struct ViewDimensions {
   public subscript(guide: SwiftUICore.VerticalAlignment) -> CoreFoundation.CGFloat {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(explicit guide: SwiftUICore.HorizontalAlignment) -> CoreFoundation.CGFloat? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(explicit guide: SwiftUICore.VerticalAlignment) -> CoreFoundation.CGFloat? {
     get
   }
-  #endif
 }
 @available(*, unavailable)
 extension SwiftUICore.ViewDimensions : Swift.Sendable {
@@ -1847,16 +1803,12 @@ extension SwiftUICore.ShapeStyle where Self == SwiftUICore.AngularGradient {
 public struct _ViewModifier_Content<Modifier> : SwiftUICore.View where Modifier : SwiftUICore.ViewModifier {
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore._ViewModifier_Content<Modifier>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore._ViewModifier_Content<Modifier>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   @_alwaysEmitIntoClient nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int? {
         _viewListCount(inputs: inputs) { _ in nil }
     }
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
@@ -1868,9 +1820,7 @@ public struct _ViewModifier_Content<Modifier> : SwiftUICore.View where Modifier 
 public struct PlaceholderContentView<Value> : SwiftUICore.View {
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.PlaceholderContentView<Value>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.PlaceholderContentView<Value>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Body = Swift.Never
 }
@@ -1888,10 +1838,8 @@ extension SwiftUICore._ViewModifier_Content : Swift.Sendable {
 extension SwiftUICore.ViewModifier {
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(modifier: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -1909,9 +1857,7 @@ extension SwiftUICore.Animation {
 public struct KeyframeTrack<Root, Value, Content> : SwiftUICore.Keyframes where Value == Content.Value, Content : SwiftUICore.KeyframeTrackContent {
   public init(@SwiftUICore.KeyframeTrackContentBuilder<Root> content: () -> Content) where Root == Value
   public init(_ keyPath: Swift.WritableKeyPath<Root, Value>, @SwiftUICore.KeyframeTrackContentBuilder<Value> content: () -> Content)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func _resolve(into resolved: inout SwiftUICore._ResolvedKeyframes<Root>, initialValue: Root, initialVelocity: Root?)
-  #endif
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Body = Swift.Never
 }
@@ -1924,7 +1870,6 @@ extension SwiftUICore.KeyframeTrack : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "foregroundStyle(_:)")
   @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "foregroundStyle(_:)")
   @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "foregroundStyle(_:)")
@@ -1934,7 +1879,6 @@ extension SwiftUICore.View {
         return environment(\.foregroundColor, color)
     }
   
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -1942,13 +1886,11 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.EnvironmentValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   package var foregroundColor: SwiftUICore.Color? {
     get
     set
   }
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -1958,9 +1900,7 @@ extension SwiftUICore.EnvironmentValues {
 @available(*, deprecated, message: "will be removed")
 @frozen public struct _ForegroundColorModifier {
   public var color: SwiftUICore.Color?
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(color: SwiftUICore.Color?) { self.color = color }
-  #endif
   nonisolated public static func _makeViewInputs(modifier: SwiftUICore._GraphValue<SwiftUICore._ForegroundColorModifier>, inputs: inout SwiftUICore._ViewInputs)
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   @available(*, deprecated, message: "will be removed")
@@ -1985,7 +1925,6 @@ extension SwiftUICore.Color {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Use the asset catalog's accent color or View.tint(_:) instead.")
   @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Use the asset catalog's accent color or View.tint(_:) instead.")
   @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Use the asset catalog's accent color or View.tint(_:) instead.")
@@ -1995,7 +1934,6 @@ extension SwiftUICore.View {
         return environment(\.accentColor, accentColor)
     }
   
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -2003,13 +1941,11 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.EnvironmentValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   package var accentColor: SwiftUICore.Color? {
     get
     set
   }
-  #endif
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -2156,9 +2092,7 @@ extension SwiftUICore.TimelineSchedule {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 public struct PeriodicTimelineSchedule : SwiftUICore.TimelineSchedule, Swift.Sendable {
   public struct Entries : Swift.Sequence, Swift.IteratorProtocol, Swift.Sendable {
-    #if compiler(>=5.3) && $NonescapableTypes
     public mutating func next() -> Foundation.Date?
-    #endif
     @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias Element = Foundation.Date
     @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
@@ -2174,9 +2108,7 @@ public struct PeriodicTimelineSchedule : SwiftUICore.TimelineSchedule, Swift.Sen
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 public struct EveryMinuteTimelineSchedule : SwiftUICore.TimelineSchedule, Swift.Sendable {
   public struct Entries : Swift.Sequence, Swift.IteratorProtocol, Swift.Sendable {
-    #if compiler(>=5.3) && $NonescapableTypes
     public mutating func next() -> Foundation.Date?
-    #endif
     @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias Element = Foundation.Date
     @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
@@ -2529,9 +2461,7 @@ public enum WorldRecenterPhase : Swift.Sendable {
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     public typealias RawValue = Swift.Int8
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int8)
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias AllCases = [SwiftUICore.Axis]
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -2561,12 +2491,10 @@ extension SwiftUICore.Axis : Swift.CustomStringConvertible {
 @frozen public struct _PaddingLayout {
   public var edges: SwiftUICore.Edge.Set
   public var insets: SwiftUICore.EdgeInsets?
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(edges: SwiftUICore.Edge.Set = .all, insets: SwiftUICore.EdgeInsets?) {
         self.edges = edges
         self.insets = insets
     }
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias AnimatableData = SwiftUICore.EmptyAnimatableData
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -2582,13 +2510,11 @@ extension SwiftUICore.View {
         return modifier(_PaddingLayout(insets: insets))
     }
   
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable nonisolated public func padding(_ edges: SwiftUICore.Edge.Set = .all, _ length: CoreFoundation.CGFloat? = nil) -> some SwiftUICore.View {
         let insets = length.map { EdgeInsets(_all: $0) }
         return modifier(_PaddingLayout(edges: edges, insets: insets))
     }
   
-  #endif
   @inlinable nonisolated public func padding(_ length: CoreFoundation.CGFloat) -> some SwiftUICore.View {
         return padding(.all, length)
     }
@@ -2659,10 +2585,8 @@ extension SwiftUICore.View {
   @inlinable public init(_ value: T) { self.value = value }
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.TupleView<T>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.TupleView<T>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
@@ -2781,10 +2705,8 @@ extension SwiftUICore.Group : SwiftUICore.View where Content : SwiftUICore.View 
         self.content = content()
     }
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.Group<Content>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -2954,9 +2876,7 @@ extension SwiftUICore.Image {
     case leftMirrored
     case right
     case rightMirrored
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt8)
-    #endif
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     public typealias AllCases = [SwiftUICore.Image.Orientation]
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -3120,10 +3040,8 @@ extension SwiftUICore.View {
     public static let discarded: SwiftUICore.OpenURLAction.Result
     public static let systemAction: SwiftUICore.OpenURLAction.Result
     public static func systemAction(_ url: Foundation.URL) -> SwiftUICore.OpenURLAction.Result
-    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
     public static func systemAction(_ url: Foundation.URL? = nil, prefersInApp: Swift.Bool) -> SwiftUICore.OpenURLAction.Result
-    #endif
   }
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   @preconcurrency @_Concurrency.MainActor public init(handler: @escaping (Foundation.URL) -> SwiftUICore.OpenURLAction.Result)
@@ -3485,9 +3403,7 @@ extension SwiftUICore._ProposedSize : Swift.Hashable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 26.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 26.0)
 public struct LazyHStack<Content> : SwiftUICore.View where Content : SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(alignment: SwiftUICore.VerticalAlignment = .center, spacing: CoreFoundation.CGFloat? = nil, pinnedViews: SwiftUICore.PinnedScrollableViews = .init(), @SwiftUICore.ViewBuilder content: () -> Content)
-  #endif
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.LazyHStack<Content>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias Body = Swift.Never
@@ -3502,11 +3418,9 @@ extension SwiftUICore.LazyHStack : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @frozen public struct Spacer {
   public var minLength: CoreFoundation.CGFloat?
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(minLength: CoreFoundation.CGFloat? = nil) {
         self.minLength = minLength
     }
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
@@ -3517,11 +3431,9 @@ extension SwiftUICore.LazyHStack : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @frozen public struct _TextBaselineRelativeSpacer {
   public var minLength: CoreFoundation.CGFloat?
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(minLength: CoreFoundation.CGFloat? = nil) {
         self.minLength = minLength
     }
-  #endif
   @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias Body = Swift.Never
 }
@@ -3532,11 +3444,9 @@ extension SwiftUICore.LazyHStack : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @frozen public struct _HSpacer {
   public var minWidth: CoreFoundation.CGFloat?
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(minWidth: CoreFoundation.CGFloat? = nil) {
         self.minWidth = minWidth
     }
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
@@ -3547,11 +3457,9 @@ extension SwiftUICore.LazyHStack : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @frozen public struct _VSpacer {
   public var minHeight: CoreFoundation.CGFloat?
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(minHeight: CoreFoundation.CGFloat? = nil) {
         self.minHeight = minHeight
     }
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
@@ -3849,10 +3757,8 @@ extension SwiftUICore.GeometryEffect {
 extension SwiftUICore.GeometryEffect {
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(modifier: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -3920,10 +3826,8 @@ public protocol _ViewTraitKey {
     }
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._TraitWritingModifier<Trait>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(modifier: SwiftUICore._GraphValue<SwiftUICore._TraitWritingModifier<Trait>>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
@@ -3944,9 +3848,7 @@ extension SwiftUICore._TraitWritingModifier : Swift.Sendable {
     }
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._ConditionalTraitWritingModifier<Trait>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(modifier: SwiftUICore._GraphValue<SwiftUICore._ConditionalTraitWritingModifier<Trait>>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias Body = Swift.Never
 }
@@ -4157,9 +4059,7 @@ extension SwiftUICore.Anchor.Source {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Anchor.Source {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init<T>(_ anchor: SwiftUICore.Anchor<T>.Source?) where Value == T?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -4666,11 +4566,9 @@ extension SwiftUICore.ViewBuilder : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.ViewBuilder {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient public static func buildIf<Content>(_ content: Content?) -> Content? where Content : SwiftUICore.View {
         content
     }
-  #endif
   @_alwaysEmitIntoClient public static func buildEither<TrueContent, FalseContent>(first: TrueContent) -> SwiftUICore._ConditionalContent<TrueContent, FalseContent> where TrueContent : SwiftUICore.View, FalseContent : SwiftUICore.View {
         .init(storage: .trueContent(first))
     }
@@ -4706,13 +4604,11 @@ extension SwiftUICore.ViewBuilder {
       return store
     }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable @_Concurrency.MainActor @preconcurrency package var optionalWrappedValue: ObjectType? {
     get {
         _store
     }
   }
-  #endif
   @usableFromInline
   nonisolated(unsafe) package var _store: ObjectType?
   @usableFromInline
@@ -4752,12 +4648,10 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension Combine.ObservableObject {
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   package static var environmentStore: Swift.WritableKeyPath<SwiftUICore.EnvironmentValues, Self?> {
     get
   }
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -4839,10 +4733,8 @@ extension SwiftUICore.View {
 extension SwiftUICore.View {
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
 }
 extension Swift.Comparable {
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -4933,6 +4825,60 @@ extension CoreFoundation.CGSize {
         return CGPoint(x: rhs.x + lhs.width, y: rhs.y + lhs.height)
     }
 }
+@available(visionOS 1.0, *)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 1.0)
+@available(iOS, unavailable)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+public protocol DepthAlignmentID {
+  static func defaultValue(in context: SwiftUICore.ViewDimensions3D) -> CoreFoundation.CGFloat
+  static func _combineExplicit(childValue: CoreFoundation.CGFloat, _ n: Swift.Int, into parentValue: inout CoreFoundation.CGFloat?)
+}
+@available(visionOS 1.0, *)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 1.0)
+@available(iOS, unavailable)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension SwiftUICore.DepthAlignmentID {
+  public static func _combineExplicit(childValue: CoreFoundation.CGFloat, _ n: Swift.Int, into parentValue: inout CoreFoundation.CGFloat?)
+}
+@available(visionOS 1.0, *)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 1.0)
+@available(iOS, unavailable)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@_documentation(visibility: private) public struct DepthAlignmentKey : Swift.Hashable, Swift.Comparable, Swift.Sendable {
+  public static func < (lhs: SwiftUICore.DepthAlignmentKey, rhs: SwiftUICore.DepthAlignmentKey) -> Swift.Bool
+  public static func == (a: SwiftUICore.DepthAlignmentKey, b: SwiftUICore.DepthAlignmentKey) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(visionOS 1.0, *)
+@available(iOS, unavailable)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@frozen public struct DepthAlignment : Swift.Equatable, Swift.Sendable {
+  public init(_ id: any SwiftUICore.DepthAlignmentID.Type)
+  @_documentation(visibility: private) public var depthKey: SwiftUICore.DepthAlignmentKey
+  public func combineExplicit<S>(_ values: S) -> CoreFoundation.CGFloat? where S : Swift.Sequence, S.Element == CoreFoundation.CGFloat?
+  public static func == (a: SwiftUICore.DepthAlignment, b: SwiftUICore.DepthAlignment) -> Swift.Bool
+}
+@available(visionOS 1.0, *)
+@available(iOS, unavailable)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension SwiftUICore.DepthAlignment {
+  public static let front: SwiftUICore.DepthAlignment
+  public static let center: SwiftUICore.DepthAlignment
+  public static let back: SwiftUICore.DepthAlignment
+}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -4967,12 +4913,8 @@ public struct AccessibilityTraits : Swift.SetAlgebra, Swift.Sendable {
   public mutating func formSymmetricDifference(_ other: SwiftUICore.AccessibilityTraits)
   public func contains(_ member: SwiftUICore.AccessibilityTraits) -> Swift.Bool
   public mutating func insert(_ newMember: SwiftUICore.AccessibilityTraits) -> (inserted: Swift.Bool, memberAfterInsert: SwiftUICore.AccessibilityTraits)
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func remove(_ member: SwiftUICore.AccessibilityTraits) -> SwiftUICore.AccessibilityTraits?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func update(with newMember: SwiftUICore.AccessibilityTraits) -> SwiftUICore.AccessibilityTraits?
-  #endif
   public static func == (a: SwiftUICore.AccessibilityTraits, b: SwiftUICore.AccessibilityTraits) -> Swift.Bool
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias ArrayLiteralElement = SwiftUICore.AccessibilityTraits
@@ -4985,9 +4927,7 @@ public struct AccessibilityTraits : Swift.SetAlgebra, Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Text {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_semantics("swiftui.init_with_localization") public init(_ key: SwiftUICore.LocalizedStringKey, tableName: Swift.String? = nil, bundle: Foundation.Bundle? = nil, comment: Swift.StaticString? = nil)
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -5013,12 +4953,8 @@ extension SwiftUICore.Text {
     @_alwaysEmitIntoClient @_semantics("swiftui.localized.appendInterpolation_@_specifier") public mutating func appendInterpolation(_ substring: Swift.Substring) {
             appendInterpolation(String(substring))
         }
-    #if compiler(>=5.3) && $NonescapableTypes
     @_semantics("swiftui.localized.appendInterpolation_@_specifier") public mutating func appendInterpolation<Subject>(_ subject: Subject, formatter: Foundation.Formatter? = nil) where Subject : Foundation.ReferenceConvertible
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     @_semantics("swiftui.localized.appendInterpolation_@_specifier") public mutating func appendInterpolation<Subject>(_ subject: Subject, formatter: Foundation.Formatter? = nil) where Subject : ObjectiveC.NSObject
-    #endif
     @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
     @_semantics("swiftui.localized.appendInterpolation_@_specifier") public mutating func appendInterpolation<F>(_ input: F.FormatInput, format: F) where F : Foundation.FormatStyle, F.FormatInput : Swift.Equatable, F.FormatOutput == Swift.String
     @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -5300,9 +5236,7 @@ public struct DebugReplaceableView : SwiftUICore.View {
   internal init<V>(_erasing view: V) where V : SwiftUICore.View
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.DebugReplaceableView>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.DebugReplaceableView>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
   @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
   public typealias Body = Swift.Never
 }
@@ -5397,17 +5331,70 @@ extension SwiftUICore.LocalizedStringKey.StringInterpolation {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
 @usableFromInline
 package struct IsExpandedTraitKey : SwiftUICore._ViewTraitKey {
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable package static var defaultValue: SwiftUICore.Binding<Swift.Bool>? {
     get { nil }
   }
-  #endif
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 11.0, *)
   @usableFromInline
   package typealias Value = SwiftUICore.Binding<Swift.Bool>?
 }
 @available(*, unavailable)
 extension SwiftUICore.IsExpandedTraitKey : Swift.Sendable {
+}
+@available(visionOS 1.0, *)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 1.0)
+@available(iOS, unavailable)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+public struct ViewDimensions3D {
+  public var width: CoreFoundation.CGFloat {
+    get
+  }
+  public var height: CoreFoundation.CGFloat {
+    get
+  }
+  public var depth: CoreFoundation.CGFloat {
+    get
+  }
+  public subscript(guide: SwiftUICore.HorizontalAlignment) -> CoreFoundation.CGFloat {
+    get
+  }
+  public subscript(guide: SwiftUICore.VerticalAlignment) -> CoreFoundation.CGFloat {
+    get
+  }
+  public subscript(explicit guide: SwiftUICore.HorizontalAlignment) -> CoreFoundation.CGFloat? {
+    get
+  }
+  public subscript(explicit guide: SwiftUICore.VerticalAlignment) -> CoreFoundation.CGFloat? {
+    get
+  }
+}
+@available(*, unavailable)
+extension SwiftUICore.ViewDimensions3D : Swift.Sendable {
+}
+@available(visionOS 1.0, *)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 1.0)
+@available(iOS, unavailable)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension SwiftUICore.ViewDimensions3D {
+  public subscript(guide: SwiftUICore.DepthAlignment) -> CoreFoundation.CGFloat {
+    get
+  }
+  public subscript(explicit guide: SwiftUICore.DepthAlignment) -> CoreFoundation.CGFloat? {
+    get
+  }
+}
+@available(visionOS 1.0, *)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 1.0)
+@available(iOS, unavailable)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension SwiftUICore.ViewDimensions3D : Swift.Equatable {
+  public static func == (lhs: SwiftUICore.ViewDimensions3D, rhs: SwiftUICore.ViewDimensions3D) -> Swift.Bool
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -5417,7 +5404,6 @@ extension SwiftUICore.IsExpandedTraitKey : Swift.Sendable {
 @frozen public struct HStack<Content> : SwiftUICore.View where Content : SwiftUICore.View {
   @usableFromInline
   internal var _tree: SwiftUICore._VariadicView.Tree<SwiftUICore._HStackLayout, Content>
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(alignment: SwiftUICore.VerticalAlignment = .center, spacing: CoreFoundation.CGFloat? = nil, @SwiftUICore.ViewBuilder content: () -> Content) {
         _tree = .init(
             _HStackLayout(alignment: alignment, spacing: spacing)
@@ -5425,7 +5411,6 @@ extension SwiftUICore.IsExpandedTraitKey : Swift.Sendable {
             content()
         }
     }
-  #endif
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.HStack<Content>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
@@ -5441,12 +5426,10 @@ extension SwiftUICore.HStack : Swift.Sendable {
 @frozen public struct _HStackLayout {
   public var alignment: SwiftUICore.VerticalAlignment
   public var spacing: CoreFoundation.CGFloat?
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(alignment: SwiftUICore.VerticalAlignment = .center, spacing: CoreFoundation.CGFloat? = nil) {
         self.alignment = alignment
         self.spacing = spacing
     }
-  #endif
 }
 extension SwiftUICore._HStackLayout {
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -5466,12 +5449,10 @@ extension SwiftUICore._HStackLayout : SwiftUICore.Layout {
 @frozen public struct HStackLayout : SwiftUICore.Layout {
   public var alignment: SwiftUICore.VerticalAlignment
   public var spacing: CoreFoundation.CGFloat?
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(alignment: SwiftUICore.VerticalAlignment = .center, spacing: CoreFoundation.CGFloat? = nil) {
         self.alignment = alignment
         self.spacing = spacing
     }
-  #endif
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias AnimatableData = SwiftUICore.EmptyAnimatableData
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
@@ -5510,9 +5491,7 @@ public protocol Keyframes<Value> {
   associatedtype Value = Self.Body.Value
   associatedtype Body : SwiftUICore.Keyframes
   @SwiftUICore.KeyframesBuilder<Self.Value> var body: Self.Body { get }
-  #if compiler(>=5.3) && $NonescapableTypes
   func _resolve(into resolved: inout SwiftUICore._ResolvedKeyframes<Self.Value>, initialValue: Self.Value, initialVelocity: Self.Value?)
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -5520,9 +5499,7 @@ public protocol Keyframes<Value> {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Keyframes where Self.Value == Self.Body.Value {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func _resolve(into resolved: inout SwiftUICore._ResolvedKeyframes<Self.Value>, initialValue: Self.Value, initialVelocity: Self.Value?)
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -5530,9 +5507,7 @@ extension SwiftUICore.Keyframes where Self.Value == Self.Body.Value {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension Swift.Never : SwiftUICore.Keyframes {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func _resolve(into resolved: inout SwiftUICore._ResolvedKeyframes<Swift.Never>, initialValue: Swift.Never, initialVelocity: Swift.Never?)
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -5675,9 +5650,7 @@ extension SwiftUICore.AccessibilityCustomContentKey : Swift.Equatable {
   case h4
   case h5
   case h6
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.UInt)
-  #endif
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias RawValue = Swift.UInt
   public var rawValue: Swift.UInt {
@@ -5787,9 +5760,7 @@ public struct Glass : Swift.Equatable, Swift.Sendable {
   public static var identity: SwiftUICore.Glass {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func tint(_ color: SwiftUICore.Color?) -> SwiftUICore.Glass
-  #endif
   public func interactive(_ isEnabled: Swift.Bool = true) -> SwiftUICore.Glass
   public static func == (a: SwiftUICore.Glass, b: SwiftUICore.Glass) -> Swift.Bool
 }
@@ -5801,10 +5772,8 @@ public struct Glass : Swift.Equatable, Swift.Sendable {
 extension SwiftUICore.Text : SwiftUICore.View {
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.Text>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.Text>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
@@ -5850,6 +5819,36 @@ extension SwiftUICore.Text : SwiftUICore.View {
   }
   public static func == (lhs: SwiftUICore.AnimatableValues<repeat each Value>, rhs: SwiftUICore.AnimatableValues<repeat each Value>) -> Swift.Bool
 }
+@available(visionOS 1.0, *)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 1.0)
+@available(iOS, unavailable)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension Spatial.Size3D : SwiftUICore.VectorArithmetic {
+  public mutating func scale(by factor: Swift.Double)
+  public var magnitudeSquared: Swift.Double {
+    get
+  }
+}
+@available(visionOS 1.0, *)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 1.0)
+@available(iOS, unavailable)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension Spatial.Size3D : SwiftUICore.Animatable {
+  public var animatableData: Spatial.Vector3D {
+    get
+    set
+  }
+  @available(visionOS 1.0, *)
+  @available(iOS, unavailable, introduced: 16.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
+  public typealias AnimatableData = Spatial.Size3D
+}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -5884,9 +5883,7 @@ extension SwiftUICore.AXChartDescriptorRepresentable {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Text {
   public struct LineStyle : Swift.Hashable, Swift.Sendable {
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(pattern: SwiftUICore.Text.LineStyle.Pattern = .solid, color: SwiftUICore.Color? = nil)
-    #endif
     public struct Pattern : Swift.Sendable {
       public static let solid: SwiftUICore.Text.LineStyle.Pattern
       public static let dot: SwiftUICore.Text.LineStyle.Pattern
@@ -5908,16 +5905,12 @@ extension SwiftUICore.Text {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   nonisolated public func underline(_ isActive: Swift.Bool = true, pattern: SwiftUICore.Text.LineStyle.Pattern = .solid, color: SwiftUICore.Color? = nil) -> some SwiftUICore.View
   
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   nonisolated public func strikethrough(_ isActive: Swift.Bool = true, pattern: SwiftUICore.Text.LineStyle.Pattern = .solid, color: SwiftUICore.Color? = nil) -> some SwiftUICore.View
   
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -6212,18 +6205,10 @@ extension SwiftUICore.SystemFormatStyle.DateOffset : Foundation.FormatStyle {
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension SwiftUICore.SystemFormatStyle.DateOffset : Foundation.DiscreteFormatStyle {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func discreteInput(before referenceDate: Foundation.Date) -> Foundation.Date?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func discreteInput(after referenceDate: Foundation.Date) -> Foundation.Date?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func input(before referenceDate: Foundation.Date) -> Foundation.Date?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func input(after referenceDate: Foundation.Date) -> Foundation.Date?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -6377,12 +6362,10 @@ extension SwiftUICore.Material {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.EnvironmentValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var backgroundMaterial: SwiftUICore.Material? {
     get
     set
   }
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -6574,10 +6557,8 @@ extension SwiftUICore._VariadicView_Root {
   public static var _viewListOptions: Swift.Int {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -6587,10 +6568,8 @@ extension SwiftUICore._VariadicView_Root {
 @preconcurrency @_Concurrency.MainActor public protocol _VariadicView_ViewRoot : SwiftUICore._VariadicView_Root {
   nonisolated static func _makeView(root: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewInputs, body: (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewOutputs
   nonisolated static func _makeViewList(root: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
   associatedtype Body : SwiftUICore.View
   @SwiftUICore.ViewBuilder @_Concurrency.MainActor @preconcurrency func body(children: SwiftUICore._VariadicView.Children) -> Self.Body
 }
@@ -6616,10 +6595,8 @@ public protocol _VariadicView_UnaryViewRoot : SwiftUICore._VariadicView_ViewRoot
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore._VariadicView_UnaryViewRoot {
   nonisolated public static func _makeViewList(root: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -6635,10 +6612,8 @@ public protocol _VariadicView_MultiViewRoot : SwiftUICore._VariadicView_ViewRoot
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore._VariadicView_MultiViewRoot {
   nonisolated public static func _makeView(root: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewInputs, body: (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -6658,10 +6633,8 @@ extension SwiftUICore._VariadicView_Children : Swift.Sendable {
 extension SwiftUICore._VariadicView_ViewRoot {
   nonisolated public static func _makeView(root: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewInputs, body: (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(root: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -6672,10 +6645,8 @@ extension SwiftUICore._VariadicView.Tree : SwiftUICore.View where Root : SwiftUI
   public typealias Body = Swift.Never
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore._VariadicView.Tree<Root, Content>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore._VariadicView.Tree<Root, Content>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -6816,12 +6787,10 @@ public struct SymbolRenderingMode : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable nonisolated public func symbolRenderingMode(_ mode: SwiftUICore.SymbolRenderingMode?) -> some SwiftUICore.View {
         return environment(\.symbolRenderingMode, mode)
     }
   
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -6829,9 +6798,7 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Image {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func symbolRenderingMode(_ mode: SwiftUICore.SymbolRenderingMode?) -> SwiftUICore.Image
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -6839,12 +6806,10 @@ extension SwiftUICore.Image {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.EnvironmentValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var symbolRenderingMode: SwiftUICore.SymbolRenderingMode? {
     get
     set
   }
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 public struct SymbolVariableValueMode : Swift.Equatable, Swift.Sendable {
@@ -6854,27 +6819,21 @@ public struct SymbolVariableValueMode : Swift.Equatable, Swift.Sendable {
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient nonisolated public func symbolVariableValueMode(_ mode: SwiftUICore.SymbolVariableValueMode?) -> some SwiftUICore.View {
         return environment(\.symbolVariableValueMode, mode)
     }
   
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension SwiftUICore.Image {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func symbolVariableValueMode(_ mode: SwiftUICore.SymbolVariableValueMode?) -> SwiftUICore.Image
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension SwiftUICore.EnvironmentValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var symbolVariableValueMode: SwiftUICore.SymbolVariableValueMode? {
     get
     set
   }
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 public struct SymbolColorRenderingMode : Swift.Equatable, Swift.Sendable {
@@ -6884,27 +6843,21 @@ public struct SymbolColorRenderingMode : Swift.Equatable, Swift.Sendable {
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient nonisolated public func symbolColorRenderingMode(_ mode: SwiftUICore.SymbolColorRenderingMode?) -> some SwiftUICore.View {
         return environment(\.symbolColorRenderingMode, mode)
     }
   
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension SwiftUICore.Image {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func symbolColorRenderingMode(_ mode: SwiftUICore.SymbolColorRenderingMode?) -> SwiftUICore.Image
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension SwiftUICore.EnvironmentValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var symbolColorRenderingMode: SwiftUICore.SymbolColorRenderingMode? {
     get
     set
   }
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -7388,9 +7341,7 @@ public struct _ShaderFilterEffect : Swift.Sendable {
       get
     }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func resolveSymbol<ID>(id: ID) -> SwiftUICore.GraphicsContext.ResolvedSymbol? where ID : Swift.Hashable
-  #endif
   public func draw(_ symbol: SwiftUICore.GraphicsContext.ResolvedSymbol, in rect: CoreFoundation.CGRect)
   public func draw(_ symbol: SwiftUICore.GraphicsContext.ResolvedSymbol, at point: CoreFoundation.CGPoint, anchor: SwiftUICore.UnitPoint = .center)
 }
@@ -7444,12 +7395,10 @@ extension SwiftUICore.GraphicsContext.Storage : Swift.Sendable {
 @frozen public struct _AspectRatioLayout {
   public var aspectRatio: CoreFoundation.CGFloat?
   public var contentMode: SwiftUICore.ContentMode
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(aspectRatio: CoreFoundation.CGFloat? = nil, contentMode: SwiftUICore.ContentMode) {
         self.aspectRatio = aspectRatio
         self.contentMode = contentMode
     }
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias AnimatableData = SwiftUICore.EmptyAnimatableData
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -7461,13 +7410,11 @@ extension SwiftUICore.GraphicsContext.Storage : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.2)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable nonisolated public func aspectRatio(_ aspectRatio: CoreFoundation.CGFloat? = nil, contentMode: SwiftUICore.ContentMode) -> some SwiftUICore.View {
         return modifier(_AspectRatioLayout(
             aspectRatio: aspectRatio, contentMode: contentMode))
     }
   
-  #endif
   @inlinable nonisolated public func aspectRatio(_ aspectRatio: CoreFoundation.CGSize, contentMode: SwiftUICore.ContentMode) -> some SwiftUICore.View {
         return self.aspectRatio(
             aspectRatio.width / aspectRatio.height, contentMode: contentMode)
@@ -7547,9 +7494,7 @@ extension SwiftUICore.Text {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Text {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(timerInterval: Swift.ClosedRange<Foundation.Date>, pauseTime: Foundation.Date? = nil, countsDown: Swift.Bool = true, showsHours: Swift.Bool = true)
-  #endif
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -7567,9 +7512,7 @@ extension SwiftUICore.LocalizedStringKey.StringInterpolation {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.LocalizedStringKey.StringInterpolation {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_semantics("swiftui.localized.appendInterpolation_@_specifier") public mutating func appendInterpolation(timerInterval: Swift.ClosedRange<Foundation.Date>, pauseTime: Foundation.Date? = nil, countsDown: Swift.Bool = true, showsHours: Swift.Bool = true)
-  #endif
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension SwiftUICore.Text.DateStyle : Swift.Equatable {
@@ -7770,11 +7713,9 @@ extension Foundation.AttributeScopes.SwiftUIAttributes {
     public typealias Value = Foundation.AttributedString.AdaptiveImageGlyph
     public static let name: Swift.String
     nonisolated(unsafe) public static var inheritedByAddedText: Swift.Bool
-    #if compiler(>=5.3) && $NonescapableTypes
     public static var runBoundaries: Foundation.AttributedString.AttributeRunBoundaries? {
       get
     }
-    #endif
   }
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
@@ -7852,12 +7793,10 @@ extension SwiftUICore.Color {
     internal var base: SwiftUICore.Color.Resolved
     @usableFromInline
     internal var _headroom: Swift.Float
-    #if compiler(>=5.3) && $NonescapableTypes
     @_alwaysEmitIntoClient public init(_ color: SwiftUICore.Color.Resolved, headroom: Swift.Float? = nil) {
             base = color
             _headroom = headroom ?? .nan
         }
-    #endif
     @_alwaysEmitIntoClient public var linearRed: Swift.Float {
       get { base.linearRed }
       set { base.linearRed = newValue }
@@ -7886,12 +7825,10 @@ extension SwiftUICore.Color {
       get { base.opacity }
       set { base.opacity = newValue }
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     @_alwaysEmitIntoClient public var headroom: Swift.Float? {
       get { _headroom == _headroom ? _headroom : nil }
       set { _headroom = newValue ?? .nan }
     }
-    #endif
     public static func == (lhs: SwiftUICore.Color.ResolvedHDR, rhs: SwiftUICore.Color.ResolvedHDR) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -7985,9 +7922,7 @@ public struct GeometryProxy {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.GeometryProxy {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func bounds(of coordinateSpace: SwiftUICore.NamedCoordinateSpace) -> CoreFoundation.CGRect?
-  #endif
   public func frame(in coordinateSpace: some CoordinateSpaceProtocol) -> CoreFoundation.CGRect
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
@@ -8145,12 +8080,8 @@ extension SwiftUICore._BackgroundPreferenceModifier : Swift.Sendable {
   public func spacing(subviews: SwiftUICore.AnyLayout.Subviews, cache: inout SwiftUICore.AnyLayout.Cache) -> SwiftUICore.ViewSpacing
   public func sizeThatFits(proposal: SwiftUICore.ProposedViewSize, subviews: SwiftUICore.AnyLayout.Subviews, cache: inout SwiftUICore.AnyLayout.Cache) -> CoreFoundation.CGSize
   public func placeSubviews(in bounds: CoreFoundation.CGRect, proposal: SwiftUICore.ProposedViewSize, subviews: SwiftUICore.AnyLayout.Subviews, cache: inout SwiftUICore.AnyLayout.Cache)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func explicitAlignment(of guide: SwiftUICore.HorizontalAlignment, in bounds: CoreFoundation.CGRect, proposal: SwiftUICore.ProposedViewSize, subviews: SwiftUICore.AnyLayout.Subviews, cache: inout SwiftUICore.AnyLayout.Cache) -> CoreFoundation.CGFloat?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func explicitAlignment(of guide: SwiftUICore.VerticalAlignment, in bounds: CoreFoundation.CGRect, proposal: SwiftUICore.ProposedViewSize, subviews: SwiftUICore.AnyLayout.Subviews, cache: inout SwiftUICore.AnyLayout.Cache) -> CoreFoundation.CGFloat?
-  #endif
   public var animatableData: SwiftUICore.AnyLayout.AnimatableData {
     get
     set
@@ -8172,9 +8103,7 @@ extension SwiftUICore.Animation {
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension SwiftUICore.Color {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func headroom(_ headroom: Swift.Double?) -> SwiftUICore.Color
-  #endif
   @_alwaysEmitIntoClient public func exposureAdjust(_ stops: Swift.Double) -> SwiftUICore.Color {
         return _linearScale(exp2(Float(stops)))
     }
@@ -8219,12 +8148,8 @@ extension SwiftUICore.ZIndexTraitKey : Swift.Sendable {
   func spacing(subviews: Self.Subviews, cache: inout Self.Cache) -> SwiftUICore.ViewSpacing
   func sizeThatFits(proposal: SwiftUICore.ProposedViewSize, subviews: Self.Subviews, cache: inout Self.Cache) -> CoreFoundation.CGSize
   func placeSubviews(in bounds: CoreFoundation.CGRect, proposal: SwiftUICore.ProposedViewSize, subviews: Self.Subviews, cache: inout Self.Cache)
-  #if compiler(>=5.3) && $NonescapableTypes
   func explicitAlignment(of guide: SwiftUICore.HorizontalAlignment, in bounds: CoreFoundation.CGRect, proposal: SwiftUICore.ProposedViewSize, subviews: Self.Subviews, cache: inout Self.Cache) -> CoreFoundation.CGFloat?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   func explicitAlignment(of guide: SwiftUICore.VerticalAlignment, in bounds: CoreFoundation.CGRect, proposal: SwiftUICore.ProposedViewSize, subviews: Self.Subviews, cache: inout Self.Cache) -> CoreFoundation.CGFloat?
-  #endif
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   static func _makeLayoutView(root: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewInputs, body: (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewOutputs
 }
@@ -8247,12 +8172,8 @@ extension SwiftUICore.Layout {
     get
   }
   public func updateCache(_ cache: inout Self.Cache, subviews: Self.Subviews)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func explicitAlignment(of guide: SwiftUICore.HorizontalAlignment, in bounds: CoreFoundation.CGRect, proposal: SwiftUICore.ProposedViewSize, subviews: Self.Subviews, cache: inout Self.Cache) -> CoreFoundation.CGFloat?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func explicitAlignment(of guide: SwiftUICore.VerticalAlignment, in bounds: CoreFoundation.CGRect, proposal: SwiftUICore.ProposedViewSize, subviews: Self.Subviews, cache: inout Self.Cache) -> CoreFoundation.CGFloat?
-  #endif
   public func spacing(subviews: Self.Subviews, cache: inout Self.Cache) -> SwiftUICore.ViewSpacing
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -8279,11 +8200,9 @@ public struct LayoutProperties : Swift.Sendable {
   public static let zero: SwiftUICore.ProposedViewSize
   public static let unspecified: SwiftUICore.ProposedViewSize
   public static let infinity: SwiftUICore.ProposedViewSize
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(width: CoreFoundation.CGFloat?, height: CoreFoundation.CGFloat?) {
         (self.width, self.height) = (width, height)
     }
-  #endif
   @inlinable public init(_ size: CoreFoundation.CGSize) {
         self.init(width: size.width, height: size.height)
     }
@@ -8442,12 +8361,8 @@ extension SwiftUICore._IdentifiedViewProxy : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore._BenchmarkHost {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func viewForIdentifier<I, V>(_ identifier: I, _ type: V.Type) -> V? where I : Swift.Hashable, V : SwiftUICore.View
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func stateForIdentifier<I, S, V>(_ id: I, type stateType: S.Type, in viewType: V.Type) -> SwiftUICore.Binding<S>? where I : Swift.Hashable, V : SwiftUICore.View
-  #endif
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 26.0)
@@ -8455,9 +8370,7 @@ extension SwiftUICore._BenchmarkHost {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 26.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 26.0)
 public struct LazyVStack<Content> : SwiftUICore.View where Content : SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(alignment: SwiftUICore.HorizontalAlignment = .center, spacing: CoreFoundation.CGFloat? = nil, pinnedViews: SwiftUICore.PinnedScrollableViews = .init(), @SwiftUICore.ViewBuilder content: () -> Content)
-  #endif
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.LazyVStack<Content>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias Body = Swift.Never
@@ -8569,13 +8482,11 @@ extension SwiftUICore.EnvironmentValues {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   public var textCase: SwiftUICore.Text.Case? {
     get
     set
   }
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -8608,13 +8519,11 @@ extension SwiftUICore.View {
         return environment(\.minimumScaleFactor, factor)
     }
   
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   @inlinable nonisolated public func textCase(_ textCase: SwiftUICore.Text.Case?) -> some SwiftUICore.View {
         environment(\.textCase, textCase)
     }
   
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -8746,9 +8655,7 @@ extension SwiftUICore.StrokeStyle : SwiftUICore.Animatable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Image {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func renderingMode(_ renderingMode: SwiftUICore.Image.TemplateRenderingMode?) -> SwiftUICore.Image
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -8790,13 +8697,11 @@ extension SwiftUICore.Text {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Transaction {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   public var scrollTargetAnchor: SwiftUICore.UnitPoint? {
     get
     set
   }
-  #endif
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -8846,13 +8751,11 @@ extension SwiftUICore.Transaction {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
   @inlinable nonisolated public func lineLimit(_ number: Swift.Int?) -> some SwiftUICore.View {
         environment(\.lineLimit, number)
     }
   
-  #endif
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   nonisolated public func lineLimit(_ limit: Swift.PartialRangeFrom<Swift.Int>) -> some SwiftUICore.View
   
@@ -8872,13 +8775,11 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.EnvironmentValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
   public var lineLimit: Swift.Int? {
     get
     set
   }
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -8919,15 +8820,9 @@ extension SwiftUICore.Image {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Image {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ name: Swift.String, bundle: Foundation.Bundle? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ name: Swift.String, bundle: Foundation.Bundle? = nil, label: SwiftUICore.Text)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(decorative name: Swift.String, bundle: Foundation.Bundle? = nil)
-  #endif
   @available(macOS 11.0, *)
   public init(systemName: Swift.String)
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
@@ -8939,21 +8834,11 @@ extension SwiftUICore.Image {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Image {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(systemName: Swift.String, variableValue: Swift.Double?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_internalSystemName systemName: Swift.String, variableValue: Swift.Double?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ name: Swift.String, variableValue: Swift.Double?, bundle: Foundation.Bundle? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ name: Swift.String, variableValue: Swift.Double?, bundle: Foundation.Bundle? = nil, label: SwiftUICore.Text)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(decorative name: Swift.String, variableValue: Swift.Double?, bundle: Foundation.Bundle? = nil)
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -8961,14 +8846,10 @@ extension SwiftUICore.Image {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Image {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use .renderingMode(.original)")
   public init(_systemName systemName: Swift.String, colorPalette: [SwiftUICore.Color]? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use .renderingMode(.original)")
   public init(_internalSystemName systemName: Swift.String, colorPalette: [SwiftUICore.Color]? = nil)
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -9148,27 +9029,21 @@ extension SwiftUICore.View {
   
 }
 extension SwiftUICore.EnvironmentValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
   public var lineHeight: Foundation.AttributedString.LineHeight? {
     get
     set
   }
-  #endif
 }
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
   nonisolated public func lineHeight(_ lineHeight: Foundation.AttributedString.LineHeight?) -> some SwiftUICore.View
   
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *)
 @available(visionOS, unavailable)
 @_Concurrency.MainActor @preconcurrency public struct GlassEffectContainer<Content> : SwiftUICore.View where Content : SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(spacing: CoreFoundation.CGFloat? = nil, @SwiftUICore.ViewBuilder content: () -> Content)
-  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
@@ -9270,12 +9145,10 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.EnvironmentValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var backgroundStyle: SwiftUICore.AnyShapeStyle? {
     get
     set
   }
-  #endif
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -9540,11 +9413,9 @@ extension SwiftUICore.AttributedTextFormatting {
     @_alwaysEmitIntoClient public static func buildLimitedAvailability<D>(_ definition: D) -> SwiftUICore.AttributedTextFormatting.AnyDefinition<Scope> where Scope == D.Scope, D : SwiftUICore.AttributedTextFormattingDefinition {
             .init(definition)
         }
-    #if compiler(>=5.3) && $NonescapableTypes
     @_alwaysEmitIntoClient public static func buildIf<D>(_ definition: D?) -> D? where Scope == D.Scope, D : SwiftUICore.AttributedTextFormattingDefinition {
             definition
         }
-    #endif
     @_alwaysEmitIntoClient public static func buildEither<T, F>(first: T) -> SwiftUICore._ConditionalContent<T, F> where Scope == T.Scope, T : SwiftUICore.AttributedTextFormattingDefinition, F : SwiftUICore.AttributedTextFormattingDefinition, T.Scope == F.Scope {
             .init(storage: .trueContent(first))
         }
@@ -9556,7 +9427,6 @@ extension SwiftUICore.AttributedTextFormatting {
 @available(*, unavailable)
 extension SwiftUICore.AttributedTextFormatting.DefinitionBuilder : Swift.Sendable {
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension Swift.Optional : SwiftUICore.AttributedTextFormattingDefinition where Wrapped : SwiftUICore.AttributedTextFormattingDefinition {
   public var body: some SwiftUICore.AttributedTextFormattingDefinition<Wrapped.Scope> {
@@ -9567,7 +9437,6 @@ extension Swift.Optional : SwiftUICore.AttributedTextFormattingDefinition where 
   @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
   public typealias Scope = Wrapped.Scope
 }
-#endif
 extension SwiftUICore.AttributedTextFormatting {
   @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
   public struct EmptyDefinition<Scope> : SwiftUICore.AttributedTextFormattingDefinition where Scope : Foundation.AttributeScope {
@@ -9628,12 +9497,8 @@ extension SwiftUICore.AttributedTextFormatting.TupleDefinition : Swift.Sendable 
 extension SwiftUICore.AttributedTextFormatting {
   @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
   public struct ValueConstraint<Scope, AttributeKey> : SwiftUICore.AttributedTextValueConstraint where Scope : Foundation.AttributeScope, AttributeKey : Foundation.AttributedStringKey, AttributeKey.Value : Swift.Sendable {
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(for keyPath: Swift.KeyPath<Scope, AttributeKey>, values allowedValues: Swift.Set<AttributeKey.Value?>, default defaultValue: AttributeKey.Value?)
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(for attribute: AttributeKey.Type, values allowedValues: Swift.Set<AttributeKey.Value?>, default defaultValue: AttributeKey.Value?)
-    #endif
     public func constrain(_ container: inout SwiftUICore.AttributedTextFormatting.ValueConstraint<Scope, AttributeKey>.Attributes)
     public static func == (a: SwiftUICore.AttributedTextFormatting.ValueConstraint<Scope, AttributeKey>, b: SwiftUICore.AttributedTextFormatting.ValueConstraint<Scope, AttributeKey>) -> Swift.Bool
     @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
@@ -9667,39 +9532,27 @@ extension SwiftUICore.AttributedTextValueConstraint {
 extension SwiftUICore.AttributedTextFormatting {
   @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
   @dynamicMemberLookup public struct AttributeContainerProxy<Scope, Attribute> : Swift.Sendable where Scope : Foundation.AttributeScope, Attribute : Foundation.AttributedStringKey, Attribute.Value : Swift.Sendable {
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript<K>(key: K.Type) -> K.Value? where K : Foundation.AttributedStringKey, K.Value : Swift.Sendable {
       mutating get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript<K>(dynamicMember keyPath: Swift.KeyPath<Foundation.AttributeDynamicLookup, K>) -> K.Value? where K : Foundation.AttributedStringKey, K.Value : Swift.Sendable {
       mutating get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript<K>(dynamicMember keyPath: Swift.KeyPath<Scope, K>) -> K.Value? where K : Foundation.AttributedStringKey, K.Value : Swift.Sendable {
       mutating get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(key: Attribute.Type) -> Attribute.Value? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(dynamicMember keyPath: Swift.KeyPath<Scope, Attribute>) -> Attribute.Value? {
       get
       set
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(dynamicMember keyPath: Swift.KeyPath<Foundation.AttributeDynamicLookup, Attribute>) -> Attribute.Value? {
       get
       set
     }
-    #endif
     public subscript<S>(dynamicMember keyPath: Swift.KeyPath<Scope, S>) -> SwiftUICore.AttributedTextFormatting.AttributeContainerProxy<Scope, Attribute>.Scoped<S> where S : Foundation.AttributeScope {
       get
       set
@@ -9717,17 +9570,13 @@ extension SwiftUICore.AttributedTextFormatting {
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension SwiftUICore.AttributedTextFormatting.AttributeContainerProxy {
   @dynamicMemberLookup public struct Scoped<Subscope> : Swift.Sendable where Subscope : Foundation.AttributeScope {
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript<K>(dynamicMember keyPath: Swift.KeyPath<Subscope, K>) -> K.Value? where K : Foundation.AttributedStringKey, K.Value : Swift.Sendable {
       mutating get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public subscript(dynamicMember keyPath: Swift.KeyPath<Subscope, Attribute>) -> Attribute.Value? {
       get
       set
     }
-    #endif
   }
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
@@ -9991,11 +9840,9 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @usableFromInline
 package struct PreviewColorSchemeTraitKey : SwiftUICore._ViewTraitKey {
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable package static var defaultValue: SwiftUICore.ColorScheme? {
     get { nil }
   }
-  #endif
   @available(iOS 14.5, tvOS 14.5, watchOS 7.4, macOS 11.3, *)
   @usableFromInline
   package typealias Value = SwiftUICore.ColorScheme?
@@ -10028,12 +9875,10 @@ extension SwiftUICore.View {
   
 }
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *)
   @available(visionOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public func glassEffectUnion(id: (some (Hashable & Sendable))?, namespace: SwiftUICore.Namespace.ID) -> some SwiftUICore.View
   
-  #endif
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
@@ -10163,9 +10008,7 @@ extension SwiftUICore.AnyGestureStorageBase : Swift.Sendable {
   public init(roundedRect rect: CoreFoundation.CGRect, cornerRadii: SwiftUICore.RectangleCornerRadii, style: SwiftUICore.RoundedCornerStyle = .continuous)
   public init(ellipseIn rect: CoreFoundation.CGRect)
   public init(_ callback: (inout SwiftUICore.Path) -> ())
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ string: Swift.String)
-  #endif
   public var description: Swift.String {
     get
   }
@@ -10261,11 +10104,9 @@ extension SwiftUICore.Path {
   public mutating func addArc(center: CoreFoundation.CGPoint, radius: CoreFoundation.CGFloat, startAngle: SwiftUICore.Angle, endAngle: SwiftUICore.Angle, clockwise: Swift.Bool, transform: CoreFoundation.CGAffineTransform = .identity)
   public mutating func addArc(tangent1End: CoreFoundation.CGPoint, tangent2End: CoreFoundation.CGPoint, radius: CoreFoundation.CGFloat, transform: CoreFoundation.CGAffineTransform = .identity)
   public mutating func addPath(_ path: SwiftUICore.Path, transform: CoreFoundation.CGAffineTransform = .identity)
-  #if compiler(>=5.3) && $NonescapableTypes
   public var currentPoint: CoreFoundation.CGPoint? {
     get
   }
-  #endif
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   public func normalized(eoFill: Swift.Bool = true) -> SwiftUICore.Path
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
@@ -10283,14 +10124,12 @@ extension SwiftUICore.Path {
   public func applying(_ transform: CoreFoundation.CGAffineTransform) -> SwiftUICore.Path
   public func offsetBy(dx: CoreFoundation.CGFloat, dy: CoreFoundation.CGFloat) -> SwiftUICore.Path
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 26.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 26.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 26.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 26.0)
 public func withAnimation<Result>(_ animation: SwiftUICore.Animation? = .default, completionCriteria: SwiftUICore.AnimationCompletionCriteria = .logicallyComplete, _ body: () throws -> Result, completion: @escaping () -> Swift.Void) rethrows -> Result
-#endif
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 26.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 26.0)
@@ -10871,12 +10710,10 @@ extension SwiftUICore.Circle : SwiftUICore.InsettableShape {
 @frozen public struct _AlignmentLayout {
   public var horizontal: SwiftUICore.TextAlignment?
   public var vertical: SwiftUICore._VAlignment?
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(horizontal: SwiftUICore.TextAlignment? = nil, vertical: SwiftUICore._VAlignment? = nil) {
         self.horizontal = horizontal
         self.vertical = vertical
     }
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias AnimatableData = SwiftUICore.EmptyAnimatableData
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -11041,12 +10878,10 @@ extension SwiftUICore.EdgeInsets {
 @frozen public struct _AppearanceActionModifier : SwiftUICore.ViewModifier {
   public var appear: (() -> Swift.Void)?
   public var disappear: (() -> Swift.Void)?
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(appear: (() -> Swift.Void)? = nil, disappear: (() -> Swift.Void)? = nil) {
         self.appear = appear
         self.disappear = disappear
     }
-  #endif
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._AppearanceActionModifier>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(modifier: SwiftUICore._GraphValue<SwiftUICore._AppearanceActionModifier>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -11061,20 +10896,16 @@ extension SwiftUICore._AppearanceActionModifier : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable nonisolated public func onAppear(perform action: (() -> Swift.Void)? = nil) -> some SwiftUICore.View {
         return modifier(
             _AppearanceActionModifier(appear: action, disappear: nil))
     }
   
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable nonisolated public func onDisappear(perform action: (() -> Swift.Void)? = nil) -> some SwiftUICore.View {
         return modifier(
             _AppearanceActionModifier(appear: nil, disappear: action))
     }
   
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -11290,15 +11121,11 @@ extension SwiftUICore.EnvironmentValues {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 public protocol AlignmentID {
   static func defaultValue(in context: SwiftUICore.ViewDimensions) -> CoreFoundation.CGFloat
-  #if compiler(>=5.3) && $NonescapableTypes
   static func _combineExplicit(childValue: CoreFoundation.CGFloat, _ n: Swift.Int, into parentValue: inout CoreFoundation.CGFloat?)
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUICore.AlignmentID {
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func _combineExplicit(childValue: CoreFoundation.CGFloat, _ n: Swift.Int, into parentValue: inout CoreFoundation.CGFloat?)
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -11316,9 +11143,7 @@ extension SwiftUICore.AlignmentID {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.HorizontalAlignment {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func combineExplicit<S>(_ values: S) -> CoreFoundation.CGFloat? where S : Swift.Sequence, S.Element == CoreFoundation.CGFloat?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -11336,9 +11161,7 @@ extension SwiftUICore.HorizontalAlignment {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.VerticalAlignment {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func combineExplicit<S>(_ values: S) -> CoreFoundation.CGFloat? where S : Swift.Sequence, S.Element == CoreFoundation.CGFloat?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -11553,12 +11376,8 @@ extension SwiftUICore.PushTransition : Swift.Sendable {
   public var transaction: SwiftUICore.Transaction
   package var location: SwiftUICore.AnyLocation<Value>
   package var _value: Value
-  #if compiler(>=5.3) && $IsolatedAny
   @preconcurrency public init(@_inheritActorContext get: @escaping @isolated(any) @Sendable () -> Value, @_inheritActorContext set: @escaping @isolated(any) @Sendable (Value) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $IsolatedAny
   @preconcurrency public init(@_inheritActorContext get: @escaping @isolated(any) @Sendable () -> Value, @_inheritActorContext set: @escaping @isolated(any) @Sendable (Value, SwiftUICore.Transaction) -> Swift.Void)
-  #endif
   public static func constant(_ value: Value) -> SwiftUICore.Binding<Value>
   public var wrappedValue: Value {
     get
@@ -11645,9 +11464,7 @@ extension SwiftUICore.Binding : Swift.RandomAccessCollection where Value : Swift
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Binding {
   public func transaction(_ transaction: SwiftUICore.Transaction) -> SwiftUICore.Binding<Value>
-  #if compiler(>=5.3) && $NonescapableTypes
   public func animation(_ animation: SwiftUICore.Animation? = .default) -> SwiftUICore.Binding<Value>
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -11748,9 +11565,7 @@ extension SwiftUICore.IsAuxiliaryContentTraitKey : Swift.Sendable {
     }
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._TagTraitWritingModifier<TagValue>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(modifier: SwiftUICore._GraphValue<SwiftUICore._TagTraitWritingModifier<TagValue>>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
   @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
   public typealias Body = Swift.Never
 }
@@ -12308,10 +12123,8 @@ extension SwiftUICore.Font {
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   public static let extraLargeTitle2: SwiftUICore.Font
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   public static func system(_ style: SwiftUICore.Font.TextStyle, design: SwiftUICore.Font.Design? = nil, weight: SwiftUICore.Font.Weight? = nil) -> SwiftUICore.Font
-  #endif
   @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Use `system(_:design:weight:)` instead.")
   @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Use `system(_:design:weight:)` instead.")
   @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Use `system(_:design:weight:)` instead.")
@@ -12460,9 +12273,7 @@ extension SwiftUICore.Font {
     case eighteen
     case nineteen
     case twenty
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
-    #endif
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
@@ -12553,9 +12364,7 @@ extension SwiftUICore.View {
     }
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._ContainerValueWritingModifier<Value>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(modifier: SwiftUICore._GraphValue<SwiftUICore._ContainerValueWritingModifier<Value>>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias Body = Swift.Never
 }
@@ -12703,7 +12512,6 @@ extension SwiftUICore.View {
 @available(*, unavailable)
 extension SwiftUICore._AnchorWritingModifier : Swift.Sendable {
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -12715,7 +12523,6 @@ extension Swift.Optional : SwiftUICore.Gesture where Wrapped : SwiftUICore.Gestu
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -12725,10 +12532,8 @@ extension Swift.Optional : SwiftUICore.Gesture where Wrapped : SwiftUICore.Gestu
   internal let width: CoreFoundation.CGFloat?
   internal let height: CoreFoundation.CGFloat?
   internal let alignment: SwiftUICore.Alignment
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   package init(width: CoreFoundation.CGFloat?, height: CoreFoundation.CGFloat?, alignment: SwiftUICore.Alignment)
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias AnimatableData = SwiftUICore.EmptyAnimatableData
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -12740,13 +12545,11 @@ extension Swift.Optional : SwiftUICore.Gesture where Wrapped : SwiftUICore.Gestu
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable nonisolated public func frame(width: CoreFoundation.CGFloat? = nil, height: CoreFoundation.CGFloat? = nil, alignment: SwiftUICore.Alignment = .center) -> some SwiftUICore.View {
         return modifier(
             _FrameLayout(width: width, height: height, alignment: alignment))
     }
   
-  #endif
   @available(*, deprecated, message: "Please pass one or more parameters.")
   @inlinable nonisolated public func frame() -> some SwiftUICore.View {
         return frame(width: nil, height: nil, alignment: .center)
@@ -12766,10 +12569,8 @@ extension SwiftUICore.View {
   internal let idealHeight: CoreFoundation.CGFloat?
   internal let maxHeight: CoreFoundation.CGFloat?
   internal let alignment: SwiftUICore.Alignment
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   package init(minWidth: CoreFoundation.CGFloat? = nil, idealWidth: CoreFoundation.CGFloat? = nil, maxWidth: CoreFoundation.CGFloat? = nil, minHeight: CoreFoundation.CGFloat? = nil, idealHeight: CoreFoundation.CGFloat? = nil, maxHeight: CoreFoundation.CGFloat? = nil, alignment: SwiftUICore.Alignment)
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias AnimatableData = SwiftUICore.EmptyAnimatableData
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -12781,7 +12582,6 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable nonisolated public func frame(minWidth: CoreFoundation.CGFloat? = nil, idealWidth: CoreFoundation.CGFloat? = nil, maxWidth: CoreFoundation.CGFloat? = nil, minHeight: CoreFoundation.CGFloat? = nil, idealHeight: CoreFoundation.CGFloat? = nil, maxHeight: CoreFoundation.CGFloat? = nil, alignment: SwiftUICore.Alignment = .center) -> some SwiftUICore.View {
         func areInNondecreasingOrder(
             _ min: CGFloat?, _ ideal: CGFloat?, _ max: CGFloat?
@@ -12809,7 +12609,6 @@ extension SwiftUICore.View {
                 alignment: alignment))
     }
   
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -12994,11 +12793,9 @@ extension SwiftUICore.Text {
                     return RunSlice(run: self, indices: bounds)
                 }
       }
-      #if compiler(>=5.3) && $NonescapableTypes
       public subscript<T>(key: T.Type) -> T? where T : SwiftUICore.TextAttribute {
         get
       }
-      #endif
       public var layoutDirection: SwiftUICore.LayoutDirection {
         get
       }
@@ -13036,11 +12833,9 @@ extension SwiftUICore.Text {
       public subscript(bounds: Swift.Range<Swift.Int>) -> SwiftUICore.Text.Layout.RunSlice {
         get
       }
-      #if compiler(>=5.3) && $NonescapableTypes
       public subscript<T>(key: T.Type) -> T? where T : SwiftUICore.TextAttribute {
         @_alwaysEmitIntoClient get { run[key] }
       }
-      #endif
       public var typographicBounds: SwiftUICore.Text.Layout.TypographicBounds {
         get
       }
@@ -13144,26 +12939,18 @@ extension SwiftUICore.GraphicsContext {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Text {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 13.0, deprecated: 100000.0, renamed: "foregroundStyle(_:)")
   @available(macOS, introduced: 10.15, deprecated: 100000.0, renamed: "foregroundStyle(_:)")
   @available(tvOS, introduced: 13.0, deprecated: 100000.0, renamed: "foregroundStyle(_:)")
   @available(watchOS, introduced: 6.0, deprecated: 100000.0, renamed: "foregroundStyle(_:)")
   @available(visionOS, introduced: 1.0, deprecated: 100000.0, renamed: "foregroundStyle(_:)")
   nonisolated public func foregroundColor(_ color: SwiftUICore.Color?) -> SwiftUICore.Text
-  #endif
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   nonisolated public func foregroundStyle<S>(_ style: S) -> SwiftUICore.Text where S : SwiftUICore.ShapeStyle
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public func font(_ font: SwiftUICore.Font?) -> SwiftUICore.Text
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public func fontWeight(_ weight: SwiftUICore.Font.Weight?) -> SwiftUICore.Text
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   nonisolated public func fontWidth(_ width: SwiftUICore.Font.Width?) -> SwiftUICore.Text
-  #endif
   nonisolated public func bold() -> SwiftUICore.Text
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   nonisolated public func bold(_ isActive: Swift.Bool) -> SwiftUICore.Text
@@ -13172,26 +12959,16 @@ extension SwiftUICore.Text {
   nonisolated public func italic(_ isActive: Swift.Bool) -> SwiftUICore.Text
   @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, *)
   nonisolated public func monospaced(_ isActive: Swift.Bool = true) -> SwiftUICore.Text
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.1, macOS 13.0, tvOS 16.1, watchOS 9.1, *)
   nonisolated public func fontDesign(_ design: SwiftUICore.Font.Design?) -> SwiftUICore.Text
-  #endif
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   nonisolated public func monospacedDigit() -> SwiftUICore.Text
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public func strikethrough(_ isActive: Swift.Bool = true, color: SwiftUICore.Color? = nil) -> SwiftUICore.Text
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   nonisolated public func strikethrough(_ isActive: Swift.Bool = true, pattern: SwiftUICore.Text.LineStyle.Pattern, color: SwiftUICore.Color? = nil) -> SwiftUICore.Text
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public func underline(_ isActive: Swift.Bool = true, color: SwiftUICore.Color? = nil) -> SwiftUICore.Text
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   nonisolated public func underline(_ isActive: Swift.Bool = true, pattern: SwiftUICore.Text.LineStyle.Pattern, color: SwiftUICore.Color? = nil) -> SwiftUICore.Text
-  #endif
   nonisolated public func kerning(_ kerning: CoreFoundation.CGFloat) -> SwiftUICore.Text
   nonisolated public func tracking(_ tracking: CoreFoundation.CGFloat) -> SwiftUICore.Text
   nonisolated public func baselineOffset(_ baselineOffset: CoreFoundation.CGFloat) -> SwiftUICore.Text
@@ -13378,12 +13155,10 @@ extension SwiftUICore._ContentShapeKindModifier : Swift.Sendable {
 @frozen public struct _AnimationModifier<Value> : SwiftUICore.ViewModifier where Value : Swift.Equatable {
   public var animation: SwiftUICore.Animation?
   public var value: Value
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(animation: SwiftUICore.Animation?, value: Value) {
         self.animation = animation
         self.value = value
     }
-  #endif
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._AnimationModifier<Value>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(modifier: SwiftUICore._GraphValue<SwiftUICore._AnimationModifier<Value>>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -13400,17 +13175,13 @@ extension SwiftUICore._AnimationModifier : Swift.Sendable {
 @frozen public struct _AnimationView<Content> : SwiftUICore.View where Content : Swift.Equatable, Content : SwiftUICore.View {
   public var content: Content
   public var animation: SwiftUICore.Animation?
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public init(content: Content, animation: SwiftUICore.Animation?) {
         self.content = content
         self.animation = animation
     }
-  #endif
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore._AnimationView<Content>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore._AnimationView<Content>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias Body = Swift.Never
 }
@@ -13431,12 +13202,10 @@ extension SwiftUICore._AnimationModifier : Swift.Equatable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable nonisolated public func animation<V>(_ animation: SwiftUICore.Animation?, value: V) -> some SwiftUICore.View where V : Swift.Equatable {
         return modifier(_AnimationModifier(animation: animation, value: value))
     }
   
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -13444,13 +13213,11 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View where Self : Swift.Equatable {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   @inlinable nonisolated public func animation(_ animation: SwiftUICore.Animation?) -> some SwiftUICore.View {
         return _AnimationView(content: self, animation: animation)
     }
   
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 public struct ConcentricRectangle : SwiftUICore.Shape, SwiftUICore.Animatable {
@@ -13537,40 +13304,28 @@ extension SwiftUICore.Shape where Self == SwiftUICore.ConcentricRectangle {
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension SwiftUICore.Rectangle : SwiftUICore.RoundedRectangularShape {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func corners(in size: CoreFoundation.CGSize?) -> SwiftUICore.Rectangle.Corners?
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension SwiftUICore.RoundedRectangle : SwiftUICore.RoundedRectangularShape {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func corners(in size: CoreFoundation.CGSize?) -> SwiftUICore.RoundedRectangle.Corners?
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension SwiftUICore.UnevenRoundedRectangle : SwiftUICore.RoundedRectangularShape {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func corners(in size: CoreFoundation.CGSize?) -> SwiftUICore.UnevenRoundedRectangle.Corners?
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension SwiftUICore.Circle : SwiftUICore.RoundedRectangularShape {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func corners(in size: CoreFoundation.CGSize?) -> SwiftUICore.Circle.Corners?
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 extension SwiftUICore.Capsule : SwiftUICore.RoundedRectangularShape {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func corners(in size: CoreFoundation.CGSize?) -> SwiftUICore.Capsule.Corners?
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 public protocol RoundedRectangularShape : SwiftUICore.InsettableShape {
   typealias Corners = SwiftUICore.RoundedRectangularShapeCorners
-  #if compiler(>=5.3) && $NonescapableTypes
   func corners(in size: CoreFoundation.CGSize?) -> Self.Corners?
-  #endif
 }
 @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
 public struct RoundedRectangularShapeCorners : Swift.Sendable, Swift.Hashable, SwiftUICore.Animatable {
@@ -13584,9 +13339,7 @@ public struct RoundedRectangularShapeCorners : Swift.Sendable, Swift.Hashable, S
   public static var concentric: SwiftUICore.RoundedRectangularShapeCorners {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func concentric(minimum: SwiftUICore.Edge.Corner.Style? = nil) -> SwiftUICore.RoundedRectangularShapeCorners
-  #endif
   public subscript(corner: SwiftUICore.Edge.Corner) -> SwiftUICore.Edge.Corner.Style {
     get
   }
@@ -13641,9 +13394,7 @@ public struct ContainerValues {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func tag<V>(for type: V.Type) -> V? where V : Swift.Hashable
-  #endif
   public func hasTag<V>(_ tag: V) -> Swift.Bool where V : Swift.Hashable
 }
 @available(*, unavailable)
@@ -13718,7 +13469,6 @@ extension SwiftUICore.EnvironmentValues {
   public func resolve(in environment: SwiftUICore.EnvironmentValues) -> SwiftUICore.Color.Resolved
   @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
   public func resolveHDR(in environment: SwiftUICore.EnvironmentValues) -> SwiftUICore.Color.ResolvedHDR
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 14.0, deprecated: 100000.0, renamed: "resolve(in:)")
   @available(macOS, introduced: 11.0, deprecated: 100000.0, renamed: "resolve(in:)")
   @available(tvOS, introduced: 14.0, deprecated: 100000.0, renamed: "resolve(in:)")
@@ -13727,7 +13477,6 @@ extension SwiftUICore.EnvironmentValues {
   public var cgColor: CoreGraphics.CGColor? {
     get
   }
-  #endif
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (lhs: SwiftUICore.Color, rhs: SwiftUICore.Color) -> Swift.Bool
   public var description: Swift.String {
@@ -13869,15 +13618,11 @@ public protocol AnimationStateKey {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Transaction {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(animation: SwiftUICore.Animation?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var animation: SwiftUICore.Animation? {
     get
     set
   }
-  #endif
   public var disablesAnimations: Swift.Bool {
     get
     set
@@ -13891,10 +13636,8 @@ extension SwiftUICore.Transaction {
 @_typeEraser(DebugReplaceableView) @_typeEraser(AnyView) @preconcurrency @_Concurrency.MainActor public protocol View {
   nonisolated static func _makeView(view: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated static func _makeViewList(view: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
   associatedtype Body : SwiftUICore.View
   @SwiftUICore.ViewBuilder @_Concurrency.MainActor @preconcurrency var body: Self.Body { get }
 }
@@ -14084,10 +13827,8 @@ extension SwiftUICore.ViewModifier where Self : SwiftUICore.Animatable {
   @inlinable public init() {}
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.EmptyView>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.EmptyView>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
@@ -14098,10 +13839,8 @@ extension SwiftUICore.ViewModifier where Self : SwiftUICore.Animatable {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore._VariadicView_Children : SwiftUICore.View {
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore._VariadicView.Children>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
@@ -14115,9 +13854,7 @@ extension SwiftUICore._VariadicView_Children : Swift.RandomAccessCollection {
     public var id: Swift.AnyHashable {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public func id<ID>(as _: ID.Type = ID.self) -> ID? where ID : Swift.Hashable
-    #endif
     public subscript<Trait>(key: Trait.Type) -> Trait.Value where Trait : SwiftUICore._ViewTraitKey {
       get
       set
@@ -14173,9 +13910,7 @@ extension Swift.MutableCollection {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Color {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ name: Swift.String, bundle: Foundation.Bundle? = nil)
-  #endif
   public static let _mainNamedBundle: Foundation.Bundle?
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
@@ -14360,9 +14095,7 @@ extension SwiftUICore._ResolvedKeyframeTrackContent : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 public struct CubicKeyframe<Value> : SwiftUICore.KeyframeTrackContent where Value : SwiftUICore.Animatable {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ to: Value, duration: Foundation.TimeInterval, startVelocity: Value? = nil, endVelocity: Value? = nil)
-  #endif
   public func _resolve(into resolved: inout SwiftUICore._ResolvedKeyframeTrackContent<Value>)
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Body = SwiftUICore.CubicKeyframe<Value>
@@ -14376,9 +14109,7 @@ extension SwiftUICore.CubicKeyframe : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 public struct SpringKeyframe<Value> : SwiftUICore.KeyframeTrackContent where Value : SwiftUICore.Animatable {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ to: Value, duration: Foundation.TimeInterval? = nil, spring: SwiftUICore.Spring = Spring(), startVelocity: Value? = nil)
-  #endif
   public func _resolve(into resolved: inout SwiftUICore._ResolvedKeyframeTrackContent<Value>)
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Body = SwiftUICore.SpringKeyframe<Value>
@@ -14433,12 +14164,8 @@ extension SwiftUICore.MoveKeyframe : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 public struct PhaseAnimator<Phase, Content> : SwiftUICore.View where Phase : Swift.Equatable, Content : SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ phases: some Sequence<Phase>, trigger: some Equatable, @SwiftUICore.ViewBuilder content: @escaping (Phase) -> Content, animation: @escaping (Phase) -> SwiftUICore.Animation? = { _ in .default })
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ phases: some Sequence<Phase>, @SwiftUICore.ViewBuilder content: @escaping (Phase) -> Content, animation: @escaping (Phase) -> SwiftUICore.Animation? = { _ in .default })
-  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
@@ -14454,14 +14181,10 @@ extension SwiftUICore.PhaseAnimator : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public func phaseAnimator<Phase>(_ phases: some Sequence<Phase>, trigger: some Equatable, @SwiftUICore.ViewBuilder content: @escaping (SwiftUICore.PlaceholderContentView<Self>, Phase) -> some View, animation: @escaping (Phase) -> SwiftUICore.Animation? = { _ in .default }) -> some SwiftUICore.View where Phase : Swift.Equatable
   
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public func phaseAnimator<Phase>(_ phases: some Sequence<Phase>, @SwiftUICore.ViewBuilder content: @escaping (SwiftUICore.PlaceholderContentView<Self>, Phase) -> some View, animation: @escaping (Phase) -> SwiftUICore.Animation? = { _ in .default }) -> some SwiftUICore.View where Phase : Swift.Equatable
   
-  #endif
 }
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -14647,10 +14370,8 @@ extension SwiftUICore.LayoutPriorityTraitKey : Swift.Sendable {
 extension SwiftUICore.Environment {
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   public init(_ objectType: Value.Type) where Value : AnyObject, Value : Observation.Observable
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   public init<T>(_ objectType: T.Type) where Value == T?, T : AnyObject, T : Observation.Observable
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -14658,13 +14379,11 @@ extension SwiftUICore.Environment {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.EnvironmentValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   public subscript<T>(objectType: T.Type) -> T? where T : AnyObject, T : Observation.Observable {
     get
     set
   }
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -14672,11 +14391,9 @@ extension SwiftUICore.EnvironmentValues {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   nonisolated public func environment<T>(_ object: T?) -> some SwiftUICore.View where T : AnyObject, T : Observation.Observable
   
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
@@ -14717,9 +14434,7 @@ extension SwiftUICore._PreferenceActionModifier : Swift.Sendable {
   @_alwaysEmitIntoClient public init<V>(erasing view: V) where V : SwiftUICore.View {
         self.init(view)
     }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_fromValue value: Any)
-  #endif
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.AnyView>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.AnyView>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -14908,9 +14623,7 @@ public enum _ViewDebug {
     case phase
     case layoutComputer
     case displayList
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.UInt32)
-    #endif
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     public typealias RawValue = Swift.UInt32
     public var rawValue: Swift.UInt32 {
@@ -14958,9 +14671,7 @@ extension SwiftUICore._ViewDebug : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore._ViewDebug {
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func serializedData(_ viewDebugData: [SwiftUICore._ViewDebug.Data]) -> Foundation.Data?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -15239,7 +14950,6 @@ public struct MeshGradient : SwiftUICore.ShapeStyle, Swift.Equatable, Swift.Send
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias Resolved = Swift.Never
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -15252,7 +14962,6 @@ extension Swift.Optional : SwiftUICore.View where Wrapped : SwiftUICore.View {
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
 }
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -15263,11 +14972,9 @@ extension Swift.Optional : SwiftUICore.View where Wrapped : SwiftUICore.View {
   @usableFromInline
   internal var elements: SwiftUICore.PropertyList.Element?
   @inlinable package init() { elements = nil }
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable package var data: Swift.AnyObject? {
     get { return elements }
   }
-  #endif
   @inlinable package var isEmpty: Swift.Bool {
     get { return elements === nil }
   }
@@ -15378,10 +15085,8 @@ extension SwiftUICore.Shape {
 @preconcurrency @_Concurrency.MainActor public protocol ViewModifier {
   nonisolated static func _makeView(modifier: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   nonisolated static func _makeViewList(modifier: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
   associatedtype Body : SwiftUICore.View
   @SwiftUICore.ViewBuilder @_Concurrency.MainActor @preconcurrency func body(content: Self.Content) -> Self.Body
   typealias Content = SwiftUICore._ViewModifier_Content<Self>
@@ -15393,10 +15098,8 @@ extension SwiftUICore.Shape {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.ViewModifier where Self.Body == Swift.Never {
   @_Concurrency.MainActor @preconcurrency public func body(content: Self.Content) -> Self.Body
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -15406,10 +15109,8 @@ extension SwiftUICore.ViewModifier where Self.Body == Swift.Never {
 extension SwiftUICore.ViewModifier where Self : SwiftUICore._GraphInputsModifier, Self.Body == Swift.Never {
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(modifier: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -15422,10 +15123,8 @@ extension SwiftUICore.ViewModifier where Self : SwiftUICore._GraphInputsModifier
   @inlinable public init() {}
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore.EmptyModifier>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(modifier: SwiftUICore._GraphValue<SwiftUICore.EmptyModifier>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
   @_Concurrency.MainActor @preconcurrency public func body(content: SwiftUICore.EmptyModifier.Content) -> SwiftUICore.EmptyModifier.Body
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -15480,10 +15179,8 @@ extension SwiftUICore.ModifiedContent : SwiftUICore.Animatable where Content : S
 extension SwiftUICore.ModifiedContent : SwiftUICore.View where Content : SwiftUICore.View, Modifier : SwiftUICore.ViewModifier {
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.ModifiedContent<Content, Modifier>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.ModifiedContent<Content, Modifier>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
   @_Concurrency.MainActor @preconcurrency public var body: SwiftUICore.ModifiedContent<Content, Modifier>.Body {
     get
   }
@@ -15496,10 +15193,8 @@ extension SwiftUICore.ModifiedContent : SwiftUICore.View where Content : SwiftUI
 extension SwiftUICore.ModifiedContent : SwiftUICore.ViewModifier where Content : SwiftUICore.ViewModifier, Modifier : SwiftUICore.ViewModifier {
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore.ModifiedContent<Content, Modifier>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(modifier: SwiftUICore._GraphValue<SwiftUICore.ModifiedContent<Content, Modifier>>, inputs: SwiftUICore._ViewListInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs, body: (SwiftUICore._ViewListCountInputs) -> Swift.Int?) -> Swift.Int?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -15527,9 +15222,7 @@ extension SwiftUICore.Image {
       get
     }
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public func allowedDynamicRange(_ range: SwiftUICore.Image.DynamicRange?) -> SwiftUICore.Image
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -15537,12 +15230,10 @@ extension SwiftUICore.Image {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @available(watchOS, unavailable)
 extension SwiftUICore.EnvironmentValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var allowedDynamicRange: SwiftUICore.Image.DynamicRange? {
     get
     set
   }
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -15550,12 +15241,10 @@ extension SwiftUICore.EnvironmentValues {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @available(watchOS, unavailable)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient nonisolated public func allowedDynamicRange(_ range: SwiftUICore.Image.DynamicRange?) -> some SwiftUICore.View {
         return environment(\.allowedDynamicRange, range)
     }
   
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -15617,9 +15306,7 @@ extension SwiftUICore.EnvironmentValues {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Image {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(size: CoreFoundation.CGSize, label: SwiftUICore.Text? = nil, opaque: Swift.Bool = false, colorMode: SwiftUICore.ColorRenderingMode = .nonLinear, renderer: @escaping (inout SwiftUICore.GraphicsContext) -> Swift.Void)
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
@@ -15794,12 +15481,8 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 @preconcurrency public protocol CustomAnimation : Swift.Hashable, Swift.Sendable {
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated func animate<V>(value: V, time: Foundation.TimeInterval, context: inout SwiftUICore.AnimationContext<V>) -> V? where V : SwiftUICore.VectorArithmetic
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated func velocity<V>(value: V, time: Foundation.TimeInterval, context: SwiftUICore.AnimationContext<V>) -> V? where V : SwiftUICore.VectorArithmetic
-  #endif
   nonisolated func shouldMerge<V>(previous: SwiftUICore.Animation, value: V, time: Foundation.TimeInterval, context: inout SwiftUICore.AnimationContext<V>) -> Swift.Bool where V : SwiftUICore.VectorArithmetic
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
@@ -15808,17 +15491,13 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.CustomAnimation {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func velocity<V>(value: V, time: Foundation.TimeInterval, context: SwiftUICore.AnimationContext<V>) -> V? where V : SwiftUICore.VectorArithmetic
-  #endif
   public func shouldMerge<V>(previous: SwiftUICore.Animation, value: V, time: Foundation.TimeInterval, context: inout SwiftUICore.AnimationContext<V>) -> Swift.Bool where V : SwiftUICore.VectorArithmetic
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Never : SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -16076,9 +15755,7 @@ extension SwiftUICore.AnyTransitionBox : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.AnyTransition {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func animation(_ animation: SwiftUICore.Animation?) -> SwiftUICore.AnyTransition
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -16086,10 +15763,17 @@ extension SwiftUICore.AnyTransition {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Transition {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func animation(_ animation: SwiftUICore.Animation?) -> some SwiftUICore.Transition
   
-  #endif
+}
+@available(iOS 26.4, macOS 26.4, tvOS 26.4, watchOS 26.4, *)
+public struct _ArchivedViewHostDelegate_URLConfiguration {
+  public var url: Foundation.URL
+  public var isSensitive: Swift.Bool
+  public init(url: Foundation.URL, isSensitive: Swift.Bool = false)
+}
+@available(iOS 26.4, macOS 26.4, tvOS 26.4, watchOS 26.4, *)
+extension SwiftUICore._ArchivedViewHostDelegate_URLConfiguration : Swift.Sendable {
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -16166,9 +15850,7 @@ public protocol _BenchmarkHost : AnyObject {
   func _renderForTest(interval: Swift.Double)
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   func _renderAsyncForTest(interval: Swift.Double) -> Swift.Bool
-  #if compiler(>=5.3) && $NonescapableTypes
   func _performScrollTest(startOffset: CoreFoundation.CGFloat, iterations: Swift.Int, delta: CoreFoundation.CGFloat, length: CoreFoundation.CGFloat, completion: (() -> Swift.Void)?)
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -16186,9 +15868,7 @@ public protocol _Benchmark : SwiftUICore._Test {
 extension SwiftUICore._BenchmarkHost {
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   public func _renderAsyncForTest(interval: Swift.Double) -> Swift.Bool
-  #if compiler(>=5.3) && $NonescapableTypes
   public func _performScrollTest(startOffset: CoreFoundation.CGFloat, iterations: Swift.Int, delta: CoreFoundation.CGFloat, length: CoreFoundation.CGFloat, completion: (() -> Swift.Void)?)
-  #endif
   public func measureAction(action: () -> Swift.Void) -> Swift.Double
   public func measureRender(interval: Swift.Double = 1.0 / 60.0) -> Swift.Double
   public func measureRenders(seconds: Swift.Double) -> [Swift.Double]
@@ -16536,9 +16216,7 @@ extension SwiftUICore.SubviewsCollection : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
 extension SwiftUICore.SubviewsCollection : SwiftUICore.View {
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.SubviewsCollection>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias Body = Swift.Never
 }
@@ -16583,9 +16261,7 @@ extension SwiftUICore.SubviewsCollectionSlice : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", visionOS 2.2)
 extension SwiftUICore.SubviewsCollectionSlice : SwiftUICore.View {
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.SubviewsCollectionSlice>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias Body = Swift.Never
 }
@@ -16616,20 +16292,16 @@ final public class ImageRenderer<Content> : Combine.ObservableObject where Conte
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 26.0, macOS 26.0, tvOS 26.0, visionOS 26.0, *)
   @available(watchOS, unavailable)
   @_Concurrency.MainActor final public var allowedDynamicRange: SwiftUICore.Image.DynamicRange? {
     get
     set
   }
-  #endif
   @_Concurrency.MainActor public init(content view: Content)
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor final public var cgImage: CoreGraphics.CGImage? {
     get
   }
-  #endif
   @_Concurrency.MainActor final public func render(rasterizationScale: CoreFoundation.CGFloat = 1, renderer: (CoreFoundation.CGSize, (CoreGraphics.CGContext) -> Swift.Void) -> Swift.Void)
   @available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, *)
   @usableFromInline
@@ -16908,10 +16580,8 @@ extension SwiftUICore._ConditionalContent : SwiftUICore.View where TrueContent :
   internal init(storage: SwiftUICore._ConditionalContent<TrueContent, FalseContent>.Storage)
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore._ConditionalContent<TrueContent, FalseContent>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore._ConditionalContent<TrueContent, FalseContent>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 26.0)
@@ -17049,39 +16719,31 @@ extension SwiftUICore.View {
         return environment(\.imageScale, scale)
     }
   
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable nonisolated public func font(_ font: SwiftUICore.Font?) -> some SwiftUICore.View {
         return environment(\.font, font)
     }
   
-  #endif
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   nonisolated public func monospacedDigit() -> some SwiftUICore.View
   
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   nonisolated public func monospaced(_ isActive: Swift.Bool = true) -> some SwiftUICore.View
   
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   nonisolated public func fontWeight(_ weight: SwiftUICore.Font.Weight?) -> some SwiftUICore.View
   
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   nonisolated public func fontWidth(_ width: SwiftUICore.Font.Width?) -> some SwiftUICore.View
   
-  #endif
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   nonisolated public func bold(_ isActive: Swift.Bool = true) -> some SwiftUICore.View
   
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   nonisolated public func italic(_ isActive: Swift.Bool = true) -> some SwiftUICore.View
   
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.1, macOS 13.0, tvOS 16.1, watchOS 9.1, *)
   nonisolated public func fontDesign(_ design: SwiftUICore.Font.Design?) -> some SwiftUICore.View
   
-  #endif
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   nonisolated public func kerning(_ kerning: CoreFoundation.CGFloat) -> some SwiftUICore.View
   
@@ -17098,12 +16760,10 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.EnvironmentValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var font: SwiftUICore.Font? {
     get
     set
   }
-  #endif
   @available(macOS 11.0, *)
   public var imageScale: SwiftUICore.Image.Scale {
     get
@@ -17130,12 +16790,10 @@ extension SwiftUICore.EnvironmentValues {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.EnvironmentValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var legibilityWeight: SwiftUICore.LegibilityWeight? {
     get
     set
   }
-  #endif
   public var locale: Foundation.Locale {
     get
     set
@@ -17157,38 +16815,30 @@ extension SwiftUICore.EnvironmentValues {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
   @backDeployed(before: macOS 14.0, tvOS 17.0, watchOS 10.0)
   public var horizontalSizeClass: SwiftUICore.UserInterfaceSizeClass? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 13.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   @usableFromInline
   internal var realHorizontalSizeClass: SwiftUICore.UserInterfaceSizeClass? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
   @backDeployed(before: macOS 14.0, tvOS 17.0, watchOS 10.0)
   public var verticalSizeClass: SwiftUICore.UserInterfaceSizeClass? {
     get
     set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 13.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   @usableFromInline
   internal var realVerticalSizeClass: SwiftUICore.UserInterfaceSizeClass? {
     get
     set
   }
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -17566,14 +17216,12 @@ extension SwiftUICore.Canvas : Swift.Sendable {
 extension SwiftUICore.Canvas where Symbols == SwiftUICore.EmptyView {
   public init(opaque: Swift.Bool = false, colorMode: SwiftUICore.ColorRenderingMode = .nonLinear, rendersAsynchronously: Swift.Bool = false, renderer: @escaping (inout SwiftUICore.GraphicsContext, CoreFoundation.CGSize) -> Swift.Void)
 }
-#if compiler(>=5.3) && $NonescapableTypes
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 public func withAnimation<Result>(_ animation: SwiftUICore.Animation? = .default, _ body: () throws -> Result) rethrows -> Result
-#endif
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.2)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.2)
@@ -17662,12 +17310,10 @@ extension SwiftUICore.HoverEffectContent {
   
 }
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *)
   @available(visionOS, unavailable)
   nonisolated public func glassEffectID(_ id: (some (Hashable & Sendable))?, in namespace: SwiftUICore.Namespace.ID) -> some SwiftUICore.View
   
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -17684,7 +17330,6 @@ extension SwiftUICore.View {
         modifier(_ValueTransactionModifier(value: value, transform: transform))
     }
   
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 13.0, deprecated: 15.0, message: "Use withAnimation or animation(_:value:) instead.")
   @available(macOS, introduced: 10.15, deprecated: 12.0, message: "Use withAnimation or animation(_:value:) instead.")
   @available(tvOS, introduced: 13.0, deprecated: 15.0, message: "Use withAnimation or animation(_:value:) instead.")
@@ -17698,7 +17343,6 @@ extension SwiftUICore.View {
         }
     }
   
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -17710,7 +17354,6 @@ extension SwiftUICore.ViewModifier {
         return _PushPopTransactionModifier(content: self, transform: transform)
     }
   
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable @_Concurrency.MainActor @preconcurrency public func animation(_ animation: SwiftUICore.Animation?) -> some SwiftUICore.ViewModifier {
         return transaction { t in
             if !t.disablesAnimations {
@@ -17719,7 +17362,6 @@ extension SwiftUICore.ViewModifier {
         }
     }
   
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -17729,10 +17371,8 @@ extension SwiftUICore.ViewModifier {
 extension SwiftUICore.View {
   nonisolated public func transaction<V>(_ transform: @escaping (inout SwiftUICore.Transaction) -> Swift.Void, @SwiftUICore.ViewBuilder body: (SwiftUICore.PlaceholderContentView<Self>) -> V) -> some SwiftUICore.View where V : SwiftUICore.View
   
-  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public func animation<V>(_ animation: SwiftUICore.Animation?, @SwiftUICore.ViewBuilder body: (SwiftUICore.PlaceholderContentView<Self>) -> V) -> some SwiftUICore.View where V : SwiftUICore.View
   
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -17814,10 +17454,8 @@ extension SwiftUICore.Font {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Font {
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   public static func system(size: CoreFoundation.CGFloat, weight: SwiftUICore.Font.Weight? = nil, design: SwiftUICore.Font.Design? = nil) -> SwiftUICore.Font
-  #endif
   @available(iOS, introduced: 13.0, deprecated: 100000.0, message: "Use `system(size:weight:design:)` instead.")
   @available(macOS, introduced: 10.15, deprecated: 100000.0, message: "Use `system(size:weight:design:)` instead.")
   @available(tvOS, introduced: 13.0, deprecated: 100000.0, message: "Use `system(size:weight:design:)` instead.")
@@ -18163,12 +17801,8 @@ extension SwiftUICore.ShapeView where Self.Content : SwiftUICore.InsettableShape
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Binding {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init<V>(_ base: SwiftUICore.Binding<V>) where Value == V?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ base: SwiftUICore.Binding<Value?>)
-  #endif
   public init<V>(_ base: SwiftUICore.Binding<V>) where Value == Swift.AnyHashable, V : Swift.Hashable
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -18440,6 +18074,12 @@ extension SwiftUICore.EnvironmentValues {
     get
   }
 }
+@available(iOS 26.4, macOS 26.4, tvOS 26.4, watchOS 26.4, visionOS 26.4, *)
+extension SwiftUICore.EnvironmentValues {
+  public var accessibilityReduceHighlightingEffects: Swift.Bool {
+    get
+  }
+}
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
@@ -18683,11 +18323,9 @@ extension SwiftUICore.IDView {
 extension SwiftUICore.IDView {
   @usableFromInline
   package static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.IDView<Content, ID>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   @usableFromInline
   package static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -18789,9 +18427,7 @@ extension SwiftUICore._Test {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 public struct PreferredColorSchemeKey : SwiftUICore.PreferenceKey {
   public typealias Value = SwiftUICore.ColorScheme?
-  #if compiler(>=5.3) && $NonescapableTypes
   public static func reduce(value: inout SwiftUICore.PreferredColorSchemeKey.Value, nextValue: () -> SwiftUICore.PreferredColorSchemeKey.Value)
-  #endif
 }
 @available(*, unavailable)
 extension SwiftUICore.PreferredColorSchemeKey : Swift.Sendable {
@@ -18802,13 +18438,11 @@ extension SwiftUICore.PreferredColorSchemeKey : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable nonisolated public func preferredColorScheme(_ colorScheme: SwiftUICore.ColorScheme?) -> some SwiftUICore.View {
         return preference(key: PreferredColorSchemeKey.self,
             value: colorScheme)
     }
   
-  #endif
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -18827,10 +18461,8 @@ extension SwiftUICore.View {
 extension SwiftUICore.Image : SwiftUICore.View {
   nonisolated public static func _makeView(view: SwiftUICore._GraphValue<SwiftUICore.Image>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
   nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<SwiftUICore.Image>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
   nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
-  #endif
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
 }
@@ -19134,7 +18766,6 @@ extension SwiftUICore.HoverEffectContent {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable nonisolated public func safeAreaInset<V>(edge: SwiftUICore.VerticalEdge, alignment: SwiftUICore.HorizontalAlignment = .center, spacing: CoreFoundation.CGFloat? = nil, @SwiftUICore.ViewBuilder content: () -> V) -> some SwiftUICore.View where V : SwiftUICore.View {
         modifier(_InsetViewModifier(
             content: content(), edge: Edge(vertical: edge),
@@ -19142,8 +18773,6 @@ extension SwiftUICore.View {
             alignmentKey: alignment.key))
     }
   
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable nonisolated public func safeAreaInset<V>(edge: SwiftUICore.HorizontalEdge, alignment: SwiftUICore.VerticalAlignment = .center, spacing: CoreFoundation.CGFloat? = nil, @SwiftUICore.ViewBuilder content: () -> V) -> some SwiftUICore.View where V : SwiftUICore.View {
         modifier(_InsetViewModifier(
             content: content(), edge: Edge(horizontal: edge),
@@ -19151,7 +18780,6 @@ extension SwiftUICore.View {
             alignmentKey: alignment.key))
     }
   
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -19163,12 +18791,10 @@ extension SwiftUICore.View {
   internal var content: Content
   @usableFromInline
   internal var properties: (regions: SwiftUICore.SafeAreaRegions, spacing: CoreFoundation.CGFloat?, edge: SwiftUICore.Edge, alignmentKey: SwiftUICore.AlignmentKey)
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable package init(content: Content, edge: SwiftUICore.Edge, regions: SwiftUICore.SafeAreaRegions, spacing: CoreFoundation.CGFloat?, alignmentKey: SwiftUICore.AlignmentKey) {
         self.content = content
         properties = (regions, spacing, edge, alignmentKey)
     }
-  #endif
   nonisolated public static func _makeView(modifier: SwiftUICore._GraphValue<SwiftUICore._InsetViewModifier<Content>>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias Body = Swift.Never
@@ -19183,10 +18809,8 @@ extension SwiftUICore._InsetViewModifier : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.2)
 @usableFromInline
 package struct SafeAreaPaddingModifier : SwiftUICore.ViewModifier {
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   package init(edges: SwiftUICore.Edge.Set, insets: SwiftUICore.EdgeInsets?)
-  #endif
   @usableFromInline
   @_Concurrency.MainActor @preconcurrency package func body(content: SwiftUICore.SafeAreaPaddingModifier.Content) -> some SwiftUICore.View
   
@@ -19210,7 +18834,6 @@ extension SwiftUICore.View {
         )
     }
   
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   @_alwaysEmitIntoClient nonisolated public func safeAreaPadding(_ edges: SwiftUICore.Edge.Set = .all, _ length: CoreFoundation.CGFloat? = nil) -> some SwiftUICore.View {
         modifier(
@@ -19221,7 +18844,6 @@ extension SwiftUICore.View {
         )
     }
   
-  #endif
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   @_alwaysEmitIntoClient nonisolated public func safeAreaPadding(_ length: CoreFoundation.CGFloat) -> some SwiftUICore.View {
         safeAreaPadding(.all, length)
@@ -19418,14 +19040,10 @@ extension SwiftUICore.FixedRoundedRect : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.Animation : Swift.Hashable {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_specialize(exported: false, kind: partial, where V == Swift.Double)
   @_specialize(exported: false, kind: partial, where V == SwiftUICore.AnimatablePair<SwiftUICore.AnimatablePair<CoreFoundation.CGFloat, CoreFoundation.CGFloat>, SwiftUICore.AnimatablePair<CoreFoundation.CGFloat, CoreFoundation.CGFloat>>)
   public func animate<V>(value: V, time: Foundation.TimeInterval, context: inout SwiftUICore.AnimationContext<V>) -> V? where V : SwiftUICore.VectorArithmetic
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func velocity<V>(value: V, time: Foundation.TimeInterval, context: SwiftUICore.AnimationContext<V>) -> V? where V : SwiftUICore.VectorArithmetic
-  #endif
   public func shouldMerge<V>(previous: SwiftUICore.Animation, value: V, time: Foundation.TimeInterval, context: inout SwiftUICore.AnimationContext<V>) -> Swift.Bool where V : SwiftUICore.VectorArithmetic
   public var base: any SwiftUICore.CustomAnimation {
     get
@@ -19486,9 +19104,7 @@ extension SwiftUICore.Edge {
       @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
       public typealias RawValue = Swift.Int8
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int8)
-    #endif
     @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
     public typealias AllCases = [SwiftUICore.Edge.Corner]
     @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
@@ -19526,9 +19142,7 @@ extension SwiftUICore.Edge.Corner {
     public static var concentric: SwiftUICore.Edge.Corner.Style {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public static func concentric(minimum: SwiftUICore.Edge.Corner.Style? = nil) -> SwiftUICore.Edge.Corner.Style
-    #endif
     public var animatableData: SwiftUICore.Edge.Corner.Style.AnimatableData {
       get
       set
@@ -19568,12 +19182,10 @@ extension SwiftUICore.Edge.Corner.Style : Swift.ExpressibleByIntegerLiteral {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable nonisolated public func tint<S>(_ tint: S?) -> some SwiftUICore.View where S : SwiftUICore.ShapeStyle {
         return environment(\.tint, tint.map(AnyShapeStyle.init))
     }
   
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -19581,12 +19193,10 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable @_disfavoredOverload nonisolated public func tint(_ tint: SwiftUICore.Color?) -> some SwiftUICore.View {
         environment(\.tintColor, tint)
     }
   
-  #endif
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -19594,13 +19204,11 @@ extension SwiftUICore.View {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.EnvironmentValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   package var tint: SwiftUICore.AnyShapeStyle? {
     get
     set
   }
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -19608,13 +19216,11 @@ extension SwiftUICore.EnvironmentValues {
 @_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 extension SwiftUICore.EnvironmentValues {
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   package var tintColor: SwiftUICore.Color? {
     get
     set
   }
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -19637,6 +19243,57 @@ public struct TintShapeStyle : SwiftUICore.ShapeStyle {
   public init()
   @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Resolved = Swift.Never
+}
+@available(visionOS 1.0, *)
+@_originallyDefinedIn(module: "SwiftUI", visionOS 26.0)
+@available(iOS, unavailable)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@frozen public struct Alignment3D : Swift.Equatable, Swift.Sendable {
+  @usableFromInline
+  internal var base: SwiftUICore.Alignment
+  public var horizontal: SwiftUICore.HorizontalAlignment {
+    @inlinable get { base.horizontal }
+    @inlinable set { base.horizontal = newValue }
+  }
+  public var vertical: SwiftUICore.VerticalAlignment {
+    @inlinable get { base.vertical }
+    @inlinable set { base.vertical = newValue }
+  }
+  public var depth: SwiftUICore.DepthAlignment
+  @_alwaysEmitIntoClient public init(horizontal: SwiftUICore.HorizontalAlignment, vertical: SwiftUICore.VerticalAlignment, depth: SwiftUICore.DepthAlignment) {
+        self.base = Alignment(horizontal: horizontal, vertical: vertical)
+        self.depth = depth
+    }
+  public static let bottom: SwiftUICore.Alignment3D
+  public static let bottomBack: SwiftUICore.Alignment3D
+  public static let bottomFront: SwiftUICore.Alignment3D
+  public static let bottomLeading: SwiftUICore.Alignment3D
+  public static let bottomLeadingBack: SwiftUICore.Alignment3D
+  public static let bottomLeadingFront: SwiftUICore.Alignment3D
+  public static let bottomTrailing: SwiftUICore.Alignment3D
+  public static let bottomTrailingBack: SwiftUICore.Alignment3D
+  public static let bottomTrailingFront: SwiftUICore.Alignment3D
+  public static let leading: SwiftUICore.Alignment3D
+  public static let leadingBack: SwiftUICore.Alignment3D
+  public static let leadingFront: SwiftUICore.Alignment3D
+  public static let top: SwiftUICore.Alignment3D
+  public static let topBack: SwiftUICore.Alignment3D
+  public static let topFront: SwiftUICore.Alignment3D
+  public static let topLeading: SwiftUICore.Alignment3D
+  public static let topLeadingBack: SwiftUICore.Alignment3D
+  public static let topLeadingFront: SwiftUICore.Alignment3D
+  public static let topTrailing: SwiftUICore.Alignment3D
+  public static let topTrailingBack: SwiftUICore.Alignment3D
+  public static let topTrailingFront: SwiftUICore.Alignment3D
+  public static let trailing: SwiftUICore.Alignment3D
+  public static let trailingBack: SwiftUICore.Alignment3D
+  public static let trailingFront: SwiftUICore.Alignment3D
+  public static let front: SwiftUICore.Alignment3D
+  public static let back: SwiftUICore.Alignment3D
+  public static let center: SwiftUICore.Alignment3D
+  public static func == (a: SwiftUICore.Alignment3D, b: SwiftUICore.Alignment3D) -> Swift.Bool
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
@@ -19683,12 +19340,8 @@ extension SwiftUICore.SystemFormatStyle.Timer : Foundation.FormatStyle {
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension SwiftUICore.SystemFormatStyle.Timer : Foundation.DiscreteFormatStyle {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func discreteInput(before input: Foundation.Date) -> Foundation.Date?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func discreteInput(after input: Foundation.Date) -> Foundation.Date?
-  #endif
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension Foundation.FormatStyle where Self == SwiftUICore.SystemFormatStyle.Stopwatch {
@@ -19715,12 +19368,8 @@ extension SwiftUICore.SystemFormatStyle.Stopwatch : Foundation.FormatStyle {
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension SwiftUICore.SystemFormatStyle.Stopwatch : Foundation.DiscreteFormatStyle {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func discreteInput(before input: Foundation.Date) -> Foundation.Date?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func discreteInput(after input: Foundation.Date) -> Foundation.Date?
-  #endif
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 extension SwiftUICore.SystemFormatStyle.Stopwatch {

@@ -1,10 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_StoreKit_SwiftUI.framework/Versions/A/_StoreKit_SwiftUI'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos ]
     symbols:         [ '_$s15_IdentifiedView17_StoreKit_SwiftUI0C7ContentPTl', '_$s17_StoreKit_SwiftUI010IdentifiedA7ContentVMa', 
                        '_$s17_StoreKit_SwiftUI010IdentifiedA7ContentVMn', '_$s17_StoreKit_SwiftUI012SubscriptionA10PolicyKindV07privacyF0ACvgZ', 
                        '_$s17_StoreKit_SwiftUI012SubscriptionA10PolicyKindV07privacyF0ACvpZMV', 
@@ -1133,6 +1133,8 @@ exports:
                        '_$s7SwiftUI4ViewP010_StoreKit_aB0E28subscriptionPromotionalOffer5offer9signatureQr0dE07ProductV012SubscriptionH0VSgAJ_AJ0L4InfoVtc_AL9SignatureVAJ_AoLtYaKctFQOMQ', 
                        '_$s7SwiftUI4ViewP010_StoreKit_aB0E29subscriptionIntroductoryOffer05applyH010compactJWSQrSb0dE07ProductV_AJ16SubscriptionInfoVtc_SSAJ_ALtYaKctF', 
                        '_$s7SwiftUI4ViewP010_StoreKit_aB0E29subscriptionIntroductoryOffer05applyH010compactJWSQrSb0dE07ProductV_AJ16SubscriptionInfoVtc_SSAJ_ALtYaKctFQOMQ', 
+                       '_$s7SwiftUI4ViewP010_StoreKit_aB0E33preferredSubscriptionPricingTermsyQr0dE07ProductV0G4InfoV0hI0VSgAH_AJtcF', 
+                       '_$s7SwiftUI4ViewP010_StoreKit_aB0E33preferredSubscriptionPricingTermsyQr0dE07ProductV0G4InfoV0hI0VSgAH_AJtcFQOMQ', 
                        '_$s8StoreKit7ProductV01_aB8_SwiftUIE19CollectionTaskStateO7failureyAFs5Error_pcAFmFWC', 
                        '_$s8StoreKit7ProductV01_aB8_SwiftUIE19CollectionTaskStateO7loadingyA2FmFWC', 
                        '_$s8StoreKit7ProductV01_aB8_SwiftUIE19CollectionTaskStateO7successyAFSayACG_SaySSGtcAFmFWC', 
