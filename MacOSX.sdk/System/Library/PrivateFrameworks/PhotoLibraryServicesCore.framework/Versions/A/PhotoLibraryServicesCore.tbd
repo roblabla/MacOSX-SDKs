@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotoLibraryServicesCore.framework/Versions/A/PhotoLibraryServicesCore'
-current-version: 811.0.106
+current-version: 821.0.120
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -430,7 +430,8 @@ exports:
                        _PLInvalidPerfCheckErrorStr, _PLInverseExifOrientationFromImageOrientation, 
                        _PLIsAllowedResultEffectivelyLimited, _PLIsAssetsd, _PLIsAssetsdProxyService, 
                        _PLIsCamera, _PLIsCameraBundleIdentifier, _PLIsCanonicalUUIDString, 
-                       _PLIsCaptureSessionEnabled, _PLIsChinaSKU, _PLIsClientApplicationStateReadyForLimitedLibraryPickerReprompt, 
+                       _PLIsCaptureSessionEnabled, _PLIsChinaDeviceWithBaseband, 
+                       _PLIsChinaSKU, _PLIsClientApplicationStateReadyForLimitedLibraryPickerReprompt, 
                        _PLIsConfiguredForUnitTesting, _PLIsContentPrivacyEnabled, 
                        _PLIsDemod, _PLIsDeveloperMode, _PLIsDeviceClassiPhone, _PLIsEDUMode, 
                        _PLIsErrorEqualToCode, _PLIsErrorEqualToSQLiteCode, _PLIsErrorFileNotFound, 

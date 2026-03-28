@@ -202,10 +202,26 @@ typedef NS_ENUM(NSInteger, PHAssetResourceUploadJobState) {
 
 } NS_SWIFT_NAME(PHAssetResourceUploadJob.State) API_AVAILABLE(ios(26.1)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos);
 
-/// These actions correspond with the types of fetches we can make on a PHAssetResourceUploadJob and the actions we can also take on those jobs.
+/// An action to perform on an upload job.
+///
+/// Determine the available jobs for an action by calling the ``PHAssetResourceUploadJob/fetchJobsWithAction:options:`` method.
 typedef NS_ENUM(NSInteger, PHAssetResourceUploadJobAction) {
-    PHAssetResourceUploadJobActionAcknowledge = 1,      /// Where PHAssetResourceUploadJobState = (success OR fail).
-    PHAssetResourceUploadJobActionRetry = 2,            /// Where PHAssetResourceUploadJobState = failed, but the job can be retried
+
+    /// A job that requires acknowledgement.
+    ///
+    /// An acknowledgeable job has a ``PHAssetResourceUploadJob/state`` of `succeeded` or `failed`
+    /// and hasn't been acknowledged.
+    ///
+    /// Call ``PHAssetResourceUploadJobChangeRequest/acknowledge`` to acknowledge a job
+    /// and free queue capacity for new uploads.
+    PHAssetResourceUploadJobActionAcknowledge = 1,
+
+    /// A job to retry processing.
+    ///
+    /// An retryable job has a ``PHAssetResourceUploadJob/state`` of `failed` and hasn't previously been retried.
+    ///
+    /// Call ``PHAssetResourceUploadJobChangeRequest/retryWithDestination:`` to retry the job.
+    PHAssetResourceUploadJobActionRetry = 2,
 } NS_SWIFT_NAME(PHAssetResourceUploadJob.Action) API_AVAILABLE(ios(26.1)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos);
 
 API_AVAILABLE_END

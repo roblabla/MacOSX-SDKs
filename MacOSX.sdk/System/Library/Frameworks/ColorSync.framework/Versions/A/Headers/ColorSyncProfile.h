@@ -125,11 +125,11 @@ CSEXTERN ColorSyncProfileRef __nullable ColorSyncProfileCreateWithURL(CFURLRef u
     *   returns ColorSyncProfileRef or NULL in case of failure
     */
 
-CSEXTERN CFStringRef kColorSyncDoNotSubstituteProfiles CS_AVAILABLE_STARTING(16.0, 19.0);
+CSEXTERN CFStringRef kColorSyncDoNotSubstituteProfiles CS_AVAILABLE_STARTING(26.1, 26.1);
     /*
      * Use the above key with kCFBooleanTrue value to skip substitution with a matching system provided profile
      */
-CSEXTERN ColorSyncProfileRef __nullable ColorSyncProfileCreateWithURLAndOptions(CFURLRef url, CFDictionaryRef __nullable options, CFErrorRef* __nullable error) CS_AVAILABLE_STARTING(16.0, 19.0);
+CSEXTERN ColorSyncProfileRef __nullable ColorSyncProfileCreateWithURLAndOptions(CFURLRef url, CFDictionaryRef __nullable options, CFErrorRef* __nullable error) CS_AVAILABLE_STARTING(26.1, 26.1);
     /*
      *   url     - URL to the profile data.
      *   options - a dictionary with creation options, e.g. kColorSyncDoNotSubstituteProfiles
@@ -231,11 +231,6 @@ CSEXTERN bool ColorSyncProfileIsHLGBased (ColorSyncProfileRef) CS_AVAILABLE_STAR
      * A utility function verifying if a profile is using ITU BT.2100 HLG transfer functions
      */
 
-CSEXTERN size_t ColorSyncProfileGetTagCount(ColorSyncProfileRef);
-    /*
-     * A utility function returning number of tags contained in the profile.
-     */
-
     
 CSEXTERN float ColorSyncProfileEstimateGammaWithDisplayID (const int32_t displayID, CFErrorRef* __nullable error) CS_AVAILABLE_STARTING(10.4) CS_UNAVAILABLE_EMBEDDED;
    /*
@@ -264,7 +259,7 @@ CSEXTERN bool ColorSyncProfileGetDisplayTransferFormulaFromVCGT(ColorSyncProfile
      */
     
 
-CSEXTERN float ColorSyncProfileEstimateGamma (ColorSyncProfileRef prof, CFErrorRef* __nullable error) CS_AVAILABLE_STARTING(10.4, 16.0);
+CSEXTERN float ColorSyncProfileEstimateGamma (ColorSyncProfileRef prof, CFErrorRef* __nullable error) CS_AVAILABLE_STARTING(10.4, 26.1);
     /*
     *   prof    - profile to perform estimation on
     *   error   - (optional) pointer to the error which will be returned in

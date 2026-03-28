@@ -59,7 +59,6 @@ exports:
                        __FCMIGReleaseMOCProxyForUser, __FCMIGResetUsageData, __FCMIGSafariReadExistingBookmarks, 
                        __FCMIGSafariVisitedPage, __FCMIGSafariWriteBookmarks, __FCMIGSaveUsageData, 
                        __FCMIGUserCanLogin, __FCMIGiChatSaveChatLog, ___WCRDefaultLog ]
-    objc-classes:    [ WCRAppleAllowList, WCRAutoAssetClient, WCRBlockPage, WCRBloomFilter, 
-                       WCRBrowserEngineClient, WCRCipherMLClient, WCRLogging, WCRURLList, 
-                       _TtC22WebContentRestrictions15BloomFilterShim ]
+    objc-classes:    [ WCRAppleAllowList, WCRAutoAssetClient, WCRBloomFilter, WCRBrowserEngineClient, 
+                       WCRCipherMLClient, WCRLogging, WCRURLList, _TtC22WebContentRestrictions15BloomFilterShim ]
 ...

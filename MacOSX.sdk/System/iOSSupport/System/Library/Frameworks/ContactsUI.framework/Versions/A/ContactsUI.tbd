@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ContactsUI.framework/Versions/A/ContactsUI'
-current-version: 1424.200.81
+current-version: 1424.255.31
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -132,10 +132,8 @@ exports:
                        '_$s10ContactsUI18ContactCardDetailsV25PropertyViewConfigurationV17HighlightCategoryON', 
                        '_$s10ContactsUI18ContactCardDetailsV25PropertyViewConfigurationV17HighlightCategoryOSHAAMc', 
                        '_$s10ContactsUI18ContactCardDetailsV25PropertyViewConfigurationV17HighlightCategoryOSQAAMc', 
-                       '_$s10ContactsUI18ContactCardDetailsV25PropertyViewConfigurationV34highlightedLabeledValueIdentifiersSaySS18propertyIdentifier_AE17HighlightCategoryO8categorytGvM', 
                        '_$s10ContactsUI18ContactCardDetailsV25PropertyViewConfigurationV34highlightedLabeledValueIdentifiersSaySS18propertyIdentifier_AE17HighlightCategoryO8categorytGvg', 
                        '_$s10ContactsUI18ContactCardDetailsV25PropertyViewConfigurationV34highlightedLabeledValueIdentifiersSaySS18propertyIdentifier_AE17HighlightCategoryO8categorytGvpMV', 
-                       '_$s10ContactsUI18ContactCardDetailsV25PropertyViewConfigurationV34highlightedLabeledValueIdentifiersSaySS18propertyIdentifier_AE17HighlightCategoryO8categorytGvs', 
                        '_$s10ContactsUI18ContactCardDetailsV25PropertyViewConfigurationV41shouldColorEmphasizeHighlightedPropertiesSbvM', 
                        '_$s10ContactsUI18ContactCardDetailsV25PropertyViewConfigurationV41shouldColorEmphasizeHighlightedPropertiesSbvg', 
                        '_$s10ContactsUI18ContactCardDetailsV25PropertyViewConfigurationV41shouldColorEmphasizeHighlightedPropertiesSbvpMV', 
@@ -774,11 +772,12 @@ exports:
                        _CNUIIsFaceTime, _CNUIIsFirstParty, _CNUIIsMessages, _CNUIIsMobilePhone, 
                        _CNUIIsWatchCompanion, _CNUILogAccountsAndGroupsList, _CNUILogAvatarView, 
                        _CNUILogContactCard, _CNUILogContactList, _CNUILogContactPhotoPicker, 
-                       _CNUILogContactStoreDataSource, _CNUILogPosters, _CNUILogRemoteAlert, 
-                       _CNUILogStarkSiriExperiment, _CNUILogStarkUtilities, _CNUILogTesting, 
-                       _CNUILogViewService, _CNUIPixelAlignedPoint, _CNUIPixelAlignedRect, 
-                       _CNUIPixelAlignedSize, _CNUIRoundToScale, _CNUIRoundToViewScale, 
-                       _CNUISetLoggingBlock, _CNUISetUseSiriLocalization, _CNUIShouldUseSiriLocalization, 
+                       _CNUILogContactStoreDataSource, _CNUILogForgetSharingContact, 
+                       _CNUILogPosters, _CNUILogRemoteAlert, _CNUILogStarkSiriExperiment, 
+                       _CNUILogStarkUtilities, _CNUILogTesting, _CNUILogViewService, 
+                       _CNUIPixelAlignedPoint, _CNUIPixelAlignedRect, _CNUIPixelAlignedSize, 
+                       _CNUIRoundToScale, _CNUIRoundToViewScale, _CNUISetLoggingBlock, 
+                       _CNUISetUseSiriLocalization, _CNUIShouldUseSiriLocalization, 
                        __CNUILog, _kCNActionViewMaxLabelWidth, _kCNActionViewPlatterSize, 
                        _kCNTransportButtonSize ]
     objc-classes:    [ CNActionItem, CNActionView, CNActionsView, CNAvatarAccessoryView, 

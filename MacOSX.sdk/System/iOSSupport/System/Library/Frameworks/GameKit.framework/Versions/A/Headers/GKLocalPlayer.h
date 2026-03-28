@@ -62,25 +62,6 @@ API_AVAILABLE(ios(4.1), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0))
 */
 - (void)loadChallengableFriendsWithCompletionHandler:(void(^__nullable)(NSArray<GKPlayer *> * __nullable challengableFriends, NSError * __nullable error))completionHandler;
 
-
-/** Set the default leaderboard for the current game
-    Possible reasons for error:
-    1. Communications problem
-    2. Unauthenticated player
-    3. Leaderboard not present
- */
-- (void)setDefaultLeaderboardIdentifier:(NSString *)leaderboardIdentifier completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
-
-
-/** Load the default leaderboard identifier for the local player
-    Possible reasons for error:
-    1. Communications problem
-    2. Unauthenticated player
-    3. Leaderboard not present
- */
-- (void)loadDefaultLeaderboardIdentifierWithCompletionHandler:(void(^__nullable)(NSString * __nullable leaderboardIdentifier, NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0));
-
-
 /**Generates a signature allowing 3rd party server to authenticate the GKLocalPlayer
     Possible reasons for error:
     1. Communications problem
@@ -132,6 +113,23 @@ GK_EXTERN NSNotificationName GKPlayerAuthenticationDidChangeNotificationName API
     2. Unauthenticated player
  */
 - (void)generateIdentityVerificationSignatureWithCompletionHandler:(void (^__nullable)(NSURL * __nullable publicKeyUrl, NSData * __nullable signature, NSData * __nullable salt, uint64_t timestamp, NSError * __nullable error))completionHandler  API_DEPRECATED_WITH_REPLACEMENT("Use ``GKLocalPlayer/fetchItems(forIdentityVerificationSignature:)`` instead.", ios(7.0,13.5), macos(10.10,10.15.5), tvos(9.0,13.4.8), visionos(1.0,1.0), watchos(3.0,6.5));
+
+/** Load the default leaderboard identifier for the local player
+    Possible reasons for error:
+    1. Communications problem
+    2. Unauthenticated player
+    3. Leaderboard not present
+ */
+- (void)loadDefaultLeaderboardIdentifierWithCompletionHandler:(void(^__nullable)(NSString * __nullable leaderboardIdentifier, NSError * __nullable error))completionHandler API_DEPRECATED("No longer supported", ios(7.0,26.2), macos(10.10,26.2), tvos(9.0,26.2), visionos(1.0,26.2), watchos(3.0,26.2));
+
+/** Set the default leaderboard for the current game
+    Possible reasons for error:
+    1. Communications problem
+    2. Unauthenticated player
+    3. Leaderboard not present
+ */
+- (void)setDefaultLeaderboardIdentifier:(NSString *)leaderboardIdentifier completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED("No longer supported", ios(7.0,26.2), macos(10.10,26.2), tvos(9.0,26.2), visionos(1.0,26.2), watchos(3.0,26.2));
+
 @end
 NS_ASSUME_NONNULL_END
 

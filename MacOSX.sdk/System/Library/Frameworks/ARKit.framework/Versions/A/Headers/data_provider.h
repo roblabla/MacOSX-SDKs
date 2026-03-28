@@ -45,6 +45,7 @@ OS_ENUM(ar_data_provider_state, intptr_t,
  @return The state of the data provider.
  */
 API_AVAILABLE(visionos(1.0), macos(26.0))
+
 AR_EXTERN ar_data_provider_state_t ar_data_provider_get_state(ar_data_provider_t data_provider) AR_REFINED_FOR_SWIFT;
 
 /**

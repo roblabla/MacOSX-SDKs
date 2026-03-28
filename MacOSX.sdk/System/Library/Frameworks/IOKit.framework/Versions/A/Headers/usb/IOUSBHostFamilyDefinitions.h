@@ -163,16 +163,18 @@ enum tIOUSBHostPortStatus
 };
 
 #pragma mark Entitlements
+
 #define kIOUSBTransportDextEntitlement                          "com.apple.developer.driverkit.transport.usb"
 #define kIOUSBHostVMEntitlement                                 "com.apple.vm.device-access"
 #define kIOUSBHostControllerInterfaceEntitlement                "com.apple.developer.usb.host-controller-interface"
 #define kIOUSBBillboardEntitlement                              "com.apple.developer.usb.billboard"
 
+#pragma mark USB Service class names
 
-#pragma mark Registry property names
+#define kIOUSBHostDeviceClassName                               "IOUSBHostDevice"
+#define kIOUSBHostInterfaceClassName                            "IOUSBHostInterface"
 
-#define kUSBHostMatchingPropertySpeed                           "USBSpeed"
-#define kUSBHostMatchingPropertyPortType                        "USBPortType"
+#pragma mark USB Service matching properties
 
 #define kUSBHostMatchingPropertyVendorID                        "idVendor"
 #define kUSBHostMatchingPropertyProductID                       "idProduct"
@@ -188,6 +190,12 @@ enum tIOUSBHostPortStatus
 #define kUSBHostMatchingPropertyInterfaceSubClass               "bInterfaceSubClass"
 #define kUSBHostMatchingPropertyInterfaceProtocol               "bInterfaceProtocol"
 #define kUSBHostMatchingPropertyInterfaceNumber                 "bInterfaceNumber"
+
+#pragma mark USB service properties for Apple internal use
+#pragma mark Names, data types, and contents are subject to change without notice
+
+#define kUSBHostMatchingPropertySpeed                           "USBSpeed"
+#define kUSBHostMatchingPropertyPortType                        "USBPortType"
 
 #define kUSBHostPropertyLocationID                              "locationID"
 #define kUSBHostPropertyDebugOptions                            "kUSBDebugOptions"
@@ -271,7 +279,8 @@ enum tIOUSBHostPortStatus
 
 #define kUSBHostPortPropertyStatus                              "port-status"
 #define kUSBHostPortPropertyOvercurrent                         "UsbHostPortOvercurrent"
-#define kUSBHostPortPropertyPortNumber                          "usb-port-number"
+#define kUSBHostPortPropertyPortNumber                          "port"
+#pragma clang deprecated(kUSBHostPortPropertyPortNumber)
 #define kUSBHostPortPropertyRemovable                           "removable"
 #define kUSBHostPortPropertyTestMode                            "kUSBTestMode"
 #define kUSBHostPortPropertyUsb3ComplianceMode                  "kUSBHostPortPropertyUsb3ComplianceMode"
@@ -327,9 +336,6 @@ enum tIOUSBHostPortStatus
 #define kUSBHostControllerPropertyTierLimit                     "UsbHostControllerTierLimit"            // OSNumber containing the number of tiers supported by this controller (See USB 2.0 § 4.1.1)
 #define kUSBHostControllerPropertyInterruptRMBS                 "UsbHostControllerInterruptRMBS"        // OSNumber containing the ns value passed to IOPCIDevice::requireMaxBusStall when interrupt endpoints are in use
 #define kUSBHostControllerPropertyIsochronousRMBS               "UsbHostControllerIsochronousRMBS"      // OSNumber containing the ns value passed to IOPCIDevice::requireMaxBusStall when isochronous endpoints are in use
-
-#define kIOUSBHostDeviceClassName                               "IOUSBHostDevice"
-#define kIOUSBHostInterfaceClassName                            "IOUSBHostInterface"
 
 // for IOUSBLib compatibility
 #define kUSBHostDevicePropertyAddress                           "kUSBAddress"

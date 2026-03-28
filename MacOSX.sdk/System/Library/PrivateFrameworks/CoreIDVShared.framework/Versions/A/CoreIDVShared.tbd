@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreIDVShared.framework/Versions/A/CoreIDVShared'
-current-version: 8.109
+current-version: 8.203
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -11434,6 +11434,7 @@ exports:
                        '_$s13CoreIDVShared8DIPErrorV4CodeO44digitalPresentmentBiometricsPermissionDeniedyA2EmFWC', 
                        '_$s13CoreIDVShared8DIPErrorV4CodeO44digitalPresentmentCOSEMisformattedSigningKeyyA2EmFWC', 
                        '_$s13CoreIDVShared8DIPErrorV4CodeO44digitalPresentmentInvalidMerchantCertificateyA2EmFWC', 
+                       '_$s13CoreIDVShared8DIPErrorV4CodeO44digitalPresentmentInvalidUsageDescriptionKeyyA2EmFWC', 
                        '_$s13CoreIDVShared8DIPErrorV4CodeO44documentReaderDocSignerIssueDateInconsistentyA2EmFWC', 
                        '_$s13CoreIDVShared8DIPErrorV4CodeO44failedToStorePIITokenCredentialIdentifierNilyA2EmFWC', 
                        '_$s13CoreIDVShared8DIPErrorV4CodeO44idcsHostNameMismatchForReaderAuthCertificateyA2EmFWC', 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/UIKit.framework/Versions/A/UIKit'
-current-version: 9126.1.12
+current-version: 9126.2.4
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/iOSSupport/System/Library/PrivateFrameworks/DocumentManager.framework/Versions/A/DocumentManager', 
@@ -46,7 +46,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 1015.6
+current-version: 1016
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -428,7 +428,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/SubFrameworks/UIUtilities.framework/Versions/A/UIUtilities'
-current-version: 9126.1.12
+current-version: 9126.2.4
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -442,7 +442,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/DocumentManager.framework/Versions/A/DocumentManager'
-current-version: 367.1.9
+current-version: 367.2.4
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _DOCAdaptSizeToRect, _DOCAlertItemIsNotReadable, _DOCAlertUserTheNetworkIsNotReachable, 
@@ -475,8 +475,7 @@ exports:
                        _DOCUserDefaultsKeyMetadataLevelOfDetail, _DOCUserDefaultsKeyMostRecentGoToLocations, 
                        _DOCUserDefaultsKeyPreferQuicklookForType, _DOCUserDefaultsKeyRecentsHomeScreenWidgetCache, 
                        _DOCUserDefaultsKeyRecentsHomeScreenWidgetCacheLastUpdatedAt, 
-                       _DOCUserDefaultsKeyReportAllFileProviderErrors, _DOCUserDefaultsKeyUseDSEnumForExternalVolumes, 
-                       _DOCUserDefaultsKeyUseDSEnumForLocalStorage, _DOCUserDefaultsLastNumberOfRecentsDocuments, 
+                       _DOCUserDefaultsKeyReportAllFileProviderErrors, _DOCUserDefaultsLastNumberOfRecentsDocuments, 
                        _DOCUserDefaultsLastNumberOfSharedDocuments, _DOCUserDefaultsMostRecentSceneState, 
                        _DOCUserDefaultsSceneState, _DOCUserDefaultsSortingModeReversedKey, 
                        _DOCUserDefaultsSortingModeSortTypeKey, _DOCUserDefaultsTimestampOfLastCallToCreateDocumentSPI, 
@@ -523,7 +522,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/PrintKitUI.framework/Versions/A/PrintKitUI'
-current-version: 78.2.1
+current-version: 78.4
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _UIPrintErrorDomain ]
@@ -536,7 +535,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/ShareSheet.framework/Versions/A/ShareSheet'
-current-version: 2094.20.72
+current-version: 2094.30.41
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _UIActivityItemsConfigurationMetadataKeyCollaborationModeRestrictions, 
@@ -589,7 +588,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/UIKitCore.framework/Versions/A/UIKitCore'
-current-version: 9126.1.12
+current-version: 9126.2.4
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -11698,10 +11697,10 @@ exports:
                        _UIKBAttributeNameDisplayImage, _UIKBAttributeNameDragThreshold, 
                        _UIKBAttributeNameGestureKeyplane, _UIKBAttributeNameGridLayout, 
                        _UIKBAttributeNameGroupNeighbor, _UIKBAttributeNameHomeIndicator, 
-                       _UIKBAttributeNameIgnoreHandBias, _UIKBAttributeNameIgnoreShiftState, 
-                       _UIKBAttributeNameIsAlphabeticPlane, _UIKBAttributeNameIsKanaKeyboard, 
-                       _UIKBAttributeNameIsKanaPlane, _UIKBAttributeNameKeyCharging, 
-                       _UIKBAttributeNameLabel, _UIKBAttributeNameLooksLikeShiftAlternate, 
+                       _UIKBAttributeNameIgnoreHandBias, _UIKBAttributeNameIgnoreShiftRendering, 
+                       _UIKBAttributeNameIgnoreShiftState, _UIKBAttributeNameIsAlphabeticPlane, 
+                       _UIKBAttributeNameIsKanaKeyboard, _UIKBAttributeNameIsKanaPlane, 
+                       _UIKBAttributeNameKeyCharging, _UIKBAttributeNameLabel, _UIKBAttributeNameLooksLikeShiftAlternate, 
                        _UIKBAttributeNameMergeAsMoreKey, _UIKBAttributeNameModifyForWriteboardKey, 
                        _UIKBAttributeNameMoreAfter, _UIKBAttributeNameMoreAlternate, 
                        _UIKBAttributeNameMoreAlternateSmallDisplay, _UIKBAttributeNameMoreRendering, 
@@ -12616,14 +12615,14 @@ exports:
                        __UIApplicationOpenExternalURLOptionIgnoreUniversalLinks, 
                        __UIApplicationOpenURLOptionIgnoreUniversalLinks, __UIApplicationOpenURLOptionsSourceProcessHandleKey, 
                        __UIApplicationOrientationIsLandscape, __UIApplicationPackedDeploymentVersionFromString, 
-                       __UIApplicationPreferredDefaultSceneSessionRoleKey, __UIApplicationRunLoopMode, 
-                       __UIApplicationRunLoopModePopNotification, __UIApplicationRunLoopModePushNotification, 
-                       __UIApplicationRunLoopModeRequesterUserInfoKey, __UIApplicationSceneConnectionHandler, 
-                       __UIApplicationSceneDisconnectionHandler, __UIApplicationSceneOcclusionChangedNotification, 
-                       __UIApplicationShortcutIconSystemImageNameForType, __UIApplicationShortcutIconTypeForTypeString, 
-                       __UIApplicationStatusBarHiddenStateChangedNotification, __UIApplicationStatusBarIsHiddenKey, 
-                       __UIApplicationSupportsIndirectInputEventsKey, __UIApplicationSupportsIndirectInputEventsPrivateKey, 
-                       __UIApplicationSystemNavigationActionChangedNotification, 
+                       __UIApplicationPackedVersionFromString, __UIApplicationPreferredDefaultSceneSessionRoleKey, 
+                       __UIApplicationRunLoopMode, __UIApplicationRunLoopModePopNotification, 
+                       __UIApplicationRunLoopModePushNotification, __UIApplicationRunLoopModeRequesterUserInfoKey, 
+                       __UIApplicationSceneConnectionHandler, __UIApplicationSceneDisconnectionHandler, 
+                       __UIApplicationSceneOcclusionChangedNotification, __UIApplicationShortcutIconSystemImageNameForType, 
+                       __UIApplicationShortcutIconTypeForTypeString, __UIApplicationStatusBarHiddenStateChangedNotification, 
+                       __UIApplicationStatusBarIsHiddenKey, __UIApplicationSupportsIndirectInputEventsKey, 
+                       __UIApplicationSupportsIndirectInputEventsPrivateKey, __UIApplicationSystemNavigationActionChangedNotification, 
                        __UIApplicationUsesAlternateUI, __UIApplicationUsesLegacyUI, 
                        __UIApplicationVolumeDownButtonDownNotification, __UIApplicationVolumeDownButtonUpNotification, 
                        __UIApplicationVolumeUpButtonDownNotification, __UIApplicationVolumeUpButtonUpNotification, 
@@ -13048,18 +13047,19 @@ exports:
                        __UITemporaryFileURL, __UITemporaryFileWithUniqueName, __UITextAttributesAtIndexWithDirection, 
                        __UITextContainerViewSizeDidChangeNotification, __UITextCursorAnimationStyleUserInfoKey, 
                        __UITextCursorInputModeSwitcherUserInfoKey, __UITextCursorKeyboardIndicatorUserInfoKey, 
-                       __UITextInputActionsErrorGeneratingError, __UITextInputActionsErrorInvalidLanguage, 
-                       __UITextInputActionsErrorInvalidRegion, __UITextInputSourceIsKeyboard, 
-                       __UITextInputSourceToString, __UITextItemHighlightCornerRadius, 
-                       __UITextItemHighlightHorizontalPadding, __UITextLayoutDrawRangeInContext, 
-                       __UITextViewHighlightBackgroundView, __UITextViewportElementDidLayoutNotification, 
-                       __UITextViewportLayoutControllerDidLayoutNotification, __UITextViewportLayoutControllerWillLayoutNotification, 
-                       __UITimeFormatIs24HourMode, __UIToValueForAnimation, __UITouchStandardForceAmount, 
-                       __UITouchStandardForceAmountForTouchType, __UITrackedStateDiffDescription, 
-                       __UITraitCollectionDisplayCornerRadiusUnspecified, __UITraitCollectionUserInterfaceStyleDidChangeTV, 
-                       __UITraitNameAccessibilityContrast, __UITraitNameActiveAppearance, 
-                       __UITraitNameArtworkSubtype, __UITraitNameContrast, __UITraitNameDisplayCornerRadius, 
-                       __UITraitNameDisplayGamut, __UITraitNameDisplayScale, __UITraitNameEnvironmentWrapper, 
+                       __UITextFieldCapsuleCornerRadiusForBounds, __UITextInputActionsErrorGeneratingError, 
+                       __UITextInputActionsErrorInvalidLanguage, __UITextInputActionsErrorInvalidRegion, 
+                       __UITextInputSourceIsKeyboard, __UITextInputSourceToString, 
+                       __UITextItemHighlightCornerRadius, __UITextItemHighlightHorizontalPadding, 
+                       __UITextLayoutDrawRangeInContext, __UITextViewHighlightBackgroundView, 
+                       __UITextViewportElementDidLayoutNotification, __UITextViewportLayoutControllerDidLayoutNotification, 
+                       __UITextViewportLayoutControllerWillLayoutNotification, __UITimeFormatIs24HourMode, 
+                       __UIToValueForAnimation, __UITouchStandardForceAmount, __UITouchStandardForceAmountForTouchType, 
+                       __UITrackedStateDiffDescription, __UITraitCollectionDisplayCornerRadiusUnspecified, 
+                       __UITraitCollectionUserInterfaceStyleDidChangeTV, __UITraitNameAccessibilityContrast, 
+                       __UITraitNameActiveAppearance, __UITraitNameArtworkSubtype, 
+                       __UITraitNameContrast, __UITraitNameDisplayCornerRadius, __UITraitNameDisplayGamut, 
+                       __UITraitNameDisplayScale, __UITraitNameEnvironmentWrapper, 
                        __UITraitNameFocusSystemState, __UITraitNameForceTouchCapability, 
                        __UITraitNameHorizontalSizeClass, __UITraitNameInteractionModel, 
                        __UITraitNameLegibilityWeight, __UITraitNamePreferredContentSizeCategory, 
@@ -13164,17 +13164,18 @@ exports:
                        __UIWindowRoleHintSoftwareDimming, __UIWindowRoleHintSubterraneanTextureHosting, 
                        __UIWindowSceneDidBecomeVisibleNotification, __UIWindowSceneDidBeginLiveResizeNotification, 
                        __UIWindowSceneDidEndLiveResizeNotification, __UIWindowSceneDidUpdateEffectiveGeometryNotification, 
-                       __UIWindowSceneDidUpdateSystemUserInterfaceStyle, __UIWindowScenePreviousEffectiveGeometryKey, 
-                       __UIWindowSceneSessionRoleCarPlay, __UIWindowSceneSessionRoleKeyboard, 
-                       __UIWindowSceneSessionRoleSimplifiedApplication, __UIWindowSceneSessionRoleViewHosting, 
-                       __UIWindowSceneSessionRoleVolumetricApplication, __UIWindowSceneSessionTypeCoverSheet, 
-                       __UIWindowSceneSessionTypePopover, __UIWindowSceneWillUpdateEffectiveGeometryNotification, 
-                       __UIWindowVisible, __UIWindowWillBecomeApplicationKeyNotification, 
-                       __UIWindowWillBecomeKeyNotification, __UIWindowWillMoveToNilSceneNotification, 
-                       __UIWritingToolsCoordinatorStateDebugDescription, ___UIApplicationLinkedOnOrAfter, 
-                       ___UIExternalIvarStorageGetObject, ___UIExternalIvarStorageGetPayload, 
-                       ___UIExternalIvarStorageSetPayload, ___UIExternalIvarStorageSetRetainedObject, 
-                       ___UIFaultDebugAssertLog, ___UIImageCacheKeySentinel, ___UIImageCacheKeyWithSentinel, 
+                       __UIWindowSceneDidUpdateSystemUserInterfaceStyle, __UIWindowSceneNewEffectiveGeometryKey, 
+                       __UIWindowScenePreviousEffectiveGeometryKey, __UIWindowSceneSessionRoleCarPlay, 
+                       __UIWindowSceneSessionRoleKeyboard, __UIWindowSceneSessionRoleSimplifiedApplication, 
+                       __UIWindowSceneSessionRoleViewHosting, __UIWindowSceneSessionRoleVolumetricApplication, 
+                       __UIWindowSceneSessionTypeCoverSheet, __UIWindowSceneSessionTypePopover, 
+                       __UIWindowSceneWillUpdateEffectiveGeometryNotification, __UIWindowVisible, 
+                       __UIWindowWillBecomeApplicationKeyNotification, __UIWindowWillBecomeKeyNotification, 
+                       __UIWindowWillMoveToNilSceneNotification, __UIWritingToolsCoordinatorStateDebugDescription, 
+                       ___UIApplicationLinkedOnOrAfter, ___UIExternalIvarStorageGetObject, 
+                       ___UIExternalIvarStorageGetPayload, ___UIExternalIvarStorageSetPayload, 
+                       ___UIExternalIvarStorageSetRetainedObject, ___UIFaultDebugAssertLog, 
+                       ___UIImageCacheKeySentinel, ___UIImageCacheKeyWithSentinel, 
                        ___UIInlinePointerSetCreateHashTableWithCapacity, ___UIInlinePointerSetReleaseElement, 
                        ___UIInlinePointerSetReleaseHashTable, ___UIInlinePointerSetRetainElement, 
                        ___UILogGetCategoryCachedImpl, ___UILogGetCategoryImpl, ___UILogIdenticalLayouts, 
@@ -14067,9 +14068,10 @@ exports:
                        UIViewAnimationState._layoutSubviews, UIViewAnimationState._nextState, 
                        UIViewAnimationState._propertyAnimator, UIViewAnimationState._repeatCount, 
                        UIViewAnimationState._retainedSelf, UIViewAnimationState._shouldDecomposeGeometricTypes, 
-                       UIViewAnimationState._start, UIViewAnimationState._trackedAnimations, 
-                       UIViewAnimationState._transition, UIViewAnimationState._transitionOptions, 
-                       UIViewAnimationState._transitionView, UIViewAnimationState._useBackingOutermostLayerForTransition, 
+                       UIViewAnimationState._shouldSuppressVelocityForVFD, UIViewAnimationState._start, 
+                       UIViewAnimationState._trackedAnimations, UIViewAnimationState._transition, 
+                       UIViewAnimationState._transitionOptions, UIViewAnimationState._transitionView, 
+                       UIViewAnimationState._useBackingOutermostLayerForTransition, 
                        UIViewAnimationState._useCurrentLayerState, UIViewAnimationState._uuid, 
                        UIViewAnimationState._viewToDeferredAnimationsMap, UIViewAnimationState._viewsPendingConstraintBasedAnimation, 
                        UIViewAnimationState._willStartSelector, UIViewAnimationState._willStartSent, 

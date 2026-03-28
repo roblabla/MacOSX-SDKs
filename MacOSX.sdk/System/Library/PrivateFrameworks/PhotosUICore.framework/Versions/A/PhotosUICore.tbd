@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosUICore.framework/Versions/A/PhotosUICore'
-current-version: 811.0.106
+current-version: 821.0.120
 swift-abi-version: 7
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -2143,10 +2143,6 @@ exports:
                        '_$s12PhotosUICore11AssetEntityV12defaultQueryAA0cdF0VvgZ', 
                        '_$s12PhotosUICore11AssetEntityV12defaultQueryAA0cdF0VvpZMV', 
                        '_$s12PhotosUICore11AssetEntityV12defaultQueryAA0cdF0VvsZ', 
-                       '_$s12PhotosUICore11AssetEntityV13livePhotoType07UniformG11Identifiers6UTTypeVvMZ', 
-                       '_$s12PhotosUICore11AssetEntityV13livePhotoType07UniformG11Identifiers6UTTypeVvgZ', 
-                       '_$s12PhotosUICore11AssetEntityV13livePhotoType07UniformG11Identifiers6UTTypeVvsZ', 
-                       '_$s12PhotosUICore11AssetEntityV16CoreTransferable0F0AAMc', 
                        '_$s12PhotosUICore11AssetEntityV17hasSuggestedEditsSbvg', 
                        '_$s12PhotosUICore11AssetEntityV17hasSuggestedEditsSbvgTu', 
                        '_$s12PhotosUICore11AssetEntityV17hasSuggestedEditsSbvpMV', 
@@ -2157,9 +2153,6 @@ exports:
                        '_$s12PhotosUICore11AssetEntityV21isPortraitModeEnabledSbSgvg', 
                        '_$s12PhotosUICore11AssetEntityV21isPortraitModeEnabledSbSgvgTu', 
                        '_$s12PhotosUICore11AssetEntityV21isPortraitModeEnabledSbSgvpMV', 
-                       '_$s12PhotosUICore11AssetEntityV22transferRepresentationQrvgZ', 
-                       '_$s12PhotosUICore11AssetEntityV22transferRepresentationQrvpZMV', 
-                       '_$s12PhotosUICore11AssetEntityV22transferRepresentationQrvpZQOMQ', 
                        '_$s12PhotosUICore11AssetEntityV2idSSvg', '_$s12PhotosUICore11AssetEntityV2idSSvpMV', 
                        '_$s12PhotosUICore11AssetEntityV5assetSo7PHAssetCvg', '_$s12PhotosUICore11AssetEntityV5assetSo7PHAssetCvpMV', 
                        '_$s12PhotosUICore11AssetEntityV6filterAC12FilterEffectOSgvg', 
@@ -3119,20 +3112,11 @@ exports:
                        '_$s12PhotosUICore17MemoryEntityQueryVMn', '_$s12PhotosUICore17MemoryEntityQueryVN', 
                        '_$s12PhotosUICore17OptionSetIteratorV4nextxSgyF', '_$s12PhotosUICore17OptionSetIteratorV7elementACyxGx_tcfC', 
                        '_$s12PhotosUICore17OptionSetIteratorVMa', '_$s12PhotosUICore17OptionSetIteratorVMn', 
-                       '_$s12PhotosUICore17OptionSetIteratorVyxGStAAMc', '_$s12PhotosUICore17PXAppIntentsErrorO18photosFileProvideryA2CmFWC', 
-                       '_$s12PhotosUICore17PXAppIntentsErrorO19emptyArrayParameteryA2CmFWC', 
-                       '_$s12PhotosUICore17PXAppIntentsErrorO19intentPerformFailedyA2CmFWC', 
-                       '_$s12PhotosUICore17PXAppIntentsErrorO21unsatisfiedDependencyyA2CmFWC', 
-                       '_$s12PhotosUICore17PXAppIntentsErrorO25entityStringQueryDisabledyA2CmFWC', 
-                       '_$s12PhotosUICore17PXAppIntentsErrorO2eeoiySbAC_ACtFZ', '_$s12PhotosUICore17PXAppIntentsErrorO4hash4intoys6HasherVz_tF', 
-                       '_$s12PhotosUICore17PXAppIntentsErrorO9hashValueSivg', '_$s12PhotosUICore17PXAppIntentsErrorO9hashValueSivpMV', 
-                       '_$s12PhotosUICore17PXAppIntentsErrorOMa', '_$s12PhotosUICore17PXAppIntentsErrorOMn', 
-                       '_$s12PhotosUICore17PXAppIntentsErrorON', '_$s12PhotosUICore17PXAppIntentsErrorOSHAAMc', 
-                       '_$s12PhotosUICore17PXAppIntentsErrorOSQAAMc', '_$s12PhotosUICore17PXAppIntentsErrorOs0E0AAMc', 
-                       '_$s12PhotosUICore17PXPhotoKitFetcherCACycfC', '_$s12PhotosUICore17PXPhotoKitFetcherCACycfc', 
-                       '_$s12PhotosUICore17PXPhotoKitFetcherCMa', '_$s12PhotosUICore17PXPhotoKitFetcherCMn', 
-                       '_$s12PhotosUICore17PXPhotoKitFetcherCMo', '_$s12PhotosUICore17PXPhotoKitFetcherCN', 
-                       '_$s12PhotosUICore17PXPhotoKitFetcherCfD', '_$s12PhotosUICore17ParallaxAssetViewV13animateLayersSbvg', 
+                       '_$s12PhotosUICore17OptionSetIteratorVyxGStAAMc', '_$s12PhotosUICore17PXPhotoKitFetcherCACycfC', 
+                       '_$s12PhotosUICore17PXPhotoKitFetcherCACycfc', '_$s12PhotosUICore17PXPhotoKitFetcherCMa', 
+                       '_$s12PhotosUICore17PXPhotoKitFetcherCMn', '_$s12PhotosUICore17PXPhotoKitFetcherCMo', 
+                       '_$s12PhotosUICore17PXPhotoKitFetcherCN', '_$s12PhotosUICore17PXPhotoKitFetcherCfD', 
+                       '_$s12PhotosUICore17ParallaxAssetViewV13animateLayersSbvg', 
                        '_$s12PhotosUICore17ParallaxAssetViewV13animateLayersSbvpMV', 
                        '_$s12PhotosUICore17ParallaxAssetViewV4bodyQrvg', '_$s12PhotosUICore17ParallaxAssetViewV4bodyQrvpMV', 
                        '_$s12PhotosUICore17ParallaxAssetViewV4bodyQrvpQOMQ', '_$s12PhotosUICore17ParallaxAssetViewV9viewModel13animateLayers07overlapE0ACyxGAA0cdeG0C_SbxyctcfC', 
@@ -4822,8 +4806,6 @@ exports:
                        '_$s12PhotosUICore22PXAppDependencyManagerC025addURLNavigationPerformerD0yySo0c7IntentsgH0_pSgFZ', 
                        '_$s12PhotosUICore22PXAppDependencyManagerC032addNavigationDestinationProviderD0yySo0c7IntentsghI0_pSgFZ', 
                        '_$s12PhotosUICore22PXAppDependencyManagerC21navigationDestinationSo024PXProgrammaticNavigationG0CSgyKFZ', 
-                       '_$s12PhotosUICore22PXAppDependencyManagerC24navigateToURLDestinationyy10Foundation3URLVYaKFZ', 
-                       '_$s12PhotosUICore22PXAppDependencyManagerC24navigateToURLDestinationyy10Foundation3URLVYaKFZTu', 
                        '_$s12PhotosUICore22PXAppDependencyManagerC6search3forySS_tYaKFZ', 
                        '_$s12PhotosUICore22PXAppDependencyManagerC6search3forySS_tYaKFZTu', 
                        '_$s12PhotosUICore22PXAppDependencyManagerC6search3forySo18NSAttributedStringC_tYaKFZ', 
@@ -5505,6 +5487,19 @@ exports:
                        '_$s12PhotosUICore24OneUpSharePlayDataSourceCMa', '_$s12PhotosUICore24OneUpSharePlayDataSourceCMn', 
                        '_$s12PhotosUICore24OneUpSharePlayDataSourceCMo', '_$s12PhotosUICore24OneUpSharePlayDataSourceCMu', 
                        '_$s12PhotosUICore24OneUpSharePlayDataSourceCN', '_$s12PhotosUICore24OneUpSharePlayDataSourceCfD', 
+                       '_$s12PhotosUICore24PXAppIntentsGenericErrorO16missingParameteryA2CmFWC', 
+                       '_$s12PhotosUICore24PXAppIntentsGenericErrorO18photosFileProvideryA2CmFWC', 
+                       '_$s12PhotosUICore24PXAppIntentsGenericErrorO19intentPerformFailedyA2CmFWC', 
+                       '_$s12PhotosUICore24PXAppIntentsGenericErrorO20unsupportedParameteryA2CmFWC', 
+                       '_$s12PhotosUICore24PXAppIntentsGenericErrorO21unsatisfiedDependencyyA2CmFWC', 
+                       '_$s12PhotosUICore24PXAppIntentsGenericErrorO25entityStringQueryDisabledyA2CmFWC', 
+                       '_$s12PhotosUICore24PXAppIntentsGenericErrorO2eeoiySbAC_ACtFZ', 
+                       '_$s12PhotosUICore24PXAppIntentsGenericErrorO4hash4intoys6HasherVz_tF', 
+                       '_$s12PhotosUICore24PXAppIntentsGenericErrorO9hashValueSivg', 
+                       '_$s12PhotosUICore24PXAppIntentsGenericErrorO9hashValueSivpMV', 
+                       '_$s12PhotosUICore24PXAppIntentsGenericErrorOMa', '_$s12PhotosUICore24PXAppIntentsGenericErrorOMn', 
+                       '_$s12PhotosUICore24PXAppIntentsGenericErrorON', '_$s12PhotosUICore24PXAppIntentsGenericErrorOSHAAMc', 
+                       '_$s12PhotosUICore24PXAppIntentsGenericErrorOSQAAMc', '_$s12PhotosUICore24PXAppIntentsGenericErrorOs0F0AAMc', 
                        '_$s12PhotosUICore24PXLemonadeShelfUtilitiesCACycfC', '_$s12PhotosUICore24PXLemonadeShelfUtilitiesCACycfc', 
                        '_$s12PhotosUICore24PXLemonadeShelfUtilitiesCMa', '_$s12PhotosUICore24PXLemonadeShelfUtilitiesCMn', 
                        '_$s12PhotosUICore24PXLemonadeShelfUtilitiesCMo', '_$s12PhotosUICore24PXLemonadeShelfUtilitiesCN', 
@@ -6623,6 +6618,7 @@ exports:
                        '_$s12PhotosUICore28PXAppIntentsDebugDescription3forSSSayAA11AssetEntityVG_tF', 
                        '_$s12PhotosUICore28PXAppIntentsDebugDescription3forSSSaySSG_tF', 
                        '_$s12PhotosUICore28PXAppIntentsDebugDescription3forSSSaySo8PHObjectCG_tF', 
+                       '_$s12PhotosUICore28PXAppIntentsDebugDescription3forSSSo8PHObjectCSg_tF', 
                        '_$s12PhotosUICore28PXDisplayRepresentationImage3for9badgeName10AppIntents07DisplayD0V0E0VSgSo7PHAssetC_SSSgtF', 
                        '_$s12PhotosUICore28ParallaxAssetOverlapTestAreaV018maximumOverlappingG8Fraction12CoreGraphics7CGFloatVvg', 
                        '_$s12PhotosUICore28ParallaxAssetOverlapTestAreaV018maximumOverlappingG8Fraction12CoreGraphics7CGFloatVvpMV', 
@@ -6898,6 +6894,8 @@ exports:
                        '_$s12PhotosUICore29LemonadeActiveSearchViewModelC11Observation10ObservableAAMc', 
                        '_$s12PhotosUICore29LemonadeActiveSearchViewModelC13searchResultsAA0aeI0VSgvg', 
                        '_$s12PhotosUICore29LemonadeActiveSearchViewModelC13searchResultsAA0aeI0VSgvpMV', 
+                       '_$s12PhotosUICore29LemonadeActiveSearchViewModelC40PUPickerConfigurationContainerIdentifierSSvgZ', 
+                       '_$s12PhotosUICore29LemonadeActiveSearchViewModelC40PUPickerConfigurationContainerIdentifierSSvpZMV', 
                        '_$s12PhotosUICore29LemonadeActiveSearchViewModelC7manager24initialSuggestionFetcher0I9Container0iE4Text028includesInitialSuggestionsIneP009activatesE9WhenEmpty23allowsCollectionResultsACSo20PHSearchQueryManagerC_AA0c9SuggestedeyK0CSgAA0c10SearchableL0_pSgSSSgS3btcfC', 
                        '_$s12PhotosUICore29LemonadeActiveSearchViewModelC7manager24initialSuggestionFetcher0I9Container0iE4Text028includesInitialSuggestionsIneP009activatesE9WhenEmpty23allowsCollectionResultsACSo20PHSearchQueryManagerC_AA0c9SuggestedeyK0CSgAA0c10SearchableL0_pSgSSSgS3btcfCTj', 
                        '_$s12PhotosUICore29LemonadeActiveSearchViewModelC7manager24initialSuggestionFetcher0I9Container0iE4Text028includesInitialSuggestionsIneP009activatesE9WhenEmpty23allowsCollectionResultsACSo20PHSearchQueryManagerC_AA0c9SuggestedeyK0CSgAA0c10SearchableL0_pSgSSSgS3btcfCTq', 
@@ -7429,7 +7427,10 @@ exports:
                        '_$s12PhotosUICore32OneUpSharePlaySessionHostJournalCfD', 
                        '_$s12PhotosUICore32OneUpSharePlaySessionHostJournalCfd', 
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO011unableToAddI5AlbumyA2CmFWC', 
+                       '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO10Foundation13CustomNSErrorAAMc', 
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO10Foundation40CustomLocalizedStringResourceConvertibleAAMc', 
+                       '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO11errorDomainSSvgZ', 
+                       '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO11errorDomainSSvpZMV', 
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO16missingDepthDatayACSo16PHAssetMediaTypeV_SitcACmFWC', 
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO23assetUnsupportedForEdityACSo16PHAssetMediaTypeV_SitcACmFWC', 
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO23cannotFilterStyledAssetyACSo16PHAssetMediaTypeV_SitcACmFWC', 
@@ -7438,6 +7439,8 @@ exports:
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO23unableToRemoveFromAlbumyA2CmFWC', 
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO24noSharedLibraryForMovingyA2CmFWC', 
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO27noSharedLibraryForFilteringyA2CmFWC', 
+                       '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO9errorCodeSivg', 
+                       '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorO9errorCodeSivpMV', 
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorOMa', 
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorOMn', 
                        '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorON', '_$s12PhotosUICore32PXAppIntentsUserPresentableErrorOs0G0AAMc', 
@@ -7951,6 +7954,8 @@ exports:
                        '_$s12PhotosUICore36ConcatenatingAssetsDataSourceManagerC04dataF8ManagersSaySo08PXAssetsefG0CGvpMV', 
                        '_$s12PhotosUICore36ConcatenatingAssetsDataSourceManagerC10observable_9didChange7contextySo12PXObservableC_s6UInt64VSvSgtFTj', 
                        '_$s12PhotosUICore36ConcatenatingAssetsDataSourceManagerC10observable_9didChange7contextySo12PXObservableC_s6UInt64VSvSgtFTq', 
+                       '_$s12PhotosUICore36ConcatenatingAssetsDataSourceManagerC4modeAA0cdeF0C4ModeOvg', 
+                       '_$s12PhotosUICore36ConcatenatingAssetsDataSourceManagerC4modeAA0cdeF0C4ModeOvpMV', 
                        '_$s12PhotosUICore36ConcatenatingAssetsDataSourceManagerCACycfC', 
                        '_$s12PhotosUICore36ConcatenatingAssetsDataSourceManagerCACycfc', 
                        '_$s12PhotosUICore36ConcatenatingAssetsDataSourceManagerCMa', 
@@ -9200,6 +9205,8 @@ exports:
                        '_$s12PhotosUICore42LemonadeMemoriesEntryCardTimeSlotProvidingP04timeH0SnySiGvgTj', 
                        '_$s12PhotosUICore42LemonadeMemoriesEntryCardTimeSlotProvidingP04timeH0SnySiGvgTq', 
                        '_$s12PhotosUICore42LemonadeMemoriesEntryCardTimeSlotProvidingTL', 
+                       '_$s12PhotosUICore42PXAppIntentsPerformNavigationToDestination4withy10Foundation3URLV_tYaKF', 
+                       '_$s12PhotosUICore42PXAppIntentsPerformNavigationToDestination4withy10Foundation3URLV_tYaKFTu', 
                        '_$s12PhotosUICore42PhotoKitClearRecentlySharedActionPerformerC05clearH14LocalizedTitle12hasSelectionSSSb_tFZTj', 
                        '_$s12PhotosUICore42PhotoKitClearRecentlySharedActionPerformerC05clearH14LocalizedTitle12hasSelectionSSSb_tFZTq', 
                        '_$s12PhotosUICore42PhotoKitClearRecentlySharedActionPerformerC10actionTypeACSS_tcfC', 
@@ -10568,7 +10575,9 @@ exports:
                        '_$sSo36PXSensitiveAssetMoreHelpAlertManagerC12PhotosUICoreEABycfc', 
                        '_$sSo36PXSensitiveAssetMoreHelpAlertManagerCMa', '_$sSo37PXLemonadeSearchViewControllerFactoryC12PhotosUICoreEABycfC', 
                        '_$sSo37PXLemonadeSearchViewControllerFactoryC12PhotosUICoreEABycfc', 
-                       '_$sSo37PXLemonadeSearchViewControllerFactoryCMa', '_$sSo38PXDisplayAssetCollectionCurationLengthV12PhotosUICoreE08lemonadeD4KindAC08LemonadedI0OSgvg', 
+                       '_$sSo37PXLemonadeSearchViewControllerFactoryCMa', '_$sSo37PXSearchNavigationAttributesUtilitiesC12PhotosUICoreEABycfC', 
+                       '_$sSo37PXSearchNavigationAttributesUtilitiesC12PhotosUICoreEABycfc', 
+                       '_$sSo37PXSearchNavigationAttributesUtilitiesCMa', '_$sSo38PXDisplayAssetCollectionCurationLengthV12PhotosUICoreE08lemonadeD4KindAC08LemonadedI0OSgvg', 
                        '_$sSo38PXDisplayAssetCollectionCurationLengthV12PhotosUICoreE08lemonadeD4KindAC08LemonadedI0OSgvpMV', 
                        '_$sSo38PXStoryMemoryChapterCollectionProducerC12PhotosUICoreE07chapterD0013forGenerativeB06assets8keyAsset5errorSo0acD0_pSgSo8PHMemoryC_So09PXDisplayM11FetchResult_pSo0pM0_pSAySo7NSErrorCSgGSgtFZ', 
                        '_$sSo40PXRearrangeTransientCollectionListActionC12PhotosUICoreE010collectionD012movedObjects12targetObjectABSo012PHCollectionD0C_So17PXFastEnumeration_pSo8PHObjectCSgtcfC', 
@@ -12251,16 +12260,16 @@ exports:
                        PXSStaticRow, PXSSwitchRow, PXSTableCellView, PXSTextField, 
                        PXSaveVideoFrameAction, PXScrubberSeekRequest, PXSearchActiveSearch, 
                        PXSearchCPAnalyticsSession, PXSearchDisplayUtility, PXSearchNavigationAttributes, 
-                       PXSearchQueryMatchInfo, PXSearchResultsDataUtility, PXSearchResultsViewModel, 
-                       PXSearchSectionHeaderLayoutMac, PXSearchSettings, PXSearchTitlesSpec, 
-                       PXSearchToken, PXSearchTokenRepresentedObject, PXSectionedTileIdentifierConverter, 
-                       PXSectionsBlurController, PXSelectedItemsStack, PXSelectionBadgeTileUserData, 
-                       PXSelectionContainer, PXSelectionView, PXSensitiveAssetMoreHelpAlertManager, 
-                       PXSensitivityContentManager, PXSensitivityInterventionManager, 
-                       PXSensitivityUIOverlayView, PXSettings, PXSettingsConfiguration, 
-                       PXSettingsConfigurationsSource, PXSettingsMeaningMomentDataContainer, 
-                       PXSharedAlbumNavigationAttributes, PXSharedAlbumParticipant, 
-                       PXSharedAlbumSubscriberInfo, PXSharedAlbumsActivityEntry, 
+                       PXSearchNavigationAttributesUtilities, PXSearchQueryMatchInfo, 
+                       PXSearchResultsDataUtility, PXSearchResultsViewModel, PXSearchSectionHeaderLayoutMac, 
+                       PXSearchSettings, PXSearchTitlesSpec, PXSearchToken, PXSearchTokenRepresentedObject, 
+                       PXSectionedTileIdentifierConverter, PXSectionsBlurController, 
+                       PXSelectedItemsStack, PXSelectionBadgeTileUserData, PXSelectionContainer, 
+                       PXSelectionView, PXSensitiveAssetMoreHelpAlertManager, PXSensitivityContentManager, 
+                       PXSensitivityInterventionManager, PXSensitivityUIOverlayView, 
+                       PXSettings, PXSettingsConfiguration, PXSettingsConfigurationsSource, 
+                       PXSettingsMeaningMomentDataContainer, PXSharedAlbumNavigationAttributes, 
+                       PXSharedAlbumParticipant, PXSharedAlbumSubscriberInfo, PXSharedAlbumsActivityEntry, 
                        PXSharedAlbumsActivityEntryAlbumInformation, PXSharedAlbumsActivityEntryAvatarConfiguration, 
                        PXSharedAlbumsActivityEntryContributor, PXSharedAlbumsActivityEntryLayout, 
                        PXSharedAlbumsActivityEntryRepository, PXSharedAlbumsActivityEntryViewController, 
@@ -12383,13 +12392,13 @@ exports:
                        PXStoryDummyTriggeredTimelineProducer, PXStoryDuplicateDisplayAsset, 
                        PXStoryDurationFormatter, PXStoryErrorRecoveryAttempter, PXStoryErrorRepository, 
                        PXStoryExplicitChapterCollection, PXStoryExportAspectRatio, 
-                       PXStoryExportAudioCompositionBuilder, PXStoryExportConfiguration, 
-                       PXStoryExportExtendedTraitCollection, PXStoryExportFullSizePlayerAspectRatio, 
-                       PXStoryExportManager, PXStoryExportOrientation, PXStoryExportVideoOptions, 
-                       PXStoryExtendedTraitCollection, PXStoryFadeOverlayLayout, 
-                       PXStoryFallbackMovieHighlightCuration, PXStoryFullsizeLayout, 
-                       PXStoryGridTimeline, PXStoryHUDView, PXStoryHUDViewConfiguration, 
-                       PXStoryHitTestResult, PXStoryImageAssetResourcePreloadingOperation, 
+                       PXStoryExportAudioCompositionBuilder, PXStoryExportAudioOptions, 
+                       PXStoryExportConfiguration, PXStoryExportExtendedTraitCollection, 
+                       PXStoryExportFullSizePlayerAspectRatio, PXStoryExportManager, 
+                       PXStoryExportOrientation, PXStoryExportVideoOptions, PXStoryExtendedTraitCollection, 
+                       PXStoryFadeOverlayLayout, PXStoryFallbackMovieHighlightCuration, 
+                       PXStoryFullsizeLayout, PXStoryGridTimeline, PXStoryHUDView, 
+                       PXStoryHUDViewConfiguration, PXStoryHitTestResult, PXStoryImageAssetResourcePreloadingOperation, 
                        PXStoryInactiveImageAdjustment, PXStoryKeyAssetVisualDiagnosticsProvider, 
                        PXStoryLayout, PXStoryLayoutSpecManager, PXStoryLoadingStatusReporter, 
                        PXStoryMediaAnalysisMovieHighlight, PXStoryMediaAnalysisMovieHighlightCuration, 
@@ -12624,7 +12633,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GridZero.framework/Versions/A/GridZero'
-current-version: 811.0.106
+current-version: 821.0.120
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -12960,7 +12969,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosUIFoundation.framework/Versions/A/PhotosUIFoundation'
-current-version: 811.0.106
+current-version: 821.0.120
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -15122,7 +15131,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Tungsten.framework/Versions/A/Tungsten'
-current-version: 811.0.106
+current-version: 821.0.120
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

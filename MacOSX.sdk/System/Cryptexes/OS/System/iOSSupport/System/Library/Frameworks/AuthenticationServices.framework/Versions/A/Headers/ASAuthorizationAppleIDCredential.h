@@ -9,6 +9,8 @@
 #import <AuthenticationServices/ASAuthorizationCredential.h>
 #import <Foundation/Foundation.h>
 
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+
 /*! @enum ASUserDetectionStatus
  @constant ASUserDetectionStatusUnsupported Not supported on current platform, ignore the value
  @constant ASUserDetectionStatusUnknown We could not determine the value.  New users in the ecosystem will get this value as well, so you should not block these users, but instead treat them as any new user through standard email sign up flows
@@ -30,8 +32,6 @@ typedef NS_ENUM(NSInteger, ASUserAgeRange) {
     ASUserAgeRangeChild,
     ASUserAgeRangeNotChild,
 } API_AVAILABLE(ios(17.0), macos(14.0), tvos(17.0), watchos(10.0));
-
-NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), watchos(6.0))
 @interface ASAuthorizationAppleIDCredential : NSObject <ASAuthorizationCredential>

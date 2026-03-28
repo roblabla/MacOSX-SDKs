@@ -10,10 +10,10 @@ exports:
                        _TYLogl, _TYMakeArabicCharacter, _TypistFrameworkVersionNumber, 
                        _TypistFrameworkVersionString, __TYLogl ]
     objc-classes:    [ TYCharacterCluster, TYHandwritingDimensions, TYLogger, TYPathData, 
-                       TYRecapCommand, TYTextDirectionAnnotation, TYUsagePairs, TypistArabicSyllable, 
-                       TypistHWKeyboard, TypistHWKeyboard_Deprecated, TypistKeyboard, 
-                       TypistKeyboardData, TypistKeyboardDataInProcess, TypistKeyboardDataInputUIClient, 
-                       TypistKeyboardUtilities, TypistKeyplane, TypistKoreanHangulJamo, 
-                       TypistKoreanHangulSyllable, TypistLatexSymbolTranslation, 
-                       TypistMathSupport, TypistThaiSyllable ]
+                       TYRecapCommand, TYTextDirectionAnnotation, TYUsagePair, TYUsagePairs, 
+                       TypistArabicSyllable, TypistHWKeyboard, TypistHWKeyboard_Deprecated, 
+                       TypistKeyboard, TypistKeyboardData, TypistKeyboardDataInProcess, 
+                       TypistKeyboardDataInputUIClient, TypistKeyboardUtilities, 
+                       TypistKeyplane, TypistKoreanHangulJamo, TypistKoreanHangulSyllable, 
+                       TypistLatexSymbolTranslation, TypistMathSupport, TypistThaiSyllable ]
 ...

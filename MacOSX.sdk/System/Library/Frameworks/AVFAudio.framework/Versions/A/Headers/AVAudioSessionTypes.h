@@ -197,6 +197,20 @@ OS_EXPORT AVAudioSessionMode const AVAudioSessionModeVoicePrompt API_AVAILABLE(i
 /// - if the session is output muted, system may prevent interrupting other active audio apps.
 OS_EXPORT AVAudioSessionMode const AVAudioSessionModeShortFormVideo API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos, macos);
 
+/// Appropriate for applications that require simultaneous use of built-in microphone/speaker
+/// with a secondary audio device that supports both input and output capabilities.
+///
+/// Only valid with ``AVAudioSessionCategoryMultiRoute``.
+///
+/// This mode requires ``AVAudioSessionCategoryOptionAllowBluetoothHFP`` to be set
+///
+/// When this mode is set:
+/// - The audio route will always include built-in mic/speaker as the primary route
+/// - Supported secondary route types: ``AVAudioSessionPortHeadsetMic``, ``AVAudioSessionPortHeadphones``, ``AVAudioSessionPortBluetoothLE``, ``AVAudioSessionPortBluetoothHFP``
+/// - Only routes with both input/output capabilities will be supported
+/// - Hardware volume controls will adjust volume for both primary and secondary routes
+///   - System may engage appropriate signal processing for output routes
+OS_EXPORT AVAudioSessionMode const AVAudioSessionModeDualRoute API_AVAILABLE(ios(26.2)) API_UNAVAILABLE(watchos, tvos, visionos, macos);
 
 #pragma mark-- Names for NSNotifications --
 
@@ -416,7 +430,8 @@ typedef NS_OPTIONS(NSUInteger, AVAudioSessionCategoryOptions) {
 	///		Controls whether other active audio apps will be interrupted or mixed with when your app's
 	///		audio session goes active. Details depend on the category.
 	///
-	///		- ``AVAudioSessionCategoryPlayAndRecord`` or ``AVAudioSessionCategoryMultiRoute``:
+	///		- ``AVAudioSessionCategoryPlayAndRecord`` or
+	///			``AVAudioSessionCategoryMultiRoute`` with ``AVAudioSessionModeDefault``:
 	///			MixWithOthers defaults to false, but can be set to true, allowing other applications to
 	///			play in the background while your app has both audio input and output enabled.
 	///
@@ -429,7 +444,8 @@ typedef NS_OPTIONS(NSUInteger, AVAudioSessionCategoryOptions) {
 	///			MixWithOthers defaults to false and cannot be changed.
 	///
 	///		MixWithOthers is only valid with ``AVAudioSessionCategoryPlayAndRecord``,
-	///		``AVAudioSessionCategoryPlayback``, and ``AVAudioSessionCategoryMultiRoute``.
+	///		``AVAudioSessionCategoryPlayback``, and
+	///		``AVAudioSessionCategoryMultiRoute`` with ``AVAudioSessionModeDefault``.
     AVAudioSessionCategoryOptionMixWithOthers            = 0x1,
 
 	///		Controls whether or not other active audio apps will be ducked when when your app's audio
@@ -446,7 +462,7 @@ typedef NS_OPTIONS(NSUInteger, AVAudioSessionCategoryOptions) {
 	///
 	///		DuckOthers is only valid with ``AVAudioSessionCategoryAmbient``,
 	///		``AVAudioSessionCategoryPlayAndRecord``, ``AVAudioSessionCategoryPlayback``, and
-	///		``AVAudioSessionCategoryMultiRoute``.
+	///		``AVAudioSessionCategoryMultiRoute`` with ``AVAudioSessionModeDefault``.
     AVAudioSessionCategoryOptionDuckOthers               = 0x2,
 
 	/// Deprecated - please see ``AVAudioSessionCategoryOptionAllowBluetoothHFP``
@@ -495,7 +511,8 @@ typedef NS_OPTIONS(NSUInteger, AVAudioSessionCategoryOptions) {
 	///		goes active, also set ``AVAudioSessionCategoryOptionDuckOthers``.
 	///
 	///		Only valid with ``AVAudioSessionCategoryPlayAndRecord``,
-	///		``AVAudioSessionCategoryPlayback``, and ``AVAudioSessionCategoryMultiRoute``.
+	///		``AVAudioSessionCategoryPlayback``, and
+	///		``AVAudioSessionCategoryMultiRoute`` with ``AVAudioSessionModeDefault``.
 	AVAudioSessionCategoryOptionInterruptSpokenAudioAndMixWithOthers API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) = 0x11,
 
 	///		Allows an application to change the default behavior of some audio session categories with
@@ -546,6 +563,20 @@ typedef NS_OPTIONS(NSUInteger, AVAudioSessionCategoryOptions) {
 	///		- Note This option has no relation to the recordPermission property, which indicates whether or
 	///		not the user has granted permission to use microphone input.
 	AVAudioSessionCategoryOptionOverrideMutedMicrophoneInterruption API_AVAILABLE(ios(14.5), watchos(7.3)) API_UNAVAILABLE(tvos, macos) = 0x80,
+
+	/// 	This option should be used if a session prefers to use FarFieldInput when available.
+	/// 	This option is only valid with categories that support input -
+	/// 	``AVAudioSessionCategoryPlayAndRecord`` and ``AVAudioSessionCategoryRecord``.
+	///
+	/// 	- This option requires ``AVAudioSessionCategoryOptionAllowBluetoothHFP`` to be set.
+	/// 	Otherwise error will be returned.
+	///
+	///		- Support for this can be queried on input ports via the BluetoothMicrophone interface on a port,
+	///		via its member `farFieldCapture.isSupported`.
+	///
+	///		- Active sessions can see if far-field input is enabled on a bluetooth audio device by querying
+	///		the BluetoothMicrophone interface of the input port of the current route for: `farFieldCapture.isEnabled`.
+	AVAudioSessionCategoryOptionFarFieldInput API_AVAILABLE(ios(26.2)) API_UNAVAILABLE(watchos, tvos, macos, visionos) = 1 << 18,
 
 	///		When this option is specified with a category that supports both input and output, the session
 	///		will enable full-bandwidth audio in both input & output directions, if the Bluetooth route supports

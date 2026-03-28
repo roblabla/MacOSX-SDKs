@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Base class used to fetch data from the store.  Should not be used directly.
 SK_EXTERN_CLASS
-API_DEPRECATED("No longer supported", ios(3.0, 18.0), macos(10.7, 15.0), watchos(6.2, 11.0), visionos(1.0, 2.0))
+API_DEPRECATED("No longer supported.", ios(3.0, 18.0), macos(10.7, 15.0), watchos(6.2, 11.0), visionos(1.0, 2.0))
 NS_SWIFT_NONSENDABLE
 @interface SKRequest : NSObject {
 @private
@@ -32,7 +32,7 @@ NS_SWIFT_NONSENDABLE
 @end
 
 
-API_DEPRECATED("No longer supported", ios(3.0, 18.0), macos(10.7, 15.0), watchos(6.2, 11.0), visionos(1.0, 2.0))
+API_DEPRECATED("No longer supported.", ios(3.0, 18.0), macos(10.7, 15.0), watchos(6.2, 11.0), visionos(1.0, 2.0))
 @protocol SKRequestDelegate <NSObject>
 
 @optional

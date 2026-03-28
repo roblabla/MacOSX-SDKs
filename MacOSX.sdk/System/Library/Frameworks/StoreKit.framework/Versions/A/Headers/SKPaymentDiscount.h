@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 SK_EXTERN_CLASS
-API_DEPRECATED("Create a Product.PurchaseOption.promotionalOffer to use in Product.purchase(confirmIn:options:)", ios(12.2, 18.0), tvos(12.2, 18.0), macos(10.14.4, 15.0), watchos(6.2, 11.0), visionos(1.0, 2.0))
+API_DEPRECATED("Create a Product.PurchaseOption.promotionalOffer to use in Product.purchase(confirmIn:options:).", ios(12.2, 18.0), tvos(12.2, 18.0), macos(10.14.4, 15.0), watchos(6.2, 11.0), visionos(1.0, 2.0))
 NS_SWIFT_SENDABLE
 @interface SKPaymentDiscount : NSObject {
 @private

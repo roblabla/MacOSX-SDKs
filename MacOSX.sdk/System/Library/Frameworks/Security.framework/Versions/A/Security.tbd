@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Security.framework/Versions/A/Security'
-current-version: 61901.40.77
+current-version: 61901.60.40
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1298,8 +1298,9 @@ exports:
                        _sec_protocol_options_get_default_min_dtls_protocol_version, 
                        _sec_protocol_options_get_default_min_tls_protocol_version, 
                        _sec_protocol_options_get_eap_method, _sec_protocol_options_get_enable_encrypted_client_hello, 
-                       _sec_protocol_options_get_pqtls_mode, _sec_protocol_options_get_quic_use_legacy_codepoint, 
-                       _sec_protocol_options_get_raw_external_pre_shared_keys_enabled, 
+                       _sec_protocol_options_get_external_pre_shared_keys_enabled, 
+                       _sec_protocol_options_get_pake_configured, _sec_protocol_options_get_pqtls_mode, 
+                       _sec_protocol_options_get_quic_use_legacy_codepoint, _sec_protocol_options_get_raw_external_pre_shared_keys_enabled, 
                        _sec_protocol_options_get_sec_session_ticket_info, _sec_protocol_options_get_session_update_block, 
                        _sec_protocol_options_get_session_update_queue, _sec_protocol_options_get_tls_ciphersuites, 
                        _sec_protocol_options_matches_config, _sec_protocol_options_set_allow_unknown_alpn_protos, 

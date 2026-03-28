@@ -7,9 +7,9 @@
 #import <AuthenticationServices/ASFoundation.h>
 #import <Foundation/Foundation.h>
 
-@class ASAuthorizationPublicKeyCredentialPRFRegistrationOutput;
-
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+
+@class ASAuthorizationPublicKeyCredentialPRFRegistrationOutput;
 
 API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0)) API_UNAVAILABLE(watchos)
 @interface ASAuthorizationPlatformPublicKeyCredentialRegistration : NSObject <ASAuthorizationPublicKeyCredentialRegistration>

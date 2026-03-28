@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DocumentUnderstanding.framework/Versions/A/DocumentUnderstanding'
-current-version: 116.7.5
+current-version: 116.7.8
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
@@ -643,7 +643,6 @@ exports:
                        '_$s21DocumentUnderstanding14SQLiteDatabaseCMa', '_$s21DocumentUnderstanding14SQLiteDatabaseCMn', 
                        '_$s21DocumentUnderstanding14SQLiteDatabaseCMo', '_$s21DocumentUnderstanding14SQLiteDatabaseCMu', 
                        '_$s21DocumentUnderstanding14SQLiteDatabaseCN', '_$s21DocumentUnderstanding14SQLiteDatabaseCfD', 
-                       '_$s21DocumentUnderstanding14requestNLAsset3forySo10NLLanguagea_tF', 
                        '_$s21DocumentUnderstanding15DUCalendarEventC0aB6Client27DUProtobufEncodableProtocolAAMc', 
                        '_$s21DocumentUnderstanding15DUCalendarEventC11endTimezone10Foundation8TimeZoneVSgvMTj', 
                        '_$s21DocumentUnderstanding15DUCalendarEventC11endTimezone10Foundation8TimeZoneVSgvMTq', 

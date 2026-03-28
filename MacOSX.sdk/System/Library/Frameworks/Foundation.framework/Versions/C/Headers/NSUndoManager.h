@@ -198,8 +198,8 @@ FOUNDATION_EXPORT NSString * const NSUndoManagerGroupIsDiscardableKey API_AVAILA
 
 /// Sets the name of the action associated with the Undo or Redo command.
 ///
-/// If actionName is an empty string, the action name currently associated with the menu command is removed. There is no effect if actionName is nil.
-/// 
+/// If `actionName` is an empty string, the undo manager removes the action name currently associated with the menu command.
+///
 /// - Parameter actionName: The name of the action.
 - (void)setActionName:(NSString *)actionName  __attribute__((swift_attr("@_disfavoredOverload")));
 

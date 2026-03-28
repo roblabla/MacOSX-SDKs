@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsFoundationOS.framework/Versions/A/PreviewsFoundationOS'
-current-version: 23.10.5
+current-version: 23.20.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1209,7 +1209,16 @@ exports:
                        '_$s20PreviewsFoundationOS16AnyInvalidatableMp', '_$s20PreviewsFoundationOS16AnyInvalidatableP10invalidate8callsite5traceyAA8CallsiteV_AA17InvalidationTraceVtFTj', 
                        '_$s20PreviewsFoundationOS16AnyInvalidatableP10invalidate8callsite5traceyAA8CallsiteV_AA17InvalidationTraceVtFTq', 
                        '_$s20PreviewsFoundationOS16AnyInvalidatablePAAE10invalidate4file4line6column8function5traceys12StaticStringV_S2uAkA17InvalidationTraceVtF', 
-                       '_$s20PreviewsFoundationOS16AnyInvalidatableTL', '_$s20PreviewsFoundationOS16CancelationTokenV6cancel8callsiteyAA8CallsiteV_tF', 
+                       '_$s20PreviewsFoundationOS16AnyInvalidatableTL', '_$s20PreviewsFoundationOS16AsyncSerialQueueC7enqueueyScTyxs5Error_pGxyYaYbKcs8SendableRzlF', 
+                       '_$s20PreviewsFoundationOS16AsyncSerialQueueC7performyxxyYaYbKXEYaKlF', 
+                       '_$s20PreviewsFoundationOS16AsyncSerialQueueC7performyxxyYaYbKXEYaKlFTu', 
+                       '_$s20PreviewsFoundationOS16AsyncSerialQueueCACycfC', '_$s20PreviewsFoundationOS16AsyncSerialQueueCACycfCTj', 
+                       '_$s20PreviewsFoundationOS16AsyncSerialQueueCACycfCTq', '_$s20PreviewsFoundationOS16AsyncSerialQueueCACycfc', 
+                       '_$s20PreviewsFoundationOS16AsyncSerialQueueCMa', '_$s20PreviewsFoundationOS16AsyncSerialQueueCMm', 
+                       '_$s20PreviewsFoundationOS16AsyncSerialQueueCMn', '_$s20PreviewsFoundationOS16AsyncSerialQueueCMo', 
+                       '_$s20PreviewsFoundationOS16AsyncSerialQueueCMu', '_$s20PreviewsFoundationOS16AsyncSerialQueueCN', 
+                       '_$s20PreviewsFoundationOS16AsyncSerialQueueCfD', '_$s20PreviewsFoundationOS16AsyncSerialQueueCfd', 
+                       '_$s20PreviewsFoundationOS16CancelationTokenV6cancel8callsiteyAA8CallsiteV_tF', 
                        '_$s20PreviewsFoundationOS16CancelationTokenV6cancel9dsoHandle4file4line6column8functionySV_s12StaticStringVS2uAKtF', 
                        '_$s20PreviewsFoundationOS16CancelationTokenVA2A010ConcurrentE8CallbackVRszrlE6cancel16onInvalidationOfyqd___tAA0F13InvalidatableRd__lF', 
                        '_$s20PreviewsFoundationOS16CancelationTokenVA2A010ConcurrentE8CallbackVRszrlE9dsoHandle4file4line6column8function_ACyAEGSV_s12StaticStringVS2uAMyyYbctcfC', 
@@ -3272,8 +3281,8 @@ exports:
                        '_$s2os6LoggerV20PreviewsFoundationOSE17registryDetectionACvgZ', 
                        '_$s2os6LoggerV20PreviewsFoundationOSE18documentManagementACvgZ', 
                        '_$s2os6LoggerV20PreviewsFoundationOSE2uvACvgZ', '_$s2os6LoggerV20PreviewsFoundationOSE3ipcACvgZ', 
-                       '_$s2os6LoggerV20PreviewsFoundationOSE3jitACvgZ', '_$s2os6LoggerV20PreviewsFoundationOSE3llmACvgZ', 
-                       '_$s2os6LoggerV20PreviewsFoundationOSE5testsACvgZ', '_$s2os6LoggerV20PreviewsFoundationOSE6canvasACvgZ', 
+                       '_$s2os6LoggerV20PreviewsFoundationOSE3jitACvgZ', '_$s2os6LoggerV20PreviewsFoundationOSE5testsACvgZ', 
+                       '_$s2os6LoggerV20PreviewsFoundationOSE6canvasACvgZ', '_$s2os6LoggerV20PreviewsFoundationOSE7agenticACvgZ', 
                        '_$s2os6LoggerV20PreviewsFoundationOSE7devicesACvgZ', '_$s2os6LoggerV20PreviewsFoundationOSE7editorsACvgZ', 
                        '_$s2os6LoggerV20PreviewsFoundationOSE7parsingACvgZ', '_$s2os6LoggerV20PreviewsFoundationOSE8metadataACvgZ', 
                        '_$s2os6LoggerV20PreviewsFoundationOSE8pipelineACvgZ', '_$s2os6LoggerV20PreviewsFoundationOSE8previewsACvgZ', 
@@ -3593,12 +3602,12 @@ exports:
                        '_$sSo9OS_os_logC018PreviewsFoundationA0E9ConstantsV10CategoriesV3ipcSSvpZMV', 
                        '_$sSo9OS_os_logC018PreviewsFoundationA0E9ConstantsV10CategoriesV3jitSSvgZ', 
                        '_$sSo9OS_os_logC018PreviewsFoundationA0E9ConstantsV10CategoriesV3jitSSvpZMV', 
-                       '_$sSo9OS_os_logC018PreviewsFoundationA0E9ConstantsV10CategoriesV3llmSSvgZ', 
-                       '_$sSo9OS_os_logC018PreviewsFoundationA0E9ConstantsV10CategoriesV3llmSSvpZMV', 
                        '_$sSo9OS_os_logC018PreviewsFoundationA0E9ConstantsV10CategoriesV5testsSSvgZ', 
                        '_$sSo9OS_os_logC018PreviewsFoundationA0E9ConstantsV10CategoriesV5testsSSvpZMV', 
                        '_$sSo9OS_os_logC018PreviewsFoundationA0E9ConstantsV10CategoriesV6canvasSSvgZ', 
                        '_$sSo9OS_os_logC018PreviewsFoundationA0E9ConstantsV10CategoriesV6canvasSSvpZMV', 
+                       '_$sSo9OS_os_logC018PreviewsFoundationA0E9ConstantsV10CategoriesV7agenticSSvgZ', 
+                       '_$sSo9OS_os_logC018PreviewsFoundationA0E9ConstantsV10CategoriesV7agenticSSvpZMV', 
                        '_$sSo9OS_os_logC018PreviewsFoundationA0E9ConstantsV10CategoriesV7devicesSSvgZ', 
                        '_$sSo9OS_os_logC018PreviewsFoundationA0E9ConstantsV10CategoriesV7devicesSSvpZMV', 
                        '_$sSo9OS_os_logC018PreviewsFoundationA0E9ConstantsV10CategoriesV7editorsSSvgZ', 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Email.framework/Versions/A/Email'
-current-version: 3864.200.81
+current-version: 3864.255.41
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -187,7 +187,7 @@ exports:
                        _EMHeaderTagHMESenderAddress, _EMHeaderTagIsHMEReply, _EMHideMyEmailErrorDomain, 
                        _EMHideMyEmailTwoFactorSystemPreferenceURL, _EMHideMyEmailmacOSSystemPreferencesURL, 
                        _EMInstantAnswersDefaultLimit, _EMInvalidCount, _EMIsGreymatterAvailable, 
-                       _EMIsGreymatterSupported, _EMLogBIMI, _EMLogCategoryMessageLoading, 
+                       _EMIsGreymatterSupported, _EMLogAttachments, _EMLogBIMI, _EMLogCategoryMessageLoading, 
                        _EMLogCompose, _EMLogMailDrop, _EMLogSearch, _EMLogSearchableIndexStatus, 
                        _EMLogUtilities, _EMMailAppBundleIdentifier, _EMMailCleanupIsFeatureEnabled, 
                        _EMMailDropAttachmentMarkupFormat, _EMMailDropBannerClass, 
@@ -333,10 +333,11 @@ exports:
                        _EMUserDefaultShouldIgnoreBlackPearlRestrictions, _EMUserDefaultShouldIgnoreLocaleRestrictions, 
                        _EMUserDefaultShowCategorizationState, _EMUserDefaultShowCategoryAsTimeSensitiveImage, 
                        _EMUserDefaultShowDebugInfo, _EMUserDefaultShowFCSFeedbackOptions, 
-                       _EMUserDefaultShowHelpMailLearnDate, _EMUserDefaultShowSearchRelevanceInfo, 
-                       _EMUserDefaultShownSendLaterDisclaimer, _EMUserDefaultShownSendLaterOnboarding, 
-                       _EMUserDefaultSignUsingPKCS7MIME, _EMUserDefaultSimulateDelayedFreeSpaceStatus, 
-                       _EMUserDefaultSimulateDelayedFreeSpaceStatusTime, _EMUserDefaultSimulateSensitiveContentSummarizationError, 
+                       _EMUserDefaultShowHelpMailLearnDate, _EMUserDefaultShowSearchFeedbackPrompt, 
+                       _EMUserDefaultShowSearchRelevanceInfo, _EMUserDefaultShownSendLaterDisclaimer, 
+                       _EMUserDefaultShownSendLaterOnboarding, _EMUserDefaultSignUsingPKCS7MIME, 
+                       _EMUserDefaultSimulateDelayedFreeSpaceStatus, _EMUserDefaultSimulateDelayedFreeSpaceStatusTime, 
+                       _EMUserDefaultSimulateSensitiveContentSummarizationError, 
                        _EMUserDefaultSkipEncryptedMailDeviceCheck, _EMUserDefaultSuggestionsFollowUpDebugEndDate, 
                        _EMUserDefaultSuggestionsFollowUpDebugStartDate, _EMUserDefaultTimeSensitivePromotionsDescription, 
                        _EMUserDefaultTimeSensitiveTransactionsDescription, _EMUserDefaultTimeSensitiveUpdatesDescription, 
@@ -399,8 +400,8 @@ exports:
                        EMListUnsubscribePostValues, EMListUnsubscribeSuggestion, 
                        EMLocalSearchInfo, EMMailDropMetadata, EMMailDropParser, EMMailToURLComponents, 
                        EMMailbox, EMMailboxCategoryCloudStorage, EMMailboxChangeAction, 
-                       EMMailboxCollection, EMMailboxObjectID, EMMailboxRepository, 
-                       EMMailboxScope, EMMessage, EMMessageCategoryChangeAction, 
+                       EMMailboxObjectID, EMMailboxRepository, EMMailboxScope, EMMessage, 
+                       EMMessageBodyParsingUtils, EMMessageCategoryChangeAction, 
                        EMMessageCategoryFeedbackAction, EMMessageChangeAction, EMMessageCollectionItemID, 
                        EMMessageContentCachedMetadata, EMMessageConversationFlagChangeAction, 
                        EMMessageDeleteAction, EMMessageDeleteAllAction, EMMessageDeliveryResult, 

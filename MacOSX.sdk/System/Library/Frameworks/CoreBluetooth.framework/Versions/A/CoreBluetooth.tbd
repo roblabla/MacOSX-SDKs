@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreBluetooth.framework/Versions/A/CoreBluetooth'
-current-version: 191.10
+current-version: 192.7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -170,7 +170,12 @@ exports:
                        _CBMsgArgPairingOptionsDisableCTKD, _CBNumberOfConnectionsForUseCase, 
                        _CBOptionUseCase, _CBOptionUseCaseList, _CBOptionUseCaseOptions, 
                        _CBOriginalPeerIdentifierErrorKey, _CBPairingAgentPairingDataOOBTKKey, 
-                       _CBPairingAgentPairingDataPasskeyKey, _CBPairingOptionsDistributeIRK, 
+                       _CBPairingAgentPairingDataPasskeyKey, _CBPairingInfoLocalBTAddress, 
+                       _CBPairingInfoLocalBTAddressType, _CBPairingInfoLocalEdiv, 
+                       _CBPairingInfoLocalIRK, _CBPairingInfoLocalLTK, _CBPairingInfoLocalLTKType, 
+                       _CBPairingInfoLocalRand, _CBPairingInfoRemoteBTAddress, _CBPairingInfoRemoteBTAddressType, 
+                       _CBPairingInfoRemoteEdiv, _CBPairingInfoRemoteIRK, _CBPairingInfoRemoteLTK, 
+                       _CBPairingInfoRemoteLTKType, _CBPairingInfoRemoteRand, _CBPairingOptionsDistributeIRK, 
                        _CBPairingOptionsUseMITMAuthentication, _CBPeriodicAdvDataAdvHandleKey, 
                        _CBPeriodicAdvDataIntervalKey, _CBPeriodicAdvDataRandomDataKey, 
                        _CBPeriodicAdvDataServiceUUIDsKey, _CBPeripheralFindMyPeripheralAddresses, 

@@ -1807,16 +1807,18 @@ uint64_t sptm_sysctl(sptm_sysctl_selector_u selector_U, sptm_sysctl_op_u op_U, u
  * a list of elements. This particular X-macro makes it easy to, for example,
  * generate sysctl accessors for the SPTM event counters on the XNU side.
  */
-#define FOREACH_SPTM_EVENT_COUNTER(DO)                                                    \
-	DO(RETYPES, "Number of retype operations")                                            \
-	DO(SWWA_TLBI_ASID, "Number of extra SWWA OSH TLBI ASIDs (for rdar://154685324)")      \
-	DO(SWWA_TLBI_ALL, "Number of extra SWWA OSH TLBI ALLs (for rdar://154685324)")        \
-	DO(UAT_UNMAP_PROCESSED,                                                               \
-	    "Number of pages processed by the UAT unmapping function (for rdar://154685324)") \
-	DO(UAT_UNMAP_MARKED,                                                                  \
-	    "Number of pages marked by the UAT unmapping function (for rdar://154685324)")    \
-	DO(UAT_UNMAP_UNMARKED,                                                                \
-	    "Number of pages not marked by the UAT unmapping function (for rdar://154685324)")
+#define FOREACH_SPTM_EVENT_COUNTER(DO)                                                     \
+	DO(RETYPES, "Number of retype operations")                                             \
+	DO(SWWA_TLBI_ASID, "Number of extra SWWA OSH TLBI ASIDs (for rdar://154685324)")       \
+	DO(SWWA_TLBI_ALL, "Number of extra SWWA OSH TLBI ALLs (for rdar://154685324)")         \
+	DO(UAT_UNMAP_PROCESSED,                                                                \
+	    "Number of pages processed by the UAT unmapping function (for rdar://154685324)")  \
+	DO(UAT_UNMAP_MARKED,                                                                   \
+	    "Number of pages marked by the UAT unmapping function (for rdar://154685324)")     \
+	DO(UAT_UNMAP_UNMARKED,                                                                 \
+	    "Number of pages not marked by the UAT unmapping function (for rdar://154685324)") \
+	DO(SWWA_TLBI_ASID_ELIDED,                                                              \
+	    "Number of elided SWWA OSH TLBI ASIDs with the epoch counters optimization (for rdar://154685324)")
 
 /**
  * Maps an SPTM event counter to its `sptm_get_info()` enum value.

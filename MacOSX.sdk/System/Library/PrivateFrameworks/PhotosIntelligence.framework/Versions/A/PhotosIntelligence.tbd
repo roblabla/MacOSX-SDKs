@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosIntelligence.framework/Versions/A/PhotosIntelligence'
-current-version: 811.0.106
+current-version: 821.0.120
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -825,6 +825,7 @@ exports:
                        '_$s18PhotosIntelligence11SafetyErrorO16errorDescription7verboseSSSb_tF', 
                        '_$s18PhotosIntelligence11SafetyErrorO16underlyingErrorsSay05AppleB9Reporting0gbD0_pGvg', 
                        '_$s18PhotosIntelligence11SafetyErrorO16underlyingErrorsSay05AppleB9Reporting0gbD0_pGvpMV', 
+                       '_$s18PhotosIntelligence11SafetyErrorO18guardrailOutOfDateyA2CmFWC', 
                        '_$s18PhotosIntelligence11SafetyErrorO20policyLimitedFailureyA2CmFWC', 
                        '_$s18PhotosIntelligence11SafetyErrorO21unsupportedCharactersyA2C011UnsupportedF4InfoVcACmFWC', 
                        '_$s18PhotosIntelligence11SafetyErrorO23UnsupportedLanguageInfoV26languageValidationCategoryAA13TextSanitizerV0fiJ0Ovg', 

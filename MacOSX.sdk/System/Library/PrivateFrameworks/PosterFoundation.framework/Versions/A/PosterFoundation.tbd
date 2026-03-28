@@ -66,10 +66,11 @@ exports:
                        _kPFPosterUpdateMemoryAssertionIdentifier, _kPFPosterUpdateMemoryHogPosterMemoryAssertionIdentifier, 
                        _kPFPosterUpdateRuntimeAssertion, _kPFPrewarmRuntimeAssertion, 
                        _kPFSQLiteDatabaseConnectionErrorDomain, _kPRDescriptorRefreshFrequencyKey, 
-                       _kPRHasDynamicDescriptorsKey, _kPRStaticDescriptorDisplayNameLocalizationKey, 
-                       _kPRStaticDescriptorFaceGalleryDisplayBehaviorKey, _kPRStaticDescriptorFaceGalleryOptionsKey, 
-                       _kPRStaticDescriptorRenderingConfigurationKey, _kPRStaticDescriptorUserInfoKey, 
-                       _kPRStaticDescriptorsKey, _kPRSupportedRolesKey, _kPRSupportsGalleryKey ]
+                       _kPRHasDynamicDescriptorsKey, _kPRPosterBundleIdentifierMigrationKey, 
+                       _kPRStaticDescriptorDisplayNameLocalizationKey, _kPRStaticDescriptorFaceGalleryDisplayBehaviorKey, 
+                       _kPRStaticDescriptorFaceGalleryOptionsKey, _kPRStaticDescriptorRenderingConfigurationKey, 
+                       _kPRStaticDescriptorUserInfoKey, _kPRStaticDescriptorsKey, 
+                       _kPRSupportedRolesKey, _kPRSupportsGalleryKey ]
     objc-classes:    [ PFDebounceFilter, PFDeviceMotionUtilities, PFDictionaryCoder, 
                        PFFileSystemEndpoint, PFFileSystemSchemaManager, PFFileSystemStagedURL, 
                        PFGenericValueTransformer, PFLRUCache, PFOSTransactionQueue, 

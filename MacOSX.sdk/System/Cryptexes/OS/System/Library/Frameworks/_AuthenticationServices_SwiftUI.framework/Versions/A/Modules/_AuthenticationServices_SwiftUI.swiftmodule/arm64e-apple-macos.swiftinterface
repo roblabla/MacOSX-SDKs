@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
-// swift-module-flags: -target arm64e-apple-macos26.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7622.2.11.11.5 -module-name _AuthenticationServices_SwiftUI
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-module-flags: -target arm64e-apple-macos26.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7623.1.14.11.9 -module-name _AuthenticationServices_SwiftUI
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 @_exported import AuthenticationServices
 import Swift
 import SwiftUI
@@ -31,6 +31,37 @@ public enum ASAuthorizationResult : Swift.Sendable {
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   case passkeyAccountCreation(AuthenticationServices.ASAuthorizationAccountCreationPlatformPublicKeyCredential)
+}
+extension SwiftUICore.EnvironmentValues {
+  @available(iOS 26.2, macOS 26.2, visionOS 26.2, *)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  public var credentialDataManager: _AuthenticationServices_SwiftUI.CredentialDataManager {
+    get
+  }
+}
+@available(iOS 26.2, macOS 26.2, visionOS 26.2, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@_Concurrency.MainActor public struct CredentialDataManager {
+}
+@available(iOS 26.2, macOS 26.2, visionOS 26.2, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension _AuthenticationServices_SwiftUI.CredentialDataManager {
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS, unavailable)
+  @_Concurrency.MainActor public func save(password: AuthenticationServices.ASPasswordCredential, for scope: AuthenticationServices.ASAutoFillURLScope, title: Swift.String? = nil) async throws
+  #endif
+}
+@available(iOS 26.2, macOS 26.2, visionOS 26.2, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension _AuthenticationServices_SwiftUI.CredentialDataManager {
+  @_Concurrency.MainActor public func reportPublicKeyCredentialUpdate(relyingPartyIdentifier: Swift.String, userHandle: Foundation.Data, newName: Swift.String) async throws
+  @_Concurrency.MainActor public func reportUnknownPublicKeyCredential(relyingPartyIdentifier: Swift.String, credentialID: Foundation.Data) async throws
+  @_Concurrency.MainActor public func reportAllAcceptedPublicKeyCredentials(relyingPartyIdentifier: Swift.String, userHandle: Foundation.Data, acceptedCredentialIDs: [Foundation.Data]) async throws
+  @_Concurrency.MainActor public func reportUnusedPasswordCredential(domain: Swift.String, userName: Swift.String) async throws
 }
 @available(iOS 16.4, macOS 13.3, watchOS 9.4, tvOS 16.4, *)
 @_Concurrency.MainActor public struct AuthorizationController {
@@ -135,6 +166,10 @@ extension SwiftUICore.EnvironmentValues {
     get
   }
 }
+@available(iOS 26.2, macOS 26.2, visionOS 26.2, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension _AuthenticationServices_SwiftUI.CredentialDataManager : Swift.Sendable {}
 @available(iOS 16.4, macOS 13.3, watchOS 9.4, tvOS 16.4, *)
 extension _AuthenticationServices_SwiftUI.AuthorizationController : Swift.Sendable {}
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)

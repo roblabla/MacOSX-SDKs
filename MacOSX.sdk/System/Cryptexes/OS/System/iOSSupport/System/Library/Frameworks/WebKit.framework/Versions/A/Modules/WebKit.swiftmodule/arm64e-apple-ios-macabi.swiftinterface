@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.1 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
-// swift-module-flags: -target arm64e-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 7622.2.11.11.5 -module-name WebKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-module-flags: -target arm64e-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Lifetimes -enable-experimental-feature LifetimeDependence -enable-experimental-feature ImportNonPublicCxxMembers -enable-experimental-feature DebugDescriptionMacro -user-module-version 7623.1.14.11.9 -module-name WebKit
+// swift-module-flags-ignorable: -strict-memory-safety -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import CoreTransferable
 import Foundation
 import Network
@@ -13,7 +13,6 @@ import UniformTypeIdentifiers
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-import os
 @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
@@ -546,7 +545,7 @@ extension WebKit.WebPage : CoreTransferable.Transferable {
   @_Concurrency.MainActor final public func load(_ data: Foundation.Data, mimeType: Swift.String, characterEncoding: Swift.String.Encoding, baseURL: Foundation.URL) -> some _Concurrency.AsyncSequence<WebKit.WebPage.NavigationEvent, any Swift.Error>
   
   @discardableResult
-  @_Concurrency.MainActor final public func load(html: Swift.String, baseURL: Foundation.URL = URL(string: "about:blank")!) -> some _Concurrency.AsyncSequence<WebKit.WebPage.NavigationEvent, any Swift.Error>
+  @_Concurrency.MainActor final public func load(html: Swift.String, baseURL: Foundation.URL = Foundation.URL(string: "about:blank")!) -> some _Concurrency.AsyncSequence<WebKit.WebPage.NavigationEvent, any Swift.Error>
   
   @discardableResult
   @_Concurrency.MainActor final public func load(simulatedRequest request: Foundation.URLRequest, response: Foundation.URLResponse, responseData: Foundation.Data) -> some _Concurrency.AsyncSequence<WebKit.WebPage.NavigationEvent, any Swift.Error>

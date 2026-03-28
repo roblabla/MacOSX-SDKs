@@ -404,8 +404,11 @@ exports:
                        '_$sSo5VCLogC12VoiceControlE25isSensitiveLoggingEnabledSbvgZ', 
                        '_$sSo5VCLogC12VoiceControlE25isSensitiveLoggingEnabledSbvpZMV', 
                        '_$sSo5VCLogC12VoiceControlEABycfC', '_$sSo5VCLogC12VoiceControlEABycfc', 
-                       '_$sSo5VCLogCMa', _VoiceControlVersionNumber, _VoiceControlVersionString ]
-    objc-classes:    [ SL_SRSSControlCenterPreferences, VCFeatureFlags, VCLocaleFeatureFlags, 
-                       VCLog, VCSettingsObjC, VCSignposts, _TtC12VoiceControl10VCSettings, 
-                       _TtC12VoiceControl14VCNotification ]
+                       '_$sSo5VCLogCMa', '_$sSo8VCCommonC12VoiceControlE16machAbsoluteTime14toMillisecondsSds6UInt64V_tFZ', 
+                       '_$sSo8VCCommonC12VoiceControlE5scaleSdvgZ', '_$sSo8VCCommonC12VoiceControlE5scaleSdvpZMV', 
+                       '_$sSo8VCCommonC12VoiceControlEABycfC', '_$sSo8VCCommonC12VoiceControlEABycfc', 
+                       '_$sSo8VCCommonCMa', _VoiceControlVersionNumber, _VoiceControlVersionString ]
+    objc-classes:    [ SL_SRSSControlCenterPreferences, VCCommon, VCFeatureFlags, 
+                       VCLocaleFeatureFlags, VCLog, VCSettingsObjC, VCSignposts, 
+                       _TtC12VoiceControl10VCSettings, _TtC12VoiceControl14VCNotification ]
 ...

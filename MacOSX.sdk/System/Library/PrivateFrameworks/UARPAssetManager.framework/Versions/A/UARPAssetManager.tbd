@@ -8,10 +8,10 @@ exports:
                        _UARPAssetManagerVersionString, _createEndpointPersonality, 
                        _kUARPAssetAvailabilityXPCEventAssetCreationDateKey, _kUARPAssetAvailabilityXPCEventAssetVersionKey, 
                        _kUARPAssetAvailabilityXPCEventDomainKey, _kUARPAssetAvailabilityXPCEventName, 
-                       _kUARPAssetAvailabilityXPCEventPersonalityKey, _kUARPAssetAvailabilityXPCEventStatusKey, 
-                       _kUARPAssetAvailabilityXPCEventSupplementAssetKey, _kUarpAssetManagerXpcEntitlement, 
-                       _kUarpAssetManagerXpcServiceName ]
-    objc-classes:    [ UARPAssetManagerCacheConfiguration, UARPAssetManagerClient, 
-                       UARPAssetVersionBase, UARPAssetVersionSoftwareUpdate, UARPEndpointPersonality, 
-                       UARPEndpointPersonalityMobileAsset ]
+                       _kUARPAssetAvailabilityXPCEventPersonalityKey, _kUARPAssetAvailabilityXPCEventSerialNumbersKey, 
+                       _kUARPAssetAvailabilityXPCEventStatusKey, _kUARPAssetAvailabilityXPCEventSupplementAssetKey, 
+                       _kUarpAssetManagerXpcEntitlement, _kUarpAssetManagerXpcServiceName ]
+    objc-classes:    [ UARPAssetAvailableEvent, UARPAssetManagerCacheConfiguration, 
+                       UARPAssetManagerClient, UARPAssetVersionBase, UARPAssetVersionSoftwareUpdate, 
+                       UARPEndpointPersonality, UARPEndpointPersonalityMobileAsset ]
 ...

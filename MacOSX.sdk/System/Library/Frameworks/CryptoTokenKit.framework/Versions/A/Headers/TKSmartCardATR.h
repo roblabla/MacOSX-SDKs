@@ -16,10 +16,10 @@ typedef NS_OPTIONS(NSUInteger, TKSmartCardProtocol) {
     TKSmartCardProtocolT1    = (1L << 1),
     TKSmartCardProtocolT15   = (1L << 15),
     TKSmartCardProtocolAny   = (1L << 16) - 1,
-} API_AVAILABLE(macos(10.10));
+} API_AVAILABLE(macos(10.10), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 /// Represents single interface-bytes group of ATR.
-API_AVAILABLE(macos(10.10))
+API_AVAILABLE(macos(10.10), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0))
 @interface TKSmartCardATRInterfaceGroup : NSObject
 
 /// TA interface byte of ATR group, or nil if TA is not present.
@@ -37,7 +37,7 @@ API_AVAILABLE(macos(10.10))
 @end
 
 /// Represents parsed SmartCard ATR.  Provides routine for parsing byte stream or NSData with binary ATR and accessors to parsed ATR parts.
-API_AVAILABLE(macos(10.10))
+API_AVAILABLE(macos(10.10), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0))
 @interface TKSmartCardATR : NSObject
 
 /// Parses ATR from binary data block
@@ -74,7 +74,7 @@ API_AVAILABLE(macos(10.10))
 ///       appended into the returned records as if historical bytes would begin with 0x80 and 0x8 record is present
 ///       in historical bytes.
 @property (nonatomic, readonly, nullable) NSArray<TKCompactTLVRecord *> *historicalRecords
-API_AVAILABLE(macos(10.12));
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 @end
 

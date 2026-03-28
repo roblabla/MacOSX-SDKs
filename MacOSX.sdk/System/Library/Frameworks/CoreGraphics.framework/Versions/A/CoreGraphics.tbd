@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics'
-current-version: 1965.1.4
+current-version: 1965.2.3
 compatibility-version: 64
 swift-abi-version: 7
 exports:
@@ -2501,15 +2501,15 @@ exports:
                        _CGPDFStructureElementRelease, _CGPDFStructureElementRetain, 
                        _CGPDFStructureElementSetActualText, _CGPDFStructureElementSetAlternativeText, 
                        _CGPDFStructureElementSetExpansionText, _CGPDFStructureElementSetLanguageIdentifier, 
-                       _CGPDFStructureElementSetTitle, _CGPDFTagTypeGetName, _CGPDFTaggedNodeCreateAttributedString, 
-                       _CGPDFTaggedNodeCreateAttributedStringForStringRange, _CGPDFTaggedNodeCreateAttributedStringForTextRange, 
-                       _CGPDFTaggedNodeCreateCopyWithStringRange, _CGPDFTaggedNodeCreateLineRanges, 
-                       _CGPDFTaggedNodeCreateLineRangesForTextRange, _CGPDFTaggedNodeCreateLineStringRanges, 
-                       _CGPDFTaggedNodeCreateLineStringRangesForStringRange, _CGPDFTaggedNodeCreateString, 
-                       _CGPDFTaggedNodeCreateStringForStringRange, _CGPDFTaggedNodeCreateStringForTextRange, 
-                       _CGPDFTaggedNodeEnumerateChildren, _CGPDFTaggedNodeEqualToPDFTaggedNode, 
-                       _CGPDFTaggedNodeGetActualText, _CGPDFTaggedNodeGetAltText, 
-                       _CGPDFTaggedNodeGetBounds, _CGPDFTaggedNodeGetBoundsForStringRange, 
+                       _CGPDFStructureElementSetTitle, _CGPDFTagTypeGetName, _CGPDFTaggedNodeCalculateCellPositions, 
+                       _CGPDFTaggedNodeCreateAttributedString, _CGPDFTaggedNodeCreateAttributedStringForStringRange, 
+                       _CGPDFTaggedNodeCreateAttributedStringForTextRange, _CGPDFTaggedNodeCreateCopyWithStringRange, 
+                       _CGPDFTaggedNodeCreateLineRanges, _CGPDFTaggedNodeCreateLineRangesForTextRange, 
+                       _CGPDFTaggedNodeCreateLineStringRanges, _CGPDFTaggedNodeCreateLineStringRangesForStringRange, 
+                       _CGPDFTaggedNodeCreateString, _CGPDFTaggedNodeCreateStringForStringRange, 
+                       _CGPDFTaggedNodeCreateStringForTextRange, _CGPDFTaggedNodeEnumerateChildren, 
+                       _CGPDFTaggedNodeEqualToPDFTaggedNode, _CGPDFTaggedNodeGetActualText, 
+                       _CGPDFTaggedNodeGetAltText, _CGPDFTaggedNodeGetBounds, _CGPDFTaggedNodeGetBoundsForStringRange, 
                        _CGPDFTaggedNodeGetBoundsForTextRange, _CGPDFTaggedNodeGetChildAtIndex, 
                        _CGPDFTaggedNodeGetChildCount, _CGPDFTaggedNodeGetColSpan, 
                        _CGPDFTaggedNodeGetLanguageText, _CGPDFTaggedNodeGetListStyle, 

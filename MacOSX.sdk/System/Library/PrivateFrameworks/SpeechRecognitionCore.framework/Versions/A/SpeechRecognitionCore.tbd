@@ -161,5 +161,5 @@ exports:
                        _reportBacktrace, _xpc_unwrap2_uint64, _xpc_unwrap_uint64s_in_object, 
                        _xpc_wrap2_uint64, _xpc_wrap_uint64s_in_object ]
     objc-classes:    [ RXXPCCSpeechRecognitionClientService, SRDConnection, SRDLanguageObject, 
-                       SRDRecognizer, SRDTranscriptionResult, SRDTranscriptionToken ]
+                       SRDMachTime, SRDRecognizer, SRDTranscriptionResult, SRDTranscriptionToken ]
 ...

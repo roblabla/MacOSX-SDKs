@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppNotificationsLoggingClient.framework/Versions/A/AppNotificationsLoggingClient'
-current-version: 619.10
+current-version: 619.14
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ATXNEventTypeFromString, _ATXNEventTypeToString, _ATXNRTOutcomeToSettingResponse, 

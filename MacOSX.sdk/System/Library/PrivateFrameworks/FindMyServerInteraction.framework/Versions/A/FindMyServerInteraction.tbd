@@ -8,9 +8,11 @@ allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FindMyDeviceSharedConfigurationXPCService, FindMyLocateTests, 
-                       FindMyServerInteractionTests, findmybeaconingd, findmydevice-user-agent, 
-                       findmylocateagent, findmylocated, findmylocatedTests, fmltool, 
-                       searchpartyd, searchpartydTests, searchpartyuseragent, sptool ]
+                       FindMyServerInteractionTests, FindMyServiceValidation, FindMyServiceValidationTests, 
+                       findmybeaconingd, findmydevice-user-agent, findmydeviced, 
+                       findmydevicetool, findmylocateagent, findmylocated, findmylocatedTests, 
+                       fmltool, searchpartyd, searchpartydTests, searchpartyuseragent, 
+                       sptool ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SharingUI.framework/Versions/A/SharingUI'
-current-version: 2094.20.72
+current-version: 2094.30.41
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -59,12 +59,18 @@ exports:
                        '_$s9SharingUI18SFAirDropUtilitiesCfD', '_$s9SharingUI18SFAirDropUtilitiesCfd', 
                        '_$s9SharingUI18ShockwaveAnimationMp', '_$s9SharingUI18ShockwaveAnimationP8timelineSayAA13TimelineEntryVy0A022SFShockwaveEffectStateOGGvgTj', 
                        '_$s9SharingUI18ShockwaveAnimationP8timelineSayAA13TimelineEntryVy0A022SFShockwaveEffectStateOGGvgTq', 
-                       '_$s9SharingUI18ShockwaveAnimationTL', '_$s9SharingUI23SFUIContactIconProviderC07contactD8FallBackSo7NSImageCyYaKFTj', 
-                       '_$s9SharingUI23SFUIContactIconProviderC07contactD8FallBackSo7NSImageCyYaKFTjTu', 
-                       '_$s9SharingUI23SFUIContactIconProviderC07contactD8FallBackSo7NSImageCyYaKFTq', 
-                       '_$s9SharingUI23SFUIContactIconProviderC4icon3forSo7NSImageCSS_tYaKFTj', 
-                       '_$s9SharingUI23SFUIContactIconProviderC4icon3forSo7NSImageCSS_tYaKFTjTu', 
-                       '_$s9SharingUI23SFUIContactIconProviderC4icon3forSo7NSImageCSS_tYaKFTq', 
+                       '_$s9SharingUI18ShockwaveAnimationTL', '_$s9SharingUI23SFUIContactIconProviderC07contactD8FallBack15backgroundStyleSo7NSImageCSo020SFUIAvatarBackgroundJ0V_tYaKFTj', 
+                       '_$s9SharingUI23SFUIContactIconProviderC07contactD8FallBack15backgroundStyleSo7NSImageCSo020SFUIAvatarBackgroundJ0V_tYaKFTjTu', 
+                       '_$s9SharingUI23SFUIContactIconProviderC07contactD8FallBack15backgroundStyleSo7NSImageCSo020SFUIAvatarBackgroundJ0V_tYaKFTq', 
+                       '_$s9SharingUI23SFUIContactIconProviderC15getImageForName05givenI006familyI015backgroundStyleSo7NSImageCSS_SSSgSo020SFUIAvatarBackgroundM0VtYaKFTj', 
+                       '_$s9SharingUI23SFUIContactIconProviderC15getImageForName05givenI006familyI015backgroundStyleSo7NSImageCSS_SSSgSo020SFUIAvatarBackgroundM0VtYaKFTjTu', 
+                       '_$s9SharingUI23SFUIContactIconProviderC15getImageForName05givenI006familyI015backgroundStyleSo7NSImageCSS_SSSgSo020SFUIAvatarBackgroundM0VtYaKFTq', 
+                       '_$s9SharingUI23SFUIContactIconProviderC19iconWithDisplayName3for15backgroundStyleSo7NSImageC5image_SS07displayI0tSS_So020SFUIAvatarBackgroundL0VtYaKFTj', 
+                       '_$s9SharingUI23SFUIContactIconProviderC19iconWithDisplayName3for15backgroundStyleSo7NSImageC5image_SS07displayI0tSS_So020SFUIAvatarBackgroundL0VtYaKFTjTu', 
+                       '_$s9SharingUI23SFUIContactIconProviderC19iconWithDisplayName3for15backgroundStyleSo7NSImageC5image_SS07displayI0tSS_So020SFUIAvatarBackgroundL0VtYaKFTq', 
+                       '_$s9SharingUI23SFUIContactIconProviderC4icon3for15backgroundStyleSo7NSImageCSS_So020SFUIAvatarBackgroundI0VtYaKFTj', 
+                       '_$s9SharingUI23SFUIContactIconProviderC4icon3for15backgroundStyleSo7NSImageCSS_So020SFUIAvatarBackgroundI0VtYaKFTjTu', 
+                       '_$s9SharingUI23SFUIContactIconProviderC4icon3for15backgroundStyleSo7NSImageCSS_So020SFUIAvatarBackgroundI0VtYaKFTq', 
                        '_$s9SharingUI23SFUIContactIconProviderC8diameter15layoutDirectionAC12CoreGraphics7CGFloatV_So023SFUIUserInterfaceLayoutH0VtcfC', 
                        '_$s9SharingUI23SFUIContactIconProviderC8diameter15layoutDirectionAC12CoreGraphics7CGFloatV_So023SFUIUserInterfaceLayoutH0VtcfCTj', 
                        '_$s9SharingUI23SFUIContactIconProviderC8diameter15layoutDirectionAC12CoreGraphics7CGFloatV_So023SFUIUserInterfaceLayoutH0VtcfCTq', 

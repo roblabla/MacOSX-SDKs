@@ -18,6 +18,8 @@ typedef NS_OPTIONS(NSUInteger, GCUIEventTypes) {
     GCUIEventTypeNone           = (0U),
     /** A constant that represents events from a game controller. */
     GCUIEventTypeGamepad        = (1U << 0),
+    /** A constant that represents events from a stylus. */
+    GCUIEventTypeStylus         API_AVAILABLE(visionos(26.2)) API_UNAVAILABLE(macCatalyst, ios, tvos) API_UNAVAILABLE(macos) = (1U << 1),
 } API_AVAILABLE(macCatalyst(18.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos);
 
 
@@ -47,8 +49,8 @@ API_AVAILABLE(macCatalyst(18.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos)
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
- *  The types of game controller events that should be delivered through
- *  the Game Controller framework.
+ *  The types of events that should be delivered through the Game Controller
+ *  framework.
  */
 @property (nonatomic, readwrite) GCUIEventTypes handledEventTypes;
 

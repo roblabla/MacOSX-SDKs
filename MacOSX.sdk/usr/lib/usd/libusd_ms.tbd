@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/usd/libusd_ms.dylib'
-current-version: 23.2.1
+current-version: 23.3.1
 compatibility-version: 0
 swift-abi-version: 7
 exports:

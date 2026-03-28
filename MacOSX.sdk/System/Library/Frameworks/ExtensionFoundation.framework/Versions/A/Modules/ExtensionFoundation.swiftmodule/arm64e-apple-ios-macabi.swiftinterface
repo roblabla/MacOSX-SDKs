@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
-// swift-module-flags: -target arm64e-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 264.1.3 -module-name ExtensionFoundation
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-module-flags: -target arm64e-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 264.2.2 -module-name ExtensionFoundation
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import Combine
 @_exported import ExtensionFoundation
 import Foundation
@@ -20,6 +20,21 @@ public protocol AppExtension {
   associatedtype Configuration : ExtensionFoundation.AppExtensionConfiguration
   @preconcurrency @_Concurrency.MainActor var configuration: Self.Configuration { get }
   @preconcurrency @_Concurrency.MainActor init()
+  @available(macOS 26.2, iOS 26.2, watchOS 26.2, tvOS 26.2, *)
+  typealias Identifier = ExtensionFoundation.AppExtensionPoint.Identifier
+  @available(macOS 26.2, iOS 26.2, watchOS 26.2, tvOS 26.2, *)
+  typealias Implementing = ExtensionFoundation.AppExtensionPoint.Capabilities
+  @available(macOS 26.2, iOS 26.2, watchOS 26.2, tvOS 26.2, *)
+  typealias Bind = ExtensionFoundation.AppExtensionPoint.Bind
+  @available(macOS 26.2, iOS 26.2, watchOS 26.2, tvOS 26.2, *)
+  @_Concurrency.MainActor @ExtensionFoundation.AppExtensionPoint.Bind var extensionPoint: ExtensionFoundation.AppExtensionPoint { get }
+}
+@available(macOS 26.2, iOS 26.2, watchOS 26.2, tvOS 26.2, *)
+extension ExtensionFoundation.AppExtension {
+  @available(macOS 26.2, iOS 26.2, watchOS 26.2, tvOS 26.2, *)
+  @_Concurrency.MainActor public var extensionPoint: ExtensionFoundation.AppExtensionPoint {
+    get
+  }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension ExtensionFoundation.AppExtension {
@@ -234,5 +249,16 @@ extension ExtensionFoundation.AppExtensionProcess {
     public var appExtensionIdentity: ExtensionFoundation.AppExtensionIdentity
     public var onInterruption: () -> Swift.Void
     public init(appExtensionIdentity: ExtensionFoundation.AppExtensionIdentity, onInterruption: @escaping () -> Swift.Void = {})
+  }
+}
+@available(macOS 26.2, iOS 26.2, watchOS 26.2, tvOS 26.2, *)
+extension ExtensionFoundation.AppExtensionPoint {
+  public protocol Capability : Swift.Identifiable {
+  }
+  public struct Capabilities : @unchecked Swift.Sendable {
+    @_functionBuilder public struct Builder {
+      public static func buildBlock<each T>(_ capabilities: repeat each T) -> ExtensionFoundation.AppExtensionPoint.Capabilities where repeat each T : ExtensionFoundation.AppExtensionPoint.Capability
+    }
+    public init(@ExtensionFoundation.AppExtensionPoint.Capabilities.Builder _ builder: () -> ExtensionFoundation.AppExtensionPoint.Capabilities)
   }
 }

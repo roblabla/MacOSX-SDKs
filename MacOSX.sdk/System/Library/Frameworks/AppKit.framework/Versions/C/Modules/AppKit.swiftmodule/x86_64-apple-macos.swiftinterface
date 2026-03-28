@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
-// swift-module-flags: -target x86_64-apple-macos26.1 -target-variant x86_64-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2685.20.119 -module-name AppKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-module-flags: -target x86_64-apple-macos26.2 -target-variant x86_64-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2685.30.107 -module-name AppKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 @_exported import Accessibility
 @_exported import AppKit
 @_exported import CoreGraphics
@@ -823,6 +823,249 @@ extension AppKit.NSMenuItemBadge : Swift.Codable {
   required convenience public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
+@available(macOS 12, *)
+extension Foundation.AttributeScopes {
+  public var appKit: Foundation.AttributeScopes.AppKitAttributes.Type {
+    get
+  }
+  public struct AppKitAttributes : Foundation.AttributeScope {
+    public let font: Foundation.AttributeScopes.AppKitAttributes.FontAttribute
+    public let paragraphStyle: Foundation.AttributeScopes.AppKitAttributes.ParagraphStyleAttribute
+    public let foregroundColor: Foundation.AttributeScopes.AppKitAttributes.ForegroundColorAttribute
+    public let backgroundColor: Foundation.AttributeScopes.AppKitAttributes.BackgroundColorAttribute
+    public let ligature: Foundation.AttributeScopes.AppKitAttributes.LigatureAttribute
+    public let kern: Foundation.AttributeScopes.AppKitAttributes.KernAttribute
+    public let tracking: Foundation.AttributeScopes.AppKitAttributes.TrackingAttribute
+    public let strikethroughStyle: Foundation.AttributeScopes.AppKitAttributes.StrikethroughStyleAttribute
+    public let underlineStyle: Foundation.AttributeScopes.AppKitAttributes.UnderlineStyleAttribute
+    public let strokeColor: Foundation.AttributeScopes.AppKitAttributes.StrokeColorAttribute
+    public let strokeWidth: Foundation.AttributeScopes.AppKitAttributes.StrokeWidthAttribute
+    public let shadow: Foundation.AttributeScopes.AppKitAttributes.ShadowAttribute
+    public let textEffect: Foundation.AttributeScopes.AppKitAttributes.TextEffectAttribute
+    public let attachment: Foundation.AttributeScopes.AppKitAttributes.AttachmentAttribute
+    public let baselineOffset: Foundation.AttributeScopes.AppKitAttributes.BaselineOffsetAttribute
+    public let underlineColor: Foundation.AttributeScopes.AppKitAttributes.UnderlineColorAttribute
+    public let strikethroughColor: Foundation.AttributeScopes.AppKitAttributes.StrikethroughColorAttribute
+    @available(macOS, introduced: 12.0, deprecated: 100000.0, message: "This attribute is not supported with TextKit 2")
+    public let obliqueness: Foundation.AttributeScopes.AppKitAttributes.ObliquenessAttribute
+    @available(macOS, introduced: 12.0, deprecated: 100000.0, message: "This attribute is not supported with TextKit 2")
+    public let expansion: Foundation.AttributeScopes.AppKitAttributes.ExpansionAttribute
+    public let toolTip: Foundation.AttributeScopes.AppKitAttributes.ToolTipAttribute
+    public let markedClauseSegment: Foundation.AttributeScopes.AppKitAttributes.MarkedClauseSegmentAttribute
+    public let superscript: Foundation.AttributeScopes.AppKitAttributes.SuperscriptAttribute
+    public let textAlternatives: Foundation.AttributeScopes.AppKitAttributes.TextAlternativesAttribute
+    public let glyphInfo: Foundation.AttributeScopes.AppKitAttributes.GlyphInfoAttribute
+    public let cursor: Foundation.AttributeScopes.AppKitAttributes.CursorAttribute
+    @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+    public let adaptiveImageGlyph: Foundation.AttributeScopes.AppKitAttributes.AdaptiveImageGlyphAttribute
+    public let accessibility: Foundation.AttributeScopes.AccessibilityAttributes
+    public let foundation: Foundation.AttributeScopes.FoundationAttributes
+    @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
+    public typealias DecodingConfiguration = Foundation.AttributeScopeCodableConfiguration
+    @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
+    public typealias EncodingConfiguration = Foundation.AttributeScopeCodableConfiguration
+  }
+}
+@available(macOS 12, *)
+extension Foundation.AttributeDynamicLookup {
+  @_disfavoredOverload public subscript<T>(dynamicMember keyPath: Swift.KeyPath<Foundation.AttributeScopes.AppKitAttributes, T>) -> T where T : Foundation.AttributedStringKey {
+    get
+  }
+}
+@available(macOS 12, *)
+extension AppKit.NSUnderlineStyle : @retroactive Swift.Hashable {
+}
+@available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes {
+  @frozen public enum FontAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = AppKit.NSFont
+    public static let name: Swift.String
+  }
+  @frozen public enum ParagraphStyleAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = AppKit.NSParagraphStyle
+    public static let name: Swift.String
+  }
+  @frozen public enum ForegroundColorAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = AppKit.NSColor
+    public static let name: Swift.String
+  }
+  @frozen public enum BackgroundColorAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = AppKit.NSColor
+    public static let name: Swift.String
+  }
+  @frozen public enum LigatureAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = Swift.Int
+    public static let name: Swift.String
+  }
+  @frozen public enum KernAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = CoreFoundation.CGFloat
+    public static let name: Swift.String
+  }
+  @frozen public enum TrackingAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = CoreFoundation.CGFloat
+    public static let name: Swift.String
+  }
+  @frozen public enum StrikethroughStyleAttribute : Foundation.CodableAttributedStringKey, Foundation.ObjectiveCConvertibleAttributedStringKey {
+    public typealias Value = AppKit.NSUnderlineStyle
+    public typealias ObjectiveCValue = Foundation.NSNumber
+    public static let name: Swift.String
+    public static func encode(_ value: AppKit.NSUnderlineStyle, to encoder: any Swift.Encoder) throws
+    public static func decode(from decoder: any Swift.Decoder) throws -> AppKit.NSUnderlineStyle
+  }
+  @frozen public enum UnderlineStyleAttribute : Foundation.CodableAttributedStringKey, Foundation.ObjectiveCConvertibleAttributedStringKey {
+    public typealias Value = AppKit.NSUnderlineStyle
+    public typealias ObjectiveCValue = Foundation.NSNumber
+    public static let name: Swift.String
+    public static func encode(_ value: AppKit.NSUnderlineStyle, to encoder: any Swift.Encoder) throws
+    public static func decode(from decoder: any Swift.Decoder) throws -> AppKit.NSUnderlineStyle
+  }
+  @frozen public enum StrokeColorAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = AppKit.NSColor
+    public static let name: Swift.String
+  }
+  @frozen public enum StrokeWidthAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = CoreFoundation.CGFloat
+    public static let name: Swift.String
+  }
+  @frozen public enum ShadowAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = AppKit.NSShadow
+    public static let name: Swift.String
+  }
+  @frozen public enum TextEffectAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = Foundation.NSAttributedString.TextEffectStyle
+    public static let name: Swift.String
+    public static func encode(_ value: Foundation.NSAttributedString.TextEffectStyle, to encoder: any Swift.Encoder) throws
+    public static func decode(from decoder: any Swift.Decoder) throws -> Foundation.NSAttributedString.TextEffectStyle
+  }
+  @frozen public enum AttachmentAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = AppKit.NSTextAttachment
+    public static let name: Swift.String
+  }
+  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+  @frozen public enum BaselineOffsetAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = CoreFoundation.CGFloat
+    public static let name: Swift.String
+  }
+  @frozen public enum UnderlineColorAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = AppKit.NSColor
+    public static let name: Swift.String
+  }
+  @frozen public enum StrikethroughColorAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = AppKit.NSColor
+    public static let name: Swift.String
+  }
+  @available(macOS, introduced: 12.0, deprecated: 100000.0, message: "This attribute is not supported with TextKit 2")
+  @frozen public enum ObliquenessAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = CoreFoundation.CGFloat
+    public static let name: Swift.String
+  }
+  @available(macOS, introduced: 12.0, deprecated: 100000.0, message: "This attribute is not supported with TextKit 2")
+  @frozen public enum ExpansionAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = CoreFoundation.CGFloat
+    public static let name: Swift.String
+  }
+  @frozen public enum ToolTipAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = Swift.String
+    public static let name: Swift.String
+  }
+  @frozen public enum MarkedClauseSegmentAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = Swift.Int
+    public static let name: Swift.String
+  }
+  @frozen public enum SuperscriptAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = Swift.Int
+    public static let name: Swift.String
+  }
+  @frozen public enum TextAlternativesAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = AppKit.NSTextAlternatives
+    public static let name: Swift.String
+  }
+  @frozen public enum GlyphInfoAttribute : Foundation.CodableAttributedStringKey {
+    public typealias Value = AppKit.NSGlyphInfo
+    public static let name: Swift.String
+  }
+  @frozen public enum CursorAttribute : Foundation.AttributedStringKey {
+    public typealias Value = AppKit.NSCursor
+    public static let name: Swift.String
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Foundation.AttributedString.AdaptiveImageGlyph {
+  public init(_ nsAdaptiveImageGlyph: AppKit.NSAdaptiveImageGlyph)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension AppKit.NSAdaptiveImageGlyph {
+  convenience public init(_ adaptiveImageGlypth: Foundation.AttributedString.AdaptiveImageGlyph)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Foundation.AttributeScopes.AppKitAttributes {
+  @frozen public enum AdaptiveImageGlyphAttribute : Foundation.CodableAttributedStringKey, Foundation.ObjectiveCConvertibleAttributedStringKey, Swift.Sendable {
+    public typealias Value = Foundation.AttributedString.AdaptiveImageGlyph
+    public typealias ObjectiveCValue = AppKit.NSAdaptiveImageGlyph
+    public static let name: Swift.String
+    public static var inheritedByAddedText: Swift.Bool
+    #if compiler(>=5.3) && $NonescapableTypes
+    public static var runBoundaries: Foundation.AttributedString.AttributeRunBoundaries? {
+      get
+    }
+    #endif
+    public static func objectiveCValue(for value: Foundation.AttributedString.AdaptiveImageGlyph) throws -> AppKit.NSAdaptiveImageGlyph
+    public static func value(for object: AppKit.NSAdaptiveImageGlyph) throws -> Foundation.AttributedString.AdaptiveImageGlyph
+    public static func encode(_ value: Foundation.AttributedString.AdaptiveImageGlyph, to encoder: any Swift.Encoder) throws
+    public static func decode(from decoder: any Swift.Decoder) throws -> Foundation.AttributedString.AdaptiveImageGlyph
+  }
+}
+@available(macOS 14.0, *)
+extension AppKit.NSColor {
+  convenience public init(resource: DeveloperToolsSupport.ColorResource)
+}
+@available(macOS 10.9, *)
+extension AppKit.NSColor : Swift._ExpressibleByColorLiteral {
+  @nonobjc required convenience public init(_colorLiteralRed red: Swift.Float, green: Swift.Float, blue: Swift.Float, alpha: Swift.Float)
+}
+public typealias _ColorLiteralType = AppKit.NSColor
+@available(macOS 10.9, *)
+extension Foundation.IndexPath {
+  public init(item: Swift.Int, section: Swift.Int)
+  public var item: Swift.Int {
+    get
+    set
+  }
+  public var section: Swift.Int {
+    get
+    set
+  }
+}
+@available(macOS 10.9, *)
+extension Foundation.URLResourceValues {
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS, introduced: 10.10, deprecated: 12.0, message: "Use the QuickLookThumbnailing framework and extension point instead")
+  public var thumbnail: AppKit.NSImage? {
+    get
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var labelColor: AppKit.NSColor? {
+    get
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var effectiveIcon: Swift.AnyObject? {
+    get
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var customIcon: AppKit.NSImage? {
+    get
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS, introduced: 10.10, deprecated: 12.0, message: "Use the QuickLookThumbnailing framework and extension point instead")
+  public var thumbnailDictionary: [Foundation.URLThumbnailDictionaryItem : AppKit.NSImage]? {
+    get
+  }
+  #endif
+}
 extension AppKit.NSImageView {
   @available(macOS 14.0, *)
   @_Concurrency.MainActor @preconcurrency public func addSymbolEffect(_ effect: some SymbolEffect & DiscreteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true)
@@ -1068,249 +1311,6 @@ extension AppKit.NSTextSuggestionsDelegate where Self.SuggestionItemType : Swift
   @available(macOS 15.0, *)
   @_disfavoredOverload @_Concurrency.MainActor public func appending<T>(_ other: some NSTextSuggestionsDelegate<T>) -> some AppKit.NSTextSuggestionsDelegate<Swift.AnyHashable> where T : Swift.Hashable
   
-}
-@available(macOS 12, *)
-extension Foundation.AttributeScopes {
-  public var appKit: Foundation.AttributeScopes.AppKitAttributes.Type {
-    get
-  }
-  public struct AppKitAttributes : Foundation.AttributeScope {
-    public let font: Foundation.AttributeScopes.AppKitAttributes.FontAttribute
-    public let paragraphStyle: Foundation.AttributeScopes.AppKitAttributes.ParagraphStyleAttribute
-    public let foregroundColor: Foundation.AttributeScopes.AppKitAttributes.ForegroundColorAttribute
-    public let backgroundColor: Foundation.AttributeScopes.AppKitAttributes.BackgroundColorAttribute
-    public let ligature: Foundation.AttributeScopes.AppKitAttributes.LigatureAttribute
-    public let kern: Foundation.AttributeScopes.AppKitAttributes.KernAttribute
-    public let tracking: Foundation.AttributeScopes.AppKitAttributes.TrackingAttribute
-    public let strikethroughStyle: Foundation.AttributeScopes.AppKitAttributes.StrikethroughStyleAttribute
-    public let underlineStyle: Foundation.AttributeScopes.AppKitAttributes.UnderlineStyleAttribute
-    public let strokeColor: Foundation.AttributeScopes.AppKitAttributes.StrokeColorAttribute
-    public let strokeWidth: Foundation.AttributeScopes.AppKitAttributes.StrokeWidthAttribute
-    public let shadow: Foundation.AttributeScopes.AppKitAttributes.ShadowAttribute
-    public let textEffect: Foundation.AttributeScopes.AppKitAttributes.TextEffectAttribute
-    public let attachment: Foundation.AttributeScopes.AppKitAttributes.AttachmentAttribute
-    public let baselineOffset: Foundation.AttributeScopes.AppKitAttributes.BaselineOffsetAttribute
-    public let underlineColor: Foundation.AttributeScopes.AppKitAttributes.UnderlineColorAttribute
-    public let strikethroughColor: Foundation.AttributeScopes.AppKitAttributes.StrikethroughColorAttribute
-    @available(macOS, introduced: 12.0, deprecated: 100000.0, message: "This attribute is not supported with TextKit 2")
-    public let obliqueness: Foundation.AttributeScopes.AppKitAttributes.ObliquenessAttribute
-    @available(macOS, introduced: 12.0, deprecated: 100000.0, message: "This attribute is not supported with TextKit 2")
-    public let expansion: Foundation.AttributeScopes.AppKitAttributes.ExpansionAttribute
-    public let toolTip: Foundation.AttributeScopes.AppKitAttributes.ToolTipAttribute
-    public let markedClauseSegment: Foundation.AttributeScopes.AppKitAttributes.MarkedClauseSegmentAttribute
-    public let superscript: Foundation.AttributeScopes.AppKitAttributes.SuperscriptAttribute
-    public let textAlternatives: Foundation.AttributeScopes.AppKitAttributes.TextAlternativesAttribute
-    public let glyphInfo: Foundation.AttributeScopes.AppKitAttributes.GlyphInfoAttribute
-    public let cursor: Foundation.AttributeScopes.AppKitAttributes.CursorAttribute
-    @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-    public let adaptiveImageGlyph: Foundation.AttributeScopes.AppKitAttributes.AdaptiveImageGlyphAttribute
-    public let accessibility: Foundation.AttributeScopes.AccessibilityAttributes
-    public let foundation: Foundation.AttributeScopes.FoundationAttributes
-    @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
-    public typealias DecodingConfiguration = Foundation.AttributeScopeCodableConfiguration
-    @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
-    public typealias EncodingConfiguration = Foundation.AttributeScopeCodableConfiguration
-  }
-}
-@available(macOS 12, *)
-extension Foundation.AttributeDynamicLookup {
-  @_disfavoredOverload public subscript<T>(dynamicMember keyPath: Swift.KeyPath<Foundation.AttributeScopes.AppKitAttributes, T>) -> T where T : Foundation.AttributedStringKey {
-    get
-  }
-}
-@available(macOS 12, *)
-extension AppKit.NSUnderlineStyle : @retroactive Swift.Hashable {
-}
-@available(macOS 12, *)
-extension Foundation.AttributeScopes.AppKitAttributes {
-  @frozen public enum FontAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = AppKit.NSFont
-    public static let name: Swift.String
-  }
-  @frozen public enum ParagraphStyleAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = AppKit.NSParagraphStyle
-    public static let name: Swift.String
-  }
-  @frozen public enum ForegroundColorAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = AppKit.NSColor
-    public static let name: Swift.String
-  }
-  @frozen public enum BackgroundColorAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = AppKit.NSColor
-    public static let name: Swift.String
-  }
-  @frozen public enum LigatureAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = Swift.Int
-    public static let name: Swift.String
-  }
-  @frozen public enum KernAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreFoundation.CGFloat
-    public static let name: Swift.String
-  }
-  @frozen public enum TrackingAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreFoundation.CGFloat
-    public static let name: Swift.String
-  }
-  @frozen public enum StrikethroughStyleAttribute : Foundation.CodableAttributedStringKey, Foundation.ObjectiveCConvertibleAttributedStringKey {
-    public typealias Value = AppKit.NSUnderlineStyle
-    public typealias ObjectiveCValue = Foundation.NSNumber
-    public static let name: Swift.String
-    public static func encode(_ value: AppKit.NSUnderlineStyle, to encoder: any Swift.Encoder) throws
-    public static func decode(from decoder: any Swift.Decoder) throws -> AppKit.NSUnderlineStyle
-  }
-  @frozen public enum UnderlineStyleAttribute : Foundation.CodableAttributedStringKey, Foundation.ObjectiveCConvertibleAttributedStringKey {
-    public typealias Value = AppKit.NSUnderlineStyle
-    public typealias ObjectiveCValue = Foundation.NSNumber
-    public static let name: Swift.String
-    public static func encode(_ value: AppKit.NSUnderlineStyle, to encoder: any Swift.Encoder) throws
-    public static func decode(from decoder: any Swift.Decoder) throws -> AppKit.NSUnderlineStyle
-  }
-  @frozen public enum StrokeColorAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = AppKit.NSColor
-    public static let name: Swift.String
-  }
-  @frozen public enum StrokeWidthAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreFoundation.CGFloat
-    public static let name: Swift.String
-  }
-  @frozen public enum ShadowAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = AppKit.NSShadow
-    public static let name: Swift.String
-  }
-  @frozen public enum TextEffectAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = Foundation.NSAttributedString.TextEffectStyle
-    public static let name: Swift.String
-    public static func encode(_ value: Foundation.NSAttributedString.TextEffectStyle, to encoder: any Swift.Encoder) throws
-    public static func decode(from decoder: any Swift.Decoder) throws -> Foundation.NSAttributedString.TextEffectStyle
-  }
-  @frozen public enum AttachmentAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = AppKit.NSTextAttachment
-    public static let name: Swift.String
-  }
-  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-  @frozen public enum BaselineOffsetAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreFoundation.CGFloat
-    public static let name: Swift.String
-  }
-  @frozen public enum UnderlineColorAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = AppKit.NSColor
-    public static let name: Swift.String
-  }
-  @frozen public enum StrikethroughColorAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = AppKit.NSColor
-    public static let name: Swift.String
-  }
-  @available(macOS, introduced: 12.0, deprecated: 100000.0, message: "This attribute is not supported with TextKit 2")
-  @frozen public enum ObliquenessAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreFoundation.CGFloat
-    public static let name: Swift.String
-  }
-  @available(macOS, introduced: 12.0, deprecated: 100000.0, message: "This attribute is not supported with TextKit 2")
-  @frozen public enum ExpansionAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = CoreFoundation.CGFloat
-    public static let name: Swift.String
-  }
-  @frozen public enum ToolTipAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = Swift.String
-    public static let name: Swift.String
-  }
-  @frozen public enum MarkedClauseSegmentAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = Swift.Int
-    public static let name: Swift.String
-  }
-  @frozen public enum SuperscriptAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = Swift.Int
-    public static let name: Swift.String
-  }
-  @frozen public enum TextAlternativesAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = AppKit.NSTextAlternatives
-    public static let name: Swift.String
-  }
-  @frozen public enum GlyphInfoAttribute : Foundation.CodableAttributedStringKey {
-    public typealias Value = AppKit.NSGlyphInfo
-    public static let name: Swift.String
-  }
-  @frozen public enum CursorAttribute : Foundation.AttributedStringKey {
-    public typealias Value = AppKit.NSCursor
-    public static let name: Swift.String
-  }
-}
-@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension Foundation.AttributedString.AdaptiveImageGlyph {
-  public init(_ nsAdaptiveImageGlyph: AppKit.NSAdaptiveImageGlyph)
-}
-@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension AppKit.NSAdaptiveImageGlyph {
-  convenience public init(_ adaptiveImageGlypth: Foundation.AttributedString.AdaptiveImageGlyph)
-}
-@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension Foundation.AttributeScopes.AppKitAttributes {
-  @frozen public enum AdaptiveImageGlyphAttribute : Foundation.CodableAttributedStringKey, Foundation.ObjectiveCConvertibleAttributedStringKey, Swift.Sendable {
-    public typealias Value = Foundation.AttributedString.AdaptiveImageGlyph
-    public typealias ObjectiveCValue = AppKit.NSAdaptiveImageGlyph
-    public static let name: Swift.String
-    public static var inheritedByAddedText: Swift.Bool
-    #if compiler(>=5.3) && $NonescapableTypes
-    public static var runBoundaries: Foundation.AttributedString.AttributeRunBoundaries? {
-      get
-    }
-    #endif
-    public static func objectiveCValue(for value: Foundation.AttributedString.AdaptiveImageGlyph) throws -> AppKit.NSAdaptiveImageGlyph
-    public static func value(for object: AppKit.NSAdaptiveImageGlyph) throws -> Foundation.AttributedString.AdaptiveImageGlyph
-    public static func encode(_ value: Foundation.AttributedString.AdaptiveImageGlyph, to encoder: any Swift.Encoder) throws
-    public static func decode(from decoder: any Swift.Decoder) throws -> Foundation.AttributedString.AdaptiveImageGlyph
-  }
-}
-@available(macOS 14.0, *)
-extension AppKit.NSColor {
-  convenience public init(resource: DeveloperToolsSupport.ColorResource)
-}
-@available(macOS 10.9, *)
-extension AppKit.NSColor : Swift._ExpressibleByColorLiteral {
-  @nonobjc required convenience public init(_colorLiteralRed red: Swift.Float, green: Swift.Float, blue: Swift.Float, alpha: Swift.Float)
-}
-public typealias _ColorLiteralType = AppKit.NSColor
-@available(macOS 10.9, *)
-extension Foundation.IndexPath {
-  public init(item: Swift.Int, section: Swift.Int)
-  public var item: Swift.Int {
-    get
-    set
-  }
-  public var section: Swift.Int {
-    get
-    set
-  }
-}
-@available(macOS 10.9, *)
-extension Foundation.URLResourceValues {
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(macOS, introduced: 10.10, deprecated: 12.0, message: "Use the QuickLookThumbnailing framework and extension point instead")
-  public var thumbnail: AppKit.NSImage? {
-    get
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public var labelColor: AppKit.NSColor? {
-    get
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public var effectiveIcon: Swift.AnyObject? {
-    get
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public var customIcon: AppKit.NSImage? {
-    get
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(macOS, introduced: 10.10, deprecated: 12.0, message: "Use the QuickLookThumbnailing framework and extension point instead")
-  public var thumbnailDictionary: [Foundation.URLThumbnailDictionaryItem : AppKit.NSImage]? {
-    get
-  }
-  #endif
 }
 extension AppKit.NSScreen {
   #if compiler(>=5.3) && $NonescapableTypes

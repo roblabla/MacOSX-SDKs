@@ -438,7 +438,6 @@ exports:
                        '_$s11ActivityKit0A12OutputClientC11descriptors8matchingSayAA0A10DescriptorVGAA0A9PredicateV_tKF', 
                        '_$s11ActivityKit0A12OutputClientC15observePayloads2id4feed7Combine12AnyPublisherVyAA0jA7Payload_ps5Error_pGSS_AA0A10UpdateFeedOtKF', 
                        '_$s11ActivityKit0A12OutputClientC15observePayloads2id7Combine12AnyPublisherVyAA0iA7Payload_ps5Error_pGSS_tKF', 
-                       '_$s11ActivityKit0A12OutputClientC17currentActivitiesSDySSAA010SubscribedA0VGyF', 
                        '_$s11ActivityKit0A12OutputClientC17observeActivities7Combine12AnyPublisherVySDySSAA010SubscribedA0VGs5NeverOGyKF', 
                        '_$s11ActivityKit0A12OutputClientC18observeDescriptors7Combine12AnyPublisherVySayAA0A10DescriptorVGs5NeverOGyKF', 
                        '_$s11ActivityKit0A12OutputClientC18observeDescriptors8matching7Combine12AnyPublisherVySayAA0A10DescriptorVGs5Error_pGAA0A9PredicateV_tKF', 

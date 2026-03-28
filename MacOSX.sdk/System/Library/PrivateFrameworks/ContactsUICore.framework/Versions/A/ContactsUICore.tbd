@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ContactsUICore.framework/Versions/A/ContactsUICore'
-current-version: 3683.200.91
+current-version: 3683.255.31
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1166,11 +1166,13 @@ exports:
                        '_$s14ContactsUICore24ContactCardConfigurationV07updatedC0So09CNMutableC0CSgvg', 
                        '_$s14ContactsUICore24ContactCardConfigurationV07updatedC0So09CNMutableC0CSgvpMV', 
                        '_$s14ContactsUICore24ContactCardConfigurationV07updatedC0So09CNMutableC0CSgvs', 
+                       '_$s14ContactsUICore24ContactCardConfigurationV2eeoiySbAC_ACtFZ', 
                        '_$s14ContactsUICore24ContactCardConfigurationV7contact0F5Store15actionsProvider20authorizationContext010customViewE008propertymE004isMeD0ACSo9CNContactC_So0qG0CSo011CNUIContactd7ActionsI0_pSgSo015CNAuthorizationK0CAA0cd6CustommE0VSgSo0rd8PropertymE0CSgSbtcfC', 
                        '_$s14ContactsUICore24ContactCardConfigurationV7contactSo9CNContactCvg', 
                        '_$s14ContactsUICore24ContactCardConfigurationV7contactSo9CNContactCvpMV', 
                        '_$s14ContactsUICore24ContactCardConfigurationVMa', '_$s14ContactsUICore24ContactCardConfigurationVMn', 
-                       '_$s14ContactsUICore24ContactCardConfigurationVN', '_$s14ContactsUICore24ContactCardInlineActionsV4bodyQrvg', 
+                       '_$s14ContactsUICore24ContactCardConfigurationVN', '_$s14ContactsUICore24ContactCardConfigurationVSQAAMc', 
+                       '_$s14ContactsUICore24ContactCardInlineActionsV4bodyQrvg', 
                        '_$s14ContactsUICore24ContactCardInlineActionsV4bodyQrvpMV', 
                        '_$s14ContactsUICore24ContactCardInlineActionsV4bodyQrvpQOMQ', 
                        '_$s14ContactsUICore24ContactCardInlineActionsV7SwiftUI4ViewAAMc', 
@@ -1365,6 +1367,8 @@ exports:
                        '_$s14ContactsUICore26ContactCardPropertyRowItemV10shouldStarSbvpMV', 
                        '_$s14ContactsUICore26ContactCardPropertyRowItemV10symbolNameSSSgvg', 
                        '_$s14ContactsUICore26ContactCardPropertyRowItemV10symbolNameSSSgvpMV', 
+                       '_$s14ContactsUICore26ContactCardPropertyRowItemV11isSuggestedSbvg', 
+                       '_$s14ContactsUICore26ContactCardPropertyRowItemV11isSuggestedSbvpMV', 
                        '_$s14ContactsUICore26ContactCardPropertyRowItemV11propertyKeys07PartialI4PathCySo9CNContactCGSgvg', 
                        '_$s14ContactsUICore26ContactCardPropertyRowItemV11propertyKeys07PartialI4PathCySo9CNContactCGSgvpMV', 
                        '_$s14ContactsUICore26ContactCardPropertyRowItemV12displayValueSSvg', 
@@ -1645,10 +1649,12 @@ exports:
                        '_$s14ContactsUICore33CatalystPosterXPCClientConnectionCMo', 
                        '_$s14ContactsUICore33CatalystPosterXPCClientConnectionCN', 
                        '_$s14ContactsUICore33CatalystPosterXPCClientConnectionCfD', 
+                       '_$s14ContactsUICore34ContactCardCustomViewConfigurationV2eeoiySbAC_ACtFZ', 
                        '_$s14ContactsUICore34ContactCardCustomViewConfigurationV5title0H14IconSymbolName0hI5Color4body12actionTitles029trailingDisclosureSystemImageK010allowsCopyAC10Foundation16AttributedStringV_SSSgSo7NSColorCSgAMSgSaySSGANSbtcfC', 
                        '_$s14ContactsUICore34ContactCardCustomViewConfigurationVMa', 
                        '_$s14ContactsUICore34ContactCardCustomViewConfigurationVMn', 
                        '_$s14ContactsUICore34ContactCardCustomViewConfigurationVN', 
+                       '_$s14ContactsUICore34ContactCardCustomViewConfigurationVSQAAMc', 
                        '_$s14ContactsUICore34ContactCardGroupHeaderItemProtocolMp', 
                        '_$s14ContactsUICore34ContactCardGroupHeaderItemProtocolP12displayValueSSvgTj', 
                        '_$s14ContactsUICore34ContactCardGroupHeaderItemProtocolP12displayValueSSvgTq', 

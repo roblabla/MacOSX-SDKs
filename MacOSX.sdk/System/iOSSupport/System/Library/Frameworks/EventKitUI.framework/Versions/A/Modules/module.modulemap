@@ -1,4 +1,4 @@
-framework module EventKitUI [extern_c] {
+framework module EventKitUI {
   umbrella header "EventKitUI.h"
   
   export *

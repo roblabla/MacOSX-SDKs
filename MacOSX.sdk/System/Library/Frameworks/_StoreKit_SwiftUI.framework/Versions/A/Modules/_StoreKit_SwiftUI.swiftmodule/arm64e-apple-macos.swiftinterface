@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
-// swift-module-flags: -target arm64e-apple-macos26.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 815.1.15 -module-name _StoreKit_SwiftUI
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-module-flags: -target arm64e-apple-macos26.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 815.2.12.1.1 -module-name _StoreKit_SwiftUI
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import AppKit
 import Combine
 import CoreGraphics
@@ -431,8 +431,7 @@ extension _StoreKit_SwiftUI.SubscriptionStoreControlStyle where Self == _StoreKi
     get
   }
 }
-@available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, *)
-@available(macOS, unavailable)
+@available(iOS 26.0, macCatalyst 26.0, tvOS 26.0, macOS 26.2, *)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension SwiftUICore.View {

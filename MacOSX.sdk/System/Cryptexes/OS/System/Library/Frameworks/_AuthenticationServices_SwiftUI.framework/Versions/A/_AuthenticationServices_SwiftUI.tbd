@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_AuthenticationServices_SwiftUI.framework/Versions/A/_AuthenticationServices_SwiftUI'
-current-version: 622.2.11
+current-version: 623.1.14
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -33,6 +33,21 @@ exports:
                        '_$s31_AuthenticationServices_SwiftUI21ASAuthorizationResultOMa', 
                        '_$s31_AuthenticationServices_SwiftUI21ASAuthorizationResultOMn', 
                        '_$s31_AuthenticationServices_SwiftUI21ASAuthorizationResultON', 
+                       '_$s31_AuthenticationServices_SwiftUI21CredentialDataManagerV015reportPublicKeyE6Update22relyingPartyIdentifier10userHandle7newNameySS_10Foundation0F0VSStYaKF', 
+                       '_$s31_AuthenticationServices_SwiftUI21CredentialDataManagerV015reportPublicKeyE6Update22relyingPartyIdentifier10userHandle7newNameySS_10Foundation0F0VSStYaKFTu', 
+                       '_$s31_AuthenticationServices_SwiftUI21CredentialDataManagerV020reportUnusedPasswordE06domain8userNameySS_SStYaKF', 
+                       '_$s31_AuthenticationServices_SwiftUI21CredentialDataManagerV020reportUnusedPasswordE06domain8userNameySS_SStYaKFTu', 
+                       '_$s31_AuthenticationServices_SwiftUI21CredentialDataManagerV022reportUnknownPublicKeyE022relyingPartyIdentifier12credentialIDySS_10Foundation0F0VtYaKF', 
+                       '_$s31_AuthenticationServices_SwiftUI21CredentialDataManagerV022reportUnknownPublicKeyE022relyingPartyIdentifier12credentialIDySS_10Foundation0F0VtYaKFTu', 
+                       '_$s31_AuthenticationServices_SwiftUI21CredentialDataManagerV37reportAllAcceptedPublicKeyCredentials22relyingPartyIdentifier10userHandle08acceptedE3IDsySS_10Foundation0F0VSayAJGtYaKF', 
+                       '_$s31_AuthenticationServices_SwiftUI21CredentialDataManagerV37reportAllAcceptedPublicKeyCredentials22relyingPartyIdentifier10userHandle08acceptedE3IDsySS_10Foundation0F0VSayAJGtYaKFTu', 
+                       '_$s31_AuthenticationServices_SwiftUI21CredentialDataManagerV4save8password3for5titleySo010ASPasswordE0C_0aB015ASAutoFillScopeOSSSgtYaKF', 
+                       '_$s31_AuthenticationServices_SwiftUI21CredentialDataManagerV4save8password3for5titleySo010ASPasswordE0C_0aB015ASAutoFillScopeOSSSgtYaKFTu', 
+                       '_$s31_AuthenticationServices_SwiftUI21CredentialDataManagerV4save8password3for5titleySo010ASPasswordE0C_0aB018ASAutoFillURLScopeVSSSgtYaKF', 
+                       '_$s31_AuthenticationServices_SwiftUI21CredentialDataManagerV4save8password3for5titleySo010ASPasswordE0C_0aB018ASAutoFillURLScopeVSSSgtYaKFTu', 
+                       '_$s31_AuthenticationServices_SwiftUI21CredentialDataManagerVMa', 
+                       '_$s31_AuthenticationServices_SwiftUI21CredentialDataManagerVMn', 
+                       '_$s31_AuthenticationServices_SwiftUI21CredentialDataManagerVN', 
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV0cD04ViewAAMc', 
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV4bodyQrvg', 
                        '_$s31_AuthenticationServices_SwiftUI21SignInWithAppleButtonV4bodyQrvpMV', 
@@ -80,6 +95,8 @@ exports:
                        '_$s31_AuthenticationServices_SwiftUI23AuthorizationControllerVN', 
                        '_$s7SwiftUI17EnvironmentValuesV024_AuthenticationServices_aB0E03webE7SessionAD03WebeH0Vvg', 
                        '_$s7SwiftUI17EnvironmentValuesV024_AuthenticationServices_aB0E03webE7SessionAD03WebeH0VvpMV', 
+                       '_$s7SwiftUI17EnvironmentValuesV024_AuthenticationServices_aB0E21credentialDataManagerAD010CredentialhI0Vvg', 
+                       '_$s7SwiftUI17EnvironmentValuesV024_AuthenticationServices_aB0E21credentialDataManagerAD010CredentialhI0VvpMV', 
                        '_$s7SwiftUI17EnvironmentValuesV024_AuthenticationServices_aB0E23authorizationControllerAD013AuthorizationH0Vvg', 
                        '_$s7SwiftUI17EnvironmentValuesV024_AuthenticationServices_aB0E23authorizationControllerAD013AuthorizationH0VvpMV', 
                        '_$s7SwiftUI17EnvironmentValuesV024_AuthenticationServices_aB0E23credentialExportManager0eF0012ASCredentialhI0Cvg', 

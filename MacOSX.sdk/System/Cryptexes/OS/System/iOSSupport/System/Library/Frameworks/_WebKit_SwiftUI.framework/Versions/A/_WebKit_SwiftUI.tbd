@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_WebKit_SwiftUI.framework/Versions/A/_WebKit_SwiftUI'
-current-version: 622.2.11
+current-version: 623.1.14
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -71,6 +71,8 @@ exports:
                        '_$s7SwiftUI4ViewP08_WebKit_aB0E03webC19ScrollInputBehavior_3forQrAA0ghI0V_AA0gH4KindVtFQOMQ', 
                        '_$s7SwiftUI4ViewP08_WebKit_aB0E03webC21MagnificationGesturesyQrAD0dC0V0gH8BehaviorVF', 
                        '_$s7SwiftUI4ViewP08_WebKit_aB0E03webC21MagnificationGesturesyQrAD0dC0V0gH8BehaviorVFQOMQ', 
+                       '_$s7SwiftUI4ViewP08_WebKit_aB0E03webC21ScrollEdgeEffectStyle_3forQrAA0ghiJ0VSg_AA0H0O3SetVtF', 
+                       '_$s7SwiftUI4ViewP08_WebKit_aB0E03webC21ScrollEdgeEffectStyle_3forQrAA0ghiJ0VSg_AA0H0O3SetVtFQOMQ', 
                        '_$s7SwiftUI4ViewP08_WebKit_aB0E03webC22OnScrollGeometryChange3for2of6actionQrqd__m_qd__AA0hI0Vcyqd___qd__tctSHRd__lF', 
                        '_$s7SwiftUI4ViewP08_WebKit_aB0E03webC22OnScrollGeometryChange3for2of6actionQrqd__m_qd__AA0hI0Vcyqd___qd__tctSHRd__lFQOMQ', 
                        '_$s7SwiftUI4ViewP08_WebKit_aB0E03webC25ElementFullscreenBehavioryQrAD0dC0V0ghI0VF', 

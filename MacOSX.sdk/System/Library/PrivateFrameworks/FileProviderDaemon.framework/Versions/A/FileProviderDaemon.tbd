@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/FileProviderDaemon.framework/Versions/A/FileProviderDaemon'
-current-version: 3882.40.131
+current-version: 3882.60.27
 compatibility-version: 0
 swift-abi-version: 7
 allowable-clients:
@@ -1055,13 +1055,14 @@ exports:
                        '_$s18FileProviderDaemon8FilenameVyACSScfC', '_$s18FileProviderDaemon9FPCKPhaseO11descriptionSSvg', 
                        '_$s18FileProviderDaemon9FPCKPhaseO11descriptionSSvpMV', '_$s18FileProviderDaemon9FPCKPhaseO12rtInvariantsyA2CmFWC', 
                        '_$s18FileProviderDaemon9FPCKPhaseO14clearPurgatoryyA2CmFWC', 
-                       '_$s18FileProviderDaemon9FPCKPhaseO15reingest1stPassyA2CmFWC', 
-                       '_$s18FileProviderDaemon9FPCKPhaseO15reingest2ndPassyA2CmFWC', 
+                       '_$s18FileProviderDaemon9FPCKPhaseO15reingestPostSPSyA2CmFWC', 
                        '_$s18FileProviderDaemon9FPCKPhaseO15sendDiagnosticsyA2CmFWC', 
                        '_$s18FileProviderDaemon9FPCKPhaseO15superPendingSetyA2CmFWC', 
                        '_$s18FileProviderDaemon9FPCKPhaseO16diskVsFSSnapshotyA2CmFWC', 
                        '_$s18FileProviderDaemon9FPCKPhaseO19checkBackupManifestyA2CmFWC', 
                        '_$s18FileProviderDaemon9FPCKPhaseO22fsSnapshotVsFPSnapshotyA2CmFWC', 
+                       '_$s18FileProviderDaemon9FPCKPhaseO26reingestPostFSvsFPSnapshotyA2CmFWC', 
+                       '_$s18FileProviderDaemon9FPCKPhaseO28reingestPostDiskvsFSSnapshotyA2CmFWC', 
                        '_$s18FileProviderDaemon9FPCKPhaseO3endyA2CmFWC', '_$s18FileProviderDaemon9FPCKPhaseO5erroryA2CmFWC', 
                        '_$s18FileProviderDaemon9FPCKPhaseO5startyA2CmFWC', '_$s18FileProviderDaemon9FPCKPhaseO8rawValueACSgSi_tcfC', 
                        '_$s18FileProviderDaemon9FPCKPhaseO8rawValueSivg', '_$s18FileProviderDaemon9FPCKPhaseO8rawValueSivpMV', 

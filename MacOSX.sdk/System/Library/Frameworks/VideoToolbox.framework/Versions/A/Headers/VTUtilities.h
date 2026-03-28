@@ -54,10 +54,11 @@ VTCreateCGImageFromCVPixelBuffer(
 	@param	codecType
 		The CMVideoCodecType corresponding the format being requested
 	@discussion
-		This call will find and register a video decoder for the provided CMVideoCodecType if
-		such a decoder is available on the system but not registered by default.
+ 		This call will register a video decoder for the provided CMVideoCodecType if such a decoder is present on the system but not registered by default.
+ 		You can call VTIsHardwareDecodeAvailable to confirm availability of the decoder after calling VTRegisterSupplementalVideoDecoderIfAvailable.
+ 		Supplemental video decoders registered through this API will not work in applications which have not performed this opt in.  For broadest ecosystem compatibility, we encourage use of platform-standard formats such as H.264, HEVC, and AV1.
 */
-VT_EXPORT void VTRegisterSupplementalVideoDecoderIfAvailable( CMVideoCodecType codecType ) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos, visionos);
+VT_EXPORT void VTRegisterSupplementalVideoDecoderIfAvailable( CMVideoCodecType codecType ) API_AVAILABLE(macos(11.0), ios(26.2), tvos(26.2), visionos(26.2)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function		VTCopyVideoDecoderExtensionProperties

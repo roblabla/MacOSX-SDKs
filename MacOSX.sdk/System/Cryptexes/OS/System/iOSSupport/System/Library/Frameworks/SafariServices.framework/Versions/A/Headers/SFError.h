@@ -16,4 +16,5 @@ typedef NS_ENUM(NSInteger, SFErrorCode) {
     SFErrorLoadingInterrupted = 3,
     SFErrorInternalError = 4,
     SFErrorMissingEntitlement = 5,
+    SFErrorMaximumAttemptsExceeded = 6,
 } API_AVAILABLE(ios(10.0), macCatalyst(13.4));

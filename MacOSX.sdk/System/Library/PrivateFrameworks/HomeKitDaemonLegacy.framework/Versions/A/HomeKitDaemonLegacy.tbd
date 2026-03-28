@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeKitDaemonLegacy.framework/Versions/A/HomeKitDaemonLegacy'
-current-version: 1371.2.9
+current-version: 1388.3.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -186,7 +186,10 @@ exports:
                        '_$sSo047HMDCameraRecordingEventDailySummaryHouseholdLogC7FactoryC19HomeKitDaemonLegacyEABycfC', 
                        '_$sSo047HMDCameraRecordingEventDailySummaryHouseholdLogC7FactoryC19HomeKitDaemonLegacyEABycfc', 
                        '_$sSo047HMDCameraRecordingEventDailySummaryHouseholdLogC7FactoryCMa', 
-                       '_$sSo11HMDRegistryCMa', '_$sSo20HMDFMFHandlerFactoryC19HomeKitDaemonLegacyEABycfC', 
+                       '_$sSo11HMDRegistryCMa', '_$sSo20HMDEventCounterGroupC19HomeKitDaemonLegacyE7contextSo0aB7Context_pSgvpfi', 
+                       '_$sSo20HMDEventCounterGroupC19HomeKitDaemonLegacyEABycfC', 
+                       '_$sSo20HMDEventCounterGroupC19HomeKitDaemonLegacyEABycfc', 
+                       '_$sSo20HMDEventCounterGroupCMa', '_$sSo20HMDFMFHandlerFactoryC19HomeKitDaemonLegacyEABycfC', 
                        '_$sSo20HMDFMFHandlerFactoryC19HomeKitDaemonLegacyEABycfc', 
                        '_$sSo20HMDFMFHandlerFactoryCMa', '_$sSo24HMDHomeDefaultDataSourceCMa', 
                        '_$sSo24HMDHomeManagerDataSourceC19HomeKitDaemonLegacyEABycfC', 
@@ -199,21 +202,33 @@ exports:
                        '_$sSo31HMDCameraRecordingEventObserverCMa', '_$sSo32HMDCameraStreamManagerDataSourceC19HomeKitDaemonLegacyEABycfC', 
                        '_$sSo32HMDCameraStreamManagerDataSourceC19HomeKitDaemonLegacyEABycfc', 
                        '_$sSo32HMDCameraStreamManagerDataSourceCMa', '_$sSo32HMDHAPAccessoryDefaultDataSourceCMa', 
-                       '_$sSo33HMDAccessorySetupMetricDispatcherC19HomeKitDaemonLegacyE07networkC019discoveryController0i4InfoK09sessionID19idsIdentifierString011currentWiFiL00rsT11NetworkRSSI12numResidents0W21AppleMediaAccessories019accessoryDiagnosticL0018primaryResidentIdspQ0025primaryResidentDiagnosticL08homeUUID025primaryResidentDiagnosticL7FetchedSo15HMMHomeLogEventCAC09DiscoveryK0C_AC0ulK0CS2SSo05HMFWituL0Cs5Int32VS2iSo021HMAccessoryDiagnosticl15ProtoDiagnosticL0CSgSSSgA2_10Foundation4UUIDVSbtF', 
+                       '_$sSo32HMDRemoteMessageTxReportLogEventC19HomeKitDaemonLegacyE9startTimeABSd_tcfC', 
+                       '_$sSo32HMDRemoteMessageTxReportLogEventC19HomeKitDaemonLegacyE9startTimeABSd_tcfc', 
+                       '_$sSo32HMDRemoteMessageTxReportLogEventC19HomeKitDaemonLegacyEABycfC', 
+                       '_$sSo32HMDRemoteMessageTxReportLogEventC19HomeKitDaemonLegacyEABycfc', 
+                       '_$sSo32HMDRemoteMessageTxReportLogEventCMa', '_$sSo33HMDAccessorySetupMetricDispatcherC19HomeKitDaemonLegacyE07networkC019discoveryController0i4InfoK09sessionID19idsIdentifierString011currentWiFiL00rsT11NetworkRSSI12numResidents0W21AppleMediaAccessories019accessoryDiagnosticL0018primaryResidentIdspQ0025primaryResidentDiagnosticL08homeUUID025primaryResidentDiagnosticL7FetchedSo15HMMHomeLogEventCAC09DiscoveryK0C_AC0ulK0CS2SSo05HMFWituL0Cs5Int32VS2iSo021HMAccessoryDiagnosticl15ProtoDiagnosticL0CSgSSSgA2_10Foundation4UUIDVSbtF', 
                        '_$sSo33HMDAccessorySetupMetricDispatcherC19HomeKitDaemonLegacyE24obtainDiscoveryAssertionyXlyF', 
                        '_$sSo33HMDAccessorySetupMetricDispatcherC19HomeKitDaemonLegacyE25releaseDiscoveryAssertion15assertionHandleyyXl_tF', 
-                       '_$sSo39HMDCameraSettingProactiveReaderLogEventC19HomeKitDaemonLegacyE9startTimeABSd_tcfC', 
+                       '_$sSo35HMDCameraCloudStorageManagerFactoryC19HomeKitDaemonLegacyEABycfC', 
+                       '_$sSo35HMDCameraCloudStorageManagerFactoryC19HomeKitDaemonLegacyEABycfc', 
+                       '_$sSo35HMDCameraCloudStorageManagerFactoryCMa', '_$sSo39HMDCameraSettingProactiveReaderLogEventC19HomeKitDaemonLegacyE9startTimeABSd_tcfC', 
                        '_$sSo39HMDCameraSettingProactiveReaderLogEventC19HomeKitDaemonLegacyE9startTimeABSd_tcfc', 
                        '_$sSo39HMDCameraSettingProactiveReaderLogEventC19HomeKitDaemonLegacyEABycfC', 
                        '_$sSo39HMDCameraSettingProactiveReaderLogEventC19HomeKitDaemonLegacyEABycfc', 
-                       '_$sSo39HMDCameraSettingProactiveReaderLogEventCMa' ]
-    objc-classes:    [ HMDAccountChangeObserver, HMDCameraRecordingEventDailySummaryHouseholdLogEventFactory, 
-                       HMDCameraRecordingEventObserver, HMDCameraSettingProactiveReaderLogEvent, 
+                       '_$sSo39HMDCameraSettingProactiveReaderLogEventCMa', '_$sSo43HMDCameraRecordingSessionErrorResultFactoryC19HomeKitDaemonLegacyEABycfC', 
+                       '_$sSo43HMDCameraRecordingSessionErrorResultFactoryC19HomeKitDaemonLegacyEABycfc', 
+                       '_$sSo43HMDCameraRecordingSessionErrorResultFactoryCMa', '_$sSo55HMDCameraRecordingLoadBalancerErrorResultTrackerFactoryC19HomeKitDaemonLegacyEABycfC', 
+                       '_$sSo55HMDCameraRecordingLoadBalancerErrorResultTrackerFactoryC19HomeKitDaemonLegacyEABycfc', 
+                       '_$sSo55HMDCameraRecordingLoadBalancerErrorResultTrackerFactoryCMa' ]
+    objc-classes:    [ HMDAccountChangeObserver, HMDCameraCloudStorageManagerFactory, 
+                       HMDCameraRecordingEventDailySummaryHouseholdLogEventFactory, 
+                       HMDCameraRecordingEventObserver, HMDCameraRecordingLoadBalancerErrorResultTrackerFactory, 
+                       HMDCameraRecordingSessionErrorResultFactory, HMDCameraSettingProactiveReaderLogEvent, 
                        HMDCameraStreamManagerDataSource, HMDDiscoveryController, 
-                       HMDFMFHandlerFactory, HMDHAPAccessoryDefaultDataSource, HMDHomeDefaultDataSource, 
-                       HMDHomeManagerDataSource, HMDHomeManagerXPCClientConnectionsManagerFactory, 
+                       HMDEventCounterGroup, HMDFMFHandlerFactory, HMDHAPAccessoryDefaultDataSource, 
+                       HMDHomeDefaultDataSource, HMDHomeManagerDataSource, HMDHomeManagerXPCClientConnectionsManagerFactory, 
                        HMDKeyPaths, HMDMainDriver, HMDMainDriverUtilities, HMDNetworkInfoController, 
-                       HMDRegistry, HMDUserDefaultDataSource, _TtC19HomeKitDaemonLegacy28HMDRemoteConnectivityMonitor, 
-                       _TtC19HomeKitDaemonLegacy40CameraRecordingEventDailySummaryLogEvent, 
+                       HMDRegistry, HMDRemoteMessageTxReportLogEvent, HMDUserDefaultDataSource, 
+                       _TtC19HomeKitDaemonLegacy28HMDRemoteConnectivityMonitor, _TtC19HomeKitDaemonLegacy40CameraRecordingEventDailySummaryLogEvent, 
                        _TtC19HomeKitDaemonLegacy7Account ]
 ...

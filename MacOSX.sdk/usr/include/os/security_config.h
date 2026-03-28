@@ -47,6 +47,9 @@ __BEGIN_DECLS
  *
  * @constant OS_SECURITY_CONFIG_TPRO
  * Indicates that Trusted Path Read-Only (TPRO) is enabled for the process/task.
+ *
+ * @constant OS_SECURITY_CONFIG_GUARD_OBJECTS
+ * Indicates that the Guard Objects configuration is enabled for the process/task.
  */
 __API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0), driverkit(25.0))
 OS_OPTIONS(os_security_config, uint64_t,
@@ -55,6 +58,7 @@ OS_OPTIONS(os_security_config, uint64_t,
   OS_SECURITY_CONFIG_TPRO OS_SWIFT_NAME(trustedPathReadOnly) = 0x2,
   OS_SECURITY_CONFIG_MTE OS_SWIFT_NAME(memoryTaggingExtension) = 0x4,
 
+  OS_SECURITY_CONFIG_GUARD_OBJECTS OS_SWIFT_NAME(guardObjects) = 0x100,
 );
 
 /*!

@@ -43,4 +43,10 @@ framework module SwiftUICore [system] {
     // dependencies; exposes `\.glassDiffusion` and `_Glass.Diffusion`.
     module Radar161733934 {
     }
+
+    // Exposes `environment.nearestScrollableAxes` for UIKit
+    // hosting view keyboard safe area updates.
+    // FIXME: Remove when this lands in the build.
+    module Radar161859309 {
+    }
 }

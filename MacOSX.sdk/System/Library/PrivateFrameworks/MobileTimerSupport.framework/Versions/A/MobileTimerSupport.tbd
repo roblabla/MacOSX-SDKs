@@ -173,6 +173,8 @@ exports:
                        '_$s18MobileTimerSupport15MTReporterProxyC20didTearDownToneAlert14withIdentifierySS_tFTq', 
                        '_$s18MobileTimerSupport15MTReporterProxyC21didCreateLiveActivity8forAlarm6withId4dateySS_SS10Foundation4DateVtFTj', 
                        '_$s18MobileTimerSupport15MTReporterProxyC21didCreateLiveActivity8forAlarm6withId4dateySS_SS10Foundation4DateVtFTq', 
+                       '_$s18MobileTimerSupport15MTReporterProxyC21processDismissedAlarmyySo7MTAlarmCFTj', 
+                       '_$s18MobileTimerSupport15MTReporterProxyC21processDismissedAlarmyySo7MTAlarmCFTq', 
                        '_$s18MobileTimerSupport15MTReporterProxyC23didTriggerSoundPlayback6withIdySS_tFTj', 
                        '_$s18MobileTimerSupport15MTReporterProxyC23didTriggerSoundPlayback6withIdySS_tFTq', 
                        '_$s18MobileTimerSupport15MTReporterProxyC24didUpdateAudioReporterIdyySuFTj', 

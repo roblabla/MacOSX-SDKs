@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DesktopServicesPriv.framework/Versions/A/DesktopServicesPriv'
-current-version: 1827.1.11
+current-version: 1827.2.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CopyNodeRef, _DSArchiveServiceErrorDomain, _DSArchiveServiceStreamingXPCInterface, 

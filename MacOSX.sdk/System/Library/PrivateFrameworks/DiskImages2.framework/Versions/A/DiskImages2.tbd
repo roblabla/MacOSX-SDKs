@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DiskImages2.framework/Versions/A/DiskImages2'
-current-version: 514.40.7
+current-version: 514.61.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]

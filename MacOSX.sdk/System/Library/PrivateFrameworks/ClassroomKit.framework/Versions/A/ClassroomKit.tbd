@@ -259,13 +259,11 @@ exports:
                        CRKIDSMessageNotificationInfo, CRKIDSMessageOptions, CRKIDSMessagePayload, 
                        CRKIDSSendMessageOperation, CRKIDSWaitAndSendIDSMessageOperation, 
                        CRKIdentityConfiguration, CRKIdentityRefFactory, CRKIdentityServiceFetchCertificatesRequest, 
-                       CRKIdentityServiceFetchCertificatesResultObject, CRKIdentityServiceMockingRequest, 
-                       CRKIdentitySharingRequestCertificateRequest, CRKIdentitySharingSendAdvertisingIdentifierAndCertificateRequest, 
-                       CRKIdentitySharingSendCertificateRequest, CRKIfaddrs, CRKIfaddrsEnumerator, 
-                       CRKInMemoryCertificate, CRKInMemoryIdentity, CRKInMemoryKeychain, 
-                       CRKInMemoryPrivateKey, CRKIndexPair, CRKInstructor, CRKInstructorExtensionContext, 
-                       CRKInstructorExtensionOptimizerShim, CRKInstructorExtensionProxy, 
-                       CRKInstructorHostContext, CRKInterfaceOrientationMonitor, 
+                       CRKIdentityServiceFetchCertificatesResultObject, CRKIfaddrs, 
+                       CRKIfaddrsEnumerator, CRKInMemoryCertificate, CRKInMemoryIdentity, 
+                       CRKInMemoryKeychain, CRKInMemoryPrivateKey, CRKIndexPair, 
+                       CRKInstructor, CRKInstructorExtensionContext, CRKInstructorExtensionOptimizerShim, 
+                       CRKInstructorExtensionProxy, CRKInstructorHostContext, CRKInterfaceOrientationMonitor, 
                        CRKInternetDateProvider, CRKInternetDateServiceProxy, CRKInvalidateTransportOperation, 
                        CRKInvitationSession, CRKInviteToCourseRequest, CRKJSONConverter, 
                        CRKJoinControlGroupRequest, CRKKeyValuePair, CRKKeyValueTable, 
@@ -455,7 +453,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement'
-current-version: 245
+current-version: 246.60.2
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

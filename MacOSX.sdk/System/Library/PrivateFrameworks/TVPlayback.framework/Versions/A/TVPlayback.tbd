@@ -214,7 +214,7 @@ exports:
                        TVPMutableInterstitial, TVPOffSubtitleOption, TVPPlaybackReportingEventCollection, 
                        TVPPlaybackStartupEvent, TVPPlaybackState, TVPPlaybackUtilities, 
                        TVPPlayer, TVPPlayerItem, TVPPlaylist, TVPReachabilityMonitor, 
-                       TVPReportingSession, TVPResourceLoadingRequest, TVPSecureKeyRequest, 
-                       TVPStateMachine, TVPSubtitleOption, TVPTimeRange, TVPURLMediaItem, 
-                       TVPVideoView ]
+                       TVPReportingSession, TVPResourceLoadingRequest, TVPRoutingManager, 
+                       TVPSecureKeyRequest, TVPStateMachine, TVPSubtitleOption, TVPTimeRange, 
+                       TVPURLMediaItem, TVPVideoView ]
 ...

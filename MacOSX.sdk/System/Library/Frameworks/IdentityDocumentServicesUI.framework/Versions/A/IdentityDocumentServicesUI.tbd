@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/IdentityDocumentServicesUI.framework/Versions/A/IdentityDocumentServicesUI'
-current-version: 8.109
+current-version: 8.203
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

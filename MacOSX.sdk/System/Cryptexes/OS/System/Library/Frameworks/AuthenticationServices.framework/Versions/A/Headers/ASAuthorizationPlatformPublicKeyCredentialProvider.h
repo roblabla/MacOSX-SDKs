@@ -1,10 +1,9 @@
 // Copyright © 2020 Apple Inc. All rights reserved.
 
+#import <AuthenticationServices/ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest.h>
 #import <AuthenticationServices/ASAuthorizationProvider.h>
 #import <AuthenticationServices/ASAuthorizationWebBrowserPlatformPublicKeyCredentialProvider.h>
 #import <AuthenticationServices/ASFoundation.h>
-
-#import <AuthenticationServices/ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest.h>
 
 @class ASAuthorizationPlatformPublicKeyCredentialAssertionRequest;
 @class ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest;

@@ -162,7 +162,7 @@ exports:
                        _ICIsSandboxModeEnabled, _ICJPEGDataFromCGImage, _ICKeyPathFromSelector, 
                        _ICKeyPathFromSelectors, _ICLaunchConfigurationEnvironmentWithString, 
                        _ICLocalAccountDidChooseToMigrateKey, _ICLocalAccountDidChooseToMigrateNotification, 
-                       _ICLocalAccountPrefIdentifier, _ICManagedObjectContextUpdaterChangeDictionaryKey, 
+                       _ICLocalAccountPrefIdentifier, _ICMachTimeToSeconds, _ICManagedObjectContextUpdaterChangeDictionaryKey, 
                        _ICManagedObjectContextUpdaterDidMergeNotification, _ICMentionNotificationsPrefIdentifier, 
                        _ICMigrationStateChangeAccountID, _ICMigrationStateChangeUserInitiated, 
                        _ICMigrationStateDidChangeNotification, _ICMigrationStateWillChangeNotification, 

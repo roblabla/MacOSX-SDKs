@@ -9,10 +9,11 @@ allowable-clients:
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FindMyAutomationKit, FindMyCloudKit, FindMyCommonTests, FindMyCrypto, 
                        FindMyLocate, FindMyLocateObjCWrapper, FindMyServerInteraction, 
-                       FindMyStorage, FindMyUnsafeAsyncBridging, FindingUI, FindingUIAngel, 
-                       findmybeaconingd, findmydevicetool, findmylocateagent, findmylocated, 
-                       findmylocatedTests, searchpartyd, searchpartydTests, searchpartyuseragent, 
-                       sptool ]
+                       FindMyServiceValidation, FindMyServiceValidationTests, FindMyStorage, 
+                       FindMyUnsafeAsyncBridging, FindingUI, FindingUIAngel, findmybeaconingd, 
+                       findmydevice-user-agent-macos, findmydeviced, findmydevicetool, 
+                       findmylocateagent, findmylocated, findmylocatedTests, searchpartyd, 
+                       searchpartydTests, searchpartyuseragent, sptool ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

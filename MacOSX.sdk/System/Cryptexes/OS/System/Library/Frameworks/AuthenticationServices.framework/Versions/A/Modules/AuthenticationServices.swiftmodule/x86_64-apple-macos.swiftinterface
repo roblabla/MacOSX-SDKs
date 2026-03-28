@@ -1,15 +1,17 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
-// swift-module-flags: -target x86_64-apple-macos26.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7622.2.11.11.5 -module-name AuthenticationServices
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-module-flags: -target x86_64-apple-macos26.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7623.1.14.11.9 -module-name AuthenticationServices
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 @_exported import AuthenticationServices
 import CryptoKit
 import DeveloperToolsSupport
 import Foundation
+import Security
 import Swift
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+import os.log
 import os
 @available(macOS 15.4, *)
 @available(iOS, unavailable)
@@ -97,6 +99,47 @@ extension AuthenticationServices.ASAuthorizationPlatformPublicKeyCredentialRegis
   }
   #endif
 }
+@available(iOS 26.2, visionOS 26.2, macOS 26.2, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+public struct ASAutoFillURLScope : Swift.Codable, Swift.Hashable, Swift.Sendable {
+  public enum Scheme : Swift.String, Swift.Codable, Swift.Sendable {
+    case http
+    case https
+    #if compiler(>=5.3) && $NonescapableTypes
+    public init?(rawValue: Swift.String)
+    #endif
+    @available(iOS 26.2, visionOS 26.2, macOS 26.2, *)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public var scheme: AuthenticationServices.ASAutoFillURLScope.Scheme
+  public var host: Swift.String
+  public var port: Swift.Int?
+  public var path: Swift.String
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(scheme: AuthenticationServices.ASAutoFillURLScope.Scheme = .https, host: Swift.String, port: Swift.Int? = nil, path: Swift.String = "")
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(url: Foundation.URL)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var url: Foundation.URL? {
+    get
+  }
+  #endif
+  public static func == (a: AuthenticationServices.ASAutoFillURLScope, b: AuthenticationServices.ASAutoFillURLScope) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
 @available(macOS 26.0, iOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -116,7 +159,9 @@ public struct ASPhoneNumberIdentifier : Swift.Sendable {
 public struct ASEmailIdentifier : Swift.Sendable {
   public var value: Swift.String
 }
-@available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
+@available(iOS, introduced: 26.0, deprecated: 26.2, message: "Use `ASCredentialDataManager` instead")
+@available(macOS, introduced: 26.0, deprecated: 26.2, message: "Use `ASCredentialDataManager` instead")
+@available(visionOS, introduced: 26.0, deprecated: 26.2, message: "Use `ASCredentialDataManager` instead")
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 final public class ASCredentialUpdater {
@@ -467,10 +512,6 @@ public struct ASAuthorizationWebBrowserPlatformPublicKeyCredential : Swift.Senda
 @available(visionOS, unavailable)
 extension AuthenticationServices.ASAuthorizationWebBrowserPublicKeyCredentialManager {
   public func platformCredentials(forRelyingParty relyingParty: Swift.String) async -> [AuthenticationServices.ASAuthorizationWebBrowserPlatformPublicKeyCredential]
-  @available(macOS 26.2, iOS 26.2, *)
-  public class var isDeviceConfiguredForPasskeys: Swift.Bool {
-    get
-  }
 }
 @available(macOS 13.5, macCatalyst 16.6, *)
 @available(iOS, unavailable)
@@ -554,6 +595,31 @@ public protocol ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialProvider 
 extension AuthenticationServices.ASAuthorizationSecurityKeyPublicKeyCredentialProvider : AuthenticationServices.ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialProvider {
   public func createCredentialRegistrationRequest(clientData: AuthenticationServices.ASPublicKeyCredentialClientData, displayName: Swift.String, name: Swift.String, userID: Foundation.Data) -> AuthenticationServices.ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest
   public func createCredentialAssertionRequest(clientData: AuthenticationServices.ASPublicKeyCredentialClientData) -> AuthenticationServices.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest
+}
+@available(iOS 26.2, macOS 26.2, visionOS 26.2, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+final public class ASCredentialDataManager {
+  public init()
+  @objc deinit
+}
+@available(iOS 26.2, macOS 26.2, visionOS 26.2, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension AuthenticationServices.ASCredentialDataManager {
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS, unavailable)
+  final public func save(password: AuthenticationServices.ASPasswordCredential, for scope: AuthenticationServices.ASAutoFillURLScope, title: Swift.String? = nil, anchor: AuthenticationServices.ASPresentationAnchor) async throws
+  #endif
+}
+@available(iOS 26.2, macOS 26.2, visionOS 26.2, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension AuthenticationServices.ASCredentialDataManager {
+  final public func reportPublicKeyCredentialUpdate(relyingPartyIdentifier: Swift.String, userHandle: Foundation.Data, newName: Swift.String) async throws
+  final public func reportUnknownPublicKeyCredential(relyingPartyIdentifier: Swift.String, credentialID: Foundation.Data) async throws
+  final public func reportAllAcceptedPublicKeyCredentials(relyingPartyIdentifier: Swift.String, userHandle: Foundation.Data, acceptedCredentialIDs: [Foundation.Data]) async throws
+  final public func reportUnusedPasswordCredential(domain: Swift.String, userName: Swift.String) async throws
 }
 @objc @_hasMissingDesignatedInitializers @available(macOS 26.0, iOS 26.0, visionOS 26.0, *)
 @available(tvOS, unavailable)
@@ -1309,6 +1375,18 @@ extension AuthenticationServices.ASAuthorizationPlatformPublicKeyCredentialAsser
   }
   #endif
 }
+@available(iOS 26.2, visionOS 26.2, macOS 26.2, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension AuthenticationServices.ASAutoFillURLScope.Scheme : Swift.Equatable {}
+@available(iOS 26.2, visionOS 26.2, macOS 26.2, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension AuthenticationServices.ASAutoFillURLScope.Scheme : Swift.Hashable {}
+@available(iOS 26.2, visionOS 26.2, macOS 26.2, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension AuthenticationServices.ASAutoFillURLScope.Scheme : Swift.RawRepresentable {}
 @available(macOS 14.0, iOS 17.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DesignLibrary.framework/Versions/A/DesignLibrary'
-current-version: 7.1.13
+current-version: 7.2.5
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -358,6 +358,7 @@ exports:
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV5loupeAEvpZMV', 
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV6cameraAEvgZ', 
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV6cameraAEvpZMV', 
+                       '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV6meshedyAESbF', 
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV6sliderAEvgZ', 
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV6sliderAEvpZMV', 
                        '_$s13DesignLibrary21GlassMaterialProviderV13ConfigurationV7bubblesAEvgZ', 

@@ -44,6 +44,7 @@ AR_EXTERN simd_float4x4 ar_anchor_get_origin_from_anchor_transform(ar_anchor_t a
  @param[out] out_identifier A pointer to a UUID to fill out with the anchor identifier. Must be non-null.
  */
 API_AVAILABLE(visionos(1.0), macos(26.0))
+
 AR_EXTERN void ar_anchor_get_identifier(ar_anchor_t anchor, uuid_t _Nonnull out_identifier) AR_REFINED_FOR_SWIFT;
 
 /**
@@ -71,6 +72,7 @@ API_AVAILABLE(visionos(1.0), macos(26.0));
  @return `true` if the anchor is tracked, `false` otherwise.
  */
 API_AVAILABLE(visionos(1.0), macos(26.0))
+
 AR_EXTERN bool ar_trackable_anchor_is_tracked(ar_trackable_anchor_t anchor) AR_REFINED_FOR_SWIFT;
 
 AR_ASSUME_NONNULL_END

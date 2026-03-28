@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Mail.framework/Versions/A/Mail'
-current-version: 3864.200.81
+current-version: 3864.255.41
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -4761,6 +4761,8 @@ exports:
                        '_$s16IMAP2Persistence11SyncRequestV4KindO012isBackgroundC0SbvpMV', 
                        '_$s16IMAP2Persistence11SyncRequestV4KindO11descriptionSSvg', 
                        '_$s16IMAP2Persistence11SyncRequestV4KindO11descriptionSSvpMV', 
+                       '_$s16IMAP2Persistence11SyncRequestV4KindO15BackFillPurposeO11descriptionSSvg', 
+                       '_$s16IMAP2Persistence11SyncRequestV4KindO15BackFillPurposeO11descriptionSSvpMV', 
                        '_$s16IMAP2Persistence11SyncRequestV4KindO15BackFillPurposeO21__derived_enum_equalsySbAG_AGtFZ', 
                        '_$s16IMAP2Persistence11SyncRequestV4KindO15BackFillPurposeO4hash4intoys6HasherVz_tF', 
                        '_$s16IMAP2Persistence11SyncRequestV4KindO15BackFillPurposeO9hashValueSivg', 
@@ -4770,6 +4772,7 @@ exports:
                        '_$s16IMAP2Persistence11SyncRequestV4KindO15BackFillPurposeON', 
                        '_$s16IMAP2Persistence11SyncRequestV4KindO15BackFillPurposeOSHAAMc', 
                        '_$s16IMAP2Persistence11SyncRequestV4KindO15BackFillPurposeOSQAAMc', 
+                       '_$s16IMAP2Persistence11SyncRequestV4KindO15BackFillPurposeOs23CustomStringConvertibleAAMc', 
                        '_$s16IMAP2Persistence11SyncRequestV4KindO21__derived_enum_equalsySbAE_AEtFZ', 
                        '_$s16IMAP2Persistence11SyncRequestV4KindO4hash4intoys6HasherVz_tF', 
                        '_$s16IMAP2Persistence11SyncRequestV4KindO8allCasesSayAEGvgZ', 

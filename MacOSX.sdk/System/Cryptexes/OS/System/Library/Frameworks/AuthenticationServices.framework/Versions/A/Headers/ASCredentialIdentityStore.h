@@ -76,6 +76,7 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
  those from credentialIdentities.
  */
 - (void)saveCredentialIdentities:(NSArray<ASPasswordCredentialIdentity *> *)credentialIdentities completion:(void (^ _Nullable)(BOOL success, NSError * _Nullable error))completion
+    __attribute__((swift_attr("@_disfavoredOverload")))
     NS_SWIFT_ASYNC_THROWS_ON_FALSE(1)
     API_DEPRECATED_WITH_REPLACEMENT("saveCredentialIdentityEntries:completion:", ios(12.0, 17.0), macos(11.0, 14.0))
     ;
@@ -91,7 +92,7 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
  If some credential identities in credentialIdentities already exist in the store, they will be replaced by
  those from credentialIdentities.
  */
--(void)saveCredentialIdentityEntries:(NSArray<id <ASCredentialIdentity>> *)credentialIdentities completion:(void (^ _Nullable)(BOOL success, NSError * _Nullable error))completion
+- (void)saveCredentialIdentityEntries:(NSArray<id <ASCredentialIdentity>> *)credentialIdentities completion:(void (^ _Nullable)(BOOL success, NSError * _Nullable error))completion
     NS_SWIFT_ASYNC_THROWS_ON_FALSE(1)
     NS_SWIFT_NAME(saveCredentialIdentities(_:completion:)) API_AVAILABLE(ios(17.0), macos(14.0));
 
@@ -104,6 +105,7 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
  credentials to the store.
  */
 - (void)removeCredentialIdentities:(NSArray<ASPasswordCredentialIdentity *> *)credentialIdentities completion:(void (^ _Nullable)(BOOL success, NSError * _Nullable error))completion
+    __attribute__((swift_attr("@_disfavoredOverload")))
     NS_SWIFT_ASYNC_THROWS_ON_FALSE(1)
     API_DEPRECATED_WITH_REPLACEMENT("removeCredentialIdentityEntries:completion:", ios(12.0, 17.0), macos(11.0, 14.0))
     ;
@@ -138,6 +140,7 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
  identities will be saved.
  */
 - (void)replaceCredentialIdentitiesWithIdentities:(NSArray<ASPasswordCredentialIdentity *> *)newCredentialIdentities completion:(void (^ _Nullable)(BOOL success, NSError * _Nullable error))completion
+    __attribute__((swift_attr("@_disfavoredOverload")))
     NS_SWIFT_ASYNC_THROWS_ON_FALSE(1)
     API_DEPRECATED_WITH_REPLACEMENT("replaceCredentialIdentityEntries:completion:", ios(12.0, 17.0), macos(11.0, 14.0))
     ;

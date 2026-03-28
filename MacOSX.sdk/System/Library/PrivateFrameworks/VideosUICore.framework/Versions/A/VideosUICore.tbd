@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/VideosUICore.framework/Versions/A/VideosUICore'
-current-version: 1061.14.1
+current-version: 1061.24.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CALayerKeyBounds, _CALayerKeyBoundsOrigin, _CALayerKeyBoundsSize, 
@@ -15,7 +15,8 @@ exports:
                        _VUIAssetDidWriteNotification, _VUIAssetDidWriteNotificationAssetPathKey, 
                        _VUIAssetDidWriteNotificationErrorKey, _VUIBoolLogString, 
                        _VUICALayerContentGravityFromVUIContentMode, _VUICeilSnap, 
-                       _VUICeilValue, _VUICornerRadiiZero, _VUIDefaultsAvailabilityEndOverrideInSeconds, 
+                       _VUICeilValue, _VUIChickenEnabled, _VUICornerRadiiZero, _VUIDefaultsAutoDownloadsEpisodeCount, 
+                       _VUIDefaultsAutoDownloadsStorageLimit, _VUIDefaultsAvailabilityEndOverrideInSeconds, 
                        _VUIDefaultsCanaryURL, _VUIDefaultsCoWatchStartsInPlayingStateInsteadOfPaused, 
                        _VUIDefaultsCollectionMaxCacheValueKey, _VUIDefaultsCollectionRefreshTypeValueKey, 
                        _VUIDefaultsDownloadExpirationOverrideInSeconds, _VUIDefaultsEnableCapellaDebugger, 
@@ -50,9 +51,9 @@ exports:
                        _VUIModalPresentationTypeKeyNone, _VUIModalPresentationTypeKeyOverCurrentContext, 
                        _VUIModalPresentationTypeKeyOverFullScreen, _VUIModalPresentationTypeKeyPageSheet, 
                        _VUIModalPresentationTypeKeyPlayback, _VUIModalPresentationTypeKeyPopover, 
-                       _VUINSImageScalingFromVUIContentMode, _VUINSNavigationItemKeyPath, 
-                       _VUINSNavigationItemObservableKeyPathsSet, _VUINavigationBarDefaultTitleViewVisibilityPercentage, 
-                       _VUINetworkReachabilityMonitorNetworkReachabilityDidChangeNotification, 
+                       _VUIMultiviewSynchronizationId, _VUINSImageScalingFromVUIContentMode, 
+                       _VUINSNavigationItemKeyPath, _VUINSNavigationItemObservableKeyPathsSet, 
+                       _VUINavigationBarDefaultTitleViewVisibilityPercentage, _VUINetworkReachabilityMonitorNetworkReachabilityDidChangeNotification, 
                        _VUINetworkReachabilityMonitorNetworkReachabilityDidChangeUserInfoKeyNetworkReachable, 
                        _VUIRectMakeWithDirectionalOriginRelativeToBoundingRect, _VUIRectWithFlippedOriginRelativeToBoundingRect, 
                        _VUIRectWithFlippedOriginRelativeToBoundingRectWithCondition, 
@@ -62,7 +63,9 @@ exports:
                        _VUIStateMachineStateChangedNotification, _VUIUserInterfaceStyleFromTheme, 
                        _VUIViewContentModeFromContentGravity, _VUIWaitForDebugger, 
                        _VUIWaitForDebuggerUntilDate, _VideosUICoreErrorDomain, _VideosUICoreErrorHTTPStatusKey, 
-                       _kVUINSNavigationBarButtonDefaultCornerRadius ]
+                       _kVUINSNavigationBarButtonDefaultCornerRadius, _vui_dispatch_async_autoreleasepool, 
+                       _vui_make_background_dispatch_queue, _vui_make_user_initiated_dispatch_queue, 
+                       _vui_make_utility_dispatch_queue ]
     objc-classes:    [ VUIAccessibility, VUIApplicationNotificationManager, VUIAssetLibrary, 
                        VUIAsynchronousOperation, VUIAsynchronousWorkToken, VUICollectionChange, 
                        VUICollectionChangeSet, VUICollectionComparator, VUIContentRating, 

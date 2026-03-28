@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosSpatialMediaCore.framework/Versions/A/PhotosSpatialMediaCore'
-current-version: 811.0.106
+current-version: 821.0.120
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -742,6 +742,7 @@ exports:
                        '_$s22PhotosSpatialMediaCore0B5PhotoO23RenderDestinationResultVMn', 
                        '_$s22PhotosSpatialMediaCore0B5PhotoO23RenderDestinationResultVN', 
                        '_$s22PhotosSpatialMediaCore0B5PhotoO23approximateSubtitleRect3forSo6CGRectVAG_tFZ', 
+                       '_$s22PhotosSpatialMediaCore0B5PhotoO23highFrequencySignposter2os12OSSignposterVSgvgZ', 
                        '_$s22PhotosSpatialMediaCore0B5PhotoO24PredictSalientDepthErrorO02noG4PartyA2EmFWC', 
                        '_$s22PhotosSpatialMediaCore0B5PhotoO24PredictSalientDepthErrorO02nogH0yA2EmFWC', 
                        '_$s22PhotosSpatialMediaCore0B5PhotoO24PredictSalientDepthErrorO07invalidH0yA2EmFWC', 
@@ -905,6 +906,7 @@ exports:
                        '_$s22PhotosSpatialMediaCore0B5PhotoO28PixelBufferRenderDestinationCfD', 
                        '_$s22PhotosSpatialMediaCore0B5PhotoO28PixelBufferRenderDestinationCfd', 
                        '_$s22PhotosSpatialMediaCore0B5PhotoO28renderFirstFrameSignpostNames12StaticStringVvgZ', 
+                       '_$s22PhotosSpatialMediaCore0B5PhotoO30highFrequencySignposterEnabledSbvgZ', 
                        '_$s22PhotosSpatialMediaCore0B5PhotoO5SceneC03mxiF0AESo8MXISceneC_tcfC', 
                        '_$s22PhotosSpatialMediaCore0B5PhotoO5SceneC03mxiF0AESo8MXISceneC_tcfCTj', 
                        '_$s22PhotosSpatialMediaCore0B5PhotoO5SceneC03mxiF0AESo8MXISceneC_tcfCTq', 

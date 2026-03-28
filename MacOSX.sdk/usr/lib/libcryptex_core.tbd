@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libcryptex_core.dylib'
-current-version: 589.40.18
+current-version: 589.60.15
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __cryptex_asset_type_c411, __cryptex_asset_type_cpxd, __cryptex_asset_type_cx1p, 
@@ -51,25 +51,26 @@ exports:
                        _cryptex_session_core_copy_homedir, _cryptex_session_core_copy_name, 
                        _cryptex_session_core_copy_xpc_object, _cryptex_session_core_create_from_xpc, 
                        _cryptex_session_core_get_attributes, _cryptex_session_core_get_homedir_size, 
-                       _cryptex_session_core_get_overrides, _cryptex_session_core_get_state, 
-                       _cryptex_session_core_get_uid, _cryptex_session_core_merge, 
-                       _cryptex_session_core_set_endpoint, _cryptex_session_core_set_homedir, 
-                       _cryptex_session_core_set_uid, _cryptex_session_core_transition, 
-                       _cryptex_session_event_to_string, _cryptex_session_state_to_string, 
-                       _cryptex_set_error, _cryptex_set_target_object, _cryptex_set_target_queue, 
-                       _cryptex_signature_create, _cryptex_signature_lock, _cryptex_signature_lock_with_sep, 
-                       _cryptex_signature_seal, _cryptex_signature_write, _cryptex_sync, 
-                       _cryptex_sync_f, _cryptex_system_cryptex_copy_graft_abspath, 
-                       _cryptex_system_cryptex_copy_launchjob_tag_for_name, _cryptex_system_cryptex_lookup_by_graftpath, 
-                       _cryptex_system_cryptex_lookup_by_name, _cryptex_system_cryptexes, 
-                       _cryptex_target_async, _cryptex_target_async_f, _cryptex_tss_activate, 
-                       _cryptex_tss_async, _cryptex_tss_create, _cryptex_tss_set_bool, 
-                       _cryptex_tss_set_data, _cryptex_tss_set_dgst, _cryptex_tss_set_im4m_array, 
-                       _cryptex_tss_set_info_from_file, _cryptex_tss_set_object_bool, 
-                       _cryptex_tss_set_object_dgst, _cryptex_tss_set_string, _cryptex_tss_set_u32, 
-                       _cryptex_tss_set_u64, _cryptex_tss_set_url, _cryptex_tss_submit, 
-                       _cryptex_version_compare, _cryptex_version_destroy, _cryptex_version_new, 
-                       _session_core_create, _session_core_generate_username ]
+                       _cryptex_session_core_get_overrides, _cryptex_session_core_get_preset_user, 
+                       _cryptex_session_core_get_state, _cryptex_session_core_get_uid, 
+                       _cryptex_session_core_merge, _cryptex_session_core_set_endpoint, 
+                       _cryptex_session_core_set_homedir, _cryptex_session_core_set_uid, 
+                       _cryptex_session_core_transition, _cryptex_session_event_to_string, 
+                       _cryptex_session_state_to_string, _cryptex_set_error, _cryptex_set_target_object, 
+                       _cryptex_set_target_queue, _cryptex_signature_create, _cryptex_signature_lock, 
+                       _cryptex_signature_lock_with_sep, _cryptex_signature_seal, 
+                       _cryptex_signature_write, _cryptex_sync, _cryptex_sync_f, 
+                       _cryptex_system_cryptex_copy_graft_abspath, _cryptex_system_cryptex_copy_launchjob_tag_for_name, 
+                       _cryptex_system_cryptex_lookup_by_graftpath, _cryptex_system_cryptex_lookup_by_name, 
+                       _cryptex_system_cryptexes, _cryptex_target_async, _cryptex_target_async_f, 
+                       _cryptex_tss_activate, _cryptex_tss_async, _cryptex_tss_create, 
+                       _cryptex_tss_set_bool, _cryptex_tss_set_data, _cryptex_tss_set_dgst, 
+                       _cryptex_tss_set_im4m_array, _cryptex_tss_set_info_from_file, 
+                       _cryptex_tss_set_object_bool, _cryptex_tss_set_object_dgst, 
+                       _cryptex_tss_set_string, _cryptex_tss_set_u32, _cryptex_tss_set_u64, 
+                       _cryptex_tss_set_url, _cryptex_tss_submit, _cryptex_version_compare, 
+                       _cryptex_version_destroy, _cryptex_version_new, _session_core_create, 
+                       _session_core_generate_username ]
     objc-classes:    [ CollationCore, CollationElement, CryptexTSS, OS_cryptex_base, 
                        OS_cryptex_core, OS_cryptex_core_cx1_properties, OS_cryptex_host, 
                        OS_cryptex_magister, OS_cryptex_scrivener, OS_cryptex_signature, 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GenerativeExperiences.framework/Versions/A/GenerativeExperiences'
-current-version: 209.21
+current-version: 209.29
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -45,6 +45,9 @@ exports:
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientC12clearAllCFUsSbyYaKFTj', 
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientC12clearAllCFUsSbyYaKFTjTu', 
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientC12clearAllCFUsSbyYaKFTq', 
+                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC14removeBuddyCFUSbyYaKFTj', 
+                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC14removeBuddyCFUSbyYaKFTjTu', 
+                       '_$s21GenerativeExperiences21CoreFollowUpXPCClientC14removeBuddyCFUSbyYaKFTq', 
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientC19postOutOfStorageCFU5force22remainingSpaceRequiredS2b_s6UInt64VtYaKFTj', 
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientC19postOutOfStorageCFU5force22remainingSpaceRequiredS2b_s6UInt64VtYaKFTjTu', 
                        '_$s21GenerativeExperiences21CoreFollowUpXPCClientC19postOutOfStorageCFU5force22remainingSpaceRequiredS2b_s6UInt64VtYaKFTq', 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Network.framework/Versions/A/Network'
-current-version: 5569.41.1
+current-version: 5569.60.39
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -8548,6 +8548,10 @@ exports:
                        '_$s7Network10NWListenerC7ServiceV20PairingConfigurationV12pairingValueAA09NWPairingG0OSgvg', 
                        '_$s7Network10NWListenerC7ServiceV20PairingConfigurationV12pairingValueAA09NWPairingG0OSgvpMV', 
                        '_$s7Network10NWListenerC7ServiceV20PairingConfigurationV12pairingValueAA09NWPairingG0OSgvs', 
+                       '_$s7Network10NWListenerC7ServiceV20PairingConfigurationV22advertiseSensitiveInfoSbvM', 
+                       '_$s7Network10NWListenerC7ServiceV20PairingConfigurationV22advertiseSensitiveInfoSbvg', 
+                       '_$s7Network10NWListenerC7ServiceV20PairingConfigurationV22advertiseSensitiveInfoSbvpMV', 
+                       '_$s7Network10NWListenerC7ServiceV20PairingConfigurationV22advertiseSensitiveInfoSbvs', 
                        '_$s7Network10NWListenerC7ServiceV20PairingConfigurationV4fromAGs7Decoder_p_tKcfC', 
                        '_$s7Network10NWListenerC7ServiceV20PairingConfigurationV6encode2toys7Encoder_p_tKF', 
                        '_$s7Network10NWListenerC7ServiceV20PairingConfigurationVMa', 

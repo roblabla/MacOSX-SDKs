@@ -23,7 +23,7 @@ exports:
                        __FTGenerateDigestForSigningFromPayload, __FTGenerateNonceAndSignatureFromComponents, 
                        __FTGenerateNonceAndSignatureFromPayload, __FTIDSFlagsNumber, 
                        __FTProfileVersionNumber, __FZErrorTypeFromNSError, __FZErrorTypeFromResponseCodeAndError, 
-                       _kDualModeDeliveryTypeHeader ]
+                       _kDualModeDeliveryTypeHeader, _kHTTPFallbackReasonHeader ]
     objc-classes:    [ FTDeviceSupport, FTEntitlementSupport, FTIDSMessage, FTMessageDelivery, 
                        FTMessageDelivery_APS, FTMessageDelivery_DualMode, FTMessageDelivery_HTTP, 
                        FTMessageQueue, FTNetworkSupport, FTPasswordManager, FTProtobufMessage, 

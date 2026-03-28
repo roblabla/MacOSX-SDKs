@@ -186,7 +186,7 @@ exports:
                        _kCCProvisionalEnrollmentExpiryKey, _kCCRegionKey, _kCCRemoteManagementAccountIdentifierKey, 
                        _kCCServiceEntitlement, _kCCServiceName, _kCCSkipKeyAccessibility, 
                        _kCCSkipKeyAccessibilityAppearance, _kCCSkipKeyActionButton, 
-                       _kCCSkipKeyAdditionalPrivacySettings, _kCCSkipKeyAgeBasedSafetySettings, 
+                       _kCCSkipKeyAgeAssurance, _kCCSkipKeyAgeBasedSafetySettings, 
                        _kCCSkipKeyAll, _kCCSkipKeyAndroid, _kCCSkipKeyAppStore, _kCCSkipKeyAppearance, 
                        _kCCSkipKeyAppleID, _kCCSkipKeyBiometric, _kCCSkipKeyCameraButton, 
                        _kCCSkipKeyDeviceProtection, _kCCSkipKeyDeviceToDeviceMigration, 

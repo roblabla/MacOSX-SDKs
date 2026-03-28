@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/LinkServices.framework/Versions/A/LinkServices'
-current-version: 300.1.13
+current-version: 300.2.3
 compatibility-version: 0
 swift-abi-version: 7
 reexported-libraries:
@@ -15,7 +15,12 @@ exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s10Foundation4UUIDV12LinkServicesE9withSaltsyACSaySSGFZ', 
-                       '_$s12LinkServices22SpotlightKeyPathMapperO06mdItemD03forSSSgs07PartialdE0CySo012CSSearchableH12AttributeSetCG_tFZ', 
+                       '_$s12LinkServices16EntitlementCacheV10auditTokenACSo0E8_token_ta_tcfC', 
+                       '_$s12LinkServices16EntitlementCacheV14currentProcessACvrZ', 
+                       '_$s12LinkServices16EntitlementCacheV20isAllowedToReferenceySbSSF', 
+                       '_$s12LinkServices16EntitlementCacheV31hasAttributionUmbrellaExceptionSbvg', 
+                       '_$s12LinkServices16EntitlementCacheVMa', '_$s12LinkServices16EntitlementCacheVMn', 
+                       '_$s12LinkServices16EntitlementCacheVN', '_$s12LinkServices22SpotlightKeyPathMapperO06mdItemD03forSSSgs07PartialdE0CySo012CSSearchableH12AttributeSetCG_tFZ', 
                        '_$s12LinkServices22SpotlightKeyPathMapperO6decodeys07PartialdE0CySo28CSSearchableItemAttributeSetCGSgSSFZ', 
                        '_$s12LinkServices22SpotlightKeyPathMapperO6encodeySSSgs07PartialdE0CySo28CSSearchableItemAttributeSetCGFZ', 
                        '_$s12LinkServices22SpotlightKeyPathMapperOMa', '_$s12LinkServices22SpotlightKeyPathMapperOMn', 
@@ -308,7 +313,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/LinkMetadata.framework/Versions/A/LinkMetadata'
-current-version: 300.1.13
+current-version: 300.2.3
 compatibility-version: 0
 swift-abi-version: 7
 exports:

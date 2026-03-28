@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/swift/libswiftPhotosUI.dylib'
-current-version: 811.0.106
+current-version: 821.0.120
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/PhotosUI.framework/Versions/A/PhotosUI' ]

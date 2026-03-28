@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightUIShared.framework/Versions/A/SpotlightUIShared'
-current-version: 181.1.16
+current-version: 181.2.7
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -400,9 +400,9 @@ exports:
                        '_$s17SpotlightUIShared12WebsiteQueryV14representationAA0D14RepresentationVvpMV', 
                        '_$s17SpotlightUIShared12WebsiteQueryV15platterBehaviorAA013ResultPlatterF0Vvg', 
                        '_$s17SpotlightUIShared12WebsiteQueryV15platterBehaviorAA013ResultPlatterF0VvpMV', 
-                       '_$s17SpotlightUIShared12WebsiteQueryV7command12searchStringACSo08SSSearchC7CommandC_SSSgtcfC', 
-                       '_$s17SpotlightUIShared12WebsiteQueryV7commandSo08SSSearchC7CommandCvg', 
-                       '_$s17SpotlightUIShared12WebsiteQueryV7commandSo08SSSearchC7CommandCvpMV', 
+                       '_$s17SpotlightUIShared12WebsiteQueryV7command12searchStringACSo011SPUISSearchC7CommandC_SSSgtcfC', 
+                       '_$s17SpotlightUIShared12WebsiteQueryV7commandSo011SPUISSearchC7CommandCvg', 
+                       '_$s17SpotlightUIShared12WebsiteQueryV7commandSo011SPUISSearchC7CommandCvpMV', 
                        '_$s17SpotlightUIShared12WebsiteQueryVAA024PlatterBehaviorAdjustingD0AAMc', 
                        '_$s17SpotlightUIShared12WebsiteQueryVAA024PlatterBehaviorAdjustingD0AAWP', 
                        '_$s17SpotlightUIShared12WebsiteQueryVAA05TypedD0AAMc', '_$s17SpotlightUIShared12WebsiteQueryVAA05TypedD0AAWP', 

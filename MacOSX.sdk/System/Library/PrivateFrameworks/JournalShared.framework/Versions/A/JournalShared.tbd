@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/JournalShared.framework/Versions/A/JournalShared'
-current-version: 49.40.16
+current-version: 49.60.6
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -286,9 +286,9 @@ exports:
                        '_$s13JournalShared0A13DataUtilitiesO20getValidEntriesCount4from2to10fetchLimit7contextSi10Foundation4DateVSg_ALSiSgSo22NSManagedObjectContextCtKFZ', 
                        '_$s13JournalShared0A13DataUtilitiesO20getValidEntriesCount4from2to7contextSi10Foundation4DateVSg_AKSo22NSManagedObjectContextCtYaKFZ', 
                        '_$s13JournalShared0A13DataUtilitiesO20getValidEntriesCount4from2to7contextSi10Foundation4DateVSg_AKSo22NSManagedObjectContextCtYaKFZTu', 
-                       '_$s13JournalShared0A13DataUtilitiesO21getTimelineEntriesIDs10fetchLimit7contextSay10Foundation4UUIDVGSiSg_So22NSManagedObjectContextCtYaFZ', 
-                       '_$s13JournalShared0A13DataUtilitiesO21getTimelineEntriesIDs10fetchLimit7contextSay10Foundation4UUIDVGSiSg_So22NSManagedObjectContextCtYaFZTu', 
-                       '_$s13JournalShared0A13DataUtilitiesO21getTimelineEntriesIDs4from2to10fetchLimit7contextSay10Foundation4UUIDVGAI4DateVSg_AOSiSgSo22NSManagedObjectContextCtFZ', 
+                       '_$s13JournalShared0A13DataUtilitiesO21fetchTimelineEntryIDs4from2to0E5Limit7contextSaySo17NSManagedObjectIDCG10Foundation4DateVSg_AOSiSgSo0mN7ContextCtFZ', 
+                       '_$s13JournalShared0A13DataUtilitiesO21fetchTimelineEntryIDs4from2to0E5Limit7contextSaySo17NSManagedObjectIDCG10Foundation4DateVSg_AOSiSgSo0mN7ContextCtYaFZ', 
+                       '_$s13JournalShared0A13DataUtilitiesO21fetchTimelineEntryIDs4from2to0E5Limit7contextSaySo17NSManagedObjectIDCG10Foundation4DateVSg_AOSiSgSo0mN7ContextCtYaFZTu', 
                        '_$s13JournalShared0A13DataUtilitiesO30getRecentlyDeletedEntriesCount7contextSiSo22NSManagedObjectContextC_tKFZ', 
                        '_$s13JournalShared0A13DataUtilitiesO32recoverAllRecentlyDeletedEntries7contextySo22NSManagedObjectContextC_tKFZ', 
                        '_$s13JournalShared0A13DataUtilitiesO42permanentlyDeleteAllRecentlyDeletedEntries7contextySo22NSManagedObjectContextC_tKFZ', 
@@ -1744,7 +1744,8 @@ exports:
                        '_$s13JournalShared25PhotoLibraryAssetMetadataVAA9CroppableAAWP', 
                        '_$s13JournalShared25PhotoLibraryAssetMetadataVMa', '_$s13JournalShared25PhotoLibraryAssetMetadataVMn', 
                        '_$s13JournalShared25PhotoLibraryAssetMetadataVN', '_$s13JournalShared25PhotoLibraryAssetMetadataVSEAAMc', 
-                       '_$s13JournalShared25PhotoLibraryAssetMetadataVSeAAMc', '_$s13JournalShared25WorkoutRouteAssetMetadataV13caloriesBurntSdSgvg', 
+                       '_$s13JournalShared25PhotoLibraryAssetMetadataVSeAAMc', '_$s13JournalShared25WorkoutRouteAssetMetadataV012deserializedD4DataSaySo10CLLocationCGSgyF', 
+                       '_$s13JournalShared25WorkoutRouteAssetMetadataV13caloriesBurntSdSgvg', 
                        '_$s13JournalShared25WorkoutRouteAssetMetadataV13caloriesBurntSdSgvpMV', 
                        '_$s13JournalShared25WorkoutRouteAssetMetadataV20mindfulnessHeartRateSdSgvg', 
                        '_$s13JournalShared25WorkoutRouteAssetMetadataV20mindfulnessHeartRateSdSgvpMV', 
@@ -1752,8 +1753,6 @@ exports:
                        '_$s13JournalShared25WorkoutRouteAssetMetadataV4typeSSSgvg', 
                        '_$s13JournalShared25WorkoutRouteAssetMetadataV4typeSSSgvpMV', 
                        '_$s13JournalShared25WorkoutRouteAssetMetadataV5route4type8duration9startTime03endK020mindfulnessHeartRate13caloriesBurnt0P08distanceACSaySo10CLLocationCGSg_SSSgSdSg10Foundation4DateVSgAv2r2QtcfC', 
-                       '_$s13JournalShared25WorkoutRouteAssetMetadataV5routeSaySo10CLLocationCGSgvg', 
-                       '_$s13JournalShared25WorkoutRouteAssetMetadataV5routeSaySo10CLLocationCGSgvpMV', 
                        '_$s13JournalShared25WorkoutRouteAssetMetadataV6encode2toys7Encoder_p_tKF', 
                        '_$s13JournalShared25WorkoutRouteAssetMetadataV7endTime10Foundation4DateVSgvg', 
                        '_$s13JournalShared25WorkoutRouteAssetMetadataV7endTime10Foundation4DateVSgvpMV', 
@@ -2403,6 +2402,7 @@ exports:
                        '_$sSo11NSPredicateC13JournalSharedE15entryDateNotNilABvgZ', 
                        '_$sSo11NSPredicateC13JournalSharedE15hasNonEmptyTextABvgZ', 
                        '_$sSo11NSPredicateC13JournalSharedE15isNotDraftEntryABvgZ', 
+                       '_$sSo11NSPredicateC13JournalSharedE15timelineEntries4from2toAB10Foundation4DateVSg_AJtFZ', 
                        '_$sSo11NSPredicateC13JournalSharedE15timelineEntriesSo19NSCompoundPredicateCvgZ', 
                        '_$sSo11NSPredicateC13JournalSharedE16hasNonEmptyTitleABvgZ', 
                        '_$sSo11NSPredicateC13JournalSharedE16removedFromCloudABvgZ', 

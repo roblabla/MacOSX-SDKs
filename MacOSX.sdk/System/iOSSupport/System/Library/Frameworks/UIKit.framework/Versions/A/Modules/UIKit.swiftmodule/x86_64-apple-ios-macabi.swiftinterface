@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
-// swift-module-flags: -target x86_64-apple-ios26.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-abi-name UIKit -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 9126.1.12.1.404 -module-name UIKit
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-module-flags: -target x86_64-apple-ios26.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-abi-name UIKit -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 9126.2.4 -module-name UIKit
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 @_exported import Accessibility
 @_exported import CoreGraphics
 import CoreText
@@ -3653,7 +3653,7 @@ extension UITextView : UIKit.UITextSearching {
   @_Concurrency.MainActor @preconcurrency public func decorate(foundTextRange: UITextRange, document: Swift.AnyHashable??, usingStyle: UITextSearchFoundTextStyle)
   #endif
   #if compiler(>=5.3) && $NonescapableTypes
-  @_Concurrency.MainActor @preconcurrency public func shouldReplace(foundTextRange: UITextRange, document: UITextView.DocumentIdentifier?, withText text: Swift.String) -> Swift.Bool
+  @_Concurrency.MainActor @preconcurrency public func shouldReplace(foundTextRange: UITextRange, document: Swift.AnyHashable??, withText text: Swift.String) -> Swift.Bool
   #endif
   #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func replace(foundTextRange: UITextRange, document: UITextView.DocumentIdentifier?, withText text: Swift.String)

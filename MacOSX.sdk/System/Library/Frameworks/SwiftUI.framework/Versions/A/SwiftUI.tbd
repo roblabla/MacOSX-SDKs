@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI'
-current-version: 7.1.13
+current-version: 7.2.5
 swift-abi-version: 7
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -5219,6 +5219,8 @@ exports:
                        '_$s7SwiftUI18DocumentLaunchViewV_3for_02onC4OpenACyxq_GAA4TextVSg_Say22UniformTypeIdentifiers6UTTypeVGxyXEq_10Foundation3URLVctcfC', 
                        '_$s7SwiftUI18DocumentLaunchViewV_3for_02onC4OpenACyxq_Gqd___Say22UniformTypeIdentifiers6UTTypeVGxyXEq_10Foundation3URLVctcSyRd__lufC', 
                        '_$s7SwiftUI18DocumentLaunchViewVyxq_GAA0E0AAMc', '_$s7SwiftUI18DocumentLaunchViewVyxq_GAA0E0AAWP', 
+                       '_$s7SwiftUI18DynamicViewContentPAAE14reorderable_v13forQrqd__m_tSHRd__s8SendableRd__lF', 
+                       '_$s7SwiftUI18DynamicViewContentPAAE14reorderable_v13forQrqd__m_tSHRd__s8SendableRd__lFQOMQ', 
                        '_$s7SwiftUI18DynamicViewContentPAAE15dropDestination3for6action10isTargetedQrqd__m_SbSayqd__G_So7CGPointVtcySbXEt16CoreTransferable0N0Rd__lF', 
                        '_$s7SwiftUI18DynamicViewContentPAAE15dropDestination3for6action10isTargetedQrqd__m_SbSayqd__G_So7CGPointVtcySbXEt16CoreTransferable0N0Rd__lFQOMQ', 
                        '_$s7SwiftUI18DynamicViewContentPAAE15dropDestination3for6actionQrqd__m_ySayqd__G_Sitct16CoreTransferable0K0Rd__lF', 
@@ -8838,6 +8840,9 @@ exports:
                        '_$s7SwiftUI25DragReorderableLazyVStackVMa', '_$s7SwiftUI25DragReorderableLazyVStackVMn', 
                        '_$s7SwiftUI25DragReorderableLazyVStackVyxq_GAA4ViewAAMc', 
                        '_$s7SwiftUI25DragReorderableLazyVStackVyxq_GAA4ViewAAWP', 
+                       '_$s7SwiftUI25DragReorderingDestinationO2atyACyxGx_tcAEmSHRzlFWC', 
+                       '_$s7SwiftUI25DragReorderingDestinationO5atEndyACyxGAEmSHRzlFWC', 
+                       '_$s7SwiftUI25DragReorderingDestinationOMa', '_$s7SwiftUI25DragReorderingDestinationOMn', 
                        '_$s7SwiftUI25EditableCollectionContentVA2A4ViewRzrlE4bodyQrvg', 
                        '_$s7SwiftUI25EditableCollectionContentVA2A4ViewRzrlE4bodyQrvpMV', 
                        '_$s7SwiftUI25EditableCollectionContentVA2A4ViewRzrlE4bodyQrvpQOMQ', 
@@ -13113,6 +13118,8 @@ exports:
                        '_$s7SwiftUI4ViewPAAE23ornamentScalingBehavioryQrAA08OrnamenteF0_pSgF', 
                        '_$s7SwiftUI4ViewPAAE23ornamentScalingBehavioryQrAA08OrnamenteF0_pSgFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE23prefersExpandedSidebarsyQrSbF', '_$s7SwiftUI4ViewPAAE23prefersExpandedSidebarsyQrSbFQOMQ', 
+                       '_$s7SwiftUI4ViewPAAE23reorderableContainer_v1_7enabled10movedItemsQrqd__m_Sbyqd___AA25DragReorderingDestinationOyqd__GtctSHRd__lF', 
+                       '_$s7SwiftUI4ViewPAAE23reorderableContainer_v1_7enabled10movedItemsQrqd__m_Sbyqd___AA25DragReorderingDestinationOyqd__GtctSHRd__lFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE23repeatingRotationEffect4from2to6anchor9animationQrAA5AngleV_AjA9UnitPointVAA9AnimationVtF', 
                        '_$s7SwiftUI4ViewPAAE23repeatingRotationEffect4from2to6anchor9animationQrAA5AngleV_AjA9UnitPointVAA9AnimationVtFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE23repeatingRotationEffect6anchor8durationQrAA9UnitPointV_SdtF', 
@@ -13225,6 +13232,7 @@ exports:
                        '_$s7SwiftUI4ViewPAAE25onDelayedLongPressGesture15minimumDuration7perform0D15PressingChangedQrSd_yycySbcSgtFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE25onInteractiveResizeChangeyQrySbcF', 
                        '_$s7SwiftUI4ViewPAAE25onInteractiveResizeChangeyQrySbcFQOMQ', 
+                       '_$s7SwiftUI4ViewPAAE25platformGroupFocusSectionQryF', '_$s7SwiftUI4ViewPAAE25platformGroupFocusSectionQryFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE25presentationDragIndicator_6offsetQrAA10VisibilityO_12CoreGraphics7CGFloatVSgtF', 
                        '_$s7SwiftUI4ViewPAAE25presentationDragIndicator_6offsetQrAA10VisibilityO_12CoreGraphics7CGFloatVSgtFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE25presentationDragIndicatoryQrAA10VisibilityOF', 

@@ -127,7 +127,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore'
-current-version: 1382
+current-version: 1383.2.1
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -890,7 +890,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents'
-current-version: 1407.40.4
+current-version: 1407.60.1
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1291,10 +1291,12 @@ exports:
                        __kLSActivationTokenTargetASNKey, __kLSActivationTokenTargetBundleIDKey, 
                        __kLSActivationTokenTargetPIDKey, __kLSActivePageUserVisibleOriginsKey, 
                        __kLSAddToPermittedFrontASNsArrayKey, __kLSAddToPermittedFrontASNsArrayKey_WindowServerOnly, 
-                       __kLSAllowedToBecomeFrontmostKey, __kLSApplicationApplicationGenreKey, 
-                       __kLSApplicationBackgroundOnlyTypeKey, __kLSApplicationBackgroundPriorityKey, 
-                       __kLSApplicationChildApplicationASNsArrayKey, __kLSApplicationCoalitionIDKey, 
-                       __kLSApplicationCoalitionNonApplicationPIDsKey, __kLSApplicationCoalitionNonForegroundApplicationPIDsKey, 
+                       __kLSAllowedToBecomeFrontmostKey, __kLSApplicationAllRelatedApplicationASNsArrayKey, 
+                       __kLSApplicationAllRelatedApplicationCoalitionPIDsArrayKey, 
+                       __kLSApplicationApplicationGenreKey, __kLSApplicationBackgroundOnlyTypeKey, 
+                       __kLSApplicationBackgroundPriorityKey, __kLSApplicationChildApplicationASNsArrayKey, 
+                       __kLSApplicationCoalitionIDKey, __kLSApplicationCoalitionNonApplicationPIDsKey, 
+                       __kLSApplicationCoalitionNonForegroundApplicationPIDsKey, 
                        __kLSApplicationCoalitionOnePIDKey, __kLSApplicationCoalitionPIDsKey, 
                        __kLSApplicationCopyMatchingApplicationsIncludeExitedApplicationsKey, 
                        __kLSApplicationCountKey, __kLSApplicationDelayLaunchUntilTimeKey, 
@@ -1310,7 +1312,8 @@ exports:
                        __kLSApplicationLoadedJobsArrayKey, __kLSApplicationLockedInStoppedStateKey, 
                        __kLSApplicationMemberCoalitionIDKey, __kLSApplicationNonForegroundChildApplicationASNsArrayKey, 
                        __kLSApplicationOnlyForegroundOnUserLaunchKey, __kLSApplicationOverriddenBackgroundDomainNameKey, 
-                       __kLSApplicationReadyToBeFrontableKey, __kLSApplicationRelatedCoalitionsIDsArrayKey, 
+                       __kLSApplicationReadyToBeFrontableKey, __kLSApplicationRelatedApplicationASNsArrayKey, 
+                       __kLSApplicationRelatedApplicationCoalitionPIDsArrayKey, __kLSApplicationRelatedCoalitionsIDsArrayKey, 
                        __kLSApplicationSandboxedInformationItemsKey, __kLSApplicationTemplateApplicationParametersKey, 
                        __kLSApplicationTemplateProxyApplicationParametersKey, __kLSApplicationTypeKey, 
                        __kLSApplicationTypeToRestoreKey, __kLSApplicationUIElementTypeKey, 
@@ -1422,7 +1425,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata'
-current-version: 2400.14.255
+current-version: 2400.18.255
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

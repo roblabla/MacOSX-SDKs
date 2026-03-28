@@ -29,6 +29,13 @@ API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, tvos)
 /// This property must be set when requestDocument is invoked.
 @property (nonatomic, nullable, copy) NSString *merchantIdentifier;
 
+/// A key in the NSIdentityUsageDescriptionDictionary field of the app's
+/// Info.plist file.
+///
+/// The value for this key is an app-provided string that describes the
+/// reason for requesting identity information.
+@property (nonatomic, nullable, copy) NSString *usageDescriptionKey API_AVAILABLE(ios(26.2), visionos(26.2));
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DesktopServicesUI.framework/Versions/A/DesktopServicesUI'
-current-version: 1827.1.11
+current-version: 1827.2.1
 compatibility-version: 0
 swift-abi-version: 7
 exports:

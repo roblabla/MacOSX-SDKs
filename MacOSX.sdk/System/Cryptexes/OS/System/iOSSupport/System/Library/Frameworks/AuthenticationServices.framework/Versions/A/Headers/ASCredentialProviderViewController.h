@@ -16,11 +16,12 @@
 #import <AuthenticationServices/ASCredentialRequest.h>
 #import <AuthenticationServices/ASPasskeyCredentialRequestParameters.h>
 
-@class ASPasskeyCredentialRequest;
-
+#import <AuthenticationServices/ASSavePasswordRequest.h>
+#import <AuthenticationServices/ASGeneratePasswordsRequest.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ASPasskeyCredentialRequest;
 
 AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILABLE(tvos, watchos)
 @interface ASCredentialProviderViewController : ASViewController
@@ -214,7 +215,7 @@ API_DEPRECATED_WITH_REPLACEMENT("prepareInterfaceToProvideCredentialForRequest:"
 /// This method will be called for handling passkey updates when a relying party reports an update using the `ASCredentialUpdater` API.
 /// This update should be handled in the background, so no blocking UI or error should ever be shown.
 ///
-/// - Parameter relyingParty: Relying party (website) that the crendential is saved for.
+/// - Parameter relyingParty: Relying party (website) that the credential is saved for.
 /// - Parameter userHandle: User identifier.
 /// - Parameter newName: The new user name for the credential.
 ///
@@ -234,7 +235,7 @@ API_DEPRECATED_WITH_REPLACEMENT("prepareInterfaceToProvideCredentialForRequest:"
 /// You may hide or remove this credential.
 /// This update should be handled in the background, so no blocking UI or error should ever be shown.
 ///
-/// - Parameter relyingParty: Relying party (website) that the crendential is saved for.
+/// - Parameter relyingParty: Relying party (website) that the credential is saved for.
 /// - Parameter credentialID: An identifier that uniquely identifies the passkey.
 ///
 /// To indicate support for this feature, add `SupportsCredentialUpdate` under the
@@ -253,7 +254,7 @@ API_DEPRECATED_WITH_REPLACEMENT("prepareInterfaceToProvideCredentialForRequest:"
 /// You may hide or remove any credential not present in the accepted credentials list.
 /// This update should be handled in the background, so no blocking UI or error should ever be shown.
 ///
-/// - Parameter relyingParty: Relying party (website) that the crendential is saved for.
+/// - Parameter relyingParty: Relying party (website) that the credential is saved for.
 /// - Parameter userHandle: User identifier.
 /// - Parameter acceptedCredentialIDs: An array of identifiers that uniquely identifies the accepted credentials.
 ///
@@ -285,6 +286,94 @@ API_DEPRECATED_WITH_REPLACEMENT("prepareInterfaceToProvideCredentialForRequest:"
 ///             ├─ ASCredentialProviderExtensionCapabilities
 ///                 ├─ SupportsCredentialUpdate => true
 - (void)reportUnusedPasswordCredentialForDomain:(NSString *)domain userName:(NSString *)userName;
+
+/// Attempt to save a password credential.
+///
+/// To return results, you must call  ``ASCredentialProviderExtensionContext/completeSavePasswordRequest(completionHandler:)``.
+/// - Parameter request: The request to save a password.
+/// - Note: When this method is called, your extension's view controller is not present on the screen.
+/// You can request user interaction by calling ``ASCredentialProviderExtensionContext/cancelRequest(with:)``, using ``ASExtensionError/userInteractionRequired``.
+///
+/// To indicate support for this feature, add `SupportsSavePasswordCredentials` under the
+/// `ASCredentialProviderExtensionCapabilities` dictionary.
+///
+///     Info.plist
+///     ├─ NSExtension
+///         ├─ NSExtensionAttributes
+///             ├─ ASCredentialProviderExtensionCapabilities
+///                 ├─ SupportsSavePasswordCredentials => true
+- (void)performSavePasswordRequestWithoutUserInteractionIfPossible:(ASSavePasswordRequest *)savePasswordRequest
+    NS_SWIFT_NAME(performWithoutUserInteractionIfPossible(savePasswordRequest:))
+    API_AVAILABLE(ios(26.2), visionos(26.2))
+    API_UNAVAILABLE(macos, tvos, watchos);
+
+/// Prepares the interface to display a prompt to save a password credential.
+///
+/// The system calls this method to tell your extension’s view controller to prepare to present a prompt to save a password credential.
+/// After calling this method, the system presents the view controller to the user.
+///
+/// Upon success, call ``ASCredentialProviderExtensionContext/completeSavePasswordRequest(completionHandler:)``.
+///
+/// Always provide a way for someone to cancel the operation from your view controller, for example, by including a Cancel button in the navigation bar.
+/// When someone cancels the operation, call ``ASCredentialProviderExtensionContext/cancelRequest(with:)``, using ``ASExtensionError/userCanceled``.
+/// - Parameter request: The request to save a password.
+- (void)prepareInterfaceForSavePasswordRequest:(ASSavePasswordRequest *)savePasswordRequest
+    NS_SWIFT_NAME(prepareInterface(for:))
+    API_AVAILABLE(ios(26.2), visionos(26.2))
+    API_UNAVAILABLE(macos, tvos, watchos);
+
+/// Attempt to generate passwords based on developer-specified rules.
+///
+/// To return results, you must call ``ASCredentialProviderExtensionContext/completeGeneratePasswordRequest(results:completionHandler:)`.
+/// - Parameter request: The request to generate a password.
+/// - Note: When this method is called, your extension's view controller is not present on the screen.
+/// ``ASExtensionError/userInteractionRequired`` will not be honored and treated as a failure.
+/// - Note: You should not update or replace any existing credentials when this API is called.
+///
+/// To indicate support for this feature, add `SupportsGeneratePasswordCredentials` under the
+/// `ASCredentialProviderExtensionCapabilities` dictionary.
+///
+///     Info.plist
+///     ├─ NSExtension
+///         ├─ NSExtensionAttributes
+///             ├─ ASCredentialProviderExtensionCapabilities
+///                 ├─ SupportsSavePasswordCredentials => true
+///                 ├─ SupportsGeneratePasswordCredentials => true
+- (void)performGeneratePasswordsRequestWithoutUserInteraction:(ASGeneratePasswordsRequest *)generatePasswordsRequest
+    NS_SWIFT_NAME(performWithoutUserInteraction(generatePasswordsRequest:))
+    API_AVAILABLE(ios(26.2), visionos(26.2))
+    API_UNAVAILABLE(macos, tvos, watchos);
+
+/// Prepares the interface to display a prompt to generate passwords based on developer-specified rules.
+///
+/// The system calls this method to tell your extension’s view controller to prepare to present a prompt to generate passwords.
+/// After calling this method, the system presents the view controller to the user.
+///
+/// Upon success, call ``ASCredentialProviderExtensionContext/completeGeneratePasswordRequest(results:completionHandler:)``.
+///
+/// Always provide a way for someone to cancel the operation from your view controller, for example, by including a Cancel button in the navigation bar.
+/// When someone cancels the operation, call ``ASCredentialProviderExtensionContext/cancelRequest(with:)``, using ``ASExtensionError/userCanceled``.
+/// - Parameter request: The request to generate a password.
+/// - Note: This flow can only be initiated by the user. It will not be triggered from `-performGeneratePasswordsRequestWithoutUserInteraction:`
+/// - Note: You should not update or replace any existing credentials when this API is called.
+///
+/// Support of this feature is implied by default when adding support for generating passwords.
+/// You can opt out of showing UI by adding the `SupportsGeneratePasswordCredentialsWithUI` under the
+/// `ASCredentialProviderExtensionCapabilities` dictionary.
+/// When opting out, you must provide a value of `false` as the default value for this field is `true`.
+/// When you opt out, the OS will provide a relevant experience after requesting generated passwords from your extension.
+///
+///     Info.plist
+///     ├─ NSExtension
+///         ├─ NSExtensionAttributes
+///             ├─ ASCredentialProviderExtensionCapabilities
+///                 ├─ SupportsSavePasswordCredentials => true
+///                 ├─ SupportsGeneratePasswordCredentials => true
+///                 ├─ SupportsGeneratePasswordCredentialsWithUI => true
+- (void)prepareInterfaceForGeneratePasswordsRequest:(ASGeneratePasswordsRequest *)generatePasswordsRequest
+    NS_SWIFT_NAME(prepareInterface(for:))
+    API_AVAILABLE(ios(26.2), visionos(26.2))
+    API_UNAVAILABLE(macos, tvos, watchos);
 
 @end
 

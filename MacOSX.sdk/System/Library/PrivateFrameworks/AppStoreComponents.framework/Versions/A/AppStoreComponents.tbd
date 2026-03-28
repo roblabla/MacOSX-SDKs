@@ -108,6 +108,7 @@ exports:
                        _ASCLockupViewSizeLarge, _ASCLockupViewSizeLargeAppShowcase, 
                        _ASCLockupViewSizeMedium, _ASCLockupViewSizeMediumOfferButton, 
                        _ASCLockupViewSizeMini, _ASCLockupViewSizeSmall, _ASCLockupViewSizeSmallOfferButton, 
+                       _ASCLockupWebBrowserFlowTypePurchaseAndOpen, _ASCLockupWebBrowserFlowTypeSelectionOnly, 
                        _ASCMetricsActivityKeyHostApp, _ASCMetricsActivityKeyPageContext, 
                        _ASCMetricsActivityKeyRedirectURL, _ASCMetricsActivityKeyRedirectURLParameters, 
                        _ASCMetricsActivityKeyReferrerApp, _ASCMetricsActivityKeyReferrerURL, 

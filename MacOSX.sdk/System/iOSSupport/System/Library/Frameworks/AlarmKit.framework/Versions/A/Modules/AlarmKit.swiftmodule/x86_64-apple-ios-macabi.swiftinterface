@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
-// swift-module-flags: -target x86_64-apple-ios19.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2303.1.8 -module-name AlarmKit -package-name com.apple.AlarmKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-module-flags: -target x86_64-apple-ios19.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2303.2.4 -module-name AlarmKit -package-name com.apple.AlarmKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import ActivityKit
 @_exported import AlarmKit
 import AppIntents
@@ -54,10 +54,19 @@ public struct AlarmPresentation : Swift.Codable, Swift.Sendable {
       public init(from decoder: any Swift.Decoder) throws
     }
     public var title: Foundation.LocalizedStringResource
-    public var stopButton: AlarmKit.AlarmButton
+    @available(*, deprecated, message: "This property is not used anymore and will be removed.")
+    public var stopButton: AlarmKit.AlarmButton {
+      get
+      set
+    }
     public var secondaryButton: AlarmKit.AlarmButton?
     public var secondaryButtonBehavior: AlarmKit.AlarmPresentation.Alert.SecondaryButtonBehavior?
     #if compiler(>=5.3) && $NonescapableTypes
+    @available(iOS 26.1, *)
+    public init(title: Foundation.LocalizedStringResource, secondaryButton: AlarmKit.AlarmButton? = nil, secondaryButtonBehavior: AlarmKit.AlarmPresentation.Alert.SecondaryButtonBehavior? = nil)
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    @available(iOS, deprecated: 26.1, message: "stopButton is deprecated and will no longer be used")
     public init(title: Foundation.LocalizedStringResource, stopButton: AlarmKit.AlarmButton, secondaryButton: AlarmKit.AlarmButton? = nil, secondaryButtonBehavior: AlarmKit.AlarmPresentation.Alert.SecondaryButtonBehavior? = nil)
     #endif
     public func encode(to encoder: any Swift.Encoder) throws

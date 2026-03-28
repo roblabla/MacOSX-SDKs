@@ -78,6 +78,7 @@ exports:
                        _ASCLockupPlatformTvOS, _ASCLockupPlatformVisionOS, _ASCLockupPlatformWatchOS, 
                        _ASCLockupProductDetailsInteractionTypeDismissed, _ASCLockupProductDetailsInteractionTypeOpened, 
                        _ASCLockupProductDetailsInteractionTypePurchased, _ASCLockupProductDetailsInteractionTypeSelected, 
+                       _ASCLockupWebBrowserFlowTypePurchaseAndOpen, _ASCLockupWebBrowserFlowTypeSelectionOnly, 
                        _ASCMetricsActivityKeyHostApp, _ASCMetricsActivityKeyPageContext, 
                        _ASCMetricsActivityKeyRedirectURL, _ASCMetricsActivityKeyRedirectURLParameters, 
                        _ASCMetricsActivityKeyReferrerApp, _ASCMetricsActivityKeyReferrerURL, 

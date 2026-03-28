@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosSwiftUICore.framework/Versions/A/PhotosSwiftUICore'
-current-version: 811.0.106
+current-version: 821.0.120
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1957,6 +1957,9 @@ exports:
                        '_$s17PhotosSwiftUICore0A18ItemTruncationModeON', '_$s17PhotosSwiftUICore0A18ItemTruncationModeOSHAAMc', 
                        '_$s17PhotosSwiftUICore0A18ItemTruncationModeOSQAAMc', '_$s17PhotosSwiftUICore0A18LegibilityGradientV0B2UI4ViewAAMc', 
                        '_$s17PhotosSwiftUICore0A18LegibilityGradientV10startPoint03endG08strength5styleAC0B2UI04UnitG0V_AJ12CoreGraphics7CGFloatVAC5StyleOtcfC', 
+                       '_$s17PhotosSwiftUICore0A18LegibilityGradientV15blurAlternativeQrvgZ', 
+                       '_$s17PhotosSwiftUICore0A18LegibilityGradientV15blurAlternativeQrvpZMV', 
+                       '_$s17PhotosSwiftUICore0A18LegibilityGradientV15blurAlternativeQrvpZQOMQ', 
                        '_$s17PhotosSwiftUICore0A18LegibilityGradientV4bodyQrvg', 
                        '_$s17PhotosSwiftUICore0A18LegibilityGradientV4bodyQrvpMV', 
                        '_$s17PhotosSwiftUICore0A18LegibilityGradientV4bodyQrvpQOMQ', 
@@ -3822,6 +3825,12 @@ exports:
                        '_$s17PhotosSwiftUICore0A35CollectionTitleOverlayConfigurationVMa', 
                        '_$s17PhotosSwiftUICore0A35CollectionTitleOverlayConfigurationVMn', 
                        '_$s17PhotosSwiftUICore0A35CollectionTitleOverlayConfigurationVN', 
+                       '_$s17PhotosSwiftUICore0A35LegibilityBlurAlternativeTextShadowV0B2UI12ViewModifierAAMc', 
+                       '_$s17PhotosSwiftUICore0A35LegibilityBlurAlternativeTextShadowV4body7contentQr0B2UI21_ViewModifier_ContentVyACG_tF', 
+                       '_$s17PhotosSwiftUICore0A35LegibilityBlurAlternativeTextShadowV4body7contentQr0B2UI21_ViewModifier_ContentVyACG_tFQOMQ', 
+                       '_$s17PhotosSwiftUICore0A35LegibilityBlurAlternativeTextShadowVMa', 
+                       '_$s17PhotosSwiftUICore0A35LegibilityBlurAlternativeTextShadowVMn', 
+                       '_$s17PhotosSwiftUICore0A35LegibilityBlurAlternativeTextShadowVN', 
                        '_$s17PhotosSwiftUICore0A35MaterialTitleCellAffordanceLocationO10topLeadingyA2CmFWC', 
                        '_$s17PhotosSwiftUICore0A35MaterialTitleCellAffordanceLocationO11topTrailingyA2CmFWC', 
                        '_$s17PhotosSwiftUICore0A35MaterialTitleCellAffordanceLocationO13bottomLeadingyA2CmFWC', 
@@ -5240,6 +5249,13 @@ exports:
                        '_$s17PhotosSwiftUICore20OneUpChromeViewModelC17localizedSubtitleSSSgvpMV', 
                        '_$s17PhotosSwiftUICore20OneUpChromeViewModelC17localizedSubtitleSSSgvsTj', 
                        '_$s17PhotosSwiftUICore20OneUpChromeViewModelC17localizedSubtitleSSSgvsTq', 
+                       '_$s17PhotosSwiftUICore20OneUpChromeViewModelC17videoScrubberRectSo6CGRectVvMTj', 
+                       '_$s17PhotosSwiftUICore20OneUpChromeViewModelC17videoScrubberRectSo6CGRectVvMTq', 
+                       '_$s17PhotosSwiftUICore20OneUpChromeViewModelC17videoScrubberRectSo6CGRectVvgTj', 
+                       '_$s17PhotosSwiftUICore20OneUpChromeViewModelC17videoScrubberRectSo6CGRectVvgTq', 
+                       '_$s17PhotosSwiftUICore20OneUpChromeViewModelC17videoScrubberRectSo6CGRectVvpMV', 
+                       '_$s17PhotosSwiftUICore20OneUpChromeViewModelC17videoScrubberRectSo6CGRectVvsTj', 
+                       '_$s17PhotosSwiftUICore20OneUpChromeViewModelC17videoScrubberRectSo6CGRectVvsTq', 
                        '_$s17PhotosSwiftUICore20OneUpChromeViewModelC18menuElementsSourceAA04MenujK0_pSgvMTj', 
                        '_$s17PhotosSwiftUICore20OneUpChromeViewModelC18menuElementsSourceAA04MenujK0_pSgvMTq', 
                        '_$s17PhotosSwiftUICore20OneUpChromeViewModelC18menuElementsSourceAA04MenujK0_pSgvgTj', 
@@ -5256,13 +5272,9 @@ exports:
                        '_$s17PhotosSwiftUICore20OneUpChromeViewModelC19bottomSafeAreaInset12CoreGraphics7CGFloatVvpMV', 
                        '_$s17PhotosSwiftUICore20OneUpChromeViewModelC19bottomSafeAreaInset12CoreGraphics7CGFloatVvsTj', 
                        '_$s17PhotosSwiftUICore20OneUpChromeViewModelC19bottomSafeAreaInset12CoreGraphics7CGFloatVvsTq', 
-                       '_$s17PhotosSwiftUICore20OneUpChromeViewModelC19videoScrubberHeight12CoreGraphics7CGFloatVvMTj', 
-                       '_$s17PhotosSwiftUICore20OneUpChromeViewModelC19videoScrubberHeight12CoreGraphics7CGFloatVvMTq', 
                        '_$s17PhotosSwiftUICore20OneUpChromeViewModelC19videoScrubberHeight12CoreGraphics7CGFloatVvgTj', 
                        '_$s17PhotosSwiftUICore20OneUpChromeViewModelC19videoScrubberHeight12CoreGraphics7CGFloatVvgTq', 
                        '_$s17PhotosSwiftUICore20OneUpChromeViewModelC19videoScrubberHeight12CoreGraphics7CGFloatVvpMV', 
-                       '_$s17PhotosSwiftUICore20OneUpChromeViewModelC19videoScrubberHeight12CoreGraphics7CGFloatVvsTj', 
-                       '_$s17PhotosSwiftUICore20OneUpChromeViewModelC19videoScrubberHeight12CoreGraphics7CGFloatVvsTq', 
                        '_$s17PhotosSwiftUICore20OneUpChromeViewModelC20allowedTopBarButtonsAA0dejkL0VvMTj', 
                        '_$s17PhotosSwiftUICore20OneUpChromeViewModelC20allowedTopBarButtonsAA0dejkL0VvMTq', 
                        '_$s17PhotosSwiftUICore20OneUpChromeViewModelC20allowedTopBarButtonsAA0dejkL0VvgTj', 
@@ -6460,6 +6472,8 @@ exports:
                        '_$s7SwiftUI4ViewP06PhotosA6UICoreE37photosBottomLegibilityGradientOverlay11bottomInset6height15gradientOpacityQr12CoreGraphics7CGFloatV_A2KtFQOMQ', 
                        '_$s7SwiftUI4ViewP06PhotosA6UICoreE39photosScrollContentBackgroundVisibilityyQrAA0J0OF', 
                        '_$s7SwiftUI4ViewP06PhotosA6UICoreE39photosScrollContentBackgroundVisibilityyQrAA0J0OFQOMQ', 
+                       '_$s7SwiftUI4ViewP06PhotosA6UICoreE41photosLegibilityBlurAlternativeTextShadowQryF', 
+                       '_$s7SwiftUI4ViewP06PhotosA6UICoreE41photosLegibilityBlurAlternativeTextShadowQryFQOMQ', 
                        '_$s7SwiftUI4ViewP06PhotosA6UICoreE5sheet09presentedC10ControllerQrAA7BindingVySo06NSViewH0CSgG_tF', 
                        '_$s7SwiftUI4ViewP06PhotosA6UICoreE5sheet09presentedC10ControllerQrAA7BindingVySo06NSViewH0CSgG_tFQOMQ', 
                        '_$s7SwiftUI4ViewP06PhotosA6UICoreE6hiddenyQrSbF', '_$s7SwiftUI4ViewP06PhotosA6UICoreE6hiddenyQrSbFQOMQ', 

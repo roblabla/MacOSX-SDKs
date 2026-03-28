@@ -543,7 +543,7 @@ The uniform type identifier kUTTypeWebArchive can be used get the related pasteb
 
 /*! @abstract A Boolean value indicating whether Screen Time blocking has occurred.
  */
-@property (nonatomic, readonly) BOOL isBlockedByScreenTime API_AVAILABLE(macos(NA), ios(26.0));
+@property (nonatomic, readonly) BOOL isBlockedByScreenTime API_AVAILABLE(macos(26.0), ios(26.0)) API_UNAVAILABLE(visionos);
 
 /*! @abstract Sets the webpage contents from the passed data as if it was the
  response to the supplied request. The request is never actually sent to the
@@ -687,19 +687,19 @@ The uniform type identifier kUTTypeWebArchive can be used get the related pasteb
 */
 typedef NS_OPTIONS(NSUInteger, WKWebViewDataType) {
     WKWebViewDataTypeSessionStorage = 1 << 0
-} API_AVAILABLE(macos(NA), ios(26.0), visionos(NA));
+} API_AVAILABLE(macos(26.0), ios(26.0), visionos(26.0));
 
 /* @abstract Called when the client wants to fetch WKWebView data.
    @param dataTypes The option set of WKWebView data types whose data the client wants to fetch.
    @param completionHandler The completion handler that should be invoked with the retrieved data and possibly an error. The retrieved data will be a serialized blob. If an error occurred, the retrieved data will be nil. An error may occur if the data cannot be retrieved for some reason (such as a crash).
 */
-- (void)fetchDataOfTypes:(WKWebViewDataType)dataTypes completionHandler:(WK_SWIFT_UI_ACTOR void (^)(NSData * _Nullable data, NSError * _Nullable error))completionHandler NS_SWIFT_NAME(fetchData(of:completionHandler:)) API_AVAILABLE(macos(NA), ios(26.0), visionos(NA));
+- (void)fetchDataOfTypes:(WKWebViewDataType)dataTypes completionHandler:(WK_SWIFT_UI_ACTOR void (^)(NSData * _Nullable data, NSError * _Nullable error))completionHandler NS_SWIFT_NAME(fetchData(of:completionHandler:)) API_AVAILABLE(macos(26.0), ios(26.0), visionos(26.0));
 
 /* @abstract Called when the client wants to restore WKWebView data.
    @param data The serialized blob containing the data that the client wants to restore.
    @param completionHandler The completion handler that may be invoked with an error if the data is in an invalid format or if the data cannot be restored for some other reason (such as a crash).
  */
-- (void)restoreData:(NSData *)data completionHandler:(WK_SWIFT_UI_ACTOR void(^)(NSError * _Nullable error))completionHandler NS_SWIFT_NAME(restoreData(_:completionHandler:)) API_AVAILABLE(macos(NA), ios(26.0), visionos(NA));
+- (void)restoreData:(NSData *)data completionHandler:(WK_SWIFT_UI_ACTOR void(^)(NSError * _Nullable error))completionHandler NS_SWIFT_NAME(restoreData(_:completionHandler:)) API_AVAILABLE(macos(26.0), ios(26.0), visionos(26.0));
 
 /*! @abstract Edge insets on all sides, relative to the web view's coordinate space, which shrink
  * the bounds of the layout viewport. Obscured content areas (that is, parts of the web view that

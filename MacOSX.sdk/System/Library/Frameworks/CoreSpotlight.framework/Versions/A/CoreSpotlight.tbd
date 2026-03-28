@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreSpotlight.framework/Versions/A/CoreSpotlight'
-current-version: 2400.14.255
+current-version: 2400.18.255
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -602,7 +602,7 @@ exports:
                        _kSecEntitlementCSSearchInternal, _kSecEntitlementCoreSpotlightApplicationIdentifier, 
                        _kSyndicatedContentDeleted, _kSyndicatedContentRefreshed, 
                        _logForCSLogCategoryDaemonClient, _logForCSLogCategoryDefault, 
-                       _logForCSLogCategoryDeleteAll, _logForCSLogCategoryIndex, 
+                       _logForCSLogCategoryDeleteAll, _logForCSLogCategoryDrop, _logForCSLogCategoryIndex, 
                        _logForCSLogCategoryItems, _logForCSLogCategoryPersonalization, 
                        _logForCSLogCategoryPhotosQU, _logForCSLogCategoryQuery, _logForCSLogCategoryRecs, 
                        _logForCSSignpostPhotosNilCS, _priorityIndexName, _registerForGameModeChange ]
@@ -613,7 +613,7 @@ exports:
                        CSExternalAnalysisTag, CSFPItem, CSFieldSpecification, CSFileProviderDomainMonitor, 
                        CSFileURLBatchResult, CSFilesSearchQuery, CSFilesSearchQueryContext, 
                        CSFlightTag, CSGenerativeModelsAvailabilityManager, CSHashtagQuery, 
-                       CSImportExtension, CSImporter, CSIndexExtensionRequestHandler, 
+                       CSIdentifierCodedArray, CSImportExtension, CSImporter, CSIndexExtensionRequestHandler, 
                        CSIndexJob, CSIndexingQueue, CSInstantAnswer, CSInstantAnswerAction, 
                        CSInstantAnswers, CSIntentsWrapper, CSInternalSearchableIndex, 
                        CSItemSummary, CSLinkTag, CSLocalizedString, CSLocationTag, 

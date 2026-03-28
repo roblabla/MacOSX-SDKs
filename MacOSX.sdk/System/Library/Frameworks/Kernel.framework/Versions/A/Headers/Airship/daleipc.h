@@ -264,6 +264,9 @@ void airship_daleipc_downlink_controller_synthesize_reset_completions(daleipc_do
 AIRSHIP_EXPORT
 uint16_t airship_daleipc_downlink_controller_get_channel_size(daleipc_downlink_controller_t downlink_ctrl);
 
+AIRSHIP_EXPORT
+uint16_t airship_daleipc_downlink_controller_get_min_buffer_count(daleipc_downlink_controller_t downlink_ctrl);
+
 /* device controller api */
 
 AIRSHIP_EXPORT

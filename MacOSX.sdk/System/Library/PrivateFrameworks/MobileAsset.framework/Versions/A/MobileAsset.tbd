@@ -64,8 +64,8 @@ exports:
                        __MAsendSetPallasEnabled, __MAsendSetPallasUrl, __MAsendSetPallasUrlForType, 
                        __MAsendSetPreferences, __MAsendUpdateClientAccessGetPathSync, 
                        __MAsendUpdateClientAccessGetPathWithPurposeSync, __SecureMABundleCommand, 
-                       ___ForceMigration, __getClientCallbackQueue, _addObjectToMessage, 
-                       _kMAMaxChannelIdSizeInBytes, _kMobileAssetDisableAutomaticPushNotificationSubscription, 
+                       ___ForceMigration, ___MABrainStartupTransaction, __getClientCallbackQueue, 
+                       _addObjectToMessage, _kMAMaxChannelIdSizeInBytes, _kMobileAssetDisableAutomaticPushNotificationSubscription, 
                        _kMobileAssetEnforceProductionSigning, _kMobileAssetPushNotificationEnvironment, 
                        _kMobileAssetPushNotificationTestID ]
     objc-classes:    [ ASAsset, ASAssetQuery, MAAbsoluteAssetId, MAAsset, MAAssetDiff, 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ImagePlaygroundInternal.framework/Versions/A/ImagePlaygroundInternal'
-current-version: 148.1.1
+current-version: 148.2.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -888,13 +888,7 @@ exports:
                        '_$s23ImagePlaygroundInternal17GPMagicPaperStateON', '_$s23ImagePlaygroundInternal17GPMagicPaperStateOSQAAMc', 
                        '_$s23ImagePlaygroundInternal17InjectableServiceMp', '_$s23ImagePlaygroundInternal17InjectableServiceP15servicesFetcherxAA08ServicesG0C_tcfCTj', 
                        '_$s23ImagePlaygroundInternal17InjectableServiceP15servicesFetcherxAA08ServicesG0C_tcfCTq', 
-                       '_$s23ImagePlaygroundInternal17InjectableServiceTL', '_$s23ImagePlaygroundInternal17LandscapeTrapViewV4bodyQrvg', 
-                       '_$s23ImagePlaygroundInternal17LandscapeTrapViewV4bodyQrvpMV', 
-                       '_$s23ImagePlaygroundInternal17LandscapeTrapViewV4bodyQrvpQOMQ', 
-                       '_$s23ImagePlaygroundInternal17LandscapeTrapViewV7SwiftUI0F0AAMc', 
-                       '_$s23ImagePlaygroundInternal17LandscapeTrapViewVACycfC', 
-                       '_$s23ImagePlaygroundInternal17LandscapeTrapViewVMa', '_$s23ImagePlaygroundInternal17LandscapeTrapViewVMn', 
-                       '_$s23ImagePlaygroundInternal17LandscapeTrapViewVN', '_$s23ImagePlaygroundInternal17PhotoLibraryAssetMp', 
+                       '_$s23ImagePlaygroundInternal17InjectableServiceTL', '_$s23ImagePlaygroundInternal17PhotoLibraryAssetMp', 
                        '_$s23ImagePlaygroundInternal17PhotoLibraryAssetP10isFavoriteSbvgTj', 
                        '_$s23ImagePlaygroundInternal17PhotoLibraryAssetP10isFavoriteSbvgTq', 
                        '_$s23ImagePlaygroundInternal17PhotoLibraryAssetP10pixelWidthSivgTj', 
@@ -1639,8 +1633,6 @@ exports:
                        '_$s7SwiftUI4ViewP23ImagePlaygroundInternalE14extensionStateyQrAD013GPUIExtensionH0CFQOMQ', 
                        '_$s7SwiftUI4ViewP23ImagePlaygroundInternalE23extensionStateTrackable17connectionManagerQrAD021ServiceSideConnectionK0C_tF', 
                        '_$s7SwiftUI4ViewP23ImagePlaygroundInternalE23extensionStateTrackable17connectionManagerQrAD021ServiceSideConnectionK0C_tFQOMQ', 
-                       '_$s7SwiftUI4ViewP23ImagePlaygroundInternalE24requiringPortraitOnPhoneQryF', 
-                       '_$s7SwiftUI4ViewP23ImagePlaygroundInternalE24requiringPortraitOnPhoneQryFQOMQ', 
                        '_$s7SwiftUI4ViewP23ImagePlaygroundInternalE32imageGenerationPeoplePickerSheet23allowsClearingSelection26usesCharacterSharedStorage11isPresented14selectedPerson18sessionUndoManagerQrSb_SbAA7BindingVySbGALyAD0dhV0VSgGAD07SessionxY0CSgtF', 
                        '_$s7SwiftUI4ViewP23ImagePlaygroundInternalE32imageGenerationPeoplePickerSheet23allowsClearingSelection26usesCharacterSharedStorage11isPresented14selectedPerson18sessionUndoManagerQrSb_SbAA7BindingVySbGALyAD0dhV0VSgGAD07SessionxY0CSgtFQOMQ', 
                        '_$s7SwiftUI4ViewP23ImagePlaygroundInternalE32imageGenerationPeoplePickerSheet23allowsClearingSelection26usesCharacterSharedStorage26preferredConditioningStyle11isPresented14selectedPerson18sessionUndoManager0G22RepresentationsManager10auditTokenQrSb_Sb0dE00deU0VAA7BindingVySbGARyAD0dhY0VSgGAD18SessionUndoManagerCSgAD0dT22RepresentationsManagerCSgSo13audit_token_taSgtF', 

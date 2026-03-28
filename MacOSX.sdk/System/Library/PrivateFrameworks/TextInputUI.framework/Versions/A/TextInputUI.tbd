@@ -172,7 +172,7 @@ exports:
     objc-classes:    [ TUICapslockAccessory, TUICursorAccessory, TUIDictationAccessory, 
                        TUIGlowEffect, TUIInputModeAccessory, TUIInputModeSwitcherAccessory, 
                        TUIKeyboardCandidateMultiplexer, TUIMathCompletionGenerator, 
-                       TUIShortFormSmartActionResponse, TUISmartActionGenerator, 
+                       TUIMixmojiCandidate, TUIShortFormSmartActionResponse, TUISmartActionGenerator, 
                        TUISmartActionPollCandidate, TUISmartActionPollOption, TUISmartActionPollResponse, 
                        TUISmartReplyGenerator, _TUIGeneratorResultAccumulator, _TUIGeneratorResultAccumulatorCache, 
                        _TUIGeneratorResultAccumulatorPolicy, _TUIKeyboardCandidateContainer, 

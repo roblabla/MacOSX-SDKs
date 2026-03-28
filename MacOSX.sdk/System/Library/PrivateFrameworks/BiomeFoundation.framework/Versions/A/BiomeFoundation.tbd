@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BiomeFoundation.framework/Versions/A/BiomeFoundation'
-current-version: 200.5
+current-version: 200.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -49,7 +49,7 @@ exports:
                        _BMSharedSyncResource, _BMShouldRetry, _BMStorageErrorDomain, 
                        _BMStorageErrorGetErrno, _BMStorageErrorIsUserControlledKey, 
                        _BMStorageErrorShouldTryAgainLater, _BMStringForServiceDomain, 
-                       _BMSyncResource, _BMUseCaseComputeSubscriptionPassthrough, 
+                       _BMSyncResource, _BMTemporaryLocationEntitlement, _BMUseCaseComputeSubscriptionPassthrough, 
                        _BMUseCaseConnectionProxy, _BMUseCaseCoreDuetClient, _BMUseCaseIncrementalViews, 
                        _BMUseCaseInternalTool, _BMUseCaseLegacy, _BMUseCaseLegacyKoa, 
                        _BMUseCaseLegacyView, _BMUseCaseMaintenance, _BMUseCaseNotApplicable, 

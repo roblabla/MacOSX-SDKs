@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_DEPRECATED("Get products using Product.products(for:)", ios(3.0, 18.0), macos(10.7, 15.0), watchos(6.2, 11.0), visionos(1.0, 2.0))
+API_DEPRECATED("Get products using Product.products(for:).", ios(3.0, 18.0), macos(10.7, 15.0), watchos(6.2, 11.0), visionos(1.0, 2.0))
 @protocol SKProductsRequestDelegate <SKRequestDelegate>
 
 @required
@@ -23,7 +23,7 @@ API_DEPRECATED("Get products using Product.products(for:)", ios(3.0, 18.0), maco
 
 // request information about products for your application
 SK_EXTERN_CLASS
-API_DEPRECATED("Use Product.products(for:)", ios(3.0, 18.0), macos(10.7, 15.0), watchos(6.2, 11.0), visionos(1.0, 2.0))
+API_DEPRECATED("Use Product.products(for:).", ios(3.0, 18.0), macos(10.7, 15.0), watchos(6.2, 11.0), visionos(1.0, 2.0))
 NS_SWIFT_NONSENDABLE
 @interface SKProductsRequest : SKRequest {
 @private
@@ -39,7 +39,7 @@ NS_SWIFT_NONSENDABLE
 
 
 SK_EXTERN_CLASS
-API_DEPRECATED("Get products using Product.products(for:)", ios(3.0, 18.0), macos(10.7, 15.0), watchos(6.2, 11.0), visionos(1.0, 2.0))
+API_DEPRECATED("Get products using Product.products(for:).", ios(3.0, 18.0), macos(10.7, 15.0), watchos(6.2, 11.0), visionos(1.0, 2.0))
 NS_SWIFT_SENDABLE
 @interface SKProductsResponse : NSObject {
 @private

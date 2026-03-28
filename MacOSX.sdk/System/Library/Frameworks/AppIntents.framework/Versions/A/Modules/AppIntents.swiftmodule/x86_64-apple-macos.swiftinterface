@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
-// swift-module-flags: -target x86_64-apple-macos26.1 -target-variant x86_64-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 300.1.13.1 -module-name AppIntents
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-module-flags: -target x86_64-apple-macos26.2 -target-variant x86_64-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 300.2.3.1 -module-name AppIntents -package-name com.apple.appintents
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 @_exported public import AppIntents
 public import CoreLocation
 public import CoreSpotlight
@@ -9308,6 +9308,54 @@ extension AppIntents.IntentParameter where Value.ValueType : AppIntents.AppEntit
   @available(tvOS, introduced: 16.0, deprecated: 18.0)
   @_disfavoredOverload convenience public init<OptionsProvider>(title: Foundation.LocalizedStringResource, description: Foundation.LocalizedStringResource? = nil, default defaultValue: _const Value.UnwrappedType? = nil, requestValueDialog: AppIntents.IntentDialog? = nil, requestDisambiguationDialog: AppIntents.IntentDialog? = nil, inputConnectionBehavior: _const AppIntents.InputConnectionBehavior = .default, supportedValues: [Value.ValueType] = Array(Value.ValueType.allCases), optionsProvider: OptionsProvider) where OptionsProvider : AppIntents.DynamicOptionsProvider, Value.ValueType == OptionsProvider.DefaultValue.ValueType
   #endif
+}
+@available(iOS 26.2, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension AppIntents.AssistantSchemas {
+  @_marker public protocol AssistantIntent : AppIntents.AssistantSchemas.Model {
+  }
+}
+@available(iOS 26.2, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension AppIntents.AssistantSchema.IntentSchema : AppIntents.AssistantSchemas.AssistantIntent {
+}
+@available(iOS 26.2, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension AppIntents.AssistantSchemas.Intent where Self == AppIntents.AssistantSchemas.IntentSchema {
+  @_alwaysEmitIntoClient public static var assistant: some AppIntents.AssistantSchemas.AssistantIntent {
+    get {
+        if #available(iOS 26.2, macOS 26.2, tvOS 26.2, watchOS 26.2, visionOS 26.2, *) {
+            return AssistantSchema.IntentSchema("assistant")
+        } else {
+            fatalError("Do not reference schema types directly")
+        }
+    }
+  }
+}
+@available(iOS 26.2, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension AppIntents.AssistantSchemas.AssistantIntent {
+  @_alwaysEmitIntoClient public var activate: some AppIntents.AssistantSchemas.Intent {
+    get {
+        if #available(iOS 26.2, macOS 26.2, tvOS 26.2, watchOS 26.2, visionOS 26.2, *) {
+            return AssistantSchema.IntentSchema("ActivateAssistantIntent")
+        } else {
+            fatalError("Do not reference schema types directly")
+        }
+    }
+  }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol SetFocusFilterIntent : AppIntents.AppIntent, AppIntents.InstanceDisplayRepresentable {

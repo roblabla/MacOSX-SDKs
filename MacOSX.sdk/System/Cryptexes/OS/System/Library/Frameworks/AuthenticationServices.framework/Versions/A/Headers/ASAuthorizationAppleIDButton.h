@@ -7,6 +7,8 @@
 
 #import <AuthenticationServices/ASFoundation.h>
 
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+
 typedef NS_ENUM(NSInteger, ASAuthorizationAppleIDButtonType) {
     ASAuthorizationAppleIDButtonTypeSignIn,
     ASAuthorizationAppleIDButtonTypeContinue,
@@ -22,9 +24,6 @@ typedef NS_ENUM(NSInteger, ASAuthorizationAppleIDButtonStyle) {
     ASAuthorizationAppleIDButtonStyleWhiteOutline,
     ASAuthorizationAppleIDButtonStyleBlack,
 } NS_SWIFT_NAME(ASAuthorizationAppleIDButton.Style) API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos);
-
-
-NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if TARGET_OS_IPHONE
 AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos)

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
-// swift-module-flags: -target arm64e-apple-macos26.1 -target-variant arm64e-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 67.125.6 -module-name PermissionKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-module-flags: -target arm64e-apple-macos26.2 -target-variant arm64e-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 67.250.4 -module-name PermissionKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import CoreGraphics
 import Foundation
 import Swift
@@ -10,7 +10,7 @@ import _StringProcessing
 import _SwiftConcurrencyShims
 import os.log
 import os
-@available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+@available(iOS 26, visionOS 26, macOS 26, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct CommunicationHandle : Swift.Hashable, Swift.Codable, Swift.Sendable {
@@ -43,11 +43,12 @@ public struct CommunicationHandle : Swift.Hashable, Swift.Codable, Swift.Sendabl
   }
   public init(from decoder: any Swift.Decoder) throws
 }
-@_hasMissingDesignatedInitializers @available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+@_hasMissingDesignatedInitializers @available(iOS 26, visionOS 26, macOS 26, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 final public class CommunicationLimits {
   public static let current: PermissionKit.CommunicationLimits
+  @available(*, deprecated, message: "Use AskCenter.responses(for:) instead.")
   final public var updates: some _Concurrency.AsyncSequence<PermissionKit.PermissionResponse<PermissionKit.CommunicationTopic>, Swift.Never> {
     get
   }
@@ -55,7 +56,25 @@ final public class CommunicationLimits {
   final public func knownHandles(in handles: Swift.Set<PermissionKit.CommunicationHandle>) async -> Swift.Set<PermissionKit.CommunicationHandle>
   @objc deinit
 }
-@available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+@available(iOS 26, visionOS 26, macOS 26, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension PermissionKit.PermissionQuestion where Topic == PermissionKit.CommunicationTopic {
+  convenience public init(communicationTopic: Topic)
+  convenience public init(handles: [PermissionKit.CommunicationHandle])
+  convenience public init(handle: PermissionKit.CommunicationHandle)
+}
+@available(iOS 26.2, visionOS 26.2, macOS 26.2, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct SignificantAppUpdateTopic : PermissionKit.QuestionTopic {
+  public static let id: Swift.String
+  public let description: Swift.String
+  public init(description: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 26, visionOS 26, macOS 26, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct PermissionChoice : Swift.Identifiable, Swift.Hashable, Swift.Codable {
@@ -85,7 +104,7 @@ public struct PermissionChoice : Swift.Identifiable, Swift.Hashable, Swift.Codab
   }
   public static func == (lhs: PermissionKit.PermissionChoice, rhs: PermissionKit.PermissionChoice) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
-  @available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+  @available(iOS 26, visionOS 26, macOS 26, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   public typealias ID = Swift.String
@@ -95,7 +114,7 @@ public struct PermissionChoice : Swift.Identifiable, Swift.Hashable, Swift.Codab
   }
   public init(from decoder: any Swift.Decoder) throws
 }
-@available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+@available(iOS 26.1, visionOS 26.1, macOS 26.1, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public enum AskError : Foundation.LocalizedError {
@@ -103,6 +122,9 @@ public enum AskError : Foundation.LocalizedError {
   case invalidQuestion
   case contactSyncNotSetup
   case communicationLimitsNotEnabled
+  @available(iOS 26.2, visionOS 26.2, macOS 26.2, *)
+  case notAvailable
+  @available(*, deprecated, message: "The underlying error is now propogated directly.")
   case systemError(underlyingError: any Swift.Error)
   #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
@@ -110,8 +132,23 @@ public enum AskError : Foundation.LocalizedError {
   }
   #endif
 }
+@_hasMissingDesignatedInitializers @available(iOS 26.2, visionOS 26.2, macOS 26.2, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+final public class AskCenter {
+  public static let shared: PermissionKit.AskCenter
+  final public func responses<Topic>(for topicType: Topic.Type) -> some _Concurrency.AsyncSequence<PermissionKit.PermissionResponse<Topic>, Swift.Never> where Topic : PermissionKit.QuestionTopic
+  
+  @objc deinit
+}
+@available(iOS 26.2, visionOS 26.2, macOS 26.2, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension PermissionKit.PermissionQuestion where Topic == PermissionKit.SignificantAppUpdateTopic {
+  convenience public init(significantAppUpdateTopic: Topic)
+}
 extension PermissionKit.CommunicationTopic {
-  @available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+  @available(iOS 26, visionOS 26, macOS 26, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   public enum Action : Swift.Codable {
@@ -134,7 +171,7 @@ extension PermissionKit.CommunicationTopic {
     public init(from decoder: any Swift.Decoder) throws
   }
 }
-@available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+@available(iOS 26, visionOS 26, macOS 26, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct CommunicationTopic : PermissionKit.QuestionTopic {
@@ -147,7 +184,7 @@ public struct CommunicationTopic : PermissionKit.QuestionTopic {
   public init(from decoder: any Swift.Decoder) throws
 }
 extension PermissionKit.CommunicationTopic {
-  @available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+  @available(iOS 26, visionOS 26, macOS 26, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   public struct PersonInformation : Swift.Codable {
@@ -161,13 +198,13 @@ extension PermissionKit.CommunicationTopic {
     public func encode(to encoder: any Swift.Encoder) throws
   }
 }
-@available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+@available(iOS 26, visionOS 26, macOS 26, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol QuestionTopic : Swift.Decodable, Swift.Encodable {
   static var id: Swift.String { get }
 }
-@available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+@available(iOS 26, visionOS 26, macOS 26, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 final public class PermissionQuestion<Topic> : Swift.Identifiable, Swift.Codable where Topic : PermissionKit.QuestionTopic {
@@ -180,7 +217,7 @@ final public class PermissionQuestion<Topic> : Swift.Identifiable, Swift.Codable
     get
   }
   final public var expirationDate: Foundation.Date?
-  @available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+  @available(iOS 26, visionOS 26, macOS 26, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   public typealias ID = Foundation.UUID
@@ -188,42 +225,34 @@ final public class PermissionQuestion<Topic> : Swift.Identifiable, Swift.Codable
   final public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
-@available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-extension PermissionKit.PermissionQuestion where Topic == PermissionKit.CommunicationTopic {
-  convenience public init(communicationTopic: Topic)
-  convenience public init(handles: [PermissionKit.CommunicationHandle])
-  convenience public init(handle: PermissionKit.CommunicationHandle)
-}
-@available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+@available(iOS 26, visionOS 26, macOS 26, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct PermissionResponse<Topic> where Topic : PermissionKit.QuestionTopic {
   public let question: PermissionKit.PermissionQuestion<Topic>
   public let choice: PermissionKit.PermissionChoice
 }
-@available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+@available(iOS 26, visionOS 26, macOS 26, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension PermissionKit.CommunicationHandle.Kind : Swift.Equatable {}
-@available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+@available(iOS 26, visionOS 26, macOS 26, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension PermissionKit.CommunicationHandle.Kind : Swift.Hashable {}
-@available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+@available(iOS 26, visionOS 26, macOS 26, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension PermissionKit.PermissionChoice.Answer : Swift.Equatable {}
-@available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+@available(iOS 26, visionOS 26, macOS 26, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension PermissionKit.PermissionChoice.Answer : Swift.Hashable {}
-@available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+@available(iOS 26, visionOS 26, macOS 26, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension PermissionKit.CommunicationTopic.Action : Swift.Equatable {}
-@available(iOS 26.0, visionOS 26.0, macOS 26.0, *)
+@available(iOS 26, visionOS 26, macOS 26, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension PermissionKit.CommunicationTopic.Action : Swift.Hashable {}

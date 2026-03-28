@@ -1,9 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/FindMyDevice.framework/Versions/A/FindMyDevice'
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _FMDFMIPManagerUnregisterErrorDomain, _FMDFMMManagerUnregisterErrorDomain, 
                        _FMDLostModeExitAuthCompleteNotification, _FMDRepairDeviceThisDeviceIdentifier, 
                        _FMDSecureLocationsReceivedCommandNotification, _FMDSecureLocationsReceivedPayloadNotification, 
@@ -35,11 +37,11 @@ exports:
                        _kFindMyDeviceIdentityXPCInterfaceErrorDomain, _kLostModeChangedRestrictedNotification, 
                        _kStopLostModeAlarmNotification ]
     objc-classes:    [ FMDAccessoryIdentifier, FMDActivationLockContext, FMDActivationLockInfo, 
-                       FMDAudioAccessoryInfo, FMDBAAAttestation, FMDDeviceIdentityFactory, 
-                       FMDEraseOptions, FMDEraseProxy, FMDFMIPAccountInfo, FMDFMMAccountInfo, 
-                       FMDFMMManager, FMDIdentitySigningRequest, FMDLocalFindableAccessory, 
-                       FMDRepairDevice, FMDRepairDeviceContext, FMDRepairDeviceResult, 
-                       FMDSharedConfiguration, FMDSharedConfigurationEntry, FMDSharedConfigurationFollowUpEntry, 
-                       FMDVolatileMetaDataRecord, FMNSXPCConnection, FMNSXPCConnectionCache, 
-                       FMNSXPCConnectionConfiguration ]
+                       FMDAudioAccessoryInfo, FMDBAAAttestation, FMDCommandValidationSignatureRequestContext, 
+                       FMDDeviceIdentityFactory, FMDEraseOptions, FMDEraseProxy, 
+                       FMDFMIPAccountInfo, FMDFMMAccountInfo, FMDFMMManager, FMDIdentitySigningRequest, 
+                       FMDLocalFindableAccessory, FMDRepairDevice, FMDRepairDeviceContext, 
+                       FMDRepairDeviceResult, FMDSharedConfiguration, FMDSharedConfigurationEntry, 
+                       FMDSharedConfigurationFollowUpEntry, FMDVolatileMetaDataRecord, 
+                       FMNSXPCConnection, FMNSXPCConnectionCache, FMNSXPCConnectionConfiguration ]
 ...

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
-// swift-module-flags: -target arm64e-apple-macos26.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature StrictConcurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7622.1.19.2 -module-name BrowserEngineKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-module-flags: -target arm64e-apple-macos26.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature StrictConcurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7623.1.14.11.1 -module-name BrowserEngineKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import AVFoundation
 @_exported import BrowserEngineCore
 @_exported import BrowserEngineKit
@@ -74,6 +74,18 @@ extension BrowserEngineKit.WebContentExtension {
   @available(macOS, unavailable)
   public typealias ID = Foundation.UUID
 }
+@available(macOS 26.2, iOS 26.2, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+public enum RenderingExtensionFeature {
+  case coreML
+  public static func == (a: BrowserEngineKit.RenderingExtensionFeature, b: BrowserEngineKit.RenderingExtensionFeature) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
 @available(macOS 14.3, iOS 17.4, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
@@ -96,6 +108,11 @@ extension BrowserEngineKit.RenderingExtension {
   public var configuration: BrowserEngineKit.RenderingExtensionConfiguration {
     get
   }
+  @available(macOS 26.2, iOS 26.2, *)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(visionOS, unavailable)
+  public func enableFeature(_ feature: BrowserEngineKit.RenderingExtensionFeature)
 }
 @available(macOS 14.3, iOS 17.4, *)
 @available(watchOS, unavailable)
@@ -324,6 +341,16 @@ extension BrowserEngineKit.NetworkingExtension {
     get
   }
 }
+@available(macOS 26.2, iOS 26.2, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension BrowserEngineKit.RenderingExtensionFeature : Swift.Equatable {}
+@available(macOS 26.2, iOS 26.2, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension BrowserEngineKit.RenderingExtensionFeature : Swift.Hashable {}
 @available(macOS 14.3, iOS 17.4, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)

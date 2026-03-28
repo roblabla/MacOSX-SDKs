@@ -9,7 +9,7 @@
 
 @protocol GCPhysicalInputElement;
 @protocol GCPhysicalInputSource;
-
+@protocol GCPhysicalInputExtents;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -76,6 +76,11 @@ API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
  */
 @property (readonly) NSTimeInterval lastValueLatency;
 
+/**
+ An object describing the physical extents of the input, if the input represents
+ a physical unit of measurement.
+ */
+@property (readonly, nullable) id<GCPhysicalInputExtents> physicalExtents API_AVAILABLE(macos(26.2), ios(26.2), tvos(26.2), visionos(26.2));
 
 
 /**

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
-// swift-module-flags: -target x86_64-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 815.1.15 -module-name StoreKit
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-module-flags: -target x86_64-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 815.2.12.1.1 -module-name StoreKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import BackgroundAssets
 import Combine
 import CoreFoundation
@@ -70,32 +70,32 @@ extension StoreKit.Product.SubscriptionInfo {
     @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
     public let offer: StoreKit.Transaction.Offer?
     #if compiler(>=5.3) && $NonescapableTypes
-    @available(iOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.id", message: "Use the offer property instead")
-    @available(macOS, introduced: 12.0, deprecated: 15.0, renamed: "offer.id", message: "Use the offer property instead")
-    @available(tvOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.id", message: "Use the offer property instead")
-    @available(watchOS, introduced: 8.0, deprecated: 11.0, renamed: "offer.id", message: "Use the offer property instead")
-    @available(visionOS, introduced: 1.0, deprecated: 2.0, renamed: "offer.id", message: "Use the offer property instead")
+    @available(iOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.id", message: "Use the offer property instead.")
+    @available(macOS, introduced: 12.0, deprecated: 15.0, renamed: "offer.id", message: "Use the offer property instead.")
+    @available(tvOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.id", message: "Use the offer property instead.")
+    @available(watchOS, introduced: 8.0, deprecated: 11.0, renamed: "offer.id", message: "Use the offer property instead.")
+    @available(visionOS, introduced: 1.0, deprecated: 2.0, renamed: "offer.id", message: "Use the offer property instead.")
     public var offerID: Swift.String? {
       get
     }
     #endif
     #if compiler(>=5.3) && $NonescapableTypes
-    @available(iOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.type", message: "Use the offer property instead")
-    @available(macOS, introduced: 12.0, deprecated: 15.0, renamed: "offer.type", message: "Use the offer property instead")
-    @available(tvOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.type", message: "Use the offer property instead")
-    @available(watchOS, introduced: 8.0, deprecated: 11.0, renamed: "offer.type", message: "Use the offer property instead")
-    @available(visionOS, introduced: 1.0, deprecated: 2.0, renamed: "offer.type", message: "Use the offer property instead")
+    @available(iOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.type", message: "Use the offer property instead.")
+    @available(macOS, introduced: 12.0, deprecated: 15.0, renamed: "offer.type", message: "Use the offer property instead.")
+    @available(tvOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.type", message: "Use the offer property instead.")
+    @available(watchOS, introduced: 8.0, deprecated: 11.0, renamed: "offer.type", message: "Use the offer property instead.")
+    @available(visionOS, introduced: 1.0, deprecated: 2.0, renamed: "offer.type", message: "Use the offer property instead.")
     public var offerType: StoreKit.Transaction.OfferType? {
       get
     }
     #endif
     #if compiler(>=5.3) && $NonescapableTypes
     @backDeployed(before: iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
-    @available(iOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
-    @available(macOS, introduced: 12.0, deprecated: 15.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
-    @available(tvOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
-    @available(watchOS, introduced: 8.0, deprecated: 11.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
-    @available(visionOS, introduced: 1.0, deprecated: 2.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
+    @available(iOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead.")
+    @available(macOS, introduced: 12.0, deprecated: 15.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead.")
+    @available(tvOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead.")
+    @available(watchOS, introduced: 8.0, deprecated: 11.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead.")
+    @available(visionOS, introduced: 1.0, deprecated: 2.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead.")
     public var offerPaymentModeStringRepresentation: Swift.String? {
       get {
             if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
@@ -113,11 +113,11 @@ extension StoreKit.Product.SubscriptionInfo {
     #endif
     #if compiler(>=5.3) && $NonescapableTypes
     @backDeployed(before: iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4)
-    @available(iOS, introduced: 15.0, deprecated: 18.4, message: "Use the offer property instead")
-    @available(macOS, introduced: 12.0, deprecated: 15.4, message: "Use the offer property instead")
-    @available(tvOS, introduced: 15.0, deprecated: 18.4, message: "Use the offer property instead")
-    @available(watchOS, introduced: 8.0, deprecated: 11.4, message: "Use the offer property instead")
-    @available(visionOS, introduced: 1.0, deprecated: 2.4, message: "Use the offer property instead")
+    @available(iOS, introduced: 15.0, deprecated: 18.4, message: "Use the offer property instead.")
+    @available(macOS, introduced: 12.0, deprecated: 15.4, message: "Use the offer property instead.")
+    @available(tvOS, introduced: 15.0, deprecated: 18.4, message: "Use the offer property instead.")
+    @available(watchOS, introduced: 8.0, deprecated: 11.4, message: "Use the offer property instead.")
+    @available(visionOS, introduced: 1.0, deprecated: 2.4, message: "Use the offer property instead.")
     public var offerPeriodStringRepresentation: Swift.String? {
       get {
              
@@ -133,11 +133,11 @@ extension StoreKit.Product.SubscriptionInfo {
     @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
     public let environment: StoreKit.AppStore.Environment
     @backDeployed(before: iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, macCatalyst 16.0)
-    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the environment property instead")
-    @available(macOS, introduced: 12.0, deprecated: 13.0, message: "Use the environment property instead")
-    @available(tvOS, introduced: 15.0, deprecated: 16.0, message: "Use the environment property instead")
-    @available(watchOS, introduced: 8.0, deprecated: 9.0, message: "Use the environment property instead")
-    @available(macCatalyst, introduced: 15.0, deprecated: 16.0, message: "Use the environment property instead")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the environment property instead.")
+    @available(macOS, introduced: 12.0, deprecated: 13.0, message: "Use the environment property instead.")
+    @available(tvOS, introduced: 15.0, deprecated: 16.0, message: "Use the environment property instead.")
+    @available(watchOS, introduced: 8.0, deprecated: 9.0, message: "Use the environment property instead.")
+    @available(macCatalyst, introduced: 15.0, deprecated: 16.0, message: "Use the environment property instead.")
     @available(visionOS, unavailable)
     public var environmentStringRepresentation: Swift.String {
       get {
@@ -240,10 +240,10 @@ extension StoreKit.Product.SubscriptionInfo {
     #endif
     #if compiler(>=5.3) && $NonescapableTypes
     @backDeployed(before: iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0)
-    @available(iOS, introduced: 15.0, deprecated: 16.0, renamed: "currency.identifier", message: "Use the currency property instead")
-    @available(macOS, introduced: 12.0, deprecated: 13.0, renamed: "currency.identifier", message: "Use the currency property instead")
-    @available(tvOS, introduced: 15.0, deprecated: 16.0, renamed: "currency.identifier", message: "Use the currency property instead")
-    @available(watchOS, introduced: 8.0, deprecated: 9.0, renamed: "currency.identifier", message: "Use the currency property instead")
+    @available(iOS, introduced: 15.0, deprecated: 16.0, renamed: "currency.identifier", message: "Use the currency property instead.")
+    @available(macOS, introduced: 12.0, deprecated: 13.0, renamed: "currency.identifier", message: "Use the currency property instead.")
+    @available(tvOS, introduced: 15.0, deprecated: 16.0, renamed: "currency.identifier", message: "Use the currency property instead.")
+    @available(watchOS, introduced: 8.0, deprecated: 9.0, renamed: "currency.identifier", message: "Use the currency property instead.")
     @available(visionOS, unavailable)
     public var currencyCode: Swift.String? {
       get {
@@ -543,11 +543,11 @@ public struct AppTransaction : Swift.Sendable {
   @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
   public let originalPlatform: StoreKit.AppStore.Platform
   @backDeployed(before: iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4)
-  @available(iOS, introduced: 16.0, deprecated: 18.4, message: "Use the originalPlatform property instead")
-  @available(macOS, introduced: 13.0, deprecated: 15.4, message: "Use the originalPlatform property instead")
-  @available(tvOS, introduced: 16.0, deprecated: 18.4, message: "Use the originalPlatform property instead")
-  @available(watchOS, introduced: 9.0, deprecated: 11.4, message: "Use the originalPlatform property instead")
-  @available(visionOS, introduced: 1.0, deprecated: 2.4, message: "Use the originalPlatform property instead")
+  @available(iOS, introduced: 16.0, deprecated: 18.4, message: "Use the originalPlatform property instead.")
+  @available(macOS, introduced: 13.0, deprecated: 15.4, message: "Use the originalPlatform property instead.")
+  @available(tvOS, introduced: 16.0, deprecated: 18.4, message: "Use the originalPlatform property instead.")
+  @available(watchOS, introduced: 9.0, deprecated: 11.4, message: "Use the originalPlatform property instead.")
+  @available(visionOS, introduced: 1.0, deprecated: 2.4, message: "Use the originalPlatform property instead.")
   public var originalPlatformStringRepresentation: Swift.String {
     get {
         if #available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *) {
@@ -1133,32 +1133,32 @@ public struct Transaction : Swift.Identifiable {
   @available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, visionOS 1.1, *)
   public let offer: StoreKit.Transaction.Offer?
   #if compiler(>=5.3) && $NonescapableTypes
-  @available(iOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.type", message: "Use the offer property instead")
-  @available(macOS, introduced: 12.0, deprecated: 14.2, renamed: "offer.type", message: "Use the offer property instead")
-  @available(tvOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.type", message: "Use the offer property instead")
-  @available(watchOS, introduced: 8.0, deprecated: 10.2, renamed: "offer.type", message: "Use the offer property instead")
-  @available(visionOS, introduced: 1.0, deprecated: 1.1, renamed: "offer.type", message: "Use the offer property instead")
+  @available(iOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.type", message: "Use the offer property instead.")
+  @available(macOS, introduced: 12.0, deprecated: 14.2, renamed: "offer.type", message: "Use the offer property instead.")
+  @available(tvOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.type", message: "Use the offer property instead.")
+  @available(watchOS, introduced: 8.0, deprecated: 10.2, renamed: "offer.type", message: "Use the offer property instead.")
+  @available(visionOS, introduced: 1.0, deprecated: 1.1, renamed: "offer.type", message: "Use the offer property instead.")
   public var offerType: StoreKit.Transaction.OfferType? {
     get
   }
   #endif
   #if compiler(>=5.3) && $NonescapableTypes
-  @available(iOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.id", message: "Use the offer property instead")
-  @available(macOS, introduced: 12.0, deprecated: 14.2, renamed: "offer.id", message: "Use the offer property instead")
-  @available(tvOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.id", message: "Use the offer property instead")
-  @available(watchOS, introduced: 8.0, deprecated: 10.2, renamed: "offer.id", message: "Use the offer property instead")
-  @available(visionOS, introduced: 1.0, deprecated: 1.1, renamed: "offer.id", message: "Use the offer property instead")
+  @available(iOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.id", message: "Use the offer property instead.")
+  @available(macOS, introduced: 12.0, deprecated: 14.2, renamed: "offer.id", message: "Use the offer property instead.")
+  @available(tvOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.id", message: "Use the offer property instead.")
+  @available(watchOS, introduced: 8.0, deprecated: 10.2, renamed: "offer.id", message: "Use the offer property instead.")
+  @available(visionOS, introduced: 1.0, deprecated: 1.1, renamed: "offer.id", message: "Use the offer property instead.")
   public var offerID: Swift.String? {
     get
   }
   #endif
   #if compiler(>=5.3) && $NonescapableTypes
   @backDeployed(before: iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2)
-  @available(iOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
-  @available(macOS, introduced: 12.0, deprecated: 14.2, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
-  @available(tvOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
-  @available(watchOS, introduced: 8.0, deprecated: 10.2, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
-  @available(visionOS, introduced: 1.0, deprecated: 1.1, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
+  @available(iOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead.")
+  @available(macOS, introduced: 12.0, deprecated: 14.2, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead.")
+  @available(tvOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead.")
+  @available(watchOS, introduced: 8.0, deprecated: 10.2, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead.")
+  @available(visionOS, introduced: 1.0, deprecated: 1.1, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead.")
   public var offerPaymentModeStringRepresentation: Swift.String? {
     get {
         if #available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, *) {
@@ -1176,11 +1176,11 @@ public struct Transaction : Swift.Identifiable {
   #endif
   #if compiler(>=5.3) && $NonescapableTypes
   @backDeployed(before: iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4)
-  @available(iOS, introduced: 15.0, deprecated: 18.4, message: "Use the offer property instead")
-  @available(macOS, introduced: 12.0, deprecated: 15.4, message: "Use the offer property instead")
-  @available(tvOS, introduced: 15.0, deprecated: 18.4, message: "Use the offer property instead")
-  @available(watchOS, introduced: 8.0, deprecated: 11.4, message: "Use the offer property instead")
-  @available(visionOS, introduced: 1.0, deprecated: 2.4, message: "Use the offer property instead")
+  @available(iOS, introduced: 15.0, deprecated: 18.4, message: "Use the offer property instead.")
+  @available(macOS, introduced: 12.0, deprecated: 15.4, message: "Use the offer property instead.")
+  @available(tvOS, introduced: 15.0, deprecated: 18.4, message: "Use the offer property instead.")
+  @available(watchOS, introduced: 8.0, deprecated: 11.4, message: "Use the offer property instead.")
+  @available(visionOS, introduced: 1.0, deprecated: 2.4, message: "Use the offer property instead.")
   public var offerPeriodStringRepresentation: Swift.String? {
     get {
          
@@ -1246,7 +1246,6 @@ public struct Transaction : Swift.Identifiable {
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
   public let storefront: StoreKit.Storefront
   @backDeployed(before: iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, macCatalyst 17.0)
-  @available(iOS, introduced: 15.0, deprecated: 17.0, message: "Use the storefront property instead")
   @available(macOS, introduced: 12.0, deprecated: 14.0, message: "Use the storefront property instead")
   @available(tvOS, introduced: 15.0, deprecated: 17.0, message: "Use the storefront property instead")
   @available(watchOS, introduced: 8.0, deprecated: 10.0, message: "Use the storefront property instead")
@@ -1629,8 +1628,7 @@ extension StoreKit.AppStore {
     get async throws
   }
 }
-@available(iOS 26.0, tvOS 26.0, *)
-@available(macOS, unavailable)
+@available(iOS 26.0, tvOS 26.0, macOS 26.2, *)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct AppStoreMerchandisingKind : Swift.Sendable {
@@ -1638,19 +1636,15 @@ public struct AppStoreMerchandisingKind : Swift.Sendable {
     case dismissed
     case purchaseCompleted(StoreKit.Product.PurchaseResult)
   }
-  @available(iOS, unavailable)
-  @available(tvOS, unavailable)
-  @available(macOS, unavailable)
-  @available(watchOS, unavailable)
-  @available(visionOS, unavailable)
-  public static func subscriptionBundle(_ productIDs: [StoreKit.Product.ID]) -> StoreKit.AppStoreMerchandisingKind
   public static func subscriptionBundle(_ groupID: Swift.String) -> StoreKit.AppStoreMerchandisingKind
-  @available(iOS, unavailable)
-  @available(tvOS, unavailable)
-  @available(macOS, unavailable)
-  @available(watchOS, unavailable)
-  @available(visionOS, unavailable)
-  public static func subscriptionBundle(_ products: [StoreKit.Product]) -> StoreKit.AppStoreMerchandisingKind
+}
+extension StoreKit.AppStore {
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(iOS 26.2, macOS 26.2, tvOS 26.2, watchOS 26.2, visionOS 26.2, *)
+  public static var ageRatingCode: Swift.Int? {
+    get async
+  }
+  #endif
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension StoreKit.VerificationResult where SignedType == StoreKit.AppTransaction {
@@ -1788,11 +1782,11 @@ extension StoreKit.Product.SubscriptionOffer.OfferType : Swift.Sendable {
 extension StoreKit.Product.SubscriptionOffer.PaymentMode : Swift.Sendable {
 }
 extension StoreKit.Product.SubscriptionOffer {
-  @available(iOS, introduced: 17.4, deprecated: 26.0, message: "Sign promotional offers with JWS and use PurchaseOption.promotionalOffer(_:compactJWS:) instead")
-  @available(macOS, introduced: 14.4, deprecated: 26.0, message: "Sign promotional offers with JWS and use PurchaseOption.promotionalOffer(_:compactJWS:) instead")
-  @available(tvOS, introduced: 17.4, deprecated: 26.0, message: "Sign promotional offers with JWS and use PurchaseOption.promotionalOffer(_:compactJWS:) instead")
-  @available(watchOS, introduced: 10.4, deprecated: 26.0, message: "Sign promotional offers with JWS and use PurchaseOption.promotionalOffer(_:compactJWS:) instead")
-  @available(visionOS, introduced: 1.1, deprecated: 26.0, message: "Sign promotional offers with JWS and use PurchaseOption.promotionalOffer(_:compactJWS:) instead")
+  @available(iOS, introduced: 17.4, deprecated: 26.0, message: "Sign promotional offers with JWS and use PurchaseOption.promotionalOffer(_:compactJWS:) instead.")
+  @available(macOS, introduced: 14.4, deprecated: 26.0, message: "Sign promotional offers with JWS and use PurchaseOption.promotionalOffer(_:compactJWS:) instead.")
+  @available(tvOS, introduced: 17.4, deprecated: 26.0, message: "Sign promotional offers with JWS and use PurchaseOption.promotionalOffer(_:compactJWS:) instead.")
+  @available(watchOS, introduced: 10.4, deprecated: 26.0, message: "Sign promotional offers with JWS and use PurchaseOption.promotionalOffer(_:compactJWS:) instead.")
+  @available(visionOS, introduced: 1.1, deprecated: 26.0, message: "Sign promotional offers with JWS and use PurchaseOption.promotionalOffer(_:compactJWS:) instead.")
   public struct Signature : Swift.Equatable, Swift.Hashable, Swift.Sendable {
     public var keyID: Swift.String
     public var nonce: Foundation.UUID
@@ -1999,6 +1993,8 @@ extension StoreKit.Product.SubscriptionInfo.RenewalInfo {
     public struct Item : Swift.Equatable, Swift.Hashable, Swift.Sendable {
       public typealias Details = StoreKit.Transaction.AdvancedCommerceInfo.Item.Details
       public let details: StoreKit.Product.SubscriptionInfo.RenewalInfo.AdvancedCommerceInfo.Item.Details
+      @available(iOS 26.2, macOS 26.2, tvOS 26.2, watchOS 26.2, visionOS 26.2, *)
+      public let priceIncreaseInfo: StoreKit.Product.SubscriptionInfo.RenewalInfo.AdvancedCommerceInfo.Item.PriceIncreaseInfo?
       public static func == (a: StoreKit.Product.SubscriptionInfo.RenewalInfo.AdvancedCommerceInfo.Item, b: StoreKit.Product.SubscriptionInfo.RenewalInfo.AdvancedCommerceInfo.Item) -> Swift.Bool
       public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
@@ -2013,6 +2009,28 @@ extension StoreKit.Product.SubscriptionInfo.RenewalInfo {
     public let period: StoreKit.SubscriptionPeriod
     public let items: [StoreKit.Product.SubscriptionInfo.RenewalInfo.AdvancedCommerceInfo.Item]
     public static func == (a: StoreKit.Product.SubscriptionInfo.RenewalInfo.AdvancedCommerceInfo, b: StoreKit.Product.SubscriptionInfo.RenewalInfo.AdvancedCommerceInfo) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+@available(iOS 26.2, macOS 26.2, tvOS 26.2, watchOS 26.2, visionOS 26.2, *)
+extension StoreKit.Product.SubscriptionInfo.RenewalInfo.AdvancedCommerceInfo.Item {
+  public struct PriceIncreaseInfo : Swift.Equatable, Swift.Hashable, Swift.Sendable {
+    public struct Status : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.Sendable {
+      public let rawValue: Swift.String
+      public init(rawValue: Swift.String)
+      public static let pending: StoreKit.Product.SubscriptionInfo.RenewalInfo.AdvancedCommerceInfo.Item.PriceIncreaseInfo.Status
+      public static let accepted: StoreKit.Product.SubscriptionInfo.RenewalInfo.AdvancedCommerceInfo.Item.PriceIncreaseInfo.Status
+      public static let scheduled: StoreKit.Product.SubscriptionInfo.RenewalInfo.AdvancedCommerceInfo.Item.PriceIncreaseInfo.Status
+      @available(iOS 26.2, tvOS 26.2, watchOS 26.2, visionOS 26.2, macOS 26.2, *)
+      public typealias RawValue = Swift.String
+    }
+    public let status: StoreKit.Product.SubscriptionInfo.RenewalInfo.AdvancedCommerceInfo.Item.PriceIncreaseInfo.Status
+    public let price: Foundation.Decimal
+    public let dependentSKUs: [Swift.String]
+    public static func == (a: StoreKit.Product.SubscriptionInfo.RenewalInfo.AdvancedCommerceInfo.Item.PriceIncreaseInfo, b: StoreKit.Product.SubscriptionInfo.RenewalInfo.AdvancedCommerceInfo.Item.PriceIncreaseInfo) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
@@ -2539,27 +2557,6 @@ extension StoreKit.Product.SubscriptionPeriod {
 extension StoreKit.BackingValue {
   #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, visionOS 1.0, *)
-  @usableFromInline
-  internal init?(_ value: StoreKit.BackingValue)
-  #endif
-}
-@available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
-extension StoreKit.Transaction.AdvancedCommerceInfo.Offer.Reason {
-  #if compiler(>=5.3) && $NonescapableTypes
-  @usableFromInline
-  internal init?(_ value: StoreKit.BackingValue)
-  #endif
-}
-@available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
-extension StoreKit.Transaction.AdvancedCommerceInfo.Refund.Reason {
-  #if compiler(>=5.3) && $NonescapableTypes
-  @usableFromInline
-  internal init?(_ value: StoreKit.BackingValue)
-  #endif
-}
-@available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
-extension StoreKit.Transaction.AdvancedCommerceInfo.Refund.RefundType {
-  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
   #endif

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreWiFi.framework/Versions/A/CoreWiFi'
-current-version: 980.16
+current-version: 983.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -356,12 +356,12 @@ exports:
                        _CWFXPCThermalIndexKey, _CWFXPCTimestampKey, _CWFXPCUCMExtProfileKey, 
                        _CWFXPCUserAutoJoinStateKey, _CWFXPCUserSettingsKey, _CWFXPCUserSettingsPropertiesKey, 
                        _CWFXPCWiFiNetworkSharingAccessoryIDKey, _CWFXPCWiFiNetworkSharingAskToShareStatusKey, 
-                       _CWFXPCWiFiNetworkSharingAuthorizationLevelKey, _CWFXPCWiFiNetworkSharingClientIDKey, 
-                       _CWFXPCWiFiNetworkSharingNetworkIDKey, _CWFXPCWiFiNetworkSharingNetworkListUpdateKey, 
-                       _MACAddressKey, _NetworkNameKey, _NetworkStateKey, _RSSIKey, 
-                       _SSIDKey, _SecurityTypeKey, _interfaceDeactivationTimeout, 
-                       _kDeviceMACAddressKey, _kDeviceModelKey, _kDeviceNameKey, 
-                       _kDeviceProductColorKey, _kDeviceProductMarketingNameKey, 
+                       _CWFXPCWiFiNetworkSharingAuthorizationLevelKey, _CWFXPCWiFiNetworkSharingBundleIDKey, 
+                       _CWFXPCWiFiNetworkSharingClientIDKey, _CWFXPCWiFiNetworkSharingNetworkIDKey, 
+                       _CWFXPCWiFiNetworkSharingNetworkListUpdateKey, _MACAddressKey, 
+                       _NetworkNameKey, _NetworkStateKey, _RSSIKey, _SSIDKey, _SecurityTypeKey, 
+                       _interfaceDeactivationTimeout, _kDeviceMACAddressKey, _kDeviceModelKey, 
+                       _kDeviceNameKey, _kDeviceProductColorKey, _kDeviceProductMarketingNameKey, 
                        _kDeviceProductTypeKey, _kDeviceRapportEffectiveIdentifierKey, 
                        _kExtractWiFiInfoRequestID, _kRapportRequestTimeStampKey, 
                        _kWiFiInfoDeviceMACAddressKey, _rapportClientActivationFailThreshold, 

@@ -7,7 +7,19 @@ swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s14AccountsDaemon18XPCEventSubscriberV10caresAbout7account10changeTypeSbSo9ACAccountC_So0j6ChangeI0atF', 
+    symbols:         [ '_$s14AccountsDaemon18ACDAnalyticsSenderC15unownedExecutorScevg', 
+                       '_$s14AccountsDaemon18ACDAnalyticsSenderC15unownedExecutorScevpMV', 
+                       '_$s14AccountsDaemon18ACDAnalyticsSenderC20postMonthlyAnalyticsyyYaFTj', 
+                       '_$s14AccountsDaemon18ACDAnalyticsSenderC20postMonthlyAnalyticsyyYaFTjTu', 
+                       '_$s14AccountsDaemon18ACDAnalyticsSenderC20postMonthlyAnalyticsyyYaFTq', 
+                       '_$s14AccountsDaemon18ACDAnalyticsSenderC6sharedACvgZ', '_$s14AccountsDaemon18ACDAnalyticsSenderC6sharedACvpZMV', 
+                       '_$s14AccountsDaemon18ACDAnalyticsSenderCACycfC', '_$s14AccountsDaemon18ACDAnalyticsSenderCACycfCTj', 
+                       '_$s14AccountsDaemon18ACDAnalyticsSenderCACycfCTq', '_$s14AccountsDaemon18ACDAnalyticsSenderCACycfc', 
+                       '_$s14AccountsDaemon18ACDAnalyticsSenderCMa', '_$s14AccountsDaemon18ACDAnalyticsSenderCMn', 
+                       '_$s14AccountsDaemon18ACDAnalyticsSenderCMo', '_$s14AccountsDaemon18ACDAnalyticsSenderCMu', 
+                       '_$s14AccountsDaemon18ACDAnalyticsSenderCN', '_$s14AccountsDaemon18ACDAnalyticsSenderCScAAAMc', 
+                       '_$s14AccountsDaemon18ACDAnalyticsSenderCfD', '_$s14AccountsDaemon18ACDAnalyticsSenderCfd', 
+                       '_$s14AccountsDaemon18XPCEventSubscriberV10caresAbout7account10changeTypeSbSo9ACAccountC_So0j6ChangeI0atF', 
                        '_$s14AccountsDaemon18XPCEventSubscriberV11descriptionSSvg', 
                        '_$s14AccountsDaemon18XPCEventSubscriberV11descriptionSSvpMV', 
                        '_$s14AccountsDaemon18XPCEventSubscriberV6handle10descriptor5flagsACs6UInt64V_So13OS_xpc_object_pAA0cD5FlagsVtcfC', 
@@ -99,5 +111,6 @@ exports:
                        ACDPluginLoader, ACDPreferences, ACDQueueDictionary, ACDServer, 
                        ACDTCCUtilities, ACDTestManager, ACDTimeMachineAccountStore, 
                        ACDTransientDatabase, ACDUserNotification, ACRemoteDeviceProxy, 
-                       _TtC14AccountsDaemon27ACDXPCEventPublisherWrapper, _TtC14AccountsDaemon35ACDAsyncAuthenticationPluginManager ]
+                       _TtC14AccountsDaemon18ACDAnalyticsSender, _TtC14AccountsDaemon27ACDXPCEventPublisherWrapper, 
+                       _TtC14AccountsDaemon35ACDAsyncAuthenticationPluginManager ]
 ...

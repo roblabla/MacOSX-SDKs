@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TipsUI.framework/Versions/A/TipsUI'
-current-version: 822.1.10
+current-version: 822.2.8
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -172,6 +172,7 @@ exports:
                        '_$s6TipsUI0A12ContentModelC9tipViewed_20collectionIdentifierySSSg_AFtFTq', 
                        '_$s6TipsUI0A12ContentModelC9userGuide17forBookIdentifier0A4Core04UserF0CSgSSSg_tFTj', 
                        '_$s6TipsUI0A12ContentModelC9userGuide17forBookIdentifier0A4Core04UserF0CSgSSSg_tFTq', 
+                       '_$s6TipsUI0A12ContentModelCACycfC', '_$s6TipsUI0A12ContentModelCACycfc', 
                        '_$s6TipsUI0A12ContentModelCMa', '_$s6TipsUI0A12ContentModelCMn', 
                        '_$s6TipsUI0A12ContentModelCMo', '_$s6TipsUI0A12ContentModelCMu', 
                        '_$s6TipsUI0A12ContentModelCN', '_$s6TipsUI0A12ContentModelCfD', 
@@ -967,6 +968,13 @@ exports:
                        '_$s6TipsUI22DocumentAssetViewModelC14$isVideoLoaded7Combine9PublishedV9PublisherVySb_GvpMV', 
                        '_$s6TipsUI22DocumentAssetViewModelC14$isVideoLoaded7Combine9PublishedV9PublisherVySb_GvsTj', 
                        '_$s6TipsUI22DocumentAssetViewModelC14$isVideoLoaded7Combine9PublishedV9PublisherVySb_GvsTq', 
+                       '_$s6TipsUI22DocumentAssetViewModelC15analyticsHelperAA0a9AnalyticsH0CSgvMTj', 
+                       '_$s6TipsUI22DocumentAssetViewModelC15analyticsHelperAA0a9AnalyticsH0CSgvMTq', 
+                       '_$s6TipsUI22DocumentAssetViewModelC15analyticsHelperAA0a9AnalyticsH0CSgvgTj', 
+                       '_$s6TipsUI22DocumentAssetViewModelC15analyticsHelperAA0a9AnalyticsH0CSgvgTq', 
+                       '_$s6TipsUI22DocumentAssetViewModelC15analyticsHelperAA0a9AnalyticsH0CSgvpMV', 
+                       '_$s6TipsUI22DocumentAssetViewModelC15analyticsHelperAA0a9AnalyticsH0CSgvsTj', 
+                       '_$s6TipsUI22DocumentAssetViewModelC15analyticsHelperAA0a9AnalyticsH0CSgvsTq', 
                        '_$s6TipsUI22DocumentAssetViewModelC19pauseVideoIfPlayingyyFTj', 
                        '_$s6TipsUI22DocumentAssetViewModelC19pauseVideoIfPlayingyyFTq', 
                        '_$s6TipsUI22DocumentAssetViewModelC19resumeVideoIfPausedSbyFTj', 

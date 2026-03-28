@@ -15,6 +15,7 @@ SF_EXTERN API_AVAILABLE(ios(26.0), visionos(26.0)) API_UNAVAILABLE(macCatalyst, 
 
 + (void)openExportBrowsingDataSettingsWithCompletionHandler:(nullable NS_SWIFT_UI_ACTOR void (^)(NSError * _Nullable error))completionHandler;
 
++ (void)openExtensionsSettingsForIdentifiers:(NSArray<NSString *> *)extensionIdentifiers completionHandler:(nullable NS_SWIFT_UI_ACTOR void (^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(26.2), visionos(26.2));
 @end
 
 NS_ASSUME_NONNULL_END

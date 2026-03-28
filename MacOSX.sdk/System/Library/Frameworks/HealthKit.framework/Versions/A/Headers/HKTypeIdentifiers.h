@@ -174,6 +174,7 @@ HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierHeadphoneAudioE
 
 // Heart
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierHighHeartRateEvent API_AVAILABLE(ios(12.2), watchos(5.2), macCatalyst(13.0), macos(13.0), visionos(1.0));                  // HKCategoryValue
+HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierHypertensionEvent API_AVAILABLE(ios(26.2), watchos(26.2), macCatalyst(26.2), macos(26.2), visionos(26.2));                  // HKCategoryValue
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierIrregularHeartRhythmEvent API_AVAILABLE(ios(12.2), watchos(5.2), macCatalyst(13.0), macos(13.0), visionos(1.0));           // HKCategoryValue
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierLowCardioFitnessEvent API_AVAILABLE(ios(14.3), watchos(7.2), macCatalyst(14.3), macos(13.0), visionos(1.0));               // HKCategoryValueLowCardioFitnessEvent
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierLowHeartRateEvent API_AVAILABLE(ios(12.2), watchos(5.2), macCatalyst(13.0), macos(13.0), visionos(1.0));                   // HKCategoryValue

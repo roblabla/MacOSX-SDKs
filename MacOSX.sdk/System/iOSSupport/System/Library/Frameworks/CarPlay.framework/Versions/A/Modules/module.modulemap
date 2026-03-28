@@ -1,6 +1,6 @@
-framework module CarPlay {
-  umbrella header "CarPlay.h"
-  export *
+framework module CarPlay [system] {
+    umbrella header "CarPlay.h"
 
-  module * { export * }
+    export *
+    module * { export * }
 }

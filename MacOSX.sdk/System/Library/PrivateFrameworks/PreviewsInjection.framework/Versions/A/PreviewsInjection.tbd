@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsInjection.framework/Versions/A/PreviewsInjection'
-current-version: 23.10.5
+current-version: 23.20.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -15,7 +15,7 @@ exports:
                        '_$s17PreviewsInjection010__previewsB17JITLinkEntrypoint4argc4argv0C9DylibPath0cH14EntryPointNameys5Int32V_SpySpys4Int8VGSgGSgA2LtF', 
                        '_$s17PreviewsInjection010__previewsB17RunUserEntryPoints5Int32VyF', 
                        '_$s17PreviewsInjection010__previewsB19PerformFirstJITLink4argc4argvs5Int32VAF_SpySpys4Int8VGSgGSgtF', 
-                       '_$s17PreviewsInjection010__previewsB34RegisterSwiftExtensionEntrySeciont4argc4argvs5Int32VAF_SpySpys4Int8VGSgGSgtF', 
+                       '_$s17PreviewsInjection010__previewsB34RegisterSwiftExtensionEntrySection4argc4argvs5Int32VAF_SpySpys4Int8VGSgGSgtF', 
                        '_$s17PreviewsInjection010__previewsB40GetDebugPseudodylibSwiftEntrySectionDataSVyF', 
                        '_$s17PreviewsInjection10EntryPointMp', '_$s17PreviewsInjection10EntryPointP12cancelUpdateyyYaFTj', 
                        '_$s17PreviewsInjection10EntryPointP12cancelUpdateyyYaFTjTu', 

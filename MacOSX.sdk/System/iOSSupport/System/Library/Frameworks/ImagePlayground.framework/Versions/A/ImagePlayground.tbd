@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ImagePlayground.framework/Versions/A/ImagePlayground'
-current-version: 148.1.1
+current-version: 148.2.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -274,7 +274,6 @@ exports:
                        '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV10familyNameSSvg', 
                        '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV10familyNameSSvpMV', 
                        '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV10familyNameSSvs', 
-                       '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV11displayName06familyG013backingPrompt12iconFilename012providerIconG0AESS_S2SSgSSAKtcfC', 
                        '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV11displayNameSSvM', 
                        '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV11displayNameSSvg', 
                        '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV11displayNameSSvpMV', 
@@ -283,10 +282,11 @@ exports:
                        '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV12iconFilenameSSvg', 
                        '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV12iconFilenameSSvpMV', 
                        '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV12iconFilenameSSvs', 
-                       '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV13backingPromptSSSgvM', 
-                       '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV13backingPromptSSSgvg', 
-                       '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV13backingPromptSSSgvpMV', 
-                       '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV13backingPromptSSSgvs', 
+                       '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV15unlocalizedName07displayG006familyG012iconFilename012providerIconG0AESSSg_S3SAKtcfC', 
+                       '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV15unlocalizedNameSSSgvM', 
+                       '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV15unlocalizedNameSSSgvg', 
+                       '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV15unlocalizedNameSSSgvpMV', 
+                       '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV15unlocalizedNameSSSgvs', 
                        '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV16providerIconNameSSSgvM', 
                        '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV16providerIconNameSSSgvg', 
                        '_$s15ImagePlayground0aB5StyleV18RepresentationInfoV16providerIconNameSSSgvpMV', 

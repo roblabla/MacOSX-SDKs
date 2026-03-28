@@ -18,5 +18,5 @@ exports:
                        _ASI_GetCurrentCPUDescriptionWithFormat, _ASI_GetFrameworkBundle, 
                        _ASI_GetLocalizedCPUDescriptionForCPUDescription, _ASI_GetLocalizedMarketingName, 
                        _ASI_IsPlatformFeatureEnabled, _ASI_NumberOfCPUs, _ASI_PhysicalMemoryIsUpgradable, 
-                       _ASI_PhysicalMemorySize ]
+                       _ASI_PhysicalMemorySize, _ASI_ShowAboutThisMac ]
 ...

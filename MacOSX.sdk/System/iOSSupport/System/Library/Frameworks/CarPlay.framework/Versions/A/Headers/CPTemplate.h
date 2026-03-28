@@ -32,7 +32,7 @@ CARPLAY_TEMPLATE_UI_ACTOR
  
  @note If no @c tabTitle is specified, the tab will inherit the template's title, if any.
  
- @note Your template should specify either a @c tabSystemItem OR both a @c tabImage and @c tabTitle.
+ @note Your template should specify a @c tabSystemItem OR a @c tabImage OR a @c tabTitle.
  */
 @property (nullable, nonatomic, copy) NSString *tabTitle API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
@@ -40,7 +40,7 @@ CARPLAY_TEMPLATE_UI_ACTOR
  When this template is the first template displayed in a @c CPTabBarTemplate's tab, the tab will inherit
  the image specified in this template. If a tabSystemItem is also specified, tabImage will take precedence.
  
- @note Your template should specify either a @c tabSystemItem OR both a @c tabImage and @c tabTitle.
+ @note Your template should specify a @c tabSystemItem OR a @c tabImage OR a @c tabTitle.
  */
 @property (nullable, nonatomic, strong) UIImage *tabImage API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
@@ -48,7 +48,7 @@ CARPLAY_TEMPLATE_UI_ACTOR
  When this template is the first template displayed in a @c CPTabBarTemplate's tab, the tab will inherit
  the system image AND system title specified in this template.
  
- @note Your template should specify either a @c tabSystemItem OR both a @c tabImage and @c tabTitle.
+ @note Your template should specify a @c tabSystemItem OR a @c tabImage OR a @c tabTitle.
  */
 @property (nonatomic) UITabBarSystemItem tabSystemItem API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 

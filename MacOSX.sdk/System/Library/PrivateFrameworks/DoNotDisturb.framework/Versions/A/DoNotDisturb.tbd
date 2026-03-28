@@ -29,12 +29,12 @@ allowable-clients:
                        SUICITests, SUIMacTests, SUISimulatorTests, SUIWatchTests, 
                        ScreenSharingServer, SessionCore, Settings, SiriSettingsIntents, 
                        SiriUI, Sleep, SleepDaemon, SpringBoard, SpringBoardIntents, 
-                       StatusKitTester, SwiftActions, UserNotificationsCore, UserNotificationsServer, 
-                       UserNotificationsServices, UserNotificationsServicesTests, 
+                       StatusKitTester, SwiftActions, UserNotificationsCore, UserNotificationsCoreTests, 
+                       UserNotificationsServer, UserNotificationsServices, UserNotificationsServicesTests, 
                        UserNotificationsUIKit, UserNotificationsUIKitTests, VisualAlert, 
                        WorkoutAlertBundle, callservicesd, callservicesdTests, carkitd, 
                        dmd, dndctl, dndtool, donotdisturbd, emberctl, imagent, itunesstored, 
-                       mdmd, ospredictiond, usernoted, vot ]
+                       mdmd, ospredictiond, usernoted, usernotificationsd, vot ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

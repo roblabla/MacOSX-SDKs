@@ -3,18 +3,20 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CloudSharing.framework/Versions/A/CloudSharing'
-current-version: 215.1.8
+current-version: 215.1.11
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s10Foundation3URLV12CloudSharingE17sandboxingWrapperSo22FPSandboxingURLWrapperCvg', 
-                       '_$s10Foundation3URLV12CloudSharingE17sandboxingWrapperSo22FPSandboxingURLWrapperCvpMV', 
-                       '_$s10Foundation3URLV12CloudSharingE25sandboxingWrapperReadOnlySo22FPSandboxingURLWrapperCvg', 
+    symbols:         [ '_$s10Foundation3URLV12CloudSharingE25sandboxingWrapperReadOnlySo22FPSandboxingURLWrapperCvg', 
                        '_$s10Foundation3URLV12CloudSharingE25sandboxingWrapperReadOnlySo22FPSandboxingURLWrapperCvpMV', 
                        '_$s10Foundation3URLV12CloudSharingE26evictionSafeResourceValues7forKeysAA011URLResourceH0VShySo16NSURLResourceKeyaG_tKF', 
+                       '_$s10Foundation3URLV12CloudSharingE26sandboxingWrapperReadwriteSo22FPSandboxingURLWrapperCvg', 
+                       '_$s10Foundation3URLV12CloudSharingE26sandboxingWrapperReadwriteSo22FPSandboxingURLWrapperCvpMV', 
                        '_$s10Foundation3URLV12CloudSharingE33cs_extensionlessLastPathComponentSSvg', 
                        '_$s10Foundation3URLV12CloudSharingE33cs_extensionlessLastPathComponentSSvpMV', 
+                       '_$s10Foundation3URLV12CloudSharingE36sandboxingWrapperReadwriteOrReadonlySo22FPSandboxingURLWrapperCvg', 
+                       '_$s10Foundation3URLV12CloudSharingE36sandboxingWrapperReadwriteOrReadonlySo22FPSandboxingURLWrapperCvpMV', 
                        '_$s12CloudSharing08InitiateB0C011callForFileB0_14emailAddresses12phoneNumbers10accessType010permissionL019allowOthersToInvite5replyy10Foundation3URLV_SaySSGANSo28CKShareParticipantPermissionVAPSbyAMSg_So0U0CSgs5Error_pSgtYbctFTj', 
                        '_$s12CloudSharing08InitiateB0C011callForFileB0_14emailAddresses12phoneNumbers10accessType010permissionL019allowOthersToInvite5replyy10Foundation3URLV_SaySSGANSo28CKShareParticipantPermissionVAPSbyAMSg_So0U0CSgs5Error_pSgtYbctFTq', 
                        '_$s12CloudSharing08InitiateB0C011callForFileB0_14emailAddresses12phoneNumbers13optionsGroups5replyy10Foundation3URLV_SaySSGALSaySo28_SWCollaborationOptionsGroupCGyAKSg_So7CKShareCSgs5Error_pSgtYbctFTj', 
@@ -67,7 +69,6 @@ exports:
                        '_$s12CloudSharing08InitiateB0CMa', '_$s12CloudSharing08InitiateB0CMn', 
                        '_$s12CloudSharing08InitiateB0CMo', '_$s12CloudSharing08InitiateB0CMu', 
                        '_$s12CloudSharing08InitiateB0CN', '_$s12CloudSharing08InitiateB0CfD', 
-                       '_$s12CloudSharing17logWrapperMessage3for10isReadOnly5errory10Foundation3URLV_Sbs5Error_pSgtF', 
                        '_$s2os6LoggerV12CloudSharingE10extensionsACvgZ', '_$s2os6LoggerV12CloudSharingE2uiACvgZ', 
                        '_$s2os6LoggerV12CloudSharingE7generalACvgZ', '_$s2os6LoggerV12CloudSharingE9analyticsACvgZ', 
                        '_$sSS12CloudSharingE15cs_hasExtensionySbSSF', '_$sSb12CloudSharingE8asStringSSvg', 

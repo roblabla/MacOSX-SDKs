@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreRE.framework/Versions/A/CoreRE'
-current-version: 403.40.7
+current-version: 403.60.3
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1905,6 +1905,7 @@ exports:
                        _REImagePresentationComponentGetCornerRadiusInPoints, _REImagePresentationComponentGetDefaultCornerRadiusInPoints, 
                        _REImagePresentationComponentGetDesiredImmersiveViewingMode, 
                        _REImagePresentationComponentGetDesiredViewingMode, _REImagePresentationComponentGetDisparityAdjustment, 
+                       _REImagePresentationComponentGetEnableSpatial3DDepthPatching, 
                        _REImagePresentationComponentGetEnableSpecularAndFresnelEffects, 
                        _REImagePresentationComponentGetHasGeneratedSpatial3DImageContent, 
                        _REImagePresentationComponentGetHorizontalFOV, _REImagePresentationComponentGetImageContentType, 
@@ -1930,6 +1931,7 @@ exports:
                        _REImagePresentationComponentSetContentDimensionHint, _REImagePresentationComponentSetCornerRadiusInPoints, 
                        _REImagePresentationComponentSetDesiredImmersiveViewingMode, 
                        _REImagePresentationComponentSetDesiredViewingMode, _REImagePresentationComponentSetDisparityAdjustment, 
+                       _REImagePresentationComponentSetEnableSpatial3DDepthPatching, 
                        _REImagePresentationComponentSetEnableSpecularAndFresnelEffects, 
                        _REImagePresentationComponentSetHasGeneratedSpatial3DImageContent, 
                        _REImagePresentationComponentSetHorizontalFOV, _REImagePresentationComponentSetImageContentType, 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ChronoKit.framework/Versions/A/ChronoKit'
-current-version: 664.1.24
+current-version: 664.2.7
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -2731,6 +2731,7 @@ exports:
                        '_$s9ChronoKit22PowerlogUpdateIdentityVSQAAMc', '_$s9ChronoKit22PowerlogUpdateIdentityVs23CustomStringConvertibleAAMc', 
                        '_$s9ChronoKit22PowerlogWidgetLocationO10homescreenyACSicACmFWC', 
                        '_$s9ChronoKit22PowerlogWidgetLocationO10lockScreenyA2CmFWC', 
+                       '_$s9ChronoKit22PowerlogWidgetLocationO10smartStackyA2CmFWC', 
                        '_$s9ChronoKit22PowerlogWidgetLocationO11descriptionSSvg', 
                        '_$s9ChronoKit22PowerlogWidgetLocationO11descriptionSSvpMV', 
                        '_$s9ChronoKit22PowerlogWidgetLocationO12actionButtonyA2CmFWC', 
@@ -2744,6 +2745,7 @@ exports:
                        '_$s9ChronoKit22PowerlogWidgetLocationO8logValueSivg', '_$s9ChronoKit22PowerlogWidgetLocationO8logValueSivpMV', 
                        '_$s9ChronoKit22PowerlogWidgetLocationO9hashValueSivg', '_$s9ChronoKit22PowerlogWidgetLocationO9hashValueSivpMV', 
                        '_$s9ChronoKit22PowerlogWidgetLocationO9todayViewyA2CmFWC', 
+                       '_$s9ChronoKit22PowerlogWidgetLocationO9watchFaceyA2CmFWC', 
                        '_$s9ChronoKit22PowerlogWidgetLocationOMa', '_$s9ChronoKit22PowerlogWidgetLocationOMn', 
                        '_$s9ChronoKit22PowerlogWidgetLocationON', '_$s9ChronoKit22PowerlogWidgetLocationOSHAAMc', 
                        '_$s9ChronoKit22PowerlogWidgetLocationOSQAAMc', '_$s9ChronoKit22PowerlogWidgetLocationOs23CustomStringConvertibleAAMc', 

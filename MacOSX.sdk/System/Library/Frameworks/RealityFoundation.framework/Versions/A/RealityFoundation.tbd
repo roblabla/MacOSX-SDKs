@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/RealityFoundation.framework/Versions/A/RealityFoundation'
-current-version: 403.40.7
+current-version: 403.60.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -31362,6 +31362,10 @@ exports:
                        '_$s17RealityFoundation26ImagePresentationComponentV25spatial3DCollapseStrengthSfvg', 
                        '_$s17RealityFoundation26ImagePresentationComponentV25spatial3DCollapseStrengthSfvpMV', 
                        '_$s17RealityFoundation26ImagePresentationComponentV25spatial3DCollapseStrengthSfvs', 
+                       '_$s17RealityFoundation26ImagePresentationComponentV28enableSpatial3DDepthPatchingSbvM', 
+                       '_$s17RealityFoundation26ImagePresentationComponentV28enableSpatial3DDepthPatchingSbvg', 
+                       '_$s17RealityFoundation26ImagePresentationComponentV28enableSpatial3DDepthPatchingSbvpMV', 
+                       '_$s17RealityFoundation26ImagePresentationComponentV28enableSpatial3DDepthPatchingSbvs', 
                        '_$s17RealityFoundation26ImagePresentationComponentV31enableSpecularAndFresnelEffectsSbvM', 
                        '_$s17RealityFoundation26ImagePresentationComponentV31enableSpecularAndFresnelEffectsSbvg', 
                        '_$s17RealityFoundation26ImagePresentationComponentV31enableSpecularAndFresnelEffectsSbvpMV', 

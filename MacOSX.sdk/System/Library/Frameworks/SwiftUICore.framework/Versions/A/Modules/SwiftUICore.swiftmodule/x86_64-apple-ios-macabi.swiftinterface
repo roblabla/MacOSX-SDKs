@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
-// swift-module-flags: -target x86_64-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -module-abi-name SwiftUI -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7.1.13.1.401 -module-name SwiftUICore -package-name SwiftUI
-// swift-module-flags-ignorable: -public-module-name SwiftUI -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-module-flags: -target x86_64-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -module-abi-name SwiftUI -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7.2.5.1.401 -module-name SwiftUICore -package-name SwiftUI
+// swift-module-flags-ignorable: -public-module-name SwiftUI -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import Accessibility
 import Combine
 import CoreFoundation
@@ -16309,6 +16309,18 @@ extension SwiftUICore.IdentityTransition : Swift.Sendable {
 @_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
 public protocol VisualEffect : Swift.Sendable, SwiftUICore.Animatable {
   static func _makeVisualEffect(effect: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewInputs, body: @escaping (SwiftUICore._Graph, SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs) -> SwiftUICore._ViewOutputs
+  @available(iOS 26.2, macOS 26.2, tvOS 26.2, watchOS 26.2, visionOS 26.2, *)
+  static func _makeTransform(effect: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._VisualEffectTransformOutputs
+}
+@available(iOS 26.2, macOS 26.2, tvOS 26.2, watchOS 26.2, visionOS 26.2, *)
+public struct _VisualEffectTransformOutputs {
+}
+@available(*, unavailable)
+extension SwiftUICore._VisualEffectTransformOutputs : Swift.Sendable {
+}
+extension SwiftUICore.VisualEffect {
+  @available(iOS 26.2, macOS 26.2, tvOS 26.2, watchOS 26.2, visionOS 26.2, *)
+  public static func _makeTransform(effect: SwiftUICore._GraphValue<Self>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._VisualEffectTransformOutputs
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 18.0)

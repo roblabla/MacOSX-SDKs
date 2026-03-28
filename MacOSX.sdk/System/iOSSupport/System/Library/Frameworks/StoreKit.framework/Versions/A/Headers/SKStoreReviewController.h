@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Controller class to request a review from the current user */
 SK_EXTERN_CLASS
-API_DEPRECATED("Use AppStore.requestReview(in:)", ios(10.3, 18.0), macos(10.14, 15.0), visionos(1.0, 2.0))
+API_DEPRECATED("Use AppStore.requestReview(in:).", ios(10.3, 18.0), macos(10.14, 15.0), visionos(1.0, 2.0))
 API_UNAVAILABLE(watchos)
 __TVOS_PROHIBITED
 NS_SWIFT_SENDABLE
@@ -30,8 +30,8 @@ NS_SWIFT_SENDABLE
  *  available to the App Store by appending the query params "action=write-review" to a product URL.
  */
 + (void)requestReview
-API_DEPRECATED("Use -[SKStoreReviewController requestReviewInScene:]", ios(10.3, 14.0))
-API_DEPRECATED("Use AppStore.requestReview(in:)", macos(10.14, 15.0))
+API_DEPRECATED("Use -[SKStoreReviewController requestReviewInScene:].", ios(10.3, 14.0))
+API_DEPRECATED("Use AppStore.requestReview(in:).", macos(10.14, 15.0))
 API_UNAVAILABLE(visionos)
 API_UNAVAILABLE(watchos)
 __TVOS_PROHIBITED;
@@ -46,7 +46,7 @@ __TVOS_PROHIBITED;
  *  available to the App Store by appending the query params "action=write-review" to a product URL.
  */
 + (void)requestReviewInScene:(UIWindowScene *)windowScene
-API_DEPRECATED("Use AppStore.requestReview(in:)", ios(14.0, 18.0), visionos(1.0, 2.0))
+API_DEPRECATED("Use AppStore.requestReview(in:).", ios(14.0, 18.0), visionos(1.0, 2.0))
 API_UNAVAILABLE(watchos)
 __TVOS_PROHIBITED
 NS_SWIFT_UI_ACTOR;

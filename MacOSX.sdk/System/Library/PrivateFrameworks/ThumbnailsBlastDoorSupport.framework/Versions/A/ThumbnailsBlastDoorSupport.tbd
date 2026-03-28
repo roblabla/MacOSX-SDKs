@@ -7,6 +7,8 @@ exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s26ThumbnailsBlastDoorSupport0abC9InterfaceC22generateImageThumbnail3for17maxPixelDimension5scale0bC0012_ObjCPreviewG7WrapperC10Foundation3URLV_S2ftKFTj', 
                        '_$s26ThumbnailsBlastDoorSupport0abC9InterfaceC22generateImageThumbnail3for17maxPixelDimension5scale0bC0012_ObjCPreviewG7WrapperC10Foundation3URLV_S2ftKFTq', 
+                       '_$s26ThumbnailsBlastDoorSupport0abC9InterfaceC22generateImageThumbnail3for17maxPixelDimension5scale11frameNumber0bC0012_ObjCPreviewG7WrapperC10Foundation3URLV_S2fSitKFTj', 
+                       '_$s26ThumbnailsBlastDoorSupport0abC9InterfaceC22generateImageThumbnail3for17maxPixelDimension5scale11frameNumber0bC0012_ObjCPreviewG7WrapperC10Foundation3URLV_S2fSitKFTq', 
                        '_$s26ThumbnailsBlastDoorSupport0abC9InterfaceC22generateMovieThumbnail17forAttachmentWith17maxPixelDimension03minH6PxSize5scale13resultHandlery10Foundation3URLV_SfSo6CGSizeVSfySo8NSObjectCSg_s5Error_pSgtctFTj', 
                        '_$s26ThumbnailsBlastDoorSupport0abC9InterfaceC22generateMovieThumbnail17forAttachmentWith17maxPixelDimension03minH6PxSize5scale13resultHandlery10Foundation3URLV_SfSo6CGSizeVSfySo8NSObjectCSg_s5Error_pSgtctFTq', 
                        '_$s26ThumbnailsBlastDoorSupport0abC9InterfaceCACycfC', '_$s26ThumbnailsBlastDoorSupport0abC9InterfaceCACycfc', 

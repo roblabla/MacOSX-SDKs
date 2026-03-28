@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/EmailCore.framework/Versions/A/EmailCore'
-current-version: 3864.200.81
+current-version: 3864.255.41
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -157,16 +157,17 @@ exports:
                        ECMessageBodyParsingUtils, ECMessageBodyStringAccumulator, 
                        ECMessageBodySubparser, ECMessageFlagChange, ECMessageFlags, 
                        ECNTLMAuthScheme, ECNWActivity, ECOAuth2AuthScheme, ECPOPAccount, 
-                       ECPlainAuthScheme, ECRawMessageHeader, ECRawMessageHeaders, 
-                       ECSASLAuthenticator, ECSASLClient, ECSMTPAccount, ECSecureMIMETrustEvaluation, 
-                       ECServerMessage, ECSignatureInfo, ECSubject, ECSubjectFormatter, 
-                       ECSubjectParser, ECTagValueList, ECTransferActionIMAPReplayer, 
-                       ECTransferActionReplayer, ECTransferMessageAction, ECTransferMessageActionItem, 
-                       ECTransferMessageActionResults, ECTransferUndownloadedActionIMAPReplayer, 
-                       ECTransferUndownloadedMessageAction, _ECBIMIHeaderParser, 
-                       _ECHeaderAuthenticationResultsParser, _ECMessageBodyConsumableNewline, 
-                       _ECMessageBodyHTMLElement, _ECParsedHTMLNode, _ECParsedHTMLTag, 
-                       _ECParsedHTMLText, _ECSVGProfileExtractor, _ECSubjectFormatterContext ]
+                       ECPlainAuthScheme, ECPriceFormattingThresholds, ECRawMessageHeader, 
+                       ECRawMessageHeaders, ECSASLAuthenticator, ECSASLClient, ECSMTPAccount, 
+                       ECSecureMIMETrustEvaluation, ECServerMessage, ECSignatureInfo, 
+                       ECSubject, ECSubjectFormatter, ECSubjectParser, ECTagValueList, 
+                       ECTransferActionIMAPReplayer, ECTransferActionReplayer, ECTransferMessageAction, 
+                       ECTransferMessageActionItem, ECTransferMessageActionResults, 
+                       ECTransferUndownloadedActionIMAPReplayer, ECTransferUndownloadedMessageAction, 
+                       _ECBIMIHeaderParser, _ECHeaderAuthenticationResultsParser, 
+                       _ECMessageBodyConsumableNewline, _ECMessageBodyHTMLElement, 
+                       _ECParsedHTMLNode, _ECParsedHTMLTag, _ECParsedHTMLText, _ECSVGProfileExtractor, 
+                       _ECSubjectFormatterContext ]
     objc-ivars:      [ ECMessageBodyElement._attributes, ECMessageBodyElement._externalRetainCount, 
                        ECMessageBodyElement._nodes, ECMessageBodyElement._parser, 
                        ECMessageBodyElement._quoteLevel, ECMessageBodyElement._validAttributes, 
@@ -174,7 +175,9 @@ exports:
                        ECMessageBodyParser._nodesStackCache, ECMessageBodyParser._parserError, 
                        ECMessageBodyParserObject._didTimeout, ECMessageBodyParserObject._shouldAbort, 
                        ECMessageBodyParserObject._timeoutTime, _ECParsedHTMLNode._childNodes, 
-                       _ECParsedHTMLNode._endLocation, _ECParsedHTMLNode._htmlString, 
-                       _ECParsedHTMLNode._nextSibling, _ECParsedHTMLNode._parentNode, 
-                       _ECParsedHTMLNode._startLocation, _ECParsedHTMLTag._tagName ]
+                       _ECParsedHTMLNode._depth, _ECParsedHTMLNode._endLocation, 
+                       _ECParsedHTMLNode._htmlString, _ECParsedHTMLNode._nextSibling, 
+                       _ECParsedHTMLNode._parentNode, _ECParsedHTMLNode._priceFormattingThresholds, 
+                       _ECParsedHTMLNode._rootNode, _ECParsedHTMLNode._startLocation, 
+                       _ECParsedHTMLTag._tagName ]
 ...

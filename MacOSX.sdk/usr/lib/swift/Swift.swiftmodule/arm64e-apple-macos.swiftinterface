@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
-// swift-module-flags: -target arm64e-apple-macosx26.1 -target-variant arm64e-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftCore -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-concise-pound-file -disable-objc-attr-requires-foundation-module -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature InoutLifetimeDependence -enable-experimental-feature LifetimeDependenceMutableAccessors -enable-experimental-feature MemberImportVisibility -enable-experimental-feature TypedThrows -enable-experimental-feature Macros -enable-experimental-feature FreestandingMacros -enable-experimental-feature BitwiseCopyable -enable-experimental-feature Extern -enable-experimental-feature AllowUnsafeAttribute -enable-experimental-feature ValueGenerics -enable-experimental-feature AddressableParameters -enable-experimental-feature AddressableTypes -user-module-version 6.2.1.4.7 -module-name Swift
-// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -enable-ossa-modules -strict-memory-safety -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-module-flags: -target arm64e-apple-macosx26.2 -target-variant arm64e-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftCore -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-concise-pound-file -disable-objc-attr-requires-foundation-module -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature InoutLifetimeDependence -enable-experimental-feature LifetimeDependenceMutableAccessors -enable-experimental-feature MemberImportVisibility -enable-experimental-feature TypedThrows -enable-experimental-feature Macros -enable-experimental-feature FreestandingMacros -enable-experimental-feature BitwiseCopyable -enable-experimental-feature Extern -enable-experimental-feature AllowUnsafeAttribute -enable-experimental-feature ValueGenerics -enable-experimental-feature AddressableParameters -enable-experimental-feature AddressableTypes -user-module-version 6.2.3.3.2 -module-name Swift
+// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -enable-ossa-modules -strict-memory-safety -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import SwiftShims
 @inlinable public func min<T>(_ x: T, _ y: T) -> T where T : Swift.Comparable {
    
@@ -23973,7 +23973,7 @@ extension Swift.Span where Element : Swift.BitwiseCopyable {
 }
 #endif
 #if compiler(>=5.3) && $NonescapableTypes
-@available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(macOS 10.14.4, iOS 12.2, watchOS 5.2, tvOS 12.2, visionOS 1.0, *)
 extension Swift.Span where Element : Swift.BitwiseCopyable {
   #if compiler(>=5.3) && $LifetimeDependence
   public var bytes: Swift.RawSpan {
@@ -26624,6 +26624,7 @@ extension Swift.OutputSpan where Element : ~Copyable {
   #if compiler(>=5.3) && $LifetimeDependence
   @lifetime(self: copy self)
   @_alwaysEmitIntoClient public mutating func removeAll() {
+    guard count > 0 else { return }
     _ = _start().withMemoryRebound(to: Element.self, capacity: _count) {
       $0.deinitialize(count: _count)
     }

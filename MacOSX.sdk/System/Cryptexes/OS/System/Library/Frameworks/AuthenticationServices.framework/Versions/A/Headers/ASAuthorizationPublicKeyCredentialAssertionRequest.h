@@ -3,9 +3,9 @@
 #import <AuthenticationServices/ASAuthorizationPublicKeyCredentialConstants.h>
 #import <Foundation/Foundation.h>
 
-@protocol ASAuthorizationPublicKeyCredentialDescriptor;
-
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+
+@protocol ASAuthorizationPublicKeyCredentialDescriptor;
 
 API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0)) API_UNAVAILABLE(watchos)
 @protocol ASAuthorizationPublicKeyCredentialAssertionRequest <NSObject, NSSecureCoding, NSCopying>

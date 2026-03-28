@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/SwiftUICore.framework/Versions/A/SwiftUICore'
-current-version: 7.1.13
+current-version: 7.2.5
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -11960,6 +11960,8 @@ exports:
                        '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$14.0$15.0$_$s7SwiftUI12VisualEffectMp$', 
                        '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$14.0$15.0$_$s7SwiftUI12VisualEffectP05_makecD06effect6inputs4bodyAA12_ViewOutputsVAA11_GraphValueVyxG_AA01_I6InputsVAiA01_K0V_ANtctFZTj$', 
                        '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$14.0$15.0$_$s7SwiftUI12VisualEffectP05_makecD06effect6inputs4bodyAA12_ViewOutputsVAA11_GraphValueVyxG_AA01_I6InputsVAiA01_K0V_ANtctFZTq$', 
+                       '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$14.0$15.0$_$s7SwiftUI12VisualEffectP14_makeTransform6effect6inputsAA01_cdF7OutputsVAA11_GraphValueVyxG_AA11_ViewInputsVtFZTj$', 
+                       '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$14.0$15.0$_$s7SwiftUI12VisualEffectP14_makeTransform6effect6inputsAA01_cdF7OutputsVAA11_GraphValueVyxG_AA11_ViewInputsVtFZTq$', 
                        '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$14.0$15.0$_$s7SwiftUI12VisualEffectPAA10AnimatableTb$', 
                        '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$14.0$15.0$_$s7SwiftUI12VisualEffectTL$', 
                        '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$14.0$15.0$_$s7SwiftUI13AnyTransitionV4blur6radiusAC12CoreGraphics7CGFloatV_tFZ$', 
@@ -26263,6 +26265,8 @@ exports:
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$17.0$18.0$_$s7SwiftUI12VisualEffectMp$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$17.0$18.0$_$s7SwiftUI12VisualEffectP05_makecD06effect6inputs4bodyAA12_ViewOutputsVAA11_GraphValueVyxG_AA01_I6InputsVAiA01_K0V_ANtctFZTj$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$17.0$18.0$_$s7SwiftUI12VisualEffectP05_makecD06effect6inputs4bodyAA12_ViewOutputsVAA11_GraphValueVyxG_AA01_I6InputsVAiA01_K0V_ANtctFZTq$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$17.0$18.0$_$s7SwiftUI12VisualEffectP14_makeTransform6effect6inputsAA01_cdF7OutputsVAA11_GraphValueVyxG_AA11_ViewInputsVtFZTj$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$17.0$18.0$_$s7SwiftUI12VisualEffectP14_makeTransform6effect6inputsAA01_cdF7OutputsVAA11_GraphValueVyxG_AA11_ViewInputsVtFZTq$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$17.0$18.0$_$s7SwiftUI12VisualEffectPAA10AnimatableTb$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$17.0$18.0$_$s7SwiftUI12VisualEffectTL$', 
                        '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$17.0$18.0$_$s7SwiftUI13AnyTransitionV4blur6radiusAC12CoreGraphics7CGFloatV_tFZ$', 
@@ -32876,6 +32880,8 @@ exports:
                        '_$s7SwiftUI12ViewModifierTL', '_$s7SwiftUI12VisualEffectMp', 
                        '_$s7SwiftUI12VisualEffectP05_makecD06effect6inputs4bodyAA12_ViewOutputsVAA11_GraphValueVyxG_AA01_I6InputsVAiA01_K0V_ANtctFZTj', 
                        '_$s7SwiftUI12VisualEffectP05_makecD06effect6inputs4bodyAA12_ViewOutputsVAA11_GraphValueVyxG_AA01_I6InputsVAiA01_K0V_ANtctFZTq', 
+                       '_$s7SwiftUI12VisualEffectP14_makeTransform6effect6inputsAA01_cdF7OutputsVAA11_GraphValueVyxG_AA11_ViewInputsVtFZTj', 
+                       '_$s7SwiftUI12VisualEffectP14_makeTransform6effect6inputsAA01_cdF7OutputsVAA11_GraphValueVyxG_AA11_ViewInputsVtFZTq', 
                        '_$s7SwiftUI12VisualEffectPAA10AnimatableTb', '_$s7SwiftUI12VisualEffectPAAE010distortionD0_15maxSampleOffset9isEnabledQrAA6ShaderV_So6CGSizeVSbtF', 
                        '_$s7SwiftUI12VisualEffectPAAE010distortionD0_15maxSampleOffset9isEnabledQrAA6ShaderV_So6CGSizeVSbtFQOMQ', 
                        '_$s7SwiftUI12VisualEffectPAAE05colorD0_9isEnabledQrAA6ShaderV_SbtF', 
@@ -32904,6 +32910,7 @@ exports:
                        '_$s7SwiftUI12VisualEffectPAAE10saturationyQrSdF', '_$s7SwiftUI12VisualEffectPAAE10saturationyQrSdFQOMQ', 
                        '_$s7SwiftUI12VisualEffectPAAE11hueRotationyQrAA5AngleVF', 
                        '_$s7SwiftUI12VisualEffectPAAE11hueRotationyQrAA5AngleVFQOMQ', 
+                       '_$s7SwiftUI12VisualEffectPAAE14_makeTransform6effect6inputsAA01_cdF7OutputsVAA11_GraphValueVyxG_AA11_ViewInputsVtFZ', 
                        '_$s7SwiftUI12VisualEffectPAAE16rotation3DEffect_4axis6anchor0H1Z11perspectiveQrAA5AngleV_12CoreGraphics7CGFloatV1x_AM1yAM1ztAA9UnitPointVA2MtF', 
                        '_$s7SwiftUI12VisualEffectPAAE16rotation3DEffect_4axis6anchor0H1Z11perspectiveQrAA5AngleV_12CoreGraphics7CGFloatV1x_AM1yAM1ztAA9UnitPointVA2MtFQOMQ', 
                        '_$s7SwiftUI12VisualEffectPAAE4blur6radius6opaqueQr12CoreGraphics7CGFloatV_SbtF', 
@@ -54024,7 +54031,9 @@ exports:
                        '_$s7SwiftUI29_ShapeStyle_InterpolatorGroupCfd', '_$s7SwiftUI29_VariadicView_AnyImplicitRootMp', 
                        '_$s7SwiftUI29_VariadicView_AnyImplicitRootP9visitType7visitoryqd__z_tAA01_cd1_fG7VisitorRd__lFZTj', 
                        '_$s7SwiftUI29_VariadicView_AnyImplicitRootP9visitType7visitoryqd__z_tAA01_cd1_fG7VisitorRd__lFZTq', 
-                       '_$s7SwiftUI29_VariadicView_AnyImplicitRootTL', '_$s7SwiftUI2eeoiySbx_q_t_q0__q1_tt_x_q_t_q0__q1_tttSQRzSQR_SQR0_SQR1_r2_lF', 
+                       '_$s7SwiftUI29_VariadicView_AnyImplicitRootTL', '_$s7SwiftUI29_VisualEffectTransformOutputsV9transformAC14AttributeGraph08OptionalH0VyAA010ProjectionE0VG_tcfC', 
+                       '_$s7SwiftUI29_VisualEffectTransformOutputsVMa', '_$s7SwiftUI29_VisualEffectTransformOutputsVMn', 
+                       '_$s7SwiftUI29_VisualEffectTransformOutputsVN', '_$s7SwiftUI2eeoiySbx_q_t_q0__q1_tt_x_q_t_q0__q1_tttSQRzSQR_SQR0_SQR1_r2_lF', 
                        '_$s7SwiftUI30AXChartDescriptorRepresentableMp', '_$s7SwiftUI30AXChartDescriptorRepresentableP011updateChartD0yySo0cD0CFTj', 
                        '_$s7SwiftUI30AXChartDescriptorRepresentableP011updateChartD0yySo0cD0CFTq', 
                        '_$s7SwiftUI30AXChartDescriptorRepresentableP09makeChartD0So0cD0CyFTj', 
@@ -58660,6 +58669,10 @@ exports:
                        '_$s7SwiftUI4ViewPAAE19typesettingLanguage_9isEnabledQr10Foundation6LocaleV0E0V_SbtFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE19typesettingLanguage_9isEnabledQrAA011TypesettingE0V_SbtF', 
                        '_$s7SwiftUI4ViewPAAE19typesettingLanguage_9isEnabledQrAA011TypesettingE0V_SbtFQOMQ', 
+                       '_$s7SwiftUI4ViewPAAE20_glassGeometryEffectyQrqd__AA011EmptyVisualF0V_AA0E5ProxyVtcAA0hF0Rd__lF', 
+                       '_$s7SwiftUI4ViewPAAE20_glassGeometryEffectyQrqd__AA011EmptyVisualF0V_AA0E5ProxyVtcAA0hF0Rd__lFQOMQ', 
+                       '_$s7SwiftUI4ViewPAAE20_glassGeometryEffectyQrqd__AA0E5ProxyVcAA0eF0Rd__lF', 
+                       '_$s7SwiftUI4ViewPAAE20_glassGeometryEffectyQrqd__AA0E5ProxyVcAA0eF0Rd__lFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE20paragraphTypesetting_9isEnabledQrAA09ParagraphE0V_SbtF', 
                        '_$s7SwiftUI4ViewPAAE20paragraphTypesetting_9isEnabledQrAA09ParagraphE0V_SbtFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE20preferredColorSchemeyQrAA0eF0OSgF', 

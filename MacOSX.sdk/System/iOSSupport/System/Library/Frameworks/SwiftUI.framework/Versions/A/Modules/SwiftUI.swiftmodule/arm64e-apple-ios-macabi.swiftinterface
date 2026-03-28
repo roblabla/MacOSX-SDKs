@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
-// swift-module-flags: -target arm64e-apple-ios26.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7.1.13.1.401 -module-name SwiftUI -package-name SwiftUI
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-module-flags: -target arm64e-apple-ios26.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -enable-experimental-feature IsolatedAny2 -enable-upcoming-feature InferSendableFromCaptures -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7.2.5.1.401 -module-name SwiftUI -package-name SwiftUI
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import Combine
 import CoreData
 import CoreFoundation
@@ -9204,10 +9204,9 @@ public struct WindowIdealSize : Swift.Sendable {
   public static let fitToContent: SwiftUI.WindowIdealSize
   public static let maximum: SwiftUI.WindowIdealSize
 }
-@available(iOS 17.5, macOS 14.5, *)
+@available(iOS 17.5, macOS 14.5, visionOS 26.2, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-@available(visionOS, unavailable)
 public struct PencilHoverPose : Swift.Hashable {
   public let location: CoreFoundation.CGPoint
   public let anchor: SwiftUICore.UnitPoint
@@ -13634,18 +13633,16 @@ extension SwiftUI.Scene {
   
   #endif
 }
-@available(iOS 17.5, macOS 14.5, *)
+@available(iOS 17.5, macOS 14.5, visionOS 26.2, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-@available(visionOS, unavailable)
 extension SwiftUICore.View {
   nonisolated public func onPencilDoubleTap(perform action: @escaping (_ value: SwiftUI.PencilDoubleTapGestureValue) -> Swift.Void) -> some SwiftUICore.View
   
 }
-@available(iOS 17.5, macOS 14.5, *)
+@available(iOS 17.5, macOS 14.5, visionOS 26.2, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-@available(visionOS, unavailable)
 public struct PencilDoubleTapGestureValue : Swift.Hashable {
   public let hoverPose: SwiftUI.PencilHoverPose?
   public static func == (a: SwiftUI.PencilDoubleTapGestureValue, b: SwiftUI.PencilDoubleTapGestureValue) -> Swift.Bool
@@ -13657,18 +13654,16 @@ public struct PencilDoubleTapGestureValue : Swift.Hashable {
 @available(*, unavailable)
 extension SwiftUI.PencilDoubleTapGestureValue : Swift.Sendable {
 }
-@available(iOS 17.5, macOS 14.5, *)
+@available(iOS 17.5, macOS 14.5, visionOS 26.2, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-@available(visionOS, unavailable)
 extension SwiftUICore.View {
   nonisolated public func onPencilSqueeze(perform action: @escaping (_ phase: SwiftUI.PencilSqueezeGesturePhase) -> Swift.Void) -> some SwiftUICore.View
   
 }
-@available(iOS 17.5, macOS 14.5, *)
+@available(iOS 17.5, macOS 14.5, visionOS 26.2, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-@available(visionOS, unavailable)
 @frozen public enum PencilSqueezeGesturePhase : Swift.Equatable {
   case active(SwiftUI.PencilSqueezeGestureValue)
   case ended(SwiftUI.PencilSqueezeGestureValue)
@@ -13678,10 +13673,9 @@ extension SwiftUICore.View {
 @available(*, unavailable)
 extension SwiftUI.PencilSqueezeGesturePhase : Swift.Sendable {
 }
-@available(iOS 17.5, macOS 14.5, *)
+@available(iOS 17.5, macOS 14.5, visionOS 26.2, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-@available(visionOS, unavailable)
 public struct PencilSqueezeGestureValue : Swift.Hashable {
   public let hoverPose: SwiftUI.PencilHoverPose?
   public static func == (a: SwiftUI.PencilSqueezeGestureValue, b: SwiftUI.PencilSqueezeGestureValue) -> Swift.Bool
@@ -13734,6 +13728,13 @@ extension SwiftUICore.View {
   @available(watchOS, unavailable)
   @available(visionOS, unavailable)
   nonisolated public func tabViewBottomAccessory<Content>(@SwiftUICore.ViewBuilder content: () -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
+  
+  @available(iOS 26.1, *)
+  @available(macOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
+  nonisolated public func tabViewBottomAccessory<Content>(isEnabled: Swift.Bool, @SwiftUICore.ViewBuilder content: () -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -18251,10 +18252,9 @@ public struct ContentToolbarPlacement : Swift.Hashable, Swift.Sendable {
     get
   }
 }
-@available(iOS 17.5, macOS 14.5, *)
+@available(iOS 17.5, macOS 14.5, visionOS 26.2, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-@available(visionOS, unavailable)
 public struct PencilPreferredAction : Swift.Hashable {
   public static let switchEraser: SwiftUI.PencilPreferredAction
   public static let switchPrevious: SwiftUI.PencilPreferredAction
@@ -18272,19 +18272,17 @@ public struct PencilPreferredAction : Swift.Hashable {
 @available(*, unavailable)
 extension SwiftUI.PencilPreferredAction : Swift.Sendable {
 }
-@available(iOS 17.5, macOS 14.5, *)
+@available(iOS 17.5, macOS 14.5, visionOS 26.2, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-@available(visionOS, unavailable)
 extension SwiftUICore.EnvironmentValues {
   public var preferredPencilDoubleTapAction: SwiftUI.PencilPreferredAction {
     get
   }
 }
-@available(iOS 17.5, macOS 14.5, *)
+@available(iOS 17.5, macOS 14.5, visionOS 26.2, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-@available(visionOS, unavailable)
 extension SwiftUICore.EnvironmentValues {
   public var preferredPencilSqueezeAction: SwiftUI.PencilPreferredAction {
     get

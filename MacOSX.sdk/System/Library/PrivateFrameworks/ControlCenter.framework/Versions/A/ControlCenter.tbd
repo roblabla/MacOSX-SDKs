@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ControlCenter.framework/Versions/A/ControlCenter'
-current-version: 682.1.31
+current-version: 682.2.13
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -685,7 +685,30 @@ exports:
                        '_$s13ControlCenter26AirPlayReceiverPreferencesCMm', '_$s13ControlCenter26AirPlayReceiverPreferencesCMn', 
                        '_$s13ControlCenter26AirPlayReceiverPreferencesCMo', '_$s13ControlCenter26AirPlayReceiverPreferencesCMu', 
                        '_$s13ControlCenter26AirPlayReceiverPreferencesCN', '_$s13ControlCenter26AirPlayReceiverPreferencesCfD', 
-                       '_$s13ControlCenter26AirPlayReceiverPreferencesCfd', '_$s13ControlCenter28SecuredPreferencesControllerC7Combine16ObservableObjectAAMc', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesCfd', '_$s13ControlCenter27UserSwitcherHostPreferencesC22multipleSessionEnabledSbvM', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesC22multipleSessionEnabledSbvg', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesC22multipleSessionEnabledSbvpMV', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesC22multipleSessionEnabledSbvs', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesC3app4keysACSS_xtcSTRzSS7ElementRtzlufC', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesC3app4keysACSS_xtcSTRzSS7ElementRtzlufc', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesC3app4keysACSS_xtcSTRzSY7ElementRpzSSAF_8RawValueRTzlufC', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesC3app4keysACSS_xtcSTRzSY7ElementRpzSSAF_8RawValueRTzlufc', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesC6domain4keysAcA0F0V6DomainV_xtcSTRzSS7ElementRtzlufC', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesC6domain4keysAcA0F0V6DomainV_xtcSTRzSS7ElementRtzlufc', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesC6domain4keysAcA0F0V6DomainV_xtcSTRzSY7ElementRpzSSAJ_8RawValueRTzlufC', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesC6domain4keysAcA0F0V6DomainV_xtcSTRzSY7ElementRpzSSAJ_8RawValueRTzlufc', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesC6sharedACvgZ', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesC6sharedACvpZMV', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesC8isForcedySbs7KeyPathCyACxGlF', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesCACycfC', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesCACycfCTj', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesCACycfCTq', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesCACycfc', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesCMa', '_$s13ControlCenter27UserSwitcherHostPreferencesCMm', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesCMn', '_$s13ControlCenter27UserSwitcherHostPreferencesCMo', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesCMu', '_$s13ControlCenter27UserSwitcherHostPreferencesCN', 
+                       '_$s13ControlCenter27UserSwitcherHostPreferencesCfD', '_$s13ControlCenter27UserSwitcherHostPreferencesCfd', 
+                       '_$s13ControlCenter28SecuredPreferencesControllerC7Combine16ObservableObjectAAMc', 
                        '_$s13ControlCenter28SecuredPreferencesControllerCMa', '_$s13ControlCenter28SecuredPreferencesControllerCMm', 
                        '_$s13ControlCenter28SecuredPreferencesControllerCMn', '_$s13ControlCenter28SecuredPreferencesControllerCMo', 
                        '_$s13ControlCenter28SecuredPreferencesControllerCMu', '_$s13ControlCenter28SecuredPreferencesControllerCN', 

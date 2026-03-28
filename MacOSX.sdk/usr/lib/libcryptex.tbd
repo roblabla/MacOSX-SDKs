@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libcryptex.dylib'
-current-version: 589.40.18
+current-version: 589.60.15
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __cryptex_copy_list, __cryptex_copy_list_lossy, __cryptex_create, 
@@ -64,10 +64,11 @@ exports:
                        _session_get_stop_code, _session_get_stop_reason, _session_get_uid, 
                        _session_get_uuid, _session_has_overrides, _session_iter_list, 
                        _session_set_event_handler, _session_set_homedir_size, _session_set_job_environment_override, 
-                       _session_start, _session_stop, _simple_session_activate, _simple_session_add_session_environment, 
-                       _simple_session_copy_homedir, _simple_session_copy_name, _simple_session_create, 
-                       _simple_session_get_uid, _simple_session_get_uuid, _simple_session_iter_list, 
-                       _simple_session_set_homedir_size, _simple_session_stop ]
+                       _session_set_preset_user, _session_start, _session_stop, _simple_session_activate, 
+                       _simple_session_add_session_environment, _simple_session_copy_homedir, 
+                       _simple_session_copy_name, _simple_session_create, _simple_session_get_uid, 
+                       _simple_session_get_uuid, _simple_session_iter_list, _simple_session_set_homedir_size, 
+                       _simple_session_stop ]
     objc-classes:    [ Collation, CryptexEventSubscriber, CryptexRemoteDeviceIdentifier, 
                        CryptexRemoteObject, CryptexRemoteObjectArray, CryptexRemoteService, 
                        CryptexRemoteServiceNonce, CryptexRemoteServiceNonceAttr, 

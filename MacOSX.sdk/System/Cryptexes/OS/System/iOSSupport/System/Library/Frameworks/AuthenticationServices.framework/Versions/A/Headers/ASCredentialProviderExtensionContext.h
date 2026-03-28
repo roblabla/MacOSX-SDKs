@@ -14,6 +14,8 @@
 @class ASPasskeyAssertionCredential;
 @class ASPasskeyRegistrationCredential;
 
+@class ASGeneratedPassword;
+
 @class ASPasswordCredential;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -60,6 +62,17 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
 - (void)completeOneTimeCodeRequestWithSelectedCredential:(ASOneTimeCodeCredential *)credential completionHandler:(void(^ _Nullable)(BOOL expired))completionHandler NS_SWIFT_NAME(completeOneTimeCodeRequest(using:completionHandler:)) API_AVAILABLE(ios(18.0), macos(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
 
 
+/// Signal that a password request was successfully saved.
+/// - parameter completionHandler: An optional block your extension can provide to perform any cleanup work after the system has captured the results.
+/// The expired parameter is true if the system decides to prematurely end a previous non-expiration invocation of the completion handler.
+/// - note: You are responsible for updating the ASCredentialIdentityStore.
+- (void)completeSavePasswordRequestWithCompletionHandler:(void (^ _Nullable)(BOOL expired))completionHandler NS_SWIFT_NAME(completeSavePasswordRequest(completionHandler:)) API_AVAILABLE(ios(26.2), visionos(26.2)) API_UNAVAILABLE(macos, tvos, watchos);
+/// Return potential passwords for the given request.
+/// - parameter results: Potential passwords that the user can select. You can provide multiple options for increased flexibility on the user's behalf.
+/// These results should be returned in priority order.
+/// - parameter completionHandler: An optional block your extension can provide to perform any cleanup work after the system has captured the results.
+/// The expired parameter is true if the system decides to prematurely end a previous non-expiration invocation of the completion handler.
+- (void)completeGeneratePasswordRequestWithResults:(NSArray<ASGeneratedPassword *> *)results completionHandler:(void (^ _Nullable)(BOOL expired))completionHandler NS_SWIFT_NAME(completeGeneratePasswordRequest(results:completionHandler:)) API_AVAILABLE(ios(26.2), visionos(26.2)) API_UNAVAILABLE(macos, tvos, watchos);
 
 /*! @abstract Complete the request to configure the extension.
  @discussion Calling this method will eventually dismiss the associated view controller.

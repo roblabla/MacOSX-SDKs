@@ -3,8 +3,8 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MIL.framework/Versions/A/MIL'
-current-version: 3505.3.2
-compatibility-version: 3505.3
+current-version: 3510.2.1
+compatibility-version: 3510.2
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIFN3MIL16ValidationResultERKNS_11IROperationEE, __ZTIFN3MIL4Fp16ES0_E, 

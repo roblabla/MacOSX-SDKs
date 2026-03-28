@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WebDriver.framework/Versions/A/WebDriver'
-current-version: 622.2.11
+current-version: 623.1.14
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -110,10 +110,9 @@ exports:
                        _WDFormSubmitScriptFunctionString, _WDFormSubmitScriptSource, 
                        _WDHTTPContentTypeTextPlain, _WDHTTPContentTypeUTF8EncodedJSON, 
                        _WDHTTPCookieSameSitePolicyFromString, _WDHTTPCookieSameSitePolicyToString, 
-                       _WDNSStringFromCoordinateSystem, _WDNSStringFromRemoteElementSearchStrategy, 
-                       _WDOSLogLauncher, _WDOSLogProtocol, _WDOSLogRouting, _WDOSLogSession, 
-                       _WDOSLogValidation, _WDOSLogWebService, _WDOSLogXPCService, 
-                       _WDPageLoadStrategyFromString, _WDProxyConfigurationTypeFromString, 
+                       _WDNSStringFromCoordinateSystem, _WDNSStringFromPermissionState, 
+                       _WDNSStringFromRemoteElementSearchStrategy, _WDPageLoadStrategyFromString, 
+                       _WDPermissionStateFromString, _WDProxyConfigurationTypeFromString, 
                        _WDRemoteElementSearchStrategyFromString, _WDSafariDriverMain, 
                        _WDUserPromptHandlerStrategyFromString, _WDValidateProxySettingsFromPayload, 
                        _WDValidateTimeoutsFromPayload, _WDValueMatchesWDPayloadType, 

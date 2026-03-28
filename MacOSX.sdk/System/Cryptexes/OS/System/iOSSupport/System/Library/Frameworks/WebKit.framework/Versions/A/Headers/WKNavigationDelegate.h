@@ -203,7 +203,7 @@ WK_SWIFT_UI_ACTOR
  In the case where the normal webpage loading process takes place, additional navigation delegate calls will continue to happen for this
  navigation starting with `decidePolicyForNavigationAction`
 */
-- (void)webView:(WKWebView *)webView shouldGoToBackForwardListItem:(WKBackForwardListItem *)backForwardListItem willUseInstantBack:(BOOL)willUseInstantBack completionHandler:(void (^)(BOOL shouldGoToItem))completionHandler API_AVAILABLE(macos(NA), ios(26.0), visionos(NA));
+- (void)webView:(WKWebView *)webView shouldGoToBackForwardListItem:(WKBackForwardListItem *)backForwardListItem willUseInstantBack:(BOOL)willUseInstantBack completionHandler:(void (^)(BOOL shouldGoToItem))completionHandler API_AVAILABLE(macos(26.0), ios(26.0), visionos(26.0));
 
 @end
 

@@ -183,6 +183,8 @@ exports:
                        '_$s7Rapport52DiscoverableApplicationServiceExtensionConfigurationCfD', 
                        '_$s7Rapport52DiscoverableApplicationServiceExtensionConfigurationCfd', 
                        '_$s7Rapport52DiscoverableApplicationServiceExtensionConfigurationCyxG0E10Foundation03AppeF0AAMc', 
+                       '_$sSo10RPIdentityC7RapportE13getExpiryDate10Foundation0E0VSgvg', 
+                       '_$sSo10RPIdentityC7RapportE13getExpiryDate10Foundation0E0VSgvpMV', 
                        _RPAppIDRemote, _RPAssertionDuckAudio, _RPAssertionImminentUse, 
                        _RPAssertionKeepAlive, _RPBonjourFlagsUpdateWithRPCompanionLinkFlags, 
                        _RPCloudServiceIDDuet, _RPCloudServiceIDNearby, _RPCloudServiceIDNearbyFamily, 

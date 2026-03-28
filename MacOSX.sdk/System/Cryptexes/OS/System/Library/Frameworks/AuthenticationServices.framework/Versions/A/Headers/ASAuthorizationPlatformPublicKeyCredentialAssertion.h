@@ -5,9 +5,9 @@
 #import <AuthenticationServices/ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput.h>
 #import <Foundation/Foundation.h>
 
-@class ASAuthorizationPublicKeyCredentialPRFAssertionOutput;
-
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+
+@class ASAuthorizationPublicKeyCredentialPRFAssertionOutput;
 
 API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0)) API_UNAVAILABLE(watchos)
 @interface ASAuthorizationPlatformPublicKeyCredentialAssertion : NSObject<ASAuthorizationPublicKeyCredentialAssertion>

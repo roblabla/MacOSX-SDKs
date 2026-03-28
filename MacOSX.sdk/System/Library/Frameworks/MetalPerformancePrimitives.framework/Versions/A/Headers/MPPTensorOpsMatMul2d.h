@@ -318,11 +318,6 @@ namespace mpp
 namespace tensor_ops
 {
 
-enum class matmul2d_cooperative_operand_index
-{
-  destination,
-};
-
 enum class reduction_operation
 {
   sum,
@@ -389,22 +384,125 @@ public:
       typename LeftOperandType, typename RightOperandType,
       typename DestinationOperandType,
       typename V = __tensor_ops_detail::__enable_if_t<
-          (__tensor_ops_detail::__is_tensor_type_v<LeftOperandType> &&
-           __tensor_ops_detail::__is_tensor_type_v<RightOperandType> &&
-           (__tensor_ops_detail::__is_tensor_type_v<DestinationOperandType> ||
-            __tensor_ops_detail::__is_cooperative_tensor_type_v<
-                DestinationOperandType>))>,
+          ((__tensor_ops_detail::__is_tensor_type_v<LeftOperandType> || __tensor_ops_detail::__is_cooperative_tensor_type_v<LeftOperandType>) &&
+           (__tensor_ops_detail::__is_tensor_type_v<RightOperandType> || __tensor_ops_detail::__is_cooperative_tensor_type_v<RightOperandType>) &&
+           (__tensor_ops_detail::__is_tensor_type_v<DestinationOperandType> || __tensor_ops_detail::__is_cooperative_tensor_type_v<DestinationOperandType>))>,
       typename... RunArgs>
   INLINE void run(thread LeftOperandType &left, thread RightOperandType &right,
                   thread DestinationOperandType &destination) thread const
   {
-
     __mutmul2d_detail::__run<Descriptor, Scope, LeftOperandType,
                              RightOperandType, DestinationOperandType,
                              RunArgs...>(left, right, destination);
   }
 
-  template <typename LeftOperand, typename RightOperand, typename ElementType, typename CoordType, typename... CoopArgs>
+  template <typename LeftElementType, typename RightElementType, typename ElementType, typename CoordType = int, typename... CoopArgs>
+  using cooperative_tensor_left_input_t =
+      __mutmul2d_detail::__cooperative_tensor_left_input_t<
+          Descriptor, Scope, LeftElementType, RightElementType, ElementType, CoordType, CoopArgs...>;
+
+  template <typename LeftElementType, typename RightElementType,
+            typename ElementType, typename CoordType = int,
+            typename U = __tensor_ops_detail::__enable_if_t<
+                __tensor_ops_detail::__is_thread_addrspace_v<LeftElementType> &&
+                __tensor_ops_detail::__is_thread_addrspace_v<RightElementType> &&
+                __tensor_ops_detail::__is_thread_addrspace_v<ElementType> &&
+                __tensor_ops_detail::__is_integral_v<CoordType>>,
+            typename... CoopArgs>
+  INLINE cooperative_tensor_left_input_t<LeftElementType, RightElementType, ElementType, CoordType, CoopArgs...>
+  get_left_input_cooperative_tensor() thread const
+  {
+    return __mutmul2d_detail::__get_left_input_cooperative_tensor<
+        Descriptor, Scope, LeftElementType, RightElementType, ElementType, CoordType, CoopArgs...>();
+  }
+  
+  template <typename LeftElementType, typename RightElementType,
+            typename ElementType, typename CoordType = int,
+            typename SrcElemType, typename SrcExtents, typename SrcLayout,
+            typename U = __tensor_ops_detail::__enable_if_t<
+                __tensor_ops_detail::__is_thread_addrspace_v<LeftElementType> &&
+                __tensor_ops_detail::__is_thread_addrspace_v<RightElementType> &&
+                __tensor_ops_detail::__is_thread_addrspace_v<ElementType> &&
+                __tensor_ops_detail::__is_thread_addrspace_v<SrcElemType> &&
+                __tensor_ops_detail::__is_integral_v<CoordType>>,
+            typename... CoopArgs>
+  INLINE cooperative_tensor_left_input_t<LeftElementType, RightElementType, ElementType, CoordType, CoopArgs...>
+  get_left_input_cooperative_tensor(const thread metal::cooperative_tensor<SrcElemType, SrcExtents, SrcLayout> & src) thread const
+  {
+    return __mutmul2d_detail::__get_left_input_cooperative_tensor<
+        SrcElemType, SrcExtents, SrcLayout, Descriptor, Scope, LeftElementType, RightElementType,
+        ElementType, CoordType, CoopArgs...>(src);
+  }
+
+  template <typename LeftElementType, typename RightElementType, typename ElementType,
+            typename SrcElemType, typename SrcExtents, typename SrcLayout,
+            typename U = __tensor_ops_detail::__enable_if_t<
+                __tensor_ops_detail::__is_thread_addrspace_v<LeftElementType> &&
+                __tensor_ops_detail::__is_thread_addrspace_v<RightElementType> &&
+                __tensor_ops_detail::__is_thread_addrspace_v<ElementType> &&
+                __tensor_ops_detail::__is_thread_addrspace_v<SrcElemType>>>
+  INLINE bool
+  is_compatible_as_left_input(const thread metal::cooperative_tensor<SrcElemType, SrcExtents, SrcLayout> & src) thread const
+  {
+      return __mutmul2d_detail::__is_compatible_as_left_input<
+          LeftElementType, RightElementType, ElementType, Descriptor, Scope,
+          SrcElemType, SrcExtents, SrcLayout>(src);
+  }
+
+  template <typename LeftElementType, typename RightElementType, typename ElementType, typename CoordType = int, typename... CoopArgs>
+  using cooperative_tensor_right_input_t =
+      __mutmul2d_detail::__cooperative_tensor_right_input_t<
+          Descriptor, Scope, LeftElementType, RightElementType, ElementType, CoordType, CoopArgs...>;
+
+  template <typename LeftElementType, typename RightElementType,
+            typename ElementType, typename CoordType = int,
+            typename U = __tensor_ops_detail::__enable_if_t<
+                __tensor_ops_detail::__is_thread_addrspace_v<LeftElementType> &&
+                __tensor_ops_detail::__is_thread_addrspace_v<RightElementType> &&
+                __tensor_ops_detail::__is_thread_addrspace_v<ElementType> &&
+                __tensor_ops_detail::__is_integral_v<CoordType>>,
+            typename... CoopArgs>
+  INLINE cooperative_tensor_right_input_t<LeftElementType, RightElementType, ElementType, CoordType, CoopArgs...>
+  get_right_input_cooperative_tensor() thread const
+  {
+    return __mutmul2d_detail::__get_right_input_cooperative_tensor<
+        Descriptor, Scope, LeftElementType, RightElementType, ElementType, CoordType, CoopArgs...>();
+  }
+
+  template <typename LeftElementType, typename RightElementType,
+            typename ElementType, typename CoordType = int,
+            typename SrcElemType, typename SrcExtents, typename SrcLayout,
+            typename U = __tensor_ops_detail::__enable_if_t<
+                __tensor_ops_detail::__is_thread_addrspace_v<LeftElementType> &&
+                __tensor_ops_detail::__is_thread_addrspace_v<RightElementType> &&
+                __tensor_ops_detail::__is_thread_addrspace_v<ElementType> &&
+                __tensor_ops_detail::__is_thread_addrspace_v<SrcElemType> &&
+                __tensor_ops_detail::__is_integral_v<CoordType>>,
+            typename... CoopArgs>
+  INLINE cooperative_tensor_right_input_t<LeftElementType, RightElementType, ElementType, CoordType, CoopArgs...>
+  get_right_input_cooperative_tensor(const thread metal::cooperative_tensor<SrcElemType, SrcExtents, SrcLayout> & src) thread const
+  {
+    return __mutmul2d_detail::__get_right_input_cooperative_tensor<
+        SrcElemType, SrcExtents, SrcLayout, Descriptor, Scope, LeftElementType, RightElementType,
+        ElementType, CoordType, CoopArgs...>(src);
+  }
+
+  template <typename LeftElementType, typename RightElementType, typename ElementType,
+            typename SrcElemType, typename SrcExtents, typename SrcLayout,
+            typename U = __tensor_ops_detail::__enable_if_t<
+                __tensor_ops_detail::__is_thread_addrspace_v<LeftElementType> &&
+                __tensor_ops_detail::__is_thread_addrspace_v<RightElementType> &&
+                __tensor_ops_detail::__is_thread_addrspace_v<ElementType> &&
+                __tensor_ops_detail::__is_thread_addrspace_v<SrcElemType>>>
+  INLINE bool
+  is_compatible_as_right_input(const thread metal::cooperative_tensor<SrcElemType, SrcExtents, SrcLayout> & src) thread const
+  {
+      return __mutmul2d_detail::__is_compatible_as_right_input<
+          LeftElementType, RightElementType, ElementType, Descriptor, Scope,
+          SrcElemType, SrcExtents, SrcLayout>(src);
+  }
+
+  template <typename LeftOperand, typename RightOperand, typename ElementType, typename CoordType = int, typename... CoopArgs>
   using cooperative_tensor_destination_t =
       __mutmul2d_detail::__cooperative_tensor_destination_t<
           Descriptor, Scope, LeftOperand, RightOperand, ElementType, CoordType, CoopArgs...>;
@@ -412,8 +510,8 @@ public:
   template <typename LeftOperandType, typename RightOperandType,
             typename ElementType, typename CoordType = int,
             typename U = __tensor_ops_detail::__enable_if_t<
-                __tensor_ops_detail::__is_tensor_type_v<LeftOperandType> &&
-                __tensor_ops_detail::__is_tensor_type_v<RightOperandType> &&
+                (__tensor_ops_detail::__is_tensor_type_v<LeftOperandType> || __tensor_ops_detail::__is_cooperative_tensor_type_v<LeftOperandType>) &&
+                (__tensor_ops_detail::__is_tensor_type_v<RightOperandType> || __tensor_ops_detail::__is_cooperative_tensor_type_v<RightOperandType>) &&
                 __tensor_ops_detail::__is_thread_addrspace_v<ElementType> &&
                 __tensor_ops_detail::__is_integral_v<CoordType>>,
             typename... CoopArgs>
@@ -427,7 +525,7 @@ public:
   }
 
   template <typename LeftOperandType, typename RightOperandType, typename ElementType,
-            typename CoordType, typename... CoopArgs>
+            typename CoordType = int, typename... CoopArgs>
   using cooperative_tensor_row_reduction_destination_t =
       __mutmul2d_detail::__cooperative_tensor_row_reduction_destination_t<
           Descriptor, Scope, LeftOperandType, RightOperandType, ElementType, CoordType, CoopArgs...>;
@@ -447,7 +545,7 @@ public:
 
 
   template <typename LeftOperandType, typename RightOperandType, typename ElementType,
-            typename CoordType, typename... CoopArgs>
+            typename CoordType = int, typename... CoopArgs>
   using cooperative_tensor_column_reduction_destination_t =
       __mutmul2d_detail::__cooperative_tensor_column_reduction_destination_t<
           Descriptor, Scope, LeftOperandType, RightOperandType, ElementType, CoordType, CoopArgs...>;

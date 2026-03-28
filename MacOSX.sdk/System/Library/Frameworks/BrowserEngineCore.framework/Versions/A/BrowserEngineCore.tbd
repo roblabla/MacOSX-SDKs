@@ -23,6 +23,7 @@ exports:
                        '_$s17BrowserEngineCore10AuditTokenV7currentACvgZ', '_$s17BrowserEngineCore10AuditTokenV7currentACvpZMV', 
                        '_$s17BrowserEngineCore10AuditTokenVMa', '_$s17BrowserEngineCore10AuditTokenVMn', 
                        '_$s17BrowserEngineCore10AuditTokenVN', '_$s17BrowserEngineCore10AuditTokenVyACSo13audit_token_tacfC', 
+                       '_$s17BrowserEngineCore21checkEligibilitySwiftyySbKF', '_$s17BrowserEngineCore29setEligibilityForTestingSwiftyySbF', 
                        __BEBrowserEngineEntitlementHost, __BEBrowserEngineEntitlementName, 
                        __BEBrowserEngineEntitlementNetworking, __BEBrowserEngineEntitlementRendering, 
                        __BEBrowserEngineEntitlementWebContent, __BECheckEntitlmentForAuditToken, 

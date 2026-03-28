@@ -3749,6 +3749,34 @@ API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAIL
 
 @end
 
+
+API_AVAILABLE(macos(26.2), ios(26.2), macCatalyst(26.2), tvos(26.2)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDevice (AVCaptureDeviceEdgeLight)
+
+/// A class property indicating whether the Edge Light feature is currently enabled in Control Center.
+///
+/// This readonly property changes to reflect the Edge Light state in Control Center. It is key-value observable.
+@property(class, readonly, getter=isEdgeLightEnabled) BOOL edgeLightEnabled API_AVAILABLE(macos(26.2), ios(26.2), macCatalyst(26.2), tvos(26.2)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// A class property indicating whether the edge light UI is actively being shown on a screen.
+///
+/// This readonly property reflects whether the edge light UI is actively being shown on a screen. It is key-value observable.
+@property(class, readonly, getter=isEdgeLightActive) BOOL edgeLightActive API_AVAILABLE(macos(26.2), ios(26.2), macCatalyst(26.2), tvos(26.2)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+@end
+
+
+API_AVAILABLE(macos(26.2), ios(26.2), macCatalyst(26.2), tvos(26.2)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDeviceFormat (AVCaptureDeviceFormatEdgeLight)
+
+/// Indicates whether the format supports the Edge Light feature.
+///
+/// This property returns YES if the device supports the Edge Light feature. See +AVCaptureDevice.edgeLightEnabled.
+@property(nonatomic, readonly, getter=isEdgeLightSupported) BOOL edgeLightSupported API_AVAILABLE(macos(26.2), ios(26.2), macCatalyst(26.2), tvos(26.2)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+@end
+
+
 API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
 @interface AVCaptureDeviceFormat (AVCaptureDeviceFormatCinematicVideoSupport)
 

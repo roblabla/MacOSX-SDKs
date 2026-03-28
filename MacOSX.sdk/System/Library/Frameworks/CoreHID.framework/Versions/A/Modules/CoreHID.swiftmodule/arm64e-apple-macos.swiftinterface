@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.7 clang-1700.4.4.1)
-// swift-module-flags: -target arm64e-apple-macos26.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature StrictConcurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2222.40.11 -module-name CoreHID
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+// swift-module-flags: -target arm64e-apple-macos26.2 -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 2222.60.11 -module-name CoreHID
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import Foundation
 import IOKit
 import Swift
@@ -3617,13 +3617,9 @@ public actor HIDDeviceClient {
     }
   }
   nonisolated final public let deviceReference: CoreHID.HIDDeviceClient.DeviceReference
-  public var descriptor: Foundation.Data {
-    get
-  }
+  final public let descriptor: Foundation.Data
   final public let primaryUsage: CoreHID.HIDUsage
-  public var deviceUsages: [CoreHID.HIDUsage] {
-    get
-  }
+  final public let deviceUsages: [CoreHID.HIDUsage]
   final public let vendorID: Swift.UInt32
   final public let productID: Swift.UInt32
   #if compiler(>=5.3) && $NonescapableTypes
@@ -3678,7 +3674,13 @@ public actor HIDDeviceClient {
   #if compiler(>=5.3) && $NonescapableTypes
   public init?(deviceReference: CoreHID.HIDDeviceClient.DeviceReference)
   #endif
-  @objc deinit
+  #if compiler(>=5.3) && $IsolatedDeinit
+  @objc @available(macOS 15.4, *)
+  isolated deinit
+  #else
+  @objc @available(macOS 15.4, *)
+  deinit
+  #endif
   public func seizeDevice() throws
   public enum Notification : Swift.Sendable {
     case inputReport(id: CoreHID.HIDReportID?, data: Foundation.Data, timestamp: _Concurrency.SuspendingClock.Instant)

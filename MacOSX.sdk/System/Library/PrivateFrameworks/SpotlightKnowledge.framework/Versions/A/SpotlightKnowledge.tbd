@@ -2,7 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightKnowledge.framework/Versions/A/SpotlightKnowledge'
-current-version: 2400.14.255
+current-version: 2400.18.255
+swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ SpotlightAutomationTester, SpotlightBackendTester, SpotlightDaemon, 
@@ -12,7 +13,26 @@ allowable-clients:
                        spotlightknowledged ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _CSGetDiskVersionForContentURL, _SKGAttributeProcessorErrorDomain, 
+    symbols:         [ '_$s18SpotlightKnowledge9IndexTypeO02cscD0ACSgSo07CSIndexD0V_tcfC', 
+                       '_$s18SpotlightKnowledge9IndexTypeO02cscD0So07CSIndexD0Vvg', 
+                       '_$s18SpotlightKnowledge9IndexTypeO02cscD0So07CSIndexD0VvpMV', 
+                       '_$s18SpotlightKnowledge9IndexTypeO11allCasesSetShyACGvgZ', 
+                       '_$s18SpotlightKnowledge9IndexTypeO32originalJournalFilePathComponent6System0gH0V0I0Vvg', 
+                       '_$s18SpotlightKnowledge9IndexTypeO32originalJournalFilePathComponent6System0gH0V0I0VvpMV', 
+                       '_$s18SpotlightKnowledge9IndexTypeO4mailyA2CmFWC', '_$s18SpotlightKnowledge9IndexTypeO6classAyA2CmFWC', 
+                       '_$s18SpotlightKnowledge9IndexTypeO6classByA2CmFWC', '_$s18SpotlightKnowledge9IndexTypeO6classCyA2CmFWC', 
+                       '_$s18SpotlightKnowledge9IndexTypeO7defaultyA2CmFWC', '_$s18SpotlightKnowledge9IndexTypeO7managedyA2CmFWC', 
+                       '_$s18SpotlightKnowledge9IndexTypeO8allCasesSayACGvgZ', '_$s18SpotlightKnowledge9IndexTypeO8allCasesSayACGvpZMV', 
+                       '_$s18SpotlightKnowledge9IndexTypeO8priorityyA2CmFWC', '_$s18SpotlightKnowledge9IndexTypeO8rawValueACSgSS_tcfC', 
+                       '_$s18SpotlightKnowledge9IndexTypeO8rawValueSSvg', '_$s18SpotlightKnowledge9IndexTypeO8rawValueSSvpMV', 
+                       '_$s18SpotlightKnowledge9IndexTypeO9shortNameSSvg', '_$s18SpotlightKnowledge9IndexTypeO9shortNameSSvpMV', 
+                       '_$s18SpotlightKnowledge9IndexTypeOMa', '_$s18SpotlightKnowledge9IndexTypeOMn', 
+                       '_$s18SpotlightKnowledge9IndexTypeON', '_$s18SpotlightKnowledge9IndexTypeOSEAAMc', 
+                       '_$s18SpotlightKnowledge9IndexTypeOSHAAMc', '_$s18SpotlightKnowledge9IndexTypeOSQAAMc', 
+                       '_$s18SpotlightKnowledge9IndexTypeOSYAAMc', '_$s18SpotlightKnowledge9IndexTypeOSeAAMc', 
+                       '_$s18SpotlightKnowledge9IndexTypeOs12CaseIterableAAMc', '_$sSo16CSSearchableItemC18SpotlightKnowledgeE9indexTypeAC05IndexF0OSgvg', 
+                       '_$sSo16CSSearchableItemC18SpotlightKnowledgeE9indexTypeAC05IndexF0OSgvpMV', 
+                       _CSGetDiskVersionForContentURL, _SKGAttributeProcessorErrorDomain, 
                        _SKGBundleIsCalendar, _SKGBundleIsEvent, _SKGBundleIsFileProvider, 
                        _SKGBundleIsMail, _SKGBundleIsMessages, _SKGBundleIsPhotos, 
                        _SKGBundleIsPommesCtl, _SKGBundleIsReminders, _SKGBundleIsSafari, 

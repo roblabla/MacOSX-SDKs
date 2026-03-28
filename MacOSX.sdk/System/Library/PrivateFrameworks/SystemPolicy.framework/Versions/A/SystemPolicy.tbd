@@ -37,10 +37,10 @@ exports:
                        _isSIPDisabledMachine, _isSKELDisabledMachine, _isSkipXprotectScansOnSeenSoftwareEnabled, 
                        _isTerminalLikePath, _isUnconditionalRevocationTicketLookupEnabled, 
                        _isValidInfoPlist, _isValidationCategoryPolicyEnabled, _isXProtectCloudKitUpdatesEnabledMachine, 
-                       _normalizeURL, _opaqueSignCode, _removePrefixPath, _sSystemPolicySubsystem, 
-                       _scanForBundledKernelExtensions, _scanForBundles, _scanForKernelExtensions, 
-                       _setQuarantineFlagsForURL, _shouldFilterOutScanTarget, _systemUptime, 
-                       _urlLooksLikeBundle ]
+                       _kMaxASBSWaitTime, _normalizeURL, _opaqueSignCode, _removePrefixPath, 
+                       _sSystemPolicySubsystem, _scanForBundledKernelExtensions, 
+                       _scanForBundles, _scanForKernelExtensions, _setQuarantineFlagsForURL, 
+                       _shouldFilterOutScanTarget, _systemUptime, _urlLooksLikeBundle ]
     objc-classes:    [ AKELData, AMFI, AppWrapper, AppWrapperPolicy, AppWrapperPolicyResult, 
                        BundleData, GKScanResult, MIS, PolicyCacheMeta, PolicyScanTarget, 
                        ProvenanceEntry, SPBundleProtection, SPDeveloperPolicy, SPExecutionHistoryItem, 

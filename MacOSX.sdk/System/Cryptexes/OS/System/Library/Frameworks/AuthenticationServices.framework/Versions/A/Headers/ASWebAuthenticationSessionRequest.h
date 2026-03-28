@@ -9,9 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ASWebAuthenticationSessionRequest;
-
 @class ASWebAuthenticationSessionCallback;
+@class ASWebAuthenticationSessionRequest;
 
 AS_EXTERN API_AVAILABLE(macCatalyst(13.0), macos(10.15)) API_UNAVAILABLE(ios, tvos)
 @protocol ASWebAuthenticationSessionRequestDelegate <NSObject>

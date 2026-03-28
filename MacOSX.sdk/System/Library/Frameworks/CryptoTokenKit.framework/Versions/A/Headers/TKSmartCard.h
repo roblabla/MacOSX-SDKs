@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class TKSmartCardUserInteraction;
 
 /// Represents pool of SmartCard reader slots.
-API_AVAILABLE(macos(10.10))
+API_AVAILABLE(macos(10.10), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0))
 @interface TKSmartCardSlotManager : NSObject
 
 /// Global pool of SmartCard reader slots.
@@ -30,7 +30,7 @@ API_AVAILABLE(macos(10.10))
 
 /// Gets SmartCard reader slot with specified name.  If reader slot with this name does not exist, returns nil.
 - (nullable TKSmartCardSlot *)slotNamed:(NSString *)name
-API_AVAILABLE(macos(10.13));
+API_AVAILABLE(macos(10.13), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 /// Creates an NFC smart card slot using the device's hardware and presents a system UI.
 /// @param message Message shown in the system-presented UI
@@ -68,7 +68,7 @@ typedef NS_ENUM(NSInteger, TKSmartCardSlotState) {
 
     /// Card properly answered to reset.
     TKSmartCardSlotStateValidCard      = 4,
-} API_AVAILABLE(macos(10.10));
+} API_AVAILABLE(macos(10.10), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 /// Enumerates all possible PIN character sets.
 typedef NS_ENUM(NSInteger, TKSmartCardPINCharset) {
@@ -80,7 +80,7 @@ typedef NS_ENUM(NSInteger, TKSmartCardPINCharset) {
 
     /// PIN can be composed of digits and uppercase letters.
     TKSmartCardPINCharsetUpperAlphanumeric   = 2,
-} API_AVAILABLE(macos(10.11));
+} API_AVAILABLE(macos(10.11), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 /// Enumerates all possible PIN encoding types.
 typedef NS_ENUM(NSInteger, TKSmartCardPINEncoding) {
@@ -92,7 +92,7 @@ typedef NS_ENUM(NSInteger, TKSmartCardPINEncoding) {
 
     /// Characters (only digits) are encoded in BCD format (1234 => 12h 34h).
     TKSmartCardPINEncodingBCD       = 2,
-} API_AVAILABLE(macos(10.11));
+} API_AVAILABLE(macos(10.11), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 /// Enumerates all posible PIN justification types.
 typedef NS_ENUM(NSInteger, TKSmartCardPINJustification) {
@@ -101,7 +101,7 @@ typedef NS_ENUM(NSInteger, TKSmartCardPINJustification) {
 
     /// Justify to the right.
     TKSmartCardPINJustificationRight    = 1,
-}  API_AVAILABLE(macos(10.11));
+}  API_AVAILABLE(macos(10.11), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 /// Bitmask specifying condition(s) under which PIN entry should be considered complete.
 typedef NS_OPTIONS(NSUInteger, TKSmartCardPINCompletion) {
@@ -113,7 +113,7 @@ typedef NS_OPTIONS(NSUInteger, TKSmartCardPINCompletion) {
 
     /// Completion by timeout expiration.
     TKSmartCardPINCompletionTimeout    = (1L << 2),
-}  API_AVAILABLE(macos(10.11));
+}  API_AVAILABLE(macos(10.11), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 /// Bitmask specifying whether PIN confirmation should be requested.
 typedef NS_OPTIONS(NSUInteger, TKSmartCardPINConfirmation) {
@@ -125,10 +125,10 @@ typedef NS_OPTIONS(NSUInteger, TKSmartCardPINConfirmation) {
 
     /// Confirmation (entry) of the current PIN requested.
     TKSmartCardPINConfirmationCurrent   = (1L << 1),
-}  API_AVAILABLE(macos(10.11));
+}  API_AVAILABLE(macos(10.11), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 /// Specifies PIN formatting properties.
-API_AVAILABLE(macos(10.11))
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0))
 @interface TKSmartCardPINFormat : NSObject
 
 /// Format of PIN characters.
@@ -172,7 +172,7 @@ API_AVAILABLE(macos(10.11))
 @end
 
 /// Delegate for user interactions involving the SmartCard reader.
-API_AVAILABLE(macos(10.11))
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0))
 @protocol TKSmartCardUserInteractionDelegate
 @optional
 
@@ -201,7 +201,7 @@ API_AVAILABLE(macos(10.11))
 
 /// Represents handle to a user interaction involving the SmartCard reader.
 /// @discussion It is a proxy object obtained as a result of invoking the userInteractionFor*** family of methods in TKSmartCardSlot and TKSmartCard.
-API_AVAILABLE(macos(10.11))
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0))
 @interface TKSmartCardUserInteraction : NSObject
 
 /// Delegate for state observing of the interaction.
@@ -226,7 +226,7 @@ API_AVAILABLE(macos(10.11))
 
 /// User interaction for the secure PIN operations on the SmartCard reader.
 /// @note Result is available after the interaction has been successfully completed.
-API_AVAILABLE(macos(10.11))
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0))
 @interface TKSmartCardUserInteractionForPINOperation : TKSmartCardUserInteraction
 
 /// Bitmask specifying condition(s) under which PIN entry should be considered complete.
@@ -252,14 +252,14 @@ API_AVAILABLE(macos(10.11))
 
 /// User interaction for the secure PIN verification on the SmartCard reader.
 /// @note Result is available after the interaction has been successfully completed.
-API_AVAILABLE(macos(10.11))
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0))
 @interface TKSmartCardUserInteractionForSecurePINVerification : TKSmartCardUserInteractionForPINOperation
 
 @end
 
 /// User interaction for the secure PIN change on the SmartCard reader.
 /// @note Result is available after the interaction has been successfully completed.
-API_AVAILABLE(macos(10.11))
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0))
 @interface TKSmartCardUserInteractionForSecurePINChange : TKSmartCardUserInteractionForPINOperation
 
 /// Bitmask specifying whether PIN confirmation should be requested.
@@ -269,7 +269,7 @@ API_AVAILABLE(macos(10.11))
 @end
 
 /// Represents single slot which can contain SmartCard.
-API_AVAILABLE(macos(10.10))
+API_AVAILABLE(macos(10.10), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0))
 @interface TKSmartCardSlot : NSObject
 
 /// Current state of the slot.  Use KVO to be notified about state changes.
@@ -295,7 +295,7 @@ API_AVAILABLE(macos(10.10))
 @end
 
 /// Represents SmartCard inserted in the slot. Once the card is physically removed from the slot, the session object is invalid and will always fail the operation invoked on it.  In order to communicate with the card, an exclusive session must be established.
-API_AVAILABLE(macos(10.10))
+API_AVAILABLE(macos(10.10), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0))
 @interface TKSmartCard : NSObject
 
 /// Slot in which is this card inserted.
@@ -340,7 +340,7 @@ API_AVAILABLE(macos(10.10))
 - (nullable TKSmartCardUserInteractionForSecurePINVerification *)userInteractionForSecurePINVerificationWithPINFormat:(TKSmartCardPINFormat *)PINFormat
                                                                                                                   APDU:(NSData *)APDU
                                                                                                          PINByteOffset:(NSInteger)PINByteOffset
-                                                                                                                NS_AVAILABLE(10_11, 9_0);
+                                                                                                                API_AVAILABLE(macos(10.11), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 /// Creates a new user interaction object for secure PIN change using the SmartCard reader facilities (typically a HW keypad).
 /// @note This interaction is only allowed within a session.
@@ -353,7 +353,7 @@ API_AVAILABLE(macos(10.10))
                                                                                                      APDU:(NSData *)APDU
                                                                                      currentPINByteOffset:(NSInteger)currentPINByteOffset
                                                                                          newPINByteOffset:(NSInteger)newPINByteOffset
-                                                                                                NS_AVAILABLE(10_11, 9_0);
+                                                                                                API_AVAILABLE(macos(10.11), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 @end
 
@@ -362,15 +362,15 @@ API_AVAILABLE(macos(10.10))
 
 /// CLA byte which will be used for sendIns: APDU transmits.  Default value is 0x00.
 @property UInt8 cla
-API_AVAILABLE(macos(10.10));
+API_AVAILABLE(macos(10.10), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 /// Flag indicating whether extended length APDUs should be used. It is automatically enabled only when used slot supports transmitting extended length commands and card announces that extended length APDU are supported in its ATR. However, caller can explicitly override this decision.
 @property BOOL useExtendedLength
-API_AVAILABLE(macos(10.10));
+API_AVAILABLE(macos(10.10), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 /// Flag indicating whether command chaining of APDU with data field longer than 255 bytes can be used.  It is automatically enabled when card announces that command chaining is supported in its ATR.  However, caller can explicitly override this decision.
 @property BOOL useCommandChaining
-API_AVAILABLE(macos(10.12));
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 /// Transmits APDU to the card and returns response.
 /// @discussion Asynchronous high level variant of command for transmitting APDU to the card.  Handles all ISO7816-4 APDU cases translation to proper sequences according to used protocol.  Consults useExtendedAPDU and useCommandChaining properties and uses these modes whenever appropriate and beneficial for sending requested APDU request.
@@ -384,14 +384,14 @@ API_AVAILABLE(macos(10.12));
 /// @param error Contains error details when nil is returned.  Specific error is also filled in if there was no communication error, but card returned other SW code than 0x9000.
 - (void)sendIns:(UInt8)ins p1:(UInt8)p1 p2:(UInt8)p2 data:(nullable NSData *)requestData le:(nullable NSNumber *)le
           reply:(void(^)(NSData *__nullable replyData, UInt16 sw, NSError *__nullable error))reply
-API_AVAILABLE(macos(10.10));
+NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(10.10), ios(9.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 /// Synchronous variant of session creation.  Begins the session, executes given block and ends session.
 /// @param error Error receiving more information when transaction failed to start or block failed for some reason.
 /// @param block Block to be executed when the session was successfully begun.
 /// @return Returns YES if the session was successfully begun and block returned YES, otherwise NO.
 - (BOOL)inSessionWithError:(NSError **)error executeBlock:(BOOL(^)(NSError **error))block
-API_AVAILABLE(macos(10.12));
+NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 /// Transmits APDU to the card and returns response.
 /// @discussion Synchronous high level variant of command for transmitting APDU to the card.  Handles all ISO7816-4 APDU cases translation to proper sequences according to used protocol.  Should be used in block passed to -[TKSmartCard inSessionWithError:executeBlock:] method.
@@ -405,7 +405,7 @@ API_AVAILABLE(macos(10.12));
 /// @return Returned data field, excluding SW status bytes.  If an error occured, returns nil.
 - (nullable NSData *)sendIns:(UInt8)ins p1:(UInt8)p1 p2:(UInt8)p2 data:(nullable NSData *)requestData
                           le:(nullable NSNumber *)le sw:(UInt16 *)sw error:(NSError **)error
-API_AVAILABLE(macos(10.12));
+NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 @end
 

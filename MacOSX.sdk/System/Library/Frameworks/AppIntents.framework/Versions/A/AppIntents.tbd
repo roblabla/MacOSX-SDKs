@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/AppIntents.framework/Versions/A/AppIntents'
-current-version: 300.1.13
+current-version: 300.2.3
 compatibility-version: 0
 swift-abi-version: 7
 reexported-libraries:
@@ -7623,7 +7623,8 @@ exports:
                        '_$s10AppIntents15_UndoableIntentPAAE11undoManagerSo06NSUndoF0CSgvpMV', 
                        '_$s10AppIntents15_UndoableIntentPAAE13configurationAA0cD13ConfigurationOyYaF', 
                        '_$s10AppIntents15_UndoableIntentPAAE13configurationAA0cD13ConfigurationOyYaFTu', 
-                       '_$s10AppIntents15_UndoableIntentTL', '_$s10AppIntents16AssistantSchemasO10CameraEnumPAAE11captureModeQrvpMV', 
+                       '_$s10AppIntents15_UndoableIntentTL', '_$s10AppIntents16AssistantSchemasO0C6IntentPAAE8activateQrvpMV', 
+                       '_$s10AppIntents16AssistantSchemasO10CameraEnumPAAE11captureModeQrvpMV', 
                        '_$s10AppIntents16AssistantSchemasO10CameraEnumPAAE13captureDeviceQrvpMV', 
                        '_$s10AppIntents16AssistantSchemasO10CameraEnumPAAE15captureDurationQrvpMV', 
                        '_$s10AppIntents16AssistantSchemasO10EnumSchemaVMa', '_$s10AppIntents16AssistantSchemasO10EnumSchemaVMn', 
@@ -7917,6 +7918,7 @@ exports:
                        '_$s10AppIntents16AssistantSchemasO6IntentPAaC0E6SchemaVRszrlE7browserQrvpZQOMQ', 
                        '_$s10AppIntents16AssistantSchemasO6IntentPAaC0E6SchemaVRszrlE7journalQrvpZMV', 
                        '_$s10AppIntents16AssistantSchemasO6IntentPAaC0E6SchemaVRszrlE8messagesQrvpZMV', 
+                       '_$s10AppIntents16AssistantSchemasO6IntentPAaC0E6SchemaVRszrlE9assistantQrvpZMV', 
                        '_$s10AppIntents16AssistantSchemasO9BooksEnumPAAE11contentTypeQrvpMV', 
                        '_$s10AppIntents16AssistantSchemasO9BooksEnumPAAE18relativeFontChangeQrvpMV', 
                        '_$s10AppIntents16AssistantSchemasO9BooksEnumPAAE19navigationDirectionQrvpMV', 

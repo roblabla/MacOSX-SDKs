@@ -12,10 +12,11 @@ allowable-clients:
                        NotificationsSettingsIntents, NotificationsSettingsSimulator, 
                        NotificationsUITool, RealityNotifications, RealityNotificationsTests, 
                        RealityNotificationsUITests, Setup, Setup Assistant, SiriPreferenceExtension, 
-                       SiriUI, SpringBoard, SpringBoardFramework-Tests, UNUIKitTestsHostApp, 
-                       UserNotificationsCore, UserNotificationsKitTests, UserNotificationsServer, 
-                       UserNotificationsUI, UserNotificationsUIKit, UserNotificationsUIKitTests, 
-                       VoiceTriggerUI, mbuseragent, usernoted, usernoted_unit_tests ]
+                       SiriSetup, SiriUI, SpringBoard, SpringBoardFramework-Tests, 
+                       UNUIKitTestsHostApp, UserNotificationsCore, UserNotificationsKitTests, 
+                       UserNotificationsServer, UserNotificationsUI, UserNotificationsUIKit, 
+                       UserNotificationsUIKitTests, VoiceTriggerUI, mbuseragent, 
+                       usernoted, usernoted_unit_tests ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s20UserNotificationsKit28ChinSuggestionAnalyticsEventV0E4TypeO16priorityFeedbackyA2EmFWC', 
@@ -75,9 +76,9 @@ exports:
                        _NCRegisterUserNotificationsUILogging, _NCUILogClient, _NCUILogCommunicationNotifications, 
                        _NCUILogDispatch, _NCUILogIcons, _NCUILogListStates, _NCUILogLists, 
                        _NCUILogManagement, _NCUILogOnboarding, _NCUILogScrollPosition, 
-                       _NCUILogSubsystem, _NCUILogSummarization, _NCUILogUtilities, 
-                       _NCUserNotificationsKitFrameworkBundle, _UserNotificationsKitVersionNumber, 
-                       _UserNotificationsKitVersionString ]
+                       _NCUILogSubsystem, _NCUILogSummarization, _NCUILogSwipeInteraction, 
+                       _NCUILogUtilities, _NCUserNotificationsKitFrameworkBundle, 
+                       _UserNotificationsKitVersionNumber, _UserNotificationsKitVersionString ]
     objc-classes:    [ NCLayoutLoopDetector, NCMutableNotificationAction, NCMutableNotificationAlertOptions, 
                        NCMutableNotificationContent, NCMutableNotificationOptions, 
                        NCMutableNotificationRequest, NCMutableNotificationSectionSettings, 

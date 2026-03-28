@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MLIR_ML.framework/Versions/A/MLIR_ML'
-current-version: 2.1.4
+current-version: 2.2.1
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTI13SelectToExtUI, __ZTI16CmpFIntToFPConst, __ZTI16FoldConstantCase, 

@@ -287,8 +287,6 @@ exports:
                        '_$s15CoreSpeechUtils23SecureVTFirstPassConfigC23masterChannelScoreBoostSfvpMV', 
                        '_$s15CoreSpeechUtils23SecureVTFirstPassConfigC24processingChannelsBitsets6UInt64Vvg', 
                        '_$s15CoreSpeechUtils23SecureVTFirstPassConfigC24processingChannelsBitsets6UInt64VvpMV', 
-                       '_$s15CoreSpeechUtils23SecureVTFirstPassConfigC24supportsChannelSelectionSbvg', 
-                       '_$s15CoreSpeechUtils23SecureVTFirstPassConfigC24supportsChannelSelectionSbvpMV', 
                        '_$s15CoreSpeechUtils23SecureVTFirstPassConfigC31delaySecondsForChannelSelectionSfvg', 
                        '_$s15CoreSpeechUtils23SecureVTFirstPassConfigC31delaySecondsForChannelSelectionSfvpMV', 
                        '_$s15CoreSpeechUtils23SecureVTFirstPassConfigC31voiceIsolationChannelScoreBoostSfvg', 

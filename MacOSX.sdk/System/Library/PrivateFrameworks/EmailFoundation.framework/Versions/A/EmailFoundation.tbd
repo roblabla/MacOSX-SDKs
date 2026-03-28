@@ -3,12 +3,32 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/EmailFoundation.framework/Versions/A/EmailFoundation'
-current-version: 3864.200.81
+current-version: 3864.255.41
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s15EmailFoundation6LockedC012performWhileC0yqd__qd__xzXElF', 
+    symbols:         [ '_$s15EmailFoundation5EventV16debugDescriptionSSvg', '_$s15EmailFoundation5EventV16debugDescriptionSSvpMV', 
+                       '_$s15EmailFoundation5EventV2eeoiySbAC_ACtFZ', '_$s15EmailFoundation5EventV4dataSDySSAC5ValueOGvM', 
+                       '_$s15EmailFoundation5EventV4dataSDySSAC5ValueOGvg', '_$s15EmailFoundation5EventV4dataSDySSAC5ValueOGvpMV', 
+                       '_$s15EmailFoundation5EventV4dataSDySSAC5ValueOGvs', '_$s15EmailFoundation5EventV4hash4intoys6HasherVz_tF', 
+                       '_$s15EmailFoundation5EventV4name4dataACSS_SDySSAC5ValueOGtcfC', 
+                       '_$s15EmailFoundation5EventV4nameSSvM', '_$s15EmailFoundation5EventV4nameSSvg', 
+                       '_$s15EmailFoundation5EventV4nameSSvpMV', '_$s15EmailFoundation5EventV4nameSSvs', 
+                       '_$s15EmailFoundation5EventV4sendyyACFZ', '_$s15EmailFoundation5EventV5ValueO04hashD0Sivg', 
+                       '_$s15EmailFoundation5EventV5ValueO04hashD0SivpMV', '_$s15EmailFoundation5EventV5ValueO16debugDescriptionSSvg', 
+                       '_$s15EmailFoundation5EventV5ValueO16debugDescriptionSSvpMV', 
+                       '_$s15EmailFoundation5EventV5ValueO2eeoiySbAE_AEtFZ', '_$s15EmailFoundation5EventV5ValueO3intyAESicAEmFWC', 
+                       '_$s15EmailFoundation5EventV5ValueO4hash4intoys6HasherVz_tF', 
+                       '_$s15EmailFoundation5EventV5ValueO6stringyAESScAEmFWC', '_$s15EmailFoundation5EventV5ValueOMa', 
+                       '_$s15EmailFoundation5EventV5ValueOMn', '_$s15EmailFoundation5EventV5ValueON', 
+                       '_$s15EmailFoundation5EventV5ValueOSHAAMc', '_$s15EmailFoundation5EventV5ValueOSQAAMc', 
+                       '_$s15EmailFoundation5EventV5ValueOs28CustomDebugStringConvertibleAAMc', 
+                       '_$s15EmailFoundation5EventV9hashValueSivg', '_$s15EmailFoundation5EventV9hashValueSivpMV', 
+                       '_$s15EmailFoundation5EventVMa', '_$s15EmailFoundation5EventVMn', 
+                       '_$s15EmailFoundation5EventVN', '_$s15EmailFoundation5EventVSHAAMc', 
+                       '_$s15EmailFoundation5EventVSQAAMc', '_$s15EmailFoundation5EventVs28CustomDebugStringConvertibleAAMc', 
+                       '_$s15EmailFoundation6LockedC012performWhileC0yqd__qd__xzXElF', 
                        '_$s15EmailFoundation6LockedC3getyqd__s7KeyPathCyxqd__GlF', 
                        '_$s15EmailFoundation6LockedC3set_2toys24ReferenceWritableKeyPathCyxqd__G_qd__tlF', 
                        '_$s15EmailFoundation6LockedC5valuexyF', '_$s15EmailFoundation6LockedC6update2toyx_tF', 
@@ -114,9 +134,9 @@ exports:
                        EFSandboxedURLWrapper, EFScheduler, EFSchedulerTrampoline, 
                        EFSortDescriptor, EFStoppableScheduler, EFStringHash, EFWatchdog, 
                        EFXPCAlarm, EFXPCAlarmEvent, EFXPCAlarmScheduler, _EFBackgroundProcessingAssertion, 
-                       _EFBlockObservable, _EFBlockObserver, _EFCombineLatestObservable, 
-                       _EFCombineLatestObservableSubscription, _EFConcatenatingObservable, 
-                       _EFConnectableObservable, _EFContentProtectionObserverWrapper, 
+                       _EFBlockObservable, _EFBlockObserver, _EFCancelationTokenImpl, 
+                       _EFCombineLatestObservable, _EFCombineLatestObservableSubscription, 
+                       _EFConcatenatingObservable, _EFConnectableObservable, _EFContentProtectionObserverWrapper, 
                        _EFDistinctUntilChangedObservable, _EFGeneratorObservable, 
                        _EFIdealTimerObservable, _EFKeyValueObserverHandler, _EFLRUCacheNode, 
                        _EFManualObservable, _EFMergingObservable, _EFMutableIndexMapTuple, 
